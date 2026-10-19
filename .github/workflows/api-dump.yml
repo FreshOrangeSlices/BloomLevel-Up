@@ -1,0 +1,36 @@
+name: api-dump
+on:
+  push:
+    branches: ['ci/api-dump*']
+jobs:
+  dump:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - run: chmod +x ./gradlew && ./gradlew printClasspath --no-configuration-cache -q
+      - name: javap
+        run: |
+          set +e
+          CP="$(cat build/cp.txt)"
+          dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
+          code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
+          {
+          dump net.minecraft.world.effect.MobEffectInstance 'private|class '
+          dump net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket 'ClientboundUpdateMobEffectPacket[(]|class '
+          dump net.minecraft.world.SimpleContainer 'addListener|removeListener|class '
+          dump net.minecraft.core.Registry ' get[(]|getValue[(]|getOptional|getHolder|class |interface '
+          dump net.minecraft.core.DefaultedRegistry ' get[(]|getValue[(]|class |interface '
+          dump net.minecraft.resources.Identifier 'tryParse|parse[(]|class '
+          dump net.minecraft.server.level.ServerPlayer 'gameMode|isCreative|isSpectator|connection'
+          dump net.minecraft.world.entity.LivingEntity 'getUsedItemHand|getOffhandItem'
+          dump net.minecraft.world.inventory.ChestMenu
+          } > dump.txt 2>&1
+          wc -c dump.txt
+      - name: publish (1)
+        run: python3 emit.py 0 30
+      - name: publish (2)
+        run: python3 emit.py 30 50

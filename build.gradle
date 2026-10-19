@@ -24,13 +24,14 @@ loom {
 
 fabricApi {
 	// In-game tests: a real dedicated server boots with the mod (so broken mixins fail the build) and runs
-	// the @GameTest methods in src/gametest. They run as part of `./gradlew build`.
+	// the @GameTest methods in src/gametest (`./gradlew runGameTest`). Client game tests boot a real client
+	// into a singleplayer world (`./gradlew runClientGameTest`, its own CI workflow).
 	configureTests {
 		createSourceSet = true
 		modId = "bloomlevelup-gametest"
 		eula = true
 		enableGameTests = true
-		enableClientGameTests = false
+		enableClientGameTests = true
 	}
 }
 

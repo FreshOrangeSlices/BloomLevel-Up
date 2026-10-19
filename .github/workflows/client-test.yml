@@ -1,0 +1,57 @@
+# Boots a real Minecraft client with the mod into a singleplayer world (client mixins, hub, sync).
+# Screenshots are attached to each run under "Artifacts" (client-test-screenshots).
+
+name: client-test
+on: [push, workflow_dispatch]
+
+jobs:
+  client-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v6
+      - name: graphics drivers
+        run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers
+      - name: client game tests
+        run: |
+          set -o pipefail
+          chmod +x ./gradlew
+          ./gradlew runClientGameTest --stacktrace 2>&1 | tee client.log
+      - name: report client tests
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('client.log'):
+              raise SystemExit(0)
+          lines = open('client.log', encoding='utf-8', errors='replace').read().splitlines()
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          keep = []
+          for i, line in enumerate(lines):
+              if re.search(r'(error:|ERROR|FAILED|What went wrong|Exception|Caused by|AssertionError|Mixin)', line):
+                  keep.extend(lines[max(0, i - 1):i + 5])
+          text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
+          chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:20]
+          kinds = ['warning', 'notice']
+          for n, chunk in enumerate(chunks):
+              print(f"::{kinds[(n // 10) % 2]} title=client-log-{n:02d}::{esc(chunk)}")
+          tail = '\n'.join(lines[-25:])
+          print(f"::notice title=client-summary::{esc(tail[:3900])}")
+          PY
+      - name: capture screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-test-screenshots
+          path: |
+            build/run/clientGameTest/screenshots
+            run/screenshots
+            **/screenshots/*.png
+          if-no-files-found: ignore

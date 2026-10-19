@@ -20,6 +20,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,7 +66,6 @@ import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
 import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor;
-import com.freshorangeslices.bloomlevelup.mixin.EntityAccessor;
 import com.freshorangeslices.bloomlevelup.mixin.PlayerInvoker;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
@@ -656,6 +656,13 @@ public final class CombatSkill {
 		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
 	}
 
+	/** Players move client-side, so a server push only reaches them as an explicit velocity packet. */
+	private static void syncVelocity(LivingEntity victim) {
+		if (victim instanceof ServerPlayer pushed) {
+			pushed.connection.send(new ClientboundSetEntityMotionPacket(pushed));
+		}
+	}
+
 	/** A small horizontal knockback (vanilla sweep strength 0.4) plus a little lift. */
 	private static void shove(LivingEntity victim, double dirX, double dirZ, double strength) {
 		Vec3 flat = new Vec3(dirX, 0.0, dirZ);
@@ -666,7 +673,7 @@ public final class CombatSkill {
 
 		Vec3 push = flat.normalize().scale(strength);
 		victim.push(push.x, 0.1, push.z);
-		((EntityAccessor) victim).bloomlevelup$setHurtMarked(true);
+		syncVelocity(victim);
 	}
 
 	private static void auraPulse(ServerLevel level, ServerPlayer player) {
@@ -845,7 +852,7 @@ public final class CombatSkill {
 			Vec3 push = (flat.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 0.0, 0.0) : flat.normalize())
 					.scale(config.windImpactStrength * (1.0 - distance / (radius + 0.5)));
 			victim.push(push.x, 0.5 * config.windImpactStrength, push.z);
-			((EntityAccessor) victim).bloomlevelup$setHurtMarked(true);
+			syncVelocity(victim);
 		}
 
 		level.sendParticles(ParticleTypes.GUST_EMITTER_SMALL, player.getX(), player.getY(), player.getZ(), 1, 0.0, 0.0, 0.0, 0.0);

@@ -105,12 +105,52 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Master Shearing | After each successful shear, 50% that the sheep/bogged/snow golem is shearable again, repeatable. Each shear costs 1 extra durability. Modded shearables get the XP and Yield but not the coin flip | config `masterShearingChance` |
 | Triple Catch | Each catch rolls the whole fishing loot table 3 times; +2 rod durability per catch (3x total). XP counts once per catch | config `tripleCatchRolls`, `tripleCatchExtraDurability` |
 
+## Chunk 5 — Combat
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Combat XP | 0.5 XP per point of real health damage you deal (after the target's armor), never more than the health it had left. The killing blow adds 50% of the XP that kill took. Dying later to fire, falls or someone else gives no kill bonus. Thorns damage gives none | config `combatXpPerDamage`, `combatKillBonus` |
+| Mob multipliers | Wither 10x, Ender Dragon 12x, Warden 5x, Elder Guardian 5x; any entity id can be added | config `combatEntityXpMultipliers` |
+| No XP from | Armor stands, your own pets; players only if `combatPvpXp` | tag `bloomlevelup:no_combat_xp` |
+| PvP | Combat stats and Majors work on players (design default) | config `combatPvp` |
+| Weapon families | Item tags `bloomlevelup:weapon/{sword,axe,bow,crossbow,trident,mace,spear}`; an empty hand is Unarmed. An item can be in several | tags |
+| Bosses (Execute) | Tag `bloomlevelup:bosses`: Wither, Ender Dragon, Warden, Elder Guardian, plus `#c:bosses` | tag |
+| Critical | A real vanilla crit deals 1.5x normally, 4x at 100 points (linear, keeps growing past 100) | `StatFormulas.criticalMultiplier` |
+| Penetration | Ignores p/(p+100) of the target's armor: 50% at 100, never 100% | `StatFormulas.penetration` |
+| Looting | Adds virtual Looting levels: 3 at 100 points (fractions rolled), so it works with every loot table that uses Looting | `StatFormulas.virtualLooting` |
+| Order of bonuses | Bonuses are real damage added before the target's armor: flat adds (Stored Impact, Death From Above, Combo) first, then multipliers (crit, Marksman, First Strike, Predator, Bloodlust) | `CombatSkill.applyBonuses` |
+| Full Sweep | Sweeping Damage ratio set to its maximum: sweep = 1 + 100% of the hit | `StatEffects` |
+| Execute | Sword hits finish targets left at 30% health or less (bosses 10%). It sets health to zero and lets vanilla's death run (kill credit, loot, XP), so it adds no fake damage | config `executeThreshold`, `executeBossThreshold` |
+| Armor Break | Each worn armor piece of the target loses durability equal to half the real damage (rounded up) | config `armorBreakRatio` |
+| Guaranteed Critical | Full-strength axe swings always crit (with crit particles and sound); −2 attack damage while an axe is in hand | config `guaranteedCriticalPenalty` |
+| Marksman (proposed numbers) | Fully drawn bow shots: no bonus up to 10 blocks, then rising to +50% at 40 blocks | config `marksman*` |
+| Piercing Shot | Bow arrows pierce 4 enemies (like Piercing IV) | config `piercingShotLevel` |
+| Straight Shot | Bow arrows fly without gravity and vanish after 5 seconds in the air | config `straightShotMaxTicks` |
+| Reinforced Shot | +3 damage on crossbow arrows | config `reinforcedShotDamage` |
+| Unrestricted Riptide (proposed control) | Hold sneak while releasing a trident to riptide with no enchantment, anywhere; release normally to throw. Riptide-enchanted tridents work without water or rain | `CombatSkill.riptideStrength` |
+| Lightning Shock (proposed radius) | Enemies within 6 blocks of the struck target. Needs 2+ enemies; 3 shocks at 50% of the hit; one chain per 2 s; ignores the target's hurt cooldown; never triggers Thorns | config `lightningShock*` |
+| Wind Impact | Landing a fall of 1.5+ blocks with a mace in hand bursts wind outward (3.5 blocks), pushing mobs away; it doesn't launch you | config `windImpact*` |
+| Stored Impact | Real fall damage stores 50% (max +20) for the next mace hit; 5-minute cooldown from the fall | config `storedImpact*` |
+| Brawler / Combo | +6 attack damage bare-handed. Combo: +0.25 per clean bare-handed hit, max +5, reset after 3 s without a hit | config |
+| Disarm | 30% on primary bare-handed hits: mobs drop their held item, players drop their selected stack | config `disarmChance` |
+| Long Reach | +2 blocks attack reach while holding a spear | config `longReachBlocks` |
+| Impale / Bleed | Full-strength spear hits and spear charges: 40% to Bleed for 3 s (half a heart per second, ignores armor, Resistance still applies, refreshes instead of stacking). Bleed is a real status effect | config `impaleChance`, `bleedTicks` |
+| Batter Up! | Non-sword melee weapons and fists sweep under vanilla's sweep rules (full strength, on the ground, not a crit or sprint hit) | `CombatSkill.sweep` |
+| Aura Sword | Every 5th full-strength melee hit releases a 3.5-block circle sweep that pulses twice (0.5 s apart), at your attack damage | config `auraSword*` |
+| Death From Above | Every melee weapon except the mace gains the mace's fall bonus (+4/block for 3 blocks, then +2/block for 5, then +1/block). No fall-damage protection | `StatFormulas.maceFallBonus` |
+| Predator (proposed numbers) | Each consecutive hit on the same target +10%, up to +50%; switching targets or 5 s idle resets | config `predator*` |
+| Bloodlust (proposed numbers) | Each kill +8% damage for 10 s, up to 5 stacks; kills refresh it | config `bloodlust*` |
+| Overkill (proposed numbers) | 60% of a kill's excess real damage, split across up to 3 enemies within 4 blocks. Not from Execute kills or from Overkill's own kills | config `overkill*` |
+| First Strike (proposed number) | +50% on the first hit against a full-health target (each pierced target counts separately) | config `firstStrikeBonus` |
+| Crossbow Infinity | Plain arrows loaded into a crossbow aren't used up (and can't be picked back up). Tipped/spectral arrows and fireworks still are | `CombatSkill.freeAmmo` |
+| Copycat | In the hub, shift-click an owned weapon Major to copy it; shift-click Copycat to stop. Copied effects keep their costs and drawbacks and switch off with their source. Long Reach is allowed as a source for now | `ProgressionService.selectCopySource` |
+
 ## Still open (need a design call)
 
-- Combat effect sizes: Marksman, Predator, Bloodlust, Overkill, First Strike (I'll propose numbers).
+- Combat numbers marked "proposed" above: Marksman, Predator, Bloodlust, Overkill, First Strike, Lightning radius, Unrestricted Riptide's sneak control.
 - Long Reach as a Copycat source.
 - License; the other mods in the modpack.
-- Trident Lightning radius; Lightning Summon control.
+- Lightning Summon control.
 - Default vegetable / rune / ammo tags.
 - Medium armor's shield-disable reduction (needs a shield cooldown hook).
 

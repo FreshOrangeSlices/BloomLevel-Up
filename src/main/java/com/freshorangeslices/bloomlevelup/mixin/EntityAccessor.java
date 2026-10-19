@@ -10,8 +10,4 @@ public interface EntityAccessor {
 	/** Vanilla's damage cooldown (private since 26.x). */
 	@Accessor("invulnerableTime")
 	int bloomlevelup$getInvulnerableTime();
-
-	/** Makes the server send this entity's new velocity to clients (needed for pushed players). */
-	@Accessor("hurtMarked")
-	void bloomlevelup$setHurtMarked(boolean value);
 }

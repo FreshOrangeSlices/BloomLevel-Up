@@ -48,6 +48,7 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// Lets shared code (Unrestricted Riptide's trident use) ask about the local player's Majors.
+		SideBridge.setClientConfig(ClientBloomState::config);
 		SideBridge.setClientMajorActive((player, majorId) -> player == Minecraft.getInstance().player && ClientBloomState.ready()
 				&& ClientBloomState.profile() != null && ClientBloomState.service().isMajorActive(ClientBloomState.profile(), majorId));
 

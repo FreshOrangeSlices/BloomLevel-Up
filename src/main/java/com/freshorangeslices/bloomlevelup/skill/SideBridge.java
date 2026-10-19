@@ -1,10 +1,12 @@
 package com.freshorangeslices.bloomlevelup.skill;
 
 import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
+import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 
@@ -14,12 +16,30 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
  */
 public final class SideBridge {
 	private static volatile BiPredicate<Player, String> clientMajorActive = (player, majorId) -> false;
+	private static volatile Supplier<BloomConfig> clientConfig = () -> null;
 
 	private SideBridge() {
 	}
 
 	public static void setClientMajorActive(BiPredicate<Player, String> query) {
 		clientMajorActive = query;
+	}
+
+	public static void setClientConfig(Supplier<BloomConfig> config) {
+		clientConfig = config;
+	}
+
+	/** The config that applies to this player: the server's own, or on the client the copy the server synced. */
+	public static BloomConfig config(Player player) {
+		if (!(player instanceof ServerPlayer)) {
+			BloomConfig synced = clientConfig.get();
+
+			if (synced != null) {
+				return synced;
+			}
+		}
+
+		return BloomServices.config();
 	}
 
 	public static boolean clientMajorActive(Player player, String majorId) {

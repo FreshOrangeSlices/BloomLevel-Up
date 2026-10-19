@@ -14,7 +14,10 @@ import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
+import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
 
 /**
  * Turns stat points (and the simple always-on Majors) into vanilla attribute modifiers. Idempotent: it
@@ -39,6 +42,8 @@ public final class StatEffects {
 	private static final Identifier SPEED_MOD = BloomLevelUp.id("stat/speed");
 	private static final Identifier TITAN_SPEED_MOD = BloomLevelUp.id("major/titan_hide_speed");
 	private static final Identifier TITAN_FALL_MOD = BloomLevelUp.id("major/titan_hide_fall");
+	private static final Identifier PROTEIN_MOD = BloomLevelUp.id("major/protein");
+	private static final Identifier HEAVY_KNOCKBACK_MOD = BloomLevelUp.id("major/fitting_armor_heavy");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	private static final double POWER_PER_POINT = 0.06;
@@ -51,6 +56,31 @@ public final class StatEffects {
 		BloomProfile profile = BloomAttachments.profile(player);
 
 		boolean titanHide = service.isMajorActive(profile, TITAN_HIDE) && armorSlotsEmpty(player);
+
+		// Protein!: the meal count belongs to owning the Major; refunding it (or Bloom+) starts over.
+		if (!profile.owns(ArmorIds.PROTEIN) && profile.counter(ArmorIds.PROTEIN_MEALS) != 0) {
+			profile.setCounter(ArmorIds.PROTEIN_MEALS, 0);
+		}
+
+		double proteinHealth = service.isMajorActive(profile, ArmorIds.PROTEIN)
+				? StatFormulas.proteinBonusHealth(profile.counter(ArmorIds.PROTEIN_MEALS)) : 0.0;
+		apply(player, Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADD_VALUE);
+
+		// Fitting Armor / Heavy: strong knockback resistance that tapers off if you already resist knockback.
+		boolean heavy = service.isMajorActive(profile, ArmorIds.FITTING_ARMOR) && ArmorStyles.styleOf(player) == ArmorStyle.HEAVY;
+		double heavyKnockback = 0.0;
+
+		if (heavy) {
+			AttributeInstance knockback = player.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+
+			if (knockback != null) {
+				AttributeModifier ours = knockback.getModifier(HEAVY_KNOCKBACK_MOD);
+				double others = knockback.getValue() - (ours == null ? 0.0 : ours.amount());
+				heavyKnockback = StatFormulas.heavyKnockbackResistance(others);
+			}
+		}
+
+		apply(player, Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADD_VALUE);
 
 		double defenseArmor = StatFormulas.defenseArmor(service.statValue(profile, DEFENSE));
 
@@ -105,7 +135,7 @@ public final class StatEffects {
 			return;
 		}
 
-		if (existing != null && existing.amount() == amount && existing.operation() == operation) {
+		if (existing != null && Math.abs(existing.amount() - amount) < 1e-9 && existing.operation() == operation) {
 			return;
 		}
 

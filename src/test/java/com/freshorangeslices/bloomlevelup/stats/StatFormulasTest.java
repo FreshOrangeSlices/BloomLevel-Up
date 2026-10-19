@@ -1,6 +1,7 @@
 package com.freshorangeslices.bloomlevelup.stats;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.SplittableRandom;
 
@@ -73,5 +74,53 @@ class StatFormulasTest {
 	@Test
 	void lightBackupDodge() {
 		assertEquals(0.37, StatFormulas.anyOf(0.30, 0.10), 1e-9);
+	}
+
+	@Test
+	void dodgeCap() {
+		assertEquals(0.90, StatFormulas.dodgeChance(100_000, 0.90), 1e-9);
+		assertEquals(0.30, StatFormulas.dodgeChance(100, 0.90), 1e-9);
+	}
+
+	@Test
+	void durabilityAt100IsLikeUnbreakingThree() {
+		assertEquals(0.30, StatFormulas.armorDurabilitySaveChance(100), 1e-9); // armor curve
+		assertEquals(0.75, StatFormulas.shieldDurabilitySaveChance(100), 1e-9); // shield curve
+		assertEquals(0.0, StatFormulas.armorDurabilitySaveChance(0), 1e-9);
+		// keeps growing past 100 but never reaches 40% (armor) / 100% (shield)
+		assertTrue(StatFormulas.armorDurabilitySaveChance(1000) < 0.40);
+		assertTrue(StatFormulas.armorDurabilitySaveChance(200) > StatFormulas.armorDurabilitySaveChance(100));
+	}
+
+	@Test
+	void lastBreathLadderHalves() {
+		assertEquals(1.0, StatFormulas.lastBreathChance(0), 1e-9);
+		assertEquals(0.5, StatFormulas.lastBreathChance(1), 1e-9);
+		assertEquals(0.03125, StatFormulas.lastBreathChance(5), 1e-9);
+	}
+
+	@Test
+	void proteinGrowsEveryTwentyMealsUpToTenHearts() {
+		assertEquals(0.0, StatFormulas.proteinBonusHealth(19), 1e-9);
+		assertEquals(1.0, StatFormulas.proteinBonusHealth(20), 1e-9);
+		assertEquals(20.0, StatFormulas.proteinBonusHealth(400), 1e-9);
+		assertEquals(20.0, StatFormulas.proteinBonusHealth(5000), 1e-9);
+	}
+
+	@Test
+	void heavyKnockbackTapers() {
+		assertEquals(0.5, StatFormulas.heavyKnockbackResistance(0.0), 1e-9);
+		assertEquals(0.3, StatFormulas.heavyKnockbackResistance(0.4), 1e-9); // netherite set: 0.4 + 0.3 = 0.7
+		assertEquals(0.0, StatFormulas.heavyKnockbackResistance(1.0), 1e-9);
+	}
+
+	@Test
+	void fittingStyleAverages() {
+		assertEquals(StatFormulas.ArmorStyle.HEAVY, StatFormulas.fittingStyle(new int[] {3, 3, 3, 3}, 4));
+		assertEquals(StatFormulas.ArmorStyle.MEDIUM, StatFormulas.fittingStyle(new int[] {3, 3, 1, 1}, 4)); // 2.0
+		assertEquals(StatFormulas.ArmorStyle.LIGHT, StatFormulas.fittingStyle(new int[] {1, 1, 1, 2}, 4)); // 1.25
+		assertEquals(StatFormulas.ArmorStyle.HEAVY, StatFormulas.fittingStyle(new int[] {3, 3, 2, 2}, 4)); // 2.5
+		assertEquals(StatFormulas.ArmorStyle.NONE, StatFormulas.fittingStyle(new int[] {3, 3, 3}, 3)); // empty slot
+		assertEquals(StatFormulas.ArmorStyle.NONE, StatFormulas.fittingStyle(new int[] {}, 4)); // nothing classified
 	}
 }

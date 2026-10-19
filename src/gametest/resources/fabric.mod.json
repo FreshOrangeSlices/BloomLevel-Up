@@ -1,0 +1,15 @@
+{
+	"schemaVersion": 1,
+	"id": "bloomlevelup-gametest",
+	"version": "1.0.0",
+	"name": "Bloom Level-Up GameTests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"com.freshorangeslices.bloomlevelup.gametest.ArmorGameTests"
+		]
+	},
+	"depends": {
+		"bloomlevelup": "*"
+	}
+}

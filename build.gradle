@@ -22,6 +22,18 @@ loom {
 	}
 }
 
+fabricApi {
+	// In-game tests: a real dedicated server boots with the mod (so broken mixins fail the build) and runs
+	// the @GameTest methods in src/gametest. They run as part of `./gradlew build`.
+	configureTests {
+		createSourceSet = true
+		modId = "bloomlevelup-gametest"
+		eula = true
+		enableGameTests = true
+		enableClientGameTests = false
+	}
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"

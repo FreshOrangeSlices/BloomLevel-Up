@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"package": "com.freshorangeslices.bloomlevelup.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"ConsumableMixin",
+		"ItemStackMixin",
+		"LivingEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

@@ -41,6 +41,33 @@ public final class BloomConfig {
 	/** Safety ceiling for the armor-overcap damage-reduction layer so it can never reach immunity. */
 	public double armorOvercapReductionCap = 0.90;
 
+	// ---------------------------------------------------------------- XP sources
+
+	/** Multiplies every XP award per category, for pacing. 1.0 = as computed. */
+	public double utilityXpMultiplier = 1.0;
+	public double combatXpMultiplier = 1.0;
+	public double armorXpMultiplier = 1.0;
+	public double miscXpMultiplier = 1.0;
+
+	/** Armor XP per point of incoming damage (one point = half a heart), before the event multiplier. */
+	public double armorXpPerDamage = 4.0;
+	/** Locked by the Armor doc: blocked hits 1.5x, dodges 2.0x. */
+	public double armorBlockXpMultiplier = 1.5;
+	public double armorDodgeXpMultiplier = 2.0;
+
+	// ---------------------------------------------------------------- Armor tuning
+
+	/** Safety ceiling for the main Dodge roll so no investment reaches literal immunity. */
+	public double dodgeChanceCap = 0.90;
+	/** Last Breath: length of the diminishing window in ticks (20 minutes) and health restored (5 hearts). */
+	public int lastBreathWindowTicks = 24_000;
+	public float lastBreathHealth = 10.0F;
+	/** Castle of Stone: invincibility length and bed rest needed to recharge (4 seconds, confirmed). */
+	public int castleOfStoneTicks = 200;
+	public int castleOfStoneRestTicks = 80;
+	/** Brace!: how long the player must crouch still before bracing. */
+	public int braceDelayTicks = 20;
+
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
 		majorLevelEvery = Math.max(1, majorLevelEvery);
@@ -54,6 +81,17 @@ public final class BloomConfig {
 		investmentBaseCost = Math.max(1, investmentBaseCost);
 		investmentCostGrowth = Math.max(0, investmentCostGrowth);
 		armorOvercapReductionCap = Math.min(0.99, Math.max(0.0, armorOvercapReductionCap));
+		utilityXpMultiplier = Math.max(0.0, utilityXpMultiplier);
+		combatXpMultiplier = Math.max(0.0, combatXpMultiplier);
+		armorXpMultiplier = Math.max(0.0, armorXpMultiplier);
+		miscXpMultiplier = Math.max(0.0, miscXpMultiplier);
+		armorXpPerDamage = Math.max(0.0, armorXpPerDamage);
+		dodgeChanceCap = Math.min(0.99, Math.max(0.0, dodgeChanceCap));
+		lastBreathWindowTicks = Math.max(1, lastBreathWindowTicks);
+		lastBreathHealth = Math.max(1.0F, lastBreathHealth);
+		castleOfStoneTicks = Math.max(0, castleOfStoneTicks);
+		castleOfStoneRestTicks = Math.max(1, castleOfStoneRestTicks);
+		braceDelayTicks = Math.max(1, braceDelayTicks);
 		return this;
 	}
 }

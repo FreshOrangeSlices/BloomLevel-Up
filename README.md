@@ -29,10 +29,12 @@ Built in chunks. Done so far:
   and the Combat Majors, including the ones with controls (Charge Attack, Catch!, Assault Rifle,
   Lightning Summon) and Copycat.
 
-- **Chunk 6 — Misc:** Misc XP from collected XP orbs, Wisdom / Speed / Endurance, and 11 of the 13 Misc
-  Majors (Iron Stomach, Selective Cleansing, XP Insurance, Second Serving, Water to Wine, Overdose,
-  Hoarder's Pocket, Rainbow, Become My Fuel, Overenchant, Ascension). Stack Overflow and Rune Embedding are
-  hidden until their own chunk (they need deeper inventory/enchantment work).
+- **Chunk 6 — Misc:** Misc XP from collected XP orbs, Wisdom / Speed / Endurance, and the Misc Majors
+  (Iron Stomach, Selective Cleansing, XP Insurance, Second Serving, Water to Wine, Overdose, Hoarder's
+  Pocket, Rainbow, Become My Fuel, Overenchant, Ascension).
+- **Chunk 7 — the last part:** Rune Embedding, Stack Overflow, Medium armor's shield-disable reduction and
+  the `[lvl N]` nameplate. Every Major in the design is now in except One and the Same, which waits for
+  the Pet system.
 
 Every push also boots a test server and runs game tests for the Armor, Utility, Combat and Misc mechanics,
 and boots a real client into a world (client-test workflow).
@@ -60,6 +62,8 @@ in Controls. In the hub:
   (Unrestricted Riptide).
 - Hoarder's Pocket: the **chest button** under the hub button in your inventory, `/bloom pocket`, or bind
   **Open Hoarder's Pocket** in Controls.
+- Rune Embedding: the **enchanted-book button** under those (or `/bloom runes`, or bind **Open Rune
+  Embedding**). Slots 1-4 work while you wear no armor, slot 5 while your hand is empty.
 - Ascension: **double-tap jump** to fly, like creative.
 - Become My Fuel: hold the weapon in your **main hand** and drink a harmful potion from your **off hand**.
 
@@ -74,7 +78,7 @@ Admin commands are still there for testing:
 | `/bloom fund <category> <xp>` | Spend vanilla XP to level a category below 100 |
 | `/bloom invest <category> <count>` | Buy permanent post-100 points (after mastering a category) |
 | `/bloom bloomreset confirm` | Bloom+ reset |
-| `/bloom pocket` | Open Hoarder's Pocket |
+| `/bloom pocket` · `/bloom runes` | Open Hoarder's Pocket / Rune Embedding |
 | `/bloom admin xp <players> <category> <amount>` · `/bloom admin definitions` | Ops: grant XP, show loaded data + warnings |
 
 ## For pack makers
@@ -86,7 +90,7 @@ Admin commands are still there for testing:
   `timber_leaves`, `yield_eligible`, `excavation_treasure`, `growth_aura_crops`, `mature_only`, `xp_column`;
   items `armor/light|medium|heavy`, `weapon/sword|axe|bow|crossbow|trident|mace|spear|blade|blunt`,
   `food/meat`, `food/unsafe`, `food/vegetables`, `food/cleanse_excluded`, `pocket_blocked`, `rainbow_ammo`,
-  `utility_tools`; entity types `bosses`, `no_combat_xp`; damage types
+  `utility_tools`; enchantments `rune/body`, `rune/unarmed`; entity types `bosses`, `no_combat_xp`; damage types
   `dodgeable`, `elemental`, `melee`, `blade`, `blunt`; effects `damage_over_time`, `unyielding_ignored`
 - Shovel treasure: loot table `bloomlevelup:gameplay/excavation_treasure`
 - Tuning: `config/bloomlevelup.json`

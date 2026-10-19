@@ -166,16 +166,26 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Become My Fuel (confirmed: main hand, drinking only) | Drinking a potion from the off hand imprints its first harmful non-instant effect (at the potion's level) on the main-hand weapon (any weapon family). Overwrites the old one. Every weapon hit (melee, arrows and thrown weapons from it) applies it for 10 s, whoever holds the weapon. Shown in the tooltip | config `fuelEffectTicks` |
 | Overenchant | In the anvil, enchantment caps rise to 8 (modded caps above 8 stay) and "Too Expensive!" never blocks; you still pay the levels | config `overenchantMaxLevel` |
 | Ascension (confirmed: double jump) | Creative-style flight in survival/adventure. Damage while flying (or while airborne, by the server's own check) takes flight away until you're standing on something or in water; that state is saved, so relogging mid-air doesn't skip the fall. Side effect of vanilla flight: no fall damage while you can fly | `MiscSkill.updateFlight` |
-| Stack Overflow / Rune Embedding | Not built yet; flagged `disabled` so they're hidden and can't be bought. Stack Overflow needs every stack codec, container and packet to accept 300; Rune Embedding needs its own slot UI and an enchantment-effect bridge | Major JSON `flags` |
+
+## Chunk 7 — the last part
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Stack Overflow (placeholder scope, see To-Do questions) | Anything that already stacks (max stack above 1) holds up to 300 per slot in your own inventory and Hoarder's Pocket, on both sides so the client predicts it. Chests, hoppers, shulkers and other players keep vanilla limits; a big stack splits as it goes in. Drag-spreading and double-click collecting still stop at the item's normal size. Switching it off splits big stacks back (what doesn't fit drops). Saved items and container contents accept counts up to 300 everywhere, so nothing is cut on save | config `stackOverflowMax` (max 300) |
+| Rune Embedding | 5 slots (slots 1-4 body, 5 bare hand), opened from an enchanted-book button under the pocket button, `/bloom runes` or an unbound key; a hopper-style screen. Only enchanted books; every enchantment in a book must be in the slot's tag; no curses; an enchantment can't be in two runes. Kept through death; take-out only without the Major | tags `bloomlevelup:rune/body`, `rune/unarmed` |
+| Body runes | Work only while all four armor slots are empty. Each enchantment counts as worn on the first armor slot it fits (Protection anywhere, Respiration on the head...). Default tag: the four Protections, Feather Falling, Thorns, Respiration, Aqua Affinity, Depth Strider, Swift Sneak. Different Protection kinds can sit in different runes. Frost Walker and Soul Speed aren't in yet (they need location hooks); Unbreaking and Mending aren't allowed (nothing to wear down) | tag `rune/body` |
+| Bare-hand rune | Works only with an empty main hand: a bare-handed attack hits with the rune's enchantments (Sharpness, Smite, Bane of Arthropods, Knockback, Fire Aspect, Looting, Sweeping Edge) | tag `rune/unarmed` |
+| Fitting Armor / Medium shield | When an axe disables your shield, it stays disabled half as long | `ArmorSkill.shieldDisableSeconds` |
+| Nameplate (COMBAT.md) | Other players see `Name [lvl N]`, N = Major Levels currently spent; gray, green for good once any category is mastered | `client/NameTags` |
 
 ## Still open (need a design call)
 
 - Combat numbers marked "proposed" above: Marksman, Predator, Bloodlust, Overkill, First Strike, Lightning radius, Unrestricted Riptide's sneak control.
 - Long Reach as a Copycat source.
 - License; the other mods in the modpack.
-- Default rune tags (Rune Embedding). Vegetable, unsafe-food and ammo tags have first-pass defaults above.
 - Misc XP rate (0.25 per orb point) and whether Ascension's flight should also cancel fall damage.
-- Medium armor's shield-disable reduction (needs a shield cooldown hook).
+- Stack Overflow's reach (own inventory + pocket for now) and the default rune tags.
+- Water to Wine on enemy debuffs, food lists, Become My Fuel on ranged weapons, the thrown-weapon look, One and the Same's Pet system (all listed in the To-Do doc with their placeholders).
 
 ## Hub UI requirements (from FreshOrangeSlices, for the hub chunk)
 

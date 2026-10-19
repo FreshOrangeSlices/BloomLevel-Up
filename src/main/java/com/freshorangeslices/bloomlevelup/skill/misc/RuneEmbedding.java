@@ -112,6 +112,7 @@ public final class RuneEmbedding {
 
 	public static void store(Player player, NonNullList<ItemStack> items) {
 		player.setAttached(RUNES, ItemContainerContents.fromItems(items));
+		HoardersPocket.markHasItems(player, MiscIds.RUNES_HAS_ITEMS, items);
 	}
 
 	// ------------------------------------------------------------------ when the runes work

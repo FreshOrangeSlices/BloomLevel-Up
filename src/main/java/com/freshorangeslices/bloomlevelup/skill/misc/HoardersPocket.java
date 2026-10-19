@@ -1,5 +1,7 @@
 package com.freshorangeslices.bloomlevelup.skill.misc;
 
+import java.util.List;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
@@ -24,7 +26,9 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
+import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 
 /**
@@ -93,6 +97,22 @@ public final class HoardersPocket {
 
 	public static void store(Player player, NonNullList<ItemStack> items) {
 		player.setAttached(CONTENTS, ItemContainerContents.fromItems(items));
+		markHasItems(player, MiscIds.POCKET_HAS_ITEMS, items);
+	}
+
+	/** Keeps a synced "anything inside?" flag, so the button stays (take-out only) after a refund or Bloom+. */
+	static void markHasItems(Player player, String counter, List<ItemStack> items) {
+		if (!(player instanceof ServerPlayer serverPlayer)) {
+			return;
+		}
+
+		long value = items.stream().anyMatch(stack -> !stack.isEmpty()) ? 1 : 0;
+		BloomProfile profile = BloomAttachments.profile(serverPlayer);
+
+		if (profile.counter(counter) != value) {
+			profile.setCounter(counter, value);
+			BloomSync.changed(serverPlayer);
+		}
 	}
 
 	public static boolean isEmpty(Player player) {

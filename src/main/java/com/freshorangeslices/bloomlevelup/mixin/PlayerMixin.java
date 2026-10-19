@@ -6,6 +6,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -52,5 +54,11 @@ abstract class PlayerMixin {
 		if (weapon != cir.getReturnValue()) {
 			cir.setReturnValue(weapon);
 		}
+	}
+
+	/** Ascension: being allowed to fly doesn't make falls harmless; only actually flying does. */
+	@ModifyExpressionValue(method = "causeFallDamage", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Abilities;mayfly:Z"))
+	private boolean bloomlevelup$ascensionFalls(boolean mayfly) {
+		return MiscSkill.fallImmune((Player) (Object) this, mayfly);
 	}
 }

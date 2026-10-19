@@ -97,11 +97,12 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 			Screens.getWidgets(screen).add(new HubButton(container));
 			int row = 1;
 
-			if (owns(MiscIds.HOARDERS_POCKET)) {
+			// After a refund or Bloom+ the buttons stay while anything is still inside (take-out only).
+			if (owns(MiscIds.HOARDERS_POCKET) || counter(MiscIds.POCKET_HAS_ITEMS) > 0) {
 				Screens.getWidgets(screen).add(SideButton.pocket(container, row++));
 			}
 
-			if (owns(MiscIds.RUNE_EMBEDDING)) {
+			if (owns(MiscIds.RUNE_EMBEDDING) || counter(MiscIds.RUNES_HAS_ITEMS) > 0) {
 				Screens.getWidgets(screen).add(SideButton.runes(container, row));
 			}
 		});
@@ -153,5 +154,9 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 
 	private static boolean owns(String majorId) {
 		return ClientBloomState.profile() != null && ClientBloomState.profile().owns(majorId);
+	}
+
+	private static long counter(String key) {
+		return ClientBloomState.profile() == null ? 0 : ClientBloomState.profile().counter(key);
 	}
 }

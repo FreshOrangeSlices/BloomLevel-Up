@@ -26,6 +26,9 @@ public final class MiscIds {
 	public static final String ASCENSION_GRANTED = BloomLevelUp.key("misc/ascension_granted");
 	/** 1 while damage has knocked the player out of Ascension's flight, until they land. */
 	public static final String ASCENSION_GROUNDED = BloomLevelUp.key("misc/ascension_grounded");
+	/** 1 while Hoarder's Pocket / the rune slots hold anything (so the client keeps their button after a refund). */
+	public static final String POCKET_HAS_ITEMS = BloomLevelUp.key("misc/pocket_has_items");
+	public static final String RUNES_HAS_ITEMS = BloomLevelUp.key("misc/runes_has_items");
 
 	private MiscIds() {
 	}

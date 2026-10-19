@@ -100,3 +100,11 @@ Admin commands are still there for testing:
 See `docs/design/` for the design documents and `docs/DECISIONS.md` for choices made during
 implementation. Code: `definition/` (data model), `progression/` (rules), `player/` (state + saving),
 `stats/` (formulas), `data/` (datapack loading), `command/`, `api/`, `registry/` (all game hooks).
+
+## License
+
+All Rights Reserved. You may include the unmodified jar in public or private modpacks, with credit to
+Bloom Level-Up and FreshOrangeSlices. See [LICENSE](LICENSE) for the exact terms.
+
+Compatibility targets: Dungeons and Taverns, World Bosses, ATi Structures, Origins: Legacy, Sodium,
+Lithium and Iris. Better Combat isn't a target for now (it may interfere with Bloom's Combat mechanics).

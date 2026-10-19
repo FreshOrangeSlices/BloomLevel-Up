@@ -444,7 +444,24 @@ public final class MiscSkill {
 	private static void tick(MinecraftServer server) {
 		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 			checkLanding(player);
+
+			// Flying on Ascension never builds up a fall (so landing from flight is safe).
+			if (player.getAbilities().flying && BloomAttachments.profile(player).counter(MiscIds.ASCENSION_GRANTED) > 0) {
+				player.resetFallDistance();
+			}
 		}
+	}
+
+	/**
+	 * Vanilla makes anyone who may fly immune to falls. With flight from Ascension that only holds while
+	 * actually flying: walking off a ledge, or falling after damage grounded you, hurts as normal.
+	 */
+	public static boolean fallImmune(Player player, boolean mayfly) {
+		if (!mayfly || !(player instanceof ServerPlayer serverPlayer) || player.getAbilities().flying) {
+			return mayfly;
+		}
+
+		return BloomAttachments.profile(serverPlayer).counter(MiscIds.ASCENSION_GRANTED) <= 0;
 	}
 
 	/** A grounded Ascension player gets flight back once they touch the ground (or water). */

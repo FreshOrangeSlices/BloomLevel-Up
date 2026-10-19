@@ -342,6 +342,29 @@ public class MiscGameTests {
 		helper.succeed();
 	}
 
+	@GameTest
+	public void becomeMyFuelWorksThroughArrowsAndTridents(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		ServerLevel level = helper.getLevel();
+		FuelImprint weakness = new FuelImprint(MobEffects.WEAKNESS, 1);
+
+		ItemStack bow = new ItemStack(Items.BOW);
+		bow.set(BloomComponents.FUEL, weakness);
+		var arrow = new net.minecraft.world.entity.projectile.arrow.Arrow(level, player, new ItemStack(Items.ARROW), bow);
+		LivingEntity shot = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+		shot.hurtServer(level, player.damageSources().arrow(arrow, player), 2.0F);
+		helper.assertTrue(shot.hasEffect(MobEffects.WEAKNESS), "A fuelled bow's arrow applies the fuel");
+
+		ItemStack trident = new ItemStack(Items.TRIDENT);
+		trident.set(BloomComponents.FUEL, weakness);
+		var thrown = new net.minecraft.world.entity.projectile.arrow.ThrownTrident(level, player, trident);
+		LivingEntity speared = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(3, 2, 3));
+		speared.hurtServer(level, player.damageSources().trident(thrown, player), 2.0F);
+		helper.assertTrue(speared.hasEffect(MobEffects.WEAKNESS), "A thrown fuelled trident applies the fuel");
+		helper.assertValueEqual(1, speared.getEffect(MobEffects.WEAKNESS).getAmplifier(), "At the imprinted level");
+		helper.succeed();
+	}
+
 	// ------------------------------------------------------------------ Overenchant
 
 	@GameTest
@@ -404,6 +427,13 @@ public class MiscGameTests {
 		player.setPos(player.getX(), helper.absolutePos(new BlockPos(2, 1, 2)).getY(), player.getZ());
 		MiscSkill.checkLanding(player);
 		helper.assertTrue(player.getAbilities().mayfly, "Landing gives flight back");
+
+		// Falls only stop hurting while actually flying.
+		player.getAbilities().flying = false;
+		helper.assertTrue(player.causeFallDamage(10.0, 1.0F, player.damageSources().fall()), "Allowed to fly but not flying: a fall hurts");
+		player.getAbilities().flying = true;
+		helper.assertFalse(player.causeFallDamage(10.0, 1.0F, player.damageSources().fall()), "Flying: no fall damage");
+		player.getAbilities().flying = false;
 
 		helper.assertTrue(BloomServices.progression().toggleMajor(BloomAttachments.profile(player), MiscIds.ASCENSION).ok(), "Toggle off");
 		MiscSkill.refresh(player);

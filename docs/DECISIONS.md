@@ -30,7 +30,7 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Copycat sources | Majors flagged `weapon` are copyable unless also flagged `copycat_ineligible`; Universal Majors are flagged `universal` | Major JSON `flags` |
 | One and the Same (confirmed) | Present but flagged `disabled` (cost 5 placeholder) until the Pet system exists | `major/combat/one_and_the_same.json` |
 | Aura Sword (confirmed) | Requires any one Sword Major (`#combat/sword`) | Major JSON |
-| Long Reach as Copycat source | Allowed for now (docs: TBD) | add `copycat_ineligible` to block |
+| Long Reach as Copycat source (confirmed) | Allowed | add `copycat_ineligible` to block |
 | Category pacing | Shared curve for now; per-category curves tuned to the pacing answers below arrive with the XP-source chunk | config |
 
 ## Answers from FreshOrangeSlices (2026-10-18)
@@ -51,6 +51,28 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Castle of Stone | 4 seconds resting in a bed |
 | Heavy armor knockback | 50% knockback resistance, with any further sources scaling with diminishing returns |
 | Placeholder art | One 64×64 placeholder (`textures/gui/placeholder.png`, from FreshOrangeSlices) stands in for every missing icon |
+
+## Answers from FreshOrangeSlices (2026-10-19)
+
+| Topic | Answer |
+|---|---|
+| Combat numbers | Keep Marksman +50%, Predator +10%/hit to +50%, Bloodlust +8%/kill to 5 stacks, Overkill 60% to 3 mobs within 4 blocks, First Strike +50% until playtested |
+| Combat controls | Keep Lightning Summon (sneak + left click with a trident) and Unrestricted Riptide (sneak while releasing) for now |
+| Lightning Shock | Keep: 6 blocks, 3 shocks at 50%, once per 2 s |
+| Copycat + Long Reach | Allowed |
+| License | All Rights Reserved; the unmodified jar may be included in public or private modpacks with attribution (see `LICENSE`) |
+| Compatibility targets | Dungeons and Taverns, World Bosses, ATi Structures, Origins: Legacy, plus Sodium, Lithium, Iris and similar visual/performance mods. Better Combat is not a target (it may interfere with Bloom's Combat) |
+| Misc XP rate | Keep 1 Misc XP per 4 orb XP until playtested |
+| Ascension and falling | No fall damage while actually flying. Knocked out of flight by damage, the fall hurts normally; landing gives flight back |
+| Water to Wine | Fully symmetrical: enemy Poison, Wither, Bleed... can last 10 minutes too (intended danger) |
+| Overdose | Beacon and conduit effects stay excluded |
+| Hoarder's Pocket after refund / Bloom+ | Take-out only while anything is inside; once empty, closed until the Major is bought again |
+| Become My Fuel | Fuelled bows and crossbows apply it through their projectiles; a fuelled trident when thrown |
+| Food lists | Keep as they are (apples and berries excluded from cleansing) |
+| Rune Embedding | Keep the body and bare-hand lists; multi-enchantment books count every valid enchantment; no duplicates; runes persist through death; Frost Walker / Soul Speed later |
+| Stack Overflow | Own inventory and Hoarder's Pocket only, never a server-wide rule; everything else keeps normal limits and splits big stacks; switching off splits safely |
+| One and the Same / Pets | Pets are planned as their own subsystem in Bloom Level-Up (not a skill tab); One and the Same stays hidden until then |
+| Catch! look | Flat spinning item for now; a 3D projectile is later polish |
 
 ## Chunk 2 — hub and first effects
 
@@ -123,12 +145,12 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Execute | Sword hits finish targets left at 30% health or less (bosses 10%). It sets health to zero and lets vanilla's death run (kill credit, loot, XP), so it adds no fake damage | config `executeThreshold`, `executeBossThreshold` |
 | Armor Break | Each worn armor piece of the target loses durability equal to half the real damage (rounded up) | config `armorBreakRatio` |
 | Guaranteed Critical | Full-strength axe swings always crit (with crit particles and sound); −2 attack damage while an axe is in hand | config `guaranteedCriticalPenalty` |
-| Marksman (proposed numbers) | Fully drawn bow shots: no bonus up to 10 blocks, then rising to +50% at 40 blocks | config `marksman*` |
+| Marksman (confirmed for playtesting) | Fully drawn bow shots: no bonus up to 10 blocks, then rising to +50% at 40 blocks | config `marksman*` |
 | Piercing Shot | Bow arrows pierce 4 enemies (like Piercing IV) | config `piercingShotLevel` |
 | Straight Shot | Bow arrows fly without gravity and vanish after 5 seconds in the air | config `straightShotMaxTicks` |
 | Reinforced Shot | +3 damage on crossbow arrows | config `reinforcedShotDamage` |
-| Unrestricted Riptide (proposed control) | Hold sneak while releasing a trident to riptide with no enchantment, anywhere; release normally to throw. Riptide-enchanted tridents work without water or rain | `CombatSkill.riptideStrength` |
-| Lightning Shock (proposed radius) | Enemies within 6 blocks of the struck target. Needs 2+ enemies; 3 shocks at 50% of the hit; one chain per 2 s; ignores the target's hurt cooldown; never triggers Thorns | config `lightningShock*` |
+| Unrestricted Riptide (confirmed control) | Hold sneak while releasing a trident to riptide with no enchantment, anywhere; release normally to throw. Riptide-enchanted tridents work without water or rain | `CombatSkill.riptideStrength` |
+| Lightning Shock (confirmed) | Enemies within 6 blocks of the struck target. Needs 2+ enemies; 3 shocks at 50% of the hit; one chain per 2 s; ignores the target's hurt cooldown; never triggers Thorns | config `lightningShock*` |
 | Wind Impact | Landing a fall of 1.5+ blocks with a mace in hand bursts wind outward (3.5 blocks), pushing mobs away; it doesn't launch you | config `windImpact*` |
 | Stored Impact | Real fall damage stores 50% (max +20) for the next mace hit; 5-minute cooldown from the fall | config `storedImpact*` |
 | Brawler / Combo | +6 attack damage bare-handed. Combo: +0.25 per clean bare-handed hit, max +5, reset after 3 s without a hit | config |
@@ -138,16 +160,16 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Batter Up! | Non-sword melee weapons and fists sweep under vanilla's sweep rules (full strength, on the ground, not a crit or sprint hit) | `CombatSkill.sweep` |
 | Aura Sword | Every 5th full-strength melee hit releases a 3.5-block circle sweep that pulses twice (0.5 s apart), at your attack damage | config `auraSword*` |
 | Death From Above | Every melee weapon except the mace gains the mace's fall bonus (+4/block for 3 blocks, then +2/block for 5, then +1/block). No fall-damage protection | `StatFormulas.maceFallBonus` |
-| Predator (proposed numbers) | Each consecutive hit on the same target +10%, up to +50%; switching targets or 5 s idle resets | config `predator*` |
-| Bloodlust (proposed numbers) | Each kill +8% damage for 10 s, up to 5 stacks; kills refresh it | config `bloodlust*` |
-| Overkill (proposed numbers) | 60% of a kill's excess real damage, split across up to 3 enemies within 4 blocks. Not from Execute kills or from Overkill's own kills | config `overkill*` |
-| First Strike (proposed number) | +50% on the first hit against a full-health target (each pierced target counts separately) | config `firstStrikeBonus` |
+| Predator (confirmed for playtesting) | Each consecutive hit on the same target +10%, up to +50%; switching targets or 5 s idle resets | config `predator*` |
+| Bloodlust (confirmed for playtesting) | Each kill +8% damage for 10 s, up to 5 stacks; kills refresh it | config `bloodlust*` |
+| Overkill (confirmed for playtesting) | 60% of a kill's excess real damage, split across up to 3 enemies within 4 blocks. Not from Execute kills or from Overkill's own kills | config `overkill*` |
+| First Strike (confirmed for playtesting) | +50% on the first hit against a full-health target (each pierced target counts separately) | config `firstStrikeBonus` |
 | Crossbow Infinity | Plain arrows loaded into a crossbow aren't used up (and can't be picked back up). Tipped/spectral arrows and fireworks still are | `CombatSkill.freeAmmo` |
 | Charge Attack / Heavy Hands controls | Hold attack (left click) on a mob or the air. Once the swing has recovered, 1 more second of holding charges it (a heavy whoosh, then sparks); release to swing for 2x (it can still crit). A quick tap still attacks, on release. Mining is unchanged. "Charge attack" can be moved to another key in Controls | config `chargeAttackTicks`, `chargeAttackMultiplier` |
-| Lightning Summon (proposed control) | Sneak + left click with a trident while not aiming at a mob: lightning where you look (up to 48 blocks). Costs 10% of the trident's max durability and refuses if that would break it; 1 s cooldown | config `lightningSummon*` |
+| Lightning Summon (confirmed control) | Sneak + left click with a trident while not aiming at a mob: lightning where you look (up to 48 blocks). Costs 10% of the trident's max durability and refuses if that would break it; 1 s cooldown | config `lightningSummon*` |
 | Catch! | Right click (rebindable "Throw weapon") with a sword, axe or mace throws it. It always comes back (like Loyalty III), hits for the weapon's own damage plus enchantments, and costs 1 durability. Thrown maces scale with the drop and set off Wind Impact on landing; other thrown weapons scale with the drop with Death From Above. Thrown weapons render as a flat item for now | config `catchThrowSpeed` |
 | Assault Rifle | Loading fills a 16-round magazine from your arrows (or fireworks); each click fires one round and holding right click keeps firing (about 5 shots a second); it reloads normally once empty | config `assaultRifleMagazine` |
-| Copycat | In the hub, shift-click an owned weapon Major to copy it; shift-click Copycat to stop. Copied effects keep their costs and drawbacks and switch off with their source. Long Reach is allowed as a source for now | `ProgressionService.selectCopySource` |
+| Copycat | In the hub, shift-click an owned weapon Major to copy it; shift-click Copycat to stop. Copied effects keep their costs and drawbacks and switch off with their source. Long Reach is allowed as a source (confirmed) | `ProgressionService.selectCopySource` |
 
 ## Chunk 6 — Misc
 
@@ -161,11 +183,11 @@ and anything the code decided on its own is visible here. Each item can be chang
 | XP Insurance | Vanilla drops min(7 x level, 100) XP as orbs and destroys the rest; half of the destroyed part comes back on respawn (level 30: 647 of 1295). Nothing happens with keepInventory | config `xpInsuranceShare` |
 | Water to Wine | New timed effects (buffs and debuffs) last at least 10 minutes; instant and infinite effects untouched. An effect counts as stretched only if the stretched version actually became the active one (an ignored or blocked effect never marks anything). The marks are saved on the player, and switching it off, refunding it or Bloom+ cuts only those to 2 minutes left (weaker copies waiting underneath within 10 minutes are cut too) | config `waterToWine*` |
 | Overdose | Re-applying an effect you already have at the same level or higher climbs one level, up to 2 above the incoming effect (Speed I → II → III); more Speed I then refreshes Speed III. Beacon and conduit (ambient) effects never climb, or a beacon would keep you at +2 forever | config `overdoseMaxBoost` |
-| Hoarder's Pocket | 9 slots saved on the player (kept through death, travel, refunds and Bloom+). Opens as a one-row chest from a chest button under the hub button, `/bloom pocket`, or an unbound key. Without the Major it still opens if anything is inside, take-out only (shift-click can't top stacks up either), so nothing is stranded. Blocked: anything with container or bundle contents, plus tag `pocket_blocked` | `HoardersPocket` |
+| Hoarder's Pocket | 9 slots saved on the player (kept through death, travel, refunds and Bloom+). Opens as a one-row chest from a chest button under the hub button, `/bloom pocket`, or an unbound key. Without the Major it still opens (button, command or key) while anything is inside, take-out only (shift-click can't top stacks up either), so nothing is stranded; once empty it stays closed until the Major is bought again. Blocked: anything with container or bundle contents, plus tag `pocket_blocked` | `HoardersPocket` |
 | Rainbow | Bows and crossbows don't use up anything in tag `rainbow_ammo` (all arrows incl. tipped/spectral, and fireworks); you still need one in your inventory. Requires Crossbow Infinity, and only works while it's switched on | tag |
 | Become My Fuel (confirmed: main hand, drinking only) | Drinking a potion from the off hand imprints its first harmful non-instant effect (at the potion's level) on the main-hand weapon (any weapon family). Overwrites the old one. Every weapon hit (melee, arrows and thrown weapons from it) applies it for 10 s, whoever holds the weapon. Shown in the tooltip | config `fuelEffectTicks` |
 | Overenchant | In the anvil, enchantment caps rise to 8 (modded caps above 8 stay) and "Too Expensive!" never blocks; you still pay the levels | config `overenchantMaxLevel` |
-| Ascension (confirmed: double jump) | Creative-style flight in survival/adventure. Damage while flying (or while airborne, by the server's own check) takes flight away until you're standing on something or in water; that state is saved, so relogging mid-air doesn't skip the fall. Side effect of vanilla flight: no fall damage while you can fly | `MiscSkill.updateFlight` |
+| Ascension (confirmed: double jump) | Creative-style flight in survival/adventure. Damage while flying (or while airborne, by the server's own check) takes flight away until you're standing on something or in water; that state is saved, so relogging mid-air doesn't skip the fall. Falls only stop hurting while you're actually flying (vanilla would make anyone who may fly immune) | `MiscSkill.updateFlight` |
 
 ## Chunk 7 — the last part
 
@@ -180,12 +202,7 @@ and anything the code decided on its own is visible here. Each item can be chang
 
 ## Still open (need a design call)
 
-- Combat numbers marked "proposed" above: Marksman, Predator, Bloodlust, Overkill, First Strike, Lightning radius, Unrestricted Riptide's sneak control.
-- Long Reach as a Copycat source.
-- License; the other mods in the modpack.
-- Misc XP rate (0.25 per orb point) and whether Ascension's flight should also cancel fall damage.
-- Stack Overflow's reach (own inventory + pocket for now) and the default rune tags.
-- Water to Wine on enemy debuffs, food lists, Become My Fuel on ranged weapons, the thrown-weapon look, One and the Same's Pet system (all listed in the To-Do doc with their placeholders).
+- Nothing blocking. Playtest results may retune the Combat numbers and the Misc XP rate.
 
 ## Hub UI requirements (from FreshOrangeSlices, for the hub chunk)
 

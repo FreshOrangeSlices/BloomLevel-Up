@@ -1,6 +1,11 @@
 package com.freshorangeslices.bloomlevelup.gametest.client;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.AnvilScreen;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.AnvilMenu;
 
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
@@ -8,10 +13,13 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContex
 
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
+import com.freshorangeslices.bloomlevelup.client.gui.PocketButton;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
 
 /**
  * Boots a real client into a singleplayer world: client mixins must apply, the profile must sync, the
- * inventory button and the Skill Hub must open, and a left click must pass through the combat key hook.
+ * inventory button and the Skill Hub must open, Hoarder's Pocket must open through the server, the anvil
+ * screen (Overenchant's mixin) must load, and a left click must pass through the combat key hook.
  * Screenshots land in the run's artifacts.
  */
 public class BloomClientGameTests implements FabricClientGameTest {
@@ -22,8 +30,11 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null);
 			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:combat 100000");
 			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:utility 100000");
+			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:misc 100000");
+			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/hoarders_pocket");
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null
-					&& ClientBloomState.profile().category("bloomlevelup:combat").level() >= 100);
+					&& ClientBloomState.profile().category("bloomlevelup:combat").level() >= 100
+					&& ClientBloomState.profile().owns(MiscIds.HOARDERS_POCKET));
 
 			context.getInput().pressKey(options -> options.keyInventory);
 			context.waitForScreen(InventoryScreen.class);
@@ -32,6 +43,21 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.setScreen(HubScreen::new);
 			context.waitTicks(2);
 			context.takeScreenshot("bloom_skill_hub");
+			context.setScreen(() -> null);
+
+			// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
+			context.runOnClient(client -> PocketButton.open());
+			context.waitForScreen(ContainerScreen.class);
+			context.takeScreenshot("bloom_hoarders_pocket");
+			context.setScreen(() -> null);
+
+			// Overenchant's anvil-screen mixin only applies when the screen class loads, so open one.
+			context.setScreen(() -> {
+				Minecraft client = Minecraft.getInstance();
+				return new AnvilScreen(new AnvilMenu(0, client.player.getInventory()), client.player.getInventory(), Component.literal("Anvil"));
+			});
+			context.waitTicks(2);
+			context.takeScreenshot("bloom_anvil");
 			context.setScreen(() -> null);
 
 			// An empty-handed left click goes through the Charge / Lightning Summon hook.

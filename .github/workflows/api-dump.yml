@@ -19,19 +19,12 @@ jobs:
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           {
-          code net.minecraft.world.entity.player.Inventory 'placeItemBackInInventory'
-          dump net.minecraft.world.entity.player.Player ' drop[(]|createItemStackToDrop|handleCreativeModeItemDrop'
-          dump net.minecraft.server.level.ServerPlayer ' drop[(]|createItemStackToDrop'
-          dump net.minecraft.world.entity.LivingEntity ' drop[(]|createItemStackToDrop|spawnAtLocation'
-          code net.minecraft.world.entity.player.Player 'ItemEntity drop[(]'
-          code net.minecraft.server.level.ServerPlayer 'ItemEntity drop[(]|boolean drop[(]'
-          code net.minecraft.server.network.ServerGamePacketListenerImpl 'void handleSetCreativeModeSlot'
-          dump net.minecraft.client.gui.screens.MenuScreens 'register|class '
-          dump net.minecraft.world.inventory.MenuType 'MenuType[(]|MenuSupplier|class '
-          dump 'net.minecraft.world.inventory.MenuType$MenuSupplier'
-          dump net.minecraft.world.flag.FeatureFlags 'VANILLA_SET|DEFAULT_FLAGS|class '
-          code net.minecraft.world.level.block.entity.HopperBlockEntity 'tryMoveInItem'
-          dump net.minecraft.client.gui.screens.inventory.ContainerScreen 'ContainerScreen[(]|class '
+          code net.minecraft.world.entity.player.Player 'boolean causeFallDamage'
+          dump net.minecraft.world.entity.projectile.arrow.ThrownTrident 'getWeaponItem|ThrownTrident[(]|class '
+          code net.minecraft.world.entity.projectile.arrow.ThrownTrident 'getWeaponItem'
+          dump net.minecraft.world.entity.projectile.arrow.Arrow 'Arrow[(]|class '
+          dump net.minecraft.world.damagesource.DamageSources 'trident|arrow|class '
+          dump net.minecraft.world.entity.Entity 'resetFallDistance|fallDistance'
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

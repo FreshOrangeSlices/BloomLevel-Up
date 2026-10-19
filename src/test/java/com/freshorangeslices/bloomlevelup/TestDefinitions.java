@@ -25,6 +25,11 @@ public final class TestDefinitions {
 	public static final String HOLD_TO_CHARGE = "bloomlevelup:armor/hold_to_charge";
 	public static final String HOLD_TO_THROW = "bloomlevelup:armor/hold_to_throw";
 	public static final String PASSIVE = "bloomlevelup:misc/passive";
+	public static final String COMBAT = "bloomlevelup:combat";
+	public static final String SWORD_TREE = "bloomlevelup:combat/sword";
+	public static final String FULL_SWEEP = "bloomlevelup:combat/full_sweep";
+	public static final String EXECUTE = "bloomlevelup:combat/execute";
+	public static final String BATTER_UP = "bloomlevelup:combat/batter_up";
 
 	private TestDefinitions() {
 	}
@@ -34,7 +39,8 @@ public final class TestDefinitions {
 				List.of(
 						category(UTILITY, 0, true, stat(EFFICIENCY, UTILITY, true), stat(YIELD, UTILITY, true)),
 						category(ARMOR, 1, true, stat(VITALITY, ARMOR, false)),
-						category(MISC, 2, false)),
+						category(MISC, 2, false),
+						category(COMBAT, 3, true)),
 				List.of(
 						major(VEIN_MINING, UTILITY, 1, true),
 						major(IRON_SKIN, ARMOR, 7, true),
@@ -42,7 +48,10 @@ public final class TestDefinitions {
 						major(CASTLE_OF_STONE, ARMOR, 2, true, List.of(LAST_BREATH), List.of()),
 						major(HOLD_TO_CHARGE, ARMOR, 1, true, List.of(), List.of(HOLD_TO_THROW)),
 						major(HOLD_TO_THROW, ARMOR, 1, true),
-						major(PASSIVE, MISC, 1, false)));
+						major(PASSIVE, MISC, 1, false),
+						inTree(FULL_SWEEP, COMBAT, SWORD_TREE),
+						inTree(EXECUTE, COMBAT, SWORD_TREE),
+						major(BATTER_UP, COMBAT, 2, true, List.of("#" + SWORD_TREE), List.of())));
 	}
 
 	public static CategoryDefinition category(String id, int sort, boolean investment, StatDefinition... stats) {
@@ -51,6 +60,12 @@ public final class TestDefinitions {
 
 	public static StatDefinition stat(String id, String category, boolean toggleable) {
 		return new StatDefinition(id, category, toggleable, 0, Optional.empty());
+	}
+
+	/** A 1-cost weapon-tree Major. */
+	public static MajorDefinition inTree(String id, String category, String group) {
+		return new MajorDefinition(id, category, 1, true, List.of(), List.of(),
+				Optional.of(group), 0, Optional.empty(), Optional.empty(), Set.of("weapon"));
 	}
 
 	public static MajorDefinition major(String id, String category, int cost, boolean toggleable) {

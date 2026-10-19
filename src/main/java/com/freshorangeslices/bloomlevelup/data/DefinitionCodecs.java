@@ -102,6 +102,10 @@ public final class DefinitionCodecs {
 
 	/** Adds the file's namespace to a bare reference; leaves fully qualified ids alone. */
 	static String qualify(String namespace, String ref) {
+		if (ref.startsWith("#")) {
+			return "#" + qualify(namespace, ref.substring(1));
+		}
+
 		return ref.indexOf(':') >= 0 ? ref : namespace + ":" + ref;
 	}
 }

@@ -20,11 +20,8 @@ public final class BloomConfig {
 	/** Lifetime prestige bonus cap per category. */
 	public int prestigePerCategoryCap = 2;
 
-	/**
-	 * Lifetime prestige bonus cap across all categories. The General Concept sheet says +8 (2 x 4 categories);
-	 * the older Utility sheet said +6. Defaulting to the newer document.
-	 */
-	public int prestigeTotalCap = 8;
+	/** Lifetime prestige bonus cap across all categories (confirmed +6, even though 4 categories x 2 could reach 8). */
+	public int prestigeTotalCap = 6;
 
 	/** XP needed to go from level L to L+1 = base + linear * L + quadratic * L^2 (TBD curve). */
 	public double xpCurveBase = 50.0;

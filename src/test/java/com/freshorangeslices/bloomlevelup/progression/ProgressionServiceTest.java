@@ -191,6 +191,32 @@ class ProgressionServiceTest {
 	}
 
 	@Test
+	void weaponTreeMajorsHaveNoOrder() {
+		levelTo(COMBAT, 10);
+		assertTrue(service.purchaseMajor(profile, EXECUTE).ok()); // no need to own Full Sweep first
+	}
+
+	@Test
+	void anyMajorInTheTreeUnlocksTheUniversalMajor() {
+		levelTo(COMBAT, 30);
+		assertEquals(Outcome.PREREQUISITE_REQUIRED, service.purchaseMajor(profile, BATTER_UP).outcome());
+		service.purchaseMajor(profile, EXECUTE);
+		assertTrue(service.purchaseMajor(profile, BATTER_UP).ok());
+	}
+
+	@Test
+	void refundKeepsTreePrerequisiteSatisfiedIfAnotherMemberRemains() {
+		levelTo(COMBAT, 40);
+		service.purchaseMajor(profile, FULL_SWEEP);
+		service.purchaseMajor(profile, EXECUTE);
+		service.purchaseMajor(profile, BATTER_UP);
+		assertTrue(service.refundMajor(profile, FULL_SWEEP).ok()); // Execute still covers the sword tree
+		ActionResult last = service.refundMajor(profile, EXECUTE);
+		assertEquals(Outcome.REQUIRED_BY_OWNED, last.outcome());
+		assertEquals(List.of(BATTER_UP), last.involved());
+	}
+
+	@Test
 	void nonToggleableMajorAlwaysActive() {
 		levelTo(MISC, 10);
 		service.purchaseMajor(profile, PASSIVE);

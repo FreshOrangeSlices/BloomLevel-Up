@@ -94,7 +94,13 @@ public final class DefinitionSet {
 			List<String> prereqs = new ArrayList<>();
 
 			for (String prereq : new LinkedHashSet<>(major.prerequisites())) {
-				if (prereq.equals(major.id())) {
+				if (MajorDefinition.isGroupRef(prereq)) {
+					if (groupMembers(majors, MajorDefinition.groupOf(prereq), major.id()).isEmpty()) {
+						warnings.add("Major '" + major.id() + "' requires a Major from empty group '" + MajorDefinition.groupOf(prereq) + "'; dropped");
+					} else {
+						prereqs.add(prereq);
+					}
+				} else if (prereq.equals(major.id())) {
 					warnings.add("Major '" + major.id() + "' lists itself as a prerequisite; dropped");
 				} else if (!majors.containsKey(prereq)) {
 					warnings.add("Major '" + major.id() + "' has unknown prerequisite '" + prereq + "'; dropped");
@@ -154,6 +160,17 @@ public final class DefinitionSet {
 					majors.put(major.id(), major.withPrerequisites(prereqs).withConflicts(conflicts));
 				}
 			}
+
+			// A tree prerequisite whose whole group was removed can never be met; drop it too.
+			for (MajorDefinition major : List.copyOf(majors.values())) {
+				List<String> prereqs = new ArrayList<>(major.prerequisites());
+
+				if (prereqs.removeIf(p -> MajorDefinition.isGroupRef(p)
+						&& groupMembers(majors, MajorDefinition.groupOf(p), major.id()).isEmpty())) {
+					warnings.add("Major '" + major.id() + "' lost a tree prerequisite to the cycle removal");
+					majors.put(major.id(), major.withPrerequisites(prereqs));
+				}
+			}
 		}
 
 		return new DefinitionSet(categories, stats, majors, warnings);
@@ -190,12 +207,44 @@ public final class DefinitionSet {
 
 		if (major != null) {
 			for (String prereq : major.prerequisites()) {
-				visit(prereq, majors, state, path, onCycle);
+				if (MajorDefinition.isGroupRef(prereq)) {
+					// Conservative: treat "any member" as depending on every member.
+					for (String member : groupMembers(majors, MajorDefinition.groupOf(prereq), id)) {
+						visit(member, majors, state, path, onCycle);
+					}
+				} else {
+					visit(prereq, majors, state, path, onCycle);
+				}
 			}
 		}
 
 		path.remove(path.size() - 1);
 		state.put(id, 2);
+	}
+
+	private static List<String> groupMembers(Map<String, MajorDefinition> majors, String group, String excluding) {
+		List<String> members = new ArrayList<>();
+
+		for (MajorDefinition major : majors.values()) {
+			if (!major.id().equals(excluding) && major.group().filter(group::equals).isPresent()) {
+				members.add(major.id());
+			}
+		}
+
+		return members;
+	}
+
+	/** Majors in a tree, e.g. every Major whose group is {@code bloomlevelup:combat/sword}. */
+	public List<MajorDefinition> groupMembers(String group) {
+		List<MajorDefinition> list = new ArrayList<>();
+
+		for (MajorDefinition major : majors.values()) {
+			if (major.group().filter(group::equals).isPresent()) {
+				list.add(major);
+			}
+		}
+
+		return list;
 	}
 
 	public Collection<CategoryDefinition> categories() {

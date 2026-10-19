@@ -1,10 +1,12 @@
 package com.freshorangeslices.bloomlevelup.progression;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.definition.CategoryDefinition;
@@ -299,8 +301,29 @@ public final class ProgressionService {
 
 	/** Whether every prerequisite is owned. The UI only ever shows a generic "Prerequisite Required" state. */
 	public boolean prerequisitesMet(BloomProfile profile, MajorDefinition major) {
+		return prerequisitesMet(profile.majors().keySet(), major);
+	}
+
+	/**
+	 * Prerequisite check against an arbitrary set of owned ids. A plain id must be owned; a {@code #group}
+	 * entry is met by owning any one Major in that tree.
+	 */
+	public boolean prerequisitesMet(Set<String> owned, MajorDefinition major) {
 		for (String prereq : major.prerequisites()) {
-			if (!profile.owns(prereq)) {
+			if (MajorDefinition.isGroupRef(prereq)) {
+				boolean any = false;
+
+				for (MajorDefinition member : definitions.groupMembers(MajorDefinition.groupOf(prereq))) {
+					if (owned.contains(member.id())) {
+						any = true;
+						break;
+					}
+				}
+
+				if (!any) {
+					return false;
+				}
+			} else if (!owned.contains(prereq)) {
 				return false;
 			}
 		}
@@ -355,14 +378,13 @@ public final class ProgressionService {
 				return ActionResult.of(Outcome.CONFLICT, conflicts);
 			}
 
+			List<String> broken = brokenBy(profile, Set.copyOf(conflicts), major.id());
+
+			if (!broken.isEmpty()) {
+				return ActionResult.of(Outcome.REQUIRED_BY_OWNED, broken);
+			}
+
 			for (String conflict : conflicts) {
-				List<String> dependents = ownedDependents(profile, conflict);
-				dependents.removeAll(conflicts);
-
-				if (!dependents.isEmpty()) {
-					return ActionResult.of(Outcome.REQUIRED_BY_OWNED, dependents);
-				}
-
 				refund += profile.majors().get(conflict).paid();
 			}
 		}
@@ -385,10 +407,10 @@ public final class ProgressionService {
 			return ActionResult.of(Outcome.NOT_OWNED);
 		}
 
-		List<String> dependents = ownedDependents(profile, majorId);
+		List<String> broken = brokenBy(profile, Set.of(majorId), null);
 
-		if (!dependents.isEmpty()) {
-			return ActionResult.of(Outcome.REQUIRED_BY_OWNED, dependents);
+		if (!broken.isEmpty()) {
+			return ActionResult.of(Outcome.REQUIRED_BY_OWNED, broken);
 		}
 
 		profile.majors().remove(majorId);
@@ -416,16 +438,30 @@ public final class ProgressionService {
 		return ActionResult.success();
 	}
 
-	private List<String> ownedDependents(BloomProfile profile, String majorId) {
-		List<String> list = new ArrayList<>();
+	/**
+	 * Owned Majors whose prerequisites would stop being met if {@code removing} were taken away
+	 * (optionally while {@code adding} is bought in the same step).
+	 */
+	private List<String> brokenBy(BloomProfile profile, Set<String> removing, String adding) {
+		Set<String> after = new HashSet<>(profile.majors().keySet());
+		after.removeAll(removing);
 
-		for (MajorDefinition dependent : definitions.dependentsOf(majorId)) {
-			if (profile.owns(dependent.id())) {
-				list.add(dependent.id());
+		if (adding != null) {
+			after.add(adding);
+		}
+
+		List<String> broken = new ArrayList<>();
+
+		for (String ownedId : after) {
+			Optional<MajorDefinition> owned = definitions.major(ownedId);
+
+			if (owned.isPresent() && !ownedId.equals(adding) && !prerequisitesMet(after, owned.get())) {
+				broken.add(ownedId);
 			}
 		}
 
-		return list;
+		broken.sort(null);
+		return broken;
 	}
 
 	// ------------------------------------------------------------------ Bloom+

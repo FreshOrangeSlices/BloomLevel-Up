@@ -56,6 +56,14 @@ class DefinitionSetTest {
 	}
 
 	@Test
+	void treePrerequisiteToEmptyGroupIsDropped() {
+		DefinitionSet set = DefinitionSet.build(List.of(category(CAT, 0, false)), List.of(
+				major("test:a", CAT, 1, true, List.of("#test:nothing_here"), List.of())));
+		assertTrue(set.major("test:a").orElseThrow().prerequisites().isEmpty());
+		assertEquals(1, set.warnings().size());
+	}
+
+	@Test
 	void categoriesAreSorted() {
 		DefinitionSet set = DefinitionSet.build(List.of(category("test:z", 0, false), category("test:a", 5, false)), List.of());
 		assertEquals("test:z", set.categories().iterator().next().id());

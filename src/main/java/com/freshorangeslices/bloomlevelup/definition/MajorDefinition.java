@@ -16,7 +16,9 @@ import java.util.Set;
  * @param categoryId    category page the Major appears on (it can be bought with Major Levels from anywhere)
  * @param cost          Major Levels required
  * @param toggleable    whether the owner may switch it off without refunding
- * @param prerequisites Majors that must be owned to purchase this one (ownership only; never revealed in UI)
+ * @param prerequisites Majors that must ALL be owned to purchase this one (ownership only; never revealed in UI).
+ *                      An entry starting with {@code #} names a tree instead: owning ANY one Major in that
+ *                      group satisfies it, e.g. {@code #bloomlevelup:combat/sword}
  * @param conflicts     Majors that cannot be owned at the same time (made symmetric on load)
  * @param group         optional tree id used to group Majors on the page, e.g. {@code bloomlevelup:combat/sword}
  * @param sort          display order on the category page
@@ -40,6 +42,8 @@ public record MajorDefinition(
 	public static final String FLAG_COPYCAT_INELIGIBLE = "copycat_ineligible";
 	public static final String FLAG_PRIMARY_HIT_ONLY = "primary_hit_only";
 	public static final String FLAG_DISABLED = "disabled";
+	/** Prefix marking a prerequisite as "any one Major in this group". */
+	public static final String GROUP_PREFIX = "#";
 
 	public MajorDefinition {
 		Objects.requireNonNull(id, "id");
@@ -50,6 +54,15 @@ public record MajorDefinition(
 		icon = icon == null ? Optional.empty() : icon;
 		effect = effect == null ? Optional.empty() : effect;
 		flags = Set.copyOf(flags);
+	}
+
+	public static boolean isGroupRef(String prerequisite) {
+		return prerequisite.startsWith(GROUP_PREFIX);
+	}
+
+	/** The group id named by a {@code #group} prerequisite. */
+	public static String groupOf(String prerequisite) {
+		return prerequisite.substring(GROUP_PREFIX.length());
 	}
 
 	public boolean hasFlag(String flag) {

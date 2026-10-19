@@ -332,4 +332,55 @@ class ProgressionServiceTest {
 		levelTo(MISC, 100);
 		assertTrue(profile.anyMastered());
 	}
+
+	// ---------------------------------------------------------------- Copycat
+
+	private void ownCombat(String... majors) {
+		levelTo(COMBAT, 100);
+		levelTo(UTILITY, 100);
+
+		for (String major : majors) {
+			assertEquals(Outcome.SUCCESS, service.purchaseMajor(profile, major).outcome());
+		}
+	}
+
+	@Test
+	void copycatCopiesOneOwnedWeaponMajor() {
+		ownCombat(COPYCAT, EXECUTE);
+		assertTrue(service.activeCopySource(profile, COPYCAT).isEmpty());
+		assertEquals(Outcome.SUCCESS, service.selectCopySource(profile, COPYCAT, EXECUTE).outcome());
+		assertEquals(EXECUTE, service.activeCopySource(profile, COPYCAT).orElseThrow());
+
+		// The choice can be changed or cleared freely.
+		assertEquals(Outcome.SUCCESS, service.selectCopySource(profile, COPYCAT, "").outcome());
+		assertTrue(service.activeCopySource(profile, COPYCAT).isEmpty());
+	}
+
+	@Test
+	void copycatRejectsUnownedUniversalAndNullListMajors() {
+		ownCombat(COPYCAT, FULL_SWEEP, BATTER_UP, ASSAULT_RIFLE);
+		assertEquals(Outcome.INVALID_CHOICE, service.selectCopySource(profile, COPYCAT, EXECUTE).outcome()); // not owned
+		assertEquals(Outcome.INVALID_CHOICE, service.selectCopySource(profile, COPYCAT, BATTER_UP).outcome()); // universal
+		assertEquals(Outcome.INVALID_CHOICE, service.selectCopySource(profile, COPYCAT, ASSAULT_RIFLE).outcome()); // null list
+		assertEquals(Outcome.INVALID_CHOICE, service.selectCopySource(profile, FULL_SWEEP, FULL_SWEEP).outcome()); // not a copier
+	}
+
+	@Test
+	void copycatStopsWhenItsSourceIsSwitchedOff() {
+		ownCombat(COPYCAT, EXECUTE);
+		service.selectCopySource(profile, COPYCAT, EXECUTE);
+		service.toggleMajor(profile, EXECUTE);
+		assertTrue(service.activeCopySource(profile, COPYCAT).isEmpty());
+		service.toggleMajor(profile, EXECUTE);
+		assertEquals(EXECUTE, service.activeCopySource(profile, COPYCAT).orElseThrow());
+
+		// Toggling Copycat keeps its choice.
+		service.toggleMajor(profile, COPYCAT);
+		service.toggleMajor(profile, COPYCAT);
+		assertEquals(EXECUTE, service.activeCopySource(profile, COPYCAT).orElseThrow());
+
+		// Refunding the source leaves Copycat with nothing to copy.
+		service.refundMajor(profile, EXECUTE);
+		assertTrue(service.activeCopySource(profile, COPYCAT).isEmpty());
+	}
 }

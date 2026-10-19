@@ -30,6 +30,8 @@ public final class TestDefinitions {
 	public static final String FULL_SWEEP = "bloomlevelup:combat/full_sweep";
 	public static final String EXECUTE = "bloomlevelup:combat/execute";
 	public static final String BATTER_UP = "bloomlevelup:combat/batter_up";
+	public static final String COPYCAT = "bloomlevelup:combat/copycat";
+	public static final String ASSAULT_RIFLE = "bloomlevelup:combat/assault_rifle";
 
 	private TestDefinitions() {
 	}
@@ -51,7 +53,11 @@ public final class TestDefinitions {
 						major(PASSIVE, MISC, 1, false),
 						inTree(FULL_SWEEP, COMBAT, SWORD_TREE),
 						inTree(EXECUTE, COMBAT, SWORD_TREE),
-						major(BATTER_UP, COMBAT, 2, true, List.of("#" + SWORD_TREE), List.of())));
+						major(BATTER_UP, COMBAT, 2, true, List.of("#" + SWORD_TREE), List.of()),
+						new MajorDefinition(COPYCAT, COMBAT, 5, true, List.of(), List.of(), Optional.empty(), 0, Optional.empty(),
+								Optional.empty(), Set.of("universal", "copies_weapon_major")),
+						new MajorDefinition(ASSAULT_RIFLE, COMBAT, 1, true, List.of(), List.of(), Optional.of("bloomlevelup:combat/crossbow"), 0,
+								Optional.empty(), Optional.empty(), Set.of("weapon", "copycat_ineligible"))));
 	}
 
 	public static CategoryDefinition category(String id, int sort, boolean investment, StatDefinition... stats) {

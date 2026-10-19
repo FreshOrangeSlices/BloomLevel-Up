@@ -53,12 +53,10 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
-import com.freshorangeslices.bloomlevelup.effect.StatEffects;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
@@ -95,7 +93,6 @@ public final class UtilitySkill {
 	private static final Set<BrokenKey> BROKEN_PLACED = new HashSet<>();
 	private static final List<ChainJob> CHAIN_QUEUE = new ArrayList<>();
 	private static final Map<UUID, PendingShear> PENDING_SHEARS = new HashMap<>();
-	private static final Map<UUID, Boolean> HOLDING_SHOVEL = new HashMap<>();
 	private static boolean chainBreaking;
 	private static boolean rollingExtraLoot;
 	private static int tickCounter;
@@ -111,12 +108,10 @@ public final class UtilitySkill {
 		ServerTickEvents.END_SERVER_TICK.register(UtilitySkill::endTick);
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> BlockXpTable.invalidate());
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> BlockXpTable.invalidate());
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> HOLDING_SHOVEL.remove(listener.player.getUUID()));
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			BROKEN_PLACED.clear();
 			CHAIN_QUEUE.clear();
 			PENDING_SHEARS.clear();
-			HOLDING_SHOVEL.clear();
 		});
 	}
 
@@ -164,7 +159,7 @@ public final class UtilitySkill {
 		return player.getMainHandItem().is(ItemTags.SHOVELS) && active(player, UtilityIds.SHOVEL_MASTERY);
 	}
 
-	/** Efficiency, including Shovel Mastery's bonus. Used by {@link StatEffects}. */
+	/** Efficiency, including Shovel Mastery's bonus. Used by StatEffects. */
 	public static int efficiency(ServerPlayer player) {
 		int points = stat(player, UtilityIds.EFFICIENCY);
 		return shovelBoost(player) ? StatFormulas.boosted(points, config().shovelMasteryBonus) : points;
@@ -506,16 +501,8 @@ public final class UtilitySkill {
 
 		boolean pulse = tickCounter % config().growthAuraIntervalTicks == 0;
 
-		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-			// Shovel Mastery changes Efficiency (an attribute), so refresh when a shovel enters or leaves the main hand.
-			boolean shovel = player.getMainHandItem().is(ItemTags.SHOVELS);
-			Boolean previous = HOLDING_SHOVEL.put(player.getUUID(), shovel);
-
-			if (previous != null && previous != shovel && BloomAttachments.profile(player).owns(UtilityIds.SHOVEL_MASTERY)) {
-				StatEffects.refresh(player);
-			}
-
-			if (pulse) {
+		if (pulse) {
+			for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 				growthAura(player);
 			}
 		}

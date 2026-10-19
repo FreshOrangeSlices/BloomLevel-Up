@@ -144,4 +144,49 @@ class StatFormulasTest {
 		assertEquals(0, StatFormulas.boosted(0, 0.20));
 		assertEquals(6, StatFormulas.boosted(5, 0.20));
 	}
+
+	@Test
+	void criticalPenetrationLooting() {
+		assertEquals(1.5, StatFormulas.criticalMultiplier(0), 1e-9);
+		assertEquals(4.0, StatFormulas.criticalMultiplier(100), 1e-9);
+		assertEquals(0.5, StatFormulas.penetration(100), 1e-9);
+		assertTrue(StatFormulas.penetration(1000) < 1.0);
+		assertEquals(3.0, StatFormulas.virtualLooting(100), 1e-9);
+	}
+
+	@Test
+	void marksmanRamp() {
+		assertEquals(0.0, StatFormulas.marksmanBonus(8, 10, 40, 0.5), 1e-9);
+		assertEquals(0.25, StatFormulas.marksmanBonus(25, 10, 40, 0.5), 1e-9);
+		assertEquals(0.5, StatFormulas.marksmanBonus(100, 10, 40, 0.5), 1e-9);
+	}
+
+	@Test
+	void maceFallBonusMatchesVanilla() {
+		assertEquals(0.0, StatFormulas.maceFallBonus(1.0), 1e-9);
+		assertEquals(12.0, StatFormulas.maceFallBonus(3.0), 1e-9);
+		assertEquals(22.0, StatFormulas.maceFallBonus(8.0), 1e-9);
+		assertEquals(32.0, StatFormulas.maceFallBonus(18.0), 1e-9);
+	}
+
+	@Test
+	void stacks() {
+		assertEquals(1.5, StatFormulas.stackMultiplier(5, 0.10, 5), 1e-9);
+		assertEquals(1.5, StatFormulas.stackMultiplier(9, 0.10, 5), 1e-9);
+		assertEquals(5.0, StatFormulas.comboBonus(40, 0.25, 5.0), 1e-9);
+		assertEquals(1.0, StatFormulas.comboBonus(4, 0.25, 5.0), 1e-9);
+	}
+
+	@Test
+	void lightningChainShapes() {
+		assertEquals(0, StatFormulas.lightningChain(1).length);
+		org.junit.jupiter.api.Assertions.assertArrayEquals(new int[] {1, 0, 1}, StatFormulas.lightningChain(2));
+		org.junit.jupiter.api.Assertions.assertArrayEquals(new int[] {0, 1, 2}, StatFormulas.lightningChain(7));
+	}
+
+	@Test
+	void combatXpIsCappedByRemainingHealth() {
+		assertEquals(5.0, StatFormulas.combatHitXp(30, 10, 0.5, 1.0), 1e-9);
+		assertEquals(30.0, StatFormulas.combatHitXp(6, 20, 0.5, 10.0), 1e-9);
+	}
 }

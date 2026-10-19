@@ -36,7 +36,8 @@ public final class ProfileCodecs {
 
 	public static final Codec<OwnedMajor> OWNED_MAJOR = RecordCodecBuilder.create(i -> i.group(
 			Codec.BOOL.optionalFieldOf("enabled", true).forGetter(OwnedMajor::enabled),
-			Codec.INT.optionalFieldOf("paid", 0).forGetter(OwnedMajor::paid)
+			Codec.INT.optionalFieldOf("paid", 0).forGetter(OwnedMajor::paid),
+			Codec.STRING.optionalFieldOf("option", "").forGetter(OwnedMajor::option)
 	).apply(i, OwnedMajor::new));
 
 	public static final Codec<BloomProfile> PROFILE = RecordCodecBuilder.<BloomProfile>create(i -> i.group(

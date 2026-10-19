@@ -94,6 +94,64 @@ public final class BloomConfig {
 	public int tripleCatchRolls = 3;
 	public int tripleCatchExtraDurability = 2;
 
+	// ---------------------------------------------------------------- Combat
+
+	/** Combat XP per point of real health damage dealt (capped by the target's remaining health). */
+	public double combatXpPerDamage = 0.5;
+	/** Kill bonus: this share of the damage XP the killer earned on that target. */
+	public double combatKillBonus = 0.5;
+	/** Combat stats and Majors work against players; and whether hitting players gives Combat XP. */
+	public boolean combatPvp = true;
+	public boolean combatPvpXp = true;
+	/** Combat XP multipliers per entity type id (bosses, dangerous modded mobs). */
+	public java.util.Map<String, Double> combatEntityXpMultipliers = new java.util.LinkedHashMap<>(java.util.Map.of(
+			"minecraft:wither", 10.0,
+			"minecraft:ender_dragon", 12.0,
+			"minecraft:warden", 5.0,
+			"minecraft:elder_guardian", 5.0));
+
+	public double executeThreshold = 0.30;
+	public double executeBossThreshold = 0.10;
+	public double armorBreakRatio = 0.5;
+	public double guaranteedCriticalPenalty = 2.0;
+	public double marksmanStartDistance = 10.0;
+	public double marksmanFullDistance = 40.0;
+	public double marksmanMaxBonus = 0.5;
+	public int piercingShotLevel = 4;
+	public int straightShotMaxTicks = 100;
+	public double reinforcedShotDamage = 3.0;
+	public double lightningShockRatio = 0.5;
+	public double lightningShockRadius = 6.0;
+	public int lightningShockCooldownTicks = 40;
+	public double storedImpactRatio = 0.5;
+	public double storedImpactCap = 20.0;
+	public int storedImpactCooldownTicks = 6000;
+	public double windImpactRadius = 3.5;
+	public double windImpactMinFall = 1.5;
+	public double windImpactStrength = 1.2;
+	public double brawlerDamage = 6.0;
+	public double comboPerHit = 0.25;
+	public double comboCap = 5.0;
+	public int comboResetTicks = 60;
+	public double disarmChance = 0.30;
+	public double longReachBlocks = 2.0;
+	public double impaleChance = 0.40;
+	public int bleedTicks = 60;
+	public int auraSwordHits = 5;
+	public double auraSwordRadius = 3.5;
+	public int auraSwordPulseGapTicks = 10;
+	public double predatorPerStack = 0.10;
+	public int predatorMaxStacks = 5;
+	public int predatorResetTicks = 100;
+	public double bloodlustPerStack = 0.08;
+	public int bloodlustMaxStacks = 5;
+	public int bloodlustTicks = 200;
+	public double overkillRatio = 0.6;
+	public double overkillRadius = 4.0;
+	public int overkillMaxTargets = 3;
+	public double firstStrikeBonus = 0.5;
+	public double unrestrictedRiptideStrength = 3.0;
+
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
 		majorLevelEvery = Math.max(1, majorLevelEvery);
@@ -132,6 +190,58 @@ public final class BloomConfig {
 		masterShearingExtraDurability = Math.max(0, masterShearingExtraDurability);
 		tripleCatchRolls = Math.max(1, Math.min(10, tripleCatchRolls));
 		tripleCatchExtraDurability = Math.max(0, tripleCatchExtraDurability);
+		combatXpPerDamage = Math.max(0.0, combatXpPerDamage);
+		combatKillBonus = Math.max(0.0, combatKillBonus);
+
+		if (combatEntityXpMultipliers == null) {
+			combatEntityXpMultipliers = new java.util.LinkedHashMap<>();
+		}
+
+		executeThreshold = clamp01(executeThreshold);
+		executeBossThreshold = clamp01(executeBossThreshold);
+		armorBreakRatio = Math.max(0.0, armorBreakRatio);
+		guaranteedCriticalPenalty = Math.max(0.0, guaranteedCriticalPenalty);
+		marksmanStartDistance = Math.max(0.0, marksmanStartDistance);
+		marksmanFullDistance = Math.max(marksmanStartDistance + 1.0, marksmanFullDistance);
+		marksmanMaxBonus = Math.max(0.0, marksmanMaxBonus);
+		piercingShotLevel = Math.max(0, Math.min(127, piercingShotLevel));
+		straightShotMaxTicks = Math.max(1, straightShotMaxTicks);
+		reinforcedShotDamage = Math.max(0.0, reinforcedShotDamage);
+		lightningShockRatio = Math.max(0.0, lightningShockRatio);
+		lightningShockRadius = Math.max(1.0, Math.min(32.0, lightningShockRadius));
+		lightningShockCooldownTicks = Math.max(0, lightningShockCooldownTicks);
+		storedImpactRatio = Math.max(0.0, storedImpactRatio);
+		storedImpactCap = Math.max(0.0, storedImpactCap);
+		storedImpactCooldownTicks = Math.max(0, storedImpactCooldownTicks);
+		windImpactRadius = Math.max(0.5, Math.min(16.0, windImpactRadius));
+		windImpactMinFall = Math.max(0.0, windImpactMinFall);
+		windImpactStrength = Math.max(0.0, windImpactStrength);
+		brawlerDamage = Math.max(0.0, brawlerDamage);
+		comboPerHit = Math.max(0.0, comboPerHit);
+		comboCap = Math.max(0.0, comboCap);
+		comboResetTicks = Math.max(1, comboResetTicks);
+		disarmChance = clamp01(disarmChance);
+		longReachBlocks = Math.max(0.0, longReachBlocks);
+		impaleChance = clamp01(impaleChance);
+		bleedTicks = Math.max(20, bleedTicks);
+		auraSwordHits = Math.max(1, auraSwordHits);
+		auraSwordRadius = Math.max(1.0, Math.min(16.0, auraSwordRadius));
+		auraSwordPulseGapTicks = Math.max(1, auraSwordPulseGapTicks);
+		predatorPerStack = Math.max(0.0, predatorPerStack);
+		predatorMaxStacks = Math.max(0, predatorMaxStacks);
+		predatorResetTicks = Math.max(1, predatorResetTicks);
+		bloodlustPerStack = Math.max(0.0, bloodlustPerStack);
+		bloodlustMaxStacks = Math.max(0, bloodlustMaxStacks);
+		bloodlustTicks = Math.max(1, bloodlustTicks);
+		overkillRatio = Math.max(0.0, overkillRatio);
+		overkillRadius = Math.max(1.0, Math.min(16.0, overkillRadius));
+		overkillMaxTargets = Math.max(1, overkillMaxTargets);
+		firstStrikeBonus = Math.max(0.0, firstStrikeBonus);
+		unrestrictedRiptideStrength = Math.max(0.0, unrestrictedRiptideStrength);
 		return this;
+	}
+
+	private static double clamp01(double value) {
+		return Math.min(1.0, Math.max(0.0, value));
 	}
 }

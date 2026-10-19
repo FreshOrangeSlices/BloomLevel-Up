@@ -22,6 +22,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.player.PlayerXpWallet;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 
 /**
  * Keeps clients in step with the server. Anything that changes a profile calls {@link #changed}; once per
@@ -132,6 +133,7 @@ public final class BloomSync {
 				case TOGGLE_MAJOR -> service.toggleMajor(profile, target);
 				case FUND -> service.fundWithVanillaXp(profile, target, amount, new PlayerXpWallet(player));
 				case INVEST -> service.invest(profile, target, amount, new PlayerXpWallet(player));
+				case SET_COPY_SOURCE -> service.selectCopySource(profile, CombatIds.COPYCAT, target);
 			};
 		} catch (RuntimeException e) {
 			BloomLevelUp.LOGGER.error("Bloom request {} from {} failed", request, player.getName().getString(), e);

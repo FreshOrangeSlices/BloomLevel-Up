@@ -8,14 +8,19 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
+import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
 import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
@@ -42,6 +47,10 @@ public final class StatEffects {
 	private static final Identifier TEMPO_MOD = BloomLevelUp.id("stat/tempo");
 	private static final Identifier SPEED_MOD = BloomLevelUp.id("stat/speed");
 	private static final Identifier EFFICIENCY_MOD = BloomLevelUp.id("stat/efficiency");
+	private static final Identifier BRAWLER_MOD = BloomLevelUp.id("major/brawler");
+	private static final Identifier GUARANTEED_CRITICAL_MOD = BloomLevelUp.id("major/guaranteed_critical");
+	private static final Identifier LONG_REACH_MOD = BloomLevelUp.id("major/long_reach");
+	private static final Identifier FULL_SWEEP_MOD = BloomLevelUp.id("major/full_sweep");
 	private static final Identifier TITAN_SPEED_MOD = BloomLevelUp.id("major/titan_hide_speed");
 	private static final Identifier TITAN_FALL_MOD = BloomLevelUp.id("major/titan_hide_fall");
 	private static final Identifier PROTEIN_MOD = BloomLevelUp.id("major/protein");
@@ -107,6 +116,20 @@ public final class StatEffects {
 		// An attribute so the client's own mining prediction speeds up too.
 		apply(player, Attributes.BLOCK_BREAK_SPEED, EFFICIENCY_MOD,
 				UtilitySkill.efficiency(player) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+
+		// Combat Majors that depend on the weapon in hand (HeldItemWatcher refreshes on every swap).
+		ItemStack held = player.getMainHandItem();
+		BloomConfig config = BloomServices.config();
+		apply(player, Attributes.ATTACK_DAMAGE, BRAWLER_MOD,
+				CombatSkill.has(player, CombatIds.BRAWLER, Family.UNARMED, held) ? config.brawlerDamage : 0.0, AttributeModifier.Operation.ADD_VALUE);
+		apply(player, Attributes.ATTACK_DAMAGE, GUARANTEED_CRITICAL_MOD,
+				CombatSkill.has(player, CombatIds.GUARANTEED_CRITICAL, Family.AXE, held) ? -config.guaranteedCriticalPenalty : 0.0,
+				AttributeModifier.Operation.ADD_VALUE);
+		apply(player, Attributes.ENTITY_INTERACTION_RANGE, LONG_REACH_MOD,
+				CombatSkill.has(player, CombatIds.LONG_REACH, Family.SPEAR, held) ? config.longReachBlocks : 0.0, AttributeModifier.Operation.ADD_VALUE);
+		// Full Sweep: sweep damage = 1 + 100% of the hit (vanilla's sweep formula at the attribute's maximum).
+		apply(player, Attributes.SWEEPING_DAMAGE_RATIO, FULL_SWEEP_MOD,
+				CombatSkill.has(player, CombatIds.FULL_SWEEP, Family.SWORD, held) ? 1.0 : 0.0, AttributeModifier.Operation.ADD_VALUE);
 
 		// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
 		apply(player, Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);

@@ -438,6 +438,57 @@ public final class ProgressionService {
 		return ActionResult.success();
 	}
 
+	/** Whether a Major could be picked as a Copycat source (owned, a weapon Major, not on the null list). */
+	public boolean isCopyableSource(BloomProfile profile, String sourceId) {
+		Optional<MajorDefinition> source = definitions.major(sourceId);
+		return profile.owns(sourceId) && source.isPresent()
+				&& source.get().flags().contains(MajorDefinition.FLAG_WEAPON)
+				&& !source.get().flags().contains(MajorDefinition.FLAG_COPYCAT_INELIGIBLE);
+	}
+
+	/**
+	 * Sets which weapon Major a copier (Copycat) spreads. An empty {@code sourceId} clears the choice.
+	 * The choice can be changed freely.
+	 */
+	public ActionResult selectCopySource(BloomProfile profile, String copierId, String sourceId) {
+		OwnedMajor copier = profile.majors().get(copierId);
+
+		if (copier == null) {
+			return ActionResult.of(Outcome.NOT_OWNED);
+		}
+
+		Optional<MajorDefinition> definition = definitions.major(copierId);
+
+		if (definition.isEmpty() || !definition.get().flags().contains(MajorDefinition.FLAG_COPIES_WEAPON_MAJOR)) {
+			return ActionResult.of(Outcome.INVALID_CHOICE);
+		}
+
+		String choice = sourceId == null ? "" : sourceId;
+
+		if (!choice.isEmpty() && !isCopyableSource(profile, choice)) {
+			return ActionResult.of(Outcome.INVALID_CHOICE);
+		}
+
+		profile.majors().put(copierId, copier.withOption(choice));
+		return ActionResult.success();
+	}
+
+	/**
+	 * The weapon Major a copier is currently spreading, if it is actually working: the copier is on, the
+	 * source is still owned and copyable, and the source itself is switched on (toggling the source off turns
+	 * Copycat off too).
+	 */
+	public Optional<String> activeCopySource(BloomProfile profile, String copierId) {
+		OwnedMajor copier = profile.majors().get(copierId);
+
+		if (copier == null || copier.option().isEmpty() || !isMajorActive(profile, copierId)) {
+			return Optional.empty();
+		}
+
+		String source = copier.option();
+		return isCopyableSource(profile, source) && isMajorActive(profile, source) ? Optional.of(source) : Optional.empty();
+	}
+
 	/**
 	 * Owned Majors whose prerequisites would stop being met if {@code removing} were taken away
 	 * (optionally while {@code adding} is bought in the same step).

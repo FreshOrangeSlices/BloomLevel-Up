@@ -474,6 +474,7 @@ public final class HubScreen extends Screen {
 			}
 
 			lines.add(Component.translatable("bloom.hub.major.click_refund", owned.paid()).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+			copycatLines(profile, service, major, owned, lines);
 		} else {
 			boolean affordable = major.cost() <= profile.availableMajorLevels();
 			lines.add(Component.translatable("bloom.hub.major.cost", major.cost())
@@ -487,6 +488,35 @@ public final class HubScreen extends Screen {
 		}
 
 		return lines;
+	}
+
+	private static final String COPYCAT = com.freshorangeslices.bloomlevelup.BloomLevelUp.key("combat/copycat");
+
+	private void copycatLines(BloomProfile profile, ProgressionService service, MajorDefinition major, OwnedMajor owned, List<FormattedCharSequence> lines) {
+		OwnedMajor copycat = profile.majors().get(COPYCAT);
+
+		if (copycat == null) {
+			return;
+		}
+
+		if (major.id().equals(COPYCAT)) {
+			if (owned.option().isEmpty()) {
+				lines.add(Component.translatable("bloom.hub.copycat.none").withStyle(ChatFormatting.YELLOW).getVisualOrderText());
+			} else {
+				Component source = ClientBloomState.definitions().major(owned.option())
+						.map(definition -> name(definition.translationKey(), owned.option()))
+						.orElse(Component.literal(owned.option()));
+				boolean working = service.activeCopySource(profile, COPYCAT).isPresent();
+				lines.add(Component.translatable(working ? "bloom.hub.copycat.copying" : "bloom.hub.copycat.paused", source)
+						.withStyle(working ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.GRAY).getVisualOrderText());
+			}
+
+			lines.add(Component.translatable("bloom.hub.copycat.clear").withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+		} else if (service.isCopyableSource(profile, major.id())) {
+			boolean chosen = major.id().equals(copycat.option());
+			lines.add(Component.translatable(chosen ? "bloom.hub.copycat.is_source" : "bloom.hub.copycat.pick")
+					.withStyle(chosen ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.DARK_GRAY).getVisualOrderText());
+		}
 	}
 
 	private void drawStatusLine(GuiGraphicsExtractor g) {
@@ -539,6 +569,19 @@ public final class HubScreen extends Screen {
 
 		if (event.button() == 0) {
 			click();
+
+			// Copycat: shift-click an owned weapon Major to choose it (shift-click Copycat itself to clear).
+			if (owned && event.hasShiftDown() && ClientBloomState.profile().owns(COPYCAT)) {
+				if (major.id().equals(COPYCAT)) {
+					send(Action.SET_COPY_SOURCE, "", 0);
+					return true;
+				}
+
+				if (ClientBloomState.service().isCopyableSource(ClientBloomState.profile(), major.id())) {
+					send(Action.SET_COPY_SOURCE, major.id(), 0);
+					return true;
+				}
+			}
 
 			if (owned) {
 				if (major.toggleable()) {

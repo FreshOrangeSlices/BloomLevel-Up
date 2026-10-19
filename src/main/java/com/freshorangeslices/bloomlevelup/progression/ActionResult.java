@@ -30,7 +30,9 @@ public record ActionResult(Outcome outcome, List<String> involved) {
 		REFUND_DISABLED,
 		AT_LEVEL_CAP,
 		INVESTMENT_LOCKED,
-		INVALID_AMOUNT
+		INVALID_AMOUNT,
+		/** The chosen option isn't allowed (Copycat: not an owned, copyable weapon Major). */
+		INVALID_CHOICE
 	}
 
 	public ActionResult {

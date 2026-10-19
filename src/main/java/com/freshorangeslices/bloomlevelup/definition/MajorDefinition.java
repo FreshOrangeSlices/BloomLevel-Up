@@ -39,6 +39,10 @@ public record MajorDefinition(
 		Optional<String> effect,
 		Set<String> flags
 ) {
+	/** A weapon-tree Major: a possible Copycat source unless also {@link #FLAG_COPYCAT_INELIGIBLE}. */
+	public static final String FLAG_WEAPON = "weapon";
+	/** This Major picks one owned weapon Major and spreads its effect to every compatible weapon (Copycat). */
+	public static final String FLAG_COPIES_WEAPON_MAJOR = "copies_weapon_major";
 	public static final String FLAG_COPYCAT_INELIGIBLE = "copycat_ineligible";
 	public static final String FLAG_PRIMARY_HIT_ONLY = "primary_hit_only";
 	public static final String FLAG_DISABLED = "disabled";

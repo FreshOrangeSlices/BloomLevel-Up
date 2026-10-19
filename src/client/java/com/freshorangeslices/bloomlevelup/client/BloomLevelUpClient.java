@@ -3,6 +3,7 @@ package com.freshorangeslices.bloomlevelup.client;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 
@@ -20,6 +21,7 @@ import com.freshorangeslices.bloomlevelup.client.gui.HubButton;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.SnapshotCodecs;
+import com.freshorangeslices.bloomlevelup.skill.SideBridge;
 
 /**
  * Client entrypoint: receives snapshots, adds the hub button to the inventory screen and registers the
@@ -30,6 +32,10 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		// Lets shared code (Unrestricted Riptide's trident use) ask about the local player's Majors.
+		SideBridge.setClientMajorActive((player, majorId) -> player == Minecraft.getInstance().player && ClientBloomState.ready()
+				&& ClientBloomState.profile() != null && ClientBloomState.service().isMajorActive(ClientBloomState.profile(), majorId));
+
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.SyncDefinitions.TYPE, (payload, context) -> {
 			try {
 				SnapshotCodecs.DefinitionsSnapshot snapshot = SnapshotCodecs.decodeDefinitions(payload.json());

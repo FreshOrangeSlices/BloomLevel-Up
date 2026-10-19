@@ -1,0 +1,389 @@
+package com.freshorangeslices.bloomlevelup.gametest;
+
+import java.util.List;
+import java.util.UUID;
+
+import com.mojang.authlib.GameProfile;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+
+import net.fabricmc.fabric.api.entity.FakePlayer;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
+
+import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
+import com.freshorangeslices.bloomlevelup.effect.StatEffects;
+import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
+import com.freshorangeslices.bloomlevelup.player.BloomProfile;
+import com.freshorangeslices.bloomlevelup.progression.ActionResult;
+import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.skill.SkillXp;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
+
+/**
+ * Combat on a real server with fake players. Fake players never tick, so swings that depend on a charged
+ * attack (crits, full-strength hits) are recorded with explicit state; the damage itself is real.
+ */
+public class CombatGameTests {
+	private static final double EPS = 1e-3;
+
+	// ------------------------------------------------------------------ helpers
+
+	private static ServerPlayer player(GameTestHelper helper, ItemStack mainHand) {
+		ServerPlayer player = FakePlayer.get(helper.getLevel(), new GameProfile(UUID.randomUUID(), "bloom-test"));
+		BlockPos at = helper.absolutePos(new BlockPos(4, 1, 4));
+		player.setPos(at.getX() + 0.5, at.getY(), at.getZ() + 0.5);
+		player.setItemInHand(InteractionHand.MAIN_HAND, mainHand);
+		return player;
+	}
+
+	/** Combat and Utility to 100 (20 Major Levels), then buy the Majors in order. */
+	private static void grant(ServerPlayer player, String... majors) {
+		ProgressionService service = BloomServices.progression();
+		BloomProfile profile = BloomAttachments.profile(player);
+
+		for (String category : List.of(SkillXp.COMBAT, SkillXp.UTILITY)) {
+			service.addXp(profile, category, 1.0e9);
+		}
+
+		for (String major : majors) {
+			ActionResult result = service.purchaseMajor(profile, major);
+
+			if (!result.ok()) {
+				throw new IllegalStateException("Couldn't buy " + major + ": " + result.outcome());
+			}
+		}
+	}
+
+	private static void points(ServerPlayer player, String stat, int amount) {
+		BloomProfile profile = BloomAttachments.profile(player);
+
+		if (profile.category(SkillXp.COMBAT).level() == 0) {
+			grant(player);
+		}
+
+		ActionResult result = BloomServices.progression().allocate(profile, stat, ProgressionService.Pool.NATURAL, amount);
+
+		if (!result.ok()) {
+			throw new IllegalStateException("Couldn't allocate " + stat + ": " + result.outcome());
+		}
+	}
+
+	private static LivingEntity zombie(GameTestHelper helper, int x, int z) {
+		return helper.spawn(EntityTypes.ZOMBIE, new BlockPos(x, 2, z));
+	}
+
+	private static DamageSource hit(ServerPlayer player) {
+		return player.damageSources().playerAttack(player);
+	}
+
+	private static double combatXp(ServerPlayer player) {
+		return BloomAttachments.profile(player).category(SkillXp.COMBAT).xp();
+	}
+
+	private static void near(GameTestHelper helper, double expected, double actual, String what) {
+		helper.assertTrue(Math.abs(expected - actual) < EPS, what + ": expected " + expected + " but was " + actual);
+	}
+
+	// ------------------------------------------------------------------ XP
+
+	@GameTest
+	public void damageXpAndKillBonus(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		ServerLevel level = helper.getLevel();
+		LivingEntity zombie = zombie(helper, 1, 1);
+
+		zombie.hurtServer(level, hit(player), 8.0F);
+		double real = 20.0 - zombie.getHealth();
+		helper.assertTrue(real > 0.0, "The hit landed");
+		near(helper, real * 0.5, combatXp(player), "0.5 XP per point of real damage");
+
+		zombie.hurtServer(level, hit(player), 100.0F);
+		helper.assertFalse(zombie.isAlive(), "Second hit kills");
+		// Damage XP is capped at the 20 health it had (10 XP); the kill adds half of that.
+		near(helper, 15.0, combatXp(player), "Damage XP capped by health, plus a 50% kill bonus");
+		helper.succeed();
+	}
+
+	// ------------------------------------------------------------------ stats
+
+	@GameTest
+	public void criticalAndFirstStrikeMultiply(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(player, CombatIds.FIRST_STRIKE);
+		points(player, CombatIds.CRITICAL, 100);
+		LivingEntity zombie = zombie(helper, 1, 1);
+
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, true, false);
+		// 6 incoming (vanilla's 1.5x crit included) -> 4x crit at 100 Critical, then First Strike +50%.
+		near(helper, 6.0 * (4.0 / 1.5) * 1.5, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "Crit 4x then First Strike");
+		CombatSkill.endSwingForTests();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void penetrationIgnoresArmor(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		points(player, CombatIds.PENETRATION, 100);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		near(helper, 5.0, CombatSkill.penetrate(hit(player), zombie, 10.0F), "100 Penetration ignores half the armor");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void lootingAddsVirtualLevels(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		points(player, CombatIds.LOOTING, 100);
+		Holder<Enchantment> looting = helper.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.LOOTING);
+		helper.assertValueEqual(3, EnchantmentHelper.getEnchantmentLevel(looting, player), "100 Looting = Looting III");
+		helper.succeed();
+	}
+
+	// ------------------------------------------------------------------ weapon Majors
+
+	@GameTest
+	public void executeFinishesLowTargetsWithSwords(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer swordsman = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(swordsman, CombatIds.EXECUTE);
+		LivingEntity low = zombie(helper, 1, 1);
+		low.setHealth(10.0F);
+		low.hurtServer(level, hit(swordsman), 5.0F);
+		helper.assertFalse(low.isAlive(), "Under 30% after the hit: executed");
+
+		ServerPlayer axeman = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(axeman, CombatIds.EXECUTE);
+		LivingEntity other = zombie(helper, 3, 1);
+		other.setHealth(10.0F);
+		other.hurtServer(level, hit(axeman), 5.0F);
+		helper.assertTrue(other.isAlive(), "Execute is a sword Major");
+
+		// Copycat spreads it to the axe.
+		grant(axeman, CombatIds.COPYCAT);
+		BloomServices.progression().selectCopySource(BloomAttachments.profile(axeman), CombatIds.COPYCAT, CombatIds.EXECUTE);
+		LivingEntity third = zombie(helper, 5, 1);
+		third.setHealth(10.0F);
+		third.hurtServer(level, hit(axeman), 5.0F);
+		helper.assertFalse(third.isAlive(), "Copycat: Execute with an axe");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void guaranteedCriticalCritsForTwoLessDamage(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(player, CombatIds.GUARANTEED_CRITICAL);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		near(helper, 9.0, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "A forced 1.5x crit");
+		CombatSkill.endSwingForTests();
+		StatEffects.refresh(player);
+		helper.assertTrue(player.getAttributeValue(Attributes.ATTACK_DAMAGE) < 1.0, "-2 attack damage while holding the axe");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void armorBreakWearsArmorOut(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer breaker = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(breaker, CombatIds.ARMOR_BREAK);
+		ServerPlayer plain = player(helper, new ItemStack(Items.IRON_AXE));
+
+		LivingEntity armored = zombie(helper, 1, 1);
+		armored.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+		armored.hurtServer(level, hit(breaker), 8.0F);
+		LivingEntity control = zombie(helper, 3, 1);
+		control.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+		control.hurtServer(level, hit(plain), 8.0F);
+
+		int broken = armored.getItemBySlot(EquipmentSlot.CHEST).getDamageValue();
+		int normal = control.getItemBySlot(EquipmentSlot.CHEST).getDamageValue();
+		helper.assertTrue(broken >= normal + 3, "Armor Break adds about half the damage as wear (" + broken + " vs " + normal + ")");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void bleedHurtsThroughArmor(GameTestHelper helper) {
+		LivingEntity zombie = zombie(helper, 1, 1);
+		zombie.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+		BloomEffects.BLEED.value().applyEffectTick(helper.getLevel(), zombie, 0);
+		near(helper, 19.0, zombie.getHealth(), "Half a heart, armor ignored");
+		zombie.addEffect(new MobEffectInstance(BloomEffects.BLEED, 60));
+		helper.assertTrue(zombie.hasEffect(BloomEffects.BLEED), "Bleed is a real status effect");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void comboAndPredatorRamp(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		grant(player, CombatIds.COMBO, CombatIds.PREDATOR);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		double[] expected = {4.0, (4.0 + 0.25) * 1.1, (4.0 + 0.5) * 1.2};
+
+		for (double value : expected) {
+			CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+			near(helper, value, CombatSkill.modifyIncoming(zombie, hit(player), 4.0F), "Combo +0.25 and Predator +10% per hit");
+			CombatSkill.endSwingForTests();
+		}
+
+		helper.succeed();
+	}
+
+	@GameTest
+	public void deathFromAboveAddsMaceFallDamage(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(player, CombatIds.STORED_IMPACT, CombatIds.DEATH_FROM_ABOVE);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		player.fallDistance = 3.0;
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, false);
+		near(helper, 5.0 + 12.0, CombatSkill.modifyIncoming(zombie, hit(player), 5.0F), "3 blocks of fall = +12, like a mace");
+		CombatSkill.endSwingForTests();
+		player.fallDistance = 0.0;
+		helper.succeed();
+	}
+
+	@GameTest
+	public void brawlerHitsHarderBareHanded(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		grant(player, CombatIds.BRAWLER);
+		StatEffects.refresh(player);
+		near(helper, 7.0, player.getAttributeValue(Attributes.ATTACK_DAMAGE), "1 base + 6 Brawler");
+		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
+		StatEffects.refresh(player);
+		near(helper, 1.0, player.getAttributeValue(Attributes.ATTACK_DAMAGE), "Only with an empty hand");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void crossbowInfinitySavesPlainArrows(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.CROSSBOW));
+		grant(player, CombatIds.CROSSBOW_INFINITY);
+		helper.assertTrue(CombatSkill.freeAmmo(new ItemStack(Items.CROSSBOW), new ItemStack(Items.ARROW), player), "Plain arrows are free");
+		helper.assertFalse(CombatSkill.freeAmmo(new ItemStack(Items.CROSSBOW), new ItemStack(Items.SPECTRAL_ARROW), player), "Special arrows still cost");
+		helper.assertFalse(CombatSkill.freeAmmo(new ItemStack(Items.BOW), new ItemStack(Items.ARROW), player), "Bows need Rainbow");
+		helper.succeed();
+	}
+
+	// ------------------------------------------------------------------ area effects
+
+	/** Area tests run beside other tests, so they shrink their radius to stay inside their own plot. */
+	private static void withSmallRadii(Runnable test) {
+		var config = BloomServices.config();
+		double lightning = config.lightningShockRadius;
+		double overkill = config.overkillRadius;
+		double aura = config.auraSwordRadius;
+		config.lightningShockRadius = 3.0;
+		config.overkillRadius = 2.0;
+		config.auraSwordRadius = 2.5;
+
+		try {
+			test.run();
+		} finally {
+			config.lightningShockRadius = lightning;
+			config.overkillRadius = overkill;
+			config.auraSwordRadius = aura;
+		}
+	}
+
+	@GameTest
+	public void lightningChainsBetweenEnemies(GameTestHelper helper) {
+		withSmallRadii(() -> {
+			ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));
+			LivingEntity a = zombie(helper, 3, 3);
+			LivingEntity b = zombie(helper, 4, 3);
+			LivingEntity c = zombie(helper, 3, 4);
+			helper.assertTrue(CombatSkill.lightningChain(helper.getLevel(), player, a, 4.0F, false), "Three enemies: the chain fires");
+			helper.assertTrue(a.getHealth() < 20.0F && b.getHealth() < 20.0F && c.getHealth() < 20.0F, "All three were shocked");
+		});
+		helper.succeed();
+	}
+
+	@GameTest
+	public void lightningNeedsTwoEnemies(GameTestHelper helper) {
+		withSmallRadii(() -> {
+			ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));
+			LivingEntity alone = zombie(helper, 4, 4);
+			helper.assertFalse(CombatSkill.lightningChain(helper.getLevel(), player, alone, 4.0F, false), "One enemy: no lightning");
+		});
+		helper.succeed();
+	}
+
+	@GameTest
+	public void overkillSplashesAndBloodlustBuilds(GameTestHelper helper) {
+		withSmallRadii(() -> {
+			ServerLevel level = helper.getLevel();
+			ServerPlayer player = player(helper, ItemStack.EMPTY);
+			grant(player, CombatIds.OVERKILL, CombatIds.BLOODLUST);
+			LivingEntity weak = zombie(helper, 3, 3);
+			LivingEntity bystander = zombie(helper, 4, 3);
+			weak.setHealth(2.0F);
+			weak.hurtServer(level, hit(player), 20.0F);
+			helper.assertFalse(weak.isAlive(), "Overkill kill");
+			CombatSkill.runQueuedForTests();
+			helper.assertTrue(bystander.getHealth() < 15.0F, "The excess splashed onto the neighbour, health " + bystander.getHealth());
+
+			LivingEntity fresh = zombie(helper, 6, 6);
+			// One kill = one Bloodlust stack (+8%); nothing else applies to this hit.
+			near(helper, 10.8, CombatSkill.modifyIncoming(fresh, hit(player), 10.0F), "Bloodlust x1");
+			CombatSkill.endSwingForTests();
+		});
+		helper.succeed();
+	}
+
+	@GameTest
+	public void batterUpSweepsWithAnAxe(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(player, CombatIds.FULL_SWEEP, CombatIds.BATTER_UP);
+		LivingEntity target = zombie(helper, 3, 3);
+		LivingEntity neighbour = zombie(helper, 3, 4);
+		CombatSkill.recordSwingForTests(player, target, 1.0F, false, true);
+		target.hurtServer(level, hit(player), 6.0F);
+		CombatSkill.runQueuedForTests();
+		CombatSkill.endSwingForTests();
+		helper.assertTrue(neighbour.getHealth() < 20.0F, "The neighbour was swept");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void auraSwordPulsesAfterFiveHits(GameTestHelper helper) {
+		withSmallRadii(() -> auraSword(helper));
+		helper.succeed();
+	}
+
+	private static void auraSword(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(player, CombatIds.FULL_SWEEP, CombatIds.AURA_SWORD);
+		LivingEntity target = zombie(helper, 3, 3);
+		LivingEntity nearby = zombie(helper, 5, 3);
+
+		for (int i = 1; i <= 5; i++) {
+			CombatSkill.recordSwingForTests(player, target, 1.0F, false, true);
+			// Rising damage gets through vanilla's hurt cooldown each time.
+			target.hurtServer(level, hit(player), 1.0F + i);
+			CombatSkill.endSwingForTests();
+		}
+
+		helper.assertValueEqual(20.0F, nearby.getHealth(), "Nothing yet");
+		CombatSkill.runQueuedForTests();
+		helper.assertTrue(nearby.getHealth() < 20.0F, "The aura pulse reached the nearby zombie");
+	}
+}

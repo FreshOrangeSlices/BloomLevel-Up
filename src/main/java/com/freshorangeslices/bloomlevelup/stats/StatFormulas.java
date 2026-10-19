@@ -202,4 +202,76 @@ public final class StatFormulas {
 
 		return average < 2.5 ? ArmorStyle.MEDIUM : ArmorStyle.HEAVY;
 	}
+
+	// ------------------------------------------------------------------ Combat
+
+	/** Critical: a successful vanilla crit deals 1.5x normally, 4x at 100 points (linear, keeps growing). */
+	public static double criticalMultiplier(int points) {
+		return 1.5 + 2.5 * Math.max(0, points) / 100.0;
+	}
+
+	/** Penetration: share of the target's armor ignored. 50% at 100 points, approaching (never reaching) 100%. */
+	public static double penetration(int points) {
+		return points <= 0 ? 0.0 : points / (points + 100.0);
+	}
+
+	/** Looting: virtual Looting levels (about Looting III at 100 points). Fractions are rolled per drop. */
+	public static double virtualLooting(int points) {
+		return 3.0 * Math.max(0, points) / 100.0;
+	}
+
+	/** Marksman: no bonus up to {@code start} blocks, rising linearly to {@code max} at {@code full} blocks. */
+	public static double marksmanBonus(double distance, double start, double full, double max) {
+		if (!(distance > start) || full <= start) {
+			return 0.0;
+		}
+
+		return Math.min(1.0, (distance - start) / (full - start)) * max;
+	}
+
+	/** Vanilla mace smash bonus for a fall distance (4/block for 3, then 2/block for 5, then 1/block). */
+	public static double maceFallBonus(double fallDistance) {
+		if (!(fallDistance > 1.5)) {
+			return 0.0;
+		}
+
+		if (fallDistance <= 3.0) {
+			return 4.0 * fallDistance;
+		}
+
+		if (fallDistance <= 8.0) {
+			return 12.0 + 2.0 * (fallDistance - 3.0);
+		}
+
+		return 22.0 + fallDistance - 8.0;
+	}
+
+	/** Predator / Bloodlust style stacking bonus: 1 + perStack x stacks, stacks capped. */
+	public static double stackMultiplier(int stacks, double perStack, int maxStacks) {
+		return 1.0 + Math.max(0.0, perStack) * Math.max(0, Math.min(stacks, maxStacks));
+	}
+
+	/** Combo: +perHit per stack, up to cap. */
+	public static double comboBonus(int stacks, double perHit, double cap) {
+		return Math.min(Math.max(0, stacks) * perHit, cap);
+	}
+
+	/**
+	 * Lightning Shock's chain over candidates ordered [the struck target, then others nearest first].
+	 * Needs at least 2 enemies; 2 enemies take 3 bounces between them (other, target, other); with 3 or more,
+	 * the target and the 2 nearest others are each shocked once. Returns indices into the candidate list.
+	 */
+	public static int[] lightningChain(int candidates) {
+		if (candidates < 2) {
+			return new int[0];
+		}
+
+		return candidates == 2 ? new int[] {1, 0, 1} : new int[] {0, 1, 2};
+	}
+
+	/** Combat XP for one hit: real damage (never more than the health the target had) x rate x mob multiplier. */
+	public static double combatHitXp(double realDamage, double healthBefore, double perDamage, double multiplier) {
+		double counted = Math.max(0.0, Math.min(realDamage, healthBefore));
+		return counted * perDamage * multiplier;
+	}
 }

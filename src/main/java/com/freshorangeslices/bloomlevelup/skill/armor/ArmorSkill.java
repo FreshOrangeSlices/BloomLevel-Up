@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Prediction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -38,6 +39,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.mixin.EntityAccessor;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
@@ -125,7 +127,7 @@ public final class ArmorSkill {
 		}
 
 		// Hits landing inside vanilla's damage cooldown are vanilla's business; don't roll or award XP for them.
-		if (player.invulnerableTime > 10 && !source.is(DamageTypeTags.BYPASSES_COOLDOWN)) {
+		if (((EntityAccessor) player).bloomlevelup$getInvulnerableTime() > 10 && !source.is(DamageTypeTags.BYPASSES_COOLDOWN)) {
 			return true;
 		}
 
@@ -179,8 +181,8 @@ public final class ArmorSkill {
 			// Keeps the item's full data (enchantments, potion contents, custom names).
 			ItemStack caught = arrow.getPickupItemStackOrigin().copy();
 
-			if (!caught.isEmpty() && !player.getInventory().add(caught)) {
-				player.drop(caught, false);
+			if (!caught.isEmpty()) {
+				player.getInventory().placeItemBackInInventory(caught, Prediction.SERVER_ONLY);
 			}
 		}
 

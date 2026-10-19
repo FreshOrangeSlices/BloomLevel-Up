@@ -19,7 +19,15 @@ Built in chunks. Done so far:
 - **Chunk 2 — Skill Hub:** the hub screen (button beside the inventory, optional keybind), live sync with
   the server, and the first real effects: Vitality, Defense, Power, Tempo, Speed and Titan Hide.
 
-Next: XP sources for each category (so levels come from playing), then each category's mechanics.
+- **Chunk 3 — Armor:** Armor XP from taking damage, Vitality / Defense / Dodge / Durability, armor
+  overcap, and all 16 Armor Majors (Fitting Armor, Last Breath, Castle of Stone, Absorb, Reflect...).
+- **Chunk 4 — Utility:** mcMMO-style Utility XP (mining, woodcutting, digging, farming, fishing,
+  shearing; player-placed blocks don't count), Efficiency / Yield / Preservation, and all 6 Utility
+  Majors (Vein Mining, Timber, Shovel Mastery, Growth Aura, Master Shearing, Triple Catch).
+
+Every push also boots a test server and runs game tests for the Armor and Utility mechanics.
+
+Next: Combat (XP from fighting, Power/Tempo effects, weapon Majors), then Misc.
 
 ## Getting the jar
 
@@ -35,7 +43,8 @@ in Controls. In the hub:
   **On/Off** to switch a stat without losing points.
 - Majors on the right: click to buy, click an owned one to switch it on/off, right-click to refund.
   Glowing = on, dim = owned but off, dark = not owned. Hover for details.
-- **Spend XP** levels the category with vanilla XP (until levels come from playing).
+- **Spend XP** levels the category with vanilla XP (Utility and Armor also level from playing now).
+- Vein Mining and Timber: hold **sneak** while breaking to skip them for that block.
 
 Admin commands are still there for testing:
 
@@ -54,6 +63,12 @@ Admin commands are still there for testing:
 
 - Categories: `data/<ns>/bloom/category/<name>.json`
 - Majors: `data/<ns>/bloom/major/<path>.json` (cost, prerequisites, conflicts, toggleable, icon, flags)
+- Utility block XP: `data/<ns>/bloom/xp/blocks/<name>.json` — `{"category": "bloomlevelup:utility", "values": {"#c:ores": 3.0, "minecraft:stone": 0.5}}`
+- Tags that decide what counts (all under `bloomlevelup:`): blocks `vein_mineable`, `timber_logs`,
+  `timber_leaves`, `yield_eligible`, `excavation_treasure`, `growth_aura_crops`, `mature_only`, `xp_column`;
+  items `armor/light|medium|heavy`, `weapon/blade|blunt`, `food/meat`, `utility_tools`; damage types
+  `dodgeable`, `elemental`, `melee`, `blade`, `blunt`; effects `damage_over_time`, `unyielding_ignored`
+- Shovel treasure: loot table `bloomlevelup:gameplay/excavation_treasure`
 - Tuning: `config/bloomlevelup.json`
 
 ## Layout

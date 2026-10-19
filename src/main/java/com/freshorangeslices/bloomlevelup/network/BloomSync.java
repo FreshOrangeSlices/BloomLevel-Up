@@ -1,6 +1,8 @@
 package com.freshorangeslices.bloomlevelup.network;
 
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,6 +38,7 @@ public final class BloomSync {
 	private static final int MAX_AMOUNT = 100_000;
 
 	private static final Set<UUID> DIRTY = new LinkedHashSet<>();
+	private static final Map<UUID, BloomPayloads.NameTag> LAST_TAG = new HashMap<>();
 	private static int tickCounter;
 
 	private BloomSync() {
@@ -45,6 +48,7 @@ public final class BloomSync {
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncDefinitions.TYPE, BloomPayloads.SyncDefinitions.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncProfile.TYPE, BloomPayloads.SyncProfile.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Result.TYPE, BloomPayloads.Result.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.NameTag.TYPE, BloomPayloads.NameTag.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.Request.TYPE, BloomPayloads.Request.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.CombatInput.TYPE, BloomPayloads.CombatInput.CODEC);
 
@@ -56,7 +60,15 @@ public final class BloomSync {
 			ServerPlayer player = listener.player;
 			sendDefinitions(player);
 			changed(player);
+
+			// Nameplates: the newcomer learns everyone's tag (everyone learns theirs when their profile is sent).
+			for (ServerPlayer other : server.getPlayerList().getPlayers()) {
+				if (other != player) {
+					sendNameTag(player, other);
+				}
+			}
 		});
+		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> LAST_TAG.remove(listener.player.getUUID()));
 
 		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
 			StatEffects.refresh(newPlayer);
@@ -75,7 +87,10 @@ public final class BloomSync {
 			}
 		});
 
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> DIRTY.clear());
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+			DIRTY.clear();
+			LAST_TAG.clear();
+		});
 		ServerTickEvents.END_SERVER_TICK.register(BloomSync::tick);
 	}
 
@@ -101,6 +116,32 @@ public final class BloomSync {
 		if (++tickCounter % EFFECT_REFRESH_INTERVAL == 0) {
 			for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 				StatEffects.refresh(player);
+			}
+		}
+	}
+
+	private static BloomPayloads.NameTag nameTag(ServerPlayer player) {
+		BloomProfile profile = BloomAttachments.profile(player);
+		return new BloomPayloads.NameTag(player.getUUID(), profile.spentMajorLevels(), profile.anyMastered());
+	}
+
+	private static void sendNameTag(ServerPlayer to, ServerPlayer about) {
+		if (ServerPlayNetworking.canSend(to, BloomPayloads.NameTag.TYPE)) {
+			ServerPlayNetworking.send(to, nameTag(about));
+		}
+	}
+
+	/** Tells everyone (the player included) about a changed nameplate tag; unchanged tags aren't re-sent. */
+	private static void broadcastNameTag(MinecraftServer server, ServerPlayer player) {
+		BloomPayloads.NameTag tag = nameTag(player);
+
+		if (tag.equals(LAST_TAG.put(player.getUUID(), tag))) {
+			return;
+		}
+
+		for (ServerPlayer other : server.getPlayerList().getPlayers()) {
+			if (ServerPlayNetworking.canSend(other, BloomPayloads.NameTag.TYPE)) {
+				ServerPlayNetworking.send(other, tag);
 			}
 		}
 	}

@@ -19,6 +19,7 @@ import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
 import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
+import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 import com.freshorangeslices.bloomlevelup.skill.utility.BlockXpLoader;
 import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 
@@ -37,6 +38,7 @@ public final class BloomRegistries {
 		BloomEntities.init();
 		BloomComponents.init();
 		HoardersPocket.init();
+		RuneEmbedding.init();
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(BloomDataLoader.ID, new BloomDataLoader());
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(BlockXpLoader.ID, new BlockXpLoader());
 		BloomCommands.init();

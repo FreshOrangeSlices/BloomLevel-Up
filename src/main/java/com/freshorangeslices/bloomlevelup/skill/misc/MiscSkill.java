@@ -426,13 +426,19 @@ public final class MiscSkill {
 
 	// ------------------------------------------------------------------ Ascension
 
-	/** Re-checked with the stat refresh (on every profile change and every half second). */
+	/** Re-checked with the stat refresh (on every profile change, held-item/armor change and every half second). */
 	public static void refresh(ServerPlayer player) {
 		updateFlight(player);
 
 		if (!active(player, MiscIds.WATER_TO_WINE)) {
 			cutWineEffects(player);
 		}
+
+		if (!active(player, MiscIds.STACK_OVERFLOW)) {
+			StackOverflow.normalize(player);
+		}
+
+		RuneEmbedding.refresh(player);
 	}
 
 	private static void tick(MinecraftServer server) {

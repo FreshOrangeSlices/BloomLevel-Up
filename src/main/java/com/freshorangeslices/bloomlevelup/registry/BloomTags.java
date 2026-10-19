@@ -5,6 +5,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
@@ -44,6 +45,12 @@ public final class BloomTags {
 	public static final TagKey<MobEffect> DAMAGE_OVER_TIME = effect("damage_over_time");
 	public static final TagKey<MobEffect> UNYIELDING_IGNORED = effect("unyielding_ignored");
 
+	// Enchantments (Rune Embedding)
+	/** What a body rune (slots 1-4) may hold. */
+	public static final TagKey<Enchantment> RUNE_BODY = enchantment("rune/body");
+	/** What the bare-hand rune (slot 5) may hold: sword enchantments that do something without a sword. */
+	public static final TagKey<Enchantment> RUNE_UNARMED = enchantment("rune/unarmed");
+
 	// Blocks (Utility)
 	public static final TagKey<Block> VEIN_MINEABLE = block("vein_mineable");
 	public static final TagKey<Block> TIMBER_LOGS = block("timber_logs");
@@ -70,6 +77,10 @@ public final class BloomTags {
 
 	private static TagKey<MobEffect> effect(String path) {
 		return TagKey.create(Registries.MOB_EFFECT, BloomLevelUp.id(path));
+	}
+
+	private static TagKey<Enchantment> enchantment(String path) {
+		return TagKey.create(Registries.ENCHANTMENT, BloomLevelUp.id(path));
 	}
 
 	private static TagKey<Block> block(String path) {

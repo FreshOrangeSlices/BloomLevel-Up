@@ -91,6 +91,12 @@ public final class HoardersPocket {
 					super.setChanged();
 					save();
 				}
+
+				// Stack Overflow reaches the pocket too (and setItem would otherwise trim big stacks).
+				@Override
+				public int getMaxStackSize(ItemStack stack) {
+					return StackOverflow.limit(owner, stack, super.getMaxStackSize(stack));
+				}
 			};
 
 			for (int i = 0; i < SIZE; i++) {
@@ -102,6 +108,11 @@ public final class HoardersPocket {
 					@Override
 					public boolean mayPlace(ItemStack stack) {
 						return canDeposit && allowed(stack);
+					}
+
+					@Override
+					public int getMaxStackSize(ItemStack stack) {
+						return StackOverflow.limit(owner, stack, super.getMaxStackSize(stack));
 					}
 				});
 			}

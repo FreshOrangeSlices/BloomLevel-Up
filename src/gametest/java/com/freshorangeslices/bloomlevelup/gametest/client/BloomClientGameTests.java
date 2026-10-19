@@ -12,8 +12,9 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
+import com.freshorangeslices.bloomlevelup.client.NameTags;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
-import com.freshorangeslices.bloomlevelup.client.gui.PocketButton;
+import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
 
 /**
@@ -36,6 +37,9 @@ public class BloomClientGameTests implements FabricClientGameTest {
 					&& ClientBloomState.profile().category("bloomlevelup:combat").level() >= 100
 					&& ClientBloomState.profile().owns(MiscIds.HOARDERS_POCKET));
 
+			// Nameplates: the server sends each player's [lvl N] tag (N = spent Major Levels: Hoarder's Pocket = 5).
+			context.waitFor(client -> NameTags.tag(client.player.getUUID()) != null && NameTags.tag(client.player.getUUID()).spent() == 5);
+
 			context.getInput().pressKey(options -> options.keyInventory);
 			context.waitForScreen(InventoryScreen.class);
 			context.takeScreenshot("bloom_inventory_button");
@@ -46,7 +50,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.setScreen(() -> null);
 
 			// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
-			context.runOnClient(client -> PocketButton.open());
+			context.runOnClient(client -> SideButton.openPocket());
 			context.waitForScreen(ContainerScreen.class);
 			context.takeScreenshot("bloom_hoarders_pocket");
 			context.setScreen(() -> null);

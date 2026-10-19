@@ -194,6 +194,33 @@ public class ArmorGameTests {
 	}
 
 	@GameTest
+	public void fittingArmorMediumHalvesShieldDisable(GameTestHelper helper) {
+		for (boolean medium : new boolean[] {false, true}) {
+			ServerPlayer player = player(helper);
+			grant(player, ArmorIds.FITTING_ARMOR);
+
+			if (medium) {
+				wear(player, new ItemStack(Items.IRON_HELMET), new ItemStack(Items.IRON_CHESTPLATE),
+						new ItemStack(Items.IRON_LEGGINGS), new ItemStack(Items.IRON_BOOTS));
+			}
+
+			ItemStack shield = new ItemStack(Items.SHIELD);
+			shield.get(DataComponents.BLOCKS_ATTACKS).disable(helper.getLevel(), player, 5.0F, shield);
+			helper.assertTrue(player.getCooldowns().isOnCooldown(shield), "An axe hit disables the shield");
+
+			for (int tick = 0; tick < 60; tick++) {
+				player.getCooldowns().tick();
+			}
+
+			// A 5 s disable is 100 ticks; Medium halves it to 50, so after 60 ticks only the plain shield is still out.
+			helper.assertValueEqual(!medium, player.getCooldowns().isOnCooldown(shield),
+					medium ? "Medium: back after 2.5 s" : "Without Medium: still disabled after 3 s");
+		}
+
+		helper.succeed();
+	}
+
+	@GameTest
 	public void absorbMovesHalfIntoArmor(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		grant(player, ArmorIds.ABSORB);

@@ -2,6 +2,7 @@ package com.freshorangeslices.bloomlevelup.network;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -145,7 +146,9 @@ public final class BloomPayloads {
 		/** Catch!: throw the weapon in the main hand. */
 		THROW,
 		/** Misc / Hoarder's Pocket: open the pocket (the server checks the Major). */
-		OPEN_POCKET
+		OPEN_POCKET,
+		/** Misc / Rune Embedding: open the rune slots (the server checks the Major). */
+		OPEN_RUNES
 	}
 
 	/** Client → server: a combat ability key. The server checks the Major, the weapon and cooldowns itself. */
@@ -160,6 +163,28 @@ public final class BloomPayloads {
 
 		private void write(RegistryFriendlyByteBuf buf) {
 			buf.writeEnum(action);
+		}
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
+	/** Server → client: one player's nameplate tag, {@code [lvl N]} with N = spent Major Levels, green once mastered. */
+	public record NameTag(UUID player, int spent, boolean mastered) implements CustomPacketPayload {
+		public static final Type<NameTag> TYPE = new Type<>(BloomLevelUp.id("name_tag"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, NameTag> CODEC =
+				CustomPacketPayload.codec(NameTag::write, NameTag::new);
+
+		private NameTag(RegistryFriendlyByteBuf buf) {
+			this(buf.readUUID(), buf.readVarInt(), buf.readBoolean());
+		}
+
+		private void write(RegistryFriendlyByteBuf buf) {
+			buf.writeUUID(player);
+			buf.writeVarInt(spent);
+			buf.writeBoolean(mastered);
 		}
 
 		@Override

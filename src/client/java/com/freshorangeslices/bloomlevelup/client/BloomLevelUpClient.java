@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -26,7 +27,7 @@ import com.freshorangeslices.bloomlevelup.client.gui.ClientScreens;
 import com.freshorangeslices.bloomlevelup.entity.BloomEntities;
 import com.freshorangeslices.bloomlevelup.client.gui.HubButton;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
-import com.freshorangeslices.bloomlevelup.client.gui.PocketButton;
+import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
 import com.freshorangeslices.bloomlevelup.item.BloomComponents;
 import com.freshorangeslices.bloomlevelup.item.FuelImprint;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
@@ -42,6 +43,7 @@ import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 public final class BloomLevelUpClient implements ClientModInitializer {
 	private static KeyMapping openHubKey;
 	private static KeyMapping openPocketKey;
+	private static KeyMapping openRunesKey;
 
 	@Override
 	public void onInitializeClient() {
@@ -68,27 +70,35 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Result.TYPE, (payload, context) -> ClientBloomState.setLastResult(payload));
 
-		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientBloomState.clear());
+		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.NameTag.TYPE, (payload, context) -> NameTags.accept(payload));
+
+		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+			ClientBloomState.clear();
+			NameTags.clear();
+		});
 
 		ScreenEvents.AFTER_INIT.register((client, screen, width, height) -> {
 			if (!ClientBloomState.ready()) {
 				return;
 			}
 
-			boolean pocket = ClientBloomState.profile() != null && ClientBloomState.profile().owns(MiscIds.HOARDERS_POCKET);
+			AbstractContainerScreen<?> container = screen instanceof InventoryScreen inventory ? inventory
+					: screen instanceof CreativeModeInventoryScreen creative ? creative : null;
 
-			if (screen instanceof InventoryScreen inventory) {
-				Screens.getWidgets(screen).add(new HubButton(inventory));
+			if (container == null) {
+				return;
+			}
 
-				if (pocket) {
-					Screens.getWidgets(screen).add(new PocketButton(inventory));
-				}
-			} else if (screen instanceof CreativeModeInventoryScreen creative) {
-				Screens.getWidgets(screen).add(new HubButton(creative));
+			// The hub button, then one button per owned storage Major, stacked down the side.
+			Screens.getWidgets(screen).add(new HubButton(container));
+			int row = 1;
 
-				if (pocket) {
-					Screens.getWidgets(screen).add(new PocketButton(creative));
-				}
+			if (owns(MiscIds.HOARDERS_POCKET)) {
+				Screens.getWidgets(screen).add(SideButton.pocket(container, row++));
+			}
+
+			if (owns(MiscIds.RUNE_EMBEDDING)) {
+				Screens.getWidgets(screen).add(SideButton.runes(container, row));
 			}
 		});
 
@@ -97,6 +107,8 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 
 		openPocketKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_pocket",
+				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
+		openRunesKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_runes",
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 
 		CombatControls.init(category);
@@ -115,7 +127,13 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (openPocketKey.consumeClick()) {
 				if (client.player != null && ClientBloomState.ready()) {
-					PocketButton.open();
+					SideButton.openPocket();
+				}
+			}
+
+			while (openRunesKey.consumeClick()) {
+				if (client.player != null && ClientBloomState.ready()) {
+					SideButton.openRunes();
 				}
 			}
 
@@ -126,5 +144,9 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 				}
 			}
 		});
+	}
+
+	private static boolean owns(String majorId) {
+		return ClientBloomState.profile() != null && ClientBloomState.profile().owns(majorId);
 	}
 }

@@ -7,6 +7,7 @@ import com.mojang.authlib.GameProfile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -46,6 +47,7 @@ import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
+import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 
 /** Misc on a real server with fake players (survival, never ticking). */
 public class MiscGameTests {
@@ -406,6 +408,147 @@ public class MiscGameTests {
 		helper.assertTrue(BloomServices.progression().toggleMajor(BloomAttachments.profile(player), MiscIds.ASCENSION).ok(), "Toggle off");
 		MiscSkill.refresh(player);
 		helper.assertFalse(player.getAbilities().mayfly, "Switching Ascension off takes flight away");
+		helper.succeed();
+	}
+
+	// ------------------------------------------------------------------ Stack Overflow
+
+	private static int slotWith(ServerPlayer player, net.minecraft.world.item.Item item) {
+		for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+			if (player.getInventory().getItem(i).is(item)) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	@GameTest
+	public void stackOverflowHoldsThreeHundred(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, MiscIds.STACK_OVERFLOW);
+
+		player.getInventory().add(new ItemStack(Items.ENDER_PEARL, 250));
+		int slot = slotWith(player, Items.ENDER_PEARL);
+		helper.assertValueEqual(250, player.getInventory().getItem(slot).getCount(), "250 ender pearls in one slot (normally 16)");
+		helper.assertValueEqual(300, player.inventoryMenu.getSlot(9).getMaxStackSize(new ItemStack(Items.DIRT)), "Inventory slots take 300");
+		helper.assertValueEqual(1, player.inventoryMenu.getSlot(5).getMaxStackSize(new ItemStack(Items.CARVED_PUMPKIN)), "Armor slots still hold 1");
+
+		player.getInventory().add(new ItemStack(Items.IRON_SWORD));
+		player.getInventory().add(new ItemStack(Items.IRON_SWORD));
+		helper.assertValueEqual(1, player.getInventory().getItem(slotWith(player, Items.IRON_SWORD)).getCount(), "Swords stay single");
+
+		// Saved and loaded intact, as an item and inside container contents (the pocket's format).
+		var ops = helper.getLevel().registryAccess().createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE);
+		ItemStack big = new ItemStack(Items.DIRT, 300);
+		var saved = ItemStack.CODEC.encodeStart(ops, big).getOrThrow();
+		helper.assertValueEqual(300, ItemStack.CODEC.parse(ops, saved).getOrThrow().getCount(), "A 300 stack survives saving");
+		var contents = net.minecraft.world.item.component.ItemContainerContents.fromItems(List.of(big));
+		var savedContents = net.minecraft.world.item.component.ItemContainerContents.CODEC.encodeStart(ops, contents).getOrThrow();
+		NonNullList<ItemStack> loaded = NonNullList.withSize(1, ItemStack.EMPTY);
+		net.minecraft.world.item.component.ItemContainerContents.CODEC.parse(ops, savedContents).getOrThrow().copyInto(loaded);
+		helper.assertValueEqual(300, loaded.get(0).getCount(), "...and inside container contents");
+
+		// Switched off: big stacks split back to vanilla sizes.
+		helper.assertTrue(BloomServices.progression().toggleMajor(BloomAttachments.profile(player), MiscIds.STACK_OVERFLOW).ok(), "Toggle off");
+		MiscSkill.refresh(player);
+		int pearls = 0;
+
+		for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+			ItemStack stack = player.getInventory().getItem(i);
+
+			if (stack.is(Items.ENDER_PEARL)) {
+				helper.assertTrue(stack.getCount() <= 16, "No pearl stack above 16 once it's off");
+				pearls += stack.getCount();
+			}
+		}
+
+		helper.assertValueEqual(250, pearls, "Nothing lost when splitting");
+		helper.succeed();
+	}
+
+	// ------------------------------------------------------------------ Rune Embedding
+
+	private static ItemStack book(GameTestHelper helper, Object... enchantmentsAndLevels) {
+		ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+
+		for (int i = 0; i < enchantmentsAndLevels.length; i += 2) {
+			@SuppressWarnings("unchecked")
+			net.minecraft.resources.ResourceKey<Enchantment> key = (net.minecraft.resources.ResourceKey<Enchantment>) enchantmentsAndLevels[i];
+			int level = (Integer) enchantmentsAndLevels[i + 1];
+			Holder<Enchantment> holder = enchantment(helper, key);
+			EnchantmentHelper.updateEnchantments(book, mutable -> mutable.set(holder, level));
+		}
+
+		return book;
+	}
+
+	private static void embed(ServerPlayer player, ItemStack... runes) {
+		NonNullList<ItemStack> slots = NonNullList.withSize(RuneEmbedding.SIZE, ItemStack.EMPTY);
+
+		for (int i = 0; i < runes.length; i++) {
+			slots.set(i, runes[i]);
+		}
+
+		RuneEmbedding.store(player, slots);
+		RuneEmbedding.refresh(player);
+	}
+
+	@GameTest
+	public void runeSlotsAcceptOnlyValidBooks(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, MiscIds.RUNE_EMBEDDING);
+		RuneEmbedding.RuneMenu menu = new RuneEmbedding.RuneMenu(1, player.getInventory(), player, true);
+
+		helper.assertTrue(menu.getSlot(0).mayPlace(book(helper, Enchantments.PROTECTION, 4)), "Protection in a body slot");
+		helper.assertFalse(menu.getSlot(0).mayPlace(book(helper, Enchantments.SHARPNESS, 5)), "No Sharpness in a body slot");
+		helper.assertTrue(menu.getSlot(4).mayPlace(book(helper, Enchantments.SHARPNESS, 5)), "Sharpness in the bare-hand slot");
+		helper.assertFalse(menu.getSlot(4).mayPlace(book(helper, Enchantments.PROTECTION, 4)), "No Protection in the bare-hand slot");
+		helper.assertFalse(menu.getSlot(0).mayPlace(book(helper, Enchantments.BINDING_CURSE, 1)), "No curses");
+		helper.assertFalse(menu.getSlot(0).mayPlace(book(helper, Enchantments.MENDING, 1)), "No Mending (nothing to repair)");
+		helper.assertFalse(menu.getSlot(0).mayPlace(new ItemStack(Items.DIAMOND)), "Only enchanted books");
+
+		menu.getSlot(0).set(book(helper, Enchantments.PROTECTION, 4));
+		helper.assertFalse(menu.getSlot(1).mayPlace(book(helper, Enchantments.PROTECTION, 3)), "No duplicate enchantments");
+		helper.assertTrue(menu.getSlot(1).mayPlace(book(helper, Enchantments.FEATHER_FALLING, 4)), "A different one is fine");
+		menu.removed(player);
+		helper.assertTrue(!RuneEmbedding.runes(player).get(0).isEmpty(), "Runes are saved on the player");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void bodyRunesProtectOnlyWithoutArmor(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, MiscIds.RUNE_EMBEDDING);
+		ServerLevel level = helper.getLevel();
+		embed(player, book(helper, Enchantments.PROTECTION, 4), book(helper, Enchantments.RESPIRATION, 3));
+
+		helper.assertTrue(EnchantmentHelper.getDamageProtection(level, player, player.damageSources().generic()) > 0.0F, "Protection rune protects");
+		near(helper, 3.0, player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.OXYGEN_BONUS), "Respiration III rune");
+
+		player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+		RuneEmbedding.refresh(player);
+		near(helper, 0.0, EnchantmentHelper.getDamageProtection(level, player, player.damageSources().generic()), "Wearing armor turns body runes off");
+		near(helper, 0.0, player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.OXYGEN_BONUS), "...attributes too");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void bareHandRuneEnchantsFists(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, MiscIds.RUNE_EMBEDDING);
+		ServerLevel level = helper.getLevel();
+		ItemStack fist = book(helper, Enchantments.SHARPNESS, 5, Enchantments.LOOTING, 3);
+		embed(player, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, fist);
+		LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+
+		float bare = EnchantmentHelper.modifyDamage(level, player.getWeaponItem(), zombie, player.damageSources().playerAttack(player), 5.0F);
+		near(helper, 8.0, bare, "Sharpness V on bare hands: +3");
+		helper.assertValueEqual(3, EnchantmentHelper.getEnchantmentLevel(enchantment(helper, Enchantments.LOOTING), player), "Looting III bare-handed");
+
+		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
+		float holding = EnchantmentHelper.modifyDamage(level, player.getWeaponItem(), zombie, player.damageSources().playerAttack(player), 5.0F);
+		near(helper, 5.0, holding, "Holding anything turns the bare-hand rune off");
 		helper.succeed();
 	}
 }

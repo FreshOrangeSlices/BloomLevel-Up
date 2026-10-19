@@ -44,6 +44,7 @@ import com.freshorangeslices.bloomlevelup.progression.BloomResetResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.progression.XpGainResult;
 import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
+import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 
 /**
  * {@code /bloom} — a temporary, text-only front end for the framework so every rule can be exercised in
@@ -120,6 +121,11 @@ public final class BloomCommands {
 				.then(literal("pocket")
 						.executes(ctx -> {
 							HoardersPocket.open(ctx.getSource().getPlayerOrException());
+							return 1;
+						}))
+				.then(literal("runes")
+						.executes(ctx -> {
+							RuneEmbedding.open(ctx.getSource().getPlayerOrException());
 							return 1;
 						}))
 				.then(literal("bloomreset")

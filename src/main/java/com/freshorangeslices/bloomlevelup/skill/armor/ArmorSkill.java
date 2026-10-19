@@ -192,6 +192,16 @@ public final class ArmorSkill {
 
 	// ------------------------------------------------------------------ after vanilla mitigation (mixin)
 
+	/** Fitting Armor / Medium: an axe disables your shield for half as long. */
+	public static float shieldDisableSeconds(LivingEntity entity, float seconds) {
+		if (entity instanceof ServerPlayer player && seconds > 0.0F && active(BloomAttachments.profile(player), ArmorIds.FITTING_ARMOR)
+				&& ArmorStyles.styleOf(player) == ArmorStyle.MEDIUM) {
+			return seconds * 0.5F;
+		}
+
+		return seconds;
+	}
+
 	/**
 	 * Applies the Armor category's percentage layers multiplicatively to damage that already went through
 	 * vanilla armor/Resistance/enchantments, then lets Absorb move half of what's left into armor durability.

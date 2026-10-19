@@ -180,6 +180,8 @@ public final class BloomConfig {
 	public int fuelEffectTicks = 200;
 	/** Overenchant: highest enchantment level the anvil can reach. */
 	public int overenchantMaxLevel = 8;
+	/** Stack Overflow: stack size in your own inventory and pocket (at most 300, what the save format allows). */
+	public int stackOverflowMax = 300;
 
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
@@ -283,6 +285,7 @@ public final class BloomConfig {
 		overdoseMaxBoost = Math.max(0, Math.min(10, overdoseMaxBoost));
 		fuelEffectTicks = Math.max(1, fuelEffectTicks);
 		overenchantMaxLevel = Math.max(1, Math.min(255, overenchantMaxLevel));
+		stackOverflowMax = Math.max(1, Math.min(300, stackOverflowMax));
 		return this;
 	}
 

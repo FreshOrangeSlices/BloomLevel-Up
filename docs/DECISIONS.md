@@ -29,7 +29,7 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Universal prerequisites (confirmed) | Owning any one Major in the related tree unlocks it: Batter Up! ← Sword, Heavy Hands ← Axe, Catch! ← Trident, Death From Above ← Mace. Written as `"#combat/sword"` in `prerequisites`. Refunding a tree Major is allowed while another one in that tree is still owned | Major JSON |
 | Copycat sources | Majors flagged `weapon` are copyable unless also flagged `copycat_ineligible`; Universal Majors are flagged `universal` | Major JSON `flags` |
 | One and the Same (confirmed) | Present but flagged `disabled` (cost 5 placeholder) until the Pet system exists | `major/combat/one_and_the_same.json` |
-| Aura Sword | No prerequisite (docs: TBD) | Major JSON |
+| Aura Sword (confirmed) | Requires any one Sword Major (`#combat/sword`) | Major JSON |
 | Long Reach as Copycat source | Allowed for now (docs: TBD) | add `copycat_ineligible` to block |
 | Category pacing | Shared curve for now; per-category curves tuned to the pacing answers below arrive with the XP-source chunk | config |
 
@@ -44,17 +44,18 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Combat kill bonus | 50% of the XP the kill took (iron sword kills a zombie in 3 hits → the kill adds half of those 3 hits' XP) |
 | Utility XP | Like mcMMO: per-block values, ores worth more, farming, fishing and shearing included |
 | Protein! on refund / Bloom+ | Resets (bonus hearts and meal count) |
-| Controls | Catch! and Heavy Hands default to left click, rebindable in Controls. Ascension flies on double-jump |
+| Controls | Heavy Hands: hold attack (left click) to charge. Catch!: right click to throw. Both rebindable in Controls. Ascension flies on double-jump |
 | Hoarder's Pocket | Opened from a tab or button styled like opening a chest |
 | Become My Fuel | Main hand only (the other hand holds the potion being drunk). Only drinking imprints; splash, lingering and other sources don't |
 | Combat costs | Marksman 1 (Bow tree), Predator 2, Bloodlust 2, Overkill 3, First Strike 2 |
 | Castle of Stone | 4 seconds resting in a bed |
+| Heavy armor knockback | 50% knockback resistance, with any further sources scaling with diminishing returns |
+| Placeholder art | One 64×64 placeholder (`textures/gui/placeholder.png`, from FreshOrangeSlices) stands in for every missing icon |
 
 ## Still open (need a design call)
 
-- Heavy Hands and Catch! both default to left click: how they are told apart.
 - Combat effect sizes: Marksman, Predator, Bloodlust, Overkill, First Strike (I'll propose numbers).
-- Heavy armor knockback strength; Aura Sword prerequisite; Long Reach as a Copycat source.
+- Long Reach as a Copycat source.
 - License; the other mods in the modpack.
 - Durability stat → virtual Unbreaking mapping; Trident Lightning radius; Lightning Summon control.
 - Default food / vegetable / rune / ammo tags.

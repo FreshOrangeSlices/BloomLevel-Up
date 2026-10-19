@@ -64,3 +64,4 @@ and anything the code decided on its own is visible here. Each item can be chang
 - A button in the inventory screen opens the hub; optional unbound keybind.
 - A toggle button next to each levelable stat.
 - Major icons: glowing when owned and on, dimmed when owned and off, shadowed when not owned.
+- Icon art is 64×64 PNG (confirmed). The hub draws each icon in a 32×32 GUI-pixel slot, so it is pixel-exact at GUI scale 2 and downscaled cleanly at scale 1; use nearest-neighbour filtering.

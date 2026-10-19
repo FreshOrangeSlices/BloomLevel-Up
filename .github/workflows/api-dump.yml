@@ -16,48 +16,15 @@ jobs:
         run: |
           CP="$(cat build/cp.txt)"
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
+          code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           {
-          dump net.minecraft.world.entity.player.Player 'attack|crit|sweep|Sweep|AttackStrength|Critical|critical|Knockback|EnchantedDamage|itemAttackInteraction|deflect|getCurrentItemAttackStrengthDelay|canAttack|isSprinting|magicCrit|attackVisual|setLastHurtMob|stabAttack|lungeAttack'
-          dump net.minecraft.world.entity.LivingEntity 'actuallyHurt|die\(|getDamageAfterArmorAbsorb|getDamageAfterMagicAbsorb|getArmorValue|hurtArmor|LastHurtByPlayer|lastHurtByPlayer|knockback\(|getKillCredit|getAbsorptionAmount|getWeaponItem|doHurtTarget|causeFallDamage|calculateFallDamage|AutoSpinAttack|isInWaterOrRain|dropAllDeathLoot|spawnAtLocation|setItemSlot|getEquipmentDropChance|kill|swing\('
-          dump net.minecraft.world.damagesource.CombatRules
-          dump net.minecraft.world.item.enchantment.EnchantmentHelper 'getEnchantmentLevel|processAmmoUse|getItemEnchantmentLevel|SpinAttack|Piercing|getTridentReturnToOwnerAcceleration|modifyDamage|getDamageProtection|getFishingLuckBonus|modifyCrossbowChargingTime|doPostAttackEffects'
-          dump net.minecraft.world.item.enchantment.Enchantments 'LOOTING|PIERCING|RIPTIDE|LOYALTY|class '
-          dump net.minecraft.world.item.ProjectileWeaponItem
-          dump net.minecraft.world.item.CrossbowItem
-          dump net.minecraft.world.item.BowItem
-          dump net.minecraft.world.item.TridentItem
-          dump net.minecraft.world.item.MaceItem
-          dump net.minecraft.world.entity.projectile.arrow.AbstractArrow
-          dump net.minecraft.world.entity.projectile.arrow.ThrownTrident
-          dump net.minecraft.world.entity.projectile.ThrownTrident
-          dump net.minecraft.world.entity.projectile.windcharge.AbstractWindCharge 'explode|class |EXPLOSION|DAMAGE_CALC'
-          dump net.minecraft.world.level.Level 'explode\('
-          dump net.minecraft.world.effect.MobEffect
-          dump net.minecraft.core.Registry 'register|class '
-          dump net.minecraft.core.registries.BuiltInRegistries 'MOB_EFFECT|class '
-          dump net.minecraft.world.damagesource.DamageSource 'DamageSource\(|class '
-          dump net.minecraft.core.particles.ParticleTypes 'ELECTRIC_SPARK|SWEEP_ATTACK|CRIT|DAMAGE_INDICATOR|GUST|ENCHANTED_HIT|class '
-          dump net.minecraft.sounds.SoundEvents 'PLAYER_ATTACK_CRIT|PLAYER_ATTACK_SWEEP|TRIDENT_THUNDER|LIGHTNING_BOLT|WIND_CHARGE_BURST|MACE_SMASH|ITEM_BREAK|class '
-          dump net.minecraft.tags.ItemTags 'SWORDS|SPEAR|AXES|MACE|TRIDENT|BOW|CROSSBOW|ARROWS|class '
-          dump net.minecraft.tags.EntityTypeTags 'BOSS|class '
-          dump net.minecraft.world.entity.Mob 'setItemSlot|getItemBySlot|setDropChance|class |setGuaranteedDrop'
-          dump net.minecraft.world.entity.Entity 'spawnAtLocation|fallDistance|getKnownMovement|isInWaterOrRain|getBoundingBox|isAlliedTo|tickCount|setNoGravity|isNoGravity|distanceTo\('
-          dump net.minecraft.world.entity.OwnableEntity
-          dump net.minecraft.world.entity.ai.attributes.Attributes 'SWEEPING|ENTITY_INTERACTION|ATTACK_DAMAGE|ATTACK_KNOCKBACK|class '
-          dump net.minecraft.world.entity.decoration.ArmorStand 'class '
-          dump net.minecraft.world.entity.decoration.armorstand.ArmorStand 'class '
-          dump net.minecraft.world.item.Item 'getAttackDamageBonus|hurtEnemy|postHurtEnemy|getUseDuration|releaseUsing|class '
-          dump net.minecraft.core.component.DataComponents 'KINETIC|PIERCE|SWING|WEAPON|ATTACK_RANGE|CHARGED|INTANGIBLE|class '
-          dump net.minecraft.world.item.component.KineticWeapon
-          dump net.minecraft.world.item.component.Weapon
-          dump net.minecraft.world.item.component.ChargedProjectiles
-          dump net.minecraft.world.damagesource.DamageSources 'trident|arrow|lightningBolt|playerAttack|mobProjectile|spear|mace|windCharge|indirectMagic|class '
-          dump net.minecraft.world.entity.projectile.ProjectileUtil 'getHitResult|class '
-          dump net.minecraft.world.level.ExplosionDamageCalculator 'class '
-          dump net.minecraft.world.level.SimpleExplosionDamageCalculator
-          dump net.minecraft.world.entity.player.Inventory 'getSelectedItem|selected|class '
-          dump net.minecraft.server.level.ServerPlayer 'crit|magicCrit|sendSystemMessage|connection|class '
-          dump net.minecraft.world.entity.projectile.Projectile 'shootFromRotation|shoot\(|getOwner|class '
+          code net.minecraft.world.entity.player.Player ' attack\(|isSweepAttack|canCriticalAttack|doSweepAttack'
+          code net.minecraft.world.entity.LivingEntity ' hurtServer\(|actuallyHurt'
+          code net.minecraft.world.item.TridentItem 'releaseUsing|use\('
+          code net.minecraft.world.item.ProjectileWeaponItem 'useAmmo'
+          dump net.minecraft.world.entity.player.Player 'actuallyHurt|hurtServer|getDamageAfter'
+          dump net.minecraft.server.level.ServerPlayer 'actuallyHurt|hurtServer|drop\('
+          dump net.minecraft.util.random.WeightedList 'of\(|class '
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

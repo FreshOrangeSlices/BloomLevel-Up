@@ -17,55 +17,47 @@ jobs:
           CP="$(cat build/cp.txt)"
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           {
-          dump net.minecraft.world.level.storage.loot.LootContext
-          dump net.minecraft.world.level.storage.loot.LootTable 'getRandomItems|EMPTY|class '
-          dump 'net.minecraft.world.level.storage.loot.LootParams$Builder'
-          dump net.minecraft.world.level.storage.loot.BuiltInLootTables 'FISHING|SHEAR|class '
-          dump net.minecraft.world.level.storage.loot.parameters.LootContextParamSets 'FISHING|CHEST|GIFT|ARCHAEOLOGY|BLOCK|class '
-          dump net.minecraft.world.item.ItemInstance
-          dump net.minecraft.server.level.ServerPlayerGameMode 'destroyBlock|getGameModeForPlayer|isCreative|isSurvival'
-          dump net.minecraft.world.entity.player.Player 'hasCorrectToolForDrops|getDestroySpeed|blockActionRestricted|getLuck|getAbilities|mayBuild'
-          dump net.minecraft.world.entity.LivingEntity 'getMainHandItem|getOffhandItem|getItemInHand|getSlotForHand|isHolding'
-          dump net.minecraft.world.level.block.LeavesBlock 'PERSISTENT|DISTANCE|class '
-          dump 'net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase' 'randomTick|boolean is\(|getBlock\(|isRandomlyTicking|getDestroySpeed|isAir'
-          dump net.minecraft.world.level.block.state.StateHolder 'getValue|hasProperty|getProperties|setValue|getOptionalValue'
-          dump net.minecraft.world.level.block.state.properties.IntegerProperty
-          dump net.minecraft.world.level.block.state.properties.Property 'getName|getPossibleValues|class '
-          dump net.minecraft.world.level.block.state.properties.BlockStateProperties 'AGE_|PERSISTENT|class '
-          dump net.minecraft.tags.BlockTags 'LOGS|LEAVES|CROPS|BEE_GROWABLES|SAPLINGS|MINEABLE|WART|ORES|DIRT|SAND|BASE_STONE|NYLIUM|class '
-          dump net.minecraft.tags.ItemTags 'PICKAXES|AXES|SHOVELS|HOES|FISH|SHEAR|MEAT|class '
-          dump net.minecraft.world.level.chunk.LevelChunk 'class |markUnsaved'
-          dump net.minecraft.world.level.chunk.ChunkAccess 'markUnsaved|class |getPos'
-          dump net.minecraft.server.level.ServerLevel 'sendParticles|getChunkAt|class |levelEvent|getBlockState'
-          dump net.minecraft.world.level.Level 'getChunkAt|getBlockState|destroyBlock|levelEvent|class |isLoaded|hasChunkAt'
-          dump net.minecraft.core.particles.ParticleTypes 'HAPPY_VILLAGER|COMPOSTER|class '
-          dump net.minecraft.world.entity.ai.attributes.Attributes 'BLOCK_BREAK|MINING|class '
-          dump net.minecraft.world.entity.animal.sheep.Sheep 'Sheared|shear|class '
-          dump net.minecraft.world.entity.animal.Sheep 'Sheared|shear|class '
-          dump net.minecraft.world.entity.monster.skeleton.Bogged 'Sheared|shear|class '
-          dump net.minecraft.world.entity.monster.Bogged 'Sheared|shear|class '
-          dump net.minecraft.world.entity.animal.golem.SnowGolem 'Pumpkin|shear|class '
-          dump net.minecraft.world.entity.animal.SnowGolem 'Pumpkin|shear|class '
-          dump net.minecraft.world.entity.animal.cow.MushroomCow 'shear|class '
-          dump net.minecraft.world.entity.animal.MushroomCow 'shear|class '
-          dump net.minecraft.world.item.ShearsItem 'class '
-          dump net.minecraft.world.item.context.BlockPlaceContext 'getClickedPos|getPlayer|getLevel|class '
-          dump net.minecraft.world.item.context.UseOnContext 'getClickedPos|getPlayer|getLevel|getItemInHand|getHand'
-          dump net.minecraft.world.entity.projectile.FishingHook
-          dump net.minecraft.world.item.FishingRodItem 'use'
-          dump net.minecraft.core.BlockPos 'asLong|of\(|offset|betweenClosed|immutable|containing|class |above|below'
-          dump net.minecraft.world.level.block.BonemealableBlock
-          dump net.minecraft.server.MinecraftServer 'reloadableRegistries|getTickCount|class '
-          dump 'net.minecraft.server.ReloadableServerRegistries$Holder' 'getLootTable'
-          dump net.minecraft.resources.ResourceKey 'create|identifier|location|class '
-          dump net.minecraft.world.entity.item.ItemEntity 'ItemEntity\(|setDefaultPickUpDelay|setPickUpDelay'
-          dump net.minecraft.world.entity.player.Abilities 'instabuild|mayBuild'
-          dump net.minecraft.world.item.Items 'SHEARS|WOOL|COOKED_BEEF|IRON_PICKAXE|DIAMOND_AXE|IRON_SHOVEL|IRON_HOE|FISHING_ROD|class '
-          dump net.minecraft.world.level.block.Blocks 'DIAMOND_ORE|IRON_ORE|OAK_LOG|OAK_LEAVES|WHEAT|DIRT;|FARMLAND|STONE;|WOOL|class '
-          dump net.minecraft.world.entity.EntityType 'SHEEP|class '
-          dump net.minecraft.world.entity.EntityTypes 'SHEEP|class '
-          dump net.minecraft.world.InteractionResult 'PASS|SUCCESS|class |consumesAction'
-          dump net.minecraft.server.level.ServerPlayer 'gameMode|getMainHandItem'
+          dump net.minecraft.world.entity.player.Player 'attack|crit|sweep|Sweep|AttackStrength|Critical|critical|Knockback|EnchantedDamage|itemAttackInteraction|deflect|getCurrentItemAttackStrengthDelay|canAttack|isSprinting|magicCrit|attackVisual|setLastHurtMob|stabAttack|lungeAttack'
+          dump net.minecraft.world.entity.LivingEntity 'actuallyHurt|die\(|getDamageAfterArmorAbsorb|getDamageAfterMagicAbsorb|getArmorValue|hurtArmor|LastHurtByPlayer|lastHurtByPlayer|knockback\(|getKillCredit|getAbsorptionAmount|getWeaponItem|doHurtTarget|causeFallDamage|calculateFallDamage|AutoSpinAttack|isInWaterOrRain|dropAllDeathLoot|spawnAtLocation|setItemSlot|getEquipmentDropChance|kill|swing\('
+          dump net.minecraft.world.damagesource.CombatRules
+          dump net.minecraft.world.item.enchantment.EnchantmentHelper 'getEnchantmentLevel|processAmmoUse|getItemEnchantmentLevel|SpinAttack|Piercing|getTridentReturnToOwnerAcceleration|modifyDamage|getDamageProtection|getFishingLuckBonus|modifyCrossbowChargingTime|doPostAttackEffects'
+          dump net.minecraft.world.item.enchantment.Enchantments 'LOOTING|PIERCING|RIPTIDE|LOYALTY|class '
+          dump net.minecraft.world.item.ProjectileWeaponItem
+          dump net.minecraft.world.item.CrossbowItem
+          dump net.minecraft.world.item.BowItem
+          dump net.minecraft.world.item.TridentItem
+          dump net.minecraft.world.item.MaceItem
+          dump net.minecraft.world.entity.projectile.arrow.AbstractArrow
+          dump net.minecraft.world.entity.projectile.arrow.ThrownTrident
+          dump net.minecraft.world.entity.projectile.ThrownTrident
+          dump net.minecraft.world.entity.projectile.windcharge.AbstractWindCharge 'explode|class |EXPLOSION|DAMAGE_CALC'
+          dump net.minecraft.world.level.Level 'explode\('
+          dump net.minecraft.world.effect.MobEffect
+          dump net.minecraft.core.Registry 'register|class '
+          dump net.minecraft.core.registries.BuiltInRegistries 'MOB_EFFECT|class '
+          dump net.minecraft.world.damagesource.DamageSource 'DamageSource\(|class '
+          dump net.minecraft.core.particles.ParticleTypes 'ELECTRIC_SPARK|SWEEP_ATTACK|CRIT|DAMAGE_INDICATOR|GUST|ENCHANTED_HIT|class '
+          dump net.minecraft.sounds.SoundEvents 'PLAYER_ATTACK_CRIT|PLAYER_ATTACK_SWEEP|TRIDENT_THUNDER|LIGHTNING_BOLT|WIND_CHARGE_BURST|MACE_SMASH|ITEM_BREAK|class '
+          dump net.minecraft.tags.ItemTags 'SWORDS|SPEAR|AXES|MACE|TRIDENT|BOW|CROSSBOW|ARROWS|class '
+          dump net.minecraft.tags.EntityTypeTags 'BOSS|class '
+          dump net.minecraft.world.entity.Mob 'setItemSlot|getItemBySlot|setDropChance|class |setGuaranteedDrop'
+          dump net.minecraft.world.entity.Entity 'spawnAtLocation|fallDistance|getKnownMovement|isInWaterOrRain|getBoundingBox|isAlliedTo|tickCount|setNoGravity|isNoGravity|distanceTo\('
+          dump net.minecraft.world.entity.OwnableEntity
+          dump net.minecraft.world.entity.ai.attributes.Attributes 'SWEEPING|ENTITY_INTERACTION|ATTACK_DAMAGE|ATTACK_KNOCKBACK|class '
+          dump net.minecraft.world.entity.decoration.ArmorStand 'class '
+          dump net.minecraft.world.entity.decoration.armorstand.ArmorStand 'class '
+          dump net.minecraft.world.item.Item 'getAttackDamageBonus|hurtEnemy|postHurtEnemy|getUseDuration|releaseUsing|class '
+          dump net.minecraft.core.component.DataComponents 'KINETIC|PIERCE|SWING|WEAPON|ATTACK_RANGE|CHARGED|INTANGIBLE|class '
+          dump net.minecraft.world.item.component.KineticWeapon
+          dump net.minecraft.world.item.component.Weapon
+          dump net.minecraft.world.item.component.ChargedProjectiles
+          dump net.minecraft.world.damagesource.DamageSources 'trident|arrow|lightningBolt|playerAttack|mobProjectile|spear|mace|windCharge|indirectMagic|class '
+          dump net.minecraft.world.entity.projectile.ProjectileUtil 'getHitResult|class '
+          dump net.minecraft.world.level.ExplosionDamageCalculator 'class '
+          dump net.minecraft.world.level.SimpleExplosionDamageCalculator
+          dump net.minecraft.world.entity.player.Inventory 'getSelectedItem|selected|class '
+          dump net.minecraft.server.level.ServerPlayer 'crit|magicCrit|sendSystemMessage|connection|class '
+          dump net.minecraft.world.entity.projectile.Projectile 'shootFromRotation|shoot\(|getOwner|class '
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

@@ -19,6 +19,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 	public void runTest(ClientGameTestContext context) {
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
 			singleplayer.getConnection().waitForChunksRender();
+			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null);
 			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:combat 100000");
 			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:utility 100000");
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null

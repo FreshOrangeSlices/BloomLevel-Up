@@ -143,6 +143,10 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Overkill (proposed numbers) | 60% of a kill's excess real damage, split across up to 3 enemies within 4 blocks. Not from Execute kills or from Overkill's own kills | config `overkill*` |
 | First Strike (proposed number) | +50% on the first hit against a full-health target (each pierced target counts separately) | config `firstStrikeBonus` |
 | Crossbow Infinity | Plain arrows loaded into a crossbow aren't used up (and can't be picked back up). Tipped/spectral arrows and fireworks still are | `CombatSkill.freeAmmo` |
+| Charge Attack / Heavy Hands controls | Hold attack (left click) on a mob or the air. Once the swing has recovered, 1 more second of holding charges it (a heavy whoosh, then sparks); release to swing for 2x (it can still crit). A quick tap still attacks, on release. Mining is unchanged. "Charge attack" can be moved to another key in Controls | config `chargeAttackTicks`, `chargeAttackMultiplier` |
+| Lightning Summon (proposed control) | Sneak + left click with a trident while not aiming at a mob: lightning where you look (up to 48 blocks). Costs 10% of the trident's max durability and refuses if that would break it; 1 s cooldown | config `lightningSummon*` |
+| Catch! | Right click (rebindable "Throw weapon") with a sword, axe or mace throws it. It always comes back (like Loyalty III), hits for the weapon's own damage plus enchantments, and costs 1 durability. Thrown maces scale with the drop and set off Wind Impact on landing; other thrown weapons scale with the drop with Death From Above. Thrown weapons render as a flat item for now | config `catchThrowSpeed` |
+| Assault Rifle | Loading fills a 16-round magazine from your arrows (or fireworks); each click fires one round and holding right click keeps firing (about 5 shots a second); it reloads normally once empty | config `assaultRifleMagazine` |
 | Copycat | In the hub, shift-click an owned weapon Major to copy it; shift-click Copycat to stop. Copied effects keep their costs and drawbacks and switch off with their source. Long Reach is allowed as a source for now | `ProgressionService.selectCopySource` |
 
 ## Still open (need a design call)
@@ -150,7 +154,6 @@ and anything the code decided on its own is visible here. Each item can be chang
 - Combat numbers marked "proposed" above: Marksman, Predator, Bloodlust, Overkill, First Strike, Lightning radius, Unrestricted Riptide's sneak control.
 - Long Reach as a Copycat source.
 - License; the other mods in the modpack.
-- Lightning Summon control.
 - Default vegetable / rune / ammo tags.
 - Medium armor's shield-disable reduction (needs a shield cooldown hook).
 

@@ -25,9 +25,14 @@ Built in chunks. Done so far:
   shearing; player-placed blocks don't count), Efficiency / Yield / Preservation, and all 6 Utility
   Majors (Vein Mining, Timber, Shovel Mastery, Growth Aura, Master Shearing, Triple Catch).
 
-Every push also boots a test server and runs game tests for the Armor and Utility mechanics.
+- **Chunk 5 — Combat:** Combat XP from real damage (plus a kill bonus), Critical / Penetration / Looting,
+  and the Combat Majors, including the ones with controls (Charge Attack, Catch!, Assault Rifle,
+  Lightning Summon) and Copycat.
 
-Next: Combat (XP from fighting, Power/Tempo effects, weapon Majors), then Misc.
+Every push also boots a test server and runs game tests for the Armor, Utility and Combat mechanics, and
+boots a real client into a world (client-test workflow).
+
+Next: Misc.
 
 ## Getting the jar
 
@@ -45,6 +50,11 @@ in Controls. In the hub:
   Glowing = on, dim = owned but off, dark = not owned. Hover for details.
 - **Spend XP** levels the category with vanilla XP (Utility and Armor also level from playing now).
 - Vein Mining and Timber: hold **sneak** while breaking to skip them for that block.
+- Copycat: **shift-click** an owned weapon Major in the hub to copy it; shift-click Copycat to stop.
+- Combat controls (rebindable in Controls → Bloom Level-Up): **hold left click** to charge (Charge
+  Attack / Heavy Hands), **right click** with a sword/axe/mace to throw it (Catch!), **sneak + left click**
+  with a trident to call lightning (Lightning Summon), **sneak while releasing** a trident to riptide
+  (Unrestricted Riptide).
 
 Admin commands are still there for testing:
 
@@ -57,7 +67,7 @@ Admin commands are still there for testing:
 | `/bloom fund <category> <xp>` | Spend vanilla XP to level a category below 100 |
 | `/bloom invest <category> <count>` | Buy permanent post-100 points (after mastering a category) |
 | `/bloom bloomreset confirm` | Bloom+ reset |
-| `/bloom admin xp <player> <category> <amount>` · `/bloom admin definitions` | Ops: grant XP, show loaded data + warnings |
+| `/bloom admin xp <players> <category> <amount>` · `/bloom admin definitions` | Ops: grant XP, show loaded data + warnings |
 
 ## For pack makers
 
@@ -66,7 +76,8 @@ Admin commands are still there for testing:
 - Utility block XP: `data/<ns>/bloom/xp/blocks/<name>.json` — `{"category": "bloomlevelup:utility", "values": {"#c:ores": 3.0, "minecraft:stone": 0.5}}`
 - Tags that decide what counts (all under `bloomlevelup:`): blocks `vein_mineable`, `timber_logs`,
   `timber_leaves`, `yield_eligible`, `excavation_treasure`, `growth_aura_crops`, `mature_only`, `xp_column`;
-  items `armor/light|medium|heavy`, `weapon/blade|blunt`, `food/meat`, `utility_tools`; damage types
+  items `armor/light|medium|heavy`, `weapon/sword|axe|bow|crossbow|trident|mace|spear|blade|blunt`,
+  `food/meat`, `utility_tools`; entity types `bosses`, `no_combat_xp`; damage types
   `dodgeable`, `elemental`, `melee`, `blade`, `blunt`; effects `damage_over_time`, `unyielding_ignored`
 - Shovel treasure: loot table `bloomlevelup:gameplay/excavation_treasure`
 - Tuning: `config/bloomlevelup.json`

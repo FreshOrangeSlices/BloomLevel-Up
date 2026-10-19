@@ -125,7 +125,7 @@ public final class BloomCommands {
 				.then(literal("admin")
 						.requires(PermissionPredicates.require(BloomLevelUp.id("command/admin"), PermissionLevel.GAMEMASTERS))
 						.then(literal("xp")
-								.then(argument("player", EntityArgument.player())
+								.then(argument("players", EntityArgument.players())
 										.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
 												.then(argument("amount", IntegerArgumentType.integer(1))
 														.executes(BloomCommands::adminXp)))))
@@ -172,19 +172,24 @@ public final class BloomCommands {
 	}
 
 	private static int adminXp(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-		ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
 		String category = id(ctx, "category");
 
 		if (BloomServices.definitions().category(category).isEmpty()) {
 			return report(ctx.getSource(), ActionResult.of(ActionResult.Outcome.UNKNOWN_CATEGORY));
 		}
 
-		XpGainResult result = BloomServices.progression().addXp(BloomAttachments.profile(target), category,
-				IntegerArgumentType.getInteger(ctx, "amount"));
-		BloomSync.changed(target);
-		ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.xp.granted",
-				target.getDisplayName(), result.levelsGained(), result.newLevel(), result.majorLevelsGranted()), true);
-		return 1;
+		int amount = IntegerArgumentType.getInteger(ctx, "amount");
+		int count = 0;
+
+		for (ServerPlayer target : EntityArgument.getPlayers(ctx, "players")) {
+			XpGainResult result = BloomServices.progression().addXp(BloomAttachments.profile(target), category, amount);
+			BloomSync.changed(target);
+			ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.xp.granted",
+					target.getDisplayName(), result.levelsGained(), result.newLevel(), result.majorLevelsGranted()), true);
+			count++;
+		}
+
+		return count;
 	}
 
 	private static int bloomReset(CommandSourceStack source, ServerPlayer player) {

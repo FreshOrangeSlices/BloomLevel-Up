@@ -69,3 +69,10 @@ publishing {
 		}
 	}
 }
+
+// TEMPORARY (api dump branch only)
+tasks.register('printClasspath') {
+	def cp = sourceSets.client.compileClasspath
+	def out = layout.buildDirectory.file('cp.txt')
+	doLast { def f = out.get().asFile; f.parentFile.mkdirs(); f.text = cp.asPath }
+}

@@ -1,0 +1,67 @@
+name: api-dump
+on:
+  push:
+    branches: ['ci/api-dump*']
+jobs:
+  dump:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - run: chmod +x ./gradlew && ./gradlew printClasspath --no-configuration-cache -q
+      - name: javap
+        run: |
+          CP="$(cat build/cp.txt)"
+          dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
+          {
+          dump net.minecraft.world.entity.LivingEntity 'hurtServer|actuallyHurt|getDamageAfter|knockback|onEquippedItemBroken|checkTotem|getArmorValue|isBlocking|applyItemBlocking|completeUsingItem|isSleeping|addEffect|forceAddEffect|canBeAffected|getRandom|hurt\(|setHealth|getAttributeValue|isInvulnerableTo|invulnerableTime|hurtTime|blockUsingItem|getItemBlockingWith|getUseItem|hurtArmor|doHurtEquipment'
+          dump net.minecraft.world.item.ItemStack 'hurtAndBreak|processDurabilityChange|DamageValue|getMaxDamage|isDamageableItem|isDamaged|boolean is\(|boolean has\(| get\(|copy\(|getCount|shrink|isEmpty|getItem\(|copyWithCount'
+          dump net.minecraft.world.item.enchantment.EnchantmentHelper 'processDurabilityChange'
+          dump net.minecraft.world.item.component.Consumable 'onConsume'
+          dump net.minecraft.world.entity.player.Player 'getSleepTimer|sleepCounter|isSleeping|getCooldowns|disableShield|blockUsingItem|hurtArmor|hurtCurrentlyUsedShield|hurtHelmet|getFoodData|causeFoodExhaustion|isSleepingLongEnough|getInventory'
+          dump net.minecraft.server.level.ServerPlayer 'getLastClientInput|setLastClientInput'
+          dump net.minecraft.world.entity.player.Input
+          dump net.minecraft.world.damagesource.DamageSource
+          dump net.minecraft.tags.DamageTypeTags
+          dump net.minecraft.world.damagesource.DamageTypes
+          dump net.minecraft.world.damagesource.DamageSources 'thorns|magic|generic|mobAttack|playerAttack|source\('
+          dump net.minecraft.world.entity.projectile.Projectile 'deflect|getOwner|setOwner|onHitEntity'
+          dump net.minecraft.world.entity.projectile.ProjectileDeflection
+          dump net.minecraft.world.entity.projectile.AbstractArrow 'getPickupItem|pickup|class '
+          dump net.minecraft.world.entity.projectile.arrow.AbstractArrow 'getPickupItem|pickup|class '
+          dump net.minecraft.world.effect.MobEffectInstance
+          dump net.minecraft.world.effect.MobEffect 'getCategory|isBeneficial|isInstantenous|isInstantaneous'
+          dump net.minecraft.world.effect.MobEffectCategory
+          dump net.minecraft.world.effect.MobEffects 'POISON|WITHER|RESISTANCE|class '
+          dump net.minecraft.gametest.framework.GameTestHelper
+          dump net.minecraft.world.entity.Entity 'getDeltaMovement|setDeltaMovement|isShiftKeyDown|onGround\(|level\(|getRandom|hurtMarked|isCrouching|discard|position\(|fallDistance|resetFallDistance|getType\(|isSpectator|isCreative|getName\('
+          dump net.minecraft.world.level.block.CropBlock 'isMaxAge|getAge'
+          dump net.minecraft.core.component.DataComponents 'EQUIPPABLE|BLOCKS_ATTACKS|FOOD|CONSUMABLE|MAX_DAMAGE'
+          dump net.minecraft.world.item.equipment.Equippable 'slot'
+          dump net.minecraft.world.item.ItemCooldowns
+          dump net.minecraft.world.entity.EquipmentSlot
+          dump 'net.minecraft.world.entity.EquipmentSlot$Type'
+          dump net.minecraft.world.level.Level 'getGameTime|getRandom|isClientSide|getServer'
+          dump net.minecraft.world.level.storage.loot.LootContext 'getParameter|getOptionalParameter|hasParameter'
+          dump net.minecraft.world.level.storage.loot.parameters.LootContextParams
+          dump net.minecraft.world.item.BlockItem 'place'
+          dump net.minecraft.world.entity.projectile.FishingHook 'retrieve|getPlayerOwner'
+          dump net.minecraft.world.entity.projectile.fishing.FishingHook 'retrieve|getPlayerOwner|class '
+          dump net.minecraft.world.level.block.Block 'playerDestroy|dropResources|getDrops|popResource'
+          dump net.minecraft.world.entity.Shearable
+          dump net.minecraft.world.entity.ExperienceOrb 'playerTouch|value|getValue'
+          dump net.minecraft.core.registries.Registries 'DAMAGE_TYPE|ITEM;|BLOCK;|class '
+          dump net.minecraft.tags.TagKey 'create'
+          dump net.minecraft.world.entity.player.Inventory 'add\(|placeItemBackInInventory'
+          dump net.minecraft.world.food.FoodData
+          dump net.minecraft.world.entity.ai.attributes.AttributeInstance 'getModifiers|getBaseValue'
+          dump net.minecraft.world.item.Items 'SHIELD|LEATHER_HELMET|COPPER_HELMET|TURTLE_HELMET|CHAINMAIL_HELMET'
+          } > dump.txt 2>&1
+          wc -c dump.txt
+      - name: publish (1)
+        run: python3 emit.py 0 30
+      - name: publish (2)
+        run: python3 emit.py 30 50

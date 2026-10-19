@@ -8,7 +8,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -191,10 +190,8 @@ public final class CombatControls {
 
 		if (!charged && holdTicks >= chargeTicks() && player.getAttackStrengthScale(0.0F) >= 1.0F) {
 			charged = true;
+			// Charged cue: a heavy whoosh, then crit sparks while held.
 			player.playSound(SoundEvents.PLAYER_ATTACK_STRONG, 0.5F, 0.6F);
-			player.displayClientMessage(Component.translatable("bloom.combat.charged"), true);
-		} else if (!charged && holdTicks == 4) {
-			player.displayClientMessage(Component.translatable("bloom.combat.charging"), true);
 		}
 
 		if (charged && holdTicks % 4 == 0 && minecraft.level != null) {

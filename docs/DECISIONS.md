@@ -31,7 +31,7 @@ and anything the code decided on its own is visible here. Each item can be chang
 | One and the Same (confirmed) | Present but flagged `disabled` (cost 5 placeholder) until the Pet system exists | `major/combat/one_and_the_same.json` |
 | Aura Sword | No prerequisite (docs: TBD) | Major JSON |
 | Long Reach as Copycat source | Allowed for now (docs: TBD) | add `copycat_ineligible` to block |
-| Category pacing | Docs want Combat slowest and Misc second-easiest; the curve is currently shared. Per-category curves arrive with the XP-source chunk | config |
+| Category pacing | Shared curve for now; per-category curves tuned to the pacing answers below arrive with the XP-source chunk | config |
 
 ## Answers from FreshOrangeSlices (2026-10-18)
 
@@ -56,7 +56,6 @@ and anything the code decided on its own is visible here. Each item can be chang
 - Combat effect sizes: Marksman, Predator, Bloodlust, Overkill, First Strike (I'll propose numbers).
 - Heavy armor knockback strength; Aura Sword prerequisite; Long Reach as a Copycat source.
 - License; the other mods in the modpack.
-
 - Durability stat → virtual Unbreaking mapping; Trident Lightning radius; Lightning Summon control.
 - Default food / vegetable / rune / ammo tags.
 

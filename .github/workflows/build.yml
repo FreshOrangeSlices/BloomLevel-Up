@@ -1,0 +1,39 @@
+# Builds the mod and runs unit tests on every push / PR.
+# The finished jar is attached to each run under "Artifacts" (Actions tab -> the run -> bloomlevelup-jar).
+
+name: build
+on: [pull_request, push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v6
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew build --stacktrace
+      - name: capture build artifacts
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: bloomlevelup-jar
+          path: |
+            build/libs/*.jar
+            !build/libs/*-sources.jar
+      - name: capture test reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports
+          path: build/reports/

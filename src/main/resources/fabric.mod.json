@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "bloomlevelup",
+	"version": "${version}",
+	"name": "Bloom Level-Up",
+	"description": "A modpack-friendly character build system: four skill categories, levelable stats, and a shared Major Level currency for rule-breaking abilities.",
+	"authors": [
+		"FreshOrangeSlices"
+	],
+	"contact": {
+		"sources": "https://github.com/FreshOrangeSlices/BloomLevel-Up"
+	},
+	"license": "All-Rights-Reserved",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.freshorangeslices.bloomlevelup.BloomLevelUp"
+		],
+		"client": [
+			"com.freshorangeslices.bloomlevelup.client.BloomLevelUpClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

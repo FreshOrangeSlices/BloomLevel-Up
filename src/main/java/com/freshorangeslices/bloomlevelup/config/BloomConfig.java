@@ -151,6 +151,17 @@ public final class BloomConfig {
 	public int overkillMaxTargets = 3;
 	public double firstStrikeBonus = 0.5;
 	public double unrestrictedRiptideStrength = 3.0;
+	/** Charge Attack / Heavy Hands: hold the attack key this long (after the swing has recovered) to charge. */
+	public int chargeAttackTicks = 20;
+	public double chargeAttackMultiplier = 2.0;
+	/** Lightning Summon: reach, durability cost (share of max durability) and cooldown. */
+	public double lightningSummonRange = 48.0;
+	public double lightningSummonCostRatio = 0.10;
+	public int lightningSummonCooldownTicks = 20;
+	/** Catch!: throw speed (a trident is 2.5). */
+	public double catchThrowSpeed = 2.5;
+	/** Assault Rifle: shots per magazine. */
+	public int assaultRifleMagazine = 16;
 
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
@@ -238,6 +249,13 @@ public final class BloomConfig {
 		overkillMaxTargets = Math.max(1, overkillMaxTargets);
 		firstStrikeBonus = Math.max(0.0, firstStrikeBonus);
 		unrestrictedRiptideStrength = Math.max(0.0, unrestrictedRiptideStrength);
+		chargeAttackTicks = Math.max(1, chargeAttackTicks);
+		chargeAttackMultiplier = Math.max(1.0, chargeAttackMultiplier);
+		lightningSummonRange = Math.max(4.0, Math.min(128.0, lightningSummonRange));
+		lightningSummonCostRatio = clamp01(lightningSummonCostRatio);
+		lightningSummonCooldownTicks = Math.max(0, lightningSummonCooldownTicks);
+		catchThrowSpeed = Math.max(0.5, Math.min(5.0, catchThrowSpeed));
+		assaultRifleMagazine = Math.max(1, Math.min(64, assaultRifleMagazine));
 		return this;
 	}
 

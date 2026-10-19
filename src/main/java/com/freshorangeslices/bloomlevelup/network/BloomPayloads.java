@@ -135,4 +135,34 @@ public final class BloomPayloads {
 			return TYPE;
 		}
 	}
+
+	/** Combat abilities that need a key: what the player just did. */
+	public enum CombatAction {
+		/** Charge Attack / Heavy Hands: the charge is complete; the next full swing deals double damage. */
+		CHARGED,
+		/** Lightning Summon: call lightning where the player is looking. */
+		SUMMON_LIGHTNING,
+		/** Catch!: throw the weapon in the main hand. */
+		THROW
+	}
+
+	/** Client → server: a combat ability key. The server checks the Major, the weapon and cooldowns itself. */
+	public record CombatInput(CombatAction action) implements CustomPacketPayload {
+		public static final Type<CombatInput> TYPE = new Type<>(BloomLevelUp.id("combat_input"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, CombatInput> CODEC =
+				CustomPacketPayload.codec(CombatInput::write, CombatInput::new);
+
+		private CombatInput(RegistryFriendlyByteBuf buf) {
+			this(buf.readEnum(CombatAction.class));
+		}
+
+		private void write(RegistryFriendlyByteBuf buf) {
+			buf.writeEnum(action);
+		}
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
 }

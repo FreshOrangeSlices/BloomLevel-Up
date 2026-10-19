@@ -65,6 +65,7 @@ import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
+import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
 import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor;
 import com.freshorangeslices.bloomlevelup.mixin.PlayerInvoker;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
@@ -330,8 +331,12 @@ public final class CombatSkill {
 
 		float result = amount;
 
+		if (direct instanceof ThrownWeapon thrown) {
+			result = CombatAbilities.thrownDamage(player, thrown, result);
+		}
+
 		if (kind.weaponHit() && pvpAllowed(target)) {
-			result = applyBonuses(level, player, target, kind, weapon, swing, direct, amount);
+			result = applyBonuses(level, player, target, kind, weapon, swing, direct, result);
 		}
 
 		ACTIVE.put(target, new Hit(player, source, kind, weapon, result, amount, swing));
@@ -349,6 +354,12 @@ public final class CombatSkill {
 		if (kind == HitKind.PRIMARY && swing != null) {
 			boolean fullStrength = swing.strength > 0.9F;
 			double critMultiplier = StatFormulas.criticalMultiplier(stat(player, CombatIds.CRITICAL));
+
+			// Charge Attack / Heavy Hands: a held charge doubles a full-strength swing (and it can still crit).
+			if (fullStrength && CombatAbilities.consumeCharge(player, weapon)) {
+				multiplier *= config.chargeAttackMultiplier;
+				CombatAbilities.chargedHitEffects(level, target);
+			}
 
 			if (swing.crit) {
 				multiplier *= critMultiplier / 1.5; // vanilla already applied its 1.5x
@@ -837,17 +848,22 @@ public final class CombatSkill {
 
 	/** Wind Impact: landing a real fall with a mace in hand bursts wind outward, like a wind charge. */
 	private static void windImpact(ServerLevel level, ServerPlayer player) {
+		windImpactAt(level, player, player.position());
+	}
+
+	/** A wind burst at a point that pushes everything around it away (never the player who caused it). */
+	public static void windImpactAt(ServerLevel level, ServerPlayer player, Vec3 at) {
 		BloomConfig config = config();
 		double radius = config.windImpactRadius;
 
-		for (LivingEntity victim : victimsAround(level, player, player.getBoundingBox().inflate(radius))) {
-			double distance = victim.distanceTo(player);
+		for (LivingEntity victim : victimsAround(level, player, new AABB(at, at).inflate(radius))) {
+			double distance = Math.sqrt(victim.position().distanceToSqr(at));
 
 			if (distance > radius) {
 				continue;
 			}
 
-			Vec3 away = victim.position().subtract(player.position());
+			Vec3 away = victim.position().subtract(at);
 			Vec3 flat = new Vec3(away.x, 0.0, away.z);
 			Vec3 push = (flat.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 0.0, 0.0) : flat.normalize())
 					.scale(config.windImpactStrength * (1.0 - distance / (radius + 0.5)));
@@ -855,8 +871,8 @@ public final class CombatSkill {
 			syncVelocity(victim);
 		}
 
-		level.sendParticles(ParticleTypes.GUST_EMITTER_SMALL, player.getX(), player.getY(), player.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
-		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WIND_CHARGE_BURST.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+		level.sendParticles(ParticleTypes.GUST_EMITTER_SMALL, at.x, at.y, at.z, 1, 0.0, 0.0, 0.0, 0.0);
+		level.playSound(null, at.x, at.y, at.z, SoundEvents.WIND_CHARGE_BURST.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
 	}
 
 	// ------------------------------------------------------------------ projectiles (Fabric ENTITY_LOAD)

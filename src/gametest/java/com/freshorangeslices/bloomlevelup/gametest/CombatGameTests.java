@@ -18,7 +18,10 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -35,6 +38,8 @@ import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
+import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
 
@@ -385,5 +390,55 @@ public class CombatGameTests {
 		helper.assertValueEqual(20.0F, nearby.getHealth(), "Nothing yet");
 		CombatSkill.runQueuedForTests();
 		helper.assertTrue(nearby.getHealth() < 20.0F, "The aura pulse reached the nearby zombie");
+	}
+
+	// ------------------------------------------------------------------ input Majors
+
+	@GameTest
+	public void chargedSwingDealsDouble(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(player, CombatIds.CHARGE_ATTACK);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		CombatAbilities.armChargeForTests(player);
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		near(helper, 12.0, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "Charged: 2x");
+		CombatSkill.endSwingForTests();
+
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "The charge is spent");
+		CombatSkill.endSwingForTests();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void thrownWeaponsHitForTheirOwnDamage(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		ThrownWeapon thrown = ThrownWeapon.create(helper.getLevel(), player, new ItemStack(Items.IRON_SWORD));
+		helper.assertTrue(thrown.getItem().is(Items.IRON_SWORD), "It carries the sword");
+		helper.assertTrue(CombatAbilities.throwable(new ItemStack(Items.IRON_AXE)) && !CombatAbilities.throwable(new ItemStack(Items.TRIDENT)),
+				"Axes throw with Catch!, tridents throw on their own");
+		LivingEntity zombie = zombie(helper, 1, 1);
+		DamageSource source = player.damageSources().trident(thrown, player);
+		// A trident hit is 8; a thrown iron sword hits like the sword: 1 base + 5.
+		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, source, 8.0F), "Iron sword damage");
+		CombatSkill.endSwingForTests();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void assaultRifleLoadsAndFiresAMagazine(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.CROSSBOW));
+		grant(player, CombatIds.ASSAULT_RIFLE);
+		player.getInventory().add(new ItemStack(Items.ARROW, 20));
+		ItemStack crossbow = player.getMainHandItem();
+		crossbow.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.ofNonEmpty(List.of(new ItemStack(Items.ARROW))));
+
+		CombatAbilities.fillMagazine(player, crossbow);
+		helper.assertValueEqual(16, crossbow.get(DataComponents.CHARGED_PROJECTILES).size(), "A full magazine");
+		helper.assertValueEqual(5, player.getInventory().countItem(Items.ARROW), "15 more arrows loaded");
+
+		CombatAbilities.fireFromMagazine((CrossbowItem) crossbow.getItem(), helper.getLevel(), player, InteractionHand.MAIN_HAND);
+		helper.assertValueEqual(15, crossbow.get(DataComponents.CHARGED_PROJECTILES).size(), "One shot per click");
+		helper.succeed();
 	}
 }

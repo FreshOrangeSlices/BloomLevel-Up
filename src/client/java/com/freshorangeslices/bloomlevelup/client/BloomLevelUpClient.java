@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 
@@ -12,11 +13,14 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
 import com.freshorangeslices.bloomlevelup.client.gui.ClientScreens;
+import com.freshorangeslices.bloomlevelup.entity.BloomEntities;
 import com.freshorangeslices.bloomlevelup.client.gui.HubButton;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
@@ -72,6 +76,9 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		KeyMapping.Category category = KeyMapping.Category.register(BloomLevelUp.id("main"));
 		openHubKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_hub",
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
+
+		CombatControls.init(category);
+		EntityRendererRegistry.register(BloomEntities.THROWN_WEAPON, context -> new ThrownItemRenderer<>(context, 1.25F, false));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (openHubKey.consumeClick()) {

@@ -22,6 +22,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.player.PlayerXpWallet;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 
 /**
@@ -45,8 +46,11 @@ public final class BloomSync {
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncProfile.TYPE, BloomPayloads.SyncProfile.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Result.TYPE, BloomPayloads.Result.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.Request.TYPE, BloomPayloads.Request.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.CombatInput.TYPE, BloomPayloads.CombatInput.CODEC);
 
 		ServerPlayNetworking.registerGlobalReceiver(BloomPayloads.Request.TYPE, (payload, context) -> handle(context.player(), payload));
+		ServerPlayNetworking.registerGlobalReceiver(BloomPayloads.CombatInput.TYPE,
+				(payload, context) -> CombatAbilities.handle(context.player(), payload.action()));
 
 		ServerPlayConnectionEvents.JOIN.register((listener, sender, server) -> {
 			ServerPlayer player = listener.player;

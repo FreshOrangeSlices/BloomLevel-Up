@@ -3,7 +3,9 @@
 	"package": "com.freshorangeslices.bloomlevelup.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"AbstractContainerScreenAccessor"
+		"AbstractContainerScreenAccessor",
+		"MinecraftInvoker",
+		"MinecraftMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

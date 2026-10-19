@@ -19,10 +19,31 @@ jobs:
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           {
-          code net.minecraft.world.entity.player.Player ' attack[(]|isSweepAttack|canCriticalAttack|doSweepAttack'
-          code net.minecraft.world.entity.LivingEntity ' hurtServer[(]|void actuallyHurt'
-          code net.minecraft.world.entity.player.Player 'void actuallyHurt'
-          code net.minecraft.world.item.TridentItem 'releaseUsing|InteractionResult use[(]'
+          dump net.minecraft.client.Minecraft 'startAttack|continueAttack|handleKeybinds|hitResult|options|gui|rightClickDelay|missTime|player;|gameMode|level;|getInstance'
+          code net.minecraft.client.Minecraft 'boolean startAttack'
+          dump net.minecraft.client.KeyMapping 'isDown|same|consumeClick|setDown|getDefaultKey|key;|matches|class '
+          dump net.minecraft.client.Options 'keyAttack|keyUse|keyShift'
+          dump net.minecraft.client.gui.Gui 'setOverlayMessage|class '
+          dump net.minecraft.world.item.CrossbowItem 'tryLoadProjectiles|performShooting|isCharged|use'
+          code net.minecraft.world.item.CrossbowItem 'boolean tryLoadProjectiles|InteractionResult use[(]'
+          dump net.minecraft.world.entity.player.Player 'getProjectile|getCooldowns|pick'
+          dump net.minecraft.world.entity.Entity 'pick[(]|getEyePosition|getViewVector|hurtMarked|isShiftKeyDown'
+          dump 'net.minecraft.world.entity.EntityType$Builder' 'of[(]|sized|clientTrackingRange|updateInterval|build|noLootTable|class '
+          dump net.minecraft.world.entity.EntityType 'LIGHTNING_BOLT|create[(]|class '
+          dump net.minecraft.world.entity.EntityTypes 'LIGHTNING_BOLT|TRIDENT|class '
+          dump net.minecraft.world.entity.EntitySpawnReason 'TRIGGERED|EVENT|class '
+          dump net.minecraft.world.entity.LightningBolt 'setCause|setVisualOnly|moveTo|setPos|class '
+          dump net.minecraft.world.entity.projectile.ItemSupplier
+          dump net.minecraft.client.renderer.entity.ThrownItemRenderer 'ThrownItemRenderer[(]|class '
+          dump net.minecraft.client.renderer.entity.ThrownTridentRenderer 'ThrownTridentRenderer[(]|class '
+          dump net.minecraft.client.renderer.entity.EntityRendererProvider 'class |create'
+          dump net.minecraft.world.entity.projectile.arrow.ThrownTrident 'ID_LOYALTY|dealtDamage|tick|onHitEntity|getWeaponItem|tryPickup|ThrownTrident[(]'
+          code net.minecraft.world.entity.projectile.arrow.ThrownTrident 'void onHitEntity'
+          dump net.minecraft.world.item.ItemCooldowns 'addCooldown|isOnCooldown'
+          dump net.minecraft.world.item.component.ItemAttributeModifiers 'compute|forEach|class '
+          dump net.minecraft.world.entity.MobCategory 'MISC'
+          dump net.minecraft.world.phys.HitResult 'getType|getLocation|class '
+          dump net.minecraft.world.InteractionResult 'FAIL|CONSUME|SUCCESS'
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

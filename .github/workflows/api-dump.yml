@@ -17,48 +17,55 @@ jobs:
           CP="$(cat build/cp.txt)"
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           {
-          dump net.minecraft.world.entity.LivingEntity 'hurtServer|actuallyHurt|getDamageAfter|knockback|onEquippedItemBroken|checkTotem|getArmorValue|isBlocking|applyItemBlocking|completeUsingItem|isSleeping|addEffect|forceAddEffect|canBeAffected|getRandom|hurt\(|setHealth|getAttributeValue|isInvulnerableTo|invulnerableTime|hurtTime|blockUsingItem|getItemBlockingWith|getUseItem|hurtArmor|doHurtEquipment'
-          dump net.minecraft.world.item.ItemStack 'hurtAndBreak|processDurabilityChange|DamageValue|getMaxDamage|isDamageableItem|isDamaged|boolean is\(|boolean has\(| get\(|copy\(|getCount|shrink|isEmpty|getItem\(|copyWithCount'
-          dump net.minecraft.world.item.enchantment.EnchantmentHelper 'processDurabilityChange'
-          dump net.minecraft.world.item.component.Consumable 'onConsume'
-          dump net.minecraft.world.entity.player.Player 'getSleepTimer|sleepCounter|isSleeping|getCooldowns|disableShield|blockUsingItem|hurtArmor|hurtCurrentlyUsedShield|hurtHelmet|getFoodData|causeFoodExhaustion|isSleepingLongEnough|getInventory'
-          dump net.minecraft.server.level.ServerPlayer 'getLastClientInput|setLastClientInput'
-          dump net.minecraft.world.entity.player.Input
-          dump net.minecraft.world.damagesource.DamageSource
-          dump net.minecraft.tags.DamageTypeTags
-          dump net.minecraft.world.damagesource.DamageTypes
-          dump net.minecraft.world.damagesource.DamageSources 'thorns|magic|generic|mobAttack|playerAttack|source\('
-          dump net.minecraft.world.entity.projectile.Projectile 'deflect|getOwner|setOwner|onHitEntity'
-          dump net.minecraft.world.entity.projectile.ProjectileDeflection
-          dump net.minecraft.world.entity.projectile.AbstractArrow 'getPickupItem|pickup|class '
-          dump net.minecraft.world.entity.projectile.arrow.AbstractArrow 'getPickupItem|pickup|class '
-          dump net.minecraft.world.effect.MobEffectInstance
-          dump net.minecraft.world.effect.MobEffect 'getCategory|isBeneficial|isInstantenous|isInstantaneous'
-          dump net.minecraft.world.effect.MobEffectCategory
-          dump net.minecraft.world.effect.MobEffects 'POISON|WITHER|RESISTANCE|class '
-          dump net.minecraft.gametest.framework.GameTestHelper
-          dump net.minecraft.world.entity.Entity 'getDeltaMovement|setDeltaMovement|isShiftKeyDown|onGround\(|level\(|getRandom|hurtMarked|isCrouching|discard|position\(|fallDistance|resetFallDistance|getType\(|isSpectator|isCreative|getName\('
-          dump net.minecraft.world.level.block.CropBlock 'isMaxAge|getAge'
-          dump net.minecraft.core.component.DataComponents 'EQUIPPABLE|BLOCKS_ATTACKS|FOOD|CONSUMABLE|MAX_DAMAGE'
-          dump net.minecraft.world.item.equipment.Equippable 'slot'
-          dump net.minecraft.world.item.ItemCooldowns
-          dump net.minecraft.world.entity.EquipmentSlot
-          dump 'net.minecraft.world.entity.EquipmentSlot$Type'
-          dump net.minecraft.world.level.Level 'getGameTime|getRandom|isClientSide|getServer'
-          dump net.minecraft.world.level.storage.loot.LootContext 'getParameter|getOptionalParameter|hasParameter'
-          dump net.minecraft.world.level.storage.loot.parameters.LootContextParams
-          dump net.minecraft.world.item.BlockItem 'place'
-          dump net.minecraft.world.entity.projectile.FishingHook 'retrieve|getPlayerOwner'
-          dump net.minecraft.world.entity.projectile.fishing.FishingHook 'retrieve|getPlayerOwner|class '
-          dump net.minecraft.world.level.block.Block 'playerDestroy|dropResources|getDrops|popResource'
-          dump net.minecraft.world.entity.Shearable
-          dump net.minecraft.world.entity.ExperienceOrb 'playerTouch|value|getValue'
-          dump net.minecraft.core.registries.Registries 'DAMAGE_TYPE|ITEM;|BLOCK;|class '
-          dump net.minecraft.tags.TagKey 'create'
-          dump net.minecraft.world.entity.player.Inventory 'add\(|placeItemBackInInventory'
-          dump net.minecraft.world.food.FoodData
-          dump net.minecraft.world.entity.ai.attributes.AttributeInstance 'getModifiers|getBaseValue'
-          dump net.minecraft.world.item.Items 'SHIELD|LEATHER_HELMET|COPPER_HELMET|TURTLE_HELMET|CHAINMAIL_HELMET'
+          dump net.minecraft.world.level.storage.loot.LootContext
+          dump net.minecraft.world.level.storage.loot.LootTable 'getRandomItems|EMPTY|class '
+          dump 'net.minecraft.world.level.storage.loot.LootParams$Builder'
+          dump net.minecraft.world.level.storage.loot.BuiltInLootTables 'FISHING|SHEAR|class '
+          dump net.minecraft.world.level.storage.loot.parameters.LootContextParamSets 'FISHING|CHEST|GIFT|ARCHAEOLOGY|BLOCK|class '
+          dump net.minecraft.world.item.ItemInstance
+          dump net.minecraft.server.level.ServerPlayerGameMode 'destroyBlock|getGameModeForPlayer|isCreative|isSurvival'
+          dump net.minecraft.world.entity.player.Player 'hasCorrectToolForDrops|getDestroySpeed|blockActionRestricted|getLuck|getAbilities|mayBuild'
+          dump net.minecraft.world.entity.LivingEntity 'getMainHandItem|getOffhandItem|getItemInHand|getSlotForHand|isHolding'
+          dump net.minecraft.world.level.block.LeavesBlock 'PERSISTENT|DISTANCE|class '
+          dump 'net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase' 'randomTick|boolean is\(|getBlock\(|isRandomlyTicking|getDestroySpeed|isAir'
+          dump net.minecraft.world.level.block.state.StateHolder 'getValue|hasProperty|getProperties|setValue|getOptionalValue'
+          dump net.minecraft.world.level.block.state.properties.IntegerProperty
+          dump net.minecraft.world.level.block.state.properties.Property 'getName|getPossibleValues|class '
+          dump net.minecraft.world.level.block.state.properties.BlockStateProperties 'AGE_|PERSISTENT|class '
+          dump net.minecraft.tags.BlockTags 'LOGS|LEAVES|CROPS|BEE_GROWABLES|SAPLINGS|MINEABLE|WART|ORES|DIRT|SAND|BASE_STONE|NYLIUM|class '
+          dump net.minecraft.tags.ItemTags 'PICKAXES|AXES|SHOVELS|HOES|FISH|SHEAR|MEAT|class '
+          dump net.minecraft.world.level.chunk.LevelChunk 'class |markUnsaved'
+          dump net.minecraft.world.level.chunk.ChunkAccess 'markUnsaved|class |getPos'
+          dump net.minecraft.server.level.ServerLevel 'sendParticles|getChunkAt|class |levelEvent|getBlockState'
+          dump net.minecraft.world.level.Level 'getChunkAt|getBlockState|destroyBlock|levelEvent|class |isLoaded|hasChunkAt'
+          dump net.minecraft.core.particles.ParticleTypes 'HAPPY_VILLAGER|COMPOSTER|class '
+          dump net.minecraft.world.entity.ai.attributes.Attributes 'BLOCK_BREAK|MINING|class '
+          dump net.minecraft.world.entity.animal.sheep.Sheep 'Sheared|shear|class '
+          dump net.minecraft.world.entity.animal.Sheep 'Sheared|shear|class '
+          dump net.minecraft.world.entity.monster.skeleton.Bogged 'Sheared|shear|class '
+          dump net.minecraft.world.entity.monster.Bogged 'Sheared|shear|class '
+          dump net.minecraft.world.entity.animal.golem.SnowGolem 'Pumpkin|shear|class '
+          dump net.minecraft.world.entity.animal.SnowGolem 'Pumpkin|shear|class '
+          dump net.minecraft.world.entity.animal.cow.MushroomCow 'shear|class '
+          dump net.minecraft.world.entity.animal.MushroomCow 'shear|class '
+          dump net.minecraft.world.item.ShearsItem 'class '
+          dump net.minecraft.world.item.context.BlockPlaceContext 'getClickedPos|getPlayer|getLevel|class '
+          dump net.minecraft.world.item.context.UseOnContext 'getClickedPos|getPlayer|getLevel|getItemInHand|getHand'
+          dump net.minecraft.world.entity.projectile.FishingHook
+          dump net.minecraft.world.item.FishingRodItem 'use'
+          dump net.minecraft.core.BlockPos 'asLong|of\(|offset|betweenClosed|immutable|containing|class |above|below'
+          dump net.minecraft.world.level.block.BonemealableBlock
+          dump net.minecraft.server.MinecraftServer 'reloadableRegistries|getTickCount|class '
+          dump 'net.minecraft.server.ReloadableServerRegistries$Holder' 'getLootTable'
+          dump net.minecraft.resources.ResourceKey 'create|identifier|location|class '
+          dump net.minecraft.world.entity.item.ItemEntity 'ItemEntity\(|setDefaultPickUpDelay|setPickUpDelay'
+          dump net.minecraft.world.entity.player.Abilities 'instabuild|mayBuild'
+          dump net.minecraft.world.item.Items 'SHEARS|WOOL|COOKED_BEEF|IRON_PICKAXE|DIAMOND_AXE|IRON_SHOVEL|IRON_HOE|FISHING_ROD|class '
+          dump net.minecraft.world.level.block.Blocks 'DIAMOND_ORE|IRON_ORE|OAK_LOG|OAK_LEAVES|WHEAT|DIRT;|FARMLAND|STONE;|WOOL|class '
+          dump net.minecraft.world.entity.EntityType 'SHEEP|class '
+          dump net.minecraft.world.entity.EntityTypes 'SHEEP|class '
+          dump net.minecraft.world.InteractionResult 'PASS|SUCCESS|class |consumesAction'
+          dump net.minecraft.server.level.ServerPlayer 'gameMode|getMainHandItem'
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

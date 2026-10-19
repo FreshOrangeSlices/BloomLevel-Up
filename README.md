@@ -16,14 +16,28 @@ Built in chunks. Done so far:
 - **All four categories defined:** 15 stats and 66 Majors (Utility 6, Combat 31, Armor 16, Misc 13) with
   costs, prerequisites and names. Their actual effects are built category by category later.
 
-Next: networking + the hub screen, then category mechanics one at a time.
+- **Chunk 2 — Skill Hub:** the hub screen (button beside the inventory, optional keybind), live sync with
+  the server, and the first real effects: Vitality, Defense, Power, Tempo, Speed and Titan Hide.
+
+Next: XP sources for each category (so levels come from playing), then each category's mechanics.
 
 ## Getting the jar
 
 Every push builds automatically. Open the **Actions** tab → latest **build** run → download
 **bloomlevelup-jar**. Drop it in `mods/` together with Fabric API.
 
-## Trying it in game (temporary commands)
+## Trying it in game
+
+Open your inventory and click the button just outside its top-right corner, or bind **Open Skill Hub**
+in Controls. In the hub:
+
+- Category tabs along the top. Stats on the left: **+ / −** to spend or take back points (shift = 10),
+  **On/Off** to switch a stat without losing points.
+- Majors on the right: click to buy, click an owned one to switch it on/off, right-click to refund.
+  Glowing = on, dim = owned but off, dark = not owned. Hover for details.
+- **Spend XP** levels the category with vanilla XP (until levels come from playing).
+
+Admin commands are still there for testing:
 
 | Command | What it does |
 |---|---|

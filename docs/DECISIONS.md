@@ -52,6 +52,16 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Heavy armor knockback | 50% knockback resistance, with any further sources scaling with diminishing returns |
 | Placeholder art | One 64×64 placeholder (`textures/gui/placeholder.png`, from FreshOrangeSlices) stands in for every missing icon |
 
+## Chunk 2 — hub and first effects
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Effect delivery | Stats become vanilla attribute modifiers, saved with the player so extra hearts survive relogging. Removing the mod leaves them on old saves | `effect/StatEffects` |
+| Power / Tempo / Speed | Power +0.06 damage per point; Tempo and Speed +1% per point of the base value (2x at 100) | `effect/StatEffects` |
+| Titan Hide | Armor slots all empty → (Defense armor + 2) × 2, +50% move speed, −70% fall damage. The 2x knockback drawback comes with the Armor chunk | `effect/StatEffects` |
+| Hub layout | Stats left, Majors right as a grid in data `sort` order; trees shown in each tooltip | `client/gui/HubScreen` |
+| Major controls | Click: buy / switch on-off. Right-click: refund. Conflicts open a swap prompt | `client/gui/HubScreen` |
+
 ## Still open (need a design call)
 
 - Combat effect sizes: Marksman, Predator, Bloodlust, Overkill, First Strike (I'll propose numbers).

@@ -1,0 +1,38 @@
+name: api-dump
+on:
+  push:
+    branches: [ci/api-dump]
+jobs:
+  dump:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - run: chmod +x ./gradlew && ./gradlew printClasspath --no-configuration-cache -q
+      - name: javap
+        run: |
+          CP="$(cat build/cp.txt)"
+          dump() { echo "=== $1"; javap -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | { if [ -n "$2" ]; then grep -E "class |interface |$2"; else cat; fi; }; }
+          {
+          dump net.minecraft.client.Minecraft 'Screen|screen|gui|Window|getWindow|options|keyboard|mouse'
+          dump 'com.mojang.blaze3d.platform.InputConstants$Key'
+          dump 'com.mojang.blaze3d.platform.InputConstants$Type'
+          dump 'net.minecraft.client.KeyMapping$Category'
+          dump net.minecraft.client.gui.components.Renderable
+          dump net.minecraft.world.entity.player.Player 'experience|Experience|getInventory|isCreative|isSpectator'
+          dump net.minecraft.server.level.ServerPlayer 'restoreFrom|connection|getStringUUID|getUUID'
+          dump net.minecraft.client.gui.GuiGraphicsExtractor 'class |pose|enableScissor'
+          dump net.minecraft.network.chat.Component 'translatable|literal|empty|translatableWithFallback'
+          dump net.minecraft.network.chat.MutableComponent 'withStyle|append|withColor'
+          dump net.minecraft.util.Util 'getMillis|getNanos'
+          dump net.minecraft.client.gui.components.AbstractWidget 'extractWidgetRenderState|playDownSound'
+          dump net.minecraft.world.entity.LivingEntity 'heal|isAlive|isDeadOrDying'
+          } > dump.txt 2>&1
+          wc -c dump.txt
+      - name: publish as annotations (1)
+        run: python3 emit.py 0 30
+      - name: publish as annotations (2)
+        run: python3 emit.py 30 50

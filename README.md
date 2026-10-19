@@ -29,10 +29,13 @@ Built in chunks. Done so far:
   and the Combat Majors, including the ones with controls (Charge Attack, Catch!, Assault Rifle,
   Lightning Summon) and Copycat.
 
-Every push also boots a test server and runs game tests for the Armor, Utility and Combat mechanics, and
-boots a real client into a world (client-test workflow).
+- **Chunk 6 — Misc:** Misc XP from collected XP orbs, Wisdom / Speed / Endurance, and 11 of the 13 Misc
+  Majors (Iron Stomach, Selective Cleansing, XP Insurance, Second Serving, Water to Wine, Overdose,
+  Hoarder's Pocket, Rainbow, Become My Fuel, Overenchant, Ascension). Stack Overflow and Rune Embedding are
+  hidden until their own chunk (they need deeper inventory/enchantment work).
 
-Next: Misc.
+Every push also boots a test server and runs game tests for the Armor, Utility, Combat and Misc mechanics,
+and boots a real client into a world (client-test workflow).
 
 ## Getting the jar
 
@@ -48,13 +51,17 @@ in Controls. In the hub:
   **On/Off** to switch a stat without losing points.
 - Majors on the right: click to buy, click an owned one to switch it on/off, right-click to refund.
   Glowing = on, dim = owned but off, dark = not owned. Hover for details.
-- **Spend XP** levels the category with vanilla XP (Utility and Armor also level from playing now).
+- **Spend XP** levels the category with vanilla XP (every category also levels from playing now).
 - Vein Mining and Timber: hold **sneak** while breaking to skip them for that block.
 - Copycat: **shift-click** an owned weapon Major in the hub to copy it; shift-click Copycat to stop.
 - Combat controls (rebindable in Controls → Bloom Level-Up): **hold left click** to charge (Charge
   Attack / Heavy Hands), **right click** with a sword/axe/mace to throw it (Catch!), **sneak + left click**
   with a trident to call lightning (Lightning Summon), **sneak while releasing** a trident to riptide
   (Unrestricted Riptide).
+- Hoarder's Pocket: the **chest button** under the hub button in your inventory, `/bloom pocket`, or bind
+  **Open Hoarder's Pocket** in Controls.
+- Ascension: **double-tap jump** to fly, like creative.
+- Become My Fuel: hold the weapon in your **main hand** and drink a harmful potion from your **off hand**.
 
 Admin commands are still there for testing:
 
@@ -67,6 +74,7 @@ Admin commands are still there for testing:
 | `/bloom fund <category> <xp>` | Spend vanilla XP to level a category below 100 |
 | `/bloom invest <category> <count>` | Buy permanent post-100 points (after mastering a category) |
 | `/bloom bloomreset confirm` | Bloom+ reset |
+| `/bloom pocket` | Open Hoarder's Pocket |
 | `/bloom admin xp <players> <category> <amount>` · `/bloom admin definitions` | Ops: grant XP, show loaded data + warnings |
 
 ## For pack makers
@@ -77,7 +85,8 @@ Admin commands are still there for testing:
 - Tags that decide what counts (all under `bloomlevelup:`): blocks `vein_mineable`, `timber_logs`,
   `timber_leaves`, `yield_eligible`, `excavation_treasure`, `growth_aura_crops`, `mature_only`, `xp_column`;
   items `armor/light|medium|heavy`, `weapon/sword|axe|bow|crossbow|trident|mace|spear|blade|blunt`,
-  `food/meat`, `utility_tools`; entity types `bosses`, `no_combat_xp`; damage types
+  `food/meat`, `food/unsafe`, `food/vegetables`, `food/cleanse_excluded`, `pocket_blocked`, `rainbow_ammo`,
+  `utility_tools`; entity types `bosses`, `no_combat_xp`; damage types
   `dodgeable`, `elemental`, `melee`, `blade`, `blunt`; effects `damage_over_time`, `unyielding_ignored`
 - Shovel treasure: loot table `bloomlevelup:gameplay/excavation_treasure`
 - Tuning: `config/bloomlevelup.json`

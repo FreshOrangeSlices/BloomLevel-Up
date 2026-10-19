@@ -283,7 +283,7 @@ public class MiscGameTests {
 		ItemStack bow = new ItemStack(Items.BOW);
 		ItemStack spectral = new ItemStack(Items.SPECTRAL_ARROW, 3);
 		player.setItemInHand(InteractionHand.MAIN_HAND, bow);
-		player.getInventory().add(spectral);
+		player.setItemInHand(InteractionHand.OFF_HAND, spectral); // (Inventory.add would move the stack and empty ours)
 
 		ItemStack shot = ProjectileWeaponItemInvoker.bloomlevelup$useAmmo(bow, spectral, player, false);
 		helper.assertFalse(shot.isEmpty(), "Fired a round");

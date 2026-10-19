@@ -149,12 +149,32 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Assault Rifle | Loading fills a 16-round magazine from your arrows (or fireworks); each click fires one round and holding right click keeps firing (about 5 shots a second); it reloads normally once empty | config `assaultRifleMagazine` |
 | Copycat | In the hub, shift-click an owned weapon Major to copy it; shift-click Copycat to stop. Copied effects keep their costs and drawbacks and switch off with their source. Long Reach is allowed as a source for now | `ProgressionService.selectCopySource` |
 
+## Chunk 6 — Misc
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Misc XP (docs: TBD curve) | 0.25 Misc XP per point of vanilla XP in each collected orb, counted before Wisdom and Mending. With the shared curve (~54k XP to 100) that is ~218k orb XP: about a week of an hour or two a day at a good XP farm | config `miscXpPerOrbPoint` |
+| Wisdom | Orb XP x(1 + 4% per point): 3x at 50, 5x at 100. Applies to the XP left after Mending; fractions are rolled | `StatFormulas.wisdomMultiplier` |
+| Endurance | Food exhaustion x 1/(1 + 0.5 x points/100): saturation and hunger last 1.5x as long at 100 | `StatFormulas.enduranceExhaustionFactor` |
+| Iron Stomach | Unsafe food = tag `bloomlevelup:food/unsafe` (rotten flesh, spider eye, pufferfish, poisonous potato, raw meat and fish, plus `c:foods/raw_meat`, `raw_fish`, `food_poisoning`). Its harmful effects never land, and it fills at least 6 hunger / 7.2 saturation (cooked chicken) | tag + config `ironStomach*` |
+| Selective Cleansing | Milk (anything that "clears all effects" when consumed) clears only harmful effects. Vegetables = tag `food/vegetables` (carrots, golden carrots, potatoes, baked potatoes, beetroot, beetroot soup, `c:foods/vegetable`), minus `food/cleanse_excluded` (apples, berries) | tags |
+| XP Insurance | Vanilla drops min(7 x level, 100) XP as orbs and destroys the rest; half of the destroyed part comes back on respawn (level 30: 647 of 1295). Nothing happens with keepInventory | config `xpInsuranceShare` |
+| Water to Wine | New timed effects (buffs and debuffs) last at least 10 minutes; instant and infinite effects untouched. The effects it stretched are remembered on the player (saved), and switching it off, refunding it or Bloom+ cuts only those to 2 minutes left | config `waterToWine*` |
+| Overdose | Re-applying an effect you already have at the same level or higher climbs one level, up to 2 above the incoming effect (Speed I → II → III). Beacon and conduit (ambient) effects never climb, or a beacon would keep you at +2 forever | config `overdoseMaxBoost` |
+| Hoarder's Pocket | 9 slots saved on the player (kept through death, travel, refunds and Bloom+). Opens as a one-row chest from a chest button under the hub button, `/bloom pocket`, or an unbound key. Without the Major it still opens if anything is inside, take-out only, so nothing is stranded. Blocked: anything with container or bundle contents, plus tag `pocket_blocked` | `HoardersPocket` |
+| Rainbow | Bows and crossbows don't use up anything in tag `rainbow_ammo` (all arrows incl. tipped/spectral, and fireworks); you still need one in your inventory. Requires Crossbow Infinity | tag |
+| Become My Fuel (confirmed: main hand, drinking only) | Drinking a potion from the off hand imprints its first harmful non-instant effect (at the potion's level) on the main-hand weapon (any weapon family). Overwrites the old one. Every weapon hit (melee, arrows and thrown weapons from it) applies it for 10 s, whoever holds the weapon. Shown in the tooltip | config `fuelEffectTicks` |
+| Overenchant | In the anvil, enchantment caps rise to 8 (modded caps above 8 stay) and "Too Expensive!" never blocks; you still pay the levels | config `overenchantMaxLevel` |
+| Ascension (confirmed: double jump) | Creative-style flight in survival/adventure. Damage while flying takes flight away until you touch ground or water. Side effect of vanilla flight: no fall damage while you can fly | `MiscSkill.updateFlight` |
+| Stack Overflow / Rune Embedding | Not built yet; flagged `disabled` so they're hidden and can't be bought. Stack Overflow needs every stack codec, container and packet to accept 300; Rune Embedding needs its own slot UI and an enchantment-effect bridge | Major JSON `flags` |
+
 ## Still open (need a design call)
 
 - Combat numbers marked "proposed" above: Marksman, Predator, Bloodlust, Overkill, First Strike, Lightning radius, Unrestricted Riptide's sneak control.
 - Long Reach as a Copycat source.
 - License; the other mods in the modpack.
-- Default vegetable / rune / ammo tags.
+- Default rune tags (Rune Embedding). Vegetable, unsafe-food and ammo tags have first-pass defaults above.
+- Misc XP rate (0.25 per orb point) and whether Ascension's flight should also cancel fall damage.
 - Medium armor's shield-disable reduction (needs a shield cooldown hook).
 
 ## Hub UI requirements (from FreshOrangeSlices, for the hub chunk)

@@ -19,32 +19,32 @@ jobs:
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           {
-          code net.minecraft.world.entity.ExperienceOrb 'void playerTouch'
-          dump net.minecraft.world.entity.ExperienceOrb 'repairPlayerItems|getValue|count|playerTouch'
-          dump net.minecraft.world.entity.player.Player 'canEat|causeFoodExhaustion|giveExperiencePoints|totalExperience|experienceLevel|experienceProgress|onUpdateAbilities|getAbilities|getXpNeededForNextLevel|eat[(]|isHurt|openMenu'
-          dump net.minecraft.world.food.FoodData
-          dump net.minecraft.world.food.FoodProperties
-          dump net.minecraft.world.item.alchemy.PotionContents 'getAllEffects|forEachEffect|class '
-          dump 'net.minecraft.core.component.DataComponentType$Builder'
-          dump net.minecraft.core.component.DataComponentType 'builder|class '
-          dump net.minecraft.core.registries.BuiltInRegistries 'DATA_COMPONENT_TYPE|MENU|class '
-          dump net.minecraft.world.inventory.AnvilMenu
-          code net.minecraft.world.inventory.AnvilMenu 'void createResult'
-          dump net.minecraft.world.inventory.ItemCombinerMenu 'player|class '
-          dump net.minecraft.world.entity.player.Abilities
-          dump net.minecraft.world.inventory.ChestMenu 'ChestMenu[(]|oneRow|class '
-          dump net.minecraft.world.inventory.MenuType 'GENERIC_9x1|class '
-          dump net.minecraft.world.SimpleMenuProvider
-          dump net.minecraft.world.SimpleContainer 'SimpleContainer[(]|setItem|getItem|canPlaceItem|setChanged|getContainerSize|class '
-          dump net.minecraft.world.item.ItemStack 'OPTIONAL_CODEC|CODEC|OPTIONAL_STREAM_CODEC'
-          dump net.minecraft.world.effect.MobEffectInstance 'isInfiniteDuration|getAmplifier|isAmbient|isVisible|showIcon|getDuration|MobEffectInstance[(]|is[(]|getEffect|endsWithin|INFINITE'
-          dump net.minecraft.world.entity.LivingEntity 'removeEffect|getActiveEffects|getEffect[(]|forceAddEffect|hasEffect|removeAllEffects|removeEffectsCuredBy'
-          dump net.minecraft.world.item.Items 'MILK_BUCKET|POTION;|SPLASH|ROTTEN_FLESH|SPIDER_EYE|CARROT;|BEETROOT;|POISONOUS|PUFFERFISH'
-          dump net.minecraft.world.item.component.Consumable 'onConsume|class '
-          dump net.minecraft.world.item.component.TooltipDisplay 'class '
-          dump net.minecraft.network.codec.ByteBufCodecs 'VAR_INT|class '
-          dump net.minecraft.world.entity.player.Inventory 'placeItemBackInInventory|countItem'
-          dump net.minecraft.server.level.ServerPlayer 'openMenu|onUpdateAbilities|restoreFrom|giveExperienceLevels|setExperiencePoints|setExperienceLevels'
+          code net.minecraft.world.item.consume_effects.ClearAllStatusEffectsConsumeEffect 'apply'
+          code net.minecraft.world.food.FoodProperties 'onConsume'
+          dump net.minecraft.world.effect.MobEffect 'CODEC|STREAM_CODEC|getCategory|isInstant|isBeneficial|class '
+          dump net.minecraft.world.effect.MobEffectInstance 'withScaledDuration|copyBlendState|update|getParticleOptions|Details'
+          dump net.minecraft.world.entity.LivingEntity 'addEffect|canBeAffected|onEffectAdded|onEffectUpdated'
+          dump net.minecraft.world.inventory.AbstractContainerMenu 'AbstractContainerMenu[(]|addStandardInventorySlots|addInventory|moveItemStackTo|addSlot|quickMoveStack|stillValid|removed|getType|class '
+          dump net.minecraft.world.inventory.Slot 'Slot[(]|mayPlace|mayPickup|getMaxStackSize|class '
+          dump net.minecraft.world.item.component.ItemContainerContents
+          dump net.minecraft.world.entity.projectile.arrow.AbstractArrow 'getWeaponItem|getPickupItem|firedFromWeapon|class '
+          dump net.minecraft.client.gui.GuiGraphicsExtractor '[Ii]tem'
+          code net.minecraft.client.gui.screens.inventory.AnvilScreen 'extract|render'
+          dump net.minecraft.client.gui.screens.inventory.AnvilScreen
+          code net.minecraft.world.entity.player.Player 'getBaseExperienceReward|int getExperienceReward'
+          dump net.minecraft.world.entity.player.Player 'take[(]|getBaseExperienceReward|ExperienceReward|causeFallDamage'
+          dump net.minecraft.world.item.enchantment.Enchantment 'getMaxLevel|canEnchant|isSupportedItem|class '
+          dump net.minecraft.tags.ItemTags 'BUNDLES|SHULKER|class '
+          dump net.minecraft.world.inventory.MenuConstructor
+          dump net.minecraft.core.NonNullList 'withSize|class '
+          dump net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
+          dump net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents 'COPY_FROM|AFTER_RESPAWN|class |interface '
+          dump 'net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents$CopyFrom'
+          dump net.minecraft.world.level.gamerules.GameRules 'KEEP_INVENTORY|class '
+          dump net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect 'apply|class '
+          dump net.minecraft.world.entity.player.Player 'hasInfiniteMaterials|isCreative|getFoodData'
+          dump net.minecraft.world.level.GameType 'isSurvival|isCreative|class '
+          dump net.minecraft.server.level.ServerPlayerGameMode 'getGameModeForPlayer|isSurvival|class '
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

@@ -65,6 +65,7 @@ import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
 import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor;
+import com.freshorangeslices.bloomlevelup.mixin.EntityAccessor;
 import com.freshorangeslices.bloomlevelup.mixin.PlayerInvoker;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
@@ -269,7 +270,7 @@ public final class CombatSkill {
 	}
 
 	private static boolean isBoss(LivingEntity entity) {
-		return entity.getType().is(BOSSES);
+		return entity.is(BOSSES);
 	}
 
 	// ------------------------------------------------------------------ the swing (Fabric: start of Player.attack)
@@ -476,7 +477,7 @@ public final class CombatSkill {
 	}
 
 	private static void awardDamageXp(ServerPlayer player, LivingEntity target, float real, float healthBefore) {
-		if (target.getType().is(NO_COMBAT_XP) || (target instanceof Player && !config().combatPvpXp)
+		if (target.is(NO_COMBAT_XP) || (target instanceof Player && !config().combatPvpXp)
 				|| (target instanceof OwnableEntity ownable && ownable.getOwner() == player)) {
 			return;
 		}
@@ -665,7 +666,7 @@ public final class CombatSkill {
 
 		Vec3 push = flat.normalize().scale(strength);
 		victim.push(push.x, 0.1, push.z);
-		victim.hurtMarked = true;
+		((EntityAccessor) victim).bloomlevelup$setHurtMarked(true);
 	}
 
 	private static void auraPulse(ServerLevel level, ServerPlayer player) {
@@ -844,7 +845,7 @@ public final class CombatSkill {
 			Vec3 push = (flat.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 0.0, 0.0) : flat.normalize())
 					.scale(config.windImpactStrength * (1.0 - distance / (radius + 0.5)));
 			victim.push(push.x, 0.5 * config.windImpactStrength, push.z);
-			victim.hurtMarked = true;
+			((EntityAccessor) victim).bloomlevelup$setHurtMarked(true);
 		}
 
 		level.sendParticles(ParticleTypes.GUST_EMITTER_SMALL, player.getX(), player.getY(), player.getZ(), 1, 0.0, 0.0, 0.0, 0.0);

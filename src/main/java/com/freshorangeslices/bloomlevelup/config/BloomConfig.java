@@ -54,6 +54,9 @@ public final class BloomConfig {
 	/** Locked by the Armor doc: blocked hits 1.5x, dodges 2.0x. */
 	public double armorBlockXpMultiplier = 1.5;
 	public double armorDodgeXpMultiplier = 2.0;
+	/** Utility XP per successful fishing catch and per successful shear (block XP lives in data: bloom/xp/blocks). */
+	public double utilityFishingXp = 8.0;
+	public double utilityShearXp = 2.5;
 
 	// ---------------------------------------------------------------- Armor tuning
 
@@ -67,6 +70,29 @@ public final class BloomConfig {
 	public int castleOfStoneRestTicks = 80;
 	/** Brace!: how long the player must crouch still before bracing. */
 	public int braceDelayTicks = 20;
+
+	// ---------------------------------------------------------------- Utility tuning
+
+	/** Vein Mining / Timber safety limits (blocks processed per activation). */
+	public int veinMiningMaxBlocks = 64;
+	public int timberMaxLogs = 256;
+	/** Holding sneak skips Vein Mining and Timber for that block, without opening the hub. */
+	public boolean chainBreakSneakBypass = true;
+	/** Shovel Mastery: Utility stats count this much more while using a shovel (0.20 = +20%). */
+	public double shovelMasteryBonus = 0.20;
+	/** Shovel Mastery treasure: chance per natural dug block for every 100 (boosted) Yield. */
+	public double excavationTreasureChancePer100Yield = 0.04;
+	/** Growth Aura: radius (horizontal / vertical) and the chance per crop per pulse for an extra growth tick. */
+	public int growthAuraRadius = 4;
+	public int growthAuraHeight = 2;
+	public int growthAuraIntervalTicks = 20;
+	public double growthAuraChance = 0.15;
+	/** Master Shearing: chance the target stays shearable; extra durability per shear. */
+	public double masterShearingChance = 0.5;
+	public int masterShearingExtraDurability = 1;
+	/** Triple Catch: total loot rolls per catch and extra rod durability per catch. */
+	public int tripleCatchRolls = 3;
+	public int tripleCatchExtraDurability = 2;
 
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
@@ -92,6 +118,20 @@ public final class BloomConfig {
 		castleOfStoneTicks = Math.max(0, castleOfStoneTicks);
 		castleOfStoneRestTicks = Math.max(1, castleOfStoneRestTicks);
 		braceDelayTicks = Math.max(1, braceDelayTicks);
+		utilityFishingXp = Math.max(0.0, utilityFishingXp);
+		utilityShearXp = Math.max(0.0, utilityShearXp);
+		veinMiningMaxBlocks = Math.max(1, Math.min(4096, veinMiningMaxBlocks));
+		timberMaxLogs = Math.max(1, Math.min(4096, timberMaxLogs));
+		shovelMasteryBonus = Math.max(0.0, shovelMasteryBonus);
+		excavationTreasureChancePer100Yield = Math.max(0.0, excavationTreasureChancePer100Yield);
+		growthAuraRadius = Math.max(0, Math.min(16, growthAuraRadius));
+		growthAuraHeight = Math.max(0, Math.min(8, growthAuraHeight));
+		growthAuraIntervalTicks = Math.max(1, growthAuraIntervalTicks);
+		growthAuraChance = Math.min(1.0, Math.max(0.0, growthAuraChance));
+		masterShearingChance = Math.min(1.0, Math.max(0.0, masterShearingChance));
+		masterShearingExtraDurability = Math.max(0, masterShearingExtraDurability);
+		tripleCatchRolls = Math.max(1, Math.min(10, tripleCatchRolls));
+		tripleCatchExtraDurability = Math.max(0, tripleCatchExtraDurability);
 		return this;
 	}
 }

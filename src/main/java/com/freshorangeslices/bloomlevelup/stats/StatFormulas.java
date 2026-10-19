@@ -36,6 +36,30 @@ public final class StatFormulas {
 		return copies;
 	}
 
+	/**
+	 * Expected-value split of a chance that may exceed 100%: whole rolls plus a fractional chance for one
+	 * more (e.g. 2.3 = 2 guaranteed, 30% for a third). Used by Shovel Mastery treasure.
+	 */
+	public static int rollsFromChance(double chance, RandomGenerator random) {
+		if (!(chance > 0.0)) {
+			return 0;
+		}
+
+		int rolls = (int) Math.floor(chance);
+		double remainder = chance - rolls;
+
+		if (remainder > 0.0 && random.nextDouble() < remainder) {
+			rolls++;
+		}
+
+		return rolls;
+	}
+
+	/** A stat value boosted by a percentage bonus (Shovel Mastery: 100 points at +20% = 120). */
+	public static int boosted(int points, double bonus) {
+		return points <= 0 ? 0 : (int) Math.round(points * (1.0 + Math.max(0.0, bonus)));
+	}
+
 	/** Preservation: backup durability save chance after vanilla Unbreaking fails = p / (p + 100). */
 	public static double preservationSaveChance(int points) {
 		return points <= 0 ? 0.0 : points / (points + 100.0);

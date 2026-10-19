@@ -16,6 +16,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
+import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
 
@@ -40,6 +41,7 @@ public final class StatEffects {
 	private static final Identifier POWER_MOD = BloomLevelUp.id("stat/power");
 	private static final Identifier TEMPO_MOD = BloomLevelUp.id("stat/tempo");
 	private static final Identifier SPEED_MOD = BloomLevelUp.id("stat/speed");
+	private static final Identifier EFFICIENCY_MOD = BloomLevelUp.id("stat/efficiency");
 	private static final Identifier TITAN_SPEED_MOD = BloomLevelUp.id("major/titan_hide_speed");
 	private static final Identifier TITAN_FALL_MOD = BloomLevelUp.id("major/titan_hide_fall");
 	private static final Identifier PROTEIN_MOD = BloomLevelUp.id("major/protein");
@@ -101,7 +103,12 @@ public final class StatEffects {
 		apply(player, Attributes.MOVEMENT_SPEED, SPEED_MOD,
 				service.statValue(profile, SPEED) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 
-		// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback arrives with the Armor chunk.)
+		// Efficiency: +1% block breaking speed per point (2x at 100), Shovel Mastery +20% while holding a shovel.
+		// An attribute so the client's own mining prediction speeds up too.
+		apply(player, Attributes.BLOCK_BREAK_SPEED, EFFICIENCY_MOD,
+				UtilitySkill.efficiency(player) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+
+		// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
 		apply(player, Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 		apply(player, Attributes.FALL_DAMAGE_MULTIPLIER, TITAN_FALL_MOD, titanHide ? -0.7 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 

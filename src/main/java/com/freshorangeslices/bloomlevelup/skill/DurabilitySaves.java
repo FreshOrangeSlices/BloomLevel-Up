@@ -2,18 +2,19 @@ package com.freshorangeslices.bloomlevelup.skill;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.Equippable;
 
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.utility.UtilityIds;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
@@ -26,7 +27,7 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
  * </ul>
  */
 public final class DurabilitySaves {
-	public static final String PRESERVATION = BloomLevelUp.key("utility/preservation");
+	public static final String PRESERVATION = UtilityIds.PRESERVATION;
 
 	private DurabilitySaves() {
 	}
@@ -45,7 +46,14 @@ public final class DurabilitySaves {
 		} else if (stack.has(DataComponents.BLOCKS_ATTACKS)) {
 			chance = StatFormulas.shieldDurabilitySaveChance(service.statValue(profile, ArmorIds.DURABILITY));
 		} else if (stack.is(BloomTags.UTILITY_TOOLS)) {
-			chance = StatFormulas.preservationSaveChance(service.statValue(profile, PRESERVATION));
+			int preservation = service.statValue(profile, PRESERVATION);
+
+			// Shovel Mastery: +20% Preservation on shovels.
+			if (stack.is(ItemTags.SHOVELS) && service.isMajorActive(profile, UtilityIds.SHOVEL_MASTERY)) {
+				preservation = StatFormulas.boosted(preservation, BloomServices.config().shovelMasteryBonus);
+			}
+
+			chance = StatFormulas.preservationSaveChance(preservation);
 		} else {
 			return damage;
 		}

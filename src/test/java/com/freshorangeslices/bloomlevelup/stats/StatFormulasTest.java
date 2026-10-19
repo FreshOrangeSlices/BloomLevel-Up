@@ -123,4 +123,25 @@ class StatFormulasTest {
 		assertEquals(StatFormulas.ArmorStyle.NONE, StatFormulas.fittingStyle(new int[] {3, 3, 3}, 3)); // empty slot
 		assertEquals(StatFormulas.ArmorStyle.NONE, StatFormulas.fittingStyle(new int[] {}, 4)); // nothing classified
 	}
+
+	@Test
+	void rollsFromChanceSplitsWholeAndFraction() {
+		SplittableRandom random = new SplittableRandom(3);
+		assertEquals(0, StatFormulas.rollsFromChance(0.0, random));
+		assertEquals(2, StatFormulas.rollsFromChance(2.0, random));
+		int total = 0;
+
+		for (int i = 0; i < 100_000; i++) {
+			total += StatFormulas.rollsFromChance(0.25, random);
+		}
+
+		assertEquals(0.25, total / 100_000.0, 0.01);
+	}
+
+	@Test
+	void shovelMasteryBoost() {
+		assertEquals(120, StatFormulas.boosted(100, 0.20));
+		assertEquals(0, StatFormulas.boosted(0, 0.20));
+		assertEquals(6, StatFormulas.boosted(5, 0.20));
+	}
 }

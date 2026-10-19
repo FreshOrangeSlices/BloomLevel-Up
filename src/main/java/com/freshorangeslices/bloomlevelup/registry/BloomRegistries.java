@@ -11,6 +11,8 @@ import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill;
+import com.freshorangeslices.bloomlevelup.skill.utility.BlockXpLoader;
+import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 
 /**
  * Single place where the mod hooks into the game. Each later chunk (networking, skills, Majors, effects)
@@ -24,8 +26,10 @@ public final class BloomRegistries {
 		BloomServices.setConfig(ConfigLoader.load());
 		BloomAttachments.init();
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(BloomDataLoader.ID, new BloomDataLoader());
+		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(BlockXpLoader.ID, new BlockXpLoader());
 		BloomCommands.init();
 		BloomSync.init();
 		ArmorSkill.init();
+		UtilitySkill.init();
 	}
 }

@@ -40,6 +40,12 @@ public final class BloomTags {
 	public static final TagKey<Block> TIMBER_LEAVES = block("timber_leaves");
 	public static final TagKey<Block> YIELD_ELIGIBLE = block("yield_eligible");
 	public static final TagKey<Block> GROWTH_AURA_CROPS = block("growth_aura_crops");
+	/** Natural dig blocks that can turn up Shovel Mastery treasure. */
+	public static final TagKey<Block> EXCAVATION_TREASURE = block("excavation_treasure");
+	/** Crops: only give XP / Yield when fully grown, and are never "player placed" (they had to grow). */
+	public static final TagKey<Block> MATURE_ONLY = block("mature_only");
+	/** Stacked plants (sugar cane, cactus...): the natural segments above the broken one count too. */
+	public static final TagKey<Block> XP_COLUMN = block("xp_column");
 
 	private BloomTags() {
 	}

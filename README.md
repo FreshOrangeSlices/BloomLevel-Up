@@ -13,6 +13,8 @@ Built in chunks. Done so far:
   versioned persistent player profile, the full shared progression rule set (levels, stat points, global
   Major Levels, prerequisites, conflicts with swap, toggles, refunds, XP funding, XP Investment, Bloom+),
   config file, and a temporary `/bloom` command front end. Pure-Java core covered by unit tests.
+- **All four categories defined:** 15 stats and 74 Majors (Utility 6, Combat 22, Armor 16, Misc 13) with
+  costs, prerequisites and names. Their actual effects are built category by category later.
 
 Next: networking + the hub screen, then category mechanics one at a time.
 

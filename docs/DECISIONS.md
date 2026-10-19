@@ -22,9 +22,23 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Armor stat toggles | Off until decided (Utility stats are toggleable) | `data/.../category/armor.json` |
 | Multi-rank Majors | One definition per rank with a shared `group`, each rank requires the previous | Major JSON |
 
+## Combat & Misc data
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Weapon Major ranks | Each rank costs 1 and requires the previous rank of the same weapon line | `major/combat/*.json` |
+| Universal prerequisites | "Sword Major 1" etc. means rank 1 of that line (Batter Up! → Full Sweep, Heavy Hands → Charge Attack, Catch! → Unrestricted Riptide, Death From Above → Wind Impact) | Major JSON |
+| Copycat sources | Majors flagged `weapon` are copyable unless also flagged `copycat_ineligible`; Universal Majors are flagged `universal` | Major JSON `flags` |
+| One and the Same | Present but flagged `disabled` (cost 5 placeholder) until the Pet system exists | `major/combat/one_and_the_same.json` |
+| Aura Sword | No prerequisite (docs: TBD) | Major JSON |
+| Long Reach as Copycat source | Allowed for now (docs: TBD) | add `copycat_ineligible` to block |
+| Misc stat toggles | Off (docs only lock toggles for Utility and Combat) | `category/misc.json` |
+| Category pacing | Docs want Combat slowest and Misc second-easiest; the curve is currently shared. Per-category curves arrive with the XP-source chunk | config |
+
 ## Still open (need a design call)
 
 - Exact XP curve and per-activity XP values for each category.
 - Protein! behaviour on refund / Bloom+ (exploit risk).
-- Combat and Misc stat lists and Major pools (docs not received yet).
 - Durability stat → virtual Unbreaking mapping; Heavy knockback value; Castle of Stone rest time (3 or 4 s).
+- Combat numbers: Marksman range curve, Predator/Bloodlust stacks, Overkill transfer/radius, First Strike bonus, Lightning radius, Lightning Summon controls.
+- Misc: Hoarder's Pocket access UX, Become My Fuel with two weapons held, default food/vegetable/rune/ammo tags.

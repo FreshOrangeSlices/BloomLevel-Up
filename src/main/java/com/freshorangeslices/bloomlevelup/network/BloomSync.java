@@ -107,6 +107,7 @@ public final class BloomSync {
 				if (player != null) {
 					StatEffects.refresh(player);
 					sendProfile(player);
+					broadcastNameTag(server, player);
 				}
 			}
 

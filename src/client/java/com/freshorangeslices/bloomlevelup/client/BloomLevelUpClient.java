@@ -6,7 +6,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -33,6 +35,7 @@ import com.freshorangeslices.bloomlevelup.item.FuelImprint;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.SnapshotCodecs;
 import com.freshorangeslices.bloomlevelup.skill.SideBridge;
+import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 
@@ -123,6 +126,7 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 						.withStyle(ChatFormatting.DARK_PURPLE));
 			}
 		});
+		MenuScreens.register(HoardersPocket.MENU, ContainerScreen::new);
 		EntityRendererRegistry.register(BloomEntities.THROWN_WEAPON, context -> new ThrownItemRenderer<>(context, 1.25F, false));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {

@@ -449,6 +449,30 @@ public class MiscGameTests {
 		net.minecraft.world.item.component.ItemContainerContents.CODEC.parse(ops, savedContents).getOrThrow().copyInto(loaded);
 		helper.assertValueEqual(300, loaded.get(0).getCount(), "...and inside container contents");
 
+		// Putting items back into a slot that already holds more than the item's normal max must finish.
+		player.getInventory().placeItemBackInInventory(new ItemStack(Items.ENDER_PEARL, 30), net.minecraft.util.Prediction.SERVER_ONLY);
+		helper.assertValueEqual(280, player.getInventory().getItem(slot).getCount(), "Put-back tops up the big stack (and returns)");
+		player.getInventory().removeItem(slot, 30);
+
+		// The pocket's client-side screen uses the same limit.
+		var clientPocket = new net.minecraft.world.inventory.ChestMenu(HoardersPocket.MENU, 9, player.getInventory(),
+				new HoardersPocket.PocketContainer(player, null), 1);
+		helper.assertValueEqual(300, clientPocket.getSlot(0).getMaxStackSize(new ItemStack(Items.DIRT)), "Pocket slots take 300 on both sides");
+
+		// Dropping a big stack makes normal-size item entities (so hoppers and mobs can't cut it down).
+		player.drop(new ItemStack(Items.COBBLESTONE, 300), false, net.minecraft.util.Prediction.SERVER_ONLY);
+		var drops = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, player.getBoundingBox().inflate(4.0),
+				entity -> entity.getItem().is(Items.COBBLESTONE));
+		int dropped = 0;
+
+		for (var drop : drops) {
+			helper.assertTrue(drop.getItem().getCount() <= 64, "No dropped stack above 64");
+			dropped += drop.getItem().getCount();
+		}
+
+		helper.assertValueEqual(300, dropped, "All 300 dropped");
+		drops.forEach(net.minecraft.world.entity.Entity::discard);
+
 		// Switched off: big stacks split back to vanilla sizes.
 		helper.assertTrue(BloomServices.progression().toggleMajor(BloomAttachments.profile(player), MiscIds.STACK_OVERFLOW).ok(), "Toggle off");
 		MiscSkill.refresh(player);

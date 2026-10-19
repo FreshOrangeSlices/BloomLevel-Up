@@ -2,6 +2,8 @@ package com.freshorangeslices.bloomlevelup.skill.misc;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -9,7 +11,9 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +29,7 @@ import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 
 /**
  * Hoarder's Pocket: 9 personal slots saved on the player, kept through death, dimension travel and Bloom+ /
- * refunds. It opens as a vanilla one-row chest screen, so the client needs nothing special to show it.
+ * refunds. It opens as a one-row chest screen (its own menu type, so big Stack Overflow stacks show right).
  * Without the Major (refunded, Bloom+, switched off) the pocket still opens to take things out, but not to put
  * things in, so nothing is ever stranded.
  */
@@ -35,7 +39,41 @@ public final class HoardersPocket {
 	public static final AttachmentType<ItemContainerContents> CONTENTS = AttachmentRegistry.create(BloomLevelUp.id("hoarders_pocket"),
 			builder -> builder.persistent(ItemContainerContents.CODEC).initializer(() -> ItemContainerContents.EMPTY).copyOnDeath());
 
+	/**
+	 * The pocket's own menu type. On the client it is a plain one-row chest screen whose container uses the same
+	 * per-stack limit as the server, so Stack Overflow's big stacks show (and predict) correctly.
+	 */
+	public static final MenuType<ChestMenu> MENU = Registry.register(BuiltInRegistries.MENU, BloomLevelUp.id("hoarders_pocket"),
+			new MenuType<>((id, inventory) -> new ChestMenu(HoardersPocket.MENU, id, inventory, new PocketContainer(inventory.player, null), 1),
+					FeatureFlags.VANILLA_SET));
+
 	private HoardersPocket() {
+	}
+
+	/** The pocket's 9 slots: Stack Overflow's limit applies (so setItem never trims a big stack). */
+	public static final class PocketContainer extends SimpleContainer {
+		private final Player owner;
+		private final Runnable onChange;
+
+		public PocketContainer(Player owner, Runnable onChange) {
+			super(SIZE);
+			this.owner = owner;
+			this.onChange = onChange;
+		}
+
+		@Override
+		public int getMaxStackSize(ItemStack stack) {
+			return StackOverflow.limit(this.owner, stack, super.getMaxStackSize(stack));
+		}
+
+		@Override
+		public void setChanged() {
+			super.setChanged();
+
+			if (this.onChange != null) {
+				this.onChange.run();
+			}
+		}
 	}
 
 	public static void init() {
@@ -77,27 +115,15 @@ public final class HoardersPocket {
 	/** Same slot layout as vanilla's one-row chest (pocket 0-8, then the inventory, then the hotbar). */
 	public static final class PocketMenu extends AbstractContainerMenu {
 		private final Player owner;
-		private final SimpleContainer container;
+		private final PocketContainer container;
 		private final boolean canDeposit;
 
 		public PocketMenu(int id, Inventory inventory, Player owner, boolean canDeposit) {
-			super(MenuType.GENERIC_9x1, id);
+			super(MENU, id);
 			this.owner = owner;
 			this.canDeposit = canDeposit;
 			NonNullList<ItemStack> stored = items(owner);
-			this.container = new SimpleContainer(SIZE) {
-				@Override
-				public void setChanged() {
-					super.setChanged();
-					save();
-				}
-
-				// Stack Overflow reaches the pocket too (and setItem would otherwise trim big stacks).
-				@Override
-				public int getMaxStackSize(ItemStack stack) {
-					return StackOverflow.limit(owner, stack, super.getMaxStackSize(stack));
-				}
-			};
+			this.container = new PocketContainer(owner, this::save);
 
 			for (int i = 0; i < SIZE; i++) {
 				this.container.getItems().set(i, stored.get(i));
@@ -108,11 +134,6 @@ public final class HoardersPocket {
 					@Override
 					public boolean mayPlace(ItemStack stack) {
 						return canDeposit && allowed(stack);
-					}
-
-					@Override
-					public int getMaxStackSize(ItemStack stack) {
-						return StackOverflow.limit(owner, stack, super.getMaxStackSize(stack));
 					}
 				});
 			}
@@ -130,7 +151,7 @@ public final class HoardersPocket {
 			store(this.owner, copy);
 		}
 
-		public SimpleContainer container() {
+		public PocketContainer container() {
 			return this.container;
 		}
 

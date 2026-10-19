@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 
 import com.freshorangeslices.bloomlevelup.skill.ConsumeContext;
 
+/** Marks "this player is eating/drinking" for the Armor/Misc effect rules; Misc's after-meal effects run at the end. */
 @Mixin(Consumable.class)
 abstract class ConsumableMixin {
 	@Inject(method = "onConsume", at = @At("HEAD"))

@@ -11,11 +11,14 @@ import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
 import com.freshorangeslices.bloomlevelup.effect.HeldItemWatcher;
 import com.freshorangeslices.bloomlevelup.entity.BloomEntities;
+import com.freshorangeslices.bloomlevelup.item.BloomComponents;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
+import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 import com.freshorangeslices.bloomlevelup.skill.utility.BlockXpLoader;
 import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 
@@ -32,6 +35,8 @@ public final class BloomRegistries {
 		BloomAttachments.init();
 		BloomEffects.init();
 		BloomEntities.init();
+		BloomComponents.init();
+		HoardersPocket.init();
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(BloomDataLoader.ID, new BloomDataLoader());
 		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(BlockXpLoader.ID, new BlockXpLoader());
 		BloomCommands.init();
@@ -40,6 +45,7 @@ public final class BloomRegistries {
 		UtilitySkill.init();
 		CombatSkill.init();
 		CombatAbilities.init();
+		MiscSkill.init();
 		HeldItemWatcher.init();
 	}
 }

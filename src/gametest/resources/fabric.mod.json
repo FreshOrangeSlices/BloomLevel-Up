@@ -1,20 +1,21 @@
 {
-	"schemaVersion": 1,
-	"id": "bloomlevelup-gametest",
-	"version": "1.0.0",
-	"name": "Bloom Level-Up GameTests",
-	"environment": "*",
-	"entrypoints": {
-		"fabric-gametest": [
-			"com.freshorangeslices.bloomlevelup.gametest.ArmorGameTests",
-			"com.freshorangeslices.bloomlevelup.gametest.UtilityGameTests",
-			"com.freshorangeslices.bloomlevelup.gametest.CombatGameTests"
-		],
-		"fabric-client-gametest": [
-			"com.freshorangeslices.bloomlevelup.gametest.client.BloomClientGameTests"
-		]
-	},
-	"depends": {
-		"bloomlevelup": "*"
-	}
+  "schemaVersion": 1,
+  "id": "bloomlevelup-gametest",
+  "version": "1.0.0",
+  "name": "Bloom Level-Up GameTests",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "com.freshorangeslices.bloomlevelup.gametest.ArmorGameTests",
+      "com.freshorangeslices.bloomlevelup.gametest.UtilityGameTests",
+      "com.freshorangeslices.bloomlevelup.gametest.CombatGameTests",
+      "com.freshorangeslices.bloomlevelup.gametest.MiscGameTests"
+    ],
+    "fabric-client-gametest": [
+      "com.freshorangeslices.bloomlevelup.gametest.client.BloomClientGameTests"
+    ]
+  },
+  "depends": {
+    "bloomlevelup": "*"
+  }
 }

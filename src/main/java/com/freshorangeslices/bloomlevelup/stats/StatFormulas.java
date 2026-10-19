@@ -274,4 +274,77 @@ public final class StatFormulas {
 		double counted = Math.max(0.0, Math.min(realDamage, healthBefore));
 		return counted * perDamage * multiplier;
 	}
+
+	// ------------------------------------------------------------------ Misc
+
+	/** Wisdom: vanilla XP from orbs x(1 + 4% per point), so 3x at 50 and 5x at 100. */
+	public static double wisdomMultiplier(int points) {
+		return 1.0 + 0.04 * Math.max(0, points);
+	}
+
+	/** An XP amount times a multiplier, with the fraction rolled (1 XP at 1.3x = 1, or 2 with 30%). */
+	public static int scaledXp(int amount, double multiplier, RandomGenerator random) {
+		if (amount <= 0) {
+			return 0;
+		}
+
+		return rollsFromChance(amount * Math.max(0.0, multiplier), random);
+	}
+
+	/** Endurance: food exhaustion x 1/(1 + 0.5 x points/100), so a full bar lasts 1.5x as long at 100. */
+	public static double enduranceExhaustionFactor(int points) {
+		return 1.0 / (1.0 + 0.005 * Math.max(0, points));
+	}
+
+	/** Vanilla: XP points from level L to L+1. */
+	public static int vanillaXpForLevel(int level) {
+		int l = Math.max(0, level);
+
+		if (l >= 30) {
+			return 112 + (l - 30) * 9;
+		}
+
+		return l >= 15 ? 37 + (l - 15) * 5 : 7 + l * 2;
+	}
+
+	/** Vanilla: total XP points held at a level plus a bar progress of 0..1. */
+	public static long vanillaTotalXp(int level, float progress) {
+		long l = Math.max(0, level);
+		long base;
+
+		if (l <= 16) {
+			base = l * l + 6 * l;
+		} else if (l <= 31) {
+			base = (long) Math.floor(2.5 * l * l - 40.5 * l + 360.0);
+		} else {
+			base = (long) Math.floor(4.5 * l * l - 162.5 * l + 2220.0);
+		}
+
+		double bar = Math.max(0.0, Math.min(1.0, progress));
+		return base + Math.round(bar * vanillaXpForLevel(level));
+	}
+
+	/**
+	 * XP Insurance: the share of the XP a death destroys that comes back on respawn. Vanilla drops
+	 * min(7 x level, 100) as orbs you can pick back up; everything else is lost, and that is what's insured.
+	 */
+	public static int insuredXp(int level, float progress, double share) {
+		long total = vanillaTotalXp(level, progress);
+		long dropped = Math.min(7L * Math.max(0, level), 100L);
+		long lost = Math.max(0L, total - dropped);
+		return (int) Math.min(Integer.MAX_VALUE, (long) Math.floor(lost * Math.max(0.0, Math.min(1.0, share))));
+	}
+
+	/**
+	 * Overdose: the amplifier a re-applied effect lands at. If the same effect is already active at the
+	 * incoming level or higher, it climbs one level, but never past incoming + maxBoost (Speed I can be pushed
+	 * to Speed III). A stronger incoming effect simply replaces a weaker one, as in vanilla.
+	 */
+	public static int overdoseAmplifier(int active, int incoming, int maxBoost) {
+		if (active < incoming || active >= incoming + Math.max(0, maxBoost)) {
+			return incoming;
+		}
+
+		return active + 1;
+	}
 }

@@ -17,6 +17,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
@@ -67,6 +68,9 @@ public final class StatEffects {
 		BloomProfile profile = BloomAttachments.profile(player);
 
 		boolean titanHide = service.isMajorActive(profile, TITAN_HIDE) && armorSlotsEmpty(player);
+
+		// Misc: Ascension's flight, and Water to Wine's cut when it's switched off.
+		MiscSkill.refresh(player);
 
 		// Protein!: the meal count belongs to owning the Major; refunding it (or Bloom+) starts over.
 		if (!profile.owns(ArmorIds.PROTEIN) && profile.counter(ArmorIds.PROTEIN_MEALS) != 0) {

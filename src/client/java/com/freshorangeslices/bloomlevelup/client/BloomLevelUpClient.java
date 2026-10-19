@@ -2,14 +2,17 @@ package com.freshorangeslices.bloomlevelup.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.network.chat.Component;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -23,9 +26,14 @@ import com.freshorangeslices.bloomlevelup.client.gui.ClientScreens;
 import com.freshorangeslices.bloomlevelup.entity.BloomEntities;
 import com.freshorangeslices.bloomlevelup.client.gui.HubButton;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
+import com.freshorangeslices.bloomlevelup.client.gui.PocketButton;
+import com.freshorangeslices.bloomlevelup.item.BloomComponents;
+import com.freshorangeslices.bloomlevelup.item.FuelImprint;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.SnapshotCodecs;
 import com.freshorangeslices.bloomlevelup.skill.SideBridge;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 
 /**
  * Client entrypoint: receives snapshots, adds the hub button to the inventory screen and registers the
@@ -33,6 +41,7 @@ import com.freshorangeslices.bloomlevelup.skill.SideBridge;
  */
 public final class BloomLevelUpClient implements ClientModInitializer {
 	private static KeyMapping openHubKey;
+	private static KeyMapping openPocketKey;
 
 	@Override
 	public void onInitializeClient() {
@@ -66,10 +75,20 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 				return;
 			}
 
+			boolean pocket = ClientBloomState.profile() != null && ClientBloomState.profile().owns(MiscIds.HOARDERS_POCKET);
+
 			if (screen instanceof InventoryScreen inventory) {
 				Screens.getWidgets(screen).add(new HubButton(inventory));
+
+				if (pocket) {
+					Screens.getWidgets(screen).add(new PocketButton(inventory));
+				}
 			} else if (screen instanceof CreativeModeInventoryScreen creative) {
 				Screens.getWidgets(screen).add(new HubButton(creative));
+
+				if (pocket) {
+					Screens.getWidgets(screen).add(new PocketButton(creative));
+				}
 			}
 		});
 
@@ -77,10 +96,29 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		openHubKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_hub",
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 
+		openPocketKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_pocket",
+				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
+
 		CombatControls.init(category);
+
+		// Become My Fuel: show what a weapon carries.
+		ItemTooltipCallback.EVENT.register((stack, tooltipContext, flag, lines) -> {
+			FuelImprint fuel = stack.get(BloomComponents.FUEL);
+
+			if (fuel != null) {
+				lines.add(Component.translatable("bloom.misc.fuel.tooltip", MiscSkill.effectName(fuel.effect(), fuel.amplifier()))
+						.withStyle(ChatFormatting.DARK_PURPLE));
+			}
+		});
 		EntityRendererRegistry.register(BloomEntities.THROWN_WEAPON, context -> new ThrownItemRenderer<>(context, 1.25F, false));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			while (openPocketKey.consumeClick()) {
+				if (client.player != null && ClientBloomState.ready()) {
+					PocketButton.open();
+				}
+			}
+
 			while (openHubKey.consumeClick()) {
 				// Key clicks are only registered while no screen is open, so this never replaces another screen.
 				if (client.player != null && ClientBloomState.ready()) {

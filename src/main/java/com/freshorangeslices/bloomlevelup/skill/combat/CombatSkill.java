@@ -74,6 +74,7 @@ import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.skill.SideBridge;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
@@ -536,6 +537,9 @@ public final class CombatSkill {
 				defer(0, () -> disarm(level, target));
 			}
 
+			// Misc / Become My Fuel: the weapon's imprinted effect lands on every hit (it belongs to the weapon).
+			MiscSkill.applyFuel(player, target, weapon);
+
 			// Lightning Shock: one chain at most every 2 seconds, whatever the hit was.
 			if (has(player, CombatIds.LIGHTNING_SHOCK, Family.TRIDENT, weapon)
 					&& level.getGameTime() >= LIGHTNING_READY_AT.getOrDefault(player.getUUID(), 0L)) {
@@ -923,8 +927,16 @@ public final class CombatSkill {
 
 	/** Crossbow Infinity: plain arrows aren't used up (and can't be picked back up). Fireworks/tipped still are. */
 	public static boolean freeAmmo(ItemStack weapon, ItemStack ammo, LivingEntity shooter) {
-		return shooter instanceof ServerPlayer player && Weapons.is(weapon, Family.CROSSBOW) && ammo.is(Items.ARROW)
-				&& active(player, CombatIds.CROSSBOW_INFINITY);
+		if (!(shooter instanceof ServerPlayer player)) {
+			return false;
+		}
+
+		if (Weapons.is(weapon, Family.CROSSBOW) && ammo.is(Items.ARROW) && active(player, CombatIds.CROSSBOW_INFINITY)) {
+			return true;
+		}
+
+		// Misc / Rainbow: every kind of ammo, on bows and crossbows.
+		return MiscSkill.rainbowFreeAmmo(weapon, ammo, player);
 	}
 
 	/** Unrestricted Riptide: sneak while releasing a trident to riptide without the enchantment, anywhere. */

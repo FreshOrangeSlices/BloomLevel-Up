@@ -42,6 +42,7 @@ import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
 import com.freshorangeslices.bloomlevelup.mixin.ProjectileWeaponItemInvoker;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.CombatAction;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
+import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
@@ -73,6 +74,7 @@ public final class CombatAbilities {
 			case CHARGED -> armCharge(player);
 			case SUMMON_LIGHTNING -> summonLightning(player);
 			case THROW -> throwWeapon(player);
+			case OPEN_POCKET -> HoardersPocket.open(player);
 		}
 	}
 

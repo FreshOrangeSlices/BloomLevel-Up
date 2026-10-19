@@ -1,7 +1,7 @@
 package com.freshorangeslices.bloomlevelup.skill;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.server.level.ServerPlayer;
@@ -12,23 +12,32 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 
 /**
  * Tracks "this player is eating/drinking right now" (from the Consumable mixin), so effects caused by food
  * the player chose to eat can be told apart from effects inflicted on them, and counts Protein! meals.
  */
 public final class ConsumeContext {
-	private static final Set<UUID> CONSUMING = new HashSet<>();
+	/** A copy of what each player is consuming right now (the stack itself shrinks while it's eaten). */
+	private static final Map<UUID, ItemStack> CONSUMING = new HashMap<>();
+	private static final Map<UUID, Boolean> FROM_OFFHAND = new HashMap<>();
 
 	private ConsumeContext() {
 	}
 
 	public static boolean isConsuming(ServerPlayer player) {
-		return CONSUMING.contains(player.getUUID());
+		return CONSUMING.containsKey(player.getUUID());
+	}
+
+	/** What the player is eating or drinking right now, or empty. */
+	public static ItemStack consumed(ServerPlayer player) {
+		return CONSUMING.getOrDefault(player.getUUID(), ItemStack.EMPTY);
 	}
 
 	public static void begin(ServerPlayer player, ItemStack stack) {
-		CONSUMING.add(player.getUUID());
+		CONSUMING.put(player.getUUID(), stack.copy());
+		FROM_OFFHAND.put(player.getUUID(), stack == player.getOffhandItem() && stack != player.getMainHandItem());
 
 		// Protein!: every qualifying meat item eaten after buying it counts toward permanent health.
 		BloomProfile profile = BloomAttachments.profile(player);
@@ -40,6 +49,11 @@ public final class ConsumeContext {
 	}
 
 	public static void end(ServerPlayer player) {
-		CONSUMING.remove(player.getUUID());
+		ItemStack consumed = CONSUMING.remove(player.getUUID());
+		boolean fromOffhand = Boolean.TRUE.equals(FROM_OFFHAND.remove(player.getUUID()));
+
+		if (consumed != null) {
+			MiscSkill.afterConsume(player, consumed, fromOffhand);
+		}
 	}
 }

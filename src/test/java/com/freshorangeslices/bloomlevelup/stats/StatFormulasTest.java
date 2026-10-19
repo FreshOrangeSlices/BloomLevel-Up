@@ -189,4 +189,47 @@ class StatFormulasTest {
 		assertEquals(5.0, StatFormulas.combatHitXp(30, 10, 0.5, 1.0), 1e-9);
 		assertEquals(30.0, StatFormulas.combatHitXp(6, 20, 0.5, 10.0), 1e-9);
 	}
+
+	@Test
+	void wisdomAndEndurance() {
+		assertEquals(1.0, StatFormulas.wisdomMultiplier(0), 1e-9);
+		assertEquals(3.0, StatFormulas.wisdomMultiplier(50), 1e-9);
+		assertEquals(5.0, StatFormulas.wisdomMultiplier(100), 1e-9);
+		assertEquals(15, StatFormulas.scaledXp(3, 5.0, new java.util.Random(1)));
+		assertEquals(0, StatFormulas.scaledXp(0, 5.0, new java.util.Random(1)));
+		assertEquals(1.0, StatFormulas.enduranceExhaustionFactor(0), 1e-9);
+		assertEquals(1.0 / 1.5, StatFormulas.enduranceExhaustionFactor(100), 1e-9);
+	}
+
+	@Test
+	void vanillaXpTotalsMatchTheWiki() {
+		assertEquals(7, StatFormulas.vanillaXpForLevel(0));
+		assertEquals(42, StatFormulas.vanillaXpForLevel(16));
+		assertEquals(112, StatFormulas.vanillaXpForLevel(30));
+		assertEquals(0L, StatFormulas.vanillaTotalXp(0, 0.0F));
+		assertEquals(352L, StatFormulas.vanillaTotalXp(16, 0.0F));
+		assertEquals(394L, StatFormulas.vanillaTotalXp(17, 0.0F));
+		assertEquals(1395L, StatFormulas.vanillaTotalXp(30, 0.0F));
+		assertEquals(1507L, StatFormulas.vanillaTotalXp(31, 0.0F));
+		assertEquals(1395L + 56L, StatFormulas.vanillaTotalXp(30, 0.5F));
+	}
+
+	@Test
+	void xpInsuranceReturnsHalfOfWhatIsLost() {
+		// Level 30: 1395 XP held, 100 dropped as orbs, 1295 lost -> 647 back.
+		assertEquals(647, StatFormulas.insuredXp(30, 0.0F, 0.5));
+		// Level 2: 16 XP held, 14 dropped -> 2 lost -> 1 back.
+		assertEquals(1, StatFormulas.insuredXp(2, 0.0F, 0.5));
+		assertEquals(0, StatFormulas.insuredXp(0, 0.0F, 0.5));
+	}
+
+	@Test
+	void overdoseClimbsTwoLevelsAboveTheSource() {
+		assertEquals(1, StatFormulas.overdoseAmplifier(0, 0, 2));
+		assertEquals(2, StatFormulas.overdoseAmplifier(1, 0, 2));
+		assertEquals(0, StatFormulas.overdoseAmplifier(2, 0, 2));
+		assertEquals(3, StatFormulas.overdoseAmplifier(1, 3, 2));
+		assertEquals(0, StatFormulas.overdoseAmplifier(5, 0, 2));
+		assertEquals(0, StatFormulas.overdoseAmplifier(0, 0, 0));
+	}
 }

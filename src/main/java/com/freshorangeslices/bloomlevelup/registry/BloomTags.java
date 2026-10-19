@@ -22,6 +22,16 @@ public final class BloomTags {
 	public static final TagKey<Item> WEAPON_BLUNT = item("weapon/blunt");
 	public static final TagKey<Item> MEAT = item("food/meat");
 	public static final TagKey<Item> UTILITY_TOOLS = item("utility_tools");
+	/** Iron Stomach: raw, rotten and poisonous food that becomes safe (and at least as filling as cooked chicken). */
+	public static final TagKey<Item> FOOD_UNSAFE = item("food/unsafe");
+	/** Selective Cleansing: vegetables that clear negative effects... */
+	public static final TagKey<Item> FOOD_VEGETABLES = item("food/vegetables");
+	/** ...except anything in here (apples and berries, per the design). */
+	public static final TagKey<Item> FOOD_CLEANSE_EXCLUDED = item("food/cleanse_excluded");
+	/** Hoarder's Pocket: storage items that can't go inside (items with container/bundle contents are always blocked). */
+	public static final TagKey<Item> POCKET_BLOCKED = item("pocket_blocked");
+	/** Rainbow: ammunition that bows and crossbows don't use up. */
+	public static final TagKey<Item> RAINBOW_AMMO = item("rainbow_ammo");
 
 	// Damage types
 	public static final TagKey<DamageType> ELEMENTAL = damage("elemental");

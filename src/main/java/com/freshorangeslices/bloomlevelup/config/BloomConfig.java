@@ -163,6 +163,24 @@ public final class BloomConfig {
 	/** Assault Rifle: shots per magazine. */
 	public int assaultRifleMagazine = 16;
 
+	// ---- Misc
+	/** Misc XP per point of vanilla XP collected from orbs (before Wisdom and Mending). */
+	public double miscXpPerOrbPoint = 0.25;
+	/** Iron Stomach: the nutrition/saturation floor for unsafe food (cooked chicken). */
+	public int ironStomachNutrition = 6;
+	public double ironStomachSaturation = 7.2;
+	/** XP Insurance: share of the XP lost on death that comes back. */
+	public double xpInsuranceShare = 0.5;
+	/** Water to Wine: minimum duration of new timed effects, and what's left when it's switched off. */
+	public int waterToWineMinTicks = 12000;
+	public int waterToWineCutTicks = 2400;
+	/** Overdose: how many levels an effect can climb above its source. */
+	public int overdoseMaxBoost = 2;
+	/** Become My Fuel: how long the imprinted effect lasts on each hit. */
+	public int fuelEffectTicks = 200;
+	/** Overenchant: highest enchantment level the anvil can reach. */
+	public int overenchantMaxLevel = 8;
+
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
 		majorLevelEvery = Math.max(1, majorLevelEvery);
@@ -256,6 +274,15 @@ public final class BloomConfig {
 		lightningSummonCooldownTicks = Math.max(0, lightningSummonCooldownTicks);
 		catchThrowSpeed = Math.max(0.5, Math.min(5.0, catchThrowSpeed));
 		assaultRifleMagazine = Math.max(1, Math.min(64, assaultRifleMagazine));
+		miscXpPerOrbPoint = Math.max(0.0, miscXpPerOrbPoint);
+		ironStomachNutrition = Math.max(0, Math.min(20, ironStomachNutrition));
+		ironStomachSaturation = Math.max(0.0, Math.min(20.0, ironStomachSaturation));
+		xpInsuranceShare = clamp01(xpInsuranceShare);
+		waterToWineMinTicks = Math.max(1, waterToWineMinTicks);
+		waterToWineCutTicks = Math.max(1, waterToWineCutTicks);
+		overdoseMaxBoost = Math.max(0, Math.min(10, overdoseMaxBoost));
+		fuelEffectTicks = Math.max(1, fuelEffectTicks);
+		overenchantMaxLevel = Math.max(1, Math.min(255, overenchantMaxLevel));
 		return this;
 	}
 

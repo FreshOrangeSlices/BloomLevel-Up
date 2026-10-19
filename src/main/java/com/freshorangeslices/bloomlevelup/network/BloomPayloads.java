@@ -143,7 +143,9 @@ public final class BloomPayloads {
 		/** Lightning Summon: call lightning where the player is looking. */
 		SUMMON_LIGHTNING,
 		/** Catch!: throw the weapon in the main hand. */
-		THROW
+		THROW,
+		/** Misc / Hoarder's Pocket: open the pocket (the server checks the Major). */
+		OPEN_POCKET
 	}
 
 	/** Client → server: a combat ability key. The server checks the Major, the weapon and cooldowns itself. */

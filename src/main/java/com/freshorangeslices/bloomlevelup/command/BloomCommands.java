@@ -43,6 +43,7 @@ import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.BloomResetResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.progression.XpGainResult;
+import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 
 /**
  * {@code /bloom} — a temporary, text-only front end for the framework so every rule can be exercised in
@@ -116,6 +117,11 @@ public final class BloomCommands {
 											return act(ctx, (svc, p) -> svc.invest(p, id(ctx, "category"),
 													IntegerArgumentType.getInteger(ctx, "count"), new PlayerXpWallet(player)));
 										}))))
+				.then(literal("pocket")
+						.executes(ctx -> {
+							HoardersPocket.open(ctx.getSource().getPlayerOrException());
+							return 1;
+						}))
 				.then(literal("bloomreset")
 						.executes(ctx -> {
 							ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.reset.confirm_hint").withStyle(ChatFormatting.YELLOW), false);

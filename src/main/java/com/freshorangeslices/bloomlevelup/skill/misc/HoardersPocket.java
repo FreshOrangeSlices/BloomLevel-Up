@@ -78,10 +78,12 @@ public final class HoardersPocket {
 	public static final class PocketMenu extends AbstractContainerMenu {
 		private final Player owner;
 		private final SimpleContainer container;
+		private final boolean canDeposit;
 
 		public PocketMenu(int id, Inventory inventory, Player owner, boolean canDeposit) {
 			super(MenuType.GENERIC_9x1, id);
 			this.owner = owner;
+			this.canDeposit = canDeposit;
 			NonNullList<ItemStack> stored = items(owner);
 			this.container = new SimpleContainer(SIZE) {
 				@Override
@@ -131,6 +133,11 @@ public final class HoardersPocket {
 
 			ItemStack stack = slot.getItem();
 			ItemStack original = stack.copy();
+
+			// Take-out-only: vanilla's shift-click merge skips mayPlace, so refuse moving anything in here.
+			if (index >= SIZE && !this.canDeposit) {
+				return ItemStack.EMPTY;
+			}
 
 			if (index < SIZE) {
 				if (!this.moveItemStackTo(stack, SIZE, this.slots.size(), true)) {

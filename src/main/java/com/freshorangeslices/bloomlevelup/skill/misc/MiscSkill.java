@@ -2,7 +2,6 @@ package com.freshorangeslices.bloomlevelup.skill.misc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +54,7 @@ import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 import com.freshorangeslices.bloomlevelup.skill.ConsumeContext;
 import com.freshorangeslices.bloomlevelup.skill.SideBridge;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
@@ -68,8 +68,11 @@ public final class MiscSkill {
 	public static final AttachmentType<List<String>> WINE_EXTENDED = AttachmentRegistry.create(BloomLevelUp.id("wine_extended"),
 			builder -> builder.persistent(Codec.STRING.listOf()).initializer(List::of));
 
-	/** Ascension: players knocked out of the sky, until they land. */
-	private static final Set<UUID> GROUNDED = new HashSet<>();
+	/** Water to Wine: what the current addEffect call would mean, settled once the call returns. */
+	private record PendingWine(String effectId, boolean stretched, int amplifier, int duration) {
+	}
+
+	private static final Map<UUID, PendingWine> PENDING_WINE = new HashMap<>();
 	/** XP Insurance: what came back, announced once the player has respawned. */
 	private static final Map<UUID, Integer> INSURED = new HashMap<>();
 
@@ -94,11 +97,11 @@ public final class MiscSkill {
 		});
 		ServerTickEvents.END_SERVER_TICK.register(MiscSkill::tick);
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
-			GROUNDED.remove(listener.player.getUUID());
+			PENDING_WINE.remove(listener.player.getUUID());
 			INSURED.remove(listener.player.getUUID());
 		});
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
-			GROUNDED.clear();
+			PENDING_WINE.clear();
 			INSURED.clear();
 		});
 	}
@@ -279,19 +282,40 @@ public final class MiscSkill {
 			}
 		}
 
-		// Water to Wine: every new timed effect lasts at least 10 minutes. Remember which ones it stretched.
-		if (!result.isInfiniteDuration() && active(player, MiscIds.WATER_TO_WINE)) {
-			String id = effectId(result.getEffect());
+		// Water to Wine: every new timed effect lasts at least 10 minutes. Whether it stretched this one is
+		// remembered only if it actually lands as the active effect (checked when addEffect returns).
+		PENDING_WINE.remove(player.getUUID());
 
-			if (result.getDuration() < config.waterToWineMinTicks) {
+		if (!result.isInfiniteDuration() && active(player, MiscIds.WATER_TO_WINE)) {
+			boolean stretched = result.getDuration() < config.waterToWineMinTicks;
+
+			if (stretched) {
 				result = copy(result, config.waterToWineMinTicks, result.getAmplifier());
-				setWineMark(player, id, true);
-			} else {
-				setWineMark(player, id, false);
 			}
+
+			PENDING_WINE.put(player.getUUID(), new PendingWine(effectId(result.getEffect()), stretched, result.getAmplifier(), result.getDuration()));
 		}
 
 		return result;
+	}
+
+	/** After addEffect: if the effect Water to Wine looked at is now the active one, (un)mark it accordingly. */
+	public static void afterEffectAdded(LivingEntity entity, MobEffectInstance instance) {
+		if (!(entity instanceof ServerPlayer player) || instance == null) {
+			return;
+		}
+
+		PendingWine pending = PENDING_WINE.remove(player.getUUID());
+
+		if (pending == null || !pending.effectId().equals(effectId(instance.getEffect()))) {
+			return;
+		}
+
+		MobEffectInstance current = player.getEffect(instance.getEffect());
+
+		if (current != null && current.getAmplifier() == pending.amplifier() && current.getDuration() == pending.duration()) {
+			setWineMark(player, pending.effectId(), pending.stretched());
+		}
 	}
 
 	private static MobEffectInstance copy(MobEffectInstance from, int duration, int amplifier) {
@@ -344,12 +368,31 @@ public final class MiscSkill {
 
 			MobEffectInstance instance = player.getEffect(effect.get());
 
-			if (instance != null && !instance.isInfiniteDuration() && instance.getDuration() > cut) {
-				((MobEffectInstanceAccessor) instance).bloomlevelup$setDuration(cut);
+			if (instance == null) {
+				continue;
+			}
 
-				if (player.connection != null) {
-					player.connection.send(new ClientboundUpdateMobEffectPacket(player.getId(), instance, false));
+			boolean changed = false;
+
+			if (!instance.isInfiniteDuration() && instance.getDuration() > cut) {
+				((MobEffectInstanceAccessor) instance).bloomlevelup$setDuration(cut);
+				changed = true;
+			}
+
+			// Weaker copies waiting underneath (vanilla's hidden effects) were stretched too if they're within
+			// Water to Wine's 10 minutes; naturally longer ones are left alone.
+			MobEffectInstance hidden = ((MobEffectInstanceAccessor) instance).bloomlevelup$hiddenEffect();
+
+			while (hidden != null) {
+				if (!hidden.isInfiniteDuration() && hidden.getDuration() > cut && hidden.getDuration() <= config().waterToWineMinTicks) {
+					((MobEffectInstanceAccessor) hidden).bloomlevelup$setDuration(cut);
 				}
+
+				hidden = ((MobEffectInstanceAccessor) hidden).bloomlevelup$hiddenEffect();
+			}
+
+			if (changed && player.connection != null) {
+				player.connection.send(new ClientboundUpdateMobEffectPacket(player.getId(), instance, false));
 			}
 		}
 
@@ -393,10 +436,6 @@ public final class MiscSkill {
 	}
 
 	private static void tick(MinecraftServer server) {
-		if (GROUNDED.isEmpty()) {
-			return;
-		}
-
 		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 			checkLanding(player);
 		}
@@ -404,10 +443,15 @@ public final class MiscSkill {
 
 	/** A grounded Ascension player gets flight back once they touch the ground (or water). */
 	public static void checkLanding(ServerPlayer player) {
-		if (GROUNDED.contains(player.getUUID()) && (player.onGround() || player.isInWater())) {
-			GROUNDED.remove(player.getUUID());
+		if (grounded(player) && supported(player)) {
+			BloomAttachments.profile(player).setCounter(MiscIds.ASCENSION_GROUNDED, 0);
 			updateFlight(player);
 		}
+	}
+
+	/** Standing on something, judged by the server (the client's on-ground flag can't be trusted for this). */
+	private static boolean supported(ServerPlayer player) {
+		return player.isInWater() || player.onClimbable() || !player.level().noCollision(player, player.getBoundingBox().move(0.0, -0.05, 0.0));
 	}
 
 	/** Grants or takes away the double-jump flight Ascension gives (only in survival/adventure). */
@@ -424,7 +468,7 @@ public final class MiscSkill {
 		}
 
 		Abilities abilities = player.getAbilities();
-		boolean want = active(player, MiscIds.ASCENSION) && !GROUNDED.contains(player.getUUID());
+		boolean want = active(player, MiscIds.ASCENSION) && !grounded(player);
 
 		if (want && !abilities.mayfly) {
 			abilities.mayfly = true;
@@ -438,17 +482,22 @@ public final class MiscSkill {
 		}
 	}
 
-	/** Taking damage while flying on Ascension drops you until you're back on the ground. */
+	/**
+	 * Taking damage while flying on Ascension drops you until you're back on the ground. "Flying" also counts
+	 * being airborne by the server's own check, so a client that never reports flying still gets grounded.
+	 */
 	private static void afterDamage(ServerPlayer player) {
-		if (player.getAbilities().flying && BloomAttachments.profile(player).counter(MiscIds.ASCENSION_GRANTED) > 0) {
-			GROUNDED.add(player.getUUID());
+		BloomProfile profile = BloomAttachments.profile(player);
+
+		if (profile.counter(MiscIds.ASCENSION_GRANTED) > 0 && (player.getAbilities().flying || !supported(player))) {
+			profile.setCounter(MiscIds.ASCENSION_GROUNDED, 1);
 			updateFlight(player);
 		}
 	}
 
-	/** For game tests. */
+	/** Grounded by damage until landing (saved, so relogging mid-air doesn't skip the fall). */
 	public static boolean grounded(ServerPlayer player) {
-		return GROUNDED.contains(player.getUUID());
+		return BloomAttachments.profile(player).counter(MiscIds.ASCENSION_GROUNDED) > 0;
 	}
 
 	// ------------------------------------------------------------------ Overenchant (anvil mixins, both sides)
@@ -467,6 +516,6 @@ public final class MiscSkill {
 	/** Rainbow: bows and crossbows don't use up any ammo in the Rainbow tag (you still need one to shoot). */
 	public static boolean rainbowFreeAmmo(ItemStack weapon, ItemStack ammo, ServerPlayer player) {
 		return (Weapons.is(weapon, Weapons.Family.BOW) || Weapons.is(weapon, Weapons.Family.CROSSBOW)) && ammo.is(BloomTags.RAINBOW_AMMO)
-				&& active(player, MiscIds.RAINBOW);
+				&& active(player, MiscIds.RAINBOW) && active(player, CombatIds.CROSSBOW_INFINITY);
 	}
 }

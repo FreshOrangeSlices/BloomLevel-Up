@@ -227,7 +227,7 @@ class StatFormulasTest {
 	void overdoseClimbsTwoLevelsAboveTheSource() {
 		assertEquals(1, StatFormulas.overdoseAmplifier(0, 0, 2));
 		assertEquals(2, StatFormulas.overdoseAmplifier(1, 0, 2));
-		assertEquals(0, StatFormulas.overdoseAmplifier(2, 0, 2));
+		assertEquals(2, StatFormulas.overdoseAmplifier(2, 0, 2));
 		assertEquals(3, StatFormulas.overdoseAmplifier(1, 3, 2));
 		assertEquals(0, StatFormulas.overdoseAmplifier(5, 0, 2));
 		assertEquals(0, StatFormulas.overdoseAmplifier(0, 0, 0));

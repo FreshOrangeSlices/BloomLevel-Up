@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
@@ -41,6 +42,11 @@ abstract class LivingEntityMixin {
 			argsOnly = true)
 	private MobEffectInstance bloomlevelup$miscEffects(MobEffectInstance instance) {
 		return MiscSkill.modifyIncomingEffect((LivingEntity) (Object) this, instance);
+	}
+
+	@Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z", at = @At("RETURN"))
+	private void bloomlevelup$miscEffectLanded(MobEffectInstance instance, Entity source, CallbackInfoReturnable<Boolean> cir) {
+		MiscSkill.afterEffectAdded((LivingEntity) (Object) this, instance);
 	}
 
 	/** Combat: classify the hit and add the bonuses that count as real damage, before any mitigation. */

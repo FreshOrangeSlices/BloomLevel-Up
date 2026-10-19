@@ -26,6 +26,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Blocks;
 
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
@@ -201,6 +202,8 @@ public class MiscGameTests {
 		player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20000, 0));
 		player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0));
 		player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));
+		// A short Haste on top of the long one is stretched but ignored by vanilla: it must not mark Haste.
+		player.addEffect(new MobEffectInstance(MobEffects.HASTE, 200, 0));
 
 		helper.assertValueEqual(12000, player.getEffect(MobEffects.SPEED).getDuration(), "30 s of Speed becomes 10 minutes");
 		helper.assertValueEqual(12000, player.getEffect(MobEffects.WEAKNESS).getDuration(), "Debuffs too");
@@ -271,6 +274,12 @@ public class MiscGameTests {
 		HoardersPocket.PocketMenu again = new HoardersPocket.PocketMenu(2, player.getInventory(), player, false);
 		helper.assertValueEqual(12, again.getSlot(3).getItem().getCount(), "Contents are saved on the player");
 		helper.assertFalse(again.getSlot(0).mayPlace(new ItemStack(Items.DIAMOND)), "Without the Major it's take-out only");
+
+		// Shift-clicking matching items in must not top up the stack either (vanilla's merge skips mayPlace).
+		player.getInventory().setItem(9, new ItemStack(Items.DIAMOND, 5));
+		again.quickMoveStack(player, HoardersPocket.SIZE); // menu slot 9 = inventory slot 9
+		helper.assertValueEqual(12, again.getSlot(3).getItem().getCount(), "Take-out only: no shift-click merge");
+		helper.assertValueEqual(5, player.getInventory().getItem(9).getCount(), "The diamonds stay in the inventory");
 		helper.succeed();
 	}
 
@@ -288,6 +297,12 @@ public class MiscGameTests {
 		ItemStack shot = ProjectileWeaponItemInvoker.bloomlevelup$useAmmo(bow, spectral, player, false);
 		helper.assertFalse(shot.isEmpty(), "Fired a round");
 		helper.assertValueEqual(3, spectral.getCount(), "Rainbow: spectral arrows from a bow aren't used up");
+
+		// Rainbow builds on Crossbow Infinity: switching that off switches Rainbow's free ammo off too.
+		helper.assertTrue(BloomServices.progression().toggleMajor(BloomAttachments.profile(player), CombatIds.CROSSBOW_INFINITY).ok(), "Toggle");
+		ItemStack more = new ItemStack(Items.SPECTRAL_ARROW, 3);
+		ProjectileWeaponItemInvoker.bloomlevelup$useAmmo(bow, more, player, false);
+		helper.assertValueEqual(2, more.getCount(), "No Rainbow without Crossbow Infinity on");
 
 		ServerPlayer plain = player(helper);
 		grant(plain, CombatIds.CROSSBOW_INFINITY);
@@ -369,6 +384,8 @@ public class MiscGameTests {
 	@GameTest
 	public void ascensionFliesAndIsGroundedByDamage(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
+		BlockPos above = helper.absolutePos(new BlockPos(2, 4, 2));
+		player.setPos(above.getX() + 0.5, above.getY(), above.getZ() + 0.5); // in the air
 		grant(player, MiscIds.ASCENSION);
 		helper.assertTrue(player.getAbilities().mayfly, "Ascension grants flight");
 
@@ -378,7 +395,11 @@ public class MiscGameTests {
 		helper.assertFalse(player.getAbilities().flying, "...and drops you");
 		helper.assertTrue(MiscSkill.grounded(player), "Grounded until landing");
 
-		player.setOnGround(true);
+		MiscSkill.checkLanding(player);
+		helper.assertTrue(MiscSkill.grounded(player), "Still in the air: still grounded");
+
+		helper.setBlock(new BlockPos(2, 0, 2), Blocks.STONE);
+		player.setPos(player.getX(), helper.absolutePos(new BlockPos(2, 1, 2)).getY(), player.getZ());
 		MiscSkill.checkLanding(player);
 		helper.assertTrue(player.getAbilities().mayfly, "Landing gives flight back");
 

@@ -24,6 +24,8 @@ public final class MiscIds {
 
 	/** 1 while Ascension is the reason the player may fly (so switching it off only takes away flight it gave). */
 	public static final String ASCENSION_GRANTED = BloomLevelUp.key("misc/ascension_granted");
+	/** 1 while damage has knocked the player out of Ascension's flight, until they land. */
+	public static final String ASCENSION_GROUNDED = BloomLevelUp.key("misc/ascension_grounded");
 
 	private MiscIds() {
 	}

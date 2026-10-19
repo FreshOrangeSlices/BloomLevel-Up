@@ -10,4 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 public interface MobEffectInstanceAccessor {
 	@Accessor("duration")
 	void bloomlevelup$setDuration(int duration);
+
+	@Accessor("hiddenEffect")
+	MobEffectInstance bloomlevelup$hiddenEffect();
 }

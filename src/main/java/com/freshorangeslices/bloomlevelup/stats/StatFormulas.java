@@ -338,13 +338,16 @@ public final class StatFormulas {
 	/**
 	 * Overdose: the amplifier a re-applied effect lands at. If the same effect is already active at the
 	 * incoming level or higher, it climbs one level, but never past incoming + maxBoost (Speed I can be pushed
-	 * to Speed III). A stronger incoming effect simply replaces a weaker one, as in vanilla.
+	 * to Speed III, and more Speed I then refreshes Speed III). A stronger incoming effect simply replaces a
+	 * weaker one, as in vanilla; one already above the cap is left to vanilla too.
 	 */
 	public static int overdoseAmplifier(int active, int incoming, int maxBoost) {
-		if (active < incoming || active >= incoming + Math.max(0, maxBoost)) {
+		int cap = incoming + Math.max(0, maxBoost);
+
+		if (active < incoming || active > cap) {
 			return incoming;
 		}
 
-		return active + 1;
+		return Math.min(active + 1, cap);
 	}
 }

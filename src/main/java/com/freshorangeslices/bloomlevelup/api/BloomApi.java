@@ -1,8 +1,10 @@
 package com.freshorangeslices.bloomlevelup.api;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.XpGainResult;
@@ -35,6 +37,12 @@ public final class BloomApi {
 	}
 
 	public static XpGainResult awardXp(Player player, String categoryId, double amount) {
-		return BloomServices.progression().addXp(BloomAttachments.profile(player), categoryId, amount);
+		XpGainResult result = BloomServices.progression().addXp(BloomAttachments.profile(player), categoryId, amount);
+
+		if (player instanceof ServerPlayer serverPlayer) {
+			BloomSync.changed(serverPlayer);
+		}
+
+		return result;
 	}
 }

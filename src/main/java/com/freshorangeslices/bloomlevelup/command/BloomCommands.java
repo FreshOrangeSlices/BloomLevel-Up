@@ -33,6 +33,7 @@ import com.freshorangeslices.bloomlevelup.definition.CategoryDefinition;
 import com.freshorangeslices.bloomlevelup.definition.DefinitionSet;
 import com.freshorangeslices.bloomlevelup.definition.MajorDefinition;
 import com.freshorangeslices.bloomlevelup.definition.StatDefinition;
+import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.player.CategoryProgress;
@@ -104,8 +105,7 @@ public final class BloomCommands {
 								.then(argument("points", IntegerArgumentType.integer(1))
 										.executes(ctx -> {
 											ServerPlayer player = ctx.getSource().getPlayerOrException();
-											return report(ctx.getSource(), BloomServices.progression().fundWithVanillaXp(
-													BloomAttachments.profile(player), id(ctx, "category"),
+											return act(ctx, (svc, p) -> svc.fundWithVanillaXp(p, id(ctx, "category"),
 													IntegerArgumentType.getInteger(ctx, "points"), new PlayerXpWallet(player)));
 										}))))
 				.then(literal("invest")
@@ -113,8 +113,7 @@ public final class BloomCommands {
 								.then(argument("count", IntegerArgumentType.integer(1))
 										.executes(ctx -> {
 											ServerPlayer player = ctx.getSource().getPlayerOrException();
-											return report(ctx.getSource(), BloomServices.progression().invest(
-													BloomAttachments.profile(player), id(ctx, "category"),
+											return act(ctx, (svc, p) -> svc.invest(p, id(ctx, "category"),
 													IntegerArgumentType.getInteger(ctx, "count"), new PlayerXpWallet(player)));
 										}))))
 				.then(literal("bloomreset")
@@ -142,7 +141,13 @@ public final class BloomCommands {
 
 	private static int act(CommandContext<CommandSourceStack> ctx, Action action) throws CommandSyntaxException {
 		ServerPlayer player = ctx.getSource().getPlayerOrException();
-		return report(ctx.getSource(), action.run(BloomServices.progression(), BloomAttachments.profile(player)));
+		ActionResult result = action.run(BloomServices.progression(), BloomAttachments.profile(player));
+
+		if (result.ok()) {
+			BloomSync.changed(player);
+		}
+
+		return report(ctx.getSource(), result);
 	}
 
 	private static int allocate(CommandContext<CommandSourceStack> ctx, ProgressionService.Pool pool) throws CommandSyntaxException {
@@ -176,6 +181,7 @@ public final class BloomCommands {
 
 		XpGainResult result = BloomServices.progression().addXp(BloomAttachments.profile(target), category,
 				IntegerArgumentType.getInteger(ctx, "amount"));
+		BloomSync.changed(target);
 		ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.xp.granted",
 				target.getDisplayName(), result.levelsGained(), result.newLevel(), result.majorLevelsGranted()), true);
 		return 1;
@@ -183,6 +189,7 @@ public final class BloomCommands {
 
 	private static int bloomReset(CommandSourceStack source, ServerPlayer player) {
 		BloomResetResult result = BloomServices.progression().bloomReset(BloomAttachments.profile(player));
+		BloomSync.changed(player);
 		source.sendSuccess(() -> Component.translatable("bloom.command.reset.done",
 				result.bloomCount(), result.majorLevelsRefunded(), result.totalPrestigeAwarded()).withStyle(ChatFormatting.LIGHT_PURPLE), false);
 		return 1;

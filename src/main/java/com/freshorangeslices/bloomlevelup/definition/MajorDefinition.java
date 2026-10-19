@@ -9,8 +9,8 @@ import java.util.Set;
  * Metadata for a purchasable Major. Behaviour lives in Java handlers keyed by {@link #id()};
  * everything a designer may want to tune (cost, prerequisites, conflicts, icons) lives here.
  *
- * <p>Multi-rank Major lines are modelled as one definition per rank sharing a {@link #group()},
- * with each rank listing the previous rank as a prerequisite. Each rank is its own purchase.
+ * <p>Weapon trees (Sword, Axe, ...) are a shared {@link #group()}; every Major in a tree is an independent
+ * purchase with no rank order between them.
  *
  * @param id            full id, e.g. {@code bloomlevelup:utility/vein_mining}
  * @param categoryId    category page the Major appears on (it can be bought with Major Levels from anywhere)
@@ -18,8 +18,7 @@ import java.util.Set;
  * @param toggleable    whether the owner may switch it off without refunding
  * @param prerequisites Majors that must be owned to purchase this one (ownership only; never revealed in UI)
  * @param conflicts     Majors that cannot be owned at the same time (made symmetric on load)
- * @param group         optional rank-line group id
- * @param rank          rank within the group (1 when not part of a line)
+ * @param group         optional tree id used to group Majors on the page, e.g. {@code bloomlevelup:combat/sword}
  * @param sort          display order on the category page
  * @param icon          optional texture id; presentation only
  * @param effect        optional visual/sound effect id; presentation only
@@ -33,7 +32,6 @@ public record MajorDefinition(
 		List<String> prerequisites,
 		List<String> conflicts,
 		Optional<String> group,
-		int rank,
 		int sort,
 		Optional<String> icon,
 		Optional<String> effect,
@@ -60,12 +58,12 @@ public record MajorDefinition(
 
 	/** Returns a copy with a different conflict list (used when conflicts are symmetrised). */
 	public MajorDefinition withConflicts(List<String> newConflicts) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, newConflicts, group, rank, sort, icon, effect, flags);
+		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, newConflicts, group, sort, icon, effect, flags);
 	}
 
 	/** Returns a copy with a different prerequisite list (used when invalid references are dropped). */
 	public MajorDefinition withPrerequisites(List<String> newPrerequisites) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, newPrerequisites, conflicts, group, rank, sort, icon, effect, flags);
+		return new MajorDefinition(id, categoryId, cost, toggleable, newPrerequisites, conflicts, group, sort, icon, effect, flags);
 	}
 
 	public String translationKey() {

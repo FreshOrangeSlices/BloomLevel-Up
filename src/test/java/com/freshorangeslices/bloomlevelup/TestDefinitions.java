@@ -60,6 +60,6 @@ public final class TestDefinitions {
 	public static MajorDefinition major(String id, String category, int cost, boolean toggleable,
 			List<String> prerequisites, List<String> conflicts) {
 		return new MajorDefinition(id, category, cost, toggleable, prerequisites, conflicts,
-				Optional.empty(), 1, 0, Optional.empty(), Optional.empty(), Set.of());
+				Optional.empty(), 0, Optional.empty(), Optional.empty(), Set.of());
 	}
 }

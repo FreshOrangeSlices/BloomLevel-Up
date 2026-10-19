@@ -71,7 +71,7 @@ public final class DefinitionSet {
 		// Majors: drop disabled / orphaned / negative cost.
 		Map<String, MajorDefinition> majors = new LinkedHashMap<>();
 		List<MajorDefinition> sortedMajors = new ArrayList<>(rawMajors);
-		sortedMajors.sort(Comparator.comparingInt(MajorDefinition::sort).thenComparing(MajorDefinition::rank).thenComparing(MajorDefinition::id));
+		sortedMajors.sort(Comparator.comparingInt(MajorDefinition::sort).thenComparing(MajorDefinition::id));
 
 		for (MajorDefinition major : sortedMajors) {
 			if (major.hasFlag(MajorDefinition.FLAG_DISABLED)) {

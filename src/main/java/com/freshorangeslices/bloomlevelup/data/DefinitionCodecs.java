@@ -30,7 +30,7 @@ public final class DefinitionCodecs {
 	public record RawStat(String name, boolean toggleable, int sort, Optional<String> icon) {
 		public static final Codec<RawStat> CODEC = RecordCodecBuilder.create(i -> i.group(
 				Codec.STRING.fieldOf("name").forGetter(RawStat::name),
-				Codec.BOOL.optionalFieldOf("toggleable", false).forGetter(RawStat::toggleable),
+				Codec.BOOL.optionalFieldOf("toggleable", true).forGetter(RawStat::toggleable),
 				Codec.INT.optionalFieldOf("sort", 0).forGetter(RawStat::sort),
 				Codec.STRING.optionalFieldOf("icon").forGetter(RawStat::icon)
 		).apply(i, RawStat::new));
@@ -64,7 +64,6 @@ public final class DefinitionCodecs {
 			List<String> prerequisites,
 			List<String> conflicts,
 			Optional<String> group,
-			int rank,
 			int sort,
 			Optional<String> icon,
 			Optional<String> effect,
@@ -77,7 +76,6 @@ public final class DefinitionCodecs {
 				Codec.STRING.listOf().optionalFieldOf("prerequisites", List.of()).forGetter(RawMajor::prerequisites),
 				Codec.STRING.listOf().optionalFieldOf("conflicts", List.of()).forGetter(RawMajor::conflicts),
 				Codec.STRING.optionalFieldOf("group").forGetter(RawMajor::group),
-				Codec.INT.optionalFieldOf("rank", 1).forGetter(RawMajor::rank),
 				Codec.INT.optionalFieldOf("sort", 0).forGetter(RawMajor::sort),
 				Codec.STRING.optionalFieldOf("icon").forGetter(RawMajor::icon),
 				Codec.STRING.optionalFieldOf("effect").forGetter(RawMajor::effect),
@@ -94,7 +92,6 @@ public final class DefinitionCodecs {
 					prerequisites.stream().map(s -> qualify(ns, s)).toList(),
 					conflicts.stream().map(s -> qualify(ns, s)).toList(),
 					group.map(s -> qualify(ns, s)),
-					rank,
 					sort,
 					icon,
 					effect,

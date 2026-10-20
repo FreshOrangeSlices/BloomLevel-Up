@@ -277,8 +277,9 @@ public final class CombatControls {
 			send(CombatAction.CHARGED);
 			HitResult hit = minecraft.hitResult;
 
-			// Swing at what's in the crosshair. Never at a block: letting go must not start mining it.
-			if (hit == null || hit.getType() != HitResult.Type.BLOCK) {
+			// Swing at what's in the crosshair. Never at a block (letting go must not start mining it), and not
+			// when the key was "released" by a screen opening.
+			if ((hit == null || hit.getType() != HitResult.Type.BLOCK) && minecraft.gui.screen() == null) {
 				performing = true;
 
 				try {

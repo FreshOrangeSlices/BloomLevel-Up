@@ -374,7 +374,7 @@ public class CombatGameTests {
 	@GameTest
 	public void spearJabCountsAsTheSwing(GameTestHelper helper) {
 		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SPEAR));
-		grant(player, CombatIds.BATTER_UP);
+		grant(player, CombatIds.FULL_SWEEP, CombatIds.BATTER_UP);
 		LivingEntity target = zombie(helper, 3, 3);
 		LivingEntity neighbour = zombie(helper, 3, 4);
 		player.setOnGround(true);

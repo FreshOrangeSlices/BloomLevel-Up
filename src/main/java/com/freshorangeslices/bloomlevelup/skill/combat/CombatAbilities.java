@@ -54,19 +54,30 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
  */
 public final class CombatAbilities {
 	private static final Map<UUID, Long> CHARGED_UNTIL = new HashMap<>();
+	private static final Map<UUID, Long> RIPTIDE_HINT_AT = new HashMap<>();
 
 	private CombatAbilities() {
 	}
 
 	public static void init() {
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> CHARGED_UNTIL.remove(listener.player.getUUID()));
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> CHARGED_UNTIL.clear());
+		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
+			CHARGED_UNTIL.remove(listener.player.getUUID());
+			RIPTIDE_HINT_AT.remove(listener.player.getUUID());
+		});
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+			CHARGED_UNTIL.clear();
+			RIPTIDE_HINT_AT.clear();
+		});
 
 		// Wind Impact: right-clicking the ground with a mace (the block didn't do anything with the click).
 		UseItemCallback.EVENT.register((player, level, hand) -> {
 			if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer serverPlayer
 					&& CombatSkill.windBurst(serverPlayer)) {
 				return InteractionResult.SUCCESS;
+			}
+
+			if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+				riptideHint(serverPlayer, player.getItemInHand(hand));
 			}
 
 			return InteractionResult.PASS;
@@ -88,6 +99,25 @@ public final class CombatAbilities {
 			case THROW -> throwWeapon(player);
 			case OPEN_POCKET -> HoardersPocket.open(player);
 			case OPEN_RUNES -> RuneEmbedding.open(player);
+		}
+	}
+
+	/**
+	 * Unrestricted Riptide is a sneak-release: when a trident without Riptide is raised without sneaking, say so
+	 * on the action bar (at most every 5 minutes).
+	 */
+	private static void riptideHint(ServerPlayer player, ItemStack stack) {
+		if (!Weapons.is(stack, Family.TRIDENT) || player.isShiftKeyDown() || !CombatSkill.active(player, CombatIds.UNRESTRICTED_RIPTIDE)
+				|| net.minecraft.world.item.enchantment.EnchantmentHelper.getTridentSpinAttackStrength(stack, player) > 0.0F) {
+			return;
+		}
+
+		long now = player.level().getGameTime();
+		Long last = RIPTIDE_HINT_AT.get(player.getUUID());
+
+		if (last == null || now - last >= 6000L || now < last) {
+			RIPTIDE_HINT_AT.put(player.getUUID(), now);
+			player.sendSystemMessage(Component.translatable("bloom.combat.riptide_hint").withStyle(ChatFormatting.GRAY), true);
 		}
 	}
 

@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +16,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -63,7 +61,6 @@ public final class CombatControls {
 	private static int holdTicks;
 	private static boolean charged;
 	private static boolean performing;
-	private static boolean riptideHinted;
 
 	private CombatControls() {
 	}
@@ -229,8 +226,6 @@ public final class CombatControls {
 			return;
 		}
 
-		riptideHint(player);
-
 		// Bound to its own key: presses arrive as clicks (vanilla's right click is untouched).
 		if (!onUseKey(minecraft)) {
 			while (skillKey.consumeClick()) {
@@ -294,23 +289,6 @@ public final class CombatControls {
 			}
 		} else if (holdTicks < TAP_TICKS && canThrow(held)) {
 			send(CombatAction.THROW);
-		}
-	}
-
-	/** Unrestricted Riptide is a sneak-release: say so once per use when a plain release would throw. */
-	private static void riptideHint(LocalPlayer player) {
-		ItemStack using = player.isUsingItem() ? player.getUseItem() : ItemStack.EMPTY;
-		boolean trident = Weapons.is(using, Family.TRIDENT);
-
-		if (!trident) {
-			riptideHinted = false;
-			return;
-		}
-
-		if (!riptideHinted && !player.isShiftKeyDown() && active(CombatIds.UNRESTRICTED_RIPTIDE)
-				&& EnchantmentHelper.getTridentSpinAttackStrength(using, player) <= 0.0F) {
-			player.displayClientMessage(Component.translatable("bloom.combat.riptide_hint"), true);
-			riptideHinted = true;
 		}
 	}
 

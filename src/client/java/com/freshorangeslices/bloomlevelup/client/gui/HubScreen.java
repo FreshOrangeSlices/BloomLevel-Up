@@ -75,6 +75,8 @@ public final class HubScreen extends Screen {
 	private int majorScroll;
 	private boolean spendInvested;
 	private int builtVersion = -1;
+	/** What the last click in the Majors grid did (client game test diagnostics). */
+	public static String lastClickForTests = "";
 
 	public HubScreen() {
 		super(Component.translatable("bloom.hub.title"));
@@ -540,17 +542,15 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		CategoryDefinition category = currentCategory();
+		MajorDefinition major = category == null ? null : majorAt(category, event.x(), event.y());
+		lastClickForTests = String.format(Locale.ROOT, "button=%d x=%.1f y=%.1f major=%s", event.button(), event.x(), event.y(),
+				major == null ? "-" : major.id());
+
 		if (super.mouseClicked(event, doubleClick)) {
+			lastClickForTests += " (taken by a widget)";
 			return true;
 		}
-
-		CategoryDefinition category = currentCategory();
-
-		if (category == null) {
-			return false;
-		}
-
-		MajorDefinition major = majorAt(category, event.x(), event.y());
 
 		if (major == null) {
 			return false;
@@ -613,6 +613,28 @@ public final class HubScreen extends Screen {
 		}
 
 		return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+	}
+
+	/** Center of a Major's icon in GUI coordinates, or null if it isn't on this page (client game test). */
+	public int[] majorCenterForTests(String majorId) {
+		CategoryDefinition category = currentCategory();
+
+		if (category == null) {
+			return null;
+		}
+
+		List<MajorDefinition> majors = majors(category);
+		int cols = columns();
+
+		for (int i = 0; i < majors.size(); i++) {
+			if (majors.get(i).id().equals(majorId)) {
+				int x = majorsX + (i % cols) * MAJOR_CELL + (MAJOR_CELL - MAJOR_ICON) / 2;
+				int y = majorsY + 12 + (i / cols) * MAJOR_CELL - majorScroll;
+				return new int[] {x + MAJOR_ICON / 2, y + MAJOR_ICON / 2};
+			}
+		}
+
+		return null;
 	}
 
 	private MajorDefinition majorAt(CategoryDefinition category, double mouseX, double mouseY) {

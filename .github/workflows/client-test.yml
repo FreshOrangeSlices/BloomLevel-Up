@@ -35,7 +35,7 @@ jobs:
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           keep = []
           for i, line in enumerate(lines):
-              if re.search(r'(error:|ERROR|FAILED|What went wrong|Exception|Caused by|AssertionError|Mixin)', line):
+              if re.search(r'(error:|ERROR|FAILED|What went wrong|Exception|Caused by|AssertionError|Mixin|BLOOMTEST)', line):
                   keep.extend(lines[max(0, i - 1):i + 5])
           text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
           chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:20]

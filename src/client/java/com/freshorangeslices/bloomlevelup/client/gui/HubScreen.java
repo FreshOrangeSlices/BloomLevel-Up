@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -157,7 +159,8 @@ public final class HubScreen extends Screen {
 			Action allocate = spendInvested ? Action.ALLOCATE_INVESTED : Action.ALLOCATE_NATURAL;
 			int unspent = spendInvested ? progress.investedUnspent() : progress.naturalUnspent();
 			int inPool = (spendInvested ? progress.invested() : progress.natural()).getOrDefault(stat.id(), 0);
-			int buttonsX = right - (stat.toggleable() ? 30 : 0) - 32;
+			boolean showToggle = spendInvested || stat.toggleable();
+			int buttonsX = right - (showToggle ? 30 : 0) - 32;
 
 			StepButton minus = new StepButton(buttonsX, y + 3, 14, 14, Component.literal("-"),
 					shift -> send(allocate, stat.id(), shift ? -Math.min(10, inPool) : -1));
@@ -171,7 +174,16 @@ public final class HubScreen extends Screen {
 			plus.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.stat.plus")));
 			this.addRenderableWidget(plus);
 
-			if (stat.toggleable()) {
+			if (spendInvested) {
+				// XP Investment mode: this switch only covers the stat's invested points.
+				boolean off = progress.disabledInvested().contains(stat.id());
+				Button toggle = Button.builder(Component.translatable(off ? "bloom.hub.off" : "bloom.hub.on")
+						.withStyle(off ? ChatFormatting.GRAY : ChatFormatting.GREEN), b -> send(Action.TOGGLE_INVESTED, stat.id(), 0))
+						.bounds(right - 28, y + 3, 28, 14).build();
+				toggle.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.invested_toggle")));
+				toggle.active = inPool > 0 || off;
+				this.addRenderableWidget(toggle);
+			} else if (stat.toggleable()) {
 				boolean off = progress.disabledStats().contains(stat.id());
 				Button toggle = Button.builder(Component.translatable(off ? "bloom.hub.off" : "bloom.hub.on")
 						.withStyle(off ? ChatFormatting.GRAY : ChatFormatting.GREEN), b -> send(Action.TOGGLE_STAT, stat.id(), 0))
@@ -186,15 +198,18 @@ public final class HubScreen extends Screen {
 		int cap = ClientBloomState.config().levelCap;
 
 		if (investUnlocked) {
-			this.addRenderableWidget(Button.builder(Component.translatable(spendInvested ? "bloom.hub.pool.invested" : "bloom.hub.pool.natural"),
-					b -> {
+			int modeW = Math.max(60, statsW * 2 / 5);
+			Button mode = Button.builder(Component.translatable(spendInvested ? "bloom.hub.pool.invested" : "bloom.hub.pool.natural")
+					.withStyle(spendInvested ? ChatFormatting.GREEN : ChatFormatting.WHITE), b -> {
 						spendInvested = !spendInvested;
 						this.rebuildWidgets();
-					}).bounds(statsX, buttonY, statsW / 2 - 2, 16).build());
+					}).bounds(statsX, buttonY, modeW, 16).build();
+			mode.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.pool.tooltip")));
+			this.addRenderableWidget(mode);
 
 			long cost = service.investmentCost(progress, 1);
 			Button invest = Button.builder(Component.translatable("bloom.hub.invest", cost), b -> send(Action.INVEST, category.id(), 1))
-					.bounds(statsX + statsW / 2 + 2, buttonY, statsW / 2 - 2, 16).build();
+					.bounds(statsX + modeW + 4, buttonY, statsW - modeW - 4, 16).build();
 			invest.active = playerXpPoints() >= cost;
 			invest.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.invest.tooltip")));
 			this.addRenderableWidget(invest);
@@ -297,6 +312,17 @@ public final class HubScreen extends Screen {
 				: Component.translatable("bloom.hub.xp", (int) progress.xp(), (int) service.xpToNext(progress.level()));
 		g.text(this.font, xpText, statsX, barY + 7, MUTED);
 
+		// Armor: the real total (the vanilla armor bar stops at 20) and what the overcap above 20 adds.
+		if (category.id().equals("bloomlevelup:armor") && this.minecraft.player != null) {
+			double armor = this.minecraft.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR);
+			double overcap = com.freshorangeslices.bloomlevelup.stats.StatFormulas.armorOvercapReduction(armor,
+					ClientBloomState.config().armorOvercapReductionCap);
+			Component armorText = overcap > 0.0
+					? Component.translatable("bloom.hub.armor_total.overcap", fmt(armor), fmt(overcap * 100.0))
+					: Component.translatable("bloom.hub.armor_total", fmt(armor));
+			g.text(this.font, armorText, statsX + statsW - this.font.width(armorText), barY + 7, TEXT);
+		}
+
 		// Global Major Level wallet (right side)
 		Component wallet = Component.translatable("bloom.hub.major_levels", profile.availableMajorLevels(), profile.spentMajorLevels());
 		g.text(this.font, wallet, panelX + panelW - 8 - this.font.width(wallet), y, TEXT);
@@ -311,7 +337,15 @@ public final class HubScreen extends Screen {
 		Component points = spendInvested
 				? Component.translatable("bloom.hub.points.invested", progress.investedUnspent())
 				: Component.translatable("bloom.hub.points", progress.naturalUnspent());
-		g.text(this.font, points, statsX, majorsY, progress.naturalUnspent() > 0 || spendInvested ? ACCENT : MUTED);
+		g.text(this.font, points, statsX, majorsY, spendInvested ? GOOD : progress.naturalUnspent() > 0 ? ACCENT : MUTED);
+
+		// XP Investment mode is unmistakable: a green wash and frame around the stat rows.
+		if (spendInvested) {
+			int top = majorsY + 10;
+			int bottom = top + category.stats().size() * STAT_ROW + 2;
+			g.fill(statsX - 3, top, statsX + statsW + 1, bottom, 0x2232A852);
+			frame(g, statsX - 3, top, statsX + statsW + 1, bottom, 0xFF3F8F4F);
+		}
 
 		int y = majorsY + 12;
 
@@ -322,11 +356,17 @@ public final class HubScreen extends Screen {
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 					off ? ICON_TINT_OWNED_OFF : 0xFFFFFFFF);
 
-			int value = progress.rawStat(stat.id());
+			int natural = progress.natural().getOrDefault(stat.id(), 0);
 			int invested = progress.invested().getOrDefault(stat.id(), 0);
+			boolean investedOff = progress.disabledInvested().contains(stat.id());
 			g.text(this.font, name(stat.translationKey(), stat.id()), statsX + 20, y + 2, off ? MUTED : TEXT);
-			String valueText = invested > 0 ? value + " (+" + invested + ")" : Integer.toString(value);
-			g.text(this.font, Component.literal(valueText), statsX + 20, y + 11, off ? MUTED : ACCENT);
+			Component naturalText = Component.literal(Integer.toString(natural));
+			g.text(this.font, naturalText, statsX + 20, y + 11, off ? MUTED : ACCENT);
+
+			if (invested > 0) {
+				Component investedText = Component.translatable(investedOff ? "bloom.hub.stat.invested_off" : "bloom.hub.stat.invested", invested);
+				g.text(this.font, investedText, statsX + 22 + this.font.width(naturalText), y + 11, off || investedOff ? MUTED : GOOD);
+			}
 
 			if (mouseX >= statsX && mouseX < statsX + 16 + 60 && mouseY >= y && mouseY < y + STAT_ROW) {
 				List<FormattedCharSequence> lines = new ArrayList<>();
@@ -335,6 +375,14 @@ public final class HubScreen extends Screen {
 
 				if (off) {
 					lines.add(Component.translatable("bloom.hub.stat.off").withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+				}
+
+				if (invested > 0) {
+					lines.add(Component.translatable("bloom.hub.stat.pools", natural, invested).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				}
+
+				if (investedOff) {
+					lines.add(Component.translatable("bloom.hub.stat.invested_off.tooltip").withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 				}
 
 				g.setTooltipForNextFrame(this.font, lines, mouseX, mouseY);
@@ -388,7 +436,7 @@ public final class HubScreen extends Screen {
 				drawGlow(g, x, y, now, i);
 				tint = 0xFFFFFFFF;
 			} else if (owned != null) {
-				frame(g, x - 1, y - 1, MAJOR_ICON + 2, 0xFF55524C);
+				frame(g, x - 1, y - 1, MAJOR_ICON + 2, 0xFF9A5A44);
 				tint = ICON_TINT_OWNED_OFF;
 			} else if (locked) {
 				tint = ICON_TINT_LOCKED;
@@ -400,6 +448,14 @@ public final class HubScreen extends Screen {
 
 			g.blit(RenderPipelines.GUI_TEXTURED, IconTextures.resolve(major.icon()), x, y, 0.0F, 0.0F, MAJOR_ICON, MAJOR_ICON,
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, tint);
+
+			// Owned but switched off: an OFF badge, so it never looks refunded.
+			if (owned != null && !owned.enabled()) {
+				Component badge = Component.translatable("bloom.hub.major.off_badge");
+				int bw = this.font.width(badge);
+				g.fill(x + MAJOR_ICON - bw - 2, y + MAJOR_ICON - 8, x + MAJOR_ICON, y + MAJOR_ICON, 0xC0201A16);
+				g.text(this.font, badge, x + MAJOR_ICON - bw - 1, y + MAJOR_ICON - 8, BAD);
+			}
 
 			// Cost badge for anything not yet owned.
 			if (owned == null) {
@@ -443,6 +499,17 @@ public final class HubScreen extends Screen {
 		int mx = cx + (int) Math.round(Math.cos(angle) * r);
 		int my = cy + (int) Math.round(Math.sin(angle) * r);
 		g.fill(mx - 1, my - 1, mx + 1, my + 1, 0xFFFFF1C9);
+	}
+
+	private static void frame(GuiGraphicsExtractor g, int x0, int y0, int x1, int y1, int color) {
+		g.fill(x0, y0, x1, y0 + 1, color);
+		g.fill(x0, y1 - 1, x1, y1, color);
+		g.fill(x0, y0 + 1, x0 + 1, y1 - 1, color);
+		g.fill(x1 - 1, y0 + 1, x1, y1 - 1, color);
+	}
+
+	private static String fmt(double value) {
+		return value == Math.rint(value) ? Integer.toString((int) value) : String.format(Locale.ROOT, "%.1f", value);
 	}
 
 	private static void frame(GuiGraphicsExtractor g, int x, int y, int size, int color) {
@@ -558,7 +625,7 @@ public final class HubScreen extends Screen {
 
 		boolean owned = ClientBloomState.profile().owns(major.id());
 
-		if (event.button() == 1) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_RIGHT) {
 			if (owned) {
 				click();
 				send(Action.REFUND_MAJOR, major.id(), 0);
@@ -567,7 +634,7 @@ public final class HubScreen extends Screen {
 			return true;
 		}
 
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			click();
 
 			// Copycat: shift-click an owned weapon Major to choose it (shift-click Copycat itself to clear).

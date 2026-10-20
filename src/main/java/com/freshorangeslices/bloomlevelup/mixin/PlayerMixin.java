@@ -2,6 +2,8 @@ package com.freshorangeslices.bloomlevelup.mixin;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +32,13 @@ abstract class PlayerMixin {
 	@Inject(method = "actuallyHurt", at = @At("RETURN"))
 	private void bloomlevelup$afterHurt(ServerLevel level, DamageSource source, float amount, CallbackInfo ci) {
 		CombatSkill.afterRealDamage((LivingEntity) (Object) this, level, source);
+	}
+
+	/** A spear jab's first stab is the swing's target (see PiercingWeaponMixin). */
+	@Inject(method = "stabAttack", at = @At("HEAD"))
+	private void bloomlevelup$stab(EquipmentSlot slot, Entity target, float damage, boolean dealsDamage, boolean knockback, boolean dismount,
+			CallbackInfoReturnable<Boolean> cir) {
+		CombatSkill.onStab((Player) (Object) this, target);
 	}
 
 	/** Endurance: less exhaustion from everything that drains food. */

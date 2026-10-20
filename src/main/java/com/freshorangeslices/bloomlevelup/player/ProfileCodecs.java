@@ -29,6 +29,7 @@ public final class ProfileCodecs {
 			Codec.INT.optionalFieldOf("invested_points", 0).forGetter(CategoryProgress::investedPoints),
 			INT_MAP.optionalFieldOf("invested", Map.of()).forGetter(CategoryProgress::invested),
 			STRING_SET.optionalFieldOf("disabled_stats", Set.of()).forGetter(CategoryProgress::disabledStats),
+			STRING_SET.optionalFieldOf("disabled_invested", Set.of()).forGetter(CategoryProgress::disabledInvested),
 			Codec.BOOL.optionalFieldOf("mastered", false).forGetter(CategoryProgress::mastered),
 			Codec.INT.optionalFieldOf("major_milestones_claimed", 0).forGetter(CategoryProgress::majorMilestonesClaimed),
 			Codec.INT.optionalFieldOf("prestige_claimed", 0).forGetter(CategoryProgress::prestigeClaimed)

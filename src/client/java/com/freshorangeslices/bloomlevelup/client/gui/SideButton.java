@@ -59,10 +59,17 @@ public final class SideButton extends AbstractButton {
 		}
 	}
 
+	/** Survival inventory: stacked above the off-hand slot. Creative: under the hub button outside the panel. */
 	private void reposition() {
 		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
-		this.setX(accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2);
-		this.setY(accessor.bloomlevelup$topPos() + 4 + this.row * (SIZE + 2));
+
+		if (screen instanceof net.minecraft.client.gui.screens.inventory.InventoryScreen) {
+			this.setX(accessor.bloomlevelup$leftPos() + 76);
+			this.setY(accessor.bloomlevelup$topPos() + 62 - this.row * (SIZE + 2));
+		} else {
+			this.setX(accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2);
+			this.setY(accessor.bloomlevelup$topPos() + 4 + this.row * (SIZE + 2));
+		}
 	}
 
 	@Override

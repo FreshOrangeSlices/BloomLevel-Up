@@ -34,6 +34,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
@@ -60,6 +61,16 @@ public final class CombatAbilities {
 	public static void init() {
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> CHARGED_UNTIL.remove(listener.player.getUUID()));
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> CHARGED_UNTIL.clear());
+
+		// Wind Impact: right-clicking the ground with a mace (the block didn't do anything with the click).
+		UseItemCallback.EVENT.register((player, level, hand) -> {
+			if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer serverPlayer
+					&& CombatSkill.windBurst(serverPlayer)) {
+				return InteractionResult.SUCCESS;
+			}
+
+			return InteractionResult.PASS;
+		});
 	}
 
 	private static BloomConfig config() {

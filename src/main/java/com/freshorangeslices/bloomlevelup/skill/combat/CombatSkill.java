@@ -60,6 +60,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
@@ -68,6 +69,7 @@ import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
 import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor;
 import com.freshorangeslices.bloomlevelup.mixin.PlayerInvoker;
+import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
@@ -163,7 +165,8 @@ public final class CombatSkill {
 	private static final Map<UUID, Stack> BLOODLUST = new HashMap<>();
 	private static final Map<UUID, Integer> AURA_COUNT = new HashMap<>();
 	private static final Map<UUID, Long> LIGHTNING_READY_AT = new HashMap<>();
-	private static final Map<UUID, Double> AIRBORNE_FALL = new HashMap<>();
+	/** Players in the middle of a spear jab, with the swing strength it started at. */
+	private static final Map<UUID, Float> JABBING = new HashMap<>();
 	private static final Set<AbstractArrow> STRAIGHT_ARROWS = Collections.newSetFromMap(new WeakHashMap<>());
 	private static final List<Deferred> DEFERRED = new ArrayList<>();
 	/** Set while the mod itself swings at extra targets, so those hits are classified correctly. */
@@ -189,7 +192,7 @@ public final class CombatSkill {
 		BLOODLUST.remove(id);
 		AURA_COUNT.remove(id);
 		LIGHTNING_READY_AT.remove(id);
-		AIRBORNE_FALL.remove(id);
+		JABBING.remove(id);
 	}
 
 	private static void clearAll() {
@@ -204,7 +207,7 @@ public final class CombatSkill {
 		BLOODLUST.clear();
 		AURA_COUNT.clear();
 		LIGHTNING_READY_AT.clear();
-		AIRBORNE_FALL.clear();
+		JABBING.clear();
 		STRAIGHT_ARROWS.clear();
 		DEFERRED.clear();
 		secondarySwing = null;
@@ -250,6 +253,15 @@ public final class CombatSkill {
 		return Weapons.is(weapon, family) || copied(player).map(majorId::equals).orElse(false);
 	}
 
+	/** {@link #has} on either side: the client reads its synced profile (local player only). */
+	public static boolean hasAnySide(Player player, String majorId, Family family, ItemStack weapon) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			return has(serverPlayer, majorId, family, weapon);
+		}
+
+		return SideBridge.clientMajorActive(player, majorId) && (Weapons.is(weapon, family) || majorId.equals(SideBridge.clientCopySource(player)));
+	}
+
 	private static boolean pvpAllowed(LivingEntity target) {
 		return !(target instanceof Player) || config().combatPvp;
 	}
@@ -287,6 +299,45 @@ public final class CombatSkill {
 		PENDING.put(serverPlayer.getUUID(), new PendingAttack(target, strength, crit, serverPlayer.fallDistance, serverPlayer.isSprinting(),
 				serverPlayer.onGround()));
 		return InteractionResult.PASS;
+	}
+
+	/** A spear jab starts (PiercingWeapon.attack): remember the swing strength before it resets. */
+	public static void startJab(LivingEntity attacker) {
+		if (attacker instanceof ServerPlayer player) {
+			JABBING.put(player.getUUID(), player.getAttackStrengthScale(0.5F));
+		}
+	}
+
+	public static void endJab(LivingEntity attacker) {
+		if (attacker instanceof ServerPlayer player) {
+			JABBING.remove(player.getUUID());
+		}
+	}
+
+	/** The first thing a jab stabs is the swing's own target, as if the player had attacked it. */
+	public static void onStab(Player player, Entity target) {
+		if (player instanceof ServerPlayer serverPlayer && !PENDING.containsKey(serverPlayer.getUUID())) {
+			Float strength = JABBING.get(serverPlayer.getUUID());
+
+			if (strength != null) {
+				PENDING.put(serverPlayer.getUUID(), new PendingAttack(target, strength, false, serverPlayer.fallDistance, serverPlayer.isSprinting(),
+						serverPlayer.onGround()));
+			}
+		}
+	}
+
+	/** Long Reach: +2 blocks on a spear's own attack range (other weapons get it through entity reach). Both sides. */
+	public static net.minecraft.world.item.component.AttackRange longReach(LivingEntity entity, ItemStack stack,
+			net.minecraft.world.item.component.AttackRange range) {
+		if (!(entity instanceof Player player) || range == null || stack == null
+				|| !stack.has(net.minecraft.core.component.DataComponents.ATTACK_RANGE)
+				|| !hasAnySide(player, CombatIds.LONG_REACH, Family.SPEAR, stack)) {
+			return range;
+		}
+
+		float extra = (float) SideBridge.config(player).longReachBlocks;
+		return new net.minecraft.world.item.component.AttackRange(range.minReach(), range.maxReach() + extra, range.minCreativeReach(),
+				range.maxCreativeReach() + extra, range.hitboxMargin(), range.mobFactor());
 	}
 
 	// ------------------------------------------------------------------ hook 1: incoming damage (mixin, hurtServer HEAD)
@@ -370,12 +421,13 @@ public final class CombatSkill {
 				level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 
-			// Stored Impact: the next mace hit spends what the last real fall stored.
-			long stored = profile.counter(CombatIds.STORED_IMPACT_HUNDREDTHS);
+			// Stored Impact: the next mace hit spends everything the open window stored.
+			long stored = storedImpact(profile, now);
 
 			if (stored > 0 && has(player, CombatIds.STORED_IMPACT, Family.MACE, weapon)) {
 				add += stored / 100.0;
 				profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, 0);
+				profile.setCounter(CombatIds.STORED_IMPACT_EXPIRES_AT, 0);
 				level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.MACE_SMASH_GROUND_HEAVY, SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 
@@ -528,7 +580,8 @@ public final class CombatSkill {
 			boolean charged = kind != HitKind.PRIMARY || (hit.swing() != null && hit.swing().strength > 0.9F);
 
 			if (charged && target.isAlive() && has(player, CombatIds.IMPALE, Family.SPEAR, weapon) && random.nextDouble() < config.impaleChance) {
-				target.addEffect(new MobEffectInstance(BloomEffects.BLEED, config.bleedTicks, 0), player);
+				// No potion swirl: Bleed shows its own blood drips (BleedEffect).
+				target.addEffect(new MobEffectInstance(BloomEffects.BLEED, config.bleedTicks, 0, false, false, true), player);
 			}
 
 			// Disarm: primary hits only.
@@ -560,14 +613,19 @@ public final class CombatSkill {
 					defer(0, () -> sweep(level, player, target, sweep));
 				}
 
-				// Aura Sword: every 5th clean hit releases a full-circle sweep that pulses twice.
+				// Aura Sword: every 5th clean hit sends three sweep waves rolling outward (about 1, 2 and 3 blocks).
 				if (active(player, CombatIds.AURA_SWORD)) {
 					int count = AURA_COUNT.merge(player.getUUID(), 1, Integer::sum);
 
 					if (count >= config.auraSwordHits) {
 						AURA_COUNT.put(player.getUUID(), 0);
-						defer(0, () -> auraPulse(level, player));
-						defer(config.auraSwordPulseGapTicks, () -> auraPulse(level, player));
+						Set<LivingEntity> struck = Collections.newSetFromMap(new IdentityHashMap<>());
+
+						for (int wave = 0; wave < 3; wave++) {
+							double inner = config.auraSwordRadius * wave / 3.0;
+							double outer = config.auraSwordRadius * (wave + 1) / 3.0;
+							defer(wave * config.auraSwordPulseGapTicks, () -> auraWave(level, player, inner, outer, struck));
+						}
 					}
 				}
 			}
@@ -613,7 +671,7 @@ public final class CombatSkill {
 			int stacks = bloodlust != null && now <= bloodlust.lastTick() ? bloodlust.stacks() : 0;
 			stacks = Math.min(stacks + 1, config.bloodlustMaxStacks);
 			BLOODLUST.put(killer.getUUID(), new Stack(null, stacks, now + config.bloodlustTicks));
-			killer.sendSystemMessage(Component.translatable("bloom.combat.bloodlust", stacks).withStyle(ChatFormatting.DARK_RED), true);
+			sendBloodlust(killer, stacks);
 		}
 
 		// Overkill: real excess damage from a normal kill splashes onward. Execute kills and Overkill's own kills don't.
@@ -691,28 +749,43 @@ public final class CombatSkill {
 		syncVelocity(victim);
 	}
 
-	private static void auraPulse(ServerLevel level, ServerPlayer player) {
+	/** One Aura Sword wave: a ring of sweeps out to {@code outer}; each target is hit by at most one wave. */
+	private static void auraWave(ServerLevel level, ServerPlayer player, double inner, double outer, Set<LivingEntity> struck) {
 		if (player.isRemoved() || !player.isAlive() || player.level() != level) {
 			return;
 		}
 
-		double radius = config().auraSwordRadius;
 		float damage = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+		double reach = outer + 0.6; // hitboxes: a mob whose edge is inside the ring counts
 
-		for (LivingEntity victim : victimsAround(level, player, player.getBoundingBox().inflate(radius, 1.0, radius))) {
-			if (player.distanceToSqr(victim) <= radius * radius && swingAt(level, player, victim, damage, HitKind.AURA)) {
+		for (LivingEntity victim : victimsAround(level, player, player.getBoundingBox().inflate(reach, 1.0, reach))) {
+			if (player.distanceToSqr(victim) <= reach * reach && !struck.contains(victim) && swingAt(level, player, victim, damage, HitKind.AURA)) {
+				struck.add(victim);
 				Vec3 away = victim.position().subtract(player.position());
 				shove(victim, away.x, away.z, 0.4);
 			}
 		}
 
-		for (int i = 0; i < 12; i++) {
-			double angle = Math.PI * 2.0 * i / 12.0;
-			level.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + Math.cos(angle) * radius * 0.7, player.getY(0.5),
-					player.getZ() + Math.sin(angle) * radius * 0.7, 1, 0.0, 0.0, 0.0, 0.0);
+		double ring = Math.max(0.8, (inner + outer) / 2.0);
+		int points = Math.max(8, (int) Math.round(ring * 8.0));
+
+		for (int i = 0; i < points; i++) {
+			double angle = Math.PI * 2.0 * i / points;
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + Math.cos(angle) * ring, player.getY(0.5),
+					player.getZ() + Math.sin(angle) * ring, 1, 0.0, 0.0, 0.0, 0.0);
 		}
 
-		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.2F, 0.8F);
+		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F,
+				(float) Math.max(0.5, 1.2 - 0.15 * outer));
+	}
+
+	/** Bloodlust bar on the player's HUD. */
+	private static void sendBloodlust(ServerPlayer player, int stacks) {
+		if (ServerPlayNetworking.canSend(player, BloomPayloads.Bloodlust.TYPE)) {
+			BloomConfig config = config();
+			float bonus = (float) (StatFormulas.stackMultiplier(stacks, config.bloodlustPerStack, config.bloodlustMaxStacks) - 1.0);
+			ServerPlayNetworking.send(player, new BloomPayloads.Bloodlust(stacks, bonus, config.bloodlustTicks, config.bloodlustTicks));
+		}
 	}
 
 	/**
@@ -741,27 +814,30 @@ public final class CombatSkill {
 			order.add(candidates.get(index));
 		}
 
-		Runnable strike = () -> {
-			Vec3 from = target.position().add(0.0, target.getBbHeight() * 0.6, 0.0);
+		// One bounce at a time, with a pause between them so the ricochet is easy to follow.
+		Vec3[] from = {target.position().add(0.0, target.getBbHeight() * 0.6, 0.0)};
+		int gap = config().lightningShockBounceTicks;
 
-			for (LivingEntity victim : order) {
-				if (!victim.isAlive()) {
-					continue;
+		for (int i = 0; i < order.size(); i++) {
+			LivingEntity victim = order.get(i);
+			Runnable bounce = () -> {
+				if (!victim.isAlive() || victim.level() != level) {
+					return;
 				}
 
 				Vec3 to = victim.position().add(0.0, victim.getBbHeight() * 0.6, 0.0);
-				sparkLine(level, from, to);
+				sparkLine(level, from[0], to);
+				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, to.x, to.y, to.z, 12, 0.3, 0.4, 0.3, 0.2);
+				level.playSound(null, to.x, to.y, to.z, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.PLAYERS, 0.35F, 1.8F);
 				victim.hurtServer(level, BloomDamage.lightningShock(level, player), damage);
-				from = to;
+				from[0] = to;
+			};
+
+			if (i == 0 && !deferHits) {
+				bounce.run();
+			} else {
+				defer(i * gap, bounce);
 			}
-
-			level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.TRIDENT_THUNDER.value(), SoundSource.PLAYERS, 0.5F, 1.6F);
-		};
-
-		if (deferHits) {
-			defer(0, strike);
-		} else {
-			strike.run();
 		}
 
 		return true;
@@ -784,6 +860,14 @@ public final class CombatSkill {
 		targets.remove(dead);
 		targets.removeIf(entity -> entity.position().distanceToSqr(at) > radius * radius);
 		targets.sort(Comparator.comparingDouble(entity -> entity.position().distanceToSqr(at)));
+
+		// Shows the splash range: a ring of crit sparks at its edge.
+		int ringPoints = Math.max(12, (int) Math.round(radius * 8.0));
+
+		for (int i = 0; i < ringPoints; i++) {
+			double angle = Math.PI * 2.0 * i / ringPoints;
+			level.sendParticles(ParticleTypes.CRIT, at.x + Math.cos(angle) * radius, at.y + 0.3, at.z + Math.sin(angle) * radius, 1, 0.0, 0.05, 0.0, 0.0);
+		}
 
 		if (targets.isEmpty()) {
 			return;
@@ -834,25 +918,76 @@ public final class CombatSkill {
 
 	// ------------------------------------------------------------------ Stored Impact / Wind Impact
 
-	private static void storeImpact(ServerPlayer player, ServerLevel level, float fallDamage) {
-		BloomProfile profile = BloomAttachments.profile(player);
-		long now = level.getGameTime();
+	/** Hundredths of damage stored right now, or 0 once the window has closed. */
+	private static long storedImpact(BloomProfile profile, long now) {
+		long expires = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT);
+		return expires > 0 && now < expires ? profile.counter(CombatIds.STORED_IMPACT_HUNDREDTHS) : 0L;
+	}
 
-		if (!active(player, CombatIds.STORED_IMPACT) || now < profile.counter(CombatIds.STORED_IMPACT_READY_AT)) {
+	/**
+	 * Stored Impact: the first real fall opens one 5-minute window; every real fall inside it adds 50% of its
+	 * damage (capped at +20 in total). The window doesn't restart on later falls. The next mace hit spends it
+	 * all; otherwise it's lost when the window closes.
+	 */
+	private static void storeImpact(ServerPlayer player, ServerLevel level, float fallDamage) {
+		if (!active(player, CombatIds.STORED_IMPACT)) {
 			return;
 		}
 
+		BloomProfile profile = BloomAttachments.profile(player);
 		BloomConfig config = config();
-		double stored = Math.min(config.storedImpactCap, fallDamage * config.storedImpactRatio);
-		profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, Math.round(stored * 100.0));
-		profile.setCounter(CombatIds.STORED_IMPACT_READY_AT, now + config.storedImpactCooldownTicks);
-		player.sendSystemMessage(Component.translatable("bloom.combat.stored_impact", String.format(java.util.Locale.ROOT, "%.1f", stored))
-				.withStyle(ChatFormatting.GOLD), true);
+		long now = level.getGameTime();
+		long expires = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT);
+		long stored = storedImpact(profile, now);
+
+		if (expires <= 0 || now >= expires) {
+			expires = now + config.storedImpactWindowTicks;
+			stored = 0;
+			profile.setCounter(CombatIds.STORED_IMPACT_EXPIRES_AT, expires);
+		}
+
+		long cap = Math.round(config.storedImpactCap * 100.0);
+		stored = Math.min(cap, stored + Math.round(fallDamage * config.storedImpactRatio * 100.0));
+		profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, stored);
+		long secondsLeft = Math.max(0, (expires - now) / 20);
+		player.sendSystemMessage(Component.translatable("bloom.combat.stored_impact", String.format(java.util.Locale.ROOT, "%.1f", stored / 100.0),
+				String.format(java.util.Locale.ROOT, "%d:%02d", secondsLeft / 60, secondsLeft % 60)).withStyle(ChatFormatting.GOLD), true);
 	}
 
-	/** Wind Impact: landing a real fall with a mace in hand bursts wind outward, like a wind charge. */
-	private static void windImpact(ServerLevel level, ServerPlayer player) {
-		windImpactAt(level, player, player.position());
+	/**
+	 * Wind Impact: right-click the ground with a mace for a wind-charge burst at that spot. Standing on it
+	 * launches you up like a wind charge jump (and the landing back down is forgiven the same way); mobs
+	 * nearby are blown away. Returns whether it fired.
+	 */
+	public static boolean windBurst(ServerPlayer player) {
+		ItemStack mace = player.getMainHandItem();
+
+		if (!(player.level() instanceof ServerLevel level) || !Weapons.is(mace, Family.MACE) || !active(player, CombatIds.WIND_IMPACT)
+				|| player.getCooldowns().isOnCooldown(mace)) {
+			return false;
+		}
+
+		net.minecraft.world.phys.HitResult hit = player.pick(player.blockInteractionRange(), 1.0F, false);
+
+		if (!(hit instanceof net.minecraft.world.phys.BlockHitResult block) || block.getType() != net.minecraft.world.phys.HitResult.Type.BLOCK
+				|| block.getDirection() != net.minecraft.core.Direction.UP) {
+			return false;
+		}
+
+		Vec3 at = block.getLocation();
+		level.explode(null, null, net.minecraft.world.entity.projectile.hurtingprojectile.windcharge.AbstractWindCharge.EXPLOSION_DAMAGE_CALCULATOR,
+				at.x, at.y, at.z, 1.2F, false, Level.ExplosionInteraction.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE,
+				net.minecraft.util.random.WeightedList.of(), SoundEvents.WIND_CHARGE_BURST);
+		windImpactAt(level, player, at);
+
+		// Like a wind charge jump: falling back to where you jumped from doesn't hurt.
+		if (player.position().distanceToSqr(at) < 4.0) {
+			player.currentImpulseImpactPos = player.position();
+			player.setIgnoreFallDamageFromCurrentImpulse(true, player.position());
+		}
+
+		player.getCooldowns().addCooldown(mace, config().windImpactCooldownTicks);
+		return true;
 	}
 
 	/** A wind burst at a point that pushes everything around it away (never the player who caused it). */
@@ -960,9 +1095,6 @@ public final class CombatSkill {
 		runDue();
 		cleanupTick();
 
-		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-			trackLanding(player);
-		}
 	}
 
 	private static void runDue() {
@@ -1006,29 +1138,20 @@ public final class CombatSkill {
 		}
 	}
 
-	private static void trackLanding(ServerPlayer player) {
-		UUID id = player.getUUID();
-
-		if (!player.onGround()) {
-			if (player.fallDistance > 0.0) {
-				AIRBORNE_FALL.merge(id, player.fallDistance, Math::max);
-			}
-
-			return;
-		}
-
-		Double fell = AIRBORNE_FALL.remove(id);
-
-		if (fell != null && fell >= config().windImpactMinFall && Weapons.is(player.getMainHandItem(), Family.MACE)
-				&& active(player, CombatIds.WIND_IMPACT) && player.level() instanceof ServerLevel level) {
-			windImpact(level, player);
-		}
-	}
-
 	/** Runs every queued follow-up now, as the end of the tick would (game tests). */
 	public static void runQueuedForTests() {
 		gameTick += 1000;
 		runDue();
+	}
+
+	/** Starts a spear jab with an explicit swing strength (game tests: fake players never tick). */
+	public static void jabForTests(ServerPlayer player, float strength) {
+		JABBING.put(player.getUUID(), strength);
+	}
+
+	/** Stores a fall as a real fall would (game tests). */
+	public static void storeImpactForTests(ServerPlayer player, float fallDamage) {
+		storeImpact(player, (ServerLevel) player.level(), fallDamage);
 	}
 
 	/** Records a swing as the attack event would, with explicit swing state (game tests: fake players never tick). */

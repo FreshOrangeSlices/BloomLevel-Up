@@ -67,6 +67,8 @@ public final class BloomPayloads {
 		ALLOCATE_NATURAL,
 		ALLOCATE_INVESTED,
 		TOGGLE_STAT,
+		/** Switches only a stat's XP-invested (post-100) points off or on. */
+		TOGGLE_INVESTED,
 		BUY_MAJOR,
 		BUY_MAJOR_SWAP,
 		REFUND_MAJOR,
@@ -163,6 +165,32 @@ public final class BloomPayloads {
 
 		private void write(RegistryFriendlyByteBuf buf) {
 			buf.writeEnum(action);
+		}
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
+	/**
+	 * Server → client: the player's Bloodlust momentum for the HUD bar: stacks, the damage bonus they give,
+	 * and how long until they run out (0 stacks = hide the bar).
+	 */
+	public record Bloodlust(int stacks, float bonus, int ticksLeft, int totalTicks) implements CustomPacketPayload {
+		public static final Type<Bloodlust> TYPE = new Type<>(BloomLevelUp.id("bloodlust"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, Bloodlust> CODEC =
+				CustomPacketPayload.codec(Bloodlust::write, Bloodlust::new);
+
+		private Bloodlust(RegistryFriendlyByteBuf buf) {
+			this(buf.readVarInt(), buf.readFloat(), buf.readVarInt(), buf.readVarInt());
+		}
+
+		private void write(RegistryFriendlyByteBuf buf) {
+			buf.writeVarInt(stacks);
+			buf.writeFloat(bonus);
+			buf.writeVarInt(ticksLeft);
+			buf.writeVarInt(totalTicks);
 		}
 
 		@Override

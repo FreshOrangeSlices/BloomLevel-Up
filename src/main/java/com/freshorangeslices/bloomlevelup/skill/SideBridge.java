@@ -17,6 +17,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 public final class SideBridge {
 	private static volatile BiPredicate<Player, String> clientMajorActive = (player, majorId) -> false;
 	private static volatile Supplier<BloomConfig> clientConfig = () -> null;
+	private static volatile java.util.function.Function<Player, String> clientCopySource = player -> null;
 
 	private SideBridge() {
 	}
@@ -27,6 +28,15 @@ public final class SideBridge {
 
 	public static void setClientConfig(Supplier<BloomConfig> config) {
 		clientConfig = config;
+	}
+
+	/** The weapon Major the local player's Copycat is spreading, or null. */
+	public static void setClientCopySource(java.util.function.Function<Player, String> query) {
+		clientCopySource = query;
+	}
+
+	public static String clientCopySource(Player player) {
+		return clientCopySource.apply(player);
 	}
 
 	/** The config that applies to this player: the server's own, or on the client the copy the server synced. */

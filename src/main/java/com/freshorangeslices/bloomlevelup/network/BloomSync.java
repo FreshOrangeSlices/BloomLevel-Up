@@ -49,6 +49,7 @@ public final class BloomSync {
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncProfile.TYPE, BloomPayloads.SyncProfile.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Result.TYPE, BloomPayloads.Result.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.NameTag.TYPE, BloomPayloads.NameTag.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Bloodlust.TYPE, BloomPayloads.Bloodlust.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.Request.TYPE, BloomPayloads.Request.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.CombatInput.TYPE, BloomPayloads.CombatInput.CODEC);
 
@@ -173,6 +174,7 @@ public final class BloomSync {
 				case ALLOCATE_NATURAL -> service.allocate(profile, target, ProgressionService.Pool.NATURAL, amount);
 				case ALLOCATE_INVESTED -> service.allocate(profile, target, ProgressionService.Pool.INVESTED, amount);
 				case TOGGLE_STAT -> service.toggleStat(profile, target);
+				case TOGGLE_INVESTED -> service.toggleInvested(profile, target);
 				case BUY_MAJOR -> service.purchaseMajor(profile, target);
 				case BUY_MAJOR_SWAP -> service.purchaseMajorWithSwap(profile, target);
 				case REFUND_MAJOR -> service.refundMajor(profile, target);

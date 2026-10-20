@@ -177,7 +177,7 @@ public final class ArmorSkill {
 	}
 
 	private static void catchProjectile(ServerPlayer player, Projectile projectile) {
-		if (projectile instanceof AbstractArrow arrow && arrow.pickup == AbstractArrow.Pickup.ALLOWED) {
+		if (catchable(projectile) instanceof AbstractArrow arrow) {
 			// Keeps the item's full data (enchantments, potion contents, custom names).
 			ItemStack caught = arrow.getPickupItemStackOrigin().copy();
 
@@ -188,6 +188,23 @@ public final class ArmorSkill {
 
 		projectile.discard();
 		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.6F, 1.2F);
+	}
+
+	/**
+	 * What a catch puts in the inventory. Normally collectable projectiles always count. Arrows that can't
+	 * normally be picked up (a skeleton's) count too, since catching one is the point; mob-thrown tridents
+	 * and Infinity / creative arrows don't, so a catch never duplicates or farms an item.
+	 */
+	public static Projectile catchable(Projectile projectile) {
+		if (!(projectile instanceof AbstractArrow arrow) || arrow.pickup == AbstractArrow.Pickup.CREATIVE_ONLY) {
+			return null;
+		}
+
+		if (arrow.pickup == AbstractArrow.Pickup.ALLOWED) {
+			return arrow;
+		}
+
+		return arrow instanceof net.minecraft.world.entity.projectile.arrow.ThrownTrident ? null : arrow;
 	}
 
 	// ------------------------------------------------------------------ after vanilla mitigation (mixin)

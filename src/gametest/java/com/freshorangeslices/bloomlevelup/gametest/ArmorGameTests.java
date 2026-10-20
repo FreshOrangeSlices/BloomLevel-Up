@@ -94,6 +94,26 @@ public class ArmorGameTests {
 	// ------------------------------------------------------------------ stats
 
 	@GameTest
+	public void reflectCatchesArrowsThatCantBePickedUp(GameTestHelper helper) {
+		net.minecraft.server.level.ServerLevel level = helper.getLevel();
+		net.minecraft.world.entity.projectile.arrow.AbstractArrow skeletonArrow =
+				net.minecraft.world.entity.EntityTypes.ARROW.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+		skeletonArrow.pickup = net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup.DISALLOWED;
+		helper.assertTrue(ArmorSkill.catchable(skeletonArrow) != null, "A skeleton's arrow can be caught");
+
+		net.minecraft.world.entity.projectile.arrow.AbstractArrow infinity =
+				net.minecraft.world.entity.EntityTypes.ARROW.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+		infinity.pickup = net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup.CREATIVE_ONLY;
+		helper.assertTrue(ArmorSkill.catchable(infinity) == null, "Infinity / creative arrows aren't duplicated");
+
+		net.minecraft.world.entity.projectile.arrow.AbstractArrow drowned =
+				net.minecraft.world.entity.EntityTypes.TRIDENT.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+		drowned.pickup = net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup.DISALLOWED;
+		helper.assertTrue(ArmorSkill.catchable(drowned) == null, "A drowned's trident isn't farmable");
+		helper.succeed();
+	}
+
+	@GameTest
 	public void vitalityAndDefenseBecomeAttributes(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		points(player, ArmorIds.VITALITY, 50);

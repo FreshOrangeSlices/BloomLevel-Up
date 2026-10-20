@@ -35,6 +35,7 @@ import com.freshorangeslices.bloomlevelup.item.FuelImprint;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.SnapshotCodecs;
 import com.freshorangeslices.bloomlevelup.skill.SideBridge;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
@@ -54,6 +55,8 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		SideBridge.setClientConfig(ClientBloomState::config);
 		SideBridge.setClientMajorActive((player, majorId) -> player == Minecraft.getInstance().player && ClientBloomState.ready()
 				&& ClientBloomState.profile() != null && ClientBloomState.service().isMajorActive(ClientBloomState.profile(), majorId));
+		SideBridge.setClientCopySource(player -> player == Minecraft.getInstance().player && ClientBloomState.ready() && ClientBloomState.profile() != null
+				? ClientBloomState.service().activeCopySource(ClientBloomState.profile(), CombatIds.COPYCAT).orElse(null) : null);
 
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.SyncDefinitions.TYPE, (payload, context) -> {
 			try {
@@ -117,6 +120,7 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 
 		CombatControls.init(category);
+		com.freshorangeslices.bloomlevelup.client.gui.BloomHud.init();
 
 		// Become My Fuel: show what a weapon carries.
 		ItemTooltipCallback.EVENT.register((stack, tooltipContext, flag, lines) -> {

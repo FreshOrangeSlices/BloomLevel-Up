@@ -56,6 +56,8 @@ public final class CombatIds {
 	public static final String STORED_IMPACT_HUNDREDTHS = STORED_IMPACT + "#stored";
 	/** Stored Impact: game time when it can store again (the 5-minute cooldown). */
 	public static final String STORED_IMPACT_READY_AT = STORED_IMPACT + "#ready_at";
+	/** Game time the current Stored Impact window closes (0 = no window open). */
+	public static final String STORED_IMPACT_EXPIRES_AT = STORED_IMPACT + "#expires_at";
 
 	private CombatIds() {
 	}

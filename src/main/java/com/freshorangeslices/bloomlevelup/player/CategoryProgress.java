@@ -21,22 +21,24 @@ public final class CategoryProgress {
 	private int investedPoints;
 	private final Map<String, Integer> invested;
 	private final Set<String> disabledStats;
+	private final Set<String> disabledInvested;
 	private boolean mastered;
 	private int majorMilestonesClaimed;
 	private int prestigeClaimed;
 
 	public CategoryProgress() {
-		this(0, 0.0, Map.of(), 0, Map.of(), Set.of(), false, 0, 0);
+		this(0, 0.0, Map.of(), 0, Map.of(), Set.of(), Set.of(), false, 0, 0);
 	}
 
 	public CategoryProgress(int level, double xp, Map<String, Integer> natural, int investedPoints, Map<String, Integer> invested,
-			Set<String> disabledStats, boolean mastered, int majorMilestonesClaimed, int prestigeClaimed) {
+			Set<String> disabledStats, Set<String> disabledInvested, boolean mastered, int majorMilestonesClaimed, int prestigeClaimed) {
 		this.level = Math.max(0, level);
 		this.xp = Math.max(0.0, xp);
 		this.natural = new LinkedHashMap<>(natural);
 		this.investedPoints = Math.max(0, investedPoints);
 		this.invested = new LinkedHashMap<>(invested);
 		this.disabledStats = new LinkedHashSet<>(disabledStats);
+		this.disabledInvested = new LinkedHashSet<>(disabledInvested);
 		this.mastered = mastered;
 		this.majorMilestonesClaimed = Math.max(0, majorMilestonesClaimed);
 		this.prestigeClaimed = Math.max(0, prestigeClaimed);
@@ -88,8 +90,14 @@ public final class CategoryProgress {
 		return Math.max(0, investedPoints - sum(invested));
 	}
 
+	/** Stats switched off entirely (both pools). */
 	public Set<String> disabledStats() {
 		return disabledStats;
+	}
+
+	/** Stats whose XP-invested (post-100) points are switched off on their own; the natural points still count. */
+	public Set<String> disabledInvested() {
+		return disabledInvested;
 	}
 
 	/** True once the category has ever reached the level cap; survives every reset. */
@@ -125,7 +133,8 @@ public final class CategoryProgress {
 	}
 
 	public CategoryProgress copy() {
-		return new CategoryProgress(level, xp, natural, investedPoints, invested, disabledStats, mastered, majorMilestonesClaimed, prestigeClaimed);
+		return new CategoryProgress(level, xp, natural, investedPoints, invested, disabledStats, disabledInvested, mastered,
+				majorMilestonesClaimed, prestigeClaimed);
 	}
 
 	private static int sum(Map<String, Integer> map) {

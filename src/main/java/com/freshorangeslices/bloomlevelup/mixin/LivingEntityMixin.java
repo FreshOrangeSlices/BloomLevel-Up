@@ -28,6 +28,16 @@ import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 @Mixin(LivingEntity.class)
 abstract class LivingEntityMixin {
 	/** After vanilla armor, Resistance and enchantment protection: apply the Armor category's own layers. */
+	/** Long Reach: a spear's own attack range (its jab and charge) reaches further. Both sides. */
+	@Inject(method = "getAttackRangeWith", at = @At("RETURN"), cancellable = true)
+	private void bloomlevelup$longReach(net.minecraft.world.item.ItemStack stack, CallbackInfoReturnable<net.minecraft.world.item.component.AttackRange> cir) {
+		net.minecraft.world.item.component.AttackRange range = CombatSkill.longReach((LivingEntity) (Object) this, stack, cir.getReturnValue());
+
+		if (range != cir.getReturnValue()) {
+			cir.setReturnValue(range);
+		}
+	}
+
 	@Inject(method = "getDamageAfterMagicAbsorb", at = @At("RETURN"), cancellable = true)
 	private void bloomlevelup$armorLayers(DamageSource source, float damage, CallbackInfoReturnable<Float> cir) {
 		if ((Object) this instanceof ServerPlayer player) {

@@ -333,7 +333,8 @@ public final class UtilitySkill {
 		if (state.is(BloomTags.EXCAVATION_TREASURE) && tool instanceof ItemStack shovel && shovel.is(ItemTags.SHOVELS)
 				&& active(player, UtilityIds.SHOVEL_MASTERY)) {
 			int yield = StatFormulas.boosted(stat(player, UtilityIds.YIELD), config().shovelMasteryBonus);
-			int rolls = StatFormulas.rollsFromChance(yield / 100.0 * config().excavationTreasureChancePer100Yield, random);
+			double chance = config().excavationTreasureBaseChance + yield / 100.0 * config().excavationTreasureChancePer100Yield;
+			int rolls = StatFormulas.rollsFromChance(chance, random);
 
 			for (int i = 0; i < rolls; i++) {
 				List<ItemStack> treasure = rollTreasure(level, player, origin);
@@ -508,7 +509,11 @@ public final class UtilitySkill {
 		}
 	}
 
-	/** Growth Aura: while holding a hoe, nearby crops get extra growth ticks. Public for game tests. */
+	/**
+	 * Growth Aura: while holding a hoe, every pulse gives each nearby plant a chance to grow. Crops jump a
+	 * whole growth stage; other plants (cactus, cane, berries, saplings...) get a burst of growth ticks.
+	 * Public for game tests.
+	 */
 	public static int growthAura(ServerPlayer player) {
 		if (player.isSpectator() || !(player.getMainHandItem().is(ItemTags.HOES) || player.getOffhandItem().is(ItemTags.HOES))
 				|| !active(player, UtilityIds.GROWTH_AURA) || !(player.level() instanceof ServerLevel level)) {
@@ -530,7 +535,16 @@ public final class UtilitySkill {
 			}
 
 			BlockPos pos = cursor.immutable();
-			state.randomTick(level, pos, level.getRandom());
+
+			if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock crop) {
+				if (!crop.isMaxAge(state)) {
+					level.setBlock(pos, crop.getStateForAge(crop.getAge(state) + 1), Block.UPDATE_CLIENTS);
+				}
+			} else {
+				for (int i = 0; i < config().growthAuraRandomTicks && level.getBlockState(pos).isRandomlyTicking(); i++) {
+					level.getBlockState(pos).randomTick(level, pos, level.getRandom());
+				}
+			}
 
 			if (level.getBlockState(pos) != state) {
 				grown++;

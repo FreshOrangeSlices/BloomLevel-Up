@@ -228,6 +228,7 @@ public class CombatGameTests {
 	public void bleedHurtsThroughArmor(GameTestHelper helper) {
 		LivingEntity zombie = zombie(helper, 1, 1);
 		zombie.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+		zombie.tickCount = 0; // a damage tick (drips in between)
 		BloomEffects.BLEED.value().applyEffectTick(helper.getLevel(), zombie, 0);
 		near(helper, 19.0, zombie.getHealth(), "Half a heart, armor ignored");
 		zombie.addEffect(new MobEffectInstance(BloomEffects.BLEED, 60));
@@ -315,7 +316,10 @@ public class CombatGameTests {
 			LivingEntity b = zombie(helper, 4, 3);
 			LivingEntity c = zombie(helper, 3, 4);
 			helper.assertTrue(CombatSkill.lightningChain(helper.getLevel(), player, a, 4.0F, false), "Three enemies: the chain fires");
-			helper.assertTrue(a.getHealth() < 20.0F && b.getHealth() < 20.0F && c.getHealth() < 20.0F, "All three were shocked");
+			helper.assertTrue(a.getHealth() < 20.0F, "The first bounce lands at once");
+			helper.assertTrue(b.getHealth() >= 20.0F && c.getHealth() >= 20.0F, "The next bounces wait their turn");
+			CombatSkill.runQueuedForTests();
+			helper.assertTrue(b.getHealth() < 20.0F && c.getHealth() < 20.0F, "All three were shocked");
 		});
 		helper.succeed();
 	}
@@ -368,6 +372,74 @@ public class CombatGameTests {
 	}
 
 	@GameTest
+	public void spearJabCountsAsTheSwing(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SPEAR));
+		grant(player, CombatIds.BATTER_UP);
+		LivingEntity target = zombie(helper, 3, 3);
+		LivingEntity neighbour = zombie(helper, 3, 4);
+		player.setOnGround(true);
+		// A jab stabs through PiercingWeapon -> stabAttack, never Player.attack.
+		CombatSkill.jabForTests(player, 1.0F);
+		player.stabAttack(net.minecraft.world.entity.EquipmentSlot.MAINHAND, target, 6.0F, true, false, false);
+		CombatSkill.endJab(player);
+		CombatSkill.runQueuedForTests();
+		CombatSkill.endSwingForTests();
+		helper.assertTrue(target.getHealth() < 20.0F, "The jab hit");
+		helper.assertTrue(neighbour.getHealth() < 20.0F, "Batter Up! swept from the jab");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void longReachStretchesTheSpear(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SPEAR));
+		float before = player.getAttackRangeWith(player.getMainHandItem()).maxReach();
+		grant(player, CombatIds.LONG_REACH);
+		float after = player.getAttackRangeWith(player.getMainHandItem()).maxReach();
+		near(helper, before + 2.0, after, "Long Reach adds 2 blocks to the spear's own reach");
+		BloomServices.progression().toggleMajor(BloomAttachments.profile(player), CombatIds.LONG_REACH);
+		near(helper, before, player.getAttackRangeWith(player.getMainHandItem()).maxReach(), "Switched off: back to normal");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void storedImpactAddsUpInOneWindow(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.MACE));
+		grant(player, CombatIds.STORED_IMPACT);
+		CombatSkill.storeImpactForTests(player, 4.0F);
+		CombatSkill.storeImpactForTests(player, 6.0F);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		near(helper, 11.0, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "Both falls stored: 50% of 4 + 6 = +5");
+		CombatSkill.endSwingForTests();
+
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "Spent by the hit");
+		CombatSkill.endSwingForTests();
+
+		CombatSkill.storeImpactForTests(player, 4.0F);
+		BloomAttachments.profile(player).setCounter(CombatIds.STORED_IMPACT_EXPIRES_AT, helper.getLevel().getGameTime());
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, hit(player), 6.0F), "Lost when the window closes");
+		CombatSkill.endSwingForTests();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void windImpactBurstsFromTheGround(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.MACE));
+		grant(player, CombatIds.WIND_IMPACT);
+		helper.setBlock(new BlockPos(4, 0, 4), net.minecraft.world.level.block.Blocks.STONE);
+		LivingEntity zombie = zombie(helper, 2, 4);
+		player.setXRot(90.0F);
+		player.xRotO = 90.0F;
+		helper.assertTrue(CombatSkill.windBurst(player), "Right-clicking the ground bursts");
+		helper.assertTrue(zombie.getDeltaMovement().horizontalDistance() > 0.05, "The zombie was blown away");
+		helper.assertTrue(player.getCooldowns().isOnCooldown(player.getMainHandItem()), "Then a short cooldown");
+		helper.assertFalse(CombatSkill.windBurst(player), "Not again during the cooldown");
+		helper.succeed();
+	}
+
+	@GameTest
 	public void auraSwordPulsesAfterFiveHits(GameTestHelper helper) {
 		withSmallRadii(() -> auraSword(helper));
 		helper.succeed();
@@ -415,6 +487,7 @@ public class CombatGameTests {
 		ServerPlayer player = player(helper, ItemStack.EMPTY);
 		ThrownWeapon thrown = ThrownWeapon.create(helper.getLevel(), player, new ItemStack(Items.IRON_SWORD));
 		helper.assertTrue(thrown.getItem().is(Items.IRON_SWORD), "It carries the sword");
+		helper.assertTrue(thrown.syncedItem().is(Items.IRON_SWORD), "Clients are told it's a sword (not a trident)");
 		helper.assertTrue(CombatAbilities.throwable(new ItemStack(Items.IRON_AXE)) && !CombatAbilities.throwable(new ItemStack(Items.TRIDENT)),
 				"Axes throw with Catch!, tridents throw on their own");
 		LivingEntity zombie = zombie(helper, 1, 1);

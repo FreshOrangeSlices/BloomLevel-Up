@@ -119,11 +119,11 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Placed-block memory | Only XP/Yield/treasure/log blocks placed from an item by a player are remembered, saved per chunk. Planted crops are never "placed" (they had to grow). Known gap: pushing a placed block with a piston loses the mark | `PlacedBlocks` |
 | Efficiency | +1% block break speed per point, as an attribute (works with any tool, and the client's mining animation matches) | `StatEffects` |
 | Yield | Copies every stack of the final drop, after Fortune. Eligible blocks: ores, logs, crops and produce, mushrooms, glowstone, amethyst clusters, clay (tag `bloomlevelup:yield_eligible`). Never on placed blocks. Also applies to shearing drops | tag |
-| Shovel Mastery | With a shovel in the main hand: Efficiency, Yield and Preservation count +20%. Natural dirt/sand/gravel/clay/soul blocks dug with a shovel can turn up treasure: 4% per block per 100 Yield (so ~4.8% at 100 Yield). Dirt itself is never multiplied. Treasure comes from loot table `bloomlevelup:gameplay/excavation_treasure` | config `shovelMasteryBonus`, `excavationTreasureChancePer100Yield` |
+| Shovel Mastery (see Playtest round 1) | With a shovel in the main hand: Efficiency, Yield and Preservation count +20%. Natural dirt/sand/gravel/clay/soul blocks dug with a shovel can turn up treasure: 4% per block per 100 Yield (so ~4.8% at 100 Yield). Dirt itself is never multiplied. Treasure comes from loot table `bloomlevelup:gameplay/excavation_treasure` | config `shovelMasteryBonus`, `excavationTreasureChancePer100Yield` |
 | Vein Mining | Pickaxe on an ore (tag `vein_mineable`): breaks up to 64 connected blocks of the same type, diagonals included. Each block costs normal durability and gives normal XP/drops/Yield. Stops with 1 durability left so the tool never breaks | config `veinMiningMaxBlocks` |
 | Timber | Axe on a natural log: fells up to 256 connected natural logs at or above the cut, only if they touch natural (non-player) leaves. Player-placed logs and log buildings are left alone | config `timberMaxLogs` |
 | Skipping a chain | Hold sneak while breaking to skip Vein Mining / Timber for that block (no need to open the hub) | config `chainBreakSneakBypass` |
-| Growth Aura | While a hoe is in either hand: every second, each crop within 4 blocks (2 up/down) has a 15% chance of an extra growth tick (about 10x faster with good light/farmland). No durability use. Tag `growth_aura_crops` | config `growthAura*` |
+| Growth Aura (see Playtest round 1) | While a hoe is in either hand: every second, each crop within 4 blocks (2 up/down) has a 15% chance of an extra growth tick (about 10x faster with good light/farmland). No durability use. Tag `growth_aura_crops` | config `growthAura*` |
 | Master Shearing | After each successful shear, 50% that the sheep/bogged/snow golem is shearable again, repeatable. Each shear costs 1 extra durability. Modded shearables get the XP and Yield but not the coin flip | config `masterShearingChance` |
 | Triple Catch | Each catch rolls the whole fishing loot table 3 times; +2 rod durability per catch (3x total). XP counts once per catch | config `tripleCatchRolls`, `tripleCatchExtraDurability` |
 
@@ -151,21 +151,21 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Reinforced Shot | +3 damage on crossbow arrows | config `reinforcedShotDamage` |
 | Unrestricted Riptide (confirmed control) | Hold sneak while releasing a trident to riptide with no enchantment, anywhere; release normally to throw. Riptide-enchanted tridents work without water or rain | `CombatSkill.riptideStrength` |
 | Lightning Shock (confirmed) | Enemies within 6 blocks of the struck target. Needs 2+ enemies; 3 shocks at 50% of the hit; one chain per 2 s; ignores the target's hurt cooldown; never triggers Thorns | config `lightningShock*` |
-| Wind Impact | Landing a fall of 1.5+ blocks with a mace in hand bursts wind outward (3.5 blocks), pushing mobs away; it doesn't launch you | config `windImpact*` |
-| Stored Impact | Real fall damage stores 50% (max +20) for the next mace hit; 5-minute cooldown from the fall | config `storedImpact*` |
+| Wind Impact (see Playtest round 1) | Landing a fall of 1.5+ blocks with a mace in hand bursts wind outward (3.5 blocks), pushing mobs away; it doesn't launch you | config `windImpact*` |
+| Stored Impact (see Playtest round 1) | Real fall damage stores 50% (max +20) for the next mace hit; 5-minute cooldown from the fall | config `storedImpact*` |
 | Brawler / Combo | +6 attack damage bare-handed. Combo: +0.25 per clean bare-handed hit, max +5, reset after 3 s without a hit | config |
 | Disarm | 30% on primary bare-handed hits: mobs drop their held item, players drop their selected stack | config `disarmChance` |
 | Long Reach | +2 blocks attack reach while holding a spear | config `longReachBlocks` |
-| Impale / Bleed | Full-strength spear hits and spear charges: 40% to Bleed for 3 s (half a heart per second, ignores armor, Resistance still applies, refreshes instead of stacking). Bleed is a real status effect | config `impaleChance`, `bleedTicks` |
+| Impale / Bleed (see Playtest round 1) | Full-strength spear hits and spear charges: 40% to Bleed for 3 s (half a heart per second, ignores armor, Resistance still applies, refreshes instead of stacking). Bleed is a real status effect | config `impaleChance`, `bleedTicks` |
 | Batter Up! | Non-sword melee weapons and fists sweep under vanilla's sweep rules (full strength, on the ground, not a crit or sprint hit) | `CombatSkill.sweep` |
-| Aura Sword | Every 5th full-strength melee hit releases a 3.5-block circle sweep that pulses twice (0.5 s apart), at your attack damage | config `auraSword*` |
+| Aura Sword (see Playtest round 1) | Every 5th full-strength melee hit releases a 3.5-block circle sweep that pulses twice (0.5 s apart), at your attack damage | config `auraSword*` |
 | Death From Above | Every melee weapon except the mace gains the mace's fall bonus (+4/block for 3 blocks, then +2/block for 5, then +1/block). No fall-damage protection | `StatFormulas.maceFallBonus` |
 | Predator (confirmed for playtesting) | Each consecutive hit on the same target +10%, up to +50%; switching targets or 5 s idle resets | config `predator*` |
 | Bloodlust (confirmed for playtesting) | Each kill +8% damage for 10 s, up to 5 stacks; kills refresh it | config `bloodlust*` |
 | Overkill (confirmed for playtesting) | 60% of a kill's excess real damage, split across up to 3 enemies within 4 blocks. Not from Execute kills or from Overkill's own kills | config `overkill*` |
 | First Strike (confirmed for playtesting) | +50% on the first hit against a full-health target (each pierced target counts separately) | config `firstStrikeBonus` |
 | Crossbow Infinity | Plain arrows loaded into a crossbow aren't used up (and can't be picked back up). Tipped/spectral arrows and fireworks still are | `CombatSkill.freeAmmo` |
-| Charge Attack / Heavy Hands controls | Hold attack (left click) on a mob or the air. Once the swing has recovered, 1 more second of holding charges it (a heavy whoosh, then sparks); release to swing for 2x (it can still crit). A quick tap still attacks, on release. Mining is unchanged. "Charge attack" can be moved to another key in Controls | config `chargeAttackTicks`, `chargeAttackMultiplier` |
+| Charge Attack / Heavy Hands controls (see Playtest round 1) | Hold attack (left click) on a mob or the air. Once the swing has recovered, 1 more second of holding charges it (a heavy whoosh, then sparks); release to swing for 2x (it can still crit). A quick tap still attacks, on release. Mining is unchanged. "Charge attack" can be moved to another key in Controls | config `chargeAttackTicks`, `chargeAttackMultiplier` |
 | Lightning Summon (confirmed control) | Sneak + left click with a trident while not aiming at a mob: lightning where you look (up to 48 blocks). Costs 10% of the trident's max durability and refuses if that would break it; 1 s cooldown | config `lightningSummon*` |
 | Catch! | Right click (rebindable "Throw weapon") with a sword, axe or mace throws it. It always comes back (like Loyalty III), hits for the weapon's own damage plus enchantments, and costs 1 durability. Thrown maces scale with the drop and set off Wind Impact on landing; other thrown weapons scale with the drop with Death From Above. Thrown weapons render as a flat item for now | config `catchThrowSpeed` |
 | Assault Rifle | Loading fills a 16-round magazine from your arrows (or fireworks); each click fires one round and holding right click keeps firing (about 5 shots a second); it reloads normally once empty | config `assaultRifleMagazine` |
@@ -199,6 +199,37 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Bare-hand rune | Works only with an empty main hand: a bare-handed attack hits with the rune's enchantments (Sharpness, Smite, Bane of Arthropods, Knockback, Fire Aspect, Looting, Sweeping Edge). Fists only sweep with Batter Up!, so Sweeping Edge needs it | tag `rune/unarmed` |
 | Fitting Armor / Medium shield | When an axe disables your shield, it stays disabled half as long | `ArmorSkill.shieldDisableSeconds` |
 | Nameplate (COMBAT.md) | Other players see `Name [lvl N]`, N = Major Levels currently spent; gray, green for good once any category is mastered | `client/NameTags` |
+
+## Playtest round 1 (report for Chunks 3-5, 2026-10-20)
+
+Rows above that these replace are marked "(see Playtest round 1)".
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Mouse buttons | Minecraft 26.3 numbers mouse buttons differently (left = 1, right = 3; older versions used 0 and 1). The hub compared against the old numbers, so every left click acted as "refund" and nothing could be bought. It now uses the engine's own constants. A client game test clicks Majors with the real mouse | `HubScreen.mouseClicked` |
+| Owned but off | An "OFF" badge and a rust-colored frame, so switching a Major off never looks like a refund | `HubScreen.drawMajors` |
+| Armor readout | The Armor tab shows the real armor total and the overcap bonus (the vanilla bar stops at 20 points) | `HubScreen.drawHeader` |
+| XP Investment on/off | Each stat's XP-invested points have their own switch (in XP mode the On/Off buttons cover only them), so 300 invested points can be dropped while the 100 level points keep working. The stat's own switch still turns everything off. Saved as `disabled_invested` | `ProgressionService.toggleInvested` |
+| XP Investment look | XP mode: green "XP Investment points", a green wash and frame on the stat rows, values shown as `100 +200`. Shorter button labels ("Mode: Level / Mode: XP", "Buy point: N XP") so nothing is cut off | `HubScreen` |
+| Weapon-skill key | One rebindable key, default right click: hold to charge (Charge Attack / Heavy Hands), tap to throw (Catch!). Letting go of a charge swings at the crosshair, never at a block. On right click it steps aside: blocks and mobs that use a click (chests, doors, log stripping, villagers, horses) go first, anything in the off hand wins, and items with their own right click (tridents, spears, bows, food) keep it. Aimed at the air or a hostile mob it acts at once. Bound to another key, right click is untouched. Replaces the old "Charge attack" (left click) and "Throw weapon" keys. Lightning Summon stays on sneak + left click | `client/combat/CombatControls` |
+| Charge meter | A small bar under the crosshair while charging; gold and blinking when ready | `client/gui/BloomHud` |
+| Straight Shot crosshair | With Straight Shot and a bow, the crosshair is a dot: red while drawing, green when fully drawn | `BloomHud` |
+| Bloodlust bar | A red bar right of the hotbar: stacks, damage bonus and time left, refilled by each kill. Replaces the action-bar message | `BloomHud`, payload `Bloodlust` |
+| Overkill radius | A ring of crit sparks marks the splash radius on every Overkill kill | `CombatSkill.overkill` |
+| Inventory buttons | Survival inventory: the hub button sits right of the recipe book; Pocket and Runes stack above the off-hand slot (off the right side, so potion effects aren't covered). Creative keeps them outside the top-right corner | `HubButton`, `SideButton` |
+| Reflect catch | Arrows that can't normally be picked up (a skeleton's) are caught too. Mob-thrown tridents and Infinity/creative arrows aren't, so a catch never farms or duplicates items | `ArmorSkill.catchable` |
+| Spear jab | A spear's left-click jab stabs through `PiercingWeapon`, not `Player.attack`; its first stab now counts as the swing's own target, so Batter Up!, Impale (full strength) and the rest follow it | `PiercingWeaponMixin`, `CombatSkill.onStab` |
+| Long Reach | Spears use their own attack-range component, not entity reach; Long Reach now adds +2 blocks to that range (jab and charge), both sides. Other weapons (via Copycat) still get +2 entity reach | `CombatSkill.longReach` |
+| Catch! model | The client never knew which weapon was thrown (it defaulted to a trident); the thrown item is now synced | `ThrownWeapon` |
+| Unrestricted Riptide | Working as designed (sneak while releasing); a one-time action-bar hint now says so when a trident without Riptide is used without sneaking | `CombatControls.riptideHint` |
+| Stored Impact (replaces the cooldown) | The first real fall opens one 5-minute window; every real fall inside it adds 50% of its damage (max +20 total). Later falls don't restart the timer. The next mace hit spends it all, or it's lost when the window closes. The action bar shows the total and time left | config `storedImpactWindowTicks` |
+| Wind Impact (rework) | Right-click the top of a block with a mace (one the block itself doesn't use): a wind-charge burst there, which launches you up if you're standing on it (falling back to where you jumped from is forgiven, as with a wind charge) and blows mobs within 3.5 blocks away. 1 s cooldown, shown on the mace. A thrown mace still bursts where it lands. Landing a fall no longer triggers it | `CombatSkill.windBurst`, config `windImpactCooldownTicks` |
+| Impale | 50% (was 40%). Bleed has no potion swirl; it drips dark red and spatters on each damage tick (the status icon stays) | config `impaleChance`, `BleedEffect` |
+| Lightning Shock | One bounce per second (spark line, burst and crack each time), so the ricochet can be followed | config `lightningShockBounceTicks` |
+| Aura Sword | Three waves rolling outward to 1, 2 and 3 blocks, 0.2 s apart; a mob is hit by one wave at most | config `auraSwordRadius` (3), `auraSwordPulseGapTicks` |
+| Growth Aura | 35% per crop per second (was 15%), and a crop now jumps a whole growth stage instead of getting one random tick; other plants (cactus, cane, berries...) get 4 growth ticks | config `growthAuraChance`, `growthAuraRandomTicks` |
+| Shovel Mastery | 3% base treasure chance per dug block, plus 5% per 100 (boosted) Yield. Loot: music discs out; coal, gravel, lapis and raw iron in | config `excavationTreasureBaseChance`, loot table |
+| Config versions | The config file now has `configVersion`. Files from before this round move to the new defaults above, but only for values that were still at the old default | `BloomConfig.migrate` |
 
 ## Still open (need a design call)
 

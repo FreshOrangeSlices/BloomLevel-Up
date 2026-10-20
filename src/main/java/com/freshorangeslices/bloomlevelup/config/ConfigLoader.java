@@ -32,13 +32,14 @@ public final class ConfigLoader {
 	public static BloomConfig load() {
 		Path path = path();
 		BloomConfig config = new BloomConfig();
+		config.configVersion = BloomConfig.CURRENT_VERSION;
 
 		if (Files.exists(path)) {
 			try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
 				BloomConfig read = GSON.fromJson(reader, BloomConfig.class);
 
 				if (read != null) {
-					config = read;
+					config = read.migrate();
 				}
 			} catch (IOException | JsonParseException e) {
 				BloomLevelUp.LOGGER.error("Couldn't read {}, using defaults", path, e);

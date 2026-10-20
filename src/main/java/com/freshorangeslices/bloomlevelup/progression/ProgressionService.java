@@ -266,7 +266,30 @@ public final class ProgressionService {
 		return ActionResult.success();
 	}
 
-	/** Effective points in a stat: natural + invested, or 0 while the player has it toggled off. */
+	/**
+	 * Switches a stat's XP-invested (post-100) points off or on without touching its natural points, so a
+	 * player can drop the overcap and keep the base stat. Any stat with invested points can do this.
+	 */
+	public ActionResult toggleInvested(BloomProfile profile, String statId) {
+		Optional<StatDefinition> stat = definitions.stat(statId);
+
+		if (stat.isEmpty()) {
+			return ActionResult.of(Outcome.UNKNOWN_STAT);
+		}
+
+		CategoryProgress progress = profile.category(stat.get().categoryId());
+
+		if (!progress.disabledInvested().remove(statId)) {
+			progress.disabledInvested().add(statId);
+		}
+
+		return ActionResult.success();
+	}
+
+	/**
+	 * Effective points in a stat: natural + invested, or 0 while the player has it toggled off. The invested
+	 * part can also be switched off on its own.
+	 */
 	public int statValue(BloomProfile profile, String statId) {
 		Optional<StatDefinition> stat = definitions.stat(statId);
 
@@ -278,6 +301,10 @@ public final class ProgressionService {
 
 		if (progress.disabledStats().contains(statId)) {
 			return 0;
+		}
+
+		if (progress.disabledInvested().contains(statId)) {
+			return progress.natural().getOrDefault(statId, 0);
 		}
 
 		return progress.rawStat(statId);

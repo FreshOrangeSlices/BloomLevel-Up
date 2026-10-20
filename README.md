@@ -46,23 +46,27 @@ Every push builds automatically. Open the **Actions** tab → latest **build** r
 
 ## Trying it in game
 
-Open your inventory and click the button just outside its top-right corner, or bind **Open Skill Hub**
-in Controls. In the hub:
+Open your inventory and click the button right of the recipe book, or bind **Open Skill Hub** in
+Controls. In the hub:
 
 - Category tabs along the top. Stats on the left: **+ / −** to spend or take back points (shift = 10),
   **On/Off** to switch a stat without losing points.
 - Majors on the right: click to buy, click an owned one to switch it on/off, right-click to refund.
-  Glowing = on, dim = owned but off, dark = not owned. Hover for details.
+  Glowing = on, "OFF" badge = owned but off, dark = not owned. Hover for details.
+- After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
+  On/Off buttons switch only a stat's invested points. The Armor tab shows your real armor total.
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).
 - Vein Mining and Timber: hold **sneak** while breaking to skip them for that block.
 - Copycat: **shift-click** an owned weapon Major in the hub to copy it; shift-click Copycat to stop.
-- Combat controls (rebindable in Controls → Bloom Level-Up): **hold left click** to charge (Charge
-  Attack / Heavy Hands), **right click** with a sword/axe/mace to throw it (Catch!), **sneak + left click**
-  with a trident to call lightning (Lightning Summon), **sneak while releasing** a trident to riptide
-  (Unrestricted Riptide).
-- Hoarder's Pocket: the **chest button** under the hub button in your inventory, `/bloom pocket`, or bind
-  **Open Hoarder's Pocket** in Controls.
-- Rune Embedding: the **enchanted-book button** under those (or `/bloom runes`, or bind **Open Rune
+- Combat controls (rebindable in Controls → Bloom Level-Up): the **weapon-skill key** (right click by
+  default) — **hold** to charge (Charge Attack / Heavy Hands; a meter under the crosshair turns gold when
+  ready, let go to swing), **tap** to throw a sword/axe/mace (Catch!). Chests, doors, villagers, items in
+  your off hand and items with their own right click still work as usual. **Right-click the ground** with
+  a mace for a wind burst (Wind Impact). **Sneak + left click** with a trident calls lightning
+  (Lightning Summon); **sneak while releasing** a trident to riptide (Unrestricted Riptide).
+- Hoarder's Pocket: the **chest button** above the off-hand slot in your inventory, `/bloom pocket`, or
+  bind **Open Hoarder's Pocket** in Controls.
+- Rune Embedding: the **enchanted-book button** above that (or `/bloom runes`, or bind **Open Rune
   Embedding**). Slots 1-4 work while you wear no armor, slot 5 while your hand is empty.
 - Ascension: **double-tap jump** to fly, like creative.
 - Become My Fuel: hold the weapon in your **main hand** and drink a harmful potion from your **off hand**.

@@ -8,6 +8,12 @@ package com.freshorangeslices.bloomlevelup.config;
  * without code changes.
  */
 public final class BloomConfig {
+	/** The defaults this build ships with. Files from older builds are moved onto changed defaults by {@link #migrate()}. */
+	public static final int CURRENT_VERSION = 1;
+
+	/** Which build's defaults the file was written with (0 = before versioning). */
+	public int configVersion;
+
 	/** Natural level cap per category. */
 	public int levelCap = 100;
 
@@ -81,12 +87,16 @@ public final class BloomConfig {
 	/** Shovel Mastery: Utility stats count this much more while using a shovel (0.20 = +20%). */
 	public double shovelMasteryBonus = 0.20;
 	/** Shovel Mastery treasure: chance per natural dug block for every 100 (boosted) Yield. */
-	public double excavationTreasureChancePer100Yield = 0.04;
+	public double excavationTreasureChancePer100Yield = 0.05;
+	/** Shovel Mastery treasure: chance per natural dug block before any Yield. */
+	public double excavationTreasureBaseChance = 0.03;
 	/** Growth Aura: radius (horizontal / vertical) and the chance per crop per pulse for an extra growth tick. */
 	public int growthAuraRadius = 4;
 	public int growthAuraHeight = 2;
 	public int growthAuraIntervalTicks = 20;
-	public double growthAuraChance = 0.15;
+	public double growthAuraChance = 0.35;
+	/** Growth Aura: growth ticks per pulse for plants that aren't crops (cactus, cane, berries, saplings...). */
+	public int growthAuraRandomTicks = 4;
 	/** Master Shearing: chance the target stays shearable; extra durability per shear. */
 	public double masterShearingChance = 0.5;
 	public int masterShearingExtraDurability = 1;
@@ -123,11 +133,15 @@ public final class BloomConfig {
 	public double lightningShockRatio = 0.5;
 	public double lightningShockRadius = 6.0;
 	public int lightningShockCooldownTicks = 40;
+	/** Lightning Shock: pause between bounces, so the ricochet can be followed. */
+	public int lightningShockBounceTicks = 20;
 	public double storedImpactRatio = 0.5;
 	public double storedImpactCap = 20.0;
-	public int storedImpactCooldownTicks = 6000;
+	/** Stored Impact: one storage window opened by the first stored fall; later falls add to it until it closes. */
+	public int storedImpactWindowTicks = 6000;
 	public double windImpactRadius = 3.5;
-	public double windImpactMinFall = 1.5;
+	/** Wind Impact: right-click the ground with a mace for a wind-charge burst; cooldown between bursts. */
+	public int windImpactCooldownTicks = 20;
 	public double windImpactStrength = 1.2;
 	public double brawlerDamage = 6.0;
 	public double comboPerHit = 0.25;
@@ -135,11 +149,12 @@ public final class BloomConfig {
 	public int comboResetTicks = 60;
 	public double disarmChance = 0.30;
 	public double longReachBlocks = 2.0;
-	public double impaleChance = 0.40;
+	public double impaleChance = 0.50;
 	public int bleedTicks = 60;
 	public int auraSwordHits = 5;
-	public double auraSwordRadius = 3.5;
-	public int auraSwordPulseGapTicks = 10;
+	public double auraSwordRadius = 3.0;
+	/** Aura Sword: ticks between its three outward waves. */
+	public int auraSwordPulseGapTicks = 4;
 	public double predatorPerStack = 0.10;
 	public int predatorMaxStacks = 5;
 	public int predatorResetTicks = 100;
@@ -183,6 +198,28 @@ public final class BloomConfig {
 	/** Stack Overflow: stack size in your own inventory and pocket (at most 300, what the save format allows). */
 	public int stackOverflowMax = 300;
 
+	/**
+	 * Moves an older file onto this build's changed defaults, but only for values the server owner never
+	 * changed (still equal to the old default). Returns this.
+	 */
+	public BloomConfig migrate() {
+		if (configVersion < 1) {
+			// Playtest round 1 (2026-10-19).
+			impaleChance = moved(impaleChance, 0.40, 0.50);
+			auraSwordRadius = moved(auraSwordRadius, 3.5, 3.0);
+			auraSwordPulseGapTicks = auraSwordPulseGapTicks == 10 ? 4 : auraSwordPulseGapTicks;
+			growthAuraChance = moved(growthAuraChance, 0.15, 0.35);
+			excavationTreasureChancePer100Yield = moved(excavationTreasureChancePer100Yield, 0.04, 0.05);
+		}
+
+		configVersion = CURRENT_VERSION;
+		return this;
+	}
+
+	private static double moved(double value, double oldDefault, double newDefault) {
+		return Math.abs(value - oldDefault) < 1.0E-9 ? newDefault : value;
+	}
+
 	public BloomConfig validated() {
 		levelCap = Math.max(1, levelCap);
 		majorLevelEvery = Math.max(1, majorLevelEvery);
@@ -213,10 +250,12 @@ public final class BloomConfig {
 		timberMaxLogs = Math.max(1, Math.min(4096, timberMaxLogs));
 		shovelMasteryBonus = Math.max(0.0, shovelMasteryBonus);
 		excavationTreasureChancePer100Yield = Math.max(0.0, excavationTreasureChancePer100Yield);
+		excavationTreasureBaseChance = Math.min(1.0, Math.max(0.0, excavationTreasureBaseChance));
 		growthAuraRadius = Math.max(0, Math.min(16, growthAuraRadius));
 		growthAuraHeight = Math.max(0, Math.min(8, growthAuraHeight));
 		growthAuraIntervalTicks = Math.max(1, growthAuraIntervalTicks);
 		growthAuraChance = Math.min(1.0, Math.max(0.0, growthAuraChance));
+		growthAuraRandomTicks = Math.max(1, Math.min(16, growthAuraRandomTicks));
 		masterShearingChance = Math.min(1.0, Math.max(0.0, masterShearingChance));
 		masterShearingExtraDurability = Math.max(0, masterShearingExtraDurability);
 		tripleCatchRolls = Math.max(1, Math.min(10, tripleCatchRolls));
@@ -241,11 +280,12 @@ public final class BloomConfig {
 		lightningShockRatio = Math.max(0.0, lightningShockRatio);
 		lightningShockRadius = Math.max(1.0, Math.min(32.0, lightningShockRadius));
 		lightningShockCooldownTicks = Math.max(0, lightningShockCooldownTicks);
+		lightningShockBounceTicks = Math.max(0, Math.min(100, lightningShockBounceTicks));
 		storedImpactRatio = Math.max(0.0, storedImpactRatio);
 		storedImpactCap = Math.max(0.0, storedImpactCap);
-		storedImpactCooldownTicks = Math.max(0, storedImpactCooldownTicks);
+		storedImpactWindowTicks = Math.max(1, storedImpactWindowTicks);
 		windImpactRadius = Math.max(0.5, Math.min(16.0, windImpactRadius));
-		windImpactMinFall = Math.max(0.0, windImpactMinFall);
+		windImpactCooldownTicks = Math.max(0, windImpactCooldownTicks);
 		windImpactStrength = Math.max(0.0, windImpactStrength);
 		brawlerDamage = Math.max(0.0, brawlerDamage);
 		comboPerHit = Math.max(0.0, comboPerHit);

@@ -331,6 +331,8 @@ public class UtilityGameTests {
 		helper.setBlock(new BlockPos(3, 1, 3), Blocks.SAND);
 		helper.setBlock(new BlockPos(3, 2, 3), Blocks.CACTUS);
 		BlockState before = helper.getBlockState(new BlockPos(3, 2, 3));
+		helper.setBlock(new BlockPos(2, 1, 3), Blocks.FARMLAND);
+		helper.setBlock(new BlockPos(2, 2, 3), Blocks.WHEAT);
 
 		BloomConfig config = BloomServices.config();
 		double chance = config.growthAuraChance;
@@ -340,6 +342,8 @@ public class UtilityGameTests {
 			int grown = UtilitySkill.growthAura(player);
 			helper.assertTrue(grown >= 1, "The cactus got a growth tick");
 			helper.assertTrue(helper.getBlockState(new BlockPos(3, 2, 3)) != before, "Cactus state advanced");
+			helper.assertValueEqual(1, ((net.minecraft.world.level.block.CropBlock) Blocks.WHEAT).getAge(helper.getBlockState(new BlockPos(2, 2, 3))),
+					"Wheat jumped a whole growth stage");
 
 			player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
 			helper.assertValueEqual(0, UtilitySkill.growthAura(player), "No hoe, no aura");

@@ -262,6 +262,23 @@ class ProgressionServiceTest {
 	}
 
 	@Test
+	void investedPointsSwitchOffWithoutTheNaturalOnes() {
+		FakeWallet wallet = new FakeWallet(100000);
+		levelTo(UTILITY, 100);
+		service.allocate(profile, EFFICIENCY, Pool.NATURAL, 40);
+		service.invest(profile, UTILITY, 3, wallet);
+		service.allocate(profile, EFFICIENCY, Pool.INVESTED, 3);
+		assertEquals(43, service.statValue(profile, EFFICIENCY));
+		assertTrue(service.toggleInvested(profile, EFFICIENCY).ok());
+		assertEquals(40, service.statValue(profile, EFFICIENCY));
+		service.toggleStat(profile, EFFICIENCY);
+		assertEquals(0, service.statValue(profile, EFFICIENCY), "the whole-stat switch still wins");
+		service.toggleStat(profile, EFFICIENCY);
+		service.toggleInvested(profile, EFFICIENCY);
+		assertEquals(43, service.statValue(profile, EFFICIENCY));
+	}
+
+	@Test
 	void investmentNeedsEnoughXp() {
 		levelTo(UTILITY, 100);
 		assertEquals(Outcome.NOT_ENOUGH_XP, service.invest(profile, UTILITY, 1, new FakeWallet(99)).outcome());

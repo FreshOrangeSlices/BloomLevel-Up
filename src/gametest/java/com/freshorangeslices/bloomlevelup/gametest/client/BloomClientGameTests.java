@@ -112,7 +112,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 	private static void click(ClientGameTestContext context, String major, int button) {
 		double[] at = context.computeOnClient(client -> {
-			if (!(client.screen instanceof HubScreen hub)) {
+			if (!(client.gui.screen() instanceof HubScreen hub)) {
 				return null;
 			}
 

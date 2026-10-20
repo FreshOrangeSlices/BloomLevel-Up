@@ -39,6 +39,20 @@ jobs:
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=gametest-summary::{esc(text[:3900])}")
           PY
+      # A fingerprint and a virus scan of the jar, shown on the run, so a download can be checked against it.
+      - name: check jar
+        if: success()
+        run: |
+          set +e
+          ls build/libs/*.jar | grep -v -- '-sources.jar' > jars.txt
+          sha256sum $(cat jars.txt) | sed 's#build/libs/##' > jar-sha256.txt
+          sudo apt-get update -qq > /dev/null && sudo apt-get install -y -qq clamav > /dev/null 2>&1
+          sudo systemctl stop clamav-freshclam > /dev/null 2>&1
+          sudo freshclam --quiet > /dev/null 2>&1
+          clamscan --no-summary $(cat jars.txt) > clam.txt 2>&1
+          status=$?
+          verdict=$([ $status -eq 0 ] && echo "ClamAV: clean" || echo "ClamAV exit $status: $(tr '\n' ' ' < clam.txt)")
+          echo "::notice title=jar-check::SHA-256 $(tr '\n' ' ' < jar-sha256.txt)| $verdict"
       - name: capture build artifacts
         if: success()
         uses: actions/upload-artifact@v7

@@ -19,41 +19,16 @@ jobs:
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           {
-          for j in $(echo "$CP" | tr ':' ' '); do unzip -l "$j" 2>/dev/null | grep -oE 'net/minecraft/[A-Za-z0-9/$]*(WindCharge|PiercingWeapon|KineticWeapon|AttackRange|Stab|Spear|CropBlock|DustParticleOptions)[A-Za-z0-9$]*\.class' ; done | sort -u
-          code net.minecraft.client.gui.screens.Screen 'mouseClicked|mouseReleased'
-          code net.minecraft.client.gui.components.events.ContainerEventHandler 'mouseClicked'
-          code net.minecraft.client.gui.components.events.AbstractContainerEventHandler 'mouseClicked'
-          code net.minecraft.client.MouseHandler 'void onButton'
-          dump net.minecraft.client.input.MouseButtonInfo
-          dump net.minecraft.world.item.component.AttackRange
-          code net.minecraft.world.item.component.AttackRange 'isInRange|effective|getClosest|static|max'
-          dump net.minecraft.world.item.component.PiercingWeapon
-          code net.minecraft.world.item.component.PiercingWeapon 'attack|canHit|hit'
-          dump net.minecraft.world.item.component.KineticWeapon
-          code net.minecraft.world.item.component.KineticWeapon 'damageEntities|tick|apply'
-          dump net.minecraft.world.entity.LivingEntity 'ttackRange|Range|stab|Stab|ierc|mpulse|kinetic|Kinetic|lungeOrStab|onAttack'
-          dump net.minecraft.world.entity.player.Player 'ttackRange|Range|stab|Stab|ierc|mpulse|attack|Attack'
-          code net.minecraft.world.entity.player.Player 'boolean isWithinAttackRange|void attack[(]|cannotAttack|stab|Stab|ierc'
-          code net.minecraft.client.Minecraft 'boolean startAttack|void startUseItem|continueAttack'
-          dump net.minecraft.client.Minecraft 'rightClickDelay|missTime|startUseItem|startAttack'
-          code net.minecraft.client.multiplayer.MultiPlayerGameMode 'stab|Stab|ierc|attack'
-          code net.minecraft.server.network.ServerGamePacketListenerImpl 'handlePlayerAction|handleAttack|handleInteract|stab|Stab|ierc'
-          code net.minecraft.world.item.TridentItem 'releaseUsing|use[(]'
-          dump net.minecraft.world.level.Level 'explode'
-          dump net.minecraft.server.level.ServerLevel 'explode'
-          dump net.minecraft.world.level.block.CropBlock 'Age|age|grow'
-          dump net.minecraft.core.particles.DustParticleOptions
-          dump net.minecraft.world.effect.MobEffect 'MobEffect[(]|particle|Particle'
-          dump net.minecraft.world.entity.projectile.arrow.ThrownTrident 'defineSynchedData|DATA|ID_'
-          dump net.minecraft.network.syncher.EntityDataSerializers 'ITEM_STACK'
-          dump net.minecraft.client.gui.screens.inventory.InventoryScreen
-          code net.minecraft.client.gui.screens.inventory.InventoryScreen 'void init|lambda'
-          dump net.minecraft.client.gui.screens.inventory.AbstractContainerScreen 'leftPos|topPos|imageWidth|imageHeight|Recipe'
-          dump net.minecraft.client.gui.screens.recipebook.RecipeBookComponent 'updateScreenPosition|isVisible|toggleVisibility'
-          dump net.minecraft.client.gui.Gui 'Crosshair|crosshair'
-          dump net.minecraft.world.entity.ai.attributes.Attributes 'RANGE|REACH'
+          dump net.minecraft.client.gui.screens.inventory.HopperScreen
+          code net.minecraft.client.gui.screens.inventory.HopperScreen 'HopperScreen[(]|extractBackground|extractRenderState'
+          dump net.minecraft.world.inventory.Slot
+          dump net.minecraft.world.inventory.InventoryMenu 'static|EMPTY|SLOT'
+          dump net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+          code net.minecraft.client.gui.screens.inventory.AbstractContainerScreen 'extractTooltip|extractSlot[(]|extractContents'
+          dump net.minecraft.client.gui.GuiGraphicsExtractor 'blit|blitSprite|setTooltipForNextFrame|setComponentTooltipForNextFrame'
+          dump net.minecraft.world.item.SmithingTemplateItem 'EMPTY'
+          dump net.minecraft.world.item.component.BlocksAttacks 'disable|record|class'
           } > dump.txt 2>&1
-          for c in $(grep -E '^net/minecraft/[A-Za-z/]*WindCharge\.class$' dump.txt | sed 's#/#.#g; s#\.class##' | sort -u); do dump "$c" 'explode|Explosion|EXPLOSION|KNOCKBACK|static' >> dump.txt 2>&1; code "$c" 'void explode' >> dump.txt 2>&1; done
           wc -c dump.txt
       - name: publish (1)
         run: python3 emit.py 0 30

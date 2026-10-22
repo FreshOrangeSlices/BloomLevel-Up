@@ -20,18 +20,9 @@ jobs:
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           full() { echo "=== FULL $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s*$' ; }
           {
-          dump net.minecraft.client.gui.screens.advancements.AdvancementsScreen 'mouse|extract|class '
-          dump net.minecraft.client.gui.components.events.GuiEventListener 'mouse|class |interface '
-          dump net.minecraft.client.gui.components.events.ContainerEventHandler 'mouse|isDragging|setDragging|interface '
-          dump net.minecraft.client.gui.components.AbstractButton
-          dump net.minecraft.client.gui.components.AbstractWidget 'extract|isHovered|setTooltip|class |protected boolean|public boolean'
-          dump net.minecraft.client.gui.screens.advancements.AdvancementWidgetType
-          code net.minecraft.client.gui.screens.advancements.AdvancementWidgetType 'static [{]'
-          code net.minecraft.client.gui.screens.advancements.AdvancementsScreen 'mouseDragged|mouseScrolled|extractWindow|extractInside'
-          dump net.minecraft.client.input.MouseButtonEvent
-          dump org.joml.Matrix3x2fStack 'push|pop|class '
-          dump org.joml.Matrix3x2f 'translate[(]float, float[)]|scale[(]float[)]|scale[(]float, float[)]|class '
-          dump net.minecraft.client.gui.screens.Screen 'extractBackground|extractRenderState|extractTransparent|extractMenuBackground|blur|class '
+          dump net.minecraft.client.Minecraft 'resize|class '
+          dump net.minecraft.client.Options 'guiScale|class '
+          dump net.minecraft.client.OptionInstance 'public void set|public T get|class '
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

@@ -273,6 +273,12 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Become My Fuel text | The description and the weapon tooltip said 10 s; they now say 5 s (the tooltip reads the live setting) | lang, `BloomLevelUpClient` |
 | Config version 4 | Round 3's defaults move over as before | `BloomConfig.migrate` |
 
+## Predator and Combo meters (2026-10-22)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| HUD meters | Predator (purple: stacks on the current target, bonus %) and Combo (blue: stacks, bonus damage) get bars left of the hotbar, mirroring Stored Impact and Bloodlust on the right. Each shows the bonus the next hit gets and empties as the stacks run out | `BloomHud`, payload `Meter` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

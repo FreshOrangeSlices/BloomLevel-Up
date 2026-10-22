@@ -49,7 +49,7 @@ public final class BloomSync {
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncProfile.TYPE, BloomPayloads.SyncProfile.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Result.TYPE, BloomPayloads.Result.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.NameTag.TYPE, BloomPayloads.NameTag.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Bloodlust.TYPE, BloomPayloads.Bloodlust.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Meter.TYPE, BloomPayloads.Meter.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.Request.TYPE, BloomPayloads.Request.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.CombatInput.TYPE, BloomPayloads.CombatInput.CODEC);
 

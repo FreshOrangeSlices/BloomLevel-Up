@@ -28,7 +28,9 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  * <ul>
  *   <li>a charge meter under the crosshair while the weapon-skill key is held (gold when ready to release);</li>
  *   <li>Straight Shot swaps the crosshair for a dot: red while drawing, green once the bow is fully drawn;</li>
- *   <li>a Bloodlust rage bar right of the hotbar: stacks, the damage bonus, and how long it lasts.</li>
+ *   <li>a Bloodlust rage bar right of the hotbar (Stored Impact above it): stacks, the damage bonus, and how
+ *   long it lasts;</li>
+ *   <li>Predator and Combo bars left of the hotbar, the same way.</li>
  * </ul>
  */
 public final class BloomHud {
@@ -48,10 +50,19 @@ public final class BloomHud {
 	private static final int IMPACT_SEGMENTS = 4;
 	private static final int IMPACT_PER_BAR = 200;
 
-	private static int bloodlustStacks;
-	private static float bloodlustBonus;
-	private static int bloodlustTicksLeft;
-	private static int bloodlustTotalTicks = 1;
+	private static final int PREDATOR_BACK = 0xA0180A24;
+	private static final int PREDATOR_FILL = 0xFFB070FF;
+	private static final int PREDATOR_TEXT = 0xFFC79BFF;
+	private static final int COMBO_BACK = 0xA0081A24;
+	private static final int COMBO_FILL = 0xFF4FC3F7;
+	private static final int COMBO_TEXT = 0xFF8AD8FA;
+	private static final int METER_WIDTH = 60;
+
+	/** Per meter kind (BloomPayloads.Meter): stacks, bonus, ticks left, total ticks. */
+	private static final int[] STACKS = new int[BloomPayloads.Meter.KINDS];
+	private static final float[] BONUS = new float[BloomPayloads.Meter.KINDS];
+	private static final int[] TICKS_LEFT = new int[BloomPayloads.Meter.KINDS];
+	private static final int[] TOTAL_TICKS = {1, 1, 1};
 
 	private BloomHud() {
 	}
@@ -60,22 +71,29 @@ public final class BloomHud {
 		HudElementRegistry.replaceElement(VanillaHudElements.CROSSHAIR, BloomHud::crosshair);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.CROSSHAIR, BloomLevelUp.id("charge_meter"), BloomHud::chargeMeter);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("bloodlust"), BloomHud::bloodlust);
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("predator_combo"), BloomHud::predatorAndCombo);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("stored_impact"), BloomHud::storedImpact);
 
-		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Bloodlust.TYPE, (payload, context) -> {
-			bloodlustStacks = payload.stacks();
-			bloodlustBonus = payload.bonus();
-			bloodlustTicksLeft = payload.ticksLeft();
-			bloodlustTotalTicks = Math.max(1, payload.totalTicks());
+		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Meter.TYPE, (payload, context) -> {
+			int kind = payload.kind();
+
+			if (kind >= 0 && kind < BloomPayloads.Meter.KINDS) {
+				STACKS[kind] = payload.stacks();
+				BONUS[kind] = payload.bonus();
+				TICKS_LEFT[kind] = payload.ticksLeft();
+				TOTAL_TICKS[kind] = Math.max(1, payload.totalTicks());
+			}
 		});
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			if (bloodlustTicksLeft > 0 && --bloodlustTicksLeft == 0) {
-				bloodlustStacks = 0;
-			}
+			for (int kind = 0; kind < BloomPayloads.Meter.KINDS; kind++) {
+				if (TICKS_LEFT[kind] > 0 && --TICKS_LEFT[kind] == 0) {
+					STACKS[kind] = 0;
+				}
 
-			if (client.player == null) {
-				bloodlustStacks = 0;
-				bloodlustTicksLeft = 0;
+				if (client.player == null) {
+					STACKS[kind] = 0;
+					TICKS_LEFT[kind] = 0;
+				}
 			}
 		});
 	}
@@ -189,18 +207,35 @@ public final class BloomHud {
 	// ------------------------------------------------------------------ Bloodlust
 
 	private static void bloodlust(GuiGraphicsExtractor g, DeltaTracker delta) {
+		int kind = BloomPayloads.Meter.BLOODLUST;
+		meter(g, kind, width() / 2 + 91 + 34, height() - 12,
+				Component.translatable("bloom.hud.bloodlust", STACKS[kind], Math.round(BONUS[kind] * 100.0F)), RAGE_BACK, RAGE_FILL, RAGE_TEXT);
+	}
+
+	// ------------------------------------------------------------------ Predator / Combo (left of the hotbar)
+
+	private static void predatorAndCombo(GuiGraphicsExtractor g, DeltaTracker delta) {
+		int x = width() / 2 - 91 - 34 - METER_WIDTH;
+		int predator = BloomPayloads.Meter.PREDATOR;
+		int combo = BloomPayloads.Meter.COMBO;
+		meter(g, predator, x, height() - 36,
+				Component.translatable("bloom.hud.predator", STACKS[predator], Math.round(BONUS[predator] * 100.0F)),
+				PREDATOR_BACK, PREDATOR_FILL, PREDATOR_TEXT);
+		meter(g, combo, x, height() - 12,
+				Component.translatable("bloom.hud.combo", STACKS[combo], String.format(java.util.Locale.ROOT, "%.2f", BONUS[combo])),
+				COMBO_BACK, COMBO_FILL, COMBO_TEXT);
+	}
+
+	/** A label over a bar that empties as the stacks run out. Hidden with no stacks. */
+	private static void meter(GuiGraphicsExtractor g, int kind, int x, int y, Component label, int back, int fill, int text) {
 		Minecraft minecraft = Minecraft.getInstance();
 
-		if (bloodlustStacks <= 0 || bloodlustTicksLeft <= 0 || minecraft.player == null) {
+		if (STACKS[kind] <= 0 || TICKS_LEFT[kind] <= 0 || minecraft.player == null) {
 			return;
 		}
 
-		int x = width() / 2 + 91 + 34;
-		int y = height() - 12;
-		int w = 60;
-		Component label = Component.translatable("bloom.hud.bloodlust", bloodlustStacks, Math.round(bloodlustBonus * 100.0F));
-		g.text(minecraft.font, label, x, y - 11, RAGE_TEXT);
-		g.fill(x - 1, y - 1, x + w + 1, y + 4, RAGE_BACK);
-		g.fill(x, y, x + Math.round(w * (bloodlustTicksLeft / (float) bloodlustTotalTicks)), y + 3, RAGE_FILL);
+		g.text(minecraft.font, label, x, y - 11, text);
+		g.fill(x - 1, y - 1, x + METER_WIDTH + 1, y + 4, back);
+		g.fill(x, y, x + Math.round(METER_WIDTH * (TICKS_LEFT[kind] / (float) TOTAL_TICKS[kind])), y + 3, fill);
 	}
 }

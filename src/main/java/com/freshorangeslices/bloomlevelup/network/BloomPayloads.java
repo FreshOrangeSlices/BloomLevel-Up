@@ -176,19 +176,24 @@ public final class BloomPayloads {
 	}
 
 	/**
-	 * Server → client: the player's Bloodlust momentum for the HUD bar: stacks, the damage bonus they give,
-	 * and how long until they run out (0 stacks = hide the bar).
+	 * Server → client: one of the stacking combat meters for the HUD (Bloodlust, Predator, Combo): stacks, the
+	 * bonus the next hit gets, and how long until they run out (0 stacks = hide the bar).
 	 */
-	public record Bloodlust(int stacks, float bonus, int ticksLeft, int totalTicks) implements CustomPacketPayload {
-		public static final Type<Bloodlust> TYPE = new Type<>(BloomLevelUp.id("bloodlust"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, Bloodlust> CODEC =
-				CustomPacketPayload.codec(Bloodlust::write, Bloodlust::new);
+	public record Meter(int kind, int stacks, float bonus, int ticksLeft, int totalTicks) implements CustomPacketPayload {
+		public static final int BLOODLUST = 0;
+		public static final int PREDATOR = 1;
+		public static final int COMBO = 2;
+		public static final int KINDS = 3;
+		public static final Type<Meter> TYPE = new Type<>(BloomLevelUp.id("meter"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, Meter> CODEC =
+				CustomPacketPayload.codec(Meter::write, Meter::new);
 
-		private Bloodlust(RegistryFriendlyByteBuf buf) {
-			this(buf.readVarInt(), buf.readFloat(), buf.readVarInt(), buf.readVarInt());
+		private Meter(RegistryFriendlyByteBuf buf) {
+			this(buf.readVarInt(), buf.readVarInt(), buf.readFloat(), buf.readVarInt(), buf.readVarInt());
 		}
 
 		private void write(RegistryFriendlyByteBuf buf) {
+			buf.writeVarInt(kind);
 			buf.writeVarInt(stacks);
 			buf.writeFloat(bonus);
 			buf.writeVarInt(ticksLeft);

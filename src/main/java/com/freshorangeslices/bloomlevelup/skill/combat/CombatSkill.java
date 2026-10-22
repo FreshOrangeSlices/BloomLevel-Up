@@ -449,6 +449,9 @@ public final class CombatSkill {
 
 				if (fullStrength) {
 					COMBO.put(player.getUUID(), new Stack(null, stacks + 1, now));
+					int shown = Math.min(stacks + 1, (int) Math.ceil(config.comboCap / Math.max(1.0E-6, config.comboPerHit)));
+					sendMeter(player, BloomPayloads.Meter.COMBO, shown,
+							(float) StatFormulas.comboBonus(stacks + 1, config.comboPerHit, config.comboCap), config.comboResetTicks);
 				}
 			}
 		}
@@ -478,7 +481,10 @@ public final class CombatSkill {
 			boolean same = predator != null && target.getUUID().equals(predator.target()) && now - predator.lastTick() <= config.predatorResetTicks;
 			int stacks = same ? predator.stacks() : 0;
 			multiplier *= StatFormulas.stackMultiplier(stacks, config.predatorPerStack, config.predatorMaxStacks);
-			PREDATOR.put(player.getUUID(), new Stack(target.getUUID(), Math.min(stacks + 1, config.predatorMaxStacks), now));
+			int next = Math.min(stacks + 1, config.predatorMaxStacks);
+			PREDATOR.put(player.getUUID(), new Stack(target.getUUID(), next, now));
+			sendMeter(player, BloomPayloads.Meter.PREDATOR, next,
+					(float) (StatFormulas.stackMultiplier(next, config.predatorPerStack, config.predatorMaxStacks) - 1.0), config.predatorResetTicks);
 		}
 
 		// Bloodlust: momentum from recent kills.
@@ -683,7 +689,8 @@ public final class CombatSkill {
 			int stacks = bloodlust != null && now <= bloodlust.lastTick() ? bloodlust.stacks() : 0;
 			stacks = Math.min(stacks + 1, config.bloodlustMaxStacks);
 			BLOODLUST.put(killer.getUUID(), new Stack(null, stacks, now + config.bloodlustTicks));
-			sendBloodlust(killer, stacks);
+			sendMeter(killer, BloomPayloads.Meter.BLOODLUST, stacks,
+					(float) (StatFormulas.stackMultiplier(stacks, config.bloodlustPerStack, config.bloodlustMaxStacks) - 1.0), config.bloodlustTicks);
 		}
 
 		// Overkill: real excess damage from a normal kill splashes onward. Execute kills and Overkill's own kills don't.
@@ -809,12 +816,10 @@ public final class CombatSkill {
 				(float) Math.max(0.5, 1.2 - 0.15 * outer));
 	}
 
-	/** Bloodlust bar on the player's HUD. */
-	private static void sendBloodlust(ServerPlayer player, int stacks) {
-		if (ServerPlayNetworking.canSend(player, BloomPayloads.Bloodlust.TYPE)) {
-			BloomConfig config = config();
-			float bonus = (float) (StatFormulas.stackMultiplier(stacks, config.bloodlustPerStack, config.bloodlustMaxStacks) - 1.0);
-			ServerPlayNetworking.send(player, new BloomPayloads.Bloodlust(stacks, bonus, config.bloodlustTicks, config.bloodlustTicks));
+	/** A stacking meter on the player's HUD (Bloodlust right of the hotbar, Predator and Combo left of it). */
+	private static void sendMeter(ServerPlayer player, int kind, int stacks, float bonus, int ticks) {
+		if (ServerPlayNetworking.canSend(player, BloomPayloads.Meter.TYPE)) {
+			ServerPlayNetworking.send(player, new BloomPayloads.Meter(kind, stacks, bonus, ticks, ticks));
 		}
 	}
 

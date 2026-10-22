@@ -18,16 +18,17 @@ jobs:
           CP="$(cat build/cp.txt)"
           dump() { echo "=== $1"; javap -p -cp "$CP" "$1" 2>&1 | grep -v '^Compiled from' | sed -E 's/net\.minecraft\.//g; s/java\.lang\.//g; s/java\.util\.//g' | { if [ -n "$2" ]; then grep -E "class |interface |enum |$2"; else cat; fi; }; }
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
+          full() { echo "=== FULL $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s*$' ; }
           {
-          dump net.minecraft.client.gui.screens.inventory.HopperScreen
-          code net.minecraft.client.gui.screens.inventory.HopperScreen 'HopperScreen[(]|extractBackground|extractRenderState'
-          dump net.minecraft.world.inventory.Slot
-          dump net.minecraft.world.inventory.InventoryMenu 'static|EMPTY|SLOT'
-          dump net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-          code net.minecraft.client.gui.screens.inventory.AbstractContainerScreen 'extractTooltip|extractSlot[(]|extractContents'
-          dump net.minecraft.client.gui.GuiGraphicsExtractor 'blit|blitSprite|setTooltipForNextFrame|setComponentTooltipForNextFrame'
-          dump net.minecraft.world.item.SmithingTemplateItem 'EMPTY'
-          dump net.minecraft.world.item.component.BlocksAttacks 'disable|record|class'
+          dump net.minecraft.world.entity.projectile.arrow.AbstractArrow 'pierc|Pierc|HitEntit|hitTarget|stepMove|canHitEntity|onHit|inGround|deflect|class '
+          full net.minecraft.world.entity.projectile.arrow.AbstractArrow 'canHitEntity|hitTargetsOrDeflectSelf|stepMoveAndHit|findHitEntities'
+          full net.minecraft.world.entity.projectile.arrow.AbstractArrow 'void onHitEntity'
+          full net.minecraft.world.entity.projectile.arrow.ThrownTrident 'onHitEntity|findHitEntit|void tick'
+          dump net.minecraft.world.entity.projectile.Projectile 'deflect|hitTargetOrDeflectSelf|lastDeflectedBy'
+          full net.minecraft.world.entity.projectile.Projectile 'hitTargetOrDeflectSelf|boolean deflect'
+          dump net.minecraft.world.entity.projectile.ProjectileDeflection
+          dump net.minecraft.world.level.storage.ValueInput 'Float|Boolean|getInt'
+          dump net.minecraft.world.level.storage.ValueOutput 'Float|Boolean|putInt'
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

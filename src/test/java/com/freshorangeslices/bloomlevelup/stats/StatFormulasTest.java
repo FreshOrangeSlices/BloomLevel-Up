@@ -178,13 +178,6 @@ class StatFormulasTest {
 	}
 
 	@Test
-	void lightningChainShapes() {
-		assertEquals(0, StatFormulas.lightningChain(1).length);
-		org.junit.jupiter.api.Assertions.assertArrayEquals(new int[] {1, 0, 1}, StatFormulas.lightningChain(2));
-		org.junit.jupiter.api.Assertions.assertArrayEquals(new int[] {0, 1, 2}, StatFormulas.lightningChain(7));
-	}
-
-	@Test
 	void combatXpIsCappedByRemainingHealth() {
 		assertEquals(5.0, StatFormulas.combatHitXp(30, 10, 0.5, 1.0), 1e-9);
 		assertEquals(30.0, StatFormulas.combatHitXp(6, 20, 0.5, 10.0), 1e-9);

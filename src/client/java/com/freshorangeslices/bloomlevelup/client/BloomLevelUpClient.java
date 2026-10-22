@@ -132,6 +132,8 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 			}
 		});
 		MenuScreens.register(HoardersPocket.MENU, ContainerScreen::new);
+		MenuScreens.register(com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding.MENU,
+				com.freshorangeslices.bloomlevelup.client.gui.RuneScreen::new);
 		EntityRendererRegistry.register(BloomEntities.THROWN_WEAPON, context -> new ThrownItemRenderer<>(context, 1.25F, false));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {

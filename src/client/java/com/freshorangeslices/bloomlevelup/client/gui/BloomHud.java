@@ -40,6 +40,13 @@ public final class BloomHud {
 	private static final int RAGE_BACK = 0xA0200000;
 	private static final int RAGE_FILL = 0xFFC0202A;
 	private static final int RAGE_TEXT = 0xFFE05555;
+	private static final int IMPACT_BACK = 0xA0201000;
+	private static final int IMPACT_FILL = 0xFFFF9A2E;
+	private static final int IMPACT_FULL = 0xFFFFC94A;
+	private static final int IMPACT_TEXT = 0xFFFFB04A;
+	/** Stored Impact bar: 4 segments of 0.5 damage; every full bar (2 damage) becomes one "×N". */
+	private static final int IMPACT_SEGMENTS = 4;
+	private static final int IMPACT_PER_BAR = 200;
 
 	private static int bloodlustStacks;
 	private static float bloodlustBonus;
@@ -53,6 +60,7 @@ public final class BloomHud {
 		HudElementRegistry.replaceElement(VanillaHudElements.CROSSHAIR, BloomHud::crosshair);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.CROSSHAIR, BloomLevelUp.id("charge_meter"), BloomHud::chargeMeter);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("bloodlust"), BloomHud::bloodlust);
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("stored_impact"), BloomHud::storedImpact);
 
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Bloodlust.TYPE, (payload, context) -> {
 			bloodlustStacks = payload.stacks();
@@ -132,6 +140,49 @@ public final class BloomHud {
 		if (ready && (System.currentTimeMillis() / 250L) % 2L == 0L) {
 			g.fill(x - 1, y - 1, x + w + 1, y, CHARGE_READY);
 			g.fill(x - 1, y + 2, x + w + 1, y + 3, CHARGE_READY);
+		}
+	}
+
+	// ------------------------------------------------------------------ Stored Impact
+
+	/** Orange, segmented, above the Bloodlust bar: what the open window holds and how long it has left. */
+	private static void storedImpact(GuiGraphicsExtractor g, DeltaTracker delta) {
+		Minecraft minecraft = Minecraft.getInstance();
+		com.freshorangeslices.bloomlevelup.player.BloomProfile profile = ClientBloomState.profile();
+
+		if (minecraft.player == null || minecraft.level == null || profile == null || !ClientBloomState.ready()) {
+			return;
+		}
+
+		long stored = profile.counter(CombatIds.STORED_IMPACT_HUNDREDTHS);
+		long ticksLeft = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT) - minecraft.level.getGameTime();
+
+		if (stored <= 0 || ticksLeft <= 0) {
+			return;
+		}
+
+		long cap = ClientBloomState.config() == null ? 2000 : Math.round(ClientBloomState.config().storedImpactCap * 100.0);
+		boolean full = stored >= cap;
+		long bars = stored / IMPACT_PER_BAR;
+		double partial = full ? 1.0 : (stored % IMPACT_PER_BAR) / (double) IMPACT_PER_BAR;
+		long seconds = ticksLeft / 20;
+
+		int x = width() / 2 + 91 + 34;
+		int y = height() - 36;
+		int segment = 14;
+		String time = String.format(java.util.Locale.ROOT, "%d:%02d", seconds / 60, seconds % 60);
+		Component label = bars > 0 ? Component.translatable("bloom.hud.stored_impact.stacks", bars, time)
+				: Component.translatable("bloom.hud.stored_impact", time);
+		g.text(minecraft.font, label, x, y - 11, IMPACT_TEXT);
+
+		for (int i = 0; i < IMPACT_SEGMENTS; i++) {
+			int sx = x + i * (segment + 1);
+			g.fill(sx - 1, y - 1, sx + segment + 1, y + 4, IMPACT_BACK);
+			double fill = Math.max(0.0, Math.min(1.0, partial * IMPACT_SEGMENTS - i));
+
+			if (fill > 0.0) {
+				g.fill(sx, y, sx + (int) Math.round(segment * fill), y + 3, full ? IMPACT_FULL : IMPACT_FILL);
+			}
 		}
 	}
 

@@ -315,11 +315,11 @@ public class CombatGameTests {
 			LivingEntity a = zombie(helper, 3, 3);
 			LivingEntity b = zombie(helper, 4, 3);
 			LivingEntity c = zombie(helper, 3, 4);
-			helper.assertTrue(CombatSkill.lightningChain(helper.getLevel(), player, a, 4.0F, false), "Three enemies: the chain fires");
-			helper.assertTrue(a.getHealth() < 20.0F, "The first bounce lands at once");
-			helper.assertTrue(b.getHealth() >= 20.0F && c.getHealth() >= 20.0F, "The next bounces wait their turn");
+			helper.assertTrue(CombatSkill.lightningChain(helper.getLevel(), player, a, 4.0F), "Three enemies: the chain fires");
+			helper.assertTrue(b.getHealth() >= 20.0F && c.getHealth() >= 20.0F, "The jumps travel before they land");
 			CombatSkill.runQueuedForTests();
-			helper.assertTrue(b.getHealth() < 20.0F && c.getHealth() < 20.0F, "All three were shocked");
+			// a -> nearest other -> the last other -> back to the nearest one not just hit (a, 1 block away).
+			helper.assertTrue(a.getHealth() < 20.0F && b.getHealth() < 20.0F && c.getHealth() < 20.0F, "All three were shocked");
 		});
 		helper.succeed();
 	}
@@ -329,7 +329,7 @@ public class CombatGameTests {
 		withSmallRadii(() -> {
 			ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));
 			LivingEntity alone = zombie(helper, 4, 4);
-			helper.assertFalse(CombatSkill.lightningChain(helper.getLevel(), player, alone, 4.0F, false), "One enemy: no lightning");
+			helper.assertFalse(CombatSkill.lightningChain(helper.getLevel(), player, alone, 4.0F), "One enemy: no lightning");
 		});
 		helper.succeed();
 	}
@@ -436,6 +436,22 @@ public class CombatGameTests {
 		helper.assertTrue(zombie.getDeltaMovement().horizontalDistance() > 0.05, "The zombie was blown away");
 		helper.assertTrue(player.getCooldowns().isOnCooldown(player.getMainHandItem()), "Then a short cooldown");
 		helper.assertFalse(CombatSkill.windBurst(player), "Not again during the cooldown");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void catchThrowsSpearsAndReturnsTridents(GameTestHelper helper) {
+		helper.assertTrue(CombatAbilities.throwable(new ItemStack(Items.IRON_SPEAR)), "Catch! throws spears");
+		ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));
+		grant(player, CombatIds.CATCH);
+		net.minecraft.world.entity.projectile.arrow.ThrownTrident trident =
+				net.minecraft.world.entity.EntityTypes.TRIDENT.create(helper.getLevel(), net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+		trident.setOwner(player);
+		trident.setPos(player.getX(), player.getY() + 1.0, player.getZ());
+		helper.getLevel().addFreshEntity(trident);
+		byte loyalty = trident.getEntityData().get(com.freshorangeslices.bloomlevelup.mixin.ThrownTridentAccessor.bloomlevelup$loyalty());
+		helper.assertValueEqual((byte) 3, loyalty, "A trident thrown with Catch! comes back like Loyalty III");
+		trident.discard();
 		helper.succeed();
 	}
 

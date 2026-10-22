@@ -231,7 +231,31 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Shovel Mastery | 3% base treasure chance per dug block, plus 5% per 100 (boosted) Yield. Loot: music discs out; coal, gravel, lapis and raw iron in | config `excavationTreasureBaseChance`, loot table |
 | Config versions | The config file now has `configVersion`. Files from before this round move to the new defaults above, but only for values that were still at the old default | `BloomConfig.migrate` |
 
+## Playtest round 2 (handoff 2026-10-21)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Catch! spears (confirmed) | Spears can be thrown. With the weapon-skill key on its own key: tap throws, hold charges. On the default right click a spear keeps its own right-click charge (spears have their own use), so it throws only from a separately bound key (pending FreshOrangeSlices' choice of tap-to-throw on right click) | `CombatAbilities.throwable` |
+| Catch! tridents (confirmed) | With Catch!, any trident you throw comes back as if it had Loyalty III | `CombatSkill.onEntityLoad` |
+| Straight Shot on thrown weapons | Copycat can spread Straight Shot to thrown weapons; they fly straight but are never deleted: once they hit something (or after 5 s) gravity comes back and they fall or fly home. Only arrows vanish after 5 s | `CombatSkill.cleanupTick` |
+| Lightning Shock (rework) | Three jumps from the struck target, each to the nearest enemy not shocked yet (so up to 3 other enemies); with fewer around it bounces back, never the same one twice in a row. Needs one other enemy. Each jump is a visible spark travelling between the two, landing 0.5 s later | config `lightningShockBounceTicks` (10) |
+| Overdose | 7 Major Levels (was 5) | Major JSON |
+| Become My Fuel | The imprinted effect lasts 5 s | config `fuelEffectTicks` (100) |
+| Fitting Armor / Medium shield | An axe's 5 s shield disable becomes 1.5 s | config `mediumShieldDisableRatio` (0.3) |
+| Wind Impact | Each burst costs 3 mace durability | config `windImpactDurabilityCost` |
+| Growth Aura | 20% per crop per second (was 35%) | config `growthAuraChance` |
+| XP Investment cost | Shown as a vanilla level, "Buy point: Lv 36": the level whose total XP covers the cost, rounded up so being at that level always affords it. The exact XP is in the tooltip. The economy is unchanged | `PlayerXpWallet.levelForPoints` |
+| Stat switches | A small green dot when on, empty when off (tooltip says which) | `client/gui/DotToggle` |
+| Rune Embedding screen | Its own screen type: armor outlines in slots 1-4, a sword outline in slot 5, title "Rune Embedding", and hovering an empty slot says what it takes | `RuneEmbedding.MENU`, `client/gui/RuneScreen` |
+| Stored Impact bar | Orange, above the Bloodlust bar: 4 segments of 0.5 damage; each full bar (2 damage) becomes "×N"; shows the window's time left; gold when at the +20 cap | `BloomHud` |
+| Spear sweep (Batter Up!) | A wide arc of three larger sweeps across the target, and the sweep reaches as far as the spear does (other weapons keep vanilla's 3 blocks) | `CombatSkill.sweep` |
+| Aura Sword | The waves' rings are drawn at their outer edge: 1, 2 and 3 blocks | `CombatSkill.auraWave` |
+| Config version 2 | Files at round 1's defaults move to these (fuel 5 s, Lightning 0.5 s, Growth Aura 20%) | `BloomConfig.migrate` |
+
 ## Still open (need a design call)
+
+- Shovel Mastery biome pools: current list sent for review with a suggested biome grouping; frequency and pools are tuned after that.
+- Catch! with spears on the default right click: tap-to-throw or not.
 
 - Nothing blocking. Playtest results may retune the Combat numbers and the Misc XP rate.
 

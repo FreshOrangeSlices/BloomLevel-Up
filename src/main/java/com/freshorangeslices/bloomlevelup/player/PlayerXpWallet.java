@@ -29,6 +29,20 @@ public final class PlayerXpWallet implements VanillaXpWallet {
 		player.giveExperiencePoints(remaining);
 	}
 
+	/**
+	 * The vanilla level whose total XP (from zero) first covers {@code points}: a player at that level or
+	 * higher can always pay it. Rounds up, so 2120 points reads as level 36 (level 35 holds only 2045).
+	 */
+	public static int levelForPoints(long points) {
+		int level = 0;
+
+		while (level < 100_000 && pointsForLevel(level) < points) {
+			level++;
+		}
+
+		return level;
+	}
+
 	/** Vanilla's total XP needed to reach {@code level} from zero. */
 	public static int pointsForLevel(int level) {
 		if (level <= 16) {

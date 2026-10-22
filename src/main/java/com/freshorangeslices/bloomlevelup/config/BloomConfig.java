@@ -9,7 +9,7 @@ package com.freshorangeslices.bloomlevelup.config;
  */
 public final class BloomConfig {
 	/** The defaults this build ships with. Files from older builds are moved onto changed defaults by {@link #migrate()}. */
-	public static final int CURRENT_VERSION = 1;
+	public static final int CURRENT_VERSION = 2;
 
 	/** Which build's defaults the file was written with (0 = before versioning). */
 	public int configVersion;
@@ -94,7 +94,7 @@ public final class BloomConfig {
 	public int growthAuraRadius = 4;
 	public int growthAuraHeight = 2;
 	public int growthAuraIntervalTicks = 20;
-	public double growthAuraChance = 0.35;
+	public double growthAuraChance = 0.20;
 	/** Growth Aura: growth ticks per pulse for plants that aren't crops (cactus, cane, berries, saplings...). */
 	public int growthAuraRandomTicks = 4;
 	/** Master Shearing: chance the target stays shearable; extra durability per shear. */
@@ -134,7 +134,7 @@ public final class BloomConfig {
 	public double lightningShockRadius = 6.0;
 	public int lightningShockCooldownTicks = 40;
 	/** Lightning Shock: pause between bounces, so the ricochet can be followed. */
-	public int lightningShockBounceTicks = 20;
+	public int lightningShockBounceTicks = 10;
 	public double storedImpactRatio = 0.5;
 	public double storedImpactCap = 20.0;
 	/** Stored Impact: one storage window opened by the first stored fall; later falls add to it until it closes. */
@@ -142,6 +142,10 @@ public final class BloomConfig {
 	public double windImpactRadius = 3.5;
 	/** Wind Impact: right-click the ground with a mace for a wind-charge burst; cooldown between bursts. */
 	public int windImpactCooldownTicks = 20;
+	/** Wind Impact: mace durability each burst costs. */
+	public int windImpactDurabilityCost = 3;
+	/** Fitting Armor / Medium: how much of an axe's shield-disable time is left (0.3 = an axe's 5 s becomes 1.5 s). */
+	public double mediumShieldDisableRatio = 0.3;
 	public double windImpactStrength = 1.2;
 	public double brawlerDamage = 6.0;
 	public double comboPerHit = 0.25;
@@ -192,7 +196,7 @@ public final class BloomConfig {
 	/** Overdose: how many levels an effect can climb above its source. */
 	public int overdoseMaxBoost = 2;
 	/** Become My Fuel: how long the imprinted effect lasts on each hit. */
-	public int fuelEffectTicks = 200;
+	public int fuelEffectTicks = 100;
 	/** Overenchant: highest enchantment level the anvil can reach. */
 	public int overenchantMaxLevel = 8;
 	/** Stack Overflow: stack size in your own inventory and pocket (at most 300, what the save format allows). */
@@ -210,6 +214,13 @@ public final class BloomConfig {
 			auraSwordPulseGapTicks = auraSwordPulseGapTicks == 10 ? 4 : auraSwordPulseGapTicks;
 			growthAuraChance = moved(growthAuraChance, 0.15, 0.35);
 			excavationTreasureChancePer100Yield = moved(excavationTreasureChancePer100Yield, 0.04, 0.05);
+		}
+
+		if (configVersion < 2) {
+			// Playtest round 2 (2026-10-21). Version-1 files carry round 1's defaults; older ones were just moved there.
+			fuelEffectTicks = fuelEffectTicks == 200 ? 100 : fuelEffectTicks;
+			lightningShockBounceTicks = lightningShockBounceTicks == 20 ? 10 : lightningShockBounceTicks;
+			growthAuraChance = moved(growthAuraChance, 0.35, 0.20);
 		}
 
 		configVersion = CURRENT_VERSION;
@@ -286,6 +297,8 @@ public final class BloomConfig {
 		storedImpactWindowTicks = Math.max(1, storedImpactWindowTicks);
 		windImpactRadius = Math.max(0.5, Math.min(16.0, windImpactRadius));
 		windImpactCooldownTicks = Math.max(0, windImpactCooldownTicks);
+		windImpactDurabilityCost = Math.max(0, windImpactDurabilityCost);
+		mediumShieldDisableRatio = Math.min(1.0, Math.max(0.0, mediumShieldDisableRatio));
 		windImpactStrength = Math.max(0.0, windImpactStrength);
 		brawlerDamage = Math.max(0.0, brawlerDamage);
 		comboPerHit = Math.max(0.0, comboPerHit);

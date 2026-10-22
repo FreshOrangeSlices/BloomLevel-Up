@@ -160,7 +160,7 @@ public final class HubScreen extends Screen {
 			int unspent = spendInvested ? progress.investedUnspent() : progress.naturalUnspent();
 			int inPool = (spendInvested ? progress.invested() : progress.natural()).getOrDefault(stat.id(), 0);
 			boolean showToggle = spendInvested || stat.toggleable();
-			int buttonsX = right - (showToggle ? 30 : 0) - 32;
+			int buttonsX = right - (showToggle ? 16 : 0) - 32;
 
 			StepButton minus = new StepButton(buttonsX, y + 3, 14, 14, Component.literal("-"),
 					shift -> send(allocate, stat.id(), shift ? -Math.min(10, inPool) : -1));
@@ -174,20 +174,19 @@ public final class HubScreen extends Screen {
 			plus.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.stat.plus")));
 			this.addRenderableWidget(plus);
 
+			// On/off: a green dot when on, empty when off.
 			if (spendInvested) {
 				// XP Investment mode: this switch only covers the stat's invested points.
 				boolean off = progress.disabledInvested().contains(stat.id());
-				Button toggle = Button.builder(Component.translatable(off ? "bloom.hub.off" : "bloom.hub.on")
-						.withStyle(off ? ChatFormatting.GRAY : ChatFormatting.GREEN), b -> send(Action.TOGGLE_INVESTED, stat.id(), 0))
-						.bounds(right - 28, y + 3, 28, 14).build();
-				toggle.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.invested_toggle")));
+				Component tip = Component.translatable(off ? "bloom.hub.toggle.off" : "bloom.hub.toggle.on").append("\n")
+						.append(Component.translatable("bloom.hub.invested_toggle"));
+				DotToggle toggle = new DotToggle(right - 14, y + 3, 14, !off, tip, () -> send(Action.TOGGLE_INVESTED, stat.id(), 0));
 				toggle.active = inPool > 0 || off;
 				this.addRenderableWidget(toggle);
 			} else if (stat.toggleable()) {
 				boolean off = progress.disabledStats().contains(stat.id());
-				Button toggle = Button.builder(Component.translatable(off ? "bloom.hub.off" : "bloom.hub.on")
-						.withStyle(off ? ChatFormatting.GRAY : ChatFormatting.GREEN), b -> send(Action.TOGGLE_STAT, stat.id(), 0))
-						.bounds(right - 28, y + 3, 28, 14).build();
+				DotToggle toggle = new DotToggle(right - 14, y + 3, 14, !off,
+						Component.translatable(off ? "bloom.hub.toggle.off" : "bloom.hub.toggle.on"), () -> send(Action.TOGGLE_STAT, stat.id(), 0));
 				this.addRenderableWidget(toggle);
 			}
 
@@ -207,11 +206,13 @@ public final class HubScreen extends Screen {
 			mode.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.pool.tooltip")));
 			this.addRenderableWidget(mode);
 
+			// Shown as a vanilla level (the level whose total XP covers the cost); the real cost is in XP.
 			long cost = service.investmentCost(progress, 1);
-			Button invest = Button.builder(Component.translatable("bloom.hub.invest", cost), b -> send(Action.INVEST, category.id(), 1))
+			int levels = PlayerXpWallet.levelForPoints(cost);
+			Button invest = Button.builder(Component.translatable("bloom.hub.invest", levels), b -> send(Action.INVEST, category.id(), 1))
 					.bounds(statsX + modeW + 4, buttonY, statsW - modeW - 4, 16).build();
 			invest.active = playerXpPoints() >= cost;
-			invest.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.invest.tooltip")));
+			invest.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("bloom.hub.invest.tooltip", cost, levels)));
 			this.addRenderableWidget(invest);
 		} else if (progress.level() < cap) {
 			int needed = vanillaXpForNextLevel(service, progress);

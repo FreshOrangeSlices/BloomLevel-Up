@@ -256,19 +256,6 @@ public final class StatFormulas {
 		return Math.min(Math.max(0, stacks) * perHit, cap);
 	}
 
-	/**
-	 * Lightning Shock's chain over candidates ordered [the struck target, then others nearest first].
-	 * Needs at least 2 enemies; 2 enemies take 3 bounces between them (other, target, other); with 3 or more,
-	 * the target and the 2 nearest others are each shocked once. Returns indices into the candidate list.
-	 */
-	public static int[] lightningChain(int candidates) {
-		if (candidates < 2) {
-			return new int[0];
-		}
-
-		return candidates == 2 ? new int[] {1, 0, 1} : new int[] {0, 1, 2};
-	}
-
 	/** Combat XP for one hit: real damage (never more than the health the target had) x rate x mob multiplier. */
 	public static double combatHitXp(double realDamage, double healthBefore, double perDamage, double multiplier) {
 		double counted = Math.max(0.0, Math.min(realDamage, healthBefore));

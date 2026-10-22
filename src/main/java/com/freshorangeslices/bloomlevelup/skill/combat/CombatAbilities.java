@@ -195,13 +195,17 @@ public final class CombatAbilities {
 
 	// ------------------------------------------------------------------ Catch!
 
-	/** Weapons Catch! can throw: swords, axes, maces and anything modded in those families (tridents throw anyway). */
+	/**
+	 * Weapons Catch! can throw: swords, axes, maces, spears and anything modded in those families. Tridents
+	 * throw on their own (Catch! makes them come back instead, see CombatSkill).
+	 */
 	public static boolean throwable(ItemStack stack) {
-		if (stack.isEmpty() || Weapons.is(stack, Family.TRIDENT) || Weapons.is(stack, Family.SPEAR)) {
+		if (stack.isEmpty() || Weapons.is(stack, Family.TRIDENT)) {
 			return false;
 		}
 
-		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE) || Weapons.is(stack, Family.MACE);
+		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE) || Weapons.is(stack, Family.MACE)
+				|| Weapons.is(stack, Family.SPEAR);
 	}
 
 	private static void throwWeapon(ServerPlayer player) {

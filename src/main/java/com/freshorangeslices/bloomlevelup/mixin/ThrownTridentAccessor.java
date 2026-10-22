@@ -12,4 +12,7 @@ public interface ThrownTridentAccessor {
 	static EntityDataAccessor<Byte> bloomlevelup$loyalty() {
 		throw new AssertionError();
 	}
+
+	@Accessor("dealtDamage")
+	boolean bloomlevelup$dealtDamage();
 }

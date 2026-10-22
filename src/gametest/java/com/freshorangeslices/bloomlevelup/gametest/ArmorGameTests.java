@@ -228,13 +228,13 @@ public class ArmorGameTests {
 			shield.get(DataComponents.BLOCKS_ATTACKS).disable(helper.getLevel(), player, 5.0F, shield);
 			helper.assertTrue(player.getCooldowns().isOnCooldown(shield), "An axe hit disables the shield");
 
-			for (int tick = 0; tick < 60; tick++) {
+			for (int tick = 0; tick < 40; tick++) {
 				player.getCooldowns().tick();
 			}
 
-			// A 5 s disable is 100 ticks; Medium halves it to 50, so after 60 ticks only the plain shield is still out.
+			// A 5 s disable is 100 ticks; Medium cuts it to 30 (1.5 s), so after 40 ticks only the plain shield is still out.
 			helper.assertValueEqual(!medium, player.getCooldowns().isOnCooldown(shield),
-					medium ? "Medium: back after 2.5 s" : "Without Medium: still disabled after 3 s");
+					medium ? "Medium: back after 1.5 s" : "Without Medium: still disabled after 2 s");
 		}
 
 		helper.succeed();

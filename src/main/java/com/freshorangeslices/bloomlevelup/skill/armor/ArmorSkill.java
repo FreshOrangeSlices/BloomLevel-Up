@@ -213,7 +213,7 @@ public final class ArmorSkill {
 	public static float shieldDisableSeconds(LivingEntity entity, float seconds) {
 		if (entity instanceof ServerPlayer player && seconds > 0.0F && active(BloomAttachments.profile(player), ArmorIds.FITTING_ARMOR)
 				&& ArmorStyles.styleOf(player) == ArmorStyle.MEDIUM) {
-			return seconds * 0.5F;
+			return (float) (seconds * config().mediumShieldDisableRatio);
 		}
 
 		return seconds;

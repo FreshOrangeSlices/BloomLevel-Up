@@ -428,6 +428,7 @@ public final class CombatSkill {
 				add += stored / 100.0;
 				profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, 0);
 				profile.setCounter(CombatIds.STORED_IMPACT_EXPIRES_AT, 0);
+				com.freshorangeslices.bloomlevelup.network.BloomSync.changed(player); // the HUD bar empties
 				level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.MACE_SMASH_GROUND_HEAVY, SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 
@@ -598,7 +599,7 @@ public final class CombatSkill {
 					&& level.getGameTime() >= LIGHTNING_READY_AT.getOrDefault(player.getUUID(), 0L)) {
 				float shock = (float) (hit.amount() * config.lightningShockRatio);
 
-				if (lightningChain(level, player, target, shock, true)) {
+				if (lightningChain(level, player, target, shock)) {
 					LIGHTNING_READY_AT.put(player.getUUID(), level.getGameTime() + config.lightningShockCooldownTicks);
 				}
 			}
@@ -717,15 +718,33 @@ public final class CombatSkill {
 			return;
 		}
 
+		// Vanilla sweeps reach 3 blocks from you; a spear's sweep reaches as far as the spear does.
+		ItemStack held = player.getMainHandItem();
+		double reach = Weapons.is(held, Family.SPEAR) ? player.getAttackRangeWith(held).effectiveMaxRange(player) + 1.5 : 3.0;
+
 		for (LivingEntity victim : victimsAround(level, player, primary.getBoundingBox().inflate(1.0, 0.25, 1.0))) {
-			if (victim != primary && player.distanceToSqr(victim) < 9.0 && swingAt(level, player, victim, damage, HitKind.SWEEP)) {
+			if (victim != primary && player.distanceToSqr(victim) < reach * reach && swingAt(level, player, victim, damage, HitKind.SWEEP)) {
 				shove(victim, -Math.sin(Math.toRadians(player.getYRot())), Math.cos(Math.toRadians(player.getYRot())), 0.4);
 			}
 		}
 
 		double dx = -Math.sin(Math.toRadians(player.getYRot()));
 		double dz = Math.cos(Math.toRadians(player.getYRot()));
-		level.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + dx, player.getY(0.5), player.getZ() + dz, 0, dx, 0.0, dz, 0.0);
+
+		if (Weapons.is(player.getMainHandItem(), Family.SPEAR)) {
+			// A spear sweeps out at the end of its reach: a wide arc across the target, not by your face.
+			double y = primary.getY(0.5);
+
+			for (int side = -1; side <= 1; side++) {
+				double px = primary.getX() - dz * side * 1.1 - dx * 0.3;
+				double pz = primary.getZ() + dx * side * 1.1 - dz * 0.3;
+				// SWEEP_ATTACK reads its x speed as size: -1 draws it 1.5x as big.
+				level.sendParticles(ParticleTypes.SWEEP_ATTACK, px, y, pz, 0, -1.0, 0.0, 0.0, 1.0);
+			}
+		} else {
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + dx, player.getY(0.5), player.getZ() + dz, 0, dx, 0.0, dz, 0.0);
+		}
+
 		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
 	}
 
@@ -766,7 +785,7 @@ public final class CombatSkill {
 			}
 		}
 
-		double ring = Math.max(0.8, (inner + outer) / 2.0);
+		double ring = Math.max(0.8, outer); // the wave's edge: 1, 2, then 3 blocks out
 		int points = Math.max(8, (int) Math.round(ring * 8.0));
 
 		for (int i = 0; i < points; i++) {
@@ -788,59 +807,102 @@ public final class CombatSkill {
 		}
 	}
 
+	/** How many times Lightning Shock jumps. */
+	private static final int LIGHTNING_HOPS = 3;
+
 	/**
-	 * Lightning Shock: needs at least 2 enemies near the struck target; the chain touches at most 3. The
-	 * target is shocked too, so 2 enemies take 3 bounces between them. Returns whether it fired.
+	 * Lightning Shock: a spark jumps from the struck target to the nearest other enemy, then on to the next
+	 * nearest it hasn't shocked yet: 3 jumps, so up to 3 other enemies. With fewer enemies around it bounces
+	 * back between them (never the same one twice in a row). Needs at least one other enemy near the target.
+	 * Each jump visibly travels between the two and lands half a second later. Returns whether it fired.
 	 */
-	public static boolean lightningChain(ServerLevel level, ServerPlayer player, LivingEntity target, float damage, boolean deferHits) {
+	public static boolean lightningChain(ServerLevel level, ServerPlayer player, LivingEntity target, float damage) {
 		double radius = config().lightningShockRadius;
-		List<LivingEntity> others = victimsAround(level, player, target.getBoundingBox().inflate(radius));
-		others.remove(target);
-		others.removeIf(entity -> entity.distanceToSqr(target) > radius * radius);
-		others.sort(Comparator.comparingDouble(entity -> entity.distanceToSqr(target)));
+		List<LivingEntity> enemies = victimsAround(level, player, target.getBoundingBox().inflate(radius));
+		enemies.removeIf(entity -> entity != target && entity.distanceToSqr(target) > radius * radius);
 
-		List<LivingEntity> candidates = new ArrayList<>();
-		candidates.add(target);
-		candidates.addAll(others);
-		int[] chain = StatFormulas.lightningChain(candidates.size());
+		if (!enemies.contains(target)) {
+			enemies.add(target);
+		}
 
-		if (chain.length == 0 || !(damage > 0.0F)) {
+		if (enemies.size() < 2 || !(damage > 0.0F)) {
 			return false;
 		}
 
-		List<LivingEntity> order = new ArrayList<>();
+		List<LivingEntity> path = new ArrayList<>();
+		Set<LivingEntity> shocked = Collections.newSetFromMap(new IdentityHashMap<>());
+		LivingEntity at = target;
 
-		for (int index : chain) {
-			order.add(candidates.get(index));
+		for (int hop = 0; hop < LIGHTNING_HOPS; hop++) {
+			LivingEntity from = at;
+			LivingEntity next = nearest(enemies, from, entity -> entity != from && entity != target && !shocked.contains(entity));
+
+			if (next == null) {
+				next = nearest(enemies, from, entity -> entity != from);
+			}
+
+			if (next == null) {
+				break;
+			}
+
+			path.add(next);
+			shocked.add(next);
+			at = next;
 		}
 
-		// One bounce at a time, with a pause between them so the ricochet is easy to follow.
-		Vec3[] from = {target.position().add(0.0, target.getBbHeight() * 0.6, 0.0)};
-		int gap = config().lightningShockBounceTicks;
+		int gap = Math.max(1, config().lightningShockBounceTicks);
 
-		for (int i = 0; i < order.size(); i++) {
-			LivingEntity victim = order.get(i);
-			Runnable bounce = () -> {
+		for (int i = 0; i < path.size(); i++) {
+			LivingEntity source = i == 0 ? target : path.get(i - 1);
+			LivingEntity victim = path.get(i);
+			Vec3 sourceStart = center(source);
+			int start = i * gap;
+
+			for (int t = 1; t < gap; t++) {
+				double progress = t / (double) gap;
+				defer(start + t, () -> {
+					Vec3 a = source.isAlive() ? center(source) : sourceStart;
+					Vec3 b = center(victim);
+					Vec3 spark = a.add(b.subtract(a).scale(progress));
+					level.sendParticles(ParticleTypes.ELECTRIC_SPARK, spark.x, spark.y, spark.z, 6, 0.06, 0.06, 0.06, 0.02);
+					level.sendParticles(ParticleTypes.END_ROD, spark.x, spark.y, spark.z, 1, 0.0, 0.0, 0.0, 0.0);
+				});
+			}
+
+			defer(start + gap, () -> {
 				if (!victim.isAlive() || victim.level() != level) {
 					return;
 				}
 
-				Vec3 to = victim.position().add(0.0, victim.getBbHeight() * 0.6, 0.0);
-				sparkLine(level, from[0], to);
-				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, to.x, to.y, to.z, 12, 0.3, 0.4, 0.3, 0.2);
+				Vec3 to = center(victim);
+				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, to.x, to.y, to.z, 20, 0.3, 0.45, 0.3, 0.25);
+				level.sendParticles(ParticleTypes.END_ROD, to.x, to.y, to.z, 4, 0.2, 0.3, 0.2, 0.05);
 				level.playSound(null, to.x, to.y, to.z, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.PLAYERS, 0.35F, 1.8F);
 				victim.hurtServer(level, BloomDamage.lightningShock(level, player), damage);
-				from[0] = to;
-			};
+			});
+		}
 
-			if (i == 0 && !deferHits) {
-				bounce.run();
-			} else {
-				defer(i * gap, bounce);
+		return !path.isEmpty();
+	}
+
+	private static Vec3 center(LivingEntity entity) {
+		return entity.position().add(0.0, entity.getBbHeight() * 0.6, 0.0);
+	}
+
+	private static LivingEntity nearest(List<LivingEntity> candidates, LivingEntity from, java.util.function.Predicate<LivingEntity> allowed) {
+		LivingEntity best = null;
+		double bestDistance = Double.MAX_VALUE;
+
+		for (LivingEntity candidate : candidates) {
+			double distance = candidate.distanceToSqr(from);
+
+			if (allowed.test(candidate) && candidate.isAlive() && distance < bestDistance) {
+				best = candidate;
+				bestDistance = distance;
 			}
 		}
 
-		return true;
+		return best;
 	}
 
 	private static void sparkLine(ServerLevel level, Vec3 from, Vec3 to) {
@@ -949,6 +1011,7 @@ public final class CombatSkill {
 		long cap = Math.round(config.storedImpactCap * 100.0);
 		stored = Math.min(cap, stored + Math.round(fallDamage * config.storedImpactRatio * 100.0));
 		profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, stored);
+		com.freshorangeslices.bloomlevelup.network.BloomSync.changed(player); // the HUD bar shows it
 		long secondsLeft = Math.max(0, (expires - now) / 20);
 		player.sendSystemMessage(Component.translatable("bloom.combat.stored_impact", String.format(java.util.Locale.ROOT, "%.1f", stored / 100.0),
 				String.format(java.util.Locale.ROOT, "%d:%02d", secondsLeft / 60, secondsLeft % 60)).withStyle(ChatFormatting.GOLD), true);
@@ -987,6 +1050,11 @@ public final class CombatSkill {
 		}
 
 		player.getCooldowns().addCooldown(mace, config().windImpactCooldownTicks);
+
+		if (config().windImpactDurabilityCost > 0) {
+			mace.hurtAndBreak(config().windImpactDurabilityCost, player, EquipmentSlot.MAINHAND);
+		}
+
 		return true;
 	}
 
@@ -1035,6 +1103,16 @@ public final class CombatSkill {
 		// Guaranteed Critical spread by Copycat: arrows count as fully drawn crits.
 		if (copied(player).map(CombatIds.GUARANTEED_CRITICAL::equals).orElse(false)) {
 			arrow.setCritArrow(true);
+		}
+
+		// Catch!: a thrown trident always comes back, as if it had Loyalty III.
+		if (arrow instanceof net.minecraft.world.entity.projectile.arrow.ThrownTrident trident && !(arrow instanceof ThrownWeapon)
+				&& active(player, CombatIds.CATCH)) {
+			net.minecraft.network.syncher.EntityDataAccessor<Byte> loyalty = com.freshorangeslices.bloomlevelup.mixin.ThrownTridentAccessor.bloomlevelup$loyalty();
+
+			if (trident.getEntityData().get(loyalty) < 3) {
+				trident.getEntityData().set(loyalty, (byte) 3);
+			}
 		}
 	}
 
@@ -1129,10 +1207,22 @@ public final class CombatSkill {
 		for (Iterator<AbstractArrow> it = STRAIGHT_ARROWS.iterator(); it.hasNext();) {
 			AbstractArrow arrow = it.next();
 
+			boolean thrown = arrow instanceof net.minecraft.world.entity.projectile.arrow.ThrownTrident;
+
 			if (arrow.isRemoved() || ((AbstractArrowAccessor) arrow).bloomlevelup$isInGround()) {
 				it.remove();
+			} else if (thrown && ((com.freshorangeslices.bloomlevelup.mixin.ThrownTridentAccessor) arrow).bloomlevelup$dealtDamage()) {
+				// A thrown trident or weapon (Straight Shot through Copycat) that hit something falls or flies home normally.
+				arrow.setNoGravity(false);
+				it.remove();
 			} else if (arrow.tickCount > config().straightShotMaxTicks) {
-				arrow.discard();
+				// Arrows that never land vanish; thrown weapons never do (they'd be lost), they just start to fall.
+				if (thrown) {
+					arrow.setNoGravity(false);
+				} else {
+					arrow.discard();
+				}
+
 				it.remove();
 			}
 		}

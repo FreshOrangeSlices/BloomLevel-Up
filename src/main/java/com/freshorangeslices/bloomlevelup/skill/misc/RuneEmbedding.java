@@ -13,6 +13,10 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,6 +30,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -71,7 +76,27 @@ public final class RuneEmbedding {
 	private RuneEmbedding() {
 	}
 
+	/** Its own screen type, so the slots can show what goes in them (the client draws it with RuneScreen). */
+	public static final MenuType<RuneMenu> MENU = Registry.register(BuiltInRegistries.MENU, BloomLevelUp.id("rune_embedding"),
+			new MenuType<>((id, inventory) -> new RuneMenu(id, inventory, inventory.player,
+					com.freshorangeslices.bloomlevelup.skill.SideBridge.majorActive(inventory.player, MiscIds.RUNE_EMBEDDING)),
+					FeatureFlags.VANILLA_SET));
+
+	/** Empty-slot pictures: the four armor outlines for the body runes, a sword outline for the bare-hand rune. */
+	private static final Identifier[] SLOT_ICONS = {
+			InventoryMenu.EMPTY_ARMOR_SLOT_HELMET,
+			InventoryMenu.EMPTY_ARMOR_SLOT_CHESTPLATE,
+			InventoryMenu.EMPTY_ARMOR_SLOT_LEGGINGS,
+			InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
+			Identifier.withDefaultNamespace("container/slot/sword")
+	};
+
 	public static void init() {
+	}
+
+	/** Whether a slot of the rune screen is a body rune (0-3) rather than the bare-hand rune (4). */
+	public static boolean isBodySlot(int index) {
+		return index >= 0 && index < UNARMED_SLOT;
 	}
 
 	// ------------------------------------------------------------------ what may be embedded
@@ -287,17 +312,20 @@ public final class RuneEmbedding {
 		}
 
 		Component title = Component.translatable(canEmbed ? "bloom.misc.runes.title" : "bloom.misc.runes.title_locked");
+		// (The empty slots show what goes where; the client explains them on hover.)
 		player.openMenu(new SimpleMenuProvider((id, inventory, p) -> new RuneMenu(id, inventory, player, canEmbed), title));
 	}
 
 	/** Five slots like a hopper (runes 1-4 = body, 5 = bare hand), then the inventory and hotbar. */
 	public static final class RuneMenu extends AbstractContainerMenu {
+		/** The rune slots come first; the player's inventory follows. */
+		public static final int SLOTS = SIZE;
 		private final Player owner;
 		private final boolean canEmbed;
 		private final SimpleContainer container;
 
 		public RuneMenu(int id, Inventory inventory, Player owner, boolean canEmbed) {
-			super(MenuType.HOPPER, id);
+			super(MENU, id);
 			this.owner = owner;
 			this.canEmbed = canEmbed;
 			NonNullList<ItemStack> stored = runes(owner);
@@ -325,6 +353,11 @@ public final class RuneEmbedding {
 					public int getMaxStackSize() {
 						return 1;
 					}
+
+					@Override
+					public Identifier getNoItemIcon() {
+						return SLOT_ICONS[index];
+					}
 				});
 			}
 
@@ -344,6 +377,10 @@ public final class RuneEmbedding {
 		}
 
 		private void save() {
+			if (this.owner.level().isClientSide()) {
+				return; // the client's copy of the screen never writes the runes
+			}
+
 			NonNullList<ItemStack> copy = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 
 			for (int i = 0; i < SIZE; i++) {

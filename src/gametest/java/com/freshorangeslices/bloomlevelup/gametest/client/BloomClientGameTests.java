@@ -68,6 +68,14 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot("bloom_hoarders_pocket");
 			context.setScreen(() -> null);
 
+			// Rune Embedding has its own screen type now (slot outlines).
+			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/rune_embedding");
+			context.waitFor(client -> ClientBloomState.profile().owns(MiscIds.RUNE_EMBEDDING));
+			context.runOnClient(client -> SideButton.openRunes());
+			context.waitForScreen(com.freshorangeslices.bloomlevelup.client.gui.RuneScreen.class);
+			context.takeScreenshot("bloom_rune_embedding");
+			context.setScreen(() -> null);
+
 			// Overenchant's anvil-screen mixin only applies when the screen class loads, so open one.
 			context.setScreen(() -> {
 				Minecraft client = Minecraft.getInstance();

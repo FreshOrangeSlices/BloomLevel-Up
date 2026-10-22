@@ -389,6 +389,10 @@ public final class CombatSkill {
 
 		if (direct instanceof ThrownWeapon thrown) {
 			result = CombatAbilities.thrownDamage(player, thrown, result);
+
+			if (thrown.isCharged()) {
+				CombatAbilities.chargedHitEffects(level, target);
+			}
 		}
 
 		if (kind.weaponHit() && pvpAllowed(target)) {
@@ -703,11 +707,11 @@ public final class CombatSkill {
 
 	// ------------------------------------------------------------------ deferred area effects
 
-	private static void defer(int delayTicks, Runnable task) {
+	static void defer(int delayTicks, Runnable task) {
 		DEFERRED.add(new Deferred(gameTick + Math.max(0, delayTicks), task));
 	}
 
-	private static List<LivingEntity> victimsAround(ServerLevel level, ServerPlayer player, AABB box) {
+	static List<LivingEntity> victimsAround(ServerLevel level, ServerPlayer player, AABB box) {
 		List<LivingEntity> out = new ArrayList<>();
 
 		for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box)) {
@@ -767,7 +771,7 @@ public final class CombatSkill {
 	}
 
 	/** Players move client-side, so a server push only reaches them as an explicit velocity packet. */
-	private static void syncVelocity(LivingEntity victim) {
+	static void syncVelocity(LivingEntity victim) {
 		if (victim instanceof ServerPlayer pushed) {
 			pushed.connection.send(new ClientboundSetEntityMotionPacket(pushed));
 		}
@@ -1065,6 +1069,11 @@ public final class CombatSkill {
 	 * away. Returns whether it fired.
 	 */
 	public static boolean windBurst(ServerPlayer player) {
+		return windBurst(player, 1.0);
+	}
+
+	/** {@link #windBurst(ServerPlayer)} scaled up: a Charged Burst (Master of Arms) is bigger in every way. */
+	public static boolean windBurst(ServerPlayer player, double scale) {
 		ItemStack mace = player.getMainHandItem();
 
 		if (!(player.level() instanceof ServerLevel level) || !Weapons.is(mace, Family.MACE) || !active(player, CombatIds.WIND_IMPACT)
@@ -1083,10 +1092,8 @@ public final class CombatSkill {
 		} else {
 			return false;
 		}
-		level.explode(null, null, net.minecraft.world.entity.projectile.hurtingprojectile.windcharge.AbstractWindCharge.EXPLOSION_DAMAGE_CALCULATOR,
-				at.x, at.y, at.z, 1.2F, false, Level.ExplosionInteraction.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE,
-				net.minecraft.util.random.WeightedList.of(), SoundEvents.WIND_CHARGE_BURST);
-		windImpactAt(level, player, at);
+		windBlast(level, at, scale);
+		windImpactAt(level, player, at, scale);
 
 		// Like a wind charge jump: falling back to where you jumped from doesn't hurt.
 		if (player.position().distanceToSqr(at) < 4.0) {
@@ -1103,10 +1110,23 @@ public final class CombatSkill {
 		return true;
 	}
 
+	/** A wind charge's blast (it launches whoever stands on it), {@code scale} times a wind charge's size. */
+	static void windBlast(ServerLevel level, Vec3 at, double scale) {
+		level.explode(null, null, net.minecraft.world.entity.projectile.hurtingprojectile.windcharge.AbstractWindCharge.EXPLOSION_DAMAGE_CALCULATOR,
+				at.x, at.y, at.z, (float) (1.2 * scale), false, Level.ExplosionInteraction.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL,
+				ParticleTypes.GUST_EMITTER_LARGE, net.minecraft.util.random.WeightedList.of(), SoundEvents.WIND_CHARGE_BURST);
+	}
+
 	/** A wind burst at a point that pushes everything around it away (never the player who caused it). */
 	public static void windImpactAt(ServerLevel level, ServerPlayer player, Vec3 at) {
+		windImpactAt(level, player, at, 1.0);
+	}
+
+	/** {@link #windImpactAt(ServerLevel, ServerPlayer, Vec3)} with the radius and push scaled. */
+	public static void windImpactAt(ServerLevel level, ServerPlayer player, Vec3 at, double scale) {
 		BloomConfig config = config();
-		double radius = config.windImpactRadius;
+		double radius = config.windImpactRadius * scale;
+		double strength = config.windImpactStrength * scale;
 
 		for (LivingEntity victim : victimsAround(level, player, new AABB(at, at).inflate(radius))) {
 			double distance = Math.sqrt(victim.position().distanceToSqr(at));
@@ -1118,8 +1138,8 @@ public final class CombatSkill {
 			Vec3 away = victim.position().subtract(at);
 			Vec3 flat = new Vec3(away.x, 0.0, away.z);
 			Vec3 push = (flat.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 0.0, 0.0) : flat.normalize())
-					.scale(config.windImpactStrength * (1.0 - distance / (radius + 0.5)));
-			victim.push(push.x, 0.5 * config.windImpactStrength, push.z);
+					.scale(strength * (1.0 - distance / (radius + 0.5)));
+			victim.push(push.x, 0.5 * strength, push.z);
 			syncVelocity(victim);
 		}
 

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import com.freshorangeslices.bloomlevelup.TestDefinitions;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
+import com.freshorangeslices.bloomlevelup.definition.MajorDefinition;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.player.CategoryProgress;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult.Outcome;
@@ -188,6 +189,38 @@ class ProgressionServiceTest {
 		assertTrue(service.purchaseMajorWithSwap(profile, HOLD_TO_CHARGE).ok());
 		assertTrue(profile.owns(HOLD_TO_CHARGE));
 		assertFalse(profile.owns(HOLD_TO_THROW));
+	}
+
+	@Test
+	void aWaiverLetsClashingMajorsBeOwnedTogether() {
+		levelTo(ARMOR, 30);
+		assertTrue(service.purchaseMajor(profile, HOLD_TO_THROW).ok());
+		assertEquals(Outcome.CONFLICT, service.purchaseMajor(profile, HOLD_TO_CHARGE).outcome());
+
+		assertTrue(service.purchaseMajor(profile, WAIVER).ok());
+		assertTrue(service.ownedConflicts(profile, service.definitions().major(HOLD_TO_CHARGE).orElseThrow()).isEmpty());
+		assertTrue(service.purchaseMajor(profile, HOLD_TO_CHARGE).ok());
+		assertTrue(profile.owns(HOLD_TO_THROW) && profile.owns(HOLD_TO_CHARGE));
+
+		// The waiver can't go while it's what holds the pair together...
+		ActionResult blocked = service.refundMajor(profile, WAIVER);
+		assertEquals(Outcome.WAIVER_IN_USE, blocked.outcome());
+		assertEquals(List.of(HOLD_TO_CHARGE, HOLD_TO_THROW), blocked.involved());
+
+		// ...but it can once one of them is gone.
+		assertTrue(service.refundMajor(profile, HOLD_TO_THROW).ok());
+		assertTrue(service.refundMajor(profile, WAIVER).ok());
+		assertEquals(Outcome.CONFLICT, service.purchaseMajor(profile, HOLD_TO_THROW).outcome());
+	}
+
+	@Test
+	void waiversDropUnknownMajors() {
+		MajorDefinition waiver = new MajorDefinition("test:w", ARMOR, 1, false, List.of(), List.of(), java.util.Optional.empty(), 0,
+				java.util.Optional.empty(), java.util.Optional.empty(), java.util.Set.of(), List.of(HOLD_TO_CHARGE, "test:ghost"));
+		com.freshorangeslices.bloomlevelup.definition.DefinitionSet set = com.freshorangeslices.bloomlevelup.definition.DefinitionSet.build(
+				List.of(category(ARMOR, 0, true)), List.of(major(HOLD_TO_CHARGE, ARMOR, 1, true), waiver));
+		assertEquals(List.of(HOLD_TO_CHARGE), set.major("test:w").orElseThrow().waives());
+		assertTrue(waiver.waivesPair(HOLD_TO_CHARGE, "test:ghost") && !waiver.waivesPair(HOLD_TO_CHARGE, HOLD_TO_CHARGE));
 	}
 
 	@Test

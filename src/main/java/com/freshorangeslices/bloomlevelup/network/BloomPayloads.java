@@ -152,7 +152,13 @@ public final class BloomPayloads {
 		/** Misc / Rune Embedding: open the rune slots (the server checks the Major). */
 		OPEN_RUNES,
 		/** Wind Impact: a wind burst on the block the player aims at, or under them on the ground. */
-		WIND_BURST
+		WIND_BURST,
+		/** Master of Arms (Charge + Catch!): a charged throw (harder, faster, pierces). */
+		CHARGED_THROW,
+		/** Master of Arms (Charge + Wind Impact): a bigger wind burst. */
+		CHARGED_BURST,
+		/** Master of Arms (Charge + Lightning Summon): several bolts around the aim point. */
+		STORM_CALL
 	}
 
 	/** Client → server: a combat ability key. The server checks the Major, the weapon and cooldowns itself. */

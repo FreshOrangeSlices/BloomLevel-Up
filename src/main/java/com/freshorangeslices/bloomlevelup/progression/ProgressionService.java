@@ -358,16 +358,58 @@ public final class ProgressionService {
 		return true;
 	}
 
+	/** Owned Majors that clash with {@code major}, leaving out pairs an owned waiver (Master of Arms) allows. */
 	public List<String> ownedConflicts(BloomProfile profile, MajorDefinition major) {
 		List<String> owned = new ArrayList<>();
 
 		for (String conflict : major.conflicts()) {
-			if (profile.owns(conflict)) {
+			if (profile.owns(conflict) && !waived(profile.majors().keySet(), major.id(), conflict)) {
 				owned.add(conflict);
 			}
 		}
 
 		return owned;
+	}
+
+	/** Whether any Major in {@code owned} waives the conflict between {@code a} and {@code b}. */
+	private boolean waived(Set<String> owned, String a, String b) {
+		for (String ownedId : owned) {
+			Optional<MajorDefinition> waiver = definitions.major(ownedId);
+
+			if (waiver.isPresent() && waiver.get().waivesPair(a, b)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Owned Majors that would be left clashing if {@code removing} were taken away, because a waiver they rely
+	 * on is among them. Sorted, each id once.
+	 */
+	private List<String> unwaivedBy(BloomProfile profile, Set<String> removing) {
+		Set<String> before = profile.majors().keySet();
+		Set<String> after = new HashSet<>(before);
+		after.removeAll(removing);
+		Set<String> clashing = new java.util.TreeSet<>();
+
+		for (String ownedId : after) {
+			Optional<MajorDefinition> owned = definitions.major(ownedId);
+
+			if (owned.isEmpty()) {
+				continue;
+			}
+
+			for (String conflict : owned.get().conflicts()) {
+				if (after.contains(conflict) && waived(before, ownedId, conflict) && !waived(after, ownedId, conflict)) {
+					clashing.add(ownedId);
+					clashing.add(conflict);
+				}
+			}
+		}
+
+		return List.copyOf(clashing);
 	}
 
 	/** Buys a Major. Returns {@link Outcome#CONFLICT} (with the clashing ids) instead of silently failing. */
@@ -411,6 +453,12 @@ public final class ProgressionService {
 				return ActionResult.of(Outcome.REQUIRED_BY_OWNED, broken);
 			}
 
+			List<String> clashing = unwaivedBy(profile, Set.copyOf(conflicts));
+
+			if (!clashing.isEmpty()) {
+				return ActionResult.of(Outcome.WAIVER_IN_USE, clashing);
+			}
+
 			for (String conflict : conflicts) {
 				refund += profile.majors().get(conflict).paid();
 			}
@@ -438,6 +486,13 @@ public final class ProgressionService {
 
 		if (!broken.isEmpty()) {
 			return ActionResult.of(Outcome.REQUIRED_BY_OWNED, broken);
+		}
+
+		// Master of Arms: can't be refunded while it's what lets two clashing Majors be owned together.
+		List<String> clashing = unwaivedBy(profile, Set.of(majorId));
+
+		if (!clashing.isEmpty()) {
+			return ActionResult.of(Outcome.WAIVER_IN_USE, clashing);
 		}
 
 		profile.majors().remove(majorId);

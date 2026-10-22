@@ -279,6 +279,19 @@ Rows above that these replace are marked "(see Playtest round 1)".
 |---|---|---|
 | HUD meters | Predator (purple: stacks on the current target, bonus %) and Combo (blue: stacks, bonus damage) get bars left of the hotbar, mirroring Stored Impact and Bloodlust on the right. Each shows the bonus the next hit gets and empties as the stacks run out | `BloomHud`, payload `Meter` |
 
+## Master of Arms and piercing throws (2026-10-22)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Piercing throws | Tridents and Catch! throws honour a pierce level (Piercing Shot through Copycat, a Charged Throw): they pass through that many mobs like a piercing arrow, the next one stops them as usual, then Loyalty brings them back. Vanilla tridents ignored pierce | `ThrownTridentMixin` |
+| Master of Arms (confirmed: cost 3) | Universal Combat Major. Owning it lets Catch!, Heavy Hands, Charge Attack, Wind Impact and Lightning Summon be owned together (any two of them). It can't be switched off, and can't be refunded while it's what lets two of them be owned together (refund one of the pair first). No prerequisite | `master_of_arms.json` (`waives`), `ProgressionService` |
+| How the combos are pressed | With Master of Arms and a charge Major for the weapon, every press of R is a hold and the release decides: a full charge released on a mob in reach is the charged swing (as before); released anywhere else it's the charged combo; a tap (or an early release) is the normal skill. The server re-checks the Majors, the weapon and that the swing has recovered | `CombatControls`, `CombatAbilities` |
+| Charged Throw (Charge Attack / Heavy Hands + Catch!) | 2x damage (the charge multiplier), 1.4x throw speed, goes through 3 mobs | config `chargedThrowSpeedMultiplier`, `chargedThrowPierce`, `chargeAttackMultiplier` |
+| Charged Burst (Heavy Hands + Wind Impact) | A wind burst 1.3x the size: blast, push radius and push strength (a higher launch). Same cooldown and durability as a normal burst | config `chargedBurstScale` |
+| Storm Call (Heavy Hands + Lightning Summon) | 3 bolts evenly around the aim point, 2.5 blocks out, 0.15 s apart. Costs and cools down 2x one bolt | config `stormCallBolts`, `stormCallRadius`, `stormCallGapTicks`, `stormCallCostMultiplier` |
+| Gale Throw (Catch! + Wind Impact) | With a mace, R bursts when you aim at a block and throws otherwise. A thrown mace landing pulls mobs in from 2x the Wind Impact radius, then 0.4 s later bursts 1.4x bigger and blows them out | config `galeThrowRadiusScale`, `galeThrowPullStrength`, `galeThrowPullTicks`, `galeThrowBurstScale` |
+| Data: `waives` | A Major JSON may list `waives`: Majors whose conflicts with each other don't apply while it's owned. Unknown ids are dropped with a warning | `MajorDefinition`, `DefinitionCodecs` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

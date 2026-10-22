@@ -184,6 +184,21 @@ public final class BloomConfig {
 	public double catchThrowSpeed = 2.5;
 	/** Assault Rifle: shots per magazine. */
 	public int assaultRifleMagazine = 16;
+	/** Master of Arms / Charged Throw: speed multiplier and how many mobs the throw goes through (damage uses chargeAttackMultiplier). */
+	public double chargedThrowSpeedMultiplier = 1.4;
+	public int chargedThrowPierce = 3;
+	/** Master of Arms / Charged Burst: size of a charged wind burst (blast, push radius and push strength) vs a normal one. */
+	public double chargedBurstScale = 1.3;
+	/** Master of Arms / Storm Call: bolts, their distance from the aim point, ticks between bolts, and cost/cooldown vs one bolt. */
+	public int stormCallBolts = 3;
+	public double stormCallRadius = 2.5;
+	public int stormCallGapTicks = 3;
+	public double stormCallCostMultiplier = 2.0;
+	/** Master of Arms / Gale Throw: a thrown mace's landing pulls mobs in from this far (x Wind Impact radius), then bursts. */
+	public double galeThrowRadiusScale = 2.0;
+	public double galeThrowPullStrength = 0.9;
+	public int galeThrowPullTicks = 8;
+	public double galeThrowBurstScale = 1.4;
 
 	// ---- Misc
 	/** Misc XP per point of vanilla XP collected from orbs (before Wisdom and Mending). */
@@ -347,6 +362,17 @@ public final class BloomConfig {
 		lightningSummonCooldownTicks = Math.max(0, lightningSummonCooldownTicks);
 		catchThrowSpeed = Math.max(0.5, Math.min(5.0, catchThrowSpeed));
 		assaultRifleMagazine = Math.max(1, Math.min(64, assaultRifleMagazine));
+		chargedThrowSpeedMultiplier = Math.max(0.5, Math.min(3.0, chargedThrowSpeedMultiplier));
+		chargedThrowPierce = Math.max(0, Math.min(127, chargedThrowPierce));
+		chargedBurstScale = Math.max(1.0, Math.min(4.0, chargedBurstScale));
+		stormCallBolts = Math.max(1, Math.min(12, stormCallBolts));
+		stormCallRadius = Math.max(0.0, Math.min(16.0, stormCallRadius));
+		stormCallGapTicks = Math.max(0, Math.min(40, stormCallGapTicks));
+		stormCallCostMultiplier = Math.max(0.0, stormCallCostMultiplier);
+		galeThrowRadiusScale = Math.max(1.0, Math.min(4.0, galeThrowRadiusScale));
+		galeThrowPullStrength = Math.max(0.0, Math.min(4.0, galeThrowPullStrength));
+		galeThrowPullTicks = Math.max(0, Math.min(40, galeThrowPullTicks));
+		galeThrowBurstScale = Math.max(1.0, Math.min(4.0, galeThrowBurstScale));
 		miscXpPerOrbPoint = Math.max(0.0, miscXpPerOrbPoint);
 		ironStomachNutrition = Math.max(0, Math.min(20, ironStomachNutrition));
 		ironStomachSaturation = Math.max(0.0, Math.min(20.0, ironStomachSaturation));

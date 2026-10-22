@@ -123,7 +123,17 @@ public final class DefinitionSet {
 				}
 			}
 
-			majors.put(major.id(), major.withPrerequisites(prereqs).withConflicts(conflicts));
+			List<String> waives = new ArrayList<>();
+
+			for (String waived : new LinkedHashSet<>(major.waives())) {
+				if (!majors.containsKey(waived)) {
+					warnings.add("Major '" + major.id() + "' waives unknown Major '" + waived + "'; dropped");
+				} else {
+					waives.add(waived);
+				}
+			}
+
+			majors.put(major.id(), major.withPrerequisites(prereqs).withConflicts(conflicts).withWaives(waives));
 		}
 
 		// Symmetrise conflicts: if A conflicts with B, B conflicts with A.
@@ -155,9 +165,10 @@ public final class DefinitionSet {
 			for (MajorDefinition major : List.copyOf(majors.values())) {
 				List<String> prereqs = new ArrayList<>(major.prerequisites());
 				List<String> conflicts = new ArrayList<>(major.conflicts());
+				List<String> waives = new ArrayList<>(major.waives());
 
-				if (prereqs.removeAll(cyclic) | conflicts.removeAll(cyclic)) {
-					majors.put(major.id(), major.withPrerequisites(prereqs).withConflicts(conflicts));
+				if (prereqs.removeAll(cyclic) | conflicts.removeAll(cyclic) | waives.removeAll(cyclic)) {
+					majors.put(major.id(), major.withPrerequisites(prereqs).withConflicts(conflicts).withWaives(waives));
 				}
 			}
 

@@ -47,8 +47,14 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  *   <li>tap to throw (Catch!).</li>
  * </ul>
  * Majors that would share the key on one weapon can't be owned together (Major JSON conflicts), so normally
- * only one applies. If the key is bound to right click instead, it steps aside for vanilla: blocks and mobs
- * that use a click, anything in the off hand, and items with their own right click keep working as usual.
+ * only one applies. Master of Arms lifts that and combines them: with a charge Major every press is a hold,
+ * and letting go decides. A full charge released on a mob in reach is a charged swing; otherwise it is the
+ * charged version of the weapon's skill (Charged Burst, Storm Call, Charged Throw). A tap or early release
+ * is the normal skill. Gale Throw (Catch! + Wind Impact on a mace): aiming at a block bursts, anything else
+ * throws.
+ *
+ * <p>If the key is bound to right click instead, it steps aside for vanilla: blocks and mobs that use a
+ * click, anything in the off hand, and items with their own right click keep working as usual.
  */
 public final class CombatControls {
 	/** Released sooner than this (ticks) counts as a tap: a throw. */
@@ -123,6 +129,20 @@ public final class CombatControls {
 		return Weapons.is(weapon, Family.MACE) && active(CombatIds.WIND_IMPACT);
 	}
 
+	/** Master of Arms: the weapon skills combine. */
+	private static boolean combos() {
+		return active(CombatIds.MASTER_OF_ARMS);
+	}
+
+	private static boolean aimingAtBlock(Minecraft minecraft) {
+		return minecraft.hitResult != null && minecraft.hitResult.getType() == HitResult.Type.BLOCK;
+	}
+
+	/** Gale Throw's split, and a mace's burst-or-throw in general: a block in the crosshair bursts, anything else throws. */
+	private static boolean burstHere(Minecraft minecraft, ItemStack weapon) {
+		return canWindBurst(weapon) && (!canThrow(weapon) || aimingAtBlock(minecraft));
+	}
+
 	/** Anything the weapon-skill key does with this item. */
 	private static boolean hasSkill(ItemStack weapon) {
 		return canWindBurst(weapon) || canSummon(weapon) || canCharge(weapon) || canThrow(weapon);
@@ -147,8 +167,21 @@ public final class CombatControls {
 	/**
 	 * Starts a press of the weapon-skill key. Returns whether a skill took it. The weapon's own skill wins
 	 * (Wind Impact on a mace, Lightning Summon on a trident), then a charge (hold), then a throw (tap).
+	 * With Master of Arms a charge comes first and the release picks (see the class comment).
 	 */
 	private static boolean begin(ItemStack held) {
+		if (combos()) {
+			if (canCharge(held)) {
+				startHold();
+				return true;
+			}
+
+			if (canWindBurst(held) && canThrow(held)) {
+				send(burstHere(Minecraft.getInstance(), held) ? CombatAction.WIND_BURST : CombatAction.THROW);
+				return true;
+			}
+		}
+
 		if (canWindBurst(held)) {
 			send(CombatAction.WIND_BURST);
 			return true;
@@ -167,13 +200,17 @@ public final class CombatControls {
 		}
 
 		if (charge) {
-			holding = true;
-			holdTicks = 0;
-			charged = false;
+			startHold();
 			return true;
 		}
 
 		return false;
+	}
+
+	private static void startHold() {
+		holding = true;
+		holdTicks = 0;
+		charged = false;
 	}
 
 	// ------------------------------------------------------------------ vanilla hooks (MinecraftMixin)
@@ -266,16 +303,44 @@ public final class CombatControls {
 		holding = false;
 		boolean wasCharged = charged;
 		charged = false;
+		boolean combos = combos();
+		boolean atMob = minecraft.hitResult instanceof EntityHitResult; // the crosshair only finds mobs in reach
 
 		if (wasCharged) {
+			// Master of Arms: a charge let go anywhere but on a mob is the charged version of the weapon's skill.
+			if (combos && !atMob && minecraft.gui.screen() == null) {
+				if (burstHere(minecraft, held)) {
+					send(CombatAction.CHARGED_BURST);
+					return;
+				}
+
+				if (canSummon(held)) {
+					send(CombatAction.STORM_CALL);
+					return;
+				}
+
+				if (canThrow(held)) {
+					send(CombatAction.CHARGED_THROW);
+					return;
+				}
+			}
+
 			send(CombatAction.CHARGED);
-			HitResult hit = minecraft.hitResult;
 
 			// Swing at what's in the crosshair. Never at a block (letting go must not start mining it), and not
 			// when the key was "released" by a screen opening.
-			if ((hit == null || hit.getType() != HitResult.Type.BLOCK) && minecraft.gui.screen() == null) {
+			if (!aimingAtBlock(minecraft) && minecraft.gui.screen() == null) {
 				((MinecraftInvoker) minecraft).bloomlevelup$startAttack();
 			}
+
+			return;
+		}
+
+		// Not charged: the normal skill (Master of Arms held it back to see whether this would be a charge).
+		if (combos && burstHere(minecraft, held)) {
+			send(CombatAction.WIND_BURST);
+		} else if (combos && canSummon(held)) {
+			send(CombatAction.SUMMON_LIGHTNING);
 		} else if (holdTicks < TAP_TICKS && canThrow(held)) {
 			send(CombatAction.THROW);
 		}

@@ -66,7 +66,11 @@ Controls. In the hub:
   With a mace and Wind Impact it bursts wind where you aim (or under you); with a trident and Lightning
   Summon it calls lightning where you aim; otherwise **hold** to charge (Charge Attack / Heavy Hands; a
   meter under the crosshair turns gold when ready, let go to swing) and **tap** to throw a sword, axe,
-  mace or spear (Catch!). Majors that would share the key on one weapon can't be owned together.
+  mace or spear (Catch!). Majors that would share the key on one weapon can't be owned together,
+  unless you own **Master of Arms**: then a charge Major makes every press a hold. Let go of a full
+  charge on a mob in reach to swing; anywhere else it's the charged skill (Charged Throw, Charged
+  Burst, Storm Call). A tap is the normal skill. A mace with Catch! and Wind Impact bursts when you
+  aim at a block and throws otherwise (Gale Throw).
   **Sneak while releasing** a trident to riptide (Unrestricted Riptide).
 - Hoarder's Pocket: the **chest button** above the off-hand slot in your inventory, `/bloom pocket`, or
   bind **Open Hoarder's Pocket** in Controls.

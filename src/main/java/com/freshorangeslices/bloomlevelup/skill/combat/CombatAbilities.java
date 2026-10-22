@@ -48,9 +48,10 @@ import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
- * The Combat Majors that need input: Charge Attack / Heavy Hands (hold attack), Lightning Summon
- * (sneak + attack with a trident, not aimed at a mob), Catch! (throw), and Assault Rifle (crossbow magazine).
- * The client only reports what the player did; the server checks the Major, weapon and costs.
+ * The Combat Majors that need input: Charge Attack / Heavy Hands (hold the weapon-skill key), Lightning
+ * Summon, Catch! (throw), Wind Impact, Assault Rifle (crossbow magazine), and Master of Arms' combos of them
+ * (Charged Throw, Charged Burst, Storm Call, Gale Throw). The client only reports what the player did; the
+ * server checks the Majors, weapon, charge and costs.
  */
 public final class CombatAbilities {
 	private static final Map<UUID, Long> CHARGED_UNTIL = new HashMap<>();
@@ -93,6 +94,9 @@ public final class CombatAbilities {
 			case SUMMON_LIGHTNING -> summonLightning(player);
 			case THROW -> throwWeapon(player);
 			case WIND_BURST -> CombatSkill.windBurst(player);
+			case CHARGED_THROW -> chargedThrow(player);
+			case CHARGED_BURST -> chargedBurst(player);
+			case STORM_CALL -> stormCall(player);
 			case OPEN_POCKET -> HoardersPocket.open(player);
 			case OPEN_RUNES -> RuneEmbedding.open(player);
 		}
@@ -142,51 +146,160 @@ public final class CombatAbilities {
 		armCharge(player);
 	}
 
+	// ------------------------------------------------------------------ Master of Arms
+
+	/** Master of Arms owned (and on): the clashing weapon skills combine. */
+	public static boolean masterOfArms(ServerPlayer player) {
+		return CombatSkill.active(player, CombatIds.MASTER_OF_ARMS);
+	}
+
+	/**
+	 * A combo's charge: Master of Arms, a charge Major for this weapon, and a swing that has recovered (the
+	 * client only sends a charged combo after a full hold, so this just stops a client from skipping it).
+	 */
+	private static boolean chargedCombo(ServerPlayer player, ItemStack weapon) {
+		return masterOfArms(player) && canCharge(player, weapon) && player.getAttackStrengthScale(0.5F) >= 0.9F;
+	}
+
+	/** Charged Throw: Charge Attack / Heavy Hands + Catch!. Double damage, faster, and it goes through mobs. */
+	private static void chargedThrow(ServerPlayer player) {
+		if (chargedCombo(player, player.getMainHandItem()) && throwWeapon(player, true)) {
+			player.resetAttackStrengthTicker();
+		}
+	}
+
+	/** Charged Burst: Charge Attack / Heavy Hands + Wind Impact. A bigger launch and push. */
+	private static void chargedBurst(ServerPlayer player) {
+		if (chargedCombo(player, player.getMainHandItem()) && CombatSkill.windBurst(player, config().chargedBurstScale)) {
+			player.resetAttackStrengthTicker();
+		}
+	}
+
+	/** Storm Call: Heavy Hands + Lightning Summon. Several bolts around where you aim. */
+	private static void stormCall(ServerPlayer player) {
+		if (chargedCombo(player, player.getMainHandItem()) && lightning(player, true)) {
+			player.resetAttackStrengthTicker();
+		}
+	}
+
+	/**
+	 * Gale Throw: Catch! + Wind Impact. A thrown mace landing first pulls mobs in from far around, then bursts
+	 * bigger than a normal Wind Impact and throws them out.
+	 */
+	private static void galeLanding(ServerLevel level, ServerPlayer owner, Vec3 at) {
+		BloomConfig config = config();
+		double radius = config.windImpactRadius * config.galeThrowRadiusScale;
+
+		for (LivingEntity victim : CombatSkill.victimsAround(level, owner, new net.minecraft.world.phys.AABB(at, at).inflate(radius))) {
+			Vec3 toward = at.subtract(victim.position());
+			Vec3 flat = new Vec3(toward.x, 0.0, toward.z);
+			double distance = flat.length();
+
+			if (distance > radius || distance < 0.75) {
+				continue;
+			}
+
+			// Stronger the farther out, so everything ends up near the middle.
+			Vec3 pull = flat.normalize().scale(config.galeThrowPullStrength * Math.min(1.0, distance / 3.0));
+			victim.push(pull.x, 0.25, pull.z);
+			CombatSkill.syncVelocity(victim);
+		}
+
+		// The inhale: a ring of gusts at the edge, drawn in.
+		int points = Math.max(12, (int) Math.round(radius * 4.0));
+
+		for (int i = 0; i < points; i++) {
+			double angle = 2.0 * Math.PI * i / points;
+			double x = at.x + Math.cos(angle) * radius;
+			double z = at.z + Math.sin(angle) * radius;
+			level.sendParticles(ParticleTypes.GUST, x, at.y + 0.4, z, 1, 0.0, 0.0, 0.0, 0.0);
+		}
+
+		level.playSound(null, at.x, at.y, at.z, SoundEvents.BREEZE_INHALE, SoundSource.PLAYERS, 1.5F, 0.8F);
+
+		CombatSkill.defer(config.galeThrowPullTicks, () -> {
+			if (owner.level() != level) {
+				return;
+			}
+
+			CombatSkill.windBlast(level, at, config.galeThrowBurstScale);
+			CombatSkill.windImpactAt(level, owner, at, config.galeThrowBurstScale);
+		});
+	}
+
 	// ------------------------------------------------------------------ Lightning Summon
 
 	private static void summonLightning(ServerPlayer player) {
+		lightning(player, false);
+	}
+
+	/**
+	 * Lightning where the player aims: one bolt, or a Storm Call's ring of bolts around the aim point (which
+	 * costs and cools down {@code stormCallCostMultiplier} times as much). Returns whether it struck.
+	 */
+	private static boolean lightning(ServerPlayer player, boolean storm) {
 		ItemStack weapon = player.getMainHandItem();
 
 		if (!CombatSkill.has(player, CombatIds.LIGHTNING_SUMMON, Family.TRIDENT, weapon) || player.getCooldowns().isOnCooldown(weapon)
 				|| !(player.level() instanceof ServerLevel level)) {
-			return;
+			return false;
 		}
 
 		BloomConfig config = config();
+		double scale = storm ? config.stormCallCostMultiplier : 1.0;
 		int cost = 0;
 
 		// 10% of the weapon's durability per strike; never breaks the weapon.
 		if (weapon.isDamageableItem()) {
-			cost = Math.max(1, (int) Math.ceil(weapon.getMaxDamage() * config.lightningSummonCostRatio));
+			cost = Math.max(1, (int) Math.ceil(weapon.getMaxDamage() * config.lightningSummonCostRatio * scale));
 
 			if (weapon.getMaxDamage() - weapon.getDamageValue() <= cost) {
 				player.sendSystemMessage(Component.translatable("bloom.combat.lightning_summon.worn").withStyle(ChatFormatting.RED), true);
-				return;
+				return false;
 			}
 		}
 
 		HitResult hit = player.pick(config.lightningSummonRange, 1.0F, false);
 
 		if (hit.getType() == HitResult.Type.MISS) {
-			return;
+			return false;
 		}
 
 		Vec3 at = hit.getLocation();
-		LightningBolt bolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
 
-		if (bolt == null) {
-			return;
+		if (storm) {
+			// Evenly around the aim point, a random turn each time, one after another.
+			double turn = player.getRandom().nextDouble() * 2.0 * Math.PI;
+
+			for (int i = 0; i < config.stormCallBolts; i++) {
+				double angle = turn + 2.0 * Math.PI * i / config.stormCallBolts;
+				Vec3 point = at.add(Math.cos(angle) * config.stormCallRadius, 0.0, Math.sin(angle) * config.stormCallRadius);
+				CombatSkill.defer(i * config.stormCallGapTicks, () -> strike(level, player, point));
+			}
+		} else {
+			strike(level, player, at);
 		}
-
-		bolt.setPos(at.x, at.y, at.z);
-		bolt.setCause(player);
-		level.addFreshEntity(bolt);
 
 		if (cost > 0) {
 			weapon.hurtAndBreak(cost, player, EquipmentSlot.MAINHAND);
 		}
 
-		player.getCooldowns().addCooldown(weapon, config.lightningSummonCooldownTicks);
+		player.getCooldowns().addCooldown(weapon, (int) Math.round(config.lightningSummonCooldownTicks * scale));
+		return true;
+	}
+
+	private static void strike(ServerLevel level, ServerPlayer player, Vec3 at) {
+		if (player.level() != level) {
+			return;
+		}
+
+		LightningBolt bolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+
+		if (bolt != null) {
+			bolt.setPos(at.x, at.y, at.z);
+			bolt.setCause(player);
+			level.addFreshEntity(bolt);
+		}
 	}
 
 	// ------------------------------------------------------------------ Catch!
@@ -205,11 +318,18 @@ public final class CombatAbilities {
 	}
 
 	private static void throwWeapon(ServerPlayer player) {
+		throwWeapon(player, false);
+	}
+
+	/** Throws the held weapon; {@code charged} makes it a Charged Throw. Returns whether it was thrown. */
+	private static boolean throwWeapon(ServerPlayer player, boolean charged) {
 		ItemStack held = player.getMainHandItem();
 
 		if (!CombatSkill.active(player, CombatIds.CATCH) || !throwable(held) || player.getCooldowns().isOnCooldown(held)) {
-			return;
+			return false;
 		}
+
+		BloomConfig config = config();
 
 		Level level = player.level();
 
@@ -219,9 +339,32 @@ public final class CombatAbilities {
 
 		ItemStack thrownStack = player.hasInfiniteMaterials() ? held.copy() : held.copyAndClear();
 		ThrownWeapon thrown = ThrownWeapon.create(level, player, thrownStack);
-		thrown.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, (float) config().catchThrowSpeed, 1.0F);
+		double speed = config.catchThrowSpeed;
+
+		if (charged) {
+			thrown.charge((float) config.chargeAttackMultiplier, config.chargedThrowPierce);
+			speed *= config.chargedThrowSpeedMultiplier;
+			level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_STRONG, SoundSource.PLAYERS, 1.0F, 0.6F);
+		}
+
+		thrown.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, (float) speed, 1.0F);
 		level.addFreshEntity(thrown);
 		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+		return true;
+	}
+
+	/** Throws the held weapon now; a charged throw skips the swing-recovery check (game tests: fake players never tick). */
+	public static boolean throwForTests(ServerPlayer player, boolean charged) {
+		if (charged) {
+			return masterOfArms(player) && canCharge(player, player.getMainHandItem()) && throwWeapon(player, true);
+		}
+
+		return throwWeapon(player, false);
+	}
+
+	/** Calls lightning now (game tests). */
+	public static boolean lightningForTests(ServerPlayer player, boolean storm) {
+		return lightning(player, storm);
 	}
 
 	/** A thrown weapon hits for the weapon's own damage (plus its enchantments), not a trident's 8. */
@@ -237,15 +380,24 @@ public final class CombatAbilities {
 			drop = StatFormulas.maceFallBonus(thrown.droppedDistance());
 		}
 
-		return (float) (base + enchantments + drop);
+		return (float) ((base + enchantments + drop) * thrown.damageMultiplier());
 	}
 
-	/** A thrown mace that hits the ground triggers Wind Impact. */
+	/** A thrown mace that hits the ground triggers Wind Impact (with Master of Arms: a Gale Throw). */
 	public static void thrownWeaponLanded(ThrownWeapon thrown) {
 		if (thrown.level() instanceof ServerLevel level && thrown.getOwner() instanceof ServerPlayer owner
 				&& Weapons.is(thrown.getItem(), Family.MACE) && CombatSkill.active(owner, CombatIds.WIND_IMPACT)) {
-			CombatSkill.windImpactAt(level, owner, thrown.position());
+			if (masterOfArms(owner)) {
+				galeLanding(level, owner, thrown.position());
+			} else {
+				CombatSkill.windImpactAt(level, owner, thrown.position());
+			}
 		}
+	}
+
+	/** A thrown mace landing at a point (game tests). */
+	public static void galeLandingForTests(ServerLevel level, ServerPlayer owner, Vec3 at) {
+		galeLanding(level, owner, at);
 	}
 
 	// ------------------------------------------------------------------ Assault Rifle

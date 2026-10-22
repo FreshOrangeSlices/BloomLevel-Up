@@ -25,6 +25,8 @@ import java.util.Set;
  * @param icon          optional texture id; presentation only
  * @param effect        optional visual/sound effect id; presentation only
  * @param flags         free-form behaviour flags read by handlers, e.g. {@code copycat_ineligible}, {@code primary_hit_only}
+ * @param waives        Majors whose conflicts with each other don't apply while this one is owned (Master of Arms):
+ *                      any two of them may be owned together
  */
 public record MajorDefinition(
 		String id,
@@ -37,7 +39,8 @@ public record MajorDefinition(
 		int sort,
 		Optional<String> icon,
 		Optional<String> effect,
-		Set<String> flags
+		Set<String> flags,
+		List<String> waives
 ) {
 	/** A weapon-tree Major: a possible Copycat source unless also {@link #FLAG_COPYCAT_INELIGIBLE}. */
 	public static final String FLAG_WEAPON = "weapon";
@@ -58,6 +61,13 @@ public record MajorDefinition(
 		icon = icon == null ? Optional.empty() : icon;
 		effect = effect == null ? Optional.empty() : effect;
 		flags = Set.copyOf(flags);
+		waives = waives == null ? List.of() : List.copyOf(waives);
+	}
+
+	/** A Major that waives nothing. */
+	public MajorDefinition(String id, String categoryId, int cost, boolean toggleable, List<String> prerequisites, List<String> conflicts,
+			Optional<String> group, int sort, Optional<String> icon, Optional<String> effect, Set<String> flags) {
+		this(id, categoryId, cost, toggleable, prerequisites, conflicts, group, sort, icon, effect, flags, List.of());
 	}
 
 	public static boolean isGroupRef(String prerequisite) {
@@ -75,12 +85,22 @@ public record MajorDefinition(
 
 	/** Returns a copy with a different conflict list (used when conflicts are symmetrised). */
 	public MajorDefinition withConflicts(List<String> newConflicts) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, newConflicts, group, sort, icon, effect, flags);
+		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, newConflicts, group, sort, icon, effect, flags, waives);
 	}
 
 	/** Returns a copy with a different prerequisite list (used when invalid references are dropped). */
 	public MajorDefinition withPrerequisites(List<String> newPrerequisites) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, newPrerequisites, conflicts, group, sort, icon, effect, flags);
+		return new MajorDefinition(id, categoryId, cost, toggleable, newPrerequisites, conflicts, group, sort, icon, effect, flags, waives);
+	}
+
+	/** Returns a copy with a different waiver list (used when invalid references are dropped). */
+	public MajorDefinition withWaives(List<String> newWaives) {
+		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, conflicts, group, sort, icon, effect, flags, newWaives);
+	}
+
+	/** Whether owning this Major lets {@code a} and {@code b} be owned together. */
+	public boolean waivesPair(String a, String b) {
+		return !a.equals(b) && waives.contains(a) && waives.contains(b);
 	}
 
 	public String translationKey() {

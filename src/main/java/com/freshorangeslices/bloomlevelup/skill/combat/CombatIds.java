@@ -50,6 +50,8 @@ public final class CombatIds {
 	public static final String FIRST_STRIKE = BloomLevelUp.key("combat/first_strike");
 	public static final String CROSSBOW_INFINITY = BloomLevelUp.key("combat/crossbow_infinity");
 	public static final String COPYCAT = BloomLevelUp.key("combat/copycat");
+	/** Lets the weapon-skill Majors that clash be owned together, and combines them (Charged Throw, Storm Call, ...). */
+	public static final String MASTER_OF_ARMS = BloomLevelUp.key("combat/master_of_arms");
 
 	// Persistent counters
 	/** Stored Impact: the stored bonus, in hundredths of a damage point. */

@@ -24,6 +24,8 @@ public final class TestDefinitions {
 	public static final String CASTLE_OF_STONE = "bloomlevelup:armor/castle_of_stone";
 	public static final String HOLD_TO_CHARGE = "bloomlevelup:armor/hold_to_charge";
 	public static final String HOLD_TO_THROW = "bloomlevelup:armor/hold_to_throw";
+	/** Lets Hold to Charge and Hold to Throw be owned together (like Master of Arms). */
+	public static final String WAIVER = "bloomlevelup:armor/waiver";
 	public static final String PASSIVE = "bloomlevelup:misc/passive";
 	public static final String COMBAT = "bloomlevelup:combat";
 	public static final String SWORD_TREE = "bloomlevelup:combat/sword";
@@ -50,6 +52,8 @@ public final class TestDefinitions {
 						major(CASTLE_OF_STONE, ARMOR, 2, true, List.of(LAST_BREATH), List.of()),
 						major(HOLD_TO_CHARGE, ARMOR, 1, true, List.of(), List.of(HOLD_TO_THROW)),
 						major(HOLD_TO_THROW, ARMOR, 1, true),
+						new MajorDefinition(WAIVER, ARMOR, 1, false, List.of(), List.of(), Optional.empty(), 0, Optional.empty(),
+								Optional.empty(), Set.of(), List.of(HOLD_TO_CHARGE, HOLD_TO_THROW)),
 						major(PASSIVE, MISC, 1, false),
 						inTree(FULL_SWEEP, COMBAT, SWORD_TREE),
 						inTree(EXECUTE, COMBAT, SWORD_TREE),

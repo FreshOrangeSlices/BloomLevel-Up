@@ -59,7 +59,8 @@ public final class SnapshotCodecs {
 			Codec.INT.fieldOf("sort").forGetter(MajorDefinition::sort),
 			Codec.STRING.optionalFieldOf("icon").forGetter(MajorDefinition::icon),
 			Codec.STRING.optionalFieldOf("effect").forGetter(MajorDefinition::effect),
-			STRING_SET.fieldOf("flags").forGetter(MajorDefinition::flags)
+			STRING_SET.fieldOf("flags").forGetter(MajorDefinition::flags),
+			Codec.STRING.listOf().optionalFieldOf("waives", List.of()).forGetter(MajorDefinition::waives)
 	).apply(i, MajorDefinition::new));
 
 	/** Definitions + config, as sent to clients. */

@@ -67,7 +67,8 @@ public final class DefinitionCodecs {
 			int sort,
 			Optional<String> icon,
 			Optional<String> effect,
-			List<String> flags
+			List<String> flags,
+			List<String> waives
 	) {
 		public static final Codec<RawMajor> CODEC = RecordCodecBuilder.create(i -> i.group(
 				Codec.STRING.fieldOf("category").forGetter(RawMajor::category),
@@ -79,7 +80,8 @@ public final class DefinitionCodecs {
 				Codec.INT.optionalFieldOf("sort", 0).forGetter(RawMajor::sort),
 				Codec.STRING.optionalFieldOf("icon").forGetter(RawMajor::icon),
 				Codec.STRING.optionalFieldOf("effect").forGetter(RawMajor::effect),
-				Codec.STRING.listOf().optionalFieldOf("flags", List.of()).forGetter(RawMajor::flags)
+				Codec.STRING.listOf().optionalFieldOf("flags", List.of()).forGetter(RawMajor::flags),
+				Codec.STRING.listOf().optionalFieldOf("waives", List.of()).forGetter(RawMajor::waives)
 		).apply(i, RawMajor::new));
 
 		public MajorDefinition toDefinition(Identifier id) {
@@ -95,7 +97,8 @@ public final class DefinitionCodecs {
 					sort,
 					icon,
 					effect,
-					Set.copyOf(flags)
+					Set.copyOf(flags),
+					waives.stream().map(s -> qualify(ns, s)).toList()
 			);
 		}
 	}

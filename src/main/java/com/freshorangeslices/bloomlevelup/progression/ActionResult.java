@@ -32,7 +32,9 @@ public record ActionResult(Outcome outcome, List<String> involved) {
 		INVESTMENT_LOCKED,
 		INVALID_AMOUNT,
 		/** The chosen option isn't allowed (Copycat: not an owned, copyable weapon Major). */
-		INVALID_CHOICE
+		INVALID_CHOICE,
+		/** A waiver (Master of Arms) can't go while it lets clashing Majors be owned together; {@code involved} lists them. */
+		WAIVER_IN_USE
 	}
 
 	public ActionResult {

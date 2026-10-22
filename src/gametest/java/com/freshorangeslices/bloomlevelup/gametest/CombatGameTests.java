@@ -529,6 +529,122 @@ public class CombatGameTests {
 		helper.succeed();
 	}
 
+	@GameTest(maxTicks = 80)
+	public void thrownWeaponsPierceWithAPierceLevel(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		BlockPos aside = helper.absolutePos(new BlockPos(1, 1, 1));
+		player.setPos(aside.getX() + 0.5, aside.getY(), aside.getZ() + 0.5); // out of the line of fire
+		LivingEntity first = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(4, 1, 6));
+		LivingEntity second = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(2, 1, 6));
+		((net.minecraft.world.entity.Mob) first).setNoAi(true);
+		((net.minecraft.world.entity.Mob) second).setNoAi(true);
+
+		// Pierce 1: through the first zombie, and the second one stops it (then it comes back).
+		ThrownWeapon thrown = ThrownWeapon.create(level, player, new ItemStack(Items.IRON_SWORD));
+		((com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor) thrown).bloomlevelup$setPierceLevel((byte) 1);
+		BlockPos start = helper.absolutePos(new BlockPos(6, 1, 6));
+		thrown.setPos(start.getX() + 0.5, start.getY() + 1.0, start.getZ() + 0.5);
+		thrown.setNoGravity(true);
+		thrown.setDeltaMovement(-1.0, 0.0, 0.0);
+		level.addFreshEntity(thrown);
+
+		helper.succeedWhen(() -> {
+			helper.assertTrue(first.getHealth() < 20.0F, "The first zombie was hit");
+			helper.assertTrue(second.getHealth() < 20.0F, "The throw went on through it and hit the second");
+		});
+	}
+
+	// ------------------------------------------------------------------ Master of Arms
+
+	@GameTest
+	public void masterOfArmsLetsClashingSkillsBeOwned(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(player, CombatIds.CHARGE_ATTACK, CombatIds.LIGHTNING_SHOCK, CombatIds.MASTER_OF_ARMS, CombatIds.HEAVY_HANDS, CombatIds.CATCH);
+		ProgressionService service = BloomServices.progression();
+		BloomProfile profile = BloomAttachments.profile(player);
+		helper.assertTrue(profile.owns(CombatIds.HEAVY_HANDS) && profile.owns(CombatIds.CATCH) && profile.owns(CombatIds.CHARGE_ATTACK),
+				"Heavy Hands, Charge Attack and Catch! together");
+
+		ActionResult refund = service.refundMajor(profile, CombatIds.MASTER_OF_ARMS);
+		helper.assertTrue(refund.outcome() == ActionResult.Outcome.WAIVER_IN_USE && refund.involved().contains(CombatIds.CATCH),
+				"Master of Arms can't be refunded while it holds them together: " + refund);
+		helper.assertTrue(service.toggleMajor(profile, CombatIds.MASTER_OF_ARMS).outcome() == ActionResult.Outcome.NOT_TOGGLEABLE,
+				"...or switched off");
+
+		// Charged Throw: double the thrown sword's damage, and it pierces.
+		LivingEntity zombie = zombie(helper, 1, 1);
+		helper.assertTrue(CombatAbilities.throwForTests(player, true), "Charged throw");
+		List<ThrownWeapon> thrown = helper.getLevel().getEntitiesOfClass(ThrownWeapon.class, player.getBoundingBox().inflate(4.0));
+		helper.assertValueEqual(1, thrown.size(), "One thrown sword");
+		ThrownWeapon sword = thrown.get(0);
+		helper.assertTrue(sword.isCharged() && sword.getPierceLevel() >= BloomServices.config().chargedThrowPierce, "Charged and piercing");
+		near(helper, 12.0, CombatSkill.modifyIncoming(zombie, player.damageSources().trident(sword, player), 8.0F), "2x the iron sword's 6");
+		CombatSkill.endSwingForTests();
+		sword.discard();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void stormCallStrikesSeveralBolts(GameTestHelper helper) {
+		var config = BloomServices.config();
+		double radius = config.stormCallRadius;
+		config.stormCallRadius = 1.0; // keep the bolts inside this test's area
+
+		try {
+			stormCall(helper);
+		} finally {
+			config.stormCallRadius = radius;
+		}
+
+		helper.succeed();
+	}
+
+	private static void stormCall(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));
+		grant(player, CombatIds.LIGHTNING_SUMMON, CombatIds.CHARGE_ATTACK, CombatIds.MASTER_OF_ARMS, CombatIds.HEAVY_HANDS);
+		player.setXRot(90.0F); // looking straight down at the floor
+		int bolts = BloomServices.config().stormCallBolts;
+
+		helper.assertTrue(CombatAbilities.lightningForTests(player, true), "Storm Call struck");
+		CombatSkill.runQueuedForTests();
+		net.minecraft.world.phys.AABB area = new net.minecraft.world.phys.AABB(player.blockPosition()).inflate(8.0);
+		helper.assertValueEqual(bolts, helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.LightningBolt.class, area).size(),
+				"One bolt each");
+		ItemStack trident = player.getMainHandItem();
+		int single = (int) Math.ceil(trident.getMaxDamage() * BloomServices.config().lightningSummonCostRatio);
+		helper.assertTrue(trident.getDamageValue() > single, "It costs more than one bolt: " + trident.getDamageValue());
+		helper.assertTrue(player.getCooldowns().isOnCooldown(trident), "Then a cooldown");
+	}
+
+	@GameTest
+	public void galeThrowPullsMobsInThenBlowsThemAway(GameTestHelper helper) {
+		var config = BloomServices.config();
+		double radiusScale = config.galeThrowRadiusScale;
+		config.galeThrowRadiusScale = 1.0; // keep it inside this test's area
+
+		try {
+			ServerLevel level = helper.getLevel();
+			ServerPlayer player = player(helper, ItemStack.EMPTY);
+			grant(player, CombatIds.WIND_IMPACT, CombatIds.MASTER_OF_ARMS);
+			LivingEntity zombie = zombie(helper, 6, 4);
+			BlockPos landing = helper.absolutePos(new BlockPos(4, 1, 4));
+			net.minecraft.world.phys.Vec3 at = new net.minecraft.world.phys.Vec3(landing.getX() + 0.5, landing.getY(), landing.getZ() + 0.5);
+
+			zombie.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
+			CombatAbilities.galeLandingForTests(level, player, at);
+			helper.assertTrue(zombie.getDeltaMovement().x < -0.05, "Pulled toward the landing: " + zombie.getDeltaMovement());
+
+			zombie.setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
+			CombatSkill.runQueuedForTests();
+			helper.assertTrue(zombie.getDeltaMovement().x > 0.05, "Then blown away: " + zombie.getDeltaMovement());
+		} finally {
+			config.galeThrowRadiusScale = radiusScale;
+		}
+
+		helper.succeed();
+	}
+
 	@GameTest
 	public void assaultRifleLoadsAndFiresAMagazine(GameTestHelper helper) {
 		ServerPlayer player = player(helper, new ItemStack(Items.CROSSBOW));

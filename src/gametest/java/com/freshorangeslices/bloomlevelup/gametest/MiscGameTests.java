@@ -338,7 +338,7 @@ public class MiscGameTests {
 		MobEffectInstance applied = zombie.getEffect(MobEffects.SLOWNESS);
 		helper.assertTrue(applied != null, "Hits apply the fuel");
 		helper.assertValueEqual(3, applied.getAmplifier(), "At the imprinted level");
-		helper.assertValueEqual(200, applied.getDuration(), "For 10 seconds");
+		helper.assertValueEqual(100, applied.getDuration(), "For 5 seconds");
 		helper.succeed();
 	}
 

@@ -443,7 +443,7 @@ public class CombatGameTests {
 	public void catchThrowsSpearsAndReturnsTridents(GameTestHelper helper) {
 		helper.assertTrue(CombatAbilities.throwable(new ItemStack(Items.IRON_SPEAR)), "Catch! throws spears");
 		ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));
-		grant(player, CombatIds.CATCH);
+		grant(player, CombatIds.LIGHTNING_SHOCK, CombatIds.CATCH); // Catch! needs a Trident Major first
 		net.minecraft.world.entity.projectile.arrow.ThrownTrident trident =
 				net.minecraft.world.entity.EntityTypes.TRIDENT.create(helper.getLevel(), net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 		trident.setOwner(player);

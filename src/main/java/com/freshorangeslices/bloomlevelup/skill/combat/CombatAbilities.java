@@ -141,6 +141,23 @@ public final class CombatAbilities {
 		return until != null && player.level().getGameTime() <= until && canCharge(player, weapon);
 	}
 
+	/**
+	 * A charged swing wears the weapon by {@code chargedSwingDurabilityCost} in all: the hit's own wear (1 for a
+	 * sword, 2 for an axe) plus whatever is left of that.
+	 */
+	static void chargedSwingWear(ServerPlayer player, ItemStack weapon) {
+		if (player.hasInfiniteMaterials() || !weapon.isDamageableItem()) {
+			return;
+		}
+
+		net.minecraft.world.item.component.Weapon stats = weapon.get(DataComponents.WEAPON);
+		int extra = config().chargedSwingDurabilityCost - (stats == null ? 0 : stats.itemDamagePerAttack());
+
+		if (extra > 0) {
+			weapon.hurtAndBreak(extra, player, EquipmentSlot.MAINHAND);
+		}
+	}
+
 	/** Arms a charge directly (game tests). */
 	public static void armChargeForTests(ServerPlayer player) {
 		armCharge(player);
@@ -161,7 +178,10 @@ public final class CombatAbilities {
 		return masterOfArms(player) && canCharge(player, weapon) && player.getAttackStrengthScale(0.5F) >= 0.9F;
 	}
 
-	/** Charged Throw: Charge Attack / Heavy Hands + Catch!. Double damage, faster, and it goes through mobs. */
+	/**
+	 * Charged Throw: Charge Attack / Heavy Hands + Catch!. Double damage, faster, and it goes through mobs. A
+	 * charged mace throw with Wind Impact is a Gale Throw (see {@link #thrownWeaponLanded}).
+	 */
 	private static void chargedThrow(ServerPlayer player) {
 		if (chargedCombo(player, player.getMainHandItem()) && throwWeapon(player, true)) {
 			player.resetAttackStrengthTicker();
@@ -170,7 +190,7 @@ public final class CombatAbilities {
 
 	/** Charged Burst: Charge Attack / Heavy Hands + Wind Impact. A bigger launch and push. */
 	private static void chargedBurst(ServerPlayer player) {
-		if (chargedCombo(player, player.getMainHandItem()) && CombatSkill.windBurst(player, config().chargedBurstScale)) {
+		if (chargedCombo(player, player.getMainHandItem()) && CombatSkill.windBurst(player, true)) {
 			player.resetAttackStrengthTicker();
 		}
 	}
@@ -183,12 +203,12 @@ public final class CombatAbilities {
 	}
 
 	/**
-	 * Gale Throw: Catch! + Wind Impact. A thrown mace landing first pulls mobs in from far around, then bursts
-	 * bigger than a normal Wind Impact and throws them out.
+	 * Gale Throw: a Charged Throw of a mace with Wind Impact (Heavy Hands + Catch! + Wind Impact). Where it lands
+	 * it first pulls mobs in from around, then bursts bigger than a normal Wind Impact and throws them out.
 	 */
 	private static void galeLanding(ServerLevel level, ServerPlayer owner, Vec3 at) {
 		BloomConfig config = config();
-		double radius = config.windImpactRadius * config.galeThrowRadiusScale;
+		double radius = config.galeThrowPullRadius;
 
 		for (LivingEntity victim : CombatSkill.victimsAround(level, owner, new net.minecraft.world.phys.AABB(at, at).inflate(radius))) {
 			Vec3 toward = at.subtract(victim.position());
@@ -223,7 +243,7 @@ public final class CombatAbilities {
 			}
 
 			CombatSkill.windBlast(level, at, config.galeThrowBurstScale);
-			CombatSkill.windImpactAt(level, owner, at, config.galeThrowBurstScale);
+			CombatSkill.windImpactAt(level, owner, at, config.galeThrowBurstScale, config.galeThrowBurstScale);
 		});
 	}
 
@@ -332,9 +352,16 @@ public final class CombatAbilities {
 		BloomConfig config = config();
 
 		Level level = player.level();
+		int wear = charged ? config.chargedThrowDurabilityCost : config.catchThrowDurabilityCost;
 
-		if (!player.hasInfiniteMaterials()) {
-			held.hurtWithoutBreaking(1, player);
+		// A throw never breaks the weapon mid-air: one too worn to pay for it isn't thrown.
+		if (!player.hasInfiniteMaterials() && held.isDamageableItem() && wear > 0) {
+			if (held.getMaxDamage() - held.getDamageValue() <= wear) {
+				player.sendSystemMessage(Component.translatable("bloom.combat.catch.worn").withStyle(ChatFormatting.RED), true);
+				return false;
+			}
+
+			held.hurtWithoutBreaking(wear, player);
 		}
 
 		ItemStack thrownStack = player.hasInfiniteMaterials() ? held.copy() : held.copyAndClear();
@@ -383,11 +410,11 @@ public final class CombatAbilities {
 		return (float) ((base + enchantments + drop) * thrown.damageMultiplier());
 	}
 
-	/** A thrown mace that hits the ground triggers Wind Impact (with Master of Arms: a Gale Throw). */
+	/** A thrown mace that hits the ground triggers Wind Impact; a charged one (Master of Arms) is a Gale Throw. */
 	public static void thrownWeaponLanded(ThrownWeapon thrown) {
 		if (thrown.level() instanceof ServerLevel level && thrown.getOwner() instanceof ServerPlayer owner
 				&& Weapons.is(thrown.getItem(), Family.MACE) && CombatSkill.active(owner, CombatIds.WIND_IMPACT)) {
-			if (masterOfArms(owner)) {
+			if (thrown.isCharged() && masterOfArms(owner)) {
 				galeLanding(level, owner, thrown.position());
 			} else {
 				CombatSkill.windImpactAt(level, owner, thrown.position());

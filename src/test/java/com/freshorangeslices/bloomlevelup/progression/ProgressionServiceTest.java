@@ -202,15 +202,45 @@ class ProgressionServiceTest {
 		assertTrue(service.purchaseMajor(profile, HOLD_TO_CHARGE).ok());
 		assertTrue(profile.owns(HOLD_TO_THROW) && profile.owns(HOLD_TO_CHARGE));
 
-		// The waiver can't go while it's what holds the pair together...
-		ActionResult blocked = service.refundMajor(profile, WAIVER);
-		assertEquals(Outcome.WAIVER_IN_USE, blocked.outcome());
-		assertEquals(List.of(HOLD_TO_CHARGE, HOLD_TO_THROW), blocked.involved());
+		// Refunding the waiver takes the pair it holds together with it (after a confirm)...
+		ActionResult asks = service.refundMajor(profile, WAIVER);
+		assertEquals(Outcome.REQUIRED_BY_OWNED, asks.outcome());
+		assertEquals(List.of(HOLD_TO_CHARGE, HOLD_TO_THROW), asks.involved());
+		assertTrue(profile.owns(WAIVER), "Nothing changes until it's confirmed");
 
-		// ...but it can once one of them is gone.
-		assertTrue(service.refundMajor(profile, HOLD_TO_THROW).ok());
+		ActionResult all = service.refundMajorWithDependents(profile, WAIVER);
+		assertTrue(all.ok());
+		assertEquals(List.of(HOLD_TO_CHARGE, HOLD_TO_THROW), all.involved());
+		assertTrue(profile.majors().isEmpty());
+		assertEquals(3, profile.availableMajorLevels(), "Everything refunded in full");
+
+		// ...and with only one of the pair left, it goes on its own.
+		assertTrue(service.purchaseMajor(profile, WAIVER).ok());
+		assertTrue(service.purchaseMajor(profile, HOLD_TO_THROW).ok());
 		assertTrue(service.refundMajor(profile, WAIVER).ok());
-		assertEquals(Outcome.CONFLICT, service.purchaseMajor(profile, HOLD_TO_THROW).outcome());
+		assertTrue(profile.owns(HOLD_TO_THROW));
+	}
+
+	@Test
+	void refundingAPrerequisiteTakesItsDependentsAlong() {
+		levelTo(ARMOR, 40);
+		assertTrue(service.purchaseMajor(profile, LAST_BREATH).ok());
+		assertTrue(service.purchaseMajor(profile, CASTLE_OF_STONE).ok());
+		ActionResult all = service.refundMajorWithDependents(profile, LAST_BREATH);
+		assertTrue(all.ok());
+		assertEquals(List.of(CASTLE_OF_STONE), all.involved());
+		assertTrue(profile.majors().isEmpty());
+	}
+
+	@Test
+	void aSwapTakesTheSwappedOutMajorsDependentsAlong() {
+		levelTo(ARMOR, 30);
+		levelTo(COMBAT, 30);
+		assertTrue(service.purchaseMajor(profile, FULL_SWEEP).ok());
+		assertTrue(service.purchaseMajor(profile, BATTER_UP).ok()); // needs a Sword Major
+		// Pretend Full Sweep clashed with something: the cascade of losing it includes Batter Up!.
+		assertEquals(List.of(BATTER_UP), service.refundCascade(profile, java.util.Set.of(FULL_SWEEP), null));
+		assertEquals(List.of(), service.refundCascade(profile, java.util.Set.of(BATTER_UP), null));
 	}
 
 	@Test

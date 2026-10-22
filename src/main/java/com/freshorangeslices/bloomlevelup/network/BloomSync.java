@@ -182,6 +182,7 @@ public final class BloomSync {
 				case FUND -> service.fundWithVanillaXp(profile, target, amount, new PlayerXpWallet(player));
 				case INVEST -> service.invest(profile, target, amount, new PlayerXpWallet(player));
 				case SET_COPY_SOURCE -> service.selectCopySource(profile, CombatIds.COPYCAT, target);
+				case REFUND_MAJOR_ALL -> service.refundMajorWithDependents(profile, target);
 			};
 		} catch (RuntimeException e) {
 			BloomLevelUp.LOGGER.error("Bloom request {} from {} failed", request, player.getName().getString(), e);

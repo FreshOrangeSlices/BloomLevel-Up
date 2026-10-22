@@ -514,6 +514,34 @@ public class CombatGameTests {
 	}
 
 	@GameTest
+	public void chargedSwingsAndThrowsWearTheWeapon(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(player, CombatIds.CHARGE_ATTACK, CombatIds.HEAVY_HANDS);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		CombatAbilities.armChargeForTests(player);
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		CombatSkill.modifyIncoming(zombie, hit(player), 6.0F);
+		CombatSkill.endSwingForTests();
+		// A sword hit wears it by 1 on its own (not run here); the charge adds the rest of the 2.
+		helper.assertValueEqual(BloomServices.config().chargedSwingDurabilityCost - 1, player.getMainHandItem().getDamageValue(),
+				"A charged swing's extra wear");
+
+		ServerPlayer thrower = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(thrower, CombatIds.LIGHTNING_SHOCK, CombatIds.CATCH);
+		helper.assertTrue(CombatAbilities.throwForTests(thrower, false), "Thrown");
+		ThrownWeapon axe = helper.getLevel().getEntitiesOfClass(ThrownWeapon.class, thrower.getBoundingBox().inflate(4.0)).get(0);
+		helper.assertValueEqual(BloomServices.config().catchThrowDurabilityCost, axe.getItem().getDamageValue(), "A throw's wear");
+		axe.discard();
+
+		ItemStack worn = new ItemStack(Items.IRON_AXE);
+		worn.setDamageValue(worn.getMaxDamage() - BloomServices.config().catchThrowDurabilityCost);
+		thrower.setItemInHand(InteractionHand.MAIN_HAND, worn);
+		helper.assertFalse(CombatAbilities.throwForTests(thrower, false), "Too worn to throw");
+		helper.assertTrue(thrower.getMainHandItem() == worn, "And it stays in hand");
+		helper.succeed();
+	}
+
+	@GameTest
 	public void thrownWeaponsHitForTheirOwnDamage(GameTestHelper helper) {
 		ServerPlayer player = player(helper, ItemStack.EMPTY);
 		ThrownWeapon thrown = ThrownWeapon.create(helper.getLevel(), player, new ItemStack(Items.IRON_SWORD));
@@ -566,11 +594,8 @@ public class CombatGameTests {
 		helper.assertTrue(profile.owns(CombatIds.HEAVY_HANDS) && profile.owns(CombatIds.CATCH) && profile.owns(CombatIds.CHARGE_ATTACK),
 				"Heavy Hands, Charge Attack and Catch! together");
 
-		ActionResult refund = service.refundMajor(profile, CombatIds.MASTER_OF_ARMS);
-		helper.assertTrue(refund.outcome() == ActionResult.Outcome.WAIVER_IN_USE && refund.involved().contains(CombatIds.CATCH),
-				"Master of Arms can't be refunded while it holds them together: " + refund);
 		helper.assertTrue(service.toggleMajor(profile, CombatIds.MASTER_OF_ARMS).outcome() == ActionResult.Outcome.NOT_TOGGLEABLE,
-				"...or switched off");
+				"Master of Arms can't be switched off");
 
 		// Charged Throw: double the thrown sword's damage, and it pierces.
 		LivingEntity zombie = zombie(helper, 1, 1);
@@ -579,9 +604,18 @@ public class CombatGameTests {
 		helper.assertValueEqual(1, thrown.size(), "One thrown sword");
 		ThrownWeapon sword = thrown.get(0);
 		helper.assertTrue(sword.isCharged() && sword.getPierceLevel() >= BloomServices.config().chargedThrowPierce, "Charged and piercing");
+		helper.assertValueEqual(BloomServices.config().chargedThrowDurabilityCost, sword.getItem().getDamageValue(), "A charged throw's wear");
 		near(helper, 12.0, CombatSkill.modifyIncoming(zombie, player.damageSources().trident(sword, player), 8.0F), "2x the iron sword's 6");
 		CombatSkill.endSwingForTests();
 		sword.discard();
+
+		// Refunding it asks first, then takes every clashing Major it held together (Lightning Shock stays).
+		ActionResult asks = service.refundMajor(profile, CombatIds.MASTER_OF_ARMS);
+		helper.assertTrue(asks.outcome() == ActionResult.Outcome.REQUIRED_BY_OWNED
+				&& asks.involved().equals(List.of(CombatIds.CATCH, CombatIds.CHARGE_ATTACK, CombatIds.HEAVY_HANDS)), "Asks first: " + asks);
+		helper.assertTrue(service.refundMajorWithDependents(profile, CombatIds.MASTER_OF_ARMS).ok(), "Then refunds them all");
+		helper.assertTrue(profile.majors().keySet().equals(java.util.Set.of(CombatIds.LIGHTNING_SHOCK)), "Only Lightning Shock left: "
+				+ profile.majors().keySet());
 		helper.succeed();
 	}
 
@@ -620,8 +654,8 @@ public class CombatGameTests {
 	@GameTest
 	public void galeThrowPullsMobsInThenBlowsThemAway(GameTestHelper helper) {
 		var config = BloomServices.config();
-		double radiusScale = config.galeThrowRadiusScale;
-		config.galeThrowRadiusScale = 1.0; // keep it inside this test's area
+		double pullRadius = config.galeThrowPullRadius;
+		config.galeThrowPullRadius = 3.5; // keep it inside this test's area
 
 		try {
 			ServerLevel level = helper.getLevel();
@@ -639,7 +673,7 @@ public class CombatGameTests {
 			CombatSkill.runQueuedForTests();
 			helper.assertTrue(zombie.getDeltaMovement().x > 0.05, "Then blown away: " + zombie.getDeltaMovement());
 		} finally {
-			config.galeThrowRadiusScale = radiusScale;
+			config.galeThrowPullRadius = pullRadius;
 		}
 
 		helper.succeed();

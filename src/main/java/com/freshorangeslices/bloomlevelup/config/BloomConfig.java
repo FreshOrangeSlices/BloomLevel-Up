@@ -180,22 +180,32 @@ public final class BloomConfig {
 	public double lightningSummonRange = 48.0;
 	public double lightningSummonCostRatio = 0.10;
 	public int lightningSummonCooldownTicks = 20;
-	/** Catch!: throw speed (a trident is 2.5). */
+	/** Catch!: throw speed (a trident is 2.5) and durability per throw (a weapon too worn to pay isn't thrown). */
 	public double catchThrowSpeed = 2.5;
+	public int catchThrowDurabilityCost = 3;
+	/** Charge Attack / Heavy Hands: total durability a charged swing costs (including the hit's own wear). */
+	public int chargedSwingDurabilityCost = 2;
 	/** Assault Rifle: shots per magazine. */
 	public int assaultRifleMagazine = 16;
-	/** Master of Arms / Charged Throw: speed multiplier and how many mobs the throw goes through (damage uses chargeAttackMultiplier). */
+	/** Master of Arms / Charged Throw (and Gale Throw): speed multiplier, mobs it goes through, durability (damage uses chargeAttackMultiplier). */
 	public double chargedThrowSpeedMultiplier = 1.4;
 	public int chargedThrowPierce = 3;
-	/** Master of Arms / Charged Burst: size of a charged wind burst (blast, push radius and push strength) vs a normal one. */
+	public int chargedThrowDurabilityCost = 8;
+	/**
+	 * Master of Arms / Charged Burst vs a normal burst: blast and push radius, push strength, your upward launch
+	 * speed (a normal burst is about 1.2: ~8 blocks; 1.65: ~14 blocks) and extra mace durability.
+	 */
 	public double chargedBurstScale = 1.3;
+	public double chargedBurstPushScale = 1.7;
+	public double chargedBurstLaunchSpeed = 1.65;
+	public int chargedBurstExtraDurability = 2;
 	/** Master of Arms / Storm Call: bolts, their distance from the aim point, ticks between bolts, and cost/cooldown vs one bolt. */
 	public int stormCallBolts = 3;
 	public double stormCallRadius = 2.5;
 	public int stormCallGapTicks = 3;
 	public double stormCallCostMultiplier = 2.0;
-	/** Master of Arms / Gale Throw: a thrown mace's landing pulls mobs in from this far (x Wind Impact radius), then bursts. */
-	public double galeThrowRadiusScale = 2.0;
+	/** Master of Arms / Gale Throw: a charged mace throw's landing pulls mobs in from this many blocks away, then bursts. */
+	public double galeThrowPullRadius = 6.5;
 	public double galeThrowPullStrength = 0.9;
 	public int galeThrowPullTicks = 8;
 	public double galeThrowBurstScale = 1.4;
@@ -365,11 +375,17 @@ public final class BloomConfig {
 		chargedThrowSpeedMultiplier = Math.max(0.5, Math.min(3.0, chargedThrowSpeedMultiplier));
 		chargedThrowPierce = Math.max(0, Math.min(127, chargedThrowPierce));
 		chargedBurstScale = Math.max(1.0, Math.min(4.0, chargedBurstScale));
+		chargedBurstPushScale = Math.max(0.0, Math.min(5.0, chargedBurstPushScale));
+		chargedBurstLaunchSpeed = Math.max(0.0, Math.min(3.0, chargedBurstLaunchSpeed));
+		chargedBurstExtraDurability = Math.max(0, chargedBurstExtraDurability);
+		catchThrowDurabilityCost = Math.max(0, catchThrowDurabilityCost);
+		chargedSwingDurabilityCost = Math.max(0, chargedSwingDurabilityCost);
+		chargedThrowDurabilityCost = Math.max(0, chargedThrowDurabilityCost);
 		stormCallBolts = Math.max(1, Math.min(12, stormCallBolts));
 		stormCallRadius = Math.max(0.0, Math.min(16.0, stormCallRadius));
 		stormCallGapTicks = Math.max(0, Math.min(40, stormCallGapTicks));
 		stormCallCostMultiplier = Math.max(0.0, stormCallCostMultiplier);
-		galeThrowRadiusScale = Math.max(1.0, Math.min(4.0, galeThrowRadiusScale));
+		galeThrowPullRadius = Math.max(1.0, Math.min(16.0, galeThrowPullRadius));
 		galeThrowPullStrength = Math.max(0.0, Math.min(4.0, galeThrowPullStrength));
 		galeThrowPullTicks = Math.max(0, Math.min(40, galeThrowPullTicks));
 		galeThrowBurstScale = Math.max(1.0, Math.min(4.0, galeThrowBurstScale));

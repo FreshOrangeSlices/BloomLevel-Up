@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
@@ -637,7 +638,13 @@ public final class HubScreen extends Screen {
 		if (event.button() == InputConstants.MOUSE_BUTTON_RIGHT) {
 			if (owned) {
 				click();
-				send(Action.REFUND_MAJOR, major.id(), 0);
+				List<String> dependents = ClientBloomState.service().refundCascade(ClientBloomState.profile(), Set.of(major.id()), null);
+
+				if (dependents.isEmpty()) {
+					send(Action.REFUND_MAJOR, major.id(), 0);
+				} else {
+					confirmRefund(major, dependents);
+				}
 			}
 
 			return true;
@@ -669,7 +676,8 @@ public final class HubScreen extends Screen {
 				if (conflicts.isEmpty()) {
 					send(Action.BUY_MAJOR, major.id(), 0);
 				} else {
-					confirmSwap(major, conflicts);
+					List<String> also = ClientBloomState.service().refundCascade(ClientBloomState.profile(), Set.copyOf(conflicts), major.id());
+					confirmSwap(major, conflicts, also);
 				}
 			}
 
@@ -735,12 +743,30 @@ public final class HubScreen extends Screen {
 		return null;
 	}
 
-	private void confirmSwap(MajorDefinition major, List<String> conflicts) {
+	private void confirmSwap(MajorDefinition major, List<String> conflicts, List<String> also) {
 		Component title = Component.translatable("bloom.hub.swap.title");
-		Component message = Component.translatable("bloom.hub.swap.message", name(major.translationKey(), major.id()), joinNames(conflicts));
+		MutableComponent message = Component.translatable("bloom.hub.swap.message", name(major.translationKey(), major.id()), joinNames(conflicts));
+
+		if (!also.isEmpty()) {
+			message.append("\n\n").append(Component.translatable("bloom.hub.refund.also", joinNames(also)));
+		}
+
 		ClientScreens.open(new ConfirmScreen(yes -> {
 			if (yes) {
 				send(Action.BUY_MAJOR_SWAP, major.id(), 0);
+			}
+
+			ClientScreens.open(this);
+		}, title, message));
+	}
+
+	/** Refunding this takes other Majors with it (they need it, or Master of Arms held them together): ask first. */
+	private void confirmRefund(MajorDefinition major, List<String> dependents) {
+		Component title = Component.translatable("bloom.hub.refund.title", name(major.translationKey(), major.id()));
+		Component message = Component.translatable("bloom.hub.refund.also", joinNames(dependents));
+		ClientScreens.open(new ConfirmScreen(yes -> {
+			if (yes) {
+				send(Action.REFUND_MAJOR_ALL, major.id(), 0);
 			}
 
 			ClientScreens.open(this);

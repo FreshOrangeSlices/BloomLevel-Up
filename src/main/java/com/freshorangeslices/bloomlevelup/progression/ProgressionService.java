@@ -385,31 +385,54 @@ public final class ProgressionService {
 	}
 
 	/**
-	 * Owned Majors that would be left clashing if {@code removing} were taken away, because a waiver they rely
-	 * on is among them. Sorted, each id once.
+	 * Everything that has to be refunded along with {@code removing} (while {@code adding}, if not null, is
+	 * bought in the same step): owned Majors whose prerequisites stop being met (Batter Up! once its last Sword
+	 * Major goes), and both Majors of every pair that was only allowed by a waiver that goes (Master of Arms),
+	 * repeated until nothing else falls. Sorted; leaves out {@code removing} itself.
 	 */
-	private List<String> unwaivedBy(BloomProfile profile, Set<String> removing) {
-		Set<String> before = profile.majors().keySet();
-		Set<String> after = new HashSet<>(before);
-		after.removeAll(removing);
-		Set<String> clashing = new java.util.TreeSet<>();
+	public List<String> refundCascade(BloomProfile profile, Set<String> removing, String adding) {
+		Set<String> before = new HashSet<>(profile.majors().keySet());
 
-		for (String ownedId : after) {
-			Optional<MajorDefinition> owned = definitions.major(ownedId);
+		if (adding != null) {
+			before.add(adding);
+		}
 
-			if (owned.isEmpty()) {
-				continue;
-			}
+		Set<String> gone = new HashSet<>(removing);
+		boolean changed = true;
 
-			for (String conflict : owned.get().conflicts()) {
-				if (after.contains(conflict) && waived(before, ownedId, conflict) && !waived(after, ownedId, conflict)) {
-					clashing.add(ownedId);
-					clashing.add(conflict);
+		while (changed) {
+			changed = false;
+			Set<String> after = new HashSet<>(before);
+			after.removeAll(gone);
+
+			for (String ownedId : after) {
+				Optional<MajorDefinition> owned = definitions.major(ownedId);
+
+				if (owned.isEmpty() || ownedId.equals(adding) || gone.contains(ownedId)) {
+					continue;
+				}
+
+				if (!prerequisitesMet(after, owned.get())) {
+					changed |= gone.add(ownedId);
+					continue;
+				}
+
+				for (String conflict : owned.get().conflicts()) {
+					if (after.contains(conflict) && waived(before, ownedId, conflict) && !waived(after, ownedId, conflict)) {
+						changed |= gone.add(ownedId);
+
+						if (!conflict.equals(adding)) {
+							changed |= gone.add(conflict);
+						}
+					}
 				}
 			}
 		}
 
-		return List.copyOf(clashing);
+		gone.removeAll(removing);
+		List<String> out = new ArrayList<>(gone);
+		out.sort(null);
+		return out;
 	}
 
 	/** Buys a Major. Returns {@link Outcome#CONFLICT} (with the clashing ids) instead of silently failing. */
@@ -447,17 +470,9 @@ public final class ProgressionService {
 				return ActionResult.of(Outcome.CONFLICT, conflicts);
 			}
 
-			List<String> broken = brokenBy(profile, Set.copyOf(conflicts), major.id());
-
-			if (!broken.isEmpty()) {
-				return ActionResult.of(Outcome.REQUIRED_BY_OWNED, broken);
-			}
-
-			List<String> clashing = unwaivedBy(profile, Set.copyOf(conflicts));
-
-			if (!clashing.isEmpty()) {
-				return ActionResult.of(Outcome.WAIVER_IN_USE, clashing);
-			}
+			// Whatever depends on the swapped-out Majors goes with them.
+			conflicts = new ArrayList<>(conflicts);
+			conflicts.addAll(refundCascade(profile, Set.copyOf(conflicts), major.id()));
 
 			for (String conflict : conflicts) {
 				refund += profile.majors().get(conflict).paid();
@@ -476,27 +491,39 @@ public final class ProgressionService {
 		return ActionResult.success();
 	}
 
-	/** Refunds a Major in full. Blocked while another owned Major lists it as a prerequisite. */
+	/**
+	 * Refunds a Major in full. If other owned Majors would have to go with it (see {@link #refundCascade}) it
+	 * refuses with {@link Outcome#REQUIRED_BY_OWNED} listing them; {@link #refundMajorWithDependents} confirms.
+	 */
 	public ActionResult refundMajor(BloomProfile profile, String majorId) {
 		if (!profile.owns(majorId)) {
 			return ActionResult.of(Outcome.NOT_OWNED);
 		}
 
-		List<String> broken = brokenBy(profile, Set.of(majorId), null);
+		List<String> dependents = refundCascade(profile, Set.of(majorId), null);
 
-		if (!broken.isEmpty()) {
-			return ActionResult.of(Outcome.REQUIRED_BY_OWNED, broken);
-		}
-
-		// Master of Arms: can't be refunded while it's what lets two clashing Majors be owned together.
-		List<String> clashing = unwaivedBy(profile, Set.of(majorId));
-
-		if (!clashing.isEmpty()) {
-			return ActionResult.of(Outcome.WAIVER_IN_USE, clashing);
+		if (!dependents.isEmpty()) {
+			return ActionResult.of(Outcome.REQUIRED_BY_OWNED, dependents);
 		}
 
 		profile.majors().remove(majorId);
 		return ActionResult.success();
+	}
+
+	/** Refunds a Major and everything that depends on it, in full. {@code involved} lists the extra refunds. */
+	public ActionResult refundMajorWithDependents(BloomProfile profile, String majorId) {
+		if (!profile.owns(majorId)) {
+			return ActionResult.of(Outcome.NOT_OWNED);
+		}
+
+		List<String> dependents = refundCascade(profile, Set.of(majorId), null);
+		profile.majors().remove(majorId);
+
+		for (String dependent : dependents) {
+			profile.majors().remove(dependent);
+		}
+
+		return new ActionResult(Outcome.SUCCESS, dependents);
 	}
 
 	public ActionResult toggleMajor(BloomProfile profile, String majorId) {
@@ -569,32 +596,6 @@ public final class ProgressionService {
 
 		String source = copier.option();
 		return isCopyableSource(profile, source) && isMajorActive(profile, source) ? Optional.of(source) : Optional.empty();
-	}
-
-	/**
-	 * Owned Majors whose prerequisites would stop being met if {@code removing} were taken away
-	 * (optionally while {@code adding} is bought in the same step).
-	 */
-	private List<String> brokenBy(BloomProfile profile, Set<String> removing, String adding) {
-		Set<String> after = new HashSet<>(profile.majors().keySet());
-		after.removeAll(removing);
-
-		if (adding != null) {
-			after.add(adding);
-		}
-
-		List<String> broken = new ArrayList<>();
-
-		for (String ownedId : after) {
-			Optional<MajorDefinition> owned = definitions.major(ownedId);
-
-			if (owned.isPresent() && !ownedId.equals(adding) && !prerequisitesMet(after, owned.get())) {
-				broken.add(ownedId);
-			}
-		}
-
-		broken.sort(null);
-		return broken;
 	}
 
 	// ------------------------------------------------------------------ Bloom+

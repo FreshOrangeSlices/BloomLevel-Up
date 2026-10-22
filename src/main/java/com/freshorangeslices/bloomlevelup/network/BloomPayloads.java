@@ -76,7 +76,9 @@ public final class BloomPayloads {
 		FUND,
 		INVEST,
 		/** Copycat: target = the weapon Major to copy, or empty to clear. */
-		SET_COPY_SOURCE
+		SET_COPY_SOURCE,
+		/** Refunds a Major and every owned Major that depends on it (after the hub's confirm prompt). */
+		REFUND_MAJOR_ALL
 	}
 
 	/** Client → server: one request from the hub. The server never trusts it beyond "the player asked for this". */

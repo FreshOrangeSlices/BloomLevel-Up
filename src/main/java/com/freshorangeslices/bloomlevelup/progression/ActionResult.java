@@ -25,16 +25,17 @@ public record ActionResult(Outcome outcome, List<String> involved) {
 		NOT_ENOUGH_MAJOR_LEVELS,
 		NOT_ENOUGH_POINTS,
 		NOT_ENOUGH_XP,
-		/** Owned Majors require this one; {@code involved} lists them. */
+		/**
+		 * Other owned Majors would have to be refunded with this one (they need it, or a waiver like Master of Arms
+		 * is what lets them be owned together); {@code involved} lists them.
+		 */
 		REQUIRED_BY_OWNED,
 		REFUND_DISABLED,
 		AT_LEVEL_CAP,
 		INVESTMENT_LOCKED,
 		INVALID_AMOUNT,
 		/** The chosen option isn't allowed (Copycat: not an owned, copyable weapon Major). */
-		INVALID_CHOICE,
-		/** A waiver (Master of Arms) can't go while it lets clashing Majors be owned together; {@code involved} lists them. */
-		WAIVER_IN_USE
+		INVALID_CHOICE
 	}
 
 	public ActionResult {

@@ -419,6 +419,7 @@ public final class CombatSkill {
 			if (fullStrength && CombatAbilities.consumeCharge(player, weapon)) {
 				multiplier *= config.chargeAttackMultiplier;
 				CombatAbilities.chargedHitEffects(level, target);
+				CombatAbilities.chargedSwingWear(player, weapon);
 			}
 
 			if (swing.crit) {
@@ -1069,11 +1070,16 @@ public final class CombatSkill {
 	 * away. Returns whether it fired.
 	 */
 	public static boolean windBurst(ServerPlayer player) {
-		return windBurst(player, 1.0);
+		return windBurst(player, false);
 	}
 
-	/** {@link #windBurst(ServerPlayer)} scaled up: a Charged Burst (Master of Arms) is bigger in every way. */
-	public static boolean windBurst(ServerPlayer player, double scale) {
+	/**
+	 * {@link #windBurst(ServerPlayer)}, or a Charged Burst (Master of Arms): a wider blast that pushes mobs
+	 * harder, and a much higher launch. A wind charge launches whoever stands on it by the same amount however
+	 * big the blast, so the charged launch sets the upward speed itself. Falling back to the launch height
+	 * stays harmless either way.
+	 */
+	public static boolean windBurst(ServerPlayer player, boolean charged) {
 		ItemStack mace = player.getMainHandItem();
 
 		if (!(player.level() instanceof ServerLevel level) || !Weapons.is(mace, Family.MACE) || !active(player, CombatIds.WIND_IMPACT)
@@ -1092,19 +1098,28 @@ public final class CombatSkill {
 		} else {
 			return false;
 		}
-		windBlast(level, at, scale);
-		windImpactAt(level, player, at, scale);
+		BloomConfig config = config();
+		double radiusScale = charged ? config.chargedBurstScale : 1.0;
+		windBlast(level, at, radiusScale);
+		windImpactAt(level, player, at, radiusScale, charged ? config.chargedBurstPushScale : 1.0);
 
 		// Like a wind charge jump: falling back to where you jumped from doesn't hurt.
 		if (player.position().distanceToSqr(at) < 4.0) {
+			if (charged) {
+				Vec3 velocity = player.getDeltaMovement();
+				player.setDeltaMovement(velocity.x, Math.max(velocity.y, config.chargedBurstLaunchSpeed), velocity.z);
+				syncVelocity(player);
+			}
+
 			player.currentImpulseImpactPos = player.position();
 			player.setIgnoreFallDamageFromCurrentImpulse(true, player.position());
 		}
 
-		player.getCooldowns().addCooldown(mace, config().windImpactCooldownTicks);
+		player.getCooldowns().addCooldown(mace, config.windImpactCooldownTicks);
+		int wear = config.windImpactDurabilityCost + (charged ? config.chargedBurstExtraDurability : 0);
 
-		if (config().windImpactDurabilityCost > 0) {
-			mace.hurtAndBreak(config().windImpactDurabilityCost, player, EquipmentSlot.MAINHAND);
+		if (wear > 0 && !player.hasInfiniteMaterials()) {
+			mace.hurtAndBreak(wear, player, EquipmentSlot.MAINHAND);
 		}
 
 		return true;
@@ -1119,14 +1134,14 @@ public final class CombatSkill {
 
 	/** A wind burst at a point that pushes everything around it away (never the player who caused it). */
 	public static void windImpactAt(ServerLevel level, ServerPlayer player, Vec3 at) {
-		windImpactAt(level, player, at, 1.0);
+		windImpactAt(level, player, at, 1.0, 1.0);
 	}
 
-	/** {@link #windImpactAt(ServerLevel, ServerPlayer, Vec3)} with the radius and push scaled. */
-	public static void windImpactAt(ServerLevel level, ServerPlayer player, Vec3 at, double scale) {
+	/** {@link #windImpactAt(ServerLevel, ServerPlayer, Vec3)} with the radius and the push scaled. */
+	public static void windImpactAt(ServerLevel level, ServerPlayer player, Vec3 at, double radiusScale, double pushScale) {
 		BloomConfig config = config();
-		double radius = config.windImpactRadius * scale;
-		double strength = config.windImpactStrength * scale;
+		double radius = config.windImpactRadius * radiusScale;
+		double strength = config.windImpactStrength * pushScale;
 
 		for (LivingEntity victim : victimsAround(level, player, new AABB(at, at).inflate(radius))) {
 			double distance = Math.sqrt(victim.position().distanceToSqr(at));

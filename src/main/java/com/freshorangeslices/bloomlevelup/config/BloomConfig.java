@@ -9,7 +9,7 @@ package com.freshorangeslices.bloomlevelup.config;
  */
 public final class BloomConfig {
 	/** The defaults this build ships with. Files from older builds are moved onto changed defaults by {@link #migrate()}. */
-	public static final int CURRENT_VERSION = 3;
+	public static final int CURRENT_VERSION = 4;
 
 	/** Which build's defaults the file was written with (0 = before versioning). */
 	public int configVersion;
@@ -133,8 +133,11 @@ public final class BloomConfig {
 	public double lightningShockRatio = 0.5;
 	public double lightningShockRadius = 6.0;
 	public int lightningShockCooldownTicks = 40;
-	/** Lightning Shock: pause between bounces, so the ricochet can be followed. */
-	public int lightningShockBounceTicks = 10;
+	/** Lightning Shock: how long each jump takes. */
+	public int lightningShockBounceTicks = 2;
+	/** Lightning Shock: sparks that leave the struck target at once, and how many enemies each one jumps through. */
+	public int lightningShockSparks = 3;
+	public int lightningShockJumps = 3;
 	public double storedImpactRatio = 0.5;
 	public double storedImpactCap = 20.0;
 	/** Stored Impact: one storage window opened by the first stored fall; later falls add to it until it closes. */
@@ -156,9 +159,9 @@ public final class BloomConfig {
 	public double impaleChance = 0.50;
 	public int bleedTicks = 60;
 	public int auraSwordHits = 5;
-	public double auraSwordRadius = 3.0;
+	public double auraSwordRadius = 4.0;
 	/** Aura Sword: ticks between its three outward waves. */
-	public int auraSwordPulseGapTicks = 4;
+	public int auraSwordPulseGapTicks = 9;
 	public double predatorPerStack = 0.10;
 	public int predatorMaxStacks = 5;
 	public int predatorResetTicks = 100;
@@ -227,6 +230,13 @@ public final class BloomConfig {
 			// Playtest round 2b: Shovel Mastery's treasure is a flat 10% plus a little from Yield.
 			excavationTreasureBaseChance = moved(excavationTreasureBaseChance, 0.03, 0.10);
 			excavationTreasureChancePer100Yield = moved(excavationTreasureChancePer100Yield, 0.05, 0.02);
+		}
+
+		if (configVersion < 4) {
+			// Playtest round 3 (2026-10-22): faster Lightning jumps, a wider and slower Aura Sword.
+			lightningShockBounceTicks = lightningShockBounceTicks == 10 ? 2 : lightningShockBounceTicks;
+			auraSwordRadius = moved(auraSwordRadius, 3.0, 4.0);
+			auraSwordPulseGapTicks = auraSwordPulseGapTicks == 4 ? 9 : auraSwordPulseGapTicks;
 		}
 
 		configVersion = CURRENT_VERSION;
@@ -298,6 +308,8 @@ public final class BloomConfig {
 		lightningShockRadius = Math.max(1.0, Math.min(32.0, lightningShockRadius));
 		lightningShockCooldownTicks = Math.max(0, lightningShockCooldownTicks);
 		lightningShockBounceTicks = Math.max(0, Math.min(100, lightningShockBounceTicks));
+		lightningShockSparks = Math.max(1, Math.min(8, lightningShockSparks));
+		lightningShockJumps = Math.max(1, Math.min(8, lightningShockJumps));
 		storedImpactRatio = Math.max(0.0, storedImpactRatio);
 		storedImpactCap = Math.max(0.0, storedImpactCap);
 		storedImpactWindowTicks = Math.max(1, storedImpactWindowTicks);

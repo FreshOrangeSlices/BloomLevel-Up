@@ -127,7 +127,9 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 			FuelImprint fuel = stack.get(BloomComponents.FUEL);
 
 			if (fuel != null) {
-				lines.add(Component.translatable("bloom.misc.fuel.tooltip", MiscSkill.effectName(fuel.effect(), fuel.amplifier()))
+				int ticks = ClientBloomState.config() == null ? 100 : ClientBloomState.config().fuelEffectTicks;
+				String seconds = ticks % 20 == 0 ? Integer.toString(ticks / 20) : String.format(java.util.Locale.ROOT, "%.1f", ticks / 20.0);
+				lines.add(Component.translatable("bloom.misc.fuel.tooltip", MiscSkill.effectName(fuel.effect(), fuel.amplifier()), seconds)
 						.withStyle(ChatFormatting.DARK_PURPLE));
 			}
 		});

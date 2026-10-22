@@ -818,17 +818,16 @@ public final class CombatSkill {
 		}
 	}
 
-	/** How many times Lightning Shock jumps. */
-	private static final int LIGHTNING_HOPS = 3;
-
 	/**
-	 * Lightning Shock: a spark jumps from the struck target to the nearest other enemy, then on to the next
-	 * nearest it hasn't shocked yet: 3 jumps, so up to 3 other enemies. With fewer enemies around it bounces
-	 * back between them (never the same one twice in a row). Needs at least one other enemy near the target.
-	 * Each jump visibly travels between the two and lands half a second later. Returns whether it fired.
+	 * Lightning Shock: sparks leave the struck target together (3 by default), each to a different nearby
+	 * enemy, nearest first. Every spark then keeps jumping to the nearest enemy it hasn't shocked yet, 3 jumps
+	 * in all; with few enemies around it bounces back between them (never the same one twice in a row). Each
+	 * jump draws a streak between the two and lands a moment later (0.1 s). Needs at least one other enemy
+	 * near the target; with fewer enemies than sparks, fewer sparks fly. Returns whether it fired.
 	 */
 	public static boolean lightningChain(ServerLevel level, ServerPlayer player, LivingEntity target, float damage) {
-		double radius = config().lightningShockRadius;
+		BloomConfig config = config();
+		double radius = config.lightningShockRadius;
 		List<LivingEntity> enemies = victimsAround(level, player, target.getBoundingBox().inflate(radius));
 		enemies.removeIf(entity -> entity != target && entity.distanceToSqr(target) > radius * radius);
 
@@ -836,33 +835,49 @@ public final class CombatSkill {
 			enemies.add(target);
 		}
 
-		if (enemies.size() < 2 || !(damage > 0.0F)) {
+		List<LivingEntity> others = new ArrayList<>(enemies);
+		others.remove(target);
+		others.sort(Comparator.comparingDouble(entity -> entity.distanceToSqr(target)));
+
+		if (others.isEmpty() || !(damage > 0.0F)) {
 			return false;
 		}
 
-		List<LivingEntity> path = new ArrayList<>();
-		Set<LivingEntity> shocked = Collections.newSetFromMap(new IdentityHashMap<>());
-		LivingEntity at = target;
+		int sparks = Math.min(config.lightningShockSparks, others.size());
+		int gap = Math.max(1, config.lightningShockBounceTicks);
 
-		for (int hop = 0; hop < LIGHTNING_HOPS; hop++) {
-			LivingEntity from = at;
-			LivingEntity next = nearest(enemies, from, entity -> entity != from && entity != target && !shocked.contains(entity));
+		for (int spark = 0; spark < sparks; spark++) {
+			List<LivingEntity> path = new ArrayList<>();
+			Set<LivingEntity> shocked = Collections.newSetFromMap(new IdentityHashMap<>());
+			LivingEntity at = others.get(spark);
+			path.add(at);
+			shocked.add(at);
 
-			if (next == null) {
-				next = nearest(enemies, from, entity -> entity != from);
+			for (int jump = 1; jump < config.lightningShockJumps; jump++) {
+				LivingEntity from = at;
+				LivingEntity next = nearest(enemies, from, entity -> entity != from && entity != target && !shocked.contains(entity));
+
+				if (next == null) {
+					next = nearest(enemies, from, entity -> entity != from);
+				}
+
+				if (next == null) {
+					break;
+				}
+
+				path.add(next);
+				shocked.add(next);
+				at = next;
 			}
 
-			if (next == null) {
-				break;
-			}
-
-			path.add(next);
-			shocked.add(next);
-			at = next;
+			scheduleSpark(level, player, target, path, damage, gap);
 		}
 
-		int gap = Math.max(1, config().lightningShockBounceTicks);
+		return true;
+	}
 
+	/** One spark's jumps: a growing streak from the last one shocked to the next, then the shock itself. */
+	private static void scheduleSpark(ServerLevel level, ServerPlayer player, LivingEntity target, List<LivingEntity> path, float damage, int gap) {
 		for (int i = 0; i < path.size(); i++) {
 			LivingEntity source = i == 0 ? target : path.get(i - 1);
 			LivingEntity victim = path.get(i);
@@ -874,9 +889,7 @@ public final class CombatSkill {
 				defer(start + t, () -> {
 					Vec3 a = source.isAlive() ? center(source) : sourceStart;
 					Vec3 b = center(victim);
-					Vec3 spark = a.add(b.subtract(a).scale(progress));
-					level.sendParticles(ParticleTypes.ELECTRIC_SPARK, spark.x, spark.y, spark.z, 6, 0.06, 0.06, 0.06, 0.02);
-					level.sendParticles(ParticleTypes.END_ROD, spark.x, spark.y, spark.z, 1, 0.0, 0.0, 0.0, 0.0);
+					sparkLine(level, a, a.add(b.subtract(a).scale(progress)));
 				});
 			}
 
@@ -885,15 +898,15 @@ public final class CombatSkill {
 					return;
 				}
 
+				Vec3 a = source.isAlive() ? center(source) : sourceStart;
 				Vec3 to = center(victim);
-				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, to.x, to.y, to.z, 20, 0.3, 0.45, 0.3, 0.25);
-				level.sendParticles(ParticleTypes.END_ROD, to.x, to.y, to.z, 4, 0.2, 0.3, 0.2, 0.05);
-				level.playSound(null, to.x, to.y, to.z, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.PLAYERS, 0.35F, 1.8F);
+				sparkLine(level, a, to);
+				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, to.x, to.y, to.z, 16, 0.3, 0.45, 0.3, 0.25);
+				level.sendParticles(ParticleTypes.END_ROD, to.x, to.y, to.z, 3, 0.2, 0.3, 0.2, 0.05);
+				level.playSound(null, to.x, to.y, to.z, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.PLAYERS, 0.25F, 1.9F);
 				victim.hurtServer(level, BloomDamage.lightningShock(level, player), damage);
 			});
 		}
-
-		return !path.isEmpty();
 	}
 
 	private static Vec3 center(LivingEntity entity) {
@@ -918,11 +931,15 @@ public final class CombatSkill {
 
 	private static void sparkLine(ServerLevel level, Vec3 from, Vec3 to) {
 		Vec3 step = to.subtract(from);
-		int points = Math.max(2, (int) (step.length() * 3.0));
+		int points = Math.max(2, (int) (step.length() * 4.0));
 
 		for (int i = 0; i <= points; i++) {
 			Vec3 at = from.add(step.scale(i / (double) points));
-			level.sendParticles(ParticleTypes.ELECTRIC_SPARK, at.x, at.y, at.z, 1, 0.02, 0.02, 0.02, 0.0);
+			level.sendParticles(ParticleTypes.ELECTRIC_SPARK, at.x, at.y, at.z, 1, 0.03, 0.03, 0.03, 0.0);
+
+			if (i % 3 == 0) {
+				level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 1, 0.0, 0.0, 0.0, 0.0);
+			}
 		}
 	}
 
@@ -1033,10 +1050,7 @@ public final class CombatSkill {
 		long cap = Math.round(config.storedImpactCap * 100.0);
 		stored = Math.min(cap, stored + Math.round(fallDamage * config.storedImpactRatio * 100.0));
 		profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, stored);
-		com.freshorangeslices.bloomlevelup.network.BloomSync.changed(player); // the HUD bar shows it
-		long secondsLeft = Math.max(0, (expires - now) / 20);
-		player.sendSystemMessage(Component.translatable("bloom.combat.stored_impact", String.format(java.util.Locale.ROOT, "%.1f", stored / 100.0),
-				String.format(java.util.Locale.ROOT, "%d:%02d", secondsLeft / 60, secondsLeft % 60)).withStyle(ChatFormatting.GOLD), true);
+		com.freshorangeslices.bloomlevelup.network.BloomSync.changed(player); // the HUD bar shows it (no chat text)
 	}
 
 	/**

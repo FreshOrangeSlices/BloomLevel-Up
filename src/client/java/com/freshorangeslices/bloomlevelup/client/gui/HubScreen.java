@@ -450,12 +450,9 @@ public final class HubScreen extends Screen {
 			g.blit(RenderPipelines.GUI_TEXTURED, IconTextures.resolve(major.icon()), x, y, 0.0F, 0.0F, MAJOR_ICON, MAJOR_ICON,
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, tint);
 
-			// Owned but switched off: an OFF badge, so it never looks refunded.
-			if (owned != null && !owned.enabled()) {
-				Component badge = Component.translatable("bloom.hub.major.off_badge");
-				int bw = this.font.width(badge);
-				g.fill(x + MAJOR_ICON - bw - 2, y + MAJOR_ICON - 8, x + MAJOR_ICON, y + MAJOR_ICON, 0xC0201A16);
-				g.text(this.font, badge, x + MAJOR_ICON - bw - 1, y + MAJOR_ICON - 8, BAD);
+			// Owned: a small dot in the corner, green when on, red when switched off (so off never looks refunded).
+			if (owned != null) {
+				dot(g, x + MAJOR_ICON - 7, y + 1, owned.enabled() ? 0xFF4FD34F : 0xFFE0453A, owned.enabled() ? 0xFF1E6B1E : 0xFF6B1A14);
 			}
 
 			// Cost badge for anything not yet owned.
@@ -500,6 +497,13 @@ public final class HubScreen extends Screen {
 		int mx = cx + (int) Math.round(Math.cos(angle) * r);
 		int my = cy + (int) Math.round(Math.sin(angle) * r);
 		g.fill(mx - 1, my - 1, mx + 1, my + 1, 0xFFFFF1C9);
+	}
+
+	/** A 6x6 round-ish dot with a darker edge. */
+	private static void dot(GuiGraphicsExtractor g, int x, int y, int color, int edge) {
+		g.fill(x + 1, y, x + 5, y + 6, edge);
+		g.fill(x, y + 1, x + 6, y + 5, edge);
+		g.fill(x + 1, y + 1, x + 5, y + 5, color);
 	}
 
 	private static void frame(GuiGraphicsExtractor g, int x0, int y0, int x1, int y1, int color) {

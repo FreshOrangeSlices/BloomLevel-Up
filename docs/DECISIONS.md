@@ -262,6 +262,17 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Shovel Mastery chance (confirmed) | 10% per natural dug block, plus 2% per 100 (boosted) Yield (about 12% at 100 Yield) | config `excavationTreasureBaseChance`, `excavationTreasureChancePer100Yield` |
 | Shovel Mastery biomes (confirmed) | Treasure is themed by biome: nether, desert/badlands, beach/ocean/river, swamp/mangrove, mountains/caves, forest/plains/taiga/jungle/savanna, and a default pool elsewhere. No name tags or saddles anywhere. The biome lists are tags (`bloomlevelup:excavation/<pool>`, already including the common `c:` tags) and each pool is its own loot table, so modpacks can extend both | `tags/worldgen/biome/excavation/`, `loot_table/gameplay/excavation/` |
 
+## Playtest round 3 (2026-10-22)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Lightning Shock (confirmed: 3 bouncing sparks) | Three sparks leave the struck target together, each to a different nearby enemy (nearest first); each spark then jumps on to the nearest enemy it hasn't shocked yet, 3 enemies per spark, bouncing back when few are around. Each jump takes 0.1 s and draws a streak. Every shock is 50% of the hit, so a crowd can take up to 9 shocks; still once per 2 s. Fewer other enemies than sparks means fewer sparks | config `lightningShockSparks`, `lightningShockJumps`, `lightningShockBounceTicks` (2), `lightningShockRatio` |
+| Aura Sword | Waves out to 4 blocks, 0.45 s apart | config `auraSwordRadius` (4), `auraSwordPulseGapTicks` (9) |
+| Major on/off | Owned Majors show a small corner dot: green when on, red when switched off (replaces the OFF text) | `HubScreen.drawMajors` |
+| Stored Impact text | No chat/action-bar message any more; the HUD bar is the only display | `CombatSkill.storeImpact` |
+| Become My Fuel text | The description and the weapon tooltip said 10 s; they now say 5 s (the tooltip reads the live setting) | lang, `BloomLevelUpClient` |
+| Config version 4 | Round 3's defaults move over as before | `BloomConfig.migrate` |
+
 ## Still open (need a design call)
 
 - Nothing blocking.

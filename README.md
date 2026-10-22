@@ -42,7 +42,11 @@ and boots a real client into a world (client-test workflow).
 ## Getting the jar
 
 Every push builds automatically. Open the **Actions** tab → latest **build** run → download
-**bloomlevelup-jar**. Drop it in `mods/` together with Fabric API.
+**bloomlevelup-jar**. Drop it in `mods/` together with Fabric API, and delete the old Bloom jar.
+
+Each jar carries its build number: `bloomlevelup-0.1.0+build.57.jar` is build 57 (the run number on the
+Actions tab). The same number shows in the bottom-right corner of the Skill Hub and in Mod Menu, so
+client and server can be checked at a glance; they should always run the same build.
 
 ## Trying it in game
 

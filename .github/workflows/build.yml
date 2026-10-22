@@ -52,7 +52,7 @@ jobs:
           clamscan --no-summary $(cat jars.txt) > clam.txt 2>&1
           status=$?
           verdict=$([ $status -eq 0 ] && echo "ClamAV: clean" || echo "ClamAV exit $status: $(tr '\n' ' ' < clam.txt)")
-          echo "::notice title=jar-check::SHA-256 $(tr '\n' ' ' < jar-sha256.txt)| $verdict"
+          echo "::notice title=jar-check::Build ${GITHUB_RUN_NUMBER} ($(cut -c1-7 <<< "$GITHUB_SHA")) | SHA-256 $(tr '\n' ' ' < jar-sha256.txt)| $verdict"
       - name: capture build artifacts
         if: success()
         uses: actions/upload-artifact@v7

@@ -273,6 +273,12 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Become My Fuel text | The description and the weapon tooltip said 10 s; they now say 5 s (the tooltip reads the live setting) | lang, `BloomLevelUpClient` |
 | Config version 4 | Round 3's defaults move over as before | `BloomConfig.migrate` |
 
+## Build numbers
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Versioning | CI builds are versioned `0.1.0+build.<run number>` (the jar name too); local builds `0.1.0+local`. The version shows in the hub's bottom-right corner, Mod Menu, the server log and the run's jar-check notice | `build.gradle` |
+
 ## Still open (need a design call)
 
 - Nothing blocking.

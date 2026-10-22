@@ -269,6 +269,10 @@ public final class HubScreen extends Screen {
 		}
 
 		drawStatusLine(g);
+
+		// Which build this is, so an old jar is easy to spot.
+		Component build = Component.literal("v" + com.freshorangeslices.bloomlevelup.BloomLevelUp.version());
+		g.text(this.font, build, panelX + panelW - 6 - this.font.width(build), panelY + panelH - 11, 0xFF5E5648);
 		super.extractRenderState(g, mouseX, mouseY, delta);
 	}
 

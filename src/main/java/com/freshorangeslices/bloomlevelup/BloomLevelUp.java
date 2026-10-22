@@ -20,7 +20,13 @@ public final class BloomLevelUp implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		BloomRegistries.init();
-		LOGGER.info("Bloom Level-Up initialised");
+		LOGGER.info("Bloom Level-Up {} initialised", version());
+	}
+
+	/** This jar's version, e.g. {@code 0.1.0+build.57} (CI run number) or {@code 0.1.0+local}. */
+	public static String version() {
+		return net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(MOD_ID)
+				.map(container -> container.getMetadata().getVersion().getFriendlyString()).orElse("?");
 	}
 
 	public static Identifier id(String path) {

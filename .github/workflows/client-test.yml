@@ -1,5 +1,6 @@
 # Boots a real Minecraft client with the mod into a singleplayer world (client mixins, hub, sync).
-# Screenshots are attached to each run under "Artifacts" (client-test-screenshots).
+# Screenshots are attached to each run under "Artifacts" (client-test-screenshots); the hub's are also
+# printed as annotations by the "screenshots" job (see .github/scripts/emit_screenshot.py).
 
 name: client-test
 on: [push, workflow_dispatch]
@@ -55,3 +56,22 @@ jobs:
             run/screenshots
             **/screenshots/*.png
           if-no-files-found: ignore
+
+  screenshots:
+    needs: client-test
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: client-test-screenshots
+          path: shots
+      - name: pillow
+        run: pip install --quiet pillow
+      - name: combat hub, GUI scale 3
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_combat_s3 24
+      - name: combat hub, GUI scale 4
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_combat_s4 24

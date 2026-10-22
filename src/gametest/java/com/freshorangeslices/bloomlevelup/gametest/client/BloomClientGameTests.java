@@ -60,6 +60,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot("bloom_skill_hub");
 			context.setScreen(() -> null);
 
+			combatTreeScreenshots(context, singleplayer);
+
 			hubClicks(context);
 
 			// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
@@ -93,6 +95,38 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		if (!failures.isEmpty()) {
 			throw new AssertionError("Bloom client checks failed: " + String.join(" | ", failures));
 		}
+	}
+
+	/**
+	 * The Combat tree with a few Majors owned (some lines lit), at 1920x1080 with GUI scale 3 and 4 (the
+	 * screenshots job prints these as annotations).
+	 */
+	private void combatTreeScreenshots(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		for (String major : List.of("combat/full_sweep", "combat/lightning_shock", "combat/master_of_arms", "combat/catch", "combat/charge_attack")) {
+			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:" + major);
+		}
+
+		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/charge_attack"));
+		context.runOnClient(client -> ClientBloomState.selectCategory("bloomlevelup:combat"));
+		context.getInput().resizeWindow(1920, 1080);
+
+		for (int scale : new int[] {3, 4}) {
+			context.runOnClient(client -> {
+				client.options.guiScale().set(scale);
+				client.resizeGui();
+			});
+			context.setScreen(HubScreen::new);
+			context.waitTicks(3);
+			context.takeScreenshot("bloom_hub_combat_s" + scale);
+			context.setScreen(() -> null);
+		}
+
+		context.runOnClient(client -> {
+			client.options.guiScale().set(0);
+			client.resizeGui();
+		});
+		context.getInput().resizeWindow(854, 480);
+		context.waitTicks(2);
 	}
 
 	/** Buys, switches off, switches on and refunds a Major with real mouse clicks on the hub's grid. */

@@ -13,7 +13,7 @@ from PIL import Image
 
 folder, name = pathlib.Path(sys.argv[1]), sys.argv[2]
 limit = int(sys.argv[3]) if len(sys.argv) > 3 else 30
-found = sorted(folder.rglob(name + '*.png'))
+found = sorted(folder.rglob('*' + name + '.png'))  # Fabric prefixes a counter: 0003_<name>.png
 
 if not found:
     print(f'no screenshot named {name}')

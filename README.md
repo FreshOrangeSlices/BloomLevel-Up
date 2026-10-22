@@ -53,12 +53,17 @@ client and server can be checked at a glance; they should always run the same bu
 Open your inventory and click the button right of the recipe book, or bind **Open Skill Hub** in
 Controls. In the hub:
 
-- Category tabs along the top. Stats on the left: **+ / −** to spend or take back points (shift = 10),
-  **On/Off** to switch a stat without losing points.
-- Majors on the right: click to buy, click an owned one to switch it on/off, right-click to refund.
-  Glowing = on, "OFF" badge = owned but off, dark = not owned. Hover for details.
+- Category tabs along the top. **Drag** the page (or scroll) to look around. Combat is a tree: Master
+  of Arms in the middle, each weapon around it with its Majors, the universal Majors along the bottom;
+  lines turn red when a Major on them is on.
+- The stats window (top left; the arrow folds it away): **+ / −** to spend or take back points
+  (shift = 10), **click a stat's icon** to switch it off or on without losing points (corner dot: green
+  on, red off).
+- Majors: click to buy, click an owned one to switch it on/off, right-click to refund (anything that
+  depends on it is listed and refunded with it after you confirm). Glowing = on, red dot = owned but
+  off, dark = not owned. Hover for details.
 - After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
-  On/Off buttons switch only a stat's invested points. The Armor tab shows your real armor total.
+  icon switches only a stat's invested points. The Armor tab shows your real armor total.
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).
 - Vein Mining and Timber: hold **sneak** while breaking to skip them for that block.
 - Copycat: **shift-click** an owned weapon Major in the hub to copy it; shift-click Copycat to stop.

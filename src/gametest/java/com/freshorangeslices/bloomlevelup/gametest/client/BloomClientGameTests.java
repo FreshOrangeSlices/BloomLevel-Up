@@ -116,6 +116,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				client.resizeGui();
 			});
 			context.setScreen(HubScreen::new);
+			context.getInput().setCursorPos(2, 2); // no tooltip in the way
 			context.waitTicks(3);
 			context.takeScreenshot("bloom_hub_combat_s" + scale);
 			context.setScreen(() -> null);

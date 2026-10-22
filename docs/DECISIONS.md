@@ -302,6 +302,17 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Durability (confirmed) | A Catch! throw costs 3, a charged swing 2 in all (Charge Attack or Heavy Hands; the hit's own wear counts toward it), a Charged Throw or Gale Throw 8, a Charged Burst 2 more than a normal burst (5). A throw never breaks the weapon: one too worn to pay isn't thrown ("too worn", like Lightning Summon). Storm Call stays at 2x one bolt (20% of the trident) | config `catchThrowDurabilityCost`, `chargedSwingDurabilityCost`, `chargedThrowDurabilityCost`, `chargedBurstExtraDurability` |
 | Charge released on a mob | Stays a charged swing (confirmed as seen in testing) | `CombatControls.release` |
 
+## Hub redesign (2026-10-22)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Layout (confirmed) | Each tab is a canvas you drag (or scroll) around, like the advancements screen. Categories with weapon trees (Combat) are a tree: the waiver Major (Master of Arms) in the middle, the weapons on an inner ring clockwise from the top, each weapon's Majors in a short row just outside it, universal Majors in rows of up to 13 along the bottom. Other tabs are a grid for now. The view starts centred in the space right of the stats window (top-aligned when the tree is taller than the window) | `HubScreen.treeLayout`, `gridLayout` |
+| Lines (confirmed: red when active) | Middle → each weapon and weapon → each of its Majors. Red while a Major on that line is on, dim otherwise. No lines to universal Majors: their prerequisites stay hidden | `HubScreen.drawCanvas` |
+| Stats window (confirmed) | Compact and foldable (the arrow): + above − to the left of each icon; the icon is the on/off switch with the same green/red corner dot as the Majors; Mode and Buy point stacked under the rows | `HubScreen.addStatsWindow`, `MiniButton`, `StatIcon` |
+| Background art | `textures/gui/hub/background_<tab>.png` (combat, utility, armor, misc) or `background.png` for all, 1024×512 (2:1). Scaled to cover the canvas and cropped at the edges, it doesn't scroll; drawn as-is (no darkening). Until it exists: the advancements screen's stone, darkened, scrolling with the page | `HubScreen.drawBackground` |
+| Weapon nodes | In vanilla's advancement goal frame (gold once you own a Major in that tree). Art `textures/icon/tree/<weapon>.png` (64×64; sword, axe, bow, crossbow, trident, mace, spear, unarmed); until then the vanilla item (a player head for Unarmed). Master of Arms sits in the challenge frame | `HubScreen.drawWeaponNode` |
+| Screenshots in CI | The client test shoots the Combat tree at 1920×1080, GUI scale 3 and 4; the client-test workflow's `screenshots` job prints them as base64 JPEG annotations so they can be checked without downloading artifacts | `BloomClientGameTests`, `.github/scripts/emit_screenshot.py` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

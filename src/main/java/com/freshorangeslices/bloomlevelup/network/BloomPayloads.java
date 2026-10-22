@@ -150,7 +150,9 @@ public final class BloomPayloads {
 		/** Misc / Hoarder's Pocket: open the pocket (the server checks the Major). */
 		OPEN_POCKET,
 		/** Misc / Rune Embedding: open the rune slots (the server checks the Major). */
-		OPEN_RUNES
+		OPEN_RUNES,
+		/** Wind Impact: a wind burst on the block the player aims at, or under them on the ground. */
+		WIND_BURST
 	}
 
 	/** Client → server: a combat ability key. The server checks the Major, the weapon and cooldowns itself. */

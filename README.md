@@ -58,12 +58,12 @@ Controls. In the hub:
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).
 - Vein Mining and Timber: hold **sneak** while breaking to skip them for that block.
 - Copycat: **shift-click** an owned weapon Major in the hub to copy it; shift-click Copycat to stop.
-- Combat controls (rebindable in Controls → Bloom Level-Up): the **weapon-skill key** (right click by
-  default) — **hold** to charge (Charge Attack / Heavy Hands; a meter under the crosshair turns gold when
-  ready, let go to swing), **tap** to throw a sword/axe/mace (Catch!). Chests, doors, villagers, items in
-  your off hand and items with their own right click still work as usual. **Right-click the ground** with
-  a mace for a wind burst (Wind Impact). **Sneak + left click** with a trident calls lightning
-  (Lightning Summon); **sneak while releasing** a trident to riptide (Unrestricted Riptide).
+- Combat controls (rebindable in Controls → Bloom Level-Up): the **weapon-skill key**, **R** by default.
+  With a mace and Wind Impact it bursts wind where you aim (or under you); with a trident and Lightning
+  Summon it calls lightning where you aim; otherwise **hold** to charge (Charge Attack / Heavy Hands; a
+  meter under the crosshair turns gold when ready, let go to swing) and **tap** to throw a sword, axe,
+  mace or spear (Catch!). Majors that would share the key on one weapon can't be owned together.
+  **Sneak while releasing** a trident to riptide (Unrestricted Riptide).
 - Hoarder's Pocket: the **chest button** above the off-hand slot in your inventory, `/bloom pocket`, or
   bind **Open Hoarder's Pocket** in Controls.
 - Rune Embedding: the **enchanted-book button** above that (or `/bloom runes`, or bind **Open Rune

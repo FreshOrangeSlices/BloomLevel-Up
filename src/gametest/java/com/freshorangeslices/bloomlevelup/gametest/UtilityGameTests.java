@@ -203,8 +203,13 @@ public class UtilityGameTests {
 
 	@GameTest
 	public void shovelMasteryDigsUpTreasure(GameTestHelper helper) {
-		LootTable treasure = helper.getLevel().getServer().reloadableRegistries().getLootTable(UtilitySkill.EXCAVATION_TREASURE);
-		helper.assertTrue(treasure != LootTable.EMPTY, "The treasure loot table loaded");
+		for (String pool : UtilitySkill.TREASURE_POOLS) {
+			helper.assertTrue(helper.getLevel().getServer().reloadableRegistries().getLootTable(UtilitySkill.treasureTable(pool)) != LootTable.EMPTY,
+					"The " + pool + " treasure table loaded");
+		}
+
+		helper.assertTrue(helper.getLevel().getServer().reloadableRegistries().getLootTable(UtilitySkill.EXCAVATION_DEFAULT) != LootTable.EMPTY,
+				"The default treasure table loaded");
 
 		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SHOVEL));
 		grant(player, List.of(SkillXp.UTILITY), UtilityIds.SHOVEL_MASTERY);
@@ -223,8 +228,8 @@ public class UtilityGameTests {
 		}
 
 		helper.assertValueEqual(1000, dirt, "Dirt itself is never multiplied");
-		// 120 Yield x 4% = 4.8% per block -> ~48 finds in 1000
-		helper.assertTrue(other > 15 && other < 100, "About 48 treasure finds expected, found " + other);
+		// 10% + 120 Yield x 2% = 12.4% per block -> ~124 finds in 1000
+		helper.assertTrue(other > 70 && other < 190, "About 124 treasure finds expected, found " + other);
 		helper.succeed();
 	}
 

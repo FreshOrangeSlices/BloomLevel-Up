@@ -440,6 +440,21 @@ public class CombatGameTests {
 	}
 
 	@GameTest
+	public void weaponSkillMajorsOnOneWeaponConflict(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		grant(player, CombatIds.CHARGE_ATTACK, CombatIds.HEAVY_HANDS);
+		ProgressionService service = BloomServices.progression();
+		BloomProfile profile = BloomAttachments.profile(player);
+		service.purchaseMajor(profile, CombatIds.LIGHTNING_SHOCK);
+		ActionResult result = service.purchaseMajor(profile, CombatIds.CATCH);
+		helper.assertTrue(result.outcome() == ActionResult.Outcome.CONFLICT && result.involved().contains(CombatIds.HEAVY_HANDS)
+				&& result.involved().contains(CombatIds.CHARGE_ATTACK), "Catch! can't be owned with Heavy Hands or Charge Attack: " + result);
+		helper.assertTrue(service.purchaseMajor(profile, CombatIds.LIGHTNING_SUMMON).outcome() == ActionResult.Outcome.CONFLICT,
+				"Lightning Summon can't be owned with Heavy Hands");
+		helper.succeed();
+	}
+
+	@GameTest
 	public void catchThrowsSpearsAndReturnsTridents(GameTestHelper helper) {
 		helper.assertTrue(CombatAbilities.throwable(new ItemStack(Items.IRON_SPEAR)), "Catch! throws spears");
 		ServerPlayer player = player(helper, new ItemStack(Items.TRIDENT));

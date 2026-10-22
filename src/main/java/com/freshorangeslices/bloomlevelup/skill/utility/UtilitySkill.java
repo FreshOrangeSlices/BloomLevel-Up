@@ -73,8 +73,30 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
  * Vein Mining and Timber are queued and run at the end of the tick, outside the original break.
  */
 public final class UtilitySkill {
-	public static final ResourceKey<LootTable> EXCAVATION_TREASURE = ResourceKey.create(Registries.LOOT_TABLE,
-			BloomLevelUp.id("gameplay/excavation_treasure"));
+	/**
+	 * Shovel Mastery treasure is themed by biome: the first biome tag {@code bloomlevelup:excavation/<pool>} the
+	 * dug block's biome is in picks loot table {@code bloomlevelup:gameplay/excavation/<pool>}; anything else
+	 * uses {@code .../default}. Modpacks add biomes to the tags (the common {@code c:} tags are already in).
+	 */
+	public static final List<String> TREASURE_POOLS = List.of("nether", "desert", "beach", "swamp", "mountain", "forest");
+	public static final ResourceKey<LootTable> EXCAVATION_DEFAULT = treasureTable("default");
+
+	public static ResourceKey<LootTable> treasureTable(String pool) {
+		return ResourceKey.create(Registries.LOOT_TABLE, BloomLevelUp.id("gameplay/excavation/" + pool));
+	}
+
+	/** The treasure table for a dug block, by its biome. */
+	public static ResourceKey<LootTable> treasureTableAt(ServerLevel level, BlockPos pos) {
+		Holder<net.minecraft.world.level.biome.Biome> biome = level.getBiome(pos);
+
+		for (String pool : TREASURE_POOLS) {
+			if (biome.is(net.minecraft.tags.TagKey.create(Registries.BIOME, BloomLevelUp.id("excavation/" + pool)))) {
+				return treasureTable(pool);
+			}
+		}
+
+		return EXCAVATION_DEFAULT;
+	}
 
 	private enum ChainKind {
 		VEIN,
@@ -364,7 +386,7 @@ public final class UtilitySkill {
 	}
 
 	private static List<ItemStack> rollTreasure(ServerLevel level, ServerPlayer player, Vec3 origin) {
-		LootTable table = level.getServer().reloadableRegistries().getLootTable(EXCAVATION_TREASURE);
+		LootTable table = level.getServer().reloadableRegistries().getLootTable(treasureTableAt(level, BlockPos.containing(origin)));
 
 		if (table == LootTable.EMPTY) {
 			return List.of();

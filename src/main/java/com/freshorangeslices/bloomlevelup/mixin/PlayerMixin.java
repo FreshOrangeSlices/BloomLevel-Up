@@ -34,6 +34,12 @@ abstract class PlayerMixin {
 		CombatSkill.afterRealDamage((LivingEntity) (Object) this, level, source);
 	}
 
+	/** Stored Impact works from the fall itself, before Feather Falling, armor or Titan Hide reduce it. */
+	@Inject(method = "causeFallDamage", at = @At("HEAD"))
+	private void bloomlevelup$noteFall(double fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+		CombatSkill.noteFall((Player) (Object) this, fallDistance, multiplier);
+	}
+
 	/** A spear jab's first stab is the swing's target (see PiercingWeaponMixin). */
 	@Inject(method = "stabAttack", at = @At("HEAD"))
 	private void bloomlevelup$stab(EquipmentSlot slot, Entity target, float damage, boolean dealsDamage, boolean knockback, boolean dismount,

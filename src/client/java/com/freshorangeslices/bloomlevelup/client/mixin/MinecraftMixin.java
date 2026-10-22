@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
 
@@ -20,11 +19,4 @@ abstract class MinecraftMixin {
 		}
 	}
 
-	/** Lightning Summon takes over sneak-attacks with a trident that aren't aimed at a mob. */
-	@Inject(method = "startAttack", at = @At("HEAD"), cancellable = true)
-	private void bloomlevelup$combatControls(CallbackInfoReturnable<Boolean> cir) {
-		if (CombatControls.interceptAttack((Minecraft) (Object) this)) {
-			cir.setReturnValue(false);
-		}
-	}
 }

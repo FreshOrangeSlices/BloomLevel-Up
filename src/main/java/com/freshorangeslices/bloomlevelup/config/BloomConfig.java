@@ -9,7 +9,7 @@ package com.freshorangeslices.bloomlevelup.config;
  */
 public final class BloomConfig {
 	/** The defaults this build ships with. Files from older builds are moved onto changed defaults by {@link #migrate()}. */
-	public static final int CURRENT_VERSION = 2;
+	public static final int CURRENT_VERSION = 3;
 
 	/** Which build's defaults the file was written with (0 = before versioning). */
 	public int configVersion;
@@ -87,9 +87,9 @@ public final class BloomConfig {
 	/** Shovel Mastery: Utility stats count this much more while using a shovel (0.20 = +20%). */
 	public double shovelMasteryBonus = 0.20;
 	/** Shovel Mastery treasure: chance per natural dug block for every 100 (boosted) Yield. */
-	public double excavationTreasureChancePer100Yield = 0.05;
+	public double excavationTreasureChancePer100Yield = 0.02;
 	/** Shovel Mastery treasure: chance per natural dug block before any Yield. */
-	public double excavationTreasureBaseChance = 0.03;
+	public double excavationTreasureBaseChance = 0.10;
 	/** Growth Aura: radius (horizontal / vertical) and the chance per crop per pulse for an extra growth tick. */
 	public int growthAuraRadius = 4;
 	public int growthAuraHeight = 2;
@@ -221,6 +221,12 @@ public final class BloomConfig {
 			fuelEffectTicks = fuelEffectTicks == 200 ? 100 : fuelEffectTicks;
 			lightningShockBounceTicks = lightningShockBounceTicks == 20 ? 10 : lightningShockBounceTicks;
 			growthAuraChance = moved(growthAuraChance, 0.35, 0.20);
+		}
+
+		if (configVersion < 3) {
+			// Playtest round 2b: Shovel Mastery's treasure is a flat 10% plus a little from Yield.
+			excavationTreasureBaseChance = moved(excavationTreasureBaseChance, 0.03, 0.10);
+			excavationTreasureChancePer100Yield = moved(excavationTreasureChancePer100Yield, 0.05, 0.02);
 		}
 
 		configVersion = CURRENT_VERSION;

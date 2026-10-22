@@ -69,13 +69,8 @@ public final class CombatAbilities {
 			RIPTIDE_HINT_AT.clear();
 		});
 
-		// Wind Impact: right-clicking the ground with a mace (the block didn't do anything with the click).
+		// Unrestricted Riptide's hint when a trident is raised.
 		UseItemCallback.EVENT.register((player, level, hand) -> {
-			if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer serverPlayer
-					&& CombatSkill.windBurst(serverPlayer)) {
-				return InteractionResult.SUCCESS;
-			}
-
 			if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 				riptideHint(serverPlayer, player.getItemInHand(hand));
 			}
@@ -97,6 +92,7 @@ public final class CombatAbilities {
 			case CHARGED -> armCharge(player);
 			case SUMMON_LIGHTNING -> summonLightning(player);
 			case THROW -> throwWeapon(player);
+			case WIND_BURST -> CombatSkill.windBurst(player);
 			case OPEN_POCKET -> HoardersPocket.open(player);
 			case OPEN_RUNES -> RuneEmbedding.open(player);
 		}

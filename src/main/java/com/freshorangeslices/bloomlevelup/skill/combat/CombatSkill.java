@@ -165,6 +165,8 @@ public final class CombatSkill {
 	private static final Map<UUID, Stack> BLOODLUST = new HashMap<>();
 	private static final Map<UUID, Integer> AURA_COUNT = new HashMap<>();
 	private static final Map<UUID, Long> LIGHTNING_READY_AT = new HashMap<>();
+	/** The raw damage of the fall a player is landing from this tick (before any protection). */
+	private static final Map<UUID, Double> RAW_FALL = new HashMap<>();
 	/** Players in the middle of a spear jab, with the swing strength it started at. */
 	private static final Map<UUID, Float> JABBING = new HashMap<>();
 	private static final Set<AbstractArrow> STRAIGHT_ARROWS = Collections.newSetFromMap(new WeakHashMap<>());
@@ -193,6 +195,7 @@ public final class CombatSkill {
 		AURA_COUNT.remove(id);
 		LIGHTNING_READY_AT.remove(id);
 		JABBING.remove(id);
+		RAW_FALL.remove(id);
 	}
 
 	private static void clearAll() {
@@ -208,6 +211,7 @@ public final class CombatSkill {
 		AURA_COUNT.clear();
 		LIGHTNING_READY_AT.clear();
 		JABBING.clear();
+		RAW_FALL.clear();
 		STRAIGHT_ARROWS.clear();
 		DEFERRED.clear();
 		secondarySwing = null;
@@ -513,8 +517,15 @@ public final class CombatSkill {
 
 		float real = before - (target.getHealth() + target.getAbsorptionAmount());
 
-		if (target instanceof ServerPlayer hurtPlayer && real > 0.0F && source.is(DamageTypeTags.IS_FALL)) {
-			storeImpact(hurtPlayer, level, real);
+		if (target instanceof ServerPlayer hurtPlayer && source.is(DamageTypeTags.IS_FALL)) {
+			// A real fall stores from its raw damage (Feather Falling and the like don't shrink it); other
+			// fall-type damage (an ender pearl) stores what it actually did.
+			Double raw = RAW_FALL.remove(hurtPlayer.getUUID());
+			float stored = raw != null ? raw.floatValue() : real;
+
+			if (stored > 0.0F) {
+				storeImpact(hurtPlayer, level, stored);
+			}
 		}
 
 		Hit hit = ACTIVE.get(target);
@@ -980,6 +991,17 @@ public final class CombatSkill {
 
 	// ------------------------------------------------------------------ Stored Impact / Wind Impact
 
+	/** A player is landing: remember what the fall deals before protection (vanilla: 1 per block past 3). */
+	public static void noteFall(Player player, double fallDistance, float multiplier) {
+		if (player instanceof ServerPlayer serverPlayer && active(serverPlayer, CombatIds.STORED_IMPACT)) {
+			double raw = Math.max(0.0, fallDistance - 3.0) * multiplier;
+
+			if (raw > 0.0) {
+				RAW_FALL.put(serverPlayer.getUUID(), raw);
+			}
+		}
+	}
+
 	/** Hundredths of damage stored right now, or 0 once the window has closed. */
 	private static long storedImpact(BloomProfile profile, long now) {
 		long expires = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT);
@@ -1018,9 +1040,10 @@ public final class CombatSkill {
 	}
 
 	/**
-	 * Wind Impact: right-click the ground with a mace for a wind-charge burst at that spot. Standing on it
-	 * launches you up like a wind charge jump (and the landing back down is forgiven the same way); mobs
-	 * nearby are blown away. Returns whether it fired.
+	 * Wind Impact (weapon-skill key with a mace): a wind-charge burst on the top of the block you're aiming at,
+	 * or under your feet when you aren't aiming at one and stand on the ground. Standing on it launches you up
+	 * like a wind charge jump (and the landing back down is forgiven the same way); mobs nearby are blown
+	 * away. Returns whether it fired.
 	 */
 	public static boolean windBurst(ServerPlayer player) {
 		ItemStack mace = player.getMainHandItem();
@@ -1031,13 +1054,16 @@ public final class CombatSkill {
 		}
 
 		net.minecraft.world.phys.HitResult hit = player.pick(player.blockInteractionRange(), 1.0F, false);
+		Vec3 at;
 
-		if (!(hit instanceof net.minecraft.world.phys.BlockHitResult block) || block.getType() != net.minecraft.world.phys.HitResult.Type.BLOCK
-				|| block.getDirection() != net.minecraft.core.Direction.UP) {
+		if (hit instanceof net.minecraft.world.phys.BlockHitResult block && block.getType() == net.minecraft.world.phys.HitResult.Type.BLOCK
+				&& block.getDirection() == net.minecraft.core.Direction.UP) {
+			at = block.getLocation();
+		} else if (player.onGround()) {
+			at = player.position();
+		} else {
 			return false;
 		}
-
-		Vec3 at = block.getLocation();
 		level.explode(null, null, net.minecraft.world.entity.projectile.hurtingprojectile.windcharge.AbstractWindCharge.EXPLOSION_DAMAGE_CALCULATOR,
 				at.x, at.y, at.z, 1.2F, false, Level.ExplosionInteraction.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE,
 				net.minecraft.util.random.WeightedList.of(), SoundEvents.WIND_CHARGE_BURST);
@@ -1200,6 +1226,7 @@ public final class CombatSkill {
 
 	private static void cleanupTick() {
 		PENDING.clear();
+		RAW_FALL.clear();
 		ACTIVE.clear();
 		HEALTH_BEFORE.clear();
 		MITIGATED.clear();

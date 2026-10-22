@@ -7,7 +7,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +15,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -39,18 +37,18 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
 /**
  * Client side of the input Majors. The client only says what the player did; the server decides.
  *
- * <p>One rebindable <b>weapon-skill key</b> (default: right click) runs the weapon Majors:
+ * <p>One rebindable <b>weapon-skill key</b> (default: R) runs every weapon Major that needs input. What it
+ * does depends on the weapon in hand, the weapon's own skill first:
  * <ul>
- *   <li>hold it to charge (Charge Attack / Heavy Hands); once the swing has recovered and the hold lasted long
- *   enough the weapon glows, and letting go swings at whatever is in the crosshair for double damage;</li>
- *   <li>tap it to throw (Catch!).</li>
+ *   <li>a mace with Wind Impact: a wind burst on the block you aim at (or under you);</li>
+ *   <li>a trident with Lightning Summon: lightning where you aim;</li>
+ *   <li>hold to charge (Charge Attack / Heavy Hands); once the swing has recovered and the hold lasted long
+ *   enough the meter turns gold, and letting go swings at whatever is in the crosshair for double damage;</li>
+ *   <li>tap to throw (Catch!).</li>
  * </ul>
- * While it shares right click, it steps aside for vanilla: a block that does something when clicked (chests,
- * doors, stripping logs), a mob that does something when clicked (villagers, horses), anything in the off
- * hand, and items with their own right click (tridents, spears, bows, food) keep working as usual. A mace
- * aimed at the ground does Wind Impact instead. Bound to its own key, it never touches right click.
- *
- * <p>Lightning Summon stays on attack: sneak + left click with a trident while not aiming at a mob.
+ * Majors that would share the key on one weapon can't be owned together (Major JSON conflicts), so normally
+ * only one applies. If the key is bound to right click instead, it steps aside for vanilla: blocks and mobs
+ * that use a click, anything in the off hand, and items with their own right click keep working as usual.
  */
 public final class CombatControls {
 	/** Released sooner than this (ticks) counts as a tap: a throw. */
@@ -60,14 +58,13 @@ public final class CombatControls {
 	private static boolean holding;
 	private static int holdTicks;
 	private static boolean charged;
-	private static boolean performing;
 
 	private CombatControls() {
 	}
 
 	public static void init(KeyMapping.Category category) {
-		skillKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.MOUSE,
-				InputConstants.MOUSE_BUTTON_RIGHT, category));
+		skillKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.KEYBOARD,
+				InputConstants.KEY_R, category));
 
 		ClientTickEvents.END_CLIENT_TICK.register(CombatControls::tick);
 
@@ -85,7 +82,7 @@ public final class CombatControls {
 
 			ItemStack held = player.getMainHandItem();
 
-			if (windBurstAimed(minecraft, held) || !claimable(player, held)) {
+			if (!claimable(player, held)) {
 				return InteractionResult.PASS;
 			}
 
@@ -122,6 +119,15 @@ public final class CombatControls {
 		return active(CombatIds.CATCH) && CombatAbilities.throwable(weapon);
 	}
 
+	private static boolean canWindBurst(ItemStack weapon) {
+		return Weapons.is(weapon, Family.MACE) && active(CombatIds.WIND_IMPACT);
+	}
+
+	/** Anything the weapon-skill key does with this item. */
+	private static boolean hasSkill(ItemStack weapon) {
+		return canWindBurst(weapon) || canSummon(weapon) || canCharge(weapon) || canThrow(weapon);
+	}
+
 	private static void send(CombatAction action) {
 		if (ClientPlayNetworking.canSend(BloomPayloads.CombatInput.TYPE)) {
 			ClientPlayNetworking.send(new BloomPayloads.CombatInput(action));
@@ -135,17 +141,24 @@ public final class CombatControls {
 	/** Whether right click may be taken from vanilla for this item at all. */
 	private static boolean claimable(Player player, ItemStack held) {
 		return !player.isSpectator() && player.getOffhandItem().isEmpty() && (held.isEmpty() || held.getUseDuration(player) <= 0)
-				&& (canCharge(held) || canThrow(held));
+				&& hasSkill(held);
 	}
 
-	/** A mace pointed at the top of a block with Wind Impact: that click is the wind burst (the server does it). */
-	private static boolean windBurstAimed(Minecraft minecraft, ItemStack held) {
-		return Weapons.is(held, Family.MACE) && active(CombatIds.WIND_IMPACT) && minecraft.hitResult instanceof BlockHitResult block
-				&& block.getType() == HitResult.Type.BLOCK && block.getDirection() == Direction.UP;
-	}
-
-	/** Starts a press of the weapon-skill key. Returns whether the skill took it. */
+	/**
+	 * Starts a press of the weapon-skill key. Returns whether a skill took it. The weapon's own skill wins
+	 * (Wind Impact on a mace, Lightning Summon on a trident), then a charge (hold), then a throw (tap).
+	 */
 	private static boolean begin(ItemStack held) {
+		if (canWindBurst(held)) {
+			send(CombatAction.WIND_BURST);
+			return true;
+		}
+
+		if (canSummon(held)) {
+			send(CombatAction.SUMMON_LIGHTNING);
+			return true;
+		}
+
 		boolean charge = canCharge(held);
 
 		if (!charge && canThrow(held)) {
@@ -197,25 +210,6 @@ public final class CombatControls {
 		return entity.getType().getCategory() == MobCategory.MONSTER || entity instanceof Player;
 	}
 
-	/** Returns true to cancel vanilla's attack for this click (Lightning Summon). */
-	public static boolean interceptAttack(Minecraft minecraft) {
-		LocalPlayer player = minecraft.player;
-
-		if (performing || player == null || !ClientBloomState.ready() || player.isSpectator()) {
-			return false;
-		}
-
-		HitResult hit = minecraft.hitResult;
-		boolean aimingAtMob = hit != null && hit.getType() == HitResult.Type.ENTITY;
-
-		if (player.isShiftKeyDown() && !aimingAtMob && canSummon(player.getMainHandItem())) {
-			send(CombatAction.SUMMON_LIGHTNING);
-			return true;
-		}
-
-		return false;
-	}
-
 	// ------------------------------------------------------------------ ticking
 
 	private static void tick(Minecraft minecraft) {
@@ -231,7 +225,7 @@ public final class CombatControls {
 			while (skillKey.consumeClick()) {
 				ItemStack held = player.getMainHandItem();
 
-				if (!holding && !player.isSpectator() && (canCharge(held) || canThrow(held))) {
+				if (!holding && !player.isSpectator() && hasSkill(held)) {
 					begin(held);
 				}
 			}
@@ -280,13 +274,7 @@ public final class CombatControls {
 			// Swing at what's in the crosshair. Never at a block (letting go must not start mining it), and not
 			// when the key was "released" by a screen opening.
 			if ((hit == null || hit.getType() != HitResult.Type.BLOCK) && minecraft.gui.screen() == null) {
-				performing = true;
-
-				try {
-					((MinecraftInvoker) minecraft).bloomlevelup$startAttack();
-				} finally {
-					performing = false;
-				}
+				((MinecraftInvoker) minecraft).bloomlevelup$startAttack();
 			}
 		} else if (holdTicks < TAP_TICKS && canThrow(held)) {
 			send(CombatAction.THROW);

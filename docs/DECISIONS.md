@@ -252,10 +252,19 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Aura Sword | The waves' rings are drawn at their outer edge: 1, 2 and 3 blocks | `CombatSkill.auraWave` |
 | Config version 2 | Files at round 1's defaults move to these (fuel 5 s, Lightning 0.5 s, Growth Aura 20%) | `BloomConfig.migrate` |
 
+## Playtest round 2b (answers 2026-10-21)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Weapon-skill key (confirmed) | Default **R** (no longer right click). It runs every input Major, the weapon's own skill first: Wind Impact with a mace (burst on the block top you aim at, or under you if you're on the ground), Lightning Summon with a trident (strike where you aim; no more sneak + left click), then hold to charge (Charge Attack / Heavy Hands), then tap to throw (Catch!). Rebinding it to right click brings back the step-aside rules | `CombatControls` |
+| R-key conflicts (confirmed) | Majors that would share the key on one weapon can't be owned together (buying one offers to refund the other): Catch! vs Heavy Hands, Charge Attack, Wind Impact; Heavy Hands vs Wind Impact, Lightning Summon. Charge Attack and Heavy Hands don't conflict (same action) | `conflicts` in the Major JSONs |
+| Stored Impact source (confirmed) | 50% of the fall's raw damage (1 per block past 3, times the landing block's multiplier), before Feather Falling, armor, Light armor or Titan Hide. Water, hay-style landings that deal nothing and Parkour dodges store nothing. Other fall-type damage (ender pearls) stores what it actually did | `CombatSkill.noteFall` |
+| Shovel Mastery chance (confirmed) | 10% per natural dug block, plus 2% per 100 (boosted) Yield (about 12% at 100 Yield) | config `excavationTreasureBaseChance`, `excavationTreasureChancePer100Yield` |
+| Shovel Mastery biomes (confirmed) | Treasure is themed by biome: nether, desert/badlands, beach/ocean/river, swamp/mangrove, mountains/caves, forest/plains/taiga/jungle/savanna, and a default pool elsewhere. No name tags or saddles anywhere. The biome lists are tags (`bloomlevelup:excavation/<pool>`, already including the common `c:` tags) and each pool is its own loot table, so modpacks can extend both | `tags/worldgen/biome/excavation/`, `loot_table/gameplay/excavation/` |
+
 ## Still open (need a design call)
 
-- Shovel Mastery biome pools: current list sent for review with a suggested biome grouping; frequency and pools are tuned after that.
-- Catch! with spears on the default right click: tap-to-throw or not.
+- Nothing blocking.
 
 - Nothing blocking. Playtest results may retune the Combat numbers and the Misc XP rate.
 

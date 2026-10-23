@@ -72,8 +72,10 @@ jobs:
       - name: pillow
         run: pip install --quiet pillow
       - name: combat hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_combat_s3 18
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_combat_s3 12
       - name: armor hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_armor_s3 15
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_armor_s3 12
       - name: utility hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_utility_s3 15
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_utility_s3 12
+      - name: misc hub, GUI scale 3
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_misc_s3 12

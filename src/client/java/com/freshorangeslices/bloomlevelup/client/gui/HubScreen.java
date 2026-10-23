@@ -46,7 +46,7 @@ import com.freshorangeslices.bloomlevelup.player.PlayerXpWallet;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 
 /**
- * The Skill Hub: a window with a tab per category. Each tab is a 432x320 page on its own background picture,
+ * The Skill Hub: a window with a tab per category. Each tab is a 416x320 page on its own background picture,
  * centred in the view; where the page is bigger than the view (small windows, big GUI scale) it can be
  * dragged, but only until its edges show:
  * <ul>
@@ -103,7 +103,7 @@ public final class HubScreen extends Screen {
 	 * Every tab's page, the size of its background picture (in GUI pixels), centred on the tab's Majors. The
 	 * view moves only as far as the page's edges, so it doesn't move at all where the page fits.
 	 */
-	public static final int BOARD_W = 432;
+	public static final int BOARD_W = 416;
 	public static final int BOARD_H = 320;
 	/** Major icons on tabs without weapon trees: bigger (half the 64-pixel art, so they stay sharp), scattered over the page. */
 	private static final int BIG_ICON = 32;
@@ -684,7 +684,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/**
-	 * The tab's picture (432x320, though any size works) drawn pixel for pixel (one picture pixel per GUI pixel,
+	 * The tab's picture (416x320, though any size works) drawn pixel for pixel (one picture pixel per GUI pixel,
 	 * like vanilla's GUI art), centred on the page and moving with it; plain dark around it. Until it exists:
 	 * the advancements screen's stone, darkened, filling the page.
 	 */

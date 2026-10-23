@@ -100,8 +100,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 	/**
 	 * The Combat tree with a few Majors owned (some lines lit) at 1920x1080 with GUI scale 3 and 4, and the
-	 * Armor grid at scale 3 (the screenshots job prints some as annotations). The test resources carry the
-	 * background templates, so the shots also show whether the art guides line up with the nodes.
+	 * other tabs at scale 3 (the screenshots job prints some as annotations), on the real background art.
 	 */
 	private void combatTreeScreenshots(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
 		for (String major : List.of("combat/full_sweep", "combat/lightning_shock", "combat/master_of_arms", "combat/catch", "combat/charge_attack")) {
@@ -111,7 +110,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/charge_attack"));
 		context.getInput().resizeWindow(1920, 1080);
 
-		for (String shot : List.of("combat:3", "combat:4", "armor:3", "utility:3")) {
+		for (String shot : List.of("combat:3", "combat:4", "armor:3", "utility:3", "misc:3")) {
 			String tab = shot.substring(0, shot.indexOf(':'));
 			int scale = Integer.parseInt(shot.substring(shot.indexOf(':') + 1));
 			context.runOnClient(client -> {

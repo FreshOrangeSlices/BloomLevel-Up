@@ -1,4 +1,4 @@
-"""Draws a guide for each Skill Hub tab's background picture: the 432x320 page, with every Major, weapon
+"""Draws a guide for each Skill Hub tab's background picture: the 416x320 page, with every Major, weapon
 node where the hub will draw them. Mirrors HubScreen's layout (keep them in step).
 
     python3 docs/art/hub-templates/make_templates.py
@@ -19,7 +19,7 @@ OUT = pathlib.Path(__file__).resolve().parent
 
 # HubScreen constants
 CELL, ICON, BIG_ICON, SCATTER_MARGIN = 28, 22, 32, 36
-BOARD_W, BOARD_H = 432, 320
+BOARD_W, BOARD_H = 416, 320
 NODE_GLOW = 3
 WEAPON_RX, WEAPON_RY, MAJOR_RX, MAJOR_RY = 110.0, 72.0, 178.0, 104.0
 UNIVERSALS_GAP, UNIVERSALS_PER_ROW = 22, 13

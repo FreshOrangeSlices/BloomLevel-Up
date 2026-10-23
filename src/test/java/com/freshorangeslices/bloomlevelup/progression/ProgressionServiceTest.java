@@ -38,19 +38,19 @@ class ProgressionServiceTest {
 
 	/** Wallet backed by a plain int, standing in for a player's vanilla XP. */
 	private static final class FakeWallet implements VanillaXpWallet {
-		int points;
+		long points;
 
-		FakeWallet(int points) {
+		FakeWallet(long points) {
 			this.points = points;
 		}
 
 		@Override
-		public int totalPoints() {
+		public long totalPoints() {
 			return points;
 		}
 
 		@Override
-		public void spend(int amount) {
+		public void spend(long amount) {
 			points -= amount;
 		}
 	}

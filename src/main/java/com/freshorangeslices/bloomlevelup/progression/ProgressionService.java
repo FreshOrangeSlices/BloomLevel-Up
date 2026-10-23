@@ -137,14 +137,14 @@ public final class ProgressionService {
 			return ActionResult.of(Outcome.AT_LEVEL_CAP);
 		}
 
-		int points = Math.min(requestedPoints, wallet.totalPoints());
+		long points = Math.min(requestedPoints, wallet.totalPoints());
 
 		if (points <= 0) {
 			return ActionResult.of(Outcome.NOT_ENOUGH_XP);
 		}
 
-		int neededForCap = (int) Math.min(Integer.MAX_VALUE, Math.ceil(xpToCap(progress) / config.vanillaXpToSkillXp));
-		points = Math.min(points, Math.max(1, neededForCap));
+		long neededForCap = (long) Math.min(Long.MAX_VALUE, Math.ceil(xpToCap(progress) / config.vanillaXpToSkillXp));
+		points = Math.min(points, Math.max(1L, neededForCap));
 		wallet.spend(points);
 		addXp(profile, categoryId, points * config.vanillaXpToSkillXp);
 		return ActionResult.success();
@@ -188,7 +188,7 @@ public final class ProgressionService {
 			return ActionResult.of(Outcome.NOT_ENOUGH_XP);
 		}
 
-		wallet.spend((int) cost);
+		wallet.spend(cost);
 		progress.setInvestedPoints(progress.investedPoints() + count);
 		return ActionResult.success();
 	}

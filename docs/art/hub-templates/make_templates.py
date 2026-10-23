@@ -1,11 +1,10 @@
-"""Draws a guide for each Skill Hub tab's background picture: the picture's suggested size, with every
-Major and weapon node where the hub will draw it. Mirrors HubScreen's layout (keep the numbers in sync).
+"""Draws a guide for each Skill Hub tab's background picture: the 432x320 page, with every Major, weapon
+node and the tab's own icon where the hub will draw them. Mirrors HubScreen's layout (keep them in step).
 
     python3 docs/art/hub-templates/make_templates.py
 
 Writes, per tab, <tab>_template.png (the exact size, 1 pixel = 1 GUI pixel: paint under these guides,
-then hide them) and <tab>_guide_4x.png (4x bigger, with names). The hub centres the picture on the
-middle of the tab's Majors, so any size works; bigger pictures just show more around the edges.
+then hide them) and <tab>_guide_4x.png (4x bigger, with names). The picture's centre is the page's centre.
 """
 import json
 import math
@@ -19,12 +18,12 @@ LANG = json.loads((ROOT / 'src/main/resources/assets/bloomlevelup/lang/en_us.jso
 OUT = pathlib.Path(__file__).resolve().parent
 
 # HubScreen constants
-CELL, ICON = 28, 22
+CELL, ICON, BIG_ICON, EMBLEM = 28, 22, 32, 64
+BOARD_W, BOARD_H = 432, 320
+NODE_GLOW = 3
 WEAPON_RX, WEAPON_RY, MAJOR_RX, MAJOR_RY = 110.0, 72.0, 178.0, 104.0
-UNIVERSALS_GAP, UNIVERSALS_PER_ROW, GRID_COLUMNS = 22, 13, 8
+UNIVERSALS_GAP, UNIVERSALS_PER_ROW = 22, 13
 SPOKE_FRACTION = 0.55
-NODE_MARGIN = 14  # HubScreen.layout: room around a node for its glow
-MARGIN = 24  # suggested picture edge beyond the outermost node
 
 
 def jround(x):
@@ -61,8 +60,17 @@ def layout(majors):
     nodes, lines = [], []
 
     if not any(m['group'] for m in majors):
-        for k, m in enumerate(majors):
-            nodes.append(('major', m['id'], (k % GRID_COLUMNS) * CELL, (k // GRID_COLUMNS) * CELL))
+        # HubScreen.ringLayout: big icons in a ring (two rings past 18) around the tab's icon.
+        def ring(members, rx, ry):
+            for k, m in enumerate(members):
+                angle = -math.pi / 2.0 + 2.0 * math.pi * k / len(members)
+                nodes.append(('big', m['id'], jround(math.cos(angle) * rx), jround(math.sin(angle) * ry)))
+
+        inner = len(majors) // 3 if len(majors) > 18 else 0
+        ring(majors[:inner], 104.0, 70.0)
+        outer = len(majors) - inner
+        ring(majors[inner:], 120.0 if outer <= 8 else 172.0, 84.0 if outer <= 8 else 118.0)
+        nodes.append(('emblem', None, 0, 0))
         return nodes, lines
 
     trees, middle, universal, near = {}, [], [], {}
@@ -115,10 +123,21 @@ def layout(majors):
         in_row = min(UNIVERSALS_PER_ROW, len(universal) - row * UNIVERSALS_PER_ROW)
         nodes.append(('major', m['id'], jround((col - (in_row - 1) / 2.0) * CELL), top + row * CELL))
 
+    # HubScreen.centerOnPage: the tree's extent (icons and glow) centred on the page.
+    half = lambda kind: ICON // 2 + NODE_GLOW  # every tree node counts as a 22-pixel icon, like HubScreen.Node
+    min_x = min(x - half(k) for k, _, x, _ in nodes)
+    max_x = max(x + half(k) for k, _, x, _ in nodes)
+    min_y = min(y - half(k) for k, _, _, y in nodes)
+    max_y = max(y + half(k) for k, _, _, y in nodes)
+    dx, dy = -int((min_x + max_x) / 2), -int((min_y + max_y) / 2)
+    nodes = [(k, r, x + dx, y + dy) for k, r, x, y in nodes]
+    lines = [(a + dx, b + dy, c + dx, d + dy) for a, b, c, d in lines]
     return nodes, lines
 
 
 def name(kind, ref):
+    if kind == 'emblem':
+        return 'tab icon'
     if kind == 'weapon':
         return ref.rsplit('/', 1)[1].capitalize()
     key = 'bloom.major.' + ref.replace(':', '.').replace('/', '.') + '.name'
@@ -127,17 +146,11 @@ def name(kind, ref):
 
 def make(tab):
     nodes, lines = layout(majors_in(tab))
-    min_x = min(x - NODE_MARGIN for _, _, x, _ in nodes)
-    max_x = max(x + NODE_MARGIN for _, _, x, _ in nodes)
-    min_y = min(y - NODE_MARGIN for _, _, _, y in nodes)
-    max_y = max(y + NODE_MARGIN for _, _, _, y in nodes)
-    # HubScreen.anchorX/Y: Java int division truncates toward zero.
-    anchor_x, anchor_y = int((min_x + max_x) / 2), int((min_y + max_y) / 2)
-    width = (max_x - min_x + 2 * MARGIN + 7) // 8 * 8
-    height = (max_y - min_y + 2 * MARGIN + 7) // 8 * 8
-    # Where a canvas point lands in the picture (HubScreen draws it at anchor - size / 2).
-    px = lambda x: x - anchor_x + width // 2
-    py = lambda y: y - anchor_y + height // 2
+    width, height = BOARD_W, BOARD_H
+    anchor_x = anchor_y = 0
+    # Where a canvas point lands in the picture (HubScreen draws it centred on the page's centre, 0,0).
+    px = lambda x: x + width // 2
+    py = lambda y: y + height // 2
 
     for scale, labels in ((1, False), (4, True)):
         # The 1x template is transparent (put it on a layer above your painting); the 4x guide is a dark picture to look at.
@@ -155,8 +168,8 @@ def make(tab):
         font = ImageFont.load_default(size=11) if labels else None
 
         for kind, ref, x, y in nodes:
-            half = 13 if kind in ('weapon', 'center') else ICON // 2
-            colour = {'weapon': (229, 147, 63, 230), 'center': (224, 69, 58, 230)}.get(kind, (239, 230, 210, 200))
+            half = {'weapon': 13, 'center': 13, 'big': BIG_ICON // 2, 'emblem': EMBLEM // 2}.get(kind, ICON // 2)
+            colour = {'weapon': (229, 147, 63, 230), 'center': (224, 69, 58, 230), 'emblem': (127, 210, 127, 200)}.get(kind, (239, 230, 210, 200))
             box = [s(px(x) - half), s(py(y) - half), s(px(x) + half) - 1, s(py(y) + half) - 1]
             draw.rectangle(box, outline=colour, width=scale)
 
@@ -173,7 +186,7 @@ def make(tab):
         suffix = 'template' if scale == 1 else 'guide_4x'
         image.save(OUT / f'{tab}_{suffix}.png')
 
-    print(f'{tab}: {width} x {height} (Majors span {max_x - min_x} x {max_y - min_y})')
+    print(f'{tab}: {width} x {height}')
 
 
 for tab in ('combat', 'utility', 'armor', 'misc'):

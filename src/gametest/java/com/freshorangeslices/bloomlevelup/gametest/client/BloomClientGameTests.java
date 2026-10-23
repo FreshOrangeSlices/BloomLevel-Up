@@ -63,6 +63,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			combatTreeScreenshots(context, singleplayer);
 
 			hubClicks(context);
+			buyPointWithHugeXp(context, singleplayer);
 
 			// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
 			context.runOnClient(client -> SideButton.openPocket());
@@ -110,7 +111,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/charge_attack"));
 		context.getInput().resizeWindow(1920, 1080);
 
-		for (String shot : List.of("combat:3", "combat:4", "armor:3")) {
+		for (String shot : List.of("combat:3", "combat:4", "armor:3", "utility:3")) {
 			String tab = shot.substring(0, shot.indexOf(':'));
 			int scale = Integer.parseInt(shot.substring(shot.indexOf(':') + 1));
 			context.runOnClient(client -> {
@@ -152,11 +153,48 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.setScreen(() -> null);
 	}
 
+	/** XP Mode's Buy point with 10,000 levels: the button must be clickable, and a click buys an Investment point. */
+	private void buyPointWithHugeXp(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		String combat = "bloomlevelup:combat";
+		singleplayer.getServer().runCommand("xp add @a 10000 levels");
+		context.waitFor(client -> client.player.experienceLevel >= 10000);
+		context.runOnClient(client -> ClientBloomState.selectCategory(combat));
+		context.setScreen(HubScreen::new);
+		context.waitTicks(3);
+		int before = context.computeOnClient(client -> ClientBloomState.profile().category(combat).investedPoints());
+		int[] button = context.computeOnClient(client -> client.gui.screen() instanceof HubScreen hub ? hub.investButtonForTests() : null);
+		String state = context.computeOnClient(client -> client.gui.screen() instanceof HubScreen hub ? hub.investStateForTests() : "no hub");
+		BloomLevelUp.LOGGER.info("BLOOMTEST buy point: button {} active={} {}", button == null ? "missing" : button[0] + "," + button[1],
+				button != null && button[2] == 1, state);
+
+		if (button == null || button[2] != 1) {
+			failures.add("Buy point clickable with 10,000 levels");
+			context.setScreen(() -> null);
+			return;
+		}
+
+		double[] at = context.computeOnClient(client -> new double[] {
+				(button[0] + 0.5) * client.getWindow().getScreenWidth() / (double) client.getWindow().getGuiScaledWidth(),
+				(button[1] + 0.5) * client.getWindow().getScreenHeight() / (double) client.getWindow().getGuiScaledHeight()});
+		context.getInput().setCursorPos(at[0], at[1]);
+		context.waitTick();
+		context.getInput().pressMouse(InputConstants.MOUSE_BUTTON_LEFT);
+		check(context, "Buy point buys an Investment point with 10,000 levels",
+				client -> ClientBloomState.profile().category(combat).investedPoints() == before + 1);
+		BloomLevelUp.LOGGER.info("BLOOMTEST after buying: level {}", context.computeOnClient(client -> client.player.experienceLevel));
+		context.setScreen(() -> null);
+	}
+
 	private static OwnedMajor owned(String major) {
 		return ClientBloomState.profile().majors().get(major);
 	}
 
 	private static void click(ClientGameTestContext context, String major, int button) {
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.revealForTests(major); // small windows show only part of the page
+			}
+		});
 		double[] at = context.computeOnClient(client -> {
 			if (!(client.gui.screen() instanceof HubScreen hub)) {
 				return null;

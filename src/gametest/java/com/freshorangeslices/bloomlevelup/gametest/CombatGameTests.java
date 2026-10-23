@@ -680,6 +680,27 @@ public class CombatGameTests {
 	}
 
 	@GameTest
+	public void hugeVanillaXpIsCountedAndSpentExactly(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		player.setExperienceLevels(10_000);
+		var wallet = new com.freshorangeslices.bloomlevelup.player.PlayerXpWallet(player);
+		long total = wallet.totalPoints();
+		helper.assertValueEqual(448_377_220L, total, "10,000 levels in raw XP");
+
+		wallet.spend(1_000);
+		helper.assertValueEqual(total - 1_000, wallet.totalPoints(), "Exactly 1000 points gone");
+		helper.assertValueEqual(9_999, player.experienceLevel, "Level 9,999 and most of a bar left");
+
+		// Far past an int: still counted, and spending leaves the rest exact.
+		player.setExperienceLevels(100_000);
+		long big = wallet.totalPoints();
+		helper.assertTrue(big > Integer.MAX_VALUE, "100,000 levels is more than an int holds: " + big);
+		wallet.spend(5);
+		helper.assertValueEqual(big - 5, wallet.totalPoints(), "Exactly 5 points gone");
+		helper.succeed();
+	}
+
+	@GameTest
 	public void assaultRifleLoadsAndFiresAMagazine(GameTestHelper helper) {
 		ServerPlayer player = player(helper, new ItemStack(Items.CROSSBOW));
 		grant(player, CombatIds.ASSAULT_RIFLE);

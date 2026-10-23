@@ -46,15 +46,16 @@ import com.freshorangeslices.bloomlevelup.player.PlayerXpWallet;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 
 /**
- * The Skill Hub: a window with a tab per category. Each tab is a canvas the player drags around (like the
- * advancements screen) over the tab's own background picture (any size, centred on its Majors):
+ * The Skill Hub: a window with a tab per category. Each tab is a 432x320 page on its own background picture,
+ * centred in the view; where the page is bigger than the view (small windows, big GUI scale) it can be
+ * dragged, but only until its edges show:
  * <ul>
  *   <li>a category with weapon trees (Combat) is a tree: the waiver Major (Master of Arms) in the middle, a node
  *   per weapon around it with that weapon's Majors just outside it, the universal Majors that need a weapon
  *   (Heavy Hands, Catch!, ...) on the line between the middle and that weapon, and the rest of the universal
  *   Majors in a row along the bottom. Lines run from the middle to each weapon and from each weapon to its
  *   Majors, and turn red when a Major on them is active;</li>
- *   <li>other categories lay their Majors out as a grid.</li>
+ *   <li>other categories put bigger icons in a ring around the category's own icon, filling the page.</li>
  * </ul>
  * A compact stats window sits in the top-left corner and folds away to give the Majors more room.
  *
@@ -94,12 +95,20 @@ public final class HubScreen extends Screen {
 	private static final int UNIVERSALS_PER_ROW = 13;
 	/** How far out a weapon's universal Majors sit on the line from the middle (0) to that weapon (1). */
 	private static final double SPOKE_FRACTION = 0.55;
-	/** Room kept around a node (its glow) when working out the tab's extent. */
-	private static final int NODE_MARGIN = 14;
+	/** Room kept around a node beyond its icon (its glow) when working out the tree's extent. */
+	private static final int NODE_GLOW = 3;
 	// docs/art/hub-templates/make_templates.py mirrors this layout: keep the two in step.
 
-	/** Majors per row on tabs without weapon trees (fixed, so background art can be painted around them). */
-	private static final int GRID_COLUMNS = 8;
+	/**
+	 * Every tab's page, the size of its background picture (in GUI pixels), centred on the tab's Majors. The
+	 * view moves only as far as the page's edges, so it doesn't move at all where the page fits.
+	 */
+	public static final int BOARD_W = 432;
+	public static final int BOARD_H = 320;
+	/** Major icons on tabs without weapon trees: bigger (half the 64-pixel art, so they stay sharp) and in a ring. */
+	private static final int BIG_ICON = 32;
+	/** The tab's own icon in the middle of that ring. */
+	private static final int EMBLEM = 64;
 	/** Shown until the art exists: the advancements screen's stone, darkened. */
 	private static final Identifier FALLBACK_TILE = Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png");
 	private static final String COPYCAT = BloomLevelUp.key("combat/copycat");
@@ -124,16 +133,16 @@ public final class HubScreen extends Screen {
 	private int statsRowsY;
 	private boolean spendInvested;
 	private int builtVersion = -1;
+	private Button investButton;
+	private long investCost;
 	private Backdrop backdrop;
 
 	/** The current tab's nodes and lines, in canvas coordinates. */
 	private final List<Node> nodes = new ArrayList<>();
 	private final List<Link> links = new ArrayList<>();
-	private int minX;
-	private int minY;
-	private int maxX;
-	private int maxY;
-	/** Where the canvas origin is on screen. */
+	/** The tab's own icon, drawn in the middle of a ring layout (null: none, or a tree). */
+	private Identifier emblem;
+	/** Where the canvas origin (the middle of the page) is on screen. */
 	private double panX;
 	private double panY;
 	private String panFor = "";
@@ -167,6 +176,8 @@ public final class HubScreen extends Screen {
 		statsX = canvasX + 4;
 		statsY = canvasY + 4;
 
+		investButton = null;
+
 		if (!ClientBloomState.ready()) {
 			return;
 		}
@@ -185,7 +196,8 @@ public final class HubScreen extends Screen {
 
 		if (!key.equals(panFor)) {
 			panFor = key;
-			centerContent();
+			panX = (freeLeftNow() + freeRight()) / 2.0;
+			panY = canvasY + canvasH / 2.0;
 		}
 
 		clampPan();
@@ -305,6 +317,8 @@ public final class HubScreen extends Screen {
 			int levels = PlayerXpWallet.levelForPoints(cost);
 			Button invest = Button.builder(Component.translatable("bloom.hub.invest", levels), b -> send(Action.INVEST, category.id(), 1))
 					.bounds(x + 4, y, STATS_W - 8, 14).build();
+			investButton = invest;
+			investCost = cost;
 			invest.active = playerXpPoints() >= cost;
 			invest.setTooltip(Tooltip.create(Component.translatable("bloom.hub.invest.tooltip", cost, levels)));
 			this.addRenderableWidget(invest);
@@ -328,13 +342,13 @@ public final class HubScreen extends Screen {
 		return (int) Math.max(1, Math.ceil(skillXp / rate));
 	}
 
-	private int playerXpPoints() {
+	/** The player's vanilla XP as raw points (a long: huge levels overflow an int). */
+	private long playerXpPoints() {
 		if (this.minecraft.player == null) {
-			return 0;
+			return 0L;
 		}
 
-		return PlayerXpWallet.pointsForLevel(this.minecraft.player.experienceLevel)
-				+ Math.round(this.minecraft.player.experienceProgress * this.minecraft.player.getXpNeededForNextLevel());
+		return PlayerXpWallet.totalPoints(this.minecraft.player.experienceLevel, this.minecraft.player.experienceProgress);
 	}
 
 	@Override
@@ -343,13 +357,42 @@ public final class HubScreen extends Screen {
 
 		if (builtVersion != ClientBloomState.version()) {
 			this.rebuildWidgets();
+			return;
 		}
+
+		// XP can change while the hub is open (orbs, commands): keep Buy point in step with it.
+		if (investButton != null) {
+			investButton.active = playerXpPoints() >= investCost;
+		}
+	}
+
+	/** Buy point's center and whether it can be clicked, or null when it isn't shown (client game test). */
+	public int[] investButtonForTests() {
+		if (investButton == null) {
+			return null;
+		}
+
+		return new int[] {investButton.getX() + investButton.getWidth() / 2, investButton.getY() + investButton.getHeight() / 2,
+				investButton.active ? 1 : 0};
+	}
+
+	/** What the hub thinks the player's XP and the next point's cost are (client game test diagnostics). */
+	public String investStateForTests() {
+		return "level=" + (this.minecraft.player == null ? -1 : this.minecraft.player.experienceLevel) + " points=" + playerXpPoints()
+				+ " cost=" + investCost;
 	}
 
 	// ------------------------------------------------------------------ canvas layout
 
-	/** A Major (or a weapon tree's node, {@code group} set) at a point on the canvas. */
-	private record Node(MajorDefinition major, String group, int x, int y, boolean center) {
+	/** A Major (or a weapon tree's node, {@code group} set) at a point on the canvas, drawn {@code size} pixels wide. */
+	private record Node(MajorDefinition major, String group, int x, int y, boolean center, int size) {
+		Node(MajorDefinition major, String group, int x, int y, boolean center) {
+			this(major, group, x, y, center, MAJOR_ICON);
+		}
+
+		Node moved(int dx, int dy) {
+			return new Node(major, group, x + dx, y + dy, center, size);
+		}
 	}
 
 	/** A line between two canvas points; red while any of {@code majors} is active. */
@@ -361,25 +404,39 @@ public final class HubScreen extends Screen {
 		links.clear();
 		List<MajorDefinition> majors = ClientBloomState.definitions().majorsIn(category.id());
 
+		emblem = null;
+
 		if (majors.stream().anyMatch(major -> major.group().isPresent())) {
 			treeLayout(majors);
+			centerOnPage();
 		} else {
-			gridLayout(majors);
+			ringLayout(category, majors);
+		}
+	}
+
+	/** Moves the tree so its extent (icons and their glow) is centred on the page. */
+	private void centerOnPage() {
+		if (nodes.isEmpty()) {
+			return;
 		}
 
-		minX = minY = Integer.MAX_VALUE;
-		maxX = maxY = Integer.MIN_VALUE;
+		int minX = Integer.MAX_VALUE;
+		int minY = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		int maxY = Integer.MIN_VALUE;
 
 		for (Node node : nodes) {
-			minX = Math.min(minX, node.x() - NODE_MARGIN);
-			maxX = Math.max(maxX, node.x() + NODE_MARGIN);
-			minY = Math.min(minY, node.y() - NODE_MARGIN);
-			maxY = Math.max(maxY, node.y() + NODE_MARGIN);
+			int half = node.size() / 2 + NODE_GLOW;
+			minX = Math.min(minX, node.x() - half);
+			maxX = Math.max(maxX, node.x() + half);
+			minY = Math.min(minY, node.y() - half);
+			maxY = Math.max(maxY, node.y() + half);
 		}
 
-		if (nodes.isEmpty()) {
-			minX = minY = maxX = maxY = 0;
-		}
+		int dx = -((minX + maxX) / 2);
+		int dy = -((minY + maxY) / 2);
+		nodes.replaceAll(node -> node.moved(dx, dy));
+		links.replaceAll(link -> new Link(link.x0() + dx, link.y0() + dy, link.x1() + dx, link.y1() + dy, link.majors()));
 	}
 
 	private void treeLayout(List<MajorDefinition> majors) {
@@ -480,19 +537,24 @@ public final class HubScreen extends Screen {
 		return null;
 	}
 
-	private void gridLayout(List<MajorDefinition> majors) {
+	/**
+	 * Tabs without weapon trees: big icons in a ring (clockwise from the top, in the Majors' order) around the
+	 * tab's own icon, sized to fill the page. More than 18 Majors split into an inner and an outer ring.
+	 */
+	private void ringLayout(CategoryDefinition category, List<MajorDefinition> majors) {
+		int count = majors.size();
+		int inner = count > 18 ? count / 3 : 0;
+		ring(majors.subList(0, inner), 104.0, 70.0);
+		ring(majors.subList(inner, count), count - inner <= 8 ? 120.0 : 172.0, count - inner <= 8 ? 84.0 : 118.0);
+		Identifier icon = IconTextures.resolve(category.icon());
+		emblem = icon == IconTextures.PLACEHOLDER ? null : icon;
+	}
+
+	private void ring(List<MajorDefinition> majors, double rx, double ry) {
 		for (int k = 0; k < majors.size(); k++) {
-			nodes.add(new Node(majors.get(k), null, (k % GRID_COLUMNS) * CELL, (k / GRID_COLUMNS) * CELL, false));
+			double angle = -Math.PI / 2.0 + 2.0 * Math.PI * k / majors.size();
+			nodes.add(new Node(majors.get(k), null, (int) Math.round(Math.cos(angle) * rx), (int) Math.round(Math.sin(angle) * ry), false, BIG_ICON));
 		}
-	}
-
-	/** The middle of the tab's Majors, where its background picture is centred. */
-	private int anchorX() {
-		return (minX + maxX) / 2;
-	}
-
-	private int anchorY() {
-		return (minY + maxY) / 2;
 	}
 
 	/** Left edge of the canvas area the stats window doesn't cover. */
@@ -504,21 +566,36 @@ public final class HubScreen extends Screen {
 		return canvasX + canvasW - 6;
 	}
 
-	/** Puts the content in the middle of the free area (or its top when it's taller than that). */
-	private void centerContent() {
-		int left = statsCollapsed ? canvasX + 6 : freeLeft();
-		int right = freeRight();
-		int top = canvasY + 22; // under the Major Level counter
-		int bottom = canvasY + canvasH - 4;
-		panX = (left + right) / 2.0 - (minX + maxX) / 2.0;
-		panY = maxY - minY <= bottom - top ? (top + bottom) / 2.0 - (minY + maxY) / 2.0 : top - minY;
+	/** Left edge of the view: right of the stats window, or the canvas edge while it's folded away. */
+	private int freeLeftNow() {
+		return statsCollapsed ? canvasX + 2 : freeLeft();
 	}
 
-	/** Keeps at least a little of the content on screen. */
+	private int viewTop() {
+		return canvasY + 2;
+	}
+
+	private int viewBottom() {
+		return canvasY + canvasH - 2;
+	}
+
+	/** Whether the page is bigger than the view, so dragging shows more of it. */
+	private boolean canPan() {
+		return BOARD_W > freeRight() - freeLeftNow() || BOARD_H > viewBottom() - viewTop();
+	}
+
+	/** The page sits in the middle of the view; where it doesn't fit, it moves only until an edge reaches the view's edge. */
 	private void clampPan() {
-		int keep = 40;
-		panX = Math.max(canvasX + keep - maxX, Math.min(canvasX + canvasW - keep - minX, panX));
-		panY = Math.max(canvasY + keep - maxY, Math.min(canvasY + canvasH - keep - minY, panY));
+		panX = clampAxis(panX, freeLeftNow(), freeRight(), BOARD_W);
+		panY = clampAxis(panY, viewTop(), viewBottom(), BOARD_H);
+	}
+
+	private static double clampAxis(double pan, int low, int high, int size) {
+		if (size <= high - low) {
+			return (low + high) / 2.0;
+		}
+
+		return Math.max(high - size / 2.0, Math.min(low + size / 2.0, pan));
 	}
 
 	private int screenX(int canvasPointX) {
@@ -588,32 +665,41 @@ public final class HubScreen extends Screen {
 	}
 
 	/**
-	 * The tab's picture, any size, drawn pixel for pixel (one picture pixel per GUI pixel, like vanilla's GUI art),
-	 * centred on the tab's Majors and scrolling with them; plain dark around it. Darkened stone until it exists.
+	 * The tab's picture (432x320, though any size works) drawn pixel for pixel (one picture pixel per GUI pixel,
+	 * like vanilla's GUI art), centred on the page and moving with it; plain dark around it. Until it exists:
+	 * the advancements screen's stone, darkened, filling the page.
 	 */
 	private void drawBackground(GuiGraphicsExtractor g) {
 		g.enableScissor(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH);
+		g.fill(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH, 0xFF120F0C);
 
 		if (backdrop != null) {
-			g.fill(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH, 0xFF120F0C);
 			int w = backdrop.width();
 			int h = backdrop.height();
-			g.blit(RenderPipelines.GUI_TEXTURED, backdrop.texture(), screenX(anchorX()) - w / 2, screenY(anchorY()) - h / 2, 0.0F, 0.0F,
-					w, h, w, h, w, h, 0xFFFFFFFF);
+			g.blit(RenderPipelines.GUI_TEXTURED, backdrop.texture(), screenX(0) - w / 2, screenY(0) - h / 2, 0.0F, 0.0F, w, h, w, h, w, h, 0xFFFFFFFF);
 			g.disableScissor();
 			return;
 		}
 
-		int offsetX = Math.floorMod((int) Math.round(panX), 16) - 16;
-		int offsetY = Math.floorMod((int) Math.round(panY), 16) - 16;
+		int left = screenX(-BOARD_W / 2);
+		int top = screenY(-BOARD_H / 2);
+		int x0 = Math.max(canvasX, left);
+		int y0 = Math.max(canvasY, top);
+		int x1 = Math.min(canvasX + canvasW, left + BOARD_W);
+		int y1 = Math.min(canvasY + canvasH, top + BOARD_H);
 
-		for (int x = canvasX + offsetX; x < canvasX + canvasW; x += 16) {
-			for (int y = canvasY + offsetY; y < canvasY + canvasH; y += 16) {
-				g.blit(RenderPipelines.GUI_TEXTURED, FALLBACK_TILE, x, y, 0.0F, 0.0F, 16, 16, 16, 16, 16, 16, 0xFFFFFFFF);
+		if (x1 > x0 && y1 > y0) {
+			for (int x = left; x < left + BOARD_W; x += 16) {
+				for (int y = top; y < top + BOARD_H; y += 16) {
+					if (x + 16 > x0 && x < x1 && y + 16 > y0 && y < y1) {
+						g.blit(RenderPipelines.GUI_TEXTURED, FALLBACK_TILE, x, y, 0.0F, 0.0F, 16, 16, 16, 16, 16, 16, 0xFFFFFFFF);
+					}
+				}
 			}
+
+			g.fill(x0, y0, x1, y1, 0xB80E0B09);
 		}
 
-		g.fill(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH, 0xB80E0B09);
 		g.disableScissor();
 	}
 
@@ -676,6 +762,12 @@ public final class HubScreen extends Screen {
 			}
 		}
 
+		// The tab's own icon in the middle of a ring.
+		if (emblem != null) {
+			g.blit(RenderPipelines.GUI_TEXTURED, emblem, screenX(0) - EMBLEM / 2, screenY(0) - EMBLEM / 2, 0.0F, 0.0F, EMBLEM, EMBLEM,
+					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
+		}
+
 		for (int i = 0; i < nodes.size(); i++) {
 			Node node = nodes.get(i);
 			int cx = screenX(node.x());
@@ -732,8 +824,9 @@ public final class HubScreen extends Screen {
 		MajorDefinition major = node.major();
 		BloomProfile profile = ClientBloomState.profile();
 		ProgressionService service = ClientBloomState.service();
-		int x = cx - MAJOR_ICON / 2;
-		int y = cy - MAJOR_ICON / 2;
+		int size = node.size();
+		int x = cx - size / 2;
+		int y = cy - size / 2;
 		OwnedMajor owned = profile.majors().get(major.id());
 		boolean active = service.isMajorActive(profile, major.id());
 		boolean locked = owned == null && !service.prerequisitesMet(profile, major);
@@ -746,54 +839,54 @@ public final class HubScreen extends Screen {
 		}
 
 		if (owned != null && active) {
-			drawGlow(g, x, y, now, seed);
+			drawGlow(g, x, y, size, now, seed);
 			tint = 0xFFFFFFFF;
 		} else if (owned != null) {
-			frame(g, x - 1, y - 1, MAJOR_ICON + 2, 0xFF9A5A44);
+			frame(g, x - 1, y - 1, size + 2, 0xFF9A5A44);
 			tint = ICON_TINT_OWNED_OFF;
 		} else if (locked) {
-			g.fill(x, y, x + MAJOR_ICON, y + MAJOR_ICON, 0xC0000000);
+			g.fill(x, y, x + size, y + size, 0xC0000000);
 			tint = ICON_TINT_LOCKED;
 		} else {
 			boolean affordable = major.cost() <= profile.availableMajorLevels();
-			g.fill(x, y, x + MAJOR_ICON, y + MAJOR_ICON, 0xA0000000);
-			frame(g, x - 1, y - 1, MAJOR_ICON + 2, affordable ? 0x90EFE6D2 : 0x50EFE6D2);
+			g.fill(x, y, x + size, y + size, 0xA0000000);
+			frame(g, x - 1, y - 1, size + 2, affordable ? 0x90EFE6D2 : 0x50EFE6D2);
 			tint = ICON_TINT_UNOWNED;
 		}
 
-		g.blit(RenderPipelines.GUI_TEXTURED, IconTextures.resolve(major.icon()), x, y, 0.0F, 0.0F, MAJOR_ICON, MAJOR_ICON,
+		g.blit(RenderPipelines.GUI_TEXTURED, IconTextures.resolve(major.icon()), x, y, 0.0F, 0.0F, size, size,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, tint);
 
 		// Owned: a small dot in the corner, green when on, red when switched off (so off never looks refunded).
 		if (owned != null) {
-			dot(g, x + MAJOR_ICON - 7, y + 1, owned.enabled() ? 0xFF4FD34F : 0xFFE0453A, owned.enabled() ? 0xFF1E6B1E : 0xFF6B1A14);
+			dot(g, x + size - 7, y + 1, owned.enabled() ? 0xFF4FD34F : 0xFFE0453A, owned.enabled() ? 0xFF1E6B1E : 0xFF6B1A14);
 		} else {
 			// Cost badge for anything not yet owned.
 			String cost = Integer.toString(major.cost());
-			g.text(this.font, Component.literal(cost), x + MAJOR_ICON - this.font.width(cost), y + MAJOR_ICON - 7, locked ? MUTED : ACCENT);
+			g.text(this.font, Component.literal(cost), x + size - this.font.width(cost), y + size - 7, locked ? MUTED : ACCENT);
 		}
 
-		boolean inside = pointing && mouseX >= x && mouseX < x + MAJOR_ICON && mouseY >= y && mouseY < y + MAJOR_ICON;
+		boolean inside = pointing && mouseX >= x && mouseX < x + size && mouseY >= y && mouseY < y + size;
 
 		if (inside) {
-			frame(g, x - 2, y - 2, MAJOR_ICON + 4, 0xFFFFFFFF);
+			frame(g, x - 2, y - 2, size + 4, 0xFFFFFFFF);
 		}
 
 		return inside;
 	}
 
 	/** Owned + on: a soft pulsing halo with a small mote orbiting the icon. */
-	private static void drawGlow(GuiGraphicsExtractor g, int x, int y, long now, int seed) {
+	private static void drawGlow(GuiGraphicsExtractor g, int x, int y, int size, long now, int seed) {
 		double t = (now % 2400L) / 2400.0;
 		int pulse = (int) (90 + 70 * Math.sin(t * Math.PI * 2));
 		int halo = (pulse << 24) | 0xE5933F;
-		g.fill(x - 3, y - 3, x + MAJOR_ICON + 3, y + MAJOR_ICON + 3, (pulse / 3 << 24) | 0xE5933F);
-		frame(g, x - 2, y - 2, MAJOR_ICON + 4, halo);
+		g.fill(x - 3, y - 3, x + size + 3, y + size + 3, (pulse / 3 << 24) | 0xE5933F);
+		frame(g, x - 2, y - 2, size + 4, halo);
 
 		double angle = ((now + seed * 337L) % 3000L) / 3000.0 * Math.PI * 2;
-		int cx = x + MAJOR_ICON / 2;
-		int cy = y + MAJOR_ICON / 2;
-		int r = MAJOR_ICON / 2 + 3;
+		int cx = x + size / 2;
+		int cy = y + size / 2;
+		int r = size / 2 + 3;
 		int mx = cx + (int) Math.round(Math.cos(angle) * r);
 		int my = cy + (int) Math.round(Math.sin(angle) * r);
 		g.fill(mx - 1, my - 1, mx + 1, my + 1, 0xFFFFF1C9);
@@ -803,7 +896,12 @@ public final class HubScreen extends Screen {
 	private void drawWallet(GuiGraphicsExtractor g) {
 		BloomProfile profile = ClientBloomState.profile();
 		Component wallet = Component.translatable("bloom.hub.major_levels", profile.availableMajorLevels(), profile.spentMajorLevels());
-		Component hint = Component.translatable("bloom.hub.major_hint");
+		MutableComponent hint = Component.translatable("bloom.hub.major_hint");
+
+		if (canPan()) {
+			hint.append(" · ").append(Component.translatable("bloom.hub.drag"));
+		}
+
 		int width = Math.max(this.font.width(wallet), this.font.width(hint));
 		int right = canvasX + canvasW - 4;
 		g.fill(right - width - 6, canvasY + 2, right + 2, canvasY + 24, 0xA0000000);
@@ -1108,8 +1206,8 @@ public final class HubScreen extends Screen {
 		}
 
 		if (major == null) {
-			// Empty canvas: drag to look around.
-			if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && onOpenCanvas(event.x(), event.y())) {
+			// Empty canvas: drag to see the rest of the page (only when it's bigger than the view).
+			if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && onOpenCanvas(event.x(), event.y()) && canPan()) {
 				panning = true;
 				return true;
 			}
@@ -1195,7 +1293,7 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-		if (onOpenCanvas(mouseX, mouseY)) {
+		if (onOpenCanvas(mouseX, mouseY) && canPan()) {
 			panX += scrollX * 20.0;
 			panY += scrollY * 20.0;
 			clampPan();
@@ -1203,6 +1301,18 @@ public final class HubScreen extends Screen {
 		}
 
 		return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+	}
+
+	/** Moves the page so a Major is in view, as far as the page's edges allow (client game test). */
+	public void revealForTests(String majorId) {
+		for (Node node : nodes) {
+			if (node.major() != null && node.major().id().equals(majorId)) {
+				panX = (freeLeftNow() + freeRight()) / 2.0 - node.x();
+				panY = (viewTop() + viewBottom()) / 2.0 - node.y();
+				clampPan();
+				return;
+			}
+		}
 	}
 
 	/** Center of a Major's icon in GUI coordinates, or null if it isn't on this page or can't be clicked (client game test). */
@@ -1224,10 +1334,10 @@ public final class HubScreen extends Screen {
 				continue;
 			}
 
-			int x = screenX(node.x()) - MAJOR_ICON / 2;
-			int y = screenY(node.y()) - MAJOR_ICON / 2;
+			int x = screenX(node.x()) - node.size() / 2;
+			int y = screenY(node.y()) - node.size() / 2;
 
-			if (mouseX >= x && mouseX < x + MAJOR_ICON && mouseY >= y && mouseY < y + MAJOR_ICON) {
+			if (mouseX >= x && mouseX < x + node.size() && mouseY >= y && mouseY < y + node.size()) {
 				return node.major();
 			}
 		}

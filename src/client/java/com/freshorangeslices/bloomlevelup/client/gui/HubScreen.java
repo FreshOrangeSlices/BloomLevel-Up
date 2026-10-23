@@ -50,9 +50,10 @@ import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
  * advancements screen) over the tab's own background picture (any size, centred on its Majors):
  * <ul>
  *   <li>a category with weapon trees (Combat) is a tree: the waiver Major (Master of Arms) in the middle, a node
- *   per weapon around it with that weapon's Majors just outside it, and the universal Majors in a row along
- *   the bottom. Lines run from the middle to each weapon and from each weapon to its Majors, and turn red when
- *   a Major on them is active;</li>
+ *   per weapon around it with that weapon's Majors just outside it, the universal Majors that need a weapon
+ *   (Heavy Hands, Catch!, ...) on the line between the middle and that weapon, and the rest of the universal
+ *   Majors in a row along the bottom. Lines run from the middle to each weapon and from each weapon to its
+ *   Majors, and turn red when a Major on them is active;</li>
  *   <li>other categories lay their Majors out as a grid.</li>
  * </ul>
  * A compact stats window sits in the top-left corner and folds away to give the Majors more room.
@@ -85,12 +86,17 @@ public final class HubScreen extends Screen {
 	private static final long RESULT_SHOW_MS = 3500;
 
 	/** Tree layout, in canvas coordinates with the middle (Master of Arms) at 0,0. */
-	private static final double WEAPON_RX = 100.0;
-	private static final double WEAPON_RY = 54.0;
-	private static final double MAJOR_RX = 168.0;
-	private static final double MAJOR_RY = 96.0;
-	private static final int UNIVERSALS_GAP = 30;
+	private static final double WEAPON_RX = 110.0;
+	private static final double WEAPON_RY = 72.0;
+	private static final double MAJOR_RX = 178.0;
+	private static final double MAJOR_RY = 104.0;
+	private static final int UNIVERSALS_GAP = 22;
 	private static final int UNIVERSALS_PER_ROW = 13;
+	/** How far out a weapon's universal Majors sit on the line from the middle (0) to that weapon (1). */
+	private static final double SPOKE_FRACTION = 0.55;
+	/** Room kept around a node (its glow) when working out the tab's extent. */
+	private static final int NODE_MARGIN = 14;
+	// docs/art/hub-templates/make_templates.py mirrors this layout: keep the two in step.
 
 	/** Majors per row on tabs without weapon trees (fixed, so background art can be painted around them). */
 	private static final int GRID_COLUMNS = 8;
@@ -365,10 +371,10 @@ public final class HubScreen extends Screen {
 		maxX = maxY = Integer.MIN_VALUE;
 
 		for (Node node : nodes) {
-			minX = Math.min(minX, node.x() - 16);
-			maxX = Math.max(maxX, node.x() + 16);
-			minY = Math.min(minY, node.y() - 16);
-			maxY = Math.max(maxY, node.y() + (node.group() != null ? 24 : 16));
+			minX = Math.min(minX, node.x() - NODE_MARGIN);
+			maxX = Math.max(maxX, node.x() + NODE_MARGIN);
+			minY = Math.min(minY, node.y() - NODE_MARGIN);
+			maxY = Math.max(maxY, node.y() + NODE_MARGIN);
 		}
 
 		if (nodes.isEmpty()) {
@@ -378,14 +384,25 @@ public final class HubScreen extends Screen {
 
 	private void treeLayout(List<MajorDefinition> majors) {
 		Map<String, List<MajorDefinition>> trees = new LinkedHashMap<>();
+		Map<String, List<MajorDefinition>> nearTree = new HashMap<>();
 		List<MajorDefinition> middle = new ArrayList<>();
 		List<MajorDefinition> universal = new ArrayList<>();
 
 		for (MajorDefinition major : majors) {
+			major.group().ifPresent(group -> trees.computeIfAbsent(group, k -> new ArrayList<>()).add(major));
+		}
+
+		for (MajorDefinition major : majors) {
 			if (major.group().isPresent()) {
-				trees.computeIfAbsent(major.group().get(), k -> new ArrayList<>()).add(major);
-			} else if (!major.waives().isEmpty()) {
+				continue;
+			}
+
+			String tree = weaponTreeNeeded(major);
+
+			if (!major.waives().isEmpty()) {
 				middle.add(major);
+			} else if (tree != null && trees.containsKey(tree)) {
+				nearTree.computeIfAbsent(tree, k -> new ArrayList<>()).add(major);
 			} else {
 				universal.add(major);
 			}
@@ -404,9 +421,21 @@ public final class HubScreen extends Screen {
 			double angle = -Math.PI / 2.0 + 2.0 * Math.PI * index / count;
 			int wx = (int) Math.round(Math.cos(angle) * WEAPON_RX);
 			int wy = (int) Math.round(Math.sin(angle) * WEAPON_RY);
-			List<String> ids = tree.getValue().stream().map(MajorDefinition::id).toList();
+			List<MajorDefinition> near = nearTree.getOrDefault(tree.getKey(), List.of());
+			List<String> ids = new ArrayList<>(tree.getValue().stream().map(MajorDefinition::id).toList());
+			near.forEach(major -> ids.add(major.id()));
 			nodes.add(new Node(null, tree.getKey(), wx, wy, false));
 			links.add(new Link(0, 0, wx, wy, ids));
+
+			// The universal Majors that need this weapon: on the line between the middle and the weapon, side by side.
+			double sx = Math.cos(angle) * WEAPON_RX * SPOKE_FRACTION;
+			double sy = Math.sin(angle) * WEAPON_RY * SPOKE_FRACTION;
+
+			for (int j = 0; j < near.size(); j++) {
+				double offset = (j - (near.size() - 1) / 2.0) * CELL;
+				nodes.add(new Node(near.get(j), null, (int) Math.round(sx - Math.sin(angle) * offset), (int) Math.round(sy + Math.cos(angle) * offset),
+						false));
+			}
 
 			double ax = Math.cos(angle) * MAJOR_RX;
 			double ay = Math.sin(angle) * MAJOR_RY;
@@ -438,6 +467,17 @@ public final class HubScreen extends Screen {
 			int col = k % UNIVERSALS_PER_ROW;
 			nodes.add(new Node(universal.get(k), null, (int) Math.round((col - (inRow - 1) / 2.0) * CELL), top + row * CELL, false));
 		}
+	}
+
+	/** The weapon tree a universal Major needs (its first "#tree" prerequisite), or null. */
+	private static String weaponTreeNeeded(MajorDefinition major) {
+		for (String prerequisite : major.prerequisites()) {
+			if (MajorDefinition.isGroupRef(prerequisite)) {
+				return MajorDefinition.groupOf(prerequisite);
+			}
+		}
+
+		return null;
 	}
 
 	private void gridLayout(List<MajorDefinition> majors) {
@@ -672,12 +712,14 @@ public final class HubScreen extends Screen {
 			g.item(treeItem(node.group()), cx - 8, cy - 8);
 		}
 
-		// The tree's name underneath, small, on a dark backing so it reads over lines and art.
+		// The tree's name, small, on a dark backing so it reads over lines and art; on the side toward the middle
+		// (under the weapons in the top half, over those in the bottom half), clear of the weapon's own Majors.
 		Component label = Component.literal(capitalize(treeName(node.group())));
 		int half = (int) Math.ceil(this.font.width(label) * 0.75 / 2.0) + 1;
-		g.fill(cx - half, cy + 14, cx + half, cy + 21, 0xA0000000);
+		int labelY = node.y() > 0 ? cy - 21 : cy + 14;
+		g.fill(cx - half, labelY, cx + half, labelY + 7, 0xA0000000);
 		g.pose().pushMatrix();
-		g.pose().translate(cx, cy + 15);
+		g.pose().translate(cx, labelY + 1);
 		g.pose().scale(0.75F);
 		g.centeredText(this.font, label, 0, 0, anyOwned ? TEXT : MUTED);
 		g.pose().popMatrix();

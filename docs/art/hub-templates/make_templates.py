@@ -20,8 +20,10 @@ OUT = pathlib.Path(__file__).resolve().parent
 
 # HubScreen constants
 CELL, ICON = 28, 22
-WEAPON_RX, WEAPON_RY, MAJOR_RX, MAJOR_RY = 100.0, 54.0, 168.0, 96.0
-UNIVERSALS_GAP, UNIVERSALS_PER_ROW, GRID_COLUMNS = 30, 13, 8
+WEAPON_RX, WEAPON_RY, MAJOR_RX, MAJOR_RY = 110.0, 72.0, 178.0, 104.0
+UNIVERSALS_GAP, UNIVERSALS_PER_ROW, GRID_COLUMNS = 22, 13, 8
+SPOKE_FRACTION = 0.55
+NODE_MARGIN = 14  # HubScreen.layout: room around a node for its glow
 MARGIN = 24  # suggested picture edge beyond the outermost node
 
 
@@ -48,6 +50,7 @@ def majors_in(tab):
             'sort': raw.get('sort', 0),
             'group': qualify(raw['group']) if 'group' in raw else None,
             'waives': raw.get('waives', []),
+            'tree': next((qualify(p[1:]) for p in raw.get('prerequisites', []) if p.startswith('#')), None),
         })
 
     return sorted(majors, key=lambda m: (m['sort'], m['id']))
@@ -62,13 +65,19 @@ def layout(majors):
             nodes.append(('major', m['id'], (k % GRID_COLUMNS) * CELL, (k // GRID_COLUMNS) * CELL))
         return nodes, lines
 
-    trees, middle, universal = {}, [], []
+    trees, middle, universal, near = {}, [], [], {}
 
     for m in majors:
         if m['group']:
             trees.setdefault(m['group'], []).append(m)
-        elif m['waives']:
+
+    for m in majors:
+        if m['group']:
+            continue
+        if m['waives']:
             middle.append(m)
+        elif m['tree'] in trees:
+            near.setdefault(m['tree'], []).append(m)
         else:
             universal.append(m)
 
@@ -80,6 +89,14 @@ def layout(majors):
         wx, wy = jround(math.cos(angle) * WEAPON_RX), jround(math.sin(angle) * WEAPON_RY)
         nodes.append(('weapon', group, wx, wy))
         lines.append((0, 0, wx, wy))
+        # Universal Majors that need this weapon: on the line between the middle and the weapon.
+        sx, sy = math.cos(angle) * WEAPON_RX * SPOKE_FRACTION, math.sin(angle) * WEAPON_RY * SPOKE_FRACTION
+        px_, py_ = -math.sin(angle), math.cos(angle)
+        dependents = near.get(group, [])
+
+        for j, m in enumerate(dependents):
+            offset = (j - (len(dependents) - 1) / 2.0) * CELL
+            nodes.append(('major', m['id'], jround(sx + px_ * offset), jround(sy + py_ * offset)))
         ax, ay = math.cos(angle) * MAJOR_RX, math.sin(angle) * MAJOR_RY
         tx, ty = -math.sin(angle) * MAJOR_RX, math.cos(angle) * MAJOR_RY
         length = max(1e-6, math.hypot(tx, ty))
@@ -110,10 +127,10 @@ def name(kind, ref):
 
 def make(tab):
     nodes, lines = layout(majors_in(tab))
-    min_x = min(x - 16 for _, _, x, _ in nodes)
-    max_x = max(x + 16 for _, _, x, _ in nodes)
-    min_y = min(y - 16 for _, _, _, y in nodes)
-    max_y = max(y + (24 if kind == 'weapon' else 16) for kind, _, _, y in nodes)
+    min_x = min(x - NODE_MARGIN for _, _, x, _ in nodes)
+    max_x = max(x + NODE_MARGIN for _, _, x, _ in nodes)
+    min_y = min(y - NODE_MARGIN for _, _, _, y in nodes)
+    max_y = max(y + NODE_MARGIN for _, _, _, y in nodes)
     # HubScreen.anchorX/Y: Java int division truncates toward zero.
     anchor_x, anchor_y = int((min_x + max_x) / 2), int((min_y + max_y) / 2)
     width = (max_x - min_x + 2 * MARGIN + 7) // 8 * 8
@@ -144,12 +161,14 @@ def make(tab):
             draw.rectangle(box, outline=colour, width=scale)
 
             if kind == 'weapon':
-                draw.rectangle([s(px(x) - 14), s(py(y) + 14), s(px(x) + 14) - 1, s(py(y) + 21) - 1], outline=(229, 147, 63, 120))
+                ly = py(y) - 21 if y > 0 else py(y) + 14  # the label sits on the side toward the middle
+                draw.rectangle([s(px(x) - 14), s(ly), s(px(x) + 14) - 1, s(ly + 7) - 1], outline=(229, 147, 63, 120))
 
             if labels:
                 text = name(kind, ref)
                 tw = draw.textlength(text, font=font)
-                draw.text((s(px(x)) - tw / 2, box[3] + 3), text, fill=colour[:3] + (255,), font=font)
+                ty = box[1] - 14 if kind == 'weapon' and y > 0 else box[3] + 3
+                draw.text((s(px(x)) - tw / 2, ty), text, fill=colour[:3] + (255,), font=font)
 
         suffix = 'template' if scale == 1 else 'guide_4x'
         image.save(OUT / f'{tab}_{suffix}.png')

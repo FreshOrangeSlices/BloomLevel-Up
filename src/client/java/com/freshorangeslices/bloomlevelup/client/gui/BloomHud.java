@@ -240,7 +240,11 @@ public final class BloomHud {
 				.orElse(IconTextures.PLACEHOLDER);
 
 		if (icon.equals(IconTextures.PLACEHOLDER)) {
-			g.item(BRACE_FALLBACK, x, y);
+			if (braceFallback == null) {
+				braceFallback = new ItemStack(net.minecraft.world.item.Items.SHIELD); // made on first use: items aren't ready at startup
+			}
+
+			g.item(braceFallback, x, y);
 		} else {
 			g.blit(RenderPipelines.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, 16, 16, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
@@ -256,7 +260,7 @@ public final class BloomHud {
 		}
 	}
 
-	private static final ItemStack BRACE_FALLBACK = new ItemStack(net.minecraft.world.item.Items.SHIELD);
+	private static ItemStack braceFallback;
 
 	// ------------------------------------------------------------------ Bloodlust
 

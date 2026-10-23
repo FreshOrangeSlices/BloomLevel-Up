@@ -60,7 +60,8 @@ public final class SnapshotCodecs {
 			Codec.STRING.optionalFieldOf("icon").forGetter(MajorDefinition::icon),
 			Codec.STRING.optionalFieldOf("effect").forGetter(MajorDefinition::effect),
 			STRING_SET.fieldOf("flags").forGetter(MajorDefinition::flags),
-			Codec.STRING.listOf().optionalFieldOf("waives", List.of()).forGetter(MajorDefinition::waives)
+			Codec.STRING.listOf().optionalFieldOf("waives", List.of()).forGetter(MajorDefinition::waives),
+			com.freshorangeslices.bloomlevelup.data.DefinitionCodecs.HUB_POSITION.optionalFieldOf("hub_position").forGetter(MajorDefinition::hubPosition)
 	).apply(i, MajorDefinition::new));
 
 	/** Definitions + config, as sent to clients. */

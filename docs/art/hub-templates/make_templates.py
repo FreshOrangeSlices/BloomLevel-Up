@@ -60,6 +60,7 @@ def majors_in(tab):
             'group': qualify(raw['group']) if 'group' in raw else None,
             'waives': raw.get('waives', []),
             'tree': next((qualify(p[1:]) for p in raw.get('prerequisites', []) if p.startswith('#')), None),
+            'hub_position': raw.get('hub_position'),
         })
 
     return sorted(majors, key=lambda m: (m['sort'], m['id']))
@@ -91,6 +92,10 @@ def layout(majors):
             h = java_hash(m['id'])
             x += ((h & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudge_x
             y += (((h >> 16) & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudge_y
+
+            if m['hub_position']:  # placed by hand in the Major's JSON (picture pixels)
+                x, y = m['hub_position'][0] - BOARD_W / 2.0, m['hub_position'][1] - BOARD_H / 2.0
+
             nodes.append(('big', m['id'], jround(x), jround(y)))
 
         return nodes, lines

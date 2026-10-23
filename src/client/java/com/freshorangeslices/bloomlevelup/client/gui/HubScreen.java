@@ -534,10 +534,11 @@ public final class HubScreen extends Screen {
 	}
 
 	/**
-	 * Tabs without weapon trees: big icons scattered over the whole page. The page is split into a grid with
-	 * about as many cells as Majors (spare cells spread out as gaps), and each Major sits somewhere in its cell,
-	 * nudged by an amount fixed by its id, so the scatter looks loose but never overlaps and stays the same
-	 * every time (the background templates show it).
+	 * Tabs without weapon trees: big icons over the whole page. A Major with a {@code hub_position} in its JSON
+	 * sits exactly there (pixels of the tab's picture, from its top-left corner), so it can be placed to fit
+	 * the art. The rest are scattered: the page is split into a grid with about as many cells as Majors (spare
+	 * cells spread out as gaps), and each Major sits somewhere in its cell, nudged by an amount fixed by its id,
+	 * so it looks loose but never overlaps and stays the same every time (the background templates show it).
 	 */
 	private void scatterLayout(List<MajorDefinition> majors) {
 		int count = majors.size();
@@ -568,6 +569,13 @@ public final class HubScreen extends Screen {
 			int hash = majors.get(k).id().hashCode();
 			x += ((hash & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudgeX;
 			y += (((hash >>> 16) & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudgeY;
+			Optional<com.freshorangeslices.bloomlevelup.definition.HubPosition> placed = majors.get(k).hubPosition();
+
+			if (placed.isPresent()) {
+				x = placed.get().x() - BOARD_W / 2.0;
+				y = placed.get().y() - BOARD_H / 2.0;
+			}
+
 			nodes.add(new Node(majors.get(k), null, (int) Math.round(x), (int) Math.round(y), false, BIG_ICON));
 		}
 	}

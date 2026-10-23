@@ -6,11 +6,13 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.resources.Identifier;
 
 import com.freshorangeslices.bloomlevelup.definition.CategoryDefinition;
+import com.freshorangeslices.bloomlevelup.definition.HubPosition;
 import com.freshorangeslices.bloomlevelup.definition.MajorDefinition;
 import com.freshorangeslices.bloomlevelup.definition.StatDefinition;
 
@@ -57,6 +59,12 @@ public final class DefinitionCodecs {
 		}
 	}
 
+	/** {@code "hub_position": [x, y]}: pixels on the tab's background picture, from its top-left corner. */
+	public static final Codec<HubPosition> HUB_POSITION = Codec.INT.listOf().comapFlatMap(
+			list -> list.size() == 2 ? DataResult.success(new HubPosition(list.get(0), list.get(1)))
+					: DataResult.error(() -> "hub_position needs two numbers, [x, y]"),
+			position -> List.of(position.x(), position.y()));
+
 	public record RawMajor(
 			String category,
 			int cost,
@@ -68,7 +76,8 @@ public final class DefinitionCodecs {
 			Optional<String> icon,
 			Optional<String> effect,
 			List<String> flags,
-			List<String> waives
+			List<String> waives,
+			Optional<HubPosition> hubPosition
 	) {
 		public static final Codec<RawMajor> CODEC = RecordCodecBuilder.create(i -> i.group(
 				Codec.STRING.fieldOf("category").forGetter(RawMajor::category),
@@ -81,7 +90,8 @@ public final class DefinitionCodecs {
 				Codec.STRING.optionalFieldOf("icon").forGetter(RawMajor::icon),
 				Codec.STRING.optionalFieldOf("effect").forGetter(RawMajor::effect),
 				Codec.STRING.listOf().optionalFieldOf("flags", List.of()).forGetter(RawMajor::flags),
-				Codec.STRING.listOf().optionalFieldOf("waives", List.of()).forGetter(RawMajor::waives)
+				Codec.STRING.listOf().optionalFieldOf("waives", List.of()).forGetter(RawMajor::waives),
+				HUB_POSITION.optionalFieldOf("hub_position").forGetter(RawMajor::hubPosition)
 		).apply(i, RawMajor::new));
 
 		public MajorDefinition toDefinition(Identifier id) {
@@ -98,7 +108,8 @@ public final class DefinitionCodecs {
 					icon,
 					effect,
 					Set.copyOf(flags),
-					waives.stream().map(s -> qualify(ns, s)).toList()
+					waives.stream().map(s -> qualify(ns, s)).toList(),
+					hubPosition
 			);
 		}
 	}

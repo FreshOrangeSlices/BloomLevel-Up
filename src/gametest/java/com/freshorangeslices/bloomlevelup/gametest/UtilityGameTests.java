@@ -403,4 +403,17 @@ public class UtilityGameTests {
 		helper.assertTrue(Math.abs(utilityXp(player) - 8.0) < EPS, "One catch's worth of Utility XP");
 		helper.succeed();
 	}
+
+	@GameTest
+	public void majorsCarryTheirHubPositions(GameTestHelper helper) {
+		var definitions = com.freshorangeslices.bloomlevelup.data.BloomServices.definitions();
+		var triple = definitions.major("bloomlevelup:utility/triple_catch").orElseThrow().hubPosition();
+		helper.assertTrue(triple.isPresent() && triple.get().x() == 80 && triple.get().y() == 232, "Triple Catch sits by the pond: " + triple);
+		helper.assertTrue(definitions.major("bloomlevelup:combat/catch").orElseThrow().hubPosition().isEmpty(), "Combat is a tree: no set spots");
+		// The client gets the same spots in the definitions snapshot.
+		var json = com.freshorangeslices.bloomlevelup.network.SnapshotCodecs.encodeDefinitions(definitions,
+				com.freshorangeslices.bloomlevelup.data.BloomServices.config());
+		helper.assertTrue(json.contains("hub_position"), "Synced to clients");
+		helper.succeed();
+	}
 }

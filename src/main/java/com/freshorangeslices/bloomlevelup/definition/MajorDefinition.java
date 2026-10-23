@@ -27,6 +27,7 @@ import java.util.Set;
  * @param flags         free-form behaviour flags read by handlers, e.g. {@code copycat_ineligible}, {@code primary_hit_only}
  * @param waives        Majors whose conflicts with each other don't apply while this one is owned (Master of Arms):
  *                      any two of them may be owned together
+ * @param hubPosition   optional spot on the tab's page in the hub (pixels of its background picture); presentation only
  */
 public record MajorDefinition(
 		String id,
@@ -40,7 +41,8 @@ public record MajorDefinition(
 		Optional<String> icon,
 		Optional<String> effect,
 		Set<String> flags,
-		List<String> waives
+		List<String> waives,
+		Optional<HubPosition> hubPosition
 ) {
 	/** A weapon-tree Major: a possible Copycat source unless also {@link #FLAG_COPYCAT_INELIGIBLE}. */
 	public static final String FLAG_WEAPON = "weapon";
@@ -62,6 +64,13 @@ public record MajorDefinition(
 		effect = effect == null ? Optional.empty() : effect;
 		flags = Set.copyOf(flags);
 		waives = waives == null ? List.of() : List.copyOf(waives);
+		hubPosition = hubPosition == null ? Optional.empty() : hubPosition;
+	}
+
+	/** A Major without a set place in the hub. */
+	public MajorDefinition(String id, String categoryId, int cost, boolean toggleable, List<String> prerequisites, List<String> conflicts,
+			Optional<String> group, int sort, Optional<String> icon, Optional<String> effect, Set<String> flags, List<String> waives) {
+		this(id, categoryId, cost, toggleable, prerequisites, conflicts, group, sort, icon, effect, flags, waives, Optional.empty());
 	}
 
 	/** A Major that waives nothing. */
@@ -85,17 +94,17 @@ public record MajorDefinition(
 
 	/** Returns a copy with a different conflict list (used when conflicts are symmetrised). */
 	public MajorDefinition withConflicts(List<String> newConflicts) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, newConflicts, group, sort, icon, effect, flags, waives);
+		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, newConflicts, group, sort, icon, effect, flags, waives, hubPosition);
 	}
 
 	/** Returns a copy with a different prerequisite list (used when invalid references are dropped). */
 	public MajorDefinition withPrerequisites(List<String> newPrerequisites) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, newPrerequisites, conflicts, group, sort, icon, effect, flags, waives);
+		return new MajorDefinition(id, categoryId, cost, toggleable, newPrerequisites, conflicts, group, sort, icon, effect, flags, waives, hubPosition);
 	}
 
 	/** Returns a copy with a different waiver list (used when invalid references are dropped). */
 	public MajorDefinition withWaives(List<String> newWaives) {
-		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, conflicts, group, sort, icon, effect, flags, newWaives);
+		return new MajorDefinition(id, categoryId, cost, toggleable, prerequisites, conflicts, group, sort, icon, effect, flags, newWaives, hubPosition);
 	}
 
 	/** Whether owning this Major lets {@code a} and {@code b} be owned together. */

@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.arrow.Arrow;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
@@ -714,6 +715,184 @@ public class CombatGameTests {
 
 		CombatAbilities.fireFromMagazine((CrossbowItem) crossbow.getItem(), helper.getLevel(), player, InteractionHand.MAIN_HAND);
 		helper.assertValueEqual(15, crossbow.get(DataComponents.CHARGED_PROJECTILES).size(), "One shot per click");
+		helper.succeed();
+	}
+
+	// ------------------------------------------------------------------ coverage round (build 87)
+
+	@GameTest
+	public void powerAndTempoBecomeAttributes(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		points(player, CombatIds.POWER, 50);
+		points(player, CombatIds.TEMPO, 50);
+		StatEffects.refresh(player);
+		near(helper, 1.0 + 3.0, player.getAttributeValue(Attributes.ATTACK_DAMAGE), "50 Power = +3 attack damage");
+		near(helper, 4.0 * 1.5, player.getAttributeValue(Attributes.ATTACK_SPEED), "50 Tempo = 1.5x attack speed");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void piercingAndStraightShotShapeBowArrows(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ItemStack bow = new ItemStack(Items.BOW);
+		ServerPlayer player = player(helper, bow);
+		grant(player, CombatIds.PIERCING_SHOT, CombatIds.STRAIGHT_SHOT);
+
+		Arrow arrow = new Arrow(level, player, new ItemStack(Items.ARROW), bow);
+		level.addFreshEntity(arrow);
+		helper.assertTrue(arrow.getPierceLevel() >= BloomServices.config().piercingShotLevel,
+				"Piercing Shot: the arrow goes through 4 mobs, pierce " + arrow.getPierceLevel());
+		helper.assertTrue(arrow.isNoGravity(), "Straight Shot: the arrow doesn't drop");
+
+		Arrow bolt = new Arrow(level, player, new ItemStack(Items.ARROW), new ItemStack(Items.CROSSBOW));
+		level.addFreshEntity(bolt);
+		helper.assertTrue(bolt.getPierceLevel() == 0 && !bolt.isNoGravity(), "Bow Majors leave crossbow bolts alone");
+
+		// A straight arrow that never lands vanishes after 5 s.
+		arrow.tickCount = BloomServices.config().straightShotMaxTicks + 1;
+		CombatSkill.endSwingForTests();
+		helper.assertTrue(arrow.isRemoved(), "Straight Shot arrows vanish when they never land");
+		bolt.discard();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void marksmanAndReinforcedShotAddArrowDamage(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ItemStack bow = new ItemStack(Items.BOW);
+		ServerPlayer archer = player(helper, bow);
+		grant(archer, CombatIds.MARKSMAN, CombatIds.REINFORCED_SHOT);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		Arrow drawn = new Arrow(level, archer, new ItemStack(Items.ARROW), bow);
+		drawn.setCritArrow(true); // a fully drawn shot
+
+		double[][] cases = {{40.0, 9.0}, {25.0, 7.5}, {8.0, 6.0}};
+		String[] what = {"40 blocks: the full +50%", "25 blocks: halfway, +25%", "Under 10 blocks: nothing"};
+
+		for (int i = 0; i < cases.length; i++) {
+			archer.setPos(zombie.getX() + cases[i][0], zombie.getY(), zombie.getZ());
+			near(helper, cases[i][1], CombatSkill.modifyIncoming(zombie, archer.damageSources().arrow(drawn, archer), 6.0F), "Marksman at " + what[i]);
+			CombatSkill.endSwingForTests();
+		}
+
+		archer.setPos(zombie.getX() + 40.0, zombie.getY(), zombie.getZ());
+		Arrow loose = new Arrow(level, archer, new ItemStack(Items.ARROW), bow);
+		loose.setCritArrow(false);
+		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, archer.damageSources().arrow(loose, archer), 6.0F), "A half-drawn shot gets no Marksman");
+		CombatSkill.endSwingForTests();
+
+		Arrow bolt = new Arrow(level, archer, new ItemStack(Items.ARROW), new ItemStack(Items.CROSSBOW));
+		near(helper, 9.0, CombatSkill.modifyIncoming(zombie, archer.damageSources().arrow(bolt, archer), 6.0F), "Reinforced Shot: +3 on crossbow bolts");
+		CombatSkill.endSwingForTests();
+		helper.succeed();
+	}
+
+	@GameTest
+	public void disarmKnocksTheWeaponOut(GameTestHelper helper) {
+		var config = BloomServices.config();
+		double chance = config.disarmChance;
+		config.disarmChance = 1.0; // the roll itself is plain random; this checks what a success does
+
+		try {
+			ServerLevel level = helper.getLevel();
+			ServerPlayer boxer = player(helper, ItemStack.EMPTY);
+			grant(boxer, CombatIds.DISARM);
+			LivingEntity armed = zombie(helper, 1, 1);
+			armed.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+			CombatSkill.recordSwingForTests(boxer, armed, 1.0F, false, true);
+			armed.hurtServer(level, hit(boxer), 2.0F);
+			CombatSkill.runQueuedForTests();
+			CombatSkill.endSwingForTests();
+			helper.assertTrue(armed.getMainHandItem().isEmpty(), "A bare-handed hit knocks the sword out of its hand");
+
+			ServerPlayer swordsman = player(helper, new ItemStack(Items.IRON_SWORD));
+			grant(swordsman, CombatIds.DISARM);
+			LivingEntity other = zombie(helper, 3, 1);
+			other.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+			CombatSkill.recordSwingForTests(swordsman, other, 1.0F, false, true);
+			other.hurtServer(level, hit(swordsman), 2.0F);
+			CombatSkill.runQueuedForTests();
+			CombatSkill.endSwingForTests();
+			helper.assertFalse(other.getMainHandItem().isEmpty(), "Disarm is a fists Major");
+		} finally {
+			config.disarmChance = chance;
+		}
+
+		helper.succeed();
+	}
+
+	@GameTest
+	public void impaleBleedsOnFullStrengthJabs(GameTestHelper helper) {
+		var config = BloomServices.config();
+		double chance = config.impaleChance;
+		config.impaleChance = 1.0; // the roll itself is plain random; this checks which hits may bleed
+
+		try {
+			ServerPlayer player = player(helper, new ItemStack(Items.IRON_SPEAR));
+			grant(player, CombatIds.IMPALE);
+			player.setOnGround(true);
+			LivingEntity full = zombie(helper, 3, 3);
+			CombatSkill.jabForTests(player, 1.0F);
+			player.stabAttack(EquipmentSlot.MAINHAND, full, 6.0F, true, false, false);
+			CombatSkill.endJab(player);
+			CombatSkill.endSwingForTests();
+			helper.assertTrue(full.hasEffect(BloomEffects.BLEED), "A full-strength jab can Bleed");
+
+			LivingEntity weak = zombie(helper, 5, 5);
+			CombatSkill.jabForTests(player, 0.5F);
+			player.stabAttack(EquipmentSlot.MAINHAND, weak, 6.0F, true, false, false);
+			CombatSkill.endJab(player);
+			CombatSkill.endSwingForTests();
+			helper.assertTrue(weak.getHealth() < 20.0F, "The weak jab still hit");
+			helper.assertFalse(weak.hasEffect(BloomEffects.BLEED), "A half-strength jab never Bleeds");
+		} finally {
+			config.impaleChance = chance;
+		}
+
+		helper.succeed();
+	}
+
+	@GameTest
+	public void unrestrictedRiptideNeedsNoEnchantment(GameTestHelper helper) {
+		ItemStack trident = new ItemStack(Items.TRIDENT);
+		ServerPlayer player = player(helper, trident);
+		player.setShiftKeyDown(true);
+		helper.assertTrue(CombatSkill.riptideStrength(trident, player, 0.0F) == 0.0F, "Without the Major: no riptide");
+
+		grant(player, CombatIds.UNRESTRICTED_RIPTIDE);
+		near(helper, BloomServices.config().unrestrictedRiptideStrength, CombatSkill.riptideStrength(trident, player, 0.0F),
+				"Sneaking on release: riptide with no enchantment");
+		helper.assertTrue(CombatSkill.riptideAnywhere(player), "No water or rain needed");
+		near(helper, 2.0, CombatSkill.riptideStrength(trident, player, 2.0F), "A real Riptide enchantment keeps its own strength");
+
+		player.setShiftKeyDown(false);
+		helper.assertTrue(CombatSkill.riptideStrength(trident, player, 0.0F) == 0.0F, "Not sneaking: a normal throw");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void chargedBurstLaunchesYouHigher(GameTestHelper helper) {
+		var config = BloomServices.config();
+		helper.setBlock(new BlockPos(4, 0, 4), net.minecraft.world.level.block.Blocks.STONE);
+
+		ServerPlayer tap = player(helper, new ItemStack(Items.MACE));
+		grant(tap, CombatIds.WIND_IMPACT);
+		tap.setXRot(90.0F);
+		tap.xRotO = 90.0F;
+		helper.assertTrue(CombatSkill.windBurst(tap, false), "A plain burst at your feet");
+		double tapLift = tap.getDeltaMovement().y;
+
+		ServerPlayer charged = player(helper, new ItemStack(Items.MACE));
+		grant(charged, CombatIds.WIND_IMPACT);
+		charged.setXRot(90.0F);
+		charged.xRotO = 90.0F;
+		helper.assertTrue(CombatSkill.windBurst(charged, true), "A charged burst at your feet");
+		double lift = charged.getDeltaMovement().y;
+		helper.assertTrue(lift >= config.chargedBurstLaunchSpeed - EPS && lift > tapLift,
+				"The charged burst launches you (vy " + lift + ", a plain one " + tapLift + ")");
+		helper.assertValueEqual(config.windImpactDurabilityCost + config.chargedBurstExtraDurability, charged.getMainHandItem().getDamageValue(),
+				"It costs 2 more durability than a plain burst");
+		helper.assertValueEqual(config.windImpactDurabilityCost, tap.getMainHandItem().getDamageValue(), "A plain burst's wear");
 		helper.succeed();
 	}
 }

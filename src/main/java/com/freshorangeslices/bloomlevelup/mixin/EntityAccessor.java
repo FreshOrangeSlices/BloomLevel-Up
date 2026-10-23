@@ -10,4 +10,8 @@ public interface EntityAccessor {
 	/** Vanilla's damage cooldown (private since 26.x). */
 	@Accessor("invulnerableTime")
 	int bloomlevelup$getInvulnerableTime();
+
+	/** Game tests reset it between repeated hits on the same mob. */
+	@Accessor("invulnerableTime")
+	void bloomlevelup$setInvulnerableTime(int ticks);
 }

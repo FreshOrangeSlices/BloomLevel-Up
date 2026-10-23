@@ -2,6 +2,7 @@ package com.freshorangeslices.bloomlevelup.gametest;
 
 import java.util.List;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
@@ -9,8 +10,13 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Input;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Consumable;
@@ -19,6 +25,7 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.StatEffects;
+import com.freshorangeslices.bloomlevelup.mixin.EntityAccessor;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
@@ -356,6 +363,120 @@ public class ArmorGameTests {
 		}
 
 		helper.assertTrue(negated > 280 && negated < 420, "Parkour should negate ~350 of 1000 falls, negated " + negated);
+		helper.succeed();
+	}
+
+	@GameTest(maxTicks = 60)
+	public void braceNeedsAStillCrouch(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.BRACE);
+		player.setOnGround(true);
+		// Input(forward, backward, left, right, jump, shift, sprint): crouching, not moving.
+		player.setLastClientInput(new Input(false, false, false, false, false, true, false));
+		near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Not braced straight away");
+		int delay = BloomServices.config().braceDelayTicks;
+
+		helper.runAfterDelay(delay + 5, () -> {
+			helper.assertTrue(ArmorSkill.isBraced(player), "Crouched still for a moment: braced");
+			near(helper, 6.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Braced: Resistance II (-40%)");
+			player.setLastClientInput(new Input(true, false, false, false, false, true, false)); // sneak-walks forward
+		});
+
+		helper.runAfterDelay(delay + 10, () -> {
+			helper.assertFalse(ArmorSkill.isBraced(player), "Moving ends Brace!");
+			near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Full damage again");
+			helper.succeed();
+		});
+	}
+
+	@GameTest
+	public void vibraniumAndAdamantiumCutWeaponHits(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.VIBRANIUM, ArmorIds.ADAMANTIUM);
+		LivingEntity swordsman = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+		swordsman.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+		LivingEntity axeman = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(2, 2, 1));
+		axeman.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
+		LivingEntity macer = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(3, 2, 1));
+		macer.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.MACE));
+		LivingEntity fists = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(4, 2, 1));
+
+		near(helper, 7.0, ArmorSkill.modifyFinalDamage(player, player.damageSources().mobAttack(swordsman), 10.0F), "Vibranium: a sword is -30%");
+		near(helper, 7.0, ArmorSkill.modifyFinalDamage(player, player.damageSources().mobAttack(axeman), 10.0F), "Vibranium: an axe is a blade too");
+		near(helper, 6.0, ArmorSkill.modifyFinalDamage(player, player.damageSources().mobAttack(macer), 10.0F), "Adamantium: a mace is -40%");
+		near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, player.damageSources().mobAttack(fists), 10.0F), "Bare fists are neither");
+		near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Nor is anything that isn't a hit");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void reboundThrowsAboutOneMeleeHitInSevenBack(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.REBOUND);
+		LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+		DamageSource melee = player.damageSources().mobAttack(zombie);
+		int rebounds = 0;
+
+		for (int i = 0; i < 400; i++) {
+			zombie.setHealth(20.0F);
+			((EntityAccessor) zombie).bloomlevelup$setInvulnerableTime(0);
+			ArmorSkill.afterDamage(player, melee, 8.0F, 4.0F, false);
+
+			if (zombie.getHealth() < 20.0F) {
+				rebounds++;
+			}
+		}
+
+		// 15% of 400 = 60 (sd ~7).
+		helper.assertTrue(rebounds > 30 && rebounds < 95, "Rebound should hit back ~60 of 400 melee hits, hit back " + rebounds);
+
+		AbstractArrow arrow = EntityTypes.ARROW.create(helper.getLevel(), EntitySpawnReason.TRIGGERED);
+		DamageSource shot = player.damageSources().arrow(arrow, zombie);
+		int fromArrows = 0;
+
+		for (int i = 0; i < 100; i++) {
+			zombie.setHealth(20.0F);
+			((EntityAccessor) zombie).bloomlevelup$setInvulnerableTime(0);
+			ArmorSkill.afterDamage(player, shot, 8.0F, 4.0F, false);
+
+			if (zombie.getHealth() < 20.0F) {
+				fromArrows++;
+			}
+		}
+
+		helper.assertValueEqual(0, fromArrows, "Arrows are never thrown back");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void reflectBouncesOrCatchesAboutAThirdOfArrows(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.REFLECT);
+		int stopped = 0;
+
+		for (int i = 0; i < 1000; i++) {
+			AbstractArrow arrow = EntityTypes.ARROW.create(helper.getLevel(), EntitySpawnReason.TRIGGERED);
+			arrow.pickup = AbstractArrow.Pickup.DISALLOWED; // a skeleton's
+
+			if (!ArmorSkill.allowDamage(player, player.damageSources().arrow(arrow, null), 3.0F)) {
+				stopped++;
+			}
+		}
+
+		int caught = 0;
+
+		for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
+			ItemStack stack = player.getInventory().getItem(slot);
+
+			if (stack.is(Items.ARROW)) {
+				caught += stack.getCount();
+			}
+		}
+
+		// 10% caught, then 25% of the rest bounce: 32.5% stopped (sd ~15), 10% caught (sd ~9.5).
+		helper.assertTrue(stopped > 270 && stopped < 380, "Reflect should stop ~325 of 1000 arrows, stopped " + stopped);
+		helper.assertTrue(caught > 60 && caught < 140, "~100 of them land in the inventory, caught " + caught);
+		helper.assertTrue(ArmorSkill.allowDamage(player, source(player, DamageTypes.GENERIC), 3.0F), "Reflect only touches projectiles");
 		helper.succeed();
 	}
 }

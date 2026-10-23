@@ -41,6 +41,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.skill.DurabilitySaves;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
 import com.freshorangeslices.bloomlevelup.skill.utility.PlacedBlocks;
 import com.freshorangeslices.bloomlevelup.skill.utility.UtilityIds;
@@ -198,6 +199,23 @@ public class UtilityGameTests {
 		StatEffects.refresh(player);
 		helper.assertTrue(Math.abs(player.getAttributeValue(Attributes.BLOCK_BREAK_SPEED) - 2.2) < EPS,
 				"Shovel Mastery: 120 Efficiency with a shovel, was " + player.getAttributeValue(Attributes.BLOCK_BREAK_SPEED));
+		helper.succeed();
+	}
+
+	@GameTest
+	public void preservationSavesAboutHalfOfToolWear(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_PICKAXE));
+		grant(player, List.of(SkillXp.UTILITY));
+		points(player, UtilityIds.PRESERVATION, 100);
+		int kept = DurabilitySaves.adjust(new ItemStack(Items.IRON_PICKAXE), 2000, player);
+		// 100 Preservation = 50% of each point of wear saved: ~1000 of 2000 kept (sd ~22).
+		helper.assertTrue(kept > 900 && kept < 1100, "Preservation 100 should keep ~1000 of 2000 wear, kept " + kept);
+		int shears = DurabilitySaves.adjust(new ItemStack(Items.SHEARS), 2000, player);
+		helper.assertTrue(shears > 900 && shears < 1100, "Shears are Utility tools too, kept " + shears);
+		helper.assertValueEqual(50, DurabilitySaves.adjust(new ItemStack(Items.IRON_SWORD), 50, player), "Swords aren't Utility tools");
+
+		BloomServices.progression().toggleStat(BloomAttachments.profile(player), UtilityIds.PRESERVATION);
+		helper.assertValueEqual(50, DurabilitySaves.adjust(new ItemStack(Items.IRON_PICKAXE), 50, player), "Switched off: no saves");
 		helper.succeed();
 	}
 

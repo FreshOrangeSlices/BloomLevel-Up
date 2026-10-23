@@ -47,7 +47,7 @@ import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 
 /**
  * The Skill Hub: a window with a tab per category. Each tab is a canvas the player drags around (like the
- * advancements screen) on the tab's background art:
+ * advancements screen) over the tab's own background picture (any size, centred on its Majors):
  * <ul>
  *   <li>a category with weapon trees (Combat) is a tree: the waiver Major (Master of Arms) in the middle, a node
  *   per weapon around it with that weapon's Majors just outside it, and the universal Majors in a row along
@@ -92,9 +92,8 @@ public final class HubScreen extends Screen {
 	private static final int UNIVERSALS_GAP = 30;
 	private static final int UNIVERSALS_PER_ROW = 13;
 
-	/** Background art: {@code textures/gui/hub/background_<category>.png} or {@code background.png}, drawn to cover the canvas. */
-	public static final int BACKGROUND_W = 1024;
-	public static final int BACKGROUND_H = 512;
+	/** Majors per row on tabs without weapon trees (fixed, so background art can be painted around them). */
+	private static final int GRID_COLUMNS = 8;
 	/** Shown until the art exists: the advancements screen's stone, darkened. */
 	private static final Identifier FALLBACK_TILE = Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png");
 	private static final String COPYCAT = BloomLevelUp.key("combat/copycat");
@@ -119,7 +118,7 @@ public final class HubScreen extends Screen {
 	private int statsRowsY;
 	private boolean spendInvested;
 	private int builtVersion = -1;
-	private Identifier background;
+	private Backdrop backdrop;
 
 	/** The current tab's nodes and lines, in canvas coordinates. */
 	private final List<Node> nodes = new ArrayList<>();
@@ -173,7 +172,7 @@ public final class HubScreen extends Screen {
 			return;
 		}
 
-		background = findBackground(category);
+		backdrop = findBackdrop(category);
 		addStatsWindow(category);
 		layout(category);
 		String key = category.id() + "@" + this.width + "x" + this.height + (statsCollapsed ? "/folded" : "");
@@ -442,11 +441,18 @@ public final class HubScreen extends Screen {
 	}
 
 	private void gridLayout(List<MajorDefinition> majors) {
-		int columns = Math.max(1, (freeRight() - freeLeft() - 8) / CELL);
-
 		for (int k = 0; k < majors.size(); k++) {
-			nodes.add(new Node(majors.get(k), null, (k % columns) * CELL, (k / columns) * CELL, false));
+			nodes.add(new Node(majors.get(k), null, (k % GRID_COLUMNS) * CELL, (k / GRID_COLUMNS) * CELL, false));
 		}
+	}
+
+	/** The middle of the tab's Majors, where its background picture is centred. */
+	private int anchorX() {
+		return (minX + maxX) / 2;
+	}
+
+	private int anchorY() {
+		return (minY + maxY) / 2;
 	}
 
 	/** Left edge of the canvas area the stats window doesn't cover. */
@@ -541,19 +547,23 @@ public final class HubScreen extends Screen {
 		frame(g, panelX, panelY, panelX + panelW, panelY + panelH, PANEL_EDGE);
 	}
 
-	/** The tab's art scaled to cover the canvas (cropping what doesn't fit), or darkened stone until it exists. */
+	/**
+	 * The tab's picture, any size, drawn pixel for pixel (one picture pixel per GUI pixel, like vanilla's GUI art),
+	 * centred on the tab's Majors and scrolling with them; plain dark around it. Darkened stone until it exists.
+	 */
 	private void drawBackground(GuiGraphicsExtractor g) {
-		if (background != null) {
-			double view = canvasW / (double) canvasH;
-			double art = BACKGROUND_W / (double) BACKGROUND_H;
-			int regionW = view >= art ? BACKGROUND_W : (int) Math.round(BACKGROUND_H * view);
-			int regionH = view >= art ? (int) Math.round(BACKGROUND_W / view) : BACKGROUND_H;
-			g.blit(RenderPipelines.GUI_TEXTURED, background, canvasX, canvasY, (BACKGROUND_W - regionW) / 2.0F, (BACKGROUND_H - regionH) / 2.0F,
-					canvasW, canvasH, regionW, regionH, BACKGROUND_W, BACKGROUND_H, 0xFFFFFFFF);
+		g.enableScissor(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH);
+
+		if (backdrop != null) {
+			g.fill(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH, 0xFF120F0C);
+			int w = backdrop.width();
+			int h = backdrop.height();
+			g.blit(RenderPipelines.GUI_TEXTURED, backdrop.texture(), screenX(anchorX()) - w / 2, screenY(anchorY()) - h / 2, 0.0F, 0.0F,
+					w, h, w, h, w, h, 0xFFFFFFFF);
+			g.disableScissor();
 			return;
 		}
 
-		g.enableScissor(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH);
 		int offsetX = Math.floorMod((int) Math.round(panX), 16) - 16;
 		int offsetY = Math.floorMod((int) Math.round(panY), 16) - 16;
 
@@ -567,19 +577,44 @@ public final class HubScreen extends Screen {
 		g.disableScissor();
 	}
 
-	private Identifier findBackground(CategoryDefinition category) {
+	/** A tab's background picture and its size in pixels. */
+	private record Backdrop(Identifier texture, int width, int height) {
+	}
+
+	/** {@code textures/gui/hub/background_<tab>.png}, else {@code background.png}, else none. */
+	private Backdrop findBackdrop(CategoryDefinition category) {
 		Identifier categoryId = Identifier.tryParse(category.id());
 		String path = categoryId == null ? "" : categoryId.getPath();
 
 		for (String name : List.of("background_" + path, "background")) {
 			Identifier texture = BloomLevelUp.id("textures/gui/hub/" + name + ".png");
+			Optional<net.minecraft.server.packs.resources.Resource> resource = this.minecraft.getResourceManager().getResource(texture);
+			int[] size = resource.map(HubScreen::pngSize).orElse(null);
 
-			if (this.minecraft.getResourceManager().getResource(texture).isPresent()) {
-				return texture;
+			if (size != null) {
+				return new Backdrop(texture, size[0], size[1]);
 			}
 		}
 
 		return null;
+	}
+
+	/** Width and height from a PNG's header, or null if it can't be read. */
+	private static int[] pngSize(net.minecraft.server.packs.resources.Resource resource) {
+		try (java.io.InputStream in = resource.open()) {
+			byte[] head = in.readNBytes(24);
+
+			if (head.length < 24 || head[1] != 'P' || head[2] != 'N' || head[3] != 'G') {
+				return null;
+			}
+
+			java.nio.ByteBuffer header = java.nio.ByteBuffer.wrap(head);
+			int width = header.getInt(16);
+			int height = header.getInt(20);
+			return width > 0 && height > 0 && width <= 4096 && height <= 4096 ? new int[] {width, height} : null;
+		} catch (java.io.IOException e) {
+			return null;
+		}
 	}
 
 	/** Lines, weapon nodes and Majors. Returns the tooltip for whatever the mouse is on, if anything. */

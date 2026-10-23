@@ -9,7 +9,7 @@ package com.freshorangeslices.bloomlevelup.config;
  */
 public final class BloomConfig {
 	/** The defaults this build ships with. Files from older builds are moved onto changed defaults by {@link #migrate()}. */
-	public static final int CURRENT_VERSION = 4;
+	public static final int CURRENT_VERSION = 5;
 
 	/** Which build's defaults the file was written with (0 = before versioning). */
 	public int configVersion;
@@ -74,8 +74,8 @@ public final class BloomConfig {
 	/** Castle of Stone: invincibility length and bed rest needed to recharge (4 seconds, confirmed). */
 	public int castleOfStoneTicks = 200;
 	public int castleOfStoneRestTicks = 80;
-	/** Brace!: how long the player must crouch still before bracing. */
-	public int braceDelayTicks = 20;
+	/** Brace!: how long the player must crouch still (or hold a shield up) before bracing; 1 = at once. */
+	public int braceDelayTicks = 1;
 
 	// ---------------------------------------------------------------- Utility tuning
 
@@ -262,6 +262,11 @@ public final class BloomConfig {
 			lightningShockBounceTicks = lightningShockBounceTicks == 10 ? 2 : lightningShockBounceTicks;
 			auraSwordRadius = moved(auraSwordRadius, 3.0, 4.0);
 			auraSwordPulseGapTicks = auraSwordPulseGapTicks == 4 ? 9 : auraSwordPulseGapTicks;
+		}
+
+		if (configVersion < 5) {
+			// Playtest round 6 (2026-10-22): Brace! takes hold at once.
+			braceDelayTicks = braceDelayTicks == 20 ? 1 : braceDelayTicks;
 		}
 
 		configVersion = CURRENT_VERSION;

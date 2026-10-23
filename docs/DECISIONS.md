@@ -95,7 +95,7 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Durability | 100 points ≈ a second Unbreaking III: armor 30% backup save, shields 75% (after vanilla Unbreaking fails) | `StatFormulas` |
 | Fitting Armor | Each worn piece is Light (1), Medium (2) or Heavy (3) by item tag; the average decides: under 1.5 Light, under 2.5 Medium, else Heavy. Any empty slot = no style. Light: 10% backup dodge + Feather Falling I. Medium: −15% damage. Heavy: −30% damage and 50% knockback resistance, tapering if you already resist knockback | tags `bloomlevelup:armor/{light,medium,heavy}` |
 | Medium style shield disable (−50%) | Not in yet: needs a hook into shield cooldowns | later chunk |
-| Iron Skin / Brace! | −20% (like Resistance I) / −40% while braced (like Resistance II). Brace: crouch without moving or jumping for 1 second | config `braceDelayTicks` |
+| Iron Skin / Brace! | −20% (like Resistance I) / −40% while braced (like Resistance II). Brace: crouch still or raise a shield, on the ground; braced at once (round 6, was 1 second) | config `braceDelayTicks` |
 | Elemental Skin | −50% fire (incl. lava), freezing, lightning and drowning damage (tag `bloomlevelup:elemental`) | tag |
 | Vibranium / Adamantium | −30% from blades / −40% from blunt weapons, by damage type or the attacker's held item tag | tags `bloomlevelup:weapon/{blade,blunt}` |
 | Thick Blood | Poison and Wither last half as long (tag `bloomlevelup:damage_over_time`) | tag |
@@ -321,6 +321,19 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Category icons (confirmed: not needed) | Categories have no icon picture any more (the hub doesn't draw one); Preservation's icon is the wrench again | category JSONs, `textures/icon/skill/` |
 | `hub_position` (Major JSON) | `"hub_position": [x, y]` puts a Major's icon at that spot on its tab's page, in pixels of the tab's background picture from its top-left corner (the page is 416×320). Used on tabs without weapon trees; the Combat tree ignores it. Synced to clients with the definitions | `MajorDefinition.hubPosition`, `DefinitionCodecs.HUB_POSITION` |
 | Major Level counter | Moved from the top-right of the page to the strip under it (hover for "spend them anywhere"), so nothing on the page sits under it; "Drag to see more" shows on the left of that strip only when the page is bigger than the view | `HubScreen.drawWallet`, `drawStatusLine` |
+
+## Playtest round 6 (2026-10-22)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Coverage | Every Major and stat now has a game test; the ones added this round: Brace!, Vibranium/Adamantium, Rebound, Reflect's rolls, Power/Tempo, Piercing/Straight Shot, Marksman/Reinforced Shot, Disarm, Impale, Unrestricted Riptide, the Charged Burst launch and Preservation | `src/gametest` |
+| Brace! | Crouching still or raising a shield braces you at once (`braceDelayTicks` 20 → 1, moved in old config files). It has to start on the ground; after that only your own movement ends it (walking, jumping, standing up, lowering the shield). Knockback no longer breaks it, as the Armor doc always said | `ArmorSkill.tick`, config `braceDelayTicks` |
+| Master of Arms text | Just "use them all together"; the combos are explained in the README, not the hub | lang `master_of_arms.desc` |
+| Crossbow Infinity | Sits in the Crossbow tree (group `combat/crossbow`) next to Reinforced Shot and Assault Rifle. Still needs nothing to buy, and it isn't a weapon Major (no `weapon` flag), so Copycat can't copy it | `crossbow_infinity.json` |
+| Bottom row | The priciest universal Major (Copycat) sits in the middle of the Combat tab's bottom row, the rest around it in their usual order | `HubScreen.treeLayout`, `make_templates.py` |
+| Timber | Moved to the flowers under the big tree, left of the waterfall (`hub_position` [268, 44]) | `timber.json` |
+| Hub window | The window hugs its page: the stats window's column plus the 416×320 page while the stats are open, just the page while they're folded (the folded header then sits on the page's top-left corner). The game shows, blurred, around it. On a screen too small for that it fills the screen and the page drags, as before | `HubScreen.init` |
+| Gold frame and tabs | A gold frame around the window: a 28×28 nine-slice GUI sprite with a 6-pixel border, made by `docs/art/hub-templates/make_frame.py` (repaint the PNG freely; keep the border 6 wide or change the `.mcmeta`). The tabs are gold-rimmed plates in the same golds; the open tab is lit | `textures/gui/sprites/hub/frame.png`, `HubTab` |
 
 ## Build numbers
 

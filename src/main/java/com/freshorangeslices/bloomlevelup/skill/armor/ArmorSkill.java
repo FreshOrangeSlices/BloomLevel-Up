@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -481,20 +482,25 @@ public final class ArmorSkill {
 			BloomProfile profile = BloomAttachments.profile(player);
 			UUID id = player.getUUID();
 
-			// Brace!: crouch still for a moment; voluntary movement, jumping or standing up ends it.
+			// Brace!: crouch still or raise a shield, on the ground, and you're braced (at once by default). Only your own
+			// movement ends it (walking, jumping, standing up, lowering the shield); knockback doesn't.
 			if (active(profile, ArmorIds.BRACE)) {
 				Input input = player.getLastClientInput();
-				boolean moving = input.forward() || input.backward() || input.left() || input.right();
+				boolean moving = input.forward() || input.backward() || input.left() || input.right() || input.jump();
+				boolean shieldUp = player.isUsingItem() && player.getUseItem().has(DataComponents.BLOCKS_ATTACKS);
+				boolean planted = !moving && (input.shift() || shieldUp);
 
-				if (input.shift() && !moving && !input.jump() && player.onGround()) {
+				if (!planted) {
+					if (BRACE_TICKS.remove(id) != null) {
+						BRACED.remove(id);
+					}
+				} else if (!BRACED.contains(id) && player.onGround()) {
 					int ticks = BRACE_TICKS.merge(id, 1, Integer::sum);
 
-					if (ticks == config.braceDelayTicks) {
+					if (ticks >= config.braceDelayTicks) {
 						BRACED.add(id);
 						player.sendSystemMessage(Component.translatable("bloom.armor.braced").withStyle(ChatFormatting.GRAY), true);
 					}
-				} else if (BRACE_TICKS.remove(id) != null) {
-					BRACED.remove(id);
 				}
 			} else if (BRACE_TICKS.remove(id) != null) {
 				BRACED.remove(id);

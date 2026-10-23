@@ -57,6 +57,7 @@ def majors_in(tab):
         majors.append({
             'id': f'bloomlevelup:{tab}/{file.stem}',
             'sort': raw.get('sort', 0),
+            'cost': raw.get('cost', 1),
             'group': qualify(raw['group']) if 'group' in raw else None,
             'waives': raw.get('waives', []),
             'tree': next((qualify(p[1:]) for p in raw.get('prerequisites', []) if p.startswith('#')), None),
@@ -142,6 +143,12 @@ def layout(majors):
             mx, my = jround(ax + tx * offset), jround(ay + ty * offset)
             nodes.append(('major', m['id'], mx, my))
             lines.append((wx, wy, mx, my))
+
+    # The priciest universal (Copycat) in the middle of the bottom row, the rest around it in order.
+    if len(universal) > 2:
+        priciest = max(universal, key=lambda m: m['cost'])
+        universal.remove(priciest)
+        universal.insert(min(UNIVERSALS_PER_ROW, len(universal) + 1) // 2, priciest)
 
     top = int(MAJOR_RY) + 14 + UNIVERSALS_GAP
 

@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -366,24 +367,42 @@ public class ArmorGameTests {
 	}
 
 	@GameTest(maxTicks = 60)
-	public void braceNeedsAStillCrouch(GameTestHelper helper) {
+	public void braceTakesHoldAtOnceAndSurvivesKnockback(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		grant(player, ArmorIds.BRACE);
 		player.setOnGround(true);
 		// Input(forward, backward, left, right, jump, shift, sprint): crouching, not moving.
 		player.setLastClientInput(new Input(false, false, false, false, false, true, false));
-		near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Not braced straight away");
 		int delay = BloomServices.config().braceDelayTicks;
 
-		helper.runAfterDelay(delay + 5, () -> {
-			helper.assertTrue(ArmorSkill.isBraced(player), "Crouched still for a moment: braced");
+		helper.runAfterDelay(delay + 2, () -> {
+			helper.assertTrue(ArmorSkill.isBraced(player), "Crouched still: braced");
 			near(helper, 6.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Braced: Resistance II (-40%)");
+			player.setOnGround(false); // knocked into the air
+		});
+
+		helper.runAfterDelay(delay + 4, () -> {
+			helper.assertTrue(ArmorSkill.isBraced(player), "Knockback doesn't end Brace!");
+			player.setOnGround(true);
 			player.setLastClientInput(new Input(true, false, false, false, false, true, false)); // sneak-walks forward
 		});
 
-		helper.runAfterDelay(delay + 10, () -> {
-			helper.assertFalse(ArmorSkill.isBraced(player), "Moving ends Brace!");
+		helper.runAfterDelay(delay + 6, () -> {
+			helper.assertFalse(ArmorSkill.isBraced(player), "Walking ends it");
 			near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Full damage again");
+			// Stands up and raises a shield instead.
+			player.setLastClientInput(new Input(false, false, false, false, false, false, false));
+			player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.SHIELD));
+			player.startUsingItem(InteractionHand.OFF_HAND);
+		});
+
+		helper.runAfterDelay(delay + 8, () -> {
+			helper.assertTrue(ArmorSkill.isBraced(player), "A raised shield braces too");
+			player.stopUsingItem();
+		});
+
+		helper.runAfterDelay(delay + 10, () -> {
+			helper.assertFalse(ArmorSkill.isBraced(player), "Lowering the shield ends it");
 			helper.succeed();
 		});
 	}

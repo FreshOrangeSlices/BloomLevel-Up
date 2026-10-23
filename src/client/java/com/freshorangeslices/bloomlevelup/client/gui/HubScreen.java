@@ -112,6 +112,13 @@ public final class HubScreen extends Screen {
 	/** Shown until the art exists: the advancements screen's stone, darkened. */
 	private static final Identifier FALLBACK_TILE = Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png");
 	private static final String COPYCAT = BloomLevelUp.key("combat/copycat");
+	/** The gold frame around the window: a nine-slice GUI sprite ({@code textures/gui/sprites/hub/frame.png}), this wide. */
+	private static final Identifier FRAME_SPRITE = BloomLevelUp.id("hub/frame");
+	private static final int FRAME = 6;
+	/** The stats window's column left of the page while it's open (window, 4-pixel gaps either side). */
+	private static final int STATS_COLUMN = STATS_W + 8;
+	private static final int TABS_H = 26;
+	private static final int STRIP_H = 14;
 
 	/** Whether the stats window is folded away (kept while the game runs). */
 	private static boolean statsCollapsed;
@@ -163,14 +170,17 @@ public final class HubScreen extends Screen {
 	@Override
 	protected void init() {
 		builtVersion = ClientBloomState.version();
-		panelW = Math.min(this.width - 12, 600);
-		panelH = Math.min(this.height - 12, 340);
+		// The window hugs its page (and the stats window's column while it's open), framed in gold, with the
+		// game showing around it; on a screen too small for that it fills the screen and the page drags.
+		int column = statsCollapsed ? 0 : STATS_COLUMN;
+		panelW = Math.min(this.width - 2 * (FRAME + 2), 8 + column + BOARD_W);
+		panelH = Math.min(this.height - 2 * (FRAME + 2), TABS_H + BOARD_H + STRIP_H);
 		panelX = (this.width - panelW) / 2;
 		panelY = (this.height - panelH) / 2;
 		canvasX = panelX + 4;
-		canvasY = panelY + 26;
+		canvasY = panelY + TABS_H;
 		canvasW = panelW - 8;
-		canvasH = panelH - 26 - 14;
+		canvasH = panelH - TABS_H - STRIP_H;
 		statsX = canvasX + 4;
 		statsY = canvasY + 4;
 
@@ -214,13 +224,12 @@ public final class HubScreen extends Screen {
 		String selected = ClientBloomState.selectedCategory();
 
 		for (CategoryDefinition category : categories) {
-			Button tab = Button.builder(name(category.translationKey(), category.id()), b -> {
-				ClientBloomState.selectCategory(category.id());
-				spendInvested = false;
-				this.rebuildWidgets();
-			}).bounds(x, panelY + 4, tabW, 18).build();
-			tab.active = !category.id().equals(selected);
-			this.addRenderableWidget(tab);
+			this.addRenderableWidget(new HubTab(x, panelY + 4, tabW, 18, name(category.translationKey(), category.id()),
+					category.id().equals(selected), () -> {
+						ClientBloomState.selectCategory(category.id());
+						spendInvested = false;
+						this.rebuildWidgets();
+					}));
 			x += tabW + gap;
 		}
 	}
@@ -511,7 +520,13 @@ public final class HubScreen extends Screen {
 			index++;
 		}
 
-		// Universal Majors: rows along the bottom.
+		// Universal Majors: rows along the bottom, the priciest (Copycat) in the middle, the rest around it in order.
+		if (universal.size() > 2) {
+			MajorDefinition priciest = universal.stream().max(java.util.Comparator.comparingInt(MajorDefinition::cost)).orElseThrow();
+			universal.remove(priciest);
+			universal.add(Math.min(UNIVERSALS_PER_ROW, universal.size() + 1) / 2, priciest);
+		}
+
 		int top = (int) MAJOR_RY + 14 + UNIVERSALS_GAP;
 
 		for (int k = 0; k < universal.size(); k++) {
@@ -582,24 +597,24 @@ public final class HubScreen extends Screen {
 
 	/** Left edge of the canvas area the stats window doesn't cover. */
 	private int freeLeft() {
-		return statsX + STATS_W + 8;
+		return canvasX + STATS_COLUMN;
 	}
 
 	private int freeRight() {
-		return canvasX + canvasW - 6;
+		return canvasX + canvasW;
 	}
 
-	/** Left edge of the view: right of the stats window, or the canvas edge while it's folded away. */
+	/** Left edge of the view: right of the stats window, or the canvas edge while it's folded away (it then sits on the page). */
 	private int freeLeftNow() {
-		return statsCollapsed ? canvasX + 2 : freeLeft();
+		return statsCollapsed ? canvasX : freeLeft();
 	}
 
 	private int viewTop() {
-		return canvasY + 2;
+		return canvasY;
 	}
 
 	private int viewBottom() {
-		return canvasY + canvasH - 2;
+		return canvasY + canvasH;
 	}
 
 	/** Whether the page is bigger than the view, so dragging shows more of it. */
@@ -688,7 +703,7 @@ public final class HubScreen extends Screen {
 
 	private void drawPanel(GuiGraphicsExtractor g) {
 		g.fill(panelX, panelY, panelX + panelW, panelY + panelH, PANEL);
-		frame(g, panelX, panelY, panelX + panelW, panelY + panelH, PANEL_EDGE);
+		g.blitSprite(RenderPipelines.GUI_TEXTURED, FRAME_SPRITE, panelX - FRAME, panelY - FRAME, panelW + 2 * FRAME, panelH + 2 * FRAME);
 	}
 
 	/**
@@ -1330,6 +1345,11 @@ public final class HubScreen extends Screen {
 		}
 
 		return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+	}
+
+	/** Folds the stats window away or brings it back, as its arrow does (client game test). */
+	public static void foldStatsForTests(boolean folded) {
+		statsCollapsed = folded;
 	}
 
 	/** Moves the page so a Major is in view, as far as the page's edges allow (client game test). */

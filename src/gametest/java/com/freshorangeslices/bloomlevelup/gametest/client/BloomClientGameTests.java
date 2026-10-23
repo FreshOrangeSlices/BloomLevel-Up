@@ -110,20 +110,26 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/charge_attack"));
 		context.getInput().resizeWindow(1920, 1080);
 
-		for (String shot : List.of("combat:3", "combat:4", "armor:3", "utility:3", "misc:3")) {
-			String tab = shot.substring(0, shot.indexOf(':'));
-			int scale = Integer.parseInt(shot.substring(shot.indexOf(':') + 1));
+		// tab:scale[:folded] (folded = the stats window folded away, so the window narrows to the page).
+		for (String shot : List.of("combat:3", "combat:4", "armor:3", "utility:3", "utility:3:folded", "misc:3")) {
+			String[] parts = shot.split(":");
+			String tab = parts[0];
+			int scale = Integer.parseInt(parts[1]);
+			boolean folded = parts.length > 2;
 			context.runOnClient(client -> {
 				ClientBloomState.selectCategory("bloomlevelup:" + tab);
+				HubScreen.foldStatsForTests(folded);
 				client.options.guiScale().set(scale);
 				client.resizeGui();
 			});
 			context.setScreen(HubScreen::new);
 			context.getInput().setCursorPos(2, 2); // no tooltip in the way
 			context.waitTicks(3);
-			context.takeScreenshot("bloom_hub_" + tab + "_s" + scale);
+			context.takeScreenshot("bloom_hub_" + tab + (folded ? "_folded" : "") + "_s" + scale);
 			context.setScreen(() -> null);
 		}
+
+		context.runOnClient(client -> HubScreen.foldStatsForTests(false));
 
 		context.runOnClient(client -> {
 			client.options.guiScale().set(0);

@@ -1,5 +1,5 @@
 """Draws a guide for each Skill Hub tab's background picture: the 432x320 page, with every Major, weapon
-node and the tab's own icon where the hub will draw them. Mirrors HubScreen's layout (keep them in step).
+node where the hub will draw them. Mirrors HubScreen's layout (keep them in step).
 
     python3 docs/art/hub-templates/make_templates.py
 
@@ -18,7 +18,7 @@ LANG = json.loads((ROOT / 'src/main/resources/assets/bloomlevelup/lang/en_us.jso
 OUT = pathlib.Path(__file__).resolve().parent
 
 # HubScreen constants
-CELL, ICON, BIG_ICON, EMBLEM = 28, 22, 32, 64
+CELL, ICON, BIG_ICON, SCATTER_MARGIN = 28, 22, 32, 36
 BOARD_W, BOARD_H = 432, 320
 NODE_GLOW = 3
 WEAPON_RX, WEAPON_RY, MAJOR_RX, MAJOR_RY = 110.0, 72.0, 178.0, 104.0
@@ -29,6 +29,16 @@ SPOKE_FRACTION = 0.55
 def jround(x):
     """Java's Math.round."""
     return math.floor(x + 0.5)
+
+
+def java_hash(text):
+    """Java's String.hashCode, as 32 unsigned bits."""
+    h = 0
+
+    for ch in text:
+        h = (31 * h + ord(ch)) & 0xFFFFFFFF
+
+    return h
 
 
 def qualify(ref):
@@ -60,17 +70,29 @@ def layout(majors):
     nodes, lines = [], []
 
     if not any(m['group'] for m in majors):
-        # HubScreen.ringLayout: big icons in a ring (two rings past 18) around the tab's icon.
-        def ring(members, rx, ry):
-            for k, m in enumerate(members):
-                angle = -math.pi / 2.0 + 2.0 * math.pi * k / len(members)
-                nodes.append(('big', m['id'], jround(math.cos(angle) * rx), jround(math.sin(angle) * ry)))
+        # HubScreen.scatterLayout: a grid with about one cell per Major (spare cells spread out as gaps),
+        # each Major nudged inside its cell by an amount fixed by its id (Java's String.hashCode).
+        count = len(majors)
+        area_w, area_h = BOARD_W - 2 * SCATTER_MARGIN, BOARD_H - 2 * SCATTER_MARGIN
+        columns = max(1, math.ceil(math.sqrt(count * area_w / area_h)))
+        rows = math.ceil(count / columns)
+        cells = columns * rows
+        cell_w, cell_h = area_w / columns, area_h / rows
+        nudge_x, nudge_y = max(0.0, (cell_w - BIG_ICON - 6) / 2.0), max(0.0, (cell_h - BIG_ICON - 6) / 2.0)
 
-        inner = len(majors) // 3 if len(majors) > 18 else 0
-        ring(majors[:inner], 104.0, 70.0)
-        outer = len(majors) - inner
-        ring(majors[inner:], 120.0 if outer <= 8 else 172.0, 84.0 if outer <= 8 else 118.0)
-        nodes.append(('emblem', None, 0, 0))
+        shift = 2 if columns > 2 else 1
+
+        for k, m in enumerate(majors):
+            cell = math.floor((k + 0.5) * cells / count)
+            row = cell // columns
+            column = (cell % columns + row * shift) % columns
+            x = -area_w / 2.0 + (column + 0.5) * cell_w
+            y = -area_h / 2.0 + (row + 0.5) * cell_h
+            h = java_hash(m['id'])
+            x += ((h & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudge_x
+            y += (((h >> 16) & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudge_y
+            nodes.append(('big', m['id'], jround(x), jround(y)))
+
         return nodes, lines
 
     trees, middle, universal, near = {}, [], [], {}
@@ -136,8 +158,6 @@ def layout(majors):
 
 
 def name(kind, ref):
-    if kind == 'emblem':
-        return 'tab icon'
     if kind == 'weapon':
         return ref.rsplit('/', 1)[1].capitalize()
     key = 'bloom.major.' + ref.replace(':', '.').replace('/', '.') + '.name'
@@ -168,8 +188,8 @@ def make(tab):
         font = ImageFont.load_default(size=11) if labels else None
 
         for kind, ref, x, y in nodes:
-            half = {'weapon': 13, 'center': 13, 'big': BIG_ICON // 2, 'emblem': EMBLEM // 2}.get(kind, ICON // 2)
-            colour = {'weapon': (229, 147, 63, 230), 'center': (224, 69, 58, 230), 'emblem': (127, 210, 127, 200)}.get(kind, (239, 230, 210, 200))
+            half = {'weapon': 13, 'center': 13, 'big': BIG_ICON // 2}.get(kind, ICON // 2)
+            colour = {'weapon': (229, 147, 63, 230), 'center': (224, 69, 58, 230)}.get(kind, (239, 230, 210, 200))
             box = [s(px(x) - half), s(py(y) - half), s(px(x) + half) - 1, s(py(y) + half) - 1]
             draw.rectangle(box, outline=colour, width=scale)
 

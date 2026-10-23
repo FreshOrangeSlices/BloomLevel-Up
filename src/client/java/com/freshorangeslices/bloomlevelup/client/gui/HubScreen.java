@@ -55,7 +55,7 @@ import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
  *   (Heavy Hands, Catch!, ...) on the line between the middle and that weapon, and the rest of the universal
  *   Majors in a row along the bottom. Lines run from the middle to each weapon and from each weapon to its
  *   Majors, and turn red when a Major on them is active;</li>
- *   <li>other categories put bigger icons in a ring around the category's own icon, filling the page.</li>
+ *   <li>other categories scatter bigger icons over the whole page.</li>
  * </ul>
  * A compact stats window sits in the top-left corner and folds away to give the Majors more room.
  *
@@ -105,10 +105,10 @@ public final class HubScreen extends Screen {
 	 */
 	public static final int BOARD_W = 432;
 	public static final int BOARD_H = 320;
-	/** Major icons on tabs without weapon trees: bigger (half the 64-pixel art, so they stay sharp) and in a ring. */
+	/** Major icons on tabs without weapon trees: bigger (half the 64-pixel art, so they stay sharp), scattered over the page. */
 	private static final int BIG_ICON = 32;
-	/** The tab's own icon in the middle of that ring. */
-	private static final int EMBLEM = 64;
+	/** Space kept clear along the page's edges by the scattered icons. */
+	private static final int SCATTER_MARGIN = 36;
 	/** Shown until the art exists: the advancements screen's stone, darkened. */
 	private static final Identifier FALLBACK_TILE = Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png");
 	private static final String COPYCAT = BloomLevelUp.key("combat/copycat");
@@ -140,8 +140,6 @@ public final class HubScreen extends Screen {
 	/** The current tab's nodes and lines, in canvas coordinates. */
 	private final List<Node> nodes = new ArrayList<>();
 	private final List<Link> links = new ArrayList<>();
-	/** The tab's own icon, drawn in the middle of a ring layout (null: none, or a tree). */
-	private Identifier emblem;
 	/** Where the canvas origin (the middle of the page) is on screen. */
 	private double panX;
 	private double panY;
@@ -404,13 +402,11 @@ public final class HubScreen extends Screen {
 		links.clear();
 		List<MajorDefinition> majors = ClientBloomState.definitions().majorsIn(category.id());
 
-		emblem = null;
-
 		if (majors.stream().anyMatch(major -> major.group().isPresent())) {
 			treeLayout(majors);
 			centerOnPage();
 		} else {
-			ringLayout(category, majors);
+			scatterLayout(majors);
 		}
 	}
 
@@ -538,22 +534,41 @@ public final class HubScreen extends Screen {
 	}
 
 	/**
-	 * Tabs without weapon trees: big icons in a ring (clockwise from the top, in the Majors' order) around the
-	 * tab's own icon, sized to fill the page. More than 18 Majors split into an inner and an outer ring.
+	 * Tabs without weapon trees: big icons scattered over the whole page. The page is split into a grid with
+	 * about as many cells as Majors (spare cells spread out as gaps), and each Major sits somewhere in its cell,
+	 * nudged by an amount fixed by its id, so the scatter looks loose but never overlaps and stays the same
+	 * every time (the background templates show it).
 	 */
-	private void ringLayout(CategoryDefinition category, List<MajorDefinition> majors) {
+	private void scatterLayout(List<MajorDefinition> majors) {
 		int count = majors.size();
-		int inner = count > 18 ? count / 3 : 0;
-		ring(majors.subList(0, inner), 104.0, 70.0);
-		ring(majors.subList(inner, count), count - inner <= 8 ? 120.0 : 172.0, count - inner <= 8 ? 84.0 : 118.0);
-		Identifier icon = IconTextures.resolve(category.icon());
-		emblem = icon == IconTextures.PLACEHOLDER ? null : icon;
-	}
 
-	private void ring(List<MajorDefinition> majors, double rx, double ry) {
-		for (int k = 0; k < majors.size(); k++) {
-			double angle = -Math.PI / 2.0 + 2.0 * Math.PI * k / majors.size();
-			nodes.add(new Node(majors.get(k), null, (int) Math.round(Math.cos(angle) * rx), (int) Math.round(Math.sin(angle) * ry), false, BIG_ICON));
+		if (count == 0) {
+			return;
+		}
+
+		double areaW = BOARD_W - 2 * SCATTER_MARGIN;
+		double areaH = BOARD_H - 2 * SCATTER_MARGIN;
+		int columns = Math.max(1, (int) Math.ceil(Math.sqrt(count * areaW / areaH)));
+		int rows = (int) Math.ceil(count / (double) columns);
+		int cells = columns * rows;
+		double cellW = areaW / columns;
+		double cellH = areaH / rows;
+		double nudgeX = Math.max(0.0, (cellW - BIG_ICON - 6) / 2.0);
+		double nudgeY = Math.max(0.0, (cellH - BIG_ICON - 6) / 2.0);
+
+		int shift = columns > 2 ? 2 : 1;
+
+		for (int k = 0; k < count; k++) {
+			// Spare cells fall every so often along the rows; shifting each row keeps them from lining up into an empty column.
+			int cell = (int) Math.floor((k + 0.5) * cells / count);
+			int row = cell / columns;
+			int column = (cell % columns + row * shift) % columns;
+			double x = -areaW / 2.0 + (column + 0.5) * cellW;
+			double y = -areaH / 2.0 + (row + 0.5) * cellH;
+			int hash = majors.get(k).id().hashCode();
+			x += ((hash & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudgeX;
+			y += (((hash >>> 16) & 0xFFFF) / 65535.0 * 2.0 - 1.0) * nudgeY;
+			nodes.add(new Node(majors.get(k), null, (int) Math.round(x), (int) Math.round(y), false, BIG_ICON));
 		}
 	}
 
@@ -764,12 +779,6 @@ public final class HubScreen extends Screen {
 					line(g, screenX(link.x0()), screenY(link.y0()), screenX(link.x1()), screenY(link.y1()), lit ? LINE_ON : LINE_OFF);
 				}
 			}
-		}
-
-		// The tab's own icon in the middle of a ring.
-		if (emblem != null) {
-			g.blit(RenderPipelines.GUI_TEXTURED, emblem, screenX(0) - EMBLEM / 2, screenY(0) - EMBLEM / 2, 0.0F, 0.0F, EMBLEM, EMBLEM,
-					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
 		}
 
 		for (int i = 0; i < nodes.size(); i++) {

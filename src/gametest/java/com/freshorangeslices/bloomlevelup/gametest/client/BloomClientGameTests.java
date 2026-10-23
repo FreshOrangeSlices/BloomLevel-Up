@@ -181,7 +181,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.getInput().pressMouse(InputConstants.MOUSE_BUTTON_LEFT);
 		check(context, "Buy point buys an Investment point with 10,000 levels",
 				client -> ClientBloomState.profile().category(combat).investedPoints() == before + 1);
-		BloomLevelUp.LOGGER.info("BLOOMTEST after buying: level {}", context.computeOnClient(client -> client.player.experienceLevel));
+		int levelAfter = context.computeOnClient(client -> client.player.experienceLevel);
+		BloomLevelUp.LOGGER.info("BLOOMTEST after buying: level {}", levelAfter);
 		context.setScreen(() -> null);
 	}
 

@@ -64,6 +64,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 			hubClicks(context);
 			buyPointWithHugeXp(context, singleplayer);
+			braceHud(context, singleplayer);
 
 			// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
 			context.runOnClient(client -> SideButton.openPocket());
@@ -130,6 +131,34 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		}
 
 		context.runOnClient(client -> HubScreen.foldStatsForTests(false));
+
+		context.runOnClient(client -> {
+			client.options.guiScale().set(0);
+			client.resizeGui();
+		});
+		context.getInput().resizeWindow(854, 480);
+		context.waitTicks(2);
+	}
+
+	/** Brace!'s HUD icon at 1920x1080, GUI scale 3: lit while crouched still, then cooling down after standing up. */
+	private void braceHud(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:armor 100000");
+		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:armor/brace");
+		context.waitFor(client -> ClientBloomState.profile().owns(ArmorIds.BRACE));
+		context.getInput().resizeWindow(1920, 1080);
+		context.runOnClient(client -> {
+			client.options.guiScale().set(3);
+			client.resizeGui();
+		});
+
+		context.getInput().holdKey(options -> options.keyShift);
+		context.waitFor(client -> ClientBloomState.profile().counter(ArmorIds.BRACED) != 0);
+		context.waitTicks(2);
+		context.takeScreenshot("bloom_hud_braced");
+		context.getInput().releaseKey(options -> options.keyShift);
+		context.waitFor(client -> ClientBloomState.profile().counter(ArmorIds.BRACED) == 0);
+		context.waitTicks(20);
+		context.takeScreenshot("bloom_hud_brace_cooldown");
 
 		context.runOnClient(client -> {
 			client.options.guiScale().set(0);

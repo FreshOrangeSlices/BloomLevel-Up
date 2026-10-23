@@ -76,6 +76,8 @@ public final class BloomConfig {
 	public int castleOfStoneRestTicks = 80;
 	/** Brace!: how long the player must crouch still (or hold a shield up) before bracing; 1 = at once. */
 	public int braceDelayTicks = 1;
+	/** Brace!: once it ends, how long before it can take hold again (10 seconds). */
+	public int braceCooldownTicks = 200;
 
 	// ---------------------------------------------------------------- Utility tuning
 
@@ -301,6 +303,7 @@ public final class BloomConfig {
 		castleOfStoneTicks = Math.max(0, castleOfStoneTicks);
 		castleOfStoneRestTicks = Math.max(1, castleOfStoneRestTicks);
 		braceDelayTicks = Math.max(1, braceDelayTicks);
+		braceCooldownTicks = Math.max(0, braceCooldownTicks);
 		utilityFishingXp = Math.max(0.0, utilityFishingXp);
 		utilityShearXp = Math.max(0.0, utilityShearXp);
 		veinMiningMaxBlocks = Math.max(1, Math.min(4096, veinMiningMaxBlocks));

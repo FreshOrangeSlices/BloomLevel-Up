@@ -2,10 +2,8 @@ package com.freshorangeslices.bloomlevelup.skill.armor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.ChatFormatting;
@@ -65,8 +63,8 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
  * </ol>
  */
 public final class ArmorSkill {
+	/** Brace!: how long each player has been planted without being braced yet (the braced state itself is a profile counter). */
 	private static final Map<UUID, Integer> BRACE_TICKS = new HashMap<>();
-	private static final Set<UUID> BRACED = new HashSet<>();
 	private static boolean addingShortenedEffect;
 
 	private ArmorSkill() {
@@ -85,14 +83,10 @@ public final class ArmorSkill {
 				context.isFromCommand() || !(entity instanceof ServerPlayer player) || allowEffect(instance, player));
 		ServerTickEvents.END_SERVER_TICK.register(ArmorSkill::tick);
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
-			UUID id = listener.player.getUUID();
-			BRACE_TICKS.remove(id);
-			BRACED.remove(id);
+			BRACE_TICKS.remove(listener.player.getUUID());
+			BloomAttachments.profile(listener.player).setCounter(ArmorIds.BRACED, 0); // logging out isn't moving: no cooldown
 		});
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
-			BRACE_TICKS.clear();
-			BRACED.clear();
-		});
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> BRACE_TICKS.clear());
 	}
 
 	private static ProgressionService service() {
@@ -108,7 +102,7 @@ public final class ArmorSkill {
 	}
 
 	public static boolean isBraced(ServerPlayer player) {
-		return BRACED.contains(player.getUUID());
+		return BloomAttachments.profile(player).counter(ArmorIds.BRACED) != 0;
 	}
 
 	// ------------------------------------------------------------------ before vanilla
@@ -435,8 +429,8 @@ public final class ArmorSkill {
 		profile.setCounter(ArmorIds.LAST_BREATH_ATTEMPTS, 0);
 		profile.setCounter(ArmorIds.LAST_BREATH_WINDOW_START, 0);
 		profile.setCounter(ArmorIds.CASTLE_UNTIL, 0);
+		profile.setCounter(ArmorIds.BRACED, 0);
 		BRACE_TICKS.remove(player.getUUID());
-		BRACED.remove(player.getUUID());
 		BloomSync.changed(player);
 	}
 
@@ -483,27 +477,40 @@ public final class ArmorSkill {
 			UUID id = player.getUUID();
 
 			// Brace!: crouch still or raise a shield, on the ground, and you're braced (at once by default). Only your own
-			// movement ends it (walking, jumping, standing up, lowering the shield); knockback doesn't.
+			// movement ends it (walking, jumping, standing up, lowering the shield); knockback doesn't. Once it ends it
+			// cools down (10 s) before it can take hold again, so hopping while crouched can't re-brace on every landing.
+			// The state lives in synced profile counters so the HUD can show it.
+			boolean braced = profile.counter(ArmorIds.BRACED) != 0;
+
 			if (active(profile, ArmorIds.BRACE)) {
 				Input input = player.getLastClientInput();
 				boolean moving = input.forward() || input.backward() || input.left() || input.right() || input.jump();
 				boolean shieldUp = player.isUsingItem() && player.getUseItem().has(DataComponents.BLOCKS_ATTACKS);
 				boolean planted = !moving && (input.shift() || shieldUp);
+				long now = player.level().getGameTime();
 
-				if (!planted) {
-					if (BRACE_TICKS.remove(id) != null) {
-						BRACED.remove(id);
+				if (braced) {
+					if (!planted) {
+						profile.setCounter(ArmorIds.BRACED, 0);
+						profile.setCounter(ArmorIds.BRACE_READY_AT, now + config.braceCooldownTicks);
+						BloomSync.changed(player);
 					}
-				} else if (!BRACED.contains(id) && player.onGround()) {
-					int ticks = BRACE_TICKS.merge(id, 1, Integer::sum);
-
-					if (ticks >= config.braceDelayTicks) {
-						BRACED.add(id);
-						player.sendSystemMessage(Component.translatable("bloom.armor.braced").withStyle(ChatFormatting.GRAY), true);
+				} else if (planted && player.onGround() && now >= profile.counter(ArmorIds.BRACE_READY_AT)) {
+					if (BRACE_TICKS.merge(id, 1, Integer::sum) >= config.braceDelayTicks) {
+						BRACE_TICKS.remove(id);
+						profile.setCounter(ArmorIds.BRACED, 1);
+						BloomSync.changed(player);
 					}
+				} else {
+					BRACE_TICKS.remove(id);
 				}
-			} else if (BRACE_TICKS.remove(id) != null) {
-				BRACED.remove(id);
+			} else {
+				BRACE_TICKS.remove(id);
+
+				if (braced) { // refunded or switched off while braced
+					profile.setCounter(ArmorIds.BRACED, 0);
+					BloomSync.changed(player);
+				}
 			}
 
 			// Castle of Stone recharges by lying in a bed for a few seconds (no night skip needed).

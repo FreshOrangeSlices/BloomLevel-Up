@@ -32,6 +32,10 @@ public final class ArmorIds {
 	public static final String LAST_BREATH_ATTEMPTS = LAST_BREATH + "#attempts";
 	public static final String CASTLE_SPENT = CASTLE_OF_STONE + "#spent";
 	public static final String CASTLE_UNTIL = CASTLE_OF_STONE + "#until";
+	/** 1 while braced (synced, so the HUD can show it). */
+	public static final String BRACED = BRACE + "#braced";
+	/** Game time from which Brace! can take hold again (it cools down after it ends). */
+	public static final String BRACE_READY_AT = BRACE + "#ready_at";
 
 	private ArmorIds() {
 	}

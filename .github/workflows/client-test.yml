@@ -75,7 +75,7 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_combat_s3 12
       - name: utility hub with the stats folded, GUI scale 3
         run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_utility_folded_s3 12
-      - name: utility hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_utility_s3 12
-      - name: misc hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_misc_s3 12
+      - name: Brace! on the HUD, braced
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hud_braced 12
+      - name: Brace! on the HUD, cooling down
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hud_brace_cooldown 12

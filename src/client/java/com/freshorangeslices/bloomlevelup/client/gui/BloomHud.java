@@ -4,7 +4,9 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,8 +18,10 @@ import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
+import com.freshorangeslices.bloomlevelup.client.IconTextures;
 import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
+import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons;
@@ -30,7 +34,8 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  *   <li>Straight Shot swaps the crosshair for a dot: red while drawing, green once the bow is fully drawn;</li>
  *   <li>a Bloodlust rage bar right of the hotbar (Stored Impact above it): stacks, the damage bonus, and how
  *   long it lasts;</li>
- *   <li>Predator and Combo bars left of the hotbar, the same way.</li>
+ *   <li>Predator and Combo bars left of the hotbar, the same way;</li>
+ *   <li>Brace!'s icon right of those bars: lit while braced, dimmed with the seconds left while it cools down.</li>
  * </ul>
  */
 public final class BloomHud {
@@ -73,6 +78,7 @@ public final class BloomHud {
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("bloodlust"), BloomHud::bloodlust);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("predator_combo"), BloomHud::predatorAndCombo);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("stored_impact"), BloomHud::storedImpact);
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("brace"), BloomHud::brace);
 
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Meter.TYPE, (payload, context) -> {
 			int kind = payload.kind();
@@ -203,6 +209,54 @@ public final class BloomHud {
 			}
 		}
 	}
+
+	// ------------------------------------------------------------------ Brace!
+
+	/**
+	 * Brace!'s icon (the vanilla shield until its art exists) right of the Bloodlust / Stored Impact bars: lit in a gold
+	 * box while braced; while it cools down, greyed with a shade that drains away and the seconds left. Hidden otherwise.
+	 */
+	private static void brace(GuiGraphicsExtractor g, DeltaTracker delta) {
+		Minecraft minecraft = Minecraft.getInstance();
+		com.freshorangeslices.bloomlevelup.player.BloomProfile profile = ClientBloomState.profile();
+
+		if (minecraft.player == null || minecraft.level == null || profile == null || !ClientBloomState.ready()
+				|| !ClientBloomState.service().isMajorActive(profile, ArmorIds.BRACE)) {
+			return;
+		}
+
+		boolean braced = profile.counter(ArmorIds.BRACED) != 0;
+		long ticksLeft = profile.counter(ArmorIds.BRACE_READY_AT) - minecraft.level.getGameTime();
+
+		if (!braced && ticksLeft <= 0) {
+			return;
+		}
+
+		int x = width() / 2 + 91 + 34 + METER_WIDTH + 8;
+		int y = height() - 24;
+		g.fill(x - 2, y - 2, x + 18, y + 18, braced ? 0xFFF2C443 : 0xFF3A3128);
+		g.fill(x - 1, y - 1, x + 17, y + 17, 0xE0141210);
+		Identifier icon = ClientBloomState.definitions().major(ArmorIds.BRACE).map(major -> IconTextures.resolve(major.icon()))
+				.orElse(IconTextures.PLACEHOLDER);
+
+		if (icon.equals(IconTextures.PLACEHOLDER)) {
+			g.item(BRACE_FALLBACK, x, y);
+		} else {
+			g.blit(RenderPipelines.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, 16, 16, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
+		}
+
+		if (!braced) {
+			int total = Math.max(1, ClientBloomState.config() == null ? 200 : ClientBloomState.config().braceCooldownTicks);
+			int shade = (int) Math.ceil(16.0 * Math.min(1.0, ticksLeft / (double) total));
+			g.fill(x, y, x + 16, y + 16, 0x80000000);
+			g.fill(x, y + 16 - shade, x + 16, y + 16, 0x90000000);
+			Component seconds = Component.literal(Long.toString((ticksLeft + 19) / 20));
+			g.text(minecraft.font, seconds, x + 17 - minecraft.font.width(seconds), y + 9, 0xFFFFFFFF);
+		}
+	}
+
+	private static final ItemStack BRACE_FALLBACK = new ItemStack(net.minecraft.world.item.Items.SHIELD);
 
 	// ------------------------------------------------------------------ Bloodlust
 

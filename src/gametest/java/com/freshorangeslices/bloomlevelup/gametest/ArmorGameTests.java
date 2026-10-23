@@ -366,43 +366,56 @@ public class ArmorGameTests {
 		helper.succeed();
 	}
 
-	@GameTest(maxTicks = 60)
-	public void braceTakesHoldAtOnceAndSurvivesKnockback(GameTestHelper helper) {
+	@GameTest(maxTicks = 100)
+	public void braceTakesHoldAtOnceThenCoolsDown(GameTestHelper helper) {
+		var config = BloomServices.config();
+		int cooldown = config.braceCooldownTicks;
+		config.braceCooldownTicks = 30; // 1.5 s instead of 10, to keep the test short
+		int delay = config.braceDelayTicks;
+		// Input(forward, backward, left, right, jump, shift, sprint)
+		Input crouched = new Input(false, false, false, false, false, true, false);
+		Input crouchJump = new Input(false, false, false, false, true, true, false);
+
 		ServerPlayer player = player(helper);
 		grant(player, ArmorIds.BRACE);
 		player.setOnGround(true);
-		// Input(forward, backward, left, right, jump, shift, sprint): crouching, not moving.
-		player.setLastClientInput(new Input(false, false, false, false, false, true, false));
-		int delay = BloomServices.config().braceDelayTicks;
+		player.setLastClientInput(crouched);
+
+		// A second player who raises a shield instead of crouching.
+		ServerPlayer shield = player(helper);
+		grant(shield, ArmorIds.BRACE);
+		shield.setOnGround(true);
+		shield.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.SHIELD));
+		shield.startUsingItem(InteractionHand.OFF_HAND);
 
 		helper.runAfterDelay(delay + 2, () -> {
 			helper.assertTrue(ArmorSkill.isBraced(player), "Crouched still: braced");
 			near(helper, 6.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Braced: Resistance II (-40%)");
+			helper.assertTrue(ArmorSkill.isBraced(shield), "A raised shield braces too");
+			shield.stopUsingItem();
 			player.setOnGround(false); // knocked into the air
 		});
 
 		helper.runAfterDelay(delay + 4, () -> {
 			helper.assertTrue(ArmorSkill.isBraced(player), "Knockback doesn't end Brace!");
+			helper.assertFalse(ArmorSkill.isBraced(shield), "Lowering the shield ends it");
 			player.setOnGround(true);
-			player.setLastClientInput(new Input(true, false, false, false, false, true, false)); // sneak-walks forward
+			player.setLastClientInput(crouchJump); // hops while crouched
 		});
 
 		helper.runAfterDelay(delay + 6, () -> {
-			helper.assertFalse(ArmorSkill.isBraced(player), "Walking ends it");
-			near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Full damage again");
-			// Stands up and raises a shield instead.
-			player.setLastClientInput(new Input(false, false, false, false, false, false, false));
-			player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.SHIELD));
-			player.startUsingItem(InteractionHand.OFF_HAND);
+			helper.assertFalse(ArmorSkill.isBraced(player), "Jumping ends it");
+			player.setLastClientInput(crouched); // lands, still crouched
 		});
 
-		helper.runAfterDelay(delay + 8, () -> {
-			helper.assertTrue(ArmorSkill.isBraced(player), "A raised shield braces too");
-			player.stopUsingItem();
+		helper.runAfterDelay(delay + 12, () -> {
+			helper.assertFalse(ArmorSkill.isBraced(player), "Landing crouched doesn't brace again during the cooldown");
+			near(helper, 10.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Full damage meanwhile");
 		});
 
-		helper.runAfterDelay(delay + 10, () -> {
-			helper.assertFalse(ArmorSkill.isBraced(player), "Lowering the shield ends it");
+		helper.runAfterDelay(delay + 6 + 30 + 4, () -> {
+			config.braceCooldownTicks = cooldown;
+			helper.assertTrue(ArmorSkill.isBraced(player), "After the cooldown, crouching still braces again");
 			helper.succeed();
 		});
 	}

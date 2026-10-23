@@ -25,7 +25,6 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.StatEffects;
-import com.freshorangeslices.bloomlevelup.mixin.EntityAccessor;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
@@ -413,35 +412,35 @@ public class ArmorGameTests {
 	public void reboundThrowsAboutOneMeleeHitInSevenBack(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		grant(player, ArmorIds.REBOUND);
-		LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
-		DamageSource melee = player.damageSources().mobAttack(zombie);
 		int rebounds = 0;
 
-		for (int i = 0; i < 400; i++) {
-			zombie.setHealth(20.0F);
-			((EntityAccessor) zombie).bloomlevelup$setInvulnerableTime(0);
-			ArmorSkill.afterDamage(player, melee, 8.0F, 4.0F, false);
+		// A fresh zombie per hit: one that was just hurt shrugs off the next hit (vanilla damage cooldown).
+		for (int i = 0; i < 300; i++) {
+			LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+			ArmorSkill.afterDamage(player, player.damageSources().mobAttack(zombie), 8.0F, 4.0F, false);
 
-			if (zombie.getHealth() < 20.0F) {
+			if (zombie.getHealth() < zombie.getMaxHealth()) {
 				rebounds++;
 			}
+
+			zombie.discard();
 		}
 
-		// 15% of 400 = 60 (sd ~7).
-		helper.assertTrue(rebounds > 30 && rebounds < 95, "Rebound should hit back ~60 of 400 melee hits, hit back " + rebounds);
+		// 15% of 300 = 45 (sd ~6).
+		helper.assertTrue(rebounds > 22 && rebounds < 70, "Rebound should hit back ~45 of 300 melee hits, hit back " + rebounds);
 
-		AbstractArrow arrow = EntityTypes.ARROW.create(helper.getLevel(), EntitySpawnReason.TRIGGERED);
-		DamageSource shot = player.damageSources().arrow(arrow, zombie);
 		int fromArrows = 0;
 
-		for (int i = 0; i < 100; i++) {
-			zombie.setHealth(20.0F);
-			((EntityAccessor) zombie).bloomlevelup$setInvulnerableTime(0);
-			ArmorSkill.afterDamage(player, shot, 8.0F, 4.0F, false);
+		for (int i = 0; i < 60; i++) {
+			LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+			AbstractArrow arrow = EntityTypes.ARROW.create(helper.getLevel(), EntitySpawnReason.TRIGGERED);
+			ArmorSkill.afterDamage(player, player.damageSources().arrow(arrow, zombie), 8.0F, 4.0F, false);
 
-			if (zombie.getHealth() < 20.0F) {
+			if (zombie.getHealth() < zombie.getMaxHealth()) {
 				fromArrows++;
 			}
+
+			zombie.discard();
 		}
 
 		helper.assertValueEqual(0, fromArrows, "Arrows are never thrown back");

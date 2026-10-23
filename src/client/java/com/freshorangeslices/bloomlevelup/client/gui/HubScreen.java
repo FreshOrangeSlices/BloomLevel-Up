@@ -639,7 +639,11 @@ public final class HubScreen extends Screen {
 			g.enableScissor(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH);
 			tooltip = drawCanvas(g, mouseX, mouseY);
 			g.disableScissor();
-			drawWallet(g);
+			List<FormattedCharSequence> walletTooltip = drawWallet(g, mouseX, mouseY);
+
+			if (walletTooltip != null && tooltip == null) {
+				tooltip = walletTooltip;
+			}
 			List<FormattedCharSequence> statTooltip = drawStatsWindow(g, category, mouseX, mouseY);
 
 			if (statTooltip != null) {
@@ -892,21 +896,24 @@ public final class HubScreen extends Screen {
 		g.fill(mx - 1, my - 1, mx + 1, my + 1, 0xFFFFF1C9);
 	}
 
-	/** The Major Level counter, top right of the canvas. */
-	private void drawWallet(GuiGraphicsExtractor g) {
+	/**
+	 * The Major Level counter, in the strip under the page (left of the build number), so nothing on the page
+	 * sits under it. Returns its tooltip when the mouse is on it.
+	 */
+	private List<FormattedCharSequence> drawWallet(GuiGraphicsExtractor g, int mouseX, int mouseY) {
 		BloomProfile profile = ClientBloomState.profile();
 		Component wallet = Component.translatable("bloom.hub.major_levels", profile.availableMajorLevels(), profile.spentMajorLevels());
-		MutableComponent hint = Component.translatable("bloom.hub.major_hint");
+		Component build = Component.literal("v" + BloomLevelUp.version());
+		int right = panelX + panelW - 6 - this.font.width(build) - 10;
+		int left = right - this.font.width(wallet);
+		int y = panelY + panelH - 11;
+		g.text(this.font, wallet, left, y, TEXT);
 
-		if (canPan()) {
-			hint.append(" · ").append(Component.translatable("bloom.hub.drag"));
+		if (mouseX >= left && mouseX < right && mouseY >= y - 2 && mouseY < y + 10) {
+			return List.of(Component.translatable("bloom.hub.major_hint").withStyle(ChatFormatting.GRAY).getVisualOrderText());
 		}
 
-		int width = Math.max(this.font.width(wallet), this.font.width(hint));
-		int right = canvasX + canvasW - 4;
-		g.fill(right - width - 6, canvasY + 2, right + 2, canvasY + 24, 0xA0000000);
-		g.text(this.font, wallet, right - this.font.width(wallet), canvasY + 4, TEXT);
-		g.text(this.font, hint, right - this.font.width(hint), canvasY + 14, MUTED);
+		return null;
 	}
 
 	/** The stats window's frame and text (its buttons draw themselves). Returns a tooltip for the row under the mouse. */
@@ -1180,6 +1187,11 @@ public final class HubScreen extends Screen {
 
 		if (result == null || System.currentTimeMillis() - ClientBloomState.lastResultAt() > RESULT_SHOW_MS
 				|| "SUCCESS".equals(result.outcome())) {
+			// Nothing to report: say the page can be dragged, if it's bigger than the view.
+			if (ClientBloomState.ready() && currentCategory() != null && canPan()) {
+				g.text(this.font, Component.translatable("bloom.hub.drag"), panelX + 6, panelY + panelH - 11, MUTED);
+			}
+
 			return;
 		}
 

@@ -144,6 +144,13 @@ final class CombatSheet {
 
 		onHit(player, weapon, sheet, families, config, profile, service);
 		swordGauge(level, sheet, mob, swing, gaugeDamage);
+
+		// What the coloured "+x" mean, once, under everything in the summary.
+		for (Kind kind : Kind.values()) {
+			if (sheet.summaryKeys.contains(kind.key)) {
+				sheet.summaryNoteLabel(Component.translatable("bloom.sheet.combat.extra." + kind.key).withStyle(style -> style.withColor(kind.color)));
+			}
+		}
 	}
 
 	/** The switches, only for effects this player owns (and that work with this weapon). */
@@ -446,11 +453,11 @@ final class CombatSheet {
 		return out;
 	}
 
-	/** Under the summary: what each coloured "+x" means (only the kinds this weapon has). */
+	/** Notes which coloured "+x" the summary uses, to explain each once at the end. */
 	private static void extrasKey(Sheet sheet, double[] extras) {
 		for (Kind kind : Kind.values()) {
 			if (extras[kind.ordinal()] > 0.005) {
-				sheet.summaryNoteLabel(Component.translatable("bloom.sheet.combat.extra." + kind.key).withStyle(style -> style.withColor(kind.color)));
+				sheet.summaryKeys.add(kind.key);
 			}
 		}
 	}

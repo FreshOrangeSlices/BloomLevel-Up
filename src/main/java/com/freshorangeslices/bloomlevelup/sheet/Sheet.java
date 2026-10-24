@@ -42,6 +42,8 @@ final class Sheet {
 	ItemStack gauge = ItemStack.EMPTY;
 	Component gaugeCaption = Component.empty();
 	Component gaugeBadge = Component.empty();
+	/** Keys a sheet wants explained once under its summary (the coloured "+x" mob kinds). */
+	final java.util.Set<String> summaryKeys = new java.util.LinkedHashSet<>();
 
 	Sheet(List<String> switches, int target) {
 		for (String entry : switches) {

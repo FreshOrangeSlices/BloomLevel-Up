@@ -126,6 +126,8 @@ public final class HubScreen extends Screen {
 	private static final Identifier RESET_LEVELS_ICON = BloomLevelUp.id("textures/gui/hub/reset_levels.png");
 	private static final Identifier RESET_MAJORS_ICON = BloomLevelUp.id("textures/gui/hub/reset_majors.png");
 	private static final int STRIP_H = 20;
+	/** Where the strip's status text starts: right of the two build helmets in its left corner. */
+	private static final int STRIP_TEXT_X = 4 + 2 * 20 + 4 + 6;
 
 	/** Whether the stats window is folded away (kept while the game runs). */
 	private static boolean statsCollapsed;
@@ -329,7 +331,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/**
-	 * The two builds, in the middle of the strip under the page: Build 1 (an iron helmet) and Build 2 (a golden
+	 * The two builds, in the left corner of the strip under the page: Build 1 (an iron helmet) and Build 2 (a golden
 	 * helmet). The one in use is lit; clicking the other switches (once a tab has reached 100, then a 2-minute wait).
 	 */
 	private void addBuildButtons() {
@@ -340,7 +342,7 @@ public final class HubScreen extends Screen {
 		buildReadyAt = ClientBloomState.config().waitsEnabled ? profile.counter(ProgressionService.BUILD_SWITCH_KEY) : 0L;
 		buildSecondsShown = buildReadyAt > now ? (buildReadyAt - now + 19) / 20 : 0L;
 		int gap = 4;
-		int x = panelX + (panelW - 2 * TAB_H - gap) / 2;
+		int x = panelX + 4;
 		int y = panelY + panelH - STRIP_H;
 
 		for (int build = 0; build < 2; build++) {
@@ -1445,7 +1447,7 @@ public final class HubScreen extends Screen {
 				|| "SUCCESS".equals(result.outcome())) {
 			// Nothing to report: say the page can be dragged, if it's bigger than the view.
 			if (ClientBloomState.ready() && currentCategory() != null && canPan()) {
-				g.text(this.font, Component.translatable("bloom.hub.drag"), panelX + 6, panelY + panelH - 14, MUTED);
+				g.text(this.font, Component.translatable("bloom.hub.drag"), panelX + STRIP_TEXT_X, panelY + panelH - 14, MUTED);
 			}
 
 			return;
@@ -1457,7 +1459,7 @@ public final class HubScreen extends Screen {
 			message.append(" ").append(joinNames(result.involved()));
 		}
 
-		g.text(this.font, message, panelX + 6, panelY + panelH - 14, BAD);
+		g.text(this.font, message, panelX + STRIP_TEXT_X, panelY + panelH - 14, BAD);
 	}
 
 	// ------------------------------------------------------------------ input

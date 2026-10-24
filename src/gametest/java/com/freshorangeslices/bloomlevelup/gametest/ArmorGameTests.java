@@ -351,6 +351,27 @@ public class ArmorGameTests {
 	}
 
 	@GameTest
+	public void proteinKeepsItsMealsWhileTheOtherBuildOwnsIt(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.PROTEIN);
+		BloomProfile profile = BloomAttachments.profile(player);
+		profile.setCounter(ArmorIds.PROTEIN_MEALS, 40);
+		ProgressionService service = BloomServices.progression();
+		long now = helper.getLevel().getGameTime();
+
+		helper.assertTrue(service.switchBuild(profile, now).ok(), "Switch to build 2 (a copy)");
+		helper.assertTrue(service.resetCategoryMajors(profile, "bloomlevelup:armor", now).ok(), "Build 2 drops its Armor Majors");
+		StatEffects.refresh(player);
+		helper.assertValueEqual(40L, profile.counter(ArmorIds.PROTEIN_MEALS), "Build 1 still owns Protein!, so the meals stay");
+		near(helper, 20.0, player.getMaxHealth(), "...but only the build in use gets its heart");
+
+		helper.assertTrue(service.switchBuild(profile, now + 100000).ok(), "Back to build 1");
+		StatEffects.refresh(player);
+		near(helper, 22.0, player.getMaxHealth(), "Build 1 has its +1 heart again");
+		helper.succeed();
+	}
+
+	@GameTest
 	public void parkourIgnoresAboutAThirdOfFalls(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		grant(player, ArmorIds.PARKOUR);

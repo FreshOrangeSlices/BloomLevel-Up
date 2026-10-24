@@ -345,7 +345,20 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Category tabs | Small gold plates with an item instead of a name (Utility a diamond pickaxe, Combat a diamond sword, Armor a diamond chestplate, Misc a Regeneration potion), centred in the tab row; the name shows on hover | `HubScreen.tabItem`, `HubTab` |
 | Bloom+ button | Top left of the tab row, the red arrows (`gui/hub/reset_levels.png`): the existing Bloom+ reset (every category to level 0, natural stat points back, every Major refunded; invested points and unlocks kept; +1 bonus Major Level per 50 levels reached in a category, up to 2 each and 6 in all). The tooltip and the confirm screen say what it would pay right now | `HubScreen.addResetButtons`, action `BLOOM_RESET` |
 | Reset Majors button | Top right, the white arrows (`gui/hub/reset_majors.png`): refunds every Major in the open tab (and anything elsewhere that needs one of them, like Rainbow after Crossbow Infinity) and pays nothing extra. Then that tab can't be reset again for 20 minutes of game time (`majorResetCooldownTicks` 24000, a profile counter per category, so it survives relogging). Right-click refunds of single Majors stay as they were | `ProgressionService.resetCategoryMajors`, action `RESET_MAJORS` |
-| Taking stat points back | The minus buttons only show once the category is level 100, and the server refuses a refund below that (`statRefundAtCapOnly`, on by default), so early points are a commitment. Bloom+ drops the level to 0, so they disappear again until the next 100 | `ProgressionService.allocate`, `canRefundStats` |
+| Taking stat points back | The minus buttons only show once the category is level 100, and the server refuses a refund below that (`statRefundAtCapOnly`, on by default), so early points are a commitment. Bloom+ drops the level to 0, so they disappear again until the next 100. XP-bought points can always be taken back (round 7b) | `ProgressionService.allocate`, `canRefundStats` |
+
+## Round 7b: resets and builds (2026-10-24)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Single refunds | Gone for players: right-click on an owned Major does nothing (round 8 turns it into a details window), and `/bloom refund` answers "switched off" (`allowMajorRefund` false). The tab's white reset button is the way to refund. Admins: `/bloom admin refund <players> <major>` | `BloomSync.handle`, `BloomCommands` |
+| Swaps | Clashing Majors (all in Combat today) can still be swapped, but only if the new one can be paid for up front; the swapped-out one comes back in full afterwards (so a clever order can win levels back, accepted) | `ProgressionService.purchase` |
+| Red button (Bloom+) | Per tab now: that category to level 0, its natural points back, its Majors refunded in both builds (with anything elsewhere that needs them). +1 bonus Major Level per 50 levels, up to 2 per tab and 8 in all (`prestigeTotalCap` 6 → 8, moved in old config files). Any time, no wait, asks twice. `/bloom bloomreset <category> confirm` does the same | `bloomResetCategory`, `HubScreen.confirmBloom` |
+| White button | Unchanged: one 20-minute game-time wait per tab, shared by both builds; resets the build in use | `resetCategoryMajors` |
+| Waits on/off | `/bloom admin waits on\|off` switches both waits (white button, build switch) for the server; saved to the config and sent to everyone | `waitsEnabled` |
+| Buy point | Shift-click buys as many points as your XP pays for, up to 10 | `HubScreen.addStatsWindow` |
+| Builds (presets) | Two builds; the second unlocks the first time any tab reaches 100 and starts as a copy of the first. Each holds its own Majors (with on/off and Copycat's pick), natural stat points and stat switches, from the same Major Level and stat point pools. Shared: levels, XP-bought points, each Major's own progress (Protein! meals are only cleared when neither build owns it). Switching waits 2 minutes of game time (`buildSwitchCooldownTicks`). Bloom+ clears that tab's part of both builds. Hub: an iron helmet (Build 1) and a golden helmet (Build 2) in the middle of the strip under the page, the one in use lit; `/bloom build` too | `SavedBuild`, `switchBuild`, `HubScreen.addBuildButtons` |
+| Strip under the page | 20 pixels tall now (the build helmets) | `HubScreen.STRIP_H` |
 
 ## Build numbers
 

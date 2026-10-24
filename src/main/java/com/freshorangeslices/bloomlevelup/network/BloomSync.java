@@ -95,6 +95,13 @@ public final class BloomSync {
 		ServerTickEvents.END_SERVER_TICK.register(BloomSync::tick);
 	}
 
+	/** Sends the definitions and config to everyone again (after an admin changes the config in game). */
+	public static void resendDefinitions(MinecraftServer server) {
+		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+			sendDefinitions(player);
+		}
+	}
+
 	/** Marks a player's profile as changed: effects are re-applied and a snapshot is sent at the end of this tick. */
 	public static void changed(ServerPlayer player) {
 		DIRTY.add(player.getUUID());
@@ -177,19 +184,22 @@ public final class BloomSync {
 				case TOGGLE_INVESTED -> service.toggleInvested(profile, target);
 				case BUY_MAJOR -> service.purchaseMajor(profile, target);
 				case BUY_MAJOR_SWAP -> service.purchaseMajorWithSwap(profile, target);
-				case REFUND_MAJOR -> service.refundMajor(profile, target);
+				case REFUND_MAJOR -> BloomServices.config().allowMajorRefund ? service.refundMajor(profile, target)
+						: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED);
 				case TOGGLE_MAJOR -> service.toggleMajor(profile, target);
 				case FUND -> service.fundWithVanillaXp(profile, target, amount, new PlayerXpWallet(player));
 				case INVEST -> service.invest(profile, target, amount, new PlayerXpWallet(player));
 				case SET_COPY_SOURCE -> service.selectCopySource(profile, CombatIds.COPYCAT, target);
-				case REFUND_MAJOR_ALL -> service.refundMajorWithDependents(profile, target);
+				case REFUND_MAJOR_ALL -> BloomServices.config().allowMajorRefund ? service.refundMajorWithDependents(profile, target)
+						: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED);
 				case RESET_MAJORS -> service.resetCategoryMajors(profile, target, player.level().getGameTime());
 				case BLOOM_RESET -> {
-					com.freshorangeslices.bloomlevelup.progression.BloomResetResult reset = service.bloomReset(profile);
+					com.freshorangeslices.bloomlevelup.progression.BloomResetResult reset = service.bloomResetCategory(profile, target);
 					player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("bloom.command.reset.done", reset.bloomCount(),
 							reset.majorLevelsRefunded(), reset.totalPrestigeAwarded()).withStyle(net.minecraft.ChatFormatting.LIGHT_PURPLE));
 					yield ActionResult.success();
 				}
+				case SWITCH_BUILD -> service.switchBuild(profile, player.level().getGameTime());
 			};
 		} catch (RuntimeException e) {
 			BloomLevelUp.LOGGER.error("Bloom request {} from {} failed", request, player.getName().getString(), e);

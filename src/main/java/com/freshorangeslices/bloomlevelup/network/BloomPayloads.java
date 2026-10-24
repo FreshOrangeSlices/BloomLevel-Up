@@ -81,8 +81,10 @@ public final class BloomPayloads {
 		REFUND_MAJOR_ALL,
 		/** A tab's reset button: refunds every Major in the category {@code target} (cools down for 20 minutes). */
 		RESET_MAJORS,
-		/** The Bloom+ button: every category back to level 0 for prestige Major Levels (after the confirm prompt). */
-		BLOOM_RESET
+		/** The Bloom+ button: the category {@code target} back to level 0 for prestige Major Levels (after two prompts). */
+		BLOOM_RESET,
+		/** Switches to the other build (the second preset). */
+		SWITCH_BUILD
 	}
 
 	/** Client → server: one request from the hub. The server never trusts it beyond "the player asked for this". */

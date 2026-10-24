@@ -2,6 +2,7 @@ package com.freshorangeslices.bloomlevelup.player;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The single, versioned source of truth for one player's build. Lives on the server as a persistent,
@@ -20,6 +21,10 @@ public final class BloomProfile {
 	private final Map<String, OwnedMajor> majors;
 	private int bloomCount;
 	private final Map<String, Long> counters;
+	/** Which of the two builds is in use (0 or 1); the other one waits in {@link #spareBuild}. */
+	private int activeBuild;
+	/** The build not in use, once there has been a switch (until then the second build starts as a copy). */
+	private SavedBuild spareBuild;
 
 	public BloomProfile() {
 		this(CURRENT_DATA_VERSION, Map.of(), Map.of(), 0, Map.of());
@@ -27,12 +32,40 @@ public final class BloomProfile {
 
 	public BloomProfile(int dataVersion, Map<String, CategoryProgress> categories, Map<String, OwnedMajor> majors,
 			int bloomCount, Map<String, Long> counters) {
+		this(dataVersion, categories, majors, bloomCount, counters, 0, Optional.empty());
+	}
+
+	public BloomProfile(int dataVersion, Map<String, CategoryProgress> categories, Map<String, OwnedMajor> majors,
+			int bloomCount, Map<String, Long> counters, int activeBuild, Optional<SavedBuild> spareBuild) {
 		this.dataVersion = dataVersion;
 		this.categories = new LinkedHashMap<>();
 		categories.forEach((id, progress) -> this.categories.put(id, progress.copy()));
 		this.majors = new LinkedHashMap<>(majors);
 		this.bloomCount = Math.max(0, bloomCount);
 		this.counters = new LinkedHashMap<>(counters);
+		this.activeBuild = activeBuild == 1 ? 1 : 0;
+		this.spareBuild = spareBuild.map(SavedBuild::copy).orElse(null);
+	}
+
+	public int activeBuild() {
+		return activeBuild;
+	}
+
+	public void setActiveBuild(int activeBuild) {
+		this.activeBuild = activeBuild == 1 ? 1 : 0;
+	}
+
+	public Optional<SavedBuild> spareBuild() {
+		return Optional.ofNullable(spareBuild);
+	}
+
+	public void setSpareBuild(SavedBuild spareBuild) {
+		this.spareBuild = spareBuild;
+	}
+
+	/** Owned in either build (the one in use or the spare one). */
+	public boolean ownsInAnyBuild(String majorId) {
+		return owns(majorId) || (spareBuild != null && spareBuild.owns(majorId));
 	}
 
 	public int dataVersion() {
@@ -136,6 +169,6 @@ public final class BloomProfile {
 	}
 
 	public BloomProfile copy() {
-		return new BloomProfile(dataVersion, categories, majors, bloomCount, counters);
+		return new BloomProfile(dataVersion, categories, majors, bloomCount, counters, activeBuild, spareBuild());
 	}
 }

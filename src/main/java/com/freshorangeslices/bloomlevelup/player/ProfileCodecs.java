@@ -41,12 +41,20 @@ public final class ProfileCodecs {
 			Codec.STRING.optionalFieldOf("option", "").forGetter(OwnedMajor::option)
 	).apply(i, OwnedMajor::new));
 
+	public static final Codec<SavedBuild> SAVED_BUILD = RecordCodecBuilder.create(i -> i.group(
+			Codec.unboundedMap(Codec.STRING, OWNED_MAJOR).optionalFieldOf("majors", Map.of()).forGetter(SavedBuild::majors),
+			Codec.unboundedMap(Codec.STRING, INT_MAP).optionalFieldOf("natural", Map.of()).forGetter(SavedBuild::natural),
+			Codec.unboundedMap(Codec.STRING, STRING_SET).optionalFieldOf("disabled_stats", Map.of()).forGetter(SavedBuild::disabledStats)
+	).apply(i, SavedBuild::new));
+
 	public static final Codec<BloomProfile> PROFILE = RecordCodecBuilder.<BloomProfile>create(i -> i.group(
 			Codec.INT.optionalFieldOf("data_version", BloomProfile.CURRENT_DATA_VERSION).forGetter(BloomProfile::dataVersion),
 			Codec.unboundedMap(Codec.STRING, CATEGORY).optionalFieldOf("categories", Map.of()).forGetter(BloomProfile::categories),
 			Codec.unboundedMap(Codec.STRING, OWNED_MAJOR).optionalFieldOf("majors", Map.of()).forGetter(BloomProfile::majors),
 			Codec.INT.optionalFieldOf("bloom_count", 0).forGetter(BloomProfile::bloomCount),
-			Codec.unboundedMap(Codec.STRING, Codec.LONG).optionalFieldOf("counters", Map.of()).forGetter(BloomProfile::counters)
+			Codec.unboundedMap(Codec.STRING, Codec.LONG).optionalFieldOf("counters", Map.of()).forGetter(BloomProfile::counters),
+			Codec.INT.optionalFieldOf("active_build", 0).forGetter(BloomProfile::activeBuild),
+			SAVED_BUILD.optionalFieldOf("spare_build").forGetter(BloomProfile::spareBuild)
 	).apply(i, BloomProfile::new)).xmap(ProfileCodecs::migrate, profile -> profile);
 
 	/** Upgrades a freshly decoded profile to {@link BloomProfile#CURRENT_DATA_VERSION}. */

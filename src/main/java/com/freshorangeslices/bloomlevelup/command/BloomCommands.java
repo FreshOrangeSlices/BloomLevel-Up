@@ -101,9 +101,11 @@ public final class BloomCommands {
 										.executes(ctx -> act(ctx, (svc, p) -> svc.purchaseMajorWithSwap(p, id(ctx, "major")))))))
 				.then(literal("refund")
 						.then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
-								.executes(ctx -> act(ctx, (svc, p) -> svc.refundMajor(p, id(ctx, "major"))))
+								.executes(ctx -> act(ctx, (svc, p) -> singleRefundsAllowed() ? svc.refundMajor(p, id(ctx, "major"))
+										: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED)))
 								.then(literal("all")
-										.executes(ctx -> act(ctx, (svc, p) -> svc.refundMajorWithDependents(p, id(ctx, "major")))))))
+										.executes(ctx -> act(ctx, (svc, p) -> singleRefundsAllowed() ? svc.refundMajorWithDependents(p, id(ctx, "major"))
+												: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED)))))))
 				.then(literal("fund")
 						.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
 								.then(argument("points", IntegerArgumentType.integer(1))
@@ -135,9 +137,20 @@ public final class BloomCommands {
 							ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.reset.confirm_hint").withStyle(ChatFormatting.YELLOW), false);
 							return 0;
 						})
-						.then(literal("confirm").executes(ctx -> bloomReset(ctx.getSource(), ctx.getSource().getPlayerOrException()))))
+						.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
+								.then(literal("confirm").executes(ctx -> bloomReset(ctx.getSource(), ctx.getSource().getPlayerOrException(),
+										id(ctx, "category"))))))
+				.then(literal("build")
+						.executes(ctx -> act(ctx, (svc, p) -> svc.switchBuild(p, ctx.getSource().getLevel().getGameTime()))))
 				.then(literal("admin")
 						.requires(PermissionPredicates.require(BloomLevelUp.id("command/admin"), PermissionLevel.GAMEMASTERS))
+						.then(literal("refund")
+								.then(argument("players", EntityArgument.players())
+										.then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
+												.executes(BloomCommands::adminRefund))))
+						.then(literal("waits")
+								.then(literal("on").executes(ctx -> setWaits(ctx.getSource(), true)))
+								.then(literal("off").executes(ctx -> setWaits(ctx.getSource(), false))))
 						.then(literal("xp")
 								.then(argument("players", EntityArgument.players())
 										.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
@@ -206,8 +219,38 @@ public final class BloomCommands {
 		return count;
 	}
 
-	private static int bloomReset(CommandSourceStack source, ServerPlayer player) {
-		BloomResetResult result = BloomServices.progression().bloomReset(BloomAttachments.profile(player));
+	private static boolean singleRefundsAllowed() {
+		return BloomServices.config().allowMajorRefund;
+	}
+
+	/** Admins can still refund a single Major (with whatever needs it) to fix a profile. */
+	private static int adminRefund(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+		String major = id(ctx, "major");
+		int done = 0;
+
+		for (ServerPlayer player : EntityArgument.getPlayers(ctx, "players")) {
+			if (BloomServices.progression().refundMajorWithDependents(BloomAttachments.profile(player), major).ok()) {
+				BloomSync.changed(player);
+				done++;
+			}
+		}
+
+		int count = done;
+		ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.admin.refund", major, count), true);
+		return count;
+	}
+
+	/** Switches the waits (the tab reset button's 20 minutes, a build switch's 2 minutes) on or off for the server. */
+	private static int setWaits(CommandSourceStack source, boolean on) {
+		BloomServices.config().waitsEnabled = on;
+		com.freshorangeslices.bloomlevelup.config.ConfigLoader.save(BloomServices.config());
+		BloomSync.resendDefinitions(source.getServer());
+		source.sendSuccess(() -> Component.translatable(on ? "bloom.command.admin.waits.on" : "bloom.command.admin.waits.off"), true);
+		return 1;
+	}
+
+	private static int bloomReset(CommandSourceStack source, ServerPlayer player, String categoryId) {
+		BloomResetResult result = BloomServices.progression().bloomResetCategory(BloomAttachments.profile(player), categoryId);
 		BloomSync.changed(player);
 		source.sendSuccess(() -> Component.translatable("bloom.command.reset.done",
 				result.bloomCount(), result.majorLevelsRefunded(), result.totalPrestigeAwarded()).withStyle(ChatFormatting.LIGHT_PURPLE), false);

@@ -54,16 +54,21 @@ Open your inventory and click the button right of the recipe book, or bind **Ope
 Controls. In the hub:
 
 - Category tabs along the top (pickaxe, sword, chestplate, potion). Top left, the red **Bloom+** button:
-  every category back to level 0 and every Major refunded, for +1 bonus Major Level per 50 levels in a
-  category. Top right, the white **reset Majors** button: refunds every Major in this tab, then waits
-  20 minutes. Both ask first. **Drag** the page (or scroll) to look around. Combat is a tree: Master
+  this tab back to level 0 and its Majors refunded (in both builds), for +1 bonus Major Level per 50
+  levels (up to 2 per tab); it asks twice. Top right, the white **reset Majors** button: refunds every
+  Major in this tab, then that tab waits 20 minutes. That button is the only way to refund Majors;
+  clashing Combat Majors can still be swapped if you can pay for the new one first.
+- **Builds**: the iron and golden helmets under the page are Build 1 and Build 2. The second unlocks once
+  any tab reaches 100 (it starts as a copy). Each build has its own Majors and normal stat points from the
+  same pool; XP-bought points, levels and each Major's progress are shared. Switching waits 2 minutes.
+- **Drag** the page (or scroll) to look around. Combat is a tree: Master
   of Arms in the middle, each weapon around it with its Majors, the universal Majors along the bottom;
   lines turn red when a Major on them is on.
 - The stats window (top left; the arrow folds it away): **+** to spend points (shift = 10); **−** to
-  take them back shows up once the category is level 100 (and goes again after Bloom+); **click a stat's icon** to switch it off or on without losing points (corner dot: green
+  take normal points back shows up once the category is level 100 (and goes again after Bloom+), and
+  is always there for XP-bought points; **shift-click Buy point** for up to 10 at once; **click a stat's icon** to switch it off or on without losing points (corner dot: green
   on, red off).
-- Majors: click to buy, click an owned one to switch it on/off, right-click to refund (anything that
-  depends on it is listed and refunded with it after you confirm). Glowing = on, red dot = owned but
+- Majors: click to buy, click an owned one to switch it on/off. Glowing = on, red dot = owned but
   off, dark = not owned. Hover for details.
 - After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
   icon switches only a stat's invested points. The Armor tab shows your real armor total.
@@ -97,7 +102,10 @@ Admin commands are still there for testing:
 | `/bloom toggle stat <stat>` · `/bloom toggle major <major>` | Switch an effect on/off without losing it |
 | `/bloom fund <category> <xp>` | Spend vanilla XP to level a category below 100 |
 | `/bloom invest <category> <count>` | Buy permanent post-100 points (after mastering a category) |
-| `/bloom bloomreset confirm` | Bloom+ reset |
+| `/bloom bloomreset <category> confirm` | Bloom+ reset of one category |
+| `/bloom build` | Switch builds |
+| `/bloom admin waits on\|off` | Switch the reset and build-switch waits on or off for the server |
+| `/bloom admin refund <players> <major>` | Refund a single Major (and what needs it) to fix a profile |
 | `/bloom pocket` · `/bloom runes` | Open Hoarder's Pocket / Rune Embedding |
 | `/bloom admin xp <players> <category> <amount>` · `/bloom admin definitions` | Ops: grant XP, show loaded data + warnings |
 

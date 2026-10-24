@@ -73,7 +73,8 @@ public final class StatEffects {
 		MiscSkill.refresh(player);
 
 		// Protein!: the meal count belongs to owning the Major; refunding it (or Bloom+) starts over.
-		if (!profile.owns(ArmorIds.PROTEIN) && profile.counter(ArmorIds.PROTEIN_MEALS) != 0) {
+		// Protein!'s meals are kept while either build owns it (switching builds isn't a refund).
+		if (!profile.ownsInAnyBuild(ArmorIds.PROTEIN) && profile.counter(ArmorIds.PROTEIN_MEALS) != 0) {
 			profile.setCounter(ArmorIds.PROTEIN_MEALS, 0);
 		}
 

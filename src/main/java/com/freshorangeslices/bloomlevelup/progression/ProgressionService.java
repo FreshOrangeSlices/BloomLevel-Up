@@ -230,8 +230,9 @@ public final class ProgressionService {
 				return ActionResult.of(Outcome.REFUND_DISABLED);
 			}
 
-			// Early on, where points go is a commitment; once the category is mastered they can be moved around.
-			if (config.statRefundAtCapOnly && progress.level() < config.levelCap) {
+			// Early on, where natural points go is a commitment; once the category is at 100 they can be moved around.
+			// XP-invested points can always be moved.
+			if (pool == Pool.NATURAL && config.statRefundAtCapOnly && progress.level() < config.levelCap) {
 				return ActionResult.of(Outcome.STAT_REFUND_LOCKED);
 			}
 
@@ -396,7 +397,12 @@ public final class ProgressionService {
 	 * repeated until nothing else falls. Sorted; leaves out {@code removing} itself.
 	 */
 	public List<String> refundCascade(BloomProfile profile, Set<String> removing, String adding) {
-		Set<String> before = new HashSet<>(profile.majors().keySet());
+		return refundCascade(profile.majors().keySet(), removing, adding);
+	}
+
+	/** {@link #refundCascade(BloomProfile, Set, String)} for any set of owned Majors (the spare build's, say). */
+	public List<String> refundCascade(Set<String> ownedIds, Set<String> removing, String adding) {
+		Set<String> before = new HashSet<>(ownedIds);
 
 		if (adding != null) {
 			before.add(adding);
@@ -468,7 +474,6 @@ public final class ProgressionService {
 		}
 
 		List<String> conflicts = ownedConflicts(profile, major);
-		int refund = 0;
 
 		if (!conflicts.isEmpty()) {
 			if (!swap) {
@@ -478,13 +483,10 @@ public final class ProgressionService {
 			// Whatever depends on the swapped-out Majors goes with them.
 			conflicts = new ArrayList<>(conflicts);
 			conflicts.addAll(refundCascade(profile, Set.copyOf(conflicts), major.id()));
-
-			for (String conflict : conflicts) {
-				refund += profile.majors().get(conflict).paid();
-			}
 		}
 
-		if (major.cost() > profile.availableMajorLevels() + refund) {
+		// A swap trades clashing Majors, but only if the new one can be paid for up front (the refund comes back after).
+		if (major.cost() > profile.availableMajorLevels()) {
 			return ActionResult.of(Outcome.NOT_ENOUGH_MAJOR_LEVELS);
 		}
 
@@ -531,6 +533,39 @@ public final class ProgressionService {
 		return new ActionResult(Outcome.SUCCESS, dependents);
 	}
 
+	// ------------------------------------------------------------------ builds (the second preset)
+
+	/** Profile counter holding the game time from which the player can switch builds again. */
+	public static final String BUILD_SWITCH_KEY = "bloomlevelup:build#switch_ready_at";
+
+	/** The second build unlocks the first time any category reaches the level cap, and stays unlocked. */
+	public boolean buildsUnlocked(BloomProfile profile) {
+		return profile.anyMastered();
+	}
+
+	/**
+	 * Switches to the other build: Majors (with their switches and options), natural stat points and stat switches
+	 * swap; XP-invested points, levels and every Major's own progress (counters) stay. The first switch starts the
+	 * second build as a copy of the first. Then a wait ({@code buildSwitchCooldownTicks}) before the next.
+	 */
+	public ActionResult switchBuild(BloomProfile profile, long now) {
+		if (!buildsUnlocked(profile)) {
+			return ActionResult.of(Outcome.BUILD_LOCKED);
+		}
+
+		if (config.waitsEnabled && now < profile.counter(BUILD_SWITCH_KEY)) {
+			return ActionResult.of(Outcome.COOLDOWN);
+		}
+
+		com.freshorangeslices.bloomlevelup.player.SavedBuild current = com.freshorangeslices.bloomlevelup.player.SavedBuild.capture(profile);
+		com.freshorangeslices.bloomlevelup.player.SavedBuild next = profile.spareBuild().orElse(current).copy();
+		next.applyTo(profile);
+		profile.setSpareBuild(current.copy());
+		profile.setActiveBuild(1 - profile.activeBuild());
+		profile.setCounter(BUILD_SWITCH_KEY, now + config.buildSwitchCooldownTicks);
+		return ActionResult.success();
+	}
+
 	/** Whether stat points in this category can be taken back out right now (the hub shows its minus buttons). */
 	public boolean canRefundStats(BloomProfile profile, String categoryId) {
 		return config.allowStatRefund && (!config.statRefundAtCapOnly || profile.category(categoryId).level() >= config.levelCap);
@@ -566,7 +601,7 @@ public final class ProgressionService {
 			return ActionResult.of(Outcome.UNKNOWN_CATEGORY);
 		}
 
-		if (now < profile.counter(majorResetKey(categoryId))) {
+		if (config.waitsEnabled && now < profile.counter(majorResetKey(categoryId))) {
 			return ActionResult.of(Outcome.COOLDOWN);
 		}
 
@@ -680,8 +715,68 @@ public final class ProgressionService {
 		return awards;
 	}
 
+	/** The prestige bonus one category would award if it were Bloom+ reset right now (both caps respected). */
+	public int previewPrestige(BloomProfile profile, String categoryId) {
+		CategoryProgress progress = profile.category(categoryId);
+		int budget = Math.max(0, config.prestigeTotalCap - profile.prestigeMajorLevels());
+		int target = Math.min(config.prestigePerCategoryCap, progress.level() / config.prestigeEvery);
+		return Math.min(budget, Math.max(0, target - progress.prestigeClaimed()));
+	}
+
 	/**
-	 * Bloom+ full reset. Resets: natural levels, XP and natural allocations. Refunds: every owned Major.
+	 * The hub's red Bloom+ button, for one tab: that category goes back to level 0 with its natural stat points
+	 * back, and its Majors are refunded in both builds (with any Major elsewhere that needs one of them). Keeps:
+	 * claimed milestones, mastery (XP mode and the second build stay unlocked), invested points. Awards: that
+	 * category's prestige bonus (+1 per {@code prestigeEvery} levels, capped).
+	 */
+	public BloomResetResult bloomResetCategory(BloomProfile profile, String categoryId) {
+		Map<String, Integer> awards = new LinkedHashMap<>();
+
+		if (definitions.category(categoryId).isEmpty()) {
+			return new BloomResetResult(awards, 0, profile.bloomCount());
+		}
+
+		int award = previewPrestige(profile, categoryId);
+		CategoryProgress progress = profile.category(categoryId);
+
+		if (award > 0) {
+			progress.setPrestigeClaimed(progress.prestigeClaimed() + award);
+			awards.put(categoryId, award);
+		}
+
+		progress.setLevel(0);
+		progress.setXp(0.0);
+		progress.natural().clear();
+
+		List<String> owned = ownedMajorsIn(profile, categoryId);
+		List<String> gone = new ArrayList<>(owned);
+		gone.addAll(refundCascade(profile, Set.copyOf(owned), null));
+		int refunded = 0;
+
+		for (String id : gone) {
+			OwnedMajor removed = profile.majors().remove(id);
+			refunded += removed == null ? 0 : removed.paid();
+		}
+
+		profile.spareBuild().ifPresent(spare -> {
+			List<String> spareGone = new ArrayList<>();
+
+			for (String id : spare.majors().keySet()) {
+				if (definitions.major(id).map(m -> m.categoryId().equals(categoryId)).orElse(false)) {
+					spareGone.add(id);
+				}
+			}
+
+			spareGone.addAll(refundCascade(spare.majors().keySet(), Set.copyOf(spareGone), null));
+			spare.clearCategory(categoryId, spareGone);
+		});
+
+		profile.setBloomCount(profile.bloomCount() + 1);
+		return new BloomResetResult(awards, refunded, profile.bloomCount());
+	}
+
+	/**
+	 * Bloom+ full reset (every category at once). Resets: natural levels, XP and natural allocations. Refunds: every owned Major.
 	 * Keeps: claimed milestones (no re-farming), mastery/Investment unlock, invested points and their
 	 * allocation, toggles, counters. Awards: capped prestige bonus Major Levels.
 	 */
@@ -701,6 +796,7 @@ public final class ProgressionService {
 
 		int refunded = profile.spentMajorLevels();
 		profile.majors().clear();
+		profile.setSpareBuild(null);
 		profile.setBloomCount(profile.bloomCount() + 1);
 		return new BloomResetResult(awards, refunded, profile.bloomCount());
 	}

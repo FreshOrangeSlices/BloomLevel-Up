@@ -39,7 +39,9 @@ public record ActionResult(Outcome outcome, List<String> involved) {
 		/** That reset is still cooling down (a tab's Major reset: once every 20 minutes). */
 		COOLDOWN,
 		/** Stat points can only be taken back out once the category is at the level cap (100). */
-		STAT_REFUND_LOCKED
+		STAT_REFUND_LOCKED,
+		/** The second build unlocks the first time any category reaches the level cap. */
+		BUILD_LOCKED
 	}
 
 	public ActionResult {

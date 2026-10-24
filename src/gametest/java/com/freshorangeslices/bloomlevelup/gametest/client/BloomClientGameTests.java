@@ -183,7 +183,15 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		click(context, major, InputConstants.MOUSE_BUTTON_LEFT);
 		check(context, "left click switches back on", client -> owned(major) != null && owned(major).enabled());
 		click(context, major, InputConstants.MOUSE_BUTTON_RIGHT);
-		check(context, "right click refunds", client -> owned(major) == null);
+		context.waitTicks(3);
+		check(context, "right click no longer refunds a single Major", client -> owned(major) != null);
+		// The tab's white reset button (past its confirm screen) refunds every Major in the tab.
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.resetTabMajorsForTests();
+			}
+		});
+		check(context, "the tab reset refunds it", client -> owned(major) == null);
 		context.setScreen(() -> null);
 	}
 

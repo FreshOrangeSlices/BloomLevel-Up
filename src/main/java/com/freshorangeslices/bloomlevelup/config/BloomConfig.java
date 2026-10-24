@@ -9,7 +9,7 @@ package com.freshorangeslices.bloomlevelup.config;
  */
 public final class BloomConfig {
 	/** The defaults this build ships with. Files from older builds are moved onto changed defaults by {@link #migrate()}. */
-	public static final int CURRENT_VERSION = 5;
+	public static final int CURRENT_VERSION = 6;
 
 	/** Which build's defaults the file was written with (0 = before versioning). */
 	public int configVersion;
@@ -26,8 +26,8 @@ public final class BloomConfig {
 	/** Lifetime prestige bonus cap per category. */
 	public int prestigePerCategoryCap = 2;
 
-	/** Lifetime prestige bonus cap across all categories (confirmed +6, even though 4 categories x 2 could reach 8). */
-	public int prestigeTotalCap = 6;
+	/** Lifetime prestige bonus cap across all categories (8: 2 per tab, confirmed in round 7). */
+	public int prestigeTotalCap = 8;
 
 	/** XP needed to go from level L to L+1 = base + linear * L + quadratic * L^2 (TBD curve). */
 	public double xpCurveBase = 50.0;
@@ -43,6 +43,12 @@ public final class BloomConfig {
 
 	/** Whether naturally earned stat points may be pulled back out and re-allocated freely. */
 	public boolean allowStatRefund = true;
+	/** Refunding a single Major (right-click in the hub, {@code /bloom refund}). Off: only a tab's reset button refunds. */
+	public boolean allowMajorRefund = false;
+	/** The waits on the tab reset button and on switching builds ({@code /bloom admin waits on|off}). */
+	public boolean waitsEnabled = true;
+	/** How long after switching builds before you can switch again (2 minutes of game time). */
+	public int buildSwitchCooldownTicks = 2400;
 	/** Stat points can only be taken back out (the hub's minus button) once that category is at the level cap. */
 	public boolean statRefundAtCapOnly = true;
 	/** A tab's "reset Majors" button: how long before that tab can be reset again (20 minutes of game time). */
@@ -275,6 +281,11 @@ public final class BloomConfig {
 			braceDelayTicks = braceDelayTicks == 20 ? 1 : braceDelayTicks;
 		}
 
+		if (configVersion < 6) {
+			// Round 7 (2026-10-23): the Bloom+ bonus can reach all 8 (2 per tab).
+			prestigeTotalCap = prestigeTotalCap == 6 ? 8 : prestigeTotalCap;
+		}
+
 		configVersion = CURRENT_VERSION;
 		return this;
 	}
@@ -288,6 +299,7 @@ public final class BloomConfig {
 		majorLevelEvery = Math.max(1, majorLevelEvery);
 		prestigeEvery = Math.max(1, prestigeEvery);
 		majorResetCooldownTicks = Math.max(0, majorResetCooldownTicks);
+		buildSwitchCooldownTicks = Math.max(0, buildSwitchCooldownTicks);
 		prestigePerCategoryCap = Math.max(0, prestigePerCategoryCap);
 		prestigeTotalCap = Math.max(0, prestigeTotalCap);
 		xpCurveBase = Math.max(1.0, xpCurveBase);

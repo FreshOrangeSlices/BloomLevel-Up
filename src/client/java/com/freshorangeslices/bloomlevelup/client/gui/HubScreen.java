@@ -125,7 +125,7 @@ public final class HubScreen extends Screen {
 	private static final int TAB_H = 20;
 	private static final Identifier RESET_LEVELS_ICON = BloomLevelUp.id("textures/gui/hub/reset_levels.png");
 	private static final Identifier RESET_MAJORS_ICON = BloomLevelUp.id("textures/gui/hub/reset_majors.png");
-	private static final int STRIP_H = 14;
+	private static final int STRIP_H = 20;
 
 	/** Whether the stats window is folded away (kept while the game runs). */
 	private static boolean statsCollapsed;
@@ -154,6 +154,11 @@ public final class HubScreen extends Screen {
 	private HubTab resetMajorsButton;
 	private long resetMajorsReadyAt;
 	private long resetMinutesShown = -1;
+	/** The build switch's wait, shown in its tooltip as seconds (rebuilt each second while it counts down). */
+	private long buildReadyAt;
+	private long buildSecondsShown;
+	/** Whether the click being handled had shift held (Buy point: shift buys up to 10). */
+	private boolean shiftClick;
 
 	/** The current tab's nodes and lines, in canvas coordinates. */
 	private final List<Node> nodes = new ArrayList<>();
@@ -210,6 +215,7 @@ public final class HubScreen extends Screen {
 		}
 
 		addResetButtons(category);
+		addBuildButtons();
 
 		backdrop = findBackdrop(category);
 		addStatsWindow(category);
@@ -258,12 +264,13 @@ public final class HubScreen extends Screen {
 		var config = ClientBloomState.config();
 		int y = panelY + 4;
 
-		Map<String, Integer> gain = service.previewPrestige(profile);
-		MutableComponent bloomTip = Component.translatable("bloom.hub.bloom.tooltip").withStyle(ChatFormatting.LIGHT_PURPLE);
-		bloomTip.append("\n").append(Component.translatable("bloom.hub.bloom.tooltip.desc", config.prestigeEvery, config.prestigePerCategoryCap,
-				config.prestigeTotalCap).withStyle(ChatFormatting.GRAY));
+		Component tabName = name(category.translationKey(), category.id());
+		int gain = service.previewPrestige(profile, category.id());
+		MutableComponent bloomTip = Component.translatable("bloom.hub.bloom.tooltip", tabName).withStyle(ChatFormatting.LIGHT_PURPLE);
+		bloomTip.append("\n").append(Component.translatable("bloom.hub.bloom.tooltip.desc", config.prestigeEvery, config.prestigePerCategoryCap)
+				.withStyle(ChatFormatting.GRAY));
 		bloomTip.append("\n").append(bloomGainLine(gain));
-		this.addRenderableWidget(HubTab.button(panelX + 4, y, TAB_H, bloomTip, RESET_LEVELS_ICON, true, () -> confirmBloom(gain)));
+		this.addRenderableWidget(HubTab.button(panelX + 4, y, TAB_H, bloomTip, RESET_LEVELS_ICON, true, () -> confirmBloom(category, gain)));
 
 		long now = this.minecraft.level == null ? 0L : this.minecraft.level.getGameTime();
 		resetMajorsReadyAt = profile.counter(ProgressionService.majorResetKey(category.id()));
@@ -293,40 +300,86 @@ public final class HubScreen extends Screen {
 		return Math.max(1, ClientBloomState.config().majorResetCooldownTicks / 1200);
 	}
 
-	/** What a Bloom+ reset would pay right now, as one line. */
-	private static Component bloomGainLine(Map<String, Integer> gain) {
-		int total = gain.values().stream().mapToInt(Integer::intValue).sum();
-
-		if (total <= 0) {
-			return Component.translatable("bloom.hub.bloom.no_gain").withStyle(ChatFormatting.DARK_GRAY);
-		}
-
-		MutableComponent parts = Component.empty();
-		int i = 0;
-
-		for (Map.Entry<String, Integer> entry : gain.entrySet()) {
-			if (i++ > 0) {
-				parts.append(", ");
-			}
-
-			Component category = ClientBloomState.definitions().category(entry.getKey())
-					.map(c -> name(c.translationKey(), c.id())).orElse(Component.literal(entry.getKey()));
-			parts.append(category).append(" +" + entry.getValue());
-		}
-
-		return Component.translatable("bloom.hub.bloom.gain", total, parts).withStyle(ChatFormatting.GREEN);
+	/** What a Bloom+ reset of this tab would pay right now, as one line. */
+	private static Component bloomGainLine(int gain) {
+		return gain <= 0 ? Component.translatable("bloom.hub.bloom.no_gain").withStyle(ChatFormatting.DARK_GRAY)
+				: Component.translatable("bloom.hub.bloom.gain", gain).withStyle(ChatFormatting.GREEN);
 	}
 
-	private void confirmBloom(Map<String, Integer> gain) {
-		MutableComponent message = Component.translatable("bloom.hub.bloom.message");
+	/** Bloom+ asks twice: what it does and pays, then "are you really sure?". */
+	private void confirmBloom(CategoryDefinition category, int gain) {
+		Component tab = name(category.translationKey(), category.id());
+		MutableComponent message = Component.translatable("bloom.hub.bloom.message", tab);
 		message.append("\n\n").append(bloomGainLine(gain));
 		ClientScreens.open(new ConfirmScreen(yes -> {
-			if (yes) {
-				send(Action.BLOOM_RESET, "", 0);
+			if (!yes) {
+				ClientScreens.open(this);
+				return;
 			}
 
-			ClientScreens.open(this);
-		}, Component.translatable("bloom.hub.bloom.title"), message));
+			ClientScreens.open(new ConfirmScreen(sure -> {
+				if (sure) {
+					send(Action.BLOOM_RESET, category.id(), 0);
+				}
+
+				ClientScreens.open(this);
+			}, Component.translatable("bloom.hub.bloom.sure.title").withStyle(ChatFormatting.RED),
+					Component.translatable("bloom.hub.bloom.sure.message", tab)));
+		}, Component.translatable("bloom.hub.bloom.title", tab), message));
+	}
+
+	/**
+	 * The two builds, in the middle of the strip under the page: Build 1 (an iron helmet) and Build 2 (a golden
+	 * helmet). The one in use is lit; clicking the other switches (once a tab has reached 100, then a 2-minute wait).
+	 */
+	private void addBuildButtons() {
+		BloomProfile profile = ClientBloomState.profile();
+		ProgressionService service = ClientBloomState.service();
+		boolean unlocked = service.buildsUnlocked(profile);
+		long now = this.minecraft.level == null ? 0L : this.minecraft.level.getGameTime();
+		buildReadyAt = ClientBloomState.config().waitsEnabled ? profile.counter(ProgressionService.BUILD_SWITCH_KEY) : 0L;
+		buildSecondsShown = buildReadyAt > now ? (buildReadyAt - now + 19) / 20 : 0L;
+		int gap = 4;
+		int x = panelX + (panelW - 2 * TAB_H - gap) / 2;
+		int y = panelY + panelH - STRIP_H;
+
+		for (int build = 0; build < 2; build++) {
+			boolean inUse = profile.activeBuild() == build;
+			MutableComponent tip = Component.translatable("bloom.hub.build", build + 1).withStyle(ChatFormatting.GOLD);
+
+			if (inUse) {
+				tip.append("\n").append(Component.translatable("bloom.hub.build.active").withStyle(ChatFormatting.GREEN));
+			} else if (!unlocked) {
+				tip.append("\n").append(Component.translatable("bloom.hub.build.locked").withStyle(ChatFormatting.DARK_GRAY));
+			} else if (buildSecondsShown > 0) {
+				tip.append("\n").append(Component.translatable("bloom.hub.build.wait", buildSecondsShown).withStyle(ChatFormatting.RED));
+			} else {
+				tip.append("\n").append(Component.translatable("bloom.hub.build.switch",
+						Math.max(1, ClientBloomState.config().buildSwitchCooldownTicks / 1200)).withStyle(ChatFormatting.GRAY));
+			}
+
+			HubTab button = HubTab.tab(x + build * (TAB_H + gap), y, TAB_H, TAB_H, tip, buildItem(build), inUse, () -> {
+				click();
+				send(Action.SWITCH_BUILD, "", 0);
+			});
+
+			if (!inUse) {
+				button.active = unlocked && buildSecondsShown == 0;
+			}
+
+			this.addRenderableWidget(button);
+		}
+	}
+
+	private static final ItemStack[] BUILD_ITEMS = new ItemStack[2];
+
+	/** Build 1 is an iron helmet, build 2 a golden one (made on first use, once items exist). */
+	private static ItemStack buildItem(int build) {
+		if (BUILD_ITEMS[build] == null) {
+			BUILD_ITEMS[build] = new ItemStack(build == 0 ? Items.IRON_HELMET : Items.GOLDEN_HELMET);
+		}
+
+		return BUILD_ITEMS[build];
 	}
 
 	private void confirmMajorReset(CategoryDefinition category, List<String> owned) {
@@ -424,8 +477,8 @@ public final class HubScreen extends Screen {
 			plus.active = unspent > 0;
 			this.addRenderableWidget(plus);
 
-			// Taking points back out only opens up at level 100 (and closes again after Bloom+).
-			if (service.canRefundStats(profile, category.id())) {
+			// Natural points can only be taken back out at level 100 (and not again after Bloom+); XP-bought ones always.
+			if (spendInvested ? ClientBloomState.config().allowStatRefund : service.canRefundStats(profile, category.id())) {
 				MiniButton minus = new MiniButton(x + 4, y + 12, MiniButton.Glyph.MINUS, Component.translatable("bloom.hub.stat.minus"),
 						shift -> send(allocate, stat.id(), shift ? -Math.min(10, inPool) : -1));
 				minus.active = inPool > 0;
@@ -464,12 +517,28 @@ public final class HubScreen extends Screen {
 			// Shown as a vanilla level (the level whose total XP covers the cost); the real cost is in XP.
 			long cost = service.investmentCost(progress, 1);
 			int levels = PlayerXpWallet.levelForPoints(cost);
-			Button invest = Button.builder(Component.translatable("bloom.hub.invest", levels), b -> send(Action.INVEST, category.id(), 1))
-					.bounds(x + 4, y, STATS_W - 8, 14).build();
+			Button invest = Button.builder(Component.translatable("bloom.hub.invest", levels), b -> {
+				// Shift: as many as the XP pays for, up to 10.
+				int count = 1;
+
+				if (shiftClick) {
+					long xp = playerXpPoints();
+
+					for (int n = 10; n > 1; n--) {
+						if (service.investmentCost(progress, n) <= xp) {
+							count = n;
+							break;
+						}
+					}
+				}
+
+				send(Action.INVEST, category.id(), count);
+			}).bounds(x + 4, y, STATS_W - 8, 14).build();
 			investButton = invest;
 			investCost = cost;
 			invest.active = playerXpPoints() >= cost;
-			invest.setTooltip(Tooltip.create(Component.translatable("bloom.hub.invest.tooltip", cost, levels)));
+			invest.setTooltip(Tooltip.create(Component.translatable("bloom.hub.invest.tooltip", cost, levels).append("\n")
+					.append(Component.translatable("bloom.hub.invest.shift").withStyle(ChatFormatting.DARK_GRAY))));
 			this.addRenderableWidget(invest);
 			y += 16;
 		} else if (progress.level() < cap) {
@@ -512,6 +581,13 @@ public final class HubScreen extends Screen {
 		// XP can change while the hub is open (orbs, commands): keep Buy point in step with it.
 		if (investButton != null) {
 			investButton.active = playerXpPoints() >= investCost;
+		}
+
+		// The build switch's countdown, in seconds.
+		if (buildSecondsShown > 0 && this.minecraft.level != null
+				&& Math.max(0L, (buildReadyAt - this.minecraft.level.getGameTime() + 19) / 20) != buildSecondsShown) {
+			this.rebuildWidgets();
+			return;
 		}
 
 		// The Major reset's countdown: rebuild when the minutes it shows change (and when it's ready again).
@@ -841,7 +917,7 @@ public final class HubScreen extends Screen {
 
 		// Which build this is, so an old jar is easy to spot.
 		Component build = Component.literal("v" + BloomLevelUp.version());
-		g.text(this.font, build, panelX + panelW - 6 - this.font.width(build), panelY + panelH - 11, 0xFF5E5648);
+		g.text(this.font, build, panelX + panelW - 6 - this.font.width(build), panelY + panelH - 14, 0xFF5E5648);
 		super.extractRenderState(g, mouseX, mouseY, delta);
 
 		if (tooltip != null) {
@@ -1086,7 +1162,7 @@ public final class HubScreen extends Screen {
 		Component build = Component.literal("v" + BloomLevelUp.version());
 		int right = panelX + panelW - 6 - this.font.width(build) - 10;
 		int left = right - this.font.width(wallet);
-		int y = panelY + panelH - 11;
+		int y = panelY + panelH - 14;
 		g.text(this.font, wallet, left, y, TEXT);
 
 		if (mouseX >= left && mouseX < right && mouseY >= y - 2 && mouseY < y + 10) {
@@ -1369,7 +1445,7 @@ public final class HubScreen extends Screen {
 				|| "SUCCESS".equals(result.outcome())) {
 			// Nothing to report: say the page can be dragged, if it's bigger than the view.
 			if (ClientBloomState.ready() && currentCategory() != null && canPan()) {
-				g.text(this.font, Component.translatable("bloom.hub.drag"), panelX + 6, panelY + panelH - 11, MUTED);
+				g.text(this.font, Component.translatable("bloom.hub.drag"), panelX + 6, panelY + panelH - 14, MUTED);
 			}
 
 			return;
@@ -1381,13 +1457,14 @@ public final class HubScreen extends Screen {
 			message.append(" ").append(joinNames(result.involved()));
 		}
 
-		g.text(this.font, message, panelX + 6, panelY + panelH - 11, BAD);
+		g.text(this.font, message, panelX + 6, panelY + panelH - 14, BAD);
 	}
 
 	// ------------------------------------------------------------------ input
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		shiftClick = event.hasShiftDown();
 		MajorDefinition major = onOpenCanvas(event.x(), event.y()) ? majorAt(event.x(), event.y()) : null;
 		lastClickForTests = String.format(Locale.ROOT, "button=%d x=%.1f y=%.1f major=%s", event.button(), event.x(), event.y(),
 				major == null ? "-" : major.id());
@@ -1410,17 +1487,7 @@ public final class HubScreen extends Screen {
 		boolean owned = ClientBloomState.profile().owns(major.id());
 
 		if (event.button() == InputConstants.MOUSE_BUTTON_RIGHT) {
-			if (owned) {
-				click();
-				List<String> dependents = ClientBloomState.service().refundCascade(ClientBloomState.profile(), Set.of(major.id()), null);
-
-				if (dependents.isEmpty()) {
-					send(Action.REFUND_MAJOR, major.id(), 0);
-				} else {
-					confirmRefund(major, dependents);
-				}
-			}
-
+			// Single Majors aren't refunded any more (the tab's reset button does that); right-click is kept free.
 			return true;
 		}
 
@@ -1495,6 +1562,15 @@ public final class HubScreen extends Screen {
 		return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
 	}
 
+	/** What the white reset button sends once its confirm screen says yes (client game test). */
+	public void resetTabMajorsForTests() {
+		CategoryDefinition category = currentCategory();
+
+		if (category != null) {
+			send(Action.RESET_MAJORS, category.id(), 0);
+		}
+	}
+
 	/** Folds the stats window away or brings it back, as its arrow does (client game test). */
 	public static void foldStatsForTests(boolean folded) {
 		statsCollapsed = folded;
@@ -1560,18 +1636,6 @@ public final class HubScreen extends Screen {
 	}
 
 	/** Refunding this takes other Majors with it (they need it, or Master of Arms held them together): ask first. */
-	private void confirmRefund(MajorDefinition major, List<String> dependents) {
-		Component title = Component.translatable("bloom.hub.refund.title", name(major.translationKey(), major.id()));
-		Component message = Component.translatable("bloom.hub.refund.also", joinNames(dependents));
-		ClientScreens.open(new ConfirmScreen(yes -> {
-			if (yes) {
-				send(Action.REFUND_MAJOR_ALL, major.id(), 0);
-			}
-
-			ClientScreens.open(this);
-		}, title, message));
-	}
-
 	private void click() {
 		this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
 	}

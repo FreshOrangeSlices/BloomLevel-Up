@@ -124,6 +124,68 @@ class ProgressionServiceTest {
 	}
 
 	@Test
+	void investedPointsCanAlwaysBeTakenBack() {
+		levelTo(UTILITY, 100);
+		service.invest(profile, UTILITY, 3, new FakeWallet(100000));
+		service.allocate(profile, YIELD, Pool.INVESTED, 3);
+		service.bloomResetCategory(profile, UTILITY);
+		assertEquals(Outcome.STAT_REFUND_LOCKED, service.allocate(profile, EFFICIENCY, Pool.NATURAL, -1).outcome());
+		assertTrue(service.allocate(profile, YIELD, Pool.INVESTED, -2).ok(), "XP-bought points move even at level 0");
+	}
+
+	@Test
+	void theSecondBuildUnlocksAt100AndKeepsItsOwnMajorsAndPoints() {
+		levelTo(ARMOR, 50);
+		assertEquals(Outcome.BUILD_LOCKED, service.switchBuild(profile, 0L).outcome());
+		levelTo(ARMOR, 100);
+		levelTo(UTILITY, 20);
+		service.purchaseMajor(profile, IRON_SKIN); // 7 of the 12
+		service.allocate(profile, VITALITY, Pool.NATURAL, 40);
+
+		assertTrue(service.switchBuild(profile, 100L).ok());
+		assertEquals(1, profile.activeBuild());
+		assertTrue(profile.owns(IRON_SKIN), "The second build starts as a copy");
+		assertEquals(Outcome.COOLDOWN, service.switchBuild(profile, 100L + 2399).outcome());
+
+		// Build 2 goes another way, with the whole Major Level pool.
+		service.resetCategoryMajors(profile, ARMOR, 100L);
+		service.purchaseMajor(profile, LAST_BREATH);
+		service.purchaseMajor(profile, VEIN_MINING);
+		assertEquals(12 - 3, profile.availableMajorLevels());
+		assertTrue(profile.ownsInAnyBuild(IRON_SKIN));
+
+		assertTrue(service.switchBuild(profile, 100L + 2400).ok());
+		assertEquals(0, profile.activeBuild());
+		assertTrue(profile.owns(IRON_SKIN) && !profile.owns(LAST_BREATH));
+		assertEquals(40, profile.category(ARMOR).rawStat(VITALITY));
+		assertEquals(12 - 7, profile.availableMajorLevels());
+
+		assertTrue(service.switchBuild(profile, 100L + 4800).ok());
+		assertTrue(profile.owns(LAST_BREATH) && profile.owns(VEIN_MINING) && !profile.owns(IRON_SKIN));
+	}
+
+	@Test
+	void redResetIsPerTabAndClearsThatTabInBothBuilds() {
+		levelTo(ARMOR, 100);
+		levelTo(UTILITY, 100);
+		service.purchaseMajor(profile, LAST_BREATH);
+		service.purchaseMajor(profile, VEIN_MINING);
+		service.switchBuild(profile, 0L); // build 2: a copy
+		service.allocate(profile, VITALITY, Pool.NATURAL, 30);
+
+		BloomResetResult result = service.bloomResetCategory(profile, ARMOR);
+		assertEquals(2, result.totalPrestigeAwarded(), "+1 per 50 levels in that tab");
+		assertEquals(2, result.majorLevelsRefunded());
+		assertEquals(0, profile.category(ARMOR).level());
+		assertEquals(100, profile.category(UTILITY).level(), "Other tabs untouched");
+		assertTrue(profile.owns(VEIN_MINING) && !profile.owns(LAST_BREATH));
+		assertEquals(0, profile.category(ARMOR).rawStat(VITALITY));
+		assertFalse(profile.spareBuild().orElseThrow().owns(LAST_BREATH), "The other build loses that tab's part too");
+		assertTrue(profile.spareBuild().orElseThrow().owns(VEIN_MINING));
+		assertEquals(0, service.bloomResetCategory(profile, ARMOR).totalPrestigeAwarded(), "Nothing more until it levels again");
+	}
+
+	@Test
 	void resettingATabRefundsItsMajorsThenCoolsDown() {
 		levelTo(ARMOR, 100);
 		levelTo(UTILITY, 100);
@@ -221,10 +283,13 @@ class ProgressionServiceTest {
 		ActionResult conflict = service.purchaseMajor(profile, HOLD_TO_CHARGE);
 		assertEquals(Outcome.CONFLICT, conflict.outcome());
 		assertEquals(List.of(HOLD_TO_THROW), conflict.involved());
-		// Swap works even with 0 available, because the refund covers the cost.
+		// A swap needs the new Major paid for up front: with 0 free, the refund doesn't count.
+		assertEquals(Outcome.NOT_ENOUGH_MAJOR_LEVELS, service.purchaseMajorWithSwap(profile, HOLD_TO_CHARGE).outcome());
+		levelTo(ARMOR, 20);
 		assertTrue(service.purchaseMajorWithSwap(profile, HOLD_TO_CHARGE).ok());
 		assertTrue(profile.owns(HOLD_TO_CHARGE));
 		assertFalse(profile.owns(HOLD_TO_THROW));
+		assertEquals(1, profile.availableMajorLevels(), "The swapped-out Major came back in full");
 	}
 
 	@Test

@@ -241,10 +241,10 @@ final class StatSheetWindow {
 
 			// "All": every switch at once, Live → Max → Off.
 			if (offered.size() > 1) {
-				int all = allMode(offered);
+				int together = allMode(offered);
 				Component allName = Component.translatable("bloom.sheet.ui.all").append(": ")
-						.append(all < 0 ? Component.literal("…") : modeName(all, Component.empty()));
-				cx = modeChip(g, font, cx, y, allName, all, mouseX, mouseY, () -> setAll(offered),
+						.append(together < 0 ? Component.literal("…") : modeName(together, Component.empty()));
+				cx = modeChip(g, font, cx, y, allName, together, mouseX, mouseY, () -> setAll(offered),
 						Component.translatable("bloom.sheet.ui.all.tip")) + 3;
 			}
 

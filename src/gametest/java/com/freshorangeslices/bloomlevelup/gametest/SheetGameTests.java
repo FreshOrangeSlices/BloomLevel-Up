@@ -184,7 +184,7 @@ public class SheetGameTests {
 		LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
 		float before = player.getHealth();
 		helper.assertTrue(player.hurtServer(level, player.damageSources().mobAttack(zombie), 10.0F), "The hit lands");
-		near(helper, before - player.getHealth(), value(view, "armor.taken.mob"), "Health lost to a mob's hit of 10 (10 armor, Iron Skin)");
+		near(helper, before - player.getHealth(), value(view, "armor.kind.mob"), "Health lost to a mob's hit of 10 (10 armor, Iron Skin)");
 		helper.succeed();
 	}
 

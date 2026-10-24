@@ -61,6 +61,11 @@ final class Sheet {
 		summary.add(new Row(Row.ROW, label(key, args), value));
 	}
 
+	/** A grey line in the summary (what the lines under it are about). */
+	void summaryNote(String key, Object... args) {
+		summary.add(new Row(Row.NOTE, label(key, args), Component.empty()));
+	}
+
 	void heading(String key, Object... args) {
 		details.add(new Row(Row.HEADING, label(key, args), Component.empty()));
 	}

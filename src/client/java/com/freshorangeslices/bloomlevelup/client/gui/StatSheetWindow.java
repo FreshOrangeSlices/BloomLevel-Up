@@ -309,8 +309,13 @@ final class StatSheetWindow {
 
 		int captionBottom = view.gauge().isEmpty() ? y : y + 58 + 10 * font.split(view.gaugeCaption(), 104).size();
 		int bottom = Math.max(ry, captionBottom) + 6;
-		g.text(font, Component.translatable("bloom.sheet.ui.more"), rx, bottom, 0xFF6E6250);
-		return bottom + 12;
+
+		for (FormattedCharSequence line : font.split(Component.translatable("bloom.sheet.ui.more"), width)) {
+			g.text(font, line, x, bottom, 0xFF6E6250);
+			bottom += 10;
+		}
+
+		return bottom + 2;
 	}
 
 	private int drawDetails(GuiGraphicsExtractor g, Font font, SheetPayloads.View view, int x, int y, int width) {

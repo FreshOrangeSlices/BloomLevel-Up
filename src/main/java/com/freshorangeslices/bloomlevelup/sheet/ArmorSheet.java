@@ -99,10 +99,11 @@ final class ArmorSheet {
 		}
 
 		sheet.summary(Sheet.plain(player.getMaxHealth()), "armor.max_health");
+		sheet.summaryNote("armor.taken", Sheet.num(hit));
 
 		for (Kind kind : kinds) {
 			Steps steps = steps(level, player, kind.source(), hit, braced);
-			sheet.summary(taken(steps), "armor.taken." + kind.key(), Sheet.num(hit));
+			sheet.summary(taken(steps), "armor.kind." + kind.key());
 		}
 
 		double dodge = StatFormulas.dodgeChance(service.statValue(profile, ArmorIds.DODGE), config.dodgeChanceCap);
@@ -358,7 +359,7 @@ final class ArmorSheet {
 	/** "3.2 (-68%)": health lost, and how much of the hit didn't get through. */
 	private static Component taken(Steps steps) {
 		double blocked = steps.start() > 0.0F ? 1.0 - steps.health() / steps.start() : 0.0;
-		return Sheet.colored(Sheet.num(steps.health()) + "  (-" + Sheet.num(blocked * 100.0) + "%)", Sheet.PLAIN);
+		return Sheet.colored(Sheet.num(steps.health()) + "  (-" + Math.round(blocked * 100.0) + "%)", Sheet.PLAIN);
 	}
 
 	/**
@@ -374,6 +375,10 @@ final class ArmorSheet {
 		ItemStack top = ItemStack.EMPTY;
 		double topTaken = Double.MAX_VALUE;
 		int topLevel = 0;
+
+		String shownMaterial = "";
+		String bestMaterial = "";
+		String topMaterial = "";
 
 		for (String material : SET_MATERIALS) {
 			Item[] items = new Item[4];
@@ -417,12 +422,14 @@ final class ArmorSheet {
 					best = chest;
 					bestTaken = through;
 					bestLevel = enchantLevel;
+					bestMaterial = material;
 				}
 
 				if (through < topTaken) {
 					top = chest;
 					topTaken = through;
 					topLevel = enchantLevel;
+					topMaterial = material;
 				}
 			}
 		}
@@ -438,10 +445,11 @@ final class ArmorSheet {
 		boolean past = taken < topTaken - 1.0E-4;
 		ItemStack shown = past ? top : best;
 		int shownLevel = past ? topLevel : bestLevel;
+		shownMaterial = past ? topMaterial : bestMaterial;
+		Component set = Component.translatable("bloom.sheet.gauge.set." + shownMaterial);
 		Component name = shownLevel > 0
-				? Component.translatable("bloom.sheet.gauge.with", Component.translatable("bloom.sheet.gauge.set", shown.getHoverName()),
-						protection.value().description(), Component.translatable("enchantment.level." + shownLevel))
-				: Component.translatable("bloom.sheet.gauge.set", shown.getHoverName());
+				? Component.translatable("bloom.sheet.gauge.with", set, protection.value().description(), Component.translatable("enchantment.level." + shownLevel))
+				: set;
 		sheet.gauge = shown;
 		sheet.gaugeCaption = Component.translatable(past ? "bloom.sheet.gauge.armor_past" : "bloom.sheet.gauge.armor", name,
 				Sheet.num(past ? topTaken : bestTaken), Sheet.num(hit));

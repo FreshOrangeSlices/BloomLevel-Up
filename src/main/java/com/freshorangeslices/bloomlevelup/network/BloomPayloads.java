@@ -78,7 +78,11 @@ public final class BloomPayloads {
 		/** Copycat: target = the weapon Major to copy, or empty to clear. */
 		SET_COPY_SOURCE,
 		/** Refunds a Major and every owned Major that depends on it (after the hub's confirm prompt). */
-		REFUND_MAJOR_ALL
+		REFUND_MAJOR_ALL,
+		/** A tab's reset button: refunds every Major in the category {@code target} (cools down for 20 minutes). */
+		RESET_MAJORS,
+		/** The Bloom+ button: every category back to level 0 for prestige Major Levels (after the confirm prompt). */
+		BLOOM_RESET
 	}
 
 	/** Client → server: one request from the hub. The server never trusts it beyond "the player asked for this". */

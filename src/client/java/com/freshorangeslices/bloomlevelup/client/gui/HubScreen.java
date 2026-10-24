@@ -28,6 +28,8 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
@@ -118,6 +120,11 @@ public final class HubScreen extends Screen {
 	/** The stats window's column left of the page while it's open (window, 4-pixel gaps either side). */
 	private static final int STATS_COLUMN = STATS_W + 8;
 	private static final int TABS_H = 26;
+	/** The category tabs: small item plates, centred; the reset buttons sit in the corners either side. */
+	private static final int TAB_W = 26;
+	private static final int TAB_H = 20;
+	private static final Identifier RESET_LEVELS_ICON = BloomLevelUp.id("textures/gui/hub/reset_levels.png");
+	private static final Identifier RESET_MAJORS_ICON = BloomLevelUp.id("textures/gui/hub/reset_majors.png");
 	private static final int STRIP_H = 14;
 
 	/** Whether the stats window is folded away (kept while the game runs). */
@@ -143,6 +150,10 @@ public final class HubScreen extends Screen {
 	private Button investButton;
 	private long investCost;
 	private Backdrop backdrop;
+	/** The tab's "reset Majors" button and the minutes its tooltip shows (rebuilt when they change). */
+	private HubTab resetMajorsButton;
+	private long resetMajorsReadyAt;
+	private long resetMinutesShown = -1;
 
 	/** The current tab's nodes and lines, in canvas coordinates. */
 	private final List<Node> nodes = new ArrayList<>();
@@ -191,11 +202,14 @@ public final class HubScreen extends Screen {
 		}
 
 		addCategoryTabs();
+		resetMajorsButton = null;
 		CategoryDefinition category = currentCategory();
 
 		if (category == null) {
 			return;
 		}
+
+		addResetButtons(category);
 
 		backdrop = findBackdrop(category);
 		addStatsWindow(category);
@@ -219,19 +233,144 @@ public final class HubScreen extends Screen {
 		}
 
 		int gap = 4;
-		int tabW = (panelW - 8 - gap * (categories.size() - 1)) / categories.size();
-		int x = panelX + 4;
+		int total = categories.size() * TAB_W + (categories.size() - 1) * gap;
+		int x = panelX + (panelW - total) / 2;
 		String selected = ClientBloomState.selectedCategory();
 
 		for (CategoryDefinition category : categories) {
-			this.addRenderableWidget(new HubTab(x, panelY + 4, tabW, 18, name(category.translationKey(), category.id()),
+			this.addRenderableWidget(HubTab.tab(x, panelY + 4, TAB_W, TAB_H, name(category.translationKey(), category.id()), tabItem(category),
 					category.id().equals(selected), () -> {
 						ClientBloomState.selectCategory(category.id());
 						spendInvested = false;
 						this.rebuildWidgets();
 					}));
-			x += tabW + gap;
+			x += TAB_W + gap;
 		}
+	}
+
+	/**
+	 * The two reset buttons in the corners of the tab row: Bloom+ on the left (every tab back to level 0 for bonus
+	 * Major Levels), and this tab's Majors on the right (all refunded, then a 20-minute wait). Both ask first.
+	 */
+	private void addResetButtons(CategoryDefinition category) {
+		ProgressionService service = ClientBloomState.service();
+		BloomProfile profile = ClientBloomState.profile();
+		var config = ClientBloomState.config();
+		int y = panelY + 4;
+
+		Map<String, Integer> gain = service.previewPrestige(profile);
+		MutableComponent bloomTip = Component.translatable("bloom.hub.bloom.tooltip").withStyle(ChatFormatting.LIGHT_PURPLE);
+		bloomTip.append("\n").append(Component.translatable("bloom.hub.bloom.tooltip.desc", config.prestigeEvery, config.prestigePerCategoryCap,
+				config.prestigeTotalCap).withStyle(ChatFormatting.GRAY));
+		bloomTip.append("\n").append(bloomGainLine(gain));
+		this.addRenderableWidget(HubTab.button(panelX + 4, y, TAB_H, bloomTip, RESET_LEVELS_ICON, true, () -> confirmBloom(gain)));
+
+		long now = this.minecraft.level == null ? 0L : this.minecraft.level.getGameTime();
+		resetMajorsReadyAt = profile.counter(ProgressionService.majorResetKey(category.id()));
+		resetMinutesShown = minutesUntil(resetMajorsReadyAt, now);
+		List<String> owned = service.ownedMajorsIn(profile, category.id());
+		MutableComponent resetTip = Component.translatable("bloom.hub.reset_majors.tooltip", name(category.translationKey(), category.id()))
+				.withStyle(ChatFormatting.GOLD);
+		resetTip.append("\n").append(Component.translatable("bloom.hub.reset_majors.tooltip.desc", cooldownMinutes()).withStyle(ChatFormatting.GRAY));
+
+		if (resetMinutesShown > 0) {
+			resetTip.append("\n").append(Component.translatable("bloom.hub.reset_majors.ready_in", resetMinutesShown).withStyle(ChatFormatting.RED));
+		} else if (owned.isEmpty()) {
+			resetTip.append("\n").append(Component.translatable("bloom.hub.reset_majors.none").withStyle(ChatFormatting.DARK_GRAY));
+		}
+
+		resetMajorsButton = HubTab.button(panelX + panelW - 4 - TAB_H, y, TAB_H, resetTip, RESET_MAJORS_ICON,
+				resetMinutesShown <= 0 && !owned.isEmpty(), () -> confirmMajorReset(category, owned));
+		this.addRenderableWidget(resetMajorsButton);
+	}
+
+	/** Whole minutes (rounded up) from {@code now} until {@code readyAt}, in game ticks; 0 when it's ready. */
+	private static long minutesUntil(long readyAt, long now) {
+		return readyAt <= now ? 0L : (readyAt - now + 1199) / 1200;
+	}
+
+	private static long cooldownMinutes() {
+		return Math.max(1, ClientBloomState.config().majorResetCooldownTicks / 1200);
+	}
+
+	/** What a Bloom+ reset would pay right now, as one line. */
+	private static Component bloomGainLine(Map<String, Integer> gain) {
+		int total = gain.values().stream().mapToInt(Integer::intValue).sum();
+
+		if (total <= 0) {
+			return Component.translatable("bloom.hub.bloom.no_gain").withStyle(ChatFormatting.DARK_GRAY);
+		}
+
+		MutableComponent parts = Component.empty();
+		int i = 0;
+
+		for (Map.Entry<String, Integer> entry : gain.entrySet()) {
+			if (i++ > 0) {
+				parts.append(", ");
+			}
+
+			Component category = ClientBloomState.definitions().category(entry.getKey())
+					.map(c -> name(c.translationKey(), c.id())).orElse(Component.literal(entry.getKey()));
+			parts.append(category).append(" +" + entry.getValue());
+		}
+
+		return Component.translatable("bloom.hub.bloom.gain", total, parts).withStyle(ChatFormatting.GREEN);
+	}
+
+	private void confirmBloom(Map<String, Integer> gain) {
+		MutableComponent message = Component.translatable("bloom.hub.bloom.message");
+		message.append("\n\n").append(bloomGainLine(gain));
+		ClientScreens.open(new ConfirmScreen(yes -> {
+			if (yes) {
+				send(Action.BLOOM_RESET, "", 0);
+			}
+
+			ClientScreens.open(this);
+		}, Component.translatable("bloom.hub.bloom.title"), message));
+	}
+
+	private void confirmMajorReset(CategoryDefinition category, List<String> owned) {
+		BloomProfile profile = ClientBloomState.profile();
+		List<String> also = ClientBloomState.service().refundCascade(profile, Set.copyOf(owned), null);
+		int back = 0;
+
+		for (String id : owned) {
+			back += profile.majors().get(id).paid();
+		}
+
+		for (String id : also) {
+			back += profile.majors().get(id).paid();
+		}
+
+		Component tab = name(category.translationKey(), category.id());
+		MutableComponent message = Component.translatable("bloom.hub.reset_majors.message", joinNames(owned), back, cooldownMinutes());
+
+		if (!also.isEmpty()) {
+			message.append("\n\n").append(Component.translatable("bloom.hub.refund.also", joinNames(also)));
+		}
+
+		ClientScreens.open(new ConfirmScreen(yes -> {
+			if (yes) {
+				send(Action.RESET_MAJORS, category.id(), 0);
+			}
+
+			ClientScreens.open(this);
+		}, Component.translatable("bloom.hub.reset_majors.title", tab), message));
+	}
+
+	private static final Map<String, ItemStack> TAB_ITEMS = new HashMap<>();
+
+	/** A category tab's item: a pickaxe, a sword, a chestplate, a potion (made on first use, once items exist). */
+	private static ItemStack tabItem(CategoryDefinition category) {
+		Identifier id = Identifier.tryParse(category.id());
+		String path = id == null ? "" : id.getPath();
+		return TAB_ITEMS.computeIfAbsent(path, name -> switch (name) {
+			case "utility" -> new ItemStack(Items.DIAMOND_PICKAXE);
+			case "combat" -> new ItemStack(Items.DIAMOND_SWORD);
+			case "armor" -> new ItemStack(Items.DIAMOND_CHESTPLATE);
+			case "misc" -> PotionContents.createItemStack(Items.POTION, Potions.REGENERATION);
+			default -> new ItemStack(Items.BOOK);
+		});
 	}
 
 	/** The stats window's widgets; also works out where its text goes. */
@@ -285,10 +424,13 @@ public final class HubScreen extends Screen {
 			plus.active = unspent > 0;
 			this.addRenderableWidget(plus);
 
-			MiniButton minus = new MiniButton(x + 4, y + 12, MiniButton.Glyph.MINUS, Component.translatable("bloom.hub.stat.minus"),
-					shift -> send(allocate, stat.id(), shift ? -Math.min(10, inPool) : -1));
-			minus.active = inPool > 0 && ClientBloomState.config().allowStatRefund;
-			this.addRenderableWidget(minus);
+			// Taking points back out only opens up at level 100 (and closes again after Bloom+).
+			if (service.canRefundStats(profile, category.id())) {
+				MiniButton minus = new MiniButton(x + 4, y + 12, MiniButton.Glyph.MINUS, Component.translatable("bloom.hub.stat.minus"),
+						shift -> send(allocate, stat.id(), shift ? -Math.min(10, inPool) : -1));
+				minus.active = inPool > 0;
+				this.addRenderableWidget(minus);
+			}
 
 			// The icon is the on/off switch: a corner dot, green when on and red when off (like the Majors).
 			boolean naturalOff = progress.disabledStats().contains(stat.id());
@@ -370,6 +512,12 @@ public final class HubScreen extends Screen {
 		// XP can change while the hub is open (orbs, commands): keep Buy point in step with it.
 		if (investButton != null) {
 			investButton.active = playerXpPoints() >= investCost;
+		}
+
+		// The Major reset's countdown: rebuild when the minutes it shows change (and when it's ready again).
+		if (resetMajorsButton != null && resetMinutesShown > 0 && this.minecraft.level != null
+				&& minutesUntil(resetMajorsReadyAt, this.minecraft.level.getGameTime()) != resetMinutesShown) {
+			this.rebuildWidgets();
 		}
 	}
 

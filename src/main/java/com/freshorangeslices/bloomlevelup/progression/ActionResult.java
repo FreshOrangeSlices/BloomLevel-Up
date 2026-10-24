@@ -35,7 +35,11 @@ public record ActionResult(Outcome outcome, List<String> involved) {
 		INVESTMENT_LOCKED,
 		INVALID_AMOUNT,
 		/** The chosen option isn't allowed (Copycat: not an owned, copyable weapon Major). */
-		INVALID_CHOICE
+		INVALID_CHOICE,
+		/** That reset is still cooling down (a tab's Major reset: once every 20 minutes). */
+		COOLDOWN,
+		/** Stat points can only be taken back out once the category is at the level cap (100). */
+		STAT_REFUND_LOCKED
 	}
 
 	public ActionResult {

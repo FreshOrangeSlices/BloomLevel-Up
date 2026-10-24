@@ -53,11 +53,14 @@ client and server can be checked at a glance; they should always run the same bu
 Open your inventory and click the button right of the recipe book, or bind **Open Skill Hub** in
 Controls. In the hub:
 
-- Category tabs along the top. **Drag** the page (or scroll) to look around. Combat is a tree: Master
+- Category tabs along the top (pickaxe, sword, chestplate, potion). Top left, the red **Bloom+** button:
+  every category back to level 0 and every Major refunded, for +1 bonus Major Level per 50 levels in a
+  category. Top right, the white **reset Majors** button: refunds every Major in this tab, then waits
+  20 minutes. Both ask first. **Drag** the page (or scroll) to look around. Combat is a tree: Master
   of Arms in the middle, each weapon around it with its Majors, the universal Majors along the bottom;
   lines turn red when a Major on them is on.
-- The stats window (top left; the arrow folds it away): **+ / −** to spend or take back points
-  (shift = 10), **click a stat's icon** to switch it off or on without losing points (corner dot: green
+- The stats window (top left; the arrow folds it away): **+** to spend points (shift = 10); **−** to
+  take them back shows up once the category is level 100 (and goes again after Bloom+); **click a stat's icon** to switch it off or on without losing points (corner dot: green
   on, red off).
 - Majors: click to buy, click an owned one to switch it on/off, right-click to refund (anything that
   depends on it is listed and refunded with it after you confirm). Glowing = on, red dot = owned but

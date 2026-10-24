@@ -99,7 +99,7 @@ class ProgressionServiceTest {
 
 	@Test
 	void refundRespectsConfig() {
-		levelTo(UTILITY, 5);
+		levelTo(UTILITY, 100);
 		service.allocate(profile, EFFICIENCY, Pool.NATURAL, 5);
 		assertTrue(service.allocate(profile, EFFICIENCY, Pool.NATURAL, -2).ok());
 		assertEquals(Outcome.NOT_ENOUGH_POINTS, service.allocate(profile, EFFICIENCY, Pool.NATURAL, -9).outcome());
@@ -108,6 +108,42 @@ class ProgressionServiceTest {
 		strict.allowStatRefund = false;
 		ProgressionService noRefund = new ProgressionService(service.definitions(), strict.validated());
 		assertEquals(Outcome.REFUND_DISABLED, noRefund.allocate(profile, EFFICIENCY, Pool.NATURAL, -1).outcome());
+	}
+
+	@Test
+	void statRefundUnlocksAtTheCap() {
+		levelTo(UTILITY, 5);
+		service.allocate(profile, EFFICIENCY, Pool.NATURAL, 5);
+		assertEquals(Outcome.STAT_REFUND_LOCKED, service.allocate(profile, EFFICIENCY, Pool.NATURAL, -1).outcome());
+		assertFalse(service.canRefundStats(profile, UTILITY), "No minus button below 100");
+		levelTo(UTILITY, 100);
+		assertTrue(service.canRefundStats(profile, UTILITY), "Minus buttons at 100");
+		assertTrue(service.allocate(profile, EFFICIENCY, Pool.NATURAL, -2).ok());
+		service.bloomReset(profile);
+		assertFalse(service.canRefundStats(profile, UTILITY), "Bloom+ takes them away again");
+	}
+
+	@Test
+	void resettingATabRefundsItsMajorsThenCoolsDown() {
+		levelTo(ARMOR, 100);
+		levelTo(UTILITY, 100);
+		service.purchaseMajor(profile, LAST_BREATH);
+		service.purchaseMajor(profile, CASTLE_OF_STONE);
+		service.purchaseMajor(profile, VEIN_MINING);
+		int before = profile.availableMajorLevels();
+
+		ActionResult result = service.resetCategoryMajors(profile, ARMOR, 1000L);
+		assertTrue(result.ok());
+		assertEquals(List.of(CASTLE_OF_STONE, LAST_BREATH), result.involved());
+		assertFalse(profile.owns(LAST_BREATH));
+		assertTrue(profile.owns(VEIN_MINING), "Other tabs keep their Majors");
+		assertEquals(before + 4, profile.availableMajorLevels());
+
+		service.purchaseMajor(profile, LAST_BREATH);
+		assertEquals(Outcome.COOLDOWN, service.resetCategoryMajors(profile, ARMOR, 1000L + 23999).outcome());
+		assertTrue(service.resetCategoryMajors(profile, ARMOR, 1000L + 24000).ok(), "Again after 20 minutes");
+		assertEquals(Outcome.NOT_OWNED, service.resetCategoryMajors(profile, ARMOR, 1000L + 48000).outcome());
+		assertEquals(Outcome.UNKNOWN_CATEGORY, service.resetCategoryMajors(profile, "other:nope", 0L).outcome());
 	}
 
 	@Test

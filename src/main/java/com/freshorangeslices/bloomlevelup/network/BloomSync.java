@@ -183,6 +183,13 @@ public final class BloomSync {
 				case INVEST -> service.invest(profile, target, amount, new PlayerXpWallet(player));
 				case SET_COPY_SOURCE -> service.selectCopySource(profile, CombatIds.COPYCAT, target);
 				case REFUND_MAJOR_ALL -> service.refundMajorWithDependents(profile, target);
+				case RESET_MAJORS -> service.resetCategoryMajors(profile, target, player.level().getGameTime());
+				case BLOOM_RESET -> {
+					com.freshorangeslices.bloomlevelup.progression.BloomResetResult reset = service.bloomReset(profile);
+					player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("bloom.command.reset.done", reset.bloomCount(),
+							reset.majorLevelsRefunded(), reset.totalPrestigeAwarded()).withStyle(net.minecraft.ChatFormatting.LIGHT_PURPLE));
+					yield ActionResult.success();
+				}
 			};
 		} catch (RuntimeException e) {
 			BloomLevelUp.LOGGER.error("Bloom request {} from {} failed", request, player.getName().getString(), e);

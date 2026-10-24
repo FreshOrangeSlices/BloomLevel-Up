@@ -43,6 +43,10 @@ public final class BloomConfig {
 
 	/** Whether naturally earned stat points may be pulled back out and re-allocated freely. */
 	public boolean allowStatRefund = true;
+	/** Stat points can only be taken back out (the hub's minus button) once that category is at the level cap. */
+	public boolean statRefundAtCapOnly = true;
+	/** A tab's "reset Majors" button: how long before that tab can be reset again (20 minutes of game time). */
+	public int majorResetCooldownTicks = 24000;
 
 	/** Safety ceiling for the armor-overcap damage-reduction layer so it can never reach immunity. */
 	public double armorOvercapReductionCap = 0.90;
@@ -283,6 +287,7 @@ public final class BloomConfig {
 		levelCap = Math.max(1, levelCap);
 		majorLevelEvery = Math.max(1, majorLevelEvery);
 		prestigeEvery = Math.max(1, prestigeEvery);
+		majorResetCooldownTicks = Math.max(0, majorResetCooldownTicks);
 		prestigePerCategoryCap = Math.max(0, prestigePerCategoryCap);
 		prestigeTotalCap = Math.max(0, prestigeTotalCap);
 		xpCurveBase = Math.max(1.0, xpCurveBase);

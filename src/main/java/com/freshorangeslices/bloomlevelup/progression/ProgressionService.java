@@ -230,6 +230,11 @@ public final class ProgressionService {
 				return ActionResult.of(Outcome.REFUND_DISABLED);
 			}
 
+			// Early on, where points go is a commitment; once the category is mastered they can be moved around.
+			if (config.statRefundAtCapOnly && progress.level() < config.levelCap) {
+				return ActionResult.of(Outcome.STAT_REFUND_LOCKED);
+			}
+
 			if (-delta > current) {
 				return ActionResult.of(Outcome.NOT_ENOUGH_POINTS);
 			}
@@ -524,6 +529,62 @@ public final class ProgressionService {
 		}
 
 		return new ActionResult(Outcome.SUCCESS, dependents);
+	}
+
+	/** Whether stat points in this category can be taken back out right now (the hub shows its minus buttons). */
+	public boolean canRefundStats(BloomProfile profile, String categoryId) {
+		return config.allowStatRefund && (!config.statRefundAtCapOnly || profile.category(categoryId).level() >= config.levelCap);
+	}
+
+	/** Profile counter holding the game time from which a category's Majors can be reset again. */
+	public static String majorResetKey(String categoryId) {
+		return categoryId + "#majors_reset_at";
+	}
+
+	/** Owned Majors in a category, sorted. */
+	public List<String> ownedMajorsIn(BloomProfile profile, String categoryId) {
+		List<String> owned = new ArrayList<>();
+
+		for (MajorDefinition major : definitions.majorsIn(categoryId)) {
+			if (profile.owns(major.id())) {
+				owned.add(major.id());
+			}
+		}
+
+		owned.sort(null);
+		return owned;
+	}
+
+	/**
+	 * A tab's "reset Majors" button: refunds every owned Major in one category in full, plus any Major elsewhere
+	 * that needs one of them (see {@link #refundCascade}), then cools down for {@code majorResetCooldownTicks}.
+	 * Gives nothing extra (Bloom+ is the reset that pays). {@code now} is the game time; {@code involved} lists
+	 * everything refunded.
+	 */
+	public ActionResult resetCategoryMajors(BloomProfile profile, String categoryId, long now) {
+		if (definitions.category(categoryId).isEmpty()) {
+			return ActionResult.of(Outcome.UNKNOWN_CATEGORY);
+		}
+
+		if (now < profile.counter(majorResetKey(categoryId))) {
+			return ActionResult.of(Outcome.COOLDOWN);
+		}
+
+		List<String> owned = ownedMajorsIn(profile, categoryId);
+
+		if (owned.isEmpty()) {
+			return ActionResult.of(Outcome.NOT_OWNED);
+		}
+
+		List<String> refunded = new ArrayList<>(owned);
+		refunded.addAll(refundCascade(profile, Set.copyOf(owned), null));
+
+		for (String id : refunded) {
+			profile.majors().remove(id);
+		}
+
+		profile.setCounter(majorResetKey(categoryId), now + config.majorResetCooldownTicks);
+		return new ActionResult(Outcome.SUCCESS, refunded);
 	}
 
 	public ActionResult toggleMajor(BloomProfile profile, String majorId) {

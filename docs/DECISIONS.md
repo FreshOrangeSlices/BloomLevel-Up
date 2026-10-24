@@ -337,6 +337,16 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Hub window | The window hugs its page: the stats window's column plus the 416×320 page while the stats are open, just the page while they're folded (the folded header then sits on the page's top-left corner). The game shows, blurred, around it. On a screen too small for that it fills the screen and the page drags, as before | `HubScreen.init` |
 | Gold frame and tabs | A gold frame around the window: a 28×28 nine-slice GUI sprite with a 6-pixel border, made by `docs/art/hub-templates/make_frame.py` (repaint the PNG freely; keep the border 6 wide or change the `.mcmeta`). The tabs are gold-rimmed plates in the same golds; the open tab is lit | `textures/gui/sprites/hub/frame.png`, `HubTab` |
 
+## Playtest round 7 (2026-10-23)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Art | Every Major has its 64×64 art now, plus the Power, Tempo, Critical and Penetration stat icons. Weapon nodes stay the vanilla items (confirmed) | `textures/icon/` |
+| Category tabs | Small gold plates with an item instead of a name (Utility a diamond pickaxe, Combat a diamond sword, Armor a diamond chestplate, Misc a Regeneration potion), centred in the tab row; the name shows on hover | `HubScreen.tabItem`, `HubTab` |
+| Bloom+ button | Top left of the tab row, the red arrows (`gui/hub/reset_levels.png`): the existing Bloom+ reset (every category to level 0, natural stat points back, every Major refunded; invested points and unlocks kept; +1 bonus Major Level per 50 levels reached in a category, up to 2 each and 6 in all). The tooltip and the confirm screen say what it would pay right now | `HubScreen.addResetButtons`, action `BLOOM_RESET` |
+| Reset Majors button | Top right, the white arrows (`gui/hub/reset_majors.png`): refunds every Major in the open tab (and anything elsewhere that needs one of them, like Rainbow after Crossbow Infinity) and pays nothing extra. Then that tab can't be reset again for 20 minutes of game time (`majorResetCooldownTicks` 24000, a profile counter per category, so it survives relogging). Right-click refunds of single Majors stay as they were | `ProgressionService.resetCategoryMajors`, action `RESET_MAJORS` |
+| Taking stat points back | The minus buttons only show once the category is level 100, and the server refuses a refund below that (`statRefundAtCapOnly`, on by default), so early points are a commitment. Bloom+ drops the level to 0, so they disappear again until the next 100 | `ProgressionService.allocate`, `canRefundStats` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

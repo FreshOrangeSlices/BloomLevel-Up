@@ -1,0 +1,11 @@
+name: mod-check
+on:
+  push:
+    branches: [ "ci/mod-check" ]
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Modrinth 26.3 Fabric status
+        run: python3 check.py

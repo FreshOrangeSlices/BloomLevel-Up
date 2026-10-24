@@ -157,8 +157,10 @@ jobs:
       - name: client game test with the pack
         run: |
           set -o pipefail
+          sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 xvfb
           chmod +x ./gradlew
-          ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log
+          # OpenGL (Sodium, Iris) needs a 24-bit screen: see build.gradle
+          xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log
       - name: report
         if: always()
         run: |

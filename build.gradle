@@ -113,6 +113,12 @@ loom.runs.create("clientGameTestPack") {
 	property "bloom.packtest", "true"
 }
 
+// Sodium and Iris switch the game to OpenGL, which needs a 24-bit display; Loom's own xvfb-run gives an 8-bit one
+// (fine for the Vulkan runs). The workflow wraps this task in its own xvfb-run instead.
+tasks.matching { it.name == "runClientGameTestPack" }.configureEach {
+	useXvfb = false
+}
+
 tasks.matching { it.name == "runGameTestBetterCombat" || it.name == "runClientGameTestBetterCombat" }.configureEach {
 	dependsOn "copyBetterCombatMods"
 }

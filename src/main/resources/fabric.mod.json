@@ -26,10 +26,18 @@
 		"java": ">=25",
 		"fabric-api": "*"
 	},
+	"suggests": {
+		"bettercombat": "*"
+	},
 	"mixins": [
 		"bloomlevelup.mixins.json",
+		"bloomlevelup.bettercombat.mixins.json",
 		{
 			"config": "bloomlevelup.client.mixins.json",
+			"environment": "client"
+		},
+		{
+			"config": "bloomlevelup.bettercombat.client.mixins.json",
 			"environment": "client"
 		}
 	]

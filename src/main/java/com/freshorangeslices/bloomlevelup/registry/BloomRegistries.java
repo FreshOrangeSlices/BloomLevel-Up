@@ -5,6 +5,7 @@ import net.minecraft.server.packs.PackType;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 
 import com.freshorangeslices.bloomlevelup.command.BloomCommands;
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.config.ConfigLoader;
 import com.freshorangeslices.bloomlevelup.data.BloomDataLoader;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
@@ -51,5 +52,6 @@ public final class BloomRegistries {
 		MiscSkill.init();
 		HeldItemWatcher.init();
 		StatSheets.init();
+		BetterCombat.init();
 	}
 }

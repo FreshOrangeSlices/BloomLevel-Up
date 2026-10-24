@@ -24,7 +24,7 @@ jobs:
       - name: build
         run: |
           set -o pipefail
-          ./gradlew build runGameTest --stacktrace 2>&1 | tee build.log
+          ./gradlew build runGameTest runGameTestBetterCombat --stacktrace 2>&1 | tee build.log
       # Always leave a one-line game test summary on the run (readable through the checks API).
       - name: report game tests
         if: always()
@@ -34,7 +34,7 @@ jobs:
           if not os.path.exists('build.log'):
               raise SystemExit(0)
           lines = open('build.log', encoding='utf-8', errors='replace').read().splitlines()
-          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|optional tests|tests? failed|failed!|GameTestAssert|Task :runGameTest', l)]
+          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|optional tests|tests? failed|failed!|GameTestAssert|Task :runGameTest|BLOOMTEST', l)]
           text = '\n'.join(hits[-40:]) or 'no game test output found'
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=gametest-summary::{esc(text[:3900])}")

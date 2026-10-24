@@ -53,7 +53,8 @@ public final class StatEffects {
 	private static final Identifier BRAWLER_MOD = BloomLevelUp.id("major/brawler");
 	private static final Identifier GUARANTEED_CRITICAL_MOD = BloomLevelUp.id("major/guaranteed_critical");
 	private static final Identifier LONG_REACH_MOD = BloomLevelUp.id("major/long_reach");
-	private static final Identifier FULL_SWEEP_MOD = BloomLevelUp.id("major/full_sweep");
+	/** Full Sweep's sweep ratio (public: the Better Combat compat reads it back). */
+	public static final Identifier FULL_SWEEP_MOD = BloomLevelUp.id("major/full_sweep");
 	private static final Identifier TITAN_SPEED_MOD = BloomLevelUp.id("major/titan_hide_speed");
 	private static final Identifier TITAN_FALL_MOD = BloomLevelUp.id("major/titan_hide_fall");
 	private static final Identifier PROTEIN_MOD = BloomLevelUp.id("major/protein");

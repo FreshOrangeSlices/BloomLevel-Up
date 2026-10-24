@@ -23,6 +23,7 @@ import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 
+import com.freshorangeslices.bloomlevelup.client.compat.BetterCombatClient;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
 import com.freshorangeslices.bloomlevelup.client.mixin.MinecraftInvoker;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
@@ -329,8 +330,9 @@ public final class CombatControls {
 
 			// Swing at what's in the crosshair. Never at a block (letting go must not start mining it), and not
 			// when the key was "released" by a screen opening.
+			// With Better Combat the swing it starts plays a slam (BetterCombatClient).
 			if (!aimingAtBlock(minecraft) && minecraft.gui.screen() == null) {
-				((MinecraftInvoker) minecraft).bloomlevelup$startAttack();
+				BetterCombatClient.chargedSwing(minecraft, () -> ((MinecraftInvoker) minecraft).bloomlevelup$startAttack());
 			}
 
 			return;

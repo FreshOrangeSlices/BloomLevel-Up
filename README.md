@@ -84,6 +84,10 @@ Controls. In the hub:
   second build, the **Build** chip shows the other build's numbers against the one in use. A Major's
   details window has a bar-chart button that opens the sheet showing it at work (its switch on Max, a
   weapon of its tree picked).
+- **Better Combat** (optional): when it's installed, Bloom follows its swings. Every mob a swing hits counts
+  as a hit, Predator builds on any mob, Full Sweep (swords) and Batter Up! (other weapons) remove its penalty
+  for hitting several mobs at once, and a charged swing plays a slam that lands with a shockwave. The stat
+  sheet shows its combo and the crowd rule. Without it nothing changes.
 - After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
   icon switches only a stat's invested points. The Armor tab shows your real armor total.
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).

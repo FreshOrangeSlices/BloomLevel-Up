@@ -63,6 +63,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
@@ -298,6 +299,8 @@ public final class CombatSkill {
 			return InteractionResult.PASS;
 		}
 
+		// Better Combat: Full Sweep / Batter Up! cancel its penalty for hitting several mobs (only inside its swings).
+		BetterCombat.beforeAttack(serverPlayer);
 		float strength = serverPlayer.getAttackStrengthScale(0.5F);
 		boolean crit = strength > 0.9F && ((PlayerInvoker) serverPlayer).bloomlevelup$canCriticalAttack(target);
 		PENDING.put(serverPlayer.getUUID(), new PendingAttack(target, strength, crit, serverPlayer.fallDistance, serverPlayer.isSprinting(),
@@ -420,6 +423,10 @@ public final class CombatSkill {
 				multiplier *= config.chargeAttackMultiplier;
 				CombatAbilities.chargedHitEffects(level, target);
 				CombatAbilities.chargedSwingWear(player, weapon);
+
+				if (BetterCombat.installed()) {
+					BetterCombat.slamShockwave(level, target); // the client played a slam for it
+				}
 			}
 
 			if (swing.crit) {
@@ -480,10 +487,12 @@ public final class CombatSkill {
 			multiplier *= 1.0 + config.firstStrikeBonus;
 		}
 
-		// Predator: keep hitting the same target to ramp up (single-target hits only).
+		// Predator: keep hitting the same target to ramp up (single-target hits only). With Better Combat, whose swings
+		// hit several mobs at once, any mob keeps the stacks going.
 		if (active(player, CombatIds.PREDATOR) && (kind == HitKind.PRIMARY || kind == HitKind.PROJECTILE)) {
 			Stack predator = PREDATOR.get(player.getUUID());
-			boolean same = predator != null && target.getUUID().equals(predator.target()) && now - predator.lastTick() <= config.predatorResetTicks;
+			boolean same = predator != null && (BetterCombat.installed() || target.getUUID().equals(predator.target()))
+					&& now - predator.lastTick() <= config.predatorResetTicks;
 			int stacks = same ? predator.stacks() : 0;
 			multiplier *= StatFormulas.stackMultiplier(stacks, config.predatorPerStack, config.predatorMaxStacks);
 			int next = Math.min(stacks + 1, config.predatorMaxStacks);
@@ -630,7 +639,10 @@ public final class CombatSkill {
 				PendingAttack swing = hit.swing();
 
 				// Batter Up!: everything that isn't a sword sweeps too (swords already do), under vanilla's sweep rules.
-				if (active(player, CombatIds.BATTER_UP) && !Weapons.is(weapon, Family.SWORD) && swing.strength > 0.9F && !swing.crit
+				// Not in a Better Combat swing: that already hits everything in the arc (and Batter Up! cancels its
+				// crowd penalty instead, BetterCombat.beforeAttack).
+				if (active(player, CombatIds.BATTER_UP) && !Weapons.is(weapon, Family.SWORD) && !BetterCombat.inSwing(player)
+						&& swing.strength > 0.9F && !swing.crit
 						&& !swing.sprinting && swing.onGround) {
 					float sweep = (float) (1.0 + player.getAttributeValue(Attributes.SWEEPING_DAMAGE_RATIO) * hit.vanillaAmount());
 					defer(0, () -> sweep(level, player, target, sweep));

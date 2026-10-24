@@ -37,6 +37,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
@@ -131,7 +132,8 @@ public final class CombatAbilities {
 
 	private static void armCharge(ServerPlayer player) {
 		if (canCharge(player, player.getMainHandItem())) {
-			CHARGED_UNTIL.put(player.getUUID(), player.level().getGameTime() + 20);
+			// Better Combat's swing lands after its wind-up (up to about a second for heavy weapons): wait for it.
+			CHARGED_UNTIL.put(player.getUUID(), player.level().getGameTime() + (BetterCombat.installed() ? 40 : 20));
 		}
 	}
 

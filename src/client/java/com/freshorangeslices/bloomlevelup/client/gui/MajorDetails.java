@@ -17,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
@@ -109,6 +110,10 @@ final class MajorDetails {
 		add(out, "bloom.hub.detail.numbers", paragraphs(text(base + ".detail.numbers")), true);
 		add(out, "bloom.hub.detail.how", paragraphs(text(base + ".detail.how")), false);
 		add(out, "bloom.hub.detail.catch", paragraphs(text(base + ".detail.catch")), false);
+
+		if (BetterCombat.installed()) {
+			add(out, "bloom.hub.detail.bettercombat", paragraphs(text(base + ".detail.bettercombat")), false);
+		}
 
 		List<Component> combos = new ArrayList<>();
 		BloomProfile profile = ClientBloomState.profile();

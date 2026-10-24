@@ -406,6 +406,22 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Details → sheet | A Major's details window has a bar-chart button (left of the ×) that opens its tab's sheet showing it at work: its switch on Max (Predator, Bloodlust, Combo, First Strike, Stored Impact, Charge Attack / Heavy Hands → Charged, Death From Above → Falling, Marksman, Master of Arms → Charged Throw, Brace! → Braced) and, for a weapon tree, the held weapon if it's of that tree, else the first one in the inventory (bare hands for Unarmed) | `StatSheetWindow.focus`, `LINKED_SWITCH` |
 | Requests | A compare request counts once against the sheet's limit of 20 requests a second per player (the server works out two sheets for it) | `StatSheets.PER_SECOND` |
 
+## Round 9: Better Combat (2026-10-24)
+
+Better Combat is optional: Bloom compiles against it but never bundles it, and every change below only switches on when it is installed. Without it Bloom is exactly as before. CI runs the game tests twice, once plain and once with Better Combat, Cloth Config and Player Animation Library loaded (`runGameTestBetterCombat`).
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Swings that hit several mobs | Every mob a Better Combat swing hits is a normal hit for Bloom (each goes through `Player.attack`), so each gets the full set of bonuses and effects. A stored charge and Stored Impact are spent on the first | `CombatSkill.applyBonuses` |
+| Predator | With Better Combat installed, any mob keeps the stacks going (not just the same target), for melee and projectiles | `CombatSkill.applyBonuses` |
+| Combo | Unchanged rule: each full-strength hit adds a stack, so a swing that hits three mobs adds three | `CombatSkill.applyBonuses` |
+| Crowd penalty | Better Combat weakens a swing that hits more mobs (down to -50% at 5 mobs, by default) and turns the sweep ratio into a bonus. Full Sweep (swords) and Batter Up! (every other melee weapon) cancel the penalty: every mob takes the whole hit, and Full Sweep's own ratio adds no bonus. Done with a transient attack-damage modifier for the length of the swing, sized from the number of mobs in Better Combat's request | `compat/BetterCombat.crowdCounter`, `BetterCombatServerNetworkMixin` |
+| Batter Up!'s own sweep | Skipped inside a Better Combat swing (it already hits the whole arc) | `CombatSkill.onHitEffects` |
+| Charged swing | Letting go plays a slam instead of the next combo swing: Better Combat's one-handed slam, the two-handed heavy slam for two-handed weapons, an uppercut for fist weapons and bare hands. The hit lands with a dust ring, a small blast and a heavy thud. The armed charge waits 2 s (instead of 1 s) for the swing's wind-up | `client/compat/BetterCombatClient`, `BetterCombatAttackInteractorMixin`, `BetterCombat.slamShockwave`, `CombatAbilities.armCharge` |
+| Spears | Better Combat turns jabs into normal swings, so Bloom's spear Majors work off those; Long Reach still adds reach (Better Combat reads the same attribute) | — |
+| Stat sheet | For weapons Better Combat handles: each swing of its combo (shape, arc, damage) and what each mob takes when a swing hits 2 to 5 mobs, in place of the vanilla sweep. The summary shows "Hitting 3 mobs, each" | `CombatSheet.betterCombatRows` |
+| Details window | Predator, Combo, Full Sweep, Batter Up!, Charge Attack and Heavy Hands get a "With Better Combat" section, only shown when it's installed | `MajorDetails.sections`, `*.detail.bettercombat` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

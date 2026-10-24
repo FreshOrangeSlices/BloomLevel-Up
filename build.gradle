@@ -14,6 +14,25 @@ version = "${project.version}+${buildNumber ? "build." + buildNumber : "local"}"
 
 repositories {
 	mavenCentral()
+	// Better Combat and the mods its test run needs (optional compat; nothing from here is bundled).
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
+}
+
+configurations {
+	// Mods loaded only into the second game test run (runGameTestBetterCombat), never into the jar or other runs.
+	betterCombatRuntime {
+		transitive = false
+	}
 }
 
 loom {
@@ -45,10 +64,42 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
+	// Better Combat is optional: compiled against, never bundled. Bloom's compat code only runs when it's installed.
+	// (Its config class extends Cloth Config's, and its animation hooks use Player Animation Library's types.)
+	compileOnly "maven.modrinth:better-combat:${project.better_combat_version}"
+	compileOnly "maven.modrinth:cloth-config:${project.cloth_config_version}"
+	clientCompileOnly "maven.modrinth:better-combat:${project.better_combat_version}"
+	clientCompileOnly "maven.modrinth:cloth-config:${project.cloth_config_version}"
+	clientCompileOnly "maven.modrinth:player-animation-library:${project.player_animation_library_version}"
+	gametestCompileOnly "maven.modrinth:better-combat:${project.better_combat_version}"
+	gametestCompileOnly "maven.modrinth:cloth-config:${project.cloth_config_version}"
+	betterCombatRuntime "maven.modrinth:better-combat:${project.better_combat_version}"
+	betterCombatRuntime "maven.modrinth:player-animation-library:${project.player_animation_library_version}"
+	betterCombatRuntime "maven.modrinth:cloth-config:${project.cloth_config_version}"
+
 	// Unit tests cover the pure-Java core (progression rules, formulas, validation).
 	testImplementation platform("org.junit:junit-bom:${project.junit_version}")
 	testImplementation 'org.junit.jupiter:junit-jupiter'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// The game tests again with Better Combat (and what it needs) loaded: the compat tests run, and everything else has
+// to pass with it installed too. The plain runGameTest stays Better Combat-free, so both setups keep working.
+def betterCombatMods = layout.buildDirectory.dir("betterCombatMods")
+
+tasks.register("copyBetterCombatMods", Sync) {
+	from configurations.betterCombatRuntime
+	into betterCombatMods
+}
+
+loom.runs.create("gameTestBetterCombat") {
+	inherit loom.runs.getByName("gameTest")
+	runDir "build/run/gameTestBetterCombat"
+	property "fabric.addMods", betterCombatMods.get().asFile.absolutePath
+}
+
+tasks.matching { it.name == "runGameTestBetterCombat" }.configureEach {
+	dependsOn "copyBetterCombatMods"
 }
 
 test {

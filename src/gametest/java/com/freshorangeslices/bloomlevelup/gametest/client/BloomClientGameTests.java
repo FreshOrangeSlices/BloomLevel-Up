@@ -20,7 +20,10 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
+import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
+import com.freshorangeslices.bloomlevelup.client.compat.BetterCombatClient;
 import com.freshorangeslices.bloomlevelup.client.NameTags;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
 import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
@@ -42,64 +45,124 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
 			singleplayer.getConnection().waitForChunksRender();
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null);
-			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:combat 100000");
-			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:utility 100000");
-			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:misc 100000");
-			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/hoarders_pocket");
-			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null
-					&& ClientBloomState.profile().category("bloomlevelup:combat").level() >= 100
-					&& ClientBloomState.profile().owns(MiscIds.HOARDERS_POCKET));
 
-			// Nameplates: the server sends each player's [lvl N] tag (N = spent Major Levels: Hoarder's Pocket = 5).
-			context.waitFor(client -> NameTags.tag(client.player.getUUID()) != null && NameTags.tag(client.player.getUUID()).spent() == 5);
-
-			context.getInput().pressKey(options -> options.keyInventory);
-			context.waitForScreen(InventoryScreen.class);
-			context.takeScreenshot("bloom_inventory_button");
-
-			context.setScreen(HubScreen::new);
-			context.waitTicks(2);
-			context.takeScreenshot("bloom_skill_hub");
-			context.setScreen(() -> null);
-
-			combatTreeScreenshots(context, singleplayer);
-			statSheetScreenshots(context, singleplayer);
-
-			hubClicks(context);
-			buyPointWithHugeXp(context, singleplayer);
-			braceHud(context, singleplayer);
-
-			// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
-			context.runOnClient(client -> SideButton.openPocket());
-			context.waitForScreen(ContainerScreen.class);
-			context.takeScreenshot("bloom_hoarders_pocket");
-			context.setScreen(() -> null);
-
-			// Rune Embedding has its own screen type now (slot outlines).
-			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/rune_embedding");
-			context.waitFor(client -> ClientBloomState.profile().owns(MiscIds.RUNE_EMBEDDING));
-			context.runOnClient(client -> SideButton.openRunes());
-			context.waitForScreen(com.freshorangeslices.bloomlevelup.client.gui.RuneScreen.class);
-			context.takeScreenshot("bloom_rune_embedding");
-			context.setScreen(() -> null);
-
-			// Overenchant's anvil-screen mixin only applies when the screen class loads, so open one.
-			context.setScreen(() -> {
-				Minecraft client = Minecraft.getInstance();
-				return new AnvilScreen(new AnvilMenu(0, client.player.getInventory()), client.player.getInventory(), Component.literal("Anvil"));
-			});
-			context.waitTicks(2);
-			context.takeScreenshot("bloom_anvil");
-			context.setScreen(() -> null);
-
-			// An empty-handed left click goes through the Charge / Lightning Summon hook.
-			context.getInput().pressKey(options -> options.keyAttack);
-			context.waitTicks(2);
+			if (BetterCombat.installed()) {
+				// The Better Combat run (runClientGameTestBetterCombat): only what Better Combat changes on the client.
+				betterCombatSlam(context, singleplayer);
+			} else {
+				everything(context, singleplayer);
+			}
 		}
 
 		if (!failures.isEmpty()) {
 			throw new AssertionError("Bloom client checks failed: " + String.join(" | ", failures));
 		}
+	}
+
+	/** Everything the client checks without Better Combat. */
+	private void everything(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:combat 100000");
+		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:utility 100000");
+		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:misc 100000");
+		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/hoarders_pocket");
+		context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null
+				&& ClientBloomState.profile().category("bloomlevelup:combat").level() >= 100
+				&& ClientBloomState.profile().owns(MiscIds.HOARDERS_POCKET));
+
+		// Nameplates: the server sends each player's [lvl N] tag (N = spent Major Levels: Hoarder's Pocket = 5).
+		context.waitFor(client -> NameTags.tag(client.player.getUUID()) != null && NameTags.tag(client.player.getUUID()).spent() == 5);
+
+		context.getInput().pressKey(options -> options.keyInventory);
+		context.waitForScreen(InventoryScreen.class);
+		context.takeScreenshot("bloom_inventory_button");
+
+		context.setScreen(HubScreen::new);
+		context.waitTicks(2);
+		context.takeScreenshot("bloom_skill_hub");
+		context.setScreen(() -> null);
+
+		combatTreeScreenshots(context, singleplayer);
+		statSheetScreenshots(context, singleplayer);
+
+		hubClicks(context);
+		buyPointWithHugeXp(context, singleplayer);
+		braceHud(context, singleplayer);
+
+		// Hoarder's Pocket: the button's request goes to the server, which opens a one-row chest screen.
+		context.runOnClient(client -> SideButton.openPocket());
+		context.waitForScreen(ContainerScreen.class);
+		context.takeScreenshot("bloom_hoarders_pocket");
+		context.setScreen(() -> null);
+
+		// Rune Embedding has its own screen type now (slot outlines).
+		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/rune_embedding");
+		context.waitFor(client -> ClientBloomState.profile().owns(MiscIds.RUNE_EMBEDDING));
+		context.runOnClient(client -> SideButton.openRunes());
+		context.waitForScreen(com.freshorangeslices.bloomlevelup.client.gui.RuneScreen.class);
+		context.takeScreenshot("bloom_rune_embedding");
+		context.setScreen(() -> null);
+
+		// Overenchant's anvil-screen mixin only applies when the screen class loads, so open one.
+		context.setScreen(() -> {
+			Minecraft client = Minecraft.getInstance();
+			return new AnvilScreen(new AnvilMenu(0, client.player.getInventory()), client.player.getInventory(), Component.literal("Anvil"));
+		});
+		context.waitTicks(2);
+		context.takeScreenshot("bloom_anvil");
+		context.setScreen(() -> null);
+
+		// An empty-handed left click goes through the Charge / Lightning Summon hook.
+		context.getInput().pressKey(options -> options.keyAttack);
+		context.waitTicks(2);
+	}
+
+	/**
+	 * With Better Combat: a charged Charge Attack swing (hold the weapon-skill key, let go) plays the overhead slam
+	 * instead of the next combo swing and lands for double damage. Screenshots from the front, during the wind-up
+	 * and as it lands.
+	 */
+	private void betterCombatSlam(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:combat 100000");
+		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:combat/charge_attack");
+		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:iron_axe");
+		singleplayer.getServer().runCommand("time set noon");
+		singleplayer.getServer().runCommand("execute as @a at @s run tp @s ~ ~ ~ 0 0");
+		context.waitTicks(2);
+		// A husk (no burning in daylight), standing still right in front.
+		singleplayer.getServer().runCommand("execute as @a at @s run summon husk ^ ^ ^2.2 {NoAI:1b,Rotation:[180f,0f]}");
+		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/charge_attack") && client.player.getMainHandItem().is(Items.IRON_AXE));
+		context.waitTicks(30);
+		// From behind, so the husk in front isn't between the camera and the slam.
+		context.runOnClient(client -> client.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_BACK));
+
+		context.getInput().holdKey(CombatControls.skillKeyForTests());
+		context.waitTicks(30);
+		context.getInput().releaseKey(CombatControls.skillKeyForTests());
+		context.waitTicks(2);
+		context.takeScreenshot("bloom_bc_slam_windup");
+		context.waitTicks(5);
+		context.takeScreenshot("bloom_bc_slam_hit");
+		check(context, "a charged release plays the slam", client -> "bettercombat:one_handed_slam".equals(BetterCombatClient.lastSlamForTests()));
+		context.waitTicks(10);
+		float health = singleplayer.getServer().computeOnServer(server -> {
+			for (var level : server.getAllLevels()) {
+				for (var entity : level.getAllEntities()) {
+					if (entity.getType() == net.minecraft.world.entity.EntityTypes.HUSK && entity instanceof net.minecraft.world.entity.LivingEntity living) {
+						return living.getHealth();
+					}
+				}
+			}
+
+			return -1.0F;
+		});
+		BloomLevelUp.LOGGER.info("BLOOMTEST slam: husk health after the charged swing {}", health);
+
+		// An iron axe hits for 9, a charged swing for twice that (the husk's 2 armor points take a little off).
+		if (!(health >= 0.0F && health < 20.0F - 12.0F)) {
+			failures.add("the charged slam hit for double damage (husk health " + health + ")");
+		}
+
+		context.runOnClient(client -> client.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON));
 	}
 
 	/**

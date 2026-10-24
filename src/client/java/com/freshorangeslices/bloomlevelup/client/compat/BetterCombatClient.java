@@ -13,6 +13,8 @@ import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 public final class BetterCombatClient {
 	/** Set for the length of a charged release's attack, so the swing Better Combat starts in it becomes the slam. */
 	private static boolean chargedRelease;
+	/** The last slam played (client game tests). */
+	private static String lastSlam;
 
 	private BetterCombatClient() {
 	}
@@ -36,6 +38,7 @@ public final class BetterCombatClient {
 		// Bare fists (and anything else Better Combat doesn't animate) hit at once like vanilla: show the uppercut too.
 		if (!BetterCombatClientBridge.handles(held)) {
 			BetterCombatClientBridge.playUppercut(minecraft.player);
+			lastSlam = BetterCombatClientBridge.UPPERCUT;
 		}
 	}
 
@@ -48,6 +51,11 @@ public final class BetterCombatClient {
 		}
 
 		chargedRelease = false;
-		return BetterCombatClientBridge.slamFor(minecraft.player.getMainHandItem());
+		lastSlam = BetterCombatClientBridge.slamFor(minecraft.player.getMainHandItem());
+		return lastSlam;
+	}
+
+	public static String lastSlamForTests() {
+		return lastSlam;
 	}
 }

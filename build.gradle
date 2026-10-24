@@ -98,7 +98,14 @@ loom.runs.create("gameTestBetterCombat") {
 	property "fabric.addMods", betterCombatMods.get().asFile.absolutePath
 }
 
-tasks.matching { it.name == "runGameTestBetterCombat" }.configureEach {
+// The same for the client game tests: only the Better Combat checks run there (the slam), with screenshots.
+loom.runs.create("clientGameTestBetterCombat") {
+	inherit loom.runs.getByName("clientGameTest")
+	runDir "build/run/clientGameTestBetterCombat"
+	property "fabric.addMods", betterCombatMods.get().asFile.absolutePath
+}
+
+tasks.matching { it.name == "runGameTestBetterCombat" || it.name == "runClientGameTestBetterCombat" }.configureEach {
 	dependsOn "copyBetterCombatMods"
 }
 

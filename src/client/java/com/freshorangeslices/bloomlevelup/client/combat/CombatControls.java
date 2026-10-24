@@ -355,6 +355,11 @@ public final class CombatControls {
 	// ------------------------------------------------------------------ HUD
 
 	/** Charge meter: 0..1 while the weapon-skill key is held for a charge, or -1 when not charging. */
+	/** The weapon-skill key (client game tests hold it). */
+	public static KeyMapping skillKeyForTests() {
+		return skillKey;
+	}
+
 	public static float chargeProgress() {
 		if (!holding) {
 			return -1.0F;

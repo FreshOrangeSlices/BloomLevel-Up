@@ -79,3 +79,54 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_compare 12
       - name: a Major's details window, with its stat sheet button
         run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_major_details 12
+
+  # The client again with Better Combat loaded: a charged Charge Attack swing has to play the slam. Its two
+  # screenshots (wind-up, landing) are printed as annotations here.
+  client-test-bettercombat:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v6
+      - name: graphics drivers
+        run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers
+      - name: client game tests with Better Combat
+        run: |
+          set -o pipefail
+          chmod +x ./gradlew
+          ./gradlew runClientGameTestBetterCombat --stacktrace 2>&1 | tee client-bc.log
+      - name: report
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('client-bc.log'):
+              raise SystemExit(0)
+          lines = open('client-bc.log', encoding='utf-8', errors='replace').read().splitlines()
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          keep = []
+          for i, line in enumerate(lines):
+              if re.search(r'(error:|ERROR|FAILED|What went wrong|Exception|Caused by|AssertionError|Mixin|BLOOMTEST)', line):
+                  keep.extend(lines[max(0, i - 1):i + 5])
+          text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
+          chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:8]
+          for n, chunk in enumerate(chunks):
+              print(f"::warning title=client-bc-log-{n:02d}::{esc(chunk)}")
+          tail = '\n'.join(lines[-25:])
+          print(f"::notice title=client-bc-summary::{esc(tail[:3900])}")
+          PY
+      - name: pillow
+        if: always()
+        run: pip install --quiet pillow
+      - name: the slam, winding up
+        if: always()
+        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_slam_windup 12
+      - name: the slam, landing
+        if: always()
+        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_slam_hit 12

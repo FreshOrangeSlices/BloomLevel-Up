@@ -1093,6 +1093,11 @@ public final class HubScreen extends Screen {
 		return super.keyPressed(event);
 	}
 
+	/** Whether a details window is open (client game test). */
+	public boolean detailsOpenForTests() {
+		return detailMajor != null;
+	}
+
 	/** Opens a Major's details window, as a right-click does (client game test). */
 	public void openDetailsForTests(String majorId) {
 		ClientBloomState.definitions().major(majorId).ifPresent(this::openDetails);

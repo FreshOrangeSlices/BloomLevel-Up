@@ -14,8 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 
 /**
- * Better Combat's server handler for a swing: notes how many mobs the swing hits before any of them is attacked,
- * so Full Sweep and Batter Up! can cancel its crowd penalty. Only applied when Better Combat is installed.
+ * Better Combat's server handler for a swing (it runs the whole swing at once, on the server thread): marks the
+ * player as mid-swing and notes how many mobs the swing hits before any of them is attacked, so Full Sweep and
+ * Batter Up! can cancel its crowd penalty; clears it all at the end. Only applied when Better Combat is installed.
  */
 @Mixin(value = ServerNetwork.class, remap = false)
 abstract class BetterCombatServerNetworkMixin {
@@ -25,5 +26,11 @@ abstract class BetterCombatServerNetworkMixin {
 		if (request != null && request.entityIds() != null) {
 			BetterCombat.request(player, request.entityIds().length);
 		}
+	}
+
+	@Inject(method = "handleAttackRequest", at = @At("RETURN"))
+	private static void bloomlevelup$swingOver(Packets.C2S_AttackRequest request, MinecraftServer server, ServerPlayer player,
+			ServerGamePacketListenerImpl handler, CallbackInfo ci) {
+		BetterCombat.endRequest(player);
 	}
 }

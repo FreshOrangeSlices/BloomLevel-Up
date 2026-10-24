@@ -7,9 +7,7 @@ import java.util.Locale;
 import net.bettercombat.BetterCombatMod;
 import net.bettercombat.api.WeaponAttributes;
 import net.bettercombat.config.ServerConfig;
-import net.bettercombat.logic.PlayerAttackProperties;
 import net.bettercombat.logic.WeaponRegistry;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -18,11 +16,6 @@ import net.minecraft.world.item.ItemStack;
  */
 final class BetterCombatBridge {
 	private BetterCombatBridge() {
-	}
-
-	/** Better Combat's combo counter on a player: 0 or more while its swing is being handled, -1 otherwise. */
-	static int comboCount(Player player) {
-		return player instanceof PlayerAttackProperties properties ? properties.getComboCount() : -1;
 	}
 
 	static BetterCombat.CrowdRule crowdRule() {

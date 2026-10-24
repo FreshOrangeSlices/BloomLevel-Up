@@ -47,7 +47,10 @@ public final class BetterCombat {
 	/** Bloom's counter to Better Combat's crowd penalty, on attack damage for the length of one swing. */
 	public static final Identifier CROWD_MOD = BloomLevelUp.id("bettercombat_crowd");
 	private static final boolean INSTALLED = FabricLoader.getInstance().isModLoaded(MOD_ID);
-	/** How many mobs each player's current Better Combat swing is hitting, and the tick it was asked for. */
+	/**
+	 * Players in the middle of a Better Combat swing: how many mobs it hits, and the tick. Set and cleared around
+	 * its server handler (mixin), which runs the whole swing at once on the server thread.
+	 */
 	private static final Map<UUID, Request> REQUESTS = new HashMap<>();
 	/** Players carrying {@link #CROWD_MOD} right now (taken off again at the end of the tick at the latest). */
 	private static final Set<UUID> COUNTERED = new HashSet<>();
@@ -98,9 +101,22 @@ public final class BetterCombat {
 		REQUESTS.put(player.getUUID(), new Request(targets, player.level().getGameTime()));
 	}
 
-	/** Whether Better Combat is in the middle of this player's swing (its combo counter is only set then). */
+	/** End of Better Combat's attack request (mixin): the swing is over, and so is the crowd counter. */
+	public static void endRequest(ServerPlayer player) {
+		REQUESTS.remove(player.getUUID());
+
+		if (COUNTERED.remove(player.getUUID())) {
+			AttributeInstance damage = player.getAttribute(Attributes.ATTACK_DAMAGE);
+
+			if (damage != null) {
+				damage.removeModifier(CROWD_MOD);
+			}
+		}
+	}
+
+	/** Whether Better Combat is in the middle of this player's swing. */
 	public static boolean inSwing(Player player) {
-		return INSTALLED && BetterCombatBridge.comboCount(player) >= 0;
+		return INSTALLED && REQUESTS.containsKey(player.getUUID());
 	}
 
 	/**

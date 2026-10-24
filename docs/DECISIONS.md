@@ -370,6 +370,20 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Copycat | Its page also says what it's copying right now | `MajorDetails.sections` |
 | Font | Headings and the Major's name use Jacquard 12 (Google Fonts, SIL Open Font License 1.1, `font/OFL-Jacquard12.txt`), falling back to the vanilla font for missing characters. Body text stays in the vanilla font for readability | `font/fancy.json` |
 
+## Round 8b: the stat sheet (2026-10-24)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Where | A Stats button (bar-chart picture, placeholder art) left of the white reset button opens a window over the hub for the open tab; switching tabs closes it | `HubScreen.addResetButtons`, `StatSheetWindow` |
+| Who computes | The server, with the game's own rules: attributes with the chosen item swapped in, enchantments' damage and protection rules run against stand-in mobs (never added to the world), vanilla's armor formula, Bloom's hooks in the same order as a real hit. The client only draws finished lines and sends what was picked; it asks again every second (at most 20 requests a second are answered) | `sheet/`, `SheetPayloads` |
+| Combat | Any weapon in the inventory (or bare hands) can be picked; the summary shows hit, crit, attacks per second, damage per second, reach, sweep, throw; the full breakdown lists every source (base, weapon, Power, Brawler, other effects, enchantments with their undead/arthropod/water extras, each Bloom bonus, crit multiplier, target armor and Penetration, speed, area effects, on-hit effects, arrows) | `CombatSheet` |
+| Target | No armor / iron (15) / diamond (20, 8 toughness) / netherite (20, 12) | `CombatSheet.TARGET_ARMOR` |
+| "Show it at max" | One switch per effect the player owns that works with that weapon: Charged, Charged Throw, Falling (10 blocks), Stored Impact, Combo, First Strike, Predator, Bloodlust, Marksman (Armor: Braced). Off = what you have right now (Stored Impact shows what's stored) | `CombatSheet.build` |
+| Picture | The vanilla sword + Sharpness level whose plain hit is closest; past Netherite + Sharpness V, the netherite sword with a gold "×N" (how many times harder). Armor: the full vanilla set + Protection level letting the closest amount of the same mob hit through ("×N" = how many times less). Utility: the same kind of tool + Efficiency | `swordGauge`, `armorGauge`, `UtilitySheet.gauge` |
+| Armor | A picker for the size of the incoming hit (5/10/20/50, 10 first); what reaches your health from a mob, blade (if Vibranium), mace (if Adamantium), arrow, fire, explosion, fall and magic hit; the mob hit step by step (armor, Resistance, Protection, each Armor layer, Absorb); dodge and other ways to avoid a hit; health and the rest | `ArmorSheet` |
+| Utility, Misc | Utility: tool picker, mining speed and break time on the tool's block (stone, dirt, oak log, hay), Yield, Preservation with Unbreaking, Utility Majors. Misc: Wisdom, Endurance, Speed (walking blocks per second), effects and storage Majors | `UtilitySheet`, `MiscSheet` |
+| Not counted | Difficulty scaling of mob hits (the sheet's "hit of 10" is after it), blocking with a shield, absorption hearts, Shields' and helmets' special cases | |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

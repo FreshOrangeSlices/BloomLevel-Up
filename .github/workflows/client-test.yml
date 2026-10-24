@@ -71,11 +71,11 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: combat hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_combat_s3 12
-      - name: armor hub, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_armor_s3 12
-      - name: utility hub with the stats folded, GUI scale 3
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_utility_folded_s3 12
+      - name: the Combat stat sheet
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_combat 12
+      - name: the Combat stat sheet, full breakdown
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_combat_details 12
+      - name: the Armor stat sheet
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_armor 12
       - name: a Major's details window
         run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_major_details 12

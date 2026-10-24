@@ -1029,6 +1029,11 @@ public final class CombatSkill {
 		}
 	}
 
+	/** Damage Stored Impact would add to the next mace hit right now (0 once its window has closed). */
+	public static double storedImpactNow(ServerPlayer player) {
+		return storedImpact(BloomAttachments.profile(player), player.level().getGameTime()) / 100.0;
+	}
+
 	/** Hundredths of damage stored right now, or 0 once the window has closed. */
 	private static long storedImpact(BloomProfile profile, long now) {
 		long expires = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT);

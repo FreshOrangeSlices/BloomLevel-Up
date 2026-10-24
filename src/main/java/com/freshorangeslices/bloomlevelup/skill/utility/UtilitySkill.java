@@ -178,13 +178,23 @@ public final class UtilitySkill {
 
 	/** Shovel Mastery applies while a shovel is in the main hand. */
 	public static boolean shovelBoost(ServerPlayer player) {
-		return player.getMainHandItem().is(ItemTags.SHOVELS) && active(player, UtilityIds.SHOVEL_MASTERY);
+		return shovelBoost(player, player.getMainHandItem());
+	}
+
+	/** Whether Shovel Mastery would apply with {@code held} in the main hand. */
+	public static boolean shovelBoost(ServerPlayer player, ItemStack held) {
+		return held.is(ItemTags.SHOVELS) && active(player, UtilityIds.SHOVEL_MASTERY);
 	}
 
 	/** Efficiency, including Shovel Mastery's bonus. Used by StatEffects. */
 	public static int efficiency(ServerPlayer player) {
+		return efficiency(player, player.getMainHandItem());
+	}
+
+	/** Efficiency with {@code held} in the main hand (the stat sheet asks about other tools too). */
+	public static int efficiency(ServerPlayer player, ItemStack held) {
 		int points = stat(player, UtilityIds.EFFICIENCY);
-		return shovelBoost(player) ? StatFormulas.boosted(points, config().shovelMasteryBonus) : points;
+		return shovelBoost(player, held) ? StatFormulas.boosted(points, config().shovelMasteryBonus) : points;
 	}
 
 	// ------------------------------------------------------------------ placing (BlockItem mixin)

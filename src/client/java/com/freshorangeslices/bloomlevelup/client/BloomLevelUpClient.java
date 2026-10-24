@@ -33,6 +33,7 @@ import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
 import com.freshorangeslices.bloomlevelup.item.BloomComponents;
 import com.freshorangeslices.bloomlevelup.item.FuelImprint;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
+import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
 import com.freshorangeslices.bloomlevelup.network.SnapshotCodecs;
 import com.freshorangeslices.bloomlevelup.skill.SideBridge;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
@@ -78,6 +79,8 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Result.TYPE, (payload, context) -> ClientBloomState.setLastResult(payload));
 
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.NameTag.TYPE, (payload, context) -> NameTags.accept(payload));
+
+		ClientPlayNetworking.registerGlobalReceiver(SheetPayloads.View.TYPE, (payload, context) -> ClientBloomState.setSheet(payload));
 
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
 			ClientBloomState.clear();

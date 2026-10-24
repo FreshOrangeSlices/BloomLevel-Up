@@ -5,6 +5,7 @@ import java.util.List;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.definition.DefinitionSet;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
+import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 
@@ -21,6 +22,7 @@ public final class ClientBloomState {
 	private static long lastResultAt;
 	private static String selectedCategory;
 	private static int version;
+	private static SheetPayloads.View sheet;
 
 	private ClientBloomState() {
 	}
@@ -83,6 +85,15 @@ public final class ClientBloomState {
 		return lastResultAt;
 	}
 
+	/** The last stat sheet the server sent (its window asks for a new one every second). */
+	public static SheetPayloads.View sheet() {
+		return sheet;
+	}
+
+	static void setSheet(SheetPayloads.View view) {
+		sheet = view;
+	}
+
 	public static String selectedCategory() {
 		List<String> ids = definitions().categories().stream().map(c -> c.id()).toList();
 
@@ -103,6 +114,7 @@ public final class ClientBloomState {
 		profile = new BloomProfile();
 		service = null;
 		lastResult = null;
+		sheet = null;
 		version++;
 	}
 }

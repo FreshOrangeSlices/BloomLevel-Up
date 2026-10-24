@@ -13,6 +13,7 @@ import com.freshorangeslices.bloomlevelup.effect.HeldItemWatcher;
 import com.freshorangeslices.bloomlevelup.entity.BloomEntities;
 import com.freshorangeslices.bloomlevelup.item.BloomComponents;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
+import com.freshorangeslices.bloomlevelup.sheet.StatSheets;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
@@ -49,5 +50,6 @@ public final class BloomRegistries {
 		CombatAbilities.init();
 		MiscSkill.init();
 		HeldItemWatcher.init();
+		StatSheets.init();
 	}
 }

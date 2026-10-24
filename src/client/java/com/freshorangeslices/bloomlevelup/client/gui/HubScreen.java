@@ -125,6 +125,7 @@ public final class HubScreen extends Screen {
 	private static final int TAB_H = 20;
 	private static final Identifier RESET_LEVELS_ICON = BloomLevelUp.id("textures/gui/hub/reset_levels.png");
 	private static final Identifier RESET_MAJORS_ICON = BloomLevelUp.id("textures/gui/hub/reset_majors.png");
+	private static final Identifier STAT_SHEET_ICON = BloomLevelUp.id("textures/gui/hub/stat_sheet.png");
 	private static final int STRIP_H = 20;
 	/** Where the strip's status text starts: right of the two build helmets in its left corner. */
 	private static final int STRIP_TEXT_X = 4 + 2 * 20 + 4 + 6;
@@ -163,6 +164,8 @@ public final class HubScreen extends Screen {
 	private boolean shiftClick;
 	/** The details window (right-click an owned Major): which Major, its sections, how far it's scrolled. */
 	private MajorDefinition detailMajor;
+	/** The stat sheet window, while it's open (the Stats button at the top right). */
+	private StatSheetWindow sheetWindow;
 	private List<MajorDetails.Section> detailSections = List.of();
 	private double detailScroll;
 	private int detailContentH;
@@ -240,16 +243,23 @@ public final class HubScreen extends Screen {
 
 		// The details window sits over everything: its Major's text is rebuilt with the profile, and the widgets under
 		// it are hidden (they'd show through, tooltips and all).
-		if (detailMajor != null) {
-			if (!ClientBloomState.profile().owns(detailMajor.id())) {
-				detailMajor = null;
-			} else {
-				detailSections = MajorDetails.sections(detailMajor);
+		if (detailMajor != null && !ClientBloomState.profile().owns(detailMajor.id())) {
+			detailMajor = null;
+		}
 
-				for (var child : this.children()) {
-					if (child instanceof net.minecraft.client.gui.components.AbstractWidget widget) {
-						widget.visible = false;
-					}
+		if (detailMajor != null) {
+			detailSections = MajorDetails.sections(detailMajor);
+		}
+
+		// The stat sheet belongs to one tab; switching tabs closes it.
+		if (sheetWindow != null && !sheetWindow.category().equals(category.id())) {
+			sheetWindow = null;
+		}
+
+		if (overlayOpen()) {
+			for (var child : this.children()) {
+				if (child instanceof net.minecraft.client.gui.components.AbstractWidget widget) {
+					widget.visible = false;
 				}
 			}
 		}
@@ -313,6 +323,12 @@ public final class HubScreen extends Screen {
 		resetMajorsButton = HubTab.button(panelX + panelW - 4 - TAB_H, y, TAB_H, resetTip, RESET_MAJORS_ICON,
 				resetMinutesShown <= 0 && !owned.isEmpty(), () -> confirmMajorReset(category, owned));
 		this.addRenderableWidget(resetMajorsButton);
+
+		// The stat sheet, just left of the reset button.
+		MutableComponent sheetTip = Component.translatable("bloom.sheet.ui.button", tabName).withStyle(ChatFormatting.GOLD);
+		sheetTip.append("\n").append(Component.translatable("bloom.sheet.ui.button.desc." + categoryKey(category.id())).withStyle(ChatFormatting.GRAY));
+		this.addRenderableWidget(HubTab.button(panelX + panelW - 4 - 2 * TAB_H - 3, y, TAB_H, sheetTip, STAT_SHEET_ICON, true,
+				() -> openSheet(category)));
 	}
 
 	/** Whole minutes (rounded up) from {@code now} until {@code readyAt}, in game ticks; 0 when it's ready. */
@@ -596,6 +612,10 @@ public final class HubScreen extends Screen {
 	@Override
 	public void tick() {
 		super.tick();
+
+		if (sheetWindow != null) {
+			sheetWindow.tick();
+		}
 
 		if (builtVersion != ClientBloomState.version()) {
 			this.rebuildWidgets();
@@ -910,8 +930,8 @@ public final class HubScreen extends Screen {
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor g, int realMouseX, int realMouseY, float delta) {
 		// While the details window is open, nothing under it reacts to the mouse.
-		int mouseX = detailMajor != null ? -10000 : realMouseX;
-		int mouseY = detailMajor != null ? -10000 : realMouseY;
+		int mouseX = overlayOpen() ? -10000 : realMouseX;
+		int mouseY = overlayOpen() ? -10000 : realMouseY;
 		drawPanel(g);
 
 		if (!ClientBloomState.ready()) {
@@ -949,6 +969,11 @@ public final class HubScreen extends Screen {
 
 		if (detailMajor != null) {
 			drawDetails(g, realMouseX, realMouseY);
+			return;
+		}
+
+		if (sheetWindow != null) {
+			sheetWindow.render(g, realMouseX, realMouseY);
 			return;
 		}
 
@@ -1090,7 +1115,58 @@ public final class HubScreen extends Screen {
 			return true;
 		}
 
+		if (sheetWindow != null && event.isEscape()) {
+			closeSheet();
+			return true;
+		}
+
 		return super.keyPressed(event);
+	}
+
+	/** Whether the details window or the stat sheet covers the hub (nothing under it reacts then). */
+	private boolean overlayOpen() {
+		return detailMajor != null || sheetWindow != null;
+	}
+
+	private void openSheet(CategoryDefinition category) {
+		sheetWindow = new StatSheetWindow(category.id(),
+				Component.translatable("bloom.sheet.ui.title", name(category.translationKey(), category.id())), FRAME_SPRITE, FRAME);
+		this.rebuildWidgets();
+	}
+
+	private void closeSheet() {
+		sheetWindow = null;
+		this.rebuildWidgets();
+	}
+
+	/** "combat" for "bloomlevelup:combat" (the lang keys per tab). */
+	private static String categoryKey(String id) {
+		int colon = id.indexOf(':');
+		return colon < 0 ? id : id.substring(colon + 1);
+	}
+
+	/** Opens the stat sheet of the current tab, as its button does (client game test). */
+	public void openSheetForTests() {
+		CategoryDefinition category = currentCategory();
+
+		if (category != null) {
+			openSheet(category);
+		}
+	}
+
+	/** The open stat sheet: switches to the full breakdown, or turns a "show it at max" switch on (client game test). */
+	public void sheetForTests(boolean details, String toggle) {
+		if (sheetWindow != null) {
+			sheetWindow.showDetailsForTests(details);
+
+			if (toggle != null) {
+				sheetWindow.setToggleForTests(toggle, true);
+			}
+		}
+	}
+
+	public boolean sheetOpenForTests() {
+		return sheetWindow != null;
 	}
 
 	/** Whether a details window is open (client game test). */
@@ -1642,6 +1718,14 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		if (sheetWindow != null) {
+			if (!sheetWindow.mouseClicked(event.x(), event.y())) {
+				closeSheet();
+			}
+
+			return true;
+		}
+
 		if (detailMajor != null) {
 			if (onDetailClose(event.x(), event.y()) || !inDetailWindow(event.x(), event.y())) {
 				closeDetails();
@@ -1721,7 +1805,7 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
-		if (detailMajor != null) {
+		if (overlayOpen()) {
 			return true;
 		}
 
@@ -1747,6 +1831,11 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+		if (sheetWindow != null) {
+			sheetWindow.mouseScrolled(scrollY);
+			return true;
+		}
+
 		if (detailMajor != null) {
 			detailScroll = Math.max(0.0, Math.min(Math.max(0, detailContentH - detailBodyH()), detailScroll - scrollY * 12.0));
 			return true;

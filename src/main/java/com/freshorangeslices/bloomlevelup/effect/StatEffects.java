@@ -1,5 +1,7 @@
 package com.freshorangeslices.bloomlevelup.effect;
 
+import java.util.List;
+
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,7 +60,11 @@ public final class StatEffects {
 	private static final Identifier HEAVY_KNOCKBACK_MOD = BloomLevelUp.id("major/fitting_armor_heavy");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
-	private static final double POWER_PER_POINT = 0.06;
+	public static final double POWER_PER_POINT = 0.06;
+
+	/** A Bloom attribute modifier that depends on the item in the main hand (amount 0 = none). */
+	public record HeldModifier(Holder<Attribute> attribute, Identifier id, double amount, AttributeModifier.Operation operation) {
+	}
 
 	private StatEffects() {
 	}
@@ -117,24 +123,10 @@ public final class StatEffects {
 		apply(player, Attributes.MOVEMENT_SPEED, SPEED_MOD,
 				service.statValue(profile, SPEED) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 
-		// Efficiency: +1% block breaking speed per point (2x at 100), Shovel Mastery +20% while holding a shovel.
-		// An attribute so the client's own mining prediction speeds up too.
-		apply(player, Attributes.BLOCK_BREAK_SPEED, EFFICIENCY_MOD,
-				UtilitySkill.efficiency(player) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-
-		// Combat Majors that depend on the weapon in hand (HeldItemWatcher refreshes on every swap).
-		ItemStack held = player.getMainHandItem();
-		BloomConfig config = BloomServices.config();
-		apply(player, Attributes.ATTACK_DAMAGE, BRAWLER_MOD,
-				CombatSkill.has(player, CombatIds.BRAWLER, Family.UNARMED, held) ? config.brawlerDamage : 0.0, AttributeModifier.Operation.ADD_VALUE);
-		apply(player, Attributes.ATTACK_DAMAGE, GUARANTEED_CRITICAL_MOD,
-				CombatSkill.has(player, CombatIds.GUARANTEED_CRITICAL, Family.AXE, held) ? -config.guaranteedCriticalPenalty : 0.0,
-				AttributeModifier.Operation.ADD_VALUE);
-		apply(player, Attributes.ENTITY_INTERACTION_RANGE, LONG_REACH_MOD,
-				CombatSkill.has(player, CombatIds.LONG_REACH, Family.SPEAR, held) ? config.longReachBlocks : 0.0, AttributeModifier.Operation.ADD_VALUE);
-		// Full Sweep: sweep damage = 1 + 100% of the hit (vanilla's sweep formula at the attribute's maximum).
-		apply(player, Attributes.SWEEPING_DAMAGE_RATIO, FULL_SWEEP_MOD,
-				CombatSkill.has(player, CombatIds.FULL_SWEEP, Family.SWORD, held) ? 1.0 : 0.0, AttributeModifier.Operation.ADD_VALUE);
+		// Everything that depends on the item in hand (HeldItemWatcher refreshes on every swap).
+		for (HeldModifier modifier : heldModifiers(player, player.getMainHandItem())) {
+			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
+		}
 
 		// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
 		apply(player, Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -143,6 +135,28 @@ public final class StatEffects {
 		if (player.getHealth() > player.getMaxHealth()) {
 			player.setHealth(player.getMaxHealth());
 		}
+	}
+
+	/**
+	 * The modifiers that depend on the item in the main hand, worked out for {@code held} (the stat sheet asks about
+	 * items that aren't in hand). Efficiency (+1% block breaking speed per point, Shovel Mastery's boost with a
+	 * shovel) is an attribute so the client's own mining prediction speeds up too. Full Sweep: sweep damage =
+	 * 1 + 100% of the hit (vanilla's sweep formula at the attribute's maximum).
+	 */
+	public static List<HeldModifier> heldModifiers(ServerPlayer player, ItemStack held) {
+		BloomConfig config = BloomServices.config();
+		return List.of(
+				new HeldModifier(Attributes.BLOCK_BREAK_SPEED, EFFICIENCY_MOD, UtilitySkill.efficiency(player, held) / 100.0,
+						AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+				new HeldModifier(Attributes.ATTACK_DAMAGE, BRAWLER_MOD,
+						CombatSkill.has(player, CombatIds.BRAWLER, Family.UNARMED, held) ? config.brawlerDamage : 0.0, AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.ATTACK_DAMAGE, GUARANTEED_CRITICAL_MOD,
+						CombatSkill.has(player, CombatIds.GUARANTEED_CRITICAL, Family.AXE, held) ? -config.guaranteedCriticalPenalty : 0.0,
+						AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.ENTITY_INTERACTION_RANGE, LONG_REACH_MOD,
+						CombatSkill.has(player, CombatIds.LONG_REACH, Family.SPEAR, held) ? config.longReachBlocks : 0.0, AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.SWEEPING_DAMAGE_RATIO, FULL_SWEEP_MOD,
+						CombatSkill.has(player, CombatIds.FULL_SWEEP, Family.SWORD, held) ? 1.0 : 0.0, AttributeModifier.Operation.ADD_VALUE));
 	}
 
 	public static boolean armorSlotsEmpty(ServerPlayer player) {

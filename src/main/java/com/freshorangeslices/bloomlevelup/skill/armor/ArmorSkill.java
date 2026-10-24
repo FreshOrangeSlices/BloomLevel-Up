@@ -224,53 +224,11 @@ public final class ArmorSkill {
 		}
 
 		BloomProfile profile = BloomAttachments.profile(player);
-		boolean resistanceApplies = !source.is(DamageTypeTags.BYPASSES_RESISTANCE);
-		List<Double> layers = new ArrayList<>(8);
-
-		if (active(profile, ArmorIds.FITTING_ARMOR)) {
-			ArmorStyle style = ArmorStyles.styleOf(player);
-
-			if (style == ArmorStyle.MEDIUM && resistanceApplies) {
-				layers.add(0.15);
-			} else if (style == ArmorStyle.HEAVY && resistanceApplies) {
-				layers.add(0.30);
-			} else if (style == ArmorStyle.LIGHT && source.is(DamageTypeTags.IS_FALL)) {
-				layers.add(0.12); // Feather Falling I
-			}
-		}
-
-		if (resistanceApplies && active(profile, ArmorIds.IRON_SKIN)) {
-			layers.add(0.20); // Resistance I
-		}
-
-		if (resistanceApplies && active(profile, ArmorIds.BRACE) && isBraced(player)) {
-			layers.add(0.40); // Resistance II
-		}
-
-		if (active(profile, ArmorIds.ELEMENTAL_SKIN) && source.is(BloomTags.ELEMENTAL)) {
-			layers.add(0.50);
-		}
-
-		if (active(profile, ArmorIds.VIBRANIUM) && isWeaponClass(source, BloomTags.BLADE_DAMAGE, BloomTags.WEAPON_BLADE)) {
-			layers.add(0.30);
-		}
-
-		if (active(profile, ArmorIds.ADAMANTIUM) && isWeaponClass(source, BloomTags.BLUNT_DAMAGE, BloomTags.WEAPON_BLUNT)) {
-			layers.add(0.40);
-		}
-
-		if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
-			double overcap = StatFormulas.armorOvercapReduction(rawArmor(player), config().armorOvercapReductionCap);
-
-			if (overcap > 0.0) {
-				layers.add(overcap);
-			}
-		}
-
+		List<Layer> layers = layers(player, source, isBraced(player));
 		double[] array = new double[layers.size()];
 
 		for (int i = 0; i < array.length; i++) {
-			array[i] = layers.get(i);
+			array[i] = layers.get(i).reduction();
 		}
 
 		float result = (float) StatFormulas.applyReductions(amount, array);
@@ -280,6 +238,72 @@ public final class ArmorSkill {
 		}
 
 		return result;
+	}
+
+	/** One of the Armor category's own damage layers: what it is (a lang key under bloom.sheet.layer.) and how much it takes off. */
+	public record Layer(String key, double reduction) {
+	}
+
+	/**
+	 * The Armor category's percentage layers for a hit from {@code source}, in the order they apply (each multiplies
+	 * what's left). {@code braced}: whether Brace! is holding. The stat sheet lists the same layers.
+	 */
+	public static List<Layer> layers(ServerPlayer player, DamageSource source, boolean braced) {
+		BloomProfile profile = BloomAttachments.profile(player);
+		boolean resistanceApplies = !source.is(DamageTypeTags.BYPASSES_RESISTANCE);
+		List<Layer> layers = new ArrayList<>(8);
+
+		if (active(profile, ArmorIds.FITTING_ARMOR)) {
+			ArmorStyle style = ArmorStyles.styleOf(player);
+
+			if (style == ArmorStyle.MEDIUM && resistanceApplies) {
+				layers.add(new Layer("medium", 0.15));
+			} else if (style == ArmorStyle.HEAVY && resistanceApplies) {
+				layers.add(new Layer("heavy", 0.30));
+			} else if (style == ArmorStyle.LIGHT && source.is(DamageTypeTags.IS_FALL)) {
+				layers.add(new Layer("light", 0.12)); // Feather Falling I
+			}
+		}
+
+		if (resistanceApplies && active(profile, ArmorIds.IRON_SKIN)) {
+			layers.add(new Layer("iron_skin", 0.20)); // Resistance I
+		}
+
+		if (resistanceApplies && active(profile, ArmorIds.BRACE) && braced) {
+			layers.add(new Layer("brace", 0.40)); // Resistance II
+		}
+
+		if (active(profile, ArmorIds.ELEMENTAL_SKIN) && source.is(BloomTags.ELEMENTAL)) {
+			layers.add(new Layer("elemental_skin", 0.50));
+		}
+
+		if (active(profile, ArmorIds.VIBRANIUM) && isWeaponClass(source, BloomTags.BLADE_DAMAGE, BloomTags.WEAPON_BLADE)) {
+			layers.add(new Layer("vibranium", 0.30));
+		}
+
+		if (active(profile, ArmorIds.ADAMANTIUM) && isWeaponClass(source, BloomTags.BLUNT_DAMAGE, BloomTags.WEAPON_BLUNT)) {
+			layers.add(new Layer("adamantium", 0.40));
+		}
+
+		if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
+			double overcap = StatFormulas.armorOvercapReduction(rawArmor(player), config().armorOvercapReductionCap);
+
+			if (overcap > 0.0) {
+				layers.add(new Layer("overcap", overcap));
+			}
+		}
+
+		return layers;
+	}
+
+	/** Armor points before vanilla's 30 cap (Defense invested past it still counts for the overcap layer). */
+	public static double armorBeforeCap(ServerPlayer player) {
+		return rawArmor(player);
+	}
+
+	/** Whether Absorb is on: half of what's left after every layer goes into armor durability. */
+	public static boolean absorbs(ServerPlayer player) {
+		return active(BloomAttachments.profile(player), ArmorIds.ABSORB);
 	}
 
 	private static boolean isWeaponClass(DamageSource source, net.minecraft.tags.TagKey<net.minecraft.world.damagesource.DamageType> damageTag,

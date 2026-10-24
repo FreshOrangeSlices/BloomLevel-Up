@@ -12,6 +12,7 @@ import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.item.Items;
 
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
@@ -61,6 +62,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.setScreen(() -> null);
 
 			combatTreeScreenshots(context, singleplayer);
+			statSheetScreenshots(context, singleplayer);
 
 			hubClicks(context);
 			buyPointWithHugeXp(context, singleplayer);
@@ -97,6 +99,73 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		if (!failures.isEmpty()) {
 			throw new AssertionError("Bloom client checks failed: " + String.join(" | ", failures));
 		}
+	}
+
+	/**
+	 * The stat sheet (the hub's Stats button) with a diamond sword in hand and Predator owned: the summary, the
+	 * same with Predator switched to its max, the full breakdown, and the Armor tab's sheet. GUI scale 3.
+	 */
+	private void statSheetScreenshots(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:armor 100000");
+		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:combat/predator");
+		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:armor/iron_skin");
+		singleplayer.getServer().runCommand("item replace entity @a hotbar.0 with minecraft:diamond_sword");
+		singleplayer.getServer().runCommand("item replace entity @a hotbar.1 with minecraft:bow");
+		singleplayer.getServer().runCommand("item replace entity @a hotbar.2 with minecraft:iron_axe");
+		singleplayer.getServer().runCommand("item replace entity @a armor.chest with minecraft:iron_chestplate");
+		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/predator") && client.player.getInventory().getItem(0).is(Items.DIAMOND_SWORD));
+
+		context.runOnClient(client -> {
+			ClientBloomState.selectCategory("bloomlevelup:combat");
+			client.options.guiScale().set(3);
+			client.resizeGui();
+		});
+		context.setScreen(HubScreen::new);
+		context.waitTicks(2);
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.openSheetForTests();
+			}
+		});
+		check(context, "the Combat stat sheet arrives", client -> client.gui.screen() instanceof HubScreen hub && hub.sheetOpenForTests()
+				&& ClientBloomState.sheet() != null && ClientBloomState.sheet().category().equals("bloomlevelup:combat")
+				&& !ClientBloomState.sheet().summary().isEmpty());
+		context.getInput().setCursorPos(2, 2);
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_sheet_combat");
+
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.sheetForTests(false, "predator");
+			}
+		});
+		check(context, "switching Predator to its max", client -> ClientBloomState.sheet() != null
+				&& ClientBloomState.sheet().toggles().stream().anyMatch(toggle -> toggle.id().equals("predator") && toggle.on()));
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_sheet_combat_predator");
+
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.sheetForTests(true, null);
+			}
+		});
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_sheet_combat_details");
+		context.setScreen(() -> null);
+
+		context.runOnClient(client -> ClientBloomState.selectCategory("bloomlevelup:armor"));
+		context.setScreen(HubScreen::new);
+		context.waitTicks(2);
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.openSheetForTests();
+			}
+		});
+		check(context, "the Armor stat sheet arrives", client -> ClientBloomState.sheet() != null
+				&& ClientBloomState.sheet().category().equals("bloomlevelup:armor") && !ClientBloomState.sheet().summary().isEmpty());
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_sheet_armor");
+		context.setScreen(() -> null);
 	}
 
 	/**

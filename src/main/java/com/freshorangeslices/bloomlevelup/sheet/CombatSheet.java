@@ -446,9 +446,9 @@ final class CombatSheet {
 		float base = EnchantmentHelper.modifyDamage(level, weapon, mob, source, 2.0F);
 		double speed = bow ? 3.0 : 3.15;
 		int arrow = Mth.ceil(Mth.clamp(speed * base, 0.0, Integer.MAX_VALUE));
-		boolean copiedCrit = CombatSkill.copied(player).map(CombatIds.GUARANTEED_CRITICAL::equals).orElse(false);
-		boolean crits = bow || copiedCrit;
-		int critMax = crits ? arrow + arrow / 2 + 1 : arrow;
+		// A fully drawn bow shot is a crit, and so is every crossbow shot a player fires (CrossbowItem.performShooting).
+		boolean crits = true;
+		int critMax = arrow + arrow / 2 + 1;
 		double add = CombatSkill.has(player, CombatIds.REINFORCED_SHOT, Family.CROSSBOW, weapon) ? config.reinforcedShotDamage : 0.0;
 		double multiplier = shared(on, config, true);
 
@@ -488,7 +488,7 @@ final class CombatSheet {
 
 		if (crits) {
 			sheet.row(Sheet.plus(critMax - arrow), "combat.arrow_crit");
-			sheet.note(bow ? "combat.arrow_crit.note" : "combat.arrow_crit.copycat");
+			sheet.note(bow ? "combat.arrow_crit.note" : "combat.arrow_crit.crossbow");
 		}
 
 		if (add > 0.0) {

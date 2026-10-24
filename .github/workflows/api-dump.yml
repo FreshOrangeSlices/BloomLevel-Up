@@ -20,11 +20,22 @@ jobs:
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           full() { echo "=== FULL $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s*$' ; }
           {
-          dump net.minecraft.network.chat.Style 'Font|class '
-          dump net.minecraft.network.chat.FontDescription
-          dump 'net.minecraft.network.chat.FontDescription$Resource'
-          dump net.minecraft.client.gui.GuiGraphicsExtractor 'text|Text|class '
-          dump net.minecraft.client.gui.Font 'width|split|lineHeight|class '
+          full net.minecraft.world.entity.player.Player 'void attack\(|getEnchantedDamage|doSweepAttack|isSweepAttack|canCriticalAttack|getCurrentItemAttackStrengthDelay|float getAttackStrengthScale|createAttackSource|getDestroySpeed'
+          full net.minecraft.world.entity.LivingEntity 'getDamageAfterArmorAbsorb|getDamageAfterMagicAbsorb|float getArmorValue|getAttackDamage|getWeaponItem'
+          full net.minecraft.world.damagesource.CombatRules 'getDamageAfter'
+          full net.minecraft.world.entity.projectile.arrow.AbstractArrow 'onHitEntity|setBaseDamage|getBaseDamage|shoot\('
+          full net.minecraft.world.item.BowItem 'releaseUsing|getPowerForTime'
+          full net.minecraft.world.item.CrossbowItem 'getShootingPower|shootProjectile|createProjectile|performShooting|getChargeDuration'
+          full net.minecraft.world.item.ProjectileWeaponItem 'createProjectile|shoot\('
+          full net.minecraft.world.item.MaceItem 'getAttackDamageBonus|canSmashAttack'
+          full net.minecraft.world.item.ItemStack 'forEachModifier|getDestroySpeed'
+          full net.minecraft.world.entity.projectile.arrow.ThrownTrident 'onHitEntity'
+          dump net.minecraft.world.item.enchantment.EnchantmentHelper 'Armor|Effective|Sweep|Spin|Pierc|Projectile|Ammo|Potion'
+          dump net.minecraft.world.damagesource.DamageSource 'Weapon|is\(|getEntity|getDirect'
+          dump net.minecraft.world.entity.EntitySpawnReason
+          dump net.minecraft.world.entity.EntityType 'create\(|PIG|ZOMBIE|SPIDER|DROWNED|ARMOR_STAND'
+          dump net.minecraft.world.item.ToolMaterial
+          dump net.minecraft.world.item.Item 'getAttackDamageBonus|getDestroySpeed|BASE_ATTACK'
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

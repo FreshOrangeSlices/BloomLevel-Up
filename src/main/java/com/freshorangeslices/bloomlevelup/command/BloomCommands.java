@@ -105,7 +105,7 @@ public final class BloomCommands {
 										: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED)))
 								.then(literal("all")
 										.executes(ctx -> act(ctx, (svc, p) -> singleRefundsAllowed() ? svc.refundMajorWithDependents(p, id(ctx, "major"))
-												: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED)))))))
+												: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED))))))
 				.then(literal("fund")
 						.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
 								.then(argument("points", IntegerArgumentType.integer(1))

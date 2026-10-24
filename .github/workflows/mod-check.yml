@@ -14,6 +14,10 @@ jobs:
           zip -q ../bloomlevelup-test.jar fabric.mod.json
       - name: build the pack
         run: python3 pack/build_pack.py bloomlevelup-test.jar test out
+      - name: look inside the CurseForge jars
+        run: |
+          mkdir -p dump && cd dump && unzip -q -o "../out/Bloom Pack test.mrpack" 'overrides/mods/*' && cd ..
+          python3 pack/dump_jar.py dump/overrides/mods/world-bosses*.jar dump/overrides/mods/vaw*.jar
       - uses: actions/setup-java@v5
         with:
           java-version: '25'

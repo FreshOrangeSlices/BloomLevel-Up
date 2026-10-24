@@ -3,7 +3,7 @@
   "summary": "Bloom Level-Up with dungeons, bosses, Better Combat, shaders and animations, for Minecraft 26.3 (Fabric).",
   "minecraft": "26.3",
   "fabric_loader": "0.19.5",
-  "_comment": "The 'Start with' list from the Bloom Pack mod list doc (GeckoLib is for World Bosses, which isn't on Modrinth). Modrinth mods by slug (newest 26.3 Fabric build; required dependencies are added automatically). External files are packed inside (fine for sharing with friends, not for publishing).",
+  "_comment": "The 'Start with' list from the Bloom Pack mod list doc, plus Origins: Legacy, Villagers at Work / after Work and Fresh Animations' player extension (with the EMF compat mods it needs next to Not Enough Animations and Better Combat). GeckoLib is for World Bosses and Fabric Language Kotlin for Villagers at Work (both CurseForge-only). Modrinth mods by slug (newest 26.3 Fabric build; required dependencies are added automatically). External files are packed inside (fine for sharing with friends, not for publishing).",
   "modrinth": [
     "fabric-api",
     "sodium",
@@ -30,7 +30,12 @@
     "villager-guards",
     "villager-names-serilum",
     "variants-and-ventures",
-    "geckolib"
+    "geckolib",
+    "origins-legacy",
+    "fa-player-extension",
+    "not-enough-animations-emf-compat",
+    "emf-compat-better-combat",
+    "fabric-language-kotlin"
   ],
   "external": [
     {
@@ -43,14 +48,45 @@
       ],
       "client": "required",
       "server": "required"
+    },
+    {
+      "name": "Villagers at Work",
+      "page": "https://www.curseforge.com/minecraft/mc-mods/villagers-at-work",
+      "file": "vaw-1.3.3+26.3.jar",
+      "urls": [
+        "https://mediafilez.forgecdn.net/files/9291/752/vaw-1.3.3+26.3.jar",
+        "https://mediafilez.forgecdn.net/files/9291/752/vaw-1.3.3%2B26.3.jar",
+        "https://edge.forgecdn.net/files/9291/752/vaw-1.3.3%2B26.3.jar"
+      ],
+      "client": "required",
+      "server": "required"
+    },
+    {
+      "name": "Villagers after Work",
+      "page": "https://www.curseforge.com/minecraft/mc-mods/villagers-after-work",
+      "file": "vaw-after-work-1.3.3+26.3.jar",
+      "urls": [
+        "https://mediafilez.forgecdn.net/files/9291/755/vaw-after-work-1.3.3+26.3.jar",
+        "https://mediafilez.forgecdn.net/files/9291/755/vaw-after-work-1.3.3%2B26.3.jar",
+        "https://edge.forgecdn.net/files/9291/755/vaw-after-work-1.3.3%2B26.3.jar"
+      ],
+      "client": "required",
+      "server": "required"
     }
   ],
   "env_overrides": {
-    "player-animation-library": {"server": "required"},
-    "cloth-config": {"server": "required"}
+    "player-animation-library": {
+      "server": "required"
+    },
+    "cloth-config": {
+      "server": "required"
+    }
   },
   "client_presets": {
-    "resource_packs": ["fresh-animations"],
+    "resource_packs": [
+      "fresh-animations",
+      "fa-player-extension"
+    ],
     "shader": "complementary-reimagined"
   }
 }

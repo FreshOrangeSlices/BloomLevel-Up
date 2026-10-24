@@ -97,7 +97,7 @@ def mod_ids(data):
 
 
 def main():
-    bloom_jar, version, out = sys.argv[1], sys.argv[2], sys.argv[3]
+    bloom_jar, pack_version, out = sys.argv[1], sys.argv[2], sys.argv[3]
     os.makedirs(out, exist_ok=True)
     spec = json.load(open(os.path.join(os.path.dirname(__file__), "pack.json")))
     game = spec["minecraft"]
@@ -197,7 +197,7 @@ def main():
     index = {
         "formatVersion": 1,
         "game": "minecraft",
-        "versionId": version,
+        "versionId": pack_version,
         "name": spec["name"],
         "summary": spec["summary"],
         "files": [{
@@ -209,7 +209,7 @@ def main():
         } for e in files],
         "dependencies": {"minecraft": game, "fabric-loader": spec["fabric_loader"]},
     }
-    pack_path = os.path.join(out, f"Bloom Pack {version}.mrpack")
+    pack_path = os.path.join(out, f"Bloom Pack {pack_version}.mrpack")
     with zipfile.ZipFile(pack_path, "w", zipfile.ZIP_DEFLATED) as pack:
         pack.writestr("modrinth.index.json", json.dumps(index, indent=2))
         for path, data in overrides.items():
@@ -219,7 +219,7 @@ def main():
             pack.writestr(f"client-overrides/{path}", data)
 
     # ---- the server's mods (drop the mods folder into a Fabric 26.3 server)
-    server_path = os.path.join(out, f"Bloom Pack {version} server mods.zip")
+    server_path = os.path.join(out, f"Bloom Pack {pack_version} server mods.zip")
     server_mods = []
     with zipfile.ZipFile(server_path, "w", zipfile.ZIP_DEFLATED) as server:
         for entry in files:

@@ -161,6 +161,12 @@ public final class HubScreen extends Screen {
 	private long buildSecondsShown;
 	/** Whether the click being handled had shift held (Buy point: shift buys up to 10). */
 	private boolean shiftClick;
+	/** The details window (right-click an owned Major): which Major, its sections, how far it's scrolled. */
+	private MajorDefinition detailMajor;
+	private List<MajorDetails.Section> detailSections = List.of();
+	private double detailScroll;
+	private int detailContentH;
+	private static final int DETAIL_HEADER = 46;
 
 	/** The current tab's nodes and lines, in canvas coordinates. */
 	private final List<Node> nodes = new ArrayList<>();
@@ -231,6 +237,22 @@ public final class HubScreen extends Screen {
 		}
 
 		clampPan();
+
+		// The details window sits over everything: its Major's text is rebuilt with the profile, and the widgets under
+		// it are hidden (they'd show through, tooltips and all).
+		if (detailMajor != null) {
+			if (!ClientBloomState.profile().owns(detailMajor.id())) {
+				detailMajor = null;
+			} else {
+				detailSections = MajorDetails.sections(detailMajor);
+
+				for (var child : this.children()) {
+					if (child instanceof net.minecraft.client.gui.components.AbstractWidget widget) {
+						widget.visible = false;
+					}
+				}
+			}
+		}
 	}
 
 	private void addCategoryTabs() {
@@ -886,7 +908,10 @@ public final class HubScreen extends Screen {
 	// ------------------------------------------------------------------ drawing
 
 	@Override
-	public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+	public void extractRenderState(GuiGraphicsExtractor g, int realMouseX, int realMouseY, float delta) {
+		// While the details window is open, nothing under it reacts to the mouse.
+		int mouseX = detailMajor != null ? -10000 : realMouseX;
+		int mouseY = detailMajor != null ? -10000 : realMouseY;
 		drawPanel(g);
 
 		if (!ClientBloomState.ready()) {
@@ -922,9 +947,155 @@ public final class HubScreen extends Screen {
 		g.text(this.font, build, panelX + panelW - 6 - this.font.width(build), panelY + panelH - 14, 0xFF5E5648);
 		super.extractRenderState(g, mouseX, mouseY, delta);
 
+		if (detailMajor != null) {
+			drawDetails(g, realMouseX, realMouseY);
+			return;
+		}
+
 		if (tooltip != null) {
 			g.setTooltipForNextFrame(this.font, tooltip, mouseX, mouseY);
 		}
+	}
+
+	// ------------------------------------------------------------------ details window
+
+	private int detailW() {
+		return Math.min(300, this.width - 40);
+	}
+
+	private int detailH() {
+		return Math.min(232, this.height - 30);
+	}
+
+	private int detailX() {
+		return (this.width - detailW()) / 2;
+	}
+
+	private int detailY() {
+		return (this.height - detailH()) / 2;
+	}
+
+	private int detailBodyH() {
+		return detailH() - DETAIL_HEADER - 14;
+	}
+
+	private void openDetails(MajorDefinition major) {
+		detailMajor = major;
+		detailScroll = 0.0;
+		this.rebuildWidgets();
+	}
+
+	private void closeDetails() {
+		detailMajor = null;
+		this.rebuildWidgets();
+	}
+
+	private boolean onDetailClose(double x, double y) {
+		int x0 = detailX() + detailW() - 15;
+		int y0 = detailY() + 3;
+		return x >= x0 && x < x0 + 12 && y >= y0 && y < y0 + 12;
+	}
+
+	private boolean inDetailWindow(double x, double y) {
+		return x >= detailX() && x < detailX() + detailW() && y >= detailY() && y < detailY() + detailH();
+	}
+
+	/**
+	 * A gold-framed window over the dimmed hub: the Major's icon, name (in the fancy font), tab, tree and cost, then
+	 * its sections, scrolled with the wheel. Esc, the × or a click outside closes it.
+	 */
+	private void drawDetails(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+		MajorDefinition major = detailMajor;
+		g.nextStratum();
+		g.fill(0, 0, this.width, this.height, 0xB0000000);
+		int x0 = detailX();
+		int y0 = detailY();
+		int w = detailW();
+		int h = detailH();
+		g.fill(x0, y0, x0 + w, y0 + h, 0xF6141210);
+		g.blitSprite(RenderPipelines.GUI_TEXTURED, FRAME_SPRITE, x0 - FRAME, y0 - FRAME, w + 2 * FRAME, h + 2 * FRAME);
+
+		Identifier icon = IconTextures.resolve(major.icon());
+		g.blit(RenderPipelines.GUI_TEXTURED, icon, x0 + 8, y0 + 7, 0.0F, 0.0F, 32, 32, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
+		g.text(this.font, MajorDetails.fancy(name(major.translationKey(), major.id())), x0 + 48, y0 + 9, 0xFFFFD86B);
+
+		MutableComponent subtitle = Component.empty();
+		ClientBloomState.definitions().category(major.categoryId())
+				.ifPresent(category -> subtitle.append(name(category.translationKey(), category.id())));
+		major.group().ifPresent(group -> subtitle.append(" · ").append(Component.translatable("bloom.hub.tree", capitalize(treeName(group)))));
+		subtitle.append(" · ").append(Component.translatable("bloom.hub.major.cost", major.cost()));
+		g.text(this.font, subtitle, x0 + 48, y0 + 25, MUTED);
+
+		boolean overClose = onDetailClose(mouseX, mouseY);
+		g.text(this.font, Component.literal("×"), x0 + w - 12, y0 + 5, overClose ? 0xFFFFFFFF : MUTED);
+		g.fill(x0 + 8, y0 + DETAIL_HEADER - 4, x0 + w - 8, y0 + DETAIL_HEADER - 3, 0xFF8A6A2A);
+
+		int bx = x0 + 10;
+		int by = y0 + DETAIL_HEADER;
+		int bw = w - 26;
+		int bh = detailBodyH();
+		g.enableScissor(bx - 2, by, bx + bw + 4, by + bh);
+		int y = by - (int) Math.round(detailScroll);
+
+		for (MajorDetails.Section section : detailSections) {
+			g.text(this.font, section.heading(), bx, y, 0xFFF2C443);
+			y += 13;
+
+			for (Component paragraph : section.paragraphs()) {
+				Component shown = section.rows() ? row(paragraph) : paragraph;
+
+				for (FormattedCharSequence line : this.font.split(shown, bw - 4)) {
+					g.text(this.font, line, bx + 4, y, TEXT);
+					y += 10;
+				}
+
+				y += 2;
+			}
+
+			y += 6;
+		}
+
+		g.disableScissor();
+		detailContentH = y + (int) Math.round(detailScroll) - by;
+
+		if (detailContentH > bh) {
+			int track = bh;
+			int thumb = Math.max(12, track * bh / detailContentH);
+			int top = by + (int) Math.round((track - thumb) * (detailScroll / Math.max(1.0, detailContentH - bh)));
+			g.fill(x0 + w - 9, by, x0 + w - 7, by + track, 0xFF2E261C);
+			g.fill(x0 + w - 9, top, x0 + w - 7, top + thumb, 0xFFC98F1F);
+		}
+
+		g.centeredText(this.font, Component.translatable("bloom.hub.detail.close"), x0 + w / 2, y0 + h - 11, 0xFF6E6250);
+	}
+
+	/** A numbers row, "Label: value", with the label in gold. */
+	private static Component row(Component paragraph) {
+		String text = paragraph.getString();
+		int colon = text.indexOf(':');
+
+		if (colon <= 0) {
+			return paragraph;
+		}
+
+		return Component.literal(text.substring(0, colon + 1)).withStyle(MajorDetails.labelStyle())
+				.append(Component.literal(text.substring(colon + 1)).withStyle(ChatFormatting.WHITE));
+	}
+
+	@Override
+	public boolean keyPressed(net.minecraft.client.input.KeyEvent event) {
+		if (detailMajor != null && event.key() == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE) {
+			closeDetails();
+			return true;
+		}
+
+		return super.keyPressed(event);
+	}
+
+	/** Opens a Major's details window, as a right-click does (client game test). */
+	public void openDetailsForTests(String majorId) {
+		ClientBloomState.definitions().major(majorId).ifPresent(this::openDetails);
 	}
 
 	private void drawPanel(GuiGraphicsExtractor g) {
@@ -1396,7 +1567,7 @@ public final class HubScreen extends Screen {
 				lines.add(Component.translatable("bloom.hub.major.click_toggle").withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			}
 
-			lines.add(Component.translatable("bloom.hub.major.click_refund", owned.paid()).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+			lines.add(Component.translatable("bloom.hub.major.click_details").withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			copycatLines(profile, service, major, owned, lines);
 		} else {
 			boolean affordable = major.cost() <= profile.availableMajorLevels();
@@ -1466,6 +1637,14 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		if (detailMajor != null) {
+			if (onDetailClose(event.x(), event.y()) || !inDetailWindow(event.x(), event.y())) {
+				closeDetails();
+			}
+
+			return true;
+		}
+
 		shiftClick = event.hasShiftDown();
 		MajorDefinition major = onOpenCanvas(event.x(), event.y()) ? majorAt(event.x(), event.y()) : null;
 		lastClickForTests = String.format(Locale.ROOT, "button=%d x=%.1f y=%.1f major=%s", event.button(), event.x(), event.y(),
@@ -1489,7 +1668,12 @@ public final class HubScreen extends Screen {
 		boolean owned = ClientBloomState.profile().owns(major.id());
 
 		if (event.button() == InputConstants.MOUSE_BUTTON_RIGHT) {
-			// Single Majors aren't refunded any more (the tab's reset button does that); right-click is kept free.
+			// Right-click an owned Major: its details window (single Majors aren't refunded any more).
+			if (owned) {
+				click();
+				openDetails(major);
+			}
+
 			return true;
 		}
 
@@ -1532,6 +1716,10 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+		if (detailMajor != null) {
+			return true;
+		}
+
 		if (panning) {
 			panX += dragX;
 			panY += dragY;
@@ -1554,6 +1742,11 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+		if (detailMajor != null) {
+			detailScroll = Math.max(0.0, Math.min(Math.max(0, detailContentH - detailBodyH()), detailScroll - scrollY * 12.0));
+			return true;
+		}
+
 		if (onOpenCanvas(mouseX, mouseY) && canPan()) {
 			panX += scrollX * 20.0;
 			panY += scrollY * 20.0;

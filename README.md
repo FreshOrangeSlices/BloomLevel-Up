@@ -129,6 +129,11 @@ See `docs/design/` for the design documents and `docs/DECISIONS.md` for choices 
 implementation. Code: `definition/` (data model), `progression/` (rules), `player/` (state + saving),
 `stats/` (formulas), `data/` (datapack loading), `command/`, `api/`, `registry/` (all game hooks).
 
+## Credits
+
+The hub's heading font is [Jacquard 12](https://fonts.google.com/specimen/Jacquard+12) by The Soft Type Project Authors,
+used under the SIL Open Font License 1.1 (see `src/main/resources/assets/bloomlevelup/font/OFL-Jacquard12.txt`).
+
 ## License
 
 All Rights Reserved. You may include the unmodified jar in public or private modpacks, with credit to

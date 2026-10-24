@@ -180,6 +180,12 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		click(context, major, InputConstants.MOUSE_BUTTON_LEFT);
 		check(context, "left click switches off (still owned)", client -> owned(major) != null && !owned(major).enabled());
 		context.takeScreenshot("bloom_hub_major_off");
+		click(context, major, InputConstants.MOUSE_BUTTON_RIGHT);
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_hub_major_details");
+		context.getInput().pressKey(org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE);
+		context.waitTicks(2);
+		check(context, "Esc closes the details window, not the hub", client -> client.gui.screen() instanceof HubScreen);
 		click(context, major, InputConstants.MOUSE_BUTTON_LEFT);
 		check(context, "left click switches back on", client -> owned(major) != null && owned(major).enabled());
 		click(context, major, InputConstants.MOUSE_BUTTON_RIGHT);

@@ -368,7 +368,7 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Numbers | Written in the lang file as `{configField}` tokens (`:pct`, `:sec`, `:min`, `:x` units) and filled from the server's synced config, so a changed config shows its own numbers. Values that are code constants are written out | `MajorDetails.fill`, `<major>.detail.*` lang keys |
 | Combos | Only combos the player owns every piece of are shown, on each piece's page (all of them on Master of Arms). Nothing is shown about combos the player can't use yet | `MajorDetails.COMBOS` |
 | Copycat | Its page also says what it's copying right now | `MajorDetails.sections` |
-| Font | Headings and the Major's name use Jacquard 12 (Google Fonts, SIL Open Font License 1.1, `font/OFL-Jacquard12.txt`), falling back to the vanilla font for missing characters. Body text stays in the vanilla font for readability | `font/fancy.json` |
+| Font | The normal Minecraft font everywhere (headings and names in bold). A fancy font was tried and dropped at FreshOrangeSlices' request | `MajorDetails.heading` |
 
 ## Round 8b: the stat sheet (2026-10-24)
 

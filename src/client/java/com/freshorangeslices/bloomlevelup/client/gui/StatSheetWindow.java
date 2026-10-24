@@ -155,7 +155,7 @@ final class StatSheetWindow {
 		g.blitSprite(RenderPipelines.GUI_TEXTURED, frameSprite, x0 - frame, y0 - frame, w + 2 * frame, h + 2 * frame);
 
 		// Title, the summary / all stats tabs, and the close button.
-		g.text(font, MajorDetails.fancy(title), x0 + 8, y0 + 7, 0xFFFFD86B);
+		g.text(font, MajorDetails.heading(title), x0 + 8, y0 + 7, 0xFFFFD86B);
 		int closeX = x0 + w - 13;
 		hits.add(new Hit(closeX - 2, y0 + 3, closeX + 10, y0 + 15, null, Component.translatable("bloom.hub.detail.close")));
 		g.text(font, Component.literal("×"), closeX, y0 + 5, overClose(mouseX, mouseY) ? 0xFFFFFFFF : MUTED);
@@ -338,7 +338,7 @@ final class StatSheetWindow {
 	private static int drawRow(GuiGraphicsExtractor g, Font font, SheetPayloads.Row row, int x, int y, int width) {
 		switch (row.kind()) {
 			case SheetPayloads.Row.HEADING -> {
-				g.text(font, MajorDetails.fancy(row.label()), x, y, GOLD);
+				g.text(font, MajorDetails.heading(row.label()), x, y, GOLD);
 				return y + 13;
 			}
 			case SheetPayloads.Row.NOTE -> {

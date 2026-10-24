@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 import net.minecraft.ChatFormatting;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
@@ -34,8 +33,6 @@ import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
  * {@code {field:min}} ticks as minutes, {@code {field:x}} as a multiplier.
  */
 final class MajorDetails {
-	/** The hub's fancy font for headings: Jacquard 12 (SIL Open Font License, see {@code font/OFL-Jacquard12.txt}). */
-	static final FontDescription FANCY = new FontDescription.Resource(BloomLevelUp.id("fancy"));
 
 	/** One section of the window: a heading and its paragraphs (a "Label: value" paragraph is a numbers row). */
 	record Section(Component heading, List<Component> paragraphs, boolean rows) {
@@ -66,8 +63,9 @@ final class MajorDetails {
 	private MajorDetails() {
 	}
 
-	static MutableComponent fancy(Component text) {
-		return text.copy().withStyle(style -> style.withFont(FANCY));
+	/** A heading or name: the normal font, bold. */
+	static MutableComponent heading(Component text) {
+		return text.copy().withStyle(style -> style.withBold(true));
 	}
 
 	/** The window's sections for a Major, in reading order; sections with no text are left out. */
@@ -104,7 +102,7 @@ final class MajorDetails {
 
 		for (Combo combo : COMBOS) {
 			if ((master || combo.involves(major.id())) && combo.owned(profile)) {
-				combos.add(fancy(Component.translatable("bloom.combo." + combo.key() + ".name")).withStyle(ChatFormatting.LIGHT_PURPLE));
+				combos.add(heading(Component.translatable("bloom.combo." + combo.key() + ".name")).withStyle(ChatFormatting.LIGHT_PURPLE));
 				combos.addAll(paragraphs(text("bloom.combo." + combo.key() + ".desc")));
 			}
 		}
@@ -115,7 +113,7 @@ final class MajorDetails {
 
 	private static void add(List<Section> out, String headingKey, List<Component> paragraphs, boolean rows) {
 		if (!paragraphs.isEmpty()) {
-			out.add(new Section(fancy(Component.translatable(headingKey)), paragraphs, rows));
+			out.add(new Section(heading(Component.translatable(headingKey)), paragraphs, rows));
 		}
 	}
 

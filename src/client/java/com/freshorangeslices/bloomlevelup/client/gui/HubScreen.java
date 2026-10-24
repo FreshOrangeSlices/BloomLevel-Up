@@ -1026,7 +1026,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/**
-	 * A gold-framed window over the dimmed hub: the Major's icon, name (in the fancy font), tab, tree and cost, then
+	 * A gold-framed window over the dimmed hub: the Major's icon, name, tab, tree and cost, then
 	 * its sections, scrolled with the wheel. Esc, the × or a click outside closes it.
 	 */
 	private void drawDetails(GuiGraphicsExtractor g, int mouseX, int mouseY) {
@@ -1043,7 +1043,7 @@ public final class HubScreen extends Screen {
 		Identifier icon = IconTextures.resolve(major.icon());
 		g.blit(RenderPipelines.GUI_TEXTURED, icon, x0 + 8, y0 + 7, 0.0F, 0.0F, 32, 32, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
-		g.text(this.font, MajorDetails.fancy(name(major.translationKey(), major.id())), x0 + 48, y0 + 9, 0xFFFFD86B);
+		g.text(this.font, MajorDetails.heading(name(major.translationKey(), major.id())), x0 + 48, y0 + 9, 0xFFFFD86B);
 
 		MutableComponent subtitle = Component.empty();
 		ClientBloomState.definitions().category(major.categoryId())

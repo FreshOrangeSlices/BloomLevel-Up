@@ -183,7 +183,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		click(context, major, InputConstants.MOUSE_BUTTON_RIGHT);
 		context.waitTicks(3);
 		context.takeScreenshot("bloom_hub_major_details");
-		context.getInput().pressKey(org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE);
+		context.getInput().pressKey(256); // Escape (GLFW key code)
 		context.waitTicks(2);
 		check(context, "Esc closes the details window, not the hub", client -> client.gui.screen() instanceof HubScreen);
 		click(context, major, InputConstants.MOUSE_BUTTON_LEFT);

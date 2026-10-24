@@ -1085,7 +1085,7 @@ public final class HubScreen extends Screen {
 
 	@Override
 	public boolean keyPressed(net.minecraft.client.input.KeyEvent event) {
-		if (detailMajor != null && event.key() == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE) {
+		if (detailMajor != null && event.isEscape()) {
 			closeDetails();
 			return true;
 		}

@@ -7,5 +7,16 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
-      - name: Modrinth 26.3 Fabric status
-        run: python3 check.py
+      - name: a stand-in Bloom jar (metadata only)
+        run: |
+          mkdir -p fake && cd fake
+          printf '{"schemaVersion":1,"id":"bloomlevelup","version":"0.0.0","environment":"*","depends":{"fabric-api":"*","minecraft":"~26.3"}}' > fabric.mod.json
+          zip -q ../bloomlevelup-test.jar fabric.mod.json
+      - name: build the pack
+        run: python3 pack/build_pack.py bloomlevelup-test.jar test out
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: boot a server with the pack
+        run: python3 pack/boot_server.py "out/Bloom Pack test server mods.zip" 26.3 0.19.5

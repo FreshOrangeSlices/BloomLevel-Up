@@ -48,6 +48,21 @@ Each jar carries its build number: `bloomlevelup-0.1.0+build.57.jar` is build 57
 Actions tab). The same number shows in the bottom-right corner of the Skill Hub and in Mod Menu, so
 client and server can be checked at a glance; they should always run the same build.
 
+## The Bloom Pack (for friends)
+
+Every build also makes the **Bloom Pack**: the same run → download **bloom-pack**. Inside:
+
+- **Bloom Pack build.N.mrpack**: the whole pack for players. In the Modrinth App, drag the file onto the app
+  (or add an instance from a file); it downloads Minecraft 26.3, Fabric and every mod. Fresh Animations and the
+  Complementary shader are switched on for the first launch. Give the instance about 6 GB of memory.
+- **Bloom Pack build.N server mods.zip**: the server's mods. Unzip into a Fabric 26.3 server (it already holds a
+  `mods` folder).
+
+The list is `pack/pack.json` (the "Start with" mods). Modrinth mods are linked and their required mods are added
+automatically; Bloom and World Bosses (CurseForge only) are packed inside, so the file is for sharing with
+friends, not for publishing. CI checks that every mod's required mods are in the pack, then boots a real server
+with the server mods.
+
 ## Trying it in game
 
 Open your inventory and click the button right of the recipe book, or bind **Open Skill Hub** in

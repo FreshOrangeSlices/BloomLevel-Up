@@ -80,7 +80,10 @@ def mod_ids(data):
         return provided, depends
     with archive:
         if "fabric.mod.json" in archive.namelist():
-            meta = json.loads(archive.read("fabric.mod.json").decode("utf-8", "replace"), strict=False)
+            try:
+                meta = json.loads(archive.read("fabric.mod.json").decode("utf-8", "replace"), strict=False)
+            except ValueError:
+                return provided, depends
             provided.add(meta.get("id"))
             provided.update(meta.get("provides", []))
             for key, value in (meta.get("depends") or {}).items():
@@ -94,7 +97,7 @@ def mod_ids(data):
 
 
 def main():
-    bloom_jar, version, out = sys.argv[1], sys.argv[2], sys.argv[3]
+    bloom_jar, pack_version, out = sys.argv[1], sys.argv[2], sys.argv[3]
     os.makedirs(out, exist_ok=True)
     spec = json.load(open(os.path.join(os.path.dirname(__file__), "pack.json")))
     game = spec["minecraft"]
@@ -194,7 +197,7 @@ def main():
     index = {
         "formatVersion": 1,
         "game": "minecraft",
-        "versionId": version,
+        "versionId": pack_version,
         "name": spec["name"],
         "summary": spec["summary"],
         "files": [{
@@ -206,7 +209,7 @@ def main():
         } for e in files],
         "dependencies": {"minecraft": game, "fabric-loader": spec["fabric_loader"]},
     }
-    pack_path = os.path.join(out, f"Bloom Pack {version}.mrpack")
+    pack_path = os.path.join(out, f"Bloom Pack {pack_version}.mrpack")
     with zipfile.ZipFile(pack_path, "w", zipfile.ZIP_DEFLATED) as pack:
         pack.writestr("modrinth.index.json", json.dumps(index, indent=2))
         for path, data in overrides.items():
@@ -216,7 +219,7 @@ def main():
             pack.writestr(f"client-overrides/{path}", data)
 
     # ---- the server's mods (drop the mods folder into a Fabric 26.3 server)
-    server_path = os.path.join(out, f"Bloom Pack {version} server mods.zip")
+    server_path = os.path.join(out, f"Bloom Pack {pack_version} server mods.zip")
     server_mods = []
     with zipfile.ZipFile(server_path, "w", zipfile.ZIP_DEFLATED) as server:
         for entry in files:
@@ -246,4 +249,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        import traceback
+        text = traceback.format_exc()
+        print("::error title=pack-crash::" + text.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+        raise

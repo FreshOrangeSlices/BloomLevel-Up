@@ -422,6 +422,17 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Stat sheet | For weapons Better Combat handles: each swing of its combo (shape, arc, damage) and what each mob takes when a swing hits 2 to 5 mobs, in place of the vanilla sweep. The summary shows "Hitting 3 mobs, each" | `CombatSheet.betterCombatRows` |
 | Details window | Predator, Combo, Full Sweep, Batter Up!, Charge Attack and Heavy Hands get a "With Better Combat" section, only shown when it's installed | `MajorDetails.sections`, `*.detail.bettercombat` |
 
+## Round 10: the Bloom Pack (2026-10-24)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| What's in it | The "Start with" mods from the Bloom Pack mod list, plus GeckoLib (World Bosses needs it) and every required dependency Modrinth lists. Not yet: Origins: Legacy, Villagers at Work, the "Later" mods | `pack/pack.json` |
+| Versions | Each build takes the newest 26.3 Fabric build of each mod (releases before betas before alphas) | `pack/build_pack.py` |
+| Packed inside | Bloom (from the same build) and World Bosses (CurseForge's Fabric 26.3 file 2.0.2). Fine for sharing privately; publishing it would need the World Bosses author's permission | `pack/pack.json` "external" |
+| Sides | A mod Modrinth marks "unsupported" on a side stays off that side; "optional" counts as required (so launchers don't ask). Cloth Config and Player Animation Library are forced onto the server (Better Combat needs them there) | `pack/pack.json` "env_overrides" |
+| First launch | Fresh Animations is on and the Complementary shader selected (client-only files, applied when the pack is installed) | `pack/pack.json` "client_presets" |
+| Checks | Every jar's required mod ids must be in the pack on the client and on the server, or the build fails; a Fabric 26.3 server then boots with the server mods and a 5 GB heap, and the run notes how long it took and its memory | `pack/build_pack.py`, `pack/boot_server.py`, `build.yml` job `pack` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

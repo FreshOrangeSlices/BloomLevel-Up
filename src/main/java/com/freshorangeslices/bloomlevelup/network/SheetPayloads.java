@@ -25,7 +25,10 @@ public final class SheetPayloads {
 	private SheetPayloads() {
 	}
 
-	/** Client → server: the stat sheet for {@code category}, for the item in inventory {@code slot} (-1 = main hand). */
+	/**
+	 * Client → server: the stat sheet for {@code category}, for the item in inventory {@code slot} (-1 = main hand,
+	 * -2 = bare hands). {@code toggles}: "id=max" or "id=off" for each switch not left on Live.
+	 */
 	public record Request(int id, String category, int slot, int target, List<String> toggles) implements CustomPacketPayload {
 		public static final Type<Request> TYPE = new Type<>(BloomLevelUp.id("sheet_request"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, Request> CODEC = CustomPacketPayload.codec(Request::write, Request::new);
@@ -72,18 +75,26 @@ public final class SheetPayloads {
 		}
 	}
 
-	/** A "show it at its max" switch for one effect the player owns. */
-	public record Toggle(String id, Component name, Component tooltip, boolean on) {
+	/**
+	 * A switch for one effect the player owns: {@code mode} is Live (what you have right now, {@code live} says
+	 * what that is), Max or Off.
+	 */
+	public record Toggle(String id, Component name, Component tooltip, int mode, Component live) {
+		public static final int LIVE = 0;
+		public static final int MAX = 1;
+		public static final int OFF = 2;
+
 		static Toggle read(RegistryFriendlyByteBuf buf) {
 			return new Toggle(buf.readUtf(BloomPayloads.MAX_ID), ComponentSerialization.STREAM_CODEC.decode(buf),
-					ComponentSerialization.STREAM_CODEC.decode(buf), buf.readBoolean());
+					ComponentSerialization.STREAM_CODEC.decode(buf), buf.readVarInt(), ComponentSerialization.STREAM_CODEC.decode(buf));
 		}
 
 		void write(RegistryFriendlyByteBuf buf) {
 			buf.writeUtf(id, BloomPayloads.MAX_ID);
 			ComponentSerialization.STREAM_CODEC.encode(buf, name);
 			ComponentSerialization.STREAM_CODEC.encode(buf, tooltip);
-			buf.writeBoolean(on);
+			buf.writeVarInt(mode);
+			ComponentSerialization.STREAM_CODEC.encode(buf, live);
 		}
 	}
 

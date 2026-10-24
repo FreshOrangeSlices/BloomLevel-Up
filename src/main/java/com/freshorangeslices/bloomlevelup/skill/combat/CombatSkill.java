@@ -1029,6 +1029,26 @@ public final class CombatSkill {
 		}
 	}
 
+	/** Predator stacks the next hit on the same target would use right now (0 once they've run out). */
+	public static int predatorStacksNow(ServerPlayer player) {
+		Stack predator = PREDATOR.get(player.getUUID());
+		long now = player.level().getGameTime();
+		return predator != null && now - predator.lastTick() <= config().predatorResetTicks ? predator.stacks() : 0;
+	}
+
+	/** Combo stacks the next punch would use right now. */
+	public static int comboStacksNow(ServerPlayer player) {
+		Stack combo = COMBO.get(player.getUUID());
+		long now = player.level().getGameTime();
+		return combo != null && now - combo.lastTick() <= config().comboResetTicks ? combo.stacks() : 0;
+	}
+
+	/** Bloodlust stacks right now. */
+	public static int bloodlustStacksNow(ServerPlayer player) {
+		Stack bloodlust = BLOODLUST.get(player.getUUID());
+		return bloodlust != null && player.level().getGameTime() <= bloodlust.lastTick() ? bloodlust.stacks() : 0;
+	}
+
 	/** Damage Stored Impact would add to the next mace hit right now (0 once its window has closed). */
 	public static double storedImpactNow(ServerPlayer player) {
 		return storedImpact(BloomAttachments.profile(player), player.level().getGameTime()) / 100.0;

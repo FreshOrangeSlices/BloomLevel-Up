@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
@@ -70,9 +72,36 @@ final class CombatSheet {
 		}
 	}
 
-	/** The switches the player turned on (each only offered when the player owns that effect). */
-	private record Switches(boolean charged, boolean chargedThrow, boolean fall, boolean stored, boolean combo, boolean firstStrike,
-			boolean predator, boolean bloodlust, boolean marksman) {
+	/**
+	 * What Bloom's own effects come in with, from the switches: Live is the player's real state right now (an armed
+	 * charge, the fall in progress, what Stored Impact holds, the stacks Combo, Predator and Bloodlust have), Max the
+	 * most, Off none.
+	 */
+	private record Switches(boolean charged, boolean chargedThrow, double fall, double stored, int combo, boolean firstStrike, int predator,
+			int bloodlust, boolean marksman) {
+	}
+
+	/** Mobs some enchantments are for, each with its own colour on the sheet: undead (Smite), arthropods (Bane), water mobs (Impaling). */
+	private enum Kind {
+		UNDEAD("undead", 0x55FF55),
+		ARTHROPOD("arthropod", 0xFF55FF),
+		WATER("water", 0x55FFFF);
+
+		final String key;
+		final int color;
+
+		Kind(String key, int color) {
+			this.key = key;
+			this.color = color;
+		}
+
+		EntityType<? extends LivingEntity> type() {
+			return switch (this) {
+				case UNDEAD -> EntityTypes.ZOMBIE;
+				case ARTHROPOD -> EntityTypes.SPIDER;
+				case WATER -> EntityTypes.GUARDIAN;
+			};
+		}
 	}
 
 	static void build(ServerPlayer player, ItemStack weapon, Sheet sheet) {
@@ -88,20 +117,7 @@ final class CombatSheet {
 		boolean trident = families.contains(Family.TRIDENT);
 		boolean mace = families.contains(Family.MACE);
 		boolean throwable = CombatAbilities.throwable(weapon) && CombatSkill.active(player, CombatIds.CATCH);
-
-		// ---- the switches, only for effects this player owns (and that work with this weapon)
-		boolean charged = melee && CombatAbilities.canCharge(player, weapon) && sheet.toggle("charged", Sheet.num(config.chargeAttackMultiplier));
-		boolean chargedThrow = throwable && CombatAbilities.masterOfArms(player) && CombatAbilities.canCharge(player, weapon)
-				&& sheet.toggle("charged_throw", Sheet.num(config.chargeAttackMultiplier));
-		boolean fall = melee && (mace || CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE)) && sheet.toggle("fall", Sheet.num(FALL_BLOCKS));
-		boolean stored = CombatSkill.has(player, CombatIds.STORED_IMPACT, Family.MACE, weapon) && sheet.toggle("stored", Sheet.num(config.storedImpactCap));
-		boolean combo = CombatSkill.has(player, CombatIds.COMBO, Family.UNARMED, weapon) && sheet.toggle("combo", Sheet.num(config.comboCap));
-		boolean firstStrike = CombatSkill.active(player, CombatIds.FIRST_STRIKE) && sheet.toggle("first_strike", Sheet.num(config.firstStrikeBonus * 100.0));
-		boolean predator = CombatSkill.active(player, CombatIds.PREDATOR) && sheet.toggle("predator", Sheet.num(config.predatorMaxStacks));
-		boolean bloodlust = CombatSkill.active(player, CombatIds.BLOODLUST) && sheet.toggle("bloodlust", Sheet.num(config.bloodlustMaxStacks));
-		boolean marksman = (bow || crossbow) && CombatSkill.has(player, CombatIds.MARKSMAN, Family.BOW, weapon)
-				&& sheet.toggle("marksman", Sheet.num(config.marksmanFullDistance));
-		Switches on = new Switches(charged, chargedThrow, fall, stored, combo, firstStrike, predator, bloodlust, marksman);
+		Switches on = switches(player, weapon, sheet, config, melee, mace, bow || crossbow, throwable);
 
 		// ---- the target
 		int target = sheet.targets(List.of(targetName(0), targetName(1), targetName(2), targetName(3)));
@@ -130,6 +146,77 @@ final class CombatSheet {
 		swordGauge(level, sheet, mob, swing, gaugeDamage);
 	}
 
+	/** The switches, only for effects this player owns (and that work with this weapon). */
+	private static Switches switches(ServerPlayer player, ItemStack weapon, Sheet sheet, BloomConfig config, boolean melee, boolean mace, boolean ranged,
+			boolean throwable) {
+		boolean charged = false;
+
+		if (melee && CombatAbilities.canCharge(player, weapon)) {
+			boolean armed = CombatAbilities.chargeArmed(player);
+			charged = pick(sheet.toggle("charged", Sheet.word(armed ? "live.armed" : "live.not_armed"), Sheet.num(config.chargeAttackMultiplier)), armed);
+		}
+
+		boolean chargedThrow = false;
+
+		if (throwable && CombatAbilities.masterOfArms(player) && CombatAbilities.canCharge(player, weapon)) {
+			chargedThrow = pick(sheet.toggle("charged_throw", Sheet.word("live.not_now"), Sheet.num(config.chargeAttackMultiplier)), false);
+		}
+
+		double fall = 0.0;
+
+		if (melee && (mace || CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE))) {
+			// A smash needs more than 1.5 blocks of falling (MaceItem.canSmashAttack).
+			double now = player.fallDistance > 1.5 ? player.fallDistance : 0.0;
+			Sheet.Mode mode = sheet.toggle("fall", now > 0.0 ? Sheet.word("live.blocks", Sheet.num(now)) : Sheet.word("live.not_falling"),
+					Sheet.num(FALL_BLOCKS));
+			fall = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX ? FALL_BLOCKS : 0.0;
+		}
+
+		double stored = 0.0;
+
+		if (CombatSkill.has(player, CombatIds.STORED_IMPACT, Family.MACE, weapon)) {
+			double now = CombatSkill.storedImpactNow(player);
+			Sheet.Mode mode = sheet.toggle("stored", Sheet.word("live.plus", Sheet.num(now)), Sheet.num(config.storedImpactCap));
+			stored = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX ? config.storedImpactCap : 0.0;
+		}
+
+		int combo = 0;
+
+		if (CombatSkill.has(player, CombatIds.COMBO, Family.UNARMED, weapon)) {
+			int now = CombatSkill.comboStacksNow(player);
+			int most = (int) Math.ceil(config.comboCap / Math.max(1.0E-6, config.comboPerHit));
+			Sheet.Mode mode = sheet.toggle("combo", Sheet.word("live.stacks", Sheet.num(now)), Sheet.num(config.comboCap));
+			combo = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX ? most : 0;
+		}
+
+		boolean firstStrike = CombatSkill.active(player, CombatIds.FIRST_STRIKE)
+				&& pick(sheet.toggle("first_strike", Sheet.word("live.not_now"), Sheet.num(config.firstStrikeBonus * 100.0)), false);
+		int predator = 0;
+
+		if (CombatSkill.active(player, CombatIds.PREDATOR)) {
+			int now = CombatSkill.predatorStacksNow(player);
+			Sheet.Mode mode = sheet.toggle("predator", Sheet.word("live.stacks", Sheet.num(now)), Sheet.num(config.predatorMaxStacks));
+			predator = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX ? config.predatorMaxStacks : 0;
+		}
+
+		int bloodlust = 0;
+
+		if (CombatSkill.active(player, CombatIds.BLOODLUST)) {
+			int now = CombatSkill.bloodlustStacksNow(player);
+			Sheet.Mode mode = sheet.toggle("bloodlust", Sheet.word("live.stacks", Sheet.num(now)), Sheet.num(config.bloodlustMaxStacks));
+			bloodlust = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX ? config.bloodlustMaxStacks : 0;
+		}
+
+		boolean marksman = ranged && CombatSkill.has(player, CombatIds.MARKSMAN, Family.BOW, weapon)
+				&& pick(sheet.toggle("marksman", Sheet.word("live.not_now"), Sheet.num(config.marksmanFullDistance)), false);
+		return new Switches(charged, chargedThrow, fall, stored, combo, firstStrike, predator, bloodlust, marksman);
+	}
+
+	/** An on/off effect: Live is what the player has right now. */
+	private static boolean pick(Sheet.Mode mode, boolean live) {
+		return mode == Sheet.Mode.LIVE ? live : mode == Sheet.Mode.MAX;
+	}
+
 	// ------------------------------------------------------------------ melee
 
 	private static double melee(ServerPlayer player, ServerLevel level, Loadout loadout, ItemStack weapon, Sheet sheet, Switches on, LivingEntity mob,
@@ -138,29 +225,46 @@ final class CombatSheet {
 		boolean mace = families.contains(Family.MACE);
 		float attack = (float) loadout.value(Attributes.ATTACK_DAMAGE);
 		float enchant = EnchantmentHelper.modifyDamage(level, weapon, mob, swing, attack) - attack;
+		double[] extra = extraEnchantment(level, weapon, swing, attack, enchant);
 		// Player.attack: the mace's fall bonus is part of the base damage (so a crit multiplies it), enchantments come after.
-		float smash = mace && on.fall()
-				? (float) (StatFormulas.maceFallBonus(FALL_BLOCKS) + EnchantmentHelper.modifyFallBasedDamage(level, weapon, mob, swing, 0.0F) * FALL_BLOCKS)
+		float smash = mace && on.fall() > 0.0
+				? (float) (StatFormulas.maceFallBonus(on.fall()) + EnchantmentHelper.modifyFallBasedDamage(level, weapon, mob, swing, 0.0F) * on.fall())
 				: 0.0F;
 		double vanillaHit = attack + smash + enchant;
 		double vanillaCrit = (attack + smash) * 1.5 + enchant;
 		boolean guaranteed = CombatSkill.has(player, CombatIds.GUARANTEED_CRITICAL, Family.AXE, weapon);
 		Bonus bonus = primaryBonus(player, weapon, on, config);
-		double hit = bonus.apply(vanillaHit) * (guaranteed ? critMultiplier : 1.0);
+		double hitMultiplier = guaranteed ? critMultiplier : 1.0;
+		double hit = bonus.apply(vanillaHit) * hitMultiplier;
 		double crit = bonus.apply(vanillaCrit) * critMultiplier / 1.5;
 		double speed = loadout.value(Attributes.ATTACK_SPEED);
 		double hitAfter = afterArmor(level, mob, weapon, swing, hit, armor, toughness, penetration);
 		double critAfter = afterArmor(level, mob, weapon, swing, crit, armor, toughness, penetration);
+		double[] hitExtra = new double[Kind.values().length];
+		double[] critExtra = new double[Kind.values().length];
+		double[] dpsExtra = new double[Kind.values().length];
+
+		for (Kind kind : Kind.values()) {
+			double more = extra[kind.ordinal()];
+
+			if (more > 0.0) {
+				hitExtra[kind.ordinal()] = afterArmor(level, mob, weapon, swing, bonus.apply(vanillaHit + more) * hitMultiplier, armor, toughness, penetration)
+						- hitAfter;
+				critExtra[kind.ordinal()] = afterArmor(level, mob, weapon, swing, bonus.apply(vanillaCrit + more) * critMultiplier / 1.5, armor, toughness,
+						penetration) - critAfter;
+				dpsExtra[kind.ordinal()] = hitExtra[kind.ordinal()] * speed;
+			}
+		}
 
 		// ---- summary
-		sheet.summary(Sheet.plain(hitAfter), guaranteed ? "combat.hit_always_crit" : "combat.hit");
+		sheet.summary(withExtras(hitAfter, hitExtra), guaranteed ? "combat.hit_always_crit" : "combat.hit");
 
 		if (!guaranteed) {
-			sheet.summary(Sheet.plain(critAfter), "combat.crit");
+			sheet.summary(withExtras(critAfter, critExtra), "combat.crit");
 		}
 
 		sheet.summary(Sheet.plain(speed), "combat.speed");
-		sheet.summary(Sheet.plain(hitAfter * speed), "combat.dps");
+		sheet.summary(withExtras(hitAfter * speed, dpsExtra), "combat.dps");
 
 		// ---- breakdown: attack damage
 		sheet.heading("combat.h.attack");
@@ -199,11 +303,10 @@ final class CombatSheet {
 		sheet.row(Sheet.plain(attack), "combat.attack_damage");
 
 		if (smash > 0.0F) {
-			sheet.row(Sheet.plus(smash), "combat.mace_fall", Sheet.num(FALL_BLOCKS));
+			sheet.row(Sheet.plus(smash), "combat.mace_fall", Sheet.num(on.fall()));
 		}
 
-		sheet.row(Sheet.plus(enchant), "combat.enchantments");
-		conditionalEnchantments(level, weapon, swing, attack, enchant, sheet);
+		enchantmentRows(level, weapon, swing, attack, sheet);
 		addBonusRows(player, weapon, on, config, sheet, true);
 
 		if (guaranteed) {
@@ -244,8 +347,9 @@ final class CombatSheet {
 		sheet.summary(Sheet.plain(reach), "combat.reach");
 
 		// ---- breakdown: hitting more than one
-		areaRows(player, level, loadout, weapon, sheet, on, mob, swing, attack, enchant, vanillaHit, hit, armor, toughness, penetration, config);
-		return bonus.apply(vanillaHit) * (guaranteed ? critMultiplier : 1.0);
+		areaRows(player, level, loadout, weapon, sheet, on, mob, swing, attack, enchant, extra, hit, armor, toughness, penetration, config);
+		extrasKey(sheet, extra);
+		return bonus.apply(vanillaHit) * hitMultiplier;
 	}
 
 	/** Bloom's bonuses on a swing's own target, with the switches. */
@@ -257,18 +361,13 @@ final class CombatSheet {
 			multiplier *= config.chargeAttackMultiplier;
 		}
 
-		if (CombatSkill.has(player, CombatIds.STORED_IMPACT, Family.MACE, weapon)) {
-			add += on.stored() ? config.storedImpactCap : CombatSkill.storedImpactNow(player);
+		add += on.stored();
+
+		if (on.fall() > 0.0 && CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE) && Weapons.isMeleeWeapon(weapon) && !Weapons.is(weapon, Family.MACE)) {
+			add += StatFormulas.maceFallBonus(on.fall());
 		}
 
-		if (on.fall() && CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE) && Weapons.isMeleeWeapon(weapon) && !Weapons.is(weapon, Family.MACE)) {
-			add += StatFormulas.maceFallBonus(FALL_BLOCKS);
-		}
-
-		if (on.combo()) {
-			add += config.comboCap;
-		}
-
+		add += StatFormulas.comboBonus(on.combo(), config.comboPerHit, config.comboCap);
 		return new Bonus(add, multiplier * shared(on, config, true));
 	}
 
@@ -280,31 +379,26 @@ final class CombatSheet {
 			multiplier *= 1.0 + config.firstStrikeBonus;
 		}
 
-		if (on.predator() && singleTarget) {
-			multiplier *= StatFormulas.stackMultiplier(config.predatorMaxStacks, config.predatorPerStack, config.predatorMaxStacks);
+		if (singleTarget) {
+			multiplier *= StatFormulas.stackMultiplier(on.predator(), config.predatorPerStack, config.predatorMaxStacks);
 		}
 
-		if (on.bloodlust()) {
-			multiplier *= StatFormulas.stackMultiplier(config.bloodlustMaxStacks, config.bloodlustPerStack, config.bloodlustMaxStacks);
-		}
-
-		return multiplier;
+		return multiplier * StatFormulas.stackMultiplier(on.bloodlust(), config.bloodlustPerStack, config.bloodlustMaxStacks);
 	}
 
 	/** The rows for Bloom's bonuses on a swing (or, {@code swing} false, on a projectile), in the order they apply. */
 	private static void addBonusRows(ServerPlayer player, ItemStack weapon, Switches on, BloomConfig config, Sheet sheet, boolean swing) {
 		if (swing) {
 			if (CombatSkill.has(player, CombatIds.STORED_IMPACT, Family.MACE, weapon)) {
-				double now = CombatSkill.storedImpactNow(player);
-				sheet.row(Sheet.plus(on.stored() ? config.storedImpactCap : now), on.stored() ? "combat.stored_full" : "combat.stored_now");
+				sheet.row(Sheet.plus(on.stored()), "combat.stored");
 			}
 
-			if (on.fall() && CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE) && !Weapons.is(weapon, Family.MACE)) {
-				sheet.row(Sheet.plus(StatFormulas.maceFallBonus(FALL_BLOCKS)), "combat.death_from_above", Sheet.num(FALL_BLOCKS));
+			if (on.fall() > 0.0 && CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE) && !Weapons.is(weapon, Family.MACE)) {
+				sheet.row(Sheet.plus(StatFormulas.maceFallBonus(on.fall())), "combat.death_from_above", Sheet.num(on.fall()));
 			}
 
-			if (on.combo()) {
-				sheet.row(Sheet.plus(config.comboCap), "combat.combo");
+			if (on.combo() > 0) {
+				sheet.row(Sheet.plus(StatFormulas.comboBonus(on.combo(), config.comboPerHit, config.comboCap)), "combat.combo", Sheet.num(on.combo()));
 			}
 
 			if (on.charged()) {
@@ -316,30 +410,89 @@ final class CombatSheet {
 			sheet.row(Sheet.times(1.0 + config.firstStrikeBonus), "combat.first_strike");
 		}
 
-		if (on.predator()) {
-			sheet.row(Sheet.times(StatFormulas.stackMultiplier(config.predatorMaxStacks, config.predatorPerStack, config.predatorMaxStacks)),
-					"combat.predator", Sheet.num(config.predatorMaxStacks));
+		if (on.predator() > 0) {
+			sheet.row(Sheet.times(StatFormulas.stackMultiplier(on.predator(), config.predatorPerStack, config.predatorMaxStacks)), "combat.predator",
+					Sheet.num(on.predator()));
 		}
 
-		if (on.bloodlust()) {
-			sheet.row(Sheet.times(StatFormulas.stackMultiplier(config.bloodlustMaxStacks, config.bloodlustPerStack, config.bloodlustMaxStacks)),
-					"combat.bloodlust", Sheet.num(config.bloodlustMaxStacks));
+		if (on.bloodlust() > 0) {
+			sheet.row(Sheet.times(StatFormulas.stackMultiplier(on.bloodlust(), config.bloodlustPerStack, config.bloodlustMaxStacks)), "combat.bloodlust",
+					Sheet.num(on.bloodlust()));
 		}
 	}
 
-	/** Smite, Bane of Arthropods, Impaling and the like: how much more they add against the mobs they're for. */
-	private static void conditionalEnchantments(ServerLevel level, ItemStack weapon, DamageSource source, float attack, float general, Sheet sheet) {
-		conditional(level, weapon, source, attack, general, sheet, EntityTypes.ZOMBIE, "combat.vs_undead");
-		conditional(level, weapon, source, attack, general, sheet, EntityTypes.SPIDER, "combat.vs_arthropods");
-		conditional(level, weapon, source, attack, general, sheet, EntityTypes.GUARDIAN, "combat.vs_water");
+	/** How much more a weapon's enchantments add against each kind of mob than against an ordinary one. */
+	private static double[] extraEnchantment(ServerLevel level, ItemStack weapon, DamageSource source, float amount, float general) {
+		double[] extra = new double[Kind.values().length];
+
+		for (Kind kind : Kind.values()) {
+			float against = EnchantmentHelper.modifyDamage(level, weapon, Dummies.of(level, kind.type()), source, amount) - amount;
+			extra[kind.ordinal()] = Math.max(0.0, against - general);
+		}
+
+		return extra;
 	}
 
-	private static void conditional(ServerLevel level, ItemStack weapon, DamageSource source, float attack, float general, Sheet sheet,
-			EntityType<? extends LivingEntity> type, String key) {
-		float against = EnchantmentHelper.modifyDamage(level, weapon, Dummies.of(level, type), source, attack) - attack;
+	/** A number, then "+x" in each mob kind's colour for what it adds against them only. */
+	private static Component withExtras(double value, double[] extras) {
+		MutableComponent out = Sheet.plain(value).copy();
 
-		if (Math.abs(against - general) > 0.005F) {
-			sheet.note(key, Sheet.num(against));
+		for (Kind kind : Kind.values()) {
+			if (extras[kind.ordinal()] > 0.005) {
+				out.append(Sheet.colored(" +" + Sheet.num(extras[kind.ordinal()]), kind.color));
+			}
+		}
+
+		return out;
+	}
+
+	/** Under the summary: what each coloured "+x" means (only the kinds this weapon has). */
+	private static void extrasKey(Sheet sheet, double[] extras) {
+		for (Kind kind : Kind.values()) {
+			if (extras[kind.ordinal()] > 0.005) {
+				sheet.summaryNoteLabel(Component.translatable("bloom.sheet.combat.extra." + kind.key).withStyle(style -> style.withColor(kind.color)));
+			}
+		}
+	}
+
+	/**
+	 * Each enchantment that adds damage, on its own line: what it adds against every mob, and in its mob kind's
+	 * colour what it adds against those only (Smite against undead, and so on).
+	 */
+	private static void enchantmentRows(ServerLevel level, ItemStack weapon, DamageSource source, float attack, Sheet sheet) {
+		ItemEnchantments enchantments = weapon.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+		LivingEntity mob = Dummies.of(level, EntityTypes.PIG);
+		double total = 0.0;
+		boolean any = false;
+
+		for (Holder<Enchantment> holder : enchantments.keySet()) {
+			int enchantLevel = enchantments.getLevel(holder);
+			ItemStack single = new ItemStack(weapon.getItem());
+			single.enchant(holder, enchantLevel);
+			MutableComponent name = holder.value().description().copy().append(" ").append(Component.translatable("enchantment.level." + enchantLevel));
+			float general = EnchantmentHelper.modifyDamage(level, single, mob, source, attack) - attack;
+
+			if (Math.abs(general) > 0.005F) {
+				sheet.rowLabel(Sheet.plus(general), name.copy().withStyle(style -> style.withColor(0xEFE6D2)));
+				total += general;
+				any = true;
+			}
+
+			for (Kind kind : Kind.values()) {
+				float against = EnchantmentHelper.modifyDamage(level, single, Dummies.of(level, kind.type()), source, attack) - attack - general;
+
+				if (against > 0.005F) {
+					sheet.rowLabel(Sheet.colored("+" + Sheet.num(against), kind.color),
+							Component.translatable("bloom.sheet.combat.enchant_vs." + kind.key, name).withStyle(style -> style.withColor(kind.color)));
+					any = true;
+				}
+			}
+		}
+
+		if (!any) {
+			sheet.row(Sheet.plus(0.0), "combat.enchantments");
+		} else if (total > 0.005) {
+			sheet.note("combat.enchantments.note");
 		}
 	}
 
@@ -361,7 +514,7 @@ final class CombatSheet {
 
 	/** Sweeps, Aura Sword, Lightning Shock, Overkill. */
 	private static void areaRows(ServerPlayer player, ServerLevel level, Loadout loadout, ItemStack weapon, Sheet sheet, Switches on, LivingEntity mob,
-			DamageSource swing, float attack, float enchant, double vanillaHit, double hit, float armor, float toughness, double penetration,
+			DamageSource swing, float attack, float enchant, double[] extra, double hit, float armor, float toughness, double penetration,
 			BloomConfig config) {
 		boolean swordSweep = weapon.is(ItemTags.SWORDS);
 		boolean batterUp = !swordSweep && Weapons.isMeleeWeapon(weapon) && CombatSkill.active(player, CombatIds.BATTER_UP);
@@ -379,15 +532,27 @@ final class CombatSheet {
 
 		if (swordSweep || batterUp) {
 			double ratio = loadout.value(Attributes.SWEEPING_DAMAGE_RATIO);
+			float sweepBase = (float) (1.0 + ratio * attack);
 			// A sword's sweep: 1 + ratio x the swing's base damage, then its enchantments again (vanilla). Batter Up!:
 			// 1 + ratio x the whole hit (CombatSkill.onHitEffects).
-			double sweep = swordSweep ? EnchantmentHelper.modifyDamage(level, weapon, mob, swing, (float) (1.0 + ratio * attack)) : 1.0 + ratio * (attack + enchant);
-			double sweepHit = sweep * spread;
-			double sweepAfter = afterArmor(level, mob, weapon, swing, sweepHit, armor, toughness, penetration);
+			double sweep = swordSweep ? EnchantmentHelper.modifyDamage(level, weapon, mob, swing, sweepBase) : 1.0 + ratio * (attack + enchant);
+			double sweepAfter = afterArmor(level, mob, weapon, swing, sweep * spread, armor, toughness, penetration);
+			double[] sweepExtra = new double[Kind.values().length];
+
+			for (Kind kind : Kind.values()) {
+				double more = swordSweep
+						? EnchantmentHelper.modifyDamage(level, weapon, Dummies.of(level, kind.type()), swing, sweepBase) - sweep
+						: ratio * extra[kind.ordinal()];
+
+				if (more > 0.005) {
+					sweepExtra[kind.ordinal()] = afterArmor(level, mob, weapon, swing, (sweep + more) * spread, armor, toughness, penetration) - sweepAfter;
+				}
+			}
+
 			sheet.row(Sheet.pct(ratio), "combat.sweep_ratio");
-			sheet.total(Sheet.plain(sweepAfter), batterUp ? "combat.sweep_batter" : "combat.sweep");
+			sheet.total(withExtras(sweepAfter, sweepExtra), batterUp ? "combat.sweep_batter" : "combat.sweep");
 			sheet.note("combat.sweep.note");
-			sheet.summary(Sheet.plain(sweepAfter), "combat.sweep");
+			sheet.summary(withExtras(sweepAfter, sweepExtra), "combat.sweep");
 		}
 
 		if (aura) {
@@ -411,19 +576,23 @@ final class CombatSheet {
 			float armor, float toughness, double penetration, BloomConfig config) {
 		DamageSource source = player.damageSources().trident(player, player);
 		float vanilla = EnchantmentHelper.modifyDamage(level, weapon, mob, source, 8.0F);
-		double damage;
+		// CombatAbilities.thrownDamage: the weapon's own damage on your base (no Power or Strength), plus its enchantments.
+		double base = tridentOnly ? 0.0 : weapon.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY)
+				.compute(Attributes.ATTACK_DAMAGE, player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE), EquipmentSlot.MAINHAND);
+		double charge = !tridentOnly && on.chargedThrow() ? config.chargeAttackMultiplier : 1.0;
+		double damage = tridentOnly ? vanilla : (base + Math.max(0.0, vanilla - 8.0)) * charge;
+		double multiplier = shared(on, config, true);
+		double after = afterArmor(level, mob, weapon, source, damage * multiplier, armor, toughness, penetration);
+		double[] extras = new double[Kind.values().length];
 
-		if (tridentOnly) {
-			damage = vanilla;
-		} else {
-			// CombatAbilities.thrownDamage: the weapon's own damage on your base (no Power or Strength), plus its enchantments.
-			double base = weapon.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY)
-					.compute(Attributes.ATTACK_DAMAGE, player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE), EquipmentSlot.MAINHAND);
-			damage = (base + Math.max(0.0, vanilla - 8.0)) * (on.chargedThrow() ? config.chargeAttackMultiplier : 1.0);
+		for (Kind kind : Kind.values()) {
+			double more = EnchantmentHelper.modifyDamage(level, weapon, Dummies.of(level, kind.type()), source, 8.0F) - vanilla;
+
+			if (more > 0.005) {
+				extras[kind.ordinal()] = afterArmor(level, mob, weapon, source, (damage + more * charge) * multiplier, armor, toughness, penetration) - after;
+			}
 		}
 
-		double total = damage * shared(on, config, true);
-		double after = afterArmor(level, mob, weapon, source, total, armor, toughness, penetration);
 		sheet.heading("combat.h.thrown");
 		sheet.row(Sheet.plain(damage), tridentOnly ? "combat.trident_throw" : on.chargedThrow() ? "combat.charged_throw" : "combat.catch_throw");
 
@@ -431,10 +600,11 @@ final class CombatSheet {
 			sheet.note("combat.catch_throw.note");
 		}
 
-		addBonusRows(player, weapon, new Switches(false, false, false, false, false, on.firstStrike(), on.predator(), on.bloodlust(), false), config,
-				sheet, false);
-		sheet.total(Sheet.plain(after), "combat.thrown_after");
-		sheet.summary(Sheet.plain(after), "combat.thrown");
+		addBonusRows(player, weapon, new Switches(false, false, 0.0, 0.0, 0, on.firstStrike(), on.predator(), on.bloodlust(), false), config, sheet,
+				false);
+		sheet.total(withExtras(after, extras), "combat.thrown_after");
+		sheet.summary(withExtras(after, extras), "combat.thrown");
+		extrasKey(sheet, extras);
 	}
 
 	// ------------------------------------------------------------------ bows and crossbows

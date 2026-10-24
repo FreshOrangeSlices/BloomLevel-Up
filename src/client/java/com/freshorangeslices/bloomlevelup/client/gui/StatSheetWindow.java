@@ -1,9 +1,9 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
@@ -50,7 +51,8 @@ final class StatSheetWindow {
 	private final int frame;
 	private final String category;
 	private final Component title;
-	private final Set<String> toggles = new LinkedHashSet<>();
+	/** Each switch not on Live: Max or Off (SheetPayloads.Toggle.MAX / OFF). */
+	private final Map<String, Integer> modes = new LinkedHashMap<>();
 	private int slot = HELD;
 	private int target = -1;
 	private boolean details;
@@ -78,7 +80,17 @@ final class StatSheetWindow {
 		this.title = title;
 		this.frameSprite = frameSprite;
 		this.frame = frame;
+		SheetMemory.Tab remembered = SheetMemory.get(category);
+		this.slot = remembered.slot();
+		this.target = remembered.target();
+		this.details = remembered.details();
+		this.modes.putAll(remembered.modes());
 		request();
+	}
+
+	/** Keeps this tab's choices for next time (config/bloomlevelup-sheet.json). */
+	private void remember() {
+		SheetMemory.put(category, new SheetMemory.Tab(slot, target, Map.copyOf(modes), details));
 	}
 
 	String category() {
@@ -94,7 +106,9 @@ final class StatSheetWindow {
 	private void request() {
 		sinceRequest = 0;
 		requestId++;
-		ClientPlayNetworking.send(new SheetPayloads.Request(requestId, category, slot, target, List.copyOf(toggles)));
+		List<String> switches = new ArrayList<>();
+		modes.forEach((id, mode) -> switches.add(id + (mode == SheetPayloads.Toggle.MAX ? "=max" : "=off")));
+		ClientPlayNetworking.send(new SheetPayloads.Request(requestId, category, slot, target, switches));
 	}
 
 	private SheetPayloads.View view() {
@@ -155,7 +169,7 @@ final class StatSheetWindow {
 		g.blitSprite(RenderPipelines.GUI_TEXTURED, frameSprite, x0 - frame, y0 - frame, w + 2 * frame, h + 2 * frame);
 
 		// Title, the summary / all stats tabs, and the close button.
-		g.text(font, MajorDetails.heading(title), x0 + 8, y0 + 7, 0xFFFFD86B);
+		MajorDetails.big(g, font, MajorDetails.heading(title), x0 + 8, y0 + 5, 0xFFFFD86B);
 		int closeX = x0 + w - 13;
 		hits.add(new Hit(closeX - 2, y0 + 3, closeX + 10, y0 + 15, null, Component.translatable("bloom.hub.detail.close")));
 		g.text(font, Component.literal("×"), closeX, y0 + 5, overClose(mouseX, mouseY) ? 0xFFFFFFFF : MUTED);
@@ -223,9 +237,21 @@ final class StatSheetWindow {
 			g.text(font, label, x0 + 8, y + 3, LABEL);
 			int left = x0 + 12 + font.width(label);
 			int cx = left;
+			List<SheetPayloads.Toggle> offered = view.toggles();
 
-			for (SheetPayloads.Toggle toggle : view.toggles()) {
-				int width = chipWidth(font, toggle.name());
+			// "All": every switch at once, Live → Max → Off.
+			if (offered.size() > 1) {
+				int all = allMode(offered);
+				Component allName = Component.translatable("bloom.sheet.ui.all").append(": ")
+						.append(all < 0 ? Component.literal("…") : modeName(all, Component.empty()));
+				cx = modeChip(g, font, cx, y, allName, all, mouseX, mouseY, () -> setAll(offered),
+						Component.translatable("bloom.sheet.ui.all.tip")) + 3;
+			}
+
+			for (SheetPayloads.Toggle toggle : offered) {
+				int mode = modes.getOrDefault(toggle.id(), SheetPayloads.Toggle.LIVE);
+				Component name = toggle.name().copy().append(": ").append(modeName(mode, toggle.live()));
+				int width = chipWidth(font, name);
 
 				if (cx + width > x0 + w - 8 && cx > left) {
 					cx = left;
@@ -233,7 +259,8 @@ final class StatSheetWindow {
 				}
 
 				String id = toggle.id();
-				cx = chip(g, font, cx, y, toggle.name(), toggles.contains(id), mouseX, mouseY, () -> flip(id), toggle.tooltip()) + 3;
+				Component tip = toggle.tooltip().copy().append("\n").append(Component.translatable("bloom.sheet.ui.cycle").withStyle(style -> style.withColor(MUTED)));
+				cx = modeChip(g, font, cx, y, name, mode, mouseX, mouseY, () -> cycle(id), tip) + 3;
 			}
 
 			y += CHIP_H + 4;
@@ -338,8 +365,8 @@ final class StatSheetWindow {
 	private static int drawRow(GuiGraphicsExtractor g, Font font, SheetPayloads.Row row, int x, int y, int width) {
 		switch (row.kind()) {
 			case SheetPayloads.Row.HEADING -> {
-				g.text(font, MajorDetails.heading(row.label()), x, y, GOLD);
-				return y + 13;
+				MajorDetails.big(g, font, MajorDetails.heading(row.label()), x, y, GOLD);
+				return y + 16;
 			}
 			case SheetPayloads.Row.NOTE -> {
 				int ny = y;
@@ -371,6 +398,36 @@ final class StatSheetWindow {
 				return ty + Math.max(1, lines.size()) * 10 + 1;
 			}
 		}
+	}
+
+	/** "Live" (with what that is right now), "Max" or "Off". */
+	private static Component modeName(int mode, Component live) {
+		if (mode == SheetPayloads.Toggle.MAX) {
+			return Component.translatable("bloom.sheet.ui.mode.max");
+		}
+
+		if (mode == SheetPayloads.Toggle.OFF) {
+			return Component.translatable("bloom.sheet.ui.mode.off");
+		}
+
+		MutableComponent text = Component.translatable("bloom.sheet.ui.mode.live");
+		return live.getString().isEmpty() ? text : text.append(" (").append(live).append(")");
+	}
+
+	/** A switch drawn by its mode: Live green, Max gold, Off dark. Returns its right edge. */
+	private int modeChip(GuiGraphicsExtractor g, Font font, int x, int y, Component text, int mode, int mouseX, int mouseY, Runnable action,
+			Component tooltip) {
+		int w = chipWidth(font, text);
+		boolean hover = mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + CHIP_H;
+		int rim = mode == SheetPayloads.Toggle.MAX ? GOLD : mode == SheetPayloads.Toggle.LIVE ? 0xFF5FB04A : hover ? 0xFF8A6A2A : 0xFF3A2F22;
+		int fill = mode == SheetPayloads.Toggle.MAX ? 0xFFC98F1F : mode == SheetPayloads.Toggle.LIVE ? 0xFF1F3A1A : 0xFF201A13;
+		int color = mode == SheetPayloads.Toggle.MAX ? 0xFF1A1206 : mode == SheetPayloads.Toggle.LIVE ? 0xFFB9F2A6 : hover ? TEXT : MUTED;
+		g.fill(x + 1, y, x + w - 1, y + CHIP_H, hover && mode != SheetPayloads.Toggle.OFF ? 0xFFFFFFFF : rim);
+		g.fill(x, y + 1, x + w, y + CHIP_H - 1, hover && mode != SheetPayloads.Toggle.OFF ? 0xFFFFFFFF : rim);
+		g.fill(x + 1, y + 1, x + w - 1, y + CHIP_H - 1, fill);
+		g.text(font, text, x + 4, y + 3, color);
+		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, tooltip));
+		return x + w;
 	}
 
 	/** A small rounded switch; returns its right edge. */
@@ -471,23 +528,64 @@ final class StatSheetWindow {
 	private void pickPage(boolean all) {
 		details = all;
 		scroll = 0.0;
+		remember();
 	}
 
 	private void pickSlot(int pick) {
 		slot = pick;
+		remember();
 		request();
 	}
 
 	private void pickTarget(int index) {
 		target = index;
+		remember();
 		request();
 	}
 
-	private void flip(String id) {
-		if (!toggles.remove(id)) {
-			toggles.add(id);
+	/** Live → Max → Off → Live. */
+	private void cycle(String id) {
+		int next = (modes.getOrDefault(id, SheetPayloads.Toggle.LIVE) + 1) % 3;
+		setMode(id, next);
+		remember();
+		request();
+	}
+
+	private void setMode(String id, int mode) {
+		if (mode == SheetPayloads.Toggle.LIVE) {
+			modes.remove(id);
+		} else {
+			modes.put(id, mode);
+		}
+	}
+
+	/** The mode every offered switch shares, or -1 when they differ. */
+	private int allMode(List<SheetPayloads.Toggle> offered) {
+		int shared = -2;
+
+		for (SheetPayloads.Toggle toggle : offered) {
+			int mode = modes.getOrDefault(toggle.id(), SheetPayloads.Toggle.LIVE);
+
+			if (shared == -2) {
+				shared = mode;
+			} else if (shared != mode) {
+				return -1;
+			}
 		}
 
+		return shared < 0 ? SheetPayloads.Toggle.LIVE : shared;
+	}
+
+	/** Every switch to the next mode together (mixed ones start over at Live). */
+	private void setAll(List<SheetPayloads.Toggle> offered) {
+		int now = allMode(offered);
+		int next = now < 0 ? SheetPayloads.Toggle.LIVE : (now + 1) % 3;
+
+		for (SheetPayloads.Toggle toggle : offered) {
+			setMode(toggle.id(), next);
+		}
+
+		remember();
 		request();
 	}
 
@@ -498,12 +596,7 @@ final class StatSheetWindow {
 	}
 
 	void setToggleForTests(String id, boolean on) {
-		if (on) {
-			toggles.add(id);
-		} else {
-			toggles.remove(id);
-		}
-
+		setMode(id, on ? SheetPayloads.Toggle.MAX : SheetPayloads.Toggle.OFF);
 		request();
 	}
 }

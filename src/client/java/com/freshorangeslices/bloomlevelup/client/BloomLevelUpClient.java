@@ -47,6 +47,7 @@ import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
  */
 public final class BloomLevelUpClient implements ClientModInitializer {
 	private static KeyMapping openHubKey;
+	private static KeyMapping openSheetKey;
 	private static KeyMapping openPocketKey;
 	private static KeyMapping openRunesKey;
 
@@ -117,6 +118,8 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		openHubKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_hub",
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 
+		openSheetKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_sheet",
+				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 		openPocketKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_pocket",
 				InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), category));
 		openRunesKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.open_runes",
@@ -151,6 +154,13 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 			while (openRunesKey.consumeClick()) {
 				if (client.player != null && ClientBloomState.ready()) {
 					SideButton.openRunes();
+				}
+			}
+
+			while (openSheetKey.consumeClick()) {
+				// The stat sheet straight away, for the tab last open in the hub; closing it closes everything.
+				if (client.player != null && ClientBloomState.ready()) {
+					ClientScreens.open(HubScreen.onStatSheet());
 				}
 			}
 

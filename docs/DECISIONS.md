@@ -384,6 +384,17 @@ Rows above that these replace are marked "(see Playtest round 1)".
 | Utility, Misc | Utility: tool picker, mining speed and break time on the tool's block (stone, dirt, oak log, hay), Yield, Preservation with Unbreaking, Utility Majors. Misc: Wisdom, Endurance, Speed (walking blocks per second), effects and storage Majors | `UtilitySheet`, `MiscSheet` |
 | Not counted | Difficulty scaling of mob hits (the sheet's "hit of 10" is after it), blocking with a shield, absorption hearts, Shields' and helmets' special cases | |
 
+## Round 8c: stat sheet follow-ups (2026-10-24)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Switches | Three ways each, clicked in turn: **Live** (what you have right now: armed charge, your fall in progress, what Stored Impact holds, Combo/Predator/Bloodlust stacks, Braced; effects that depend on the target or distance, like First Strike and Marksman, are off when Live), **Max**, **Off**. An **All** switch sets them all together. Live is the default | `CombatSheet.switches`, `StatSheetWindow.modeChip` |
+| Mob-specific enchantments | Smite (green), Bane of Arthropods (purple) and Impaling (aqua) show as a coloured "+x" after Hit, Critical hit, Damage per second, Sweep and Thrown, with a key under the summary; in All stats every enchantment has its own line, the mob-specific part in its colour | `CombatSheet.Kind`, `enchantmentRows` |
+| Remembered | Each tab keeps its weapon/tool, target, switches and page in `config/bloomlevelup-sheet.json` (survives quitting) | `SheetMemory` |
+| Keybind | "Open Stat Sheet" (unbound by default) opens the sheet for the tab last open in the hub; closing it closes everything | `BloomLevelUpClient`, `HubScreen.onStatSheet` |
+| Headings | Normal font, bold, 1.5× size (details window headings and name, sheet title and headings) | `MajorDetails.big` |
+| Stats button | A plain white bar chart, like the other two buttons | `textures/gui/hub/stat_sheet.png` |
+
 ## Build numbers
 
 | Topic | Decision | Where to change |

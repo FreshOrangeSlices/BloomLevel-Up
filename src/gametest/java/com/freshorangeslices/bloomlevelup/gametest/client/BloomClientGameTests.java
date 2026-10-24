@@ -140,7 +140,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			}
 		});
 		check(context, "switching Predator to its max", client -> ClientBloomState.sheet() != null
-				&& ClientBloomState.sheet().toggles().stream().anyMatch(toggle -> toggle.id().equals("predator") && toggle.on()));
+				&& ClientBloomState.sheet().toggles().stream().anyMatch(toggle -> toggle.id().equals("predator") && toggle.mode() == com.freshorangeslices.bloomlevelup.network.SheetPayloads.Toggle.MAX));
 		context.waitTicks(3);
 		context.takeScreenshot("bloom_sheet_combat_predator");
 

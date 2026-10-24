@@ -76,6 +76,9 @@ Controls. In the hub:
   against a target with no/iron/diamond/netherite armor, with a switch per stacking effect you own to
   show it at its max, and the vanilla sword your hit compares to; Armor shows what reaches your health
   from each kind of hit; Utility your tools; Misc the rest. **All stats** lists where every number comes from.
+  Each effect switch goes **Live** (what you have right now) → **Max** → **Off**; **All** sets them together.
+  Coloured "+x" numbers are extra damage against undead (green), spiders (purple) or water mobs (aqua). The
+  sheet remembers your picks per tab, and **Open Stat Sheet** (Controls, unbound) opens it directly.
 - After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
   icon switches only a stat's invested points. The Armor tab shows your real armor total.
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).

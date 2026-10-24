@@ -136,10 +136,10 @@ public class SheetGameTests {
 		points(player, CombatIds.CRITICAL, 40);
 		StatEffects.refresh(player);
 
-		SheetPayloads.View plain = sheet(player, SkillXp.COMBAT, 5, 0, "first_strike");
-		SheetPayloads.View armored = sheet(player, SkillXp.COMBAT, 5, 2, "first_strike");
+		SheetPayloads.View plain = sheet(player, SkillXp.COMBAT, 5, 0, "first_strike=max");
+		SheetPayloads.View armored = sheet(player, SkillXp.COMBAT, 5, 2, "first_strike=max");
 		helper.assertTrue(player.getMainHandItem().is(Items.IRON_SWORD), "The sheet doesn't change what's in hand");
-		helper.assertTrue(plain.toggles().stream().anyMatch(toggle -> toggle.id().equals("first_strike") && toggle.on()),
+		helper.assertTrue(plain.toggles().stream().anyMatch(toggle -> toggle.id().equals("first_strike") && toggle.mode() == SheetPayloads.Toggle.MAX),
 				"First Strike is offered, and on");
 		helper.assertTrue(plain.gauge().is(ItemTags.SWORDS), "The picture is a sword");
 
@@ -166,6 +166,37 @@ public class SheetGameTests {
 
 		near(helper, CombatRules.getDamageAfterAbsorb(zombie, (float) hit, source, 20.0F, 8.0F), value(armored, "combat.hit"),
 				"The same hit on full diamond armor");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void liveSwitchesFollowTheFight(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		grant(player, CombatIds.PREDATOR);
+		StatEffects.refresh(player);
+		DamageSource source = player.damageSources().playerAttack(player);
+		LivingEntity zombie = helper.spawn(EntityTypes.ZOMBIE, new BlockPos(1, 2, 1));
+		float attack = (float) new ItemStack(Items.IRON_SWORD).getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY)
+				.compute(Attributes.ATTACK_DAMAGE, player.getAttributeValue(Attributes.ATTACK_DAMAGE), EquipmentSlot.MAINHAND);
+
+		double fresh = value(sheet(player, SkillXp.COMBAT, -1, 0), "combat.hit");
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		CombatSkill.modifyIncoming(zombie, source, attack); // Predator: 1 stack on this zombie now
+		CombatSkill.endSwingForTests();
+
+		SheetPayloads.View live = sheet(player, SkillXp.COMBAT, -1, 0);
+		SheetPayloads.View max = sheet(player, SkillXp.COMBAT, -1, 0, "predator=max");
+		SheetPayloads.View off = sheet(player, SkillXp.COMBAT, -1, 0, "predator=off");
+		CombatSkill.recordSwingForTests(player, zombie, 1.0F, false, true);
+		double second = CombatSkill.modifyIncoming(zombie, source, attack);
+		CombatSkill.endSwingForTests();
+
+		near(helper, second, value(live, "combat.hit"), "Live: the next hit on the same zombie, with its 1 Predator stack");
+		near(helper, fresh, value(off, "combat.hit"), "Off: no stacks");
+		near(helper, fresh * 1.5, value(max, "combat.hit"), "Max: 5 stacks, +50%");
+		helper.assertTrue(live.toggles().stream().anyMatch(toggle -> toggle.id().equals("predator") && toggle.mode() == SheetPayloads.Toggle.LIVE
+				&& toggle.live().getString().contains("1")), "The Predator switch says Live (1 stacks)");
 		helper.succeed();
 	}
 

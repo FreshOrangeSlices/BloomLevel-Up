@@ -10,6 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -66,6 +68,18 @@ final class MajorDetails {
 	/** A heading or name: the normal font, bold. */
 	static MutableComponent heading(Component text) {
 		return text.copy().withStyle(style -> style.withBold(true));
+	}
+
+	/** How much bigger headings are drawn than body text. */
+	static final float BIG = 1.5F;
+
+	/** Text drawn {@link #BIG} times as large, its top-left corner at x, y (about 13 pixels tall). */
+	static void big(GuiGraphicsExtractor g, Font font, Component text, int x, int y, int color) {
+		g.pose().pushMatrix();
+		g.pose().translate(x, y);
+		g.pose().scale(BIG, BIG);
+		g.text(font, text, 0, 0, color);
+		g.pose().popMatrix();
 	}
 
 	/** The window's sections for a Major, in reading order; sections with no text are left out. */

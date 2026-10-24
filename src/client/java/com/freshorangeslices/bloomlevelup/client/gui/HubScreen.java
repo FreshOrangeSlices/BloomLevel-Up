@@ -183,8 +183,18 @@ public final class HubScreen extends Screen {
 	/** What the last click on the canvas did (client game test diagnostics). */
 	public static String lastClickForTests = "";
 
+	/** Opened by the stat sheet's keybind: the sheet shows at once, and closing it closes the hub too. */
+	private boolean sheetOnly;
+
 	public HubScreen() {
 		super(Component.translatable("bloom.hub.title"));
+	}
+
+	/** The hub with the stat sheet already open for the tab last open (the "Open Stat Sheet" key). */
+	public static HubScreen onStatSheet() {
+		HubScreen hub = new HubScreen();
+		hub.sheetOnly = true;
+		return hub;
 	}
 
 	@Override
@@ -254,6 +264,10 @@ public final class HubScreen extends Screen {
 		// The stat sheet belongs to one tab; switching tabs closes it.
 		if (sheetWindow != null && !sheetWindow.category().equals(category.id())) {
 			sheetWindow = null;
+		}
+
+		if (sheetOnly && sheetWindow == null) {
+			sheetWindow = newSheet(category);
 		}
 
 		if (overlayOpen()) {
@@ -1043,7 +1057,7 @@ public final class HubScreen extends Screen {
 		Identifier icon = IconTextures.resolve(major.icon());
 		g.blit(RenderPipelines.GUI_TEXTURED, icon, x0 + 8, y0 + 7, 0.0F, 0.0F, 32, 32, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
-		g.text(this.font, MajorDetails.heading(name(major.translationKey(), major.id())), x0 + 48, y0 + 9, 0xFFFFD86B);
+		MajorDetails.big(g, this.font, MajorDetails.heading(name(major.translationKey(), major.id())), x0 + 48, y0 + 7, 0xFFFFD86B);
 
 		MutableComponent subtitle = Component.empty();
 		ClientBloomState.definitions().category(major.categoryId())
@@ -1064,8 +1078,8 @@ public final class HubScreen extends Screen {
 		int y = by - (int) Math.round(detailScroll);
 
 		for (MajorDetails.Section section : detailSections) {
-			g.text(this.font, section.heading(), bx, y, 0xFFF2C443);
-			y += 13;
+			MajorDetails.big(g, this.font, section.heading(), bx, y, 0xFFF2C443);
+			y += 16;
 
 			for (Component paragraph : section.paragraphs()) {
 				Component shown = section.rows() ? row(paragraph) : paragraph;
@@ -1129,13 +1143,23 @@ public final class HubScreen extends Screen {
 	}
 
 	private void openSheet(CategoryDefinition category) {
-		sheetWindow = new StatSheetWindow(category.id(),
-				Component.translatable("bloom.sheet.ui.title", name(category.translationKey(), category.id())), FRAME_SPRITE, FRAME);
+		sheetWindow = newSheet(category);
 		this.rebuildWidgets();
+	}
+
+	private static StatSheetWindow newSheet(CategoryDefinition category) {
+		return new StatSheetWindow(category.id(), Component.translatable("bloom.sheet.ui.title", name(category.translationKey(), category.id())),
+				FRAME_SPRITE, FRAME);
 	}
 
 	private void closeSheet() {
 		sheetWindow = null;
+
+		if (sheetOnly) {
+			this.onClose();
+			return;
+		}
+
 		this.rebuildWidgets();
 	}
 

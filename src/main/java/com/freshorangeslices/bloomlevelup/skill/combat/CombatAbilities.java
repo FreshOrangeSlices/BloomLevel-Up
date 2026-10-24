@@ -135,6 +135,12 @@ public final class CombatAbilities {
 		}
 	}
 
+	/** Whether a charge is armed right now (the next full-strength swing within a second spends it). */
+	public static boolean chargeArmed(ServerPlayer player) {
+		Long until = CHARGED_UNTIL.get(player.getUUID());
+		return until != null && player.level().getGameTime() <= until;
+	}
+
 	/** Spends a pending charge on this full-strength swing, if there is one. */
 	static boolean consumeCharge(ServerPlayer player, ItemStack weapon) {
 		Long until = CHARGED_UNTIL.remove(player.getUUID());

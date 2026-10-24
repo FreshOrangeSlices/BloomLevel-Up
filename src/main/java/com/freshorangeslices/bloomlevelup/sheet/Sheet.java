@@ -1,9 +1,10 @@
 package com.freshorangeslices.bloomlevelup.sheet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
+import java.util.Map;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -22,7 +23,17 @@ final class Sheet {
 	static final int GOLD = 0xFFD86B;
 	static final int PLAIN = 0xFFFFFF;
 
-	private final Set<String> requested;
+	/**
+	 * What a switch shows: the player's real state right now (Live), the effect at its most (Max), or none of it
+	 * (Off). The client sends "id=max" / "id=off"; anything else is Live.
+	 */
+	enum Mode {
+		LIVE,
+		MAX,
+		OFF
+	}
+
+	private final Map<String, Mode> requested = new HashMap<>();
 	final List<Row> summary = new ArrayList<>();
 	final List<Row> details = new ArrayList<>();
 	final List<SheetPayloads.Toggle> toggles = new ArrayList<>();
@@ -32,17 +43,38 @@ final class Sheet {
 	Component gaugeCaption = Component.empty();
 	Component gaugeBadge = Component.empty();
 
-	Sheet(Set<String> requested, int target) {
-		this.requested = requested;
+	Sheet(List<String> switches, int target) {
+		for (String entry : switches) {
+			int equals = entry.indexOf('=');
+
+			if (equals > 0) {
+				String mode = entry.substring(equals + 1);
+				requested.put(entry.substring(0, equals), mode.equals("max") ? Mode.MAX : mode.equals("off") ? Mode.OFF : Mode.LIVE);
+			}
+		}
+
 		this.target = target;
 	}
 
-	/** Offers a switch (named {@code bloom.sheet.toggle.<id>}) and returns whether the player has it on. */
-	boolean toggle(String id, Object... args) {
-		boolean on = requested.contains(id);
+	/**
+	 * Offers a switch (named {@code bloom.sheet.toggle.<id>}) and returns what the player set it to. {@code live} is
+	 * what the effect is at right now, shown on the switch while it's on Live.
+	 */
+	Mode toggle(String id, Component live, Object... args) {
+		Mode mode = requested.getOrDefault(id, Mode.LIVE);
 		toggles.add(new SheetPayloads.Toggle(id, Component.translatable("bloom.sheet.toggle." + id, args),
-				Component.translatable("bloom.sheet.toggle." + id + ".tip", args), on));
-		return on;
+				Component.translatable("bloom.sheet.toggle." + id + ".tip", args), mode.ordinal(), live));
+		return mode;
+	}
+
+	/** A label built elsewhere (an enchantment's name, coloured). */
+	void rowLabel(Component value, Component label) {
+		details.add(new Row(Row.ROW, label, value));
+	}
+
+	/** A note built elsewhere, in the summary. */
+	void summaryNoteLabel(Component label) {
+		summary.add(new Row(Row.NOTE, label, Component.empty()));
 	}
 
 	/** The picker's choices; returns the chosen index (the first when none was chosen yet, clamped). */

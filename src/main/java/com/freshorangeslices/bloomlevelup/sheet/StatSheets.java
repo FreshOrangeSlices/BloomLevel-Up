@@ -2,7 +2,6 @@ package com.freshorangeslices.bloomlevelup.sheet;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -60,7 +59,7 @@ public final class StatSheets {
 	/** The sheet for a request (public for game tests). */
 	public static SheetPayloads.View build(ServerPlayer player, SheetPayloads.Request request) {
 		ItemStack item = item(player, request.slot());
-		Sheet sheet = new Sheet(Set.copyOf(request.toggles()), request.target());
+		Sheet sheet = new Sheet(request.toggles(), request.target());
 		String category = request.category();
 
 		try {

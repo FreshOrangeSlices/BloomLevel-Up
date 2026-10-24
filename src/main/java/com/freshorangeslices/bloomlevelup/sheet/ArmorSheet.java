@@ -77,7 +77,13 @@ final class ArmorSheet {
 		ProgressionService service = BloomServices.progression();
 		BloomProfile profile = BloomAttachments.profile(player);
 		boolean ownsBrace = service.isMajorActive(profile, ArmorIds.BRACE);
-		boolean braced = ownsBrace && sheet.toggle("braced") || ArmorSkill.isBraced(player);
+		boolean braced = false;
+
+		if (ownsBrace) {
+			boolean now = ArmorSkill.isBraced(player);
+			Sheet.Mode mode = sheet.toggle("braced", Sheet.word(now ? "live.on" : "live.off"));
+			braced = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX;
+		}
 
 		List<Component> sizes = new ArrayList<>();
 

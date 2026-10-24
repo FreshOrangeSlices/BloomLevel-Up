@@ -69,7 +69,13 @@ Controls. In the hub:
   is always there for XP-bought points; **shift-click Buy point** for up to 10 at once; **click a stat's icon** to switch it off or on without losing points (corner dot: green
   on, red off).
 - Majors: click to buy, click an owned one to switch it on/off. Glowing = on, red dot = owned but
-  off, dark = not owned. Hover for details.
+  off, dark = not owned. Hover for a summary; **right-click an owned Major** for its details window
+  (what it does, its numbers, how to use it, its catches, and the combos you own).
+- The **Stats** button (bar chart, top right, left of the white button) opens this tab's stat sheet,
+  worked out by the server: Combat for any weapon in your inventory (pick it in the row at the top)
+  against a target with no/iron/diamond/netherite armor, with a switch per stacking effect you own to
+  show it at its max, and the vanilla sword your hit compares to; Armor shows what reaches your health
+  from each kind of hit; Utility your tools; Misc the rest. **All stats** lists where every number comes from.
 - After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
   icon switches only a stat's invested points. The Armor tab shows your real armor total.
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).

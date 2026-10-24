@@ -24,7 +24,9 @@ jobs:
       - name: build
         run: |
           set -o pipefail
-          ./gradlew build runGameTest runGameTestBetterCombat --stacktrace 2>&1 | tee build.log
+          ./gradlew build runGameTest --stacktrace 2>&1 | tee build.log
+          # The game tests again with Better Combat loaded (after the plain run, so the two logs don't interleave).
+          ./gradlew runGameTestBetterCombat --stacktrace 2>&1 | tee -a build.log
       # Always leave a one-line game test summary on the run (readable through the checks API).
       - name: report game tests
         if: always()

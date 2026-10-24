@@ -79,3 +79,5 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots bloom_hud_braced 12
       - name: utility hub with the stats folded, GUI scale 3
         run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_utility_folded_s3 12
+      - name: a Major's details window
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_major_details 12

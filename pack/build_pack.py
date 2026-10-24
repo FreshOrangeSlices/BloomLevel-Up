@@ -1,16 +1,24 @@
-"""Builds the Bloom Pack for sharing with friends: a Modrinth pack file (.mrpack) and the server's mods as a zip.
+"""Builds the Bloom Pack for sharing with friends: a Modrinth pack file (.mrpack) and a ready-to-run server folder.
 
-Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir>
+Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--client-run <dir>]
 
 Reads pack/pack.json. Modrinth mods are linked (newest 26.3 Fabric build, plus every required dependency); Bloom
 and the external (CurseForge-only) files are packed inside, which is fine for a private share but not for
 publishing. Every jar is downloaded and checked: each mod's required mod ids have to be in the pack (on the client
 and on the server), or the build fails. Prints a summary as GitHub annotations.
+
+The server zip is a whole server folder: the Fabric server launcher, mods, datapacks (in world/datapacks),
+start.bat / start.sh, server.properties and an eula.txt to accept. On a host like Shockbyte only its mods and world
+folders are uploaded.
+
+--client-run fills a dev client's run folder with the pack's client side (mods except Fabric API and Bloom, which
+the dev run has already, plus resource packs, shaders and the first-launch settings) for the pack launch test.
 """
 import hashlib
 import io
 import json
 import os
+import shutil
 import sys
 import time
 import urllib.parse
@@ -22,6 +30,48 @@ UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up pack builder (github action
 FOLDERS = {"mod": "mods", "resourcepack": "resourcepacks", "shader": "shaderpacks", "datapack": "datapacks"}
 # Mod ids every Fabric 26.3 setup has.
 BUILT_IN = {"minecraft", "java", "fabricloader", "fabric-loader", "mixinextras"}
+HEAP = "5G"  # what a 6 GB host leaves for Minecraft (the boot test uses the same)
+
+START_BAT = f"""@echo off
+rem Bloom Pack server. Needs Java 25 or newer (java -version). Close this window or type stop to shut it down.
+cd /d "%~dp0"
+java -Xms2G -Xmx{HEAP} -jar fabric-server.jar nogui
+pause
+"""
+
+START_SH = f"""#!/bin/sh
+# Bloom Pack server. Needs Java 25 or newer (java -version). Type stop to shut it down.
+cd "$(dirname "$0")"
+exec java -Xms2G -Xmx{HEAP} -jar fabric-server.jar nogui "$@"
+"""
+
+EULA = """# Change false to true to agree to Minecraft's EULA (https://aka.ms/MinecraftEULA). The server won't start until you do.
+eula=false
+"""
+
+# Only what the pack needs; the server fills in every other setting on its first start.
+SERVER_PROPERTIES = """motd=Bloom Pack
+view-distance=10
+simulation-distance=8
+max-players=10
+difficulty=normal
+spawn-protection=0
+allow-flight=true
+"""
+
+README = """Bloom Pack server
+
+On your own PC
+1. Install Java 25 or newer (for example Eclipse Temurin 25 from adoptium.net). "java -version" in a terminal shows which one you have.
+2. Open eula.txt and change false to true.
+3. Double-click start.bat (Windows) or run ./start.sh (Mac/Linux). The first start downloads Minecraft's server and builds the world.
+4. Friends join with your public IP and port 25565 (forward TCP 25565 on your router to this PC).
+   It starts with 5 GB of memory: change -Xmx5G in start.bat if your PC needs it lower.
+
+On a host (Shockbyte and similar)
+Set the server type to Fabric for Minecraft 26.3, then upload the mods folder and the world folder (it holds the datapacks).
+allow-flight=true and the other lines in server.properties are worth copying into the host's settings.
+"""
 
 
 def http(url, binary=False):
@@ -96,8 +146,20 @@ def mod_ids(data):
     return provided, depends
 
 
+def server_launcher(game, loader):
+    installers = http("https://meta.fabricmc.net/v2/versions/installer")
+    installer = next(v["version"] for v in installers if v.get("stable"))
+    return http(f"https://meta.fabricmc.net/v2/versions/loader/{game}/{loader}/{installer}/server/jar", binary=True)
+
+
 def main():
-    bloom_jar, pack_version, out = sys.argv[1], sys.argv[2], sys.argv[3]
+    args = sys.argv[1:]
+    client_run = None
+    if "--client-run" in args:
+        at = args.index("--client-run")
+        client_run = args[at + 1]
+        del args[at:at + 2]
+    bloom_jar, pack_version, out = args[0], args[1], args[2]
     os.makedirs(out, exist_ok=True)
     spec = json.load(open(os.path.join(os.path.dirname(__file__), "pack.json")))
     game = spec["minecraft"]
@@ -123,7 +185,9 @@ def main():
             problems.append(f"{project['title']} ({project['slug']}) has no {game} build")
             continue
         file = next((f for f in version["files"] if f.get("primary")), version["files"][0])
-        folder = FOLDERS.get(project.get("project_type"), "mods")
+        # A datapack-only project (no Fabric jar) is a zip for a world's datapacks folder, whatever its type says.
+        datapack = loader_for(project) == "datapack" or ("datapack" in version.get("loaders", []) and "fabric" not in version.get("loaders", []))
+        folder = "datapacks" if datapack else FOLDERS.get(project.get("project_type"), "mods")
         env = {"client": side(project.get("client_side")), "server": side(project.get("server_side"))}
         if folder != "mods":
             env = {"client": "required", "server": "unsupported"}
@@ -131,6 +195,7 @@ def main():
         entry = {
             "slug": project["slug"], "title": project["title"], "version": version["version_number"], "type": version["version_type"],
             "path": f"{folder}/{file['filename']}", "url": file["url"], "hashes": file["hashes"], "size": file["size"], "env": env,
+            "datapack": datapack,
         }
         files.append(entry)
         by_slug[project["slug"]] = entry
@@ -218,18 +283,45 @@ def main():
         for path, data in client_overrides.items():
             pack.writestr(f"client-overrides/{path}", data)
 
-    # ---- the server's mods (drop the mods folder into a Fabric 26.3 server)
-    server_path = os.path.join(out, f"Bloom Pack {pack_version} server mods.zip")
+    # ---- the server: a whole folder, ready to start (or its mods and world folders, uploaded to a host)
+    server_path = os.path.join(out, f"Bloom Pack {pack_version} server.zip")
     server_mods = []
     with zipfile.ZipFile(server_path, "w", zipfile.ZIP_DEFLATED) as server:
         for entry in files:
             if entry["env"]["server"] != "unsupported" and entry["path"].startswith("mods/"):
                 server.writestr(entry["path"], jars[entry["path"]])
                 server_mods.append(entry["title"])
+            elif entry["datapack"]:
+                server.writestr(f"world/datapacks/{os.path.basename(entry['path'])}", jars[entry["path"]])
+                server_mods.append(f"{entry['title']} (datapack)")
         for path, data in overrides.items():
             if sides[path]["server"] != "unsupported":
                 server.writestr(path, data)
                 server_mods.append(os.path.basename(path))
+        server.writestr("fabric-server.jar", server_launcher(game, spec["fabric_loader"]))
+        for name, text in (("start.bat", START_BAT.replace("\n", "\r\n")), ("eula.txt", EULA), ("server.properties", SERVER_PROPERTIES),
+                           ("README.txt", README)):
+            server.writestr(name, text)
+        script = zipfile.ZipInfo("start.sh")
+        script.external_attr = 0o755 << 16  # executable when unzipped
+        script.compress_type = zipfile.ZIP_DEFLATED
+        server.writestr(script, START_SH)
+
+    # ---- the pack launch test: the client side into a dev run folder
+    if client_run:
+        for sub in ("mods", "resourcepacks", "shaderpacks", "config"):
+            shutil.rmtree(os.path.join(client_run, sub), ignore_errors=True)
+            os.makedirs(os.path.join(client_run, sub), exist_ok=True)
+        for entry in files:
+            if entry["env"]["client"] != "unsupported" and entry["slug"] != "fabric-api" and not entry["datapack"]:
+                with open(os.path.join(client_run, entry["path"]), "wb") as target:
+                    target.write(jars[entry["path"]])
+        for path, data in list(overrides.items()) + list(client_overrides.items()):
+            if path == f"mods/{bloom_name}" or sides.get(path, {}).get("client") == "unsupported":
+                continue
+            os.makedirs(os.path.dirname(os.path.join(client_run, path)) or client_run, exist_ok=True)
+            with open(os.path.join(client_run, path), "wb") as target:
+                target.write(data)
 
     # ---- summary
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")

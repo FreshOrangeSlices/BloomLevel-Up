@@ -20,9 +20,11 @@ jobs:
           code() { echo "=== CODE $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s+[0-9]+: (aload|iload|fload|dload|astore|istore|fstore|dstore|dup|pop|iconst|fconst|dconst|aconst_null|ldc|bipush|sipush|i2f|f2d|d2f|i2d|f2i|checkcast|return|areturn|ireturn|freturn)' ; }
           full() { echo "=== FULL $1 :: $2"; javap -c -p -cp "$CP" "$1" 2>&1 | awk -v pat="$2" 'BEGIN{p=0} /^  [a-z].*\(/ { p = ($0 ~ pat) } p { print }' | sed -E 's/net\/minecraft\///g; s/net\.minecraft\.//g' | grep -vE '^\s*$' ; }
           {
-          dump net.minecraft.client.Minecraft 'resize|class '
-          dump net.minecraft.client.Options 'guiScale|class '
-          dump net.minecraft.client.OptionInstance 'public void set|public T get|class '
+          dump net.minecraft.network.chat.Style 'Font|class '
+          dump net.minecraft.network.chat.FontDescription
+          dump 'net.minecraft.network.chat.FontDescription$Resource'
+          dump net.minecraft.client.gui.GuiGraphicsExtractor 'text|Text|class '
+          dump net.minecraft.client.gui.Font 'width|split|lineHeight|class '
           } > dump.txt 2>&1
           wc -c dump.txt
       - name: publish (1)

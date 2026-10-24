@@ -70,6 +70,7 @@ final class StatSheetWindow {
 	/** Each switch not on Live: Max or Off (SheetPayloads.Toggle.MAX / OFF). */
 	private final Map<String, Integer> modes = new LinkedHashMap<>();
 	private int slot = HELD;
+	private int target = -1;
 	/** The pinned weapon or tool (an inventory slot, or BARE), or NO_COMPARE. Not kept after the window closes. */
 	private int pinned = SheetPayloads.Request.NO_COMPARE;
 	/** Showing the other build's numbers against the one in use. Not kept after the window closes. */

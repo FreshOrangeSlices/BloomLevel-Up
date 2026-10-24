@@ -109,7 +109,17 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:armor 100000");
 		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:combat/predator");
 		singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:armor/iron_skin");
-		singleplayer.getServer().runCommand("item replace entity @a hotbar.0 with minecraft:diamond_sword");
+		// A diamond sword with Smite V: the sheet shows its extra damage against undead in green.
+		singleplayer.getServer().runOnServer(server -> {
+			var smite = server.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT)
+					.getOrThrow(net.minecraft.world.item.enchantment.Enchantments.SMITE);
+
+			for (var serverPlayer : server.getPlayerList().getPlayers()) {
+				net.minecraft.world.item.ItemStack sword = new net.minecraft.world.item.ItemStack(Items.DIAMOND_SWORD);
+				sword.enchant(smite, 5);
+				serverPlayer.getInventory().setItem(0, sword);
+			}
+		});
 		singleplayer.getServer().runCommand("item replace entity @a hotbar.1 with minecraft:bow");
 		singleplayer.getServer().runCommand("item replace entity @a hotbar.2 with minecraft:iron_axe");
 		singleplayer.getServer().runCommand("item replace entity @a armor.chest with minecraft:iron_chestplate");

@@ -122,7 +122,7 @@ If the source weapon-Major effect is toggled off, Copycat turns off as well.
 
 | **Combination** | **Ruling** | **Behavior** |
 | --- | --- | --- |
-| Axe Charge + Execute | Allowed | A charged hit can deal its damage and then Execute the same target if the resulting health meets the execute threshold. |
+| Axe Charge + Execute | Allowed | A charged hit executes a target that was already under the execute threshold before it landed (like any hit: the hit that takes a target under the line doesn't execute). |
 | Batter Up! + Execute | Allowed | Eligible sweep targets can be executed independently. |
 | Aura Sword + Execute | Allowed | Each Aura pulse can execute eligible targets. |
 | Armor Break + Batter Up! | Allowed | Armor-durability damage can apply to each swept target based on the real damage dealt to that target. |

@@ -105,6 +105,14 @@ loom.runs.create("clientGameTestBetterCombat") {
 	property "fabric.addMods", betterCombatMods.get().asFile.absolutePath
 }
 
+// The whole Bloom Pack on the client (CI job client-test-pack): pack/build_pack.py --client-run fills this run folder
+// with the pack's client mods, resource packs, shader and settings first. Only the pack launch checks run there.
+loom.runs.create("clientGameTestPack") {
+	inherit loom.runs.getByName("clientGameTest")
+	runDir "build/run/clientGameTestPack"
+	property "bloom.packtest", "true"
+}
+
 tasks.matching { it.name == "runGameTestBetterCombat" || it.name == "runClientGameTestBetterCombat" }.configureEach {
 	dependsOn "copyBetterCombatMods"
 }

@@ -120,4 +120,4 @@ jobs:
           java-version: '25'
           distribution: 'microsoft'
       - name: boot a server with the pack
-        run: python3 pack/boot_server.py "out/Bloom Pack build.${GITHUB_RUN_NUMBER} server mods.zip" 26.3 0.19.5
+        run: python3 pack/boot_server.py "out/Bloom Pack build.${GITHUB_RUN_NUMBER} server.zip"

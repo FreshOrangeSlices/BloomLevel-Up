@@ -1,26 +1,18 @@
-"""Boots a Fabric dedicated server with the pack's server mods and stops it once it's up.
+"""Starts the pack's server zip the way a friend would (accept the EULA, run start.sh) and stops it once it's up.
 
-Usage: python3 pack/boot_server.py <server mods zip> <minecraft version> <loader version>
+Usage: python3 pack/boot_server.py <server zip>
 
-Fails if the server crashes or isn't up within the time limit. Reports how long it took, how many mods loaded and
-how much memory the server process used, as GitHub annotations.
+Fails if the server crashes or isn't up within the time limit. Reports how long it took, how many mods loaded, the
+datapacks the world has on and how much memory the server process used, as GitHub annotations.
 """
-import json
 import os
 import re
 import subprocess
 import sys
 import time
-import urllib.request
 import zipfile
 
 LIMIT = 420  # seconds
-HEAP = "5G"  # what a 6 GB host leaves for Minecraft
-
-
-def get(url):
-    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "BloomLevel-Up CI"}), timeout=60) as response:
-        return response.read()
 
 
 def rss_mb(pid):
@@ -34,29 +26,37 @@ def rss_mb(pid):
 
 
 def main():
-    mods_zip, game, loader = sys.argv[1], sys.argv[2], sys.argv[3]
+    server_zip = sys.argv[1]
     root = "server"
     os.makedirs(root, exist_ok=True)
-    installers = json.loads(get("https://meta.fabricmc.net/v2/versions/installer"))
-    installer = next(v["version"] for v in installers if v.get("stable"))
-    with open(os.path.join(root, "server.jar"), "wb") as out:
-        out.write(get(f"https://meta.fabricmc.net/v2/versions/loader/{game}/{loader}/{installer}/server/jar"))
-    with zipfile.ZipFile(mods_zip) as mods:
-        mods.extractall(root)
+    with zipfile.ZipFile(server_zip) as server:
+        server.extractall(root)
+    with open(os.path.join(root, "eula.txt")) as eula:
+        text = eula.read()
+    if "eula=false" not in text:
+        print("::error title=server-boot::eula.txt should ship as eula=false (the player accepts it)")
+        sys.exit(1)
     with open(os.path.join(root, "eula.txt"), "w") as eula:
-        eula.write("eula=true\n")
+        eula.write(text.replace("eula=false", "eula=true"))
+    heap = re.search(r"-Xmx(\w+)", open(os.path.join(root, "start.sh")).read()).group(1)
 
     start = time.time()
-    process = subprocess.Popen(["java", f"-Xmx{HEAP}", "-jar", "server.jar", "nogui"], cwd=root, stdin=subprocess.PIPE,
+    # start.sh execs java, so this process is the server itself.
+    process = subprocess.Popen(["sh", "start.sh"], cwd=root, stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
-    log, done, memory = [], None, -1
+    log, done, memory, datapacks = [], None, -1, []
 
     for line in process.stdout:
         log.append(line.rstrip())
+        if done is not None and "data pack" in line:
+            datapacks.append(line.split("]: ", 1)[-1].strip())
         if done is None and re.search(r"\]: Done \(|\) Done \(|Done \([0-9.]+s\)!", line):
             done = time.time() - start
             time.sleep(5)
             memory = rss_mb(process.pid)
+            process.stdin.write("datapack list enabled\n")
+            process.stdin.flush()
+            time.sleep(3)
             process.stdin.write("stop\n")
             process.stdin.flush()
         if time.time() - start > LIMIT:
@@ -73,7 +73,8 @@ def main():
     if done is None:
         print(f"::error title=server-boot::The server didn't come up (exit {process.returncode}). Last lines:%0A{esc(chr(10).join(log[-40:])[:3800])}")
         sys.exit(1)
-    print(f"::notice title=server-boot::Up in {done:.0f} s with -Xmx{HEAP}; {loading.strip()}; server process memory {memory} MB right after start")
+    print(f"::notice title=server-boot::Up in {done:.0f} s with -Xmx{heap}; {loading.strip()}; server process memory {memory} MB right after start")
+    print(f"::notice title=server-datapacks::{esc(chr(10).join(datapacks) or 'no datapack list printed')}")
 
 
 if __name__ == "__main__":

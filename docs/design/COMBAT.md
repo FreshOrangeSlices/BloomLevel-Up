@@ -76,7 +76,7 @@ Sword
 Sword
  | 2
  | Execute
- | Eligible sword hits execute normal enemies at or below 30% max HP; bosses at or below 10%.
+ | Eligible sword hits execute normal enemies that are already at or below 30% max HP when the hit lands; bosses at or below 10%. The hit that first takes a target under the line doesn't execute; the next one does.
  | 
 Axe
  | 1

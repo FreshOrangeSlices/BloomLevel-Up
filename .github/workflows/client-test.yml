@@ -130,3 +130,92 @@ jobs:
       - name: the slam, landing
         if: always()
         run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_slam_hit 12
+
+  # The whole Bloom Pack on a real client: the pack's client mods, Fresh Animations and its player extension, and the
+  # Complementary shader, as the .mrpack installs them (Bloom itself comes from this commit). It has to start, make a
+  # normal world and open the hub; the pack-screenshots job prints what it looked like.
+  client-test-pack:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v6
+      - name: graphics drivers
+        run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers
+      - name: the pack's client side
+        run: |
+          mkdir -p fake && cd fake
+          printf '{"schemaVersion":1,"id":"bloomlevelup","version":"0.0.0","environment":"*","depends":{}}' > fabric.mod.json
+          zip -q ../bloomlevelup-stand-in.jar fabric.mod.json && cd ..
+          python3 pack/build_pack.py bloomlevelup-stand-in.jar test pack-out --client-run build/run/clientGameTestPack
+      - name: client game test with the pack
+        run: |
+          set -o pipefail
+          chmod +x ./gradlew
+          ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log
+      - name: report
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('client-pack.log'):
+              raise SystemExit(0)
+          lines = open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          tests = [l for l in lines if 'BLOOMTEST' in l]
+          print(f"::notice title=client-pack-checks::{esc(chr(10).join(tests)[:3900] or 'no BLOOMTEST lines')}")
+          loading = [l for l in lines if re.search(r'Loading \d+ mods', l)]
+          if loading:
+              start = lines.index(loading[0])
+              print(f"::notice title=client-pack-mods::{esc(chr(10).join(lines[start:start + 120])[:3900])}")
+          keep = []
+          for i, line in enumerate(lines):
+              if re.search(r'(error:|ERROR|FAILED|What went wrong|Exception|Caused by|AssertionError|Mixin apply|Incompatible|requires)', line):
+                  keep.extend(lines[max(0, i - 1):i + 4])
+          text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
+          chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:12]
+          for n, chunk in enumerate(chunks):
+              print(f"::warning title=client-pack-log-{n:02d}::{esc(chunk)}")
+          tail = '\n'.join(lines[-25:])
+          print(f"::notice title=client-pack-summary::{esc(tail[:3900])}")
+          PY
+      - name: capture screenshots and logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-pack-screenshots
+          path: |
+            build/run/clientGameTestPack/screenshots
+            build/run/clientGameTestPack/logs/latest.log
+            build/run/clientGameTestPack/crash-reports
+            client-pack.log
+          if-no-files-found: ignore
+
+  pack-screenshots:
+    needs: client-test-pack
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: client-pack-screenshots
+          path: shots
+      - name: pillow
+        run: pip install --quiet pillow
+      - name: after joining (Origins asks for an origin)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_join 12
+      - name: the world
+        run: python3 .github/scripts/emit_screenshot.py shots pack_world 12
+      - name: the player (Fresh Animations' player extension)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_player 12
+      - name: a Better Combat swing
+        run: python3 .github/scripts/emit_screenshot.py shots pack_swing 12

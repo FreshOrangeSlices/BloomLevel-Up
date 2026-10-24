@@ -173,21 +173,24 @@ public class CombatGameTests {
 		LivingEntity low = zombie(helper, 1, 1);
 		low.setHealth(10.0F);
 		low.hurtServer(level, hit(swordsman), 5.0F);
-		helper.assertFalse(low.isAlive(), "Under 30% after the hit: executed");
+		helper.assertTrue(low.isAlive() && low.getHealth() == 5.0F, "The hit that takes it under 30% doesn't execute");
+		low.invulnerableTime = 0;
+		low.hurtServer(level, hit(swordsman), 1.0F);
+		helper.assertFalse(low.isAlive(), "Already under 30%: the next hit executes");
 
 		ServerPlayer axeman = player(helper, new ItemStack(Items.IRON_AXE));
 		grant(axeman, CombatIds.EXECUTE);
 		LivingEntity other = zombie(helper, 3, 1);
-		other.setHealth(10.0F);
-		other.hurtServer(level, hit(axeman), 5.0F);
+		other.setHealth(5.0F);
+		other.hurtServer(level, hit(axeman), 1.0F);
 		helper.assertTrue(other.isAlive(), "Execute is a sword Major");
 
 		// Copycat spreads it to the axe.
 		grant(axeman, CombatIds.COPYCAT);
 		BloomServices.progression().selectCopySource(BloomAttachments.profile(axeman), CombatIds.COPYCAT, CombatIds.EXECUTE);
 		LivingEntity third = zombie(helper, 5, 1);
-		third.setHealth(10.0F);
-		third.hurtServer(level, hit(axeman), 5.0F);
+		third.setHealth(5.0F);
+		third.hurtServer(level, hit(axeman), 1.0F);
 		helper.assertFalse(third.isAlive(), "Copycat: Execute with an axe");
 		helper.succeed();
 	}

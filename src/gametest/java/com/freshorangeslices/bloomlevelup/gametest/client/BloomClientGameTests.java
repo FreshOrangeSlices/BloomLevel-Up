@@ -6,18 +6,27 @@ import java.util.function.Predicate;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
+import net.minecraft.SharedConstants;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.worldselection.WorldCreationUiState;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.level.levelgen.presets.WorldPreset;
+import net.minecraft.world.level.levelgen.presets.WorldPresets;
 
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
+import net.fabricmc.loader.api.FabricLoader;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
@@ -42,6 +51,17 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 	@Override
 	public void runTest(ClientGameTestContext context) {
+		if (Boolean.getBoolean("bloom.packtest")) {
+			// The whole Bloom Pack (runClientGameTestPack): only the launch checks run there.
+			packLaunch(context);
+
+			if (!failures.isEmpty()) {
+				throw new AssertionError("Bloom Pack launch checks failed: " + String.join(" | ", failures));
+			}
+
+			return;
+		}
+
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
 			singleplayer.getConnection().waitForChunksRender();
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null);
@@ -56,6 +76,81 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 		if (!failures.isEmpty()) {
 			throw new AssertionError("Bloom client checks failed: " + String.join(" | ", failures));
+		}
+	}
+
+	/**
+	 * The pack launch test: the game starts with every pack mod, its resource packs and the shader, makes a normal
+	 * world (structures and mobs on), and shows the world, the player, a Better Combat swing and the hub. What's
+	 * loaded goes to the log (BLOOMTEST lines); each step leaves a screenshot.
+	 */
+	private void packLaunch(ClientGameTestContext context) {
+		context.waitTicks(20);
+		context.takeScreenshot("pack_title");
+		context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: {} mods loaded; resource packs on: {}; shader in use: {}",
+				FabricLoader.getInstance().getAllMods().size(), client.getResourcePackRepository().getSelectedIds(), shaderInUse()));
+
+		try (TestSingleplayerContext singleplayer = context.worldBuilder().adjustSettings(creator -> {
+			Holder<WorldPreset> normal = creator.getSettings().worldgenLoadContext().lookupOrThrow(Registries.WORLD_PRESET)
+					.getOrThrow(WorldPresets.NORMAL);
+			creator.setWorldType(new WorldCreationUiState.WorldTypeEntry(normal));
+			creator.setSeed("bloom");
+			creator.setGenerateStructures(true);
+			creator.getGameRules().set(GameRules.SPAWN_MOBS, true, null);
+		}).create()) {
+			singleplayer.getConnection().waitForChunksRender(SharedConstants.TICKS_PER_MINUTE * 3);
+			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null, SharedConstants.TICKS_PER_MINUTE);
+			context.waitTicks(40);
+
+			// Origins asks for an origin on the first join: picture it, then pick Human so the rest can go on.
+			String screen = context.computeOnClient(client -> client.gui.screen() == null ? "none" : client.gui.screen().getClass().getName());
+			BloomLevelUp.LOGGER.info("BLOOMTEST pack: screen after joining: {}", screen);
+			context.takeScreenshot("pack_join");
+			singleplayer.getServer().runCommand("origin set @a origins:origin origins:human");
+			context.waitTicks(10);
+			context.setScreen(() -> null);
+
+			singleplayer.getServer().runCommand("time set noon");
+			singleplayer.getServer().runCommand("weather clear");
+			singleplayer.getServer().runCommand("execute as @a at @s run tp @s ~ ~ ~ 0 10");
+			singleplayer.getServer().runCommand("execute as @a at @s run summon villager ^-1 ^ ^4 {NoAI:1b,Rotation:[180f,0f]}");
+			singleplayer.getServer().runCommand("execute as @a at @s run summon zombie ^1.5 ^ ^5 {NoAI:1b,Rotation:[160f,0f]}");
+			singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:iron_sword");
+			context.waitTicks(40);
+			context.takeScreenshot("pack_world");
+
+			context.runOnClient(client -> client.options.setCameraType(CameraType.THIRD_PERSON_FRONT));
+			context.waitTicks(20);
+			context.takeScreenshot("pack_player");
+
+			context.runOnClient(client -> client.options.setCameraType(CameraType.THIRD_PERSON_BACK));
+			context.waitTicks(10);
+			context.getInput().pressKey(options -> options.keyAttack);
+			context.waitTicks(4);
+			context.takeScreenshot("pack_swing");
+			context.runOnClient(client -> client.options.setCameraType(CameraType.FIRST_PERSON));
+
+			context.setScreen(HubScreen::new);
+			context.waitTicks(5);
+
+			if (!context.computeOnClient(client -> client.gui.screen() instanceof HubScreen)) {
+				failures.add("the hub didn't open with the pack");
+			}
+
+			context.takeScreenshot("pack_hub");
+			context.setScreen(() -> null);
+			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
+		}
+	}
+
+	/** Whether Iris is drawing a shader pack ("no Iris" without it; asked by name so Bloom never depends on Iris). */
+	private static String shaderInUse() {
+		try {
+			Class<?> api = Class.forName("net.irisshaders.iris.api.v0.IrisApi");
+			Object instance = api.getMethod("getInstance").invoke(null);
+			return String.valueOf(api.getMethod("isShaderPackInUse").invoke(instance));
+		} catch (ReflectiveOperationException | LinkageError e) {
+			return "no Iris";
 		}
 	}
 

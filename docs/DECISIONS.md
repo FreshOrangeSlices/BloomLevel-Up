@@ -426,12 +426,24 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 
 | Topic | Decision | Where to change |
 |---|---|---|
-| What's in it | The "Start with" mods from the Bloom Pack mod list, plus GeckoLib (World Bosses needs it) and every required dependency Modrinth lists. Not yet: Origins: Legacy, Villagers at Work, the "Later" mods | `pack/pack.json` |
+| What's in it | The "Start with" mods from the Bloom Pack mod list, plus GeckoLib (World Bosses needs it) and every required dependency Modrinth lists. Added after the first pack: Origins: Legacy, Villagers at Work / after Work (with Fabric Language Kotlin), Fresh Animations: Player Extension (with the EMF compat mods for Not Enough Animations and Better Combat), Aerial Hell, Moog's Soaring and End Structures, Homesteads, Ambient Creatures, Wandering Trader Maps and the Cave Horror datapack. Left out on purpose: Repurposed Structures, Undead Riders, Friends&Foes, Tiny Skeletons, Distant Horizons (performance), More Villagers (Villagers at Work has no routines for its new jobs) | `pack/pack.json` |
 | Versions | Each build takes the newest 26.3 Fabric build of each mod (releases before betas before alphas) | `pack/build_pack.py` |
-| Packed inside | Bloom (from the same build) and World Bosses (CurseForge's Fabric 26.3 file 2.0.2). Fine for sharing privately; publishing it would need the World Bosses author's permission | `pack/pack.json` "external" |
+| Packed inside | Bloom (from the same build), World Bosses (CurseForge's Fabric 26.3 file 2.0.2) and Villagers at Work / after Work 1.3.3. Fine for sharing privately; publishing it would need those authors' permission | `pack/pack.json` "external" |
+| Datapacks | A datapack-only project (Cave Horror) goes in the server zip's `world/datapacks` (on for the server's world on its first start) and in the instance's `datapacks` folder for adding to singleplayer worlds by hand | `pack/build_pack.py` |
+| Server-only structure mods | Moog's Soaring / End Structures say "server only"; they go on the client too (with their library), so singleplayer worlds have them | `pack/pack.json` "singleplayer_too" |
+| The server download | One zip that is a whole server folder: Fabric's server launcher, mods, `world/datapacks`, start.bat / start.sh (5 GB heap), README, `server.properties` (view 10, simulation 8, no spawn protection, flight allowed for Origins) and `eula.txt` set to false for the owner to accept. On a host only `mods` and `world` are uploaded | `pack/build_pack.py` |
 | Sides | A mod Modrinth marks "unsupported" on a side stays off that side; "optional" counts as required (so launchers don't ask). Cloth Config and Player Animation Library are forced onto the server (Better Combat needs them there) | `pack/pack.json` "env_overrides" |
 | First launch | Fresh Animations is on and the Complementary shader selected (client-only files, applied when the pack is installed) | `pack/pack.json` "client_presets" |
-| Checks | Every jar's required mod ids must be in the pack on the client and on the server, or the build fails; a Fabric 26.3 server then boots with the server mods and a 5 GB heap, and the run notes how long it took and its memory | `pack/build_pack.py`, `pack/boot_server.py`, `build.yml` job `pack` |
+| Checks | Every jar's required mod ids must be in the pack on the client and on the server, or the build fails; the server zip then starts the way a friend would start it (EULA accepted, start.sh), and the run notes how long it took, its memory and the datapacks on | `pack/build_pack.py`, `pack/boot_server.py`, `build.yml` job `pack` |
+| Pack launch test | A dev client starts with the pack's whole client side (Bloom from the commit; the pack's resource packs, shader and settings), makes a normal world with structures and mobs, picks an origin, and opens the hub; screenshots of the join, world, player, a Better Combat swing and the hub | `client-test.yml` jobs `client-test-pack`, `pack-screenshots`; `BloomClientGameTests.packLaunch` |
+
+## Round 11: Execute and World Bosses (2026-10-24)
+
+| Topic | Decision | Where to change |
+|---|---|---|
+| Execute timing | Execute finishes a target that was already at or under the line before the hit landed: the hit that takes it under doesn't execute, the next sword hit does (any hit that lands and does damage, sweeps and splash included). Health before the hit counts absorption | `CombatSkill.onHitEffects`, `docs/design/COMBAT.md` |
+| World Bosses: bosses | Its seven world bosses (Astrael, Aureon, Elyndra, Morvath, Nekhraz, Sylvaron, Varkhul), four realm bosses (Dragon Mother, Shadow King, The Shadow Weaver, Storm Griffin) and the Shard Sentinel (it has a boss bar) are in `bloomlevelup:bosses` (Execute at 10%). Optional entries, so nothing changes without the mod. No extra Combat XP multiplier yet: XP already scales with the damage dealt | `data/bloomlevelup/tags/entity_type/bosses.json` |
+| World Bosses: armor | Worldbreaker (4/9/7/4, toughness 3.5) and Shadowbreaker (5/10/8/5, toughness 6) both beat netherite, so both are heavy | `data/bloomlevelup/tags/item/armor/heavy.json` |
 
 ## Build numbers
 

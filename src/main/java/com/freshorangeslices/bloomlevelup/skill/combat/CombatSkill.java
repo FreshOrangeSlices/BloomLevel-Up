@@ -566,7 +566,7 @@ public final class CombatSkill {
 		boolean executed = false;
 
 		if (pvpAllowed(target) && real > 0.0F) {
-			executed = onHitEffects(level, player, target, hit, real);
+			executed = onHitEffects(level, player, target, hit, real, before);
 		}
 
 		LAST_HIT.put(target, new LastHit(player.getUUID(), hit.kind(), executed, excess, overkillSource));
@@ -587,8 +587,8 @@ public final class CombatSkill {
 		}
 	}
 
-	/** Returns whether Execute finished the target. */
-	private static boolean onHitEffects(ServerLevel level, ServerPlayer player, LivingEntity target, Hit hit, float real) {
+	/** Returns whether Execute finished the target. {@code before}: its health (and absorption) before this hit. */
+	private static boolean onHitEffects(ServerLevel level, ServerPlayer player, LivingEntity target, Hit hit, float real, float before) {
 		BloomConfig config = config();
 		ItemStack weapon = hit.weapon();
 		HitKind kind = hit.kind();
@@ -667,11 +667,13 @@ public final class CombatSkill {
 		}
 
 		// Execute: a finish rule, not damage. Setting health to zero lets vanilla's death path credit the kill.
-		// Overkill's splash may push a different target into range, so secondary hits can execute too.
+		// Only a target that was already under the line when this hit landed: the hit that takes it under the line
+		// doesn't execute, the next one does. Overkill's splash may push a different target under the line, so
+		// secondary hits can execute too (on the next hit).
 		if (target.isAlive() && target.getHealth() > 0.0F && has(player, CombatIds.EXECUTE, Family.SWORD, weapon)) {
 			double threshold = isBoss(target) ? config.executeBossThreshold : config.executeThreshold;
 
-			if (target.getHealth() <= target.getMaxHealth() * threshold) {
+			if (before <= target.getMaxHealth() * threshold) {
 				target.setHealth(0.0F);
 				level.sendParticles(ParticleTypes.DAMAGE_INDICATOR, target.getX(), target.getY(0.5), target.getZ(), 8, 0.3, 0.3, 0.3, 0.1);
 				return true;

@@ -91,3 +91,33 @@ jobs:
         with:
           name: test-reports
           path: build/reports/
+
+  # The Bloom Pack for friends (pack/pack.json): a Modrinth pack file (.mrpack) and the server's mods, under
+  # "Artifacts" as bloom-pack. Then a real Fabric server boots with those server mods, to be sure it starts.
+  pack:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch the mod jar
+        uses: actions/download-artifact@v4
+        with:
+          name: bloomlevelup-jar
+          path: jar
+      - name: build the pack
+        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out
+      - name: capture the pack
+        uses: actions/upload-artifact@v7
+        with:
+          name: bloom-pack
+          path: |
+            out/*.mrpack
+            out/*.zip
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: boot a server with the pack
+        run: python3 pack/boot_server.py "out/Bloom Pack build.${GITHUB_RUN_NUMBER} server mods.zip" 26.3 0.19.5

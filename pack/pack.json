@@ -1,0 +1,55 @@
+{
+  "name": "Bloom Pack",
+  "summary": "Bloom Level-Up with dungeons, bosses, Better Combat, shaders and animations, for Minecraft 26.3 (Fabric).",
+  "minecraft": "26.3",
+  "fabric_loader": "0.19.5",
+  "_comment": "The 'Start with' list from the Bloom Pack mod list doc. Modrinth mods by slug (newest 26.3 Fabric build; required dependencies are added automatically). External files are packed inside (fine for sharing with friends, not for publishing).",
+  "modrinth": [
+    "fabric-api",
+    "sodium",
+    "lithium",
+    "ferrite-core",
+    "immediatelyfast",
+    "entityculling",
+    "dungeons-and-taverns",
+    "ati-structures-fabricforge",
+    "boss-checklist",
+    "iris",
+    "complementary-reimagined",
+    "lambdynamiclights",
+    "continuity",
+    "bettergrassify",
+    "entity-model-features",
+    "entitytexturefeatures",
+    "fresh-animations",
+    "not-enough-animations",
+    "better-animations-collection",
+    "better-combat",
+    "cloth-config",
+    "player-animation-library",
+    "villager-guards",
+    "villager-names-serilum",
+    "variants-and-ventures"
+  ],
+  "external": [
+    {
+      "name": "World Bosses",
+      "page": "https://www.curseforge.com/minecraft/mc-mods/world-bosses",
+      "file": "world-bosses-fabric-26.3-2.0.2.jar",
+      "urls": [
+        "https://mediafilez.forgecdn.net/files/9258/404/world-bosses-fabric-26.3-2.0.2.jar",
+        "https://edge.forgecdn.net/files/9258/404/world-bosses-fabric-26.3-2.0.2.jar"
+      ],
+      "client": "required",
+      "server": "required"
+    }
+  ],
+  "env_overrides": {
+    "player-animation-library": {"server": "required"},
+    "cloth-config": {"server": "required"}
+  },
+  "client_presets": {
+    "resource_packs": ["fresh-animations"],
+    "shader": "complementary-reimagined"
+  }
+}

@@ -1,29 +1,52 @@
 package com.freshorangeslices.bloomlevelup.sheet;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.definition.StatDefinition;
 import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
+import com.freshorangeslices.bloomlevelup.network.SheetPayloads.Row;
+import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
+import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
 
 /**
- * The stat sheet (the hub's Stats button): the client asks for a tab, an inventory slot, a target and which
- * switches are on; the server works everything out from the real game rules and answers with finished lines.
- * The client never computes a number itself.
+ * The stat sheet (the hub's Stats button): the client asks for a tab, an inventory slot, a target and how each
+ * switch is set; the server works everything out from the real game rules and answers with finished lines.
+ * The client never computes a number itself. It can also ask to compare against a pinned item or the other
+ * build (each line then carries the difference), and what one more point in a stat would change.
  */
 public final class StatSheets {
-	/** Requests a player may send per second (the hub asks once a second, and again on every click). */
+	/** Requests a player may send per second (the hub asks once a second, and again on every click or hover). */
 	private static final int PER_SECOND = 20;
+	/** Lines a stat-point preview shows at most. */
+	private static final int PREVIEW_LINES = 6;
+	/** Lines where a smaller number is the better one (health lost, waiting times). */
+	private static final Set<String> LOWER_IS_BETTER = Set.of("bloom.sheet.armor.step.health", "bloom.sheet.combat.cooldown",
+			"bloom.sheet.combat.load_time", "bloom.sheet.combat.draw_time", "bloom.sheet.utility.break_time");
+	private static final Pattern NUMBER = Pattern.compile("-?\\d+(?:\\.\\d+)?");
 	private static final Map<UUID, long[]> BUDGET = new HashMap<>();
 
 	private StatSheets() {
@@ -31,8 +54,19 @@ public final class StatSheets {
 
 	public static void init() {
 		PayloadTypeRegistry.serverboundPlay().register(SheetPayloads.Request.TYPE, SheetPayloads.Request.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(SheetPayloads.Preview.TYPE, SheetPayloads.Preview.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(SheetPayloads.View.TYPE, SheetPayloads.View.CODEC);
-		ServerPlayNetworking.registerGlobalReceiver(SheetPayloads.Request.TYPE, (payload, context) -> handle(context.player(), payload));
+		PayloadTypeRegistry.clientboundPlay().register(SheetPayloads.PreviewResult.TYPE, SheetPayloads.PreviewResult.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(SheetPayloads.Request.TYPE, (payload, context) -> {
+			if (allowed(context.player()) && ServerPlayNetworking.canSend(context.player(), SheetPayloads.View.TYPE)) {
+				ServerPlayNetworking.send(context.player(), build(context.player(), payload));
+			}
+		});
+		ServerPlayNetworking.registerGlobalReceiver(SheetPayloads.Preview.TYPE, (payload, context) -> {
+			if (allowed(context.player()) && ServerPlayNetworking.canSend(context.player(), SheetPayloads.PreviewResult.TYPE)) {
+				ServerPlayNetworking.send(context.player(), new SheetPayloads.PreviewResult(payload.stat(), preview(context.player(), payload.stat())));
+			}
+		});
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> BUDGET.remove(listener.player.getUUID()));
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			BUDGET.clear();
@@ -40,7 +74,7 @@ public final class StatSheets {
 		});
 	}
 
-	private static void handle(ServerPlayer player, SheetPayloads.Request request) {
+	private static boolean allowed(ServerPlayer player) {
 		long second = player.level().getGameTime() / 20L;
 		long[] budget = BUDGET.computeIfAbsent(player.getUUID(), key -> new long[] {second, 0L});
 
@@ -49,18 +83,49 @@ public final class StatSheets {
 			budget[1] = 0L;
 		}
 
-		if (++budget[1] > PER_SECOND || !ServerPlayNetworking.canSend(player, SheetPayloads.View.TYPE)) {
-			return;
-		}
-
-		ServerPlayNetworking.send(player, build(player, request));
+		return ++budget[1] <= PER_SECOND;
 	}
 
-	/** The sheet for a request (public for game tests). */
+	/**
+	 * The sheet for a request (public for game tests). Compared with a pinned item: the chosen item's numbers, each
+	 * followed by how far it is from the pinned one's. Compared with the other build: the other build's numbers,
+	 * each followed by how far it is from the build in use. Green is better, red worse.
+	 */
 	public static SheetPayloads.View build(ServerPlayer player, SheetPayloads.Request request) {
 		ItemStack item = item(player, request.slot());
-		Sheet sheet = new Sheet(request.toggles(), request.target());
-		String category = request.category();
+		BloomProfile profile = BloomAttachments.profile(player);
+		Sheet shown = compute(player, request.category(), item, request.target(), request.toggles());
+		Sheet baseline = null;
+		Component note = null;
+
+		if (request.compareBuild() && profile.spareBuild().isPresent()) {
+			baseline = shown;
+			shown = BloomServices.progression().withOtherBuild(profile,
+					() -> compute(player, request.category(), item, request.target(), request.toggles()));
+			int inUse = profile.activeBuild() + 1;
+			note = Component.translatable("bloom.sheet.ui.build.note", String.valueOf(3 - inUse), String.valueOf(inUse));
+		} else if (request.compareSlot() != SheetPayloads.Request.NO_COMPARE && request.compareSlot() != request.slot()) {
+			ItemStack pinned = item(player, request.compareSlot());
+			baseline = compute(player, request.category(), pinned, request.target(), request.toggles());
+			note = Component.translatable("bloom.sheet.ui.pin.note", pinned.isEmpty() ? Component.translatable("bloom.sheet.ui.bare") : pinned.getHoverName());
+		}
+
+		List<Row> summary = baseline == null ? shown.summary : diff(shown.summary, baseline.summary);
+		List<Row> details = baseline == null ? shown.details : diff(shown.details, baseline.details);
+
+		if (note != null) {
+			summary = new ArrayList<>(summary);
+			summary.add(0, new Row(Row.NOTE, note, Component.empty()));
+			details = new ArrayList<>(details);
+			details.add(0, new Row(Row.NOTE, note, Component.empty()));
+		}
+
+		return new SheetPayloads.View(request.id(), request.category(), request.slot(), item.copy(), shown.targets, shown.target, shown.toggles,
+				shown.gauge, shown.gaugeCaption, shown.gaugeBadge, summary, details);
+	}
+
+	private static Sheet compute(ServerPlayer player, String category, ItemStack item, int target, List<String> toggles) {
+		Sheet sheet = new Sheet(toggles, target);
 
 		try {
 			if (category.equals(SkillXp.COMBAT)) {
@@ -81,8 +146,172 @@ public final class StatSheets {
 			sheet.summary(Sheet.word("value.error"), "error");
 		}
 
-		return new SheetPayloads.View(request.id(), category, request.slot(), item.copy(), sheet.targets, sheet.target, sheet.toggles, sheet.gauge,
-				sheet.gaugeCaption, sheet.gaugeBadge, sheet.summary, sheet.details);
+		return sheet;
+	}
+
+	/**
+	 * What one more point in a stat would change, as "Hit: 12 → 12.06" lines (summary lines first, at most
+	 * {@link #PREVIEW_LINES}), worked out with the held item and every switch on Live. Empty if nothing moves.
+	 */
+	public static List<Component> preview(ServerPlayer player, String statId) {
+		Optional<StatDefinition> stat = BloomServices.definitions().stat(statId);
+
+		if (stat.isEmpty()) {
+			return List.of();
+		}
+
+		String category = stat.get().categoryId();
+		ItemStack held = player.getMainHandItem();
+		Sheet before = compute(player, category, held, -1, List.of());
+		Sheet after = BloomServices.progression().withExtraPoint(BloomAttachments.profile(player), statId,
+				() -> compute(player, category, held, -1, List.of()));
+		List<Component> lines = new ArrayList<>();
+		Set<String> shown = new HashSet<>();
+		changes(after.summary, before.summary, lines, shown);
+		changes(after.details, before.details, lines, shown);
+		return lines.size() > PREVIEW_LINES ? List.copyOf(lines.subList(0, PREVIEW_LINES)) : lines;
+	}
+
+	/** Adds "label: before → after" for each line whose number moved (once per line name). */
+	private static void changes(List<Row> after, List<Row> before, List<Component> lines, Set<String> shown) {
+		List<Row> matched = pair(after, before);
+
+		for (int i = 0; i < after.size(); i++) {
+			Row row = after.get(i);
+			Row was = matched.get(i);
+			Double now = number(row);
+			Double then = was == null ? null : number(was);
+
+			if (now == null || then == null || Math.abs(now - then) < 0.005 || !shown.add(shape(row.label()))) {
+				continue;
+			}
+
+			boolean better = lowerIsBetter(row, now) ? now < then : now > then;
+			lines.add(row.label().copy().append(": ").append(Sheet.colored(Sheet.num(then) + suffix(was) + " → " + Sheet.num(now) + suffix(row),
+					better ? Sheet.GOOD : Sheet.BAD)));
+		}
+	}
+
+	/** {@code rows}, each number that differs from its line in {@code baseline} followed by "(+0.5)": green if better. */
+	private static List<Row> diff(List<Row> rows, List<Row> baseline) {
+		List<Row> matched = pair(rows, baseline);
+		List<Row> out = new ArrayList<>(rows.size());
+
+		for (int i = 0; i < rows.size(); i++) {
+			Row row = rows.get(i);
+			Row was = matched.get(i);
+			Double now = number(row);
+			Double then = was == null ? null : number(was);
+
+			if (now == null || then == null || Math.abs(now - then) < 0.005) {
+				out.add(row);
+				continue;
+			}
+
+			double delta = now - then;
+			boolean better = lowerIsBetter(row, now) ? delta < 0.0 : delta > 0.0;
+			MutableComponent value = row.value().copy()
+					.append(Sheet.colored("  (" + (delta > 0.0 ? "+" : "-") + Sheet.num(Math.abs(delta)) + suffix(row) + ")", better ? Sheet.GOOD : Sheet.BAD));
+			out.add(new Row(row.kind(), row.label(), value));
+		}
+
+		return out;
+	}
+
+	/**
+	 * For each of {@code rows}, the line of {@code baseline} it stands for, or null: lines are matched by their
+	 * label with the numbers in it left out ("Endurance (12)" is "Endurance (13)" in the other sheet), the n-th of
+	 * a name with the n-th. Headings and notes are never matched.
+	 */
+	private static List<Row> pair(List<Row> rows, List<Row> baseline) {
+		Map<String, List<Row>> byShape = new HashMap<>();
+
+		for (Row row : baseline) {
+			if (row.kind() != Row.HEADING && row.kind() != Row.NOTE) {
+				byShape.computeIfAbsent(shape(row.label()), key -> new ArrayList<>()).add(row);
+			}
+		}
+
+		Map<String, Integer> seen = new HashMap<>();
+		List<Row> out = new ArrayList<>(rows.size());
+
+		for (Row row : rows) {
+			if (row.kind() == Row.HEADING || row.kind() == Row.NOTE) {
+				out.add(null);
+				continue;
+			}
+
+			String shape = shape(row.label());
+			int index = seen.merge(shape, 1, Integer::sum) - 1;
+			List<Row> matches = byShape.get(shape);
+			out.add(matches == null || index >= matches.size() ? null : matches.get(index));
+		}
+
+		return out;
+	}
+
+	/** A label's translation keys and words with every number replaced by "#" (the same on any server language). */
+	private static String shape(Component label) {
+		return NUMBER.matcher(shapeOf(label)).replaceAll("#");
+	}
+
+	private static String shapeOf(Object part) {
+		if (!(part instanceof Component component)) {
+			return String.valueOf(part);
+		}
+
+		StringBuilder out = new StringBuilder();
+
+		if (component.getContents() instanceof TranslatableContents contents) {
+			out.append(contents.getKey()).append('(');
+
+			for (Object arg : contents.getArgs()) {
+				out.append(shapeOf(arg)).append(',');
+			}
+
+			out.append(')');
+		} else {
+			out.append(component.plainCopy().getString());
+		}
+
+		for (Component sibling : component.getSiblings()) {
+			out.append(shapeOf(sibling));
+		}
+
+		return out.toString();
+	}
+
+	/** The first number in a line's value ("7.62  (-24%)" → 7.62, "×1.5" → 1.5, "-30%" → -30), or null. */
+	private static Double number(Row row) {
+		Matcher matcher = NUMBER.matcher(row.value().getString());
+		return matcher.find() ? Double.parseDouble(matcher.group()) : null;
+	}
+
+	/** "%" or " s" when the first number in the value carries it. */
+	private static String suffix(Row row) {
+		String text = row.value().getString();
+		Matcher matcher = NUMBER.matcher(text);
+
+		if (!matcher.find()) {
+			return "";
+		}
+
+		String rest = text.substring(matcher.end());
+		return rest.startsWith("%") ? "%" : rest.startsWith(" s") ? " s" : "";
+	}
+
+	/**
+	 * Whether a smaller number is the better one on this line: health lost, waiting times, and cuts shown as a green
+	 * "-24%" (a bigger cut is better).
+	 */
+	private static boolean lowerIsBetter(Row row, double value) {
+		if (row.label().getContents() instanceof TranslatableContents contents
+				&& (LOWER_IS_BETTER.contains(contents.getKey()) || contents.getKey().startsWith("bloom.sheet.armor.kind."))) {
+			return true;
+		}
+
+		TextColor color = row.value().getStyle().getColor();
+		return value < 0.0 && color != null && color.getValue() == Sheet.GOOD;
 	}
 
 	/** -1 = the main hand; -2 = bare hands; 0-35 the inventory (0-8 the hotbar); 40 the off hand. */

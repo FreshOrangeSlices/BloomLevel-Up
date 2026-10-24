@@ -3,6 +3,7 @@ package com.freshorangeslices.bloomlevelup.client.gui;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -23,8 +24,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
+import com.freshorangeslices.bloomlevelup.definition.MajorDefinition;
 import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
+import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
+import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons;
 
 /**
@@ -32,6 +37,9 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons;
  * server works out every number (with the real game rules) and sends finished lines; this only draws them and
  * sends what the player picks: which weapon or tool from the inventory, which target, which "show it at max"
  * switches are on, and summary or full breakdown. It asks again every second so it stays current.
+ *
+ * <p>Right-clicking a weapon or tool pins it: every line then shows how the chosen one differs from it. Once
+ * there's a second build, the Build chip shows the other build's numbers against the one in use.
  */
 final class StatSheetWindow {
 	/** Inventory slot meaning "the main hand" (what the sheet opens on). */
@@ -46,6 +54,14 @@ final class StatSheetWindow {
 	private static final int HEADER = 30;
 	private static final int SLOT = 18;
 	private static final int CHIP_H = 13;
+	/** The pinned weapon's outline. */
+	private static final int PIN = 0xFF6EC6FF;
+	/** The switch a Major's "see it in the stat sheet" link puts on Max. */
+	private static final Map<String, String> LINKED_SWITCH = Map.ofEntries(Map.entry(CombatIds.PREDATOR, "predator"),
+			Map.entry(CombatIds.BLOODLUST, "bloodlust"), Map.entry(CombatIds.COMBO, "combo"), Map.entry(CombatIds.FIRST_STRIKE, "first_strike"),
+			Map.entry(CombatIds.STORED_IMPACT, "stored"), Map.entry(CombatIds.CHARGE_ATTACK, "charged"), Map.entry(CombatIds.HEAVY_HANDS, "charged"),
+			Map.entry(CombatIds.DEATH_FROM_ABOVE, "fall"), Map.entry(CombatIds.MARKSMAN, "marksman"),
+			Map.entry(CombatIds.MASTER_OF_ARMS, "charged_throw"), Map.entry(ArmorIds.BRACE, "braced"));
 
 	private final Identifier frameSprite;
 	private final int frame;
@@ -54,7 +70,10 @@ final class StatSheetWindow {
 	/** Each switch not on Live: Max or Off (SheetPayloads.Toggle.MAX / OFF). */
 	private final Map<String, Integer> modes = new LinkedHashMap<>();
 	private int slot = HELD;
-	private int target = -1;
+	/** The pinned weapon or tool (an inventory slot, or BARE), or NO_COMPARE. Not kept after the window closes. */
+	private int pinned = SheetPayloads.Request.NO_COMPARE;
+	/** Showing the other build's numbers against the one in use. Not kept after the window closes. */
+	private boolean otherBuild;
 	private boolean details;
 	private double scroll;
 	private int contentH;
@@ -65,7 +84,7 @@ final class StatSheetWindow {
 	private final List<Hit> hits = new ArrayList<>();
 
 	/** A clickable or hoverable spot drawn this frame. */
-	private record Hit(int x0, int y0, int x1, int y1, Runnable action, Component tooltip) {
+	private record Hit(int x0, int y0, int x1, int y1, Runnable action, Runnable rightAction, Component tooltip) {
 		boolean contains(double x, double y) {
 			return x >= x0 && x < x1 && y >= y0 && y < y1;
 		}
@@ -98,6 +117,19 @@ final class StatSheetWindow {
 	}
 
 	void tick() {
+		Player player = Minecraft.getInstance().player;
+
+		// The pinned item left its slot: unpin. A second build that isn't there any more: back to this one.
+		if (pinned >= 0 && player != null && player.getInventory().getItem(pinned).isEmpty()) {
+			pinned = SheetPayloads.Request.NO_COMPARE;
+			request();
+		}
+
+		if (otherBuild && ClientBloomState.profile().spareBuild().isEmpty()) {
+			otherBuild = false;
+			request();
+		}
+
 		if (++sinceRequest >= 20) {
 			request();
 		}
@@ -108,7 +140,7 @@ final class StatSheetWindow {
 		requestId++;
 		List<String> switches = new ArrayList<>();
 		modes.forEach((id, mode) -> switches.add(id + (mode == SheetPayloads.Toggle.MAX ? "=max" : "=off")));
-		ClientPlayNetworking.send(new SheetPayloads.Request(requestId, category, slot, target, switches));
+		ClientPlayNetworking.send(new SheetPayloads.Request(requestId, category, slot, target, switches, pinned, otherBuild));
 	}
 
 	private SheetPayloads.View view() {
@@ -171,7 +203,7 @@ final class StatSheetWindow {
 		// Title, the summary / all stats tabs, and the close button.
 		MajorDetails.big(g, font, MajorDetails.heading(title), x0 + 8, y0 + 5, 0xFFFFD86B);
 		int closeX = x0 + w - 13;
-		hits.add(new Hit(closeX - 2, y0 + 3, closeX + 10, y0 + 15, null, Component.translatable("bloom.hub.detail.close")));
+		hits.add(new Hit(closeX - 2, y0 + 3, closeX + 10, y0 + 15, null, null, Component.translatable("bloom.hub.detail.close")));
 		g.text(font, Component.literal("×"), closeX, y0 + 5, overClose(mouseX, mouseY) ? 0xFFFFFFFF : MUTED);
 		int tabsRight = closeX - 6;
 		Component all = Component.translatable("bloom.sheet.ui.details");
@@ -180,6 +212,23 @@ final class StatSheetWindow {
 		int summaryX = allX - 3 - chipWidth(font, summary);
 		chip(g, font, summaryX, y0 + 6, summary, !details, mouseX, mouseY, () -> pickPage(false), null);
 		chip(g, font, allX, y0 + 6, all, details, mouseX, mouseY, () -> pickPage(true), null);
+
+		// The other build, once there is one.
+		BloomProfile profile = ClientBloomState.profile();
+
+		if (profile.spareBuild().isPresent()) {
+			int inUse = profile.activeBuild() + 1;
+			String other = String.valueOf(3 - inUse);
+			Component build = Component.translatable("bloom.sheet.ui.build", other);
+			int buildX = summaryX - 8 - chipWidth(font, build);
+			MutableComponent tip = Component.translatable("bloom.sheet.ui.build.tip", other, String.valueOf(inUse));
+
+			if (otherBuild) {
+				tip.append("\n").append(Component.translatable("bloom.sheet.ui.build.back").withStyle(style -> style.withColor(MUTED)));
+			}
+
+			chip(g, font, buildX, y0 + 6, build, otherBuild, mouseX, mouseY, this::toggleOtherBuild, tip);
+		}
 
 		SheetPayloads.View view = view();
 		int y = y0 + HEADER - 6;
@@ -199,9 +248,15 @@ final class StatSheetWindow {
 				}
 
 				boolean selected = choice.slot() == slot;
+				boolean pin = isPinned(choice.slot());
 				boolean hover = mouseX >= sx && mouseX < sx + SLOT && mouseY >= y && mouseY < y + SLOT;
-				g.fill(sx, y, sx + SLOT, y + SLOT, selected ? GOLD : hover ? 0xFF8A6A2A : 0xFF3A2F22);
-				g.fill(sx + 1, y + 1, sx + SLOT - 1, y + SLOT - 1, selected ? 0xFF4A3A22 : 0xFF201A13);
+
+				if (pin) {
+					g.fill(sx - 1, y - 1, sx + SLOT + 1, y + SLOT + 1, PIN);
+				}
+
+				g.fill(sx, y, sx + SLOT, y + SLOT, selected ? GOLD : pin ? PIN : hover ? 0xFF8A6A2A : 0xFF3A2F22);
+				g.fill(sx + 1, y + 1, sx + SLOT - 1, y + SLOT - 1, selected ? 0xFF4A3A22 : pin ? 0xFF1C2E3A : 0xFF201A13);
 
 				if (choice.stack().isEmpty()) {
 					g.centeredText(font, Component.literal("✋"), sx + SLOT / 2, y + 5, MUTED);
@@ -209,8 +264,15 @@ final class StatSheetWindow {
 					g.item(choice.stack(), sx + 1, y + 1);
 				}
 
+				if (pin) {
+					// A little pin in the corner.
+					g.fill(sx + SLOT - 5, y + 1, sx + SLOT - 1, y + 5, PIN);
+				}
+
 				int pick = choice.slot();
-				hits.add(new Hit(sx, y, sx + SLOT, y + SLOT, () -> pickSlot(pick), choice.tooltip()));
+				MutableComponent tip = choice.tooltip().copy().append("\n").append(Component.translatable(pin ? "bloom.sheet.ui.pin.on" : "bloom.sheet.ui.pin.tip")
+						.withStyle(style -> style.withColor(pin ? PIN : MUTED)));
+				hits.add(new Hit(sx, y, sx + SLOT, y + SLOT, () -> pickSlot(pick), () -> togglePin(pick), tip));
 				sx += SLOT + 2;
 			}
 
@@ -426,7 +488,7 @@ final class StatSheetWindow {
 		g.fill(x, y + 1, x + w, y + CHIP_H - 1, hover && mode != SheetPayloads.Toggle.OFF ? 0xFFFFFFFF : rim);
 		g.fill(x + 1, y + 1, x + w - 1, y + CHIP_H - 1, fill);
 		g.text(font, text, x + 4, y + 3, color);
-		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, tooltip));
+		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, null, tooltip));
 		return x + w;
 	}
 
@@ -439,7 +501,7 @@ final class StatSheetWindow {
 		g.fill(x, y + 1, x + w, y + CHIP_H - 1, on ? GOLD : hover ? 0xFF8A6A2A : 0xFF3A2F22);
 		g.fill(x + 1, y + 1, x + w - 1, y + CHIP_H - 1, on ? 0xFFC98F1F : 0xFF201A13);
 		g.text(font, text, x + 4, y + 3, on ? 0xFF1A1206 : hover ? TEXT : MUTED);
-		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, tooltip));
+		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, null, tooltip));
 		return x + w;
 	}
 
@@ -499,16 +561,18 @@ final class StatSheetWindow {
 		return x >= closeX - 2 && x < closeX + 10 && y >= y() + 3 && y < y() + 15;
 	}
 
-	/** Returns false when the click closes the window. */
-	boolean mouseClicked(double x, double y) {
+	/** Returns false when the click closes the window. {@code right}: the right mouse button (pins a weapon or tool). */
+	boolean mouseClicked(double x, double y, boolean right) {
 		if (!inside(x, y) || overClose(x, y)) {
-			return false;
+			return right;
 		}
 
 		for (Hit hit : hits) {
-			if (hit.action() != null && hit.contains(x, y)) {
+			Runnable action = right ? hit.rightAction() : hit.action();
+
+			if (action != null && hit.contains(x, y)) {
 				click();
-				hit.action().run();
+				action.run();
 				return true;
 			}
 		}
@@ -535,6 +599,118 @@ final class StatSheetWindow {
 		slot = pick;
 		remember();
 		request();
+	}
+
+	/** Whether a choice in the weapon row is the pinned one (the held item counts by the slot it's in). */
+	private boolean isPinned(int choice) {
+		return pinned != SheetPayloads.Request.NO_COMPARE && (choice == pinned || (choice == HELD && heldSlot() == pinned));
+	}
+
+	/** The inventory slot of what's in the main hand, or HELD if it isn't in the 36 slots. */
+	private static int heldSlot() {
+		Player player = Minecraft.getInstance().player;
+
+		if (player == null) {
+			return HELD;
+		}
+
+		ItemStack held = player.getMainHandItem();
+
+		for (int i = 0; i < 36; i++) {
+			if (!held.isEmpty() && player.getInventory().getItem(i) == held) {
+				return i;
+			}
+		}
+
+		return HELD;
+	}
+
+	/** Pins a weapon or tool (or unpins it); the item in hand is pinned by its slot, so it stays put when you scroll. */
+	private void togglePin(int choice) {
+		int slotOf = choice == HELD ? heldSlot() : choice;
+		pinned = isPinned(choice) || slotOf == HELD ? SheetPayloads.Request.NO_COMPARE : slotOf;
+		otherBuild = false;
+		request();
+	}
+
+	private void toggleOtherBuild() {
+		otherBuild = !otherBuild;
+		pinned = SheetPayloads.Request.NO_COMPARE;
+		request();
+	}
+
+	/**
+	 * From a Major's details window: shows what it does, with its switch on Max and (for a weapon tree) a weapon
+	 * of that tree picked, bare hands for Unarmed.
+	 */
+	void focus(MajorDefinition major) {
+		String linked = LINKED_SWITCH.get(major.id());
+
+		if (linked != null) {
+			setMode(linked, SheetPayloads.Toggle.MAX);
+		}
+
+		Integer weapon = slotFor(major);
+
+		if (weapon != null) {
+			slot = weapon;
+		}
+
+		details = false;
+		scroll = 0.0;
+		remember();
+		request();
+	}
+
+	/** The switch a Major's link puts on Max, or null. */
+	static String linkedSwitch(String majorId) {
+		return LINKED_SWITCH.get(majorId);
+	}
+
+	/** The weapon row's choice for a Major: bare hands for Unarmed, the held weapon or the first one of its tree. */
+	private static Integer slotFor(MajorDefinition major) {
+		List<Weapons.Family> families = new ArrayList<>();
+
+		if (major.id().equals(CombatIds.MASTER_OF_ARMS)) {
+			families.add(Weapons.Family.TRIDENT);
+			families.add(Weapons.Family.SPEAR);
+		}
+
+		major.group().ifPresent(group -> {
+			String tree = group.substring(group.lastIndexOf('/') + 1).toUpperCase(Locale.ROOT);
+
+			for (Weapons.Family family : Weapons.Family.values()) {
+				if (family.name().equals(tree)) {
+					families.add(family);
+				}
+			}
+		});
+
+		Player player = Minecraft.getInstance().player;
+
+		if (families.isEmpty() || player == null) {
+			return null;
+		}
+
+		if (families.contains(Weapons.Family.UNARMED)) {
+			return BARE;
+		}
+
+		for (Weapons.Family family : families) {
+			if (Weapons.is(player.getMainHandItem(), family)) {
+				return HELD;
+			}
+		}
+
+		for (Weapons.Family family : families) {
+			for (int i = 0; i < 36; i++) {
+				if (Weapons.is(player.getInventory().getItem(i), family)) {
+					return i;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	private void pickTarget(int index) {
@@ -598,5 +774,25 @@ final class StatSheetWindow {
 	void setToggleForTests(String id, boolean on) {
 		setMode(id, on ? SheetPayloads.Toggle.MAX : SheetPayloads.Toggle.OFF);
 		request();
+	}
+
+	void pinForTests(int slot) {
+		togglePin(slot);
+	}
+
+	void pickSlotForTests(int pick) {
+		pickSlot(pick);
+	}
+
+	void otherBuildForTests() {
+		toggleOtherBuild();
+	}
+
+	int slotForTests() {
+		return slot;
+	}
+
+	Map<String, Integer> modesForTests() {
+		return Map.copyOf(modes);
 	}
 }

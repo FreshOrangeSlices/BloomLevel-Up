@@ -29,25 +29,36 @@ public final class SheetPayloads {
 	 * Client → server: the stat sheet for {@code category}, for the item in inventory {@code slot} (-1 = main hand,
 	 * -2 = bare hands). {@code toggles}: "id=max" or "id=off" for each switch not left on Live.
 	 */
-	public record Request(int id, String category, int slot, int target, List<String> toggles) implements CustomPacketPayload {
+	public record Request(int id, String category, int slot, int target, List<String> toggles, int compareSlot, boolean compareBuild)
+			implements CustomPacketPayload {
+		/** {@code compareSlot} when nothing is pinned. */
+		public static final int NO_COMPARE = -100;
 		public static final Type<Request> TYPE = new Type<>(BloomLevelUp.id("sheet_request"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, Request> CODEC = CustomPacketPayload.codec(Request::write, Request::new);
 
+		/** A plain request: no pinned item, no other build. */
+		public Request(int id, String category, int slot, int target, List<String> toggles) {
+			this(id, category, slot, target, toggles, NO_COMPARE, false);
+		}
+
 		private Request(RegistryFriendlyByteBuf buf) {
-			this(buf.readVarInt(), buf.readUtf(BloomPayloads.MAX_ID), buf.readVarInt(), buf.readVarInt(),
-					readList(buf, MAX_TOGGLES, b -> b.readUtf(BloomPayloads.MAX_ID)));
+			this(buf.readVarInt(), buf.readUtf(BloomPayloads.MAX_ID), buf.readInt(), buf.readVarInt(),
+					readList(buf, MAX_TOGGLES, b -> b.readUtf(BloomPayloads.MAX_ID)), buf.readInt(), buf.readBoolean());
 		}
 
 		private void write(RegistryFriendlyByteBuf buf) {
 			buf.writeVarInt(id);
 			buf.writeUtf(category, BloomPayloads.MAX_ID);
-			buf.writeVarInt(slot);
+			buf.writeInt(slot);
 			buf.writeVarInt(target);
 			buf.writeVarInt(Math.min(toggles.size(), MAX_TOGGLES));
 
 			for (int i = 0; i < Math.min(toggles.size(), MAX_TOGGLES); i++) {
 				buf.writeUtf(toggles.get(i), BloomPayloads.MAX_ID);
 			}
+
+			buf.writeInt(compareSlot);
+			buf.writeBoolean(compareBuild);
 		}
 
 		@Override
@@ -128,6 +139,45 @@ public final class SheetPayloads {
 			ComponentSerialization.STREAM_CODEC.encode(buf, gaugeBadge);
 			writeList(buf, summary, MAX_ROWS, (b, r) -> r.write(b));
 			writeList(buf, details, MAX_ROWS, (b, r) -> r.write(b));
+		}
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
+	/** Client → server: what one more point in {@code stat} would change (hovering a stat's + in the hub). */
+	public record Preview(String stat) implements CustomPacketPayload {
+		public static final Type<Preview> TYPE = new Type<>(BloomLevelUp.id("sheet_preview"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, Preview> CODEC = CustomPacketPayload.codec(Preview::write, Preview::new);
+
+		private Preview(RegistryFriendlyByteBuf buf) {
+			this(buf.readUtf(BloomPayloads.MAX_ID));
+		}
+
+		private void write(RegistryFriendlyByteBuf buf) {
+			buf.writeUtf(stat, BloomPayloads.MAX_ID);
+		}
+
+		@Override
+		public Type<? extends CustomPacketPayload> type() {
+			return TYPE;
+		}
+	}
+
+	/** Server → client: the lines that one more point in {@code stat} changes ("Hit: 12 → 12.06"). */
+	public record PreviewResult(String stat, List<Component> lines) implements CustomPacketPayload {
+		public static final Type<PreviewResult> TYPE = new Type<>(BloomLevelUp.id("sheet_preview_result"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, PreviewResult> CODEC = CustomPacketPayload.codec(PreviewResult::write, PreviewResult::new);
+
+		private PreviewResult(RegistryFriendlyByteBuf buf) {
+			this(buf.readUtf(BloomPayloads.MAX_ID), readList(buf, MAX_TOGGLES, ComponentSerialization.STREAM_CODEC::decode));
+		}
+
+		private void write(RegistryFriendlyByteBuf buf) {
+			buf.writeUtf(stat, BloomPayloads.MAX_ID);
+			writeList(buf, lines, MAX_TOGGLES, (b, c) -> ComponentSerialization.STREAM_CODEC.encode(b, c));
 		}
 
 		@Override

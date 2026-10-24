@@ -62,7 +62,7 @@ public final class StatEffects {
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	public static final double POWER_PER_POINT = 0.06;
 
-	/** A Bloom attribute modifier that depends on the item in the main hand (amount 0 = none). */
+	/** A Bloom attribute modifier (amount 0 = none): from the item in hand, or from the profile. */
 	public record HeldModifier(Holder<Attribute> attribute, Identifier id, double amount, AttributeModifier.Operation operation) {
 	}
 
@@ -73,8 +73,6 @@ public final class StatEffects {
 		ProgressionService service = BloomServices.progression();
 		BloomProfile profile = BloomAttachments.profile(player);
 
-		boolean titanHide = service.isMajorActive(profile, TITAN_HIDE) && armorSlotsEmpty(player);
-
 		// Misc: Ascension's flight, and Water to Wine's cut when it's switched off.
 		MiscSkill.refresh(player);
 
@@ -84,9 +82,30 @@ public final class StatEffects {
 			profile.setCounter(ArmorIds.PROTEIN_MEALS, 0);
 		}
 
+		for (HeldModifier modifier : profileModifiers(player)) {
+			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
+		}
+
+		// Everything that depends on the item in hand (HeldItemWatcher refreshes on every swap).
+		for (HeldModifier modifier : heldModifiers(player, player.getMainHandItem())) {
+			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
+		}
+
+		if (player.getHealth() > player.getMaxHealth()) {
+			player.setHealth(player.getMaxHealth());
+		}
+	}
+
+	/**
+	 * The modifiers that come from the profile (stat points and always-on Majors), worked out from the profile as it
+	 * is right now. The stat sheet asks this for a build that isn't in use, or a point not spent yet.
+	 */
+	public static List<HeldModifier> profileModifiers(ServerPlayer player) {
+		ProgressionService service = BloomServices.progression();
+		BloomProfile profile = BloomAttachments.profile(player);
+		boolean titanHide = service.isMajorActive(profile, TITAN_HIDE) && armorSlotsEmpty(player);
 		double proteinHealth = service.isMajorActive(profile, ArmorIds.PROTEIN)
 				? StatFormulas.proteinBonusHealth(profile.counter(ArmorIds.PROTEIN_MEALS)) : 0.0;
-		apply(player, Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADD_VALUE);
 
 		// Fitting Armor / Heavy: strong knockback resistance that tapers off if you already resist knockback.
 		boolean heavy = service.isMajorActive(profile, ArmorIds.FITTING_ARMOR) && ArmorStyles.styleOf(player) == ArmorStyle.HEAVY;
@@ -102,8 +121,6 @@ public final class StatEffects {
 			}
 		}
 
-		apply(player, Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADD_VALUE);
-
 		double defenseArmor = StatFormulas.defenseArmor(service.statValue(profile, DEFENSE));
 
 		if (titanHide) {
@@ -111,30 +128,24 @@ public final class StatEffects {
 			defenseArmor = (defenseArmor + 2.0) * 2.0;
 		}
 
-		apply(player, Attributes.MAX_HEALTH, VITALITY_MOD,
-				StatFormulas.vitalityBonusHealth(service.statValue(profile, VITALITY)), AttributeModifier.Operation.ADD_VALUE);
-		apply(player, Attributes.ARMOR, DEFENSE_MOD, defenseArmor, AttributeModifier.Operation.ADD_VALUE);
-		apply(player, Attributes.ATTACK_DAMAGE, POWER_MOD,
-				service.statValue(profile, POWER) * POWER_PER_POINT, AttributeModifier.Operation.ADD_VALUE);
-		// Tempo: 2x attack speed at 100 points; multiplies the weapon's own speed.
-		apply(player, Attributes.ATTACK_SPEED, TEMPO_MOD,
-				service.statValue(profile, TEMPO) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-		// Speed: +1% movement per point, 2x at 100.
-		apply(player, Attributes.MOVEMENT_SPEED, SPEED_MOD,
-				service.statValue(profile, SPEED) / 100.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-
-		// Everything that depends on the item in hand (HeldItemWatcher refreshes on every swap).
-		for (HeldModifier modifier : heldModifiers(player, player.getMainHandItem())) {
-			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
-		}
-
-		// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
-		apply(player, Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-		apply(player, Attributes.FALL_DAMAGE_MULTIPLIER, TITAN_FALL_MOD, titanHide ? -0.7 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-
-		if (player.getHealth() > player.getMaxHealth()) {
-			player.setHealth(player.getMaxHealth());
-		}
+		return List.of(
+				new HeldModifier(Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.MAX_HEALTH, VITALITY_MOD, StatFormulas.vitalityBonusHealth(service.statValue(profile, VITALITY)),
+						AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.ARMOR, DEFENSE_MOD, defenseArmor, AttributeModifier.Operation.ADD_VALUE),
+				new HeldModifier(Attributes.ATTACK_DAMAGE, POWER_MOD, service.statValue(profile, POWER) * POWER_PER_POINT,
+						AttributeModifier.Operation.ADD_VALUE),
+				// Tempo: 2x attack speed at 100 points; multiplies the weapon's own speed.
+				new HeldModifier(Attributes.ATTACK_SPEED, TEMPO_MOD, service.statValue(profile, TEMPO) / 100.0,
+						AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+				// Speed: +1% movement per point, 2x at 100.
+				new HeldModifier(Attributes.MOVEMENT_SPEED, SPEED_MOD, service.statValue(profile, SPEED) / 100.0,
+						AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+				// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
+				new HeldModifier(Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+				new HeldModifier(Attributes.FALL_DAMAGE_MULTIPLIER, TITAN_FALL_MOD, titanHide ? -0.7 : 0.0,
+						AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 	}
 
 	/**

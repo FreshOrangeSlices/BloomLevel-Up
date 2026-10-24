@@ -1,5 +1,8 @@
 package com.freshorangeslices.bloomlevelup.sheet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -62,7 +65,12 @@ final class Loadout {
 			}
 		});
 
-		for (StatEffects.HeldModifier modifier : StatEffects.heldModifiers(player, item)) {
+		// Bloom's own modifiers, worked out again from the profile as it is now (the sheet may be showing the other
+		// build, or a point not spent yet) and for this item.
+		List<StatEffects.HeldModifier> bloom = new ArrayList<>(StatEffects.profileModifiers(player));
+		bloom.addAll(StatEffects.heldModifiers(player, item));
+
+		for (StatEffects.HeldModifier modifier : bloom) {
 			if (modifier.attribute().value() == attribute.value()) {
 				copy.removeModifier(modifier.id());
 

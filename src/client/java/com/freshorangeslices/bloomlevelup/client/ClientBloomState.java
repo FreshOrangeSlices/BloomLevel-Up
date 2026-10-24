@@ -1,6 +1,8 @@
 package com.freshorangeslices.bloomlevelup.client;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.definition.DefinitionSet;
@@ -23,6 +25,8 @@ public final class ClientBloomState {
 	private static String selectedCategory;
 	private static int version;
 	private static SheetPayloads.View sheet;
+	/** What one more point in each stat would change, as the server last said (the + buttons' tooltips). */
+	private static final Map<String, List<net.minecraft.network.chat.Component>> PREVIEWS = new HashMap<>();
 
 	private ClientBloomState() {
 	}
@@ -94,6 +98,15 @@ public final class ClientBloomState {
 		sheet = view;
 	}
 
+	/** The server's answer to "what would one more point here change", or null before it has answered. */
+	public static List<net.minecraft.network.chat.Component> preview(String statId) {
+		return PREVIEWS.get(statId);
+	}
+
+	static void setPreview(SheetPayloads.PreviewResult result) {
+		PREVIEWS.put(result.stat(), List.copyOf(result.lines()));
+	}
+
 	public static String selectedCategory() {
 		List<String> ids = definitions().categories().stream().map(c -> c.id()).toList();
 
@@ -115,6 +128,7 @@ public final class ClientBloomState {
 		service = null;
 		lastResult = null;
 		sheet = null;
+		PREVIEWS.clear();
 		version++;
 	}
 }

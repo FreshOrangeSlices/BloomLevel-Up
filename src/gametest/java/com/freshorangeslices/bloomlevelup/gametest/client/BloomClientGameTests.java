@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.Items;
 
@@ -161,6 +162,66 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		});
 		context.waitTicks(3);
 		context.takeScreenshot("bloom_sheet_combat_details");
+
+		// Pin the sword in hand, then pick the iron axe: every line shows how the axe differs from the sword.
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.sheetForTests(false, null);
+				hub.sheetSlotForTests(-1, 2);
+			}
+		});
+		check(context, "pinning the sword and picking the axe compares them", client -> ClientBloomState.sheet() != null
+				&& ClientBloomState.sheet().slot() == 2 && !ClientBloomState.sheet().summary().isEmpty()
+				&& ClientBloomState.sheet().summary().get(0).label().getContents() instanceof TranslatableContents note
+				&& note.getKey().equals("bloom.sheet.ui.pin.note"));
+		context.getInput().setCursorPos(2, 2);
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_sheet_compare");
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.sheetForTests(false, "predator", false);
+			}
+		});
+		context.waitTicks(2);
+		context.setScreen(() -> null);
+
+		// A Major's details window links to the sheet, with its switch on Max.
+		context.setScreen(HubScreen::new);
+		context.waitTicks(2);
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.openDetailsForTests("bloomlevelup:combat/predator");
+				hub.showInSheetForTests();
+			}
+		});
+		check(context, "the details window's link opens the sheet with Predator on Max", client -> client.gui.screen() instanceof HubScreen hub
+				&& hub.sheetOpenForTests() && !hub.detailsOpenForTests() && hub.sheetStateForTests().contains("predator=1"));
+		context.setScreen(() -> null);
+
+		// Hovering Power's + asks the server what one more point would change, and the tooltip shows it.
+		String power = "bloomlevelup:combat/power";
+		context.setScreen(HubScreen::new);
+		context.waitTicks(2);
+		double[] plus = context.computeOnClient(client -> {
+			if (!(client.gui.screen() instanceof HubScreen hub) || hub.plusCenterForTests(power) == null) {
+				return null;
+			}
+
+			int[] gui = hub.plusCenterForTests(power);
+			double sx = client.getWindow().getScreenWidth() / (double) client.getWindow().getGuiScaledWidth();
+			double sy = client.getWindow().getScreenHeight() / (double) client.getWindow().getGuiScaledHeight();
+			return new double[] {(gui[0] + 0.5) * sx, (gui[1] + 0.5) * sy};
+		});
+
+		if (plus != null) {
+			context.getInput().setCursorPos(plus[0], plus[1]);
+		}
+
+		check(context, "hovering Power's + previews one more point", client -> ClientBloomState.preview(power) != null
+				&& !ClientBloomState.preview(power).isEmpty());
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_hub_point_preview");
+		context.getInput().setCursorPos(2, 2);
 		context.setScreen(() -> null);
 
 		context.runOnClient(client -> ClientBloomState.selectCategory("bloomlevelup:armor"));

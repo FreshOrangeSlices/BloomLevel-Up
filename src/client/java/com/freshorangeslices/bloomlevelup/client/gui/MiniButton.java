@@ -1,6 +1,7 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractButton;
@@ -21,6 +22,9 @@ final class MiniButton extends AbstractButton {
 	private static final int SIZE = 9;
 	private final Glyph glyph;
 	private final Consumer<Boolean> action;
+	private Supplier<Component> liveTooltip;
+	private Runnable onHover;
+	private Component shownTooltip;
 
 	/** {@code action} gets whether shift was held. */
 	MiniButton(int x, int y, Glyph glyph, Component tooltip, Consumer<Boolean> action) {
@@ -30,10 +34,31 @@ final class MiniButton extends AbstractButton {
 		this.setTooltip(Tooltip.create(tooltip));
 	}
 
+	/**
+	 * A tooltip that can change while it's open ({@code tooltip} is asked each frame), and {@code onHover} run each
+	 * frame the mouse is over the button (the + buttons ask the server what one more point would change).
+	 */
+	MiniButton live(Supplier<Component> tooltip, Runnable onHover) {
+		this.liveTooltip = tooltip;
+		this.onHover = onHover;
+		return this;
+	}
+
 	@Override
 	protected void extractContents(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
 		int x = this.getX();
 		int y = this.getY();
+
+		if (liveTooltip != null && this.isHovered()) {
+			onHover.run();
+			Component now = liveTooltip.get();
+
+			if (!now.equals(shownTooltip)) {
+				shownTooltip = now;
+				this.setTooltip(Tooltip.create(now));
+			}
+		}
+
 		int back = !this.active ? 0xFF1E1B18 : this.isHoveredOrFocused() ? 0xFF6A5A44 : 0xFF3A3128;
 		int edge = !this.active ? 0xFF2E2822 : 0xFF8A7656;
 		int ink = !this.active ? 0xFF5A5248 : 0xFFEFE6D2;

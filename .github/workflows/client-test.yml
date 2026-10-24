@@ -75,7 +75,7 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_combat 12
       - name: the Combat stat sheet, full breakdown
         run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_combat_details 12
-      - name: the Armor stat sheet
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_armor 12
-      - name: a Major's details window
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_major_details 12
+      - name: the Combat stat sheet, comparing the axe with the pinned sword
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_compare 12
+      - name: one more point's preview on a + button
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hub_point_preview 12

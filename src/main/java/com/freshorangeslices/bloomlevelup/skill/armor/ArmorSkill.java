@@ -249,6 +249,11 @@ public final class ArmorSkill {
 	 * what's left). {@code braced}: whether Brace! is holding. The stat sheet lists the same layers.
 	 */
 	public static List<Layer> layers(ServerPlayer player, DamageSource source, boolean braced) {
+		return layers(player, source, braced, rawArmor(player));
+	}
+
+	/** {@link #layers(ServerPlayer, DamageSource, boolean)} with the armor points (before vanilla's cap) given. */
+	public static List<Layer> layers(ServerPlayer player, DamageSource source, boolean braced, double rawArmor) {
 		BloomProfile profile = BloomAttachments.profile(player);
 		boolean resistanceApplies = !source.is(DamageTypeTags.BYPASSES_RESISTANCE);
 		List<Layer> layers = new ArrayList<>(8);
@@ -286,7 +291,7 @@ public final class ArmorSkill {
 		}
 
 		if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
-			double overcap = StatFormulas.armorOvercapReduction(rawArmor(player), config().armorOvercapReductionCap);
+			double overcap = StatFormulas.armorOvercapReduction(rawArmor, config().armorOvercapReductionCap);
 
 			if (overcap > 0.0) {
 				layers.add(new Layer("overcap", overcap));

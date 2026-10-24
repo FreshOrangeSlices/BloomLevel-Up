@@ -41,6 +41,7 @@ import com.freshorangeslices.bloomlevelup.definition.MajorDefinition;
 import com.freshorangeslices.bloomlevelup.definition.StatDefinition;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.Action;
+import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.player.CategoryProgress;
 import com.freshorangeslices.bloomlevelup.player.OwnedMajor;
@@ -185,6 +186,11 @@ public final class HubScreen extends Screen {
 
 	/** Opened by the stat sheet's keybind: the sheet shows at once, and closing it closes the hub too. */
 	private boolean sheetOnly;
+	/** The stat whose "one more point" preview was asked for last, and ticks since. */
+	private String previewAsked;
+	private int previewAge;
+	/** This frame's + buttons by stat (client game test). */
+	private final Map<String, MiniButton> plusButtons = new HashMap<>();
 
 	public HubScreen() {
 		super(Component.translatable("bloom.hub.title"));
@@ -482,6 +488,7 @@ public final class HubScreen extends Screen {
 
 	/** The stats window's widgets; also works out where its text goes. */
 	private void addStatsWindow(CategoryDefinition category) {
+		plusButtons.clear();
 		ProgressionService service = ClientBloomState.service();
 		BloomProfile profile = ClientBloomState.profile();
 		CategoryProgress progress = profile.category(category.id());
@@ -526,10 +533,12 @@ public final class HubScreen extends Screen {
 			int unspent = spendInvested ? progress.investedUnspent() : progress.naturalUnspent();
 			int inPool = (spendInvested ? progress.invested() : progress.natural()).getOrDefault(stat.id(), 0);
 
+			String statId = stat.id();
 			MiniButton plus = new MiniButton(x + 4, y + 1, MiniButton.Glyph.PLUS, Component.translatable("bloom.hub.stat.plus"),
-					shift -> send(allocate, stat.id(), shift ? Math.min(10, unspent) : 1));
+					shift -> send(allocate, statId, shift ? Math.min(10, unspent) : 1)).live(() -> plusTooltip(statId), () -> askPreview(statId));
 			plus.active = unspent > 0;
 			this.addRenderableWidget(plus);
+			plusButtons.put(statId, plus);
 
 			// Natural points can only be taken back out at level 100 (and not again after Bloom+); XP-bought ones always.
 			if (spendInvested ? ClientBloomState.config().allowStatRefund : service.canRefundStats(profile, category.id())) {
@@ -631,7 +640,10 @@ public final class HubScreen extends Screen {
 			sheetWindow.tick();
 		}
 
+		previewAge++;
+
 		if (builtVersion != ClientBloomState.version()) {
+			previewAsked = null; // the profile changed: ask again
 			this.rebuildWidgets();
 			return;
 		}
@@ -1068,6 +1080,14 @@ public final class HubScreen extends Screen {
 
 		boolean overClose = onDetailClose(mouseX, mouseY);
 		g.text(this.font, Component.literal("×"), x0 + w - 12, y0 + 5, overClose ? 0xFFFFFFFF : MUTED);
+
+		// The stat sheet link: the Stats button's picture in a little box.
+		boolean overLink = onDetailLink(mouseX, mouseY);
+		int lx = detailLinkX();
+		int ly = detailLinkY();
+		g.fill(lx, ly, lx + 16, ly + 16, overLink ? 0xFFF2C443 : 0xFF8A7656);
+		g.fill(lx + 1, ly + 1, lx + 15, ly + 15, overLink ? 0xFF6A5A44 : 0xFF3A3128);
+		g.blit(RenderPipelines.GUI_TEXTURED, STAT_SHEET_ICON, lx + 2, ly + 2, 0.0F, 0.0F, 12, 12, 64, 64, 64, 64, 0xFFFFFFFF);
 		g.fill(x0 + 8, y0 + DETAIL_HEADER - 4, x0 + w - 8, y0 + DETAIL_HEADER - 3, 0xFF8A6A2A);
 
 		int bx = x0 + 10;
@@ -1107,6 +1127,18 @@ public final class HubScreen extends Screen {
 		}
 
 		g.centeredText(this.font, Component.translatable("bloom.hub.detail.close"), x0 + w / 2, y0 + h - 11, 0xFF6E6250);
+
+		if (overLink) {
+			MutableComponent tip = Component.translatable("bloom.hub.detail.sheet").withStyle(ChatFormatting.GOLD);
+			String linked = StatSheetWindow.linkedSwitch(major.id());
+
+			if (linked != null) {
+				tip.append("\n").append(Component.translatable("bloom.hub.detail.sheet.switch", Component.translatable("bloom.sheet.toggle." + linked))
+						.withStyle(ChatFormatting.GRAY));
+			}
+
+			g.setTooltipForNextFrame(this.font, this.font.split(tip, 200), mouseX, mouseY);
+		}
 	}
 
 	/** A numbers row, "Label: value", with the label in gold. */
@@ -1137,6 +1169,41 @@ public final class HubScreen extends Screen {
 		return super.keyPressed(event);
 	}
 
+	/** Asks the server what one more point in a stat would change: when the mouse moves to another +, then once a second. */
+	private void askPreview(String statId) {
+		if ((statId.equals(previewAsked) && previewAge < 20) || !ClientPlayNetworking.canSend(SheetPayloads.Preview.TYPE)) {
+			return;
+		}
+
+		previewAsked = statId;
+		previewAge = 0;
+		ClientPlayNetworking.send(new SheetPayloads.Preview(statId));
+	}
+
+	/** The + button's tooltip, with what one more point would change (worked out by the server). */
+	private static Component plusTooltip(String statId) {
+		MutableComponent tip = Component.translatable("bloom.hub.stat.plus");
+
+		if (!ClientPlayNetworking.canSend(SheetPayloads.Preview.TYPE)) {
+			return tip;
+		}
+
+		List<Component> lines = ClientBloomState.preview(statId);
+		tip.append("\n").append(Component.translatable("bloom.sheet.preview.header").withStyle(ChatFormatting.GOLD));
+
+		if (lines == null) {
+			tip.append("\n").append(Component.translatable("bloom.sheet.ui.loading").withStyle(ChatFormatting.DARK_GRAY));
+		} else if (lines.isEmpty()) {
+			tip.append("\n").append(Component.translatable("bloom.sheet.preview.none").withStyle(ChatFormatting.DARK_GRAY));
+		} else {
+			for (Component line : lines) {
+				tip.append("\n").append(line);
+			}
+		}
+
+		return tip;
+	}
+
 	/** Whether the details window or the stat sheet covers the hub (nothing under it reacts then). */
 	private boolean overlayOpen() {
 		return detailMajor != null || sheetWindow != null;
@@ -1145,6 +1212,33 @@ public final class HubScreen extends Screen {
 	private void openSheet(CategoryDefinition category) {
 		sheetWindow = newSheet(category);
 		this.rebuildWidgets();
+	}
+
+	/** The details window's stat sheet link: closes it and opens the sheet showing that Major at work. */
+	private void showInSheet(MajorDefinition major) {
+		Optional<CategoryDefinition> category = ClientBloomState.definitions().category(major.categoryId());
+
+		if (category.isEmpty()) {
+			return;
+		}
+
+		detailMajor = null;
+		sheetWindow = newSheet(category.get());
+		sheetWindow.focus(major);
+		this.rebuildWidgets();
+	}
+
+	/** Where the details window's stat sheet link sits (left of the ×). */
+	private int detailLinkX() {
+		return detailX() + detailW() - 34;
+	}
+
+	private int detailLinkY() {
+		return detailY() + 4;
+	}
+
+	private boolean onDetailLink(double x, double y) {
+		return x >= detailLinkX() && x < detailLinkX() + 16 && y >= detailLinkY() && y < detailLinkY() + 16;
 	}
 
 	private static StatSheetWindow newSheet(CategoryDefinition category) {
@@ -1180,17 +1274,42 @@ public final class HubScreen extends Screen {
 
 	/** The open stat sheet: switches to the full breakdown, or turns a "show it at max" switch on (client game test). */
 	public void sheetForTests(boolean details, String toggle) {
+		sheetForTests(details, toggle, true);
+	}
+
+	/** As above, with the switch put on Max ({@code on}) or Off. */
+	public void sheetForTests(boolean details, String toggle, boolean on) {
 		if (sheetWindow != null) {
 			sheetWindow.showDetailsForTests(details);
 
 			if (toggle != null) {
-				sheetWindow.setToggleForTests(toggle, true);
+				sheetWindow.setToggleForTests(toggle, on);
 			}
 		}
 	}
 
 	public boolean sheetOpenForTests() {
 		return sheetWindow != null;
+	}
+
+	/** The details window's stat sheet link, as a click on it does (client game test). */
+	public void showInSheetForTests() {
+		if (detailMajor != null) {
+			showInSheet(detailMajor);
+		}
+	}
+
+	/** Pins a weapon in the open sheet, or picks one (client game test). */
+	public void sheetSlotForTests(int pin, int pick) {
+		if (sheetWindow != null) {
+			sheetWindow.pinForTests(pin);
+			sheetWindow.pickSlotForTests(pick);
+		}
+	}
+
+	/** The open sheet's weapon choice and switches, "slot=3 predator=1" (client game test). */
+	public String sheetStateForTests() {
+		return sheetWindow == null ? "closed" : "slot=" + sheetWindow.slotForTests() + " " + new java.util.TreeMap<>(sheetWindow.modesForTests());
 	}
 
 	/** Whether a details window is open (client game test). */
@@ -1743,7 +1862,7 @@ public final class HubScreen extends Screen {
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
 		if (sheetWindow != null) {
-			if (!sheetWindow.mouseClicked(event.x(), event.y())) {
+			if (!sheetWindow.mouseClicked(event.x(), event.y(), event.button() == InputConstants.MOUSE_BUTTON_RIGHT)) {
 				closeSheet();
 			}
 
@@ -1751,7 +1870,10 @@ public final class HubScreen extends Screen {
 		}
 
 		if (detailMajor != null) {
-			if (onDetailClose(event.x(), event.y()) || !inDetailWindow(event.x(), event.y())) {
+			if (onDetailLink(event.x(), event.y())) {
+				click();
+				showInSheet(detailMajor);
+			} else if (onDetailClose(event.x(), event.y()) || !inDetailWindow(event.x(), event.y())) {
 				closeDetails();
 			}
 
@@ -1902,6 +2024,12 @@ public final class HubScreen extends Screen {
 	}
 
 	/** Center of a Major's icon in GUI coordinates, or null if it isn't on this page or can't be clicked (client game test). */
+	/** The centre of a stat's + button, in GUI coordinates, or null (client game test). */
+	public int[] plusCenterForTests(String statId) {
+		MiniButton plus = plusButtons.get(statId);
+		return plus == null ? null : new int[] {plus.getX() + plus.getWidth() / 2, plus.getY() + plus.getHeight() / 2};
+	}
+
 	public int[] majorCenterForTests(String majorId) {
 		for (Node node : nodes) {
 			if (node.major() != null && node.major().id().equals(majorId)) {

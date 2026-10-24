@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.definition.CategoryDefinition;
@@ -564,6 +565,55 @@ public final class ProgressionService {
 		profile.setActiveBuild(1 - profile.activeBuild());
 		profile.setCounter(BUILD_SWITCH_KEY, now + config.buildSwitchCooldownTicks);
 		return ActionResult.success();
+	}
+
+	/**
+	 * Runs {@code look} with the other build in place for a moment (its Majors, natural points and stat switches),
+	 * then puts the build in use back exactly as it was. Only for read-only "what would it be" questions (the stat
+	 * sheet's build compare): nothing may be saved or sent while {@code look} runs. With no second build yet, the
+	 * other build is the same as this one.
+	 */
+	public <T> T withOtherBuild(BloomProfile profile, Supplier<T> look) {
+		Optional<com.freshorangeslices.bloomlevelup.player.SavedBuild> spare = profile.spareBuild();
+
+		if (spare.isEmpty()) {
+			return look.get();
+		}
+
+		com.freshorangeslices.bloomlevelup.player.SavedBuild inUse = com.freshorangeslices.bloomlevelup.player.SavedBuild.capture(profile);
+		spare.get().copy().applyTo(profile);
+
+		try {
+			return look.get();
+		} finally {
+			inUse.applyTo(profile);
+		}
+	}
+
+	/**
+	 * Runs {@code look} with one more natural point in {@code statId} (even past the points earned), then takes it
+	 * back. Read-only like {@link #withOtherBuild}: the stat sheet's "what would one more point do" preview.
+	 */
+	public <T> T withExtraPoint(BloomProfile profile, String statId, Supplier<T> look) {
+		Optional<StatDefinition> stat = definitions.stat(statId);
+
+		if (stat.isEmpty()) {
+			return look.get();
+		}
+
+		Map<String, Integer> natural = profile.category(stat.get().categoryId()).natural();
+		Integer was = natural.get(statId);
+		natural.put(statId, was == null ? 1 : was + 1);
+
+		try {
+			return look.get();
+		} finally {
+			if (was == null) {
+				natural.remove(statId);
+			} else {
+				natural.put(statId, was);
+			}
+		}
 	}
 
 	/** Whether stat points in this category can be taken back out right now (the hub shows its minus buttons). */

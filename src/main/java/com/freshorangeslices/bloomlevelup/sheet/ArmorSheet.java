@@ -25,6 +25,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -66,6 +69,24 @@ final class ArmorSheet {
 	private record Kind(String key, DamageSource source) {
 	}
 
+	/** The player's defences as the sheet sees them (the build shown, any point not spent yet included). */
+	private record Body(int armorValue, double armor, double toughness, double rawArmor, double maxHealth, double knockback) {
+		static Body of(Loadout loadout) {
+			AttributeInstance armor = loadout.instance(Attributes.ARMOR);
+			double raw = armor.getBaseValue();
+
+			for (AttributeModifier modifier : armor.getModifiers()) {
+				if (modifier.operation() == AttributeModifier.Operation.ADD_VALUE) {
+					raw += modifier.amount();
+				}
+			}
+
+			double value = armor.getValue();
+			return new Body(Mth.floor(value), value, loadout.value(Attributes.ARMOR_TOUGHNESS), raw, loadout.value(Attributes.MAX_HEALTH),
+					loadout.value(Attributes.KNOCKBACK_RESISTANCE));
+		}
+	}
+
 	/** What's left of a hit after each step. */
 	private record Steps(float start, float afterArmor, float afterResistance, float afterProtection, List<ArmorSkill.Layer> layers,
 			float afterLayers, float health) {
@@ -96,19 +117,20 @@ final class ArmorSheet {
 		List<Kind> kinds = kinds(level, player, zombie, profile, service);
 
 		// ---- summary
-		double armor = player.getAttributeValue(Attributes.ARMOR);
-		double toughness = player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-		sheet.summary(Sheet.plain(player.getArmorValue()), "armor.armor_points");
+		Body body = Body.of(new Loadout(player, player.getMainHandItem()));
+		double armor = body.armor();
+		double toughness = body.toughness();
+		sheet.summary(Sheet.plain(body.armorValue()), "armor.armor_points");
 
 		if (toughness > 0.0) {
 			sheet.summary(Sheet.plain(toughness), "armor.toughness");
 		}
 
-		sheet.summary(Sheet.plain(player.getMaxHealth()), "armor.max_health");
+		sheet.summary(Sheet.plain(body.maxHealth()), "armor.max_health");
 		sheet.summaryNote("armor.taken", Sheet.num(hit));
 
 		for (Kind kind : kinds) {
-			Steps steps = steps(level, player, kind.source(), hit, braced);
+			Steps steps = steps(level, player, body, kind.source(), hit, braced);
 			sheet.summary(taken(steps), "armor.kind." + kind.key());
 		}
 
@@ -135,7 +157,7 @@ final class ArmorSheet {
 		double defense = StatFormulas.defenseArmor(service.statValue(profile, ArmorIds.DEFENSE));
 		boolean titan = service.isMajorActive(profile, ArmorIds.TITAN_HIDE) && StatEffects.armorSlotsEmpty(player);
 		double defenseShown = titan ? (defense + 2.0) * 2.0 : defense;
-		double rawArmor = ArmorSkill.armorBeforeCap(player);
+		double rawArmor = body.rawArmor();
 		sheet.row(Sheet.plus(gear), "armor.gear");
 		sheet.row(Sheet.plus(defenseShown), titan ? "armor.defense_titan" : "armor.defense", Sheet.num(service.statValue(profile, ArmorIds.DEFENSE)));
 
@@ -161,7 +183,7 @@ final class ArmorSheet {
 
 		// ---- breakdown: one hit, step by step
 		Kind first = kinds.get(0);
-		Steps steps = steps(level, player, first.source(), hit, braced);
+		Steps steps = steps(level, player, body, first.source(), hit, braced);
 		sheet.heading("armor.h.steps", Sheet.num(hit));
 		sheet.row(Sheet.plain(steps.start()), "armor.step.hit");
 		stepRow(sheet, "armor.step.armor", steps.start(), steps.afterArmor());
@@ -184,7 +206,7 @@ final class ArmorSheet {
 		sheet.heading("armor.h.kinds", Sheet.num(hit));
 
 		for (Kind kind : kinds) {
-			Steps each = steps(level, player, kind.source(), hit, braced);
+			Steps each = steps(level, player, body, kind.source(), hit, braced);
 			sheet.row(taken(each), "armor.kind." + kind.key());
 		}
 
@@ -231,19 +253,19 @@ final class ArmorSheet {
 			sheet.row(Sheet.plus(protein), "armor.protein", Sheet.num(profile.counter(ArmorIds.PROTEIN_MEALS)));
 		}
 
-		double otherHealth = player.getMaxHealth() - baseHealth - vitality - protein;
+		double otherHealth = body.maxHealth() - baseHealth - vitality - protein;
 
 		if (Math.abs(otherHealth) > 0.005) {
 			sheet.row(Sheet.plus(otherHealth), "armor.other_health");
 		}
 
-		sheet.total(Sheet.plain(player.getMaxHealth()), "armor.max_health");
+		sheet.total(Sheet.plain(body.maxHealth()), "armor.max_health");
 
 		if (player.getAbsorptionAmount() > 0.0F) {
 			sheet.row(Sheet.plus(player.getAbsorptionAmount()), "armor.absorption");
 		}
 
-		sheet.row(Sheet.pct(Math.min(1.0, player.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE))), "armor.knockback");
+		sheet.row(Sheet.pct(Math.min(1.0, body.knockback())), "armor.knockback");
 		int durability = service.statValue(profile, ArmorIds.DURABILITY);
 		sheet.row(Sheet.pct(StatFormulas.armorDurabilitySaveChance(durability)), "armor.durability_armor", Sheet.num(durability));
 		sheet.row(Sheet.pct(StatFormulas.shieldDurabilitySaveChance(durability)), "armor.durability_shield");
@@ -302,12 +324,11 @@ final class ArmorSheet {
 	 * A hit of {@code amount} through vanilla's armor and magic steps (LivingEntity.getDamageAfterArmorAbsorb and
 	 * getDamageAfterMagicAbsorb, without their side effects), then the Armor category's layers and Absorb.
 	 */
-	private static Steps steps(ServerLevel level, ServerPlayer player, DamageSource source, float amount, boolean braced) {
+	private static Steps steps(ServerLevel level, ServerPlayer player, Body body, DamageSource source, float amount, boolean braced) {
 		float afterArmor = amount;
 
 		if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
-			afterArmor = CombatRules.getDamageAfterAbsorb(player, amount, source, player.getArmorValue(),
-					(float) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+			afterArmor = CombatRules.getDamageAfterAbsorb(player, amount, source, body.armorValue(), (float) body.toughness());
 		}
 
 		float afterResistance = afterArmor;
@@ -332,7 +353,7 @@ final class ArmorSheet {
 			}
 		}
 
-		List<ArmorSkill.Layer> layers = ArmorSkill.layers(player, source, braced);
+		List<ArmorSkill.Layer> layers = ArmorSkill.layers(player, source, braced, body.rawArmor());
 		double[] cuts = new double[layers.size()];
 
 		for (int i = 0; i < cuts.length; i++) {

@@ -10,6 +10,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -118,6 +119,29 @@ public class SheetGameTests {
 		throw new IllegalStateException("The sheet has no " + key + " line: " + view.summary());
 	}
 
+	/** The difference a compared summary line carries: "7  (+1)" reads as +1. */
+	private static double delta(SheetPayloads.View view, String key) {
+		for (SheetPayloads.Row row : view.summary()) {
+			if (isKey(row, "bloom.sheet." + key)) {
+				String text = row.value().getString();
+				int open = text.lastIndexOf('(');
+				int close = text.lastIndexOf(')');
+
+				if (open < 0 || close < open) {
+					throw new IllegalStateException("The " + key + " line shows no difference: " + text);
+				}
+
+				return Double.parseDouble(text.substring(open + 1, close).replace("%", "").replace(" s", "").trim());
+			}
+		}
+
+		throw new IllegalStateException("The sheet has no " + key + " line: " + view.summary());
+	}
+
+	private static boolean isKey(SheetPayloads.Row row, String key) {
+		return row.label().getContents() instanceof TranslatableContents contents && contents.getKey().equals(key);
+	}
+
 	private static void near(GameTestHelper helper, double expected, double actual, String what) {
 		helper.assertTrue(Math.abs(expected - actual) < EPS, what + ": expected " + expected + " but the sheet says " + actual);
 	}
@@ -216,6 +240,46 @@ public class SheetGameTests {
 		float before = player.getHealth();
 		helper.assertTrue(player.hurtServer(level, player.damageSources().mobAttack(zombie), 10.0F), "The hit lands");
 		near(helper, before - player.getHealth(), value(view, "armor.kind.mob"), "Health lost to a mob's hit of 10 (10 armor, Iron Skin)");
+		helper.succeed();
+	}
+
+	@GameTest
+	public void comparingWeaponsBuildsAndOneMorePoint(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
+		player.getInventory().setItem(1, new ItemStack(Items.DIAMOND_SWORD));
+		grant(player);
+		ProgressionService service = BloomServices.progression();
+		BloomProfile profile = BloomAttachments.profile(player);
+
+		// The diamond sword picked, the iron one (slot 0, in hand) pinned: the diamond's numbers, each with how far
+		// it is from the iron's.
+		double iron = value(sheet(player, SkillXp.COMBAT, 0, 0), "combat.hit");
+		double diamond = value(sheet(player, SkillXp.COMBAT, 1, 0), "combat.hit");
+		SheetPayloads.View pinned = StatSheets.build(player, new SheetPayloads.Request(1, SkillXp.COMBAT, 1, 0, List.of(), 0, false));
+		helper.assertTrue(diamond > iron, "A diamond sword hits harder than an iron one");
+		near(helper, diamond, value(pinned, "combat.hit"), "The picked sword's own number");
+		near(helper, diamond - iron, delta(pinned, "combat.hit"), "Its difference from the pinned one");
+		helper.assertTrue(isKey(pinned.summary().get(0), "bloom.sheet.ui.pin.note"), "A note says what it's compared with");
+
+		// Build 2 (in use) has 20 Power, Build 1 none: looking at Build 1 shows its numbers against Build 2's.
+		helper.assertTrue(service.switchBuild(profile, 0L).ok(), "The second build is unlocked");
+		points(player, CombatIds.POWER, 20);
+		double strong = value(sheet(player, SkillXp.COMBAT, -1, 0), "combat.hit");
+		SheetPayloads.View other = StatSheets.build(player,
+				new SheetPayloads.Request(1, SkillXp.COMBAT, -1, 0, List.of(), SheetPayloads.Request.NO_COMPARE, true));
+		double weak = value(other, "combat.hit");
+		near(helper, strong - 20 * StatEffects.POWER_PER_POINT, weak, "Build 1's hit, without the 20 Power");
+		near(helper, weak - strong, delta(other, "combat.hit"), "Its difference from the build in use");
+		helper.assertTrue(isKey(other.summary().get(0), "bloom.sheet.ui.build.note"), "A note says which build it is");
+		helper.assertTrue(profile.activeBuild() == 1 && service.statValue(profile, CombatIds.POWER) == 20, "Looking changed nothing");
+		near(helper, strong, value(sheet(player, SkillXp.COMBAT, -1, 0), "combat.hit"), "The build in use is back");
+
+		// One more point of Power: the preview says what it does, and the point isn't really spent.
+		List<Component> lines = StatSheets.preview(player, CombatIds.POWER);
+		helper.assertFalse(lines.isEmpty(), "One more Power point changes something");
+		helper.assertTrue(lines.stream().allMatch(line -> line.getString().contains("→")), "Each line reads before → after: " + lines);
+		helper.assertTrue(service.statValue(profile, CombatIds.POWER) == 20, "The previewed point isn't spent");
+		helper.assertTrue(StatSheets.preview(player, "bloomlevelup:no/such_stat").isEmpty(), "An unknown stat previews nothing");
 		helper.succeed();
 	}
 

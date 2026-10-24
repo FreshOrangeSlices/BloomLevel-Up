@@ -29,7 +29,7 @@ final class MiscSheet {
 		int speed = service.statValue(profile, MiscIds.SPEED);
 		double wisdomMultiplier = StatFormulas.wisdomMultiplier(wisdom);
 		double foodLasts = 1.0 / StatFormulas.enduranceExhaustionFactor(endurance);
-		double movement = player.getAttributeValue(Attributes.MOVEMENT_SPEED);
+		double movement = new Loadout(player, player.getMainHandItem()).value(Attributes.MOVEMENT_SPEED);
 
 		sheet.summary(Sheet.times(wisdomMultiplier), "misc.wisdom");
 		sheet.summary(Sheet.times(foodLasts), "misc.food_lasts");

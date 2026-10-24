@@ -17,10 +17,12 @@ jobs:
       - name: look inside the CurseForge jars
         run: |
           mkdir -p dump && cd dump && unzip -q -o "../out/Bloom Pack test.mrpack" 'overrides/mods/*' && cd ..
-          python3 pack/dump_jar.py dump/overrides/mods/world-bosses*.jar dump/overrides/mods/vaw*.jar
+          python3 pack/dump_jar.py dump/overrides/mods/world-bosses*.jar
       - uses: actions/setup-java@v5
         with:
           java-version: '25'
           distribution: 'microsoft'
+      - name: World Bosses entities and armor
+        run: python3 pack/dump_wb.py dump/overrides/mods/world-bosses*.jar
       - name: boot a server with the pack
         run: python3 pack/boot_server.py "out/Bloom Pack test server mods.zip" 26.3 0.19.5

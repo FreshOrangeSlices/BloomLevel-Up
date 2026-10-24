@@ -198,32 +198,6 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				&& hub.sheetOpenForTests() && !hub.detailsOpenForTests() && hub.sheetStateForTests().contains("predator=1"));
 		context.setScreen(() -> null);
 
-		// Hovering Power's + asks the server what one more point would change, and the tooltip shows it.
-		String power = "bloomlevelup:combat/power";
-		context.setScreen(HubScreen::new);
-		context.waitTicks(2);
-		double[] plus = context.computeOnClient(client -> {
-			if (!(client.gui.screen() instanceof HubScreen hub) || hub.plusCenterForTests(power) == null) {
-				return null;
-			}
-
-			int[] gui = hub.plusCenterForTests(power);
-			double sx = client.getWindow().getScreenWidth() / (double) client.getWindow().getGuiScaledWidth();
-			double sy = client.getWindow().getScreenHeight() / (double) client.getWindow().getGuiScaledHeight();
-			return new double[] {(gui[0] + 0.5) * sx, (gui[1] + 0.5) * sy};
-		});
-
-		if (plus != null) {
-			context.getInput().setCursorPos(plus[0], plus[1]);
-		}
-
-		check(context, "hovering Power's + previews one more point", client -> ClientBloomState.preview(power) != null
-				&& !ClientBloomState.preview(power).isEmpty());
-		context.waitTicks(3);
-		context.takeScreenshot("bloom_hub_point_preview");
-		context.getInput().setCursorPos(2, 2);
-		context.setScreen(() -> null);
-
 		context.runOnClient(client -> ClientBloomState.selectCategory("bloomlevelup:armor"));
 		context.setScreen(HubScreen::new);
 		context.waitTicks(2);

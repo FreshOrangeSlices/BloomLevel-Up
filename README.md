@@ -81,9 +81,9 @@ Controls. In the hub:
   sheet remembers your picks per tab, and **Open Stat Sheet** (Controls, unbound) opens it directly.
   **Right-click a weapon or tool** in its row to pin it (blue outline): every line then shows how the one
   you pick differs from it, green when better, red when worse; right-click again to unpin. Once you have a
-  second build, the **Build** chip shows the other build's numbers against the one in use. Hover a stat's
-  **+** to see what one more point would change, and a Major's details window has a bar-chart link that
-  opens the sheet showing it at work (its switch on Max, a weapon of its tree picked).
+  second build, the **Build** chip shows the other build's numbers against the one in use. A Major's
+  details window has a bar-chart button that opens the sheet showing it at work (its switch on Max, a
+  weapon of its tree picked).
 - After level 100, **Mode: XP** switches the stat rows (green) to XP Investment points; there the
   icon switches only a stat's invested points. The Armor tab shows your real armor total.
 - **Spend XP** levels the category with vanilla XP (every category also levels from playing now).

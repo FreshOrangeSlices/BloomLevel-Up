@@ -590,32 +590,6 @@ public final class ProgressionService {
 		}
 	}
 
-	/**
-	 * Runs {@code look} with one more natural point in {@code statId} (even past the points earned), then takes it
-	 * back. Read-only like {@link #withOtherBuild}: the stat sheet's "what would one more point do" preview.
-	 */
-	public <T> T withExtraPoint(BloomProfile profile, String statId, Supplier<T> look) {
-		Optional<StatDefinition> stat = definitions.stat(statId);
-
-		if (stat.isEmpty()) {
-			return look.get();
-		}
-
-		Map<String, Integer> natural = profile.category(stat.get().categoryId()).natural();
-		Integer was = natural.get(statId);
-		natural.put(statId, was == null ? 1 : was + 1);
-
-		try {
-			return look.get();
-		} finally {
-			if (was == null) {
-				natural.remove(statId);
-			} else {
-				natural.put(statId, was);
-			}
-		}
-	}
-
 	/** Whether stat points in this category can be taken back out right now (the hub shows its minus buttons). */
 	public boolean canRefundStats(BloomProfile profile, String categoryId) {
 		return config.allowStatRefund && (!config.statRefundAtCapOnly || profile.category(categoryId).level() >= config.levelCap);

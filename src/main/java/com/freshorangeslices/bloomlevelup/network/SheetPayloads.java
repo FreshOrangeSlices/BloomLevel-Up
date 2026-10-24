@@ -147,45 +147,6 @@ public final class SheetPayloads {
 		}
 	}
 
-	/** Client → server: what one more point in {@code stat} would change (hovering a stat's + in the hub). */
-	public record Preview(String stat) implements CustomPacketPayload {
-		public static final Type<Preview> TYPE = new Type<>(BloomLevelUp.id("sheet_preview"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, Preview> CODEC = CustomPacketPayload.codec(Preview::write, Preview::new);
-
-		private Preview(RegistryFriendlyByteBuf buf) {
-			this(buf.readUtf(BloomPayloads.MAX_ID));
-		}
-
-		private void write(RegistryFriendlyByteBuf buf) {
-			buf.writeUtf(stat, BloomPayloads.MAX_ID);
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
-	}
-
-	/** Server → client: the lines that one more point in {@code stat} changes ("Hit: 12 → 12.06"). */
-	public record PreviewResult(String stat, List<Component> lines) implements CustomPacketPayload {
-		public static final Type<PreviewResult> TYPE = new Type<>(BloomLevelUp.id("sheet_preview_result"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, PreviewResult> CODEC = CustomPacketPayload.codec(PreviewResult::write, PreviewResult::new);
-
-		private PreviewResult(RegistryFriendlyByteBuf buf) {
-			this(buf.readUtf(BloomPayloads.MAX_ID), readList(buf, MAX_TOGGLES, ComponentSerialization.STREAM_CODEC::decode));
-		}
-
-		private void write(RegistryFriendlyByteBuf buf) {
-			buf.writeUtf(stat, BloomPayloads.MAX_ID);
-			writeList(buf, lines, MAX_TOGGLES, (b, c) -> ComponentSerialization.STREAM_CODEC.encode(b, c));
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
-	}
-
 	private static <T> List<T> readList(RegistryFriendlyByteBuf buf, int max, Function<RegistryFriendlyByteBuf, T> reader) {
 		int size = buf.readVarInt();
 

@@ -2,10 +2,8 @@ package com.freshorangeslices.bloomlevelup.sheet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -25,7 +23,6 @@ import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
-import com.freshorangeslices.bloomlevelup.definition.StatDefinition;
 import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
 import com.freshorangeslices.bloomlevelup.network.SheetPayloads.Row;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
@@ -36,13 +33,11 @@ import com.freshorangeslices.bloomlevelup.skill.SkillXp;
  * The stat sheet (the hub's Stats button): the client asks for a tab, an inventory slot, a target and how each
  * switch is set; the server works everything out from the real game rules and answers with finished lines.
  * The client never computes a number itself. It can also ask to compare against a pinned item or the other
- * build (each line then carries the difference), and what one more point in a stat would change.
+ * build (each line then carries the difference).
  */
 public final class StatSheets {
-	/** Requests a player may send per second (the hub asks once a second, and again on every click or hover). */
+	/** Requests a player may send per second (the hub asks once a second, and again on every click). */
 	private static final int PER_SECOND = 20;
-	/** Lines a stat-point preview shows at most. */
-	private static final int PREVIEW_LINES = 6;
 	/** Lines where a smaller number is the better one (health lost, waiting times). */
 	private static final Set<String> LOWER_IS_BETTER = Set.of("bloom.sheet.armor.step.health", "bloom.sheet.combat.cooldown",
 			"bloom.sheet.combat.load_time", "bloom.sheet.combat.draw_time", "bloom.sheet.utility.break_time");
@@ -54,17 +49,10 @@ public final class StatSheets {
 
 	public static void init() {
 		PayloadTypeRegistry.serverboundPlay().register(SheetPayloads.Request.TYPE, SheetPayloads.Request.CODEC);
-		PayloadTypeRegistry.serverboundPlay().register(SheetPayloads.Preview.TYPE, SheetPayloads.Preview.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(SheetPayloads.View.TYPE, SheetPayloads.View.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(SheetPayloads.PreviewResult.TYPE, SheetPayloads.PreviewResult.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(SheetPayloads.Request.TYPE, (payload, context) -> {
 			if (allowed(context.player()) && ServerPlayNetworking.canSend(context.player(), SheetPayloads.View.TYPE)) {
 				ServerPlayNetworking.send(context.player(), build(context.player(), payload));
-			}
-		});
-		ServerPlayNetworking.registerGlobalReceiver(SheetPayloads.Preview.TYPE, (payload, context) -> {
-			if (allowed(context.player()) && ServerPlayNetworking.canSend(context.player(), SheetPayloads.PreviewResult.TYPE)) {
-				ServerPlayNetworking.send(context.player(), new SheetPayloads.PreviewResult(payload.stat(), preview(context.player(), payload.stat())));
 			}
 		});
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> BUDGET.remove(listener.player.getUUID()));
@@ -147,49 +135,6 @@ public final class StatSheets {
 		}
 
 		return sheet;
-	}
-
-	/**
-	 * What one more point in a stat would change, as "Hit: 12 → 12.06" lines (summary lines first, at most
-	 * {@link #PREVIEW_LINES}), worked out with the held item and every switch on Live. Empty if nothing moves.
-	 */
-	public static List<Component> preview(ServerPlayer player, String statId) {
-		Optional<StatDefinition> stat = BloomServices.definitions().stat(statId);
-
-		if (stat.isEmpty()) {
-			return List.of();
-		}
-
-		String category = stat.get().categoryId();
-		ItemStack held = player.getMainHandItem();
-		Sheet before = compute(player, category, held, -1, List.of());
-		Sheet after = BloomServices.progression().withExtraPoint(BloomAttachments.profile(player), statId,
-				() -> compute(player, category, held, -1, List.of()));
-		List<Component> lines = new ArrayList<>();
-		Set<String> shown = new HashSet<>();
-		changes(after.summary, before.summary, lines, shown);
-		changes(after.details, before.details, lines, shown);
-		return lines.size() > PREVIEW_LINES ? List.copyOf(lines.subList(0, PREVIEW_LINES)) : lines;
-	}
-
-	/** Adds "label: before → after" for each line whose number moved (once per line name). */
-	private static void changes(List<Row> after, List<Row> before, List<Component> lines, Set<String> shown) {
-		List<Row> matched = pair(after, before);
-
-		for (int i = 0; i < after.size(); i++) {
-			Row row = after.get(i);
-			Row was = matched.get(i);
-			Double now = number(row);
-			Double then = was == null ? null : number(was);
-
-			if (now == null || then == null || Math.abs(now - then) < 0.005 || !shown.add(shape(row.label()))) {
-				continue;
-			}
-
-			boolean better = lowerIsBetter(row, now) ? now < then : now > then;
-			lines.add(row.label().copy().append(": ").append(Sheet.colored(Sheet.num(then) + suffix(was) + " → " + Sheet.num(now) + suffix(row),
-					better ? Sheet.GOOD : Sheet.BAD)));
-		}
 	}
 
 	/** {@code rows}, each number that differs from its line in {@code baseline} followed by "(+0.5)": green if better. */

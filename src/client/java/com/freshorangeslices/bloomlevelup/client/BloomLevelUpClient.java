@@ -82,7 +82,6 @@ public final class BloomLevelUpClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.NameTag.TYPE, (payload, context) -> NameTags.accept(payload));
 
 		ClientPlayNetworking.registerGlobalReceiver(SheetPayloads.View.TYPE, (payload, context) -> ClientBloomState.setSheet(payload));
-		ClientPlayNetworking.registerGlobalReceiver(SheetPayloads.PreviewResult.TYPE, (payload, context) -> ClientBloomState.setPreview(payload));
 
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
 			ClientBloomState.clear();

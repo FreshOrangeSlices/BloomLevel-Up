@@ -10,7 +10,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -244,7 +243,7 @@ public class SheetGameTests {
 	}
 
 	@GameTest
-	public void comparingWeaponsBuildsAndOneMorePoint(GameTestHelper helper) {
+	public void comparingWeaponsAndBuilds(GameTestHelper helper) {
 		ServerPlayer player = player(helper, new ItemStack(Items.IRON_SWORD));
 		player.getInventory().setItem(1, new ItemStack(Items.DIAMOND_SWORD));
 		grant(player);
@@ -273,13 +272,6 @@ public class SheetGameTests {
 		helper.assertTrue(isKey(other.summary().get(0), "bloom.sheet.ui.build.note"), "A note says which build it is");
 		helper.assertTrue(profile.activeBuild() == 1 && service.statValue(profile, CombatIds.POWER) == 20, "Looking changed nothing");
 		near(helper, strong, value(sheet(player, SkillXp.COMBAT, -1, 0), "combat.hit"), "The build in use is back");
-
-		// One more point of Power: the preview says what it does, and the point isn't really spent.
-		List<Component> lines = StatSheets.preview(player, CombatIds.POWER);
-		helper.assertFalse(lines.isEmpty(), "One more Power point changes something");
-		helper.assertTrue(lines.stream().allMatch(line -> line.getString().contains("→")), "Each line reads before → after: " + lines);
-		helper.assertTrue(service.statValue(profile, CombatIds.POWER) == 20, "The previewed point isn't spent");
-		helper.assertTrue(StatSheets.preview(player, "bloomlevelup:no/such_stat").isEmpty(), "An unknown stat previews nothing");
 		helper.succeed();
 	}
 

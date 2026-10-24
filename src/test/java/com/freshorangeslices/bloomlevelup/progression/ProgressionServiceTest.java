@@ -165,7 +165,7 @@ class ProgressionServiceTest {
 	}
 
 	@Test
-	void lookingAtTheOtherBuildOrAnExtraPointChangesNothing() {
+	void lookingAtTheOtherBuildChangesNothing() {
 		levelTo(ARMOR, 100);
 		levelTo(UTILITY, 20);
 		service.purchaseMajor(profile, IRON_SKIN);
@@ -184,11 +184,6 @@ class ProgressionServiceTest {
 		assertEquals(0, service.statValue(profile, VITALITY));
 		assertEquals(5, service.statValue(profile, EFFICIENCY));
 		assertEquals(1, profile.activeBuild());
-
-		assertEquals(Integer.valueOf(6), service.withExtraPoint(profile, EFFICIENCY, () -> service.statValue(profile, EFFICIENCY)));
-		assertEquals(Integer.valueOf(1), service.withExtraPoint(profile, VITALITY, () -> service.statValue(profile, VITALITY)));
-		assertEquals(5, service.statValue(profile, EFFICIENCY));
-		assertFalse(profile.category(ARMOR).natural().containsKey(VITALITY), "No stray zero left behind");
 	}
 
 	@Test

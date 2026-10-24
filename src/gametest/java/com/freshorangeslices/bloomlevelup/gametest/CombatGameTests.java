@@ -174,9 +174,10 @@ public class CombatGameTests {
 		low.setHealth(10.0F);
 		low.hurtServer(level, hit(swordsman), 5.0F);
 		helper.assertTrue(low.isAlive() && low.getHealth() == 5.0F, "The hit that takes it under 30% doesn't execute");
-		low.invulnerableTime = 0;
-		low.hurtServer(level, hit(swordsman), 1.0F);
-		helper.assertFalse(low.isAlive(), "Already under 30%: the next hit executes");
+		LivingEntity under = zombie(helper, 1, 3);
+		under.setHealth(5.0F);
+		under.hurtServer(level, hit(swordsman), 1.0F);
+		helper.assertFalse(under.isAlive(), "Already under 30%: the next hit executes");
 
 		ServerPlayer axeman = player(helper, new ItemStack(Items.IRON_AXE));
 		grant(axeman, CombatIds.EXECUTE);

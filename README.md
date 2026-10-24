@@ -53,15 +53,18 @@ client and server can be checked at a glance; they should always run the same bu
 Every build also makes the **Bloom Pack**: the same run → download **bloom-pack**. Inside:
 
 - **Bloom Pack build.N.mrpack**: the whole pack for players. In the Modrinth App, drag the file onto the app
-  (or add an instance from a file); it downloads Minecraft 26.3, Fabric and every mod. Fresh Animations and the
-  Complementary shader are switched on for the first launch. Give the instance about 6 GB of memory.
-- **Bloom Pack build.N server mods.zip**: the server's mods. Unzip into a Fabric 26.3 server (it already holds a
-  `mods` folder).
+  (or add an instance from a file); it downloads Minecraft 26.3, Fabric and every mod. Fresh Animations (with its
+  player extension) and the Complementary shader are switched on for the first launch. Give the instance about
+  6 GB of memory.
+- **Bloom Pack build.N server.zip**: a ready-to-run server. On a PC: install Java 25, unzip, set `eula=true` in
+  eula.txt, run start.bat (or start.sh); its README has the rest. On a host such as Shockbyte: make a Fabric 26.3
+  server and upload the zip's `mods` and `world` folders (`world/datapacks` holds Cave Horror).
 
-The list is `pack/pack.json` (the "Start with" mods). Modrinth mods are linked and their required mods are added
-automatically; Bloom and World Bosses (CurseForge only) are packed inside, so the file is for sharing with
-friends, not for publishing. CI checks that every mod's required mods are in the pack, then boots a real server
-with the server mods.
+The list is `pack/pack.json`. Modrinth mods are linked and their required mods are added automatically; Bloom,
+World Bosses and Villagers at Work / after Work (CurseForge only) are packed inside, so the file is for sharing
+with friends, not for publishing. CI checks that every mod's required mods are in the pack, starts the server zip
+the way a friend would, and the client-test workflow starts a real client with the pack's whole client side
+(job `client-test-pack`).
 
 ## Trying it in game
 

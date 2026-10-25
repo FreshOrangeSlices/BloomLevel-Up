@@ -157,10 +157,26 @@ jobs:
       - name: client game test with the pack
         run: |
           set -o pipefail
-          sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 xvfb
+          sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 libegl1 libegl-mesa0 mesa-utils xvfb
           chmod +x ./gradlew
-          # OpenGL (Sodium, Iris) needs a 24-bit screen: see build.gradle
-          xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log
+          # Sodium and Iris switch the game to OpenGL (see build.gradle). Xvfb's GLX has no visual the game accepts,
+          # so first without X at all (SDL's offscreen video driver, OpenGL through EGL), then on Xvfb through EGL.
+          if SDL_VIDEO_DRIVER=offscreen ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log; then
+            exit 0
+          fi
+          echo "BLOOMTEST pack: offscreen failed, trying Xvfb + EGL" | tee -a client-pack.log
+          SDL_VIDEO_FORCE_EGL=1 xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee -a client-pack.log
+      - name: what OpenGL the runner has
+        if: always()
+        run: |
+          {
+            xvfb-run -a -s "-screen 0 1920x1080x24" glxinfo -B 2>&1 | head -25
+            echo "-- GLX visuals"
+            xvfb-run -a -s "-screen 0 1920x1080x24" glxinfo 2>&1 | grep -A12 "GLX Visuals" | head -14
+            echo "-- EGL"
+            eglinfo -B 2>&1 | head -30 || true
+          } > gl.txt 2>&1
+          python3 -c "t=open('gl.txt').read().replace('%','%25').replace(chr(10),'%0A'); print('::notice title=client-pack-gl::'+t[:3900])"
       - name: report
         if: always()
         run: |

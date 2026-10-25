@@ -200,6 +200,25 @@ jobs:
               start = lines.index(loading[0])
               mods = [l for l in lines[start + 1:start + 400] if l.startswith('\t- ')]
               print(f"::notice title=client-pack-mods::{esc(loading[0] + chr(10) + ' '.join(m.strip()[2:] for m in mods)[:3800])}")
+          # Bug hunting: every distinct warning and error, grouped by the mod that logged it (numbers and ids
+          # folded so repeats count once), most frequent first.
+          import collections
+          raw = open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()
+          groups = collections.defaultdict(collections.Counter)
+          for line in raw:
+              m = re.match(r'\[[\d:]+\] \[([^\]]+)/(WARN|ERROR)\] \(([^)]+)\) (.*)', line)
+              if not m:
+                  continue
+              text = re.sub(r'\d+(\.\d+)?', '#', m.group(4))[:180]
+              groups[(m.group(3), m.group(2))][text] += 1
+          report = []
+          for (logger, level), counter in sorted(groups.items(), key=lambda kv: -sum(kv[1].values())):
+              report.append(f"[{level}] {logger}: {sum(counter.values())} lines, {len(counter)} kinds")
+              for text, n in counter.most_common(6):
+                  report.append(f"    {n}x {text}")
+          text = '\n'.join(report) or 'no warnings or errors'
+          for n, i in enumerate(range(0, min(len(text), 3900 * 5), 3900)):
+              print(f"::notice title=client-pack-health-{n:02d}::{esc(text[i:i + 3900])}")
           PY
       - name: capture screenshots and logs
         if: always()

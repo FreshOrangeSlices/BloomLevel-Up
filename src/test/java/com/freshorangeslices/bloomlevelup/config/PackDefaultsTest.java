@@ -25,18 +25,19 @@ class PackDefaultsTest {
 
 	@Test
 	void switchesThePacksOnAndKeepsEverythingElse() {
-		List<String> options = PackDefaults.lines("version:4660\nfov:0.5\nresourcePacks:[\"vanilla\",\"fabric\",\"file/Mine.zip\"]\nguiScale:2");
+		List<String> options = PackDefaults.lines("version:4660\nfov:0.5\nresourcePacks:[\"vanilla\",\"fabric\",\"file/Mine.zip\"]\nguiScale:2\nincompatibleResourcePacks:[]");
 		List<String> out = PackDefaults.mergeOptions(options, List.of("file/FA.zip", "file/FA+Player.zip"));
 		assertTrue(out.contains("fov:0.5") && out.contains("guiScale:2") && out.contains("version:4660"), "other settings stay");
 		assertTrue(out.contains("resourcePacks:[\"vanilla\",\"file/FA.zip\",\"file/FA+Player.zip\",\"file/Mine.zip\"]"),
 				"pack's packs in order above vanilla, the player's own on top, no 'fabric': " + out);
-		assertTrue(out.contains("incompatibleResourcePacks:[\"file/FA.zip\",\"file/FA+Player.zip\"]"), "accepted even if flagged: " + out);
+		// Not added to the "accepted though incompatible" list: the game skips a pack that's there but fits.
+		assertTrue(out.contains("incompatibleResourcePacks:[]"), "incompatible list untouched: " + out);
 	}
 
 	@Test
 	void writesAnOptionsFileFromNothing() {
 		List<String> out = PackDefaults.mergeOptions(new ArrayList<>(), List.of("file/FA.zip"));
-		assertEquals(List.of("resourcePacks:[\"vanilla\",\"file/FA.zip\"]", "incompatibleResourcePacks:[\"file/FA.zip\"]"), out);
+		assertEquals(List.of("resourcePacks:[\"vanilla\",\"file/FA.zip\"]"), out);
 	}
 
 	@Test

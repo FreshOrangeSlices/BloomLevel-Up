@@ -6,9 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -60,8 +58,9 @@ public final class PackDefaults {
 
 	/**
 	 * options.txt with the pack's resource packs on, in order, above vanilla; packs the player added themselves stay
-	 * on, above the pack's. The pack's packs are also marked as accepted even if the game thinks they're for another
-	 * version (it would otherwise switch them off again). The old "fabric" entry is dropped (26.3 has no such pack).
+	 * on, above the pack's. The old "fabric" entry is dropped (26.3 has no such pack). The list of packs accepted
+	 * despite a version mismatch is left alone: the game skips a pack for one launch if it's on that list but fits
+	 * the version after all.
 	 */
 	public static List<String> mergeOptions(List<String> lines, List<String> packs) {
 		List<String> out = new ArrayList<>(lines);
@@ -76,10 +75,7 @@ public final class PackDefaults {
 			}
 		}
 
-		Set<String> accepted = new LinkedHashSet<>(jsonList(value(out, "incompatibleResourcePacks")));
-		accepted.addAll(packs);
 		put(out, "resourcePacks", toJson(on));
-		put(out, "incompatibleResourcePacks", toJson(new ArrayList<>(accepted)));
 		return out;
 	}
 

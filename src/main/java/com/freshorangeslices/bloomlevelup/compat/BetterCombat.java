@@ -178,7 +178,17 @@ public final class BetterCombat {
 
 	/** A weapon's Better Combat combo, or an empty list when Better Combat doesn't handle it. */
 	public static List<Swing> swings(ItemStack weapon) {
-		return INSTALLED ? BetterCombatBridge.swings(weapon) : List.of();
+		return INSTALLED ? BetterCombatBridge.swings(null, weapon) : List.of();
+	}
+
+	/** As above, as this player swings it (Batter Up! gives maces and spears the sword's swings). */
+	public static List<Swing> swings(net.minecraft.world.entity.player.Player player, ItemStack weapon) {
+		return INSTALLED ? BetterCombatBridge.swings(player, weapon) : List.of();
+	}
+
+	/** The animation of the swing this player's combo is on (for tests), or null without Better Combat. */
+	public static String attackAnimation(net.minecraft.world.entity.player.Player player, int combo) {
+		return INSTALLED ? BetterCombatBridge.attackAnimation(player, combo) : null;
 	}
 
 	/** A charged swing's landing under Better Combat: a ring of dust, a small blast and a heavy thud. */

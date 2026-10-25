@@ -530,7 +530,7 @@ final class CombatSheet {
 		boolean shock = CombatSkill.has(player, CombatIds.LIGHTNING_SHOCK, Family.TRIDENT, weapon);
 		boolean overkill = CombatSkill.active(player, CombatIds.OVERKILL);
 		// Better Combat runs this weapon's swings: its combo and its rule for hitting several mobs replace the sweep.
-		List<BetterCombat.Swing> combo = BetterCombat.swings(weapon);
+		List<BetterCombat.Swing> combo = BetterCombat.swings(player, weapon);
 
 		if (!combo.isEmpty()) {
 			betterCombatRows(player, level, loadout, weapon, sheet, mob, swing, attack, enchant, hit, armor, toughness, penetration, combo);

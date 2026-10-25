@@ -181,6 +181,53 @@ public class BetterCombatGameTests {
 		helper.succeed();
 	}
 
+	/**
+	 * Batter Up! gives maces the sword's combo and spears (held in two hands) the claymore's; their own speed stays.
+	 * Without it they keep their own swings, and a falling mace keeps its slam.
+	 */
+	@GameTest
+	public void batterUpSwingsMacesAndSpearsLikeSwords(GameTestHelper helper) {
+		if (!BetterCombat.installed()) {
+			helper.assertTrue(BetterCombat.attackAnimation(player(helper, new ItemStack(Items.MACE)), 0) == null, "No swings without Better Combat");
+			helper.succeed();
+			return;
+		}
+
+		List<String> sword = combo(player(helper, new ItemStack(Items.DIAMOND_SWORD)));
+		String maceOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.MACE), CombatIds.FULL_SWEEP), 0);
+		ServerPlayer batter = player(helper, new ItemStack(Items.MACE), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP);
+		helper.assertTrue(maceOwn != null && !sword.contains(maceOwn), "A mace has its own swing: " + maceOwn + " vs " + sword);
+		helper.assertTrue(combo(batter).equals(sword), "Batter Up!: the mace swings the sword's combo " + sword + ", got " + combo(batter));
+
+		batter.setOnGround(false);
+		batter.fallDistance = 3;
+		helper.assertTrue(maceOwn.equals(BetterCombat.attackAnimation(batter, 0)), "Falling, the mace keeps its own slam (the smash)");
+		batter.setOnGround(true);
+		batter.fallDistance = 0;
+
+		String spearOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.IRON_SPEAR), CombatIds.FULL_SWEEP), 0);
+		String spearBatter = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.IRON_SPEAR), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP), 0);
+
+		if (spearOwn != null) {
+			helper.assertTrue(!spearOwn.equals(spearBatter) && spearBatter != null && spearBatter.startsWith("bettercombat:two_handed_slash"),
+					"Batter Up!: a two-handed spear swings the claymore's combo (" + spearOwn + " -> " + spearBatter + ")");
+		}
+
+		helper.assertTrue(BetterCombat.swings(batter, batter.getMainHandItem()).size() == sword.size(),
+				"The stat sheet shows the mace's sword combo too");
+		helper.succeed();
+	}
+
+	private static List<String> combo(ServerPlayer player) {
+		List<String> out = new ArrayList<>();
+
+		for (int i = 0; i < 3; i++) {
+			out.add(BetterCombat.attackAnimation(player, i));
+		}
+
+		return out;
+	}
+
 	@GameTest
 	public void predatorBuildsOnAnyMob(GameTestHelper helper) {
 		if (!BetterCombat.installed()) {

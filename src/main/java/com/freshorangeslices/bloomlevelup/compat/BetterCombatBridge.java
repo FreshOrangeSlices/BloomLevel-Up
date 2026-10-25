@@ -29,8 +29,8 @@ final class BetterCombatBridge {
 				config.reworked_sweeping_extra_target_count, config.allow_vanilla_sweeping);
 	}
 
-	static List<BetterCombat.Swing> swings(ItemStack weapon) {
-		WeaponAttributes attributes = weapon.isEmpty() ? null : WeaponRegistry.getAttributes(weapon);
+	static List<BetterCombat.Swing> swings(net.minecraft.world.entity.player.Player player, ItemStack weapon) {
+		WeaponAttributes attributes = weapon.isEmpty() ? null : BetterCombatMoves.forPlayer(player, weapon, WeaponRegistry.getAttributes(weapon));
 
 		if (attributes == null || attributes.attacks() == null) {
 			return List.of();
@@ -48,5 +48,10 @@ final class BetterCombatBridge {
 		}
 
 		return out;
+	}
+
+	static String attackAnimation(net.minecraft.world.entity.player.Player player, int combo) {
+		net.bettercombat.api.AttackHand hand = net.bettercombat.logic.PlayerAttackHelper.getCurrentAttack(player, combo);
+		return hand == null || hand.attack() == null ? null : hand.attack().animation();
 	}
 }

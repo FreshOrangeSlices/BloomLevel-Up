@@ -273,6 +273,9 @@ def main():
     shader = presets.get("shader")
     if shader in by_slug:
         client_overrides["config/iris.properties"] = (f"enableShaders=true\nshaderPack={os.path.basename(by_slug[shader]['path'])}\n").encode()
+    # Other client config files, as given (a JSON object is written as JSON). A mod fills in the settings left out.
+    for path, content in presets.get("files", {}).items():
+        client_overrides[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
 
     # ---- the .mrpack
     index = {

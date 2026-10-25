@@ -145,6 +145,10 @@ jobs:
         include:
           - variant: full
             without: ""
+          - variant: no-vaw
+            without: villagers-at-work,villagers-after-work
+          - variant: no-homesteads
+            without: homesteads
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -265,7 +269,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full]
+        variant: [full, no-vaw, no-homesteads]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -276,9 +280,11 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: a villager, a snowy farmer villager, a sheep
+      - name: villagers from the front (noon)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_villagers_front 12
+      - name: villagers from the side (noon)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_villagers_side 12
+      - name: villagers at night
+        run: python3 .github/scripts/emit_screenshot.py shots pack_villagers_night 12
+      - name: sheep, cow, wandering trader
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
-      - name: zombie, skeleton, creeper
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12
-      - name: pig, iron golem, chicken
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_3 12

@@ -233,6 +233,8 @@ def main():
     overrides[f"mods/{bloom_name}"] = open(bloom_jar, "rb").read()
     sides = {f"mods/{bloom_name}": {"client": "required", "server": "required"}}
     for external in spec.get("external", []):
+        if external["name"].lower().replace(" ", "-") in without:
+            continue
         data = None
         for url in external["urls"]:
             try:

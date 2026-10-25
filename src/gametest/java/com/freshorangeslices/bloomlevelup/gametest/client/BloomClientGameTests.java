@@ -164,41 +164,47 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		}
 	}
 
+	/** One close-up: the time of day, where each mob stands (relative to the camera) and the command that makes it. */
+	private record Shot(String name, String time, String[] spots, String[] commands) {
+	}
+
 	/**
-	 * Close-ups of the mobs whose looks the pack changes (Fresh Animations), three at a time,
-	 * standing still and facing the camera: pack_mobs_1 to pack_mobs_3. At night with night vision, so the undead
-	 * don't burn.
+	 * Close-ups of the mobs whose looks the pack changes: villagers from the front, from the side and at night (two
+	 * each: a plain one that keeps its AI but can't walk, so it looks at the camera, and a snowy farmer standing
+	 * still), then Fresh Animations' mobs three at a time. Night vision keeps the night shots bright.
 	 */
 	private void mobGallery(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
-		singleplayer.getServer().runCommand("time set midnight");
 		singleplayer.getServer().runCommand("effect give @a night_vision infinite 0 true");
 		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
-		// The villager keeps its AI (so it turns to look at the camera, eyes and all) but can't walk away.
-		String[][] groups = {
-			{"summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}",
-				"summon villager ~ ~ ~ {NoAI:1b,Rotation:[180f,0f],VillagerData:{type:\"minecraft:snow\",profession:\"minecraft:farmer\",level:2}}",
-				"summon sheep"},
-			{"summon zombie", "summon skeleton", "summon creeper"},
-			{"summon pig", "summon iron_golem", "summon chicken"},
+		String looking = "summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}";
+		String farmer = "summon villager ~ ~ ~ {NoAI:1b,Rotation:[%sf,0f],VillagerData:{type:\"minecraft:snow\",profession:\"minecraft:farmer\",level:2}}";
+		String plainStill = "summon villager ~ ~ ~ {NoAI:1b,Rotation:[%sf,0f]}";
+		String[] two = {"^0.9 ^ ^2.4", "^-0.9 ^ ^2.4"};
+		String[] three = {"^1.6 ^ ^3", "^ ^ ^3", "^-1.6 ^ ^3"};
+		Shot[] shots = {
+			new Shot("pack_villagers_front", "noon", two, new String[] {looking, farmer.formatted("180")}),
+			new Shot("pack_villagers_side", "noon", two, new String[] {plainStill.formatted("90"), farmer.formatted("90")}),
+			new Shot("pack_villagers_night", "midnight", two, new String[] {looking, farmer.formatted("180")}),
+			new Shot("pack_mobs_1", "midnight", three, new String[] {"summon sheep", "summon cow", "summon wandering_trader"}),
+			new Shot("pack_mobs_2", "midnight", three, new String[] {"summon zombie", "summon skeleton", "summon creeper"}),
+			new Shot("pack_mobs_3", "midnight", three, new String[] {"summon pig", "summon iron_golem", "summon chicken"}),
 		};
-		String[] spots = {"^1.6 ^ ^3", "^ ^ ^3", "^-1.6 ^ ^3"};
 
-		for (int group = 0; group < groups.length; group++) {
+		for (Shot shot : shots) {
+			singleplayer.getServer().runCommand("time set " + shot.time());
 			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
 
-			for (int i = 0; i < 3; i++) {
-				String command = groups[group][i];
+			for (int i = 0; i < shot.commands().length; i++) {
+				String command = shot.commands()[i];
 				boolean plain = command.startsWith("summon") && !command.contains("{");
-				singleplayer.getServer().runCommand("execute as @a at @s positioned " + spots[i] + " run " + command
+				singleplayer.getServer().runCommand("execute as @a at @s positioned " + shot.spots()[i] + " run " + command
 						+ (plain ? " ~ ~ ~ {NoAI:1b,Rotation:[180f,0f]}" : ""));
 			}
 
-			// Everything but the villager stands still, facing the camera.
-			singleplayer.getServer().runCommand("execute as @a at @s run execute as @e[type=!player,type=!villager,distance=..6] run data merge entity @s {NoAI:1b,Rotation:[180f,0f]}");
 			// What each villager is (type and job), in the log next to the picture.
 			singleplayer.getServer().runCommand("execute as @e[type=villager] run data get entity @s VillagerData");
 			context.waitTicks(60);
-			context.takeScreenshot("pack_mobs_" + (group + 1));
+			context.takeScreenshot(shot.name());
 		}
 	}
 

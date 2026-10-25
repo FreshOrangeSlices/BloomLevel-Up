@@ -44,8 +44,7 @@
     "fresh-animations-details",
     "fresh-animations-objects",
     "fresh-animations-spiders",
-    "fresh-animations-creepers",
-    "just-expressions"
+    "fresh-animations-creepers"
   ],
   "external": [
     {
@@ -99,14 +98,16 @@
   ],
   "client_presets": {
     "resource_packs": [
+      "id:continuity:default",
+      "id:continuity:glass_pane_culling_fix",
       "fresh-animations",
       "fresh-animations-details",
-      "fresh-animations-objects",
-      "fresh-animations-spiders",
+      "fa-player-extension",
       "fresh-animations-creepers",
-      "just-expressions",
-      "fa-player-extension"
+      "fresh-animations-spiders",
+      "fresh-animations-objects"
     ],
-    "shader": "complementary-reimagined"
+    "shader": "complementary-reimagined",
+    "_resource_packs": "Bottom to top, above vanilla's Default. Modrinth slugs, or id:<pack id> for packs built into a mod (Continuity's two)."
   }
 }

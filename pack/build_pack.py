@@ -272,7 +272,8 @@ def main():
     client_overrides = {}
     pack_defaults = {}
     presets = spec.get("client_presets", {})
-    packs = [f"file/{os.path.basename(by_slug[s]['path'])}" for s in presets.get("resource_packs", []) if s in by_slug]
+    packs = [s[3:] if s.startswith("id:") else f"file/{os.path.basename(by_slug[s]['path'])}"
+             for s in presets.get("resource_packs", []) if s.startswith("id:") or s in by_slug]
     shader = presets.get("shader")
     lines = ["# Bloom Pack: switched on by Bloom Level-Up before the game starts, once per change of this file."]
     if packs:

@@ -99,6 +99,9 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			failures.add("the pack's resource packs weren't switched on at the first launch");
 		}
 
+		context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: every resource pack there is: {}",
+				client.getResourcePackRepository().getAvailableIds()));
+
 		if (!"true".equals(shaderInUse())) {
 			failures.add("the pack's shader wasn't on at the first launch");
 		}

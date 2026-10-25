@@ -175,8 +175,9 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
 		// The villager keeps its AI (so it turns to look at the camera, eyes and all) but can't walk away.
 		String[][] groups = {
-			{"summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}", "summon sheep",
-				"summon cow"},
+			{"summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}",
+				"summon villager ~ ~ ~ {NoAI:1b,Rotation:[180f,0f],VillagerData:{type:\"minecraft:snow\",profession:\"minecraft:farmer\",level:2}}",
+				"summon sheep"},
 			{"summon zombie", "summon skeleton", "summon creeper"},
 			{"summon pig", "summon iron_golem", "summon chicken"},
 		};
@@ -194,6 +195,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 			// Everything but the villager stands still, facing the camera.
 			singleplayer.getServer().runCommand("execute as @a at @s run execute as @e[type=!player,type=!villager,distance=..6] run data merge entity @s {NoAI:1b,Rotation:[180f,0f]}");
+			// What each villager is (type and job), in the log next to the picture.
+			singleplayer.getServer().runCommand("execute as @e[type=villager] run data get entity @s VillagerData");
 			context.waitTicks(60);
 			context.takeScreenshot("pack_mobs_" + (group + 1));
 		}

@@ -190,7 +190,7 @@ jobs:
           for n, begin in enumerate(starts[:2]):
               finish = starts[n + 1] if n + 1 < len(starts) else len(lines)
               part = lines[begin:finish]
-              keep = [l for l in part if re.search(r'BLOOMTEST|ERROR|FATAL|Exception|Caused by|AssertionError|Timeout|timed out|failed|Failed|What went wrong|\tat net\.fabricmc|\tat knot//com\.freshorangeslices', l)]
+              keep = [l for l in part if re.search(r'BLOOMTEST|has the following entity data|ERROR|FATAL|Exception|Caused by|AssertionError|Timeout|timed out|failed|Failed|What went wrong|\tat net\.fabricmc|\tat knot//com\.freshorangeslices', l)]
               text = '\n'.join(dict.fromkeys(keep[-120:])) + '\n-- last lines --\n' + '\n'.join(part[-40:])
               chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:6]
               for m, chunk in enumerate(chunks):
@@ -276,7 +276,7 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: villager, sheep, cow
+      - name: a villager, a snowy farmer villager, a sheep
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
       - name: zombie, skeleton, creeper
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12

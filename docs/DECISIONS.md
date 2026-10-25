@@ -450,8 +450,8 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Topic | Decision | Where to change |
 |---|---|---|
 | Better Animations Collection | Out of the pack. It re-models most of the mobs Fresh Animations does (villager, sheep, cow, chicken, pig, creeper, zombie, skeleton...), and with both, Fresh Animations' models load but don't animate: mobs with their eyes shut, some mobs looking vanilla. The CI close-ups with and without it showed the difference (sheep with eyes, snowy villagers in their coats) | `pack/pack.json` |
-| Villager Guards' look | Kept as it is: the datapack makes each guard an invisible zombie, skeleton or piglin wearing iron and chainmail armor and a villager-face player head, so the see-through limbs (chainmail with nothing inside) and the flat face are its design, not a pack bug. Guard Villagers (a mod with real guard models) has no 26.3 build yet | `pack/pack.json` |
-| Mob close-ups in CI | The pack launch test photographs villager, sheep and cow; zombie, skeleton and creeper; two guards and a chicken (pack_mobs_1-3), and can compare variants of the pack (`without:` in the client-test matrix, `build_pack.py --without`) | `client-test.yml`, `BloomClientGameTests.mobGallery` |
+| Villager Guards | Out of the pack (FreshOrangeSlices' call). The datapack makes each guard an invisible zombie, skeleton or piglin wearing iron and chainmail armor and a villager-face player head, so the see-through limbs and flat face are its design. Guard Villagers (a mod with real guard models) is the candidate once it has a 26.3 build. Guards already in a world stay as invisible armored mobs: `/kill @e[name="Villager Guard"]` | `pack/pack.json` |
+| Mob close-ups in CI | The pack launch test photographs villager, sheep and cow; zombie, skeleton and creeper; pig, iron golem and chicken (pack_mobs_1-3), and can compare variants of the pack (`without:` in the client-test matrix, `build_pack.py --without`) | `client-test.yml`, `BloomClientGameTests.mobGallery` |
 
 ## Build numbers
 

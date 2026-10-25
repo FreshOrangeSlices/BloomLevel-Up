@@ -165,7 +165,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 	}
 
 	/**
-	 * Close-ups of the mobs whose looks the pack changes (Fresh Animations, Villager Guards), three at a time,
+	 * Close-ups of the mobs whose looks the pack changes (Fresh Animations), three at a time,
 	 * standing still and facing the camera: pack_mobs_1 to pack_mobs_3. At night with night vision, so the undead
 	 * don't burn.
 	 */
@@ -178,7 +178,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			{"summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}", "summon sheep",
 				"summon cow"},
 			{"summon zombie", "summon skeleton", "summon creeper"},
-			{"function villager_guards:guard/spear/summon", "function villager_guards:guard/archer/summon", "summon chicken"},
+			{"summon pig", "summon iron_golem", "summon chicken"},
 		};
 		String[] spots = {"^1.6 ^ ^3", "^ ^ ^3", "^-1.6 ^ ^3"};
 
@@ -192,7 +192,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 						+ (plain ? " ~ ~ ~ {NoAI:1b,Rotation:[180f,0f]}" : ""));
 			}
 
-			// The guards come from a datapack function: stop them and turn them round too.
+			// Everything but the villager stands still, facing the camera.
 			singleplayer.getServer().runCommand("execute as @a at @s run execute as @e[type=!player,type=!villager,distance=..6] run data merge entity @s {NoAI:1b,Rotation:[180f,0f]}");
 			context.waitTicks(60);
 			context.takeScreenshot("pack_mobs_" + (group + 1));

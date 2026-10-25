@@ -208,7 +208,9 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			for (int i = 0; i < shot.commands().length; i++) {
 				String command = shot.commands()[i];
 				boolean plain = command.startsWith("summon") && !command.contains("{");
-				singleplayer.getServer().runCommand("execute as @a at @s positioned " + shot.spots()[i] + " run " + command
+				// "rotated ~ 0": the camera looks slightly down, and ^ ^ ^3 along that line ends half a block under
+				// the floor (that's what sank the earlier close-ups).
+				singleplayer.getServer().runCommand("execute as @a at @s rotated ~ 0 positioned " + shot.spots()[i] + " run " + command
 						+ (plain ? " ~ ~ ~ {NoAI:1b,Rotation:[180f,0f]}" : ""));
 			}
 

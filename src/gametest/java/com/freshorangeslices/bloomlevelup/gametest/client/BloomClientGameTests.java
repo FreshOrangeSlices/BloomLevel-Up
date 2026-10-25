@@ -155,10 +155,44 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot("pack_hub");
 			context.setScreen(() -> null);
 
+			mobGallery(context, singleplayer);
+
 			context.runOnClient(client -> setShaders(true));
 			context.waitTicks(100);
 			context.takeScreenshot("pack_shader");
 			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
+		}
+	}
+
+	/**
+	 * Close-ups of the mobs whose looks the pack changes (Fresh Animations, Villager Guards), three at a time,
+	 * standing still and facing the camera: pack_mobs_1 to pack_mobs_3. At night with night vision, so the undead
+	 * don't burn.
+	 */
+	private void mobGallery(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("time set midnight");
+		singleplayer.getServer().runCommand("effect give @a night_vision infinite 0 true");
+		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
+		String[][] groups = {
+			{"summon villager", "summon sheep", "summon cow"},
+			{"summon zombie", "summon skeleton", "summon creeper"},
+			{"function villager_guards:guard/spear/summon", "function villager_guards:guard/archer/summon", "summon chicken"},
+		};
+		String[] spots = {"^1.6 ^ ^3", "^ ^ ^3", "^-1.6 ^ ^3"};
+
+		for (int group = 0; group < groups.length; group++) {
+			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
+
+			for (int i = 0; i < 3; i++) {
+				String command = groups[group][i];
+				singleplayer.getServer().runCommand("execute as @a at @s positioned " + spots[i] + " run " + command
+						+ (command.startsWith("summon") ? " ~ ~ ~ {NoAI:1b,Rotation:[180f,0f]}" : ""));
+			}
+
+			// The guards come from a datapack function: stop them and turn them round too.
+			singleplayer.getServer().runCommand("execute as @a at @s run execute as @e[type=!player,distance=..6] run data merge entity @s {NoAI:1b,Rotation:[180f,0f]}");
+			context.waitTicks(60);
+			context.takeScreenshot("pack_mobs_" + (group + 1));
 		}
 	}
 

@@ -1,6 +1,6 @@
 """Builds the Bloom Pack for sharing with friends: a Modrinth pack file (.mrpack) and a ready-to-run server folder.
 
-Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--client-run <dir>]
+Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--client-run <dir>] [--without <slug,slug>]
 
 Reads pack/pack.json. Modrinth mods are linked (newest 26.3 Fabric build, plus every required dependency); Bloom
 and the external (CurseForge-only) files are packed inside, which is fine for a private share but not for
@@ -13,6 +13,7 @@ folders are uploaded.
 
 --client-run fills a dev client's run folder with the pack's client side (mods except Fabric API and Bloom, which
 the dev run has already, plus resource packs, shaders and the first-launch settings) for the pack launch test.
+--without leaves those Modrinth projects out (to test the pack without a suspect).
 """
 import hashlib
 import io
@@ -159,6 +160,11 @@ def main():
         at = args.index("--client-run")
         client_run = args[at + 1]
         del args[at:at + 2]
+    without = set()
+    if "--without" in args:
+        at = args.index("--without")
+        without = {slug.strip() for slug in args[at + 1].split(",") if slug.strip()}
+        del args[at:at + 2]
     bloom_jar, pack_version, out = args[0], args[1], args[2]
     os.makedirs(out, exist_ok=True)
     spec = json.load(open(os.path.join(os.path.dirname(__file__), "pack.json")))
@@ -168,6 +174,11 @@ def main():
     # Server-only content mods (structures) go on the client too, so singleplayer worlds have them; their
     # dependencies with them.
     singleplayer_too = set(spec.get("singleplayer_too", []))
+    spec["modrinth"] = [slug for slug in spec["modrinth"] if slug not in without]
+    presets = spec.setdefault("client_presets", {})
+    presets["resource_packs"] = [slug for slug in presets.get("resource_packs", []) if slug not in without]
+    if without:
+        notes.append("left out: " + ", ".join(sorted(without)))
     queue = [(slug, None, slug in singleplayer_too) for slug in spec["modrinth"]]
     seen = set()
 

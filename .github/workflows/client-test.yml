@@ -134,8 +134,17 @@ jobs:
   # The whole Bloom Pack on a real client: the pack's client mods, Fresh Animations and its player extension, and the
   # Complementary shader, as the .mrpack installs them (Bloom itself comes from this commit). It has to start, make a
   # normal world and open the hub; the pack-screenshots job prints what it looked like.
+  # Variants: "full" is the pack as shipped; the others leave a suspect out, to compare the mob close-ups.
   client-test-pack:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: full
+            without: ""
+          - variant: no-bac
+            without: better-animations-collection
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -153,7 +162,8 @@ jobs:
           mkdir -p fake && cd fake
           printf '{"schemaVersion":1,"id":"bloomlevelup","version":"0.0.0","environment":"*","depends":{}}' > fabric.mod.json
           zip -q ../bloomlevelup-stand-in.jar fabric.mod.json && cd ..
-          python3 pack/build_pack.py bloomlevelup-stand-in.jar test pack-out --client-run build/run/clientGameTestPack
+          WITHOUT="${{ matrix.without }}"
+          python3 pack/build_pack.py bloomlevelup-stand-in.jar test pack-out --client-run build/run/clientGameTestPack ${WITHOUT:+--without "$WITHOUT"}
       - name: client game test with the pack
         run: |
           set -o pipefail
@@ -195,7 +205,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: client-pack-screenshots
+          name: client-pack-screenshots-${{ matrix.variant }}
           path: |
             build/run/clientGameTestPack/screenshots
             build/run/clientGameTestPack/logs/latest.log
@@ -213,7 +223,7 @@ jobs:
       - name: fetch screenshots
         uses: actions/download-artifact@v4
         with:
-          name: client-pack-screenshots
+          name: client-pack-screenshots-full
           path: shots
       - name: pillow
         run: pip install --quiet pillow
@@ -236,7 +246,7 @@ jobs:
       - name: fetch screenshots
         uses: actions/download-artifact@v4
         with:
-          name: client-pack-screenshots
+          name: client-pack-screenshots-full
           path: shots
       - name: pillow
         run: pip install --quiet pillow
@@ -246,3 +256,29 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots pack_hub 12
       - name: the shader
         run: python3 .github/scripts/emit_screenshot.py shots pack_shader 12
+
+  # The mob close-ups from each variant, side by side in the checks.
+  mob-gallery:
+    needs: client-test-pack
+    if: always()
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [full, no-bac]
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: client-pack-screenshots-${{ matrix.variant }}
+          path: shots
+      - name: pillow
+        run: pip install --quiet pillow
+      - name: villager, sheep, cow
+        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
+      - name: zombie, skeleton, creeper
+        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12
+      - name: two Villager Guards and a chicken
+        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_3 12

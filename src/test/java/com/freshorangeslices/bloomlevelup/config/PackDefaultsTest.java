@@ -59,6 +59,15 @@ class PackDefaultsTest {
 	}
 
 	@Test
+	void anOptionsFileFromNothingGetsTheVersionSoKeysByNameLoad() {
+		assertEquals(List.of("version:4671", "fov:0.5"), PackDefaults.withVersion(PackDefaults.lines("fov:0.5"), 4671));
+		assertEquals(List.of("version:100", "fov:0.5"), PackDefaults.withVersion(PackDefaults.lines("version:100\nfov:0.5"), 4671), "the game's own version stays");
+		assertEquals(List.of("fov:0.5"), PackDefaults.withVersion(PackDefaults.lines("fov:0.5"), null));
+		assertEquals(Integer.valueOf(4671), PackDefaults.dataVersion("{\n  \"id\": \"26.3\",\n  \"world_version\": 4671,\n  \"series_id\": \"main\"}"));
+		assertNull(PackDefaults.dataVersion("{}"));
+	}
+
+	@Test
 	void readsEscapedJson() {
 		assertEquals(List.of("file/A&B.zip", "q\"uote"), PackDefaults.jsonList("[\"file/A\\u0026B.zip\",\"q\\\"uote\"]"));
 		assertEquals(List.of(), PackDefaults.jsonList("not json"));
@@ -80,7 +89,8 @@ class PackDefaultsTest {
 				StandardCharsets.UTF_8);
 		List<String> logs = new ArrayList<>();
 
-		assertTrue(PackDefaults.apply(config, options, logs::add));
+		assertTrue(PackDefaults.apply(config, options, 4671, logs::add));
+		assertTrue(Files.readString(options).startsWith("version:4671\n"), "a version line first, so the game doesn't run the old key fixes");
 		assertTrue(Files.readString(options).contains("\"file/FA.zip\""));
 		assertTrue(Files.readString(options).contains("key_iris.keybind.reload:key.keyboard.unknown"));
 		assertTrue(Files.readString(config.resolve("iris.properties")).contains("shaderPack=C.zip"));
@@ -94,6 +104,12 @@ class PackDefaultsTest {
 		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip|file/New.zip\n", StandardCharsets.UTF_8);
 		assertTrue(PackDefaults.apply(config, options, logs::add));
 		assertTrue(Files.readString(options).contains("\"file/FA.zip\",\"file/New.zip\""));
+
+		// No data version and no options.txt yet: the packs go on, the keys wait (a key by name would fail the file).
+		Files.delete(options);
+		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip\nkeys=iris.keybind.reload:key.keyboard.unknown\n", StandardCharsets.UTF_8);
+		assertTrue(PackDefaults.apply(config, options, logs::add));
+		assertTrue(Files.readString(options).contains("\"file/FA.zip\"") && !Files.readString(options).contains("key_"), Files.readString(options));
 
 		// Outside the pack (no defaults file): nothing.
 		assertFalse(PackDefaults.apply(dir.resolve("nothing"), options, logs::add));

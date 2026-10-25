@@ -126,11 +126,21 @@ public final class PackDefaults {
 		return out;
 	}
 
+	/** As below, without knowing the game's data version (key bindings then only go into an options.txt the game wrote). */
+	public static boolean apply(Path configDir, Path optionsFile, Consumer<String> log) throws IOException {
+		return apply(configDir, optionsFile, null, log);
+	}
+
 	/**
 	 * Applies the defaults in {@code configDir} to {@code optionsFile} and Iris's config, unless this exact version
 	 * of them was applied before. Returns whether it changed anything.
+	 *
+	 * <p>{@code dataVersion} (the game's, from its version.json) goes on an options.txt Bloom writes from nothing: an
+	 * options.txt without a version line is read as one from long ago and run through every old fix, and the 1.13 one
+	 * reads each {@code key_} value as a number, so a key written by name fails the whole file. Without it, keys are
+	 * only set in an options.txt that already has its version.
 	 */
-	public static boolean apply(Path configDir, Path optionsFile, Consumer<String> log) throws IOException {
+	public static boolean apply(Path configDir, Path optionsFile, Integer dataVersion, Consumer<String> log) throws IOException {
 		Path file = configDir.resolve(FILE);
 
 		if (!Files.isRegularFile(file)) {
@@ -147,9 +157,18 @@ public final class PackDefaults {
 
 		Defaults defaults = parse(raw);
 
-		if (!defaults.resourcePacks().isEmpty() || !defaults.keys().isEmpty()) {
-			List<String> options = Files.isRegularFile(optionsFile) ? Files.readAllLines(optionsFile, StandardCharsets.UTF_8) : List.of();
-			Files.write(optionsFile, mergeOptions(options, defaults.resourcePacks(), defaults.keys()), StandardCharsets.UTF_8);
+		Map<String, String> keys = defaults.keys();
+
+		if (!defaults.resourcePacks().isEmpty() || !keys.isEmpty()) {
+			List<String> options = withVersion(Files.isRegularFile(optionsFile) ? Files.readAllLines(optionsFile, StandardCharsets.UTF_8)
+					: List.of(), dataVersion);
+
+			if (!keys.isEmpty() && value(options, "version") == null) {
+				log.accept("Bloom Pack defaults: the game's data version is unknown, so the key bindings are left as they are");
+				keys = Map.of();
+			}
+
+			Files.write(optionsFile, mergeOptions(options, defaults.resourcePacks(), keys), StandardCharsets.UTF_8);
 		}
 
 		if (defaults.shaderPack() != null) {
@@ -162,8 +181,25 @@ public final class PackDefaults {
 		Files.writeString(marker, stamp + "\n", StandardCharsets.UTF_8);
 		log.accept("Bloom Pack defaults applied: " + defaults.resourcePacks().size() + " resource packs on"
 				+ (defaults.shaderPack() == null ? "" : ", shader " + defaults.shaderPack())
-				+ (defaults.keys().isEmpty() ? "" : ", keys " + new java.util.TreeMap<>(defaults.keys())));
+				+ (keys.isEmpty() ? "" : ", keys " + new java.util.TreeMap<>(keys)));
 		return true;
+	}
+
+	/** options.txt lines with a {@code version:} line first if they have none and the data version is known. */
+	public static List<String> withVersion(List<String> lines, Integer dataVersion) {
+		List<String> out = new ArrayList<>(lines);
+
+		if (dataVersion != null && value(out, "version") == null) {
+			out.add(0, "version:" + dataVersion);
+		}
+
+		return out;
+	}
+
+	/** The data version in a version.json ({@code "world_version": 4671}), or null. */
+	public static Integer dataVersion(String versionJson) {
+		java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\"world_version\"\\s*:\\s*(\\d+)").matcher(versionJson == null ? "" : versionJson);
+		return matcher.find() ? Integer.valueOf(matcher.group(1)) : null;
 	}
 
 	// ------------------------------------------------------------------ options.txt lines and JSON string lists

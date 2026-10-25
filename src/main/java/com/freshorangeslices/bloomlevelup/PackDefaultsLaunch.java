@@ -26,9 +26,30 @@ public final class PackDefaultsLaunch implements PreLaunchEntrypoint {
 		}
 
 		try {
-			PackDefaults.apply(loader.getConfigDir(), loader.getGameDir().resolve("options.txt"), LOGGER::info);
+			PackDefaults.apply(loader.getConfigDir(), loader.getGameDir().resolve("options.txt"), dataVersion(), LOGGER::info);
 		} catch (Exception e) {
-			LOGGER.warn("Couldn't apply the Bloom Pack's resource pack and shader defaults", e);
+			LOGGER.warn("Couldn't apply the Bloom Pack's resource pack, shader and key defaults", e);
 		}
+	}
+
+	/** The game's data version, from the version.json in its jar (read as a file: no game classes yet), or null. */
+	public static Integer dataVersion() {
+		try {
+			java.util.Enumeration<java.net.URL> found = PackDefaultsLaunch.class.getClassLoader().getResources("version.json");
+
+			while (found.hasMoreElements()) {
+				try (java.io.InputStream in = found.nextElement().openStream()) {
+					Integer version = PackDefaults.dataVersion(new String(in.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8));
+
+					if (version != null) {
+						return version;
+					}
+				}
+			}
+		} catch (java.io.IOException e) {
+			LOGGER.warn("Couldn't read the game's version.json", e);
+		}
+
+		return null;
 	}
 }

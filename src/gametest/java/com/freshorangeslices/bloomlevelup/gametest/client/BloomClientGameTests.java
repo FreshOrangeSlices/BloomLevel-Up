@@ -222,7 +222,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				shared.add(key + " " + names);
 			}
 		});
-		BloomLevelUp.LOGGER.info("BLOOMTEST pack: keys shared by more than one binding: {}", shared.isEmpty() ? "none" : shared);
+		BloomLevelUp.LOGGER.info("BLOOMTEST pack: keys shared by more than one binding: {}; game data version for options.txt: {}",
+				shared.isEmpty() ? "none" : shared, com.freshorangeslices.bloomlevelup.PackDefaultsLaunch.dataVersion());
 	}
 
 	/**

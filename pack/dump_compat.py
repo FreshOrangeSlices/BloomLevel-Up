@@ -17,14 +17,18 @@ for url in ("https://mediafilez.forgecdn.net/files/8939/569/vaw-human-era.zip", 
         print("could not get", url, e)
 if data:
     z = zipfile.ZipFile(io.BytesIO(data))
-    note("compat-files", "\n".join(f"{i.filename} {i.file_size}" for i in z.infolist()))
+    if False: note("compat-files", "\n".join(f"{i.filename} {i.file_size}" for i in z.infolist()))
     for n in z.namelist():
-        if n.endswith((".jem", ".jpm", ".txt", ".md", ".mcmeta")) and not n.lower().startswith("license"):
+        if n.endswith("villager.jem"):
             text = z.read(n).decode("utf-8", "replace")
             hits = []
             for m in re.finditer(r"vaw[^\"]*\"\s*:\s*\"[^\"]*\"|\"[^\"]*\"\s*:\s*\"[^\"]*vaw[^\"]*\"", text):
                 hits.append(m.group(0))
-            body = "\n".join(hits) if hits and n.endswith((".jem", ".jpm")) else text[:3000]
+            if n.endswith(".jem"):
+                spots = [m.start() for m in re.finditer(r"vaw|attachments|animations", text)]
+                body = "\n...\n".join(text[max(0, i - 200):i + 700] for i in spots[:8])
+            else:
+                body = text[:3000]
             note("compat-" + n.split("/")[-1][:30], f"{n} ({len(text)} chars)\n" + body)
 
 mr = zipfile.ZipFile(sys.argv[1])
@@ -49,5 +53,10 @@ for n in mr.namelist():
 index = json.loads(mr.read("modrinth.index.json"))
 fa = next(f for f in index["files"] if "FreshAnimations" in f["path"])
 z = zipfile.ZipFile(io.BytesIO(get(fa["downloads"][0])))
-terms = next(n for n in z.namelist() if "terms" in n.lower())
-note("fa-terms", z.read(terms).decode("utf-8", "replace"))
+note("fa-villager-files", "\n".join(n for n in z.namelist() if re.search(r"villager|wandering", n)))
+v = next(n for n in z.namelist() if n.endswith("/villager.jem"))
+text = z.read(v).decode("utf-8", "replace")
+parts = re.findall(r'"(?:part|id)"\s*:\s*"([^"]+)"', text)
+note("fa-villager-parts", ", ".join(parts))
+anims = re.findall(r'"([a-z_0-9]+\.[a-z]{2,3})"\s*:\s*"', text)
+note("fa-villager-anim-targets", ", ".join(sorted(set(anims)))[:3800])

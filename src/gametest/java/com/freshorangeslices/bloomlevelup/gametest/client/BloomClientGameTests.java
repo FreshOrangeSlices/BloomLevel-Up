@@ -125,9 +125,12 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			singleplayer.getServer().runCommand("time set noon");
 			singleplayer.getServer().runCommand("weather clear");
 			singleplayer.getServer().runCommand("execute as @a at @s run tp @s ~ ~ ~ 0 10");
-			// A clear patch of grass in front, whatever the spawn looks like, so the mobs show.
-			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-4 ~ ~1 ~4 ~4 ~9 air");
-			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-4 ~-1 ~1 ~4 ~-1 ~9 grass_block");
+			// A clear, flat patch of grass in front, whatever the spawn looks like, so the mobs show. It reaches under
+			// the camera too, so the player stands on the same floor as the mobs (spawning on snow layers left the
+			// mobs a layer too low).
+			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-4 ~ ~-2 ~4 ~4 ~9 air");
+			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-4 ~-1 ~-2 ~4 ~-1 ~9 grass_block");
+			context.waitTicks(10);
 			singleplayer.getServer().runCommand("execute as @a at @s run summon villager ^-1 ^ ^4 {NoAI:1b,Rotation:[180f,0f]}");
 			singleplayer.getServer().runCommand("execute as @a at @s run summon zombie ^1.5 ^ ^5 {NoAI:1b,Rotation:[160f,0f]}");
 			singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:iron_sword");

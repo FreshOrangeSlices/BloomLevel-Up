@@ -179,7 +179,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		String looking = "summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}";
 		String farmer = "summon villager ~ ~ ~ {NoAI:1b,Rotation:[%sf,0f],VillagerData:{type:\"minecraft:snow\",profession:\"minecraft:farmer\",level:2}}";
 		String plainStill = "summon villager ~ ~ ~ {NoAI:1b,Rotation:[%sf,0f]}";
-		String[] two = {"^0.9 ^ ^2.4", "^-0.9 ^ ^2.4"};
+		String[] two = {"^1.1 ^ ^4", "^-1.1 ^ ^4"};
 		String[] three = {"^1.6 ^ ^3", "^ ^ ^3", "^-1.6 ^ ^3"};
 		Shot[] shots = {
 			new Shot("pack_villagers_front", "noon", two, new String[] {looking, farmer.formatted("180")}),
@@ -203,6 +203,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 			// What each villager is (type and job), in the log next to the picture.
 			singleplayer.getServer().runCommand("execute as @e[type=villager] run data get entity @s VillagerData");
+			singleplayer.getServer().runCommand("execute as @e[type=villager] run data get entity @s Age");
+			singleplayer.getServer().runCommand("execute as @e[type=villager] run data get entity @s Pos");
 			context.waitTicks(60);
 			context.takeScreenshot(shot.name());
 		}

@@ -223,5 +223,26 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots pack_world 12
       - name: the player (Fresh Animations' player extension)
         run: python3 .github/scripts/emit_screenshot.py shots pack_player 12
+      - name: the title screen
+        run: python3 .github/scripts/emit_screenshot.py shots pack_title 12
+
+  pack-screenshots-2:
+    needs: client-test-pack
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: client-pack-screenshots
+          path: shots
+      - name: pillow
+        run: pip install --quiet pillow
       - name: a Better Combat swing
         run: python3 .github/scripts/emit_screenshot.py shots pack_swing 12
+      - name: the hub
+        run: python3 .github/scripts/emit_screenshot.py shots pack_hub 12
+      - name: the shader
+        run: python3 .github/scripts/emit_screenshot.py shots pack_shader 12

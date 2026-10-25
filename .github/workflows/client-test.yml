@@ -145,10 +145,6 @@ jobs:
         include:
           - variant: full
             without: ""
-          - variant: no-vaw
-            without: villagers-at-work,villagers-after-work
-          - variant: no-homesteads
-            without: homesteads
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -269,7 +265,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full, no-vaw, no-homesteads]
+        variant: [full]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

@@ -217,8 +217,26 @@ jobs:
               for text, n in counter.most_common(6):
                   report.append(f"    {n}x {text}")
           text = '\n'.join(report) or 'no warnings or errors'
-          for n, i in enumerate(range(0, min(len(text), 3900 * 5), 3900)):
+          for n, i in enumerate(range(0, min(len(text), 3900 * 4), 3900)):
               print(f"::notice title=client-pack-health-{n:02d}::{esc(text[i:i + 3900])}")
+          # The game's own warnings, by the mod (namespace) they name: missing textures, broken models, recipes,
+          # loot tables, world generation. Vanilla's dev-only translation warnings are left out.
+          byns = collections.defaultdict(collections.Counter)
+          for line in raw:
+              m = re.match(r'\[[\d:]+\] \[[^\]]+/(WARN|ERROR)\] \((?:Minecraft|fabric-[a-z-]+)\) (.*)', line)
+              if not m or 'translation key' in m.group(2) or "Can't keep up" in m.group(2):
+                  continue
+              names = re.findall(r'\b([a-z0-9_.-]+):[a-z0-9_/.-]+', m.group(2))
+              ns = next((x for x in names if x not in ('minecraft', 'http', 'https', 'file')), names[0] if names else 'other')
+              byns[ns][re.sub(r'\d+', '#', m.group(2))[:200]] += 1
+          detail = []
+          for ns, counter in sorted(byns.items(), key=lambda kv: -sum(kv[1].values())):
+              detail.append(f"{ns}: {sum(counter.values())} lines")
+              for line, n in counter.most_common(5):
+                  detail.append(f"    {n}x {line}")
+          text = '\n'.join(detail) or 'none'
+          for n, i in enumerate(range(0, min(len(text), 3900 * 4), 3900)):
+              print(f"::notice title=client-pack-game-warnings-{n:02d}::{esc(text[i:i + 3900])}")
           PY
       - name: capture screenshots and logs
         if: always()

@@ -174,7 +174,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 	/**
 	 * Close-ups of the mobs whose looks the pack changes: villagers from the front, from the side and at night (two
 	 * each: a plain one that keeps its AI but can't walk, so it looks at the camera, and a snowy farmer standing
-	 * still), then Fresh Animations' mobs three at a time. Night vision keeps the night shots bright.
+	 * still), then Fresh Animations' mobs (and its add-ons' chest and minecart) three at a time. Night vision keeps
+	 * the night shots bright.
 	 */
 	private void mobGallery(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
 		singleplayer.getServer().runCommand("effect give @a night_vision infinite 0 true");
@@ -191,6 +192,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			new Shot("pack_mobs_1", "midnight", three, new String[] {"summon sheep", "summon cow", "summon wandering_trader"}),
 			new Shot("pack_mobs_2", "midnight", three, new String[] {"summon zombie", "summon skeleton", "summon creeper"}),
 			new Shot("pack_mobs_3", "midnight", three, new String[] {"summon pig", "summon iron_golem", "summon chicken"}),
+			// Fresh Animations' Spiders and Objects add-ons: a spider, a chest and a minecart.
+			new Shot("pack_mobs_4", "midnight", three, new String[] {"summon spider", "setblock ~ ~ ~ chest[facing=north]", "summon minecart"}),
 		};
 
 		for (Shot shot : shots) {

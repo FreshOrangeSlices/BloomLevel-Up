@@ -266,15 +266,22 @@ def main():
             if mod_id not in provided:
                 problems.append(f"{where}: {', '.join(sorted(set(wanted_by)))} need(s) mod id '{mod_id}', which isn't in the pack")
 
-    # ---- client presets: Fresh Animations on, Complementary selected (client only, first install)
+    # ---- first-launch look: the resource packs on (bottom to top) and the shader picked. Not an options.txt (launchers
+    # don't reliably copy one, and it would wipe a player's settings on every update): a defaults file Bloom applies
+    # before the game starts, once per change (config/PackDefaults.java). In overrides, so every install gets it.
     client_overrides = {}
+    pack_defaults = {}
     presets = spec.get("client_presets", {})
-    packs = [f"file/{os.path.basename(by_slug[s]['path'])}" for s in presets.get("resource_packs", []) if s in by_slug]
-    if packs:
-        client_overrides["options.txt"] = ("resourcePacks:" + json.dumps(["vanilla", "fabric"] + packs) + "\n").encode()
+    packs = [s[3:] if s.startswith("id:") else f"file/{os.path.basename(by_slug[s]['path'])}"
+             for s in presets.get("resource_packs", []) if s.startswith("id:") or s in by_slug]
     shader = presets.get("shader")
+    lines = ["# Bloom Pack: switched on by Bloom Level-Up before the game starts, once per change of this file."]
+    if packs:
+        lines.append("resourcePacks=" + "|".join(packs))
     if shader in by_slug:
-        client_overrides["config/iris.properties"] = (f"enableShaders=true\nshaderPack={os.path.basename(by_slug[shader]['path'])}\n").encode()
+        lines.append("shaderPack=" + os.path.basename(by_slug[shader]["path"]))
+    if len(lines) > 1:
+        pack_defaults["config/bloomlevelup/pack-defaults.properties"] = ("\n".join(lines) + "\n").encode()
     # Other client config files, as given (a JSON object is written as JSON). A mod fills in the settings left out.
     for path, content in presets.get("files", {}).items():
         client_overrides[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
@@ -301,6 +308,8 @@ def main():
         for path, data in overrides.items():
             folder = "overrides" if sides[path]["server"] != "unsupported" else "client-overrides"
             pack.writestr(f"{folder}/{path}", data)
+        for path, data in pack_defaults.items():
+            pack.writestr(f"overrides/{path}", data)
         for path, data in client_overrides.items():
             pack.writestr(f"client-overrides/{path}", data)
 
@@ -337,7 +346,7 @@ def main():
             if entry["env"]["client"] != "unsupported" and entry["slug"] != "fabric-api" and not entry["datapack"]:
                 with open(os.path.join(client_run, entry["path"]), "wb") as target:
                     target.write(jars[entry["path"]])
-        for path, data in list(overrides.items()) + list(client_overrides.items()):
+        for path, data in list(overrides.items()) + list(client_overrides.items()) + list(pack_defaults.items()):
             if path == f"mods/{bloom_name}" or sides.get(path, {}).get("client") == "unsupported":
                 continue
             os.makedirs(os.path.dirname(os.path.join(client_run, path)) or client_run, exist_ok=True)
@@ -349,7 +358,7 @@ def main():
     lines = [f"{e['title']} ({e['slug']}) {e['version']} [{e['type']}] -> {e['path']} (client {e['env']['client']}, server {e['env']['server']})"
              for e in files]
     lines += [f"packed inside: {path}" for path in overrides]
-    lines += [f"client preset: {path}" for path in client_overrides]
+    lines += [f"client preset: {path}" for path in list(client_overrides) + list(pack_defaults)]
     text = "\n".join(lines)
     for n in range(0, len(text), 3800):
         print(f"::notice title=pack-contents-{n // 3800:02d}::{esc(text[n:n + 3800])}")

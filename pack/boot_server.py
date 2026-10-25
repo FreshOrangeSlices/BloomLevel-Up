@@ -76,6 +76,25 @@ def main():
     print(f"::notice title=server-boot::Up in {done:.0f} s with -Xmx{heap}; {loading.strip()}; server process memory {memory} MB right after start")
     print(f"::notice title=server-datapacks::{esc(chr(10).join(datapacks) or 'no datapack list printed')}")
 
+    # Bug hunting: every distinct warning and error, by the mod (namespace) it names, most frequent first.
+    import collections
+    byns = collections.defaultdict(collections.Counter)
+    for line in log:
+        m = re.match(r"\[[\d:]+\] \[[^\]]+/(WARN|ERROR)\]: (.*)", line)
+        if not m or "Can't keep up" in m.group(2):
+            continue
+        names = re.findall(r"\b([a-z0-9_.-]+):[a-z0-9_/.-]+", m.group(2))
+        ns = next((x for x in names if x not in ("minecraft", "http", "https", "file")), names[0] if names else "other")
+        byns[ns][f"[{m.group(1)}] " + re.sub(r"\d+", "#", m.group(2))[:200]] += 1
+    detail = []
+    for ns, counter in sorted(byns.items(), key=lambda kv: -sum(kv[1].values())):
+        detail.append(f"{ns}: {sum(counter.values())} lines")
+        for text, n in counter.most_common(5):
+            detail.append(f"    {n}x {text}")
+    text = "\n".join(detail) or "none"
+    for n, i in enumerate(range(0, min(len(text), 3900 * 4), 3900)):
+        print(f"::notice title=server-warnings-{n:02d}::{esc(text[i:i + 3900])}")
+
 
 if __name__ == "__main__":
     main()

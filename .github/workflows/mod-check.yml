@@ -5,7 +5,30 @@ on:
 jobs:
   check:
     runs-on: ubuntu-24.04
+    env:
+      NEW: wizards,paladins-and-priests,archers,rogues-and-warriors,arsenal-rpg-series,armory-rpg-series,jewelry,combat-roll
     steps:
       - uses: actions/checkout@v6
-      - name: what exists for 26.3
-        run: python3 pack/scout.py
+      - name: a stand-in Bloom jar (metadata only)
+        run: |
+          mkdir -p fake && cd fake
+          printf '{"schemaVersion":1,"id":"bloomlevelup","version":"0.0.0","environment":"*","depends":{"fabric-api":"*","minecraft":"~26.3"}}' > fabric.mod.json
+          zip -q ../bloomlevelup-test.jar fabric.mod.json
+      - name: the pack as it is
+        run: python3 pack/build_pack.py bloomlevelup-test.jar base base --client-run base_client --without "$NEW"
+      - name: the pack with the RPG Series and Combat Roll
+        run: python3 pack/build_pack.py bloomlevelup-test.jar test out --client-run client
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: boot a server with it
+        run: python3 pack/boot_server.py "out/Bloom Pack test server.zip"
+      - name: what the new mods bring
+        if: always()
+        run: python3 pack/dump_rpg.py base_client/mods client/mods server rpgdump
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: rpg-check
+          path: rpgdump/

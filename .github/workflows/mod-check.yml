@@ -22,20 +22,5 @@ jobs:
         with:
           java-version: '25'
           distribution: 'microsoft'
-      - name: boot a server with it
-        run: python3 pack/boot_server.py "out/Bloom Pack test server.zip"
-      - name: what the new mods bring
-        if: always()
-        run: python3 pack/dump_rpg.py base_client/mods client/mods server rpgdump
-      - name: armor and weapon numbers
-        if: always()
-        run: python3 pack/dump_rpg2.py configs rpgdump/jars server
-      - name: item tags
-        if: always()
-        run: python3 pack/dump_rpg2.py tags rpgdump/jars server
-      - name: damage types and entity tags
-        if: always()
-        run: python3 pack/dump_rpg2.py damage rpgdump/jars server
-      - name: attributes, keys, professions, items
-        if: always()
-        run: python3 pack/dump_rpg2.py lang rpgdump/jars server
+      - name: every key binding in the client jars
+        run: python3 pack/dump_keys.py client/mods

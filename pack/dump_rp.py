@@ -23,5 +23,12 @@ for f in index["files"]:
         owners[path].append(name)
     short = lambda xs: ", ".join(x.split("/")[-1] for x in xs)
     note("rp-" + name[:28], f"{name}\nmodels ({len(models)}): {short(models)[:2500]}\ntextures ({len(textures)}): {short(textures)[:600]}\nrandom/etf ({len(other)}): {short(other)[:300]}")
+    if "Player" in name or "Expressions" in name:
+        for n in files:
+            if n.endswith((".jem", ".jpm")) and "player" in n:
+                text = z.read(n).decode("utf-8", "replace")
+                refs = sorted(set(re.findall(r"(?:face|express|blink|eye|lid|pupil|brow|mouth)[a-z_0-9]*", text, re.I)))
+                if refs:
+                    note("rp-refs-" + name[:12] + "-" + n.split("/")[-1][:20], ", ".join(refs)[:1500])
 clashes = [f"{p.split('/')[-1]}: {', '.join(o)}" for p, o in sorted(owners.items()) if len(o) > 1]
 note("rp-clashes", "\n".join(clashes) or "none")

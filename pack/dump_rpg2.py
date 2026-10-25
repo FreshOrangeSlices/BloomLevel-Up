@@ -22,6 +22,19 @@ def values(raw):
     return [v if isinstance(v, str) else v.get("id", "?") + ("?" if not v.get("required", True) else "") for v in d.get("values", [])]
 short = lambda s: re.sub(r"^(wizards|paladins|archers|rogues|arsenal|armory_rpgs|jewelry|spell_engine|rpg_series):", "", s)
 out = []
+def summarize(rel, d):
+    for name, a in (d.get("armor_sets") or {}).items():
+        pieces = "/".join(str((a.get(p) or {}).get("armor", "?")) for p in ("head", "chest", "legs", "feet"))
+        attrs = sorted({str(m.get("attribute", m.get("id", "?"))).split(":")[-1] for p in ("head", "chest", "legs", "feet") for m in ((a.get(p) or {}).get("attributes") or [])})
+        out.append(f"{rel} armor {name}: {pieces} t{a.get('armor_toughness')} kb{a.get('knockback_resistance')} [{','.join(attrs)}]")
+    for name, w in (d.get("weapons") or {}).items():
+        attrs = ",".join(f"{str(m.get('attribute', m.get('id','?'))).split(':')[-1]}{m.get('value')}" for m in (w.get("attributes") or []))
+        out.append(f"{rel} weapon {name}: dmg{w.get('attack_damage')} spd{w.get('attack_speed')} [{attrs}]")
+    for key in ("ranged_weapons", "shields"):
+        for name, w in (d.get(key) or {}).items():
+            out.append(f"{rel} {key[:-1]} {name}: {json.dumps(w)[:160]}")
+    if not any(k in d for k in ("armor_sets", "weapons", "ranged_weapons", "shields")):
+        out.append(f"{rel}: keys {list(d)[:12]}")
 if section == "configs":
     for root, _, files in os.walk(os.path.join(server, "config")):
         for f in sorted(files):
@@ -35,21 +48,13 @@ if section == "configs":
             if not isinstance(d, dict):
                 continue
             rel = os.path.relpath(path, os.path.join(server, "config"))
-            for name, a in (d.get("armor_sets") or {}).items():
-                pieces = "/".join(str(a.get(p, {}).get("armor", "?")) for p in ("head", "chest", "legs", "feet"))
-                attrs = sorted({m.get("attribute", "?").split(":")[-1] for p in ("head", "chest", "legs", "feet") for m in a.get(p, {}).get("attributes", [])})
-                out.append(f"{rel} armor {name}: {pieces} t{a.get('armor_toughness')} kb{a.get('knockback_resistance')} [{','.join(attrs)}]")
-            for name, w in (d.get("weapons") or {}).items():
-                attrs = ",".join(f"{m.get('attribute','?').split(':')[-1]}{m.get('value')}" for m in w.get("attributes", []))
-                out.append(f"{rel} weapon {name}: dmg{w.get('attack_damage')} spd{w.get('attack_speed')} [{attrs}]")
-            for key in ("ranged_weapons", "shields"):
-                for name, w in (d.get(key) or {}).items():
-                    out.append(f"{rel} {key[:-1]} {name}: {json.dumps(w)[:160]}")
-            if not any(k in d for k in ("armor_sets", "weapons", "ranged_weapons", "shields")):
-                out.append(f"{rel}: keys {list(d)[:12]}")
+            try:
+                summarize(rel, d)
+            except Exception as e:
+                out.append(f"{rel}: {type(e).__name__} {e}; keys {list(d)[:8]}")
     emit("cfg", "\n".join(out))
 elif section == "tags":
-    for jar, n, raw in entries(r"^data/(rpg_series|c|minecraft|spell_engine|spell_power|trinkets|bloomlevelup)/tags/item/"):
+    for jar, n, raw in entries(r"^data/(rpg_series/tags/item/(weapon_type|armor_type)|c/tags/item|minecraft/tags/item/(swords|axes|spears|maces|pickaxes|shovels|hoes|bow|crossbow|arrows|trident))"):
         out.append(f"{jar[:14]} {n[5:-5]}: {' '.join(map(short, values(raw)))}")
     emit("tags", "\n".join(out))
 elif section == "damage":
@@ -70,5 +75,6 @@ elif section == "lang":
         keys = [f"{k}={v}" for k, v in lang.items() if k.startswith(("key", "keybind")) and "category" not in k]
         items = [k.split(".", 2)[2] for k in lang if re.match(r"item\.[^.]+\.[^.]+$", k)]
         prof = [k for k in lang if k.startswith("entity.minecraft.villager.")]
-        out.append(f"{jar[:14]} {n.split('/')[1]}: attrs {attrs}\n keys {keys}\n professions {prof}\n items({len(items)}) {' '.join(items)}")
+        ns = n.split('/')[1]
+        out.append(f"{ns}: attrs {[a.split('.')[-1] for a in attrs]} keys {keys} jobs {[p.split('.')[-1] for p in prof]}")
     emit("lang", "\n".join(out))

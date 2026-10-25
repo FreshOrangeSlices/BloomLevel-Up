@@ -15,9 +15,9 @@ jobs:
           printf '{"schemaVersion":1,"id":"bloomlevelup","version":"0.0.0","environment":"*","depends":{"fabric-api":"*","minecraft":"~26.3"}}' > fabric.mod.json
           zip -q ../bloomlevelup-test.jar fabric.mod.json
       - name: the pack as it is
-        run: python3 pack/build_pack.py bloomlevelup-test.jar base base --client-run base_client --without "$NEW"
+        run: python3 pack/build_pack.py bloomlevelup-test.jar base base --client-run base_client --without "$NEW" > base.log || (tail -5 base.log; exit 1)
       - name: the pack with the RPG Series and Combat Roll
-        run: python3 pack/build_pack.py bloomlevelup-test.jar test out --client-run client
+        run: python3 pack/build_pack.py bloomlevelup-test.jar test out --client-run client > test.log || (tail -5 test.log; exit 1)
       - uses: actions/setup-java@v5
         with:
           java-version: '25'

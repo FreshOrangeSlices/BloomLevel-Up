@@ -27,8 +27,15 @@ jobs:
       - name: what the new mods bring
         if: always()
         run: python3 pack/dump_rpg.py base_client/mods client/mods server rpgdump
-      - uses: actions/upload-artifact@v7
+      - name: armor and weapon numbers
         if: always()
-        with:
-          name: rpg-check
-          path: rpgdump/
+        run: python3 pack/dump_rpg2.py configs rpgdump/jars server
+      - name: item tags
+        if: always()
+        run: python3 pack/dump_rpg2.py tags rpgdump/jars server
+      - name: damage types and entity tags
+        if: always()
+        run: python3 pack/dump_rpg2.py damage rpgdump/jars server
+      - name: attributes, keys, professions, items
+        if: always()
+        run: python3 pack/dump_rpg2.py lang rpgdump/jars server

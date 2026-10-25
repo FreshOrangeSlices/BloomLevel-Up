@@ -18,27 +18,26 @@ def get(path, **params):
     return None
 out = []
 topics = {
-    "magic": ["spells", "magic", "wizard"], "dodge": ["dodge roll", "combat roll"], "bosses": ["bosses", "boss"],
-    "weapons": ["weapons", "swords"], "armor": ["armor sets", "knight armor"], "biomes": ["biomes", "terrain generation"],
-    "medieval": ["medieval", "castle", "dungeons structures"], "dragons": ["dragons"], "classes": ["rpg classes"],
+    "bosses": ["boss", "bosses", "boss fight", "mini boss", "dungeon boss", "raid", "boss rush"],
+    "monsters": ["monsters", "mobs", "creatures", "new mobs", "hostile mobs", "undead"],
+    "elites": ["elite mobs", "champions", "difficulty", "stronger mobs", "mob levels", "affixes"],
+    "dungeons": ["dungeon", "dungeons", "ruins", "catacombs", "tower"],
+    "fantasy": ["fantasy", "rpg", "adventure", "mythology", "knight"],
 }
 seen = set()
 for topic, queries in topics.items():
     out.append(f"== {topic}")
     for query in queries:
-        res = get("/search", query=query, limit="12", index="relevance",
-                  facets=[["versions:26.3"], ["categories:fabric"], ["project_type:mod"]]) or {"hits": []}
-        for h in res["hits"]:
-            if h["slug"] in seen:
-                continue
-            seen.add(h["slug"])
-            out.append(f"{h['slug']} | {h['title']} | {h['downloads']:,} dl | {h['description'][:110]}")
-cands = ["spell-engine", "wizards", "paladins-and-priests", "archers", "rogues-and-warriors", "combat-roll", "spell-power",
-         "jewelry", "simply-swords", "epic-knights-shields-armor-and-weapons", "bosses-of-mass-destruction",
-         "mariums-soulslike-weaponry", "terralith", "regions-unexplored", "biomes-o-plenty", "wwoo", "tectonic",
-         "towns-and-towers", "yungs-better-dungeons", "when-dungeons-arise", "l_enders-cataclysm", "mowzies-mobs",
-         "illager-invasion", "born-in-chaos", "arcanus", "magic-spellblades", "relics-mod", "artifacts", "medieval-buildings",
-         "the-graveyard", "friends-and-foes", "dragons-survival", "end-remastered", "nullscape", "incendium", "spell-engine-extension"]
+        for version in ("26.3", "26.2"):
+            res = get("/search", query=query, limit="15", index="relevance",
+                      facets=[[f"versions:{version}"], ["categories:fabric", "categories:datapack"]]) or {"hits": []}
+            for h in res["hits"]:
+                if h["slug"] in seen or h["downloads"] < 3000:
+                    continue
+                seen.add(h["slug"])
+                tag = "" if version == "26.3" else "  [26.2 only]"
+                out.append(f"{h['slug']} | {h['title']} | {h['downloads']:,} dl | {h.get('date_modified','')[:10]} | {h['description'][:120]}{tag}")
+cands = []
 out.append("== candidates: newest Minecraft version with a Fabric build")
 for slug in cands:
     p = get(f"/project/{slug}")

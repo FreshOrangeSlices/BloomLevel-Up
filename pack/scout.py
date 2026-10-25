@@ -37,7 +37,11 @@ for topic, queries in topics.items():
                 seen.add(h["slug"])
                 tag = "" if version == "26.3" else "  [26.2 only]"
                 out.append(f"{h['slug']} | {h['title']} | {h['downloads']:,} dl | {h.get('date_modified','')[:10]} | {h['description'][:120]}{tag}")
-cands = []
+cands = ["the-twilight-forest", "twilightforest", "aether", "the-aether", "eternal-starlight", "adventurez", "ruins-and-towers",
+         "remnants-eclipsed-realm", "gateway-of-doom", "brutal-nightmare", "deadly-deadly-dungeon", "useless-reptile",
+         "stellarity", "incendium", "deeper-and-darker", "the-bumblezone-fabric", "bosses-of-mass-destruction", "mutant-monsters",
+         "mobs-of-mythology", "illagers-plus", "illager-invasion", "graveyard-fabric", "the-graveyard", "dungeons-plus",
+         "creeper-overhaul", "naturalist", "alexs-mobs", "mythic-mounts", "galosphere", "spawn"]
 out.append("== candidates: newest Minecraft version with a Fabric build")
 for slug in cands:
     p = get(f"/project/{slug}")
@@ -47,7 +51,7 @@ for slug in cands:
     vs = get(f"/project/{slug}/version", loaders=["fabric"]) or []
     newest = vs[0]["game_versions"][-3:] if vs else []
     has = any("26.3" in v["game_versions"] for v in vs)
-    out.append(f"{slug} ({p['title']}): {'26.3 YES' if has else 'no 26.3'}; newest {newest}; {p['downloads']:,} dl")
+    out.append(f"{slug} ({p['title']}): {'26.3 YES' if has else 'no 26.3'}; newest fabric {newest}; loaders {p.get('loaders')}; {p['downloads']:,} dl; {p['description'][:100]}")
 text = "\n".join(out)
 esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
 chunks = [text[i:i + 3800] for i in range(0, len(text), 3800)]

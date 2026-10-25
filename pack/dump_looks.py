@@ -28,6 +28,10 @@ for n in names:
             if re.search(r"summon|mannequin|profile|skin|texture", l):
                 lines.append(f"{n}: {l.strip()[:300]}")
 note("guards", "\n".join(lines[:80]))
+for n in names:
+    if re.search(r"guard/(spear|data|tick|convert)|guard/spear/data|natural_spawn/spawn", n) and n.endswith(".mcfunction"):
+        text = re.sub(r'value:"[A-Za-z0-9+/=]{40,}"', 'value:"<skin>"', z.read(n).decode("utf-8", "replace"))
+        note("guardfn-" + n.split("/function/")[-1].replace("/", "_")[:40], text[:3700])
 
 # Fresh Animations
 z = zipfile.ZipFile(io.BytesIO(fetch(find(r"FreshAnimations"))))

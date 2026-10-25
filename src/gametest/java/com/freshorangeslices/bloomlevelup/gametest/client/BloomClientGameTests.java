@@ -187,13 +187,15 @@ public class BloomClientGameTests implements FabricClientGameTest {
 	}
 
 	/**
-	 * The keys the pack moves on the first launch: the roll keeps R, Bloom's weapon skill is on V and Iris's "reload
-	 * shaders" is unbound, so nothing else starts on R or V. Every other key two bindings share goes to the log
+	 * The keys the pack moves on the first launch: the roll keeps R, Bloom's weapon skill is on V, Iris's "reload
+	 * shaders" and vanilla's Quick Actions are unbound, Origins' ability keeps G and its "view origin" is on U (O stays
+	 * vanilla's Friends list), so nothing else starts on R, V, G, O or U. Every other key two bindings share goes to the log
 	 * (vanilla's F3 combinations are left out: they share letters on purpose).
 	 */
 	private void packKeys(ClientGameTestContext context) {
 		String[][] expected = {{"keybinds.combat_roll.roll", "key.keyboard.r"}, {"key.bloomlevelup.weapon_skill", "key.keyboard.v"},
-			{"iris.keybind.reload", "key.keyboard.unknown"}};
+			{"iris.keybind.reload", "key.keyboard.unknown"}, {"key.origins.primary_active", "key.keyboard.g"},
+			{"key.quickActions", "key.keyboard.unknown"}, {"key.friends", "key.keyboard.o"}, {"key.origins.view_origin", "key.keyboard.u"}};
 		java.util.Map<String, List<String>> byKey = context.computeOnClient(client -> {
 			java.util.Map<String, List<String>> keys = new java.util.TreeMap<>();
 

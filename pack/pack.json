@@ -122,9 +122,11 @@
     "keys": {
       "keybinds.combat_roll.roll": "key.keyboard.r",
       "key.bloomlevelup.weapon_skill": "key.keyboard.v",
-      "iris.keybind.reload": "key.keyboard.unknown"
+      "iris.keybind.reload": "key.keyboard.unknown",
+      "key.quickActions": "key.keyboard.unknown",
+      "key.origins.view_origin": "key.keyboard.u"
     },
-    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): the roll keeps R, Bloom's weapon skill moves to V (it was R) and Iris's 'reload shaders' is unbound (it was R too)."
+    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): the roll keeps R, Bloom's weapon skill moves to V (it was R), Iris's 'reload shaders' is unbound (it was R too), vanilla's Quick Actions is unbound so Origins' ability keeps G, and Origins' 'view origin' moves to U so O stays vanilla's Friends list."
   },
   "config_files": {
     "_comment": "Config files for both sides (the server's rules, which a singleplayer world reads too), written as given. Combat Roll: a 5-tick (quarter second) window where hits don't land after a roll (FreshOrangeSlices' call); the rest are its defaults.",

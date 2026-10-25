@@ -104,6 +104,11 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 		return this.getEntityData().get(DATA_ITEM);
 	}
 
+	/** Whether it's stuck in a block (the renderer stops its spin). */
+	public boolean stuck() {
+		return this.isInGround();
+	}
+
 	/** How far it has dropped since it was thrown (Death From Above / thrown mace bonus). */
 	public double droppedDistance() {
 		return Math.max(0.0, startY - this.getY());

@@ -57,7 +57,7 @@ public final class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon, Thr
 		state.yRot = Mth.lerp(partialTick, entity.yRotO, entity.getYRot());
 		state.xRot = Mth.lerp(partialTick, entity.xRotO, entity.getXRot());
 		boolean pointFirst = Weapons.is(stack, Family.SPEAR) || Weapons.is(stack, Family.TRIDENT);
-		state.spin = pointFirst || entity.isInGround() ? 0.0F : (entity.tickCount + partialTick) * SPIN_PER_TICK;
+		state.spin = pointFirst || entity.stuck() ? 0.0F : (entity.tickCount + partialTick) * SPIN_PER_TICK;
 	}
 
 	@Override

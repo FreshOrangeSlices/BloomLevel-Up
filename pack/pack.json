@@ -1,9 +1,9 @@
 {
   "name": "Bloom Pack",
-  "summary": "Bloom Level-Up with dungeons, bosses, origins, Better Combat, busier villages, shaders and animations, for Minecraft 26.3 (Fabric).",
+  "summary": "Bloom Level-Up with the RPG Series classes, spells and gear, dungeons, bosses, origins, Better Combat, a dodge roll, busier villages, shaders and animations, for Minecraft 26.3 (Fabric).",
   "minecraft": "26.3",
   "fabric_loader": "0.19.5",
-  "_comment": "The 'Start with' list (minus Better Animations Collection, which fights Fresh Animations, and Villager Guards, dropped for now) from the Bloom Pack mod list doc, plus Origins: Legacy, Villagers at Work / after Work, Fresh Animations' player extension (with the EMF compat mods it needs next to Not Enough Animations and Better Combat) and the 'Later' picks (Aerial Hell since removed: it crashed with Origins: Legacy): both Moog's structure mods, Homesteads, Ambient Creatures, Wandering Trader Maps and the Cave Horror datapack (server: world/datapacks). GeckoLib is for World Bosses and Fabric Language Kotlin for Villagers at Work (both CurseForge-only). Modrinth mods by slug (newest 26.3 Fabric build; required dependencies are added automatically). External files are packed inside (fine for sharing with friends, not for publishing).",
+  "_comment": "The 'Start with' list (minus Better Animations Collection, which fights Fresh Animations, and Villager Guards, dropped for now) from the Bloom Pack mod list doc, plus Origins: Legacy, Villagers at Work / after Work, Fresh Animations' player extension (with the EMF compat mods it needs next to Not Enough Animations and Better Combat) and the 'Later' picks (Aerial Hell since removed: it crashed with Origins: Legacy): both Moog's structure mods, Homesteads, Ambient Creatures, Wandering Trader Maps and the Cave Horror datapack (server: world/datapacks). Then the RPG Series (Wizards, Paladins & Priests, Archers, Rogues & Warriors, Arsenal, Armory, Jewelry; Spell Engine and the rest come in as their dependencies) and Combat Roll. Structure Pool API says it's server-only, but the RPG mods require it on the client too (singleplayer). GeckoLib is for World Bosses and Fabric Language Kotlin for Villagers at Work (both CurseForge-only). Modrinth mods by slug (newest 26.3 Fabric build; required dependencies are added automatically). External files are packed inside (fine for sharing with friends, not for publishing).",
   "modrinth": [
     "fabric-api",
     "sodium",
@@ -43,7 +43,15 @@
     "fresh-animations-details",
     "fresh-animations-objects",
     "fresh-animations-spiders",
-    "fresh-animations-creepers"
+    "fresh-animations-creepers",
+    "wizards",
+    "paladins-and-priests",
+    "archers",
+    "rogues-and-warriors",
+    "arsenal-rpg-series",
+    "armory-rpg-series",
+    "jewelry",
+    "combat-roll"
   ],
   "external": [
     {
@@ -88,6 +96,9 @@
     },
     "cloth-config": {
       "server": "required"
+    },
+    "structure-pool-api": {
+      "client": "required"
     }
   },
   "_singleplayer_too": "Server-only structure mods also installed on the client (with their libraries), so singleplayer worlds get them.",

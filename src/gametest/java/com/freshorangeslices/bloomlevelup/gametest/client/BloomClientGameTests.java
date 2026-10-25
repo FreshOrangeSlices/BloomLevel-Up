@@ -214,6 +214,11 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				"setblock ~ ~ ~ crafting_table"}),
 			new Shot("pack_mobs_5", "noon", three, new String[] {"summon minecart", "setblock ~ ~ ~ ender_chest[facing=north]",
 				"summon oak_boat"}),
+			// The RPG Series' gear (its 3D armor comes from Armor Model API): a wizard, a paladin and an archer.
+			new Shot("pack_rpg_gear", "noon", three, new String[] {
+				gearStand("wizards", "wizard_robe", "wizards:staff_wizard"),
+				gearStand("paladins", "paladin_armor", "paladins:iron_claymore"),
+				gearStand("archers", "archer_armor", "archers:composite_longbow")}),
 		};
 
 		for (Shot shot : shots) {
@@ -237,6 +242,36 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.waitTicks(60);
 			context.takeScreenshot(shot.name());
 		}
+
+		// The player in a wizard's robes with a staff, from the front: the RPG armor on Fresh Animations' player model.
+		singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
+
+		for (String piece : new String[] {"head", "chest", "legs", "feet"}) {
+			singleplayer.getServer().runCommand("item replace entity @a armor." + piece + " with wizards:wizard_robe_" + piece);
+		}
+
+		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with wizards:staff_wizard");
+		context.runOnClient(client -> client.options.setCameraType(CameraType.THIRD_PERSON_FRONT));
+		context.waitTicks(40);
+		context.takeScreenshot("pack_rpg_player");
+		context.runOnClient(client -> client.options.setCameraType(CameraType.FIRST_PERSON));
+
+		for (String piece : new String[] {"head", "chest", "legs", "feet"}) {
+			singleplayer.getServer().runCommand("item replace entity @a armor." + piece + " with minecraft:air");
+		}
+
+		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
+	}
+
+	/** An armor stand facing the camera in one of the RPG Series' armor sets ({@code <set>_head} and so on), holding a weapon. */
+	private static String gearStand(String namespace, String set, String weapon) {
+		StringBuilder equipment = new StringBuilder();
+
+		for (String piece : new String[] {"head", "chest", "legs", "feet"}) {
+			equipment.append(piece).append(":{id:\"").append(namespace).append(':').append(set).append('_').append(piece).append("\"},");
+		}
+
+		return "summon armor_stand ~ ~ ~ {Rotation:[180f,0f],ShowArms:1b,equipment:{" + equipment + "mainhand:{id:\"" + weapon + "\"}}}";
 	}
 
 	/** Turns Iris's shader pack on or off (nothing without Iris). */

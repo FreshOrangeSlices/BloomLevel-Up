@@ -325,7 +325,7 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
       - name: zombie, skeleton, creeper (Creepers add-on)
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12
-      - name: spider, chest, crafting table (Spiders and Objects add-ons)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_4 12
-      - name: minecart, ender chest, boat (Objects add-on)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_5 12
+      - name: the RPG Series' gear on armor stands (wizard, paladin, archer)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_rpg_gear 12
+      - name: the player in a wizard's robes with a staff
+        run: python3 .github/scripts/emit_screenshot.py shots pack_rpg_player 12

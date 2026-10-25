@@ -460,6 +460,9 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Topic | Decision | Where to change |
 |---|---|---|
 | Aerial Hell | Out of the pack (FreshOrangeSlices' call). Its bosses take hits through their own damage code, which skips the start of the game's normal one; Origins: Legacy's armor hook then finds its per-hit state unset and the server crashes (`NullPointerException` in apoli-legacy's `modifyArmorApplicance`, hitting Lilith with a spear). Not Bloom's code. Boss mods added later get a test that hits each boss with Origins loaded | `pack/pack.json` |
+| RPG Series and Combat Roll | In (FreshOrangeSlices' call): Wizards, Paladins & Priests, Archers, Rogues & Warriors, Arsenal, Armory and Jewelry, with Spell Engine, Spell Power, Runes, Trinkets, Ranged Weapon API, Armor Model API, Bundle API and Structure Pool API as their dependencies; and Combat Roll (roll on R by default). How their weapons, armor and keys fit Bloom's weapon families, armor classes and key bindings is the next step, not this one | `pack/pack.json` |
+| Structure Pool API | Its Modrinth page says server-only, but the RPG mods require it on the client too (for singleplayer worlds), so the pack puts it on both sides | `pack/pack.json` (`env_overrides`) |
+| RPG gear in CI | The pack test's gallery photographs a wizard, a paladin and an archer set on armor stands (`pack_rpg_gear`) and the player in a wizard's robes with a staff (`pack_rpg_player`); those two replace the Objects add-on close-ups in the checks (the pictures are still taken) | `BloomClientGameTests.mobGallery`, `client-test.yml` |
 
 ## Build numbers
 

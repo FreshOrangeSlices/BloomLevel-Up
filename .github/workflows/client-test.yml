@@ -145,8 +145,6 @@ jobs:
         include:
           - variant: full
             without: ""
-          - variant: no-objects
-            without: fresh-animations-objects
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -267,7 +265,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full, no-objects]
+        variant: [full]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

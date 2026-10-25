@@ -124,12 +124,15 @@ jobs:
       - name: pillow
         if: always()
         run: pip install --quiet pillow
-      - name: the slam, winding up
+      - name: the throw, winding up
         if: always()
-        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_slam_windup 12
-      - name: the slam, landing
+        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_throw_windup 12
+      - name: the throw, just let go
         if: always()
-        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_slam_hit 12
+        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_bc_throw_release 12
+      - name: thrown weapons in flight (axe, sword, spear)
+        if: always()
+        run: python3 .github/scripts/emit_screenshot.py build/run/clientGameTestBetterCombat bloom_thrown_weapons 12
 
   # The whole Bloom Pack on a real client: the pack's client mods, Fresh Animations and its player extension, and the
   # Complementary shader, as the .mrpack installs them (Bloom itself comes from this commit). It has to start, make a

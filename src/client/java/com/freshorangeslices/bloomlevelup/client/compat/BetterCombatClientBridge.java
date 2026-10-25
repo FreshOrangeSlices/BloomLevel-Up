@@ -15,6 +15,11 @@ final class BetterCombatClientBridge {
 	static final String ONE_HANDED_SLAM = "bettercombat:one_handed_slam";
 	static final String TWO_HANDED_SLAM = "bettercombat:two_handed_slam_heavy";
 	static final String UPPERCUT = "bettercombat:one_handed_uppercut_right";
+	/** Bloom's own overhand throw (assets/bloomlevelup/player_animations). */
+	static final String THROW = "bloomlevelup:one_handed_throw";
+	/** The throw's length in ticks, and how far into it the arm comes over and lets go. */
+	static final float THROW_LENGTH = 10.0F;
+	static final float THROW_UPSWING = 0.5F;
 
 	private BetterCombatClientBridge() {
 	}
@@ -39,6 +44,22 @@ final class BetterCombatClientBridge {
 		}
 
 		return attributes.isTwoHanded() ? TWO_HANDED_SLAM : ONE_HANDED_SLAM;
+	}
+
+	/**
+	 * Plays the overhand throw on this player and tells the server, which shows it to everyone watching. Returns the
+	 * ticks until the arm comes over (when the weapon should leave the hand).
+	 */
+	static int playThrow(LocalPlayer player) {
+		((PlayerAttackAnimatable) player).playAttackAnimation(THROW, AnimatedHand.MAIN_HAND, THROW_LENGTH, THROW_UPSWING);
+		int release = Math.max(1, Math.round(THROW_LENGTH * THROW_UPSWING));
+
+		if (ClientPlayNetworking.canSend(Packets.AttackAnimation.PACKET_ID)) {
+			ClientPlayNetworking.send(new Packets.AttackAnimation(player.getId(), AnimatedHand.MAIN_HAND, THROW, THROW_LENGTH, THROW_UPSWING, 3.0F,
+					release, Packets.SwingParticles.EMPTY));
+		}
+
+		return release;
 	}
 
 	/** Plays the uppercut on this player and tells the server, which shows it to everyone watching. */

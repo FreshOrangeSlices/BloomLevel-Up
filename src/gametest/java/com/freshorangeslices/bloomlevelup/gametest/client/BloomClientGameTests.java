@@ -69,6 +69,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			if (BetterCombat.installed()) {
 				// The Better Combat run (runClientGameTestBetterCombat): only what Better Combat changes on the client.
 				betterCombatSlam(context, singleplayer);
+				betterCombatThrow(context, singleplayer);
 			} else {
 				everything(context, singleplayer);
 			}
@@ -512,6 +513,51 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		}
 
 		context.runOnClient(client -> client.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON));
+	}
+
+	/**
+	 * With Better Combat: a Catch! throw (a tap of the weapon-skill key) plays Bloom's overhand throw and lets go of the
+	 * weapon as the arm comes over. Pictures from behind: winding up, and just after the axe left the hand. Then three
+	 * thrown weapons drifting sideways in front of the camera (axe, sword, spear): the 3D look in flight, the axe and
+	 * sword turning end over end, the spear tip first along its path.
+	 */
+	private void betterCombatThrow(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		for (String major : List.of("combat/lightning_shock", "combat/master_of_arms", "combat/catch")) {
+			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:" + major);
+		}
+
+		singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..20]");
+		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:iron_axe");
+		singleplayer.getServer().runCommand("execute as @a at @s run tp @s ~ ~ ~ 0 0");
+		context.waitFor(client -> ClientBloomState.profile().owns("bloomlevelup:combat/catch") && client.player.getMainHandItem().is(Items.IRON_AXE));
+		context.waitTicks(30);
+		context.runOnClient(client -> client.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_BACK));
+		int before = context.computeOnClient(client -> BetterCombatClient.throwsPlayedForTests());
+
+		// A tap: shorter than a charge, so it's a throw.
+		context.getInput().holdKey(CombatControls.skillKeyForTests());
+		context.waitTicks(2);
+		context.getInput().releaseKey(CombatControls.skillKeyForTests());
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_bc_throw_windup");
+		context.waitTicks(4);
+		context.takeScreenshot("bloom_bc_throw_release");
+		check(context, "a tap plays the overhand throw", client -> BetterCombatClient.throwsPlayedForTests() > before);
+		check(context, "the axe leaves the hand as the arm comes over", client -> client.player.getMainHandItem().isEmpty());
+
+		// The 3D look in flight: three thrown weapons drifting slowly sideways, no gravity, in front of the camera.
+		singleplayer.getServer().runCommand("kill @e[type=bloomlevelup:thrown_weapon]");
+		context.runOnClient(client -> client.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON));
+		String drift = "summon bloomlevelup:thrown_weapon ~ ~ ~ {NoGravity:1b,Motion:[0.04d,0.0d,0.0d],item:{id:\"%s\",count:1}}";
+		String[][] weapons = {{"^1.4 ^1.4 ^3", "minecraft:iron_axe"}, {"^ ^1.4 ^3", "minecraft:diamond_sword"}, {"^-1.4 ^1.4 ^3", "minecraft:iron_spear"}};
+
+		for (String[] weapon : weapons) {
+			singleplayer.getServer().runCommand("execute as @a at @s rotated ~ 0 positioned " + weapon[0] + " run " + drift.formatted(weapon[1]));
+		}
+
+		context.waitTicks(12);
+		context.takeScreenshot("bloom_thrown_weapons");
+		singleplayer.getServer().runCommand("kill @e[type=bloomlevelup:thrown_weapon]");
 	}
 
 	/**

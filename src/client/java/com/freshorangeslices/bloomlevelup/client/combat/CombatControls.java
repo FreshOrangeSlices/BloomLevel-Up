@@ -150,6 +150,16 @@ public final class CombatControls {
 	}
 
 	private static void send(CombatAction action) {
+		// A throw waits for the arm to come over when Better Combat can animate it.
+		if ((action == CombatAction.THROW || action == CombatAction.CHARGED_THROW)
+				&& BetterCombatClient.animatedThrow(Minecraft.getInstance(), () -> sendNow(action))) {
+			return;
+		}
+
+		sendNow(action);
+	}
+
+	private static void sendNow(CombatAction action) {
 		if (ClientPlayNetworking.canSend(BloomPayloads.CombatInput.TYPE)) {
 			ClientPlayNetworking.send(new BloomPayloads.CombatInput(action));
 		}
@@ -251,6 +261,7 @@ public final class CombatControls {
 	// ------------------------------------------------------------------ ticking
 
 	private static void tick(Minecraft minecraft) {
+		BetterCombatClient.tick(minecraft);
 		LocalPlayer player = minecraft.player;
 
 		if (player == null || skillKey == null) {

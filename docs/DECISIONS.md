@@ -72,7 +72,7 @@ and anything the code decided on its own is visible here. Each item can be chang
 | Rune Embedding | Keep the body and bare-hand lists; multi-enchantment books count every valid enchantment; no duplicates; runes persist through death; Frost Walker / Soul Speed later |
 | Stack Overflow | Own inventory and Hoarder's Pocket only, never a server-wide rule; everything else keeps normal limits and splits big stacks; switching off splits safely |
 | One and the Same / Pets | Pets are planned as their own subsystem in Bloom Level-Up (not a skill tab); One and the Same stays hidden until then |
-| Catch! look | Flat spinning item for now; a 3D projectile is later polish |
+| Catch! look | Flat spinning item for now; a 3D projectile is later polish (done in Round 13: see "Catch! in flight") |
 
 ## Chunk 2 — hub and first effects
 
@@ -470,6 +470,8 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Spells and Bloom (for now) | Unchanged on purpose: spell hits give Combat XP; Bloom's five Combat stats don't boost spells (spell gear does); First Strike, Predator and Bloodlust do; healing gives no XP. Revisit after playing a caster | — |
 | Rogue evasion | The RPG armor's evasion chance (Spell Engine) is its own roll, on top of Bloom's Dodge, like Light armor's backup roll | — |
 | RPG checks in CI | The pack test checks the three keys (and that nothing else starts on R or V), a sample of RPG weapons' families, blade/blunt and armor classes, and the roll's 5 ticks; every other key two bindings share goes to the log | `BloomClientGameTests.packKeys`, `rpgSorting` |
+| Catch! in flight (FreshOrangeSlices' call) | The thrown weapon is its own 3D item model along its flight line, no longer a flat picture facing the camera: axes, swords and maces turn end over end (about two turns a second), spears fly tip first like a trident; stuck in a block it stays still | `ThrownWeaponRenderer` |
+| Catch! throw motion (FreshOrangeSlices' call) | With Better Combat, a throw plays an overhand throw (Bloom's own animation, `assets/bloomlevelup/player_animations/one_handed_throw.json`), shown to everyone watching, and the weapon leaves the hand as the arm comes over: the throw goes out a quarter second (5 ticks) after the key. Charged Throws too. Switching items before then cancels it. Without Better Combat the throw is instant, as before | `BetterCombatClient.animatedThrow`, `CombatControls.send` |
 | Batter Up! moves (FreshOrangeSlices' idea) | With Better Combat, Batter Up! also makes maces and spears (Bloom's families, so the RPG Series' maces, hammers, spears and glaives too) swing like swords: the sword's three-hit combo, or the claymore's when the weapon is two-handed (spears, glaives, hammers), so the animations fit the grip. Everything else stays the weapon's own: its attack speed (the wind-up stretches with it), reach, idle pose and two-handedness. A mace falling more than 1.5 blocks keeps its own slam, so the smash still lands. Both sides pick the swing the same way, so the client's animation and targets match the server's damage and sound; the stat sheet shows the sword combo too. Off-hand weapons keep their own swings. Without Better Combat nothing changes (vanilla has no combos) | `BetterCombatMoves`, `BetterCombatPlayerAttackHelperMixin` |
 
 ## Build numbers

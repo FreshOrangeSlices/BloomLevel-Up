@@ -271,7 +271,8 @@ def main():
     presets = spec.get("client_presets", {})
     packs = [f"file/{os.path.basename(by_slug[s]['path'])}" for s in presets.get("resource_packs", []) if s in by_slug]
     if packs:
-        client_overrides["options.txt"] = ("resourcePacks:" + json.dumps(["vanilla", "fabric"] + packs) + "\n").encode()
+        # Fabric adds the mods' own resources by itself (26.3 has no pack called "fabric" any more).
+        client_overrides["options.txt"] = ("resourcePacks:" + json.dumps(["vanilla"] + packs) + "\n").encode()
     shader = presets.get("shader")
     if shader in by_slug:
         client_overrides["config/iris.properties"] = (f"enableShaders=true\nshaderPack={os.path.basename(by_slug[shader]['path'])}\n").encode()

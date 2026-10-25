@@ -237,6 +237,14 @@ jobs:
           text = '\n'.join(detail) or 'none'
           for n, i in enumerate(range(0, min(len(text), 3900 * 4), 3900)):
               print(f"::notice title=client-pack-game-warnings-{n:02d}::{esc(text[i:i + 3900])}")
+          # The lines that follow a few multi-line warnings (Fabric Loader's warnings, the first missing texture).
+          follow = []
+          for key in ('Warnings were found!', 'Missing texture references in model'):
+              at = next((i for i, l in enumerate(raw) if key in l), None)
+              if at is not None:
+                  follow += raw[at:at + 1] + [l for l in raw[at + 1:at + 16] if not re.match(r'\[[\d:]+\]', l)][:12]
+          if follow:
+              print(f"::notice title=client-pack-warning-details::{esc(chr(10).join(follow)[:3900])}")
           PY
       - name: capture screenshots and logs
         if: always()

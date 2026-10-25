@@ -26,8 +26,8 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
 public final class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon, ThrownWeaponRenderer.State> {
 	/** Degrees per tick a spinning weapon turns (about two turns a second). */
 	private static final float SPIN_PER_TICK = 36.0F;
-	/** The item model's size: its item-frame look is half a block, so this makes it about as long as when held. */
-	private static final float SCALE = 1.6F;
+	/** The item model's size: its item-frame look is half a block across, so this makes a sword about as long as held. */
+	private static final float SCALE = 1.25F;
 
 	public static final class State extends EntityRenderState {
 		final ItemStackRenderState item = new ItemStackRenderState();
@@ -52,7 +52,7 @@ public final class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon, Thr
 	public void extractRenderState(ThrownWeapon entity, State state, float partialTick) {
 		super.extractRenderState(entity, state, partialTick);
 		ItemStack stack = entity.getItem();
-		// FIXED (the item-frame look): the item stands upright in its own plane, handle bottom left, tip top right.
+		// FIXED (the item-frame look): the item stands upright in its own plane, mirrored like in a frame (tip top left).
 		items.updateForNonLiving(state.item, stack, ItemDisplayContext.FIXED, entity);
 		state.yRot = Mth.lerp(partialTick, entity.yRotO, entity.getYRot());
 		state.xRot = Mth.lerp(partialTick, entity.xRotO, entity.getXRot());
@@ -74,6 +74,6 @@ public final class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon, Thr
 		super.submit(state, poseStack, collector, camera);
 	}
 
-	/** Turns the item's handle-to-tip diagonal (bottom left to top right) onto local X, tip first. */
-	private static final float TIP_ALONG_X = -45.0F;
+	/** Turns the item's handle-to-tip diagonal (bottom right to top left in a frame) onto local +X, tip first. */
+	private static final float TIP_ALONG_X = -135.0F;
 }

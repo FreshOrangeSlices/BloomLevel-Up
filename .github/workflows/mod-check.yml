@@ -14,11 +14,5 @@ jobs:
           zip -q ../bloomlevelup-test.jar fabric.mod.json
       - name: build the pack
         run: python3 pack/build_pack.py bloomlevelup-test.jar test out
-      - name: what's in the server zip
-        run: unzip -l "out/Bloom Pack test server.zip" | grep -v "mods/" | head -40
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '25'
-          distribution: 'microsoft'
-      - name: boot a server with the pack
-        run: python3 pack/boot_server.py "out/Bloom Pack test server.zip"
+      - name: look inside the look-changing files
+        run: python3 pack/dump_looks.py "out/Bloom Pack test.mrpack"

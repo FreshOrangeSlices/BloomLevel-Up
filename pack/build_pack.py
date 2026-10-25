@@ -165,12 +165,15 @@ def main():
     game = spec["minecraft"]
     files, notes, problems = [], [], []
     by_slug = {}
-    queue = [(slug, None) for slug in spec["modrinth"]]
+    # Server-only content mods (structures) go on the client too, so singleplayer worlds have them; their
+    # dependencies with them.
+    singleplayer_too = set(spec.get("singleplayer_too", []))
+    queue = [(slug, None, slug in singleplayer_too) for slug in spec["modrinth"]]
     seen = set()
 
     # ---- Modrinth: each listed project and its required dependencies
     while queue:
-        ref, wanted_version = queue.pop(0)
+        ref, wanted_version, client_too = queue.pop(0)
         project = api(f"/project/{ref}")
         if project is None:
             problems.append(f"Modrinth project {ref} not found")
@@ -191,6 +194,8 @@ def main():
         env = {"client": side(project.get("client_side")), "server": side(project.get("server_side"))}
         if folder != "mods":
             env = {"client": "required", "server": "unsupported"}
+        if client_too and folder == "mods":
+            env["client"] = "required"
         env.update(spec.get("env_overrides", {}).get(project["slug"], {}))
         entry = {
             "slug": project["slug"], "title": project["title"], "version": version["version_number"], "type": version["version_type"],
@@ -201,7 +206,7 @@ def main():
         by_slug[project["slug"]] = entry
         for dependency in version.get("dependencies", []):
             if dependency.get("dependency_type") == "required" and dependency.get("project_id"):
-                queue.append((dependency["project_id"], dependency.get("version_id")))
+                queue.append((dependency["project_id"], dependency.get("version_id"), client_too))
 
     # ---- download every jar: checks the hashes, and the server zip needs them anyway
     jars = {}
@@ -325,7 +330,8 @@ def main():
 
     # ---- summary
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
-    lines = [f"{e['title']} {e['version']} [{e['type']}] -> {e['path']} (client {e['env']['client']}, server {e['env']['server']})" for e in files]
+    lines = [f"{e['title']} ({e['slug']}) {e['version']} [{e['type']}] -> {e['path']} (client {e['env']['client']}, server {e['env']['server']})"
+             for e in files]
     lines += [f"packed inside: {path}" for path in overrides]
     lines += [f"client preset: {path}" for path in client_overrides]
     text = "\n".join(lines)

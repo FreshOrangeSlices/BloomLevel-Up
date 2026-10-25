@@ -140,11 +140,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Add a variant with "without: <slug,slug>" to compare the pack without a suspect (round 12 compared
+        # Better Animations Collection this way).
         include:
           - variant: full
             without: ""
-          - variant: no-bac
-            without: better-animations-collection
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -265,7 +265,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full, no-bac]
+        variant: [full]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

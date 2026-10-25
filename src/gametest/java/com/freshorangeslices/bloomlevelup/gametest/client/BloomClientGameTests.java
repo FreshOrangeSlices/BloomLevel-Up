@@ -173,8 +173,10 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		singleplayer.getServer().runCommand("time set midnight");
 		singleplayer.getServer().runCommand("effect give @a night_vision infinite 0 true");
 		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
+		// The villager keeps its AI (so it turns to look at the camera, eyes and all) but can't walk away.
 		String[][] groups = {
-			{"summon villager", "summon sheep", "summon cow"},
+			{"summon villager ~ ~ ~ {Rotation:[180f,0f],attributes:[{id:\"minecraft:movement_speed\",base:0.0}]}", "summon sheep",
+				"summon cow"},
 			{"summon zombie", "summon skeleton", "summon creeper"},
 			{"function villager_guards:guard/spear/summon", "function villager_guards:guard/archer/summon", "summon chicken"},
 		};
@@ -185,12 +187,13 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 			for (int i = 0; i < 3; i++) {
 				String command = groups[group][i];
+				boolean plain = command.startsWith("summon") && !command.contains("{");
 				singleplayer.getServer().runCommand("execute as @a at @s positioned " + spots[i] + " run " + command
-						+ (command.startsWith("summon") ? " ~ ~ ~ {NoAI:1b,Rotation:[180f,0f]}" : ""));
+						+ (plain ? " ~ ~ ~ {NoAI:1b,Rotation:[180f,0f]}" : ""));
 			}
 
 			// The guards come from a datapack function: stop them and turn them round too.
-			singleplayer.getServer().runCommand("execute as @a at @s run execute as @e[type=!player,distance=..6] run data merge entity @s {NoAI:1b,Rotation:[180f,0f]}");
+			singleplayer.getServer().runCommand("execute as @a at @s run execute as @e[type=!player,type=!villager,distance=..6] run data merge entity @s {NoAI:1b,Rotation:[180f,0f]}");
 			context.waitTicks(60);
 			context.takeScreenshot("pack_mobs_" + (group + 1));
 		}

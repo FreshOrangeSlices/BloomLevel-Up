@@ -89,6 +89,19 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.takeScreenshot("pack_title");
 		context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: {} mods loaded; resource packs on: {}; shader in use: {}",
 				FabricLoader.getInstance().getAllMods().size(), client.getResourcePackRepository().getSelectedIds(), shaderInUse()));
+		// The run folder has no options.txt: Bloom has to switch the pack's resource packs and shader on by itself
+		// (config/bloomlevelup/pack-defaults.properties, applied before the game starts).
+		boolean packsOn = context.computeOnClient(client -> client.getResourcePackRepository().getSelectedIds().stream()
+				.anyMatch(id -> id.startsWith("file/FreshAnimations")) && client.getResourcePackRepository().getSelectedIds().stream()
+				.anyMatch(id -> id.startsWith("file/FA+Player")));
+
+		if (!packsOn) {
+			failures.add("the pack's resource packs weren't switched on at the first launch");
+		}
+
+		if (!"true".equals(shaderInUse())) {
+			failures.add("the pack's shader wasn't on at the first launch");
+		}
 		// CI draws in software: with the shader on, a frame takes seconds. The world part runs without it (and at a
 		// short view distance); the shader comes back for one picture at the end.
 		context.runOnClient(client -> {

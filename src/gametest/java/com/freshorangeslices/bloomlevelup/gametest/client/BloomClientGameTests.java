@@ -192,13 +192,18 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			new Shot("pack_mobs_1", "midnight", three, new String[] {"summon sheep", "summon cow", "summon wandering_trader"}),
 			new Shot("pack_mobs_2", "midnight", three, new String[] {"summon zombie", "summon skeleton", "summon creeper"}),
 			new Shot("pack_mobs_3", "midnight", three, new String[] {"summon pig", "summon iron_golem", "summon chicken"}),
-			// Fresh Animations' Spiders and Objects add-ons: a spider, a chest and a minecart.
-			new Shot("pack_mobs_4", "midnight", three, new String[] {"summon spider", "setblock ~ ~ ~ chest[facing=north]", "summon minecart"}),
+			// Fresh Animations' Spiders and Objects add-ons. A crafting table (a plain block) next to the chest shows
+			// where the chest should sit.
+			new Shot("pack_mobs_4", "midnight", three, new String[] {"summon spider", "setblock ~ ~ ~ chest[facing=north]",
+				"setblock ~ ~ ~ crafting_table"}),
+			new Shot("pack_mobs_5", "noon", three, new String[] {"summon minecart", "setblock ~ ~ ~ ender_chest[facing=north]",
+				"summon oak_boat"}),
 		};
 
 		for (Shot shot : shots) {
 			singleplayer.getServer().runCommand("time set " + shot.time());
 			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
+			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-3 ~ ~1 ~3 ~1 ~5 air");
 
 			for (int i = 0; i < shot.commands().length; i++) {
 				String command = shot.commands()[i];

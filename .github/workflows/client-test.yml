@@ -145,6 +145,8 @@ jobs:
         include:
           - variant: full
             without: ""
+          - variant: no-objects
+            without: fresh-animations-objects
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -265,7 +267,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full]
+        variant: [full, no-objects]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -280,7 +282,7 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
       - name: zombie, skeleton, creeper (Creepers add-on)
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12
-      - name: pig, iron golem, chicken (Details add-on)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_3 12
-      - name: spider, chest, minecart (Spiders and Objects add-ons)
+      - name: spider, chest, crafting table (Spiders and Objects add-ons)
         run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_4 12
+      - name: minecart, ender chest, boat (Objects add-on)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_5 12

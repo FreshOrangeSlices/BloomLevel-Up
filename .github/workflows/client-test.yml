@@ -157,26 +157,11 @@ jobs:
       - name: client game test with the pack
         run: |
           set -o pipefail
-          sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 libegl1 libegl-mesa0 mesa-utils xvfb
+          sudo apt-get install -y libgl1-mesa-dri libegl1 libegl-mesa0
           chmod +x ./gradlew
-          # Sodium and Iris switch the game to OpenGL (see build.gradle). Xvfb's GLX has no visual the game accepts,
-          # so first without X at all (SDL's offscreen video driver, OpenGL through EGL), then on Xvfb through EGL.
-          if SDL_VIDEO_DRIVER=offscreen ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log; then
-            exit 0
-          fi
-          echo "BLOOMTEST pack: offscreen failed, trying Xvfb + EGL" | tee -a client-pack.log
-          SDL_VIDEO_FORCE_EGL=1 xvfb-run -a -s "-screen 0 1920x1080x24" ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee -a client-pack.log
-      - name: what OpenGL the runner has
-        if: always()
-        run: |
-          {
-            xvfb-run -a -s "-screen 0 1920x1080x24" glxinfo -B 2>&1 | head -25
-            echo "-- GLX visuals"
-            xvfb-run -a -s "-screen 0 1920x1080x24" glxinfo 2>&1 | grep -A12 "GLX Visuals" | head -14
-            echo "-- EGL"
-            eglinfo -B 2>&1 | head -30 || true
-          } > gl.txt 2>&1
-          python3 -c "t=open('gl.txt').read().replace('%','%25').replace(chr(10),'%0A'); print('::notice title=client-pack-gl::'+t[:3900])"
+          # Sodium and Iris switch the game to OpenGL (see build.gradle), and Xvfb's GLX has no visual the game
+          # accepts: no X at all, SDL's offscreen video driver (OpenGL through Mesa's EGL, software rendering).
+          SDL_VIDEO_DRIVER=offscreen ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log
       - name: report
         if: always()
         run: |
@@ -184,24 +169,27 @@ jobs:
           import os, re
           if not os.path.exists('client-pack.log'):
               raise SystemExit(0)
-          lines = open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          noise = re.compile(r'flite|Narrator|text2speech|sessionserver|SocketTimeout|Read timed out|NioSocketImpl|authlib|Realms|cardinal-components-api.properties|UnixException|UnixFileSystemProvider|Files.newByteChannel')
+          lines = [l if len(l) < 400 else l[:400] + ' ...' for l in open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()]
+          lines = [l for l in lines if not noise.search(l)]
           tests = [l for l in lines if 'BLOOMTEST' in l]
-          print(f"::notice title=client-pack-checks::{esc(chr(10).join(tests)[:3900] or 'no BLOOMTEST lines')}")
+          print(f"::notice title=client-pack-checks::{esc(chr(10).join(t[:600] for t in tests)[:3900] or 'no BLOOMTEST lines')}")
+          # Each attempt: what happened after the game reached the title screen (or the last 80 lines before it).
+          starts = [i for i, l in enumerate(lines) if re.search(r'Loading \d+ mods', l)] or [0]
+          for n, begin in enumerate(starts[:2]):
+              finish = starts[n + 1] if n + 1 < len(starts) else len(lines)
+              part = lines[begin:finish]
+              keep = [l for l in part if re.search(r'BLOOMTEST|ERROR|FATAL|Exception|Caused by|AssertionError|Timeout|timed out|failed|Failed|What went wrong|\tat net\.fabricmc|\tat knot//com\.freshorangeslices', l)]
+              text = '\n'.join(dict.fromkeys(keep[-120:])) + '\n-- last lines --\n' + '\n'.join(part[-40:])
+              chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:6]
+              for m, chunk in enumerate(chunks):
+                  print(f"::warning title=client-pack-attempt{n + 1}-{m:02d}::{esc(chunk)}")
           loading = [l for l in lines if re.search(r'Loading \d+ mods', l)]
           if loading:
               start = lines.index(loading[0])
-              print(f"::notice title=client-pack-mods::{esc(chr(10).join(lines[start:start + 120])[:3900])}")
-          keep = []
-          for i, line in enumerate(lines):
-              if re.search(r'(error:|ERROR|FAILED|What went wrong|Exception|Caused by|AssertionError|Mixin apply|Incompatible|requires)', line):
-                  keep.extend(lines[max(0, i - 1):i + 4])
-          text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
-          chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:12]
-          for n, chunk in enumerate(chunks):
-              print(f"::warning title=client-pack-log-{n:02d}::{esc(chunk)}")
-          tail = '\n'.join(lines[-25:])
-          print(f"::notice title=client-pack-summary::{esc(tail[:3900])}")
+              mods = [l for l in lines[start + 1:start + 400] if l.startswith('\t- ')]
+              print(f"::notice title=client-pack-mods::{esc(loading[0] + chr(10) + ' '.join(m.strip()[2:] for m in mods)[:3800])}")
           PY
       - name: capture screenshots and logs
         if: always()

@@ -7,12 +7,5 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
-      - name: a stand-in Bloom jar (metadata only)
-        run: |
-          mkdir -p fake && cd fake
-          printf '{"schemaVersion":1,"id":"bloomlevelup","version":"0.0.0","environment":"*","depends":{"fabric-api":"*","minecraft":"~26.3"}}' > fabric.mod.json
-          zip -q ../bloomlevelup-test.jar fabric.mod.json
-      - name: build the pack
-        run: python3 pack/build_pack.py bloomlevelup-test.jar test out
-      - name: what each resource pack replaces
-        run: python3 pack/dump_rp.py "out/Bloom Pack test.mrpack"
+      - name: what exists for 26.3
+        run: python3 pack/scout.py

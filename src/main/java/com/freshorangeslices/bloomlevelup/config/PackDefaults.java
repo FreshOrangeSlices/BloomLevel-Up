@@ -6,15 +6,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * The Bloom Pack's first-launch look: its resource packs switched on in the right order and its shader picked.
+ * The Bloom Pack's first-launch setup: its resource packs switched on in the right order, its shader picked and a few
+ * key bindings moved so no two mods start on the same key.
  * Launchers don't reliably copy a pack's own options.txt (and copying it would wipe a player's settings on every
  * update), so the pack ships {@code config/bloomlevelup/pack-defaults.properties} instead and Bloom applies it
- * before the game starts, once per change of that file. Only the resource pack list and the shader are touched;
- * every other setting stays the player's. Plain Java, no game classes, so it can be unit tested.
+ * before the game starts, once per change of that file. Only the resource pack list, the shader and the listed keys
+ * are touched; every other setting stays the player's. Plain Java, no game classes, so it can be unit tested.
  */
 public final class PackDefaults {
 	public static final String FILE = "bloomlevelup/pack-defaults.properties";
@@ -23,14 +26,21 @@ public final class PackDefaults {
 	private PackDefaults() {
 	}
 
-	/** What the pack wants: resource packs bottom to top (ids as options.txt has them), and a shader pack or null. */
-	public record Defaults(List<String> resourcePacks, String shaderPack) {
+	/**
+	 * What the pack wants: resource packs bottom to top (ids as options.txt has them), a shader pack or null, and key
+	 * bindings by name ({@code iris.keybind.reload}) with the key each starts on ({@code key.keyboard.v}).
+	 */
+	public record Defaults(List<String> resourcePacks, String shaderPack, Map<String, String> keys) {
 	}
 
-	/** Reads {@code resourcePacks=a|b|c} and {@code shaderPack=name} lines; anything else is ignored. */
+	/**
+	 * Reads {@code resourcePacks=a|b|c}, {@code shaderPack=name} and {@code keys=name:key|name:key} lines; anything
+	 * else is ignored.
+	 */
 	public static Defaults parse(List<String> lines) {
 		List<String> packs = new ArrayList<>();
 		String shader = null;
+		Map<String, String> keys = new LinkedHashMap<>();
 
 		for (String raw : lines) {
 			String line = raw.strip();
@@ -50,10 +60,18 @@ public final class PackDefaults {
 				}
 			} else if (key.equals("shaderPack") && !value.isEmpty()) {
 				shader = value;
+			} else if (key.equals("keys")) {
+				for (String entry : value.split("\\|")) {
+					int colon = entry.lastIndexOf(':');
+
+					if (colon > 0 && colon < entry.length() - 1) {
+						keys.put(entry.substring(0, colon).strip(), entry.substring(colon + 1).strip());
+					}
+				}
 			}
 		}
 
-		return new Defaults(List.copyOf(packs), shader);
+		return new Defaults(List.copyOf(packs), shader, Map.copyOf(keys));
 	}
 
 	/**
@@ -63,7 +81,21 @@ public final class PackDefaults {
 	 * the version after all.
 	 */
 	public static List<String> mergeOptions(List<String> lines, List<String> packs) {
+		return mergeOptions(lines, packs, Map.of());
+	}
+
+	/** As above, and each listed key binding set to its key ({@code key_<name>:<key>}); no packs leaves the list alone. */
+	public static List<String> mergeOptions(List<String> lines, List<String> packs, Map<String, String> keys) {
 		List<String> out = new ArrayList<>(lines);
+
+		for (Map.Entry<String, String> key : new java.util.TreeMap<>(keys).entrySet()) {
+			put(out, "key_" + key.getKey(), key.getValue());
+		}
+
+		if (packs.isEmpty()) {
+			return out;
+		}
+
 		List<String> current = jsonList(value(out, "resourcePacks"));
 		List<String> on = new ArrayList<>();
 		on.add("vanilla");
@@ -115,9 +147,9 @@ public final class PackDefaults {
 
 		Defaults defaults = parse(raw);
 
-		if (!defaults.resourcePacks().isEmpty()) {
+		if (!defaults.resourcePacks().isEmpty() || !defaults.keys().isEmpty()) {
 			List<String> options = Files.isRegularFile(optionsFile) ? Files.readAllLines(optionsFile, StandardCharsets.UTF_8) : List.of();
-			Files.write(optionsFile, mergeOptions(options, defaults.resourcePacks()), StandardCharsets.UTF_8);
+			Files.write(optionsFile, mergeOptions(options, defaults.resourcePacks(), defaults.keys()), StandardCharsets.UTF_8);
 		}
 
 		if (defaults.shaderPack() != null) {
@@ -129,7 +161,8 @@ public final class PackDefaults {
 		Files.createDirectories(marker.getParent());
 		Files.writeString(marker, stamp + "\n", StandardCharsets.UTF_8);
 		log.accept("Bloom Pack defaults applied: " + defaults.resourcePacks().size() + " resource packs on"
-				+ (defaults.shaderPack() == null ? "" : ", shader " + defaults.shaderPack()));
+				+ (defaults.shaderPack() == null ? "" : ", shader " + defaults.shaderPack())
+				+ (defaults.keys().isEmpty() ? "" : ", keys " + new java.util.TreeMap<>(defaults.keys())));
 		return true;
 	}
 

@@ -118,6 +118,27 @@
       "fresh-animations-objects"
     ],
     "shader": "complementary-reimagined",
-    "_resource_packs": "Bottom to top, above vanilla's Default. Modrinth slugs, or id:<pack id> for packs built into a mod (Continuity's two)."
+    "_resource_packs": "Bottom to top, above vanilla's Default. Modrinth slugs, or id:<pack id> for packs built into a mod (Continuity's two).",
+    "keys": {
+      "keybinds.combat_roll.roll": "key.keyboard.r",
+      "key.bloomlevelup.weapon_skill": "key.keyboard.v",
+      "iris.keybind.reload": "key.keyboard.unknown"
+    },
+    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): the roll keeps R, Bloom's weapon skill moves to V (it was R) and Iris's 'reload shaders' is unbound (it was R too)."
+  },
+  "config_files": {
+    "_comment": "Config files for both sides (the server's rules, which a singleplayer world reads too), written as given. Combat Roll: a 5-tick (quarter second) window where hits don't land after a roll (FreshOrangeSlices' call); the rest are its defaults.",
+    "config/combat_roll/server.json5": {
+      "invulnerable_ticks_upon_roll": 5,
+      "roll_duration": 8,
+      "allow_auto_jump_while_rolling": true,
+      "allow_jump_while_rolling": false,
+      "allow_rolling_while_weapon_cooldown": false,
+      "allow_rolling_while_airborn": false,
+      "exhaust_on_roll": 0.1,
+      "food_level_required": 6.0,
+      "roll_cooldown": 4.0,
+      "additional_roll_distance": 0.0
+    }
   }
 }

@@ -12,7 +12,9 @@ import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 
 /**
  * Weapon families by item tag ({@code bloomlevelup:weapon/<family>}), so modded weapons join a family by
- * tag and one item may deliberately belong to several. An empty hand is Unarmed.
+ * tag and one item may deliberately belong to several. An item in {@code bloomlevelup:weapon/not_<family>} is never
+ * in that family, even when the family's tag takes it in through a wider tag (the RPG Series puts its maces, hammers,
+ * spears, glaives and double axes in {@code #minecraft:swords}). An empty hand is Unarmed.
  */
 public final class Weapons {
 	public enum Family {
@@ -27,10 +29,13 @@ public final class Weapons {
 
 		private final boolean melee;
 		private final TagKey<Item> tag;
+		private final TagKey<Item> excluded;
 
 		Family(boolean melee) {
+			String name = name().toLowerCase(java.util.Locale.ROOT);
 			this.melee = melee;
-			this.tag = TagKey.create(Registries.ITEM, BloomLevelUp.id("weapon/" + name().toLowerCase(java.util.Locale.ROOT)));
+			this.tag = TagKey.create(Registries.ITEM, BloomLevelUp.id("weapon/" + name));
+			this.excluded = TagKey.create(Registries.ITEM, BloomLevelUp.id("weapon/not_" + name));
 		}
 
 		public boolean melee() {
@@ -39,6 +44,11 @@ public final class Weapons {
 
 		public TagKey<Item> tag() {
 			return tag;
+		}
+
+		/** In the family's tag and not in its {@code not_} tag. */
+		boolean holds(ItemStack stack) {
+			return stack.is(tag) && !stack.is(excluded);
 		}
 	}
 
@@ -53,7 +63,7 @@ public final class Weapons {
 		EnumSet<Family> out = EnumSet.noneOf(Family.class);
 
 		for (Family family : Family.values()) {
-			if (family != Family.UNARMED && stack.is(family.tag())) {
+			if (family != Family.UNARMED && family.holds(stack)) {
 				out.add(family);
 			}
 		}
@@ -66,7 +76,7 @@ public final class Weapons {
 			return stack == null || stack.isEmpty();
 		}
 
-		return stack != null && !stack.isEmpty() && stack.is(family.tag());
+		return stack != null && !stack.isEmpty() && family.holds(stack);
 	}
 
 	/** Anything a player can sensibly swing: a tagged melee weapon or an empty hand. */

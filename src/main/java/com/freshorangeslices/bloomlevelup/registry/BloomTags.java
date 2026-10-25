@@ -21,6 +21,9 @@ public final class BloomTags {
 	public static final TagKey<Item> ARMOR_HEAVY = item("armor/heavy");
 	public static final TagKey<Item> WEAPON_BLADE = item("weapon/blade");
 	public static final TagKey<Item> WEAPON_BLUNT = item("weapon/blunt");
+	/** Never blade (or blunt) weapons, even when {@link #WEAPON_BLADE} takes them in through a wider tag. */
+	public static final TagKey<Item> WEAPON_NOT_BLADE = item("weapon/not_blade");
+	public static final TagKey<Item> WEAPON_NOT_BLUNT = item("weapon/not_blunt");
 	public static final TagKey<Item> MEAT = item("food/meat");
 	public static final TagKey<Item> UTILITY_TOOLS = item("utility_tools");
 	/** Iron Stomach: raw, rotten and poisonous food that becomes safe (and at least as filling as cooked chicken). */

@@ -71,7 +71,7 @@ public final class CombatControls {
 
 	public static void init(KeyMapping.Category category) {
 		skillKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.KEYBOARD,
-				InputConstants.KEY_R, category));
+				InputConstants.KEY_V, category));
 
 		ClientTickEvents.END_CLIENT_TICK.register(CombatControls::tick);
 

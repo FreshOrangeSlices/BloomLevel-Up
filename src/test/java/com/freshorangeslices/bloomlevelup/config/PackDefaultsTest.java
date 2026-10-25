@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,23 @@ class PackDefaultsTest {
 		assertEquals(List.of("file/FA.zip", "file/FA+Details-v2.3.zip", "file/FA+Player-v1.1.zip"), defaults.resourcePacks());
 		assertEquals("Complementary.zip", defaults.shaderPack());
 		assertNull(PackDefaults.parse(List.of("resourcePacks=a")).shaderPack());
+		assertTrue(PackDefaults.parse(List.of("resourcePacks=a")).keys().isEmpty());
+	}
+
+	@Test
+	void readsKeyBindings() {
+		PackDefaults.Defaults defaults = PackDefaults.parse(List.of(
+				"keys=iris.keybind.reload:key.keyboard.unknown| key.bloomlevelup.weapon_skill:key.keyboard.v|broken|:key.keyboard.x"));
+		assertEquals(Map.of("iris.keybind.reload", "key.keyboard.unknown", "key.bloomlevelup.weapon_skill", "key.keyboard.v"), defaults.keys());
+	}
+
+	@Test
+	void movesTheListedKeysAndNothingElse() {
+		List<String> options = PackDefaults.lines("resourcePacks:[\"vanilla\",\"file/Mine.zip\"]\nkey_iris.keybind.reload:key.keyboard.r\nkey_key.jump:key.keyboard.space");
+		List<String> out = PackDefaults.mergeOptions(options, List.of(),
+				Map.of("iris.keybind.reload", "key.keyboard.unknown", "keybinds.combat_roll.roll", "key.keyboard.r"));
+		assertEquals(List.of("resourcePacks:[\"vanilla\",\"file/Mine.zip\"]", "key_iris.keybind.reload:key.keyboard.unknown",
+				"key_key.jump:key.keyboard.space", "key_keybinds.combat_roll.roll:key.keyboard.r"), out, "no packs: the pack list stays as it is");
 	}
 
 	@Test
@@ -58,11 +76,13 @@ class PackDefaultsTest {
 		Path config = dir.resolve("config");
 		Path options = dir.resolve("options.txt");
 		Files.createDirectories(config.resolve("bloomlevelup"));
-		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip\nshaderPack=C.zip\n", StandardCharsets.UTF_8);
+		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip\nshaderPack=C.zip\nkeys=iris.keybind.reload:key.keyboard.unknown\n",
+				StandardCharsets.UTF_8);
 		List<String> logs = new ArrayList<>();
 
 		assertTrue(PackDefaults.apply(config, options, logs::add));
 		assertTrue(Files.readString(options).contains("\"file/FA.zip\""));
+		assertTrue(Files.readString(options).contains("key_iris.keybind.reload:key.keyboard.unknown"));
 		assertTrue(Files.readString(config.resolve("iris.properties")).contains("shaderPack=C.zip"));
 
 		// The player switches the pack off: the same defaults don't switch it back on.

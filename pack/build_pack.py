@@ -280,11 +280,19 @@ def main():
         lines.append("resourcePacks=" + "|".join(packs))
     if shader in by_slug:
         lines.append("shaderPack=" + os.path.basename(by_slug[shader]["path"]))
+    if presets.get("keys"):
+        lines.append("keys=" + "|".join(f"{name}:{key}" for name, key in presets["keys"].items()))
     if len(lines) > 1:
         pack_defaults["config/bloomlevelup/pack-defaults.properties"] = ("\n".join(lines) + "\n").encode()
     # Other client config files, as given (a JSON object is written as JSON). A mod fills in the settings left out.
     for path, content in presets.get("files", {}).items():
         client_overrides[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
+    # Config files for both sides (server rules a singleplayer world reads too), as given; in the server zip as well.
+    for path, content in spec.get("config_files", {}).items():
+        if path.startswith("_"):
+            continue
+        overrides[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
+        sides[path] = {"client": "required", "server": "required"}
 
     # ---- the .mrpack
     index = {
@@ -327,7 +335,8 @@ def main():
         for path, data in overrides.items():
             if sides[path]["server"] != "unsupported":
                 server.writestr(path, data)
-                server_mods.append(os.path.basename(path))
+                if path.startswith("mods/"):
+                    server_mods.append(os.path.basename(path))
         server.writestr("fabric-server.jar", server_launcher(game, spec["fabric_loader"]))
         for name, text in (("start.bat", START_BAT.replace("\n", "\r\n")), ("eula.txt", EULA), ("server.properties", SERVER_PROPERTIES),
                            ("README.txt", README)):

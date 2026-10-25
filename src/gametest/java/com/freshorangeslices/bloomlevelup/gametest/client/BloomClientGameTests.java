@@ -105,6 +105,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		if (!"true".equals(shaderInUse())) {
 			failures.add("the pack's shader wasn't on at the first launch");
 		}
+
+		packKeys(context);
 		// CI draws in software: with the shader on, a frame takes seconds. The world part runs without it (and at a
 		// short view distance); the shader comes back for one picture at the end.
 		context.runOnClient(client -> {
@@ -129,6 +131,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null, SharedConstants.TICKS_PER_MINUTE);
 			context.waitTicks(40);
+			rpgSorting(singleplayer);
 
 			// Origins asks for an origin on the first join: picture it, then pick Human so the rest can go on.
 			String screen = context.computeOnClient(client -> client.gui.screen() == null ? "none" : client.gui.screen().getClass().getName());
@@ -180,6 +183,112 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.waitTicks(100);
 			context.takeScreenshot("pack_shader");
 			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
+		}
+	}
+
+	/**
+	 * The keys the pack moves on the first launch: the roll keeps R, Bloom's weapon skill is on V and Iris's "reload
+	 * shaders" is unbound, so nothing else starts on R or V. Every other key two bindings share goes to the log
+	 * (vanilla's F3 combinations are left out: they share letters on purpose).
+	 */
+	private void packKeys(ClientGameTestContext context) {
+		String[][] expected = {{"keybinds.combat_roll.roll", "key.keyboard.r"}, {"key.bloomlevelup.weapon_skill", "key.keyboard.v"},
+			{"iris.keybind.reload", "key.keyboard.unknown"}};
+		java.util.Map<String, List<String>> byKey = context.computeOnClient(client -> {
+			java.util.Map<String, List<String>> keys = new java.util.TreeMap<>();
+
+			for (net.minecraft.client.KeyMapping mapping : client.options.keyMappings) {
+				if (!mapping.getName().startsWith("key.debug.")) {
+					keys.computeIfAbsent(mapping.saveString(), key -> new ArrayList<>()).add(mapping.getName());
+				}
+			}
+
+			return keys;
+		});
+
+		for (String[] pair : expected) {
+			List<String> on = byKey.getOrDefault(pair[1], List.of());
+
+			if (!on.contains(pair[0])) {
+				failures.add(pair[0] + " isn't on " + pair[1]);
+			} else if (!pair[1].endsWith("unknown") && on.size() > 1) {
+				failures.add(pair[1] + " is shared: " + on);
+			}
+		}
+
+		List<String> shared = new ArrayList<>();
+		byKey.forEach((key, names) -> {
+			if (names.size() > 1 && !key.endsWith("unknown")) {
+				shared.add(key + " " + names);
+			}
+		});
+		BloomLevelUp.LOGGER.info("BLOOMTEST pack: keys shared by more than one binding: {}", shared.isEmpty() ? "none" : shared);
+	}
+
+	/**
+	 * The RPG Series' weapons in Bloom's weapon families (their maces, hammers, spears, glaives and double axes are in
+	 * #minecraft:swords, which Bloom's sword tag takes in, so the not_sword tag has to keep them out), blade or blunt,
+	 * and their armor's class (1 light, 2 medium, 3 heavy). Also the roll's quarter second of invulnerability from the
+	 * pack's Combat Roll config.
+	 */
+	private void rpgSorting(TestSingleplayerContext singleplayer) {
+		String[][] weapons = {
+			{"minecraft:iron_sword", "[SWORD]"}, {"minecraft:iron_axe", "[AXE]"},
+			{"paladins:iron_claymore", "[SWORD]"}, {"rogues:iron_dagger", "[SWORD]"}, {"rogues:iron_sickle", "[SWORD]"},
+			{"rogues:iron_double_axe", "[AXE]"}, {"paladins:iron_mace", "[MACE]"}, {"paladins:iron_great_hammer", "[MACE]"},
+			{"archers:iron_spear", "[SPEAR]"}, {"rogues:iron_glaive", "[SPEAR]"},
+			{"archers:composite_longbow", "[BOW]"}, {"archers:mechanic_shortbow", "[BOW]"},
+			{"archers:heavy_crossbow", "[CROSSBOW]"}, {"archers:rapid_crossbow", "[CROSSBOW]"},
+			{"wizards:staff_wizard", "[]"}, {"paladins:holy_wand", "[]"}};
+		String[][] armor = {
+			{"wizards:wizard_robe_chest", "1"}, {"armory_rpgs:astral_robe_chest", "1"}, {"archers:archer_armor_chest", "1"},
+			{"rogues:warrior_armor_chest", "1"}, {"armory_rpgs:slayer_armor_chest", "1"}, {"paladins:paladin_armor_chest", "2"},
+			{"paladins:crusader_armor_chest", "3"}, {"rogues:berserker_armor_chest", "3"}, {"armory_rpgs:justicar_armor_chest", "3"}};
+		List<String> report = singleplayer.getServer().computeOnServer(server -> {
+			List<String> out = new ArrayList<>();
+
+			for (String[] row : weapons) {
+				java.util.Optional<net.minecraft.world.item.Item> item = net.minecraft.core.registries.BuiltInRegistries.ITEM
+						.getOptional(net.minecraft.resources.Identifier.parse(row[0]));
+				net.minecraft.world.item.ItemStack stack = item.map(net.minecraft.world.item.ItemStack::new).orElse(null);
+				String got = stack == null ? "missing" : com.freshorangeslices.bloomlevelup.skill.combat.Weapons.families(stack).toString();
+				String edge = stack == null ? "" : (stack.is(com.freshorangeslices.bloomlevelup.registry.BloomTags.WEAPON_BLUNT) ? " blunt" : "")
+						+ (stack.is(com.freshorangeslices.bloomlevelup.registry.BloomTags.WEAPON_BLADE)
+							&& !stack.is(com.freshorangeslices.bloomlevelup.registry.BloomTags.WEAPON_NOT_BLADE) ? " blade" : "");
+				out.add((got.equals(row[1]) ? "" : "WRONG ") + row[0] + "=" + got + edge);
+			}
+
+			for (String[] row : armor) {
+				java.util.Optional<net.minecraft.world.item.Item> item = net.minecraft.core.registries.BuiltInRegistries.ITEM
+						.getOptional(net.minecraft.resources.Identifier.parse(row[0]));
+				String got = item.map(i -> String.valueOf(com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles
+						.weightOf(new net.minecraft.world.item.ItemStack(i)))).orElse("missing");
+				out.add((got.equals(row[1]) ? "" : "WRONG ") + row[0] + "=" + got);
+			}
+
+			out.add("roll invulnerable ticks=" + rollInvulnerableTicks());
+			return out;
+		});
+		BloomLevelUp.LOGGER.info("BLOOMTEST pack: RPG gear in Bloom: {}", report);
+
+		for (String line : report) {
+			if (line.startsWith("WRONG")) {
+				failures.add(line);
+			}
+		}
+
+		if (!report.contains("roll invulnerable ticks=5")) {
+			failures.add("the roll's invulnerability isn't the pack's 5 ticks: " + report.get(report.size() - 1));
+		}
+	}
+
+	/** Combat Roll's server setting, read by name so Bloom never depends on it. */
+	private static String rollInvulnerableTicks() {
+		try {
+			Object config = Class.forName("net.combat_roll.CombatRollMod").getField("config").get(null);
+			return String.valueOf(config.getClass().getField("invulnerable_ticks_upon_roll").get(config));
+		} catch (ReflectiveOperationException | LinkageError e) {
+			return "unreadable (" + e + ")";
 		}
 	}
 

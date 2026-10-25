@@ -282,11 +282,11 @@ public final class ArmorSkill {
 			layers.add(new Layer("elemental_skin", 0.50));
 		}
 
-		if (active(profile, ArmorIds.VIBRANIUM) && isWeaponClass(source, BloomTags.BLADE_DAMAGE, BloomTags.WEAPON_BLADE)) {
+		if (active(profile, ArmorIds.VIBRANIUM) && isWeaponClass(source, BloomTags.BLADE_DAMAGE, BloomTags.WEAPON_BLADE, BloomTags.WEAPON_NOT_BLADE)) {
 			layers.add(new Layer("vibranium", 0.30));
 		}
 
-		if (active(profile, ArmorIds.ADAMANTIUM) && isWeaponClass(source, BloomTags.BLUNT_DAMAGE, BloomTags.WEAPON_BLUNT)) {
+		if (active(profile, ArmorIds.ADAMANTIUM) && isWeaponClass(source, BloomTags.BLUNT_DAMAGE, BloomTags.WEAPON_BLUNT, BloomTags.WEAPON_NOT_BLUNT)) {
 			layers.add(new Layer("adamantium", 0.40));
 		}
 
@@ -312,7 +312,7 @@ public final class ArmorSkill {
 	}
 
 	private static boolean isWeaponClass(DamageSource source, net.minecraft.tags.TagKey<net.minecraft.world.damagesource.DamageType> damageTag,
-			net.minecraft.tags.TagKey<net.minecraft.world.item.Item> weaponTag) {
+			net.minecraft.tags.TagKey<net.minecraft.world.item.Item> weaponTag, net.minecraft.tags.TagKey<net.minecraft.world.item.Item> notTag) {
 		if (source.is(damageTag)) {
 			return true;
 		}
@@ -322,7 +322,7 @@ public final class ArmorSkill {
 		}
 
 		ItemStack weapon = source.getWeaponItem();
-		return weapon != null && !weapon.isEmpty() && weapon.is(weaponTag);
+		return weapon != null && !weapon.isEmpty() && weapon.is(weaponTag) && !weapon.is(notTag);
 	}
 
 	/** Armor points before vanilla's clamp, so Defense invested past the cap still counts for overcap. */

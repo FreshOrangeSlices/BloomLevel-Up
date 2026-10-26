@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -52,13 +52,10 @@ final class MajorDetails {
 		}
 	}
 
+	/** Forge 1.20.1 build: the mace combos (Charged Burst, Mace Throw, Gale Throw) are gone with the mace. */
 	private static final List<Combo> COMBOS = List.of(
 			new Combo("charged_throw", List.of(Set.of(CombatIds.MASTER_OF_ARMS), Set.of(CombatIds.CATCH), Set.of(CombatIds.HEAVY_HANDS, CombatIds.CHARGE_ATTACK))),
-			new Combo("charged_burst", List.of(Set.of(CombatIds.MASTER_OF_ARMS), Set.of(CombatIds.HEAVY_HANDS), Set.of(CombatIds.WIND_IMPACT))),
-			new Combo("storm_call", List.of(Set.of(CombatIds.MASTER_OF_ARMS), Set.of(CombatIds.HEAVY_HANDS), Set.of(CombatIds.LIGHTNING_SUMMON))),
-			new Combo("mace_throw", List.of(Set.of(CombatIds.MASTER_OF_ARMS), Set.of(CombatIds.CATCH), Set.of(CombatIds.WIND_IMPACT))),
-			new Combo("gale_throw", List.of(Set.of(CombatIds.MASTER_OF_ARMS), Set.of(CombatIds.CATCH), Set.of(CombatIds.WIND_IMPACT),
-					Set.of(CombatIds.HEAVY_HANDS))));
+			new Combo("storm_call", List.of(Set.of(CombatIds.MASTER_OF_ARMS), Set.of(CombatIds.HEAVY_HANDS), Set.of(CombatIds.LIGHTNING_SUMMON))));
 
 	private static final Pattern TOKEN = Pattern.compile("\\{([A-Za-z][A-Za-z0-9]*)(?::(pct|sec|min|x))?\\}");
 	private static final Set<String> WARNED = new HashSet<>();
@@ -75,7 +72,7 @@ final class MajorDetails {
 	static final float BIG = 1.5F;
 
 	/** Text drawn {@link #BIG} times as large, its top-left corner at x, y (about 13 pixels tall). */
-	static void big(GuiGraphicsExtractor g, Font font, Component text, int x, int y, int color) {
+	static void big(BloomGraphics g, Font font, Component text, int x, int y, int color) {
 		g.pose().pushMatrix();
 		g.pose().translate(x, y);
 		g.pose().scale(BIG, BIG);

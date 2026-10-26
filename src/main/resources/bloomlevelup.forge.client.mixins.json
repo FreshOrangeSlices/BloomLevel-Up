@@ -1,0 +1,20 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.freshorangeslices.bloomlevelup.client.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "bloomlevelup.refmap.json",
+	"mixins": [],
+	"client": [
+		"AbstractContainerScreenAccessor",
+		"AnvilScreenMixin",
+		"MinecraftInvoker",
+		"MinecraftMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

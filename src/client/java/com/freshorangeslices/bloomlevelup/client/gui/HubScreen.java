@@ -12,26 +12,24 @@ import java.util.Set;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.input.MouseButtonEvent;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
@@ -112,10 +110,10 @@ public final class HubScreen extends Screen {
 	/** Space kept clear along the page's edges by the scattered icons. */
 	private static final int SCATTER_MARGIN = 36;
 	/** Shown until the art exists: the advancements screen's stone, darkened. */
-	private static final Identifier FALLBACK_TILE = Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png");
+	private static final ResourceLocation FALLBACK_TILE = new ResourceLocation("textures/gui/advancements/backgrounds/stone.png");
 	private static final String COPYCAT = BloomLevelUp.key("combat/copycat");
 	/** The gold frame around the window: a nine-slice GUI sprite ({@code textures/gui/sprites/hub/frame.png}), this wide. */
-	private static final Identifier FRAME_SPRITE = BloomLevelUp.id("hub/frame");
+	private static final ResourceLocation FRAME_SPRITE = BloomLevelUp.id("hub/frame");
 	private static final int FRAME = 6;
 	/** The stats window's column left of the page while it's open (window, 4-pixel gaps either side). */
 	private static final int STATS_COLUMN = STATS_W + 8;
@@ -123,9 +121,9 @@ public final class HubScreen extends Screen {
 	/** The category tabs: small item plates, centred; the reset buttons sit in the corners either side. */
 	private static final int TAB_W = 26;
 	private static final int TAB_H = 20;
-	private static final Identifier RESET_LEVELS_ICON = BloomLevelUp.id("textures/gui/hub/reset_levels.png");
-	private static final Identifier RESET_MAJORS_ICON = BloomLevelUp.id("textures/gui/hub/reset_majors.png");
-	private static final Identifier STAT_SHEET_ICON = BloomLevelUp.id("textures/gui/hub/stat_sheet.png");
+	private static final ResourceLocation RESET_LEVELS_ICON = BloomLevelUp.id("textures/gui/hub/reset_levels.png");
+	private static final ResourceLocation RESET_MAJORS_ICON = BloomLevelUp.id("textures/gui/hub/reset_majors.png");
+	private static final ResourceLocation STAT_SHEET_ICON = BloomLevelUp.id("textures/gui/hub/stat_sheet.png");
 	private static final int STRIP_H = 20;
 	/** Where the strip's status text starts: right of the two build helmets in its left corner. */
 	private static final int STRIP_TEXT_X = 4 + 2 * 20 + 4 + 6;
@@ -469,13 +467,13 @@ public final class HubScreen extends Screen {
 
 	/** A category tab's item: a pickaxe, a sword, a chestplate, a potion (made on first use, once items exist). */
 	private static ItemStack tabItem(CategoryDefinition category) {
-		Identifier id = Identifier.tryParse(category.id());
+		ResourceLocation id = ResourceLocation.tryParse(category.id());
 		String path = id == null ? "" : id.getPath();
 		return TAB_ITEMS.computeIfAbsent(path, name -> switch (name) {
 			case "utility" -> new ItemStack(Items.DIAMOND_PICKAXE);
 			case "combat" -> new ItemStack(Items.DIAMOND_SWORD);
 			case "armor" -> new ItemStack(Items.DIAMOND_CHESTPLATE);
-			case "misc" -> PotionContents.createItemStack(Items.POTION, Potions.REGENERATION);
+			case "misc" -> PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.REGENERATION);
 			default -> new ItemStack(Items.BOOK);
 		});
 	}
@@ -541,7 +539,7 @@ public final class HubScreen extends Screen {
 
 			// The icon is the on/off switch: a corner dot, green when on and red when off (like the Majors).
 			boolean naturalOff = progress.disabledStats().contains(stat.id());
-			Identifier icon = IconTextures.resolve(stat.icon());
+			ResourceLocation icon = IconTextures.resolve(stat.icon());
 
 			if (spendInvested) {
 				boolean off = progress.disabledInvested().contains(stat.id());
@@ -942,7 +940,19 @@ public final class HubScreen extends Screen {
 	// ------------------------------------------------------------------ drawing
 
 	@Override
-	public void extractRenderState(GuiGraphicsExtractor g, int realMouseX, int realMouseY, float delta) {
+	public void render(GuiGraphics graphics, int realMouseX, int realMouseY, float delta) {
+		BloomGraphics g = BloomGraphics.of(graphics);
+
+		try {
+			draw(g, graphics, realMouseX, realMouseY, delta);
+		} finally {
+			g.finish();
+		}
+	}
+
+	private void draw(BloomGraphics g, GuiGraphics graphics, int realMouseX, int realMouseY, float delta) {
+		// The game shows dimmed around the window (1.20.1's own screen background).
+		this.renderBackground(graphics);
 		// While the details window is open, nothing under it reacts to the mouse.
 		int mouseX = overlayOpen() ? -10000 : realMouseX;
 		int mouseY = overlayOpen() ? -10000 : realMouseY;
@@ -950,7 +960,7 @@ public final class HubScreen extends Screen {
 
 		if (!ClientBloomState.ready()) {
 			g.centeredText(this.font, Component.translatable("bloom.hub.not_ready"), this.width / 2, this.height / 2 - 4, MUTED);
-			super.extractRenderState(g, mouseX, mouseY, delta);
+			super.render(graphics, mouseX, mouseY, delta);
 			return;
 		}
 
@@ -979,7 +989,7 @@ public final class HubScreen extends Screen {
 		// Which build this is, so an old jar is easy to spot.
 		Component build = Component.literal("v" + BloomLevelUp.version());
 		g.text(this.font, build, panelX + panelW - 6 - this.font.width(build), panelY + panelH - 14, 0xFF5E5648);
-		super.extractRenderState(g, mouseX, mouseY, delta);
+		super.render(graphics, mouseX, mouseY, delta);
 
 		if (detailMajor != null) {
 			drawDetails(g, realMouseX, realMouseY);
@@ -1043,7 +1053,7 @@ public final class HubScreen extends Screen {
 	 * A gold-framed window over the dimmed hub: the Major's icon, name, tab, tree and cost, then
 	 * its sections, scrolled with the wheel. Esc, the × or a click outside closes it.
 	 */
-	private void drawDetails(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+	private void drawDetails(BloomGraphics g, int mouseX, int mouseY) {
 		MajorDefinition major = detailMajor;
 		g.nextStratum();
 		g.fill(0, 0, this.width, this.height, 0xB0000000);
@@ -1052,10 +1062,10 @@ public final class HubScreen extends Screen {
 		int w = detailW();
 		int h = detailH();
 		g.fill(x0, y0, x0 + w, y0 + h, 0xF6141210);
-		g.blitSprite(RenderPipelines.GUI_TEXTURED, FRAME_SPRITE, x0 - FRAME, y0 - FRAME, w + 2 * FRAME, h + 2 * FRAME);
+		g.blitSprite(BloomGraphics.GUI_TEXTURED, FRAME_SPRITE, x0 - FRAME, y0 - FRAME, w + 2 * FRAME, h + 2 * FRAME);
 
-		Identifier icon = IconTextures.resolve(major.icon());
-		g.blit(RenderPipelines.GUI_TEXTURED, icon, x0 + 8, y0 + 7, 0.0F, 0.0F, 32, 32, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+		ResourceLocation icon = IconTextures.resolve(major.icon());
+		g.blit(BloomGraphics.GUI_TEXTURED, icon, x0 + 8, y0 + 7, 0.0F, 0.0F, 32, 32, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
 		MajorDetails.big(g, this.font, MajorDetails.heading(name(major.translationKey(), major.id())), x0 + 48, y0 + 7, 0xFFFFD86B);
 
@@ -1075,7 +1085,7 @@ public final class HubScreen extends Screen {
 		int ly = detailLinkY();
 		g.fill(lx, ly, lx + 16, ly + 16, overLink ? 0xFFF2C443 : 0xFF8A7656);
 		g.fill(lx + 1, ly + 1, lx + 15, ly + 15, overLink ? 0xFF6A5A44 : 0xFF3A3128);
-		g.blit(RenderPipelines.GUI_TEXTURED, STAT_SHEET_ICON, lx + 2, ly + 2, 0.0F, 0.0F, 12, 12, 64, 64, 64, 64, 0xFFFFFFFF);
+		g.blit(BloomGraphics.GUI_TEXTURED, STAT_SHEET_ICON, lx + 2, ly + 2, 0.0F, 0.0F, 12, 12, 64, 64, 64, 64, 0xFFFFFFFF);
 		g.fill(x0 + 8, y0 + DETAIL_HEADER - 4, x0 + w - 8, y0 + DETAIL_HEADER - 3, 0xFF8A6A2A);
 
 		int bx = x0 + 10;
@@ -1143,18 +1153,20 @@ public final class HubScreen extends Screen {
 	}
 
 	@Override
-	public boolean keyPressed(net.minecraft.client.input.KeyEvent event) {
-		if (detailMajor != null && event.isEscape()) {
+	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+		boolean escape = keyCode == InputConstants.KEY_ESCAPE;
+
+		if (detailMajor != null && escape) {
 			closeDetails();
 			return true;
 		}
 
-		if (sheetWindow != null && event.isEscape()) {
+		if (sheetWindow != null && escape) {
 			closeSheet();
 			return true;
 		}
 
-		return super.keyPressed(event);
+		return super.keyPressed(keyCode, scanCode, modifiers);
 	}
 
 	/** Whether the details window or the stat sheet covers the hub (nothing under it reacts then). */
@@ -1275,9 +1287,9 @@ public final class HubScreen extends Screen {
 		ClientBloomState.definitions().major(majorId).ifPresent(this::openDetails);
 	}
 
-	private void drawPanel(GuiGraphicsExtractor g) {
+	private void drawPanel(BloomGraphics g) {
 		g.fill(panelX, panelY, panelX + panelW, panelY + panelH, PANEL);
-		g.blitSprite(RenderPipelines.GUI_TEXTURED, FRAME_SPRITE, panelX - FRAME, panelY - FRAME, panelW + 2 * FRAME, panelH + 2 * FRAME);
+		g.blitSprite(BloomGraphics.GUI_TEXTURED, FRAME_SPRITE, panelX - FRAME, panelY - FRAME, panelW + 2 * FRAME, panelH + 2 * FRAME);
 	}
 
 	/**
@@ -1285,14 +1297,14 @@ public final class HubScreen extends Screen {
 	 * like vanilla's GUI art), centred on the page and moving with it; plain dark around it. Until it exists:
 	 * the advancements screen's stone, darkened, filling the page.
 	 */
-	private void drawBackground(GuiGraphicsExtractor g) {
+	private void drawBackground(BloomGraphics g) {
 		g.enableScissor(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH);
 		g.fill(canvasX, canvasY, canvasX + canvasW, canvasY + canvasH, 0xFF120F0C);
 
 		if (backdrop != null) {
 			int w = backdrop.width();
 			int h = backdrop.height();
-			g.blit(RenderPipelines.GUI_TEXTURED, backdrop.texture(), screenX(0) - w / 2, screenY(0) - h / 2, 0.0F, 0.0F, w, h, w, h, w, h, 0xFFFFFFFF);
+			g.blit(BloomGraphics.GUI_TEXTURED, backdrop.texture(), screenX(0) - w / 2, screenY(0) - h / 2, 0.0F, 0.0F, w, h, w, h, w, h, 0xFFFFFFFF);
 			g.disableScissor();
 			return;
 		}
@@ -1308,7 +1320,7 @@ public final class HubScreen extends Screen {
 			for (int x = left; x < left + BOARD_W; x += 16) {
 				for (int y = top; y < top + BOARD_H; y += 16) {
 					if (x + 16 > x0 && x < x1 && y + 16 > y0 && y < y1) {
-						g.blit(RenderPipelines.GUI_TEXTURED, FALLBACK_TILE, x, y, 0.0F, 0.0F, 16, 16, 16, 16, 16, 16, 0xFFFFFFFF);
+						g.blit(BloomGraphics.GUI_TEXTURED, FALLBACK_TILE, x, y, 0.0F, 0.0F, 16, 16, 16, 16, 16, 16, 0xFFFFFFFF);
 					}
 				}
 			}
@@ -1320,16 +1332,16 @@ public final class HubScreen extends Screen {
 	}
 
 	/** A tab's background picture and its size in pixels. */
-	private record Backdrop(Identifier texture, int width, int height) {
+	private record Backdrop(ResourceLocation texture, int width, int height) {
 	}
 
 	/** {@code textures/gui/hub/background_<tab>.png}, else {@code background.png}, else none. */
 	private Backdrop findBackdrop(CategoryDefinition category) {
-		Identifier categoryId = Identifier.tryParse(category.id());
+		ResourceLocation categoryId = ResourceLocation.tryParse(category.id());
 		String path = categoryId == null ? "" : categoryId.getPath();
 
 		for (String name : List.of("background_" + path, "background")) {
-			Identifier texture = BloomLevelUp.id("textures/gui/hub/" + name + ".png");
+			ResourceLocation texture = BloomLevelUp.id("textures/gui/hub/" + name + ".png");
 			Optional<net.minecraft.server.packs.resources.Resource> resource = this.minecraft.getResourceManager().getResource(texture);
 			int[] size = resource.map(HubScreen::pngSize).orElse(null);
 
@@ -1360,7 +1372,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/** Lines, weapon nodes and Majors. Returns the tooltip for whatever the mouse is on, if anything. */
-	private List<FormattedCharSequence> drawCanvas(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+	private List<FormattedCharSequence> drawCanvas(BloomGraphics g, int mouseX, int mouseY) {
 		BloomProfile profile = ClientBloomState.profile();
 		ProgressionService service = ClientBloomState.service();
 		boolean pointing = onOpenCanvas(mouseX, mouseY) && !panning;
@@ -1400,15 +1412,15 @@ public final class HubScreen extends Screen {
 	}
 
 	/** A weapon tree's node: the tree's art (or the weapon itself) in an advancement-style frame, named underneath. */
-	private boolean drawWeaponNode(GuiGraphicsExtractor g, Node node, int cx, int cy, int mouseX, int mouseY, boolean pointing) {
+	private boolean drawWeaponNode(BloomGraphics g, Node node, int cx, int cy, int mouseX, int mouseY, boolean pointing) {
 		BloomProfile profile = ClientBloomState.profile();
 		boolean anyOwned = ClientBloomState.definitions().groupMembers(node.group()).stream().anyMatch(m -> profile.owns(m.id()));
-		Identifier frame = Identifier.withDefaultNamespace(anyOwned ? "advancements/goal_frame_obtained" : "advancements/goal_frame_unobtained");
-		g.blitSprite(RenderPipelines.GUI_TEXTURED, frame, cx - 13, cy - 13, 26, 26);
-		Identifier art = treeArt(node.group());
+		ResourceLocation frame = new ResourceLocation(anyOwned ? "advancements/goal_frame_obtained" : "advancements/goal_frame_unobtained");
+		g.blitSprite(BloomGraphics.GUI_TEXTURED, frame, cx - 13, cy - 13, 26, 26);
+		ResourceLocation art = treeArt(node.group());
 
 		if (art != IconTextures.PLACEHOLDER) {
-			g.blit(RenderPipelines.GUI_TEXTURED, art, cx - 9, cy - 9, 0.0F, 0.0F, 18, 18, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+			g.blit(BloomGraphics.GUI_TEXTURED, art, cx - 9, cy - 9, 0.0F, 0.0F, 18, 18, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
 		} else {
 			g.item(treeItem(node.group()), cx - 8, cy - 8);
@@ -1430,7 +1442,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/** One Major's icon and state. Returns whether the mouse is on it. */
-	private boolean drawMajor(GuiGraphicsExtractor g, Node node, int cx, int cy, int seed, long now, int mouseX, int mouseY, boolean pointing) {
+	private boolean drawMajor(BloomGraphics g, Node node, int cx, int cy, int seed, long now, int mouseX, int mouseY, boolean pointing) {
 		MajorDefinition major = node.major();
 		BloomProfile profile = ClientBloomState.profile();
 		ProgressionService service = ClientBloomState.service();
@@ -1443,9 +1455,9 @@ public final class HubScreen extends Screen {
 		int tint;
 
 		if (node.center()) {
-			Identifier frame = Identifier.withDefaultNamespace(owned != null ? "advancements/challenge_frame_obtained"
+			ResourceLocation frame = new ResourceLocation(owned != null ? "advancements/challenge_frame_obtained"
 					: "advancements/challenge_frame_unobtained");
-			g.blitSprite(RenderPipelines.GUI_TEXTURED, frame, cx - 13, cy - 13, 26, 26);
+			g.blitSprite(BloomGraphics.GUI_TEXTURED, frame, cx - 13, cy - 13, 26, 26);
 		}
 
 		if (owned != null && active) {
@@ -1464,7 +1476,7 @@ public final class HubScreen extends Screen {
 			tint = ICON_TINT_UNOWNED;
 		}
 
-		g.blit(RenderPipelines.GUI_TEXTURED, IconTextures.resolve(major.icon()), x, y, 0.0F, 0.0F, size, size,
+		g.blit(BloomGraphics.GUI_TEXTURED, IconTextures.resolve(major.icon()), x, y, 0.0F, 0.0F, size, size,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, tint);
 
 		// Owned: a small dot in the corner, green when on, red when switched off (so off never looks refunded).
@@ -1486,7 +1498,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/** Owned + on: a soft pulsing halo with a small mote orbiting the icon. */
-	private static void drawGlow(GuiGraphicsExtractor g, int x, int y, int size, long now, int seed) {
+	private static void drawGlow(BloomGraphics g, int x, int y, int size, long now, int seed) {
 		double t = (now % 2400L) / 2400.0;
 		int pulse = (int) (90 + 70 * Math.sin(t * Math.PI * 2));
 		int halo = (pulse << 24) | 0xE5933F;
@@ -1506,7 +1518,7 @@ public final class HubScreen extends Screen {
 	 * The Major Level counter, in the strip under the page (left of the build number), so nothing on the page
 	 * sits under it. Returns its tooltip when the mouse is on it.
 	 */
-	private List<FormattedCharSequence> drawWallet(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+	private List<FormattedCharSequence> drawWallet(BloomGraphics g, int mouseX, int mouseY) {
 		BloomProfile profile = ClientBloomState.profile();
 		Component wallet = Component.translatable("bloom.hub.major_levels", profile.availableMajorLevels(), profile.spentMajorLevels());
 		Component build = Component.literal("v" + BloomLevelUp.version());
@@ -1523,7 +1535,7 @@ public final class HubScreen extends Screen {
 	}
 
 	/** The stats window's frame and text (its buttons draw themselves). Returns a tooltip for the row under the mouse. */
-	private List<FormattedCharSequence> drawStatsWindow(GuiGraphicsExtractor g, CategoryDefinition category, int mouseX, int mouseY) {
+	private List<FormattedCharSequence> drawStatsWindow(BloomGraphics g, CategoryDefinition category, int mouseX, int mouseY) {
 		ProgressionService service = ClientBloomState.service();
 		BloomProfile profile = ClientBloomState.profile();
 		CategoryProgress progress = profile.category(category.id());
@@ -1643,25 +1655,25 @@ public final class HubScreen extends Screen {
 	}
 
 	/** A 6x6 round-ish dot with a darker edge. */
-	static void dot(GuiGraphicsExtractor g, int x, int y, int color, int edge) {
+	static void dot(BloomGraphics g, int x, int y, int color, int edge) {
 		g.fill(x + 1, y, x + 5, y + 6, edge);
 		g.fill(x, y + 1, x + 6, y + 5, edge);
 		g.fill(x + 1, y + 1, x + 5, y + 5, color);
 	}
 
-	private static void frame(GuiGraphicsExtractor g, int x0, int y0, int x1, int y1, int color) {
+	private static void frame(BloomGraphics g, int x0, int y0, int x1, int y1, int color) {
 		g.fill(x0, y0, x1, y0 + 1, color);
 		g.fill(x0, y1 - 1, x1, y1, color);
 		g.fill(x0, y0 + 1, x0 + 1, y1 - 1, color);
 		g.fill(x1 - 1, y0 + 1, x1, y1 - 1, color);
 	}
 
-	private static void frame(GuiGraphicsExtractor g, int x, int y, int size, int color) {
+	private static void frame(BloomGraphics g, int x, int y, int size, int color) {
 		frame(g, x, y, x + size, y + size, color);
 	}
 
 	/** A 2-pixel line, drawn as runs of rectangles. */
-	private static void line(GuiGraphicsExtractor g, int x0, int y0, int x1, int y1, int color) {
+	private static void line(BloomGraphics g, int x0, int y0, int x1, int y1, int color) {
 		int dx = x1 - x0;
 		int dy = y1 - y0;
 
@@ -1788,7 +1800,7 @@ public final class HubScreen extends Screen {
 		}
 	}
 
-	private void drawStatusLine(GuiGraphicsExtractor g) {
+	private void drawStatusLine(BloomGraphics g) {
 		BloomPayloads.Result result = ClientBloomState.lastResult();
 
 		if (result == null || System.currentTimeMillis() - ClientBloomState.lastResultAt() > RESULT_SHOW_MS
@@ -1813,9 +1825,9 @@ public final class HubScreen extends Screen {
 	// ------------------------------------------------------------------ input
 
 	@Override
-	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		if (sheetWindow != null) {
-			if (!sheetWindow.mouseClicked(event.x(), event.y(), event.button() == InputConstants.MOUSE_BUTTON_RIGHT)) {
+			if (!sheetWindow.mouseClicked(mouseX, mouseY, button == InputConstants.MOUSE_BUTTON_RIGHT)) {
 				closeSheet();
 			}
 
@@ -1823,29 +1835,29 @@ public final class HubScreen extends Screen {
 		}
 
 		if (detailMajor != null) {
-			if (onDetailLink(event.x(), event.y())) {
+			if (onDetailLink(mouseX, mouseY)) {
 				click();
 				showInSheet(detailMajor);
-			} else if (onDetailClose(event.x(), event.y()) || !inDetailWindow(event.x(), event.y())) {
+			} else if (onDetailClose(mouseX, mouseY) || !inDetailWindow(mouseX, mouseY)) {
 				closeDetails();
 			}
 
 			return true;
 		}
 
-		shiftClick = event.hasShiftDown();
-		MajorDefinition major = onOpenCanvas(event.x(), event.y()) ? majorAt(event.x(), event.y()) : null;
-		lastClickForTests = String.format(Locale.ROOT, "button=%d x=%.1f y=%.1f major=%s", event.button(), event.x(), event.y(),
+		shiftClick = hasShiftDown();
+		MajorDefinition major = onOpenCanvas(mouseX, mouseY) ? majorAt(mouseX, mouseY) : null;
+		lastClickForTests = String.format(Locale.ROOT, "button=%d x=%.1f y=%.1f major=%s", button, mouseX, mouseY,
 				major == null ? "-" : major.id());
 
-		if (super.mouseClicked(event, doubleClick)) {
+		if (super.mouseClicked(mouseX, mouseY, button)) {
 			lastClickForTests += " (taken by a widget)";
 			return true;
 		}
 
 		if (major == null) {
 			// Empty canvas: drag to see the rest of the page (only when it's bigger than the view).
-			if (event.button() == InputConstants.MOUSE_BUTTON_LEFT && onOpenCanvas(event.x(), event.y()) && canPan()) {
+			if (button == InputConstants.MOUSE_BUTTON_LEFT && onOpenCanvas(mouseX, mouseY) && canPan()) {
 				panning = true;
 				return true;
 			}
@@ -1855,7 +1867,7 @@ public final class HubScreen extends Screen {
 
 		boolean owned = ClientBloomState.profile().owns(major.id());
 
-		if (event.button() == InputConstants.MOUSE_BUTTON_RIGHT) {
+		if (button == InputConstants.MOUSE_BUTTON_RIGHT) {
 			// Right-click an owned Major: its details window (single Majors aren't refunded any more).
 			if (owned) {
 				click();
@@ -1865,11 +1877,11 @@ public final class HubScreen extends Screen {
 			return true;
 		}
 
-		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
+		if (button == InputConstants.MOUSE_BUTTON_LEFT) {
 			click();
 
 			// Copycat: shift-click an owned weapon Major to choose it (shift-click Copycat itself to clear).
-			if (owned && event.hasShiftDown() && ClientBloomState.profile().owns(COPYCAT)) {
+			if (owned && hasShiftDown() && ClientBloomState.profile().owns(COPYCAT)) {
 				if (major.id().equals(COPYCAT)) {
 					send(Action.SET_COPY_SOURCE, "", 0);
 					return true;
@@ -1903,7 +1915,7 @@ public final class HubScreen extends Screen {
 	}
 
 	@Override
-	public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+	public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
 		if (overlayOpen()) {
 			return true;
 		}
@@ -1915,21 +1927,25 @@ public final class HubScreen extends Screen {
 			return true;
 		}
 
-		return super.mouseDragged(event, dragX, dragY);
+		return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
 	}
 
 	@Override
-	public boolean mouseReleased(MouseButtonEvent event) {
-		if (panning && event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
+	public boolean mouseReleased(double mouseX, double mouseY, int button) {
+		if (panning && button == InputConstants.MOUSE_BUTTON_LEFT) {
 			panning = false;
 			return true;
 		}
 
-		return super.mouseReleased(event);
+		return super.mouseReleased(mouseX, mouseY, button);
 	}
 
 	@Override
-	public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+	public boolean mouseScrolled(double mouseX, double mouseY, double wheel) {
+		// 1.20.1 has one wheel: shift turns it sideways (for dragging the page left and right).
+		double scrollX = hasShiftDown() ? wheel : 0.0;
+		double scrollY = hasShiftDown() ? 0.0 : wheel;
+
 		if (sheetWindow != null) {
 			sheetWindow.mouseScrolled(scrollY);
 			return true;
@@ -1947,7 +1963,7 @@ public final class HubScreen extends Screen {
 			return true;
 		}
 
-		return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+		return super.mouseScrolled(mouseX, mouseY, wheel);
 	}
 
 	/** What the white reset button sends once its confirm screen says yes (client game test). */
@@ -2033,7 +2049,7 @@ public final class HubScreen extends Screen {
 			return;
 		}
 
-		ClientPlayNetworking.send(new BloomPayloads.Request(action, target, amount));
+		BloomNetwork.sendToServer(new BloomPayloads.Request(action, target, amount));
 	}
 
 	// ------------------------------------------------------------------ helpers
@@ -2073,8 +2089,8 @@ public final class HubScreen extends Screen {
 	}
 
 	/** A tree's own art, {@code textures/icon/tree/<name>.png} (64x64), or the placeholder if it doesn't exist yet. */
-	private static Identifier treeArt(String group) {
-		Identifier id = Identifier.tryParse(group);
+	private static ResourceLocation treeArt(String group) {
+		ResourceLocation id = ResourceLocation.tryParse(group);
 		String namespace = id == null ? BloomLevelUp.MOD_ID : id.getNamespace();
 		return IconTextures.resolve(Optional.of(namespace + ":icon/tree/" + treeName(group)));
 	}
@@ -2090,8 +2106,6 @@ public final class HubScreen extends Screen {
 				case "bow" -> Items.BOW;
 				case "crossbow" -> Items.CROSSBOW;
 				case "trident" -> Items.TRIDENT;
-				case "mace" -> Items.MACE;
-				case "spear" -> Items.IRON_SPEAR;
 				case "unarmed" -> Items.PLAYER_HEAD;
 				default -> Items.STICK;
 			};

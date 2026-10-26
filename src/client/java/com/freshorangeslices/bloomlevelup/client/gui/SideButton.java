@@ -1,16 +1,15 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 
 import com.freshorangeslices.bloomlevelup.client.mixin.AbstractContainerScreenAccessor;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
@@ -54,8 +53,8 @@ public final class SideButton extends AbstractButton {
 	}
 
 	private static void send(CombatAction action) {
-		if (ClientPlayNetworking.canSend(BloomPayloads.CombatInput.TYPE)) {
-			ClientPlayNetworking.send(new BloomPayloads.CombatInput(action));
+		if (BloomNetwork.canSendToServer()) {
+			BloomNetwork.sendToServer(new BloomPayloads.CombatInput(action));
 		}
 	}
 
@@ -73,19 +72,20 @@ public final class SideButton extends AbstractButton {
 	}
 
 	@Override
-	protected void extractContents(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+		BloomGraphics g = BloomGraphics.of(graphics);
 		reposition();
-		this.extractDefaultSprite(g);
+		g.buttonBackground(this);
 		g.item(this.icon, this.getX() + 2, this.getY() + 2);
 	}
 
 	@Override
-	public void onPress(InputWithModifiers input) {
+	public void onPress() {
 		this.action.run();
 	}
 
 	@Override
-	protected void updateWidgetNarration(NarrationElementOutput output) {
+	public void updateWidgetNarration(NarrationElementOutput output) {
 		this.defaultButtonNarrationText(output);
 	}
 }

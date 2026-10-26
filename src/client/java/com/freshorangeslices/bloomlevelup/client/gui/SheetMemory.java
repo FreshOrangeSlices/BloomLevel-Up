@@ -14,7 +14,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 
@@ -48,7 +48,7 @@ final class SheetMemory {
 	}
 
 	private static Path file() {
-		return FabricLoader.getInstance().getConfigDir().resolve("bloomlevelup-sheet.json");
+		return FMLPaths.CONFIGDIR.get().resolve("bloomlevelup-sheet.json");
 	}
 
 	private static void load() {

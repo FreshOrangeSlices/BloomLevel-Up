@@ -1,12 +1,10 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.input.InputWithModifiers;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 
 import com.freshorangeslices.bloomlevelup.client.IconTextures;
@@ -41,20 +39,21 @@ public final class HubButton extends AbstractButton {
 	}
 
 	@Override
-	protected void extractContents(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+		BloomGraphics g = BloomGraphics.of(graphics);
 		reposition();
-		this.extractDefaultSprite(g);
-		g.blit(RenderPipelines.GUI_TEXTURED, IconTextures.PLACEHOLDER, this.getX() + 2, this.getY() + 2, 0.0F, 0.0F, 16, 16,
+		g.buttonBackground(this);
+		g.blit(BloomGraphics.GUI_TEXTURED, IconTextures.PLACEHOLDER, this.getX() + 2, this.getY() + 2, 0.0F, 0.0F, 16, 16,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE);
 	}
 
 	@Override
-	public void onPress(InputWithModifiers input) {
+	public void onPress() {
 		ClientScreens.open(new HubScreen());
 	}
 
 	@Override
-	protected void updateWidgetNarration(NarrationElementOutput output) {
+	public void updateWidgetNarration(NarrationElementOutput output) {
 		this.defaultButtonNarrationText(output);
 	}
 }

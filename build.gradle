@@ -22,21 +22,16 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 // The Fabric 26.3 sources share this tree. What is ported to Forge 1.20.1 so far builds; the rest waits here
 // (unchanged, for reference) until its chunk is ported. Each chunk removes its lines from this list.
 def notPortedYet = [
-		// Chunk 4: Better Combat compat, against Better Combat for 1.20.1 (compat/BetterCombat.java is a stand-in until then)
+		// Chunk 4: Better Combat compat, against Better Combat for 1.20.1 (compat/BetterCombat.java and
+		// client/compat/BetterCombatClient.java are stand-ins until then)
 		'**/bloomlevelup/compat/BetterCombatBridge.java',
 		'**/bloomlevelup/compat/BetterCombatMoves.java',
 		'**/bloomlevelup/compat/BetterCombatMixinPlugin.java',
 		'**/bloomlevelup/compat/mixin/**',
+		'**/bloomlevelup/client/compat/BetterCombatClientBridge.java',
+		'**/bloomlevelup/client/compat/mixin/**',
 		// Fabric-only: the Bloom Pack's launch defaults (resource packs, shader); this build isn't for that pack.
 		'**/bloomlevelup/PackDefaultsLaunch.java',
-		// Chunk 3: the client (hub, HUD, combat keys, renderers)
-		'**/bloomlevelup/client/combat/**',
-		'**/bloomlevelup/client/compat/**',
-		'**/bloomlevelup/client/gui/**',
-		'**/bloomlevelup/client/mixin/**',
-		'**/bloomlevelup/client/render/**',
-		'**/bloomlevelup/client/IconTextures.java',
-		'**/bloomlevelup/client/NameTags.java',
 ]
 
 sourceSets {
@@ -127,6 +122,7 @@ minecraft {
 mixin {
 	add sourceSets.main, "${mod_id}.refmap.json"
 	config "${mod_id}.forge.mixins.json"
+	config "${mod_id}.forge.client.mixins.json"
 }
 
 repositories {
@@ -186,7 +182,7 @@ tasks.named('jar', Jar).configure {
 				'Implementation-Title'    : project.name,
 				'Implementation-Version'  : project.jar.archiveVersion,
 				'Implementation-Vendor'   : mod_authors,
-				'MixinConfigs'            : "${mod_id}.forge.mixins.json"
+				'MixinConfigs'            : "${mod_id}.forge.mixins.json,${mod_id}.forge.client.mixins.json"
 		])
 	}
 }
@@ -196,7 +192,7 @@ tasks.named('jarJar').configure {
 	archiveClassifier = ''
 	manifest {
 		attributes([
-				'MixinConfigs': "${mod_id}.forge.mixins.json"
+				'MixinConfigs': "${mod_id}.forge.mixins.json,${mod_id}.forge.client.mixins.json"
 		])
 	}
 }

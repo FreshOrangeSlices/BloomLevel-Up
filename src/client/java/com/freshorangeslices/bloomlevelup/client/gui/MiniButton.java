@@ -2,11 +2,10 @@ package com.freshorangeslices.bloomlevelup.client.gui;
 
 import java.util.function.Consumer;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.network.chat.Component;
 
 /**
@@ -31,7 +30,8 @@ final class MiniButton extends AbstractButton {
 	}
 
 	@Override
-	protected void extractContents(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+		BloomGraphics g = BloomGraphics.of(graphics);
 		int x = this.getX();
 		int y = this.getY();
 		int back = !this.active ? 0xFF1E1B18 : this.isHoveredOrFocused() ? 0xFF6A5A44 : 0xFF3A3128;
@@ -60,12 +60,12 @@ final class MiniButton extends AbstractButton {
 	}
 
 	@Override
-	public void onPress(InputWithModifiers input) {
-		this.action.accept(input.hasShiftDown());
+	public void onPress() {
+		this.action.accept(net.minecraft.client.gui.screens.Screen.hasShiftDown());
 	}
 
 	@Override
-	protected void updateWidgetNarration(NarrationElementOutput output) {
+	public void updateWidgetNarration(NarrationElementOutput output) {
 		this.defaultButtonNarrationText(output);
 	}
 }

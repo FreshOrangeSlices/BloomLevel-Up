@@ -61,6 +61,12 @@ public final class ClientPackets {
 		ClientBloomState.setSheet(message);
 	}
 
+	/** Whether the server we're connected to has Bloom's channel. */
+	public static boolean serverHasBloom() {
+		net.minecraft.client.multiplayer.ClientPacketListener connection = net.minecraft.client.Minecraft.getInstance().getConnection();
+		return connection != null && com.freshorangeslices.bloomlevelup.network.BloomNetwork.CHANNEL.isRemotePresent(connection.getConnection());
+	}
+
 	/** Leaving a server forgets everything it sent. */
 	public static void disconnected() {
 		ClientBloomState.clear();

@@ -1,12 +1,10 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.input.InputWithModifiers;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 import com.freshorangeslices.bloomlevelup.client.IconTextures;
 
@@ -16,7 +14,7 @@ import com.freshorangeslices.bloomlevelup.client.IconTextures;
  */
 final class StatIcon extends AbstractButton {
 	private static final int SIZE = 18;
-	private final Identifier icon;
+	private final ResourceLocation icon;
 	private final boolean dimmed;
 	private final boolean showDot;
 	private final boolean on;
@@ -28,7 +26,7 @@ final class StatIcon extends AbstractButton {
 	 * @param on       the switch's state
 	 * @param clickable whether clicking flips it now
 	 */
-	StatIcon(int x, int y, Identifier icon, boolean dimmed, boolean showDot, boolean on, boolean clickable, Runnable action) {
+	StatIcon(int x, int y, ResourceLocation icon, boolean dimmed, boolean showDot, boolean on, boolean clickable, Runnable action) {
 		super(x, y, SIZE, SIZE, Component.translatable(on ? "bloom.hub.on" : "bloom.hub.off"));
 		this.icon = icon;
 		this.dimmed = dimmed;
@@ -39,10 +37,11 @@ final class StatIcon extends AbstractButton {
 	}
 
 	@Override
-	protected void extractContents(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+		BloomGraphics g = BloomGraphics.of(graphics);
 		int x = this.getX();
 		int y = this.getY();
-		g.blit(RenderPipelines.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, SIZE, SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+		g.blit(BloomGraphics.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, SIZE, SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, dimmed ? 0xFF7A7A7A : 0xFFFFFFFF);
 
 		if (this.active && this.isHoveredOrFocused()) {
@@ -58,12 +57,12 @@ final class StatIcon extends AbstractButton {
 	}
 
 	@Override
-	public void onPress(InputWithModifiers input) {
+	public void onPress() {
 		this.action.run();
 	}
 
 	@Override
-	protected void updateWidgetNarration(NarrationElementOutput output) {
+	public void updateWidgetNarration(NarrationElementOutput output) {
 		this.defaultButtonNarrationText(output);
 	}
 }

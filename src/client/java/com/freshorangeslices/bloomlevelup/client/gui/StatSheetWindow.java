@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.FormattedCharSequence;
@@ -59,11 +58,11 @@ final class StatSheetWindow {
 	/** The switch a Major's "see it in the stat sheet" link puts on Max. */
 	private static final Map<String, String> LINKED_SWITCH = Map.ofEntries(Map.entry(CombatIds.PREDATOR, "predator"),
 			Map.entry(CombatIds.BLOODLUST, "bloodlust"), Map.entry(CombatIds.COMBO, "combo"), Map.entry(CombatIds.FIRST_STRIKE, "first_strike"),
-			Map.entry(CombatIds.STORED_IMPACT, "stored"), Map.entry(CombatIds.CHARGE_ATTACK, "charged"), Map.entry(CombatIds.HEAVY_HANDS, "charged"),
+			Map.entry(CombatIds.CHARGE_ATTACK, "charged"), Map.entry(CombatIds.HEAVY_HANDS, "charged"),
 			Map.entry(CombatIds.DEATH_FROM_ABOVE, "fall"), Map.entry(CombatIds.MARKSMAN, "marksman"),
 			Map.entry(CombatIds.MASTER_OF_ARMS, "charged_throw"), Map.entry(ArmorIds.BRACE, "braced"));
 
-	private final Identifier frameSprite;
+	private final ResourceLocation frameSprite;
 	private final int frame;
 	private final String category;
 	private final Component title;
@@ -95,7 +94,7 @@ final class StatSheetWindow {
 	private record Choice(int slot, ItemStack stack, Component tooltip) {
 	}
 
-	StatSheetWindow(String category, Component title, Identifier frameSprite, int frame) {
+	StatSheetWindow(String category, Component title, ResourceLocation frameSprite, int frame) {
 		this.category = category;
 		this.title = title;
 		this.frameSprite = frameSprite;
@@ -141,7 +140,7 @@ final class StatSheetWindow {
 		requestId++;
 		List<String> switches = new ArrayList<>();
 		modes.forEach((id, mode) -> switches.add(id + (mode == SheetPayloads.Toggle.MAX ? "=max" : "=off")));
-		ClientPlayNetworking.send(new SheetPayloads.Request(requestId, category, slot, target, switches, pinned, otherBuild));
+		BloomNetwork.sendToServer(new SheetPayloads.Request(requestId, category, slot, target, switches, pinned, otherBuild));
 	}
 
 	private SheetPayloads.View view() {
@@ -189,7 +188,7 @@ final class StatSheetWindow {
 
 	// ------------------------------------------------------------------ drawing
 
-	void render(GuiGraphicsExtractor g, int mouseX, int mouseY) {
+	void render(BloomGraphics g, int mouseX, int mouseY) {
 		Font font = font();
 		hits.clear();
 		g.nextStratum();
@@ -199,7 +198,7 @@ final class StatSheetWindow {
 		int w = w();
 		int h = h();
 		g.fill(x0, y0, x0 + w, y0 + h, 0xF6141210);
-		g.blitSprite(RenderPipelines.GUI_TEXTURED, frameSprite, x0 - frame, y0 - frame, w + 2 * frame, h + 2 * frame);
+		g.blitSprite(BloomGraphics.GUI_TEXTURED, frameSprite, x0 - frame, y0 - frame, w + 2 * frame, h + 2 * frame);
 
 		// Title, the summary / all stats tabs, and the close button.
 		MajorDetails.big(g, font, MajorDetails.heading(title), x0 + 8, y0 + 5, 0xFFFFD86B);
@@ -362,7 +361,7 @@ final class StatSheetWindow {
 	}
 
 	/** The gauge (the vanilla item it compares to, three times as big) on the left, the summary lines on the right. */
-	private int drawSummary(GuiGraphicsExtractor g, Font font, SheetPayloads.View view, int x, int y, int width) {
+	private int drawSummary(BloomGraphics g, Font font, SheetPayloads.View view, int x, int y, int width) {
 		int left = 0;
 
 		if (!view.gauge().isEmpty()) {
@@ -408,7 +407,7 @@ final class StatSheetWindow {
 		return bottom + 2;
 	}
 
-	private int drawDetails(GuiGraphicsExtractor g, Font font, SheetPayloads.View view, int x, int y, int width) {
+	private int drawDetails(BloomGraphics g, Font font, SheetPayloads.View view, int x, int y, int width) {
 		int ry = y;
 		boolean first = true;
 
@@ -425,7 +424,7 @@ final class StatSheetWindow {
 	}
 
 	/** One line: a heading, "label .... value", a total (with a rule over it) or a grey note. Returns the next y. */
-	private static int drawRow(GuiGraphicsExtractor g, Font font, SheetPayloads.Row row, int x, int y, int width) {
+	private static int drawRow(BloomGraphics g, Font font, SheetPayloads.Row row, int x, int y, int width) {
 		switch (row.kind()) {
 			case SheetPayloads.Row.HEADING -> {
 				MajorDetails.big(g, font, MajorDetails.heading(row.label()), x, y, GOLD);
@@ -478,7 +477,7 @@ final class StatSheetWindow {
 	}
 
 	/** A switch drawn by its mode: Live green, Max gold, Off dark. Returns its right edge. */
-	private int modeChip(GuiGraphicsExtractor g, Font font, int x, int y, Component text, int mode, int mouseX, int mouseY, Runnable action,
+	private int modeChip(BloomGraphics g, Font font, int x, int y, Component text, int mode, int mouseX, int mouseY, Runnable action,
 			Component tooltip) {
 		int w = chipWidth(font, text);
 		boolean hover = mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + CHIP_H;
@@ -494,7 +493,7 @@ final class StatSheetWindow {
 	}
 
 	/** A small rounded switch; returns its right edge. */
-	private int chip(GuiGraphicsExtractor g, Font font, int x, int y, Component text, boolean on, int mouseX, int mouseY, Runnable action,
+	private int chip(BloomGraphics g, Font font, int x, int y, Component text, boolean on, int mouseX, int mouseY, Runnable action,
 			Component tooltip) {
 		int w = chipWidth(font, text);
 		boolean hover = mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + CHIP_H;
@@ -673,8 +672,9 @@ final class StatSheetWindow {
 		List<Weapons.Family> families = new ArrayList<>();
 
 		if (major.id().equals(CombatIds.MASTER_OF_ARMS)) {
-			families.add(Weapons.Family.TRIDENT);
-			families.add(Weapons.Family.SPEAR);
+			// Its charged throw: the weapons Catch! throws in this build (swords and axes).
+			families.add(Weapons.Family.SWORD);
+			families.add(Weapons.Family.AXE);
 		}
 
 		major.group().ifPresent(group -> {

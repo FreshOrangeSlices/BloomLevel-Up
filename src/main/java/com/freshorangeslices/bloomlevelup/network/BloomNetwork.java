@@ -26,8 +26,12 @@ public final class BloomNetwork {
 	/** Bump when any message's shape changes. */
 	private static final String PROTOCOL = "3";
 
-	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomLevelUp.id("main"), () -> PROTOCOL, PROTOCOL::equals,
-			PROTOCOL::equals);
+	/**
+	 * A Bloom server needs Bloom on the client (same protocol). A client with Bloom can still join servers without it:
+	 * it then sends nothing ({@link #canSendToServer}) and Bloom stays out of the way.
+	 */
+	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomLevelUp.id("main"), () -> PROTOCOL,
+			NetworkRegistry.acceptMissingOr(PROTOCOL), PROTOCOL::equals);
 
 	private static int nextId;
 
@@ -84,8 +88,15 @@ public final class BloomNetwork {
 		CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
 	}
 
-	/** Client side: a request to the server. */
+	/** Client side: a request to the server (dropped when the server doesn't run Bloom). */
 	public static void sendToServer(Object message) {
-		CHANNEL.sendToServer(message);
+		if (canSendToServer()) {
+			CHANNEL.sendToServer(message);
+		}
+	}
+
+	/** Client side: whether the server we're on runs Bloom. */
+	public static boolean canSendToServer() {
+		return ClientPackets.serverHasBloom();
 	}
 }

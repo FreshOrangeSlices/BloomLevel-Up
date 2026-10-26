@@ -18,10 +18,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+
+import com.freshorangeslices.bloomlevelup.client.BloomLevelUpClient;
+import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 
 import com.freshorangeslices.bloomlevelup.client.compat.BetterCombatClient;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
@@ -41,7 +45,6 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  * <p>One rebindable <b>weapon-skill key</b> (default: R) runs every weapon Major that needs input. What it
  * does depends on the weapon in hand, the weapon's own skill first:
  * <ul>
- *   <li>a mace with Wind Impact: a wind burst on the block you aim at (or under you);</li>
  *   <li>a trident with Lightning Summon: lightning where you aim;</li>
  *   <li>hold to charge (Charge Attack / Heavy Hands); once the swing has recovered and the hold lasted long
  *   enough the meter turns gold, and letting go swings at whatever is in the crosshair for double damage;</li>
@@ -50,9 +53,8 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  * Majors that would share the key on one weapon can't be owned together (Major JSON conflicts), so normally
  * only one applies. Master of Arms lifts that and combines them: with a charge Major every press is a hold,
  * and letting go decides. A full charge released on a mob in reach is a charged swing; otherwise it is the
- * charged version of the weapon's skill (Charged Burst, Storm Call, Charged Throw). A tap or early release
- * is the normal skill. Gale Throw (Catch! + Wind Impact on a mace): aiming at a block bursts, anything else
- * throws.
+ * charged version of the weapon's skill (Storm Call, Charged Throw). A tap or early release is the normal
+ * skill. (Forge 1.20.1 build: no maces, so no Wind Impact, Charged Burst or Gale Throw.)
  *
  * <p>If the key is bound to right click instead, it steps aside for vanilla: blocks and mobs that use a
  * click, anything in the off hand, and items with their own right click keep working as usual.
@@ -69,32 +71,45 @@ public final class CombatControls {
 	private CombatControls() {
 	}
 
-	public static void init(KeyMapping.Category category) {
-		skillKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.KEYBOARD,
-				InputConstants.KEY_V, category));
+	public static void init(IEventBus modBus) {
+		skillKey = new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.KEYBOARD, InputConstants.KEY_V, BloomLevelUpClient.KEY_CATEGORY);
+		modBus.addListener((RegisterKeyMappingsEvent event) -> event.register(skillKey));
 
-		ClientTickEvents.END_CLIENT_TICK.register(CombatControls::tick);
+		MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> {
+			if (event.phase == TickEvent.Phase.END) {
+				tick(Minecraft.getInstance());
+			}
+		});
 
 		// Right click that no block or mob used: the item's own use would be next, so the skill can take it.
-		UseItemCallback.EVENT.register((player, level, hand) -> {
-			Minecraft minecraft = Minecraft.getInstance();
+		MinecraftForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickItem event) -> {
+			InteractionResult result = useItem(event.getEntity(), event.getLevel().isClientSide(), event.getHand());
 
-			if (!level.isClientSide() || hand != InteractionHand.MAIN_HAND || player != minecraft.player || !onUseKey(minecraft)) {
-				return InteractionResult.PASS;
+			if (result != InteractionResult.PASS) {
+				event.setCancellationResult(result);
+				event.setCanceled(true);
 			}
-
-			if (holding) {
-				return InteractionResult.FAIL;
-			}
-
-			ItemStack held = player.getMainHandItem();
-
-			if (!claimable(player, held)) {
-				return InteractionResult.PASS;
-			}
-
-			return begin(held) ? InteractionResult.FAIL : InteractionResult.PASS;
 		});
+	}
+
+	private static InteractionResult useItem(Player player, boolean clientSide, InteractionHand hand) {
+		Minecraft minecraft = Minecraft.getInstance();
+
+		if (!clientSide || hand != InteractionHand.MAIN_HAND || player != minecraft.player || !onUseKey(minecraft)) {
+			return InteractionResult.PASS;
+		}
+
+		if (holding) {
+			return InteractionResult.FAIL;
+		}
+
+		ItemStack held = player.getMainHandItem();
+
+		if (!claimable(player, held)) {
+			return InteractionResult.PASS;
+		}
+
+		return begin(held) ? InteractionResult.FAIL : InteractionResult.PASS;
 	}
 
 	// ------------------------------------------------------------------ what the player can do (synced profile)
@@ -126,10 +141,6 @@ public final class CombatControls {
 		return active(CombatIds.CATCH) && CombatAbilities.throwable(weapon);
 	}
 
-	private static boolean canWindBurst(ItemStack weapon) {
-		return Weapons.is(weapon, Family.MACE) && active(CombatIds.WIND_IMPACT);
-	}
-
 	/** Master of Arms: the weapon skills combine. */
 	private static boolean combos() {
 		return active(CombatIds.MASTER_OF_ARMS);
@@ -139,14 +150,9 @@ public final class CombatControls {
 		return minecraft.hitResult != null && minecraft.hitResult.getType() == HitResult.Type.BLOCK;
 	}
 
-	/** Gale Throw's split, and a mace's burst-or-throw in general: a block in the crosshair bursts, anything else throws. */
-	private static boolean burstHere(Minecraft minecraft, ItemStack weapon) {
-		return canWindBurst(weapon) && (!canThrow(weapon) || aimingAtBlock(minecraft));
-	}
-
 	/** Anything the weapon-skill key does with this item. */
 	private static boolean hasSkill(ItemStack weapon) {
-		return canWindBurst(weapon) || canSummon(weapon) || canCharge(weapon) || canThrow(weapon);
+		return canSummon(weapon) || canCharge(weapon) || canThrow(weapon);
 	}
 
 	private static void send(CombatAction action) {
@@ -160,9 +166,7 @@ public final class CombatControls {
 	}
 
 	private static void sendNow(CombatAction action) {
-		if (ClientPlayNetworking.canSend(BloomPayloads.CombatInput.TYPE)) {
-			ClientPlayNetworking.send(new BloomPayloads.CombatInput(action));
-		}
+		BloomNetwork.sendToServer(new BloomPayloads.CombatInput(action));
 	}
 
 	private static boolean onUseKey(Minecraft minecraft) {
@@ -171,30 +175,18 @@ public final class CombatControls {
 
 	/** Whether right click may be taken from vanilla for this item at all. */
 	private static boolean claimable(Player player, ItemStack held) {
-		return !player.isSpectator() && player.getOffhandItem().isEmpty() && (held.isEmpty() || held.getUseDuration(player) <= 0)
+		return !player.isSpectator() && player.getOffhandItem().isEmpty() && (held.isEmpty() || held.getUseDuration() <= 0)
 				&& hasSkill(held);
 	}
 
 	/**
 	 * Starts a press of the weapon-skill key. Returns whether a skill took it. The weapon's own skill wins
-	 * (Wind Impact on a mace, Lightning Summon on a trident), then a charge (hold), then a throw (tap).
+	 * (Lightning Summon on a trident), then a charge (hold), then a throw (tap).
 	 * With Master of Arms a charge comes first and the release picks (see the class comment).
 	 */
 	private static boolean begin(ItemStack held) {
-		if (combos()) {
-			if (canCharge(held)) {
-				startHold();
-				return true;
-			}
-
-			if (canWindBurst(held) && canThrow(held)) {
-				send(burstHere(Minecraft.getInstance(), held) ? CombatAction.WIND_BURST : CombatAction.THROW);
-				return true;
-			}
-		}
-
-		if (canWindBurst(held)) {
-			send(CombatAction.WIND_BURST);
+		if (combos() && canCharge(held)) {
+			startHold();
 			return true;
 		}
 
@@ -229,7 +221,7 @@ public final class CombatControls {
 	/**
 	 * Right click aimed at the air or at an enemy (things a right click does nothing to), before vanilla
 	 * handles it. Blocks and other mobs go through vanilla first and reach the skill through
-	 * {@link UseItemCallback} only if they didn't use the click. Returns true to cancel vanilla's use.
+	 * Forge's right-click-item event only if they didn't use the click. Returns true to cancel vanilla's use.
 	 */
 	public static boolean interceptUse(Minecraft minecraft) {
 		LocalPlayer player = minecraft.player;
@@ -320,12 +312,7 @@ public final class CombatControls {
 
 		if (wasCharged) {
 			// Master of Arms: a charge let go anywhere but on a mob is the charged version of the weapon's skill.
-			if (combos && !atMob && minecraft.gui.screen() == null) {
-				if (burstHere(minecraft, held)) {
-					send(CombatAction.CHARGED_BURST);
-					return;
-				}
-
+			if (combos && !atMob && minecraft.screen == null) {
 				if (canSummon(held)) {
 					send(CombatAction.STORM_CALL);
 					return;
@@ -342,7 +329,7 @@ public final class CombatControls {
 			// Swing at what's in the crosshair. Never at a block (letting go must not start mining it), and not
 			// when the key was "released" by a screen opening.
 			// With Better Combat the swing it starts plays a slam (BetterCombatClient).
-			if (!aimingAtBlock(minecraft) && minecraft.gui.screen() == null) {
+			if (!aimingAtBlock(minecraft) && minecraft.screen == null) {
 				BetterCombatClient.chargedSwing(minecraft, () -> ((MinecraftInvoker) minecraft).bloomlevelup$startAttack());
 			}
 
@@ -350,9 +337,7 @@ public final class CombatControls {
 		}
 
 		// Not charged: the normal skill (Master of Arms held it back to see whether this would be a charge).
-		if (combos && burstHere(minecraft, held)) {
-			send(CombatAction.WIND_BURST);
-		} else if (combos && canSummon(held)) {
+		if (combos && canSummon(held)) {
 			send(CombatAction.SUMMON_LIGHTNING);
 		} else if (holdTicks < TAP_TICKS && canThrow(held)) {
 			send(CombatAction.THROW);

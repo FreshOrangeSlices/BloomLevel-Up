@@ -9,6 +9,6 @@ public final class ClientScreens {
 	}
 
 	public static void open(Screen screen) {
-		Minecraft.getInstance().setScreenAndShow(screen);
+		Minecraft.getInstance().setScreen(screen);
 	}
 }

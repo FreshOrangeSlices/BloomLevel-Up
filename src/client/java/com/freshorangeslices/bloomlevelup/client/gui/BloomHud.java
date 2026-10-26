@@ -1,23 +1,22 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
+import com.freshorangeslices.bloomlevelup.client.ClientPackets;
 import com.freshorangeslices.bloomlevelup.client.IconTextures;
 import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
@@ -32,11 +31,11 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  * <ul>
  *   <li>a charge meter under the crosshair while the weapon-skill key is held (gold when ready to release);</li>
  *   <li>Straight Shot swaps the crosshair for a dot: red while drawing, green once the bow is fully drawn;</li>
- *   <li>a Bloodlust rage bar right of the hotbar (Stored Impact above it): stacks, the damage bonus, and how
- *   long it lasts;</li>
+ *   <li>a Bloodlust rage bar right of the hotbar: stacks, the damage bonus, and how long it lasts;</li>
  *   <li>Predator and Combo bars left of the hotbar, the same way;</li>
  *   <li>Brace!'s icon right of those bars: lit while braced, dimmed with the seconds left while it cools down.</li>
  * </ul>
+ * (Forge 1.20.1 build: Forge GUI overlays; no Stored Impact bar, the mace is gone.)
  */
 public final class BloomHud {
 	private static final int CHARGE_BACK = 0xA0000000;
@@ -47,13 +46,6 @@ public final class BloomHud {
 	private static final int RAGE_BACK = 0xA0200000;
 	private static final int RAGE_FILL = 0xFFC0202A;
 	private static final int RAGE_TEXT = 0xFFE05555;
-	private static final int IMPACT_BACK = 0xA0201000;
-	private static final int IMPACT_FILL = 0xFFFF9A2E;
-	private static final int IMPACT_FULL = 0xFFFFC94A;
-	private static final int IMPACT_TEXT = 0xFFFFB04A;
-	/** Stored Impact bar: 4 segments of 0.5 damage; every full bar (2 damage) becomes one "×N". */
-	private static final int IMPACT_SEGMENTS = 4;
-	private static final int IMPACT_PER_BAR = 200;
 
 	private static final int PREDATOR_BACK = 0xA0180A24;
 	private static final int PREDATOR_FILL = 0xFFB070FF;
@@ -72,15 +64,21 @@ public final class BloomHud {
 	private BloomHud() {
 	}
 
-	public static void init() {
-		HudElementRegistry.replaceElement(VanillaHudElements.CROSSHAIR, BloomHud::crosshair);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.CROSSHAIR, BloomLevelUp.id("charge_meter"), BloomHud::chargeMeter);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("bloodlust"), BloomHud::bloodlust);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("predator_combo"), BloomHud::predatorAndCombo);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("stored_impact"), BloomHud::storedImpact);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("brace"), BloomHud::brace);
+	public static void init(IEventBus modBus) {
+		modBus.addListener((RegisterGuiOverlaysEvent event) -> {
+			event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "charge_meter", overlay(BloomHud::chargeMeter));
+			event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "bloodlust", overlay(BloomHud::bloodlust));
+			event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "predator_combo", overlay(BloomHud::predatorAndCombo));
+			event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "brace", overlay(BloomHud::brace));
+		});
+		// Straight Shot: its dot instead of the crosshair.
+		MinecraftForge.EVENT_BUS.addListener((RenderGuiOverlayEvent.Pre event) -> {
+			if (event.getOverlay().id().equals(VanillaGuiOverlay.CROSSHAIR.id()) && straightShotDot(BloomGraphics.of(event.getGuiGraphics()))) {
+				event.setCanceled(true);
+			}
+		});
 
-		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Meter.TYPE, (payload, context) -> {
+		ClientPackets.onMeter(payload -> {
 			int kind = payload.kind();
 
 			if (kind >= 0 && kind < BloomPayloads.Meter.KINDS) {
@@ -90,7 +88,13 @@ public final class BloomHud {
 				TOTAL_TICKS[kind] = Math.max(1, payload.totalTicks());
 			}
 		});
-		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+		MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> {
+			if (event.phase != TickEvent.Phase.END) {
+				return;
+			}
+
+			Minecraft client = Minecraft.getInstance();
+
 			for (int kind = 0; kind < BloomPayloads.Meter.KINDS; kind++) {
 				if (TICKS_LEFT[kind] > 0 && --TICKS_LEFT[kind] == 0) {
 					STACKS[kind] = 0;
@@ -104,6 +108,15 @@ public final class BloomHud {
 		});
 	}
 
+	/** A HUD element as a Forge overlay; hidden with the rest of the HUD (F1). */
+	private static IGuiOverlay overlay(java.util.function.Consumer<BloomGraphics> draw) {
+		return (gui, graphics, partialTick, screenWidth, screenHeight) -> {
+			if (!Minecraft.getInstance().options.hideGui) {
+				draw.accept(BloomGraphics.of(graphics));
+			}
+		};
+	}
+
 	private static int width() {
 		return Minecraft.getInstance().getWindow().getGuiScaledWidth();
 	}
@@ -114,20 +127,12 @@ public final class BloomHud {
 
 	// ------------------------------------------------------------------ crosshair / Straight Shot
 
-	private static HudElement crosshair(HudElement original) {
-		return (graphics, delta) -> {
-			if (!straightShotDot(graphics)) {
-				original.extractRenderState(graphics, delta);
-			}
-		};
-	}
-
 	/** Draws Straight Shot's dot instead of the crosshair. Returns false to draw the normal crosshair. */
-	private static boolean straightShotDot(GuiGraphicsExtractor g) {
+	private static boolean straightShotDot(BloomGraphics g) {
 		Minecraft minecraft = Minecraft.getInstance();
 		LocalPlayer player = minecraft.player;
 
-		if (player == null || !ClientBloomState.ready() || !minecraft.options.getCameraType().isFirstPerson()) {
+		if (player == null || !ClientBloomState.ready() || !minecraft.options.getCameraType().isFirstPerson() || minecraft.options.hideGui) {
 			return false;
 		}
 
@@ -147,7 +152,7 @@ public final class BloomHud {
 
 	// ------------------------------------------------------------------ charge meter
 
-	private static void chargeMeter(GuiGraphicsExtractor g, DeltaTracker delta) {
+	private static void chargeMeter(BloomGraphics g) {
 		float progress = CombatControls.chargeProgress();
 
 		if (progress < 0.0F || Minecraft.getInstance().player == null) {
@@ -167,56 +172,13 @@ public final class BloomHud {
 		}
 	}
 
-	// ------------------------------------------------------------------ Stored Impact
-
-	/** Orange, segmented, above the Bloodlust bar: what the open window holds and how long it has left. */
-	private static void storedImpact(GuiGraphicsExtractor g, DeltaTracker delta) {
-		Minecraft minecraft = Minecraft.getInstance();
-		com.freshorangeslices.bloomlevelup.player.BloomProfile profile = ClientBloomState.profile();
-
-		if (minecraft.player == null || minecraft.level == null || profile == null || !ClientBloomState.ready()) {
-			return;
-		}
-
-		long stored = profile.counter(CombatIds.STORED_IMPACT_HUNDREDTHS);
-		long ticksLeft = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT) - minecraft.level.getGameTime();
-
-		if (stored <= 0 || ticksLeft <= 0) {
-			return;
-		}
-
-		long cap = ClientBloomState.config() == null ? 2000 : Math.round(ClientBloomState.config().storedImpactCap * 100.0);
-		boolean full = stored >= cap;
-		long bars = stored / IMPACT_PER_BAR;
-		double partial = full ? 1.0 : (stored % IMPACT_PER_BAR) / (double) IMPACT_PER_BAR;
-		long seconds = ticksLeft / 20;
-
-		int x = width() / 2 + 91 + 34;
-		int y = height() - 36;
-		int segment = 14;
-		String time = String.format(java.util.Locale.ROOT, "%d:%02d", seconds / 60, seconds % 60);
-		Component label = bars > 0 ? Component.translatable("bloom.hud.stored_impact.stacks", bars, time)
-				: Component.translatable("bloom.hud.stored_impact", time);
-		g.text(minecraft.font, label, x, y - 11, IMPACT_TEXT);
-
-		for (int i = 0; i < IMPACT_SEGMENTS; i++) {
-			int sx = x + i * (segment + 1);
-			g.fill(sx - 1, y - 1, sx + segment + 1, y + 4, IMPACT_BACK);
-			double fill = Math.max(0.0, Math.min(1.0, partial * IMPACT_SEGMENTS - i));
-
-			if (fill > 0.0) {
-				g.fill(sx, y, sx + (int) Math.round(segment * fill), y + 3, full ? IMPACT_FULL : IMPACT_FILL);
-			}
-		}
-	}
-
 	// ------------------------------------------------------------------ Brace!
 
 	/**
-	 * Brace!'s icon (the vanilla shield until its art exists) right of the Bloodlust / Stored Impact bars: lit in a gold
+	 * Brace!'s icon (the vanilla shield until its art exists) right of the Bloodlust bar: lit in a gold
 	 * box while braced; while it cools down, greyed with a shade that drains away and the seconds left. Hidden otherwise.
 	 */
-	private static void brace(GuiGraphicsExtractor g, DeltaTracker delta) {
+	private static void brace(BloomGraphics g) {
 		Minecraft minecraft = Minecraft.getInstance();
 		com.freshorangeslices.bloomlevelup.player.BloomProfile profile = ClientBloomState.profile();
 
@@ -236,7 +198,7 @@ public final class BloomHud {
 		int y = height() - 24;
 		g.fill(x - 2, y - 2, x + 18, y + 18, braced ? 0xFFF2C443 : 0xFF3A3128);
 		g.fill(x - 1, y - 1, x + 17, y + 17, 0xE0141210);
-		Identifier icon = ClientBloomState.definitions().major(ArmorIds.BRACE).map(major -> IconTextures.resolve(major.icon()))
+		ResourceLocation icon = ClientBloomState.definitions().major(ArmorIds.BRACE).map(major -> IconTextures.resolve(major.icon()))
 				.orElse(IconTextures.PLACEHOLDER);
 
 		if (icon.equals(IconTextures.PLACEHOLDER)) {
@@ -246,7 +208,7 @@ public final class BloomHud {
 
 			g.item(braceFallback, x, y);
 		} else {
-			g.blit(RenderPipelines.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, 16, 16, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+			g.blit(BloomGraphics.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, 16, 16, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
 		}
 
@@ -264,7 +226,7 @@ public final class BloomHud {
 
 	// ------------------------------------------------------------------ Bloodlust
 
-	private static void bloodlust(GuiGraphicsExtractor g, DeltaTracker delta) {
+	private static void bloodlust(BloomGraphics g) {
 		int kind = BloomPayloads.Meter.BLOODLUST;
 		meter(g, kind, width() / 2 + 91 + 34, height() - 12,
 				Component.translatable("bloom.hud.bloodlust", STACKS[kind], Math.round(BONUS[kind] * 100.0F)), RAGE_BACK, RAGE_FILL, RAGE_TEXT);
@@ -272,7 +234,7 @@ public final class BloomHud {
 
 	// ------------------------------------------------------------------ Predator / Combo (left of the hotbar)
 
-	private static void predatorAndCombo(GuiGraphicsExtractor g, DeltaTracker delta) {
+	private static void predatorAndCombo(BloomGraphics g) {
 		int x = width() / 2 - 91 - 34 - METER_WIDTH;
 		int predator = BloomPayloads.Meter.PREDATOR;
 		int combo = BloomPayloads.Meter.COMBO;
@@ -285,7 +247,7 @@ public final class BloomHud {
 	}
 
 	/** A label over a bar that empties as the stacks run out. Hidden with no stacks. */
-	private static void meter(GuiGraphicsExtractor g, int kind, int x, int y, Component label, int back, int fill, int text) {
+	private static void meter(BloomGraphics g, int kind, int x, int y, Component label, int back, int fill, int text) {
 		Minecraft minecraft = Minecraft.getInstance();
 
 		if (STACKS[kind] <= 0 || TICKS_LEFT[kind] <= 0 || minecraft.player == null) {

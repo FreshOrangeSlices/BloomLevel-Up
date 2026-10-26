@@ -28,7 +28,10 @@ for name, blob in [('origins', data)] + jars:
                 # the annotations of syncAttacker and its code
                 i = dis.find('syncAttacker')
                 ann = [l for l in dis.splitlines() if 'Inject' in l or 'At' in l and 'value' in l or 'method=' in l or 'setLastHurtByMob' in l][:20]
-                m = re.search(r'(void syncAttacker\(.*?)(?:\n\n|\Z)', dis, re.S)
+                j = dis.find('void syncAttacker(')
+                k = dis.find('RuntimeVisibleAnnotations', j)
+                ann = [dis[k:k + 1500]]
+                m = None
                 out.append(f'== {name}:{n}\n' + '\n'.join(ann) + '\n' + (m.group(1)[:3000] if m else dis[i - 200:i + 2500]))
 text = '\n'.join(out)
 for n, i in enumerate(range(0, min(len(text), 3900 * 6), 3900)):

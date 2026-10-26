@@ -13,7 +13,11 @@ import java.util.function.Predicate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,6 +38,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
+import com.freshorangeslices.bloomlevelup.client.ClientPackets;
+import com.freshorangeslices.bloomlevelup.client.gui.RuneScreen;
+import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
+import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
+import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.StatEffects;
@@ -104,8 +113,19 @@ public final class ClientSmokeTest {
 		});
 		step("inventory", always(), 0, mc -> mc.setScreen(new InventoryScreen(mc.player)));
 		step("inventory shot", always(), 20, mc -> shot(mc, "inventory"));
-		step("hud", always(), 0, mc -> mc.setScreen(null));
-		step("hud shot", always(), 20, mc -> shot(mc, "hud"));
+		// Rune Embedding: asked of the server like its button does; the server opens the menu, the client its screen.
+		step("runes", always(), 0, mc -> {
+			mc.setScreen(null);
+			SideButton.openRunes();
+		});
+		step("runes shot", mc -> mc.screen instanceof RuneScreen, 10, mc -> shot(mc, "runes"));
+		// The anvil screen (its label mixin only loads with it).
+		step("anvil", always(), 0, mc -> mc.setScreen(new AnvilScreen(new AnvilMenu(0, mc.player.getInventory()), mc.player.getInventory(),
+				Component.translatable("container.repair"))));
+		step("anvil shot", always(), 10, mc -> shot(mc, "anvil"));
+		// The HUD with Brace! on, Bloodlust and Predator bars, and a thrown sword hanging in front (its renderer).
+		step("hud", always(), 0, ClientSmokeTest::hudScene);
+		step("hud shot", always(), 15, mc -> shot(mc, "hud"));
 		step("quit", always(), 10, ClientSmokeTest::finish);
 	}
 
@@ -207,6 +227,25 @@ public final class ClientSmokeTest {
 			player.getInventory().selected = 0;
 			StatEffects.refresh(player);
 			BloomSync.changed(player);
+		});
+	}
+
+	private static void hudScene(Minecraft mc) {
+		mc.setScreen(null);
+		ClientPackets.meter(new BloomPayloads.Meter(BloomPayloads.Meter.BLOODLUST, 3, 0.3F, 400, 400));
+		ClientPackets.meter(new BloomPayloads.Meter(BloomPayloads.Meter.PREDATOR, 2, 0.2F, 400, 400));
+		IntegratedServer server = mc.getSingleplayerServer();
+		UUID id = mc.player.getUUID();
+		server.execute(() -> {
+			ServerPlayer player = server.getPlayerList().getPlayer(id);
+			BloomAttachments.profile(player).setCounter(ArmorIds.BRACED, 1);
+			BloomSync.changed(player);
+			ThrownWeapon thrown = ThrownWeapon.create(player.level(), player, new ItemStack(Items.IRON_AXE));
+			Vec3 ahead = player.getEyePosition().add(player.getLookAngle().scale(2.5));
+			thrown.setPos(ahead.x, ahead.y - 0.3, ahead.z);
+			thrown.setNoGravity(true);
+			thrown.setDeltaMovement(Vec3.ZERO);
+			player.level().addFreshEntity(thrown);
 		});
 	}
 

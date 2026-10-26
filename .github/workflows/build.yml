@@ -178,7 +178,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shot: [hub_utility, hub_combat, hub_armor, hub_misc, sheet_combat, sheet_combat_details, hub_major_details, inventory, hud]
+        shot: [hub_utility, hub_combat, hub_armor, hub_misc, sheet_combat, sheet_combat_details, hub_major_details, inventory, runes, anvil, hud]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

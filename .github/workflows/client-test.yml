@@ -156,6 +156,8 @@ jobs:
             without: "iris,complementary-reimagined"
           - variant: no-lights-culling
             without: "lambdynamiclights,entityculling"
+          - variant: no-sodium
+            without: "sodium,iris,complementary-reimagined"
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -321,7 +323,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full, no-immediatelyfast, no-emf, no-iris, no-lights-culling]
+        variant: [full, no-immediatelyfast, no-emf, no-iris, no-lights-culling, no-sodium]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -332,7 +334,11 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: World Bosses (shadow weaver, shadow king, morvath)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_worldbosses 12
-      - name: World Bosses (astrael, elyndra, varkhul)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_worldbosses_2 12
+      - name: World Bosses fight 1
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_1 12
+      - name: World Bosses fight 2
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_2 12
+      - name: World Bosses fight 3
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_3 12
+      - name: World Bosses fight 4
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_4 12

@@ -328,20 +328,21 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			new Shot("pack_mobs_5", "noon", three, new String[] {"summon minecart", "setblock ~ ~ ~ ender_chest[facing=north]",
 				"summon oak_boat"}),
 			// The RPG Series' gear (its 3D armor comes from Armor Model API): a wizard, a paladin and an archer.
-			// World Bosses' mobs (their models drew as stretched spikes in play): three at a time, a few blocks off.
-			new Shot("pack_worldbosses", "noon", new String[] {"^3 ^ ^6", "^ ^ ^6", "^-3 ^ ^6"}, new String[] {
-				"summon worldbosses:shadow_weaver", "summon worldbosses:shadow_king", "summon worldbosses:morvath"}),
-			new Shot("pack_worldbosses_2", "noon", new String[] {"^3 ^ ^6", "^ ^ ^6", "^-3 ^ ^6"}, new String[] {
-				"summon worldbosses:astrael", "summon worldbosses:elyndra", "summon worldbosses:varkhul"}),
 			new Shot("pack_rpg_gear", "noon", three, new String[] {
 				gearStand("wizards", "wizard_robe", "wizards:staff_wizard"),
 				gearStand("paladins", "paladin_armor", "paladins:iron_claymore"),
 				gearStand("archers", "archer_armor", "archers:composite_longbow")}),
+			// World Bosses' mobs drew as stretched spikes in play, in fights only (standing still they look fine):
+			// each boss with its AI on, next to two iron golems that go for it, the player in creative so it's left alone.
+			fight("pack_wb_fight_1", "worldbosses:shadow_weaver"),
+			fight("pack_wb_fight_2", "worldbosses:shadow_king"),
+			fight("pack_wb_fight_3", "worldbosses:varkhul"),
+			fight("pack_wb_fight_4", "worldbosses:astrael"),
 		};
 
 		for (Shot shot : shots) {
 			singleplayer.getServer().runCommand("time set " + shot.time());
-			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
+			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..40]");
 			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-6 ~ ~1 ~6 ~4 ~8 air");
 
 			for (int i = 0; i < shot.commands().length; i++) {
@@ -361,6 +362,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot(shot.name());
 		}
 
+		singleplayer.getServer().runCommand("gamemode survival @a");
+
 		// The player in a wizard's robes with a staff, from the front: the RPG armor on Fresh Animations' player model.
 		singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
 
@@ -379,6 +382,13 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		}
 
 		singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
+	}
+
+	/** A World Bosses fight: the boss (AI on) six blocks ahead, an iron golem either side of it, the player in creative. */
+	private static Shot fight(String name, String boss) {
+		return new Shot(name, "noon", new String[] {"^ ^ ^", "^ ^ ^6", "^2.5 ^ ^6", "^-2.5 ^ ^6"}, new String[] {
+			"gamemode creative @a", "summon " + boss + " ~ ~ ~ {Rotation:[180f,0f]}", "summon iron_golem ~ ~ ~ {Rotation:[90f,0f]}",
+			"summon iron_golem ~ ~ ~ {Rotation:[270f,0f]}"});
 	}
 
 	/** An armor stand facing the camera in one of the RPG Series' armor sets ({@code <set>_head} and so on), holding a weapon. */

@@ -1,5 +1,15 @@
 # Bloom Level-Up — notes for Claude
 
+## This branch: `forge-1.20.1`
+
+- A separate build of Bloom for **Forge 1.20.1** (Forge 47.x, ForgeGradle 6, Gradle 8.8, Java 17, official mappings). `main` stays the Fabric 26.3 mod: never merge this branch into main or the other way round; port changes across by hand.
+- CI (`.github/workflows/build.yml` on this branch) runs `./gradlew build runGameTestServer`; same annotation trick as below for errors. The jar players install is the un-classified one in `build/libs` (MixinExtras inside, reobfuscated); `-slim` is the bare one.
+- Ported in chunks. Files not ported yet stay where they are (unchanged 26.3 code, for reference) and are excluded in `build.gradle` (`notPortedYet`); a chunk ports its files and deletes their lines there.
+- Forge stand-ins: profile = capability (`player/BloomAttachments`), packets = one `SimpleChannel` (`network/BloomNetwork`, client handlers in `client/ClientPackets`), data reload = `AddReloadListenerEvent`, attribute modifiers keyed by UUIDs made from Bloom ids (`StatEffects.ModifierId`). Data folders use 1.20.1 names (`tags/items`, `tags/blocks`, `tags/entity_types`, `loot_tables`, `structures`).
+- Game tests: `src/gametest/java/**/gametest/forge/` (`@GameTestHolder`, template `bloomlevelup:empty`); the Fabric ones beside them are ported with their chunks.
+
+## Shared notes (written for main)
+
 - Fabric mod, MC 26.3, Java 25, Mojang official names (no mappings). Versions in `gradle.properties` come from the official Fabric template.
 - The sandbox cannot reach Fabric/Mojang maven, so `./gradlew build` only runs in GitHub Actions. Verify by pushing and reading the run. Job logs are not reachable from the sandbox; on failure the build workflow attaches compile/test errors as annotations (`build-errors-NN`), read via `GET /repos/FreshOrangeSlices/BloomLevel-Up/check-runs/<job id>/annotations`.
 - 26.3 renamed much of the client API (`GuiGraphicsExtractor`, `extractRenderState`, `setScreenAndShow`, ...). Look up exact signatures rather than guessing: the javap API-dump tool was removed from the tree but lives in git history (`git show c987f4a:tools/api-dump/README.md`); run it from a throwaway `ci/api-dump*` branch, never main. Fabric API's own source (branch `26.3`) is also a good reference.

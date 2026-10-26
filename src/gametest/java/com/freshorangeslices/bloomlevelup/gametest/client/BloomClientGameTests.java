@@ -686,6 +686,13 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				&& hub.sheetOpenForTests() && !hub.detailsOpenForTests() && hub.sheetStateForTests().contains("predator=1"));
 		context.setScreen(() -> null);
 
+		// The Armor sheet in iron armor: hit by a zombie (shown first), then by a netherite sword with Sharpness V and
+		// Strength II.
+		for (String piece : new String[] {"head:iron_helmet", "chest:iron_chestplate", "legs:iron_leggings", "feet:iron_boots"}) {
+			String[] parts = piece.split(":");
+			singleplayer.getServer().runCommand("item replace entity @a armor." + parts[0] + " with minecraft:" + parts[1]);
+		}
+
 		context.runOnClient(client -> ClientBloomState.selectCategory("bloomlevelup:armor"));
 		context.setScreen(HubScreen::new);
 		context.waitTicks(2);
@@ -698,7 +705,20 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				&& ClientBloomState.sheet().category().equals("bloomlevelup:armor") && !ClientBloomState.sheet().summary().isEmpty());
 		context.waitTicks(3);
 		context.takeScreenshot("bloom_sheet_armor");
+		context.runOnClient(client -> {
+			if (client.gui.screen() instanceof HubScreen hub) {
+				hub.sheetTargetForTests(5);
+			}
+		});
+		check(context, "the Armor sheet shows the netherite sword's hit", client -> ClientBloomState.sheet() != null
+				&& ClientBloomState.sheet().gauge().is(net.minecraft.world.item.Items.NETHERITE_SWORD));
+		context.waitTicks(3);
+		context.takeScreenshot("bloom_sheet_armor_netherite");
 		context.setScreen(() -> null);
+
+		for (String slot : new String[] {"head", "chest", "legs", "feet"}) {
+			singleplayer.getServer().runCommand("item replace entity @a armor." + slot + " with minecraft:air");
+		}
 	}
 
 	/**

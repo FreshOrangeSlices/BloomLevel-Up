@@ -2,17 +2,16 @@ package com.freshorangeslices.bloomlevelup.sheet;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Locale;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Difficulty;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,7 +20,6 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +31,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 
@@ -51,15 +48,22 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
 
 /**
  * The Armor sheet: how much of a hit actually reaches your health, step by step in the order the game applies
- * them (armor, Resistance, protection enchantments, then the Armor category's own layers and Absorb), for the
- * kinds of hits that differ (mobs, blades, arrows, fire, explosions, falls, magic), plus the chances to avoid a
- * hit altogether. The steps are vanilla's own code (LivingEntity.getDamageAfterArmorAbsorb / MagicAbsorb) and
+ * them (armor, Resistance, protection enchantments, then the Armor category's own layers and Absorb). The hit is
+ * picked by who deals it (a zombie, a skeleton's arrow, a creeper, a player with an iron sword, a diamond one with
+ * Sharpness V, a netherite one with Sharpness V and Strength II), so the numbers read like real fights; the same
+ * amount is then shown for the other kinds of hits (fire, falls, magic...), plus the chances to avoid a hit
+ * altogether. The steps are vanilla's own code (LivingEntity.getDamageAfterArmorAbsorb / MagicAbsorb) and
  * {@link ArmorSkill#layers}, so the sheet matches a real hit.
  */
 final class ArmorSheet {
-	private static final float[] HIT_SIZES = {5.0F, 10.0F, 20.0F, 50.0F};
-	private static final String[] SET_MATERIALS = {"leather", "chainmail", "copper", "iron", "diamond", "netherite"};
-	private static final String[] PIECES = {"helmet", "chestplate", "leggings", "boots"};
+	/** The picker, in its order (bloom.sheet.armor.attacker.<key>); the zombie is shown first. */
+	private static final String[] ATTACKERS = {"zombie", "skeleton", "creeper", "iron_sword", "diamond_sword", "netherite_sword"};
+	/** A skeleton's arrow up close: it leaves the bow at 1.6 with about 2.2 base damage, rounded up (before difficulty). */
+	private static final float SKELETON_ARROW = 4.0F;
+	/** How far the creeper is when it goes off. */
+	private static final double CREEPER_DISTANCE = 2.0;
+	/** Strength's attack damage per level (vanilla: +3 for each). */
+	private static final float STRENGTH_PER_LEVEL = 3.0F;
 	private static final EquipmentSlot[] SLOTS = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
 	private ArmorSheet() {
@@ -67,6 +71,17 @@ final class ArmorSheet {
 
 	/** One kind of incoming hit: its name (bloom.sheet.armor.kind.<key>) and a real damage source for it. */
 	private record Kind(String key, DamageSource source) {
+	}
+
+	/**
+	 * Who's hitting: its key (bloom.sheet.armor.attacker.<key> on the picker, .who in sentences), the item pictured
+	 * for it, the hit as it lands on this difficulty and a real damage source for it (the swordsmen hold their
+	 * sword, so Vibranium sees a blade).
+	 */
+	private record Attacker(String key, ItemStack picture, float hit, DamageSource source, boolean mob) {
+		Component who() {
+			return Component.translatable("bloom.sheet.armor.attacker." + key + ".who");
+		}
 	}
 
 	/** The player's defences as the sheet sees them (the build shown, any point not spent yet included). */
@@ -106,13 +121,15 @@ final class ArmorSheet {
 			braced = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX;
 		}
 
-		List<Component> sizes = new ArrayList<>();
+		List<Component> names = new ArrayList<>();
 
-		for (float size : HIT_SIZES) {
-			sizes.add(Component.translatable("bloom.sheet.armor.hit_size", Sheet.num(size)));
+		for (String key : ATTACKERS) {
+			names.add(Component.translatable("bloom.sheet.armor.attacker." + key));
 		}
 
-		float hit = HIT_SIZES[sheet.targets(sizes, 1)];
+		Difficulty difficulty = shownDifficulty(level);
+		Attacker attacker = attacker(level, player, ATTACKERS[sheet.targets(names, 0)], difficulty);
+		float hit = attacker.hit();
 		LivingEntity zombie = Dummies.of(level, EntityTypes.ZOMBIE);
 		List<Kind> kinds = kinds(level, player, zombie, profile, service);
 
@@ -120,6 +137,7 @@ final class ArmorSheet {
 		Body body = Body.of(new Loadout(player, player.getMainHandItem()));
 		double armor = body.armor();
 		double toughness = body.toughness();
+		Steps hitSteps = steps(level, player, body, attacker.source(), hit, braced);
 		sheet.summary(Sheet.plain(body.armorValue()), "armor.armor_points");
 
 		if (toughness > 0.0) {
@@ -127,12 +145,9 @@ final class ArmorSheet {
 		}
 
 		sheet.summary(Sheet.plain(body.maxHealth()), "armor.max_health");
-		sheet.summaryNote("armor.taken", Sheet.num(hit));
-
-		for (Kind kind : kinds) {
-			Steps steps = steps(level, player, body, kind.source(), hit, braced);
-			sheet.summary(taken(steps), "armor.kind." + kind.key());
-		}
+		attackerNote(sheet, attacker, difficulty);
+		sheet.summary(taken(hitSteps), "armor.lost");
+		sheet.summary(hitsToDown(body.maxHealth(), hitSteps.health()), "armor.hits_to_down");
 
 		double dodge = StatFormulas.dodgeChance(service.statValue(profile, ArmorIds.DODGE), config.dodgeChanceCap);
 		boolean light = service.isMajorActive(profile, ArmorIds.FITTING_ARMOR) && ArmorStyles.styleOf(player) == ArmorStyle.LIGHT;
@@ -181,10 +196,9 @@ final class ArmorSheet {
 		sheet.row(Sheet.pct(overcap), "armor.overcap");
 		sheet.note("armor.overcap.note");
 
-		// ---- breakdown: one hit, step by step
-		Kind first = kinds.get(0);
-		Steps steps = steps(level, player, body, first.source(), hit, braced);
-		sheet.heading("armor.h.steps", Sheet.num(hit));
+		// ---- breakdown: the picked hit, step by step
+		Steps steps = hitSteps;
+		sheet.heading("armor.h.steps", attacker.who(), Sheet.num(hit));
 		sheet.row(Sheet.plain(steps.start()), "armor.step.hit");
 		stepRow(sheet, "armor.step.armor", steps.start(), steps.afterArmor());
 		stepRow(sheet, "armor.step.resistance", steps.afterArmor(), steps.afterResistance());
@@ -201,6 +215,8 @@ final class ArmorSheet {
 
 		sheet.total(Sheet.plain(steps.health()), "armor.step.health");
 		sheet.note("armor.step.note");
+		sheet.row(hitsToDown(body.maxHealth(), steps.health()), "armor.hits_to_down");
+		sheet.note("armor.hits_to_down.note");
 
 		// ---- breakdown: other kinds of hits
 		sheet.heading("armor.h.kinds", Sheet.num(hit));
@@ -282,7 +298,99 @@ final class ArmorSheet {
 			sheet.row(Sheet.times(0.5), "armor.thick_blood");
 		}
 
-		armorGauge(level, player, zombie, sheet, kinds.get(0).source(), hit, steps.health());
+		// The picture: who's hitting, and what gets through.
+		sheet.gauge = attacker.picture();
+		sheet.gaugeCaption = Component.translatable("bloom.sheet.gauge.attacker", attacker.who(), Sheet.num(hit), Sheet.num(steps.health()));
+	}
+
+	/**
+	 * The picked attacker. Mobs hit as they would on this difficulty (Player.hurtServer: half plus one on Easy, half
+	 * again on Hard); a player's sword doesn't change with difficulty. Swords count a fully charged swing, no crit.
+	 */
+	private static Attacker attacker(ServerLevel level, ServerPlayer player, String key, Difficulty difficulty) {
+		return switch (key) {
+			case "skeleton" -> {
+				LivingEntity skeleton = Dummies.of(level, EntityTypes.SKELETON);
+				yield mob(key, new ItemStack(Items.SKELETON_SKULL), SKELETON_ARROW, source(level, DamageTypes.ARROW, null, skeleton), difficulty);
+			}
+			case "creeper" -> {
+				LivingEntity creeper = Dummies.of(level, EntityTypes.CREEPER);
+				yield mob(key, new ItemStack(Items.CREEPER_HEAD), (float) creeperBlast(CREEPER_DISTANCE),
+						source(level, DamageTypes.EXPLOSION, creeper, creeper), difficulty);
+			}
+			case "iron_sword" -> sword(level, player, key, Items.IRON_SWORD, 0, 0);
+			case "diamond_sword" -> sword(level, player, key, Items.DIAMOND_SWORD, 5, 0);
+			case "netherite_sword" -> sword(level, player, key, Items.NETHERITE_SWORD, 5, 2);
+			default -> {
+				LivingEntity zombie = Dummies.of(level, EntityTypes.ZOMBIE);
+				zombie.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+				yield mob("zombie", new ItemStack(Items.ZOMBIE_HEAD), (float) zombie.getAttributeValue(Attributes.ATTACK_DAMAGE),
+						source(level, DamageTypes.MOB_ATTACK, zombie, zombie), difficulty);
+			}
+		};
+	}
+
+	private static Attacker mob(String key, ItemStack picture, float hit, DamageSource source, Difficulty difficulty) {
+		return new Attacker(key, picture, source.scalesWithDifficulty() ? scaled(hit, difficulty) : hit, source, true);
+	}
+
+	/** A player's swing: 1 + the sword's attack damage + Strength, then what Sharpness adds. */
+	private static Attacker sword(ServerLevel level, ServerPlayer player, String key, Item item, int sharpness, int strength) {
+		ItemStack sword = new ItemStack(item);
+
+		if (sharpness > 0) {
+			sword.enchant(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.SHARPNESS), sharpness);
+		}
+
+		// The swing comes from a stand-in holding the sword (the sheet's player can't hit itself), as a player's attack.
+		LivingEntity swordsman = Dummies.of(level, EntityTypes.VINDICATOR);
+		swordsman.setItemSlot(EquipmentSlot.MAINHAND, sword);
+		DamageSource source = source(level, DamageTypes.PLAYER_ATTACK, swordsman, swordsman);
+		float base = (float) sword.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY)
+				.compute(Attributes.ATTACK_DAMAGE, 1.0, EquipmentSlot.MAINHAND) + strength * STRENGTH_PER_LEVEL;
+		float hit = EnchantmentHelper.modifyDamage(level, sword, player, source, base);
+		return new Attacker(key, sword, hit, source, false);
+	}
+
+	/** Vanilla's explosion damage for a creeper's blast (radius 3) at {@code distance} blocks, in plain sight. */
+	static double creeperBlast(double distance) {
+		double size = 3.0 * 2.0;
+		double impact = Math.max(0.0, 1.0 - distance / size);
+		return (impact * impact + impact) / 2.0 * 7.0 * size + 1.0;
+	}
+
+	/** Player.hurtServer's difficulty scaling for hits that scale with it. */
+	static float scaled(float amount, Difficulty difficulty) {
+		return switch (difficulty) {
+			case EASY -> Math.min(amount / 2.0F + 1.0F, amount);
+			case HARD -> amount * 3.0F / 2.0F;
+			default -> amount;
+		};
+	}
+
+	/** The world's difficulty; Normal's numbers on Peaceful, where mobs don't fight. */
+	private static Difficulty shownDifficulty(ServerLevel level) {
+		Difficulty difficulty = level.getDifficulty();
+		return difficulty == Difficulty.PEACEFUL ? Difficulty.NORMAL : difficulty;
+	}
+
+	/** "Hit by a zombie for 3 (on Normal):" over the lines it's about. */
+	private static void attackerNote(Sheet sheet, Attacker attacker, Difficulty difficulty) {
+		if (attacker.mob()) {
+			sheet.summaryNote("armor.attacker.note_mob", attacker.who(), Sheet.num(attacker.hit()),
+					Component.translatable("options.difficulty." + difficulty.name().toLowerCase(Locale.ROOT)));
+		} else {
+			sheet.summaryNote("armor.attacker.note", attacker.who(), Sheet.num(attacker.hit()));
+		}
+	}
+
+	/** How many such hits take you from full health to nothing ("Never" when none gets through). */
+	private static Component hitsToDown(double maxHealth, double perHit) {
+		if (perHit <= 1.0E-4) {
+			return Sheet.word("armor.never");
+		}
+
+		return Sheet.plain(Math.max(1.0, Math.ceil(maxHealth / perHit - 1.0E-6)));
 	}
 
 	/** The kinds of hits the sheet compares; blades and blunt weapons only when a Major treats them differently. */
@@ -387,99 +495,5 @@ final class ArmorSheet {
 	private static Component taken(Steps steps) {
 		double blocked = steps.start() > 0.0F ? 1.0 - steps.health() / steps.start() : 0.0;
 		return Sheet.colored(Sheet.num(steps.health()) + "  (-" + Math.round(blocked * 100.0) + "%)", Sheet.PLAIN);
-	}
-
-	/**
-	 * The picture: the full vanilla armor set (and Protection level on every piece) that would let through the
-	 * amount closest to what reaches the player's health from the same mob hit; past full Netherite with
-	 * Protection IV, how many times less gets through.
-	 */
-	private static void armorGauge(ServerLevel level, ServerPlayer player, LivingEntity dummy, Sheet sheet, DamageSource source, float hit, double taken) {
-		Holder<Enchantment> protection = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.PROTECTION);
-		ItemStack best = ItemStack.EMPTY;
-		double bestTaken = 0.0;
-		int bestLevel = 0;
-		ItemStack top = ItemStack.EMPTY;
-		double topTaken = Double.MAX_VALUE;
-		int topLevel = 0;
-
-		String shownMaterial = "";
-		String bestMaterial = "";
-		String topMaterial = "";
-
-		for (String material : SET_MATERIALS) {
-			Item[] items = new Item[4];
-			boolean complete = true;
-
-			for (int i = 0; i < 4; i++) {
-				Optional<Item> item = BuiltInRegistries.ITEM.getOptional(Identifier.withDefaultNamespace(material + "_" + PIECES[i]));
-				complete &= item.isPresent() && item.get() != Items.AIR;
-				items[i] = item.orElse(Items.AIR);
-			}
-
-			if (!complete) {
-				continue;
-			}
-
-			for (int enchantLevel = 0; enchantLevel <= 4; enchantLevel++) {
-				float armor = 0.0F;
-				float toughness = 0.0F;
-
-				for (int i = 0; i < 4; i++) {
-					ItemStack piece = new ItemStack(items[i]);
-
-					if (enchantLevel > 0) {
-						piece.enchant(protection, enchantLevel);
-					}
-
-					ItemAttributeModifiers modifiers = piece.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-					armor += (float) modifiers.compute(Attributes.ARMOR, 0.0, SLOTS[i]);
-					toughness += (float) modifiers.compute(Attributes.ARMOR_TOUGHNESS, 0.0, SLOTS[i]);
-					dummy.setItemSlot(SLOTS[i], piece);
-				}
-
-				float after = CombatRules.getDamageAfterAbsorb(dummy, hit, source, armor, toughness);
-				float epf = EnchantmentHelper.getDamageProtection(level, dummy, source);
-				double through = epf > 0.0F ? CombatRules.getDamageAfterMagicAbsorb(after, epf) : after;
-				ItemStack chest = dummy.getItemBySlot(EquipmentSlot.CHEST).copy();
-				double gap = Math.abs(through - taken);
-				double bestGap = Math.abs(bestTaken - taken);
-
-				if (best.isEmpty() || gap < bestGap - 1.0E-4 || (Math.abs(gap - bestGap) <= 1.0E-4 && enchantLevel < bestLevel)) {
-					best = chest;
-					bestTaken = through;
-					bestLevel = enchantLevel;
-					bestMaterial = material;
-				}
-
-				if (through < topTaken) {
-					top = chest;
-					topTaken = through;
-					topLevel = enchantLevel;
-					topMaterial = material;
-				}
-			}
-		}
-
-		for (EquipmentSlot slot : SLOTS) {
-			dummy.setItemSlot(slot, ItemStack.EMPTY);
-		}
-
-		if (best.isEmpty()) {
-			return;
-		}
-
-		boolean past = taken < topTaken - 1.0E-4;
-		ItemStack shown = past ? top : best;
-		int shownLevel = past ? topLevel : bestLevel;
-		shownMaterial = past ? topMaterial : bestMaterial;
-		Component set = Component.translatable("bloom.sheet.gauge.set." + shownMaterial);
-		Component name = shownLevel > 0
-				? Component.translatable("bloom.sheet.gauge.with", set, protection.value().description(), Component.translatable("enchantment.level." + shownLevel))
-				: set;
-		sheet.gauge = shown;
-		sheet.gaugeCaption = Component.translatable(past ? "bloom.sheet.gauge.armor_past" : "bloom.sheet.gauge.armor", name,
-				Sheet.num(past ? topTaken : bestTaken), Sheet.num(hit));
-		sheet.gaugeBadge = past && taken > 0.0 ? Sheet.colored("×" + Sheet.num(topTaken / taken), Sheet.GOLD) : Component.empty();
 	}
 }

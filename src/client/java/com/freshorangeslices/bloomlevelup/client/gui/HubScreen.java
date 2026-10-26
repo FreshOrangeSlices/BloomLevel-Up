@@ -1260,6 +1260,13 @@ public final class HubScreen extends Screen {
 		}
 	}
 
+	/** Picks a target (Combat) or attacker (Armor) in the open sheet (client game test). */
+	public void sheetTargetForTests(int index) {
+		if (sheetWindow != null) {
+			sheetWindow.pickTargetForTests(index);
+		}
+	}
+
 	/** The open sheet's weapon choice and switches, "slot=3 predator=1" (client game test). */
 	public String sheetStateForTests() {
 		return sheetWindow == null ? "closed" : "slot=" + sheetWindow.slotForTests() + " " + new java.util.TreeMap<>(sheetWindow.modesForTests());

@@ -3,7 +3,7 @@
   "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, magic, knights and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
   "minecraft": "1.20.1",
   "forge": "47.3.0",
-  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight). Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Modrinth projects by slug (newest 1.20.1 Forge build; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Framework, Obscure API and Iron's Lib, are listed next to it). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
+  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight). Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Modrinth projects by slug (newest 1.20.1 Forge build; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Obscure API and Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
   "layers": [
     {
       "name": "core",
@@ -42,13 +42,23 @@
         "myths-and-legends",
         "legionary",
         "migamigos",
-        "framework",
         "obscure-api",
         "better-mob-combat",
         "easy-mob-spawn-control",
         "structurify"
       ],
       "external": [
+        {
+          "name": "Framework",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/framework",
+          "file": "framework-forge-1.20.1-0.8.0.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/7573/740/framework-forge-1.20.1-0.8.0.jar",
+            "https://edge.forgecdn.net/files/7573/740/framework-forge-1.20.1-0.8.0.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        },
         {
           "name": "Skarrier Mobs",
           "page": "https://www.curseforge.com/minecraft/mc-mods/skarrier-mobs",

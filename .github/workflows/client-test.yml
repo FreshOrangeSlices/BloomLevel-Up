@@ -187,6 +187,11 @@ jobs:
           lines = [l if len(l) < 400 else l[:400] + ' ...' for l in open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()]
           lines = [l for l in lines if not noise.search(l)]
           tests = [l for l in lines if 'BLOOMTEST' in l]
+          census = [l.split('BLOOMCENSUS ', 1)[1] for l in lines if 'BLOOMCENSUS ' in l and '/INFO]' in l]
+          if census:
+              text = chr(10).join(census)
+              for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
+                  print(f"::error title=client-pack-census-{n:02d}::{esc(text[i:i + 3900])}")
           print(f"::notice title=client-pack-checks::{esc(chr(10).join(t[:600] for t in tests)[:3900] or 'no BLOOMTEST lines')}")
           # Each attempt: what happened after the game reached the title screen (or the last 80 lines before it).
           starts = [i for i, l in enumerate(lines) if re.search(r'Loading \d+ mods', l)] or [0]

@@ -135,6 +135,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.waitFor(client -> ClientBloomState.ready() && ClientBloomState.profile() != null, SharedConstants.TICKS_PER_MINUTE);
 			context.waitTicks(40);
 			rpgSorting(singleplayer);
+			bossCensus(singleplayer);
 
 			// Origins asks for an origin on the first join: picture it, then pick Human so the rest can go on.
 			String screen = context.computeOnClient(client -> client.gui.screen() == null ? "none" : client.gui.screen().getClass().getName());
@@ -316,6 +317,124 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		if (!report.contains("roll invulnerable ticks=5")) {
 			failures.add("the roll's invulnerability isn't the pack's 5 ticks: " + report.get(report.size() - 1));
 		}
+	}
+
+	/** The namespaces of batch 2's mods (Mutant Monsters, Remnants: The Eclipsed Realm and RPG Mobs, Ultimate Warden). */
+	private static final java.util.Set<String> BOSS_MODS = java.util.Set.of("mutantmonsters", "remnant_bosses", "remnants", "remnant_mobs",
+			"ultimate_warden", "warden");
+
+	/**
+	 * Batch 2's mobs and gear, for the log: every living mob they add (health, whether it carries a boss bar) is
+	 * spawned next to the player, hit by the player's own attack and made to hit the player back (Aerial Hell's bosses
+	 * crashed the server with Origins: Legacy on that path), then removed; every weapon and armor piece is listed with
+	 * Bloom's weapon types and armor weight. Lines are marked BLOOMCENSUS (the report prints them in full).
+	 */
+	private void bossCensus(TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("effect give @a resistance 60 4 true");
+		List<String> report = singleplayer.getServer().computeOnServer(server -> {
+			List<String> out = new ArrayList<>();
+			net.minecraft.server.level.ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+			net.minecraft.server.level.ServerLevel level = (net.minecraft.server.level.ServerLevel) player.level();
+
+			for (net.minecraft.world.entity.EntityType<?> type : net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE) {
+				net.minecraft.resources.Identifier id = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(type);
+
+				if (!BOSS_MODS.contains(id.getNamespace())) {
+					continue;
+				}
+
+				String line = id + " [" + type.getCategory() + "]";
+
+				try {
+					net.minecraft.world.entity.Entity entity = type.create(level, net.minecraft.world.entity.EntitySpawnReason.COMMAND);
+
+					if (!(entity instanceof net.minecraft.world.entity.LivingEntity living)) {
+						out.add(line + " not a mob");
+
+						if (entity != null) {
+							entity.discard();
+						}
+
+						continue;
+					}
+
+					net.minecraft.world.phys.Vec3 ahead = player.position().add(player.getLookAngle().multiply(1.0, 0.0, 1.0).normalize().scale(4.0));
+					living.setPos(ahead.x, player.getY(), ahead.z);
+					level.addFreshEntity(living);
+					line += " hp=" + living.getMaxHealth() + (hasBossBar(living) ? " BOSSBAR" : "");
+					player.resetAttackStrengthTicker();
+					player.attack(living);
+					line += " hit by player ok";
+
+					if (living instanceof net.minecraft.world.entity.Mob mob && living.isAlive()) {
+						mob.doHurtTarget(level, player);
+						line += ", hits player ok";
+					}
+
+					living.discard();
+				} catch (Throwable e) {
+					line = "FAILED " + line + ": " + e;
+					BloomLevelUp.LOGGER.error("BLOOMCENSUS {}", line, e);
+				}
+
+				out.add(line);
+			}
+
+			for (net.minecraft.world.item.Item item : net.minecraft.core.registries.BuiltInRegistries.ITEM) {
+				net.minecraft.resources.Identifier id = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item);
+
+				if (!BOSS_MODS.contains(id.getNamespace())) {
+					continue;
+				}
+
+				net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(item);
+				net.minecraft.world.item.component.ItemAttributeModifiers modifiers = stack.getOrDefault(
+						net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS, net.minecraft.world.item.component.ItemAttributeModifiers.EMPTY);
+				double damage = modifiers.compute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, 1.0,
+						net.minecraft.world.entity.EquipmentSlot.MAINHAND);
+				double speed = modifiers.compute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED, 4.0,
+						net.minecraft.world.entity.EquipmentSlot.MAINHAND);
+				net.minecraft.world.item.equipment.Equippable equippable = stack.get(net.minecraft.core.component.DataComponents.EQUIPPABLE);
+				String families = com.freshorangeslices.bloomlevelup.skill.combat.Weapons.families(stack).toString();
+
+				if (equippable != null && equippable.slot().isArmor()) {
+					double armor = modifiers.compute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR, 0.0, equippable.slot());
+					double toughness = modifiers.compute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS, 0.0, equippable.slot());
+					out.add("armor " + id + " " + equippable.slot().getName() + " armor=" + armor + " toughness=" + toughness + " weight="
+							+ com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles.weightOf(stack));
+				} else if (damage > 1.0 || !families.equals("[]")) {
+					out.add("weapon " + id + " damage=" + damage + " speed=" + Math.round(speed * 100.0) / 100.0 + " bloom=" + families
+							+ " tags=" + stack.getTags().map(tag -> tag.location().toString()).filter(tag -> !tag.startsWith("minecraft:enchantable"))
+									.sorted().toList());
+				}
+			}
+
+			return out;
+		});
+
+		for (String line : report) {
+			BloomLevelUp.LOGGER.info("BLOOMCENSUS {}", line);
+
+			if (line.startsWith("FAILED")) {
+				failures.add(line);
+			}
+		}
+
+		BloomLevelUp.LOGGER.info("BLOOMTEST pack: batch 2 census: {} lines, {} failed", report.size(),
+				report.stream().filter(line -> line.startsWith("FAILED")).count());
+	}
+
+	/** Whether a mob keeps a boss bar (a ServerBossEvent field anywhere in its class chain). */
+	private static boolean hasBossBar(net.minecraft.world.entity.Entity entity) {
+		for (Class<?> type = entity.getClass(); type != null && type != Object.class; type = type.getSuperclass()) {
+			for (java.lang.reflect.Field field : type.getDeclaredFields()) {
+				if (net.minecraft.server.level.ServerBossEvent.class.isAssignableFrom(field.getType())) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/** Combat Roll's server setting, read by name so Bloom never depends on it. */

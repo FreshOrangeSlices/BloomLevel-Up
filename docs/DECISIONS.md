@@ -486,6 +486,7 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Topic | Decision | Where |
 |---|---|---|
 | No maces or spears in 1.20.1 | Wind Impact, Stored Impact (mace) and Long Reach (spear) are left out of this build. Impale becomes **Slash**, a sword Major: fully charged sword hits, and what their sweep catches, can Bleed (`slashChance`, 50%). Swords now have three Majors like every other weapon, so the Combat tab is six weapon trees of three. Death From Above's gate moves from the mace tree to the axe tree. The Master of Arms combos that need a mace go with them (from FreshOrangeSlices, 2026-10-25) | `data/bloomlevelup/bloom/major/combat/`, `CombatIds` |
+| Adamantium | Left out too: it only cut damage from blunt weapons, and by default only maces are blunt. The Armor tab's top row is spread back out so it stays even (from FreshOrangeSlices, 2026-10-25) | `data/bloomlevelup/bloom/major/armor/` |
 
 ## Still open (need a design call)
 

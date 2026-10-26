@@ -17,7 +17,6 @@ public final class ArmorIds {
 	public static final String ELEMENTAL_SKIN = BloomLevelUp.key("armor/elemental_skin");
 	public static final String THICK_BLOOD = BloomLevelUp.key("armor/thick_blood");
 	public static final String VIBRANIUM = BloomLevelUp.key("armor/vibranium");
-	public static final String ADAMANTIUM = BloomLevelUp.key("armor/adamantium");
 	public static final String REFLECT = BloomLevelUp.key("armor/reflect");
 	public static final String REBOUND = BloomLevelUp.key("armor/rebound");
 	public static final String UNYIELDING = BloomLevelUp.key("armor/unyielding");

@@ -496,6 +496,8 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Scrolling the hub | 1.20.1 has one mouse wheel: shift + wheel moves the page sideways | `client/gui/HubScreen` |
 | Joining other servers | A client with Bloom can join servers without it (Bloom then sends nothing and stays quiet). A Bloom server still needs Bloom on the client | `network/BloomNetwork` |
 | Nameplates | `[lvl N]` comes from Forge's name tag event instead of a renderer mixin | `client/BloomLevelUpClient` |
+| Hook points (review of the port) | Dodge/Reflect/Parkour/Castle of Stone sit in `LivingEntity.hurt` where Fabric's allow-damage event does (after creative mode, invulnerability and difficulty scaling), not Forge's attack event, which fires before those for players. Last Breath runs before a Totem of Undying is used (Fabric's allow-death point), not in Forge's death event. Placed blocks are tracked from block items only (Forge's place event also fires for stripped logs and grown trees). Bloom's side damage (`minecraft:no_knockback`) skips the knockback in `hurt`, since 1.20.1 doesn't read that tag | `mixin/LivingEntityMixin`, `mixin/BlockItemMixin` |
+| Break XP timing | Utility's break XP runs in Forge's break event, just before the block goes; in the rare case another mod cancels the break later, the XP stays (accepted) | `skill/utility/UtilitySkill` |
 
 ## Still open (need a design call)
 

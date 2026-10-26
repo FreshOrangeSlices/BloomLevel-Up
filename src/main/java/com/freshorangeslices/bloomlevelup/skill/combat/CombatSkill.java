@@ -181,7 +181,7 @@ public final class CombatSkill {
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, (LivingDeathEvent event) -> onDeath(event.getEntity(), event.getSource()));
 		MinecraftForge.EVENT_BUS.addListener((EntityJoinLevelEvent event) -> {
 			if (event.getLevel() instanceof ServerLevel level) {
-				onEntityLoad(event.getEntity(), level);
+				onEntityLoad(event.getEntity(), level, event.loadedFromDisk());
 			}
 		});
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
@@ -997,7 +997,12 @@ public final class CombatSkill {
 			return weapon;
 		}
 
-		if (projectile instanceof ThrownTrident trident && !(projectile instanceof ThrownWeapon)) {
+		// A Catch! throw hits with the weapon thrown (Slash, Armor Break, Execute, Become My Fuel...), as main's does.
+		if (projectile instanceof ThrownWeapon thrown) {
+			return thrown.getItem();
+		}
+
+		if (projectile instanceof ThrownTrident trident) {
 			return ((com.freshorangeslices.bloomlevelup.mixin.ThrownTridentAccessor) trident).bloomlevelup$tridentItem();
 		}
 
@@ -1024,8 +1029,9 @@ public final class CombatSkill {
 		return ItemStack.EMPTY;
 	}
 
-	private static void onEntityLoad(Entity entity, ServerLevel level) {
-		if (!(entity instanceof AbstractArrow arrow) || !(arrow.getOwner() instanceof ServerPlayer player)) {
+	private static void onEntityLoad(Entity entity, ServerLevel level, boolean fromDisk) {
+		// Arrows loaded back with their chunk aren't being shot (their tick count isn't saved, so they'd look fresh).
+		if (fromDisk || !(entity instanceof AbstractArrow arrow) || !(arrow.getOwner() instanceof ServerPlayer player)) {
 			return;
 		}
 

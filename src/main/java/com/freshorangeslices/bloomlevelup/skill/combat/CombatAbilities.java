@@ -315,7 +315,8 @@ public final class CombatAbilities {
 				return false;
 			}
 
-			held.setDamageValue(held.getDamageValue() + wear);
+			// Through Unbreaking and Bloom's durability saves, like any other wear (never breaks: checked above).
+			held.hurt(wear, player.getRandom(), player);
 		}
 
 		ItemStack thrownStack = held.copy();

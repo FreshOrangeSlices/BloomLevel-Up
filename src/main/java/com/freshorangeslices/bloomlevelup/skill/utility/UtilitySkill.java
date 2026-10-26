@@ -127,11 +127,7 @@ public final class UtilitySkill {
 				beforeBreak(event.getLevel() instanceof ServerLevel level ? level : null, event.getPlayer(), event.getPos(), event.getState());
 			}
 		});
-		MinecraftForge.EVENT_BUS.addListener((BlockEvent.EntityPlaceEvent event) -> {
-			if (event.getEntity() instanceof Player && event.getLevel() instanceof ServerLevel level) {
-				onPlaced(level, event.getPos());
-			}
-		});
+		// Placing is tracked by BlockItemMixin (Forge's place event also fires for stripped logs and grown trees).
 		MinecraftForge.EVENT_BUS.addListener((PlayerInteractEvent.EntityInteract event) -> beforeInteract(event.getEntity(), event.getHand(),
 				event.getTarget()));
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
@@ -590,10 +586,11 @@ public final class UtilitySkill {
 			IntegerProperty age = state.getBlock() instanceof net.minecraft.world.level.block.CropBlock ? ageOf(state) : null;
 
 			if (age != null) {
-				int max = Collections.max(age.getPossibleValues());
+				// The crop's own idea of growing up: a torchflower's last stage is the flower itself, past its age property.
+				net.minecraft.world.level.block.CropBlock crop = (net.minecraft.world.level.block.CropBlock) state.getBlock();
 
-				if (state.getValue(age) < max) {
-					level.setBlock(pos, state.setValue(age, state.getValue(age) + 1), Block.UPDATE_CLIENTS);
+				if (!crop.isMaxAge(state)) {
+					level.setBlock(pos, crop.getStateForAge(state.getValue(age) + 1), Block.UPDATE_CLIENTS);
 				}
 			} else {
 				for (int i = 0; i < config().growthAuraRandomTicks && level.getBlockState(pos).isRandomlyTicking(); i++) {

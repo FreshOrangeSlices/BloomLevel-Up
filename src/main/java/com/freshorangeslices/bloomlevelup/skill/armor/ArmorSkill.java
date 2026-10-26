@@ -81,11 +81,7 @@ public final class ArmorSkill {
 	}
 
 	public static void init() {
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, (LivingAttackEvent event) -> {
-			if (!event.getEntity().level().isClientSide() && !allowDamage(event.getEntity(), event.getSource(), event.getAmount())) {
-				event.setCanceled(true);
-			}
-		});
+		// Dodge, Reflect, Parkour and Castle of Stone: LivingEntityMixin (allowDamage), where Fabric's event sits.
 		MinecraftForge.EVENT_BUS.addListener((ShieldBlockEvent event) -> {
 			Incoming incoming = INCOMING.get(event.getEntity());
 
@@ -93,12 +89,7 @@ public final class ArmorSkill {
 				incoming.blocked()[0] = true;
 			}
 		});
-		// Before anything else hears of the death: Last Breath may cancel it.
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, (LivingDeathEvent event) -> {
-			if (!allowDeath(event.getEntity(), event.getSource())) {
-				event.setCanceled(true);
-			}
-		});
+		// Last Breath: LivingEntityMixin (allowDeath), before a totem is used.
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (LivingDeathEvent event) -> {
 			if (event.getEntity() instanceof ServerPlayer player) {
 				onDeath(player);
@@ -174,7 +165,7 @@ public final class ArmorSkill {
 	// ------------------------------------------------------------------ before vanilla
 
 	public static boolean allowDamage(LivingEntity entity, DamageSource source, float amount) {
-		// Creative/spectator players never get here for normal damage (vanilla makes them invulnerable first).
+		// Creative/spectator players never get here for normal damage (Player.hurt turns them away first).
 		if (!(entity instanceof ServerPlayer player)) {
 			return true;
 		}

@@ -302,6 +302,30 @@ public final class ArmorGameTests {
 	}
 
 	@GameTest(template = "empty")
+	public static void lastBreathComesBeforeTheTotem(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.LAST_BREATH);
+		player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.TOTEM_OF_UNDYING));
+		player.hurt(source(player, DamageTypes.GENERIC), 100.0F);
+		helper.assertTrue(player.isAlive(), "Survived");
+		near(helper, 10.0, player.getHealth(), "Last Breath's 5 hearts, not the totem's 1");
+		helper.assertTrue(player.getOffhandItem().is(Items.TOTEM_OF_UNDYING), "The totem is still there");
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
+	public static void castleOfStoneStopsARealHit(GameTestHelper helper) {
+		// Through LivingEntity.hurt (where the Armor hook sits), not just the hook on its own.
+		ServerPlayer player = player(helper);
+		grant(player, ArmorIds.LAST_BREATH, ArmorIds.CASTLE_OF_STONE);
+		BloomAttachments.profile(player).setCounter(ArmorIds.CASTLE_UNTIL, player.level().getGameTime() + 100);
+		float before = player.getHealth();
+		helper.assertFalse(player.hurt(source(player, DamageTypes.GENERIC), 5.0F), "The hit is stopped");
+		near(helper, before, player.getHealth(), "No health lost");
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
 	public static void thickBloodHalvesPoison(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		grant(player, ArmorIds.THICK_BLOOD);

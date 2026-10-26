@@ -32,6 +32,9 @@ import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 
 @Mixin(LivingEntity.class)
 abstract class LivingEntityMixin {
+	private static final net.minecraft.tags.TagKey<net.minecraft.world.damagesource.DamageType> NO_KNOCKBACK = net.minecraft.tags.TagKey.create(
+			net.minecraft.core.registries.Registries.DAMAGE_TYPE, new net.minecraft.resources.ResourceLocation("minecraft", "no_knockback"));
+
 	/** Combat: classify the hit and add the bonuses that count as real damage, before any mitigation. */
 	@ModifyVariable(method = "hurt", at = @At("HEAD"), argsOnly = true, ordinal = 0)
 	private float bloomlevelup$combatBonuses(float amount, DamageSource source, float originalAmount) {
@@ -49,6 +52,41 @@ abstract class LivingEntityMixin {
 	@Inject(method = "hurt", at = @At("RETURN"))
 	private void bloomlevelup$endHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		ArmorSkill.endHurt((LivingEntity) (Object) this, source);
+	}
+
+	/**
+	 * Armor: Castle of Stone, Reflect, Dodge and Parkour may stop the hit. Where Fabric's allow-damage event sits: after
+	 * the invulnerability, death and fire-resistance checks (and, for players, after creative mode and difficulty
+	 * scaling in Player.hurt). Forge's attack event fires before all of those for players.
+	 */
+	@Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isSleeping()Z", ordinal = 0), cancellable = true)
+	private void bloomlevelup$allowDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+		LivingEntity self = (LivingEntity) (Object) this;
+
+		if (self instanceof ServerPlayer && !ArmorSkill.allowDamage(self, source, amount)) {
+			ArmorSkill.endHurt(self, source);
+			cir.setReturnValue(false);
+		}
+	}
+
+	/** Armor / Last Breath: before a Totem of Undying is used (Fabric's allow-death event sits there). */
+	@Inject(method = "checkTotemDeathProtection", at = @At("HEAD"), cancellable = true)
+	private void bloomlevelup$lastBreath(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+		if (!ArmorSkill.allowDeath((LivingEntity) (Object) this, source)) {
+			cir.setReturnValue(true);
+		}
+	}
+
+	/**
+	 * Bloom's own side damage (Lightning Shock, Overkill, Bleed) never knocks back: the {@code minecraft:no_knockback}
+	 * damage type tag, which 1.20.1's hurt doesn't check yet.
+	 */
+	@WrapOperation(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;knockback(DDD)V"))
+	private void bloomlevelup$noKnockback(LivingEntity self, double strength, double x, double z, Operation<Void> original,
+			@Local(argsOnly = true) DamageSource source) {
+		if (!source.is(NO_KNOCKBACK)) {
+			original.call(self, strength, x, z);
+		}
 	}
 
 	/** After vanilla armor, Resistance and enchantment protection: apply the Armor category's own layers. */

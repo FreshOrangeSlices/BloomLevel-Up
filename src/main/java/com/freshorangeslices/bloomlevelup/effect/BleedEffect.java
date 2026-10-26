@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import com.freshorangeslices.bloomlevelup.skill.combat.BloomDamage;
 
 /**
- * Bleed (Spear Impale): half a heart per second that ignores armor (Resistance still applies).
+ * Bleed (Slash): half a heart per second that ignores armor (Resistance still applies).
  * Reapplying refreshes the duration; instances never stack. It's applied without the potion swirl and shows
  * dark red drips instead, with a spatter on every damage tick.
  */

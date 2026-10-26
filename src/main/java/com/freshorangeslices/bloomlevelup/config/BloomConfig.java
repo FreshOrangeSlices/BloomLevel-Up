@@ -189,14 +189,10 @@ public final class BloomConfig {
 	public int chargedSwingDurabilityCost = 2;
 	/** Assault Rifle: shots per magazine. */
 	public int assaultRifleMagazine = 16;
-	/** Master of Arms / Charged Throw (and Gale Throw): speed multiplier, mobs it goes through, durability (damage uses chargeAttackMultiplier). */
+	/** Master of Arms / Charged Throw: speed multiplier, mobs it goes through, durability (damage uses chargeAttackMultiplier). */
 	public double chargedThrowSpeedMultiplier = 1.4;
 	public int chargedThrowPierce = 3;
 	public int chargedThrowDurabilityCost = 8;
-	/**
-	 * Master of Arms / Charged Burst vs a normal burst: blast and push radius, push strength, your upward launch
-	 * speed (a normal burst is about 1.2: ~8 blocks; 1.65: ~14 blocks) and extra mace durability.
-	 */
 	/** Master of Arms / Storm Call: bolts, their distance from the aim point, ticks between bolts, and cost/cooldown vs one bolt. */
 	public int stormCallBolts = 3;
 	public double stormCallRadius = 2.5;

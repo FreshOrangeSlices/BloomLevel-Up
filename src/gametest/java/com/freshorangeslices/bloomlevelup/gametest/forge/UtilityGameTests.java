@@ -157,6 +157,21 @@ public final class UtilityGameTests {
 		helper.succeed();
 	}
 
+	@GameTest(template = "empty")
+	public static void strippingALogIsNotPlacing(GameTestHelper helper) {
+		// Forge's place event fires for an axe stripping a log too; only block items count as placing.
+		ItemStack axe = new ItemStack(Items.IRON_AXE);
+		ServerPlayer player = player(helper, axe);
+		BlockPos log = new BlockPos(1, 1, 1);
+		helper.setBlock(log, Blocks.OAK_LOG);
+		BlockHitResult hit = new BlockHitResult(Vec3.atCenterOf(helper.absolutePos(log)), Direction.NORTH, helper.absolutePos(log), false);
+		axe.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit));
+
+		helper.assertBlockPresent(Blocks.STRIPPED_OAK_LOG, log);
+		helper.assertFalse(PlacedBlocks.isPlaced(helper.getLevel(), helper.absolutePos(log)), "A stripped log isn't a placed block");
+		helper.succeed();
+	}
+
 	// ------------------------------------------------------------------ Yield
 
 	@GameTest(template = "empty")

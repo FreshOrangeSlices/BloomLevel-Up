@@ -493,6 +493,45 @@ public final class CombatGameTests {
 		helper.succeed();
 	}
 
+	@GameTest(template = "empty")
+	public static void thrownSwordsCarryTheirMajors(GameTestHelper helper) {
+		// A Catch! throw hits with the sword thrown: Slash can make the target bleed (as on main).
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		grant(player, CombatIds.SLASH);
+		ThrownWeapon thrown = ThrownWeapon.create(helper.getLevel(), player, new ItemStack(Items.IRON_SWORD));
+		LivingEntity zombie = zombie(helper, 1, 1);
+		var config = BloomServices.config();
+		double chance = config.slashChance;
+		config.slashChance = 1.0;
+
+		try {
+			helper.assertTrue(CombatSkill.firedWith(thrown).is(Items.IRON_SWORD), "The throw's weapon is the sword");
+			zombie.hurt(player.damageSources().trident(thrown, player), 8.0F);
+			helper.assertTrue(zombie.hasEffect(BloomEffects.BLEED.get()), "A thrown sword's hit can Bleed");
+		} finally {
+			config.slashChance = chance;
+			CombatSkill.endSwingForTests();
+		}
+
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
+	public static void bloomSideDamageDoesntKnockBack(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		LivingEntity zombie = zombie(helper, 2, 4);
+		((net.minecraft.world.entity.Mob) zombie).setNoAi(true);
+		zombie.hurt(com.freshorangeslices.bloomlevelup.skill.combat.BloomDamage.overkill(helper.getLevel(), player), 1.0F);
+		helper.assertTrue(zombie.getDeltaMovement().horizontalDistance() < 1.0E-3, "Overkill's splash doesn't push, moved "
+				+ zombie.getDeltaMovement());
+
+		LivingEntity other = zombie(helper, 6, 4);
+		((net.minecraft.world.entity.Mob) other).setNoAi(true);
+		other.hurt(player.damageSources().playerAttack(player), 1.0F);
+		helper.assertTrue(other.getDeltaMovement().horizontalDistance() > 0.05, "An ordinary hit still does");
+		helper.succeed();
+	}
+
 	@GameTest(template = "empty", timeoutTicks = 80)
 	public static void thrownWeaponsPierceWithAPierceLevel(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();

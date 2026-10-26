@@ -10,4 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: scout
-        run: python3 pack/scout.py "mutant monsters;remnants;remnants rpg mobs;moar bosses;ultimate warden;wasd libraries" "moar-bosses,ultimate-warden,remnants,mutant-monsters"
+        run: python3 pack/scout2.py "remnants-eclipsed-realm,remnants-rpg-mobs,moar-bosses"
+      - name: scout 2
+        run: python3 pack/scout2.py "ultimate-warden,mutant-monsters,remnants-rpg-stats-skills-progression"

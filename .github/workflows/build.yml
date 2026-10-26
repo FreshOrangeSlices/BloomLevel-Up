@@ -248,13 +248,22 @@ jobs:
             out/*.zip
       - name: boot a server with the pack
         run: python3 pack/boot_server.py "out/Bloom Pack Forge build.${GITHUB_RUN_NUMBER} server.zip" server
+      # A virtual display, and portablemc (a command-line launcher: installs Forge's client and starts it offline).
       - name: tools for the client
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils imagemagick > /dev/null
-          pip install --user --break-system-packages --quiet "portablemc>=5,<6"
-          portablemc --version
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri > /dev/null
+          if gh release download v5.0.6 -R theorzr/portablemc -p 'portablemc-*-linux-x86_64-gnu.tar.gz' -D pmc; then
+            tar -xzf pmc/*.tar.gz -C pmc
+            echo "$PWD/$(dirname "$(ls pmc/*/portablemc | head -1)")" >> "$GITHUB_PATH"
+          else
+            pip install --user --break-system-packages --quiet "portablemc>=5,<6"
+          fi
       - name: pack launch test
-        run: xvfb-run -a -s "-screen 0 1280x720x24" python3 pack/launch_test.py server game shots
+        run: |
+          portablemc --version
+          xvfb-run -a -s "-screen 0 1280x720x24" python3 pack/launch_test.py server game shots
       - name: capture the client's screenshots and logs
         if: always()
         uses: actions/upload-artifact@v7

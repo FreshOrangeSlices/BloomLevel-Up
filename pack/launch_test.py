@@ -78,8 +78,10 @@ def set_properties(path, values):
 
 
 def capture(folder, name):
+    """The whole virtual screen, as a PNG (ffmpeg comes with the CI image)."""
     path = os.path.join(folder, f"bloom_{name}.png")
-    subprocess.run(["import", "-window", "root", path], check=False)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "x11grab", "-video_size", "1280x720", "-i", os.environ.get("DISPLAY", ":99"),
+                    "-frames:v", "1", path], check=False)
     return os.path.exists(path)
 
 

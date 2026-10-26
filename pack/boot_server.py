@@ -74,8 +74,11 @@ def main():
 
     process.wait(timeout=180)
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
-    mods = next((l for l in log if re.search(r"Found \d+ mod|Loading \d+ mods|mods? loaded", l, re.I)), "")
-    problems = [l for l in log if re.search(r"ERROR|Exception|Caused by|Incompatible|requires|Missing or unsupported mandatory", l)]
+    mods_dir = os.path.join(root, "mods")
+    mods = f"{len([f for f in os.listdir(mods_dir) if f.endswith('.jar')])} mods" if os.path.isdir(mods_dir) else "no mods folder"
+    # The installer's own output (it lists every class it patches, exceptions included) isn't the server's.
+    after = next((i for i, l in enumerate(log) if re.search(r"The server installed successfully|ModLauncher running", l)), 0)
+    problems = [l for l in log[after:] if re.search(r"ERROR|Exception|Caused by|Incompatible|requires|Missing or unsupported mandatory", l)]
     if problems:
         text = "\n".join(problems[:60])
         print(f"::warning title=server-log::{esc(text[:3900])}")
@@ -83,7 +86,7 @@ def main():
         print(f"::error title=server-boot::The server didn't come up (exit {process.returncode}). Last lines:%0A{esc(chr(10).join(log[-40:])[:3800])}")
         sys.exit(1)
     install = f"Forge installed in {installed:.0f} s, " if installed else ""
-    print(f"::notice title=server-boot::{install}up in {done:.0f} s with -Xmx{heap}; {mods.strip()}; server process memory {memory} MB right after start")
+    print(f"::notice title=server-boot::{install}up in {done:.0f} s with -Xmx{heap}; {mods}; server process memory {memory} MB right after start")
 
     # Bug hunting: every distinct warning and error, by the mod (namespace) it names, most frequent first.
     byns = collections.defaultdict(collections.Counter)

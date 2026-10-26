@@ -1,24 +1,128 @@
 {
-  "name": "Bloom Pack (Forge 1.20.1)",
-  "summary": "Bloom Level-Up with Better Combat and Fresh Animations, for Minecraft 1.20.1 (Forge).",
+  "name": "LegionWareX",
+  "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, magic, knights and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
   "minecraft": "1.20.1",
   "forge": "47.3.0",
-  "_comment": "The Forge build's pack (FreshOrangeSlices, 2026-10-26): Bloom, Better Combat and the same Fresh Animations set as main's Bloom Pack (Entity Model/Texture Features, Not Enough Animations, Fresh Animations with its Details, Objects, Spiders, Creepers and Player add-ons, and the EMF compat mods that make Better Combat and Not Enough Animations work with them). Modrinth projects by slug (newest 1.20.1 Forge build; required dependencies are added automatically). Bloom is packed inside.",
-  "modrinth": [
-    "better-combat",
-    "playeranimator",
-    "cloth-config",
-    "entity-model-features",
-    "entitytexturefeatures",
-    "not-enough-animations",
-    "not-enough-animations-emf-compat",
-    "emf-compat-better-combat",
-    "fresh-animations",
-    "fresh-animations-details",
-    "fresh-animations-objects",
-    "fresh-animations-spiders",
-    "fresh-animations-creepers",
-    "fa-player-extension"
+  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight). Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Modrinth projects by slug (newest 1.20.1 Forge build; required dependencies are added automatically). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
+  "layers": [
+    {
+      "name": "core",
+      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack), plus the performance mods, since they change how everything renders.",
+      "modrinth": [
+        "better-combat",
+        "playeranimator",
+        "cloth-config",
+        "entity-model-features",
+        "entitytexturefeatures",
+        "not-enough-animations",
+        "not-enough-animations-emf-compat",
+        "emf-compat-better-combat",
+        "fresh-animations",
+        "fresh-animations-details",
+        "fresh-animations-objects",
+        "fresh-animations-spiders",
+        "fresh-animations-creepers",
+        "fa-player-extension",
+        "embeddium",
+        "modernfix",
+        "ferrite-core",
+        "clumps"
+      ]
+    },
+    {
+      "name": "creatures",
+      "_comment": "Creatures, bosses and companions, with the spawn and structure control that keeps them memorable instead of everywhere.",
+      "modrinth": [
+        "aquamirae",
+        "ice-and-fire-dragons",
+        "book-of-dragons",
+        "mowzies-mobs",
+        "monster-expansion",
+        "mutant-monsters",
+        "myths-and-legends",
+        "legionary",
+        "migamigos",
+        "better-mob-combat",
+        "easy-mob-spawn-control",
+        "structurify"
+      ],
+      "external": [
+        {
+          "name": "Skarrier Mobs",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/skarrier-mobs",
+          "file": "skarrier_mobs-1.1.2-forge-1.20.1.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/9296/241/skarrier_mobs-1.1.2-forge-1.20.1.jar",
+            "https://edge.forgecdn.net/files/9296/241/skarrier_mobs-1.1.2-forge-1.20.1.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        }
+      ]
+    },
+    {
+      "name": "magic-and-gear",
+      "_comment": "Iron's Spells as the mage, the RPG Series' Paladins & Priests and Rogues & Warriors (Spell Engine comes with them), weapons and armor, and the recipe glue for all of it. Marium's Soulslike Weaponry is on test (power creep).",
+      "modrinth": [
+        "irons-spells-n-spellbooks",
+        "paladins-and-priests",
+        "rogues-and-warriors",
+        "epic-knights-shields-armor-and-weapons",
+        "simply-swords",
+        "mariums-soulslike-weaponry",
+        "polymorph",
+        "almost-unified"
+      ]
+    },
+    {
+      "name": "animation-and-qol",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat), and the quality-of-life and multiplayer mods.",
+      "modrinth": [
+        "punchy-fpa",
+        "fwa",
+        "particle-rain",
+        "emotecraft",
+        "carry-on",
+        "emf-compat-carry-on",
+        "jei",
+        "jade",
+        "appleskin",
+        "mouse-tweaks",
+        "inventory-profiles-next",
+        "crafting-tweaks",
+        "lootr",
+        "corpse",
+        "xaeros-minimap",
+        "xaeros-world-map",
+        "waystones",
+        "keyvision",
+        "modifier-keybinds"
+      ],
+      "external": [
+        {
+          "name": "Touch'n Motion",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/touch-and-motion",
+          "file": "touch_n_motion_forge_1.20.1_1.0.4.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/9205/892/touch_n_motion_forge_1.20.1_1.0.4.jar",
+            "https://edge.forgecdn.net/files/9205/892/touch_n_motion_forge_1.20.1_1.0.4.jar"
+          ],
+          "client": "required",
+          "server": "unsupported"
+        },
+        {
+          "name": "Novum's Altitude",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/novums-altitude",
+          "file": "novums-altitude-0.0.5.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/8213/759/Altitude%200.0.5.jar",
+            "https://edge.forgecdn.net/files/8213/759/Altitude%200.0.5.jar"
+          ],
+          "client": "required",
+          "server": "unsupported"
+        }
+      ]
+    }
   ],
   "env_overrides": {
     "playeranimator": {
@@ -37,6 +141,6 @@
       "fresh-animations-spiders",
       "fresh-animations-objects"
     ],
-    "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources), same order as main's pack. Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin)."
+    "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin)."
   }
 }

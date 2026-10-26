@@ -1,10 +1,12 @@
-"""Builds the Forge 1.20.1 Bloom Pack for sharing with friends: a Modrinth pack file (.mrpack) and a ready-to-run server
-folder.
+"""Builds the Forge 1.20.1 pack in pack/pack.json (LegionWareX) for sharing with friends: a Modrinth pack file (.mrpack)
+and a ready-to-run server folder.
 
-Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--client-run <dir>] [--without <slug,slug>]
+Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--layers N] [--client-run <dir>] [--without <slug,slug>]
 
-Reads pack/pack.json. Modrinth mods are linked (newest 1.20.1 Forge build, plus every required dependency); Bloom is
-packed inside, which is fine for a private share but not for publishing. Every jar is downloaded and checked: each
+The pack's mods are in cumulative layers; --layers N builds only the first N (CI tests each, to tell which layer
+breaks what), and without it every layer goes in. Modrinth mods are linked (newest 1.20.1 Forge build, plus every
+required dependency); Bloom and the CurseForge-only files ("external") are packed inside, which is fine for a private
+share but not for publishing. Every jar is downloaded and checked: each
 mod's mandatory mod ids (from its META-INF/mods.toml) have to be in the pack, on the client and on the server, or the
 build fails. Prints a summary as GitHub annotations.
 
@@ -36,7 +38,7 @@ BUILT_IN = {"minecraft", "forge", "javafml", "lowcodefml", "mcp"}
 HEAP = "5G"  # what a 6 GB host leaves for Minecraft (the boot test uses the same)
 
 START_BAT = f"""@echo off
-rem Bloom Pack server (Forge 1.20.1). Needs Java 17 (java -version). Type stop to shut it down.
+rem {{name}} server (Forge 1.20.1). Needs Java 17 (java -version). Type stop to shut it down.
 cd /d "%~dp0"
 if not exist run.bat (
   echo First start: installing Forge, this needs internet and takes a minute...
@@ -52,7 +54,7 @@ pause
 """
 
 START_SH = f"""#!/bin/sh
-# Bloom Pack server (Forge 1.20.1). Needs Java 17 (java -version). Type stop to shut it down.
+# {{name}} server (Forge 1.20.1). Needs Java 17 (java -version). Type stop to shut it down.
 cd "$(dirname "$0")"
 if [ ! -f run.sh ]; then
   echo "First start: installing Forge, this needs internet and takes a minute..."
@@ -67,7 +69,7 @@ eula=false
 """
 
 # Only what the pack needs; the server fills in every other setting on its first start.
-SERVER_PROPERTIES = """motd=Bloom Pack (Forge 1.20.1)
+SERVER_PROPERTIES = """motd={name}
 view-distance=10
 simulation-distance=8
 max-players=10
@@ -76,7 +78,7 @@ spawn-protection=0
 allow-flight=true
 """
 
-README = """Bloom Pack server (Forge 1.20.1)
+README = """{name} server (Forge 1.20.1)
 
 On your own PC
 1. Install Java 17 (for example Eclipse Temurin 17 from adoptium.net). "java -version" in a terminal shows which one you have.
@@ -195,6 +197,11 @@ def main():
         at = args.index("--client-run")
         client_run = args[at + 1]
         del args[at:at + 2]
+    layers = None
+    if "--layers" in args:
+        at = args.index("--layers")
+        layers = int(args[at + 1])
+        del args[at:at + 2]
     without = set()
     if "--without" in args:
         at = args.index("--without")
@@ -204,6 +211,10 @@ def main():
     os.makedirs(out, exist_ok=True)
     spec = json.load(open(os.path.join(os.path.dirname(__file__), "pack.json")))
     game = spec["minecraft"]
+    name = spec["name"]
+    chosen = spec.get("layers", [])[:layers] if layers else spec.get("layers", [])
+    spec["modrinth"] = spec.get("modrinth", []) + [slug for layer in chosen for slug in layer.get("modrinth", [])]
+    spec["external"] = spec.get("external", []) + [entry for layer in chosen for entry in layer.get("external", [])]
     files, notes, problems = [], [], []
     by_slug = {}
     spec["modrinth"] = [slug for slug in spec["modrinth"] if slug not in without]
@@ -211,6 +222,8 @@ def main():
     presets["resource_packs"] = [slug for slug in presets.get("resource_packs", []) if slug not in without]
     if without:
         notes.append("left out: " + ", ".join(sorted(without)))
+    if chosen:
+        notes.append("layers: " + ", ".join(layer["name"] for layer in chosen))
     queue = [(slug, None) for slug in spec["modrinth"]]
     seen = set()
 
@@ -262,6 +275,24 @@ def main():
     bloom_name = os.path.basename(bloom_jar)
     overrides[f"mods/{bloom_name}"] = open(bloom_jar, "rb").read()
     sides = {f"mods/{bloom_name}": {"client": "required", "server": "required"}}
+    for external in spec.get("external", []):
+        if external["name"].lower().replace(" ", "-") in without:
+            continue
+        data = None
+        for url in external.get("urls", []):
+            try:
+                data = http(url, binary=True)
+            except RuntimeError:
+                data = None
+            if data and data[:2] == b"PK":
+                break
+            data = None
+        if data is None:
+            problems.append(f"{external['name']} couldn't be downloaded ({external['page']})")
+            continue
+        path = f"mods/{external['file']}"
+        overrides[path] = data
+        sides[path] = {"client": external["client"], "server": external["server"]}
 
     # ---- every mod's mandatory mods have to be in the pack, on each side
     for where in ("client", "server"):
@@ -286,11 +317,11 @@ def main():
     pack_defaults = {}
     packs = [s[3:] if s.startswith("id:") else f"file/{os.path.basename(by_slug[s]['path'])}"
              for s in presets.get("resource_packs", []) if s.startswith("id:") or s in by_slug]
-    lines = ["# Bloom Pack: switched on by Bloom Level-Up before the game reads its options, once per change of this file."]
+    lines = [f"# {name}: switched on by Bloom Level-Up before the game reads its options, once per change of this file."]
     if packs:
         lines.append("resourcePacks=" + "|".join(packs))
     if presets.get("keys"):
-        lines.append("keys=" + "|".join(f"{name}:{key}" for name, key in presets["keys"].items()))
+        lines.append("keys=" + "|".join(f"{binding}:{key}" for binding, key in presets["keys"].items()))
     if len(lines) > 1:
         pack_defaults["config/bloomlevelup/pack-defaults.properties"] = ("\n".join(lines) + "\n").encode()
     # Config files for both sides (server rules a singleplayer world reads too), as given; in the server zip as well.
@@ -316,7 +347,7 @@ def main():
         } for e in files],
         "dependencies": {"minecraft": game, "forge": spec["forge"]},
     }
-    pack_path = os.path.join(out, f"Bloom Pack Forge {pack_version}.mrpack")
+    pack_path = os.path.join(out, f"{name} {pack_version}.mrpack")
     with zipfile.ZipFile(pack_path, "w", zipfile.ZIP_DEFLATED) as pack:
         pack.writestr("modrinth.index.json", json.dumps(index, indent=2))
         for path, data in overrides.items():
@@ -326,7 +357,7 @@ def main():
             pack.writestr(f"client-overrides/{path}", data)
 
     # ---- the server: a whole folder, ready to start (or its mods folder, uploaded to a host)
-    server_path = os.path.join(out, f"Bloom Pack Forge {pack_version} server.zip")
+    server_path = os.path.join(out, f"{name} {pack_version} server.zip")
     server_mods = []
     installer = forge_installer(game, spec["forge"])
     if not installer or installer[:2] != b"PK":
@@ -343,13 +374,13 @@ def main():
                 if path.startswith("mods/"):
                     server_mods.append(os.path.basename(path))
         server.writestr("forge-installer.jar", installer)
-        for name, text in (("start.bat", START_BAT.replace("\n", "\r\n")), ("eula.txt", EULA), ("server.properties", SERVER_PROPERTIES),
-                           ("README.txt", README)):
-            server.writestr(name, text)
+        for file_name, text in (("start.bat", START_BAT.replace("\n", "\r\n")), ("eula.txt", EULA), ("server.properties", SERVER_PROPERTIES),
+                                ("README.txt", README)):
+            server.writestr(file_name, text.replace("{name}", name))
         script = zipfile.ZipInfo("start.sh")
         script.external_attr = 0o755 << 16  # executable when unzipped
         script.compress_type = zipfile.ZIP_DEFLATED
-        server.writestr(script, START_SH)
+        server.writestr(script, START_SH.replace("{name}", name))
 
     # ---- the pack launch test: the client side into a game folder
     if client_run:

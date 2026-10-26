@@ -4,7 +4,7 @@ Usage (inside a virtual display): python3 pack/launch_test.py <server folder> <c
 
 The server folder is the one boot_server.py left (Forge installed). It's switched to a flat world in offline mode
 and started; the client (installed and started by portablemc, offline, as the build_pack.py --client-run folder has
-it) joins it. The server then sets a scene (noon, some Fresh Animations mobs in front of the player) and the screen
+it) first starts to the title screen (captured: it should be Minecraft's own), then joins it. The server then sets a scene (noon, some Fresh Animations mobs in front of the player) and the screen
 is captured a few times. Checks: the client gets in, Bloom switched the pack's resource packs on (log line and
 options.txt), and nothing crashed. Results and the client's warnings go out as GitHub annotations; the screenshots
 are written as PNGs for the screenshot job.
@@ -12,13 +12,15 @@ are written as PNGs for the screenshot job.
 import os
 import re
 import shutil
+import signal
 import subprocess
 import sys
 import threading
 import time
 
 PLAYER = "BloomTester"
-JOIN_LIMIT = 900  # seconds for the client to install, start and join
+TITLE_LIMIT = 1200  # seconds for the first start (installs Forge's client, then loads every mod) to reach the title screen
+JOIN_LIMIT = 900  # seconds for the second start to join
 FORGE = "forge::1.20.1-47.3.0"
 SCENE = [
     "time set 6000",
@@ -43,8 +45,9 @@ class Process:
 
     def __init__(self, args, cwd, env=None, stdin=False):
         self.lines = []
+        # Its own process group, so stopping a launcher stops the game it started too.
         self.process = subprocess.Popen(args, cwd=cwd, env=env, stdin=subprocess.PIPE if stdin else subprocess.DEVNULL,
-                                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+                                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, start_new_session=True)
         threading.Thread(target=self._read, daemon=True).start()
 
     def _read(self):
@@ -76,6 +79,37 @@ def set_properties(path, values):
              for line in lines]
     lines += [f"{key}={value}" for key, value in values.items() if key not in keys]
     open(path, "w").write("\n".join(lines) + "\n")
+
+
+def settle(process, quiet, limit):
+    """Waits until the process has printed nothing for {quiet} seconds (at most {limit})."""
+    end = time.time() + limit
+    count, since = len(process.lines), time.time()
+    while time.time() < end and process.process.poll() is None:
+        time.sleep(1)
+        if len(process.lines) != count:
+            count, since = len(process.lines), time.time()
+        elif time.time() - since >= quiet:
+            return
+
+
+def stop(process):
+    """Stops a launcher and the game it started (its whole process group)."""
+    for sig, wait in ((signal.SIGTERM, 60), (signal.SIGKILL, 30)):
+        try:
+            os.killpg(process.process.pid, sig)
+        except ProcessLookupError:
+            return
+        try:
+            process.process.wait(timeout=wait)
+            time.sleep(3)  # the game may outlive the launcher by a moment
+            os.killpg(process.process.pid, 0)
+        except (subprocess.TimeoutExpired, ProcessLookupError):
+            if sig == signal.SIGTERM:
+                continue
+            return
+        except OSError:
+            return
 
 
 def capture(folder, name):
@@ -115,8 +149,22 @@ def main():
     # A first start like a friend's: options.txt only has what keeps the test quiet (Bloom adds the pack's packs).
     open(options, "w").write("onboardAccessibility:false\ntutorialStep:none\njoinedFirstServer:true\nskipMultiplayerWarning:true\n"
                              "pauseOnLostFocus:false\nsoundCategory_master:0.0\nguiScale:2\nrenderDistance:6\n")
-    client = Process(["portablemc", "--main-dir", os.path.join(game_dir, ".pmc"), "start", FORGE, "--mc-dir", game_dir,
-                      "-u", PLAYER, "--join-server", "127.0.0.1", "--resolution", "1280x720", "--jvm-arg=-Xmx3G"], game_dir)
+    launch = ["portablemc", "--main-dir", os.path.join(game_dir, ".pmc"), "start", FORGE, "--mc-dir", game_dir, "-u", PLAYER,
+              "--resolution", "1280x720", "--jvm-arg=-Xmx6G"]
+
+    # First start: up to the title screen (it should be Minecraft's own), then closed.
+    title = Process(launch, game_dir)
+    if title.wait_for(r"Created: \d+x\d+x\d+ minecraft:textures/atlas/blocks\.png-atlas", TITLE_LIMIT):
+        settle(title, quiet=20, limit=240)
+        if not capture(shots, "pack_title"):
+            failures.append("couldn't capture the title screen")
+    else:
+        failures.append("the client didn't reach the title screen")
+        capture(shots, "pack_title")
+    stop(title)
+
+    # Second start: straight into the server.
+    client = Process(launch + ["--join-server", "127.0.0.1"], game_dir)
     joined = server.wait_for(rf"{PLAYER} joined the game", JOIN_LIMIT)
     started = time.time()
 
@@ -136,8 +184,8 @@ def main():
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")
 
-    # ---- what the client did
-    client_log = client.lines
+    # ---- what the client did (both starts)
+    client_log = title.lines + client.lines
     applied = next((l for l in client_log if "Bloom Pack defaults applied" in l), None)
     packs_line = next((l for l in open(options).read().splitlines() if l.startswith("resourcePacks:")), "") if os.path.exists(options) else ""
     if not applied:
@@ -148,12 +196,7 @@ def main():
     if crash:
         failures.append("the client crashed")
 
-    for process in (client.process,):
-        process.terminate()
-    try:
-        client.process.wait(timeout=60)
-    except subprocess.TimeoutExpired:
-        client.process.kill()
+    stop(client)
     server.send("stop")
     try:
         server.process.wait(timeout=120)

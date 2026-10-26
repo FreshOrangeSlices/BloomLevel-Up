@@ -216,14 +216,19 @@ jobs:
       - name: screenshot
         run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28 ${{ matrix.variant == 'bettercombat' && 'bc' || '' }}
 
-  # The Forge Bloom Pack (pack/pack.json): Bloom, Better Combat and Fresh Animations, as a Modrinth pack file (.mrpack)
-  # and a server zip, under "Artifacts" as bloom-pack-forge. A real Forge server then boots from that zip the way a
-  # friend would start it (installing Forge first), and a real Forge client with the pack's client side joins it
-  # (pack/launch_test.py: Fresh Animations has to be on); the pack-screenshots job prints what it saw.
+  # LegionWareX (pack/pack.json): FreshOrangeSlices' medieval high-fantasy pack built around Bloom, as a Modrinth pack
+  # file (.mrpack) and a server zip, under "Artifacts" as legionwarex. Its mods are in four cumulative layers and each is
+  # tested on its own: a real Forge server boots from the layer's server zip the way a friend would start it
+  # (installing Forge first), then a real Forge client with the layer's client side starts to the title screen and
+  # joins it (pack/launch_test.py: no crash, Fresh Animations on). The pack-screenshots jobs print what each saw.
   pack:
     needs: build
     if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        layers: [1, 2, 3, 4]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -238,16 +243,17 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
       - name: build the pack
-        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out --client-run game
+        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out --layers ${{ matrix.layers }} --client-run game
       - name: capture the pack
+        if: matrix.layers == 4
         uses: actions/upload-artifact@v7
         with:
-          name: bloom-pack-forge
+          name: legionwarex
           path: |
             out/*.mrpack
             out/*.zip
       - name: boot a server with the pack
-        run: python3 pack/boot_server.py "out/Bloom Pack Forge build.${GITHUB_RUN_NUMBER} server.zip" server
+        run: python3 pack/boot_server.py "$(ls out/*server.zip | head -1)" server
       # A virtual display, and portablemc (a command-line launcher: installs Forge's client and starts it offline).
       - name: tools for the client
         env:
@@ -269,7 +275,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: pack-screenshots
+          name: pack-screenshots-L${{ matrix.layers }}
           path: |
             shots/*.png
             game/logs/latest.log
@@ -283,17 +289,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shot: [pack_0, pack_2, pack_back]
+        layers: [1, 2, 3, 4]
+        shot: [pack_title, pack_0, pack_back]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
       - name: fetch screenshots
         uses: actions/download-artifact@v4
         with:
-          name: pack-screenshots
+          name: pack-screenshots-L${{ matrix.layers }}
           path: shots
         continue-on-error: true
       - name: pillow
         run: pip install --quiet pillow
       - name: screenshot
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28 L${{ matrix.layers }}

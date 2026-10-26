@@ -178,8 +178,10 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot("pack_hub");
 			context.setScreen(() -> null);
 
-			// The inventory with the pack's accessory slots (Trinkets) and all three of Bloom's buttons in their row.
+			// The inventory with the pack's accessory slots (Trinkets) and all three of Bloom's buttons in their row. The
+			// two Majors cost 11 Major Levels, more than Misc alone earns (10), so Utility chips in.
 			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:misc 100000");
+			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:utility 100000");
 			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/hoarders_pocket");
 			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/rune_embedding");
 			context.waitFor(client -> ClientBloomState.profile() != null && ClientBloomState.profile().owns(MiscIds.RUNE_EMBEDDING),

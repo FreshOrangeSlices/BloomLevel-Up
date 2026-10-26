@@ -10,10 +10,12 @@
 > optional) works the same as on main. Every difference from the Fabric build is listed under "Forge 1.20.1 build" in
 > `docs/DECISIONS.md`. The rest of this README describes the Fabric 26.3 build on `main`.
 >
-> **Forge pack:** each **build** run on this branch also makes **bloom-pack-forge**: a Modrinth pack file (Bloom,
-> Better Combat and Fresh Animations with its add-ons; import it in the Modrinth App or Prism Launcher) and a
-> server zip (Java 17; `start.sh` / `start.bat` install Forge on the first start). Fresh Animations is switched on
-> by itself at the first launch.
+> **LegionWareX (Forge pack):** each **build** run on this branch also makes **legionwarex**: FreshOrangeSlices'
+> medieval high-fantasy pack built around Bloom (Better Combat, Fresh Animations, dragons and monsters, Iron's Spells
+> and the RPG Series' Paladins & Priests and Rogues & Warriors, knights' gear, QoL). It's a Modrinth pack file (import
+> it in the Modrinth App or Prism Launcher) and a server zip (Java 17; `start.sh` / `start.bat` install Forge on the
+> first start). Fresh Animations is switched on by itself at the first launch. Bloom itself stays a standalone mod:
+> the pack adds its own settings around it, never inside it.
 
 A Fabric mod for Minecraft **26.3**: a modpack-friendly character build system inspired by Path of Exile
 and mcMMO. Four skill categories (Utility, Combat, Armor, Misc) level from use, each level gives a stat

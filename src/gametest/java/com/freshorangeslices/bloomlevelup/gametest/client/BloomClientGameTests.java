@@ -36,8 +36,10 @@ import com.freshorangeslices.bloomlevelup.client.compat.BetterCombatClient;
 import com.freshorangeslices.bloomlevelup.client.NameTags;
 import com.freshorangeslices.bloomlevelup.client.gui.HubScreen;
 import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
+import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.player.OwnedMajor;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
 
 /**
@@ -781,6 +783,27 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		context.waitFor(client -> ClientBloomState.profile().counter(ArmorIds.BRACED) == 0);
 		context.waitTicks(20);
 		context.takeScreenshot("bloom_hud_brace_cooldown");
+
+		// Every skill icon at once, bottom right: Predator, Combo, Bloodlust, Stored Impact (3 × 2 damage stored),
+		// Brace! cooling down, then the Wind Impact and Lightning Summon cooldowns.
+		context.runOnClient(client -> {
+			com.freshorangeslices.bloomlevelup.client.gui.BloomHud.accept(new BloomPayloads.Meter(BloomPayloads.Meter.PREDATOR, 2, 0.2F, 300, 400));
+			com.freshorangeslices.bloomlevelup.client.gui.BloomHud.accept(new BloomPayloads.Meter(BloomPayloads.Meter.COMBO, 4, 1.0F, 100, 400));
+			com.freshorangeslices.bloomlevelup.client.gui.BloomHud.accept(new BloomPayloads.Meter(BloomPayloads.Meter.BLOODLUST, 3, 0.3F, 200, 400));
+			com.freshorangeslices.bloomlevelup.client.gui.BloomHud.accept(new BloomPayloads.Meter(BloomPayloads.Meter.WIND_IMPACT, 1, 0.0F, 60, 100));
+			com.freshorangeslices.bloomlevelup.client.gui.BloomHud.accept(new BloomPayloads.Meter(BloomPayloads.Meter.LIGHTNING_SUMMON, 1, 0.0F, 150, 200));
+		});
+		singleplayer.getServer().runOnServer(server -> {
+			for (var player : server.getPlayerList().getPlayers()) {
+				var profile = com.freshorangeslices.bloomlevelup.player.BloomAttachments.profile(player);
+				profile.setCounter(CombatIds.STORED_IMPACT_HUNDREDTHS, 650);
+				profile.setCounter(CombatIds.STORED_IMPACT_EXPIRES_AT, player.level().getGameTime() + 2000);
+				com.freshorangeslices.bloomlevelup.network.BloomSync.changed(player);
+			}
+		});
+		context.waitFor(client -> ClientBloomState.profile().counter(CombatIds.STORED_IMPACT_HUNDREDTHS) == 650);
+		context.waitTicks(2);
+		context.takeScreenshot("bloom_hud_icons");
 
 		context.runOnClient(client -> {
 			client.options.guiScale().set(0);

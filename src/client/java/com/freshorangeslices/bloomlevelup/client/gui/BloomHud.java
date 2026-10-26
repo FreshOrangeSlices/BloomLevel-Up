@@ -1,5 +1,8 @@
 package com.freshorangeslices.bloomlevelup.client.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -21,6 +24,7 @@ import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
 import com.freshorangeslices.bloomlevelup.client.IconTextures;
 import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
+import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
@@ -32,10 +36,9 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  * <ul>
  *   <li>a charge meter under the crosshair while the weapon-skill key is held (gold when ready to release);</li>
  *   <li>Straight Shot swaps the crosshair for a dot: red while drawing, green once the bow is fully drawn;</li>
- *   <li>a Bloodlust rage bar right of the hotbar (Stored Impact above it): stacks, the damage bonus, and how
- *   long it lasts;</li>
- *   <li>Predator and Combo bars left of the hotbar, the same way;</li>
- *   <li>Brace!'s icon right of those bars: lit while braced, dimmed with the seconds left while it cools down.</li>
+ *   <li>the running skills as their Major icons in a row at the bottom right of the screen, each with its "×N"
+ *   beside it: Predator, Combo, Bloodlust and Stored Impact darken from the top as they run out; Brace! is lit
+ *   while braced; Brace!, Wind Impact and Lightning Summon cooling down are greyed with the seconds left.</li>
  * </ul>
  */
 public final class BloomHud {
@@ -44,33 +47,32 @@ public final class BloomHud {
 	private static final int CHARGE_READY = 0xFFFFB13B;
 	private static final int DOT_DRAWING = 0xFFE04040;
 	private static final int DOT_READY = 0xFF55E055;
-	private static final int RAGE_BACK = 0xA0200000;
-	private static final int RAGE_FILL = 0xFFC0202A;
+	/** Frame colours: Bloodlust red, Stored Impact orange (gold once full), Predator purple, Combo blue. */
+	private static final int RAGE = 0xFFC0202A;
 	private static final int RAGE_TEXT = 0xFFE05555;
-	private static final int IMPACT_BACK = 0xA0201000;
-	private static final int IMPACT_FILL = 0xFFFF9A2E;
+	private static final int IMPACT = 0xFFFF9A2E;
 	private static final int IMPACT_FULL = 0xFFFFC94A;
 	private static final int IMPACT_TEXT = 0xFFFFB04A;
-	/** Stored Impact bar: 4 segments of 0.5 damage; every full bar (2 damage) becomes one "×N". */
-	private static final int IMPACT_SEGMENTS = 4;
-	private static final int IMPACT_PER_BAR = 200;
-
-	private static final int PREDATOR_BACK = 0xA0180A24;
-	private static final int PREDATOR_FILL = 0xFFB070FF;
+	/** Stored Impact: every full 2 damage stored (200 hundredths) is one "×N". */
+	private static final int IMPACT_PER_STACK = 200;
+	private static final int PREDATOR = 0xFFB070FF;
 	private static final int PREDATOR_TEXT = 0xFFC79BFF;
-	private static final int COMBO_BACK = 0xA0081A24;
-	private static final int COMBO_FILL = 0xFF4FC3F7;
+	private static final int COMBO = 0xFF4FC3F7;
 	private static final int COMBO_TEXT = 0xFF8AD8FA;
-	private static final int METER_WIDTH = 60;
+	private static final int BRACED = 0xFFF2C443;
+	private static final int COOLING = 0xFF3A3128;
+	/** An icon's box: the 16-pixel icon, a dark inside and a 1-pixel frame (20 across), and the gaps around it. */
+	private static final int BOX = 20;
+	private static final int MARGIN = 4;
+	private static final int GAP = 4;
+	/** The row stays clear of the hotbar and what sits right of it (the attack indicator, Combat Roll's meter). */
+	private static final int CLEAR_OF_HOTBAR = 91 + 40;
 
 	/** Per meter kind (BloomPayloads.Meter): stacks, bonus, ticks left, total ticks. */
 	private static final int[] STACKS = new int[BloomPayloads.Meter.KINDS];
 	private static final float[] BONUS = new float[BloomPayloads.Meter.KINDS];
 	private static final int[] TICKS_LEFT = new int[BloomPayloads.Meter.KINDS];
 	private static final int[] TOTAL_TICKS = java.util.stream.IntStream.generate(() -> 1).limit(BloomPayloads.Meter.KINDS).toArray();
-	private static final int COOLDOWN_BACK = 0xA0101418;
-	private static final int COOLDOWN_FILL = 0xFF9FB4C8;
-	private static final int COOLDOWN_TEXT = 0xFFC9D6E3;
 
 	private BloomHud() {
 	}
@@ -78,22 +80,9 @@ public final class BloomHud {
 	public static void init() {
 		HudElementRegistry.replaceElement(VanillaHudElements.CROSSHAIR, BloomHud::crosshair);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.CROSSHAIR, BloomLevelUp.id("charge_meter"), BloomHud::chargeMeter);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("bloodlust"), BloomHud::bloodlust);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("predator_combo"), BloomHud::predatorAndCombo);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("stored_impact"), BloomHud::storedImpact);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("brace"), BloomHud::brace);
-		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("skill_cooldowns"), BloomHud::skillCooldowns);
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("skill_icons"), BloomHud::skillIcons);
 
-		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Meter.TYPE, (payload, context) -> {
-			int kind = payload.kind();
-
-			if (kind >= 0 && kind < BloomPayloads.Meter.KINDS) {
-				STACKS[kind] = payload.stacks();
-				BONUS[kind] = payload.bonus();
-				TICKS_LEFT[kind] = payload.ticksLeft();
-				TOTAL_TICKS[kind] = Math.max(1, payload.totalTicks());
-			}
-		});
+		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Meter.TYPE, (payload, context) -> accept(payload));
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			for (int kind = 0; kind < BloomPayloads.Meter.KINDS; kind++) {
 				if (TICKS_LEFT[kind] > 0 && --TICKS_LEFT[kind] == 0) {
@@ -106,6 +95,18 @@ public final class BloomHud {
 				}
 			}
 		});
+	}
+
+	/** A meter update from the server (or a client game test). */
+	public static void accept(BloomPayloads.Meter payload) {
+		int kind = payload.kind();
+
+		if (kind >= 0 && kind < BloomPayloads.Meter.KINDS) {
+			STACKS[kind] = payload.stacks();
+			BONUS[kind] = payload.bonus();
+			TICKS_LEFT[kind] = payload.ticksLeft();
+			TOTAL_TICKS[kind] = Math.max(1, payload.totalTicks());
+		}
 	}
 
 	private static int width() {
@@ -171,155 +172,143 @@ public final class BloomHud {
 		}
 	}
 
-	// ------------------------------------------------------------------ Stored Impact
+	// ------------------------------------------------------------------ skill icons (bottom right)
 
-	/** Orange, segmented, above the Bloodlust bar: what the open window holds and how long it has left. */
-	private static void storedImpact(GuiGraphicsExtractor g, DeltaTracker delta) {
-		Minecraft minecraft = Minecraft.getInstance();
-		com.freshorangeslices.bloomlevelup.player.BloomProfile profile = ClientBloomState.profile();
-
-		if (minecraft.player == null || minecraft.level == null || profile == null || !ClientBloomState.ready()) {
-			return;
+	/**
+	 * One icon in the row: the Major whose art it shows, its frame colour, the "×N" beside it (empty for none) and
+	 * its colour, how much of it has run out (darkened from the top), and, while it cools down, the share of the
+	 * cooldown left (greyed, a shade draining from the bottom) and the seconds on it.
+	 */
+	private record Icon(String majorId, int frame, String count, int countColor, float spent, float cooling, String seconds) {
+		static Icon buff(String majorId, int frame, int stacks, int countColor, float spent) {
+			return new Icon(majorId, frame, stacks > 0 ? "×" + stacks : "", countColor, spent, 0.0F, "");
 		}
 
-		long stored = profile.counter(CombatIds.STORED_IMPACT_HUNDREDTHS);
-		long ticksLeft = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT) - minecraft.level.getGameTime();
-
-		if (stored <= 0 || ticksLeft <= 0) {
-			return;
-		}
-
-		long cap = ClientBloomState.config() == null ? 2000 : Math.round(ClientBloomState.config().storedImpactCap * 100.0);
-		boolean full = stored >= cap;
-		long bars = stored / IMPACT_PER_BAR;
-		double partial = full ? 1.0 : (stored % IMPACT_PER_BAR) / (double) IMPACT_PER_BAR;
-		long seconds = ticksLeft / 20;
-
-		int x = width() / 2 + 91 + 34;
-		int y = height() - 36;
-		int segment = 14;
-		String time = String.format(java.util.Locale.ROOT, "%d:%02d", seconds / 60, seconds % 60);
-		Component label = bars > 0 ? Component.translatable("bloom.hud.stored_impact.stacks", bars, time)
-				: Component.translatable("bloom.hud.stored_impact", time);
-		g.text(minecraft.font, label, x, y - 11, IMPACT_TEXT);
-
-		for (int i = 0; i < IMPACT_SEGMENTS; i++) {
-			int sx = x + i * (segment + 1);
-			g.fill(sx - 1, y - 1, sx + segment + 1, y + 4, IMPACT_BACK);
-			double fill = Math.max(0.0, Math.min(1.0, partial * IMPACT_SEGMENTS - i));
-
-			if (fill > 0.0) {
-				g.fill(sx, y, sx + (int) Math.round(segment * fill), y + 3, full ? IMPACT_FULL : IMPACT_FILL);
-			}
+		static Icon cooldown(String majorId, long ticksLeft, long totalTicks) {
+			return new Icon(majorId, COOLING, "", 0, 0.0F, Math.min(1.0F, ticksLeft / (float) Math.max(1L, totalTicks)),
+					Long.toString((ticksLeft + 19) / 20));
 		}
 	}
 
-	// ------------------------------------------------------------------ Brace!
-
-	/**
-	 * Brace!'s icon (the vanilla shield until its art exists) right of the Bloodlust / Stored Impact bars: lit in a gold
-	 * box while braced; while it cools down, greyed with a shade that drains away and the seconds left. Hidden otherwise.
-	 */
-	private static void brace(GuiGraphicsExtractor g, DeltaTracker delta) {
+	private static void skillIcons(GuiGraphicsExtractor g, DeltaTracker delta) {
 		Minecraft minecraft = Minecraft.getInstance();
-		com.freshorangeslices.bloomlevelup.player.BloomProfile profile = ClientBloomState.profile();
 
-		if (minecraft.player == null || minecraft.level == null || profile == null || !ClientBloomState.ready()
-				|| !ClientBloomState.service().isMajorActive(profile, ArmorIds.BRACE)) {
+		if (minecraft.player == null || minecraft.level == null || !ClientBloomState.ready() || ClientBloomState.profile() == null) {
 			return;
 		}
 
-		boolean braced = profile.counter(ArmorIds.BRACED) != 0;
-		long ticksLeft = profile.counter(ArmorIds.BRACE_READY_AT) - minecraft.level.getGameTime();
+		List<Icon> icons = icons(minecraft);
 
-		if (!braced && ticksLeft <= 0) {
+		if (icons.isEmpty()) {
 			return;
 		}
 
-		int x = width() / 2 + 91 + 34 + METER_WIDTH + 8;
-		int y = height() - 24;
-		g.fill(x - 2, y - 2, x + 18, y + 18, braced ? 0xFFF2C443 : 0xFF3A3128);
-		g.fill(x - 1, y - 1, x + 17, y + 17, 0xE0141210);
-		Identifier icon = ClientBloomState.definitions().major(ArmorIds.BRACE).map(major -> IconTextures.resolve(major.icon()))
+		// Laid out from the right edge leftwards, the last icon in the corner; a row that would reach the hotbar
+		// carries on in a row above.
+		int right = width() - MARGIN;
+		int top = height() - MARGIN - BOX;
+		int leftLimit = width() / 2 + CLEAR_OF_HOTBAR;
+
+		for (int i = icons.size() - 1; i >= 0; i--) {
+			Icon icon = icons.get(i);
+			int wide = BOX + (icon.count().isEmpty() ? 0 : 2 + minecraft.font.width(icon.count()));
+			int left = right - wide;
+
+			if (left < leftLimit && right < width() - MARGIN) {
+				right = width() - MARGIN;
+				top -= BOX + GAP;
+				left = right - wide;
+			}
+
+			draw(g, minecraft, icon, left, top);
+			right = left - GAP;
+		}
+	}
+
+	/** What's running: the buffs first (Predator, Combo, Bloodlust, Stored Impact), then Brace! and the cooldowns. */
+	private static List<Icon> icons(Minecraft minecraft) {
+		BloomProfile profile = ClientBloomState.profile();
+		long now = minecraft.level.getGameTime();
+		List<Icon> icons = new ArrayList<>();
+		buff(icons, CombatIds.PREDATOR, BloomPayloads.Meter.PREDATOR, PREDATOR, PREDATOR_TEXT);
+		buff(icons, CombatIds.COMBO, BloomPayloads.Meter.COMBO, COMBO, COMBO_TEXT);
+		buff(icons, CombatIds.BLOODLUST, BloomPayloads.Meter.BLOODLUST, RAGE, RAGE_TEXT);
+
+		long stored = profile.counter(CombatIds.STORED_IMPACT_HUNDREDTHS);
+		long impactLeft = profile.counter(CombatIds.STORED_IMPACT_EXPIRES_AT) - now;
+
+		if (stored > 0 && impactLeft > 0) {
+			long cap = ClientBloomState.config() == null ? 2000 : Math.round(ClientBloomState.config().storedImpactCap * 100.0);
+			int window = ClientBloomState.config() == null ? 6000 : ClientBloomState.config().storedImpactWindowTicks;
+			icons.add(Icon.buff(CombatIds.STORED_IMPACT, stored >= cap ? IMPACT_FULL : IMPACT, (int) (stored / IMPACT_PER_STACK), IMPACT_TEXT,
+					1.0F - Math.min(1.0F, impactLeft / (float) Math.max(1, window))));
+		}
+
+		if (ClientBloomState.service().isMajorActive(profile, ArmorIds.BRACE)) {
+			long braceLeft = profile.counter(ArmorIds.BRACE_READY_AT) - now;
+
+			if (profile.counter(ArmorIds.BRACED) != 0) {
+				icons.add(new Icon(ArmorIds.BRACE, BRACED, "", 0, 0.0F, 0.0F, ""));
+			} else if (braceLeft > 0) {
+				icons.add(Icon.cooldown(ArmorIds.BRACE, braceLeft, ClientBloomState.config() == null ? 200 : ClientBloomState.config().braceCooldownTicks));
+			}
+		}
+
+		cooldown(icons, CombatIds.WIND_IMPACT, BloomPayloads.Meter.WIND_IMPACT);
+		cooldown(icons, CombatIds.LIGHTNING_SUMMON, BloomPayloads.Meter.LIGHTNING_SUMMON);
+		return icons;
+	}
+
+	/** A stacking buff from the server's meter (Predator, Combo, Bloodlust): hidden with no stacks. */
+	private static void buff(List<Icon> icons, String majorId, int kind, int frame, int countColor) {
+		if (STACKS[kind] > 0 && TICKS_LEFT[kind] > 0) {
+			icons.add(Icon.buff(majorId, frame, STACKS[kind], countColor, 1.0F - Math.min(1.0F, TICKS_LEFT[kind] / (float) TOTAL_TICKS[kind])));
+		}
+	}
+
+	/** A skill's own cooldown from the server's meter (Wind Impact, Lightning Summon). */
+	private static void cooldown(List<Icon> icons, String majorId, int kind) {
+		if (STACKS[kind] > 0 && TICKS_LEFT[kind] > 0) {
+			icons.add(Icon.cooldown(majorId, TICKS_LEFT[kind], TOTAL_TICKS[kind]));
+		}
+	}
+
+	private static void draw(GuiGraphicsExtractor g, Minecraft minecraft, Icon icon, int left, int top) {
+		int x = left + 2;
+		int y = top + 2;
+		g.fill(left, top, left + BOX, top + BOX, icon.frame());
+		g.fill(left + 1, top + 1, left + BOX - 1, top + BOX - 1, 0xE0141210);
+		Identifier texture = ClientBloomState.definitions().major(icon.majorId()).map(major -> IconTextures.resolve(major.icon()))
 				.orElse(IconTextures.PLACEHOLDER);
 
-		if (icon.equals(IconTextures.PLACEHOLDER)) {
+		if (texture.equals(IconTextures.PLACEHOLDER) && icon.majorId().equals(ArmorIds.BRACE)) {
 			if (braceFallback == null) {
 				braceFallback = new ItemStack(net.minecraft.world.item.Items.SHIELD); // made on first use: items aren't ready at startup
 			}
 
 			g.item(braceFallback, x, y);
 		} else {
-			g.blit(RenderPipelines.GUI_TEXTURED, icon, x, y, 0.0F, 0.0F, 16, 16, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
+			g.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0.0F, 0.0F, 16, 16, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE,
 					IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, 0xFFFFFFFF);
 		}
 
-		if (!braced) {
-			int total = Math.max(1, ClientBloomState.config() == null ? 200 : ClientBloomState.config().braceCooldownTicks);
-			int shade = (int) Math.ceil(16.0 * Math.min(1.0, ticksLeft / (double) total));
+		if (icon.spent() > 0.0F) {
+			int shade = Math.round(16.0F * Math.min(1.0F, icon.spent()));
+			g.fill(x, y, x + 16, y + shade, 0xA0000000);
+		}
+
+		if (!icon.seconds().isEmpty()) {
+			int shade = (int) Math.ceil(16.0 * icon.cooling());
 			g.fill(x, y, x + 16, y + 16, 0x80000000);
 			g.fill(x, y + 16 - shade, x + 16, y + 16, 0x90000000);
-			Component seconds = Component.literal(Long.toString((ticksLeft + 19) / 20));
+			Component seconds = Component.literal(icon.seconds());
 			g.text(minecraft.font, seconds, x + 17 - minecraft.font.width(seconds), y + 9, 0xFFFFFFFF);
+		}
+
+		if (!icon.count().isEmpty()) {
+			g.text(minecraft.font, Component.literal(icon.count()), left + BOX + 2, top + 6, icon.countColor());
 		}
 	}
 
 	private static ItemStack braceFallback;
-
-	// ------------------------------------------------------------------ Bloodlust
-
-	private static void bloodlust(GuiGraphicsExtractor g, DeltaTracker delta) {
-		int kind = BloomPayloads.Meter.BLOODLUST;
-		meter(g, kind, width() / 2 + 91 + 34, height() - 12,
-				Component.translatable("bloom.hud.bloodlust", STACKS[kind], Math.round(BONUS[kind] * 100.0F)), RAGE_BACK, RAGE_FILL, RAGE_TEXT);
-	}
-
-	// ------------------------------------------------------------------ Predator / Combo (left of the hotbar)
-
-	private static void predatorAndCombo(GuiGraphicsExtractor g, DeltaTracker delta) {
-		int x = width() / 2 - 91 - 34 - METER_WIDTH;
-		int predator = BloomPayloads.Meter.PREDATOR;
-		int combo = BloomPayloads.Meter.COMBO;
-		meter(g, predator, x, height() - 36,
-				Component.translatable("bloom.hud.predator", STACKS[predator], Math.round(BONUS[predator] * 100.0F)),
-				PREDATOR_BACK, PREDATOR_FILL, PREDATOR_TEXT);
-		meter(g, combo, x, height() - 12,
-				Component.translatable("bloom.hud.combo", STACKS[combo], String.format(java.util.Locale.ROOT, "%.2f", BONUS[combo])),
-				COMBO_BACK, COMBO_FILL, COMBO_TEXT);
-	}
-
-	// ------------------------------------------------------------------ Bloom's skill cooldowns (right of the hotbar, over Bloodlust)
-
-	/**
-	 * Wind Impact's and Lightning Summon's cooldowns: Bloom keeps them itself, apart from the weapon's item cooldown
-	 * (other mods' weapon skills use that), so they show here instead of on the hotbar slot.
-	 */
-	private static void skillCooldowns(GuiGraphicsExtractor g, DeltaTracker delta) {
-		int x = width() / 2 + 91 + 34;
-		int y = height() - 36;
-
-		for (int kind : new int[] {BloomPayloads.Meter.WIND_IMPACT, BloomPayloads.Meter.LIGHTNING_SUMMON}) {
-			if (STACKS[kind] <= 0 || TICKS_LEFT[kind] <= 0) {
-				continue;
-			}
-
-			String seconds = String.format(java.util.Locale.ROOT, "%.1f", TICKS_LEFT[kind] / 20.0F);
-			String key = kind == BloomPayloads.Meter.WIND_IMPACT ? "bloom.hud.cooldown.wind_impact" : "bloom.hud.cooldown.lightning_summon";
-			meter(g, kind, x, y, Component.translatable(key, seconds), COOLDOWN_BACK, COOLDOWN_FILL, COOLDOWN_TEXT);
-			y -= 24;
-		}
-	}
-
-	/** A label over a bar that empties as the stacks run out. Hidden with no stacks. */
-	private static void meter(GuiGraphicsExtractor g, int kind, int x, int y, Component label, int back, int fill, int text) {
-		Minecraft minecraft = Minecraft.getInstance();
-
-		if (STACKS[kind] <= 0 || TICKS_LEFT[kind] <= 0 || minecraft.player == null) {
-			return;
-		}
-
-		g.text(minecraft.font, label, x, y - 11, text);
-		g.fill(x - 1, y - 1, x + METER_WIDTH + 1, y + 4, back);
-		g.fill(x, y, x + Math.round(METER_WIDTH * (TICKS_LEFT[kind] / (float) TOTAL_TICKS[kind])), y + 3, fill);
-	}
 }

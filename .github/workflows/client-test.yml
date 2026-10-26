@@ -73,12 +73,12 @@ jobs:
         run: pip install --quiet pillow
       - name: the Combat stat sheet
         run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_combat 12
-      - name: the Combat stat sheet, full breakdown
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_combat_details 12
       - name: the Armor stat sheet, hit by a zombie
         run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_armor 12
-      - name: the Armor stat sheet, hit by a netherite sword with Sharpness V and Strength II
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_sheet_armor_netherite 12
+      - name: the HUD's skill icons, bottom right
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hud_icons 12
+      - name: the HUD with Brace! on
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_hud_braced 12
 
   # The client again with Better Combat loaded: a charged Charge Attack swing has to play the slam. Its two
   # screenshots (wind-up, landing) are printed as annotations here.

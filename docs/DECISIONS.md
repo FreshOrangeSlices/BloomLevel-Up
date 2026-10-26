@@ -491,6 +491,11 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 | Unyielding | Blocks harmful effects through Forge's `MobEffectEvent.Applicable`, which `/effect give` also fires, so commands are blocked too (on main they aren't) | `skill/armor/ArmorSkill` |
 | Brace! movement | 1.20.1 servers don't get the client's movement keys, so the client sends a small `MovementInput` packet when they change | `network/BloomPayloads`, `skill/armor/ArmorSkill` |
 | Better Combat | Not wired up yet: `compat/BetterCombat` reports it as absent until the 1.20.1 compat chunk | `compat/BetterCombat` |
+| Stat sheet numbers | Worked out with 1.20.1's own rules: enchantment damage by mob type (Smite/Bane/Impaling against undead/arthropods/water mobs), the sweep as 1 + Sweeping Edge's share x the whole hit (no sweep without Sweeping Edge; Full Sweep is the whole hit), Power on bows only, Efficiency as level² + 1, Mining Fatigue's own table, the old armor formula (no Breach), Forge's reach attribute. The sword, tool and armor pictures skip copper (not in 1.20.1) | `sheet/` |
+| Client drawing | Main's GUI code is kept line for line; `client/gui/BloomGraphics` gives 1.20.1's `GuiGraphics` the calls it uses (`text`, tinted `blit`, `blitSprite`, layers). The gold frame is drawn as a nine-slice from its texture and the advancement frames from 1.20.1's widgets sheet, since 1.20.1 has no GUI sprite atlas | `client/gui/BloomGraphics` |
+| Scrolling the hub | 1.20.1 has one mouse wheel: shift + wheel moves the page sideways | `client/gui/HubScreen` |
+| Joining other servers | A client with Bloom can join servers without it (Bloom then sends nothing and stays quiet). A Bloom server still needs Bloom on the client | `network/BloomNetwork` |
+| Nameplates | `[lvl N]` comes from Forge's name tag event instead of a renderer mixin | `client/BloomLevelUpClient` |
 
 ## Still open (need a design call)
 

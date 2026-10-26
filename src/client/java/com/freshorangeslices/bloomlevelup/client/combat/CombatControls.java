@@ -67,6 +67,8 @@ public final class CombatControls {
 	private static boolean holding;
 	private static int holdTicks;
 	private static boolean charged;
+	/** What the server was last told about the movement keys (Brace!), or null before the first report. */
+	private static Boolean movingSent;
 
 	private CombatControls() {
 	}
@@ -258,8 +260,11 @@ public final class CombatControls {
 
 		if (player == null || skillKey == null) {
 			holding = false;
+			movingSent = null;
 			return;
 		}
+
+		reportMovement(player);
 
 		// Bound to its own key: presses arrive as clicks (vanilla's right click is untouched).
 		if (!onUseKey(minecraft)) {
@@ -300,6 +305,24 @@ public final class CombatControls {
 
 		if (charged && holdTicks % 4 == 0 && minecraft.level != null) {
 			minecraft.level.addParticle(ParticleTypes.CRIT, player.getX(), player.getY() + 1.0, player.getZ(), 0.0, 0.1, 0.0);
+		}
+	}
+
+	/**
+	 * Brace!: the server needs to know whether the player is pressing a movement key (main reads the client's input on
+	 * the server; 1.20.1 servers don't get it). Sent whenever it changes.
+	 */
+	private static void reportMovement(LocalPlayer player) {
+		if (!BloomNetwork.canSendToServer()) {
+			movingSent = null; // nothing to tell yet (still joining, or a server without Bloom)
+			return;
+		}
+
+		boolean moving = player.input.up || player.input.down || player.input.left || player.input.right || player.input.jumping;
+
+		if (movingSent == null || movingSent != moving) {
+			movingSent = moving;
+			BloomNetwork.sendToServer(new BloomPayloads.MovementInput(moving));
 		}
 	}
 

@@ -7,6 +7,8 @@
 - Ported in chunks. Files not ported yet stay where they are (unchanged 26.3 code, for reference) and are excluded in `build.gradle` (`notPortedYet`); a chunk ports its files and deletes their lines there.
 - Forge stand-ins: profile = capability (`player/BloomAttachments`), packets = one `SimpleChannel` (`network/BloomNetwork`, client handlers in `client/ClientPackets`), data reload = `AddReloadListenerEvent`, attribute modifiers keyed by UUIDs made from Bloom ids (`StatEffects.ModifierId`). Data folders use 1.20.1 names (`tags/items`, `tags/blocks`, `tags/entity_types`, `loot_tables`, `structures`).
 - Game tests: `src/gametest/java/**/gametest/forge/` (`@GameTestHolder`, template `bloomlevelup:empty`); the Fabric ones beside them are ported with their chunks.
+- Client: drawing goes through `client/gui/BloomGraphics` (26.3-style calls on 1.20.1's `GuiGraphics`), so GUI code stays close to main's. Client mixins are in `bloomlevelup.forge.client.mixins.json`.
+- CI's `client-test` job boots a real client on a virtual display (`gametest/forge/client/ClientSmokeTest`, on when `BLOOM_CLIENT_TEST` is set) and screenshots the hub; the `screenshots` jobs print each picture as annotations (`shot-<name>-NN`, base64 JPEG) to rebuild from the checks API.
 
 ## Shared notes (written for main)
 

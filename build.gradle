@@ -22,15 +22,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 // The Fabric 26.3 sources share this tree. What is ported to Forge 1.20.1 so far builds; the rest waits here
 // (unchanged, for reference) until its chunk is ported. Each chunk removes its lines from this list.
 def notPortedYet = [
-		// Chunk 4: Better Combat compat, against Better Combat for 1.20.1 (compat/BetterCombat.java and
-		// client/compat/BetterCombatClient.java are stand-ins until then)
-		'**/bloomlevelup/compat/BetterCombatBridge.java',
-		'**/bloomlevelup/compat/BetterCombatMoves.java',
-		'**/bloomlevelup/compat/BetterCombatMixinPlugin.java',
-		'**/bloomlevelup/compat/mixin/**',
-		'**/bloomlevelup/client/compat/BetterCombatClientBridge.java',
-		'**/bloomlevelup/client/compat/mixin/**',
-		// Fabric-only: the Bloom Pack's launch defaults (resource packs, shader); this build isn't for that pack.
+		// Fabric-only: the Bloom Pack's launch defaults (the Forge pack sets them in its own options files).
 		'**/bloomlevelup/PackDefaultsLaunch.java',
 ]
 
@@ -43,8 +35,7 @@ sourceSets {
 		resources {
 			srcDirs = ['src/main/resources', 'src/client/resources']
 			// Fabric metadata and mixin configs (the Forge ones are mods.toml and *.forge.mixins.json).
-			exclude 'fabric.mod.json', 'bloomlevelup.mixins.json', 'bloomlevelup.bettercombat.mixins.json',
-					'bloomlevelup.client.mixins.json', 'bloomlevelup.bettercombat.client.mixins.json'
+			exclude 'fabric.mod.json', 'bloomlevelup.mixins.json', 'bloomlevelup.client.mixins.json'
 		}
 	}
 	gametest {
@@ -135,7 +126,28 @@ mixin {
 
 repositories {
 	mavenCentral()
+	// Better Combat and what it needs (compiled against only; never bundled).
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'Modrinth'
+				url = 'https://api.modrinth.com/maven'
+			}
+		}
+		filter {
+			includeGroup 'maven.modrinth'
+		}
+	}
 }
+
+// `-PwithBetterCombat` puts Better Combat (and Player Animator and Cloth Config, which it needs) into the dev runs,
+// so CI can run the game tests and the client smoke test with it installed as well as without.
+def withBetterCombat = project.hasProperty('withBetterCombat')
+def betterCombatMods = [
+		"maven.modrinth:better-combat:${better_combat_version}",
+		"maven.modrinth:playeranimator:${player_animator_version}",
+		"maven.modrinth:cloth-config:${cloth_config_version}",
+]
 
 jarJar.enable()
 
@@ -151,6 +163,13 @@ dependencies {
 	}
 
 	gametestImplementation sourceSets.main.output
+
+	// Better Combat (optional): compat/BetterCombat*, client/compat/BetterCombatClient*.
+	betterCombatMods.each { compileOnly fg.deobf(it) }
+
+	if (withBetterCombat) {
+		betterCombatMods.each { runtimeOnly fg.deobf(it) }
+	}
 
 	// Unit tests cover the pure-Java core (progression rules, formulas, validation).
 	testImplementation platform("org.junit:junit-bom:${junit_version}")

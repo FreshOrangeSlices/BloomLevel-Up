@@ -20,6 +20,7 @@ import net.minecraft.world.item.enchantment.SweepingEdgeEnchantment;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ToolActions;
 
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.StatEffects;
@@ -42,7 +43,8 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
  * hooks step for step, so the sheet and a real hit agree (a game test checks it).
  *
  * <p>Forge 1.20.1 build: no maces or spears, so no smash, Stored Impact or reach weapons; the sword sweep is
- * vanilla 1.20.1's (1 + Sweeping Edge's ratio x the whole hit), and Better Combat's swings are added with its compat.
+ * vanilla 1.20.1's (1 + Sweeping Edge's ratio x the whole hit). With Better Combat, a weapon it handles shows its
+ * combo and its 1.20.1 crowd rule (Sweeping Edge gives some of the penalty back) in place of the sweep.
  */
 final class CombatSheet {
 	/** How far the "falling" switch falls. */
@@ -475,6 +477,17 @@ final class CombatSheet {
 		boolean aura = CombatSkill.active(player, CombatIds.AURA_SWORD);
 		boolean shock = CombatSkill.has(player, CombatIds.LIGHTNING_SHOCK, Family.TRIDENT, weapon);
 		boolean overkill = CombatSkill.active(player, CombatIds.OVERKILL);
+		// Better Combat runs this weapon's swings: its combo and its rule for hitting several mobs replace the sweep.
+		List<BetterCombat.Swing> combo = BetterCombat.swings(player, weapon);
+
+		if (!combo.isEmpty()) {
+			betterCombatRows(player, weapon, sheet, attack, enchant, hit, armor, toughness, penetration, combo);
+
+			if (!BetterCombat.crowdRule().vanillaSweeping()) {
+				swordSweep = false;
+				batterUp = false;
+			}
+		}
 
 		if (!swordSweep && !batterUp && !aura && !shock && !overkill) {
 			return;
@@ -519,6 +532,70 @@ final class CombatSheet {
 		if (overkill) {
 			sheet.row(Sheet.pct(config.overkillRatio), "combat.overkill", Sheet.num(config.overkillMaxTargets), Sheet.num(config.overkillRadius));
 		}
+	}
+
+	/**
+	 * Better Combat: each swing of the weapon's combo (its shape, arc and damage), then what a swing does to each mob
+	 * when it hits several at once. Its combo multiplier and crowd rule change the attack damage only, so the
+	 * enchantments' part of the hit stays as it is.
+	 */
+	private static void betterCombatRows(ServerPlayer player, ItemStack weapon, Sheet sheet, float attack, float enchant, double hit, float armor,
+			float toughness, double penetration, List<BetterCombat.Swing> combo) {
+		sheet.heading("combat.h.bettercombat");
+
+		for (int i = 0; i < combo.size(); i++) {
+			BetterCombat.Swing step = combo.get(i);
+			double damage = afterArmor(attackScaled(hit, attack, enchant, step.damageMultiplier()), armor, toughness, penetration);
+			Component shape = Component.translatable("bloom.sheet.combat.bc.shape." + step.shape());
+			String key = step.angle() > 0.0 ? "combat.bc.swing" : "combat.bc.swing_straight";
+
+			if (Math.abs(step.damageMultiplier() - 1.0) > 0.005) {
+				sheet.row(Sheet.plain(damage), key + "_times", Sheet.num(i + 1), shape, Sheet.num(step.angle()), Sheet.num(step.damageMultiplier()));
+			} else {
+				sheet.row(Sheet.plain(damage), key, Sheet.num(i + 1), shape, Sheet.num(step.angle()));
+			}
+		}
+
+		if (combo.size() > 1) {
+			sheet.note("combat.bc.combo.note");
+		}
+
+		BetterCombat.CrowdRule rule = BetterCombat.crowdRule();
+
+		if (!rule.enabled() || rule.extraTargets() <= 0) {
+			return;
+		}
+
+		boolean fullSweep = CombatSkill.has(player, CombatIds.FULL_SWEEP, Family.SWORD, weapon);
+		boolean batterUp = !Weapons.is(weapon, Family.SWORD) && Weapons.isMeleeWeapon(weapon) && CombatSkill.active(player, CombatIds.BATTER_UP);
+		int sweeping = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SWEEPING_EDGE, weapon);
+		double single = afterArmor(hit, armor, toughness, penetration);
+
+		for (int mobs = 2; mobs <= rule.extraTargets() + 1; mobs++) {
+			// Full Sweep and Batter Up! take the penalty away (BetterCombat.crowdCounter).
+			double multiplier = fullSweep || batterUp ? 1.0 : rule.multiplier(mobs, sweeping);
+			double each = afterArmor(attackScaled(hit, attack, enchant, multiplier), armor, toughness, penetration);
+			double change = single > 0.0 ? each / single - 1.0 : 0.0;
+			Component value = Sheet.colored(Sheet.num(each) + "  (" + (change < 0.0 ? "-" : "+") + Math.round(Math.abs(change) * 100.0) + "%)",
+					Sheet.PLAIN);
+			sheet.row(value, "combat.bc.crowd", Sheet.num(mobs));
+
+			if (mobs == 3) {
+				sheet.summary(value, "combat.bc.crowd_summary", Sheet.num(mobs));
+			}
+		}
+
+		sheet.note("combat.bc.crowd.note", Sheet.num(rule.maxPenalty() * 100.0), Sheet.num(rule.extraTargets() + 1));
+
+		if (fullSweep || batterUp) {
+			sheet.note(fullSweep ? "combat.bc.crowd.full_sweep" : "combat.bc.crowd.batter_up");
+		}
+	}
+
+	/** {@code hit} with only its attack damage part multiplied ({@code hit} is (attack + enchantments) after Bloom's bonuses). */
+	private static double attackScaled(double hit, float attack, float enchant, double attackMultiplier) {
+		double plain = attack + enchant;
+		return plain <= 0.0 ? hit : hit * (attack * attackMultiplier + enchant) / plain;
 	}
 
 	/** {@link CombatSkill#sweepRatio} for an item that may not be in hand: Full Sweep's whole blow, else Sweeping Edge's share. */

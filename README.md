@@ -6,9 +6,9 @@
 > inside). Players and the server need the same build.
 >
 > It's the same mod with what 1.20.1 doesn't have taken out: no maces or spears, so Wind Impact, Stored Impact, Long
-> Reach and Adamantium are gone and swords get **Slash** (Bleed) instead of Impale. Better Combat support is still to
-> come. Every difference from the Fabric build is listed under "Forge 1.20.1 build" in `docs/DECISIONS.md`. The rest of
-> this README describes the Fabric 26.3 build on `main`.
+> Reach and Adamantium are gone and swords get **Slash** (Bleed) instead of Impale. **Better Combat** (1.9.0+1.20.1,
+> optional) works the same as on main. Every difference from the Fabric build is listed under "Forge 1.20.1 build" in
+> `docs/DECISIONS.md`. The rest of this README describes the Fabric 26.3 build on `main`.
 
 A Fabric mod for Minecraft **26.3**: a modpack-friendly character build system inspired by Path of Exile
 and mcMMO. Four skill categories (Utility, Combat, Armor, Misc) level from use, each level gives a stat

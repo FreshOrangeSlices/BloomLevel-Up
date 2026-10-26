@@ -14,11 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
@@ -51,6 +53,12 @@ abstract class PlayerMixin {
 		if (!cir.getReturnValueZ() && MiscSkill.canAlwaysEat((Player) (Object) this)) {
 			cir.setReturnValue(true);
 		}
+	}
+
+	/** Better Combat: Bloom's counter to its crowd penalty lasts one hit (put on at the start, by the attack event). */
+	@Inject(method = "attack", at = @At("RETURN"))
+	private void bloomlevelup$afterAttack(Entity target, CallbackInfo ci) {
+		BetterCombat.afterAttack((Player) (Object) this);
 	}
 
 	/** Rune Embedding: a bare-handed attack's damage bonus comes from the bare-hand rune (sharpness, smite...). */

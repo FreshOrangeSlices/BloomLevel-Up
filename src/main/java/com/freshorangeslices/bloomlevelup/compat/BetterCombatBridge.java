@@ -4,33 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.bettercombat.BetterCombatMod;
+import net.bettercombat.api.AttackHand;
 import net.bettercombat.api.WeaponAttributes;
 import net.bettercombat.config.ServerConfig;
+import net.bettercombat.logic.PlayerAttackHelper;
 import net.bettercombat.logic.WeaponRegistry;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * The only server-side code that touches Better Combat's classes. Never loaded unless Better Combat is installed
- * (every call goes through {@link BetterCombat}, which checks first).
+ * The only server-side code that touches Better Combat's classes (its 1.20.1 API). Never loaded unless Better Combat
+ * is installed (every call goes through {@link BetterCombat}, which checks first).
  */
 final class BetterCombatBridge {
 	private BetterCombatBridge() {
 	}
 
 	static BetterCombat.CrowdRule crowdRule() {
-		ServerConfig config = BetterCombatMod.config;
+		ServerConfig config = net.bettercombat.BetterCombat.config;
 
 		if (config == null) {
-			return new BetterCombat.CrowdRule(true, 0.5, 4, false);
+			return new BetterCombat.CrowdRule(true, 0.5, 4, 0.5, false);
 		}
 
 		return new BetterCombat.CrowdRule(config.allow_reworked_sweeping, config.reworked_sweeping_maximum_damage_penalty,
-				config.reworked_sweeping_extra_target_count, config.allow_vanilla_sweeping);
+				config.reworked_sweeping_extra_target_count, config.reworked_sweeping_enchant_restores, config.allow_vanilla_sweeping);
 	}
 
-	static List<BetterCombat.Swing> swings(net.minecraft.world.entity.player.Player player, ItemStack weapon) {
-		WeaponAttributes attributes = weapon.isEmpty() ? null : BetterCombatMoves.forPlayer(player, weapon, WeaponRegistry.getAttributes(weapon));
+	static List<BetterCombat.Swing> swings(ItemStack weapon) {
+		WeaponAttributes attributes = weapon.isEmpty() ? null : WeaponRegistry.getAttributes(weapon);
 
 		if (attributes == null || attributes.attacks() == null) {
 			return List.of();
@@ -50,8 +52,8 @@ final class BetterCombatBridge {
 		return out;
 	}
 
-	static String attackAnimation(net.minecraft.world.entity.player.Player player, int combo) {
-		net.bettercombat.api.AttackHand hand = net.bettercombat.logic.PlayerAttackHelper.getCurrentAttack(player, combo);
+	static String attackAnimation(Player player, int combo) {
+		AttackHand hand = PlayerAttackHelper.getCurrentAttack(player, combo);
 		return hand == null || hand.attack() == null ? null : hand.attack().animation();
 	}
 }

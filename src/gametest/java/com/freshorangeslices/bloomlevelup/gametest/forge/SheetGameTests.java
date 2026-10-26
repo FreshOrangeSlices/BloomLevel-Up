@@ -160,6 +160,11 @@ public final class SheetGameTests {
 
 	@GameTest(template = "empty")
 	public static void sweepFollowsSweepingEdge(GameTestHelper helper) {
+		if (com.freshorangeslices.bloomlevelup.compat.BetterCombat.installed()) {
+			helper.succeed(); // Better Combat replaces a sword's sweep (BetterCombatGameTests.sheetFollowsTheCrowdRule)
+			return;
+		}
+
 		// 1.20.1 sweeps only with Sweeping Edge: 1 + ratio x the hit (III: 3/4).
 		ItemStack sword = new ItemStack(Items.IRON_SWORD);
 		sword.enchant(Enchantments.SWEEPING_EDGE, 3);

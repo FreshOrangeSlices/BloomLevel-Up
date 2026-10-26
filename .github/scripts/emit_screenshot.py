@@ -1,8 +1,9 @@
 """Prints one client-test screenshot as GitHub annotations (a small JPEG, base64, in 3900-character chunks).
 
-Usage: emit_screenshot.py <screenshots dir> <name> [max chunks]
-The annotations are titled shot-<name>-NN, so the picture can be put back together from the checks API
-where downloading artifacts isn't possible. One step may carry 10 annotations of each kind (30 in all).
+Usage: emit_screenshot.py <screenshots dir> <name> [max chunks] [tag]
+The annotations are titled shot-<name>-NN (shot-<tag>_<name>-NN with a tag, for a second client run), so the
+picture can be put back together from the checks API where downloading artifacts isn't possible. One step may
+carry 10 annotations of each kind (30 in all).
 """
 import base64
 import io
@@ -13,6 +14,7 @@ from PIL import Image
 
 folder, name = pathlib.Path(sys.argv[1]), sys.argv[2]
 limit = int(sys.argv[3]) if len(sys.argv) > 3 else 30
+title = (sys.argv[4] + '_' if len(sys.argv) > 4 and sys.argv[4] else '') + name
 found = sorted(folder.rglob('*' + name + '.png'))  # Fabric prefixes a counter: 0003_<name>.png
 
 if not found:
@@ -36,6 +38,6 @@ for quality in (60, 50, 40, 30, 20):
 kinds = ['notice', 'warning', 'error']
 
 for n, chunk in enumerate(chunks[:limit]):
-    print(f'::{kinds[n // 10]} title=shot-{name}-{n:02d}::{chunk}')
+    print(f'::{kinds[n // 10]} title=shot-{title}-{n:02d}::{chunk}')
 
-print(f'{name}: {image.width}x{image.height}, quality {quality}, {len(chunks)} chunks')
+print(f'{title}: {image.width}x{image.height}, quality {quality}, {len(chunks)} chunks')

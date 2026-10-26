@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -39,6 +40,9 @@ import net.minecraftforge.fml.common.Mod;
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
 import com.freshorangeslices.bloomlevelup.client.ClientPackets;
+import com.freshorangeslices.bloomlevelup.client.compat.BetterCombatClient;
+import com.freshorangeslices.bloomlevelup.client.mixin.MinecraftInvoker;
+import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.client.gui.RuneScreen;
 import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
@@ -61,7 +65,8 @@ import com.freshorangeslices.bloomlevelup.skill.utility.UtilityIds;
  * The client smoke test (CI only: runs when BLOOM_CLIENT_TEST is set): a real client makes a flat world, gets
  * levels and a few Majors, then opens every hub tab, the stat sheet, a Major's details window and the inventory,
  * taking a screenshot of each, and quits. Client mixins, the GUI and the sync all have to work for it to get
- * through; the result goes to {@code bloomtest-client.txt} and the log (BLOOMTEST lines).
+ * through; the result goes to {@code bloomtest-client.txt} and the log (BLOOMTEST lines). With Better Combat
+ * installed (CI's second run) it also plays a Catch! throw and a charged slam.
  */
 @Mod.EventBusSubscriber(modid = BloomLevelUp.MOD_ID, value = Dist.CLIENT)
 public final class ClientSmokeTest {
@@ -145,7 +150,53 @@ public final class ClientSmokeTest {
 
 			shot(mc, "hud");
 		});
+
+		if (BetterCombat.installed()) {
+			betterCombatSteps();
+		}
+
 		step("quit", always(), 10, ClientSmokeTest::finish);
+	}
+
+	/**
+	 * With Better Combat (CI's second client run): its animations and Bloom's throw load, a Catch! throw plays the
+	 * overhand throw and lets go as the arm comes over, and a charged swing plays the slam; both seen from the front.
+	 */
+	private static void betterCombatSteps() {
+		boolean[] released = {false};
+		step("bc ready", mc -> mc.player != null && BetterCombatClient.activeForTests(), 20, mc -> {
+			List<String> missing = BetterCombatClient.missingAnimationsForTests();
+
+			if (!missing.isEmpty()) {
+				FAILURES.add("Better Combat didn't load the animations " + missing);
+			}
+
+			mc.setScreen(null);
+			mc.player.setXRot(-15.0F); // nothing to mine in the crosshair, so a left click swings
+			mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+		});
+		step("bc throw", always(), 10, mc -> {
+			if (!BetterCombatClient.animatedThrow(mc, () -> released[0] = true)) {
+				FAILURES.add("a Catch! throw wasn't animated with Better Combat");
+			}
+		});
+		step("bc throw shot", always(), 2, mc -> shot(mc, "bc_throw"));
+		step("bc throw released", always(), 8, mc -> {
+			if (!released[0]) {
+				FAILURES.add("the throw wasn't sent as the arm came over");
+			}
+		});
+		step("bc slam", always(), 20, mc -> BetterCombatClient.chargedSwing(mc, () -> ((MinecraftInvoker) mc).bloomlevelup$startAttack()));
+		step("bc slam shot", always(), 2, mc -> {
+			BloomLevelUp.LOGGER.info("BLOOMTEST better combat slam: {}", BetterCombatClient.lastSlamForTests());
+
+			if (!"bettercombat:one_handed_slam".equals(BetterCombatClient.lastSlamForTests())) {
+				FAILURES.add("a charged swing with a sword played '" + BetterCombatClient.lastSlamForTests() + "', not the one-handed slam");
+			}
+
+			shot(mc, "bc_slam");
+		});
+		step("bc done", always(), 10, mc -> mc.options.setCameraType(CameraType.FIRST_PERSON));
 	}
 
 	private ClientSmokeTest() {

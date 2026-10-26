@@ -1,6 +1,6 @@
 # Forge 1.20.1 build (branch forge-1.20.1): builds the mod, runs the unit tests, then boots a real dedicated
-# server with it and runs the game tests. The finished jar is attached to each run under "Artifacts"
-# (Actions tab -> the run -> bloomlevelup-jar).
+# server with it and runs the game tests, once as is and once with Better Combat installed (-PwithBetterCombat).
+# The finished jar is attached to each run under "Artifacts" (Actions tab -> the run -> bloomlevelup-jar).
 
 name: build
 on: [pull_request, push, workflow_dispatch]
@@ -8,6 +8,10 @@ on: [pull_request, push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [plain, bettercombat]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -25,7 +29,11 @@ jobs:
       - name: build
         run: |
           set -o pipefail
-          ./gradlew build runGameTestServer --stacktrace 2>&1 | tee build.log
+          if [ "${{ matrix.variant }}" = "bettercombat" ]; then
+            ./gradlew runGameTestServer -PwithBetterCombat --stacktrace 2>&1 | tee build.log
+          else
+            ./gradlew build runGameTestServer --stacktrace 2>&1 | tee build.log
+          fi
       # Always leave a one-line game test summary on the run (readable through the checks API).
       - name: report game tests
         if: always()
@@ -35,7 +43,7 @@ jobs:
           if not os.path.exists('build.log'):
               raise SystemExit(0)
           lines = open('build.log', encoding='utf-8', errors='replace').read().splitlines()
-          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|optional tests|tests? failed|failed!|GameTestAssert|Task :runGameTestServer|BLOOMTEST|passed', l)]
+          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|optional tests|tests? failed|failed!|GameTestAssert|Task :runGameTestServer|BLOOMTEST|passed|Better Combat', l)]
           text = '\n'.join(hits[-40:]) or 'no game test output found'
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=gametest-summary::{esc(text[:3900])}")
@@ -61,7 +69,7 @@ jobs:
           PY
       # A fingerprint and a virus scan of the jar, shown on the run, so a download can be checked against it.
       - name: check jar
-        if: success()
+        if: success() && matrix.variant == 'plain'
         run: |
           set +e
           ls build/libs/*.jar | grep -v -- '-sources.jar' | grep -v -- '-slim.jar' > jars.txt
@@ -74,7 +82,7 @@ jobs:
           verdict=$([ $status -eq 0 ] && echo "ClamAV: clean" || echo "ClamAV exit $status: $(tr '\n' ' ' < clam.txt)")
           echo "::notice title=jar-check::Build ${GITHUB_RUN_NUMBER} ($(cut -c1-7 <<< "$GITHUB_SHA")) | SHA-256 $(tr '\n' ' ' < jar-sha256.txt)| $verdict"
       - name: capture build artifacts
-        if: success()
+        if: success() && matrix.variant == 'plain'
         uses: actions/upload-artifact@v7
         with:
           name: bloomlevelup-jar
@@ -108,14 +116,19 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: test-reports
+          name: test-reports-${{ matrix.variant }}
           path: build/reports/
 
   # A real 1.20.1 client (on a virtual display) makes a world, opens the hub, the stat sheet, a Major's details and
   # the inventory, and screenshots each (src/gametest/.../forge/client/ClientSmokeTest). Client mixins only load
-  # here, so this is also what proves them.
+  # here, so this is also what proves them. The second run has Better Combat installed and also plays a Catch!
+  # throw and a charged slam.
   client-test:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [plain, bettercombat]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -140,7 +153,8 @@ jobs:
         run: |
           set -o pipefail
           chmod +x ./gradlew
-          timeout 25m xvfb-run -a -s "-screen 0 1280x720x24" ./gradlew runClient --stacktrace 2>&1 | tee client.log || true
+          extra=$([ "${{ matrix.variant }}" = "bettercombat" ] && echo "-PwithBetterCombat" || true)
+          timeout 25m xvfb-run -a -s "-screen 0 1280x720x24" ./gradlew runClient $extra --stacktrace 2>&1 | tee client.log || true
           cat run/bloomtest-client.txt 2>/dev/null || echo "no result file"
           grep -q '^PASS' run/bloomtest-client.txt
       - name: report client test
@@ -166,7 +180,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: client-test-screenshots
+          name: client-test-screenshots-${{ matrix.variant }}
           path: run/screenshots/*.png
           if-no-files-found: ignore
 
@@ -179,16 +193,25 @@ jobs:
       fail-fast: false
       matrix:
         shot: [hub_utility, hub_combat, hub_armor, hub_misc, sheet_combat, sheet_combat_details, sheet_armor, hub_major_details, inventory, runes, anvil, hud]
+        variant: [plain]
+        include:
+          # With Better Combat: the overhand throw and the charged slam, seen from the front.
+          - shot: bc_throw
+            variant: bettercombat
+          - shot: bc_slam
+            variant: bettercombat
+          - shot: sheet_combat
+            variant: bettercombat
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
       - name: fetch screenshots
         uses: actions/download-artifact@v4
         with:
-          name: client-test-screenshots
+          name: client-test-screenshots-${{ matrix.variant }}
           path: shots
         continue-on-error: true
       - name: pillow
         run: pip install --quiet pillow
       - name: screenshot
-        run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28 ${{ matrix.variant == 'bettercombat' && 'bc' || '' }}

@@ -487,10 +487,12 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 |---|---|---|
 | No maces or spears in 1.20.1 | Wind Impact, Stored Impact (mace) and Long Reach (spear) are left out of this build. Impale becomes **Slash**, a sword Major: fully charged sword hits, and what their sweep catches, can Bleed (`slashChance`, 50%). Swords now have three Majors like every other weapon, so the Combat tab is six weapon trees of three. Death From Above's gate moves from the mace tree to the axe tree. The Master of Arms combos that need a mace go with them (from FreshOrangeSlices, 2026-10-25) | `data/bloomlevelup/bloom/major/combat/`, `CombatIds` |
 | Adamantium | Left out too: it only cut damage from blunt weapons, and by default only maces are blunt. The Armor tab's top row is spread back out so it stays even (from FreshOrangeSlices, 2026-10-25) | `data/bloomlevelup/bloom/major/armor/` |
+| Stack Overflow | Raises the per-slot limit through `Inventory`/`Slot` mixins. 1.20.1's shift-click merging (`AbstractContainerMenu.moveItemStackTo`) still stops at the item's own max, so shift-clicking fills to 64 and dragging or picking up goes past it | `skill/misc/StackOverflow`, `mixin/SlotMixin`, `mixin/InventoryMixin` |
+| Unyielding | Blocks harmful effects through Forge's `MobEffectEvent.Applicable`, which `/effect give` also fires, so commands are blocked too (on main they aren't) | `skill/armor/ArmorSkill` |
+| Brace! movement | 1.20.1 servers don't get the client's movement keys, so the client sends a small `MovementInput` packet when they change | `network/BloomPayloads`, `skill/armor/ArmorSkill` |
+| Better Combat | Not wired up yet: `compat/BetterCombat` reports it as absent until the 1.20.1 compat chunk | `compat/BetterCombat` |
 
 ## Still open (need a design call)
-
-- Nothing blocking.
 
 - Nothing blocking. Playtest results may retune the Combat numbers and the Misc XP rate.
 

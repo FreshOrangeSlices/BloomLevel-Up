@@ -40,6 +40,25 @@ jobs:
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=gametest-summary::{esc(text[:3900])}")
           PY
+      # Data that fails to load (a tag naming an id 1.20.1 doesn't have, a broken loot table or recipe) only logs a
+      # warning and the game carries on without it, so list those warnings on every run.
+      - name: report data warnings
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('build.log'):
+              raise SystemExit(0)
+          lines = open('build.log', encoding='utf-8', errors='replace').read().splitlines()
+          pattern = re.compile(r"(/(WARN|ERROR)\].*(bloomlevelup|Couldn't load tag|Couldn't parse|Parsing error|Failed to load|Unknown|Missing|Invalid|not found|loot|recipe|advancement|tag))|Exception.*bloomlevelup", re.I)
+          noise = re.compile(r'Configuration file|Incorrect key|missing mods.toml|ImmediateWindowProvider|Advanced terminal|diffplug|Ambiguity between arguments', re.I)
+          hits = list(dict.fromkeys(l.strip() for l in lines if pattern.search(l) and not noise.search(l)))
+          text = '\n'.join(hits[:80]) or 'no data warnings'
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          for n, i in enumerate(range(0, len(text), 3900)):
+              if n < 5:
+                  print(f"::notice title=data-warnings-{n:02d}::{esc(text[i:i + 3900])}")
+          PY
       # A fingerprint and a virus scan of the jar, shown on the run, so a download can be checked against it.
       - name: check jar
         if: success()

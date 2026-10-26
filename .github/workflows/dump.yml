@@ -54,7 +54,8 @@ jobs:
           if [ -f jars/better-combat.jar ]; then
             unzip -l jars/better-combat.jar | awk '{print $4}' | grep -vE '\.png$|^$' > out/01-files.txt
             mkdir -p src && java -jar vineflower.jar -dgs=1 jars/better-combat.jar src/ > /dev/null 2>&1
-            (cd src && for z in *.jar; do unzip -oq "$z"; done; rm -f *.jar)
+            (cd src && shopt -s nullglob && for z in *.jar; do unzip -oq "$z" || true; done; rm -f *.jar) || true
+            find src -maxdepth 3 | head -20
             for f in META-INF/mods.toml bettercombat.mixins.json bettercombat-common.mixins.json bettercombat-forge.mixins.json; do
               [ -f "src/$f" ] && { echo "==== $f"; cat "src/$f"; } >> out/02-meta.txt
             done
@@ -64,7 +65,7 @@ jobs:
             find src/net/bettercombat -maxdepth 1 -name '*.java' >> list.txt
             while read f; do echo "==== ${f#src/}"; grep -v '^import ' "$f"; done < list.txt > out/10-sources.txt
           fi
-          cat out/*.txt > all.txt
+          cat out/*.txt > all.txt || true
           wc -c all.txt
       - name: print
         run: |

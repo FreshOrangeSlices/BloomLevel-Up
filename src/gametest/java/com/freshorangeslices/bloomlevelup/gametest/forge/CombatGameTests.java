@@ -789,3 +789,4 @@ public final class CombatGameTests {
 	}
 
 
+}

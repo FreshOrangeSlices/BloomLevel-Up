@@ -16,4 +16,7 @@ public interface AbstractContainerScreenAccessor {
 
 	@Accessor("imageWidth")
 	int bloomlevelup$imageWidth();
+
+	@Accessor("imageHeight")
+	int bloomlevelup$imageHeight();
 }

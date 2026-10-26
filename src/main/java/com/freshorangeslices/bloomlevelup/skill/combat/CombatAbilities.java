@@ -57,6 +57,11 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 public final class CombatAbilities {
 	private static final Map<UUID, Long> CHARGED_UNTIL = new HashMap<>();
 	private static final Map<UUID, Long> RIPTIDE_HINT_AT = new HashMap<>();
+	/**
+	 * Bloom's own skill cooldowns (game time when each is ready again, by meter kind), kept apart from the item
+	 * cooldowns other mods put on the weapon (the RPG Series' weapon skills), so neither blocks the other.
+	 */
+	private static final Map<UUID, Map<Integer, Long>> READY_AT = new HashMap<>();
 
 	private CombatAbilities() {
 	}
@@ -65,10 +70,12 @@ public final class CombatAbilities {
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
 			CHARGED_UNTIL.remove(listener.player.getUUID());
 			RIPTIDE_HINT_AT.remove(listener.player.getUUID());
+			READY_AT.remove(listener.player.getUUID());
 		});
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			CHARGED_UNTIL.clear();
 			RIPTIDE_HINT_AT.clear();
+			READY_AT.clear();
 		});
 
 		// Unrestricted Riptide's hint when a trident is raised.
@@ -83,6 +90,27 @@ public final class CombatAbilities {
 
 	private static BloomConfig config() {
 		return BloomServices.config();
+	}
+
+	/** Whether one of Bloom's skills (a {@link com.freshorangeslices.bloomlevelup.network.BloomPayloads.Meter} kind) is still cooling down. */
+	public static boolean coolingDown(ServerPlayer player, int kind) {
+		Long ready = READY_AT.getOrDefault(player.getUUID(), Map.of()).get(kind);
+		return ready != null && player.level().getGameTime() < ready;
+	}
+
+	/** Starts one of Bloom's skill cooldowns and shows it on the player's HUD. */
+	public static void coolDown(ServerPlayer player, int kind, int ticks) {
+		if (ticks <= 0) {
+			return;
+		}
+
+		READY_AT.computeIfAbsent(player.getUUID(), key -> new HashMap<>()).put(kind, player.level().getGameTime() + ticks);
+		CombatSkill.sendMeter(player, kind, 1, 0.0F, ticks);
+	}
+
+	/** Ends every Bloom skill cooldown (game tests). */
+	public static void clearCooldownsForTests(ServerPlayer player) {
+		READY_AT.remove(player.getUUID());
 	}
 
 	public static void handle(ServerPlayer player, CombatAction action) {
@@ -268,7 +296,8 @@ public final class CombatAbilities {
 	private static boolean lightning(ServerPlayer player, boolean storm) {
 		ItemStack weapon = player.getMainHandItem();
 
-		if (!CombatSkill.has(player, CombatIds.LIGHTNING_SUMMON, Family.TRIDENT, weapon) || player.getCooldowns().isOnCooldown(weapon)
+		if (!CombatSkill.has(player, CombatIds.LIGHTNING_SUMMON, Family.TRIDENT, weapon)
+				|| coolingDown(player, com.freshorangeslices.bloomlevelup.network.BloomPayloads.Meter.LIGHTNING_SUMMON)
 				|| !(player.level() instanceof ServerLevel level)) {
 			return false;
 		}
@@ -312,7 +341,8 @@ public final class CombatAbilities {
 			weapon.hurtAndBreak(cost, player, EquipmentSlot.MAINHAND);
 		}
 
-		player.getCooldowns().addCooldown(weapon, (int) Math.round(config.lightningSummonCooldownTicks * scale));
+		coolDown(player, com.freshorangeslices.bloomlevelup.network.BloomPayloads.Meter.LIGHTNING_SUMMON,
+				(int) Math.round(config.lightningSummonCooldownTicks * scale));
 		return true;
 	}
 
@@ -353,7 +383,8 @@ public final class CombatAbilities {
 	private static boolean throwWeapon(ServerPlayer player, boolean charged) {
 		ItemStack held = player.getMainHandItem();
 
-		if (!CombatSkill.active(player, CombatIds.CATCH) || !throwable(held) || player.getCooldowns().isOnCooldown(held)) {
+		// Not gated by the weapon's item cooldown: that's other mods' (the RPG Series' weapon skills), kept apart from Bloom's.
+		if (!CombatSkill.active(player, CombatIds.CATCH) || !throwable(held)) {
 			return false;
 		}
 

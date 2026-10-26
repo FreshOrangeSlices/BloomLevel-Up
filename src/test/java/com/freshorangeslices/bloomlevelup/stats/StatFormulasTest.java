@@ -188,6 +188,10 @@ class StatFormulasTest {
 		assertEquals(1.0, StatFormulas.wisdomMultiplier(0), 1e-9);
 		assertEquals(3.0, StatFormulas.wisdomMultiplier(50), 1e-9);
 		assertEquals(5.0, StatFormulas.wisdomMultiplier(100), 1e-9);
+		// Spell haste: +50% at 100 points, in Spell Power's haste points (100 = normal), and on past 100.
+		assertEquals(0.0, StatFormulas.wisdomSpellHaste(0), 1e-9);
+		assertEquals(50.0, StatFormulas.wisdomSpellHaste(100), 1e-9);
+		assertEquals(75.0, StatFormulas.wisdomSpellHaste(150), 1e-9);
 		assertEquals(15, StatFormulas.scaledXp(3, 5.0, new java.util.Random(1)));
 		assertEquals(0, StatFormulas.scaledXp(0, 5.0, new java.util.Random(1)));
 		assertEquals(1.0, StatFormulas.enduranceExhaustionFactor(0), 1e-9);

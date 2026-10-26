@@ -281,8 +281,8 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots pack_world 12
       - name: the player (Fresh Animations' player extension)
         run: python3 .github/scripts/emit_screenshot.py shots pack_player 12
-      - name: the title screen
-        run: python3 .github/scripts/emit_screenshot.py shots pack_title 12
+      - name: the inventory with accessory slots and Bloom's buttons
+        run: python3 .github/scripts/emit_screenshot.py shots pack_inventory 12
 
   pack-screenshots-2:
     needs: client-test-pack

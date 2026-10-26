@@ -27,13 +27,16 @@ public final class HubButton extends AbstractButton {
 		reposition();
 	}
 
-	/** Survival inventory: right of the recipe book button. Creative: just outside the panel's top-right corner. */
+	/**
+	 * Survival inventory: the right end of Bloom's row just under the panel's bottom-right corner (other mods crowd the
+	 * top, the left and the space around the player). Creative: just outside the panel's top-right corner.
+	 */
 	private void reposition() {
 		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
 
 		if (screen instanceof net.minecraft.client.gui.screens.inventory.InventoryScreen) {
-			this.setX(accessor.bloomlevelup$leftPos() + 126);
-			this.setY(accessor.bloomlevelup$topPos() + 60);
+			this.setX(SideButton.rowX(accessor, 0));
+			this.setY(SideButton.rowY(accessor));
 		} else {
 			this.setX(accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2);
 			this.setY(accessor.bloomlevelup$topPos() + 4);

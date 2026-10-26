@@ -190,14 +190,17 @@ public final class BloomPayloads {
 	}
 
 	/**
-	 * Server → client: one of the stacking combat meters for the HUD (Bloodlust, Predator, Combo): stacks, the
-	 * bonus the next hit gets, and how long until they run out (0 stacks = hide the bar).
+	 * Server → client: one of the combat meters for the HUD: the stacking ones (Bloodlust, Predator, Combo: stacks, the
+	 * bonus the next hit gets, how long until they run out) and Bloom's skill cooldowns (Wind Impact, Lightning Summon:
+	 * how long until ready). 0 stacks = hide the bar.
 	 */
 	public record Meter(int kind, int stacks, float bonus, int ticksLeft, int totalTicks) implements CustomPacketPayload {
 		public static final int BLOODLUST = 0;
 		public static final int PREDATOR = 1;
 		public static final int COMBO = 2;
-		public static final int KINDS = 3;
+		public static final int WIND_IMPACT = 3;
+		public static final int LIGHTNING_SUMMON = 4;
+		public static final int KINDS = 5;
 		public static final Type<Meter> TYPE = new Type<>(BloomLevelUp.id("meter"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, Meter> CODEC =
 				CustomPacketPayload.codec(Meter::write, Meter::new);

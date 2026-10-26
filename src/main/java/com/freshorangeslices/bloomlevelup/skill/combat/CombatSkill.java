@@ -836,7 +836,7 @@ public final class CombatSkill {
 	}
 
 	/** A stacking meter on the player's HUD (Bloodlust right of the hotbar, Predator and Combo left of it). */
-	private static void sendMeter(ServerPlayer player, int kind, int stacks, float bonus, int ticks) {
+	static void sendMeter(ServerPlayer player, int kind, int stacks, float bonus, int ticks) {
 		if (ServerPlayNetworking.canSend(player, BloomPayloads.Meter.TYPE)) {
 			ServerPlayNetworking.send(player, new BloomPayloads.Meter(kind, stacks, bonus, ticks, ticks));
 		}
@@ -1122,7 +1122,7 @@ public final class CombatSkill {
 		ItemStack mace = player.getMainHandItem();
 
 		if (!(player.level() instanceof ServerLevel level) || !Weapons.is(mace, Family.MACE) || !active(player, CombatIds.WIND_IMPACT)
-				|| player.getCooldowns().isOnCooldown(mace)) {
+				|| CombatAbilities.coolingDown(player, BloomPayloads.Meter.WIND_IMPACT)) {
 			return false;
 		}
 
@@ -1154,7 +1154,7 @@ public final class CombatSkill {
 			player.setIgnoreFallDamageFromCurrentImpulse(true, player.position());
 		}
 
-		player.getCooldowns().addCooldown(mace, config.windImpactCooldownTicks);
+		CombatAbilities.coolDown(player, BloomPayloads.Meter.WIND_IMPACT, config.windImpactCooldownTicks);
 		int wear = config.windImpactDurabilityCost + (charged ? config.chargedBurstExtraDurability : 0);
 
 		if (wear > 0 && !player.hasInfiniteMaterials()) {

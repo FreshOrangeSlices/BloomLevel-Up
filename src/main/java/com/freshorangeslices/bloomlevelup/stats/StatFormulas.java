@@ -269,6 +269,14 @@ public final class StatFormulas {
 		return 1.0 + 0.04 * Math.max(0, points);
 	}
 
+	/**
+	 * Wisdom's spell haste (with the RPG Series' Spell Power): +0.5% per point, so +50% at 100. The value is in Spell
+	 * Power's haste attribute points (100 = normal speed), added on top.
+	 */
+	public static double wisdomSpellHaste(int points) {
+		return 0.5 * Math.max(0, points);
+	}
+
 	/** An XP amount times a multiplier, with the fraction rolled (1 XP at 1.3x = 1, or 2 with 30%). */
 	public static int scaledXp(int amount, double multiplier, RandomGenerator random) {
 		if (amount <= 0) {

@@ -67,7 +67,10 @@ public final class BloomHud {
 	private static final int[] STACKS = new int[BloomPayloads.Meter.KINDS];
 	private static final float[] BONUS = new float[BloomPayloads.Meter.KINDS];
 	private static final int[] TICKS_LEFT = new int[BloomPayloads.Meter.KINDS];
-	private static final int[] TOTAL_TICKS = {1, 1, 1};
+	private static final int[] TOTAL_TICKS = java.util.stream.IntStream.generate(() -> 1).limit(BloomPayloads.Meter.KINDS).toArray();
+	private static final int COOLDOWN_BACK = 0xA0101418;
+	private static final int COOLDOWN_FILL = 0xFF9FB4C8;
+	private static final int COOLDOWN_TEXT = 0xFFC9D6E3;
 
 	private BloomHud() {
 	}
@@ -79,6 +82,7 @@ public final class BloomHud {
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("predator_combo"), BloomHud::predatorAndCombo);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("stored_impact"), BloomHud::storedImpact);
 		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("brace"), BloomHud::brace);
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, BloomLevelUp.id("skill_cooldowns"), BloomHud::skillCooldowns);
 
 		ClientPlayNetworking.registerGlobalReceiver(BloomPayloads.Meter.TYPE, (payload, context) -> {
 			int kind = payload.kind();
@@ -282,6 +286,28 @@ public final class BloomHud {
 		meter(g, combo, x, height() - 12,
 				Component.translatable("bloom.hud.combo", STACKS[combo], String.format(java.util.Locale.ROOT, "%.2f", BONUS[combo])),
 				COMBO_BACK, COMBO_FILL, COMBO_TEXT);
+	}
+
+	// ------------------------------------------------------------------ Bloom's skill cooldowns (right of the hotbar, over Bloodlust)
+
+	/**
+	 * Wind Impact's and Lightning Summon's cooldowns: Bloom keeps them itself, apart from the weapon's item cooldown
+	 * (other mods' weapon skills use that), so they show here instead of on the hotbar slot.
+	 */
+	private static void skillCooldowns(GuiGraphicsExtractor g, DeltaTracker delta) {
+		int x = width() / 2 + 91 + 34;
+		int y = height() - 36;
+
+		for (int kind : new int[] {BloomPayloads.Meter.WIND_IMPACT, BloomPayloads.Meter.LIGHTNING_SUMMON}) {
+			if (STACKS[kind] <= 0 || TICKS_LEFT[kind] <= 0) {
+				continue;
+			}
+
+			String seconds = String.format(java.util.Locale.ROOT, "%.1f", TICKS_LEFT[kind] / 20.0F);
+			String key = kind == BloomPayloads.Meter.WIND_IMPACT ? "bloom.hud.cooldown.wind_impact" : "bloom.hud.cooldown.lightning_summon";
+			meter(g, kind, x, y, Component.translatable(key, seconds), COOLDOWN_BACK, COOLDOWN_FILL, COOLDOWN_TEXT);
+			y -= 24;
+		}
 	}
 
 	/** A label over a bar that empties as the stacks run out. Hidden with no stacks. */

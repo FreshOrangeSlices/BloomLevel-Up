@@ -178,6 +178,34 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot("pack_hub");
 			context.setScreen(() -> null);
 
+			// The inventory with the pack's accessory slots (Trinkets) and all three of Bloom's buttons in their row.
+			singleplayer.getServer().runCommand("bloom admin xp @a bloomlevelup:misc 100000");
+			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/hoarders_pocket");
+			singleplayer.getServer().runCommand("execute as @a run bloom buy bloomlevelup:misc/rune_embedding");
+			context.waitFor(client -> ClientBloomState.profile() != null && ClientBloomState.profile().owns(MiscIds.RUNE_EMBEDDING),
+					200);
+			context.getInput().pressKey(options -> options.keyInventory);
+			context.waitForScreen(InventoryScreen.class);
+			context.waitTicks(5);
+			context.takeScreenshot("pack_inventory");
+			context.setScreen(() -> null);
+
+			// Wisdom with Spell Power: 100 points = +50% spell haste (Spell Power's haste: 100 normal, so 150).
+			singleplayer.getServer().runCommand("execute as @a run bloom allocate bloomlevelup:misc/wisdom 100");
+			context.waitTicks(10);
+			double haste = singleplayer.getServer().computeOnServer(server -> {
+				var attribute = net.minecraft.core.registries.BuiltInRegistries.ATTRIBUTE.getOptional(
+						net.minecraft.resources.Identifier.fromNamespaceAndPath("spell_power", "haste"));
+				var player = server.getPlayerList().getPlayers().get(0);
+				return attribute.map(a -> player.getAttributeValue(net.minecraft.core.registries.BuiltInRegistries.ATTRIBUTE.wrapAsHolder(a)))
+						.orElse(-1.0);
+			});
+			BloomLevelUp.LOGGER.info("BLOOMTEST pack: spell haste with 100 Wisdom: {}", haste);
+
+			if (Math.abs(haste - 150.0) > 0.01) {
+				failures.add("100 Wisdom should give 150 spell haste (100 + 50), got " + haste);
+			}
+
 			mobGallery(context, singleplayer);
 
 			context.runOnClient(client -> setShaders(true));

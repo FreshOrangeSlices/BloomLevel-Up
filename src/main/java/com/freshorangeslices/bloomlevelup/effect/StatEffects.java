@@ -3,6 +3,7 @@ package com.freshorangeslices.bloomlevelup.effect;
 import java.util.List;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -59,6 +60,9 @@ public final class StatEffects {
 	private static final Identifier TITAN_FALL_MOD = BloomLevelUp.id("major/titan_hide_fall");
 	private static final Identifier PROTEIN_MOD = BloomLevelUp.id("major/protein");
 	private static final Identifier HEAVY_KNOCKBACK_MOD = BloomLevelUp.id("major/fitting_armor_heavy");
+	private static final Identifier WISDOM_HASTE_MOD = BloomLevelUp.id("stat/wisdom_spell_haste");
+	/** Spell Power's spell haste (the RPG Series): faster casting and shorter spell cooldowns. Absent without it. */
+	private static final Identifier SPELL_HASTE = Identifier.fromNamespaceAndPath("spell_power", "haste");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	public static final double POWER_PER_POINT = 0.06;
@@ -129,7 +133,7 @@ public final class StatEffects {
 			defenseArmor = (defenseArmor + 2.0) * 2.0;
 		}
 
-		return List.of(
+		List<HeldModifier> modifiers = new java.util.ArrayList<>(List.of(
 				new HeldModifier(Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADD_VALUE),
 				new HeldModifier(Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADD_VALUE),
 				new HeldModifier(Attributes.MAX_HEALTH, VITALITY_MOD, StatFormulas.vitalityBonusHealth(service.statValue(profile, VITALITY)),
@@ -146,7 +150,13 @@ public final class StatEffects {
 				// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
 				new HeldModifier(Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
 				new HeldModifier(Attributes.FALL_DAMAGE_MULTIPLIER, TITAN_FALL_MOD, titanHide ? -0.7 : 0.0,
-						AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+						AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)));
+		// Wisdom: +0.5% spell haste per point when Spell Power is installed (+50% at 100).
+		BuiltInRegistries.ATTRIBUTE.getOptional(SPELL_HASTE).ifPresent(haste -> modifiers.add(new HeldModifier(
+				BuiltInRegistries.ATTRIBUTE.wrapAsHolder(haste), WISDOM_HASTE_MOD,
+				StatFormulas.wisdomSpellHaste(service.statValue(profile, com.freshorangeslices.bloomlevelup.skill.misc.MiscIds.WISDOM)),
+				AttributeModifier.Operation.ADD_VALUE)));
+		return modifiers;
 	}
 
 	/**

@@ -1,0 +1,10 @@
+# Throwaway (never merged): checks the Medieval High Fantasy master list for Forge 1.20.1 builds (check.py).
+name: modcheck
+on: [push, workflow_dispatch]
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: check the list
+        run: python3 check.py

@@ -167,8 +167,9 @@ implementation. Code: `definition/` (data model), `progression/` (rules), `playe
 
 ## License
 
-All Rights Reserved. You may include the unmodified jar in public or private modpacks, with credit to
-Bloom Level-Up and FreshOrangeSlices. See [LICENSE](LICENSE) for the exact terms.
+Free for everyone: FreshOrangeSlices dedicates Bloom Level-Up to the public domain under
+[CC0 1.0 Universal](LICENSE). Use it, change it, put it in any modpack or publish your own version, with no need to
+ask. Credit is welcome but not required.
 
 Compatibility targets: Dungeons and Taverns, World Bosses, ATi Structures, Origins: Legacy, Sodium,
 Lithium and Iris. Better Combat isn't a target for now (it may interfere with Bloom's Combat mechanics).

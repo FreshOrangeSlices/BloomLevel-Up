@@ -363,10 +363,12 @@ public final class UtilityGameTests {
 		helper.setBlock(new BlockPos(3, 1, 3), Blocks.SAND);
 		helper.setBlock(new BlockPos(3, 2, 3), Blocks.CACTUS);
 		BlockState before = helper.getBlockState(new BlockPos(3, 2, 3));
-		// Wet farmland: the aura's random ticks would otherwise dry it to dirt and pop the wheat.
-		helper.setBlock(new BlockPos(1, 1, 3), Blocks.WATER);
-		helper.setBlock(new BlockPos(2, 1, 3), Blocks.FARMLAND.defaultBlockState().setValue(BlockStateProperties.MOISTURE, 7));
-		helper.setBlock(new BlockPos(2, 2, 3), Blocks.WHEAT);
+		// The wheat sits away from the cactus, on wet farmland.
+		BlockPos wheat = new BlockPos(5, 2, 5);
+		helper.setBlock(new BlockPos(6, 1, 5), Blocks.WATER);
+		helper.setBlock(wheat.below(), Blocks.FARMLAND.defaultBlockState().setValue(BlockStateProperties.MOISTURE, 7));
+		helper.setBlock(wheat, Blocks.WHEAT.defaultBlockState());
+		helper.assertBlockPresent(Blocks.WHEAT, wheat);
 
 		BloomConfig config = BloomServices.config();
 		double chance = config.growthAuraChance;
@@ -375,8 +377,9 @@ public final class UtilityGameTests {
 		try {
 			int grown = UtilitySkill.growthAura(player);
 			helper.assertTrue(grown >= 1, "The cactus got a growth tick");
+			helper.assertTrue(helper.getBlockState(wheat).is(Blocks.WHEAT), "Wheat survived the aura, found " + helper.getBlockState(wheat));
 			helper.assertTrue(helper.getBlockState(new BlockPos(3, 2, 3)) != before, "Cactus state advanced");
-			TestPlayers.equal(helper, 1, helper.getBlockState(new BlockPos(2, 2, 3)).getValue(BlockStateProperties.AGE_7),
+			TestPlayers.equal(helper, 1, helper.getBlockState(wheat).getValue(BlockStateProperties.AGE_7),
 					"Wheat jumped a whole growth stage");
 
 			player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);

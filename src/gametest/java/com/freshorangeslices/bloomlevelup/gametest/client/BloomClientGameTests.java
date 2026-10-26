@@ -276,11 +276,14 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			{"archers:iron_spear", "[SPEAR]"}, {"rogues:iron_glaive", "[SPEAR]"},
 			{"archers:composite_longbow", "[BOW]"}, {"archers:mechanic_shortbow", "[BOW]"},
 			{"archers:heavy_crossbow", "[CROSSBOW]"}, {"archers:rapid_crossbow", "[CROSSBOW]"},
-			{"wizards:staff_wizard", "[]"}, {"paladins:holy_wand", "[]"}};
+			{"wizards:staff_wizard", "[]"}, {"paladins:holy_wand", "[]"},
+			{"mutantmonsters:hulk_hammer", "[MACE]"}, {"remnant_bosses:ossukage_sword", "[SWORD]"}, {"remnant_bosses:sovereigns_ruin", "[SWORD]"},
+			{"remnant_bosses:gravebound_executioner", "[AXE]"}};
 		String[][] armor = {
 			{"wizards:wizard_robe_chest", "1"}, {"armory_rpgs:astral_robe_chest", "1"}, {"archers:archer_armor_chest", "1"},
 			{"rogues:warrior_armor_chest", "1"}, {"armory_rpgs:slayer_armor_chest", "1"}, {"paladins:paladin_armor_chest", "2"},
-			{"paladins:crusader_armor_chest", "3"}, {"rogues:berserker_armor_chest", "3"}, {"armory_rpgs:justicar_armor_chest", "3"}};
+			{"paladins:crusader_armor_chest", "3"}, {"rogues:berserker_armor_chest", "3"}, {"armory_rpgs:justicar_armor_chest", "3"},
+			{"mutantmonsters:mutant_skeleton_chestplate", "2"}, {"remnant_bosses:warden_hauberk", "2"}, {"remnant_bosses:regalia_cuirass", "3"}};
 		List<String> report = singleplayer.getServer().computeOnServer(server -> {
 			List<String> out = new ArrayList<>();
 
@@ -361,14 +364,26 @@ public class BloomClientGameTests implements FabricClientGameTest {
 					net.minecraft.world.phys.Vec3 ahead = player.position().add(player.getLookAngle().multiply(1.0, 0.0, 1.0).normalize().scale(4.0));
 					living.setPos(ahead.x, player.getY(), ahead.z);
 					level.addFreshEntity(living);
-					line += " hp=" + living.getMaxHealth() + (hasBossBar(living) ? " BOSSBAR" : "");
+					boolean bossBar = hasBossBar(living);
+					boolean tagged = living.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, BloomLevelUp.id("bosses")));
+					line += " hp=" + living.getMaxHealth() + (bossBar ? " BOSSBAR" : "") + (tagged ? " bloom-boss" : "");
+
+					if (bossBar != tagged) {
+						line = "FAILED " + line + " (a boss bar but not in bloomlevelup:bosses, or the other way round)";
+					}
+
 					player.resetAttackStrengthTicker();
 					player.attack(living);
 					line += " hit by player ok";
 
 					if (living instanceof net.minecraft.world.entity.Mob mob && living.isAlive()) {
-						mob.doHurtTarget(level, player);
-						line += ", hits player ok";
+						// Some mobs never hit in melee (no attack damage at all: a snow golem, a boss's floating part).
+						if (mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) != null) {
+							mob.doHurtTarget(level, player);
+							line += ", hits player ok";
+						} else {
+							line += ", no melee";
+						}
 					}
 
 					living.discard();
@@ -400,8 +415,16 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				if (equippable != null && equippable.slot().isArmor()) {
 					double armor = modifiers.compute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR, 0.0, equippable.slot());
 					double toughness = modifiers.compute(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS, 0.0, equippable.slot());
+					List<String> other = new ArrayList<>();
+					modifiers.forEach(equippable.slot(), (attribute, modifier) -> {
+						String name = String.valueOf(net.minecraft.core.registries.BuiltInRegistries.ATTRIBUTE.getKey(attribute.value()));
+
+						if (!name.equals("minecraft:armor") && !name.equals("minecraft:armor_toughness")) {
+							other.add(name + " " + modifier.amount() + " " + modifier.operation());
+						}
+					});
 					out.add("armor " + id + " " + equippable.slot().getName() + " armor=" + armor + " toughness=" + toughness + " weight="
-							+ com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles.weightOf(stack));
+							+ com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles.weightOf(stack) + (other.isEmpty() ? "" : " also=" + other));
 				} else if (damage > 1.0 || !families.equals("[]")) {
 					out.add("weapon " + id + " damage=" + damage + " speed=" + Math.round(speed * 100.0) / 100.0 + " bloom=" + families
 							+ " tags=" + net.minecraft.core.registries.BuiltInRegistries.ITEM.wrapAsHolder(item).tags().map(tag -> tag.location().toString()).filter(tag -> !tag.startsWith("minecraft:enchantable"))
@@ -465,6 +488,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		String plainStill = "summon villager ~ ~ ~ {NoAI:1b,Rotation:[%sf,0f]}";
 		String[] two = {"^1.1 ^ ^4", "^-1.1 ^ ^4"};
 		String[] three = {"^1.6 ^ ^3", "^ ^ ^3", "^-1.6 ^ ^3"};
+		String[] wide = {"^3.2 ^ ^7", "^ ^ ^7", "^-3.2 ^ ^7"};
 		Shot[] shots = {
 			new Shot("pack_villagers_front", "noon", two, new String[] {looking, farmer.formatted("180")}),
 			new Shot("pack_villagers_side", "noon", two, new String[] {plainStill.formatted("90"), farmer.formatted("90")}),
@@ -479,6 +503,15 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			new Shot("pack_mobs_5", "noon", three, new String[] {"summon minecart", "setblock ~ ~ ~ ender_chest[facing=north]",
 				"summon oak_boat"}),
 			// The RPG Series' gear (its 3D armor comes from Armor Model API): a wizard, a paladin and an archer.
+			// Batch 2: Mutant Monsters, then Remnants: The Eclipsed Realm's bosses (big, so further off and spread out).
+			new Shot("pack_mutants_1", "noon", wide, new String[] {"summon mutantmonsters:mutant_zombie", "summon mutantmonsters:mutant_skeleton",
+				"summon mutantmonsters:mutant_creeper"}),
+			new Shot("pack_mutants_2", "noon", wide, new String[] {"summon mutantmonsters:mutant_snow_golem", "summon mutantmonsters:mutant_enderman",
+				"summon mutantmonsters:spider_pig"}),
+			new Shot("pack_remnants_1", "noon", wide, new String[] {"summon remnants:ossukage", "summon remnants:hollow_sovereign",
+				"summon remnants:forgotten_watcher"}),
+			new Shot("pack_remnants_2", "noon", wide, new String[] {"summon remnants:gravebound_warden", "summon remnants:burial_guardian",
+				"summon remnants:soulbound_knight"}),
 			new Shot("pack_rpg_gear", "noon", three, new String[] {
 				gearStand("wizards", "wizard_robe", "wizards:staff_wizard"),
 				gearStand("paladins", "paladin_armor", "paladins:iron_claymore"),

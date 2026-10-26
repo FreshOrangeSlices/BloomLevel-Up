@@ -300,7 +300,7 @@ final class ArmorSheet {
 
 		// The picture: who's hitting, and what gets through.
 		sheet.gauge = attacker.picture();
-		sheet.gaugeCaption = Component.translatable("bloom.sheet.gauge.attacker", attacker.who(), Sheet.num(hit), Sheet.num(steps.health()));
+		sheet.gaugeCaption = Component.translatable("bloom.sheet.gauge.attacker", Sheet.num(steps.health()), Sheet.num(hit));
 	}
 
 	/**

@@ -520,8 +520,10 @@ public class BloomClientGameTests implements FabricClientGameTest {
 
 		for (Shot shot : shots) {
 			singleplayer.getServer().runCommand("time set " + shot.time());
-			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
-			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-3 ~ ~1 ~3 ~1 ~5 air");
+			// The last shot's mobs drop into the void rather than die here: a Mutant Creeper's death blast would leave a
+			// crater and the Remnants bosses their death scenes in the next picture.
+			singleplayer.getServer().runCommand("execute as @a at @s run tp @e[type=!player,distance=..20] ~ -250 ~");
+			singleplayer.getServer().runCommand("execute as @a at @s rotated ~ 0 run fill ^-6 ^ ^1 ^6 ^4 ^9 air");
 
 			for (int i = 0; i < shot.commands().length; i++) {
 				String command = shot.commands()[i];

@@ -11,6 +11,7 @@ are written as PNGs for the screenshot job.
 """
 import os
 import re
+import shutil
 import subprocess
 import sys
 import threading
@@ -78,10 +79,17 @@ def set_properties(path, values):
 
 
 def capture(folder, name):
-    """The whole virtual screen, as a PNG (ffmpeg comes with the CI image)."""
+    """The whole virtual screen, as a PNG: ffmpeg when the machine has it, else ImageMagick's import."""
     path = os.path.join(folder, f"bloom_{name}.png")
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "x11grab", "-video_size", "1280x720", "-i", os.environ.get("DISPLAY", ":99"),
-                    "-frames:v", "1", path], check=False)
+    if shutil.which("ffmpeg"):
+        command = ["ffmpeg", "-loglevel", "error", "-y", "-f", "x11grab", "-video_size", "1280x720", "-i", os.environ.get("DISPLAY", ":99"),
+                   "-frames:v", "1", path]
+    else:
+        command = ["import", "-window", "root", path]
+    try:
+        subprocess.run(command, check=False, timeout=60)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        print(f"couldn't capture the screen: {error}")
     return os.path.exists(path)
 
 
@@ -168,4 +176,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        import traceback
+        text = traceback.format_exc()
+        print("::error title=pack-launch-crash::" + text.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+        raise

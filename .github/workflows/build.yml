@@ -253,7 +253,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri > /dev/null
+          sudo rm -f /var/lib/man-db/auto-update  # no man page indexing after each install (it takes minutes)
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri imagemagick > /dev/null
           if gh release download v5.0.6 -R theorzr/portablemc -p 'portablemc-*-linux-x86_64-gnu.tar.gz' -D pmc; then
             tar -xzf pmc/*.tar.gz -C pmc
             echo "$PWD/$(dirname "$(ls pmc/*/portablemc | head -1)")" >> "$GITHUB_PATH"

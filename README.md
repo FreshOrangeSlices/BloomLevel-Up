@@ -11,7 +11,7 @@
 > `docs/DECISIONS.md`. The rest of this README describes the Fabric 26.3 build on `main`.
 >
 > **Forge pack:** each **build** run on this branch also makes **bloom-pack-forge**: a Modrinth pack file (Bloom,
-> Better Combat and Fresh Animations with its add-ons; import it in the Modrinth App, Prism or ATLauncher) and a
+> Better Combat and Fresh Animations with its add-ons; import it in the Modrinth App or Prism Launcher) and a
 > server zip (Java 17; `start.sh` / `start.bat` install Forge on the first start). Fresh Animations is switched on
 > by itself at the first launch.
 

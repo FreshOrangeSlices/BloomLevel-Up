@@ -187,6 +187,17 @@ jobs:
           lines = [l if len(l) < 400 else l[:400] + ' ...' for l in open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()]
           lines = [l for l in lines if not noise.search(l)]
           tests = [l for l in lines if 'BLOOMTEST' in l]
+          # A crash report: its stack and the entity or block being ticked, in full.
+          import glob
+          for report in sorted(glob.glob('build/run/clientGameTestPack/crash-reports/*.txt'))[:1]:
+              body = open(report, encoding='utf-8', errors='replace').read().splitlines()
+              keep = body[:70]
+              at = next((i for i, l in enumerate(body) if 'being ticked' in l or 'Affected level' in l), None)
+              if at is not None:
+                  keep += ['...'] + body[at:at + 25]
+              text = chr(10).join(keep)
+              for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
+                  print(f"::error title=client-pack-crash-{n:02d}::{esc(text[i:i + 3900])}")
           census = [l.split('BLOOMCENSUS ', 1)[1] for l in lines if 'BLOOMCENSUS ' in l and '/INFO]' in l]
           if census:
               text = chr(10).join(census)

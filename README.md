@@ -1,5 +1,15 @@
 # Bloom Level-Up
 
+> **This branch (`forge-1.20.1`) is the Forge build for Minecraft 1.20.1** (Forge 47.x). To install it: Actions tab →
+> latest **build** run on `forge-1.20.1` → download **bloomlevelup-jar** → put
+> `bloomlevelup-forge-1.20.1-<version>.jar` (not the `-slim` one) in `mods/`. No other mods are needed (MixinExtras is
+> inside). Players and the server need the same build.
+>
+> It's the same mod with what 1.20.1 doesn't have taken out: no maces or spears, so Wind Impact, Stored Impact, Long
+> Reach and Adamantium are gone and swords get **Slash** (Bleed) instead of Impale. Better Combat support is still to
+> come. Every difference from the Fabric build is listed under "Forge 1.20.1 build" in `docs/DECISIONS.md`. The rest of
+> this README describes the Fabric 26.3 build on `main`.
+
 A Fabric mod for Minecraft **26.3**: a modpack-friendly character build system inspired by Path of Exile
 and mcMMO. Four skill categories (Utility, Combat, Armor, Misc) level from use, each level gives a stat
 point, and every 10 levels gives a shared **Major Level** you can spend on rule-breaking abilities in any

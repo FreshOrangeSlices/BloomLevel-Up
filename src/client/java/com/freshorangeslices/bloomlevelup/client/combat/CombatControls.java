@@ -72,7 +72,7 @@ public final class CombatControls {
 	}
 
 	public static void init(IEventBus modBus) {
-		skillKey = new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.KEYBOARD, InputConstants.KEY_V, BloomLevelUpClient.KEY_CATEGORY);
+		skillKey = new KeyMapping("key.bloomlevelup.weapon_skill", InputConstants.Type.KEYSYM, InputConstants.KEY_V, BloomLevelUpClient.KEY_CATEGORY);
 		modBus.addListener((RegisterKeyMappingsEvent event) -> event.register(skillKey));
 
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> {

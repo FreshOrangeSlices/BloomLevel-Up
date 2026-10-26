@@ -110,3 +110,85 @@ jobs:
         with:
           name: test-reports
           path: build/reports/
+
+  # A real 1.20.1 client (on a virtual display) makes a world, opens the hub, the stat sheet, a Major's details and
+  # the inventory, and screenshots each (src/gametest/.../forge/client/ClientSmokeTest). Client mixins only load
+  # here, so this is also what proves them.
+  client-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'microsoft'
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v6
+      - name: virtual display
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils > /dev/null
+      - name: client settings
+        run: |
+          mkdir -p run/config
+          # No accessibility/first-run screens, no pausing when the window isn't focused, quiet, small world view.
+          printf 'onboardAccessibility:false\ntutorialStep:none\njoinedFirstServer:true\nskipMultiplayerWarning:true\npauseOnLostFocus:false\nnarrator:0\nrenderDistance:4\nsimulationDistance:5\nguiScale:2\nsoundCategory_master:0.0\n' > run/options.txt
+          printf 'earlyWindowControl = false\n' > run/config/fml.toml
+      - name: client smoke test
+        env:
+          BLOOM_CLIENT_TEST: '1'
+        run: |
+          set -o pipefail
+          chmod +x ./gradlew
+          timeout 25m xvfb-run -a -s "-screen 0 1280x720x24" ./gradlew runClient --stacktrace 2>&1 | tee client.log || true
+          cat run/bloomtest-client.txt 2>/dev/null || echo "no result file"
+          grep -q '^PASS' run/bloomtest-client.txt
+      - name: report client test
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('client.log'):
+              raise SystemExit(0)
+          lines = open('client.log', encoding='utf-8', errors='replace').read().splitlines()
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          keep = []
+          for i, line in enumerate(lines):
+              if re.search(r'(error:|/ERROR\]|FAILED|What went wrong|Exception|Caused by|Mixin apply|InvalidInjection|BLOOMTEST)', line) and not re.search(r'Failed to load properties|server.properties', line):
+                  keep.extend(lines[max(0, i - 1):i + 5])
+          text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
+          chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)][:20]
+          kinds = ['warning', 'notice']
+          for n, chunk in enumerate(chunks):
+              print(f"::{kinds[(n // 10) % 2]} title=client-log-{n:02d}::{esc(chunk)}")
+          PY
+      - name: capture screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-test-screenshots
+          path: run/screenshots/*.png
+          if-no-files-found: ignore
+
+  # Each screenshot printed as annotations (a job can carry 50), so they can be put back together from the checks API.
+  screenshots:
+    needs: client-test
+    if: always()
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        shot: [hub_utility, hub_combat, hub_armor, hub_misc, sheet_combat, sheet_combat_details, hub_major_details, inventory, hud]
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: client-test-screenshots
+          path: shots
+        continue-on-error: true
+      - name: pillow
+        run: pip install --quiet pillow
+      - name: screenshot
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28

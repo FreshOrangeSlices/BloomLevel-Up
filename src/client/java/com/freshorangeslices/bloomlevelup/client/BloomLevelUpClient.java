@@ -58,7 +58,7 @@ public final class BloomLevelUpClient {
 	}
 
 	private static KeyMapping unbound(String name) {
-		return new KeyMapping(name, InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
+		return new KeyMapping(name, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
 	}
 
 	public static void init(IEventBus modBus) {

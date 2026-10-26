@@ -96,6 +96,14 @@ minecraft {
 
 		client {
 			property 'forge.enabledGameTestNamespaces', mod_id
+
+			// The client smoke test (src/gametest/.../forge/client) rides along; it only runs with BLOOM_CLIENT_TEST set.
+			mods {
+				"${mod_id}" {
+					source sourceSets.main
+					source sourceSets.gametest
+				}
+			}
 		}
 
 		server {

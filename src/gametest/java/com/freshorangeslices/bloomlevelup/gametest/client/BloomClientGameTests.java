@@ -184,10 +184,16 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.waitTicks(100);
 			context.takeScreenshot("pack_shader");
 
-			// World Bosses with the shader on (the glitch only shows with Iris + Complementary): a boss fighting golems.
-			for (String[] shot : new String[][] {{"pack_wb_shader_1", "worldbosses:shadow_weaver"}, {"pack_wb_shader_2", "worldbosses:varkhul"},
-					{"pack_wb_shader_3", "worldbosses:astrael"}}) {
+			// World Bosses with the shader on (the glitch only shows with Iris + Complementary): a boss fighting golems,
+			// at noon, then towards the setting sun (where Complementary's light shafts show).
+			String[][] shaderShots = {{"pack_wb_shader_1", "worldbosses:shadow_weaver", "6000", "0"}, {"pack_wb_sunset_1", "worldbosses:shadow_weaver", "12300", "90"},
+				{"pack_wb_sunset_2", "worldbosses:varkhul", "12300", "90"}, {"pack_wb_sunset_3", "worldbosses:astrael", "12300", "90"}};
+
+			for (String[] shot : shaderShots) {
 				singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..40]");
+				singleplayer.getServer().runCommand("time set " + shot[2]);
+				singleplayer.getServer().runCommand("execute as @a at @s run tp @s ~ ~ ~ " + shot[3] + " -8");
+				singleplayer.getServer().runCommand("execute as @a at @s rotated ~ 0 run fill ^-6 ^ ^1 ^6 ^5 ^10 air");
 				Shot fight = fight(shot[0], shot[1]);
 
 				for (int i = 0; i < fight.commands().length; i++) {
@@ -197,6 +203,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				context.waitTicks(100);
 				context.takeScreenshot(shot[0]);
 			}
+
 			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
 		}
 	}

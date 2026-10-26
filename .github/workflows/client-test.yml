@@ -329,11 +329,11 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: World Bosses fight, no shader
-        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_1 12
-      - name: World Bosses fight 1, shader on
+      - name: World Bosses fight, shader on (noon)
         run: python3 .github/scripts/emit_screenshot.py shots pack_wb_shader_1 12
-      - name: World Bosses fight 2, shader on
-        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_shader_2 12
-      - name: World Bosses fight 3, shader on
-        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_shader_3 12
+      - name: World Bosses fight 1, shader on, towards the setting sun
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_sunset_1 12
+      - name: World Bosses fight 2, shader on, towards the setting sun
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_sunset_2 12
+      - name: World Bosses fight 3, shader on, towards the setting sun
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_sunset_3 12

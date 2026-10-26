@@ -24,7 +24,7 @@ import com.freshorangeslices.bloomlevelup.client.ClientPackets;
  */
 public final class BloomNetwork {
 	/** Bump when any message's shape changes. */
-	private static final String PROTOCOL = "3";
+	private static final String PROTOCOL = "4";
 
 	/**
 	 * A Bloom server needs Bloom on the client (same protocol). A client with Bloom can still join servers without it:

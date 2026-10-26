@@ -99,6 +99,16 @@ public final class ClientSmokeTest {
 		step("sheet shot", always(), 40, mc -> shot(mc, "sheet_combat"));
 		step("sheet details", always(), 0, mc -> ((HubScreen) mc.screen).sheetForTests(true, null));
 		step("sheet details shot", always(), 30, mc -> shot(mc, "sheet_combat_details"));
+		// The Armor sheet, hit by a netherite sword with Sharpness V and Strength II (its attackers wrap onto two rows).
+		step("armor sheet", always(), 0, mc -> {
+			ClientBloomState.selectCategory(SkillXp.ARMOR);
+			HubScreen hub = new HubScreen();
+			mc.setScreen(hub);
+			hub.openSheetForTests();
+		});
+		step("armor sheet attacker", always(), 30, mc -> ((HubScreen) mc.screen).sheetTargetForTests(5));
+		step("armor sheet shot", mc -> ClientBloomState.sheet() != null && ClientBloomState.sheet().gauge().is(Items.NETHERITE_SWORD), 10,
+				mc -> shot(mc, "sheet_armor"));
 		step("details", always(), 0, mc -> {
 			HubScreen hub = new HubScreen();
 			mc.setScreen(hub);
@@ -125,7 +135,16 @@ public final class ClientSmokeTest {
 		step("anvil shot", always(), 10, mc -> shot(mc, "anvil"));
 		// The HUD with Brace! on, Bloodlust and Predator bars, and a thrown sword hanging in front (its renderer).
 		step("hud", always(), 0, ClientSmokeTest::hudScene);
-		step("hud shot", always(), 15, mc -> shot(mc, "hud"));
+		step("hud shot", always(), 15, mc -> {
+			String icons = com.freshorangeslices.bloomlevelup.client.gui.BloomHud.iconsForTests();
+			com.freshorangeslices.bloomlevelup.BloomLevelUp.LOGGER.info("BLOOMTEST hud icons: {}", icons);
+
+			if (!icons.contains("predator×2") || !icons.contains("bloodlust×3") || !icons.contains("brace")) {
+				FAILURES.add("the HUD icons were '" + icons + "'");
+			}
+
+			shot(mc, "hud");
+		});
 		step("quit", always(), 10, ClientSmokeTest::finish);
 	}
 

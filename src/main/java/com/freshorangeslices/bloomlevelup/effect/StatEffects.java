@@ -63,6 +63,9 @@ public final class StatEffects {
 	public static final ModifierId TITAN_SPEED_MOD = ModifierId.of("major/titan_hide_speed");
 	public static final ModifierId PROTEIN_MOD = ModifierId.of("major/protein");
 	public static final ModifierId HEAVY_KNOCKBACK_MOD = ModifierId.of("major/fitting_armor_heavy");
+	public static final ModifierId WISDOM_HASTE_MOD = ModifierId.of("stat/wisdom_spell_haste");
+	/** Spell Power's spell haste (the RPG Series): faster casting and shorter spell cooldowns. Absent without it. */
+	private static final net.minecraft.resources.ResourceLocation SPELL_HASTE = new net.minecraft.resources.ResourceLocation("spell_power", "haste");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	public static final double POWER_PER_POINT = 0.06;
@@ -161,7 +164,7 @@ public final class StatEffects {
 			defenseArmor = (defenseArmor + 2.0) * 2.0;
 		}
 
-		return List.of(
+		List<HeldModifier> modifiers = new java.util.ArrayList<>(List.of(
 				new HeldModifier(Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADDITION),
 				new HeldModifier(Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADDITION),
 				new HeldModifier(Attributes.MAX_HEALTH, VITALITY_MOD, StatFormulas.vitalityBonusHealth(service.statValue(profile, VITALITY)),
@@ -176,7 +179,16 @@ public final class StatEffects {
 				new HeldModifier(Attributes.MOVEMENT_SPEED, SPEED_MOD, service.statValue(profile, SPEED) / 100.0,
 						AttributeModifier.Operation.MULTIPLY_BASE),
 				// Titan Hide: +50% movement. (Its fall cut is the fall event above; its 2x knockback drawback is in LivingEntityMixin.)
-				new HeldModifier(Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.MULTIPLY_BASE));
+				new HeldModifier(Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.MULTIPLY_BASE)));
+
+		// Wisdom: +0.5% spell haste per point when Spell Power is installed (+50% at 100).
+		if (net.minecraftforge.registries.ForgeRegistries.ATTRIBUTES.containsKey(SPELL_HASTE)) {
+			modifiers.add(new HeldModifier(net.minecraftforge.registries.ForgeRegistries.ATTRIBUTES.getValue(SPELL_HASTE), WISDOM_HASTE_MOD,
+					StatFormulas.wisdomSpellHaste(service.statValue(profile, com.freshorangeslices.bloomlevelup.skill.misc.MiscIds.WISDOM)),
+					AttributeModifier.Operation.ADDITION));
+		}
+
+		return modifiers;
 	}
 
 	/**

@@ -26,6 +26,8 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 	private double startY;
 	/** Damage multiplier of a Charged Throw (1 for a normal throw). */
 	private float damageMultiplier = 1.0F;
+	/** The hotbar slot it was thrown from (it comes back there if that's still free), or -1. */
+	private int originSlot = -1;
 
 	public ThrownWeapon(EntityType<? extends ThrownWeapon> type, Level level) {
 		super(type, level);
@@ -40,6 +42,7 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 		thrown.startY = thrown.getY();
 		thrown.pickup = owner instanceof Player player && player.getAbilities().instabuild ? AbstractArrow.Pickup.CREATIVE_ONLY
 				: AbstractArrow.Pickup.ALLOWED;
+		thrown.originSlot = owner instanceof Player player ? player.getInventory().selected : -1;
 		thrown.makeLoyal();
 		return thrown;
 	}
@@ -75,12 +78,14 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putFloat("bloom_damage_multiplier", damageMultiplier);
+		tag.putInt("bloom_origin_slot", originSlot);
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 		damageMultiplier = tag.contains("bloom_damage_multiplier") ? Math.max(1.0F, tag.getFloat("bloom_damage_multiplier")) : 1.0F;
+		originSlot = tag.contains("bloom_origin_slot") ? tag.getInt("bloom_origin_slot") : -1;
 		makeLoyal();
 		startY = this.getY();
 		this.getEntityData().set(DATA_ITEM, weapon().copy());
@@ -110,6 +115,42 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 	/** Whether it's stuck in a block (the renderer stops its spin). */
 	public boolean stuck() {
 		return this.inGround;
+	}
+
+	/**
+	 * Coming back to its thrower: into the slot it was thrown from if that's free, else any free slot, else it drops at
+	 * their feet and never despawns (vanilla would leave it hovering inside them until a slot frees up).
+	 */
+	@Override
+	protected boolean tryPickup(Player player) {
+		if (this.pickup == AbstractArrow.Pickup.ALLOWED && this.isNoPhysics() && this.ownedBy(player)) {
+			returnTo(player);
+			return true;
+		}
+
+		return super.tryPickup(player);
+	}
+
+	/** Puts the weapon back with its thrower (see {@link #tryPickup}); returns where it went: "slot", "inventory" or "dropped". */
+	public String returnTo(Player player) {
+		ItemStack stack = this.getPickupItem();
+		net.minecraft.world.entity.player.Inventory inventory = player.getInventory();
+
+		if (originSlot >= 0 && originSlot < 9 && inventory.getItem(originSlot).isEmpty()) {
+			inventory.setItem(originSlot, stack);
+			return "slot";
+		}
+
+		if (inventory.add(stack) && stack.isEmpty()) {
+			return "inventory";
+		}
+
+		net.minecraft.world.entity.item.ItemEntity dropped = new net.minecraft.world.entity.item.ItemEntity(this.level(), player.getX(), player.getY(),
+				player.getZ(), stack);
+		dropped.setNoPickUpDelay();
+		dropped.setUnlimitedLifetime();
+		this.level().addFreshEntity(dropped);
+		return "dropped";
 	}
 
 	/** How far it has dropped since it was thrown (Death From Above's bonus). */

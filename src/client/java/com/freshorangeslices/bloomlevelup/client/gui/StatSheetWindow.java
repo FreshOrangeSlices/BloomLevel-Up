@@ -283,11 +283,18 @@ final class StatSheetWindow {
 		if (view != null && !view.targets().isEmpty()) {
 			Component label = Component.translatable(category.equals(SkillXp.ARMOR) ? "bloom.sheet.ui.incoming" : "bloom.sheet.ui.target");
 			g.text(font, label, x0 + 8, y + 3, LABEL);
-			int cx = x0 + 12 + font.width(label);
+			int left = x0 + 12 + font.width(label);
+			int cx = left;
 
 			for (int i = 0; i < view.targets().size(); i++) {
 				Component name = view.targets().get(i);
 				int index = i;
+
+				// The Armor sheet's attackers don't fit one row: the rest go on the next, from the left edge.
+				if (cx > left && cx + chipWidth(font, name) > x0 + w - 8) {
+					cx = x0 + 8;
+					y += CHIP_H + 3;
+				}
 				cx = chip(g, font, cx, y, name, i == view.target(), mouseX, mouseY, () -> pickTarget(index), null) + 3;
 			}
 
@@ -783,6 +790,10 @@ final class StatSheetWindow {
 
 	void pickSlotForTests(int pick) {
 		pickSlot(pick);
+	}
+
+	void pickTargetForTests(int index) {
+		pickTarget(index);
 	}
 
 	void otherBuildForTests() {

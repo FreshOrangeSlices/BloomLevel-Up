@@ -20,8 +20,8 @@ Stat
  | 100-point target
  | 
 Wisdom
- | Multiplies the player’s vanilla XP reward from collected XP. Does not multiply automatic Misc XP.
- | About 5x vanilla XP gain at 100. First-pass linear target: 1x at 0, 3x at 50, 5x at 100.
+ | Multiplies the player’s vanilla XP reward from collected XP. Does not multiply automatic Misc XP. With a spell mod (Spell Power, from the RPG Series) it also gives spell haste: faster casting and shorter spell cooldowns.
+ | About 5x vanilla XP gain at 100. First-pass linear target: 1x at 0, 3x at 50, 5x at 100. Spell haste +0.5% per point (+50% at 100).
  | 
 Speed
  | General player movement-speed increase.

@@ -477,6 +477,53 @@ public final class CombatGameTests {
 		helper.succeed();
 	}
 
+	/** Another mod's item cooldown on the weapon (the RPG Series' weapon skills) doesn't stop a Catch! throw. */
+	@GameTest(template = "empty")
+	public static void otherModsCooldownsDontBlockBloomSkills(GameTestHelper helper) {
+		ServerPlayer thrower = player(helper, new ItemStack(Items.IRON_AXE));
+		grant(thrower, CombatIds.LIGHTNING_SHOCK, CombatIds.CATCH);
+		thrower.getCooldowns().addCooldown(thrower.getMainHandItem().getItem(), 200);
+		helper.assertTrue(CombatAbilities.throwForTests(thrower, false), "Thrown though the axe is on its item cooldown");
+		helper.getLevel().getEntitiesOfClass(ThrownWeapon.class, thrower.getBoundingBox().inflate(4.0)).forEach(net.minecraft.world.entity.Entity::discard);
+		helper.succeed();
+	}
+
+	/** A Catch! throw comes back into the slot it left, else any free slot, else it drops at the thrower's feet for good. */
+	@GameTest(template = "empty")
+	public static void thrownWeaponsComeBackSomewhere(GameTestHelper helper) {
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		player.getInventory().selected = 2;
+		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_AXE));
+		ThrownWeapon first = ThrownWeapon.create(helper.getLevel(), player, takeHeld(player));
+		TestPlayers.equal(helper, "slot", first.returnTo(player), "Its slot was free");
+		helper.assertTrue(player.getInventory().getItem(2).is(Items.IRON_AXE), "Back in slot 3");
+
+		ThrownWeapon second = ThrownWeapon.create(helper.getLevel(), player, takeHeld(player));
+		player.getInventory().setItem(2, new ItemStack(Items.DIRT));
+		TestPlayers.equal(helper, "inventory", second.returnTo(player), "Its slot was taken: any free slot");
+
+		for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+			if (player.getInventory().getItem(i).isEmpty()) {
+				player.getInventory().setItem(i, new ItemStack(Items.DIRT));
+			}
+		}
+
+		ThrownWeapon third = ThrownWeapon.create(helper.getLevel(), player, new ItemStack(Items.IRON_SWORD));
+		TestPlayers.equal(helper, "dropped", third.returnTo(player), "A full inventory: it drops");
+		List<net.minecraft.world.entity.item.ItemEntity> drops = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+				player.getBoundingBox().inflate(2.0), item -> item.getItem().is(Items.IRON_SWORD));
+		helper.assertTrue(drops.size() == 1, "The sword lies at the thrower's feet");
+		drops.forEach(net.minecraft.world.entity.Entity::discard);
+		helper.succeed();
+	}
+
+	/** The held stack, taken out of the hand (as a throw does). */
+	private static ItemStack takeHeld(ServerPlayer player) {
+		ItemStack held = player.getMainHandItem().copy();
+		player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+		return held;
+	}
+
 	@GameTest(template = "empty")
 	public static void thrownWeaponsHitForTheirOwnDamage(GameTestHelper helper) {
 		ServerPlayer player = player(helper, ItemStack.EMPTY);
@@ -623,7 +670,9 @@ public final class CombatGameTests {
 		ItemStack trident = player.getMainHandItem();
 		int single = (int) Math.ceil(trident.getMaxDamage() * BloomServices.config().lightningSummonCostRatio);
 		helper.assertTrue(trident.getDamageValue() > single, "It costs more than one bolt: " + trident.getDamageValue());
-		helper.assertTrue(player.getCooldowns().isOnCooldown(trident.getItem()), "Then a cooldown");
+		helper.assertTrue(CombatAbilities.coolingDown(player, com.freshorangeslices.bloomlevelup.network.BloomPayloads.Meter.LIGHTNING_SUMMON),
+				"Then a cooldown (Bloom's own, not the trident's)");
+		helper.assertFalse(player.getCooldowns().isOnCooldown(trident.getItem()), "Not the trident's item cooldown (other mods' skills use that)");
 	}
 
 	@GameTest(template = "empty")

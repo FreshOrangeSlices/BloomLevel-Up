@@ -39,7 +39,7 @@ public final class StatSheets {
 	/** Requests a player may send per second (the hub asks once a second, and again on every click). */
 	private static final int PER_SECOND = 20;
 	/** Lines where a smaller number is the better one (health lost, waiting times). */
-	private static final Set<String> LOWER_IS_BETTER = Set.of("bloom.sheet.armor.step.health", "bloom.sheet.combat.cooldown",
+	private static final Set<String> LOWER_IS_BETTER = Set.of("bloom.sheet.armor.step.health", "bloom.sheet.armor.lost", "bloom.sheet.combat.cooldown",
 			"bloom.sheet.combat.load_time", "bloom.sheet.combat.draw_time", "bloom.sheet.utility.break_time");
 	private static final Pattern NUMBER = Pattern.compile("-?\\d+(?:\\.\\d+)?");
 	private static final Map<UUID, long[]> BUDGET = new HashMap<>();

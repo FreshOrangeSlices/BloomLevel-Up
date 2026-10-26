@@ -772,8 +772,8 @@ public final class CombatSkill {
 				(float) Math.max(0.5, 1.2 - 0.15 * outer));
 	}
 
-	/** A stacking meter on the player's HUD (Bloodlust right of the hotbar, Predator and Combo left of it). */
-	private static void sendMeter(ServerPlayer player, int kind, int stacks, float bonus, int ticks) {
+	/** One of the player's HUD meters (Bloodlust, Predator, Combo stacks; Bloom's skill cooldowns). */
+	static void sendMeter(ServerPlayer player, int kind, int stacks, float bonus, int ticks) {
 		BloomNetwork.send(player, new BloomPayloads.Meter(kind, stacks, bonus, ticks, ticks));
 	}
 

@@ -16,8 +16,8 @@ import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.CombatAction;
 
 /**
- * Item-icon buttons stacked under the Skill Hub button outside the inventory: Hoarder's Pocket (a chest) and
- * Rune Embedding (an enchanted book). They only ask; the server opens the screen or says why not.
+ * Item-icon buttons beside the Skill Hub button outside the inventory: Hoarder's Pocket (a chest) and Rune Embedding
+ * (an enchanted book). They only ask; the server opens the screen or says why not.
  */
 public final class SideButton extends AbstractButton {
 	private static final int SIZE = 20;
@@ -58,17 +58,30 @@ public final class SideButton extends AbstractButton {
 		}
 	}
 
-	/** Survival inventory: stacked above the off-hand slot. Creative: under the hub button outside the panel. */
+	/**
+	 * Survival inventory: Bloom's row just under the panel's bottom-right corner, right to left (the hub button at the
+	 * right end), clear of what accessory mods put beside the player. Creative: under the hub button outside the panel.
+	 */
 	private void reposition() {
 		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
 
 		if (screen instanceof net.minecraft.client.gui.screens.inventory.InventoryScreen) {
-			this.setX(accessor.bloomlevelup$leftPos() + 76);
-			this.setY(accessor.bloomlevelup$topPos() + 62 - this.row * (SIZE + 2));
+			this.setX(rowX(accessor, this.row));
+			this.setY(rowY(accessor));
 		} else {
 			this.setX(accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2);
 			this.setY(accessor.bloomlevelup$topPos() + 4 + this.row * (SIZE + 2));
 		}
+	}
+
+	/** X of place {@code index} in Bloom's row under the survival inventory (0 = the right end). */
+	static int rowX(AbstractContainerScreenAccessor accessor, int index) {
+		return accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() - SIZE - index * (SIZE + 2);
+	}
+
+	/** Y of Bloom's row: just under the survival inventory's panel. */
+	static int rowY(AbstractContainerScreenAccessor accessor) {
+		return accessor.bloomlevelup$topPos() + accessor.bloomlevelup$imageHeight() + 2;
 	}
 
 	@Override

@@ -159,7 +159,9 @@ public final class BloomPayloads {
 		public static final int BLOODLUST = 0;
 		public static final int PREDATOR = 1;
 		public static final int COMBO = 2;
-		public static final int KINDS = 3;
+		/** Bloom's own skill cooldown (Forge 1.20.1 build: no mace, so no Wind Impact meter). */
+		public static final int LIGHTNING_SUMMON = 3;
+		public static final int KINDS = 4;
 		public static Meter read(FriendlyByteBuf buf) {
 			return new Meter(buf.readVarInt(), buf.readVarInt(), buf.readFloat(), buf.readVarInt(), buf.readVarInt());
 		}

@@ -53,6 +53,13 @@ class PackDefaultsTest {
 	}
 
 	@Test
+	void forgesModResourcesStayUnderThePacks() {
+		List<String> options = PackDefaults.lines("resourcePacks:[\"vanilla\",\"file/Mine.zip\",\"mod_resources\"]");
+		List<String> out = PackDefaults.mergeOptions(options, List.of("file/FA.zip"));
+		assertEquals(List.of("resourcePacks:[\"vanilla\",\"mod_resources\",\"file/FA.zip\",\"file/Mine.zip\"]"), out);
+	}
+
+	@Test
 	void writesAnOptionsFileFromNothing() {
 		List<String> out = PackDefaults.mergeOptions(new ArrayList<>(), List.of("file/FA.zip"));
 		assertEquals(List.of("resourcePacks:[\"vanilla\",\"file/FA.zip\"]"), out);

@@ -1,27 +1,29 @@
-"""Builds the Bloom Pack for sharing with friends: a Modrinth pack file (.mrpack) and a ready-to-run server folder.
+"""Builds the Forge 1.20.1 Bloom Pack for sharing with friends: a Modrinth pack file (.mrpack) and a ready-to-run server
+folder.
 
 Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--client-run <dir>] [--without <slug,slug>]
 
-Reads pack/pack.json. Modrinth mods are linked (newest 26.3 Fabric build, plus every required dependency); Bloom
-and the external (CurseForge-only) files are packed inside, which is fine for a private share but not for
-publishing. Every jar is downloaded and checked: each mod's required mod ids have to be in the pack (on the client
-and on the server), or the build fails. Prints a summary as GitHub annotations.
+Reads pack/pack.json. Modrinth mods are linked (newest 1.20.1 Forge build, plus every required dependency); Bloom is
+packed inside, which is fine for a private share but not for publishing. Every jar is downloaded and checked: each
+mod's mandatory mod ids (from its META-INF/mods.toml) have to be in the pack, on the client and on the server, or the
+build fails. Prints a summary as GitHub annotations.
 
-The server zip is a whole server folder: the Fabric server launcher, mods, datapacks (in world/datapacks),
-start.bat / start.sh, server.properties and an eula.txt to accept. On a host like Shockbyte only its mods and world
-folders are uploaded.
+The server zip is a whole server folder: the Forge installer (start.bat / start.sh install Forge on the first start,
+then run it), mods, start scripts, server.properties and an eula.txt to accept. On a host like Shockbyte only its mods
+folder is uploaded.
 
---client-run fills a dev client's run folder with the pack's client side (mods except Fabric API and Bloom, which
-the dev run has already, plus resource packs, shaders and the first-launch settings) for the pack launch test.
---without leaves those Modrinth projects out (to test the pack without a suspect).
+--client-run fills a game folder with the pack's client side (every client mod including Bloom, resource packs and
+the first-launch settings) for the pack launch test. --without leaves those Modrinth projects out.
 """
 import hashlib
 import io
 import json
 import os
+import re
 import shutil
 import sys
 import time
+import tomllib
 import urllib.parse
 import urllib.request
 import zipfile
@@ -29,21 +31,35 @@ import zipfile
 API = "https://api.modrinth.com/v2"
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up pack builder (github actions)"}
 FOLDERS = {"mod": "mods", "resourcepack": "resourcepacks", "shader": "shaderpacks", "datapack": "datapacks"}
-# Mod ids every Fabric 26.3 setup has.
-BUILT_IN = {"minecraft", "java", "fabricloader", "fabric-loader", "mixinextras"}
+# Mod ids every Forge 1.20.1 setup has.
+BUILT_IN = {"minecraft", "forge", "javafml", "lowcodefml", "mcp"}
 HEAP = "5G"  # what a 6 GB host leaves for Minecraft (the boot test uses the same)
 
 START_BAT = f"""@echo off
-rem Bloom Pack server. Needs Java 25 or newer (java -version). Close this window or type stop to shut it down.
+rem Bloom Pack server (Forge 1.20.1). Needs Java 17 (java -version). Type stop to shut it down.
 cd /d "%~dp0"
-java -Xms2G -Xmx{HEAP} -jar fabric-server.jar nogui
+if not exist run.bat (
+  echo First start: installing Forge, this needs internet and takes a minute...
+  java -jar forge-installer.jar --installServer
+  if errorlevel 1 goto failed
+)
+findstr /b /c:"-Xmx" user_jvm_args.txt >nul 2>&1 || echo -Xmx{HEAP}>> user_jvm_args.txt
+call run.bat nogui
+goto :eof
+:failed
+echo Installing Forge failed (is Java 17 installed, and is the internet on?)
 pause
 """
 
 START_SH = f"""#!/bin/sh
-# Bloom Pack server. Needs Java 25 or newer (java -version). Type stop to shut it down.
+# Bloom Pack server (Forge 1.20.1). Needs Java 17 (java -version). Type stop to shut it down.
 cd "$(dirname "$0")"
-exec java -Xms2G -Xmx{HEAP} -jar fabric-server.jar nogui "$@"
+if [ ! -f run.sh ]; then
+  echo "First start: installing Forge, this needs internet and takes a minute..."
+  java -jar forge-installer.jar --installServer || exit 1
+fi
+grep -q '^-Xmx' user_jvm_args.txt 2>/dev/null || echo "-Xmx{HEAP}" >> user_jvm_args.txt
+exec sh run.sh nogui "$@"
 """
 
 EULA = """# Change false to true to agree to Minecraft's EULA (https://aka.ms/MinecraftEULA). The server won't start until you do.
@@ -51,7 +67,7 @@ eula=false
 """
 
 # Only what the pack needs; the server fills in every other setting on its first start.
-SERVER_PROPERTIES = """motd=Bloom Pack
+SERVER_PROPERTIES = """motd=Bloom Pack (Forge 1.20.1)
 view-distance=10
 simulation-distance=8
 max-players=10
@@ -60,17 +76,17 @@ spawn-protection=0
 allow-flight=true
 """
 
-README = """Bloom Pack server
+README = """Bloom Pack server (Forge 1.20.1)
 
 On your own PC
-1. Install Java 25 or newer (for example Eclipse Temurin 25 from adoptium.net). "java -version" in a terminal shows which one you have.
+1. Install Java 17 (for example Eclipse Temurin 17 from adoptium.net). "java -version" in a terminal shows which one you have.
 2. Open eula.txt and change false to true.
-3. Double-click start.bat (Windows) or run ./start.sh (Mac/Linux). The first start downloads Minecraft's server and builds the world.
+3. Double-click start.bat (Windows) or run ./start.sh (Mac/Linux). The first start installs Forge (it needs internet for that), then builds the world.
 4. Friends join with your public IP and port 25565 (forward TCP 25565 on your router to this PC).
-   It starts with 5 GB of memory: change -Xmx5G in start.bat if your PC needs it lower.
+   It starts with 5 GB of memory: change -Xmx5G in user_jvm_args.txt if your PC needs it lower.
 
 On a host (Shockbyte and similar)
-Set the server type to Fabric for Minecraft 26.3, then upload the mods folder and the world folder (it holds the datapacks).
+Set the server type to Forge 1.20.1 (version 47.3.0 or newer), then upload the mods folder.
 allow-flight=true and the other lines in server.properties are worth copying into the host's settings.
 """
 
@@ -116,41 +132,60 @@ def loader_for(project):
     if kind == "resourcepack":
         return "minecraft"
     if kind == "shader":
-        return "iris"
-    if kind == "datapack" or ("fabric" not in project.get("loaders", []) and "datapack" in project.get("loaders", [])):
+        return "oculus"
+    if kind == "datapack" or ("forge" not in project.get("loaders", []) and "datapack" in project.get("loaders", [])):
         return "datapack"
-    return "fabric"
+    return "forge"
+
+
+def read_toml(text):
+    """A mods.toml as a dict. A few mods ship TOML that isn't quite valid; then just the ids and dependencies."""
+    try:
+        return tomllib.loads(text)
+    except tomllib.TOMLDecodeError:
+        mods = [{"modId": m} for m in re.findall(r'^\s*modId\s*=\s*"([^"]+)"', text, re.M)]
+        return {"mods": mods[:1], "dependencies": {}}
 
 
 def mod_ids(data):
-    """Mod ids a jar provides (its own, 'provides', and every jar nested inside it), and its required mod ids."""
+    """
+    Mod ids a jar provides (its own and every jar nested inside it, Forge's jar-in-jar), and the mod ids it needs, by
+    side: {mod id: "BOTH" | "CLIENT" | "SERVER"}.
+    """
     provided, depends = set(), {}
     try:
         archive = zipfile.ZipFile(io.BytesIO(data))
     except zipfile.BadZipFile:
         return provided, depends
     with archive:
-        if "fabric.mod.json" in archive.namelist():
+        names = set(archive.namelist())
+        if "META-INF/mods.toml" in names:
+            meta = read_toml(archive.read("META-INF/mods.toml").decode("utf-8", "replace"))
+            own = [mod.get("modId") for mod in meta.get("mods", []) if mod.get("modId")]
+            provided.update(own)
+            for owner, entries in (meta.get("dependencies") or {}).items():
+                if owner not in own or not isinstance(entries, list):
+                    continue
+                for entry in entries:
+                    mandatory = entry.get("mandatory", entry.get("type", "required") == "required")
+                    if mandatory is True or mandatory == "true":
+                        depends[entry.get("modId")] = str(entry.get("side", "BOTH")).upper()
+        if "META-INF/jarjar/metadata.json" in names:
             try:
-                meta = json.loads(archive.read("fabric.mod.json").decode("utf-8", "replace"), strict=False)
+                nested = json.loads(archive.read("META-INF/jarjar/metadata.json")).get("jars", [])
             except ValueError:
-                return provided, depends
-            provided.add(meta.get("id"))
-            provided.update(meta.get("provides", []))
-            for key, value in (meta.get("depends") or {}).items():
-                depends[key] = value
-            for nested in meta.get("jars", []):
-                path = nested.get("file") if isinstance(nested, dict) else None
-                if path and path in archive.namelist():
+                nested = []
+            for jar in nested:
+                path = jar.get("path")
+                if path in names:
                     inner, _ = mod_ids(archive.read(path))
                     provided.update(inner)
     return provided, depends
 
 
-def server_launcher(game, loader):
-    installers = http("https://meta.fabricmc.net/v2/versions/installer")
-    installer = next(v["version"] for v in installers if v.get("stable"))
-    return http(f"https://meta.fabricmc.net/v2/versions/loader/{game}/{loader}/{installer}/server/jar", binary=True)
+def forge_installer(game, forge):
+    version = f"{game}-{forge}"
+    return http(f"https://maven.minecraftforge.net/net/minecraftforge/forge/{version}/forge-{version}-installer.jar", binary=True)
 
 
 def main():
@@ -171,20 +206,17 @@ def main():
     game = spec["minecraft"]
     files, notes, problems = [], [], []
     by_slug = {}
-    # Server-only content mods (structures) go on the client too, so singleplayer worlds have them; their
-    # dependencies with them.
-    singleplayer_too = set(spec.get("singleplayer_too", []))
     spec["modrinth"] = [slug for slug in spec["modrinth"] if slug not in without]
     presets = spec.setdefault("client_presets", {})
     presets["resource_packs"] = [slug for slug in presets.get("resource_packs", []) if slug not in without]
     if without:
         notes.append("left out: " + ", ".join(sorted(without)))
-    queue = [(slug, None, slug in singleplayer_too) for slug in spec["modrinth"]]
+    queue = [(slug, None) for slug in spec["modrinth"]]
     seen = set()
 
     # ---- Modrinth: each listed project and its required dependencies
     while queue:
-        ref, wanted_version, client_too = queue.pop(0)
+        ref, wanted_version = queue.pop(0)
         project = api(f"/project/{ref}")
         if project is None:
             problems.append(f"Modrinth project {ref} not found")
@@ -193,20 +225,18 @@ def main():
             continue
         seen.add(project["id"])
         version = api(f"/version/{wanted_version}") if wanted_version else None
-        if version is None or game not in version.get("game_versions", []):
+        if version is None or game not in version.get("game_versions", []) or (
+                loader_for(project) == "forge" and "forge" not in version.get("loaders", [])):
             version = newest_version(project, game, loader_for(project))
         if version is None:
-            problems.append(f"{project['title']} ({project['slug']}) has no {game} build")
+            problems.append(f"{project['title']} ({project['slug']}) has no {game} {loader_for(project)} build")
             continue
         file = next((f for f in version["files"] if f.get("primary")), version["files"][0])
-        # A datapack-only project (no Fabric jar) is a zip for a world's datapacks folder, whatever its type says.
-        datapack = loader_for(project) == "datapack" or ("datapack" in version.get("loaders", []) and "fabric" not in version.get("loaders", []))
+        datapack = loader_for(project) == "datapack"
         folder = "datapacks" if datapack else FOLDERS.get(project.get("project_type"), "mods")
         env = {"client": side(project.get("client_side")), "server": side(project.get("server_side"))}
         if folder != "mods":
             env = {"client": "required", "server": "unsupported"}
-        if client_too and folder == "mods":
-            env["client"] = "required"
         env.update(spec.get("env_overrides", {}).get(project["slug"], {}))
         entry = {
             "slug": project["slug"], "title": project["title"], "version": version["version_number"], "type": version["version_type"],
@@ -217,7 +247,7 @@ def main():
         by_slug[project["slug"]] = entry
         for dependency in version.get("dependencies", []):
             if dependency.get("dependency_type") == "required" and dependency.get("project_id"):
-                queue.append((dependency["project_id"], dependency.get("version_id"), client_too))
+                queue.append((dependency["project_id"], dependency.get("version_id")))
 
     # ---- download every jar: checks the hashes, and the server zip needs them anyway
     jars = {}
@@ -227,31 +257,13 @@ def main():
             problems.append(f"{entry['title']}: sha1 mismatch")
         jars[entry["path"]] = data
 
-    # ---- Bloom and the external files: packed inside (overrides)
+    # ---- Bloom: packed inside (overrides)
     overrides = {}
     bloom_name = os.path.basename(bloom_jar)
     overrides[f"mods/{bloom_name}"] = open(bloom_jar, "rb").read()
     sides = {f"mods/{bloom_name}": {"client": "required", "server": "required"}}
-    for external in spec.get("external", []):
-        if external["name"].lower().replace(" ", "-") in without:
-            continue
-        data = None
-        for url in external["urls"]:
-            try:
-                data = http(url, binary=True)
-            except RuntimeError:
-                data = None
-            if data and data[:2] == b"PK":
-                break
-            data = None
-        if data is None:
-            notes.append(f"{external['name']} couldn't be downloaded here: add {external['file']} to the mods folder by hand ({external['page']})")
-            continue
-        path = f"mods/{external['file']}"
-        overrides[path] = data
-        sides[path] = {"client": external["client"], "server": external["server"]}
 
-    # ---- every mod's required mods have to be in the pack, on each side
+    # ---- every mod's mandatory mods have to be in the pack, on each side
     for where in ("client", "server"):
         present = {path: data for path, data in jars.items()
                    if next(e for e in files if e["path"] == path)["env"][where] != "unsupported" and path.startswith("mods/")}
@@ -260,33 +272,27 @@ def main():
         for path, data in present.items():
             ids, depends = mod_ids(data)
             provided |= ids
-            for mod_id in depends:
-                needs.setdefault(mod_id, []).append(os.path.basename(path))
+            for mod_id, needed_on in depends.items():
+                if needed_on in ("BOTH", where.upper()):
+                    needs.setdefault(mod_id, []).append(os.path.basename(path))
         for mod_id, wanted_by in sorted(needs.items()):
             if mod_id not in provided:
                 problems.append(f"{where}: {', '.join(sorted(set(wanted_by)))} need(s) mod id '{mod_id}', which isn't in the pack")
 
-    # ---- first-launch look: the resource packs on (bottom to top) and the shader picked. Not an options.txt (launchers
-    # don't reliably copy one, and it would wipe a player's settings on every update): a defaults file Bloom applies
-    # before the game starts, once per change (config/PackDefaults.java). In overrides, so every install gets it.
-    client_overrides = {}
+    # ---- first-launch look: the resource packs on (bottom to top). Not an options.txt (launchers don't reliably copy
+    # one, and it would wipe a player's settings on every update): a defaults file Bloom applies just before the game
+    # reads its options, once per change (config/PackDefaults.java, client/mixin/OptionsMixin). In overrides, so every
+    # install gets it.
     pack_defaults = {}
-    presets = spec.get("client_presets", {})
     packs = [s[3:] if s.startswith("id:") else f"file/{os.path.basename(by_slug[s]['path'])}"
              for s in presets.get("resource_packs", []) if s.startswith("id:") or s in by_slug]
-    shader = presets.get("shader")
-    lines = ["# Bloom Pack: switched on by Bloom Level-Up before the game starts, once per change of this file."]
+    lines = ["# Bloom Pack: switched on by Bloom Level-Up before the game reads its options, once per change of this file."]
     if packs:
         lines.append("resourcePacks=" + "|".join(packs))
-    if shader in by_slug:
-        lines.append("shaderPack=" + os.path.basename(by_slug[shader]["path"]))
     if presets.get("keys"):
         lines.append("keys=" + "|".join(f"{name}:{key}" for name, key in presets["keys"].items()))
     if len(lines) > 1:
         pack_defaults["config/bloomlevelup/pack-defaults.properties"] = ("\n".join(lines) + "\n").encode()
-    # Other client config files, as given (a JSON object is written as JSON). A mod fills in the settings left out.
-    for path, content in presets.get("files", {}).items():
-        client_overrides[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
     # Config files for both sides (server rules a singleplayer world reads too), as given; in the server zip as well.
     for path, content in spec.get("config_files", {}).items():
         if path.startswith("_"):
@@ -308,36 +314,35 @@ def main():
             "downloads": [e["url"]],
             "fileSize": e["size"],
         } for e in files],
-        "dependencies": {"minecraft": game, "fabric-loader": spec["fabric_loader"]},
+        "dependencies": {"minecraft": game, "forge": spec["forge"]},
     }
-    pack_path = os.path.join(out, f"Bloom Pack {pack_version}.mrpack")
+    pack_path = os.path.join(out, f"Bloom Pack Forge {pack_version}.mrpack")
     with zipfile.ZipFile(pack_path, "w", zipfile.ZIP_DEFLATED) as pack:
         pack.writestr("modrinth.index.json", json.dumps(index, indent=2))
         for path, data in overrides.items():
             folder = "overrides" if sides[path]["server"] != "unsupported" else "client-overrides"
             pack.writestr(f"{folder}/{path}", data)
         for path, data in pack_defaults.items():
-            pack.writestr(f"overrides/{path}", data)
-        for path, data in client_overrides.items():
             pack.writestr(f"client-overrides/{path}", data)
 
-    # ---- the server: a whole folder, ready to start (or its mods and world folders, uploaded to a host)
-    server_path = os.path.join(out, f"Bloom Pack {pack_version} server.zip")
+    # ---- the server: a whole folder, ready to start (or its mods folder, uploaded to a host)
+    server_path = os.path.join(out, f"Bloom Pack Forge {pack_version} server.zip")
     server_mods = []
+    installer = forge_installer(game, spec["forge"])
+    if not installer or installer[:2] != b"PK":
+        problems.append(f"Couldn't download the Forge {game}-{spec['forge']} installer")
+        installer = b""
     with zipfile.ZipFile(server_path, "w", zipfile.ZIP_DEFLATED) as server:
         for entry in files:
             if entry["env"]["server"] != "unsupported" and entry["path"].startswith("mods/"):
                 server.writestr(entry["path"], jars[entry["path"]])
                 server_mods.append(entry["title"])
-            elif entry["datapack"]:
-                server.writestr(f"world/datapacks/{os.path.basename(entry['path'])}", jars[entry["path"]])
-                server_mods.append(f"{entry['title']} (datapack)")
         for path, data in overrides.items():
             if sides[path]["server"] != "unsupported":
                 server.writestr(path, data)
                 if path.startswith("mods/"):
                     server_mods.append(os.path.basename(path))
-        server.writestr("fabric-server.jar", server_launcher(game, spec["fabric_loader"]))
+        server.writestr("forge-installer.jar", installer)
         for name, text in (("start.bat", START_BAT.replace("\n", "\r\n")), ("eula.txt", EULA), ("server.properties", SERVER_PROPERTIES),
                            ("README.txt", README)):
             server.writestr(name, text)
@@ -346,17 +351,17 @@ def main():
         script.compress_type = zipfile.ZIP_DEFLATED
         server.writestr(script, START_SH)
 
-    # ---- the pack launch test: the client side into a dev run folder
+    # ---- the pack launch test: the client side into a game folder
     if client_run:
         for sub in ("mods", "resourcepacks", "shaderpacks", "config"):
             shutil.rmtree(os.path.join(client_run, sub), ignore_errors=True)
             os.makedirs(os.path.join(client_run, sub), exist_ok=True)
         for entry in files:
-            if entry["env"]["client"] != "unsupported" and entry["slug"] != "fabric-api" and not entry["datapack"]:
+            if entry["env"]["client"] != "unsupported" and not entry["datapack"]:
                 with open(os.path.join(client_run, entry["path"]), "wb") as target:
                     target.write(jars[entry["path"]])
-        for path, data in list(overrides.items()) + list(client_overrides.items()) + list(pack_defaults.items()):
-            if path == f"mods/{bloom_name}" or sides.get(path, {}).get("client") == "unsupported":
+        for path, data in list(overrides.items()) + list(pack_defaults.items()):
+            if sides.get(path, {}).get("client") == "unsupported":
                 continue
             os.makedirs(os.path.dirname(os.path.join(client_run, path)) or client_run, exist_ok=True)
             with open(os.path.join(client_run, path), "wb") as target:
@@ -367,7 +372,7 @@ def main():
     lines = [f"{e['title']} ({e['slug']}) {e['version']} [{e['type']}] -> {e['path']} (client {e['env']['client']}, server {e['env']['server']})"
              for e in files]
     lines += [f"packed inside: {path}" for path in overrides]
-    lines += [f"client preset: {path}" for path in list(client_overrides) + list(pack_defaults)]
+    lines += [f"client preset: {path}" for path in pack_defaults]
     text = "\n".join(lines)
     for n in range(0, len(text), 3800):
         print(f"::notice title=pack-contents-{n // 3800:02d}::{esc(text[n:n + 3800])}")

@@ -76,7 +76,8 @@ public final class PackDefaults {
 
 	/**
 	 * options.txt with the pack's resource packs on, in order, above vanilla; packs the player added themselves stay
-	 * on, above the pack's. The old "fabric" entry is dropped (26.3 has no such pack). The list of packs accepted
+	 * on, above the pack's. The old "fabric" entry is dropped (26.3 has no such pack); Forge's "mod_resources" stays
+	 * right above vanilla, under the pack's. The list of packs accepted
 	 * despite a version mismatch is left alone: the game skips a pack for one launch if it's on that list but fits
 	 * the version after all.
 	 */
@@ -99,6 +100,11 @@ public final class PackDefaults {
 		List<String> current = jsonList(value(out, "resourcePacks"));
 		List<String> on = new ArrayList<>();
 		on.add("vanilla");
+
+		if (current.contains("mod_resources")) {
+			on.add("mod_resources");
+		}
+
 		on.addAll(packs);
 
 		for (String pack : current) {

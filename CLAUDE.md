@@ -9,6 +9,7 @@
 - Game tests: `src/gametest/java/**/gametest/forge/` (`@GameTestHolder`, template `bloomlevelup:empty`); the Fabric ones beside them are ported with their chunks.
 - Client: drawing goes through `client/gui/BloomGraphics` (26.3-style calls on 1.20.1's `GuiGraphics`), so GUI code stays close to main's. Client mixins are in `bloomlevelup.forge.client.mixins.json`.
 - Better Combat (1.9.0+1.20.1, optional): `compat/BetterCombat*` and `client/compat/BetterCombatClient*`; no mixins into Better Combat (its swing is recognised by its attack damage modifiers). `-PwithBetterCombat` adds it, Player Animator and Cloth Config to the dev runs; CI's `build` and `client-test` jobs run once without and once with it (matrix `variant`).
+- Forge pack: `pack/` (pack.json, build_pack.py, boot_server.py, launch_test.py) is the Forge 1.20.1 pack (Bloom + Better Combat + Fresh Animations set). CI's `pack` job builds it, boots its server zip, and joins it with a real Forge client (portablemc) whose screenshots `pack-screenshots` prints. The pack's resource packs are switched on by `client/mixin/OptionsMixin` (Forge reads options before mods load).
 - CI's `client-test` job boots a real client on a virtual display (`gametest/forge/client/ClientSmokeTest`, on when `BLOOM_CLIENT_TEST` is set) and screenshots the hub; the `screenshots` jobs print each picture as annotations (`shot-<name>-NN`, base64 JPEG) to rebuild from the checks API.
 
 ## Shared notes (written for main)

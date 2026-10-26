@@ -1,115 +1,35 @@
 {
-  "name": "Bloom Pack",
-  "summary": "Bloom Level-Up with the RPG Series classes, spells and gear, dungeons, bosses, origins, Better Combat, a dodge roll, busier villages, shaders and animations, for Minecraft 26.3 (Fabric).",
-  "minecraft": "26.3",
-  "fabric_loader": "0.19.5",
-  "_comment": "The 'Start with' list (minus Better Animations Collection, which fights Fresh Animations, and Villager Guards, dropped for now) from the Bloom Pack mod list doc, plus Origins: Legacy, Villagers at Work / after Work, Fresh Animations' player extension (with the EMF compat mods it needs next to Not Enough Animations and Better Combat) and the 'Later' picks (Aerial Hell since removed: it crashed with Origins: Legacy): both Moog's structure mods, Homesteads, Ambient Creatures, Wandering Trader Maps and the Cave Horror datapack (server: world/datapacks). Then the RPG Series (Wizards, Paladins & Priests, Archers, Rogues & Warriors, Arsenal, Armory, Jewelry; Spell Engine and the rest come in as their dependencies) and Combat Roll. Structure Pool API says it's server-only, but the RPG mods require it on the client too (singleplayer). GeckoLib is for World Bosses and Fabric Language Kotlin for Villagers at Work (both CurseForge-only). Modrinth mods by slug (newest 26.3 Fabric build; required dependencies are added automatically). External files are packed inside (fine for sharing with friends, not for publishing).",
+  "name": "Bloom Pack (Forge 1.20.1)",
+  "summary": "Bloom Level-Up with Better Combat and Fresh Animations, for Minecraft 1.20.1 (Forge).",
+  "minecraft": "1.20.1",
+  "forge": "47.3.0",
+  "_comment": "The Forge build's pack (FreshOrangeSlices, 2026-10-26): Bloom, Better Combat and the same Fresh Animations set as main's Bloom Pack (Entity Model/Texture Features, Not Enough Animations, Fresh Animations with its Details, Objects, Spiders, Creepers and Player add-ons, and the EMF compat mods that make Better Combat and Not Enough Animations work with them). Modrinth projects by slug (newest 1.20.1 Forge build; required dependencies are added automatically). Bloom is packed inside.",
   "modrinth": [
-    "fabric-api",
-    "sodium",
-    "lithium",
-    "ferrite-core",
-    "immediatelyfast",
-    "entityculling",
-    "dungeons-and-taverns",
-    "ati-structures-fabricforge",
-    "boss-checklist",
-    "iris",
-    "complementary-reimagined",
-    "lambdynamiclights",
-    "continuity",
-    "bettergrassify",
+    "better-combat",
+    "playeranimator",
+    "cloth-config",
     "entity-model-features",
     "entitytexturefeatures",
-    "fresh-animations",
     "not-enough-animations",
-    "better-combat",
-    "cloth-config",
-    "player-animation-library",
-    "villager-names-serilum",
-    "variants-and-ventures",
-    "geckolib",
-    "origins-legacy",
-    "fa-player-extension",
     "not-enough-animations-emf-compat",
     "emf-compat-better-combat",
-    "fabric-language-kotlin",
-    "mss-moogs-soaring-structures",
-    "mes-moogs-end-structures",
-    "homesteads",
-    "ambient-creatures",
-    "wandering-trader-maps",
-    "cave-horror-datapack",
+    "fresh-animations",
     "fresh-animations-details",
     "fresh-animations-objects",
     "fresh-animations-spiders",
     "fresh-animations-creepers",
-    "wizards",
-    "paladins-and-priests",
-    "archers",
-    "rogues-and-warriors",
-    "arsenal-rpg-series",
-    "armory-rpg-series",
-    "jewelry",
-    "combat-roll"
-  ],
-  "external": [
-    {
-      "name": "World Bosses",
-      "page": "https://www.curseforge.com/minecraft/mc-mods/world-bosses",
-      "file": "world-bosses-fabric-26.3-2.0.2.jar",
-      "urls": [
-        "https://mediafilez.forgecdn.net/files/9258/404/world-bosses-fabric-26.3-2.0.2.jar",
-        "https://edge.forgecdn.net/files/9258/404/world-bosses-fabric-26.3-2.0.2.jar"
-      ],
-      "client": "required",
-      "server": "required"
-    },
-    {
-      "name": "Villagers at Work",
-      "page": "https://www.curseforge.com/minecraft/mc-mods/villagers-at-work",
-      "file": "vaw-1.3.3+26.3.jar",
-      "urls": [
-        "https://mediafilez.forgecdn.net/files/9291/752/vaw-1.3.3+26.3.jar",
-        "https://mediafilez.forgecdn.net/files/9291/752/vaw-1.3.3%2B26.3.jar",
-        "https://edge.forgecdn.net/files/9291/752/vaw-1.3.3%2B26.3.jar"
-      ],
-      "client": "required",
-      "server": "required"
-    },
-    {
-      "name": "Villagers after Work",
-      "page": "https://www.curseforge.com/minecraft/mc-mods/villagers-after-work",
-      "file": "vaw-after-work-1.3.3+26.3.jar",
-      "urls": [
-        "https://mediafilez.forgecdn.net/files/9291/755/vaw-after-work-1.3.3+26.3.jar",
-        "https://mediafilez.forgecdn.net/files/9291/755/vaw-after-work-1.3.3%2B26.3.jar",
-        "https://edge.forgecdn.net/files/9291/755/vaw-after-work-1.3.3%2B26.3.jar"
-      ],
-      "client": "required",
-      "server": "required"
-    }
+    "fa-player-extension"
   ],
   "env_overrides": {
-    "player-animation-library": {
+    "playeranimator": {
       "server": "required"
     },
     "cloth-config": {
       "server": "required"
-    },
-    "structure-pool-api": {
-      "client": "required"
     }
   },
-  "_singleplayer_too": "Server-only structure mods also installed on the client (with their libraries), so singleplayer worlds get them.",
-  "singleplayer_too": [
-    "mss-moogs-soaring-structures",
-    "mes-moogs-end-structures"
-  ],
   "client_presets": {
     "resource_packs": [
-      "id:continuity:default",
-      "id:continuity:glass_pane_culling_fix",
       "fresh-animations",
       "fresh-animations-details",
       "fa-player-extension",
@@ -117,30 +37,6 @@
       "fresh-animations-spiders",
       "fresh-animations-objects"
     ],
-    "shader": "complementary-reimagined",
-    "_resource_packs": "Bottom to top, above vanilla's Default. Modrinth slugs, or id:<pack id> for packs built into a mod (Continuity's two).",
-    "keys": {
-      "keybinds.combat_roll.roll": "key.keyboard.r",
-      "key.bloomlevelup.weapon_skill": "key.keyboard.v",
-      "iris.keybind.reload": "key.keyboard.unknown",
-      "key.quickActions": "key.keyboard.unknown",
-      "key.origins.view_origin": "key.keyboard.u"
-    },
-    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): the roll keeps R, Bloom's weapon skill moves to V (it was R), Iris's 'reload shaders' is unbound (it was R too), vanilla's Quick Actions is unbound so Origins' ability keeps G, and Origins' 'view origin' moves to U so O stays vanilla's Friends list."
-  },
-  "config_files": {
-    "_comment": "Config files for both sides (the server's rules, which a singleplayer world reads too), written as given. Combat Roll: a 5-tick (quarter second) window where hits don't land after a roll (FreshOrangeSlices' call); the rest are its defaults.",
-    "config/combat_roll/server.json5": {
-      "invulnerable_ticks_upon_roll": 5,
-      "roll_duration": 8,
-      "allow_auto_jump_while_rolling": true,
-      "allow_jump_while_rolling": false,
-      "allow_rolling_while_weapon_cooldown": false,
-      "allow_rolling_while_airborn": false,
-      "exhaust_on_roll": 0.1,
-      "food_level_required": 6.0,
-      "roll_cooldown": 4.0,
-      "additional_roll_distance": 0.0
-    }
+    "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources), same order as main's pack. Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin)."
   }
 }

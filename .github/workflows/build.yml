@@ -215,3 +215,75 @@ jobs:
         run: pip install --quiet pillow
       - name: screenshot
         run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28 ${{ matrix.variant == 'bettercombat' && 'bc' || '' }}
+
+  # The Forge Bloom Pack (pack/pack.json): Bloom, Better Combat and Fresh Animations, as a Modrinth pack file (.mrpack)
+  # and a server zip, under "Artifacts" as bloom-pack-forge. A real Forge server then boots from that zip the way a
+  # friend would start it (installing Forge first), and a real Forge client with the pack's client side joins it
+  # (pack/launch_test.py: Fresh Animations has to be on); the pack-screenshots job prints what it saw.
+  pack:
+    needs: build
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch the mod jar
+        uses: actions/download-artifact@v4
+        with:
+          name: bloomlevelup-jar
+          path: jar
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'microsoft'
+      - name: build the pack
+        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out --client-run game
+      - name: capture the pack
+        uses: actions/upload-artifact@v7
+        with:
+          name: bloom-pack-forge
+          path: |
+            out/*.mrpack
+            out/*.zip
+      - name: boot a server with the pack
+        run: python3 pack/boot_server.py "out/Bloom Pack Forge build.${GITHUB_RUN_NUMBER} server.zip" server
+      - name: tools for the client
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils imagemagick > /dev/null
+          pip install --user --break-system-packages --quiet "portablemc>=5,<6"
+          portablemc --version
+      - name: pack launch test
+        run: xvfb-run -a -s "-screen 0 1280x720x24" python3 pack/launch_test.py server game shots
+      - name: capture the client's screenshots and logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: pack-screenshots
+          path: |
+            shots/*.png
+            game/logs/latest.log
+            game/crash-reports
+          if-no-files-found: ignore
+
+  pack-screenshots:
+    needs: pack
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        shot: [pack_0, pack_2, pack_back]
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: fetch screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: pack-screenshots
+          path: shots
+        continue-on-error: true
+      - name: pillow
+        run: pip install --quiet pillow
+      - name: screenshot
+        run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28

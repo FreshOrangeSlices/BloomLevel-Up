@@ -9,6 +9,11 @@
 > Reach and Adamantium are gone and swords get **Slash** (Bleed) instead of Impale. **Better Combat** (1.9.0+1.20.1,
 > optional) works the same as on main. Every difference from the Fabric build is listed under "Forge 1.20.1 build" in
 > `docs/DECISIONS.md`. The rest of this README describes the Fabric 26.3 build on `main`.
+>
+> **Forge pack:** each **build** run on this branch also makes **bloom-pack-forge**: a Modrinth pack file (Bloom,
+> Better Combat and Fresh Animations with its add-ons; import it in the Modrinth App, Prism or ATLauncher) and a
+> server zip (Java 17; `start.sh` / `start.bat` install Forge on the first start). Fresh Animations is switched on
+> by itself at the first launch.
 
 A Fabric mod for Minecraft **26.3**: a modpack-friendly character build system inspired by Path of Exile
 and mcMMO. Four skill categories (Utility, Combat, Armor, Misc) level from use, each level gives a stat

@@ -1,127 +1,230 @@
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
-	id 'maven-publish'
+	id 'eclipse'
+	id 'idea'
+	id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
+	id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-base {
-	archivesName = project.archives_base_name
-}
+// Bloom Level-Up for Forge 1.20.1 (this branch). The main branch is the Fabric 26.3 mod; this one is a port of it.
 
 // Every CI build is stamped with its run number (0.1.0+build.57), so jars can't be mixed up.
 // Local builds are 0.1.0+local.
 def buildNumber = System.getenv("GITHUB_RUN_NUMBER")
 version = "${project.version}+${buildNumber ? "build." + buildNumber : "local"}"
+group = project.group
 
-repositories {
-	mavenCentral()
-	// Better Combat and the mods its test run needs (optional compat; nothing from here is bundled).
-	exclusiveContent {
-		forRepository {
-			maven {
-				name = "Modrinth"
-				url = "https://api.modrinth.com/maven"
-			}
+base {
+	archivesName = project.archives_base_name
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+// The Fabric 26.3 sources share this tree. What is ported to Forge 1.20.1 so far builds; the rest waits here
+// (unchanged, for reference) until its chunk is ported. Each chunk removes its lines from this list.
+def notPortedYet = [
+		// Chunk 2: skills, Majors and the mixins they need
+		'**/bloomlevelup/compat/**',
+		'**/bloomlevelup/entity/**',
+		'**/bloomlevelup/item/**',
+		'**/bloomlevelup/sheet/**',
+		'**/bloomlevelup/skill/armor/ArmorSkill.java',
+		'**/bloomlevelup/skill/armor/ArmorStyles.java',
+		'**/bloomlevelup/skill/combat/CombatSkill.java',
+		'**/bloomlevelup/skill/combat/CombatAbilities.java',
+		'**/bloomlevelup/skill/combat/Weapons.java',
+		'**/bloomlevelup/skill/misc/HoardersPocket.java',
+		'**/bloomlevelup/skill/misc/MiscSkill.java',
+		'**/bloomlevelup/skill/misc/RuneEmbedding.java',
+		'**/bloomlevelup/skill/misc/StackOverflow.java',
+		'**/bloomlevelup/skill/utility/UtilitySkill.java',
+		'**/bloomlevelup/skill/utility/BlockXpLoader.java',
+		'**/bloomlevelup/skill/utility/BlockXpTable.java',
+		'**/bloomlevelup/skill/utility/ChainBreaker.java',
+		'**/bloomlevelup/skill/utility/PlacedBlocks.java',
+		'**/bloomlevelup/skill/ConsumeContext.java',
+		'**/bloomlevelup/skill/DurabilitySaves.java',
+		'**/bloomlevelup/effect/HeldItemWatcher.java',
+		'**/bloomlevelup/mixin/**',
+		// Fabric-only: the Bloom Pack's launch defaults (resource packs, shader); this build isn't for that pack.
+		'**/bloomlevelup/PackDefaultsLaunch.java',
+		// Chunk 3: the client (hub, HUD, combat keys, renderers)
+		'**/bloomlevelup/client/combat/**',
+		'**/bloomlevelup/client/compat/**',
+		'**/bloomlevelup/client/gui/**',
+		'**/bloomlevelup/client/mixin/**',
+		'**/bloomlevelup/client/render/**',
+		'**/bloomlevelup/client/IconTextures.java',
+		'**/bloomlevelup/client/NameTags.java',
+]
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java', 'src/client/java']
+			exclude notPortedYet
 		}
-		filter {
-			includeGroup "maven.modrinth"
+		resources {
+			srcDirs = ['src/main/resources', 'src/client/resources']
+			// Fabric metadata and mixin configs (the Forge ones are mods.toml and *.forge.mixins.json).
+			exclude 'fabric.mod.json', 'bloomlevelup.mixins.json', 'bloomlevelup.bettercombat.mixins.json',
+					'bloomlevelup.client.mixins.json', 'bloomlevelup.bettercombat.client.mixins.json'
+		}
+	}
+	gametest {
+		java {
+			// Only the Forge game tests for now; the Fabric ones next to them are ported with their chunks.
+			srcDirs = ['src/gametest/java']
+			include '**/gametest/forge/**'
+		}
+		resources {
+			// The game tests' empty structure (data/bloomlevelup/structures/empty.nbt).
+			srcDirs = ['src/gametest/resources']
+			exclude 'fabric.mod.json'
+		}
+		compileClasspath += sourceSets.main.output
+		runtimeClasspath += sourceSets.main.output
+	}
+	test {
+		java {
+			// The unit tests cover the pure-Java core, which is the same on every loader.
+			srcDirs = ['src/test/java']
 		}
 	}
 }
 
 configurations {
-	// Mods loaded only into the second game test run (runGameTestBetterCombat), never into the jar or other runs.
-	betterCombatRuntime {
-		transitive = false
-	}
+	gametestImplementation.extendsFrom implementation
+	gametestCompileOnly.extendsFrom compileOnly
+	gametestAnnotationProcessor.extendsFrom annotationProcessor
 }
 
-loom {
-	splitEnvironmentSourceSets()
+minecraft {
+	mappings channel: mapping_channel, version: mapping_version
+	copyIdeResources = true
 
-	mods {
-		"bloomlevelup" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
+	runs {
+		configureEach {
+			workingDirectory project.file('run')
+			property 'forge.logging.markers', 'REGISTRIES'
+			property 'forge.logging.console.level', 'info'
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+			mods {
+				"${mod_id}" {
+					source sourceSets.main
+				}
+			}
+		}
+
+		client {
+			property 'forge.enabledGameTestNamespaces', mod_id
+		}
+
+		server {
+			property 'forge.enabledGameTestNamespaces', mod_id
+			args '--nogui'
+		}
+
+		// A real dedicated server boots with the mod (so registries, data, capabilities and mixins are proven),
+		// runs the @GameTest methods in src/gametest and stops (`./gradlew runGameTestServer`).
+		gameTestServer {
+			workingDirectory project.file('run/gametest')
+			property 'forge.enabledGameTestNamespaces', mod_id
+
+			mods {
+				"${mod_id}" {
+					source sourceSets.main
+					source sourceSets.gametest
+				}
+			}
 		}
 	}
 }
 
-fabricApi {
-	// In-game tests: a real dedicated server boots with the mod (so broken mixins fail the build) and runs
-	// the @GameTest methods in src/gametest (`./gradlew runGameTest`). Client game tests boot a real client
-	// into a singleplayer world (`./gradlew runClientGameTest`, its own CI workflow).
-	configureTests {
-		createSourceSet = true
-		modId = "bloomlevelup-gametest"
-		eula = true
-		enableGameTests = true
-		enableClientGameTests = true
-	}
+mixin {
+	add sourceSets.main, "${mod_id}.refmap.json"
+	config "${mod_id}.forge.mixins.json"
 }
 
-dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+repositories {
+	mavenCentral()
+}
 
-	// Better Combat is optional: compiled against, never bundled. Bloom's compat code only runs when it's installed.
-	// (Its config class extends Cloth Config's, and its animation hooks use Player Animation Library's types.)
-	compileOnly "maven.modrinth:better-combat:${project.better_combat_version}"
-	compileOnly "maven.modrinth:cloth-config:${project.cloth_config_version}"
-	clientCompileOnly "maven.modrinth:better-combat:${project.better_combat_version}"
-	clientCompileOnly "maven.modrinth:cloth-config:${project.cloth_config_version}"
-	clientCompileOnly "maven.modrinth:player-animation-library:${project.player_animation_library_version}"
-	gametestCompileOnly "maven.modrinth:better-combat:${project.better_combat_version}"
-	gametestCompileOnly "maven.modrinth:cloth-config:${project.cloth_config_version}"
-	betterCombatRuntime "maven.modrinth:better-combat:${project.better_combat_version}"
-	betterCombatRuntime "maven.modrinth:player-animation-library:${project.player_animation_library_version}"
-	betterCombatRuntime "maven.modrinth:cloth-config:${project.cloth_config_version}"
+jarJar.enable()
+
+dependencies {
+	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+	// MixinExtras (WrapOperation, ModifyExpressionValue, ...): bundled inside the jar, so players don't install it.
+	compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixinextras_version}"))
+	implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixinextras_version}")) {
+		jarJar.ranged(it, "[${mixinextras_version},)")
+	}
+
+	gametestImplementation sourceSets.main.output
 
 	// Unit tests cover the pure-Java core (progression rules, formulas, validation).
-	testImplementation platform("org.junit:junit-bom:${project.junit_version}")
+	testImplementation platform("org.junit:junit-bom:${junit_version}")
 	testImplementation 'org.junit.jupiter:junit-jupiter'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-// The game tests again with Better Combat (and what it needs) loaded: the compat tests run, and everything else has
-// to pass with it installed too. The plain runGameTest stays Better Combat-free, so both setups keep working.
-def betterCombatMods = layout.buildDirectory.dir("betterCombatMods")
+def resourceProps = [
+		minecraft_version      : minecraft_version,
+		minecraft_version_range: minecraft_version_range,
+		forge_version          : forge_version,
+		forge_version_range    : forge_version_range,
+		loader_version_range   : loader_version_range,
+		mod_id                 : mod_id,
+		mod_name               : mod_name,
+		mod_license            : mod_license,
+		mod_version            : version,
+		mod_authors            : mod_authors,
+		mod_description        : mod_description,
+]
 
-tasks.register("copyBetterCombatMods", Sync) {
-	from configurations.betterCombatRuntime
-	into betterCombatMods
+tasks.named('processResources', ProcessResources).configure {
+	inputs.properties resourceProps
+
+	filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+		expand resourceProps + [project: project]
+	}
 }
 
-loom.runs.create("gameTestBetterCombat") {
-	inherit loom.runs.getByName("gameTest")
-	runDir "build/run/gameTestBetterCombat"
-	property "fabric.addMods", betterCombatMods.get().asFile.absolutePath
+tasks.named('jar', Jar).configure {
+	archiveClassifier = 'slim'
+	manifest {
+		attributes([
+				'Specification-Title'     : mod_id,
+				'Specification-Vendor'    : mod_authors,
+				'Specification-Version'   : '1',
+				'Implementation-Title'    : project.name,
+				'Implementation-Version'  : project.jar.archiveVersion,
+				'Implementation-Vendor'   : mod_authors,
+				'MixinConfigs'            : "${mod_id}.forge.mixins.json"
+		])
+	}
 }
 
-// The same for the client game tests: only the Better Combat checks run there (the slam), with screenshots.
-loom.runs.create("clientGameTestBetterCombat") {
-	inherit loom.runs.getByName("clientGameTest")
-	runDir "build/run/clientGameTestBetterCombat"
-	property "fabric.addMods", betterCombatMods.get().asFile.absolutePath
+// The jar players install: the mod plus MixinExtras inside it, remapped to the names the game uses outside dev.
+tasks.named('jarJar').configure {
+	archiveClassifier = ''
+	manifest {
+		attributes([
+				'MixinConfigs': "${mod_id}.forge.mixins.json"
+		])
+	}
 }
 
-// The whole Bloom Pack on the client (CI job client-test-pack): pack/build_pack.py --client-run fills this run folder
-// with the pack's client mods, resource packs, shader and settings first. Only the pack launch checks run there.
-loom.runs.create("clientGameTestPack") {
-	inherit loom.runs.getByName("clientGameTest")
-	runDir "build/run/clientGameTestPack"
-	property "bloom.packtest", "true"
+reobf {
+	jarJar {}
 }
 
-// Sodium and Iris switch the game to OpenGL, and Xvfb (Loom's xvfb-run, fine for the Vulkan runs) has no GLX visual
-// the game accepts: the workflow runs this one on SDL's offscreen video driver instead.
-tasks.matching { it.name == "runClientGameTestPack" }.configureEach {
-	useXvfb = false
-}
-
-tasks.matching { it.name == "runGameTestBetterCombat" || it.name == "runClientGameTestBetterCombat" }.configureEach {
-	dependsOn "copyBetterCombatMods"
-}
+tasks.named('jarJar').configure { finalizedBy 'reobfJarJar' }
+tasks.named('build').configure { dependsOn 'jarJar' }
 
 test {
 	useJUnitPlatform()
@@ -131,32 +234,7 @@ test {
 	}
 }
 
-processResources {
-	def version = project.version
-	inputs.property "version", version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": version
-	}
-}
-
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 25
-	it.options.encoding = 'UTF-8'
+	options.encoding = 'UTF-8'
+	options.release = 17
 }
-
-java {
-	withSourcesJar()
-
-	sourceCompatibility = JavaVersion.VERSION_25
-	targetCompatibility = JavaVersion.VERSION_25
-}
-
-publishing {
-	publications {
-		create("mavenJava", MavenPublication) {
-			from components.java
-		}
-	}
-}
-

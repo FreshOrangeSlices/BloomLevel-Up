@@ -1,32 +1,22 @@
 package com.freshorangeslices.bloomlevelup.effect;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 
-import net.minecraft.core.Holder;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
-import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
-import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
-import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
-import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
-import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
-import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
-import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
-import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
-import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
 
 /**
  * Turns stat points (and the simple always-on Majors) into vanilla attribute modifiers. Idempotent: it
@@ -35,6 +25,9 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
  *
  * <p>Modifiers are permanent (saved with the player) so max health is already correct when the player's
  * health is loaded on login; otherwise extra hearts would be clipped every relog.
+ *
+ * <p>1.20.1 attribute modifiers are keyed by UUID (26.x uses ids): each of Bloom's gets a fixed UUID made from
+ * its id, so the same modifier is found again after a relog.
  */
 public final class StatEffects {
 	public static final String VITALITY = BloomLevelUp.key("armor/vitality");
@@ -44,51 +37,32 @@ public final class StatEffects {
 	public static final String SPEED = BloomLevelUp.key("misc/speed");
 	public static final String TITAN_HIDE = BloomLevelUp.key("armor/titan_hide");
 
-	private static final Identifier VITALITY_MOD = BloomLevelUp.id("stat/vitality");
-	private static final Identifier DEFENSE_MOD = BloomLevelUp.id("stat/defense");
-	private static final Identifier POWER_MOD = BloomLevelUp.id("stat/power");
-	private static final Identifier TEMPO_MOD = BloomLevelUp.id("stat/tempo");
-	private static final Identifier SPEED_MOD = BloomLevelUp.id("stat/speed");
-	private static final Identifier EFFICIENCY_MOD = BloomLevelUp.id("stat/efficiency");
-	private static final Identifier BRAWLER_MOD = BloomLevelUp.id("major/brawler");
-	private static final Identifier GUARANTEED_CRITICAL_MOD = BloomLevelUp.id("major/guaranteed_critical");
-	private static final Identifier LONG_REACH_MOD = BloomLevelUp.id("major/long_reach");
-	/** Full Sweep's sweep ratio (public: the Better Combat compat reads it back). */
-	public static final Identifier FULL_SWEEP_MOD = BloomLevelUp.id("major/full_sweep");
-	private static final Identifier TITAN_SPEED_MOD = BloomLevelUp.id("major/titan_hide_speed");
-	private static final Identifier TITAN_FALL_MOD = BloomLevelUp.id("major/titan_hide_fall");
-	private static final Identifier PROTEIN_MOD = BloomLevelUp.id("major/protein");
-	private static final Identifier HEAVY_KNOCKBACK_MOD = BloomLevelUp.id("major/fitting_armor_heavy");
+	public static final ModifierId VITALITY_MOD = ModifierId.of("stat/vitality");
+	public static final ModifierId DEFENSE_MOD = ModifierId.of("stat/defense");
+	public static final ModifierId POWER_MOD = ModifierId.of("stat/power");
+	public static final ModifierId TEMPO_MOD = ModifierId.of("stat/tempo");
+	public static final ModifierId SPEED_MOD = ModifierId.of("stat/speed");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	public static final double POWER_PER_POINT = 0.06;
 
+	/** A Bloom modifier's identity: its id (for logs and names) and the UUID 1.20.1 keys modifiers by. */
+	public record ModifierId(String name, UUID uuid) {
+		public static ModifierId of(String path) {
+			String name = BloomLevelUp.key(path);
+			return new ModifierId(name, UUID.nameUUIDFromBytes(name.getBytes(StandardCharsets.UTF_8)));
+		}
+	}
+
 	/** A Bloom attribute modifier (amount 0 = none): from the item in hand, or from the profile. */
-	public record HeldModifier(Holder<Attribute> attribute, Identifier id, double amount, AttributeModifier.Operation operation) {
+	public record HeldModifier(Attribute attribute, ModifierId id, double amount, AttributeModifier.Operation operation) {
 	}
 
 	private StatEffects() {
 	}
 
 	public static void refresh(ServerPlayer player) {
-		ProgressionService service = BloomServices.progression();
-		BloomProfile profile = BloomAttachments.profile(player);
-
-		// Misc: Ascension's flight, and Water to Wine's cut when it's switched off.
-		MiscSkill.refresh(player);
-
-		// Protein!: the meal count belongs to owning the Major; refunding it (or Bloom+) starts over.
-		// Protein!'s meals are kept while either build owns it (switching builds isn't a refund).
-		if (!profile.ownsInAnyBuild(ArmorIds.PROTEIN) && profile.counter(ArmorIds.PROTEIN_MEALS) != 0) {
-			profile.setCounter(ArmorIds.PROTEIN_MEALS, 0);
-		}
-
 		for (HeldModifier modifier : profileModifiers(player)) {
-			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
-		}
-
-		// Everything that depends on the item in hand (HeldItemWatcher refreshes on every swap).
-		for (HeldModifier modifier : heldModifiers(player, player.getMainHandItem())) {
 			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
 		}
 
@@ -104,71 +78,20 @@ public final class StatEffects {
 	public static List<HeldModifier> profileModifiers(ServerPlayer player) {
 		ProgressionService service = BloomServices.progression();
 		BloomProfile profile = BloomAttachments.profile(player);
-		boolean titanHide = service.isMajorActive(profile, TITAN_HIDE) && armorSlotsEmpty(player);
-		double proteinHealth = service.isMajorActive(profile, ArmorIds.PROTEIN)
-				? StatFormulas.proteinBonusHealth(profile.counter(ArmorIds.PROTEIN_MEALS)) : 0.0;
-
-		// Fitting Armor / Heavy: strong knockback resistance that tapers off if you already resist knockback.
-		boolean heavy = service.isMajorActive(profile, ArmorIds.FITTING_ARMOR) && ArmorStyles.styleOf(player) == ArmorStyle.HEAVY;
-		double heavyKnockback = 0.0;
-
-		if (heavy) {
-			AttributeInstance knockback = player.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-
-			if (knockback != null) {
-				AttributeModifier ours = knockback.getModifier(HEAVY_KNOCKBACK_MOD);
-				double others = knockback.getValue() - (ours == null ? 0.0 : ours.amount());
-				heavyKnockback = StatFormulas.heavyKnockbackResistance(others);
-			}
-		}
-
 		double defenseArmor = StatFormulas.defenseArmor(service.statValue(profile, DEFENSE));
 
-		if (titanHide) {
-			// +2 innate armor first, then the whole Defense value doubles.
-			defenseArmor = (defenseArmor + 2.0) * 2.0;
-		}
-
 		return List.of(
-				new HeldModifier(Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADD_VALUE),
-				new HeldModifier(Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADD_VALUE),
 				new HeldModifier(Attributes.MAX_HEALTH, VITALITY_MOD, StatFormulas.vitalityBonusHealth(service.statValue(profile, VITALITY)),
-						AttributeModifier.Operation.ADD_VALUE),
-				new HeldModifier(Attributes.ARMOR, DEFENSE_MOD, defenseArmor, AttributeModifier.Operation.ADD_VALUE),
+						AttributeModifier.Operation.ADDITION),
+				new HeldModifier(Attributes.ARMOR, DEFENSE_MOD, defenseArmor, AttributeModifier.Operation.ADDITION),
 				new HeldModifier(Attributes.ATTACK_DAMAGE, POWER_MOD, service.statValue(profile, POWER) * POWER_PER_POINT,
-						AttributeModifier.Operation.ADD_VALUE),
+						AttributeModifier.Operation.ADDITION),
 				// Tempo: 2x attack speed at 100 points; multiplies the weapon's own speed.
 				new HeldModifier(Attributes.ATTACK_SPEED, TEMPO_MOD, service.statValue(profile, TEMPO) / 100.0,
-						AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+						AttributeModifier.Operation.MULTIPLY_BASE),
 				// Speed: +1% movement per point, 2x at 100.
 				new HeldModifier(Attributes.MOVEMENT_SPEED, SPEED_MOD, service.statValue(profile, SPEED) / 100.0,
-						AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-				// Titan Hide: +50% movement, -70% fall damage. (Its 2x knockback drawback is in LivingEntityMixin.)
-				new HeldModifier(Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-				new HeldModifier(Attributes.FALL_DAMAGE_MULTIPLIER, TITAN_FALL_MOD, titanHide ? -0.7 : 0.0,
-						AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-	}
-
-	/**
-	 * The modifiers that depend on the item in the main hand, worked out for {@code held} (the stat sheet asks about
-	 * items that aren't in hand). Efficiency (+1% block breaking speed per point, Shovel Mastery's boost with a
-	 * shovel) is an attribute so the client's own mining prediction speeds up too. Full Sweep: sweep damage =
-	 * 1 + 100% of the hit (vanilla's sweep formula at the attribute's maximum).
-	 */
-	public static List<HeldModifier> heldModifiers(ServerPlayer player, ItemStack held) {
-		BloomConfig config = BloomServices.config();
-		return List.of(
-				new HeldModifier(Attributes.BLOCK_BREAK_SPEED, EFFICIENCY_MOD, UtilitySkill.efficiency(player, held) / 100.0,
-						AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-				new HeldModifier(Attributes.ATTACK_DAMAGE, BRAWLER_MOD,
-						CombatSkill.has(player, CombatIds.BRAWLER, Family.UNARMED, held) ? config.brawlerDamage : 0.0, AttributeModifier.Operation.ADD_VALUE),
-				new HeldModifier(Attributes.ATTACK_DAMAGE, GUARANTEED_CRITICAL_MOD,
-						CombatSkill.has(player, CombatIds.GUARANTEED_CRITICAL, Family.AXE, held) ? -config.guaranteedCriticalPenalty : 0.0,
-						AttributeModifier.Operation.ADD_VALUE),
-				new HeldModifier(Attributes.ENTITY_INTERACTION_RANGE, LONG_REACH_MOD,
-						CombatSkill.has(player, CombatIds.LONG_REACH, Family.SPEAR, held) ? config.longReachBlocks : 0.0, AttributeModifier.Operation.ADD_VALUE),
-				new HeldModifier(Attributes.SWEEPING_DAMAGE_RATIO, FULL_SWEEP_MOD,
-						CombatSkill.has(player, CombatIds.FULL_SWEEP, Family.SWORD, held) ? 1.0 : 0.0, AttributeModifier.Operation.ADD_VALUE));
+						AttributeModifier.Operation.MULTIPLY_BASE));
 	}
 
 	public static boolean armorSlotsEmpty(ServerPlayer player) {
@@ -178,28 +101,37 @@ public final class StatEffects {
 				&& player.getItemBySlot(EquipmentSlot.FEET).isEmpty();
 	}
 
-	private static void apply(ServerPlayer player, Holder<Attribute> attribute, Identifier id, double amount,
-			AttributeModifier.Operation operation) {
+	/** The amount of one of Bloom's modifiers on this attribute right now (0 when it isn't there). */
+	public static double current(AttributeInstance instance, ModifierId id) {
+		AttributeModifier modifier = instance == null ? null : instance.getModifier(id.uuid());
+		return modifier == null ? 0.0 : modifier.getAmount();
+	}
+
+	private static void apply(ServerPlayer player, Attribute attribute, ModifierId id, double amount, AttributeModifier.Operation operation) {
 		AttributeInstance instance = player.getAttribute(attribute);
 
 		if (instance == null) {
 			return;
 		}
 
-		AttributeModifier existing = instance.getModifier(id);
+		AttributeModifier existing = instance.getModifier(id.uuid());
 
 		if (amount == 0.0) {
 			if (existing != null) {
-				instance.removeModifier(id);
+				instance.removeModifier(id.uuid());
 			}
 
 			return;
 		}
 
-		if (existing != null && Math.abs(existing.amount() - amount) < 1e-9 && existing.operation() == operation) {
+		if (existing != null && Math.abs(existing.getAmount() - amount) < 1e-9 && existing.getOperation() == operation) {
 			return;
 		}
 
-		instance.addOrReplacePermanentModifier(new AttributeModifier(id, amount, operation));
+		if (existing != null) {
+			instance.removeModifier(id.uuid());
+		}
+
+		instance.addPermanentModifier(new AttributeModifier(id.uuid(), id.name(), amount, operation));
 	}
 }

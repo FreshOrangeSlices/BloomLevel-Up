@@ -1,5 +1,6 @@
-# Builds the mod and runs unit tests on every push / PR.
-# The finished jar is attached to each run under "Artifacts" (Actions tab -> the run -> bloomlevelup-jar).
+# Forge 1.20.1 build (branch forge-1.20.1): builds the mod, runs the unit tests, then boots a real dedicated
+# server with it and runs the game tests. The finished jar is attached to each run under "Artifacts"
+# (Actions tab -> the run -> bloomlevelup-jar).
 
 name: build
 on: [pull_request, push, workflow_dispatch]
@@ -15,7 +16,7 @@ jobs:
       - name: setup jdk
         uses: actions/setup-java@v5
         with:
-          java-version: '25'
+          java-version: '17'
           distribution: 'microsoft'
       - name: setup gradle cache
         uses: gradle/actions/setup-gradle@v6
@@ -24,9 +25,7 @@ jobs:
       - name: build
         run: |
           set -o pipefail
-          ./gradlew build runGameTest --stacktrace 2>&1 | tee build.log
-          # The game tests again with Better Combat loaded (after the plain run, so the two logs don't interleave).
-          ./gradlew runGameTestBetterCombat --stacktrace 2>&1 | tee -a build.log
+          ./gradlew build runGameTestServer --stacktrace 2>&1 | tee build.log
       # Always leave a one-line game test summary on the run (readable through the checks API).
       - name: report game tests
         if: always()
@@ -36,7 +35,7 @@ jobs:
           if not os.path.exists('build.log'):
               raise SystemExit(0)
           lines = open('build.log', encoding='utf-8', errors='replace').read().splitlines()
-          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|optional tests|tests? failed|failed!|GameTestAssert|Task :runGameTest|BLOOMTEST', l)]
+          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|optional tests|tests? failed|failed!|GameTestAssert|Task :runGameTestServer|BLOOMTEST|passed', l)]
           text = '\n'.join(hits[-40:]) or 'no game test output found'
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=gametest-summary::{esc(text[:3900])}")
@@ -46,7 +45,7 @@ jobs:
         if: success()
         run: |
           set +e
-          ls build/libs/*.jar | grep -v -- '-sources.jar' > jars.txt
+          ls build/libs/*.jar | grep -v -- '-sources.jar' | grep -v -- '-slim.jar' > jars.txt
           sha256sum $(cat jars.txt) | sed 's#build/libs/##' > jar-sha256.txt
           sudo apt-get update -qq > /dev/null && sudo apt-get install -y -qq clamav > /dev/null 2>&1
           sudo systemctl stop clamav-freshclam > /dev/null 2>&1
@@ -63,6 +62,7 @@ jobs:
           path: |
             build/libs/*.jar
             !build/libs/*-sources.jar
+            !build/libs/*-slim.jar
       # On failure, surface the compiler / test errors as annotations on the run,
       # so they are readable from the run's summary page and the checks API.
       - name: report build errors
@@ -91,33 +91,3 @@ jobs:
         with:
           name: test-reports
           path: build/reports/
-
-  # The Bloom Pack for friends (pack/pack.json): a Modrinth pack file (.mrpack) and the server's mods, under
-  # "Artifacts" as bloom-pack. Then a real Fabric server boots with those server mods, to be sure it starts.
-  pack:
-    needs: build
-    runs-on: ubuntu-24.04
-    steps:
-      - name: checkout repository
-        uses: actions/checkout@v6
-      - name: fetch the mod jar
-        uses: actions/download-artifact@v4
-        with:
-          name: bloomlevelup-jar
-          path: jar
-      - name: build the pack
-        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out
-      - name: capture the pack
-        uses: actions/upload-artifact@v7
-        with:
-          name: bloom-pack
-          path: |
-            out/*.mrpack
-            out/*.zip
-      - name: setup jdk
-        uses: actions/setup-java@v5
-        with:
-          java-version: '25'
-          distribution: 'microsoft'
-      - name: boot a server with the pack
-        run: python3 pack/boot_server.py "out/Bloom Pack build.${GITHUB_RUN_NUMBER} server.zip"

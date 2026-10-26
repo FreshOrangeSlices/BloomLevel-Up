@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 
@@ -26,7 +26,7 @@ public final class ConfigLoader {
 	}
 
 	public static Path path() {
-		return FabricLoader.getInstance().getConfigDir().resolve(BloomLevelUp.MOD_ID + ".json");
+		return FMLPaths.CONFIGDIR.get().resolve(BloomLevelUp.MOD_ID + ".json");
 	}
 
 	public static BloomConfig load() {

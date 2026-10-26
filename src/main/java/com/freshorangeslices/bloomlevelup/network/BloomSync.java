@@ -9,12 +9,11 @@ import java.util.UUID;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.OnDatapackSyncEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
@@ -24,7 +23,6 @@ import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.player.PlayerXpWallet;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
-import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 
 /**
@@ -45,54 +43,57 @@ public final class BloomSync {
 	}
 
 	public static void init() {
-		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncDefinitions.TYPE, BloomPayloads.SyncDefinitions.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.SyncProfile.TYPE, BloomPayloads.SyncProfile.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Result.TYPE, BloomPayloads.Result.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.NameTag.TYPE, BloomPayloads.NameTag.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(BloomPayloads.Meter.TYPE, BloomPayloads.Meter.CODEC);
-		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.Request.TYPE, BloomPayloads.Request.CODEC);
-		PayloadTypeRegistry.serverboundPlay().register(BloomPayloads.CombatInput.TYPE, BloomPayloads.CombatInput.CODEC);
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent event) -> {
+			if (!(event.getEntity() instanceof ServerPlayer player)) {
+				return;
+			}
 
-		ServerPlayNetworking.registerGlobalReceiver(BloomPayloads.Request.TYPE, (payload, context) -> handle(context.player(), payload));
-		ServerPlayNetworking.registerGlobalReceiver(BloomPayloads.CombatInput.TYPE,
-				(payload, context) -> CombatAbilities.handle(context.player(), payload.action()));
-
-		ServerPlayConnectionEvents.JOIN.register((listener, sender, server) -> {
-			ServerPlayer player = listener.player;
 			sendDefinitions(player);
 			changed(player);
 
 			// Nameplates: the newcomer learns everyone's tag (everyone learns theirs when their profile is sent).
-			for (ServerPlayer other : server.getPlayerList().getPlayers()) {
+			for (ServerPlayer other : player.server.getPlayerList().getPlayers()) {
 				if (other != player) {
 					sendNameTag(player, other);
 				}
 			}
 		});
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> LAST_TAG.remove(listener.player.getUUID()));
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedOutEvent event) -> LAST_TAG.remove(event.getEntity().getUUID()));
 
-		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerRespawnEvent event) -> {
+			if (!(event.getEntity() instanceof ServerPlayer newPlayer)) {
+				return;
+			}
+
 			StatEffects.refresh(newPlayer);
 
-			if (!alive) {
+			// A respawn after death (not the walk back from the End): start on full health, extra hearts included.
+			if (!event.isEndConquered()) {
 				newPlayer.setHealth(newPlayer.getMaxHealth());
 			}
 
 			changed(newPlayer);
 		});
 
-		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> {
-			for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-				sendDefinitions(player);
-				changed(player);
+		// After /reload (no player: everyone); on login the PlayerLoggedInEvent above sends them.
+		MinecraftForge.EVENT_BUS.addListener((OnDatapackSyncEvent event) -> {
+			if (event.getPlayer() == null) {
+				for (ServerPlayer player : event.getPlayerList().getPlayers()) {
+					sendDefinitions(player);
+					changed(player);
+				}
 			}
 		});
 
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+		MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> {
 			DIRTY.clear();
 			LAST_TAG.clear();
 		});
-		ServerTickEvents.END_SERVER_TICK.register(BloomSync::tick);
+		MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
+			if (event.phase == TickEvent.Phase.END) {
+				tick(event.getServer());
+			}
+		});
 	}
 
 	/** Sends the definitions and config to everyone again (after an admin changes the config in game). */
@@ -135,9 +136,7 @@ public final class BloomSync {
 	}
 
 	private static void sendNameTag(ServerPlayer to, ServerPlayer about) {
-		if (ServerPlayNetworking.canSend(to, BloomPayloads.NameTag.TYPE)) {
-			ServerPlayNetworking.send(to, nameTag(about));
-		}
+		BloomNetwork.send(to, nameTag(about));
 	}
 
 	/** Tells everyone (the player included) about a changed nameplate tag; unchanged tags aren't re-sent. */
@@ -149,27 +148,21 @@ public final class BloomSync {
 		}
 
 		for (ServerPlayer other : server.getPlayerList().getPlayers()) {
-			if (ServerPlayNetworking.canSend(other, BloomPayloads.NameTag.TYPE)) {
-				ServerPlayNetworking.send(other, tag);
-			}
+			BloomNetwork.send(other, tag);
 		}
 	}
 
 	private static void sendDefinitions(ServerPlayer player) {
-		if (ServerPlayNetworking.canSend(player, BloomPayloads.SyncDefinitions.TYPE)) {
-			String json = SnapshotCodecs.encodeDefinitions(BloomServices.definitions(), BloomServices.config());
-			ServerPlayNetworking.send(player, new BloomPayloads.SyncDefinitions(json));
-		}
+		String json = SnapshotCodecs.encodeDefinitions(BloomServices.definitions(), BloomServices.config());
+		BloomNetwork.send(player, new BloomPayloads.SyncDefinitions(json));
 	}
 
 	private static void sendProfile(ServerPlayer player) {
-		if (ServerPlayNetworking.canSend(player, BloomPayloads.SyncProfile.TYPE)) {
-			String json = SnapshotCodecs.encodeProfile(BloomAttachments.profile(player));
-			ServerPlayNetworking.send(player, new BloomPayloads.SyncProfile(json));
-		}
+		String json = SnapshotCodecs.encodeProfile(BloomAttachments.profile(player));
+		BloomNetwork.send(player, new BloomPayloads.SyncProfile(json));
 	}
 
-	private static void handle(ServerPlayer player, BloomPayloads.Request request) {
+	static void handle(ServerPlayer player, BloomPayloads.Request request) {
 		ProgressionService service = BloomServices.progression();
 		BloomProfile profile = BloomAttachments.profile(player);
 		String target = request.target();
@@ -210,8 +203,6 @@ public final class BloomSync {
 			changed(player);
 		}
 
-		if (ServerPlayNetworking.canSend(player, BloomPayloads.Result.TYPE)) {
-			ServerPlayNetworking.send(player, new BloomPayloads.Result(request.action(), target, result.outcome().name(), result.involved()));
-		}
+		BloomNetwork.send(player, new BloomPayloads.Result(request.action(), target, result.outcome().name(), result.involved()));
 	}
 }

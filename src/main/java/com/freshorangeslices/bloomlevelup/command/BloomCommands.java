@@ -18,16 +18,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.arguments.IdentifierArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.permissions.PermissionLevel;
 
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.permission.v1.PermissionPredicates;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.definition.CategoryDefinition;
 import com.freshorangeslices.bloomlevelup.definition.DefinitionSet;
@@ -43,8 +41,6 @@ import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.BloomResetResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.progression.XpGainResult;
-import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
-import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 
 /**
  * {@code /bloom} — a temporary, text-only front end for the framework so every rule can be exercised in
@@ -52,11 +48,14 @@ import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
  * {@link ProgressionService} calls the hub will use; {@code /bloom admin} is for testing and pack authors.
  */
 public final class BloomCommands {
+	/** Operator permission level 2 (command blocks, /give...): looking at others and the admin commands. */
+	private static final int GAMEMASTERS = 2;
+
 	private BloomCommands() {
 	}
 
 	public static void init() {
-		CommandRegistrationCallback.EVENT.register((dispatcher, buildContext, selection) -> register(dispatcher));
+		MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> register(event.getDispatcher()));
 	}
 
 	private static final SuggestionProvider<CommandSourceStack> CATEGORIES = (ctx, builder) ->
@@ -81,33 +80,33 @@ public final class BloomCommands {
 				.then(literal("info")
 						.executes(ctx -> info(ctx.getSource(), ctx.getSource().getPlayerOrException()))
 						.then(argument("player", EntityArgument.player())
-								.requires(PermissionPredicates.require(BloomLevelUp.id("command/inspect"), PermissionLevel.GAMEMASTERS))
+								.requires(source -> source.hasPermission(GAMEMASTERS))
 								.executes(ctx -> info(ctx.getSource(), EntityArgument.getPlayer(ctx, "player")))))
 				.then(literal("allocate")
-						.then(argument("stat", IdentifierArgument.id()).suggests(STATS)
+						.then(argument("stat", ResourceLocationArgument.id()).suggests(STATS)
 								.then(argument("amount", IntegerArgumentType.integer())
 										.executes(ctx -> allocate(ctx, ProgressionService.Pool.NATURAL))
 										.then(literal("invested")
 												.executes(ctx -> allocate(ctx, ProgressionService.Pool.INVESTED))))))
 				.then(literal("toggle")
-						.then(literal("stat").then(argument("stat", IdentifierArgument.id()).suggests(STATS)
+						.then(literal("stat").then(argument("stat", ResourceLocationArgument.id()).suggests(STATS)
 								.executes(ctx -> act(ctx, (svc, p) -> svc.toggleStat(p, id(ctx, "stat"))))))
-						.then(literal("major").then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
+						.then(literal("major").then(argument("major", ResourceLocationArgument.id()).suggests(MAJORS)
 								.executes(ctx -> act(ctx, (svc, p) -> svc.toggleMajor(p, id(ctx, "major")))))))
 				.then(literal("buy")
-						.then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
+						.then(argument("major", ResourceLocationArgument.id()).suggests(MAJORS)
 								.executes(ctx -> act(ctx, (svc, p) -> svc.purchaseMajor(p, id(ctx, "major"))))
 								.then(literal("swap")
 										.executes(ctx -> act(ctx, (svc, p) -> svc.purchaseMajorWithSwap(p, id(ctx, "major")))))))
 				.then(literal("refund")
-						.then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
+						.then(argument("major", ResourceLocationArgument.id()).suggests(MAJORS)
 								.executes(ctx -> act(ctx, (svc, p) -> singleRefundsAllowed() ? svc.refundMajor(p, id(ctx, "major"))
 										: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED)))
 								.then(literal("all")
 										.executes(ctx -> act(ctx, (svc, p) -> singleRefundsAllowed() ? svc.refundMajorWithDependents(p, id(ctx, "major"))
 												: ActionResult.of(ActionResult.Outcome.REFUND_DISABLED))))))
 				.then(literal("fund")
-						.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
+						.then(argument("category", ResourceLocationArgument.id()).suggests(CATEGORIES)
 								.then(argument("points", IntegerArgumentType.integer(1))
 										.executes(ctx -> {
 											ServerPlayer player = ctx.getSource().getPlayerOrException();
@@ -115,45 +114,35 @@ public final class BloomCommands {
 													IntegerArgumentType.getInteger(ctx, "points"), new PlayerXpWallet(player)));
 										}))))
 				.then(literal("invest")
-						.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
+						.then(argument("category", ResourceLocationArgument.id()).suggests(CATEGORIES)
 								.then(argument("count", IntegerArgumentType.integer(1))
 										.executes(ctx -> {
 											ServerPlayer player = ctx.getSource().getPlayerOrException();
 											return act(ctx, (svc, p) -> svc.invest(p, id(ctx, "category"),
 													IntegerArgumentType.getInteger(ctx, "count"), new PlayerXpWallet(player)));
 										}))))
-				.then(literal("pocket")
-						.executes(ctx -> {
-							HoardersPocket.open(ctx.getSource().getPlayerOrException());
-							return 1;
-						}))
-				.then(literal("runes")
-						.executes(ctx -> {
-							RuneEmbedding.open(ctx.getSource().getPlayerOrException());
-							return 1;
-						}))
 				.then(literal("bloomreset")
 						.executes(ctx -> {
 							ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.reset.confirm_hint").withStyle(ChatFormatting.YELLOW), false);
 							return 0;
 						})
-						.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
+						.then(argument("category", ResourceLocationArgument.id()).suggests(CATEGORIES)
 								.then(literal("confirm").executes(ctx -> bloomReset(ctx.getSource(), ctx.getSource().getPlayerOrException(),
 										id(ctx, "category"))))))
 				.then(literal("build")
 						.executes(ctx -> act(ctx, (svc, p) -> svc.switchBuild(p, ctx.getSource().getLevel().getGameTime()))))
 				.then(literal("admin")
-						.requires(PermissionPredicates.require(BloomLevelUp.id("command/admin"), PermissionLevel.GAMEMASTERS))
+						.requires(source -> source.hasPermission(GAMEMASTERS))
 						.then(literal("refund")
 								.then(argument("players", EntityArgument.players())
-										.then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
+										.then(argument("major", ResourceLocationArgument.id()).suggests(MAJORS)
 												.executes(BloomCommands::adminRefund))))
 						.then(literal("waits")
 								.then(literal("on").executes(ctx -> setWaits(ctx.getSource(), true)))
 								.then(literal("off").executes(ctx -> setWaits(ctx.getSource(), false))))
 						.then(literal("xp")
 								.then(argument("players", EntityArgument.players())
-										.then(argument("category", IdentifierArgument.id()).suggests(CATEGORIES)
+										.then(argument("category", ResourceLocationArgument.id()).suggests(CATEGORIES)
 												.then(argument("amount", IntegerArgumentType.integer(1))
 														.executes(BloomCommands::adminXp)))))
 						.then(literal("definitions").executes(ctx -> definitions(ctx.getSource())))));
@@ -326,7 +315,7 @@ public final class BloomCommands {
 	// ------------------------------------------------------------------ helpers
 
 	private static String id(CommandContext<CommandSourceStack> ctx, String name) {
-		return IdentifierArgument.getId(ctx, name).toString();
+		return ResourceLocationArgument.getId(ctx, name).toString();
 	}
 
 	private static MutableComponent name(String translationKey, String fallback) {

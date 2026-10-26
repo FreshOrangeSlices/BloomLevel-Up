@@ -1,20 +1,23 @@
 package com.freshorangeslices.bloomlevelup.effect;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 
 /** The mod's own status effects. */
 public final class BloomEffects {
-	public static final Holder<MobEffect> BLEED = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, BloomLevelUp.id("bleed"), new BleedEffect());
+	private static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, BloomLevelUp.MOD_ID);
+
+	public static final RegistryObject<MobEffect> BLEED = EFFECTS.register("bleed", BleedEffect::new);
 
 	private BloomEffects() {
 	}
 
-	/** Loads the class so the effects register during mod init. */
-	public static void init() {
+	public static void register(IEventBus modBus) {
+		EFFECTS.register(modBus);
 	}
 }

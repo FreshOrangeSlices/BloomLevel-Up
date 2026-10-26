@@ -1,18 +1,26 @@
 {
-  "replace": false,
-  "values": [
-    "minecraft:desert",
-    {
-      "id": "#minecraft:is_badlands",
-      "required": false
-    },
-    {
-      "id": "#c:is_desert",
-      "required": false
-    },
-    {
-      "id": "#c:is_badlands",
-      "required": false
-    }
-  ]
+	"replace": false,
+	"values": [
+		"minecraft:desert",
+		{
+			"id": "#minecraft:is_badlands",
+			"required": false
+		},
+		{
+			"id": "#c:is_desert",
+			"required": false
+		},
+		{
+			"id": "#forge:is_desert",
+			"required": false
+		},
+		{
+			"id": "#c:is_badlands",
+			"required": false
+		},
+		{
+			"id": "#forge:is_badlands",
+			"required": false
+		}
+	]
 }

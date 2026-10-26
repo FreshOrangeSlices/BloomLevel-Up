@@ -25,16 +25,20 @@ public final class BloomDamage {
 		return ResourceKey.create(Registries.DAMAGE_TYPE, BloomLevelUp.id(path));
 	}
 
+	private static net.minecraft.core.Holder<DamageType> type(ServerLevel level, ResourceKey<DamageType> key) {
+		return level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key);
+	}
+
 	public static DamageSource bleed(ServerLevel level) {
-		return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(BLEED));
+		return new DamageSource(type(level, BLEED));
 	}
 
 	public static DamageSource lightningShock(ServerLevel level, Entity attacker) {
-		return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(LIGHTNING_SHOCK), null, attacker);
+		return new DamageSource(type(level, LIGHTNING_SHOCK), null, attacker);
 	}
 
 	public static DamageSource overkill(ServerLevel level, Entity attacker) {
-		return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(OVERKILL), null, attacker);
+		return new DamageSource(type(level, OVERKILL), null, attacker);
 	}
 
 	/** Damage this mod deals as a side effect: never feeds weapon Majors again (no recursion). */

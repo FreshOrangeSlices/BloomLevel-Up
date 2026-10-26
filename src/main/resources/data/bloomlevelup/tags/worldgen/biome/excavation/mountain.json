@@ -1,20 +1,28 @@
 {
-  "replace": false,
-  "values": [
-    {
-      "id": "#minecraft:is_mountain",
-      "required": false
-    },
-    "minecraft:dripstone_caves",
-    "minecraft:lush_caves",
-    "minecraft:deep_dark",
-    {
-      "id": "#c:is_mountain",
-      "required": false
-    },
-    {
-      "id": "#c:is_cave",
-      "required": false
-    }
-  ]
+	"replace": false,
+	"values": [
+		{
+			"id": "#minecraft:is_mountain",
+			"required": false
+		},
+		"minecraft:dripstone_caves",
+		"minecraft:lush_caves",
+		"minecraft:deep_dark",
+		{
+			"id": "#c:is_mountain",
+			"required": false
+		},
+		{
+			"id": "#forge:is_mountain",
+			"required": false
+		},
+		{
+			"id": "#c:is_cave",
+			"required": false
+		},
+		{
+			"id": "#forge:is_cave",
+			"required": false
+		}
+	]
 }

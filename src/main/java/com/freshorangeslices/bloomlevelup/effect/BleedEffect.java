@@ -1,5 +1,7 @@
 package com.freshorangeslices.bloomlevelup.effect;
 
+import org.joml.Vector3f;
+
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -17,19 +19,23 @@ import com.freshorangeslices.bloomlevelup.skill.combat.BloomDamage;
  * dark red drips instead, with a spatter on every damage tick.
  */
 public final class BleedEffect extends MobEffect {
-	private static final DustParticleOptions BLOOD = new DustParticleOptions(0x7A0A12, 1.1F);
+	private static final DustParticleOptions BLOOD = new DustParticleOptions(new Vector3f(0x7A / 255.0F, 0x0A / 255.0F, 0x12 / 255.0F), 1.1F);
 
 	public BleedEffect() {
 		super(MobEffectCategory.HARMFUL, 0x9B111E);
 	}
 
 	@Override
-	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return duration % 5 == 0;
 	}
 
 	@Override
-	public boolean applyEffectTick(ServerLevel level, LivingEntity entity, int amplifier) {
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		if (!(entity.level() instanceof ServerLevel level)) {
+			return;
+		}
+
 		double width = entity.getBbWidth();
 		double height = entity.getBbHeight();
 		level.sendParticles(BLOOD, entity.getX(), entity.getY(0.55), entity.getZ(), 2, width * 0.3, height * 0.2, width * 0.3, 0.0);
@@ -38,9 +44,7 @@ public final class BleedEffect extends MobEffect {
 		if (entity.tickCount % 20 < 5) {
 			level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.REDSTONE_BLOCK.defaultBlockState()), entity.getX(), entity.getY(0.6),
 					entity.getZ(), 6, width * 0.25, height * 0.15, width * 0.25, 0.05);
-			entity.hurtServer(level, BloomDamage.bleed(level), 1.0F + amplifier);
+			entity.hurt(BloomDamage.bleed(level), 1.0F + amplifier);
 		}
-
-		return true;
 	}
 }

@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import net.minecraft.network.FriendlyByteBuf;
 
 /**
  * Every packet the mod sends. Server to client carries snapshots (definitions + config, the player's profile)
  * and the outcome of a request; client to server only ever carries a request, which the server validates.
+ * Each one writes itself and has a {@code read}; {@link BloomNetwork} registers them on the mod's channel.
  */
 public final class BloomPayloads {
 	/** Upper bound for JSON snapshots; definitions for a large modpack stay far below this. */
@@ -23,42 +20,24 @@ public final class BloomPayloads {
 	}
 
 	/** Server → client: every category, stat and Major currently loaded, plus the server config. */
-	public record SyncDefinitions(String json) implements CustomPacketPayload {
-		public static final Type<SyncDefinitions> TYPE = new Type<>(BloomLevelUp.id("sync_definitions"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, SyncDefinitions> CODEC =
-				CustomPacketPayload.codec(SyncDefinitions::write, SyncDefinitions::new);
-
-		private SyncDefinitions(RegistryFriendlyByteBuf buf) {
-			this(buf.readUtf(MAX_JSON));
+	public record SyncDefinitions(String json) {
+		public static SyncDefinitions read(FriendlyByteBuf buf) {
+			return new SyncDefinitions(buf.readUtf(MAX_JSON));
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeUtf(json, MAX_JSON);
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
 		}
 	}
 
 	/** Server → client: the player's own profile. */
-	public record SyncProfile(String json) implements CustomPacketPayload {
-		public static final Type<SyncProfile> TYPE = new Type<>(BloomLevelUp.id("sync_profile"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, SyncProfile> CODEC =
-				CustomPacketPayload.codec(SyncProfile::write, SyncProfile::new);
-
-		private SyncProfile(RegistryFriendlyByteBuf buf) {
-			this(buf.readUtf(MAX_JSON));
+	public record SyncProfile(String json) {
+		public static SyncProfile read(FriendlyByteBuf buf) {
+			return new SyncProfile(buf.readUtf(MAX_JSON));
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeUtf(json, MAX_JSON);
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
 		}
 	}
 
@@ -88,38 +67,25 @@ public final class BloomPayloads {
 	}
 
 	/** Client → server: one request from the hub. The server never trusts it beyond "the player asked for this". */
-	public record Request(Action action, String target, int amount) implements CustomPacketPayload {
-		public static final Type<Request> TYPE = new Type<>(BloomLevelUp.id("request"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, Request> CODEC =
-				CustomPacketPayload.codec(Request::write, Request::new);
-
-		private Request(RegistryFriendlyByteBuf buf) {
-			this(buf.readEnum(Action.class), buf.readUtf(MAX_ID), buf.readVarInt());
+	public record Request(Action action, String target, int amount) {
+		public static Request read(FriendlyByteBuf buf) {
+			return new Request(buf.readEnum(Action.class), buf.readUtf(MAX_ID), buf.readVarInt());
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeEnum(action);
 			buf.writeUtf(target, MAX_ID);
 			buf.writeVarInt(amount);
 		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
 	}
 
 	/** Server → client: how a request turned out (the profile sync carries the new state). */
-	public record Result(Action action, String target, String outcome, List<String> involved) implements CustomPacketPayload {
-		public static final Type<Result> TYPE = new Type<>(BloomLevelUp.id("result"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, Result> CODEC =
-				CustomPacketPayload.codec(Result::write, Result::new);
-
-		private Result(RegistryFriendlyByteBuf buf) {
-			this(buf.readEnum(Action.class), buf.readUtf(MAX_ID), buf.readUtf(MAX_ID), readList(buf));
+	public record Result(Action action, String target, String outcome, List<String> involved) {
+		public static Result read(FriendlyByteBuf buf) {
+			return new Result(buf.readEnum(Action.class), buf.readUtf(MAX_ID), buf.readUtf(MAX_ID), readList(buf));
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeEnum(action);
 			buf.writeUtf(target, MAX_ID);
 			buf.writeUtf(outcome, MAX_ID);
@@ -130,7 +96,7 @@ public final class BloomPayloads {
 			}
 		}
 
-		private static List<String> readList(RegistryFriendlyByteBuf buf) {
+		private static List<String> readList(FriendlyByteBuf buf) {
 			int size = Math.min(buf.readVarInt(), 512);
 			List<String> list = new ArrayList<>(size);
 
@@ -139,11 +105,6 @@ public final class BloomPayloads {
 			}
 
 			return list;
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
 		}
 	}
 
@@ -170,22 +131,13 @@ public final class BloomPayloads {
 	}
 
 	/** Client → server: a combat ability key. The server checks the Major, the weapon and cooldowns itself. */
-	public record CombatInput(CombatAction action) implements CustomPacketPayload {
-		public static final Type<CombatInput> TYPE = new Type<>(BloomLevelUp.id("combat_input"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, CombatInput> CODEC =
-				CustomPacketPayload.codec(CombatInput::write, CombatInput::new);
-
-		private CombatInput(RegistryFriendlyByteBuf buf) {
-			this(buf.readEnum(CombatAction.class));
+	public record CombatInput(CombatAction action) {
+		public static CombatInput read(FriendlyByteBuf buf) {
+			return new CombatInput(buf.readEnum(CombatAction.class));
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeEnum(action);
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
 		}
 	}
 
@@ -193,52 +145,34 @@ public final class BloomPayloads {
 	 * Server → client: one of the stacking combat meters for the HUD (Bloodlust, Predator, Combo): stacks, the
 	 * bonus the next hit gets, and how long until they run out (0 stacks = hide the bar).
 	 */
-	public record Meter(int kind, int stacks, float bonus, int ticksLeft, int totalTicks) implements CustomPacketPayload {
+	public record Meter(int kind, int stacks, float bonus, int ticksLeft, int totalTicks) {
 		public static final int BLOODLUST = 0;
 		public static final int PREDATOR = 1;
 		public static final int COMBO = 2;
 		public static final int KINDS = 3;
-		public static final Type<Meter> TYPE = new Type<>(BloomLevelUp.id("meter"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, Meter> CODEC =
-				CustomPacketPayload.codec(Meter::write, Meter::new);
-
-		private Meter(RegistryFriendlyByteBuf buf) {
-			this(buf.readVarInt(), buf.readVarInt(), buf.readFloat(), buf.readVarInt(), buf.readVarInt());
+		public static Meter read(FriendlyByteBuf buf) {
+			return new Meter(buf.readVarInt(), buf.readVarInt(), buf.readFloat(), buf.readVarInt(), buf.readVarInt());
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeVarInt(kind);
 			buf.writeVarInt(stacks);
 			buf.writeFloat(bonus);
 			buf.writeVarInt(ticksLeft);
 			buf.writeVarInt(totalTicks);
 		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
 	}
 
 	/** Server → client: one player's nameplate tag, {@code [lvl N]} with N = spent Major Levels, green once mastered. */
-	public record NameTag(UUID player, int spent, boolean mastered) implements CustomPacketPayload {
-		public static final Type<NameTag> TYPE = new Type<>(BloomLevelUp.id("name_tag"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, NameTag> CODEC =
-				CustomPacketPayload.codec(NameTag::write, NameTag::new);
-
-		private NameTag(RegistryFriendlyByteBuf buf) {
-			this(buf.readUUID(), buf.readVarInt(), buf.readBoolean());
+	public record NameTag(UUID player, int spent, boolean mastered) {
+		public static NameTag read(FriendlyByteBuf buf) {
+			return new NameTag(buf.readUUID(), buf.readVarInt(), buf.readBoolean());
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeUUID(player);
 			buf.writeVarInt(spent);
 			buf.writeBoolean(mastered);
-		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
 		}
 	}
 }

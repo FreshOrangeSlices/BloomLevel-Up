@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentSerialization;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
-
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 
 /**
  * The stat sheet's packets. The client only says which tab, which inventory slot, which target and which
@@ -29,24 +24,21 @@ public final class SheetPayloads {
 	 * Client → server: the stat sheet for {@code category}, for the item in inventory {@code slot} (-1 = main hand,
 	 * -2 = bare hands). {@code toggles}: "id=max" or "id=off" for each switch not left on Live.
 	 */
-	public record Request(int id, String category, int slot, int target, List<String> toggles, int compareSlot, boolean compareBuild)
-			implements CustomPacketPayload {
+	public record Request(int id, String category, int slot, int target, List<String> toggles, int compareSlot, boolean compareBuild) {
 		/** {@code compareSlot} when nothing is pinned. */
 		public static final int NO_COMPARE = -100;
-		public static final Type<Request> TYPE = new Type<>(BloomLevelUp.id("sheet_request"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, Request> CODEC = CustomPacketPayload.codec(Request::write, Request::new);
 
 		/** A plain request: no pinned item, no other build. */
 		public Request(int id, String category, int slot, int target, List<String> toggles) {
 			this(id, category, slot, target, toggles, NO_COMPARE, false);
 		}
 
-		private Request(RegistryFriendlyByteBuf buf) {
-			this(buf.readVarInt(), buf.readUtf(BloomPayloads.MAX_ID), buf.readInt(), buf.readVarInt(),
+		public static Request read(FriendlyByteBuf buf) {
+			return new Request(buf.readVarInt(), buf.readUtf(BloomPayloads.MAX_ID), buf.readInt(), buf.readVarInt(),
 					readList(buf, MAX_TOGGLES, b -> b.readUtf(BloomPayloads.MAX_ID)), buf.readInt(), buf.readBoolean());
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeVarInt(id);
 			buf.writeUtf(category, BloomPayloads.MAX_ID);
 			buf.writeInt(slot);
@@ -60,11 +52,6 @@ public final class SheetPayloads {
 			buf.writeInt(compareSlot);
 			buf.writeBoolean(compareBuild);
 		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
 	}
 
 	/** One line of a sheet: a heading, a "label ... value" row, or a grey note under the row before it. */
@@ -75,14 +62,14 @@ public final class SheetPayloads {
 		/** A row that sums up the rows above it (drawn with a line over it). */
 		public static final int TOTAL = 3;
 
-		static Row read(RegistryFriendlyByteBuf buf) {
-			return new Row(buf.readVarInt(), ComponentSerialization.STREAM_CODEC.decode(buf), ComponentSerialization.STREAM_CODEC.decode(buf));
+		static Row read(FriendlyByteBuf buf) {
+			return new Row(buf.readVarInt(), buf.readComponent(), buf.readComponent());
 		}
 
-		void write(RegistryFriendlyByteBuf buf) {
+		void write(FriendlyByteBuf buf) {
 			buf.writeVarInt(kind);
-			ComponentSerialization.STREAM_CODEC.encode(buf, label);
-			ComponentSerialization.STREAM_CODEC.encode(buf, value);
+			buf.writeComponent(label);
+			buf.writeComponent(value);
 		}
 	}
 
@@ -95,17 +82,17 @@ public final class SheetPayloads {
 		public static final int MAX = 1;
 		public static final int OFF = 2;
 
-		static Toggle read(RegistryFriendlyByteBuf buf) {
-			return new Toggle(buf.readUtf(BloomPayloads.MAX_ID), ComponentSerialization.STREAM_CODEC.decode(buf),
-					ComponentSerialization.STREAM_CODEC.decode(buf), buf.readVarInt(), ComponentSerialization.STREAM_CODEC.decode(buf));
+		static Toggle read(FriendlyByteBuf buf) {
+			return new Toggle(buf.readUtf(BloomPayloads.MAX_ID), buf.readComponent(),
+					buf.readComponent(), buf.readVarInt(), buf.readComponent());
 		}
 
-		void write(RegistryFriendlyByteBuf buf) {
+		void write(FriendlyByteBuf buf) {
 			buf.writeUtf(id, BloomPayloads.MAX_ID);
-			ComponentSerialization.STREAM_CODEC.encode(buf, name);
-			ComponentSerialization.STREAM_CODEC.encode(buf, tooltip);
+			buf.writeComponent(name);
+			buf.writeComponent(tooltip);
 			buf.writeVarInt(mode);
-			ComponentSerialization.STREAM_CODEC.encode(buf, live);
+			buf.writeComponent(live);
 		}
 	}
 
@@ -115,39 +102,32 @@ public final class SheetPayloads {
 	 * caption and a badge such as "×1.4"), then the short summary and the full breakdown.
 	 */
 	public record View(int id, String category, int slot, ItemStack weapon, List<Component> targets, int target, List<Toggle> toggles,
-			ItemStack gauge, Component gaugeCaption, Component gaugeBadge, List<Row> summary, List<Row> details) implements CustomPacketPayload {
-		public static final Type<View> TYPE = new Type<>(BloomLevelUp.id("sheet_view"));
-		public static final StreamCodec<RegistryFriendlyByteBuf, View> CODEC = CustomPacketPayload.codec(View::write, View::new);
+			ItemStack gauge, Component gaugeCaption, Component gaugeBadge, List<Row> summary, List<Row> details) {
 
-		private View(RegistryFriendlyByteBuf buf) {
-			this(buf.readVarInt(), buf.readUtf(BloomPayloads.MAX_ID), buf.readVarInt(), ItemStack.OPTIONAL_STREAM_CODEC.decode(buf),
-					readList(buf, MAX_TOGGLES, ComponentSerialization.STREAM_CODEC::decode), buf.readVarInt(), readList(buf, MAX_TOGGLES, Toggle::read),
-					ItemStack.OPTIONAL_STREAM_CODEC.decode(buf), ComponentSerialization.STREAM_CODEC.decode(buf),
-					ComponentSerialization.STREAM_CODEC.decode(buf), readList(buf, MAX_ROWS, Row::read), readList(buf, MAX_ROWS, Row::read));
+		public static View read(FriendlyByteBuf buf) {
+			return new View(buf.readVarInt(), buf.readUtf(BloomPayloads.MAX_ID), buf.readVarInt(), buf.readItem(),
+					readList(buf, MAX_TOGGLES, FriendlyByteBuf::readComponent), buf.readVarInt(), readList(buf, MAX_TOGGLES, Toggle::read),
+					buf.readItem(), buf.readComponent(),
+					buf.readComponent(), readList(buf, MAX_ROWS, Row::read), readList(buf, MAX_ROWS, Row::read));
 		}
 
-		private void write(RegistryFriendlyByteBuf buf) {
+		public void write(FriendlyByteBuf buf) {
 			buf.writeVarInt(id);
 			buf.writeUtf(category, BloomPayloads.MAX_ID);
 			buf.writeVarInt(slot);
-			ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, weapon);
-			writeList(buf, targets, MAX_TOGGLES, (b, c) -> ComponentSerialization.STREAM_CODEC.encode(b, c));
+			buf.writeItem(weapon);
+			writeList(buf, targets, MAX_TOGGLES, (b, c) -> b.writeComponent(c));
 			buf.writeVarInt(target);
 			writeList(buf, toggles, MAX_TOGGLES, (b, t) -> t.write(b));
-			ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, gauge);
-			ComponentSerialization.STREAM_CODEC.encode(buf, gaugeCaption);
-			ComponentSerialization.STREAM_CODEC.encode(buf, gaugeBadge);
+			buf.writeItem(gauge);
+			buf.writeComponent(gaugeCaption);
+			buf.writeComponent(gaugeBadge);
 			writeList(buf, summary, MAX_ROWS, (b, r) -> r.write(b));
 			writeList(buf, details, MAX_ROWS, (b, r) -> r.write(b));
 		}
-
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
 	}
 
-	private static <T> List<T> readList(RegistryFriendlyByteBuf buf, int max, Function<RegistryFriendlyByteBuf, T> reader) {
+	private static <T> List<T> readList(FriendlyByteBuf buf, int max, Function<FriendlyByteBuf, T> reader) {
 		int size = buf.readVarInt();
 
 		if (size < 0 || size > max) {
@@ -163,7 +143,7 @@ public final class SheetPayloads {
 		return out;
 	}
 
-	private static <T> void writeList(RegistryFriendlyByteBuf buf, List<T> list, int max, java.util.function.BiConsumer<RegistryFriendlyByteBuf, T> writer) {
+	private static <T> void writeList(FriendlyByteBuf buf, List<T> list, int max, java.util.function.BiConsumer<FriendlyByteBuf, T> writer) {
 		int size = Math.min(list.size(), max);
 		buf.writeVarInt(size);
 

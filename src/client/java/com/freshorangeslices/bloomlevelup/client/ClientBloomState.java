@@ -23,6 +23,9 @@ public final class ClientBloomState {
 	private static String selectedCategory;
 	private static int version;
 	private static SheetPayloads.View sheet;
+	/** Runs after new definitions arrive (the icon cache drops what it loaded for the old ones). */
+	private static Runnable onDefinitionsChanged = () -> {
+	};
 
 	private ClientBloomState() {
 	}
@@ -58,11 +61,15 @@ public final class ClientBloomState {
 		return version;
 	}
 
+	public static void onDefinitionsChanged(Runnable listener) {
+		onDefinitionsChanged = listener;
+	}
+
 	static void setDefinitions(DefinitionSet newDefinitions, BloomConfig newConfig) {
 		definitions = newDefinitions;
 		config = newConfig;
 		service = null;
-		IconTextures.clearCache();
+		onDefinitionsChanged.run();
 		version++;
 	}
 

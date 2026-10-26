@@ -9,7 +9,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 import com.freshorangeslices.bloomlevelup.definition.CategoryDefinition;
 import com.freshorangeslices.bloomlevelup.definition.HubPosition;
@@ -46,7 +46,7 @@ public final class DefinitionCodecs {
 				RawStat.CODEC.listOf().optionalFieldOf("stats", List.of()).forGetter(RawCategory::stats)
 		).apply(i, RawCategory::new));
 
-		public CategoryDefinition toDefinition(Identifier id) {
+		public CategoryDefinition toDefinition(ResourceLocation id) {
 			String categoryId = id.toString();
 			List<StatDefinition> list = new ArrayList<>();
 
@@ -94,7 +94,7 @@ public final class DefinitionCodecs {
 				HUB_POSITION.optionalFieldOf("hub_position").forGetter(RawMajor::hubPosition)
 		).apply(i, RawMajor::new));
 
-		public MajorDefinition toDefinition(Identifier id) {
+		public MajorDefinition toDefinition(ResourceLocation id) {
 			String ns = id.getNamespace();
 			return new MajorDefinition(
 					id.toString(),

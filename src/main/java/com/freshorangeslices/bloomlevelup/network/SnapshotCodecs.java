@@ -26,6 +26,11 @@ import com.freshorangeslices.bloomlevelup.player.ProfileCodecs;
 public final class SnapshotCodecs {
 	private static final Gson GSON = new Gson();
 
+	private static <T> T unwrap(com.mojang.serialization.DataResult<T> result) {
+		return result.getOrThrow(false, error -> {
+		});
+	}
+
 	private SnapshotCodecs() {
 	}
 
@@ -71,25 +76,25 @@ public final class SnapshotCodecs {
 	public static String encodeDefinitions(DefinitionSet definitions, BloomConfig config) {
 		JsonObject root = new JsonObject();
 		root.add("config", GSON.toJsonTree(config));
-		root.add("categories", CATEGORY.listOf().encodeStart(JsonOps.INSTANCE, List.copyOf(definitions.categories())).getOrThrow());
-		root.add("majors", MAJOR.listOf().encodeStart(JsonOps.INSTANCE, List.copyOf(definitions.majors())).getOrThrow());
+		root.add("categories", unwrap(CATEGORY.listOf().encodeStart(JsonOps.INSTANCE, List.copyOf(definitions.categories()))));
+		root.add("majors", unwrap(MAJOR.listOf().encodeStart(JsonOps.INSTANCE, List.copyOf(definitions.majors()))));
 		return GSON.toJson(root);
 	}
 
 	public static DefinitionsSnapshot decodeDefinitions(String json) {
 		JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 		BloomConfig config = GSON.fromJson(root.get("config"), BloomConfig.class).validated();
-		List<CategoryDefinition> categories = CATEGORY.listOf().parse(JsonOps.INSTANCE, root.get("categories")).getOrThrow();
-		List<MajorDefinition> majors = MAJOR.listOf().parse(JsonOps.INSTANCE, root.get("majors")).getOrThrow();
+		List<CategoryDefinition> categories = unwrap(CATEGORY.listOf().parse(JsonOps.INSTANCE, root.get("categories")));
+		List<MajorDefinition> majors = unwrap(MAJOR.listOf().parse(JsonOps.INSTANCE, root.get("majors")));
 		return new DefinitionsSnapshot(DefinitionSet.build(categories, majors), config);
 	}
 
 	public static String encodeProfile(BloomProfile profile) {
-		JsonElement json = ProfileCodecs.PROFILE.encodeStart(JsonOps.INSTANCE, profile).getOrThrow();
+		JsonElement json = unwrap(ProfileCodecs.PROFILE.encodeStart(JsonOps.INSTANCE, profile));
 		return GSON.toJson(json);
 	}
 
 	public static BloomProfile decodeProfile(String json) {
-		return ProfileCodecs.PROFILE.parse(JsonOps.INSTANCE, JsonParser.parseString(json)).getOrThrow();
+		return unwrap(ProfileCodecs.PROFILE.parse(JsonOps.INSTANCE, JsonParser.parseString(json)));
 	}
 }

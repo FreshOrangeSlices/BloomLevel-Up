@@ -32,6 +32,15 @@ public final class TestPlayers {
 	public static final class Vulnerable extends FakePlayer {
 		Vulnerable(ServerLevel level, GameProfile profile) {
 			super(level, profile);
+
+			// New players are briefly immune after spawning (they never tick here, so it would never wear off).
+			try {
+				java.lang.reflect.Field spawnInvulnerable = ServerPlayer.class.getDeclaredField("spawnInvulnerableTime");
+				spawnInvulnerable.setAccessible(true);
+				spawnInvulnerable.setInt(this, 0);
+			} catch (ReflectiveOperationException e) {
+				throw new IllegalStateException("Couldn't make a test player vulnerable", e);
+			}
 		}
 
 		@Override

@@ -563,54 +563,59 @@ public final class ArmorSkill {
 	// ------------------------------------------------------------------ per tick
 
 	private static void tick(MinecraftServer server) {
-		BloomConfig config = config();
-
 		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-			BloomProfile profile = BloomAttachments.profile(player);
-			UUID id = player.getUUID();
+			tickPlayer(player);
+		}
+	}
 
-			// Brace!: crouch still or raise a shield, on the ground, and you're braced (at once by default). Only your own
-			// movement ends it (walking, jumping, standing up, lowering the shield); knockback doesn't. Once it ends it
-			// cools down (10 s) before it can take hold again, so hopping while crouched can't re-brace on every landing.
-			// The state lives in synced profile counters so the HUD can show it.
-			boolean braced = profile.counter(ArmorIds.BRACED) != 0;
+	/** One player's per-tick Armor checks (Brace!, Castle of Stone's rest). Public for game tests. */
+	public static void tickPlayer(ServerPlayer player) {
+		BloomConfig config = config();
+		BloomProfile profile = BloomAttachments.profile(player);
+		UUID id = player.getUUID();
 
-			if (active(profile, ArmorIds.BRACE)) {
-				boolean moving = MOVING.getOrDefault(id, false);
-				boolean shieldUp = player.isUsingItem() && player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK);
-				boolean planted = !moving && (player.isShiftKeyDown() || shieldUp);
-				long now = player.level().getGameTime();
+		// Brace!: crouch still or raise a shield, on the ground, and you're braced (at once by default). Only your own
+		// movement ends it (walking, jumping, standing up, lowering the shield); knockback doesn't. Once it ends it
+		// cools down (10 s) before it can take hold again, so hopping while crouched can't re-brace on every landing.
+		// The state lives in synced profile counters so the HUD can show it.
+		boolean braced = profile.counter(ArmorIds.BRACED) != 0;
 
-				if (braced) {
-					if (!planted) {
-						profile.setCounter(ArmorIds.BRACED, 0);
-						profile.setCounter(ArmorIds.BRACE_READY_AT, now + config.braceCooldownTicks);
-						BloomSync.changed(player);
-					}
-				} else if (planted && player.onGround() && now >= profile.counter(ArmorIds.BRACE_READY_AT)) {
-					if (BRACE_TICKS.merge(id, 1, Integer::sum) >= config.braceDelayTicks) {
-						BRACE_TICKS.remove(id);
-						profile.setCounter(ArmorIds.BRACED, 1);
-						BloomSync.changed(player);
-					}
-				} else {
+		if (active(profile, ArmorIds.BRACE)) {
+			boolean moving = MOVING.getOrDefault(id, false);
+			boolean shieldUp = player.isUsingItem() && player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK);
+			boolean planted = !moving && (player.isShiftKeyDown() || shieldUp);
+			long now = player.level().getGameTime();
+
+			if (braced) {
+				if (!planted) {
+					profile.setCounter(ArmorIds.BRACED, 0);
+					profile.setCounter(ArmorIds.BRACE_READY_AT, now + config.braceCooldownTicks);
+					BloomSync.changed(player);
+				}
+			} else if (planted && player.onGround() && now >= profile.counter(ArmorIds.BRACE_READY_AT)) {
+				if (BRACE_TICKS.merge(id, 1, Integer::sum) >= config.braceDelayTicks) {
 					BRACE_TICKS.remove(id);
+					profile.setCounter(ArmorIds.BRACED, 1);
+					BloomSync.changed(player);
 				}
 			} else {
 				BRACE_TICKS.remove(id);
-
-				if (braced) { // refunded or switched off while braced
-					profile.setCounter(ArmorIds.BRACED, 0);
-					BloomSync.changed(player);
-				}
 			}
+		} else {
+			BRACE_TICKS.remove(id);
 
-			// Castle of Stone recharges by lying in a bed for a few seconds (no night skip needed).
-			if (profile.counter(ArmorIds.CASTLE_SPENT) != 0 && player.isSleeping() && player.getSleepTimer() >= config.castleOfStoneRestTicks) {
-				profile.setCounter(ArmorIds.CASTLE_SPENT, 0);
-				player.sendSystemMessage(Component.translatable("bloom.armor.castle_recharged").withStyle(ChatFormatting.GREEN), true);
+			if (braced) { // refunded or switched off while braced
+				profile.setCounter(ArmorIds.BRACED, 0);
 				BloomSync.changed(player);
 			}
 		}
+
+		// Castle of Stone recharges by lying in a bed for a few seconds (no night skip needed).
+		if (profile.counter(ArmorIds.CASTLE_SPENT) != 0 && player.isSleeping() && player.getSleepTimer() >= config.castleOfStoneRestTicks) {
+			profile.setCounter(ArmorIds.CASTLE_SPENT, 0);
+			player.sendSystemMessage(Component.translatable("bloom.armor.castle_recharged").withStyle(ChatFormatting.GREEN), true);
+			BloomSync.changed(player);
+		}
+
 	}
 }

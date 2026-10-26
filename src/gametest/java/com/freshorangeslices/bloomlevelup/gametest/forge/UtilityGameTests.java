@@ -363,7 +363,9 @@ public final class UtilityGameTests {
 		helper.setBlock(new BlockPos(3, 1, 3), Blocks.SAND);
 		helper.setBlock(new BlockPos(3, 2, 3), Blocks.CACTUS);
 		BlockState before = helper.getBlockState(new BlockPos(3, 2, 3));
-		helper.setBlock(new BlockPos(2, 1, 3), Blocks.FARMLAND);
+		// Wet farmland: the aura's random ticks would otherwise dry it to dirt and pop the wheat.
+		helper.setBlock(new BlockPos(1, 1, 3), Blocks.WATER);
+		helper.setBlock(new BlockPos(2, 1, 3), Blocks.FARMLAND.defaultBlockState().setValue(BlockStateProperties.MOISTURE, 7));
 		helper.setBlock(new BlockPos(2, 2, 3), Blocks.WHEAT);
 
 		BloomConfig config = BloomServices.config();

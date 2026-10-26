@@ -50,7 +50,7 @@ public final class ArmorGameTests {
 	// ------------------------------------------------------------------ helpers
 
 	private static ServerPlayer player(GameTestHelper helper) {
-		return helper.makeMockServerPlayerInLevel();
+		return TestPlayers.player(helper, ItemStack.EMPTY);
 	}
 
 	/** Max out every category (40 Major Levels) and buy the given Majors. */
@@ -414,6 +414,12 @@ public final class ArmorGameTests {
 		shield.setOnGround(true);
 		shield.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.SHIELD));
 		shield.startUsingItem(InteractionHand.OFF_HAND);
+
+		// Fake players aren't in the player list, so this test runs Brace!'s per-tick check for them itself.
+		helper.onEachTick(() -> {
+			ArmorSkill.tickPlayer(player);
+			ArmorSkill.tickPlayer(shield);
+		});
 
 		helper.runAfterDelay(delay + 2, () -> {
 			helper.assertTrue(ArmorSkill.isBraced(player), "Crouched still: braced");

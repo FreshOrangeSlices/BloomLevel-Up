@@ -13,6 +13,8 @@ public final class CombatIds {
 	// Sword
 	public static final String FULL_SWEEP = BloomLevelUp.key("combat/full_sweep");
 	public static final String EXECUTE = BloomLevelUp.key("combat/execute");
+	/** Forge 1.20.1 build: the spear's Impale moved to swords (no spears or maces in 1.20.1). */
+	public static final String SLASH = BloomLevelUp.key("combat/slash");
 	// Axe
 	public static final String CHARGE_ATTACK = BloomLevelUp.key("combat/charge_attack");
 	public static final String ARMOR_BREAK = BloomLevelUp.key("combat/armor_break");
@@ -28,16 +30,10 @@ public final class CombatIds {
 	public static final String UNRESTRICTED_RIPTIDE = BloomLevelUp.key("combat/unrestricted_riptide");
 	public static final String LIGHTNING_SHOCK = BloomLevelUp.key("combat/lightning_shock");
 	public static final String LIGHTNING_SUMMON = BloomLevelUp.key("combat/lightning_summon");
-	// Mace
-	public static final String WIND_IMPACT = BloomLevelUp.key("combat/wind_impact");
-	public static final String STORED_IMPACT = BloomLevelUp.key("combat/stored_impact");
 	// Unarmed
 	public static final String BRAWLER = BloomLevelUp.key("combat/brawler");
 	public static final String COMBO = BloomLevelUp.key("combat/combo");
 	public static final String DISARM = BloomLevelUp.key("combat/disarm");
-	// Spear
-	public static final String LONG_REACH = BloomLevelUp.key("combat/long_reach");
-	public static final String IMPALE = BloomLevelUp.key("combat/impale");
 	// Universal
 	public static final String BATTER_UP = BloomLevelUp.key("combat/batter_up");
 	public static final String AURA_SWORD = BloomLevelUp.key("combat/aura_sword");
@@ -52,14 +48,6 @@ public final class CombatIds {
 	public static final String COPYCAT = BloomLevelUp.key("combat/copycat");
 	/** Lets the weapon-skill Majors that clash be owned together, and combines them (Charged Throw, Storm Call, ...). */
 	public static final String MASTER_OF_ARMS = BloomLevelUp.key("combat/master_of_arms");
-
-	// Persistent counters
-	/** Stored Impact: the stored bonus, in hundredths of a damage point. */
-	public static final String STORED_IMPACT_HUNDREDTHS = STORED_IMPACT + "#stored";
-	/** Stored Impact: game time when it can store again (the 5-minute cooldown). */
-	public static final String STORED_IMPACT_READY_AT = STORED_IMPACT + "#ready_at";
-	/** Game time the current Stored Impact window closes (0 = no window open). */
-	public static final String STORED_IMPACT_EXPIRES_AT = STORED_IMPACT + "#expires_at";
 
 	private CombatIds() {
 	}

@@ -150,25 +150,15 @@ public final class BloomConfig {
 	/** Lightning Shock: sparks that leave the struck target at once, and how many enemies each one jumps through. */
 	public int lightningShockSparks = 3;
 	public int lightningShockJumps = 3;
-	public double storedImpactRatio = 0.5;
-	public double storedImpactCap = 20.0;
-	/** Stored Impact: one storage window opened by the first stored fall; later falls add to it until it closes. */
-	public int storedImpactWindowTicks = 6000;
-	public double windImpactRadius = 3.5;
-	/** Wind Impact: right-click the ground with a mace for a wind-charge burst; cooldown between bursts. */
-	public int windImpactCooldownTicks = 20;
-	/** Wind Impact: mace durability each burst costs. */
-	public int windImpactDurabilityCost = 3;
 	/** Fitting Armor / Medium: how much of an axe's shield-disable time is left (0.3 = an axe's 5 s becomes 1.5 s). */
 	public double mediumShieldDisableRatio = 0.3;
-	public double windImpactStrength = 1.2;
 	public double brawlerDamage = 6.0;
 	public double comboPerHit = 0.25;
 	public double comboCap = 5.0;
 	public int comboResetTicks = 60;
 	public double disarmChance = 0.30;
-	public double longReachBlocks = 2.0;
-	public double impaleChance = 0.50;
+	/** Slash (swords): chance a fully charged hit (or its sweep) makes the target Bleed. */
+	public double slashChance = 0.50;
 	public int bleedTicks = 60;
 	public int auraSwordHits = 5;
 	public double auraSwordRadius = 4.0;
@@ -249,7 +239,6 @@ public final class BloomConfig {
 	public BloomConfig migrate() {
 		if (configVersion < 1) {
 			// Playtest round 1 (2026-10-19).
-			impaleChance = moved(impaleChance, 0.40, 0.50);
 			auraSwordRadius = moved(auraSwordRadius, 3.5, 3.0);
 			auraSwordPulseGapTicks = auraSwordPulseGapTicks == 10 ? 4 : auraSwordPulseGapTicks;
 			growthAuraChance = moved(growthAuraChance, 0.15, 0.35);
@@ -360,21 +349,13 @@ public final class BloomConfig {
 		lightningShockBounceTicks = Math.max(0, Math.min(100, lightningShockBounceTicks));
 		lightningShockSparks = Math.max(1, Math.min(8, lightningShockSparks));
 		lightningShockJumps = Math.max(1, Math.min(8, lightningShockJumps));
-		storedImpactRatio = Math.max(0.0, storedImpactRatio);
-		storedImpactCap = Math.max(0.0, storedImpactCap);
-		storedImpactWindowTicks = Math.max(1, storedImpactWindowTicks);
-		windImpactRadius = Math.max(0.5, Math.min(16.0, windImpactRadius));
-		windImpactCooldownTicks = Math.max(0, windImpactCooldownTicks);
-		windImpactDurabilityCost = Math.max(0, windImpactDurabilityCost);
 		mediumShieldDisableRatio = Math.min(1.0, Math.max(0.0, mediumShieldDisableRatio));
-		windImpactStrength = Math.max(0.0, windImpactStrength);
 		brawlerDamage = Math.max(0.0, brawlerDamage);
 		comboPerHit = Math.max(0.0, comboPerHit);
 		comboCap = Math.max(0.0, comboCap);
 		comboResetTicks = Math.max(1, comboResetTicks);
 		disarmChance = clamp01(disarmChance);
-		longReachBlocks = Math.max(0.0, longReachBlocks);
-		impaleChance = clamp01(impaleChance);
+		slashChance = clamp01(slashChance);
 		bleedTicks = Math.max(20, bleedTicks);
 		auraSwordHits = Math.max(1, auraSwordHits);
 		auraSwordRadius = Math.max(1.0, Math.min(16.0, auraSwordRadius));

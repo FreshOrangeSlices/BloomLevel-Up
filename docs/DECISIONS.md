@@ -481,6 +481,12 @@ Better Combat is optional: Bloom compiles against it but never bundles it, and e
 |---|---|---|
 | Versioning | CI builds are versioned `0.1.0+build.<run number>` (the jar name too); local builds `0.1.0+local`. The version shows in the hub's bottom-right corner, Mod Menu, the server log and the run's jar-check notice | `build.gradle` |
 
+## Forge 1.20.1 build (branch `forge-1.20.1`)
+
+| Topic | Decision | Where |
+|---|---|---|
+| No maces or spears in 1.20.1 | Wind Impact, Stored Impact (mace) and Long Reach (spear) are left out of this build. Impale becomes **Slash**, a sword Major: fully charged sword hits, and what their sweep catches, can Bleed (`slashChance`, 50%). Swords now have three Majors like every other weapon, so the Combat tab is six weapon trees of three. Death From Above's gate moves from the mace tree to the axe tree. The Master of Arms combos that need a mace go with them (from FreshOrangeSlices, 2026-10-25) | `data/bloomlevelup/bloom/major/combat/`, `CombatIds` |
+
 ## Still open (need a design call)
 
 - Nothing blocking.

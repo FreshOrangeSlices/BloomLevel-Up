@@ -589,6 +589,22 @@ public class CombatGameTests {
 		helper.succeed();
 	}
 
+	/** A mob hurt in the name of one that's already gone doesn't record it as its attacker (Origins: Legacy crashed on it). */
+	@GameTest
+	public void goneMobsArentRecordedAsAttackers(GameTestHelper helper) {
+		LivingEntity hurt = zombie(helper, 1, 1);
+		LivingEntity gone = zombie(helper, 3, 1);
+		LivingEntity here = zombie(helper, 5, 1);
+		gone.discard();
+		hurt.tickCount = 50;
+		hurt.setLastHurtByMob(gone);
+		helper.assertValueEqual(0, hurt.getLastHurtByMobTimestamp(), "A removed mob isn't recorded (no timestamp)");
+		hurt.setLastHurtByMob(here);
+		helper.assertValueEqual(50, hurt.getLastHurtByMobTimestamp(), "A mob that's still here is");
+		helper.assertTrue(hurt.getLastHurtByMob() == here, "And it's the attacker");
+		helper.succeed();
+	}
+
 	@GameTest
 	public void thrownWeaponsHitForTheirOwnDamage(GameTestHelper helper) {
 		ServerPlayer player = player(helper, ItemStack.EMPTY);

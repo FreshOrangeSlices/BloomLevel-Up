@@ -38,6 +38,18 @@ abstract class LivingEntityMixin {
 		}
 	}
 
+	/**
+	 * Pack compatibility: Origins: Legacy sends a mob's attacker to nearby players right after it's recorded, and crashes
+	 * the server when that attacker is no longer in the world (Mutant Monsters: the parts of a dead Mutant Skeleton fly
+	 * off and hit other mobs in its name). A mob that's gone can't be fought back, so it isn't recorded at all.
+	 */
+	@Inject(method = "setLastHurtByMob(Lnet/minecraft/world/entity/LivingEntity;)V", at = @At("HEAD"), cancellable = true)
+	private void bloomlevelup$noGoneAttackers(LivingEntity mob, CallbackInfo ci) {
+		if (mob != null && (mob.isRemoved() || mob.level() != ((LivingEntity) (Object) this).level())) {
+			ci.cancel();
+		}
+	}
+
 	@Inject(method = "getDamageAfterMagicAbsorb", at = @At("RETURN"), cancellable = true)
 	private void bloomlevelup$armorLayers(DamageSource source, float damage, CallbackInfoReturnable<Float> cir) {
 		if ((Object) this instanceof ServerPlayer player) {

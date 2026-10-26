@@ -187,6 +187,22 @@ jobs:
           lines = [l if len(l) < 400 else l[:400] + ' ...' for l in open('client-pack.log', encoding='utf-8', errors='replace').read().splitlines()]
           lines = [l for l in lines if not noise.search(l)]
           tests = [l for l in lines if 'BLOOMTEST' in l]
+          # A crash report: its stack and the entity or block being ticked, in full.
+          import glob
+          for report in sorted(glob.glob('build/run/clientGameTestPack/crash-reports/*.txt'))[:1]:
+              body = open(report, encoding='utf-8', errors='replace').read().splitlines()
+              keep = body[:70]
+              at = next((i for i, l in enumerate(body) if 'being ticked' in l or 'Affected level' in l), None)
+              if at is not None:
+                  keep += ['...'] + body[at:at + 25]
+              text = chr(10).join(keep)
+              for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
+                  print(f"::error title=client-pack-crash-{n:02d}::{esc(text[i:i + 3900])}")
+          census = [l.split('BLOOMCENSUS ', 1)[1] for l in lines if 'BLOOMCENSUS ' in l and '/INFO]' in l]
+          if census:
+              text = chr(10).join(census)
+              for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
+                  print(f"::error title=client-pack-census-{n:02d}::{esc(text[i:i + 3900])}")
           print(f"::notice title=client-pack-checks::{esc(chr(10).join(t[:600] for t in tests)[:3900] or 'no BLOOMTEST lines')}")
           # Each attempt: what happened after the game reached the title screen (or the last 80 lines before it).
           starts = [i for i, l in enumerate(lines) if re.search(r'Loading \d+ mods', l)] or [0]
@@ -324,11 +340,11 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: sheep, cow, wandering trader (Details add-on)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
-      - name: zombie, skeleton, creeper (Creepers add-on)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12
-      - name: the RPG Series' gear on armor stands (wizard, paladin, archer)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_rpg_gear 12
-      - name: the player in a wizard's robes with a staff
-        run: python3 .github/scripts/emit_screenshot.py shots pack_rpg_player 12
+      - name: Mutant Monsters (zombie, skeleton, creeper)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_mutants_1 12
+      - name: Mutant Monsters (snow golem, enderman, spider pig)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_mutants_2 12
+      - name: Remnants bosses (Ossukage, Hollow Sovereign, Forgotten Watcher)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_remnants_1 12
+      - name: Remnants bosses (Gravebound Warden, Burial Guardian) and a Soulbound Knight
+        run: python3 .github/scripts/emit_screenshot.py shots pack_remnants_2 12

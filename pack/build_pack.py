@@ -203,7 +203,9 @@ def mod_ids(data):
 
 def version_key(text):
     """A version as numbers for comparing ("15.57.0.207" -> (15, 57, 0, 207)); None when it doesn't start with one."""
-    numbers = re.findall(r"\d+", text.split("+")[0].split("-")[0] if re.match(r"\d", text) else "")
+    # Every number before any "+build" part ("1.20.1-2.3.0" -> 1.20.1.2.3.0, so Maven ranges like
+    # [1.20.1-2,1.20.1-3) compare right); a version that doesn't start with a number isn't compared.
+    numbers = re.findall(r"\d+", text.split("+")[0] if re.match(r"\d", text) else "")
     return tuple(int(n) for n in numbers) if numbers else None
 
 

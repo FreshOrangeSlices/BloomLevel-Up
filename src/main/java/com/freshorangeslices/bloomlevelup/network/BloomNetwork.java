@@ -24,7 +24,7 @@ import com.freshorangeslices.bloomlevelup.client.ClientPackets;
  */
 public final class BloomNetwork {
 	/** Bump when any message's shape changes. */
-	private static final String PROTOCOL = "1";
+	private static final String PROTOCOL = "2";
 
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomLevelUp.id("main"), () -> PROTOCOL, PROTOCOL::equals,
 			PROTOCOL::equals);
@@ -45,6 +45,10 @@ public final class BloomNetwork {
 		toClient(SheetPayloads.View.class, SheetPayloads.View::write, SheetPayloads.View::read, message -> ClientPackets.sheet(message));
 
 		toServer(BloomPayloads.Request.class, BloomPayloads.Request::write, BloomPayloads.Request::read, BloomSync::handle);
+		toServer(BloomPayloads.CombatInput.class, BloomPayloads.CombatInput::write, BloomPayloads.CombatInput::read,
+				(player, message) -> com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities.handle(player, message.action()));
+		toServer(BloomPayloads.MovementInput.class, BloomPayloads.MovementInput::write, BloomPayloads.MovementInput::read,
+				(player, message) -> com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill.movementInput(player, message.moving()));
 	}
 
 	/** A server → client message. {@code handler} runs on the client's main thread, and only on a physical client. */

@@ -15,7 +15,7 @@ import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 
 /**
- * Tracks "this player is eating/drinking right now" (from the Consumable mixin), so effects caused by food
+ * Tracks "this player is eating/drinking right now" (mixin around {@code LivingEntity.completeUsingItem}), so effects caused by food
  * the player chose to eat can be told apart from effects inflicted on them, and counts Protein! meals.
  */
 public final class ConsumeContext {
@@ -35,9 +35,9 @@ public final class ConsumeContext {
 		return CONSUMING.getOrDefault(player.getUUID(), ItemStack.EMPTY);
 	}
 
-	public static void begin(ServerPlayer player, ItemStack stack) {
+	public static void begin(ServerPlayer player, ItemStack stack, boolean fromOffhand) {
 		CONSUMING.put(player.getUUID(), stack.copy());
-		FROM_OFFHAND.put(player.getUUID(), stack == player.getOffhandItem() && stack != player.getMainHandItem());
+		FROM_OFFHAND.put(player.getUUID(), fromOffhand);
 
 		// Protein!: every qualifying meat item eaten after buying it counts toward permanent health.
 		BloomProfile profile = BloomAttachments.profile(player);

@@ -11,12 +11,26 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
+import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
+import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
+import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
+import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
+import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
 
 /**
  * Turns stat points (and the simple always-on Majors) into vanilla attribute modifiers. Idempotent: it
@@ -27,7 +41,9 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
  * health is loaded on login; otherwise extra hearts would be clipped every relog.
  *
  * <p>1.20.1 attribute modifiers are keyed by UUID (26.x uses ids): each of Bloom's gets a fixed UUID made from
- * its id, so the same modifier is found again after a relog.
+ * its id, so the same modifier is found again after a relog. 1.20.1 has no block-break-speed or fall-damage
+ * attribute and no sweep attribute: Efficiency and Titan Hide's fall cut are Forge events here, Full Sweep a
+ * mixin on the sweep itself.
  */
 public final class StatEffects {
 	public static final String VITALITY = BloomLevelUp.key("armor/vitality");
@@ -42,6 +58,11 @@ public final class StatEffects {
 	public static final ModifierId POWER_MOD = ModifierId.of("stat/power");
 	public static final ModifierId TEMPO_MOD = ModifierId.of("stat/tempo");
 	public static final ModifierId SPEED_MOD = ModifierId.of("stat/speed");
+	public static final ModifierId BRAWLER_MOD = ModifierId.of("major/brawler");
+	public static final ModifierId GUARANTEED_CRITICAL_MOD = ModifierId.of("major/guaranteed_critical");
+	public static final ModifierId TITAN_SPEED_MOD = ModifierId.of("major/titan_hide_speed");
+	public static final ModifierId PROTEIN_MOD = ModifierId.of("major/protein");
+	public static final ModifierId HEAVY_KNOCKBACK_MOD = ModifierId.of("major/fitting_armor_heavy");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	public static final double POWER_PER_POINT = 0.06;
@@ -61,8 +82,46 @@ public final class StatEffects {
 	private StatEffects() {
 	}
 
+	public static void init() {
+		// Efficiency (and Shovel Mastery's boost): faster block breaking, on both sides so the client's own mining
+		// keeps pace with the server.
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.BreakSpeed event) -> {
+			int efficiency = UtilitySkill.efficiencyAnySide(event.getEntity(), event.getEntity().getMainHandItem());
+
+			if (efficiency > 0) {
+				event.setNewSpeed(event.getNewSpeed() * (1.0F + efficiency / 100.0F));
+			}
+		});
+		// Titan Hide: -70% fall damage while wearing no armor.
+		MinecraftForge.EVENT_BUS.addListener((LivingFallEvent event) -> {
+			if (event.getEntity() instanceof ServerPlayer player && titanHide(player)) {
+				event.setDamageMultiplier(event.getDamageMultiplier() * 0.3F);
+			}
+		});
+	}
+
+	public static boolean titanHide(ServerPlayer player) {
+		return BloomServices.progression().isMajorActive(BloomAttachments.profile(player), TITAN_HIDE) && armorSlotsEmpty(player);
+	}
+
 	public static void refresh(ServerPlayer player) {
+		BloomProfile profile = BloomAttachments.profile(player);
+
+		// Misc: Ascension's flight, and Water to Wine's cut when it's switched off.
+		MiscSkill.refresh(player);
+
+		// Protein!: the meal count belongs to owning the Major; refunding it (or Bloom+) starts over.
+		// Protein!'s meals are kept while either build owns it (switching builds isn't a refund).
+		if (!profile.ownsInAnyBuild(ArmorIds.PROTEIN) && profile.counter(ArmorIds.PROTEIN_MEALS) != 0) {
+			profile.setCounter(ArmorIds.PROTEIN_MEALS, 0);
+		}
+
 		for (HeldModifier modifier : profileModifiers(player)) {
+			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
+		}
+
+		// Everything that depends on the item in hand (HeldItemWatcher refreshes on every swap).
+		for (HeldModifier modifier : heldModifiers(player, player.getMainHandItem())) {
 			apply(player, modifier.attribute(), modifier.id(), modifier.amount(), modifier.operation());
 		}
 
@@ -78,9 +137,33 @@ public final class StatEffects {
 	public static List<HeldModifier> profileModifiers(ServerPlayer player) {
 		ProgressionService service = BloomServices.progression();
 		BloomProfile profile = BloomAttachments.profile(player);
+		boolean titanHide = service.isMajorActive(profile, TITAN_HIDE) && armorSlotsEmpty(player);
+		double proteinHealth = service.isMajorActive(profile, ArmorIds.PROTEIN)
+				? StatFormulas.proteinBonusHealth(profile.counter(ArmorIds.PROTEIN_MEALS)) : 0.0;
+
+		// Fitting Armor / Heavy: strong knockback resistance that tapers off if you already resist knockback.
+		boolean heavy = service.isMajorActive(profile, ArmorIds.FITTING_ARMOR) && ArmorStyles.styleOf(player) == ArmorStyle.HEAVY;
+		double heavyKnockback = 0.0;
+
+		if (heavy) {
+			AttributeInstance knockback = player.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+
+			if (knockback != null) {
+				double others = knockback.getValue() - current(knockback, HEAVY_KNOCKBACK_MOD);
+				heavyKnockback = StatFormulas.heavyKnockbackResistance(others);
+			}
+		}
+
 		double defenseArmor = StatFormulas.defenseArmor(service.statValue(profile, DEFENSE));
 
+		if (titanHide) {
+			// +2 innate armor first, then the whole Defense value doubles.
+			defenseArmor = (defenseArmor + 2.0) * 2.0;
+		}
+
 		return List.of(
+				new HeldModifier(Attributes.MAX_HEALTH, PROTEIN_MOD, proteinHealth, AttributeModifier.Operation.ADDITION),
+				new HeldModifier(Attributes.KNOCKBACK_RESISTANCE, HEAVY_KNOCKBACK_MOD, heavyKnockback, AttributeModifier.Operation.ADDITION),
 				new HeldModifier(Attributes.MAX_HEALTH, VITALITY_MOD, StatFormulas.vitalityBonusHealth(service.statValue(profile, VITALITY)),
 						AttributeModifier.Operation.ADDITION),
 				new HeldModifier(Attributes.ARMOR, DEFENSE_MOD, defenseArmor, AttributeModifier.Operation.ADDITION),
@@ -91,7 +174,23 @@ public final class StatEffects {
 						AttributeModifier.Operation.MULTIPLY_BASE),
 				// Speed: +1% movement per point, 2x at 100.
 				new HeldModifier(Attributes.MOVEMENT_SPEED, SPEED_MOD, service.statValue(profile, SPEED) / 100.0,
-						AttributeModifier.Operation.MULTIPLY_BASE));
+						AttributeModifier.Operation.MULTIPLY_BASE),
+				// Titan Hide: +50% movement. (Its fall cut is the fall event above; its 2x knockback drawback is in LivingEntityMixin.)
+				new HeldModifier(Attributes.MOVEMENT_SPEED, TITAN_SPEED_MOD, titanHide ? 0.5 : 0.0, AttributeModifier.Operation.MULTIPLY_BASE));
+	}
+
+	/**
+	 * The modifiers that depend on the item in the main hand, worked out for {@code held} (the stat sheet asks about
+	 * items that aren't in hand).
+	 */
+	public static List<HeldModifier> heldModifiers(ServerPlayer player, ItemStack held) {
+		BloomConfig config = BloomServices.config();
+		return List.of(
+				new HeldModifier(Attributes.ATTACK_DAMAGE, BRAWLER_MOD,
+						CombatSkill.has(player, CombatIds.BRAWLER, Family.UNARMED, held) ? config.brawlerDamage : 0.0, AttributeModifier.Operation.ADDITION),
+				new HeldModifier(Attributes.ATTACK_DAMAGE, GUARANTEED_CRITICAL_MOD,
+						CombatSkill.has(player, CombatIds.GUARANTEED_CRITICAL, Family.AXE, held) ? -config.guaranteedCriticalPenalty : 0.0,
+						AttributeModifier.Operation.ADDITION));
 	}
 
 	public static boolean armorSlotsEmpty(ServerPlayer player) {

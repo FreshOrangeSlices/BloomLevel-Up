@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,13 +14,14 @@ import com.freshorangeslices.bloomlevelup.skill.SideBridge;
 /**
  * Stack Overflow: in the owner's own inventory and Hoarder's Pocket, anything that already stacks holds up to
  * 300 per slot. Chests, hoppers and other players keep vanilla limits (a big stack splits as it goes in).
- * Item stacks of up to {@link #HARD_CAP} are allowed by the save codecs (mixins), so nothing is lost on save.
+ * Item stacks of up to {@link #HARD_CAP} save and sync whole (mixins write counts over 127 as an int), so nothing is
+ * lost on save. In the Forge 1.20.1 build, shift-clicking into a big stack still stops at the item's normal limit.
  */
 public final class StackOverflow {
 	/** The most any stack can hold anywhere; the save codecs accept counts up to this. */
 	public static final int HARD_CAP = 300;
 	/** What a vanilla container slot allows at most (Container's default). */
-	private static final int VANILLA_SLOT_MAX = 99;
+	private static final int VANILLA_SLOT_MAX = 64;
 
 	private StackOverflow() {
 	}
@@ -44,6 +44,15 @@ public final class StackOverflow {
 		return Math.max(vanilla, cap(player));
 	}
 
+	/** The player's own inventory's per-slot limit (vanilla 64) with Stack Overflow on. Works on both sides. */
+	public static int slotLimit(Player player, int vanilla) {
+		if (player == null || !SideBridge.majorActive(player, MiscIds.STACK_OVERFLOW)) {
+			return vanilla;
+		}
+
+		return Math.max(vanilla, cap(player));
+	}
+
 	/** Without the Major, stacks bigger than vanilla allows are split back up (what doesn't fit drops). */
 	public static void normalize(ServerPlayer player) {
 		normalizePocket(player);
@@ -57,7 +66,7 @@ public final class StackOverflow {
 			if (!stack.isEmpty() && stack.getCount() > max) {
 				ItemStack extra = stack.copyWithCount(stack.getCount() - max);
 				stack.setCount(max);
-				inventory.placeItemBackInInventory(extra, Prediction.SERVER_ONLY);
+				inventory.placeItemBackInInventory(extra);
 			}
 		}
 	}
@@ -97,7 +106,7 @@ public final class StackOverflow {
 			}
 
 			if (!extra.isEmpty()) {
-				player.getInventory().placeItemBackInInventory(extra, Prediction.SERVER_ONLY);
+				player.getInventory().placeItemBackInInventory(extra);
 			}
 		}
 

@@ -9,23 +9,24 @@ import java.util.TreeMap;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.util.StrictJsonParser;
-
-import net.fabricmc.fabric.api.resource.v1.reloader.SimpleReloadListener;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
 
 /** Loads {@code data/<ns>/bloom/xp/blocks/*.json} into the {@link BlockXpTable}. */
-public final class BlockXpLoader extends SimpleReloadListener<BlockXpTable> {
-	public static final Identifier ID = BloomLevelUp.id("block_xp");
+public final class BlockXpLoader extends SimplePreparableReloadListener<BlockXpTable> {
+	public static final ResourceLocation ID = BloomLevelUp.id("block_xp");
 
 	private static final FileToIdConverter FILES = FileToIdConverter.json("bloom/xp/blocks");
 
@@ -37,16 +38,16 @@ public final class BlockXpLoader extends SimpleReloadListener<BlockXpTable> {
 	}
 
 	@Override
-	protected BlockXpTable prepare(SharedState state) {
+	protected BlockXpTable prepare(ResourceManager manager, ProfilerFiller profiler) {
 		List<BlockXpTable.Raw> raws = new ArrayList<>();
 		// Sorted for a stable override order across packs and platforms.
-		Map<Identifier, Resource> resources = new TreeMap<>(FILES.listMatchingResources(state.resourceManager()));
+		Map<ResourceLocation, Resource> resources = new TreeMap<>(FILES.listMatchingResources(manager));
 
-		for (Map.Entry<Identifier, Resource> entry : resources.entrySet()) {
-			Identifier id = FILES.fileToId(entry.getKey());
+		for (Map.Entry<ResourceLocation, Resource> entry : resources.entrySet()) {
+			ResourceLocation id = FILES.fileToId(entry.getKey());
 
 			try (Reader reader = entry.getValue().openAsReader()) {
-				JsonElement json = StrictJsonParser.parse(reader);
+				JsonElement json = JsonParser.parseReader(reader);
 				File.CODEC.parse(JsonOps.INSTANCE, json)
 						.resultOrPartial(error -> BloomLevelUp.LOGGER.error("Couldn't parse Bloom block XP '{}': {}", id, error))
 						.ifPresent(file -> raws.add(new BlockXpTable.Raw(id, file.category(), file.values())));
@@ -59,7 +60,7 @@ public final class BlockXpLoader extends SimpleReloadListener<BlockXpTable> {
 	}
 
 	@Override
-	protected void apply(BlockXpTable prepared, SharedState state) {
+	protected void apply(BlockXpTable prepared, ResourceManager manager, ProfilerFiller profiler) {
 		BlockXpTable.set(prepared);
 		BloomLevelUp.LOGGER.info("Loaded {} Bloom block XP entries", prepared.size());
 	}

@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,28 +15,35 @@ import net.minecraft.world.item.ItemStack;
 import com.freshorangeslices.bloomlevelup.skill.misc.StackOverflow;
 
 /**
- * Stack Overflow: the player's own inventory holds up to 300 of anything stackable. Vanilla's Inventory uses
- * Container's default per-item limit, so this adds an override (pickup, add and merge all go through it).
+ * Stack Overflow: picking things up fills the player's own slots past the usual limit. 1.20.1 works the limit out
+ * inline (the item's max and the inventory's 64), so both are raised where the inventory adds to a stack.
  */
 @Mixin(Inventory.class)
-abstract class InventoryMixin implements Container {
+abstract class InventoryMixin {
 	@Shadow
 	@Final
 	public Player player;
 
-	@Override
-	public int getMaxStackSize(ItemStack stack) {
-		return StackOverflow.limit(this.player, stack, Math.min(this.getMaxStackSize(), stack.getMaxStackSize()));
+	@WrapOperation(method = {"addResource(ILnet/minecraft/world/item/ItemStack;)I", "hasRemainingSpaceForItem"},
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
+	private int bloomlevelup$itemLimit(ItemStack stack, Operation<Integer> original) {
+		return StackOverflow.limit(this.player, stack, original.call(stack));
+	}
+
+	@WrapOperation(method = {"addResource(ILnet/minecraft/world/item/ItemStack;)I", "hasRemainingSpaceForItem"},
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;getMaxStackSize()I"))
+	private int bloomlevelup$slotLimit(Inventory inventory, Operation<Integer> original) {
+		return StackOverflow.slotLimit(this.player, original.call(inventory));
 	}
 
 	/**
-	 * Putting items back (closing a menu with something on the cursor or in a crafting grid) sizes each chunk as
-	 * "item max - what the slot holds". A slot holding more than the item's max would make that negative and the
-	 * loop would never end, so it uses this inventory's real limit instead.
+	 * Putting items back (closing a menu with something on the cursor) sizes each chunk as "item max - what the slot
+	 * holds". A slot holding more than the item's max would make that negative and the loop would never end, so it
+	 * uses the real limit instead.
 	 */
-	@WrapOperation(method = "placeItemBackInInventory(Lnet/minecraft/world/item/ItemStack;ZLnet/minecraft/util/Prediction;)V",
+	@WrapOperation(method = "placeItemBackInInventory(Lnet/minecraft/world/item/ItemStack;Z)V",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getMaxStackSize()I"))
 	private int bloomlevelup$putBackLimit(ItemStack stack, Operation<Integer> original) {
-		return Math.max(original.call(stack), this.getMaxStackSize(stack));
+		return StackOverflow.limit(this.player, stack, original.call(stack));
 	}
 }

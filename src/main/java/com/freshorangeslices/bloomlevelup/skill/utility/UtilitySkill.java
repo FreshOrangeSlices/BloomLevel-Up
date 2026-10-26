@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,20 +22,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Shearable;
-import net.minecraft.world.entity.animal.golem.SnowGolem;
-import net.minecraft.world.entity.animal.sheep.Sheep;
-import net.minecraft.world.entity.monster.skeleton.Bogged;
+import net.minecraft.world.entity.animal.SnowGolem;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -45,14 +40,16 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.OnDatapackSyncEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
@@ -61,15 +58,16 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.registry.BloomTags;
+import com.freshorangeslices.bloomlevelup.skill.SideBridge;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
  * Utility XP (mcMMO-style, per block from data), Yield, Shovel Mastery treasure, and the six Utility Majors.
  *
- * <p>Hook order inside vanilla's block break: Fabric's AFTER event fires right after the block is removed,
- * but <em>before</em> the drops are rolled. So the placed-block flag is read and cleared there and remembered
- * for the rest of the tick ({@link #BROKEN_PLACED}) so the drop hook can still refuse Yield on placed blocks.
+ * <p>Hook order inside vanilla's block break: Forge's break event fires just before the block is removed and
+ * the drops are rolled. So the placed-block flag is read and cleared there and remembered for the rest of the
+ * tick ({@link #BROKEN_PLACED}) so the drop hook (a global loot modifier) can still refuse Yield on placed blocks.
  * Vein Mining and Timber are queued and run at the end of the tick, outside the original break.
  */
 public final class UtilitySkill {
@@ -79,14 +77,14 @@ public final class UtilitySkill {
 	 * uses {@code .../default}. Modpacks add biomes to the tags (the common {@code c:} tags are already in).
 	 */
 	public static final List<String> TREASURE_POOLS = List.of("nether", "desert", "beach", "swamp", "mountain", "forest");
-	public static final ResourceKey<LootTable> EXCAVATION_DEFAULT = treasureTable("default");
+	public static final ResourceLocation EXCAVATION_DEFAULT = treasureTable("default");
 
-	public static ResourceKey<LootTable> treasureTable(String pool) {
-		return ResourceKey.create(Registries.LOOT_TABLE, BloomLevelUp.id("gameplay/excavation/" + pool));
+	public static ResourceLocation treasureTable(String pool) {
+		return BloomLevelUp.id("gameplay/excavation/" + pool);
 	}
 
 	/** The treasure table for a dug block, by its biome. */
-	public static ResourceKey<LootTable> treasureTableAt(ServerLevel level, BlockPos pos) {
+	public static ResourceLocation treasureTableAt(ServerLevel level, BlockPos pos) {
 		Holder<net.minecraft.world.level.biome.Biome> biome = level.getBiome(pos);
 
 		for (String pool : TREASURE_POOLS) {
@@ -122,15 +120,32 @@ public final class UtilitySkill {
 	private UtilitySkill() {
 	}
 
-	public static void init() {
-		PlacedBlocks.init();
-		PlayerBlockBreakEvents.AFTER.register(UtilitySkill::afterBreak);
-		LootTableEvents.MODIFY_DROPS.register(UtilitySkill::modifyDrops);
-		UseEntityCallback.EVENT.register(UtilitySkill::beforeInteract);
-		ServerTickEvents.END_SERVER_TICK.register(UtilitySkill::endTick);
-		ServerLifecycleEvents.SERVER_STARTED.register(server -> BlockXpTable.invalidate());
-		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> BlockXpTable.invalidate());
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+	public static void init(IEventBus modBus) {
+		PlacedBlocks.init(modBus);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (BlockEvent.BreakEvent event) -> {
+			if (event.getPlayer() != null) {
+				beforeBreak(event.getLevel() instanceof ServerLevel level ? level : null, event.getPlayer(), event.getPos(), event.getState());
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener((BlockEvent.EntityPlaceEvent event) -> {
+			if (event.getEntity() instanceof Player && event.getLevel() instanceof ServerLevel level) {
+				onPlaced(level, event.getPos());
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener((PlayerInteractEvent.EntityInteract event) -> beforeInteract(event.getEntity(), event.getHand(),
+				event.getTarget()));
+		MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
+			if (event.phase == TickEvent.Phase.END) {
+				endTick(event.getServer());
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener((ServerStartedEvent event) -> BlockXpTable.invalidate());
+		MinecraftForge.EVENT_BUS.addListener((OnDatapackSyncEvent event) -> {
+			if (event.getPlayer() == null) {
+				BlockXpTable.invalidate();
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> {
 			BROKEN_PLACED.clear();
 			CHAIN_QUEUE.clear();
 			PENDING_SHEARS.clear();
@@ -167,13 +182,19 @@ public final class UtilitySkill {
 
 	/** Crops count only when fully grown: any integer "age" property must be at its maximum. */
 	public static boolean isMature(BlockState state) {
+		IntegerProperty age = ageOf(state);
+		return age == null || state.getValue(age) >= Collections.max(age.getPossibleValues());
+	}
+
+	/** A block's integer "age" property (crops, berries, wart), or null. */
+	private static IntegerProperty ageOf(BlockState state) {
 		for (Property<?> property : state.getProperties()) {
 			if (property instanceof IntegerProperty age && "age".equals(property.getName())) {
-				return state.getValue(age) >= Collections.max(age.getPossibleValues());
+				return age;
 			}
 		}
 
-		return true;
+		return null;
 	}
 
 	/** Shovel Mastery applies while a shovel is in the main hand. */
@@ -197,7 +218,18 @@ public final class UtilitySkill {
 		return shovelBoost(player, held) ? StatFormulas.boosted(points, config().shovelMasteryBonus) : points;
 	}
 
-	// ------------------------------------------------------------------ placing (BlockItem mixin)
+	/** {@link #efficiency(ServerPlayer, ItemStack)} on either side (the client mines with its synced copy). */
+	public static int efficiencyAnySide(Player player, ItemStack held) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			return efficiency(serverPlayer, held);
+		}
+
+		int points = SideBridge.statValue(player, UtilityIds.EFFICIENCY);
+		boolean shovel = held.is(ItemTags.SHOVELS) && SideBridge.majorActive(player, UtilityIds.SHOVEL_MASTERY);
+		return shovel ? StatFormulas.boosted(points, SideBridge.config(player).shovelMasteryBonus) : points;
+	}
+
+	// ------------------------------------------------------------------ placing (Forge's place event)
 
 	public static void onPlaced(ServerLevel level, BlockPos pos) {
 		if (tracksPlacement(level.getBlockState(pos))) {
@@ -207,8 +239,9 @@ public final class UtilitySkill {
 
 	// ------------------------------------------------------------------ breaking
 
-	public static void afterBreak(Level level, Player breaker, BlockPos pos, BlockState state, BlockEntity blockEntity) {
-		if (!(level instanceof ServerLevel serverLevel) || !(breaker instanceof ServerPlayer player)) {
+	/** A player is breaking a block (Forge's break event, lowest priority, so only breaks nothing cancelled). */
+	public static void beforeBreak(ServerLevel serverLevel, Player breaker, BlockPos pos, BlockState state) {
+		if (serverLevel == null || !(breaker instanceof ServerPlayer player)) {
 			return;
 		}
 
@@ -309,38 +342,29 @@ public final class UtilitySkill {
 
 	// ------------------------------------------------------------------ drops
 
-	private static void modifyDrops(Holder<LootTable> holder, LootContext context, List<ItemStack> drops) {
+	/** Every loot roll's drops (Bloom's global loot modifier): blocks, fishing. */
+	public static void modifyDrops(ResourceLocation table, LootContext context, List<ItemStack> drops) {
 		if (rollingExtraLoot) {
 			return;
 		}
 
-		ResourceKey<LootTable> key = holder.unwrapKey().orElse(null);
-
-		if (key == null) {
+		if (table.equals(BuiltInLootTables.FISHING)) {
+			fishingDrops(table, context, drops);
 			return;
 		}
 
-		if (key.equals(BuiltInLootTables.FISHING)) {
-			fishingDrops(holder, context, drops);
-			return;
-		}
-
-		String path = key.identifier().getPath();
-
-		if (path.startsWith("shearing/")) {
-			shearingDrops(context, drops);
-		} else if (path.startsWith("blocks/") && context.hasParameter(LootContextParams.BLOCK_STATE)) {
+		if (table.getPath().startsWith("blocks/") && context.hasParam(LootContextParams.BLOCK_STATE)) {
 			blockDrops(context, drops);
 		}
 	}
 
 	private static void blockDrops(LootContext context, List<ItemStack> drops) {
-		if (!(context.getOptional(LootContextParams.THIS_ENTITY) instanceof ServerPlayer player) || player.isCreative()) {
+		if (!(context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof ServerPlayer player) || player.isCreative()) {
 			return;
 		}
 
-		BlockState state = context.getOptional(LootContextParams.BLOCK_STATE);
-		Vec3 origin = context.getOptional(LootContextParams.ORIGIN);
+		BlockState state = context.getParamOrNull(LootContextParams.BLOCK_STATE);
+		Vec3 origin = context.getParamOrNull(LootContextParams.ORIGIN);
 
 		if (state == null || origin == null) {
 			return;
@@ -360,9 +384,9 @@ public final class UtilitySkill {
 			addCopies(drops, StatFormulas.yieldExtraCopies(stat(player, UtilityIds.YIELD), random));
 		}
 
-		ItemInstance tool = context.getOptional(LootContextParams.TOOL);
+		ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
 
-		if (state.is(BloomTags.EXCAVATION_TREASURE) && tool instanceof ItemStack shovel && shovel.is(ItemTags.SHOVELS)
+		if (state.is(BloomTags.EXCAVATION_TREASURE) && tool != null && tool.is(ItemTags.SHOVELS)
 				&& active(player, UtilityIds.SHOVEL_MASTERY)) {
 			int yield = StatFormulas.boosted(stat(player, UtilityIds.YIELD), config().shovelMasteryBonus);
 			double chance = config().excavationTreasureBaseChance + yield / 100.0 * config().excavationTreasureChancePer100Yield;
@@ -396,7 +420,7 @@ public final class UtilitySkill {
 	}
 
 	private static List<ItemStack> rollTreasure(ServerLevel level, ServerPlayer player, Vec3 origin) {
-		LootTable table = level.getServer().reloadableRegistries().getLootTable(treasureTableAt(level, BlockPos.containing(origin)));
+		LootTable table = level.getServer().getLootData().getLootTable(treasureTableAt(level, BlockPos.containing(origin)));
 
 		if (table == LootTable.EMPTY) {
 			return List.of();
@@ -410,8 +434,8 @@ public final class UtilitySkill {
 		return table.getRandomItems(params);
 	}
 
-	private static void fishingDrops(Holder<LootTable> holder, LootContext context, List<ItemStack> drops) {
-		if (!(context.getOptional(LootContextParams.THIS_ENTITY) instanceof FishingHook hook)
+	private static void fishingDrops(ResourceLocation id, LootContext context, List<ItemStack> drops) {
+		if (!(context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof FishingHook hook)
 				|| !(hook.getPlayerOwner() instanceof ServerPlayer player)) {
 			return;
 		}
@@ -427,41 +451,39 @@ public final class UtilitySkill {
 
 		try {
 			for (int i = 1; i < config().tripleCatchRolls; i++) {
-				holder.value().getRandomItems(context, drops::add);
+				// The raw roll: no loot modifiers (this one included) run on it again.
+				context.getLevel().getServer().getLootData().getLootTable(id).getRandomItemsRaw(context, drops::add);
 			}
 		} finally {
 			rollingExtraLoot = false;
 		}
 
-		if (context.getOptional(LootContextParams.TOOL) instanceof ItemStack rod && rod.isDamageableItem() && config().tripleCatchExtraDurability > 0) {
+		ItemStack rod = context.getParamOrNull(LootContextParams.TOOL);
+
+		if (rod != null && rod.isDamageableItem() && config().tripleCatchExtraDurability > 0) {
 			InteractionHand hand = player.getMainHandItem() == rod ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-			rod.hurtAndBreak(config().tripleCatchExtraDurability, player, hand);
+			rod.hurtAndBreak(config().tripleCatchExtraDurability, player, p -> p.broadcastBreakEvent(hand));
 		}
 	}
 
-	private static void shearingDrops(LootContext context, List<ItemStack> drops) {
-		Entity sheared = context.getOptional(LootContextParams.THIS_ENTITY);
-
-		if (sheared == null || drops.isEmpty()) {
-			return;
+	/** Yield on the wool (or other drops) of a mob sheared with shears right now (ShearsItem mixin). */
+	public static List<ItemStack> shearingDrops(Player player, List<ItemStack> drops) {
+		if (!(player instanceof ServerPlayer serverPlayer) || serverPlayer.isCreative() || drops.isEmpty()) {
+			return drops;
 		}
 
-		PendingShear pending = PENDING_SHEARS.get(sheared.getUUID());
-
-		if (pending != null && !pending.player().isCreative()) {
-			addCopies(drops, StatFormulas.yieldExtraCopies(stat(pending.player(), UtilityIds.YIELD), ThreadLocalRandom.current()));
-		}
+		List<ItemStack> out = new ArrayList<>(drops);
+		addCopies(out, StatFormulas.yieldExtraCopies(stat(serverPlayer, UtilityIds.YIELD), ThreadLocalRandom.current()));
+		return out;
 	}
 
 	// ------------------------------------------------------------------ shearing
 
-	private static InteractionResult beforeInteract(Player player, Level level, InteractionHand hand, Entity entity, EntityHitResult hit) {
-		if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer && !serverPlayer.isSpectator()
+	private static void beforeInteract(Player player, InteractionHand hand, Entity entity) {
+		if (!player.level().isClientSide() && player instanceof ServerPlayer serverPlayer && !serverPlayer.isSpectator()
 				&& entity instanceof Shearable shearable && shearable.readyForShearing() && !serverPlayer.getItemInHand(hand).isEmpty()) {
 			PENDING_SHEARS.put(entity.getUUID(), new PendingShear(serverPlayer, hand, entity));
 		}
-
-		return InteractionResult.PASS;
 	}
 
 	/** Records that a player is about to interact with a shearable mob. Public for game tests. */
@@ -496,7 +518,7 @@ public final class UtilitySkill {
 			ItemStack tool = player.getItemInHand(shear.hand());
 
 			if (!tool.isEmpty() && tool.isDamageableItem() && config().masterShearingExtraDurability > 0) {
-				tool.hurtAndBreak(config().masterShearingExtraDurability, player, shear.hand());
+				tool.hurtAndBreak(config().masterShearingExtraDurability, player, p -> p.broadcastBreakEvent(shear.hand()));
 			}
 
 			if (!entity.isRemoved() && ThreadLocalRandom.current().nextDouble() < config().masterShearingChance && restoreShearable(entity)
@@ -512,9 +534,6 @@ public final class UtilitySkill {
 	private static boolean restoreShearable(Entity entity) {
 		if (entity instanceof Sheep sheep) {
 			sheep.setSheared(false);
-			return true;
-		} else if (entity instanceof Bogged bogged) {
-			bogged.setSheared(false);
 			return true;
 		} else if (entity instanceof SnowGolem golem) {
 			golem.setPumpkin(true);
@@ -568,9 +587,13 @@ public final class UtilitySkill {
 
 			BlockPos pos = cursor.immutable();
 
-			if (state.getBlock() instanceof net.minecraft.world.level.block.CropBlock crop) {
-				if (!crop.isMaxAge(state)) {
-					level.setBlock(pos, crop.getStateForAge(crop.getAge(state) + 1), Block.UPDATE_CLIENTS);
+			IntegerProperty age = state.getBlock() instanceof net.minecraft.world.level.block.CropBlock ? ageOf(state) : null;
+
+			if (age != null) {
+				int max = Collections.max(age.getPossibleValues());
+
+				if (state.getValue(age) < max) {
+					level.setBlock(pos, state.setValue(age, state.getValue(age) + 1), Block.UPDATE_CLIENTS);
 				}
 			} else {
 				for (int i = 0; i < config().growthAuraRandomTicks && level.getBlockState(pos).isRandomlyTicking(); i++) {

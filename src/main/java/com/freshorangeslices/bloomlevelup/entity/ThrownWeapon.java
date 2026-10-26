@@ -1,22 +1,19 @@
 package com.freshorangeslices.bloomlevelup.entity;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
-import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
-import net.minecraft.world.phys.BlockHitResult;
 
 import com.freshorangeslices.bloomlevelup.mixin.ThrownTridentAccessor;
-import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 
 /**
  * Catch!: any eligible weapon thrown like a trident. It always comes back (as if it had Loyalty III) and
@@ -35,13 +32,14 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 	}
 
 	public static ThrownWeapon create(Level level, LivingEntity owner, ItemStack weapon) {
-		ThrownWeapon thrown = new ThrownWeapon(BloomEntities.THROWN_WEAPON, level);
+		ThrownWeapon thrown = new ThrownWeapon(BloomEntities.THROWN_WEAPON.get(), level);
 		thrown.setOwner(owner);
 		thrown.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
-		thrown.setPickupItemStack(weapon);
+		((ThrownTridentAccessor) thrown).bloomlevelup$setTridentItem(weapon.copy());
 		thrown.getEntityData().set(DATA_ITEM, weapon.copy());
 		thrown.startY = thrown.getY();
-		thrown.pickup = owner instanceof Player player && player.hasInfiniteMaterials() ? AbstractArrow.Pickup.CREATIVE_ONLY : AbstractArrow.Pickup.ALLOWED;
+		thrown.pickup = owner instanceof Player player && player.getAbilities().instabuild ? AbstractArrow.Pickup.CREATIVE_ONLY
+				: AbstractArrow.Pickup.ALLOWED;
 		thrown.makeLoyal();
 		return thrown;
 	}
@@ -51,7 +49,7 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 		this.damageMultiplier = Math.max(1.0F, multiplier);
 
 		if (pierce > this.getPierceLevel()) {
-			((com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor) this).bloomlevelup$setPierceLevel((byte) Math.min(127, pierce));
+			this.setPierceLevel((byte) Math.min(127, pierce));
 		}
 	}
 
@@ -68,24 +66,29 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(DATA_ITEM, ItemStack.EMPTY);
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(DATA_ITEM, ItemStack.EMPTY);
 	}
 
 	@Override
-	protected void addAdditionalSaveData(ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putFloat("bloom_damage_multiplier", damageMultiplier);
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		tag.putFloat("bloom_damage_multiplier", damageMultiplier);
 	}
 
 	@Override
-	protected void readAdditionalSaveData(ValueInput input) {
-		super.readAdditionalSaveData(input);
-		damageMultiplier = Math.max(1.0F, input.getFloatOr("bloom_damage_multiplier", 1.0F));
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
+		damageMultiplier = tag.contains("bloom_damage_multiplier") ? Math.max(1.0F, tag.getFloat("bloom_damage_multiplier")) : 1.0F;
 		makeLoyal();
 		startY = this.getY();
-		this.getEntityData().set(DATA_ITEM, this.getPickupItemStackOrigin().copy());
+		this.getEntityData().set(DATA_ITEM, weapon().copy());
+	}
+
+	/** The real thrown stack (the server's). */
+	private ItemStack weapon() {
+		return ((ThrownTridentAccessor) this).bloomlevelup$tridentItem();
 	}
 
 	/** The thrown weapon: the server's real stack, the client's synced copy. */
@@ -93,10 +96,10 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 	public ItemStack getItem() {
 		if (this.level().isClientSide()) {
 			ItemStack synced = this.getEntityData().get(DATA_ITEM);
-			return synced.isEmpty() ? this.getPickupItemStackOrigin() : synced;
+			return synced.isEmpty() ? weapon() : synced;
 		}
 
-		return this.getPickupItemStackOrigin();
+		return weapon();
 	}
 
 	/** The copy of the weapon the client draws. */
@@ -106,17 +109,11 @@ public class ThrownWeapon extends ThrownTrident implements ItemSupplier {
 
 	/** Whether it's stuck in a block (the renderer stops its spin). */
 	public boolean stuck() {
-		return this.isInGround();
+		return this.inGround;
 	}
 
-	/** How far it has dropped since it was thrown (Death From Above / thrown mace bonus). */
+	/** How far it has dropped since it was thrown (Death From Above's bonus). */
 	public double droppedDistance() {
 		return Math.max(0.0, startY - this.getY());
-	}
-
-	@Override
-	protected void onHitBlock(BlockHitResult hit) {
-		super.onHitBlock(hit);
-		CombatAbilities.thrownWeaponLanded(this);
 	}
 }

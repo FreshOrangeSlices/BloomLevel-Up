@@ -197,20 +197,11 @@ public final class BloomConfig {
 	 * Master of Arms / Charged Burst vs a normal burst: blast and push radius, push strength, your upward launch
 	 * speed (a normal burst is about 1.2: ~8 blocks; 1.65: ~14 blocks) and extra mace durability.
 	 */
-	public double chargedBurstScale = 1.3;
-	public double chargedBurstPushScale = 1.7;
-	public double chargedBurstLaunchSpeed = 1.65;
-	public int chargedBurstExtraDurability = 2;
 	/** Master of Arms / Storm Call: bolts, their distance from the aim point, ticks between bolts, and cost/cooldown vs one bolt. */
 	public int stormCallBolts = 3;
 	public double stormCallRadius = 2.5;
 	public int stormCallGapTicks = 3;
 	public double stormCallCostMultiplier = 2.0;
-	/** Master of Arms / Gale Throw: a charged mace throw's landing pulls mobs in from this many blocks away, then bursts. */
-	public double galeThrowPullRadius = 6.5;
-	public double galeThrowPullStrength = 0.9;
-	public int galeThrowPullTicks = 8;
-	public double galeThrowBurstScale = 1.4;
 
 	// ---- Misc
 	/** Misc XP per point of vanilla XP collected from orbs (before Wisdom and Mending). */
@@ -380,10 +371,6 @@ public final class BloomConfig {
 		assaultRifleMagazine = Math.max(1, Math.min(64, assaultRifleMagazine));
 		chargedThrowSpeedMultiplier = Math.max(0.5, Math.min(3.0, chargedThrowSpeedMultiplier));
 		chargedThrowPierce = Math.max(0, Math.min(127, chargedThrowPierce));
-		chargedBurstScale = Math.max(1.0, Math.min(4.0, chargedBurstScale));
-		chargedBurstPushScale = Math.max(0.0, Math.min(5.0, chargedBurstPushScale));
-		chargedBurstLaunchSpeed = Math.max(0.0, Math.min(3.0, chargedBurstLaunchSpeed));
-		chargedBurstExtraDurability = Math.max(0, chargedBurstExtraDurability);
 		catchThrowDurabilityCost = Math.max(0, catchThrowDurabilityCost);
 		chargedSwingDurabilityCost = Math.max(0, chargedSwingDurabilityCost);
 		chargedThrowDurabilityCost = Math.max(0, chargedThrowDurabilityCost);
@@ -391,10 +378,6 @@ public final class BloomConfig {
 		stormCallRadius = Math.max(0.0, Math.min(16.0, stormCallRadius));
 		stormCallGapTicks = Math.max(0, Math.min(40, stormCallGapTicks));
 		stormCallCostMultiplier = Math.max(0.0, stormCallCostMultiplier);
-		galeThrowPullRadius = Math.max(1.0, Math.min(16.0, galeThrowPullRadius));
-		galeThrowPullStrength = Math.max(0.0, Math.min(4.0, galeThrowPullStrength));
-		galeThrowPullTicks = Math.max(0, Math.min(40, galeThrowPullTicks));
-		galeThrowBurstScale = Math.max(1.0, Math.min(4.0, galeThrowBurstScale));
 		miscXpPerOrbPoint = Math.max(0.0, miscXpPerOrbPoint);
 		ironStomachNutrition = Math.max(0, Math.min(20, ironStomachNutrition));
 		ironStomachSaturation = Math.max(0.0, Math.min(20.0, ironStomachSaturation));

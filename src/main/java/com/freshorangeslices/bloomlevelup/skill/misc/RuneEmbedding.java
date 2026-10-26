@@ -2,50 +2,41 @@ package com.freshorangeslices.bloomlevelup.skill.misc;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraftforge.registries.RegistryObject;
 
-import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
-import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
-
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
+import com.freshorangeslices.bloomlevelup.player.StoredItems;
+import com.freshorangeslices.bloomlevelup.registry.BloomMenus;
 import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 
 /**
@@ -53,46 +44,41 @@ import com.freshorangeslices.bloomlevelup.registry.BloomTags;
  * four armor slots are empty; slot 5 is the bare-hand rune, which works only with an empty main hand. Books are
  * never used up. Curses, duplicate enchantments and anything outside the rune tags are refused.
  * <p>
- * How the effects reach vanilla: the body runes are folded into one invisible item per armor slot, which the
- * game's enchantment code visits as if worn (protection, thorns, feather falling...), plus their attribute
- * effects (respiration, swift sneak...). The bare-hand rune becomes the "weapon" of a bare-handed attack
- * (sharpness, knockback, fire aspect...). Looting and anything else asked by level read the runes too.
+ * How the effects reach vanilla 1.20.1 (enchantments there are asked for by level, not visited as effects): every
+ * "what level of X does this entity have" answer includes the runes (respiration, depth strider, swift sneak, fire
+ * aspect, knockback, looting...), protection adds the body runes' protection, thorns and the bare-hand rune's
+ * on-hit enchantments run after a hit, and a bare-handed attack's damage bonus (sharpness, smite...) comes from the
+ * bare-hand rune.
  */
 public final class RuneEmbedding {
 	public static final int SIZE = 5;
 	public static final int UNARMED_SLOT = 4;
+	private static final String KEY = "runes";
 	private static final EquipmentSlot[] ARMOR = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
-	public static final AttachmentType<ItemContainerContents> RUNES = AttachmentRegistry.create(BloomLevelUp.id("runes"),
-			builder -> builder.persistent(ItemContainerContents.CODEC).initializer(() -> ItemContainerContents.EMPTY).copyOnDeath());
-
 	/** What the runes add up to, rebuilt only when the stored runes change. */
-	private record Built(ItemContainerContents source, Map<EquipmentSlot, ItemStack> body, ItemStack unarmed) {
+	private record Built(List<ItemStack> source, Map<Enchantment, Integer> body, Map<Enchantment, Integer> unarmed, ItemStack unarmedStack) {
 	}
 
 	private static final Map<Player, Built> BUILT = new WeakHashMap<>();
-	private static final Map<Player, Multimap<Holder<Attribute>, AttributeModifier>> APPLIED = new WeakHashMap<>();
 
 	private RuneEmbedding() {
 	}
 
 	/** Its own screen type, so the slots can show what goes in them (the client draws it with RuneScreen). */
-	public static final MenuType<RuneMenu> MENU = Registry.register(BuiltInRegistries.MENU, BloomLevelUp.id("rune_embedding"),
-			new MenuType<>((id, inventory) -> new RuneMenu(id, inventory, inventory.player,
+	public static final RegistryObject<MenuType<RuneMenu>> MENU = BloomMenus.MENUS.register("rune_embedding",
+			() -> new MenuType<>((id, inventory) -> new RuneMenu(id, inventory, inventory.player,
 					com.freshorangeslices.bloomlevelup.skill.SideBridge.majorActive(inventory.player, MiscIds.RUNE_EMBEDDING)),
 					FeatureFlags.VANILLA_SET));
 
 	/** Empty-slot pictures: the four armor outlines for the body runes, a sword outline for the bare-hand rune. */
-	private static final Identifier[] SLOT_ICONS = {
+	private static final ResourceLocation[] SLOT_ICONS = {
 			InventoryMenu.EMPTY_ARMOR_SLOT_HELMET,
 			InventoryMenu.EMPTY_ARMOR_SLOT_CHESTPLATE,
 			InventoryMenu.EMPTY_ARMOR_SLOT_LEGGINGS,
 			InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
-			Identifier.withDefaultNamespace("container/slot/sword")
+			new ResourceLocation("item/empty_slot_sword")
 	};
-
-	public static void init() {
-	}
 
 	/** Whether a slot of the rune screen is a body rune (0-3) rather than the bare-hand rune (4). */
 	public static boolean isBodySlot(int index) {
@@ -101,8 +87,8 @@ public final class RuneEmbedding {
 
 	// ------------------------------------------------------------------ what may be embedded
 
-	private static ItemEnchantments stored(ItemStack stack) {
-		return stack.getOrDefault(DataComponents.STORED_ENCHANTMENTS, ItemEnchantments.EMPTY);
+	private static Map<Enchantment, Integer> stored(ItemStack stack) {
+		return stack.isEmpty() ? Map.of() : EnchantmentHelper.getEnchantments(stack);
 	}
 
 	/**
@@ -114,13 +100,13 @@ public final class RuneEmbedding {
 			return false;
 		}
 
-		for (Holder<Enchantment> enchantment : stored(stack).keySet()) {
-			if (enchantment.is(EnchantmentTags.CURSE) || !enchantment.is(slot == UNARMED_SLOT ? BloomTags.RUNE_UNARMED : BloomTags.RUNE_BODY)) {
+		for (Enchantment enchantment : stored(stack).keySet()) {
+			if (enchantment.isCurse() || !BloomTags.is(enchantment, slot == UNARMED_SLOT ? BloomTags.RUNE_UNARMED : BloomTags.RUNE_BODY)) {
 				return false;
 			}
 
 			for (ItemStack other : others) {
-				if (stored(other).getLevel(enchantment) > 0) {
+				if (stored(other).getOrDefault(enchantment, 0) > 0) {
 					return false; // duplicates are blocked: swap the old rune out first
 				}
 			}
@@ -130,13 +116,12 @@ public final class RuneEmbedding {
 	}
 
 	public static NonNullList<ItemStack> runes(Player player) {
-		NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-		player.getAttachedOrElse(RUNES, ItemContainerContents.EMPTY).copyInto(items);
-		return items;
+		return StoredItems.read(player, KEY, SIZE);
 	}
 
 	public static void store(Player player, NonNullList<ItemStack> items) {
-		player.setAttached(RUNES, ItemContainerContents.fromItems(items));
+		StoredItems.write(player, KEY, items);
+		BUILT.remove(player);
 		HoardersPocket.markHasItems(player, MiscIds.RUNES_HAS_ITEMS, items);
 	}
 
@@ -166,72 +151,40 @@ public final class RuneEmbedding {
 	}
 
 	private static Built built(Player player) {
-		ItemContainerContents source = player.getAttachedOrElse(RUNES, ItemContainerContents.EMPTY);
 		Built cached = BUILT.get(player);
 
-		if (cached != null && cached.source() == source) {
+		if (cached != null) {
 			return cached;
 		}
 
-		NonNullList<ItemStack> runes = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-		source.copyInto(runes);
-		Map<EquipmentSlot, ItemEnchantments.Mutable> body = new EnumMap<>(EquipmentSlot.class);
-		ItemEnchantments.Mutable unarmed = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+		NonNullList<ItemStack> runes = runes(player);
+		Map<Enchantment, Integer> body = new LinkedHashMap<>();
+		Map<Enchantment, Integer> unarmed = new LinkedHashMap<>();
 
 		for (int i = 0; i < SIZE; i++) {
-			for (Object2IntMap.Entry<Holder<Enchantment>> entry : stored(runes.get(i)).entrySet()) {
-				Holder<Enchantment> enchantment = entry.getKey();
-				int level = entry.getIntValue();
-
-				if (i == UNARMED_SLOT) {
-					if (enchantment.value().matchingSlot(EquipmentSlot.MAINHAND)) {
-						unarmed.set(enchantment, Math.max(level, unarmed.getLevel(enchantment)));
-					}
-
-					continue;
-				}
-
-				// Body runes aren't tied to a piece: each enchantment sits in the first armor slot it works in.
-				for (EquipmentSlot slot : ARMOR) {
-					if (enchantment.value().matchingSlot(slot)) {
-						ItemEnchantments.Mutable onSlot = body.computeIfAbsent(slot, key -> new ItemEnchantments.Mutable(ItemEnchantments.EMPTY));
-						onSlot.set(enchantment, Math.max(level, onSlot.getLevel(enchantment)));
-						break;
-					}
-				}
+			for (Map.Entry<Enchantment, Integer> entry : stored(runes.get(i)).entrySet()) {
+				Map<Enchantment, Integer> into = i == UNARMED_SLOT ? unarmed : body;
+				into.merge(entry.getKey(), entry.getValue(), Math::max);
 			}
 		}
 
-		Map<EquipmentSlot, ItemStack> bodyStacks = new EnumMap<>(EquipmentSlot.class);
-		body.forEach((slot, enchantments) -> bodyStacks.put(slot, virtual(enchantments.toImmutable())));
-		ItemEnchantments unarmedEnchantments = unarmed.toImmutable();
-		Built result = new Built(source, bodyStacks, unarmedEnchantments.isEmpty() ? ItemStack.EMPTY : virtual(unarmedEnchantments));
+		ItemStack unarmedStack = ItemStack.EMPTY;
+
+		if (!unarmed.isEmpty()) {
+			// An invisible carrier for the bare-hand rune (never placed anywhere): the attack's "weapon".
+			unarmedStack = new ItemStack(Items.BOOK);
+			EnchantmentHelper.setEnchantments(unarmed, unarmedStack);
+		}
+
+		Built result = new Built(runes, Map.copyOf(body), Map.copyOf(unarmed), unarmedStack);
 		BUILT.put(player, result);
 		return result;
 	}
 
-	/** An invisible carrier for enchantments (never placed anywhere; a book can't be damaged or broken). */
-	private static ItemStack virtual(ItemEnchantments enchantments) {
-		ItemStack stack = new ItemStack(Items.BOOK);
-		stack.set(DataComponents.ENCHANTMENTS, enchantments);
-		return stack;
-	}
-
 	// ------------------------------------------------------------------ hooks (EnchantmentHelper / Player mixins)
 
-	/** Body runes join the equipment the game iterates (protection, thorns, feather falling...). */
-	public static void visitBody(LivingEntity entity, EnchantmentHelper.EnchantmentInSlotVisitor visitor) {
-		if (!(entity instanceof ServerPlayer player) || !bodyActive(player)) {
-			return;
-		}
-
-		for (Map.Entry<EquipmentSlot, ItemStack> entry : built(player).body().entrySet()) {
-			EnchantmentHelper.runIterationOnItem(entry.getValue(), entry.getKey(), entity, visitor);
-		}
-	}
-
 	/** Enchantment level the runes give this entity (body while armorless, bare-hand while empty-handed). */
-	public static int level(Holder<Enchantment> enchantment, LivingEntity entity) {
+	public static int level(Enchantment enchantment, LivingEntity entity) {
 		if (!(entity instanceof ServerPlayer player) || !majorActive(player)) {
 			return 0;
 		}
@@ -240,64 +193,61 @@ public final class RuneEmbedding {
 		int level = 0;
 
 		if (bodyActive(player)) {
-			for (ItemStack stack : built.body().values()) {
-				level = Math.max(level, EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack));
-			}
+			level = Math.max(level, built.body().getOrDefault(enchantment, 0));
 		}
 
-		if (unarmedActive(player) && !built.unarmed().isEmpty()) {
-			level = Math.max(level, EnchantmentHelper.getItemEnchantmentLevel(enchantment, built.unarmed()));
+		if (unarmedActive(player)) {
+			level = Math.max(level, built.unarmed().getOrDefault(enchantment, 0));
 		}
 
 		return level;
 	}
 
-	/** A bare-handed attack's "weapon" carries the bare-hand rune (sharpness, knockback, fire aspect...). */
+	/** Protection the body runes give against {@code source} (added to what worn armor gives). */
+	public static int protection(LivingEntity entity, DamageSource source) {
+		if (!(entity instanceof ServerPlayer player) || !bodyActive(player)) {
+			return 0;
+		}
+
+		int total = 0;
+
+		for (Map.Entry<Enchantment, Integer> entry : built(player).body().entrySet()) {
+			total += entry.getKey().getDamageProtection(entry.getValue(), source);
+		}
+
+		return total;
+	}
+
+	/** After the wearer is hit: the body runes' answers (thorns). */
+	public static void afterHurt(LivingEntity user, Entity attacker) {
+		if (attacker == null || !(user instanceof ServerPlayer player) || !bodyActive(player)) {
+			return;
+		}
+
+		for (Map.Entry<Enchantment, Integer> entry : built(player).body().entrySet()) {
+			entry.getKey().doPostHurt(user, attacker, entry.getValue());
+		}
+	}
+
+	/** After a bare-handed hit lands: the bare-hand rune's on-hit enchantments (bane of arthropods' slowness...). */
+	public static void afterAttack(LivingEntity user, Entity target) {
+		if (!(user instanceof ServerPlayer player) || !unarmedActive(player)) {
+			return;
+		}
+
+		for (Map.Entry<Enchantment, Integer> entry : built(player).unarmed().entrySet()) {
+			entry.getKey().doPostAttack(user, target, entry.getValue());
+		}
+	}
+
+	/** A bare-handed attack's "weapon" for its damage bonus: the bare-hand rune (sharpness, smite...). */
 	public static ItemStack weaponItem(Player player, ItemStack original) {
 		if (!original.isEmpty() || !(player instanceof ServerPlayer) || !unarmedActive(player)) {
 			return original;
 		}
 
-		ItemStack unarmed = built(player).unarmed();
-		return unarmed.isEmpty() ? original : unarmed.copy();
-	}
-
-	/** Attribute effects of the runes (respiration, swift sneak, depth strider, sweeping edge...). */
-	public static void refresh(ServerPlayer player) {
-		Multimap<Holder<Attribute>, AttributeModifier> wanted = HashMultimap.create();
-
-		if (majorActive(player)) {
-			Built built = built(player);
-
-			if (bodyActive(player)) {
-				built.body().forEach((slot, stack) -> EnchantmentHelper.forEachModifier(stack, slot,
-						(attribute, modifier) -> wanted.put(attribute, renamed(slot, modifier))));
-			}
-
-			if (unarmedActive(player) && !built.unarmed().isEmpty()) {
-				EnchantmentHelper.forEachModifier(built.unarmed(), EquipmentSlot.MAINHAND,
-						(attribute, modifier) -> wanted.put(attribute, renamed(EquipmentSlot.MAINHAND, modifier)));
-			}
-		}
-
-		Multimap<Holder<Attribute>, AttributeModifier> applied = APPLIED.get(player);
-
-		if (wanted.equals(applied)) {
-			return;
-		}
-
-		if (applied != null) {
-			player.getAttributes().removeAttributeModifiers(applied);
-		}
-
-		player.getAttributes().addTransientAttributeModifiers(wanted);
-		APPLIED.put(player, wanted);
-	}
-
-	/** Our own ids, so a rune's modifier never collides with the same enchantment on real gear. */
-	private static AttributeModifier renamed(EquipmentSlot slot, AttributeModifier modifier) {
-		return new AttributeModifier(BloomLevelUp.id("rune/" + slot.getSerializedName() + "/" + modifier.id().getNamespace() + "/" + modifier.id().getPath()),
-				modifier.amount(), modifier.operation());
+		ItemStack unarmed = built(player).unarmedStack();
+		return unarmed.isEmpty() ? original : unarmed;
 	}
 
 	// ------------------------------------------------------------------ the rune screen
@@ -325,10 +275,10 @@ public final class RuneEmbedding {
 		private final SimpleContainer container;
 
 		public RuneMenu(int id, Inventory inventory, Player owner, boolean canEmbed) {
-			super(MENU, id);
+			super(MENU.get(), id);
 			this.owner = owner;
 			this.canEmbed = canEmbed;
-			NonNullList<ItemStack> stored = runes(owner);
+			NonNullList<ItemStack> stored = owner.level().isClientSide() ? NonNullList.withSize(SIZE, ItemStack.EMPTY) : runes(owner);
 			this.container = new SimpleContainer(SIZE) {
 				@Override
 				public void setChanged() {
@@ -355,13 +305,13 @@ public final class RuneEmbedding {
 					}
 
 					@Override
-					public Identifier getNoItemIcon() {
-						return SLOT_ICONS[index];
+					public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+						return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_ICONS[index]);
 					}
 				});
 			}
 
-			this.addStandardInventorySlots(inventory, 8, 51);
+			BloomMenus.addInventorySlots(this::addSlot, inventory, 8, 51);
 		}
 
 		private List<ItemStack> others(int index) {
@@ -388,10 +338,6 @@ public final class RuneEmbedding {
 			}
 
 			store(this.owner, copy);
-
-			if (this.owner instanceof ServerPlayer player) {
-				refresh(player);
-			}
 		}
 
 		@Override
@@ -414,7 +360,7 @@ public final class RuneEmbedding {
 			}
 
 			if (stack.isEmpty()) {
-				slot.setByPlayer(ItemStack.EMPTY);
+				slot.set(ItemStack.EMPTY);
 			} else {
 				slot.setChanged();
 			}

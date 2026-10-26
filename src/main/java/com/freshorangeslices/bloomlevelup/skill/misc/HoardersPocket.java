@@ -4,31 +4,29 @@ import java.util.List;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.registries.RegistryObject;
 
-import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
-import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
-
-import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
+import com.freshorangeslices.bloomlevelup.player.StoredItems;
+import com.freshorangeslices.bloomlevelup.registry.BloomMenus;
 import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 
 /**
@@ -40,16 +38,16 @@ import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 public final class HoardersPocket {
 	public static final int SIZE = 9;
 
-	public static final AttachmentType<ItemContainerContents> CONTENTS = AttachmentRegistry.create(BloomLevelUp.id("hoarders_pocket"),
-			builder -> builder.persistent(ItemContainerContents.CODEC).initializer(() -> ItemContainerContents.EMPTY).copyOnDeath());
+	/** Where the pocket's items live in the player's Bloom capability (kept through death). */
+	private static final String KEY = "pocket";
 
 	/**
 	 * The pocket's own menu type. On the client it is a plain one-row chest screen whose container uses the same
 	 * per-stack limit as the server, so Stack Overflow's big stacks show (and predict) correctly.
 	 */
-	public static final MenuType<ChestMenu> MENU = Registry.register(BuiltInRegistries.MENU, BloomLevelUp.id("hoarders_pocket"),
-			new MenuType<>((id, inventory) -> new ChestMenu(HoardersPocket.MENU, id, inventory, new PocketContainer(inventory.player, null), 1),
-					FeatureFlags.VANILLA_SET));
+	public static final RegistryObject<MenuType<ChestMenu>> MENU = BloomMenus.MENUS.register("hoarders_pocket",
+			() -> new MenuType<>((id, inventory) -> new ChestMenu(HoardersPocket.MENU.get(), id, inventory, new PocketContainer(inventory.player, null), 1),
+					net.minecraft.world.flag.FeatureFlags.VANILLA_SET));
 
 	private HoardersPocket() {
 	}
@@ -65,9 +63,9 @@ public final class HoardersPocket {
 			this.onChange = onChange;
 		}
 
-		@Override
-		public int getMaxStackSize(ItemStack stack) {
-			return StackOverflow.limit(this.owner, stack, super.getMaxStackSize(stack));
+		/** The owner (the Slot mixin gives this container Stack Overflow's limit for them). */
+		public Player owner() {
+			return this.owner;
 		}
 
 		@Override
@@ -83,20 +81,22 @@ public final class HoardersPocket {
 	public static void init() {
 	}
 
-	/** Storage items (shulker boxes, bundles, backpacks...) can't go in the pocket. */
+	/**
+	 * Storage items (shulker boxes, bundles, backpacks...) can't go in the pocket: the tag, shulker boxes, bundles, and
+	 * anything that holds items of its own (an item handler, as modded backpacks have).
+	 */
 	public static boolean allowed(ItemStack stack) {
-		return stack.isEmpty() || !(stack.is(BloomTags.POCKET_BLOCKED) || stack.has(DataComponents.CONTAINER)
-				|| stack.has(DataComponents.BUNDLE_CONTENTS));
+		return stack.isEmpty() || !(stack.is(BloomTags.POCKET_BLOCKED) || stack.getItem() instanceof BundleItem
+				|| (stack.getItem() instanceof BlockItem block && block.getBlock() instanceof ShulkerBoxBlock)
+				|| stack.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent());
 	}
 
 	public static NonNullList<ItemStack> items(Player player) {
-		NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-		player.getAttachedOrElse(CONTENTS, ItemContainerContents.EMPTY).copyInto(items);
-		return items;
+		return StoredItems.read(player, KEY, SIZE);
 	}
 
 	public static void store(Player player, NonNullList<ItemStack> items) {
-		player.setAttached(CONTENTS, ItemContainerContents.fromItems(items));
+		StoredItems.write(player, KEY, items);
 		markHasItems(player, MiscIds.POCKET_HAS_ITEMS, items);
 	}
 
@@ -139,7 +139,7 @@ public final class HoardersPocket {
 		private final boolean canDeposit;
 
 		public PocketMenu(int id, Inventory inventory, Player owner, boolean canDeposit) {
-			super(MENU, id);
+			super(MENU.get(), id);
 			this.owner = owner;
 			this.canDeposit = canDeposit;
 			NonNullList<ItemStack> stored = items(owner);
@@ -158,7 +158,7 @@ public final class HoardersPocket {
 				});
 			}
 
-			this.addStandardInventorySlots(inventory, 8, 50);
+			BloomMenus.addInventorySlots(this::addSlot, inventory, 8, 50);
 		}
 
 		private void save() {
@@ -200,7 +200,7 @@ public final class HoardersPocket {
 			}
 
 			if (stack.isEmpty()) {
-				slot.setByPlayer(ItemStack.EMPTY);
+				slot.set(ItemStack.EMPTY);
 			} else {
 				slot.setChanged();
 			}

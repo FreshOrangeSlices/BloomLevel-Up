@@ -9,9 +9,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 
 /**
  * Several effects are attributes that depend on what's in the main hand (Shovel Mastery, Brawler, Long
@@ -27,12 +28,16 @@ public final class HeldItemWatcher {
 	}
 
 	public static void init() {
-		ServerTickEvents.END_SERVER_TICK.register(HeldItemWatcher::tick);
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
-			LAST.remove(listener.player.getUUID());
-			ARMORLESS.remove(listener.player.getUUID());
+		MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
+			if (event.phase == TickEvent.Phase.END) {
+				tick(event.getServer());
+			}
 		});
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedOutEvent event) -> {
+			LAST.remove(event.getEntity().getUUID());
+			ARMORLESS.remove(event.getEntity().getUUID());
+		});
+		MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> {
 			LAST.clear();
 			ARMORLESS.clear();
 		});

@@ -14,7 +14,8 @@ import com.freshorangeslices.bloomlevelup.BloomLevelUp;
  * Weapon families by item tag ({@code bloomlevelup:weapon/<family>}), so modded weapons join a family by
  * tag and one item may deliberately belong to several. An item in {@code bloomlevelup:weapon/not_<family>} is never
  * in that family, even when the family's tag takes it in through a wider tag (the RPG Series puts its maces, hammers,
- * spears, glaives and double axes in {@code #minecraft:swords}). An empty hand is Unarmed.
+ * spears, glaives and double axes in {@code #minecraft:swords}). An empty hand is Unarmed. The Forge 1.20.1 build has no
+ * mace or spear families (1.20.1 has neither weapon).
  */
 public final class Weapons {
 	public enum Family {
@@ -23,8 +24,6 @@ public final class Weapons {
 		BOW(false),
 		CROSSBOW(false),
 		TRIDENT(true),
-		MACE(true),
-		SPEAR(true),
 		UNARMED(true);
 
 		private final boolean melee;

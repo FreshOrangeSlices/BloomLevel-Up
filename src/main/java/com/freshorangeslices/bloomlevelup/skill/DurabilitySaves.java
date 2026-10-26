@@ -1,12 +1,12 @@
 package com.freshorangeslices.bloomlevelup.skill;
 
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.Equippable;
+import net.minecraftforge.common.ToolActions;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
@@ -18,8 +18,8 @@ import com.freshorangeslices.bloomlevelup.skill.utility.UtilityIds;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
- * Backup durability saves, applied after vanilla Unbreaking has already had its chance (mixin into the
- * point where an item's durability loss is decided). Each remaining point of damage gets one extra roll.
+ * Backup durability saves on top of vanilla Unbreaking (mixin at the start of {@code ItemStack.hurt}): each point
+ * of damage gets one extra roll. Unbreaking rolls each point independently too, so the order doesn't matter.
  * <ul>
  *   <li>Worn armor: Armor / Durability (100 points ≈ a second Unbreaking III).</li>
  *   <li>Shields: Armor / Durability on the shield curve.</li>
@@ -43,7 +43,7 @@ public final class DurabilitySaves {
 
 		if (isWornArmor(stack)) {
 			chance = StatFormulas.armorDurabilitySaveChance(service.statValue(profile, ArmorIds.DURABILITY));
-		} else if (stack.has(DataComponents.BLOCKS_ATTACKS)) {
+		} else if (stack.canPerformAction(ToolActions.SHIELD_BLOCK)) {
 			chance = StatFormulas.shieldDurabilitySaveChance(service.statValue(profile, ArmorIds.DURABILITY));
 		} else if (stack.is(BloomTags.UTILITY_TOOLS)) {
 			int preservation = service.statValue(profile, PRESERVATION);
@@ -75,7 +75,6 @@ public final class DurabilitySaves {
 	}
 
 	private static boolean isWornArmor(ItemStack stack) {
-		Equippable equippable = stack.get(DataComponents.EQUIPPABLE);
-		return equippable != null && equippable.slot().getType() == EquipmentSlot.Type.HUMANOID_ARMOR;
+		return LivingEntity.getEquipmentSlotForItem(stack).getType() == EquipmentSlot.Type.ARMOR;
 	}
 }

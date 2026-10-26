@@ -18,6 +18,7 @@ public final class SideBridge {
 	private static volatile BiPredicate<Player, String> clientMajorActive = (player, majorId) -> false;
 	private static volatile Supplier<BloomConfig> clientConfig = () -> null;
 	private static volatile java.util.function.Function<Player, String> clientCopySource = player -> null;
+	private static volatile java.util.function.ToIntBiFunction<Player, String> clientStatValue = (player, statId) -> 0;
 
 	private SideBridge() {
 	}
@@ -33,6 +34,19 @@ public final class SideBridge {
 	/** The weapon Major the local player's Copycat is spreading, or null. */
 	public static void setClientCopySource(java.util.function.Function<Player, String> query) {
 		clientCopySource = query;
+	}
+
+	public static void setClientStatValue(java.util.function.ToIntBiFunction<Player, String> query) {
+		clientStatValue = query;
+	}
+
+	/** A stat's effective points, on either side: the server reads the profile, the client its synced copy. */
+	public static int statValue(Player player, String statId) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			return BloomServices.progression().statValue(BloomAttachments.profile(serverPlayer), statId);
+		}
+
+		return player == null ? 0 : clientStatValue.applyAsInt(player, statId);
 	}
 
 	public static String clientCopySource(Player player) {

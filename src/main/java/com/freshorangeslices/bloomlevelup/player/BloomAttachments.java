@@ -33,9 +33,13 @@ public final class BloomAttachments {
 	private BloomAttachments() {
 	}
 
-	/** The capability's value: one player's live profile (replaced wholesale when a player is cloned). */
+	/**
+	 * The capability's value: one player's live profile, plus item storage kept with it (Hoarder's Pocket, Rune
+	 * Embedding). Both are replaced wholesale when a player is cloned, so they survive death and the End.
+	 */
 	public static final class Holder {
 		private BloomProfile profile = new BloomProfile();
+		private CompoundTag items = new CompoundTag();
 
 		public BloomProfile profile() {
 			return profile;
@@ -44,6 +48,20 @@ public final class BloomAttachments {
 		void set(BloomProfile profile) {
 			this.profile = profile;
 		}
+
+		/** Named item lists ({@code pocket}, {@code runes}); live, so writes stick. */
+		public CompoundTag items() {
+			return items;
+		}
+
+		void setItems(CompoundTag items) {
+			this.items = items;
+		}
+	}
+
+	/** Item storage that travels with the profile (see {@link Holder#items}); an empty tag when the player has none. */
+	public static CompoundTag items(Player player) {
+		return player.getCapability(PROFILE).map(Holder::items).orElseGet(CompoundTag::new);
 	}
 
 	public static void init(IEventBus modBus) {
@@ -65,7 +83,10 @@ public final class BloomAttachments {
 
 		try {
 			original.getCapability(PROFILE).ifPresent(old -> event.getEntity().getCapability(PROFILE)
-					.ifPresent(fresh -> fresh.set(old.profile().copy())));
+					.ifPresent(fresh -> {
+						fresh.set(old.profile().copy());
+						fresh.setItems(old.items().copy());
+					}));
 		} finally {
 			original.invalidateCaps();
 		}
@@ -95,6 +116,11 @@ public final class BloomAttachments {
 			DataResult<Tag> encoded = ProfileCodecs.PROFILE.encodeStart(NbtOps.INSTANCE, holder.profile());
 			encoded.resultOrPartial(error -> BloomLevelUp.LOGGER.error("Couldn't save a Bloom profile: {}", error))
 					.ifPresent(profile -> tag.put("profile", profile));
+
+			if (!holder.items().isEmpty()) {
+				tag.put("items", holder.items().copy());
+			}
+
 			return tag;
 		}
 
@@ -105,6 +131,8 @@ public final class BloomAttachments {
 						.resultOrPartial(error -> BloomLevelUp.LOGGER.error("Couldn't load a Bloom profile: {}", error))
 						.ifPresent(holder::set);
 			}
+
+			holder.setItems(tag.getCompound("items").copy());
 		}
 	}
 }

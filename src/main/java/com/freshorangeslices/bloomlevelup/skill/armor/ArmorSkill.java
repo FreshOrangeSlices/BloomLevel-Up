@@ -2,20 +2,18 @@ package com.freshorangeslices.bloomlevelup.skill.armor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.util.Prediction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -25,20 +23,25 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Input;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
-
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.entity.event.v1.effect.ServerMobEffectEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.living.ShieldBlockEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
-import com.freshorangeslices.bloomlevelup.mixin.EntityAccessor;
+import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowInvoker;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
@@ -55,38 +58,101 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
  *
  * <p>Damage resolution for a player, in order:
  * <ol>
- *   <li>{@link #allowDamage} (before vanilla): Castle of Stone invincibility, Reflect, Dodge, Parkour.</li>
+ *   <li>{@link #allowDamage} (Forge's attack event, before vanilla): Castle of Stone invincibility, Reflect, Dodge, Parkour.</li>
  *   <li>Vanilla shield, armor, Resistance and enchantment protection.</li>
  *   <li>{@link #modifyFinalDamage} (mixin, after vanilla): our multiplicative layers, then Absorb.</li>
- *   <li>{@link #afterDamage}: Armor XP and Rebound.</li>
- *   <li>{@link #allowDeath}: Last Breath (and Castle of Stone's trigger).</li>
+ *   <li>{@link #afterDamage} (mixin, end of {@code hurt}): Armor XP and Rebound.</li>
+ *   <li>{@link #allowDeath} (Forge's death event, cancelled to survive): Last Breath (and Castle of Stone's trigger).</li>
  * </ol>
  */
 public final class ArmorSkill {
 	/** Brace!: how long each player has been planted without being braced yet (the braced state itself is a profile counter). */
 	private static final Map<UUID, Integer> BRACE_TICKS = new HashMap<>();
+	/** Brace!: whether each player is pressing a movement key (walk, strafe, jump), as their client reports it. */
+	private static final Map<UUID, Boolean> MOVING = new HashMap<>();
+	/** A hit in progress on a player, from the start of {@code hurt} to its end (for {@link #afterDamage}). */
+	private record Incoming(float amount, float healthBefore, boolean[] blocked) {
+	}
+
+	private static final Map<LivingEntity, Incoming> INCOMING = new IdentityHashMap<>();
 	private static boolean addingShortenedEffect;
 
 	private ArmorSkill() {
 	}
 
 	public static void init() {
-		ServerLivingEntityEvents.ALLOW_DAMAGE.register(ArmorSkill::allowDamage);
-		ServerLivingEntityEvents.AFTER_DAMAGE.register(ArmorSkill::afterDamage);
-		ServerLivingEntityEvents.ALLOW_DEATH.register(ArmorSkill::allowDeath);
-		ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-			if (entity instanceof ServerPlayer player) {
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, (LivingAttackEvent event) -> {
+			if (!event.getEntity().level().isClientSide() && !allowDamage(event.getEntity(), event.getSource(), event.getAmount())) {
+				event.setCanceled(true);
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener((ShieldBlockEvent event) -> {
+			Incoming incoming = INCOMING.get(event.getEntity());
+
+			if (incoming != null) {
+				incoming.blocked()[0] = true;
+			}
+		});
+		// Before anything else hears of the death: Last Breath may cancel it.
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, (LivingDeathEvent event) -> {
+			if (!allowDeath(event.getEntity(), event.getSource())) {
+				event.setCanceled(true);
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (LivingDeathEvent event) -> {
+			if (event.getEntity() instanceof ServerPlayer player) {
 				onDeath(player);
 			}
 		});
-		ServerMobEffectEvents.ALLOW_ADD.register((instance, entity, context) ->
-				context.isFromCommand() || !(entity instanceof ServerPlayer player) || allowEffect(instance, player));
-		ServerTickEvents.END_SERVER_TICK.register(ArmorSkill::tick);
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
-			BRACE_TICKS.remove(listener.player.getUUID());
-			BloomAttachments.profile(listener.player).setCounter(ArmorIds.BRACED, 0); // logging out isn't moving: no cooldown
+		MinecraftForge.EVENT_BUS.addListener((MobEffectEvent.Applicable event) -> {
+			if (event.getEntity() instanceof ServerPlayer player && !allowEffect(event.getEffectInstance(), player)) {
+				event.setResult(Event.Result.DENY);
+			}
 		});
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> BRACE_TICKS.clear());
+		MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
+			if (event.phase == TickEvent.Phase.END) {
+				tick(event.getServer());
+			}
+		});
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedOutEvent event) -> {
+			BRACE_TICKS.remove(event.getEntity().getUUID());
+			MOVING.remove(event.getEntity().getUUID());
+			BloomAttachments.profile(event.getEntity()).setCounter(ArmorIds.BRACED, 0); // logging out isn't moving: no cooldown
+		});
+		MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> {
+			BRACE_TICKS.clear();
+			MOVING.clear();
+			INCOMING.clear();
+		});
+	}
+
+	/** The client says whether its player is pressing a movement key (Brace! ends on your own movement only). */
+	public static void movementInput(ServerPlayer player, boolean moving) {
+		MOVING.put(player.getUUID(), moving);
+	}
+
+	// ------------------------------------------------------------------ around hurt (mixin)
+
+	/** Start of {@code LivingEntity.hurt} on a player: remember the incoming amount and health for {@link #afterDamage}. */
+	public static void beginHurt(LivingEntity entity, float amount) {
+		if (entity instanceof ServerPlayer) {
+			INCOMING.put(entity, new Incoming(amount, entity.getHealth() + entity.getAbsorptionAmount(), new boolean[1]));
+		}
+	}
+
+	/** End of {@code LivingEntity.hurt}: what the hit actually took (or whether a shield blocked it). */
+	public static void endHurt(LivingEntity entity, DamageSource source) {
+		Incoming incoming = entity instanceof ServerPlayer ? INCOMING.remove(entity) : null;
+
+		if (incoming != null) {
+			float taken = incoming.healthBefore() - (entity.getHealth() + entity.getAbsorptionAmount());
+			afterDamage(entity, source, incoming.amount(), Math.max(0.0F, taken), incoming.blocked()[0]);
+
+			// Misc / Ascension: damage while flying on it grounds you until you land.
+			if (taken > 0.0F && entity instanceof ServerPlayer player) {
+				com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill.afterDamage(player);
+			}
+		}
 	}
 
 	private static ProgressionService service() {
@@ -122,7 +188,7 @@ public final class ArmorSkill {
 		}
 
 		// Hits landing inside vanilla's damage cooldown are vanilla's business; don't roll or award XP for them.
-		if (((EntityAccessor) player).bloomlevelup$getInvulnerableTime() > 10 && !source.is(DamageTypeTags.BYPASSES_COOLDOWN)) {
+		if (player.invulnerableTime > 10 && !source.is(DamageTypeTags.BYPASSES_COOLDOWN)) {
 			return true;
 		}
 
@@ -174,10 +240,10 @@ public final class ArmorSkill {
 	private static void catchProjectile(ServerPlayer player, Projectile projectile) {
 		if (catchable(projectile) instanceof AbstractArrow arrow) {
 			// Keeps the item's full data (enchantments, potion contents, custom names).
-			ItemStack caught = arrow.getPickupItemStackOrigin().copy();
+			ItemStack caught = ((AbstractArrowInvoker) arrow).bloomlevelup$getPickupItem().copy();
 
 			if (!caught.isEmpty()) {
-				player.getInventory().placeItemBackInInventory(caught, Prediction.SERVER_ONLY);
+				player.getInventory().placeItemBackInInventory(caught);
 			}
 		}
 
@@ -199,19 +265,19 @@ public final class ArmorSkill {
 			return arrow;
 		}
 
-		return arrow instanceof net.minecraft.world.entity.projectile.arrow.ThrownTrident ? null : arrow;
+		return arrow instanceof ThrownTrident ? null : arrow;
 	}
 
 	// ------------------------------------------------------------------ after vanilla mitigation (mixin)
 
-	/** Fitting Armor / Medium: an axe disables your shield for half as long. */
-	public static float shieldDisableSeconds(LivingEntity entity, float seconds) {
-		if (entity instanceof ServerPlayer player && seconds > 0.0F && active(BloomAttachments.profile(player), ArmorIds.FITTING_ARMOR)
+	/** Fitting Armor / Medium: an axe disables your shield for less time ({@code ticks}: vanilla's 100). */
+	public static int shieldDisableTicks(LivingEntity entity, int ticks) {
+		if (entity instanceof ServerPlayer player && ticks > 0 && active(BloomAttachments.profile(player), ArmorIds.FITTING_ARMOR)
 				&& ArmorStyles.styleOf(player) == ArmorStyle.MEDIUM) {
-			return (float) (seconds * config().mediumShieldDisableRatio);
+			return (int) Math.round(ticks * config().mediumShieldDisableRatio);
 		}
 
-		return seconds;
+		return ticks;
 	}
 
 	/**
@@ -286,10 +352,6 @@ public final class ArmorSkill {
 			layers.add(new Layer("vibranium", 0.30));
 		}
 
-		if (active(profile, ArmorIds.ADAMANTIUM) && isWeaponClass(source, BloomTags.BLUNT_DAMAGE, BloomTags.WEAPON_BLUNT, BloomTags.WEAPON_NOT_BLUNT)) {
-			layers.add(new Layer("adamantium", 0.40));
-		}
-
 		if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
 			double overcap = StatFormulas.armorOvercapReduction(rawArmor, config().armorOvercapReductionCap);
 
@@ -321,7 +383,9 @@ public final class ArmorSkill {
 			return false;
 		}
 
-		ItemStack weapon = source.getWeaponItem();
+		// 1.20.1 damage sources don't carry the weapon: a melee hit's weapon is what its attacker holds.
+		ItemStack weapon = source.getDirectEntity() instanceof LivingEntity attacker && attacker == source.getEntity() ? attacker.getMainHandItem()
+				: ItemStack.EMPTY;
 		return weapon != null && !weapon.isEmpty() && weapon.is(weaponTag) && !weapon.is(notTag);
 	}
 
@@ -336,8 +400,8 @@ public final class ArmorSkill {
 		double total = armor.getBaseValue();
 
 		for (AttributeModifier modifier : armor.getModifiers()) {
-			if (modifier.operation() == AttributeModifier.Operation.ADD_VALUE) {
-				total += modifier.amount();
+			if (modifier.getOperation() == AttributeModifier.Operation.ADDITION) {
+				total += modifier.getAmount();
 			}
 		}
 
@@ -370,9 +434,8 @@ public final class ArmorSkill {
 
 			if (durability >= remaining) {
 				// The piece breaks; whatever it couldn't pay simply disappears.
-				ItemStack broken = stack.copy();
 				stack.shrink(1);
-				player.onEquippedItemBroken(broken, slot);
+				player.broadcastBreakEvent(slot);
 			} else {
 				stack.setDamageValue(stack.getDamageValue() + durability);
 			}
@@ -394,7 +457,7 @@ public final class ArmorSkill {
 		if (damageTaken > 0.0F && source.is(BloomTags.MELEE) && source.getEntity() instanceof LivingEntity attacker
 				&& attacker != player && attacker.isAlive()
 				&& active(BloomAttachments.profile(player), ArmorIds.REBOUND) && player.getRandom().nextDouble() < 0.15) {
-			attacker.hurtServer((ServerLevel) player.level(), player.damageSources().thorns(player), baseDamage * 0.5F);
+			attacker.hurt(player.damageSources().thorns(player), baseDamage * 0.5F);
 		}
 	}
 
@@ -408,7 +471,7 @@ public final class ArmorSkill {
 
 	// ------------------------------------------------------------------ death
 
-	public static boolean allowDeath(LivingEntity entity, DamageSource source, float amount) {
+	public static boolean allowDeath(LivingEntity entity, DamageSource source) {
 		if (!(entity instanceof ServerPlayer player)) {
 			return true;
 		}
@@ -472,20 +535,21 @@ public final class ArmorSkill {
 		}
 
 		BloomProfile profile = BloomAttachments.profile(player);
-		boolean harmful = instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL;
+		boolean harmful = instance.getEffect().getCategory() == MobEffectCategory.HARMFUL;
 
 		// Effects from food the player chose to eat (rotten flesh, spider eyes...) always land.
 		if (harmful && active(profile, ArmorIds.UNYIELDING) && !ConsumeContext.isConsuming(player)
-				&& !instance.getEffect().is(BloomTags.UNYIELDING_IGNORED) && player.getRandom().nextDouble() < 0.5) {
+				&& !BloomTags.is(instance.getEffect(), BloomTags.UNYIELDING_IGNORED) && player.getRandom().nextDouble() < 0.5) {
 			return false;
 		}
 
-		if (active(profile, ArmorIds.THICK_BLOOD) && instance.getEffect().is(BloomTags.DAMAGE_OVER_TIME)
+		if (active(profile, ArmorIds.THICK_BLOOD) && BloomTags.is(instance.getEffect(), BloomTags.DAMAGE_OVER_TIME)
 				&& !instance.isInfiniteDuration() && instance.getDuration() > 1) {
 			addingShortenedEffect = true;
 
 			try {
-				player.addEffect(instance.withScaledDuration(0.5F));
+				player.addEffect(new MobEffectInstance(instance.getEffect(), Math.max(1, instance.getDuration() / 2), instance.getAmplifier(),
+						instance.isAmbient(), instance.isVisible(), instance.showIcon()));
 			} finally {
 				addingShortenedEffect = false;
 			}
@@ -512,10 +576,9 @@ public final class ArmorSkill {
 			boolean braced = profile.counter(ArmorIds.BRACED) != 0;
 
 			if (active(profile, ArmorIds.BRACE)) {
-				Input input = player.getLastClientInput();
-				boolean moving = input.forward() || input.backward() || input.left() || input.right() || input.jump();
-				boolean shieldUp = player.isUsingItem() && player.getUseItem().has(DataComponents.BLOCKS_ATTACKS);
-				boolean planted = !moving && (input.shift() || shieldUp);
+				boolean moving = MOVING.getOrDefault(id, false);
+				boolean shieldUp = player.isUsingItem() && player.getUseItem().canPerformAction(ToolActions.SHIELD_BLOCK);
+				boolean planted = !moving && (player.isShiftKeyDown() || shieldUp);
 				long now = player.level().getGameTime();
 
 				if (braced) {

@@ -2,6 +2,7 @@ package com.freshorangeslices.bloomlevelup.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,32 +13,45 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
+import com.freshorangeslices.bloomlevelup.skill.ConsumeContext;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
+import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
 
 @Mixin(LivingEntity.class)
 abstract class LivingEntityMixin {
-	/** After vanilla armor, Resistance and enchantment protection: apply the Armor category's own layers. */
-	/** Long Reach: a spear's own attack range (its jab and charge) reaches further. Both sides. */
-	@Inject(method = "getAttackRangeWith", at = @At("RETURN"), cancellable = true)
-	private void bloomlevelup$longReach(net.minecraft.world.item.ItemStack stack, CallbackInfoReturnable<net.minecraft.world.item.component.AttackRange> cir) {
-		net.minecraft.world.item.component.AttackRange range = CombatSkill.longReach((LivingEntity) (Object) this, stack, cir.getReturnValue());
+	/** Combat: classify the hit and add the bonuses that count as real damage, before any mitigation. */
+	@ModifyVariable(method = "hurt", at = @At("HEAD"), argsOnly = true, ordinal = 0)
+	private float bloomlevelup$combatBonuses(float amount, DamageSource source, float originalAmount) {
+		return CombatSkill.modifyIncoming((LivingEntity) (Object) this, source, amount);
+	}
 
-		if (range != cir.getReturnValue()) {
-			cir.setReturnValue(range);
+	/** Armor: remember the hit coming in, so its end can tell what it took (Armor XP, Rebound, Ascension). */
+	@Inject(method = "hurt", at = @At("HEAD"))
+	private void bloomlevelup$beginHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+		if (((LivingEntity) (Object) this).level() instanceof ServerLevel) {
+			ArmorSkill.beginHurt((LivingEntity) (Object) this, amount);
 		}
 	}
 
+	@Inject(method = "hurt", at = @At("RETURN"))
+	private void bloomlevelup$endHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+		ArmorSkill.endHurt((LivingEntity) (Object) this, source);
+	}
+
+	/** After vanilla armor, Resistance and enchantment protection: apply the Armor category's own layers. */
 	@Inject(method = "getDamageAfterMagicAbsorb", at = @At("RETURN"), cancellable = true)
 	private void bloomlevelup$armorLayers(DamageSource source, float damage, CallbackInfoReturnable<Float> cir) {
 		if ((Object) this instanceof ServerPlayer player) {
@@ -45,6 +59,13 @@ abstract class LivingEntityMixin {
 		}
 
 		CombatSkill.recordMitigated((LivingEntity) (Object) this, cir.getReturnValueF());
+	}
+
+	/** Rune Embedding: body runes protect like the same enchantments on worn armor. */
+	@WrapOperation(method = "getDamageAfterMagicAbsorb", at = @At(value = "INVOKE",
+			target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getDamageProtection(Ljava/lang/Iterable;Lnet/minecraft/world/damagesource/DamageSource;)I"))
+	private int bloomlevelup$runeProtection(Iterable<ItemStack> armor, DamageSource source, Operation<Integer> original) {
+		return original.call(armor, source) + RuneEmbedding.protection((LivingEntity) (Object) this, source);
 	}
 
 	/** Misc: Water to Wine (10-minute floor) and Overdose (re-applying climbs a level) reshape incoming effects. */
@@ -59,32 +80,29 @@ abstract class LivingEntityMixin {
 		MiscSkill.afterEffectAdded((LivingEntity) (Object) this, instance);
 	}
 
-	/** Combat: classify the hit and add the bonuses that count as real damage, before any mitigation. */
-	@ModifyVariable(method = "hurtServer", at = @At("HEAD"), argsOnly = true, ordinal = 0)
-	private float bloomlevelup$combatBonuses(float amount, ServerLevel level, DamageSource source, float originalAmount) {
-		return CombatSkill.modifyIncoming((LivingEntity) (Object) this, source, amount);
-	}
-
 	/** Combat: measure the health actually lost (XP, Execute, Armor Break, Overkill...). */
 	@Inject(method = "actuallyHurt", at = @At("HEAD"))
-	private void bloomlevelup$beforeHurt(ServerLevel level, DamageSource source, float amount, CallbackInfo ci) {
+	private void bloomlevelup$beforeHurt(DamageSource source, float amount, CallbackInfo ci) {
 		CombatSkill.beforeRealDamage((LivingEntity) (Object) this);
 	}
 
 	@Inject(method = "actuallyHurt", at = @At("RETURN"))
-	private void bloomlevelup$afterHurt(ServerLevel level, DamageSource source, float amount, CallbackInfo ci) {
-		CombatSkill.afterRealDamage((LivingEntity) (Object) this, level, source);
+	private void bloomlevelup$afterHurt(DamageSource source, float amount, CallbackInfo ci) {
+		if (((LivingEntity) (Object) this).level() instanceof ServerLevel level) {
+			CombatSkill.afterRealDamage((LivingEntity) (Object) this, level, source);
+		}
 	}
 
 	/** Combat / Penetration: the attacker ignores part of the armor. */
 	@WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE",
-			target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(Lnet/minecraft/world/entity/LivingEntity;FLnet/minecraft/world/damagesource/DamageSource;FF)F"))
-	private float bloomlevelup$penetration(LivingEntity entity, float damage, DamageSource source, float armor, float toughness, Operation<Float> original) {
-		return original.call(entity, damage, source, CombatSkill.penetrate(source, entity, armor), toughness);
+			target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
+	private float bloomlevelup$penetration(float damage, float armor, float toughness, Operation<Float> original,
+			@Local(argsOnly = true) DamageSource source) {
+		return original.call(damage, CombatSkill.penetrate(source, (LivingEntity) (Object) this, armor), toughness);
 	}
 
 	/** Titan Hide's drawback: double knockback while fighting with no armor on. */
-	@ModifyVariable(method = "knockback(DDDLnet/minecraft/world/damagesource/DamageSource;FZ)V", at = @At("HEAD"), argsOnly = true, ordinal = 0)
+	@ModifyVariable(method = "knockback", at = @At("HEAD"), argsOnly = true, ordinal = 0)
 	private double bloomlevelup$titanHideKnockback(double strength) {
 		if ((Object) this instanceof ServerPlayer player
 				&& BloomServices.progression().isMajorActive(BloomAttachments.profile(player), ArmorIds.TITAN_HIDE)
@@ -93,5 +111,22 @@ abstract class LivingEntityMixin {
 		}
 
 		return strength;
+	}
+
+	/** Eating and drinking: what is being consumed, while it is (food effects, milk, Protein!, Become My Fuel). */
+	@Inject(method = "completeUsingItem", at = @At("HEAD"))
+	private void bloomlevelup$beginConsume(CallbackInfo ci) {
+		LivingEntity self = (LivingEntity) (Object) this;
+
+		if (self instanceof ServerPlayer player && self.isUsingItem() && !self.getUseItem().isEmpty()) {
+			ConsumeContext.begin(player, self.getUseItem(), self.getUsedItemHand() == InteractionHand.OFF_HAND);
+		}
+	}
+
+	@Inject(method = "completeUsingItem", at = @At("RETURN"))
+	private void bloomlevelup$endConsume(CallbackInfo ci) {
+		if ((Object) this instanceof ServerPlayer player) {
+			ConsumeContext.end(player);
+		}
 	}
 }

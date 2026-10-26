@@ -22,29 +22,13 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 // The Fabric 26.3 sources share this tree. What is ported to Forge 1.20.1 so far builds; the rest waits here
 // (unchanged, for reference) until its chunk is ported. Each chunk removes its lines from this list.
 def notPortedYet = [
-		// Chunk 2: skills, Majors and the mixins they need
-		'**/bloomlevelup/compat/**',
-		'**/bloomlevelup/entity/**',
-		'**/bloomlevelup/item/**',
+		// Chunk 3 (with the client): the stat sheet, worked out on the server for the hub
 		'**/bloomlevelup/sheet/**',
-		'**/bloomlevelup/skill/armor/ArmorSkill.java',
-		'**/bloomlevelup/skill/armor/ArmorStyles.java',
-		'**/bloomlevelup/skill/combat/CombatSkill.java',
-		'**/bloomlevelup/skill/combat/CombatAbilities.java',
-		'**/bloomlevelup/skill/combat/Weapons.java',
-		'**/bloomlevelup/skill/misc/HoardersPocket.java',
-		'**/bloomlevelup/skill/misc/MiscSkill.java',
-		'**/bloomlevelup/skill/misc/RuneEmbedding.java',
-		'**/bloomlevelup/skill/misc/StackOverflow.java',
-		'**/bloomlevelup/skill/utility/UtilitySkill.java',
-		'**/bloomlevelup/skill/utility/BlockXpLoader.java',
-		'**/bloomlevelup/skill/utility/BlockXpTable.java',
-		'**/bloomlevelup/skill/utility/ChainBreaker.java',
-		'**/bloomlevelup/skill/utility/PlacedBlocks.java',
-		'**/bloomlevelup/skill/ConsumeContext.java',
-		'**/bloomlevelup/skill/DurabilitySaves.java',
-		'**/bloomlevelup/effect/HeldItemWatcher.java',
-		'**/bloomlevelup/mixin/**',
+		// Chunk 4: Better Combat compat, against Better Combat for 1.20.1 (compat/BetterCombat.java is a stand-in until then)
+		'**/bloomlevelup/compat/BetterCombatBridge.java',
+		'**/bloomlevelup/compat/BetterCombatMoves.java',
+		'**/bloomlevelup/compat/BetterCombatMixinPlugin.java',
+		'**/bloomlevelup/compat/mixin/**',
 		// Fabric-only: the Bloom Pack's launch defaults (resource packs, shader); this build isn't for that pack.
 		'**/bloomlevelup/PackDefaultsLaunch.java',
 		// Chunk 3: the client (hub, HUD, combat keys, renderers)

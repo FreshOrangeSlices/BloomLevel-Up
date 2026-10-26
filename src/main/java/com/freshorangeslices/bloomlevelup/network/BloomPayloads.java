@@ -120,12 +120,8 @@ public final class BloomPayloads {
 		OPEN_POCKET,
 		/** Misc / Rune Embedding: open the rune slots (the server checks the Major). */
 		OPEN_RUNES,
-		/** Wind Impact: a wind burst on the block the player aims at, or under them on the ground. */
-		WIND_BURST,
 		/** Master of Arms (Charge + Catch!): a charged throw (harder, faster, pierces). */
 		CHARGED_THROW,
-		/** Master of Arms (Charge + Wind Impact): a bigger wind burst. */
-		CHARGED_BURST,
 		/** Master of Arms (Charge + Lightning Summon): several bolts around the aim point. */
 		STORM_CALL
 	}
@@ -138,6 +134,20 @@ public final class BloomPayloads {
 
 		public void write(FriendlyByteBuf buf) {
 			buf.writeEnum(action);
+		}
+	}
+
+	/**
+	 * Client → server: whether the player is pressing a movement key (walk, strafe or jump), sent when it changes.
+	 * 1.20.1 servers don't see a walking player's keys; Brace! ends on your own movement only.
+	 */
+	public record MovementInput(boolean moving) {
+		public static MovementInput read(FriendlyByteBuf buf) {
+			return new MovementInput(buf.readBoolean());
+		}
+
+		public void write(FriendlyByteBuf buf) {
+			buf.writeBoolean(moving);
 		}
 	}
 

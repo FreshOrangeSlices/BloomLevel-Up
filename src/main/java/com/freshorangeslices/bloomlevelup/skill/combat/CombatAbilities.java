@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -15,33 +17,33 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.component.ChargedProjectiles;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 
 import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
-import com.freshorangeslices.bloomlevelup.mixin.ProjectileWeaponItemInvoker;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.CombatAction;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
 import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
@@ -50,8 +52,8 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
  * The Combat Majors that need input: Charge Attack / Heavy Hands (hold the weapon-skill key), Lightning
- * Summon, Catch! (throw), Wind Impact, Assault Rifle (crossbow magazine), and Master of Arms' combos of them
- * (Charged Throw, Charged Burst, Storm Call, Gale Throw). The client only reports what the player did; the
+ * Summon, Catch! (throw), Assault Rifle (crossbow magazine), and Master of Arms' combos of them (Charged Throw,
+ * Storm Call). The client only reports what the player did; the
  * server checks the Majors, weapon, charge and costs.
  */
 public final class CombatAbilities {
@@ -62,22 +64,20 @@ public final class CombatAbilities {
 	}
 
 	public static void init() {
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> {
-			CHARGED_UNTIL.remove(listener.player.getUUID());
-			RIPTIDE_HINT_AT.remove(listener.player.getUUID());
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedOutEvent event) -> {
+			CHARGED_UNTIL.remove(event.getEntity().getUUID());
+			RIPTIDE_HINT_AT.remove(event.getEntity().getUUID());
 		});
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+		MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> {
 			CHARGED_UNTIL.clear();
 			RIPTIDE_HINT_AT.clear();
 		});
 
 		// Unrestricted Riptide's hint when a trident is raised.
-		UseItemCallback.EVENT.register((player, level, hand) -> {
-			if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-				riptideHint(serverPlayer, player.getItemInHand(hand));
+		MinecraftForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickItem event) -> {
+			if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+				riptideHint(serverPlayer, event.getItemStack());
 			}
-
-			return InteractionResult.PASS;
 		});
 	}
 
@@ -94,9 +94,7 @@ public final class CombatAbilities {
 			case CHARGED -> armCharge(player);
 			case SUMMON_LIGHTNING -> summonLightning(player);
 			case THROW -> throwWeapon(player);
-			case WIND_BURST -> CombatSkill.windBurst(player);
 			case CHARGED_THROW -> chargedThrow(player);
-			case CHARGED_BURST -> chargedBurst(player);
 			case STORM_CALL -> stormCall(player);
 			case OPEN_POCKET -> HoardersPocket.open(player);
 			case OPEN_RUNES -> RuneEmbedding.open(player);
@@ -109,7 +107,7 @@ public final class CombatAbilities {
 	 */
 	private static void riptideHint(ServerPlayer player, ItemStack stack) {
 		if (!Weapons.is(stack, Family.TRIDENT) || player.isShiftKeyDown() || !CombatSkill.active(player, CombatIds.UNRESTRICTED_RIPTIDE)
-				|| net.minecraft.world.item.enchantment.EnchantmentHelper.getTridentSpinAttackStrength(stack, player) > 0.0F) {
+				|| EnchantmentHelper.getRiptide(stack) > 0) {
 			return;
 		}
 
@@ -154,15 +152,17 @@ public final class CombatAbilities {
 	 * sword, 2 for an axe) plus whatever is left of that.
 	 */
 	static void chargedSwingWear(ServerPlayer player, ItemStack weapon) {
-		if (player.hasInfiniteMaterials() || !weapon.isDamageableItem()) {
+		if (player.getAbilities().instabuild || !weapon.isDamageableItem()) {
 			return;
 		}
 
-		net.minecraft.world.item.component.Weapon stats = weapon.get(DataComponents.WEAPON);
-		int extra = config().chargedSwingDurabilityCost - (stats == null ? 0 : stats.itemDamagePerAttack());
+		// What the hit itself wears in 1.20.1: swords and tridents 1, axes and other tools 2.
+		int ownWear = weapon.getItem() instanceof SwordItem || weapon.getItem() instanceof TridentItem ? 1
+				: weapon.getItem() instanceof DiggerItem ? 2 : 0;
+		int extra = config().chargedSwingDurabilityCost - ownWear;
 
 		if (extra > 0) {
-			weapon.hurtAndBreak(extra, player, EquipmentSlot.MAINHAND);
+			weapon.hurtAndBreak(extra, player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		}
 	}
 
@@ -186,19 +186,9 @@ public final class CombatAbilities {
 		return masterOfArms(player) && canCharge(player, weapon) && player.getAttackStrengthScale(0.5F) >= 0.9F;
 	}
 
-	/**
-	 * Charged Throw: Charge Attack / Heavy Hands + Catch!. Double damage, faster, and it goes through mobs. A
-	 * charged mace throw with Wind Impact is a Gale Throw (see {@link #thrownWeaponLanded}).
-	 */
+	/** Charged Throw: Charge Attack / Heavy Hands + Catch!. Double damage, faster, and it goes through mobs. */
 	private static void chargedThrow(ServerPlayer player) {
 		if (chargedCombo(player, player.getMainHandItem()) && throwWeapon(player, true)) {
-			player.resetAttackStrengthTicker();
-		}
-	}
-
-	/** Charged Burst: Charge Attack / Heavy Hands + Wind Impact. A bigger launch and push. */
-	private static void chargedBurst(ServerPlayer player) {
-		if (chargedCombo(player, player.getMainHandItem()) && CombatSkill.windBurst(player, true)) {
 			player.resetAttackStrengthTicker();
 		}
 	}
@@ -208,51 +198,6 @@ public final class CombatAbilities {
 		if (chargedCombo(player, player.getMainHandItem()) && lightning(player, true)) {
 			player.resetAttackStrengthTicker();
 		}
-	}
-
-	/**
-	 * Gale Throw: a Charged Throw of a mace with Wind Impact (Heavy Hands + Catch! + Wind Impact). Where it lands
-	 * it first pulls mobs in from around, then bursts bigger than a normal Wind Impact and throws them out.
-	 */
-	private static void galeLanding(ServerLevel level, ServerPlayer owner, Vec3 at) {
-		BloomConfig config = config();
-		double radius = config.galeThrowPullRadius;
-
-		for (LivingEntity victim : CombatSkill.victimsAround(level, owner, new net.minecraft.world.phys.AABB(at, at).inflate(radius))) {
-			Vec3 toward = at.subtract(victim.position());
-			Vec3 flat = new Vec3(toward.x, 0.0, toward.z);
-			double distance = flat.length();
-
-			if (distance > radius || distance < 0.75) {
-				continue;
-			}
-
-			// Stronger the farther out, so everything ends up near the middle.
-			Vec3 pull = flat.normalize().scale(config.galeThrowPullStrength * Math.min(1.0, distance / 3.0));
-			victim.push(pull.x, 0.25, pull.z);
-			CombatSkill.syncVelocity(victim);
-		}
-
-		// The inhale: a ring of gusts at the edge, drawn in.
-		int points = Math.max(12, (int) Math.round(radius * 4.0));
-
-		for (int i = 0; i < points; i++) {
-			double angle = 2.0 * Math.PI * i / points;
-			double x = at.x + Math.cos(angle) * radius;
-			double z = at.z + Math.sin(angle) * radius;
-			level.sendParticles(ParticleTypes.GUST, x, at.y + 0.4, z, 1, 0.0, 0.0, 0.0, 0.0);
-		}
-
-		level.playSound(null, at.x, at.y, at.z, SoundEvents.BREEZE_INHALE, SoundSource.PLAYERS, 1.5F, 0.8F);
-
-		CombatSkill.defer(config.galeThrowPullTicks, () -> {
-			if (owner.level() != level) {
-				return;
-			}
-
-			CombatSkill.windBlast(level, at, config.galeThrowBurstScale);
-			CombatSkill.windImpactAt(level, owner, at, config.galeThrowBurstScale, config.galeThrowBurstScale);
-		});
 	}
 
 	// ------------------------------------------------------------------ Lightning Summon
@@ -309,7 +254,7 @@ public final class CombatAbilities {
 		}
 
 		if (cost > 0) {
-			weapon.hurtAndBreak(cost, player, EquipmentSlot.MAINHAND);
+			weapon.hurtAndBreak(cost, player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		}
 
 		player.getCooldowns().addCooldown(weapon, (int) Math.round(config.lightningSummonCooldownTicks * scale));
@@ -321,7 +266,7 @@ public final class CombatAbilities {
 			return;
 		}
 
-		LightningBolt bolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+		LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
 
 		if (bolt != null) {
 			bolt.setPos(at.x, at.y, at.z);
@@ -333,16 +278,15 @@ public final class CombatAbilities {
 	// ------------------------------------------------------------------ Catch!
 
 	/**
-	 * Weapons Catch! can throw: swords, axes, maces, spears and anything modded in those families. Tridents
-	 * throw on their own (Catch! makes them come back instead, see CombatSkill).
+	 * Weapons Catch! can throw: swords, axes and anything modded in those families. Tridents throw on their own
+	 * (Catch! makes them come back instead, see CombatSkill).
 	 */
 	public static boolean throwable(ItemStack stack) {
 		if (stack.isEmpty() || Weapons.is(stack, Family.TRIDENT)) {
 			return false;
 		}
 
-		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE) || Weapons.is(stack, Family.MACE)
-				|| Weapons.is(stack, Family.SPEAR);
+		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE);
 	}
 
 	private static void throwWeapon(ServerPlayer player) {
@@ -363,16 +307,22 @@ public final class CombatAbilities {
 		int wear = charged ? config.chargedThrowDurabilityCost : config.catchThrowDurabilityCost;
 
 		// A throw never breaks the weapon mid-air: one too worn to pay for it isn't thrown.
-		if (!player.hasInfiniteMaterials() && held.isDamageableItem() && wear > 0) {
+		boolean creative = player.getAbilities().instabuild;
+
+		if (!creative && held.isDamageableItem() && wear > 0) {
 			if (held.getMaxDamage() - held.getDamageValue() <= wear) {
 				player.sendSystemMessage(Component.translatable("bloom.combat.catch.worn").withStyle(ChatFormatting.RED), true);
 				return false;
 			}
 
-			held.hurtWithoutBreaking(wear, player);
+			held.setDamageValue(held.getDamageValue() + wear);
 		}
 
-		ItemStack thrownStack = player.hasInfiniteMaterials() ? held.copy() : held.copyAndClear();
+		ItemStack thrownStack = held.copy();
+
+		if (!creative) {
+			held.setCount(0);
+		}
 		ThrownWeapon thrown = ThrownWeapon.create(level, player, thrownStack);
 		double speed = config.catchThrowSpeed;
 
@@ -384,7 +334,7 @@ public final class CombatAbilities {
 
 		thrown.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, (float) speed, 1.0F);
 		level.addFreshEntity(thrown);
-		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+		level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
 		return true;
 	}
 
@@ -405,37 +355,57 @@ public final class CombatAbilities {
 	/** A thrown weapon hits for the weapon's own damage (plus its enchantments), not a trident's 8. */
 	static float thrownDamage(ServerPlayer player, ThrownWeapon thrown, float amount) {
 		ItemStack weapon = thrown.getItem();
-		double base = weapon.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY)
-				.compute(Attributes.ATTACK_DAMAGE, player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE), EquipmentSlot.MAINHAND);
-		double enchantments = Math.max(0.0, amount - TridentItem.BASE_DAMAGE);
+		double base = player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+
+		// The weapon's own attack damage, as its main-hand modifiers add it (the flat ones; 1.20.1 weapons use only those).
+		for (AttributeModifier modifier : weapon.getAttributeModifiers(EquipmentSlot.MAINHAND).get(Attributes.ATTACK_DAMAGE)) {
+			if (modifier.getOperation() == AttributeModifier.Operation.ADDITION) {
+				base += modifier.getAmount();
+			}
+		}
+
+		// A trident's hit is 8 plus its enchantment bonus: keep the bonus.
+		double enchantments = Math.max(0.0, amount - 8.0);
 		double drop = 0.0;
 
-		// A falling throw: a mace always scales with the drop, other weapons with Death From Above.
-		if (Weapons.is(weapon, Family.MACE) || CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE)) {
+		// A falling throw scales with the drop with Death From Above.
+		if (CombatSkill.active(player, CombatIds.DEATH_FROM_ABOVE)) {
 			drop = StatFormulas.maceFallBonus(thrown.droppedDistance());
 		}
 
 		return (float) ((base + enchantments + drop) * thrown.damageMultiplier());
 	}
 
-	/** A thrown mace that hits the ground triggers Wind Impact; a charged one (Master of Arms) is a Gale Throw. */
-	public static void thrownWeaponLanded(ThrownWeapon thrown) {
-		if (thrown.level() instanceof ServerLevel level && thrown.getOwner() instanceof ServerPlayer owner
-				&& Weapons.is(thrown.getItem(), Family.MACE) && CombatSkill.active(owner, CombatIds.WIND_IMPACT)) {
-			if (thrown.isCharged() && masterOfArms(owner)) {
-				galeLanding(level, owner, thrown.position());
-			} else {
-				CombatSkill.windImpactAt(level, owner, thrown.position());
+	// ------------------------------------------------------------------ Assault Rifle
+
+	/** The rounds loaded in a crossbow (1.20.1 keeps them in its NBT, {@code ChargedProjectiles}). */
+	static List<ItemStack> loaded(ItemStack crossbow) {
+		List<ItemStack> out = new ArrayList<>();
+		CompoundTag tag = crossbow.getTag();
+
+		if (tag != null && tag.contains("ChargedProjectiles", Tag.TAG_LIST)) {
+			ListTag list = tag.getList("ChargedProjectiles", Tag.TAG_COMPOUND);
+
+			for (int i = 0; i < list.size(); i++) {
+				out.add(ItemStack.of(list.getCompound(i)));
 			}
 		}
+
+		return out;
 	}
 
-	/** A thrown mace landing at a point (game tests). */
-	public static void galeLandingForTests(ServerLevel level, ServerPlayer owner, Vec3 at) {
-		galeLanding(level, owner, at);
-	}
+	/** Replaces the loaded rounds (and the crossbow's "charged" flag to match). */
+	static void setLoaded(ItemStack crossbow, List<ItemStack> rounds) {
+		ListTag list = new ListTag();
 
-	// ------------------------------------------------------------------ Assault Rifle
+		for (ItemStack round : rounds) {
+			list.add(round.save(new CompoundTag()));
+		}
+
+		CompoundTag tag = crossbow.getOrCreateTag();
+		tag.put("ChargedProjectiles", list);
+		CrossbowItem.setCharged(crossbow, !rounds.isEmpty());
+	}
 
 	/** After a normal load, keep loading until the magazine is full or the ammo runs out. */
 	public static void fillMagazine(LivingEntity shooter, ItemStack crossbow) {
@@ -444,14 +414,14 @@ public final class CombatAbilities {
 			return;
 		}
 
-		ChargedProjectiles current = crossbow.get(DataComponents.CHARGED_PROJECTILES);
+		List<ItemStack> loaded = loaded(crossbow);
 
-		if (current == null || current.isEmpty()) {
+		if (loaded.isEmpty()) {
 			return;
 		}
 
-		List<ItemStack> loaded = new ArrayList<>(current.itemCopies().toList());
 		int magazine = config().assaultRifleMagazine;
+		boolean creative = player.getAbilities().instabuild;
 
 		while (loaded.size() < magazine) {
 			ItemStack ammo = player.getProjectile(crossbow);
@@ -460,7 +430,8 @@ public final class CombatAbilities {
 				break;
 			}
 
-			ItemStack one = ProjectileWeaponItemInvoker.bloomlevelup$useAmmo(crossbow, ammo, player, false);
+			// Free rounds (creative, Crossbow Infinity's arrows, Rainbow) aren't taken from the stack.
+			ItemStack one = creative || CombatSkill.freeAmmo(crossbow, ammo, player) ? ammo.copyWithCount(1) : ammo.split(1);
 
 			if (one.isEmpty()) {
 				break;
@@ -469,32 +440,36 @@ public final class CombatAbilities {
 			loaded.add(one);
 		}
 
-		crossbow.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.ofNonEmpty(loaded));
+		setLoaded(crossbow, loaded);
 	}
 
 	/** Fires one round of a loaded magazine. Returns null to let vanilla handle the click. */
-	public static InteractionResult fireFromMagazine(CrossbowItem item, Level level, Player player, InteractionHand hand) {
+	public static InteractionResultHolder<ItemStack> fireFromMagazine(Level level, Player player, InteractionHand hand) {
 		ItemStack crossbow = player.getItemInHand(hand);
-		ChargedProjectiles loaded = crossbow.get(DataComponents.CHARGED_PROJECTILES);
 
-		if (loaded == null || loaded.size() <= 1 || !CombatSkill.activeAnySide(player, CombatIds.ASSAULT_RIFLE)) {
+		if (!CrossbowItem.isCharged(crossbow) || !CombatSkill.activeAnySide(player, CombatIds.ASSAULT_RIFLE)) {
+			return null;
+		}
+
+		List<ItemStack> rounds = loaded(crossbow);
+
+		if (rounds.size() <= 1) {
 			return null;
 		}
 
 		if (level.isClientSide()) {
-			return InteractionResult.CONSUME; // the server fires and syncs the remaining magazine
+			return InteractionResultHolder.consume(crossbow); // the server fires and syncs the remaining magazine
 		}
 
-		List<ItemStack> rounds = loaded.itemCopies().toList();
 		ItemStack round = rounds.get(0);
-		crossbow.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.ofNonEmpty(List.of(round)));
-		item.performShooting(level, player, hand, crossbow, round.is(Items.FIREWORK_ROCKET) ? 1.6F : 3.15F, 1.0F, null);
+		setLoaded(crossbow, List.of(round));
+		CrossbowItem.performShooting(level, player, hand, crossbow, round.is(Items.FIREWORK_ROCKET) ? 1.6F : 3.15F, 1.0F);
 
-		if (!crossbow.isEmpty() && rounds.size() > 1) {
-			crossbow.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.ofNonEmpty(rounds.subList(1, rounds.size())));
+		if (!crossbow.isEmpty()) {
+			setLoaded(crossbow, rounds.subList(1, rounds.size()));
 		}
 
-		return InteractionResult.CONSUME;
+		return InteractionResultHolder.consume(crossbow);
 	}
 
 	/** Visual for a spent charge. */

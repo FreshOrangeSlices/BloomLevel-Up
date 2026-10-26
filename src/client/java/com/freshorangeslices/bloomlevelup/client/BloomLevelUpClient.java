@@ -21,6 +21,8 @@ public final class BloomLevelUpClient {
 		SideBridge.setClientConfig(ClientBloomState::config);
 		SideBridge.setClientMajorActive((player, majorId) -> player == Minecraft.getInstance().player && ClientBloomState.ready()
 				&& ClientBloomState.profile() != null && ClientBloomState.service().isMajorActive(ClientBloomState.profile(), majorId));
+		SideBridge.setClientStatValue((player, statId) -> player == Minecraft.getInstance().player && ClientBloomState.ready()
+				&& ClientBloomState.profile() != null ? ClientBloomState.service().statValue(ClientBloomState.profile(), statId) : 0);
 		SideBridge.setClientCopySource(player -> player == Minecraft.getInstance().player && ClientBloomState.ready() && ClientBloomState.profile() != null
 				? ClientBloomState.service().activeCopySource(ClientBloomState.profile(), CombatIds.COPYCAT).orElse(null) : null);
 

@@ -1,5 +1,6 @@
 package com.freshorangeslices.bloomlevelup.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -20,10 +21,8 @@ public final class BloomTags {
 	public static final TagKey<Item> ARMOR_MEDIUM = item("armor/medium");
 	public static final TagKey<Item> ARMOR_HEAVY = item("armor/heavy");
 	public static final TagKey<Item> WEAPON_BLADE = item("weapon/blade");
-	public static final TagKey<Item> WEAPON_BLUNT = item("weapon/blunt");
-	/** Never blade (or blunt) weapons, even when {@link #WEAPON_BLADE} takes them in through a wider tag. */
+	/** Never blade weapons, even when {@link #WEAPON_BLADE} takes them in through a wider tag. */
 	public static final TagKey<Item> WEAPON_NOT_BLADE = item("weapon/not_blade");
-	public static final TagKey<Item> WEAPON_NOT_BLUNT = item("weapon/not_blunt");
 	public static final TagKey<Item> MEAT = item("food/meat");
 	public static final TagKey<Item> UTILITY_TOOLS = item("utility_tools");
 	/** Iron Stomach: raw, rotten and poisonous food that becomes safe (and at least as filling as cooked chicken). */
@@ -42,7 +41,6 @@ public final class BloomTags {
 	public static final TagKey<DamageType> MELEE = damage("melee");
 	public static final TagKey<DamageType> DODGEABLE = damage("dodgeable");
 	public static final TagKey<DamageType> BLADE_DAMAGE = damage("blade");
-	public static final TagKey<DamageType> BLUNT_DAMAGE = damage("blunt");
 
 	// Mob effects
 	public static final TagKey<MobEffect> DAMAGE_OVER_TIME = effect("damage_over_time");
@@ -68,6 +66,16 @@ public final class BloomTags {
 	public static final TagKey<Block> XP_COLUMN = block("xp_column");
 
 	private BloomTags() {
+	}
+
+	/** Whether an effect is in a tag (1.20.1 effects aren't holders themselves). */
+	public static boolean is(MobEffect effect, TagKey<MobEffect> tag) {
+		return effect != null && BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect).is(tag);
+	}
+
+	/** Whether an enchantment is in a tag. */
+	public static boolean is(Enchantment enchantment, TagKey<Enchantment> tag) {
+		return enchantment != null && BuiltInRegistries.ENCHANTMENT.wrapAsHolder(enchantment).is(tag);
 	}
 
 	private static TagKey<Item> item(String path) {

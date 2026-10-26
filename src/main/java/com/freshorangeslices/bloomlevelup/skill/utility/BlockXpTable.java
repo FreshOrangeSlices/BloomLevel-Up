@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,11 +27,11 @@ public final class BlockXpTable {
 
 	private static volatile BlockXpTable current = new BlockXpTable(Map.of(), List.of());
 
-	private final Map<Identifier, Entry> exact;
+	private final Map<ResourceLocation, Entry> exact;
 	private final List<Map.Entry<TagKey<Block>, Entry>> tagged;
 	private final Map<Block, Optional<Entry>> cache = new IdentityHashMap<>();
 
-	BlockXpTable(Map<Identifier, Entry> exact, List<Map.Entry<TagKey<Block>, Entry>> tagged) {
+	BlockXpTable(Map<ResourceLocation, Entry> exact, List<Map.Entry<TagKey<Block>, Entry>> tagged) {
 		this.exact = exact;
 		this.tagged = tagged;
 	}
@@ -91,14 +91,14 @@ public final class BlockXpTable {
 
 	/** Merges raw files in load order; later files override earlier ones for the same key. */
 	static BlockXpTable build(List<Raw> files) {
-		Map<Identifier, Entry> exact = new HashMap<>();
-		Map<Identifier, Entry> tags = new HashMap<>();
+		Map<ResourceLocation, Entry> exact = new HashMap<>();
+		Map<ResourceLocation, Entry> tags = new HashMap<>();
 
 		for (Raw file : files) {
 			for (Map.Entry<String, Double> value : file.values().entrySet()) {
 				String key = value.getKey();
 				boolean tag = key.startsWith("#");
-				Identifier id = Identifier.tryParse(tag ? key.substring(1) : key);
+				ResourceLocation id = ResourceLocation.tryParse(tag ? key.substring(1) : key);
 
 				if (id == null || !(value.getValue() >= 0.0)) {
 					BloomLevelUp.LOGGER.warn("[Bloom XP] Ignoring bad block XP entry '{}' in {}", key, file.source());
@@ -115,6 +115,6 @@ public final class BlockXpTable {
 		return new BlockXpTable(Map.copyOf(exact), List.copyOf(tagged));
 	}
 
-	record Raw(Identifier source, String category, Map<String, Double> values) {
+	record Raw(ResourceLocation source, String category, Map<String, Double> values) {
 	}
 }

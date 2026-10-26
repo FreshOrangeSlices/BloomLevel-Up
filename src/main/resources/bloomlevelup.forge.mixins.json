@@ -5,9 +5,28 @@
 	"compatibilityLevel": "JAVA_17",
 	"refmap": "bloomlevelup.refmap.json",
 	"mixins": [
+		"AbstractArrowAccessor",
+		"AbstractArrowInvoker",
+		"AnvilMenuMixin",
+		"ArrowItemMixin",
+		"CrossbowItemMixin",
+		"EnchantmentHelperMixin",
+		"ExperienceOrbMixin",
+		"FoodDataMixin",
+		"FriendlyByteBufMixin",
+		"InventoryMixin",
+		"ItemStackMixin",
+		"LivingEntityMixin",
+		"MobEffectInstanceAccessor",
+		"PlayerMixin",
+		"ServerPlayerMixin",
+		"ShearsItemMixin",
+		"SlotMixin",
+		"ThrownTridentAccessor",
+		"ThrownTridentMixin",
+		"TridentItemMixin"
 	],
-	"client": [
-	],
+	"client": [],
 	"injectors": {
 		"defaultRequire": 1
 	},

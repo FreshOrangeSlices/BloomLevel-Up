@@ -22,8 +22,6 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 // The Fabric 26.3 sources share this tree. What is ported to Forge 1.20.1 so far builds; the rest waits here
 // (unchanged, for reference) until its chunk is ported. Each chunk removes its lines from this list.
 def notPortedYet = [
-		// Chunk 3 (with the client): the stat sheet, worked out on the server for the hub
-		'**/bloomlevelup/sheet/**',
 		// Chunk 4: Better Combat compat, against Better Combat for 1.20.1 (compat/BetterCombat.java is a stand-in until then)
 		'**/bloomlevelup/compat/BetterCombatBridge.java',
 		'**/bloomlevelup/compat/BetterCombatMoves.java',

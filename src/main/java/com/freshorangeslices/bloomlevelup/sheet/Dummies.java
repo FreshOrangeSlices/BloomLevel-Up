@@ -5,7 +5,6 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -26,7 +25,7 @@ final class Dummies {
 		LivingEntity dummy = perLevel.get(type);
 
 		if (dummy == null) {
-			dummy = type.create(level, EntitySpawnReason.COMMAND);
+			dummy = type.create(level);
 
 			if (dummy == null) {
 				throw new IllegalStateException("Bloom stat sheet: can't create a " + type);

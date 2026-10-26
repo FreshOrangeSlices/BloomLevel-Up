@@ -2,23 +2,18 @@ package com.freshorangeslices.bloomlevelup.sheet;
 
 import java.util.Optional;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
@@ -34,11 +29,12 @@ import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
 import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 
 /**
- * The Utility sheet: how fast a tool works the block it's made for (vanilla's Player.getDestroySpeed with the
- * tool swapped in), what Yield and Preservation add, and the numbers of the Utility Majors the player owns.
+ * The Utility sheet: how fast a tool works the block it's made for (vanilla 1.20.1's Player.getDigSpeed with the
+ * tool swapped in, standing on the ground in the open), what Yield and Preservation add, and the numbers of the
+ * Utility Majors the player owns.
  */
 final class UtilitySheet {
-	private static final String[] MATERIALS = {"wooden", "stone", "copper", "iron", "diamond", "netherite"};
+	private static final String[] MATERIALS = {"wooden", "stone", "iron", "diamond", "netherite"};
 
 	private UtilitySheet() {
 	}
@@ -52,24 +48,23 @@ final class UtilitySheet {
 		BloomConfig config = BloomServices.config();
 		ProgressionService service = BloomServices.progression();
 		BloomProfile profile = BloomAttachments.profile(player);
-		Loadout loadout = new Loadout(player, tool);
 		Work work = work(tool);
+		int efficiency = UtilitySkill.efficiency(player, tool);
 
-		// ---- mining speed (Player.getDestroySpeed)
+		// ---- mining speed (Player.getDigSpeed, then Forge's break-speed event, where Bloom's Efficiency multiplies)
 		float toolSpeed = tool.getDestroySpeed(work.block());
-		double enchantSpeed = toolSpeed > 1.0F ? loadout.value(Attributes.MINING_EFFICIENCY) : 0.0;
+		double enchantSpeed = toolSpeed > 1.0F ? efficiencyEnchant(tool) : 0.0;
 		double speed = toolSpeed + enchantSpeed;
 		double haste = MobEffectUtil.hasDigSpeed(player) ? 1.0 + (MobEffectUtil.getDigSpeedAmplification(player) + 1) * 0.2 : 1.0;
-		MobEffectInstance fatigue = player.getEffect(MobEffects.MINING_FATIGUE);
-		double fatigueFactor = fatigue == null ? 1.0 : Math.pow(0.3, fatigue.getAmplifier() + 1);
-		double breakSpeed = loadout.value(Attributes.BLOCK_BREAK_SPEED);
+		MobEffectInstance fatigue = player.getEffect(MobEffects.DIG_SLOWDOWN);
+		double fatigueFactor = fatigue == null ? 1.0 : fatigue(fatigue.getAmplifier());
+		double breakSpeed = 1.0 + efficiency / 100.0;
 		double total = speed * haste * fatigueFactor * breakSpeed;
 		boolean harvests = !work.block().requiresCorrectToolForDrops() || tool.isCorrectToolForDrops(work.block());
 		float hardness = work.block().getDestroySpeed(level, player.blockPosition());
 		double ticks = total <= 0.0 ? Double.POSITIVE_INFINITY : Math.ceil(hardness * (harvests ? 30.0 : 100.0) / total);
 		boolean instant = total > hardness * 30.0 && harvests;
 		Component blockName = work.block().getBlock().getName();
-		int efficiency = UtilitySkill.efficiency(player, tool);
 		int yield = service.statValue(profile, UtilityIds.YIELD);
 		int preservationPoints = service.statValue(profile, UtilityIds.PRESERVATION);
 		boolean shovelMastery = UtilitySkill.shovelBoost(player, tool);
@@ -125,8 +120,7 @@ final class UtilitySheet {
 
 		// ---- durability
 		sheet.heading("utility.h.durability");
-		Holder<Enchantment> unbreakingHolder = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.UNBREAKING);
-		int unbreaking = EnchantmentHelper.getItemEnchantmentLevel(unbreakingHolder, tool);
+		int unbreaking = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, tool);
 		double vanillaSave = unbreaking <= 0 ? 0.0 : 1.0 - 1.0 / (unbreaking + 1.0);
 		double bloomSave = StatFormulas.preservationSaveChance(preservation);
 		sheet.row(Sheet.pct(vanillaSave), "utility.unbreaking", Sheet.num(unbreaking));
@@ -182,6 +176,22 @@ final class UtilitySheet {
 		return Sheet.colored(copies > 0 ? "+" + copies + (chance > 0 ? " & " + chance + "%" : "") : chance + "%", copies > 0 || chance > 0 ? Sheet.GOOD : Sheet.PLAIN);
 	}
 
+	/** Efficiency's speed on a tool that's right for the block: level squared plus one (1.20.1). */
+	private static double efficiencyEnchant(ItemStack tool) {
+		int level = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, tool);
+		return level > 0 && !tool.isEmpty() ? level * level + 1 : 0.0;
+	}
+
+	/** Mining Fatigue's factor by amplifier (vanilla 1.20.1's table). */
+	private static double fatigue(int amplifier) {
+		return switch (amplifier) {
+			case 0 -> 0.3;
+			case 1 -> 0.09;
+			case 2 -> 0.0027;
+			default -> 8.1E-4;
+		};
+	}
+
 	private static Work work(ItemStack tool) {
 		if (tool.is(ItemTags.SHOVELS)) {
 			return new Work("shovel", Blocks.DIRT.defaultBlockState(), "shovel");
@@ -204,7 +214,6 @@ final class UtilitySheet {
 	 * many times faster the player is.
 	 */
 	private static void gauge(ServerLevel level, Sheet sheet, Work work, double speed) {
-		Holder<Enchantment> efficiency = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.EFFICIENCY);
 		ItemStack best = ItemStack.EMPTY;
 		double bestSpeed = 0.0;
 		int bestLevel = 0;
@@ -213,7 +222,7 @@ final class UtilitySheet {
 		int topLevel = 0;
 
 		for (String material : MATERIALS) {
-			Optional<Item> item = BuiltInRegistries.ITEM.getOptional(Identifier.withDefaultNamespace(material + "_" + work.tool()));
+			Optional<Item> item = BuiltInRegistries.ITEM.getOptional(new ResourceLocation(material + "_" + work.tool()));
 
 			if (item.isEmpty() || item.get() == Items.AIR) {
 				continue;
@@ -223,21 +232,11 @@ final class UtilitySheet {
 				ItemStack candidate = new ItemStack(item.get());
 
 				if (enchantLevel > 0) {
-					candidate.enchant(efficiency, enchantLevel);
+					candidate.enchant(Enchantments.BLOCK_EFFICIENCY, enchantLevel);
 				}
 
 				float base = candidate.getDestroySpeed(work.block());
-				double[] bonus = {0.0};
-
-				if (base > 1.0F) {
-					EnchantmentHelper.forEachModifier(candidate, EquipmentSlot.MAINHAND, (attribute, modifier) -> {
-						if (attribute.value() == Attributes.MINING_EFFICIENCY.value()) {
-							bonus[0] += modifier.amount();
-						}
-					});
-				}
-
-				double candidateSpeed = base + bonus[0];
+				double candidateSpeed = base + (base > 1.0F ? efficiencyEnchant(candidate) : 0.0);
 				double gap = Math.abs(candidateSpeed - speed);
 				double bestGap = Math.abs(bestSpeed - speed);
 
@@ -263,7 +262,7 @@ final class UtilitySheet {
 		ItemStack shown = past ? top : best;
 		int shownLevel = past ? topLevel : bestLevel;
 		Component name = shownLevel > 0
-				? Component.translatable("bloom.sheet.gauge.with", shown.getHoverName(), efficiency.value().description(),
+				? Component.translatable("bloom.sheet.gauge.with", shown.getHoverName(), Component.translatable(Enchantments.BLOCK_EFFICIENCY.getDescriptionId()),
 						Component.translatable("enchantment.level." + shownLevel))
 				: shown.getHoverName();
 		sheet.gauge = shown;

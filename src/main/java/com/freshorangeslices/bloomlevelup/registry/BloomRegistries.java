@@ -20,6 +20,7 @@ import com.freshorangeslices.bloomlevelup.entity.BloomEntities;
 import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
+import com.freshorangeslices.bloomlevelup.sheet.StatSheets;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatSkill;
@@ -57,6 +58,7 @@ public final class BloomRegistries {
 		CombatAbilities.init();
 		MiscSkill.init();
 		HeldItemWatcher.init();
+		StatSheets.init();
 		BetterCombat.init();
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> BloomLevelUpClient.init(modBus));

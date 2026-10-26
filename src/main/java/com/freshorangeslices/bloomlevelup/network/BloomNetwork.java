@@ -24,7 +24,7 @@ import com.freshorangeslices.bloomlevelup.client.ClientPackets;
  */
 public final class BloomNetwork {
 	/** Bump when any message's shape changes. */
-	private static final String PROTOCOL = "2";
+	private static final String PROTOCOL = "3";
 
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomLevelUp.id("main"), () -> PROTOCOL, PROTOCOL::equals,
 			PROTOCOL::equals);
@@ -47,6 +47,8 @@ public final class BloomNetwork {
 		toServer(BloomPayloads.Request.class, BloomPayloads.Request::write, BloomPayloads.Request::read, BloomSync::handle);
 		toServer(BloomPayloads.CombatInput.class, BloomPayloads.CombatInput::write, BloomPayloads.CombatInput::read,
 				(player, message) -> com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities.handle(player, message.action()));
+		toServer(SheetPayloads.Request.class, SheetPayloads.Request::write, SheetPayloads.Request::read,
+				com.freshorangeslices.bloomlevelup.sheet.StatSheets::handle);
 		toServer(BloomPayloads.MovementInput.class, BloomPayloads.MovementInput::write, BloomPayloads.MovementInput::read,
 				(player, message) -> com.freshorangeslices.bloomlevelup.skill.armor.ArmorSkill.movementInput(player, message.moving()));
 	}

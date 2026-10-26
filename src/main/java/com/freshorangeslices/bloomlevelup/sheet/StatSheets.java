@@ -9,10 +9,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
@@ -20,9 +16,13 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
 import com.freshorangeslices.bloomlevelup.network.SheetPayloads.Row;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
@@ -47,19 +47,20 @@ public final class StatSheets {
 	private StatSheets() {
 	}
 
+	/** The packets are registered with the rest in {@link BloomNetwork}; this only forgets state. */
 	public static void init() {
-		PayloadTypeRegistry.serverboundPlay().register(SheetPayloads.Request.TYPE, SheetPayloads.Request.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(SheetPayloads.View.TYPE, SheetPayloads.View.CODEC);
-		ServerPlayNetworking.registerGlobalReceiver(SheetPayloads.Request.TYPE, (payload, context) -> {
-			if (allowed(context.player()) && ServerPlayNetworking.canSend(context.player(), SheetPayloads.View.TYPE)) {
-				ServerPlayNetworking.send(context.player(), build(context.player(), payload));
-			}
-		});
-		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> BUDGET.remove(listener.player.getUUID()));
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+		MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedOutEvent event) -> BUDGET.remove(event.getEntity().getUUID()));
+		MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> {
 			BUDGET.clear();
 			Dummies.clear();
 		});
+	}
+
+	/** A request from a client (on the server thread). */
+	public static void handle(ServerPlayer player, SheetPayloads.Request request) {
+		if (allowed(player)) {
+			BloomNetwork.send(player, build(player, request));
+		}
 	}
 
 	private static boolean allowed(ServerPlayer player) {

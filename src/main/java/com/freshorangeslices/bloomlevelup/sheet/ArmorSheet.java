@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
@@ -22,7 +21,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.util.Mth;
@@ -32,8 +30,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 
@@ -53,12 +49,12 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
  * The Armor sheet: how much of a hit actually reaches your health, step by step in the order the game applies
  * them (armor, Resistance, protection enchantments, then the Armor category's own layers and Absorb), for the
  * kinds of hits that differ (mobs, blades, arrows, fire, explosions, falls, magic), plus the chances to avoid a
- * hit altogether. The steps are vanilla's own code (LivingEntity.getDamageAfterArmorAbsorb / MagicAbsorb) and
- * {@link ArmorSkill#layers}, so the sheet matches a real hit.
+ * hit altogether. The steps are vanilla 1.20.1's own code (LivingEntity.getDamageAfterArmorAbsorb / MagicAbsorb) and
+ * {@link ArmorSkill#layers}, so the sheet matches a real hit. (Forge 1.20.1 build: no blunt hits, Adamantium is gone.)
  */
 final class ArmorSheet {
 	private static final float[] HIT_SIZES = {5.0F, 10.0F, 20.0F, 50.0F};
-	private static final String[] SET_MATERIALS = {"leather", "chainmail", "copper", "iron", "diamond", "netherite"};
+	private static final String[] SET_MATERIALS = {"leather", "chainmail", "iron", "diamond", "netherite"};
 	private static final String[] PIECES = {"helmet", "chestplate", "leggings", "boots"};
 	private static final EquipmentSlot[] SLOTS = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
@@ -76,8 +72,8 @@ final class ArmorSheet {
 			double raw = armor.getBaseValue();
 
 			for (AttributeModifier modifier : armor.getModifiers()) {
-				if (modifier.operation() == AttributeModifier.Operation.ADD_VALUE) {
-					raw += modifier.amount();
+				if (modifier.getOperation() == AttributeModifier.Operation.ADDITION) {
+					raw += modifier.getAmount();
 				}
 			}
 
@@ -113,7 +109,7 @@ final class ArmorSheet {
 		}
 
 		float hit = HIT_SIZES[sheet.targets(sizes, 1)];
-		LivingEntity zombie = Dummies.of(level, EntityTypes.ZOMBIE);
+		LivingEntity zombie = Dummies.of(level, EntityType.ZOMBIE);
 		List<Kind> kinds = kinds(level, player, zombie, profile, service);
 
 		// ---- summary
@@ -149,9 +145,8 @@ final class ArmorSheet {
 
 		for (EquipmentSlot slot : SLOTS) {
 			ItemStack piece = player.getItemBySlot(slot);
-			ItemAttributeModifiers modifiers = piece.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-			gear += modifiers.compute(Attributes.ARMOR, 0.0, slot);
-			gearToughness += modifiers.compute(Attributes.ARMOR_TOUGHNESS, 0.0, slot);
+			gear += added(piece, slot, Attributes.ARMOR);
+			gearToughness += added(piece, slot, Attributes.ARMOR_TOUGHNESS);
 		}
 
 		double defense = StatFormulas.defenseArmor(service.statValue(profile, ArmorIds.DEFENSE));
@@ -291,17 +286,11 @@ final class ArmorSheet {
 		zombie.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 		kinds.add(new Kind("mob", source(level, DamageTypes.MOB_ATTACK, zombie, zombie)));
 
-		// A hit's weapon is whatever its attacker holds: a stand-in husk with a sword, a stand-in zombie villager with a mace.
+		// A hit's weapon is whatever its attacker holds: a stand-in husk with a sword.
 		if (service.isMajorActive(profile, ArmorIds.VIBRANIUM)) {
-			LivingEntity swordsman = Dummies.of(level, EntityTypes.HUSK);
+			LivingEntity swordsman = Dummies.of(level, EntityType.HUSK);
 			swordsman.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
 			kinds.add(new Kind("blade", source(level, DamageTypes.MOB_ATTACK, swordsman, swordsman)));
-		}
-
-		if (service.isMajorActive(profile, ArmorIds.ADAMANTIUM)) {
-			LivingEntity basher = Dummies.of(level, EntityTypes.ZOMBIE_VILLAGER);
-			basher.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.MACE));
-			kinds.add(new Kind("blunt", source(level, DamageTypes.MOB_ATTACK, basher, basher)));
 		}
 
 		kinds.add(new Kind("arrow", source(level, DamageTypes.ARROW, null, zombie)));
@@ -313,7 +302,7 @@ final class ArmorSheet {
 	}
 
 	private static Holder<DamageType> type(ServerLevel level, ResourceKey<DamageType> key) {
-		return level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(key);
+		return level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key);
 	}
 
 	private static DamageSource source(ServerLevel level, ResourceKey<DamageType> key, Entity direct, Entity causing) {
@@ -321,21 +310,21 @@ final class ArmorSheet {
 	}
 
 	/**
-	 * A hit of {@code amount} through vanilla's armor and magic steps (LivingEntity.getDamageAfterArmorAbsorb and
+	 * A hit of {@code amount} through vanilla 1.20.1's armor and magic steps (LivingEntity.getDamageAfterArmorAbsorb and
 	 * getDamageAfterMagicAbsorb, without their side effects), then the Armor category's layers and Absorb.
 	 */
 	private static Steps steps(ServerLevel level, ServerPlayer player, Body body, DamageSource source, float amount, boolean braced) {
 		float afterArmor = amount;
 
 		if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
-			afterArmor = CombatRules.getDamageAfterAbsorb(player, amount, source, body.armorValue(), (float) body.toughness());
+			afterArmor = CombatRules.getDamageAfterAbsorb(amount, body.armorValue(), (float) body.toughness());
 		}
 
 		float afterResistance = afterArmor;
 		float afterProtection = afterArmor;
 
 		if (!source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
-			MobEffectInstance resistance = player.getEffect(MobEffects.RESISTANCE);
+			MobEffectInstance resistance = player.getEffect(MobEffects.DAMAGE_RESISTANCE);
 
 			if (resistance != null && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
 				int cut = (resistance.getAmplifier() + 1) * 5;
@@ -345,9 +334,9 @@ final class ArmorSheet {
 			afterProtection = afterResistance;
 
 			if (afterResistance > 0.0F && !source.is(DamageTypeTags.BYPASSES_ENCHANTMENTS)) {
-				float protection = EnchantmentHelper.getDamageProtection(level, player, source);
+				int protection = EnchantmentHelper.getDamageProtection(player.getArmorSlots(), source);
 
-				if (protection > 0.0F) {
+				if (protection > 0) {
 					afterProtection = CombatRules.getDamageAfterMagicAbsorb(afterResistance, protection);
 				}
 			}
@@ -377,6 +366,19 @@ final class ArmorSheet {
 		return false;
 	}
 
+	/** What a piece's own flat modifiers in its slot add to {@code attribute} (armor and toughness are flat in 1.20.1). */
+	private static double added(ItemStack piece, EquipmentSlot slot, net.minecraft.world.entity.ai.attributes.Attribute attribute) {
+		double total = 0.0;
+
+		for (AttributeModifier modifier : piece.getAttributeModifiers(slot).get(attribute)) {
+			if (modifier.getOperation() == AttributeModifier.Operation.ADDITION) {
+				total += modifier.getAmount();
+			}
+		}
+
+		return total;
+	}
+
 	private static void stepRow(Sheet sheet, String key, float before, float after) {
 		if (before > 0.0F && after < before - 1.0E-4F) {
 			sheet.row(Sheet.colored("-" + Sheet.num((1.0 - after / before) * 100.0) + "%", Sheet.GOOD), key);
@@ -395,7 +397,6 @@ final class ArmorSheet {
 	 * Protection IV, how many times less gets through.
 	 */
 	private static void armorGauge(ServerLevel level, ServerPlayer player, LivingEntity dummy, Sheet sheet, DamageSource source, float hit, double taken) {
-		Holder<Enchantment> protection = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.PROTECTION);
 		ItemStack best = ItemStack.EMPTY;
 		double bestTaken = 0.0;
 		int bestLevel = 0;
@@ -412,7 +413,7 @@ final class ArmorSheet {
 			boolean complete = true;
 
 			for (int i = 0; i < 4; i++) {
-				Optional<Item> item = BuiltInRegistries.ITEM.getOptional(Identifier.withDefaultNamespace(material + "_" + PIECES[i]));
+				Optional<Item> item = BuiltInRegistries.ITEM.getOptional(new ResourceLocation(material + "_" + PIECES[i]));
 				complete &= item.isPresent() && item.get() != Items.AIR;
 				items[i] = item.orElse(Items.AIR);
 			}
@@ -429,18 +430,17 @@ final class ArmorSheet {
 					ItemStack piece = new ItemStack(items[i]);
 
 					if (enchantLevel > 0) {
-						piece.enchant(protection, enchantLevel);
+						piece.enchant(Enchantments.ALL_DAMAGE_PROTECTION, enchantLevel);
 					}
 
-					ItemAttributeModifiers modifiers = piece.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
-					armor += (float) modifiers.compute(Attributes.ARMOR, 0.0, SLOTS[i]);
-					toughness += (float) modifiers.compute(Attributes.ARMOR_TOUGHNESS, 0.0, SLOTS[i]);
+					armor += (float) added(piece, SLOTS[i], Attributes.ARMOR);
+					toughness += (float) added(piece, SLOTS[i], Attributes.ARMOR_TOUGHNESS);
 					dummy.setItemSlot(SLOTS[i], piece);
 				}
 
-				float after = CombatRules.getDamageAfterAbsorb(dummy, hit, source, armor, toughness);
-				float epf = EnchantmentHelper.getDamageProtection(level, dummy, source);
-				double through = epf > 0.0F ? CombatRules.getDamageAfterMagicAbsorb(after, epf) : after;
+				float after = CombatRules.getDamageAfterAbsorb(hit, armor, toughness);
+				int epf = EnchantmentHelper.getDamageProtection(dummy.getArmorSlots(), source);
+				double through = epf > 0 ? CombatRules.getDamageAfterMagicAbsorb(after, epf) : after;
 				ItemStack chest = dummy.getItemBySlot(EquipmentSlot.CHEST).copy();
 				double gap = Math.abs(through - taken);
 				double bestGap = Math.abs(bestTaken - taken);
@@ -475,7 +475,8 @@ final class ArmorSheet {
 		shownMaterial = past ? topMaterial : bestMaterial;
 		Component set = Component.translatable("bloom.sheet.gauge.set." + shownMaterial);
 		Component name = shownLevel > 0
-				? Component.translatable("bloom.sheet.gauge.with", set, protection.value().description(), Component.translatable("enchantment.level." + shownLevel))
+				? Component.translatable("bloom.sheet.gauge.with", set, Component.translatable(Enchantments.ALL_DAMAGE_PROTECTION.getDescriptionId()),
+						Component.translatable("enchantment.level." + shownLevel))
 				: set;
 		sheet.gauge = shown;
 		sheet.gaugeCaption = Component.translatable(past ? "bloom.sheet.gauge.armor_past" : "bloom.sheet.gauge.armor", name,

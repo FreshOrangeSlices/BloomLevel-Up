@@ -120,13 +120,20 @@ def side(value):
 
 
 def newest_version(project, game, loader_for):
-    """The newest version for this game version (releases first, then betas, then alphas)."""
+    """The newest release or beta for this game version (as launchers take it; alphas only when there's nothing else)."""
     versions = api(f"/project/{project['id']}/version", game_versions=[game], loaders=[loader_for]) or []
-    for kind in ("release", "beta", "alpha"):
-        for version in versions:
-            if version["version_type"] == kind:
-                return version
-    return None
+    for version in versions:
+        if version["version_type"] in ("release", "beta"):
+            return version
+    return versions[0] if versions else None
+
+
+def pick_file(version):
+    """A version's jar for Forge: when it carries several, not a NeoForge or sources one."""
+    files = [f for f in version["files"] if not f["filename"].endswith(("-sources.jar", "-javadoc.jar"))] or version["files"]
+    forge = [f for f in files if "neoforge" not in f["filename"].lower() and "-neo-" not in f["filename"].lower()]
+    pool = forge or files
+    return next((f for f in pool if f.get("primary")), pool[0])
 
 
 def loader_for(project):
@@ -151,10 +158,10 @@ def read_toml(text):
 
 def mod_ids(data):
     """
-    Mod ids a jar provides (its own and every jar nested inside it, Forge's jar-in-jar), and the mod ids it needs, by
-    side: {mod id: "BOTH" | "CLIENT" | "SERVER"}.
+    Mod ids a jar provides with their versions (its own and every jar nested inside it, Forge's jar-in-jar; None when
+    the version isn't written out), and the mod ids it needs: {mod id: (side "BOTH" | "CLIENT" | "SERVER", version range)}.
     """
-    provided, depends = set(), {}
+    provided, depends = {}, {}
     try:
         archive = zipfile.ZipFile(io.BytesIO(data))
     except zipfile.BadZipFile:
@@ -163,15 +170,23 @@ def mod_ids(data):
         names = set(archive.namelist())
         if "META-INF/mods.toml" in names:
             meta = read_toml(archive.read("META-INF/mods.toml").decode("utf-8", "replace"))
-            own = [mod.get("modId") for mod in meta.get("mods", []) if mod.get("modId")]
-            provided.update(own)
+            jar_version = None
+            if "META-INF/MANIFEST.MF" in names:
+                found = re.search(r"^Implementation-Version:\s*(\S+)", archive.read("META-INF/MANIFEST.MF").decode("utf-8", "replace"), re.M)
+                jar_version = found.group(1) if found else None
+            own = []
+            for mod in meta.get("mods", []):
+                if mod.get("modId"):
+                    version = str(mod.get("version", ""))
+                    provided[mod["modId"]] = jar_version if "${file.jarVersion}" in version else (version if "${" not in version else None)
+                    own.append(mod["modId"])
             for owner, entries in (meta.get("dependencies") or {}).items():
                 if owner not in own or not isinstance(entries, list):
                     continue
                 for entry in entries:
                     mandatory = entry.get("mandatory", entry.get("type", "required") == "required")
                     if mandatory is True or mandatory == "true":
-                        depends[entry.get("modId")] = str(entry.get("side", "BOTH")).upper()
+                        depends[entry.get("modId")] = (str(entry.get("side", "BOTH")).upper(), str(entry.get("versionRange", "") or ""))
         if "META-INF/jarjar/metadata.json" in names:
             try:
                 nested = json.loads(archive.read("META-INF/jarjar/metadata.json")).get("jars", [])
@@ -181,8 +196,38 @@ def mod_ids(data):
                 path = jar.get("path")
                 if path in names:
                     inner, _ = mod_ids(archive.read(path))
-                    provided.update(inner)
+                    for mod_id, version in inner.items():
+                        provided.setdefault(mod_id, version)
     return provided, depends
+
+
+def version_key(text):
+    """A version as numbers for comparing ("15.57.0.207" -> (15, 57, 0, 207)); None when it doesn't start with one."""
+    numbers = re.findall(r"\d+", text.split("+")[0].split("-")[0] if re.match(r"\d", text) else "")
+    return tuple(int(n) for n in numbers) if numbers else None
+
+
+def in_range(version, spec):
+    """Whether a version fits a Maven range ("[47.4,)", "[1.20,1.21)", "*" or empty means any). True when unsure."""
+    spec = spec.strip()
+    have = version_key(version or "")
+    if not spec or spec == "*" or have is None:
+        return True
+    for part in re.findall(r"[\[(][^\])]*[\])]", spec) or [f"[{spec},)"]:
+        low, _, high = part[1:-1].partition(",") if "," in part else (part[1:-1], None, part[1:-1])
+        ok = True
+        if low.strip():
+            low_key = version_key(low.strip())
+            if low_key is not None:
+                ok &= have > low_key or (have == low_key and part[0] == "[") or have[:len(low_key)] > low_key
+                ok &= not (have[:len(low_key)] < low_key)
+        if high and high.strip():
+            high_key = version_key(high.strip())
+            if high_key is not None:
+                ok &= have[:len(high_key)] < high_key or (have[:len(high_key)] == high_key and part[-1] == "]")
+        if ok:
+            return True
+    return False
 
 
 def forge_installer(game, forge):
@@ -244,7 +289,7 @@ def main():
         if version is None:
             problems.append(f"{project['title']} ({project['slug']}) has no {game} {loader_for(project)} build")
             continue
-        file = next((f for f in version["files"] if f.get("primary")), version["files"][0])
+        file = pick_file(version)
         datapack = loader_for(project) == "datapack"
         folder = "datapacks" if datapack else FOLDERS.get(project.get("project_type"), "mods")
         env = {"client": side(project.get("client_side")), "server": side(project.get("server_side"))}
@@ -299,16 +344,23 @@ def main():
         present = {path: data for path, data in jars.items()
                    if next(e for e in files if e["path"] == path)["env"][where] != "unsupported" and path.startswith("mods/")}
         present.update({path: data for path, data in overrides.items() if sides[path][where] != "unsupported"})
-        provided, needs = set(BUILT_IN), {}
+        provided = {mod_id: None for mod_id in BUILT_IN}
+        provided.update({"minecraft": game, "forge": spec["forge"]})
+        needs = {}
         for path, data in present.items():
             ids, depends = mod_ids(data)
-            provided |= ids
-            for mod_id, needed_on in depends.items():
+            for mod_id, version in ids.items():
+                provided.setdefault(mod_id, version)
+            for mod_id, (needed_on, wanted) in depends.items():
                 if needed_on in ("BOTH", where.upper()):
-                    needs.setdefault(mod_id, []).append(os.path.basename(path))
+                    needs.setdefault(mod_id, []).append((os.path.basename(path), wanted))
         for mod_id, wanted_by in sorted(needs.items()):
             if mod_id not in provided:
-                problems.append(f"{where}: {', '.join(sorted(set(wanted_by)))} need(s) mod id '{mod_id}', which isn't in the pack")
+                problems.append(f"{where}: {', '.join(sorted(set(name for name, _ in wanted_by)))} need(s) mod id '{mod_id}', which isn't in the pack")
+                continue
+            for name, wanted in sorted(set(wanted_by)):
+                if not in_range(provided[mod_id], wanted):
+                    problems.append(f"{where}: {name} needs {mod_id} {wanted}, the pack has {provided[mod_id]}")
 
     # ---- first-launch look: the resource packs on (bottom to top). Not an options.txt (launchers don't reliably copy
     # one, and it would wipe a player's settings on every update): a defaults file Bloom applies just before the game
@@ -382,8 +434,11 @@ def main():
         script.compress_type = zipfile.ZIP_DEFLATED
         server.writestr(script, START_SH.replace("{name}", name))
 
-    # ---- the pack launch test: the client side into a game folder
+    # ---- the pack launch test: the client side into a game folder (and the Forge version to start it with)
     if client_run:
+        os.makedirs(client_run, exist_ok=True)
+        with open(os.path.join(client_run, "forge-version.txt"), "w") as forge_file:
+            forge_file.write(f"{game}-{spec['forge']}\n")
         for sub in ("mods", "resourcepacks", "shaderpacks", "config"):
             shutil.rmtree(os.path.join(client_run, sub), ignore_errors=True)
             os.makedirs(os.path.join(client_run, sub), exist_ok=True)

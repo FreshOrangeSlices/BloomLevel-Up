@@ -21,7 +21,7 @@ import time
 PLAYER = "BloomTester"
 TITLE_LIMIT = 1200  # seconds for the first start (installs Forge's client, then loads every mod) to reach the title screen
 JOIN_LIMIT = 900  # seconds for the second start to join
-FORGE = "forge::1.20.1-47.3.0"
+FORGE_FALLBACK = "1.20.1-47.4.28"  # build_pack.py writes the pack's own into the game folder (forge-version.txt)
 SCENE = [
     "time set 6000",
     "weather clear",
@@ -149,7 +149,9 @@ def main():
     # A first start like a friend's: options.txt only has what keeps the test quiet (Bloom adds the pack's packs).
     open(options, "w").write("onboardAccessibility:false\ntutorialStep:none\njoinedFirstServer:true\nskipMultiplayerWarning:true\n"
                              "pauseOnLostFocus:false\nsoundCategory_master:0.0\nguiScale:2\nrenderDistance:6\n")
-    launch = ["portablemc", "--main-dir", os.path.join(game_dir, ".pmc"), "start", FORGE, "--mc-dir", game_dir, "-u", PLAYER,
+    forge_file = os.path.join(game_dir, "forge-version.txt")
+    forge = open(forge_file).read().strip() if os.path.exists(forge_file) else FORGE_FALLBACK
+    launch = ["portablemc", "--main-dir", os.path.join(game_dir, ".pmc"), "start", f"forge::{forge}", "--mc-dir", game_dir, "-u", PLAYER,
               "--resolution", "1280x720", "--jvm-arg=-Xmx6G"]
 
     # First start: up to the title screen (it should be Minecraft's own), then closed.

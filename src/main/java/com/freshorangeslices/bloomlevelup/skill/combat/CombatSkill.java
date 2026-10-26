@@ -67,7 +67,6 @@ import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.BloomEffects;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
 import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowAccessor;
-import com.freshorangeslices.bloomlevelup.mixin.PlayerInvoker;
 import com.freshorangeslices.bloomlevelup.network.BloomNetwork;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;

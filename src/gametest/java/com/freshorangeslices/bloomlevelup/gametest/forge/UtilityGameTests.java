@@ -166,13 +166,13 @@ public final class UtilityGameTests {
 		points(player, UtilityIds.YIELD, 100);
 		BlockState ore = Blocks.DIAMOND_ORE.defaultBlockState();
 
-		helper.assertValueEqual(2, count(drops(helper, new BlockPos(1, 1, 1), ore, player), Items.DIAMOND), "Yield 100 = 1 extra copy");
+		TestPlayers.equal(helper, 2, count(drops(helper, new BlockPos(1, 1, 1), ore, player), Items.DIAMOND), "Yield 100 = 1 extra copy");
 
 		PlacedBlocks.mark(helper.getLevel(), helper.absolutePos(new BlockPos(2, 1, 1)));
-		helper.assertValueEqual(1, count(drops(helper, new BlockPos(2, 1, 1), ore, player), Items.DIAMOND), "No Yield on placed blocks");
+		TestPlayers.equal(helper, 1, count(drops(helper, new BlockPos(2, 1, 1), ore, player), Items.DIAMOND), "No Yield on placed blocks");
 
 		BloomServices.progression().toggleStat(BloomAttachments.profile(player), UtilityIds.YIELD);
-		helper.assertValueEqual(1, count(drops(helper, new BlockPos(1, 1, 1), ore, player), Items.DIAMOND), "Yield switched off");
+		TestPlayers.equal(helper, 1, count(drops(helper, new BlockPos(1, 1, 1), ore, player), Items.DIAMOND), "Yield switched off");
 		helper.succeed();
 	}
 
@@ -184,8 +184,8 @@ public final class UtilityGameTests {
 		BlockState ripe = Blocks.WHEAT.defaultBlockState().setValue(BlockStateProperties.AGE_7, 7);
 		BlockState young = Blocks.WHEAT.defaultBlockState();
 
-		helper.assertValueEqual(2, count(drops(helper, new BlockPos(1, 1, 1), ripe, player), Items.WHEAT), "Ripe wheat is doubled");
-		helper.assertValueEqual(1, count(drops(helper, new BlockPos(1, 1, 1), young, player), Items.WHEAT_SEEDS), "Unripe wheat is untouched");
+		TestPlayers.equal(helper, 2, count(drops(helper, new BlockPos(1, 1, 1), ripe, player), Items.WHEAT), "Ripe wheat is doubled");
+		TestPlayers.equal(helper, 1, count(drops(helper, new BlockPos(1, 1, 1), young, player), Items.WHEAT_SEEDS), "Unripe wheat is untouched");
 		helper.assertFalse(UtilitySkill.tracksPlacement(young), "Planted crops are never treated as placed");
 		helper.succeed();
 	}
@@ -207,7 +207,7 @@ public final class UtilityGameTests {
 		helper.assertTrue(Math.abs(boosted / plain - 2.0) < EPS, "100 Efficiency = 2x break speed, was " + boosted / plain);
 
 		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_SHOVEL));
-		helper.assertValueEqual(120, UtilitySkill.efficiencyAnySide(player, player.getMainHandItem()), "Shovel Mastery: 120 Efficiency with a shovel");
+		TestPlayers.equal(helper, 120, UtilitySkill.efficiencyAnySide(player, player.getMainHandItem()), "Shovel Mastery: 120 Efficiency with a shovel");
 		helper.succeed();
 	}
 
@@ -221,10 +221,10 @@ public final class UtilityGameTests {
 		helper.assertTrue(kept > 900 && kept < 1100, "Preservation 100 should keep ~1000 of 2000 wear, kept " + kept);
 		int shears = DurabilitySaves.adjust(new ItemStack(Items.SHEARS), 2000, player);
 		helper.assertTrue(shears > 900 && shears < 1100, "Shears are Utility tools too, kept " + shears);
-		helper.assertValueEqual(50, DurabilitySaves.adjust(new ItemStack(Items.IRON_SWORD), 50, player), "Swords aren't Utility tools");
+		TestPlayers.equal(helper, 50, DurabilitySaves.adjust(new ItemStack(Items.IRON_SWORD), 50, player), "Swords aren't Utility tools");
 
 		BloomServices.progression().toggleStat(BloomAttachments.profile(player), UtilityIds.PRESERVATION);
-		helper.assertValueEqual(50, DurabilitySaves.adjust(new ItemStack(Items.IRON_PICKAXE), 50, player), "Switched off: no saves");
+		TestPlayers.equal(helper, 50, DurabilitySaves.adjust(new ItemStack(Items.IRON_PICKAXE), 50, player), "Switched off: no saves");
 		helper.succeed();
 	}
 
@@ -254,7 +254,7 @@ public final class UtilityGameTests {
 			}
 		}
 
-		helper.assertValueEqual(1000, dirt, "Dirt itself is never multiplied");
+		TestPlayers.equal(helper, 1000, dirt, "Dirt itself is never multiplied");
 		// 10% + 120 Yield x 2% = 12.4% per block -> ~124 finds in 1000
 		helper.assertTrue(other > 70 && other < 190, "About 124 treasure finds expected, found " + other);
 		helper.succeed();
@@ -283,7 +283,7 @@ public final class UtilityGameTests {
 
 		helper.assertBlockPresent(Blocks.AIR, new BlockPos(1, 2, 2));
 		helper.assertBlockPresent(Blocks.STONE, new BlockPos(5, 1, 1));
-		helper.assertValueEqual(6, player.getMainHandItem().getDamageValue(), "Each block costs its own durability");
+		TestPlayers.equal(helper, 6, player.getMainHandItem().getDamageValue(), "Each block costs its own durability");
 		helper.assertTrue(Math.abs(utilityXp(player) - 24.0) < EPS, "Every ore in the vein gives XP (6 x 4), had " + utilityXp(player));
 		helper.succeed();
 	}
@@ -321,7 +321,7 @@ public final class UtilityGameTests {
 		}
 
 		helper.assertBlockPresent(Blocks.AIR, new BlockPos(2, 5, 1));
-		helper.assertValueEqual(6, player.getMainHandItem().getDamageValue(), "One durability per log");
+		TestPlayers.equal(helper, 6, player.getMainHandItem().getDamageValue(), "One durability per log");
 		helper.succeed();
 	}
 
@@ -374,11 +374,11 @@ public final class UtilityGameTests {
 			int grown = UtilitySkill.growthAura(player);
 			helper.assertTrue(grown >= 1, "The cactus got a growth tick");
 			helper.assertTrue(helper.getBlockState(new BlockPos(3, 2, 3)) != before, "Cactus state advanced");
-			helper.assertValueEqual(1, helper.getBlockState(new BlockPos(2, 2, 3)).getValue(BlockStateProperties.AGE_7),
+			TestPlayers.equal(helper, 1, helper.getBlockState(new BlockPos(2, 2, 3)).getValue(BlockStateProperties.AGE_7),
 					"Wheat jumped a whole growth stage");
 
 			player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-			helper.assertValueEqual(0, UtilitySkill.growthAura(player), "No hoe, no aura");
+			TestPlayers.equal(helper, 0, UtilitySkill.growthAura(player), "No hoe, no aura");
 		} finally {
 			config.growthAuraChance = chance;
 		}
@@ -406,9 +406,9 @@ public final class UtilityGameTests {
 		}
 
 		helper.assertTrue(stayedShearable > 30 && stayedShearable < 70, "About half the shears keep the wool, kept " + stayedShearable);
-		helper.assertValueEqual(100, shears.getDamageValue(), "Master Shearing's extra durability per shear");
+		TestPlayers.equal(helper, 100, shears.getDamageValue(), "Master Shearing's extra durability per shear");
 		// 100 shears x 2.5 XP = 250 XP: past Utility level 3 (50 + 60 + 70 = 180).
-		helper.assertValueEqual(3, BloomAttachments.profile(player).category(SkillXp.UTILITY).level(), "Shearing gives Utility XP");
+		TestPlayers.equal(helper, 3, BloomAttachments.profile(player).category(SkillXp.UTILITY).level(), "Shearing gives Utility XP");
 		helper.succeed();
 	}
 
@@ -425,8 +425,8 @@ public final class UtilityGameTests {
 				.create(LootContextParamSets.FISHING);
 		List<ItemStack> loot = helper.getLevel().getServer().getLootData().getLootTable(BuiltInLootTables.FISHING).getRandomItems(params);
 
-		helper.assertValueEqual(3, loot.size(), "Three independent catches");
-		helper.assertValueEqual(2, rod.getDamageValue(), "Two extra durability (vanilla adds its own 1 after)");
+		TestPlayers.equal(helper, 3, loot.size(), "Three independent catches");
+		TestPlayers.equal(helper, 2, rod.getDamageValue(), "Two extra durability (vanilla adds its own 1 after)");
 		helper.assertTrue(Math.abs(utilityXp(player) - 8.0) < EPS, "One catch's worth of Utility XP");
 		helper.succeed();
 	}

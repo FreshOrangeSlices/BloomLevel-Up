@@ -87,7 +87,7 @@ public final class ArmorGameTests {
 	}
 
 	private static DamageSource source(ServerPlayer player, net.minecraft.resources.ResourceKey<net.minecraft.world.damagesource.DamageType> type) {
-		return player.damageSources().source(type);
+		return TestPlayers.source((net.minecraft.server.level.ServerLevel) player.level(), type);
 	}
 
 	private static void near(GameTestHelper helper, double expected, double actual, String what) {
@@ -152,7 +152,7 @@ public final class ArmorGameTests {
 		// 30% saved on average: 1400 kept, sd ~ 20
 		helper.assertTrue(kept > 1300 && kept < 1500, "Durability 100 should keep ~1400 of 2000 damage, kept " + kept);
 		int untouched = DurabilitySaves.adjust(new ItemStack(Items.DIAMOND), 50, player);
-		helper.assertValueEqual(50, untouched, "Items that aren't armor/shields/tools are untouched");
+		TestPlayers.equal(helper, 50, untouched, "Items that aren't armor/shields/tools are untouched");
 		helper.succeed();
 	}
 
@@ -179,7 +179,7 @@ public final class ArmorGameTests {
 			}
 		}
 
-		helper.assertValueEqual(0, fallDodged, "Dodge never avoids fall damage");
+		TestPlayers.equal(helper, 0, fallDodged, "Dodge never avoids fall damage");
 		helper.succeed();
 	}
 
@@ -245,7 +245,7 @@ public final class ArmorGameTests {
 			}
 
 			// A 5 s disable is 100 ticks; Medium cuts it to 30 (1.5 s), so after 40 ticks only the plain shield is still out.
-			helper.assertValueEqual(!medium, player.getCooldowns().isOnCooldown(Items.SHIELD),
+			TestPlayers.equal(helper, !medium, player.getCooldowns().isOnCooldown(Items.SHIELD),
 					medium ? "Medium: back after 1.5 s" : "Without Medium: still disabled after 2 s");
 		}
 
@@ -259,7 +259,7 @@ public final class ArmorGameTests {
 		ItemStack chest = new ItemStack(Items.IRON_CHESTPLATE);
 		player.setItemSlot(EquipmentSlot.CHEST, chest);
 		near(helper, 5.0, ArmorSkill.modifyFinalDamage(player, source(player, DamageTypes.GENERIC), 10.0F), "Player takes half");
-		helper.assertValueEqual(5, player.getItemBySlot(EquipmentSlot.CHEST).getDamageValue(), "Armor took the other half");
+		TestPlayers.equal(helper, 5, player.getItemBySlot(EquipmentSlot.CHEST).getDamageValue(), "Armor took the other half");
 
 		ServerPlayer naked = player(helper);
 		grant(naked, ArmorIds.ABSORB);
@@ -292,12 +292,12 @@ public final class ArmorGameTests {
 		boolean died = ArmorSkill.allowDeath(player, source(player, DamageTypes.GENERIC));
 		helper.assertFalse(died, "First lethal hit in the window is always survived");
 		near(helper, 10.0, player.getHealth(), "Back to 5 hearts");
-		helper.assertValueEqual(1L, BloomAttachments.profile(player).counter(ArmorIds.LAST_BREATH_ATTEMPTS), "Ladder advanced");
+		TestPlayers.equal(helper, 1L, BloomAttachments.profile(player).counter(ArmorIds.LAST_BREATH_ATTEMPTS), "Ladder advanced");
 
 		// Castle of Stone triggered: the next hits are ignored, except damage that bypasses invulnerability.
 		helper.assertFalse(ArmorSkill.allowDamage(player, source(player, DamageTypes.GENERIC), 5.0F), "Castle of Stone blocks damage");
 		helper.assertTrue(ArmorSkill.allowDamage(player, source(player, DamageTypes.FELL_OUT_OF_WORLD), 5.0F), "...but not the void");
-		helper.assertValueEqual(1L, BloomAttachments.profile(player).counter(ArmorIds.CASTLE_SPENT), "Castle needs rest to recharge");
+		TestPlayers.equal(helper, 1L, BloomAttachments.profile(player).counter(ArmorIds.CASTLE_SPENT), "Castle needs rest to recharge");
 		helper.succeed();
 	}
 
@@ -347,13 +347,13 @@ public final class ArmorGameTests {
 		ConsumeContext.begin(player, bread, false);
 		player.eat(helper.getLevel(), bread);
 		ConsumeContext.end(player);
-		helper.assertValueEqual(40L, BloomAttachments.profile(player).counter(ArmorIds.PROTEIN_MEALS), "Only meat counts");
+		TestPlayers.equal(helper, 40L, BloomAttachments.profile(player).counter(ArmorIds.PROTEIN_MEALS), "Only meat counts");
 		StatEffects.refresh(player);
 		near(helper, 22.0, player.getMaxHealth(), "40 meals = +1 heart");
 
 		BloomServices.progression().refundMajor(BloomAttachments.profile(player), ArmorIds.PROTEIN);
 		StatEffects.refresh(player);
-		helper.assertValueEqual(0L, BloomAttachments.profile(player).counter(ArmorIds.PROTEIN_MEALS), "Refund resets Protein!");
+		TestPlayers.equal(helper, 0L, BloomAttachments.profile(player).counter(ArmorIds.PROTEIN_MEALS), "Refund resets Protein!");
 		near(helper, 20.0, player.getMaxHealth(), "...and its hearts");
 		helper.succeed();
 	}
@@ -370,7 +370,7 @@ public final class ArmorGameTests {
 		helper.assertTrue(service.switchBuild(profile, now).ok(), "Switch to build 2 (a copy)");
 		helper.assertTrue(service.resetCategoryMajors(profile, "bloomlevelup:armor", now).ok(), "Build 2 drops its Armor Majors");
 		StatEffects.refresh(player);
-		helper.assertValueEqual(40L, profile.counter(ArmorIds.PROTEIN_MEALS), "Build 1 still owns Protein!, so the meals stay");
+		TestPlayers.equal(helper, 40L, profile.counter(ArmorIds.PROTEIN_MEALS), "Build 1 still owns Protein!, so the meals stay");
 		near(helper, 20.0, player.getMaxHealth(), "...but only the build in use gets its heart");
 
 		helper.assertTrue(service.switchBuild(profile, now + 100000).ok(), "Back to build 1");
@@ -499,7 +499,7 @@ public final class ArmorGameTests {
 			zombie.discard();
 		}
 
-		helper.assertValueEqual(0, fromArrows, "Arrows are never thrown back");
+		TestPlayers.equal(helper, 0, fromArrows, "Arrows are never thrown back");
 		helper.succeed();
 	}
 

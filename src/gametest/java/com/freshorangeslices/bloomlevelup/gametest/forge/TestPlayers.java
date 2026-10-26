@@ -45,6 +45,16 @@ public final class TestPlayers {
 		}
 	}
 
+	/** {@code expected} equals {@code actual} (1.20.1's game test helper has no value check). */
+	public static <T> void equal(GameTestHelper helper, T expected, T actual, String what) {
+		helper.assertTrue(java.util.Objects.equals(expected, actual), what + ": expected " + expected + " but was " + actual);
+	}
+
+	/** A damage source of any type (1.20.1 keeps DamageSources' own lookup private). */
+	public static DamageSource source(ServerLevel level, net.minecraft.resources.ResourceKey<net.minecraft.world.damagesource.DamageType> type) {
+		return new DamageSource(level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.DAMAGE_TYPE).getHolderOrThrow(type));
+	}
+
 	/** A new player standing at (4, 1, 4) of the test, holding {@code mainHand}. */
 	public static ServerPlayer player(GameTestHelper helper, ItemStack mainHand) {
 		ServerPlayer player = new Vulnerable(helper.getLevel(), new GameProfile(UUID.randomUUID(), "bloom-test"));

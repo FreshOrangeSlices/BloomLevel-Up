@@ -159,7 +159,7 @@ public final class CombatGameTests {
 	public static void lootingAddsVirtualLevels(GameTestHelper helper) {
 		ServerPlayer player = player(helper, ItemStack.EMPTY);
 		points(player, CombatIds.LOOTING, 100);
-		helper.assertValueEqual(3, EnchantmentHelper.getEnchantmentLevel(Enchantments.MOB_LOOTING, player), "100 Looting = Looting III");
+		TestPlayers.equal(helper, 3, EnchantmentHelper.getEnchantmentLevel(Enchantments.MOB_LOOTING, player), "100 Looting = Looting III");
 		helper.succeed();
 	}
 
@@ -401,7 +401,7 @@ public final class CombatGameTests {
 		trident.setPos(player.getX(), player.getY() + 1.0, player.getZ());
 		helper.getLevel().addFreshEntity(trident);
 		byte loyalty = trident.getEntityData().get(com.freshorangeslices.bloomlevelup.mixin.ThrownTridentAccessor.bloomlevelup$loyalty());
-		helper.assertValueEqual((byte) 3, loyalty, "A trident thrown with Catch! comes back like Loyalty III");
+		TestPlayers.equal(helper, (byte) 3, loyalty, "A trident thrown with Catch! comes back like Loyalty III");
 		trident.discard();
 		helper.succeed();
 	}
@@ -426,7 +426,7 @@ public final class CombatGameTests {
 			CombatSkill.endSwingForTests();
 		}
 
-		helper.assertValueEqual(20.0F, nearby.getHealth(), "Nothing yet");
+		TestPlayers.equal(helper, 20.0F, nearby.getHealth(), "Nothing yet");
 		CombatSkill.runQueuedForTests();
 		helper.assertTrue(nearby.getHealth() < 20.0F, "The aura pulse reached the nearby zombie");
 	}
@@ -459,14 +459,14 @@ public final class CombatGameTests {
 		CombatSkill.modifyIncoming(zombie, hit(player), 6.0F);
 		CombatSkill.endSwingForTests();
 		// A sword hit wears it by 1 on its own (not run here); the charge adds the rest of the 2.
-		helper.assertValueEqual(BloomServices.config().chargedSwingDurabilityCost - 1, player.getMainHandItem().getDamageValue(),
+		TestPlayers.equal(helper, BloomServices.config().chargedSwingDurabilityCost - 1, player.getMainHandItem().getDamageValue(),
 				"A charged swing's extra wear");
 
 		ServerPlayer thrower = player(helper, new ItemStack(Items.IRON_AXE));
 		grant(thrower, CombatIds.LIGHTNING_SHOCK, CombatIds.CATCH);
 		helper.assertTrue(CombatAbilities.throwForTests(thrower, false), "Thrown");
 		ThrownWeapon axe = helper.getLevel().getEntitiesOfClass(ThrownWeapon.class, thrower.getBoundingBox().inflate(4.0)).get(0);
-		helper.assertValueEqual(BloomServices.config().catchThrowDurabilityCost, axe.getItem().getDamageValue(), "A throw's wear");
+		TestPlayers.equal(helper, BloomServices.config().catchThrowDurabilityCost, axe.getItem().getDamageValue(), "A throw's wear");
 		axe.discard();
 
 		ItemStack worn = new ItemStack(Items.IRON_AXE);
@@ -537,10 +537,10 @@ public final class CombatGameTests {
 		LivingEntity zombie = zombie(helper, 1, 1);
 		helper.assertTrue(CombatAbilities.throwForTests(player, true), "Charged throw");
 		List<ThrownWeapon> thrown = helper.getLevel().getEntitiesOfClass(ThrownWeapon.class, player.getBoundingBox().inflate(4.0));
-		helper.assertValueEqual(1, thrown.size(), "One thrown sword");
+		TestPlayers.equal(helper, 1, thrown.size(), "One thrown sword");
 		ThrownWeapon sword = thrown.get(0);
 		helper.assertTrue(sword.isCharged() && sword.getPierceLevel() >= BloomServices.config().chargedThrowPierce, "Charged and piercing");
-		helper.assertValueEqual(BloomServices.config().chargedThrowDurabilityCost, sword.getItem().getDamageValue(), "A charged throw's wear");
+		TestPlayers.equal(helper, BloomServices.config().chargedThrowDurabilityCost, sword.getItem().getDamageValue(), "A charged throw's wear");
 		near(helper, 12.0, CombatSkill.modifyIncoming(zombie, player.damageSources().trident(sword, player), 8.0F), "2x the iron sword's 6");
 		CombatSkill.endSwingForTests();
 		sword.discard();
@@ -579,7 +579,7 @@ public final class CombatGameTests {
 		helper.assertTrue(CombatAbilities.lightningForTests(player, true), "Storm Call struck");
 		CombatSkill.runQueuedForTests();
 		net.minecraft.world.phys.AABB area = new net.minecraft.world.phys.AABB(player.blockPosition()).inflate(8.0);
-		helper.assertValueEqual(bolts, helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.LightningBolt.class, area).size(),
+		TestPlayers.equal(helper, bolts, helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.LightningBolt.class, area).size(),
 				"One bolt each");
 		ItemStack trident = player.getMainHandItem();
 		int single = (int) Math.ceil(trident.getMaxDamage() * BloomServices.config().lightningSummonCostRatio);
@@ -593,18 +593,18 @@ public final class CombatGameTests {
 		player.setExperienceLevels(10_000);
 		var wallet = new com.freshorangeslices.bloomlevelup.player.PlayerXpWallet(player);
 		long total = wallet.totalPoints();
-		helper.assertValueEqual(448_377_220L, total, "10,000 levels in raw XP");
+		TestPlayers.equal(helper, 448_377_220L, total, "10,000 levels in raw XP");
 
 		wallet.spend(1_000);
-		helper.assertValueEqual(total - 1_000, wallet.totalPoints(), "Exactly 1000 points gone");
-		helper.assertValueEqual(9_999, player.experienceLevel, "Level 9,999 and most of a bar left");
+		TestPlayers.equal(helper, total - 1_000, wallet.totalPoints(), "Exactly 1000 points gone");
+		TestPlayers.equal(helper, 9_999, player.experienceLevel, "Level 9,999 and most of a bar left");
 
 		// Far past an int: still counted, and spending leaves the rest exact.
 		player.setExperienceLevels(100_000);
 		long big = wallet.totalPoints();
 		helper.assertTrue(big > Integer.MAX_VALUE, "100,000 levels is more than an int holds: " + big);
 		wallet.spend(5);
-		helper.assertValueEqual(big - 5, wallet.totalPoints(), "Exactly 5 points gone");
+		TestPlayers.equal(helper, big - 5, wallet.totalPoints(), "Exactly 5 points gone");
 		helper.succeed();
 	}
 
@@ -617,11 +617,11 @@ public final class CombatGameTests {
 		CombatAbilities.setLoaded(crossbow, List.of(new ItemStack(Items.ARROW)));
 
 		CombatAbilities.fillMagazine(player, crossbow);
-		helper.assertValueEqual(16, CombatAbilities.loaded(crossbow).size(), "A full magazine");
-		helper.assertValueEqual(5, player.getInventory().countItem(Items.ARROW), "15 more arrows loaded");
+		TestPlayers.equal(helper, 16, CombatAbilities.loaded(crossbow).size(), "A full magazine");
+		TestPlayers.equal(helper, 5, player.getInventory().countItem(Items.ARROW), "15 more arrows loaded");
 
 		CombatAbilities.fireFromMagazine(helper.getLevel(), player, InteractionHand.MAIN_HAND);
-		helper.assertValueEqual(15, CombatAbilities.loaded(crossbow).size(), "One shot per click");
+		TestPlayers.equal(helper, 15, CombatAbilities.loaded(crossbow).size(), "One shot per click");
 		helper.assertTrue(CrossbowItem.isCharged(crossbow), "Still loaded");
 		helper.succeed();
 	}
@@ -775,16 +775,16 @@ public final class CombatGameTests {
 		ItemStack trident = new ItemStack(Items.TRIDENT);
 		ServerPlayer player = player(helper, trident);
 		player.setShiftKeyDown(true);
-		helper.assertValueEqual(0, CombatSkill.riptideLevel(trident, player, 0), "Without the Major: no riptide");
+		TestPlayers.equal(helper, 0, CombatSkill.riptideLevel(trident, player, 0), "Without the Major: no riptide");
 
 		grant(player, CombatIds.UNRESTRICTED_RIPTIDE);
-		helper.assertValueEqual((int) Math.round(BloomServices.config().unrestrictedRiptideStrength), CombatSkill.riptideLevel(trident, player, 0),
+		TestPlayers.equal(helper, (int) Math.round(BloomServices.config().unrestrictedRiptideStrength), CombatSkill.riptideLevel(trident, player, 0),
 				"Sneaking on release: riptide with no enchantment");
 		helper.assertTrue(CombatSkill.riptideAnywhere(player), "No water or rain needed");
-		helper.assertValueEqual(2, CombatSkill.riptideLevel(trident, player, 2), "A real Riptide enchantment keeps its own level");
+		TestPlayers.equal(helper, 2, CombatSkill.riptideLevel(trident, player, 2), "A real Riptide enchantment keeps its own level");
 
 		player.setShiftKeyDown(false);
-		helper.assertValueEqual(0, CombatSkill.riptideLevel(trident, player, 0), "Not sneaking: a normal throw");
+		TestPlayers.equal(helper, 0, CombatSkill.riptideLevel(trident, player, 0), "Not sneaking: a normal throw");
 		helper.succeed();
 	}
 

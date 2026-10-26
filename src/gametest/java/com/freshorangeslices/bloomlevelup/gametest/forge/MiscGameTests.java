@@ -131,7 +131,7 @@ public final class MiscGameTests {
 
 		// Exactly Misc level 50 (50 + 10L XP per level), so the orb's Misc XP shows up as the bar.
 		service.addXp(profile, SkillXp.MISC, 14750.0);
-		helper.assertValueEqual(50, profile.category(SkillXp.MISC).level(), "Misc level");
+		TestPlayers.equal(helper, 50, profile.category(SkillXp.MISC).level(), "Misc level");
 		helper.assertTrue(service.allocate(profile, MiscIds.WISDOM, ProgressionService.Pool.NATURAL, 50).ok(), "Wisdom 50");
 
 		ServerLevel level = helper.getLevel();
@@ -140,7 +140,7 @@ public final class MiscGameTests {
 		orb.playerTouch(player);
 
 		near(helper, 2.5, profile.category(SkillXp.MISC).xp(), "Misc XP = 25% of the orb's own value (not Wisdom's)");
-		helper.assertValueEqual(30, player.totalExperience, "Wisdom 50 = 3x vanilla XP");
+		TestPlayers.equal(helper, 30, player.totalExperience, "Wisdom 50 = 3x vanilla XP");
 		helper.succeed();
 	}
 
@@ -178,7 +178,7 @@ public final class MiscGameTests {
 		helper.assertFalse(player.hasEffect(MobEffects.POISON), "No poison");
 		helper.assertFalse(player.hasEffect(MobEffects.HUNGER), "No hunger");
 		helper.assertFalse(player.hasEffect(MobEffects.CONFUSION), "No nausea");
-		helper.assertValueEqual(6, player.getFoodData().getFoodLevel(), "Fills like cooked chicken");
+		TestPlayers.equal(helper, 6, player.getFoodData().getFoodLevel(), "Fills like cooked chicken");
 		near(helper, 6.0, player.getFoodData().getSaturationLevel(), "Saturation floor (capped by the food level)");
 
 		// Without the Major the pufferfish is as nasty as ever.
@@ -243,18 +243,18 @@ public final class MiscGameTests {
 		// A short Haste on top of the long one is stretched but ignored by vanilla: it must not mark Haste.
 		player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 0));
 
-		helper.assertValueEqual(12000, player.getEffect(MobEffects.MOVEMENT_SPEED).getDuration(), "30 s of Speed becomes 10 minutes");
-		helper.assertValueEqual(12000, player.getEffect(MobEffects.WEAKNESS).getDuration(), "Debuffs too");
-		helper.assertValueEqual(20000, player.getEffect(MobEffects.DIG_SPEED).getDuration(), "Long effects are untouched");
+		TestPlayers.equal(helper, 12000, player.getEffect(MobEffects.MOVEMENT_SPEED).getDuration(), "30 s of Speed becomes 10 minutes");
+		TestPlayers.equal(helper, 12000, player.getEffect(MobEffects.WEAKNESS).getDuration(), "Debuffs too");
+		TestPlayers.equal(helper, 20000, player.getEffect(MobEffects.DIG_SPEED).getDuration(), "Long effects are untouched");
 		helper.assertTrue(player.getEffect(MobEffects.NIGHT_VISION).isInfiniteDuration(), "Infinite stays infinite");
 
 		ProgressionService service = BloomServices.progression();
 		helper.assertTrue(service.toggleMajor(BloomAttachments.profile(player), MiscIds.WATER_TO_WINE).ok(), "Toggle off");
 		MiscSkill.refresh(player);
 
-		helper.assertValueEqual(2400, player.getEffect(MobEffects.MOVEMENT_SPEED).getDuration(), "Stretched effects drop to 2 minutes");
-		helper.assertValueEqual(2400, player.getEffect(MobEffects.WEAKNESS).getDuration(), "Stretched debuffs too");
-		helper.assertValueEqual(20000, player.getEffect(MobEffects.DIG_SPEED).getDuration(), "Naturally long effects keep their time");
+		TestPlayers.equal(helper, 2400, player.getEffect(MobEffects.MOVEMENT_SPEED).getDuration(), "Stretched effects drop to 2 minutes");
+		TestPlayers.equal(helper, 2400, player.getEffect(MobEffects.WEAKNESS).getDuration(), "Stretched debuffs too");
+		TestPlayers.equal(helper, 20000, player.getEffect(MobEffects.DIG_SPEED).getDuration(), "Naturally long effects keep their time");
 		helper.succeed();
 	}
 
@@ -267,13 +267,13 @@ public final class MiscGameTests {
 
 		for (int amplifier : expected) {
 			player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0));
-			helper.assertValueEqual(amplifier, player.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier(), "Speed I re-applied climbs to III and stops");
+			TestPlayers.equal(helper, amplifier, player.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier(), "Speed I re-applied climbs to III and stops");
 		}
 
 		// Beacon-style (ambient) effects don't climb.
 		player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 300, 0, true, true));
 		player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 300, 0, true, true));
-		helper.assertValueEqual(0, player.getEffect(MobEffects.DIG_SPEED).getAmplifier(), "Ambient effects are left alone");
+		TestPlayers.equal(helper, 0, player.getEffect(MobEffects.DIG_SPEED).getAmplifier(), "Ambient effects are left alone");
 		helper.succeed();
 	}
 
@@ -291,7 +291,7 @@ public final class MiscGameTests {
 		MinecraftForge.EVENT_BUS.post(new PlayerEvent.Clone(respawned, dead, true));
 
 		// Level 30 = 1395 XP: 100 drops as orbs, 1295 is lost, half of it (647) comes back.
-		helper.assertValueEqual(647, respawned.totalExperience, "Half the lost XP comes back");
+		TestPlayers.equal(helper, 647, respawned.totalExperience, "Half the lost XP comes back");
 		helper.assertTrue(BloomAttachments.profile(respawned).owns(MiscIds.XP_INSURANCE), "The profile came along");
 		helper.succeed();
 	}
@@ -312,19 +312,19 @@ public final class MiscGameTests {
 		menu.removed(player);
 
 		HoardersPocket.PocketMenu again = new HoardersPocket.PocketMenu(2, player.getInventory(), player, false);
-		helper.assertValueEqual(12, again.getSlot(3).getItem().getCount(), "Contents are saved on the player");
+		TestPlayers.equal(helper, 12, again.getSlot(3).getItem().getCount(), "Contents are saved on the player");
 		helper.assertFalse(again.getSlot(0).mayPlace(new ItemStack(Items.DIAMOND)), "Without the Major it's take-out only");
 
 		// Shift-clicking matching items in must not top up the stack either (vanilla's merge skips mayPlace).
 		player.getInventory().setItem(9, new ItemStack(Items.DIAMOND, 5));
 		again.quickMoveStack(player, HoardersPocket.SIZE); // menu slot 9 = inventory slot 9
-		helper.assertValueEqual(12, again.getSlot(3).getItem().getCount(), "Take-out only: no shift-click merge");
-		helper.assertValueEqual(5, player.getInventory().getItem(9).getCount(), "The diamonds stay in the inventory");
+		TestPlayers.equal(helper, 12, again.getSlot(3).getItem().getCount(), "Take-out only: no shift-click merge");
+		TestPlayers.equal(helper, 5, player.getInventory().getItem(9).getCount(), "The diamonds stay in the inventory");
 
 		// It's kept through death (the profile capability carries it to the new player).
 		ServerPlayer respawned = player(helper);
 		MinecraftForge.EVENT_BUS.post(new PlayerEvent.Clone(respawned, player, true));
-		helper.assertValueEqual(12, HoardersPocket.items(respawned).get(3).getCount(), "The pocket survives death");
+		TestPlayers.equal(helper, 12, HoardersPocket.items(respawned).get(3).getCount(), "The pocket survives death");
 		helper.succeed();
 	}
 
@@ -369,15 +369,15 @@ public final class MiscGameTests {
 		FuelImprint fuel = FuelImprint.get(player.getMainHandItem());
 		helper.assertTrue(fuel != null, "The sword carries the potion's effect");
 		helper.assertTrue(fuel.effect() == MobEffects.MOVEMENT_SLOWDOWN, "It's Slowness");
-		helper.assertValueEqual(3, fuel.amplifier(), "At the potion's level (Slowness IV)");
+		TestPlayers.equal(helper, 3, fuel.amplifier(), "At the potion's level (Slowness IV)");
 		helper.assertTrue(player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN), "The drinker still suffers the potion");
 
 		LivingEntity zombie = helper.spawn(EntityType.ZOMBIE, new BlockPos(1, 2, 1));
 		zombie.hurt(player.damageSources().playerAttack(player), 2.0F);
 		MobEffectInstance applied = zombie.getEffect(MobEffects.MOVEMENT_SLOWDOWN);
 		helper.assertTrue(applied != null, "Hits apply the fuel");
-		helper.assertValueEqual(3, applied.getAmplifier(), "At the imprinted level");
-		helper.assertValueEqual(100, applied.getDuration(), "For 5 seconds");
+		TestPlayers.equal(helper, 3, applied.getAmplifier(), "At the imprinted level");
+		TestPlayers.equal(helper, 100, applied.getDuration(), "For 5 seconds");
 		helper.succeed();
 	}
 
@@ -401,7 +401,7 @@ public final class MiscGameTests {
 		LivingEntity speared = helper.spawn(EntityType.ZOMBIE, new BlockPos(3, 2, 3));
 		speared.hurt(player.damageSources().trident(thrown, player), 2.0F);
 		helper.assertTrue(speared.hasEffect(MobEffects.WEAKNESS), "A thrown fuelled trident applies the fuel");
-		helper.assertValueEqual(1, speared.getEffect(MobEffects.WEAKNESS).getAmplifier(), "At the imprinted level");
+		TestPlayers.equal(helper, 1, speared.getEffect(MobEffects.WEAKNESS).getAmplifier(), "At the imprinted level");
 
 		// The imprint is item data: it survives saving the item.
 		ItemStack reloaded = ItemStack.of(trident.save(new CompoundTag()));
@@ -425,7 +425,7 @@ public final class MiscGameTests {
 			anvil.getSlot(1).set(book(Enchantments.SHARPNESS, 5));
 			anvil.createResult();
 			ItemStack result = anvil.getSlot(2).getItem();
-			helper.assertValueEqual(overenchant ? 6 : 5, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, result),
+			TestPlayers.equal(helper, overenchant ? 6 : 5, EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, result),
 					overenchant ? "Overenchant: V + V = VI" : "Vanilla caps Sharpness at V");
 
 			ItemStack worn = new ItemStack(Items.DIAMOND_SWORD);
@@ -435,7 +435,7 @@ public final class MiscGameTests {
 			expensive.getSlot(0).set(worn);
 			expensive.getSlot(1).set(book(Enchantments.SHARPNESS, 4));
 			expensive.createResult();
-			helper.assertValueEqual(!overenchant, expensive.getSlot(2).getItem().isEmpty(),
+			TestPlayers.equal(helper, !overenchant, expensive.getSlot(2).getItem().isEmpty(),
 					overenchant ? "No Too Expensive with Overenchant" : "Too Expensive in vanilla");
 		}
 
@@ -499,39 +499,39 @@ public final class MiscGameTests {
 
 		player.getInventory().add(new ItemStack(Items.ENDER_PEARL, 250));
 		int slot = slotWith(player, Items.ENDER_PEARL);
-		helper.assertValueEqual(250, player.getInventory().getItem(slot).getCount(), "250 ender pearls in one slot (normally 16)");
-		helper.assertValueEqual(300, player.inventoryMenu.getSlot(9).getMaxStackSize(new ItemStack(Items.DIRT)), "Inventory slots take 300");
-		helper.assertValueEqual(1, player.inventoryMenu.getSlot(5).getMaxStackSize(new ItemStack(Items.CARVED_PUMPKIN)), "Armor slots still hold 1");
+		TestPlayers.equal(helper, 250, player.getInventory().getItem(slot).getCount(), "250 ender pearls in one slot (normally 16)");
+		TestPlayers.equal(helper, 300, player.inventoryMenu.getSlot(9).getMaxStackSize(new ItemStack(Items.DIRT)), "Inventory slots take 300");
+		TestPlayers.equal(helper, 1, player.inventoryMenu.getSlot(5).getMaxStackSize(new ItemStack(Items.CARVED_PUMPKIN)), "Armor slots still hold 1");
 
 		player.getInventory().add(new ItemStack(Items.IRON_SWORD));
 		player.getInventory().add(new ItemStack(Items.IRON_SWORD));
-		helper.assertValueEqual(1, player.getInventory().getItem(slotWith(player, Items.IRON_SWORD)).getCount(), "Swords stay single");
+		TestPlayers.equal(helper, 1, player.getInventory().getItem(slotWith(player, Items.IRON_SWORD)).getCount(), "Swords stay single");
 
 		// Saved and loaded intact, as an item and in the pocket's storage.
 		ItemStack big = new ItemStack(Items.DIRT, 300);
-		helper.assertValueEqual(300, ItemStack.of(big.save(new CompoundTag())).getCount(), "A 300 stack survives saving");
+		TestPlayers.equal(helper, 300, ItemStack.of(big.save(new CompoundTag())).getCount(), "A 300 stack survives saving");
 		NonNullList<ItemStack> stored = NonNullList.withSize(1, ItemStack.EMPTY);
 		stored.set(0, big);
 		StoredItems.write(player, "test", stored);
-		helper.assertValueEqual(300, StoredItems.read(player, "test", 1).get(0).getCount(), "...and in the pocket's storage");
+		TestPlayers.equal(helper, 300, StoredItems.read(player, "test", 1).get(0).getCount(), "...and in the pocket's storage");
 		StoredItems.write(player, "test", NonNullList.withSize(1, ItemStack.EMPTY));
 
 		// ...and over the network (vanilla sends a stack's count as one byte).
 		net.minecraft.network.FriendlyByteBuf buf = new net.minecraft.network.FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
 		buf.writeItem(big);
 		buf.writeItem(new ItemStack(Items.DIAMOND, 7));
-		helper.assertValueEqual(300, buf.readItem().getCount(), "A 300 stack crosses the network whole");
-		helper.assertValueEqual(7, buf.readItem().getCount(), "...and small stacks after it still read right");
+		TestPlayers.equal(helper, 300, buf.readItem().getCount(), "A 300 stack crosses the network whole");
+		TestPlayers.equal(helper, 7, buf.readItem().getCount(), "...and small stacks after it still read right");
 
 		// Putting items back into a slot that already holds more than the item's normal max must finish.
 		player.getInventory().placeItemBackInInventory(new ItemStack(Items.ENDER_PEARL, 30));
-		helper.assertValueEqual(280, player.getInventory().getItem(slot).getCount(), "Put-back tops up the big stack (and returns)");
+		TestPlayers.equal(helper, 280, player.getInventory().getItem(slot).getCount(), "Put-back tops up the big stack (and returns)");
 		player.getInventory().removeItem(slot, 30);
 
 		// The pocket's client-side screen uses the same limit.
 		var clientPocket = new net.minecraft.world.inventory.ChestMenu(HoardersPocket.MENU.get(), 9, player.getInventory(),
 				new HoardersPocket.PocketContainer(player, null), 1);
-		helper.assertValueEqual(300, clientPocket.getSlot(0).getMaxStackSize(new ItemStack(Items.DIRT)), "Pocket slots take 300 on both sides");
+		TestPlayers.equal(helper, 300, clientPocket.getSlot(0).getMaxStackSize(new ItemStack(Items.DIRT)), "Pocket slots take 300 on both sides");
 
 		// Dropping a big stack makes normal-size item entities (so hoppers and mobs can't cut it down).
 		player.drop(new ItemStack(Items.COBBLESTONE, 300), false, false);
@@ -544,7 +544,7 @@ public final class MiscGameTests {
 			dropped += drop.getItem().getCount();
 		}
 
-		helper.assertValueEqual(300, dropped, "All 300 dropped");
+		TestPlayers.equal(helper, 300, dropped, "All 300 dropped");
 		drops.forEach(net.minecraft.world.entity.Entity::discard);
 
 		// Switched off: big stacks split back to vanilla sizes.
@@ -561,7 +561,7 @@ public final class MiscGameTests {
 			}
 		}
 
-		helper.assertValueEqual(250, pearls, "Nothing lost when splitting");
+		TestPlayers.equal(helper, 250, pearls, "Nothing lost when splitting");
 		helper.succeed();
 	}
 
@@ -606,7 +606,7 @@ public final class MiscGameTests {
 		embed(player, book(Enchantments.ALL_DAMAGE_PROTECTION, 4), book(Enchantments.RESPIRATION, 3));
 
 		helper.assertTrue(RuneEmbedding.protection(player, player.damageSources().generic()) > 0, "Protection rune protects");
-		helper.assertValueEqual(3, EnchantmentHelper.getRespiration(player), "Respiration III rune");
+		TestPlayers.equal(helper, 3, EnchantmentHelper.getRespiration(player), "Respiration III rune");
 
 		// A real hit is reduced by it too (vanilla's own protection math, with the rune added).
 		player.setHealth(20.0F);
@@ -615,8 +615,8 @@ public final class MiscGameTests {
 		helper.assertTrue(player.getHealth() > 10.5F, "Protection IV rune softened a 10-damage hit, health " + player.getHealth());
 
 		player.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-		helper.assertValueEqual(0, RuneEmbedding.protection(player, player.damageSources().generic()), "Wearing armor turns body runes off");
-		helper.assertValueEqual(0, EnchantmentHelper.getRespiration(player), "...the levels too");
+		TestPlayers.equal(helper, 0, RuneEmbedding.protection(player, player.damageSources().generic()), "Wearing armor turns body runes off");
+		TestPlayers.equal(helper, 0, EnchantmentHelper.getRespiration(player), "...the levels too");
 		helper.succeed();
 	}
 
@@ -629,7 +629,7 @@ public final class MiscGameTests {
 
 		float bare = EnchantmentHelper.getDamageBonus(RuneEmbedding.weaponItem(player, player.getMainHandItem()), MobType.UNDEFINED);
 		near(helper, 3.0, bare, "Sharpness V on bare hands: +3");
-		helper.assertValueEqual(3, EnchantmentHelper.getEnchantmentLevel(Enchantments.MOB_LOOTING, player), "Looting III bare-handed");
+		TestPlayers.equal(helper, 3, EnchantmentHelper.getEnchantmentLevel(Enchantments.MOB_LOOTING, player), "Looting III bare-handed");
 
 		player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
 		float holding = EnchantmentHelper.getDamageBonus(RuneEmbedding.weaponItem(player, player.getMainHandItem()), MobType.UNDEFINED);

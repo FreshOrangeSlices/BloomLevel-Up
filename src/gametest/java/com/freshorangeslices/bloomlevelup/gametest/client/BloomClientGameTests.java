@@ -404,7 +404,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 							+ com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles.weightOf(stack));
 				} else if (damage > 1.0 || !families.equals("[]")) {
 					out.add("weapon " + id + " damage=" + damage + " speed=" + Math.round(speed * 100.0) / 100.0 + " bloom=" + families
-							+ " tags=" + stack.getTags().map(tag -> tag.location().toString()).filter(tag -> !tag.startsWith("minecraft:enchantable"))
+							+ " tags=" + net.minecraft.core.registries.BuiltInRegistries.ITEM.wrapAsHolder(item).tags().map(tag -> tag.location().toString()).filter(tag -> !tag.startsWith("minecraft:enchantable"))
 									.sorted().toList());
 				}
 			}

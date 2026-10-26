@@ -379,7 +379,7 @@ public final class CombatAbilities {
 	// ------------------------------------------------------------------ Assault Rifle
 
 	/** The rounds loaded in a crossbow (1.20.1 keeps them in its NBT, {@code ChargedProjectiles}). */
-	static List<ItemStack> loaded(ItemStack crossbow) {
+	public static List<ItemStack> loaded(ItemStack crossbow) {
 		List<ItemStack> out = new ArrayList<>();
 		CompoundTag tag = crossbow.getTag();
 
@@ -395,7 +395,7 @@ public final class CombatAbilities {
 	}
 
 	/** Replaces the loaded rounds (and the crossbow's "charged" flag to match). */
-	static void setLoaded(ItemStack crossbow, List<ItemStack> rounds) {
+	public static void setLoaded(ItemStack crossbow, List<ItemStack> rounds) {
 		ListTag list = new ListTag();
 
 		for (ItemStack round : rounds) {

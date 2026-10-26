@@ -1204,6 +1204,11 @@ public final class CombatSkill {
 		PENDING.put(player.getUUID(), new PendingAttack(target, strength, crit, player.fallDistance, false, onGround));
 	}
 
+	/** Records what a projectile was fired with, as joining the world would (game tests: arrows not added to a level). */
+	public static void firedWithForTests(Projectile projectile, ItemStack weapon) {
+		FIRED_WITH.put(projectile, weapon.copy());
+	}
+
 	/** Forgets this tick's swings and hits (game tests). */
 	public static void endSwingForTests() {
 		cleanupTick();

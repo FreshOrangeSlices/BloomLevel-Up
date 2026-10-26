@@ -256,7 +256,7 @@ public final class MiscSkill {
 		}
 
 		for (MobEffectInstance instance : effects) {
-			if (harmful(instance) && !instance.getEffect().isInstantaneous()) {
+			if (harmful(instance) && !instance.getEffect().isInstantenous()) {
 				FuelImprint.set(weapon, new FuelImprint(instance.getEffect(), instance.getAmplifier()));
 				player.sendSystemMessage(Component.translatable("bloom.misc.fuel.imprinted", effectName(instance.getEffect(), instance.getAmplifier()),
 						weapon.getHoverName()).withStyle(ChatFormatting.DARK_PURPLE), true);
@@ -284,7 +284,7 @@ public final class MiscSkill {
 	// ------------------------------------------------------------------ Water to Wine / Overdose (LivingEntity.addEffect mixin)
 
 	public static MobEffectInstance modifyIncomingEffect(LivingEntity entity, MobEffectInstance incoming) {
-		if (incoming == null || !(entity instanceof ServerPlayer player) || incoming.getEffect().isInstantaneous()) {
+		if (incoming == null || !(entity instanceof ServerPlayer player) || incoming.getEffect().isInstantenous()) {
 			return incoming;
 		}
 

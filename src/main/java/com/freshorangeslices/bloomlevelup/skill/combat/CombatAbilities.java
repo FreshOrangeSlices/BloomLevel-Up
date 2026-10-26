@@ -213,7 +213,7 @@ public final class CombatAbilities {
 	private static boolean lightning(ServerPlayer player, boolean storm) {
 		ItemStack weapon = player.getMainHandItem();
 
-		if (!CombatSkill.has(player, CombatIds.LIGHTNING_SUMMON, Family.TRIDENT, weapon) || player.getCooldowns().isOnCooldown(weapon)
+		if (!CombatSkill.has(player, CombatIds.LIGHTNING_SUMMON, Family.TRIDENT, weapon) || player.getCooldowns().isOnCooldown(weapon.getItem())
 				|| !(player.level() instanceof ServerLevel level)) {
 			return false;
 		}
@@ -257,7 +257,7 @@ public final class CombatAbilities {
 			weapon.hurtAndBreak(cost, player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		}
 
-		player.getCooldowns().addCooldown(weapon, (int) Math.round(config.lightningSummonCooldownTicks * scale));
+		player.getCooldowns().addCooldown(weapon.getItem(), (int) Math.round(config.lightningSummonCooldownTicks * scale));
 		return true;
 	}
 
@@ -297,7 +297,7 @@ public final class CombatAbilities {
 	private static boolean throwWeapon(ServerPlayer player, boolean charged) {
 		ItemStack held = player.getMainHandItem();
 
-		if (!CombatSkill.active(player, CombatIds.CATCH) || !throwable(held) || player.getCooldowns().isOnCooldown(held)) {
+		if (!CombatSkill.active(player, CombatIds.CATCH) || !throwable(held) || player.getCooldowns().isOnCooldown(held.getItem())) {
 			return false;
 		}
 

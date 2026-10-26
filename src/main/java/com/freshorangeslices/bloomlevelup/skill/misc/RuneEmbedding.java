@@ -273,6 +273,8 @@ public final class RuneEmbedding {
 		private final Player owner;
 		private final boolean canEmbed;
 		private final SimpleContainer container;
+		/** True while the slots are being filled from the saved runes (no save then). */
+		private boolean loading = true;
 
 		public RuneMenu(int id, Inventory inventory, Player owner, boolean canEmbed) {
 			super(MENU.get(), id);
@@ -288,8 +290,10 @@ public final class RuneEmbedding {
 			};
 
 			for (int i = 0; i < SIZE; i++) {
-				this.container.getItems().set(i, stored.get(i));
+				this.container.setItem(i, stored.get(i));
 			}
+
+			this.loading = false;
 
 			for (int i = 0; i < SIZE; i++) {
 				int index = i;
@@ -327,7 +331,7 @@ public final class RuneEmbedding {
 		}
 
 		private void save() {
-			if (this.owner.level().isClientSide()) {
+			if (this.loading || this.owner.level().isClientSide()) {
 				return; // the client's copy of the screen never writes the runes
 			}
 

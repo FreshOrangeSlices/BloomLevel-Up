@@ -137,6 +137,8 @@ public final class HoardersPocket {
 		private final Player owner;
 		private final PocketContainer container;
 		private final boolean canDeposit;
+		/** True while the slots are being filled from the saved pocket (no save then). */
+		private boolean loading = true;
 
 		public PocketMenu(int id, Inventory inventory, Player owner, boolean canDeposit) {
 			super(MENU.get(), id);
@@ -146,8 +148,10 @@ public final class HoardersPocket {
 			this.container = new PocketContainer(owner, this::save);
 
 			for (int i = 0; i < SIZE; i++) {
-				this.container.getItems().set(i, stored.get(i));
+				this.container.setItem(i, stored.get(i));
 			}
+
+			this.loading = false;
 
 			for (int i = 0; i < SIZE; i++) {
 				this.addSlot(new Slot(this.container, i, 8 + i * 18, 18) {
@@ -162,6 +166,10 @@ public final class HoardersPocket {
 		}
 
 		private void save() {
+			if (this.loading) {
+				return;
+			}
+
 			NonNullList<ItemStack> copy = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 
 			for (int i = 0; i < SIZE; i++) {

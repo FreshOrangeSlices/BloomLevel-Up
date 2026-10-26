@@ -589,6 +589,43 @@ public class CombatGameTests {
 		helper.succeed();
 	}
 
+	/**
+	 * A Catch! hit is the thrown weapon's hit, not a bare fist (the thrower's hand is empty): a thrown axe's Armor
+	 * Break wears armor and a thrown sword's Execute finishes a low target, against the same throws without them.
+	 */
+	@GameTest
+	public void thrownWeaponsCarryTheirMajors(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		ServerPlayer thrower = player(helper, ItemStack.EMPTY);
+		grant(thrower, CombatIds.ARMOR_BREAK, CombatIds.EXECUTE);
+		ServerPlayer plain = player(helper, ItemStack.EMPTY);
+
+		LivingEntity armored = zombie(helper, 1, 1);
+		armored.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+		armored.hurtServer(level, thrower.damageSources().trident(ThrownWeapon.create(level, thrower, new ItemStack(Items.IRON_AXE)), thrower), 8.0F);
+		LivingEntity control = zombie(helper, 3, 1);
+		control.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+		control.hurtServer(level, plain.damageSources().trident(ThrownWeapon.create(level, plain, new ItemStack(Items.IRON_AXE)), plain), 8.0F);
+		int broken = armored.getItemBySlot(EquipmentSlot.CHEST).getDamageValue();
+		int normal = control.getItemBySlot(EquipmentSlot.CHEST).getDamageValue();
+		helper.assertTrue(broken >= normal + 3, "A thrown axe's Armor Break (" + broken + " vs " + normal + ")");
+
+		// Resistance II keeps the thrown sword's own hit (6) from killing a 5-health zombie: only Execute does.
+		LivingEntity low = zombie(helper, 1, 3);
+		LivingEntity lowControl = zombie(helper, 3, 3);
+
+		for (LivingEntity zombie : List.of(low, lowControl)) {
+			zombie.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffects.RESISTANCE, 200, 1));
+			zombie.setHealth(5.0F);
+		}
+
+		lowControl.hurtServer(level, plain.damageSources().trident(ThrownWeapon.create(level, plain, new ItemStack(Items.IRON_SWORD)), plain), 1.0F);
+		helper.assertTrue(lowControl.isAlive(), "Without Execute the thrown sword leaves it standing (health " + lowControl.getHealth() + ")");
+		low.hurtServer(level, thrower.damageSources().trident(ThrownWeapon.create(level, thrower, new ItemStack(Items.IRON_SWORD)), thrower), 1.0F);
+		helper.assertFalse(low.isAlive(), "A thrown sword's Execute");
+		helper.succeed();
+	}
+
 	@GameTest
 	public void thrownWeaponsHitForTheirOwnDamage(GameTestHelper helper) {
 		ServerPlayer player = player(helper, ItemStack.EMPTY);

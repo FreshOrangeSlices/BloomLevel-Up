@@ -328,6 +328,11 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			new Shot("pack_mobs_5", "noon", three, new String[] {"summon minecart", "setblock ~ ~ ~ ender_chest[facing=north]",
 				"summon oak_boat"}),
 			// The RPG Series' gear (its 3D armor comes from Armor Model API): a wizard, a paladin and an archer.
+			// World Bosses' mobs (their models drew as stretched spikes in play): three at a time, a few blocks off.
+			new Shot("pack_worldbosses", "noon", new String[] {"^3 ^ ^6", "^ ^ ^6", "^-3 ^ ^6"}, new String[] {
+				"summon worldbosses:shadow_weaver", "summon worldbosses:shadow_king", "summon worldbosses:morvath"}),
+			new Shot("pack_worldbosses_2", "noon", new String[] {"^3 ^ ^6", "^ ^ ^6", "^-3 ^ ^6"}, new String[] {
+				"summon worldbosses:astrael", "summon worldbosses:elyndra", "summon worldbosses:varkhul"}),
 			new Shot("pack_rpg_gear", "noon", three, new String[] {
 				gearStand("wizards", "wizard_robe", "wizards:staff_wizard"),
 				gearStand("paladins", "paladin_armor", "paladins:iron_claymore"),
@@ -337,7 +342,7 @@ public class BloomClientGameTests implements FabricClientGameTest {
 		for (Shot shot : shots) {
 			singleplayer.getServer().runCommand("time set " + shot.time());
 			singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..12]");
-			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-3 ~ ~1 ~3 ~1 ~5 air");
+			singleplayer.getServer().runCommand("execute as @a at @s run fill ~-6 ~ ~1 ~6 ~4 ~8 air");
 
 			for (int i = 0; i < shot.commands().length; i++) {
 				String command = shot.commands()[i];

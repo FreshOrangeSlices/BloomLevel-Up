@@ -148,6 +148,14 @@ jobs:
         include:
           - variant: full
             without: ""
+          - variant: no-immediatelyfast
+            without: "immediatelyfast"
+          - variant: no-emf
+            without: "entity-model-features,entitytexturefeatures,not-enough-animations-emf-compat,emf-compat-better-combat,fa-player-extension"
+          - variant: no-iris
+            without: "iris,complementary-reimagined"
+          - variant: no-lights-culling
+            without: "lambdynamiclights,entityculling"
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -313,7 +321,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full]
+        variant: [full, no-immediatelyfast, no-emf, no-iris, no-lights-culling]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -324,11 +332,7 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: sheep, cow, wandering trader (Details add-on)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_1 12
-      - name: zombie, skeleton, creeper (Creepers add-on)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_mobs_2 12
-      - name: the RPG Series' gear on armor stands (wizard, paladin, archer)
-        run: python3 .github/scripts/emit_screenshot.py shots pack_rpg_gear 12
-      - name: the player in a wizard's robes with a staff
-        run: python3 .github/scripts/emit_screenshot.py shots pack_rpg_player 12
+      - name: World Bosses (shadow weaver, shadow king, morvath)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_worldbosses 12
+      - name: World Bosses (astrael, elyndra, varkhul)
+        run: python3 .github/scripts/emit_screenshot.py shots pack_worldbosses_2 12

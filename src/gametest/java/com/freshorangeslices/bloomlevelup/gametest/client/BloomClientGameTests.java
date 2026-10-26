@@ -183,6 +183,20 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.runOnClient(client -> setShaders(true));
 			context.waitTicks(100);
 			context.takeScreenshot("pack_shader");
+
+			// World Bosses with the shader on (the glitch only shows with Iris + Complementary): a boss fighting golems.
+			for (String[] shot : new String[][] {{"pack_wb_shader_1", "worldbosses:shadow_weaver"}, {"pack_wb_shader_2", "worldbosses:varkhul"},
+					{"pack_wb_shader_3", "worldbosses:astrael"}}) {
+				singleplayer.getServer().runCommand("execute as @a at @s run kill @e[type=!player,distance=..40]");
+				Shot fight = fight(shot[0], shot[1]);
+
+				for (int i = 0; i < fight.commands().length; i++) {
+					singleplayer.getServer().runCommand("execute as @a at @s rotated ~ 0 positioned " + fight.spots()[i] + " run " + fight.commands()[i]);
+				}
+
+				context.waitTicks(100);
+				context.takeScreenshot(shot[0]);
+			}
 			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
 		}
 	}

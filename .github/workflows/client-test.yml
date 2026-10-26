@@ -148,16 +148,6 @@ jobs:
         include:
           - variant: full
             without: ""
-          - variant: no-immediatelyfast
-            without: "immediatelyfast"
-          - variant: no-emf
-            without: "entity-model-features,entitytexturefeatures,not-enough-animations-emf-compat,emf-compat-better-combat,fa-player-extension"
-          - variant: no-iris
-            without: "iris,complementary-reimagined"
-          - variant: no-lights-culling
-            without: "lambdynamiclights,entityculling"
-          - variant: no-sodium
-            without: "sodium,iris,complementary-reimagined"
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -258,6 +248,11 @@ jobs:
                   follow += raw[at:at + 1] + [l for l in raw[at + 1:at + 16] if not re.match(r'\[[\d:]+\]', l)][:12]
           if follow:
               print(f"::notice title=client-pack-warning-details::{esc(chr(10).join(follow)[:3900])}")
+          # Iris: every pipeline it had to guess a program for (World Bosses' effects glitch with the shader on).
+          iris = [re.sub(r'^\[[\d:]+\] ', '', l) for l in raw if '(Iris)' in l and re.search(r'program|pipeline|shader|Shader', l)]
+          text = '\n'.join(dict.fromkeys(iris)) or 'no Iris lines'
+          for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
+              print(f"::error title=client-pack-iris-{n:02d}::{esc(text[i:i + 3900])}")
           PY
       - name: capture screenshots and logs
         if: always()
@@ -323,7 +318,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [full, no-immediatelyfast, no-emf, no-iris, no-lights-culling, no-sodium]
+        variant: [full]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -334,11 +329,11 @@ jobs:
           path: shots
       - name: pillow
         run: pip install --quiet pillow
-      - name: World Bosses fight 1
+      - name: World Bosses fight, no shader
         run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_1 12
-      - name: World Bosses fight 2
-        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_2 12
-      - name: World Bosses fight 3
-        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_3 12
-      - name: World Bosses fight 4
-        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_fight_4 12
+      - name: World Bosses fight 1, shader on
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_shader_1 12
+      - name: World Bosses fight 2, shader on
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_shader_2 12
+      - name: World Bosses fight 3, shader on
+        run: python3 .github/scripts/emit_screenshot.py shots pack_wb_shader_3 12

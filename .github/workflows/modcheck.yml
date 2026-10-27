@@ -12,10 +12,5 @@ jobs:
         with:
           ref: forge-1.20.1
           path: bloom
-      - name: download the pack's mods
-        run: |
-          python3 -c "import zipfile; zipfile.ZipFile('dummy.jar','w').writestr('x.txt','x')"
-          python3 bloom/pack/build_pack.py dummy.jar check out --client-run game || true
-          ls game/mods | wc -l
-      - name: shaders
-        run: python3 check/shaders.py bloom/pack/pack.lock.json game/mods
+      - name: versions
+        run: python3 check/versions.py book-of-dragons easy-mob-spawn-control

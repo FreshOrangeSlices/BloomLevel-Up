@@ -258,6 +258,23 @@ public class MiscGameTests {
 		helper.succeed();
 	}
 
+	/** Universal Graves keeps the drop in the grave and sets the level to 0 while the player dies. */
+	@GameTest
+	public void xpInsuranceCountsTheXpHeldAtDeath(GameTestHelper helper) {
+		ServerPlayer dead = player(helper);
+		ServerPlayer respawned = player(helper);
+		grant(dead, MiscIds.XP_INSURANCE);
+		dead.setExperienceLevels(30);
+		dead.experienceProgress = 0.0F;
+
+		dead.die(helper.getLevel().damageSources().generic());
+		dead.experienceLevel = 0; // what the grave does
+		ServerPlayerEvents.COPY_FROM.invoker().copyFromPlayer(dead, respawned, false);
+
+		helper.assertValueEqual(647, respawned.totalExperience, "Half the lost XP still comes back");
+		helper.succeed();
+	}
+
 	// ------------------------------------------------------------------ Hoarder's Pocket
 
 	@GameTest

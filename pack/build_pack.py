@@ -192,6 +192,11 @@ def main():
         if project["id"] in seen:
             continue
         seen.add(project["id"])
+        # A multi-loader ("universal") jar lists its other loaders' libraries as required on Modrinth; the
+        # fabric.mod.json check below still catches anything a Fabric jar really needs.
+        if project["slug"] in spec.get("not_dependencies", {}):
+            notes.append(f"not added: {project['title']} ({spec['not_dependencies'][project['slug']]})")
+            continue
         version = api(f"/version/{wanted_version}") if wanted_version else None
         if version is None or game not in version.get("game_versions", []):
             version = newest_version(project, game, loader_for(project))

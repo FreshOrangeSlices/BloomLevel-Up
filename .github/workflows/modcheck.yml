@@ -1,6 +1,9 @@
 # Throwaway (never merged): shader loader and shader packs for LegionWareX (shaders.py).
 name: modcheck
 on: [push, workflow_dispatch]
+permissions:
+  contents: read
+  actions: read
 jobs:
   check:
     runs-on: ubuntu-24.04
@@ -12,5 +15,9 @@ jobs:
         with:
           ref: forge-1.20.1
           path: bloom
+      - name: the tested pack
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 40430310015 -R ${{ github.repository }} -n legionwarex -D art || true
       - name: book of dragons
-        run: python3 check/bod.py bloom/pack/pack.lock.json
+        run: python3 check/bod2.py

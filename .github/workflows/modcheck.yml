@@ -1,4 +1,4 @@
-# Throwaway (never merged): Legionary's flaming skull on a dedicated server (skull.sh).
+# Throwaway (never merged): Myths & Legends' Cogwork Construct renderer (cog.sh).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -14,5 +14,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-      - run: bash check/skull.sh > out.txt 2>&1; cat out.txt
+      - run: bash check/cog.sh > out.txt 2>&1; cat out.txt
       - run: python3 check/slice.py out.txt 0 9

@@ -25,8 +25,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.TickEvent;
@@ -42,6 +46,8 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.mixin.AbstractArrowInvoker;
+import com.freshorangeslices.bloomlevelup.mixin.CooldownInstanceAccessor;
+import com.freshorangeslices.bloomlevelup.mixin.ItemCooldownsAccessor;
 import com.freshorangeslices.bloomlevelup.network.BloomSync;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
@@ -260,6 +266,33 @@ public final class ArmorSkill {
 	}
 
 	// ------------------------------------------------------------------ after vanilla mitigation (mixin)
+
+	/**
+	 * After {@code Player.disableShield} (mixin): when it just put the shield in use on cooldown, Fitting Armor / Medium
+	 * shortens that cooldown, whatever length it was set to (vanilla's 100 ticks, or another mod's).
+	 */
+	public static void shortenShieldDisable(Player player, Item used, boolean wasDown) {
+		if (!(player instanceof ServerPlayer) || wasDown) {
+			return;
+		}
+
+		ItemCooldowns cooldowns = player.getCooldowns();
+
+		for (Item shield : used == null || used == Items.AIR ? List.of(Items.SHIELD) : List.of(used, Items.SHIELD)) {
+			Object instance = ((ItemCooldownsAccessor) cooldowns).bloomlevelup$cooldowns().get(shield);
+
+			if (instance instanceof CooldownInstanceAccessor times) {
+				int ticks = times.bloomlevelup$endTime() - times.bloomlevelup$startTime();
+				int shorter = shieldDisableTicks(player, ticks);
+
+				if (shorter < ticks) {
+					cooldowns.addCooldown(shield, Math.max(1, shorter));
+				}
+
+				return;
+			}
+		}
+	}
 
 	/** Fitting Armor / Medium: an axe disables your shield for less time ({@code ticks}: vanilla's 100). */
 	public static int shieldDisableTicks(LivingEntity entity, int ticks) {

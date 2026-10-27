@@ -3,11 +3,13 @@ package com.freshorangeslices.bloomlevelup.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
@@ -82,10 +85,23 @@ abstract class PlayerMixin {
 		return MiscSkill.fallImmune((Player) (Object) this, mayfly);
 	}
 
-	/** Fitting Armor / Medium: an axe disables your shield for less time. */
-	@ModifyArg(method = "disableShield", at = @At(value = "INVOKE",
-			target = "Lnet/minecraft/world/item/ItemCooldowns;addCooldown(Lnet/minecraft/world/item/Item;I)V"), index = 1)
-	private int bloomlevelup$mediumShield(int ticks) {
-		return ArmorSkill.shieldDisableTicks((Player) (Object) this, ticks);
+	/**
+	 * Fitting Armor / Medium: an axe disables your shield for less time. The shield in use and whether it was already
+	 * down are noted first; afterwards, a cooldown the hit started is shortened, however long it was set for (other
+	 * mods change that line, so Bloom doesn't touch it).
+	 */
+	@Inject(method = "disableShield", at = @At("HEAD"))
+	private void bloomlevelup$shieldBefore(boolean sprinting, CallbackInfo ci, @Share("shield") LocalRef<Item> shield,
+			@Share("wasDown") LocalBooleanRef wasDown) {
+		Player self = (Player) (Object) this;
+		Item item = self.getUseItem().getItem();
+		shield.set(item);
+		wasDown.set(self.getCooldowns().isOnCooldown(item));
+	}
+
+	@Inject(method = "disableShield", at = @At("RETURN"))
+	private void bloomlevelup$mediumShield(boolean sprinting, CallbackInfo ci, @Share("shield") LocalRef<Item> shield,
+			@Share("wasDown") LocalBooleanRef wasDown) {
+		ArmorSkill.shortenShieldDisable((Player) (Object) this, shield.get(), wasDown.get());
 	}
 }

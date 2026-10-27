@@ -14,5 +14,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-      - run: bash check/cog2.sh > out.txt 2>&1; cat out.txt
+      - run: bash check/oc2.sh > out.txt 2>&1; cat out.txt
       - run: python3 check/slice.py out.txt 0 9

@@ -21,3 +21,5 @@ jobs:
         run: gh run download 40430310015 -R ${{ github.repository }} -n legionwarex -D art || true
       - name: lock
         run: python3 check/lockgen.py
+      - run: python3 check/slice.py 0 8
+      - run: python3 check/slice.py 8 16

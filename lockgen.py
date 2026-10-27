@@ -24,12 +24,10 @@ for f in index["files"]:
     in_list = any(v["id"] == vid for v in listed)
     status.append(f"{slug}: {version and version['version_number']} /version/{vid} -> {'OK' if version else '404'}, listed={in_list}, env={f.get('env')}")
     lock[slug] = {"version": version["version_number"] if version else None, "id": vid, "project": pid, "path": f["path"],
-                  "url": f["downloads"][0], "sha1": f["hashes"]["sha1"], "sha512": f["hashes"]["sha512"], "size": f["fileSize"],
+                  "url": f["downloads"][0], "file": f["path"].split("/")[-1], "sha1": f["hashes"]["sha1"], "sha512": f["hashes"]["sha512"], "size": f["fileSize"],
                   "required": [[d.get("project_id"), d.get("version_id")] for d in (version or {}).get("dependencies", []) if d["dependency_type"] == "required"]}
-text = "\n".join(status); print(text)
-esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
-for n, i in enumerate(range(0, len(text), 3900)):
-    print(f"::notice title=lock-status-{n:02d}::" + esc(text[i:i+3900]))
-blob = json.dumps(lock, separators=(",", ":"), sort_keys=True)
-for n, i in enumerate(range(0, len(blob), 3900)):
-    print(f"::notice title=lock-json-{n:02d}::" + esc(blob[i:i+3900]))
+print("\n".join(status))
+for entry in lock.values():
+    entry.pop("url"); entry.pop("path")
+open("lock.json", "w").write(json.dumps(lock, separators=(",", ":"), sort_keys=True))
+print(len(open("lock.json").read()), "bytes")

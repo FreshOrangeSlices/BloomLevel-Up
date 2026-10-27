@@ -520,12 +520,13 @@ def main():
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
     with open(os.path.join(out, "pack.lock.json"), "w") as lock_file:
         lock_file.write(lock_text(game, spec["forge"], used, used_files, lock.get("_comment")))
-    changes = [f"{slug}: {locked.get(slug, 'not locked')} -> {version}" for slug, version in sorted(used.items()) if locked.get(slug) != version]
+    stale = {slug for slug in used if locked.get(slug) != used[slug] or locked_files.get(slug, {}).get("id") != used_files[slug]["id"]}
+    changes = [f"{slug}: {locked.get(slug, 'not locked')} -> {used[slug]}" + ("" if locked.get(slug) != used[slug] else " (the lock's file record was out of date)")
+               for slug in sorted(stale)]
     if changes:
         print(f"::notice title=pack-updates::{esc(('Ignoring the lock (--update): ' if update else 'Not in the lock (newest taken): ') + chr(10) + chr(10).join(changes))}")
         # The lock entries for just those, to merge into pack/pack.lock.json once this build has passed its test.
-        moved = json.dumps({"versions": {slug: used[slug] for slug in sorted(used) if locked.get(slug) != used[slug]},
-                            "files": {slug: used_files[slug] for slug in sorted(used) if locked.get(slug) != used[slug]}},
+        moved = json.dumps({"versions": {slug: used[slug] for slug in sorted(stale)}, "files": {slug: used_files[slug] for slug in sorted(stale)}},
                            separators=(",", ":"))
         for n, i in enumerate(range(0, len(moved), 3800)):
             print(f"::notice title=pack-lock-{n:02d}::{esc(moved[i:i + 3800])}")

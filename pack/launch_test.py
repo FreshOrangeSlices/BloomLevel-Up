@@ -7,7 +7,7 @@ and started; the client (installed and started by portablemc, offline, as the bu
 it) first starts to the title screen (captured: it should be Minecraft's own), then joins it. The server then sets a scene (noon, some Fresh Animations mobs in front of the player) and the screen
 is captured a few times. Then every modded creature is summoned in front of the player a few at a time and
 cleared again (the mob check), so a mod that breaks when one of them spawns or ticks (as Better Mob Combat did with
-Mowzie's Mobs), or that the client can't draw, shows up here instead of in a playthrough. The test server removes an
+many of them), or that the client can't draw, shows up here instead of in a playthrough. The test server removes an
 entity that fails to tick and logs it (Forge's removeErroringEntities) so one bad mob doesn't hide the rest; a
 creature with a spawn egg doing that fails the test, anything else (projectiles, effects summoned bare) is a warning.
 Checks: the client gets in, Bloom switched the pack's resource packs (and shader) on (log line and options.txt), the

@@ -523,6 +523,12 @@ def main():
     changes = [f"{slug}: {locked.get(slug, 'not locked')} -> {version}" for slug, version in sorted(used.items()) if locked.get(slug) != version]
     if changes:
         print(f"::notice title=pack-updates::{esc(('Ignoring the lock (--update): ' if update else 'Not in the lock (newest taken): ') + chr(10) + chr(10).join(changes))}")
+        # The lock entries for just those, to merge into pack/pack.lock.json once this build has passed its test.
+        moved = json.dumps({"versions": {slug: used[slug] for slug in sorted(used) if locked.get(slug) != used[slug]},
+                            "files": {slug: used_files[slug] for slug in sorted(used) if locked.get(slug) != used[slug]}},
+                           separators=(",", ":"))
+        for n, i in enumerate(range(0, len(moved), 3800)):
+            print(f"::notice title=pack-lock-{n:02d}::{esc(moved[i:i + 3800])}")
 
     # ---- summary
     lines = [f"{e['title']} ({e['slug']}) {e['version']} [{e['type']}] -> {e['path']} (client {e['env']['client']}, server {e['env']['server']})"

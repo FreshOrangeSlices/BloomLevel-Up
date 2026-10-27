@@ -3,7 +3,7 @@
   "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, bosses, magic, knights, shaders and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
   "minecraft": "1.20.1",
   "forge": "47.4.28",
-  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight) with Better Mob Combat. After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out (it crashes Better Mob Combat), replacement bosses to come. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
+  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight); Better Mob Combat is shelved (its mob animation hook crashes the server on creatures from Mowzie's, Migamigos, Cataclysm, Legendary Monsters and Monster Expansion, and with the whole pack on vanilla wolves too; its last build is from January 2025). After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out, and a bosses layer in their place. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
   "layers": [
     {
       "name": "core",
@@ -31,7 +31,7 @@
     },
     {
       "name": "creatures",
-      "_comment": "Creatures, bosses and companions, Better Mob Combat (Better Combat's swings for mobs that hold weapons), and the spawn and structure control that keeps them memorable instead of everywhere.",
+      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere.",
       "modrinth": [
         "aquamirae",
         "book-of-dragons",
@@ -40,7 +40,6 @@
         "myths-and-legends",
         "legionary",
         "migamigos",
-        "better-mob-combat",
         "easy-mob-spawn-control",
         "structurify"
       ],
@@ -127,9 +126,10 @@
     },
     {
       "name": "bosses",
-      "_comment": "Bosses in place of Ice and Fire and Mowzie's Mobs (first playtest): L_Ender's Cataclysm (dungeon bosses), Bosses'Rise (Souls-like bosses), The Graveyard (graveyards, crypts and their undead) and Illager Invasion (new illagers to fight, which swing like players with Better Mob Combat). On test: CI summons every one of their creatures with the rest of the pack. Legendary Monsters was tried and left out: its creatures crash Better Mob Combat (as Mowzie's did).",
+      "_comment": "Bosses in place of Ice and Fire and Mowzie's Mobs (first playtest): L_Ender's Cataclysm (dungeon bosses), Legendary Monsters (roaming early, middle and late game bosses), Bosses'Rise (Souls-like bosses), The Graveyard (graveyards, crypts and their undead) and Illager Invasion (new illagers to fight). CI summons every one of their creatures with the rest of the pack.",
       "modrinth": [
         "l_enders-cataclysm",
+        "legendary-monsters",
         "bossesrise",
         "the-graveyard-forge",
         "illager-invasion"

@@ -1,4 +1,4 @@
-# Throwaway (never merged): mods FreshOrangeSlices asked about (asked.py).
+# Throwaway (never merged): Legionary's flaming skull on a dedicated server (skull.sh).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -10,5 +10,9 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - run: python3 check/asked.py
-      - run: python3 check/slice.py asked.txt 0 9
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'microsoft'
+      - run: bash check/skull.sh > out.txt 2>&1; cat out.txt
+      - run: python3 check/slice.py out.txt 0 9

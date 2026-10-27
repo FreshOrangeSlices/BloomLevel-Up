@@ -52,6 +52,7 @@ class Process:
 
     def __init__(self, args, cwd, env=None, stdin=False):
         self.lines = []
+        self.folder = cwd
         # Its own process group, so stopping a launcher stops the game it started too.
         self.process = subprocess.Popen(args, cwd=cwd, env=env, stdin=subprocess.PIPE if stdin else subprocess.DEVNULL,
                                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, start_new_session=True)
@@ -75,8 +76,13 @@ class Process:
         return None
 
     def send(self, command):
-        self.process.stdin.write(command + "\n")
-        self.process.stdin.flush()
+        """Sends a console command; False when the process has gone (its stdin is closed)."""
+        try:
+            self.process.stdin.write(command + "\n")
+            self.process.stdin.flush()
+            return True
+        except (BrokenPipeError, OSError, ValueError):
+            return False
 
 
 def progress(step):
@@ -151,7 +157,19 @@ def modded_entities(mods_dir):
     return sorted(entities), with_egg
 
 
-def mob_check(server, client, player, entities, with_egg, shots):
+def crash_summary(folder, lines):
+    """What a crashed process said: the newest crash report's description and first lines, else its last errors."""
+    reports = sorted((os.path.join(folder, "crash-reports", f) for f in os.listdir(os.path.join(folder, "crash-reports"))),
+                     key=os.path.getmtime) if os.path.isdir(os.path.join(folder, "crash-reports")) else []
+    if reports:
+        text = open(reports[-1], errors="replace").read()
+        start = text.find("Description:")
+        return text[start if start >= 0 else 0:][:2500]
+    errors = [l for l in lines if re.search(r"Exception|Error|Caused by|\tat ", l)]
+    return "\n".join(errors[-30:])[:2500]
+
+
+def mob_check(server, client, player, entities, with_egg, shots, server_dir="."):
     """Summons each modded entity a few at a time in front of the player (in creative, so they leave it alone), lets
     them tick, then clears them. Returns (failures, warnings, summoned)."""
     failures, warnings, summoned = [], [], 0
@@ -169,10 +187,13 @@ def mob_check(server, client, player, entities, with_egg, shots):
         time.sleep(3)
         if n == len(batches) // 2:
             capture(shots, "pack_mobs")
-        server.send(f"execute as {player} at @s run kill @e[type=!minecraft:player,distance=..90]")
+        alive = server.process.poll() is None and server.send(f"execute as {player} at @s run kill @e[type=!minecraft:player,distance=..90]")
         time.sleep(0.5)
-        server.send(f"execute as {player} at @s run tp @e[type=!minecraft:player,distance=..90] ~4000 ~ ~")
+        alive = alive and server.send(f"execute as {player} at @s run tp @e[type=!minecraft:player,distance=..90] ~4000 ~ ~")
         time.sleep(0.5)
+        if not alive or server.process.poll() is not None:
+            failures.append(f"the server stopped during the mob check, with {', '.join(batch)}:\n" + crash_summary(server_dir, server.lines[start:]))
+            break
         summoned += len(batch)
         new = server.lines[start:]
         for entity in sorted(set(re.findall(r"Entity Type: ([a-z0-9_.-]+:[a-z0-9_/.-]+)", "\n".join(new)))):
@@ -180,11 +201,8 @@ def mob_check(server, client, player, entities, with_egg, shots):
         errors = [line for line in new if re.search(r"Exception|/ERROR\]", line) and "Entity Type" not in line]
         if errors and len(warnings) < 40:
             warnings.append(f"server errors while summoning {', '.join(batch)}: " + " / ".join(dict.fromkeys(errors))[:400])
-        if server.process.poll() is not None:
-            failures.append(f"the server stopped during the mob check, with {', '.join(batch)}")
-            break
         if client.process.poll() is not None:
-            failures.append(f"the client stopped during the mob check, with {', '.join(batch)}")
+            failures.append(f"the client stopped during the mob check, with {', '.join(batch)}:\n" + crash_summary(client.folder, client.lines[-200:]))
             break
     server.send(f"gamemode survival {player}")
     return failures, warnings, summoned
@@ -270,12 +288,14 @@ def main():
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
         entities, with_egg = modded_entities(os.path.join(server_dir, "mods"))
         progress(f"mob check: {len(entities)} modded entities")
-        mob_failures, mob_warnings, summoned = mob_check(server, client, PLAYER, entities, with_egg, shots)
+        mob_failures, mob_warnings, summoned = mob_check(server, client, PLAYER, entities, with_egg, shots, server_dir)
         progress(f"mob check done ({summoned} summoned)")
         failures += mob_failures
         notes.append(f"mob check: {summoned} of {len(entities)} modded entities summoned ({len(with_egg)} with a spawn egg)")
         if mob_failures or mob_warnings:
-            print(f"::warning title=pack-mobs::{esc(chr(10).join(mob_failures + mob_warnings)[:3900])}")
+            text = chr(10).join(mob_failures + mob_warnings)
+            for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
+                print(f"::warning title=pack-mobs-{n}::{esc(text[i:i + 3900])}")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")

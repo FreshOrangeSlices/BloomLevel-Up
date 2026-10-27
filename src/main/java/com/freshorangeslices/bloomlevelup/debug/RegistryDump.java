@@ -27,14 +27,14 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.TickEvent;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 
 /**
- * A tool for supporting modpacks, off unless the server starts with {@code -Dbloomlevelup.dump=<file>}: once the
- * server is up it writes every item (its classes, tags, damage, armor, Better Combat category) and every entity type
+ * A tool for supporting modpacks, off unless the server starts with {@code -Dbloomlevelup.dump=<file>}: two seconds after
+ * the server is up it writes every item (its classes, tags, damage, armor, Better Combat category) and every entity type
  * (health, armor, whether it keeps a boss bar) to that file, one JSON object per line. CI runs it on LegionWareX to
  * sort the pack's weapons, armor and bosses into Bloom's tags. Does nothing to the world: the entities it measures are
  * made and thrown away, never added.
@@ -49,7 +49,13 @@ public final class RegistryDump {
 		String target = System.getProperty("bloomlevelup.dump");
 
 		if (target != null && !target.isBlank()) {
-			MinecraftForge.EVENT_BUS.addListener((ServerStartedEvent event) -> write(event.getServer().overworld(), Path.of(target)));
+			// Two seconds after the start, so other mods' own server-start loading (Better Combat's weapon data) is done.
+			int[] ticks = {0};
+			MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> {
+				if (event.phase == TickEvent.Phase.END && ++ticks[0] == 40) {
+					write(event.getServer().overworld(), Path.of(target));
+				}
+			});
 		}
 	}
 

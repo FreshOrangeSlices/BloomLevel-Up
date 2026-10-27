@@ -129,6 +129,10 @@
     "mes-moogs-end-structures",
     "universal-graves"
   ],
+  "_not_dependencies": "Modrinth lists these as required, but only for another loader's half of a multi-loader jar: not added (the fabric.mod.json check still catches a real missing library).",
+  "not_dependencies": {
+    "kotlin-lang-forge": "Kotlin for Forge/NeoForge; on Fabric, Fabric Language Kotlin does that job"
+  },
   "client_presets": {
     "resource_packs": [
       "id:continuity:default",

@@ -131,6 +131,14 @@ def stop(process):
             return
 
 
+# Known problems the mob check steps over (so it can test everything after them), each with what happens: they're
+# reported every run, and the pack has to deal with them some other way.
+KNOWN = {
+    "mythsandlegends:cogwork_construct": "Myths & Legends 1.0.6's renderer reads its entity before GeckoLib sets it, so the "
+                                         "first one a player sees crashes their game",
+}
+
+
 def modded_entities(mods_dir):
     """Entity ids from the mods' language files (entity.<mod>.<name>), and which of them have a spawn egg."""
     entities, eggs = set(), set()
@@ -179,6 +187,8 @@ def mob_check(server, client, player, entities, with_egg, shots, server_dir=".")
     server.send("gamerule doTileDrops false")
     server.send("gamerule mobGriefing false")
     time.sleep(1)
+    warnings += [f"skipped {entity} (known: {why})" for entity, why in KNOWN.items() if entity in entities]
+    entities = [entity for entity in entities if entity not in KNOWN]
     batches = [entities[i:i + batch_size] for i in range(0, len(entities), batch_size)]
     for n, batch in enumerate(batches):
         start = len(server.lines)

@@ -11,8 +11,8 @@
 > `docs/DECISIONS.md`. The rest of this README describes the Fabric 26.3 build on `main`.
 >
 > **LegionWareX (Forge pack):** each **build** run on this branch also makes **legionwarex**: FreshOrangeSlices'
-> medieval high-fantasy pack built around Bloom (Better Combat, Fresh Animations, dragons and monsters, Iron's Spells
-> and the RPG Series' Paladins & Priests and Rogues & Warriors, knights' gear, QoL). It's a Modrinth pack file (import
+> medieval high-fantasy pack built around Bloom (Better Combat, Fresh Animations, shaders, dragons, monsters and bosses,
+> Iron's Spells and the RPG Series' Paladins & Priests and Rogues & Warriors, knights' gear, QoL). It's a Modrinth pack file (import
 > it in the Modrinth App or Prism Launcher) and a server zip (Java 17; `start.sh` / `start.bat` install Forge on the
 > first start). Fresh Animations is switched on by itself at the first launch. Bloom itself stays a standalone mod:
 > the pack adds its own settings around it, never inside it.

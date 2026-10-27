@@ -117,6 +117,12 @@ public final class PackDefaults {
 		return out;
 	}
 
+	/**
+	 * Where the shader goes: Oculus (Iris's Forge port) keeps Iris's settings in oculus.properties, which is written; an
+	 * iris.properties already there (an older install, which Oculus moves over) is updated too.
+	 */
+	public static final List<String> SHADER_CONFIGS = List.of("oculus.properties", "iris.properties");
+
 	/** iris.properties with shaders on and the pack's shader picked; the player's other Iris settings stay. */
 	public static List<String> mergeIris(List<String> lines, String shaderPack) {
 		List<String> out = new ArrayList<>();
@@ -138,7 +144,7 @@ public final class PackDefaults {
 	}
 
 	/**
-	 * Applies the defaults in {@code configDir} to {@code optionsFile} and Iris's config, unless this exact version
+	 * Applies the defaults in {@code configDir} to {@code optionsFile} and Oculus's config, unless this exact version
 	 * of them was applied before. Returns whether it changed anything.
 	 *
 	 * <p>{@code dataVersion} (the game's, from its version.json) goes on an options.txt Bloom writes from nothing: an
@@ -178,9 +184,14 @@ public final class PackDefaults {
 		}
 
 		if (defaults.shaderPack() != null) {
-			Path iris = configDir.resolve("iris.properties");
-			List<String> lines = Files.isRegularFile(iris) ? Files.readAllLines(iris, StandardCharsets.UTF_8) : List.of();
-			Files.write(iris, mergeIris(lines, defaults.shaderPack()), StandardCharsets.UTF_8);
+			for (String name : SHADER_CONFIGS) {
+				Path shaderConfig = configDir.resolve(name);
+
+				if (name.equals(SHADER_CONFIGS.get(0)) || Files.isRegularFile(shaderConfig)) {
+					List<String> lines = Files.isRegularFile(shaderConfig) ? Files.readAllLines(shaderConfig, StandardCharsets.UTF_8) : List.of();
+					Files.write(shaderConfig, mergeIris(lines, defaults.shaderPack()), StandardCharsets.UTF_8);
+				}
+			}
 		}
 
 		Files.createDirectories(marker.getParent());

@@ -1,9 +1,9 @@
 {
   "name": "LegionWareX",
-  "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, magic, knights and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
+  "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, bosses, magic, knights, shaders and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
   "minecraft": "1.20.1",
   "forge": "47.4.28",
-  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight); Better Mob Combat is left out (its last build crashes the server on Mowzie's Mobs). Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Novum's Altitude was taken out after the first playtest (its sky effects made the world disorienting). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
+  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight) with Better Mob Combat. After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out (it crashes Better Mob Combat), replacement bosses to come. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
   "layers": [
     {
       "name": "core",
@@ -31,17 +31,16 @@
     },
     {
       "name": "creatures",
-      "_comment": "Creatures, bosses and companions, with the spawn and structure control that keeps them memorable instead of everywhere.",
+      "_comment": "Creatures, bosses and companions, Better Mob Combat (Better Combat's swings for mobs that hold weapons), and the spawn and structure control that keeps them memorable instead of everywhere.",
       "modrinth": [
         "aquamirae",
-        "ice-and-fire-dragons",
         "book-of-dragons",
-        "mowzies-mobs",
         "monster-expansion",
         "mutant-monsters",
         "myths-and-legends",
         "legionary",
         "migamigos",
+        "better-mob-combat",
         "easy-mob-spawn-control",
         "structurify"
       ],
@@ -87,7 +86,7 @@
     },
     {
       "name": "animation-and-qol",
-      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat), and the quality-of-life and multiplayer mods.",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked and Solas to swap to), and the quality-of-life and multiplayer mods.",
       "modrinth": [
         "punchy-fpa",
         "fwa",
@@ -107,7 +106,10 @@
         "xaeros-world-map",
         "waystones",
         "keyvision",
-        "modifier-keybinds"
+        "modifier-keybinds",
+        "oculus",
+        "complementary-unbound",
+        "solas-shader"
       ],
       "external": [
         {
@@ -121,6 +123,17 @@
           "client": "required",
           "server": "unsupported"
         }
+      ]
+    },
+    {
+      "name": "bosses",
+      "_comment": "Bosses in place of Ice and Fire and Mowzie's Mobs (first playtest): L_Ender's Cataclysm (dungeon bosses), Legendary Monsters (roaming early, middle and late game bosses), Bosses'Rise (Souls-like bosses), The Graveyard (graveyards, crypts and their undead) and Illager Invasion (new illagers to fight, which swing like players with Better Mob Combat). On test: CI summons every one of their creatures with the rest of the pack.",
+      "modrinth": [
+        "l_enders-cataclysm",
+        "legendary-monsters",
+        "bossesrise",
+        "the-graveyard-forge",
+        "illager-invasion"
       ]
     }
   ],
@@ -145,9 +158,14 @@
       "fresh-animations-objects"
     ],
     "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin).",
+    "shader": "complementary-unbound",
+    "_shader": "Shaders on with Complementary Unbound at first launch (and once per change of this line); K turns shaders off, O picks another pack (Solas ships too).",
+    "keys": {
+      "iris.keybind.reload": "key.keyboard.unknown"
+    },
+    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds).",
     "files": {
-      "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Ice and Fire swaps in its book menu, Aquamirae its frozen-sea panorama and logo.",
-      "config/iceandfire-client.toml": "[general]\n\t\"Custom main menu\" = false\n",
+      "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo.",
       "config/obscuria/aquamirae-early.json": {
         "themed_main_menu": false
       }

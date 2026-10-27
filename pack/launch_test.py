@@ -5,10 +5,16 @@ Usage (inside a virtual display): python3 pack/launch_test.py <server folder> <c
 The server folder is the one boot_server.py left (Forge installed). It's switched to a flat world in offline mode
 and started; the client (installed and started by portablemc, offline, as the build_pack.py --client-run folder has
 it) first starts to the title screen (captured: it should be Minecraft's own), then joins it. The server then sets a scene (noon, some Fresh Animations mobs in front of the player) and the screen
-is captured a few times. Checks: the client gets in, Bloom switched the pack's resource packs on (log line and
-options.txt), and nothing crashed. Results and the client's warnings go out as GitHub annotations; the screenshots
-are written as PNGs for the screenshot job.
+is captured a few times. Then every modded creature is summoned in front of the player a few at a time and
+cleared again (the mob check), so a mod that breaks when one of them spawns or ticks (as Better Mob Combat did with
+Mowzie's Mobs), or that the client can't draw, shows up here instead of in a playthrough. The test server removes an
+entity that fails to tick and logs it (Forge's removeErroringEntities) so one bad mob doesn't hide the rest; a
+creature with a spawn egg doing that fails the test, anything else (projectiles, effects summoned bare) is a warning.
+Checks: the client gets in, Bloom switched the pack's resource packs (and shader) on (log line and options.txt), the
+mob check, and nothing crashed. Results and the client's warnings go out as GitHub annotations; the screenshots are
+written as PNGs for the screenshot job.
 """
+import json
 import os
 import re
 import shutil
@@ -17,6 +23,7 @@ import subprocess
 import sys
 import threading
 import time
+import zipfile
 
 PLAYER = "BloomTester"
 TITLE_LIMIT = 1200  # seconds for the first start (installs Forge's client, then loads every mod) to reach the title screen
@@ -112,6 +119,71 @@ def stop(process):
             return
 
 
+def modded_entities(mods_dir):
+    """Entity ids from the mods' language files (entity.<mod>.<name>), and which of them have a spawn egg."""
+    entities, eggs = set(), set()
+    for jar in sorted(os.listdir(mods_dir)):
+        try:
+            archive = zipfile.ZipFile(os.path.join(mods_dir, jar))
+        except (zipfile.BadZipFile, IsADirectoryError):
+            continue
+        for name in archive.namelist():
+            match = re.fullmatch(r"assets/([a-z0-9_.-]+)/lang/en_us\.json", name)
+            if not match or match.group(1) == "minecraft":
+                continue
+            try:
+                lang = json.loads(archive.read(name).decode("utf-8-sig", errors="replace"))
+            except ValueError:
+                continue
+            for key in lang:
+                parts = key.split(".")
+                if len(parts) == 3 and parts[0] == "entity" and parts[1] != "minecraft" and re.fullmatch(r"[a-z0-9_/-]+", parts[2]):
+                    entities.add(f"{parts[1]}:{parts[2]}")
+                elif len(parts) == 3 and parts[0] == "item" and "egg" in parts[2]:
+                    eggs.add((parts[1], parts[2]))
+    with_egg = {e for e in entities if any(ns == e.split(":")[0] and e.split(":")[1] in item for ns, item in eggs)}
+    return sorted(entities), with_egg
+
+
+def mob_check(server, client, player, entities, with_egg, shots):
+    """Summons each modded entity a few at a time in front of the player (in creative, so they leave it alone), lets
+    them tick, then clears them. Returns (failures, warnings, summoned)."""
+    failures, warnings, summoned = [], [], 0
+    batch_size = 6
+    server.send(f"gamemode creative {player}")
+    server.send("gamerule doMobLoot false")
+    server.send("gamerule doTileDrops false")
+    server.send("gamerule mobGriefing false")
+    time.sleep(1)
+    batches = [entities[i:i + batch_size] for i in range(0, len(entities), batch_size)]
+    for n, batch in enumerate(batches):
+        start = len(server.lines)
+        for i, entity in enumerate(batch):
+            server.send(f"execute as {player} at @s run summon {entity} ~{i * 3 - 7.5} ~ ~14")
+        time.sleep(3)
+        if n == len(batches) // 2:
+            capture(shots, "pack_mobs")
+        server.send(f"execute as {player} at @s run kill @e[type=!minecraft:player,distance=..90]")
+        time.sleep(0.5)
+        server.send(f"execute as {player} at @s run tp @e[type=!minecraft:player,distance=..90] ~4000 ~ ~")
+        time.sleep(0.5)
+        summoned += len(batch)
+        new = server.lines[start:]
+        for entity in sorted(set(re.findall(r"Entity Type: ([a-z0-9_.-]+:[a-z0-9_/.-]+)", "\n".join(new)))):
+            (failures if entity in with_egg else warnings).append(f"{entity} failed to tick on the server (removed)")
+        errors = [line for line in new if re.search(r"Exception|/ERROR\]", line) and "Entity Type" not in line]
+        if errors and len(warnings) < 40:
+            warnings.append(f"server errors while summoning {', '.join(batch)}: " + " / ".join(dict.fromkeys(errors))[:400])
+        if server.process.poll() is not None:
+            failures.append(f"the server stopped during the mob check, with {', '.join(batch)}")
+            break
+        if client.process.poll() is not None:
+            failures.append(f"the client stopped during the mob check, with {', '.join(batch)}")
+            break
+    server.send(f"gamemode survival {player}")
+    return failures, warnings, summoned
+
+
 def capture(folder, name):
     """The whole virtual screen, as a PNG: ffmpeg when the machine has it, else ImageMagick's import."""
     path = os.path.join(folder, f"bloom_{name}.png")
@@ -135,6 +207,10 @@ def main():
 
     # ---- the server: a fresh flat world, offline so the test client can join
     subprocess.run(["rm", "-rf", os.path.join(server_dir, "world")])
+    # A mob that fails to tick is removed and logged instead of stopping the server (the mob check reports it).
+    os.makedirs(os.path.join(server_dir, "defaultconfigs"), exist_ok=True)
+    open(os.path.join(server_dir, "defaultconfigs", "forge-server.toml"), "w").write(
+        "[general]\n\tremoveErroringBlockEntities = true\n\tremoveErroringEntities = true\n")
     set_properties(os.path.join(server_dir, "server.properties"), {
         "online-mode": "false", "level-type": "minecraft\\:flat", "difficulty": "easy", "spawn-protection": "0",
         "generate-structures": "false", "view-distance": "6", "simulation-distance": "5",
@@ -182,6 +258,13 @@ def main():
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 180 15")
         time.sleep(4)
         capture(shots, "pack_back")
+        server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
+        entities, with_egg = modded_entities(os.path.join(server_dir, "mods"))
+        mob_failures, mob_warnings, summoned = mob_check(server, client, PLAYER, entities, with_egg, shots)
+        failures += mob_failures
+        notes.append(f"mob check: {summoned} of {len(entities)} modded entities summoned ({len(with_egg)} with a spawn egg)")
+        if mob_failures or mob_warnings:
+            print(f"::warning title=pack-mobs::{esc(chr(10).join(mob_failures + mob_warnings)[:3900])}")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")
@@ -194,6 +277,17 @@ def main():
         failures.append("Bloom didn't apply the pack's resource packs (no 'Bloom Pack defaults applied' line)")
     if "FreshAnimations" not in packs_line:
         failures.append(f"Fresh Animations isn't on in options.txt ({packs_line or 'no resourcePacks line'})")
+    # The pack's shader, when it has one: switched on in Oculus's settings, and what Oculus said about it.
+    defaults_file = os.path.join(game_dir, "config", "bloomlevelup", "pack-defaults.properties")
+    wanted = next((l.split("=", 1)[1] for l in open(defaults_file).read().splitlines() if l.startswith("shaderPack=")), None) \
+        if os.path.exists(defaults_file) else None
+    if wanted:
+        oculus = os.path.join(game_dir, "config", "oculus.properties")
+        settings = open(oculus).read() if os.path.exists(oculus) else ""
+        if f"shaderPack={wanted}" not in settings or "enableShaders=true" not in settings:
+            failures.append(f"the pack's shader {wanted} isn't on in config/oculus.properties")
+        said = [l for l in client_log if re.search(r"(?i)oculus|iris", l) and re.search(r"(?i)shader ?pack|pipeline|compil", l)]
+        notes.append("shader: " + (" / ".join(dict.fromkeys(said[:4])) if said else f"{wanted} (Oculus said nothing about it)")[:600])
     crash = [l for l in client_log if re.search(r"---- Minecraft Crash Report|Exception in thread \"Render thread\"|Game crashed", l)]
     if crash:
         failures.append("the client crashed")
@@ -207,7 +301,7 @@ def main():
 
     # ---- report
     mods = next((l for l in client_log if re.search(r"Found \d+ mod|Loading \d+ mods|Mod List", l)), "")
-    summary = [f"joined: {'yes' if joined else 'no'}", applied or "no pack defaults line", packs_line, mods.strip()]
+    summary = [f"joined: {'yes' if joined else 'no'}", applied or "no pack defaults line", packs_line, mods.strip()] + notes
     print(f"::notice title=pack-launch::{esc(chr(10).join(summary)[:3900])}")
     problems = [l for l in client_log if re.search(r"/ERROR\]|Exception|Caused by|Mixin apply failed|InvalidInjection|Missing or unsupported", l)]
     if problems:

@@ -87,6 +87,19 @@ class PackDefaultsTest {
 	}
 
 	@Test
+	void anOlderIrisFileIsUpdatedToo() throws Exception {
+		Path config = Files.createTempDirectory("bloom-pack-defaults-iris").resolve("config");
+		Files.createDirectories(config.resolve("bloomlevelup"));
+		Files.writeString(config.resolve(PackDefaults.FILE), "shaderPack=C.zip\n", StandardCharsets.UTF_8);
+		Files.writeString(config.resolve("iris.properties"), "enableShaders=false\nshaderPack=Old.zip\n", StandardCharsets.UTF_8);
+
+		assertTrue(PackDefaults.apply(config, config.resolve("options.txt"), 3465, line -> { }));
+		assertTrue(Files.readString(config.resolve("oculus.properties")).contains("shaderPack=C.zip"));
+		assertTrue(Files.readString(config.resolve("iris.properties")).contains("enableShaders=true"));
+		assertTrue(Files.readString(config.resolve("iris.properties")).contains("shaderPack=C.zip"));
+	}
+
+	@Test
 	void appliesOncePerVersionOfTheDefaults() throws Exception {
 		Path dir = Files.createTempDirectory("bloom-pack-defaults");
 		Path config = dir.resolve("config");
@@ -100,7 +113,8 @@ class PackDefaultsTest {
 		assertTrue(Files.readString(options).startsWith("version:4671\n"), "a version line first, so the game doesn't run the old key fixes");
 		assertTrue(Files.readString(options).contains("\"file/FA.zip\""));
 		assertTrue(Files.readString(options).contains("key_iris.keybind.reload:key.keyboard.unknown"));
-		assertTrue(Files.readString(config.resolve("iris.properties")).contains("shaderPack=C.zip"));
+		assertTrue(Files.readString(config.resolve("oculus.properties")).contains("shaderPack=C.zip"), "Oculus's settings file");
+		assertFalse(Files.exists(config.resolve("iris.properties")), "no iris.properties made for nothing");
 
 		// The player switches the pack off: the same defaults don't switch it back on.
 		Files.writeString(options, "resourcePacks:[\"vanilla\"]\n", StandardCharsets.UTF_8);

@@ -217,10 +217,11 @@ jobs:
         run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28 ${{ matrix.variant == 'bettercombat' && 'bc' || '' }}
 
   # LegionWareX (pack/pack.json): FreshOrangeSlices' medieval high-fantasy pack built around Bloom, as a Modrinth pack
-  # file (.mrpack) and a server zip, under "Artifacts" as legionwarex. Its mods are in four cumulative layers and each is
+  # file (.mrpack) and a server zip, under "Artifacts" as legionwarex. Its mods are in five cumulative layers and each is
   # tested on its own: a real Forge server boots from the layer's server zip the way a friend would start it
   # (installing Forge first), then a real Forge client with the layer's client side starts to the title screen and
-  # joins it (pack/launch_test.py: no crash, Fresh Animations on). The pack-screenshots jobs print what each saw.
+  # joins it (pack/launch_test.py: no crash, Fresh Animations and the shader on, every modded creature summoned once).
+  # The pack-screenshots jobs print what each saw.
   pack:
     needs: build
     if: ${{ !cancelled() }}
@@ -228,7 +229,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        layers: [1, 2, 3, 4]
+        layers: [1, 2, 3, 4, 5]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -245,7 +246,7 @@ jobs:
       - name: build the pack
         run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out --layers ${{ matrix.layers }} --client-run game
       - name: capture the pack
-        if: matrix.layers == 4
+        if: matrix.layers == 5
         uses: actions/upload-artifact@v7
         with:
           name: legionwarex
@@ -289,8 +290,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        layers: [1, 2, 3, 4]
-        shot: [pack_title, pack_0, pack_back]
+        layers: [1, 2, 3, 4, 5]
+        shot: [pack_title, pack_0, pack_back, pack_mobs]
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

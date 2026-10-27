@@ -148,7 +148,7 @@ def loader_for(project):
     if kind == "resourcepack":
         return "minecraft"
     if kind == "shader":
-        return "oculus"
+        return "iris"  # Modrinth files shader packs under Iris (and OptiFine); Oculus, Iris's Forge port, reads the same packs
     if kind == "datapack" or ("forge" not in project.get("loaders", []) and "datapack" in project.get("loaders", [])):
         return "datapack"
     return "forge"
@@ -418,7 +418,7 @@ def main():
                 if not in_range(provided[mod_id], wanted):
                     problems.append(f"{where}: {jar} needs {mod_id} {wanted}, the pack has {provided[mod_id]}")
 
-    # ---- first-launch look: the resource packs on (bottom to top). Not an options.txt (launchers don't reliably copy
+    # ---- first-launch look: the resource packs on (bottom to top) and the shader picked. Not an options.txt (launchers don't reliably copy
     # one, and it would wipe a player's settings on every update): a defaults file Bloom applies just before the game
     # reads its options, once per change (config/PackDefaults.java, client/mixin/OptionsMixin). In overrides, so every
     # install gets it.
@@ -428,6 +428,9 @@ def main():
     lines = [f"# {name}: switched on by Bloom Level-Up before the game reads its options, once per change of this file."]
     if packs:
         lines.append("resourcePacks=" + "|".join(packs))
+    shader = presets.get("shader")
+    if shader in by_slug:  # (not when the layers built leave it out)
+        lines.append("shaderPack=" + os.path.basename(by_slug[shader]["path"]))
     if presets.get("keys"):
         lines.append("keys=" + "|".join(f"{binding}:{key}" for binding, key in presets["keys"].items()))
     if len(lines) > 1:

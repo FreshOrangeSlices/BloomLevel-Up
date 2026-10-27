@@ -175,10 +175,10 @@ jobs:
           # Sodium and Iris switch the game to OpenGL (see build.gradle), and Xvfb's GLX has no visual the game
           # accepts: no X at all, SDL's offscreen video driver (OpenGL through Mesa's EGL, software rendering).
           # Watchdog: the run normally takes under ten minutes; if it's still going after 20, dump every JVM's
-          # threads (the report shows where the game is stuck) and stop it.
+          # threads (the report shows where the game is stuck) and kill it (-9: a stuck game's shutdown hook can hang too).
           ( sleep 1200; echo "watchdog: still running after 20 minutes" >> watchdog.txt
-            for pid in $(jcmd -l | awk '{print $1}'); do jcmd "$pid" Thread.print > "threads-$pid.txt" 2>&1; done
-            pkill -f GradleWrapperMain; pkill java ) &
+            for pid in $(jcmd -l | awk '{print $1}'); do timeout 30 jcmd "$pid" Thread.print > "threads-$pid.txt" 2>&1; done
+            pkill -9 java ) &
           watchdog=$!
           SDL_VIDEO_DRIVER=offscreen ./gradlew runClientGameTestPack --stacktrace 2>&1 | tee client-pack.log
           kill $watchdog 2>/dev/null || true
@@ -285,24 +285,6 @@ jobs:
           if follow:
               print(f"::notice title=client-pack-warning-details::{esc(chr(10).join(follow)[:3900])}")
           PY
-      - name: configs the new mods wrote (graves, Dynamic FPS)
-        if: always()
-        run: |
-          cd build/run/clientGameTestPack/config 2>/dev/null || exit 0
-          python3 - <<'PY'
-          import glob, os
-          files = [f for f in ("universal-graves/config.json", "dynamic_fps.json") if os.path.isfile(f)]
-          shown = 0
-          for f in files:
-              body = open(f, encoding="utf-8", errors="replace").read()
-              for part in range(0, len(body), 3800):
-                  if shown == 9:
-                      break
-                  text = body[part:part + 3800].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-                  print(f"::notice title=config-{f.replace('/', '_')}-{part // 3800}::{text}")
-                  shown += 1
-          PY
-          echo "::notice title=config-list::$(ls | tr '\n' ' ')"
       - name: capture screenshots and logs
         if: always()
         uses: actions/upload-artifact@v7

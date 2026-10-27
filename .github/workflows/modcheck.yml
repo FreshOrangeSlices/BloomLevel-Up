@@ -19,5 +19,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh run download 40430310015 -R ${{ github.repository }} -n legionwarex -D art || true
-      - name: book of dragons
-        run: python3 check/bod2.py
+      - name: lock
+        run: python3 check/lockgen.py

@@ -1,9 +1,8 @@
-# Throwaway (never merged): LegionWareX's registry from a real server (dump.sh), pushed to the ci/data branch.
+# Throwaway (never merged): LegionWareX's mod descriptions (desc.py), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
   contents: write
-  actions: read
 jobs:
   check:
     runs-on: ubuntu-24.04
@@ -17,8 +16,10 @@ jobs:
         with:
           ref: forge-1.20.1
           path: bloom
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'microsoft'
-      - run: bash check/dump.sh
+      - run: python3 check/desc.py
+      - run: |
+          git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
+          cp descriptions.json data/ && cd data
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qam "LegionWareX mod descriptions" || git -c user.name=ci -c user.email=ci@example.invalid commit -qm "LegionWareX mod descriptions" --allow-empty
+          git add -A && git -c user.name=ci -c user.email=ci@example.invalid commit -qm "descriptions" || true
+          git push -q origin ci/data

@@ -1,4 +1,4 @@
-# Throwaway (never merged): checks the Medieval High Fantasy master list for Forge 1.20.1 builds (check.py).
+# Throwaway (never merged): what LegionWareX's mods do to world generation (biomes.py).
 name: modcheck
 on: [push, workflow_dispatch]
 jobs:
@@ -6,5 +6,17 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
-      - name: check the list
-        run: bash find6.sh
+        with:
+          path: check
+      - uses: actions/checkout@v6
+        with:
+          ref: forge-1.20.1
+          path: bloom
+      - name: download the pack's mods
+        run: |
+          python3 -c "import zipfile; zipfile.ZipFile('dummy.jar','w').writestr('x.txt','x')"
+          python3 bloom/pack/build_pack.py dummy.jar check out --client-run game || true
+          python3 bloom/pack/build_pack.py dummy.jar check out2 --layers 2 --client-run game2 > /dev/null 2>&1 || true
+          ls game/mods | wc -l
+      - name: world generation
+        run: python3 check/biomes.py game/mods

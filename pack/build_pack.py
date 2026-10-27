@@ -1,12 +1,17 @@
 """Builds the Forge 1.20.1 pack in pack/pack.json (LegionWareX) for sharing with friends: a Modrinth pack file (.mrpack)
 and a ready-to-run server folder.
 
-Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--layers N] [--client-run <dir>] [--without <slug,slug>]
+Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--layers N] [--client-run <dir>] [--without <slug,slug>] [--update]
 
 The pack's mods are in cumulative layers; --layers N builds only the first N (CI tests each, to tell which layer
 breaks what), and without it every layer goes in. Modrinth mods are linked (newest 1.20.1 Forge build, plus every
 required dependency); Bloom and the CurseForge-only files ("external") are packed inside, which is fine for a private
-share but not for publishing. Every jar is downloaded and checked: each
+share but not for publishing.
+
+Every Modrinth project is pinned to the version in pack/pack.lock.json (the versions last tested), so a build only
+changes when the lock does; a project the lock doesn't name gets its newest build. --update ignores the lock and takes
+the newest of everything. Either way the build writes the versions it used to <out dir>/pack.lock.json and lists what
+differs from the committed lock (pack-updates), so the lock can be moved forward on purpose. Every jar is downloaded and checked: each
 mod's mandatory mod ids (from its META-INF/mods.toml) have to be in the pack, on the client and on the server, or the
 build fails. Prints a summary as GitHub annotations.
 
@@ -244,6 +249,9 @@ def main():
         at = args.index("--client-run")
         client_run = args[at + 1]
         del args[at:at + 2]
+    update = "--update" in args
+    if update:
+        args.remove("--update")
     layers = None
     if "--layers" in args:
         at = args.index("--layers")
@@ -273,6 +281,9 @@ def main():
         notes.append("layers: " + ", ".join(layer["name"] for layer in chosen))
     queue = [(slug, None) for slug in spec["modrinth"]]
     seen = set()
+    lock_path = os.path.join(os.path.dirname(__file__), "pack.lock.json")
+    locked = {} if not os.path.exists(lock_path) else json.load(open(lock_path)).get("versions", {})
+    used = {}
 
     # ---- Modrinth: each listed project and its required dependencies
     while queue:
@@ -284,13 +295,23 @@ def main():
         if project["id"] in seen:
             continue
         seen.add(project["id"])
-        version = api(f"/version/{wanted_version}") if wanted_version else None
-        if version is None or game not in version.get("game_versions", []) or (
-                loader_for(project) == "forge" and "forge" not in version.get("loaders", [])):
-            version = newest_version(project, game, loader_for(project))
+        version = None
+        pin = None if update else locked.get(project["slug"])
+        if pin:
+            candidates = api(f"/project/{project['id']}/version", game_versions=[game], loaders=[loader_for(project)]) or []
+            version = next((v for v in candidates if v["version_number"] == pin), None)
+            if version is None:
+                problems.append(f"{project['title']} ({project['slug']}): the locked version {pin} isn't on Modrinth any more")
+                continue
+        if version is None:
+            version = api(f"/version/{wanted_version}") if wanted_version else None
+            if version is None or game not in version.get("game_versions", []) or (
+                    loader_for(project) == "forge" and "forge" not in version.get("loaders", [])):
+                version = newest_version(project, game, loader_for(project))
         if version is None:
             problems.append(f"{project['title']} ({project['slug']}) has no {game} {loader_for(project)} build")
             continue
+        used[project["slug"]] = version["version_number"]
         file = pick_file(version)
         datapack = loader_for(project) == "datapack"
         folder = "datapacks" if datapack else FOLDERS.get(project.get("project_type"), "mods")
@@ -459,15 +480,29 @@ def main():
             with open(os.path.join(client_run, path), "wb") as target:
                 target.write(data)
 
-    # ---- summary
+    # ---- the versions used (the lock), and how they differ from the committed one
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+    with open(os.path.join(out, "pack.lock.json"), "w") as lock_file:
+        json.dump({"minecraft": game, "forge": spec["forge"], "versions": dict(sorted(used.items()))}, lock_file, indent=2)
+        lock_file.write("\n")
+    changes = [f"{slug}: {locked.get(slug, 'not locked')} -> {version}" for slug, version in sorted(used.items()) if locked.get(slug) != version]
+    if changes:
+        print(f"::notice title=pack-updates::{esc(('Ignoring the lock (--update): ' if update else 'Not in the lock (newest taken): ') + chr(10) + chr(10).join(changes))}")
+
+    # ---- summary
     lines = [f"{e['title']} ({e['slug']}) {e['version']} [{e['type']}] -> {e['path']} (client {e['env']['client']}, server {e['env']['server']})"
              for e in files]
     lines += [f"packed inside: {path}" for path in overrides]
     lines += [f"client preset: {path}" for path in pack_defaults]
-    text = "\n".join(lines)
-    for n in range(0, len(text), 3800):
-        print(f"::notice title=pack-contents-{n // 3800:02d}::{esc(text[n:n + 3800])}")
+    chunks, current = [], ""
+    for line in lines:
+        if current and len(current) + len(line) + 1 > 3800:
+            chunks.append(current)
+            current = ""
+        current += line + "\n"
+    chunks.append(current)
+    for n, chunk in enumerate(chunks):
+        print(f"::notice title=pack-contents-{n:02d}::{esc(chunk)}")
     size = os.path.getsize(pack_path) / 1e6
     print(f"::notice title=pack-summary::{esc(f'{len(files)} linked + {len(overrides)} packed inside; pack file {size:.1f} MB; server mods: {len(server_mods)}' + chr(10) + chr(10).join(notes))}")
     with open(os.path.join(out, "server-mods.txt"), "w") as listing:

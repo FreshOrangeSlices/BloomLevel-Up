@@ -79,6 +79,12 @@ class Process:
         self.process.stdin.flush()
 
 
+def progress(step):
+    """A milestone, with the machine's free memory, printed as it happens (so a run that dies shows how far it got)."""
+    free = next((int(l.split()[1]) // 1024 for l in open("/proc/meminfo") if l.startswith("MemAvailable:")), -1)
+    print(f"::notice title=pack-progress::{step} ({free} MB free, {time.strftime('%H:%M:%S')})", flush=True)
+
+
 def set_properties(path, values):
     lines = open(path).read().splitlines() if os.path.exists(path) else []
     keys = {line.split("=", 1)[0] for line in lines if "=" in line}
@@ -219,6 +225,7 @@ def main():
     if not server.wait_for(r"\]: Done \(|Done \([0-9.]+s\)!", 600):
         print(f"::error title=pack-launch::The server didn't come up. Last lines:%0A{esc(chr(10).join(server.lines[-40:])[:3800])}")
         sys.exit(1)
+    progress("server up")
 
     # ---- the client: Forge installed by portablemc, the pack's client side already in the game folder
     options = os.path.join(game_dir, "options.txt")
@@ -240,12 +247,14 @@ def main():
         failures.append("the client didn't reach the title screen")
         capture(shots, "pack_title")
     stop(title)
+    progress("title screen done")
 
     # Second start: straight into the server.
     client = Process(launch + ["--join-server", "127.0.0.1"], game_dir)
     joined = server.wait_for(rf"{PLAYER} joined the game", JOIN_LIMIT)
     started = time.time()
 
+    progress("joined" if joined else "didn't join")
     if joined:
         for command in SCENE:
             server.send(command)
@@ -260,7 +269,9 @@ def main():
         capture(shots, "pack_back")
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
         entities, with_egg = modded_entities(os.path.join(server_dir, "mods"))
+        progress(f"mob check: {len(entities)} modded entities")
         mob_failures, mob_warnings, summoned = mob_check(server, client, PLAYER, entities, with_egg, shots)
+        progress(f"mob check done ({summoned} summoned)")
         failures += mob_failures
         notes.append(f"mob check: {summoned} of {len(entities)} modded entities summoned ({len(with_egg)} with a spawn egg)")
         if mob_failures or mob_warnings:

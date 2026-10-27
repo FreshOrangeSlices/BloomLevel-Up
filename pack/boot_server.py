@@ -14,8 +14,11 @@ import subprocess
 import sys
 import time
 import zipfile
+import shutil
+import signal
+import threading
 
-LIMIT = 900  # seconds (the first start installs Forge too)
+LIMIT = 600  # seconds (the first start installs Forge too; a normal start takes one or two minutes)
 
 
 def rss_mb(pid):
@@ -54,26 +57,47 @@ def main():
     heap = re.search(r"-Xmx(\w+)", open(os.path.join(root, "start.sh")).read()).group(1)
 
     start = time.time()
+    # Its own process group, so a hung server (and the Java it started) can be stopped as a whole.
     process = subprocess.Popen(["sh", "start.sh"], cwd=root, stdin=subprocess.PIPE,
-                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
-    log, done, installed, memory = [], None, None, -1
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, start_new_session=True)
+    log, done, installed, memory, hung = [], None, None, -1, None
+    esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+    # Read in the background: a server that hangs prints nothing, and the limit still has to apply.
+    threading.Thread(target=lambda: [log.append(line.rstrip()) for line in process.stdout], daemon=True).start()
 
-    for line in process.stdout:
-        log.append(line.rstrip())
-        if installed is None and re.search(r"The server installed successfully|Successfully installed", line):
-            installed = time.time() - start
-        if done is None and re.search(r"\]: Done \(|\) Done \(|Done \([0-9.]+s\)!", line):
-            done = time.time() - start
+    seen, stop_sent = 0, None
+    while process.poll() is None:
+        time.sleep(1)
+        for line in log[seen:]:
+            if installed is None and re.search(r"The server installed successfully|Successfully installed", line):
+                installed = time.time() - start
+            if done is None and re.search(r"\]: Done \(|\) Done \(|Done \([0-9.]+s\)!", line):
+                done = time.time() - start
+        seen = len(log)
+        if done is not None and stop_sent is None:
             time.sleep(5)
             memory = rss_mb(java_pid(process.pid))
             process.stdin.write("stop\n")
             process.stdin.flush()
-        if time.time() - start > LIMIT:
-            process.kill()
+            stop_sent = time.time()
+        stuck = time.time() - start > LIMIT if stop_sent is None else time.time() - stop_sent > 180
+        if stuck:
+            hung = "stopping" if stop_sent else "starting"
+            pid = java_pid(process.pid)
+            if pid and shutil.which("jstack"):
+                dump = subprocess.run(["jstack", str(pid)], capture_output=True, text=True, timeout=60).stdout
+                threads = [t for t in dump.split("\n\n") if re.search(r'"(Server thread|main|Worker-Main[^"]*|ForkJoinPool[^"]*)"', t)]
+                text = "\n\n".join(t.strip()[:1500] for t in threads[:8])
+                print(f"::error title=server-hung::The server hung while {hung}; its main threads:%0A{esc(text[:3900])}")
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
             break
-
-    process.wait(timeout=180)
-    esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+    try:
+        process.wait(timeout=60)
+    except subprocess.TimeoutExpired:
+        pass
     mods_dir = os.path.join(root, "mods")
     mods = f"{len([f for f in os.listdir(mods_dir) if f.endswith('.jar')])} mods" if os.path.isdir(mods_dir) else "no mods folder"
     # The installer's own output (it lists every class it patches, exceptions included) isn't the server's.

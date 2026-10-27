@@ -16,10 +16,12 @@ PY
 get better-mob-combat 1.3.0; get mob-player-animator 1.3.3; get legendary-monsters 2.2.4
 for j in better-mob-combat mob-player-animator legendary-monsters; do mkdir -p ../x/$j && (cd ../x/$j && unzip -q -o ../../jars/$j.jar); done
 cd ../x
-echo "== mixin configs"; for j in better-mob-combat mob-player-animator; do find $j -maxdepth 1 -name '*.json' | while read f; do echo "-- $f"; cat "$f"; echo; done; done
+echo "== mixin configs"; for j in better-mob-combat mob-player-animator; do find $j -maxdepth 1 -name '*mixins.json' | while read f; do echo "-- $f"; python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print({k: v for k, v in d.items() if k in ('plugin','package')}, 'mixins:', [m for m in d.get('mixins', []) if 'Mob' in m or 'Living' in m])" "$f"; done; done
+m=$(find better-mob-combat -name 'MobMixin_AttackAnimation.class'); echo "== javap $m"; javap -p -c -constants "$m" | grep -v "^ *[0-9]*: \(aload\|areturn\|return\|dup\|pop\|iload\|astore\|ldc\|getfield\|putfield\)" | head -60
+p=$(find mob-player-animator -name '*MixinPlugin*.class' -o -name '*Plugin.class' | head -3); for c in $p; do echo "== javap $c"; javap -p -c -constants "$c" | grep -i "ldc\|invoke" | head -30; done
+for c in $(find better-mob-combat mob-player-animator -name '*.class' | xargs grep -l "blacklist\|Blacklist" | head -5); do echo "== blacklist in $c"; javap -p -constants "$c" | head -20; strings "$c" | grep -i "black\|gecko\|azure" | head; done
 echo "== configs/defaults"; find better-mob-combat -iname '*config*' | head
-echo "== classes touching Mob"; grep -rl "net/minecraft/world/entity/Mob\b\|net/minecraft/world/entity/Mob;" --include=*.class better-mob-combat mob-player-animator | head -20
-for c in $(grep -rl "getAnimationStack" --include=*.class better-mob-combat mob-player-animator | head -8); do echo "== javap $c"; javap -p -c -constants "$c" | grep -n -i "getAnimationStack\|interface\|class \|post_init\|blacklist\|instanceof\|invoke" | head -40; done
+for c in $(grep -rl "getAnimationStack" --include=*.class better-mob-combat mob-player-animator | head -6); do echo "== $c"; javap -p "$c" | grep -i "getAnimationStack\|interface\|class " | head -6; done
 echo "== knight"; k=$(find legendary-monsters -name 'BeheadedKnightEntity.class'); javap -p "$k" | head -40
 echo "== knight getAnimationStack refs"; grep -rl "getAnimationStack\|playerAnim" --include=*.class legendary-monsters | head
 for c in $(grep -rl "getAnimationStack" --include=*.class legendary-monsters | head -3); do echo "== javap $c"; javap -p "$c" | grep -i "anim\|interface\|class " | head -20; done

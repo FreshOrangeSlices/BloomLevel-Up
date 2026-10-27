@@ -7,7 +7,7 @@
   "layers": [
     {
       "name": "core",
-      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack), plus the performance mods, since they change how everything renders.",
+      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags).",
       "modrinth": [
         "better-combat",
         "playeranimator",
@@ -26,7 +26,13 @@
         "embeddium",
         "modernfix",
         "ferrite-core",
-        "clumps"
+        "clumps",
+        "entityculling",
+        "immediatelyfast",
+        "ai-improvements",
+        "let-me-despawn",
+        "chunky",
+        "spark"
       ]
     },
     {
@@ -85,7 +91,7 @@
     },
     {
       "name": "animation-and-qol",
-      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked and Solas to swap to), and the quality-of-life and multiplayer mods.",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods.",
       "modrinth": [
         "punchy-fpa",
         "fwa",
@@ -108,7 +114,8 @@
         "modifier-keybinds",
         "oculus",
         "complementary-unbound",
-        "solas-shader"
+        "solas-shader",
+        "makeup-ultra-fast-shaders"
       ],
       "external": [
         {
@@ -176,7 +183,7 @@
     ],
     "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin).",
     "shader": "complementary-unbound",
-    "_shader": "Shaders on with Complementary Unbound at first launch (and once per change of this line); K turns shaders off, O picks another pack (Solas ships too).",
+    "_shader": "Shaders on with Complementary Unbound at first launch (and once per change of this line); K turns shaders off, O picks another pack (Solas and the much lighter MakeUp Ultra Fast ship too).",
     "keys": {
       "iris.keybind.reload": "key.keyboard.unknown"
     },

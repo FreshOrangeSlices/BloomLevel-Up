@@ -1,4 +1,4 @@
-# Throwaway (never merged): the AzureLib Book of Dragons 1.31 needs (azure.sh).
+# Throwaway (never merged): mods FreshOrangeSlices asked about (asked.py).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -10,5 +10,5 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - run: bash check/azure.sh > out.txt 2>&1; cat out.txt
-      - run: python3 check/slice.py out.txt 0 9
+      - run: python3 check/asked.py
+      - run: python3 check/slice.py asked.txt 0 9

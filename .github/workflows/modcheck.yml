@@ -1,4 +1,4 @@
-# Throwaway (never merged): Myths & Legends' Cogwork Construct renderer (cog.sh).
+# Throwaway (never merged): AzureLib 3.1.23's file record (az2.py).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -10,9 +10,4 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'microsoft'
-      - run: bash check/oc2.sh > out.txt 2>&1; cat out.txt
-      - run: python3 check/slice.py out.txt 0 9
+      - run: python3 check/az2.py

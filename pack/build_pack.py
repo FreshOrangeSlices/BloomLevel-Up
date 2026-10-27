@@ -11,7 +11,9 @@ share but not for publishing.
 Every Modrinth project is pinned to the version in pack/pack.lock.json (the versions last tested), so a build only
 changes when the lock does; a project the lock doesn't name gets its newest build. --update ignores the lock and takes
 the newest of everything. Either way the build writes the versions it used to <out dir>/pack.lock.json and lists what
-differs from the committed lock (pack-updates), so the lock can be moved forward on purpose. Every jar is downloaded and checked: each
+differs from the committed lock (pack-updates), so the lock can be moved forward on purpose. The lock also keeps each
+file's address and hashes: Modrinth's CDN keeps serving a version its author has taken off the project page, so the
+pack still builds from it (with a note), and only a file that's really gone stops the build. Every jar is downloaded and checked: each
 mod's mandatory mod ids (from its META-INF/mods.toml) have to be in the pack, on the client and on the server, or the
 build fails. Prints a summary as GitHub annotations.
 
@@ -242,6 +244,27 @@ def forge_installer(game, forge):
     return http(f"https://maven.minecraftforge.net/net/minecraftforge/forge/{version}/forge-{version}-installer.jar", binary=True)
 
 
+def locked_version(pin, record, game, loader):
+    """A Modrinth version rebuilt from the lock, for one its author has taken off the project (the CDN still has the file)."""
+    url = f"https://cdn.modrinth.com/data/{record['project']}/versions/{record['id']}/{urllib.parse.quote(record['file'])}"
+    return {
+        "id": record["id"], "version_number": pin, "version_type": "release", "game_versions": [game], "loaders": [loader],
+        "files": [{"url": url, "filename": record["file"], "hashes": {"sha1": record["sha1"], "sha512": record["sha512"]},
+                   "size": record["size"], "primary": True}],
+        "dependencies": [{"project_id": project, "version_id": version, "dependency_type": "required"}
+                         for project, version in record.get("required", [])],
+    }
+
+
+def lock_text(game, forge, versions, files, comment=None):
+    """The lock file: the readable versions first, then one line per file (address, hashes, required projects)."""
+    head = {"_comment": comment, "minecraft": game, "forge": forge} if comment else {"minecraft": game, "forge": forge}
+    text = json.dumps(head, indent=2)[:-2] + ",\n"
+    text += '  "versions": ' + json.dumps(dict(sorted(versions.items())), indent=2).replace("\n", "\n  ") + ",\n"
+    rows = [f'    {json.dumps(slug)}: {json.dumps(files[slug], separators=(", ", ": "))}' for slug in sorted(files)]
+    return text + '  "files": {\n' + ",\n".join(rows) + "\n  }\n}\n"
+
+
 def main():
     args = sys.argv[1:]
     client_run = None
@@ -282,8 +305,9 @@ def main():
     queue = [(slug, None) for slug in spec["modrinth"]]
     seen = set()
     lock_path = os.path.join(os.path.dirname(__file__), "pack.lock.json")
-    locked = {} if not os.path.exists(lock_path) else json.load(open(lock_path)).get("versions", {})
-    used = {}
+    lock = {} if not os.path.exists(lock_path) else json.load(open(lock_path))
+    locked, locked_files = lock.get("versions", {}), lock.get("files", {})
+    used, used_files = {}, {}
 
     # ---- Modrinth: each listed project and its required dependencies
     while queue:
@@ -300,6 +324,9 @@ def main():
         if pin:
             candidates = api(f"/project/{project['id']}/version", game_versions=[game], loaders=[loader_for(project)]) or []
             version = next((v for v in candidates if v["version_number"] == pin), None)
+            if version is None and project["slug"] in locked_files:
+                version = locked_version(pin, locked_files[project["slug"]], game, loader_for(project))
+                notes.append(f"{project['title']} {pin} isn't listed on Modrinth any more (its author took it down): built from the locked file")
             if version is None:
                 problems.append(f"{project['title']} ({project['slug']}): the locked version {pin} isn't on Modrinth any more")
                 continue
@@ -313,6 +340,12 @@ def main():
             continue
         used[project["slug"]] = version["version_number"]
         file = pick_file(version)
+        used_files[project["slug"]] = {
+            "project": project["id"], "id": version["id"], "file": file["filename"], "sha1": file["hashes"]["sha1"],
+            "sha512": file["hashes"]["sha512"], "size": file["size"],
+            "required": [[d.get("project_id"), d.get("version_id")] for d in version.get("dependencies", [])
+                         if d.get("dependency_type") == "required" and d.get("project_id")],
+        }
         datapack = loader_for(project) == "datapack"
         folder = "datapacks" if datapack else FOLDERS.get(project.get("project_type"), "mods")
         env = {"client": side(project.get("client_side")), "server": side(project.get("server_side"))}
@@ -379,11 +412,11 @@ def main():
                     needs.setdefault(mod_id, []).append((os.path.basename(path), wanted))
         for mod_id, wanted_by in sorted(needs.items()):
             if mod_id not in provided:
-                problems.append(f"{where}: {', '.join(sorted(set(name for name, _ in wanted_by)))} need(s) mod id '{mod_id}', which isn't in the pack")
+                problems.append(f"{where}: {', '.join(sorted(set(jar for jar, _ in wanted_by)))} need(s) mod id '{mod_id}', which isn't in the pack")
                 continue
-            for name, wanted in sorted(set(wanted_by)):
+            for jar, wanted in sorted(set(wanted_by)):
                 if not in_range(provided[mod_id], wanted):
-                    problems.append(f"{where}: {name} needs {mod_id} {wanted}, the pack has {provided[mod_id]}")
+                    problems.append(f"{where}: {jar} needs {mod_id} {wanted}, the pack has {provided[mod_id]}")
 
     # ---- first-launch look: the resource packs on (bottom to top). Not an options.txt (launchers don't reliably copy
     # one, and it would wipe a player's settings on every update): a defaults file Bloom applies just before the game
@@ -483,8 +516,7 @@ def main():
     # ---- the versions used (the lock), and how they differ from the committed one
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
     with open(os.path.join(out, "pack.lock.json"), "w") as lock_file:
-        json.dump({"minecraft": game, "forge": spec["forge"], "versions": dict(sorted(used.items()))}, lock_file, indent=2)
-        lock_file.write("\n")
+        lock_file.write(lock_text(game, spec["forge"], used, used_files, lock.get("_comment")))
     changes = [f"{slug}: {locked.get(slug, 'not locked')} -> {version}" for slug, version in sorted(used.items()) if locked.get(slug) != version]
     if changes:
         print(f"::notice title=pack-updates::{esc(('Ignoring the lock (--update): ' if update else 'Not in the lock (newest taken): ') + chr(10) + chr(10).join(changes))}")

@@ -1,4 +1,4 @@
-# Throwaway (never merged): what LegionWareX's mods do to world generation (biomes.py).
+# Throwaway (never merged): shader loader and shader packs for LegionWareX (shaders.py).
 name: modcheck
 on: [push, workflow_dispatch]
 jobs:
@@ -16,7 +16,6 @@ jobs:
         run: |
           python3 -c "import zipfile; zipfile.ZipFile('dummy.jar','w').writestr('x.txt','x')"
           python3 bloom/pack/build_pack.py dummy.jar check out --client-run game || true
-          python3 bloom/pack/build_pack.py dummy.jar check out2 --layers 2 --client-run game2 > /dev/null 2>&1 || true
           ls game/mods | wc -l
-      - name: world generation
-        run: python3 check/biomes.py game/mods
+      - name: shaders
+        run: python3 check/shaders.py bloom/pack/pack.lock.json game/mods

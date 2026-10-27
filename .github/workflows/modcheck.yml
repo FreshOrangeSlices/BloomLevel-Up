@@ -1,4 +1,4 @@
-# Throwaway (never merged): Oculus's config file and key names (oculus.py).
+# Throwaway (never merged): Better Mob Combat vs Legendary Monsters (bmc.sh).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -10,5 +10,5 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - run: python3 check/oculus.py
-      - run: python3 check/slice.py oculus.txt 0 9
+      - run: bash check/bmc.sh > out.txt 2>&1; cat out.txt
+      - run: python3 check/slice.py out.txt 0 9

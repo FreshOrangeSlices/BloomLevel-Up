@@ -311,6 +311,7 @@ def main():
         capture(shots, "pack_0")
 
     # ---- what the client did (both starts)
+    client_exited = client.process.poll() is not None  # by itself, before the test stops it
     client_log = title.lines + client.lines
     applied = next((l for l in client_log if "Bloom Pack defaults applied" in l), None)
     packs_line = next((l for l in open(options).read().splitlines() if l.startswith("resourcePacks:")), "") if os.path.exists(options) else ""
@@ -325,13 +326,22 @@ def main():
     if wanted:
         oculus = os.path.join(game_dir, "config", "oculus.properties")
         settings = open(oculus).read() if os.path.exists(oculus) else ""
+        said = [l for l in client_log if re.search(r"(?i)\[oculus|\[iris|shaderpack|shader pack|shader program|pipeline", l)
+                and "are modifying Embeddium" not in l]
+        notes.append("shader: " + (" / ".join(dict.fromkeys(said[:6])) if said else f"{wanted} (Oculus said nothing about it)")[:900])
         if f"shaderPack={wanted}" not in settings or "enableShaders=true" not in settings:
-            failures.append(f"the pack's shader {wanted} isn't on in config/oculus.properties")
-        said = [l for l in client_log if re.search(r"(?i)oculus|iris", l) and re.search(r"(?i)shader ?pack|pipeline|compil", l)]
-        notes.append("shader: " + (" / ".join(dict.fromkeys(said[:4])) if said else f"{wanted} (Oculus said nothing about it)")[:600])
-    crash = [l for l in client_log if re.search(r"---- Minecraft Crash Report|Exception in thread \"Render thread\"|Game crashed", l)]
-    if crash:
-        failures.append("the client crashed")
+            # Bloom writes the file before the game starts; Oculus may switch shaders off where they can't run (this
+            # test machine draws with a software renderer), so that's a warning with what the file says, not a failure.
+            print(f"::warning title=pack-shader::Oculus's settings don't have {wanted} on after the run:%0A"
+                  + esc(" / ".join(l for l in settings.splitlines() if re.match(r"(enableShaders|shaderPack)=", l)) or "no oculus.properties"))
+    # A crash is the game stopping by itself or writing a crash report file. (Forge's removeErroringEntities, which the
+    # server sends to clients too, logs a whole crash report for an entity it removes and carries on: those are listed.)
+    reports = os.listdir(os.path.join(game_dir, "crash-reports")) if os.path.isdir(os.path.join(game_dir, "crash-reports")) else []
+    if reports or client_exited or re.search(r"#@!@# Game crashed", "\n".join(client_log)):
+        failures.append("the client crashed:\n" + crash_summary(game_dir, client_log[-200:]))
+    removed = sorted(set(re.findall(r"Entity Type: ([a-z0-9_.-]+:[a-z0-9_/.-]+)", "\n".join(client.lines))))
+    if removed:
+        notes.append("removed on the client after an error: " + ", ".join(removed))
 
     stop(client)
     server.send("stop")

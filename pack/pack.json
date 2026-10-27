@@ -130,7 +130,7 @@
             "https://edge.forgecdn.net/files/8213/759/Altitude%200.0.5.jar"
           ],
           "client": "required",
-          "server": "unsupported"
+          "server": "required"
         }
       ]
     }
@@ -155,6 +155,10 @@
       "fresh-animations-spiders",
       "fresh-animations-objects"
     ],
-    "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin)."
+    "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin).",
+    "files": {
+      "_comment": "Client config files, as given (the mod fills in every setting left out). Ice and Fire replaces Minecraft's title screen with its own book menu; FreshOrangeSlices wants Minecraft's own.",
+      "config/iceandfire-client.toml": "[general]\n\t\"Custom main menu\" = false\n"
+    }
   }
 }

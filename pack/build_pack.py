@@ -378,6 +378,10 @@ def main():
         lines.append("keys=" + "|".join(f"{binding}:{key}" for binding, key in presets["keys"].items()))
     if len(lines) > 1:
         pack_defaults["config/bloomlevelup/pack-defaults.properties"] = ("\n".join(lines) + "\n").encode()
+    # Other client config files, as given (a JSON object is written as JSON). A mod fills in the settings left out.
+    for path, content in presets.get("files", {}).items():
+        if not path.startswith("_"):
+            pack_defaults[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
     # Config files for both sides (server rules a singleplayer world reads too), as given; in the server zip as well.
     for path, content in spec.get("config_files", {}).items():
         if path.startswith("_"):

@@ -265,6 +265,18 @@ jobs:
           if follow:
               print(f"::notice title=client-pack-warning-details::{esc(chr(10).join(follow)[:3900])}")
           PY
+      - name: configs the new mods wrote (graves, server tuning, despawning)
+        if: always()
+        run: |
+          cd build/run/clientGameTestPack/config 2>/dev/null || exit 0
+          for f in $(ls -d *grave* *servercore* *lmd* *despawn* 2>/dev/null); do
+            find "$f" -type f 2>/dev/null | head -5 | while read file; do
+              body=$(head -c 3800 "$file" | python3 -c 'import sys;print(sys.stdin.read().replace("%","%25").replace("\r","%0D").replace("\n","%0A"))')
+              echo "::notice title=config-$(echo $file | tr '/' '_')::$body"
+            done
+            [ -f "$f" ] && { body=$(head -c 3800 "$f" | python3 -c 'import sys;print(sys.stdin.read().replace("%","%25").replace("\r","%0D").replace("\n","%0A"))'); echo "::notice title=config-$f::$body"; }
+          done
+          echo "::notice title=config-list::$(ls | tr '\n' ' ')"
       - name: capture screenshots and logs
         if: always()
         uses: actions/upload-artifact@v7

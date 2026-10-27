@@ -258,6 +258,8 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				shared.add(key + " " + names);
 			}
 		});
+		// Every binding and its key, for planning the pack's key defaults (printed in full by the report).
+		byKey.forEach((key, names) -> BloomLevelUp.LOGGER.info("BLOOMCENSUS key {} = {}", key, names));
 		BloomLevelUp.LOGGER.info("BLOOMTEST pack: keys shared by more than one binding: {}; game data version for options.txt: {}",
 				shared.isEmpty() ? "none" : shared, com.freshorangeslices.bloomlevelup.PackDefaultsLaunch.dataVersion());
 	}

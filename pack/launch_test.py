@@ -234,7 +234,7 @@ def main():
     # A mob that fails to tick is removed and logged instead of stopping the server (the mob check reports it).
     os.makedirs(os.path.join(server_dir, "defaultconfigs"), exist_ok=True)
     open(os.path.join(server_dir, "defaultconfigs", "forge-server.toml"), "w").write(
-        "[general]\n\tremoveErroringBlockEntities = true\n\tremoveErroringEntities = true\n")
+        "[server]\n\tremoveErroringBlockEntities = true\n\tremoveErroringEntities = true\n")
     set_properties(os.path.join(server_dir, "server.properties"), {
         "online-mode": "false", "level-type": "minecraft\\:flat", "difficulty": "easy", "spawn-protection": "0",
         "generate-structures": "false", "view-distance": "6", "simulation-distance": "5",

@@ -150,6 +150,10 @@
       ]
     }
   ],
+  "config_files": {
+    "_comment": "For both sides (the server, and the worlds a player makes; Forge copies defaultconfigs into each new world). A safety net: an entity or block entity that errors while ticking is removed and logged instead of crashing the server. Legionary's Unbreakable boss shoots flaming skulls and magma blocks whose code needs a client-only class, so each one crashes a dedicated server on its first tick (found by the mob check); with this they fizzle instead.",
+    "defaultconfigs/forge-server.toml": "[server]\n\tremoveErroringBlockEntities = true\n\tremoveErroringEntities = true\n"
+  },
   "env_overrides": {
     "playeranimator": {
       "server": "required"

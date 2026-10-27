@@ -9,9 +9,5 @@ jobs:
       NEW: wizards,paladins-and-priests,archers,rogues-and-warriors,arsenal-rpg-series,armory-rpg-series,jewelry,combat-roll
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '25'
-          distribution: 'microsoft'
       - name: scout
-        run: python3 pack/scout5.py
+        run: python3 pack/scout6.py "modmenu,yacl,emi,jei,rei,jade,wthit,appleskin,xaeros-minimap,xaeros-world-map,journeymap,controlling,mouse-tweaks,inventory-profiles-next,dynamic-fps,modernfix,c2me-fabric,krypton,scalablelux,noisium,spark,servercore,simple-voice-chat,universal-graves,yigd,sodium-extra,reeses-sodium-options,moreculling,ksyxis,enchantment-descriptions,shulkerboxtooltip,waystones,clumps,let-me-despawn,betterf3,chat-heads,zoomify,debugify,fastquit,entity-view-distance,skin-layers-3d,fallingtree,crafting-tweaks,sophisticated-backpacks,travelers-backpack,paginated-advancements,better-advancements"

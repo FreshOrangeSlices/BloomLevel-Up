@@ -21,8 +21,9 @@ abstract class OptionsMixin {
 
 	/**
 	 * The Bloom Pack's first-launch setup (its resource packs on, in order), written into options.txt just before the
-	 * game first reads it. Forge makes the options before it loads any mod, so this is the earliest point a mod has.
-	 * {@code load(boolean)} is Forge's; its "limited" pass only re-reads key bindings once mods are loaded.
+	 * game first reads it, if {@code PackDefaultsEarly} (Bloom's mixin config plugin, which runs before any game class)
+	 * hasn't already. {@code load(boolean)} is Forge's; its "limited" pass only re-reads key bindings once mods are
+	 * loaded.
 	 */
 	@Inject(method = "load(Z)V", at = @At("HEAD"), remap = false)
 	private void bloomlevelup$packDefaults(boolean limited, CallbackInfo ci) {

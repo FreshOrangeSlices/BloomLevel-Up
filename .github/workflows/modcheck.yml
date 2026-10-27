@@ -1,4 +1,4 @@
-# Throwaway (never merged): LegionWareX's mod descriptions (desc.py), pushed to ci/data.
+# Throwaway (never merged): Origins and its add-ons for Forge 1.20.1 (origins.py), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -12,14 +12,8 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - uses: actions/checkout@v6
-        with:
-          ref: forge-1.20.1
-          path: bloom
-      - run: python3 check/desc.py
+      - run: python3 check/origins.py
       - run: |
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          cp descriptions.json data/ && cd data
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qam "LegionWareX mod descriptions" || git -c user.name=ci -c user.email=ci@example.invalid commit -qm "LegionWareX mod descriptions" --allow-empty
-          git add -A && git -c user.name=ci -c user.email=ci@example.invalid commit -qm "descriptions" || true
-          git push -q origin ci/data
+          cp origins.json data/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "Origins survey" && git push -q origin ci/data

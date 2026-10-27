@@ -157,8 +157,11 @@
     ],
     "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin).",
     "files": {
-      "_comment": "Client config files, as given (the mod fills in every setting left out). Ice and Fire replaces Minecraft's title screen with its own book menu; FreshOrangeSlices wants Minecraft's own.",
-      "config/iceandfire-client.toml": "[general]\n\t\"Custom main menu\" = false\n"
+      "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Ice and Fire swaps in its book menu, Aquamirae its frozen-sea panorama and logo.",
+      "config/iceandfire-client.toml": "[general]\n\t\"Custom main menu\" = false\n",
+      "config/obscuria/aquamirae-early.json": {
+        "themed_main_menu": false
+      }
     }
   }
 }

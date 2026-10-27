@@ -1,4 +1,4 @@
-# Throwaway (never merged): Better Mob Combat on its own with Migamigos and Cataclysm (bmctest.sh).
+# Throwaway (never merged): the AzureLib Book of Dragons 1.31 needs (azure.sh).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -6,21 +6,9 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        variant: [plain, fix]
     steps:
       - uses: actions/checkout@v6
         with:
           path: check
-      - uses: actions/checkout@v6
-        with:
-          ref: forge-1.20.1
-          path: bloom
-      - uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'microsoft'
-      - run: bash check/bmctest.sh ${{ matrix.variant }} > out.txt 2>&1; cat out.txt
+      - run: bash check/azure.sh > out.txt 2>&1; cat out.txt
       - run: python3 check/slice.py out.txt 0 9

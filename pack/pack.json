@@ -151,12 +151,14 @@
       "key.bloomlevelup.weapon_skill": "key.keyboard.v",
       "iris.keybind.reload": "key.keyboard.unknown",
       "key.quickActions": "key.keyboard.unknown",
-      "key.origins.view_origin": "key.keyboard.u"
+      "key.origins.view_origin": "key.keyboard.j",
+      "key.saveToolbarActivator": "key.keyboard.unknown",
+      "key.jade.show_details": "key.keyboard.h"
     },
-    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): the roll keeps R, Bloom's weapon skill moves to V (it was R), Iris's 'reload shaders' is unbound (it was R too), vanilla's Quick Actions is unbound so Origins' ability keeps G, and Origins' 'view origin' moves to U so O stays vanilla's Friends list."
+    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): the roll keeps R, Bloom's weapon skill moves to V (it was R), Iris's 'reload shaders' is unbound (it was R too), vanilla's Quick Actions is unbound so Origins' ability keeps G, Origins' 'view origin' moves to J (O stays vanilla's Friends list and U Xaero's waypoints), vanilla's creative-only 'save hotbar' is unbound so Zoomify's zoom keeps C, and Jade's 'show details' moves from Shift (sneak) to H. Nothing else shares a key but vanilla's own middle-click pair (pick block, spectator menu)."
   },
   "config_files": {
-    "_comment": "Config files for both sides (the server's rules, which a singleplayer world reads too), written as given. Combat Roll: a 5-tick (quarter second) window where hits don't land after a roll (FreshOrangeSlices' call); the rest are its defaults.",
+    "_comment": "Config files for both sides (the server's rules, which a singleplayer world reads too), written as given. Combat Roll: a 5-tick (quarter second) window where hits don't land after a roll (FreshOrangeSlices' call); the rest are its defaults. Universal Graves (FreshOrangeSlices' calls): only the owner can open a grave, for as long as it stands (-1 = no time limit), and graves never break by themselves; the grave keeps the XP vanilla would drop (7 per level, at most 100), so XP Insurance still hands back its share of the rest. Only these two sections are given: the mod fills in its defaults for the others and writes the whole file back.",
     "config/combat_roll/server.json5": {
       "invulnerable_ticks_upon_roll": 5,
       "roll_duration": 8,
@@ -168,6 +170,23 @@
       "food_level_required": 6.0,
       "roll_cooldown": 4.0,
       "additional_roll_distance": 0.0
+    },
+    "config/universal-graves/config.json": {
+      "config_version": 4,
+      "protection": {
+        "non_owner_protection_time": -1,
+        "self_destruction_time": -1,
+        "drop_items_on_expiration": true,
+        "attackers_bypass_protection": false,
+        "use_real_time": false
+      },
+      "storage": {
+        "experience_type": "vanilla",
+        "experience_percent:setting_value": 100.0,
+        "can_store_only_xp": false,
+        "alternative_experience_entity": true,
+        "blocked_enchantments": []
+      }
     }
   }
 }

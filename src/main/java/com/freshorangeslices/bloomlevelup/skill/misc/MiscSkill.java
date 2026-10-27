@@ -407,7 +407,12 @@ public final class MiscSkill {
 			return;
 		}
 
-		int returned = StatFormulas.insuredXp(oldPlayer.experienceLevel, oldPlayer.experienceProgress, config().xpInsuranceShare);
+		// The XP held when the death started: a grave mod may have zeroed the level since (it keeps the drop).
+		XpAtDeath atDeath = (XpAtDeath) oldPlayer;
+		boolean died = atDeath.bloomlevelup$levelAtDeath() >= 0;
+		int level = died ? atDeath.bloomlevelup$levelAtDeath() : oldPlayer.experienceLevel;
+		float progress = died ? atDeath.bloomlevelup$progressAtDeath() : oldPlayer.experienceProgress;
+		int returned = StatFormulas.insuredXp(level, progress, config().xpInsuranceShare);
 
 		if (returned > 0) {
 			newPlayer.giveExperiencePoints(returned);

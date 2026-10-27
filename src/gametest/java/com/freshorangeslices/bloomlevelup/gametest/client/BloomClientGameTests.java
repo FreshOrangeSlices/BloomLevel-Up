@@ -2,6 +2,7 @@ package com.freshorangeslices.bloomlevelup.gametest.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import com.mojang.blaze3d.platform.InputConstants;
@@ -41,6 +42,7 @@ import com.freshorangeslices.bloomlevelup.player.OwnedMajor;
 import com.freshorangeslices.bloomlevelup.skill.armor.ArmorIds;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatIds;
 import com.freshorangeslices.bloomlevelup.skill.misc.MiscIds;
+import com.freshorangeslices.bloomlevelup.skill.misc.MiscSkill;
 
 /**
  * Boots a real client into a singleplayer world: client mixins must apply, the profile must sync, the
@@ -217,19 +219,85 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.waitTicks(100);
 			context.takeScreenshot("pack_shader");
 			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
+
+			graves(context, singleplayer);
+		}
+	}
+
+	/**
+	 * Universal Graves with the pack's settings: a death leaves one grave with the items and the XP vanilla would
+	 * drop (7 per level, at most 100), only its owner can open it, with no time limit, and it never breaks by itself.
+	 * XP Insurance still hands back its share of the rest on respawn (the grave sets the level to 0 during the death).
+	 * Graves are read through their own classes by name: the mod is only in the pack.
+	 */
+	private void graves(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("execute as @a run bloom buy " + MiscIds.XP_INSURANCE);
+		context.waitFor(client -> ClientBloomState.profile() != null && ClientBloomState.profile().owns(MiscIds.XP_INSURANCE), 200);
+		singleplayer.getServer().runCommand("clear @a");
+		singleplayer.getServer().runCommand("give @a minecraft:diamond_sword");
+		singleplayer.getServer().runCommand("give @a minecraft:cobblestone 64");
+		singleplayer.getServer().runCommand("experience set @a 20 levels");
+		singleplayer.getServer().runCommand("experience set @a 0 points");
+		context.waitTicks(5);
+		int insured = singleplayer.getServer().computeOnServer(server -> MiscSkill.insuredXpFor(server.getPlayerList().getPlayers().get(0)));
+
+		singleplayer.getServer().runCommand("kill @a");
+		context.waitFor(client -> client.player != null && client.player.isDeadOrDying(), 100);
+		String grave = singleplayer.getServer().computeOnServer(server -> {
+			UUID owner = server.getPlayerList().getPlayers().get(0).getUUID();
+
+			try {
+				Class<?> managerClass = Class.forName("eu.pb4.graves.grave.GraveManager");
+				Object manager = managerClass.getField("INSTANCE").get(null);
+				List<?> graves = List.copyOf((java.util.Collection<?>) managerClass.getMethod("getByUuid", UUID.class).invoke(manager, owner));
+
+				if (graves.size() != 1) {
+					return "graves: " + graves.size();
+				}
+
+				Object one = graves.get(0);
+				Class<?> type = one.getClass();
+				java.lang.reflect.Method access = type.getMethod("hasAccess", com.mojang.authlib.GameProfile.class);
+				return "xp " + type.getMethod("getXp").invoke(one)
+						+ ", items " + ((List<?>) type.getMethod("getItems").invoke(one)).size()
+						+ ", protected " + type.getMethod("isProtected").invoke(one)
+						+ ", owner " + access.invoke(one, new com.mojang.authlib.GameProfile(owner, "owner"))
+						+ ", stranger " + access.invoke(one, new com.mojang.authlib.GameProfile(UUID.randomUUID(), "stranger"))
+						+ ", breaks " + type.getMethod("shouldNaturallyBreak").invoke(one);
+			} catch (ReflectiveOperationException | RuntimeException e) {
+				return "couldn't read the grave: " + e;
+			}
+		});
+
+		context.waitTicks(30); // the respawn button turns on after a second
+		context.clickScreenButton("deathScreen.respawn");
+		context.waitFor(client -> client.player != null && client.player.isAlive(), 200);
+		context.waitTicks(10);
+		int after = singleplayer.getServer().computeOnServer(server -> server.getPlayerList().getPlayers().get(0).totalExperience);
+		BloomLevelUp.LOGGER.info("BLOOMTEST pack: grave after dying at level 20: {}; XP after respawn {} (XP Insurance: {})", grave, after, insured);
+
+		if (!grave.equals("xp 100, items 2, protected true, owner true, stranger false, breaks false")) {
+			failures.add("the grave should hold 100 XP and 2 stacks, open only for its owner and never break: " + grave);
+		}
+
+		if (after != insured) {
+			failures.add("XP Insurance with a grave should hand back " + insured + " XP, got " + after);
 		}
 	}
 
 	/**
 	 * The keys the pack moves on the first launch: the roll keeps R, Bloom's weapon skill is on V, Iris's "reload
-	 * shaders" and vanilla's Quick Actions are unbound, Origins' ability keeps G and its "view origin" is on U (O stays
-	 * vanilla's Friends list), so nothing else starts on R, V, G, O or U. Every other key two bindings share goes to the log
-	 * (vanilla's F3 combinations are left out: they share letters on purpose).
+	 * shaders" and vanilla's Quick Actions are unbound, Origins' ability keeps G and its "view origin" is on J (O stays
+	 * vanilla's Friends list, U Xaero's waypoints), vanilla's creative "save hotbar" is unbound so Zoomify's zoom keeps C,
+	 * and Jade's "show details" is on H instead of Shift. No key is shared (nothing shows red in Controls) except vanilla's
+	 * own middle-click pair; vanilla's F3 combinations are left out: they share letters on purpose.
 	 */
 	private void packKeys(ClientGameTestContext context) {
 		String[][] expected = {{"keybinds.combat_roll.roll", "key.keyboard.r"}, {"key.bloomlevelup.weapon_skill", "key.keyboard.v"},
 			{"iris.keybind.reload", "key.keyboard.unknown"}, {"key.origins.primary_active", "key.keyboard.g"},
-			{"key.quickActions", "key.keyboard.unknown"}, {"key.friends", "key.keyboard.o"}, {"key.origins.view_origin", "key.keyboard.u"}};
+			{"key.quickActions", "key.keyboard.unknown"}, {"key.friends", "key.keyboard.o"}, {"key.origins.view_origin", "key.keyboard.j"},
+			{"gui.xaero_waypoints_key", "key.keyboard.u"}, {"key.saveToolbarActivator", "key.keyboard.unknown"}, {"zoomify.key.zoom", "key.keyboard.c"},
+			{"key.jade.show_details", "key.keyboard.h"}, {"key.sneak", "key.keyboard.left.shift"}};
 		java.util.Map<String, List<String>> byKey = context.computeOnClient(client -> {
 			java.util.Map<String, List<String>> keys = new java.util.TreeMap<>();
 
@@ -258,6 +326,12 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				shared.add(key + " " + names);
 			}
 		});
+		// Vanilla's own pair: pick block and the spectator menu (only in spectator mode) are both middle click.
+		List<String> unexpected = shared.stream().filter(entry -> !entry.equals("key.mouse.middle [key.pickItem, key.spectatorHotbar]")).toList();
+
+		if (!unexpected.isEmpty()) {
+			failures.add("keys shared (red in Controls): " + unexpected);
+		}
 		// Every binding and its key, for planning the pack's key defaults (printed in full by the report).
 		byKey.forEach((key, names) -> BloomLevelUp.LOGGER.info("BLOOMCENSUS key {} = {}", key, names));
 		BloomLevelUp.LOGGER.info("BLOOMTEST pack: keys shared by more than one binding: {}; game data version for options.txt: {}",

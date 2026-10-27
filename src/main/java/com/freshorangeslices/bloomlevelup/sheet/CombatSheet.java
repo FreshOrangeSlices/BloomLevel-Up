@@ -617,6 +617,9 @@ final class CombatSheet {
 		// CombatAbilities.thrownDamage: the weapon's own damage on your base (no Power or Strength), plus its enchantments.
 		double base = tridentOnly ? 0.0 : Loadout.withItem(weapon, Attributes.ATTACK_DAMAGE, player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE));
 		double charge = !tridentOnly && on.chargedThrow() ? config.chargeAttackMultiplier : 1.0;
+		// A thrown dagger or knife hits harder (CombatAbilities.throwMultiplier).
+		double dagger = tridentOnly ? 1.0 : CombatAbilities.throwMultiplier(weapon);
+		charge *= dagger;
 		double damage = tridentOnly ? vanilla : (base + Math.max(0.0, bonus)) * charge;
 		double multiplier = shared(on, config, true);
 		double after = afterArmor(damage * multiplier, armor, toughness, penetration);
@@ -632,6 +635,10 @@ final class CombatSheet {
 
 		sheet.heading("combat.h.thrown");
 		sheet.row(Sheet.plain(damage), tridentOnly ? "combat.trident_throw" : on.chargedThrow() ? "combat.charged_throw" : "combat.catch_throw");
+
+		if (dagger > 1.0) {
+			sheet.row(Sheet.times(dagger), "combat.dagger_throw");
+		}
 
 		if (!tridentOnly) {
 			sheet.note("combat.catch_throw.note");

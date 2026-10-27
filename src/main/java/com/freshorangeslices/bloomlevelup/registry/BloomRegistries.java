@@ -58,6 +58,7 @@ public final class BloomRegistries {
 		CombatAbilities.init();
 		MiscSkill.init();
 		HeldItemWatcher.init();
+		com.freshorangeslices.bloomlevelup.debug.RegistryDump.init();
 		StatSheets.init();
 		BetterCombat.init();
 

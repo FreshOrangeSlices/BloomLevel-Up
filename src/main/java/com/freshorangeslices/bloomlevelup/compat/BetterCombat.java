@@ -231,6 +231,11 @@ public final class BetterCombat {
 	}
 
 	/** The animation of the swing this player's combo is on (for tests), or null without Better Combat. */
+	/** Better Combat's "category|twoHanded|range" for a weapon, or null (not installed, or no attributes for it). */
+	public static String describe(ItemStack weapon) {
+		return installed() ? BetterCombatBridge.describe(weapon) : null;
+	}
+
 	public static String attackAnimation(Player player, int combo) {
 		return installed() ? BetterCombatBridge.attackAnimation(player, combo) : null;
 	}

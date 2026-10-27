@@ -44,6 +44,7 @@ import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
+import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.CombatAction;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
@@ -307,15 +308,21 @@ public final class CombatAbilities {
 	// ------------------------------------------------------------------ Catch!
 
 	/**
-	 * Weapons Catch! can throw: swords, axes and anything modded in those families. Tridents throw on their own
-	 * (Catch! makes them come back instead, see CombatSkill).
+	 * Weapons Catch! can throw: swords, axes and anything modded in those families, and daggers and knives
+	 * ({@code bloomlevelup:weapon/dagger}). Tridents throw on their own (Catch! makes them come back instead, see
+	 * CombatSkill).
 	 */
 	public static boolean throwable(ItemStack stack) {
 		if (stack.isEmpty() || Weapons.is(stack, Family.TRIDENT)) {
 			return false;
 		}
 
-		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE);
+		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE) || stack.is(BloomTags.WEAPON_DAGGER);
+	}
+
+	/** A thrown dagger or knife hits harder (FreshOrangeSlices: +50%); anything else 1. */
+	public static double throwMultiplier(ItemStack weapon) {
+		return weapon.is(BloomTags.WEAPON_DAGGER) ? 1.0 + config().daggerThrowBonus : 1.0;
 	}
 
 	private static void throwWeapon(ServerPlayer player) {
@@ -404,7 +411,7 @@ public final class CombatAbilities {
 			drop = StatFormulas.maceFallBonus(thrown.droppedDistance());
 		}
 
-		return (float) ((base + enchantments + drop) * thrown.damageMultiplier());
+		return (float) ((base + enchantments + drop) * thrown.damageMultiplier() * throwMultiplier(weapon));
 	}
 
 	// ------------------------------------------------------------------ Assault Rifle

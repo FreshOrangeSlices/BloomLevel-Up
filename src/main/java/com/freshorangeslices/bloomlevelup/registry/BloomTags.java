@@ -23,6 +23,8 @@ public final class BloomTags {
 	public static final TagKey<Item> WEAPON_BLADE = item("weapon/blade");
 	/** Never blade weapons, even when {@link #WEAPON_BLADE} takes them in through a wider tag. */
 	public static final TagKey<Item> WEAPON_NOT_BLADE = item("weapon/not_blade");
+	/** Daggers and knives: Catch! throws them (even outside the sword and axe families) and they hit harder thrown. */
+	public static final TagKey<Item> WEAPON_DAGGER = item("weapon/dagger");
 	public static final TagKey<Item> MEAT = item("food/meat");
 	public static final TagKey<Item> UTILITY_TOOLS = item("utility_tools");
 	/** Iron Stomach: raw, rotten and poisonous food that becomes safe (and at least as filling as cooked chicken). */

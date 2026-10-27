@@ -52,6 +52,12 @@ final class BetterCombatBridge {
 		return out;
 	}
 
+	/** Better Combat's own words for a weapon: its category ("dagger", "sword", "mace"...), whether it's two-handed, its reach. */
+	static String describe(ItemStack weapon) {
+		WeaponAttributes attributes = weapon.isEmpty() ? null : WeaponRegistry.getAttributes(weapon);
+		return attributes == null ? null : attributes.category() + "|" + attributes.isTwoHanded() + "|" + attributes.attackRange();
+	}
+
 	static String attackAnimation(Player player, int combo) {
 		AttackHand hand = PlayerAttackHelper.getCurrentAttack(player, combo);
 		return hand == null || hand.attack() == null ? null : hand.attack().animation();

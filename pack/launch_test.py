@@ -165,6 +165,43 @@ def modded_entities(mods_dir):
     return sorted(entities), with_egg
 
 
+BLOOM_NONE = {"staff", "battlestaff", "wand", "spellbreaker", "horn", "shield", "fist"}  # spell weapons, shields, gauntlets
+
+
+def bloom_sorting(dump_file):
+    """How much of the pack Bloom has sorted, from the server's registry dump (-Dbloomlevelup.dump): weapons into its
+    families, armor into its classes, daggers into its dagger tag, bosses with a boss bar into its boss tag. Returns
+    (summary, unsorted lines)."""
+    if not os.path.exists(dump_file):
+        return "no registry dump", []
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    families = ("sword", "axe", "bow", "crossbow", "trident")
+    in_family = lambda r: any(f"bloomlevelup:weapon/{f}" in r["tags"] and f"bloomlevelup:weapon/not_{f}" not in r["tags"] for f in families)
+    weapons, armor, daggers, bosses, unsorted = 0, 0, 0, 0, []
+    for r in rows:
+        if r.get("kind") == "item":
+            category = (r.get("bettercombat") or "").split("|")[0]
+            weaponish = (category and category not in BLOOM_NONE) or (category not in BLOOM_NONE and any(
+                c in r.get("classes", []) for c in ("SwordItem", "AxeItem", "BowItem", "CrossbowItem", "TridentItem")))
+            if weaponish:
+                weapons += 1
+                if not in_family(r):
+                    unsorted.append(f"weapon {r['id']} ({category or r['classes'][0]})")
+            if category in ("dagger", "soul_knife"):
+                daggers += 1
+                if "bloomlevelup:weapon/dagger" not in r["tags"]:
+                    unsorted.append(f"dagger {r['id']}")
+            if "armor" in r:
+                armor += 1
+                if not any(f"bloomlevelup:armor/{c}" in r["tags"] for c in ("light", "medium", "heavy")):
+                    unsorted.append(f"armor {r['id']} ({r['armor']['material']})")
+        elif r.get("kind") == "entity" and r.get("bossBar"):
+            bosses += 1
+            if "bloomlevelup:bosses" not in r["tags"]:
+                unsorted.append(f"boss {r['id']}")
+    return f"Bloom sorting: {weapons} weapons, {armor} armor pieces, {daggers} daggers, {bosses} bosses with a boss bar; {len(unsorted)} unsorted", unsorted
+
+
 def crash_summary(folder, lines):
     """What a crashed process said: the newest crash report's description and first lines, else its last errors."""
     reports = sorted((os.path.join(folder, "crash-reports", f) for f in os.listdir(os.path.join(folder, "crash-reports"))),
@@ -249,6 +286,11 @@ def main():
         "online-mode": "false", "level-type": "minecraft\\:flat", "difficulty": "easy", "spawn-protection": "0",
         "generate-structures": "false", "view-distance": "6", "simulation-distance": "5",
     })
+    # Bloom's registry dump (two seconds after the start), for the sorting check.
+    jvm_args = os.path.join(server_dir, "user_jvm_args.txt")
+    existing = open(jvm_args).read() if os.path.exists(jvm_args) else ""
+    if "bloomlevelup.dump" not in existing:
+        open(jvm_args, "a").write(("" if existing.endswith("\n") or not existing else "\n") + "-Dbloomlevelup.dump=bloom-dump.jsonl\n")
     server = Process(["sh", "start.sh"], server_dir, stdin=True)
     if not server.wait_for(r"\]: Done \(|Done \([0-9.]+s\)!", 600):
         print(f"::error title=pack-launch::The server didn't come up. Last lines:%0A{esc(chr(10).join(server.lines[-40:])[:3800])}")
@@ -309,6 +351,12 @@ def main():
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")
+
+    # ---- Bloom's view of the pack's gear and bosses
+    sorting, unsorted = bloom_sorting(os.path.join(server_dir, "bloom-dump.jsonl"))
+    notes.append(sorting)
+    if unsorted:
+        print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
 
     # ---- what the client did (both starts)
     client_exited = client.process.poll() is not None  # by itself, before the test stops it

@@ -1,4 +1,4 @@
-# Throwaway (never merged): AzureLib 3.1.23's file record (az2.py).
+# Throwaway (never merged): the optimization mods' 1.20.1 Forge builds (opt.py).
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -10,4 +10,4 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - run: python3 check/az2.py
+      - run: python3 check/opt.py

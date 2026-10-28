@@ -558,9 +558,10 @@ public final class ArmorGameTests {
 			}
 		}
 
-		// 10% caught, then 25% of the rest bounce: 32.5% stopped (sd ~15), 10% caught (sd ~9.5).
-		helper.assertTrue(stopped > 270 && stopped < 380, "Reflect should stop ~325 of 1000 arrows, stopped " + stopped);
-		helper.assertTrue(caught > 60 && caught < 140, "~100 of them land in the inventory, caught " + caught);
+		// 10% caught, then 25% of the rest bounce: 32.5% stopped (sd ~15), 10% caught (sd ~9.5). Bounds at five sd, so
+		// only a broken chance fails (at 3.7 sd a fair roll failed one run in about 5,000).
+		helper.assertTrue(stopped > 250 && stopped < 400, "Reflect should stop ~325 of 1000 arrows, stopped " + stopped);
+		helper.assertTrue(caught > 52 && caught < 148, "~100 of them land in the inventory, caught " + caught);
 		helper.assertTrue(ArmorSkill.allowDamage(player, source(player, DamageTypes.GENERIC), 3.0F), "Reflect only touches projectiles");
 		helper.succeed();
 	}

@@ -425,7 +425,7 @@ public final class UtilityGameTests {
 			}
 		}
 
-		helper.assertTrue(stayedShearable > 30 && stayedShearable < 70, "About half the shears keep the wool, kept " + stayedShearable);
+		helper.assertTrue(stayedShearable > 25 && stayedShearable < 75, /* five sd of 100 coin flips */ "About half the shears keep the wool, kept " + stayedShearable);
 		TestPlayers.equal(helper, 100, shears.getDamageValue(), "Master Shearing's extra durability per shear");
 		// 100 shears x 2.5 XP = 250 XP: past Utility level 3 (50 + 60 + 70 = 180).
 		TestPlayers.equal(helper, 3, BloomAttachments.profile(player).category(SkillXp.UTILITY).level(), "Shearing gives Utility XP");

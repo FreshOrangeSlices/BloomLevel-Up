@@ -34,6 +34,7 @@ jobs:
           find shots pack -maxdepth 3 | head -20
           python3 check/weapons.py "$(find shots -name bloom-dump.jsonl | head -1)" "$(ls pack/*server.zip | head -1)" data-out/weapons | tee summary.txt
           python3 check/weaponcode.py data-out/weapons/weapons.json "$(ls pack/*server.zip | head -1)" data-out/weapons | tee -a summary.txt
+          t="$(find shots -name tooltips.jsonl | head -1)"; if [ -n "$t" ]; then cp "$t" data-out/weapons/; echo "tooltips: $(wc -l < "$t") weapons" >> summary.txt; else echo "no tooltips.jsonl" >> summary.txt; fi
           echo "::notice title=weapons::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
           mkdir -p data/weapons && cp data-out/weapons/* data/weapons/ && cd data && git add -A

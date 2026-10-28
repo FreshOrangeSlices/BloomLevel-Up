@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -255,6 +256,38 @@ public class MiscGameTests {
 
 		// Level 30 = 1395 XP: 100 drops as orbs, 1295 is lost, half of it (647) comes back.
 		helper.assertValueEqual(647, respawned.totalExperience, "Half the lost XP comes back");
+		helper.succeed();
+	}
+
+	/**
+	 * Dying keeps everything Bloom has on the player: levels, Majors, given Major Levels, the pocket and the runes. A
+	 * real death (die, then the respawn copy), as the Forge build's playtest lost all of it there.
+	 */
+	@GameTest
+	public void theWholeProfileSurvivesDeath(GameTestHelper helper) {
+		ServerPlayer dead = player(helper);
+		ServerPlayer respawned = player(helper);
+		grant(dead, MiscIds.HOARDERS_POCKET, MiscIds.XP_INSURANCE);
+		BloomProfile before = BloomAttachments.profile(dead);
+		BloomServices.progression().giveMajorLevels(before, 3);
+		int earned = before.earnedMajorLevels();
+		int spent = before.spentMajorLevels();
+		dead.setAttached(HoardersPocket.CONTENTS, ItemContainerContents.fromItems(List.of(new ItemStack(Items.DIAMOND, 12))));
+		dead.setAttached(RuneEmbedding.RUNES, ItemContainerContents.fromItems(List.of(new ItemStack(Items.ENCHANTED_BOOK))));
+
+		dead.die(helper.getLevel().damageSources().generic());
+		respawned.restoreFrom(dead, false);
+
+		BloomProfile after = BloomAttachments.profile(respawned);
+		helper.assertValueEqual(earned, after.earnedMajorLevels(), "Major Levels earned and given");
+		helper.assertValueEqual(spent, after.spentMajorLevels(), "Major Levels spent");
+		helper.assertTrue(after.owns(MiscIds.HOARDERS_POCKET) && after.owns(MiscIds.XP_INSURANCE), "The Majors are still owned");
+		NonNullList<ItemStack> pocket = NonNullList.withSize(HoardersPocket.SIZE, ItemStack.EMPTY);
+		respawned.getAttachedOrElse(HoardersPocket.CONTENTS, ItemContainerContents.EMPTY).copyInto(pocket);
+		helper.assertValueEqual(12, pocket.get(0).getCount(), "The pocket's diamonds");
+		NonNullList<ItemStack> runes = NonNullList.withSize(1, ItemStack.EMPTY);
+		respawned.getAttachedOrElse(RuneEmbedding.RUNES, ItemContainerContents.EMPTY).copyInto(runes);
+		helper.assertTrue(runes.get(0).is(Items.ENCHANTED_BOOK), "The rune slot's book");
 		helper.succeed();
 	}
 

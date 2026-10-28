@@ -122,8 +122,11 @@ public final class BloomProfile {
 		}
 	}
 
+	/** Counter: Major Levels given outright by an admin ({@code /bloom admin majorlevels}), on top of earned ones. */
+	public static final String GIVEN_MAJOR_LEVELS = "bloomlevelup:admin#major_levels";
+
 	public int earnedMajorLevels() {
-		int total = 0;
+		int total = (int) Math.max(0L, Math.min(Integer.MAX_VALUE / 2, counter(GIVEN_MAJOR_LEVELS)));
 
 		for (CategoryProgress progress : categories.values()) {
 			total += progress.majorMilestonesClaimed() + progress.prestigeClaimed();

@@ -17,7 +17,8 @@ import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
  * Batter Up! with Better Combat: a mace or a spear swings like a sword. It takes the sword's combo (the claymore's
  * when it's held in two hands, like spears, glaives and hammers) and keeps everything else of its own: its speed (the
  * item's attack speed, so the wind-up stretches with it), reach, idle pose and grip. A mace still slams with its own
- * swing while falling, so the mace smash keeps working. Both sides pick the swing the same way (the client for the
+ * swing while falling, so the mace smash keeps working. Up to netherite only: one-off and end-game weapons keep their
+ * own swings ({@code Weapons.batterUpMoves}). Both sides pick the swing the same way (the client for the
  * animation and the targets, the server for the damage and the sound). Only loaded when Better Combat is installed.
  */
 public final class BetterCombatMoves {
@@ -36,7 +37,7 @@ public final class BetterCombatMoves {
 
 		boolean mace = Weapons.is(stack, Family.MACE);
 
-		if ((!mace && !Weapons.is(stack, Family.SPEAR)) || !CombatSkill.activeAnySide(player, CombatIds.BATTER_UP)) {
+		if ((!mace && !Weapons.is(stack, Family.SPEAR)) || !Weapons.batterUpMoves(stack) || !CombatSkill.activeAnySide(player, CombatIds.BATTER_UP)) {
 			return attributes;
 		}
 

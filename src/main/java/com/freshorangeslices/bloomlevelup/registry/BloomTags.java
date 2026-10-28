@@ -23,6 +23,10 @@ public final class BloomTags {
 	public static final TagKey<Item> WEAPON_BLUNT = item("weapon/blunt");
 	/** Never blade (or blunt) weapons, even when {@link #WEAPON_BLADE} takes them in through a wider tag. */
 	public static final TagKey<Item> WEAPON_NOT_BLADE = item("weapon/not_blade");
+	/** Daggers and knives: Catch! throws them (even outside Bloom's weapon families) and they hit harder thrown. */
+	public static final TagKey<Item> WEAPON_DAGGER = item("weapon/dagger");
+	/** Maces and spears that keep their own Better Combat swings with Batter Up! (besides one-offs, see Weapons.batterUpMoves). */
+	public static final TagKey<Item> WEAPON_OWN_MOVES = item("weapon/own_moves");
 	public static final TagKey<Item> WEAPON_NOT_BLUNT = item("weapon/not_blunt");
 	public static final TagKey<Item> MEAT = item("food/meat");
 	public static final TagKey<Item> UTILITY_TOOLS = item("utility_tools");

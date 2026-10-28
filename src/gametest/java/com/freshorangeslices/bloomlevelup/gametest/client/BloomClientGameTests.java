@@ -220,8 +220,53 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			context.takeScreenshot("pack_shader");
 			context.runOnClient(client -> BloomLevelUp.LOGGER.info("BLOOMTEST pack: in the world, shader in use: {}", shaderInUse()));
 
+			assaultRifle(context, singleplayer);
 			graves(context, singleplayer);
 		}
+	}
+
+	/**
+	 * Assault Rifle with the pack's crossbows, through the real controls: hold right-click to load (a 16-round
+	 * magazine), then one click fires one round. Vanilla's crossbow must do it; the RPG Series' (Archers) are reported.
+	 * The Major Levels come from {@code /bloom admin majorlevels}.
+	 */
+	private void assaultRifle(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		singleplayer.getServer().runCommand("bloom admin majorlevels @a 5");
+		singleplayer.getServer().runCommand("execute as @a run bloom buy " + com.freshorangeslices.bloomlevelup.skill.combat.CombatIds.ASSAULT_RIFLE);
+		context.waitFor(client -> ClientBloomState.profile() != null
+				&& ClientBloomState.profile().owns(com.freshorangeslices.bloomlevelup.skill.combat.CombatIds.ASSAULT_RIFLE), 200);
+		context.setScreen(() -> null);
+		List<String> results = new ArrayList<>();
+
+		for (String crossbow : List.of("minecraft:crossbow", "archers:heavy_crossbow", "archers:rapid_crossbow")) {
+			singleplayer.getServer().runCommand("clear @a");
+			singleplayer.getServer().runCommand("item replace entity @a weapon.mainhand with " + crossbow);
+			singleplayer.getServer().runCommand("give @a minecraft:arrow 40");
+			context.waitTicks(5);
+			context.getInput().holdKey(options -> options.keyUse);
+			context.waitTicks(60);
+			context.getInput().releaseKey(options -> options.keyUse);
+			context.waitTicks(5);
+			int loaded = loadedRounds(singleplayer);
+			context.getInput().pressKey(options -> options.keyUse);
+			context.waitTicks(10);
+			int afterOne = loadedRounds(singleplayer);
+			results.add(crossbow + ": loaded " + loaded + ", after one click " + afterOne);
+		}
+
+		BloomLevelUp.LOGGER.info("BLOOMTEST pack: Assault Rifle: {}", results);
+
+		if (!results.get(0).endsWith("loaded 16, after one click 15")) {
+			failures.add("Assault Rifle with the vanilla crossbow: " + results.get(0));
+		}
+	}
+
+	private static int loadedRounds(TestSingleplayerContext singleplayer) {
+		return singleplayer.getServer().computeOnServer(server -> {
+			net.minecraft.world.item.component.ChargedProjectiles rounds = server.getPlayerList().getPlayers().get(0).getMainHandItem()
+					.get(net.minecraft.core.component.DataComponents.CHARGED_PROJECTILES);
+			return rounds == null ? 0 : rounds.size();
+		});
 	}
 
 	/**
@@ -378,6 +423,53 @@ public class BloomClientGameTests implements FabricClientGameTest {
 				String got = item.map(i -> String.valueOf(com.freshorangeslices.bloomlevelup.skill.armor.ArmorStyles
 						.weightOf(new net.minecraft.world.item.ItemStack(i)))).orElse("missing");
 				out.add((got.equals(row[1]) ? "" : "WRONG ") + row[0] + "=" + got);
+			}
+
+			// Daggers and knives (thrown 50% harder): every item named so is in Bloom's dagger tag.
+			List<String> daggers = new ArrayList<>();
+			List<String> missed = new ArrayList<>();
+
+			for (net.minecraft.world.item.Item item : net.minecraft.core.registries.BuiltInRegistries.ITEM) {
+				net.minecraft.resources.Identifier id = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item);
+
+				if (!id.getNamespace().equals("minecraft") && (id.getPath().contains("dagger") || id.getPath().contains("knife"))) {
+					(new net.minecraft.world.item.ItemStack(item).is(com.freshorangeslices.bloomlevelup.registry.BloomTags.WEAPON_DAGGER)
+							? daggers : missed).add(id.toString());
+				}
+			}
+
+			out.add("daggers=" + daggers);
+
+			if (daggers.isEmpty() || !missed.isEmpty()) {
+				out.add("WRONG daggers or knives outside bloomlevelup:weapon/dagger: " + missed);
+			}
+
+			// Batter Up!'s swings stop at netherite: material maces and spears get them, one-offs keep their own.
+			List<String> moves = new ArrayList<>();
+			List<String> own = new ArrayList<>();
+
+			for (net.minecraft.world.item.Item item : net.minecraft.core.registries.BuiltInRegistries.ITEM) {
+				net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(item);
+
+				if (com.freshorangeslices.bloomlevelup.skill.combat.Weapons.is(stack, com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family.MACE)
+						|| com.freshorangeslices.bloomlevelup.skill.combat.Weapons.is(stack, com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family.SPEAR)) {
+					(com.freshorangeslices.bloomlevelup.skill.combat.Weapons.batterUpMoves(stack) ? moves : own)
+							.add(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item).toString());
+				}
+			}
+
+			out.add("batter up moves=" + moves);
+			out.add("own moves=" + own);
+
+			for (String id : List.of("minecraft:mace", "minecraft:netherite_spear", "paladins:iron_mace", "paladins:netherite_great_hammer",
+					"archers:iron_spear", "rogues:netherite_glaive")) {
+				if (!moves.contains(id)) {
+					out.add("WRONG " + id + " should get Batter Up!'s swings");
+				}
+			}
+
+			if (!own.contains("mutantmonsters:hulk_hammer")) {
+				out.add("WRONG mutantmonsters:hulk_hammer should keep its own swings");
 			}
 
 			out.add("roll invulnerable ticks=" + rollInvulnerableTicks());

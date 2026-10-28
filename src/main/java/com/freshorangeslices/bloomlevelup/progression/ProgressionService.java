@@ -319,6 +319,17 @@ public final class ProgressionService {
 
 	// ------------------------------------------------------------------ Majors
 
+	/**
+	 * Admin: gives Major Levels outright (testing, events), or with a negative amount takes back ones given that
+	 * way. Never takes back more than were given or than are free (owned Majors stay paid for). Returns the change.
+	 */
+	public int giveMajorLevels(BloomProfile profile, int amount) {
+		long given = profile.counter(BloomProfile.GIVEN_MAJOR_LEVELS);
+		long change = amount >= 0 ? amount : -Math.min((long) -amount, Math.min(given, Math.max(0, profile.availableMajorLevels())));
+		profile.setCounter(BloomProfile.GIVEN_MAJOR_LEVELS, given + change);
+		return (int) change;
+	}
+
 	/** Owned and switched on (non-toggleable Majors are always on). Special dependency rules layer on top of this. */
 	public boolean isMajorActive(BloomProfile profile, String majorId) {
 		OwnedMajor owned = profile.majors().get(majorId);

@@ -43,6 +43,7 @@ import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
 import com.freshorangeslices.bloomlevelup.mixin.ProjectileWeaponItemInvoker;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.CombatAction;
+import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 import com.freshorangeslices.bloomlevelup.skill.combat.Weapons.Family;
 import com.freshorangeslices.bloomlevelup.skill.misc.HoardersPocket;
 import com.freshorangeslices.bloomlevelup.skill.misc.RuneEmbedding;
@@ -363,8 +364,9 @@ public final class CombatAbilities {
 	// ------------------------------------------------------------------ Catch!
 
 	/**
-	 * Weapons Catch! can throw: swords, axes, maces, spears and anything modded in those families. Tridents
-	 * throw on their own (Catch! makes them come back instead, see CombatSkill).
+	 * Weapons Catch! can throw: swords, axes, maces, spears and anything modded in those families, and daggers and
+	 * knives ({@code bloomlevelup:weapon/dagger}). Tridents throw on their own (Catch! makes them come back instead,
+	 * see CombatSkill).
 	 */
 	public static boolean throwable(ItemStack stack) {
 		if (stack.isEmpty() || Weapons.is(stack, Family.TRIDENT)) {
@@ -372,7 +374,12 @@ public final class CombatAbilities {
 		}
 
 		return Weapons.is(stack, Family.SWORD) || Weapons.is(stack, Family.AXE) || Weapons.is(stack, Family.MACE)
-				|| Weapons.is(stack, Family.SPEAR);
+				|| Weapons.is(stack, Family.SPEAR) || stack.is(BloomTags.WEAPON_DAGGER);
+	}
+
+	/** A thrown dagger or knife hits harder (FreshOrangeSlices: +50%); anything else 1. */
+	public static double throwMultiplier(ItemStack weapon) {
+		return weapon.is(BloomTags.WEAPON_DAGGER) ? 1.0 + config().daggerThrowBonus : 1.0;
 	}
 
 	private static void throwWeapon(ServerPlayer player) {
@@ -446,7 +453,7 @@ public final class CombatAbilities {
 			drop = StatFormulas.maceFallBonus(thrown.droppedDistance());
 		}
 
-		return (float) ((base + enchantments + drop) * thrown.damageMultiplier());
+		return (float) ((base + enchantments + drop) * thrown.damageMultiplier() * throwMultiplier(weapon));
 	}
 
 	/** A thrown mace that hits the ground triggers Wind Impact; a charged one (Master of Arms) is a Gale Throw. */

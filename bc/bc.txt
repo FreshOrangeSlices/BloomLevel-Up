@@ -1,0 +1,344 @@
+== net.bettercombat.api.WeaponAttributes
+Compiled from "WeaponAttributes.java"
+public final class net.bettercombat.api.WeaponAttributes {
+  private final double attack_range;
+  private final java.lang.String pose;
+  private final java.lang.String off_hand_pose;
+  private final java.lang.Boolean two_handed;
+  private final java.lang.String category;
+  private final net.bettercombat.api.WeaponAttributes$Attack[] attacks;
+  public net.bettercombat.api.WeaponAttributes(double, java.lang.String, java.lang.String, java.lang.Boolean, java.lang.String, net.bettercombat.api.WeaponAttributes$Attack[]);
+  public double attackRange();
+  public java.lang.String pose();
+  public java.lang.String offHandPose();
+  public java.lang.String category();
+  public boolean isTwoHanded();
+  public java.lang.Boolean two_handed();
+  public net.bettercombat.api.WeaponAttributes$Attack[] attacks();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+== net.bettercombat.api.WeaponAttributes$Attack
+Compiled from "WeaponAttributes.java"
+public final class net.bettercombat.api.WeaponAttributes$Attack {
+  private net.bettercombat.api.WeaponAttributes$Condition[] conditions;
+  private net.bettercombat.api.WeaponAttributes$HitBoxShape hitbox;
+  private double damage_multiplier;
+  private double angle;
+  private double upswing;
+  private java.lang.String animation;
+  private net.bettercombat.api.WeaponAttributes$Sound swing_sound;
+  private net.bettercombat.api.WeaponAttributes$Sound impact_sound;
+  public net.bettercombat.api.WeaponAttributes$Attack();
+  public net.bettercombat.api.WeaponAttributes$Attack(net.bettercombat.api.WeaponAttributes$Condition[], net.bettercombat.api.WeaponAttributes$HitBoxShape, double, double, double, java.lang.String, net.bettercombat.api.WeaponAttributes$Sound, net.bettercombat.api.WeaponAttributes$Sound);
+  public net.bettercombat.api.WeaponAttributes$Condition[] conditions();
+  public net.bettercombat.api.WeaponAttributes$HitBoxShape hitbox();
+  public double damageMultiplier();
+  public double angle();
+  public double upswing();
+  public java.lang.String animation();
+  public net.bettercombat.api.WeaponAttributes$Sound swingSound();
+  public net.bettercombat.api.WeaponAttributes$Sound impactSound();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+== net.bettercombat.logic.WeaponRegistry
+Compiled from "WeaponRegistry.java"
+public class net.bettercombat.logic.WeaponRegistry {
+  static final org.slf4j.Logger LOGGER;
+  static java.util.Map<net.minecraft.resources.ResourceLocation, net.bettercombat.api.WeaponAttributes> registrations;
+  static java.util.Map<net.minecraft.resources.ResourceLocation, net.bettercombat.api.AttributesContainer> containers;
+  private static net.minecraft.network.FriendlyByteBuf encodedRegistrations;
+  public net.bettercombat.logic.WeaponRegistry();
+  public static void register(net.minecraft.resources.ResourceLocation, net.bettercombat.api.WeaponAttributes);
+  static net.bettercombat.api.WeaponAttributes getAttributes(net.minecraft.resources.ResourceLocation);
+  public static net.bettercombat.api.WeaponAttributes getAttributes(net.minecraft.world.item.ItemStack);
+  public static void loadAttributes(net.minecraft.server.packs.resources.ResourceManager);
+  private static void loadContainers(net.minecraft.server.packs.resources.ResourceManager);
+  public static net.bettercombat.api.WeaponAttributes resolveAttributes(net.minecraft.resources.ResourceLocation, net.bettercombat.api.AttributesContainer);
+  public static void resolveAndRegisterAttributes(net.minecraft.resources.ResourceLocation, net.bettercombat.api.AttributesContainer);
+  public static void encodeRegistry();
+  public static void decodeRegistry(net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraft.network.FriendlyByteBuf getEncodedRegistry();
+  private static void lambda$decodeRegistry$3(java.util.Map, java.lang.String, net.bettercombat.api.WeaponAttributes);
+  private static net.bettercombat.api.WeaponAttributes lambda$resolveAttributes$2(net.bettercombat.api.WeaponAttributes, net.bettercombat.api.WeaponAttributes);
+  private static boolean lambda$loadContainers$1(net.minecraft.resources.ResourceLocation);
+  private static void lambda$loadAttributes$0(net.minecraft.resources.ResourceLocation, net.bettercombat.api.AttributesContainer);
+  static {};
+}
+== net.bettercombat.logic.PlayerAttackHelper
+Compiled from "PlayerAttackHelper.java"
+public class net.bettercombat.logic.PlayerAttackHelper {
+  private static final java.lang.Object attributesLock;
+  public net.bettercombat.logic.PlayerAttackHelper();
+  public static float getDualWieldingAttackDamageMultiplier(net.minecraft.world.entity.player.Player, net.bettercombat.api.AttackHand);
+  public static boolean shouldAttackWithOffHand(net.minecraft.world.entity.player.Player, int);
+  public static boolean isDualWielding(net.minecraft.world.entity.player.Player);
+  public static boolean isTwoHandedWielding(net.minecraft.world.entity.player.Player);
+  public static float getAttackCooldownTicksCapped(net.minecraft.world.entity.player.Player);
+  public static net.bettercombat.api.AttackHand getCurrentAttack(net.minecraft.world.entity.player.Player, int);
+  private static net.bettercombat.logic.PlayerAttackHelper$AttackSelection selectAttack(int, net.bettercombat.api.WeaponAttributes, net.minecraft.world.entity.player.Player, boolean);
+  private static boolean evaluateConditions(net.bettercombat.api.WeaponAttributes$Condition[], net.minecraft.world.entity.player.Player, boolean);
+  private static boolean evaluateCondition(net.bettercombat.api.WeaponAttributes$Condition, net.minecraft.world.entity.player.Player, boolean);
+  public static void offhandAttributes(net.minecraft.world.entity.player.Player, java.lang.Runnable);
+  public static void setAttributesForOffHandAttack(net.minecraft.world.entity.player.Player, boolean);
+  private static boolean lambda$evaluateConditions$2(net.minecraft.world.entity.player.Player, boolean, net.bettercombat.api.WeaponAttributes$Condition);
+  private static net.bettercombat.api.WeaponAttributes$Attack[] lambda$selectAttack$1(int);
+  private static boolean lambda$selectAttack$0(net.minecraft.world.entity.player.Player, boolean, net.bettercombat.api.WeaponAttributes$Attack);
+  static {};
+}
+== net.bettercombat.api.AttackHand
+Compiled from "AttackHand.java"
+public final class net.bettercombat.api.AttackHand extends java.lang.Record {
+  private final net.bettercombat.api.WeaponAttributes$Attack attack;
+  private final net.bettercombat.api.ComboState combo;
+  private final boolean isOffHand;
+  private final net.bettercombat.api.WeaponAttributes attributes;
+  private final net.minecraft.world.item.ItemStack itemStack;
+  public net.bettercombat.api.AttackHand(net.bettercombat.api.WeaponAttributes$Attack, net.bettercombat.api.ComboState, boolean, net.bettercombat.api.WeaponAttributes, net.minecraft.world.item.ItemStack);
+  public double upswingRate();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.bettercombat.api.WeaponAttributes$Attack attack();
+  public net.bettercombat.api.ComboState combo();
+  public boolean isOffHand();
+  public net.bettercombat.api.WeaponAttributes attributes();
+  public net.minecraft.world.item.ItemStack itemStack();
+}
+== net.bettercombat.logic.PlayerAttackHelper$AttackSelection
+Compiled from "PlayerAttackHelper.java"
+final class net.bettercombat.logic.PlayerAttackHelper$AttackSelection extends java.lang.Record {
+  private final net.bettercombat.api.WeaponAttributes$Attack attack;
+  private final net.bettercombat.api.ComboState comboState;
+  private net.bettercombat.logic.PlayerAttackHelper$AttackSelection(net.bettercombat.api.WeaponAttributes$Attack, net.bettercombat.api.ComboState);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.bettercombat.api.WeaponAttributes$Attack attack();
+  public net.bettercombat.api.ComboState comboState();
+}
+== getCurrentAttack bytecode
+  public static net.bettercombat.api.AttackHand getCurrentAttack(net.minecraft.world.entity.player.Player, int);
+    Code:
+       0: aload_0
+       1: invokestatic  #39                 // Method isDualWielding:(Lnet/minecraft/world/entity/player/Player;)Z
+       4: ifeq          118
+       7: aload_0
+       8: iload_1
+       9: invokestatic  #107                // Method shouldAttackWithOffHand:(Lnet/minecraft/world/entity/player/Player;I)Z
+      12: istore_2
+      13: iload_2
+      14: ifeq          24
+      17: aload_0
+      18: invokevirtual #81                 // Method net/minecraft/world/entity/player/Player.m_21206_:()Lnet/minecraft/world/item/ItemStack;
+      21: goto          28
+      24: aload_0
+      25: invokevirtual #72                 // Method net/minecraft/world/entity/player/Player.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      28: astore_3
+      29: aload_3
+      30: invokestatic  #78                 // Method net/bettercombat/logic/WeaponRegistry.getAttributes:(Lnet/minecraft/world/item/ItemStack;)Lnet/bettercombat/api/WeaponAttributes;
+      33: astore        4
+      35: aload         4
+      37: ifnull        115
+      40: aload         4
+      42: invokevirtual #113                // Method net/bettercombat/api/WeaponAttributes.attacks:()[Lnet/bettercombat/api/WeaponAttributes$Attack;
+      45: ifnull        115
+      48: iload_2
+      49: ifeq          62
+      52: iload_1
+      53: ifle          62
+      56: iload_1
+      57: iconst_1
+      58: isub
+      59: goto          63
+      62: iload_1
+      63: iconst_2
+      64: idiv
+      65: istore        5
+      67: iload         5
+      69: aload         4
+      71: aload_0
+      72: iload_2
+      73: invokestatic  #117                // Method selectAttack:(ILnet/bettercombat/api/WeaponAttributes;Lnet/minecraft/world/entity/player/Player;Z)Lnet/bettercombat/logic/PlayerAttackHelper$AttackSelection;
+      76: astore        6
+      78: aload         6
+      80: ifnonnull     85
+      83: aconst_null
+      84: areturn
+      85: aload         6
+      87: getfield      #121                // Field net/bettercombat/logic/PlayerAttackHelper$AttackSelection.attack:Lnet/bettercombat/api/WeaponAttributes$Attack;
+      90: astore        7
+      92: aload         6
+      94: getfield      #125                // Field net/bettercombat/logic/PlayerAttackHelper$AttackSelection.comboState:Lnet/bettercombat/api/ComboState;
+      97: astore        8
+      99: new           #41                 // class net/bettercombat/api/AttackHand
+     102: dup
+     103: aload         7
+     105: aload         8
+     107: iload_2
+     108: aload         4
+     110: aload_3
+     111: invokespecial #128                // Method net/bettercombat/api/AttackHand."<init>":(Lnet/bettercombat/api/WeaponAttributes$Attack;Lnet/bettercombat/api/ComboState;ZLnet/bettercombat/api/WeaponAttributes;Lnet/minecraft/world/item/ItemStack;)V
+     114: areturn
+     115: goto          184
+     118: aload_0
+     119: invokevirtual #72                 // Method net/minecraft/world/entity/player/Player.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+     122: astore_2
+     123: aload_2
+     124: invokestatic  #78                 // Method net/bettercombat/logic/WeaponRegistry.getAttributes:(Lnet/minecraft/world/item/ItemStack;)Lnet/bettercombat/api/WeaponAttributes;
+     127: astore_3
+     128: aload_3
+     129: ifnull        184
+     132: aload_3
+     133: invokevirtual #113                // Method net/bettercombat/api/WeaponAttributes.attacks:()[Lnet/bettercombat/api/WeaponAttributes$Attack;
+     136: ifnull        184
+     139: iload_1
+     140: aload_3
+     141: aload_0
+     142: iconst_0
+     143: invokestatic  #117                // Method selectAttack:(ILnet/bettercombat/api/WeaponAttributes;Lnet/minecraft/world/entity/player/Player;Z)Lnet/bettercombat/logic/PlayerAttackHelper$AttackSelection;
+     146: astore        4
+     148: aload         4
+     150: ifnonnull     155
+     153: aconst_null
+     154: areturn
+     155: aload         4
+     157: getfield      #121                // Field net/bettercombat/logic/PlayerAttackHelper$AttackSelection.attack:Lnet/bettercombat/api/WeaponAttributes$Attack;
+     160: astore        5
+     162: aload         4
+     164: getfield      #125                // Field net/bettercombat/logic/PlayerAttackHelper$AttackSelection.comboState:Lnet/bettercombat/api/ComboState;
+     167: astore        6
+     169: new           #41                 // class net/bettercombat/api/AttackHand
+     172: dup
+     173: aload         5
+     175: aload         6
+     177: iconst_0
+     178: aload_3
+     179: aload_2
+     180: invokespecial #128                // Method net/bettercombat/api/AttackHand."<init>":(Lnet/bettercombat/api/WeaponAttributes$Attack;Lnet/bettercombat/api/ComboState;ZLnet/bettercombat/api/WeaponAttributes;Lnet/minecraft/world/item/ItemStack;)V
+     183: areturn
+     184: aconst_null
+     185: areturn
+
+== getAttributes(ItemStack) bytecode
+  public static net.bettercombat.api.WeaponAttributes getAttributes(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: aload_0
+       7: invokevirtual #63                 // Method net/minecraft/world/item/ItemStack.m_41782_:()Z
+      10: ifeq          24
+      13: aload_0
+      14: invokestatic  #68                 // Method net/bettercombat/api/WeaponAttributesHelper.readFromNBT:(Lnet/minecraft/world/item/ItemStack;)Lnet/bettercombat/api/WeaponAttributes;
+      17: astore_1
+      18: aload_1
+      19: ifnull        24
+      22: aload_1
+      23: areturn
+      24: aload_0
+      25: invokevirtual #72                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      28: astore_1
+      29: getstatic     #78                 // Field net/minecraft/core/registries/BuiltInRegistries.f_257033_:Lnet/minecraft/core/DefaultedRegistry;
+      32: aload_1
+      33: invokeinterface #84,  2           // InterfaceMethod net/minecraft/core/DefaultedRegistry.m_7981_:(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;
+      38: astore_2
+      39: aload_2
+      40: invokestatic  #86                 // Method getAttributes:(Lnet/minecraft/resources/ResourceLocation;)Lnet/bettercombat/api/WeaponAttributes;
+      43: astore_3
+      44: aload_3
+      45: areturn
+
+== preset files
+        0  1980-01-01 00:00   data/bettercombat/weapon_attributes/
+      386  1980-01-01 00:00   data/bettercombat/weapon_attributes/anchor.json
+      588  1980-01-01 00:00   data/bettercombat/weapon_attributes/axe.json
+     1705  1980-01-01 00:00   data/bettercombat/weapon_attributes/battlestaff.json
+      119  1980-01-01 00:00   data/bettercombat/weapon_attributes/bow_two_handed_heavy.json
+       71  1980-01-01 00:00   data/bettercombat/weapon_attributes/bow_two_handed_light.json
+      551  1980-01-01 00:00   data/bettercombat/weapon_attributes/claw.json
+     1021  1980-01-01 00:00   data/bettercombat/weapon_attributes/claymore.json
+      962  1980-01-01 00:00   data/bettercombat/weapon_attributes/coral_blade.json
+      124  1980-01-01 00:00   data/bettercombat/weapon_attributes/crossbow_two_handed_heavy.json
+       71  1980-01-01 00:00   data/bettercombat/weapon_attributes/crossbow_two_handed_light.json
+      154  1980-01-01 00:00   data/bettercombat/weapon_attributes/cutlass.json
+     1026  1980-01-01 00:00   data/bettercombat/weapon_attributes/dagger.json
+      706  1980-01-01 00:00   data/bettercombat/weapon_attributes/double_axe.json
+      299  1980-01-01 00:00   data/bettercombat/weapon_attributes/fist.json
+     1038  1980-01-01 00:00   data/bettercombat/weapon_attributes/glaive.json
+      724  1980-01-01 00:00   data/bettercombat/weapon_attributes/halberd.json
+      430  1980-01-01 00:00   data/bettercombat/weapon_attributes/hammer.json
+      167  1980-01-01 00:00   data/bettercombat/weapon_attributes/heavy_axe.json
+     1304  1980-01-01 00:00   data/bettercombat/weapon_attributes/katana.json
+      613  1980-01-01 00:00   data/bettercombat/weapon_attributes/lance.json
+      922  1980-01-01 00:00   data/bettercombat/weapon_attributes/mace.json
+      362  1980-01-01 00:00   data/bettercombat/weapon_attributes/pickaxe.json
+      641  1980-01-01 00:00   data/bettercombat/weapon_attributes/rapier.json
+      738  1980-01-01 00:00   data/bettercombat/weapon_attributes/scythe.json
+     1398  1980-01-01 00:00   data/bettercombat/weapon_attributes/sickle.json
+      458  1980-01-01 00:00   data/bettercombat/weapon_attributes/soul_knife.json
+      435  1980-01-01 00:00   data/bettercombat/weapon_attributes/spear.json
+      947  1980-01-01 00:00   data/bettercombat/weapon_attributes/staff.json
+      941  1980-01-01 00:00   data/bettercombat/weapon_attributes/sword.json
+      245  1980-01-01 00:00   data/bettercombat/weapon_attributes/trident.json
+      744  1980-01-01 00:00   data/bettercombat/weapon_attributes/twin_blade.json
+      332  1980-01-01 00:00   data/bettercombat/weapon_attributes/wand.json
+        0  1980-01-01 00:00   data/minecraft/weapon_attributes/
+       36  1980-01-01 00:00   data/minecraft/weapon_attributes/diamond_sword.json
+       36  1980-01-01 00:00   data/minecraft/weapon_attributes/golden_sword.json
+       36  1980-01-01 00:00   data/minecraft/weapon_attributes/iron_sword.json
+       36  1980-01-01 00:00   data/minecraft/weapon_attributes/netherite_sword.json
+       36  1980-01-01 00:00   data/minecraft/weapon_attributes/stone_sword.json
+       38  1980-01-01 00:00   data/minecraft/weapon_attributes/trident.json
+       36  1980-01-01 00:00   data/minecraft/weapon_attributes/wooden_sword.json
+== sword.json
+{
+  "attributes": {
+    "attack_range": 2.5,
+    "category": "sword",
+    "attacks": [
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "damage_multiplier": 1,
+        "angle": 120,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slash_horizontal_right",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash"
+        }
+      },
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "damage_multiplier": 1,
+        "angle": 120,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slash_horizontal_left",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash"
+        }
+      },
+      {
+        "hitbox": "FORWARD_BOX",
+        "damage_multiplier": 1,
+        "angle": 0,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_stab",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash",
+          "pitch": 1.2
+        }
+      }
+    ]
+  }
+}== who calls getCurrentAttack
+net.bettercombat.api.EntityPlayer_BetterCombat
+net.bettercombat.logic.PlayerAttackHelper
+net.bettercombat.mixin.EnchantmentMixin
+net.bettercombat.mixin.PlayerEntityMixin
+net.bettercombat.mixin.client.ColliderDebugRenderer
+net.bettercombat.mixin.client.MinecraftClientInject
+net.bettercombat.network.ServerNetwork

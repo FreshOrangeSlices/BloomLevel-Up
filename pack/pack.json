@@ -184,12 +184,126 @@
     }
   },
   "pack_data": {
-    "_comment": "LegionWareX's own data pack, loaded into every world (new and old) and the server by Open Loader, from config/openloader/data/legionwarex: the recipes the pack takes out (each replaced by one that never loads), and the items it hides from JEI (the c:hidden_from_recipe_viewers tag). Grouped by reason. CI checks the recipes are gone and the hidden items carry the tag (pack-data, from Bloom's registry dump).",
+    "_comment": "LegionWareX's own data pack, loaded into every world (new and old) and the server by Open Loader, from config/openloader/data/legionwarex: the recipes the pack takes out (each replaced by one that never loads), the items it takes out of the game (removed_items: their recipes, loot table entries and JEI listing, found in the mods' own files when the pack is built), and the items it hides from JEI (the c:hidden_from_recipe_viewers tag). Grouped by reason. CI checks the recipes are gone and the hidden items carry the tag (pack-data, from Bloom's registry dump).",
     "name": "legionwarex",
     "description": "LegionWareX: recipes the pack takes out, items it hides from JEI",
     "removed_recipes": {
       "Zoni's Ultimate Summon Device catches any mob, bosses included, and the mob is gone from the world once caught (a boss fight skipped, or a boss let out in someone's base). The Advanced Summon Device stays: it only carries your own tamed pets.": [
         "zonis_companions:ultimate_craft"
+      ]
+    },
+    "removed_items": {
+      "_comment": "FreshOrangeSlices' armory trim (2026-10-28, from the LegionWareX Armory page: every weapon sorted into own skill, own effect, stat bonus or nothing of its own). 230 weapons out: their recipes never load, the loot tables that name them are rewritten without them, and they're hidden from JEI. Ones a mod drops from its own code (some boss drops) can only be hidden; the pack summary lists them. Kept on purpose: the six Epic Knights shortswords the bigger swords are made from, the Knight's Sword (makes the Knight Summoner), the Decrepit Flamberge (repaired into the Legionnaire Flamberge), Monster Expansion's wooden mace and spear (Hunter's Notes) and Rimescourge (a quest reward).",
+      "Epic Knights: most of its material grid (every type keeps iron, diamond and netherite, plus the extra tiers FreshOrangeSlices picked; the shortswords that bastard swords, claymores and zweihanders are made from stay), all the jousting lances, and five one-offs": [
+        "magistuarmory:barbedclub", "magistuarmory:blacksmith_hammer", "magistuarmory:bronze_ahlspiess",
+        "magistuarmory:bronze_bastardsword", "magistuarmory:bronze_chainmorgenstern", "magistuarmory:bronze_chivalrylance",
+        "magistuarmory:bronze_claymore", "magistuarmory:bronze_concavehalberd", "magistuarmory:bronze_estoc",
+        "magistuarmory:bronze_flamebladedsword", "magistuarmory:bronze_guisarme", "magistuarmory:bronze_heavymace",
+        "magistuarmory:bronze_heavywarhammer", "magistuarmory:bronze_katzbalger", "magistuarmory:bronze_lochaberaxe",
+        "magistuarmory:bronze_lucernhammer", "magistuarmory:bronze_morgenstern", "magistuarmory:bronze_pike",
+        "magistuarmory:bronze_ranseur", "magistuarmory:bronze_shortsword", "magistuarmory:bronze_stylet",
+        "magistuarmory:bronze_zweihander", "magistuarmory:club", "magistuarmory:copper_ahlspiess",
+        "magistuarmory:copper_chainmorgenstern", "magistuarmory:copper_chivalrylance", "magistuarmory:copper_concavehalberd",
+        "magistuarmory:copper_estoc", "magistuarmory:copper_guisarme", "magistuarmory:copper_heavymace",
+        "magistuarmory:copper_heavywarhammer", "magistuarmory:copper_katzbalger", "magistuarmory:copper_lochaberaxe",
+        "magistuarmory:copper_lucernhammer", "magistuarmory:copper_morgenstern", "magistuarmory:copper_pike",
+        "magistuarmory:copper_ranseur", "magistuarmory:copper_stylet", "magistuarmory:diamond_chivalrylance",
+        "magistuarmory:gold_ahlspiess", "magistuarmory:gold_chainmorgenstern", "magistuarmory:gold_chivalrylance",
+        "magistuarmory:gold_claymore", "magistuarmory:gold_concavehalberd", "magistuarmory:gold_estoc",
+        "magistuarmory:gold_flamebladedsword", "magistuarmory:gold_guisarme", "magistuarmory:gold_heavymace",
+        "magistuarmory:gold_heavywarhammer", "magistuarmory:gold_katzbalger", "magistuarmory:gold_lochaberaxe",
+        "magistuarmory:gold_lucernhammer", "magistuarmory:gold_morgenstern", "magistuarmory:gold_pike",
+        "magistuarmory:gold_ranseur", "magistuarmory:gold_stylet", "magistuarmory:iron_chivalrylance",
+        "magistuarmory:netherite_chivalrylance", "magistuarmory:noble_sword", "magistuarmory:rusted_bastardsword",
+        "magistuarmory:silver_ahlspiess", "magistuarmory:silver_chainmorgenstern", "magistuarmory:silver_chivalrylance",
+        "magistuarmory:silver_claymore", "magistuarmory:silver_concavehalberd", "magistuarmory:silver_estoc",
+        "magistuarmory:silver_flamebladedsword", "magistuarmory:silver_guisarme", "magistuarmory:silver_heavymace",
+        "magistuarmory:silver_heavywarhammer", "magistuarmory:silver_katzbalger", "magistuarmory:silver_lochaberaxe",
+        "magistuarmory:silver_lucernhammer", "magistuarmory:silver_morgenstern", "magistuarmory:silver_pike",
+        "magistuarmory:silver_ranseur", "magistuarmory:silver_stylet", "magistuarmory:silver_zweihander",
+        "magistuarmory:steel_ahlspiess", "magistuarmory:steel_chainmorgenstern", "magistuarmory:steel_chivalrylance",
+        "magistuarmory:steel_claymore", "magistuarmory:steel_concavehalberd", "magistuarmory:steel_estoc",
+        "magistuarmory:steel_flamebladedsword", "magistuarmory:steel_guisarme", "magistuarmory:steel_heavymace",
+        "magistuarmory:steel_heavywarhammer", "magistuarmory:steel_katzbalger", "magistuarmory:steel_lochaberaxe",
+        "magistuarmory:steel_lucernhammer", "magistuarmory:steel_morgenstern", "magistuarmory:steel_pike",
+        "magistuarmory:steel_ranseur", "magistuarmory:steel_stylet", "magistuarmory:steel_zweihander",
+        "magistuarmory:stone_ahlspiess", "magistuarmory:stone_chainmorgenstern", "magistuarmory:stone_chivalrylance",
+        "magistuarmory:stone_concavehalberd", "magistuarmory:stone_estoc", "magistuarmory:stone_guisarme",
+        "magistuarmory:stone_heavymace", "magistuarmory:stone_heavywarhammer", "magistuarmory:stone_katzbalger",
+        "magistuarmory:stone_lochaberaxe", "magistuarmory:stone_lucernhammer", "magistuarmory:stone_morgenstern",
+        "magistuarmory:stone_pike", "magistuarmory:stone_ranseur", "magistuarmory:stone_stylet",
+        "magistuarmory:tin_ahlspiess", "magistuarmory:tin_chainmorgenstern", "magistuarmory:tin_chivalrylance",
+        "magistuarmory:tin_claymore", "magistuarmory:tin_concavehalberd", "magistuarmory:tin_estoc",
+        "magistuarmory:tin_flamebladedsword", "magistuarmory:tin_guisarme", "magistuarmory:tin_heavymace",
+        "magistuarmory:tin_heavywarhammer", "magistuarmory:tin_katzbalger", "magistuarmory:tin_lochaberaxe",
+        "magistuarmory:tin_lucernhammer", "magistuarmory:tin_morgenstern", "magistuarmory:tin_pike",
+        "magistuarmory:tin_ranseur", "magistuarmory:tin_stylet", "magistuarmory:tin_zweihander",
+        "magistuarmory:wood_ahlspiess", "magistuarmory:wood_chainmorgenstern", "magistuarmory:wood_chivalrylance",
+        "magistuarmory:wood_concavehalberd", "magistuarmory:wood_estoc", "magistuarmory:wood_guisarme",
+        "magistuarmory:wood_heavymace", "magistuarmory:wood_heavywarhammer", "magistuarmory:wood_katzbalger",
+        "magistuarmory:wood_lochaberaxe", "magistuarmory:wood_lucernhammer", "magistuarmory:wood_morgenstern",
+        "magistuarmory:wood_pike", "magistuarmory:wood_ranseur", "magistuarmory:wood_stylet"
+      ],
+      "Simply Swords: the gold tier but the twinblade, the runic claymore, glaive and warglaive, and the Brimstone Claymore": [
+        "simplyswords:brimstone_claymore", "simplyswords:gold_chakram", "simplyswords:gold_claymore",
+        "simplyswords:gold_cutlass", "simplyswords:gold_glaive", "simplyswords:gold_greataxe",
+        "simplyswords:gold_greathammer", "simplyswords:gold_halberd", "simplyswords:gold_katana",
+        "simplyswords:gold_longsword", "simplyswords:gold_rapier", "simplyswords:gold_sai",
+        "simplyswords:gold_scythe", "simplyswords:gold_spear", "simplyswords:gold_warglaive",
+        "simplyswords:runic_claymore", "simplyswords:runic_glaive", "simplyswords:runic_warglaive"
+      ],
+      "Monster Expansion: the ones marked Cut": [
+        "monsterexpansion:charcraw", "monsterexpansion:diamond_mace", "monsterexpansion:diamond_spear",
+        "monsterexpansion:golden_mace", "monsterexpansion:golden_spear", "monsterexpansion:iron_mace",
+        "monsterexpansion:iron_spear", "monsterexpansion:netherite_mace", "monsterexpansion:netherite_spear",
+        "monsterexpansion:stone_mace", "monsterexpansion:stone_spear", "monsterexpansion:test_sword"
+      ],
+      "Legendary Monsters: the ones marked Cut": [
+        "legendary_monsters:chorus_blade", "legendary_monsters:dinosaur_bone_club", "legendary_monsters:enderitium_sickle",
+        "legendary_monsters:enderitium_sword", "legendary_monsters:resurrected_javelin", "legendary_monsters:sharp_sai",
+        "legendary_monsters:the_great_frost", "legendary_monsters:void_sword", "legendary_monsters:wand_of_clouds"
+      ],
+      "Paladins & Priests: the ones marked Cut": [
+        "paladins:diamond_claymore", "paladins:golden_claymore", "paladins:golden_great_hammer",
+        "paladins:golden_mace", "paladins:iron_claymore", "paladins:netherite_claymore",
+        "paladins:stone_claymore", "paladins:stone_great_hammer", "paladins:wooden_great_hammer"
+      ],
+      "Rogues & Warriors: the ones marked Cut": [
+        "rogues:diamond_glaive", "rogues:flint_dagger", "rogues:golden_double_axe",
+        "rogues:golden_glaive", "rogues:golden_sickle", "rogues:iron_glaive",
+        "rogues:netherite_glaive", "rogues:stone_double_axe"
+      ],
+      "Skarrier Mobs: the ones marked Cut": [
+        "skarrier_mobs:ban_sword", "skarrier_mobs:blitzblade", "skarrier_mobs:decayerite_sword",
+        "skarrier_mobs:invulnerite_axe", "skarrier_mobs:invulnerite_sword", "skarrier_mobs:morgenstern",
+        "skarrier_mobs:resisteel_axe", "skarrier_mobs:voracious_blade"
+      ],
+      "Marium's Soulslike Weaponry: the ones marked Cut": [
+        "soulsweapons:blunderbuss", "soulsweapons:chungus_staff", "soulsweapons:gatling_gun",
+        "soulsweapons:guts_sword", "soulsweapons:hunter_pistol", "soulsweapons:moonstone_axe",
+        "soulsweapons:silver_sword"
+      ],
+      "Bosses'Rise: the ones marked Cut": [
+        "block_factorys_bosses:dagger", "block_factorys_bosses:knight_sword", "block_factorys_bosses:large_sword",
+        "block_factorys_bosses:pirate_saber", "block_factorys_bosses:warrior_sword"
+      ],
+      "L_Ender's Cataclysm: the ones marked Cut": [
+        "cataclysm:coral_bardiche", "cataclysm:khopesh", "cataclysm:the_incinerator"
+      ],
+      "Iron's Spells: the Autoloader Crossbow (broken in 1.20.1, and only found in 1.21's trial vaults), the plain Claymore and the Graybeard Staff": [
+        "irons_spellbooks:autoloader_crossbow", "irons_spellbooks:claymore", "irons_spellbooks:graybeard_staff"
+      ],
+      "The Graveyard: the ones marked Cut": [
+        "graveyard:bone_dagger"
+      ],
+      "Illager Invasion: the ones marked Cut": [
+        "illagerinvasion:platinum_infused_hatchet"
+      ],
+      "Mutant Monsters: the ones marked Cut": [
+        "mutantmonsters:creeper_shard"
+      ],
+      "Myths & Legends: the ones marked Cut": [
+        "mythsandlegends:copper_coin_sword"
       ]
     },
     "hidden_items": {
@@ -208,9 +322,6 @@
       ],
       "Zoni's creative-only tools (their tooltips say 'Creative only'): Repel despawns any entity it's used on, Ruler makes mobs look south, and the Whip": [
         "zonis_companions:repel", "zonis_companions:ruler", "zonis_companions:whip"
-      ],
-      "Iron's Spells' Autoloader Crossbow: broken (FreshOrangeSlices' playtest: one arrow, then a mess), no recipe, and its only loot is 1.21's trial vaults, which 1.20.1 doesn't have": [
-        "irons_spellbooks:autoloader_crossbow"
       ]
     }
   },

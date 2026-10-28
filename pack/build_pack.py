@@ -258,11 +258,16 @@ def locked_version(pin, record, game, loader):
     }
 
 
-def pack_data_files(data, have_loader, problems):
+def pack_data_files(data, have_loader, problems, jars=None, notes=None):
     """The pack's own data pack, as {path: JSON}: under config/openloader/data/<name>, a pack.mcmeta, a recipe that
     never loads (a forge:false condition) in place of each removed one, and the c:hidden_from_recipe_viewers item tag
     (JEI hides what it holds) with the hidden items as optional entries. removed_recipes and hidden_items group their
-    ids under a reason each ({reason: [ids]}); keys starting with _ are comments."""
+    ids under a reason each ({reason: [ids]}); keys starting with _ are comments.
+
+    removed_items takes items out of the game as far as data can: every recipe in the pack's jars ({path: bytes})
+    that makes only removed items is replaced by one that never loads, every loot table that names one is rewritten
+    without it, and each is hidden from JEI. What a mod drops from its own code can't be changed this way; those are
+    only hidden (listed in notes)."""
     if not data:
         return {}
     if not have_loader:
@@ -274,11 +279,119 @@ def pack_data_files(data, have_loader, problems):
     for recipe in grouped("removed_recipes"):
         namespace, path = recipe.split(":", 1)
         out[f"{root}/data/{namespace}/recipes/{path}.json"] = {"conditions": [{"type": "forge:false"}]}
-    hidden = grouped("hidden_items")
+    removed = list(dict.fromkeys(grouped("removed_items")))
+    if removed and jars:
+        recipes, tables, gone = removed_item_data(set(removed), jars)
+        for path in recipes:
+            out[f"{root}/{path}"] = {"conditions": [{"type": "forge:false"}]}
+        for path, table in tables.items():
+            out[f"{root}/{path}"] = table
+        if notes is not None:
+            present = mods_in(jars)
+            only_hidden = [i for i in removed if i not in gone and i.split(":")[0] in present]
+            notes.append(f"removed items: {len(removed)} ({len(recipes)} recipes out, {len(tables)} loot tables rewritten)"
+                         + (f"; only hidden (no recipe or loot table names them; a mod's own code drops them): {', '.join(only_hidden)}" if only_hidden else ""))
+    hidden = list(dict.fromkeys(grouped("hidden_items") + removed))
     if hidden:
         out[f"{root}/data/c/tags/items/hidden_from_recipe_viewers.json"] = {
             "replace": False, "values": [{"id": item, "required": False} for item in hidden]}
     return out
+
+
+def mods_in(jars):
+    """The namespaces the jars carry data or assets for."""
+    spaces = set()
+    for data in jars.values():
+        try:
+            names = zipfile.ZipFile(io.BytesIO(data)).namelist()
+        except zipfile.BadZipFile:
+            continue
+        spaces |= {n.split("/")[1] for n in names if n.startswith(("data/", "assets/")) and n.count("/") >= 2}
+    return spaces
+
+
+def removed_item_data(removed, jars):
+    """For removed_items: the recipe files (data/<ns>/recipes/...) that make only removed items, the loot tables that
+    name one rewritten without it ({path: table}), and the items either touched."""
+    recipes, tables, touched = [], {}, set()
+    for jar, data in sorted(jars.items()):
+        try:
+            z = zipfile.ZipFile(io.BytesIO(data))
+        except zipfile.BadZipFile:
+            continue
+        for name in z.namelist():
+            if not name.startswith("data/") or not name.endswith(".json"):
+                continue
+            is_recipe, is_loot = "/recipes/" in name, "/loot_tables/" in name
+            if not is_recipe and not is_loot:
+                continue
+            text = z.read(name).decode("utf-8", "replace")
+            if not any(f'"{item}"' in text for item in removed):
+                continue
+            try:
+                parsed = json.loads(text)
+            except ValueError:
+                continue
+            if is_recipe:
+                made = recipe_results(parsed)
+                if made and made <= removed:
+                    recipes.append(name)
+                    touched |= made
+            else:
+                stripped, dropped = strip_loot(parsed, removed)
+                if dropped:
+                    tables[name] = stripped
+                    touched |= dropped
+    return recipes, tables, touched
+
+
+def recipe_results(node, inside=False):
+    """The item ids a recipe makes: anything under a result or output key, however the mod nests it."""
+    found = set()
+    if isinstance(node, dict):
+        for key, value in node.items():
+            here = inside or key in ("result", "results", "output", "outputs")
+            if key in ("result", "output") and isinstance(value, str):
+                found.add(value)
+            elif here and key in ("item", "id") and isinstance(value, str):
+                found.add(value)
+            else:
+                found |= recipe_results(value, here)
+    elif isinstance(node, list):
+        for value in node:
+            found |= recipe_results(value, inside)
+    return found
+
+
+def strip_loot(node, removed):
+    """A loot table without its entries for removed items (and composite entries left empty). Returns (table, the
+    removed items it named)."""
+    dropped = set()
+
+    def entry_kept(entry):
+        if isinstance(entry, dict):
+            if entry.get("type", "").endswith("item") and entry.get("name") in removed:
+                dropped.add(entry["name"])
+                return False
+            if "children" in entry:
+                entry["children"] = [c for c in entry["children"] if entry_kept(c)]
+                return bool(entry["children"])
+        return True
+
+    def walk(value):
+        if isinstance(value, dict):
+            for key, inner in value.items():
+                if key == "entries" and isinstance(inner, list):
+                    value[key] = [e for e in inner if entry_kept(e)]
+                else:
+                    walk(inner)
+        elif isinstance(value, list):
+            for inner in value:
+                walk(inner)
+
+    table = json.loads(json.dumps(node))
+    walk(table)
+    return table, dropped
 
 
 def lock_text(game, forge, versions, files, comment=None):
@@ -479,7 +592,8 @@ def main():
     # The pack's own data pack (pack_data): the recipes it takes out and the items it hides from JEI, loaded into every
     # world (new and old, and the server's) by Open Loader from config/openloader/data. Ids from mods a layer leaves out
     # do no harm: a recipe that can never load is skipped, and the tag's entries are optional.
-    for path, content in pack_data_files(spec.get("pack_data"), "open-loader" in by_slug, problems).items():
+    every_jar = {**jars, **{path: data for path, data in overrides.items() if path.endswith(".jar")}}
+    for path, content in pack_data_files(spec.get("pack_data"), "open-loader" in by_slug, problems, every_jar, notes).items():
         overrides[path] = (json.dumps(content, indent=2) + "\n").encode()
         sides[path] = {"client": "required", "server": "required"}
 

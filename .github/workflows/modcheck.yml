@@ -14,6 +14,10 @@ jobs:
         with:
           path: check
       - run: echo "RUN_ID=$(cat check/run-id.txt)" >> "$GITHUB_ENV"
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'microsoft'
       - uses: actions/download-artifact@v4
         with:
           name: pack-screenshots-L6
@@ -29,6 +33,7 @@ jobs:
       - run: |
           find shots pack -maxdepth 3 | head -20
           python3 check/weapons.py "$(find shots -name bloom-dump.jsonl | head -1)" "$(ls pack/*server.zip | head -1)" data-out/weapons | tee summary.txt
+          python3 check/weaponcode.py data-out/weapons/weapons.json "$(ls pack/*server.zip | head -1)" data-out/weapons | tee -a summary.txt
           echo "::notice title=weapons::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
           mkdir -p data/weapons && cp data-out/weapons/* data/weapons/ && cd data && git add -A

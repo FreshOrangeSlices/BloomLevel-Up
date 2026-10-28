@@ -1,4 +1,4 @@
-# Throwaway (never merged): the pack's weapons and armor, from a pack run's artifacts (weapons.py), pushed to ci/data.
+# Throwaway (never merged): the pack's natural spawns, from a pack run's artifacts (spawnscan.py), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          python3 check/weapons.py "$(find shots -name bloom-dump.jsonl | head -1)" "$(ls pack/*server.zip | head -1)" data-out/weapons | tee summary.txt
-          t="$(find shots -name tooltips.jsonl | head -1)"; if [ -n "$t" ]; then cp "$t" data-out/weapons/; echo "tooltips: $(wc -l < "$t") lines" >> summary.txt; else echo "no tooltips.jsonl" >> summary.txt; fi
-          echo "::notice title=weapons::$(tr '\n' '|' < summary.txt)"
+          ls pack
+          python3 check/spawnscan.py "$(ls pack/*server*.zip | head -1)" data-out/spawns | tee summary.txt
+          echo "::notice title=spawns::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/weapons && cp data-out/weapons/* data/weapons/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack weapons and armor" && git push -q origin ci/data && echo pushed
+          mkdir -p data/spawns && cp data-out/spawns/* data/spawns/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack spawns" && git push -q origin ci/data && echo pushed

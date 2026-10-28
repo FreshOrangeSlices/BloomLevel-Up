@@ -277,6 +277,40 @@ public final class MiscGameTests {
 		helper.succeed();
 	}
 
+	// ------------------------------------------------------------------ the profile through death
+
+	/**
+	 * Dying (and coming back from the End) makes a new player: by the time Forge's Clone event runs, the old one's
+	 * capabilities are already invalidated. The whole profile must still come across: levels, spent points, Majors,
+	 * Major Levels given by command and stored items. (FreshOrangeSlices' playtest: every death reset Bloom to 0.)
+	 */
+	@GameTest(template = "empty")
+	public static void theProfileSurvivesDeathAndTheEnd(GameTestHelper helper) {
+		ServerPlayer first = player(helper);
+		grant(first, MiscIds.XP_INSURANCE);
+		BloomProfile profile = BloomAttachments.profile(first);
+		BloomServices.progression().giveMajorLevels(profile, 5);
+		BloomServices.progression().allocate(profile, CombatIds.POWER, ProgressionService.Pool.NATURAL, 30);
+		BloomAttachments.items(first).putInt("marker", 7);
+		int available = profile.availableMajorLevels();
+
+		ServerPlayer second = player(helper);
+		first.invalidateCaps();
+		MinecraftForge.EVENT_BUS.post(new PlayerEvent.Clone(second, first, true));
+		BloomProfile after = BloomAttachments.profile(second);
+		TestPlayers.equal(helper, 100, after.category(SkillXp.COMBAT).level(), "Combat level after death");
+		TestPlayers.equal(helper, 30, BloomServices.progression().statValue(after, CombatIds.POWER), "Power points after death");
+		helper.assertTrue(after.owns(MiscIds.XP_INSURANCE), "Majors after death");
+		TestPlayers.equal(helper, available, after.availableMajorLevels(), "Free Major Levels after death (5 given by command)");
+		TestPlayers.equal(helper, 7, BloomAttachments.items(second).getInt("marker"), "Stored items after death");
+
+		ServerPlayer third = player(helper);
+		second.invalidateCaps();
+		MinecraftForge.EVENT_BUS.post(new PlayerEvent.Clone(third, second, false));
+		TestPlayers.equal(helper, 100, BloomAttachments.profile(third).category(SkillXp.COMBAT).level(), "Combat level back from the End");
+		helper.succeed();
+	}
+
 	// ------------------------------------------------------------------ XP Insurance
 
 	@GameTest(template = "empty")
@@ -287,7 +321,9 @@ public final class MiscGameTests {
 		dead.setExperienceLevels(30);
 		dead.experienceProgress = 0.0F;
 
-		// What respawning after death does: the profile is copied, then XP Insurance hands back its share.
+		// What respawning after death does: the dead player's capabilities are invalidated, the profile is copied,
+		// then XP Insurance hands back its share.
+		dead.invalidateCaps();
 		MinecraftForge.EVENT_BUS.post(new PlayerEvent.Clone(respawned, dead, true));
 
 		// Level 30 = 1395 XP: 100 drops as orbs, 1295 is lost, half of it (647) comes back.
@@ -323,6 +359,7 @@ public final class MiscGameTests {
 
 		// It's kept through death (the profile capability carries it to the new player).
 		ServerPlayer respawned = player(helper);
+		player.invalidateCaps(); // as dying does, before the copy
 		MinecraftForge.EVENT_BUS.post(new PlayerEvent.Clone(respawned, player, true));
 		TestPlayers.equal(helper, 12, HoardersPocket.items(respawned).get(3).getCount(), "The pocket survives death");
 		helper.succeed();

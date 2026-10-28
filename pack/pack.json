@@ -201,9 +201,13 @@
     },
     "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds).",
     "files": {
-      "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo.",
+      "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",
       "config/obscuria/aquamirae-early.json": {
         "themed_main_menu": false
+      },
+      "config/inventoryprofilesnext/integrationHints/spell_engine.json": {
+        "net.spell_engine.client.gui.SpellBindingScreen": {"ignore": true},
+        "net.spell_engine.spellbinding.SpellBindingScreenHandler": {"ignore": true}
       }
     }
   }

@@ -258,6 +258,21 @@ def mob_check(server, client, player, entities, with_egg, shots, server_dir=".")
     return failures, warnings, summoned
 
 
+def press(key):
+    """Types a key into the game window (xdotool on the virtual display); False when that isn't possible."""
+    if not shutil.which("xdotool"):
+        return False
+    try:
+        found = subprocess.run(["xdotool", "search", "--name", "Minecraft"], capture_output=True, text=True, timeout=10)
+        window = (found.stdout.split() or [None])[0]
+        if window:
+            subprocess.run(["xdotool", "windowfocus", "--sync", window], check=False, timeout=10)
+        return subprocess.run(["xdotool", "key", key], check=False, timeout=10).returncode == 0
+    except (OSError, subprocess.TimeoutExpired) as error:
+        print(f"couldn't press {key}: {error}")
+        return False
+
+
 def capture(folder, name):
     """The whole virtual screen, as a PNG: ffmpeg when the machine has it, else ImageMagick's import."""
     path = os.path.join(folder, f"bloom_{name}.png")
@@ -340,6 +355,12 @@ def main():
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 180 15")
         time.sleep(4)
         capture(shots, "pack_back")
+        # The inventory: where Bloom's buttons sit next to what other mods put around it.
+        if press("e"):
+            time.sleep(3)
+            capture(shots, "pack_inventory")
+            press("e")
+            time.sleep(1)
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
         entities, with_egg = modded_entities(os.path.join(server_dir, "mods"))
         progress(f"mob check: {len(entities)} modded entities")

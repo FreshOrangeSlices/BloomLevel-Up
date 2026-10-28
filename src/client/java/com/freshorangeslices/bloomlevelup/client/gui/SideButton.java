@@ -2,6 +2,8 @@ package com.freshorangeslices.bloomlevelup.client.gui;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -16,8 +18,8 @@ import com.freshorangeslices.bloomlevelup.network.BloomPayloads;
 import com.freshorangeslices.bloomlevelup.network.BloomPayloads.CombatAction;
 
 /**
- * Item-icon buttons beside the Skill Hub button outside the inventory: Hoarder's Pocket (a chest) and Rune Embedding
- * (an enchanted book). They only ask; the server opens the screen or says why not.
+ * Item-icon buttons under the Skill Hub button, in Bloom's column outside the inventory: Hoarder's Pocket (a chest) and
+ * Rune Embedding (an enchanted book). They only ask; the server opens the screen or says why not.
  */
 public final class SideButton extends AbstractButton {
 	private static final int SIZE = 20;
@@ -58,30 +60,55 @@ public final class SideButton extends AbstractButton {
 		}
 	}
 
-	/**
-	 * Survival inventory: Bloom's row just under the panel's bottom-right corner, right to left (the hub button at the
-	 * right end), clear of what accessory mods put beside the player. Creative: under the hub button outside the panel.
-	 */
+	/** Under the hub button, in Bloom's column beside the inventory (see {@link #columnY}). */
 	private void reposition() {
 		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
+		this.setX(columnX(accessor));
+		this.setY(columnY(screen, accessor, this.row));
+	}
 
-		if (screen instanceof net.minecraft.client.gui.screens.inventory.InventoryScreen) {
-			this.setX(rowX(accessor, this.row));
-			this.setY(rowY(accessor));
-		} else {
-			this.setX(accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2);
-			this.setY(accessor.bloomlevelup$topPos() + 4 + this.row * (SIZE + 2));
+	/** X of Bloom's column: just outside the inventory panel's right edge (it follows the recipe book). */
+	static int columnX(AbstractContainerScreenAccessor accessor) {
+		return accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2;
+	}
+
+	/**
+	 * Y of place {@code index} in Bloom's column (0 = the hub button), top down from the panel's top-right corner.
+	 * Buttons other mods put in that spot come first: the column starts under them (FreshOrangeSlices' playtest: under
+	 * the panel it ran into Inventory Profiles Next's profile bar). Worked out each frame, so late arrivals count.
+	 */
+	static int columnY(AbstractContainerScreen<?> screen, AbstractContainerScreenAccessor accessor, int index) {
+		int x = columnX(accessor);
+		int ours = 0;
+
+		for (GuiEventListener child : screen.children()) {
+			if (child instanceof HubButton || child instanceof SideButton) {
+				ours++;
+			}
 		}
-	}
 
-	/** X of place {@code index} in Bloom's row under the survival inventory (0 = the right end). */
-	static int rowX(AbstractContainerScreenAccessor accessor, int index) {
-		return accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() - SIZE - index * (SIZE + 2);
-	}
+		int height = Math.max(1, ours) * (SIZE + 2);
+		int top = accessor.bloomlevelup$topPos() + 4;
 
-	/** Y of Bloom's row: just under the survival inventory's panel. */
-	static int rowY(AbstractContainerScreenAccessor accessor) {
-		return accessor.bloomlevelup$topPos() + accessor.bloomlevelup$imageHeight() + 2;
+		for (int pass = 0; pass < 8; pass++) {
+			int below = top;
+
+			for (GuiEventListener child : screen.children()) {
+				if (child instanceof AbstractWidget widget && !(child instanceof HubButton) && !(child instanceof SideButton) && widget.visible
+						&& widget.getX() < x + SIZE && widget.getX() + widget.getWidth() > x
+						&& widget.getY() < below + height && widget.getY() + widget.getHeight() > below) {
+					below = Math.max(below, widget.getY() + widget.getHeight() + 2);
+				}
+			}
+
+			if (below == top) {
+				break;
+			}
+
+			top = below;
+		}
+
+		return top + index * (SIZE + 2);
 	}
 
 	@Override

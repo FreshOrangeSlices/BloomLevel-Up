@@ -11,7 +11,7 @@ import com.freshorangeslices.bloomlevelup.client.IconTextures;
 import com.freshorangeslices.bloomlevelup.client.mixin.AbstractContainerScreenAccessor;
 
 /**
- * The "open Skill Hub" button that sits just outside the top-right corner of the inventory panel.
+ * The "open Skill Hub" button at the top of Bloom's column just outside the inventory panel's right edge.
  * It re-reads the panel position every frame, so it follows the inventory when the recipe book opens.
  */
 public final class HubButton extends AbstractButton {
@@ -26,19 +26,13 @@ public final class HubButton extends AbstractButton {
 	}
 
 	/**
-	 * Survival inventory: the right end of Bloom's row just under the panel's bottom-right corner (other mods crowd the
-	 * top, the left and the space around the player). Creative: just outside the panel's top-right corner.
+	 * The top of Bloom's column just outside the panel's top-right corner, or under whatever other mods put there
+	 * ({@link SideButton#columnY}); the same in the survival and the creative inventory.
 	 */
 	private void reposition() {
 		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
-
-		if (screen instanceof net.minecraft.client.gui.screens.inventory.InventoryScreen) {
-			this.setX(SideButton.rowX(accessor, 0));
-			this.setY(SideButton.rowY(accessor));
-		} else {
-			this.setX(accessor.bloomlevelup$leftPos() + accessor.bloomlevelup$imageWidth() + 2);
-			this.setY(accessor.bloomlevelup$topPos() + 4);
-		}
+		this.setX(SideButton.columnX(accessor));
+		this.setY(SideButton.columnY(screen, accessor, 0));
 	}
 
 	@Override

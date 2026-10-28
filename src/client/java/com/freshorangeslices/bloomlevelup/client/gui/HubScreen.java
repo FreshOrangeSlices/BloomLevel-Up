@@ -319,7 +319,8 @@ public final class HubScreen extends Screen {
 		this.addRenderableWidget(HubTab.button(panelX + 4, y, TAB_H, bloomTip, RESET_LEVELS_ICON, true, () -> confirmBloom(category, gain)));
 
 		long now = this.minecraft.level == null ? 0L : this.minecraft.level.getGameTime();
-		resetMajorsReadyAt = profile.counter(ProgressionService.majorResetKey(category.id()));
+		// With the waits off (/bloom admin waits off) the server skips them, so the button doesn't count down either.
+		resetMajorsReadyAt = config.waitsEnabled ? profile.counter(ProgressionService.majorResetKey(category.id())) : 0L;
 		resetMinutesShown = minutesUntil(resetMajorsReadyAt, now);
 		List<String> owned = service.ownedMajorsIn(profile, category.id());
 		MutableComponent resetTip = Component.translatable("bloom.hub.reset_majors.tooltip", name(category.translationKey(), category.id()))

@@ -157,6 +157,10 @@ public final class BloomCommands {
 										.then(argument("category", ResourceLocationArgument.id()).suggests(CATEGORIES)
 												.then(argument("amount", IntegerArgumentType.integer(1))
 														.executes(BloomCommands::adminXp)))))
+						.then(literal("majorlevels")
+								.then(argument("players", EntityArgument.players())
+										.then(argument("amount", IntegerArgumentType.integer())
+												.executes(BloomCommands::adminMajorLevels))))
 						.then(literal("definitions").executes(ctx -> definitions(ctx.getSource())))));
 	}
 
@@ -214,6 +218,23 @@ public final class BloomCommands {
 			BloomSync.changed(target);
 			ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.xp.granted",
 					target.getDisplayName(), result.levelsGained(), result.newLevel(), result.majorLevelsGranted()), true);
+			count++;
+		}
+
+		return count;
+	}
+
+	/** Gives (or with a negative amount takes back) Major Levels outright, skipping the levels that earn them. */
+	private static int adminMajorLevels(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+		int amount = IntegerArgumentType.getInteger(ctx, "amount");
+		int count = 0;
+
+		for (ServerPlayer target : EntityArgument.getPlayers(ctx, "players")) {
+			BloomProfile profile = BloomAttachments.profile(target);
+			int change = BloomServices.progression().giveMajorLevels(profile, amount);
+			BloomSync.changed(target);
+			ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.admin.major_levels",
+					target.getDisplayName(), (change >= 0 ? "+" : "") + change, profile.availableMajorLevels()), true);
 			count++;
 		}
 

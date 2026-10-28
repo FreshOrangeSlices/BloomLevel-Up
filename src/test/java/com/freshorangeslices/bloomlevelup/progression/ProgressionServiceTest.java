@@ -134,6 +134,21 @@ class ProgressionServiceTest {
 	}
 
 	@Test
+	void majorLevelsCanBeGivenOutrightAndTakenBackOnlyWhileFree() {
+		assertEquals(8, service.giveMajorLevels(profile, 8));
+		assertEquals(8, profile.availableMajorLevels(), "No levels needed");
+		assertTrue(service.purchaseMajor(profile, IRON_SKIN).ok(), "They buy Majors like earned ones"); // 7
+		assertEquals(-1, service.giveMajorLevels(profile, -5), "Only the free one comes back; Iron Skin stays paid for");
+		assertEquals(0, profile.availableMajorLevels());
+		assertTrue(profile.owns(IRON_SKIN));
+		assertEquals(7, profile.copy().earnedMajorLevels(), "Kept with the profile (copied on death)");
+		levelTo(UTILITY, 10);
+		assertEquals(-1, service.giveMajorLevels(profile, -3), "A level earned since frees one given");
+		assertEquals(0, profile.availableMajorLevels());
+		assertEquals(6, profile.counter(BloomProfile.GIVEN_MAJOR_LEVELS));
+	}
+
+	@Test
 	void theSecondBuildUnlocksAt100AndKeepsItsOwnMajorsAndPoints() {
 		levelTo(ARMOR, 50);
 		assertEquals(Outcome.BUILD_LOCKED, service.switchBuild(profile, 0L).outcome());

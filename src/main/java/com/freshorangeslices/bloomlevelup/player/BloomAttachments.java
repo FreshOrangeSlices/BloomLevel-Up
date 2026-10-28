@@ -70,7 +70,7 @@ public final class BloomAttachments {
 			if (event.getObject() instanceof Player) {
 				Provider provider = new Provider();
 				event.addCapability(BloomLevelUp.id("profile"), provider);
-				event.addListener(provider.optional::invalidate);
+				event.addListener(provider::invalidate);
 			}
 		});
 		MinecraftForge.EVENT_BUS.addListener(BloomAttachments::onClone);
@@ -103,11 +103,23 @@ public final class BloomAttachments {
 
 	private static final class Provider implements ICapabilitySerializable<CompoundTag> {
 		private final Holder holder = new Holder();
-		private final LazyOptional<Holder> optional = LazyOptional.of(() -> holder);
+		private LazyOptional<Holder> optional = LazyOptional.of(() -> holder);
 
 		@Override
 		public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
+			// A dead player's capabilities are invalidated (which ends this LazyOptional for good); reviveCaps() lets
+			// Forge ask again during the Clone event, and a fresh one is handed out then, or the copy finds nothing
+			// and the respawned player starts from an empty profile. Forge itself answers "empty" while invalid.
+			if (!optional.isPresent()) {
+				optional = LazyOptional.of(() -> holder);
+			}
+
 			return PROFILE.orEmpty(capability, optional);
+		}
+
+		/** Called when Forge invalidates the player's capabilities (removed, died): ends the one handed out now. */
+		void invalidate() {
+			optional.invalidate();
 		}
 
 		@Override

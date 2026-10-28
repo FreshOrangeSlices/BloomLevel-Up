@@ -1,0 +1,162 @@
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /advancement (grant|revoke)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /attribute <target> <attribute> (get|base|modifier)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /execute (run|if|unless|as|at|store|positioned|rotated|facing|align|anchored|in|summon|on)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /bossbar (add|remove|list|set|get)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /clear [<targets>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /clone (<begin>|from)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /damage <target> <amount> [<damageType>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /data (merge|get|remove|modify)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /datapack (enable|disable|list)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /debug (start|stop|function)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /defaultgamemode <gamemode>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /difficulty [peaceful|easy|normal|hard]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /effect (clear|give)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /me <action>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /enchant <targets> <enchantment> [<level>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /experience (add|set|query)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /xp -> experience
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /fill <from> <to> <block> [replace|keep|outline|hollow|destroy]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /fillbiome <from> <to> <biome> [replace]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /forceload (add|remove|query)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /function <name>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /gamemode <gamemode> [<target>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /gamerule (announceAdvancements|blockExplosionDropDecay|commandBlockOutput|commandModificationBlockLimit|decorative_blocks:disableThatch|disableElytraMovementCheck|disableRaids|doDaylightCycle|doEntityDrops|doFireTick|doImmediateRespawn|doInsomnia|doLimitedCrafting|doMobLoot|doMobSpawning|doPatrolSpawning|doTileDrops|doTraderSpawning|doVinesSpread|doWardenSpawning|doWeatherCycle|drowningDamage|fallDamage|fireDamage|forgiveDeadPlayers|freezeDamage|globalSoundEvents|keepInventory|lavaSourceConversion|logAdminCommands|maxCommandChainLength|maxEntityCramming|mobExplosionDropDecay|mobGriefing|naturalRegeneration|playersSleepingPercentage|randomTickSpeed|reducedDebugInfo|sendCommandFeedback|showDeathMessages|snowAccumulationHeight|spawnRadius|spectatorsGenerateChunks|tntExplosionDropDecay|universalAnger|waterSourceConversion)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /give <targets> <item> [<count>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /help [<command>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /item (replace|modify)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /kick <targets> [<reason>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /kill [<targets>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /list [uuids]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /locate (structure|biome|poi)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /loot (replace|insert|give|spawn)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /msg <targets> <message>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /tell -> msg
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /w -> msg
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /particle <name> [<pos>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /place (feature|jigsaw|structure|template)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /playsound <sound> (master|music|record|weather|block|hostile|neutral|player|ambient|voice)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /reload
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /recipe (give|take)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /return <value>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /ride <target> (mount|dismount)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /say <message>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /schedule (function|clear)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /scoreboard (objectives|players)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /seed
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /setblock <pos> <block> [destroy|keep|replace]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /spawnpoint [<targets>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /setworldspawn [<pos>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /spectate [<target>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /spreadplayers <center> <spreadDistance> <maxRange> (<respectTeams>|under)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /stopsound <targets> [*|master|music|record|weather|block|hostile|neutral|player|ambient|voice]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /summon <entity> [<pos>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /tag <targets> (add|remove|list)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /team (list|add|remove|empty|join|leave|modify)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /teammsg <message>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /tm -> teammsg
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /teleport (<location>|<destination>|<targets>)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /tp -> teleport
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /tellraw <targets> <message>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /time (set|add|query)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /title <targets> (clear|reset|title|subtitle|actionbar|times)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /trigger <objective> [add|set]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /weather (clear|rain|thunder)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /worldborder (add|set|center|damage|get|warning)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /jfr (start|stop)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /ban-ip <target> [<reason>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /banlist [ips|players]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /ban <targets> [<reason>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /deop <targets>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /op <targets>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /pardon <targets>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /pardon-ip <target>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /perf (start|stop)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /save-all [flush]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /save-off
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /save-on
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /setidletimeout <minutes>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /stop
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /whitelist (on|off|list|add|remove|reload)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /simplyswords (power|spawn_hostile|loot_test|loot_test_chest|component_test|pity)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /modernfix (upgradeStructures|mcfunctions)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /mfsrc
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /balm (dev|export)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones (activate|forget|place|count|list|cooldown)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /craftingtweaks debug
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /carryon (debug|clear|place)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /configure_update <id> (list|inspect|accept|reject)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [cancel|center|confirm|continue|corners|help|pattern|pause|progress|quiet|radius|reload|selection|shape|silent|spawn|start|trim|worldborder|world]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /curios (list|replace|set|add|remove|clear|drop|reset)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /migamigos summon <entityType> (amigo|enemigo|heartless)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /posdebug <x> <y> <z>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /structurify (dump|config|locate|structure|debug)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /irons_lib (statue|soulfire)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /easymsc [ban|spawnrate|dimensionban|biomeban|spawntype]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /easymobspawncontrol [ban|spawnrate|dimensionban|biomeban|spawntype]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /spell_cooldown (reset|clear)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /emotes (play|stop|reload)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /forge (tps|track|entity|generate|dimensions|mods|tags)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /config showfile <mod> <type>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /jade (show|hide)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /testhunt
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /testlonghunt [<biome>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /quest (abandon|party|debug)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /enrage <targets>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /monsterability <targets> <abilityName>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /arborix (goto|stop|unclaim)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /kobeko unclaim <player>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /horde trigger
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /chronicle (find|forget|reset|page)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /lootr [barrel|trapped_chest|chest|shulker|clear|cclear|cart|custom|open_as|open_as_uuid|id|refresh|decay|openers|convert]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /aquamirae (test|shipbreaker|animation)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /bloodmoon (start|stop|status|next)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /research (grant|revoke|grantAll|revokeAll|list)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /createScroll <spell> <level>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /createSpellBook <slots> [randomize]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /createImbuedSword <item> <spell> <level>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /createDebugWizard <spell> <spellLevel> <targetsPlayer> <cancelAfterTicks>
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /cast <casters> <spell> [<level>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /mana (set|add|get)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /modlist
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /learnSpell (forget_all|learn_all|learn)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /clearCooldowns [all|player]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /clearRecasts (all|player)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /ironsSpellbooks (summons|upgrade|it|camera_shake|config)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /deathhistory (<player>|<player_uuid>)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /polymorph conflicts
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /almanac reload [<config>]
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /letmedespawn (add|remove|addPersistenceEnabler|removePersistenceEnabler|standardSpawnerDespawn)
+[04:21:52] [Server thread/INFO] [minecraft/MinecraftServer]: /spark [<args>]
+[04:21:58] [Server thread/INFO] [minecraft/MinecraftServer]: /spark [<args>]
+[04:22:04] [Server thread/INFO] [minecraft/MinecraftServer]: Unknown command or insufficient permissions
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [cancel] [<world>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [center] [<x>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [confirm]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [continue] [<world>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [corners] [<x1>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [help] [<page>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [pattern] [<pattern>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [pause] [<world>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [progress]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [quiet] [<interval>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [radius] [<radius>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [reload] [<type>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [selection]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [shape] [<shape>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [silent]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [spawn]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [start] [<world>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [trim] [<world>]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [worldborder]
+[04:22:10] [Server thread/INFO] [minecraft/MinecraftServer]: /chunky [world] [<world>]
+[04:22:16] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones activate <targets> <pos>
+[04:22:16] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones forget <targets> (<pos>|all)
+[04:22:16] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones place <pos> <style> <name>
+[04:22:16] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones count <player>
+[04:22:16] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones list <player> [all]
+[04:22:16] [Server thread/INFO] [minecraft/MinecraftServer]: /waystones cooldown <targets> reset (all|warp_stone|inventory_button)
+[04:22:22] [Server thread/INFO] [minecraft/MinecraftServer]: /structurify dump
+[04:22:22] [Server thread/INFO] [minecraft/MinecraftServer]: /structurify config (sync|status)
+[04:22:22] [Server thread/INFO] [minecraft/MinecraftServer]: /structurify locate structure <structure>
+[04:22:22] [Server thread/INFO] [minecraft/MinecraftServer]: /structurify structure (list|enable|disable)
+[04:22:22] [Server thread/INFO] [minecraft/MinecraftServer]: /structurify debug (enable|disable|debug_mode|sampling_mode)

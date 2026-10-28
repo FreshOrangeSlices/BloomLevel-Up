@@ -11,11 +11,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -31,8 +33,9 @@ import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 
 /**
  * A tool for supporting modpacks, off unless the game starts with {@code -Dbloomlevelup.tooltips=<file>}: ten seconds
- * after the player is in a world it writes every weapon-like item's tooltip as a player sees it, plain, with Shift held
- * and with Ctrl held (many mods put a weapon's ability behind one of those), one JSON object per line. The server's
+ * after the player is in a world it writes every weapon-like item's and armor piece's tooltip as a player sees it,
+ * plain, with Shift held and with Ctrl held (many mods put an ability behind one of those), and every control (its
+ * key, default, Forge modifier and conflict context), one JSON object per line. The server's
  * registry dump can't read these: most mods build tooltips with client-only code. CI runs it on LegionWareX to sort the
  * pack's weapons into ones with a skill, an effect, or neither.
  */
@@ -77,11 +80,12 @@ public final class TooltipDump {
 		for (Item item : BuiltInRegistries.ITEM) {
 			ItemStack stack = new ItemStack(item);
 
-			if (!weaponLike(item, stack)) {
+			if (!weaponLike(item, stack) && !(item instanceof ArmorItem)) {
 				continue;
 			}
 
 			JsonObject out = new JsonObject();
+			out.addProperty("kind", item instanceof ArmorItem ? "armor" : "weapon");
 			out.addProperty("id", BuiltInRegistries.ITEM.getKey(item).toString());
 			out.add("plain", tooltip(minecraft, stack, false, false));
 			out.add("shift", tooltip(minecraft, stack, true, false));
@@ -89,9 +93,24 @@ public final class TooltipDump {
 			lines.add(GSON.toJson(out));
 		}
 
+		// Every control: its key now, its default, Forge's modifier and conflict context (for sorting a pack's keys).
+		for (KeyMapping key : minecraft.options.keyMappings) {
+			JsonObject out = new JsonObject();
+			out.addProperty("kind", "key");
+			out.addProperty("id", key.getName());
+			out.addProperty("name", Component.translatable(key.getName()).getString());
+			out.addProperty("category", Component.translatable(key.getCategory()).getString());
+			out.addProperty("key", key.getKey().getName());
+			out.addProperty("modifier", key.getKeyModifier().name());
+			out.addProperty("default", key.getDefaultKey().getName());
+			out.addProperty("defaultModifier", key.getDefaultKeyModifier().name());
+			out.addProperty("context", String.valueOf(key.getKeyConflictContext()));
+			lines.add(GSON.toJson(out));
+		}
+
 		try {
 			Files.write(target, lines, StandardCharsets.UTF_8);
-			BloomLevelUp.LOGGER.info("Bloom tooltip dump: {} weapons -> {}", lines.size(), target.toAbsolutePath());
+			BloomLevelUp.LOGGER.info("Bloom tooltip dump: {} weapons, armor pieces and controls -> {}", lines.size(), target.toAbsolutePath());
 		} catch (IOException e) {
 			BloomLevelUp.LOGGER.warn("Bloom tooltip dump couldn't be written to {}", target, e);
 		}

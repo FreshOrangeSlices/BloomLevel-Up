@@ -2,20 +2,32 @@ package com.freshorangeslices.bloomlevelup.debug;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,11 +35,20 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraftforge.event.TickEvent;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
@@ -43,6 +64,7 @@ import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
  */
 public final class RegistryDump {
 	private static final Gson GSON = new Gson();
+	private static final Map<String, Method> HOOKS = hookMethods();
 
 	private RegistryDump() {
 	}
@@ -68,7 +90,7 @@ public final class RegistryDump {
 
 		for (Item item : BuiltInRegistries.ITEM) {
 			try {
-				lines.add(GSON.toJson(item(item)));
+				lines.add(GSON.toJson(item(level, item)));
 				items++;
 			} catch (Throwable e) {
 				lines.add(GSON.toJson(error("item", BuiltInRegistries.ITEM.getKey(item).toString(), e)));
@@ -105,7 +127,7 @@ public final class RegistryDump {
 		}
 	}
 
-	private static JsonObject item(Item item) {
+	private static JsonObject item(ServerLevel level, Item item) {
 		JsonObject out = new JsonObject();
 		ItemStack stack = new ItemStack(item);
 		out.addProperty("kind", "item");
@@ -135,7 +157,165 @@ public final class RegistryDump {
 			out.addProperty("bettercombat", bc);
 		}
 
+		// What a weapon does beyond its numbers: the uses and hooks its own code adds, what it implements, its other
+		// stats, and what its tooltip says (for sorting a pack's weapons into ones with a skill, an effect, or neither).
+		if (bc != null || item instanceof SwordItem || item instanceof AxeItem || item instanceof TridentItem
+				|| item instanceof ProjectileWeaponItem || out.get("damage").getAsDouble() > 0) {
+			out.add("hooks", hooks(item.getClass()));
+			out.add("interfaces", interfaces(item.getClass()));
+			out.add("stats", extraStats(stack));
+			out.add("tooltip", tooltip(level, stack));
+		}
+
 		return out;
+	}
+
+	/**
+	 * The behaviour methods an item can override, found by their parameter types (their names differ between a dev run
+	 * and a real game); Forge's own keep their names.
+	 */
+	private static Map<String, Method> hookMethods() {
+		Map<String, Method> out = new LinkedHashMap<>();
+		hook(out, "use", InteractionResultHolder.class, Level.class, Player.class, InteractionHand.class);
+		hook(out, "useOn", InteractionResult.class, UseOnContext.class);
+		hook(out, "useOnEntity", InteractionResult.class, ItemStack.class, Player.class, LivingEntity.class, InteractionHand.class);
+		hook(out, "releaseUsing", void.class, ItemStack.class, Level.class, LivingEntity.class, int.class);
+		hook(out, "useTick", void.class, Level.class, LivingEntity.class, ItemStack.class, int.class);
+		hook(out, "finishUsing", ItemStack.class, ItemStack.class, Level.class, LivingEntity.class);
+		hook(out, "hurtEnemy", boolean.class, ItemStack.class, LivingEntity.class, LivingEntity.class);
+		hook(out, "inventoryTick", void.class, ItemStack.class, Level.class, Entity.class, int.class, boolean.class);
+		hook(out, "tooltip", void.class, ItemStack.class, Level.class, List.class, TooltipFlag.class);
+
+		try {
+			out.put("leftClickEntity", IForgeItem.class.getMethod("onLeftClickEntity", ItemStack.class, Player.class, Entity.class));
+			out.put("swing", IForgeItem.class.getMethod("onEntitySwing", ItemStack.class, LivingEntity.class));
+		} catch (NoSuchMethodException e) {
+			BloomLevelUp.LOGGER.warn("Bloom registry dump: Forge's item hooks weren't found", e);
+		}
+
+		return out;
+	}
+
+	private static void hook(Map<String, Method> out, String name, Class<?> returns, Class<?>... parameters) {
+		for (Method method : Item.class.getDeclaredMethods()) {
+			if (method.getReturnType() == returns && Arrays.equals(method.getParameterTypes(), parameters)) {
+				out.put(name, method);
+				return;
+			}
+		}
+
+		BloomLevelUp.LOGGER.warn("Bloom registry dump: no Item method for {}", name);
+	}
+
+	/** Which of those an item's class overrides outside Minecraft and Forge, and in which class. */
+	private static JsonObject hooks(Class<?> type) {
+		JsonObject out = new JsonObject();
+
+		for (Map.Entry<String, Method> hook : HOOKS.entrySet()) {
+			try {
+				Class<?> owner = type.getMethod(hook.getValue().getName(), hook.getValue().getParameterTypes()).getDeclaringClass();
+
+				if (!vanilla(owner)) {
+					out.addProperty(hook.getKey(), owner.getSimpleName());
+				}
+			} catch (NoSuchMethodException | RuntimeException e) {
+				// not there
+			}
+		}
+
+		return out;
+	}
+
+	/** The interfaces a class and its superclasses implement, other than Minecraft's, Forge's and Java's. */
+	private static JsonArray interfaces(Class<?> type) {
+		Set<String> names = new TreeSet<>();
+		List<Class<?>> queue = new ArrayList<>();
+
+		for (Class<?> c = type; c != null && c != Object.class; c = c.getSuperclass()) {
+			queue.addAll(Arrays.asList(c.getInterfaces()));
+		}
+
+		while (!queue.isEmpty()) {
+			Class<?> next = queue.remove(queue.size() - 1);
+
+			if (!vanilla(next) && !next.getName().startsWith("java.") && names.add(next.getSimpleName())) {
+				queue.addAll(Arrays.asList(next.getInterfaces()));
+			}
+		}
+
+		return strings(List.copyOf(names));
+	}
+
+	private static boolean vanilla(Class<?> type) {
+		return type.getName().startsWith("net.minecraft.") || type.getName().startsWith("net.minecraftforge.");
+	}
+
+	/** Main-hand attribute modifiers other than plain attack damage and speed, summed by attribute and operation. */
+	private static JsonObject extraStats(ItemStack stack) {
+		Map<String, Double> totals = new TreeMap<>();
+
+		for (Map.Entry<Attribute, AttributeModifier> entry : stack.getAttributeModifiers(EquipmentSlot.MAINHAND).entries()) {
+			AttributeModifier.Operation operation = entry.getValue().getOperation();
+
+			if ((entry.getKey() == Attributes.ATTACK_DAMAGE || entry.getKey() == Attributes.ATTACK_SPEED)
+					&& operation == AttributeModifier.Operation.ADDITION) {
+				continue;
+			}
+
+			String name = String.valueOf(BuiltInRegistries.ATTRIBUTE.getKey(entry.getKey())) + switch (operation) {
+				case ADDITION -> "";
+				case MULTIPLY_BASE -> " (x base)";
+				case MULTIPLY_TOTAL -> " (x total)";
+			};
+			totals.merge(name, entry.getValue().getAmount(), Double::sum);
+		}
+
+		JsonObject out = new JsonObject();
+		totals.forEach(out::addProperty);
+		return out;
+	}
+
+	/**
+	 * The item's own tooltip lines as the server reads them, and the translation keys in them (a dedicated server has
+	 * only vanilla's English, so a mod's lines come back as their keys). Tooltips that need the client fail here.
+	 */
+	private static JsonObject tooltip(ServerLevel level, ItemStack stack) {
+		JsonObject out = new JsonObject();
+
+		try {
+			List<Component> lines = new ArrayList<>();
+			stack.getItem().appendHoverText(stack, level, lines, TooltipFlag.NORMAL);
+			Set<String> keys = new LinkedHashSet<>();
+			JsonArray text = new JsonArray();
+
+			for (Component line : lines) {
+				text.add(line.getString());
+				keys(line, keys);
+			}
+
+			out.add("lines", text);
+			out.add("keys", strings(List.copyOf(keys)));
+		} catch (Throwable e) {
+			out.addProperty("error", e.toString());
+		}
+
+		return out;
+	}
+
+	private static void keys(Component component, Set<String> out) {
+		if (component.getContents() instanceof TranslatableContents translatable) {
+			out.add(translatable.getKey());
+
+			for (Object argument : translatable.getArgs()) {
+				if (argument instanceof Component inner) {
+					keys(inner, out);
+				}
+			}
+		}
+
+		for (Component sibling : component.getSiblings()) {
+			keys(sibling, out);
+		}
 	}
 
 	private static JsonObject recipe(ServerLevel level, Recipe<?> recipe) {

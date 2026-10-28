@@ -281,6 +281,7 @@ jobs:
             shots/*.png
             game/logs/latest.log
             game/crash-reports
+            server/bloom-dump.jsonl
           if-no-files-found: ignore
 
   pack-screenshots:

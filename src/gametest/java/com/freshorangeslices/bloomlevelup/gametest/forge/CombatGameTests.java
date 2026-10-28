@@ -716,21 +716,21 @@ public final class CombatGameTests {
 		helper.succeed();
 	}
 
-	/** Assault Rifle is switched off on this build (FreshOrangeSlices' playtest: glitchy): it can't be bought or fire. */
 	@GameTest(template = "empty")
-	public static void assaultRifleIsSwitchedOff(GameTestHelper helper) {
+	public static void assaultRifleLoadsAndFiresAMagazine(GameTestHelper helper) {
 		ServerPlayer player = player(helper, new ItemStack(Items.CROSSBOW));
-		BloomProfile profile = BloomAttachments.profile(player);
-		BloomServices.progression().addXp(profile, SkillXp.COMBAT, 1.0e9);
-		helper.assertFalse(BloomServices.progression().purchaseMajor(profile, CombatIds.ASSAULT_RIFLE).ok(), "Not for sale");
-		helper.assertTrue(BloomServices.definitions().major(CombatIds.ASSAULT_RIFLE).isEmpty(), "Not in the hub");
-
+		grant(player, CombatIds.ASSAULT_RIFLE);
 		player.getInventory().add(new ItemStack(Items.ARROW, 20));
 		ItemStack crossbow = player.getMainHandItem();
 		CombatAbilities.setLoaded(crossbow, List.of(new ItemStack(Items.ARROW)));
+
 		CombatAbilities.fillMagazine(player, crossbow);
-		TestPlayers.equal(helper, 1, CombatAbilities.loaded(crossbow).size(), "A crossbow loads one arrow, as normal");
-		helper.assertTrue(CombatAbilities.fireFromMagazine(helper.getLevel(), player, InteractionHand.MAIN_HAND) == null, "Vanilla fires it");
+		TestPlayers.equal(helper, 16, CombatAbilities.loaded(crossbow).size(), "A full magazine");
+		TestPlayers.equal(helper, 5, player.getInventory().countItem(Items.ARROW), "15 more arrows loaded");
+
+		CombatAbilities.fireFromMagazine(helper.getLevel(), player, InteractionHand.MAIN_HAND);
+		TestPlayers.equal(helper, 15, CombatAbilities.loaded(crossbow).size(), "One shot per click");
+		helper.assertTrue(CrossbowItem.isCharged(crossbow), "Still loaded");
 		helper.succeed();
 	}
 

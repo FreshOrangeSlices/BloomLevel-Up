@@ -127,8 +127,9 @@ def side(value):
 
 
 def newest_version(project, game, loader_for):
-    """The newest release or beta for this game version (as launchers take it; alphas only when there's nothing else)."""
-    versions = api(f"/project/{project['id']}/version", game_versions=[game], loaders=[loader_for]) or []
+    """The newest release or beta for this game version (as launchers take it; alphas only when there's nothing else),
+    skipping a version with no file a game can load (see pick_file)."""
+    versions = [v for v in api(f"/project/{project['id']}/version", game_versions=[game], loaders=[loader_for]) or [] if pick_file(v)]
     for version in versions:
         if version["version_type"] in ("release", "beta"):
             return version
@@ -136,11 +137,12 @@ def newest_version(project, game, loader_for):
 
 
 def pick_file(version):
-    """A version's jar for Forge: when it carries several, not a NeoForge or sources one."""
-    files = [f for f in version["files"] if not f["filename"].endswith(("-sources.jar", "-javadoc.jar"))] or version["files"]
+    """A version's jar for Forge: when it carries several, not a NeoForge one. Never a sources, javadoc or developer
+    jar (Moonlight Lib's 1.20-2.16.38 shipped only a -dev.jar, which a game can't load); None when that's all there is."""
+    files = [f for f in version["files"] if not f["filename"].endswith(("-sources.jar", "-javadoc.jar", "-dev.jar"))]
     forge = [f for f in files if "neoforge" not in f["filename"].lower() and "-neo-" not in f["filename"].lower()]
     pool = forge or files
-    return next((f for f in pool if f.get("primary")), pool[0])
+    return next((f for f in pool if f.get("primary")), pool[0]) if pool else None
 
 
 def loader_for(project):
@@ -355,14 +357,17 @@ def main():
                 continue
         if version is None:
             version = api(f"/version/{wanted_version}") if wanted_version else None
-            if version is None or game not in version.get("game_versions", []) or (
+            if version is None or game not in version.get("game_versions", []) or not pick_file(version) or (
                     loader_for(project) == "forge" and "forge" not in version.get("loaders", [])):
                 version = newest_version(project, game, loader_for(project))
         if version is None:
             problems.append(f"{project['title']} ({project['slug']}) has no {game} {loader_for(project)} build")
             continue
-        used[project["slug"]] = version["version_number"]
         file = pick_file(version)
+        if file is None:
+            problems.append(f"{project['title']} {version['version_number']} has no jar a game can load (only sources or developer ones)")
+            continue
+        used[project["slug"]] = version["version_number"]
         used_files[project["slug"]] = {
             "project": project["id"], "id": version["id"], "file": file["filename"], "sha1": file["hashes"]["sha1"],
             "sha512": file["hashes"]["sha512"], "size": file["size"],

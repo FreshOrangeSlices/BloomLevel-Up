@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -71,7 +73,12 @@ public final class BloomSync {
 		});
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> LAST_TAG.remove(listener.player.getUUID()));
 
-		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+		// After Fabric has moved the attachments (the profile) to the new player, which it does in the same event: in
+		// the default phase it could run after this, and the stats were put on from an empty profile (a respawn with
+		// Vitality came back at 20 health, its extra hearts empty).
+		Identifier afterAttachments = BloomLevelUp.id("after_attachments");
+		ServerPlayerEvents.AFTER_RESPAWN.addPhaseOrdering(Event.DEFAULT_PHASE, afterAttachments);
+		ServerPlayerEvents.AFTER_RESPAWN.register(afterAttachments, (oldPlayer, newPlayer, alive) -> {
 			StatEffects.refresh(newPlayer);
 
 			if (!alive) {

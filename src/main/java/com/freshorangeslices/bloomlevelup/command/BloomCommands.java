@@ -148,6 +148,10 @@ public final class BloomCommands {
 								.then(argument("players", EntityArgument.players())
 										.then(argument("major", IdentifierArgument.id()).suggests(MAJORS)
 												.executes(BloomCommands::adminRefund))))
+						.then(literal("majorlevels")
+								.then(argument("players", EntityArgument.players())
+										.then(argument("amount", IntegerArgumentType.integer())
+												.executes(BloomCommands::adminMajorLevels))))
 						.then(literal("waits")
 								.then(literal("on").executes(ctx -> setWaits(ctx.getSource(), true)))
 								.then(literal("off").executes(ctx -> setWaits(ctx.getSource(), false))))
@@ -237,6 +241,23 @@ public final class BloomCommands {
 
 		int count = done;
 		ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.admin.refund", major, count), true);
+		return count;
+	}
+
+	/** Gives (or with a negative amount takes back) Major Levels outright, skipping the levels that earn them. */
+	private static int adminMajorLevels(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+		int amount = IntegerArgumentType.getInteger(ctx, "amount");
+		int count = 0;
+
+		for (ServerPlayer target : EntityArgument.getPlayers(ctx, "players")) {
+			BloomProfile profile = BloomAttachments.profile(target);
+			int change = BloomServices.progression().giveMajorLevels(profile, amount);
+			BloomSync.changed(target);
+			ctx.getSource().sendSuccess(() -> Component.translatable("bloom.command.admin.major_levels",
+					target.getDisplayName(), (change >= 0 ? "+" : "") + change, profile.availableMajorLevels()), true);
+			count++;
+		}
+
 		return count;
 	}
 

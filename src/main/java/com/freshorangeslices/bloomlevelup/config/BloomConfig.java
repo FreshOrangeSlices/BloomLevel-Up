@@ -195,6 +195,8 @@ public final class BloomConfig {
 	/** Catch!: throw speed (a trident is 2.5) and durability per throw (a weapon too worn to pay isn't thrown). */
 	public double catchThrowSpeed = 2.5;
 	public int catchThrowDurabilityCost = 3;
+	/** Catch!: how much harder a thrown dagger or knife ({@code bloomlevelup:weapon/dagger}) hits (0.5 = +50%). */
+	public double daggerThrowBonus = 0.5;
 	/** Charge Attack / Heavy Hands: total durability a charged swing costs (including the hit's own wear). */
 	public int chargedSwingDurabilityCost = 2;
 	/** Assault Rifle: shots per magazine. */
@@ -404,6 +406,7 @@ public final class BloomConfig {
 		chargedBurstLaunchSpeed = Math.max(0.0, Math.min(3.0, chargedBurstLaunchSpeed));
 		chargedBurstExtraDurability = Math.max(0, chargedBurstExtraDurability);
 		catchThrowDurabilityCost = Math.max(0, catchThrowDurabilityCost);
+		daggerThrowBonus = Math.max(0.0, Math.min(5.0, daggerThrowBonus));
 		chargedSwingDurabilityCost = Math.max(0, chargedSwingDurabilityCost);
 		chargedThrowDurabilityCost = Math.max(0, chargedThrowDurabilityCost);
 		stormCallBolts = Math.max(1, Math.min(12, stormCallBolts));

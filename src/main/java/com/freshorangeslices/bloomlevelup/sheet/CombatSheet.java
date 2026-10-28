@@ -665,6 +665,9 @@ final class CombatSheet {
 		double base = tridentOnly ? 0.0 : weapon.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY)
 				.compute(Attributes.ATTACK_DAMAGE, player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE), EquipmentSlot.MAINHAND);
 		double charge = !tridentOnly && on.chargedThrow() ? config.chargeAttackMultiplier : 1.0;
+		// A thrown dagger or knife hits harder (CombatAbilities.throwMultiplier).
+		double dagger = tridentOnly ? 1.0 : CombatAbilities.throwMultiplier(weapon);
+		charge *= dagger;
 		double damage = tridentOnly ? vanilla : (base + Math.max(0.0, vanilla - 8.0)) * charge;
 		double multiplier = shared(on, config, true);
 		double after = afterArmor(level, mob, weapon, source, damage * multiplier, armor, toughness, penetration);
@@ -680,6 +683,10 @@ final class CombatSheet {
 
 		sheet.heading("combat.h.thrown");
 		sheet.row(Sheet.plain(damage), tridentOnly ? "combat.trident_throw" : on.chargedThrow() ? "combat.charged_throw" : "combat.catch_throw");
+
+		if (dagger > 1.0) {
+			sheet.row(Sheet.times(dagger), "combat.dagger_throw");
+		}
 
 		if (!tridentOnly) {
 			sheet.note("combat.catch_throw.note");

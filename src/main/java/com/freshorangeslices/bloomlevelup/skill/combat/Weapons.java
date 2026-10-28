@@ -1,14 +1,18 @@
 package com.freshorangeslices.bloomlevelup.skill.combat;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import com.freshorangeslices.bloomlevelup.BloomLevelUp;
+import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 
 /**
  * Weapon families by item tag ({@code bloomlevelup:weapon/<family>}), so modded weapons join a family by
@@ -77,6 +81,36 @@ public final class Weapons {
 		}
 
 		return stack != null && !stack.isEmpty() && family.holds(stack);
+	}
+
+	/** The materials whose maces and spears get Batter Up!'s swings with Better Combat: netherite and below. */
+	private static final List<String> UP_TO_NETHERITE = List.of("wooden", "wood", "stone", "flint", "copper", "iron", "golden", "gold",
+			"diamond", "netherite");
+
+	/**
+	 * Batter Up!'s new swings (Better Combat) stop at netherite, the vanilla end game (FreshOrangeSlices): vanilla's
+	 * maces and spears get them, and a modded one made of wood, stone, flint, copper, iron, gold, diamond or netherite
+	 * (its id starts with the material). One-off weapons (boss drops, legendaries) and tiers past netherite keep their
+	 * own swings, as does anything in {@code bloomlevelup:weapon/own_moves}.
+	 */
+	public static boolean batterUpMoves(ItemStack stack) {
+		if (stack == null || stack.isEmpty() || stack.is(BloomTags.WEAPON_OWN_MOVES)) {
+			return false;
+		}
+
+		Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+
+		if (id.getNamespace().equals("minecraft")) {
+			return true;
+		}
+
+		for (String material : UP_TO_NETHERITE) {
+			if (id.getPath().startsWith(material + "_")) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/** Anything a player can sensibly swing: a tagged melee weapon or an empty hand. */

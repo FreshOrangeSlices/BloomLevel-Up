@@ -38,6 +38,7 @@ import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
+import com.freshorangeslices.bloomlevelup.registry.BloomTags;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
 import com.freshorangeslices.bloomlevelup.entity.ThrownWeapon;
 import com.freshorangeslices.bloomlevelup.skill.combat.CombatAbilities;
@@ -617,6 +618,25 @@ public class CombatGameTests {
 		DamageSource source = player.damageSources().trident(thrown, player);
 		// A trident hit is 8; a thrown iron sword hits like the sword: 1 base + 5.
 		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, source, 8.0F), "Iron sword damage");
+		CombatSkill.endSwingForTests();
+		helper.succeed();
+	}
+
+	/** Thrown daggers and knives hit 50% harder (in the game tests a golden sword is a dagger: c:tools/dagger). */
+	@GameTest
+	public void thrownDaggersHitHarder(GameTestHelper helper) {
+		ItemStack dagger = new ItemStack(Items.GOLDEN_SWORD);
+		helper.assertTrue(dagger.is(BloomTags.WEAPON_DAGGER), "The golden sword is a dagger here");
+		helper.assertTrue(CombatAbilities.throwable(dagger), "Catch! throws daggers");
+		ServerPlayer player = player(helper, ItemStack.EMPTY);
+		LivingEntity zombie = zombie(helper, 1, 1);
+		ThrownWeapon thrown = ThrownWeapon.create(helper.getLevel(), player, dagger);
+		// A golden sword hits for 1 base + 3; thrown as a dagger, 50% more.
+		near(helper, 4.0 * (1.0 + BloomServices.config().daggerThrowBonus),
+				CombatSkill.modifyIncoming(zombie, player.damageSources().trident(thrown, player), 8.0F), "A thrown dagger");
+		CombatSkill.endSwingForTests();
+		ThrownWeapon sword = ThrownWeapon.create(helper.getLevel(), player, new ItemStack(Items.IRON_SWORD));
+		near(helper, 6.0, CombatSkill.modifyIncoming(zombie, player.damageSources().trident(sword, player), 8.0F), "A thrown sword: no bonus");
 		CombatSkill.endSwingForTests();
 		helper.succeed();
 	}

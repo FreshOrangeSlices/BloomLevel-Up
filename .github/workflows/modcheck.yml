@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/worldgen
-          python3 check/worldgen.py "$(ls pack/*server*.zip | head -1)" data-out/worldgen/worldgen.json | tee summary.txt
-          echo "::notice title=worldgen::$(tr '\n' '|' < summary.txt)"
+          mkdir -p data-out/skrythe
+          python3 check/skrythe.py "$(ls pack/*server*.zip | head -1)" data-out/skrythe/skrythe.txt | tee summary.txt
+          echo "::notice title=skrythe::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/worldgen && cp data-out/worldgen/* data/worldgen/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack worldgen" && git push -q origin ci/data && echo pushed
+          mkdir -p data/skrythe && cp data-out/skrythe/* data/skrythe/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "skrythe" && git push -q origin ci/data && echo pushed

@@ -36,6 +36,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
+import com.freshorangeslices.bloomlevelup.effect.StatEffects;
 import com.freshorangeslices.bloomlevelup.item.BloomComponents;
 import com.freshorangeslices.bloomlevelup.item.FuelImprint;
 import com.freshorangeslices.bloomlevelup.mixin.ProjectileWeaponItemInvoker;
@@ -274,20 +275,29 @@ public class MiscGameTests {
 		int spent = before.spentMajorLevels();
 		dead.setAttached(HoardersPocket.CONTENTS, ItemContainerContents.fromItems(List.of(new ItemStack(Items.DIAMOND, 12))));
 		dead.setAttached(RuneEmbedding.RUNES, ItemContainerContents.fromItems(List.of(new ItemStack(Items.ENCHANTED_BOOK))));
+		ActionResult vitality = BloomServices.progression().allocate(before, StatEffects.VITALITY, ProgressionService.Pool.NATURAL, 50);
+		helper.assertTrue(vitality.ok(), "50 Vitality: " + vitality.outcome());
+		StatEffects.refresh(dead);
+		float health = dead.getMaxHealth();
+		helper.assertTrue(health > 20.0F, "Vitality adds health: " + health);
 
+		// What the server does on a respawn: the new player copies the old one, then the respawn event (where Fabric
+		// moves the attachments over, and Bloom puts the stats back on).
 		dead.die(helper.getLevel().damageSources().generic());
 		respawned.restoreFrom(dead, false);
+		ServerPlayerEvents.AFTER_RESPAWN.invoker().afterRespawn(dead, respawned, false);
 
 		BloomProfile after = BloomAttachments.profile(respawned);
-		helper.assertValueEqual(earned, after.earnedMajorLevels(), "Major Levels earned and given");
-		helper.assertValueEqual(spent, after.spentMajorLevels(), "Major Levels spent");
+		helper.assertValueEqual(after.earnedMajorLevels(), earned, "Major Levels earned and given");
+		helper.assertValueEqual(after.spentMajorLevels(), spent, "Major Levels spent");
 		helper.assertTrue(after.owns(MiscIds.HOARDERS_POCKET) && after.owns(MiscIds.XP_INSURANCE), "The Majors are still owned");
 		NonNullList<ItemStack> pocket = NonNullList.withSize(HoardersPocket.SIZE, ItemStack.EMPTY);
 		respawned.getAttachedOrElse(HoardersPocket.CONTENTS, ItemContainerContents.EMPTY).copyInto(pocket);
-		helper.assertValueEqual(12, pocket.get(0).getCount(), "The pocket's diamonds");
+		helper.assertValueEqual(pocket.get(0).getCount(), 12, "The pocket's diamonds");
 		NonNullList<ItemStack> runes = NonNullList.withSize(1, ItemStack.EMPTY);
 		respawned.getAttachedOrElse(RuneEmbedding.RUNES, ItemContainerContents.EMPTY).copyInto(runes);
 		helper.assertTrue(runes.get(0).is(Items.ENCHANTED_BOOK), "The rune slot's book");
+		helper.assertTrue(Math.abs(respawned.getMaxHealth() - health) < 0.01F, "Vitality's health is back on: " + respawned.getMaxHealth() + " vs " + health);
 		helper.succeed();
 	}
 

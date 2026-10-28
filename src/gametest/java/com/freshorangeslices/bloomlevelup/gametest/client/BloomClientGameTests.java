@@ -476,6 +476,9 @@ public class BloomClientGameTests implements FabricClientGameTest {
 			return out;
 		});
 		BloomLevelUp.LOGGER.info("BLOOMTEST pack: RPG gear in Bloom: {}", report);
+		// The long lists in full (the report shortens BLOOMTEST lines).
+		report.stream().filter(line -> line.startsWith("daggers=") || line.contains("moves="))
+				.forEach(line -> BloomLevelUp.LOGGER.info("BLOOMCENSUS {}", line));
 
 		for (String line : report) {
 			if (line.startsWith("WRONG")) {

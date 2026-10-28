@@ -1,4 +1,4 @@
-# Throwaway (never merged): Biomes O' Plenty's config files from a real boot (bopconf.sh), pushed to ci/data.
+# Throwaway (never merged): the ids and commands a playtest needs (idcheck.sh), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -20,4 +20,4 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-      - run: bash check/bopcheck.sh
+      - run: bash check/idcheck.sh

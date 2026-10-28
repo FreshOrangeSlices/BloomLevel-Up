@@ -245,8 +245,8 @@ public final class SheetGameTests {
 			helper.assertTrue(sheet(player, SkillXp.ARMOR, -1, -1).summary().stream().anyMatch(row -> row.label().getString().contains("10")),
 					"The default hit is 10");
 			SheetPayloads.View simple = sheet(player, SkillXp.ARMOR, -1, SheetPayloads.ArmorHit.encode(7, 1), "simplify=on");
-			double lost = value(simple, "armor.lost");
-			helper.assertTrue(Math.abs(lost * 2.0 - Math.rint(lost * 2.0)) < 1.0E-9, "Simplified health lost is a half: " + lost);
+			double simplified = value(simple, "armor.lost");
+			helper.assertTrue(Math.abs(simplified * 2.0 - Math.rint(simplified * 2.0)) < 1.0E-9, "Simplified health lost is a half: " + simplified);
 		} finally {
 			level.getServer().setDifficulty(difficulty, true);
 		}

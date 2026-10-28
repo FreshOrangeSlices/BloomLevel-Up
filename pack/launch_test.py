@@ -402,12 +402,16 @@ def main():
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 180 15")
         time.sleep(4)
         capture(shots, "pack_back")
-        # The inventory: where Bloom's buttons sit next to what other mods put around it.
+        # The inventory: where Bloom's buttons sit next to what other mods put around it, with a status effect showing
+        # (the game draws effects outside the panel's right edge, beside JEI's item list).
+        server.send(f"effect give {PLAYER} minecraft:resistance 60 0 true")
+        time.sleep(1)
         if press("e"):
             time.sleep(3)
             capture(shots, "pack_inventory")
             press("e")
             time.sleep(1)
+        server.send(f"effect clear {PLAYER}")
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
         entities, with_egg = modded_entities(os.path.join(server_dir, "mods"))
         progress(f"mob check: {len(entities)} modded entities")

@@ -127,7 +127,7 @@ mixin {
 
 repositories {
 	mavenCentral()
-	// Better Combat and what it needs (compiled against only; never bundled). A plain filter, not exclusiveContent:
+	// Better Combat and what it needs, and JEI (compiled against only; never bundled). A plain filter, not exclusiveContent:
 	// ForgeGradle serves the deobfuscated copies (same group) from its own repository.
 	maven {
 		name = 'Modrinth'
@@ -168,6 +168,9 @@ dependencies {
 	if (withBetterCombat) {
 		betterCombatMods.each { runtimeOnly fg.deobf(it) }
 	}
+
+	// JEI (optional): client/compat/JeiCompat tells it where Bloom's inventory buttons are.
+	compileOnly fg.deobf("maven.modrinth:jei:${jei_version}")
 
 	// Unit tests cover the pure-Java core (progression rules, formulas, validation).
 	testImplementation platform("org.junit:junit-bom:${junit_version}")

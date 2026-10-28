@@ -11,7 +11,7 @@ import com.freshorangeslices.bloomlevelup.client.IconTextures;
 import com.freshorangeslices.bloomlevelup.client.mixin.AbstractContainerScreenAccessor;
 
 /**
- * The "open Skill Hub" button at the top of Bloom's column just outside the inventory panel's right edge.
+ * The "open Skill Hub" button at the top of Bloom's column just outside the inventory panel's left edge.
  * It re-reads the panel position every frame, so it follows the inventory when the recipe book opens.
  */
 public final class HubButton extends AbstractButton {
@@ -26,12 +26,13 @@ public final class HubButton extends AbstractButton {
 	}
 
 	/**
-	 * The top of Bloom's column just outside the panel's top-right corner, or under whatever other mods put there
-	 * ({@link SideButton#columnY}); the same in the survival and the creative inventory.
+	 * The top of Bloom's column just outside the panel's top-left corner (beside the recipe book's tabs when that's
+	 * open), or under whatever other mods put there ({@link SideButton#column}, {@link SideButton#columnY}); the same in
+	 * the survival and the creative inventory.
 	 */
 	private void reposition() {
 		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
-		this.setX(SideButton.columnX(accessor));
+		this.setX(SideButton.column(screen, accessor).x());
 		this.setY(SideButton.columnY(screen, accessor, 0));
 	}
 

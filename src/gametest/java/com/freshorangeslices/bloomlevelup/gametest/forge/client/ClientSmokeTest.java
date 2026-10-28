@@ -13,11 +13,16 @@ import java.util.function.Predicate;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.inventory.AnvilScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.registries.Registries;
@@ -41,7 +46,9 @@ import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 import com.freshorangeslices.bloomlevelup.client.ClientBloomState;
 import com.freshorangeslices.bloomlevelup.client.ClientPackets;
 import com.freshorangeslices.bloomlevelup.client.compat.BetterCombatClient;
+import com.freshorangeslices.bloomlevelup.client.mixin.AbstractContainerScreenAccessor;
 import com.freshorangeslices.bloomlevelup.client.mixin.MinecraftInvoker;
+import com.freshorangeslices.bloomlevelup.client.mixin.RecipeBookComponentAccessor;
 import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 import com.freshorangeslices.bloomlevelup.client.gui.RuneScreen;
 import com.freshorangeslices.bloomlevelup.client.gui.SideButton;
@@ -126,8 +133,26 @@ public final class ClientSmokeTest {
 
 			shot(mc, "hub_major_details");
 		});
-		step("inventory", always(), 0, mc -> mc.setScreen(new InventoryScreen(mc.player)));
-		step("inventory shot", always(), 20, mc -> shot(mc, "inventory"));
+		// The inventory with a status effect (drawn outside the panel's right edge, where Bloom's column used to be), then
+		// with the recipe book open too: Bloom's column keeps clear of both.
+		step("inventory", always(), 0, mc -> {
+			mc.player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600));
+			mc.setScreen(new InventoryScreen(mc.player));
+		});
+		step("inventory shot", always(), 20, mc -> {
+			checkColumn(mc);
+			shot(mc, "inventory");
+		});
+		step("inventory recipe book", always(), 0, mc -> {
+			mc.player.getRecipeBook().setOpen(RecipeBookType.CRAFTING, true);
+			mc.setScreen(new InventoryScreen(mc.player));
+		});
+		step("inventory recipe book shot", always(), 20, mc -> {
+			checkColumn(mc);
+			shot(mc, "inventory_book");
+			mc.player.getRecipeBook().setOpen(RecipeBookType.CRAFTING, false);
+			mc.player.removeEffect(MobEffects.DAMAGE_RESISTANCE);
+		});
 		// Rune Embedding: asked of the server like its button does; the server opens the menu, the client its screen.
 		step("runes", always(), 0, mc -> {
 			mc.setScreen(null);
@@ -317,6 +342,67 @@ public final class ClientSmokeTest {
 			thrown.setDeltaMovement(Vec3.ZERO);
 			player.level().addFreshEntity(thrown);
 		});
+	}
+
+	/**
+	 * Bloom's buttons in the open inventory are on the screen, off the panel, left of it (with the recipe book closed)
+	 * and clear of the recipe book's tabs (with it open).
+	 */
+	private static void checkColumn(Minecraft mc) {
+		if (!(mc.screen instanceof InventoryScreen screen)) {
+			FAILURES.add("the inventory didn't open");
+			return;
+		}
+
+		AbstractContainerScreenAccessor panel = (AbstractContainerScreenAccessor) screen;
+		boolean book = screen.getRecipeBookComponent().isVisible();
+		List<Rect2i> buttons = SideButton.columnAreas(screen);
+		List<Rect2i> tabs = new ArrayList<>();
+
+		if (book) {
+			for (AbstractWidget tab : ((RecipeBookComponentAccessor) screen.getRecipeBookComponent()).bloomlevelup$tabButtons()) {
+				if (tab.visible) {
+					tabs.add(new Rect2i(tab.getX() - 2, tab.getY(), tab.getWidth() + 2, tab.getHeight()));
+				}
+			}
+		}
+
+		BloomLevelUp.LOGGER.info("BLOOMTEST inventory column (book {}, screen {}x{}, panel at {}): {}", book ? "open" : "closed",
+				screen.width, screen.height, panel.bloomlevelup$leftPos(),
+				buttons.stream().map(r -> r.getX() + "," + r.getY()).toList());
+
+		if (buttons.isEmpty()) {
+			FAILURES.add("no Bloom buttons in the inventory");
+		}
+
+		Rect2i panelArea = new Rect2i(panel.bloomlevelup$leftPos(), panel.bloomlevelup$topPos(), panel.bloomlevelup$imageWidth(),
+				panel.bloomlevelup$imageHeight());
+
+		for (Rect2i button : buttons) {
+			String where = "a Bloom button at " + button.getX() + "," + button.getY() + " (book " + (book ? "open" : "closed") + ")";
+
+			if (button.getX() < 0 || button.getY() < 0 || button.getX() + button.getWidth() > screen.width
+					|| button.getY() + button.getHeight() > screen.height) {
+				FAILURES.add(where + " is off the screen");
+			}
+
+			if (overlaps(button, panelArea)) {
+				FAILURES.add(where + " is on the inventory panel");
+			}
+
+			if (!book && button.getX() + button.getWidth() > panel.bloomlevelup$leftPos()) {
+				FAILURES.add(where + " isn't left of the panel");
+			}
+
+			if (tabs.stream().anyMatch(tab -> overlaps(button, tab))) {
+				FAILURES.add(where + " is on a recipe book tab");
+			}
+		}
+	}
+
+	private static boolean overlaps(Rect2i a, Rect2i b) {
+		return a.getX() < b.getX() + b.getWidth() && b.getX() < a.getX() + a.getWidth()
+				&& a.getY() < b.getY() + b.getHeight() && b.getY() < a.getY() + a.getHeight();
 	}
 
 	private static void shot(Minecraft mc, String name) {

@@ -35,7 +35,10 @@ with zipfile.ZipFile(server_zip) as server:
             elif n.startswith("data/") and "/spells/" in n and n.endswith(".json") and len(spells) < 4000:
                 spells[n] = z.read(n).decode("utf-8", "replace")[:600]
 json.dump(weapons, open(os.path.join(out, "weapons.json"), "w"))
-ids = {r["id"] for r in weapons}
+armor = [r for r in rows if r.get("kind") == "item" and "armor" in r]
+json.dump(armor, open(os.path.join(out, "armor.json"), "w"))
+print("armor pieces", len(armor))
+ids = {r["id"] for r in weapons} | {r["id"] for r in armor}
 made = {}
 for r in rows:
     if r.get("kind") == "recipe" and r.get("result") in ids:

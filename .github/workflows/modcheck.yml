@@ -1,4 +1,4 @@
-# Throwaway (never merged): Inventory Profiles Next integration hints (ipncheck.sh), pushed to ci/data.
+# Throwaway (never merged): what the companion mods add (companioncheck.sh), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -20,4 +20,4 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-      - run: bash check/ipncheck.sh
+      - run: bash check/companioncheck.sh

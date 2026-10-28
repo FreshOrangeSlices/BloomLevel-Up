@@ -86,6 +86,8 @@ public final class ClientSmokeTest {
 
 	private static final List<Step> STEPS = new ArrayList<>();
 	private static final List<String> FAILURES = new ArrayList<>();
+	/** The player's GUI scale while the inventory test uses a bigger one. */
+	private static int guiScale;
 	private static int index;
 	private static int readyFor;
 	private static int ticks;
@@ -150,6 +152,26 @@ public final class ClientSmokeTest {
 		step("inventory recipe book shot", always(), 20, mc -> {
 			checkColumn(mc);
 			shot(mc, "inventory_book");
+		});
+		// The same at GUI scale 3 (the 1280x720 window is then 426x240, as 720p, 1440p and 4K are at the automatic scale),
+		// knowing every recipe so the book shows all its tabs: no room left of them or under them for three buttons.
+		step("inventory small", always(), 0, mc -> {
+			IntegratedServer server = mc.getSingleplayerServer();
+			UUID id = mc.player.getUUID();
+			server.execute(() -> server.getPlayerList().getPlayer(id).awardRecipes(server.getRecipeManager().getRecipes()));
+			guiScale = mc.options.guiScale().get();
+			mc.options.guiScale().set(3);
+			mc.resizeDisplay();
+		});
+		step("inventory small open", always(), 20, mc -> {
+			mc.getToasts().clear();
+			mc.setScreen(new InventoryScreen(mc.player));
+		});
+		step("inventory small shot", always(), 20, mc -> {
+			checkColumn(mc);
+			shot(mc, "inventory_book_small");
+			mc.options.guiScale().set(guiScale);
+			mc.resizeDisplay();
 			mc.player.getRecipeBook().setOpen(RecipeBookType.CRAFTING, false);
 			mc.player.removeEffect(MobEffects.DAMAGE_RESISTANCE);
 		});
@@ -358,6 +380,7 @@ public final class ClientSmokeTest {
 		boolean book = screen.getRecipeBookComponent().isVisible();
 		List<Rect2i> buttons = SideButton.columnAreas(screen);
 		List<Rect2i> tabs = new ArrayList<>();
+		Rect2i bookArea = null;
 
 		if (book) {
 			for (AbstractWidget tab : ((RecipeBookComponentAccessor) screen.getRecipeBookComponent()).bloomlevelup$tabButtons()) {
@@ -365,11 +388,18 @@ public final class ClientSmokeTest {
 					tabs.add(new Rect2i(tab.getX() - 2, tab.getY(), tab.getWidth() + 2, tab.getHeight()));
 				}
 			}
+
+			// The book itself: 147x166, 30 right of where its tabs start, level with the panel.
+			int tabsLeft = tabs.stream().mapToInt(tab -> tab.getX() + 2).min().orElse(0);
+			bookArea = new Rect2i(tabsLeft + 30, panel.bloomlevelup$topPos(), 147, 166);
 		}
 
-		BloomLevelUp.LOGGER.info("BLOOMTEST inventory column (book {}, screen {}x{}, panel at {}): {}", book ? "open" : "closed",
-				screen.width, screen.height, panel.bloomlevelup$leftPos(),
+		BloomLevelUp.LOGGER.info("BLOOMTEST inventory column (book {}, {} tabs, screen {}x{}, panel at {}): {}", book ? "open" : "closed",
+				tabs.size(), screen.width, screen.height, panel.bloomlevelup$leftPos(),
 				buttons.stream().map(r -> r.getX() + "," + r.getY()).toList());
+		// The game draws status effects outside the panel's right edge when there are 32 or more pixels there.
+		int effectsX = panel.bloomlevelup$leftPos() + panel.bloomlevelup$imageWidth() + 2;
+		boolean effects = !mc.player.getActiveEffects().isEmpty() && screen.width - effectsX >= 32;
 
 		if (buttons.isEmpty()) {
 			FAILURES.add("no Bloom buttons in the inventory");
@@ -396,6 +426,14 @@ public final class ClientSmokeTest {
 
 			if (tabs.stream().anyMatch(tab -> overlaps(button, tab))) {
 				FAILURES.add(where + " is on a recipe book tab");
+			}
+
+			if (bookArea != null && overlaps(button, bookArea)) {
+				FAILURES.add(where + " is on the recipe book");
+			}
+
+			if (effects && button.getX() + button.getWidth() > effectsX) {
+				FAILURES.add(where + " is on the status effects");
 			}
 		}
 	}

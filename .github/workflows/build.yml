@@ -192,7 +192,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shot: [hub_utility, hub_combat, hub_armor, hub_misc, sheet_combat, sheet_combat_details, sheet_armor, hub_major_details, inventory, runes, anvil, hud]
+        shot: [hub_utility, hub_combat, hub_armor, hub_misc, sheet_combat, sheet_combat_details, sheet_armor, hub_major_details, inventory, inventory_book, inventory_book_small, runes, anvil, hud]
         variant: [plain]
         include:
           # With Better Combat: the overhand throw and the charged slam, seen from the front.

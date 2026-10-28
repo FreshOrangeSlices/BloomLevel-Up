@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 
 import com.freshorangeslices.bloomlevelup.client.IconTextures;
-import com.freshorangeslices.bloomlevelup.client.mixin.AbstractContainerScreenAccessor;
 
 /**
  * The "open Skill Hub" button at the top of Bloom's column just outside the inventory panel's left edge.
@@ -26,14 +25,12 @@ public final class HubButton extends AbstractButton {
 	}
 
 	/**
-	 * The top of Bloom's column just outside the panel's top-left corner (beside the recipe book's tabs when that's
-	 * open), or under whatever other mods put there ({@link SideButton#column}, {@link SideButton#columnY}); the same in
-	 * the survival and the creative inventory.
+	 * First of Bloom's buttons: the top of its column just outside the panel's top-left corner (beside the recipe book's
+	 * tabs when that's open), or under whatever other mods put there ({@link SideButton#place}); the same in the
+	 * survival and the creative inventory.
 	 */
 	private void reposition() {
-		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
-		this.setX(SideButton.column(screen, accessor).x());
-		this.setY(SideButton.columnY(screen, accessor, 0));
+		SideButton.place(this, screen, 0);
 	}
 
 	@Override

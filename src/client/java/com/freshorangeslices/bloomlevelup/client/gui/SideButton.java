@@ -72,44 +72,66 @@ public final class SideButton extends AbstractButton {
 		}
 	}
 
-	/** Under the hub button, in Bloom's column beside the inventory (see {@link #column}, {@link #columnY}). */
+	/** Under the hub button, in Bloom's column beside the inventory (see {@link #place}). */
 	private void reposition() {
-		AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) screen;
-		this.setX(column(screen, accessor).x());
-		this.setY(columnY(screen, accessor, this.row));
-	}
-
-	/** Where Bloom's column goes: its x, and the y it starts from before other mods' buttons push it down. */
-	record Column(int x, int top) {
+		place(this, screen, this.row);
 	}
 
 	/**
-	 * Bloom's column: just outside the inventory panel's left edge, from its top (FreshOrangeSlices' playtest: outside
-	 * the right edge, the game's status effects covered it, and JEI's item list fills that side). With the recipe book
-	 * open: left of the book's category tabs; where there isn't room for that (the game's 854×480 window, and 720p, 1440p
-	 * and 4K at the automatic GUI scale), under the tabs; and if that runs off the bottom too, outside the panel's right
-	 * edge as before.
+	 * Puts {@code button} at place {@code index} of Bloom's buttons (0 = the hub button) on {@code screen}: down
+	 * Bloom's column, or along its row (see {@link #layout}). Worked out each frame, so it follows the recipe book and
+	 * other mods' buttons that arrive late.
 	 */
-	static Column column(AbstractContainerScreen<?> screen, AbstractContainerScreenAccessor accessor) {
+	static void place(AbstractWidget button, AbstractContainerScreen<?> screen, int index) {
+		Layout layout = layout(screen, (AbstractContainerScreenAccessor) screen);
+
+		if (layout.across()) {
+			button.setX(layout.x() + index * (SIZE + GAP));
+			button.setY(layout.top());
+		} else {
+			button.setX(layout.x());
+			button.setY(columnTop(screen, layout) + index * (SIZE + GAP));
+		}
+	}
+
+	/** Where Bloom's buttons go: a column from (x, top) down, or a row from there across. */
+	record Layout(int x, int top, boolean across) {
+	}
+
+	/**
+	 * Bloom's buttons: a column just outside the inventory panel's left edge, from its top (FreshOrangeSlices' playtest:
+	 * outside the right edge, the game's status effects covered it, and JEI's item list fills that side). With the recipe
+	 * book open: left of the book's category tabs; where there isn't room for that (the game's 854×480 window, and 720p,
+	 * 1440p and 4K at the automatic GUI scale), under the tabs; where the tabs reach too far down for that, a row just
+	 * above the book; and only if none of those fit on the screen, a column outside the panel's right edge as before.
+	 */
+	static Layout layout(AbstractContainerScreen<?> screen, AbstractContainerScreenAccessor accessor) {
 		int leftPos = accessor.bloomlevelup$leftPos();
-		int top = accessor.bloomlevelup$topPos() + 4;
+		int topPos = accessor.bloomlevelup$topPos();
+		int length = ownButtons(screen) * (SIZE + GAP);
 		List<? extends AbstractWidget> tabs = openRecipeBookTabs(screen);
 		int tabsLeft = tabs.stream().mapToInt(AbstractWidget::getX).min().orElse(Integer.MAX_VALUE);
 		int x = Math.min(leftPos, tabsLeft - CHOSEN_TAB_SHIFT) - GAP - SIZE;
 
 		if (x >= GAP) {
-			return new Column(x, top);
+			return new Layout(x, topPos + 4, false);
 		}
 
 		if (!tabs.isEmpty()) {
 			int under = tabs.stream().mapToInt(tab -> tab.getY() + tab.getHeight()).max().getAsInt() + GAP;
 
-			if (under + ownButtons(screen) * (SIZE + GAP) <= screen.height) {
-				return new Column(tabsLeft, under);
+			if (under + length <= screen.height) {
+				return new Layout(tabsLeft, under, false);
+			}
+
+			int above = topPos - GAP - SIZE;
+
+			if (above >= GAP && tabsLeft + length <= screen.width) {
+				return new Layout(tabsLeft, above, true);
 			}
 		}
 
-		return new Column(leftPos + accessor.bloomlevelup$imageWidth() + GAP, top);
+		return new Layout(leftPos + accessor.bloomlevelup$imageWidth() + GAP, topPos + 4, false);
 	}
 
 	/** The open recipe book's tabs that show (none when the screen has no recipe book or it's closed). */
@@ -148,15 +170,13 @@ public final class SideButton extends AbstractButton {
 	}
 
 	/**
-	 * Y of place {@code index} in Bloom's column (0 = the hub button), top down from where {@link #column} starts it.
-	 * Buttons other mods put in that spot come first: the column starts under them (FreshOrangeSlices' playtest: under
-	 * the panel it ran into Inventory Profiles Next's profile bar). Worked out each frame, so late arrivals count.
+	 * Where Bloom's column starts: where {@link #layout} put it, or under buttons other mods put in that spot
+	 * (FreshOrangeSlices' playtest: under the panel it ran into Inventory Profiles Next's profile bar).
 	 */
-	static int columnY(AbstractContainerScreen<?> screen, AbstractContainerScreenAccessor accessor, int index) {
-		Column column = column(screen, accessor);
-		int x = column.x();
+	private static int columnTop(AbstractContainerScreen<?> screen, Layout layout) {
+		int x = layout.x();
 		int height = ownButtons(screen) * (SIZE + GAP);
-		int top = column.top();
+		int top = layout.top();
 
 		for (int pass = 0; pass < 8; pass++) {
 			int below = top;
@@ -165,7 +185,7 @@ public final class SideButton extends AbstractButton {
 				if (child instanceof AbstractWidget widget && !(child instanceof HubButton) && !(child instanceof SideButton) && widget.visible
 						&& widget.getX() < x + SIZE && widget.getX() + widget.getWidth() > x
 						&& widget.getY() < below + height && widget.getY() + widget.getHeight() > below) {
-					below = Math.max(below, widget.getY() + widget.getHeight() + 2);
+					below = Math.max(below, widget.getY() + widget.getHeight() + GAP);
 				}
 			}
 
@@ -176,7 +196,7 @@ public final class SideButton extends AbstractButton {
 			top = below;
 		}
 
-		return top + index * (SIZE + 2);
+		return top;
 	}
 
 	@Override

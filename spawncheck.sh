@@ -18,6 +18,13 @@ for n in sorted(z.namelist()):
         names = sorted(set(m.decode() for m in re.findall(rb"mythsandlegends:[a-z_]+", b)))
         if names:
             print(" ", n, names)
+        if b"cogwork" in b or b"gearbound" in b or b"cogling" in b:
+            print("  STRUCTURE WITH COGWORK:", n)
+for n in sorted(z.namelist()):
+    if n.endswith(".json") and n.startswith("data/") and (b"cogwork" in z.read(n) or b"gearbound" in z.read(n)):
+        print("  DATA WITH COGWORK:", n, z.read(n).decode()[:300].replace(chr(10), " "))
+    if n.endswith(".class") and b"cogwork_construct" in z.read(n) and b"cogwork_construct/" not in n.encode():
+        print("  CLASS NAMING cogwork_construct:", n)
 for n in sorted(z.namelist()):
     if "structure_set/ancient_vestiges" in n or "worldgen/structure/ancient_vestiges" in n:
         print(" ", n, z.read(n).decode()[:600].replace("\n", " "))
@@ -27,5 +34,5 @@ b = z.read("data/legionary/fieldguide/biome_modifiers/legionary_biome_additions.
 i = b.find("unbreakable")
 print("== legionary unbreakable spawn:", b[max(0, i - 700):i + 400].replace("\n", " "))
 PY
-cat out.txt
+grep -v -E "^  data/mythsandlegends/structures/" out.txt > short.txt; grep -E "cogwork|gearbound|cogling" out.txt >> short.txt; cp short.txt out.txt; cat out.txt
 echo "::notice title=spawns::$(head -c 3800 out.txt | tr '\n' '|' | sed 's/%/%25/g')"

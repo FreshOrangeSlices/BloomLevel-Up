@@ -10,6 +10,7 @@ print("dump rows", len(rows), "weapon-like items", len(weapons))
 paths = {r["id"].split(":", 1)[1] for r in weapons}
 long_paths = sorted(p for p in paths if len(p) >= 6)
 short_paths = {p for p in paths if len(p) < 6}
+namespaces = {r["id"].split(":", 1)[0] for r in weapons} - {"minecraft"}
 keys = {k for r in weapons for k in r.get("tooltip", {}).get("keys", [])}
 lang, spells, iron = {}, {}, {}
 with zipfile.ZipFile(server_zip) as server:
@@ -20,13 +21,14 @@ with zipfile.ZipFile(server_zip) as server:
         except Exception as e:
             print("skip", jar, e); continue
         for n in z.namelist():
-            if re.fullmatch(r"assets/[^/]+/lang/en_us\.json", n):
+            m = re.fullmatch(r"assets/([^/]+)/lang/en_us\.json", n)
+            if m:
                 try:
                     entries = json.loads(z.read(n).decode("utf-8", "replace"))
                 except Exception:
                     continue
                 for k, v in entries.items():
-                    if k in keys or any(p in k for p in long_paths) or set(re.split(r"[._]", k)) & short_paths:
+                    if m.group(1) in namespaces or k in keys or any(p in k for p in long_paths) or set(re.split(r"[._]", k)) & short_paths:
                         lang[k] = v
             elif "/spell_assignments/" in n and n.endswith(".json"):
                 spells[n] = z.read(n).decode("utf-8", "replace")

@@ -1,0 +1,217 @@
+== files
+./LICENSE_castmod-forge-1.20.1
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./assets/castmod/lang/en_us.json
+./assets/castmod/lang/ru_ru.json
+./castmod-forge-1.20.1-refmap.json
+./castmod.mixins.json
+./pack.mcmeta
+./ru/castmod/CastMod.class
+./ru/castmod/mixin/KeybindsScreenMixin.class
+./ru/castmod/platform/LoadedMod.class
+./ru/castmod/platform/ModPlatform.class
+./ru/castmod/screen/KeyboardControlsScreen$ActionHit.class
+./ru/castmod/screen/KeyboardControlsScreen$BindingResetHit.class
+./ru/castmod/screen/KeyboardControlsScreen$DarkButton.class
+./ru/castmod/screen/KeyboardControlsScreen$KeyCap.class
+./ru/castmod/screen/KeyboardControlsScreen$KeyHit.class
+./ru/castmod/screen/KeyboardControlsScreen.class
+== lang
+{
+  "castmod.controls.title": "Visual Controls",
+  "castmod.controls.search": "Search key bindings...",
+  "castmod.controls.free": "Free",
+  "castmod.controls.bound": "Bound",
+  "castmod.controls.conflict": "Conflict",
+  "castmod.controls.list": "All bindings",
+  "castmod.controls.press_key": "Press a new key for: %s",
+  "castmod.controls.unbound": "Not bound",
+  "castmod.controls.from": "From: %s",
+  "castmod.controls.actions": "%s actions",
+  "castmod.controls.choose_action": "Choose an action to rebind",
+  "castmod.controls.click_to_rebind": "Click to choose an action",
+  "castmod.controls.reset": "Reset all",
+  "castmod.controls.reset_one": "Reset this binding",
+  "castmod.controls.unknown_mod": "Unknown mod"
+}
+== mods.toml
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="castmod"
+version="0.5.0"
+displayName="CastMod Keyboard"
+authors="CastMod"
+displayTest="IGNORE_ALL_VERSION"
+description='''
+Visual keyboard controls screen with mod ownership and conflict hints.
+'''
+
+[[dependencies.castmod]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.castmod]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="CLIENT"
+== mixins
+-- x/castmod.mixins.json
+{
+  "required": true,
+  "package": "ru.castmod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "KeybindsScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "castmod-forge-1.20.1-refmap.json"
+}-- x/castmod-forge-1.20.1-refmap.json
+{
+  "mappings": {
+    "ru/castmod/mixin/KeybindsScreenMixin": {
+      "init": "Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;m_7856_()V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "ru/castmod/mixin/KeybindsScreenMixin": {
+        "init": "Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;m_7856_()V"
+      }
+    }
+  }
+}== strings
+-- x/ru/castmod/CastMod.class
+-- x/ru/castmod/mixin/KeybindsScreenMixin.class
+$ru/castmod/mixin/KeybindsScreenMixin
+&Lru/castmod/mixin/KeybindsScreenMixin;
+(Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/Options;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V
+(ru/castmod/screen/KeyboardControlsScreen
+)Lnet/minecraft/client/gui/screens/Screen;
+,(Lnet/minecraft/client/gui/screens/Screen;)V
+8net/minecraft/client/gui/screens/controls/KeyBindsScreen
+:Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;
+J(Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/Options;)V
+KeybindsScreenMixin.java
+castmod$openVisualControls
+e(Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;)Lnet/minecraft/client/gui/screens/Screen;
+f(Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;Lnet/minecraft/client/gui/screens/Screen;)V
+-- x/ru/castmod/screen/KeyboardControlsScreen$DarkButton.class
+(IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;Lnet/minecraft/client/gui/components/Button$CreateNarration;)V
+(Lru/castmod/screen/KeyboardControlsScreen;IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;Z)V
+(ru/castmod/screen/KeyboardControlsScreen
+*Lru/castmod/screen/KeyboardControlsScreen;
+*net/minecraft/client/gui/components/Button
+2net/minecraft/client/gui/components/Button$OnPress
+3ru/castmod/screen/KeyboardControlsScreen$DarkButton
+4Lnet/minecraft/client/gui/components/Button$OnPress;
+5Lru/castmod/screen/KeyboardControlsScreen$DarkButton;
+:net/minecraft/client/gui/components/Button$CreateNarration
+<Lnet/minecraft/client/gui/components/Button$CreateNarration;
+DarkButton
+K(Lru/castmod/screen/KeyboardControlsScreen;)Lnet/minecraft/client/gui/Font;
+KeyboardControlsScreen.java
+-- x/ru/castmod/screen/KeyboardControlsScreen$KeyHit.class
+(ru/castmod/screen/KeyboardControlsScreen
+/ru/castmod/screen/KeyboardControlsScreen$KeyHit
+1Lru/castmod/screen/KeyboardControlsScreen$KeyHit;
+4(Lru/castmod/screen/KeyboardControlsScreen$KeyHit;)I
+E(Lru/castmod/screen/KeyboardControlsScreen$KeyHit;)Ljava/lang/String;
+F(Lru/castmod/screen/KeyboardControlsScreen$KeyHit;Ljava/lang/Object;)Z
+KeyboardControlsScreen.java
+-- x/ru/castmod/screen/KeyboardControlsScreen$ActionHit.class
+(ru/castmod/screen/KeyboardControlsScreen
+2ru/castmod/screen/KeyboardControlsScreen$ActionHit
+4Lru/castmod/screen/KeyboardControlsScreen$ActionHit;
+7(Lru/castmod/screen/KeyboardControlsScreen$ActionHit;)I
+H(Lru/castmod/screen/KeyboardControlsScreen$ActionHit;)Ljava/lang/String;
+I(Lru/castmod/screen/KeyboardControlsScreen$ActionHit;Ljava/lang/Object;)Z
+KeyboardControlsScreen.java
+-- x/ru/castmod/screen/KeyboardControlsScreen.class
+ castmod.controls.click_to_rebind
+'net/minecraft/client/gui/screens/Screen
+(Lru/castmod/screen/KeyboardControlsScreen;IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;Z)V
+(ru/castmod/screen/KeyboardControlsScreen
+)Lnet/minecraft/client/gui/screens/Screen;
+*Lru/castmod/screen/KeyboardControlsScreen;
+*net/minecraft/client/gui/components/Button
+,(Lnet/minecraft/client/gui/screens/Screen;)V
+,Lnet/minecraft/client/gui/components/Button;
+.json
+/(Lnet/minecraft/client/gui/components/Button;)V
+/ru/castmod/screen/KeyboardControlsScreen$KeyCap
+/ru/castmod/screen/KeyboardControlsScreen$KeyHit
+1Lru/castmod/screen/KeyboardControlsScreen$KeyCap;
+1Lru/castmod/screen/KeyboardControlsScreen$KeyHit;
+2net/minecraft/client/gui/components/Button$OnPress
+2ru/castmod/screen/KeyboardControlsScreen$ActionHit
+3ru/castmod/screen/KeyboardControlsScreen$DarkButton
+4Lru/castmod/screen/KeyboardControlsScreen$ActionHit;
+8ru/castmod/screen/KeyboardControlsScreen$BindingResetHit
+:Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;
+:Lru/castmod/screen/KeyboardControlsScreen$BindingResetHit;
+CLjava/util/List<Lru/castmod/screen/KeyboardControlsScreen$KeyCap;>;
+CLjava/util/List<Lru/castmod/screen/KeyboardControlsScreen$KeyHit;>;
+D(Lru/castmod/screen/KeyboardControlsScreen$KeyCap;)Ljava/lang/Float;
+DarkButton
+FLjava/util/List<Lru/castmod/screen/KeyboardControlsScreen$ActionHit;>;
+I(Lru/castmod/screen/KeyboardControlsScreen;)Ljava/util/function/Consumer;
+J(Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/Options;)V
+J(Lru/castmod/screen/KeyboardControlsScreen;)Ljava/util/function/Predicate;
+K(Lru/castmod/screen/KeyboardControlsScreen;)Lnet/minecraft/client/gui/Font;
+KeyboardControlsScreen.java
+LLjava/util/List<Lru/castmod/screen/KeyboardControlsScreen$BindingResetHit;>;
+VANILLA_BINDINGS
+[(Lru/castmod/screen/KeyboardControlsScreen;Ljava/lang/String;)Ljava/util/function/Consumer;
+\(Lru/castmod/screen/KeyboardControlsScreen;Ljava/lang/String;)Ljava/util/function/Predicate;
+^(Lnet/minecraft/client/gui/GuiGraphics;Lru/castmod/screen/KeyboardControlsScreen$KeyCap;IIII)V
+`(Lru/castmod/screen/KeyboardControlsScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+button
+castmod.controls.bound
+castmod.controls.choose_action
+castmod.controls.conflict
+castmod.controls.free
+castmod.controls.from
+castmod.controls.list
+castmod.controls.press_key
+castmod.controls.reset
+castmod.controls.reset_one
+castmod.controls.search
+castmod.controls.title
+castmod.controls.unbound
+castmod.controls.unknown_mod
+e(Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;)Lnet/minecraft/client/gui/screens/Screen;
+f(Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;Lnet/minecraft/client/gui/screens/Screen;)V
+key.fullscreen
+key.screenshot
+key.togglePerspective
+screen
+tLjava/util/Map<Lnet/minecraft/client/gui/screens/controls/KeyBindsScreen;Lnet/minecraft/client/gui/screens/Screen;>;
+-- x/ru/castmod/screen/KeyboardControlsScreen$KeyCap.class
+(ru/castmod/screen/KeyboardControlsScreen
+/ru/castmod/screen/KeyboardControlsScreen$KeyCap
+1Lru/castmod/screen/KeyboardControlsScreen$KeyCap;
+4(Lru/castmod/screen/KeyboardControlsScreen$KeyCap;)I
+E(Lru/castmod/screen/KeyboardControlsScreen$KeyCap;)Ljava/lang/String;
+F(Lru/castmod/screen/KeyboardControlsScreen$KeyCap;Ljava/lang/Object;)Z
+KeyboardControlsScreen.java
+-- x/ru/castmod/screen/KeyboardControlsScreen$BindingResetHit.class
+(ru/castmod/screen/KeyboardControlsScreen
+8ru/castmod/screen/KeyboardControlsScreen$BindingResetHit
+:Lru/castmod/screen/KeyboardControlsScreen$BindingResetHit;
+=(Lru/castmod/screen/KeyboardControlsScreen$BindingResetHit;)I
+KeyboardControlsScreen.java
+N(Lru/castmod/screen/KeyboardControlsScreen$BindingResetHit;)Ljava/lang/String;
+O(Lru/castmod/screen/KeyboardControlsScreen$BindingResetHit;Ljava/lang/Object;)Z
+-- x/ru/castmod/platform/ModPlatform.class
+-- x/ru/castmod/platform/LoadedMod.class

@@ -35,6 +35,13 @@ with zipfile.ZipFile(server_zip) as server:
             elif n.startswith("data/") and "/spells/" in n and n.endswith(".json") and len(spells) < 4000:
                 spells[n] = z.read(n).decode("utf-8", "replace")[:600]
 json.dump(weapons, open(os.path.join(out, "weapons.json"), "w"))
+ids = {r["id"] for r in weapons}
+made = {}
+for r in rows:
+    if r.get("kind") == "recipe" and r.get("result") in ids:
+        made.setdefault(r["result"], []).append(f"{r['type']} {r['id']}")
+json.dump(made, open(os.path.join(out, "recipes.json"), "w"), indent=0, sort_keys=True)
+print("weapons with a recipe", len(made))
 json.dump(lang, open(os.path.join(out, "lang.json"), "w"), indent=0, sort_keys=True)
 json.dump(spells, open(os.path.join(out, "spells.json"), "w"), indent=0, sort_keys=True)
 print("lang lines", len(lang), "spell files", len(spells))

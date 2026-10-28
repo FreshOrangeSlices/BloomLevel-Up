@@ -257,9 +257,9 @@ public final class BetterCombatGameTests {
 		}
 
 		List<String> sword = combo(player(helper, new ItemStack(Items.DIAMOND_SWORD)));
-		String maceOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.IRON_INGOT), CombatIds.FULL_SWEEP), 0);
+		List<String> maceOwn = combo(player(helper, new ItemStack(Items.IRON_INGOT), CombatIds.FULL_SWEEP));
 		ServerPlayer batter = player(helper, new ItemStack(Items.IRON_INGOT), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP);
-		helper.assertTrue(maceOwn != null && !sword.contains(maceOwn), "A mace has its own swing: " + maceOwn + " vs " + sword);
+		helper.assertTrue(maceOwn.get(0) != null && !maceOwn.equals(sword), "A mace has its own combo: " + maceOwn + " vs " + sword);
 		helper.assertTrue(combo(batter).equals(sword), "Batter Up!: the iron mace swings the sword's combo " + sword + ", got " + combo(batter));
 		helper.assertTrue(BetterCombat.swings(batter, batter.getMainHandItem()).size() == sword.size(), "The stat sheet shows the sword's combo too");
 
@@ -269,9 +269,9 @@ public final class BetterCombatGameTests {
 		helper.assertTrue(spearOwn != null && !spearOwn.equals(spearBatter) && claymore != null && claymore.equals(spearBatter),
 				"Batter Up!: a two-handed iron spear swings the greatsword's combo (" + spearOwn + " -> " + spearBatter + ", claymore " + claymore + ")");
 
-		String uniqueOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.BONE), CombatIds.FULL_SWEEP), 0);
-		String uniqueBatter = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.BONE), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP), 0);
-		helper.assertTrue(uniqueOwn != null && uniqueOwn.equals(uniqueBatter), "A weapon that isn't wooden to netherite keeps its moves: " + uniqueBatter);
+		List<String> uniqueOwn = combo(player(helper, new ItemStack(Items.BONE), CombatIds.FULL_SWEEP));
+		List<String> uniqueBatter = combo(player(helper, new ItemStack(Items.BONE), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP));
+		helper.assertTrue(uniqueOwn.equals(maceOwn) && uniqueOwn.equals(uniqueBatter), "A weapon that isn't wooden to netherite keeps its moves: " + uniqueBatter);
 		helper.succeed();
 	}
 

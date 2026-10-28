@@ -55,6 +55,8 @@ final class StatSheetWindow {
 	private static final int CHIP_H = 13;
 	/** The pinned weapon's outline. */
 	private static final int PIN = 0xFF6EC6FF;
+	/** The white reset arrow (the hub's Reset Majors picture). */
+	private static final ResourceLocation RESET_ICON = new ResourceLocation("bloomlevelup", "textures/gui/hub/reset_majors.png");
 	/** The switch a Major's "see it in the stat sheet" link puts on Max. */
 	private static final Map<String, String> LINKED_SWITCH = Map.ofEntries(Map.entry(CombatIds.PREDATOR, "predator"),
 			Map.entry(CombatIds.BLOODLUST, "bloodlust"), Map.entry(CombatIds.COMBO, "combo"), Map.entry(CombatIds.FIRST_STRIKE, "first_strike"),
@@ -75,6 +77,8 @@ final class StatSheetWindow {
 	/** Showing the other build's numbers against the one in use. Not kept after the window closes. */
 	private boolean otherBuild;
 	private boolean details;
+	/** Numbers rounded to halves (the Simplify chip); one setting for every tab, kept with the rest. */
+	private boolean simplify;
 	private double scroll;
 	private int contentH;
 	private int bodyTop;
@@ -101,9 +105,11 @@ final class StatSheetWindow {
 		this.frame = frame;
 		SheetMemory.Tab remembered = SheetMemory.get(category);
 		this.slot = remembered.slot();
-		this.target = remembered.target();
+		// An Armor tab remembered from the old attacker picker (0 to 5) starts on the default hit instead.
+		this.target = category.equals(SkillXp.ARMOR) && remembered.target() >= 0 && remembered.target() <= 5 ? -1 : remembered.target();
 		this.details = remembered.details();
 		this.modes.putAll(remembered.modes());
+		this.simplify = SheetMemory.simplify();
 		request();
 	}
 
@@ -140,6 +146,11 @@ final class StatSheetWindow {
 		requestId++;
 		List<String> switches = new ArrayList<>();
 		modes.forEach((id, mode) -> switches.add(id + (mode == SheetPayloads.Toggle.MAX ? "=max" : "=off")));
+
+		if (simplify) {
+			switches.add("simplify=on");
+		}
+
 		BloomNetwork.sendToServer(new SheetPayloads.Request(requestId, category, slot, target, switches, pinned, otherBuild));
 	}
 
@@ -213,8 +224,9 @@ final class StatSheetWindow {
 		chip(g, font, summaryX, y0 + 6, summary, !details, mouseX, mouseY, () -> pickPage(false), null);
 		chip(g, font, allX, y0 + 6, all, details, mouseX, mouseY, () -> pickPage(true), null);
 
-		// The other build, once there is one.
+		// The other build, once there is one, and the Simplify switch left of it.
 		BloomProfile profile = ClientBloomState.profile();
+		int leftmost = summaryX;
 
 		if (profile.spareBuild().isPresent()) {
 			int inUse = profile.activeBuild() + 1;
@@ -228,7 +240,12 @@ final class StatSheetWindow {
 			}
 
 			chip(g, font, buildX, y0 + 6, build, otherBuild, mouseX, mouseY, this::toggleOtherBuild, tip);
+			leftmost = buildX;
 		}
+
+		Component simple = Component.translatable("bloom.sheet.ui.simplify");
+		chip(g, font, leftmost - 8 - chipWidth(font, simple), y0 + 6, simple, simplify, mouseX, mouseY, this::toggleSimplify,
+				Component.translatable("bloom.sheet.ui.simplify.tip"));
 
 		SheetPayloads.View view = view();
 		int y = y0 + HEADER - 6;
@@ -279,9 +296,27 @@ final class StatSheetWindow {
 			y += SLOT + 4;
 		}
 
+		// The Armor sheet's hit: how hard (click up, right-click down, Shift for 5), what kind, and a reset.
+		if (category.equals(SkillXp.ARMOR)) {
+			Component label = Component.translatable("bloom.sheet.ui.hit");
+			g.text(font, label, x0 + 8, y + 3, LABEL);
+			int cx = x0 + 12 + font.width(label);
+			int amount = SheetPayloads.ArmorHit.amount(target);
+			int type = SheetPayloads.ArmorHit.type(target);
+			Component damage = Component.translatable("bloom.sheet.ui.hit.amount", String.valueOf(amount));
+			cx = clickChip(g, font, cx, y, damage, mouseX, mouseY, () -> stepHit(1), () -> stepHit(-1),
+					Component.translatable("bloom.sheet.ui.hit.amount.tip")) + 3;
+			Component kind = Component.translatable("bloom.sheet.ui.hit.type",
+					Component.translatable("bloom.sheet.armor.type." + SheetPayloads.ArmorHit.TYPES[type]));
+			cx = clickChip(g, font, cx, y, kind, mouseX, mouseY, () -> cycleHitType(1), () -> cycleHitType(-1),
+					Component.translatable("bloom.sheet.ui.hit.type.tip")) + 3;
+			resetChip(g, cx, y, mouseX, mouseY, this::resetHit, Component.translatable("bloom.sheet.ui.hit.reset"));
+			y += CHIP_H + 4;
+		}
+
 		// The target picker and the switches.
 		if (view != null && !view.targets().isEmpty()) {
-			Component label = Component.translatable(category.equals(SkillXp.ARMOR) ? "bloom.sheet.ui.incoming" : "bloom.sheet.ui.target");
+			Component label = Component.translatable("bloom.sheet.ui.target");
 			g.text(font, label, x0 + 8, y + 3, LABEL);
 			int left = x0 + 12 + font.width(label);
 			int cx = left;
@@ -516,6 +551,31 @@ final class StatSheetWindow {
 		return font.width(text) + 8;
 	}
 
+	/** A plain chip with a left-click and a right-click action (the Armor sheet's hit buttons); returns its right edge. */
+	private int clickChip(BloomGraphics g, Font font, int x, int y, Component text, int mouseX, int mouseY, Runnable action,
+			Runnable rightAction, Component tooltip) {
+		int w = chipWidth(font, text);
+		boolean hover = mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + CHIP_H;
+		g.fill(x + 1, y, x + w - 1, y + CHIP_H, hover ? GOLD : 0xFF8A6A2A);
+		g.fill(x, y + 1, x + w, y + CHIP_H - 1, hover ? GOLD : 0xFF8A6A2A);
+		g.fill(x + 1, y + 1, x + w - 1, y + CHIP_H - 1, 0xFF33291D);
+		g.text(font, text, x + 4, y + 3, hover ? 0xFFFFFFFF : TEXT);
+		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, rightAction, tooltip));
+		return x + w;
+	}
+
+	/** A square chip with the white reset arrow; returns its right edge. */
+	private int resetChip(BloomGraphics g, int x, int y, int mouseX, int mouseY, Runnable action, Component tooltip) {
+		int w = CHIP_H;
+		boolean hover = mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + CHIP_H;
+		g.fill(x + 1, y, x + w - 1, y + CHIP_H, hover ? GOLD : 0xFF8A6A2A);
+		g.fill(x, y + 1, x + w, y + CHIP_H - 1, hover ? GOLD : 0xFF8A6A2A);
+		g.fill(x + 1, y + 1, x + w - 1, y + CHIP_H - 1, 0xFF33291D);
+		g.blit(BloomGraphics.GUI_TEXTURED, RESET_ICON, x + 2, y + 2, 0.0F, 0.0F, 9, 9, 64, 64, 64, 64);
+		hits.add(new Hit(x, y, x + w, y + CHIP_H, action, null, tooltip));
+		return x + w;
+	}
+
 	// ------------------------------------------------------------------ choices
 
 	/** The weapon (Combat) or tool (Utility) choices: what's in hand, bare hands, then the rest of the inventory. */
@@ -727,6 +787,33 @@ final class StatSheetWindow {
 		request();
 	}
 
+	/** The Armor sheet's damage: up or down by 1, or by 5 with Shift held. */
+	private void stepHit(int direction) {
+		int step = net.minecraft.client.gui.screens.Screen.hasShiftDown() ? 5 : 1;
+		setHit(SheetPayloads.ArmorHit.amount(target) + direction * step, SheetPayloads.ArmorHit.type(target));
+	}
+
+	/** The Armor sheet's kind of hit: the next one (or the one before). */
+	private void cycleHitType(int direction) {
+		setHit(SheetPayloads.ArmorHit.amount(target), SheetPayloads.ArmorHit.type(target) + direction);
+	}
+
+	private void resetHit() {
+		setHit(SheetPayloads.ArmorHit.DEFAULT_AMOUNT, 0);
+	}
+
+	private void setHit(int amount, int type) {
+		target = SheetPayloads.ArmorHit.encode(amount, type);
+		remember();
+		request();
+	}
+
+	private void toggleSimplify() {
+		simplify = !simplify;
+		SheetMemory.setSimplify(simplify);
+		request();
+	}
+
 	/** Live → Max → Off → Live. */
 	private void cycle(String id) {
 		int next = (modes.getOrDefault(id, SheetPayloads.Toggle.LIVE) + 1) % 3;
@@ -794,6 +881,10 @@ final class StatSheetWindow {
 
 	void pickTargetForTests(int index) {
 		pickTarget(index);
+	}
+
+	void setHitForTests(int amount, int type) {
+		setHit(amount, type);
 	}
 
 	void otherBuildForTests() {

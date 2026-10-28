@@ -21,6 +21,32 @@ public final class SheetPayloads {
 	}
 
 	/**
+	 * The Armor sheet's hit (FreshOrangeSlices' playtest: a damage button and a type button instead of attackers),
+	 * carried in a request's {@code target} as {@code amount * 4 + type}; below 0 is the default, a 10 melee hit.
+	 */
+	public static final class ArmorHit {
+		/** The kinds of hit, in the Type button's order (bloom.sheet.armor.type.<key>). */
+		public static final String[] TYPES = {"melee", "projectile", "magic", "fall"};
+		public static final int DEFAULT_AMOUNT = 10;
+		public static final int MAX_AMOUNT = 999;
+
+		private ArmorHit() {
+		}
+
+		public static int amount(int target) {
+			return target < 0 ? DEFAULT_AMOUNT : Math.max(1, Math.min(MAX_AMOUNT, target / TYPES.length));
+		}
+
+		public static int type(int target) {
+			return target < 0 ? 0 : target % TYPES.length;
+		}
+
+		public static int encode(int amount, int type) {
+			return Math.max(1, Math.min(MAX_AMOUNT, amount)) * TYPES.length + Math.floorMod(type, TYPES.length);
+		}
+	}
+
+	/**
 	 * Client → server: the stat sheet for {@code category}, for the item in inventory {@code slot} (-1 = main hand,
 	 * -2 = bare hands). {@code toggles}: "id=max" or "id=off" for each switch not left on Live.
 	 */

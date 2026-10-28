@@ -33,7 +33,15 @@ final class Sheet {
 		OFF
 	}
 
+	/**
+	 * The client's Simplify switch ("simplify=on" among the switches; FreshOrangeSlices' playtest: too many decimals):
+	 * numbers are rounded to the nearest half, percents to whole ones and multipliers to one decimal. Held for the
+	 * sheet being built on this thread (the formatting helpers are static).
+	 */
+	static final String SIMPLIFY = "simplify";
+	private static final ThreadLocal<Boolean> SIMPLIFIED = ThreadLocal.withInitial(() -> false);
 	private final Map<String, Mode> requested = new HashMap<>();
+	final boolean simplify;
 	final List<Row> summary = new ArrayList<>();
 	final List<Row> details = new ArrayList<>();
 	final List<SheetPayloads.Toggle> toggles = new ArrayList<>();
@@ -46,7 +54,14 @@ final class Sheet {
 	final java.util.Set<String> summaryKeys = new java.util.LinkedHashSet<>();
 
 	Sheet(List<String> switches, int target) {
+		boolean simple = false;
+
 		for (String entry : switches) {
+			if (entry.equals(SIMPLIFY + "=on")) {
+				simple = true;
+				continue;
+			}
+
 			int equals = entry.indexOf('=');
 
 			if (equals > 0) {
@@ -56,6 +71,19 @@ final class Sheet {
 		}
 
 		this.target = target;
+		this.simplify = simple;
+	}
+
+	/** Runs {@code work} with this sheet's Simplify setting on for the number formatting (see {@link #SIMPLIFY}). */
+	void formatting(Runnable work) {
+		boolean before = SIMPLIFIED.get();
+		SIMPLIFIED.set(simplify);
+
+		try {
+			work.run();
+		} finally {
+			SIMPLIFIED.set(before);
+		}
 	}
 
 	/**
@@ -122,10 +150,14 @@ final class Sheet {
 
 	// ------------------------------------------------------------------ values
 
-	/** A number with up to two decimals, trailing zeros dropped. */
+	/** A number with up to two decimals, trailing zeros dropped (with Simplify on: to the nearest half). */
 	static String num(double value) {
 		if (!Double.isFinite(value)) {
 			return "-";
+		}
+
+		if (SIMPLIFIED.get()) {
+			value = Math.round(value * 2.0) / 2.0;
 		}
 
 		if (Math.abs(value - Math.rint(value)) < 0.005) {
@@ -149,19 +181,34 @@ final class Sheet {
 		return value < 0.0 ? colored("-" + num(-value), BAD) : colored("+" + num(value), GOOD);
 	}
 
-	/** "×1.5" in gold (red below 1). */
+	/** "×1.5" in gold (red below 1); with Simplify on, to one decimal. */
 	static Component times(double value) {
-		return colored("×" + num(value), value < 1.0 ? BAD : GOLD);
+		String text = SIMPLIFIED.get() ? plain2(Math.round(value * 10.0) / 10.0) : num(value);
+		return colored("×" + text, value < 1.0 ? BAD : GOLD);
+	}
+
+	/** A percent's number ("35" of 35%), to whole percents with Simplify on. */
+	static String pctNum(double percent) {
+		return SIMPLIFIED.get() && Double.isFinite(percent) ? Long.toString(Math.round(percent)) : num(percent);
 	}
 
 	/** A share as a percent: 0.35 → "35%". */
 	static Component pct(double share) {
-		return colored(num(share * 100.0) + "%", PLAIN);
+		return colored(pctNum(share * 100.0) + "%", PLAIN);
 	}
 
 	/** A bonus share as a percent: 0.35 → "+35%" (green), -0.2 → "-20%" (red). */
 	static Component plusPct(double share) {
-		return share < 0.0 ? colored("-" + num(-share * 100.0) + "%", BAD) : colored("+" + num(share * 100.0) + "%", GOOD);
+		return share < 0.0 ? colored("-" + pctNum(-share * 100.0) + "%", BAD) : colored("+" + pctNum(share * 100.0) + "%", GOOD);
+	}
+
+	/** Up to two decimals, unrounded (for numbers Simplify has already rounded its own way). */
+	private static String plain2(double value) {
+		if (Math.abs(value - Math.rint(value)) < 0.005) {
+			return Long.toString(Math.round(value));
+		}
+
+		return String.format(Locale.ROOT, "%.2f", value).replaceAll("0+$", "").replaceAll("\\.$", "");
 	}
 
 	/** Ticks as seconds: "1.5 s". */

@@ -222,21 +222,31 @@ public final class SheetGameTests {
 			StatEffects.refresh(player);
 			helper.assertTrue(player.getArmorValue() == 10, "100 Defense = 10 armor, was " + player.getArmorValue());
 
-			SheetPayloads.View view = sheet(player, SkillXp.ARMOR, -1, 0); // hit by a zombie
 			LivingEntity zombie = helper.spawn(EntityType.ZOMBIE, new BlockPos(1, 2, 1));
 			float before = player.getHealth();
 			float zombieHit = (float) zombie.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+			// The sheet's buttons set to a zombie's hit: that much, melee.
+			SheetPayloads.View view = sheet(player, SkillXp.ARMOR, -1, SheetPayloads.ArmorHit.encode(Math.round(zombieHit), 0));
 			helper.assertTrue(player.hurt(player.damageSources().mobAttack(zombie), zombieHit), "The hit lands");
 			double lost = before - player.getHealth();
 			near(helper, lost, value(view, "armor.lost"), "Health lost to a zombie's hit (10 armor, Iron Skin)");
 			near(helper, Math.ceil(player.getMaxHealth() / lost - 1.0E-6), value(view, "armor.hits_to_down"), "Zombie hits to go down from full health");
 
-			// A netherite sword with Sharpness V and Strength II: 1 + 7 + 6 (Strength II) + 3 (Sharpness V).
-			SheetPayloads.View netherite = sheet(player, SkillXp.ARMOR, -1, 5);
-			double swing = netherite.details().stream().filter(row -> isKey(row, "bloom.sheet.armor.step.hit"))
+			// 17 magic: armor doesn't touch it (no armor step), Iron Skin's Resistance I still cuts a fifth.
+			SheetPayloads.View magic = sheet(player, SkillXp.ARMOR, -1, SheetPayloads.ArmorHit.encode(17, 2));
+			double hit = magic.details().stream().filter(row -> isKey(row, "bloom.sheet.armor.step.hit"))
 					.mapToDouble(row -> Double.parseDouble(row.value().getString().trim())).findFirst().orElse(-1.0);
-			near(helper, 17.0, swing, "The netherite swing's hit");
-			helper.assertTrue(netherite.gauge().is(Items.NETHERITE_SWORD), "The picture is the netherite sword");
+			near(helper, 17.0, hit, "The hit set on the sheet");
+			helper.assertFalse(magic.details().stream().anyMatch(row -> isKey(row, "bloom.sheet.armor.step.armor")), "Armor doesn't cut magic");
+			near(helper, 17.0 * 0.8, value(magic, "armor.lost"), "Magic through Resistance I");
+			helper.assertTrue(magic.gauge().is(Items.SPLASH_POTION), "The picture is a splash potion");
+
+			// No hit set yet: 10 melee. With Simplify on, every number lands on a half.
+			helper.assertTrue(sheet(player, SkillXp.ARMOR, -1, -1).summary().stream().anyMatch(row -> row.label().getString().contains("10")),
+					"The default hit is 10");
+			SheetPayloads.View simple = sheet(player, SkillXp.ARMOR, -1, SheetPayloads.ArmorHit.encode(7, 1), "simplify=on");
+			double lost = value(simple, "armor.lost");
+			helper.assertTrue(Math.abs(lost * 2.0 - Math.rint(lost * 2.0)) < 1.0E-9, "Simplified health lost is a half: " + lost);
 		} finally {
 			level.getServer().setDifficulty(difficulty, true);
 		}

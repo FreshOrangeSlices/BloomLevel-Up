@@ -1,8 +1,6 @@
 package com.freshorangeslices.bloomlevelup.sheet;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Difficulty;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,22 +17,22 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 
 import com.freshorangeslices.bloomlevelup.config.BloomConfig;
 import com.freshorangeslices.bloomlevelup.data.BloomServices;
 import com.freshorangeslices.bloomlevelup.effect.StatEffects;
+import com.freshorangeslices.bloomlevelup.network.SheetPayloads;
 import com.freshorangeslices.bloomlevelup.player.BloomAttachments;
 import com.freshorangeslices.bloomlevelup.player.BloomProfile;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
@@ -48,38 +45,21 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas.ArmorStyle;
 /**
  * The Armor sheet: how much of a hit actually reaches your health, step by step in the order the game applies
  * them (armor, Resistance, protection enchantments, then the Armor category's own layers and Absorb). The hit is
- * picked by who deals it (a zombie, a skeleton's arrow, a creeper, a player with an iron sword, a diamond one with
- * Sharpness V, a netherite one with Sharpness V and Strength II), so the numbers read like real fights; the same
- * amount is then shown for the other kinds of hits (fire, falls, magic...), plus the chances to avoid a hit
- * altogether. The steps are vanilla 1.20.1's own code (LivingEntity.getDamageAfterArmorAbsorb / MagicAbsorb) and
- * {@link ArmorSkill#layers}, so the sheet matches a real hit. (Forge 1.20.1 build: no blunt hits, Adamantium is gone.)
+ * set on the sheet itself (FreshOrangeSlices' playtest: the old attacker picker read as too much): how hard it is
+ * and what kind (melee, a projectile, magic or a fall), and the Summary says what you'd lose to it. The steps are
+ * vanilla 1.20.1's own code (LivingEntity.getDamageAfterArmorAbsorb / MagicAbsorb) and {@link ArmorSkill#layers}, so
+ * the sheet matches a real hit. (Forge 1.20.1 build: no blunt hits, Adamantium is gone.)
  */
 final class ArmorSheet {
-	/** The picker, in its order (bloom.sheet.armor.attacker.<key>); the zombie is shown first. */
-	private static final String[] ATTACKERS = {"zombie", "skeleton", "creeper", "iron_sword", "diamond_sword", "netherite_sword"};
-	/** A skeleton's arrow up close: it leaves the bow at 1.6 with about 2.2 base damage, rounded up (before difficulty). */
-	private static final float SKELETON_ARROW = 4.0F;
-	/** How far the creeper is when it goes off. */
-	private static final double CREEPER_DISTANCE = 2.0;
-	/** Strength's attack damage per level (vanilla: +3 for each). */
-	private static final float STRENGTH_PER_LEVEL = 3.0F;
 	private static final EquipmentSlot[] SLOTS = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
 	private ArmorSheet() {
 	}
 
-	/** One kind of incoming hit: its name (bloom.sheet.armor.kind.<key>) and a real damage source for it. */
-	private record Kind(String key, DamageSource source) {
-	}
-
-	/**
-	 * Who's hitting: its key (bloom.sheet.armor.attacker.<key> on the picker, .who in sentences), the item pictured
-	 * for it, the hit as it lands on this difficulty and a real damage source for it (the swordsmen hold their
-	 * sword, so Vibranium sees a blade).
-	 */
-	private record Attacker(String key, ItemStack picture, float hit, DamageSource source, boolean mob) {
-		Component who() {
-			return Component.translatable("bloom.sheet.armor.attacker." + key + ".who");
+	/** The hit set on the sheet (its amount, and its kind by {@link SheetPayloads.ArmorHit#TYPES}), from the request's target. */
+	record Hit(int amount, String key) {
+		static Hit of(int target) {
+			return new Hit(SheetPayloads.ArmorHit.amount(target), SheetPayloads.ArmorHit.TYPES[SheetPayloads.ArmorHit.type(target)]);
 		}
 	}
 
@@ -120,23 +100,15 @@ final class ArmorSheet {
 			braced = mode == Sheet.Mode.LIVE ? now : mode == Sheet.Mode.MAX;
 		}
 
-		List<Component> names = new ArrayList<>();
-
-		for (String key : ATTACKERS) {
-			names.add(Component.translatable("bloom.sheet.armor.attacker." + key));
-		}
-
-		Difficulty difficulty = shownDifficulty(level);
-		Attacker attacker = attacker(level, player, ATTACKERS[sheet.targets(names, 0)], difficulty);
-		float hit = attacker.hit();
-		LivingEntity zombie = Dummies.of(level, EntityType.ZOMBIE);
-		List<Kind> kinds = kinds(level, player, zombie, profile, service);
+		Hit set = Hit.of(sheet.target);
+		float hit = set.amount();
+		DamageSource source = source(level, set.key());
 
 		// ---- summary
 		Body body = Body.of(new Loadout(player, player.getMainHandItem()));
 		double armor = body.armor();
 		double toughness = body.toughness();
-		Steps hitSteps = steps(level, player, body, attacker.source(), hit, braced);
+		Steps steps = steps(level, player, body, source, hit, braced);
 		sheet.summary(Sheet.plain(body.armorValue()), "armor.armor_points");
 
 		if (toughness > 0.0) {
@@ -144,9 +116,9 @@ final class ArmorSheet {
 		}
 
 		sheet.summary(Sheet.plain(body.maxHealth()), "armor.max_health");
-		attackerNote(sheet, attacker, difficulty);
-		sheet.summary(taken(hitSteps), "armor.lost");
-		sheet.summary(hitsToDown(body.maxHealth(), hitSteps.health()), "armor.hits_to_down");
+		sheet.summaryNote("armor.hit.note", Sheet.num(hit), typeName(set));
+		sheet.summary(taken(steps), "armor.lost");
+		sheet.summary(hitsToDown(body.maxHealth(), steps.health()), "armor.hits_to_down");
 
 		double dodge = StatFormulas.dodgeChance(service.statValue(profile, ArmorIds.DODGE), config.dodgeChanceCap);
 		boolean light = service.isMajorActive(profile, ArmorIds.FITTING_ARMOR) && ArmorStyles.styleOf(player) == ArmorStyle.LIGHT;
@@ -156,7 +128,27 @@ final class ArmorSheet {
 			sheet.summary(Sheet.pct(anyDodge), "armor.dodge_total");
 		}
 
-		// ---- breakdown: armor points
+		// ---- breakdown: the hit set on the sheet, step by step
+		sheet.heading("armor.h.steps", Sheet.num(hit), typeName(set));
+		sheet.row(Sheet.plain(steps.start()), "armor.step.hit");
+		stepRow(sheet, "armor.step.armor", steps.start(), steps.afterArmor());
+		stepRow(sheet, "armor.step.resistance", steps.afterArmor(), steps.afterResistance());
+		stepRow(sheet, "armor.step.protection", steps.afterResistance(), steps.afterProtection());
+
+		for (ArmorSkill.Layer layer : steps.layers()) {
+			sheet.row(Sheet.colored("-" + Sheet.pctNum(layer.reduction() * 100.0) + "%", Sheet.GOOD), "layer." + layer.key());
+		}
+
+		if (steps.health() < steps.afterLayers()) {
+			sheet.row(Sheet.colored("-50%", Sheet.GOOD), "armor.step.absorb");
+			sheet.note("armor.step.absorb.note", Sheet.num(Math.floor(steps.afterLayers() * 0.5)));
+		}
+
+		sheet.total(Sheet.plain(steps.health()), "armor.step.health");
+		sheet.row(hitsToDown(body.maxHealth(), steps.health()), "armor.hits_to_down");
+		sheet.note("armor.step.note");
+
+		// ---- breakdown: your armor
 		sheet.heading("armor.h.armor");
 		double gear = 0.0;
 		double gearToughness = 0.0;
@@ -191,37 +183,34 @@ final class ArmorSheet {
 		}
 
 		double overcap = StatFormulas.armorOvercapReduction(rawArmor, config.armorOvercapReductionCap);
-		sheet.row(Sheet.pct(overcap), "armor.overcap");
-		sheet.note("armor.overcap.note");
 
-		// ---- breakdown: the picked hit, step by step
-		Steps steps = hitSteps;
-		sheet.heading("armor.h.steps", attacker.who(), Sheet.num(hit));
-		sheet.row(Sheet.plain(steps.start()), "armor.step.hit");
-		stepRow(sheet, "armor.step.armor", steps.start(), steps.afterArmor());
-		stepRow(sheet, "armor.step.resistance", steps.afterArmor(), steps.afterResistance());
-		stepRow(sheet, "armor.step.protection", steps.afterResistance(), steps.afterProtection());
-
-		for (ArmorSkill.Layer layer : steps.layers()) {
-			sheet.row(Sheet.colored("-" + Sheet.num(layer.reduction() * 100.0) + "%", Sheet.GOOD), "layer." + layer.key());
+		if (overcap > 0.0) {
+			sheet.row(Sheet.pct(overcap), "armor.overcap");
+			sheet.note("armor.overcap.note");
 		}
 
-		if (steps.health() < steps.afterLayers()) {
-			sheet.row(Sheet.colored("-50%", Sheet.GOOD), "armor.step.absorb");
-			sheet.note("armor.step.absorb.note", Sheet.num(Math.floor(steps.afterLayers() * 0.5)));
+		// ---- breakdown: your health
+		sheet.heading("armor.h.health");
+		double vitality = StatFormulas.vitalityBonusHealth(service.statValue(profile, ArmorIds.VITALITY));
+		double protein = service.isMajorActive(profile, ArmorIds.PROTEIN) ? StatFormulas.proteinBonusHealth(profile.counter(ArmorIds.PROTEIN_MEALS)) : 0.0;
+		double baseHealth = player.getAttributeBaseValue(Attributes.MAX_HEALTH);
+		sheet.row(Sheet.plain(baseHealth), "armor.base_health");
+		sheet.row(Sheet.plus(vitality), "armor.vitality", Sheet.num(service.statValue(profile, ArmorIds.VITALITY)));
+
+		if (protein > 0.0) {
+			sheet.row(Sheet.plus(protein), "armor.protein", Sheet.num(profile.counter(ArmorIds.PROTEIN_MEALS)));
 		}
 
-		sheet.total(Sheet.plain(steps.health()), "armor.step.health");
-		sheet.note("armor.step.note");
-		sheet.row(hitsToDown(body.maxHealth(), steps.health()), "armor.hits_to_down");
-		sheet.note("armor.hits_to_down.note");
+		double otherHealth = body.maxHealth() - baseHealth - vitality - protein;
 
-		// ---- breakdown: other kinds of hits
-		sheet.heading("armor.h.kinds", Sheet.num(hit));
+		if (Math.abs(otherHealth) > 0.005) {
+			sheet.row(Sheet.plus(otherHealth), "armor.other_health");
+		}
 
-		for (Kind kind : kinds) {
-			Steps each = steps(level, player, body, kind.source(), hit, braced);
-			sheet.row(taken(each), "armor.kind." + kind.key());
+		sheet.total(Sheet.plain(body.maxHealth()), "armor.max_health");
+
+		if (player.getAbsorptionAmount() > 0.0F) {
+			sheet.row(Sheet.plus(player.getAbsorptionAmount()), "armor.absorption");
 		}
 
 		// ---- breakdown: not getting hit at all
@@ -255,30 +244,8 @@ final class ArmorSheet {
 			sheet.row(Sheet.word(profile.counter(ArmorIds.CASTLE_SPENT) == 0 ? "value.ready" : "value.spent"), "armor.castle");
 		}
 
-		// ---- breakdown: health and the rest
-		sheet.heading("armor.h.health");
-		double vitality = StatFormulas.vitalityBonusHealth(service.statValue(profile, ArmorIds.VITALITY));
-		double protein = service.isMajorActive(profile, ArmorIds.PROTEIN) ? StatFormulas.proteinBonusHealth(profile.counter(ArmorIds.PROTEIN_MEALS)) : 0.0;
-		double baseHealth = player.getAttributeBaseValue(Attributes.MAX_HEALTH);
-		sheet.row(Sheet.plain(baseHealth), "armor.base_health");
-		sheet.row(Sheet.plus(vitality), "armor.vitality", Sheet.num(service.statValue(profile, ArmorIds.VITALITY)));
-
-		if (protein > 0.0) {
-			sheet.row(Sheet.plus(protein), "armor.protein", Sheet.num(profile.counter(ArmorIds.PROTEIN_MEALS)));
-		}
-
-		double otherHealth = body.maxHealth() - baseHealth - vitality - protein;
-
-		if (Math.abs(otherHealth) > 0.005) {
-			sheet.row(Sheet.plus(otherHealth), "armor.other_health");
-		}
-
-		sheet.total(Sheet.plain(body.maxHealth()), "armor.max_health");
-
-		if (player.getAbsorptionAmount() > 0.0F) {
-			sheet.row(Sheet.plus(player.getAbsorptionAmount()), "armor.absorption");
-		}
-
+		// ---- breakdown: knockback, wear and effects
+		sheet.heading("armor.h.rest");
 		sheet.row(Sheet.pct(Math.min(1.0, body.knockback())), "armor.knockback");
 		int durability = service.statValue(profile, ArmorIds.DURABILITY);
 		sheet.row(Sheet.pct(StatFormulas.armorDurabilitySaveChance(durability)), "armor.durability_armor", Sheet.num(durability));
@@ -296,90 +263,41 @@ final class ArmorSheet {
 			sheet.row(Sheet.times(0.5), "armor.thick_blood");
 		}
 
-		// The picture: who's hitting, and what gets through.
-		sheet.gauge = attacker.picture();
+		// The picture: the kind of hit, and what gets through.
+		sheet.gauge = picture(set.key());
 		sheet.gaugeCaption = Component.translatable("bloom.sheet.gauge.attacker", Sheet.num(steps.health()), Sheet.num(hit));
 	}
 
-	/**
-	 * The picked attacker. Mobs hit as they would on this difficulty (Player.hurt: half plus one on Easy, half
-	 * again on Hard); a player's sword doesn't change with difficulty. Swords count a fully charged swing, no crit.
-	 */
-	private static Attacker attacker(ServerLevel level, ServerPlayer player, String key, Difficulty difficulty) {
-		return switch (key) {
-			case "skeleton" -> {
+	/** The kind of hit, as the sheet names it ("melee", "magic"...). */
+	private static Component typeName(Hit set) {
+		return Component.translatable("bloom.sheet.armor.type." + set.key() + ".lower");
+	}
+
+	/** A real damage source for a kind of hit: a zombie's swing, a skeleton's arrow, magic (Harming) or a fall. */
+	private static DamageSource source(ServerLevel level, String type) {
+		return switch (type) {
+			case "projectile" -> {
 				LivingEntity skeleton = Dummies.of(level, EntityType.SKELETON);
-				yield mob(key, new ItemStack(Items.SKELETON_SKULL), SKELETON_ARROW, source(level, DamageTypes.ARROW, null, skeleton), difficulty);
+				yield source(level, DamageTypes.ARROW, null, skeleton);
 			}
-			case "creeper" -> {
-				LivingEntity creeper = Dummies.of(level, EntityType.CREEPER);
-				yield mob(key, new ItemStack(Items.CREEPER_HEAD), (float) creeperBlast(CREEPER_DISTANCE),
-						source(level, DamageTypes.EXPLOSION, creeper, creeper), difficulty);
-			}
-			case "iron_sword" -> sword(level, player, key, Items.IRON_SWORD, 0, 0);
-			case "diamond_sword" -> sword(level, player, key, Items.DIAMOND_SWORD, 5, 0);
-			case "netherite_sword" -> sword(level, player, key, Items.NETHERITE_SWORD, 5, 2);
+			case "magic" -> source(level, DamageTypes.MAGIC, null, null);
+			case "fall" -> source(level, DamageTypes.FALL, null, null);
 			default -> {
 				LivingEntity zombie = Dummies.of(level, EntityType.ZOMBIE);
 				zombie.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-				yield mob("zombie", new ItemStack(Items.ZOMBIE_HEAD), (float) zombie.getAttributeValue(Attributes.ATTACK_DAMAGE),
-						source(level, DamageTypes.MOB_ATTACK, zombie, zombie), difficulty);
+				yield source(level, DamageTypes.MOB_ATTACK, zombie, zombie);
 			}
 		};
 	}
 
-	private static Attacker mob(String key, ItemStack picture, float hit, DamageSource source, Difficulty difficulty) {
-		return new Attacker(key, picture, source.scalesWithDifficulty() ? scaled(hit, difficulty) : hit, source, true);
-	}
-
-	/** A player's swing: 1 + the sword's attack damage + Strength, then what Sharpness adds. */
-	private static Attacker sword(ServerLevel level, ServerPlayer player, String key, Item item, int sharpness, int strength) {
-		ItemStack sword = new ItemStack(item);
-
-		if (sharpness > 0) {
-			sword.enchant(Enchantments.SHARPNESS, sharpness);
-		}
-
-		// The swing comes from a stand-in holding the sword (the sheet's player can't hit itself), as a player's attack.
-		LivingEntity swordsman = Dummies.of(level, EntityType.VINDICATOR);
-		swordsman.setItemSlot(EquipmentSlot.MAINHAND, sword);
-		DamageSource source = source(level, DamageTypes.PLAYER_ATTACK, swordsman, swordsman);
-		float base = (float) Loadout.withItem(sword, Attributes.ATTACK_DAMAGE, 1.0) + strength * STRENGTH_PER_LEVEL;
-		// 1.20.1: Sharpness and the rest by the target's mob type (a player is an ordinary one).
-		float hit = base + EnchantmentHelper.getDamageBonus(sword, MobType.UNDEFINED);
-		return new Attacker(key, sword, hit, source, false);
-	}
-
-	/** Vanilla's explosion damage for a creeper's blast (radius 3) at {@code distance} blocks, in plain sight. */
-	static double creeperBlast(double distance) {
-		double size = 3.0 * 2.0;
-		double impact = Math.max(0.0, 1.0 - distance / size);
-		return (impact * impact + impact) / 2.0 * 7.0 * size + 1.0;
-	}
-
-	/** Player.hurt's difficulty scaling for hits that scale with it. */
-	static float scaled(float amount, Difficulty difficulty) {
-		return switch (difficulty) {
-			case EASY -> Math.min(amount / 2.0F + 1.0F, amount);
-			case HARD -> amount * 3.0F / 2.0F;
-			default -> amount;
+	/** What the sheet pictures for a kind of hit. */
+	private static ItemStack picture(String type) {
+		return switch (type) {
+			case "projectile" -> new ItemStack(Items.ARROW);
+			case "magic" -> PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), Potions.HARMING);
+			case "fall" -> new ItemStack(Items.FEATHER);
+			default -> new ItemStack(Items.IRON_SWORD);
 		};
-	}
-
-	/** The world's difficulty; Normal's numbers on Peaceful, where mobs don't fight. */
-	private static Difficulty shownDifficulty(ServerLevel level) {
-		Difficulty difficulty = level.getDifficulty();
-		return difficulty == Difficulty.PEACEFUL ? Difficulty.NORMAL : difficulty;
-	}
-
-	/** "Hit by a zombie for 3 (on Normal):" over the lines it's about. */
-	private static void attackerNote(Sheet sheet, Attacker attacker, Difficulty difficulty) {
-		if (attacker.mob()) {
-			sheet.summaryNote("armor.attacker.note_mob", attacker.who(), Sheet.num(attacker.hit()),
-					Component.translatable("options.difficulty." + difficulty.name().toLowerCase(Locale.ROOT)));
-		} else {
-			sheet.summaryNote("armor.attacker.note", attacker.who(), Sheet.num(attacker.hit()));
-		}
 	}
 
 	/** How many such hits take you from full health to nothing ("Never" when none gets through). */
@@ -389,27 +307,6 @@ final class ArmorSheet {
 		}
 
 		return Sheet.plain(Math.max(1.0, Math.ceil(maxHealth / perHit - 1.0E-6)));
-	}
-
-	/** The kinds of hits the sheet compares; blades and blunt weapons only when a Major treats them differently. */
-	private static List<Kind> kinds(ServerLevel level, ServerPlayer player, LivingEntity zombie, BloomProfile profile, ProgressionService service) {
-		List<Kind> kinds = new ArrayList<>();
-		zombie.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-		kinds.add(new Kind("mob", source(level, DamageTypes.MOB_ATTACK, zombie, zombie)));
-
-		// A hit's weapon is whatever its attacker holds: a stand-in husk with a sword.
-		if (service.isMajorActive(profile, ArmorIds.VIBRANIUM)) {
-			LivingEntity swordsman = Dummies.of(level, EntityType.HUSK);
-			swordsman.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
-			kinds.add(new Kind("blade", source(level, DamageTypes.MOB_ATTACK, swordsman, swordsman)));
-		}
-
-		kinds.add(new Kind("arrow", source(level, DamageTypes.ARROW, null, zombie)));
-		kinds.add(new Kind("fire", source(level, DamageTypes.IN_FIRE, null, null)));
-		kinds.add(new Kind("explosion", source(level, DamageTypes.EXPLOSION, null, null)));
-		kinds.add(new Kind("fall", source(level, DamageTypes.FALL, null, null)));
-		kinds.add(new Kind("magic", source(level, DamageTypes.MAGIC, null, null)));
-		return kinds;
 	}
 
 	private static Holder<DamageType> type(ServerLevel level, ResourceKey<DamageType> key) {
@@ -492,7 +389,7 @@ final class ArmorSheet {
 
 	private static void stepRow(Sheet sheet, String key, float before, float after) {
 		if (before > 0.0F && after < before - 1.0E-4F) {
-			sheet.row(Sheet.colored("-" + Sheet.num((1.0 - after / before) * 100.0) + "%", Sheet.GOOD), key);
+			sheet.row(Sheet.colored("-" + Sheet.pctNum((1.0 - after / before) * 100.0) + "%", Sheet.GOOD), key);
 		}
 	}
 

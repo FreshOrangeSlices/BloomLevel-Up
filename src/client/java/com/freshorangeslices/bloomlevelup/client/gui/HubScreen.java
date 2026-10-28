@@ -1280,6 +1280,13 @@ public final class HubScreen extends Screen {
 		}
 	}
 
+	/** The Armor sheet's hit (amount, and its kind by SheetPayloads.ArmorHit.TYPES). */
+	public void sheetHitForTests(int amount, int type) {
+		if (sheetWindow != null) {
+			sheetWindow.setHitForTests(amount, type);
+		}
+	}
+
 	/** The open sheet's weapon choice and switches, "slot=3 predator=1" (client game test). */
 	public String sheetStateForTests() {
 		return sheetWindow == null ? "closed" : "slot=" + sheetWindow.slotForTests() + " " + new java.util.TreeMap<>(sheetWindow.modesForTests());

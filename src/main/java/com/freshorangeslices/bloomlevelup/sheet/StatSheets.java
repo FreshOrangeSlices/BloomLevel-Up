@@ -117,17 +117,19 @@ public final class StatSheets {
 		Sheet sheet = new Sheet(toggles, target);
 
 		try {
-			if (category.equals(SkillXp.COMBAT)) {
-				CombatSheet.build(player, item, sheet);
-			} else if (category.equals(SkillXp.ARMOR)) {
-				ArmorSheet.build(player, sheet);
-			} else if (category.equals(SkillXp.UTILITY)) {
-				UtilitySheet.build(player, item, sheet);
-			} else if (category.equals(SkillXp.MISC)) {
-				MiscSheet.build(player, sheet);
-			} else {
-				sheet.summary(Sheet.word("value.none"), "unknown");
-			}
+			sheet.formatting(() -> {
+				if (category.equals(SkillXp.COMBAT)) {
+					CombatSheet.build(player, item, sheet);
+				} else if (category.equals(SkillXp.ARMOR)) {
+					ArmorSheet.build(player, sheet);
+				} else if (category.equals(SkillXp.UTILITY)) {
+					UtilitySheet.build(player, item, sheet);
+				} else if (category.equals(SkillXp.MISC)) {
+					MiscSheet.build(player, sheet);
+				} else {
+					sheet.summary(Sheet.word("value.none"), "unknown");
+				}
+			});
 		} catch (RuntimeException e) {
 			BloomLevelUp.LOGGER.error("Bloom stat sheet for {} failed", category, e);
 			sheet.summary.clear();

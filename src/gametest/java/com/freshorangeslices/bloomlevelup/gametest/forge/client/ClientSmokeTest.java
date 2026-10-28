@@ -104,15 +104,15 @@ public final class ClientSmokeTest {
 		step("sheet shot", always(), 40, mc -> shot(mc, "sheet_combat"));
 		step("sheet details", always(), 0, mc -> ((HubScreen) mc.screen).sheetForTests(true, null));
 		step("sheet details shot", always(), 30, mc -> shot(mc, "sheet_combat_details"));
-		// The Armor sheet, hit by a netherite sword with Sharpness V and Strength II (its attackers wrap onto two rows).
+		// The Armor sheet, with a 17 projectile hit set on its buttons.
 		step("armor sheet", always(), 0, mc -> {
 			ClientBloomState.selectCategory(SkillXp.ARMOR);
 			HubScreen hub = new HubScreen();
 			mc.setScreen(hub);
 			hub.openSheetForTests();
 		});
-		step("armor sheet attacker", always(), 30, mc -> ((HubScreen) mc.screen).sheetTargetForTests(5));
-		step("armor sheet shot", mc -> ClientBloomState.sheet() != null && ClientBloomState.sheet().gauge().is(Items.NETHERITE_SWORD), 10,
+		step("armor sheet hit", always(), 30, mc -> ((HubScreen) mc.screen).sheetHitForTests(17, 1));
+		step("armor sheet shot", mc -> ClientBloomState.sheet() != null && ClientBloomState.sheet().gauge().is(Items.ARROW), 10,
 				mc -> shot(mc, "sheet_armor"));
 		step("details", always(), 0, mc -> {
 			HubScreen hub = new HubScreen();

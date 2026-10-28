@@ -31,6 +31,9 @@ final class SheetMemory {
 	private static final Tab DEFAULT = new Tab(StatSheetWindow.HELD, -1, Map.of(), false);
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final Map<String, Tab> TABS = new HashMap<>();
+	/** The Simplify switch, for every tab (saved as "_simplify", next to the tabs). */
+	private static final String SIMPLIFY = "_simplify";
+	private static boolean simplify;
 	private static boolean loaded;
 
 	private SheetMemory() {
@@ -44,6 +47,17 @@ final class SheetMemory {
 	static void put(String category, Tab tab) {
 		load();
 		TABS.put(category, tab);
+		save();
+	}
+
+	static boolean simplify() {
+		load();
+		return simplify;
+	}
+
+	static void setSimplify(boolean on) {
+		load();
+		simplify = on;
 		save();
 	}
 
@@ -66,7 +80,13 @@ final class SheetMemory {
 		try {
 			JsonObject root = JsonParser.parseString(Files.readString(file, StandardCharsets.UTF_8)).getAsJsonObject();
 
+			simplify = root.has(SIMPLIFY) && root.get(SIMPLIFY).getAsBoolean();
+
 			for (Map.Entry<String, JsonElement> entry : root.entrySet()) {
+				if (entry.getKey().startsWith("_") || !entry.getValue().isJsonObject()) {
+					continue;
+				}
+
 				JsonObject tab = entry.getValue().getAsJsonObject();
 				Map<String, Integer> modes = new LinkedHashMap<>();
 
@@ -86,6 +106,7 @@ final class SheetMemory {
 
 	private static void save() {
 		JsonObject root = new JsonObject();
+		root.addProperty(SIMPLIFY, simplify);
 
 		for (Map.Entry<String, Tab> entry : TABS.entrySet()) {
 			JsonObject tab = new JsonObject();

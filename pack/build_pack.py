@@ -328,6 +328,8 @@ def main():
     if chosen:
         notes.append("layers: " + ", ".join(layer["name"] for layer in chosen))
     queue = [(slug, None) for slug in spec["modrinth"]]
+    pins = {slug: pin for slug, pin in spec.get("pins", {}).items() if not slug.startswith("_")}
+    notes += [f"{slug} held at {pin['version']}: {pin.get('why', 'pinned')}" for slug, pin in sorted(pins.items()) if slug in spec["modrinth"]]
     seen = set()
     lock_path = os.path.join(os.path.dirname(__file__), "pack.lock.json")
     lock = {} if not os.path.exists(lock_path) else json.load(open(lock_path))
@@ -345,7 +347,8 @@ def main():
             continue
         seen.add(project["id"])
         version = None
-        pin = None if update else locked.get(project["slug"])
+        held = pins.get(project["slug"], {}).get("version")  # pack.json's pins hold a version even with --update
+        pin = held or (None if update else locked.get(project["slug"]))
         if pin:
             candidates = api(f"/project/{project['id']}/version", game_versions=[game], loaders=[loader_for(project)]) or []
             version = next((v for v in candidates if v["version_number"] == pin), None)

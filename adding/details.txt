@@ -1,0 +1,424 @@
+== JEI classes naming the hidden tag
+--- mezz.jei.api.constants.Tags
+Compiled from "Tags.java"
+public class mezz.jei.api.constants.Tags {
+  public static final net.minecraft.resources.ResourceLocation HIDDEN_FROM_RECIPE_VIEWERS;
+  public mezz.jei.api.constants.Tags();
+       0: new           #16                 // class net/minecraft/resources/ResourceLocation
+       4: ldc           #18                 // String c
+       6: ldc           #20                 // String hidden_from_recipe_viewers
+       8: invokespecial #23                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: putstatic     #25                 // Field HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/resources/ResourceLocation;
+--- mezz.jei.api.ingredients.IIngredientHelper
+  public default java.lang.String getWildcardId(V);
+       2: invokeinterface #56,  2           // InterfaceMethod getWildcardId:(Ljava/lang/Object;)Ljava/lang/String;
+       2: invokeinterface #65,  2           // InterfaceMethod getResourceLocation:(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;
+       7: invokevirtual #71                 // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+       0: ldc2_w        #75                 // long -1l
+  public abstract net.minecraft.resources.ResourceLocation getResourceLocation(V);
+  public default java.util.stream.Stream<net.minecraft.resources.ResourceLocation> getTagStream(V);
+  public default boolean isHiddenFromRecipeViewersByTags(V);
+       7: getstatic     #124                // Field mezz/jei/api/constants/Tags.HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/resources/ResourceLocation;
+      15: invokedynamic #147,  0            // InvokeDynamic #0:test:(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/function/Predicate;
+  public default boolean isHiddenFromRecipeViewersByTags(mezz.jei.api.ingredients.ITypedIngredient<V>);
+       7: invokeinterface #155,  2          // InterfaceMethod isHiddenFromRecipeViewersByTags:(Ljava/lang/Object;)Z
+  public default java.util.Optional<net.minecraft.tags.TagKey<?>> getTagKeyEquivalent(java.util.Collection<V>);
+  public default java.util.Optional<net.minecraft.resources.ResourceLocation> getTagEquivalent(java.util.Collection<V>);
+       2: invokeinterface #174,  2          // InterfaceMethod getTagKeyEquivalent:(Ljava/util/Collection;)Ljava/util/Optional;
+--- mezz.jei.library.plugins.jei.tags.TagInfoRecipeMaker
+  private static <B, I> java.util.List<mezz.jei.api.ingredients.ITypedIngredient<I>> getIngredients(net.minecraft.core.Registry<B>, net.minecraft.tags.TagKey<B>, mezz.jei.api.ingredients.IIngredientType<I>, java.util.function.Function<B, I>, mezz.jei.api.runtime.IIngredientManager);
+      19: invokeinterface #102,  2          // InterfaceMethod net/minecraft/core/Registry.m_206058_:(Lnet/minecraft/tags/TagKey;)Ljava/lang/Iterable;
+      78: invokeinterface #143,  2          // InterfaceMethod mezz/jei/api/ingredients/IIngredientHelper.isHiddenFromRecipeViewersByTags:(Lmezz/jei/api/ingredients/ITypedIngredient;)Z
+  private static void lambda$createTagInfoRecipes$0(net.minecraft.core.Registry, mezz.jei.api.ingredients.IIngredientType, java.util.function.Function, mezz.jei.api.runtime.IIngredientManager, net.minecraft.resources.ResourceKey, net.minecraft.tags.TagKey, java.util.function.Consumer);
+       2: invokevirtual #155                // Method net/minecraft/tags/TagKey.f_203868_:()Lnet/minecraft/resources/ResourceLocation;
+       5: invokevirtual #161                // Method net/minecraft/resources/ResourceLocation.m_135815_:()Ljava/lang/String;
+       8: getstatic     #167                // Field mezz/jei/api/constants/Tags.HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/resources/ResourceLocation;
+      11: invokevirtual #161                // Method net/minecraft/resources/ResourceLocation.m_135815_:()Ljava/lang/String;
+      29: invokestatic  #174                // Method getIngredients:(Lnet/minecraft/core/Registry;Lnet/minecraft/tags/TagKey;Lmezz/jei/api/ingredients/IIngredientType;Ljava/util/function/Function;Lmezz/jei/api/runtime/IIngredientManager;)Ljava/util/List;
+      52: invokespecial #182                // Method mezz/jei/library/plugins/jei/tags/TagInfoRecipe."<init>":(Lnet/minecraft/tags/TagKey;Ljava/util/List;)V
+      88: invokeinterface #214,  2          // InterfaceMethod mezz/jei/common/platform/IPlatformRenderHelper.getName:(Lnet/minecraft/tags/TagKey;)Lnet/minecraft/network/chat/Component;
+      95: invokevirtual #217                // Method net/minecraft/resources/ResourceKey.m_135782_:()Lnet/minecraft/resources/ResourceLocation;
+     105: invokevirtual #155                // Method net/minecraft/tags/TagKey.f_203868_:()Lnet/minecraft/resources/ResourceLocation;
+     109: ldc           #224                // String No valid ingredients found for {} tag: {} ({})
+--- mezz.jei.library.plugins.vanilla.ingredients.ItemStackHelper
+  private final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> itemHiddenFromRecipeViewers;
+  private final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> blockHiddenFromRecipeViewers;
+      35: new           #67                 // class net/minecraft/tags/TagKey
+      42: getstatic     #73                 // Field mezz/jei/api/constants/Tags.HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/resources/ResourceLocation;
+      47: invokespecial #76                 // Method net/minecraft/tags/TagKey."<init>":(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)V
+      50: putfield      #78                 // Field itemHiddenFromRecipeViewers:Lnet/minecraft/tags/TagKey;
+      53: new           #67                 // class net/minecraft/tags/TagKey
+      61: invokespecial #76                 // Method net/minecraft/tags/TagKey."<init>":(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)V
+      64: putfield      #83                 // Field blockHiddenFromRecipeViewers:Lnet/minecraft/tags/TagKey;
+  private boolean isHiddenFromRecipeViewersByTags(net.minecraft.core.Holder<net.minecraft.world.item.Item>);
+       2: getfield      #78                 // Field itemHiddenFromRecipeViewers:Lnet/minecraft/tags/TagKey;
+       5: invokeinterface #133,  2          // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      42: invokeinterface #157,  1          // InterfaceMethod mezz/jei/common/config/IClientConfig.lookupBlockTagsEnabled:()Lnet/mezzdev/config/api/value/IConfigValue;
+      69: getfield      #83                 // Field blockHiddenFromRecipeViewers:Lnet/minecraft/tags/TagKey;
+      72: invokevirtual #179                // Method net/minecraft/core/Holder$Reference.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+  private java.lang.IllegalStateException lambda$getResourceLocation$3(net.minecraft.world.item.ItemStack);
+      10: ldc           #235                // String itemStack.getDisplayName()
+       2: ldc           #245                // String ingredient
+       3: ldc           #245                // String ingredient
+       9: ldc           #254                // String context
+grep: write error: Broken pipe
+--- mezz.jei.library.plugins.vanilla.ingredients.ItemStackListFactory
+  private static final net.minecraft.tags.TagKey<net.minecraft.world.item.CreativeModeTab> HIDDEN_FROM_RECIPE_VIEWERS;
+     258: ldc_w         #260                // String minecraft.level must be set before JEI fetches ingredients
+      24: ldc_w         #350                // String itemGroup.op
+      86: ldc_w         #376                // String Ignoring ingredient in \'{}\' creative tab\'s {} that is considered invalid: {}
+     123: ldc_w         #387                // String Ignoring ingredient in \'{}\' creative tab\'s {} that isn\'t on the server: {}
+     270: ldc_w         #415                // String Added {}/{} new items from \'{}\' creative tab\'s {}
+     348: ldc_w         #463                // String ,
+     351: ldc_w         #465                // String [
+     354: ldc_w         #467                // String ]
+     366: ldc_w         #479                // String {} duplicate items were found in \'{}\' creative tab\'s: {}\nThis may indicate that these types of item need a subtype interpreter added to JEI:\n{}
+     141: ldc_w         #530                // String Added {}/{} new items from the item registry (this is run because ShowHiddenItems is set to true in JEI\'s config)
+     300: ldc_w         #557                // String Added {}/{} new items from the block registry (this is run because ShowHiddenItems is set to true in JEI\'s config)
+      22: ldc_w         #581                // String Couldn\'t get unique name for itemStack {}
+      39: ldc_w         #602                // String Skipping creative tab: \'{}\' because it is type: {}
+      52: getstatic     #604                // Field HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/tags/TagKey;
+      55: invokevirtual #608                // Method net/minecraft/core/Holder$Reference.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      74: getstatic     #613                // Field mezz/jei/api/constants/Tags.HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/resources/ResourceLocation;
+      78: ldc_w         #615                // String Skipping creative tab: \'{}\' because it has tag: \'{}\'
+     155: ldc_w         #631                // String Item Group has no display items and no search tab display items. Items from this group will be missing from the JEI ingredient list. {}
+     169: ldc_w         #636                // String displayItems
+--- mezz.jei.library.plugins.vanilla.ingredients.fluid.FluidIngredientHelper
+  private final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> hiddenFromRecipeViewers;
+      45: new           #83                 // class net/minecraft/tags/TagKey
+      52: getstatic     #89                 // Field mezz/jei/api/constants/Tags.HIDDEN_FROM_RECIPE_VIEWERS:Lnet/minecraft/resources/ResourceLocation;
+      55: invokespecial #92                 // Method net/minecraft/tags/TagKey."<init>":(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)V
+      58: putfield      #94                 // Field hiddenFromRecipeViewers:Lnet/minecraft/tags/TagKey;
+  private net.minecraft.resources.ResourceLocation getRegistryName(T, net.minecraft.world.level.material.Fluid);
+      20: checkcast     #130                // class net/minecraft/resources/ResourceLocation
+       1: ldc           #134                // String Tag
+      16: invokevirtual #200                // Method getRegistryName:(Ljava/lang/Object;Lnet/minecraft/world/level/material/Fluid;)Lnet/minecraft/resources/ResourceLocation;
+      26: ldc           #204                // String fluid:
+      59: ldc           #223                // String :
+  public java.lang.String getWildcardId(T);
+      15: invokevirtual #200                // Method getRegistryName:(Ljava/lang/Object;Lnet/minecraft/world/level/material/Fluid;)Lnet/minecraft/resources/ResourceLocation;
+      18: invokedynamic #235,  0            // InvokeDynamic #2:makeConcatWithConstants:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/String;
+  public net.minecraft.resources.ResourceLocation getResourceLocation(T);
+      15: invokevirtual #200                // Method getRegistryName:(Ljava/lang/Object;Lnet/minecraft/world/level/material/Fluid;)Lnet/minecraft/resources/ResourceLocation;
+  public java.util.stream.Stream<net.minecraft.resources.ResourceLocation> getTagStream(T);
+      47: anewarray     #83                 // class net/minecraft/tags/TagKey
+  public boolean isHiddenFromRecipeViewersByTags(T);
+      14: getfield      #94                 // Field hiddenFromRecipeViewers:Lnet/minecraft/tags/TagKey;
+== Zoni's item registrations
+String advanced_summon_item String arlecchino_summon_item String astolfo_summon_item String asuna_jba_summon_item String asuna_summon_item String atalanta_jba_summon_item String beni_jba_summon_item String bocchi_summon_item String companion_pendant String derek_jba_summon_item String derek_summon_item String empty_doujin String empty_jba_summon_item String empty_poke_ball String empty_summon_item String empty_tamagotchi String eugeo_summon_item String eula_summon_item String gardete_jba_summon_item String hu_tao_summon_item String illya_jba_summon_item String jba_machine_tab_item String jean_summon_item String jorge_jba_summon_item String jorge_summon_item String klee_summon_item String koyan_jba_summon_item String liz_jba_summon_item String mash_summon_item String melusine_jba_summon_item String melusine_summon_item String moreira_jba_summon_item String nagako_summon_item String niomus_jba_summon_item String niomus_summon_item String nuno_jba_summon_item String plaggy_jba_summon_item String rain_jba_summon_item String rain_summon_item String recover_pill String repel String ruler String silica_jba_summon_item String strea_jba_summon_item String tamamo_jba_summon_item String tiago_jba_summon_item String ultimate_summon_device String whip String zani_summon_item String zonis_companions 
+== Zoni's whip, ruler, repel and what uses them
+--- net.zoni.zoniscompanions.init.ZonisCompanionsModItems
+  public net.zoni.zoniscompanions.init.ZonisCompanionsModItems();
+  private static net.minecraft.world.item.Item lambda$static$48();
+       4: invokespecial #75                 // Method net/zoni/zoniscompanions/item/PlaggyJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$47();
+       4: invokespecial #79                 // Method net/zoni/zoniscompanions/item/NiomusJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$46();
+       4: invokespecial #83                 // Method net/zoni/zoniscompanions/item/DerekJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$45();
+       4: invokespecial #87                 // Method net/zoni/zoniscompanions/item/DerekSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$44();
+       4: invokespecial #91                 // Method net/zoni/zoniscompanions/item/ZaniSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$43();
+       4: invokespecial #95                 // Method net/zoni/zoniscompanions/item/ArlecchinoSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$42();
+       4: invokespecial #99                 // Method net/zoni/zoniscompanions/item/UltimateSummonDeviceItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$41();
+       4: invokespecial #103                // Method net/zoni/zoniscompanions/item/RainSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$40();
+       4: invokespecial #107                // Method net/zoni/zoniscompanions/item/IllyaJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$39();
+       4: invokespecial #111                // Method net/zoni/zoniscompanions/item/KoyanJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$38();
+       4: invokespecial #115                // Method net/zoni/zoniscompanions/item/TamamoJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$37();
+       4: invokespecial #119                // Method net/zoni/zoniscompanions/item/GardeteJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$36();
+       4: invokespecial #123                // Method net/zoni/zoniscompanions/item/MoreiraJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$35();
+       4: invokespecial #127                // Method net/zoni/zoniscompanions/item/NunoJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$34();
+       4: invokespecial #131                // Method net/zoni/zoniscompanions/item/EmptyTamagotchiItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$33();
+       4: invokespecial #135                // Method net/zoni/zoniscompanions/item/AtalantaJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$32();
+       4: invokespecial #139                // Method net/zoni/zoniscompanions/item/MelusineJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$31();
+       4: invokespecial #143                // Method net/zoni/zoniscompanions/item/BeniJbaSummonItemItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$30();
+       4: invokespecial #147                // Method net/zoni/zoniscompanions/item/EmptyPokeBallItem."<init>":()V
+  private static net.minecraft.world.item.Item lambda$static$29();
+grep: write error: Broken pipe
+grep: write error: Broken pipe
+--- net.zoni.zoniscompanions.init.ZonisCompanionsModTabs
+  public net.zoni.zoniscompanions.init.ZonisCompanionsModTabs();
+  private static net.minecraft.world.item.CreativeModeTab lambda$static$2();
+       0: invokestatic  #42                 // Method net/minecraft/world/item/CreativeModeTab.builder:()Lnet/minecraft/world/item/CreativeModeTab$Builder;
+       3: ldc           #44                 // String item_group.zonis_companions.companions
+       5: invokestatic  #50                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       8: invokevirtual #54                 // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257941_:(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      11: invokedynamic #73,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      16: invokevirtual #77                 // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257737_:(Ljava/util/function/Supplier;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      19: invokedynamic #87,  0             // InvokeDynamic #1:m_257865_:()Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;
+      24: invokevirtual #91                 // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257501_:(Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      27: invokevirtual #94                 // Method net/minecraft/world/item/CreativeModeTab$Builder.withSearchBar:()Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      30: invokevirtual #97                 // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257652_:()Lnet/minecraft/world/item/CreativeModeTab;
+  private static void lambda$static$1(net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters, net.minecraft.world.item.CreativeModeTab$Output);
+       1: getstatic     #102                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.EMPTY_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      10: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      16: getstatic     #115                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.JORGE_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+      19: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      25: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      31: getstatic     #118                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.NAGAKO_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+      34: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      40: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      46: getstatic     #121                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.NIOMUS_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+      49: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      55: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      61: getstatic     #124                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.DEREK_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+      64: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      70: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      76: getstatic     #127                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.BOCCHI_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+      79: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      85: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      91: getstatic     #130                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.ASUNA_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+      94: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     100: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     106: getstatic     #133                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.EUGEO_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     109: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     115: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     121: getstatic     #136                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.RAIN_SUMMON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     124: invokevirtual #106                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     130: invokeinterface #112,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+grep: write error: Broken pipe
+--- net.zoni.zoniscompanions.item.RepelItem
+  public net.zoni.zoniscompanions.item.RepelItem();
+       5: invokespecial #12                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       9: invokevirtual #16                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      12: invokevirtual #20                 // Method net/minecraft/world/item/Item$Properties.m_41486_:()Lnet/minecraft/world/item/Item$Properties;
+      18: invokevirtual #30                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      21: invokespecial #33                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+       6: invokespecial #40                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+      10: ldc           #42                 // String Creative only
+      12: invokestatic  #48                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #54,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      22: ldc           #56                 // String Despawns any entity when you right-click
+      24: invokestatic  #48                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      27: invokeinterface #54,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+--- net.zoni.zoniscompanions.item.RulerItem
+  public net.zoni.zoniscompanions.item.RulerItem();
+       5: invokespecial #12                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       9: invokevirtual #16                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      12: invokevirtual #20                 // Method net/minecraft/world/item/Item$Properties.m_41486_:()Lnet/minecraft/world/item/Item$Properties;
+      18: invokevirtual #30                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      21: invokespecial #33                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+       6: invokespecial #40                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+      10: ldc           #42                 // String Creative only
+      12: invokestatic  #48                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #54,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      22: ldc           #56                 // String Makes mobs look south
+      24: invokestatic  #48                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      27: invokeinterface #54,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+--- net.zoni.zoniscompanions.item.WhipItem
+  public net.zoni.zoniscompanions.item.WhipItem();
+       5: invokespecial #12                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       9: invokevirtual #16                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      12: invokevirtual #20                 // Method net/minecraft/world/item/Item$Properties.m_41486_:()Lnet/minecraft/world/item/Item$Properties;
+      18: invokevirtual #30                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      21: invokespecial #33                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+       6: invokespecial #40                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+      10: ldc           #42                 // String Creative only
+      12: invokestatic  #48                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #54,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      22: ldc           #56                 // String Can freeze or unfreeze any entity
+      24: invokestatic  #48                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      27: invokeinterface #54,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+--- net.zoni.zoniscompanions.procedures.DespawnMobProcedure
+  public net.zoni.zoniscompanions.procedures.DespawnMobProcedure();
+  public static void onRightClickEntity(net.minecraftforge.event.entity.player.PlayerInteractEvent$EntityInteract);
+       1: invokevirtual #29                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getHand:()Lnet/minecraft/world/InteractionHand;
+      13: invokevirtual #39                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getLevel:()Lnet/minecraft/world/level/Level;
+      17: invokevirtual #43                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      20: invokevirtual #49                 // Method net/minecraft/core/BlockPos.m_123341_:()I
+      25: invokevirtual #43                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      28: invokevirtual #52                 // Method net/minecraft/core/BlockPos.m_123342_:()I
+      33: invokevirtual #43                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      36: invokevirtual #55                 // Method net/minecraft/core/BlockPos.m_123343_:()I
+      41: invokevirtual #59                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getTarget:()Lnet/minecraft/world/entity/Entity;
+      45: invokevirtual #63                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      48: invokestatic  #67                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #67                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      13: instanceof    #82                 // class net/minecraft/world/entity/player/Player
+      21: instanceof    #84                 // class net/minecraft/world/entity/decoration/GlowItemFrame
+      29: instanceof    #86                 // class net/minecraft/world/entity/decoration/ItemFrame
+      35: getstatic     #92                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.REPEL:Lnet/minecraftforge/registries/RegistryObject;
+      38: invokevirtual #98                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      43: instanceof    #100                // class net/minecraft/world/entity/LivingEntity
+      58: invokevirtual #104                // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      67: invokevirtual #120                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      74: instanceof    #122                // class net/minecraft/world/level/Level
+      88: invokevirtual #126                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     102: invokestatic  #130                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     112: ldc           #140                // String block.fire.extinguish
+     114: invokespecial #143                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     117: invokeinterface #149,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     130: invokevirtual #161                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     150: ldc           #140                // String block.fire.extinguish
+     152: invokespecial #143                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     155: invokeinterface #149,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     169: invokevirtual #165                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     174: instanceof    #82                 // class net/minecraft/world/entity/player/Player
+     189: invokevirtual #168                // Method net/minecraft/world/entity/player/Player.m_9236_:()Lnet/minecraft/world/level/Level;
+     192: invokevirtual #126                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     200: ldc           #170                // String Gone!
+     202: invokestatic  #176                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+--- net.zoni.zoniscompanions.procedures.GigaDisableAIProcedure
+  public net.zoni.zoniscompanions.procedures.GigaDisableAIProcedure();
+  public static void onRightClickEntity(net.minecraftforge.event.entity.player.PlayerInteractEvent$EntityInteract);
+       1: invokevirtual #34                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getHand:()Lnet/minecraft/world/InteractionHand;
+      13: invokevirtual #44                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getLevel:()Lnet/minecraft/world/level/Level;
+      17: invokevirtual #48                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      20: invokevirtual #54                 // Method net/minecraft/core/BlockPos.m_123341_:()I
+      25: invokevirtual #48                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      28: invokevirtual #57                 // Method net/minecraft/core/BlockPos.m_123342_:()I
+      33: invokevirtual #48                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      36: invokevirtual #60                 // Method net/minecraft/core/BlockPos.m_123343_:()I
+      41: invokevirtual #64                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getTarget:()Lnet/minecraft/world/entity/Entity;
+      45: invokevirtual #68                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      48: invokestatic  #72                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #72                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      13: instanceof    #87                 // class net/minecraft/world/entity/player/Player
+      19: getstatic     #93                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.WHIP:Lnet/minecraftforge/registries/RegistryObject;
+      22: invokevirtual #99                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      27: instanceof    #101                // class net/minecraft/world/entity/LivingEntity
+      42: invokevirtual #105                // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      51: invokevirtual #121                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      58: instanceof    #123                // class net/minecraft/world/level/Level
+      72: invokevirtual #127                // Method net/minecraft/world/level/Level.m_5776_:()Z
+      86: invokestatic  #131                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      96: ldc           #141                // String entity.chicken.egg
+      98: invokespecial #144                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     101: invokeinterface #150,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     114: invokevirtual #162                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     134: ldc           #141                // String entity.chicken.egg
+     136: invokespecial #144                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     139: invokeinterface #150,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     153: invokevirtual #166                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     158: invokevirtual #170                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     161: ldc           #172                // String NoAI
+     163: invokevirtual #178                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     171: invokevirtual #170                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     174: ldc           #172                // String NoAI
+     177: invokevirtual #182                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     186: invokevirtual #185                // Method net/minecraft/world/entity/Entity.m_9236_:()Lnet/minecraft/world/level/Level;
+grep: write error: Broken pipe
+--- net.zoni.zoniscompanions.procedures.MakeMobLookStraightProcedure
+  public net.zoni.zoniscompanions.procedures.MakeMobLookStraightProcedure();
+  public static void onRightClickEntity(net.minecraftforge.event.entity.player.PlayerInteractEvent$EntityInteract);
+       1: invokevirtual #39                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getHand:()Lnet/minecraft/world/InteractionHand;
+      13: invokevirtual #49                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getLevel:()Lnet/minecraft/world/level/Level;
+      17: invokevirtual #53                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      20: invokevirtual #59                 // Method net/minecraft/core/BlockPos.m_123341_:()I
+      25: invokevirtual #53                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      28: invokevirtual #62                 // Method net/minecraft/core/BlockPos.m_123342_:()I
+      33: invokevirtual #53                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getPos:()Lnet/minecraft/core/BlockPos;
+      36: invokevirtual #65                 // Method net/minecraft/core/BlockPos.m_123343_:()I
+      41: invokevirtual #69                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getTarget:()Lnet/minecraft/world/entity/Entity;
+      45: invokevirtual #73                 // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$EntityInteract.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      48: invokestatic  #77                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #77                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      13: instanceof    #92                 // class net/minecraft/world/entity/player/Player
+      21: instanceof    #94                 // class net/minecraft/world/entity/decoration/GlowItemFrame
+      29: instanceof    #96                 // class net/minecraft/world/entity/decoration/ItemFrame
+      35: getstatic     #102                // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.RULER:Lnet/minecraftforge/registries/RegistryObject;
+      38: invokevirtual #108                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      43: instanceof    #110                // class net/minecraft/world/entity/LivingEntity
+      58: invokevirtual #114                // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      67: invokevirtual #130                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      74: instanceof    #132                // class net/minecraft/world/level/Level
+      88: invokevirtual #136                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     102: invokestatic  #140                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     112: ldc           #150                // String block.dripstone_block.place
+     114: invokespecial #153                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     117: invokeinterface #159,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     130: invokevirtual #171                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     150: ldc           #150                // String block.dripstone_block.place
+     152: invokespecial #153                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     155: invokeinterface #159,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     169: invokevirtual #175                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     174: instanceof    #92                 // class net/minecraft/world/entity/player/Player
+     189: invokevirtual #178                // Method net/minecraft/world/entity/player/Player.m_9236_:()Lnet/minecraft/world/level/Level;
+     192: invokevirtual #136                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     202: invokevirtual #182                // Method net/minecraft/world/entity/Entity.m_5446_:()Lnet/minecraft/network/chat/Component;
+     205: invokeinterface #188,  1          // InterfaceMethod net/minecraft/network/chat/Component.getString:()Ljava/lang/String;
+--- net.zoni.zoniscompanions.procedures.OpenCompanionInvProcedure
+  public net.zoni.zoniscompanions.procedures.OpenCompanionInvProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      16: instanceof    #17                 // class net/minecraft/world/entity/TamableAnimal
+      31: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+      48: invokevirtual #23                 // Method net/minecraft/world/entity/TamableAnimal.m_21830_:(Lnet/minecraft/world/entity/LivingEntity;)Z
+      56: invokevirtual #29                 // Method net/minecraft/world/entity/Entity.m_6144_:()Z
+      62: getstatic     #35                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.COMPANION_PENDANT:Lnet/minecraftforge/registries/RegistryObject;
+      65: invokevirtual #41                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      70: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+      85: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      94: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     100: getstatic     #60                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.WHIP:Lnet/minecraftforge/registries/RegistryObject;
+     103: invokevirtual #41                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     108: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+     123: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+     132: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     138: getstatic     #63                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.REPEL:Lnet/minecraftforge/registries/RegistryObject;
+     141: invokevirtual #41                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     146: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+     161: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+     170: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     176: getstatic     #66                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.RECOVER_PILL:Lnet/minecraftforge/registries/RegistryObject;
+     179: invokevirtual #41                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     184: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+     199: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+     208: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     214: getstatic     #69                 // Field net/zoni/zoniscompanions/init/ZonisCompanionsModItems.RULER:Lnet/minecraftforge/registries/RegistryObject;
+     217: invokevirtual #41                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     222: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+     237: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+     246: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     257: instanceof    #19                 // class net/minecraft/world/entity/LivingEntity
+     272: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+     281: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     289: invokevirtual #81                 // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     292: ldc           #83                 // String OpenUI
+     296: invokevirtual #87                 // Method net/minecraft/world/entity/Entity.m_20149_:()Ljava/lang/String;
+     299: invokevirtual #93                 // Method net/minecraft/nbt/CompoundTag.m_128359_:(Ljava/lang/String;Ljava/lang/String;)V
+     304: instanceof    #95                 // class net/minecraft/server/level/ServerPlayer
+     321: invokestatic  #101                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+grep: write error: Broken pipe
+== Open Loader files and strings
+./META-INF/DARKHAXM.RSA
+./META-INF/DARKHAXM.SF
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./assets/openloader/lang/en_us.json
+./pack.mcmeta
+./net/darkhax/openloader/Constants.class:  net/darkhax/openloader/Constants "Lnet/darkhax/openloader/Constants; Open Loader openloader 
+./net/darkhax/openloader/OpenLoaderForge$1.class: #net/minecraft/server/packs/PackType %Lnet/minecraft/server/packs/PackType; &net/darkhax/openloader/OpenLoaderForge (()[Lnet/minecraft/server/packs/PackType; (net/darkhax/openloader/OpenLoaderForge$1 .$SwitchMap$net$minecraft$server$packs$PackType CLIENT_RESOURCES OpenLoaderForge.java SERVER_DATA 
+./net/darkhax/openloader/OpenLoaderForge.class: 	CONFIGDIR 	RESOURCES 	configDir 	dataPacks  net/darkhax/openloader/Constants #net/minecraft/server/packs/PackType %net/darkhax/openloader/packs/RepoType &net/darkhax/openloader/OpenLoaderForge '()Lnet/minecraft/server/packs/PackType; 'Lnet/darkhax/openloader/packs/RepoType; 'net/minecraftforge/fml/loading/FMLPaths (Lnet/darkhax/openloader/OpenLoaderForge; (Lnet/darkhax/openloader/packs/RepoType;Lnet/darkhax/openloader/config/ConfigSchema;Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;Ljava/nio/file/Path;)V (net/darkhax/openloader/OpenLoaderForge$1 )Lnet/minecraftforge/fml/loading/FMLPaths; *net/darkhax/openloader/config/ConfigSchema ,Lnet/darkhax/openloader/config/ConfigSchema; ,net/minecraftforge/event/AddPackFindersEvent .$SwitchMap$net$minecraft$server$packs$PackType .Lnet/minecraftforge/event/AddPackFindersEvent; 1(Lnet/minecraftforge/event/AddPackFindersEvent;)V 5net/darkhax/openloader/config/ConfigSchema$PackConfig 7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; 7net/darkhax/openloader/packs/OpenLoaderRepositorySource :net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext ;(Lnet/minecraft/server/packs/repository/RepositorySource;)V >()Lnet/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext; B(Ljava/nio/file/Path;)Lnet/darkhax/openloader/config/ConfigSchema; DATA G(Lnet/darkhax/openloader/OpenLoaderForge;)Ljava/util/function/Consumer; 
+./net/darkhax/openloader/OpenLoaderForgeClient.class: 	configDir &net/darkhax/openloader/OpenLoaderForge (Lnet/darkhax/openloader/commands/ClientCommand;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder<Lnet/minecraft/commands/CommandSourceStack;>; ,Lnet/darkhax/openloader/config/ConfigSchema; ,net/darkhax/openloader/OpenLoaderForgeClient -net/darkhax/openloader/commands/ClientCommand .Lnet/darkhax/openloader/OpenLoaderForgeClient; /Lnet/darkhax/openloader/commands/ClientCommand; 7net/darkhax/openloader/commands/OpenLoaderClientCommand C(Ljava/nio/file/Path;Lnet/darkhax/openloader/config/ConfigSchema;)V O(Lnet/darkhax/openloader/commands/ClientCommand;)Lcom/mojang/brigadier/Command; OpenLoaderForgeClient.java _(Lnet/darkhax/openloader/commands/ClientCommand;Lcom/mojang/brigadier/context/CommandContext;)I config f(Lnet/darkhax/openloader/commands/ClientCommand;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder; openloader 
+./net/darkhax/openloader/commands/ClientCommand.class: -net/darkhax/openloader/commands/ClientCommand /Lnet/darkhax/openloader/commands/ClientCommand; C()Ljava/util/List<Lnet/darkhax/openloader/commands/ClientCommand;>; 
+./net/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand.class: 	RESOURCES 	configDir 	dataPacks %net/darkhax/openloader/packs/RepoType 'Lnet/darkhax/openloader/packs/RepoType; *net/darkhax/openloader/config/ConfigSchema ,Lnet/darkhax/openloader/config/ConfigSchema; -net/darkhax/openloader/commands/ClientCommand .()Lnet/darkhax/openloader/config/ConfigSchema; 5net/darkhax/openloader/config/ConfigSchema$PackConfig 7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; 7net/darkhax/openloader/commands/OpenLoaderClientCommand C()Ljava/util/List<Lnet/darkhax/openloader/commands/ClientCommand;>; C(Ljava/nio/file/Path;Lnet/darkhax/openloader/config/ConfigSchema;)V Cnet/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand DATA ELnet/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand; Fnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand H(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand;)I OpenLoaderClientCommand.java PackConfig Y(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand;)Ljava/lang/String; Z(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand;Ljava/lang/Object;)Z config configDir;config resourcePacks u(Ljava/nio/file/Path;Lnet/darkhax/openloader/packs/RepoType;Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;)V 
+./net/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand.class: 	configDir %net/darkhax/openloader/packs/RepoType 'Lnet/darkhax/openloader/packs/RepoType; )()Lnet/darkhax/openloader/packs/RepoType; *net/darkhax/openloader/config/ConfigSchema -net/darkhax/openloader/commands/ClientCommand 5net/darkhax/openloader/config/ConfigSchema$PackConfig 7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; 7net/darkhax/openloader/commands/OpenLoaderClientCommand 9()Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; Fnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand HLnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand; K(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand;)I OpenLoaderClientCommand.java PackConfig \(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand;)Ljava/lang/String; ](Lnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand;Ljava/lang/Object;)Z config configDir;type;config enabled u(Ljava/nio/file/Path;Lnet/darkhax/openloader/packs/RepoType;Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;)V 
+./net/darkhax/openloader/commands/OpenLoaderClientCommand.class: 	configDir ,Lnet/darkhax/openloader/config/ConfigSchema; -net/darkhax/openloader/commands/ClientCommand .()Lnet/darkhax/openloader/config/ConfigSchema; 7net/darkhax/openloader/commands/OpenLoaderClientCommand 9Lnet/darkhax/openloader/commands/OpenLoaderClientCommand; <(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand;)I C()Ljava/util/List<Lnet/darkhax/openloader/commands/ClientCommand;>; C(Ljava/nio/file/Path;Lnet/darkhax/openloader/config/ConfigSchema;)V Cnet/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand Fnet/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand M(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand;)Ljava/lang/String; N(Lnet/darkhax/openloader/commands/OpenLoaderClientCommand;Ljava/lang/Object;)Z OpenLoaderClientCommand.java config configDir;config openloader 
+./net/darkhax/openloader/config/ConfigSchema$PackConfig.class: *net/darkhax/openloader/config/ConfigSchema 5net/darkhax/openloader/config/ConfigSchema$PackConfig 7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; ConfigSchema.java PackConfig enabled 
+./net/darkhax/openloader/config/ConfigSchema.class: 	RESOURCES 	configDir 	dataPacks  net/darkhax/openloader/Constants !Could not write config file '{}'! !Creating a new config file at {}. %net/darkhax/openloader/packs/RepoType 'Lnet/darkhax/openloader/packs/RepoType; *net/darkhax/openloader/config/ConfigSchema +Default configuration file generated at {}. ,Lnet/darkhax/openloader/config/ConfigSchema; 5Could not read config file {}. Defaults will be used. 5net/darkhax/openloader/config/ConfigSchema$PackConfig 7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; B(Ljava/nio/file/Path;)Lnet/darkhax/openloader/config/ConfigSchema; ConfigSchema.java DATA PackConfig advanced_options.json configFile defaultConfig fromJson load resourcePacks toJson 
+./net/darkhax/openloader/packs/OpenLoaderRepositorySource.class: 	configDir  net/darkhax/openloader/Constants $Can not load  %Skipping {}. Disabled by user config. %net/darkhax/openloader/packs/RepoType '()Lnet/minecraft/server/packs/PackType; 'Lnet/darkhax/openloader/packs/RepoType; (Lnet/darkhax/openloader/packs/RepoType;Lnet/darkhax/openloader/config/ConfigSchema;Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;Ljava/nio/file/Path;)V (net/minecraft/server/packs/PackResources *Successfully injected {}/{} packs from {}. *net/darkhax/openloader/config/ConfigSchema *net/minecraft/server/packs/repository/Pack ,Lnet/darkhax/openloader/config/ConfigSchema; ,Lnet/minecraft/server/packs/repository/Pack; ,net/minecraft/server/packs/FilePackResources ,net/minecraft/server/packs/PathPackResources 0Can not load {} as an archive. It is not a file. 0net/minecraft/server/packs/repository/PackSource 1(Ljava/lang/String;Lnet/minecraft/network/chat/Component;ZLnet/minecraft/server/packs/repository/Pack$ResourcesSupplier;Lnet/minecraft/server/packs/PackType;Lnet/minecraft/server/packs/repository/Pack$Position;Lnet/minecraft/server/packs/repository/PackSource;)Lnet/minecraft/server/packs/repository/Pack; 1Can not load {} as folder. It is not a directory. 2Lnet/minecraft/server/packs/repository/PackSource; 3net/minecraft/server/packs/repository/Pack$Position 5Lnet/minecraft/server/packs/repository/Pack$Position; 5net/darkhax/openloader/config/ConfigSchema$PackConfig 6net/minecraft/server/packs/repository/RepositorySource 7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig; 7net/darkhax/openloader/packs/OpenLoaderRepositorySource 9Lnet/darkhax/openloader/packs/OpenLoaderRepositorySource; <net/minecraft/server/packs/repository/Pack$ResourcesSupplier >(Ljava/lang/String;)Lnet/minecraft/server/packs/PackResources; 
+./net/darkhax/openloader/packs/RepoType.class: 	Data Pack 	RESOURCES 	configDir 	resources #net/minecraft/server/packs/PackType %Lnet/minecraft/server/packs/PackType; %net/darkhax/openloader/packs/RepoType '()Lnet/minecraft/server/packs/PackType; 'Lnet/darkhax/openloader/packs/RepoType; ([Lnet/darkhax/openloader/packs/RepoType; *()[Lnet/darkhax/openloader/packs/RepoType; 9Ljava/lang/Enum<Lnet/darkhax/openloader/packs/RepoType;>; ;(Ljava/lang/String;)Lnet/darkhax/openloader/packs/RepoType; CLIENT_RESOURCES DATA L(Lnet/minecraft/server/packs/PackType;Ljava/lang/String;Ljava/lang/String;)V Resource Pack SERVER_DATA _(Ljava/lang/String;ILnet/minecraft/server/packs/PackType;Ljava/lang/String;Ljava/lang/String;)V data getPackType 

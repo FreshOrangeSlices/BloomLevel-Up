@@ -479,13 +479,12 @@
           "category": "monster",
           "biomes": ["#forge:is_swamp"],
           "spawners": {"illagerinvasion:alchemist": [12, 1, 1]}
-        },
-        "jungle_crew": {
-          "why": "About 1 in 20: Legendary Monsters' mossy golems out of the Mossy Temple, in jungles.",
-          "category": "monster",
-          "biomes": ["#minecraft:is_jungle"],
-          "spawners": {"legendary_monsters:mossy_golem": [12, 1, 1]}
         }
+
+      },
+      "persistent": {
+        "why": "Monsters that never despawn but stay in the pack's spawns: Skarrier has them spawn in these vanilla biomes (Glowin in Dark Forests, Slithers in swamps), as they did before at higher weights. The pack test fails on any other added monster that never despawns.",
+        "mobs": ["skarrier_mobs:glowin", "skarrier_mobs:slither_matriarch", "skarrier_mobs:slither_spawner_dummy"]
       },
       "conditional": {
         "_comment": "Mobs the pack test leaves out of a biome's modded share: they only spawn underground, after the Wither, or under a condition of their own.",

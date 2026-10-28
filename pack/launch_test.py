@@ -220,7 +220,8 @@ def pack_data_check(server_dir, dump_file, server_lines):
 def spawn_check(server_dir, dump_file, spec_file):
     """The pack's natural spawns (pack_data.spawns, as biome modifiers in its data pack), from the biome rows of Bloom's
     registry dump (every biome's spawn list after all mods' modifiers). Fails when a mob the pack adds is missing from
-    every biome (its modifier didn't load) or never despawns (natural spawns would pile up), when Skrythe's lair can go
+    every biome (its modifier didn't load) or is a monster that never despawns (natural spawns would pile up; animals never
+    do, and spawns.persistent lists the monsters kept anyway), when Skrythe's lair can go
     in a biome that isn't a mountain, or when a Skarrier cave mob is still listed in the Nether or the End. Reports each
     overworld biome's modded share of the night's spawns, counted in mobs (weight x average group): about 1 in 5 is
     the aim. Mobs that spawn only underground, after the Wither or under a condition of their own (spawns.conditional)
@@ -244,12 +245,14 @@ def spawn_check(server_dir, dump_file, spec_file):
     spawns = (json.load(open(spec_file)).get("pack_data") or {}).get("spawns", {}) if os.path.exists(spec_file) else {}
     conditional = {e for k, v in spawns.get("conditional", {}).items() if not k.startswith("_") for e in v}
     quiet_ids = set(spawns.get("quiet", {}).get("biomes", []))
+    persistent = set(spawns.get("persistent", {}).get("mobs", []))
     failures = []
     listed = {s["type"] for b in biomes for v in b["spawns"].values() for s in v}
     for mob, groups in sorted(added.items()):
         if mob not in listed:
             failures.append(f"spawns: {mob} ({', '.join(groups)}) isn't in any biome's spawns (its modifier didn't load)")
-        elif entities.get(mob, {}).get("despawns") is False:
+        elif (entities.get(mob, {}).get("despawns") is False and entities[mob].get("category") == "monster"
+              and mob not in persistent):
             failures.append(f"spawns: {mob} ({', '.join(groups)}) never despawns, so natural spawns would pile up")
     lair = [b["id"] for b in biomes if "monsterexpansion:skrythe_biomes" in b["tags"]
             and not {"minecraft:is_mountain", "forge:is_mountain"} & set(b["tags"])]

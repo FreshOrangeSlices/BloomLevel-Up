@@ -31,9 +31,8 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          ls pack
-          python3 check/spawnscan.py "$(ls pack/*server*.zip | head -1)" data-out/spawns | tee summary.txt
-          echo "::notice title=spawns::$(tr '\n' '|' < summary.txt)"
+          python3 check/spawncode.py "$(ls pack/*server*.zip | head -1)" data-out/spawncode | tee summary.txt
+          echo "::notice title=spawncode::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/spawns && cp data-out/spawns/* data/spawns/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack spawns" && git push -q origin ci/data && echo pushed
+          mkdir -p data/spawncode && cp data-out/spawncode/* data/spawncode/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack spawn code" && git push -q origin ci/data && echo pushed

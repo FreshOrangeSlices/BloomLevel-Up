@@ -17,9 +17,9 @@ z = zipfile.ZipFile(io.BytesIO(data))
 for n in z.namelist():
     if n.endswith("en_us.json"):
         l = json.loads(z.read(n))
-        print("lang key.* :", {k: v for k, v in l.items() if k.startswith("key")})
+        print("lang keys about key bindings:", {k: v for k, v in l.items() if "key." in k and ("cycle" in k or "open" in k or "category" in k or "modifier" in k.lower())})
 mods = [n for n in z.namelist() if n.endswith("mods.toml")]
-for n in mods: print(z.read(n).decode()[:800])
+for n in mods: print("mods.toml deps:", re.findall(r'modId\s*=\s*"([^"]+)"', z.read(n).decode()))
 hits = {}
 for n in z.namelist():
     if n.endswith(".class"):

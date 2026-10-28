@@ -165,9 +165,15 @@ public final class ClientSmokeTest {
 		});
 		step("inventory small open", always(), 20, mc -> {
 			mc.getToasts().clear();
+			// The server's recipe packet brought its book settings (closed) along.
+			mc.player.getRecipeBook().setOpen(RecipeBookType.CRAFTING, true);
 			mc.setScreen(new InventoryScreen(mc.player));
 		});
 		step("inventory small shot", always(), 20, mc -> {
+			if (!(mc.screen instanceof InventoryScreen screen) || !screen.getRecipeBookComponent().isVisible()) {
+				FAILURES.add("the recipe book didn't stay open at GUI scale 3");
+			}
+
 			checkColumn(mc);
 			shot(mc, "inventory_book_small");
 			mc.options.guiScale().set(guiScale);

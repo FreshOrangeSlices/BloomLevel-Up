@@ -122,6 +122,7 @@ mixin {
 	add sourceSets.main, "${mod_id}.refmap.json"
 	config "${mod_id}.forge.mixins.json"
 	config "${mod_id}.forge.client.mixins.json"
+	config "${mod_id}.forge.bettercombat.mixins.json"
 }
 
 repositories {
@@ -206,7 +207,7 @@ tasks.named('jar', Jar).configure {
 				'Implementation-Title'    : project.name,
 				'Implementation-Version'  : project.jar.archiveVersion,
 				'Implementation-Vendor'   : mod_authors,
-				'MixinConfigs'            : "${mod_id}.forge.mixins.json,${mod_id}.forge.client.mixins.json"
+				'MixinConfigs'            : "${mod_id}.forge.mixins.json,${mod_id}.forge.client.mixins.json,${mod_id}.forge.bettercombat.mixins.json"
 		])
 	}
 }
@@ -216,7 +217,7 @@ tasks.named('jarJar').configure {
 	archiveClassifier = ''
 	manifest {
 		attributes([
-				'MixinConfigs': "${mod_id}.forge.mixins.json,${mod_id}.forge.client.mixins.json"
+				'MixinConfigs': "${mod_id}.forge.mixins.json,${mod_id}.forge.client.mixins.json,${mod_id}.forge.bettercombat.mixins.json"
 		])
 	}
 }

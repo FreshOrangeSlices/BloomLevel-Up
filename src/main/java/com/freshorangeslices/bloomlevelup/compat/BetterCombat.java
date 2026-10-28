@@ -225,9 +225,9 @@ public final class BetterCombat {
 		return installed() ? BetterCombatBridge.swings(weapon) : List.of();
 	}
 
-	/** As above, as this player swings it (the same on this build: Batter Up! changes no weapon's swings here). */
+	/** As above, as this player swings it (Batter Up! gives weapons that poke or slam the sword's combo). */
 	public static List<Swing> swings(Player player, ItemStack weapon) {
-		return swings(weapon);
+		return installed() ? BetterCombatBridge.swings(player, weapon) : List.of();
 	}
 
 	/** The animation of the swing this player's combo is on (for tests), or null without Better Combat. */

@@ -241,4 +241,47 @@ public final class BetterCombatGameTests {
 		helper.assertFalse(CombatAbilities.chargeArmed(player), "The charge is spent");
 		helper.succeed();
 	}
+
+	/**
+	 * Batter Up! (FreshOrangeSlices, from main): a wooden-to-netherite weapon that pokes or slams swings the sword's
+	 * combo, or the greatsword's when it's two-handed. Unique weapons and players without it keep their own swings. The
+	 * game tests give vanilla items Better Combat categories for this (gametest data): an iron ingot is a mace, a gold
+	 * ingot a two-handed spear, a blaze rod a claymore and a bone a mace that isn't of a material (a "unique" one).
+	 */
+	@GameTest(template = "empty")
+	public static void batterUpSwingsPokesAndSlamsLikeSwords(GameTestHelper helper) {
+		if (!BetterCombat.installed()) {
+			helper.assertTrue(BetterCombat.attackAnimation(player(helper, new ItemStack(Items.IRON_INGOT)), 0) == null, "No swings without Better Combat");
+			helper.succeed();
+			return;
+		}
+
+		List<String> sword = combo(player(helper, new ItemStack(Items.DIAMOND_SWORD)));
+		String maceOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.IRON_INGOT), CombatIds.FULL_SWEEP), 0);
+		ServerPlayer batter = player(helper, new ItemStack(Items.IRON_INGOT), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP);
+		helper.assertTrue(maceOwn != null && !sword.contains(maceOwn), "A mace has its own swing: " + maceOwn + " vs " + sword);
+		helper.assertTrue(combo(batter).equals(sword), "Batter Up!: the iron mace swings the sword's combo " + sword + ", got " + combo(batter));
+		helper.assertTrue(BetterCombat.swings(batter, batter.getMainHandItem()).size() == sword.size(), "The stat sheet shows the sword's combo too");
+
+		String claymore = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.BLAZE_ROD)), 0);
+		String spearOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.GOLD_INGOT), CombatIds.FULL_SWEEP), 0);
+		String spearBatter = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.GOLD_INGOT), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP), 0);
+		helper.assertTrue(spearOwn != null && !spearOwn.equals(spearBatter) && claymore != null && claymore.equals(spearBatter),
+				"Batter Up!: a two-handed iron spear swings the greatsword's combo (" + spearOwn + " -> " + spearBatter + ", claymore " + claymore + ")");
+
+		String uniqueOwn = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.BONE), CombatIds.FULL_SWEEP), 0);
+		String uniqueBatter = BetterCombat.attackAnimation(player(helper, new ItemStack(Items.BONE), CombatIds.FULL_SWEEP, CombatIds.BATTER_UP), 0);
+		helper.assertTrue(uniqueOwn != null && uniqueOwn.equals(uniqueBatter), "A weapon that isn't wooden to netherite keeps its moves: " + uniqueBatter);
+		helper.succeed();
+	}
+
+	private static List<String> combo(ServerPlayer player) {
+		List<String> out = new ArrayList<>();
+
+		for (int i = 0; i < 3; i++) {
+			out.add(BetterCombat.attackAnimation(player, i));
+		}
+
+		return out;
+	}
 }

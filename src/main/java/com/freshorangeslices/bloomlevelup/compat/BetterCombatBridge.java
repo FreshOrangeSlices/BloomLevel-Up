@@ -32,7 +32,11 @@ final class BetterCombatBridge {
 	}
 
 	static List<BetterCombat.Swing> swings(ItemStack weapon) {
-		WeaponAttributes attributes = weapon.isEmpty() ? null : WeaponRegistry.getAttributes(weapon);
+		return swings(null, weapon);
+	}
+
+	static List<BetterCombat.Swing> swings(Player player, ItemStack weapon) {
+		WeaponAttributes attributes = weapon.isEmpty() ? null : BetterCombatMoves.forPlayer(player, weapon, WeaponRegistry.getAttributes(weapon));
 
 		if (attributes == null || attributes.attacks() == null) {
 			return List.of();

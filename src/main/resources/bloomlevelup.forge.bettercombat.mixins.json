@@ -1,0 +1,14 @@
+{
+	"required": false,
+	"minVersion": "0.8",
+	"package": "com.freshorangeslices.bloomlevelup.compat.mixin",
+	"plugin": "com.freshorangeslices.bloomlevelup.compat.BetterCombatMixinPlugin",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "bloomlevelup.refmap.json",
+	"mixins": [
+		"BetterCombatPlayerAttackHelperMixin"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	}
+}

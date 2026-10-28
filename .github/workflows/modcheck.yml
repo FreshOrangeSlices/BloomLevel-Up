@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v6
         with:
           path: check
-      - run: python3 check/obody.py
+      - run: python3 check/gh.py
       - run: |
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          cp origins-bodies.json data/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "Origins bodies" && git push -q origin ci/data
+          cp gods-heroes.json data/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "Gods and Heroes" && git push -q origin ci/data

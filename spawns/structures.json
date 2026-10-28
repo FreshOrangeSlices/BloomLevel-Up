@@ -1,0 +1,827 @@
+[
+ {
+  "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+  "path": "data/illagerinvasion/worldgen/structure/illager_fort.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "minecraft:pillager",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 3
+     },
+     {
+      "type": "illagerinvasion:marauder",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 3
+     },
+     {
+      "type": "illagerinvasion:basher",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 1
+     },
+     {
+      "type": "illagerinvasion:provoker",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 3
+     }
+    ]
+   }
+  },
+  "biomes": "#illagerinvasion:has_structure/illager_fort"
+ },
+ {
+  "jar": "L_Enders_Cataclysm-3.31.jar",
+  "path": "data/cataclysm/worldgen/structure/amethyst_nest.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "cataclysm:amethyst_crab",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 1
+     }
+    ]
+   }
+  },
+  "biomes": "minecraft:lush_caves"
+ },
+ {
+  "jar": "L_Enders_Cataclysm-3.31.jar",
+  "path": "data/cataclysm/worldgen/structure/desert_occupied_village.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "cataclysm:koboleton",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#cataclysm:has_structure/cursed_pyramid_biomes"
+ },
+ {
+  "jar": "L_Enders_Cataclysm-3.31.jar",
+  "path": "data/cataclysm/worldgen/structure/desert_site.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "cataclysm:koboleton",
+      "maxCount": 1,
+      "minCount": 1,
+      "weight": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#cataclysm:has_structure/cursed_pyramid_biomes"
+ },
+ {
+  "jar": "L_Enders_Cataclysm-3.31.jar",
+  "path": "data/cataclysm/worldgen/structure/ruined_citadel.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "cataclysm:endermaptera",
+      "weight": 3,
+      "minCount": 1,
+      "maxCount": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#cataclysm:has_structure/ruined_citadel_biomes"
+ },
+ {
+  "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+  "path": "data/aquamirae/worldgen/structure/pirate_outpost.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "minecraft:pillager",
+      "weight": 10,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "minecraft:vindicator",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#aquamirae:ice_maze"
+ },
+ {
+  "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+  "path": "data/aquamirae/worldgen/structure/pirate_ship.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "minecraft:pillager",
+      "weight": 10,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "minecraft:vindicator",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#aquamirae:ice_maze"
+ },
+ {
+  "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+  "path": "data/aquamirae/worldgen/structure/surface/arch.json",
+  "spawn_overrides": {
+   "ambient": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "aquamirae:golden_moth",
+      "weight": 10,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   }
+  },
+  "biomes": "#aquamirae:ice_maze"
+ },
+ {
+  "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar",
+  "path": "data/block_factorys_bosses/worldgen/structure/underworld_arena.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "block_factorys_bosses:soul_skeleton",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "block_factorys_bosses:soul_knight_wither_skeleton",
+      "weight": 1,
+      "minCount": 1,
+      "maxCount": 3
+     }
+    ]
+   }
+  },
+  "biomes": "#block_factorys_bosses:underworld_arena"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/crypt.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:acolyte",
+      "weight": 25,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:corrupted_vindicator",
+      "weight": 35,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:corrupted_pillager",
+      "weight": 35,
+      "minCount": 1,
+      "maxCount": 3
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/crypt"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/haunted_house.json",
+  "spawn_overrides": {
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     },
+     {
+      "type": "graveyard:magpie",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/haunted_house"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/large_graveyard.json",
+  "spawn_overrides": {
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     },
+     {
+      "type": "graveyard:magpie",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     }
+    ]
+   },
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:skeleton_creeper",
+      "weight": 35,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:revenant",
+      "weight": 45,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:ghoul",
+      "weight": 50,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/large_graveyard"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/medium_graveyard.json",
+  "spawn_overrides": {
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     },
+     {
+      "type": "graveyard:magpie",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     }
+    ]
+   },
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:skeleton_creeper",
+      "weight": 35,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:revenant",
+      "weight": 45,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:ghoul",
+      "weight": 50,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/medium_graveyard"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/overrun_desert_village.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:corrupted_pillager",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "graveyard:corrupted_vindicator",
+      "weight": 3,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:corrupted_evoker",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:acolyte",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:tormented_villager",
+      "weight": 6,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   },
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     },
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/overrun_desert_village"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/overrun_plains_village.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:corrupted_pillager",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "graveyard:corrupted_vindicator",
+      "weight": 3,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:corrupted_evoker",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:acolyte",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:tormented_villager",
+      "weight": 6,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   },
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     },
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/overrun_plains_village"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/overrun_savanna_village.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:corrupted_pillager",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "graveyard:corrupted_vindicator",
+      "weight": 3,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:corrupted_evoker",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:acolyte",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:tormented_villager",
+      "weight": 6,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   },
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     },
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/overrun_savanna_village"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/overrun_snowy_village.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:corrupted_pillager",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "graveyard:corrupted_vindicator",
+      "weight": 3,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:corrupted_evoker",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:acolyte",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:tormented_villager",
+      "weight": 6,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   },
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     },
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/overrun_snowy_village"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/overrun_taiga_village.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:corrupted_pillager",
+      "weight": 5,
+      "minCount": 1,
+      "maxCount": 2
+     },
+     {
+      "type": "graveyard:corrupted_vindicator",
+      "weight": 3,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:corrupted_evoker",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:acolyte",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:tormented_villager",
+      "weight": 6,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   },
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     },
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/overrun_taiga_village"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/ruins.json",
+  "spawn_overrides": {
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     },
+     {
+      "type": "graveyard:magpie",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     }
+    ]
+   },
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:skeleton_creeper",
+      "weight": 35,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:revenant",
+      "weight": 45,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:ghoul",
+      "weight": 50,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/ruins"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/small_desert_graveyard.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "minecraft:vindicator",
+      "weight": 1,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "minecraft:pillager",
+      "weight": 10,
+      "minCount": 1,
+      "maxCount": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/small_desert_graveyard"
+ },
+ {
+  "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+  "path": "data/graveyard/worldgen/structure/small_graveyard.json",
+  "spawn_overrides": {
+   "ambient": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:raven",
+      "weight": 3,
+      "minCount": 2,
+      "maxCount": 4
+     },
+     {
+      "type": "graveyard:magpie",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:crow",
+      "weight": 4,
+      "minCount": 4,
+      "maxCount": 8
+     }
+    ]
+   },
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "graveyard:skeleton_creeper",
+      "weight": 35,
+      "minCount": 1,
+      "maxCount": 1
+     },
+     {
+      "type": "graveyard:revenant",
+      "weight": 45,
+      "minCount": 1,
+      "maxCount": 3
+     },
+     {
+      "type": "graveyard:ghoul",
+      "weight": 50,
+      "minCount": 1,
+      "maxCount": 2
+     }
+    ]
+   }
+  },
+  "biomes": "#graveyard:has_structure/small_graveyard"
+ },
+ {
+  "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+  "path": "data/legendary_monsters/worldgen/structure/ruined_pyramid.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "piece",
+    "spawns": [
+     {
+      "type": "legendary_monsters:bomber",
+      "weight": 1,
+      "minCount": 1,
+      "maxCount": 1
+     }
+    ]
+   }
+  },
+  "biomes": "#legendary_monsters:has_structure/ruined_pyramid_biomes"
+ },
+ {
+  "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar",
+  "path": "data/soulsweapons/worldgen/structure/cathedral_of_resurrection.json",
+  "spawn_overrides": {
+   "monster": {
+    "bounding_box": "full",
+    "spawns": [
+     {
+      "type": "soulsweapons:dark_sorcerer",
+      "weight": 100,
+      "minCount": 1,
+      "maxCount": 4
+     }
+    ]
+   }
+  },
+  "biomes": "#minecraft:is_hill"
+ }
+]

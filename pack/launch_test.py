@@ -384,7 +384,8 @@ def main():
     progress("title screen done")
 
     # Second start: straight into the server.
-    client = Process(launch + ["--join-server", "127.0.0.1"], game_dir)
+    # Bloom's tooltip dump (ten seconds in): every weapon's tooltip as a player sees it, for sorting the pack's weapons.
+    client = Process(launch + [f"--jvm-arg=-Dbloomlevelup.tooltips={os.path.join(game_dir, 'tooltips.jsonl')}", "--join-server", "127.0.0.1"], game_dir)
     joined = server.wait_for(rf"{PLAYER} joined the game", JOIN_LIMIT)
     started = time.time()
 

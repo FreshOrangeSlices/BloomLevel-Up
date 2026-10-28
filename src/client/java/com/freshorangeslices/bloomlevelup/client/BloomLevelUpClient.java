@@ -24,6 +24,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import com.freshorangeslices.bloomlevelup.client.combat.CombatControls;
+import com.freshorangeslices.bloomlevelup.client.debug.TooltipDump;
 import com.freshorangeslices.bloomlevelup.client.gui.BloomHud;
 import com.freshorangeslices.bloomlevelup.client.gui.ClientScreens;
 import com.freshorangeslices.bloomlevelup.client.gui.HubButton;
@@ -71,6 +72,7 @@ public final class BloomLevelUpClient {
 		SideBridge.setClientCopySource(player -> player == Minecraft.getInstance().player && ClientBloomState.ready() && ClientBloomState.profile() != null
 				? ClientBloomState.service().activeCopySource(ClientBloomState.profile(), CombatIds.COPYCAT).orElse(null) : null);
 
+		TooltipDump.init();
 		ClientPackets.onNameTag(NameTags::accept);
 		MinecraftForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut event) -> {
 			ClientPackets.disconnected();

@@ -1,4 +1,4 @@
-# Throwaway (never merged): how taming works in the pack's Book of Dragons (bodcheck.sh), pushed to ci/data.
+# Throwaway (never merged): Inventory Profiles Next integration hints (ipncheck.sh), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -16,4 +16,4 @@ jobs:
         with:
           ref: forge-1.20.1
           path: bloom
-      - run: bash check/bodcheck.sh
+      - run: bash check/ipncheck.sh

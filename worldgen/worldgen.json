@@ -1,0 +1,1517 @@
+{
+ "data/illagerinvasion/worldgen/structure_set/firecaller_hut.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 169476076,
+   "separation": 28,
+   "spacing": 42
+  },
+  "structures": [
+   {
+    "structure": "illagerinvasion:firecaller_hut",
+    "weight": 1
+   }
+  ]
+ },
+ "data/illagerinvasion/worldgen/structure_set/illager_fort.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "minecraft:villages"
+   },
+   "frequency": 0.2,
+   "frequency_reduction_method": "legacy_type_1",
+   "salt": 169476082,
+   "separation": 28,
+   "spacing": 42
+  },
+  "structures": [
+   {
+    "structure": "illagerinvasion:illager_fort",
+    "weight": 1
+   }
+  ]
+ },
+ "data/illagerinvasion/worldgen/structure_set/illusioner_tower.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "minecraft:villages"
+   },
+   "salt": 169476081,
+   "separation": 28,
+   "spacing": 42
+  },
+  "structures": [
+   {
+    "structure": "illagerinvasion:illusioner_tower",
+    "weight": 1
+   }
+  ]
+ },
+ "data/illagerinvasion/worldgen/structure_set/labyrinth.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "minecraft:villages"
+   },
+   "salt": 169476079,
+   "separation": 26,
+   "spacing": 48
+  },
+  "structures": [
+   {
+    "structure": "illagerinvasion:labyrinth",
+    "weight": 1
+   }
+  ]
+ },
+ "data/illagerinvasion/worldgen/structure_set/sorcerer_hut.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 169476080,
+   "separation": 14,
+   "spacing": 18
+  },
+  "structures": [
+   {
+    "structure": "illagerinvasion:sorcerer_hut",
+    "weight": 1
+   }
+  ]
+ },
+ "data/cataclysm/tags/worldgen/structure_set/abandoned_structures_avoid.json": {
+  "replace": false,
+  "values": [
+   "minecraft:villages",
+   "cataclysm:frosted_prison"
+  ]
+ },
+ "data/cataclysm/tags/worldgen/structure_set/acropolis_avoid.json": {
+  "replace": false,
+  "values": [
+   "minecraft:ocean_monuments",
+   "cataclysm:sunken_city",
+   "cataclysm:cursed_pyramid"
+  ]
+ },
+ "data/cataclysm/tags/worldgen/structure_set/burning_arena_avoid.json": {
+  "replace": false,
+  "values": [
+   "cataclysm:soul_black_smith",
+   "minecraft:nether_complexes"
+  ]
+ },
+ "data/cataclysm/tags/worldgen/structure_set/cursed_pyramid_avoid.json": {
+  "replace": false,
+  "values": []
+ },
+ "data/cataclysm/tags/worldgen/structure_set/desert_structures_avoid.json": {
+  "replace": false,
+  "values": [
+   "minecraft:villages",
+   "cataclysm:cursed_pyramid"
+  ]
+ },
+ "data/cataclysm/tags/worldgen/structure_set/frosted_prison_avoid.json": {
+  "replace": false,
+  "values": []
+ },
+ "data/cataclysm/tags/worldgen/structure_set/soul_black_smith_avoid.json": {
+  "replace": false,
+  "values": [
+   "minecraft:nether_complexes"
+  ]
+ },
+ "data/cataclysm/tags/worldgen/structure_set/sunken_city_avoid.json": {
+  "replace": false,
+  "values": [
+   "minecraft:ocean_monuments"
+  ]
+ },
+ "data/cataclysm/worldgen/structure_set/abandoned_structures.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:abandoned_spire",
+    "weight": 1
+   },
+   {
+    "structure": "cataclysm:abandoned_temple",
+    "weight": 1
+   },
+   {
+    "structure": "cataclysm:abandoned_village",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 514659267,
+   "spacing": 30,
+   "separation": 20,
+   "super_exclusion_zone": {
+    "chunk_count": 8,
+    "other_set": "#cataclysm:abandoned_structures_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/acropolis.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:acropolis",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 913530101,
+   "spacing": 80,
+   "separation": 50,
+   "super_exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "#cataclysm:acropolis_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/amethyst_nest.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 14325760,
+   "separation": 8,
+   "spacing": 32
+  },
+  "structures": [
+   {
+    "structure": "cataclysm:amethyst_nest",
+    "weight": 1
+   }
+  ]
+ },
+ "data/cataclysm/worldgen/structure_set/ancient_factory.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:ancient_factory",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "salt": 319514301,
+   "spacing": 112,
+   "separation": 70,
+   "type": "minecraft:random_spread"
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/burning_arena.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:burning_arena",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 9123456789,
+   "spacing": 80,
+   "separation": 50,
+   "super_exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "#cataclysm:burning_arena_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/cursed_pyramid.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:cursed_pyramid",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 9167234589,
+   "spacing": 80,
+   "separation": 50,
+   "super_exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "#cataclysm:cursed_pyramid_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/desert_structures.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:desert_site",
+    "weight": 1
+   },
+   {
+    "structure": "cataclysm:desert_occupied_village",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 31547671,
+   "spacing": 30,
+   "separation": 20,
+   "super_exclusion_zone": {
+    "chunk_count": 8,
+    "other_set": "#cataclysm:desert_structures_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/frosted_prison.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:frosted_prison",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 5872139439,
+   "spacing": 80,
+   "separation": 50,
+   "super_exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "#cataclysm:frosted_prison_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/ruined_citadel.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:ruined_citadel",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "salt": 367895146,
+   "spacing": 50,
+   "separation": 25,
+   "type": "minecraft:random_spread"
+  },
+  "exclusion_zone": {
+   "chunk_count": 10,
+   "other_set": "minecraft:end_city"
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/soul_black_smith.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:soul_black_smith",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 1984567320,
+   "spacing": 60,
+   "separation": 50,
+   "super_exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "#cataclysm:soul_black_smith_avoid"
+   }
+  }
+ },
+ "data/cataclysm/worldgen/structure_set/sunken_city.json": {
+  "structures": [
+   {
+    "structure": "cataclysm:sunken_city",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "cataclysm:cataclysm_random_spread",
+   "salt": 1673928450,
+   "spacing": 100,
+   "separation": 70,
+   "spread_type": "triangular",
+   "super_exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "#cataclysm:sunken_city_avoid"
+   }
+  }
+ },
+ "data/aquamirae/worldgen/structure_set/pirate_outpost.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 9291764181,
+   "spacing": 18,
+   "separation": 10
+  },
+  "structures": [
+   {
+    "structure": "aquamirae:pirate_outpost",
+    "weight": 1
+   }
+  ]
+ },
+ "data/aquamirae/worldgen/structure_set/pirate_shelter.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 9491766081,
+   "spacing": 30,
+   "separation": 20
+  },
+  "structures": [
+   {
+    "structure": "aquamirae:pirate_shelter",
+    "weight": 1
+   }
+  ]
+ },
+ "data/aquamirae/worldgen/structure_set/pirate_ship.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 9391766081,
+   "spacing": 25,
+   "separation": 10
+  },
+  "structures": [
+   {
+    "structure": "aquamirae:pirate_ship",
+    "weight": 1
+   }
+  ]
+ },
+ "data/aquamirae/worldgen/structure_set/shipwreck.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 165745295,
+   "spacing": 6,
+   "separation": 1
+  },
+  "structures": [
+   {
+    "structure": "aquamirae:shipwreck",
+    "weight": 1
+   }
+  ]
+ },
+ "data/aquamirae/worldgen/structure_set/surface.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 9191766080,
+   "spacing": 4,
+   "separation": 0
+  },
+  "structures": [
+   {
+    "structure": "aquamirae:surface/arch",
+    "weight": 66
+   },
+   {
+    "structure": "aquamirae:surface/spiral",
+    "weight": 33
+   }
+  ]
+ },
+ "data/block_factorys_bosses/worldgen/structure_set/dragon_tower.json": {
+  "structures": [
+   {
+    "structure": "block_factorys_bosses:dragon_tower",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 96,
+   "separation": 24,
+   "salt": 178711064
+  }
+ },
+ "data/block_factorys_bosses/worldgen/structure_set/kraken_ship.json": {
+  "structures": [
+   {
+    "structure": "block_factorys_bosses:kraken_ship",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 52,
+   "separation": 24,
+   "salt": 496078896
+  }
+ },
+ "data/block_factorys_bosses/worldgen/structure_set/sandworm_nest.json": {
+  "structures": [
+   {
+    "structure": "block_factorys_bosses:sandworm_nest",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 45,
+   "separation": 30,
+   "salt": 1779810129
+  }
+ },
+ "data/block_factorys_bosses/worldgen/structure_set/underworld_arena.json": {
+  "structures": [
+   {
+    "structure": "block_factorys_bosses:underworld_arena",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 48,
+   "separation": 40,
+   "salt": 565960105,
+   "exclusion_zone": {
+    "chunk_count": 8,
+    "other_set": "minecraft:nether_complexes"
+   }
+  }
+ },
+ "data/block_factorys_bosses/worldgen/structure_set/yeti_hideout.json": {
+  "structures": [
+   {
+    "structure": "block_factorys_bosses:yeti_hideout",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 30,
+   "separation": 25,
+   "salt": 787478644
+  }
+ },
+ "data/bookofdragons/worldgen/structure_set/roost_barrens.json": {
+  "structures": [
+   {
+    "structure": "bookofdragons:roost_barrens",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 24,
+   "separation": 12,
+   "salt": 1665432005
+  }
+ },
+ "data/bookofdragons/worldgen/structure_set/roost_cave.json": {
+  "structures": [
+   {
+    "structure": "bookofdragons:roost_cave",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 20,
+   "separation": 10,
+   "salt": 1665432002
+  }
+ },
+ "data/bookofdragons/worldgen/structure_set/roost_cliff.json": {
+  "structures": [
+   {
+    "structure": "bookofdragons:roost_cliff",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 32,
+   "separation": 16,
+   "salt": 1665432001
+  }
+ },
+ "data/bookofdragons/worldgen/structure_set/roost_glade.json": {
+  "structures": [
+   {
+    "structure": "bookofdragons:roost_glade",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 24,
+   "separation": 12,
+   "salt": 1665432003
+  }
+ },
+ "data/bookofdragons/worldgen/structure_set/roost_wetland.json": {
+  "structures": [
+   {
+    "structure": "bookofdragons:roost_wetland",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 24,
+   "separation": 12,
+   "salt": 1665432004
+  }
+ },
+ "data/graveyard/worldgen/structure_set/altar_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:altar",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1093123913,
+   "spacing": 30,
+   "separation": 24
+  }
+ },
+ "data/graveyard/worldgen/structure_set/crypt_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:crypt",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 893183913,
+   "spacing": 24,
+   "separation": 22
+  }
+ },
+ "data/graveyard/worldgen/structure_set/dead_tree_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:dead_tree",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 781897819,
+   "spacing": 28,
+   "separation": 16
+  }
+ },
+ "data/graveyard/worldgen/structure_set/giant_mushroom_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:giant_mushroom",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 365012356,
+   "spacing": 34,
+   "separation": 26
+  }
+ },
+ "data/graveyard/worldgen/structure_set/haunted_house_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:haunted_house",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 451235912,
+   "spacing": 20,
+   "separation": 18
+  }
+ },
+ "data/graveyard/worldgen/structure_set/large_graveyard_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:large_graveyard",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 304812394,
+   "spacing": 25,
+   "separation": 20
+  }
+ },
+ "data/graveyard/worldgen/structure_set/lich_prison_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:lich_prison",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 258195719,
+   "spacing": 120,
+   "separation": 100
+  }
+ },
+ "data/graveyard/worldgen/structure_set/medium_graveyard_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:medium_graveyard",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1690192399,
+   "spacing": 18,
+   "separation": 16
+  }
+ },
+ "data/graveyard/worldgen/structure_set/memorial_tree_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:memorial_tree",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 529239621,
+   "spacing": 14,
+   "separation": 12
+  }
+ },
+ "data/graveyard/worldgen/structure_set/mushroom_grave_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:mushroom_grave",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 379123039,
+   "spacing": 24,
+   "separation": 18
+  }
+ },
+ "data/graveyard/worldgen/structure_set/overrun_villages.json": {
+  "structures": [
+   {
+    "structure": "graveyard:overrun_plains_village",
+    "weight": 1
+   },
+   {
+    "structure": "graveyard:overrun_savanna_village",
+    "weight": 1
+   },
+   {
+    "structure": "graveyard:overrun_taiga_village",
+    "weight": 1
+   },
+   {
+    "structure": "graveyard:overrun_snowy_village",
+    "weight": 1
+   },
+   {
+    "structure": "graveyard:overrun_desert_village",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1820462391,
+   "spacing": 40,
+   "separation": 12,
+   "exclusion_zone": {
+    "other_set": "minecraft:villages",
+    "chunk_count": 8
+   }
+  }
+ },
+ "data/graveyard/worldgen/structure_set/ruins_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:ruins",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 467108394,
+   "spacing": 16,
+   "separation": 12
+  }
+ },
+ "data/graveyard/worldgen/structure_set/small_desert_grave_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:small_desert_grave",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 681236914,
+   "spacing": 20,
+   "separation": 16
+  }
+ },
+ "data/graveyard/worldgen/structure_set/small_desert_graveyard_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:small_desert_graveyard",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 598017285,
+   "spacing": 32,
+   "separation": 28
+  }
+ },
+ "data/graveyard/worldgen/structure_set/small_grave_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:small_grave",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 240451934,
+   "spacing": 12,
+   "separation": 8
+  }
+ },
+ "data/graveyard/worldgen/structure_set/small_graveyard_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:small_graveyard",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 598017285,
+   "spacing": 20,
+   "separation": 18
+  }
+ },
+ "data/graveyard/worldgen/structure_set/small_mountain_grave_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:small_mountain_grave",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 725689810,
+   "spacing": 12,
+   "separation": 8
+  }
+ },
+ "data/graveyard/worldgen/structure_set/small_savanna_grave_structure.json": {
+  "structures": [
+   {
+    "structure": "graveyard:small_savanna_grave",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 709787761,
+   "spacing": 12,
+   "separation": 8
+  }
+ },
+ "data/irons_spellbooks/worldgen/structure_set/ancient_battleground.json": "unparsable",
+ "data/irons_spellbooks/worldgen/structure_set/catacombs.json": {
+  "structures": [
+   {
+    "structure": "irons_spellbooks:catacombs",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "salt": 1794563212,
+   "spacing": 72,
+   "separation": 48,
+   "type": "minecraft:random_spread"
+  }
+ },
+ "data/irons_spellbooks/worldgen/structure_set/citadel.json": "unparsable",
+ "data/irons_spellbooks/worldgen/structure_set/evoker_fort.json": "unparsable",
+ "data/irons_spellbooks/worldgen/structure_set/ice_spider_den.json": {
+  "structures": [
+   {
+    "structure": "irons_spellbooks:ice_spider_den",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "salt": 126346,
+   "spacing": 85,
+   "separation": 50,
+   "type": "minecraft:random_spread"
+  }
+ },
+ "data/irons_spellbooks/worldgen/structure_set/impaled_icebreaker.json": {
+  "structures": [
+   {
+    "structure": "irons_spellbooks:impaled_icebreaker",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "salt": 87959402,
+   "spacing": 75,
+   "separation": 50,
+   "type": "minecraft:random_spread"
+  }
+ },
+ "data/irons_spellbooks/worldgen/structure_set/mangrove_hut.json": "unparsable",
+ "data/irons_spellbooks/worldgen/structure_set/mountain_tower.json": "unparsable",
+ "data/irons_spellbooks/worldgen/structure_set/pyromancer_tower.json": "unparsable",
+ "data/legendary_monsters/worldgen/structure_set/ancient_stronghold.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:ancient_stronghold",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 40,
+   "separation": 30,
+   "salt": 5792349
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/ancient_tower_remains.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:ancient_tower_remains",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 65,
+   "separation": 35,
+   "salt": 12466453
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/cloudy_temple.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:cloudy_temple",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 70,
+   "separation": 50,
+   "salt": 443951123
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/collapsed_kingdom.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 542863,
+   "separation": 80,
+   "spacing": 110
+  },
+  "structures": [
+   {
+    "structure": "legendary_monsters:collapsed_kingdom",
+    "weight": 1
+   }
+  ]
+ },
+ "data/legendary_monsters/worldgen/structure_set/frostbitten_temple.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:frostbitten_temple",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 38,
+   "separation": 28,
+   "salt": 6538645
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/lava_eater_spawn.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:lava_eater_spawn",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 25,
+   "separation": 13,
+   "salt": 435246
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/mossy_temple.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:mossy_temple",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 35,
+   "separation": 24,
+   "salt": 12381234
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/ruined_pyramid.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:ruined_pyramid",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 40,
+   "separation": 30,
+   "salt": 5792349
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/shulker_tower.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:shulker_tower",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 65,
+   "separation": 35,
+   "salt": 7539258
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/skeletosaurus_nest.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:skeletosaurus_nest",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 25,
+   "separation": 14,
+   "salt": 93781234
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/soul_fortress_remains.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:soul_fortress_remains",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 27,
+   "separation": 18,
+   "salt": 5478396
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/space_station.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:space_station",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "frequency": 0.75,
+   "frequency_reduction_method": "legacy_type_1",
+   "type": "minecraft:random_spread",
+   "spacing": 110,
+   "separation": 75,
+   "salt": 8570437
+  },
+  "exclusion_zone": {
+   "chunk_count": 6,
+   "other_set": "minecraft:end_city"
+  }
+ },
+ "data/legendary_monsters/worldgen/structure_set/warped_fungussus_nest.json": {
+  "structures": [
+   {
+    "structure": "legendary_monsters:warped_fungussus_nest",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 7,
+   "separation": 5,
+   "salt": 5546645
+  }
+ },
+ "data/legionary/worldgen/structure_set/bastion_arena.json": {
+  "structures": [
+   {
+    "structure": "legionary:bastion_arena",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 320,
+   "separation": 128,
+   "salt": 1413749916
+  }
+ },
+ "data/monsterexpansion/worldgen/processor_list/ignathos_spawner.json": {
+  "processors": [
+   {
+    "processor_type": "monsterexpansion:entity_spawner"
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/processor_list/leivekilth_spawner.json": {
+  "processors": [
+   {
+    "processor_type": "monsterexpansion:entity_spawner"
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/processor_list/rakoth_spawner.json": {
+  "processors": [
+   {
+    "processor_type": "monsterexpansion:entity_spawner"
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/processor_list/rhyza_spawner.json": {
+  "processors": [
+   {
+    "processor_type": "monsterexpansion:entity_spawner"
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/processor_list/skrythe_spawner.json": {
+  "processors": [
+   {
+    "processor_type": "monsterexpansion:entity_spawner"
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/structure/ignathos_structure.json": {
+  "type": "minecraft:jigsaw",
+  "biomes": "#monsterexpansion:ignathos_biomes",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_pool": "monsterexpansion:ignathos_pool",
+  "size": 1,
+  "start_height": {
+   "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+ },
+ "data/monsterexpansion/worldgen/structure/leivekilth_structure.json": {
+  "type": "minecraft:jigsaw",
+  "biomes": "#monsterexpansion:leivekilth_biomes",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_pool": "monsterexpansion:leivekilth_pool",
+  "size": 1,
+  "start_height": {
+   "absolute": 0
+  },
+  "project_start_to_heightmap": "OCEAN_FLOOR_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+ },
+ "data/monsterexpansion/worldgen/structure/rakoth_structure.json": {
+  "type": "minecraft:jigsaw",
+  "biomes": "#monsterexpansion:rakoth_biomes",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_pool": "monsterexpansion:rakoth_pool",
+  "size": 1,
+  "start_height": {
+   "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+ },
+ "data/monsterexpansion/worldgen/structure/rhyza_structure.json": {
+  "type": "minecraft:jigsaw",
+  "biomes": "#monsterexpansion:rhyza_biomes",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_pool": "monsterexpansion:rhyza_pool",
+  "size": 1,
+  "start_height": {
+   "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+ },
+ "data/monsterexpansion/worldgen/structure/skrythe_structure.json": {
+  "type": "minecraft:jigsaw",
+  "biomes": "#monsterexpansion:skrythe_biomes",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "start_pool": "monsterexpansion:skrythe_pool",
+  "size": 1,
+  "start_height": {
+   "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+ },
+ "data/monsterexpansion/worldgen/structure_set/ignathos_placement.json": {
+  "structures": [
+   {
+    "structure": "monsterexpansion:ignathos_structure",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 20,
+   "salt": 56789012
+  }
+ },
+ "data/monsterexpansion/worldgen/structure_set/leivekilth_placement.json": {
+  "structures": [
+   {
+    "structure": "monsterexpansion:leivekilth_structure",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 20,
+   "salt": 45678901
+  }
+ },
+ "data/monsterexpansion/worldgen/structure_set/rakoth_placement.json": {
+  "structures": [
+   {
+    "structure": "monsterexpansion:rakoth_structure",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 20,
+   "salt": 34567890
+  }
+ },
+ "data/monsterexpansion/worldgen/structure_set/rhyza_placement.json": {
+  "structures": [
+   {
+    "structure": "monsterexpansion:rhyza_structure",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 20,
+   "salt": 23456789
+  }
+ },
+ "data/monsterexpansion/worldgen/structure_set/skrythe_placement.json": {
+  "structures": [
+   {
+    "structure": "monsterexpansion:skrythe_structure",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 20,
+   "salt": 12345678
+  }
+ },
+ "data/monsterexpansion/worldgen/template_pool/ignathos_pool.json": {
+  "name": "monsterexpansion:ignathos_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+   {
+    "weight": 1,
+    "element": {
+     "element_type": "minecraft:single_pool_element",
+     "location": "monsterexpansion:ignathos_anchor",
+     "projection": "rigid",
+     "processors": "monsterexpansion:ignathos_spawner"
+    }
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/template_pool/leivekilth_pool.json": {
+  "name": "monsterexpansion:leivekilth_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+   {
+    "weight": 1,
+    "element": {
+     "element_type": "minecraft:single_pool_element",
+     "location": "monsterexpansion:leivekilth_anchor",
+     "projection": "rigid",
+     "processors": "monsterexpansion:leivekilth_spawner"
+    }
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/template_pool/rakoth_pool.json": {
+  "name": "monsterexpansion:rakoth_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+   {
+    "weight": 1,
+    "element": {
+     "element_type": "minecraft:single_pool_element",
+     "location": "monsterexpansion:rakoth_anchor",
+     "projection": "rigid",
+     "processors": "monsterexpansion:rakoth_spawner"
+    }
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/template_pool/rhyza_pool.json": {
+  "name": "monsterexpansion:rhyza_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+   {
+    "weight": 1,
+    "element": {
+     "element_type": "minecraft:single_pool_element",
+     "location": "monsterexpansion:rhyza_anchor",
+     "projection": "rigid",
+     "processors": "monsterexpansion:rhyza_spawner"
+    }
+   }
+  ]
+ },
+ "data/monsterexpansion/worldgen/template_pool/skrythe_pool.json": {
+  "name": "monsterexpansion:skrythe_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+   {
+    "weight": 1,
+    "element": {
+     "element_type": "minecraft:single_pool_element",
+     "location": "monsterexpansion:skrythe_anchor",
+     "projection": "rigid",
+     "processors": "monsterexpansion:skrythe_spawner"
+    }
+   }
+  ]
+ },
+ "data/mythsandlegends/worldgen/structure_set/ancient_vestiges.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1694767080,
+   "separation": 50,
+   "spacing": 64
+  },
+  "structures": [
+   {
+    "structure": "mythsandlegends:ancient_vestiges",
+    "weight": 1
+   }
+  ]
+ },
+ "data/mythsandlegends/worldgen/structure_set/chronicler_house.json": {
+  "placement": {
+   "type": "minecraft:concentric_rings",
+   "count": 1,
+   "distance": 8,
+   "preferred_biomes": "#mythsandlegends:has_chronicler_house",
+   "salt": 1694767084,
+   "spread": 1
+  },
+  "structures": [
+   {
+    "structure": "mythsandlegends:chronicler_house",
+    "weight": 1
+   }
+  ]
+ },
+ "data/mythsandlegends/worldgen/structure_set/mausoleum.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1694767081,
+   "separation": 50,
+   "spacing": 64,
+   "spread_type": "triangular"
+  },
+  "structures": [
+   {
+    "structure": "mythsandlegends:mausoleum",
+    "weight": 1
+   }
+  ]
+ },
+ "data/mythsandlegends/worldgen/structure_set/old_camp.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1694767082,
+   "separation": 50,
+   "spacing": 64
+  },
+  "structures": [
+   {
+    "structure": "mythsandlegends:old_camp",
+    "weight": 1
+   }
+  ]
+ },
+ "data/mythsandlegends/worldgen/structure_set/scorched_nest.json": {
+  "placement": {
+   "type": "minecraft:random_spread",
+   "salt": 1694767083,
+   "separation": 4,
+   "spacing": 27
+  },
+  "structures": [
+   {
+    "structure": "mythsandlegends:scorched_nest",
+    "weight": 1
+   }
+  ]
+ },
+ "data/oddities/worldgen/structure_set/orchid_shrine.json": {
+  "structures": [
+   {
+    "structure": "oddities:orchid_shrine",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 70,
+   "separation": 20,
+   "salt": 1685267439
+  }
+ },
+ "data/skarrier_mobs/worldgen/structure_set/stone_golem_circle.json": {
+  "structures": [
+   {
+    "structure": "skarrier_mobs:stone_golem_circle",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 26,
+   "separation": 18,
+   "salt": 518608786
+  }
+ },
+ "data/skarrier_mobs/worldgen/structure_set/tunnel_gore_lair_x.json": {
+  "structures": [
+   {
+    "structure": "skarrier_mobs:tunnel_gore_lair_x",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 22,
+   "separation": 12,
+   "salt": 489090257
+  }
+ },
+ "data/skarrier_mobs/worldgen/structure_set/tunnel_gore_tunnel_1.json": {
+  "structures": [
+   {
+    "structure": "skarrier_mobs:tunnel_gore_tunnel_1",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 5,
+   "separation": 2,
+   "salt": 971659559
+  }
+ },
+ "data/skarrier_mobs/worldgen/structure_set/tunnel_gore_tunnel_2.json": {
+  "structures": [
+   {
+    "structure": "skarrier_mobs:tunnel_gore_tunnel_2",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 5,
+   "separation": 2,
+   "salt": 970697687
+  }
+ },
+ "data/skarrier_mobs/worldgen/structure_set/tunnel_gore_tunnel_3.json": {
+  "structures": [
+   {
+    "structure": "skarrier_mobs:tunnel_gore_tunnel_3",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 5,
+   "separation": 2,
+   "salt": 970505313
+  }
+ },
+ "data/soulsweapons/worldgen/structure_set/nether_structures.json": {
+  "structures": [
+   {
+    "structure": "soulsweapons:decaying_kingdom",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 30,
+   "salt": 92177219
+  }
+ },
+ "data/soulsweapons/worldgen/structure_set/overworld_structures.json": {
+  "structures": [
+   {
+    "structure": "soulsweapons:cathedral_of_resurrection",
+    "weight": 1
+   },
+   {
+    "structure": "soulsweapons:champions_graves",
+    "weight": 1
+   }
+  ],
+  "placement": {
+   "type": "minecraft:random_spread",
+   "spacing": 60,
+   "separation": 30,
+   "salt": 1646207470
+  }
+ }
+}

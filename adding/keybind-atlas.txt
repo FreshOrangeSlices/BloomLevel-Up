@@ -1,0 +1,258 @@
+== mods.toml
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="keybindatlas"
+version="2.1.0"
+displayName="Keybind Atlas"
+description="Client-side keyboard overlay that maps vanilla and modded keybinds, shows their sources, and helps players rebind with less friction."
+== non-class files
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./assets/keybindatlas/lang/da_dk.json
+./assets/keybindatlas/lang/de_de.json
+./assets/keybindatlas/lang/en_gb.json
+./assets/keybindatlas/lang/en_us.json
+./assets/keybindatlas/lang/es_es.json
+./assets/keybindatlas/lang/fi_fi.json
+./assets/keybindatlas/lang/fr_fr.json
+./assets/keybindatlas/lang/it_it.json
+./assets/keybindatlas/lang/nb_no.json
+./assets/keybindatlas/lang/nl_be.json
+./assets/keybindatlas/lang/pt_br.json
+./assets/keybindatlas/lang/ru_ru.json
+./assets/keybindatlas/lang/sv_se.json
+./assets/keybindatlas/lang/zh_cn.json
+./pack.mcmeta
+== lang key/keybind entries
+  "key.keybindatlas.open_keyboard": "Open Keybind Atlas",
+  "key.keybindatlas.cycle_sets": "Cycle Keybind Sets",
+  "keybindatlas.ui.status.set_loaded": "Loaded keybind set: %s",
+  "keybindatlas.ui.status.no_sets": "No saved keybind sets",
+  "keybindatlas.ui.status.set_load_failed": "Could not load keybind set",
+  "keybindatlas.ui.screen.title": "Keyboard",
+  "keybindatlas.ui.common.on": "ON",
+  "keybindatlas.ui.common.off": "OFF",
+  "keybindatlas.ui.button.apply": "Apply",
+  "keybindatlas.ui.button.cancel": "Cancel",
+  "keybindatlas.ui.button.confirm": "Confirm",
+  "keybindatlas.ui.button.create": "Create",
+  "keybindatlas.ui.button.dir_short": "FOLDER",
+  "keybindatlas.ui.button.discard": "Discard",
+  "keybindatlas.ui.button.log_short": "LOGS",
+  "keybindatlas.ui.button.no": "No",
+  "keybindatlas.ui.button.remove": "Remove",
+  "keybindatlas.ui.button.reset": "Reset",
+  "keybindatlas.ui.button.reset_short": "RESET",
+  "keybindatlas.ui.button.select_all": "Select all",
+  "keybindatlas.ui.button.undo": "Undo",
+  "keybindatlas.ui.button.toggle_categories": "Toggle categories",
+  "keybindatlas.ui.button.unselect_all": "Unselect all",
+  "keybindatlas.ui.button.update": "Update",
+  "keybindatlas.ui.button.yes": "Yes",
+  "keybindatlas.ui.confirm.apply_all_changes": "Apply all changes?",
+  "keybindatlas.ui.confirm.delete_category": "Delete category \"%s\"?",
+  "keybindatlas.ui.confirm.discard_all_changes": "Discard all changes?",
+  "keybindatlas.ui.confirm.discard_and_close": "Discard changes and close?",
+  "keybindatlas.ui.confirm.discard_for_debug": "Discard changes for debug?",
+grep: write error: Broken pipe
+== KeyMapping registrations
+--- com.example.keybindatlas.ClientEvents
+      23: bipush        10
+      59: sipush        200
+     123: ldc           #84                 // String Could not autosave the selected keybind set
+      70: ldc           #125                // String keybindatlas.ui.status.no_sets
+      78: ldc           #133                // String keybindatlas.ui.status.set_loaded
+     102: ldc           #144                // String Could not cycle keybind sets
+     114: ldc           #146                // String keybindatlas.ui.status.set_load_failed
+      27: sipush        155
+      36: bipush        6
+      39: bipush        12
+      98: bipush        24
+     107: ldc           #207                // String key.keybindatlas.open_keyboard
+     123: sipush        310
+     126: bipush        20
+--- com.example.keybindatlas.KeyBindings
+       4: ldc           #9                  // String key.keybindatlas.cycle_sets
+       6: getstatic     #11                 // Field net/minecraftforge/client/settings/KeyConflictContext.IN_GAME:Lnet/minecraftforge/client/settings/KeyConflictContext;
+       9: getstatic     #17                 // Field net/minecraftforge/client/settings/KeyModifier.ALT:Lnet/minecraftforge/client/settings/KeyModifier;
+      12: getstatic     #23                 // Field com/mojang/blaze3d/platform/InputConstants$Type.KEYSYM:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      15: bipush        75
+      17: ldc           #31                 // String key.categories.misc
+      19: invokespecial #33                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;Lnet/minecraftforge/client/settings/IKeyConflictContext;Lnet/minecraftforge/client/settings/KeyModifier;Lcom/mojang/blaze3d/platform/InputConstants$Type;ILjava/lang/String;)V
+       4: ldc           #36                 // String key.keybindatlas.open_keyboard
+       6: bipush        75
+       8: ldc           #31                 // String key.categories.misc
+      10: invokespecial #38                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+--- com.example.keybindatlas.edit.EditModeState
+       0: bipush        31
+      73: invokevirtual #54                 // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      78: invokevirtual #58                 // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+      81: invokespecial #62                 // Method com/example/keybindatlas/edit/EditModeState$OriginalBinding."<init>":(Lcom/mojang/blaze3d/platform/InputConstants$Key;Lnet/minecraftforge/client/settings/KeyModifier;)V
+      91: bipush        31
+     111: bipush        31
+     120: invokevirtual #54                 // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+     123: invokevirtual #75                 // Method com/mojang/blaze3d/platform/InputConstants$Key.hashCode:()I
+     131: bipush        31
+     140: invokevirtual #58                 // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+     143: invokevirtual #78                 // Method net/minecraftforge/client/settings/KeyModifier.ordinal:()I
+       2: getstatic     #83                 // Field com/mojang/blaze3d/platform/InputConstants.UNKNOWN:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       5: getstatic     #89                 // Field net/minecraftforge/client/settings/KeyModifier.NONE:Lnet/minecraftforge/client/settings/KeyModifier;
+       8: invokevirtual #93                 // Method updateBinding:(Lnet/minecraft/client/KeyMapping;Lcom/mojang/blaze3d/platform/InputConstants$Key;Lnet/minecraftforge/client/settings/KeyModifier;)V
+       8: invokevirtual #54                 // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      11: getstatic     #83                 // Field com/mojang/blaze3d/platform/InputConstants.UNKNOWN:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      14: invokevirtual #97                 // Method com/mojang/blaze3d/platform/InputConstants$Key.equals:(Ljava/lang/Object;)Z
+      27: bipush        -100
+      47: getstatic     #103                // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      53: getstatic     #109                // Field com/mojang/blaze3d/platform/InputConstants$Type.KEYSYM:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      58: invokevirtual #112                // Method com/mojang/blaze3d/platform/InputConstants$Type.getOrCreate:(I)Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      67: getstatic     #89                 // Field net/minecraftforge/client/settings/KeyModifier.NONE:Lnet/minecraftforge/client/settings/KeyModifier;
+      70: invokevirtual #93                 // Method updateBinding:(Lnet/minecraft/client/KeyMapping;Lcom/mojang/blaze3d/platform/InputConstants$Key;Lnet/minecraftforge/client/settings/KeyModifier;)V
+  public void updateBinding(net.minecraft.client.KeyMapping, com.mojang.blaze3d.platform.InputConstants$Key, net.minecraftforge.client.settings.KeyModifier);
+       1: invokevirtual #54                 // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       5: invokevirtual #97                 // Method com/mojang/blaze3d/platform/InputConstants$Key.equals:(Ljava/lang/Object;)Z
+      12: invokevirtual #58                 // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+      33: invokevirtual #54                 // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      37: invokevirtual #58                 // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+      40: invokespecial #118                // Method com/example/keybindatlas/edit/EditModeState$EditAction."<init>":(Ljava/lang/String;Lcom/mojang/blaze3d/platform/InputConstants$Key;Lnet/minecraftforge/client/settings/KeyModifier;)V
+      52: invokevirtual #124                // Method net/minecraft/client/KeyMapping.setKeyModifierAndCode:(Lnet/minecraftforge/client/settings/KeyModifier;Lcom/mojang/blaze3d/platform/InputConstants$Key;)V
+      29: getfield      #135                // Field com/example/keybindatlas/edit/EditModeState$OriginalBinding.key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      33: invokevirtual #54                 // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      36: invokevirtual #97                 // Method com/mojang/blaze3d/platform/InputConstants$Key.equals:(Ljava/lang/Object;)Z
+      43: getfield      #138                // Field com/example/keybindatlas/edit/EditModeState$OriginalBinding.modifier:Lnet/minecraftforge/client/settings/KeyModifier;
+      47: invokevirtual #58                 // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+      24: getfield      #135                // Field com/example/keybindatlas/edit/EditModeState$OriginalBinding.key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      28: getfield      #138                // Field com/example/keybindatlas/edit/EditModeState$OriginalBinding.modifier:Lnet/minecraftforge/client/settings/KeyModifier;
+      31: invokevirtual #93                 // Method updateBinding:(Lnet/minecraft/client/KeyMapping;Lcom/mojang/blaze3d/platform/InputConstants$Key;Lnet/minecraftforge/client/settings/KeyModifier;)V
+      50: getfield      #135                // Field com/example/keybindatlas/edit/EditModeState$OriginalBinding.key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+grep: write error: Broken pipe
+--- com.example.keybindatlas.layout.KeyboardBindingCache
+      38: ldc           #24                 // int -2147483648
+      44: ldc           #24                 // int -2147483648
+      44: ldc           #24                 // int -2147483648
+      50: ldc           #24                 // int -2147483648
+       5: bipush        31
+      65: ldc           #24                 // int -2147483648
+     111: ldc           #24                 // int -2147483648
+       4: ldc           #24                 // int -2147483648
+     124: ldc           #24                 // int -2147483648
+      89: invokevirtual #197                // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      92: getstatic     #201                // Field com/mojang/blaze3d/platform/InputConstants.UNKNOWN:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      95: invokevirtual #207                // Method com/mojang/blaze3d/platform/InputConstants$Key.equals:(Ljava/lang/Object;)Z
+     104: invokevirtual #197                // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+     107: invokevirtual #212                // Method resolveGlfwKey:(Lcom/mojang/blaze3d/platform/InputConstants$Key;)I
+  private int resolveGlfwKey(com.mojang.blaze3d.platform.InputConstants$Key);
+       1: invokevirtual #248                // Method com/mojang/blaze3d/platform/InputConstants$Key.getType:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       4: getstatic     #252                // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      10: bipush        -100
+      13: invokevirtual #258                // Method com/mojang/blaze3d/platform/InputConstants$Key.getValue:()I
+      19: invokevirtual #258                // Method com/mojang/blaze3d/platform/InputConstants$Key.getValue:()I
+      27: bipush        31
+      41: bipush        31
+      57: invokevirtual #197                // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      64: invokevirtual #248                // Method com/mojang/blaze3d/platform/InputConstants$Key.getType:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      67: getstatic     #252                // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      73: bipush        31
+      77: bipush        -100
+      81: invokevirtual #258                // Method com/mojang/blaze3d/platform/InputConstants$Key.getValue:()I
+      90: bipush        31
+      96: invokevirtual #258                // Method com/mojang/blaze3d/platform/InputConstants$Key.getValue:()I
+     103: invokevirtual #272                // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+     108: bipush        31
+     123: invokevirtual #276                // Method net/minecraftforge/client/settings/KeyModifier.ordinal:()I
+      25: ldc_w         #297                // String en_us
+       9: ldc_w         #303                // String minecraft
+      19: ldc_w         #306                // String Minecraft
+      14: ldc_w         #350                // String \\.
+      27: ldc_w         #356                // String key
+      39: ldc_w         #358                // String categories
+      14: ldc_w         #350                // String \\.
+grep: write error: Broken pipe
+--- com.example.keybindatlas.render.KeyboardScreen
+      16: ldc           #19                 // String Keybind Atlas failed during {}
+       1: ldc           #31                 // String ui.screen.title
+      14: ldc2_w        #46                 // long -1l
+     101: ldc2_w        #46                 // long -1l
+     113: ldc2_w        #46                 // long -1l
+     185: ldc2_w        #46                 // long -1l
+     192: ldc2_w        #46                 // long -1l
+     245: ldc2_w        #46                 // long -1l
+     388: ldc2_w        #46                 // long -1l
+     414: ldc2_w        #46                 // long -1l
+     441: ldc2_w        #46                 // long -1l
+     490: ldc_w         #306                // String assigned
+     497: ldc_w         #312                // String
+     526: ldc2_w        #46                 // long -1l
+     600: ldc_w         #361                // int -2147483648
+     622: ldc_w         #361                // int -2147483648
+     680: ldc_w         #312                // String
+     687: ldc_w         #312                // String
+      29: ldc_w         #500                // String ui.status.layout_changed
+      11: ldc_w         #306                // String assigned
+      21: ldc_w         #306                // String assigned
+      25: ldc_w         #546                // String hidden
+      35: ldc_w         #546                // String hidden
+      46: ldc_w         #306                // String assigned
+      66: ldc_w         #306                // String assigned
+      12: ldc_w         #546                // String hidden
+      29: ldc_w         #306                // String assigned
+       1: ldc_w         #312                // String
+       9: ldc2_w        #667                // long 3000l
+      14: ldc_w         #827                // String __unused__
+     116: ldc_w         #889                // float 1000000.0f
+     120: ldc_w         #890                // float 140.0f
+     157: ldc_w         #312                // String
+     562: ldc_w         #950                // float 0.12f
+       4: bipush        6
+       7: bipush        90
+      10: bipush        16
+       4: bipush        6
+       7: bipush        36
+      22: bipush        18
+grep: write error: Broken pipe
+--- com.example.keybindatlas.sets.KeybindSetStore
+     130: ldc           #98                 // String name
+     170: ldc           #128                // String bindings
+      67: ldc           #206                // String key
+      77: ldc           #208                // String modifier
+       4: ldc           #226                // String
+      25: bipush        48
+      51: ldc           #251                // String Use a name between 1 and 48 characters.
+      14: ldc           #253                // String A set with that name already exists.
+      19: ldc           #226                // String
+      18: ldc           #253                // String A set with that name already exists.
+      22: ldc_w         #280                // String That set no longer exists.
+      42: ldc           #253                // String A set with that name already exists.
+       1: ldc_w         #314                // String [<>:\"/\\\\|?*\\p{Cntrl}]
+       4: ldc_w         #316                // String _
+      10: ldc_w         #322                // String [. ]+$
+      13: ldc           #226                // String
+      26: ldc_w         #327                // String set
+      31: ldc_w         #329                // String (?i)(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\\..*)?
+     107: bipush        8
+      11: ldc           #98                 // String name
+      59: ldc           #128                // String bindings
+      82: ldc_w         #386                // String keybind-set-
+      85: ldc_w         #388                // String .tmp
+      40: invokevirtual #443                // Method net/minecraft/client/KeyMapping.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      43: invokevirtual #446                // Method com/mojang/blaze3d/platform/InputConstants$Key.getName:()Ljava/lang/String;
+      48: invokevirtual #449                // Method net/minecraft/client/KeyMapping.getKeyModifier:()Lnet/minecraftforge/client/settings/KeyModifier;
+      51: invokevirtual #453                // Method net/minecraftforge/client/settings/KeyModifier.name:()Ljava/lang/String;
+      22: ldc_w         #280                // String That set no longer exists.
+      88: invokestatic  #459                // Method net/minecraftforge/client/settings/KeyModifier.valueOf:(Ljava/lang/String;)Lnet/minecraftforge/client/settings/KeyModifier;
+      96: invokestatic  #465                // Method com/mojang/blaze3d/platform/InputConstants.getKey:(Ljava/lang/String;)Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      99: invokevirtual #470                // Method net/minecraft/client/KeyMapping.setKeyModifierAndCode:(Lnet/minecraftforge/client/settings/KeyModifier;Lcom/mojang/blaze3d/platform/InputConstants$Key;)V
+       9: ldc           #206                // String key
+      27: ldc           #208                // String modifier
+      34: ldc_w         #494                // String .json
+--- com.example.keybindatlas.sets.KeybindSets
+      16: ldc           #25                 // String keybindatlas/sets
+      37: ldc           #55                 // String
+      14: ldc           #55                 // String
+      14: ldc           #99                 // String That set no longer exists.
+      17: ldc           #55                 // String
+      22: ldc           #55                 // String
+       0: ldc           #55                 // String
+== strings about blacklist/hidden/config paths

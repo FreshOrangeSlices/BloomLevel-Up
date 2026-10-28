@@ -1,0 +1,67 @@
+== mods.toml
+modLoader="javafml"
+loaderVersion="[47,)"
+license="Not specified"
+
+[[mods]]
+modId="zonis_companions"
+version="1.3.16"
+displayName="Zoni's Companions"
+displayURL="https://discord.com/invite/KWGakdBVwG"
+logoFile="logo.png"
+credits="Zoni"
+authors="Zoni"
+description="A mod that adds Companions!"
+
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
+[[dependencies.zonis_companions]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="NONE"
+    side="BOTH"
+
+
+
+== non-class files
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./assets/zonis_companions/lang/en_us.json
+./data/forge/tags/items/armors/boots.json
+./data/forge/tags/items/armors/chestplates.json
+./data/forge/tags/items/armors/helmets.json
+./data/forge/tags/items/armors/leggings.json
+./data/forge/tags/items/tools.json
+./data/zoni/tags/entity_types/companion.json
+./data/zoni/tags/entity_types/jba_companion.json
+./data/zoni/tags/entity_types/origins_companion.json
+./data/zoni/tags/entity_types/pokemon_companion.json
+./data/zoni/tags/entity_types/sao_companion.json
+./data/zonis_companions/recipes/advanced_craft.json
+./data/zonis_companions/recipes/arlecchino_summon_craft.json
+./data/zonis_companions/recipes/astolfo_summon_craft.json
+./data/zonis_companions/recipes/asuna_summon_craft.json
+./data/zonis_companions/recipes/bocchi_summon_craft.json
+./data/zonis_companions/recipes/companion_pendant_craft.json
+./data/zonis_companions/recipes/derek_summon_craft.json
+./data/zonis_companions/recipes/eugeo_summon_craft.json
+./data/zonis_companions/recipes/eula_summon_craft.json
+./data/zonis_companions/recipes/hu_tao_summon_craft.json
+./data/zonis_companions/recipes/jean_summon_craft.json
+./data/zonis_companions/recipes/jorge_summon_craft.json
+./data/zonis_companions/recipes/klee_summon_craft.json
+./data/zonis_companions/recipes/mash_summon_craft.json
+./data/zonis_companions/recipes/melusine_summon_craft.json
+./data/zonis_companions/recipes/nagako_summon_craft.json
+./data/zonis_companions/recipes/niomus_summon_craft.json
+./data/zonis_companions/recipes/pill_craft.json
+./data/zonis_companions/recipes/rain_summon_craft.json
+./data/zonis_companions/recipes/summon_item_craft.json
+./data/zonis_companions/recipes/ultimate_craft.json
+./data/zonis_companions/recipes/zani_summon_craft.json
+./pack.mcmeta
+== lang key/keybind entries
+== KeyMapping registrations
+== strings about blacklist/hidden/config paths

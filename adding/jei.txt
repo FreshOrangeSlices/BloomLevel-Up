@@ -1,0 +1,286 @@
+== mods.toml
+# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
+# The overall format is standard TOML format, v0.5.0.
+# Note that there are a couple of TOML lists in this file.
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+modLoader="javafml" #mandatory
+
+# A version range to match for said mod loader - for regular FML @Mod it will be the minecraft version (without the 1.)
+loaderVersion="[47,)" #mandatory
+
+# A URL to refer people to when problems occur with this mod
+issueTrackerURL="https://github.com/mezz/JustEnoughItems/issues?q=is%3Aissue" #optional
+
+# License
+license="The MIT License (MIT)"
+
+# A text field displayed in the mod UI
+#credits="Thanks for this example mod goes to Java" #optional
+
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]] #mandatory
+
+# The modid of the mod
+modId="jei" #mandatory
+
+# The version number of the mod
+version="15.74.0.230" #mandatory
+
+# A display name for the mod
+displayName="Just Enough Items" #mandatory
+
+# A URL for the "homepage" for this mod, displayed in the mod UI
+displayURL="https://www.curseforge.com/minecraft/mc-mods/jei" #optional
+
+# A URL to query for updates for this mod. See the JSON update specification <here>
+#updateJSONURL="" #optional
+
+# A text field displayed in the mod UI
+# credits="" #optional
+
+# A file name (in the root of the mod JAR) containing a logo for display
+logoFile="jei-icon.png"
+
+# A text field displayed in the mod UI
+authors="mezz" #optional
+
+# The description text for the mod (multi line!) (#mandatory)
+description='''
+JEI is an item and recipe viewing mod for Minecraft, built from the ground up for stability and performance.
+'''
+
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.jei]]
+    modId="mezz_config" #mandatory
+    mandatory=true #mandatory
+    versionRange="[0.6.3,1.0.0)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="AFTER"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+== non-class files
+./META-INF/LICENSE.txt
+./META-INF/MANIFEST.MF
+./META-INF/NOTICE.txt
+./META-INF/accesstransformer.cfg
+./META-INF/jarjar/metadata.json
+./META-INF/jarjar/mezz_config-1.20.1-forge-0.6.6.jar
+./META-INF/mods.toml
+./META-INF/services/mezz.jei.common.platform.IPlatformHelper
+./META-INF/services/mezz.jei.modshade.org.apache.lucene.analysis.TokenizerFactory
+./META-INF/services/mezz.jei.modshade.org.apache.lucene.codecs.Codec
+./META-INF/services/mezz.jei.modshade.org.apache.lucene.codecs.DocValuesFormat
+./META-INF/services/mezz.jei.modshade.org.apache.lucene.codecs.KnnVectorsFormat
+./META-INF/services/mezz.jei.modshade.org.apache.lucene.codecs.PostingsFormat
+./META-INF/services/mezz.jei.modshade.org.apache.lucene.index.SortFieldProvider
+./assets/jei/atlases/gui.json
+./assets/jei/gui/colors.json
+./assets/jei/lang/ar_sa.json
+./assets/jei/lang/bg_bg.json
+./assets/jei/lang/cs_cz.json
+./assets/jei/lang/de_de.json
+./assets/jei/lang/el_gr.json
+./assets/jei/lang/en_us.json
+./assets/jei/lang/es_ar.json
+./assets/jei/lang/es_ec.json
+./assets/jei/lang/es_es.json
+./assets/jei/lang/fi_fi.json
+./assets/jei/lang/fil_ph.json
+./assets/jei/lang/fr_fr.json
+./assets/jei/lang/he_il.json
+./assets/jei/lang/hu_hu.json
+./assets/jei/lang/id_id.json
+./assets/jei/lang/it_it.json
+./assets/jei/lang/ja_jp.json
+./assets/jei/lang/kk_kz.json
+./assets/jei/lang/ko_kr.json
+./assets/jei/lang/lt_lt.json
+./assets/jei/lang/lzh.json
+./assets/jei/lang/no_no.json
+./assets/jei/lang/pl_pl.json
+./assets/jei/lang/pt_br.json
+./assets/jei/lang/pt_pt.json
+./assets/jei/lang/ru_ru.json
+./assets/jei/lang/sv_se.json
+./assets/jei/lang/tr_tr.json
+./assets/jei/lang/uk_ua.json
+./assets/jei/lang/vi_vn.json
+./assets/jei/lang/zh_cn.json
+./assets/jei/lang/zh_tw.json
+./pack.mcmeta
+== lang key/keybind entries
+  "jei.key.category.overlays": "JEI (Overlays)",
+  "key.jei.toggleOverlay": "Show/Hide JEI Overlays",
+  "key.jei.toggleOverlay.description": "Show or hide the ingredient and bookmark overlays.",
+  "key.jei.toggleOverlay.context": "a GUI is open",
+  "key.jei.focusSearch": "Select Search Bar",
+  "key.jei.focusSearch.description": "Move keyboard focus to the JEI search field.",
+  "key.jei.focusSearch.context": "a GUI is open",
+  "key.jei.previousPage": "Previous Page",
+  "key.jei.previousPage.description": "Go to the previous page in JEI overlay lists.",
+  "key.jei.previousPage.context": "a GUI is open",
+  "key.jei.nextPage": "Next Page",
+  "key.jei.nextPage.description": "Go to the next page in JEI overlay lists.",
+  "key.jei.nextPage.context": "a GUI is open",
+  "key.jei.toggleBookmarkOverlay": "Show/Hide Bookmarked Ingredients",
+  "key.jei.toggleBookmarkOverlay.description": "Show or hide the bookmarked ingredients overlay.",
+  "key.jei.toggleBookmarkOverlay.context": "a GUI is open",
+  "jei.key.category.recipe.gui": "JEI (Recipes)",
+  "key.jei.recipeBack": "Previous Recipe",
+  "key.jei.recipeBack.description": "Go back to the previous recipe lookup.",
+  "key.jei.recipeBack.context": "a GUI is open",
+  "key.jei.recipeForward": "Next Recipe",
+  "key.jei.recipeForward.description": "Go forward to the next recipe lookup.",
+  "key.jei.recipeForward.context": "a GUI is open",
+  "key.jei.previousCategory": "Previous Recipe Category",
+  "key.jei.previousCategory.description": "Move to the previous recipe category.",
+  "key.jei.previousCategory.context": "a GUI is open",
+  "key.jei.nextCategory": "Next Recipe Category",
+  "key.jei.nextCategory.description": "Move to the next recipe category.",
+  "key.jei.nextCategory.context": "a GUI is open",
+  "key.jei.previousRecipePage": "Previous Recipe Page",
+grep: write error: Broken pipe
+== KeyMapping registrations
+--- mezz.jei.api.gui.builder.ITooltipBuilder
+--- mezz.jei.api.gui.inputs.IJeiUserInput
+  public abstract com.mojang.blaze3d.platform.InputConstants$Key getKey();
+--- mezz.jei.api.runtime.IJeiKeyMapping
+  public abstract boolean isActiveAndMatches(com.mojang.blaze3d.platform.InputConstants$Key);
+--- mezz.jei.api.runtime.IJeiKeyMappings
+--- mezz.jei.api.runtime.IJeiRuntime
+--- mezz.jei.common.Internal
+      11: ldc           #65                 // String Server Connection has not been created yet.
+      11: ldc           #79                 // String Key Mappings have not been created yet.
+      11: ldc           #112                // String Jei Client Configs have not been created yet.
+      11: ldc           #143                // String Jei Runtime has not been created yet.
+      11: ldc           #151                // String JEI restart handler has not been created yet.
+      14: ldc2_w        #275                // long 10l
+      20: ldc_w         #284                // String JEI Delayed Executor
+--- mezz.jei.common.gui.JeiTooltip
+      61: ldc           #167                // String JEI Debug:
+      25: ldc_w         #332                // String Tried to add null tooltip text
+      25: ldc_w         #341                // String Tried to add null tooltip component
+      19: ldc_w         #453                // String \n
+      22: ldc_w         #455                // String [\n
+      25: ldc_w         #457                // String \n]
+      74: ldc_w         #509                // String Rendering ingredient tooltip
+      86: ldc_w         #517                // String tooltip
+      92: ldc_w         #525                // String value
+--- mezz.jei.common.gui.RecipeSlotOptionsTooltipComponent
+      32: ldc           #52                 // String jei.tooltip.recipe.slot.options
+      15: bipush        10
+      39: bipush        10
+--- mezz.jei.common.gui.elements.AbstractRecipeButtonWidget
+      54: ldc           #95                 // String Button width and height must be positive
+      28: invokeinterface #110,  1          // InterfaceMethod mezz/jei/api/gui/inputs/IJeiUserInput.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      33: invokevirtual #114                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      36: getstatic     #118                // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      44: invokeinterface #110,  1          // InterfaceMethod mezz/jei/api/gui/inputs/IJeiUserInput.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      49: invokevirtual #122                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+      80: ldc           #249                // float 0.5f
+      82: ldc           #249                // float 0.5f
+       2: invokeinterface #110,  1          // InterfaceMethod mezz/jei/api/gui/inputs/IJeiUserInput.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       7: invokevirtual #114                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      10: getstatic     #118                // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      18: invokeinterface #110,  1          // InterfaceMethod mezz/jei/api/gui/inputs/IJeiUserInput.getKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      23: invokevirtual #122                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+--- mezz.jei.common.input.IInputTarget
+--- mezz.jei.common.input.IInternalKeyMappings
+  public abstract mezz.jei.api.runtime.IJeiKeyMapping getToggleWildcardHideIngredient();
+--- mezz.jei.common.input.UserInput
+  private final com.mojang.blaze3d.platform.InputConstants$Key key;
+       6: invokestatic  #44                 // Method com/mojang/blaze3d/platform/InputConstants.m_84827_:(II)Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      32: invokespecial #62                 // Method "<init>":(Lcom/mojang/blaze3d/platform/InputConstants$Key;DDILmezz/jei/common/input/InputPhase;I)V
+      13: getstatic     #74                 // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      18: invokevirtual #78                 // Method com/mojang/blaze3d/platform/InputConstants$Type.m_84895_:(I)Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      26: invokespecial #81                 // Method "<init>":(Lcom/mojang/blaze3d/platform/InputConstants$Key;DDILmezz/jei/common/input/InputPhase;)V
+  public mezz.jei.common.input.UserInput(com.mojang.blaze3d.platform.InputConstants$Key, double, double, int, mezz.jei.common.input.InputPhase);
+      10: invokespecial #62                 // Method "<init>":(Lcom/mojang/blaze3d/platform/InputConstants$Key;DDILmezz/jei/common/input/InputPhase;I)V
+  private mezz.jei.common.input.UserInput(com.mojang.blaze3d.platform.InputConstants$Key, double, double, int, mezz.jei.common.input.InputPhase, int);
+      14: putfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+  public com.mojang.blaze3d.platform.InputConstants$Key getKey();
+       1: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       7: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      35: invokespecial #62                 // Method "<init>":(Lcom/mojang/blaze3d/platform/InputConstants$Key;DDILmezz/jei/common/input/InputPhase;I)V
+       1: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       4: invokevirtual #120                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       7: getstatic     #74                 // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       1: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       4: invokevirtual #120                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       7: getstatic     #74                 // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       8: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      11: invokevirtual #126                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+       2: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       5: invokeinterface #140,  2          // InterfaceMethod mezz/jei/api/runtime/IJeiKeyMapping.isActiveAndMatches:(Lcom/mojang/blaze3d/platform/InputConstants$Key;)Z
+       1: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       4: invokevirtual #120                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       8: getstatic     #163                // Field com/mojang/blaze3d/platform/InputConstants$Type.KEYSYM:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      12: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      24: invokevirtual #126                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+      46: invokevirtual #120                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      49: getstatic     #170                // Field com/mojang/blaze3d/platform/InputConstants$Type.SCANCODE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      58: getstatic     #173                // Field com/mojang/blaze3d/platform/InputConstants.f_84822_:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      61: invokevirtual #126                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+      65: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      68: invokevirtual #126                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+      21: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      24: invokevirtual #126                // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+       8: ldc           #186                // String phase
+      15: getfield      #92                 // Field key:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+      18: invokestatic  #196                // Method mezz/jei/common/input/KeyNameUtil.getKeyDisplayName:(Lcom/mojang/blaze3d/platform/InputConstants$Key;)Lnet/minecraft/network/chat/Component;
+--- mezz.jei.common.input.handlers.InputGroup
+--- mezz.jei.common.input.interaction.ApiInputAdapter
+--- mezz.jei.common.input.keys.AbstractJeiKeyMappingBuilder
+--- mezz.jei.common.input.keys.IJeiKeyMappingBuilder
+  public abstract mezz.jei.common.input.keys.IJeiKeyMappingBuilder setContext(mezz.jei.common.input.keys.JeiKeyConflictContext);
+  public abstract mezz.jei.common.input.keys.IJeiKeyMappingBuilder setModifier(mezz.jei.common.input.keys.JeiKeyModifier);
+--- mezz.jei.common.input.keys.IJeiKeyMappingCategoryBuilder
+--- mezz.jei.common.input.keys.IJeiKeyMappingInternal$1
+  static final int[] $SwitchMap$com$mojang$blaze3d$platform$InputConstants$Type;
+       0: invokestatic  #22                 // Method com/mojang/blaze3d/platform/InputConstants$Type.values:()[Lcom/mojang/blaze3d/platform/InputConstants$Type;
+       7: putstatic     #24                 // Field $SwitchMap$com$mojang$blaze3d$platform$InputConstants$Type:[I
+      10: getstatic     #28                 // Field com/mojang/blaze3d/platform/InputConstants$Type.KEYSYM:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      13: invokevirtual #32                 // Method com/mojang/blaze3d/platform/InputConstants$Type.ordinal:()I
+      22: getstatic     #24                 // Field $SwitchMap$com$mojang$blaze3d$platform$InputConstants$Type:[I
+      25: getstatic     #37                 // Field com/mojang/blaze3d/platform/InputConstants$Type.MOUSE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      28: invokevirtual #32                 // Method com/mojang/blaze3d/platform/InputConstants$Type.ordinal:()I
+      37: getstatic     #24                 // Field $SwitchMap$com$mojang$blaze3d$platform$InputConstants$Type:[I
+      40: getstatic     #40                 // Field com/mojang/blaze3d/platform/InputConstants$Type.SCANCODE:Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      43: invokevirtual #32                 // Method com/mojang/blaze3d/platform/InputConstants$Type.ordinal:()I
+--- mezz.jei.common.input.keys.IJeiKeyMappingInternal
+  public static boolean isKeyDown(com.mojang.blaze3d.platform.InputConstants$Key);
+       0: getstatic     #25                 // Field com/mojang/blaze3d/platform/InputConstants.f_84822_:Lcom/mojang/blaze3d/platform/InputConstants$Key;
+       4: invokevirtual #29                 // Method com/mojang/blaze3d/platform/InputConstants$Key.equals:(Ljava/lang/Object;)Z
+      23: getstatic     #49                 // Field mezz/jei/common/input/keys/IJeiKeyMappingInternal$1.$SwitchMap$com$mojang$blaze3d$platform$InputConstants$Type:[I
+      27: invokevirtual #53                 // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84868_:()Lcom/mojang/blaze3d/platform/InputConstants$Type;
+      30: invokevirtual #57                 // Method com/mojang/blaze3d/platform/InputConstants$Type.ordinal:()I
+      63: invokevirtual #66                 // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+      66: invokestatic  #72                 // Method org/lwjgl/glfw/GLFW.glfwGetMouseButton:(JI)I
+      79: invokevirtual #66                 // Method com/mojang/blaze3d/platform/InputConstants$Key.m_84873_:()I
+      50: invokestatic  #79                 // Method com/mojang/blaze3d/platform/InputConstants.m_84830_:(JI)Z
+      55: sipush        343
+      58: sipush        347
+      66: sipush        342
+      69: sipush        346
+      77: sipush        341
+      80: sipush        345
+      88: sipush        340
+      91: sipush        344
+       2: invokestatic  #79                 // Method com/mojang/blaze3d/platform/InputConstants.m_84830_:(JI)Z
+      10: invokestatic  #79                 // Method com/mojang/blaze3d/platform/InputConstants.m_84830_:(JI)Z
+--- mezz.jei.common.input.keys.IJeiKeyMappingWithExtraModifiers
+  public abstract boolean isActiveAndMatchesAllowingExtraModifiers(com.mojang.blaze3d.platform.InputConstants$Key);
+== strings about blacklist/hidden/config paths
+--- ./mezz/jei/common/config/ClientConfig.class: !Lmezz/jei/common/config/GiveMode; #mezz/jei/common/config/ClientConfig $mezz/jei/common/config/IClientConfig &Lmezz/jei/common/config/IClientConfig; (()Lmezz/jei/common/config/IClientConfig; (Ljava/lang/String;Ljava/lang/Object;Lnet/mezzdev/config/api/value/serializer/IConfigValueSerializer;)Lnet/mezzdev/config/api/value/builder/IConfigValueBuilder; (Ljava/lang/String;Ljava/lang/String;Lnet/mezzdev/config/api/value/serializer/IConfigValueSerializer;Ljava/util/function/Function;)Lnet/mezzdev/config/api/value/builder/IConfigValueBuilder; (Lnet/mezzdev/config/api/schema/builder/IConfigEditorCategoryBuilder;)Lnet/mezzdev/config/api/value/builder/IConfigValueBuilder; (mezz/jei/common/config/RecipeSorterStage (mezz/jei/common/config/SearchBarPosition )mezz/jei/common/config/HistoryDisplaySide *Lmezz/jei/common/config/RecipeSorterStage; *mezz/jei/common/config/BookmarkAddPosition *mezz/jei/common/config/IngredientSortStage +Lmezz/jei/common/config/HistoryDisplaySide; +Lnet/mezzdev/config/api/value/IConfigValue; ,Lmezz/jei/common/config/BookmarkAddPosition; -()Lnet/mezzdev/config/api/value/IConfigValue; -(Z)Lmezz/jei/common/config/SearchBarPosition; -mezz/jei/common/config/BookmarkTooltipFeature .mezz/jei/common/config/RecipeGuiNavigationMode /(Z)Lmezz/jei/common/config/BookmarkAddPosition; /Lmezz/jei/common/config/BookmarkTooltipFeature; 0Lmezz/jei/common/config/RecipeGuiNavigationMode; 3mezz/jei/common/config/legacy/LegacyEnumSerializers 
+--- ./mezz/jei/common/config/IClientConfig.class: #()Lmezz/jei/common/config/GiveMode; $mezz/jei/common/config/IClientConfig (mezz/jei/common/config/RecipeSorterStage (mezz/jei/common/config/SearchBarPosition )mezz/jei/common/config/HistoryDisplaySide )net/mezzdev/config/api/value/IConfigValue *(Lmezz/jei/common/config/IClientConfig;Z)V *mezz/jei/common/config/BookmarkAddPosition -()Lmezz/jei/common/config/HistoryDisplaySide; -()Lnet/mezzdev/config/api/value/IConfigValue; -(Lmezz/jei/common/config/RecipeSorterStage;)V -mezz/jei/common/config/BookmarkTooltipFeature /Lmezz/jei/common/config/BookmarkTooltipFeature; 7(Lmezz/jei/common/config/IClientConfig;)Ljava/util/Set; =()Ljava/util/Set<Lmezz/jei/common/config/RecipeSorterStage;>; =net/mezzdev/config/api/value/change/IAppliedConfigValueChange @()Ljava/util/List<Lmezz/jei/common/config/IngredientSortStage;>; B()Lnet/mezzdev/config/api/value/IConfigValue<Ljava/lang/Boolean;>; B()Lnet/mezzdev/config/api/value/IConfigValue<Ljava/lang/Integer;>; B(Lnet/mezzdev/config/api/value/change/IAppliedConfigValueChange;)V C()Ljava/util/List<Lmezz/jei/common/config/BookmarkTooltipFeature;>; K(Lnet/mezzdev/config/api/value/IConfigValue;Ljava/util/function/Consumer;)V L(Ljava/util/function/Consumer<Lmezz/jei/common/config/SearchBarPosition;>;)V M(Ljava/util/function/Consumer<Lmezz/jei/common/config/HistoryDisplaySide;>;)V P()Lnet/mezzdev/config/api/value/IConfigValue<Lmezz/jei/common/config/GiveMode;>; 
+--- ./mezz/jei/common/util/ErrorUtil.class: %Unique Id for JEI (for JEI Blacklist) 
+--- ./mezz/jei/gui/startup/JeiGuiStarter.class: "mezz/jei/gui/startup/GuiConfigData #mezz/jei/gui/config/IBookmarkConfig $mezz/jei/common/config/IClientConfig %mezz/jei/common/config/IClientConfigs '()Lmezz/jei/gui/config/IBookmarkConfig; (()Lmezz/jei/common/config/IClientConfig; (Lmezz/jei/api/recipe/IRecipeManager;Lmezz/jei/api/recipe/IFocusFactory;Lmezz/jei/api/runtime/IIngredientManager;Lnet/minecraft/core/RegistryAccess;Lmezz/jei/gui/config/IBookmarkConfig;Lmezz/jei/common/config/IClientConfig;Lmezz/jei/api/helpers/IGuiHelper;)V (Lmezz/jei/api/recipe/IRecipeManager;Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/api/recipe/IFocusFactory;Lmezz/jei/common/config/IClientConfig;Lmezz/jei/gui/config/ILookupHistoryConfig;Lmezz/jei/common/transfer/RecipeTransferService;)V (Lmezz/jei/api/registration/IRuntimeRegistration;Lmezz/jei/gui/config/JeiGuiSortingConfigData;)Lmezz/jei/gui/startup/JeiEventHandlers; (Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/api/runtime/IScreenHelper;Lmezz/jei/gui/overlay/ingredients/IIngredientGridSource;Lmezz/jei/gui/overlay/ingredients/IIngredientGridSource;Lmezz/jei/gui/filter/IFilterTextSource;Lmezz/jei/common/input/IInternalKeyMappings;Lmezz/jei/common/config/IIngredientGridConfig;Lmezz/jei/common/config/IClientConfig;Lmezz/jei/common/config/IClientToggleState;Lmezz/jei/common/network/IConnectionToServer;Lmezz/jei/common/config/IIngredientFilterConfig;Lmezz/jei/common/gui/textures/Textures;Lmezz/jei/api/helpers/IColorHelper;Lmezz/jei/gui/search/ISearchCompletionProvider;)Lmezz/jei/gui/overlay/IngredientListOverlay; (Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/common/config/IIngredientFilterConfig;Lmezz/jei/api/helpers/IModIdHelper;)Ljava/util/List; (Lmezz/jei/common/config/IClientConfig;Lmezz/jei/gui/config/ModNameSortingConfig;Lmezz/jei/gui/config/IngredientTypeSortingConfig;Lmezz/jei/api/runtime/IIngredientManager;)Ljava/util/function/Function; (Lmezz/jei/common/config/IClientConfig;Lmezz/jei/gui/config/ModNameSortingConfig;Lmezz/jei/gui/config/IngredientTypeSortingConfig;Lmezz/jei/api/runtime/IIngredientManager;Ljava/util/List;)Ljava/util/Comparator; (Lmezz/jei/gui/filter/IFilterTextSource;Lmezz/jei/common/config/IClientConfig;Lmezz/jei/common/config/IIngredientFilterConfig;Lmezz/jei/api/runtime/IIngredientManager;Ljava/util/function/Function;Ljava/util/List;Lmezz/jei/api/helpers/IModIdHelper;Lmezz/jei/api/runtime/IIngredientVisibility;Lmezz/jei/gui/config/IngredientTypeSortingConfig;Lmezz/jei/api/helpers/IColorHelper;Lmezz/jei/api/search/ISearchStorageBuilderFactory;Lmezz/jei/common/config/IClientToggleState;)V (mezz/jei/gui/config/ModNameSortingConfig )()Lmezz/jei/common/config/IClientConfigs; )net/mezzdev/config/api/value/IConfigValue *(Lmezz/jei/common/config/IClientConfigs;)V ,()Lmezz/jei/gui/config/ILookupHistoryConfig; ,()Lmezz/jei/gui/config/ModNameSortingConfig; -()Lmezz/jei/common/config/IClientToggleState; -()Lnet/mezzdev/config/api/value/IConfigValue; /mezz/jei/gui/config/IngredientTypeSortingConfig 0()Lmezz/jei/common/config/IIngredientGridConfig; 2()Lmezz/jei/common/config/IIngredientFilterConfig; 
+--- ./mezz/jei/library/config/EditModeConfig$FileSerializer.class: 	blacklist "Saved blacklist config to file: {} %Failed to load blacklist from file {} &mezz/jei/library/config/EditModeConfig *Failed to save blacklist config to file {} +(Lmezz/jei/library/config/EditModeConfig;)V ,Failed to load legacy blacklist from file {} .Backed up legacy blacklist config file to '{}' .json /mezz/jei/common/config/file/JsonArrayFileHelper 2mezz/jei/library/config/EditModeConfig$ISerializer 3Failed to back up legacy blacklist config file '{}' 5mezz/jei/library/config/EditModeConfig$FileSerializer BFailed to load blacklist entry from file {}, expected a string: FEncountered error when loading the blacklist config from file {} X(Lmezz/jei/library/config/EditModeConfig$FileSerializer;)Ljava/util/function/BiConsumer; lambda$loadJsonBlacklist$0 loadJsonBlacklist loadLegacyBlacklist 
+--- ./mezz/jei/library/config/EditModeConfig.class: 	blacklist !isIngredientHiddenUsingConfigFile "getIngredientHiddenUsingConfigFile &addIngredientToConfigBlacklistInternal &mezz/jei/library/config/EditModeConfig (mezz/jei/library/config/EditModeConfig$1 +(Lmezz/jei/library/config/EditModeConfig;)V 2mezz/jei/library/config/EditModeConfig$ISerializer 4Lmezz/jei/library/config/EditModeConfig$ISerializer; 5mezz/jei/library/config/EditModeConfig$FileSerializer `(Lmezz/jei/library/config/EditModeConfig$ISerializer;Lmezz/jei/api/runtime/IIngredientManager;)V addIngredientToConfigBlacklist getIngredientOnConfigBlacklist isIngredientOnConfigBlacklist 
+--- ./mezz/jei/library/ingredients/IngredientBlacklistInternal.class:  IngredientBlacklistInternal.java (Lmezz/jei/library/ingredients/IngredientBlacklistInternal;Lmezz/jei/api/ingredients/ITypedIngredient;Lmezz/jei/api/ingredients/IIngredientHelper;)Ljava/util/function/Predicate; 8mezz/jei/library/ingredients/IngredientBlacklistInternal hiddenIngredientUids isIngredientBlacklistedByApi isIngredientHidden lambda$updateHiddenContexts$2 updateHiddenContexts 
+--- ./mezz/jei/library/ingredients/IngredientVisibility.class: 	blacklist !isIngredientHiddenUsingConfigFile &mezz/jei/library/config/EditModeConfig (Lmezz/jei/library/config/EditModeConfig; (Lmezz/jei/library/ingredients/IngredientBlacklistInternal;Lmezz/jei/common/config/IClientToggleState;Lmezz/jei/library/config/EditModeConfig;Lmezz/jei/api/runtime/IIngredientManager;)V )mezz/jei/common/config/IClientToggleState +Lmezz/jei/common/config/IClientToggleState; 8mezz/jei/library/ingredients/IngredientBlacklistInternal :Lmezz/jei/library/ingredients/IngredientBlacklistInternal; hidden isHiddenFromRecipeViewersByTags isIngredientBlacklistedByApi unhidden 
+--- ./mezz/jei/library/load/PluginLoader.class: "mezz/jei/library/startup/StartData (Ljava/util/List;Lcom/google/common/collect/ImmutableListMultimap;Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/library/config/RecipeCategorySortingConfig;Lmezz/jei/api/runtime/IIngredientVisibility;)V (Ljava/util/List;Lmezz/jei/library/plugins/vanilla/VanillaPlugin;Lmezz/jei/library/config/RecipeCategorySortingConfig;Lmezz/jei/library/runtime/JeiHelpers;Lmezz/jei/api/runtime/IIngredientManager;)Lmezz/jei/library/recipes/RecipeManager; (Ljava/util/List<Lmezz/jei/api/IModPlugin;>;Lmezz/jei/library/plugins/vanilla/VanillaPlugin;Lmezz/jei/library/config/RecipeCategorySortingConfig;Lmezz/jei/library/runtime/JeiHelpers;Lmezz/jei/api/runtime/IIngredientManager;)Lmezz/jei/library/recipes/RecipeManager; (Lmezz/jei/library/config/IModIdFormatConfig;Lmezz/jei/api/runtime/IIngredientManager;Ljava/util/function/Function;Lcom/google/common/collect/ImmutableSetMultimap;)V (Lmezz/jei/library/ingredients/IngredientBlacklistInternal;Lmezz/jei/common/config/IClientToggleState;Lmezz/jei/library/config/EditModeConfig;Lmezz/jei/api/runtime/IIngredientManager;)V (Lmezz/jei/library/startup/StartData;Lmezz/jei/library/ingredients/subtypes/SubtypeManager;Lmezz/jei/api/helpers/IColorHelper;)Lmezz/jei/library/ingredients/IngredientManager; -()Lmezz/jei/common/config/IClientToggleState; 8mezz/jei/library/ingredients/IngredientBlacklistInternal R(Lcom/google/common/collect/ImmutableSetMultimap;Lmezz/jei/library/config/IModIdFormatConfig;Lmezz/jei/api/helpers/IColorHelper;Lmezz/jei/library/config/EditModeConfig;Lmezz/jei/library/focus/FocusFactory;Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/library/ingredients/subtypes/SubtypeManager;)Lmezz/jei/library/runtime/JeiHelpers; V(Lmezz/jei/library/startup/StartData;)Lcom/google/common/collect/ImmutableSetMultimap; \(Lmezz/jei/library/startup/StartData;)Lmezz/jei/library/ingredients/subtypes/SubtypeManager; x(Lcom/google/common/collect/ImmutableSetMultimap<Ljava/lang/String;Ljava/lang/String;>;Lmezz/jei/library/config/IModIdFormatConfig;Lmezz/jei/api/helpers/IColorHelper;Lmezz/jei/library/config/EditModeConfig;Lmezz/jei/library/focus/FocusFactory;Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/library/ingredients/subtypes/SubtypeManager;)Lmezz/jei/library/runtime/JeiHelpers; |(Lmezz/jei/library/startup/StartData;)Lcom/google/common/collect/ImmutableSetMultimap<Ljava/lang/String;Ljava/lang/String;>; 
+--- ./mezz/jei/library/load/registration/GuiHandlerRegistration.class: ghostIngredientGuiBlacklist 
+--- ./mezz/jei/library/plugins/vanilla/ingredients/ItemStackListFactory.class: $mezz/jei/common/config/IClientConfig %mezz/jei/common/config/IClientConfigs (()Lmezz/jei/common/config/IClientConfig; )()Lmezz/jei/common/config/IClientConfigs; )net/mezzdev/config/api/value/IConfigValue -()Lnet/mezzdev/config/api/value/IConfigValue; HIDDEN_FROM_RECIPE_VIEWERS qAdded {}/{} new items from the item registry (this is run because ShowHiddenItems is set to true in JEI's config) rAdded {}/{} new items from the block registry (this is run because ShowHiddenItems is set to true in JEI's config) showHiddenIngredients 
+--- ./mezz/jei/library/startup/JeiStarter.class: "mezz/jei/library/startup/StartData $Lmezz/jei/library/startup/StartData; $mezz/jei/common/config/ClientConfigs $mezz/jei/common/config/IClientConfig %mezz/jei/library/config/JeiConfigData &Lmezz/jei/common/config/ClientConfigs; &mezz/jei/library/config/EditModeConfig '(Lmezz/jei/library/startup/StartData;)V (()Lmezz/jei/common/config/ClientConfigs; (()Lmezz/jei/common/config/IClientConfig; (Ljava/util/List;Lmezz/jei/library/plugins/vanilla/VanillaPlugin;Lmezz/jei/library/config/RecipeCategorySortingConfig;Lmezz/jei/library/runtime/JeiHelpers;Lmezz/jei/api/runtime/IIngredientManager;)Lmezz/jei/library/recipes/RecipeManager; (Lmezz/jei/api/recipe/IRecipeManager;Lmezz/jei/api/runtime/IIngredientManager;Lmezz/jei/api/runtime/IJeiKeyMappings;Lmezz/jei/api/helpers/IJeiHelpers;Lmezz/jei/api/runtime/IScreenHelper;Lmezz/jei/api/recipe/transfer/IRecipeTransferManager;Lmezz/jei/api/runtime/IEditModeConfig;Lmezz/jei/api/runtime/IIngredientListOverlay;Lmezz/jei/api/runtime/IBookmarkOverlay;Lmezz/jei/api/runtime/IBookmarkManager;Lmezz/jei/api/runtime/IRecipesGui;Lmezz/jei/api/runtime/IIngredientFilter;Lmezz/jei/api/runtime/config/IJeiConfigManager;)V (Lmezz/jei/library/startup/StartData;Lmezz/jei/library/ingredients/subtypes/SubtypeManager;Lmezz/jei/api/helpers/IColorHelper;)Lmezz/jei/library/ingredients/IngredientManager; )()Lmezz/jei/library/config/JeiConfigData; )Lmezz/jei/library/config/ColorNameConfig; )net/mezzdev/config/api/value/IConfigValue *(Lmezz/jei/common/config/IClientConfigs;)V +()Lmezz/jei/library/config/ColorNameConfig; +Lmezz/jei/library/config/ModIdFormatConfig; +mezz/jei/common/config/ConfigManagerAdapter ,(Lmezz/jei/library/config/ColorNameConfig;)V -()Lmezz/jei/library/config/ModIdFormatConfig; -()Lnet/mezzdev/config/api/value/IConfigValue; /Lmezz/jei/api/runtime/config/IJeiConfigManager; 2(Lmezz/jei/api/runtime/config/IJeiConfigManager;)V 

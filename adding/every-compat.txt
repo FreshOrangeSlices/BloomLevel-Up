@@ -1,0 +1,107 @@
+== mods.toml
+
+modLoader="javafml" #mandatory
+loaderVersion = "[40,)"
+
+license = "Supplementaries Team License v.1.1"
+issueTrackerURL = "https://github.com/MehVahdJukaar/WoodGood/issues"
+
+[[mods]] #mandatory
+modId = "everycomp"
+version = "1.20-2.9.28"
+displayName = "Every Compat"
+logoFile = "icon.png"
+authors = "MehVahdJukaar, Xel'Bayria, WenXin2"
+credits = "Plantkillable, Frogbirdd, Pau_1eal"
+description = '''Ultimate Wood Compat Mod'''
+modUrl = "https://www.curseforge.com/minecraft/mc-mods/every-compat"
+itemIcon = "everycomp:all_woods" #catalogue icon
+
+
+[[dependencies.everycomp]] #optional
+modId="forge" #mandatory
+mandatory=true #mandatory
+versionRange="[41.0.100,)" #mandatory
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.everycomp]]
+modId="minecraft"
+mandatory=true
+versionRange = "[1.20,1.21)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.everycomp]]
+modId="moonlight"
+mandatory=true
+versionRange = "[1.20-2.16.35,]"
+ordering="NONE"
+side="BOTH"
+
+# ----------------------------------------------------- MODS -----------------------------------------------------------
+
+[[dependencies.everycomp]] #optional
+modId="create"
+mandatory=false
+versionRange="[6.0.0,)" #mandatory
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.everycomp]] #optional
+modId="mcwbridges"
+mandatory=false
+versionRange="[3.0.0,)" #mandatory
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.everycomp]] #optional
+modId="mcwfences"
+mandatory=false
+versionRange="[1.1.2,)" #mandatory
+== non-class files
+./META-INF/MANIFEST.MF
+./META-INF/accesstransformer.cfg
+./META-INF/jarjar/metadata.json
+./META-INF/jars/mixinextras-forge-0.4.1.jar
+./META-INF/mods.toml
+./assets/everycomp/lang/de_de.json
+./assets/everycomp/lang/en_us.json
+./assets/everycomp/lang/es_cl.json
+./assets/everycomp/lang/es_mx.json
+./assets/everycomp/lang/ja_jp.json
+./assets/everycomp/lang/ru_ru.json
+./assets/everycomp/lang/zh_cn.json
+./assets/everycomp/recolorable_textures/test.disabled-json
+./data/everycomp/tags/items/chipped_wooden_stuff.json
+./data/everycomp/template_recipes/botanypots/crop/leaves_from_quark_hedge_crop.json
+./data/everycomp/template_recipes/example.json.disabled
+./data/everycomp/template_recipes/xerca/carving/carved_warped_1_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_1_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_2_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_2_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_3_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_3_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_4_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_4_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_5_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_5_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_6_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_6_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_7_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_7_from_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_8_from_stripped_warped_stem_carving.json
+./data/everycomp/template_recipes/xerca/carving/carved_warped_8_from_warped_stem_carving.json
+./everycomp-common-refmap.json
+./everycomp-common.mixins.json
+./pack.mcmeta
+== lang key/keybind entries
+== KeyMapping registrations
+== strings about blacklist/hidden/config paths
+--- ./net/mehvahdjukaar/every_compat/EveryCompat.class: >net/mehvahdjukaar/moonlight/api/resources/pack/DynamicDataPack ENTRY_SETS_BLACKLIST MODULES_BLACKLIST isModuleNotBlacklisted 
+--- ./net/mehvahdjukaar/every_compat/configs/ECConfigs.class: Enables the generation of dynamic assets. This is required for the mod to work properly. Turn off if you chose to add all the generated assets via datapack manually. This can speedup boot times for modpacks. Note that the generated assets will depend on loaded datapacks 
+--- ./net/mehvahdjukaar/every_compat/configs/UnsafeDisablerConfigs.class: 	blacklist     EXAMPLE: blacklist = [     NOTE: blacklisting a Module will be applied to Wood-Good, Stone-Zone, Gems-Realm BLOCKS_BLACKLIST ENTRY_SETS_BLACKLIST LEAVES_TYPES_BLACKLIST MODULES_BLACKLIST S    EXAMPLE: blacklist = [ WOOD_TYPES_BLACKLIST c    EXAMPLE: blacklist = [ 
+--- ./net/mehvahdjukaar/every_compat/misc/HardcodedBlockType.class: BLOCKS_BLACKLIST ENTRY_SETS_BLACKLIST LEAVES_TYPES_BLACKLIST WOOD_TYPES_BLACKLIST 
+--- ./net/mehvahdjukaar/every_compat/modules/forge/lightmans_currency/LightmansCurrencyModule.class: carryon:block_blacklist 
+--- ./net/mehvahdjukaar/every_compat/modules/forge/workshop/WorkshopForHandsomeAdventurerModule.class: 	blacklist (Lnet/mehvahdjukaar/moonlight/api/resources/SimpleTagBuilder;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/mehvahdjukaar/moonlight/api/resources/pack/ResourceSink;)V 6Lnet/minecraft/server/packs/resources/ResourceManager; TAG_PACKINGTAPE_BLACKLIST blacklistBlock te_blacklist v(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/mehvahdjukaar/moonlight/api/resources/pack/ResourceSink;)V 
+--- ./net/mehvahdjukaar/every_compat/modules/furnish/FurnishModule.class: (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/mehvahdjukaar/moonlight/api/resources/pack/ResourceSink;)Ljava/util/function/BiConsumer; (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/mehvahdjukaar/moonlight/api/resources/pack/ResourceSink;Lnet/mehvahdjukaar/moonlight/api/set/wood/WoodType;Lnet/minecraft/world/level/block/Block;)V (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/resources/ResourceLocation;)Lnet/mehvahdjukaar/moonlight/api/resources/textures/TextureImage; (Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/world/level/block/Block;Ljava/util/function/Predicate;)Lnet/minecraft/resources/ResourceLocation; 4net/minecraft/server/packs/resources/ResourceManager 6Lnet/minecraft/server/packs/resources/ResourceManager; crate_blacklist h(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/lang/String;Ljava/util/function/Supplier;)V v(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/mehvahdjukaar/moonlight/api/resources/pack/ResourceSink;)V 

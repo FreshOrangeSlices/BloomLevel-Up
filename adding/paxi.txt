@@ -1,0 +1,43 @@
+== mods.toml
+modLoader="javafml" #mandatory
+loaderVersion="[46,)"
+license="LGPLv3"
+issueTrackerURL="https://github.com/yungnickyoung/Paxi/issues"
+
+[[mods]]
+    modId="paxi"
+    version="1.20-Forge-4.0"
+    displayName="Paxi"
+    credits="Thanks so much to all my patrons!"
+    authors="YUNGNICKYOUNG"
+    description="Drag-and-drop your data packs and let Paxi do the rest! Global data packs made easy."
+    logoFile="icon.png"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/paxi"
+
+[[dependencies.paxi]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20,1.21)"
+
+[[dependencies.paxi]]
+    modId="forge"
+    mandatory=true
+    versionRange="[46.0.2,)"
+
+[[dependencies.paxi]]
+    modId="yungsapi"
+    versionRange="[1.20-Forge-4.0.1,)"
+    mandatory=true
+    ordering="NONE"
+    side="BOTH"== non-class files
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./META-INF/services/com.yungnickyoung.minecraft.paxi.services.IPlatformHelper
+./pack.mcmeta
+./paxi.mixins.json
+./paxi.refmap.json
+./paxi_forge.mixins.json
+== lang key/keybind entries
+== KeyMapping registrations
+== strings about blacklist/hidden/config paths
+--- ./com/yungnickyoung/minecraft/paxi/PaxiForge.class: 	datapacks #net/minecraft/server/packs/PackType %Lnet/minecraft/server/packs/PackType; '()Lnet/minecraft/server/packs/PackType; .$SwitchMap$net$minecraft$server$packs$PackType ;(Lnet/minecraft/server/packs/repository/RepositorySource;)V DATAPACK_ORDERING_FILE DATA_PACK_DIRECTORY J(Ljava/nio/file/Path;Lnet/minecraft/server/packs/PackType;Ljava/io/File;)V SERVER_DATA addPaxiPackSource datapack_load_order.json resourcepack_load_order.json resourcepacks 

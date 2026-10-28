@@ -1,0 +1,30 @@
+== mods.toml
+modLoader = "lowcodefml"
+loaderVersion = "[44,)"
+license = "ARR"
+[[mods]]
+modId = "globalpacks"
+version = "19.3.7"
+displayName = "Global Packs"
+authors = "JTK222"
+description = '''Allows loading of Data & Resource Packs on a global level '''
+[[dependencies.globalpacks]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.3,1.20.1]"
+ordering = "NONE"
+side = "BOTH"
+== non-class files
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./default_config.toml
+./fabric.mod.json
+./globalpacks.mixins.json
+./globalpacks.refmap.json
+./pack.mcmeta
+== lang key/keybind entries
+== KeyMapping registrations
+== strings about blacklist/hidden/config paths
+--- ./net/brazier_modding/gdarp/CommonClass.class: #net/minecraft/server/packs/PackType %Lnet/minecraft/server/packs/PackType; +net/brazier_modding/gdarp/config/PackConfig -Lnet/brazier_modding/gdarp/config/PackConfig; .$SwitchMap$net$minecraft$server$packs$PackType 9(Lnet/minecraft/server/packs/PackType;ZLjava/util/List;)V `(Lnet/minecraft/server/packs/PackType;Z)Lnet/minecraft/server/packs/repository/RepositorySource; getOptionalDatapacks getOptionalResourcePacks getRequiredDatapacks getRequiredResourcePacks 
+--- ./net/brazier_modding/gdarp/config/PackConfig.class:  defaultconfigs/global_packs.toml  global_packs/required_resources/ )config/global_data_and_resourcepacks.toml +net/brazier_modding/gdarp/config/PackConfig ,com/electronwill/nightconfig/core/ConfigSpec -(Lcom/electronwill/nightconfig/core/Config;)Z -Lnet/brazier_modding/gdarp/config/PackConfig; .Lcom/electronwill/nightconfig/core/ConfigSpec; .minecraft_global_packs 5()Lcom/electronwill/nightconfig/core/file/FileConfig; 5com/electronwill/nightconfig/core/file/GenericBuilder 9()Lcom/electronwill/nightconfig/core/file/GenericBuilder; 9Corrected global Packs Config: '{}': was '{}, is now '{}' 9com/electronwill/nightconfig/core/file/FileNotFoundAction :com/electronwill/nightconfig/core/file/CommentedFileConfig ;Lcom/electronwill/nightconfig/core/file/FileNotFoundAction; <Lcom/electronwill/nightconfig/core/file/CommentedFileConfig; =com/electronwill/nightconfig/core/ConfigSpec$CorrectionAction ?Lcom/electronwill/nightconfig/core/ConfigSpec$CorrectionAction; ?com/electronwill/nightconfig/core/ConfigSpec$CorrectionListener Acom/electronwill/nightconfig/core/file/CommentedFileConfigBuilder B_DATA_KEY C()Lcom/electronwill/nightconfig/core/ConfigSpec$CorrectionListener; G(Ljava/net/URL;)Lcom/electronwill/nightconfig/core/file/GenericBuilder; L(Lnet/brazier_modding/gdarp/config/PackConfig;)Ljava/util/function/Function; 
+--- ./net/brazier_modding/gdarp/mixin/PackRepositoryMixin.class: # Listing {} Packs # # Listing {} Packs - END # #net/minecraft/server/packs/PackType %Lnet/minecraft/server/packs/PackType; (Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable<Ljava/util/Map<Ljava/lang/String;Lnet/minecraft/server/packs/repository/Pack;>;>;)V *net/minecraft/server/packs/repository/Pack +net/brazier_modding/gdarp/config/PackConfig ,Lnet/minecraft/server/packs/repository/Pack; -Lnet/brazier_modding/gdarp/config/PackConfig; /(Lnet/minecraft/server/packs/repository/Pack;)V 3net/minecraft/server/packs/repository/Pack$Position 5Lnet/minecraft/server/packs/repository/Pack$Position; 6Lnet/minecraft/server/packs/repository/PackRepository; 6net/minecraft/server/packs/repository/RepositorySource 8(Lnet/minecraft/server/packs/repository/Pack$Position;)V 8Lnet/minecraft/server/packs/repository/RepositorySource; >(Ljava/util/Map;Lnet/minecraft/server/packs/repository/Pack;)V ?# Set 'log_pack_ids' to false in the 'global_packs.toml' config K()Ljava/util/Set<Lnet/minecraft/server/packs/repository/RepositorySource;>; Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable<Ljava/util/Map<Ljava/lang/String;Lnet/minecraft/server/packs/repository/Pack;>;>; OLjava/util/Map<Ljava/lang/String;Lnet/minecraft/server/packs/repository/Pack;>; ULjava/util/Map$Entry<Ljava/lang/String;Lnet/minecraft/server/packs/repository/Pack;>; forceEnablePacks getRequiredBuiltinDataPacks getRequiredBuiltinResourcePacks 

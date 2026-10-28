@@ -1,0 +1,3001 @@
+# easy_mob_spawn_control-1.6.2.jar
+## file assets/easy_mob_spawn_control/ (0 bytes)
+
+## file assets/easy_mob_spawn_control/lang/ (0 bytes)
+
+## file assets/easy_mob_spawn_control/lang/de_de.json (22931 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Ausschalten",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Spawn-Kontrollbildschirm öffnen",
+  "screen.easy_mob_spawn_control.spawn_caps": "Spawn-Obergrenzen-Editor",
+  "gui.easy_mob_spawn_control.apply": "Änderungen anwenden",
+  "gui.easy_mob_spawn_control.cancel": "Abbrechen",
+  "gui.easy_mob_spawn_control.reset_default": "Auf Standard zurücksetzen",
+  "gui.easy_mob_spawn_control.help_text": "Obergrenzen begrenzen die maximale Anzahl an Mobs, die in der Nähe des Spielers spawnen können",
+  "gui.easy_mob_spawn_control.edit_caps": "Spawn-Obergrenzen",
+  "gui.easy_mob_spawn_control.search_placeholder": "Suchen...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Alle Mobs",
+  "gui.easy_mob_spawn_control.view_recent": "Zuletzt",
+  "gui.easy_mob_spawn_control.view_banned": "Verboten",
+  "gui.easy_mob_spawn_control.view_edited": "Bearbeitet",
+  "gui.easy_mob_spawn_control.view_in_world": "In der Welt",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Spawn-Rate",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Spawn-Rate: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Verwerfungswahrscheinlichkeit: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Natürliche Spawn-Rate:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Weltgenerierungs-Spawn-Rate:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ VERBOTEN",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Verbieten",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Treten Sie einer Welt bei, um die Mob-Vorschau zu sehen",
+  "gui.easy_mob_spawn_control.preview_failed": "Vorschau konnte nicht erstellt werden",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: Serverkonfiguration wurde aktualisiert.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Ihr Berechtigungsniveau ist zu niedrig, um das zu verwenden.",
+  "easy_mob_spawn_control.update": "Aktualisieren",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Vorschau konnte nicht gerendert werden",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Zurücksetzen..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Alles zurücksetzen",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Möchten Sie wirklich alles zurücksetzen?",
+  "easy_mob_spawn_control.warning.title": "Warnung",
+  "easy_mob_spawn_control.warning.spawnrate": "Höhere Spawn-Raten, insbesondere über 10.000%, verlangsamen die Spawn-Geschwindigkeit aller Mobs in der Welt. Du kannst das abmildern, indem du die Spawn-Intervalle im Menü „Sonstiges“ reduzierst.",
+  "easy_mob_spawn_control.warning.dontshow": "Nicht mehr anzeigen",
+  "easy_mob_spawn_co
+## file assets/easy_mob_spawn_control/lang/en_us.json (24920 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Turn Off",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Open spawn control screen",
+  "screen.easy_mob_spawn_control.spawn_caps": "Spawn Caps Editor",
+  "gui.easy_mob_spawn_control.apply": "Apply Changes",
+  "gui.easy_mob_spawn_control.cancel": "Cancel",
+  "gui.easy_mob_spawn_control.reset_default": "Reset to Default",
+  "gui.easy_mob_spawn_control.help_text": "Caps limit the maximum mobs that can spawn near player",
+  "gui.easy_mob_spawn_control.edit_caps": "Spawn caps",
+  "gui.easy_mob_spawn_control.search_placeholder": "Search...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "All Mobs",
+  "gui.easy_mob_spawn_control.view_recent": "Recent",
+  "gui.easy_mob_spawn_control.view_banned": "Banned",
+  "gui.easy_mob_spawn_control.view_edited": "Edited",
+  "gui.easy_mob_spawn_control.view_in_world": "In World",
+  "gui.easy_mob_spawn_control.view_around_me": "Around Me",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Spawn Rate",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Spawn rate: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Discard chance: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Natural spawn rate:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "World-gen spawn rate:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ BANNED",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Ban",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Join a world to see mob preview",
+  "gui.easy_mob_spawn_control.preview_failed": "Failed to create preview",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: Server config was updated.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Your permission level is too low to use that.",
+  "easy_mob_spawn_control.update": "Update",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Failed to render preview",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Reset..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Reset ALL",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Are you sure you want to reset everything?",
+  "easy_mob_spawn_control.warning.title": "Warning",
+  "easy_mob_spawn_control.warning.spawnrate": "Higher spawn rates, especially beyond 10_000%, will slow down spawning speed for all mobs in the world. You can mitigate this by reducing the spawn intervals in the Misc screen.",
+  "easy_mob_spawn_control.warning.dontshow": "Don't show again",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Copy mob ID",
+  "screen.easy_mob_spawn_control.dimension_ban_select": "Select Dimensions to Ban",
+  "screen.easy_mob_sp
+## file assets/easy_mob_spawn_control/lang/es_es.json (23840 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Apagar",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Abrir pantalla de control de aparición",
+  "screen.easy_mob_spawn_control.spawn_caps": "Editor de límites de aparición",
+  "gui.easy_mob_spawn_control.apply": "Aplicar cambios",
+  "gui.easy_mob_spawn_control.cancel": "Cancelar",
+  "gui.easy_mob_spawn_control.reset_default": "Restablecer valores predeterminados",
+  "gui.easy_mob_spawn_control.help_text": "Los límites restringen el número máximo de mobs que pueden aparecer cerca del jugador",
+  "gui.easy_mob_spawn_control.edit_caps": "Límites de aparición",
+  "gui.easy_mob_spawn_control.search_placeholder": "Buscar...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Todos los mobs",
+  "gui.easy_mob_spawn_control.view_recent": "Reciente",
+  "gui.easy_mob_spawn_control.view_banned": "Prohibidos",
+  "gui.easy_mob_spawn_control.view_edited": "Editados",
+  "gui.easy_mob_spawn_control.view_in_world": "En el mundo",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Tasa de aparición",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Tasa de aparición: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Probabilidad de descarte: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Tasa de aparición natural:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Tasa de aparición de generación:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ PROHIBIDO",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Prohibir",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Únete a un mundo para ver la vista previa del mob",
+  "gui.easy_mob_spawn_control.preview_failed": "Error al crear la vista previa",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: La configuración del servidor ha sido actualizada.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Tu nivel de permiso es demasiado bajo para usar eso.",
+  "easy_mob_spawn_control.update": "Actualizar",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Error al renderizar la vista previa",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Restablecer..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Restablecer todo",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "¿Estás seguro de que quieres restablecer todo?",
+  "easy_mob_spawn_control.warning.title": "Advertencia",
+  "easy_mob_spawn_control.warning.spawnrate": "Las tasas de aparición más altas, especialmente por encima del 10.000%, ralentizarán la velocidad de aparición de todos los mobs del mundo. Puedes mitigarlo reduciendo los intervalos de aparición en la pantalla de Misceláneos.",
+  "easy_mob_spawn_control.warning.don
+## file assets/easy_mob_spawn_control/lang/fr_fr.json (23891 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Désactiver",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Ouvrir l'écran de contrôle de spawn",
+  "screen.easy_mob_spawn_control.spawn_caps": "Éditeur de limites de spawn",
+  "gui.easy_mob_spawn_control.apply": "Appliquer les changements",
+  "gui.easy_mob_spawn_control.cancel": "Annuler",
+  "gui.easy_mob_spawn_control.reset_default": "Réinitialiser par défaut",
+  "gui.easy_mob_spawn_control.help_text": "Les limites restreignent le nombre maximum de mobs pouvant apparaître près du joueur",
+  "gui.easy_mob_spawn_control.edit_caps": "Limites de spawn",
+  "gui.easy_mob_spawn_control.search_placeholder": "Rechercher...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Tous les mobs",
+  "gui.easy_mob_spawn_control.view_recent": "Récent",
+  "gui.easy_mob_spawn_control.view_banned": "Interdits",
+  "gui.easy_mob_spawn_control.view_edited": "Modifiés",
+  "gui.easy_mob_spawn_control.view_in_world": "Dans le monde",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Taux de spawn",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Taux de spawn : ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Chance de rejet : ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Taux de spawn naturel :",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Taux de spawn de génération :",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ INTERDIT",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Interdire",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Rejoignez un monde pour voir l'aperçu du mob",
+  "gui.easy_mob_spawn_control.preview_failed": "Échec de la création de l'aperçu",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl : La configuration du serveur a été mise à jour.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl : Votre niveau de permission est trop bas pour l'utiliser.",
+  "easy_mob_spawn_control.update": "Mettre à jour",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Échec du rendu de l'aperçu",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Réinitialiser..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Tout réinitialiser",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Êtes-vous sûr de vouloir tout réinitialiser ?",
+  "easy_mob_spawn_control.warning.title": "Avertissement",
+  "easy_mob_spawn_control.warning.spawnrate": "Des taux de spawn plus élevés, surtout au-delà de 10 000 %, ralentiront la vitesse de spawn de tous les mobs du monde. Vous pouvez atténuer cela en réduisant les intervalles de spawn dans l'écran Divers.",
+  "easy_mob_spawn_control.warning.dontshow": "Ne plus afficher",
+  "easy_mob_spawn_control
+## file assets/easy_mob_spawn_control/lang/it_it.json (22696 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Disattiva",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Apri schermo di controllo spawn",
+  "screen.easy_mob_spawn_control.spawn_caps": "Editor limiti di spawn",
+  "gui.easy_mob_spawn_control.apply": "Applica modifiche",
+  "gui.easy_mob_spawn_control.cancel": "Annulla",
+  "gui.easy_mob_spawn_control.reset_default": "Ripristina predefiniti",
+  "gui.easy_mob_spawn_control.help_text": "I limiti restrigono il numero massimo di mob che possono generarsi vicino al giocatore",
+  "gui.easy_mob_spawn_control.edit_caps": "Limiti di spawn",
+  "gui.easy_mob_spawn_control.search_placeholder": "Cerca...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Tutti i mob",
+  "gui.easy_mob_spawn_control.view_recent": "Recenti",
+  "gui.easy_mob_spawn_control.view_banned": "Banditi",
+  "gui.easy_mob_spawn_control.view_edited": "Modificati",
+  "gui.easy_mob_spawn_control.view_in_world": "Nel mondo",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Tasso di spawn",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Tasso di spawn: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Probabilità di scarto: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Tasso di spawn naturale:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Tasso di spawn generazione:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ VIETATO",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Vieta",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Entra in un mondo per vedere l'anteprima del mob",
+  "gui.easy_mob_spawn_control.preview_failed": "Impossibile creare l'anteprima",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: La configurazione del server è stata aggiornata.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Il tuo livello di permesso è troppo basso per usarlo.",
+  "easy_mob_spawn_control.update": "Aggiorna",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Impossibile renderizzare l'anteprima",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Ripristina..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Ripristina tutto",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Sei sicuro di voler ripristinare tutto?",
+  "easy_mob_spawn_control.warning.title": "Avviso",
+  "easy_mob_spawn_control.warning.spawnrate": "Tassi di spawn più alti, specialmente oltre il 10.000%, rallenteranno la velocità di spawn di tutti i mob nel mondo. Puoi mitigarlo riducendo gli intervalli di spawn nella schermata Varie.",
+  "easy_mob_spawn_control.warning.dontshow": "Non mostrare più",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Copia ID mob",
+  "screen.easy_mob_sp
+## file assets/easy_mob_spawn_control/lang/ja_jp.json (24873 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "イージーモブスポーンコントロール",
+  "key.categories.easy_mob_spawn_control": "イージーモブスポーンコントロール",
+  "screen.easy_mob_spawn_control.turn_off": "オフにする",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "スポーンコントロール画面を開く",
+  "screen.easy_mob_spawn_control.spawn_caps": "スポーン上限エディタ",
+  "gui.easy_mob_spawn_control.apply": "変更を適用",
+  "gui.easy_mob_spawn_control.cancel": "キャンセル",
+  "gui.easy_mob_spawn_control.reset_default": "デフォルトに戻す",
+  "gui.easy_mob_spawn_control.help_text": "上限は、プレイヤー付近にスポーンできるモブの最大数を制限します",
+  "gui.easy_mob_spawn_control.edit_caps": "スポーン上限",
+  "gui.easy_mob_spawn_control.search_placeholder": "検索...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "全モブ",
+  "gui.easy_mob_spawn_control.view_recent": "最近",
+  "gui.easy_mob_spawn_control.view_banned": "禁止済み",
+  "gui.easy_mob_spawn_control.view_edited": "編集済み",
+  "gui.easy_mob_spawn_control.view_in_world": "ワールド内",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "スポーン率",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "スポーン率: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "廃棄確率: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "自然スポーン率:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "ワールド生成スポーン率:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ 禁止",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ 禁止",
+  "gui.easy_mob_spawn_control.preview_unavailable": "ワールドに参加してモブプレビューを表示",
+  "gui.easy_mob_spawn_control.preview_failed": "プレビューの作成に失敗しました",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: サーバー設定が更新されました。",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: 権限レベルが低いため使用できません。",
+  "easy_mob_spawn_control.update": "更新",
+  "gui.easy_mob_spawn_control.preview_render_failed": "プレビューのレンダリングに失敗しました",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "リセット..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "すべてリセット",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "本当にすべてをリセットしますか？",
+  "easy_mob_spawn_control.warning.title": "警告",
+  "easy_mob_spawn_control.warning.spawnrate": "高いスポーン率、特に 10,000% を超えると、ワールド内のすべてのモブのスポーン速度が低下します。「その他設定」画面でスポーン間隔を短くすることで軽減できます。",
+  "easy_mob_spawn_control.warning.dontshow": "今後表示しない",
+  "easy_mob_spawn_control.tooltip.copyMobId": "モブIDをコピー",
+  "screen.easy_mob_spawn_control.dimension_ban_select": "禁止するディメンションを選択",
+  "screen.easy_mob_spawn_control.dimension_ban_select_mob": "選択したディメンションで %s (%s) を禁止",
+  "gui.easy_mob_spawn_control.dim_ban_selected": "[✓]",
+  "gui.easy_mob_spawn_control.dim_ban_unselected": "[ ]",
+  "gui.easy_mob_spawn_control.dim_ban_button_banned": "☒ ディメンションで禁止..",
+  "gui.easy_mob_spawn_control.dim_ban_button_unbanned": "☐ ディメンションで禁止..",
+  "gui.easy_mob_spawn_control.disabled_spawn_types": "☒ 無効なスポーンタイプ..",
+  "gui.easy_mob_spawn_control.disable_spawn_types": "☐ スポーンタイプを
+## file assets/easy_mob_spawn_control/lang/ko_kr.json (22769 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "이지 몹 스폰 컨트롤",
+  "key.categories.easy_mob_spawn_control": "이지 몹 스폰 컨트롤",
+  "screen.easy_mob_spawn_control.turn_off": "끄기",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "스폰 컨트롤 화면 열기",
+  "screen.easy_mob_spawn_control.spawn_caps": "스폰 상한편집기",
+  "gui.easy_mob_spawn_control.apply": "변경 사항 적용",
+  "gui.easy_mob_spawn_control.cancel": "취소",
+  "gui.easy_mob_spawn_control.reset_default": "기본값으로 초기화",
+  "gui.easy_mob_spawn_control.help_text": "상한은 플레이어 근처에 스폰할 수 있는 최대 몹 수를 제한합니다",
+  "gui.easy_mob_spawn_control.edit_caps": "스폰 상한",
+  "gui.easy_mob_spawn_control.search_placeholder": "검색...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "전체 몹",
+  "gui.easy_mob_spawn_control.view_recent": "최근",
+  "gui.easy_mob_spawn_control.view_banned": "금지됨",
+  "gui.easy_mob_spawn_control.view_edited": "편집됨",
+  "gui.easy_mob_spawn_control.view_in_world": "월드 내",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "스폰 비율",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "스폰 비율: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "폐기 확률: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "자연 스폰 비율:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "월드 생성 스폰 비율:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ 금지됨",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ 금지",
+  "gui.easy_mob_spawn_control.preview_unavailable": "월드에 참여하여 몹 미리보기 확인",
+  "gui.easy_mob_spawn_control.preview_failed": "미리보기를 생성하지 못했습니다",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: 서버 설정이 업데이트되었습니다.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: 권한 수준이 너무 낮아 사용할 수 없습니다.",
+  "easy_mob_spawn_control.update": "업데이트",
+  "gui.easy_mob_spawn_control.preview_render_failed": "미리보기를 렌더링하지 못했습니다",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "초기화..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "모두 초기화",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "정말 모든 것을 초기화하시겠습니까?",
+  "easy_mob_spawn_control.warning.title": "경고",
+  "easy_mob_spawn_control.warning.spawnrate": "높은 스폰률, 특히 10,000%를 초과하면 세계의 모든 몽의 스폰 속도가 느려집니다. 기타 설정 화면에서 스폰 간격을 줄여 완화할 수 있습니다.",
+  "easy_mob_spawn_control.warning.dontshow": "다시 표시하지 않음",
+  "easy_mob_spawn_control.tooltip.copyMobId": "몹 ID 복사",
+  "screen.easy_mob_spawn_control.dimension_ban_select": "금지할 차원 선택",
+  "screen.easy_mob_spawn_control.dimension_ban_select_mob": "선택한 차원에서 %s (%s) 금지",
+  "gui.easy_mob_spawn_control.dim_ban_selected": "[✓]",
+  "gui.easy_mob_spawn_control.dim_ban_unselected": "[ ]",
+  "gui.easy_mob_spawn_control.dim_ban_button_banned": "☒ 차원에서 금지..",
+  "gui.easy_mob_spawn_control.dim_ban_button_unbanned": "☐ 차원에서 금지..",
+  "gui.easy_mob_spawn_control.disabled_spawn_types": "☒ 비활성화된 스폰 유형..",
+  "gui.easy_mob_spawn_control.disable_spawn_types": "☐ 스폰 유형 비활성화..",
+  "gui.easy
+## file assets/easy_mob_spawn_control/lang/pl_pl.json (22680 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Wyłącz",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Otwórz ekran kontroli spawnu",
+  "screen.easy_mob_spawn_control.spawn_caps": "Edytor limitów spawnu",
+  "gui.easy_mob_spawn_control.apply": "Zastosuj zmiany",
+  "gui.easy_mob_spawn_control.cancel": "Anuluj",
+  "gui.easy_mob_spawn_control.reset_default": "Przywróć domyślne",
+  "gui.easy_mob_spawn_control.help_text": "Limity ograniczają maksymalną liczbę mobów, które mogą pojawić się w pobliżu gracza",
+  "gui.easy_mob_spawn_control.edit_caps": "Limity spawnu",
+  "gui.easy_mob_spawn_control.search_placeholder": "Szukaj...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Wszystkie moby",
+  "gui.easy_mob_spawn_control.view_recent": "Ostatnie",
+  "gui.easy_mob_spawn_control.view_banned": "Zablokowane",
+  "gui.easy_mob_spawn_control.view_edited": "Edytowane",
+  "gui.easy_mob_spawn_control.view_in_world": "W świecie",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Wskaźnik spawnu",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Wskaźnik spawnu: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Szansa odrzucenia: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Naturalny wskaźnik spawnu:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Wskaźnik spawnu generacji:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ ZABLOKOWANY",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Zablokuj",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Dołącz do świata, aby zobaczyć podgląd moba",
+  "gui.easy_mob_spawn_control.preview_failed": "Nie udało się utworzyć podglądu",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: Konfiguracja serwera została zaktualizowana.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Twój poziom uprawnień jest zbyt niski, aby tego użyć.",
+  "easy_mob_spawn_control.update": "Aktualizuj",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Nie udało się wyrenderować podglądu",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Przywróć..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Przywróć wszystko",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Czy na pewno chcesz przywrócić wszystko?",
+  "easy_mob_spawn_control.warning.title": "Ostrzeżenie",
+  "easy_mob_spawn_control.warning.spawnrate": "Wyższe wskaźniki spawnu, zwłaszcza powyżej 10 000%, spowolnią prędkość spawnu wszystkich mobów w świecie. Możesz temu zaradzić, zmniejszając interwały spawnu w ekranie Różne.",
+  "easy_mob_spawn_control.warning.dontshow": "Nie pokazuj ponownie",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Kopiuj ID moba",
+  "screen.easy_mob_spawn_control.dime
+## file assets/easy_mob_spawn_control/lang/pt_br.json (23082 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Desligar",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Abrir tela de controle de spawn",
+  "screen.easy_mob_spawn_control.spawn_caps": "Editor de limites de spawn",
+  "gui.easy_mob_spawn_control.apply": "Aplicar alterações",
+  "gui.easy_mob_spawn_control.cancel": "Cancelar",
+  "gui.easy_mob_spawn_control.reset_default": "Redefinir para padrão",
+  "gui.easy_mob_spawn_control.help_text": "Os limites restringem o número máximo de mobs que podem aparecer perto do jogador",
+  "gui.easy_mob_spawn_control.edit_caps": "Limites de spawn",
+  "gui.easy_mob_spawn_control.search_placeholder": "Pesquisar...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Todos os mobs",
+  "gui.easy_mob_spawn_control.view_recent": "Recente",
+  "gui.easy_mob_spawn_control.view_banned": "Proibidos",
+  "gui.easy_mob_spawn_control.view_edited": "Editados",
+  "gui.easy_mob_spawn_control.view_in_world": "No mundo",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Taxa de spawn",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Taxa de spawn: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Chance de descarte: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Taxa de spawn natural:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Taxa de spawn de geração:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ PROIBIDO",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Proibir",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Entre em um mundo para ver a pré-visualização do mob",
+  "gui.easy_mob_spawn_control.preview_failed": "Falha ao criar pré-visualização",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: A configuração do servidor foi atualizada.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Seu nível de permissão é muito baixo para usar isso.",
+  "easy_mob_spawn_control.update": "Atualizar",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Falha ao renderizar pré-visualização",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Redefinir..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Redefinir tudo",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Tem certeza de que deseja redefinir tudo?",
+  "easy_mob_spawn_control.warning.title": "Aviso",
+  "easy_mob_spawn_control.warning.spawnrate": "Taxas de spawn mais altas, especialmente acima de 10.000%, reduzirão a velocidade de spawn de todos os mobs no mundo. Você pode atenuar isso reduzindo os intervalos de spawn na tela Diversos.",
+  "easy_mob_spawn_control.warning.dontshow": "Não mostrar novamente",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Copiar ID do mob",
+  "screen.eas
+## file assets/easy_mob_spawn_control/lang/ru_ru.json (27903 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Отключить",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Открыть экран управления спавном",
+  "screen.easy_mob_spawn_control.spawn_caps": "Редактор лимитов спавна",
+  "gui.easy_mob_spawn_control.apply": "Применить",
+  "gui.easy_mob_spawn_control.cancel": "Отмена",
+  "gui.easy_mob_spawn_control.reset_default": "Сбросить",
+  "gui.easy_mob_spawn_control.help_text": "Лимиты ограничивают макс. количество мобов рядом с игроком",
+  "gui.easy_mob_spawn_control.edit_caps": "Лимиты спавна",
+  "gui.easy_mob_spawn_control.search_placeholder": "Поиск...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Все мобы",
+  "gui.easy_mob_spawn_control.view_recent": "Недавние",
+  "gui.easy_mob_spawn_control.view_banned": "Запрещённые",
+  "gui.easy_mob_spawn_control.view_edited": "Изменённые",
+  "gui.easy_mob_spawn_control.view_in_world": "В мире",
+  "gui.easy_mob_spawn_control.view_around_me": "Вокруг меня",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Частота спавна",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Частота спавна: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Естественная частота спавна:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Частота спавна при генерации мира:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ ЗАПРЕЩЁН",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Запретить",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Зайдите в мир, чтобы увидеть превью",
+  "gui.easy_mob_spawn_control.preview_failed": "Не удалось создать превью",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: Конфиг сервера обновлён.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Недостаточно прав для использования.",
+  "easy_mob_spawn_control.update": "Обновить",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Не удалось отобразить превью",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Сбросить..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Сбросить ВСЁ",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Точно сбросить все запреты и частоты спавна?",
+  "easy_mob_spawn_control.warning.title": "Предупреждение",
+  "easy_mob_spawn_control.warning.spawnrate": "Высокая частота спавна, особенно выше 10 000%, снижает скорость появления всех мобов в мире. Это можно компенсировать, уменьшив интервалы спавна на экране «Разное».",
+  "easy_mob_spawn_control.warning.dontshow": "Не показывать снова",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Скопировать ID моба",
+  "screen.easy_mob_spawn_control.dimension_ban_select": "Выберите измерения для запрета",
+  "screen.easy_mob_spawn_
+## file assets/easy_mob_spawn_control/lang/tr_tr.json (23081 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Kapat",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Spawn kontrol ekranını aç",
+  "screen.easy_mob_spawn_control.spawn_caps": "Spawn Sınırı Düzenleyici",
+  "gui.easy_mob_spawn_control.apply": "Değişiklikleri Uygula",
+  "gui.easy_mob_spawn_control.cancel": "İptal",
+  "gui.easy_mob_spawn_control.reset_default": "Varsayılana Sıfırla",
+  "gui.easy_mob_spawn_control.help_text": "Sınırlar, oyuncunun yakınında spawn olabilecek maksimum mob sayısını kısıtlar",
+  "gui.easy_mob_spawn_control.edit_caps": "Spawn sınırları",
+  "gui.easy_mob_spawn_control.search_placeholder": "Ara...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Tüm Moblar",
+  "gui.easy_mob_spawn_control.view_recent": "Son",
+  "gui.easy_mob_spawn_control.view_banned": "Yasaklı",
+  "gui.easy_mob_spawn_control.view_edited": "Düzenlenmiş",
+  "gui.easy_mob_spawn_control.view_in_world": "Dünyada",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Spawn Oranı",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Spawn oranı: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Atılma şansı: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Doğal spawn oranı:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Dünya üretim spawn oranı:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ YASAKLI",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Yasakla",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Mob önizlemesini görmek için bir dünyaya katılın",
+  "gui.easy_mob_spawn_control.preview_failed": "Önizleme oluşturulamadı",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: Sunucu yapılandırması güncellendi.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: İzin seviyeniz bunu kullanmak için çok düşük.",
+  "easy_mob_spawn_control.update": "Güncelle",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Önizleme işlenemedi",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Sıfırla..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Tümünü Sıfırla",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Her şeyi sıfırlamak istediğinizden emin misiniz?",
+  "easy_mob_spawn_control.warning.title": "Uyarı",
+  "easy_mob_spawn_control.warning.spawnrate": "Daha yüksek spawn oranları, özellikle %10.000'in üzerindeki değerler, dünyadaki tüm yaratıkların spawn hızını yavaşlatır. Çeşitli ekranındaki spawn aralıklarını azaltarak bunu hafifletebilirsiniz.",
+  "easy_mob_spawn_control.warning.dontshow": "Tekrar gösterme",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Mob ID'sini kopyala",
+  "screen.easy_mob_spawn_control.dimension_ban_select": "Yasaklanacak Boyutları Seçin",
+  "screen
+## file assets/easy_mob_spawn_control/lang/uk_ua.json (28446 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "Easy Mob Spawn Control",
+  "key.categories.easy_mob_spawn_control": "Easy Mob Spawn Control",
+  "screen.easy_mob_spawn_control.turn_off": "Вимкнути",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "Відкрити екран контролю спавну",
+  "screen.easy_mob_spawn_control.spawn_caps": "Редактор лімітів спавну",
+  "gui.easy_mob_spawn_control.apply": "Застосувати зміни",
+  "gui.easy_mob_spawn_control.cancel": "Скасувати",
+  "gui.easy_mob_spawn_control.reset_default": "Скинути до стандартних",
+  "gui.easy_mob_spawn_control.help_text": "Ліміти обмежують максимальну кількість мобів, які можуть з'явитися поруч з гравцем",
+  "gui.easy_mob_spawn_control.edit_caps": "Ліміти спавну",
+  "gui.easy_mob_spawn_control.search_placeholder": "Пошук...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "Усі моби",
+  "gui.easy_mob_spawn_control.view_recent": "Нещодавні",
+  "gui.easy_mob_spawn_control.view_banned": "Заблоковані",
+  "gui.easy_mob_spawn_control.view_edited": "Відредаговані",
+  "gui.easy_mob_spawn_control.view_in_world": "У світі",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "Швидкість спавну",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "Швидкість спавну: ",
+  "gui.easy_mob_spawn_control.discard_chance_slider_text": "Ймовірність відхилення: ",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "Природна швидкість спавну:",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "Швидкість спавну при генерації світу:",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ ЗАБЛОКОВАНО",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ Заблокувати",
+  "gui.easy_mob_spawn_control.preview_unavailable": "Приєднайтеся до світу, щоб побачити попередній перегляд моба",
+  "gui.easy_mob_spawn_control.preview_failed": "Не вдалося створити попередній перегляд",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl: Конфігурацію сервера оновлено.",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl: Ваш рівень дозволу занадто низький для цього.",
+  "easy_mob_spawn_control.update": "Оновити",
+  "gui.easy_mob_spawn_control.preview_render_failed": "Не вдалося відобразити попередній перегляд",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "Скинути..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "Скинути все",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "Ви впевнені, що хочете скинути все?",
+  "easy_mob_spawn_control.warning.title": "Попередження",
+  "easy_mob_spawn_control.warning.spawnrate": "Вища частота спавну, особливо понад 10 000%, сповільнює швидкість появи всіх мобів у світі. Це можна компенсувати, зменшивши інтервали спавну на екрані «Різне».",
+  "easy_mob_spawn_control.warning.dontshow": "Більше не показувати",
+  "easy_mob_spawn_control.tooltip.copyMobId": "Копіювати ID моба",
+  "screen.easy_mob_s
+## file assets/easy_mob_spawn_control/lang/zh_cn.json (21950 bytes)
+{
+  "screen.easy_mob_spawn_control.config": "简易生物生成控制 (Easy Mob Spawn Control)",
+  "key.categories.easy_mob_spawn_control": "简易生物生成控制 (Easy Mob Spawn Control)",
+  "screen.easy_mob_spawn_control.turn_off": "关闭",
+  "key.easy_mob_spawn_control.openspawncrontrolscreen": "打开生成控制界面",
+  "screen.easy_mob_spawn_control.spawn_caps": "生成上限编辑器",
+  "gui.easy_mob_spawn_control.apply": "应用更改",
+  "gui.easy_mob_spawn_control.cancel": "取消",
+  "gui.easy_mob_spawn_control.reset_default": "重置为默认",
+  "gui.easy_mob_spawn_control.help_text": "上限限制玩家附近可生成的最大生物数量",
+  "gui.easy_mob_spawn_control.edit_caps": "编辑生成上限",
+  "gui.easy_mob_spawn_control.search_placeholder": "搜索...",
+  "gui.easy_mob_spawn_control.view_toggle": "%s →",
+  "gui.easy_mob_spawn_control.view_all": "全部生物",
+  "gui.easy_mob_spawn_control.view_recent": "最近",
+  "gui.easy_mob_spawn_control.view_banned": "已禁用",
+  "gui.easy_mob_spawn_control.view_edited": "已修改",
+  "gui.easy_mob_spawn_control.view_in_world": "当前世界",
+  "gui.easy_mob_spawn_control.view_around_me": "周围",
+  "gui.easy_mob_spawn_control.spawn_rate_label": "生成概率",
+  "gui.easy_mob_spawn_control.spawn_rate_value": "%d%%",
+  "gui.easy_mob_spawn_control.spawn_rate_slider_text": "生成概率：",
+  "gui.easy_mob_spawn_control.natural_spawn_rate_slider_text": "自然生成概率：",
+  "gui.easy_mob_spawn_control.world_gen_spawn_rate_slider_text": "世界生成概率：",
+  "gui.easy_mob_spawn_control.ban_checkbox_checked": "☒ 已禁用",
+  "gui.easy_mob_spawn_control.ban_checkbox_unchecked": "☐ 禁用",
+  "gui.easy_mob_spawn_control.preview_unavailable": "进入世界后可查看预览",
+  "gui.easy_mob_spawn_control.preview_failed": "无法创建预览",
+  "easy_mob_spawn_control.sys_msg.server_config_updated": "EasyMobSpawnControl：服务器配置已更新。",
+  "easy_mob_spawn_control.sys_msg.no_permission": "EasyMobSpawnControl：权限不足，无法使用。",
+  "easy_mob_spawn_control.update": "更新",
+  "gui.easy_mob_spawn_control.preview_render_failed": "无法渲染预览",
+  "gui.easy_mob_spawn_control.open_reset_screen_button": "重置..",
+  "gui.easy_mob_spawn_control.confirm_reset_title": "重置全部",
+  "gui.easy_mob_spawn_control.confirm_reset_message": "确定要重置所有禁用和生成概率吗？",
+  "easy_mob_spawn_control.warning.title": "警告",
+  "easy_mob_spawn_control.warning.spawnrate": "较高的生成概率，尤其是超过 10000%，会降低世界中所有生物的生成速度。你可以通过减少“杂项”界面中的生成间隔来缓解此问题。",
+  "easy_mob_spawn_control.warning.dontshow": "不再显示",
+  "easy_mob_spawn_control.tooltip.copyMobId": "复制生物 ID",
+  "screen.easy_mob_spawn_control.dimension_ban_select": "选择要禁用的维度",
+  "screen.easy_mob_spawn_control.dimension_ban_select_mob": "在选定的维度中禁用 %s (%s)",
+  "gui.easy_mob_spawn_control.dim_ban_selected": "[✓]",
+  "gui.easy_mob_spawn_control.dim_ban_unselected": "[ ]",
+  "gui.easy_mob_spawn_control.dim_ban_button_banned": "☒ 已在维度禁用..",
+  "gui.easy_mob_spawn_control.dim_ban_button_unbanned": "☐ 在维度禁用..",
+  "gui.easy_mob_spawn_control.disabled_spawn_types": "☒ 已禁用生成类型..",
+  "gui.easy_mob_spawn_control.disable_spawn_types": "☐ 禁用生成类型..",
+  "gui.easy_mob_spawn_control.confirm": "确认",
+  "easy_mob_spawn_control.to
+## file assets/easy_mob_spawn_control/sounds.json (6 bytes)
+{
+
+}
+## file assets/easy_mob_spawn_control/textures/ (0 bytes)
+
+## file data/easy_mob_spawn_control/ (0 bytes)
+
+## file data/easy_mob_spawn_control/forge/ (0 bytes)
+
+## file data/easy_mob_spawn_control/forge/biome_modifier/ (0 bytes)
+
+## file data/easy_mob_spawn_control/forge/biome_modifier/activate_custom_code.json (62 bytes)
+{
+  "type": "easy_mob_spawn_control:custom_spawn_modifier"
+}
+## file io/github/catomon/easymobspawncontrol/ (0 bytes)
+
+## file io/github/catomon/easymobspawncontrol/gui/ (0 bytes)
+
+## file io/github/catomon/easymobspawncontrol/gui/mobpanel/ (0 bytes)
+
+## file io/github/catomon/easymobspawncontrol/gui/screens/ (0 bytes)
+
+## file io/github/catomon/easymobspawncontrol/mixin/ (0 bytes)
+
+## file io/github/catomon/easymobspawncontrol/network/ (0 bytes)
+
+## file io/github/catomon/easymobspawncontrol/sync/ (0 bytes)
+
+## file mixins.easy_mob_spawn_control.json (461 bytes)
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.catomon.easymobspawncontrol.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EnderDragonFightMixin",
+    "MobCategoryMixin",
+    "MobDespawnMixin",
+    "NaturalSpawnerMixin",
+    "RaidMixin",
+    "ServerChunkCacheMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "mixins.easy_mob_spawn_control.refmap.json"
+}
+## file mixins.easy_mob_spawn_control.refmap.json (3624 bytes)
+{
+  "mappings": {
+    "io/github/catomon/easymobspawncontrol/mixin/RaidMixin": {
+      "joinRaid": "Lnet/minecraft/world/entity/raid/Raid;m_37713_(ILnet/minecraft/world/entity/raid/Raider;Lnet/minecraft/core/BlockPos;Z)V"
+    },
+    "io/github/catomon/easymobspawncontrol/mixin/MobCategoryMixin": {
+      "getMaxInstancesPerChunk()I": "Lnet/minecraft/world/entity/MobCategory;m_21608_()I"
+    },
+    "io/github/catomon/easymobspawncontrol/mixin/NaturalSpawnerMixin": {
+      "spawnForChunk": "Lnet/minecraft/world/level/NaturalSpawner;m_47029_(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnState;ZZZ)V",
+      "Lnet/minecraft/world/level/NaturalSpawner;spawnCategoryForChunk(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V": "Lnet/minecraft/world/level/NaturalSpawner;m_47045_(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V"
+    },
+    "io/github/catomon/easymobspawncontrol/mixin/EnderDragonFightMixin": {
+      "tick": "Lnet/minecraft/world/level/dimension/end/EndDragonFight;m_64095_()V"
+    },
+    "io/github/catomon/easymobspawncontrol/mixin/MobDespawnMixin": {
+      "checkDespawn": "Lnet/minecraft/world/entity/Mob;m_6043_()V"
+    },
+    "io/github/catomon/easymobspawncontrol/mixin/ServerChunkCacheMixin": {
+      "tickChunks": "Lnet/minecraft/server/level/ServerChunkCache;m_8490_()V"
+    }
+  },
+  "data": {
+    "searge": {
+      "io/github/catomon/easymobspawncontrol/mixin/RaidMixin": {
+        "joinRaid": "Lnet/minecraft/world/entity/raid/Raid;m_37713_(ILnet/minecraft/world/entity/raid/Raider;Lnet/minecraft/core/BlockPos;Z)V"
+      },
+      "io/github/catomon/easymobspawncontrol/mixin/MobCategoryMixin": {
+        "getMaxInstancesPerChunk()I": "Lnet/minecraft/world/entity/MobCategory;m_21608_()I"
+      },
+      "io/github/catomon/easymobspawncontrol/mixin/NaturalSpawnerMixin": {
+        "spawnForChunk": "Lnet/minecraft/world/level/NaturalSpawner;m_47029_(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnState;ZZZ)V",
+        "Lnet/minecraft/world/level/NaturalSpawner;spawnCategoryForChunk(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V": "Lnet/minecraft/world/level/NaturalSpawner;m_47045_(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet
+## classes: io/github/catomon/easymobspawncontrol/AttributeStorage.class, io/github/catomon/easymobspawncontrol/DespawnStorage.class, io/github/catomon/easymobspawncontrol/DropStorage.class, io/github/catomon/easymobspawncontrol/EquipmentStorage.class, io/github/catomon/easymobspawncontrol/MobCapStorage.class, io/github/catomon/easymobspawncontrol/ModBiomeModifiers.class, io/github/catomon/easymobspawncontrol/SpawnDataStorage.class, io/github/catomon/easymobspawncontrol/Storage.class
+## javap io/github/catomon/easymobspawncontrol/AttributeStorage.class
+Compiled from "AttributeStorage.java"
+public class io.github.catomon.easymobspawncontrol.AttributeStorage {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path ATTRIBUTES_FILE;
+
+  public static java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Double>> mobAttributes;
+
+  private static final java.lang.reflect.Type MAP_TYPE;
+
+  public io.github.catomon.easymobspawncontrol.AttributeStorage();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reload();
+    Code:
+       0: getstatic     #37                 // Field ATTRIBUTES_FILE:Ljava/nio/file/Path;
+       3: new           #39                 // class java/util/HashMap
+       6: dup
+       7: invokespecial #40                 // Method java/util/HashMap."<init>":()V
+      10: getstatic     #42                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      13: invokestatic  #46                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      16: checkcast     #11                 // class java/util/Map
+      19: putstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+      22: getstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+      25: invokeinterface #52,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      30: invokedynamic #71,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      35: invokeinterface #77,  2           // InterfaceMethod java/util/Set.removeIf:(Ljava/util/function/Predicate;)Z
+      40: pop
+      41: return
+
+  public static void save();
+    Code:
+       0: getstatic     #37                 // Field ATTRIBUTES_FILE:Ljava/nio/file/Path;
+       3: getstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+       6: invokestatic  #82                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+       9: return
+
+  public static java.util.Map<java.lang.String, java.lang.Double> getAttributesForMob(java.lang.String);
+    Code:
+       0: getstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+       3: aload_0
+       4: new           #39                 // class java/util/HashMap
+       7: dup
+       8: invokespecial #40                 // Method java/util/HashMap."<init>":()V
+      11: invokeinterface #89,  3           // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      16: checkcast     #11                 // class java/util/Map
+      19: areturn
+
+  public static void setAttribute(java.lang.String, java.lang.String, java.lang.Double);
+    Code:
+       0: getstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+       3: aload_0
+       4: invokedynamic #104,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+       9: invokeinterface #108,  3          // InterfaceMethod java/util/Map.computeIfAbsent:(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;
+      14: checkcast     #11                 // class java/util/Map
+      17: astore_3
+      18: aload_2
+      19: ifnonnull     33
+      22: aload_3
+      23: aload_1
+      24: invokeinterface #111,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      29: pop
+      30: goto          42
+      33: aload_3
+      34: aload_1
+      35: aload_2
+      36: invokeinterface #114,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      41: pop
+      42: aload_3
+      43: invokeinterface #118,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+      48: ifeq          61
+      51: getstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+      54: aload_0
+      55: invokeinterface #111,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      60: pop
+      61: invokestatic  #120                // Method save:()V
+      64: return
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #130                // class java/nio/file/LinkOption
+       5: invokestatic  #136                // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #82                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: aload_0
+      19: getstatic     #142                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      22: invokestatic  #146                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      25: astore_3
+      26: getstatic     #148                // Field GSON:Lcom/google/gson/Gson;
+      29: aload_3
+      30: aload_2
+      31: invokevirtual #154                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      34: astore        4
+      36: aload         4
+      38: ifnull        46
+      41: aload         4
+      43: goto          47
+      46: aload_1
+      47: areturn
+      48: astore_3
+      49: getstatic     #162                // Field LOGGER:Lorg/slf4j/Logger;
+      52: ldc           #164                // String Failed to read attributes config file {}
+      54: aload_0
+      55: aload_3
+      56: invokeinterface #170,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      61: aload_1
+      62: areturn
+    Exception table:
+       from    to  target type
+           0    17    48   Class java/lang/Exception
+          18    47    48   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #182,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #184                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #188                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #148                // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #192                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #142                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #194                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #200                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #203                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #206                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #210                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          67
+      54: astore_2
+      55: getstatic     #162                // Field LOGGER:Lorg/slf4j/Logger;
+      58: ldc           #212                // String Failed to write attributes config file {}
+      60: aload_0
+      61: aload_2
+      62: invokeinterface #215,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      67: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  private static java.util.Map lambda$setAttribute$1(java.lang.String);
+    Code:
+       0: new           #39                 // class java/util/HashMap
+       3: dup
+       4: invokespecial #40                 // Method java/util/HashMap."<init>":()V
+       7: areturn
+
+  private static boolean lambda$reload$0(java.util.Map$Entry);
+    Code:
+       0: aload_0
+       1: invokeinterface #220,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       6: ifnull        26
+       9: aload_0
+      10: invokeinterface #220,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      15: checkcast     #11                 // class java/util/Map
+      18: invokeinterface #118,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+      23: ifeq          30
+      26: iconst_1
+      27: goto          31
+      30: iconst_0
+      31: ireturn
+
+  static {};
+    Code:
+       0: invokestatic  #229                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #162                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #231                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #232                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #236                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #239                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #243                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #148                // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #248                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc           #250                // String attributes.json
+      30: invokeinterface #254,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      35: putstatic     #37                 // Field ATTRIBUTES_FILE:Ljava/nio/file/Path;
+      38: new           #39                 // class java/util/HashMap
+      41: dup
+      42: invokespecial #40                 // Method java/util/HashMap."<init>":()V
+      45: putstatic     #48                 // Field mobAttributes:Ljava/util/Map;
+      48: new           #7                  // class io/github/catomon/easymobspawncontrol/AttributeStorage$1
+      51: dup
+      52: invokespecial #255                // Method io/github/catomon/easymobspawncontrol/AttributeStorage$1."<init>":()V
+      55: invokevirtual #259                // Method io/github/catomon/easymobspawncontrol/AttributeStorage$1.getType:()Ljava/lang/reflect/Type;
+      58: putstatic     #42                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      61: invokestatic  #261                // Method reload:()V
+      64: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/DespawnStorage.class
+Compiled from "DespawnStorage.java"
+public class io.github.catomon.easymobspawncontrol.DespawnStorage {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path DESPAWN_FILE;
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule> despawnRules;
+
+  private static java.util.Map<net.minecraft.world.entity.EntityType<?>, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule> runtimeRules;
+
+  private static final java.lang.reflect.Type MAP_TYPE;
+
+  public io.github.catomon.easymobspawncontrol.DespawnStorage();
+    Code:
+       0: aload_0
+       1: invokespecial #37                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reload();
+    Code:
+       0: getstatic     #42                 // Field DESPAWN_FILE:Ljava/nio/file/Path;
+       3: new           #44                 // class java/util/HashMap
+       6: dup
+       7: invokespecial #45                 // Method java/util/HashMap."<init>":()V
+      10: getstatic     #47                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      13: invokestatic  #51                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      16: checkcast     #14                 // class java/util/Map
+      19: putstatic     #53                 // Field despawnRules:Ljava/util/Map;
+      22: getstatic     #53                 // Field despawnRules:Ljava/util/Map;
+      25: invokeinterface #57,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      30: invokedynamic #76,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      35: invokeinterface #82,  2           // InterfaceMethod java/util/Set.removeIf:(Ljava/util/function/Predicate;)Z
+      40: pop
+      41: invokestatic  #85                 // Method rebuildRuntime:()V
+      44: return
+
+  public static void save();
+    Code:
+       0: getstatic     #42                 // Field DESPAWN_FILE:Ljava/nio/file/Path;
+       3: getstatic     #53                 // Field despawnRules:Ljava/util/Map;
+       6: invokestatic  #90                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+       9: invokestatic  #85                 // Method rebuildRuntime:()V
+      12: return
+
+  public static io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule getRule(java.lang.String);
+    Code:
+       0: getstatic     #53                 // Field despawnRules:Ljava/util/Map;
+       3: aload_0
+       4: invokeinterface #96,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule
+      12: areturn
+
+  public static io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule getRule(net.minecraft.world.entity.EntityType<?>);
+    Code:
+       0: getstatic     #102                // Field runtimeRules:Ljava/util/Map;
+       3: aload_0
+       4: invokeinterface #96,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule
+      12: areturn
+
+  private static void rebuildRuntime();
+    Code:
+       0: new           #44                 // class java/util/HashMap
+       3: dup
+       4: invokespecial #45                 // Method java/util/HashMap."<init>":()V
+       7: astore_0
+       8: getstatic     #53                 // Field despawnRules:Ljava/util/Map;
+      11: invokeinterface #57,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      16: invokeinterface #109,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      21: astore_1
+      22: aload_1
+      23: invokeinterface #115,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      28: ifeq          94
+      31: aload_1
+      32: invokeinterface #119,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      37: checkcast     #12                 // class java/util/Map$Entry
+      40: astore_2
+      41: aload_2
+      42: invokeinterface #122,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      47: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule
+      50: astore_3
+      51: aload_3
+      52: ifnull        22
+      55: aload_3
+      56: invokevirtual #125                // Method io/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule.enabled:()Z
+      59: ifne          65
+      62: goto          22
+      65: aload_2
+      66: invokeinterface #128,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      71: checkcast     #130                // class java/lang/String
+      74: invokestatic  #136                // Method net/minecraft/world/entity/EntityType.m_20632_:(Ljava/lang/String;)Ljava/util/Optional;
+      77: astore        4
+      79: aload         4
+      81: aload_0
+      82: aload_3
+      83: invokedynamic #149,  0            // InvokeDynamic #1:accept:(Ljava/util/Map;Lio/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule;)Ljava/util/function/Consumer;
+      88: invokevirtual #155                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      91: goto          22
+      94: aload_0
+      95: putstatic     #102                // Field runtimeRules:Ljava/util/Map;
+      98: return
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #168                // class java/nio/file/LinkOption
+       5: invokestatic  #174                // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #90                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: aload_0
+      19: getstatic     #180                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      22: invokestatic  #184                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      25: astore_3
+      26: getstatic     #186                // Field GSON:Lcom/google/gson/Gson;
+      29: aload_3
+      30: aload_2
+      31: invokevirtual #192                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      34: astore        4
+      36: aload         4
+      38: ifnull        46
+      41: aload         4
+      43: goto          47
+      46: aload_1
+      47: areturn
+      48: astore_3
+      49: getstatic     #198                // Field LOGGER:Lorg/slf4j/Logger;
+      52: ldc           #200                // String Failed to read despawn config file {}
+      54: aload_0
+      55: aload_3
+      56: invokeinterface #206,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      61: aload_1
+      62: areturn
+    Exception table:
+       from    to  target type
+           0    17    48   Class java/lang/Exception
+          18    47    48   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #218,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #220                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #224                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #186                // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #228                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #180                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #230                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #236                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #239                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #242                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #246                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          67
+      54: astore_2
+      55: getstatic     #198                // Field LOGGER:Lorg/slf4j/Logger;
+      58: ldc           #248                // String Failed to write despawn config file {}
+      60: aload_0
+      61: aload_2
+      62: invokeinterface #251,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      67: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  private static void lambda$rebuildRuntime$1(java.util.Map, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule, net.minecraft.world.entity.EntityType);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: aload_1
+       3: invokeinterface #255,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       8: pop
+       9: return
+
+  private static boolean lambda$reload$0(java.util.Map$Entry);
+    Code:
+       0: aload_0
+       1: invokeinterface #128,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+       6: ifnull        18
+       9: aload_0
+      10: invokeinterface #122,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      15: ifnonnull     22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+
+  static {};
+    Code:
+       0: invokestatic  #263                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #198                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #265                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #266                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #270                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #273                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #277                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #186                // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #282                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc_w         #284                // String despawn.json
+      31: invokeinterface #288,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      36: putstatic     #42                 // Field DESPAWN_FILE:Ljava/nio/file/Path;
+      39: new           #44                 // class java/util/HashMap
+      42: dup
+      43: invokespecial #45                 // Method java/util/HashMap."<init>":()V
+      46: putstatic     #53                 // Field despawnRules:Ljava/util/Map;
+      49: invokestatic  #292                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+      52: putstatic     #102                // Field runtimeRules:Ljava/util/Map;
+      55: new           #9                  // class io/github/catomon/easymobspawncontrol/DespawnStorage$1
+      58: dup
+      59: invokespecial #293                // Method io/github/catomon/easymobspawncontrol/DespawnStorage$1."<init>":()V
+      62: invokevirtual #297                // Method io/github/catomon/easymobspawncontrol/DespawnStorage$1.getType:()Ljava/lang/reflect/Type;
+      65: putstatic     #47                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      68: invokestatic  #299                // Method reload:()V
+      71: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/DropStorage.class
+Compiled from "DropStorage.java"
+public class io.github.catomon.easymobspawncontrol.DropStorage {
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path DROPS_FILE;
+
+  public static final java.nio.file.Path DISABLED_VANILLA_FILE;
+
+  public static java.util.Map<java.lang.String, java.util.List<io.github.catomon.easymobspawncontrol.DropStorage$DropEntry>> mobDrops;
+
+  public static java.util.Set<java.lang.String> disabledVanillaDrops;
+
+  private static final java.lang.reflect.Type MAP_TYPE;
+
+  private static final java.lang.reflect.Type SET_TYPE;
+
+  public io.github.catomon.easymobspawncontrol.DropStorage();
+    Code:
+       0: aload_0
+       1: invokespecial #30                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reload();
+    Code:
+       0: getstatic     #35                 // Field DROPS_FILE:Ljava/nio/file/Path;
+       3: new           #37                 // class java/util/HashMap
+       6: dup
+       7: invokespecial #38                 // Method java/util/HashMap."<init>":()V
+      10: getstatic     #40                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      13: invokestatic  #44                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      16: checkcast     #46                 // class java/util/Map
+      19: putstatic     #48                 // Field mobDrops:Ljava/util/Map;
+      22: getstatic     #50                 // Field DISABLED_VANILLA_FILE:Ljava/nio/file/Path;
+      25: new           #52                 // class java/util/HashSet
+      28: dup
+      29: invokespecial #53                 // Method java/util/HashSet."<init>":()V
+      32: getstatic     #55                 // Field SET_TYPE:Ljava/lang/reflect/Type;
+      35: invokestatic  #44                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      38: checkcast     #57                 // class java/util/Set
+      41: putstatic     #59                 // Field disabledVanillaDrops:Ljava/util/Set;
+      44: return
+
+  public static void save();
+    Code:
+       0: getstatic     #35                 // Field DROPS_FILE:Ljava/nio/file/Path;
+       3: getstatic     #48                 // Field mobDrops:Ljava/util/Map;
+       6: invokestatic  #64                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+       9: getstatic     #50                 // Field DISABLED_VANILLA_FILE:Ljava/nio/file/Path;
+      12: getstatic     #59                 // Field disabledVanillaDrops:Ljava/util/Set;
+      15: invokestatic  #64                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      18: return
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #69                 // class java/nio/file/LinkOption
+       5: invokestatic  #75                 // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #64                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: getstatic     #77                 // Field GSON:Lcom/google/gson/Gson;
+      21: aload_0
+      22: getstatic     #83                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: invokestatic  #87                 // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      28: aload_2
+      29: invokevirtual #93                 // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      32: areturn
+      33: astore_3
+      34: aload_1
+      35: areturn
+    Exception table:
+       from    to  target type
+           0    17    33   Class java/lang/Exception
+          18    32    33   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #106,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #108                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #112                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #77                 // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #116                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #83                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #118                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #124                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #127                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #130                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #134                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          55
+      54: astore_2
+      55: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  static {};
+    Code:
+       0: new           #138                // class com/google/gson/GsonBuilder
+       3: dup
+       4: invokespecial #139                // Method com/google/gson/GsonBuilder."<init>":()V
+       7: invokevirtual #143                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      10: invokevirtual #146                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      13: invokevirtual #150                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      16: putstatic     #77                 // Field GSON:Lcom/google/gson/Gson;
+      19: getstatic     #155                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      22: ldc           #157                // String drops.json
+      24: invokeinterface #161,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      29: putstatic     #35                 // Field DROPS_FILE:Ljava/nio/file/Path;
+      32: getstatic     #155                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      35: ldc           #163                // String disabled_vanilla_drops.json
+      37: invokeinterface #161,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      42: putstatic     #50                 // Field DISABLED_VANILLA_FILE:Ljava/nio/file/Path;
+      45: new           #37                 // class java/util/HashMap
+      48: dup
+      49: invokespecial #38                 // Method java/util/HashMap."<init>":()V
+      52: putstatic     #48                 // Field mobDrops:Ljava/util/Map;
+      55: new           #52                 // class java/util/HashSet
+      58: dup
+      59: invokespecial #53                 // Method java/util/HashSet."<init>":()V
+      62: putstatic     #59                 // Field disabledVanillaDrops:Ljava/util/Set;
+      65: new           #11                 // class io/github/catomon/easymobspawncontrol/DropStorage$1
+      68: dup
+      69: invokespecial #164                // Method io/github/catomon/easymobspawncontrol/DropStorage$1."<init>":()V
+      72: invokevirtual #168                // Method io/github/catomon/easymobspawncontrol/DropStorage$1.getType:()Ljava/lang/reflect/Type;
+      75: putstatic     #40                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      78: new           #9                  // class io/github/catomon/easymobspawncontrol/DropStorage$2
+      81: dup
+      82: invokespecial #169                // Method io/github/catomon/easymobspawncontrol/DropStorage$2."<init>":()V
+      85: invokevirtual #170                // Method io/github/catomon/easymobspawncontrol/DropStorage$2.getType:()Ljava/lang/reflect/Type;
+      88: putstatic     #55                 // Field SET_TYPE:Ljava/lang/reflect/Type;
+      91: invokestatic  #172                // Method reload:()V
+      94: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/EquipmentStorage.class
+Compiled from "EquipmentStorage.java"
+public class io.github.catomon.easymobspawncontrol.EquipmentStorage {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path EQUIPMENT_FILE;
+
+  public static java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.EquipmentStorage$EquipmentEntry>> mobEquipment;
+
+  private static final java.lang.reflect.Type MAP_TYPE;
+
+  public io.github.catomon.easymobspawncontrol.EquipmentStorage();
+    Code:
+       0: aload_0
+       1: invokespecial #30                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reload();
+    Code:
+       0: getstatic     #35                 // Field EQUIPMENT_FILE:Ljava/nio/file/Path;
+       3: new           #37                 // class java/util/HashMap
+       6: dup
+       7: invokespecial #38                 // Method java/util/HashMap."<init>":()V
+      10: getstatic     #40                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      13: invokestatic  #44                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      16: checkcast     #46                 // class java/util/Map
+      19: putstatic     #48                 // Field mobEquipment:Ljava/util/Map;
+      22: getstatic     #48                 // Field mobEquipment:Ljava/util/Map;
+      25: invokeinterface #52,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+      30: invokedynamic #71,  0             // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      35: invokeinterface #77,  2           // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+      40: return
+
+  public static void save();
+    Code:
+       0: getstatic     #35                 // Field EQUIPMENT_FILE:Ljava/nio/file/Path;
+       3: getstatic     #48                 // Field mobEquipment:Ljava/util/Map;
+       6: invokestatic  #82                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+       9: return
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #87                 // class java/nio/file/LinkOption
+       5: invokestatic  #93                 // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #82                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: getstatic     #95                 // Field GSON:Lcom/google/gson/Gson;
+      21: aload_0
+      22: getstatic     #101                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: invokestatic  #105                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      28: aload_2
+      29: invokevirtual #111                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      32: areturn
+      33: astore_3
+      34: aload_1
+      35: areturn
+    Exception table:
+       from    to  target type
+           0    17    33   Class java/lang/Exception
+          18    32    33   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #124,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #126                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #130                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #95                 // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #134                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #101                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #136                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #142                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #145                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #148                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #152                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          55
+      54: astore_2
+      55: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  private static void lambda$reload$1(java.util.Map);
+    Code:
+       0: aload_0
+       1: invokeinterface #52,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       6: invokedynamic #165,  0            // InvokeDynamic #1:test:()Ljava/util/function/Predicate;
+      11: invokeinterface #169,  2          // InterfaceMethod java/util/Collection.removeIf:(Ljava/util/function/Predicate;)Z
+      16: pop
+      17: return
+
+  private static boolean lambda$reload$0(io.github.catomon.easymobspawncontrol.EquipmentStorage$EquipmentEntry);
+    Code:
+       0: aload_0
+       1: getfield      #173                // Field io/github/catomon/easymobspawncontrol/EquipmentStorage$EquipmentEntry.itemIds:Ljava/util/List;
+       4: ifnonnull     11
+       7: iconst_1
+       8: goto          12
+      11: iconst_0
+      12: ireturn
+
+  static {};
+    Code:
+       0: invokestatic  #182                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #184                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #186                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #187                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #191                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #194                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #198                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #95                 // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #203                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc           #205                // String equipment.json
+      30: invokeinterface #209,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      35: putstatic     #35                 // Field EQUIPMENT_FILE:Ljava/nio/file/Path;
+      38: new           #37                 // class java/util/HashMap
+      41: dup
+      42: invokespecial #38                 // Method java/util/HashMap."<init>":()V
+      45: putstatic     #48                 // Field mobEquipment:Ljava/util/Map;
+      48: new           #9                  // class io/github/catomon/easymobspawncontrol/EquipmentStorage$1
+      51: dup
+      52: invokespecial #210                // Method io/github/catomon/easymobspawncontrol/EquipmentStorage$1."<init>":()V
+      55: invokevirtual #214                // Method io/github/catomon/easymobspawncontrol/EquipmentStorage$1.getType:()Ljava/lang/reflect/Type;
+      58: putstatic     #40                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      61: invokestatic  #216                // Method reload:()V
+      64: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/MobCapStorage.class
+Compiled from "MobCapStorage.java"
+public class io.github.catomon.easymobspawncontrol.MobCapStorage {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path MOB_CAPS_FILE;
+
+  public static final java.nio.file.Path DIMENSION_MOB_CAPS_FILE;
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule> mobCaps;
+
+  public static java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> dimensionMobCaps;
+
+  private static final java.lang.reflect.Type MAP_TYPE;
+
+  private static final java.lang.reflect.Type NESTED_TYPE;
+
+  public io.github.catomon.easymobspawncontrol.MobCapStorage();
+    Code:
+       0: aload_0
+       1: invokespecial #36                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reload();
+    Code:
+       0: getstatic     #41                 // Field MOB_CAPS_FILE:Ljava/nio/file/Path;
+       3: new           #43                 // class java/util/HashMap
+       6: dup
+       7: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+      10: getstatic     #46                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      13: invokestatic  #50                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      16: checkcast     #16                 // class java/util/Map
+      19: invokestatic  #54                 // Method sanitize:(Ljava/util/Map;)Ljava/util/Map;
+      22: putstatic     #56                 // Field mobCaps:Ljava/util/Map;
+      25: getstatic     #58                 // Field DIMENSION_MOB_CAPS_FILE:Ljava/nio/file/Path;
+      28: new           #43                 // class java/util/HashMap
+      31: dup
+      32: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+      35: getstatic     #60                 // Field NESTED_TYPE:Ljava/lang/reflect/Type;
+      38: invokestatic  #50                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      41: checkcast     #16                 // class java/util/Map
+      44: invokestatic  #63                 // Method sanitizeNested:(Ljava/util/Map;)Ljava/util/Map;
+      47: putstatic     #65                 // Field dimensionMobCaps:Ljava/util/Map;
+      50: return
+
+  public static void save();
+    Code:
+       0: getstatic     #41                 // Field MOB_CAPS_FILE:Ljava/nio/file/Path;
+       3: getstatic     #56                 // Field mobCaps:Ljava/util/Map;
+       6: invokestatic  #70                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+       9: getstatic     #58                 // Field DIMENSION_MOB_CAPS_FILE:Ljava/nio/file/Path;
+      12: getstatic     #65                 // Field dimensionMobCaps:Ljava/util/Map;
+      15: invokestatic  #70                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      18: return
+
+  public static boolean isEmpty();
+    Code:
+       0: getstatic     #56                 // Field mobCaps:Ljava/util/Map;
+       3: invokeinterface #74,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+       8: ifeq          26
+      11: getstatic     #65                 // Field dimensionMobCaps:Ljava/util/Map;
+      14: invokeinterface #74,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+      19: ifeq          26
+      22: iconst_1
+      23: goto          27
+      26: iconst_0
+      27: ireturn
+
+  public static io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule getRule(java.lang.String);
+    Code:
+       0: getstatic     #56                 // Field mobCaps:Ljava/util/Map;
+       3: aload_0
+       4: invokeinterface #80,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule
+      12: areturn
+
+  public static io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule getRule(java.lang.String, java.lang.String);
+    Code:
+       0: getstatic     #65                 // Field dimensionMobCaps:Ljava/util/Map;
+       3: aload_0
+       4: invokeinterface #80,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       9: checkcast     #16                 // class java/util/Map
+      12: astore_2
+      13: aload_2
+      14: ifnull        34
+      17: aload_2
+      18: aload_1
+      19: invokeinterface #80,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      24: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule
+      27: astore_3
+      28: aload_3
+      29: ifnull        34
+      32: aload_3
+      33: areturn
+      34: getstatic     #56                 // Field mobCaps:Ljava/util/Map;
+      37: aload_1
+      38: invokeinterface #80,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      43: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule
+      46: areturn
+
+  private static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule> sanitize(java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>);
+    Code:
+       0: new           #43                 // class java/util/HashMap
+       3: dup
+       4: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ifnonnull     14
+      12: aload_1
+      13: areturn
+      14: aload_0
+      15: invokeinterface #92,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #98,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_2
+      26: aload_2
+      27: invokeinterface #103,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          112
+      35: aload_2
+      36: invokeinterface #107,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #14                 // class java/util/Map$Entry
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #110,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      51: ifnull        26
+      54: aload_3
+      55: invokeinterface #110,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      60: checkcast     #112                // class java/lang/String
+      63: invokevirtual #115                // Method java/lang/String.isBlank:()Z
+      66: ifne          26
+      69: aload_3
+      70: invokeinterface #118,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          26
+      81: aload_1
+      82: aload_3
+      83: invokeinterface #110,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      88: checkcast     #112                // class java/lang/String
+      91: aload_3
+      92: invokeinterface #118,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      97: checkcast     #7                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule
+     100: invokestatic  #122                // Method sanitizeRule:(Lio/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule;)Lio/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule;
+     103: invokeinterface #126,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     108: pop
+     109: goto          26
+     112: aload_1
+     113: areturn
+
+  private static java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> sanitizeNested(java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>>);
+    Code:
+       0: new           #43                 // class java/util/HashMap
+       3: dup
+       4: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ifnonnull     14
+      12: aload_1
+      13: areturn
+      14: aload_0
+      15: invokeinterface #92,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #98,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_2
+      26: aload_2
+      27: invokeinterface #103,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          126
+      35: aload_2
+      36: invokeinterface #107,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #14                 // class java/util/Map$Entry
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #110,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      51: ifnull        26
+      54: aload_3
+      55: invokeinterface #110,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      60: checkcast     #112                // class java/lang/String
+      63: invokevirtual #115                // Method java/lang/String.isBlank:()Z
+      66: ifne          26
+      69: aload_3
+      70: invokeinterface #118,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          26
+      81: aload_3
+      82: invokeinterface #118,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      87: checkcast     #16                 // class java/util/Map
+      90: invokestatic  #54                 // Method sanitize:(Ljava/util/Map;)Ljava/util/Map;
+      93: astore        4
+      95: aload         4
+      97: invokeinterface #74,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+     102: ifne          123
+     105: aload_1
+     106: aload_3
+     107: invokeinterface #110,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     112: checkcast     #112                // class java/lang/String
+     115: aload         4
+     117: invokeinterface #126,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     122: pop
+     123: goto          26
+     126: aload_1
+     127: areturn
+
+  private static io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule sanitizeRule(io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule);
+    Code:
+       0: aload_0
+       1: invokevirtual #137                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.percent:()Z
+       4: ifeq          24
+       7: dconst_0
+       8: ldc2_w        #138                // double 1000.0d
+      11: aload_0
+      12: invokevirtual #143                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.value:()D
+      15: invokestatic  #149                // Method java/lang/Math.min:(DD)D
+      18: invokestatic  #152                // Method java/lang/Math.max:(DD)D
+      21: goto          38
+      24: dconst_0
+      25: ldc2_w        #153                // double 10000.0d
+      28: aload_0
+      29: invokevirtual #143                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.value:()D
+      32: invokestatic  #149                // Method java/lang/Math.min:(DD)D
+      35: invokestatic  #152                // Method java/lang/Math.max:(DD)D
+      38: dstore_1
+      39: new           #7                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule
+      42: dup
+      43: aload_0
+      44: invokevirtual #157                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.enabled:()Z
+      47: aload_0
+      48: invokevirtual #137                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.percent:()Z
+      51: dload_1
+      52: aload_0
+      53: invokevirtual #160                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.global:()Z
+      56: invokespecial #163                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule."<init>":(ZZDZ)V
+      59: areturn
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #169                // class java/nio/file/LinkOption
+       5: invokestatic  #175                // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #70                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: aload_0
+      19: getstatic     #181                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      22: invokestatic  #185                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      25: astore_3
+      26: getstatic     #187                // Field GSON:Lcom/google/gson/Gson;
+      29: aload_3
+      30: aload_2
+      31: invokevirtual #193                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      34: astore        4
+      36: aload         4
+      38: ifnull        46
+      41: aload         4
+      43: goto          47
+      46: aload_1
+      47: areturn
+      48: astore_3
+      49: getstatic     #199                // Field LOGGER:Lorg/slf4j/Logger;
+      52: ldc           #201                // String Failed to read mob cap config file {}
+      54: aload_0
+      55: aload_3
+      56: invokeinterface #207,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      61: aload_1
+      62: areturn
+    Exception table:
+       from    to  target type
+           0    17    48   Class java/lang/Exception
+          18    47    48   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #219,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #221                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #225                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #187                // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #229                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #181                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #231                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #237                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #240                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #243                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #247                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          67
+      54: astore_2
+      55: getstatic     #199                // Field LOGGER:Lorg/slf4j/Logger;
+      58: ldc           #249                // String Failed to write mob cap config file {}
+      60: aload_0
+      61: aload_2
+      62: invokeinterface #252,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      67: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  static {};
+    Code:
+       0: invokestatic  #259                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #199                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #261                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #262                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #266                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #269                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #273                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #187                // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #278                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc_w         #280                // String mob_caps.json
+      31: invokeinterface #284,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      36: putstatic     #41                 // Field MOB_CAPS_FILE:Ljava/nio/file/Path;
+      39: getstatic     #278                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      42: ldc_w         #286                // String dimension_mob_caps.json
+      45: invokeinterface #284,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      50: putstatic     #58                 // Field DIMENSION_MOB_CAPS_FILE:Ljava/nio/file/Path;
+      53: new           #43                 // class java/util/HashMap
+      56: dup
+      57: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+      60: putstatic     #56                 // Field mobCaps:Ljava/util/Map;
+      63: new           #43                 // class java/util/HashMap
+      66: dup
+      67: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+      70: putstatic     #65                 // Field dimensionMobCaps:Ljava/util/Map;
+      73: new           #11                 // class io/github/catomon/easymobspawncontrol/MobCapStorage$1
+      76: dup
+      77: invokespecial #287                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$1."<init>":()V
+      80: invokevirtual #291                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$1.getType:()Ljava/lang/reflect/Type;
+      83: putstatic     #46                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      86: new           #9                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$2
+      89: dup
+      90: invokespecial #292                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$2."<init>":()V
+      93: invokevirtual #293                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$2.getType:()Ljava/lang/reflect/Type;
+      96: putstatic     #60                 // Field NESTED_TYPE:Ljava/lang/reflect/Type;
+      99: invokestatic  #295                // Method reload:()V
+     102: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/ModBiomeModifiers.class
+Compiled from "ModBiomeModifiers.java"
+public class io.github.catomon.easymobspawncontrol.ModBiomeModifiers {
+  public static final net.minecraftforge.registries.DeferredRegister<com.mojang.serialization.Codec<? extends net.minecraftforge.common.world.BiomeModifier>> BIOME_MODIFIER_SERIALIZERS;
+
+  public static final net.minecraftforge.registries.RegistryObject<com.mojang.serialization.Codec<io.github.catomon.easymobspawncontrol.CustomSpawnModifier>> CUSTOM_SPAWN_MODIFIER;
+
+  public io.github.catomon.easymobspawncontrol.ModBiomeModifiers();
+    Code:
+       0: aload_0
+       1: invokespecial #25                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private static com.mojang.serialization.Codec lambda$static$0();
+    Code:
+       0: getstatic     #35                 // Field io/github/catomon/easymobspawncontrol/CustomSpawnModifier.CODEC:Lcom/mojang/serialization/Codec;
+       3: areturn
+
+  static {};
+    Code:
+       0: getstatic     #39                 // Field net/minecraftforge/registries/ForgeRegistries$Keys.BIOME_MODIFIER_SERIALIZERS:Lnet/minecraft/resources/ResourceKey;
+       3: ldc           #41                 // String easy_mob_spawn_control
+       5: invokestatic  #47                 // Method net/minecraftforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/DeferredRegister;
+       8: putstatic     #49                 // Field BIOME_MODIFIER_SERIALIZERS:Lnet/minecraftforge/registries/DeferredRegister;
+      11: getstatic     #49                 // Field BIOME_MODIFIER_SERIALIZERS:Lnet/minecraftforge/registries/DeferredRegister;
+      14: ldc           #51                 // String custom_spawn_modifier
+      16: invokedynamic #68,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      21: invokevirtual #72                 // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+      24: putstatic     #74                 // Field CUSTOM_SPAWN_MODIFIER:Lnet/minecraftforge/registries/RegistryObject;
+      27: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/SpawnDataStorage.class
+Compiled from "SpawnDataStorage.java"
+public class io.github.catomon.easymobspawncontrol.SpawnDataStorage {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path FILE;
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.SpawnDataStorage$SpawnDataOverride> overrides;
+
+  private static final java.lang.reflect.Type MAP_TYPE;
+
+  public io.github.catomon.easymobspawncontrol.SpawnDataStorage();
+    Code:
+       0: aload_0
+       1: invokespecial #25                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void reload();
+    Code:
+       0: getstatic     #30                 // Field FILE:Ljava/nio/file/Path;
+       3: new           #32                 // class java/util/HashMap
+       6: dup
+       7: invokespecial #33                 // Method java/util/HashMap."<init>":()V
+      10: getstatic     #35                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      13: invokestatic  #39                 // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      16: checkcast     #41                 // class java/util/Map
+      19: putstatic     #43                 // Field overrides:Ljava/util/Map;
+      22: return
+
+  public static void save();
+    Code:
+       0: getstatic     #30                 // Field FILE:Ljava/nio/file/Path;
+       3: getstatic     #43                 // Field overrides:Ljava/util/Map;
+       6: invokestatic  #48                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+       9: return
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #53                 // class java/nio/file/LinkOption
+       5: invokestatic  #59                 // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #48                 // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: aload_0
+      19: getstatic     #65                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      22: invokestatic  #69                 // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      25: astore_3
+      26: getstatic     #71                 // Field GSON:Lcom/google/gson/Gson;
+      29: aload_3
+      30: aload_2
+      31: invokevirtual #77                 // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      34: astore        4
+      36: aload         4
+      38: ifnull        46
+      41: aload         4
+      43: goto          47
+      46: aload_1
+      47: areturn
+      48: astore_3
+      49: getstatic     #85                 // Field LOGGER:Lorg/slf4j/Logger;
+      52: ldc           #87                 // String Failed to read spawn data config file {}
+      54: aload_0
+      55: aload_3
+      56: invokeinterface #93,  4           // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      61: aload_1
+      62: areturn
+    Exception table:
+       from    to  target type
+           0    17    48   Class java/lang/Exception
+          18    47    48   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #107,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #109                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #113                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #71                 // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #117                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #65                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #119                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #125                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #128                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #131                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #135                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          67
+      54: astore_2
+      55: getstatic     #85                 // Field LOGGER:Lorg/slf4j/Logger;
+      58: ldc           #137                // String Failed to write spawn data config file {}
+      60: aload_0
+      61: aload_2
+      62: invokeinterface #140,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      67: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  static {};
+    Code:
+       0: invokestatic  #147                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #85                 // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #149                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #150                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #154                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #157                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #161                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #71                 // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #166                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc           #168                // String spawn_data.json
+      30: invokeinterface #172,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      35: putstatic     #30                 // Field FILE:Ljava/nio/file/Path;
+      38: new           #32                 // class java/util/HashMap
+      41: dup
+      42: invokespecial #33                 // Method java/util/HashMap."<init>":()V
+      45: putstatic     #43                 // Field overrides:Ljava/util/Map;
+      48: new           #9                  // class io/github/catomon/easymobspawncontrol/SpawnDataStorage$1
+      51: dup
+      52: invokespecial #173                // Method io/github/catomon/easymobspawncontrol/SpawnDataStorage$1."<init>":()V
+      55: invokevirtual #177                // Method io/github/catomon/easymobspawncontrol/SpawnDataStorage$1.getType:()Ljava/lang/reflect/Type;
+      58: putstatic     #35                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      61: invokestatic  #179                // Method reload:()V
+      64: return
+}
+
+## javap io/github/catomon/easymobspawncontrol/Storage.class
+Compiled from "Storage.java"
+public class io.github.catomon.easymobspawncontrol.Storage {
+  private static final org.slf4j.Logger LOGGER;
+
+  private static final com.google.gson.Gson GSON;
+
+  public static final java.nio.file.Path CONFIG_DIR;
+
+  public static final java.nio.file.Path BANS_FILE;
+
+  public static final java.nio.file.Path SPAWN_RATES_FILE;
+
+  public static final java.nio.file.Path NATURAL_SPAWN_RATES_FILE;
+
+  public static final java.nio.file.Path WORLD_GEN_SPAWN_RATES_FILE;
+
+  public static final java.nio.file.Path SPAWN_CAPS_FILE;
+
+  public static final java.nio.file.Path DIMENSION_BANS_FILE;
+
+  public static final java.nio.file.Path DIMENSION_SPAWN_CAPS_FILE;
+
+  public static final java.nio.file.Path DISABLED_MOB_SPAWN_TYPES_FILE;
+
+  public static final java.nio.file.Path BIOME_BANS_FILE;
+
+  public static final java.nio.file.Path BIOME_SPAWNS_FILE;
+
+  public static final java.nio.file.Path BIOME_SPAWN_ASSIGNMENTS_FILE;
+
+  public static final java.nio.file.Path SPAWN_RULES_FILE;
+
+  public static final java.nio.file.Path SPAWN_RULE_ASSIGNMENTS_FILE;
+
+  public static final java.nio.file.Path STRUCTURE_SPAWNS_FILE;
+
+  public static final java.nio.file.Path STRUCTURE_SPAWN_ASSIGNMENTS_FILE;
+
+  public static final java.nio.file.Path DISCARD_CHANCES_FILE;
+
+  public static final java.nio.file.Path MISC_FILE;
+
+  private static float maxSpawnRate;
+
+  public static java.util.Map<java.lang.String, java.lang.Double> spawnRates;
+
+  public static java.util.Map<java.lang.String, java.lang.Double> naturalSpawnRates;
+
+  public static java.util.Map<java.lang.String, java.lang.Double> worldGenSpawnRates;
+
+  public static java.util.Map<java.lang.String, java.lang.Integer> spawnCaps;
+
+  public static java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Integer>> dimensionSpawnCaps;
+
+  public static java.util.ArrayList<java.lang.String> bannedMobs;
+
+  public static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> dimensionBannedMobs;
+
+  public static java.util.Map<net.minecraft.world.entity.MobSpawnType, java.util.Set<java.lang.String>> disabledMobSpawnTypes;
+
+  public static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> biomeBannedMobs;
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.Storage$BiomeSpawn> biomeSpawns;
+
+  public static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> biomeSpawnAssignments;
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.Storage$SpawnRule> spawnRules;
+
+  public static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> spawnRuleAssignments;
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.Storage$StructureSpawn> structureSpawns;
+
+  public static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> structureSpawnAssignments;
+
+  public static java.util.Map<java.lang.String, java.lang.Double> discardChances;
+
+  public static int creatureNaturalSpawnCheckTicks;
+
+  public static double monsterSpawnInterval;
+
+  public static int sparseMobRangeMonsters;
+
+  public static int sparseMobRangeCreatures;
+
+  public static java.util.Map<java.lang.String, java.lang.Integer> defaultSpawnCaps;
+
+  private static final java.util.Map<net.minecraft.world.entity.MobCategory, java.lang.String> CATEGORY_KEYS;
+
+  private static final java.lang.reflect.Type LIST_STRING;
+
+  private static final java.lang.reflect.Type MAP_STRING_DOUBLE;
+
+  private static final java.lang.reflect.Type MAP_STRING_INTEGER;
+
+  private static final java.lang.reflect.Type MAP_STRING_SET_STRING;
+
+  private static final java.lang.reflect.Type MAP_STRING_MAP_STRING_INTEGER;
+
+  private static final java.lang.reflect.Type LIST_BIOME_SPAWN;
+
+  private static final java.lang.reflect.Type LIST_SPAWN_RULE;
+
+  private static final java.lang.reflect.Type LIST_STRUCTURE_SPAWN;
+
+  public io.github.catomon.easymobspawncontrol.Storage();
+    Code:
+       0: aload_0
+       1: invokespecial #128                // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void init();
+    Code:
+       0: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+       3: iconst_0
+       4: anewarray     #137                // class java/nio/file/attribute/FileAttribute
+       7: invokestatic  #143                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      10: pop
+      11: goto          29
+      14: astore_0
+      15: getstatic     #145                // Field LOGGER:Lorg/slf4j/Logger;
+      18: ldc           #147                // String Failed to create config directory {}
+      20: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+      23: aload_0
+      24: invokeinterface #153,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      29: return
+    Exception table:
+       from    to  target type
+           0    11    14   Class java/io/IOException
+
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #162                // class java/nio/file/LinkOption
+       5: invokestatic  #166                // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          18
+      11: aload_0
+      12: aload_1
+      13: invokestatic  #170                // Method writeJson:(Ljava/nio/file/Path;Ljava/lang/Object;)V
+      16: aload_1
+      17: areturn
+      18: aload_0
+      19: getstatic     #176                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      22: invokestatic  #180                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      25: astore_3
+      26: getstatic     #182                // Field GSON:Lcom/google/gson/Gson;
+      29: aload_3
+      30: aload_2
+      31: invokevirtual #188                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      34: astore        4
+      36: aload         4
+      38: ifnull        46
+      41: aload         4
+      43: goto          47
+      46: aload_1
+      47: areturn
+      48: astore_3
+      49: getstatic     #145                // Field LOGGER:Lorg/slf4j/Logger;
+      52: ldc           #196                // String Failed to read config file {}
+      54: aload_0
+      55: aload_3
+      56: invokeinterface #199,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      61: aload_1
+      62: areturn
+    Exception table:
+       from    to  target type
+           0    17    48   Class java/lang/Exception
+          18    47    48   Class java/lang/Exception
+
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokeinterface #212,  1          // InterfaceMethod java/nio/file/Path.getParent:()Ljava/nio/file/Path;
+       6: iconst_0
+       7: anewarray     #137                // class java/nio/file/attribute/FileAttribute
+      10: invokestatic  #143                // Method java/nio/file/Files.createDirectories:(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;
+      13: pop
+      14: aload_0
+      15: getstatic     #182                // Field GSON:Lcom/google/gson/Gson;
+      18: aload_1
+      19: invokevirtual #216                // Method com/google/gson/Gson.toJson:(Ljava/lang/Object;)Ljava/lang/String;
+      22: getstatic     #176                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      25: iconst_3
+      26: anewarray     #218                // class java/nio/file/OpenOption
+      29: dup
+      30: iconst_0
+      31: getstatic     #224                // Field java/nio/file/StandardOpenOption.CREATE:Ljava/nio/file/StandardOpenOption;
+      34: aastore
+      35: dup
+      36: iconst_1
+      37: getstatic     #227                // Field java/nio/file/StandardOpenOption.TRUNCATE_EXISTING:Ljava/nio/file/StandardOpenOption;
+      40: aastore
+      41: dup
+      42: iconst_2
+      43: getstatic     #230                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+      46: aastore
+      47: invokestatic  #234                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;Ljava/nio/charset/Charset;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      50: pop
+      51: goto          67
+      54: astore_2
+      55: getstatic     #145                // Field LOGGER:Lorg/slf4j/Logger;
+      58: ldc           #236                // String Failed to write config file {}
+      60: aload_0
+      61: aload_2
+      62: invokeinterface #153,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      67: return
+    Exception table:
+       from    to  target type
+           0    51    54   Class java/lang/Exception
+
+  private static <T> java.util.List<T> readObjectList(java.nio.file.Path, java.lang.reflect.Type, java.util.function.Function<java.lang.String, T>);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #162                // class java/nio/file/LinkOption
+       5: invokestatic  #166                // Method java/nio/file/Files.exists:(Ljava/nio/file/Path;[Ljava/nio/file/LinkOption;)Z
+       8: ifne          15
+      11: invokestatic  #245                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      14: areturn
+      15: aload_0
+      16: getstatic     #176                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+      19: invokestatic  #180                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      22: invokevirtual #249                // Method java/lang/String.strip:()Ljava/lang/String;
+      25: astore_3
+      26: aload_3
+      27: ldc           #251                // String [
+      29: invokevirtual #255                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+      32: ifeq          112
+      35: iconst_1
+      36: istore        4
+      38: iload         4
+      40: aload_3
+      41: invokevirtual #259                // Method java/lang/String.length:()I
+      44: if_icmpge     65
+      47: aload_3
+      48: iload         4
+      50: invokevirtual #263                // Method java/lang/String.charAt:(I)C
+      53: invokestatic  #269                // Method java/lang/Character.isWhitespace:(C)Z
+      56: ifeq          65
+      59: iinc          4, 1
+      62: goto          38
+      65: iload         4
+      67: aload_3
+      68: invokevirtual #259                // Method java/lang/String.length:()I
+      71: if_icmpge     112
+      74: aload_3
+      75: iload         4
+      77: invokevirtual #263                // Method java/lang/String.charAt:(I)C
+      80: bipush        123
+      82: if_icmpne     112
+      85: getstatic     #182                // Field GSON:Lcom/google/gson/Gson;
+      88: aload_3
+      89: aload_1
+      90: invokevirtual #188                // Method com/google/gson/Gson.fromJson:(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      93: checkcast     #241                // class java/util/List
+      96: astore        5
+      98: aload         5
+     100: ifnull        108
+     103: aload         5
+     105: goto          111
+     108: invokestatic  #245                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     111: areturn
+     112: goto          133
+     115: astore_3
+     116: getstatic     #145                // Field LOGGER:Lorg/slf4j/Logger;
+     119: ldc_w         #271                // String Failed to read config file {} as object list
+     122: aload_0
+     123: aload_3
+     124: invokeinterface #199,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     129: invokestatic  #245                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     132: areturn
+     133: aload_0
+     134: invokestatic  #245                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     137: getstatic     #273                // Field LIST_STRING:Ljava/lang/reflect/Type;
+     140: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     143: checkcast     #241                // class java/util/List
+     146: astore_3
+     147: new           #277                // class java/util/ArrayList
+     150: dup
+     151: invokespecial #278                // Method java/util/ArrayList."<init>":()V
+     154: astore        4
+     156: aload_3
+     157: invokeinterface #282,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     162: astore        5
+     164: aload         5
+     166: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     171: ifeq          230
+     174: aload         5
+     176: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     181: checkcast     #190                // class java/lang/String
+     184: astore        6
+     186: aload         6
+     188: ifnull        164
+     191: aload         6
+     193: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+     196: ifeq          202
+     199: goto          164
+     202: aload_2
+     203: aload         6
+     205: invokeinterface #301,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+     210: astore        7
+     212: aload         7
+     214: ifnull        227
+     217: aload         4
+     219: aload         7
+     221: invokeinterface #305,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     226: pop
+     227: goto          164
+     230: aload         4
+     232: areturn
+     233: astore_3
+     234: getstatic     #145                // Field LOGGER:Lorg/slf4j/Logger;
+     237: ldc           #196                // String Failed to read config file {}
+     239: aload_0
+     240: aload_3
+     241: invokeinterface #199,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     246: invokestatic  #245                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+     249: areturn
+    Exception table:
+       from    to  target type
+          15   111   115   Class java/lang/Exception
+         133   232   233   Class java/lang/Exception
+
+  public static void reload();
+    Code:
+       0: new           #277                // class java/util/ArrayList
+       3: dup
+       4: new           #277                // class java/util/ArrayList
+       7: dup
+       8: getstatic     #320                // Field BANS_FILE:Ljava/nio/file/Path;
+      11: invokestatic  #245                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      14: getstatic     #273                // Field LIST_STRING:Ljava/lang/reflect/Type;
+      17: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      20: checkcast     #322                // class java/util/Collection
+      23: invokespecial #325                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+      26: invokevirtual #329                // Method java/util/ArrayList.stream:()Ljava/util/stream/Stream;
+      29: invokedynamic #346,  0            // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      34: invokeinterface #352,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      39: invokeinterface #355,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+      44: invokespecial #325                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+      47: putstatic     #357                // Field bannedMobs:Ljava/util/ArrayList;
+      50: getstatic     #359                // Field SPAWN_RATES_FILE:Ljava/nio/file/Path;
+      53: new           #361                // class java/util/HashMap
+      56: dup
+      57: invokespecial #362                // Method java/util/HashMap."<init>":()V
+      60: getstatic     #364                // Field MAP_STRING_DOUBLE:Ljava/lang/reflect/Type;
+      63: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      66: checkcast     #45                 // class java/util/Map
+      69: invokestatic  #368                // Method sanitizeDoubleMap:(Ljava/util/Map;)Ljava/util/Map;
+      72: putstatic     #370                // Field spawnRates:Ljava/util/Map;
+      75: getstatic     #372                // Field NATURAL_SPAWN_RATES_FILE:Ljava/nio/file/Path;
+      78: new           #361                // class java/util/HashMap
+      81: dup
+      82: invokespecial #362                // Method java/util/HashMap."<init>":()V
+      85: getstatic     #364                // Field MAP_STRING_DOUBLE:Ljava/lang/reflect/Type;
+      88: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      91: checkcast     #45                 // class java/util/Map
+      94: invokestatic  #368                // Method sanitizeDoubleMap:(Ljava/util/Map;)Ljava/util/Map;
+      97: putstatic     #374                // Field naturalSpawnRates:Ljava/util/Map;
+     100: getstatic     #376                // Field WORLD_GEN_SPAWN_RATES_FILE:Ljava/nio/file/Path;
+     103: new           #361                // class java/util/HashMap
+     106: dup
+     107: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     110: getstatic     #364                // Field MAP_STRING_DOUBLE:Ljava/lang/reflect/Type;
+     113: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     116: checkcast     #45                 // class java/util/Map
+     119: invokestatic  #368                // Method sanitizeDoubleMap:(Ljava/util/Map;)Ljava/util/Map;
+     122: putstatic     #378                // Field worldGenSpawnRates:Ljava/util/Map;
+     125: getstatic     #380                // Field SPAWN_CAPS_FILE:Ljava/nio/file/Path;
+     128: new           #361                // class java/util/HashMap
+     131: dup
+     132: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     135: getstatic     #382                // Field MAP_STRING_INTEGER:Ljava/lang/reflect/Type;
+     138: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     141: checkcast     #45                 // class java/util/Map
+     144: invokestatic  #385                // Method sanitizeIntMap:(Ljava/util/Map;)Ljava/util/Map;
+     147: putstatic     #387                // Field spawnCaps:Ljava/util/Map;
+     150: getstatic     #389                // Field DIMENSION_SPAWN_CAPS_FILE:Ljava/nio/file/Path;
+     153: new           #361                // class java/util/HashMap
+     156: dup
+     157: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     160: getstatic     #391                // Field MAP_STRING_MAP_STRING_INTEGER:Ljava/lang/reflect/Type;
+     163: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     166: checkcast     #45                 // class java/util/Map
+     169: invokestatic  #394                // Method sanitizeNestedIntMap:(Ljava/util/Map;)Ljava/util/Map;
+     172: putstatic     #396                // Field dimensionSpawnCaps:Ljava/util/Map;
+     175: getstatic     #398                // Field DIMENSION_BANS_FILE:Ljava/nio/file/Path;
+     178: new           #361                // class java/util/HashMap
+     181: dup
+     182: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     185: getstatic     #400                // Field MAP_STRING_SET_STRING:Ljava/lang/reflect/Type;
+     188: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     191: checkcast     #45                 // class java/util/Map
+     194: invokestatic  #403                // Method sanitizeSetMap:(Ljava/util/Map;)Ljava/util/Map;
+     197: putstatic     #405                // Field dimensionBannedMobs:Ljava/util/Map;
+     200: getstatic     #407                // Field DISABLED_MOB_SPAWN_TYPES_FILE:Ljava/nio/file/Path;
+     203: invokestatic  #411                // Method readDisabledSpawnTypes:(Ljava/nio/file/Path;)Ljava/util/Map;
+     206: putstatic     #413                // Field disabledMobSpawnTypes:Ljava/util/Map;
+     209: getstatic     #415                // Field BIOME_BANS_FILE:Ljava/nio/file/Path;
+     212: new           #361                // class java/util/HashMap
+     215: dup
+     216: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     219: getstatic     #400                // Field MAP_STRING_SET_STRING:Ljava/lang/reflect/Type;
+     222: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     225: checkcast     #45                 // class java/util/Map
+     228: invokestatic  #403                // Method sanitizeSetMap:(Ljava/util/Map;)Ljava/util/Map;
+     231: putstatic     #417                // Field biomeBannedMobs:Ljava/util/Map;
+     234: getstatic     #419                // Field BIOME_SPAWN_ASSIGNMENTS_FILE:Ljava/nio/file/Path;
+     237: new           #361                // class java/util/HashMap
+     240: dup
+     241: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     244: getstatic     #400                // Field MAP_STRING_SET_STRING:Ljava/lang/reflect/Type;
+     247: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     250: checkcast     #45                 // class java/util/Map
+     253: invokestatic  #403                // Method sanitizeSetMap:(Ljava/util/Map;)Ljava/util/Map;
+     256: putstatic     #421                // Field biomeSpawnAssignments:Ljava/util/Map;
+     259: getstatic     #423                // Field SPAWN_RULE_ASSIGNMENTS_FILE:Ljava/nio/file/Path;
+     262: new           #361                // class java/util/HashMap
+     265: dup
+     266: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     269: getstatic     #400                // Field MAP_STRING_SET_STRING:Ljava/lang/reflect/Type;
+     272: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     275: checkcast     #45                 // class java/util/Map
+     278: invokestatic  #403                // Method sanitizeSetMap:(Ljava/util/Map;)Ljava/util/Map;
+     281: putstatic     #425                // Field spawnRuleAssignments:Ljava/util/Map;
+     284: getstatic     #427                // Field STRUCTURE_SPAWN_ASSIGNMENTS_FILE:Ljava/nio/file/Path;
+     287: new           #361                // class java/util/HashMap
+     290: dup
+     291: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     294: getstatic     #400                // Field MAP_STRING_SET_STRING:Ljava/lang/reflect/Type;
+     297: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     300: checkcast     #45                 // class java/util/Map
+     303: invokestatic  #403                // Method sanitizeSetMap:(Ljava/util/Map;)Ljava/util/Map;
+     306: putstatic     #429                // Field structureSpawnAssignments:Ljava/util/Map;
+     309: getstatic     #431                // Field DISCARD_CHANCES_FILE:Ljava/nio/file/Path;
+     312: new           #361                // class java/util/HashMap
+     315: dup
+     316: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     319: getstatic     #364                // Field MAP_STRING_DOUBLE:Ljava/lang/reflect/Type;
+     322: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+     325: checkcast     #45                 // class java/util/Map
+     328: invokestatic  #368                // Method sanitizeDoubleMap:(Ljava/util/Map;)Ljava/util/Map;
+     331: putstatic     #433                // Field discardChances:Ljava/util/Map;
+     334: invokestatic  #436                // Method loadMisc:()V
+     337: new           #361                // class java/util/HashMap
+     340: dup
+     341: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     344: putstatic     #438                // Field biomeSpawns:Ljava/util/Map;
+     347: getstatic     #440                // Field BIOME_SPAWNS_FILE:Ljava/nio/file/Path;
+     350: getstatic     #442                // Field LIST_BIOME_SPAWN:Ljava/lang/reflect/Type;
+     353: invokedynamic #452,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+     358: invokestatic  #454                // Method readObjectList:(Ljava/nio/file/Path;Ljava/lang/reflect/Type;Ljava/util/function/Function;)Ljava/util/List;
+     361: invokeinterface #282,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     366: astore_0
+     367: aload_0
+     368: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     373: ifeq          403
+     376: aload_0
+     377: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     382: checkcast     #19                 // class io/github/catomon/easymobspawncontrol/Storage$BiomeSpawn
+     385: astore_1
+     386: getstatic     #438                // Field biomeSpawns:Ljava/util/Map;
+     389: aload_1
+     390: getfield      #457                // Field io/github/catomon/easymobspawncontrol/Storage$BiomeSpawn.name:Ljava/lang/String;
+     393: aload_1
+     394: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     399: pop
+     400: goto          367
+     403: getstatic     #438                // Field biomeSpawns:Ljava/util/Map;
+     406: ldc_w         #463                // String 0_remove_default_biome_spawns
+     409: getstatic     #467                // Field io/github/catomon/easymobspawncontrol/Storage$BiomeSpawn.REMOVE_DEFAULT_BIOME_SPAWNS:Lio/github/catomon/easymobspawncontrol/Storage$BiomeSpawn;
+     412: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     417: pop
+     418: new           #361                // class java/util/HashMap
+     421: dup
+     422: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     425: putstatic     #469                // Field spawnRules:Ljava/util/Map;
+     428: getstatic     #471                // Field SPAWN_RULES_FILE:Ljava/nio/file/Path;
+     431: getstatic     #473                // Field LIST_SPAWN_RULE:Ljava/lang/reflect/Type;
+     434: invokedynamic #480,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+     439: invokestatic  #454                // Method readObjectList:(Ljava/nio/file/Path;Ljava/lang/reflect/Type;Ljava/util/function/Function;)Ljava/util/List;
+     442: invokeinterface #282,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     447: astore_0
+     448: aload_0
+     449: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     454: ifeq          484
+     457: aload_0
+     458: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     463: checkcast     #17                 // class io/github/catomon/easymobspawncontrol/Storage$SpawnRule
+     466: astore_1
+     467: getstatic     #469                // Field spawnRules:Ljava/util/Map;
+     470: aload_1
+     471: getfield      #481                // Field io/github/catomon/easymobspawncontrol/Storage$SpawnRule.name:Ljava/lang/String;
+     474: aload_1
+     475: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     480: pop
+     481: goto          448
+     484: new           #361                // class java/util/HashMap
+     487: dup
+     488: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     491: putstatic     #483                // Field structureSpawns:Ljava/util/Map;
+     494: getstatic     #485                // Field STRUCTURE_SPAWNS_FILE:Ljava/nio/file/Path;
+     497: getstatic     #487                // Field LIST_STRUCTURE_SPAWN:Ljava/lang/reflect/Type;
+     500: invokedynamic #494,  0            // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+     505: invokestatic  #454                // Method readObjectList:(Ljava/nio/file/Path;Ljava/lang/reflect/Type;Ljava/util/function/Function;)Ljava/util/List;
+     508: invokeinterface #282,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     513: astore_0
+     514: aload_0
+     515: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     520: ifeq          550
+     523: aload_0
+     524: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     529: checkcast     #15                 // class io/github/catomon/easymobspawncontrol/Storage$StructureSpawn
+     532: astore_1
+     533: getstatic     #483                // Field structureSpawns:Ljava/util/Map;
+     536: aload_1
+     537: getfield      #495                // Field io/github/catomon/easymobspawncontrol/Storage$StructureSpawn.name:Ljava/lang/String;
+     540: aload_1
+     541: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     546: pop
+     547: goto          514
+     550: getstatic     #370                // Field spawnRates:Ljava/util/Map;
+     553: invokeinterface #499,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+     558: invokeinterface #500,  1          // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+     563: invokedynamic #515,  0            // InvokeDynamic #4:compare:()Ljava/util/Comparator;
+     568: invokeinterface #519,  2          // InterfaceMethod java/util/stream/Stream.max:(Ljava/util/Comparator;)Ljava/util/Optional;
+     573: dconst_1
+     574: invokestatic  #523                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     577: invokevirtual #528                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     580: checkcast     #504                // class java/lang/Double
+     583: invokevirtual #532                // Method java/lang/Double.floatValue:()F
+     586: putstatic     #534                // Field maxSpawnRate:F
+     589: getstatic     #417                // Field biomeBannedMobs:Ljava/util/Map;
+     592: invokestatic  #538                // Method io/github/catomon/easymobspawncontrol/Storage$BiomeBanCache.rebuild:(Ljava/util/Map;)V
+     595: return
+
+  private static java.util.Map<java.lang.String, java.lang.Double> sanitizeDoubleMap(java.util.Map<java.lang.String, java.lang.Double>);
+    Code:
+       0: new           #361                // class java/util/HashMap
+       3: dup
+       4: invokespecial #362                // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ifnonnull     14
+      12: aload_1
+      13: areturn
+      14: aload_0
+      15: invokeinterface #548,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #551,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_2
+      26: aload_2
+      27: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          125
+      35: aload_2
+      36: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #43                 // class java/util/Map$Entry
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      51: ifnull        26
+      54: aload_3
+      55: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      60: checkcast     #190                // class java/lang/String
+      63: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+      66: ifne          26
+      69: aload_3
+      70: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          26
+      81: aload_1
+      82: aload_3
+      83: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      88: checkcast     #190                // class java/lang/String
+      91: dconst_0
+      92: ldc2_w        #558                // double 1000.0d
+      95: aload_3
+      96: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     101: checkcast     #504                // class java/lang/Double
+     104: invokevirtual #563                // Method java/lang/Double.doubleValue:()D
+     107: invokestatic  #569                // Method java/lang/Math.min:(DD)D
+     110: invokestatic  #571                // Method java/lang/Math.max:(DD)D
+     113: invokestatic  #523                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     116: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     121: pop
+     122: goto          26
+     125: aload_1
+     126: areturn
+
+  private static java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Integer>> sanitizeNestedIntMap(java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Integer>>);
+    Code:
+       0: new           #361                // class java/util/HashMap
+       3: dup
+       4: invokespecial #362                // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ifnonnull     14
+      12: aload_1
+      13: areturn
+      14: aload_0
+      15: invokeinterface #548,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #551,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_2
+      26: aload_2
+      27: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          112
+      35: aload_2
+      36: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #43                 // class java/util/Map$Entry
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      51: ifnull        26
+      54: aload_3
+      55: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      60: checkcast     #190                // class java/lang/String
+      63: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+      66: ifne          26
+      69: aload_3
+      70: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          26
+      81: aload_1
+      82: aload_3
+      83: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      88: checkcast     #190                // class java/lang/String
+      91: aload_3
+      92: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      97: checkcast     #45                 // class java/util/Map
+     100: invokestatic  #385                // Method sanitizeIntMap:(Ljava/util/Map;)Ljava/util/Map;
+     103: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     108: pop
+     109: goto          26
+     112: aload_1
+     113: areturn
+
+  private static java.util.Map<java.lang.String, java.lang.Integer> sanitizeIntMap(java.util.Map<java.lang.String, java.lang.Integer>);
+    Code:
+       0: new           #361                // class java/util/HashMap
+       3: dup
+       4: invokespecial #362                // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ifnonnull     14
+      12: aload_1
+      13: areturn
+      14: aload_0
+      15: invokeinterface #548,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #551,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_2
+      26: aload_2
+      27: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          148
+      35: aload_2
+      36: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #43                 // class java/util/Map$Entry
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      51: ifnull        26
+      54: aload_3
+      55: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      60: checkcast     #190                // class java/lang/String
+      63: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+      66: ifne          26
+      69: aload_3
+      70: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          26
+      81: aload_3
+      82: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      87: checkcast     #580                // class java/lang/Integer
+      90: invokevirtual #583                // Method java/lang/Integer.intValue:()I
+      93: iflt          26
+      96: aload_3
+      97: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     102: checkcast     #580                // class java/lang/Integer
+     105: invokevirtual #583                // Method java/lang/Integer.intValue:()I
+     108: sipush        10000
+     111: if_icmple     117
+     114: goto          26
+     117: aload_1
+     118: aload_3
+     119: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     124: checkcast     #190                // class java/lang/String
+     127: invokevirtual #586                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+     130: aload_3
+     131: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     136: checkcast     #580                // class java/lang/Integer
+     139: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     144: pop
+     145: goto          26
+     148: aload_1
+     149: areturn
+
+  private static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> sanitizeSetMap(java.util.Map<java.lang.String, java.util.Set<java.lang.String>>);
+    Code:
+       0: new           #361                // class java/util/HashMap
+       3: dup
+       4: invokespecial #362                // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: ifnonnull     14
+      12: aload_1
+      13: areturn
+      14: aload_0
+      15: invokeinterface #548,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      20: invokeinterface #551,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      25: astore_2
+      26: aload_2
+      27: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      32: ifeq          144
+      35: aload_2
+      36: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      41: checkcast     #43                 // class java/util/Map$Entry
+      44: astore_3
+      45: aload_3
+      46: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      51: ifnull        26
+      54: aload_3
+      55: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      60: checkcast     #190                // class java/lang/String
+      63: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+      66: ifne          26
+      69: aload_3
+      70: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          26
+      81: aload_3
+      82: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      87: checkcast     #550                // class java/util/Set
+      90: invokeinterface #589,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+      95: invokedynamic #594,  0            // InvokeDynamic #5:test:()Ljava/util/function/Predicate;
+     100: invokeinterface #352,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     105: invokedynamic #605,  0            // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+     110: invokestatic  #611                // Method java/util/stream/Collectors.toCollection:(Ljava/util/function/Supplier;)Ljava/util/stream/Collector;
+     113: invokeinterface #615,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     118: checkcast     #550                // class java/util/Set
+     121: astore        4
+     123: aload_1
+     124: aload_3
+     125: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     130: checkcast     #190                // class java/lang/String
+     133: aload         4
+     135: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     140: pop
+     141: goto          26
+     144: aload_1
+     145: areturn
+
+  private static java.util.Map<net.minecraft.world.entity.MobSpawnType, java.util.Set<java.lang.String>> readDisabledSpawnTypes(java.nio.file.Path);
+    Code:
+       0: aload_0
+       1: new           #361                // class java/util/HashMap
+       4: dup
+       5: invokespecial #362                // Method java/util/HashMap."<init>":()V
+       8: getstatic     #400                // Field MAP_STRING_SET_STRING:Ljava/lang/reflect/Type;
+      11: invokestatic  #275                // Method readJson:(Ljava/nio/file/Path;Ljava/lang/Object;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+      14: checkcast     #45                 // class java/util/Map
+      17: astore_1
+      18: new           #361                // class java/util/HashMap
+      21: dup
+      22: invokespecial #362                // Method java/util/HashMap."<init>":()V
+      25: astore_2
+      26: aload_1
+      27: invokeinterface #548,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      32: invokeinterface #551,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      37: astore_3
+      38: aload_3
+      39: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      44: ifeq          210
+      47: aload_3
+      48: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      53: checkcast     #43                 // class java/util/Map$Entry
+      56: astore        4
+      58: aload         4
+      60: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      65: ifnull        38
+      68: aload         4
+      70: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      75: ifnonnull     81
+      78: goto          38
+      81: aconst_null
+      82: astore        5
+      84: invokestatic  #624                // Method net/minecraft/world/entity/MobSpawnType.values:()[Lnet/minecraft/world/entity/MobSpawnType;
+      87: astore        6
+      89: aload         6
+      91: arraylength
+      92: istore        7
+      94: iconst_0
+      95: istore        8
+      97: iload         8
+      99: iload         7
+     101: if_icmpge     145
+     104: aload         6
+     106: iload         8
+     108: aaload
+     109: astore        9
+     111: aload         9
+     113: invokevirtual #628                // Method net/minecraft/world/entity/MobSpawnType.name:()Ljava/lang/String;
+     116: aload         4
+     118: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+     123: checkcast     #190                // class java/lang/String
+     126: invokevirtual #631                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+     129: ifeq          139
+     132: aload         9
+     134: astore        5
+     136: goto          145
+     139: iinc          8, 1
+     142: goto          97
+     145: aload         5
+     147: ifnonnull     153
+     150: goto          38
+     153: aload         4
+     155: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     160: checkcast     #550                // class java/util/Set
+     163: invokeinterface #589,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+     168: invokedynamic #636,  0            // InvokeDynamic #7:test:()Ljava/util/function/Predicate;
+     173: invokeinterface #352,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+     178: invokedynamic #605,  0            // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+     183: invokestatic  #611                // Method java/util/stream/Collectors.toCollection:(Ljava/util/function/Supplier;)Ljava/util/stream/Collector;
+     186: invokeinterface #615,  2          // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+     191: checkcast     #550                // class java/util/Set
+     194: astore        6
+     196: aload_2
+     197: aload         5
+     199: aload         6
+     201: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     206: pop
+     207: goto          38
+     210: aload_2
+     211: areturn
+
+  private static java.util.Map<java.lang.String, java.util.Set<java.lang.String>> writeDisabledSpawnTypes(java.util.Map<net.minecraft.world.entity.MobSpawnType, java.util.Set<java.lang.String>>);
+    Code:
+       0: new           #643                // class java/util/LinkedHashMap
+       3: dup
+       4: invokespecial #644                // Method java/util/LinkedHashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: invokeinterface #548,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      14: invokeinterface #551,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      19: astore_2
+      20: aload_2
+      21: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      26: ifeq          70
+      29: aload_2
+      30: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      35: checkcast     #43                 // class java/util/Map$Entry
+      38: astore_3
+      39: aload_1
+      40: aload_3
+      41: invokeinterface #554,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      46: checkcast     #621                // class net/minecraft/world/entity/MobSpawnType
+      49: invokevirtual #628                // Method net/minecraft/world/entity/MobSpawnType.name:()Ljava/lang/String;
+      52: aload_3
+      53: invokeinterface #557,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      58: checkcast     #550                // class java/util/Set
+      61: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      66: pop
+      67: goto          20
+      70: aload_1
+      71: areturn
+
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.Storage$BiomeSpawn> parseBiomeSpawns(java.util.List<java.lang.String>);
+    Code:
+       0: new           #361                // class java/util/HashMap
+       3: dup
+       4: invokespecial #362                // Method java/util/HashMap."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: invokeinterface #282,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      14: astore_2
+      15: aload_2
+      16: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      21: ifeq          113
+      24: aload_2
+      25: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      30: checkcast     #190                // class java/lang/String
+      33: astore_3
+      34: aload_3
+      35: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+      38: ifeq          44
+      41: goto          15
+      44: aload_3
+      45: invokevirtual #651                // Method java/lang/String.stripLeading:()Ljava/lang/String;
+      48: ldc_w         #653                // String {
+      51: invokevirtual #255                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+      54: ifeq          85
+      57: aload_3
+      58: invokestatic  #656                // Method parseBiomeSpawnJson:(Ljava/lang/String;)Lio/github/catomon/easymobspawncontrol/Storage$BiomeSpawn;
+      61: astore        4
+      63: aload         4
+      65: ifnull        82
+      68: aload_1
+      69: aload         4
+      71: getfield      #457                // Field io/github/catomon/easymobspawncontrol/Storage$BiomeSpawn.name:Ljava/lang/String;
+      74: aload         4
+      76: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      81: pop
+      82: goto          110
+      85: aload_3
+      86: invokestatic  #659                // Method parseBiomeSpawnString:(Ljava/lang/String;)Lio/github/catomon/easymobspawncontrol/Storage$BiomeSpawn;
+      89: astore        4
+      91: aload         4
+      93: ifnull        110
+      96: aload_1
+      97: aload         4
+      99: getfield      #457                // Field io/github/catomon/easymobspawncontrol/Storage$BiomeSpawn.name:Ljava/lang/String;
+     102: aload         4
+     104: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     109: pop
+     110: goto          15
+     113: aload_1
+     114: ldc_w         #463                // String 0_remove_default_biome_spawns
+     117: getstatic     #467                // Field io/github/catomon/easymobspawncontrol/Storage$BiomeSpawn.REMOVE_DEFAULT_BIOME_SPAWNS:Lio/github/catomon/easymobspawncontrol/Storage$BiomeSpawn;
+     120: invokeinterface #461,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     125: pop
+     126: aload_1
+     127: areturn
+
+  private static io.github.catomon.easymobspawncontrol.Storage$BiomeSpawn parseBiomeSpawnJson(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokestatic  #667                // Method com/google/gson/JsonParser.parseString:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+       4: invokevirtual #673                // Method com/google/gson/JsonElement.getAsJsonObject:()Lcom/google/gson/JsonObject;
+       7: astore_1
+       8: aload_1
+       9: ldc_w         #674                // String name
+      12: invokevirtual #679                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+      15: ifeq          34
+      18: aload_1
+      19: ldc_w         #674                // String name
+      22: invokevirtual #681                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+      25: invokevirtual #684                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+      28: invokevirtual #687                // Method java/lang/String.trim:()Ljava/lang/String;
+      31: goto          37
+      34: ldc_w         #689                // String
+      37: astore_2
+      38: aload_2
+      39: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+      42: ifeq          47
+      45: aconst_null
+      46: areturn
+      47: new           #597                // class java/util/LinkedHashSet
+      50: dup
+      51: invokespecial #598                // Method java/util/LinkedHashSet."<init>":()V
+      54: astore_3
+      55: aload_1
+      56: ldc_w         #691                // String biomeIds
+      59: invokevirtual #679                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+      62: ifeq          144
+      65: aload_1
+      66: ldc_w         #691                // String biomeIds
+      69: invokevirtual #695                // Method com/google/gson/JsonObject.getAsJsonArray:(Ljava/lang/String;)Lcom/google/gson/JsonArray;
+      72: astore        4
+      74: aload         4
+      76: invokevirtual #698                // Method com/google/gson/JsonArray.iterator:()Ljava/util/Iterator;
+      79: astore        5
+      81: aload         5
+      83: invokeinterface #288,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      88: ifeq          144
+      91: aload         5
+      93: invokeinterface #292,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      98: checkcast     #669                // class com/google/gson/JsonElement
+     101: astore        6
+     103: aload         6
+     105: invokevirtual #684                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+     108: invokevirtual #687                // Method java/lang/String.trim:()Ljava/lang/String;
+     111: astore        7
+     113: aload         7
+     115: invokevirtual #295                // Method java/lang/String.isBlank:()Z
+     118: ifne          141
+     121: aload         7
+     123: ldc_w         #700                // String all
+     126: invokevirtual #631                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+     129: ifne          141
+     132: aload_3
+     133: aload         7
+     135: invokeinterface #701,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+     140: pop
+     141: goto          81
+     144: aload_1
+     145: ldc_w         #703                // String category
+     148: invokevirtual #679                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+     151: ifeq          173
+     154: aload_1
+     155: ldc_w         #703                // String category
+     158: invokevirtual #681                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+     161: invokevirtual #684                // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+     164: invokevirtual #687                // Method java/lang/String.trim:()Ljava/lang/String;
+     167: invokevirtual #706                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+     170: goto          176
+     173: ldc_w         #689                // String
+     176: astore        4
+     178: aload_1
+     179: ldc_w         #708                // String weight
+     182: invokevirtual #679                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+     185: ifeq          201
+     188: aload_1
+     189: ldc_w         #708                // String weight
+     192: invokevirtual #681                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+     195: invokevirtual #711                // Method com/google/gson/JsonElement.getAsInt:()I
+     198: goto          203
+     201: bipush        10
+     203: istore        5
+     205: aload_1
+     206: ldc_w         #713                // String minCount
+     209: invokevirtual #679                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+     212: ifeq          228
+     215: aload_1
+     216: ldc_w         #713                // String minCount
+     219: invokevirtual #681                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+     222: invokevirtual #711                // Method com/google/gson/JsonElement.getAsInt:()I
+     225: goto          229
+     228: iconst_1
+     229: istore        6
+     231: aload_1
+     232: ldc_w         #715                // String maxCount
+     235: invokevirtual #679                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+     238: ifeq          254
+     241: aload_1
+     242: ldc_w         #715                // String maxCount
+     245: invokevirtual #681                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+     248: invokevirtual #711                // Method com/google/gson/JsonElement.getAsInt:()I
+     251: goto          255
+     254: iconst_1
+     255: istore        7
+     257: aconst_null
+     258: astore        8
+     260: invokestatic  #720                // Method net/minecraft/world/entity/MobCategory.values:()[Lnet/minecraft/world/entity/MobCategory;
+     263: astore        9
+     265: aload         9
+     267: arraylength
+     268: istore        10
+     270: iconst_0
+     271: istore        11
+     273: iload         11
+     275: iload         10
+     277: if_icmpge     316
+     280: aload         9
+     282: iload         11
+     284: aaload
+     285: astore        12
+     287: aload         12
+     289: invokevirtual #725                // Method net/minecraft/world/entity/MobCategory.m_21607_:()Ljava/lang/String;
+     292: invokevirtual #706                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+     295: aload         4
+     297: invokevirtual #728                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     300: ifeq          310
+     303: aload         12
+     305: astore        8
+     307: goto          316
+     310: iinc          11, 1
+     313: goto          273
+     316: aload         8
+     318: ifnonnull     323
+     321: aconst_null
+     322: areturn
+     323: new           #19                 // class io/github/catomon/eas

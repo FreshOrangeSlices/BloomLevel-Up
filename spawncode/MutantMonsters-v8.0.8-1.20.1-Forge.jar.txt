@@ -1,0 +1,698 @@
+# MutantMonsters-v8.0.8-1.20.1-Forge.jar
+## file assets/mutantmonsters/models/item/creeper_minion_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/mutant_creeper_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/mutant_enderman_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/mutant_skeleton_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/mutant_snow_golem_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/mutant_zombie_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/spider_pig_spawn_egg.json (55 bytes)
+{
+	"parent": "mutantmonsters:item/template_spawn_egg"
+}
+## file assets/mutantmonsters/models/item/template_spawn_egg.json (147 bytes)
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "mutantmonsters:item/spawn_egg",
+		"layer1": "mutantmonsters:item/spawn_egg_overlay"
+	}
+}
+## file fuzs/mutantmonsters/config/ (0 bytes)
+
+## classes: fuzs/mutantmonsters/MutantMonsters.class, fuzs/mutantmonsters/config/CommonConfig.class
+## javap fuzs/mutantmonsters/MutantMonsters.class
+Compiled from "MutantMonsters.java"
+public class fuzs.mutantmonsters.MutantMonsters implements fuzs.puzzleslib.api.core.v1.ModConstructor {
+  public static final java.lang.String MOD_ID = "mutantmonsters";
+
+  public static final java.lang.String MOD_NAME = "Mutant Monsters";
+
+  public static final org.slf4j.Logger LOGGER;
+
+  public static final fuzs.puzzleslib.api.config.v3.ConfigHolder CONFIG;
+
+  public static final fuzs.puzzleslib.api.network.v2.NetworkHandlerV2 NETWORK;
+
+  public fuzs.mutantmonsters.MutantMonsters();
+    Code:
+       0: aload_0
+       1: invokespecial #93                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static net.minecraft.resources.ResourceLocation id(java.lang.String);
+    Code:
+       0: new           #99                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #80                 // String mutantmonsters
+       6: aload_0
+       7: invokespecial #102                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      10: areturn
+
+  public void onConstructMod();
+    Code:
+       0: invokestatic  #109                // Method fuzs/mutantmonsters/init/ModRegistry.touch:()V
+       3: invokestatic  #112                // Method registerMessages:()V
+       6: invokestatic  #115                // Method registerHandlers:()V
+       9: return
+
+  private static void registerMessages();
+    Code:
+       0: getstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+       3: ldc           #119                // class fuzs/mutantmonsters/network/client/C2SCreeperMinionTrackerMessage
+       5: invokedynamic #136,  0            // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      10: getstatic     #142                // Field fuzs/puzzleslib/api/network/v2/MessageDirection.TO_SERVER:Lfuzs/puzzleslib/api/network/v2/MessageDirection;
+      13: invokeinterface #148,  4          // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.register:(Ljava/lang/Class;Ljava/util/function/Supplier;Lfuzs/puzzleslib/api/network/v2/MessageDirection;)V
+      18: getstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      21: ldc           #150                // class fuzs/mutantmonsters/network/S2CMutantLevelParticlesMessage
+      23: invokedynamic #155,  0            // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+      28: getstatic     #158                // Field fuzs/puzzleslib/api/network/v2/MessageDirection.TO_CLIENT:Lfuzs/puzzleslib/api/network/v2/MessageDirection;
+      31: invokeinterface #148,  4          // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.register:(Ljava/lang/Class;Ljava/util/function/Supplier;Lfuzs/puzzleslib/api/network/v2/MessageDirection;)V
+      36: getstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      39: ldc           #160                // class fuzs/mutantmonsters/network/client/C2SCreeperMinionNameMessage
+      41: invokedynamic #165,  0            // InvokeDynamic #2:get:()Ljava/util/function/Supplier;
+      46: getstatic     #142                // Field fuzs/puzzleslib/api/network/v2/MessageDirection.TO_SERVER:Lfuzs/puzzleslib/api/network/v2/MessageDirection;
+      49: invokeinterface #148,  4          // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.register:(Ljava/lang/Class;Ljava/util/function/Supplier;Lfuzs/puzzleslib/api/network/v2/MessageDirection;)V
+      54: getstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      57: ldc           #167                // class fuzs/mutantmonsters/network/S2CAnimationMessage
+      59: invokedynamic #172,  0            // InvokeDynamic #3:get:()Ljava/util/function/Supplier;
+      64: getstatic     #158                // Field fuzs/puzzleslib/api/network/v2/MessageDirection.TO_CLIENT:Lfuzs/puzzleslib/api/network/v2/MessageDirection;
+      67: invokeinterface #148,  4          // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.register:(Ljava/lang/Class;Ljava/util/function/Supplier;Lfuzs/puzzleslib/api/network/v2/MessageDirection;)V
+      72: getstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      75: ldc           #174                // class fuzs/mutantmonsters/network/S2CSeismicWaveFluidParticlesMessage
+      77: invokedynamic #179,  0            // InvokeDynamic #4:get:()Ljava/util/function/Supplier;
+      82: getstatic     #158                // Field fuzs/puzzleslib/api/network/v2/MessageDirection.TO_CLIENT:Lfuzs/puzzleslib/api/network/v2/MessageDirection;
+      85: invokeinterface #148,  4          // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.register:(Ljava/lang/Class;Ljava/util/function/Supplier;Lfuzs/puzzleslib/api/network/v2/MessageDirection;)V
+      90: getstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      93: ldc           #181                // class fuzs/mutantmonsters/network/S2CMutantEndermanHeldBlockMessage
+      95: invokedynamic #186,  0            // InvokeDynamic #5:get:()Ljava/util/function/Supplier;
+     100: getstatic     #158                // Field fuzs/puzzleslib/api/network/v2/MessageDirection.TO_CLIENT:Lfuzs/puzzleslib/api/network/v2/MessageDirection;
+     103: invokeinterface #148,  4          // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.register:(Ljava/lang/Class;Ljava/util/function/Supplier;Lfuzs/puzzleslib/api/network/v2/MessageDirection;)V
+     108: return
+
+  private static void registerHandlers();
+    Code:
+       0: getstatic     #192                // Field fuzs/puzzleslib/api/event/v1/entity/living/LivingHurtCallback.EVENT:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+       3: invokedynamic #203,  0            // InvokeDynamic #6:onLivingHurt:()Lfuzs/puzzleslib/api/event/v1/entity/living/LivingHurtCallback;
+       8: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      13: getstatic     #211                // Field fuzs/puzzleslib/api/event/v1/entity/living/UseItemEvents.TICK:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      16: invokedynamic #223,  0            // InvokeDynamic #7:onUseItemTick:()Lfuzs/puzzleslib/api/event/v1/entity/living/UseItemEvents$Tick;
+      21: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      26: getstatic     #226                // Field fuzs/puzzleslib/api/event/v1/entity/player/ArrowLooseCallback.EVENT:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      29: invokedynamic #235,  0            // InvokeDynamic #8:onArrowLoose:()Lfuzs/puzzleslib/api/event/v1/entity/player/ArrowLooseCallback;
+      34: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      39: getstatic     #238                // Field fuzs/puzzleslib/api/event/v1/entity/player/PlayerInteractEvents.USE_ENTITY:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      42: invokedynamic #248,  0            // InvokeDynamic #9:onUseEntity:()Lfuzs/puzzleslib/api/event/v1/entity/player/PlayerInteractEvents$UseEntity;
+      47: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      52: getstatic     #251                // Field fuzs/puzzleslib/api/event/v1/entity/player/PlayerTickEvents.END:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      55: invokedynamic #261,  0            // InvokeDynamic #10:onEndPlayerTick:()Lfuzs/puzzleslib/api/event/v1/entity/player/PlayerTickEvents$End;
+      60: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      65: getstatic     #264                // Field fuzs/puzzleslib/api/event/v1/entity/ServerEntityLevelEvents.LOAD_V2:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      68: invokedynamic #273,  0            // InvokeDynamic #11:onEntityLoad:()Lfuzs/puzzleslib/api/event/v1/entity/ServerEntityLevelEvents$LoadV2;
+      73: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      78: getstatic     #276                // Field fuzs/puzzleslib/api/event/v1/entity/living/LivingDropsCallback.EVENT:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      81: invokedynamic #285,  0            // InvokeDynamic #12:onLivingDrops:()Lfuzs/puzzleslib/api/event/v1/entity/living/LivingDropsCallback;
+      86: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+      91: getstatic     #288                // Field fuzs/puzzleslib/api/event/v1/entity/player/ItemTossCallback.EVENT:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+      94: invokedynamic #297,  0            // InvokeDynamic #13:onItemToss:()Lfuzs/puzzleslib/api/event/v1/entity/player/ItemTossCallback;
+      99: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+     104: getstatic     #300                // Field fuzs/puzzleslib/api/event/v1/entity/ServerEntityLevelEvents.SPAWN:Lfuzs/puzzleslib/api/event/v1/core/EventInvoker;
+     107: invokedynamic #311,  0            // InvokeDynamic #14:onEntitySpawn:()Lfuzs/puzzleslib/api/event/v1/entity/ServerEntityLevelEvents$Spawn;
+     112: invokeinterface #208,  2          // InterfaceMethod fuzs/puzzleslib/api/event/v1/core/EventInvoker.register:(Ljava/lang/Object;)V
+     117: return
+
+  public void onCommonSetup();
+    Code:
+       0: getstatic     #318                // Field fuzs/puzzleslib/api/init/v2/PotionBrewingRegistry.INSTANCE:Lfuzs/puzzleslib/api/init/v2/PotionBrewingRegistry;
+       3: getstatic     #324                // Field net/minecraft/world/item/alchemy/Potions.f_43601_:Lnet/minecraft/world/item/alchemy/Potion;
+       6: iconst_4
+       7: anewarray     #326                // class net/minecraft/world/level/ItemLike
+      10: dup
+      11: iconst_0
+      12: getstatic     #330                // Field fuzs/mutantmonsters/init/ModRegistry.ENDERSOUL_HAND_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      15: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      20: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      23: aastore
+      24: dup
+      25: iconst_1
+      26: getstatic     #337                // Field fuzs/mutantmonsters/init/ModRegistry.HULK_HAMMER_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      29: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      34: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      37: aastore
+      38: dup
+      39: iconst_2
+      40: getstatic     #340                // Field fuzs/mutantmonsters/init/ModRegistry.CREEPER_SHARD_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      43: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      48: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      51: aastore
+      52: dup
+      53: iconst_3
+      54: getstatic     #343                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_SKULL_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      57: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      62: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      65: aastore
+      66: invokestatic  #349                // Method net/minecraft/world/item/crafting/Ingredient.m_43929_:([Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/item/crafting/Ingredient;
+      69: getstatic     #352                // Field fuzs/mutantmonsters/init/ModRegistry.CHEMICAL_X_POTION:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      72: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      77: checkcast     #354                // class net/minecraft/world/item/alchemy/Potion
+      80: invokeinterface #358,  4          // InterfaceMethod fuzs/puzzleslib/api/init/v2/PotionBrewingRegistry.registerPotionRecipe:(Lnet/minecraft/world/item/alchemy/Potion;Lnet/minecraft/world/item/crafting/Ingredient;Lnet/minecraft/world/item/alchemy/Potion;)V
+      85: return
+
+  public void onEntityAttributeCreation(fuzs.puzzleslib.api.core.v1.context.EntityAttributesCreateContext);
+    Code:
+       0: aload_1
+       1: getstatic     #363                // Field fuzs/mutantmonsters/init/ModRegistry.CREEPER_MINION_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+       4: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+       9: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      12: invokestatic  #371                // Method fuzs/mutantmonsters/world/entity/CreeperMinion.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      15: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+      20: aload_1
+      21: getstatic     #380                // Field fuzs/mutantmonsters/init/ModRegistry.ENDERSOUL_CLONE_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      24: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      29: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      32: invokestatic  #383                // Method fuzs/mutantmonsters/world/entity/EndersoulClone.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      35: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+      40: aload_1
+      41: getstatic     #386                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_CREEPER_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      44: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      49: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      52: invokestatic  #389                // Method fuzs/mutantmonsters/world/entity/mutant/MutantCreeper.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      55: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+      60: aload_1
+      61: getstatic     #392                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      64: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      69: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      72: invokestatic  #395                // Method fuzs/mutantmonsters/world/entity/mutant/MutantEnderman.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      75: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+      80: aload_1
+      81: getstatic     #398                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SNOW_GOLEM_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      84: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      89: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      92: invokestatic  #401                // Method fuzs/mutantmonsters/world/entity/mutant/MutantSnowGolem.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      95: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+     100: aload_1
+     101: getstatic     #404                // Field fuzs/mutantmonsters/init/ModRegistry.SPIDER_PIG_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     104: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     109: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     112: invokestatic  #407                // Method fuzs/mutantmonsters/world/entity/mutant/SpiderPig.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     115: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+     120: getstatic     #412                // Field fuzs/puzzleslib/api/core/v1/ModLoaderEnvironment.INSTANCE:Lfuzs/puzzleslib/api/core/v1/ModLoaderEnvironment;
+     123: invokeinterface #416,  1          // InterfaceMethod fuzs/puzzleslib/api/core/v1/ModLoaderEnvironment.getModLoader:()Lfuzs/puzzleslib/api/core/v1/ModLoader;
+     128: invokevirtual #422                // Method fuzs/puzzleslib/api/core/v1/ModLoader.isForge:()Z
+     131: ifne          174
+     134: aload_1
+     135: getstatic     #425                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     138: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     143: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     146: invokestatic  #428                // Method fuzs/mutantmonsters/world/entity/mutant/MutantSkeleton.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     149: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+     154: aload_1
+     155: getstatic     #431                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     158: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     163: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     166: invokestatic  #434                // Method fuzs/mutantmonsters/world/entity/mutant/MutantZombie.registerAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     169: invokeinterface #377,  3          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/EntityAttributesCreateContext.registerEntityAttributes:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;)V
+     174: return
+
+  public void onRegisterSpawnPlacements(fuzs.puzzleslib.api.core.v1.context.SpawnPlacementsContext);
+    Code:
+       0: aload_1
+       1: getstatic     #363                // Field fuzs/mutantmonsters/init/ModRegistry.CREEPER_MINION_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+       4: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+       9: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      12: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      15: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      18: invokedynamic #459,  0            // InvokeDynamic #15:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      23: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      28: aload_1
+      29: getstatic     #380                // Field fuzs/mutantmonsters/init/ModRegistry.ENDERSOUL_CLONE_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      32: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      37: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      40: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      43: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      46: invokedynamic #472,  0            // InvokeDynamic #16:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      51: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      56: aload_1
+      57: getstatic     #386                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_CREEPER_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      60: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      65: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      68: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      71: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      74: invokedynamic #472,  0            // InvokeDynamic #16:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      79: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      84: aload_1
+      85: getstatic     #392                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      88: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      93: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      96: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      99: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+     102: invokedynamic #477,  0            // InvokeDynamic #17:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+     107: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+     112: aload_1
+     113: getstatic     #425                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     116: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     121: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     124: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+     127: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+     130: invokedynamic #472,  0            // InvokeDynamic #16:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+     135: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+     140: aload_1
+     141: getstatic     #398                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SNOW_GOLEM_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     144: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     149: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     152: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+     155: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+     158: invokedynamic #459,  0            // InvokeDynamic #15:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+     163: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+     168: aload_1
+     169: getstatic     #431                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     172: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     177: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     180: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+     183: getstatic     #446                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+     186: invokedynamic #472,  0            // InvokeDynamic #16:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+     191: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+     196: aload_1
+     197: getstatic     #404                // Field fuzs/mutantmonsters/init/ModRegistry.SPIDER_PIG_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     200: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     205: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     208: getstatic     #442                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+     211: getstatic     #480                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+     214: invokedynamic #487,  0            // InvokeDynamic #18:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+     219: invokeinterface #465,  5          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/SpawnPlacementsContext.registerSpawnPlacement:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+     224: return
+
+  public void onRegisterBiomeModifications(fuzs.puzzleslib.api.core.v1.context.BiomeModificationsContext);
+    Code:
+       0: aload_1
+       1: getstatic     #496                // Field fuzs/puzzleslib/api/biome/v1/BiomeLoadingPhase.ADDITIONS:Lfuzs/puzzleslib/api/biome/v1/BiomeLoadingPhase;
+       4: invokedynamic #508,  0            // InvokeDynamic #19:test:()Ljava/util/function/Predicate;
+       9: invokedynamic #519,  0            // InvokeDynamic #20:accept:()Ljava/util/function/Consumer;
+      14: invokeinterface #524,  4          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/BiomeModificationsContext.register:(Lfuzs/puzzleslib/api/biome/v1/BiomeLoadingPhase;Ljava/util/function/Predicate;Ljava/util/function/Consumer;)V
+      19: return
+
+  private static void addMutantSpawn(fuzs.puzzleslib.api.biome.v1.MobSpawnSettingsContext, double, net.minecraft.world.entity.EntityType<?>, net.minecraft.world.entity.EntityType<?>);
+    Code:
+       0: dload_1
+       1: dconst_0
+       2: dcmpl
+       3: ifne          7
+       6: return
+       7: aload_0
+       8: getstatic     #534                // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+      11: invokeinterface #540,  2          // InterfaceMethod fuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext.getSpawnerData:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+      16: invokeinterface #546,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      21: aload_3
+      22: invokedynamic #556,  0            // InvokeDynamic #21:test:(Lnet/minecraft/world/entity/EntityType;)Ljava/util/function/Predicate;
+      27: invokeinterface #562,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      32: invokeinterface #566,  1          // InterfaceMethod java/util/stream/Stream.findAny:()Ljava/util/Optional;
+      37: dload_1
+      38: aload_0
+      39: aload         4
+      41: invokedynamic #576,  0            // InvokeDynamic #22:accept:(DLfuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext;Lnet/minecraft/world/entity/EntityType;)Ljava/util/function/Consumer;
+      46: invokevirtual #582                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      49: aload_0
+      50: aload_3
+      51: invokeinterface #586,  2          // InterfaceMethod fuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext.getSpawnCost:(Lnet/minecraft/world/entity/EntityType;)Lnet/minecraft/world/level/biome/MobSpawnSettings$MobSpawnCost;
+      56: astore        5
+      58: aload         5
+      60: ifnull        81
+      63: aload_0
+      64: aload         4
+      66: aload         5
+      68: invokevirtual #590                // Method net/minecraft/world/level/biome/MobSpawnSettings$MobSpawnCost.f_48385_:()D
+      71: aload         5
+      73: invokevirtual #593                // Method net/minecraft/world/level/biome/MobSpawnSettings$MobSpawnCost.f_48386_:()D
+      76: invokeinterface #597,  6          // InterfaceMethod fuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext.setSpawnCost:(Lnet/minecraft/world/entity/EntityType;DD)V
+      81: return
+
+  public void onRegisterCreativeModeTabs(fuzs.puzzleslib.api.core.v1.context.CreativeModeTabContext);
+    Code:
+       0: aload_1
+       1: ldc           #80                 // String mutantmonsters
+       3: invokestatic  #615                // InterfaceMethod fuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator.from:(Ljava/lang/String;)Lfuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator;
+       6: invokedynamic #622,  0            // InvokeDynamic #23:get:()Ljava/util/function/Supplier;
+      11: invokeinterface #626,  2          // InterfaceMethod fuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator.icon:(Ljava/util/function/Supplier;)Lfuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator;
+      16: invokedynamic #636,  0            // InvokeDynamic #24:m_257865_:()Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;
+      21: invokeinterface #640,  2          // InterfaceMethod fuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator.displayItems:(Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;)Lfuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator;
+      26: invokeinterface #644,  1          // InterfaceMethod fuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator.appendEnchantmentsAndPotions:()Lfuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator;
+      31: invokeinterface #650,  2          // InterfaceMethod fuzs/puzzleslib/api/core/v1/context/CreativeModeTabContext.registerCreativeModeTab:(Lfuzs/puzzleslib/api/item/v2/CreativeModeTabConfigurator;)V
+      36: return
+
+  public fuzs.puzzleslib.api.core.v1.ContentRegistrationFlags[] getContentRegistrationFlags();
+    Code:
+       0: iconst_1
+       1: anewarray     #655                // class fuzs/puzzleslib/api/core/v1/ContentRegistrationFlags
+       4: dup
+       5: iconst_0
+       6: getstatic     #659                // Field fuzs/puzzleslib/api/core/v1/ContentRegistrationFlags.BIOME_MODIFICATIONS:Lfuzs/puzzleslib/api/core/v1/ContentRegistrationFlags;
+       9: aastore
+      10: areturn
+
+  private static void lambda$onRegisterCreativeModeTabs$5(net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters, net.minecraft.world.item.CreativeModeTab$Output);
+    Code:
+       0: aload_1
+       1: getstatic     #662                // Field fuzs/mutantmonsters/init/ModRegistry.CREEPER_MINION_TRACKER_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+       4: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+       9: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      12: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      17: aload_1
+      18: getstatic     #340                // Field fuzs/mutantmonsters/init/ModRegistry.CREEPER_SHARD_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      21: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      26: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      29: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      34: aload_1
+      35: getstatic     #330                // Field fuzs/mutantmonsters/init/ModRegistry.ENDERSOUL_HAND_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      38: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      43: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      46: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      51: aload_1
+      52: getstatic     #337                // Field fuzs/mutantmonsters/init/ModRegistry.HULK_HAMMER_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      55: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      60: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      63: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      68: aload_1
+      69: getstatic     #669                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_ARMS_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      72: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      77: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      80: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      85: aload_1
+      86: getstatic     #672                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_LIMB_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      89: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      94: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      97: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     102: aload_1
+     103: getstatic     #675                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_PELVIS_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     106: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     111: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     114: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     119: aload_1
+     120: getstatic     #678                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_RIB_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     123: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     128: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     131: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     136: aload_1
+     137: getstatic     #681                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_RIB_CAGE_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     140: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     145: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     148: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     153: aload_1
+     154: getstatic     #684                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_SHOULDER_PAD_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     157: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     162: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     165: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     170: aload_1
+     171: getstatic     #343                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_SKULL_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     174: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     179: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     182: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     187: aload_1
+     188: getstatic     #687                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_CHESTPLATE_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     191: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     196: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     199: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     204: aload_1
+     205: getstatic     #690                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_LEGGINGS_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     208: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     213: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     216: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     221: aload_1
+     222: getstatic     #693                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_BOOTS_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     225: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     230: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     233: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     238: aload_1
+     239: getstatic     #696                // Field fuzs/mutantmonsters/init/ModRegistry.CREEPER_MINION_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     242: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     247: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     250: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     255: aload_1
+     256: getstatic     #699                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_CREEPER_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     259: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     264: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     267: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     272: aload_1
+     273: getstatic     #702                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ENDERMAN_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     276: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     281: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     284: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     289: aload_1
+     290: getstatic     #705                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     293: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     298: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     301: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     306: aload_1
+     307: getstatic     #708                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SNOW_GOLEM_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     310: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     315: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     318: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     323: aload_1
+     324: getstatic     #711                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ZOMBIE_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     327: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     332: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     335: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     340: aload_1
+     341: getstatic     #714                // Field fuzs/mutantmonsters/init/ModRegistry.SPIDER_PIG_SPAWN_EGG_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+     344: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     349: checkcast     #326                // class net/minecraft/world/level/ItemLike
+     352: invokeinterface #666,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+     357: return
+
+  private static net.minecraft.world.item.ItemStack lambda$onRegisterCreativeModeTabs$4();
+    Code:
+       0: new           #720                // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #330                // Field fuzs/mutantmonsters/init/ModRegistry.ENDERSOUL_HAND_ITEM:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+       7: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      12: checkcast     #326                // class net/minecraft/world/level/ItemLike
+      15: invokespecial #722                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      18: areturn
+
+  private static void lambda$addMutantSpawn$3(double, fuzs.puzzleslib.api.biome.v1.MobSpawnSettingsContext, net.minecraft.world.entity.EntityType, net.minecraft.world.level.biome.MobSpawnSettings$SpawnerData);
+    Code:
+       0: iconst_1
+       1: aload         4
+       3: invokevirtual #726                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData.m_142631_:()Lnet/minecraft/util/random/Weight;
+       6: invokevirtual #732                // Method net/minecraft/util/random/Weight.m_146281_:()I
+       9: i2d
+      10: dload_0
+      11: dmul
+      12: d2i
+      13: invokestatic  #738                // Method java/lang/Math.max:(II)I
+      16: istore        5
+      18: aload_2
+      19: getstatic     #534                // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+      22: new           #63                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+      25: dup
+      26: aload_3
+      27: iload         5
+      29: iconst_1
+      30: iconst_1
+      31: invokespecial #741                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+      34: invokeinterface #745,  3          // InterfaceMethod fuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext.addSpawn:(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/world/level/biome/MobSpawnSettings$SpawnerData;)V
+      39: return
+
+  private static boolean lambda$addMutantSpawn$2(net.minecraft.world.entity.EntityType, net.minecraft.world.level.biome.MobSpawnSettings$SpawnerData);
+    Code:
+       0: aload_1
+       1: getfield      #752                // Field net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData.f_48404_:Lnet/minecraft/world/entity/EntityType;
+       4: aload_0
+       5: if_acmpne     12
+       8: iconst_1
+       9: goto          13
+      12: iconst_0
+      13: ireturn
+
+  private static void lambda$onRegisterBiomeModifications$1(fuzs.puzzleslib.api.biome.v1.BiomeModificationContext);
+    Code:
+       0: aload_0
+       1: invokevirtual #759                // Method fuzs/puzzleslib/api/biome/v1/BiomeModificationContext.mobSpawnSettings:()Lfuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext;
+       4: astore_1
+       5: getstatic     #761                // Field CONFIG:Lfuzs/puzzleslib/api/config/v3/ConfigHolder;
+       8: ldc_w         #763                // class fuzs/mutantmonsters/config/CommonConfig
+      11: invokeinterface #766,  2          // InterfaceMethod fuzs/puzzleslib/api/config/v3/ConfigHolder.get:(Ljava/lang/Class;)Lfuzs/puzzleslib/api/config/v3/ConfigCore;
+      16: checkcast     #763                // class fuzs/mutantmonsters/config/CommonConfig
+      19: astore_2
+      20: aload_1
+      21: aload_2
+      22: getfield      #769                // Field fuzs/mutantmonsters/config/CommonConfig.mutantCreeperSpawnWeight:D
+      25: getstatic     #772                // Field net/minecraft/world/entity/EntityType.f_20558_:Lnet/minecraft/world/entity/EntityType;
+      28: getstatic     #386                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_CREEPER_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      31: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      36: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      39: invokestatic  #774                // Method addMutantSpawn:(Lfuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext;DLnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/EntityType;)V
+      42: aload_1
+      43: aload_2
+      44: getfield      #777                // Field fuzs/mutantmonsters/config/CommonConfig.mutantEndermanSpawnWeight:D
+      47: getstatic     #780                // Field net/minecraft/world/entity/EntityType.f_20566_:Lnet/minecraft/world/entity/EntityType;
+      50: getstatic     #392                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      53: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      58: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      61: invokestatic  #774                // Method addMutantSpawn:(Lfuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext;DLnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/EntityType;)V
+      64: aload_1
+      65: aload_2
+      66: getfield      #783                // Field fuzs/mutantmonsters/config/CommonConfig.mutantSkeletonSpawnWeight:D
+      69: getstatic     #786                // Field net/minecraft/world/entity/EntityType.f_20524_:Lnet/minecraft/world/entity/EntityType;
+      72: getstatic     #425                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_SKELETON_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      75: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+      80: checkcast     #365                // class net/minecraft/world/entity/EntityType
+      83: invokestatic  #774                // Method addMutantSpawn:(Lfuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext;DLnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/EntityType;)V
+      86: aload_1
+      87: aload_2
+      88: getfield      #789                // Field fuzs/mutantmonsters/config/CommonConfig.mutantZombieSpawnWeight:D
+      91: getstatic     #792                // Field net/minecraft/world/entity/EntityType.f_20501_:Lnet/minecraft/world/entity/EntityType;
+      94: getstatic     #431                // Field fuzs/mutantmonsters/init/ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE:Lfuzs/puzzleslib/api/init/v2/RegistryReference;
+      97: invokeinterface #334,  1          // InterfaceMethod fuzs/puzzleslib/api/init/v2/RegistryReference.get:()Ljava/lang/Object;
+     102: checkcast     #365                // class net/minecraft/world/entity/EntityType
+     105: invokestatic  #774                // Method addMutantSpawn:(Lfuzs/puzzleslib/api/biome/v1/MobSpawnSettingsContext;DLnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/EntityType;)V
+     108: return
+
+  private static boolean lambda$onRegisterBiomeModifications$0(fuzs.puzzleslib.api.biome.v1.BiomeLoadingContext);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  static {};
+    Code:
+       0: ldc           #83                 // String Mutant Monsters
+       2: invokestatic  #805                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/String;)Lorg/slf4j/Logger;
+       5: putstatic     #807                // Field LOGGER:Lorg/slf4j/Logger;
+       8: ldc           #80                 // String mutantmonsters
+      10: invokestatic  #811                // InterfaceMethod fuzs/puzzleslib/api/config/v3/ConfigHolder.builder:(Ljava/lang/String;)Lfuzs/puzzleslib/api/config/v3/ConfigHolder$Builder;
+      13: ldc_w         #763                // class fuzs/mutantmonsters/config/CommonConfig
+      16: invokeinterface #815,  2          // InterfaceMethod fuzs/puzzleslib/api/config/v3/ConfigHolder$Builder.common:(Ljava/lang/Class;)Lfuzs/puzzleslib/api/config/v3/ConfigHolder$Builder;
+      21: ldc_w         #817                // class fuzs/mutantmonsters/config/ServerConfig
+      24: invokeinterface #820,  2          // InterfaceMethod fuzs/puzzleslib/api/config/v3/ConfigHolder$Builder.server:(Ljava/lang/Class;)Lfuzs/puzzleslib/api/config/v3/ConfigHolder$Builder;
+      29: putstatic     #761                // Field CONFIG:Lfuzs/puzzleslib/api/config/v3/ConfigHolder;
+      32: ldc           #80                 // String mutantmonsters
+      34: invokestatic  #824                // InterfaceMethod fuzs/puzzleslib/api/network/v2/NetworkHandlerV2.build:(Ljava/lang/String;)Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      37: putstatic     #117                // Field NETWORK:Lfuzs/puzzleslib/api/network/v2/NetworkHandlerV2;
+      40: return
+}
+
+## javap fuzs/mutantmonsters/config/CommonConfig.class
+Compiled from "CommonConfig.java"
+public class fuzs.mutantmonsters.config.CommonConfig implements fuzs.puzzleslib.api.config.v3.ConfigCore {
+  public double mutantCreeperSpawnWeight;
+
+  public double mutantEndermanSpawnWeight;
+
+  public double mutantSkeletonSpawnWeight;
+
+  public double mutantZombieSpawnWeight;
+
+  public fuzs.mutantmonsters.config.CommonConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void addToBuilder(net.minecraftforge.common.ForgeConfigSpec$Builder, fuzs.puzzleslib.api.config.v3.ValueCallback);
+    Code:
+       0: aload_2
+       1: aload_1
+       2: ldc           #38                 // String Weight for mutant creeper spawns as a percentage of the vanilla creeper spawn weight. Mutants can spawn in every biome and dimension where their vanilla counterparts can be found.
+       4: invokevirtual #42                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+       7: invokevirtual #46                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.worldRestart:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: ldc           #48                 // String mutant_creeper_spawn_weight
+      12: ldc2_w        #49                 // double 0.05d
+      15: dconst_0
+      16: ldc2_w        #51                 // double 20.0d
+      19: invokevirtual #56                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      22: aload_0
+      23: invokedynamic #75,  0             // InvokeDynamic #0:accept:(Lfuzs/mutantmonsters/config/CommonConfig;)Ljava/util/function/Consumer;
+      28: invokeinterface #80,  3           // InterfaceMethod fuzs/puzzleslib/api/config/v3/ValueCallback.accept:(Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;Ljava/util/function/Consumer;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      33: pop
+      34: aload_2
+      35: aload_1
+      36: ldc           #82                 // String Weight for mutant enderman spawns as a percentage of the vanilla enderman spawn weight. Mutants can spawn in every biome and dimension where their vanilla counterparts can be found.
+      38: invokevirtual #42                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      41: invokevirtual #46                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.worldRestart:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      44: ldc           #84                 // String mutant_enderman_spawn_weight
+      46: ldc2_w        #49                 // double 0.05d
+      49: dconst_0
+      50: ldc2_w        #51                 // double 20.0d
+      53: invokevirtual #56                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      56: aload_0
+      57: invokedynamic #89,  0             // InvokeDynamic #1:accept:(Lfuzs/mutantmonsters/config/CommonConfig;)Ljava/util/function/Consumer;
+      62: invokeinterface #80,  3           // InterfaceMethod fuzs/puzzleslib/api/config/v3/ValueCallback.accept:(Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;Ljava/util/function/Consumer;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      67: pop
+      68: aload_2
+      69: aload_1
+      70: ldc           #91                 // String Weight for mutant skeleton spawns as a percentage of the vanilla skeleton spawn weight. Mutants can spawn in every biome and dimension where their vanilla counterparts can be found.
+      72: invokevirtual #42                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      75: invokevirtual #46                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.worldRestart:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      78: ldc           #93                 // String mutant_skeleton_spawn_weight
+      80: ldc2_w        #49                 // double 0.05d
+      83: dconst_0
+      84: ldc2_w        #51                 // double 20.0d
+      87: invokevirtual #56                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      90: aload_0
+      91: invokedynamic #98,  0             // InvokeDynamic #2:accept:(Lfuzs/mutantmonsters/config/CommonConfig;)Ljava/util/function/Consumer;
+      96: invokeinterface #80,  3           // InterfaceMethod fuzs/puzzleslib/api/config/v3/ValueCallback.accept:(Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;Ljava/util/function/Consumer;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     101: pop
+     102: aload_2
+     103: aload_1
+     104: ldc           #100                // String Weight for mutant zombie spawns as a percentage of the vanilla zombie spawn weight. Mutants can spawn in every biome and dimension where their vanilla counterparts can be found.
+     106: invokevirtual #42                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     109: invokevirtual #46                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.worldRestart:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     112: ldc           #102                // String mutant_zombie_spawn_weight
+     114: ldc2_w        #49                 // double 0.05d
+     117: dconst_0
+     118: ldc2_w        #51                 // double 20.0d
+     121: invokevirtual #56                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     124: aload_0
+     125: invokedynamic #107,  0            // InvokeDynamic #3:accept:(Lfuzs/mutantmonsters/config/CommonConfig;)Ljava/util/function/Consumer;
+     130: invokeinterface #80,  3           // InterfaceMethod fuzs/puzzleslib/api/config/v3/ValueCallback.accept:(Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;Ljava/util/function/Consumer;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     135: pop
+     136: return
+
+  private void lambda$addToBuilder$3(java.lang.Double);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #117                // Method java/lang/Double.doubleValue:()D
+       5: putfield      #119                // Field mutantZombieSpawnWeight:D
+       8: return
+
+  private void lambda$addToBuilder$2(java.lang.Double);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #117                // Method java/lang/Double.doubleValue:()D
+       5: putfield      #123                // Field mutantSkeletonSpawnWeight:D
+       8: return
+
+  private void lambda$addToBuilder$1(java.lang.Double);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #117                // Method java/lang/Double.doubleValue:()D
+       5: putfield      #125                // Field mutantEndermanSpawnWeight:D
+       8: return
+
+  private void lambda$addToBuilder$0(java.lang.Double);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #117                // Method java/lang/Double.doubleValue:()D
+       5: putfield      #127                // Field mutantCreeperSpawnWeight:D
+       8: return
+}

@@ -1,0 +1,1860 @@
+# L_Enders_Cataclysm-3.31.jar
+## file assets/cataclysm/blockstates/boss_respawner.json (87 bytes)
+{
+  "variants": {
+    "": {
+      "model": "cataclysm:block/boss_respawner"
+    }
+  }
+}
+## file assets/cataclysm/models/block/boss_respawner.json (132 bytes)
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "translucent",
+  "textures": {
+    "all": "minecraft:block/spawner"
+  }
+}
+## file assets/cataclysm/models/item/amethyst_crab_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/ancient_remnant_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/aptrgangr_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/boss_respawner.json (870 bytes)
+{
+  "parent": "builtin/entity",
+  "textures": {
+    "particle": "block/spawner"
+  },
+  "display": {
+    "gui": {
+      "rotation": [ 30, 45, 0 ],
+      "translation": [ 0, -1, 0],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale":[ 0.25, 0.25, 0.25 ]
+    },
+    "head": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 1, 1, 1]
+    },
+    "fixed": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 315, 0 ],
+      "translation": [ -2, 2.5, 0],
+      "scale": [ 0.375, 0.375, 0.375 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 315, 0 ],
+      "translation": [ -2, 2.5, 0],
+      "scale": [ 0.375, 0.375, 0.375 ]
+    }
+  }
+}
+## file assets/cataclysm/models/item/cindaria_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/clawdian_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/coral_golem_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/coralssus_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/deepling_angler_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/deepling_brute_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/deepling_priest_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/deepling_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/deepling_warlock_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/draugr_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/elite_draugr_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/ender_golem_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/ender_guardian_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/endermaptera_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/hippocamtus_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/ignis_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/ignited_berserker_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/ignited_revenant_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/kobolediator_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/koboleton_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/lionfish_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/maledictus_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/modern_remnant_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/nameless_sorcerer_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/netherite_ministrosity_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/netherite_monstrosity_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/octohost_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/royal_draugr_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/scylla_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/symbiocto_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/the_baby_leviathan_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/the_harbinger_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/the_leviathan_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/the_prowler_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/the_watcher_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/urchinkin_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file assets/cataclysm/models/item/wadjet_spawn_egg.json (41 bytes)
+{
+  "parent": "item/template_spawn_egg"
+}
+## file com/github/L_Ender/cataclysm/config/ (0 bytes)
+
+## file data/cataclysm/forge/biome_modifier/cataclysm_mob_spawns.json (46 bytes)
+{
+  "type": "cataclysm:cataclysm_mob_spawns"
+}
+## file data/cataclysm/forge/structure_modifier/cataclysm_mob_spawns.json (52 bytes)
+{
+  "type": "cataclysm:cataclysm_structure_spawns"
+}
+## file data/cataclysm/tags/blocks/endermaptera_can_not_spawn.json (743 bytes)
+{
+  "replace": false,
+  "values": [
+    "minecraft:end_stone_brick_stairs",
+    "minecraft:end_stone_bricks",
+    "minecraft:end_stone_brick_wall",
+    "minecraft:crying_obsidian",
+    "minecraft:obsidian",
+    "minecraft:purpur_block",
+    "minecraft:purpur_stairs",
+    "cataclysm:void_stone",
+    "cataclysm:chiseled_obsidian_bricks",
+    "cataclysm:chiseled_end_stone_bricks",
+    "cataclysm:chiseled_purpur_block",
+    "cataclysm:obsidian_brick_slab",
+    "cataclysm:obsidian_bricks",
+    "cataclysm:obsidian_brick_stairs",
+    "cataclysm:obsidian_explosion_trap_bricks",
+    "cataclysm:void_lantern_block",
+    "cataclysm:void_infused_end_stone_bricks",
+    "cataclysm:polished_end_stone",
+    "cataclysm:polished_end_stone_stairs"
+  ]
+}
+## file data/cataclysm/tags/worldgen/biome/amethyst_crab_spawn.json (68 bytes)
+{
+  "replace": false,
+  "values": [
+    "minecraft:lush_caves"
+  ]
+}
+## file data/cataclysm/tags/worldgen/biome/deeplings_spawn.json (173 bytes)
+{
+  "replace": false,
+  "values": [
+    "minecraft:deep_ocean",
+    "minecraft:deep_lukewarm_ocean",
+    "minecraft:deep_cold_ocean",
+    "minecraft:deep_frozen_ocean"
+  ]
+}
+## file data/cataclysm/tags/worldgen/biome/koboleton_spawn.json (123 bytes)
+{
+  "replace": false,
+  "values": [
+    "minecraft:desert",
+    "#minecraft:is_savanna",
+    "#minecraft:is_badlands"
+  ]
+}
+## file data/cataclysm/tags/worldgen/structure/berserker_spawn.json (46 bytes)
+{
+  "values": [
+    "minecraft:fortress"
+  ]
+}
+## classes: com/github/L_Ender/cataclysm/Cataclysm.class, com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.class, com/github/L_Ender/cataclysm/config/CMCommonConfig.class, com/github/L_Ender/cataclysm/config/CommonConfig$Spawning.class, com/github/L_Ender/cataclysm/world/CMMobSpawnBiomeModifier.class, com/github/L_Ender/cataclysm/world/CMWorldRegistry.class
+## javap com/github/L_Ender/cataclysm/Cataclysm.class
+Compiled from "Cataclysm.java"
+public class com.github.L_Ender.cataclysm.Cataclysm {
+  public static final java.lang.String MODID = "cataclysm";
+
+  public static final org.apache.logging.log4j.Logger LOGGER;
+
+  public static final net.minecraftforge.network.simple.SimpleChannel NETWORK_WRAPPER;
+
+  private static final java.lang.String PROTOCOL_VERSION;
+
+  public static com.github.L_Ender.cataclysm.CommonProxy PROXY;
+
+  private static int packetsRegistered;
+
+  public com.github.L_Ender.cataclysm.Cataclysm();
+    Code:
+       0: aload_0
+       1: invokespecial #123                // Method java/lang/Object."<init>":()V
+       4: invokestatic  #129                // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.get:()Lnet/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext;
+       7: invokevirtual #133                // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.getModEventBus:()Lnet/minecraftforge/eventbus/api/IEventBus;
+      10: astore_1
+      11: aload_1
+      12: aload_0
+      13: invokedynamic #152,  0            // InvokeDynamic #0:accept:(Lcom/github/L_Ender/cataclysm/Cataclysm;)Ljava/util/function/Consumer;
+      18: invokeinterface #158,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      23: aload_1
+      24: aload_0
+      25: invokedynamic #165,  0            // InvokeDynamic #1:accept:(Lcom/github/L_Ender/cataclysm/Cataclysm;)Ljava/util/function/Consumer;
+      30: invokeinterface #158,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      35: getstatic     #171                // Field com/github/L_Ender/cataclysm/init/ModGroup.DEF_REG:Lnet/minecraftforge/registries/DeferredRegister;
+      38: aload_1
+      39: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      42: aload_1
+      43: aload_0
+      44: invokedynamic #184,  0            // InvokeDynamic #2:accept:(Lcom/github/L_Ender/cataclysm/Cataclysm;)Ljava/util/function/Consumer;
+      49: invokeinterface #158,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      54: aload_1
+      55: invokedynamic #195,  0            // InvokeDynamic #3:accept:()Ljava/util/function/Consumer;
+      60: invokeinterface #158,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      65: aload_1
+      66: invokedynamic #202,  0            // InvokeDynamic #4:accept:()Ljava/util/function/Consumer;
+      71: invokeinterface #158,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      76: invokestatic  #207                // Method net/minecraftforge/fml/ModLoadingContext.get:()Lnet/minecraftforge/fml/ModLoadingContext;
+      79: getstatic     #211                // Field net/minecraftforge/fml/config/ModConfig$Type.CLIENT:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      82: getstatic     #215                // Field com/github/L_Ender/cataclysm/config/ConfigHolder.CLIENT_SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+      85: ldc           #217                // String %s-client.toml
+      87: iconst_1
+      88: anewarray     #4                  // class java/lang/Object
+      91: dup
+      92: iconst_0
+      93: ldc           #110                // String cataclysm
+      95: aastore
+      96: invokestatic  #223                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      99: invokevirtual #227                // Method net/minecraftforge/fml/ModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;Ljava/lang/String;)V
+     102: invokestatic  #207                // Method net/minecraftforge/fml/ModLoadingContext.get:()Lnet/minecraftforge/fml/ModLoadingContext;
+     105: getstatic     #230                // Field net/minecraftforge/fml/config/ModConfig$Type.COMMON:Lnet/minecraftforge/fml/config/ModConfig$Type;
+     108: getstatic     #233                // Field com/github/L_Ender/cataclysm/config/ConfigHolder.COMMON_SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+     111: ldc           #235                // String %s-common.toml
+     113: iconst_1
+     114: anewarray     #4                  // class java/lang/Object
+     117: dup
+     118: iconst_0
+     119: ldc           #110                // String cataclysm
+     121: aastore
+     122: invokestatic  #223                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     125: invokevirtual #227                // Method net/minecraftforge/fml/ModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;Ljava/lang/String;)V
+     128: getstatic     #240                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTS:Lnet/minecraftforge/registries/DeferredRegister;
+     131: aload_1
+     132: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     135: getstatic     #245                // Field com/github/L_Ender/cataclysm/init/ModBlocks.BLOCKS:Lnet/minecraftforge/registries/DeferredRegister;
+     138: aload_1
+     139: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     142: getstatic     #250                // Field com/github/L_Ender/cataclysm/init/ModParticle.PARTICLE:Lnet/minecraftforge/registries/DeferredRegister;
+     145: aload_1
+     146: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     149: getstatic     #255                // Field com/github/L_Ender/cataclysm/init/ModStructures.STRUCTURE_PIECE_DEF_REG:Lnet/minecraftforge/registries/DeferredRegister;
+     152: aload_1
+     153: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     156: getstatic     #258                // Field com/github/L_Ender/cataclysm/init/ModStructures.STRUCTURE_TYPE_DEF_REG:Lnet/minecraftforge/registries/DeferredRegister;
+     159: aload_1
+     160: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     163: getstatic     #263                // Field com/github/L_Ender/cataclysm/init/ModTileentites.TILE_ENTITY_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+     166: aload_1
+     167: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     170: getstatic     #266                // Field com/github/L_Ender/cataclysm/init/ModEntityDataSerializers.DEF_REG:Lnet/minecraftforge/registries/DeferredRegister;
+     173: aload_1
+     174: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     177: getstatic     #271                // Field com/github/L_Ender/cataclysm/init/ModEntities.ENTITY_TYPE:Lnet/minecraftforge/registries/DeferredRegister;
+     180: aload_1
+     181: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     184: getstatic     #276                // Field com/github/L_Ender/cataclysm/init/ModItems.ITEMS:Lnet/minecraftforge/registries/DeferredRegister;
+     187: aload_1
+     188: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     191: getstatic     #281                // Field com/github/L_Ender/cataclysm/init/ModSounds.SOUNDS:Lnet/minecraftforge/registries/DeferredRegister;
+     194: aload_1
+     195: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     198: getstatic     #286                // Field com/github/L_Ender/cataclysm/init/ModRecipeSerializers.RECIPE_SERIALIZERS:Lnet/minecraftforge/registries/DeferredRegister;
+     201: aload_1
+     202: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     205: getstatic     #291                // Field com/github/L_Ender/cataclysm/init/ModRecipeTypes.RECIPE_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+     208: aload_1
+     209: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     212: getstatic     #294                // Field com/github/L_Ender/cataclysm/init/ModMenu.DEF_REG:Lnet/minecraftforge/registries/DeferredRegister;
+     215: aload_1
+     216: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     219: getstatic     #299                // Field com/github/L_Ender/cataclysm/init/ModAttribute.ATTRIBUTES:Lnet/minecraftforge/registries/DeferredRegister;
+     222: aload_1
+     223: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     226: getstatic     #304                // Field com/github/L_Ender/cataclysm/init/ModStructurePlacementType.STRUCTURE_PLACEMENT_TYPE:Lnet/minecraftforge/registries/DeferredRegister;
+     229: aload_1
+     230: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     233: getstatic     #309                // Field com/github/L_Ender/cataclysm/init/ModStructureProcessor.STRUCTURE_PROCESSOR:Lnet/minecraftforge/registries/DeferredRegister;
+     236: aload_1
+     237: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     240: getstatic     #311                // Field PROXY:Lcom/github/L_Ender/cataclysm/CommonProxy;
+     243: invokevirtual #316                // Method com/github/L_Ender/cataclysm/CommonProxy.init:()V
+     246: getstatic     #322                // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+     249: aload_0
+     250: invokeinterface #324,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+     255: getstatic     #322                // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+     258: new           #326                // class com/github/L_Ender/cataclysm/event/ServerEventHandler
+     261: dup
+     262: invokespecial #327                // Method com/github/L_Ender/cataclysm/event/ServerEventHandler."<init>":()V
+     265: invokeinterface #324,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+     270: getstatic     #322                // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+     273: ldc_w         #329                // class net/minecraft/world/entity/Entity
+     276: invokedynamic #338,  0            // InvokeDynamic #5:accept:()Ljava/util/function/Consumer;
+     281: invokeinterface #342,  3          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addGenericListener:(Ljava/lang/Class;Ljava/util/function/Consumer;)V
+     286: aload_1
+     287: invokedynamic #349,  0            // InvokeDynamic #6:accept:()Ljava/util/function/Consumer;
+     292: invokeinterface #158,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+     297: getstatic     #353                // Field net/minecraftforge/registries/ForgeRegistries$Keys.BIOME_MODIFIER_SERIALIZERS:Lnet/minecraft/resources/ResourceKey;
+     300: ldc           #110                // String cataclysm
+     302: invokestatic  #357                // Method net/minecraftforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/DeferredRegister;
+     305: astore_2
+     306: aload_2
+     307: aload_1
+     308: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     311: aload_2
+     312: ldc_w         #359                // String cataclysm_mob_spawns
+     315: invokedynamic #372,  0            // InvokeDynamic #7:get:()Ljava/util/function/Supplier;
+     320: invokevirtual #375                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+     323: pop
+     324: getstatic     #378                // Field net/minecraftforge/registries/ForgeRegistries$Keys.STRUCTURE_MODIFIER_SERIALIZERS:Lnet/minecraft/resources/ResourceKey;
+     327: ldc           #110                // String cataclysm
+     329: invokestatic  #357                // Method net/minecraftforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/DeferredRegister;
+     332: astore_3
+     333: aload_3
+     334: aload_1
+     335: invokevirtual #177                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     338: aload_3
+     339: ldc_w         #380                // String cataclysm_structure_spawns
+     342: invokedynamic #385,  0            // InvokeDynamic #8:get:()Ljava/util/function/Supplier;
+     347: invokevirtual #375                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+     350: pop
+     351: return
+
+  private void setupEntityModelLayers(net.minecraftforge.client.event.EntityRenderersEvent$RegisterLayerDefinitions);
+    Code:
+       0: aload_1
+       1: invokestatic  #396                // Method com/github/L_Ender/cataclysm/client/model/CMModelLayers.register:(Lnet/minecraftforge/client/event/EntityRenderersEvent$RegisterLayerDefinitions;)V
+       4: return
+
+  public static <MSG> void sendMSGToServer(MSG);
+    Code:
+       0: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+       3: aload_0
+       4: invokevirtual #407                // Method net/minecraftforge/network/simple/SimpleChannel.sendToServer:(Ljava/lang/Object;)V
+       7: return
+
+  public static <MSG> void sendMSGToAll(MSG);
+    Code:
+       0: invokestatic  #417                // Method net/minecraftforge/server/ServerLifecycleHooks.getCurrentServer:()Lnet/minecraft/server/MinecraftServer;
+       3: invokevirtual #423                // Method net/minecraft/server/MinecraftServer.m_6846_:()Lnet/minecraft/server/players/PlayerList;
+       6: invokevirtual #429                // Method net/minecraft/server/players/PlayerList.m_11314_:()Ljava/util/List;
+       9: invokeinterface #435,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      14: astore_1
+      15: aload_1
+      16: invokeinterface #441,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      21: ifeq          42
+      24: aload_1
+      25: invokeinterface #444,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      30: checkcast     #446                // class net/minecraft/server/level/ServerPlayer
+      33: astore_2
+      34: aload_0
+      35: aload_2
+      36: invokestatic  #450                // Method sendNonLocal:(Ljava/lang/Object;Lnet/minecraft/server/level/ServerPlayer;)V
+      39: goto          15
+      42: return
+
+  public static <MSG> void sendNonLocal(MSG, net.minecraft.server.level.ServerPlayer);
+    Code:
+       0: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+       3: aload_0
+       4: aload_1
+       5: getfield      #457                // Field net/minecraft/server/level/ServerPlayer.f_8906_:Lnet/minecraft/server/network/ServerGamePacketListenerImpl;
+       8: getfield      #463                // Field net/minecraft/server/network/ServerGamePacketListenerImpl.f_9742_:Lnet/minecraft/network/Connection;
+      11: getstatic     #469                // Field net/minecraftforge/network/NetworkDirection.PLAY_TO_CLIENT:Lnet/minecraftforge/network/NetworkDirection;
+      14: invokevirtual #473                // Method net/minecraftforge/network/simple/SimpleChannel.sendTo:(Ljava/lang/Object;Lnet/minecraft/network/Connection;Lnet/minecraftforge/network/NetworkDirection;)V
+      17: return
+
+  private void setupClient(net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent);
+    Code:
+       0: getstatic     #311                // Field PROXY:Lcom/github/L_Ender/cataclysm/CommonProxy;
+       3: invokevirtual #477                // Method com/github/L_Ender/cataclysm/CommonProxy.clientInit:()V
+       6: aload_1
+       7: invokedynamic #486,  0            // InvokeDynamic #9:run:()Ljava/lang/Runnable;
+      12: invokevirtual #492                // Method net/minecraftforge/fml/event/lifecycle/FMLClientSetupEvent.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+      15: pop
+      16: return
+
+  private void setup(net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent);
+    Code:
+       0: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+       3: getstatic     #495                // Field packetsRegistered:I
+       6: dup
+       7: iconst_1
+       8: iadd
+       9: putstatic     #495                // Field packetsRegistered:I
+      12: ldc           #62                 // class com/github/L_Ender/cataclysm/message/MessageCMMultipart
+      14: invokedynamic #507,  0            // InvokeDynamic #10:accept:()Ljava/util/function/BiConsumer;
+      19: invokedynamic #518,  0            // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+      24: invokedynamic #526,  0            // InvokeDynamic #12:accept:()Ljava/util/function/BiConsumer;
+      29: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+      32: pop
+      33: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+      36: getstatic     #495                // Field packetsRegistered:I
+      39: dup
+      40: iconst_1
+      41: iadd
+      42: putstatic     #495                // Field packetsRegistered:I
+      45: ldc           #67                 // class com/github/L_Ender/cataclysm/message/MessageUpdateblockentity
+      47: invokedynamic #537,  0            // InvokeDynamic #13:accept:()Ljava/util/function/BiConsumer;
+      52: invokedynamic #544,  0            // InvokeDynamic #14:apply:()Ljava/util/function/Function;
+      57: invokedynamic #551,  0            // InvokeDynamic #15:accept:()Ljava/util/function/BiConsumer;
+      62: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+      65: pop
+      66: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+      69: getstatic     #495                // Field packetsRegistered:I
+      72: dup
+      73: iconst_1
+      74: iadd
+      75: putstatic     #495                // Field packetsRegistered:I
+      78: ldc           #71                 // class com/github/L_Ender/cataclysm/message/MessageSwingArm
+      80: invokedynamic #557,  0            // InvokeDynamic #16:accept:()Ljava/util/function/BiConsumer;
+      85: invokedynamic #563,  0            // InvokeDynamic #17:apply:()Ljava/util/function/Function;
+      90: invokedynamic #569,  0            // InvokeDynamic #18:accept:()Ljava/util/function/BiConsumer;
+      95: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+      98: pop
+      99: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     102: getstatic     #495                // Field packetsRegistered:I
+     105: dup
+     106: iconst_1
+     107: iadd
+     108: putstatic     #495                // Field packetsRegistered:I
+     111: ldc           #75                 // class com/github/L_Ender/cataclysm/message/MessageHookFalling
+     113: invokedynamic #574,  0            // InvokeDynamic #19:accept:()Ljava/util/function/BiConsumer;
+     118: invokedynamic #579,  0            // InvokeDynamic #20:apply:()Ljava/util/function/Function;
+     123: invokedynamic #586,  0            // InvokeDynamic #21:accept:()Ljava/util/function/BiConsumer;
+     128: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     131: pop
+     132: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     135: getstatic     #495                // Field packetsRegistered:I
+     138: dup
+     139: iconst_1
+     140: iadd
+     141: putstatic     #495                // Field packetsRegistered:I
+     144: ldc           #79                 // class com/github/L_Ender/cataclysm/message/MessageTidalTentacle
+     146: invokedynamic #591,  0            // InvokeDynamic #22:accept:()Ljava/util/function/BiConsumer;
+     151: invokedynamic #596,  0            // InvokeDynamic #23:apply:()Ljava/util/function/Function;
+     156: invokedynamic #603,  0            // InvokeDynamic #24:accept:()Ljava/util/function/BiConsumer;
+     161: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     164: pop
+     165: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     168: getstatic     #495                // Field packetsRegistered:I
+     171: dup
+     172: iconst_1
+     173: iadd
+     174: putstatic     #495                // Field packetsRegistered:I
+     177: ldc           #83                 // class com/github/L_Ender/cataclysm/message/MessageCharge
+     179: invokedynamic #608,  0            // InvokeDynamic #25:accept:()Ljava/util/function/BiConsumer;
+     184: invokedynamic #613,  0            // InvokeDynamic #26:apply:()Ljava/util/function/Function;
+     189: invokedynamic #620,  0            // InvokeDynamic #27:accept:()Ljava/util/function/BiConsumer;
+     194: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     197: pop
+     198: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     201: getstatic     #495                // Field packetsRegistered:I
+     204: dup
+     205: iconst_1
+     206: iadd
+     207: putstatic     #495                // Field packetsRegistered:I
+     210: ldc_w         #622                // class com/github/L_Ender/cataclysm/message/MessageUpdateBossBar
+     213: invokedynamic #628,  0            // InvokeDynamic #28:accept:()Ljava/util/function/BiConsumer;
+     218: invokedynamic #634,  0            // InvokeDynamic #29:apply:()Ljava/util/function/Function;
+     223: invokedynamic #640,  0            // InvokeDynamic #30:accept:()Ljava/util/function/BiConsumer;
+     228: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     231: pop
+     232: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     235: getstatic     #495                // Field packetsRegistered:I
+     238: dup
+     239: iconst_1
+     240: iadd
+     241: putstatic     #495                // Field packetsRegistered:I
+     244: ldc_w         #642                // class com/github/L_Ender/cataclysm/message/MessageArmorKey
+     247: invokedynamic #648,  0            // InvokeDynamic #31:accept:()Ljava/util/function/BiConsumer;
+     252: invokedynamic #654,  0            // InvokeDynamic #32:apply:()Ljava/util/function/Function;
+     257: invokedynamic #660,  0            // InvokeDynamic #33:accept:()Ljava/util/function/BiConsumer;
+     262: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     265: pop
+     266: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     269: getstatic     #495                // Field packetsRegistered:I
+     272: dup
+     273: iconst_1
+     274: iadd
+     275: putstatic     #495                // Field packetsRegistered:I
+     278: ldc           #87                 // class com/github/L_Ender/cataclysm/message/MessageParticle
+     280: invokedynamic #665,  0            // InvokeDynamic #34:accept:()Ljava/util/function/BiConsumer;
+     285: invokedynamic #670,  0            // InvokeDynamic #35:apply:()Ljava/util/function/Function;
+     290: invokedynamic #677,  0            // InvokeDynamic #36:accept:()Ljava/util/function/BiConsumer;
+     295: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     298: pop
+     299: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     302: getstatic     #495                // Field packetsRegistered:I
+     305: dup
+     306: iconst_1
+     307: iadd
+     308: putstatic     #495                // Field packetsRegistered:I
+     311: ldc           #91                 // class com/github/L_Ender/cataclysm/message/MessageRenderRush
+     313: invokedynamic #682,  0            // InvokeDynamic #37:accept:()Ljava/util/function/BiConsumer;
+     318: invokedynamic #687,  0            // InvokeDynamic #38:apply:()Ljava/util/function/Function;
+     323: invokedynamic #694,  0            // InvokeDynamic #39:accept:()Ljava/util/function/BiConsumer;
+     328: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     331: pop
+     332: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     335: getstatic     #495                // Field packetsRegistered:I
+     338: dup
+     339: iconst_1
+     340: iadd
+     341: putstatic     #495                // Field packetsRegistered:I
+     344: ldc           #95                 // class com/github/L_Ender/cataclysm/message/MessageMusic
+     346: invokedynamic #700,  0            // InvokeDynamic #40:accept:()Ljava/util/function/BiConsumer;
+     351: invokedynamic #706,  0            // InvokeDynamic #41:apply:()Ljava/util/function/Function;
+     356: invokedynamic #713,  0            // InvokeDynamic #42:accept:()Ljava/util/function/BiConsumer;
+     361: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     364: pop
+     365: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     368: getstatic     #495                // Field packetsRegistered:I
+     371: dup
+     372: iconst_1
+     373: iadd
+     374: putstatic     #495                // Field packetsRegistered:I
+     377: ldc           #99                 // class com/github/L_Ender/cataclysm/message/MessageParryFrame
+     379: invokedynamic #718,  0            // InvokeDynamic #43:accept:()Ljava/util/function/BiConsumer;
+     384: invokedynamic #723,  0            // InvokeDynamic #44:apply:()Ljava/util/function/Function;
+     389: invokedynamic #730,  0            // InvokeDynamic #45:accept:()Ljava/util/function/BiConsumer;
+     394: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     397: pop
+     398: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     401: getstatic     #495                // Field packetsRegistered:I
+     404: dup
+     405: iconst_1
+     406: iadd
+     407: putstatic     #495                // Field packetsRegistered:I
+     410: ldc           #103                // class com/github/L_Ender/cataclysm/message/MessageMiniinventory
+     412: invokedynamic #736,  0            // InvokeDynamic #46:accept:()Ljava/util/function/BiConsumer;
+     417: invokedynamic #742,  0            // InvokeDynamic #47:apply:()Ljava/util/function/Function;
+     422: invokedynamic #748,  0            // InvokeDynamic #48:accept:()Ljava/util/function/BiConsumer;
+     427: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     430: pop
+     431: getstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     434: getstatic     #495                // Field packetsRegistered:I
+     437: dup
+     438: iconst_1
+     439: iadd
+     440: putstatic     #495                // Field packetsRegistered:I
+     443: ldc           #107                // class com/github/L_Ender/cataclysm/message/MessageEntityCamera
+     445: invokedynamic #753,  0            // InvokeDynamic #49:accept:()Ljava/util/function/BiConsumer;
+     450: invokedynamic #758,  0            // InvokeDynamic #50:apply:()Ljava/util/function/Function;
+     455: invokedynamic #765,  0            // InvokeDynamic #51:accept:()Ljava/util/function/BiConsumer;
+     460: invokevirtual #530                // Method net/minecraftforge/network/simple/SimpleChannel.registerMessage:(ILjava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)Lnet/minecraftforge/network/simple/IndexedMessageCodec$MessageHandler;
+     463: pop
+     464: aload_1
+     465: invokedynamic #770,  0            // InvokeDynamic #52:run:()Ljava/lang/Runnable;
+     470: invokevirtual #773                // Method net/minecraftforge/fml/event/lifecycle/FMLCommonSetupEvent.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+     473: pop
+     474: aload_1
+     475: invokedynamic #780,  0            // InvokeDynamic #53:run:()Ljava/lang/Runnable;
+     480: invokevirtual #773                // Method net/minecraftforge/fml/event/lifecycle/FMLCommonSetupEvent.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+     483: pop
+     484: return
+
+  private static void lambda$setupClient$3();
+    Code:
+       0: getstatic     #787                // Field net/minecraft/client/renderer/blockentity/SkullBlockRenderer.f_112519_:Ljava/util/Map;
+       3: getstatic     #791                // Field com/github/L_Ender/cataclysm/blocks/Cataclysm_Skull_Block$Types.KOBOLEDIATOR:Lcom/github/L_Ender/cataclysm/blocks/Cataclysm_Skull_Block$Types;
+       6: new           #793                // class net/minecraft/resources/ResourceLocation
+       9: dup
+      10: ldc           #110                // String cataclysm
+      12: ldc_w         #795                // String textures/entity/koboleton/kobolediator.png
+      15: invokespecial #798                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      18: invokeinterface #804,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      23: pop
+      24: getstatic     #787                // Field net/minecraft/client/renderer/blockentity/SkullBlockRenderer.f_112519_:Ljava/util/Map;
+      27: getstatic     #807                // Field com/github/L_Ender/cataclysm/blocks/Cataclysm_Skull_Block$Types.APTRGANGR:Lcom/github/L_Ender/cataclysm/blocks/Cataclysm_Skull_Block$Types;
+      30: new           #793                // class net/minecraft/resources/ResourceLocation
+      33: dup
+      34: ldc           #110                // String cataclysm
+      36: ldc_w         #809                // String textures/entity/draugar/aptrgangr.png
+      39: invokespecial #798                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      42: invokeinterface #804,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      47: pop
+      48: getstatic     #787                // Field net/minecraft/client/renderer/blockentity/SkullBlockRenderer.f_112519_:Ljava/util/Map;
+      51: getstatic     #812                // Field com/github/L_Ender/cataclysm/blocks/Cataclysm_Skull_Block$Types.DRAUGR:Lcom/github/L_Ender/cataclysm/blocks/Cataclysm_Skull_Block$Types;
+      54: new           #793                // class net/minecraft/resources/ResourceLocation
+      57: dup
+      58: ldc           #110                // String cataclysm
+      60: ldc_w         #814                // String textures/entity/draugar/draugr.png
+      63: invokespecial #798                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      66: invokeinterface #804,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      71: pop
+      72: return
+
+  private static java.lang.String lambda$static$2();
+    Code:
+       0: getstatic     #818                // Field PROTOCOL_VERSION:Ljava/lang/String;
+       3: areturn
+
+  private static java.util.function.Supplier lambda$static$1();
+    Code:
+       0: invokedynamic #824,  0            // InvokeDynamic #54:get:()Ljava/util/function/Supplier;
+       5: areturn
+
+  private static java.util.function.Supplier lambda$static$0();
+    Code:
+       0: invokedynamic #830,  0            // InvokeDynamic #55:get:()Ljava/util/function/Supplier;
+       5: areturn
+
+  static {};
+    Code:
+       0: invokestatic  #837                // Method org/apache/logging/log4j/LogManager.getLogger:()Lorg/apache/logging/log4j/Logger;
+       3: putstatic     #839                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       6: iconst_1
+       7: invokestatic  #845                // Method java/lang/Integer.toString:(I)Ljava/lang/String;
+      10: putstatic     #818                // Field PROTOCOL_VERSION:Ljava/lang/String;
+      13: invokedynamic #850,  0            // InvokeDynamic #56:get:()Ljava/util/function/Supplier;
+      18: invokedynamic #854,  0            // InvokeDynamic #57:get:()Ljava/util/function/Supplier;
+      23: invokestatic  #860                // Method net/minecraftforge/fml/DistExecutor.runForDist:(Ljava/util/function/Supplier;Ljava/util/function/Supplier;)Ljava/lang/Object;
+      26: checkcast     #313                // class com/github/L_Ender/cataclysm/CommonProxy
+      29: putstatic     #311                // Field PROXY:Lcom/github/L_Ender/cataclysm/CommonProxy;
+      32: new           #793                // class net/minecraft/resources/ResourceLocation
+      35: dup
+      36: ldc           #110                // String cataclysm
+      38: ldc_w         #862                // String main_channel
+      41: invokespecial #798                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      44: invokestatic  #866                // Method net/minecraftforge/network/NetworkRegistry$ChannelBuilder.named:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraftforge/network/NetworkRegistry$ChannelBuilder;
+      47: astore_0
+      48: getstatic     #818                // Field PROTOCOL_VERSION:Ljava/lang/String;
+      51: astore_1
+      52: aload_1
+      53: invokevirtual #870                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      56: pop
+      57: aload_0
+      58: aload_1
+      59: dup
+      60: invokestatic  #875                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      63: pop
+      64: invokedynamic #887,  0            // InvokeDynamic #58:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+      69: invokevirtual #891                // Method net/minecraftforge/network/NetworkRegistry$ChannelBuilder.clientAcceptedVersions:(Ljava/util/function/Predicate;)Lnet/minecraftforge/network/NetworkRegistry$ChannelBuilder;
+      72: astore_0
+      73: getstatic     #818                // Field PROTOCOL_VERSION:Ljava/lang/String;
+      76: astore_1
+      77: aload_1
+      78: invokevirtual #870                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      81: pop
+      82: aload_0
+      83: aload_1
+      84: dup
+      85: invokestatic  #875                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      88: pop
+      89: invokedynamic #887,  0            // InvokeDynamic #58:test:(Ljava/lang/String;)Ljava/util/function/Predicate;
+      94: invokevirtual #894                // Method net/minecraftforge/network/NetworkRegistry$ChannelBuilder.serverAcceptedVersions:(Ljava/util/function/Predicate;)Lnet/minecraftforge/network/NetworkRegistry$ChannelBuilder;
+      97: invokedynamic #899,  0            // InvokeDynamic #59:get:()Ljava/util/function/Supplier;
+     102: invokevirtual #903                // Method net/minecraftforge/network/NetworkRegistry$ChannelBuilder.networkProtocolVersion:(Ljava/util/function/Supplier;)Lnet/minecraftforge/network/NetworkRegistry$ChannelBuilder;
+     105: invokevirtual #907                // Method net/minecraftforge/network/NetworkRegistry$ChannelBuilder.simpleChannel:()Lnet/minecraftforge/network/simple/SimpleChannel;
+     108: putstatic     #402                // Field NETWORK_WRAPPER:Lnet/minecraftforge/network/simple/SimpleChannel;
+     111: return
+}
+
+## javap com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.class
+Compiled from "CMCommonConfig.java"
+public class com.github.L_Ender.cataclysm.config.CMCommonConfig$Spawning {
+  public static int DeeplingSpawnWeight;
+
+  public static int DeeplingSpawnRolls;
+
+  public static int DeeplingBruteSpawnWeight;
+
+  public static int DeeplingBruteSpawnRolls;
+
+  public static int DeeplingAnglerSpawnWeight;
+
+  public static int DeeplingAnglerSpawnRolls;
+
+  public static int DeeplingPriestSpawnWeight;
+
+  public static int DeeplingPriestSpawnRolls;
+
+  public static int DeeplingWarlockSpawnWeight;
+
+  public static int DeeplingWarlockSpawnRolls;
+
+  public static int CoralgolemSpawnWeight;
+
+  public static int CoralgolemSpawnRolls;
+
+  public static int AmethystCrabSpawnWeight;
+
+  public static int AmethystCrabSpawnRolls;
+
+  public static int KoboletonSpawnWeight;
+
+  public static int KoboletonSpawnRolls;
+
+  public static int IgnitedBerserkerSpawnWeight;
+
+  public static int IgnitedBerserkerSpawnRolls;
+
+  public com.github.L_Ender.cataclysm.config.CMCommonConfig$Spawning();
+    Code:
+       0: aload_0
+       1: invokespecial #31                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: iconst_2
+       1: putstatic     #36                 // Field DeeplingSpawnWeight:I
+       4: bipush        30
+       6: putstatic     #38                 // Field DeeplingSpawnRolls:I
+       9: iconst_1
+      10: putstatic     #40                 // Field DeeplingBruteSpawnWeight:I
+      13: bipush        50
+      15: putstatic     #42                 // Field DeeplingBruteSpawnRolls:I
+      18: iconst_2
+      19: putstatic     #44                 // Field DeeplingAnglerSpawnWeight:I
+      22: bipush        30
+      24: putstatic     #46                 // Field DeeplingAnglerSpawnRolls:I
+      27: iconst_1
+      28: putstatic     #48                 // Field DeeplingPriestSpawnWeight:I
+      31: bipush        70
+      33: putstatic     #50                 // Field DeeplingPriestSpawnRolls:I
+      36: iconst_1
+      37: putstatic     #52                 // Field DeeplingWarlockSpawnWeight:I
+      40: bipush        70
+      42: putstatic     #54                 // Field DeeplingWarlockSpawnRolls:I
+      45: iconst_1
+      46: putstatic     #56                 // Field CoralgolemSpawnWeight:I
+      49: bipush        70
+      51: putstatic     #58                 // Field CoralgolemSpawnRolls:I
+      54: iconst_1
+      55: putstatic     #60                 // Field AmethystCrabSpawnWeight:I
+      58: bipush        20
+      60: putstatic     #62                 // Field AmethystCrabSpawnRolls:I
+      63: bipush        15
+      65: putstatic     #64                 // Field KoboletonSpawnWeight:I
+      68: iconst_1
+      69: putstatic     #66                 // Field KoboletonSpawnRolls:I
+      72: bipush        7
+      74: putstatic     #68                 // Field IgnitedBerserkerSpawnWeight:I
+      77: iconst_2
+      78: putstatic     #70                 // Field IgnitedBerserkerSpawnRolls:I
+      81: return
+}
+
+## javap com/github/L_Ender/cataclysm/config/CMCommonConfig.class
+Compiled from "CMCommonConfig.java"
+public class com.github.L_Ender.cataclysm.config.CMCommonConfig {
+  public com.github.L_Ender.cataclysm.config.CMCommonConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #309                // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void Commonbake(com.github.L_Ender.cataclysm.config.CommonConfig);
+    Code:
+       0: aload_0
+       1: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+       4: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+       7: getfield      #327                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+      10: getfield      #331                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.healthMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      13: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+      16: checkcast     #337                // class java/lang/Double
+      19: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+      22: putstatic     #344                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.healthMultiplier:D
+      25: aload_0
+      26: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+      29: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+      32: getfield      #327                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+      35: getfield      #347                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.attackMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      38: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+      41: checkcast     #337                // class java/lang/Double
+      44: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+      47: putstatic     #349                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.attackMultiplier:D
+      50: aload_0
+      51: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+      54: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+      57: getfield      #353                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+      60: getfield      #356                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.damageCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      63: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+      66: checkcast     #337                // class java/lang/Double
+      69: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+      72: putstatic     #358                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.damageCap:D
+      75: aload_0
+      76: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+      79: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+      82: getfield      #353                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+      85: getfield      #361                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpsCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      88: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+      91: checkcast     #337                // class java/lang/Double
+      94: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+      97: putstatic     #363                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.dpsCap:D
+     100: aload_0
+     101: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     104: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     107: getfield      #353                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     110: getfield      #367                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpslimittime:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     113: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     116: checkcast     #370                // class java/lang/Integer
+     119: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     122: putstatic     #378                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.dpsLimitTime:I
+     125: aload_0
+     126: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     129: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     132: getfield      #353                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     135: getfield      #381                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.rangeCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     138: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     141: checkcast     #337                // class java/lang/Double
+     144: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     147: putstatic     #383                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.rangeCap:D
+     150: aload_0
+     151: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     154: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     157: getfield      #387                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.healConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$NatureHealConfig;
+     160: getfield      #390                // Field com/github/L_Ender/cataclysm/config/CommonConfig$NatureHealConfig.heal:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     163: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     166: checkcast     #337                // class java/lang/Double
+     169: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     172: putstatic     #393                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.natureHeal:D
+     175: aload_0
+     176: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     179: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     182: getfield      #397                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.respawnerConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$RespawnerConfig;
+     185: getfield      #401                // Field com/github/L_Ender/cataclysm/config/CommonConfig$RespawnerConfig.Respawner:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     188: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+     191: checkcast     #404                // class java/lang/Boolean
+     194: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+     197: putstatic     #412                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.respawner:Z
+     200: aload_0
+     201: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     204: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     207: getfield      #416                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.mobGriefingConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$IgnoreMobGriefing;
+     210: getfield      #419                // Field com/github/L_Ender/cataclysm/config/CommonConfig$IgnoreMobGriefing.Ignore:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     213: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+     216: checkcast     #404                // class java/lang/Boolean
+     219: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+     222: putstatic     #422                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.ignoreMobGriefing:Z
+     225: aload_0
+     226: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     229: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     232: getfield      #425                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.GravityPunchHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     235: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     238: checkcast     #337                // class java/lang/Double
+     241: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     244: putstatic     #427                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.GravityPunchHpdamage:D
+     247: aload_0
+     248: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     251: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     254: getfield      #430                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.TeleportAttackHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     257: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     260: checkcast     #337                // class java/lang/Double
+     263: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     266: putstatic     #432                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.TeleportAttackHpdamage:D
+     269: aload_0
+     270: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     273: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     276: getfield      #435                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.KnockbackHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     279: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     282: checkcast     #337                // class java/lang/Double
+     285: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     288: putstatic     #437                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.KnockbackHpdamage:D
+     291: aload_0
+     292: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     295: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     298: getfield      #440                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.UppercutHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     301: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     304: checkcast     #337                // class java/lang/Double
+     307: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     310: putstatic     #442                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.UppercutHpdamage:D
+     313: aload_0
+     314: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     317: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     320: getfield      #445                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.RocketPunchHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     323: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     326: checkcast     #337                // class java/lang/Double
+     329: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     332: putstatic     #447                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.RocketPunchHpdamage:D
+     335: aload_0
+     336: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     339: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     342: getfield      #450                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.AreaAttackHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     345: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     348: checkcast     #337                // class java/lang/Double
+     351: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     354: putstatic     #452                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.AreaAttackHpdamage:D
+     357: aload_0
+     358: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     361: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     364: getfield      #455                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.BlockBreakingX:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     367: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     370: checkcast     #370                // class java/lang/Integer
+     373: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     376: putstatic     #457                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.BlockBreakingX:I
+     379: aload_0
+     380: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     383: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     386: getfield      #460                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.BlockBreakingY:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     389: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     392: checkcast     #370                // class java/lang/Integer
+     395: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     398: putstatic     #462                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.BlockBreakingY:I
+     401: aload_0
+     402: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     405: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     408: getfield      #465                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.BlockBreakingZ:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     411: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     414: checkcast     #370                // class java/lang/Integer
+     417: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     420: putstatic     #467                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.BlockBreakingZ:I
+     423: aload_0
+     424: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     427: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     430: getfield      #470                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.VoidRuneDamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     433: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     436: checkcast     #337                // class java/lang/Double
+     439: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     442: putstatic     #472                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.VoidRuneDamage:D
+     445: aload_0
+     446: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     449: getfield      #323                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGUARDIAN:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian;
+     452: getfield      #475                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGuardian.SeparatePhaseMusic:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     455: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+     458: checkcast     #404                // class java/lang/Boolean
+     461: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+     464: putstatic     #477                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGuardian.SeparatePhaseMusic:Z
+     467: aload_0
+     468: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     471: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     474: getfield      #482                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+     477: getfield      #331                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.healthMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     480: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     483: checkcast     #337                // class java/lang/Double
+     486: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     489: putstatic     #483                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.healthMultiplier:D
+     492: aload_0
+     493: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     496: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     499: getfield      #482                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+     502: getfield      #347                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.attackMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     505: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     508: checkcast     #337                // class java/lang/Double
+     511: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     514: putstatic     #484                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.attackMultiplier:D
+     517: aload_0
+     518: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     521: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     524: getfield      #485                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     527: getfield      #356                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.damageCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     530: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     533: checkcast     #337                // class java/lang/Double
+     536: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     539: putstatic     #486                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.damageCap:D
+     542: aload_0
+     543: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     546: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     549: getfield      #485                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     552: getfield      #361                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpsCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     555: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     558: checkcast     #337                // class java/lang/Double
+     561: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     564: putstatic     #487                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.dpsCap:D
+     567: aload_0
+     568: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     571: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     574: getfield      #485                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     577: getfield      #367                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpslimittime:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     580: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     583: checkcast     #370                // class java/lang/Integer
+     586: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     589: putstatic     #488                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.dpsLimitTime:I
+     592: aload_0
+     593: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     596: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     599: getfield      #485                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     602: getfield      #381                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.rangeCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     605: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     608: checkcast     #337                // class java/lang/Double
+     611: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     614: putstatic     #489                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.rangeCap:D
+     617: aload_0
+     618: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     621: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     624: getfield      #490                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.healConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$NatureHealConfig;
+     627: getfield      #390                // Field com/github/L_Ender/cataclysm/config/CommonConfig$NatureHealConfig.heal:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     630: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     633: checkcast     #337                // class java/lang/Double
+     636: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     639: putstatic     #491                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.natureHeal:D
+     642: aload_0
+     643: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     646: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     649: getfield      #492                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.mobGriefingConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$IgnoreMobGriefing;
+     652: getfield      #419                // Field com/github/L_Ender/cataclysm/config/CommonConfig$IgnoreMobGriefing.Ignore:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     655: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+     658: checkcast     #404                // class java/lang/Boolean
+     661: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+     664: putstatic     #493                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.ignoreMobGriefing:Z
+     667: aload_0
+     668: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     671: getfield      #481                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.ENDERGOLEM:Lcom/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem;
+     674: getfield      #494                // Field com/github/L_Ender/cataclysm/config/CommonConfig$EnderGolem.VoidRuneDamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     677: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     680: checkcast     #337                // class java/lang/Double
+     683: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     686: putstatic     #495                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$EnderGolem.VoidRuneDamage:D
+     689: aload_0
+     690: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     693: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     696: getfield      #500                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+     699: getfield      #331                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.healthMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     702: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     705: checkcast     #337                // class java/lang/Double
+     708: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     711: putstatic     #501                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.healthMultiplier:D
+     714: aload_0
+     715: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     718: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     721: getfield      #500                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+     724: getfield      #347                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.attackMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     727: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     730: checkcast     #337                // class java/lang/Double
+     733: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     736: putstatic     #502                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.attackMultiplier:D
+     739: aload_0
+     740: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     743: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     746: getfield      #503                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     749: getfield      #356                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.damageCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     752: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     755: checkcast     #337                // class java/lang/Double
+     758: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     761: putstatic     #504                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.damageCap:D
+     764: aload_0
+     765: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     768: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     771: getfield      #503                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     774: getfield      #361                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpsCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     777: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     780: checkcast     #337                // class java/lang/Double
+     783: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     786: putstatic     #505                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.dpsCap:D
+     789: aload_0
+     790: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     793: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     796: getfield      #503                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     799: getfield      #367                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpslimittime:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     802: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     805: checkcast     #370                // class java/lang/Integer
+     808: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     811: putstatic     #506                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.dpsLimitTime:I
+     814: aload_0
+     815: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     818: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     821: getfield      #503                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+     824: getfield      #381                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.rangeCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     827: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     830: checkcast     #337                // class java/lang/Double
+     833: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     836: putstatic     #507                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.rangeCap:D
+     839: aload_0
+     840: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     843: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     846: getfield      #508                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.healConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$NatureHealConfig;
+     849: getfield      #390                // Field com/github/L_Ender/cataclysm/config/CommonConfig$NatureHealConfig.heal:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     852: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+     855: checkcast     #337                // class java/lang/Double
+     858: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+     861: putstatic     #509                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.natureHeal:D
+     864: aload_0
+     865: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     868: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     871: getfield      #510                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.respawnerConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$RespawnerConfig;
+     874: getfield      #401                // Field com/github/L_Ender/cataclysm/config/CommonConfig$RespawnerConfig.Respawner:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     877: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+     880: checkcast     #404                // class java/lang/Boolean
+     883: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+     886: putstatic     #511                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.respawner:Z
+     889: aload_0
+     890: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     893: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     896: getfield      #512                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.mobGriefingConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$IgnoreMobGriefing;
+     899: getfield      #419                // Field com/github/L_Ender/cataclysm/config/CommonConfig$IgnoreMobGriefing.Ignore:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     902: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+     905: checkcast     #404                // class java/lang/Boolean
+     908: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+     911: putstatic     #513                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.ignoreMobGriefing:Z
+     914: aload_0
+     915: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     918: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     921: getfield      #516                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.Lavabombmagazine:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     924: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     927: checkcast     #370                // class java/lang/Integer
+     930: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     933: putstatic     #518                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.Lavabombmagazine:I
+     936: aload_0
+     937: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     940: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     943: getfield      #521                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.Lavabombamount:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     946: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     949: checkcast     #370                // class java/lang/Integer
+     952: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     955: putstatic     #523                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.Lavabombamount:I
+     958: aload_0
+     959: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     962: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     965: getfield      #526                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.LavabombDuration:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     968: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     971: checkcast     #370                // class java/lang/Integer
+     974: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     977: putstatic     #528                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.LavabombDuration:I
+     980: aload_0
+     981: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+     984: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+     987: getfield      #531                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.LavabombRandomDuration:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     990: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+     993: checkcast     #370                // class java/lang/Integer
+     996: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+     999: putstatic     #533                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.LavabombRandomDuration:I
+    1002: aload_0
+    1003: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1006: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+    1009: getfield      #536                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.BodyCollided:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+    1012: invokevirtual #402                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+    1015: checkcast     #404                // class java/lang/Boolean
+    1018: invokevirtual #408                // Method java/lang/Boolean.booleanValue:()Z
+    1021: putstatic     #538                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.BodyCollided:Z
+    1024: aload_0
+    1025: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1028: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+    1031: getfield      #541                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.SmashHpdamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1034: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1037: checkcast     #337                // class java/lang/Double
+    1040: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1043: putstatic     #543                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.SmashHpdamage:D
+    1046: aload_0
+    1047: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1050: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+    1053: getfield      #546                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.FlameJetDamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1056: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1059: checkcast     #337                // class java/lang/Double
+    1062: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1065: putstatic     #548                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.FlameJetDamage:D
+    1068: aload_0
+    1069: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1072: getfield      #499                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MONSTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity;
+    1075: getfield      #551                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Monstrosity.FlareBombDamage:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1078: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1081: checkcast     #337                // class java/lang/Double
+    1084: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1087: putstatic     #553                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMonstrosity.FlareBombDamage:D
+    1090: aload_0
+    1091: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1094: getfield      #557                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MINISTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Ministrosity;
+    1097: getfield      #558                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Ministrosity.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+    1100: getfield      #331                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.healthMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1103: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1106: checkcast     #337                // class java/lang/Double
+    1109: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1112: putstatic     #559                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMinistrosity.healthMultiplier:D
+    1115: aload_0
+    1116: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1119: getfield      #557                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.NETHERITE_MINISTROSITY:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Ministrosity;
+    1122: getfield      #558                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Netherite_Ministrosity.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+    1125: getfield      #347                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.attackMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1128: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1131: checkcast     #337                // class java/lang/Double
+    1134: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1137: putstatic     #560                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$NetheriteMinistrosity.attackMultiplier:D
+    1140: aload_0
+    1141: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1144: getfield      #564                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.IGNIS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Ignis;
+    1147: getfield      #565                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Ignis.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+    1150: getfield      #331                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.healthMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1153: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1156: checkcast     #337                // class java/lang/Double
+    1159: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1162: putstatic     #566                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Ignis.healthMultiplier:D
+    1165: aload_0
+    1166: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1169: getfield      #564                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.IGNIS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Ignis;
+    1172: getfield      #565                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Ignis.combatConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig;
+    1175: getfield      #347                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CombatConfig.attackMultiplier:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1178: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1181: checkcast     #337                // class java/lang/Double
+    1184: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1187: putstatic     #567                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Ignis.attackMultiplier:D
+    1190: aload_0
+    1191: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1194: getfield      #564                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.IGNIS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Ignis;
+    1197: getfield      #568                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Ignis.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+    1200: getfield      #356                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.damageCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1203: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1206: checkcast     #337                // class java/lang/Double
+    1209: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1212: putstatic     #569                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Ignis.damageCap:D
+    1215: aload_0
+    1216: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1219: getfield      #564                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.IGNIS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Ignis;
+    1222: getfield      #568                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Ignis.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+    1225: getfield      #361                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpsCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1228: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1231: checkcast     #337                // class java/lang/Double
+    1234: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1237: putstatic     #570                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Ignis.dpsCap:D
+    1240: aload_0
+    1241: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1244: getfield      #564                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.IGNIS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Ignis;
+    1247: getfield      #568                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Ignis.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+    1250: getfield      #367                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.dpslimittime:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+    1253: invokevirtual #368                // Method net/minecraftforge/common/ForgeConfigSpec$IntValue.get:()Ljava/lang/Object;
+    1256: checkcast     #370                // class java/lang/Integer
+    1259: invokevirtual #374                // Method java/lang/Integer.intValue:()I
+    1262: putstatic     #571                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Ignis.dpsLimitTime:I
+    1265: aload_0
+    1266: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Mobs;
+    1269: getfield      #564                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Mobs.IGNIS:Lcom/github/L_Ender/cataclysm/config/CommonConfig$Ignis;
+    1272: getfield      #568                // Field com/github/L_Ender/cataclysm/config/CommonConfig$Ignis.capConfig:Lcom/github/L_Ender/cataclysm/config/CommonConfig$CapConfig;
+    1275: getfield      #381                // Field com/github/L_Ender/cataclysm/config/CommonConfig$CapConfig.rangeCap:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+    1278: invokevirtual #335                // Method net/minecraftforge/common/ForgeConfigSpec$DoubleValue.get:()Ljava/lang/Object;
+    1281: checkcast     #337                // class java/lang/Double
+    1284: invokevirtual #341                // Method java/lang/Double.doubleValue:()D
+    1287: putstatic     #572                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Ignis.rangeCap:D
+    1290: aload_0
+    1291: getfield      #319                // Field com/github/L_Ender/cataclysm/config/CommonConfig.MOBS:Lcom/github/L_Ender/ca
+## javap com/github/L_Ender/cataclysm/config/CommonConfig$Spawning.class
+Compiled from "CommonConfig.java"
+public class com.github.L_Ender.cataclysm.config.CommonConfig$Spawning {
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingBruteSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingBruteSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingAnglerSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingAnglerSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingPriestSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingPriestSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingWarlockSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue DeeplingWarlockSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue CoralgolemSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue CoralgolemSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue AmethystCrabSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue AmethystCrabSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue KoboletonSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue KoboletonSpawnRolls;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue IgnitedBerserkerSpawnWeight;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$IntValue IgnitedBerserkerSpawnRolls;
+
+  com.github.L_Ender.cataclysm.config.CommonConfig$Spawning(net.minecraftforge.common.ForgeConfigSpec$Builder);
+    Code:
+       0: aload_0
+       1: invokespecial #44                 // Method java/lang/Object."<init>":()V
+       4: aload_1
+       5: ldc           #46                 // String spawning
+       7: invokevirtual #50                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: pop
+      11: aload_0
+      12: aload_1
+      13: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+      15: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      18: ldc           #57                 // String config.cataclysm.deepling_spawn_weight
+      20: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      23: ldc           #62                 // String deepling_spawn_weight
+      25: getstatic     #65                 // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingSpawnWeight:I
+      28: iconst_0
+      29: sipush        1000
+      32: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+      35: putfield      #71                 // Field DeeplingSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+      38: aload_0
+      39: aload_1
+      40: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+      42: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      45: ldc           #75                 // String config.cataclysm.deepling_spawn_rolls
+      47: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      50: ldc           #77                 // String deepling_spawn_rolls
+      52: getstatic     #79                 // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingSpawnRolls:I
+      55: iconst_0
+      56: ldc           #80                 // int 2147483647
+      58: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+      61: putfield      #82                 // Field DeeplingSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+      64: aload_0
+      65: aload_1
+      66: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+      68: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      71: ldc           #84                 // String config.cataclysm.deepling_brute_spawn_weight
+      73: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      76: ldc           #86                 // String deepling_brute_spawn_weight
+      78: getstatic     #88                 // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingBruteSpawnWeight:I
+      81: iconst_0
+      82: sipush        1000
+      85: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+      88: putfield      #90                 // Field DeeplingBruteSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+      91: aload_0
+      92: aload_1
+      93: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+      95: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      98: ldc           #92                 // String config.cataclysm.deepling_brute_spawn_rolls
+     100: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     103: ldc           #94                 // String deepling_brute_spawn_rolls
+     105: getstatic     #96                 // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingBruteSpawnRolls:I
+     108: iconst_0
+     109: ldc           #80                 // int 2147483647
+     111: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     114: putfield      #98                 // Field DeeplingBruteSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     117: aload_0
+     118: aload_1
+     119: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     121: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     124: ldc           #100                // String config.cataclysm.deepling_angler_spawn_weight
+     126: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     129: ldc           #102                // String deepling_angler_spawn_weight
+     131: getstatic     #104                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingAnglerSpawnWeight:I
+     134: iconst_0
+     135: sipush        1000
+     138: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     141: putfield      #106                // Field DeeplingAnglerSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     144: aload_0
+     145: aload_1
+     146: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     148: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     151: ldc           #108                // String config.cataclysm.deepling_angler_spawn_rolls
+     153: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     156: ldc           #110                // String deepling_angler_spawn_rolls
+     158: getstatic     #112                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingAnglerSpawnRolls:I
+     161: iconst_0
+     162: ldc           #80                 // int 2147483647
+     164: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     167: putfield      #114                // Field DeeplingAnglerSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     170: aload_0
+     171: aload_1
+     172: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     174: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     177: ldc           #116                // String config.cataclysm.deepling_priest_spawn_weight
+     179: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     182: ldc           #118                // String deepling_priest_spawn_weight
+     184: getstatic     #120                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingPriestSpawnWeight:I
+     187: iconst_0
+     188: sipush        1000
+     191: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     194: putfield      #122                // Field DeeplingPriestSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     197: aload_0
+     198: aload_1
+     199: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     201: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     204: ldc           #124                // String config.cataclysm.deepling_priest_spawn_rolls
+     206: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     209: ldc           #126                // String deepling_priest_spawn_rolls
+     211: getstatic     #128                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingPriestSpawnRolls:I
+     214: iconst_0
+     215: ldc           #80                 // int 2147483647
+     217: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     220: putfield      #130                // Field DeeplingPriestSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     223: aload_0
+     224: aload_1
+     225: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     227: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     230: ldc           #132                // String config.cataclysm.deepling_warlock_spawn_weight
+     232: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     235: ldc           #134                // String deepling_warlock_spawn_weight
+     237: getstatic     #136                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingWarlockSpawnWeight:I
+     240: iconst_0
+     241: sipush        1000
+     244: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     247: putfield      #138                // Field DeeplingWarlockSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     250: aload_0
+     251: aload_1
+     252: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     254: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     257: ldc           #140                // String config.cataclysm.deepling_warlock_spawn_rolls
+     259: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     262: ldc           #142                // String deepling_warlock_spawn_rolls
+     264: getstatic     #144                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingWarlockSpawnRolls:I
+     267: iconst_0
+     268: ldc           #80                 // int 2147483647
+     270: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     273: putfield      #146                // Field DeeplingWarlockSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     276: aload_0
+     277: aload_1
+     278: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     280: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     283: ldc           #148                // String config.cataclysm.coral_golem_spawn_weight
+     285: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     288: ldc           #150                // String coral_golem_spawn_weight
+     290: getstatic     #152                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.CoralgolemSpawnWeight:I
+     293: iconst_0
+     294: sipush        1000
+     297: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     300: putfield      #154                // Field CoralgolemSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     303: aload_0
+     304: aload_1
+     305: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     307: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     310: ldc           #156                // String config.cataclysm.coral_golem_spawn_rolls
+     312: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     315: ldc           #158                // String coral_golem_spawn_rolls
+     317: getstatic     #160                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.CoralgolemSpawnRolls:I
+     320: iconst_0
+     321: ldc           #80                 // int 2147483647
+     323: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     326: putfield      #162                // Field CoralgolemSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     329: aload_0
+     330: aload_1
+     331: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     333: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     336: ldc           #164                // String config.cataclysm.amethyst_crab_spawn_weight
+     338: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     341: ldc           #166                // String amethyst_crab_spawn_weight
+     343: getstatic     #168                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.AmethystCrabSpawnWeight:I
+     346: iconst_0
+     347: sipush        1000
+     350: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     353: putfield      #170                // Field AmethystCrabSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     356: aload_0
+     357: aload_1
+     358: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     360: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     363: ldc           #172                // String config.cataclysm.amethyst_crab_spawn_rolls
+     365: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     368: ldc           #174                // String amethyst_crab_spawn_rolls
+     370: getstatic     #176                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.AmethystCrabSpawnRolls:I
+     373: iconst_0
+     374: ldc           #80                 // int 2147483647
+     376: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     379: putfield      #178                // Field AmethystCrabSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     382: aload_0
+     383: aload_1
+     384: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     386: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     389: ldc           #180                // String config.cataclysm.koboleton_spawn_weight
+     391: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     394: ldc           #182                // String koboleton_spawn_weight
+     396: getstatic     #184                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.KoboletonSpawnWeight:I
+     399: iconst_0
+     400: sipush        1000
+     403: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     406: putfield      #186                // Field KoboletonSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     409: aload_0
+     410: aload_1
+     411: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     413: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     416: ldc           #188                // String config.cataclysm.koboleton_spawn_rolls
+     418: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     421: ldc           #190                // String koboleton_spawn_rolls
+     423: getstatic     #192                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.KoboletonSpawnRolls:I
+     426: iconst_0
+     427: ldc           #80                 // int 2147483647
+     429: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     432: putfield      #194                // Field KoboletonSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     435: aload_0
+     436: aload_1
+     437: ldc           #52                 // String Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn
+     439: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     442: ldc           #196                // String config.cataclysm.ignited_berserker_spawn_weight
+     444: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     447: ldc           #198                // String ignited_berserker_spawn_weight
+     449: getstatic     #200                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.IgnitedBerserkerSpawnWeight:I
+     452: iconst_0
+     453: sipush        1000
+     456: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     459: putfield      #202                // Field IgnitedBerserkerSpawnWeight:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     462: aload_0
+     463: aload_1
+     464: ldc           #73                 // String Random roll chance to enable mob spawning. Higher number = lower chance of spawning
+     466: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     469: ldc           #204                // String config.cataclysm.ignited_berserker_spawn_rolls
+     471: invokevirtual #60                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.translation:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     474: ldc           #206                // String ignited_berserker_spawn_rolls
+     476: getstatic     #208                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.IgnitedBerserkerSpawnRolls:I
+     479: iconst_0
+     480: ldc           #80                 // int 2147483647
+     482: invokevirtual #69                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;III)Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     485: putfield      #210                // Field IgnitedBerserkerSpawnRolls:Lnet/minecraftforge/common/ForgeConfigSpec$IntValue;
+     488: aload_1
+     489: invokevirtual #214                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     492: pop
+     493: return
+}
+
+## javap com/github/L_Ender/cataclysm/world/CMMobSpawnBiomeModifier.class
+Compiled from "CMMobSpawnBiomeModifier.java"
+public class com.github.L_Ender.cataclysm.world.CMMobSpawnBiomeModifier implements net.minecraftforge.common.world.BiomeModifier {
+  private static final net.minecraftforge.registries.RegistryObject<com.mojang.serialization.Codec<? extends net.minecraftforge.common.world.BiomeModifier>> SERIALIZER;
+
+  public com.github.L_Ender.cataclysm.world.CMMobSpawnBiomeModifier();
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void modify(net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>, net.minecraftforge.common.world.BiomeModifier$Phase, net.minecraftforge.common.world.ModifiableBiomeInfo$BiomeInfo$Builder);
+    Code:
+       0: aload_2
+       1: getstatic     #44                 // Field net/minecraftforge/common/world/BiomeModifier$Phase.ADD:Lnet/minecraftforge/common/world/BiomeModifier$Phase;
+       4: if_acmpne     12
+       7: aload_1
+       8: aload_3
+       9: invokestatic  #50                 // Method com/github/L_Ender/cataclysm/world/CMWorldRegistry.addBiomeSpawns:(Lnet/minecraft/core/Holder;Lnet/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder;)V
+      12: return
+
+  public com.mojang.serialization.Codec<? extends net.minecraftforge.common.world.BiomeModifier> codec();
+    Code:
+       0: getstatic     #61                 // Field SERIALIZER:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #67                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #69                 // class com/mojang/serialization/Codec
+       9: areturn
+
+  public static com.mojang.serialization.Codec<com.github.L_Ender.cataclysm.world.CMMobSpawnBiomeModifier> makeCodec();
+    Code:
+       0: invokedynamic #86,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+       5: invokestatic  #90                 // InterfaceMethod com/mojang/serialization/Codec.unit:(Ljava/util/function/Supplier;)Lcom/mojang/serialization/Codec;
+       8: areturn
+
+  static {};
+    Code:
+       0: new           #93                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #95                 // String cataclysm
+       6: ldc           #97                 // String cataclysm_mob_spawns
+       8: invokespecial #100                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: getstatic     #104                // Field net/minecraftforge/registries/ForgeRegistries$Keys.BIOME_MODIFIER_SERIALIZERS:Lnet/minecraft/resources/ResourceKey;
+      14: ldc           #95                 // String cataclysm
+      16: invokestatic  #108                // Method net/minecraftforge/registries/RegistryObject.create:(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/RegistryObject;
+      19: putstatic     #61                 // Field SERIALIZER:Lnet/minecraftforge/registries/RegistryObject;
+      22: return
+}
+
+## javap com/github/L_Ender/cataclysm/world/CMWorldRegistry.class
+Compiled from "CMWorldRegistry.java"
+public class com.github.L_Ender.cataclysm.world.CMWorldRegistry {
+  public com.github.L_Ender.cataclysm.world.CMWorldRegistry();
+    Code:
+       0: aload_0
+       1: invokespecial #53                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void addBiomeSpawns(net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>, net.minecraftforge.common.world.ModifiableBiomeInfo$BiomeInfo$Builder);
+    Code:
+       0: aload_0
+       1: getstatic     #64                 // Field com/github/L_Ender/cataclysm/init/ModTag.DEEPLINGS_SPAWN:Lnet/minecraft/tags/TagKey;
+       4: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+       9: ifeq          55
+      12: getstatic     #74                 // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingSpawnWeight:I
+      15: ifle          55
+      18: aload_1
+      19: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+      22: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+      25: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+      28: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+      31: dup
+      32: getstatic     #96                 // Field com/github/L_Ender/cataclysm/init/ModEntities.DEEPLING:Lnet/minecraftforge/registries/RegistryObject;
+      35: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      38: checkcast     #104                // class net/minecraft/world/entity/EntityType
+      41: getstatic     #74                 // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingSpawnWeight:I
+      44: iconst_1
+      45: iconst_1
+      46: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+      49: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      54: pop
+      55: aload_0
+      56: getstatic     #64                 // Field com/github/L_Ender/cataclysm/init/ModTag.DEEPLINGS_SPAWN:Lnet/minecraft/tags/TagKey;
+      59: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      64: ifeq          110
+      67: getstatic     #116                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingAnglerSpawnWeight:I
+      70: ifle          110
+      73: aload_1
+      74: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+      77: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+      80: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+      83: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+      86: dup
+      87: getstatic     #119                // Field com/github/L_Ender/cataclysm/init/ModEntities.DEEPLING_ANGLER:Lnet/minecraftforge/registries/RegistryObject;
+      90: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      93: checkcast     #104                // class net/minecraft/world/entity/EntityType
+      96: getstatic     #116                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingAnglerSpawnWeight:I
+      99: iconst_1
+     100: iconst_1
+     101: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     104: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     109: pop
+     110: aload_0
+     111: getstatic     #64                 // Field com/github/L_Ender/cataclysm/init/ModTag.DEEPLINGS_SPAWN:Lnet/minecraft/tags/TagKey;
+     114: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     119: ifeq          165
+     122: getstatic     #122                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingBruteSpawnWeight:I
+     125: ifle          165
+     128: aload_1
+     129: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+     132: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+     135: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+     138: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+     141: dup
+     142: getstatic     #125                // Field com/github/L_Ender/cataclysm/init/ModEntities.DEEPLING_BRUTE:Lnet/minecraftforge/registries/RegistryObject;
+     145: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     148: checkcast     #104                // class net/minecraft/world/entity/EntityType
+     151: getstatic     #122                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingBruteSpawnWeight:I
+     154: iconst_1
+     155: iconst_1
+     156: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     159: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     164: pop
+     165: aload_0
+     166: getstatic     #64                 // Field com/github/L_Ender/cataclysm/init/ModTag.DEEPLINGS_SPAWN:Lnet/minecraft/tags/TagKey;
+     169: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     174: ifeq          220
+     177: getstatic     #128                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingPriestSpawnWeight:I
+     180: ifle          220
+     183: aload_1
+     184: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+     187: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+     190: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+     193: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+     196: dup
+     197: getstatic     #131                // Field com/github/L_Ender/cataclysm/init/ModEntities.DEEPLING_PRIEST:Lnet/minecraftforge/registries/RegistryObject;
+     200: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     203: checkcast     #104                // class net/minecraft/world/entity/EntityType
+     206: getstatic     #128                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingPriestSpawnWeight:I
+     209: iconst_1
+     210: iconst_1
+     211: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     214: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     219: pop
+     220: aload_0
+     221: getstatic     #64                 // Field com/github/L_Ender/cataclysm/init/ModTag.DEEPLINGS_SPAWN:Lnet/minecraft/tags/TagKey;
+     224: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     229: ifeq          275
+     232: getstatic     #134                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingWarlockSpawnWeight:I
+     235: ifle          275
+     238: aload_1
+     239: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+     242: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+     245: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+     248: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+     251: dup
+     252: getstatic     #137                // Field com/github/L_Ender/cataclysm/init/ModEntities.DEEPLING_WARLOCK:Lnet/minecraftforge/registries/RegistryObject;
+     255: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     258: checkcast     #104                // class net/minecraft/world/entity/EntityType
+     261: getstatic     #134                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.DeeplingWarlockSpawnWeight:I
+     264: iconst_1
+     265: iconst_1
+     266: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     269: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     274: pop
+     275: aload_0
+     276: getstatic     #64                 // Field com/github/L_Ender/cataclysm/init/ModTag.DEEPLINGS_SPAWN:Lnet/minecraft/tags/TagKey;
+     279: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     284: ifeq          330
+     287: getstatic     #140                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.CoralgolemSpawnWeight:I
+     290: ifle          330
+     293: aload_1
+     294: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+     297: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+     300: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+     303: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+     306: dup
+     307: getstatic     #143                // Field com/github/L_Ender/cataclysm/init/ModEntities.CORAL_GOLEM:Lnet/minecraftforge/registries/RegistryObject;
+     310: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     313: checkcast     #104                // class net/minecraft/world/entity/EntityType
+     316: getstatic     #140                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.CoralgolemSpawnWeight:I
+     319: iconst_1
+     320: iconst_1
+     321: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     324: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     329: pop
+     330: aload_0
+     331: getstatic     #146                // Field com/github/L_Ender/cataclysm/init/ModTag.AMETHYST_CRAB_SPAWN:Lnet/minecraft/tags/TagKey;
+     334: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     339: ifeq          385
+     342: getstatic     #149                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.AmethystCrabSpawnWeight:I
+     345: ifle          385
+     348: aload_1
+     349: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+     352: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+     355: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+     358: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+     361: dup
+     362: getstatic     #152                // Field com/github/L_Ender/cataclysm/init/ModEntities.AMETHYST_CRAB:Lnet/minecraftforge/registries/RegistryObject;
+     365: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     368: checkcast     #104                // class net/minecraft/world/entity/EntityType
+     371: getstatic     #149                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.AmethystCrabSpawnWeight:I
+     374: iconst_1
+     375: iconst_1
+     376: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     379: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     384: pop
+     385: aload_0
+     386: getstatic     #155                // Field com/github/L_Ender/cataclysm/init/ModTag.KOBOLETON_SPAWN:Lnet/minecraft/tags/TagKey;
+     389: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     394: ifeq          440
+     397: getstatic     #158                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.KoboletonSpawnWeight:I
+     400: ifle          440
+     403: aload_1
+     404: invokevirtual #78                 // Method net/minecraftforge/common/world/ModifiableBiomeInfo$BiomeInfo$Builder.getMobSpawnSettings:()Lnet/minecraftforge/common/world/MobSpawnSettingsBuilder;
+     407: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+     410: invokevirtual #90                 // Method net/minecraftforge/common/world/MobSpawnSettingsBuilder.getSpawner:(Lnet/minecraft/world/entity/MobCategory;)Ljava/util/List;
+     413: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+     416: dup
+     417: getstatic     #161                // Field com/github/L_Ender/cataclysm/init/ModEntities.KOBOLETON:Lnet/minecraftforge/registries/RegistryObject;
+     420: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     423: checkcast     #104                // class net/minecraft/world/entity/EntityType
+     426: getstatic     #158                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.KoboletonSpawnWeight:I
+     429: iconst_2
+     430: iconst_3
+     431: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+     434: invokeinterface #113,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     439: pop
+     440: return
+
+  public static void modifyStructure(net.minecraft.core.Holder<net.minecraft.world.level.levelgen.structure.Structure>, net.minecraftforge.common.world.ModifiableStructureInfo$StructureInfo$Builder);
+    Code:
+       0: aload_0
+       1: getstatic     #172                // Field com/github/L_Ender/cataclysm/init/ModTag.BERSERKER_SPAWN:Lnet/minecraft/tags/TagKey;
+       4: invokeinterface #70,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+       9: ifeq          52
+      12: getstatic     #175                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.IgnitedBerserkerSpawnWeight:I
+      15: ifle          52
+      18: aload_1
+      19: invokevirtual #179                // Method net/minecraftforge/common/world/ModifiableStructureInfo$StructureInfo$Builder.getStructureSettings:()Lnet/minecraftforge/common/world/StructureSettingsBuilder;
+      22: getstatic     #84                 // Field net/minecraft/world/entity/MobCategory.MONSTER:Lnet/minecraft/world/entity/MobCategory;
+      25: invokevirtual #183                // Method net/minecraftforge/common/world/StructureSettingsBuilder.getOrAddSpawnOverrides:(Lnet/minecraft/world/entity/MobCategory;)Lnet/minecraftforge/common/world/StructureSettingsBuilder$StructureSpawnOverrideBuilder;
+      28: new           #26                 // class net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData
+      31: dup
+      32: getstatic     #186                // Field com/github/L_Ender/cataclysm/init/ModEntities.IGNITED_BERSERKER:Lnet/minecraftforge/registries/RegistryObject;
+      35: invokevirtual #102                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      38: checkcast     #104                // class net/minecraft/world/entity/EntityType
+      41: getstatic     #175                // Field com/github/L_Ender/cataclysm/config/CMCommonConfig$Spawning.IgnitedBerserkerSpawnWeight:I
+      44: iconst_1
+      45: iconst_1
+      46: invokespecial #107                // Method net/minecraft/world/level/biome/MobSpawnSettings$SpawnerData."<init>":(Lnet/minecraft/world/entity/EntityType;III)V
+      49: invokevirtual #190                // Method net/minecraftforge/common/world/StructureSettingsBuilder$StructureSpawnOverrideBuilder.addSpawn:(Lnet/minecraft/world/level/biome/MobSpawnSettings$SpawnerData;)V
+      52: return
+}

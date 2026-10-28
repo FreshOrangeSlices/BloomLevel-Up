@@ -1,0 +1,71 @@
+# legionary-1.20.1-1.2.2.jar
+## file assets/legionary/models/item/unbreakable_spawn_egg.json (51 bytes)
+{
+  "parent": "minecraft:item/template_spawn_egg"
+}
+## file data/fieldguide/ (0 bytes)
+
+## file data/fieldguide/tags/ (0 bytes)
+
+## file data/fieldguide/tags/entity_types/ (0 bytes)
+
+## file data/fieldguide/tags/entity_types/bosses.json (49 bytes)
+{
+  "values": [
+    "legionary:unbreakable"
+  ]
+}
+## file data/legionary/fieldguide/ (0 bytes)
+
+## file data/legionary/fieldguide/biome_modifiers/ (0 bytes)
+
+## file data/legionary/fieldguide/biome_modifiers/legionary_biome_additions.json (167 bytes)
+{
+  "replace": false,
+  "additions": [
+    {
+      "entries": [
+        "legionary:unbreakable"
+      ],
+      "value": "minecraft:nether_wastes"
+    }
+  ]
+}
+## classes: com/purity/legionary/registry/ModTags$EntityTypes.class
+## javap com/purity/legionary/registry/ModTags$EntityTypes.class
+Compiled from "ModTags.java"
+public class com.purity.legionary.registry.ModTags$EntityTypes {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> bosses;
+
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> fieldguide_bosses;
+
+  public com.purity.legionary.registry.ModTags$EntityTypes();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> tag(java.lang.String);
+    Code:
+       0: getstatic     #27                 // Field net/minecraft/core/registries/Registries.f_256939_:Lnet/minecraft/resources/ResourceKey;
+       3: aload_0
+       4: invokestatic  #33                 // Method com/purity/legionary/util/ModLoc.get:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       7: invokestatic  #39                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      10: areturn
+
+  static {};
+    Code:
+       0: getstatic     #27                 // Field net/minecraft/core/registries/Registries.f_256939_:Lnet/minecraft/resources/ResourceKey;
+       3: ldc           #44                 // String forge
+       5: ldc           #45                 // String bosses
+       7: invokestatic  #51                 // Method net/minecraft/resources/ResourceLocation.fromNamespaceAndPath:(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      10: invokestatic  #39                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      13: putstatic     #53                 // Field bosses:Lnet/minecraft/tags/TagKey;
+      16: getstatic     #27                 // Field net/minecraft/core/registries/Registries.f_256939_:Lnet/minecraft/resources/ResourceKey;
+      19: ldc           #55                 // String fieldguide
+      21: ldc           #45                 // String bosses
+      23: invokestatic  #51                 // Method net/minecraft/resources/ResourceLocation.fromNamespaceAndPath:(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      26: invokestatic  #39                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      29: putstatic     #57                 // Field fieldguide_bosses:Lnet/minecraft/tags/TagKey;
+      32: return
+}

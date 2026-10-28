@@ -20,9 +20,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.InteractionHand;
@@ -32,6 +35,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -47,6 +51,10 @@ import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraftforge.event.TickEvent;
@@ -57,7 +65,8 @@ import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 /**
  * A tool for supporting modpacks, off unless the server starts with {@code -Dbloomlevelup.dump=<file>}: two seconds after
  * the server is up it writes every item (its classes, tags, damage, armor, Better Combat category), every entity type
- * (health, armor, whether it keeps a boss bar) and every recipe (id, type, result) to that file, one JSON object per
+ * (health, armor, whether it keeps a boss bar), every recipe (id, type, result), and every biome's natural spawns and
+ * every structure's own spawns (after all mods' biome and structure modifiers) to that file, one JSON object per
  * line. CI runs it on LegionWareX to sort the pack's weapons, armor and bosses into Bloom's tags, and to check the
  * recipes and items the pack's own data pack takes out. Does nothing to the world: the entities it measures are
  * made and thrown away, never added.
@@ -118,10 +127,39 @@ public final class RegistryDump {
 			}
 		}
 
+		// What spawns where, after every mod's biome and structure modifiers: each biome's natural spawns by category,
+		// and the structures that replace them inside (for tuning a pack's spawns).
+		Registry<Biome> biomes = level.registryAccess().registryOrThrow(Registries.BIOME);
+		int places = 0;
+
+		for (Map.Entry<ResourceKey<Biome>, Biome> entry : biomes.entrySet()) {
+			try {
+				lines.add(GSON.toJson(biome(biomes, entry.getKey(), entry.getValue())));
+				places++;
+			} catch (Throwable e) {
+				lines.add(GSON.toJson(error("biome", entry.getKey().location().toString(), e)));
+			}
+		}
+
+		Registry<Structure> structures = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
+
+		for (Map.Entry<ResourceKey<Structure>, Structure> entry : structures.entrySet()) {
+			try {
+				JsonObject row = structure(entry.getKey(), entry.getValue());
+
+				if (row != null) {
+					lines.add(GSON.toJson(row));
+					places++;
+				}
+			} catch (Throwable e) {
+				lines.add(GSON.toJson(error("structure", entry.getKey().location().toString(), e)));
+			}
+		}
+
 		try {
 			Files.write(target, lines, StandardCharsets.UTF_8);
-			BloomLevelUp.LOGGER.info("Bloom registry dump: {} items, {} entity types, {} recipes -> {}", items, entities, recipes,
-					target.toAbsolutePath());
+			BloomLevelUp.LOGGER.info("Bloom registry dump: {} items, {} entity types, {} recipes, {} biomes and structures -> {}", items,
+					entities, recipes, places, target.toAbsolutePath());
 		} catch (IOException e) {
 			BloomLevelUp.LOGGER.warn("Bloom registry dump couldn't be written to {}", target, e);
 		}
@@ -327,6 +365,64 @@ public final class RegistryDump {
 
 		if (result != null && !result.isEmpty()) {
 			out.addProperty("result", BuiltInRegistries.ITEM.getKey(result.getItem()).toString());
+		}
+
+		return out;
+	}
+
+	private static JsonObject biome(Registry<Biome> biomes, ResourceKey<Biome> key, Biome biome) {
+		JsonObject out = new JsonObject();
+		out.addProperty("kind", "biome");
+		out.addProperty("id", key.location().toString());
+		out.add("tags", strings(biomes.getHolderOrThrow(key).tags().map(tag -> tag.location().toString()).sorted().toList()));
+		MobSpawnSettings settings = biome.getMobSettings();
+		out.addProperty("creatureProbability", settings.getCreatureProbability());
+		JsonObject spawns = new JsonObject();
+
+		for (MobCategory category : MobCategory.values()) {
+			JsonArray list = spawners(settings.getMobs(category).unwrap());
+
+			if (!list.isEmpty()) {
+				spawns.add(category.getName(), list);
+			}
+		}
+
+		out.add("spawns", spawns);
+		return out;
+	}
+
+	/** A structure's own spawns (they replace the biome's inside it), or null when it has none. */
+	private static JsonObject structure(ResourceKey<Structure> key, Structure structure) {
+		JsonObject spawns = new JsonObject();
+
+		for (Map.Entry<MobCategory, StructureSpawnOverride> entry : structure.spawnOverrides().entrySet()) {
+			JsonObject override = new JsonObject();
+			override.addProperty("box", entry.getValue().boundingBox().getSerializedName());
+			override.add("spawns", spawners(entry.getValue().spawns().unwrap()));
+			spawns.add(entry.getKey().getName(), override);
+		}
+
+		if (spawns.size() == 0) {
+			return null;
+		}
+
+		JsonObject out = new JsonObject();
+		out.addProperty("kind", "structure");
+		out.addProperty("id", key.location().toString());
+		out.add("spawns", spawns);
+		return out;
+	}
+
+	private static JsonArray spawners(List<MobSpawnSettings.SpawnerData> list) {
+		JsonArray out = new JsonArray();
+
+		for (MobSpawnSettings.SpawnerData data : list) {
+			JsonObject spawner = new JsonObject();
+			spawner.addProperty("type", String.valueOf(BuiltInRegistries.ENTITY_TYPE.getKey(data.type)));
+			spawner.addProperty("weight", data.getWeight().asInt());
+			spawner.addProperty("min", data.minCount);
+			spawner.addProperty("max", data.maxCount);
+			out.add(spawner);
 		}
 
 		return out;

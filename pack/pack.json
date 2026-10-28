@@ -174,7 +174,9 @@
     "defaultconfigs/forge-server.toml": "[server]\n\tremoveErroringBlockEntities = true\n\tremoveErroringEntities = true\n",
     "_biomesoplenty": "BOP's own files with two Nether biomes off (Visceral Heap's flesh, Withered Abyss's void pits) and its Nether region weight 5 instead of 13 (vanilla's is 10), so about two thirds of the Nether stays vanilla. The Overworld is BOP's default.",
     "config/biomesoplenty/biome_toggles.json": {"aspen_glade_enabled": true, "auroral_garden_enabled": true, "bayou_enabled": true, "bog_enabled": true, "cold_desert_enabled": true, "coniferous_forest_enabled": true, "crag_enabled": true, "crystalline_chasm_enabled": true, "dead_forest_enabled": true, "dryland_enabled": true, "dune_beach_enabled": true, "erupting_inferno_enabled": true, "field_enabled": true, "fir_clearing_enabled": true, "floodplain_enabled": true, "forested_field_enabled": true, "fungal_jungle_enabled": true, "glowing_grotto_enabled": true, "grassland_enabled": true, "gravel_beach_enabled": true, "highland_enabled": true, "hot_springs_enabled": true, "jacaranda_glade_enabled": true, "jade_cliffs_enabled": true, "lavender_field_enabled": true, "lush_desert_enabled": true, "lush_savanna_enabled": true, "maple_woods_enabled": true, "marsh_enabled": true, "mediterranean_forest_enabled": true, "moor_enabled": true, "muskeg_enabled": true, "mystic_grove_enabled": true, "old_growth_dead_forest_enabled": true, "old_growth_woodland_enabled": true, "ominous_woods_enabled": true, "orchard_enabled": true, "origin_valley_enabled": true, "overgrown_greens_enabled": true, "pasture_enabled": true, "prairie_enabled": true, "pumpkin_patch_enabled": true, "rainforest_enabled": true, "redwood_forest_enabled": true, "rocky_rainforest_enabled": true, "rocky_shrubland_enabled": true, "scrubland_enabled": true, "seasonal_forest_enabled": true, "shrubland_enabled": true, "snowblossom_grove_enabled": true, "snowy_coniferous_forest_enabled": true, "snowy_fir_clearing_enabled": true, "snowy_maple_woods_enabled": true, "spider_nest_enabled": true, "tropics_enabled": true, "tundra_enabled": true, "undergrowth_enabled": true, "visceral_heap_enabled": false, "volcanic_plains_enabled": true, "volcano_enabled": true, "wasteland_enabled": true, "wasteland_steppe_enabled": true, "wetland_enabled": true, "wintry_origin_valley_enabled": true, "withered_abyss_enabled": false, "woodland_enabled": true},
-    "config/biomesoplenty/generation.toml": "\n[nether]\n\t#The weighting of bop biome regions in the nether.\n\tbop_nether_region_weight = 5\n\t#The weighting of rare bop biome regions in the nether.\n\tbop_nether_rare_region_weight = 2\n\n[overworld]\n\t#The weighting of primary bop biome regions in the overworld.\n\tbop_primary_overworld_region_weight = 10\n\t#The weighting of rare bop biome regions in the overworld.\n\tbop_overworld_rare_region_weight = 2\n\t#The weighting of secondary bop biome regions in the overworld.\n\tbop_secondary_overworld_region_weight = 8\n\n"
+    "config/biomesoplenty/generation.toml": "\n[nether]\n\t#The weighting of bop biome regions in the nether.\n\tbop_nether_region_weight = 5\n\t#The weighting of rare bop biome regions in the nether.\n\tbop_nether_rare_region_weight = 2\n\n[overworld]\n\t#The weighting of primary bop biome regions in the overworld.\n\tbop_primary_overworld_region_weight = 10\n\t#The weighting of rare bop biome regions in the overworld.\n\tbop_overworld_rare_region_weight = 2\n\t#The weighting of secondary bop biome regions in the overworld.\n\tbop_secondary_overworld_region_weight = 8\n\n",
+    "_mutantmonsters": "Mutant Monsters' spawn weights, as a share of each vanilla counterpart's: 10% (default 5%; FreshOrangeSlices: twice as common). Forge fills in the rest of the file.",
+    "config/mutantmonsters-common.toml": "mutant_creeper_spawn_weight = 0.1\nmutant_enderman_spawn_weight = 0.1\nmutant_skeleton_spawn_weight = 0.1\nmutant_zombie_spawn_weight = 0.1\n"
   },
   "pins": {
     "_comment": "Mods held at a version, even with --update (the lock only holds the last tested): each with why, so it can go once a fixed version is out.",
@@ -323,6 +325,174 @@
       "Zoni's creative-only tools (their tooltips say 'Creative only'): Repel despawns any entity it's used on, Ruler makes mobs look south, and the Whip": [
         "zonis_companions:repel", "zonis_companions:ruler", "zonis_companions:whip"
       ]
+    },
+    "spawns": {
+      "_comment": "FreshOrangeSlices' playtest (2 hours, almost no modded mobs): the pack's natural spawns, aimed at about 1 in 5 of the mobs that spawn at night in every overworld biome (Biomes O' Plenty's included) being modded, about 1 in 20 being a structure's regulars out in biomes that fit them, bosses only in their lairs, at the same mob cap (vanilla's). Counted by mobs, not weight: vanilla monsters come in fours, most modded ones alone. Skarrier Mobs listed 15 of its mobs in every biome of every dimension at high weights, though each only spawns in one biome, underground, or after the Wither is beaten, so about half of all spawn picks failed; those are put back only where they can spawn. Graveyard and Cataclysm pick their biomes by tags, which only named vanilla biomes; the tags now take BOP's in. Mutant Monsters' weights are in its config (config_files). The pack test reports each biome's modded share (pack-spawns).",
+      "off": {
+        "Skarrier Mobs, in every biome of every dimension: put back below only where each can spawn": ["skarrier_mobs:bowlder_biome_modifier", "skarrier_mobs:breacher_biome_modifier", "skarrier_mobs:dragger_biome_modifier", "skarrier_mobs:eater_biome_modifier", "skarrier_mobs:freeze_biome_modifier", "skarrier_mobs:frost_biome_modifier", "skarrier_mobs:gadlisk_biome_modifier", "skarrier_mobs:glowin_biome_modifier", "skarrier_mobs:gorger_biome_modifier", "skarrier_mobs:slither_matriarch_biome_modifier", "skarrier_mobs:slither_spawner_dummy_biome_modifier", "skarrier_mobs:viruleon_biome_modifier", "skarrier_mobs:voidrake_biome_modifier", "skarrier_mobs:wretch_biome_modifier", "skarrier_mobs:wrought_biome_modifier"],
+        "Monster Expansion's Arborix and Kobeko, named vanilla biomes only: put back below with BOP's": ["monsterexpansion:add_arborix_spawn", "monsterexpansion:add_kobeko_spawn"]
+      },
+      "quiet": {
+        "why": "Biomes the pack adds no monsters to: vanilla's own peaceful ones (the Deep Dark is the Warden's, Mushroom Fields have none) and Biomes O' Plenty's (Auroral Garden has none, Mystic Grove few).",
+        "biomes": ["minecraft:deep_dark", "minecraft:mushroom_fields", "biomesoplenty:auroral_garden", "biomesoplenty:mystic_grove"]
+      },
+      "biome_tags": {
+        "monsterexpansion:skrythe_biomes": {
+          "why": "Skrythe (750 health) spawns from its lair when the lair generates (one per 60x60 chunks where the biome fits); the lair could go in almost any overworld biome. Mountains only (FreshOrangeSlices).",
+          "replace": true,
+          "values": ["#minecraft:is_mountain", "#forge:is_mountain"]
+        },
+        "graveyard:ghoul_spawns": {"why": "Emptied: ghouls come from the pack's own spawns below (all land but quiet biomes).", "replace": true, "values": []},
+        "graveyard:revenant_spawns": {"why": "Emptied: revenants come from the pack's own spawns below (every snowy biome, smaller packs).", "replace": true, "values": []},
+        "graveyard:nightmare_spawns": {"why": "Emptied: nightmares come from the pack's own spawns below (open, dry and high land).", "replace": true, "values": []},
+        "cataclysm:koboleton_spawn": {"why": "Emptied: koboletons come from the pack's own spawns below (every dry biome).", "replace": true, "values": []}
+      },
+      "add": {
+        "ghouls": {
+          "why": "The Graveyard's ghouls (packs of 2-5): vanilla forests, taigas and swamps at weight 25; now all land (BOP's too) at 40.",
+          "category": "monster",
+          "biomes": ["#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense", "#forge:is_swamp", "#minecraft:is_jungle", "#forge:is_lush", "#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_beach", "#minecraft:is_river"],
+          "spawners": {"graveyard:ghoul": [40, 2, 5]}
+        },
+        "revenants": {
+          "why": "The Graveyard's revenants: three vanilla snowy biomes in packs of 5-8 (weight 25); now every snowy biome, 3-5 at weight 12.",
+          "category": "monster",
+          "biomes": ["#forge:is_snowy"],
+          "spawners": {"graveyard:revenant": [12, 3, 5]}
+        },
+        "nightmares": {
+          "why": "The Graveyard's nightmares (alone): open land as before, and BOP's dry and high land; weight 20 (was 10).",
+          "category": "monster",
+          "biomes": ["#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#minecraft:is_beach"],
+          "spawners": {"graveyard:nightmare": [20, 1, 1]}
+        },
+        "koboletons": {
+          "why": "Cataclysm's koboletons (its desert ruins' regulars, 2-3): vanilla deserts, savannas and badlands at 15; now every dry biome, and savannas, at 35.",
+          "category": "monster",
+          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_savanna"],
+          "spawners": {"cataclysm:koboleton": [35, 2, 3]}
+        },
+        "skarrier_caves": {
+          "why": "Underground in the dark (not the Deep Dark); Bowlder and Gorger only after the Wither is beaten. One Bowlder and one Wrought within 100 blocks.",
+          "category": "monster",
+          "biomes": ["#minecraft:is_overworld"],
+          "spawners": {"skarrier_mobs:breacher": [10, 1, 1], "skarrier_mobs:dragger": [14, 1, 1], "skarrier_mobs:eater": [60, 1, 3], "skarrier_mobs:wrought": [34, 1, 1], "skarrier_mobs:bowlder": [34, 1, 1], "skarrier_mobs:gorger": [30, 1, 2]}
+        },
+        "skarrier_frozen_peaks": {
+          "why": "Freeze: vanilla Ice Spikes, Frozen Peaks and Snowy Slopes, after the Wither.",
+          "category": "monster",
+          "biomes": ["minecraft:ice_spikes", "minecraft:frozen_peaks", "minecraft:snowy_slopes"],
+          "spawners": {"skarrier_mobs:freeze": [10, 1, 1]}
+        },
+        "skarrier_ice_spikes": {
+          "why": "Frost: vanilla Ice Spikes, under the open sky.",
+          "category": "monster",
+          "biomes": ["minecraft:ice_spikes"],
+          "spawners": {"skarrier_mobs:frost": [22, 1, 2]}
+        },
+        "skarrier_swamps": {
+          "why": "Slithers: vanilla Swamp and Mangrove Swamp, above Y 60 (at 120 they took over swamps).",
+          "category": "monster",
+          "biomes": ["minecraft:swamp", "minecraft:mangrove_swamp"],
+          "spawners": {"skarrier_mobs:slither_spawner_dummy": [40, 1, 3]}
+        },
+        "skarrier_swamp": {
+          "why": "Gadlisk: vanilla Swamp, after the Wither.",
+          "category": "monster",
+          "biomes": ["minecraft:swamp"],
+          "spawners": {"skarrier_mobs:gadlisk": [12, 1, 2]}
+        },
+        "skarrier_mangroves": {
+          "why": "Slither Matriarch: vanilla Mangrove Swamp.",
+          "category": "monster",
+          "biomes": ["minecraft:mangrove_swamp"],
+          "spawners": {"skarrier_mobs:slither_matriarch": [15, 1, 1]}
+        },
+        "skarrier_dark_forest": {
+          "why": "Glowin: vanilla Dark Forest.",
+          "category": "monster",
+          "biomes": ["minecraft:dark_forest"],
+          "spawners": {"skarrier_mobs:glowin": [12, 1, 2]}
+        },
+        "skarrier_badlands": {
+          "why": "Viruleon (one within 100 blocks, after the Wither): vanilla badlands and desert.",
+          "category": "monster",
+          "biomes": ["minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands", "minecraft:desert"],
+          "spawners": {"skarrier_mobs:viruleon": [20, 1, 1]}
+        },
+        "skarrier_end": {
+          "why": "Voidrake: End Barrens and End Highlands, after the Wither.",
+          "category": "monster",
+          "biomes": ["minecraft:end_barrens", "minecraft:end_highlands"],
+          "spawners": {"skarrier_mobs:voidrake": [10, 1, 1]}
+        },
+        "monster_expansion_animals": {
+          "why": "Arborix and Kobeko (neutral, spawn like animals, in daylight too) as before, and in BOP's land biomes.",
+          "category": "creature",
+          "biomes": ["minecraft:plains", "minecraft:sunflower_plains", "minecraft:snowy_plains", "minecraft:ice_spikes", "minecraft:desert", "minecraft:swamp", "minecraft:mangrove_swamp", "minecraft:forest", "minecraft:flower_forest", "minecraft:birch_forest", "minecraft:old_growth_birch_forest", "minecraft:dark_forest", "minecraft:jungle", "minecraft:sparse_jungle", "minecraft:bamboo_jungle", "minecraft:taiga", "minecraft:snowy_taiga", "minecraft:old_growth_pine_taiga", "minecraft:old_growth_spruce_taiga", "minecraft:savanna", "minecraft:savanna_plateau", "minecraft:windswept_savanna", "minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands", "minecraft:meadow", "minecraft:cherry_grove", "minecraft:grove", "minecraft:snowy_slopes", "minecraft:frozen_peaks", "minecraft:jagged_peaks", "minecraft:stony_peaks", "minecraft:windswept_hills", "minecraft:windswept_gravelly_hills", "minecraft:windswept_forest", "minecraft:mushroom_fields", "minecraft:beach", "minecraft:snowy_beach", "minecraft:stony_shore", "minecraft:dripstone_caves", "minecraft:lush_caves", "#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense", "#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#forge:is_snowy", "#forge:is_swamp", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#minecraft:is_jungle"],
+          "spawners": {"monsterexpansion:arborix": [1, 1, 1], "monsterexpansion:kobeko": [1, 1, 1]}
+        },
+        "jungle_wild": {
+          "why": "Zombiflore (Skarrier, no spawn condition of its own): every jungle, not just vanilla's.",
+          "category": "monster",
+          "biomes": ["#minecraft:is_jungle", "#forge:is_lush"],
+          "spawners": {"skarrier_mobs:zombiflore": [20, 1, 2]}
+        },
+        "desert_bombers": {
+          "why": "Bombers (Legendary Monsters, vanilla Desert at 75): BOP's deserts too, fewer.",
+          "category": "monster",
+          "biomes": ["#forge:is_desert", "#forge:is_sandy"],
+          "spawners": {"legendary_monsters:bomber": [25, 1, 3]}
+        },
+        "forest_crew": {
+          "why": "About 1 in 20: Illager Invasion's fort crew, The Graveyard's corrupted illagers and Iron's Spells' catacombs zombies out of their forts, crypts and catacombs, in forests and taigas.",
+          "category": "monster",
+          "biomes": ["#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense"],
+          "spawners": {"illagerinvasion:marauder": [20, 1, 2], "illagerinvasion:provoker": [10, 1, 1], "illagerinvasion:basher": [10, 1, 2], "graveyard:corrupted_vindicator": [10, 1, 1], "graveyard:corrupted_pillager": [10, 1, 2], "graveyard:acolyte": [8, 1, 1], "irons_spellbooks:catacombs_zombie": [20, 1, 2]}
+        },
+        "village_crew": {
+          "why": "About 1 in 20: The Graveyard's overrun-village crew, Illager Invasion's marauders and Iron's Spells' catacombs zombies on open land.",
+          "category": "monster",
+          "biomes": ["#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau"],
+          "spawners": {"graveyard:corrupted_pillager": [20, 1, 2], "graveyard:corrupted_vindicator": [15, 1, 1], "graveyard:acolyte": [10, 1, 1], "graveyard:tormented_villager": [10, 1, 1], "illagerinvasion:marauder": [12, 1, 2], "irons_spellbooks:catacombs_zombie": [20, 1, 2]}
+        },
+        "desert_crew": {
+          "why": "About 1 in 20: The Graveyard's desert-village crew in dry lands (Cataclysm's koboletons come by their tag above).",
+          "category": "monster",
+          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland"],
+          "spawners": {"graveyard:corrupted_pillager": [15, 1, 2], "graveyard:corrupted_vindicator": [10, 1, 1]}
+        },
+        "snow_crew": {
+          "why": "About 1 in 20: Cataclysm's draugr out of the Frosted Prison, in snowy biomes.",
+          "category": "monster",
+          "biomes": ["#forge:is_snowy"],
+          "spawners": {"cataclysm:draugr": [20, 1, 2], "cataclysm:royal_draugr": [8, 1, 1], "cataclysm:elite_draugr": [8, 1, 1]}
+        },
+        "mountain_crew": {
+          "why": "About 1 in 20: Myths & Legends' possessed armor out of its old camps, in mountains.",
+          "category": "monster",
+          "biomes": ["#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill"],
+          "spawners": {"mythsandlegends:possessed_armor": [20, 1, 2], "mythsandlegends:possessed_armor_archer": [12, 1, 1]}
+        },
+        "swamp_crew": {
+          "why": "About 1 in 20: Illager Invasion's alchemists (they throw potions) in swamps.",
+          "category": "monster",
+          "biomes": ["#forge:is_swamp"],
+          "spawners": {"illagerinvasion:alchemist": [12, 1, 1]}
+        },
+        "jungle_crew": {
+          "why": "About 1 in 20: Legendary Monsters' mossy golems out of the Mossy Temple, in jungles.",
+          "category": "monster",
+          "biomes": ["#minecraft:is_jungle"],
+          "spawners": {"legendary_monsters:mossy_golem": [12, 1, 1]}
+        }
+      },
+      "conditional": {
+        "_comment": "Mobs the pack test leaves out of a biome's modded share: they only spawn underground, after the Wither, or under a condition of their own.",
+        "underground": ["skarrier_mobs:breacher", "skarrier_mobs:dragger", "skarrier_mobs:eater", "skarrier_mobs:wrought", "skarrier_mobs:blare"],
+        "after the Wither": ["skarrier_mobs:bowlder", "skarrier_mobs:gorger", "skarrier_mobs:freeze", "skarrier_mobs:gadlisk", "skarrier_mobs:viruleon", "skarrier_mobs:trawler", "skarrier_mobs:voidrake", "skarrier_mobs:crimlin", "skarrier_mobs:hellamander"],
+        "one at a time, or a condition of their own": ["skarrier_mobs:carniflore", "skarrier_mobs:quake", "skarrier_mobs:snap", "cataclysm:amethyst_crab", "cataclysm:deepling", "cataclysm:deepling_angler", "cataclysm:deepling_brute", "cataclysm:deepling_priest", "cataclysm:deepling_warlock", "cataclysm:coral_golem"]
+      }
     }
   },
   "env_overrides": {

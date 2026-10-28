@@ -295,6 +295,74 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
     if hidden:
         out[f"{root}/data/c/tags/items/hidden_from_recipe_viewers.json"] = {
             "replace": False, "values": [{"id": item, "required": False} for item in hidden]}
+    if data.get("spawns"):
+        out.update(spawn_data(root, data["spawns"], mods_in(jars) if jars else None, problems, notes, jars))
+    return out
+
+
+def spawn_data(root, spawns, present, problems, notes=None, jars=None):
+    """The pack's natural spawns, as Forge biome modifiers and biome tags in its data pack ({path: JSON}):
+    - off: mods' own biome modifiers (by id) replaced by forge:none, so the pack's own take their place;
+    - biome_tags: biome tags overridden (replace) or added to; every entry optional, so a missing mod or biome does
+      no harm;
+    - add: forge:add_spawns, each with its own biome tag (legionwarex:spawns/<name>) made from the biomes and tags it
+      lists, and spawners {entity: [weight, min, max]};
+    - quiet: biomes no group adds to (unless the group says "quiet": false).
+    Spawners, tags and modifiers of mods a layer leaves out are skipped (present: the namespaces in the layer's jars):
+    a biome modifier naming an entity that doesn't exist would stop every world from loading."""
+    out, made = {}, []
+    have = (lambda ident: ident.lstrip("#").split(":")[0] in present) if present is not None else (lambda ident: True)
+    entries = lambda values: [{"id": v, "required": False} for v in values]
+    modifiers = set()
+    if jars:
+        for data in jars.values():
+            try:
+                names = zipfile.ZipFile(io.BytesIO(data)).namelist()
+            except zipfile.BadZipFile:
+                continue
+            modifiers |= {f"{n.split('/')[1]}:{n.split('/', 4)[4][:-5]}" for n in names
+                          if n.startswith("data/") and n.count("/") >= 4 and n.split("/")[2:4] == ["forge", "biome_modifier"]
+                          and n.endswith(".json")}
+    for reason, ids in spawns.get("off", {}).items():
+        if reason.startswith("_"):
+            continue
+        for ident in ids:
+            if not have(ident):
+                continue
+            if jars and ident not in modifiers:
+                problems.append(f"pack_data.spawns.off: no biome modifier {ident} in the pack's jars")
+                continue
+            namespace, path = ident.split(":", 1)
+            out[f"{root}/data/{namespace}/forge/biome_modifier/{path}.json"] = {"type": "forge:none"}
+            made.append(f"off {ident}")
+    for tag, spec in spawns.get("biome_tags", {}).items():
+        if tag.startswith("_") or not have(tag):
+            continue
+        namespace, path = tag.split(":", 1)
+        out[f"{root}/data/{namespace}/tags/worldgen/biome/{path}.json"] = {
+            "replace": bool(spec.get("replace")), "values": entries(spec["values"])}
+        made.append(f"tag {tag}")
+    quiet = spawns.get("quiet", {}).get("biomes")
+    if quiet:
+        out[f"{root}/data/legionwarex/tags/worldgen/biome/spawns/quiet.json"] = {"replace": False, "values": entries(quiet)}
+    for name, spec in spawns.get("add", {}).items():
+        if name.startswith("_"):
+            continue
+        spawners = [{"type": entity, "weight": w, "minCount": lo, "maxCount": hi}
+                    for entity, (w, lo, hi) in spec["spawners"].items() if have(entity)]
+        if not spawners:
+            continue
+        out[f"{root}/data/legionwarex/tags/worldgen/biome/spawns/{name}.json"] = {"replace": False, "values": entries(spec["biomes"])}
+        biomes = f"#legionwarex:spawns/{name}"
+        if quiet and spec.get("quiet", True):
+            # Forge's own holder sets: this group's biomes, less the quiet ones.
+            biomes = {"type": "forge:and", "values": [biomes, {"type": "forge:not", "value": "#legionwarex:spawns/quiet"}]}
+        out[f"{root}/data/legionwarex/forge/biome_modifier/spawns/{name}.json"] = {
+            "type": "forge:add_spawns", "biomes": biomes, "spawners": spawners}
+        made.append(f"add {name} ({len(spawners)})")
+    if notes is not None and made:
+        notes.append(f"spawns: {len([m for m in made if m.startswith('off')])} mod spawns off, "
+                     f"{len([m for m in made if m.startswith('tag')])} biome tags, {len([m for m in made if m.startswith('add')])} spawn groups")
     return out
 
 

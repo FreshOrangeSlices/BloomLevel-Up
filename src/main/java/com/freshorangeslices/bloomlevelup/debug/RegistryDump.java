@@ -35,6 +35,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -442,6 +443,11 @@ public final class RegistryDump {
 			if (made != null) {
 				out.add("classes", classes(made.getClass(), Entity.class));
 				out.addProperty("bossBar", keepsBossBar(made.getClass()));
+
+				// Whether it despawns once players are far away (mobs that don't pile up when spawned naturally).
+				if (made instanceof Mob mob) {
+					out.addProperty("despawns", mob.removeWhenFarAway(16384.0));
+				}
 
 				if (made instanceof LivingEntity living) {
 					out.addProperty("health", living.getMaxHealth());

@@ -217,6 +217,70 @@ def pack_data_check(server_dir, dump_file, server_lines):
     return failures, notes
 
 
+def spawn_check(server_dir, dump_file, spec_file):
+    """The pack's natural spawns (pack_data.spawns, as biome modifiers in its data pack), from the biome rows of Bloom's
+    registry dump (every biome's spawn list after all mods' modifiers). Fails when a mob the pack adds is missing from
+    every biome (its modifier didn't load) or never despawns (natural spawns would pile up), when Skrythe's lair can go
+    in a biome that isn't a mountain, or when a Skarrier cave mob is still listed in the Nether or the End. Reports each
+    overworld biome's modded share of the night's spawns, counted in mobs (weight x average group): about 1 in 5 is
+    the aim. Mobs that spawn only underground, after the Wither or under a condition of their own (spawns.conditional)
+    and quiet biomes are left out. Returns (failures, notes, report lines)."""
+    folder = os.path.join(server_dir, "config", "openloader", "data")
+    added = {}
+    for pack in (sorted(os.listdir(folder)) if os.path.isdir(folder) else []):
+        mods_dir = os.path.join(folder, pack, "data", "legionwarex", "forge", "biome_modifier", "spawns")
+        for name in sorted(os.listdir(mods_dir)) if os.path.isdir(mods_dir) else []:
+            for spawner in json.load(open(os.path.join(mods_dir, name))).get("spawners", []):
+                added.setdefault(spawner["type"], []).append(name[:-5])
+    if not added:
+        return [], ["spawns: none added in this layer"], []
+    if not os.path.exists(dump_file):
+        return ["spawns: no registry dump to check them against"], [], []
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    biomes = [r for r in rows if r.get("kind") == "biome" and "spawns" in r]
+    entities = {r["id"]: r for r in rows if r.get("kind") == "entity"}
+    if not biomes:
+        return ["spawns: the registry dump has no biomes (an older Bloom?)"], [], []
+    spawns = (json.load(open(spec_file)).get("pack_data") or {}).get("spawns", {}) if os.path.exists(spec_file) else {}
+    conditional = {e for k, v in spawns.get("conditional", {}).items() if not k.startswith("_") for e in v}
+    quiet_ids = set(spawns.get("quiet", {}).get("biomes", []))
+    failures = []
+    listed = {s["type"] for b in biomes for v in b["spawns"].values() for s in v}
+    for mob, groups in sorted(added.items()):
+        if mob not in listed:
+            failures.append(f"spawns: {mob} ({', '.join(groups)}) isn't in any biome's spawns (its modifier didn't load)")
+        elif entities.get(mob, {}).get("despawns") is False:
+            failures.append(f"spawns: {mob} ({', '.join(groups)}) never despawns, so natural spawns would pile up")
+    lair = [b["id"] for b in biomes if "monsterexpansion:skrythe_biomes" in b["tags"]
+            and not {"minecraft:is_mountain", "forge:is_mountain"} & set(b["tags"])]
+    if lair:
+        failures.append(f"spawns: Skrythe's lair can still go in {', '.join(lair[:8])}")
+    overworld_only = {"skarrier_mobs:" + m for m in ("breacher", "dragger", "eater", "wrought", "bowlder", "gorger", "slither_spawner_dummy", "viruleon")}
+    elsewhere = sorted({s["type"] for b in biomes if "minecraft:is_overworld" not in b["tags"] for v in b["spawns"].values()
+                        for s in v if s["type"] in overworld_only})
+    if elsewhere:
+        failures.append(f"spawns: Skarrier's overworld mobs are still listed outside the Overworld: {', '.join(elsewhere)}")
+    report, shares = [], []
+    for b in sorted(biomes, key=lambda b: b["id"]):
+        if "minecraft:is_overworld" not in b["tags"] or b["id"] in quiet_ids:
+            continue
+        live = [s for s in b["spawns"].get("monster", []) if s["type"] not in conditional
+                and not (s["type"] == "minecraft:slime" and "minecraft:allows_surface_slime_spawns" not in b["tags"])]
+        mobs = lambda s: s["weight"] * (s["min"] + s["max"]) / 2
+        total = sum(mobs(s) for s in live)
+        modded = sum(mobs(s) for s in live if not s["type"].startswith("minecraft:"))
+        if total:
+            shares.append((modded / total, b["id"]))
+    shares.sort()
+    for share, ident in shares:
+        report.append(f"{share * 100:5.1f}%  {ident}")
+    land = [s for s in shares if not any(w in s[1] for w in ("ocean", "river", "beach", "shore", "caves", "grotto"))]
+    median = land[len(land) // 2][0] if land else 0
+    notes = [f"spawns: {len(added)} mobs added by the pack; modded share of night spawns (in mobs) on land: median "
+             f"{median * 100:.0f}%, {land[0][0] * 100:.0f}% ({land[0][1]}) to {land[-1][0] * 100:.0f}% ({land[-1][1]})" if land else "spawns: no land biomes"]
+    return failures, notes, report
+
+
 def bloom_sorting(dump_file):
     """How much of the pack Bloom has sorted, from the server's registry dump (-Dbloomlevelup.dump): weapons into its
     families, armor into its classes, daggers into its dagger tag, bosses with a boss bar into its boss tag. Returns
@@ -436,6 +500,15 @@ def main():
     data_failures, data_notes = pack_data_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
     failures += data_failures
     notes += data_notes
+    # ---- the pack's natural spawns: what each biome spawns, and how much of it is modded
+    spawn_failures, spawn_notes, spawn_report = spawn_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"),
+                                                            os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
+    failures += spawn_failures
+    notes += spawn_notes
+    if spawn_report:
+        text = chr(10).join(spawn_report)
+        for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
+            print(f"::notice title=pack-spawns-{n}::{esc(text[i:i + 3900])}")
 
     # ---- what the client did (both starts)
     client_exited = client.process.poll() is not None  # by itself, before the test stops it

@@ -136,6 +136,9 @@ def stop(process):
 KNOWN = {
     "mythsandlegends:cogwork_construct": "Myths & Legends 1.0.6's renderer reads its entity before GeckoLib sets it, so the "
                                          "first one a player sees crashes their game",
+    # Not a problem in play, only when summoned bare: an entity that can't exist without its data.
+    "handcrafted:fancy_painting": "summoned bare it has no picture and Handcrafted's renderer can't draw it; one a player "
+                                  "hangs always has one",
 }
 
 

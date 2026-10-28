@@ -1,0 +1,54 @@
+# graveyard-FORGE-4.0.0+mc1.20.1.jar
+## javap com/lion/graveyard/mixin/MobEntitySpawnMixin.class
+Compiled from "MobEntitySpawnMixin.java"
+public abstract class com.lion.graveyard.mixin.MobEntitySpawnMixin {
+  public com.lion.graveyard.mixin.MobEntitySpawnMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private void graveyard$gateAutomaticSpawn(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.MobSpawnType, org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<java.lang.Boolean>);
+    Code:
+       0: aload_0
+       1: checkcast     #30                 // class net/minecraft/world/entity/Mob
+       4: astore        4
+       6: aload         4
+       8: invokevirtual #34                 // Method net/minecraft/world/entity/Mob.m_6095_:()Lnet/minecraft/world/entity/EntityType;
+      11: aload_2
+      12: invokestatic  #40                 // Method com/lion/graveyard/entities/MobSpawnGate.blocks:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/MobSpawnType;)Z
+      15: ifne          36
+      18: aload_1
+      19: aload         4
+      21: invokevirtual #44                 // Method net/minecraft/world/entity/Mob.m_20183_:()Lnet/minecraft/core/BlockPos;
+      24: aload         4
+      26: invokevirtual #34                 // Method net/minecraft/world/entity/Mob.m_6095_:()Lnet/minecraft/world/entity/EntityType;
+      29: aload_2
+      30: invokestatic  #48                 // Method com/lion/graveyard/entities/MobSpawnGate.inForbiddenBiome:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/MobSpawnType;)Z
+      33: ifeq          44
+      36: aload_3
+      37: iconst_0
+      38: invokestatic  #54                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      41: invokevirtual #60                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable.setReturnValue:(Ljava/lang/Object;)V
+      44: return
+
+  private void graveyard$discardGatedStructureMob(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag, org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<net.minecraft.world.entity.SpawnGroupData>);
+    Code:
+       0: aload_0
+       1: checkcast     #30                 // class net/minecraft/world/entity/Mob
+       4: astore        7
+       6: aload_3
+       7: getstatic     #78                 // Field net/minecraft/world/entity/MobSpawnType.STRUCTURE:Lnet/minecraft/world/entity/MobSpawnType;
+      10: if_acmpeq     20
+      13: aload_3
+      14: getstatic     #81                 // Field net/minecraft/world/entity/MobSpawnType.SPAWNER:Lnet/minecraft/world/entity/MobSpawnType;
+      17: if_acmpne     37
+      20: aload         7
+      22: invokevirtual #34                 // Method net/minecraft/world/entity/Mob.m_6095_:()Lnet/minecraft/world/entity/EntityType;
+      25: aload_3
+      26: invokestatic  #40                 // Method com/lion/graveyard/entities/MobSpawnGate.blocks:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/MobSpawnType;)Z
+      29: ifeq          37
+      32: aload         7
+      34: invokevirtual #84                 // Method net/minecraft/world/entity/Mob.m_146870_:()V
+      37: return
+}

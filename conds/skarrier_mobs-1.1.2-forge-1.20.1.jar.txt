@@ -1,0 +1,1303 @@
+# skarrier_mobs-1.1.2-forge-1.20.1.jar
+## javap net/mcreator/skarriermobs/procedures/BowlderNaturalSpawningConditionProcedure.class
+Compiled from "BowlderNaturalSpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.BowlderNaturalSpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.BowlderNaturalSpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #41                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #43                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #45                 // String minecraft:is_overworld
+      22: invokespecial #48                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #54                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #60,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          188
+      36: aload_0
+      37: dload_1
+      38: dload_3
+      39: dload         5
+      41: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      44: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      49: new           #43                 // class net/minecraft/resources/ResourceLocation
+      52: dup
+      53: ldc           #62                 // String deep_dark
+      55: invokespecial #48                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      58: invokeinterface #66,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      63: ifne          188
+      66: aload_0
+      67: getstatic     #72                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      70: dload_1
+      71: dload_3
+      72: dload         5
+      74: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      77: invokeinterface #76,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+      82: ifne          188
+      85: dload_3
+      86: ldc2_w        #77                 // double 40.0d
+      89: dcmpg
+      90: ifge          188
+      93: aload_0
+      94: ldc           #80                 // class net/mcreator/skarriermobs/entity/BowlderEntity
+      96: new           #82                 // class net/minecraft/world/phys/Vec3
+      99: dup
+     100: dload_1
+     101: dload_3
+     102: dload         5
+     104: invokespecial #85                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     107: ldc2_w        #86                 // double 100.0d
+     110: ldc2_w        #86                 // double 100.0d
+     113: ldc2_w        #86                 // double 100.0d
+     116: invokestatic  #93                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+     119: invokedynamic #112,  0            // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+     124: invokeinterface #116,  4          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+     129: invokeinterface #122,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     134: ifeq          188
+     137: aload_0
+     138: invokestatic  #126                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+     141: getfield      #130                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+     144: iconst_1
+     145: if_icmpne     188
+     148: aload_0
+     149: dload_1
+     150: dload_3
+     151: dload         5
+     153: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     156: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     161: getstatic     #41                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     164: new           #43                 // class net/minecraft/resources/ResourceLocation
+     167: dup
+     168: ldc           #132                // String skarrier_mobs:alcaves_biomes
+     170: invokespecial #48                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     173: invokestatic  #54                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     176: invokeinterface #60,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     181: ifne          188
+     184: iconst_1
+     185: goto          189
+     188: iconst_0
+     189: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.BowlderEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/BreacherNaturalEntitySpawningConditionProcedure.class
+Compiled from "BreacherNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.BreacherNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.BreacherNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #31                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #33                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #35                 // String minecraft:is_overworld
+      22: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #44                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #50,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          155
+      36: aload_0
+      37: dload_1
+      38: dload_3
+      39: dload         5
+      41: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      44: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      49: new           #33                 // class net/minecraft/resources/ResourceLocation
+      52: dup
+      53: ldc           #52                 // String deep_dark
+      55: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      58: invokeinterface #56,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      63: ifne          155
+      66: aload_0
+      67: getstatic     #62                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      70: dload_1
+      71: dload_3
+      72: dload         5
+      74: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      77: invokeinterface #66,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+      82: ifne          155
+      85: aload_0
+      86: dload_1
+      87: dload_3
+      88: dload         5
+      90: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      93: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      98: new           #33                 // class net/minecraft/resources/ResourceLocation
+     101: dup
+     102: ldc           #68                 // String mushroom_fields
+     104: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     107: invokeinterface #56,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     112: ifne          155
+     115: aload_0
+     116: dload_1
+     117: dload_3
+     118: dload         5
+     120: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     123: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     128: getstatic     #31                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     131: new           #33                 // class net/minecraft/resources/ResourceLocation
+     134: dup
+     135: ldc           #70                 // String skarrier_mobs:alcaves_biomes
+     137: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     140: invokestatic  #44                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     143: invokeinterface #50,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     148: ifne          155
+     151: iconst_1
+     152: goto          156
+     155: iconst_0
+     156: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/CarnifloreNaturalEntitySpawningConditionProcedure.class
+Compiled from "CarnifloreNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.CarnifloreNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.CarnifloreNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #32                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #34                 // String jungle
+      19: invokespecial #37                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #43,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          38
+      30: dload_3
+      31: ldc2_w        #44                 // double 60.0d
+      34: dcmpl
+      35: ifge          68
+      38: aload_0
+      39: dload_1
+      40: dload_3
+      41: dload         5
+      43: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      46: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      51: new           #32                 // class net/minecraft/resources/ResourceLocation
+      54: dup
+      55: ldc           #47                 // String lush_caves
+      57: invokespecial #37                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      60: invokeinterface #43,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      65: ifeq          116
+      68: aload_0
+      69: ldc           #49                 // class net/mcreator/skarriermobs/entity/CarnifloreEntity
+      71: new           #51                 // class net/minecraft/world/phys/Vec3
+      74: dup
+      75: dload_1
+      76: dload_3
+      77: dload         5
+      79: invokespecial #54                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+      82: ldc2_w        #55                 // double 100.0d
+      85: ldc2_w        #55                 // double 100.0d
+      88: ldc2_w        #55                 // double 100.0d
+      91: invokestatic  #62                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+      94: invokedynamic #81,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      99: invokeinterface #85,  4           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+     104: invokeinterface #91,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     109: ifeq          116
+     112: iconst_1
+     113: goto          117
+     116: iconst_0
+     117: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.CarnifloreEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/CrimlinNaturalEntitySpawningConditionProcedure.class
+Compiled from "CrimlinNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.CrimlinNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.CrimlinNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dconst_1
+       4: dsub
+       5: dload         5
+       7: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      10: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      15: invokevirtual #36                 // Method net/minecraft/world/level/block/state/BlockState.m_60734_:()Lnet/minecraft/world/level/block/Block;
+      18: getstatic     #42                 // Field net/minecraft/world/level/block/Blocks.f_50699_:Lnet/minecraft/world/level/block/Block;
+      21: if_acmpne     39
+      24: aload_0
+      25: invokestatic  #46                 // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+      28: getfield      #50                 // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+      31: iconst_1
+      32: if_icmpne     39
+      35: iconst_1
+      36: goto          40
+      39: iconst_0
+      40: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/DangleNaturalEntitySpawningConditionProcedure.class
+Compiled from "DangleNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.DangleNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.DangleNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String bamboo_jungle
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          42
+      30: dload_3
+      31: ldc2_w        #39                 // double 64.0d
+      34: dcmpl
+      35: iflt          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/DraggerNaturalEntitySpawningConditionProcedure.class
+Compiled from "DraggerNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.DraggerNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.DraggerNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #31                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #33                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #35                 // String minecraft:is_overworld
+      22: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #44                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #50,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          119
+      36: aload_0
+      37: dload_1
+      38: dload_3
+      39: dload         5
+      41: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      44: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      49: new           #33                 // class net/minecraft/resources/ResourceLocation
+      52: dup
+      53: ldc           #52                 // String deep_dark
+      55: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      58: invokeinterface #56,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      63: ifne          119
+      66: aload_0
+      67: getstatic     #62                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      70: dload_1
+      71: dload_3
+      72: dload         5
+      74: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      77: invokeinterface #66,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+      82: ifne          119
+      85: aload_0
+      86: dload_1
+      87: dload_3
+      88: dload         5
+      90: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      93: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      98: new           #33                 // class net/minecraft/resources/ResourceLocation
+     101: dup
+     102: ldc           #68                 // String mushroom_fields
+     104: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     107: invokeinterface #56,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     112: ifne          119
+     115: iconst_1
+     116: goto          120
+     119: iconst_0
+     120: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/EaterNaturalSpawningConditionProcedure.class
+Compiled from "EaterNaturalSpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.EaterNaturalSpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.EaterNaturalSpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #31                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #33                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #35                 // String minecraft:is_overworld
+      22: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #44                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #50,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          103
+      36: aload_0
+      37: dload_1
+      38: dload_3
+      39: dload         5
+      41: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      44: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      49: new           #33                 // class net/minecraft/resources/ResourceLocation
+      52: dup
+      53: ldc           #52                 // String deep_dark
+      55: invokespecial #38                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      58: invokeinterface #56,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      63: ifne          103
+      66: aload_0
+      67: getstatic     #62                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      70: dload_1
+      71: dload_3
+      72: dload         5
+      74: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      77: invokeinterface #66,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+      82: ifne          103
+      85: dload_3
+      86: ldc2_w        #67                 // double 40.0d
+      89: dcmpg
+      90: ifge          103
+      93: dload_3
+      94: dconst_0
+      95: dcmpl
+      96: ifle          103
+      99: iconst_1
+     100: goto          104
+     103: iconst_0
+     104: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/FreezeNaturalEntitySpawningConditionProcedure.class
+Compiled from "FreezeNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.FreezeNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.FreezeNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      13: ifeq          121
+      16: aload_0
+      17: dload_1
+      18: dload_3
+      19: dload         5
+      21: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      24: invokeinterface #34,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      29: new           #36                 // class net/minecraft/resources/ResourceLocation
+      32: dup
+      33: ldc           #38                 // String ice_spikes
+      35: invokespecial #41                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      38: invokeinterface #47,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      43: ifne          117
+      46: aload_0
+      47: dload_1
+      48: dload_3
+      49: dload         5
+      51: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      54: invokeinterface #34,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      59: new           #36                 // class net/minecraft/resources/ResourceLocation
+      62: dup
+      63: ldc           #49                 // String frozen_peaks
+      65: invokespecial #41                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      68: invokeinterface #47,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      73: ifne          106
+      76: aload_0
+      77: dload_1
+      78: dload_3
+      79: dload         5
+      81: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      84: invokeinterface #34,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      89: new           #36                 // class net/minecraft/resources/ResourceLocation
+      92: dup
+      93: ldc           #51                 // String snowy_slopes
+      95: invokespecial #41                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      98: invokeinterface #47,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     103: ifeq          121
+     106: aload_0
+     107: invokestatic  #55                 // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+     110: getfield      #59                 // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+     113: iconst_1
+     114: if_icmpne     121
+     117: iconst_1
+     118: goto          122
+     121: iconst_0
+     122: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/FrostNaturalEntitySpawningConditionProcedure.class
+Compiled from "FrostNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.FrostNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.FrostNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String ice_spikes
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          50
+      30: aload_0
+      31: dload_1
+      32: dload_3
+      33: dload         5
+      35: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      38: invokeinterface #42,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      43: ifeq          50
+      46: iconst_1
+      47: goto          51
+      50: iconst_0
+      51: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/GadliskNaturalEntitySpawningConditionProcedure.class
+Compiled from "GadliskNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.GadliskNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.GadliskNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #32                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #34                 // String swamp
+      19: invokespecial #37                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #43,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          53
+      30: dload_3
+      31: ldc2_w        #44                 // double 64.0d
+      34: dcmpl
+      35: iflt          53
+      38: aload_0
+      39: invokestatic  #49                 // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+      42: getfield      #53                 // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+      45: iconst_1
+      46: if_icmpne     53
+      49: iconst_1
+      50: goto          54
+      53: iconst_0
+      54: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/GlowinNaturalEntitySpawningConditionProcedure.class
+Compiled from "GlowinNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.GlowinNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.GlowinNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String dark_forest
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          42
+      30: dload_3
+      31: ldc2_w        #39                 // double 64.0d
+      34: dcmpl
+      35: iflt          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/GorgerNaturalSpawningConditionProcedure.class
+Compiled from "GorgerNaturalSpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.GorgerNaturalSpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.GorgerNaturalSpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #41                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #43                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #45                 // String minecraft:is_overworld
+      22: invokespecial #48                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #54                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #60,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          160
+      36: aload_0
+      37: dload_1
+      38: dload_3
+      39: dload         5
+      41: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      44: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      49: new           #43                 // class net/minecraft/resources/ResourceLocation
+      52: dup
+      53: ldc           #62                 // String deep_dark
+      55: invokespecial #48                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      58: invokeinterface #66,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      63: ifne          160
+      66: aload_0
+      67: getstatic     #72                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      70: dload_1
+      71: dload_3
+      72: dload         5
+      74: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      77: invokeinterface #76,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+      82: ifne          160
+      85: dload_3
+      86: ldc2_w        #77                 // double 40.0d
+      89: dcmpg
+      90: ifge          160
+      93: dload_3
+      94: ldc2_w        #79                 // double -20.0d
+      97: dcmpl
+      98: ifle          160
+     101: aload_0
+     102: ldc           #82                 // class net/mcreator/skarriermobs/entity/GorgerEntity
+     104: new           #84                 // class net/minecraft/world/phys/Vec3
+     107: dup
+     108: dload_1
+     109: dload_3
+     110: dload         5
+     112: invokespecial #87                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     115: ldc2_w        #88                 // double 60.0d
+     118: ldc2_w        #88                 // double 60.0d
+     121: ldc2_w        #88                 // double 60.0d
+     124: invokestatic  #95                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+     127: invokedynamic #114,  0            // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+     132: invokeinterface #118,  4          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+     137: invokeinterface #124,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     142: ifeq          160
+     145: aload_0
+     146: invokestatic  #128                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+     149: getfield      #132                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+     152: iconst_1
+     153: if_icmpne     160
+     156: iconst_1
+     157: goto          161
+     160: iconst_0
+     161: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.GorgerEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/HellamanderNaturalEntitySpawningConditionProcedure.class
+Compiled from "HellamanderNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.HellamanderNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.HellamanderNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double);
+    Code:
+       0: dload_1
+       1: ldc2_w        #19                 // double 40.0d
+       4: dcmpg
+       5: ifgt          31
+       8: dload_1
+       9: ldc2_w        #21                 // double 30.0d
+      12: dcmpl
+      13: ifle          31
+      16: aload_0
+      17: invokestatic  #26                 // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+      20: getfield      #30                 // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+      23: iconst_1
+      24: if_icmpne     31
+      27: iconst_1
+      28: goto          32
+      31: iconst_0
+      32: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/QuakeNaturalEntitySpawningConditionProcedure.class
+Compiled from "QuakeNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.QuakeNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.QuakeNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String desert
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          60
+      30: aload_0
+      31: dload_1
+      32: dload_3
+      33: dload         5
+      35: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      38: invokeinterface #42,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      43: ifeq          60
+      46: invokestatic  #48                 // Method java/lang/Math.random:()D
+      49: ldc2_w        #49                 // double 0.15d
+      52: dcmpg
+      53: ifge          60
+      56: iconst_1
+      57: goto          61
+      60: iconst_0
+      61: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/SlitherMatriarchNaturalEntitySpawningConditionProcedure.class
+Compiled from "SlitherMatriarchNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SlitherMatriarchNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.SlitherMatriarchNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String mangrove_swamp
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifeq          42
+      30: dload_3
+      31: ldc2_w        #39                 // double 60.0d
+      34: dcmpl
+      35: iflt          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/SlitherNaturalEntitySpawningConditionProcedure.class
+Compiled from "SlitherNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SlitherNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.SlitherNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String swamp
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifne          60
+      30: aload_0
+      31: dload_1
+      32: dload_3
+      33: dload         5
+      35: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      38: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      43: new           #27                 // class net/minecraft/resources/ResourceLocation
+      46: dup
+      47: ldc           #40                 // String mangrove_swamp
+      49: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      52: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      57: ifeq          72
+      60: dload_3
+      61: ldc2_w        #41                 // double 60.0d
+      64: dcmpl
+      65: iflt          72
+      68: iconst_1
+      69: goto          73
+      72: iconst_0
+      73: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/SnapNaturalEntitySpawningConditionProcedure.class
+Compiled from "SnapNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SnapNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.SnapNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      13: ifeq          41
+      16: aload_0
+      17: instanceof    #27                 // class net/minecraft/world/level/Level
+      20: ifeq          41
+      23: aload_0
+      24: checkcast     #27                 // class net/minecraft/world/level/Level
+      27: astore        7
+      29: aload         7
+      31: invokevirtual #31                 // Method net/minecraft/world/level/Level.m_46461_:()Z
+      34: ifeq          41
+      37: iconst_1
+      38: goto          42
+      41: iconst_0
+      42: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/TrawlerNaturalSpawningConditionProcedure.class
+Compiled from "TrawlerNaturalSpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.TrawlerNaturalSpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.TrawlerNaturalSpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #37                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #39                 // String badlands
+      19: invokespecial #42                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #48,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifne          60
+      30: aload_0
+      31: dload_1
+      32: dload_3
+      33: dload         5
+      35: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      38: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      43: new           #37                 // class net/minecraft/resources/ResourceLocation
+      46: dup
+      47: ldc           #50                 // String eroded_badlands
+      49: invokespecial #42                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      52: invokeinterface #48,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      57: ifeq          127
+      60: dload_3
+      61: ldc2_w        #51                 // double 60.0d
+      64: dcmpl
+      65: ifle          127
+      68: aload_0
+      69: ldc           #54                 // class net/mcreator/skarriermobs/entity/TrawlerEntity
+      71: new           #56                 // class net/minecraft/world/phys/Vec3
+      74: dup
+      75: dload_1
+      76: dload_3
+      77: dload         5
+      79: invokespecial #59                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+      82: ldc2_w        #60                 // double 120.0d
+      85: ldc2_w        #60                 // double 120.0d
+      88: ldc2_w        #60                 // double 120.0d
+      91: invokestatic  #67                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+      94: invokedynamic #86,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      99: invokeinterface #90,  4           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+     104: invokeinterface #96,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     109: ifeq          127
+     112: aload_0
+     113: invokestatic  #100                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+     116: getfield      #104                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+     119: iconst_1
+     120: if_icmpne     127
+     123: iconst_1
+     124: goto          128
+     127: iconst_0
+     128: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.TrawlerEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/ViruleonNaturalEntitySpawningConditionProcedure.class
+Compiled from "ViruleonNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.ViruleonNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.ViruleonNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #37                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #39                 // String badlands
+      19: invokespecial #42                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #48,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifne          120
+      30: aload_0
+      31: dload_1
+      32: dload_3
+      33: dload         5
+      35: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      38: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      43: new           #37                 // class net/minecraft/resources/ResourceLocation
+      46: dup
+      47: ldc           #50                 // String eroded_badlands
+      49: invokespecial #42                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      52: invokeinterface #48,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      57: ifne          120
+      60: aload_0
+      61: dload_1
+      62: dload_3
+      63: dload         5
+      65: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      68: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      73: new           #37                 // class net/minecraft/resources/ResourceLocation
+      76: dup
+      77: ldc           #52                 // String wooded_badlands
+      79: invokespecial #42                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      82: invokeinterface #48,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      87: ifne          120
+      90: aload_0
+      91: dload_1
+      92: dload_3
+      93: dload         5
+      95: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      98: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     103: new           #37                 // class net/minecraft/resources/ResourceLocation
+     106: dup
+     107: ldc           #54                 // String desert
+     109: invokespecial #42                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     112: invokeinterface #48,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     117: ifeq          195
+     120: aload_0
+     121: ldc           #56                 // class net/mcreator/skarriermobs/entity/ViruleonEntity
+     123: new           #58                 // class net/minecraft/world/phys/Vec3
+     126: dup
+     127: dload_1
+     128: dload_3
+     129: dload         5
+     131: invokespecial #61                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     134: ldc2_w        #62                 // double 100.0d
+     137: ldc2_w        #62                 // double 100.0d
+     140: ldc2_w        #62                 // double 100.0d
+     143: invokestatic  #69                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+     146: invokedynamic #88,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+     151: invokeinterface #92,  4           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+     156: invokeinterface #98,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     161: ifeq          195
+     164: aload_0
+     165: dload_1
+     166: dload_3
+     167: dload         5
+     169: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     172: invokeinterface #102,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+     177: ifne          195
+     180: aload_0
+     181: invokestatic  #106                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+     184: getfield      #110                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+     187: iconst_1
+     188: if_icmpne     195
+     191: iconst_1
+     192: goto          196
+     195: iconst_0
+     196: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.ViruleonEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/VoidrakeNaturalEntitySpawningConditionProcedure.class
+Compiled from "VoidrakeNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.VoidrakeNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.VoidrakeNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: invokestatic  #22                 // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+       4: getfield      #26                 // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+       7: iconst_1
+       8: if_icmpne     75
+      11: aload_0
+      12: dload_1
+      13: dload_3
+      14: dload         5
+      16: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      19: invokeinterface #38,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      24: new           #40                 // class net/minecraft/resources/ResourceLocation
+      27: dup
+      28: ldc           #42                 // String end_barrens
+      30: invokespecial #45                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      33: invokeinterface #51,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      38: ifne          71
+      41: aload_0
+      42: dload_1
+      43: dload_3
+      44: dload         5
+      46: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      49: invokeinterface #38,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      54: new           #40                 // class net/minecraft/resources/ResourceLocation
+      57: dup
+      58: ldc           #53                 // String end_highlands
+      60: invokespecial #45                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      63: invokeinterface #51,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      68: ifeq          75
+      71: iconst_1
+      72: goto          76
+      75: iconst_0
+      76: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/WretchNaturalEntitySpawningConditionProcedure.class
+Compiled from "WretchNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.WretchNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.WretchNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #35,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #41                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #43                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #45                 // String skarrier_mobs:alcaves_forlornhollows
+      22: invokespecial #48                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #54                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #60,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          111
+      36: aload_0
+      37: ldc           #62                 // class net/mcreator/skarriermobs/entity/WretchEntity
+      39: new           #64                 // class net/minecraft/world/phys/Vec3
+      42: dup
+      43: dload_1
+      44: dload_3
+      45: dload         5
+      47: invokespecial #67                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+      50: ldc2_w        #68                 // double 120.0d
+      53: ldc2_w        #68                 // double 120.0d
+      56: ldc2_w        #68                 // double 120.0d
+      59: invokestatic  #75                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+      62: invokedynamic #94,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      67: invokeinterface #98,  4           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+      72: invokeinterface #104,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      77: ifeq          111
+      80: aload_0
+      81: dload_1
+      82: dload_3
+      83: dload         5
+      85: invokestatic  #29                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      88: invokeinterface #108,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      93: ifne          111
+      96: aload_0
+      97: invokestatic  #112                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.get:(Lnet/minecraft/world/level/LevelAccessor;)Lnet/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables;
+     100: getfield      #116                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$WorldVariables.WitherDefeated:Z
+     103: iconst_1
+     104: if_icmpne     111
+     107: iconst_1
+     108: goto          112
+     111: iconst_0
+     112: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.WretchEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/WroughtNaturalEntitySpawningConditionProcedure.class
+Compiled from "WroughtNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.WroughtNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.WroughtNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: getstatic     #36                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+      16: new           #38                 // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc           #40                 // String minecraft:is_overworld
+      22: invokespecial #43                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      25: invokestatic  #49                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      28: invokeinterface #55,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+      33: ifeq          192
+      36: aload_0
+      37: dload_1
+      38: dload_3
+      39: dload         5
+      41: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      44: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      49: new           #38                 // class net/minecraft/resources/ResourceLocation
+      52: dup
+      53: ldc           #57                 // String deep_dark
+      55: invokespecial #43                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      58: invokeinterface #61,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      63: ifne          192
+      66: aload_0
+      67: dload_1
+      68: dload_3
+      69: dload         5
+      71: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      74: invokeinterface #65,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      79: ifne          192
+      82: aload_0
+      83: getstatic     #71                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      86: dload_1
+      87: dload_3
+      88: dload         5
+      90: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      93: invokeinterface #75,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+      98: iconst_5
+      99: if_icmpge     192
+     102: dload_3
+     103: dconst_0
+     104: dcmpg
+     105: ifge          192
+     108: aload_0
+     109: ldc           #77                 // class net/mcreator/skarriermobs/entity/WroughtEntity
+     111: new           #79                 // class net/minecraft/world/phys/Vec3
+     114: dup
+     115: dload_1
+     116: dload_3
+     117: dload         5
+     119: invokespecial #82                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     122: ldc2_w        #83                 // double 100.0d
+     125: ldc2_w        #83                 // double 100.0d
+     128: ldc2_w        #83                 // double 100.0d
+     131: invokestatic  #90                 // Method net/minecraft/world/phys/AABB.m_165882_:(Lnet/minecraft/world/phys/Vec3;DDD)Lnet/minecraft/world/phys/AABB;
+     134: invokedynamic #109,  0            // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+     139: invokeinterface #113,  4          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+     144: invokeinterface #119,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     149: ifeq          192
+     152: aload_0
+     153: dload_1
+     154: dload_3
+     155: dload         5
+     157: invokestatic  #24                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     160: invokeinterface #30,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     165: getstatic     #36                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     168: new           #38                 // class net/minecraft/resources/ResourceLocation
+     171: dup
+     172: ldc           #121                // String skarrier_mobs:alcaves_biomes
+     174: invokespecial #43                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     177: invokestatic  #49                 // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     180: invokeinterface #55,  2           // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     185: ifne          192
+     188: iconst_1
+     189: goto          193
+     192: iconst_0
+     193: ireturn
+
+  private static boolean lambda$execute$0(net.mcreator.skarriermobs.entity.WroughtEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap net/mcreator/skarriermobs/procedures/ZombifloreNaturalEntitySpawningConditionProcedure.class
+Compiled from "ZombifloreNaturalEntitySpawningConditionProcedure.java"
+public class net.mcreator.skarriermobs.procedures.ZombifloreNaturalEntitySpawningConditionProcedure {
+  public net.mcreator.skarriermobs.procedures.ZombifloreNaturalEntitySpawningConditionProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+       8: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      13: new           #27                 // class net/minecraft/resources/ResourceLocation
+      16: dup
+      17: ldc           #29                 // String jungle
+      19: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      22: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      27: ifne          90
+      30: aload_0
+      31: dload_1
+      32: dload_3
+      33: dload         5
+      35: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      38: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      43: new           #27                 // class net/minecraft/resources/ResourceLocation
+      46: dup
+      47: ldc           #40                 // String sparse_jungle
+      49: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      52: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      57: ifne          90
+      60: aload_0
+      61: dload_1
+      62: dload_3
+      63: dload         5
+      65: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      68: invokeinterface #25,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      73: new           #27                 // class net/minecraft/resources/ResourceLocation
+      76: dup
+      77: ldc           #42                 // String lush_caves
+      79: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      82: invokeinterface #38,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+      87: ifeq          114
+      90: aload_0
+      91: getstatic     #48                 // Field net/minecraft/world/level/LightLayer.BLOCK:Lnet/minecraft/world/level/LightLayer;
+      94: dload_1
+      95: dload_3
+      96: dload         5
+      98: invokestatic  #19                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     101: invokeinterface #52,  3           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_45517_:(Lnet/minecraft/world/level/LightLayer;Lnet/minecraft/core/BlockPos;)I
+     106: iconst_2
+     107: if_icmpgt     114
+     110: iconst_1
+     111: goto          115
+     114: iconst_0
+     115: ireturn
+}

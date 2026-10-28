@@ -1,0 +1,546 @@
+# irons_spellbooks-1.20.1-3.16.3.jar
+## javap io/redspace/ironsspellbooks/entity/mobs/necromancer/NecromancerEntity.class
+Compiled from "NecromancerEntity.java"
+public class io.redspace.ironsspellbooks.entity.mobs.necromancer.NecromancerEntity extends io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.AbstractSpellCastingMob implements net.minecraft.world.entity.monster.Enemy {
+  public io.redspace.ironsspellbooks.entity.mobs.necromancer.NecromancerEntity(net.minecraft.world.entity.EntityType<? extends io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.AbstractSpellCastingMob>, net.minecraft.world.level.Level);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #17                 // Method io/redspace/ironsspellbooks/entity/mobs/abstract_spell_casting_mob/AbstractSpellCastingMob."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       6: aload_0
+       7: bipush        15
+       9: putfield      #21                 // Field f_21364_:I
+      12: return
+
+  protected void m_8099_();
+    Code:
+       0: aload_0
+       1: getfield      #34                 // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+       4: iconst_4
+       5: new           #36                 // class io/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal
+       8: dup
+       9: aload_0
+      10: ldc2_w        #37                 // double 1.25d
+      13: bipush        35
+      15: bipush        80
+      17: invokespecial #41                 // Method io/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal."<init>":(Lio/redspace/ironsspellbooks/api/entity/IMagicEntity;DII)V
+      20: getstatic     #47                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.FANG_STRIKE_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      23: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      26: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      29: getstatic     #58                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.ICICLE_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      32: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      35: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      38: getstatic     #61                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.MAGIC_MISSILE_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      41: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      44: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      47: invokestatic  #67                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      50: getstatic     #70                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.FANG_WARD_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      53: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      56: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      59: invokestatic  #73                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;)Ljava/util/List;
+      62: invokestatic  #76                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+      65: getstatic     #79                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.BLIGHT_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      68: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      71: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      74: getstatic     #82                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.ROOT_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      77: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      80: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      83: invokestatic  #85                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      86: invokevirtual #89                 // Method io/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal.setSpells:(Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lio/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal;
+      89: getstatic     #92                 // Field io/redspace/ironsspellbooks/api/registry/SpellRegistry.RAISE_DEAD_SPELL:Lnet/minecraftforge/registries/RegistryObject;
+      92: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      95: checkcast     #55                 // class io/redspace/ironsspellbooks/api/spells/AbstractSpell
+      98: bipush        80
+     100: sipush        350
+     103: iconst_4
+     104: iconst_5
+     105: invokevirtual #96                 // Method io/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal.setSingleUseSpell:(Lio/redspace/ironsspellbooks/api/spells/AbstractSpell;IIII)Lio/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal;
+     108: invokevirtual #100                // Method io/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal.setDrinksPotions:()Lio/redspace/ironsspellbooks/entity/mobs/goals/WizardAttackGoal;
+     111: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     114: aload_0
+     115: getfield      #34                 // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     118: iconst_5
+     119: new           #108                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+     122: dup
+     123: aload_0
+     124: dconst_1
+     125: invokespecial #111                // Method net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal."<init>":(Lnet/minecraft/world/entity/PathfinderMob;D)V
+     128: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     131: aload_0
+     132: getfield      #34                 // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     135: bipush        6
+     137: new           #113                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+     140: dup
+     141: aload_0
+     142: ldc           #115                // class net/minecraft/world/entity/player/Player
+     144: ldc           #116                // float 8.0f
+     146: invokespecial #119                // Method net/minecraft/world/entity/ai/goal/LookAtPlayerGoal."<init>":(Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;F)V
+     149: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     152: aload_0
+     153: getfield      #34                 // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     156: bipush        6
+     158: new           #121                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     161: dup
+     162: aload_0
+     163: invokespecial #124                // Method net/minecraft/world/entity/ai/goal/RandomLookAroundGoal."<init>":(Lnet/minecraft/world/entity/Mob;)V
+     166: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     169: aload_0
+     170: getfield      #34                 // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     173: bipush        10
+     175: new           #126                // class io/redspace/ironsspellbooks/entity/mobs/goals/WizardRecoverGoal
+     178: dup
+     179: aload_0
+     180: invokespecial #129                // Method io/redspace/ironsspellbooks/entity/mobs/goals/WizardRecoverGoal."<init>":(Lio/redspace/ironsspellbooks/api/entity/IMagicEntity;)V
+     183: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     186: aload_0
+     187: getfield      #132                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     190: iconst_1
+     191: new           #134                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     194: dup
+     195: aload_0
+     196: iconst_0
+     197: anewarray     #136                // class java/lang/Class
+     200: invokespecial #139                // Method net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal."<init>":(Lnet/minecraft/world/entity/PathfinderMob;[Ljava/lang/Class;)V
+     203: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     206: aload_0
+     207: getfield      #132                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     210: iconst_2
+     211: new           #141                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     214: dup
+     215: aload_0
+     216: ldc           #115                // class net/minecraft/world/entity/player/Player
+     218: iconst_1
+     219: invokespecial #144                // Method net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal."<init>":(Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;Z)V
+     222: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     225: aload_0
+     226: getfield      #132                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     229: iconst_3
+     230: new           #141                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     233: dup
+     234: aload_0
+     235: ldc           #146                // class net/minecraft/world/entity/animal/IronGolem
+     237: iconst_1
+     238: invokespecial #144                // Method net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal."<init>":(Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;Z)V
+     241: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     244: aload_0
+     245: getfield      #132                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     248: iconst_3
+     249: new           #141                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     252: dup
+     253: aload_0
+     254: ldc           #148                // class net/minecraft/world/entity/animal/Turtle
+     256: bipush        10
+     258: iconst_1
+     259: iconst_0
+     260: getstatic     #152                // Field net/minecraft/world/entity/animal/Turtle.f_30122_:Ljava/util/function/Predicate;
+     263: invokespecial #155                // Method net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal."<init>":(Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;IZZLjava/util/function/Predicate;)V
+     266: invokevirtual #106                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     269: return
+
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+    Code:
+       0: getstatic     #163                // Field net/minecraft/sounds/SoundEvents.f_12423_:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  protected net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+    Code:
+       0: getstatic     #168                // Field net/minecraft/sounds/SoundEvents.f_12381_:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  protected net.minecraft.sounds.SoundEvent m_5592_();
+    Code:
+       0: getstatic     #174                // Field net/minecraft/sounds/SoundEvents.f_12424_:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  protected net.minecraft.sounds.SoundEvent getStepSound();
+    Code:
+       0: getstatic     #178                // Field net/minecraft/sounds/SoundEvents.f_12383_:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+    Code:
+       0: getstatic     #187                // Field io/redspace/ironsspellbooks/api/util/Utils.random:Lnet/minecraft/util/RandomSource;
+       3: astore        6
+       5: aload_0
+       6: aload         6
+       8: aload_2
+       9: invokevirtual #191                // Method m_213945_:(Lnet/minecraft/util/RandomSource;Lnet/minecraft/world/DifficultyInstance;)V
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: aload         4
+      18: aload         5
+      20: invokespecial #193                // Method io/redspace/ironsspellbooks/entity/mobs/abstract_spell_casting_mob/AbstractSpellCastingMob.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+      23: areturn
+
+  protected void m_213945_(net.minecraft.util.RandomSource, net.minecraft.world.DifficultyInstance);
+    Code:
+       0: aload_0
+       1: getstatic     #209                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+       4: new           #211                // class net/minecraft/world/item/ItemStack
+       7: dup
+       8: getstatic     #216                // Field io/redspace/ironsspellbooks/registries/ItemRegistry.TARNISHED_CROWN:Lnet/minecraftforge/registries/RegistryObject;
+      11: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      14: checkcast     #218                // class net/minecraft/world/level/ItemLike
+      17: invokespecial #221                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      20: invokevirtual #225                // Method m_8061_:(Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;)V
+      23: aload_0
+      24: getstatic     #209                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+      27: ldc           #226                // float 0.15f
+      29: invokevirtual #230                // Method m_21409_:(Lnet/minecraft/world/entity/EquipmentSlot;F)V
+      32: return
+
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder prepareAttributes();
+    Code:
+       0: invokestatic  #238                // Method net/minecraft/world/entity/LivingEntity.m_21183_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       3: getstatic     #244                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       6: ldc2_w        #245                // double 3.0d
+       9: invokevirtual #250                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      12: getstatic     #253                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22282_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      15: dconst_0
+      16: invokevirtual #250                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      19: getstatic     #256                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      22: ldc2_w        #257                // double 25.0d
+      25: invokevirtual #250                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      28: getstatic     #261                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      31: ldc2_w        #257                // double 25.0d
+      34: invokevirtual #250                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      37: getstatic     #266                // Field io/redspace/ironsspellbooks/api/registry/AttributeRegistry.SPELL_POWER:Lnet/minecraftforge/registries/RegistryObject;
+      40: invokevirtual #53                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      43: checkcast     #268                // class net/minecraft/world/entity/ai/attributes/Attribute
+      46: ldc2_w        #269                // double 0.75d
+      49: invokevirtual #250                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      52: getstatic     #273                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      55: ldc2_w        #274                // double 0.25d
+      58: invokevirtual #250                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      61: areturn
+
+  protected boolean m_8028_();
+    Code:
+       0: iconst_1
+       1: ireturn
+}
+
+## javap io/redspace/ironsspellbooks/setup/CommonSetup.class
+Compiled from "CommonSetup.java"
+public class io.redspace.ironsspellbooks.setup.CommonSetup {
+  public io.redspace.ironsspellbooks.setup.CommonSetup();
+    Code:
+       0: aload_0
+       1: invokespecial #63                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onModConfigLoadingEvent(net.minecraftforge.fml.event.config.ModConfigEvent$Loading);
+    Code:
+       0: aload_0
+       1: invokevirtual #72                 // Method net/minecraftforge/fml/event/config/ModConfigEvent$Loading.getConfig:()Lnet/minecraftforge/fml/config/ModConfig;
+       4: invokevirtual #76                 // Method net/minecraftforge/fml/config/ModConfig.getType:()Lnet/minecraftforge/fml/config/ModConfig$Type;
+       7: getstatic     #80                 // Field net/minecraftforge/fml/config/ModConfig$Type.SERVER:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      10: if_acmpne     22
+      13: invokestatic  #85                 // Method io/redspace/ironsspellbooks/api/registry/SpellRegistry.onConfigReload:()V
+      16: invokestatic  #88                 // Method io/redspace/ironsspellbooks/config/ServerConfigs.onConfigReload:()V
+      19: goto          38
+      22: aload_0
+      23: invokevirtual #72                 // Method net/minecraftforge/fml/event/config/ModConfigEvent$Loading.getConfig:()Lnet/minecraftforge/fml/config/ModConfig;
+      26: invokevirtual #76                 // Method net/minecraftforge/fml/config/ModConfig.getType:()Lnet/minecraftforge/fml/config/ModConfig$Type;
+      29: getstatic     #91                 // Field net/minecraftforge/fml/config/ModConfig$Type.CLIENT:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      32: if_acmpne     38
+      35: invokestatic  #94                 // Method io/redspace/ironsspellbooks/config/ClientConfigs.onConfigReload:()V
+      38: return
+
+  public static void onModConfigReloadingEvent(net.minecraftforge.fml.event.config.ModConfigEvent$Reloading);
+    Code:
+       0: aload_0
+       1: invokevirtual #99                 // Method net/minecraftforge/fml/event/config/ModConfigEvent$Reloading.getConfig:()Lnet/minecraftforge/fml/config/ModConfig;
+       4: invokevirtual #76                 // Method net/minecraftforge/fml/config/ModConfig.getType:()Lnet/minecraftforge/fml/config/ModConfig$Type;
+       7: getstatic     #80                 // Field net/minecraftforge/fml/config/ModConfig$Type.SERVER:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      10: if_acmpne     22
+      13: invokestatic  #85                 // Method io/redspace/ironsspellbooks/api/registry/SpellRegistry.onConfigReload:()V
+      16: invokestatic  #88                 // Method io/redspace/ironsspellbooks/config/ServerConfigs.onConfigReload:()V
+      19: goto          38
+      22: aload_0
+      23: invokevirtual #99                 // Method net/minecraftforge/fml/event/config/ModConfigEvent$Reloading.getConfig:()Lnet/minecraftforge/fml/config/ModConfig;
+      26: invokevirtual #76                 // Method net/minecraftforge/fml/config/ModConfig.getType:()Lnet/minecraftforge/fml/config/ModConfig$Type;
+      29: getstatic     #91                 // Field net/minecraftforge/fml/config/ModConfig$Type.CLIENT:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      32: if_acmpne     38
+      35: invokestatic  #94                 // Method io/redspace/ironsspellbooks/config/ClientConfigs.onConfigReload:()V
+      38: return
+
+  public static void onAttributeCreate(net.minecraftforge.event.entity.EntityAttributeCreationEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #108                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.DEBUG_WIZARD:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #116                // class net/minecraft/world/entity/EntityType
+      10: invokestatic  #122                // Method io/redspace/ironsspellbooks/entity/mobs/debug_wizard/DebugWizard.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      13: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+      16: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+      19: aload_0
+      20: getstatic     #135                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.PYROMANCER:Lnet/minecraftforge/registries/RegistryObject;
+      23: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      26: checkcast     #116                // class net/minecraft/world/entity/EntityType
+      29: invokestatic  #138                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/pyromancer/PyromancerEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      32: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+      35: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+      38: aload_0
+      39: getstatic     #141                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.NECROMANCER:Lnet/minecraftforge/registries/RegistryObject;
+      42: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      45: checkcast     #116                // class net/minecraft/world/entity/EntityType
+      48: invokestatic  #144                // Method io/redspace/ironsspellbooks/entity/mobs/necromancer/NecromancerEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      51: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+      54: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+      57: aload_0
+      58: getstatic     #147                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SPECTRAL_STEED:Lnet/minecraftforge/registries/RegistryObject;
+      61: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      64: checkcast     #116                // class net/minecraft/world/entity/EntityType
+      67: invokestatic  #150                // Method io/redspace/ironsspellbooks/entity/mobs/SummonedHorse.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      70: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+      73: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+      76: aload_0
+      77: getstatic     #153                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.WISP:Lnet/minecraftforge/registries/RegistryObject;
+      80: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      83: checkcast     #116                // class net/minecraft/world/entity/EntityType
+      86: invokestatic  #156                // Method io/redspace/ironsspellbooks/entity/spells/wisp/WispEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      89: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+      92: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+      95: aload_0
+      96: getstatic     #159                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SPECTRAL_HAMMER:Lnet/minecraftforge/registries/RegistryObject;
+      99: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     102: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     105: invokestatic  #162                // Method io/redspace/ironsspellbooks/entity/spells/spectral_hammer/SpectralHammer.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     108: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     111: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     114: aload_0
+     115: getstatic     #165                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_VEX:Lnet/minecraftforge/registries/RegistryObject;
+     118: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     121: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     124: invokestatic  #170                // Method io/redspace/ironsspellbooks/entity/mobs/SummonedVex.m_34040_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     127: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     130: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     133: aload_0
+     134: getstatic     #173                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_ZOMBIE:Lnet/minecraftforge/registries/RegistryObject;
+     137: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     140: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     143: invokestatic  #178                // Method io/redspace/ironsspellbooks/entity/mobs/SummonedZombie.m_34328_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     146: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     149: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     152: aload_0
+     153: getstatic     #181                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_SKELETON:Lnet/minecraftforge/registries/RegistryObject;
+     156: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     159: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     162: invokestatic  #186                // Method io/redspace/ironsspellbooks/entity/mobs/SummonedSkeleton.m_32166_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     165: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     168: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     171: aload_0
+     172: getstatic     #189                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.FROZEN_HUMANOID:Lnet/minecraftforge/registries/RegistryObject;
+     175: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     178: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     181: invokestatic  #192                // Method io/redspace/ironsspellbooks/entity/mobs/frozen_humanoid/FrozenHumanoid.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     184: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     187: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     190: aload_0
+     191: getstatic     #195                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_POLAR_BEAR:Lnet/minecraftforge/registries/RegistryObject;
+     194: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     197: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     200: invokestatic  #200                // Method net/minecraft/world/entity/animal/PolarBear.m_29560_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     203: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     206: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     209: aload_0
+     210: getstatic     #203                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.DEAD_KING:Lnet/minecraftforge/registries/RegistryObject;
+     213: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     216: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     219: invokestatic  #206                // Method io/redspace/ironsspellbooks/entity/mobs/dead_king_boss/DeadKingBoss.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     222: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     225: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     228: aload_0
+     229: getstatic     #209                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.DEAD_KING_CORPSE:Lnet/minecraftforge/registries/RegistryObject;
+     232: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     235: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     238: invokestatic  #206                // Method io/redspace/ironsspellbooks/entity/mobs/dead_king_boss/DeadKingBoss.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     241: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     244: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     247: aload_0
+     248: getstatic     #212                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.CATACOMBS_ZOMBIE:Lnet/minecraftforge/registries/RegistryObject;
+     251: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     254: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     257: invokestatic  #215                // Method net/minecraft/world/entity/monster/Zombie.m_34328_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     260: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     263: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     266: aload_0
+     267: getstatic     #218                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.MAGEHUNTER_VINDICATOR:Lnet/minecraftforge/registries/RegistryObject;
+     270: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     273: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     276: invokestatic  #223                // Method net/minecraft/world/entity/monster/Vindicator.m_34104_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     279: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     282: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     285: aload_0
+     286: getstatic     #226                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.ARCHEVOKER:Lnet/minecraftforge/registries/RegistryObject;
+     289: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     292: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     295: invokestatic  #229                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/archevoker/ArchevokerEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     298: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     301: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     304: aload_0
+     305: getstatic     #232                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.PRIEST:Lnet/minecraftforge/registries/RegistryObject;
+     308: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     311: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     314: invokestatic  #235                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/priest/PriestEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     317: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     320: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     323: aload_0
+     324: getstatic     #238                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.KEEPER:Lnet/minecraftforge/registries/RegistryObject;
+     327: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     330: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     333: invokestatic  #241                // Method io/redspace/ironsspellbooks/entity/mobs/keeper/KeeperEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     336: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     339: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     342: aload_0
+     343: getstatic     #244                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SCULK_TENTACLE:Lnet/minecraftforge/registries/RegistryObject;
+     346: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     349: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     352: invokestatic  #249                // Method io/redspace/ironsspellbooks/entity/spells/void_tentacle/VoidTentacle.m_21183_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     355: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     358: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     361: aload_0
+     362: getstatic     #252                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.CRYOMANCER:Lnet/minecraftforge/registries/RegistryObject;
+     365: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     368: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     371: invokestatic  #255                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/cryomancer/CryomancerEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     374: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     377: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     380: aload_0
+     381: getstatic     #258                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.ROOT:Lnet/minecraftforge/registries/RegistryObject;
+     384: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     387: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     390: invokestatic  #261                // Method io/redspace/ironsspellbooks/entity/spells/root/RootEntity.m_21183_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     393: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     396: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     399: aload_0
+     400: getstatic     #264                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.FIREFLY_SWARM:Lnet/minecraftforge/registries/RegistryObject;
+     403: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     406: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     409: invokestatic  #156                // Method io/redspace/ironsspellbooks/entity/spells/wisp/WispEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     412: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     415: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     418: aload_0
+     419: getstatic     #267                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.APOTHECARIST:Lnet/minecraftforge/registries/RegistryObject;
+     422: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     425: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     428: invokestatic  #270                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/alchemist/ApothecaristEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     431: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     434: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     437: aload_0
+     438: getstatic     #273                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.CULTIST:Lnet/minecraftforge/registries/RegistryObject;
+     441: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     444: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     447: invokestatic  #276                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/cultist/CultistEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     450: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     453: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     456: aload_0
+     457: getstatic     #279                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.FIRE_BOSS:Lnet/minecraftforge/registries/RegistryObject;
+     460: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     463: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     466: invokestatic  #282                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/fire_boss/FireBossEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     469: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     472: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     475: aload_0
+     476: getstatic     #285                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.CURSED_ARMOR_STAND:Lnet/minecraftforge/registries/RegistryObject;
+     479: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     482: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     485: invokestatic  #288                // Method io/redspace/ironsspellbooks/entity/mobs/wizards/cursed_armor_stand/CursedArmorStandEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     488: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     491: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     494: aload_0
+     495: getstatic     #291                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     498: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     501: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     504: invokestatic  #294                // Method io/redspace/ironsspellbooks/entity/spells/summoned_weapons/SummonedSwordEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     507: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     510: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     513: aload_0
+     514: getstatic     #297                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_CLAYMORE:Lnet/minecraftforge/registries/RegistryObject;
+     517: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     520: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     523: invokestatic  #300                // Method io/redspace/ironsspellbooks/entity/spells/summoned_weapons/SummonedClaymoreEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     526: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     529: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     532: aload_0
+     533: getstatic     #303                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SUMMONED_RAPIER:Lnet/minecraftforge/registries/RegistryObject;
+     536: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     539: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     542: invokestatic  #306                // Method io/redspace/ironsspellbooks/entity/spells/summoned_weapons/SummonedRapierEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     545: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     548: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     551: aload_0
+     552: getstatic     #309                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.ICE_SPIDER:Lnet/minecraftforge/registries/RegistryObject;
+     555: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     558: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     561: invokestatic  #312                // Method io/redspace/ironsspellbooks/entity/mobs/ice_spider/IceSpiderEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     564: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     567: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     570: aload_0
+     571: getstatic     #315                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.SCAPEGOAT:Lnet/minecraftforge/registries/RegistryObject;
+     574: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     577: checkcast     #116                // class net/minecraft/world/entity/EntityType
+     580: invokestatic  #318                // Method io/redspace/ironsspellbooks/entity/spells/scapegoat/ScapegoatEntity.prepareAttributes:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+     583: invokevirtual #126                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22265_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;
+     586: invokevirtual #132                // Method net/minecraftforge/event/entity/EntityAttributeCreationEvent.put:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;)V
+     589: return
+
+  public static void spawnPlacements(net.minecraftforge.event.entity.SpawnPlacementRegisterEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #141                // Field io/redspace/ironsspellbooks/registries/EntityRegistry.NECROMANCER:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #114                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #116                // class net/minecraft/world/entity/EntityType
+      10: getstatic     #325                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      13: getstatic     #329                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      16: invokedynamic #346,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      21: getstatic     #350                // Field net/minecraftforge/event/entity/SpawnPlacementRegisterEvent$Operation.OR:Lnet/minecraftforge/event/entity/SpawnPlacementRegisterEvent$Operation;
+      24: invokevirtual #354                // Method net/minecraftforge/event/entity/SpawnPlacementRegisterEvent.register:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;Lnet/minecraftforge/event/entity/SpawnPlacementRegisterEvent$Operation;)V
+      27: return
+
+  private static boolean lambda$spawnPlacements$0(net.minecraft.world.entity.EntityType, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.MobSpawnType, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: aload_3
+       3: aload         4
+       5: invokestatic  #361                // Method io/redspace/ironsspellbooks/api/util/Utils.checkMonsterSpawnRules:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+       8: ireturn
+}
+
+## javap io/redspace/ironsspellbooks/setup/ModSetup.class
+Compiled from "ModSetup.java"
+public class io.redspace.ironsspellbooks.setup.ModSetup {
+  public io.redspace.ironsspellbooks.setup.ModSetup();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void setup();
+    Code:
+       0: getstatic     #28                 // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+       3: astore_0
+       4: invokestatic  #33                 // Method io/redspace/ironsspellbooks/setup/PacketDistributor.register:()V
+       7: aload_0
+       8: invokedynamic #54,  0             // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      13: invokeinterface #60,  2           // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      18: return
+
+  public static void init(net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent);
+    Code:
+       0: aload_0
+       1: invokedynamic #72,  0             // InvokeDynamic #1:run:()Ljava/lang/Runnable;
+       6: invokevirtual #78                 // Method net/minecraftforge/fml/event/lifecycle/FMLCommonSetupEvent.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+       9: pop
+      10: return
+
+  private static void lambda$init$0();
+    Code:
+       0: invokestatic  #84                 // Method io/redspace/ironsspellbooks/compat/CompatHandler.init:()V
+       3: return
+}

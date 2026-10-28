@@ -333,7 +333,8 @@ def removed_item_data(removed, jars):
             except ValueError:
                 continue
             if is_recipe:
-                made = recipe_results(parsed)
+                # An upgrade-in-place recipe (Marium's smithing_item_upgrade) names no result: it gives back its base.
+                made = recipe_results(parsed) or recipe_results({"result": parsed.get("base")} if isinstance(parsed, dict) else {})
                 if made and made <= removed:
                     recipes.append(name)
                     touched |= made

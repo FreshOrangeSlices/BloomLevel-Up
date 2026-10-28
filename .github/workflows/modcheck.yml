@@ -31,8 +31,14 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          python3 check/spawncode.py "$(ls pack/*server*.zip | head -1)" data-out/spawncode | tee summary.txt
-          echo "::notice title=spawncode::$(tr '\n' '|' < summary.txt)"
+          find shots -maxdepth 3 | head -30
+          mkdir -p data-out/table
+          d="$(find shots -name bloom-dump.jsonl | head -1)"
+          grep -E '"kind": ?"(biome|structure|entity)"' "$d" > data-out/table/spawn-dump.jsonl || true
+          c="$(find shots -type d -name config | head -1)"; [ -n "$c" ] && tar -czf data-out/table/config.tgz -C "$(dirname "$c")" config
+          s="$(find shots -type d -name serverconfig | head -1)"; [ -n "$s" ] && tar -czf data-out/table/serverconfig.tgz -C "$(dirname "$s")" serverconfig
+          ls -la data-out/table | tee summary.txt
+          echo "::notice title=table::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/spawncode && cp data-out/spawncode/* data/spawncode/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack spawn code" && git push -q origin ci/data && echo pushed
+          mkdir -p data/table && cp data-out/table/* data/table/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "pack spawn table" && git push -q origin ci/data && echo pushed

@@ -1,0 +1,198 @@
+== ipn files with hint
+./assets/inventoryprofilesnext/config/ModIntegrationHintsNG.json
+./assets/inventoryprofilesnext/config/exampleIntegrationHints.json
+./org/anti_ad/mc/ipn/api/IPNGuiHint.class
+./org/anti_ad/mc/ipn/api/IPNGuiHints.class
+./org/anti_ad/mc/ipn/api/IPNStorageDimensionsHint.class
+./org/anti_ad/mc/ipnext/config/ExportHints.class
+./org/anti_ad/mc/ipnext/gui/inject/EditorWidget$rehint$1.class
+./org/anti_ad/mc/ipnext/gui/inject/SortingButtonCollectionWidget$rehint$1.class
+./org/anti_ad/mc/ipnext/gui/inject/VillagerOverlayWidget$rehint$1.class
+./org/anti_ad/mc/ipnext/gui/inject/base/SettingsWidget$rehint$1.class
+./org/anti_ad/mc/ipnext/gui/widgets/Hintable$DefaultImpls.class
+./org/anti_ad/mc/ipnext/gui/widgets/Hintable$HintManagementRenderer.class
+./org/anti_ad/mc/ipnext/gui/widgets/Hintable.class
+./org/anti_ad/mc/ipnext/integration/ButtonPositionHint$$serializer.class
+./org/anti_ad/mc/ipnext/integration/ButtonPositionHint$Companion.class
+./org/anti_ad/mc/ipnext/integration/ButtonPositionHint.class
+./org/anti_ad/mc/ipnext/integration/HintClassData$$serializer.class
+./org/anti_ad/mc/ipnext/integration/HintClassData$Companion.class
+./org/anti_ad/mc/ipnext/integration/HintClassData.class
+./org/anti_ad/mc/ipnext/integration/HintsManagerNG$doInit$2.class
+./org/anti_ad/mc/ipnext/integration/HintsManagerNG.class
+./org/anti_ad/mc/ipnext/integration/HintsManagerNGKt.class
+./org/anti_ad/mc/ipnext/integration/SlotIntegrationHints.class
+./org/anti_ad/mc/ipnext/parser/HintsLoader.class
+-- ./assets/inventoryprofilesnext/config/ModIntegrationHintsNG.json
+{
+    "advgenerators": {
+        "net.bdew.generators.controllers.steam.GuiSteamTurbine": {
+            "playerSideOnly": true
+        },
+        "net.bdew.generators.modules.sensor.GuiSensor": {
+            "playerSideOnly": true
+        },
+        "net.bdew.generators.controllers.exchanger.GuiExchanger": {
+            "playerSideOnly": true
+        },
+        "net.bdew.generators.modules.control.GuiControl": {
+            "playerSideOnly": true
+        },
+        "net.bdew.generators.controllers.steam.ContainerSteamTurbine": {
+            "ignore": true
+        },
+        "net.bdew.generators.gui.GuiOutputConfig": {
+            "ignore": true
+        }
+    },
+    "ae2": {
+        "appeng.client.gui.implementations.EnergyLevelEmitterScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.ChestScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.CondenserScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.DriveScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.InscriberScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.InterfaceScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.MolecularAssemblerScreen": {
+            "playerSideOnly": true
+        },
+        "appeng.client.gui.implementations.P
+-- ./assets/inventoryprofilesnext/config/exampleIntegrationHints.json
+{
+    "package.name.className":         {
+        "ignore":         false,
+        "playerSideOnly": false,
+        "force":          false,
+        "buttonHints":    {
+            "SORT":                {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0
+            },
+            "SORT_COLUMNS":        {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0
+            },
+            "SORT_ROWS":           {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0
+            },
+            "MOVE_TO_CONTAINER":   {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0
+            },
+            "MOVE_TO_PLAYER":      {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0
+            },
+            "CONTINUOUS_CRAFTING": {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0
+            },
+            "PROFILE_SELECTOR":    {
+                "horizontalOffset": 0,
+                "top":              0,
+                "bottom":           0,
+                "hide":             true
+            }
+        }
+    },
+    "another.package.name.className": {
+    }
+}
+== ipn strings about hints
+-- ./org/anti_ad/mc/ipnext/parser/SlotSettingsLoader.class
+6org/anti_ad/mc/ipnext/integration/SlotIntegrationHints
+8Lorg/anti_ad/mc/ipnext/integration/SlotIntegrationHints;
+integrationHints
+-- ./org/anti_ad/mc/ipnext/parser/HintsLoader.class
+(org/anti_ad/mc/ipnext/parser/HintsLoader
+*Lorg/anti_ad/mc/ipnext/parser/HintsLoader;
+0org/anti_ad/mc/ipnext/integration/HintsManagerNG
+2Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG;
+ModIntegrationHints.json
+integrationHints
+org/anti_ad/mc/ipnext/parser/HintsLoader
+-- ./org/anti_ad/mc/ipnext/integration/SlotIntegrationHints.class
++ 1 SlotIntegrationHints.kt
+6org/anti_ad/mc/ipnext/integration/SlotIntegrationHints
+8Lorg/anti_ad/mc/ipnext/integration/SlotIntegrationHints;
+=assets/inventoryprofilesnext/config/SlotIntegrationHints.json
+SlotIntegrationHints.kt
+builtInHintsResource
+exampleIntegrationHints.json
+externalHintsPath
+hintFor
+hints
+org/anti_ad/mc/ipnext/integration/SlotIntegrationHints
+-- ./org/anti_ad/mc/ipnext/integration/HintsManagerNG.class
+ build-in GUI hints
+ external GUI hints
+ org/anti_ad/mc/ipn/api/IPNIgnore
+!org/anti_ad/mc/ipn/api/IPNGuiHint
+"Effective GUI hints after merge: 
+(Lorg/anti_ad/mc/ipnext/integration/HintClassData;ZZZLjava/util/Map;Ljava/util/Set;ZZZILjava/lang/Object;)Lorg/anti_ad/mc/ipnext/integration/HintClassData;
+(org/anti_ad/mc/ipn/api/IPNPlayerSideOnly
++ 1 HintsManagerNG.kt
+.json
+/org/anti_ad/mc/ipnext/integration/HintClassData
+0org/anti_ad/mc/ipnext/integration/HintsManagerNG
+2Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG;
+4org/anti_ad/mc/ipnext/integration/ButtonPositionHint
+6org/anti_ad/mc/ipn/api/IPNSlotsIgnoreForInventoryTypes
+9org/anti_ad/mc/ipnext/integration/HintClassData$Companion
+9org/anti_ad/mc/ipnext/integration/HintsManagerNG$doInit$2
+;Lorg/anti_ad/mc/ipnext/integration/HintClassData$Companion;
+;Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG$doInit$2;
+>assets/inventoryprofilesnext/config/ModIntegrationHintsNG.json
+@assets/inventoryprofilesnext/config/exampleIntegrationHints.json
+D(Ljava/lang/Class;)Lorg/anti_ad/mc/ipnext/integration/HintClassData;
+HintsManagerNG.kt
+ModIntegrationExport.json
+ModIntegrationOverride.json
+X(Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG;Ljava/io/InputStream;)Ljava/util/Map;
+builtInHintsResource
+e(Lorg/anti_ad/mc/ipnext/integration/HintClassData;Lorg/anti_ad/mc/ipnext/integration/HintClassData;)V
+effectiveHints
+exampleHintsResource
+exampleIntegrationHints.json
+externalHintsPath
+fillMissingHints
+getForce
+getHints
+getIgnoredClass
+getPlayerSideOnly
+hide
+hintsExport
+ignoreCraftingSlots
+isPlayerSideOnly
+-- ./org/anti_ad/mc/ipnext/inventory/AreaTypes$disabled$1.class
+	getIgnore
+/org/anti_ad/mc/ipnext/integration/HintClassData
+0org/anti_ad/mc/ipnext/integration/HintsManagerNG
+2Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG;
+6org/anti_ad/mc/ipnext/integration/SlotIntegrationHints
+8Lorg/anti_ad/mc/ipnext/integration/SlotIntegrationHints;
+D(Ljava/lang/Class;)Lorg/anti_ad/mc/ipnext/integration/HintClassData;
+getHints
+getIgnoreCraftingGrid
+getSlotIgnoreInventoryTypes
+hintFor
+== spell engine screens
+check/ipncheck.sh: line 13: cd: se: No such file or directory

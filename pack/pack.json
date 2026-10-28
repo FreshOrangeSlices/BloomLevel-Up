@@ -7,7 +7,7 @@
   "layers": [
     {
       "name": "core",
-      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags).",
+      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
       "modrinth": [
         "better-combat",
         "playeranimator",
@@ -32,12 +32,13 @@
         "ai-improvements",
         "lmd",
         "chunky",
-        "spark"
+        "spark",
+        "open-loader"
       ]
     },
     {
       "name": "creatures",
-      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere.",
+      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere. Zoni's Companions (FreshOrangeSlices' pick, beside Migamigos) are only summoned, from devices players craft, never found in the wild; its Ultimate Summon Device (catches any mob, bosses included) is taken out and its creative-only items are hidden (pack_data).",
       "modrinth": [
         "aquamirae",
         "book-of-dragons",
@@ -46,6 +47,7 @@
         "myths-and-legends",
         "legionary",
         "migamigos",
+        "zonis-companions",
         "easy-mob-spawn-control",
         "structurify"
       ],
@@ -91,7 +93,7 @@
     },
     {
       "name": "animation-and-qol",
-      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods.",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back.",
       "modrinth": [
         "punchy-fpa",
         "fwa",
@@ -110,7 +112,7 @@
         "xaeros-minimap",
         "xaeros-world-map",
         "waystones",
-        "keyvision",
+        "keybind-atlas",
         "modifier-keybinds",
         "oculus",
         "complementary-unbound",
@@ -158,11 +160,12 @@
     },
     {
       "name": "world-and-decor",
-      "_comment": "Biomes O' Plenty for the world (FreshOrangeSlices' pick; Terralith's biomes felt too big), and Decorative Blocks and Handcrafted for building (beams, braziers, chains, lattices and seats; vanilla-style furniture). BOP's Nether is cut back (config_files): Visceral Heap and Withered Abyss are off, and its Nether regions weigh 5 against vanilla's 10 (BOP's default is 13, more than half the Nether). The decor comes in vanilla's woods; BOP's woods get no furniture of their own (that would take Every Compat).",
+      "_comment": "Biomes O' Plenty for the world (FreshOrangeSlices' pick; Terralith's biomes felt too big), and Decorative Blocks and Handcrafted for building (beams, braziers, chains, lattices and seats; vanilla-style furniture). BOP's Nether is cut back (config_files): Visceral Heap and Withered Abyss are off, and its Nether regions weigh 5 against vanilla's 10 (BOP's default is 13, more than half the Nether). Every Compat (Wood Good) makes the decor in BOP's woods too (and in any other mod's woods it knows); its blocks have their own creative tab.",
       "modrinth": [
         "biomes-o-plenty",
         "decorative-blocks",
-        "handcrafted"
+        "handcrafted",
+        "every-compat"
       ]
     }
   ],
@@ -172,6 +175,37 @@
     "_biomesoplenty": "BOP's own files with two Nether biomes off (Visceral Heap's flesh, Withered Abyss's void pits) and its Nether region weight 5 instead of 13 (vanilla's is 10), so about two thirds of the Nether stays vanilla. The Overworld is BOP's default.",
     "config/biomesoplenty/biome_toggles.json": {"aspen_glade_enabled": true, "auroral_garden_enabled": true, "bayou_enabled": true, "bog_enabled": true, "cold_desert_enabled": true, "coniferous_forest_enabled": true, "crag_enabled": true, "crystalline_chasm_enabled": true, "dead_forest_enabled": true, "dryland_enabled": true, "dune_beach_enabled": true, "erupting_inferno_enabled": true, "field_enabled": true, "fir_clearing_enabled": true, "floodplain_enabled": true, "forested_field_enabled": true, "fungal_jungle_enabled": true, "glowing_grotto_enabled": true, "grassland_enabled": true, "gravel_beach_enabled": true, "highland_enabled": true, "hot_springs_enabled": true, "jacaranda_glade_enabled": true, "jade_cliffs_enabled": true, "lavender_field_enabled": true, "lush_desert_enabled": true, "lush_savanna_enabled": true, "maple_woods_enabled": true, "marsh_enabled": true, "mediterranean_forest_enabled": true, "moor_enabled": true, "muskeg_enabled": true, "mystic_grove_enabled": true, "old_growth_dead_forest_enabled": true, "old_growth_woodland_enabled": true, "ominous_woods_enabled": true, "orchard_enabled": true, "origin_valley_enabled": true, "overgrown_greens_enabled": true, "pasture_enabled": true, "prairie_enabled": true, "pumpkin_patch_enabled": true, "rainforest_enabled": true, "redwood_forest_enabled": true, "rocky_rainforest_enabled": true, "rocky_shrubland_enabled": true, "scrubland_enabled": true, "seasonal_forest_enabled": true, "shrubland_enabled": true, "snowblossom_grove_enabled": true, "snowy_coniferous_forest_enabled": true, "snowy_fir_clearing_enabled": true, "snowy_maple_woods_enabled": true, "spider_nest_enabled": true, "tropics_enabled": true, "tundra_enabled": true, "undergrowth_enabled": true, "visceral_heap_enabled": false, "volcanic_plains_enabled": true, "volcano_enabled": true, "wasteland_enabled": true, "wasteland_steppe_enabled": true, "wetland_enabled": true, "wintry_origin_valley_enabled": true, "withered_abyss_enabled": false, "woodland_enabled": true},
     "config/biomesoplenty/generation.toml": "\n[nether]\n\t#The weighting of bop biome regions in the nether.\n\tbop_nether_region_weight = 5\n\t#The weighting of rare bop biome regions in the nether.\n\tbop_nether_rare_region_weight = 2\n\n[overworld]\n\t#The weighting of primary bop biome regions in the overworld.\n\tbop_primary_overworld_region_weight = 10\n\t#The weighting of rare bop biome regions in the overworld.\n\tbop_overworld_rare_region_weight = 2\n\t#The weighting of secondary bop biome regions in the overworld.\n\tbop_secondary_overworld_region_weight = 8\n\n"
+  },
+  "pack_data": {
+    "_comment": "LegionWareX's own data pack, loaded into every world (new and old) and the server by Open Loader, from config/openloader/data/legionwarex: the recipes the pack takes out (each replaced by one that never loads), and the items it hides from JEI (the c:hidden_from_recipe_viewers tag). Grouped by reason. CI checks the recipes are gone and the hidden items carry the tag (pack-data, from Bloom's registry dump).",
+    "name": "legionwarex",
+    "description": "LegionWareX: recipes the pack takes out, items it hides from JEI",
+    "removed_recipes": {
+      "Zoni's Ultimate Summon Device catches any mob, bosses included, and the mob is gone from the world once caught (a boss fight skipped, or a boss let out in someone's base). The Advanced Summon Device stays: it only carries your own tamed pets.": [
+        "zonis_companions:ultimate_craft"
+      ]
+    },
+    "hidden_items": {
+      "Zoni's Ultimate Summon Device, now uncraftable": [
+        "zonis_companions:ultimate_summon_device"
+      ],
+      "Zoni's JBA set: a second cast with no recipes (creative only), and its empty devices": [
+        "zonis_companions:asuna_jba_summon_item", "zonis_companions:atalanta_jba_summon_item", "zonis_companions:beni_jba_summon_item",
+        "zonis_companions:derek_jba_summon_item", "zonis_companions:gardete_jba_summon_item", "zonis_companions:illya_jba_summon_item",
+        "zonis_companions:jorge_jba_summon_item", "zonis_companions:koyan_jba_summon_item", "zonis_companions:liz_jba_summon_item",
+        "zonis_companions:melusine_jba_summon_item", "zonis_companions:moreira_jba_summon_item", "zonis_companions:niomus_jba_summon_item",
+        "zonis_companions:nuno_jba_summon_item", "zonis_companions:plaggy_jba_summon_item", "zonis_companions:rain_jba_summon_item",
+        "zonis_companions:silica_jba_summon_item", "zonis_companions:strea_jba_summon_item", "zonis_companions:tamamo_jba_summon_item",
+        "zonis_companions:tiago_jba_summon_item", "zonis_companions:empty_doujin", "zonis_companions:empty_jba_summon_item",
+        "zonis_companions:empty_poke_ball", "zonis_companions:empty_tamagotchi", "zonis_companions:jba_machine_tab_item"
+      ],
+      "Zoni's creative-only tools (their tooltips say 'Creative only'): Repel despawns any entity it's used on, Ruler makes mobs look south, and the Whip": [
+        "zonis_companions:repel", "zonis_companions:ruler", "zonis_companions:whip"
+      ],
+      "Iron's Spells' Autoloader Crossbow: broken (FreshOrangeSlices' playtest: one arrow, then a mess), no recipe, and its only loot is 1.21's trial vaults, which 1.20.1 doesn't have": [
+        "irons_spellbooks:autoloader_crossbow"
+      ]
+    }
   },
   "env_overrides": {
     "playeranimator": {
@@ -197,9 +231,10 @@
     "shader": "complementary-unbound",
     "_shader": "Shaders on with Complementary Unbound at first launch (and once per change of this line); K turns shaders off, O picks another pack (Solas and the much lighter MakeUp Ultra Fast ship too).",
     "keys": {
-      "iris.keybind.reload": "key.keyboard.unknown"
+      "iris.keybind.reload": "key.keyboard.unknown",
+      "key.keybindatlas.open_keyboard": "key.keyboard.k:CONTROL"
     },
-    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds).",
+    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets').",
     "files": {
       "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",
       "config/obscuria/aquamirae-early.json": {

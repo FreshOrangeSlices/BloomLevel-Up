@@ -33,6 +33,16 @@ class PackDefaultsTest {
 	}
 
 	@Test
+	void keepsAKeysModifierWithIt() {
+		PackDefaults.Defaults defaults = PackDefaults.parse(List.of(
+				"keys=key.keybindatlas.open_keyboard:key.keyboard.k:CONTROL|key.a:key.keyboard.j:ALT|key.b:key.keyboard.l|CONTROL|:key.keyboard.k:SHIFT"));
+		assertEquals(Map.of("key.keybindatlas.open_keyboard", "key.keyboard.k:CONTROL", "key.a", "key.keyboard.j:ALT", "key.b", "key.keyboard.l"),
+				defaults.keys());
+		assertEquals(List.of("key_key.keybindatlas.open_keyboard:key.keyboard.k:CONTROL"),
+				PackDefaults.mergeOptions(List.of("key_key.keybindatlas.open_keyboard:key.keyboard.k"), List.of(), defaults.keys()).subList(0, 1));
+	}
+
+	@Test
 	void movesTheListedKeysAndNothingElse() {
 		List<String> options = PackDefaults.lines("resourcePacks:[\"vanilla\",\"file/Mine.zip\"]\nkey_iris.keybind.reload:key.keyboard.r\nkey_key.jump:key.keyboard.space");
 		List<String> out = PackDefaults.mergeOptions(options, List.of(),

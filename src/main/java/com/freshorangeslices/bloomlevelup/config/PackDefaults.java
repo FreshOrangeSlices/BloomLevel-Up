@@ -22,6 +22,8 @@ import java.util.function.Consumer;
 public final class PackDefaults {
 	public static final String FILE = "bloomlevelup/pack-defaults.properties";
 	public static final String MARKER = "bloomlevelup/pack-defaults.applied";
+	/** Forge's key modifiers, as options.txt writes them after a key ({@code key.keyboard.k:CONTROL}). */
+	private static final List<String> MODIFIERS = List.of("CONTROL", "SHIFT", "ALT", "NONE");
 
 	private PackDefaults() {
 	}
@@ -34,8 +36,8 @@ public final class PackDefaults {
 	}
 
 	/**
-	 * Reads {@code resourcePacks=a|b|c}, {@code shaderPack=name} and {@code keys=name:key|name:key} lines; anything
-	 * else is ignored.
+	 * Reads {@code resourcePacks=a|b|c}, {@code shaderPack=name} and {@code keys=name:key|name:key} lines (a key can
+	 * carry a Forge modifier, {@code name:key.keyboard.k:CONTROL}); anything else is ignored.
 	 */
 	public static Defaults parse(List<String> lines) {
 		List<String> packs = new ArrayList<>();
@@ -63,6 +65,11 @@ public final class PackDefaults {
 			} else if (key.equals("keys")) {
 				for (String entry : value.split("\\|")) {
 					int colon = entry.lastIndexOf(':');
+
+					// A Forge modifier after the key (key.keyboard.k:CONTROL) stays with it, as options.txt has it.
+					if (colon > 0 && MODIFIERS.contains(entry.substring(colon + 1).strip())) {
+						colon = entry.lastIndexOf(':', colon - 1);
+					}
 
 					if (colon > 0 && colon < entry.length() - 1) {
 						keys.put(entry.substring(0, colon).strip(), entry.substring(colon + 1).strip());

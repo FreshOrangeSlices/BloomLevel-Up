@@ -26,6 +26,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 
@@ -34,9 +35,10 @@ import com.freshorangeslices.bloomlevelup.compat.BetterCombat;
 
 /**
  * A tool for supporting modpacks, off unless the server starts with {@code -Dbloomlevelup.dump=<file>}: two seconds after
- * the server is up it writes every item (its classes, tags, damage, armor, Better Combat category) and every entity type
- * (health, armor, whether it keeps a boss bar) to that file, one JSON object per line. CI runs it on LegionWareX to
- * sort the pack's weapons, armor and bosses into Bloom's tags. Does nothing to the world: the entities it measures are
+ * the server is up it writes every item (its classes, tags, damage, armor, Better Combat category), every entity type
+ * (health, armor, whether it keeps a boss bar) and every recipe (id, type, result) to that file, one JSON object per
+ * line. CI runs it on LegionWareX to sort the pack's weapons, armor and bosses into Bloom's tags, and to check the
+ * recipes and items the pack's own data pack takes out. Does nothing to the world: the entities it measures are
  * made and thrown away, never added.
  */
 public final class RegistryDump {
@@ -82,9 +84,22 @@ public final class RegistryDump {
 			}
 		}
 
+		// Every recipe the server loaded (id, type, result), so a pack can check the ones it takes out are gone.
+		int recipes = 0;
+
+		for (Recipe<?> recipe : level.getServer().getRecipeManager().getRecipes()) {
+			try {
+				lines.add(GSON.toJson(recipe(level, recipe)));
+				recipes++;
+			} catch (Throwable e) {
+				lines.add(GSON.toJson(error("recipe", String.valueOf(recipe.getId()), e)));
+			}
+		}
+
 		try {
 			Files.write(target, lines, StandardCharsets.UTF_8);
-			BloomLevelUp.LOGGER.info("Bloom registry dump: {} items, {} entity types -> {}", items, entities, target.toAbsolutePath());
+			BloomLevelUp.LOGGER.info("Bloom registry dump: {} items, {} entity types, {} recipes -> {}", items, entities, recipes,
+					target.toAbsolutePath());
 		} catch (IOException e) {
 			BloomLevelUp.LOGGER.warn("Bloom registry dump couldn't be written to {}", target, e);
 		}
@@ -118,6 +133,20 @@ public final class RegistryDump {
 
 		if (bc != null) {
 			out.addProperty("bettercombat", bc);
+		}
+
+		return out;
+	}
+
+	private static JsonObject recipe(ServerLevel level, Recipe<?> recipe) {
+		JsonObject out = new JsonObject();
+		out.addProperty("kind", "recipe");
+		out.addProperty("id", recipe.getId().toString());
+		out.addProperty("type", String.valueOf(BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType())));
+		ItemStack result = recipe.getResultItem(level.registryAccess());
+
+		if (result != null && !result.isEmpty()) {
+			out.addProperty("result", BuiltInRegistries.ITEM.getKey(result.getItem()).toString());
 		}
 
 		return out;

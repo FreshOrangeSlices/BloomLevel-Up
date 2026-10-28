@@ -171,6 +171,52 @@ def modded_entities(mods_dir):
 BLOOM_NONE = {"staff", "battlestaff", "wand", "spellbreaker", "horn", "shield", "fist"}  # spell weapons, shields, gauntlets
 
 
+def pack_data_check(server_dir, dump_file, server_lines):
+    """The pack's own data pack (pack_data, loaded by Open Loader from config/openloader/data): every recipe it takes
+    out is gone from the server, nothing makes an item it hides, and each hidden item carries JEI's hidden tag. From
+    the files the server zip shipped and Bloom's registry dump. Ids from mods this layer leaves out are skipped.
+    Returns (failures, notes)."""
+    packs = os.path.join(server_dir, "config", "openloader", "data")
+    if not os.path.isdir(packs):
+        return [], []
+    removed, hidden = [], []
+    for pack in sorted(os.listdir(packs)):
+        data = os.path.join(packs, pack, "data")
+        for folder, _, names in os.walk(data):
+            for file_name in names:
+                parts = os.path.relpath(os.path.join(folder, file_name), data).replace(os.sep, "/").split("/", 2)
+                if len(parts) == 3 and parts[1] == "recipes" and file_name.endswith(".json"):
+                    removed.append(f"{parts[0]}:{parts[2][:-5]}")
+        tag = os.path.join(data, "c", "tags", "items", "hidden_from_recipe_viewers.json")
+        if os.path.exists(tag):
+            hidden += [v["id"] if isinstance(v, dict) else v for v in json.load(open(tag))["values"]]
+    if not os.path.exists(dump_file):
+        return ["pack data: no registry dump to check it against"], []
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    recipes = [r for r in rows if r.get("kind") == "recipe"]
+    items = {r["id"]: r for r in rows if r.get("kind") == "item"}
+    mods = {i.split(":")[0] for i in items}
+    failures = []
+    if not recipes:
+        failures.append("pack data: the registry dump has no recipes (an older Bloom?)")
+    loaded = {r["id"] for r in recipes}
+    failures += [f"pack data: the recipe {r} is still loaded" for r in removed if r in loaded]
+    checked = [i for i in hidden if i.split(":")[0] in mods]
+    for item in checked:
+        if item not in items:
+            failures.append(f"pack data: there's no item {item} to hide (a typo, or the mod renamed it)")
+            continue
+        if "c:hidden_from_recipe_viewers" not in items[item]["tags"]:
+            failures.append(f"pack data: {item} isn't hidden from JEI (no c:hidden_from_recipe_viewers tag)")
+        makers = sorted(r["id"] for r in recipes if r.get("result") == item)
+        if makers:
+            failures.append(f"pack data: {item} is hidden but still made by {', '.join(makers)}")
+    injected = next((l.split("]: ", 1)[-1] for l in server_lines if "Successfully injected" in l), "Open Loader said nothing")
+    notes = [f"pack data: {len([r for r in removed if r.split(':')[0] in mods])} recipes out, {len(checked)} items hidden "
+             f"(of {len(removed)} and {len(hidden)} listed; the rest are from mods this layer leaves out); {injected}"]
+    return failures, notes
+
+
 def bloom_sorting(dump_file):
     """How much of the pack Bloom has sorted, from the server's registry dump (-Dbloomlevelup.dump): weapons into its
     families, armor into its classes, daggers into its dagger tag, bosses with a boss bar into its boss tag. Returns
@@ -381,6 +427,10 @@ def main():
     notes.append(sorting)
     if unsorted:
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
+    # ---- the pack's own data pack: recipes out, items hidden from JEI
+    data_failures, data_notes = pack_data_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
+    failures += data_failures
+    notes += data_notes
 
     # ---- what the client did (both starts)
     client_exited = client.process.poll() is not None  # by itself, before the test stops it

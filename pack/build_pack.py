@@ -256,6 +256,29 @@ def locked_version(pin, record, game, loader):
     }
 
 
+def pack_data_files(data, have_loader, problems):
+    """The pack's own data pack, as {path: JSON}: under config/openloader/data/<name>, a pack.mcmeta, a recipe that
+    never loads (a forge:false condition) in place of each removed one, and the c:hidden_from_recipe_viewers item tag
+    (JEI hides what it holds) with the hidden items as optional entries. removed_recipes and hidden_items group their
+    ids under a reason each ({reason: [ids]}); keys starting with _ are comments."""
+    if not data:
+        return {}
+    if not have_loader:
+        problems.append("pack_data needs Open Loader (open-loader) in the pack, in the first layer")
+        return {}
+    grouped = lambda field: [i for reason, ids in data.get(field, {}).items() if not reason.startswith("_") for i in ids]
+    root = f"config/openloader/data/{data['name']}"
+    out = {f"{root}/pack.mcmeta": {"pack": {"pack_format": 15, "description": data.get("description", data["name"])}}}
+    for recipe in grouped("removed_recipes"):
+        namespace, path = recipe.split(":", 1)
+        out[f"{root}/data/{namespace}/recipes/{path}.json"] = {"conditions": [{"type": "forge:false"}]}
+    hidden = grouped("hidden_items")
+    if hidden:
+        out[f"{root}/data/c/tags/items/hidden_from_recipe_viewers.json"] = {
+            "replace": False, "values": [{"id": item, "required": False} for item in hidden]}
+    return out
+
+
 def lock_text(game, forge, versions, files, comment=None):
     """The lock file: the readable versions first, then one line per file (address, hashes, required projects)."""
     head = {"_comment": comment, "minecraft": game, "forge": forge} if comment else {"minecraft": game, "forge": forge}
@@ -444,6 +467,12 @@ def main():
         if path.startswith("_"):
             continue
         overrides[path] = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
+        sides[path] = {"client": "required", "server": "required"}
+    # The pack's own data pack (pack_data): the recipes it takes out and the items it hides from JEI, loaded into every
+    # world (new and old, and the server's) by Open Loader from config/openloader/data. Ids from mods a layer leaves out
+    # do no harm: a recipe that can never load is skipped, and the tag's entries are optional.
+    for path, content in pack_data_files(spec.get("pack_data"), "open-loader" in by_slug, problems).items():
+        overrides[path] = (json.dumps(content, indent=2) + "\n").encode()
         sides[path] = {"client": "required", "server": "required"}
 
     # ---- the .mrpack

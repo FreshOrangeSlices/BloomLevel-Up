@@ -1,0 +1,204 @@
+== iron's files mentioning autoloader
+assets/irons_spellbooks/lang/en_us.json
+assets/irons_spellbooks/lang/es_es.json
+assets/irons_spellbooks/lang/es_mx.json
+assets/irons_spellbooks/lang/fr_fr.json
+assets/irons_spellbooks/lang/it_it.json
+assets/irons_spellbooks/lang/ja_jp.json
+assets/irons_spellbooks/lang/ko_kr.json
+assets/irons_spellbooks/lang/pl_pl.json
+assets/irons_spellbooks/lang/pt_br.json
+assets/irons_spellbooks/lang/ru_ru.json
+assets/irons_spellbooks/lang/uk_ua.json
+assets/irons_spellbooks/lang/vi_vn.json
+assets/irons_spellbooks/lang/zh_cn.json
+assets/irons_spellbooks/lang/zh_hk.json
+assets/irons_spellbooks/lang/zh_tw.json
+assets/irons_spellbooks/models/item/autoloader_crossbow.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_arrow.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_firework.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_0.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_1.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_2.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_3.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_4.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_5.json
+assets/irons_spellbooks/models/item/autoloader_crossbow_pulling_6.json
+data/forge/tags/items/tools/crossbow.json
+data/forge/tags/items/tools/ranged_weapon.json
+data/irons_spellbooks/loot_tables/chests/trial_chambers/additional_ominous_vault_loot.json
+data/minecraft/tags/items/enchantable/crossbow.json
+data/minecraft/tags/items/enchantable/durability.json
+-- data/forge/tags/items/tools/crossbow.json
+{
+  "replace": false,
+  "values": [
+    "irons_spellbooks:autoloader_crossbow"
+  ]
+}
+-- data/forge/tags/items/tools/ranged_weapon.json
+{
+  "replace": false,
+  "values": [
+    "irons_spellbooks:autoloader_crossbow"
+  ]
+}
+-- data/irons_spellbooks/loot_tables/chests/trial_chambers/additional_ominous_vault_loot.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:autoloader_crossbow",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:weapon_parts",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:upgrade_orb",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
+          "name": "irons_spellbooks:scroll",
+          "functions": [
+            {
+              "function": "irons_spellbooks:randomize_spell",
+              "quality": {
+                "min": 0.8,
+                "max": 1.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "irons_spe
+-- data/minecraft/tags/items/enchantable/crossbow.json
+{
+  "replace": false,
+  "values": [
+    "irons_spellbooks:autoloader_crossbow"
+  ]
+}
+-- data/minecraft/tags/items/enchantable/durability.json
+{
+  "replace": false,
+  "values": [
+    "irons_spellbooks:autoloader_crossbow"
+  ]
+}
+
+
+
+== iron's classes mentioning autoloader
+./io/redspace/ironsspellbooks/item/weapons/AutoloaderCrossbow.class
+./io/redspace/ironsspellbooks/registries/ItemRegistry.class
+== open loader versions
+19.0.5 release CpX666bw OpenLoader-Forge-1.20.1-19.0.5.jar https://cdn.modrinth.com/data/KwWsINvD/versions/CpX666bw/OpenLoader-Forge-1.20.1-19.0.5.jar []
+19.0.4 release hzFgmbGN OpenLoader-Forge-1.20.1-19.0.4.jar https://cdn.modrinth.com/data/KwWsINvD/versions/hzFgmbGN/OpenLoader-Forge-1.20.1-19.0.4.jar []
+19.0.3 release nU5q0Vho OpenLoader-Forge-1.20.1-19.0.3.jar https://cdn.modrinth.com/data/KwWsINvD/versions/nU5q0Vho/OpenLoader-Forge-1.20.1-19.0.3.jar []
+19.0.2 release ljyoVSiS OpenLoader-Forge-1.20.1-19.0.2.jar https://cdn.modrinth.com/data/KwWsINvD/versions/ljyoVSiS/OpenLoader-Forge-1.20.1-19.0.2.jar []
+19.0.1 release 3nf2zTDI OpenLoader-Forge-1.20.1-19.0.1.jar https://cdn.modrinth.com/data/KwWsINvD/versions/3nf2zTDI/OpenLoader-Forge-1.20.1-19.0.1.jar []
+== open loader strings
+	CONFIGDIR
+	Data Pack
+	RESOURCES
+	configDir
+	customDir
+	dataPacks
+	directory
+	resources
+ from non-directory. 
+ net/darkhax/openloader/Constants
+!Could not write config file '{}'!
+!Creating a new config file at {}.
+"Lnet/darkhax/openloader/Constants;
+#net/minecraft/server/packs/PackType
+%Lnet/minecraft/server/packs/PackType;
+%Skipping {}. Disabled by user config.
+%net/darkhax/openloader/packs/RepoType
+&net/darkhax/openloader/OpenLoaderForge
+'()Lnet/minecraft/server/packs/PackType;
+'Lnet/darkhax/openloader/packs/RepoType;
+(()[Lnet/minecraft/server/packs/PackType;
+(Lnet/darkhax/openloader/OpenLoaderForge;
+(Lnet/darkhax/openloader/commands/ClientCommand;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder<Lnet/minecraft/commands/CommandSourceStack;>;
+(Lnet/darkhax/openloader/packs/RepoType;Lnet/darkhax/openloader/config/ConfigSchema;Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;Ljava/nio/file/Path;)V
+([Lnet/darkhax/openloader/packs/RepoType;
+(net/darkhax/openloader/OpenLoaderForge$1
+(net/minecraft/server/packs/PackResources
+)()Lnet/darkhax/openloader/packs/RepoType;
+*()[Lnet/darkhax/openloader/packs/RepoType;
+*Successfully injected {}/{} packs from {}.
+*net/darkhax/openloader/config/ConfigSchema
+*net/minecraft/server/packs/repository/Pack
++Default configuration file generated at {}.
+,Lnet/darkhax/openloader/config/ConfigSchema;
+,Lnet/minecraft/server/packs/repository/Pack;
+,net/darkhax/openloader/OpenLoaderForgeClient
+,net/minecraft/server/packs/FilePackResources
+,net/minecraft/server/packs/PathPackResources
+-net/darkhax/openloader/commands/ClientCommand
+.$SwitchMap$net$minecraft$server$packs$PackType
+.()Lnet/darkhax/openloader/config/ConfigSchema;
+.Lnet/darkhax/openloader/OpenLoaderForgeClient;
+/Lnet/darkhax/openloader/commands/ClientCommand;
+0net/minecraft/server/packs/repository/PackSource
+1(Ljava/lang/String;Lnet/minecraft/network/chat/Component;ZLnet/minecraft/server/packs/repository/Pack$ResourcesSupplier;Lnet/minecraft/server/packs/PackType;Lnet/minecraft/server/packs/repository/Pack$Position;Lnet/minecraft/server/packs/repository/PackSource;)Lnet/minecraft/server/packs/repository/Pack;
+1Can not load {} as folder. It is not a directory.
+2Lnet/minecraft/server/packs/repository/PackSource;
+3net/minecraft/server/packs/repository/Pack$Position
+5Could not read config file {}. Defaults will be used.
+5Lnet/minecraft/server/packs/repository/Pack$Position;
+5net/darkhax/openloader/config/ConfigSchema$PackConfig
+6net/minecraft/server/packs/repository/RepositorySource
+7Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;
+7net/darkhax/openloader/commands/OpenLoaderClientCommand
+7net/darkhax/openloader/packs/OpenLoaderRepositorySource
+9()Lnet/darkhax/openloader/config/ConfigSchema$PackConfig;
+9Ljava/lang/Enum<Lnet/darkhax/openloader/packs/RepoType;>;
+9Lnet/darkhax/openloader/commands/OpenLoaderClientCommand;
+9Lnet/darkhax/openloader/packs/OpenLoaderRepositorySource;
+:Improper {} folder specified. Must be a directory! See {}.
+== open loader files
+./META-INF/DARKHAXM.RSA
+./META-INF/DARKHAXM.SF
+./META-INF/MANIFEST.MF
+./META-INF/mods.toml
+./assets/openloader/lang/en_us.json
+./net/darkhax/openloader/Constants.class
+./net/darkhax/openloader/OpenLoaderForge$1.class
+./net/darkhax/openloader/OpenLoaderForge.class
+./net/darkhax/openloader/OpenLoaderForgeClient.class
+./net/darkhax/openloader/commands/ClientCommand.class
+./net/darkhax/openloader/commands/OpenLoaderClientCommand$RepoCommand.class
+./net/darkhax/openloader/commands/OpenLoaderClientCommand$SubRepoCommand.class
+./net/darkhax/openloader/commands/OpenLoaderClientCommand.class
+./net/darkhax/openloader/config/ConfigSchema$PackConfig.class
+./net/darkhax/openloader/config/ConfigSchema.class
+./net/darkhax/openloader/packs/OpenLoaderRepositorySource.class
+./net/darkhax/openloader/packs/RepoType.class
+./pack.mcmeta

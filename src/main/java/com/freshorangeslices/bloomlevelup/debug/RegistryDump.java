@@ -21,6 +21,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -38,6 +40,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -55,8 +58,10 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
@@ -112,9 +117,11 @@ public final class RegistryDump {
 			}
 		}
 
+		BlockPos daylit = daylitSpot(level);
+
 		for (EntityType<?> type : BuiltInRegistries.ENTITY_TYPE) {
 			try {
-				lines.add(GSON.toJson(entity(level, type)));
+				lines.add(GSON.toJson(entity(level, type, daylit)));
 				entities++;
 			} catch (Throwable e) {
 				lines.add(GSON.toJson(error("entity", BuiltInRegistries.ENTITY_TYPE.getKey(type).toString(), e)));
@@ -458,7 +465,7 @@ public final class RegistryDump {
 		return out;
 	}
 
-	private static JsonObject entity(ServerLevel level, EntityType<?> type) {
+	private static JsonObject entity(ServerLevel level, EntityType<?> type, BlockPos daylit) {
 		JsonObject out = new JsonObject();
 		out.addProperty("kind", "entity");
 		out.addProperty("id", BuiltInRegistries.ENTITY_TYPE.getKey(type).toString());
@@ -469,6 +476,11 @@ public final class RegistryDump {
 		Boolean rules = hasSpawnRules(type);
 		if (rules != null) {
 			out.addProperty("spawnRules", rules);
+		}
+		// Whether its spawn rules let a monster spawn on open, daylit ground (vanilla's need the dark; illagers' patrol
+		// rules don't, so a natural spawn of one comes by day too).
+		if (daylit != null && type.getCategory() == MobCategory.MONSTER) {
+			out.addProperty("spawnsInDaylight", spawnsAt(level, type, daylit));
 		}
 		Entity made = null;
 
@@ -502,6 +514,45 @@ public final class RegistryDump {
 		}
 
 		return out;
+	}
+
+	/** A spot near the world spawn in daylight: open sky, no block light, air over a solid top; null when none or night. */
+	private static BlockPos daylitSpot(ServerLevel level) {
+		if (!level.isDay()) {
+			return null;
+		}
+
+		BlockPos spawn = level.getSharedSpawnPos();
+
+		for (int dx = -32; dx <= 32; dx += 4) {
+			for (int dz = -32; dz <= 32; dz += 4) {
+				BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spawn.offset(dx, 0, dz));
+				BlockPos below = top.below();
+
+				if (level.isLoaded(top) && level.canSeeSky(top) && level.getBrightness(LightLayer.BLOCK, top) == 0
+						&& level.getBlockState(top).isAir() && level.getFluidState(below).isEmpty()
+						&& level.getBlockState(below).isFaceSturdy(level, below, Direction.UP)) {
+					return top;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/** Whether the type's spawn rules (with Forge's spawn placement event) allow a natural spawn at the spot. */
+	private static boolean spawnsAt(ServerLevel level, EntityType<?> type, BlockPos pos) {
+		for (int i = 0; i < 16; i++) {
+			try {
+				if (SpawnPlacements.checkSpawnRules(type, level, MobSpawnType.NATURAL, pos, level.getRandom())) {
+					return true;
+				}
+			} catch (RuntimeException e) {
+				return false;
+			}
+		}
+
+		return false;
 	}
 
 	/** Whether SpawnPlacements has an entry for the type (its only static map), or null when it can't be read. */

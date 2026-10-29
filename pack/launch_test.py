@@ -269,6 +269,9 @@ def spawn_check(server_dir, dump_file, spec_file):
         elif entities.get(mob, {}).get("spawnRules") is False and not ruled.get(mob):
             failures.append(f"spawns: {mob} ({', '.join(groups)}) has no spawn rules of its own, so it would spawn in daylight, "
                             f"in caves and on treetops: give it an Easy Mob Spawn Control rule (config/EasyMSC/spawn_rule_assignments.json)")
+        elif entities.get(mob, {}).get("spawnsInDaylight") and not ruled.get(mob):
+            failures.append(f"spawns: {mob} ({', '.join(groups)}) can spawn in daylight (its spawn rules don't ask for the dark, "
+                            f"like illagers' patrol rules): give it an Easy Mob Spawn Control rule (config/EasyMSC/spawn_rule_assignments.json)")
         elif (entities.get(mob, {}).get("despawns") is False and entities[mob].get("category") == "monster"
               and mob not in persistent):
             failures.append(f"spawns: {mob} ({', '.join(groups)}) never despawns, so natural spawns would pile up")
@@ -349,9 +352,16 @@ def spawn_check(server_dir, dump_file, spec_file):
              f"{median * 100:.0f}%, {land[0][0] * 100:.0f}% ({land[0][1]}) to {land[-1][0] * 100:.0f}% ({land[-1][1]})" if land else "spawns: no land biomes"]
     if roosts:
         notes.append("structure sets: " + ", ".join(roosts))
-    unruled = sorted(m for m in added if entities.get(m, {}).get("spawnRules") is False)
+    # The daylight check itself (Bloom's dump asks each monster's spawn rules about a daylit spot near spawn): a zombie
+    # may not spawn there, a pillager (patrol rules) may.
+    probe = {m: entities.get(m, {}).get("spawnsInDaylight") for m in ("minecraft:zombie", "minecraft:pillager")}
+    if probe["minecraft:zombie"] is None:
+        notes.append("daylight check: didn't run (night at the dump, or no open ground near spawn)")
+    elif probe != {"minecraft:zombie": False, "minecraft:pillager": True}:
+        failures.append(f"daylight check: zombie {probe['minecraft:zombie']}, pillager {probe['minecraft:pillager']} (should be false, true)")
+    unruled = sorted(m for m in added if entities.get(m, {}).get("spawnRules") is False or entities.get(m, {}).get("spawnsInDaylight"))
     if unruled:
-        notes.append("spawn rules from the pack (their mods give none): " + ", ".join(f"{m} ({'/'.join(ruled.get(m, [])) or 'none'})" for m in unruled))
+        notes.append("spawn rules from the pack (their mods give none, or allow daylight): " + ", ".join(f"{m} ({'/'.join(ruled.get(m, [])) or 'none'})" for m in unruled))
     notes += notes_extra
     # Biome tags the pack adds to (structures, roosts): each on some biome, and on one of BOP's when it names BOP's.
     have_bop = any(b["id"].startswith("biomesoplenty:") for b in biomes)

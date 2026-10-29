@@ -11,6 +11,7 @@ import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -54,7 +55,10 @@ public final class BandGameTests {
 
 			for (Mob member : band) {
 				helper.assertTrue(Bands.inBand(member), "Every member is tagged as in a band");
-				helper.assertTrue(member instanceof PatrollingMonster patroller && patroller.isPatrolling(), id(member) + " patrols with the band");
+				// isPatrolling() is protected: its saved flag says the same.
+				CompoundTag saved = new CompoundTag();
+				member.saveWithoutId(saved);
+				helper.assertTrue(member instanceof PatrollingMonster && saved.getBoolean("Patrolling"), id(member) + " patrols with the band");
 				helper.assertFalse(member.isPersistenceRequired(), id(member) + " despawns like a patrol member (the game decides)");
 
 				if (member != leader) {

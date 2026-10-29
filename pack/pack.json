@@ -177,9 +177,9 @@
     "config/biomesoplenty/generation.toml": "\n[nether]\n\t#The weighting of bop biome regions in the nether.\n\tbop_nether_region_weight = 5\n\t#The weighting of rare bop biome regions in the nether.\n\tbop_nether_rare_region_weight = 2\n\n[overworld]\n\t#The weighting of primary bop biome regions in the overworld.\n\tbop_primary_overworld_region_weight = 10\n\t#The weighting of rare bop biome regions in the overworld.\n\tbop_overworld_rare_region_weight = 2\n\t#The weighting of secondary bop biome regions in the overworld.\n\tbop_secondary_overworld_region_weight = 8\n\n",
     "_mutantmonsters": "Mutant Monsters' spawn weights, as a share of each vanilla counterpart's: 10% (default 5%; FreshOrangeSlices: twice as common). Forge fills in the rest of the file.",
     "config/mutantmonsters-common.toml": "mutant_creeper_spawn_weight = 0.1\nmutant_enderman_spawn_weight = 0.1\nmutant_skeleton_spawn_weight = 0.1\nmutant_zombie_spawn_weight = 0.1\n",
-    "_easymsc": "Easy Mob Spawn Control's files (its in-game menu edits the same ones). Shybroom (Migamigos; FreshOrangeSlices: she can turn up in villages) lives in villages: its structure spawner keeps one within 128 blocks of a village a player is near, at least 24 blocks from them. The roaming Queen of Orchid despawns once idle for 2 minutes with no player within 64 blocks (unless name-tagged or in sight), and at most one Queen of Orchid and one Draugr Boss are loaded at a time.",
-    "config/EasyMSC/structure_spawns.json": [{"name": "legionwarex_shybroom_villages", "structureIds": ["minecraft:village_plains", "minecraft:village_desert", "minecraft:village_savanna", "minecraft:village_snowy", "minecraft:village_taiga"], "category": "creature", "weight": 1, "minCount": 1, "maxCount": 1, "spawnRule": null, "cap": 1}],
-    "config/EasyMSC/structure_spawn_assignments.json": {"migamigos:shybroom": ["legionwarex_shybroom_villages"]},
+    "_easymsc": "Easy Mob Spawn Control's files (its in-game menu edits the same ones). Shybroom no longer lives in villages (FreshOrangeSlices found her in none of 10): its structure spawn lists are left empty, and she spawns in plains instead (spawns.add.migamigos_shybroom). The roaming Queen of Orchid and Draugr Boss despawn once idle for 2 minutes with no player within 64 blocks (unless name-tagged or in sight), and at most one of each is loaded at a time.",
+    "config/EasyMSC/structure_spawns.json": [],
+    "config/EasyMSC/structure_spawn_assignments.json": {},
     "config/EasyMSC/despawn.json": {"oddities:queen_of_orchid": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}, "soulsweapons:draugr_boss": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}},
     "config/EasyMSC/mob_caps.json": {"oddities:queen_of_orchid": {"enabled": true, "percent": false, "value": 1.0, "global": true}, "soulsweapons:draugr_boss": {"enabled": true, "percent": false, "value": 1.0, "global": true}},
     "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies): night (13000-23000), under open sky, no torchlight, standing on ground (the block below). Arborix (an animal): sky light 9 or more (no caves), on grass, dirt, moss or snow, as vanilla animals. The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
@@ -528,32 +528,39 @@
           "spawners": {"soulsweapons:draugr_boss": [15, 1, 1]}
         },
         "migamigos_claymore": {
-          "why": "Migamigos' Claymore (FreshOrangeSlices: companions more often): vanilla forests and Taiga at weight 1; now every forest and taiga, BOP's too, at 2 (the other animals add up to about 48).",
+          "why": "Migamigos' Claymore (FreshOrangeSlices: companions more often): vanilla forests and Taiga at weight 1; now every forest and taiga, BOP's too, at 5 (the other animals add up to about 48; FreshOrangeSlices: more, since the strong mobs kill wild ones).",
           "category": "creature",
           "quiet": false,
           "biomes": ["#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense"],
-          "spawners": {"migamigos:claymore": [2, 1, 1]}
+          "spawners": {"migamigos:claymore": [5, 1, 1]}
         },
         "migamigos_wavelyn": {
-          "why": "Migamigos' Wavelyn: vanilla plains, birch forests and Cherry Grove; now every plain too, at 2.",
+          "why": "Migamigos' Wavelyn: vanilla plains, birch forests and Cherry Grove; now every plain too, at 5.",
           "category": "creature",
           "quiet": false,
           "biomes": ["#forge:is_plains", "minecraft:birch_forest", "minecraft:old_growth_birch_forest", "minecraft:cherry_grove"],
-          "spawners": {"migamigos:wavelyn": [2, 1, 1]}
+          "spawners": {"migamigos:wavelyn": [5, 1, 1]}
         },
         "migamigos_cocogoat": {
-          "why": "Migamigos' Cocogoat: Meadow, Stony Peaks, windswept hills and Cherry Grove; now every hill and mountain, at 2.",
+          "why": "Migamigos' Cocogoat: Meadow, Stony Peaks, windswept hills and Cherry Grove; now every hill and mountain, at 5.",
           "category": "creature",
           "quiet": false,
           "biomes": ["#minecraft:is_hill", "#minecraft:is_mountain", "#forge:is_mountain"],
-          "spawners": {"migamigos:cocogoat": [2, 1, 1]}
+          "spawners": {"migamigos:cocogoat": [5, 1, 1]}
         },
         "migamigos_pollypounce": {
-          "why": "Migamigos' Pollypounce: vanilla beaches, Stony Shore, Old Growth Birch Forest and Cherry Grove; now every beach too, at 2.",
+          "why": "Migamigos' Pollypounce: vanilla beaches, Stony Shore, Old Growth Birch Forest and Cherry Grove; now every beach too, at 5.",
           "category": "creature",
           "quiet": false,
           "biomes": ["#minecraft:is_beach", "minecraft:stony_shore", "minecraft:old_growth_birch_forest", "minecraft:cherry_grove"],
-          "spawners": {"migamigos:pollypounce": [2, 1, 1]}
+          "spawners": {"migamigos:pollypounce": [5, 1, 1]}
+        },
+        "migamigos_shybroom": {
+          "why": "Migamigos' Shybroom: no wild spawn of her own (only her Spawn Broom); villages through Easy Mob Spawn Control never showed her, so the greener plains instead (FreshOrangeSlices), vanilla's and BOP's, at 5 like the others. Not the Meadow: few animals there, so the companions already outnumber them.",
+          "category": "creature",
+          "quiet": false,
+          "biomes": ["minecraft:plains", "minecraft:sunflower_plains", "biomesoplenty:lavender_field", "biomesoplenty:grassland", "biomesoplenty:pasture", "biomesoplenty:prairie", "biomesoplenty:orchard", "biomesoplenty:overgrown_greens"],
+          "spawners": {"migamigos:shybroom": [5, 1, 1]}
         },
         "jungle_wild": {
           "why": "Zombiflore (Skarrier, no spawn condition of its own): every jungle, not just vanilla's.",

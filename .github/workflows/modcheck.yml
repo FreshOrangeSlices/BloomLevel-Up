@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/emsc
-          python3 check/emsc.py "$(ls pack/*server*.zip | head -1)" data-out/emsc/emsc.txt | tee summary.txt
-          echo "::notice title=emsc::$(tr '\n' '|' < summary.txt)"
+          mkdir -p data-out/emsc2
+          python3 check/emsc2.py "$(ls pack/*server*.zip | head -1)" data-out/emsc2/emsc2.txt | tee summary.txt
+          echo "::notice title=emsc2::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/emsc && cp data-out/emsc/* data/emsc/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "emsc" && git push -q origin ci/data && echo pushed
+          mkdir -p data/emsc2 && cp data-out/emsc2/* data/emsc2/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "emsc2" && git push -q origin ci/data && echo pushed

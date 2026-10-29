@@ -7,7 +7,7 @@
   "layers": [
     {
       "name": "core",
-      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
+      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
       "modrinth": [
         "better-combat",
         "playeranimator",
@@ -20,7 +20,6 @@
         "fresh-animations",
         "fresh-animations-details",
         "fresh-animations-objects",
-        "fresh-animations-spiders",
         "fresh-animations-creepers",
         "fa-player-extension",
         "embeddium",
@@ -673,7 +672,6 @@
       "fresh-animations-details",
       "fa-player-extension",
       "fresh-animations-creepers",
-      "fresh-animations-spiders",
       "fresh-animations-objects"
     ],
     "_resource_packs": "Bottom to top, above vanilla's Default (and Forge's mod resources). Bloom switches them on before the game first reads options.txt, once per change of this list (client/mixin/OptionsMixin).",
@@ -685,7 +683,8 @@
     },
     "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets').",
     "files": {
-      "_comment": "Client config files, as given (the mod fills in every setting left out). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",
+      "_comment": "Client config files, as given (the mod fills in every setting left out). A file under defaultconfigs/ is a mod's default, copied in only where the player has no config of their own yet (so an update never resets their settings). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",
+      "defaultconfigs/xaero/minimap/profiles/default.cfg": "# LegionWareX: the minimap keeps north at the top instead of turning with you (FreshOrangeSlices). Xaero's Minimap copies this into config/xaero/minimap/profiles/ on a first start and fills in every other setting; after that it's the player's own (Minimap Settings, Lock Minimap North).\nprofile_name = Default\nminimap_north_locked = true\n",
       "config/obscuria/aquamirae-early.json": {
         "themed_main_menu": false
       },

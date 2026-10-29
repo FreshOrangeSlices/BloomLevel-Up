@@ -767,6 +767,17 @@ def main():
         failures.append("Bloom didn't apply the pack's resource packs (no 'Bloom Pack defaults applied' line)")
     if "FreshAnimations" not in packs_line:
         failures.append(f"Fresh Animations isn't on in options.txt ({packs_line or 'no resourcePacks line'})")
+    # The pack's defaults for mods that read them from defaultconfigs/ on a first start: Xaero's Minimap locked north.
+    xaero_default = os.path.join(game_dir, "defaultconfigs", "xaero", "minimap", "profiles", "default.cfg")
+    if os.path.exists(xaero_default):
+        profile = os.path.join(game_dir, "config", "xaero", "minimap", "profiles", "default.cfg")
+        text = open(profile).read() if os.path.exists(profile) else ""
+        if not re.search(r"(?m)^minimap_north_locked\s*=\s*true\s*$", text):
+            found = sorted(os.listdir(os.path.dirname(profile))) if os.path.isdir(os.path.dirname(profile)) else "no profiles folder"
+            failures.append(f"Xaero's Minimap didn't take the pack's default (north locked): {found}; "
+                            + " / ".join(l for l in text.splitlines() if "north" in l or "profile" in l)[:300])
+        else:
+            notes.append("minimap: locked north (from the pack's defaultconfigs)")
     # The pack's shader, when it has one: switched on in Oculus's settings, and what Oculus said about it.
     defaults_file = os.path.join(game_dir, "config", "bloomlevelup", "pack-defaults.properties")
     wanted = next((l.split("=", 1)[1] for l in open(defaults_file).read().splitlines() if l.startswith("shaderPack=")), None) \

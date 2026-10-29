@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/dragons
-          python3 check/dragons.py "$(ls pack/*server*.zip | head -1)" data-out/dragons/dragons.txt | tee summary.txt
-          echo "::notice title=dragons::$(tr '\n' '|' < summary.txt)"
+          mkdir -p data-out/shipbreaker
+          python3 check/shipbreaker.py "$(ls pack/*server*.zip | head -1)" data-out/shipbreaker/shipbreaker.txt | tee summary.txt
+          echo "::notice title=shipbreaker::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/dragons && cp data-out/dragons/* data/dragons/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "dragons" && git push -q origin ci/data && echo pushed
+          mkdir -p data/shipbreaker && cp data-out/shipbreaker/* data/shipbreaker/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "shipbreaker" && git push -q origin ci/data && echo pushed

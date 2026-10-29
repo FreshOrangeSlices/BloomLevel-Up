@@ -263,6 +263,24 @@ def spawn_check(server_dir, dump_file, spec_file):
                         for s in v if s["type"] in overworld_only})
     if elsewhere:
         failures.append(f"spawns: Skarrier's overworld mobs are still listed outside the Overworld: {', '.join(elsewhere)}")
+    # Book of Dragons' roosts: every type in BOP's biomes too, at the pack's spacing.
+    sets = {r["id"]: r for r in rows if r.get("kind") == "structure_set"}
+    roosts = []
+    for ident, want in spawns.get("structure_sets", {}).items():
+        if ident.startswith("_") or ident.split(":")[0] not in {s.split(":")[0] for s in sets}:
+            continue
+        got = sets.get(ident)
+        if not got or (got["spacing"], got["separation"]) != (want["spacing"], want["separation"]):
+            failures.append(f"spawns: {ident} is {got and (got['spacing'], got['separation'])}, not {want['spacing']}/{want['separation']} chunks apart")
+            continue
+        tag = ident.replace(":roost_", ":has_roost_")
+        where = [b["id"] for b in biomes if tag in b["tags"]]
+        if tag != ident:
+            if not any(i.startswith("biomesoplenty:") for i in where) and any(b["id"].startswith("biomesoplenty:") for b in biomes):
+                failures.append(f"spawns: {ident} can't go in any of Biomes O' Plenty's biomes")
+            roosts.append(f"{ident.split(':')[1]} {want['spacing']} chunks apart in {len(where)} biomes")
+        else:
+            roosts.append(f"{ident} {want['spacing']} chunks apart")
     report, shares = [], []
     for b in sorted(biomes, key=lambda b: b["id"]):
         if "minecraft:is_overworld" not in b["tags"] or b["id"] in quiet_ids:
@@ -281,6 +299,8 @@ def spawn_check(server_dir, dump_file, spec_file):
     median = land[len(land) // 2][0] if land else 0
     notes = [f"spawns: {len(added)} mobs added by the pack; modded share of night spawns (in mobs) on land: median "
              f"{median * 100:.0f}%, {land[0][0] * 100:.0f}% ({land[0][1]}) to {land[-1][0] * 100:.0f}% ({land[-1][1]})" if land else "spawns: no land biomes"]
+    if roosts:
+        notes.append("dragon roosts: " + ", ".join(roosts))
     return failures, notes, report
 
 

@@ -345,7 +345,20 @@
         "graveyard:ghoul_spawns": {"why": "Emptied: ghouls come from the pack's own spawns below (all land but quiet biomes).", "replace": true, "values": []},
         "graveyard:revenant_spawns": {"why": "Emptied: revenants come from the pack's own spawns below (every snowy biome, smaller packs).", "replace": true, "values": []},
         "graveyard:nightmare_spawns": {"why": "Emptied: nightmares come from the pack's own spawns below (open, dry and high land).", "replace": true, "values": []},
-        "cataclysm:koboleton_spawn": {"why": "Emptied: koboletons come from the pack's own spawns below (every dry biome).", "replace": true, "values": []}
+        "cataclysm:koboleton_spawn": {"why": "Emptied: koboletons come from the pack's own spawns below (every dry biome).", "replace": true, "values": []},
+        "bookofdragons:has_roost_cliff": {"why": "Book of Dragons' cliff roosts (Night Fury, Skrill): vanilla's snowy peaks only; now every peak and mountain, BOP's Crag and Jade Cliffs too (FreshOrangeSlices: dragons were rare and far out).", "values": ["#forge:is_peak", "#minecraft:is_mountain"]},
+        "bookofdragons:has_roost_cave": {"why": "Cave roosts (Gronckle, Whispering Death): vanilla's windswept hills, Stony Peaks and Meadow; now every hill and mountain (BOP's Highland, Crag, Jade Cliffs, Moor, Volcano).", "values": ["#minecraft:is_hill", "#forge:is_mountain"]},
+        "bookofdragons:has_roost_glade": {"why": "Glade roosts (Deadly Nadder, Hideous Zippleback): vanilla's old-growth forests and two jungles; now every forest, taiga and jungle.", "values": ["#minecraft:is_forest", "#minecraft:is_taiga", "#minecraft:is_jungle", "#forge:is_coniferous", "#forge:is_dense"]},
+        "bookofdragons:has_roost_wetland": {"why": "Wetland roosts (Hideous Zippleback): vanilla's swamps and Mushroom Fields; now every swamp (BOP's Bayou, Bog, Floodplain, Marsh, Moor, Muskeg, Wetland).", "values": ["#forge:is_swamp"]},
+        "bookofdragons:has_roost_barrens": {"why": "Barrens roosts (Monstrous Nightmare, Gronckle): vanilla's desert, badlands and savannas; now every dry biome and savanna.", "values": ["#forge:is_desert", "#forge:is_dry", "#minecraft:is_badlands", "#minecraft:is_savanna", "#forge:is_wasteland"]}
+      },
+      "structure_sets": {
+        "_comment": "Book of Dragons' roosts (one dragon each; the roost brings a new one a day after it's killed or tamed) about 30% closer together, so twice as many per area (FreshOrangeSlices: double). Spacing and separation in chunks; the mod's were cliff 32/16, cave 20/10, the others 24/12.",
+        "bookofdragons:roost_cliff": {"spacing": 23, "separation": 11},
+        "bookofdragons:roost_cave": {"spacing": 14, "separation": 7},
+        "bookofdragons:roost_glade": {"spacing": 17, "separation": 8},
+        "bookofdragons:roost_wetland": {"spacing": 17, "separation": 8},
+        "bookofdragons:roost_barrens": {"spacing": 17, "separation": 8}
       },
       "add": {
         "ghouls": {

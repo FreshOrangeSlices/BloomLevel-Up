@@ -307,7 +307,8 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
       no harm;
     - add: forge:add_spawns, each with its own biome tag (legionwarex:spawns/<name>) made from the biomes and tags it
       lists, and spawners {entity: [weight, min, max]};
-    - quiet: biomes no group adds to (unless the group says "quiet": false).
+    - quiet: biomes no group adds to (unless the group says "quiet": false);
+    - structure_sets: a mod's structure set (from its jar) with new spacing and separation, in chunks.
     Spawners, tags and modifiers of mods a layer leaves out are skipped (present: the namespaces in the layer's jars):
     a biome modifier naming an entity that doesn't exist would stop every world from loading."""
     out, made = {}, []
@@ -342,6 +343,26 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
         out[f"{root}/data/{namespace}/tags/worldgen/biome/{path}.json"] = {
             "replace": bool(spec.get("replace")), "values": entries(spec["values"])}
         made.append(f"tag {tag}")
+    # Structure sets placed closer together (or further apart): the mod's own set from its jar, with new spacing.
+    for ident, spec in spawns.get("structure_sets", {}).items():
+        if ident.startswith("_") or not have(ident):
+            continue
+        namespace, path = ident.split(":", 1)
+        original = None
+        for data in (jars or {}).values():
+            try:
+                z = zipfile.ZipFile(io.BytesIO(data))
+                original = json.loads(z.read(f"data/{namespace}/worldgen/structure_set/{path}.json"))
+                break
+            except (KeyError, zipfile.BadZipFile, ValueError):
+                continue
+        if original is None:
+            if jars:
+                problems.append(f"pack_data.spawns.structure_sets: no structure set {ident} in the pack's jars")
+            continue
+        original["placement"]["spacing"], original["placement"]["separation"] = spec["spacing"], spec["separation"]
+        out[f"{root}/data/{namespace}/worldgen/structure_set/{path}.json"] = original
+        made.append(f"set {ident}")
     quiet = spawns.get("quiet", {}).get("biomes")
     if quiet:
         out[f"{root}/data/legionwarex/tags/worldgen/biome/spawns/quiet.json"] = {"replace": False, "values": entries(quiet)}
@@ -362,7 +383,8 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
         made.append(f"add {name} ({len(spawners)})")
     if notes is not None and made:
         notes.append(f"spawns: {len([m for m in made if m.startswith('off')])} mod spawns off, "
-                     f"{len([m for m in made if m.startswith('tag')])} biome tags, {len([m for m in made if m.startswith('add')])} spawn groups")
+                     f"{len([m for m in made if m.startswith('tag')])} biome tags, {len([m for m in made if m.startswith('add')])} spawn groups, "
+                     f"{len([m for m in made if m.startswith('set')])} structure sets respaced")
     return out
 
 

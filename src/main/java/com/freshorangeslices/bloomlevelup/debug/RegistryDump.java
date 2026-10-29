@@ -55,7 +55,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
+import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraftforge.event.TickEvent;
@@ -154,6 +156,20 @@ public final class RegistryDump {
 				}
 			} catch (Throwable e) {
 				lines.add(GSON.toJson(error("structure", entry.getKey().location().toString(), e)));
+			}
+		}
+
+		// How far apart each mod's structures are (random-spread sets, in chunks).
+		Registry<StructureSet> sets = level.registryAccess().registryOrThrow(Registries.STRUCTURE_SET);
+
+		for (Map.Entry<ResourceKey<StructureSet>, StructureSet> entry : sets.entrySet()) {
+			if (entry.getValue().placement() instanceof RandomSpreadStructurePlacement spread) {
+				JsonObject row = new JsonObject();
+				row.addProperty("kind", "structure_set");
+				row.addProperty("id", entry.getKey().location().toString());
+				row.addProperty("spacing", spread.spacing());
+				row.addProperty("separation", spread.separation());
+				lines.add(GSON.toJson(row));
 			}
 		}
 

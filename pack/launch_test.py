@@ -524,7 +524,7 @@ def lines_since(process, mark, pattern, limit):
 
 
 def band_check(server, player, entities, shots):
-    """The LegionWareX add-on's bands, called by its command in front of the player (9 blocks ahead): a war band of 5
+    """The LegionWareX add-on's bands, called by its command in front of the player (14 and 9 blocks ahead): a war band of 5
     and a pirate band of 4. Each must come whole, the war band led by its banner carrier; each is captured, then
     cleared. A band whose mod isn't in this layer is only noted. Returns (failures, notes)."""
     failures, notes = [], []
@@ -535,7 +535,8 @@ def band_check(server, player, entities, shots):
             notes.append(f"add-on: no {kind} band in this layer (no {leader.split(':')[0]})")
             continue
         mark = len(server.lines)
-        server.send(f"execute as {player} at @s positioned ^ ^ ^9 run legionwarex band {kind} {size}")
+        # War bands charge at once, so they start further off; the client draws a couple of seconds behind the server.
+        server.send(f"execute as {player} at @s positioned ^ ^ ^{14 if kind == 'war' else 9} run legionwarex band {kind} {size}")
         line = lines_since(server, mark, r"LegionWareX band: (no |\w+ band of)", 20)
         if line is None:
             failures.append(f"add-on: /legionwarex band {kind} said nothing (is the command there?)")
@@ -550,7 +551,7 @@ def band_check(server, player, entities, shots):
             failures.append(f"add-on: a {kind} band of {size} came with {count} on flat ground: {members}")
         if kind == "war" and "banner" not in members:
             failures.append(f"add-on: the war band's leader carries no banner: {members}")
-        time.sleep(1.5 if kind == "war" else 4)  # illagers charge at once; pirates take their time
+        time.sleep(3.5 if kind == "war" else 4)
         capture(shots, f"pack_band_{kind}")
         # Still there a moment later (Easy Mob Spawn Control or another mod could take them away as they join).
         mark = len(server.lines)

@@ -1,29 +1,23 @@
-"""Throwaway: Xaero's Minimap 26.6.0 (Forge 1.20.1) from Modrinth: its option names and config files, for locking the
-minimap to north. Usage: companions.py <server.zip> <out dir>"""
-import io
+"""Throwaway: what Xaero's Minimap left in the test client's config (from the pack-screenshots artifact), and the
+client log's Xaero lines. Usage: companions.py <server.zip> <out dir> (reads ./shots)."""
 import os
-import re
-import subprocess
 import sys
-import urllib.request
-import zipfile
 
 out = sys.argv[2]
 os.makedirs(out, exist_ok=True)
-url = "https://cdn.modrinth.com/data/1bokaNcj/versions/dB6E0CY9/xaerominimap-forge-1.20.1-26.6.0.jar"
-data = urllib.request.urlopen(url).read()
-open(os.path.join(out, "xaerominimap.jar.bin"), "wb").write(data)
-jar = zipfile.ZipFile(io.BytesIO(data))
 lines = []
-for name in jar.namelist():
-    if name.endswith(".class"):
-        text = jar.read(name).decode("latin-1")
-        for word in set(re.findall(r"[A-Za-z0-9_./ -]{3,80}", text)):
-            if re.search(r"(?i)north|lockNorth|rotat|\.cfg|\.txt|profiles|config/xaero|minimap/", word):
-                lines.append(f"{name}\t{word}")
-    elif name.endswith("en_us.json") or name.endswith("en_us.lang"):
-        for line in jar.read(name).decode("utf-8", "replace").splitlines():
-            if re.search(r"(?i)north|rotat", line):
-                lines.append(f"{name}\t{line.strip()}")
-open(os.path.join(out, "xaero-strings.txt"), "w").write("\n".join(sorted(set(lines))))
-print(len(lines), "strings")
+for root, dirs, files in os.walk("shots"):
+    for f in files:
+        path = os.path.join(root, f)
+        if "xaero" in path.lower():
+            lines.append(f"== {path} ({os.path.getsize(path)} bytes)")
+            try:
+                lines.extend(open(path, errors="replace").read().splitlines()[:80])
+            except OSError:
+                pass
+        if f == "latest.log":
+            for l in open(path, errors="replace"):
+                if "xaero" in l.lower() or "minimap" in l.lower():
+                    lines.append("LOG " + l.rstrip()[:300])
+open(os.path.join(out, "xaero-config.txt"), "w").write("\n".join(lines[:2000]))
+print(len(lines), "lines")

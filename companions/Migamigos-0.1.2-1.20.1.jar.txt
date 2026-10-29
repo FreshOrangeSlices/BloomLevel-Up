@@ -1,0 +1,425 @@
+== assets/migamigos/lang/en_us.json
+{
+  "entity.migamigos.amigo": "Amigo",
+  "entity.migamigos.cocogoat": "Cocogoat",
+  "entity.migamigos.wavelyn": "Wavelyn",
+  "entity.migamigos.claymore": "Claymore",
+  "entity.migamigos.shybroom": "Shybroom",
+  "entity.migamigos.pollypounce": "Pollypounce",
+  "slot.migamigos.coming_soon": "Coming soon!",
+  "slot.migamigos.hide_armor_piece": "Hide Armor Piece",
+  "subtitle.migamigos.amigo.backpack_opening": "Backpack Opening",
+  "subtitle.migamigos.amigo.backpack_closing": "Backpack Closing",
+  "info.migamigos.favorite_item": "Favorite Item: ",
+  "info.migamigos.max_health": "Max Health: ",
+  "info.migamigos.armor": "Armor: ",
+  "info.migamigos.additional_power": "Additional Power: ",
+  "info.migamigos.tolerance": "Tolerance: ",
+  "info.migamigos.speed": "Speed: ",
+  "gui.migamigos.amigo_inventory.level": "Every Amigo Level increases the Amigo's stats!",
+  "gui.migamigos.amigo_inventory.attacking_any_entity.true": "Attacks All Hostiles",
+  "gui.migamigos.amigo_inventory.attacking_any_entity.false": "Attacks Only Targets",
+  "gui.migamigos.amigo_inventory.defend_player_only.true": "Defends Player Only",
+  "gui.migamigos.amigo_inventory.defend_player_only.false": "Defends Team",
+  "gui.migamigos.amigo_inventory.focus_on_main_target.true": "Focuses On Targets",
+  "gui.migamigos.amigo_inventory.focus_on_main_target.false": "Supports Team",
+  "gui.migamigos.amigo_inventory.allow_wandering.true": "Can Wander",
+  "gui.migamigos.amigo_inventory.allow_wandering.false": "Cannot Wander",
+  "gui.migamigos.amigo_inventory.following.true": "Is Following",
+  "gui.migamigos.amigo_inventory.following.false": "Is Staying",
+  "gui.migamigos.amigo_inventory.ride_with_player": "Get On %s",
+  "gui.migamigos.amigo_inventory.stop_riding": "Get Off %s",
+  "cutesy.migamigos.thanks": "Thank you for using Migamigos!",
+  "chat.migamigos.favorite_item": "They like %1$s!",
+  "chat.migamigos.foe_appeared": "A new foe has appeared!",
+  "broadcast.migamigos.amigo_visitor": "An Amigo is visiting your Realm!",
+  "warning.migamigos.wip": "This is a very early release of Migamigos!",
+  "warning.migamigos.wip_2": "Report any bug you find and stay tuned for future updates!",
+  "amigo.death.by_player": "%1$s was slain by %2$s!",
+  "amigo.death.by_entity": "%1$s was slain by a %2$s!",
+  "amigo.death.generic": "%1$s died!",
+  "itemGroup.migamigos": "Migamigos",
+  "item.migamigos.cocogoat_spawn_flower": "Cocogoat Spawn Flower",
+  "item.migamigos.wavelyn_spawn_cookie": "Wavelyn Spawn Cookie",
+  "item.migamigos.claymore_spawn_tortilla": "Claymore Spawn Tortilla",
+  "item.migamigos.pollypounce_spawn_parrot_plushie": "Pollypounce Spawn Parrot Plushie",
+  "item.migamigos.shybroom_spawn_broom": "Shybroom Spawn Broom"
+}
+== classes
+ttv/migami/migamigos/AmigoAnimations.class
+ttv/migami/migamigos/Config$Common.class
+ttv/migami/migamigos/Config$Gameplay.class
+ttv/migami/migamigos/Config.class
+ttv/migami/migamigos/Migamigos.class
+ttv/migami/migamigos/Reference.class
+ttv/migami/migamigos/amigo/AmigoRealmVisitor.class
+ttv/migami/migamigos/annotation/Ignored.class
+ttv/migami/migamigos/annotation/Optional.class
+ttv/migami/migamigos/annotation/Validator.class
+ttv/migami/migamigos/client/ClientHandler.class
+ttv/migami/migamigos/client/CustomAmigoManager$LoginData.class
+ttv/migami/migamigos/client/CustomAmigoManager.class
+ttv/migami/migamigos/client/KeyBinds.class
+ttv/migami/migamigos/client/MetaLoader$ItemResource.class
+ttv/migami/migamigos/client/MetaLoader.class
+ttv/migami/migamigos/client/ParticleFactoryRegistry.class
+ttv/migami/migamigos/client/network/ClientPlayHandler.class
+ttv/migami/migamigos/client/particle/GlintParticle$LightBlueProvider.class
+ttv/migami/migamigos/client/particle/GlintParticle.class
+ttv/migami/migamigos/client/particle/SmokeParticle$BreezeProvider.class
+ttv/migami/migamigos/client/particle/SmokeParticle$Provider.class
+ttv/migami/migamigos/client/particle/SmokeParticle$SmallBreezeProvider.class
+ttv/migami/migamigos/client/particle/SmokeParticle.class
+ttv/migami/migamigos/client/particle/SoulLavaParticle$Provider.class
+ttv/migami/migamigos/client/particle/SoulLavaParticle.class
+ttv/migami/migamigos/client/particle/SparkParticle$Provider.class
+ttv/migami/migamigos/client/particle/SparkParticle.class
+ttv/migami/migamigos/client/screen/AmigoScreen.class
+ttv/migami/migamigos/client/util/RenderUtil.class
+ttv/migami/migamigos/common/Amigo$Action.class
+ttv/migami/migamigos/common/Amigo$AttackCombo.class
+ttv/migami/migamigos/common/Amigo$AttackSpecial.class
+ttv/migami/migamigos/common/Amigo$AttackUltimate.class
+ttv/migami/migamigos/common/Amigo$Builder.class
+ttv/migami/migamigos/common/Amigo$General.class
+ttv/migami/migamigos/common/Amigo.class
+ttv/migami/migamigos/common/AmigoDataHandler.class
+ttv/migami/migamigos/common/CustomAmigo.class
+ttv/migami/migamigos/common/CustomAmigoLoader.class
+ttv/migami/migamigos/common/JsonDeserializers.class
+ttv/migami/migamigos/common/NetworkAmigoManager$LoginData.class
+ttv/migami/migamigos/common/NetworkAmigoManager$Supplier.class
+ttv/migami/migamigos/common/NetworkAmigoManager.class
+ttv/migami/migamigos/common/amigo/Action.class
+ttv/migami/migamigos/common/container/AmigoContainer$ArmorSlot.class
+ttv/migami/migamigos/common/container/AmigoContainer.class
+ttv/migami/migamigos/common/network/ServerPlayHandler.class
+ttv/migami/migamigos/datagen/AmigoGen.class
+ttv/migami/migamigos/datagen/AmigoProvider.class
+ttv/migami/migamigos/datagen/EntityTagGen.class
+ttv/migami/migamigos/entity/AmigoEmotes.class
+ttv/migami/migamigos/entity/AmigoEntity.class
+ttv/migami/migamigos/entity/AmigoEntityType.class
+ttv/migami/migamigos/entity/AmigoState.class
+ttv/migami/migamigos/entity/StunEntity.class
+ttv/migami/migamigos/entity/ai/AmigoEatOrDrinkGoal.class
+ttv/migami/migamigos/entity/ai/AmigoFarmGoal.class
+ttv/migami/migamigos/entity/ai/AmigoFishGoal.class
+ttv/migami/migamigos/entity/ai/AmigoHurtByPlayerGoal.class
+ttv/migami/migamigos/entity/ai/AmigoHurtByTargetGoal.class
+ttv/migami/migamigos/entity/ai/AmigoLookAtPlayerGoal.class
+ttv/migami/migamigos/entity/ai/AmigoMeleeAttackGoal.class
+ttv/migami/migamigos/entity/ai/AmigoRangedAttackGoal.class
+ttv/migami/migamigos/entity/ai/FollowPlayerGoal.class
+ttv/migami/migamigos/entity/ai/MoveBackToPostGoal.class
+ttv/migami/migamigos/entity/ai/NearestAttackableAmigoTargetGoal.class
+ttv/migami/migamigos/entity/ai/PersonalSpaceGoal.class
+ttv/migami/migamigos/entity/ai/PlayerHurtByTargetGoal.class
+ttv/migami/migamigos/entity/ai/PlayerHurtTargetGoal.class
+ttv/migami/migamigos/entity/ai/WaterAvoidingAmigoStrollGoal.class
+ttv/migami/migamigos/entity/amigo/CaptainBeakbeard.class
+ttv/migami/migamigos/entity/amigo/Claymore.class
+ttv/migami/migamigos/entity/amigo/Cocogoat.class
+ttv/migami/migamigos/entity/amigo/Pollypounce.class
+ttv/migami/migamigos/entity/amigo/Shybroom.class
+ttv/migami/migamigos/entity/amigo/Wavelyn.class
+ttv/migami/migamigos/entity/client/StunEntityRenderer.class
+ttv/migami/migamigos/entity/client/effect/GroundMarkRenderer.class
+ttv/migami/migamigos/entity/client/migamigo/AmigoModel.class
+ttv/migami/migamigos/entity/client/migamigo/AmigoRenderer$1.class
+ttv/migami/migamigos/entity/client/migamigo/AmigoRenderer$2.class
+ttv/migami/migamigos/entity/client/migamigo/AmigoRenderer.class
+ttv/migami/migamigos/entity/client/migamigo/EnemigoEyeLayer.class
+ttv/migami/migamigos/entity/client/projectile/AmigoFishingHookRenderer.class
+ttv/migami/migamigos/entity/client/projectile/GenericArrowRenderer.class
+ttv/migami/migamigos/entity/client/projectile/cocogoat/IceConeRenderer.class
+ttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer.class
+ttv/migami/migamigos/entity/client/summon/IceLotusRenderer.class
+ttv/migami/migamigos/entity/client/summon/IceShowerRenderer.class
+ttv/migami/migamigos/entity/fx/GroundCracksEntity.class
+ttv/migami/migamigos/entity/fx/GroundMarkEntity.class
+ttv/migami/migamigos/entity/fx/ScorchMarkEntity.class
+ttv/migami/migamigos/entity/projectile/AmigoFishingHook.class
+ttv/migami/migamigos/entity/projectile/CustomProjectileEntity$EntityResult.class
+ttv/migami/migamigos/entity/projectile/CustomProjectileEntity.class
+ttv/migami/migamigos/entity/projectile/GenericArrow.class
+ttv/migami/migamigos/entity/projectile/cocogoat/IceCone.class
+ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball.class
+ttv/migami/migamigos/entity/summon/HailShower.class
+ttv/migami/migamigos/entity/summon/IceLotus.class
+ttv/migami/migamigos/entity/summon/SummonEntity.class
+ttv/migami/migamigos/event/AmigoProjectileHitEvent.class
+ttv/migami/migamigos/event/CommonEntityEvents.class
+ttv/migami/migamigos/event/EntityKillEventHandler.class
+ttv/migami/migamigos/event/EntitySpawnEventHandler.class
+ttv/migami/migamigos/event/ModCommandsRegister.class
+ttv/migami/migamigos/event/ModCommonEventBus.class
+ttv/migami/migamigos/event/PlayerAttackAmigoEvent.class
+ttv/migami/migamigos/event/PlayerCloneHandler.class
+ttv/migami/migamigos/event/ServerTickHandler.class
+ttv/migami/migamigos/event/TameTargetEventHandler.class
+ttv/migami/migamigos/init/ModBlocks.class
+ttv/migami/migamigos/init/ModCommands.class
+ttv/migami/migamigos/init/ModContainers.class
+ttv/migami/migamigos/init/ModEffects.class
+ttv/migami/migamigos/init/ModEnchantments.class
+ttv/migami/migamigos/init/ModEntities.class
+ttv/migami/migamigos/init/ModItems.class
+ttv/migami/migamigos/init/ModParticleTypes.class
+ttv/migami/migamigos/init/ModSounds.class
+ttv/migami/migamigos/init/ModTags$Entities.class
+ttv/migami/migamigos/init/ModTags.class
+ttv/migami/migamigos/item/IMeta.class
+ttv/migami/migamigos/mixin/MixinAbstractHorse.class
+ttv/migami/migamigos/mixin/MixinEntity.class
+ttv/migami/migamigos/mixin/MixinPlugin.class
+ttv/migami/migamigos/network/PacketHandler.class
+ttv/migami/migamigos/network/message/C2SAmigoSwitchAttitude.class
+ttv/migami/migamigos/network/message/C2SCloseAmigoInventory.class
+ttv/migami/migamigos/network/message/C2SMessageToggleArmorPiece.class
+ttv/migami/migamigos/network/message/S2CMessageUpdateAmigos.class
+== data
+data/
+data/migamigos/
+data/migamigos/amigos/
+data/migamigos/amigos/claymore.json
+data/migamigos/amigos/cocogoat.json
+data/migamigos/amigos/pollypounce.json
+data/migamigos/amigos/shybroom.json
+data/migamigos/amigos/wavelyn.json
+data/migamigos/forge/
+data/migamigos/forge/biome_modifier/
+data/migamigos/forge/biome_modifier/amigo_claymore.json
+data/migamigos/forge/biome_modifier/amigo_cocogoat.json
+data/migamigos/forge/biome_modifier/amigo_pollypounce.json
+data/migamigos/forge/biome_modifier/amigo_wavelyn.json
+data/migamigos/tags/
+data/migamigos/tags/entity_types/
+data/migamigos/tags/entity_types/amigo.json
+data/migamigos/tags/entity_types/ride_with_player.json
+data/migamigos/tags/entity_types/undead.json
+== ttv/migami/migamigos/Migamigos.class
+:ttv/migami/migamigos/entity/client/summon/IceLotusRenderer
+;ttv/migami/migamigos/entity/client/summon/IceShowerRenderer
+Jttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer
+SOUL_FIREBALL
+== ttv/migami/migamigos/client/ParticleFactoryRegistry.class
+5ttv/migami/migamigos/client/particle/SoulLavaParticle
+>ttv/migami/migamigos/client/particle/SoulLavaParticle$Provider
+SOUL_LAVA_PARTICLE
+== ttv/migami/migamigos/client/particle/SoulLavaParticle$Provider.class
+5ttv/migami/migamigos/client/particle/SoulLavaParticle
+7Lttv/migami/migamigos/client/particle/SoulLavaParticle;
+>ttv/migami/migamigos/client/particle/SoulLavaParticle$Provider
+@Lttv/migami/migamigos/client/particle/SoulLavaParticle$Provider;
+SoulLavaParticle.java
+== ttv/migami/migamigos/client/particle/SoulLavaParticle.class
+5ttv/migami/migamigos/client/particle/SoulLavaParticle
+7Lttv/migami/migamigos/client/particle/SoulLavaParticle;
+>ttv/migami/migamigos/client/particle/SoulLavaParticle$Provider
+SoulLavaParticle.java
+== ttv/migami/migamigos/client/screen/AmigoScreen.class
+fullHearts
+hasHalfHeart
+heartX
+maxHearts
+== ttv/migami/migamigos/common/AmigoDataHandler.class
+getPersistentData
+== ttv/migami/migamigos/common/network/ServerPlayHandler.class
+isHeartless
+== ttv/migami/migamigos/datagen/AmigoGen.class
+soul_fire_blast
+== ttv/migami/migamigos/datagen/EntityTagGen.class
+UNDEAD
+== ttv/migami/migamigos/entity/AmigoEntity.class
+DATA_IS_HEARTLESS
+IsHeartless
+heartless
+heartlessDiscard
+heartlessParticles
+isHeartless
+setHeartless
+== ttv/migami/migamigos/entity/AmigoEntityType.class
+pSummon
+== ttv/migami/migamigos/entity/ai/AmigoEatOrDrinkGoal.class
+isHeartless
+== ttv/migami/migamigos/entity/ai/AmigoFarmGoal.class
+isHeartless
+== ttv/migami/migamigos/entity/ai/AmigoHurtByTargetGoal.class
+isHeartless
+isHeartlessOrEnemigo
+== ttv/migami/migamigos/entity/ai/AmigoLookAtPlayerGoal.class
+isHeartless
+== ttv/migami/migamigos/entity/ai/AmigoMeleeAttackGoal.class
+isHeartless
+== ttv/migami/migamigos/entity/ai/AmigoRangedAttackGoal.class
+isHeartless
+== ttv/migami/migamigos/entity/ai/NearestAttackableAmigoTargetGoal.class
+isHeartless
+== ttv/migami/migamigos/entity/amigo/Claymore.class
+knockbackDirection
+summonGroundCracks
+summonLightingBolt
+== ttv/migami/migamigos/entity/amigo/Cocogoat.class
++ttv/migami/migamigos/entity/summon/IceLotus
+-Lttv/migami/migamigos/entity/summon/IceLotus;
+-ttv/migami/migamigos/entity/summon/HailShower
+/Lttv/migami/migamigos/entity/summon/HailShower;
+knockbackDirection
+summonIceCone
+== ttv/migami/migamigos/entity/amigo/Pollypounce.class
+isHeartless
+== ttv/migami/migamigos/entity/amigo/Shybroom.class
+knockbackDirection
+== ttv/migami/migamigos/entity/amigo/Wavelyn.class
+;ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball
+=Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;
+UNDEAD
+knockbackDirection
+soulFireball
+summonLightingBolt
+== ttv/migami/migamigos/entity/client/migamigo/AmigoModel.class
+!textures/animated/heartless/
+isHeartless
+== ttv/migami/migamigos/entity/client/migamigo/AmigoRenderer.class
+isHeartless
+== ttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer.class
+(Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+-textures/projectile/wavelyn/soul_fireball.png
+;ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball
+=Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;
+Jttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer
+LLttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer;
+SoulFireballRenderer.java
+](Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;Lnet/minecraft/core/BlockPos;)I
+i(Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;)Lnet/minecraft/resources/ResourceLocation;
+tLnet/minecraft/client/renderer/entity/EntityRenderer<Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;>;
+== ttv/migami/migamigos/entity/client/summon/IceLotusRenderer.class
+(Lttv/migami/migamigos/entity/summon/IceLotus;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
++ttv/migami/migamigos/entity/summon/IceLotus
+-Lttv/migami/migamigos/entity/summon/IceLotus;
+:ttv/migami/migamigos/entity/client/summon/IceLotusRenderer
+<Lttv/migami/migamigos/entity/client/summon/IceLotusRenderer;
+ALttv/migami/migamigos/entity/client/summon/IceLotusRenderer<TT;>;
+M(Lttv/migami/migamigos/entity/summon/IceLotus;Lnet/minecraft/core/BlockPos;)I
+Y(Lttv/migami/migamigos/entity/summon/IceLotus;)Lnet/minecraft/resources/ResourceLocation;
+k<T:Lttv/migami/migamigos/entity/summon/IceLotus;>Lnet/minecraft/client/renderer/entity/EntityRenderer<TT;>;
+== ttv/migami/migamigos/entity/client/summon/IceShowerRenderer.class
+(Lttv/migami/migamigos/entity/summon/HailShower;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+-ttv/migami/migamigos/entity/summon/HailShower
+/Lttv/migami/migamigos/entity/summon/HailShower;
+;ttv/migami/migamigos/entity/client/summon/IceShowerRenderer
+=Lttv/migami/migamigos/entity/client/summon/IceShowerRenderer;
+BLttv/migami/migamigos/entity/client/summon/IceShowerRenderer<TT;>;
+[(Lttv/migami/migamigos/entity/summon/HailShower;)Lnet/minecraft/resources/ResourceLocation;
+m<T:Lttv/migami/migamigos/entity/summon/HailShower;>Lnet/minecraft/client/renderer/entity/EntityRenderer<TT;>;
+== ttv/migami/migamigos/entity/projectile/CustomProjectileEntity.class
+/ttv/migami/migamigos/entity/summon/SummonEntity
+== ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball.class
+;ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball
+=Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;
+SOUL_FIREBALL
+SOUL_LAVA_PARTICLE
+SoulFireball.java
+== ttv/migami/migamigos/entity/summon/HailShower.class
+-ttv/migami/migamigos/entity/summon/HailShower
+/Lttv/migami/migamigos/entity/summon/HailShower;
+/ttv/migami/migamigos/entity/summon/SummonEntity
+YLnet/minecraft/world/entity/EntityType<+Lttv/migami/migamigos/entity/summon/HailShower;>;
+summonBlizzardParticles
+summonIceCone
+summonParticleRing
+}(Lnet/minecraft/world/entity/EntityType<+Lttv/migami/migamigos/entity/summon/HailShower;>;Lnet/minecraft/world/level/Level;)V
+== ttv/migami/migamigos/entity/summon/IceLotus.class
++ttv/migami/migamigos/entity/summon/IceLotus
+-Lttv/migami/migamigos/entity/summon/IceLotus;
+/ttv/migami/migamigos/entity/summon/SummonEntity
+summonParticleRing
+== ttv/migami/migamigos/entity/summon/SummonEntity.class
+/ttv/migami/migamigos/entity/summon/SummonEntity
+1Lttv/migami/migamigos/entity/summon/SummonEntity;
+SummonEntity.java
+== ttv/migami/migamigos/event/EntityKillEventHandler.class
+7net/minecraftforge/event/entity/living/LivingDeathEvent
+9Lnet/minecraftforge/event/entity/living/LivingDeathEvent;
+<(Lnet/minecraftforge/event/entity/living/LivingDeathEvent;)V
+amigo.death.by_entity
+amigo.death.by_player
+amigo.death.generic
+deathMessage
+== ttv/migami/migamigos/event/EntitySpawnEventHandler.class
+isHeartless
+setHeartless
+summonGroundCracks
+summonLightingBolt
+== ttv/migami/migamigos/event/ModCommandsRegister.class
+*()Lcom/mojang/brigadier/CommandDispatcher;
++(Lcom/mojang/brigadier/CommandDispatcher;)V
+== ttv/migami/migamigos/event/ModCommonEventBus.class
++ttv/migami/migamigos/entity/summon/IceLotus
+-ttv/migami/migamigos/entity/summon/HailShower
+== ttv/migami/migamigos/event/PlayerCloneHandler.class
+Enet/minecraftforge/event/entity/player/PlayerEvent$PlayerRespawnEvent
+GLnet/minecraftforge/event/entity/player/PlayerEvent$PlayerRespawnEvent;
+J(Lnet/minecraftforge/event/entity/player/PlayerEvent$PlayerRespawnEvent;)V
+PlayerRespawnEvent
+getPersistentData
+onPlayerRespawn
+== ttv/migami/migamigos/init/ModCommands.class
+ ()Lcom/mojang/brigadier/Command;
+&com/mojang/brigadier/CommandDispatcher
+(Lcom/mojang/brigadier/CommandDispatcher;
+(Lcom/mojang/brigadier/context/CommandContext;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
++(Lcom/mojang/brigadier/CommandDispatcher;)V
++com/mojang/brigadier/context/CommandContext
+-Lcom/mojang/brigadier/context/CommandContext;
+0(Lcom/mojang/brigadier/context/CommandContext;)I
+3com/mojang/brigadier/builder/LiteralArgumentBuilder
+4Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;
+4com/mojang/brigadier/builder/RequiredArgumentBuilder
+6()Lcom/mojang/brigadier/suggestion/SuggestionProvider;
+6com/mojang/brigadier/exceptions/CommandSyntaxException
+8com/mojang/brigadier/exceptions/BuiltInExceptionProvider
+:Lcom/mojang/brigadier/exceptions/BuiltInExceptionProvider;
+;com/mojang/brigadier/exceptions/DynamicCommandExceptionType
+?()Lcom/mojang/brigadier/exceptions/DynamicCommandExceptionType;
+I(Ljava/lang/String;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;
+IsHeartless
+L(Ljava/lang/Object;)Lcom/mojang/brigadier/exceptions/CommandSyntaxException;
+N(Lcom/mojang/brigadier/Command;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+Summoned a Heartless
+ULcom/mojang/brigadier/CommandDispatcher<Lnet/minecraft/commands/CommandSourceStack;>;
+X(Lcom/mojang/brigadier/CommandDispatcher<Lnet/minecraft/commands/CommandSourceStack;>;)V
+^(Lcom/mojang/brigadier/builder/ArgumentBuilder;)Lcom/mojang/brigadier/builder/ArgumentBuilder;
+`(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Lnet/minecraft/world/phys/Vec3;
+e(Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;)Lcom/mojang/brigadier/tree/LiteralCommandNode;
+executeSummonHeartless
+heartless
+heartlessParticles
+k(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+l(Lcom/mojang/brigadier/suggestion/SuggestionProvider;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder;
+lambda$executeSummonHeartless$7
+summon
+summonGroundCracks
+summonHeartless
+summonLightingBolt
+w(Ljava/lang/String;Lcom/mojang/brigadier/arguments/ArgumentType;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder;
+w(Ljava/util/stream/Stream;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+== ttv/migami/migamigos/init/ModEntities.class
+(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;
++ttv/migami/migamigos/entity/summon/IceLotus
+-ttv/migami/migamigos/entity/summon/HailShower
+;ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball
+Lnet/minecraftforge/registries/RegistryObject<Lnet/minecraft/world/entity/EntityType<Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;>;>;
+Lnet/minecraftforge/registries/RegistryObject<Lnet/minecraft/world/entity/EntityType<Lttv/migami/migamigos/entity/summon/HailShower;>;>;
+Lnet/minecraftforge/registries/RegistryObject<Lnet/minecraft/world/entity/EntityType<Lttv/migami/migamigos/entity/summon/IceLotus;>;>;
+SOUL_FIREBALL
+soul_fireball
+w(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)Lttv/migami/migamigos/entity/summon/IceLotus;
+y(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)Lttv/migami/migamigos/entity/summon/HailShower;
+== ttv/migami/migamigos/init/ModParticleTypes.class
+SOUL_LAVA_PARTICLE
+soul_lava
+== ttv/migami/migamigos/init/ModTags$Entities.class
+UNDEAD
+undead

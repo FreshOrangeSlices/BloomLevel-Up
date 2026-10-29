@@ -3,6 +3,7 @@ package com.freshorangeslices.bloomlevelup.debug;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,6 +38,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -462,6 +464,12 @@ public final class RegistryDump {
 		out.addProperty("id", BuiltInRegistries.ENTITY_TYPE.getKey(type).toString());
 		out.addProperty("category", type.getCategory().getName());
 		out.add("tags", strings(type.builtInRegistryHolder().tags().map(tag -> tag.location().toString()).sorted().toList()));
+		// Whether its mod gave it spawn rules (a SpawnPlacements entry): without one, a natural spawn ignores light,
+		// time of day and ground.
+		Boolean rules = hasSpawnRules(type);
+		if (rules != null) {
+			out.addProperty("spawnRules", rules);
+		}
 		Entity made = null;
 
 		try {
@@ -471,9 +479,11 @@ public final class RegistryDump {
 				out.add("classes", classes(made.getClass(), Entity.class));
 				out.addProperty("bossBar", keepsBossBar(made.getClass()));
 
-				// Whether it despawns once players are far away (mobs that don't pile up when spawned naturally).
+				// Whether it despawns once players are far away (mobs that don't pile up when spawned naturally): not
+				// when it's kept for good (Migamigos keeps every amigo) or far away doesn't count.
 				if (made instanceof Mob mob) {
-					out.addProperty("despawns", mob.removeWhenFarAway(16384.0));
+					out.addProperty("despawns", !mob.isPersistenceRequired() && !mob.requiresCustomPersistence()
+							&& mob.removeWhenFarAway(16384.0));
 				}
 
 				if (made instanceof LivingEntity living) {
@@ -492,6 +502,22 @@ public final class RegistryDump {
 		}
 
 		return out;
+	}
+
+	/** Whether SpawnPlacements has an entry for the type (its only static map), or null when it can't be read. */
+	private static Boolean hasSpawnRules(EntityType<?> type) {
+		try {
+			for (Field field : SpawnPlacements.class.getDeclaredFields()) {
+				if (Modifier.isStatic(field.getModifiers()) && Map.class.isAssignableFrom(field.getType())) {
+					field.setAccessible(true);
+					return ((Map<?, ?>) field.get(null)).containsKey(type);
+				}
+			}
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			// Read where it can be; the pack test treats a missing answer as unknown.
+		}
+
+		return null;
 	}
 
 	/** Whether the class (or a superclass) has a boss bar field: how 1.20.1 bosses show their health. */

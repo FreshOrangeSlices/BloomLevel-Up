@@ -230,7 +230,8 @@ def spawn_check(server_dir, dump_file, spec_file):
     do, and spawns.persistent lists the monsters kept anyway), when Skrythe's lair can go
     in a biome that isn't a mountain, when a Skarrier cave mob is still listed in the Nether or the End, when a biome list
     of the pack's reaches a dimension it doesn't name (Overworld only, unless it says), when a structure set isn't at
-    the pack's spacing, or when a mob the pack adds to a structure isn't in its spawns. Reports each
+    the pack's spacing, when a mob the pack adds to a structure isn't in its spawns, or when a mob it adds has no spawn
+    rules (its mod registered none) and no Easy Mob Spawn Control rule from the pack. Reports each
     overworld biome's modded share of the night's spawns, counted in mobs (weight x average group): about 1 in 5 is
     the aim. Mobs that spawn only underground, after the Wither or under a condition of their own (spawns.conditional)
     and quiet biomes are left out. Returns (failures, notes, report lines)."""
@@ -259,9 +260,15 @@ def spawn_check(server_dir, dump_file, spec_file):
     persistent = set(spawns.get("persistent", {}).get("mobs", []))
     failures, notes_extra = [], []
     listed = {s["type"] for b in biomes for v in b["spawns"].values() for s in v}
+    # Easy Mob Spawn Control's rules (the pack's config): what keeps a mob with no spawn rules of its own to the night.
+    assignments_file = os.path.join(server_dir, "config", "EasyMSC", "spawn_rule_assignments.json")
+    ruled = json.load(open(assignments_file)) if os.path.exists(assignments_file) else {}
     for mob, groups in sorted(added.items()):
         if mob not in listed:
             failures.append(f"spawns: {mob} ({', '.join(groups)}) isn't in any biome's spawns (its modifier didn't load)")
+        elif entities.get(mob, {}).get("spawnRules") is False and not ruled.get(mob):
+            failures.append(f"spawns: {mob} ({', '.join(groups)}) has no spawn rules of its own, so it would spawn in daylight, "
+                            f"in caves and on treetops: give it an Easy Mob Spawn Control rule (config/EasyMSC/spawn_rule_assignments.json)")
         elif (entities.get(mob, {}).get("despawns") is False and entities[mob].get("category") == "monster"
               and mob not in persistent):
             failures.append(f"spawns: {mob} ({', '.join(groups)}) never despawns, so natural spawns would pile up")
@@ -342,6 +349,9 @@ def spawn_check(server_dir, dump_file, spec_file):
              f"{median * 100:.0f}%, {land[0][0] * 100:.0f}% ({land[0][1]}) to {land[-1][0] * 100:.0f}% ({land[-1][1]})" if land else "spawns: no land biomes"]
     if roosts:
         notes.append("structure sets: " + ", ".join(roosts))
+    unruled = sorted(m for m in added if entities.get(m, {}).get("spawnRules") is False)
+    if unruled:
+        notes.append("spawn rules from the pack (their mods give none): " + ", ".join(f"{m} ({'/'.join(ruled.get(m, [])) or 'none'})" for m in unruled))
     notes += notes_extra
     # Biome tags the pack adds to (structures, roosts): each on some biome, and on one of BOP's when it names BOP's.
     have_bop = any(b["id"].startswith("biomesoplenty:") for b in biomes)

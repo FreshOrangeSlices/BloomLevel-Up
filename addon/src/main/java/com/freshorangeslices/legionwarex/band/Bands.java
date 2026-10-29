@@ -25,7 +25,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * Making a band: the leader first (no band without one), then its followers a few blocks apart, each on the ground
+ * Making a band: the leader first (no band without one), then its followers within 4 blocks of it, each on the ground
  * like a patrol member (an empty block to stand in, a block below a mob can spawn on, little torchlight). Spawned as a
  * patrol (MobSpawnType.PATROL): illagers then patrol, the leader with the ominous banner heading off and its
  * followers keeping up, as vanilla's patrols do. Pirates aren't patrollers: they keep near their captain
@@ -54,10 +54,18 @@ public final class Bands {
 	}
 
 	/**
-	 * A band of 'size' at the top of the column at 'at' (members spread up to 4 blocks apart, on the ground there).
+	 * A band of 'size' at the top of the column at 'at' (followers within 4 blocks of it, each on the ground there).
 	 * Empty when the leader can't stand there or its mod isn't installed; followers that can't stand are left out.
 	 */
 	public static List<Mob> spawn(ServerLevel level, BandKind kind, BlockPos at, RandomSource random, int size) {
+		return spawn(level, kind, at, random, size, true);
+	}
+
+	/**
+	 * As {@link #spawn(ServerLevel, BandKind, BlockPos, RandomSource, int)}; with onSurface false every member stands at
+	 * at's height instead of the top of its column (the game tests' closed rooms, whatever the world is around them).
+	 */
+	public static List<Mob> spawn(ServerLevel level, BandKind kind, BlockPos at, RandomSource random, int size, boolean onSurface) {
 		List<Mob> band = new ArrayList<>();
 		EntityType<?> leaderType = kind.pickLeader(random);
 
@@ -69,7 +77,10 @@ public final class Bands {
 		UUID leader = null;
 
 		for (int i = 0; i < Math.max(1, size); i++) {
-			pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
+			if (onSurface) {
+				pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
+			}
+
 			Mob mob = member(level, kind, i == 0 ? leaderType : kind.pickMember(random), pos.immutable(), random, leader);
 
 			if (mob == null && i == 0) {
@@ -84,8 +95,8 @@ public final class Bands {
 				band.add(mob);
 			}
 
-			pos.setX(pos.getX() + random.nextInt(5) - random.nextInt(5));
-			pos.setZ(pos.getZ() + random.nextInt(5) - random.nextInt(5));
+			// The next one up to 4 blocks from where the band started (vanilla walks on from the last one), so it stays together.
+			pos.set(at.getX() + random.nextInt(5) - random.nextInt(5), at.getY(), at.getZ() + random.nextInt(5) - random.nextInt(5));
 		}
 
 		return band;

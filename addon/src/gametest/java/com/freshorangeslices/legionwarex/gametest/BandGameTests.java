@@ -22,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.PatrollingMonster;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
@@ -44,11 +45,11 @@ public final class BandGameTests {
 	@GameTest(template = "empty")
 	public static void aWarBandIsAPatrolLedByTheBanner(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		BlockPos at = helper.absolutePos(new BlockPos(1, 1, 1));
-		List<Mob> band = Bands.spawn(level, BandKind.WAR, at, RandomSource.create(7), 5);
+		room(helper, -2, 9);
+		List<Mob> band = Bands.spawn(level, BandKind.WAR, helper.absolutePos(new BlockPos(4, 1, 4)), RandomSource.create(7), 5, false);
 
 		try {
-			helper.assertTrue(band.size() >= 3, "Most of a band of 5 found room on flat ground: " + Bands.describe(BandKind.WAR, band) + "; " + why(level, at));
+			helper.assertTrue(band.size() >= 3, "Most of a band of 5 found room on flat ground: " + Bands.describe(BandKind.WAR, band));
 			Mob leader = band.get(0);
 			helper.assertTrue(leader instanceof PatrollingMonster patroller && patroller.isPatrolLeader(), "The first is the patrol's leader: " + id(leader));
 			helper.assertTrue(leader.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof BannerItem, "The leader carries the ominous banner");
@@ -91,26 +92,22 @@ public final class BandGameTests {
 		helper.succeed();
 	}
 
-	/** Why a pillager leading a band wouldn't come at a column: each step of Bands.member, by hand. */
-	private static String why(ServerLevel level, BlockPos column) {
-		BlockPos top = level.getHeightmapPos(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column);
-		String out = "top " + top.toShortString() + " " + level.getBlockState(top) + " on " + level.getBlockState(top.below())
-				+ ", canStand " + Bands.canStand(level, top, EntityType.PILLAGER);
-		net.minecraft.world.entity.monster.Pillager pillager = EntityType.PILLAGER.create(level);
+	/**
+	 * A closed stone room around the test (a floor at y 0, air from 1 to 4, a ceiling and walls): the game test server
+	 * makes a normal world, so a test can sit in the sea or a hillside, and water flows into its cleared space.
+	 */
+	private static void room(GameTestHelper helper, int from, int to) {
+		for (int x = from; x <= to; x++) {
+			for (int z = from; z <= to; z++) {
+				boolean wall = x == from || x == to || z == from || z == to;
+				helper.setBlock(new BlockPos(x, 0, z), Blocks.STONE);
+				helper.setBlock(new BlockPos(x, 5, z), Blocks.STONE);
 
-		if (pillager == null) {
-			return out + ", no pillager made";
+				for (int y = 1; y <= 4; y++) {
+					helper.setBlock(new BlockPos(x, y, z), wall ? Blocks.STONE : Blocks.AIR);
+				}
+			}
 		}
-
-		pillager.setPatrolLeader(true);
-		pillager.findPatrolTarget();
-		pillager.moveTo(top.getX() + 0.5, top.getY(), top.getZ() + 0.5, 0.0F, 0.0F);
-		net.minecraftforge.event.ForgeEventFactory.onFinalizeSpawn(pillager, level, level.getCurrentDifficultyAt(top), net.minecraft.world.entity.MobSpawnType.PATROL, null, null);
-		out += ", after finalize removed " + pillager.isRemoved() + " (" + pillager.getRemovalReason() + "), head " + pillager.getItemBySlot(EquipmentSlot.HEAD);
-		boolean added = level.addFreshEntity(pillager);
-		out += ", added " + added + ", removed " + pillager.isRemoved() + " (" + pillager.getRemovalReason() + ")";
-		pillager.discard();
-		return out;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -118,8 +115,9 @@ public final class BandGameTests {
 	public static void aPirateBandKeepsToItsCaptainAndKillingItSummonsNoBoss(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
 		helper.assertTrue(ForgeRegistries.ENTITY_TYPES.containsKey(CAPTAIN), "Bosses'Rise is loaded in the dev run");
-		BlockPos at = helper.absolutePos(new BlockPos(1, 1, 1));
-		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, at, RandomSource.create(3), 4);
+		room(helper, -2, 9);
+		BlockPos at = helper.absolutePos(new BlockPos(4, 1, 4));
+		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, at, RandomSource.create(3), 4, false);
 		helper.assertTrue(band.size() >= 3, "Most of a pirate band of 4 found room: " + Bands.describe(BandKind.PIRATE, band));
 		Mob captain = band.get(0);
 		helper.assertTrue(captain.getType() == ForgeRegistries.ENTITY_TYPES.getValue(CAPTAIN), "A captain leads: " + id(captain));
@@ -136,7 +134,7 @@ public final class BandGameTests {
 		helper.assertTrue(band.stream().allMatch(Mob::isPersistenceRequired), "Pirates are kept for good by their mod");
 		helper.assertFalse(Despawning.keptByPlayer(captain), "Nothing keeps the captain");
 		Mob loner = helper.spawn((EntityType<Mob>) ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("block_factorys_bosses", "pirate_rook")),
-				new BlockPos(3, 2, 3));
+				new BlockPos(2, 1, 2));
 		helper.assertFalse(Bands.inBand(loner), "A pirate the add-on didn't send (the Kraken's crew) is left to its mod");
 		loner.discard();
 
@@ -154,11 +152,15 @@ public final class BandGameTests {
 	@GameTest(template = "empty")
 	public static void aBandMemberStandsOnTheGround(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		// The template (air) sits on the test floor, which is at y 0 beside the structure block: room just above the
-		// floor, none inside it, no ground in mid-air.
-		helper.assertTrue(Bands.canStand(level, helper.absolutePos(new BlockPos(1, 1, 1)), EntityType.PILLAGER), "On the floor");
-		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(1, 0, 1)), EntityType.PILLAGER), "Not inside the floor");
-		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(1, 5, 1)), EntityType.PILLAGER), "Not in mid-air");
+		room(helper, 0, 6);
+		helper.setBlock(new BlockPos(3, 1, 3), Blocks.WATER);
+		helper.setBlock(new BlockPos(4, 1, 2), Blocks.STONE);
+		// Room just above the floor; none inside it, in water, or on a block in mid-air's way (a lone stone, then air under 3 up).
+		helper.assertTrue(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 1, 2)), EntityType.PILLAGER), "On the floor");
+		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 0, 2)), EntityType.PILLAGER), "Not inside the floor");
+		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(3, 1, 3)), EntityType.PILLAGER), "Not in water");
+		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 3, 2)), EntityType.PILLAGER), "Not in mid-air");
+		helper.assertTrue(Bands.canStand(level, helper.absolutePos(new BlockPos(4, 2, 2)), EntityType.PILLAGER), "On a block");
 		helper.assertTrue(BandKind.byId("war") == BandKind.WAR && BandKind.byId("pirate") == BandKind.PIRATE && BandKind.byId("navy") == null,
 				"Bands by name, as the command takes them");
 		helper.succeed();

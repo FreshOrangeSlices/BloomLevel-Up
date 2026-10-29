@@ -8,7 +8,7 @@ server = zipfile.ZipFile(sys.argv[1])
 os.makedirs(sys.argv[2], exist_ok=True)
 for name in server.namelist():
     low = name.lower()
-    for key, out in (("easy_mob_spawn_control", "emsc.jar.bin"), ("soulslike-weaponry", "soulsweapons.jar.bin")):
+    for key, out in (("bookofdragons", "bookofdragons.jar.bin"),):
         if name.endswith(".jar") and key in low:
             data = server.read(name)
             open(os.path.join(sys.argv[2], out), "wb").write(data)

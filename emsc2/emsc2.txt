@@ -1,0 +1,308 @@
+## io/github/catomon/easymobspawncontrol/Storage.class static init
+static {};
+    Code:
+       0: invokestatic  #1495               // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #145                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #1497               // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #1498               // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #1502               // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #1505               // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #1509               // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #182                // Field GSON:Lcom/google/gson/Gson;
+      25: ldc_w         #1511               // String config
+      28: iconst_1
+      29: anewarray     #190                // class java/lang/String
+      32: dup
+      33: iconst_0
+      34: ldc_w         #1513               // String EasyMSC
+      37: aastore
+      38: invokestatic  #1518               // Method java/nio/file/Paths.get:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+      41: putstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+      44: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+      47: ldc_w         #1520               // String bans.json
+      50: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      55: putstatic     #320                // Field BANS_FILE:Ljava/nio/file/Path;
+      58: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+      61: ldc_w         #1526               // String spawn_rates.json
+      64: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      69: putstatic     #359                // Field SPAWN_RATES_FILE:Ljava/nio/file/Path;
+      72: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+      75: ldc_w         #1528               // String natural_spawn_rates.json
+      78: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      83: putstatic     #372                // Field NATURAL_SPAWN_RATES_FILE:Ljava/nio/file/Path;
+      86: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+      89: ldc_w         #1530               // String world_gen_spawn_rates.json
+      92: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      97: putstatic     #376                // Field WORLD_GEN_SPAWN_RATES_FILE:Ljava/nio/file/Path;
+     100: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     103: ldc_w         #1532               // String spawn_caps.json
+     106: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     111: putstatic     #380                // Field SPAWN_CAPS_FILE:Ljava/nio/file/Path;
+     114: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     117: ldc_w         #1534               // String dimension_bans.json
+     120: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     125: putstatic     #398                // Field DIMENSION_BANS_FILE:Ljava/nio/file/Path;
+     128: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     131: ldc_w         #1536               // String dimension_spawn_caps.json
+     134: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     139: putstatic     #389                // Field DIMENSION_SPAWN_CAPS_FILE:Ljava/nio/file/Path;
+     142: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     145: ldc_w         #1538               // String disabled_mob_spawn_types.json
+     148: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     153: putstatic     #407                // Field DISABLED_MOB_SPAWN_TYPES_FILE:Ljava/nio/file/Path;
+     156: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     159: ldc_w         #1540               // String biome_bans.json
+     162: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     167: putstatic     #415                // Field BIOME_BANS_FILE:Ljava/nio/file/Path;
+     170: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     173: ldc_w         #1542               // String biome_spawns.json
+     176: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     181: putstatic     #440                // Field BIOME_SPAWNS_FILE:Ljava/nio/file/Path;
+     184: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     187: ldc_w         #1544               // String biome_spawn_assignments.json
+     190: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     195: putstatic     #419                // Field BIOME_SPAWN_ASSIGNMENTS_FILE:Ljava/nio/file/Path;
+     198: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     201: ldc_w         #1546               // String spawn_rules.json
+     204: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     209: putstatic     #471                // Field SPAWN_RULES_FILE:Ljava/nio/file/Path;
+     212: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     215: ldc_w         #1548               // String spawn_rule_assignments.json
+     218: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     223: putstatic     #423                // Field SPAWN_RULE_ASSIGNMENTS_FILE:Ljava/nio/file/Path;
+     226: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     229: ldc_w         #1550               // String structure_spawns.json
+     232: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     237: putstatic     #485                // Field STRUCTURE_SPAWNS_FILE:Ljava/nio/file/Path;
+     240: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     243: ldc_w         #1552               // String structure_spawn_assignments.json
+     246: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     251: putstatic     #427                // Field STRUCTURE_SPAWN_ASSIGNMENTS_FILE:Ljava/nio/file/Path;
+     254: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     257: ldc_w         #1554               // String discard_chances.json
+     260: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     265: putstatic     #431                // Field DISCARD_CHANCES_FILE:Ljava/nio/file/Path;
+     268: getstatic     #135                // Field CONFIG_DIR:Ljava/nio/file/Path;
+     271: ldc_w         #1556               // String misc.json
+     274: invokeinterface #1524,  2         // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+     279: putstatic     #1351               // Field MISC_FILE:Ljava/nio/file/Path;
+     282: fconst_1
+     283: putstatic     #534                // Field maxSpawnRate:F
+     286: new           #361                // class java/util/HashMap
+     289: dup
+     290: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     293: putstatic     #370                // Field spawnRates:Ljava/util/Map;
+     296: new           #361                // class java/util/HashMap
+     299: dup
+     300: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     303: putstatic     #374                // Field naturalSpawnRates:Ljava/util/Map;
+     306: new           #361                // class java/util/HashMap
+     309: dup
+     310: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     313: putstatic     #378                // Field worldGenSpawnRates:Ljava/util/Map;
+     316: new           #361                // class java/util/HashMap
+     319: dup
+     320: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     323: putstatic     #387                // Field spawnCaps:Ljava/util/Map;
+     326: new           #361                // class java/util/HashMap
+     329: dup
+     330: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     333: putstatic     #396                // Field dimensionSpawnCaps:Ljava/util/Map;
+     336: new           #277                // class java/util/ArrayList
+     339: dup
+     340: invokespecial #278                // Method java/util/ArrayList."<init>":()V
+     343: putstatic     #357                // Field bannedMobs:Ljava/util/ArrayList;
+     346: new           #361                // class java/util/HashMap
+     349: dup
+     350: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     353: putstatic     #405                // Field dimensionBannedMobs:Ljava/util/Map;
+     356: new           #361                // class java/util/HashMap
+     359: dup
+     360: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     363: putstatic     #413                // Field disabledMobSpawnTypes:Ljava/util/Map;
+     366: new           #361                // class java/util/HashMap
+     369: dup
+     370: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     373: putstatic     #417                // Field biomeBannedMobs:Ljava/util/Map;
+     376: new           #361                // class java/util/HashMap
+     379: dup
+     380: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     383: putstatic     #438                // Field biomeSpawns:Ljava/util/Map;
+     386: new           #361                // class java/util/HashMap
+     389: dup
+     390: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     393: putstatic     #421                // Field biomeSpawnAssignments:Ljava/util/Map;
+     396: new           #361                // class java/util/HashMap
+     399: dup
+     400: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     403: putstatic     #469                // Field spawnRules:Ljava/util/Map;
+     406: new           #361                // class java/util/HashMap
+     409: dup
+     410: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     413: putstatic     #425                // Field spawnRuleAssignments:Ljava/util/Map;
+     416: new           #361                // class java/util/HashMap
+     419: dup
+     420: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     423: putstatic     #483                // Field structureSpawns:Ljava/util/Map;
+     426: new           #361                // class java/util/HashMap
+     429: dup
+     430: invokespecial #362                // Method java/util/HashMap."<init>":()V
+     433: putstatic     #429                // Field structureSpawnAssignments:Ljava/util/Map;
+     436: new           #361                // class java/util/HashMap
+     439: dup
+     440: invokespecial #362                // Meth
+## io/github/catomon/easymobspawncontrol/DespawnStorage.class static init
+static {};
+    Code:
+       0: invokestatic  #263                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #198                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #265                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #266                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #270                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #273                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #277                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #186                // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #282                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc_w         #284                // String despawn.json
+      31: invokeinterface #288,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      36: putstatic     #42                 // Field DESPAWN_FILE:Ljava/nio/file/Path;
+      39: new           #44                 // class java/util/HashMap
+      42: dup
+      43: invokespecial #45                 // Method java/util/HashMap."<init>":()V
+      46: putstatic     #53                 // Field despawnRules:Ljava/util/Map;
+      49: invokestatic  #292                // InterfaceMethod java/util/Map.of:()Ljava/util/Map;
+      52: putstatic     #102                // Field runtimeRules:Ljava/util/Map;
+      55: new           #9                  // class io/github/catomon/easymobspawncontrol/DespawnStorage$1
+      58: dup
+      59: invokespecial #293                // Method io/github/catomon/easymobspawncontrol/DespawnStorage$1."<init>":()V
+      62: invokevirtual #297                // Method io/github/catomon/easymobspawncontrol/DespawnStorage$1.getType:()Ljava/lang/reflect/Type;
+      65: putstatic     #47                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      68: invokestatic  #299                // Method reload:()V
+      71: return
+}
+
+## io/github/catomon/easymobspawncontrol/MobCapStorage.class static init
+static {};
+    Code:
+       0: invokestatic  #259                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #199                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #261                // class com/google/gson/GsonBuilder
+       9: dup
+      10: invokespecial #262                // Method com/google/gson/GsonBuilder."<init>":()V
+      13: invokevirtual #266                // Method com/google/gson/GsonBuilder.setPrettyPrinting:()Lcom/google/gson/GsonBuilder;
+      16: invokevirtual #269                // Method com/google/gson/GsonBuilder.disableHtmlEscaping:()Lcom/google/gson/GsonBuilder;
+      19: invokevirtual #273                // Method com/google/gson/GsonBuilder.create:()Lcom/google/gson/Gson;
+      22: putstatic     #187                // Field GSON:Lcom/google/gson/Gson;
+      25: getstatic     #278                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      28: ldc_w         #280                // String mob_caps.json
+      31: invokeinterface #284,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      36: putstatic     #41                 // Field MOB_CAPS_FILE:Ljava/nio/file/Path;
+      39: getstatic     #278                // Field io/github/catomon/easymobspawncontrol/Storage.CONFIG_DIR:Ljava/nio/file/Path;
+      42: ldc_w         #286                // String dimension_mob_caps.json
+      45: invokeinterface #284,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+      50: putstatic     #58                 // Field DIMENSION_MOB_CAPS_FILE:Ljava/nio/file/Path;
+      53: new           #43                 // class java/util/HashMap
+      56: dup
+      57: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+      60: putstatic     #56                 // Field mobCaps:Ljava/util/Map;
+      63: new           #43                 // class java/util/HashMap
+      66: dup
+      67: invokespecial #44                 // Method java/util/HashMap."<init>":()V
+      70: putstatic     #65                 // Field dimensionMobCaps:Ljava/util/Map;
+      73: new           #11                 // class io/github/catomon/easymobspawncontrol/MobCapStorage$1
+      76: dup
+      77: invokespecial #287                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$1."<init>":()V
+      80: invokevirtual #291                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$1.getType:()Ljava/lang/reflect/Type;
+      83: putstatic     #46                 // Field MAP_TYPE:Ljava/lang/reflect/Type;
+      86: new           #9                  // class io/github/catomon/easymobspawncontrol/MobCapStorage$2
+      89: dup
+      90: invokespecial #292                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$2."<init>":()V
+      93: invokevirtual #293                // Method io/github/catomon/easymobspawncontrol/MobCapStorage$2.getType:()Ljava/lang/reflect/Type;
+      96: putstatic     #60                 // Field NESTED_TYPE:Ljava/lang/reflect/Type;
+      99: invokestatic  #295                // Method reload:()V
+     102: return
+}
+
+## migamigos en_us
+{
+  "entity.migamigos.amigo": "Amigo",
+  "entity.migamigos.cocogoat": "Cocogoat",
+  "entity.migamigos.wavelyn": "Wavelyn",
+  "entity.migamigos.claymore": "Claymore",
+  "entity.migamigos.shybroom": "Shybroom",
+  "entity.migamigos.pollypounce": "Pollypounce",
+  "slot.migamigos.coming_soon": "Coming soon!",
+  "slot.migamigos.hide_armor_piece": "Hide Armor Piece",
+  "subtitle.migamigos.amigo.backpack_opening": "Backpack Opening",
+  "subtitle.migamigos.amigo.backpack_closing": "Backpack Closing",
+  "info.migamigos.favorite_item": "Favorite Item: ",
+  "info.migamigos.max_health": "Max Health: ",
+  "info.migamigos.armor": "Armor: ",
+  "info.migamigos.additional_power": "Additional Power: ",
+  "info.migamigos.tolerance": "Tolerance: ",
+  "info.migamigos.speed": "Speed: ",
+  "gui.migamigos.amigo_inventory.level": "Every Amigo Level increases the Amigo's stats!",
+  "gui.migamigos.amigo_inventory.attacking_any_entity.true": "Attacks All Hostiles",
+  "gui.migamigos.amigo_inventory.attacking_any_entity.false": "Attacks Only Targets",
+  "gui.migamigos.amigo_inventory.defend_player_only.true": "Defends Player Only",
+  "gui.migamigos.amigo_inventory.defend_player_only.false": "Defends Team",
+  "gui.migamigos.amigo_inventory.focus_on_main_target.true": "Focuses On Targets",
+  "gui.migamigos.amigo_inventory.focus_on_main_target.false": "Supports Team",
+  "gui.migamigos.amigo_inventory.allow_wandering.true": "Can Wander",
+  "gui.migamigos.amigo_inventory.allow_wandering.false": "Cannot Wander",
+  "gui.migamigos.amigo_inventory.following.true": "Is Following",
+  "gui.migamigos.amigo_inventory.following.false": "Is Staying",
+  "gui.migamigos.amigo_inventory.ride_with_player": "Get On %s",
+  "gui.migamigos.amigo_inventory.stop_riding": "Get Off %s",
+  "cutesy.migamigos.thanks": "Thank you for using Migamigos!",
+  "chat.migamigos.favorite_item": "They like %1$s!",
+  "chat.migamigos.foe_appeared": "A new foe has appeared!",
+  "broadcast.migamigos.amigo_visitor": "An Amigo is visiting your Realm!",
+  "warning.migamigos.wip": "This is a very early release of Migamigos!",
+  "warning.migamigos.wip_2": "Report any bug you find and stay tuned for future updates!",
+  "amigo.death.by_player": "%1$s was slain by %2$s!",
+  "amigo.death.by_entity": "%1$s was slain by a %2$s!",
+  "amigo.death.generic": "%1$s died!",
+  "itemGroup.migamigos": "Migamigos",
+  "item.migamigos.cocogoat_spawn_flower": "Cocogoat Spawn Flower",
+  "item.migamigos.wavelyn_spawn_cookie": "Wavelyn Spawn Cookie",
+  "item.migamigos.claymore_spawn_tortilla": "Claymore Spawn Tortilla",
+  "item.migamigos.pollypounce_spawn_parrot_plushie": "Pollypounce Spawn Parrot Plushie",
+  "item.migamigos.shybroom_spawn_broom": "Shybroom Spawn Broom"
+}
+## migamigos item models
+, claymore_spawn_tortilla, cocogoat_spawn_flower, pollypounce_spawn_parrot_plushie, shybroom_spawn_broom, wavelyn_spawn_cookie
+## migamigos strings
+-textures/projectile/wavelyn/soul_fireball.png
+5ttv/migami/migamigos/client/particle/SoulLavaParticle
+7Lttv/migami/migamigos/client/particle/SoulLavaParticle;
+7net/minecraftforge/event/entity/living/LivingDeathEvent
+9Lnet/minecraftforge/event/entity/living/LivingDeathEvent;
+;ttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball
+<(Lnet/minecraftforge/event/entity/living/LivingDeathEvent;)V
+=Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;
+>ttv/migami/migamigos/client/particle/SoulLavaParticle$Provider
+@Lttv/migami/migamigos/client/particle/SoulLavaParticle$Provider;
+Enet/minecraftforge/event/entity/player/PlayerEvent$PlayerRespawnEvent
+GLnet/minecraftforge/event/entity/player/PlayerEvent$PlayerRespawnEvent;
+J(Lnet/minecraftforge/event/entity/player/PlayerEvent$PlayerRespawnEvent;)V
+Jttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer
+LLttv/migami/migamigos/entity/client/projectile/wavelyn/SoulFireballRenderer;
+PlayerRespawnEvent
+SoulFireball.java
+SoulFireballRenderer.java
+SoulLavaParticle.java
+](Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;Lnet/minecraft/core/BlockPos;)I
+amigo.death.by_entity
+amigo.death.by_player
+amigo.death.generic
+deathMessage
+i(Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;)Lnet/minecraft/resources/ResourceLocation;
+onPlayerRespawn
+soulFireball
+soul_fire_blast
+soul_fireball
+soul_lava
+tLnet/minecraft/client/renderer/entity/EntityRenderer<Lttv/migami/migamigos/entity/projectile/wavelyn/SoulFireball;>;

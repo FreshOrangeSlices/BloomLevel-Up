@@ -263,13 +263,18 @@ def spawn_check(server_dir, dump_file, spec_file):
     # Easy Mob Spawn Control's rules (the pack's config): what keeps a mob with no spawn rules of its own to the night.
     assignments_file = os.path.join(server_dir, "config", "EasyMSC", "spawn_rule_assignments.json")
     ruled = json.load(open(assignments_file)) if os.path.exists(assignments_file) else {}
+    unruled_ok = set(spawns.get("unruled", {}).get("mobs", []))
+    # Its rules are checked against the world itself, so one on a mob that spawns while chunks generate (animals)
+    # waits on a chunk that can't load: the server hangs starting.
+    for mob in sorted(m for m, names in ruled.items() if names and entities.get(m, {}).get("category") == "creature"):
+        failures.append(f"spawns: {mob} is an animal with an Easy Mob Spawn Control spawn rule, which hangs world generation")
     for mob, groups in sorted(added.items()):
         if mob not in listed:
             failures.append(f"spawns: {mob} ({', '.join(groups)}) isn't in any biome's spawns (its modifier didn't load)")
-        elif entities.get(mob, {}).get("spawnRules") is False and not ruled.get(mob):
+        elif entities.get(mob, {}).get("spawnRules") is False and not ruled.get(mob) and mob not in unruled_ok:
             failures.append(f"spawns: {mob} ({', '.join(groups)}) has no spawn rules of its own, so it would spawn in daylight, "
                             f"in caves and on treetops: give it an Easy Mob Spawn Control rule (config/EasyMSC/spawn_rule_assignments.json)")
-        elif entities.get(mob, {}).get("spawnsInDaylight") and not ruled.get(mob):
+        elif entities.get(mob, {}).get("spawnsInDaylight") and not ruled.get(mob) and mob not in unruled_ok:
             failures.append(f"spawns: {mob} ({', '.join(groups)}) can spawn in daylight (its spawn rules don't ask for the dark, "
                             f"like illagers' patrol rules): give it an Easy Mob Spawn Control rule (config/EasyMSC/spawn_rule_assignments.json)")
         elif (entities.get(mob, {}).get("despawns") is False and entities[mob].get("category") == "monster"

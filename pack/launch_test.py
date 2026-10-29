@@ -241,7 +241,10 @@ def spawn_check(server_dir, dump_file, spec_file):
         for name in sorted(os.listdir(mods_dir)) if os.path.isdir(mods_dir) else []:
             for spawner in json.load(open(os.path.join(mods_dir, name))).get("spawners", []):
                 added.setdefault(spawner["type"], []).append(name[:-5])
-    if not added:
+    overridden = any(os.path.isdir(os.path.join(folder, pack, "data", ns, "worldgen", "structure"))
+                     for pack in (os.listdir(folder) if os.path.isdir(folder) else [])
+                     for ns in (os.listdir(os.path.join(folder, pack, "data")) if os.path.isdir(os.path.join(folder, pack, "data")) else []))
+    if not added and not overridden:
         return [], ["spawns: none added in this layer"], []
     if not os.path.exists(dump_file):
         return ["spawns: no registry dump to check them against"], [], []
@@ -282,20 +285,25 @@ def spawn_check(server_dir, dump_file, spec_file):
         astray = sorted(i for i, d in reach(values).items() if d not in spec.get("dimensions", ["overworld"]))
         if astray:
             failures.append(f"spawns: {label} reaches {', '.join(astray[:6])}{' ...' if len(astray) > 6 else ''} (outside its dimensions)")
-    # Mobs added to structures' own spawns (Forge structure modifiers): listed there, as the pack gives them.
+    # Structures the pack overrides (structure_spawns): every spawn its file lists is in the loaded structure's spawns.
     structures = {r["id"]: r for r in rows if r.get("kind") == "structure"}
     for pack in (sorted(os.listdir(folder)) if os.path.isdir(folder) else []):
-        mods_dir = os.path.join(folder, pack, "data", "legionwarex", "forge", "structure_modifier", "spawns")
-        for name in sorted(os.listdir(mods_dir)) if os.path.isdir(mods_dir) else []:
-            modifier = json.load(open(os.path.join(mods_dir, name)))
-            for ident in modifier["structures"]:
-                for spawner in modifier["spawners"]:
-                    want = {"type": spawner["type"], "weight": spawner["weight"], "min": spawner["minCount"], "max": spawner["maxCount"]}
-                    found = any(want in o.get("spawns", []) for o in (structures.get(ident) or {}).get("spawns", {}).values())
-                    if not found:
-                        failures.append(f"spawns: {ident} doesn't list {spawner['type']} {spawner['weight']} ({name[:-5]}; its structure modifier didn't load)")
-                    else:
-                        notes_extra.append(f"structure spawns: {ident} + {spawner['type']} {spawner['weight']} ({spawner['minCount']}-{spawner['maxCount']})")
+        data_dir = os.path.join(folder, pack, "data")
+        for namespace in sorted(os.listdir(data_dir)) if os.path.isdir(data_dir) else []:
+            base = os.path.join(data_dir, namespace, "worldgen", "structure")
+            for here, _, files in os.walk(base):
+                for file_name in sorted(f for f in files if f.endswith(".json")):
+                    ident = f"{namespace}:{os.path.relpath(os.path.join(here, file_name), base)[:-5]}"
+                    loaded = (structures.get(ident) or {}).get("spawns", {})
+                    for category, override in json.load(open(os.path.join(here, file_name))).get("spawn_overrides", {}).items():
+                        missing = [f"{s['type']} {s['weight']} ({s['minCount']}-{s['maxCount']})" for s in override.get("spawns", [])
+                                   if {"type": s["type"], "weight": s["weight"], "min": s["minCount"], "max": s["maxCount"]}
+                                   not in loaded.get(category, {}).get("spawns", [])]
+                        if missing:
+                            failures.append(f"spawns: {ident} doesn't list {', '.join(missing)} (its override didn't load)")
+                        else:
+                            notes_extra.append(f"structure spawns: {ident} {category}: " + ", ".join(
+                                f"{s['type'].split(':')[1]} {s['weight']}" for s in loaded[category]["spawns"]))
     # Book of Dragons' roosts: every type in BOP's biomes too, at the pack's spacing.
     sets = {r["id"]: r for r in rows if r.get("kind") == "structure_set"}
     roosts = []

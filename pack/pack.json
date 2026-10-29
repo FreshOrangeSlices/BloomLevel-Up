@@ -406,12 +406,19 @@
         "soulsweapons:nether_structures": {"spacing": 45, "separation": 22}
       },
       "structure_spawns": {
-        "_comment": "Mobs added to a structure's own spawns (Forge structure modifiers, forge:add_spawns), as {entity: [weight, min, max]}.",
+        "_comment": "Mobs added to a structure's own spawns, as {entity: [weight, min, max]}. Forge 1.20.1 has no structure forge:add_spawns, so the structure is overridden: its JSON from the jars, else base (vanilla's own, which no jar carries), with the spawners added.",
         "fortress_wither_skeletons": {
-          "why": "Fortresses: twice the wither skeletons (vanilla's weight 8 in fives, plus 8 more in fours to sixes), now that Cataclysm's Ignited Berserkers share the fortress too (FreshOrangeSlices). About half the fortress's mobs instead of a third.",
+          "why": "Fortresses: twice the wither skeletons (vanilla's weight 8 in fives, plus 8 more in fours to sixes), about half the fortress's mobs instead of a third, now that Cataclysm's Ignited Berserkers share it (still added on top) (FreshOrangeSlices).",
           "structures": ["minecraft:fortress"],
           "category": "monster",
-          "spawners": {"minecraft:wither_skeleton": [8, 4, 6]}
+          "spawners": {"minecraft:wither_skeleton": [8, 4, 6]},
+          "base": {"minecraft:fortress": {"type": "minecraft:fortress", "biomes": "#minecraft:has_structure/nether_fortress", "step": "underground_decoration",
+            "spawn_overrides": {"monster": {"bounding_box": "piece", "spawns": [
+              {"type": "minecraft:blaze", "weight": 10, "minCount": 2, "maxCount": 3},
+              {"type": "minecraft:zombified_piglin", "weight": 5, "minCount": 4, "maxCount": 4},
+              {"type": "minecraft:wither_skeleton", "weight": 8, "minCount": 5, "maxCount": 5},
+              {"type": "minecraft:skeleton", "weight": 2, "minCount": 5, "maxCount": 5},
+              {"type": "minecraft:magma_cube", "weight": 3, "minCount": 4, "maxCount": 4}]}}}}
         }
       },
       "add": {

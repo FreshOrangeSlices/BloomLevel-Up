@@ -335,7 +335,7 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
       lists, and spawners {entity: [weight, min, max]};
     - quiet: biomes no group adds to (unless the group says "quiet": false);
     - structure_sets: a mod's structure set (from its jar) with new spacing and separation, in chunks;
-    - structure_spawns: forge:add_spawns structure modifiers, mobs added to structures' own spawn lists.
+    - structure_spawns: mobs added to structures' own spawn lists (the structure overridden, spawners appended).
     Spawners, tags and modifiers of mods a layer leaves out are skipped (present: the namespaces in the layer's jars):
     a biome modifier naming an entity that doesn't exist would stop every world from loading."""
     out, made = {}, []
@@ -410,18 +410,33 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
         out[f"{root}/data/legionwarex/forge/biome_modifier/spawns/{name}.json"] = {
             "type": "forge:add_spawns", "biomes": biomes, "spawners": spawners}
         made.append(f"add {name} ({len(spawners)})")
-    # Mobs added to structures' own spawn lists (Forge structure modifiers, run after the mods' own).
+    # Mobs added to structures' own spawn lists. Forge 1.20.1 has no forge:add_spawns for structures, so the
+    # structure itself is overridden: its JSON from the jars (a mod's own, or a mod's override of vanilla's), else the
+    # group's "base" (vanilla's, which no jar carries), with the spawners added to its spawn_overrides. Mods' own
+    # structure modifiers (Cataclysm's) still apply on top.
     for name, spec in spawns.get("structure_spawns", {}).items():
         if name.startswith("_"):
             continue
         spawners = [{"type": entity, "weight": w, "minCount": lo, "maxCount": hi}
                     for entity, (w, lo, hi) in spec["spawners"].items() if have(entity)]
-        structures = [s for s in spec["structures"] if have(s)]
-        if not spawners or not structures:
-            continue
-        out[f"{root}/data/legionwarex/forge/structure_modifier/spawns/{name}.json"] = {
-            "type": "forge:add_spawns", "structures": structures, "spawners": spawners}
-        made.append(f"structure {name} ({len(spawners)})")
+        for ident in [s for s in spec["structures"] if have(s)] if spawners else []:
+            namespace, path = ident.split(":", 1)
+            original = None
+            for data in (jars or {}).values():
+                try:
+                    original = json.loads(zipfile.ZipFile(io.BytesIO(data)).read(f"data/{namespace}/worldgen/structure/{path}.json"))
+                    break
+                except (KeyError, zipfile.BadZipFile, ValueError):
+                    continue
+            if original is None:
+                original = json.loads(json.dumps((spec.get("base") or {}).get(ident))) if (spec.get("base") or {}).get(ident) else None
+            if original is None:
+                problems.append(f"pack_data.spawns.structure_spawns.{name}: no structure {ident} in the pack's jars or its base")
+                continue
+            override = original.setdefault("spawn_overrides", {}).setdefault(spec["category"], {"bounding_box": "piece", "spawns": []})
+            override["spawns"] = override.get("spawns", []) + spawners
+            out[f"{root}/data/{namespace}/worldgen/structure/{path}.json"] = original
+            made.append(f"structure {name} {ident}")
     if notes is not None and made:
         notes.append(f"spawns: {len([m for m in made if m.startswith('off')])} mod spawns off, "
                      f"{len([m for m in made if m.startswith('tag')])} biome tags, {len([m for m in made if m.startswith('add')])} spawn groups, "

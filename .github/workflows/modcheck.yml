@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/shipbreaker
-          python3 check/shipbreaker.py "$(ls pack/*server*.zip | head -1)" data-out/shipbreaker/shipbreaker.txt | tee summary.txt
-          echo "::notice title=shipbreaker::$(tr '\n' '|' < summary.txt)"
+          mkdir -p data-out/survey
+          python3 check/survey.py "$(ls pack/*server*.zip | head -1)" "$(find shots -name bloom-dump.jsonl | head -1)" data-out/survey | tee summary.txt
+          echo "::notice title=survey::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/shipbreaker && cp data-out/shipbreaker/* data/shipbreaker/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "shipbreaker" && git push -q origin ci/data && echo pushed
+          mkdir -p data/survey && cp data-out/survey/* data/survey/ && cp "$(find shots -name bloom-dump.jsonl | head -1)" data/survey/dump.jsonl && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "survey" && git push -q origin ci/data && echo pushed

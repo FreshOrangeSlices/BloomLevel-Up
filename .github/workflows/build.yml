@@ -344,6 +344,7 @@ jobs:
             game/logs/latest.log
             game/crash-reports
             server/bloom-dump.jsonl
+            server/legionwarex-terrain.jsonl
             game/tooltips.jsonl
             server/config
             server/world/serverconfig
@@ -358,6 +359,12 @@ jobs:
       matrix:
         layers: [1, 2, 3, 4, 5, 6]
         shot: [pack_title, pack_0, pack_back, pack_inventory, pack_mobs]
+        # The add-on's bands, called in front of the player: the whole pack only.
+        include:
+          - layers: 6
+            shot: pack_band_war
+          - layers: 6
+            shot: pack_band_pirate
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

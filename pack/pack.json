@@ -177,20 +177,24 @@
     "config/biomesoplenty/generation.toml": "\n[nether]\n\t#The weighting of bop biome regions in the nether.\n\tbop_nether_region_weight = 5\n\t#The weighting of rare bop biome regions in the nether.\n\tbop_nether_rare_region_weight = 2\n\n[overworld]\n\t#The weighting of primary bop biome regions in the overworld.\n\tbop_primary_overworld_region_weight = 10\n\t#The weighting of rare bop biome regions in the overworld.\n\tbop_overworld_rare_region_weight = 2\n\t#The weighting of secondary bop biome regions in the overworld.\n\tbop_secondary_overworld_region_weight = 8\n\n",
     "_mutantmonsters": "Mutant Monsters' spawn weights, as a share of each vanilla counterpart's: 10% (default 5%; FreshOrangeSlices: twice as common). Forge fills in the rest of the file.",
     "config/mutantmonsters-common.toml": "mutant_creeper_spawn_weight = 0.1\nmutant_enderman_spawn_weight = 0.1\nmutant_skeleton_spawn_weight = 0.1\nmutant_zombie_spawn_weight = 0.1\n",
+    "_bloomlevelup": "Bloom's XP, half as fast again in every category (FreshOrangeSlices' playtest: XP gain faster overall). Only these lines are set; Bloom fills in the rest of its file with its own defaults when it loads, and writes them back.",
+    "config/bloomlevelup.json": {"configVersion": 6, "utilityXpMultiplier": 1.5, "combatXpMultiplier": 1.5, "armorXpMultiplier": 1.5, "miscXpMultiplier": 1.5},
     "_easymsc": "Easy Mob Spawn Control's files (its in-game menu edits the same ones). Shybroom no longer lives in villages (FreshOrangeSlices found her in none of 10): its structure spawn lists are left empty, and she spawns in plains instead (spawns.add.migamigos_shybroom). The roaming Queen of Orchid and Draugr Boss despawn once idle for 2 minutes with no player within 64 blocks (unless name-tagged or in sight), and at most one of each is loaded at a time.",
     "config/EasyMSC/structure_spawns.json": [],
     "config/EasyMSC/structure_spawn_assignments.json": {},
     "config/EasyMSC/despawn.json": {"oddities:queen_of_orchid": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}, "soulsweapons:draugr_boss": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}},
     "config/EasyMSC/mob_caps.json": {"oddities:queen_of_orchid": {"enabled": true, "percent": false, "value": 1.0, "global": true}, "soulsweapons:draugr_boss": {"enabled": true, "percent": false, "value": 1.0, "global": true}},
-    "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Also for mobs whose rules allow daylight: Illager Invasion's illagers use vanilla's patrol rules (any light), so out of their structures they spawned by day (FreshOrangeSlices). Both rules hold in the Overworld only (elsewhere the mobs keep their own rules: the Graveyard's corrupted illagers in the Nether). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies, Illager Invasion's marauders, provokers, bashers and alchemists, the Graveyard's acolytes and corrupted pillagers and vindicators, Myths & Legends' possessed armor): night (13000-23000), sky light 8 or more (outdoors or under trees, not caves), no torchlight, standing on ground (the block below). Skarrier's Breacher and Dragger (cave mobs whose rules let them out by day): no sky light and no torchlight, so caves only, at any hour. Never on animals: Easy Mob Spawn Control checks a rule against the world itself, and animals spawn while chunks generate, so the check waits on a chunk that can't load until it's done (the server hung starting, build #282). The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
+    "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Also for mobs whose rules allow daylight: Illager Invasion's illagers use vanilla's patrol rules (any light), so out of their structures they spawned by day (FreshOrangeSlices). Both rules hold in the Overworld only (elsewhere the mobs keep their own rules: the Graveyard's corrupted illagers in the Nether). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies, Illager Invasion's marauders, provokers, bashers and alchemists, Myths & Legends' possessed armor): night (13000-23000), sky light 8 or more (outdoors or under trees, not caves), no torchlight, standing on ground (the block below). The Graveyard's acolytes and corrupted pillagers and vindicators (in swampy, magical and dark biomes, spawns.add.dark_crew): whenever it's dark (light 7 or less, as at night or under thick cover; FreshOrangeSlices), no torchlight, some sky (not caves), on the ground. The add-on's daytime war bands come as patrols and aren't held to these rules (FreshOrangeSlices: illagers by day are fine as war bands). Skarrier's Breacher and Dragger (cave mobs whose rules let them out by day): no sky light and no torchlight, so caves only, at any hour. Never on animals: Easy Mob Spawn Control checks a rule against the world itself, and animals spawn while chunks generate, so the check waits on a chunk that can't load until it's done (the server hung starting, build #282). The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
     "config/EasyMSC/spawn_rules.json": [{"name": "legionwarex_night_ground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxBlockLight": 0, "minSkyLight": 8, "dayFrom": 13000, "dayTo": 23000, "strict": false,
       "blockIds": ["minecraft:grass_block", "minecraft:dirt", "minecraft:coarse_dirt", "minecraft:podzol", "minecraft:rooted_dirt", "minecraft:moss_block", "minecraft:mud", "minecraft:mycelium", "minecraft:sand", "minecraft:red_sand", "minecraft:gravel", "minecraft:stone", "minecraft:calcite", "minecraft:snow", "minecraft:snow_block", "minecraft:packed_ice", "minecraft:dirt_path", "minecraft:clay", "minecraft:terracotta", "minecraft:white_terracotta", "minecraft:orange_terracotta", "minecraft:yellow_terracotta", "minecraft:brown_terracotta", "minecraft:red_terracotta", "minecraft:light_gray_terracotta", "biomesoplenty:origin_grass_block", "biomesoplenty:white_sand", "biomesoplenty:orange_sand", "biomesoplenty:black_sand"]},
-      {"name": "legionwarex_underground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxSkyLight": 0, "maxBlockLight": 0, "strict": false}],
+      {"name": "legionwarex_underground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxSkyLight": 0, "maxBlockLight": 0, "strict": false},
+      {"name": "legionwarex_dark", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxLight": 7, "maxBlockLight": 0, "minSkyLight": 1, "strict": false,
+      "blockIds": ["minecraft:grass_block", "minecraft:dirt", "minecraft:coarse_dirt", "minecraft:podzol", "minecraft:rooted_dirt", "minecraft:moss_block", "minecraft:mud", "minecraft:muddy_mangrove_roots", "minecraft:mycelium", "minecraft:sand", "minecraft:gravel", "minecraft:stone", "minecraft:clay", "minecraft:snow", "minecraft:snow_block", "minecraft:dirt_path", "biomesoplenty:origin_grass_block", "biomesoplenty:white_sand", "biomesoplenty:black_sand"]}],
     "config/EasyMSC/spawn_rule_assignments.json": {"oddities:queen_of_orchid": ["legionwarex_night_ground"], "soulsweapons:draugr_boss": ["legionwarex_night_ground"],
       "cataclysm:draugr": ["legionwarex_night_ground"], "cataclysm:elite_draugr": ["legionwarex_night_ground"], "cataclysm:royal_draugr": ["legionwarex_night_ground"],
       "irons_spellbooks:catacombs_zombie": ["legionwarex_night_ground"],
       "illagerinvasion:marauder": ["legionwarex_night_ground"], "illagerinvasion:provoker": ["legionwarex_night_ground"], "illagerinvasion:basher": ["legionwarex_night_ground"], "illagerinvasion:alchemist": ["legionwarex_night_ground"],
-      "graveyard:acolyte": ["legionwarex_night_ground"], "graveyard:corrupted_pillager": ["legionwarex_night_ground"], "graveyard:corrupted_vindicator": ["legionwarex_night_ground"],
+      "graveyard:acolyte": ["legionwarex_dark"], "graveyard:corrupted_pillager": ["legionwarex_dark"], "graveyard:corrupted_vindicator": ["legionwarex_dark"],
       "mythsandlegends:possessed_armor": ["legionwarex_night_ground"], "mythsandlegends:possessed_armor_archer": ["legionwarex_night_ground"],
       "skarrier_mobs:breacher": ["legionwarex_underground"], "skarrier_mobs:dragger": ["legionwarex_underground"]}
   },
@@ -353,6 +357,14 @@
     "recipe_edits": {
       "_comment": "Mods' recipes changed in place (the recipe from its jar, items swapped).",
       "zonis_companions:summon_item_craft": {"why": "Zoni's empty summon device: 8 amethyst shards around an iron block instead of a diamond block (FreshOrangeSlices: a bit easier)", "swap": {"minecraft:diamond_block": "minecraft:iron_block"}}
+    },
+    "worldgen": {
+      "_comment": "Worldgen files the pack replaces, at data/<namespace>/worldgen/<path>.json. They only shape chunks made after the change: an old world gets seams where new chunks meet old ones, so these are for new worlds. The pack test reads the terrain the server would make (the add-on's terrain survey, -Dlegionwarex.terrain) beside vanilla's for the same seed.",
+      "minecraft:density_function/overworld/erosion": {
+        "why": "Fewer and lower mountains (FreshOrangeSlices: too many of them, and too big; oceans are fine). Erosion is the noise that decides how rugged land is: low erosion is where peaks and slopes rise, both in the terrain's height and in which biome goes there, so lifting its low end gives fewer mountains everywhere, Biomes O' Plenty's land included. Vanilla's value x 0.9 + 0.1: -1 becomes -0.8, 0 becomes 0.1, 1 stays 1 (flat land and swamps, at the top, barely change). Continentalness (land and sea) is untouched.",
+        "json": {"type": "minecraft:flat_cache", "argument": {"type": "minecraft:add", "argument1": 0.1, "argument2": {"type": "minecraft:mul", "argument1": 0.9,
+          "argument2": {"type": "minecraft:shifted_noise", "noise": "minecraft:erosion", "shift_x": "minecraft:shift_x", "shift_y": 0.0, "shift_z": "minecraft:shift_z", "xz_scale": 0.25, "y_scale": 0.0}}}}
+      }
     },
     "spawns": {
       "_comment": "FreshOrangeSlices' playtest (2 hours, almost no modded mobs): the pack's natural spawns, aimed at about 1 in 5 of the mobs that spawn at night in every overworld biome (Biomes O' Plenty's included) being modded, about 1 in 20 being a structure's regulars out in biomes that fit them, bosses only in their lairs, at the same mob cap (vanilla's). Counted by mobs, not weight: vanilla monsters come in fours, most modded ones alone. Skarrier Mobs listed 15 of its mobs in every biome of every dimension at high weights, though each only spawns in one biome, underground, or after the Wither is beaten, so about half of all spawn picks failed; those are put back only where they can spawn. Graveyard and Cataclysm pick their biomes by tags, which only named vanilla biomes; the tags now take BOP's in. Mutant Monsters' weights are in its config (config_files). The pack test reports each biome's modded share (pack-spawns).",
@@ -586,22 +598,16 @@
           "spawners": {"legendary_monsters:bomber": [25, 1, 3]}
         },
         "forest_crew": {
-          "why": "About 1 in 20: Illager Invasion's fort crew, The Graveyard's corrupted illagers and Iron's Spells' catacombs zombies out of their forts, crypts and catacombs, in forests and taigas.",
+          "why": "About 1 in 20: Illager Invasion's fort crew and Iron's Spells' catacombs zombies out of their forts and catacombs, in forests and taigas (The Graveyard's corrupted illagers moved to dark_crew).",
           "category": "monster",
           "biomes": ["#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense"],
-          "spawners": {"illagerinvasion:marauder": [20, 1, 2], "illagerinvasion:provoker": [10, 1, 1], "illagerinvasion:basher": [10, 1, 2], "graveyard:corrupted_vindicator": [10, 1, 1], "graveyard:corrupted_pillager": [10, 1, 2], "graveyard:acolyte": [8, 1, 1], "irons_spellbooks:catacombs_zombie": [20, 1, 2]}
+          "spawners": {"illagerinvasion:marauder": [20, 1, 2], "illagerinvasion:provoker": [10, 1, 1], "illagerinvasion:basher": [10, 1, 2], "irons_spellbooks:catacombs_zombie": [20, 1, 2]}
         },
         "village_crew": {
-          "why": "About 1 in 20: The Graveyard's overrun-village crew, Illager Invasion's marauders and Iron's Spells' catacombs zombies on open land.",
+          "why": "About 1 in 20: The Graveyard's tormented villagers out of its overrun villages, Illager Invasion's marauders and Iron's Spells' catacombs zombies on open land (the overrun villages' corrupted illagers moved to dark_crew).",
           "category": "monster",
           "biomes": ["#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau"],
-          "spawners": {"graveyard:corrupted_pillager": [20, 1, 2], "graveyard:corrupted_vindicator": [15, 1, 1], "graveyard:acolyte": [10, 1, 1], "graveyard:tormented_villager": [10, 1, 1], "illagerinvasion:marauder": [12, 1, 2], "irons_spellbooks:catacombs_zombie": [20, 1, 2]}
-        },
-        "desert_crew": {
-          "why": "About 1 in 20: The Graveyard's desert-village crew in dry lands (Cataclysm's koboletons come by their tag above).",
-          "category": "monster",
-          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry/overworld", "#forge:is_sandy", "#forge:is_wasteland"],
-          "spawners": {"graveyard:corrupted_pillager": [15, 1, 2], "graveyard:corrupted_vindicator": [10, 1, 1]}
+          "spawners": {"graveyard:tormented_villager": [10, 1, 1], "illagerinvasion:marauder": [12, 1, 2], "irons_spellbooks:catacombs_zombie": [20, 1, 2]}
         },
         "snow_crew": {
           "why": "About 1 in 20: Cataclysm's draugr out of the Frosted Prison, in snowy biomes.",
@@ -614,6 +620,13 @@
           "category": "monster",
           "biomes": ["#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill"],
           "spawners": {"mythsandlegends:possessed_armor": [20, 1, 2], "mythsandlegends:possessed_armor_archer": [12, 1, 1]}
+        },
+        "dark_crew": {
+          "why": "The Graveyard's corrupted illagers (FreshOrangeSlices: not with the war bands, in swampy, magical and dark biomes; whenever it's dark there, by Easy Mob Spawn Control's legionwarex_dark rule), about 1 in 10 there: every swamp, Dark Forest, BOP's Ominous Woods, Mystic Grove (quiet otherwise, haunted by these), Fungal Jungle and dead forests. Auroral Garden stays peaceful. Out of forests, open land and deserts, where they were 1 in 20.",
+          "category": "monster",
+          "quiet": false,
+          "biomes": ["#forge:is_swamp", "minecraft:dark_forest", "biomesoplenty:ominous_woods", "biomesoplenty:mystic_grove", "biomesoplenty:fungal_jungle", "biomesoplenty:dead_forest", "biomesoplenty:old_growth_dead_forest"],
+          "spawners": {"graveyard:corrupted_pillager": [25, 1, 2], "graveyard:corrupted_vindicator": [20, 1, 2], "graveyard:acolyte": [12, 1, 1]}
         },
         "swamp_crew": {
           "why": "About 1 in 20: Illager Invasion's alchemists (they throw potions) in swamps.",

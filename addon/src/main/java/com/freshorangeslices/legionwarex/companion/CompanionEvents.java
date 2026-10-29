@@ -1,6 +1,7 @@
 package com.freshorangeslices.legionwarex.companion;
 
 import com.freshorangeslices.legionwarex.AddonConfig;
+import com.freshorangeslices.legionwarex.Despawning;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -11,7 +12,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -21,10 +21,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /** A befriended companion's death leaves its owner a keepsake; wild companions despawn like monsters. */
 public final class CompanionEvents {
-	/** Vanilla monsters' despawn distances, in blocks: at once past the first, now and then past the second. */
-	public static final int FAR = 128;
-	public static final int NEAR = 32;
-
 	private CompanionEvents() {
 	}
 
@@ -82,36 +78,14 @@ public final class CompanionEvents {
 
 	@SubscribeEvent
 	public static void onTick(LivingEvent.LivingTickEvent event) {
-		if (!(event.getEntity() instanceof Mob mob) || mob.tickCount % 20 != 0 || mob.level().isClientSide
-				|| !AddonConfig.wildDespawn() || !Companions.isWild(mob)) {
-			return;
-		}
-
-		Player nearest = mob.level().getNearestPlayer(mob, -1.0);
-
-		if (nearest == null) {
-			return;
-		}
-
-		double distance = nearest.distanceToSqr(mob);
-
-		if (despawns(distance, mob.getNoActionTime(), mob.getRandom())) {
-			mob.discard();
-		} else if (distance < NEAR * NEAR) {
-			mob.setNoActionTime(0);
+		if (event.getEntity() instanceof Mob mob && mob.tickCount % 20 == 0 && !mob.level().isClientSide
+				&& AddonConfig.wildDespawn() && Companions.isWild(mob)) {
+			Despawning.tick(mob);
 		}
 	}
 
-	/**
-	 * Vanilla's rule for a monster (Mob.checkDespawn), checked once a second instead of every tick: gone at once with
-	 * no player within 128 blocks; past 32, after 30 seconds without a player close, a 1 in 40 chance a second (1 in
-	 * 800 a tick).
-	 */
+	/** Vanilla's rule for a monster (see {@link Despawning#despawns}). */
 	public static boolean despawns(double distanceSqr, int noActionTicks, RandomSource random) {
-		if (distanceSqr > FAR * FAR) {
-			return true;
-		}
-
-		return distanceSqr > NEAR * NEAR && noActionTicks > 600 && random.nextInt(40) == 0;
+		return Despawning.despawns(distanceSqr, noActionTicks, random);
 	}
 }

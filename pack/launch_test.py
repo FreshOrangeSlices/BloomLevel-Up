@@ -512,6 +512,102 @@ def capture(folder, name):
     return os.path.exists(path)
 
 
+def lines_since(process, mark, pattern, limit):
+    """The first line from index {mark} on matching {pattern}, waiting up to {limit} seconds; None if none came."""
+    end = time.time() + limit
+    while time.time() < end:
+        for line in process.lines[mark:]:
+            if re.search(pattern, line):
+                return line
+        time.sleep(0.5)
+    return None
+
+
+def band_check(server, player, entities, shots):
+    """The LegionWareX add-on's bands, called by its command in front of the player (9 blocks ahead): a war band of 5
+    and a pirate band of 4. Each must come whole, the war band led by its banner carrier; each is captured, then
+    cleared. A band whose mod isn't in this layer is only noted. Returns (failures, notes)."""
+    failures, notes = [], []
+    wanted = {"war": ("minecraft:pillager", 5), "pirate": ("block_factorys_bosses:pirate_captain", 4)}
+    server.send(f"effect give {player} minecraft:resistance 60 4 true")  # they attack at once
+    for kind, (leader, size) in wanted.items():
+        if leader not in entities and not leader.startswith("minecraft:"):
+            notes.append(f"add-on: no {kind} band in this layer (no {leader.split(':')[0]})")
+            continue
+        mark = len(server.lines)
+        server.send(f"execute as {player} at @s positioned ^ ^ ^9 run legionwarex band {kind} {size}")
+        line = lines_since(server, mark, r"LegionWareX band: (no |\w+ band of)", 20)
+        if line is None:
+            failures.append(f"add-on: /legionwarex band {kind} said nothing (is the command there?)")
+            continue
+        made = re.search(r"(\w+) band of (\d+) at [^:]+: (.*)$", line)
+        if not made:
+            failures.append(f"add-on: no {kind} band: {line.strip()[-300:]}")
+            continue
+        count, members = int(made.group(2)), re.sub(r"\s*\(by command\)$", "", made.group(3).strip())
+        notes.append(f"add-on: {kind} band of {count}: {members}")
+        if count < size - 1:
+            failures.append(f"add-on: a {kind} band of {size} came with {count} on flat ground: {members}")
+        if kind == "war" and "banner" not in members:
+            failures.append(f"add-on: the war band's leader carries no banner: {members}")
+        time.sleep(4)
+        capture(shots, f"pack_band_{kind}")
+        # Still there a moment later (Easy Mob Spawn Control or another mod could take them away as they join).
+        mark = len(server.lines)
+        server.send(f"execute as {player} at @s run kill @e[tag=legionwarex_band,distance=..64]")
+        killed = lines_since(server, mark, r"Killed (\d+) entities|Killed [^\n]+|No entity was found", 10)
+        gone = re.search(r"Killed (\d+) entities", killed or "")
+        if killed and "No entity was found" in killed:
+            failures.append(f"add-on: the {kind} band was gone before it could be cleared (something removed it as it joined)")
+        elif gone and int(gone.group(1)) < count:
+            notes.append(f"add-on: {gone.group(1)} of the {kind} band's {count} were still there after 4 seconds")
+        time.sleep(3)
+        server.send(f"execute as {player} at @s run kill @e[type=item,distance=..64]")
+    server.send(f"effect clear {player}")
+    return failures, notes
+
+
+def terrain_check(server_dir, spec_file):
+    """The add-on's terrain survey (-Dlegionwarex.terrain): the Overworld the server would make beside vanilla's for the
+    same seed, and where a new world's spawn goes. Fails when the survey didn't run, a spawn search found no mainland,
+    or (with the pack's erosion change) the pack's land has no fewer mountains than vanilla's. Returns
+    (failures, notes, report lines)."""
+    failures, notes, report = [], [], []
+    path = os.path.join(server_dir, "legionwarex-terrain.jsonl")
+    if not os.path.exists(path):
+        return ["add-on: the terrain survey wrote nothing (legionwarex-terrain.jsonl)"], notes, report
+    rows = [json.loads(line) for line in open(path) if line.strip()]
+    for row in rows:
+        report.append(json.dumps(row))
+        if row.get("kind") == "error":
+            failures.append(f"add-on: the terrain survey failed: {row.get('error')}")
+    terrain = {row["setup"]: row for row in rows if row.get("kind") == "terrain"}
+    if "pack" in terrain and "vanilla" in terrain:
+        pack, vanilla = terrain["pack"], terrain["vanilla"]
+        pct = lambda v: f"{v * 100:.1f}%"
+        notes.append("terrain (pack vs vanilla, same seed): mountain biomes " + pct(pack["mountainBiomes"]) + " vs " + pct(vanilla["mountainBiomes"])
+                     + ", peaks " + pct(pack["peakBiomes"]) + " vs " + pct(vanilla["peakBiomes"])
+                     + "; land over 130 " + pct(pack["over130"]) + " vs " + pct(vanilla["over130"])
+                     + ", over 160 " + pct(pack["over160"]) + " vs " + pct(vanilla["over160"])
+                     + ", highest " + str(pack["landMax"]) + " vs " + str(vanilla["landMax"])
+                     + "; land " + pct(pack["land"]) + " vs " + pct(vanilla["land"]))
+        spec = json.load(open(spec_file))
+        if "minecraft:density_function/overworld/erosion" in spec.get("pack_data", {}).get("worldgen", {}) \
+                and pack["mountainBiomes"] > vanilla["mountainBiomes"] * 0.85:
+            failures.append("terrain: the pack's erosion change left as many mountains as vanilla's ("
+                            + pct(pack["mountainBiomes"]) + " vs " + pct(vanilla["mountainBiomes"]) + ")")
+    else:
+        failures.append("add-on: the terrain survey has no pack/vanilla rows")
+    for row in [r for r in rows if r.get("kind") == "spawn"]:
+        old = row.get("vanillaSearch", {})
+        if not row.get("found"):
+            failures.append(f"terrain: no mainland spawn for seed {row.get('seed')}")
+            continue
+        notes.append(f"spawn, seed {row['seed']}: {row['x']}, {row['y']}, {row['z']} ({row['biome']}, continentalness {row['continentalness']}); "
+                     f"vanilla's search: {old.get('x')}, {old.get('z')} ({old.get('biome')}, {old.get('continentalness')})")
+    return failures, notes, report
+
+
 def main():
     server_dir, game_dir, shots = sys.argv[1], os.path.abspath(sys.argv[2]), sys.argv[3]
     os.makedirs(shots, exist_ok=True)
@@ -533,6 +629,10 @@ def main():
     existing = open(jvm_args).read() if os.path.exists(jvm_args) else ""
     if "bloomlevelup.dump" not in existing:
         open(jvm_args, "a").write(("" if existing.endswith("\n") or not existing else "\n") + "-Dbloomlevelup.dump=bloom-dump.jsonl\n")
+    # The add-on's terrain survey (the Overworld this server would make, beside vanilla's), for the terrain check.
+    existing = open(jvm_args).read()
+    if "legionwarex.terrain" not in existing:
+        open(jvm_args, "a").write("-Dlegionwarex.terrain=legionwarex-terrain.jsonl\n")
     server = Process(["sh", "start.sh"], server_dir, stdin=True)
     if not server.wait_for(r"\]: Done \(|Done \([0-9.]+s\)!", 600):
         print(f"::error title=pack-launch::The server didn't come up. Last lines:%0A{esc(chr(10).join(server.lines[-40:])[:3800])}")
@@ -601,6 +701,12 @@ def main():
             text = chr(10).join(mob_failures + mob_warnings)
             for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
                 print(f"::warning title=pack-mobs-{n}::{esc(text[i:i + 3900])}")
+        if any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(server_dir, "mods"))):
+            server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
+            band_failures, band_notes = band_check(server, PLAYER, entities, shots)
+            failures += band_failures
+            notes += band_notes
+            progress("band check done")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")
@@ -632,6 +738,13 @@ def main():
             failures.append(f"add-on: its companion tag has {companions}, not Migamigos' five")
         else:
             notes.append(f"add-on: loaded; companions it keeps: {', '.join(companions) or 'none in this layer'}")
+        terrain_failures, terrain_notes, terrain_report = terrain_check(server_dir, os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
+        failures += terrain_failures
+        notes += terrain_notes
+        if terrain_report:
+            text = chr(10).join(terrain_report)
+            for n, i in enumerate(range(0, min(len(text), 3900 * 2), 3900)):
+                print(f"::notice title=pack-terrain-{n}::{esc(text[i:i + 3900])}")
     # Easy Mob Spawn Control's files from the pack (Shybroom's village spawns, boss despawn rules and caps) must load.
     emsc = [l for l in server.lines if ("EasyMSC" in l or "easymobspawncontrol" in l.lower()) and ("Failed to read" in l or "Exception" in l)]
     if emsc:

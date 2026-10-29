@@ -278,7 +278,10 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
     only hidden (listed in notes).
 
     recipe_edits changes a mod's recipe in place: {recipe id: {"swap": {old item: new item}}}, from the recipe in the
-    jars."""
+    jars.
+
+    worldgen replaces worldgen files: {"<namespace>:<path under worldgen>": {"why": ..., "json": {...}}}, written to
+    data/<namespace>/worldgen/<path>.json (a jar that carries the same file is noted: the pack's wins)."""
     if not data:
         return {}
     if not have_loader:
@@ -325,6 +328,17 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
                 problems.append(f"pack_data.recipe_edits: {ident} has no {old_item}")
             original = original.replace(f'"{old_item}"', f'"{new_item}"')
         out[f"{root}/data/{namespace}/recipes/{path}.json"] = json.loads(original)
+    # Worldgen files replaced outright (vanilla's or a mod's): the pack's data pack loads after both.
+    for ident, spec in data.get("worldgen", {}).items():
+        if ident.startswith("_"):
+            continue
+        namespace, path = ident.split(":", 1)
+        target = f"data/{namespace}/worldgen/{path}.json"
+        out[f"{root}/{target}"] = spec["json"]
+        if notes is not None:
+            carried = [name for name, jar_data in (jars or {}).items() if target in zipfile.ZipFile(io.BytesIO(jar_data)).namelist()] \
+                if jars else []
+            notes.append(f"worldgen: {ident} replaced" + (f" (also in {', '.join(os.path.basename(c) for c in carried)}; the pack's wins)" if carried else ""))
     hidden = list(dict.fromkeys(grouped("hidden_items") + removed))
     if hidden:
         out[f"{root}/data/c/tags/items/hidden_from_recipe_viewers.json"] = {

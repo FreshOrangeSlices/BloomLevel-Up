@@ -57,7 +57,8 @@ minecraft {
 			args '--nogui'
 		}
 
-		// A real dedicated server with Migamigos boots, runs the @GameTest methods in src/gametest and stops
+		// A real dedicated server with Migamigos, Illager Invasion and Bosses'Rise boots, runs the @GameTest methods in
+		// src/gametest and stops
 		// (`./gradlew -p addon runGameTestServer`).
 		gameTestServer {
 			workingDirectory project.file('run/gametest')
@@ -94,10 +95,14 @@ repositories {
 dependencies {
 	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-	// Migamigos and what it needs, in the dev runs only, for the game tests.
+	// The mods the add-on works with, and what they need, in the dev runs only, for the game tests: Migamigos
+	// (companions), Illager Invasion (war bands) and Bosses'Rise (pirate bands).
 	runtimeOnly fg.deobf("maven.modrinth:migamigos:${migamigos_version}")
 	runtimeOnly fg.deobf("maven.modrinth:geckolib:${geckolib_version}")
 	runtimeOnly fg.deobf("curse.maven:framework-549225:${framework_file}")
+	runtimeOnly fg.deobf("maven.modrinth:illager-invasion:${illager_invasion_version}")
+	runtimeOnly fg.deobf("maven.modrinth:puzzles-lib:${puzzles_lib_version}")
+	runtimeOnly fg.deobf("maven.modrinth:bossesrise:${bossesrise_version}")
 }
 
 def resourceProps = [

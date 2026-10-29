@@ -550,7 +550,7 @@ def band_check(server, player, entities, shots):
             failures.append(f"add-on: a {kind} band of {size} came with {count} on flat ground: {members}")
         if kind == "war" and "banner" not in members:
             failures.append(f"add-on: the war band's leader carries no banner: {members}")
-        time.sleep(4)
+        time.sleep(1.5 if kind == "war" else 4)  # illagers charge at once; pirates take their time
         capture(shots, f"pack_band_{kind}")
         # Still there a moment later (Easy Mob Spawn Control or another mod could take them away as they join).
         mark = len(server.lines)
@@ -560,7 +560,7 @@ def band_check(server, player, entities, shots):
         if killed and "No entity was found" in killed:
             failures.append(f"add-on: the {kind} band was gone before it could be cleared (something removed it as it joined)")
         elif gone and int(gone.group(1)) < count:
-            notes.append(f"add-on: {gone.group(1)} of the {kind} band's {count} were still there after 4 seconds")
+            notes.append(f"add-on: {gone.group(1)} of the {kind} band's {count} were still there a few seconds later")
         time.sleep(3)
         server.send(f"execute as {player} at @s run kill @e[type=item,distance=..64]")
     server.send(f"effect clear {player}")

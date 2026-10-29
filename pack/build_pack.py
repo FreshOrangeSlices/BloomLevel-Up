@@ -95,8 +95,16 @@ On your own PC
    It starts with 5 GB of memory: change -Xmx5G in user_jvm_args.txt if your PC needs it lower.
 
 On a host (Shockbyte and similar)
-Set the server type to Forge 1.20.1 (version 47.3.0 or newer), then upload the mods folder.
-allow-flight=true and the other lines in server.properties are worth copying into the host's settings.
+1. Set the server type to Forge 1.20.1, version {forge} (or the newest 47.4 the host offers), on Java 17, and start it
+   once so it installs Forge. Then stop it.
+2. Upload this zip's mods and config folders into the server's main folder, replacing what's there. Both are needed:
+   config holds the pack's own data pack (spawns, removed items) and settings. SFTP (FileZilla) is easiest for this
+   many files; or zip the two folders, upload that through the host's file manager and unzip it there.
+3. Copy the lines from server.properties here into the host's server.properties. allow-flight=true matters: without
+   it, players get kicked for "flying" on dragons and mounts.
+Skip forge-installer.jar, start.bat, start.sh and eula.txt: the host does those.
+To update later: stop the server, upload the new build's mods and config folders over the old ones (delete the old
+mods folder first, so no old jar stays behind), start it again. The world stays.
 """
 
 
@@ -800,7 +808,7 @@ def main():
         server.writestr("forge-installer.jar", installer)
         for file_name, text in (("start.bat", START_BAT.replace("\n", "\r\n")), ("eula.txt", EULA), ("server.properties", SERVER_PROPERTIES),
                                 ("README.txt", README)):
-            server.writestr(file_name, text.replace("{name}", name))
+            server.writestr(file_name, text.replace("{name}", name).replace("{forge}", f"{game}-{spec['forge']}"))
         script = zipfile.ZipInfo("start.sh")
         script.external_attr = 0o755 << 16  # executable when unzipped
         script.compress_type = zipfile.ZIP_DEFLATED

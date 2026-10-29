@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/companions
+          rm -rf data-out; mkdir -p data-out/companions
           python3 check/companions.py "$(ls pack/*server*.zip | head -1)" data-out/companions | tee summary.txt
           echo "::notice title=companions::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/companions && cp data-out/companions/* data/companions/ && cd data && git add -A
+          mkdir -p data/finders && cp -r data-out/companions/* data/finders/ && cd data && git add -A
           git -c user.name=ci -c user.email=ci@example.invalid commit -qm "companions" && git push -q origin ci/data && echo pushed

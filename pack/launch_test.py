@@ -571,7 +571,7 @@ def band_check(server, player, entities, shots):
 def terrain_check(server_dir, spec_file):
     """The add-on's terrain survey (-Dlegionwarex.terrain): the Overworld the server would make beside vanilla's for the
     same seed, and where a new world's spawn goes. Fails when the survey didn't run, a spawn search found no mainland,
-    or (with the pack's erosion change) the pack has more than 60% of vanilla's land over y 130. Returns
+    or (with the pack's erosion change) the pack keeps more than 60% of both vanilla's peaks and its land over y 130. Returns
     (failures, notes, report lines)."""
     failures, notes, report = [], [], []
     path = os.path.join(server_dir, "legionwarex-terrain.jsonl")
@@ -593,12 +593,15 @@ def terrain_check(server_dir, spec_file):
                      + ", highest " + str(pack["landMax"]) + " vs " + str(vanilla["landMax"])
                      + "; land " + pct(pack["land"]) + " vs " + pct(vanilla["land"]))
         spec = json.load(open(spec_file))
-        # The erosion change pulls in the low end, where the high land is: land over y 130 must fall well below
-        # vanilla's (when the seed has some). Mountain biomes are only reported: windswept hills and meadows, which
-        # sit higher in erosion, keep their share by design.
-        if "minecraft:density_function/overworld/erosion" in spec.get("pack_data", {}).get("worldgen", {}) \
-                and vanilla["over130"] >= 0.005 and pack["over130"] > vanilla["over130"] * 0.6:
-            failures.append("terrain: the pack's erosion change left nearly as much land over y 130 as vanilla's ("
+        # The erosion change pulls in the low end, where the peaks and most high land are: the peaks or the land over
+        # y 130 must fall well below vanilla's (in a seed that has some; a few high spots come from other noise, and
+        # windswept hills and meadows sit higher in erosion and keep their share by design, so mountain biomes are
+        # only reported).
+        some = vanilla["peakBiomes"] >= 0.003 or vanilla["over130"] >= 0.005
+        fewer = pack["peakBiomes"] <= vanilla["peakBiomes"] * 0.6 or pack["over130"] <= vanilla["over130"] * 0.6
+        if "minecraft:density_function/overworld/erosion" in spec.get("pack_data", {}).get("worldgen", {}) and some and not fewer:
+            failures.append("terrain: the pack's erosion change left nearly as many peaks and as much land over y 130 as vanilla's ("
+                            + pct(pack["peakBiomes"]) + " vs " + pct(vanilla["peakBiomes"]) + "; "
                             + pct(pack["over130"]) + " vs " + pct(vanilla["over130"]) + ")")
     else:
         failures.append("add-on: the terrain survey has no pack/vanilla rows")
@@ -769,7 +772,8 @@ def main():
         failures.append(f"Fresh Animations isn't on in options.txt ({packs_line or 'no resourcePacks line'})")
     # The pack's defaults for mods that read them from defaultconfigs/ on a first start: Xaero's Minimap locked north.
     xaero_default = os.path.join(game_dir, "defaultconfigs", "xaero", "minimap", "profiles", "default.cfg")
-    if os.path.exists(xaero_default):
+    has_minimap = any(f.startswith("xaerominimap") for f in os.listdir(os.path.join(game_dir, "mods")))
+    if os.path.exists(xaero_default) and has_minimap:
         profile = os.path.join(game_dir, "config", "xaero", "minimap", "profiles", "default.cfg")
         text = open(profile).read() if os.path.exists(profile) else ""
         if not re.search(r"(?m)^minimap_north_locked\s*=\s*true\s*$", text):

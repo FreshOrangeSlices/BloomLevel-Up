@@ -1,0 +1,356 @@
+LOG [18:52:27] [main/INFO]: Found mod file xaerominimap-forge-1.20.1-26.6.0.jar of type MOD with provider {mods folder locator at /home/runner/work/BloomLevel-Up/BloomLevel-Up/game/mods}
+LOG [18:52:27] [main/INFO]: Found mod file xaeroworldmap-forge-1.20.1-1.47.0.jar of type MOD with provider {mods folder locator at /home/runner/work/BloomLevel-Up/BloomLevel-Up/game/mods}
+LOG [18:52:29] [main/INFO]: Found mod file xaerolib-forge-1.20.1-1.7.3.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@7ed9499e
+LOG 	- xaerominimap 26.6.0
+LOG 		\-- xaerolib 1.7.3
+LOG 	- xaeroworldmap 1.47.0
+LOG [18:52:47] [modloading-worker-0/INFO]: Registering common data for channel xaeroworldmap:main!
+LOG [18:52:47] [modloading-worker-0/INFO]: Registering client data for channel xaeroworldmap:main!
+LOG [18:52:47] [modloading-worker-0/INFO]: Loading primary common config for channel xaeroworldmap:main!
+LOG [18:52:47] [modloading-worker-0/INFO]: Loading server config profiles for channel xaeroworldmap:main!
+LOG [18:52:47] [modloading-worker-0/INFO]: Loading primary client config for channel xaeroworldmap:main!
+LOG [18:52:47] [modloading-worker-0/INFO]: Loading client config profiles for channel xaeroworldmap:main!
+LOG [18:52:49] [modloading-worker-0/INFO]: Registering common data for channel xaerolib:main!
+LOG [18:52:49] [modloading-worker-0/INFO]: Registering client data for channel xaerolib:main!
+LOG [18:52:49] [modloading-worker-0/INFO]: Loading primary common config for channel xaerolib:main!
+LOG [18:52:49] [modloading-worker-0/INFO]: Loading server config profiles for channel xaerolib:main!
+LOG [18:52:49] [modloading-worker-0/INFO]: Loading primary client config for channel xaerolib:main!
+LOG [18:52:49] [modloading-worker-0/INFO]: Loading client config profiles for channel xaerolib:main!
+LOG [18:52:50] [modloading-worker-0/INFO]: Xaero's Minimap: World Map found!
+LOG [18:52:50] [modloading-worker-0/INFO]: Xaero's Minimap: No Vivecraft!
+LOG [18:52:50] [modloading-worker-0/INFO]: Xaero's Minimap: Iris found!
+LOG [18:52:50] [modloading-worker-0/INFO]: Xaero's Minimap: Waystones found!
+LOG [18:52:50] [modloading-worker-0/INFO]: Registering common data for channel xaerominimap:main!
+LOG [18:52:51] [modloading-worker-0/INFO]: Registering client data for channel xaerominimap:main!
+LOG [18:52:51] [modloading-worker-0/INFO]: Loading primary common config for channel xaerominimap:main!
+LOG [18:52:51] [modloading-worker-0/INFO]: Loading server config profiles for channel xaerominimap:main!
+LOG [18:52:51] [modloading-worker-0/INFO]: Loading primary client config for channel xaerominimap:main!
+LOG [18:52:51] [modloading-worker-0/INFO]: Loading client config profiles for channel xaerominimap:main!
+LOG [18:53:07] [Worker-ResourceReload-0/INFO]: Loading XaeroLib common 1/2!
+LOG [18:53:07] [Worker-ResourceReload-1/INFO]: Loading Xaero's World Map - Stage 1/2
+LOG [18:53:07] [Worker-ResourceReload-1/INFO]: Loading XaeroLib client 1/2!
+LOG [18:53:08] [Worker-ResourceReload-0/INFO]: Loading Xaero's Minimap - Stage 1/2
+LOG [18:53:09] [Render thread/INFO]: Loading Xaero's World Map - Stage 2/2
+LOG [18:53:10] [Render thread/INFO]: Xaero's WorldMap Mod: Xaero's minimap found!
+LOG [18:53:10] [Render thread/INFO]: Registered player tracker system: minimap_synced
+LOG [18:53:10] [Render thread/INFO]: Xaero's World Map: No Vivecraft!
+LOG [18:53:10] [Render thread/INFO]: Xaero's World Map: Iris found!
+LOG [18:53:10] [Render thread/WARN]: Mod 'xaeroworldmap' took 1.138 s to run a deferred task.
+LOG [18:53:10] [Render thread/INFO]: Loading Xaero's Minimap - Stage 2/2
+LOG [18:53:11] [Render thread/INFO]: Registered player tracker system: minimap_synced
+LOG [18:53:11] [Render thread/INFO]: Loading XaeroLib common 2/2!
+LOG [18:53:11] [Render thread/INFO]: Loading XaeroLib client 2/2!
+LOG [18:53:32] [Render thread/INFO]: Successfully reloaded the XaeroLib shaders!
+LOG [18:53:35] [Render thread/INFO]: Minimap required item set to nothing.
+LOG [18:53:35] [Render thread/INFO]: New Xaero hud session initialized!
+LOG [18:54:00] [Render thread/INFO]: Minimap updated server level id: 646749912 for world ResourceKey[minecraft:dimension / minecraft:overworld]
+== shots/game/config/xaero/minimap/default_radar_categories_client.json (5531 bytes)
+{
+  "hardInclude": "anything",
+  "includeList": [],
+  "includeListInSuperCategory": true,
+  "excludeMode": "ONLY",
+  "excludeList": [
+    "minecraft:glow_item_frame",
+    "minecraft:item_frame"
+  ],
+  "name": "gui.xaero_entity_category_root",
+  "protection": true,
+  "settingOverrides": {
+    "displayHeight": 0.0,
+    "displayed": true,
+    "heightBasedFade": true,
+    "renderOrder": 0.0,
+    "color": 13.0,
+    "displayNameWhenIconFails": true,
+    "entityNumber": 1000.0,
+    "alwaysDisplayNametags": false,
+    "dotSize": 2.0,
+    "startFadingAt": 0.0,
+    "renderOverMinimapFrame": 1.0,
+    "icons": 1.0,
+    "heightLimit": 20.0,
+    "names": 0.0,
+    "iconScale": 1.0
+  },
+  "subCategories": [
+    {
+      "hardInclude": "living",
+      "includeList": [],
+      "includeListInSuperCategory": true,
+      "excludeMode": "ONLY",
+      "excludeList": [
+        "minecraft:armor_stand"
+      ],
+      "name": "gui.xaero_entity_category_living",
+      "protection": true,
+      "settingOverrides": {
+        "renderOrder": 2.0,
+        "color": 14.0
+      },
+      "subCategories": [
+        {
+          "hardInclude": "players",
+          "includeList": [],
+          "includeListInSuperCategory": true,
+          "excludeMode": "ONLY",
+          "excludeList": [],
+          "name": "gui.xaero_entity_category_players",
+          "protection": true,
+          "settingOverrides": {
+            "renderOrder": 6.0,
+            "heightLimit": 2050.0,
+            "color": 15.0
+          },
+          "subCategories": [
+            {
+              "hardInclude": "nothing",
+              "includeList": [],
+              "includeListInSuperCategory": true,
+              "excludeMode": "ONLY",
+              "excludeList": [],
+              "name": "gui.xaero_entity_category_friend",
+              "protection": true,
+              "settingOverrides": {},
+              "subCategories": []
+            },
+            {
+              "hardInclude": "tracked",
+              "includeList": [],
+              "includeListInSuperCategory": true,
+              "excludeMode": "ONLY",
+              "excludeList": [],
+              "name": "gui.xaero_entity_category_tracked",
+              "protection": true,
+              "settingOverrides": {
+                "icons": 2.0
+              },
+== shots/game/config/xaero/minimap/default_radar_categories_server.json (4597 bytes)
+{
+  "hardInclude": "anything",
+  "includeList": [],
+  "includeListInSuperCategory": true,
+  "excludeMode": "ONLY",
+  "excludeList": [],
+  "name": "gui.xaero_entity_category_root",
+  "protection": true,
+  "settingOverrides": {},
+  "subCategories": [
+    {
+      "hardInclude": "living",
+      "includeList": [],
+      "includeListInSuperCategory": true,
+      "excludeMode": "ONLY",
+      "excludeList": [
+        "minecraft:armor_stand"
+      ],
+      "name": "gui.xaero_entity_category_living",
+      "protection": true,
+      "settingOverrides": {},
+      "subCategories": [
+        {
+          "hardInclude": "players",
+          "includeList": [],
+          "includeListInSuperCategory": true,
+          "excludeMode": "ONLY",
+          "excludeList": [],
+          "name": "gui.xaero_entity_category_players",
+          "protection": true,
+          "settingOverrides": {},
+          "subCategories": [
+            {
+              "hardInclude": "nothing",
+              "includeList": [],
+              "includeListInSuperCategory": true,
+              "excludeMode": "ONLY",
+              "excludeList": [],
+              "name": "gui.xaero_entity_category_friend",
+              "protection": true,
+              "settingOverrides": {},
+              "subCategories": []
+            },
+            {
+              "hardInclude": "tracked",
+              "includeList": [],
+              "includeListInSuperCategory": true,
+              "excludeMode": "ONLY",
+              "excludeList": [],
+              "name": "gui.xaero_entity_category_tracked",
+              "protection": true,
+              "settingOverrides": {},
+              "subCategories": []
+            },
+            {
+              "hardInclude": "same-team",
+              "includeList": [],
+              "includeListInSuperCategory": true,
+              "excludeMode": "ONLY",
+              "excludeList": [],
+              "name": "gui.xaero_entity_category_same_team",
+              "protection": true,
+              "settingOverrides": {},
+              "subCategories": []
+            },
+            {
+              "hardInclude": "anything",
+              "includeList": [],
+              "includeListInSuperCategory": true,
+              "excludeMode": "ONLY",
+              "excludeList": [],
+              "name": "gui.xaero_entity_category_other_teams",
+              "protection": true,
+              "settingOverrides": {},
+              "subCategories": []
+            }
+          ]
+        },
+        {
+          "hardInclude": "hostile",
+== shots/game/config/xaero/minimap/common.cfg (147 bytes)
+default_enforced_profile = default
+enforced_profile_permission_node = xaero.minimap.enforced_server_profile
+register_minimap_status_effects = true
+== shots/game/config/xaero/minimap/client.cfg (235 bytes)
+current_profile = default
+update_notifications = true
+ignored_update = 0
+allow_wrong_world_teleport = false
+differentiate_by_server_address = true
+debug_entity_icons = false
+debug_entity_variant_ids = false
+waypoint_mutual_edit = true
+== shots/game/config/xaero/minimap/profiles/default.cfg (3824 bytes)
+############
+## Client Config Profile "default"
+##
+
+profile_name = Default
+ignore_enforcement_if_edit_permission = false
+display_minimap = true
+minimap_item = -
+minimap_safe_mode = false
+minimap_ui_scale = 1
+display_radar = true
+radar_dots_style = 0
+radar_smooth_dots = true
+radar_name_scale = 1.0
+radar_main_entity = 0
+radar_main_dot_size = 2
+radar_hide_invisible_entities = true
+minimap_arrow_scale = 1.5
+minimap_arrow_color = 0
+minimap_arrow_opacity = 100
+tracked_players_on_minimap = true
+tracked_players_in_world = true
+tracked_player_minimap_icon_scale = 0
+tracked_player_world_icon_scale = 0
+tracked_player_world_name_scale = 0
+waypoints_in_world = true
+waypoints_on_minimap = true
+waypoints_all_sets = false
+deathpoints = true
+old_deathpoints = true
+delete_reached_deathpoints = true
+switch_auto_waypoints_on_death = true
+waypoint_icon_scale_in_world = 0
+waypoint_name_scale_in_world = 0
+waypoint_close_scale_in_world = 1.0
+waypoint_distance_scale_in_world = 0
+multiple_waypoints_info = 1
+waypoint_distance_in_world = 1
+waypoint_distance_in_menu = true
+waypoint_name_in_world = true
+waypoint_short_distance_in_world = false
+waypoint_vertical_pointing_angle = 180
+waypoint_horizontal_pointing_angle = 10
+waypoint_max_distance = 0
+waypoint_max_distance_dimension_scale = true
+waypoint_min_distance_in_world = 0.0
+waypoint_convert_distance_to_km_at = 10000
+waypoint_distance_precision = 1
+waypoint_opacity_in_world = 80
+waypoint_opacity_on_minimap = 90
+waypoint_icon_scale_on_minimap = 0
+temporary_waypoints_global = true
+default_waypoint_teleport_format = /tp @s {x} {y} {z}
+default_waypoint_teleport_rotation_format = /tp @s {x} {y} {z} {yaw} ~
+waypoint_teleport_cross_dimension = true
+waypoint_partial_y_teleport = true
+new_waypoints_to_bottom = false
+hide_world_names = 1
+minimap_compass_over_everything = true
+hide_waypoint_coordinates = false
+minimap_compass_location = 1
+minimap_compass_shadow_color = 9
+minimap_compass_north_shadow_color = -1
+minimap_compass_scale = 0
+minimap_block_colors = 0
+minimap_biomes_in_vanilla_colors = false
+minimap_cave_mode_allowed = true
+minimap_auto_cave_mode = 2
+minimap_cave_mode_allowed_dimensions = []
+minimap_manual_cave_mode_start = 2147483647
+minimap_cave_mode_depth = 30
+minimap_legible_cave_maps = false
+minimap_cave_mode_toggle_timer = 1000.0
+minimap_biome_blending = true
+minimap_display_world_map_chunks = true
+minimap_terrain_depth = true
+minimap_terrain_slopes = 2
+minimap_display_redstone = true
+minimap_display_flowers = true
+minimap_block_transparency = true
+== shots/game/config/xaero/minimap/profiles/info_display_config/default.cfg.txt (684 bytes)
+infoDisplayOrder:coords:overworld_coords:chunk_coords:angles:dimension:biome:weather:light_level:time:real_time:highlights:light_overlay_indicator:manual_cave_mode_indicator:custom_sub_world
+infoDisplay:coords:true:15:-1
+infoDisplay:overworld_coords:false:15:-1
+infoDisplay:chunk_coords:false:15:-1
+infoDisplay:angles:false:15:-1
+infoDisplay:dimension:false:15:-1
+infoDisplay:biome:false:15:-1
+infoDisplay:weather:false:15:-1
+infoDisplay:light_level:0:15:-1
+infoDisplay:time:0:15:-1
+infoDisplay:real_time:0:15:-1
+infoDisplay:highlights:true:15:-1
+infoDisplay:light_overlay_indicator:true:15:-1
+infoDisplay:manual_cave_mode_indicator:true:15:-1
+infoDisplay:custom_sub_world:true:15:-1
+== shots/game/config/xaero/minimap/server_profiles/default.cfg (75 bytes)
+############
+## Server Config Profile "default"
+##
+
+profile_name = Default
+== shots/server/config/xaero/lib/common.cfg (236 bytes)
+default_enforced_profile = default
+enforced_profile_permission_node = xaero.lib.enforced_server_profile
+allow_internet_access = true
+everyone_tracks_everyone = false
+edit_server_profiles_permission_node = xaero.lib.edit_server_profiles
+== shots/server/config/xaero/lib/server_profiles/default.cfg (75 bytes)
+############
+## Server Config Profile "default"
+##
+
+profile_name = Default
+== shots/server/config/xaero/world-map/common.cfg (141 bytes)
+default_enforced_profile = default
+enforced_profile_permission_node = xaero.world_map.enforced_server_profile
+register_status_effects = true
+== shots/server/config/xaero/world-map/server_profiles/default.cfg (75 bytes)
+############
+## Server Config Profile "default"
+##
+
+profile_name = Default
+== shots/server/config/xaero/minimap/common.cfg (147 bytes)
+default_enforced_profile = default
+enforced_profile_permission_node = xaero.minimap.enforced_server_profile
+register_minimap_status_effects = true
+== shots/server/config/xaero/minimap/server_profiles/default.cfg (75 bytes)
+############
+## Server Config Profile "default"
+##
+
+profile_name = Default

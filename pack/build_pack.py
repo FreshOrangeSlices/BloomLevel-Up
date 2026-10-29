@@ -97,14 +97,17 @@ On your own PC
 On a host (Shockbyte and similar)
 1. Set the server type to Forge 1.20.1, version {forge} (or the newest 47.4 the host offers), on Java 17, and start it
    once so it installs Forge. Then stop it.
-2. Upload this zip's mods and config folders into the server's main folder, replacing what's there. Both are needed:
-   config holds the pack's own data pack (spawns, removed items) and settings. SFTP (FileZilla) is easiest for this
-   many files; or zip the two folders, upload that through the host's file manager and unzip it there.
+2. Upload this zip's mods, config and defaultconfigs folders into the server's main folder, replacing what's there.
+   All three are needed: config holds the pack's own data pack (spawns, terrain, removed items) and settings, and
+   defaultconfigs the world settings a new world starts with (the one that keeps a buggy mob from crashing the
+   server). SFTP (FileZilla) is easiest for this many files; or zip the folders, upload that through the host's file
+   manager and unzip it there.
 3. Copy the lines from server.properties here into the host's server.properties. allow-flight=true matters: without
    it, players get kicked for "flying" on dragons and mounts.
 Skip forge-installer.jar, start.bat, start.sh and eula.txt: the host does those.
-To update later: stop the server, upload the new build's mods and config folders over the old ones (delete the old
-mods folder first, so no old jar stays behind), start it again. The world stays.
+To update later: stop the server, upload the new build's mods, config and defaultconfigs folders over the old ones
+(delete the old mods folder first, so no old jar stays behind), start it again. The world stays, unless the update
+says it needs a new one (terrain changes only reach chunks made after them).
 """
 
 

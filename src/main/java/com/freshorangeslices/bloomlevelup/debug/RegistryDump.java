@@ -50,6 +50,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -384,6 +385,16 @@ public final class RegistryDump {
 			out.addProperty("result", BuiltInRegistries.ITEM.getKey(result.getItem()).toString());
 		}
 
+		// What it takes (every item any ingredient accepts), so a pack can check a recipe it changed.
+		Set<String> takes = new TreeSet<>();
+
+		for (Ingredient ingredient : recipe.getIngredients()) {
+			for (ItemStack stack : ingredient.getItems()) {
+				takes.add(BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+			}
+		}
+
+		out.add("ingredients", strings(new ArrayList<>(takes)));
 		return out;
 	}
 

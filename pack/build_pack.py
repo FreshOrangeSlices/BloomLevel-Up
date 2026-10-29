@@ -267,7 +267,10 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
     removed_items takes items out of the game as far as data can: every recipe in the pack's jars ({path: bytes})
     that makes only removed items is replaced by one that never loads, every loot table that names one is rewritten
     without it, and each is hidden from JEI. What a mod drops from its own code can't be changed this way; those are
-    only hidden (listed in notes)."""
+    only hidden (listed in notes).
+
+    recipe_edits changes a mod's recipe in place: {recipe id: {"swap": {old item: new item}}}, from the recipe in the
+    jars."""
     if not data:
         return {}
     if not have_loader:
@@ -291,6 +294,29 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
             only_hidden = [i for i in removed if i not in gone and i.split(":")[0] in present]
             notes.append(f"removed items: {len(removed)} ({len(recipes)} recipes out, {len(tables)} loot tables rewritten)"
                          + (f"; only hidden (no recipe or loot table names them; a mod's own code drops them): {', '.join(only_hidden)}" if only_hidden else ""))
+    # Recipes changed in place: the mod's own recipe from its jar, with items swapped ({old item: new item}).
+    for ident, spec in data.get("recipe_edits", {}).items():
+        if ident.startswith("_"):
+            continue
+        namespace, path = ident.split(":", 1)
+        if jars and namespace not in mods_in(jars):
+            continue
+        original = None
+        for jar_data in (jars or {}).values():
+            try:
+                original = zipfile.ZipFile(io.BytesIO(jar_data)).read(f"data/{namespace}/recipes/{path}.json").decode("utf-8")
+                break
+            except (KeyError, zipfile.BadZipFile):
+                continue
+        if original is None:
+            if jars:
+                problems.append(f"pack_data.recipe_edits: no recipe {ident} in the pack's jars")
+            continue
+        for old_item, new_item in spec["swap"].items():
+            if f'"{old_item}"' not in original:
+                problems.append(f"pack_data.recipe_edits: {ident} has no {old_item}")
+            original = original.replace(f'"{old_item}"', f'"{new_item}"')
+        out[f"{root}/data/{namespace}/recipes/{path}.json"] = json.loads(original)
     hidden = list(dict.fromkeys(grouped("hidden_items") + removed))
     if hidden:
         out[f"{root}/data/c/tags/items/hidden_from_recipe_viewers.json"] = {

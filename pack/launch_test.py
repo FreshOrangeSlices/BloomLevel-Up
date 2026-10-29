@@ -301,6 +301,30 @@ def spawn_check(server_dir, dump_file, spec_file):
              f"{median * 100:.0f}%, {land[0][0] * 100:.0f}% ({land[0][1]}) to {land[-1][0] * 100:.0f}% ({land[-1][1]})" if land else "spawns: no land biomes"]
     if roosts:
         notes.append("dragon roosts: " + ", ".join(roosts))
+    # Biome tags the pack adds to (structures, roosts): each on some biome, and on one of BOP's when it names BOP's.
+    have_bop = any(b["id"].startswith("biomesoplenty:") for b in biomes)
+    for tag, want in spawns.get("biome_tags", {}).items():
+        if tag.startswith("_") or not want.get("values") or tag.split(":")[0] not in {t.split(":")[0] for b in biomes for t in b["tags"]}:
+            continue
+        on = [b["id"] for b in biomes if tag in b["tags"]]
+        if not on:
+            failures.append(f"spawns: no biome carries {tag}")
+        elif have_bop and not any(i.startswith("biomesoplenty:") for i in on) and any(
+                v.startswith("#") or v.startswith("biomesoplenty:") for v in want["values"]):
+            failures.append(f"spawns: {tag} has none of Biomes O' Plenty's biomes")
+    # Recipes the pack changed in place: loaded, with the new item and without the old.
+    recipes = {r["id"]: r for r in rows if r.get("kind") == "recipe"}
+    edits = (json.load(open(spec_file)).get("pack_data") or {}).get("recipe_edits", {}) if os.path.exists(spec_file) else {}
+    for ident, edit in edits.items():
+        if ident.startswith("_") or ident.split(":")[0] not in {e.split(":")[0] for e in entities}:
+            continue
+        takes = set((recipes.get(ident) or {}).get("ingredients", []))
+        if ident not in recipes:
+            failures.append(f"recipe edits: {ident} isn't loaded")
+        elif any(old in takes or new not in takes for old, new in edit["swap"].items()):
+            failures.append(f"recipe edits: {ident} takes {sorted(takes)}, not the swapped items")
+        else:
+            notes.append(f"recipe edits: {ident} takes {', '.join(sorted(takes))}")
     return failures, notes, report
 
 
@@ -528,6 +552,10 @@ def main():
                                                             os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
     failures += spawn_failures
     notes += spawn_notes
+    # Easy Mob Spawn Control's files from the pack (Shybroom's village spawns, boss despawn rules and caps) must load.
+    emsc = [l for l in server.lines if ("EasyMSC" in l or "easymobspawncontrol" in l.lower()) and ("Failed to read" in l or "Exception" in l)]
+    if emsc:
+        failures.append("Easy Mob Spawn Control couldn't read the pack's files: " + " | ".join(emsc[:4])[:900])
     if spawn_report:
         text = chr(10).join(spawn_report)
         for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):

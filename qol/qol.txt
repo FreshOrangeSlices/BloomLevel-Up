@@ -1,0 +1,427 @@
+jade LANG gui.jade.configuration.desc2 = §fdisplays information§r about what §fyou are looking at§r.
+jade LANG key.jade.config = Open Config
+jade LANG key.jade.show_overlay = Show Overlay
+jade LANG key.jade.toggle_liquid = Toggle Fluid
+jade LANG key.jade.show_details = Show Details
+jade LANG key.jade.show_details_alternative = Show Details (Alternative)
+jade LANG key.jade.show_recipes = Show Recipes
+jade LANG key.jade.show_uses = Show Uses
+jade LANG key.jade.narrate = Narrate
+jade LANG config.jade.display_tooltip = Display Tooltip
+jade LANG config.jade.display_tooltip_desc = Collect data and render the tooltip.
+jade LANG config.jade.display_entities = Display Entities
+jade LANG config.jade.display_entities_extra_msg = entity
+jade LANG config.jade.display_bosses = Display Bosses
+jade LANG config.jade.display_blocks = Display Blocks
+jade LANG config.jade.display_fluids = Display Fluids
+jade LANG config.jade.display_fluids_extra_msg = liquid,source,only
+jade LANG config.jade.display_fluids_source_only = Source Only
+jade LANG config.jade.display_fluids_any = Any
+jade LANG config.jade.display_fluids_none = None
+jade LANG config.jade.display_fluids_fallback = Fallback
+jade LANG config.jade.display_fluids_fallback_desc = Only show fluid when there is no other target.
+jade LANG config.jade.display_mode = Display Mode
+jade LANG config.jade.display_mode_desc = The behavior of the tooltip in the usual situation and how the [Show Details] key works.
+jade LANG config.jade.display_mode_extra_msg = toggle,hold,lite
+jade LANG config.jade.display_mode_toggle = Toggle
+jade LANG config.jade.display_mode_toggle_desc = Display keybind will toggle it on and off.
+jade LANG config.jade.display_mode_hold_key = Hold
+jade LANG config.jade.display_mode_hold_key_desc = Display keybind must be held.
+jade LANG config.jade.display_mode_lite = Lite
+jade LANG config.jade.display_mode_lite_desc = Hold [Show Details] key to show further information.
+jade LANG config.jade.display_mode_lite_desc.fabric = Hold Shift to show further information.
+jade LANG config.jade.hide_from_debug_desc = Hide the tooltip while the debug screen is displayed.
+jade LANG config.jade.hide_from_tab_list_desc = Hide the tooltip while the player list is displayed.
+jade LANG config.jade.display_item = Icon Position
+jade LANG config.jade.display_item_extra_msg = hide,top,centered
+jade LANG config.jade.display_item_hide = Hide
+jade LANG config.jade.display_item_top = Top
+jade LANG config.jade.display_item_centered = Centered
+jade LANG config.jade.overlay = Appearance
+jade LANG config.jade.overlay_pos_x = Horizontal Position
+jade LANG config.jade.overlay_pos_x_extra_msg = left,right,center,ratio
+jade LANG config.jade.overlay_pos_y = Vertical Position
+jade LANG config.jade.overlay_pos_y_extra_msg = top,bottom,center,ratio
+jade LANG config.jade.overlay_scale = Display Scale
+jade LANG config.jade.overlay_anchor_x = Horizontal Anchor
+jade LANG config.jade.overlay_anchor_y = Vertical Anchor
+jade LANG config.jade.overlay_square = Square Border
+jade LANG config.jade.overlay_alpha = Background Opacity
+jade LANG config.jade.overlay_alpha_extra_msg = transparent,alpha
+jade LANG config.jade.overlay_theme = Theme
+jade LANG config.jade.animation = Overlay Animation
+jade LANG config.jade.animation_desc = Animate the overlay when it appears and disappears. Morph the box when size changes.
+jade LANG config.jade.plugin_minecraft.entity_health = Entity Health
+jade LANG config.jade.plugin_minecraft.entity_health.max_for_render = Max Health for Render
+jade LANG config.jade.plugin_minecraft.entity_health.icons_per_line = Icons per Line
+jade LANG config.jade.plugin_minecraft.entity_health.show_fractions = Show Fractions
+jade LANG config.jade.plugin_minecraft.entity_armor = Entity Armor
+jade LANG config.jade.plugin_minecraft.entity_armor.max_for_render = Max Armors for Render
+jade LANG config.jade.plugin_minecraft.block_states = Block States
+jade LANG entity.minecraft.villager.none = Unemployed
+jade LANG entity.minecraft.villager.nitwit = Nitwit
+jade LANG config.jade.plugin_minecraft.horse_stats = Horse Stats
+jade LANG config.jade.plugin_minecraft.potion_effects = Entity Effects
+jade LANG config.jade.plugin_minecraft.potion_effects_extra_msg = potion,status
+jade LANG config.jade.plugin_minecraft.item_frame = Item Frame
+jade LANG config.jade.plugin_minecraft.container_entity = Container Entity
+jade LANG config.jade.plugin_minecraft.mob_growth = Mob Growth
+jade LANG config.jade.plugin_minecraft.mob_breeding = Mob Breeding
+jade LANG config.jade.plugin_minecraft.mob_breeding_extra_msg = cooldown,cd,allay,duplication
+jade LANG config.jade.plugin_minecraft.brewing_stand = Brewing Stand
+jade LANG config.jade.plugin_minecraft.tnt_stability = TNT Stability
+jade LANG config.jade.plugin_minecraft.tnt_stability_desc = Warn player of special TNT that ignites when hit.
+jade LANG config.jade.plugin_minecraft.beehive = Beehive
+jade LANG config.jade.plugin_minecraft.beehive_extra_msg = bees,honey
+jade LANG config.jade.plugin_minecraft.note_block = Note Block
+jade LANG config.jade.plugin_minecraft.note_block_desc = Show the note and instrument of the note block.
+jade LANG config.jade.plugin_minecraft.armor_stand = Armor Stand
+jade LANG config.jade.plugin_minecraft.painting = Painting
+jade LANG config.jade.plugin_minecraft.chicken_egg = Chicken Egg
+jade LANG config.jade.plugin_minecraft.breaking_progress = Breaking Progress
+jade LANG config.jade.plugin_minecraft.command_block = Command Block
+jade LANG config.jade.plugin_minecraft.harvest_tool = Harvest Tool
+jade LANG config.jade.plugin_minecraft.harvest_tool.new_line = Start in New Line
+jade LANG config.jade.plugin_minecraft.harvest_tool.effective_tool = Effective Tool
+jade LANG config.jade.plugin_minecraft.harvest_tool.show_unbreakable = Show "Unbreakable"
+jade LANG config.jade.plugin_minecraft.harvest_tool.creative = Show in Creative Mode
+jade LANG config.jade.plugin_minecraft.harvest_tool.creative_desc = Show harvest information in creative or spectator mode as well
+jade LANG jade.harvest_tool.unbreakable = Unbreakable
+jade LANG config.jade.plugin_minecraft.enchantment_power = Enchantment Power
+jade LANG config.jade.plugin_minecraft.enchantment_power_desc = Show the enchantment power of the block.
+jade LANG config.jade.plugin_minecraft.total_enchantment_power = Total Enchantment Power
+jade LANG config.jade.plugin_minecraft.player_head = Player Head
+jade LANG config.jade.plugin_minecraft.profession = Villager Profession
+jade LANG config.jade.plugin_minecraft.item_tooltip = Item Description
+jade LANG config.jade.plugin_minecraft.item_storage = Item Storage
+jade LANG config.jade.plugin_minecraft.item_storage_extra_msg = inventory,chest
+jade LANG config.jade.plugin_minecraft.item_storage.detailed_amount = Detailed Amount
+jade LANG config.jade.plugin_minecraft.item_storage.detailed_amount_desc = The amount of items to show when [Show Details] key is pressed.
+jade LANG config.jade.plugin_minecraft.item_storage.normal_amount = Normal Amount
+jade LANG config.jade.plugin_minecraft.item_storage.normal_amount_desc = The amount of items to show when [Show Details] key is not pressed.
+jade LANG config.jade.plugin_minecraft.item_storage.show_name_amount = Show Name Threshold
+jade LANG config.jade.plugin_minecraft.item_storage.show_name_amount_desc = The maximum amount of items to show item names instead of just item icons.
+jade LANG config.jade.plugin_minecraft.item_storage.items_per_line = Items per Line
+jade LANG config.jade.plugin_minecraft.energy_storage = Energy Storage
+jade LANG config.jade.plugin_minecraft.energy_storage.detailed = Detailed-Only
+jade LANG config.jade.plugin_minecraft.energy_storage.detailed_desc = Only show energy info when [Show Details] key is pressed.
+jade LANG config.jade.plugin_minecraft.fluid_storage = Fluid Storage
+jade LANG config.jade.plugin_minecraft.fluid_storage_extra_msg = tank,liquid
+jade LANG config.jade.plugin_minecraft.fluid_storage.detailed = Detailed-Only
+jade LANG config.jade.plugin_minecraft.fluid_storage.detailed_desc = Only show fluid info when [Show Details] key is pressed.
+jade LANG config.jade.plugin_minecraft.lectern = Lectern
+jade LANG config.jade.plugin_minecraft.animal_owner = Animal Owner
+jade LANG config.jade.plugin_minecraft.animal_owner_extra_msg = horse,pet
+jade LANG config.jade.plugin_minecraft.furnace = Furnace Contents
+jade LANG config.jade.plugin_minecraft.mob_spawner = Mob Spawner Type
+jade LANG config.jade.plugin_minecraft.crop_progress = Crop Progress
+jade LANG config.jade.plugin_minecraft.redstone = Redstone Info
+jade LANG config.jade.plugin_minecraft.jukebox = Jukebox Record
+jade LANG config.jade.plugin_minecraft.villager_profession = Villager Profession
+jade LANG config.jade.plugin_minecraft.chiseled_bookshelf = Chiseled Bookshelf
+jade LANG config.jade.plugin_minecraft.zombie_villager = Zombie Villager Conversion
+jade LANG config.jade.plugin_minecraft.waxed = Waxed State
+jade LANG config.jade.plugin_minecraft.waxed_desc = Show the waxed state of the block, such as waxed sign.
+jade LANG jade.modName.cpp = Crafting++
+jade CLASS snownee/jade/impl/config/entry/ConfigEntry.class notifyChange
+ipn LANG inventoryprofiles.common.gui.config.advanced_keybind_settings = Advanced Key Binding Settings
+ipn LANG inventoryprofiles.common.gui.config.keybind_settings_tips = - Left click to configure
+- Right click to reset to defaults
+ipn LANG inventoryprofiles.common.enum.modifier_key.differentiate = Diff left/right
+ipn LANG inventoryprofiles.common.enum.modifier_key.normal = Normal
+ipn LANG inventoryprofiles.config.category.auto_refill = Auto Refill
+ipn LANG inventoryprofiles.config.description.open_config_folder = Open folder .minecraft/config/inventoryprofilesnext
+ipn LANG inventoryprofiles.config.name.move_just_refill_modifier = Just refill stacks
+ipn LANG inventoryprofiles.config.description.move_just_refill_modifier = Holding this key while using move all/matching function will make it so that only existing stacks will be refilled on the target
+ipn LANG inventoryprofiles.config.description.enable_lock_slots = Locked slots are ignored for: sort, move all, clean cursor, continuous crafting supplies storage, auto refill supplies storage (auto refill monitoring slots are not affected). 
+Notice:
+Sorting in colu
+ipn LANG inventoryprofiles.config.name.enable_auto_refill = Enable Auto Refill
+ipn LANG inventoryprofiles.config.description.enable_updates_check = Display message if a new version of the mod is available. To do the check we send to our servers ONLY the following information:
+	Minecraft Version, Fabric or Forge, Inventory Profiles Next version.
+Y
+ipn LANG inventoryprofiles.config.name.auto_craft_delay = Wait Ticks Before Next Craft Click
+ipn LANG inventoryprofiles.config.name.continuous_crafting_method = Continuous Crafting Method
+ipn LANG inventoryprofiles.config.name.ignore_durability = Ignore item durability for Throw/Move
+ipn LANG inventoryprofiles.config.description.auto_craft_delay = Wait this number of client ticks before doing next craft while auto-crafting.
+Increase this if auto-crafting stops before it uses all available resources.
+This is server ping dependent. The higher the
+ipn LANG inventoryprofiles.config.description.continuous_crafting_method = Method 2 is pre 1.3.7 behaviour, Method 1 is post 1.3.7.
+Method 1 is better overall, but Method 2 works better on some servers.
+ipn LANG inventoryprofiles.config.description.ignore_durability = If set to true Move Matching and Throw Matching operations will ignore the item durability when deciding what to move or throw.
+ipn LANG inventoryprofiles.config.name.inventory_overlay_buttons_visible = Toggle overlay buttons visibility
+ipn LANG inventoryprofiles.config.description.inventory_overlay_buttons_visible = This is not meant to disable the overlay buttons!
+This is meant so you can assign a shortcut to temporary hide/show the overlay buttons!
+To permanently enable/disable overlay buttons use the other opt
+ipn LANG inventoryprofiles.config.name.enable_inventory_editor_button = Enable Overlay Editor Button
+ipn LANG inventoryprofiles.config.description.enable_inventory_editor_button = When enabled a small button will appear in the to left of the screen that will open the IPN Overlay Editor.
+ipn LANG inventoryprofiles.config.name.show_continuous_crafting_checkbox = Show Continuous Crafting Checkbox
+ipn LANG inventoryprofiles.config.name.continuous_crafting_checkbox_value = §bRemember Checkbox State
+ipn LANG inventoryprofiles.config.name.continuous_crafting_saved_value = §bLast State of the Checkbox
+ipn LANG inventoryprofiles.config.description.show_continuous_crafting_checkbox = Show continuous crafting checkbox in crafting table and survival inventory.
+"Continuous Crafting" will auto refill the recipe ingredients in the crafting grid.
+ipn LANG inventoryprofiles.config.description.continuous_crafting_checkbox_value = This setting controls if the checkbox state is preserved after the screen is closed or is always reset to the configured value below.
+ipn LANG inventoryprofiles.config.description.continuous_crafting_saved_value = The saved/default value of the "Continuous Crafting" checkbox.
+ipn LANG inventoryprofiles.config.description.show_button_tooltips = Display tooltips for the buttons.
+ipn LANG inventoryprofiles.gui.config.AutoRefillSettings = Auto Refill
+ipn LANG inventoryprofiles.config.category.auto-refill.general = General
+ipn LANG inventoryprofiles.config.category.auto-refill.non-enchanted = Non Enchanted Items
+ipn LANG inventoryprofiles.config.category.auto-refill.matching = Items Matching
+ipn LANG inventoryprofiles.config.category.auto-refill.notifications = Notifications
+ipn LANG inventoryprofiles.config.name.auto_refill_prefer_smaller_stacks = Refill with smallest available stack
+ipn LANG inventoryprofiles.config.name.refill_armor = Refill Armor Before It Breaks
+ipn LANG inventoryprofiles.config.name.refill_before_tool_break = Replace Tools Before They Break
+ipn LANG inventoryprofiles.config.name.auto_refill_match_custom_name = Differentiate By Custom Name
+ipn LANG inventoryprofiles.config.name.auto_refill_match_nbt = Differentiate By NBT
+ipn LANG inventoryprofiles.config.name.auto_refill_match_nbt_type = NBT Comparison Type
+ipn LANG inventoryprofiles.config.name.auto_refill_ignore_nbt_for_buckets = Ignore NBT for buckets
+ipn LANG inventoryprofiles.config.name.auto_refill_match_any_food = Refill With Any Food
+ipn LANG inventoryprofiles.config.name.auto_refill_match_harmful_food = Allow refill with harmful foods.
+ipn LANG inventoryprofiles.config.name.autorefill_blacklist = Blacklisted item types
+ipn LANG inventoryprofiles.config.name.tool_damage_threshold = Damage Threshold
+ipn LANG inventoryprofiles.config.name.auto_refill_wait_tick = Number of Ticks to Wait Before Auto Refill
+ipn LANG inventoryprofiles.config.name.auto_refill_temp_disable_refill_for_tools = Disable Refill for Tools While Holding
+ipn LANG inventoryprofiles.config.name.auto_refill_enable_per_slot_config = Toggle Refill Per Slot
+ipn LANG inventoryprofiles.config.name.auto_refill_enable_indicator_icons = Show Icons on Enabled Slots
+ipn LANG inventoryprofiles.config.name.auto_refill_enable_horbar_indicator_icons = Also Show Icons in the Hotbar
+ipn LANG inventoryprofiles.config.name.allow_break_for_non_enchanted = Allow Some Non Enchanted Gear to Break
+ipn LANG inventoryprofiles.config.name.tool_max_durability_threshold = Max Durability Threshold
+ipn LANG inventoryprofiles.config.name.visual_durability_notification = Visual Alert Before Tool Switch
+ipn LANG inventoryprofiles.config.name.type_visual_durability_notification = Kind of Visual Alert
+ipn LANG inventoryprofiles.config.name.audio_durability_notification = Sound Alert Before Tool Switch
+ipn LANG inventoryprofiles.config.name.number_of_notifications = Number of Alerts Before Switch
+ipn LANG inventoryprofiles.config.name.notification_step = Durability Step
+ipn LANG inventoryprofiles.config.name.visual_replace_success_notification = Visual Alert on Replace
+ipn LANG inventoryprofiles.config.name.audio_replace_success_notification = Sound Alert on Replace
+ipn LANG inventoryprofiles.config.name.type_visual_replace_success_notification = Kind of Visual Alert
+ipn LANG inventoryprofiles.config.name.visual_replace_failed_notification = Visual Alert on Failed Replace
+ipn LANG inventoryprofiles.config.name.audio_replace_failed_notification = Sound Alert on Failed Replace
+ipn LANG inventoryprofiles.config.name.type_visual_replace_failed_notification = Kind of Visual Alert
+ipn LANG inventoryprofiles.config.name.allow_alerts_without_tool_protection = Notifications Without Tool Protection
+ipn LANG inventoryprofiles.config.description.allow_alerts_without_tool_protection = Show low durability notifications even when early tool replacement is disabled
+ipn LANG inventoryprofiles.config.description.type_visual_replace_failed_notification = Controls what type of visual alert is used when a tool can't be replaced.
+ipn LANG inventoryprofiles.config.description.audio_replace_failed_notification = If enabled you will get sound alert when a tool replace was unsuccessful.
+ipn LANG inventoryprofiles.config.description.visual_replace_failed_notification = If enabled you will get visual alert when a tool replace was unsuccessful.
+ipn LANG inventoryprofiles.config.description.type_visual_replace_success_notification = Controls what type of visual alert is used when a tool have been replaced.
+ipn LANG inventoryprofiles.config.description.audio_replace_success_notification = If enabled you will get sound alert when a tool is replaced because of depleted durability.
+ipn LANG inventoryprofiles.config.description.visual_replace_success_notification = If enabled you will get visual alert when a tool is replaced because of depleted durability.
+ipn LANG inventoryprofiles.config.description.notification_step = Points of durability between alerts
+ipn LANG inventoryprofiles.config.description.number_of_notifications = How many notification you will get before the switch
+ipn LANG inventoryprofiles.config.description.audio_durability_notification = If enabled a specific sound will be played when a tool durability is close to switch point.
+ipn LANG inventoryprofiles.config.description.type_visual_durability_notification = Controls what type of visual alert is used in case a tool durability is close to switch point.
+ipn LANG inventoryprofiles.config.description.visual_durability_notification = This enables visual notifications when a tool/armor durability is getting close to the level for replacement.
+ipn LANG inventoryprofiles.config.description.enable_auto_refill = Refill the active item when the stack runs out.
+ipn LANG inventoryprofiles.config.description.disable_for_drop_item = Disable "Auto Refill" for dropped items
+ipn LANG inventoryprofiles.config.description.ignore_locked_slots = Allow Auto Refill to use items from locked slots.
+ipn LANG inventoryprofiles.config.description.auto_refill_prefer_smaller_stacks = Be default the stack with most items in it will be used for auto refill. If this is set to `true` the smallest available will be used first.
+ipn LANG inventoryprofiles.config.description.refill_armor = Refill armor slots if items are about to break
+ipn LANG inventoryprofiles.config.description.refill_before_tool_break = Refill tools and armor before they break.
+See "Damage Threshold" for more information.
+ipn LANG inventoryprofiles.config.description.auto_refill_match_custom_name = Auto refill will take Custom Names into account when refilling blocks
+For gear custom names are ignored.
+ipn LANG inventoryprofiles.config.description.auto_refill_match_nbt = Auto refill will take NBT into account when refilling blocks
+For gear NBT is ignored.
+ipn LANG inventoryprofiles.config.description.auto_refill_match_nbt_type = This controls how is NBT compared.
+'Exact' means that NBT must fully match.
+'Allow Extra' means that only tags that are the same will be compared.
+ipn LANG inventoryprofiles.config.description.auto_refill_ignore_nbt_for_buckets = If this is set to false Fish and Axolotl buckets will only refill if they contain the same type of Fish/Axolotl.
+ipn LANG inventoryprofiles.config.description.auto_refill_match_any_food = When this is set to true when a food item stack is depleted any other food item can be used to refill it.
+
+NOTE:
+This will sort the food items by saturation, i.e. and enchanted golden apple will be th
+ipn LANG inventoryprofiles.config.description.auto_refill_match_harmful_food = When this and the above are set to true, harmful foods, like 'puffer fish', will also be uset to refill depleted food stacks.
+ipn LANG inventoryprofiles.config.description.autorefill_blacklist = Comma separated list of item types to that will be ignored by Auto refill
+For example 'minecraft:golden_axe,minecraft:stone'
+WARNING:
+To avoid performance degradation DO NOT put too many item types in
+ipn LANG inventoryprofiles.config.description.stackable_threshold = Controls the quantity in a stackable item that will trigger auto refill.
+ipn LANG inventoryprofiles.config.description.tool_damage_threshold = Controls the durability level that will trigger auto refill.
+ipn LANG inventoryprofiles.config.description.threshold_unit = Set the unit for "Damage Threshold".
+Absolute value and percentage (%%) are supported.
+ipn LANG inventoryprofiles.config.description.auto_refill_wait_tick = Auto refill will wait this many ticks before doing the swap. 
+This might be useful on some during high server lag. 
+However, depending on the "Damage Threshold" value, the tool might break before a sw
+ipn LANG inventoryprofiles.config.description.auto_refill_temp_disable_refill_for_tools = Holding this key will disable auto refill for tools this allows you to break tools if you want to.
+ipn LANG inventoryprofiles.config.description.auto_refill_enable_per_slot_config = Allows you to enable/disable Auto Refill per slot.
+ipn LANG inventoryprofiles.config.description.auto_refill_enable_indicator_icons = When enabled a small icon will be show on top left of every slot that
+has Auto Refill enabled.
+ipn LANG inventoryprofiles.config.description.auto_refill_enable_horbar_indicator_icons = Enables the small icon from above option to be shown in the hotbar too.
+ipn LANG inventoryprofiles.config.description.allow_break_for_non_enchanted = Don't try to save non enchanted items.
+That has maximum durability less than the setting below.
+ipn LANG inventoryprofiles.config.description.tool_max_durability_threshold = Tools with maximum durability below this value will be allowed to break if the setting above is true.
+The idea that most players don't really want to keep stone tools,
+ but will be annoyed if they bre
+ipn LANG inventoryprofiles.config.notification.tool_replace_ping.ipn = IPN 
+ipn LANG inventoryprofiles.config.notification.tool_replace_ping.warning = WARNING 
+ipn LANG inventoryprofiles.config.notification.tool_replace_ping.durability = "%s" Durability is: %s 
+ipn LANG inventoryprofiles.config.notification.tool_replace_ping.replacing = Replacing at: %s
+ipn LANG inventoryprofiles.config.notification.tool_replace_failed.replacing = "%s" replace failed
+ipn LANG inventoryprofiles.config.notification.tool_replace_success = replaced with
+ipn LANG inventoryprofiles.config.category.lock_slots.gui = GUI Overlay
+ipn LANG inventoryprofiles.config.description.locked_slots_empty_hotbar_blacklist = A list of item ids that will be allowed to be picked up into the hotbar
+
+The format is 'namespace:item' so if you want stone to be allowed you need to add 'minecraft:stone'
+if the name doesn't contain
+ipn LANG inventoryprofiles.config.description.show_locked_slots_foreground = Draw locked slots foreground
+
+You can create your own texture and put it in
+resourcepacks/§o[pack_name]§r/assets/inventoryprofilesnext/textures/gui/overlay.png
+ipn LANG inventoryprofiles.config.description.locked_slots_foreground_style = Select foreground style from preset
+
+You can create your own texture and put it in
+resourcepacks/§o[pack_name]§r/assets/inventoryprofilesnext/textures/gui/overlay.png
+ipn LANG inventoryprofiles.config.description.locked_slots_delay_keeper_reinit_ticks = The maximum number of client ticks to wait for the server to send the content of the player inventory. 
+If locked slots get items moved out/thrown away on dimension change you need to increase this va
+ipn LANG inventoryprofiles.config.description.lock_slots_disable_user_interaction = The idea is that any user actions on locked slots will be disabled.
+Essentially you will need to unlock it before moving, or performing any other action on the item.
+Automated actions, profiles, auto 
+ipn LANG inventoryprofiles.config.description.quick_slot_1_profile = The name of the Profile that will be accessible with Quick Profile 1 hot key.
+ipn LANG inventoryprofiles.config.description.quick_slot_2_profile = The name of the Profile that will be accessible with Quick Profile 2 hot key.
+ipn LANG inventoryprofiles.config.description.quick_slot_3_profile = The name of the Profile that will be accessible with Quick Profile 3 hot key.
+ipn LANG inventoryprofiles.config.name.scroll_auto_pickup_next_for_single = Auto refill cursor
+ipn LANG inventoryprofiles.config.name.open_gui_editor = Show GUI overlay Config
+ipn LANG inventoryprofiles.config.name.auto_refill_gui_toggle_for_slot = Toggle Auto Refill for Slot Under the Cursor
+ipn LANG inventoryprofiles.config.name.auto_refill_game_toggle_for_slot = Toggle Auto Refill for the Active Hotbar Slot
+ipn LANG inventoryprofiles.config.description.throw_all_items = The key to throw all/matching items for either player inventory or the opened container.Generally useful for mass crafting.
+All modifier keys for Move All Items apply here too.
+ipn LANG inventoryprofiles.config.description.open_gui_editor = Show configuration screen for Inventory Profiles Next GUI overlay
+ipn LANG inventoryprofiles.config.description.auto_refill_gui_toggle_for_slot = Press this shortcut to toggle Auto Refill for the slot under the cursor.
+You can also move the mouse while holding it to toggle multiple slots.
+Only Hotbar and gear slots are supported.
+ipn LANG inventoryprofiles.config.description.auto_refill_game_toggle_for_slot = You can use this shortcut to toggle Auto Refill for the currently active Hotbar slot.
+This will work only if no GUI is opened.
+ipn LANG inventoryprofiles.config.name.swipe_move_crafting_result_slot = Swipe Move Crafting Result Slot
+ipn LANG inventoryprofiles.config.description.swipe_move_crafting_result_slot = Enable "Swipe Moving Items" in crafting result slot.
+ipn LANG inventoryprofiles.config.description.make_block_screen_generator_script = This button generate a script of /chat commands that will:
+ - try to find all blocks that have a GUIs
+ - make a nice platform
+ - place every block organized by mod
+
+NOTE: You don't really need this if
+ipn LANG inventoryprofiles.enum.continuous_crafting_checkbox_value.remember = Remember
+ipn LANG inventoryprofiles.enum.continuous_crafting_checkbox_value.checked = Checked
+ipn LANG inventoryprofiles.enum.continuous_crafting_checkbox_value.unchecked = Unchecked
+ipn LANG inventoryprofiles.enum.tool_replace_visual_notification.subtitle = Large
+ipn LANG inventoryprofiles.enum.tool_replace_visual_notification.hotbar = Small
+ipn LANG inventoryprofiles.enum.tool_replace_visual_notification.chat = In Chat
+ipn LANG inventoryprofiles.enum.auto_refill_nbt_match_type.can_have_extra = Allow Extra
+ipn LANG inventoryprofiles.enum.auto_refill_nbt_match_type.exact = Exact
+ipn LANG inventoryprofiles.tooltip.move_all_button.move_just_refill = §5Hold §o%s§r
+§6 - Move Only enough items to
+§6top up existing stacks.
+ipn LANG inventoryprofiles.tooltip.continuous_crafting_checkbox = Continuous Crafting
+§6Hold §o%s§r§6: for Auto Crafting
+ipn LANG inventoryprofiles.tooltip.auto_crafting_checkbox = Auto Crafting
+§6Stop holding §o%s§r§6: for Continuous Crafting
+ipn LANG inventoryprofiles.tooltip.editor_toggle = Shows configuration screen for Inventory Profiles Next GUI overlay
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings$AUTOREFILL_BLACKLIST$2.class AUTOREFILL_BLACKLIST
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings$AUTOREFILL_BLACKLIST$2.class AutoRefillHandler
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings$AUTOREFILL_BLACKLIST$2.class AutoRefillSettings
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class 0TYPE_VISUAL_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class 1TYPE_VISUAL_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class 2AUTO_REFILL_TEMP_DISABLE_REFILL_FOR_TOOLS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class ALLOW_BREAK_FOR_NON_ENCHANTED
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUDIO_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUDIO_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUDIO_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTOREFILL_BLACKLIST
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_IGNORE_NBT_FOR_BUCKETS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_MATCH_ANY_FOOD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_MATCH_CUSTOM_NAME
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_MATCH_HARMFUL_FOOD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_MATCH_NBT
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_MATCH_NBT_TYPE
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_PREFER_SMALLER_STACKS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_TEMP_DISABLE_REFILL_FOR_TOOLS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AUTO_REFILL_WAIT_TICK
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AutoRefillHandler
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AutoRefillNbtMatchType
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class AutoRefillSettings
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class JgetNOTIFICATION_STEP
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class NOTIFICATION_STEP
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class NUMBER_OF_NOTIFICATIONS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class NgetAUTO_REFILL_MATCH_NBT
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class NgetAUTO_REFILL_WAIT_TICK
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class NgetREFILL_ARMOR
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class NgetTOOL_DAMAGE_THRESHOLD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class PgetAUTO_REFILL_MATCH_NBT_TYPE
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class PgetNUMBER_OF_NOTIFICATIONS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class REFILL_ARMOR
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class REFILL_BEFORE_TOOL_BREAK
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class SgetAUTOREFILL_BLACKLIST
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class SgetAUTO_REFILL_MATCH_ANY_FOOD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class TOOL_DAMAGE_THRESHOLD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class TYPE_VISUAL_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class TYPE_VISUAL_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class TYPE_VISUAL_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class ToolReplaceVisualNotification
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class VISUAL_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class VISUAL_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class VISUAL_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class VgetAUTO_REFILL_MATCH_CUSTOM_NAME
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class WgetAUTO_REFILL_MATCH_HARMFUL_FOOD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class YgetTYPE_VISUAL_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class ZgetAUTO_REFILL_PREFER_SMALLER_STACKS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class ZgetREFILL_BEFORE_TOOL_BREAK
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class _getALLOW_BREAK_FOR_NON_ENCHANTED
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class _getAUDIO_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class agetAUTO_REFILL_TEMP_DISABLE_REFILL_FOR_TOOLS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class cgetAUDIO_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class dgetAUDIO_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class dgetVISUAL_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class egetVISUAL_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getALLOW_BREAK_FOR_NON_ENCHANTED
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUDIO_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUDIO_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUDIO_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTOREFILL_BLACKLIST
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_IGNORE_NBT_FOR_BUCKETS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_MATCH_ANY_FOOD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_MATCH_CUSTOM_NAME
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_MATCH_HARMFUL_FOOD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_MATCH_NBT
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_MATCH_NBT_TYPE
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_PREFER_SMALLER_STACKS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_TEMP_DISABLE_REFILL_FOR_TOOLS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getAUTO_REFILL_WAIT_TICK
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getNOTIFICATION_STEP
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getNUMBER_OF_NOTIFICATIONS
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getREFILL_ARMOR
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getREFILL_BEFORE_TOOL_BREAK
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getTOOL_DAMAGE_THRESHOLD
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getTYPE_VISUAL_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getTYPE_VISUAL_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getTYPE_VISUAL_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getVISUAL_DURABILITY_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getVISUAL_REPLACE_FAILED_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class getVISUAL_REPLACE_SUCCESS_NOTIFICATION
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class refill.general
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class refill.matching
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class refill.non
+ipn CLASS org/anti_ad/mc/ipnext/config/AutoRefillSettings.class refill.notifications
+ipn CLASS org/anti_ad/mc/ipnext/config/ConfigsKt.class AutoRefillSettings
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class CONTINUOUS_CRAFTING_CHECKBOX_VALUE
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class CONTINUOUS_CRAFTING_SAVED_VALUE
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class ContinuousCraftingCheckboxValue
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class SHOW_CONTINUOUS_CRAFTING_CHECKBOX
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class XgetCONTINUOUS_CRAFTING_CHECKBOX_VALUE
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class XgetCONTINUOUS_CRAFTING_SAVED_VALUE
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class cgetSHOW_CONTINUOUS_CRAFTING_CHECKBOX
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class getCONTINUOUS_CRAFTING_CHECKBOX_VALUE
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class getCONTINUOUS_CRAFTING_SAVED_VALUE
+ipn CLASS org/anti_ad/mc/ipnext/config/GuiSettings.class getSHOW_CONTINUOUS_CRAFTING_CHECKBOX
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class AUTO_CRAFT_DELAY
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class CONTINUOUS_CRAFTING_METHOD
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class ENABLE_AUTO_REFILL
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class IgetAUTO_CRAFT_DELAY
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class MOVE_JUST_REFILL_MODIFIER
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class QgetMOVE_JUST_REFILL_MODIFIER
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class SgetCONTINUOUS_CRAFTING_METHOD
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class TgetENABLE_AUTO_REFILL
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class getAUTO_CRAFT_DELAY
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class getCONTINUOUS_CRAFTING_METHOD
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class getENABLE_AUTO_REFILL
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class getMOVE_JUST_REFILL_MODIFIER
+ipn CLASS org/anti_ad/mc/ipnext/config/ModSettings.class inventoryprofiles.config.category.auto_refill
+ipn CLASS org/anti_ad/mc/ipnext/gui/ConfigScreen.class AutoRefillHandler
+ipn CLASS org/anti_ad/mc/ipnext/profiles/config/ProfilesConfigParserKt.class unbreaking

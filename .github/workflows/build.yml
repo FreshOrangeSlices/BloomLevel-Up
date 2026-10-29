@@ -151,6 +151,20 @@ jobs:
           text = '\n'.join(hits[-40:]) or 'no game test output found'
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=addon-gametest-summary::{esc(text[:3900])}")
+          # The add-on's own numbers (terrain survey, spawn search) in full.
+          ours = [l.strip() for l in lines if re.search(r'legionwarex (terrain|spawn)', l)]
+          for n, i in enumerate(range(0, min(len('\n'.join(ours)), 3900 * 4), 3900)):
+              print(f"::notice title=addon-numbers-{n}::{esc(chr(10).join(ours)[i:i + 3900])}")
+          # A server that crashed (or never ran the tests) can still leave Gradle happy: say why, and fail.
+          if not any('GAME TESTS COMPLETE' in l for l in lines):
+              keep = []
+              for i, line in enumerate(lines):
+                  if re.search(r'/ERROR\]|/FATAL\]|Exception|Caused by|Crash|crash report|Mixin|Missing|Failed', line):
+                      keep.extend(lines[i:i + 4])
+              text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-120:])
+              for n, chunk in enumerate([text[i:i + 3900] for i in range(0, len(text), 3900)][:8]):
+                  print(f"::error title=addon-gametest-crash-{n:02d}::{esc(chunk)}")
+              raise SystemExit(1)
           PY
       - name: report build errors
         if: failure()

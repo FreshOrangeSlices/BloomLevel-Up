@@ -570,7 +570,7 @@ def band_check(server, player, entities, shots):
 def terrain_check(server_dir, spec_file):
     """The add-on's terrain survey (-Dlegionwarex.terrain): the Overworld the server would make beside vanilla's for the
     same seed, and where a new world's spawn goes. Fails when the survey didn't run, a spawn search found no mainland,
-    or (with the pack's erosion change) the pack's land has no fewer mountains than vanilla's. Returns
+    or (with the pack's erosion change) the pack has more than 60% of vanilla's land over y 130. Returns
     (failures, notes, report lines)."""
     failures, notes, report = [], [], []
     path = os.path.join(server_dir, "legionwarex-terrain.jsonl")
@@ -592,10 +592,13 @@ def terrain_check(server_dir, spec_file):
                      + ", highest " + str(pack["landMax"]) + " vs " + str(vanilla["landMax"])
                      + "; land " + pct(pack["land"]) + " vs " + pct(vanilla["land"]))
         spec = json.load(open(spec_file))
+        # The erosion change pulls in the low end, where the high land is: land over y 130 must fall well below
+        # vanilla's (when the seed has some). Mountain biomes are only reported: windswept hills and meadows, which
+        # sit higher in erosion, keep their share by design.
         if "minecraft:density_function/overworld/erosion" in spec.get("pack_data", {}).get("worldgen", {}) \
-                and pack["mountainBiomes"] > vanilla["mountainBiomes"] * 0.85:
-            failures.append("terrain: the pack's erosion change left as many mountains as vanilla's ("
-                            + pct(pack["mountainBiomes"]) + " vs " + pct(vanilla["mountainBiomes"]) + ")")
+                and vanilla["over130"] >= 0.005 and pack["over130"] > vanilla["over130"] * 0.6:
+            failures.append("terrain: the pack's erosion change left nearly as much land over y 130 as vanilla's ("
+                            + pct(pack["over130"]) + " vs " + pct(vanilla["over130"]) + ")")
     else:
         failures.append("add-on: the terrain survey has no pack/vanilla rows")
     for row in [r for r in rows if r.get("kind") == "spawn"]:

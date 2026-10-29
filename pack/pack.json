@@ -360,7 +360,7 @@
         "bookofdragons:has_roost_cave": {"why": "Cave roosts (Gronckle, Whispering Death): vanilla's windswept hills, Stony Peaks and Meadow; now every hill and mountain (BOP's Highland, Crag, Jade Cliffs, Moor, Volcano).", "values": ["#minecraft:is_hill", "#forge:is_mountain"]},
         "bookofdragons:has_roost_glade": {"why": "Glade roosts (Deadly Nadder, Hideous Zippleback): vanilla's old-growth forests and two jungles; now every forest, taiga and jungle.", "values": ["#minecraft:is_forest", "#minecraft:is_taiga", "#minecraft:is_jungle", "#forge:is_coniferous", "#forge:is_dense"]},
         "bookofdragons:has_roost_wetland": {"why": "Wetland roosts (Hideous Zippleback): vanilla's swamps and Mushroom Fields; now every swamp (BOP's Bayou, Bog, Floodplain, Marsh, Moor, Muskeg, Wetland).", "values": ["#forge:is_swamp"]},
-        "bookofdragons:has_roost_barrens": {"why": "Barrens roosts (Monstrous Nightmare, Gronckle): vanilla's desert, badlands and savannas; now every dry biome and savanna.", "values": ["#forge:is_desert", "#forge:is_dry", "#minecraft:is_badlands", "#minecraft:is_savanna", "#forge:is_wasteland"]},
+        "bookofdragons:has_roost_barrens": {"why": "Barrens roosts (Monstrous Nightmare, Gronckle): vanilla's desert, badlands and savannas; now every dry biome and savanna.", "values": ["#forge:is_desert", "#forge:is_dry/overworld", "#minecraft:is_badlands", "#minecraft:is_savanna", "#forge:is_wasteland"]},
         "block_factorys_bosses:dragon_tower": {"why": "Structures (FreshOrangeSlices: too far apart in BOP land): Bosses'Rise's dragon tower: vanilla jungles, swamps, plains, savanna and windswept hills; BOP's too.", "values": ["#minecraft:is_jungle", "#forge:is_swamp", "#forge:is_plains", "#minecraft:is_savanna", "#minecraft:is_hill"]},
         "block_factorys_bosses:sandworm_nest": {"why": "Bosses'Rise's sandworm nest: vanilla Desert only; every desert.", "values": ["#forge:is_desert"]},
         "block_factorys_bosses:yeti_hideout": {"why": "Bosses'Rise's yeti hideout: vanilla Snowy Plains only; every snowy biome.", "values": ["#forge:is_snowy"]},
@@ -377,13 +377,13 @@
         "graveyard:has_structure/small_desert_grave": {"why": "Small desert grave: vanilla Desert; every desert.", "values": ["#forge:is_desert"]},
         "graveyard:has_structure/small_desert_graveyard": {"why": "Small desert graveyard: vanilla Desert; every desert.", "values": ["#forge:is_desert"]},
         "graveyard:has_structure/small_mountain_grave": {"why": "Small mountain grave: vanilla peaks and slopes; every mountain.", "values": ["#minecraft:is_mountain", "#forge:is_mountain"]},
-        "graveyard:has_structure/small_savanna_grave": {"why": "Small savanna grave: vanilla savannas and badlands; every savanna and badlands, BOP's dry lands.", "values": ["#minecraft:is_savanna", "#minecraft:is_badlands", "#forge:is_dry"]},
+        "graveyard:has_structure/small_savanna_grave": {"why": "Small savanna grave: vanilla savannas and badlands; every savanna and badlands, BOP's dry lands.", "values": ["#minecraft:is_savanna", "#minecraft:is_badlands", "#forge:is_dry/overworld"]},
         "illagerinvasion:has_structure/firecaller_hut": {"why": "Illager Invasion's firecaller hut: vanilla badlands; BOP's wastelands and volcanic land too.", "values": ["#minecraft:is_badlands", "#forge:is_wasteland", "biomesoplenty:volcanic_plains"]},
         "illagerinvasion:has_structure/illusioner_tower": {"why": "Illusioner tower: Dark Forest, taigas and Swamp; every taiga and swamp, and Ominous Woods.", "values": ["#minecraft:is_taiga", "#forge:is_swamp", "biomesoplenty:ominous_woods"]},
         "illagerinvasion:has_structure/sorcerer_hut": {"why": "Sorcerer hut: Dark Forest; BOP's Ominous Woods and dead forests.", "values": ["biomesoplenty:ominous_woods", "biomesoplenty:dead_forest", "biomesoplenty:old_growth_dead_forest"]},
         "legendary_monsters:has_structure/mossy_temple_biomes": {"why": "Legendary Monsters' mossy temple (Overgrown Colossus): two vanilla jungles; every jungle and rainforest.", "values": ["#minecraft:is_jungle", "biomesoplenty:rainforest", "biomesoplenty:rocky_rainforest", "biomesoplenty:fungal_jungle", "biomesoplenty:tropics"]},
         "legendary_monsters:has_structure/ruined_pyramid_biomes": {"why": "Legendary Monsters' ruined pyramid: vanilla Desert; every desert.", "values": ["#forge:is_desert"]},
-        "monsterexpansion:rakoth_biomes": {"why": "Monster Expansion's Rakoth (its spawn marker): vanilla desert and badlands; every desert and dry land.", "values": ["#forge:is_desert", "#forge:is_dry", "#minecraft:is_badlands"]},
+        "monsterexpansion:rakoth_biomes": {"why": "Monster Expansion's Rakoth (its spawn marker): vanilla desert and badlands; every desert and dry land.", "values": ["#forge:is_desert", "#forge:is_dry/overworld", "#minecraft:is_badlands"]},
         "mythsandlegends:old_camp_biomes": {"why": "Myths & Legends' old camp (possessed armor): Flower Forest and Meadow; BOP's flower fields and meadows too.", "values": ["biomesoplenty:lavender_field", "biomesoplenty:jacaranda_glade", "biomesoplenty:field", "biomesoplenty:grassland", "biomesoplenty:pasture"]}
       },
       "structure_sets": {
@@ -392,13 +392,33 @@
         "bookofdragons:roost_cave": {"spacing": 14, "separation": 7},
         "bookofdragons:roost_glade": {"spacing": 17, "separation": 8},
         "bookofdragons:roost_wetland": {"spacing": 17, "separation": 8},
-        "bookofdragons:roost_barrens": {"spacing": 17, "separation": 8}
+        "bookofdragons:roost_barrens": {"spacing": 17, "separation": 8},
+        "_nether": "The Nether's structures a quarter closer together, so nearly twice as many per area (FreshOrangeSlices: travelling there is dangerous, so they should be easier to find). Bosses'Rise's Underworld Arena (the Underworld Knight; huge) stays as it was, and so do fortresses and bastions (vanilla's nether_complexes): the arena keeps 8 chunks from them, so more of them would make it rarer. Legionary's Bastion Arena (the Unbreakable) was 320/128, one per 5000 Nether blocks: now 80/32.",
+        "cataclysm:burning_arena": {"spacing": 60, "separation": 38},
+        "cataclysm:soul_black_smith": {"spacing": 45, "separation": 38},
+        "irons_spellbooks:ancient_battleground": {"spacing": 26, "separation": 9},
+        "irons_spellbooks:citadel": {"spacing": 75, "separation": 60},
+        "legendary_monsters:lava_eater_spawn": {"spacing": 19, "separation": 10},
+        "legendary_monsters:skeletosaurus_nest": {"spacing": 19, "separation": 10},
+        "legendary_monsters:soul_fortress_remains": {"spacing": 20, "separation": 13},
+        "legionary:bastion_arena": {"spacing": 80, "separation": 32},
+        "mythsandlegends:scorched_nest": {"spacing": 20, "separation": 3},
+        "soulsweapons:nether_structures": {"spacing": 45, "separation": 22}
+      },
+      "structure_spawns": {
+        "_comment": "Mobs added to a structure's own spawns (Forge structure modifiers, forge:add_spawns), as {entity: [weight, min, max]}.",
+        "fortress_wither_skeletons": {
+          "why": "Fortresses: twice the wither skeletons (vanilla's weight 8 in fives, plus 8 more in fours to sixes), now that Cataclysm's Ignited Berserkers share the fortress too (FreshOrangeSlices). About half the fortress's mobs instead of a third.",
+          "structures": ["minecraft:fortress"],
+          "category": "monster",
+          "spawners": {"minecraft:wither_skeleton": [8, 4, 6]}
+        }
       },
       "add": {
         "ghouls": {
-          "why": "The Graveyard's ghouls (packs of 2-5): vanilla forests, taigas and swamps at weight 25; now all land (BOP's too) at 40.",
+          "why": "The Graveyard's ghouls (packs of 2-5): vanilla forests, taigas and swamps at weight 25; now all Overworld land (BOP's too) at 40. Overworld only: Forge's plain is_dry tag has the Nether and the End in it, so the pack uses is_dry/overworld (FreshOrangeSlices: no ghouls in the Nether).",
           "category": "monster",
-          "biomes": ["#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense", "#forge:is_swamp", "#minecraft:is_jungle", "#forge:is_lush", "#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_beach", "#minecraft:is_river"],
+          "biomes": ["#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense", "#forge:is_swamp", "#minecraft:is_jungle", "#forge:is_lush", "#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry/overworld", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_beach", "#minecraft:is_river"],
           "spawners": {"graveyard:ghoul": [40, 2, 5]}
         },
         "revenants": {
@@ -410,13 +430,13 @@
         "nightmares": {
           "why": "The Graveyard's nightmares (alone): open land as before, and BOP's dry and high land; weight 20 (was 10).",
           "category": "monster",
-          "biomes": ["#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#minecraft:is_beach"],
+          "biomes": ["#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry/overworld", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#minecraft:is_beach"],
           "spawners": {"graveyard:nightmare": [20, 1, 1]}
         },
         "koboletons": {
           "why": "Cataclysm's koboletons (its desert ruins' regulars, 2-3): vanilla deserts, savannas and badlands at 15; now every dry biome, and savannas, at 35.",
           "category": "monster",
-          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_savanna"],
+          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry/overworld", "#forge:is_sandy", "#forge:is_wasteland", "#minecraft:is_savanna"],
           "spawners": {"cataclysm:koboleton": [35, 2, 3]}
         },
         "skarrier_caves": {
@@ -469,6 +489,7 @@
         },
         "skarrier_end": {
           "why": "Voidrake: End Barrens and End Highlands, after the Wither.",
+          "dimensions": ["end"],
           "category": "monster",
           "biomes": ["minecraft:end_barrens", "minecraft:end_highlands"],
           "spawners": {"skarrier_mobs:voidrake": [10, 1, 1]}
@@ -476,7 +497,7 @@
         "monster_expansion_animals": {
           "why": "Arborix and Kobeko (neutral, spawn like animals, in daylight too) as before, and in BOP's land biomes.",
           "category": "creature",
-          "biomes": ["minecraft:plains", "minecraft:sunflower_plains", "minecraft:snowy_plains", "minecraft:ice_spikes", "minecraft:desert", "minecraft:swamp", "minecraft:mangrove_swamp", "minecraft:forest", "minecraft:flower_forest", "minecraft:birch_forest", "minecraft:old_growth_birch_forest", "minecraft:dark_forest", "minecraft:jungle", "minecraft:sparse_jungle", "minecraft:bamboo_jungle", "minecraft:taiga", "minecraft:snowy_taiga", "minecraft:old_growth_pine_taiga", "minecraft:old_growth_spruce_taiga", "minecraft:savanna", "minecraft:savanna_plateau", "minecraft:windswept_savanna", "minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands", "minecraft:meadow", "minecraft:cherry_grove", "minecraft:grove", "minecraft:snowy_slopes", "minecraft:frozen_peaks", "minecraft:jagged_peaks", "minecraft:stony_peaks", "minecraft:windswept_hills", "minecraft:windswept_gravelly_hills", "minecraft:windswept_forest", "minecraft:mushroom_fields", "minecraft:beach", "minecraft:snowy_beach", "minecraft:stony_shore", "minecraft:dripstone_caves", "minecraft:lush_caves", "#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense", "#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland", "#forge:is_snowy", "#forge:is_swamp", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#minecraft:is_jungle"],
+          "biomes": ["minecraft:plains", "minecraft:sunflower_plains", "minecraft:snowy_plains", "minecraft:ice_spikes", "minecraft:desert", "minecraft:swamp", "minecraft:mangrove_swamp", "minecraft:forest", "minecraft:flower_forest", "minecraft:birch_forest", "minecraft:old_growth_birch_forest", "minecraft:dark_forest", "minecraft:jungle", "minecraft:sparse_jungle", "minecraft:bamboo_jungle", "minecraft:taiga", "minecraft:snowy_taiga", "minecraft:old_growth_pine_taiga", "minecraft:old_growth_spruce_taiga", "minecraft:savanna", "minecraft:savanna_plateau", "minecraft:windswept_savanna", "minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands", "minecraft:meadow", "minecraft:cherry_grove", "minecraft:grove", "minecraft:snowy_slopes", "minecraft:frozen_peaks", "minecraft:jagged_peaks", "minecraft:stony_peaks", "minecraft:windswept_hills", "minecraft:windswept_gravelly_hills", "minecraft:windswept_forest", "minecraft:mushroom_fields", "minecraft:beach", "minecraft:snowy_beach", "minecraft:stony_shore", "minecraft:dripstone_caves", "minecraft:lush_caves", "#minecraft:is_forest", "#minecraft:is_taiga", "#forge:is_coniferous", "#forge:is_dense", "#forge:is_plains", "#minecraft:is_savanna", "#forge:is_grassland", "#forge:is_plateau", "#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry/overworld", "#forge:is_sandy", "#forge:is_wasteland", "#forge:is_snowy", "#forge:is_swamp", "#minecraft:is_mountain", "#forge:is_mountain", "#minecraft:is_hill", "#minecraft:is_jungle"],
           "spawners": {"monsterexpansion:arborix": [1, 1, 1], "monsterexpansion:kobeko": [1, 1, 1]}
         },
         "roaming_queen_of_orchid": {
@@ -546,7 +567,7 @@
         "desert_crew": {
           "why": "About 1 in 20: The Graveyard's desert-village crew in dry lands (Cataclysm's koboletons come by their tag above).",
           "category": "monster",
-          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry", "#forge:is_sandy", "#forge:is_wasteland"],
+          "biomes": ["#forge:is_desert", "#minecraft:is_badlands", "#forge:is_dry/overworld", "#forge:is_sandy", "#forge:is_wasteland"],
           "spawners": {"graveyard:corrupted_pillager": [15, 1, 2], "graveyard:corrupted_vindicator": [10, 1, 1]}
         },
         "snow_crew": {

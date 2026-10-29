@@ -228,7 +228,9 @@ def spawn_check(server_dir, dump_file, spec_file):
     registry dump (every biome's spawn list after all mods' modifiers). Fails when a mob the pack adds is missing from
     every biome (its modifier didn't load) or is a monster that never despawns (natural spawns would pile up; animals never
     do, and spawns.persistent lists the monsters kept anyway), when Skrythe's lair can go
-    in a biome that isn't a mountain, or when a Skarrier cave mob is still listed in the Nether or the End. Reports each
+    in a biome that isn't a mountain, when a Skarrier cave mob is still listed in the Nether or the End, when a biome list
+    of the pack's reaches a dimension it doesn't name (Overworld only, unless it says), when a structure set isn't at
+    the pack's spacing, or when a mob the pack adds to a structure isn't in its spawns. Reports each
     overworld biome's modded share of the night's spawns, counted in mobs (weight x average group): about 1 in 5 is
     the aim. Mobs that spawn only underground, after the Wither or under a condition of their own (spawns.conditional)
     and quiet biomes are left out. Returns (failures, notes, report lines)."""
@@ -252,7 +254,7 @@ def spawn_check(server_dir, dump_file, spec_file):
     conditional = {e for k, v in spawns.get("conditional", {}).items() if not k.startswith("_") for e in v}
     quiet_ids = set(spawns.get("quiet", {}).get("biomes", []))
     persistent = set(spawns.get("persistent", {}).get("mobs", []))
-    failures = []
+    failures, notes_extra = [], []
     listed = {s["type"] for b in biomes for v in b["spawns"].values() for s in v}
     for mob, groups in sorted(added.items()):
         if mob not in listed:
@@ -269,6 +271,31 @@ def spawn_check(server_dir, dump_file, spec_file):
                         for s in v if s["type"] in overworld_only})
     if elsewhere:
         failures.append(f"spawns: Skarrier's overworld mobs are still listed outside the Overworld: {', '.join(elsewhere)}")
+    # The pack's own biome lists (spawn groups, tags it adds to) stay in the Overworld unless they say otherwise
+    # ("dimensions"): Forge's plain is_dry, for one, has the Nether and the End in it.
+    dimension = lambda b: "nether" if "minecraft:is_nether" in b["tags"] else "end" if "minecraft:is_end" in b["tags"] else "overworld"
+    reach = lambda values: {b["id"]: dimension(b) for b in biomes for v in values
+                            if (v.startswith("#") and v[1:] in b["tags"]) or v == b["id"]}
+    lists = [(f"spawn group {n}", s.get("biomes", []), s) for n, s in spawns.get("add", {}).items() if not n.startswith("_")]
+    lists += [(f"biome tag {t}", s.get("values", []), s) for t, s in spawns.get("biome_tags", {}).items() if not t.startswith("_")]
+    for label, values, spec in lists:
+        astray = sorted(i for i, d in reach(values).items() if d not in spec.get("dimensions", ["overworld"]))
+        if astray:
+            failures.append(f"spawns: {label} reaches {', '.join(astray[:6])}{' ...' if len(astray) > 6 else ''} (outside its dimensions)")
+    # Mobs added to structures' own spawns (Forge structure modifiers): listed there, as the pack gives them.
+    structures = {r["id"]: r for r in rows if r.get("kind") == "structure"}
+    for pack in (sorted(os.listdir(folder)) if os.path.isdir(folder) else []):
+        mods_dir = os.path.join(folder, pack, "data", "legionwarex", "forge", "structure_modifier", "spawns")
+        for name in sorted(os.listdir(mods_dir)) if os.path.isdir(mods_dir) else []:
+            modifier = json.load(open(os.path.join(mods_dir, name)))
+            for ident in modifier["structures"]:
+                for spawner in modifier["spawners"]:
+                    want = {"type": spawner["type"], "weight": spawner["weight"], "min": spawner["minCount"], "max": spawner["maxCount"]}
+                    found = any(want in o.get("spawns", []) for o in (structures.get(ident) or {}).get("spawns", {}).values())
+                    if not found:
+                        failures.append(f"spawns: {ident} doesn't list {spawner['type']} {spawner['weight']} ({name[:-5]}; its structure modifier didn't load)")
+                    else:
+                        notes_extra.append(f"structure spawns: {ident} + {spawner['type']} {spawner['weight']} ({spawner['minCount']}-{spawner['maxCount']})")
     # Book of Dragons' roosts: every type in BOP's biomes too, at the pack's spacing.
     sets = {r["id"]: r for r in rows if r.get("kind") == "structure_set"}
     roosts = []
@@ -306,7 +333,8 @@ def spawn_check(server_dir, dump_file, spec_file):
     notes = [f"spawns: {len(added)} mobs added by the pack; modded share of night spawns (in mobs) on land: median "
              f"{median * 100:.0f}%, {land[0][0] * 100:.0f}% ({land[0][1]}) to {land[-1][0] * 100:.0f}% ({land[-1][1]})" if land else "spawns: no land biomes"]
     if roosts:
-        notes.append("dragon roosts: " + ", ".join(roosts))
+        notes.append("structure sets: " + ", ".join(roosts))
+    notes += notes_extra
     # Biome tags the pack adds to (structures, roosts): each on some biome, and on one of BOP's when it names BOP's.
     have_bop = any(b["id"].startswith("biomesoplenty:") for b in biomes)
     for tag, want in spawns.get("biome_tags", {}).items():

@@ -334,11 +334,12 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
     - add: forge:add_spawns, each with its own biome tag (legionwarex:spawns/<name>) made from the biomes and tags it
       lists, and spawners {entity: [weight, min, max]};
     - quiet: biomes no group adds to (unless the group says "quiet": false);
-    - structure_sets: a mod's structure set (from its jar) with new spacing and separation, in chunks.
+    - structure_sets: a mod's structure set (from its jar) with new spacing and separation, in chunks;
+    - structure_spawns: forge:add_spawns structure modifiers, mobs added to structures' own spawn lists.
     Spawners, tags and modifiers of mods a layer leaves out are skipped (present: the namespaces in the layer's jars):
     a biome modifier naming an entity that doesn't exist would stop every world from loading."""
     out, made = {}, []
-    have = (lambda ident: ident.lstrip("#").split(":")[0] in present) if present is not None else (lambda ident: True)
+    have = (lambda ident: ident.lstrip("#").split(":")[0] in present | {"minecraft", "forge"}) if present is not None else (lambda ident: True)
     entries = lambda values: [{"id": v, "required": False} for v in values]
     modifiers = set()
     if jars:
@@ -378,7 +379,9 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
         for data in (jars or {}).values():
             try:
                 z = zipfile.ZipFile(io.BytesIO(data))
-                original = json.loads(z.read(f"data/{namespace}/worldgen/structure_set/{path}.json"))
+                # Minecraft reads data JSON leniently: Iron's Spellbooks' sets carry // comment lines.
+                text = z.read(f"data/{namespace}/worldgen/structure_set/{path}.json").decode("utf-8", "replace")
+                original = json.loads(re.sub(r"(?m)^\s*//.*$", "", text))
                 break
             except (KeyError, zipfile.BadZipFile, ValueError):
                 continue
@@ -407,10 +410,23 @@ def spawn_data(root, spawns, present, problems, notes=None, jars=None):
         out[f"{root}/data/legionwarex/forge/biome_modifier/spawns/{name}.json"] = {
             "type": "forge:add_spawns", "biomes": biomes, "spawners": spawners}
         made.append(f"add {name} ({len(spawners)})")
+    # Mobs added to structures' own spawn lists (Forge structure modifiers, run after the mods' own).
+    for name, spec in spawns.get("structure_spawns", {}).items():
+        if name.startswith("_"):
+            continue
+        spawners = [{"type": entity, "weight": w, "minCount": lo, "maxCount": hi}
+                    for entity, (w, lo, hi) in spec["spawners"].items() if have(entity)]
+        structures = [s for s in spec["structures"] if have(s)]
+        if not spawners or not structures:
+            continue
+        out[f"{root}/data/legionwarex/forge/structure_modifier/spawns/{name}.json"] = {
+            "type": "forge:add_spawns", "structures": structures, "spawners": spawners}
+        made.append(f"structure {name} ({len(spawners)})")
     if notes is not None and made:
         notes.append(f"spawns: {len([m for m in made if m.startswith('off')])} mod spawns off, "
                      f"{len([m for m in made if m.startswith('tag')])} biome tags, {len([m for m in made if m.startswith('add')])} spawn groups, "
-                     f"{len([m for m in made if m.startswith('set')])} structure sets respaced")
+                     f"{len([m for m in made if m.startswith('set')])} structure sets respaced, "
+                     f"{len([m for m in made if m.startswith('structure')])} structure spawn groups")
     return out
 
 

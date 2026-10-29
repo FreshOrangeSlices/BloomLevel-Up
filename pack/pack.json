@@ -360,10 +360,14 @@
     },
     "worldgen": {
       "_comment": "Worldgen files the pack replaces, at data/<namespace>/worldgen/<path>.json. They only shape chunks made after the change: an old world gets seams where new chunks meet old ones, so these are for new worlds. The pack test reads the terrain the server would make (the add-on's terrain survey, -Dlegionwarex.terrain) beside vanilla's for the same seed.",
+      "legionwarex:density_function/erosion_noise": {
+        "why": "Vanilla's erosion noise, as vanilla's minecraft:overworld/erosion reads it (unchanged), named so the pack's erosion below can use it twice.",
+        "json": {"type": "minecraft:shifted_noise", "noise": "minecraft:erosion", "shift_x": "minecraft:shift_x", "shift_y": 0.0, "shift_z": "minecraft:shift_z", "xz_scale": 0.25, "y_scale": 0.0}
+      },
       "minecraft:density_function/overworld/erosion": {
-        "why": "Fewer and lower mountains (FreshOrangeSlices: too many of them, and too big; oceans are fine). Erosion is the noise that decides how rugged land is: low erosion is where peaks and slopes rise, both in the terrain's height and in which biome goes there, so lifting its low end gives fewer mountains everywhere, Biomes O' Plenty's land included. Vanilla's value x 0.9 + 0.1: -1 becomes -0.8, 0 becomes 0.1, 1 stays 1 (flat land and swamps, at the top, barely change). Continentalness (land and sea) is untouched.",
-        "json": {"type": "minecraft:flat_cache", "argument": {"type": "minecraft:add", "argument1": 0.1, "argument2": {"type": "minecraft:mul", "argument1": 0.9,
-          "argument2": {"type": "minecraft:shifted_noise", "noise": "minecraft:erosion", "shift_x": "minecraft:shift_x", "shift_y": 0.0, "shift_z": "minecraft:shift_z", "xz_scale": 0.25, "y_scale": 0.0}}}}
+        "why": "Fewer and lower mountains (FreshOrangeSlices: too many of them, and too big; oceans are fine). Erosion is the noise that decides how rugged land is: low erosion is where peaks and slopes rise, both in the terrain's height and in which biome goes there, so pulling its low end in gives fewer mountains everywhere, Biomes O' Plenty's land included. Below 0 vanilla's value x 0.65 (-1 becomes -0.65), 0 and above unchanged: the lowest band (below -0.78, where the highest peaks rise) is gone, the next (below -0.375, peaks and mountains) about halves, and flat land, windswept hills and swamps (the top) don't change. A first try (x 0.9 + 0.1 everywhere, build #295) lowered the peaks but pushed land into the windswept hills' band, so the share of mountain biomes hardly fell. Continentalness (land and sea) is untouched.",
+        "json": {"type": "minecraft:flat_cache", "argument": {"type": "minecraft:max", "argument1": "legionwarex:erosion_noise",
+          "argument2": {"type": "minecraft:mul", "argument1": 0.65, "argument2": "legionwarex:erosion_noise"}}}
       }
     },
     "spawns": {

@@ -1,0 +1,757 @@
+{
+ "recipes": {
+  "data/aquamirae/recipes/echo_compass.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " 1 ",
+    "101",
+    " 1 "
+   ],
+   "key": {
+    "0": {
+     "item": "minecraft:compass"
+    },
+    "1": {
+     "item": "aquamirae:ship_graveyard_echo"
+    }
+   },
+   "result": {
+    "item": "aquamirae:echo_compass",
+    "count": 1
+   }
+  },
+  "data/monsterexpansion/recipes/kobeko_locator.json": {
+   "type": "monsterexpansion:foundry",
+   "pattern": [
+    "     ",
+    "   B ",
+    "  B  ",
+    " B   ",
+    "     "
+   ],
+   "key": {
+    "B": {
+     "item": "minecraft:bone"
+    }
+   },
+   "result": {
+    "item": "monsterexpansion:kobeko_locator",
+    "count": 1
+   }
+  },
+  "data/monsterexpansion/recipes/kobeko_locator_crafting.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "  B",
+    " B ",
+    "B  "
+   ],
+   "key": {
+    "B": {
+     "item": "minecraft:bone"
+    }
+   },
+   "result": {
+    "item": "monsterexpansion:kobeko_locator",
+    "count": 1
+   }
+  },
+  "data/irons_spellbooks/recipes/citadel_map.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "PFP",
+    "CPC",
+    "PFP"
+   ],
+   "key": {
+    "P": {
+     "item": "minecraft:paper"
+    },
+    "C": {
+     "item": "irons_spellbooks:cinder_essence"
+    },
+    "F": {
+     "item": "irons_spellbooks:ancient_knowledge_fragment"
+    }
+   },
+   "result": {
+    "item": "irons_spellbooks:furled_map_citadel"
+   }
+  },
+  "data/irons_spellbooks/recipes/spider_den_map.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "SW ",
+    "WCW",
+    " WS"
+   ],
+   "key": {
+    "S": {
+     "item": "irons_spellbooks:frozen_bone"
+    },
+    "W": {
+     "item": "minecraft:cobweb"
+    },
+    "C": {
+     "item": "irons_spellbooks:magic_cloth"
+    }
+   },
+   "result": {
+    "item": "irons_spellbooks:furled_map_ice_spider_den"
+   }
+  },
+  "data/irons_spellbooks/recipes/wayward_compass.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "DID",
+    "ILI",
+    "DID"
+   ],
+   "key": {
+    "D": {
+     "item": "irons_spellbooks:arcane_essence"
+    },
+    "I": {
+     "tag": "forge:ingots/iron"
+    },
+    "L": {
+     "item": "minecraft:soul_lantern"
+    }
+   },
+   "result": {
+    "item": "irons_spellbooks:wayward_compass",
+    "count": 1
+   }
+  },
+  "data/soulsweapons/recipes/boss_compass.json": {
+   "type": "minecraft:crafting_shaped",
+   "category": "equipment",
+   "key": {
+    "#": {
+     "item": "soulsweapons:moonstone"
+    },
+    "X": {
+     "item": "minecraft:compass"
+    }
+   },
+   "pattern": [
+    "###",
+    "#X#",
+    "###"
+   ],
+   "result": {
+    "item": "soulsweapons:boss_compass"
+   },
+   "show_notification": true
+  },
+  "data/cataclysm/recipes/abyss_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "#O#",
+    "OEO",
+    "#O#"
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:crying_obsidian"
+    },
+    "O": {
+     "item": "minecraft:obsidian"
+    },
+    "E": {
+     "item": "minecraft:ender_eye"
+    }
+   },
+   "result": {
+    "item": "cataclysm:abyss_eye",
+    "count": 1
+   }
+  },
+  "data/cataclysm/recipes/cursed_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "gBg",
+    "PEP",
+    "gRg"
+   ],
+   "key": {
+    "g": {
+     "item": "minecraft:gold_ingot"
+    },
+    "B": {
+     "item": "minecraft:bone"
+    },
+    "P": {
+     "item": "minecraft:phantom_membrane"
+    },
+    "E": {
+     "item": "minecraft:ender_eye"
+    },
+    "R": {
+     "item": "minecraft:rotten_flesh"
+    }
+   },
+   "result": {
+    "item": "cataclysm:cursed_eye",
+    "count": 1
+   }
+  },
+  "data/cataclysm/recipes/desert_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "gCE",
+    "DOG",
+    "RCB"
+   ],
+   "key": {
+    "g": {
+     "item": "minecraft:gold_ingot"
+    },
+    "C": {
+     "item": "minecraft:chiseled_sandstone"
+    },
+    "E": {
+     "item": "minecraft:emerald"
+    },
+    "D": {
+     "item": "minecraft:dead_bush"
+    },
+    "O": {
+     "item": "minecraft:ender_eye"
+    },
+    "G": {
+     "item": "minecraft:cactus"
+    },
+    "R": {
+     "item": "minecraft:rotten_flesh"
+    },
+    "B": {
+     "item": "minecraft:bone"
+    }
+   },
+   "result": {
+    "item": "cataclysm:desert_eye",
+    "count": 1
+   }
+  },
+  "data/cataclysm/recipes/flame_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "###",
+    "NEN",
+    "SSS"
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:blaze_powder"
+    },
+    "N": {
+     "item": "minecraft:netherite_scrap"
+    },
+    "E": {
+     "item": "minecraft:ender_eye"
+    },
+    "S": {
+     "item": "minecraft:soul_sand"
+    }
+   },
+   "result": {
+    "item": "cataclysm:flame_eye",
+    "count": 1
+   }
+  },
+  "data/cataclysm/recipes/mech_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "#i#",
+    "iEi",
+    "#i#"
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:redstone_block"
+    },
+    "i": {
+     "item": "minecraft:iron_ingot"
+    },
+    "E": {
+     "item": "minecraft:ender_eye"
+    }
+   },
+   "result": {
+    "item": "cataclysm:mech_eye",
+    "count": 1
+   }
+  },
+  "data/cataclysm/recipes/monstrous_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "#N#",
+    "GEG",
+    "#N#"
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:lava_bucket"
+    },
+    "N": {
+     "item": "minecraft:netherite_scrap"
+    },
+    "G": {
+     "item": "minecraft:blackstone"
+    },
+    "E": {
+     "item": "minecraft:ender_eye"
+    }
+   },
+   "result": {
+    "item": "cataclysm:monstrous_eye",
+    "count": 1
+   }
+  },
+  "data/cataclysm/recipes/storm_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "#L#",
+    "EVE",
+    "CWC"
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:prismarine_shard"
+    },
+    "W": {
+     "item": "minecraft:water_bucket"
+    },
+    "E": {
+     "item": "minecraft:diamond"
+    },
+    "V": {
+     "item": "minecraft:ender_eye"
+    },
+    "C": {
+     "item": "minecraft:prismarine_crystals"
+    },
+    "L": {
+     "item": "minecraft:lightning_rod"
+    }
+   },
+   "result": {
+    "item": "cataclysm:storm_eye"
+   }
+  },
+  "data/cataclysm/recipes/void_eye.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    "#S#",
+    "EVE",
+    "PSP"
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:purpur_pillar"
+    },
+    "S": {
+     "item": "minecraft:shulker_shell"
+    },
+    "E": {
+     "item": "minecraft:end_stone_bricks"
+    },
+    "V": {
+     "item": "minecraft:ender_eye"
+    },
+    "P": {
+     "item": "minecraft:purpur_block"
+    }
+   },
+   "result": {
+    "item": "cataclysm:void_eye",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_air.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:feather"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_air",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_anniilation.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " G ",
+    "GiG",
+    " G "
+   ],
+   "key": {
+    "G": {
+     "item": "legendary_monsters:enderitium_gem"
+    },
+    "i": {
+     "item": "minecraft:ender_eye"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_annihilation",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_bones.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:bone"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_bones",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_chorus.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:chorus_fruit"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_chorus",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_frost.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:snowball"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_frost",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_ghost.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:soul_torch"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_ghost",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_magma.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:magma_block"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_magma",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_many_ribs.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:dripstone_block"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_many_ribs",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_moss.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:moss_block"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_moss",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_sandstorm.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " H ",
+    "HGH",
+    " H "
+   ],
+   "key": {
+    "H": {
+     "item": "minecraft:sandstone"
+    },
+    "G": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_sandstorm",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_shulker.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:end_stone"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_shulker",
+    "count": 1
+   }
+  },
+  "data/legendary_monsters/recipes/eye_of_soul.json": {
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+    " # ",
+    "#E#",
+    " # "
+   ],
+   "key": {
+    "#": {
+     "item": "minecraft:soul_sand"
+    },
+    "E": {
+     "item": "minecraft:ender_pearl"
+    }
+   },
+   "result": {
+    "item": "legendary_monsters:eye_of_soul",
+    "count": 1
+   }
+  }
+ },
+ "lang": {
+  "asynclocator.map.locating": "Map (Locating...)",
+  "asynclocator.map.none": "Map (No nearby feature found)",
+  "modernfix.option.mixin.perf.async_locator": "1.16 only. Backports the Async Locator mod's patches to eliminate server freezes associated with `/locate`, loot table generation, etc.",
+  "advancements.aquamirae.obtain_frozen_key.title": "The Dead Sea",
+  "advancements.aquamirae.obtain_frozen_key.description": "Claim the key from the restless Ghost of Captain Cornelia",
+  "item.aquamirae.echo_compass": "Echo Compass",
+  "item.aquamirae.frozen_key": "Frozen Key",
+  "tooltip.aquamirae.frozen_key": "Opens a chest hidden in the depths of the Ice Maze.",
+  "tooltip.aquamirae.echo_compass": "Resonates with the nearest Ship Graveyard Echo, attuned to its lingering call.",
+  "item.bookofdragons.barrens_roost_map": "Barrens Roost Map",
+  "item.bookofdragons.cave_roost_map": "Cave Roost Map",
+  "item.bookofdragons.cliff_roost_map": "Cliff Roost Map",
+  "item.bookofdragons.glade_roost_map": "Glade Roost Map",
+  "item.bookofdragons.roost_map.fail": "No roost found nearby within search radius!",
+  "item.bookofdragons.roost_map.instruction": "Right-click to locate structure",
+  "item.bookofdragons.roost_map.tooltip": "Points to a %s",
+  "item.bookofdragons.wetland_roost_map": "Wetland Roost Map",
+  "key.monsterexpansion.arborix_call_key": "Call Arborix",
+  "item.monsterexpansion.kobeko_locator": "Kobeko Locator",
+  "tooltip.monsterexpansion.kobeko_locator.description": "Allows you to teleport your tamed Kobeko to you from anywhere!",
+  "item.irons_spellbooks.wayward_compass": "Wayward Compass",
+  "item.irons_spellbooks.wayward_compass_desc": "The trapped soul points toward its home",
+  "item.irons_spellbooks.wayward_compass.error": "No catacombs loaded. [%s] to search",
+  "item.irons_spellbooks.antiquated_compass": "Antiquated Compass",
+  "item.irons_spellbooks.antiquated_compass_desc": "A magical resonance pulls strongly towards... Something.",
+  "item.irons_spellbooks.furled_map": "Furled Map",
+  "item.irons_spellbooks.furled_map_ancient": "Ancient Furled Map",
+  "item.irons_spellbooks.furled_map_descriptor_framing": "[%s]",
+  "item.irons_spellbooks.furled_map.dimension_fail": "This map does not lead to anything in this dimension.",
+  "item.irons_spellbooks.furled_map.guide": "Furled Maps hold a map leading to a set structure within. They can be found, traded for, or crafted, aiding you in your journeys.",
+  "item.irons_spellbooks.decrepit_key": "Decrepit Key",
+  "item.irons_spellbooks.decrepit_key.description": "Unlocks Citadel Vaults",
+  "item.irons_spellbooks.bone_key": "Bone Key",
+  "item.irons_spellbooks.bone_key.description": "Unlocks Catacombs Vaults",
+  "advancements.irons_spellbooks.make_wayward_compass.title": "And so a Quest Begins!",
+  "advancements.irons_spellbooks.make_wayward_compass.description": "Craft a wayward compass, and find out where it leads...",
+  "advancements.irons_spellbooks.make_antiquated_compass.title": "A Time Long Past",
+  "advancements.irons_spellbooks.make_antiquated_compass.description": "Craft an antiquated compass. Maybe don't find out where it leads...",
+  "item.soulsweapons.boss_compass": "Moonstone Compass",
+  "tooltip.soulsweapons.sneaking_keybind_ability": "While sneaking Ability Keybind: ",
+  "config.jade.display_mode_hold_key": "Hold",
+  "config.jade.display_mode_hold_key_desc": "Display keybind must be held.",
+  "gui.xaero_waypoints_key": "Open Waypoint Screen",
+  "gui.xaero_compass_over_wp": "Compass Over Waypoints",
+  "gui.xaero_compass": "Compass",
+  "gui.xaero_compass_north": "N",
+  "gui.xaero_compass_east": "E",
+  "gui.xaero_compass_south": "S",
+  "gui.xaero_compass_west": "W",
+  "gui.xaero_compass_scale": "Compass Scale On-Map",
+  "gui.xaero_box_compass_scale": "The scale of the compass letters NESW when using the on-map compass location.",
+  "gui.xaero_minimap_compass_inside_frame": "On Map",
+  "gui.xaero_minimap_compass_on_frame": "On Frame",
+  "gui.xaero_compass_color": "Compass Shadow Color",
+  "gui.xaero_box_compass_over_wp2": "Render compass letters (N, E, S, W) over the on-map waypoints. This only works for the on-frame compass location.",
+  "gui.xaero_north_compass_color": "North Compass Color",
+  "gui.xaero_north_compass_color_default": "Default",
+  "gui.xaero_compass_over_everything": "Compass Over Everything",
+  "gui.xaero_box_compass_over_everything": "Render the cardinal direction letters (N, E, S, W) above all map elements, as opposed to under some, e.g. waypoints.",
+  "gui.xaero_box_compass": "The cardinal directions displayed on the minimap.",
+  "gui.xaero_box_compass_color": "The color of the background/shadow under the cardinal directions displayed on the minimap.",
+  "gui.xaero_box_north_compass_color": "The color of the background/shadow under the north cardinal direction displayed on the minimap.",
+  "gui.xaero_compass_scale_auto": "Auto",
+  "gui.xaero_compass_scale2": "Compass Scale",
+  "gui.xaero_box_compass_scale2": "The scale of the cardinal direction letters NESW. For the \"Auto\" option, go all the way to the left.",
+  "item.cataclysm.strange_key.desc": "Can open the Door of Seal",
+  "item.cataclysm.mech_eye": "Eye of Mech",
+  "item.cataclysm.monstrous_eye": "Eye of Monstrous",
+  "item.cataclysm.void_eye": "Eye of Void",
+  "item.cataclysm.flame_eye": "Eye of Flame",
+  "item.cataclysm.abyss_eye": "Eye of Abyss",
+  "item.cataclysm.desert_eye": "Eye of Desert",
+  "item.cataclysm.cursed_eye": "Eye of Curse",
+  "item.cataclysm.storm_eye": "Eye of Storm",
+  "item.cataclysm.strange_key": "Strange Key",
+  "item.legendary_monsters.eye_of_sandstorm": "Eye Of Sandstorm",
+  "item.legendary_monsters.eye_of_many_ribs": "Eye Of Many Ribs",
+  "item.legendary_monsters.eye_of_frost": "Eye Of Frost",
+  "item.legendary_monsters.eye_of_soul": "Eye Of Soul",
+  "item.legendary_monsters.eye_of_air": "Eye Of Air",
+  "item.legendary_monsters.eye_of_moss": "Eye Of Moss",
+  "item.legendary_monsters.eye_of_chorus": "Eye Of Chorus",
+  "item.legendary_monsters.eye_of_shulker": "Eye Of Shulker",
+  "item.legendary_monsters.eye_of_bones": "Eye Of Bones",
+  "item.legendary_monsters.eye_of_magma": "Eye Of Magma",
+  "item.legendary_monsters.eye_of_ghost": "Eye Of Ghost",
+  "entity.legendary_monsters.wandering_eye": "Wandering Eye",
+  "advancements.legendary_monsters.defeat_wandering_eye.title": "Float f1",
+  "advancements.legendary_monsters.defeat_wandering_eye.description": "Defeat the Wandering Eye",
+  "item.legendary_monsters.somber_key": "Somber Key",
+  "item.legendary_monsters.wandering_eye_spawn_egg": "Wandering Eye Spawn Egg",
+  "item.legendary_monsters.somber_key_ring": "Somber Key Ring",
+  "item.legendary_monsters.somber_key_blade": "Somber Key Blade",
+  "item.legendary_monsters.somber_key_part": "Combine with another key part to create Somber Key",
+  "item.legendary_monsters.eye_of_annihilation": "Eye Of Annihilation",
+  "item.block_factorys_bosses.ancient_trial_key": "Ancient Trial Key",
+  "item.block_factorys_bosses.underworld_arena_key": "Underworld Arena Key",
+  "fc.button.info.context_keyboard": "Context Menu",
+  "fc.button.info.context_keyboard.desc": "Opens a 'right-click' menu, if applicable",
+  "key.skarrier_mobs.semi_living_boots_dash_keybind": "Semi Living Boots Dash",
+  "item.oddities.orchid_mantis_eye": "Orchid Mantis Eye"
+ },
+ "loot": {
+  "data/aquamirae/loot_tables/entities/captain_cornelia.json": [
+   "aquamirae:frozen_key"
+  ],
+  "data/irons_spellbooks/loot_tables/chests/citadel/citadel_bookshelf.json": [
+   "irons_spellbooks:furled_map"
+  ],
+  "data/irons_spellbooks/loot_tables/chests/mountain_tower/mountain_tower.json": [
+   "irons_spellbooks:furled_map"
+  ],
+  "data/irons_spellbooks/loot_tables/entities/dead_king_per_player.json": [
+   "irons_spellbooks:bone_key"
+  ],
+  "data/irons_spellbooks/loot_tables/entities/fire_boss_per_player.json": [
+   "irons_spellbooks:decrepit_key"
+  ],
+  "data/cataclysm/loot_tables/entities/aptrgangr.json": [
+   "cataclysm:strange_key"
+  ],
+  "data/block_factorys_bosses/loot_tables/chests/underworld_arena_rare.json": [
+   "block_factorys_bosses:underworld_arena_key"
+  ],
+  "data/block_factorys_bosses/loot_tables/chests/underworld_arena_vault.json": [
+   "block_factorys_bosses:underworld_arena_key"
+  ],
+  "data/block_factorys_bosses/loot_tables/entities/soul_knight_wither_skeleton.json": [
+   "block_factorys_bosses:underworld_arena_key"
+  ],
+  "data/block_factorys_bosses/loot_tables/entities/soul_skeleton.json": [
+   "block_factorys_bosses:underworld_arena_key"
+  ],
+  "data/block_factorys_bosses/loot_tables/spawners/ancient_trial_key.json": [
+   "block_factorys_bosses:ancient_trial_key"
+  ],
+  "data/block_factorys_bosses/loot_tables/spawners/underworld_arena/underworld_arena_key.json": [
+   "block_factorys_bosses:underworld_arena_key"
+  ],
+  "data/oddities/loot_tables/entities/queen_of_orchid.json": [
+   "oddities:orchid_mantis_eye"
+  ]
+ }
+}

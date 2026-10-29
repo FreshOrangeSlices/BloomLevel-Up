@@ -1,0 +1,52 @@
+SET irons_spellbooks-1.20.1-3.16.3.jar data/irons_spellbooks/worldgen/structure_set/ancient_battleground.json {
+  // What structures to pick to try and spawn if a spot passes the placement check.
+  // If two or more structures in this list can spawn in a biome at a spot, a random one based on weight is chosen to spawn
+  "structures": [
+    {
+      "structure": "irons_spellbooks:ancient_battleground",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    // Make sure this is unique and does not match any other structure set's salt
+    "salt": 1111569999,
+    // The average distance apart in chunks for spawn attempts
+    "spacing": 35,
+    // Minimum distance apart in chunks for spawn attempts
+SET irons_spellbooks-1.20.1-3.16.3.jar data/irons_spellbooks/worldgen/structure_set/citadel.json {
+  // What structures to pick to try and spawn if a spot passes the placement check.
+  // If two or more structures in this list can spawn in a biome at a spot, a random one based on weight is chosen to spawn
+  "structures": [
+    {
+      "structure": "irons_spellbooks:citadel",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    // Make sure this is unique and does not match any other structure set's salt
+    "salt": 199995600,
+    // The average distance apart in chunks for spawn attempts
+    "spacing": 100,
+    // Minimum distance apart in chunks for spawn attempts
+    // MUST
+MODIFIER L_Enders_Cataclysm-3.31.jar data/cataclysm/forge/structure_modifier/cataclysm_mob_spawns.json {
+  "type": "cataclysm:cataclysm_structure_spawns"
+}
+SET L_Enders_Cataclysm-3.31.jar data/cataclysm/worldgen/structure_set/ruined_citadel.json {
+  "structures": [
+    {
+      "structure": "cataclysm:ruined_citadel",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 367895146,
+    "spacing": 50,
+    "separation": 25,
+    "type": "minecraft:random_spread"
+  },
+  "exclusion_zone": {
+    "chunk_count": 10,
+    "other_set": "minecraft:end_city"
+  }
+}

@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/skrythe
-          python3 check/skrythe.py "$(ls pack/*server*.zip | head -1)" data-out/skrythe/skrythe.txt | tee summary.txt
-          echo "::notice title=skrythe::$(tr '\n' '|' < summary.txt)"
+          mkdir -p data-out/dragons
+          python3 check/dragons.py "$(ls pack/*server*.zip | head -1)" data-out/dragons/dragons.txt | tee summary.txt
+          echo "::notice title=dragons::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/skrythe && cp data-out/skrythe/* data/skrythe/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "skrythe" && git push -q origin ci/data && echo pushed
+          mkdir -p data/dragons && cp data-out/dragons/* data/dragons/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "dragons" && git push -q origin ci/data && echo pushed

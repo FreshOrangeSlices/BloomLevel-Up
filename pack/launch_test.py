@@ -186,7 +186,13 @@ def pack_data_check(server_dir, dump_file, server_lines):
             for file_name in names:
                 parts = os.path.relpath(os.path.join(folder, file_name), data).replace(os.sep, "/").split("/", 2)
                 if len(parts) == 3 and parts[1] == "recipes" and file_name.endswith(".json"):
-                    removed.append(f"{parts[0]}:{parts[2][:-5]}")
+                    # Only recipes switched off (a forge:false condition); recipe_edits are changed, not removed.
+                    try:
+                        recipe = json.load(open(os.path.join(folder, file_name)))
+                    except ValueError:
+                        recipe = {}
+                    if {"type": "forge:false"} in recipe.get("conditions", []):
+                        removed.append(f"{parts[0]}:{parts[2][:-5]}")
         tag = os.path.join(data, "c", "tags", "items", "hidden_from_recipe_viewers.json")
         if os.path.exists(tag):
             hidden += [v["id"] if isinstance(v, dict) else v for v in json.load(open(tag))["values"]]

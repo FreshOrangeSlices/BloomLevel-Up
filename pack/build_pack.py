@@ -1,7 +1,7 @@
 """Builds the Forge 1.20.1 pack in pack/pack.json (LegionWareX) for sharing with friends: a Modrinth pack file (.mrpack)
 and a ready-to-run server folder.
 
-Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--layers N] [--client-run <dir>] [--without <slug,slug>] [--update]
+Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--extra-jar <jar>]... [--layers N] [--client-run <dir>] [--without <slug,slug>] [--update]
 
 The pack's mods are in cumulative layers; --layers N builds only the first N (CI tests each, to tell which layer
 breaks what), and without it every layer goes in. Modrinth mods are linked (newest 1.20.1 Forge build, plus every
@@ -566,6 +566,12 @@ def main():
         at = args.index("--layers")
         layers = int(args[at + 1])
         del args[at:at + 2]
+    # Other mods built from this repository (the LegionWareX add-on), packed inside like Bloom.
+    extra_jars = []
+    while "--extra-jar" in args:
+        at = args.index("--extra-jar")
+        extra_jars.append(args[at + 1])
+        del args[at:at + 2]
     without = set()
     if "--without" in args:
         at = args.index("--without")
@@ -668,6 +674,10 @@ def main():
     bloom_name = os.path.basename(bloom_jar)
     overrides[f"mods/{bloom_name}"] = open(bloom_jar, "rb").read()
     sides = {f"mods/{bloom_name}": {"client": "required", "server": "required"}}
+    for extra in extra_jars:
+        overrides[f"mods/{os.path.basename(extra)}"] = open(extra, "rb").read()
+        sides[f"mods/{os.path.basename(extra)}"] = {"client": "required", "server": "required"}
+        notes.append(f"packed from this repository: {os.path.basename(extra)}")
     for external in spec.get("external", []):
         if external["name"].lower().replace(" ", "-") in without:
             continue

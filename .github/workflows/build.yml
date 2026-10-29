@@ -119,6 +119,63 @@ jobs:
           name: test-reports-${{ matrix.variant }}
           path: build/reports/
 
+  # The LegionWareX add-on (addon/): its own small Forge mod for the pack, not part of Bloom. Built with the same
+  # Gradle wrapper and game-tested on a real dedicated server with Migamigos loaded; the pack jobs pack its jar in.
+  addon:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'microsoft'
+      - name: setup gradle cache
+        uses: gradle/actions/setup-gradle@v6
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build and game-test the add-on
+        run: |
+          set -o pipefail
+          ./gradlew -p addon build runGameTestServer --stacktrace 2>&1 | tee addon.log
+      - name: report game tests
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('addon.log'):
+              raise SystemExit(0)
+          lines = open('addon.log', encoding='utf-8', errors='replace').read().splitlines()
+          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|tests? failed|failed!|GameTestAssert|Task :runGameTestServer|passed|legionwarex', l)]
+          text = '\n'.join(hits[-40:]) or 'no game test output found'
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          print(f"::notice title=addon-gametest-summary::{esc(text[:3900])}")
+          PY
+      - name: report build errors
+        if: failure()
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not os.path.exists('addon.log'):
+              raise SystemExit(0)
+          lines = open('addon.log', encoding='utf-8', errors='replace').read().splitlines()
+          keep = []
+          for i, line in enumerate(lines):
+              if re.search(r'(error:|FAILED|What went wrong|Exception|> Task .*FAILED|GameTest|gametest|Could not)', line):
+                  keep.extend(lines[max(0, i - 1):i + 6])
+          text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-200:])
+          esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          for n, chunk in enumerate([text[i:i + 3900] for i in range(0, len(text), 3900)][:10]):
+              print(f"::error title=addon-build-errors-{n:02d}::{esc(chunk)}")
+          PY
+      - name: capture the add-on jar
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: legionwarex-addon-jar
+          path: addon/build/libs/*.jar
+
   # A real 1.20.1 client (on a virtual display) makes a world, opens the hub, the stat sheet, a Major's details and
   # the inventory, and screenshots each (src/gametest/.../forge/client/ClientSmokeTest). Client mixins only load
   # here, so this is also what proves them. The second run has Better Combat installed and also plays a Catch!
@@ -223,7 +280,7 @@ jobs:
   # joins it (pack/launch_test.py: no crash, Fresh Animations and the shader on, every modded creature summoned once).
   # The pack-screenshots jobs print what each saw.
   pack:
-    needs: build
+    needs: [build, addon]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
     strategy:
@@ -238,13 +295,18 @@ jobs:
         with:
           name: bloomlevelup-jar
           path: jar
+      - name: fetch the add-on jar
+        uses: actions/download-artifact@v4
+        with:
+          name: legionwarex-addon-jar
+          path: addon-jar
       - name: setup jdk
         uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'microsoft'
       - name: build the pack
-        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out --layers ${{ matrix.layers }} --client-run game
+        run: python3 pack/build_pack.py "$(ls jar/*.jar | head -1)" "build.${GITHUB_RUN_NUMBER}" out --extra-jar "$(ls addon-jar/*.jar | head -1)" --layers ${{ matrix.layers }} --client-run game
       - name: capture the pack
         if: matrix.layers == 6
         uses: actions/upload-artifact@v7

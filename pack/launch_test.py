@@ -619,6 +619,19 @@ def main():
                                                             os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
     failures += spawn_failures
     notes += spawn_notes
+    # The LegionWareX add-on (addon/, packed in like Bloom): loaded, with its keepsake and its companion tag.
+    if any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(server_dir, "mods"))):
+        dump_rows = [json.loads(line) for line in open(os.path.join(server_dir, "bloom-dump.jsonl")) if line.strip()] \
+            if os.path.exists(os.path.join(server_dir, "bloom-dump.jsonl")) else []
+        keepsake = any(r.get("kind") == "item" and r.get("id") == "legionwarex:companion_keepsake" for r in dump_rows)
+        companions = sorted(r["id"] for r in dump_rows if r.get("kind") == "entity" and "legionwarex:companions" in r.get("tags", []))
+        has_migamigos = any(r.get("kind") == "entity" and r.get("id", "").startswith("migamigos:") for r in dump_rows)
+        if not keepsake:
+            failures.append("add-on: the companion keepsake isn't registered (the LegionWareX add-on didn't load)")
+        elif has_migamigos and len(companions) != 5:
+            failures.append(f"add-on: its companion tag has {companions}, not Migamigos' five")
+        else:
+            notes.append(f"add-on: loaded; companions it keeps: {', '.join(companions) or 'none in this layer'}")
     # Easy Mob Spawn Control's files from the pack (Shybroom's village spawns, boss despawn rules and caps) must load.
     emsc = [l for l in server.lines if ("EasyMSC" in l or "easymobspawncontrol" in l.lower()) and ("Failed to read" in l or "Exception" in l)]
     if emsc:

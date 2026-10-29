@@ -1,0 +1,1724 @@
+item irons_spellbooks:furled_map_ice_spider_den: {"kind": "item", "id": "irons_spellbooks:furled_map_ice_spider_den", "name": "Furled Map", "classes": ["FurledMapCraftableItem", "FurledMapItem"], "tags": [], "damage": 0.0, "speed": 0.0, "durability": 0, "stack": 1, "use": "none"}
+item irons_spellbooks:prepared_ice_spider_egg: {"kind": "item", "id": "irons_spellbooks:prepared_ice_spider_egg", "name": "Prepared Ice Spider Egg", "classes": [], "tags": [], "damage": 0.0, "speed": 0.0, "durability": 0, "stack": 64, "use": "none"}
+item irons_spellbooks:ice_spider_egg: {"kind": "item", "id": "irons_spellbooks:ice_spider_egg", "name": "Ice Spider Egg", "classes": ["BlockItem"], "tags": [], "damage": 0.0, "speed": 0.0, "durability": 0, "stack": 64, "use": "none"}
+item irons_spellbooks:cooked_ice_spider_egg: {"kind": "item", "id": "irons_spellbooks:cooked_ice_spider_egg", "name": "Cooked Ice Spider Egg", "classes": ["BlockItem"], "tags": [], "damage": 0.0, "speed": 0.0, "durability": 0, "stack": 1, "use": "none"}
+item irons_spellbooks:ice_spider_spawn_egg: {"kind": "item", "id": "irons_spellbooks:ice_spider_spawn_egg", "name": "Ice Spider Spawn Egg", "classes": ["ForgeSpawnEggItem", "SpawnEggItem"], "tags": [], "damage": 0.0, "speed": 0.0, "durability": 0, "stack": 64, "use": "none"}
+entity irons_spellbooks:ice_spider: {"kind": "entity", "id": "irons_spellbooks:ice_spider", "category": "monster", "tags": [], "spawnRules": false, "spawnsInDaylight": true, "classes": ["IceSpiderEntity", "AbstractSpellCastingMob", "PathfinderMob", "Mob", "LivingEntity"], "bossBar": false, "despawns": true, "health": 50.0, "armor": 20, "attack": 8.0}
+recipe irons_spellbooks:spider_den_map: {"kind": "recipe", "id": "irons_spellbooks:spider_den_map", "type": "minecraft:crafting", "result": "irons_spellbooks:furled_map_ice_spider_den", "ingredients": ["irons_spellbooks:frozen_bone", "irons_spellbooks:magic_cloth", "minecraft:cobweb"]}
+recipe irons_spellbooks:cooked_ice_spider_egg_from_smelting: {"kind": "recipe", "id": "irons_spellbooks:cooked_ice_spider_egg_from_smelting", "type": "minecraft:smelting", "result": "irons_spellbooks:cooked_ice_spider_egg", "ingredients": ["irons_spellbooks:prepared_ice_spider_egg"]}
+recipe irons_spellbooks:cooked_ice_spider_egg_from_campfire_cooking: {"kind": "recipe", "id": "irons_spellbooks:cooked_ice_spider_egg_from_campfire_cooking", "type": "minecraft:campfire_cooking", "result": "irons_spellbooks:cooked_ice_spider_egg", "ingredients": ["irons_spellbooks:prepared_ice_spider_egg"]}
+recipe irons_spellbooks:prepared_ice_spider_egg: {"kind": "recipe", "id": "irons_spellbooks:prepared_ice_spider_egg", "type": "minecraft:crafting", "result": "irons_spellbooks:prepared_ice_spider_egg", "ingredients": ["irons_spellbooks:ice_spider_egg", "minecraft:bowl", "minecraft:honey_bottle", "minecraft:sweet_berries"]}
+recipe irons_spellbooks:cooked_ice_spider_egg_from_smoking: {"kind": "recipe", "id": "irons_spellbooks:cooked_ice_spider_egg_from_smoking", "type": "minecraft:smoking", "result": "irons_spellbooks:cooked_ice_spider_egg", "ingredients": ["irons_spellbooks:prepared_ice_spider_egg"]}
+structure_set irons_spellbooks:ice_spider_den: {"kind": "structure_set", "id": "irons_spellbooks:ice_spider_den", "spacing": 85, "separation": 50}
+== assets/irons_spellbooks/animations/ice_spider.animation.json
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "attack_fang_basic": {
+      "animation_length": 1,
+      "bones": {
+        "torso": {
+          "relative_to": {
+            "rotation": "entity"
+          },
+          "rotation": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.375": {
+              "vector": [
+                -5,
+                0,
+                0
+              ],
+              "easing": "easeInOutQuad"
+            },
+            "0.75": {
+              "vector": [
+                7.5,
+                0,
+                0
+              ],
+              "easing": "easeInOutCubic"
+            },
+            "1.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ],
+              "easing": "easeInOutSine"
+            }
+          },
+          "position": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.375": {
+              "vector": [
+                0,
+                0,
+                2
+              ],
+              "easing": "easeInOutQuad"
+            },
+            "0.75": {
+              "vector": [
+                0,
+                0,
+                -2
+              ],
+              "easing": "easeInOutCubic"
+            },
+    
+== assets/irons_spellbooks/blockstates/cooked_ice_spider_egg.json
+{
+  "variants": {
+    "bites=0": {
+      "model": "irons_spellbooks:block/cooked_ice_spider_egg"
+    },
+    "bites=1": {
+      "model": "irons_spellbooks:block/cooked_ice_spider_egg_bite1"
+    },
+    "bites=2": {
+      "model": "irons_spellbooks:block/cooked_ice_spider_egg_bite2"
+    },
+    "bites=3": {
+      "model": "irons_spellbooks:block/cooked_ice_spider_egg_bite3"
+    }
+  }
+}
+
+== assets/irons_spellbooks/blockstates/ice_spider_egg.json
+{
+  "variants": {
+    "frosted=true": {
+      "model": "irons_spellbooks:block/ice_spider_egg_frosted"
+    },
+    "frosted=false": {
+      "model": "irons_spellbooks:block/ice_spider_egg"
+    }
+  }
+}
+== assets/irons_spellbooks/geo/ice_spider.geo.json
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unknown",
+        "texture_width": 256,
+        "texture_height": 256,
+        "visible_bounds_width": 8,
+        "visible_bounds_height": 4,
+        "visible_bounds_offset": [
+          0,
+          1,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "torso",
+          "pivot": [
+            0,
+            11,
+            -1
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -6,
+                2,
+                -9
+              ],
+              "size": [
+                12,
+                9,
+                16
+              ],
+              "uv": [
+                180,
+                77
+              ]
+            },
+            {
+              "origin": [
+                0,
+                11,
+                -7
+              ],
+              "size": [
+                0,
+                6,
+                14
+              ],
+              "pivot": [
+                0,
+                11,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                -22.5
+              ],
+              "uv": [
+                31,
+                137
+              ]
+            },
+            {
+              "origin": [
+                0,
+                11,
+                -7
+     
+== assets/irons_spellbooks/models/block/cooked_ice_spider_egg.json
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "irons_spellbooks:block/cooked_ice_spider_egg",
+		"2": "irons_spellbooks:block/cooked_ice_spider_egg_garnish",
+		"particle": "irons_spellbooks:block/ice_spider_egg_particle"
+	},
+	"elements": [
+		{
+			"name": "food",
+			"from": [4, 11, 3],
+			"to": [12, 13, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 11, 3]},
+			"faces": {
+				"up": {"uv": [10, 1.5, 14, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 13],
+			"to": [13, 15, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 1]},
+			"faces": {
+				"north": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"east": {"uv": [0.5, 9, 1, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 9, 5.5, 16], "texture": "#0"},
+				"west": {"uv": [5, 9, 5.5, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 9, 5.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 2],
+			"to": [13, 15, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, -10]},
+			"faces": {
+				"north": {"uv": [1, 8.5, 6, 15.5], "texture": "#0"},
+				"east": {"uv": [1, 8.5, 1.5, 15.5], "texture": "#0"},
+				"south": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"west": {"uv": [5.5, 8.5, 6, 15.5], "texture": "#0"},
+				"up": {"uv": [1, 8.5, 6, 9], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 3],
+			
+== assets/irons_spellbooks/models/block/cooked_ice_spider_egg_bite1.json
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "irons_spellbooks:block/cooked_ice_spider_egg",
+		"2": "irons_spellbooks:block/cooked_ice_spider_egg_garnish",
+		"particle": "irons_spellbooks:block/ice_spider_egg_particle"
+	},
+	"elements": [
+		{
+			"name": "food",
+			"from": [4, 8, 3],
+			"to": [12, 10, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 8, 3]},
+			"faces": {
+				"up": {"uv": [10, 1.5, 14, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 13],
+			"to": [13, 15, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 1]},
+			"faces": {
+				"north": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"east": {"uv": [0.5, 9, 1, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 9, 5.5, 16], "texture": "#0"},
+				"west": {"uv": [5, 9, 5.5, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 9, 5.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 2],
+			"to": [13, 15, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, -10]},
+			"faces": {
+				"north": {"uv": [1, 8.5, 6, 15.5], "texture": "#0"},
+				"east": {"uv": [1, 8.5, 1.5, 15.5], "texture": "#0"},
+				"south": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"west": {"uv": [5.5, 8.5, 6, 15.5], "texture": "#0"},
+				"up": {"uv": [1, 8.5, 6, 9], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 3],
+			"t
+== assets/irons_spellbooks/models/block/cooked_ice_spider_egg_bite2.json
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "irons_spellbooks:block/cooked_ice_spider_egg",
+		"2": "irons_spellbooks:block/cooked_ice_spider_egg_garnish",
+		"particle": "irons_spellbooks:block/ice_spider_egg_particle"
+	},
+	"elements": [
+		{
+			"name": "food",
+			"from": [4, 5, 3],
+			"to": [12, 7, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 5, 3]},
+			"faces": {
+				"up": {"uv": [10, 1.5, 14, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 13],
+			"to": [13, 15, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 1]},
+			"faces": {
+				"north": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"east": {"uv": [0.5, 9, 1, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 9, 5.5, 16], "texture": "#0"},
+				"west": {"uv": [5, 9, 5.5, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 9, 5.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 2],
+			"to": [13, 15, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, -10]},
+			"faces": {
+				"north": {"uv": [1, 8.5, 6, 15.5], "texture": "#0"},
+				"east": {"uv": [1, 8.5, 1.5, 15.5], "texture": "#0"},
+				"south": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"west": {"uv": [5.5, 8.5, 6, 15.5], "texture": "#0"},
+				"up": {"uv": [1, 8.5, 6, 9], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 3],
+			"to
+== assets/irons_spellbooks/models/block/cooked_ice_spider_egg_bite3.json
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "irons_spellbooks:block/cooked_ice_spider_egg",
+		"2": "irons_spellbooks:block/cooked_ice_spider_egg_garnish",
+		"particle": "irons_spellbooks:block/ice_spider_egg_particle"
+	},
+	"elements": [
+		{
+			"name": "food",
+			"from": [4, 2, 3],
+			"to": [12, 4, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 2, 3]},
+			"faces": {
+				"up": {"uv": [10, 1.5, 14, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 13],
+			"to": [13, 15, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 1]},
+			"faces": {
+				"north": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"east": {"uv": [0.5, 9, 1, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 9, 5.5, 16], "texture": "#0"},
+				"west": {"uv": [5, 9, 5.5, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 9, 5.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 2],
+			"to": [13, 15, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 1, -10]},
+			"faces": {
+				"north": {"uv": [1, 8.5, 6, 15.5], "texture": "#0"},
+				"east": {"uv": [1, 8.5, 1.5, 15.5], "texture": "#0"},
+				"south": {"uv": [9.5, 8, 14.5, 15], "texture": "#0"},
+				"west": {"uv": [5.5, 8.5, 6, 15.5], "texture": "#0"},
+				"up": {"uv": [1, 8.5, 6, 9], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 1, 3],
+			"to
+== assets/irons_spellbooks/models/block/ice_spider_egg.json
+{
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/block",
+  "texture_size": [
+    32,
+    32
+  ],
+  "textures": {
+    "0": "irons_spellbooks:block/ice_spider_egg",
+    "particle": "irons_spellbooks:block/ice_spider_egg_particle"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        2
+      ],
+      "to": [
+        13,
+        14,
+        14
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          1,
+          0,
+          1
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            1,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0.5,
+            9,
+            5.5,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            1,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            1.5,
+            1,
+            6.5,
+            7
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+== assets/irons_spellbooks/models/block/ice_spider_egg_frosted.json
+{
+  "credit": "Made with Blockbench",
+  "texture_size": [
+    32,
+    32
+  ],
+  "textures": {
+    "0": "irons_spellbooks:block/ice_spider_egg",
+    "particle": "irons_spellbooks:block/ice_spider_egg_particle"
+  },
+  "render_type": "minecraft:translucent",
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        2
+      ],
+      "to": [
+        13,
+        14,
+        14
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          1,
+          0,
+          1
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            1,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0.5,
+            9,
+            5.5,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            1,
+            9,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            1.5,
+            1,
+            6.5,
+            7
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1,
+            9,
+            7,
+            16
+          ],
+          "texture": 
+== assets/irons_spellbooks/models/item/cooked_ice_spider_egg.json
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "irons_spellbooks:item/cooked_ice_spider_egg"
+  }
+}
+
+== assets/irons_spellbooks/models/item/furled_map_ice_spider_den.json
+{
+  "parent": "irons_spellbooks:item/furled_map"
+}
+== assets/irons_spellbooks/models/item/ice_spider_egg.json
+{
+  "parent": "irons_spellbooks:block/ice_spider_egg"
+}
+
+== assets/irons_spellbooks/models/item/ice_spider_pheromones.json
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "irons_spellbooks:item/ice_spider_pheromones"
+  }
+}
+== assets/irons_spellbooks/models/item/ice_spider_spawn_egg.json
+{
+  "parent": "item/template_spawn_egg"
+}
+== assets/irons_spellbooks/models/item/prepared_ice_spider_egg.json
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "irons_spellbooks:item/prepared_ice_spider_egg"
+  }
+}
+
+== data/irons_spellbooks/loot_tables/blocks/ice_spider_egg.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "predicates": {
+              "minecraft:enchantments": [
+                {
+                  "enchantments": "minecraft:silk_touch",
+                  "levels": {
+                    "min": 1
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "irons_spellbooks:ice_spider_egg",
+          "properties": {
+            "frosted": "false"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:ice_spider_egg"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}
+== data/irons_spellbooks/loot_tables/chests/ice_spider_den/basement.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "irons_spellbooks:magic_items/basic_curios"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:ice_venom_vial"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:blank_rune"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.60
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 6,
+        "max": 12
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snowball",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:ice",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count":
+== data/irons_spellbooks/loot_tables/chests/ice_spider_den/cask.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:honey_bottle",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:glass_bottle",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sweet_berries",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 5,
+                "max": 16
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:ice",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 15,
+                "max": 25
+  
+== data/irons_spellbooks/loot_tables/chests/ice_spider_den/dungeon.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30.0,
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "minecraft:book"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "irons_spellbooks:magic_items/decent_ink"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:scroll",
+          "functions": [
+            {
+              "function": "irons_spellbooks:randomize_spell",
+              "quality": {
+                "min": 0.2,
+                "max": 0.5
+              },
+              "spell_filter": {
+                "school": "irons_spellbooks:ice"
+              }
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.75
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "irons_spellbooks:magic_items/basic_curios"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.10
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+
+== data/irons_spellbooks/loot_tables/chests/ice_spider_den/pot.json
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "weight": 6,
+          "type": "minecraft:empty"
+        },
+        {
+          "weight": 4,
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "min": 1,
+                "max": 5
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:emerald"
+        },
+        {
+          "weight": 3,
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "min": 2,
+                "max": 7
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "irons_spellbooks:arcane_essence"
+        },
+        {
+          "weight": 4,
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "min": 1,
+                "max": 3
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:cobweb"
+        },
+        {
+          "weight": 7,
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:frozen_bone"
+        },
+        {
+          "weight": 1,
+          "type": "minecraft:item",
+          "name": "minecraft:iron_ingot"
+        }
+      ]
+    }
+  ]
+}
+
+== data/irons_spellbooks/loot_tables/chests/ice_spider_den/spawner_reward.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 15.0,
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "minecraft:book"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "irons_spellbooks:magic_items/decent_ink"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:scroll",
+          "functions": [
+            {
+              "function": "irons_spellbooks:randomize_spell",
+              "quality": {
+                "min": 0.0,
+                "max": 0.5
+              },
+              "spell_filter": {
+                "school": "irons_spellbooks:ice"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+== data/irons_spellbooks/loot_tables/chests/ice_spider_den/tower.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "irons_spellbooks:magic_items/basic_curios"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:spyglass"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
+        }
+      ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:scroll",
+          "functions": [
+            {
+              "function": "irons_spellbooks:randomize_spell",
+              "quality": {
+                "min": 0.0,
+                "max": 0.5
+              },
+              "spell_filter": {
+                "school": "irons_spellbooks:ice"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:empty"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 6,
+        "max": 12
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snowball",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+
+== data/irons_spellbooks/loot_tables/entities/ice_spider.json
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 16.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 0.0
+              },
+              "function": "minecraft:looting_enchant"
+
+            }
+          ],
+          "name": "irons_spellbooks:arcane_essence"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:looting_enchant"
+            }
+          ],
+          "name": "minecraft:string"
+        }
+      ],
+      "rolls": 1.0
+    },
+
+== data/irons_spellbooks/recipes/cooked_ice_spider_egg_from_campfire_cooking.json
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "irons_spellbooks:prepared_ice_spider_egg"
+  },
+  "result": "irons_spellbooks:cooked_ice_spider_egg"
+}
+
+== data/irons_spellbooks/recipes/cooked_ice_spider_egg_from_smelting.json
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "irons_spellbooks:prepared_ice_spider_egg"
+  },
+  "result": "irons_spellbooks:cooked_ice_spider_egg"
+}
+
+== data/irons_spellbooks/recipes/cooked_ice_spider_egg_from_smoking.json
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "irons_spellbooks:prepared_ice_spider_egg"
+  },
+  "result": "irons_spellbooks:cooked_ice_spider_egg"
+}
+
+== data/irons_spellbooks/recipes/prepared_ice_spider_egg.json
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "SES",
+    " B "
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:honey_bottle"
+    },
+    "E": {
+      "item": "irons_spellbooks:ice_spider_egg"
+    },
+    "S": {
+      "item": "minecraft:sweet_berries"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "irons_spellbooks:prepared_ice_spider_egg",
+    "count": 1
+  }
+}
+
+== data/irons_spellbooks/tags/blocks/ice_spider_den_replaceable.json
+{
+  "values": [
+    "minecraft:stone_bricks",
+    "minecraft:stone_brick_stairs",
+    "minecraft:stone_brick_slab",
+    "minecraft:cracked_stone_bricks",
+    "minecraft:cobbled_deepslate"
+  ]
+}
+== data/irons_spellbooks/tags/worldgen/biome/has_structure/ice_spider_den.json
+{
+  "replace": false,
+  "values": [
+    "#forge:is_snowy"
+  ],
+  "remove": [
+    "#forge:is_mountain",
+    "#forge:is_ocean"
+  ]
+}
+== data/irons_spellbooks/tags/worldgen/biome/ice_spider_patrols.json
+{
+  "replace": false,
+  "values": [
+    "#forge:is_snowy"
+  ],
+  "remove": [
+    "#forge:is_ocean"
+  ]
+}
+== data/irons_spellbooks/worldgen/processor_list/ice_spider_den_randomizer.json
+{
+  "processors": [
+    {
+      "processor_type": "irons_lib:randomize_player_statue"
+    },
+    {
+      "integrity": 0.95,
+      "processor_type": "minecraft:block_rot",
+      "rottable_blocks": "#irons_spellbooks:ice_spider_den_replaceable"
+    },
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "minecraft:blue_ice",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.50
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:packed_ice"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "irons_spellbooks:mithril_ore",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.50
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:blue_ice"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:blue_ice",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.25
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:stone
+== data/irons_spellbooks/worldgen/structure/ice_spider_den.json
+{
+  "type": "minecraft:jigsaw",
+  "liquid_settings": "ignore_waterlogging",
+  "start_pool": "irons_spellbooks:ice_spider_den/start_pool",
+  "size": 7,
+  "max_distance_from_center": 100,
+  "step": "underground_decoration",
+  "use_expansion_hack": false,
+  "start_height": {
+    "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "biomes": "#irons_spellbooks:has_structure/ice_spider_den",
+  "terrain_adaptation": "beard_box",
+  "spawn_overrides": {
+  }
+}
+== data/irons_spellbooks/worldgen/structure_set/ice_spider_den.json
+{
+  "structures": [
+    {
+      "structure": "irons_spellbooks:ice_spider_den",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 126346,
+    "spacing": 85,
+    "separation": 50,
+    "type": "minecraft:random_spread"
+  }
+}
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/basement.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/basement",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/cavern/cavern_extensions.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 3,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/cavern_extension/empty",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/cavern_extension/egg",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "beard_box"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/cavern_extension/ice_spike_1",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "beard_box"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/cavern_extension/ice_spike_2",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_t
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/cavern/cavern_opening.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/cavern_opening",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "beard_box"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/cavern/cavern_opening_lower.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/cavern_opening_lower",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/cavern_fort.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/fort_underground",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "beard_box"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/cave_connector.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "irons_spellbooks:ice_spider_den/dungeon/fallback",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/cave/straight_connector_1",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/dungeon.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "irons_spellbooks:ice_spider_den/dungeon/fallback",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_cramped",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_t",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_t_collapsed",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/diagonal_cave_2x2",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/dungeon_no_deadends.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "irons_spellbooks:ice_spider_den/dungeon/fallback",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_cramped",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_snowfall",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_t",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/junction_t_collapsed",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/dungeon_start.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/starting_junction",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "encapsulate"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/fallback.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/fallback/fallback_wall",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/fallback/fallback_rubble",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/fort_to_dungeon.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/fort_to_dungeon",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/interior/5x5_decorator.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "irons_spellbooks:ice_spider_den/dungeon/interior/5x5_decorator",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/5x5_decorator/table_and_chairs",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/5x5_decorator/rubble_pile_1",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/5x5_decorator/snow",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/5x5_decorator/barrel_pile",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "el
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/dungeon/maybe_cave_connector.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "irons_spellbooks:ice_spider_den/dungeon/fallback",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/dungeon/cave/straight_connector_1",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/stairwell_to_cavern.json
+{
+  "name": "irons_spellbooks:ice_spider_den_basement",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/cavern/stairwell",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "none"
+      }
+    }
+  ]
+}
+
+== data/irons_spellbooks/worldgen/template_pool/ice_spider_den/start_pool.json
+{
+  "name": "irons_spellbooks:ice_spider_den_start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "irons_spellbooks:ice_spider_den/fort",
+        "processors": "irons_spellbooks:ice_spider_den_randomizer",
+        "projection": "rigid",
+        "element_type": "irons_spellbooks:individual_terrain_element",
+        "terrain_adjustment": "beard_thin"
+      }
+    }
+  ]
+}
+
+== config/openloader/data/legionwarex/data/irons_spellbooks/recipes/graybeard_staff.json
+{
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}
+
+== config/openloader/data/legionwarex/data/irons_spellbooks/loot_tables/chests/trial_chambers/additional_ominous_vault_loot.json
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:weapon_parts",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:upgrade_orb",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
+          "name": "irons_spellbooks:scroll",
+          "functions": [
+            {
+              "function": "irons_spellbooks:randomize_spell",
+              "quality": {
+                "min": 0.8,
+                "max": 1.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+  
+== config/openloader/data/legionwarex/data/irons_spellbooks/worldgen/structure_set/ancient_battleground.json
+{
+  "structures": [
+    {
+      "structure": "irons_spellbooks:ancient_battleground",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1111569999,
+    "spacing": 26,
+    "separation": 9,
+    "type": "minecraft:random_spread"
+  }
+}
+
+== config/openloader/data/legionwarex/data/irons_spellbooks/worldgen/structure_set/citadel.json
+{
+  "structures": [
+    {
+      "structure": "irons_spellbooks:citadel",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 199995600,
+    "spacing": 75,
+    "separation": 60,
+    "type": "minecraft:random_spread"
+  }
+}

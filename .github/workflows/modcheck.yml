@@ -35,5 +35,5 @@ jobs:
           python3 check/companions.py "$(ls pack/*server*.zip | head -1)" data-out/companions | tee summary.txt
           echo "::notice title=companions::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/xaero2 && cp -r data-out/companions/* data/xaero2/ && cd data && git add -A
+          mkdir -p data/icespider && cp -r data-out/companions/* data/icespider/ && cd data && git add -A
           git -c user.name=ci -c user.email=ci@example.invalid commit -qm "companions" && git push -q origin ci/data && echo pushed

@@ -1,23 +1,40 @@
-"""Throwaway: what Xaero's Minimap left in the test client's config (from the pack-screenshots artifact), and the
-client log's Xaero lines. Usage: companions.py <server.zip> <out dir> (reads ./shots)."""
+"""Throwaway: where Iron's Spells' Ice Spider spawns in the pack (the server's registry dump: every biome's spawn list,
+every structure's own spawns), and the Ice Spider Den's biomes and spacing from the jars and the pack's data.
+Usage: companions.py <server.zip> <out dir> (reads ./shots)."""
+import io
+import json
 import os
+import re
 import sys
+import zipfile
 
 out = sys.argv[2]
 os.makedirs(out, exist_ok=True)
 lines = []
-for root, dirs, files in os.walk("shots"):
-    for f in files:
-        path = os.path.join(root, f)
-        if "xaero" in path.lower():
-            lines.append(f"== {path} ({os.path.getsize(path)} bytes)")
-            try:
-                lines.extend(open(path, errors="replace").read().splitlines()[:80])
-            except OSError:
-                pass
-        if f == "latest.log":
-            for l in open(path, errors="replace"):
-                if "xaero" in l.lower() or "minimap" in l.lower():
-                    lines.append("LOG " + l.rstrip()[:300])
-open(os.path.join(out, "xaero-config.txt"), "w").write("\n".join(lines[:2000]))
+dump = next((os.path.join(r, f) for r, d, fs in os.walk("shots") for f in fs if f == "bloom-dump.jsonl"), None)
+for line in open(dump):
+    row = json.loads(line)
+    text = json.dumps(row)
+    if "ice_spider" not in text:
+        continue
+    if row.get("kind") == "biome":
+        for category, spawns in (row.get("spawns") or {}).items():
+            for s in spawns:
+                if "ice_spider" in s.get("type", ""):
+                    total = sum(x.get("weight", 0) for x in spawns)
+                    lines.append(f"biome {row['id']} {category}: weight {s['weight']} of {total}, {s.get('min')}-{s.get('max')}")
+    else:
+        lines.append(f"{row.get('kind')} {row.get('id')}: {text[:1500]}")
+server = zipfile.ZipFile(sys.argv[1])
+for name in server.namelist():
+    if name.endswith(".jar") and "irons" in name.lower():
+        jar = zipfile.ZipFile(io.BytesIO(server.read(name)))
+        for entry in jar.namelist():
+            if entry.endswith(".json") and ("ice_spider" in entry or "biome_modifier" in entry or "has_structure" in entry):
+                body = jar.read(entry).decode("utf-8", "replace")
+                if "ice_spider" in entry or "ice_spider" in body or "spider_den" in body:
+                    lines.append(f"== {entry}\n{body[:1500]}")
+    elif name.startswith("config/openloader") and ("spider" in name or "irons" in name):
+        lines.append(f"== {name}\n{server.read(name).decode('utf-8', 'replace')[:800]}")
+open(os.path.join(out, "ice-spider.txt"), "w").write("\n".join(lines))
 print(len(lines), "lines")

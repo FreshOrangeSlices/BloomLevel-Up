@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          mkdir -p data-out/survey
-          python3 check/survey.py "$(ls pack/*server*.zip | head -1)" "$(find shots -name bloom-dump.jsonl | head -1)" data-out/survey | tee summary.txt
-          echo "::notice title=survey::$(tr '\n' '|' < summary.txt)"
+          mkdir -p data-out/emsc
+          python3 check/emsc.py "$(ls pack/*server*.zip | head -1)" data-out/emsc/emsc.txt | tee summary.txt
+          echo "::notice title=emsc::$(tr '\n' '|' < summary.txt)"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/survey && cp data-out/survey/* data/survey/ && cp "$(find shots -name bloom-dump.jsonl | head -1)" data/survey/dump.jsonl && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "survey" && git push -q origin ci/data && echo pushed
+          mkdir -p data/emsc && cp data-out/emsc/* data/emsc/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "emsc" && git push -q origin ci/data && echo pushed

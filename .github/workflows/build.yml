@@ -356,6 +356,11 @@ jobs:
         run: |
           portablemc --version
           xvfb-run -a -s "-screen 0 1280x720x24" python3 pack/launch_test.py server game shots
+      # How far the launch test got, as one annotation of its own step (the test's step has only 10 notices to give).
+      - name: launch test progress
+        if: always()
+        run: |
+          [ -f pack-progress.txt ] && echo "::notice title=pack-progress::$(sed 's/%/%25/g' pack-progress.txt | sed ':a;N;$!ba;s/\n/%0A/g')" || true
       - name: capture the client's screenshots and logs
         if: always()
         uses: actions/upload-artifact@v7

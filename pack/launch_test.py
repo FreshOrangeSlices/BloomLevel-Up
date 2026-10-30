@@ -86,9 +86,14 @@ class Process:
 
 
 def progress(step):
-    """A milestone, with the machine's free memory, printed as it happens (so a run that dies shows how far it got)."""
+    """A milestone, with the machine's free memory, written down as it happens (so a run that dies shows how far it got):
+    to pack-progress.txt, which the workflow's next step prints as one annotation (GitHub keeps only 10 notices a step,
+    and this step's own findings need them)."""
     free = next((int(l.split()[1]) // 1024 for l in open("/proc/meminfo") if l.startswith("MemAvailable:")), -1)
-    print(f"::notice title=pack-progress::{step} ({free} MB free, {time.strftime('%H:%M:%S')})", flush=True)
+    line = f"{step} ({free} MB free, {time.strftime('%H:%M:%S')})"
+    print(f"progress: {line}", flush=True)
+    with open("pack-progress.txt", "a") as out:
+        out.write(line + "\n")
 
 
 def set_properties(path, values):

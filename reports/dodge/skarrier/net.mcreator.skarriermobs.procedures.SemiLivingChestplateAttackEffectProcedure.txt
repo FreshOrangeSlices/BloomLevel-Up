@@ -1,0 +1,186 @@
+Compiled from "SemiLivingChestplateAttackEffectProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SemiLivingChestplateAttackEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.SemiLivingChestplateAttackEffectProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onEntityAttacked(net.minecraftforge.event.entity.living.LivingHurtEvent);
+    Code:
+       0: aload_0
+       1: ifnull        33
+       4: aload_0
+       5: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       8: ifnull        33
+      11: aload_0
+      12: aload_0
+      13: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #32                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      19: aload_0
+      20: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      23: aload_0
+      24: invokevirtual #36                 // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      27: invokevirtual #42                 // Method net/minecraft/world/damagesource/DamageSource.m_7639_:()Lnet/minecraft/world/entity/Entity;
+      30: invokestatic  #46                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+      33: return
+
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+    Code:
+       0: aconst_null
+       1: aload_0
+       2: aload_1
+       3: aload_2
+       4: invokestatic  #46                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+       7: return
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_2
+       1: ifnull        8
+       4: aload_3
+       5: ifnonnull     9
+       8: return
+       9: aload_3
+      10: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+      13: ifeq          33
+      16: aload_3
+      17: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+      20: astore        4
+      22: aload         4
+      24: getstatic     #61                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      27: invokevirtual #65                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+      30: goto          36
+      33: getstatic     #71                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      36: invokevirtual #75                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      39: getstatic     #81                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+      42: invokevirtual #87                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      45: if_acmpne     343
+      48: aload_3
+      49: instanceof    #89                 // class net/minecraft/world/entity/player/Player
+      52: ifeq          70
+      55: aload_3
+      56: checkcast     #89                 // class net/minecraft/world/entity/player/Player
+      59: astore        5
+      61: aload         5
+      63: fconst_0
+      64: invokevirtual #93                 // Method net/minecraft/world/entity/player/Player.m_36403_:(F)F
+      67: goto          71
+      70: fconst_0
+      71: f2d
+      72: ldc2_w        #94                 // double 0.5d
+      75: dcmpl
+      76: iflt          343
+      79: aload_3
+      80: instanceof    #89                 // class net/minecraft/world/entity/player/Player
+      83: ifeq          343
+      86: aload_3
+      87: instanceof    #89                 // class net/minecraft/world/entity/player/Player
+      90: ifeq          140
+      93: aload_3
+      94: checkcast     #89                 // class net/minecraft/world/entity/player/Player
+      97: astore        6
+      99: aload         6
+     101: invokevirtual #99                 // Method net/minecraft/world/entity/player/Player.m_36335_:()Lnet/minecraft/world/item/ItemCooldowns;
+     104: aload_3
+     105: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     108: ifeq          128
+     111: aload_3
+     112: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     115: astore        7
+     117: aload         7
+     119: getstatic     #61                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+     122: invokevirtual #65                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     125: goto          131
+     128: getstatic     #71                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     131: invokevirtual #75                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     134: invokevirtual #111                // Method net/minecraft/world/item/ItemCooldowns.m_41519_:(Lnet/minecraft/world/item/Item;)Z
+     137: ifne          343
+     140: iconst_0
+     141: istore        8
+     143: iload         8
+     145: invokestatic  #117                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     148: iconst_1
+     149: iconst_3
+     150: invokestatic  #123                // Method net/minecraft/util/Mth.m_216271_:(Lnet/minecraft/util/RandomSource;II)I
+     153: if_icmpge     289
+     156: aload_1
+     157: instanceof    #125                // class net/minecraft/server/level/ServerLevel
+     160: ifeq          283
+     163: aload_1
+     164: checkcast     #125                // class net/minecraft/server/level/ServerLevel
+     167: astore        9
+     169: getstatic     #130                // Field net/mcreator/skarriermobs/init/SkarrierMobsModEntities.HEALING_FLESH:Lnet/minecraftforge/registries/RegistryObject;
+     172: invokevirtual #87                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     175: checkcast     #132                // class net/minecraft/world/entity/EntityType
+     178: aload         9
+     180: aload_2
+     181: invokevirtual #136                // Method net/minecraft/world/entity/Entity.m_20185_:()D
+     184: aload_2
+     185: invokevirtual #139                // Method net/minecraft/world/entity/Entity.m_20186_:()D
+     188: aload_2
+     189: invokevirtual #143                // Method net/minecraft/world/entity/Entity.m_20206_:()F
+     192: f2d
+     193: ldc2_w        #144                // double 0.8d
+     196: dmul
+     197: dadd
+     198: aload_2
+     199: invokevirtual #148                // Method net/minecraft/world/entity/Entity.m_20189_:()D
+     202: invokestatic  #154                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     205: getstatic     #160                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     208: invokevirtual #164                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     211: astore        10
+     213: aload         10
+     215: ifnull        283
+     218: aload         10
+     220: aload_2
+     221: invokevirtual #168                // Method net/minecraft/world/entity/Entity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     224: getfield      #174                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     227: invokestatic  #117                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     230: ldc2_w        #175                // double -0.4d
+     233: ldc2_w        #177                // double 0.4d
+     236: invokestatic  #182                // Method net/minecraft/util/Mth.m_216263_:(Lnet/minecraft/util/RandomSource;DD)D
+     239: dmul
+     240: aload_2
+     241: invokevirtual #168                // Method net/minecraft/world/entity/Entity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     244: getfield      #185                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+     247: invokestatic  #117                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     250: ldc2_w        #177                // double 0.4d
+     253: ldc2_w        #144                // double 0.8d
+     256: invokestatic  #182                // Method net/minecraft/util/Mth.m_216263_:(Lnet/minecraft/util/RandomSource;DD)D
+     259: dmul
+     260: aload_2
+     261: invokevirtual #168                // Method net/minecraft/world/entity/Entity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     264: getfield      #188                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     267: invokestatic  #117                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     270: ldc2_w        #175                // double -0.4d
+     273: ldc2_w        #177                // double 0.4d
+     276: invokestatic  #182                // Method net/minecraft/util/Mth.m_216263_:(Lnet/minecraft/util/RandomSource;DD)D
+     279: dmul
+     280: invokevirtual #192                // Method net/minecraft/world/entity/Entity.m_20334_:(DDD)V
+     283: iinc          8, 1
+     286: goto          143
+     289: aload_3
+     290: instanceof    #89                 // class net/minecraft/world/entity/player/Player
+     293: ifeq          343
+     296: aload_3
+     297: checkcast     #89                 // class net/minecraft/world/entity/player/Player
+     300: astore        8
+     302: aload         8
+     304: invokevirtual #99                 // Method net/minecraft/world/entity/player/Player.m_36335_:()Lnet/minecraft/world/item/ItemCooldowns;
+     307: aload_3
+     308: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     311: ifeq          331
+     314: aload_3
+     315: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     318: astore        9
+     320: aload         9
+     322: getstatic     #61                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+     325: invokevirtual #65                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     328: goto          334
+     331: getstatic     #71                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     334: invokevirtual #75                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     337: sipush        200
+     340: invokevirtual #196                // Method net/minecraft/world/item/ItemCooldowns.m_41524_:(Lnet/minecraft/world/item/Item;I)V
+     343: return
+}

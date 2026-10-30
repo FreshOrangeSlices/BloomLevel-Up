@@ -1,0 +1,197 @@
+dodge bossesrise block_factorys_bosses-2.1.2-forge-1.20.1.jar 12 classes
+   net/unusual/block_factorys_bosses/block/RopeRollBlock.class 4212 bytes []
+   net/unusual/block_factorys_bosses/block/entity/RopeRollBlockEntity.class 2622 bytes ['geckolib']
+   net/unusual/block_factorys_bosses/capability/entity/RollCap$1.class 1183 bytes []
+   net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$1.class 812 bytes []
+   net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$2.class 3826 bytes []
+   net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.class 2054 bytes []
+   net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler.class 16009 bytes ['attackEvent', 'configSpec']
+   net/unusual/block_factorys_bosses/capability/entity/RollCap.class 2869 bytes []
+   net/unusual/block_factorys_bosses/client/renderer/block/RopeRollBlockEntityRenderer.class 1463 bytes ['geckolib']
+   net/unusual/block_factorys_bosses/init/BossesRiseKeyMappings.class 1822 bytes ['keyMapping']
+   net/unusual/block_factorys_bosses/mixins/RollMixin.class 1381 bytes []
+   net/unusual/block_factorys_bosses/network/DodgeRollMessage.class 7405 bytes ['configSpec']
+   texture assets/block_factorys_bosses/textures/block/rope_roll.png
+   texture assets/block_factorys_bosses/textures/gui/roll/dash_green.png
+   texture assets/block_factorys_bosses/textures/gui/roll/dash_grey.png
+   texture assets/block_factorys_bosses/textures/gui/roll/dash_orange.png
+   texture assets/block_factorys_bosses/textures/gui/roll/dash_red.png
+   texture assets/block_factorys_bosses/textures/gui/roll/dash_yellow.png
+   texture assets/block_factorys_bosses/textures/item/rope_roll.png
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/loot_tables/chests/dragon_tower.json
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/loot_tables/chests/underworld_arena_rare.json
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/loot_tables/chests/underworld_arena_vault.json
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/loot_tables/entities/underworld_knight.json
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/tags/worldgen/biome/dragon_tower.json
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/tags/worldgen/biome/sandworm_nest.json
+   server config config/openloader/data/legionwarex/data/block_factorys_bosses/tags/worldgen/biome/yeti_hideout.json
+dodge monsterexpansion monsterexpansion-1.20.1-v0.7.6.jar 17 classes
+   net/saksolm/monsterexpansion/capabilities/IRoll.class 394 bytes []
+   net/saksolm/monsterexpansion/capabilities/RollImpl.class 1996 bytes []
+   net/saksolm/monsterexpansion/client/ClientFlashHandler.class 3135 bytes ['guiRender']
+   net/saksolm/monsterexpansion/client/DamageIndicatorRenderer.class 16342 bytes ['guiRender']
+   net/saksolm/monsterexpansion/client/QuestHudOverlay.class 13125 bytes ['overlayRender', 'configSpec']
+   net/saksolm/monsterexpansion/config/RollConfig.class 3438 bytes ['configSpec']
+   net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$1.class 963 bytes []
+   net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase.class 1442 bytes []
+   net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal.class 9823 bytes []
+   net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.class 1480 bytes []
+   net/saksolm/monsterexpansion/event/CapabilityEvents$RollProvider.class 3631 bytes []
+   net/saksolm/monsterexpansion/event/ModEventBusEventsClient.class 12936 bytes ['hudOverlay', 'overlayRender']
+   net/saksolm/monsterexpansion/event/RollEventsClient$ClientModBusEvents.class 1617 bytes ['keyMapping']
+   net/saksolm/monsterexpansion/event/RollEventsClient.class 9431 bytes ['keyMapping']
+   net/saksolm/monsterexpansion/event/RollEventsServer.class 4389 bytes ['attackEvent']
+   net/saksolm/monsterexpansion/input/KeyInit.class 1456 bytes ['keyMapping']
+   net/saksolm/monsterexpansion/network/RollPacket.class 8154 bytes []
+   texture assets/monsterexpansion/textures/entity/charge_aura.png
+   texture assets/monsterexpansion/textures/mob_effect/cloaked_cooldown.png
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/charcraw.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/diamond_mace.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/diamond_spear.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/golden_mace.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/golden_spear.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/iron_mace.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/iron_spear.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/netherite_mace.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/netherite_spear.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/stone_mace.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/recipes/stone_spear.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/forge/biome_modifier/add_arborix_spawn.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/forge/biome_modifier/add_kobeko_spawn.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/tags/worldgen/biome/skrythe_biomes.json
+   server config config/openloader/data/legionwarex/data/monsterexpansion/tags/worldgen/biome/rakoth_biomes.json
+dodge skarrier skarrier_mobs-1.1.2-forge-1.20.1.jar 35 classes
+   net/mcreator/skarriermobs/client/renderer/SemiLivingFleshArmorArmorRenderer.class 3062 bytes ['geckolib']
+   net/mcreator/skarriermobs/client/renderer/SemiLivingHelmetBiteRenderer.class 3812 bytes ['geckolib']
+   net/mcreator/skarriermobs/client/renderer/SemiLivingSpikeRenderer.class 3939 bytes []
+   net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity.class 12521 bytes ['geckolib']
+   net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity.class 7887 bytes []
+   net/mcreator/skarriermobs/entity/model/SemiLivingHelmetBiteModel.class 2135 bytes ['geckolib']
+   net/mcreator/skarriermobs/init/SkarrierMobsModKeyMappings.class 1740 bytes ['keyMapping']
+   net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem$1.class 2825 bytes []
+   net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem$2.class 2230 bytes ['geckolib']
+   net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem.class 6842 bytes ['geckolib']
+   net/mcreator/skarriermobs/item/SemiLivingFleshItem.class 1774 bytes []
+   net/mcreator/skarriermobs/item/model/SemiLivingFleshArmorModel.class 1640 bytes ['geckolib']
+   net/mcreator/skarriermobs/network/SemiLivingBootsDashKeybindMessage.class 5104 bytes []
+   net/mcreator/skarriermobs/potion/SemiLivingArmorPenaltyEffectMobEffect$1.class 1979 bytes []
+   net/mcreator/skarriermobs/potion/SemiLivingArmorPenaltyEffectMobEffect.class 2575 bytes []
+   net/mcreator/skarriermobs/potion/SemiLivingFleshPenaltyEffectMobEffect$1.class 1979 bytes []
+   net/mcreator/skarriermobs/potion/SemiLivingFleshPenaltyEffectMobEffect.class 2483 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingArmorAttackBiteProcedure.class 10606 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingArmorAttackShootProcedure$1.class 1853 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingArmorAttackShootProcedure$2.class 1853 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingArmorAttackShootProcedure.class 4824 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingArmorMeleeHitDetectionProcedure.class 4342 bytes ['hurtEvent']
+   net/mcreator/skarriermobs/procedures/SemiLivingBootsDashKeybindOnKeyPressedProcedure.class 5767 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingBootsFallDamageImmunityProcedure.class 3051 bytes ['hurtEvent']
+   net/mcreator/skarriermobs/procedures/SemiLivingChestplateAttackEffectProcedure.class 5205 bytes ['hurtEvent']
+   net/mcreator/skarriermobs/procedures/SemiLivingFleshArmorEquippedEffectProcedure.class 8372 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingHelmetBiteOnEntityTickUpdateProcedure.class 1137 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingHelmetEatingEffectProcedure.class 3184 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingSpikeProjectileHitsLivingEntityProcedure.class 2880 bytes []
+   net/mcreator/skarriermobs/procedures/SemiLivingSpikeWhileProjectileFlyingTickProcedure.class 1046 bytes []
+   net/mcreator/skarriermobs/procedures/TooltipSemiLivingBootsProcedure.class 3243 bytes []
+   net/mcreator/skarriermobs/procedures/TooltipSemiLivingChestplateProcedure.class 3292 bytes []
+   net/mcreator/skarriermobs/procedures/TooltipSemiLivingFleshProcedure.class 3899 bytes []
+   net/mcreator/skarriermobs/procedures/TooltipSemiLivingHelmetProcedure.class 3247 bytes []
+   net/mcreator/skarriermobs/procedures/TooltipSemiLivingLeggingsProcedure.class 3260 bytes []
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/recipes/invulnerite_axe_recipe.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/recipes/invulnerite_sword_recipe.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/recipes/morgenstern_recipe.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/recipes/resisteel_axe_recipe.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/bowlder_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/breacher_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/dragger_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/eater_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/freeze_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/frost_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/gadlisk_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/glowin_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/gorger_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/slither_matriarch_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/slither_spawner_dummy_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/viruleon_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/voidrake_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/wretch_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/skarrier_mobs/forge/biome_modifier/wrought_biome_modifier.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_caves.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_caves.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_frozen_peaks.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_frozen_peaks.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_ice_spikes.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_ice_spikes.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_swamps.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_swamps.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_swamp.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_swamp.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_mangroves.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_mangroves.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_dark_forest.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_dark_forest.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_badlands.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_badlands.json
+   server config config/openloader/data/legionwarex/data/legionwarex/tags/worldgen/biome/spawns/skarrier_end.json
+   server config config/openloader/data/legionwarex/data/legionwarex/forge/biome_modifier/spawns/skarrier_end.json
+pirates block_factorys_bosses-2.1.2-forge-1.20.1.jar 42 pirate/kraken classes, 11 goal classes
+   net/unusual/block_factorys_bosses/block/KrakenSpawnerBlock.class []
+   net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$1.class []
+   net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$PiratePoint.class []
+   net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$SpawnerTied.class []
+   net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity.class []
+   net/unusual/block_factorys_bosses/client/renderer/ThrownKrakenTridentRenderer.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$1.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleDefinition.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleRespawnTimer.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity.class ['geckolib', 'configSpec']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$1.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$2.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$AttackTarget.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$KrakenTentacleLookControl.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleAttackCollider.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentaclePartDefinition.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntityPart.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/goals/KrakenTentacleAttackGoal.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/goals/KrakenTentacleCrateGoal.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/goals/KrakenTentacleRunawayGoal.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity$1.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateCaptainEntity$1.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateCaptainEntity.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity$1.class []
+   net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity.class ['geckolib']
+   net/unusual/block_factorys_bosses/entity/projectile/ThrownKrakenTridentEntity.class []
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenCannonRenderer.class ['geckolib']
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenCinematicRenderer$KrakenCinematicModel.class ['geckolib']
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenCinematicRenderer.class ['geckolib']
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenModel.class []
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenRenderer.class ['geckolib']
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel.class ['geckolib']
+   net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleRenderer.class ['geckolib']
+   net/unusual/block_factorys_bosses/item/KrakenTridentItem.class []
+   net/unusual/block_factorys_bosses/item/PirateSaberItem.class []
+   net/unusual/block_factorys_bosses/mixins/KrakenTridentTridentItemMixin.class []
+   net/unusual/block_factorys_bosses/structures/KrakenShipStructure.class []
+dragons bookofdragons-1.31-1.20.1.jar -> 1.4: 0 classes with saved-data differences
+  entities only old: []
+  entities only new: ['ball_plush', 'fish_plush', 'fury_plush', 'nightmare_plush', 'sheep_plush', 'speed_stinger', 'spike_projectile', 'steak_plush', 'terrible_terror', 'terror_plush']
+  1.4 legacy/migration strings: []
+dragons library: AzureLib | Java Minecraft mod using Bedrock models to create custom models and animations for items, blocks, entities | license MIT | version 3.2.0 ['1.21.1'] ['fabric', 'quilt'] | files [('azurelib-fabric-1.21.1-3.2.0.jar', 1079991)] | deps []
+  needs azurelib: bookofdragons-1.31-1.20.1.jar [3.1.3,)
+  pack azurelib jar: azurelib-neo-1.20.1-3.1.23.jar
+  needs azurelib: azurelib-neo-1.20.1-3.1.23.jar ?
+copper modrinth hit: backport-copper-age | Copper Age Backport | 1410715 downloads | a1llHwl4
+copper modrinth hit: yori3os-grappling-hooks-copper-addon | Yori3o's Grappling Hooks & Copper Age Backport | 5120 downloads | n84V1ibt
+copper modrinth hit: carmells-create-compilation | Carmell's Create Compilation | 283 downloads | AdSfwuVI
+copper modrinth version: 1.20.1-0.1.5.1-pre 2026-10-03T21:33:45.141413Z copperagebackport-forge-1.20.1-0.1.5.1-pre.jar license? MIT
+copper jar 2831149 bytes, 170 classes
+  mixins copperagebackport.forge.mixins.json ['EntityRemapMixin', 'IdRemapMixin', 'LightningRodBlockMixin', 'OfferFlowerGoalMixin', 'PlayerDataRemapMixin'] ['client.ClientLevelMixin', 'client.LightTextureMixin', 'client.LevelRendererMixin']
+  items (12): ['copper_axe', 'copper_boots', 'copper_chestplate', 'copper_golem_spawn_egg', 'copper_helmet', 'copper_hoe', 'copper_horse_armor', 'copper_leggings', 'copper_nugget', 'copper_pickaxe', 'copper_shovel', 'copper_sword']
+  blocks (108): ['acacia_shelf', 'bamboo_shelf', 'birch_shelf', 'cherry_shelf', 'chiseled_copper', 'copper_bars', 'copper_bulb', 'copper_button', 'copper_chain', 'copper_chest', 'copper_door', 'copper_golem_statue', 'copper_grate', 'copper_lantern', 'copper_torch', 'copper_trapdoor', 'crimson_shelf', 'dark_oak_shelf', 'exposed_chiseled_copper', 'exposed_copper_bars', 'exposed_copper_bulb', 'exposed_copper_button', 'exposed_copper_chain', 'exposed_copper_chest', 'exposed_copper_door', 'exposed_copper_golem_statue', 'exposed_copper_grate', 'exposed_copper_lantern', 'exposed_copper_trapdoor', 'exposed_lightning_rod', 'jungle_shelf', 'mangrove_shelf', 'oak_shelf', 'oxidized_chiseled_copper', 'oxidized_copper_bars', 'oxidized_copper_bulb', 'oxidized_copper_button', 'oxidized_copper_chain', 'oxidized_copper_chest', 'oxidized_copper_door', 'oxidized_copper_golem_statue', 'oxidized_copper_grate', 'oxidized_copper_lantern', 'oxidized_copper_trapdoor', 'oxidized_lightning_rod', 'pale_oak_shelf', 'spruce_shelf', 'warped_shelf', 'waxed_chiseled_copper', 'waxed_copper_bars', 'waxed_copper_bulb', 'waxed_copper_button', 'waxed_copper_chain', 'waxed_copper_chest', 'waxed_copper_door', 'waxed_copper_golem_statue', 'waxed_copper_grate', 'waxed_copper_lantern', 'waxed_copper_trapdoor', 'waxed_exposed_chiseled_copper', 'waxed_exposed_copper_bars', 'waxed_exposed_copper_bulb', 'waxed_exposed_copper_button', 'waxed_exposed_copper_chain', 'waxed_exposed_copper_chest', 'waxed_exposed_copper_door', 'waxed_exposed_copper_golem_statue', 'waxed_exposed_copper_grate', 'waxed_exposed_copper_lantern', 'waxed_exposed_copper_trapdoor', 'waxed_exposed_lightning_rod', 'waxed_lightning_rod', 'waxed_oxidized_chiseled_copper', 'waxed_oxidized_copper_bars', 'waxed_oxidized_copper_bulb', 'waxed_oxidized_copper_button', 'waxed_oxidized_copper_chain', 'waxed_oxidized_copper_chest', 'waxed_oxidized_copper_door', 'waxed_oxidized_copper_golem_statue', 'waxed_oxidized_copper_grate', 'waxed_oxidized_copper_lantern', 'waxed_oxidized_copper_trapdoor', 'waxed_oxidized_lightning_rod', 'waxed_weathered_chiseled_copper', 'waxed_weathered_copper_bars', 'waxed_weathered_copper_bulb', 'waxed_weathered_copper_button', 'waxed_weathered_copper_chain', 'waxed_weathered_copper_chest', 'waxed_weathered_copper_door', 'waxed_weathered_copper_golem_statue', 'waxed_weathered_copper_grate', 'waxed_weathered_copper_lantern', 'waxed_weathered_copper_trapdoor', 'waxed_weathered_lightning_rod', 'weathered_chiseled_copper', 'weathered_copper_bars', 'weathered_copper_bulb', 'weathered_copper_button', 'weathered_copper_chain', 'weathered_copper_chest', 'weathered_copper_door', 'weathered_copper_golem_statue', 'weathered_copper_grate', 'weathered_copper_lantern', 'weathered_copper_trapdoor', 'weathered_lightning_rod']
+  entitys (1): ['copper_golem']
+  recipes: 139 | loot tables: 117 | worldgen: []
+  config/material classes: 2

@@ -1,0 +1,95 @@
+Compiled from "RollCap.java"
+public final class net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType extends java.lang.Enum<net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType> implements net.minecraft.util.StringRepresentable {
+  public static final net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType FORWARD;
+
+  public static final net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType BACKWARD;
+
+  public static final net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType LEFT;
+
+  public static final net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType RIGHT;
+
+  private static final net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType[] $VALUES;
+
+  public static net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType[] values();
+    Code:
+       0: getstatic     #25                 // Field $VALUES:[Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+       3: invokevirtual #30                 // Method "[Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;".clone:()Ljava/lang/Object;
+       6: checkcast     #26                 // class "[Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;"
+       9: areturn
+
+  public static net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+       2: aload_0
+       3: invokestatic  #35                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+       9: areturn
+
+  private net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #42                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public java.lang.String m_7912_();
+    Code:
+       0: aload_0
+       1: invokevirtual #47                 // Method name:()Ljava/lang/String;
+       4: getstatic     #53                 // Field java/util/Locale.ROOT:Ljava/util/Locale;
+       7: invokevirtual #59                 // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      10: areturn
+
+  private static net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType[] $values();
+    Code:
+       0: iconst_4
+       1: anewarray     #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+       4: dup
+       5: iconst_0
+       6: getstatic     #62                 // Field FORWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #64                 // Field BACKWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #66                 // Field LEFT:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      21: aastore
+      22: dup
+      23: iconst_3
+      24: getstatic     #68                 // Field RIGHT:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      27: aastore
+      28: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+       3: dup
+       4: ldc           #70                 // String FORWARD
+       6: iconst_0
+       7: invokespecial #71                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #62                 // Field FORWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      13: new           #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+      16: dup
+      17: ldc           #72                 // String BACKWARD
+      19: iconst_1
+      20: invokespecial #71                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #64                 // Field BACKWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      26: new           #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+      29: dup
+      30: ldc           #73                 // String LEFT
+      32: iconst_2
+      33: invokespecial #71                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #66                 // Field LEFT:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      39: new           #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType
+      42: dup
+      43: ldc           #74                 // String RIGHT
+      45: iconst_3
+      46: invokespecial #71                 // Method "<init>":(Ljava/lang/String;I)V
+      49: putstatic     #68                 // Field RIGHT:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      52: invokestatic  #76                 // Method $values:()[Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      55: putstatic     #25                 // Field $VALUES:[Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      58: return
+}

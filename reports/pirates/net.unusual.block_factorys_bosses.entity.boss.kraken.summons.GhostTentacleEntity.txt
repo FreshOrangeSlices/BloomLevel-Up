@@ -1,0 +1,629 @@
+Compiled from "GhostTentacleEntity.java"
+public class net.unusual.block_factorys_bosses.entity.boss.kraken.summons.GhostTentacleEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity,net.unusual.block_factorys_bosses.entity.OwnableByAllEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Integer> ATTACK_COOLDOWN;
+
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Integer> ATTACK_ANIMTIME;
+
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.util.Optional<java.util.UUID>> OWNER_UUID;
+
+  public static final software.bernie.geckolib.core.animation.RawAnimation IDLE_ANIM;
+
+  public static final software.bernie.geckolib.core.animation.RawAnimation IDLE_ANIM_TWO;
+
+  public static final software.bernie.geckolib.core.animation.RawAnimation ATTACK_ANIM;
+
+  public static final software.bernie.geckolib.core.animation.RawAnimation SPAWN_ANIM;
+
+  public static final software.bernie.geckolib.core.animation.RawAnimation DEATH_ANIM;
+
+  private static final int DEATH_DURATION = 30;
+
+  private final software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache geoCache;
+
+  public net.unusual.block_factorys_bosses.entity.boss.kraken.summons.GhostTentacleEntity(net.minecraft.world.entity.EntityType<net.unusual.block_factorys_bosses.entity.boss.kraken.summons.GhostTentacleEntity>, net.minecraft.world.level.Level);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #74                 // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       6: aload_0
+       7: aload_0
+       8: invokestatic  #80                 // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      11: putfield      #82                 // Field geoCache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      14: aload_0
+      15: invokevirtual #86                 // Method m_21530_:()V
+      18: return
+
+  protected void m_8097_();
+    Code:
+       0: aload_0
+       1: invokespecial #96                 // Method net/minecraft/world/entity/monster/Monster.m_8097_:()V
+       4: aload_0
+       5: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+       8: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: bipush        30
+      13: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      16: invokevirtual #114                // Method net/minecraft/network/syncher/SynchedEntityData.m_135372_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+      19: aload_0
+      20: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      23: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      26: iconst_0
+      27: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      30: invokevirtual #114                // Method net/minecraft/network/syncher/SynchedEntityData.m_135372_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+      33: aload_0
+      34: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      37: getstatic     #118                // Field OWNER_UUID:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      40: invokestatic  #124                // Method java/util/Optional.empty:()Ljava/util/Optional;
+      43: invokevirtual #114                // Method net/minecraft/network/syncher/SynchedEntityData.m_135372_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+      46: return
+
+  protected void m_8099_();
+    Code:
+       0: aload_0
+       1: invokespecial #127                // Method net/minecraft/world/entity/monster/Monster.m_8099_:()V
+       4: aload_0
+       5: getfield      #131                // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+       8: iconst_1
+       9: new           #13                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity$1
+      12: dup
+      13: aload_0
+      14: aload_0
+      15: ldc2_w        #132                // double 0.9d
+      18: iconst_0
+      19: invokespecial #136                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity$1."<init>":(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity;Lnet/minecraft/world/entity/PathfinderMob;DZ)V
+      22: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+      25: aload_0
+      26: getfield      #131                // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+      29: iconst_3
+      30: new           #144                // class net/minecraft/world/entity/ai/goal/RandomStrollGoal
+      33: dup
+      34: aload_0
+      35: ldc2_w        #145                // double 0.8d
+      38: invokespecial #149                // Method net/minecraft/world/entity/ai/goal/RandomStrollGoal."<init>":(Lnet/minecraft/world/entity/PathfinderMob;D)V
+      41: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+      44: aload_0
+      45: getfield      #131                // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+      48: iconst_4
+      49: new           #151                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+      52: dup
+      53: aload_0
+      54: invokespecial #154                // Method net/minecraft/world/entity/ai/goal/RandomLookAroundGoal."<init>":(Lnet/minecraft/world/entity/Mob;)V
+      57: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+      60: aload_0
+      61: getfield      #157                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+      64: iconst_1
+      65: new           #15                 // class net/unusual/block_factorys_bosses/entity/OwnableByAllEntity$OwnerHurtByTargetGoal
+      68: dup
+      69: aload_0
+      70: invokespecial #158                // Method net/unusual/block_factorys_bosses/entity/OwnableByAllEntity$OwnerHurtByTargetGoal."<init>":(Lnet/minecraft/world/entity/Mob;)V
+      73: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+      76: aload_0
+      77: getfield      #157                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+      80: iconst_2
+      81: new           #18                 // class net/unusual/block_factorys_bosses/entity/OwnableByAllEntity$OwnerHurtTargetGoal
+      84: dup
+      85: aload_0
+      86: invokespecial #159                // Method net/unusual/block_factorys_bosses/entity/OwnableByAllEntity$OwnerHurtTargetGoal."<init>":(Lnet/minecraft/world/entity/Mob;)V
+      89: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+      92: aload_0
+      93: getfield      #157                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+      96: iconst_3
+      97: new           #21                 // class net/unusual/block_factorys_bosses/entity/OwnableByAllEntity$DoNotAttackOwnerGoal
+     100: dup
+     101: aload_0
+     102: ldc           #161                // class net/minecraft/world/entity/player/Player
+     104: iconst_0
+     105: iconst_0
+     106: invokespecial #164                // Method net/unusual/block_factorys_bosses/entity/OwnableByAllEntity$DoNotAttackOwnerGoal."<init>":(Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;ZZ)V
+     109: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     112: aload_0
+     113: getfield      #157                // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+     116: iconst_4
+     117: new           #166                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     120: dup
+     121: aload_0
+     122: iconst_0
+     123: anewarray     #168                // class java/lang/Class
+     126: invokespecial #171                // Method net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal."<init>":(Lnet/minecraft/world/entity/PathfinderMob;[Ljava/lang/Class;)V
+     129: invokevirtual #142                // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+     132: return
+
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #175                // Method net/minecraft/world/entity/monster/Monster.m_7380_:(Lnet/minecraft/nbt/CompoundTag;)V
+       5: aload_1
+       6: ldc           #177                // String attack_cooldown
+       8: aload_0
+       9: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      12: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      15: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      18: checkcast     #104                // class java/lang/Integer
+      21: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+      24: invokevirtual #191                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      27: aload_1
+      28: ldc           #193                // String attack_animtime
+      30: aload_0
+      31: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      34: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      37: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      40: checkcast     #104                // class java/lang/Integer
+      43: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+      46: invokevirtual #191                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      49: aload_0
+      50: invokevirtual #197                // Method m_21805_:()Ljava/util/UUID;
+      53: ifnull        66
+      56: aload_1
+      57: ldc           #199                // String Owner
+      59: aload_0
+      60: invokevirtual #197                // Method m_21805_:()Ljava/util/UUID;
+      63: invokevirtual #203                // Method net/minecraft/nbt/CompoundTag.m_128362_:(Ljava/lang/String;Ljava/util/UUID;)V
+      66: aload_1
+      67: ldc           #205                // String ghost_age
+      69: aload_0
+      70: getfield      #208                // Field f_19797_:I
+      73: invokevirtual #191                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      76: return
+
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #213                // Method net/minecraft/world/entity/monster/Monster.m_7378_:(Lnet/minecraft/nbt/CompoundTag;)V
+       5: aload_1
+       6: ldc           #177                // String attack_cooldown
+       8: invokevirtual #217                // Method net/minecraft/nbt/CompoundTag.m_128441_:(Ljava/lang/String;)Z
+      11: ifeq          33
+      14: aload_0
+      15: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      18: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      21: aload_1
+      22: ldc           #219                // String Dataattack_cooldown
+      24: invokevirtual #223                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      27: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      30: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+      33: aload_1
+      34: ldc           #193                // String attack_animtime
+      36: invokevirtual #217                // Method net/minecraft/nbt/CompoundTag.m_128441_:(Ljava/lang/String;)Z
+      39: ifeq          61
+      42: aload_0
+      43: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      46: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      49: aload_1
+      50: ldc           #193                // String attack_animtime
+      52: invokevirtual #223                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      55: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      58: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+      61: aload_1
+      62: ldc           #199                // String Owner
+      64: invokevirtual #229                // Method net/minecraft/nbt/CompoundTag.m_128403_:(Ljava/lang/String;)Z
+      67: ifeq          80
+      70: aload_0
+      71: aload_1
+      72: ldc           #199                // String Owner
+      74: invokevirtual #233                // Method net/minecraft/nbt/CompoundTag.m_128342_:(Ljava/lang/String;)Ljava/util/UUID;
+      77: invokevirtual #237                // Method setOwnerUUID:(Ljava/util/UUID;)V
+      80: aload_0
+      81: aload_1
+      82: ldc           #205                // String ghost_age
+      84: invokevirtual #223                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      87: putfield      #208                // Field f_19797_:I
+      90: return
+
+  protected void m_6153_();
+    Code:
+       0: aload_0
+       1: dup
+       2: getfield      #241                // Field f_20919_:I
+       5: iconst_1
+       6: iadd
+       7: putfield      #241                // Field f_20919_:I
+      10: aload_0
+      11: getfield      #241                // Field f_20919_:I
+      14: bipush        30
+      16: if_icmplt     53
+      19: aload_0
+      20: invokevirtual #245                // Method m_9236_:()Lnet/minecraft/world/level/Level;
+      23: invokevirtual #251                // Method net/minecraft/world/level/Level.m_5776_:()Z
+      26: ifne          53
+      29: aload_0
+      30: invokevirtual #254                // Method m_213877_:()Z
+      33: ifne          53
+      36: aload_0
+      37: invokevirtual #245                // Method m_9236_:()Lnet/minecraft/world/level/Level;
+      40: aload_0
+      41: bipush        60
+      43: invokevirtual #258                // Method net/minecraft/world/level/Level.m_7605_:(Lnet/minecraft/world/entity/Entity;B)V
+      46: aload_0
+      47: getstatic     #262                // Field net/minecraft/world/entity/Entity$RemovalReason.KILLED:Lnet/minecraft/world/entity/Entity$RemovalReason;
+      50: invokevirtual #266                // Method m_142687_:(Lnet/minecraft/world/entity/Entity$RemovalReason;)V
+      53: return
+
+  public void m_6075_();
+    Code:
+       0: aload_0
+       1: invokespecial #269                // Method net/minecraft/world/entity/monster/Monster.m_6075_:()V
+       4: aload_0
+       5: invokevirtual #245                // Method m_9236_:()Lnet/minecraft/world/level/Level;
+       8: instanceof    #271                // class net/minecraft/server/level/ServerLevel
+      11: ifeq          59
+      14: aload_0
+      15: getfield      #208                // Field f_19797_:I
+      18: sipush        200
+      21: if_icmple     59
+      24: aload_0
+      25: invokevirtual #274                // Method m_21224_:()Z
+      28: ifne          58
+      31: aload_0
+      32: invokevirtual #277                // Method m_6074_:()V
+      35: aload_0
+      36: getstatic     #283                // Field net/unusual/block_factorys_bosses/init/BossesRiseSounds.UNDYING_TENTACLE_DISAPPEARING:Lnet/minecraftforge/registries/RegistryObject;
+      39: invokevirtual #289                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      42: checkcast     #291                // class net/minecraft/sounds/SoundEvent
+      45: invokevirtual #295                // Method m_216990_:(Lnet/minecraft/sounds/SoundEvent;)V
+      48: aload_0
+      49: ldc_w         #297                // String main_controller
+      52: ldc_w         #299                // String death
+      55: invokevirtual #303                // Method triggerAnim:(Ljava/lang/String;Ljava/lang/String;)V
+      58: return
+      59: aload_0
+      60: invokevirtual #307                // Method m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+      63: astore_1
+      64: aload_0
+      65: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+      68: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      71: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      74: checkcast     #104                // class java/lang/Integer
+      77: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+      80: ifle          304
+      83: aload_0
+      84: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+      87: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      90: aload_0
+      91: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+      94: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      97: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+     100: checkcast     #104                // class java/lang/Integer
+     103: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+     106: iconst_1
+     107: isub
+     108: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     111: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+     114: aload_0
+     115: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+     118: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     121: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+     124: checkcast     #104                // class java/lang/Integer
+     127: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+     130: iconst_4
+     131: if_icmpeq     135
+     134: return
+     135: aload_1
+     136: ifnull        152
+     139: aload_1
+     140: aload_0
+     141: invokevirtual #317                // Method net/minecraft/world/entity/LivingEntity.m_20270_:(Lnet/minecraft/world/entity/Entity;)F
+     144: f2d
+     145: ldc2_w        #318                // double 6.0d
+     148: dcmpg
+     149: iflt          153
+     152: return
+     153: aload_0
+     154: getstatic     #323                // Field net/minecraft/commands/arguments/EntityAnchorArgument$Anchor.EYES:Lnet/minecraft/commands/arguments/EntityAnchorArgument$Anchor;
+     157: aload_1
+     158: invokevirtual #327                // Method net/minecraft/world/entity/LivingEntity.m_146892_:()Lnet/minecraft/world/phys/Vec3;
+     161: invokevirtual #331                // Method m_7618_:(Lnet/minecraft/commands/arguments/EntityAnchorArgument$Anchor;Lnet/minecraft/world/phys/Vec3;)V
+     164: aload_0
+     165: invokevirtual #334                // Method m_6084_:()Z
+     168: ifeq          241
+     171: aload_1
+     172: invokevirtual #337                // Method net/minecraft/world/entity/LivingEntity.m_21254_:()Z
+     175: ifeq          207
+     178: aload_1
+     179: instanceof    #161                // class net/minecraft/world/entity/player/Player
+     182: ifeq          206
+     185: aload_1
+     186: checkcast     #161                // class net/minecraft/world/entity/player/Player
+     189: astore_2
+     190: aload_2
+     191: invokevirtual #341                // Method net/minecraft/world/entity/player/Player.m_36335_:()Lnet/minecraft/world/item/ItemCooldowns;
+     194: aload_2
+     195: invokevirtual #345                // Method net/minecraft/world/entity/player/Player.m_21211_:()Lnet/minecraft/world/item/ItemStack;
+     198: invokevirtual #351                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     201: bipush        100
+     203: invokevirtual #357                // Method net/minecraft/world/item/ItemCooldowns.m_41524_:(Lnet/minecraft/world/item/Item;I)V
+     206: return
+     207: aload_0
+     208: getstatic     #360                // Field net/unusual/block_factorys_bosses/init/BossesRiseSounds.UNDYING_TENTACLE_SMASH_GROUND:Lnet/minecraftforge/registries/RegistryObject;
+     211: invokevirtual #289                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     214: checkcast     #291                // class net/minecraft/sounds/SoundEvent
+     217: invokevirtual #295                // Method m_216990_:(Lnet/minecraft/sounds/SoundEvent;)V
+     220: aload_1
+     221: aload_0
+     222: invokevirtual #364                // Method m_269291_:()Lnet/minecraft/world/damagesource/DamageSources;
+     225: aload_0
+     226: invokevirtual #370                // Method net/minecraft/world/damagesource/DamageSources.m_269333_:(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/damagesource/DamageSource;
+     229: aload_0
+     230: getstatic     #376                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+     233: invokevirtual #380                // Method m_21133_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D
+     236: d2f
+     237: invokevirtual #384                // Method net/minecraft/world/entity/LivingEntity.m_6469_:(Lnet/minecraft/world/damagesource/DamageSource;F)Z
+     240: pop
+     241: aload_1
+     242: new           #386                // class net/minecraft/world/phys/Vec3
+     245: dup
+     246: aload_1
+     247: invokevirtual #389                // Method net/minecraft/world/entity/LivingEntity.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+     250: invokevirtual #393                // Method net/minecraft/world/phys/Vec3.m_7096_:()D
+     253: aload_0
+     254: invokevirtual #396                // Method m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     257: getfield      #400                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     260: ldc2_w        #401                // double 0.2d
+     263: dmul
+     264: dadd
+     265: aload_1
+     266: invokevirtual #389                // Method net/minecraft/world/entity/LivingEntity.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+     269: invokevirtual #405                // Method net/minecraft/world/phys/Vec3.m_7098_:()D
+     272: ldc2_w        #406                // double 0.1d
+     275: dadd
+     276: aload_1
+     277: invokevirtual #389                // Method net/minecraft/world/entity/LivingEntity.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+     280: invokevirtual #410                // Method net/minecraft/world/phys/Vec3.m_7094_:()D
+     283: aload_0
+     284: invokevirtual #396                // Method m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     287: getfield      #413                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     290: ldc2_w        #401                // double 0.2d
+     293: dmul
+     294: dadd
+     295: invokespecial #416                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     298: invokevirtual #420                // Method net/minecraft/world/entity/LivingEntity.m_20256_:(Lnet/minecraft/world/phys/Vec3;)V
+     301: goto          422
+     304: aload_0
+     305: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+     308: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     311: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+     314: checkcast     #104                // class java/lang/Integer
+     317: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+     320: bipush        40
+     322: if_icmplt     374
+     325: aload_1
+     326: ifnull        422
+     329: aload_1
+     330: aload_0
+     331: invokevirtual #317                // Method net/minecraft/world/entity/LivingEntity.m_20270_:(Lnet/minecraft/world/entity/Entity;)F
+     334: f2d
+     335: ldc2_w        #421                // double 4.5d
+     338: dcmpg
+     339: ifge          422
+     342: aload_0
+     343: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+     346: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     349: iconst_0
+     350: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     353: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+     356: aload_0
+     357: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+     360: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     363: bipush        20
+     365: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     368: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+     371: goto          422
+     374: aload_1
+     375: ifnull        422
+     378: aload_1
+     379: aload_0
+     380: invokevirtual #317                // Method net/minecraft/world/entity/LivingEntity.m_20270_:(Lnet/minecraft/world/entity/Entity;)F
+     383: f2d
+     384: ldc2_w        #423                // double 16.0d
+     387: dcmpg
+     388: ifge          422
+     391: aload_0
+     392: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+     395: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     398: aload_0
+     399: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+     402: getstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     405: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+     408: checkcast     #104                // class java/lang/Integer
+     411: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+     414: iconst_1
+     415: iadd
+     416: invokestatic  #108                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     419: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+     422: return
+
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+    Code:
+       0: invokestatic  #435                // Method net/minecraft/world/entity/Mob.m_21552_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       3: astore_0
+       4: aload_0
+       5: getstatic     #438                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       8: dconst_0
+       9: invokevirtual #442                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      12: astore_0
+      13: aload_0
+      14: getstatic     #445                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      17: ldc2_w        #446                // double 20.0d
+      20: invokevirtual #442                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      23: astore_0
+      24: aload_0
+      25: getstatic     #450                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22284_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      28: ldc2_w        #318                // double 6.0d
+      31: invokevirtual #442                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      34: astore_0
+      35: aload_0
+      36: getstatic     #376                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      39: ldc2_w        #451                // double 5.0d
+      42: invokevirtual #442                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      45: astore_0
+      46: aload_0
+      47: getstatic     #455                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      50: ldc2_w        #423                // double 16.0d
+      53: invokevirtual #442                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      56: astore_0
+      57: aload_0
+      58: getstatic     #458                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22278_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      61: ldc2_w        #406                // double 0.1d
+      64: invokevirtual #442                // Method net/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder.m_22268_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;D)Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+      67: astore_0
+      68: aload_0
+      69: areturn
+
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+    Code:
+       0: new           #41                 // class software/bernie/geckolib/core/animation/AnimationController
+       3: dup
+       4: aload_0
+       5: ldc_w         #297                // String main_controller
+       8: iconst_5
+       9: aload_0
+      10: invokedynamic #479,  0            // InvokeDynamic #0:handle:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity;)Lsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;
+      15: invokespecial #482                // Method software/bernie/geckolib/core/animation/AnimationController."<init>":(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;Ljava/lang/String;ILsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;)V
+      18: astore_2
+      19: aload_2
+      20: ldc_w         #484                // String spawn
+      23: getstatic     #486                // Field SPAWN_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      26: invokevirtual #490                // Method software/bernie/geckolib/core/animation/AnimationController.triggerableAnim:(Ljava/lang/String;Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      29: pop
+      30: aload_2
+      31: ldc_w         #299                // String death
+      34: getstatic     #492                // Field DEATH_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      37: invokevirtual #490                // Method software/bernie/geckolib/core/animation/AnimationController.triggerableAnim:(Ljava/lang/String;Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      40: pop
+      41: aload_1
+      42: iconst_1
+      43: anewarray     #41                 // class software/bernie/geckolib/core/animation/AnimationController
+      46: dup
+      47: iconst_0
+      48: aload_2
+      49: aastore
+      50: invokevirtual #496                // Method software/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar.add:([Lsoftware/bernie/geckolib/core/animation/AnimationController;)Lsoftware/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar;
+      53: pop
+      54: return
+
+  public boolean m_6094_();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public void m_20256_(net.minecraft.world.phys.Vec3);
+    Code:
+       0: return
+
+  protected void m_6138_();
+    Code:
+       0: return
+
+  public net.minecraft.world.level.material.PushReaction m_7752_();
+    Code:
+       0: getstatic     #513                // Field net/minecraft/world/level/material/PushReaction.IGNORE:Lnet/minecraft/world/level/material/PushReaction;
+       3: areturn
+
+  public net.minecraft.world.entity.MobType m_6336_();
+    Code:
+       0: getstatic     #521                // Field net/minecraft/world/entity/MobType.f_21641_:Lnet/minecraft/world/entity/MobType;
+       3: areturn
+
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+    Code:
+       0: aload_0
+       1: getfield      #82                 // Field geoCache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+       4: areturn
+
+  public java.util.UUID m_21805_();
+    Code:
+       0: aload_0
+       1: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+       4: getstatic     #118                // Field OWNER_UUID:Lnet/minecraft/network/syncher/EntityDataAccessor;
+       7: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      10: checkcast     #120                // class java/util/Optional
+      13: aconst_null
+      14: invokevirtual #528                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      17: checkcast     #530                // class java/util/UUID
+      20: areturn
+
+  public void setOwnerUUID(java.util.UUID);
+    Code:
+       0: aload_0
+       1: getfield      #100                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+       4: getstatic     #118                // Field OWNER_UUID:Lnet/minecraft/network/syncher/EntityDataAccessor;
+       7: aload_1
+       8: invokestatic  #534                // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+      11: invokevirtual #226                // Method net/minecraft/network/syncher/SynchedEntityData.m_135381_:(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V
+      14: return
+
+  protected boolean m_6125_();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public net.minecraft.world.level.EntityGetter m_9236_();
+    Code:
+       0: aload_0
+       1: invokespecial #539                // Method net/minecraft/world/entity/monster/Monster.m_9236_:()Lnet/minecraft/world/level/Level;
+       4: areturn
+
+  private software.bernie.geckolib.core.object.PlayState lambda$registerControllers$0(software.bernie.geckolib.core.animation.AnimationState);
+    Code:
+       0: aload_0
+       1: invokevirtual #311                // Method m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+       4: getstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+       7: invokevirtual #181                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      10: checkcast     #104                // class java/lang/Integer
+      13: invokevirtual #185                // Method java/lang/Integer.intValue:()I
+      16: ifle          29
+      19: aload_1
+      20: getstatic     #541                // Field ATTACK_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      23: invokevirtual #547                // Method software/bernie/geckolib/core/animation/AnimationState.setAndContinue:(Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      26: goto          55
+      29: aload_0
+      30: invokevirtual #550                // Method m_19879_:()I
+      33: iconst_2
+      34: irem
+      35: ifne          48
+      38: aload_1
+      39: getstatic     #552                // Field IDLE_ANIM_TWO:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      42: invokevirtual #547                // Method software/bernie/geckolib/core/animation/AnimationState.setAndContinue:(Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      45: goto          55
+      48: aload_1
+      49: getstatic     #554                // Field IDLE_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      52: invokevirtual #547                // Method software/bernie/geckolib/core/animation/AnimationState.setAndContinue:(Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      55: areturn
+
+  static {};
+    Code:
+       0: ldc           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity
+       2: getstatic     #565                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135028_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+       5: invokestatic  #569                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: putstatic     #102                // Field ATTACK_COOLDOWN:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: ldc           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity
+      13: getstatic     #565                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135028_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      16: invokestatic  #569                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      19: putstatic     #116                // Field ATTACK_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      22: ldc           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/summons/GhostTentacleEntity
+      24: getstatic     #572                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135041_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      27: invokestatic  #569                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      30: putstatic     #118                // Field OWNER_UUID:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      33: invokestatic  #578                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      36: ldc_w         #580                // String animation.bf_br_ghost_tentacle.idle
+      39: invokevirtual #584                // Method software/bernie/geckolib/core/animation/RawAnimation.thenLoop:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      42: putstatic     #554                // Field IDLE_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      45: invokestatic  #578                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      48: ldc_w         #586                // String animation.bf_br_ghost_tentacle.idle2
+      51: invokevirtual #584                // Method software/bernie/geckolib/core/animation/RawAnimation.thenLoop:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      54: putstatic     #552                // Field IDLE_ANIM_TWO:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      57: invokestatic  #578                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      60: ldc_w         #588                // String animation.bf_br_ghost_tentacle.attack
+      63: invokevirtual #584                // Method software/bernie/geckolib/core/animation/RawAnimation.thenLoop:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      66: putstatic     #541                // Field ATTACK_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      69: invokestatic  #578                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      72: ldc_w         #590                // String animation.bf_br_ghost_tentacle.spawn
+      75: invokevirtual #593                // Method software/bernie/geckolib/core/animation/RawAnimation.thenPlay:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      78: putstatic     #486                // Field SPAWN_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      81: invokestatic  #578                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      84: ldc_w         #595                // String animation.bf_br_ghost_tentacle.despawn
+      87: invokevirtual #593                // Method software/bernie/geckolib/core/animation/RawAnimation.thenPlay:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      90: putstatic     #492                // Field DEATH_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      93: return
+}

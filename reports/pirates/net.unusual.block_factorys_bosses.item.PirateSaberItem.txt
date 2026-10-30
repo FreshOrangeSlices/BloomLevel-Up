@@ -1,0 +1,178 @@
+Compiled from "PirateSaberItem.java"
+public class net.unusual.block_factorys_bosses.item.PirateSaberItem extends net.minecraft.world.item.SwordItem {
+  public net.unusual.block_factorys_bosses.item.PirateSaberItem();
+    Code:
+       0: aload_0
+       1: getstatic     #25                 // Field net/minecraft/world/item/Tiers.IRON:Lnet/minecraft/world/item/Tiers;
+       4: bipush        9
+       6: ldc           #26                 // float -2.4f
+       8: new           #9                  // class net/minecraft/world/item/Item$Properties
+      11: dup
+      12: invokespecial #28                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+      15: sipush        2000
+      18: invokevirtual #32                 // Method net/minecraft/world/item/Item$Properties.m_41503_:(I)Lnet/minecraft/world/item/Item$Properties;
+      21: invokespecial #35                 // Method net/minecraft/world/item/SwordItem."<init>":(Lnet/minecraft/world/item/Tier;IFLnet/minecraft/world/item/Item$Properties;)V
+      24: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_3
+       1: instanceof    #41                 // class net/minecraft/world/entity/player/Player
+       4: ifeq          324
+       7: aload_3
+       8: checkcast     #41                 // class net/minecraft/world/entity/player/Player
+      11: astore        4
+      13: aload_2
+      14: getfield      #47                 // Field net/minecraft/world/level/Level.f_46443_:Z
+      17: ifne          274
+      20: new           #49                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity
+      23: dup
+      24: getstatic     #55                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.CROSSBOW_PIRATE:Lnet/minecraftforge/registries/RegistryObject;
+      27: invokevirtual #61                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      30: checkcast     #63                 // class net/minecraft/world/entity/EntityType
+      33: aload_2
+      34: invokespecial #66                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+      37: astore        5
+      39: aload         5
+      41: aload         4
+      43: invokevirtual #70                 // Method net/minecraft/world/entity/player/Player.m_20148_:()Ljava/util/UUID;
+      46: invokevirtual #74                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity.setOwnerUUID:(Ljava/util/UUID;)V
+      49: aload         5
+      51: getstatic     #80                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+      54: new           #82                 // class net/minecraft/world/item/ItemStack
+      57: dup
+      58: getstatic     #88                 // Field net/minecraft/world/item/Items.f_42717_:Lnet/minecraft/world/item/Item;
+      61: invokespecial #91                 // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      64: invokevirtual #95                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity.m_8061_:(Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;)V
+      67: aload         4
+      69: invokevirtual #99                 // Method net/minecraft/world/entity/player/Player.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+      72: aload         4
+      74: fconst_0
+      75: aload         4
+      77: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_146908_:()F
+      80: invokevirtual #107                // Method net/minecraft/world/entity/player/Player.m_20171_:(FF)Lnet/minecraft/world/phys/Vec3;
+      83: ldc           #108                // float 1.5707964f
+      85: invokevirtual #114                // Method net/minecraft/world/phys/Vec3.m_82524_:(F)Lnet/minecraft/world/phys/Vec3;
+      88: invokevirtual #118                // Method net/minecraft/world/phys/Vec3.m_82549_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+      91: astore        6
+      93: aload         5
+      95: aload         6
+      97: invokevirtual #122                // Method net/minecraft/world/phys/Vec3.m_7096_:()D
+     100: aload         6
+     102: invokevirtual #125                // Method net/minecraft/world/phys/Vec3.m_7098_:()D
+     105: aload         6
+     107: invokevirtual #128                // Method net/minecraft/world/phys/Vec3.m_7094_:()D
+     110: aload         4
+     112: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_146908_:()F
+     115: aload         4
+     117: invokevirtual #131                // Method net/minecraft/world/entity/player/Player.m_146909_:()F
+     120: invokevirtual #135                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity.m_7678_:(DDDFF)V
+     123: aload_2
+     124: aload         5
+     126: invokevirtual #139                // Method net/minecraft/world/level/Level.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     129: pop
+     130: aload         5
+     132: ldc           #141                // String main_controller
+     134: ldc           #143                // String spawn
+     136: invokevirtual #147                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity.triggerAnim:(Ljava/lang/String;Ljava/lang/String;)V
+     139: aload         5
+     141: invokevirtual #150                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/CrossbowPirateEntity.m_217045_:()V
+     144: new           #152                // class net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity
+     147: dup
+     148: getstatic     #155                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.PIRATE_ROOK:Lnet/minecraftforge/registries/RegistryObject;
+     151: invokevirtual #61                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     154: checkcast     #63                 // class net/minecraft/world/entity/EntityType
+     157: aload_2
+     158: invokespecial #156                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+     161: astore        7
+     163: aload         7
+     165: aload         4
+     167: invokevirtual #70                 // Method net/minecraft/world/entity/player/Player.m_20148_:()Ljava/util/UUID;
+     170: invokevirtual #157                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity.setOwnerUUID:(Ljava/util/UUID;)V
+     173: aload         7
+     175: getstatic     #80                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+     178: new           #82                 // class net/minecraft/world/item/ItemStack
+     181: dup
+     182: getstatic     #162                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.PIRATE_SABER:Lnet/minecraftforge/registries/RegistryObject;
+     185: invokevirtual #61                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     188: checkcast     #164                // class net/minecraft/world/level/ItemLike
+     191: invokespecial #91                 // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     194: invokevirtual #165                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity.m_8061_:(Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;)V
+     197: aload         4
+     199: invokevirtual #99                 // Method net/minecraft/world/entity/player/Player.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+     202: aload         4
+     204: fconst_0
+     205: aload         4
+     207: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_146908_:()F
+     210: invokevirtual #107                // Method net/minecraft/world/entity/player/Player.m_20171_:(FF)Lnet/minecraft/world/phys/Vec3;
+     213: ldc           #166                // float -1.5707964f
+     215: invokevirtual #114                // Method net/minecraft/world/phys/Vec3.m_82524_:(F)Lnet/minecraft/world/phys/Vec3;
+     218: invokevirtual #118                // Method net/minecraft/world/phys/Vec3.m_82549_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+     221: astore        8
+     223: aload         7
+     225: aload         8
+     227: invokevirtual #122                // Method net/minecraft/world/phys/Vec3.m_7096_:()D
+     230: aload         8
+     232: invokevirtual #125                // Method net/minecraft/world/phys/Vec3.m_7098_:()D
+     235: aload         8
+     237: invokevirtual #128                // Method net/minecraft/world/phys/Vec3.m_7094_:()D
+     240: aload         4
+     242: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_146908_:()F
+     245: aload         4
+     247: invokevirtual #131                // Method net/minecraft/world/entity/player/Player.m_146909_:()F
+     250: invokevirtual #167                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity.m_7678_:(DDDFF)V
+     253: aload_2
+     254: aload         7
+     256: invokevirtual #139                // Method net/minecraft/world/level/Level.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     259: pop
+     260: aload         7
+     262: ldc           #141                // String main_controller
+     264: ldc           #143                // String spawn
+     266: invokevirtual #168                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity.triggerAnim:(Ljava/lang/String;Ljava/lang/String;)V
+     269: aload         7
+     271: invokevirtual #169                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/summons/PirateRookEntity.m_217045_:()V
+     274: aload         4
+     276: getstatic     #175                // Field net/minecraft/stats/Stats.f_12982_:Lnet/minecraft/stats/StatType;
+     279: aload_0
+     280: invokevirtual #181                // Method net/minecraft/stats/StatType.m_12902_:(Ljava/lang/Object;)Lnet/minecraft/stats/Stat;
+     283: invokevirtual #185                // Method net/minecraft/world/entity/player/Player.m_36246_:(Lnet/minecraft/stats/Stat;)V
+     286: aload         4
+     288: invokevirtual #189                // Method net/minecraft/world/entity/player/Player.m_36335_:()Lnet/minecraft/world/item/ItemCooldowns;
+     291: aload_1
+     292: invokevirtual #193                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     295: bipush        80
+     297: invokevirtual #199                // Method net/minecraft/world/item/ItemCooldowns.m_41524_:(Lnet/minecraft/world/item/Item;I)V
+     300: aload         4
+     302: invokevirtual #203                // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+     305: getfield      #208                // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+     308: ifne          324
+     311: aload_1
+     312: bipush        10
+     314: aload         4
+     316: invokedynamic #227,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+     321: invokevirtual #231                // Method net/minecraft/world/item/ItemStack.m_41622_:(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V
+     324: aload_1
+     325: areturn
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        14
+       2: ireturn
+
+  public net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack> m_7203_(net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: aload_3
+       3: invokestatic  #256                // Method net/minecraft/world/item/ItemUtils.m_150959_:(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;
+       6: areturn
+
+  public net.minecraft.world.item.UseAnim m_6164_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: getstatic     #266                // Field net/minecraft/world/item/UseAnim.BOW:Lnet/minecraft/world/item/UseAnim;
+       3: areturn
+
+  private static void lambda$finishUsingItem$0(net.minecraft.world.entity.player.Player);
+    Code:
+       0: return
+}

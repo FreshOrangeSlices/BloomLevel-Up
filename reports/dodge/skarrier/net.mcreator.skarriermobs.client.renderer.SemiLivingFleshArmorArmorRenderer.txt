@@ -1,0 +1,161 @@
+Compiled from "SemiLivingFleshArmorArmorRenderer.java"
+public class net.mcreator.skarriermobs.client.renderer.SemiLivingFleshArmorArmorRenderer extends software.bernie.geckolib.renderer.GeoArmorRenderer<net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem> {
+  public net.mcreator.skarriermobs.client.renderer.SemiLivingFleshArmorArmorRenderer();
+    Code:
+       0: aload_0
+       1: new           #10                 // class net/mcreator/skarriermobs/item/model/SemiLivingFleshArmorModel
+       4: dup
+       5: invokespecial #12                 // Method net/mcreator/skarriermobs/item/model/SemiLivingFleshArmorModel."<init>":()V
+       8: invokespecial #15                 // Method software/bernie/geckolib/renderer/GeoArmorRenderer."<init>":(Lsoftware/bernie/geckolib/model/GeoModel;)V
+      11: aload_0
+      12: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+      15: dup
+      16: aconst_null
+      17: ldc           #19                 // String armorHead
+      19: iconst_0
+      20: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      23: dconst_0
+      24: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      27: iconst_0
+      28: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      31: iconst_0
+      32: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      35: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+      38: putfield      #37                 // Field head:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+      41: aload_0
+      42: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+      45: dup
+      46: aconst_null
+      47: ldc           #39                 // String armorBody
+      49: iconst_0
+      50: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      53: dconst_0
+      54: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      57: iconst_0
+      58: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      61: iconst_0
+      62: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      65: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+      68: putfield      #42                 // Field body:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+      71: aload_0
+      72: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+      75: dup
+      76: aconst_null
+      77: ldc           #44                 // String armorRightArm
+      79: iconst_0
+      80: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      83: dconst_0
+      84: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      87: iconst_0
+      88: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      91: iconst_0
+      92: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      95: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+      98: putfield      #47                 // Field rightArm:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+     101: aload_0
+     102: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+     105: dup
+     106: aconst_null
+     107: ldc           #49                 // String armorLeftArm
+     109: iconst_0
+     110: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     113: dconst_0
+     114: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     117: iconst_0
+     118: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     121: iconst_0
+     122: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     125: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+     128: putfield      #52                 // Field leftArm:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+     131: aload_0
+     132: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+     135: dup
+     136: aconst_null
+     137: ldc           #54                 // String armorRightLeg
+     139: iconst_0
+     140: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     143: dconst_0
+     144: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     147: iconst_0
+     148: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     151: iconst_0
+     152: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     155: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+     158: putfield      #57                 // Field rightLeg:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+     161: aload_0
+     162: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+     165: dup
+     166: aconst_null
+     167: ldc           #59                 // String armorLeftLeg
+     169: iconst_0
+     170: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     173: dconst_0
+     174: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     177: iconst_0
+     178: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     181: iconst_0
+     182: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     185: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+     188: putfield      #62                 // Field leftLeg:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+     191: aload_0
+     192: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+     195: dup
+     196: aconst_null
+     197: ldc           #64                 // String armorRightBoot
+     199: iconst_0
+     200: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     203: dconst_0
+     204: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     207: iconst_0
+     208: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     211: iconst_0
+     212: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     215: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+     218: putfield      #67                 // Field rightBoot:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+     221: aload_0
+     222: new           #17                 // class software/bernie/geckolib/cache/object/GeoBone
+     225: dup
+     226: aconst_null
+     227: ldc           #69                 // String armorLeftBoot
+     229: iconst_0
+     230: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     233: dconst_0
+     234: invokestatic  #30                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     237: iconst_0
+     238: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     241: iconst_0
+     242: invokestatic  #25                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     245: invokespecial #33                 // Method software/bernie/geckolib/cache/object/GeoBone."<init>":(Lsoftware/bernie/geckolib/cache/object/GeoBone;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Double;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
+     248: putfield      #72                 // Field leftBoot:Lsoftware/bernie/geckolib/cache/object/GeoBone;
+     251: return
+
+  public net.minecraft.client.renderer.RenderType getRenderType(net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem, net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.MultiBufferSource, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #80                 // Method getTextureLocation:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lnet/minecraft/resources/ResourceLocation;
+       5: invokestatic  #86                 // Method net/minecraft/client/renderer/RenderType.m_110473_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+       8: areturn
+
+  public net.minecraft.client.renderer.RenderType getRenderType(net.minecraft.world.item.Item, net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.MultiBufferSource, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #97                 // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem
+       5: aload_2
+       6: aload_3
+       7: fload         4
+       9: invokevirtual #99                 // Method getRenderType:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/MultiBufferSource;F)Lnet/minecraft/client/renderer/RenderType;
+      12: areturn
+
+  public net.minecraft.client.renderer.RenderType getRenderType(software.bernie.geckolib.core.animatable.GeoAnimatable, net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.MultiBufferSource, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #97                 // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem
+       5: aload_2
+       6: aload_3
+       7: fload         4
+       9: invokevirtual #99                 // Method getRenderType:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/MultiBufferSource;F)Lnet/minecraft/client/renderer/RenderType;
+      12: areturn
+}

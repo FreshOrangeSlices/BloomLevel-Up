@@ -1,0 +1,61 @@
+Compiled from "SemiLivingHelmetBiteModel.java"
+public class net.mcreator.skarriermobs.entity.model.SemiLivingHelmetBiteModel extends software.bernie.geckolib.model.GeoModel<net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity> {
+  public net.mcreator.skarriermobs.entity.model.SemiLivingHelmetBiteModel();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method software/bernie/geckolib/model/GeoModel."<init>":()V
+       4: return
+
+  public net.minecraft.resources.ResourceLocation getAnimationResource(net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity);
+    Code:
+       0: new           #21                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #23                 // String skarrier_mobs
+       6: ldc           #25                 // String animations/semi_living_helmet_bite.animation.json
+       8: invokespecial #28                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: areturn
+
+  public net.minecraft.resources.ResourceLocation getModelResource(net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity);
+    Code:
+       0: new           #21                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #23                 // String skarrier_mobs
+       6: ldc           #33                 // String geo/semi_living_helmet_bite.geo.json
+       8: invokespecial #28                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureResource(net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity);
+    Code:
+       0: new           #21                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #23                 // String skarrier_mobs
+       6: aload_1
+       7: invokevirtual #40                 // Method net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity.getTexture:()Ljava/lang/String;
+      10: invokedynamic #52,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      15: invokespecial #28                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      18: areturn
+
+  public net.minecraft.resources.ResourceLocation getAnimationResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #36                 // class net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity
+       5: invokevirtual #55                 // Method getAnimationResource:(Lnet/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #36                 // class net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity
+       5: invokevirtual #57                 // Method getTextureResource:(Lnet/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public net.minecraft.resources.ResourceLocation getModelResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #36                 // class net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity
+       5: invokevirtual #59                 // Method getModelResource:(Lnet/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+}

@@ -1,0 +1,101 @@
+Compiled from "SemiLivingHelmetBiteRenderer.java"
+public class net.mcreator.skarriermobs.client.renderer.SemiLivingHelmetBiteRenderer extends software.bernie.geckolib.renderer.GeoEntityRenderer<net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity> {
+  public net.mcreator.skarriermobs.client.renderer.SemiLivingHelmetBiteRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: new           #15                 // class net/mcreator/skarriermobs/entity/model/SemiLivingHelmetBiteModel
+       5: dup
+       6: invokespecial #18                 // Method net/mcreator/skarriermobs/entity/model/SemiLivingHelmetBiteModel."<init>":()V
+       9: invokespecial #21                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lsoftware/bernie/geckolib/model/GeoModel;)V
+      12: aload_0
+      13: ldc           #22                 // float 0.1f
+      15: putfield      #26                 // Field f_114477_:F
+      18: return
+
+  public net.minecraft.client.renderer.RenderType getRenderType(net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity, net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.MultiBufferSource, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #36                 // Method m_5478_:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation;
+       5: invokestatic  #42                 // Method net/minecraft/client/renderer/RenderType.m_110473_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+       8: areturn
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, net.mcreator.skarriermobs.entity.SemiLivingHelmetBiteEntity, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: fconst_1
+       1: fstore        14
+       3: aload_0
+       4: fload         14
+       6: putfield      #54                 // Field scaleHeight:F
+       9: aload_0
+      10: fload         14
+      12: putfield      #57                 // Field scaleWidth:F
+      15: aload_0
+      16: aload_1
+      17: aload_2
+      18: aload_3
+      19: aload         4
+      21: aload         5
+      23: iload         6
+      25: fload         7
+      27: iload         8
+      29: iload         9
+      31: fload         10
+      33: fload         11
+      35: fload         12
+      37: fload         13
+      39: invokespecial #60                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer.preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      42: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.Entity, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #79                 // class net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: fload         7
+      15: iload         8
+      17: iload         9
+      19: fload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: invokevirtual #81                 // Method preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      30: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #79                 // class net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: fload         7
+      15: iload         8
+      17: iload         9
+      19: fload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: invokevirtual #81                 // Method preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      30: return
+
+  public net.minecraft.client.renderer.RenderType getRenderType(software.bernie.geckolib.core.animatable.GeoAnimatable, net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.MultiBufferSource, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #79                 // class net/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity
+       5: aload_2
+       6: aload_3
+       7: fload         4
+       9: invokevirtual #85                 // Method getRenderType:(Lnet/mcreator/skarriermobs/entity/SemiLivingHelmetBiteEntity;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/MultiBufferSource;F)Lnet/minecraft/client/renderer/RenderType;
+      12: areturn
+}

@@ -1,0 +1,81 @@
+Compiled from "KrakenRenderer.java"
+public class net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenRenderer extends software.bernie.geckolib.renderer.GeoEntityRenderer<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity> {
+  public net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: new           #15                 // class net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenModel
+       5: dup
+       6: invokespecial #18                 // Method net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenModel."<init>":()V
+       9: invokespecial #21                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lsoftware/bernie/geckolib/model/GeoModel;)V
+      12: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: iload         6
+       2: ifne          24
+       5: aload_3
+       6: ldc           #29                 // String root
+       8: invokevirtual #35                 // Method software/bernie/geckolib/cache/object/BakedGeoModel.getBone:(Ljava/lang/String;)Ljava/util/Optional;
+      11: invokevirtual #41                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+      14: checkcast     #43                 // class software/bernie/geckolib/cache/object/GeoBone
+      17: aload_2
+      18: invokevirtual #49                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity.isHidden:()Z
+      21: invokevirtual #53                 // Method software/bernie/geckolib/cache/object/GeoBone.setHidden:(Z)V
+      24: aload_0
+      25: aload_1
+      26: aload_2
+      27: aload_3
+      28: aload         4
+      30: aload         5
+      32: iload         6
+      34: fload         7
+      36: iload         8
+      38: iload         9
+      40: fload         10
+      42: fload         11
+      44: fload         12
+      46: fload         13
+      48: invokespecial #56                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer.preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      51: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.Entity, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #45                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: fload         7
+      15: iload         8
+      17: iload         9
+      19: fload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: invokevirtual #79                 // Method preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      30: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #45                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: fload         7
+      15: iload         8
+      17: iload         9
+      19: fload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: invokevirtual #79                 // Method preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      30: return
+}

@@ -1,0 +1,336 @@
+Compiled from "ModEventBusEventsClient.java"
+public class net.saksolm.monsterexpansion.event.ModEventBusEventsClient {
+  private static final net.minecraftforge.client.extensions.common.IClientItemExtensions ARMOR_RENDER_PROPERTIES;
+
+  public net.saksolm.monsterexpansion.event.ModEventBusEventsClient();
+    Code:
+       0: aload_0
+       1: invokespecial #124                // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static net.minecraftforge.client.extensions.common.IClientItemExtensions getArmorRenderProperties();
+    Code:
+       0: getstatic     #130                // Field ARMOR_RENDER_PROPERTIES:Lnet/minecraftforge/client/extensions/common/IClientItemExtensions;
+       3: areturn
+
+  public static void registerParticles(net.minecraftforge.client.event.RegisterParticleProvidersEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #139                // Field net/saksolm/monsterexpansion/particles/ModParticles.SHOCKWAVE:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+      10: invokedynamic #164,  0            // InvokeDynamic #0:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+      15: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+      18: aload_0
+      19: getstatic     #173                // Field net/saksolm/monsterexpansion/particles/ModParticles.SOUND_RIPPLE:Lnet/minecraftforge/registries/RegistryObject;
+      22: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      25: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+      28: invokedynamic #176,  0            // InvokeDynamic #1:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+      33: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+      36: aload_0
+      37: getstatic     #179                // Field net/saksolm/monsterexpansion/particles/ModParticles.SOUND_MINE_SPHERE:Lnet/minecraftforge/registries/RegistryObject;
+      40: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      43: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+      46: invokedynamic #182,  0            // InvokeDynamic #2:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+      51: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+      54: aload_0
+      55: getstatic     #185                // Field net/saksolm/monsterexpansion/particles/ModParticles.DEBRIS:Lnet/minecraftforge/registries/RegistryObject;
+      58: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      61: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+      64: invokedynamic #188,  0            // InvokeDynamic #3:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+      69: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+      72: aload_0
+      73: getstatic     #191                // Field net/saksolm/monsterexpansion/particles/ModParticles.DUST:Lnet/minecraftforge/registries/RegistryObject;
+      76: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      79: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+      82: invokedynamic #194,  0            // InvokeDynamic #4:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+      87: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+      90: aload_0
+      91: getstatic     #197                // Field net/saksolm/monsterexpansion/particles/ModParticles.BIG_DUST:Lnet/minecraftforge/registries/RegistryObject;
+      94: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      97: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     100: invokedynamic #200,  0            // InvokeDynamic #5:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     105: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     108: aload_0
+     109: getstatic     #203                // Field net/saksolm/monsterexpansion/particles/ModParticles.FLASH:Lnet/minecraftforge/registries/RegistryObject;
+     112: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     115: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     118: invokedynamic #206,  0            // InvokeDynamic #6:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     123: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     126: aload_0
+     127: getstatic     #209                // Field net/saksolm/monsterexpansion/particles/ModParticles.CORE_MIST:Lnet/minecraftforge/registries/RegistryObject;
+     130: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     133: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     136: invokedynamic #212,  0            // InvokeDynamic #7:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     141: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     144: aload_0
+     145: getstatic     #215                // Field net/saksolm/monsterexpansion/particles/ModParticles.DRIVING_WIND:Lnet/minecraftforge/registries/RegistryObject;
+     148: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     151: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     154: invokedynamic #218,  0            // InvokeDynamic #8:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     159: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     162: aload_0
+     163: getstatic     #221                // Field net/saksolm/monsterexpansion/particles/ModParticles.ICE_SHARD:Lnet/minecraftforge/registries/RegistryObject;
+     166: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     169: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     172: invokedynamic #224,  0            // InvokeDynamic #9:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     177: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     180: aload_0
+     181: getstatic     #227                // Field net/saksolm/monsterexpansion/particles/ModParticles.FROST_MOTE:Lnet/minecraftforge/registries/RegistryObject;
+     184: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     187: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     190: invokedynamic #230,  0            // InvokeDynamic #10:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     195: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     198: aload_0
+     199: getstatic     #233                // Field net/saksolm/monsterexpansion/particles/ModParticles.VOLATILE_GLOB:Lnet/minecraftforge/registries/RegistryObject;
+     202: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     205: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     208: invokedynamic #236,  0            // InvokeDynamic #11:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     213: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     216: aload_0
+     217: getstatic     #239                // Field net/saksolm/monsterexpansion/particles/ModParticles.STUN_STAR:Lnet/minecraftforge/registries/RegistryObject;
+     220: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     223: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     226: invokedynamic #242,  0            // InvokeDynamic #12:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     231: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     234: aload_0
+     235: getstatic     #245                // Field net/saksolm/monsterexpansion/particles/ModParticles.BREATH:Lnet/minecraftforge/registries/RegistryObject;
+     238: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     241: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     244: invokedynamic #248,  0            // InvokeDynamic #13:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     249: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     252: aload_0
+     253: getstatic     #251                // Field net/saksolm/monsterexpansion/particles/ModParticles.FLAME_GLOB:Lnet/minecraftforge/registries/RegistryObject;
+     256: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     259: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     262: invokedynamic #254,  0            // InvokeDynamic #14:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     267: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     270: aload_0
+     271: getstatic     #257                // Field net/saksolm/monsterexpansion/particles/ModParticles.FLAME_BALL:Lnet/minecraftforge/registries/RegistryObject;
+     274: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     277: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     280: invokedynamic #260,  0            // InvokeDynamic #15:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     285: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     288: aload_0
+     289: getstatic     #263                // Field net/saksolm/monsterexpansion/particles/ModParticles.BIG_FLAME_BALL:Lnet/minecraftforge/registries/RegistryObject;
+     292: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     295: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     298: invokedynamic #266,  0            // InvokeDynamic #16:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     303: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     306: aload_0
+     307: getstatic     #269                // Field net/saksolm/monsterexpansion/particles/ModParticles.SMOKE:Lnet/minecraftforge/registries/RegistryObject;
+     310: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     313: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     316: invokedynamic #272,  0            // InvokeDynamic #17:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     321: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     324: aload_0
+     325: getstatic     #275                // Field net/saksolm/monsterexpansion/particles/ModParticles.TRACKFLY:Lnet/minecraftforge/registries/RegistryObject;
+     328: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     331: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     334: invokedynamic #278,  0            // InvokeDynamic #18:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     339: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     342: aload_0
+     343: getstatic     #281                // Field net/saksolm/monsterexpansion/particles/ModParticles.TRACKFLY_GOLD:Lnet/minecraftforge/registries/RegistryObject;
+     346: invokevirtual #145                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     349: checkcast     #147                // class net/minecraft/core/particles/ParticleType
+     352: invokedynamic #284,  0            // InvokeDynamic #19:m_107419_:()Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;
+     357: invokevirtual #170                // Method net/minecraftforge/client/event/RegisterParticleProvidersEvent.registerSpriteSet:(Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
+     360: return
+
+  public static void onRegisterClientReloadListeners(net.minecraftforge.client.event.RegisterClientReloadListenersEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #294                // Field net/saksolm/monsterexpansion/data/WeaponDataManager.INSTANCE:Lnet/saksolm/monsterexpansion/data/WeaponDataManager;
+       4: invokevirtual #300                // Method net/minecraftforge/client/event/RegisterClientReloadListenersEvent.registerReloadListener:(Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+       7: aload_0
+       8: getstatic     #305                // Field net/saksolm/monsterexpansion/data/ArmorDataManager.INSTANCE:Lnet/saksolm/monsterexpansion/data/ArmorDataManager;
+      11: invokevirtual #300                // Method net/minecraftforge/client/event/RegisterClientReloadListenersEvent.registerReloadListener:(Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+      14: return
+
+  public static void onRegisterShaders(net.minecraftforge.client.event.RegisterShadersEvent) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+       4: dup
+       5: aload_0
+       6: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+       9: new           #320                // class net/minecraft/resources/ResourceLocation
+      12: dup
+      13: ldc_w         #321                // String monsterexpansion
+      16: ldc_w         #323                // String rendertype_split_text_bevel
+      19: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      22: getstatic     #332                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85817_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+      25: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+      28: invokedynamic #347,  0            // InvokeDynamic #20:accept:()Ljava/util/function/Consumer;
+      33: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+      36: aload_0
+      37: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+      40: dup
+      41: aload_0
+      42: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+      45: new           #320                // class net/minecraft/resources/ResourceLocation
+      48: dup
+      49: ldc_w         #321                // String monsterexpansion
+      52: ldc_w         #353                // String rendertype_distortion_entity
+      55: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      58: getstatic     #356                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85812_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+      61: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+      64: invokedynamic #361,  0            // InvokeDynamic #21:accept:()Ljava/util/function/Consumer;
+      69: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+      72: aload_0
+      73: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+      76: dup
+      77: aload_0
+      78: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+      81: new           #320                // class net/minecraft/resources/ResourceLocation
+      84: dup
+      85: ldc_w         #321                // String monsterexpansion
+      88: ldc_w         #363                // String rendertype_distortion_particle
+      91: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      94: getstatic     #366                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85813_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+      97: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+     100: invokedynamic #371,  0            // InvokeDynamic #22:accept:()Ljava/util/function/Consumer;
+     105: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+     108: aload_0
+     109: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+     112: dup
+     113: aload_0
+     114: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+     117: new           #320                // class net/minecraft/resources/ResourceLocation
+     120: dup
+     121: ldc_w         #321                // String monsterexpansion
+     124: ldc_w         #373                // String rendertype_entity_refraction
+     127: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     130: getstatic     #356                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85812_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+     133: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+     136: invokedynamic #378,  0            // InvokeDynamic #23:accept:()Ljava/util/function/Consumer;
+     141: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+     144: aload_0
+     145: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+     148: dup
+     149: aload_0
+     150: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+     153: new           #320                // class net/minecraft/resources/ResourceLocation
+     156: dup
+     157: ldc_w         #321                // String monsterexpansion
+     160: ldc_w         #380                // String particle_refraction
+     163: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     166: getstatic     #366                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85813_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+     169: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+     172: invokedynamic #385,  0            // InvokeDynamic #24:accept:()Ljava/util/function/Consumer;
+     177: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+     180: aload_0
+     181: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+     184: dup
+     185: aload_0
+     186: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+     189: new           #320                // class net/minecraft/resources/ResourceLocation
+     192: dup
+     193: ldc_w         #321                // String monsterexpansion
+     196: ldc_w         #387                // String rendertype_quest_ripple
+     199: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     202: getstatic     #332                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85817_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+     205: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+     208: invokedynamic #392,  0            // InvokeDynamic #25:accept:()Ljava/util/function/Consumer;
+     213: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+     216: aload_0
+     217: new           #312                // class net/minecraft/client/renderer/ShaderInstance
+     220: dup
+     221: aload_0
+     222: invokevirtual #318                // Method net/minecraftforge/client/event/RegisterShadersEvent.getResourceProvider:()Lnet/minecraft/server/packs/resources/ResourceProvider;
+     225: new           #320                // class net/minecraft/resources/ResourceLocation
+     228: dup
+     229: ldc_w         #321                // String monsterexpansion
+     232: ldc_w         #394                // String rendertype_quest_completed
+     235: invokespecial #326                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     238: getstatic     #332                // Field com/mojang/blaze3d/vertex/DefaultVertexFormat.f_85817_:Lcom/mojang/blaze3d/vertex/VertexFormat;
+     241: invokespecial #335                // Method net/minecraft/client/renderer/ShaderInstance."<init>":(Lnet/minecraft/server/packs/resources/ResourceProvider;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/VertexFormat;)V
+     244: invokedynamic #399,  0            // InvokeDynamic #26:accept:()Ljava/util/function/Consumer;
+     249: invokevirtual #351                // Method net/minecraftforge/client/event/RegisterShadersEvent.registerShader:(Lnet/minecraft/client/renderer/ShaderInstance;Ljava/util/function/Consumer;)V
+     252: return
+
+  public static void onRegisterGuiOverlays(net.minecraftforge.client.event.RegisterGuiOverlaysEvent);
+    Code:
+       0: aload_0
+       1: ldc_w         #404                // String quest_hud
+       4: getstatic     #409                // Field net/saksolm/monsterexpansion/client/QuestHudOverlay.INSTANCE:Lnet/saksolm/monsterexpansion/client/QuestHudOverlay;
+       7: invokevirtual #415                // Method net/minecraftforge/client/event/RegisterGuiOverlaysEvent.registerAboveAll:(Ljava/lang/String;Lnet/minecraftforge/client/gui/overlay/IGuiOverlay;)V
+      10: return
+
+  public static void addRenderLayers(net.minecraftforge.client.event.EntityRenderersEvent$AddLayers);
+    Code:
+       0: aload_0
+       1: invokevirtual #422                // Method net/minecraftforge/client/event/EntityRenderersEvent$AddLayers.getSkins:()Ljava/util/Set;
+       4: aload_0
+       5: invokedynamic #432,  0            // InvokeDynamic #27:accept:(Lnet/minecraftforge/client/event/EntityRenderersEvent$AddLayers;)Ljava/util/function/Consumer;
+      10: invokeinterface #438,  2          // InterfaceMethod java/util/Set.forEach:(Ljava/util/function/Consumer;)V
+      15: return
+
+  private static void lambda$addRenderLayers$7(net.minecraftforge.client.event.EntityRenderersEvent$AddLayers, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #443                // Method net/minecraftforge/client/event/EntityRenderersEvent$AddLayers.getSkin:(Ljava/lang/String;)Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;
+       5: checkcast     #445                // class net/minecraft/client/renderer/entity/player/PlayerRenderer
+       8: astore_2
+       9: aload_2
+      10: ifnull        26
+      13: aload_2
+      14: new           #447                // class net/saksolm/monsterexpansion/client/GreatswordChargeGlintLayer
+      17: dup
+      18: aload_2
+      19: invokespecial #450                // Method net/saksolm/monsterexpansion/client/GreatswordChargeGlintLayer."<init>":(Lnet/minecraft/client/renderer/entity/RenderLayerParent;)V
+      22: invokevirtual #454                // Method net/minecraft/client/renderer/entity/player/PlayerRenderer.m_115326_:(Lnet/minecraft/client/renderer/entity/layers/RenderLayer;)Z
+      25: pop
+      26: return
+
+  private static void lambda$onRegisterShaders$6(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #464                // Field net/saksolm/monsterexpansion/client/QuestCompletedShader.COMPLETED_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  private static void lambda$onRegisterShaders$5(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #470                // Field net/saksolm/monsterexpansion/client/QuestRippleShader.RIPPLE_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  private static void lambda$onRegisterShaders$4(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #475                // Field net/saksolm/monsterexpansion/client/DistortionShader.PARTICLE_REFRACTION_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  private static void lambda$onRegisterShaders$3(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #478                // Field net/saksolm/monsterexpansion/client/DistortionShader.ENTITY_REFRACTION_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  private static void lambda$onRegisterShaders$2(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #481                // Field net/saksolm/monsterexpansion/client/DistortionShader.PARTICLE_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  private static void lambda$onRegisterShaders$1(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #484                // Field net/saksolm/monsterexpansion/client/DistortionShader.ENTITY_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  private static void lambda$onRegisterShaders$0(net.minecraft.client.renderer.ShaderInstance);
+    Code:
+       0: aload_0
+       1: putstatic     #489                // Field net/saksolm/monsterexpansion/client/SplitTextShader.BEVEL_INSTANCE:Lnet/minecraft/client/renderer/ShaderInstance;
+       4: return
+
+  static {};
+    Code:
+       0: new           #492                // class net/saksolm/monsterexpansion/client/ModRenderProperties
+       3: dup
+       4: invokespecial #493                // Method net/saksolm/monsterexpansion/client/ModRenderProperties."<init>":()V
+       7: putstatic     #130                // Field ARMOR_RENDER_PROPERTIES:Lnet/minecraftforge/client/extensions/common/IClientItemExtensions;
+      10: return
+}

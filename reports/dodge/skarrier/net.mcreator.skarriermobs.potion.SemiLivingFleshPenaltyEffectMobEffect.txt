@@ -1,0 +1,41 @@
+Compiled from "SemiLivingFleshPenaltyEffectMobEffect.java"
+public class net.mcreator.skarriermobs.potion.SemiLivingFleshPenaltyEffectMobEffect extends net.minecraft.world.effect.MobEffect {
+  public net.mcreator.skarriermobs.potion.SemiLivingFleshPenaltyEffectMobEffect();
+    Code:
+       0: aload_0
+       1: getstatic     #20                 // Field net/minecraft/world/effect/MobEffectCategory.NEUTRAL:Lnet/minecraft/world/effect/MobEffectCategory;
+       4: ldc           #21                 // int -16777216
+       6: invokespecial #24                 // Method net/minecraft/world/effect/MobEffect."<init>":(Lnet/minecraft/world/effect/MobEffectCategory;I)V
+       9: aload_0
+      10: getstatic     #30                 // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      13: ldc           #32                 // String 213f9ca3-cc6f-309e-920b-1885d1d2b3c8
+      15: ldc2_w        #33                 // double -4.0d
+      18: getstatic     #38                 // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      21: invokevirtual #42                 // Method m_19472_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)Lnet/minecraft/world/effect/MobEffect;
+      24: pop
+      25: return
+
+  public java.util.List<net.minecraft.world.item.ItemStack> getCurativeItems();
+    Code:
+       0: new           #49                 // class java/util/ArrayList
+       3: dup
+       4: invokespecial #51                 // Method java/util/ArrayList."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: areturn
+
+  public boolean m_6584_(int, int);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientMobEffectExtensions>);
+    Code:
+       0: aload_1
+       1: new           #7                  // class net/mcreator/skarriermobs/potion/SemiLivingFleshPenaltyEffectMobEffect$1
+       4: dup
+       5: aload_0
+       6: invokespecial #65                 // Method net/mcreator/skarriermobs/potion/SemiLivingFleshPenaltyEffectMobEffect$1."<init>":(Lnet/mcreator/skarriermobs/potion/SemiLivingFleshPenaltyEffectMobEffect;)V
+       9: invokeinterface #71,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      14: return
+}

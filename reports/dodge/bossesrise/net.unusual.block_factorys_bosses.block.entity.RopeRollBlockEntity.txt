@@ -1,0 +1,39 @@
+Compiled from "RopeRollBlockEntity.java"
+public class net.unusual.block_factorys_bosses.block.entity.RopeRollBlockEntity extends net.minecraft.world.level.block.entity.BlockEntity implements software.bernie.geckolib.animatable.GeoBlockEntity {
+  private final software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache cache;
+
+  public net.unusual.block_factorys_bosses.block.entity.RopeRollBlockEntity(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_0
+       1: getstatic     #24                 // Field net/unusual/block_factorys_bosses/init/BossesRiseBlockEntities.ROPE_ROLL:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #30                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #32                 // class net/minecraft/world/level/block/entity/BlockEntityType
+      10: aload_1
+      11: aload_2
+      12: invokespecial #35                 // Method net/minecraft/world/level/block/entity/BlockEntity."<init>":(Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+      15: aload_0
+      16: aload_0
+      17: invokestatic  #41                 // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      20: putfield      #43                 // Field cache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      23: aload_0
+      24: invokestatic  #49                 // InterfaceMethod software/bernie/geckolib/animatable/SingletonGeoAnimatable.registerSyncedAnimatable:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)V
+      27: return
+
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+    Code:
+       0: return
+
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+    Code:
+       0: aload_0
+       1: getfield      #43                 // Field cache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+       4: areturn
+
+  public net.minecraft.world.phys.AABB getRenderBoundingBox();
+    Code:
+       0: aload_0
+       1: invokespecial #65                 // Method net/minecraft/world/level/block/entity/BlockEntity.getRenderBoundingBox:()Lnet/minecraft/world/phys/AABB;
+       4: dconst_1
+       5: invokevirtual #71                 // Method net/minecraft/world/phys/AABB.m_82400_:(D)Lnet/minecraft/world/phys/AABB;
+       8: areturn
+}

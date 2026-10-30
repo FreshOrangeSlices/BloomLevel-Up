@@ -1,0 +1,206 @@
+Compiled from "KrakenTentacleAttackGoal.java"
+public class net.unusual.block_factorys_bosses.entity.boss.kraken.goals.KrakenTentacleAttackGoal extends net.minecraft.world.entity.ai.goal.Goal {
+  protected net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity tentacleEntity;
+
+  protected final java.lang.String attackAnimation;
+
+  protected final float rotationRangeScale;
+
+  private final float attackProbability;
+
+  protected final int duration;
+
+  protected final int lookTicks;
+
+  protected final int hitOnTick;
+
+  protected int tick;
+
+  protected java.util.function.Consumer<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity> attackCallback;
+
+  public net.unusual.block_factorys_bosses.entity.boss.kraken.goals.KrakenTentacleAttackGoal(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, java.lang.String, float, float, int, int, int, java.util.function.Consumer<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity>);
+    Code:
+       0: aload_0
+       1: invokespecial #37                 // Method net/minecraft/world/entity/ai/goal/Goal."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+       9: aload_0
+      10: aload_2
+      11: putfield      #41                 // Field attackAnimation:Ljava/lang/String;
+      14: aload_0
+      15: fload_3
+      16: putfield      #43                 // Field rotationRangeScale:F
+      19: aload_0
+      20: fload         4
+      22: putfield      #45                 // Field attackProbability:F
+      25: aload_0
+      26: aload_0
+      27: iload         5
+      29: invokevirtual #49                 // Method m_183277_:(I)I
+      32: putfield      #51                 // Field duration:I
+      35: aload_0
+      36: aload_0
+      37: iload         6
+      39: invokevirtual #49                 // Method m_183277_:(I)I
+      42: putfield      #53                 // Field lookTicks:I
+      45: aload_0
+      46: aload_0
+      47: iload         7
+      49: invokevirtual #49                 // Method m_183277_:(I)I
+      52: putfield      #55                 // Field hitOnTick:I
+      55: aload_0
+      56: aload         8
+      58: putfield      #57                 // Field attackCallback:Ljava/util/function/Consumer;
+      61: aload_0
+      62: getstatic     #61                 // Field net/minecraft/world/entity/ai/goal/Goal$Flag.MOVE:Lnet/minecraft/world/entity/ai/goal/Goal$Flag;
+      65: getstatic     #64                 // Field net/minecraft/world/entity/ai/goal/Goal$Flag.LOOK:Lnet/minecraft/world/entity/ai/goal/Goal$Flag;
+      68: invokestatic  #70                 // Method java/util/EnumSet.of:(Ljava/lang/Enum;Ljava/lang/Enum;)Ljava/util/EnumSet;
+      71: invokevirtual #74                 // Method m_7021_:(Ljava/util/EnumSet;)V
+      74: return
+
+  public boolean m_6767_();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean m_8036_();
+    Code:
+       0: aload_0
+       1: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+       4: invokevirtual #83                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.getTentacleType:()Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+       7: getstatic     #87                 // Field net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType.MELEE:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      10: if_acmpeq     15
+      13: iconst_0
+      14: ireturn
+      15: aload_0
+      16: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      19: invokevirtual #91                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+      22: astore_1
+      23: aload_1
+      24: ifnonnull     29
+      27: iconst_0
+      28: ireturn
+      29: aload_0
+      30: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      33: invokevirtual #97                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_217043_:()Lnet/minecraft/util/RandomSource;
+      36: invokeinterface #103,  1          // InterfaceMethod net/minecraft/util/RandomSource.m_188501_:()F
+      41: aload_0
+      42: getfield      #45                 // Field attackProbability:F
+      45: fcmpl
+      46: iflt          51
+      49: iconst_0
+      50: ireturn
+      51: aload_0
+      52: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      55: invokevirtual #107                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.getOwnerKraken:()Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity;
+      58: astore_2
+      59: aload_2
+      60: ifnull        79
+      63: aload_2
+      64: invokevirtual #112                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity.isKnockedDown:()Z
+      67: ifne          77
+      70: aload_2
+      71: invokevirtual #115                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity.allTentaclesBusy:()Z
+      74: ifeq          79
+      77: iconst_0
+      78: ireturn
+      79: aload_0
+      80: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      83: aload_1
+      84: aload_0
+      85: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      88: invokevirtual #118                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.getTargetRotationRange:()F
+      91: aload_0
+      92: getfield      #43                 // Field rotationRangeScale:F
+      95: fmul
+      96: invokevirtual #122                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.hasLineOfSight:(Lnet/minecraft/world/entity/Entity;F)Z
+      99: ireturn
+
+  public boolean m_8045_();
+    Code:
+       0: aload_0
+       1: getfield      #129                // Field tick:I
+       4: aload_0
+       5: getfield      #51                 // Field duration:I
+       8: if_icmpge     15
+      11: iconst_1
+      12: goto          16
+      15: iconst_0
+      16: ireturn
+
+  public void m_8056_();
+    Code:
+       0: aload_0
+       1: invokespecial #132                // Method net/minecraft/world/entity/ai/goal/Goal.m_8056_:()V
+       4: aload_0
+       5: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+       8: invokevirtual #91                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+      11: ifnull        32
+      14: aload_0
+      15: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      18: aload_0
+      19: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      22: invokevirtual #91                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+      25: ldc           #133                // float 30.0f
+      27: ldc           #133                // float 30.0f
+      29: invokevirtual #137                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_21391_:(Lnet/minecraft/world/entity/Entity;FF)V
+      32: aload_0
+      33: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      36: aload_0
+      37: getfield      #41                 // Field attackAnimation:Ljava/lang/String;
+      40: invokevirtual #141                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.triggerAnim:(Ljava/lang/String;)V
+      43: return
+
+  public void m_8041_();
+    Code:
+       0: aload_0
+       1: invokespecial #144                // Method net/minecraft/world/entity/ai/goal/Goal.m_8041_:()V
+       4: aload_0
+       5: iconst_0
+       6: putfield      #129                // Field tick:I
+       9: aload_0
+      10: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      13: aload_0
+      14: getfield      #41                 // Field attackAnimation:Ljava/lang/String;
+      17: invokevirtual #147                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.stopTriggeredAnimation:(Ljava/lang/String;)V
+      20: return
+
+  public void m_8037_();
+    Code:
+       0: aload_0
+       1: invokespecial #150                // Method net/minecraft/world/entity/ai/goal/Goal.m_8037_:()V
+       4: aload_0
+       5: dup
+       6: getfield      #129                // Field tick:I
+       9: iconst_1
+      10: iadd
+      11: putfield      #129                // Field tick:I
+      14: aload_0
+      15: getfield      #129                // Field tick:I
+      18: aload_0
+      19: getfield      #53                 // Field lookTicks:I
+      22: if_icmpge     48
+      25: aload_0
+      26: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      29: invokevirtual #91                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+      32: astore_1
+      33: aload_1
+      34: ifnull        48
+      37: aload_0
+      38: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      41: invokevirtual #154                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_21563_:()Lnet/minecraft/world/entity/ai/control/LookControl;
+      44: aload_1
+      45: invokevirtual #160                // Method net/minecraft/world/entity/ai/control/LookControl.m_148051_:(Lnet/minecraft/world/entity/Entity;)V
+      48: aload_0
+      49: getfield      #129                // Field tick:I
+      52: aload_0
+      53: getfield      #55                 // Field hitOnTick:I
+      56: if_icmpne     72
+      59: aload_0
+      60: getfield      #57                 // Field attackCallback:Ljava/util/function/Consumer;
+      63: aload_0
+      64: getfield      #39                 // Field tentacleEntity:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+      67: invokeinterface #166,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      72: return
+}

@@ -1,0 +1,28 @@
+Compiled from "SkarrierMobsModKeyMappings.java"
+public class net.mcreator.skarriermobs.init.SkarrierMobsModKeyMappings {
+  public static final net.minecraft.client.KeyMapping SEMI_LIVING_BOOTS_DASH_KEYBIND;
+
+  public net.mcreator.skarriermobs.init.SkarrierMobsModKeyMappings();
+    Code:
+       0: aload_0
+       1: invokespecial #31                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void registerKeyMappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #38                 // Field SEMI_LIVING_BOOTS_DASH_KEYBIND:Lnet/minecraft/client/KeyMapping;
+       4: invokevirtual #44                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+       7: return
+
+  static {};
+    Code:
+       0: new           #16                 // class net/mcreator/skarriermobs/init/SkarrierMobsModKeyMappings$1
+       3: dup
+       4: ldc           #49                 // String key.skarrier_mobs.semi_living_boots_dash_keybind
+       6: bipush        87
+       8: ldc           #51                 // String key.categories.movement
+      10: invokespecial #54                 // Method net/mcreator/skarriermobs/init/SkarrierMobsModKeyMappings$1."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      13: putstatic     #38                 // Field SEMI_LIVING_BOOTS_DASH_KEYBIND:Lnet/minecraft/client/KeyMapping;
+      16: return
+}

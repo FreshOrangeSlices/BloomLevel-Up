@@ -1,0 +1,21 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:and",
+    "values": [
+      "#legionwarex:spawns/skarrier_swamp",
+      {
+        "type": "forge:not",
+        "value": "#legionwarex:spawns/quiet"
+      }
+    ]
+  },
+  "spawners": [
+    {
+      "type": "skarrier_mobs:gadlisk",
+      "weight": 12,
+      "minCount": 1,
+      "maxCount": 2
+    }
+  ]
+}

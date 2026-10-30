@@ -1,0 +1,397 @@
+## com/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial.class
+Compiled from "CopperArmorMaterial.java"
+public final class com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial extends java.lang.Enum<com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial> implements net.minecraft.world.item.ArmorMaterial {
+  public static final com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial COPPER;
+
+  private static final java.util.EnumMap<net.minecraft.world.item.ArmorItem$Type, java.lang.Integer> HEALTH_FUNCTION_FOR_TYPE;
+
+  private final java.lang.String name;
+
+  private final int durabilityMultiplier;
+
+  private final java.util.EnumMap<net.minecraft.world.item.ArmorItem$Type, java.lang.Integer> protectionFunctionForType;
+
+  private final int enchantmentValue;
+
+  private final net.minecraft.sounds.SoundEvent sound;
+
+  private final float toughness;
+
+  private final float knockbackResistance;
+
+  private final net.minecraft.util.LazyLoadedValue<net.minecraft.world.item.crafting.Ingredient> repairIngredient;
+
+  private static final com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial[] $VALUES;
+
+  public static com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial[] values();
+    Code:
+       0: getstatic     #43                 // Field $VALUES:[Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;
+       3: invokevirtual #48                 // Method "[Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;".clone:()Ljava/lang/Object;
+       6: checkcast     #44                 // class "[Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;"
+       9: areturn
+
+  public static com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class com/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial
+       2: aload_0
+       3: invokestatic  #53                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class com/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial
+       9: areturn
+
+  private com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial(java.lang.String, int, java.util.EnumMap<net.minecraft.world.item.ArmorItem$Type, java.lang.Integer>, int, net.minecraft.sounds.SoundEvent, float, float, java.util.function.Supplier<net.minecraft.world.item.crafting.Ingredient>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #59                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: aload_3
+       8: putfield      #61                 // Field name:Ljava/lang/String;
+      11: aload_0
+      12: iload         4
+      14: putfield      #63                 // Field durabilityMultiplier:I
+      17: aload_0
+      18: aload         5
+      20: putfield      #65                 // Field protectionFunctionForType:Ljava/util/EnumMap;
+      23: aload_0
+      24: iload         6
+      26: putfield      #67                 // Field enchantmentValue:I
+      29: aload_0
+      30: aload         7
+      32: putfield      #69                 // Field sound:Lnet/minecraft/sounds/SoundEvent;
+      35: aload_0
+      36: fload         8
+      38: putfield      #71                 // Field toughness:F
+      41: aload_0
+      42: fload         9
+      44: putfield      #73                 // Field knockbackResistance:F
+      47: aload_0
+      48: new           #75                 // class net/minecraft/util/LazyLoadedValue
+      51: dup
+      52: aload         10
+      54: invokespecial #78                 // Method net/minecraft/util/LazyLoadedValue."<init>":(Ljava/util/function/Supplier;)V
+      57: putfield      #80                 // Field repairIngredient:Lnet/minecraft/util/LazyLoadedValue;
+      60: return
+
+  public int m_266425_(net.minecraft.world.item.ArmorItem$Type);
+    Code:
+       0: getstatic     #87                 // Field HEALTH_FUNCTION_FOR_TYPE:Ljava/util/EnumMap;
+       3: aload_1
+       4: invokevirtual #93                 // Method java/util/EnumMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: checkcast     #95                 // class java/lang/Integer
+      10: invokevirtual #99                 // Method java/lang/Integer.intValue:()I
+      13: aload_0
+      14: getfield      #63                 // Field durabilityMultiplier:I
+      17: imul
+      18: ireturn
+
+  public int m_7366_(net.minecraft.world.item.ArmorItem$Type);
+    Code:
+       0: aload_0
+       1: getfield      #65                 // Field protectionFunctionForType:Ljava/util/EnumMap;
+       4: aload_1
+       5: invokevirtual #93                 // Method java/util/EnumMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #95                 // class java/lang/Integer
+      11: invokevirtual #99                 // Method java/lang/Integer.intValue:()I
+      14: ireturn
+
+  public int m_6646_();
+    Code:
+       0: aload_0
+       1: getfield      #67                 // Field enchantmentValue:I
+       4: ireturn
+
+  public net.minecraft.sounds.SoundEvent m_7344_();
+    Code:
+       0: getstatic     #110                // Field com/github/smallinger/copperagebackport/ModSounds.ARMOR_EQUIP_COPPER:Ljava/util/function/Supplier;
+       3: ifnull        29
+       6: getstatic     #110                // Field com/github/smallinger/copperagebackport/ModSounds.ARMOR_EQUIP_COPPER:Ljava/util/function/Supplier;
+       9: invokeinterface #114,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+      14: ifnull        29
+      17: getstatic     #110                // Field com/github/smallinger/copperagebackport/ModSounds.ARMOR_EQUIP_COPPER:Ljava/util/function/Supplier;
+      20: invokeinterface #114,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+      25: checkcast     #116                // class net/minecraft/sounds/SoundEvent
+      28: areturn
+      29: aload_0
+      30: getfield      #69                 // Field sound:Lnet/minecraft/sounds/SoundEvent;
+      33: areturn
+
+  public net.minecraft.world.item.crafting.Ingredient m_6230_();
+    Code:
+       0: aload_0
+       1: getfield      #80                 // Field repairIngredient:Lnet/minecraft/util/LazyLoadedValue;
+       4: invokevirtual #121                // Method net/minecraft/util/LazyLoadedValue.m_13971_:()Ljava/lang/Object;
+       7: checkcast     #123                // class net/minecraft/world/item/crafting/Ingredient
+      10: areturn
+
+  public java.lang.String m_6082_();
+    Code:
+       0: aload_0
+       1: getfield      #61                 // Field name:Ljava/lang/String;
+       4: areturn
+
+  public float m_6651_();
+    Code:
+       0: aload_0
+       1: getfield      #71                 // Field toughness:F
+       4: freturn
+
+  public float m_6649_();
+    Code:
+       0: aload_0
+       1: getfield      #73                 // Field knockbackResistance:F
+       4: freturn
+
+  private static void lambda$static$2(java.util.EnumMap);
+    Code:
+       0: aload_0
+       1: getstatic     #133                // Field net/minecraft/world/item/ArmorItem$Type.BOOTS:Lnet/minecraft/world/item/ArmorItem$Type;
+       4: bipush        13
+       6: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       9: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      12: pop
+      13: aload_0
+      14: getstatic     #143                // Field net/minecraft/world/item/ArmorItem$Type.LEGGINGS:Lnet/minecraft/world/item/ArmorItem$Type;
+      17: bipush        15
+      19: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      22: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      25: pop
+      26: aload_0
+      27: getstatic     #146                // Field net/minecraft/world/item/ArmorItem$Type.CHESTPLATE:Lnet/minecraft/world/item/ArmorItem$Type;
+      30: bipush        16
+      32: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      35: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      38: pop
+      39: aload_0
+      40: getstatic     #149                // Field net/minecraft/world/item/ArmorItem$Type.HELMET:Lnet/minecraft/world/item/ArmorItem$Type;
+      43: bipush        11
+      45: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      48: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      51: pop
+      52: return
+
+  private static net.minecraft.world.item.crafting.Ingredient lambda$static$1();
+    Code:
+       0: iconst_1
+       1: anewarray     #153                // class net/minecraft/world/level/ItemLike
+       4: dup
+       5: iconst_0
+       6: getstatic     #159                // Field net/minecraft/world/item/Items.f_151052_:Lnet/minecraft/world/item/Item;
+       9: aastore
+      10: invokestatic  #163                // Method net/minecraft/world/item/crafting/Ingredient.m_43929_:([Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/item/crafting/Ingredient;
+      13: areturn
+
+  private static void lambda$static$0(java.util.EnumMap);
+    Code:
+       0: aload_0
+       1: getstatic     #133                // Field net/minecraft/world/item/ArmorItem$Type.BOOTS:Lnet/minecraft/world/item/ArmorItem$Type;
+       4: iconst_1
+       5: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       8: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: aload_0
+      13: getstatic     #143                // Field net/minecraft/world/item/ArmorItem$Type.LEGGINGS:Lnet/minecraft/world/item/ArmorItem$Type;
+      16: iconst_3
+      17: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      20: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      23: pop
+      24: aload_0
+      25: getstatic     #146                // Field net/minecraft/world/item/ArmorItem$Type.CHESTPLATE:Lnet/minecraft/world/item/ArmorItem$Type;
+      28: iconst_4
+      29: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      32: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      35: pop
+      36: aload_0
+      37: getstatic     #149                // Field net/minecraft/world/item/ArmorItem$Type.HELMET:Lnet/minecraft/world/item/ArmorItem$Type;
+      40: iconst_2
+      41: invokestatic  #136                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      44: invokevirtual #140                // Method java/util/EnumMap.put:(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;
+      47: pop
+      48: return
+
+  private static com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial[] $values();
+    Code:
+       0: iconst_1
+       1: anewarray     #2                  // class com/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial
+       4: dup
+       5: iconst_0
+       6: getstatic     #167                // Field COPPER:Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;
+       9: aastore
+      10: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class com/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial
+       3: dup
+       4: ldc           #170                // String COPPER
+       6: iconst_0
+       7: ldc           #172                // String copper
+       9: bipush        11
+      11: new           #89                 // class java/util/EnumMap
+      14: dup
+      15: ldc           #10                 // class net/minecraft/world/item/ArmorItem$Type
+      17: invokespecial #175                // Method java/util/EnumMap."<init>":(Ljava/lang/Class;)V
+      20: invokedynamic #192,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      25: invokestatic  #198                // Method net/minecraft/Util.m_137469_:(Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
+      28: checkcast     #89                 // class java/util/EnumMap
+      31: bipush        8
+      33: getstatic     #203                // Field net/minecraft/sounds/SoundEvents.f_11676_:Lnet/minecraft/sounds/SoundEvent;
+      36: fconst_0
+      37: fconst_0
+      38: invokedynamic #211,  0            // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+      43: invokespecial #213                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;ILjava/util/EnumMap;ILnet/minecraft/sounds/SoundEvent;FFLjava/util/function/Supplier;)V
+      46: putstatic     #167                // Field COPPER:Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;
+      49: invokestatic  #215                // Method $values:()[Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;
+      52: putstatic     #43                 // Field $VALUES:[Lcom/github/smallinger/copperagebackport/item/armor/CopperArmorMaterial;
+      55: new           #89                 // class java/util/EnumMap
+      58: dup
+      59: ldc           #10                 // class net/minecraft/world/item/ArmorItem$Type
+      61: invokespecial #175                // Method java/util/EnumMap."<init>":(Ljava/lang/Class;)V
+      64: invokedynamic #219,  0            // InvokeDynamic #2:accept:()Ljava/util/function/Consumer;
+      69: invokestatic  #198                // Method net/minecraft/Util.m_137469_:(Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
+      72: checkcast     #89                 // class java/util/EnumMap
+      75: putstatic     #87                 // Field HEALTH_FUNCTION_FOR_TYPE:Ljava/util/EnumMap;
+      78: return
+}
+
+
+## com/github/smallinger/copperagebackport/item/tools/CopperTier.class
+Compiled from "CopperTier.java"
+public final class com.github.smallinger.copperagebackport.item.tools.CopperTier extends java.lang.Enum<com.github.smallinger.copperagebackport.item.tools.CopperTier> implements net.minecraft.world.item.Tier {
+  public static final com.github.smallinger.copperagebackport.item.tools.CopperTier INSTANCE;
+
+  private final int level;
+
+  private final int uses;
+
+  private final float speed;
+
+  private final float damage;
+
+  private final int enchantmentValue;
+
+  private final net.minecraft.util.LazyLoadedValue<net.minecraft.world.item.crafting.Ingredient> repairIngredient;
+
+  private static final com.github.smallinger.copperagebackport.item.tools.CopperTier[] $VALUES;
+
+  public static com.github.smallinger.copperagebackport.item.tools.CopperTier[] values();
+    Code:
+       0: getstatic     #31                 // Field $VALUES:[Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;
+       3: invokevirtual #36                 // Method "[Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;".clone:()Ljava/lang/Object;
+       6: checkcast     #32                 // class "[Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;"
+       9: areturn
+
+  public static com.github.smallinger.copperagebackport.item.tools.CopperTier valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class com/github/smallinger/copperagebackport/item/tools/CopperTier
+       2: aload_0
+       3: invokestatic  #41                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class com/github/smallinger/copperagebackport/item/tools/CopperTier
+       9: areturn
+
+  private com.github.smallinger.copperagebackport.item.tools.CopperTier(int, int, float, float, int, java.util.function.Supplier<net.minecraft.world.item.crafting.Ingredient>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #49                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: iload_3
+       8: putfield      #51                 // Field level:I
+      11: aload_0
+      12: iload         4
+      14: putfield      #53                 // Field uses:I
+      17: aload_0
+      18: fload         5
+      20: putfield      #55                 // Field speed:F
+      23: aload_0
+      24: fload         6
+      26: putfield      #57                 // Field damage:F
+      29: aload_0
+      30: iload         7
+      32: putfield      #59                 // Field enchantmentValue:I
+      35: aload_0
+      36: new           #61                 // class net/minecraft/util/LazyLoadedValue
+      39: dup
+      40: aload         8
+      42: invokespecial #64                 // Method net/minecraft/util/LazyLoadedValue."<init>":(Ljava/util/function/Supplier;)V
+      45: putfield      #66                 // Field repairIngredient:Lnet/minecraft/util/LazyLoadedValue;
+      48: return
+
+  public int m_6609_();
+    Code:
+       0: aload_0
+       1: getfield      #53                 // Field uses:I
+       4: ireturn
+
+  public float m_6624_();
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field speed:F
+       4: freturn
+
+  public float m_6631_();
+    Code:
+       0: aload_0
+       1: getfield      #57                 // Field damage:F
+       4: freturn
+
+  public int m_6604_();
+    Code:
+       0: aload_0
+       1: getfield      #51                 // Field level:I
+       4: ireturn
+
+  public int m_6601_();
+    Code:
+       0: aload_0
+       1: getfield      #59                 // Field enchantmentValue:I
+       4: ireturn
+
+  public net.minecraft.world.item.crafting.Ingredient m_6282_();
+    Code:
+       0: aload_0
+       1: getfield      #66                 // Field repairIngredient:Lnet/minecraft/util/LazyLoadedValue;
+       4: invokevirtual #81                 // Method net/minecraft/util/LazyLoadedValue.m_13971_:()Ljava/lang/Object;
+       7: checkcast     #83                 // class net/minecraft/world/item/crafting/Ingredient
+      10: areturn
+
+  private static net.minecraft.world.item.crafting.Ingredient lambda$static$0();
+    Code:
+       0: iconst_1
+       1: anewarray     #86                 // class net/minecraft/world/level/ItemLike
+       4: dup
+       5: iconst_0
+       6: getstatic     #92                 // Field net/minecraft/world/item/Items.f_151052_:Lnet/minecraft/world/item/Item;
+       9: aastore
+      10: invokestatic  #96                 // Method net/minecraft/world/item/crafting/Ingredient.m_43929_:([Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/item/crafting/Ingredient;
+      13: areturn
+
+  private static com.github.smallinger.copperagebackport.item.tools.CopperTier[] $values();
+    Code:
+       0: iconst_1
+       1: anewarray     #2                  // class com/github/smallinger/copperagebackport/item/tools/CopperTier
+       4: dup
+       5: iconst_0
+       6: getstatic     #99                 // Field INSTANCE:Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;
+       9: aastore
+      10: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class com/github/smallinger/copperagebackport/item/tools/CopperTier
+       3: dup
+       4: ldc           #102                // String INSTANCE
+       6: iconst_0
+       7: iconst_1
+       8: sipush        190
+      11: ldc           #103                // float 5.0f
+      13: fconst_1
+      14: bipush        13
+      16: invokedynamic #119,  0            // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      21: invokespecial #121                // Method "<init>":(Ljava/lang/String;IIIFFILjava/util/function/Supplier;)V
+      24: putstatic     #99                 // Field INSTANCE:Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;
+      27: invokestatic  #123                // Method $values:()[Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;
+      30: putstatic     #31                 // Field $VALUES:[Lcom/github/smallinger/copperagebackport/item/tools/CopperTier;
+      33: return
+}

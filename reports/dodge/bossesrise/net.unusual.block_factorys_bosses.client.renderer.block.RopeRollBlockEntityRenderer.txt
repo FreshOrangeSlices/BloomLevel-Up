@@ -1,0 +1,13 @@
+Compiled from "RopeRollBlockEntityRenderer.java"
+public class net.unusual.block_factorys_bosses.client.renderer.block.RopeRollBlockEntityRenderer extends software.bernie.geckolib.renderer.GeoBlockRenderer<net.unusual.block_factorys_bosses.block.entity.RopeRollBlockEntity> {
+  public net.unusual.block_factorys_bosses.client.renderer.block.RopeRollBlockEntityRenderer(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: new           #17                 // class net/unusual/block_factorys_bosses/geckolib/util/CustomBlockGeoModel
+       4: dup
+       5: ldc           #19                 // String rope_roll
+       7: invokestatic  #25                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      10: invokespecial #28                 // Method net/unusual/block_factorys_bosses/geckolib/util/CustomBlockGeoModel."<init>":(Lnet/minecraft/resources/ResourceLocation;)V
+      13: invokespecial #31                 // Method software/bernie/geckolib/renderer/GeoBlockRenderer."<init>":(Lsoftware/bernie/geckolib/model/GeoModel;)V
+      16: return
+}

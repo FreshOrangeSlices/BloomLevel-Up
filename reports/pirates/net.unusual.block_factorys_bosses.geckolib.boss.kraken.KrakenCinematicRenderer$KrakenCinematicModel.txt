@@ -1,0 +1,22 @@
+Compiled from "KrakenCinematicRenderer.java"
+class net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenCinematicRenderer$KrakenCinematicModel extends net.unusual.block_factorys_bosses.geckolib.util.CustomEntityGeoModel<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity> {
+  public net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenCinematicRenderer$KrakenCinematicModel(net.minecraft.resources.ResourceLocation);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #13                 // Method net/unusual/block_factorys_bosses/geckolib/util/CustomEntityGeoModel."<init>":(Lnet/minecraft/resources/ResourceLocation;)V
+       5: return
+
+  public net.minecraft.resources.ResourceLocation getTextureResource(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity);
+    Code:
+       0: getstatic     #22                 // Field net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenCinematicRenderer.TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+       3: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #27                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity
+       5: invokevirtual #29                 // Method getTextureResource:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+}

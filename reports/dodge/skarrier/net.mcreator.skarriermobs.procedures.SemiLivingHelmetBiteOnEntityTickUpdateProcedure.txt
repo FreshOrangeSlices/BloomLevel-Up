@@ -1,0 +1,41 @@
+Compiled from "SemiLivingHelmetBiteOnEntityTickUpdateProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SemiLivingHelmetBiteOnEntityTickUpdateProcedure {
+  public net.mcreator.skarriermobs.procedures.SemiLivingHelmetBiteOnEntityTickUpdateProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: iconst_1
+       7: invokevirtual #19                 // Method net/minecraft/world/entity/Entity.m_20242_:(Z)V
+      10: aload_0
+      11: invokevirtual #23                 // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+      14: ldc           #25                 // String BiteTimer
+      16: aload_0
+      17: invokevirtual #23                 // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+      20: ldc           #25                 // String BiteTimer
+      22: invokevirtual #31                 // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+      25: dconst_1
+      26: dadd
+      27: invokevirtual #35                 // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+      30: aload_0
+      31: invokevirtual #23                 // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+      34: ldc           #25                 // String BiteTimer
+      36: invokevirtual #31                 // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+      39: ldc2_w        #36                 // double 20.0d
+      42: dcmpl
+      43: iflt          60
+      46: aload_0
+      47: invokevirtual #41                 // Method net/minecraft/world/entity/Entity.m_9236_:()Lnet/minecraft/world/level/Level;
+      50: invokevirtual #47                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      53: ifne          60
+      56: aload_0
+      57: invokevirtual #50                 // Method net/minecraft/world/entity/Entity.m_146870_:()V
+      60: return
+}

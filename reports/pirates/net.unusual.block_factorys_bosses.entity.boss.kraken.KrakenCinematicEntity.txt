@@ -1,0 +1,308 @@
+Compiled from "KrakenCinematicEntity.java"
+public class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity,net.unusual.block_factorys_bosses.entity.OwnableByAllEntity {
+  private net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity owner;
+
+  private java.util.UUID ownerUUID;
+
+  private final software.bernie.geckolib.core.animation.RawAnimation INTRO_ANIM;
+
+  private final software.bernie.geckolib.core.animation.RawAnimation PHASE_TRANSITION_ANIM;
+
+  private static final int INTRO_ANIM_DURATION = 490;
+
+  private static final int PHASE_TRANSITION_ANIM_DURATION = 290;
+
+  private static final java.lang.String INTRO_ANIM_TRIGGER_NAME = "intro";
+
+  private static final java.lang.String PHASE_TRANSITION_ANIM_TRIGGER_NAME = "phase_transition";
+
+  private long despawnAtGameTime;
+
+  private boolean wasReloaded;
+
+  private final software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache geoCache;
+
+  public net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #58                 // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       6: aload_0
+       7: invokestatic  #64                 // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      10: ldc           #66                 // String intro_cinematic2_java
+      12: invokevirtual #70                 // Method software/bernie/geckolib/core/animation/RawAnimation.thenPlayAndHold:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      15: putfield      #72                 // Field INTRO_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      18: aload_0
+      19: invokestatic  #64                 // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      22: ldc           #74                 // String phase_transition_java
+      24: invokevirtual #70                 // Method software/bernie/geckolib/core/animation/RawAnimation.thenPlayAndHold:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      27: putfield      #76                 // Field PHASE_TRANSITION_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      30: aload_0
+      31: ldc2_w        #77                 // long -1l
+      34: putfield      #80                 // Field despawnAtGameTime:J
+      37: aload_0
+      38: iconst_0
+      39: putfield      #82                 // Field wasReloaded:Z
+      42: aload_0
+      43: aload_0
+      44: invokestatic  #88                 // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      47: putfield      #90                 // Field geoCache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      50: aload_0
+      51: iconst_1
+      52: putfield      #93                 // Field f_19794_:Z
+      55: aload_0
+      56: new           #95                 // class net/unusual/block_factorys_bosses/entity/control/NoMoveControl
+      59: dup
+      60: aload_0
+      61: invokespecial #98                 // Method net/unusual/block_factorys_bosses/entity/control/NoMoveControl."<init>":(Lnet/minecraft/world/entity/Mob;)V
+      64: putfield      #102                // Field f_21342_:Lnet/minecraft/world/entity/ai/control/MoveControl;
+      67: aload_0
+      68: new           #104                // class net/unusual/block_factorys_bosses/entity/control/NoLookControl
+      71: dup
+      72: aload_0
+      73: invokespecial #105                // Method net/unusual/block_factorys_bosses/entity/control/NoLookControl."<init>":(Lnet/minecraft/world/entity/Mob;)V
+      76: putfield      #109                // Field f_21365_:Lnet/minecraft/world/entity/ai/control/LookControl;
+      79: return
+
+  protected net.minecraft.world.entity.ai.control.BodyRotationControl m_7560_();
+    Code:
+       0: new           #120                // class net/unusual/block_factorys_bosses/entity/control/FollowHeadBodyRotationControl
+       3: dup
+       4: aload_0
+       5: invokespecial #121                // Method net/unusual/block_factorys_bosses/entity/control/FollowHeadBodyRotationControl."<init>":(Lnet/minecraft/world/entity/Mob;)V
+       8: areturn
+
+  public void setInitialRotation(float);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: invokespecial #126                // Method net/minecraft/world/entity/monster/Monster.m_146922_:(F)V
+       5: aload_0
+       6: fload_1
+       7: putfield      #130                // Field f_19859_:F
+      10: aload_0
+      11: fload_1
+      12: putfield      #133                // Field f_20883_:F
+      15: aload_0
+      16: fload_1
+      17: putfield      #136                // Field f_20884_:F
+      20: aload_0
+      21: fload_1
+      22: putfield      #139                // Field f_20885_:F
+      25: aload_0
+      26: fload_1
+      27: putfield      #142                // Field f_20886_:F
+      30: return
+
+  public void m_7023_(net.minecraft.world.phys.Vec3);
+    Code:
+       0: return
+
+  protected void m_7840_(double, boolean, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos);
+    Code:
+       0: return
+
+  public void m_5997_(double, double, double);
+    Code:
+       0: return
+
+  public void m_147240_(double, double, double);
+    Code:
+       0: return
+
+  public java.util.UUID m_21805_();
+    Code:
+       0: aload_0
+       1: getfield      #167                // Field ownerUUID:Ljava/util/UUID;
+       4: areturn
+
+  public void setOwner(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #171                // Field owner:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity;
+       5: aload_0
+       6: aload_1
+       7: ifnonnull     14
+      10: aconst_null
+      11: goto          18
+      14: aload_1
+      15: invokevirtual #176                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity.m_20148_:()Ljava/util/UUID;
+      18: putfield      #167                // Field ownerUUID:Ljava/util/UUID;
+      21: return
+
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+    Code:
+       0: aload_1
+       1: iconst_1
+       2: anewarray     #13                 // class software/bernie/geckolib/core/animation/AnimationController
+       5: dup
+       6: iconst_0
+       7: new           #183                // class net/unusual/block_factorys_bosses/client/camera/client/CinematicAnimationController
+      10: dup
+      11: aload_0
+      12: ldc           #185                // String main_controller
+      14: iconst_0
+      15: invokedynamic #202,  0            // InvokeDynamic #0:handle:()Lsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;
+      20: invokespecial #205                // Method net/unusual/block_factorys_bosses/client/camera/client/CinematicAnimationController."<init>":(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;Ljava/lang/String;ILsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;)V
+      23: new           #207                // class net/unusual/block_factorys_bosses/geckolib/util/SoundKeyframePlayer
+      26: dup
+      27: invokespecial #210                // Method net/unusual/block_factorys_bosses/geckolib/util/SoundKeyframePlayer."<init>":()V
+      30: invokevirtual #214                // Method net/unusual/block_factorys_bosses/client/camera/client/CinematicAnimationController.setSoundKeyframeHandler:(Lsoftware/bernie/geckolib/core/animation/AnimationController$SoundKeyframeHandler;)Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      33: ldc           #44                 // String intro
+      35: aload_0
+      36: getfield      #72                 // Field INTRO_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      39: invokevirtual #218                // Method software/bernie/geckolib/core/animation/AnimationController.triggerableAnim:(Ljava/lang/String;Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      42: ldc           #47                 // String phase_transition
+      44: aload_0
+      45: getfield      #76                 // Field PHASE_TRANSITION_ANIM:Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      48: invokevirtual #218                // Method software/bernie/geckolib/core/animation/AnimationController.triggerableAnim:(Ljava/lang/String;Lsoftware/bernie/geckolib/core/animation/RawAnimation;)Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      51: aastore
+      52: invokevirtual #222                // Method software/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar.add:([Lsoftware/bernie/geckolib/core/animation/AnimationController;)Lsoftware/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar;
+      55: pop
+      56: return
+
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+    Code:
+       0: aload_0
+       1: getfield      #90                 // Field geoCache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+       4: areturn
+
+  public void playAnimation(int);
+    Code:
+       0: iload_1
+       1: iconst_m1
+       2: if_icmpne     10
+       5: ldc           #44                 // String intro
+       7: goto          12
+      10: ldc           #47                 // String phase_transition
+      12: astore_2
+      13: iload_1
+      14: iconst_m1
+      15: if_icmpne     24
+      18: ldc2_w        #231                // long 490l
+      21: goto          27
+      24: ldc2_w        #233                // long 290l
+      27: lstore_3
+      28: aload_0
+      29: aload_0
+      30: invokevirtual #238                // Method m_9236_:()Lnet/minecraft/world/level/Level;
+      33: invokevirtual #244                // Method net/minecraft/world/level/Level.m_46467_:()J
+      36: lload_3
+      37: ladd
+      38: putfield      #80                 // Field despawnAtGameTime:J
+      41: aload_0
+      42: ldc           #185                // String main_controller
+      44: aload_2
+      45: invokevirtual #248                // Method triggerAnim:(Ljava/lang/String;Ljava/lang/String;)V
+      48: return
+
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean animationFinished();
+    Code:
+       0: aload_0
+       1: getfield      #80                 // Field despawnAtGameTime:J
+       4: lconst_0
+       5: lcmp
+       6: ifge          11
+       9: iconst_0
+      10: ireturn
+      11: aload_0
+      12: invokevirtual #238                // Method m_9236_:()Lnet/minecraft/world/level/Level;
+      15: invokevirtual #244                // Method net/minecraft/world/level/Level.m_46467_:()J
+      18: aload_0
+      19: getfield      #80                 // Field despawnAtGameTime:J
+      22: lcmp
+      23: iflt          30
+      26: iconst_1
+      27: goto          31
+      30: iconst_0
+      31: ireturn
+
+  public void m_8119_();
+    Code:
+       0: aload_0
+       1: invokespecial #261                // Method net/minecraft/world/entity/monster/Monster.m_8119_:()V
+       4: aload_0
+       5: getfield      #82                 // Field wasReloaded:Z
+       8: ifeq          16
+      11: aload_0
+      12: invokevirtual #264                // Method m_146870_:()V
+      15: return
+      16: aload_0
+      17: getfield      #80                 // Field despawnAtGameTime:J
+      20: lconst_0
+      21: lcmp
+      22: ifge          26
+      25: return
+      26: aload_0
+      27: invokevirtual #266                // Method animationFinished:()Z
+      30: ifeq          37
+      33: aload_0
+      34: invokevirtual #264                // Method m_146870_:()V
+      37: return
+
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #270                // Method net/minecraft/world/entity/monster/Monster.m_7380_:(Lnet/minecraft/nbt/CompoundTag;)V
+       5: aload_1
+       6: ldc_w         #272                // String despawn_at_game_time
+       9: aload_0
+      10: getfield      #80                 // Field despawnAtGameTime:J
+      13: invokevirtual #278                // Method net/minecraft/nbt/CompoundTag.m_128356_:(Ljava/lang/String;J)V
+      16: aload_0
+      17: getfield      #167                // Field ownerUUID:Ljava/util/UUID;
+      20: ifnull        34
+      23: aload_1
+      24: ldc_w         #279                // String owner
+      27: aload_0
+      28: getfield      #167                // Field ownerUUID:Ljava/util/UUID;
+      31: invokevirtual #283                // Method net/minecraft/nbt/CompoundTag.m_128362_:(Ljava/lang/String;Ljava/util/UUID;)V
+      34: return
+
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #288                // Method net/minecraft/world/entity/monster/Monster.m_7378_:(Lnet/minecraft/nbt/CompoundTag;)V
+       5: aload_0
+       6: aload_1
+       7: ldc_w         #272                // String despawn_at_game_time
+      10: invokevirtual #292                // Method net/minecraft/nbt/CompoundTag.m_128454_:(Ljava/lang/String;)J
+      13: putfield      #80                 // Field despawnAtGameTime:J
+      16: aload_0
+      17: iconst_1
+      18: putfield      #82                 // Field wasReloaded:Z
+      21: aload_1
+      22: ldc_w         #279                // String owner
+      25: invokevirtual #296                // Method net/minecraft/nbt/CompoundTag.m_128403_:(Ljava/lang/String;)Z
+      28: ifeq          42
+      31: aload_0
+      32: aload_1
+      33: ldc_w         #279                // String owner
+      36: invokevirtual #300                // Method net/minecraft/nbt/CompoundTag.m_128342_:(Ljava/lang/String;)Ljava/util/UUID;
+      39: putfield      #167                // Field ownerUUID:Ljava/util/UUID;
+      42: return
+
+  public void m_8024_();
+    Code:
+       0: return
+
+  public net.minecraft.world.level.EntityGetter m_9236_();
+    Code:
+       0: aload_0
+       1: invokespecial #303                // Method net/minecraft/world/entity/monster/Monster.m_9236_:()Lnet/minecraft/world/level/Level;
+       4: areturn
+
+  private static software.bernie.geckolib.core.object.PlayState lambda$registerControllers$0(software.bernie.geckolib.core.animation.AnimationState);
+    Code:
+       0: getstatic     #309                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       3: areturn
+}

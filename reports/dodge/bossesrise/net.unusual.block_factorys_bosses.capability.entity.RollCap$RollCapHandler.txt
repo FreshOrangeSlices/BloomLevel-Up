@@ -1,0 +1,803 @@
+Compiled from "RollCap.java"
+public class net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler implements net.unusual.block_factorys_bosses.capability.entity.RollCap {
+  public static final net.minecraftforge.common.capabilities.Capability<net.unusual.block_factorys_bosses.capability.entity.RollCap> ROLL_CAP;
+
+  private static final int DEFAULT_ROLL_DURATION = 14;
+
+  private static final int ROLL_I_FRAMES = 7;
+
+  public static final int ROLL_DELAY = 5;
+
+  public static final double ROLL_DISTANCE = 6.0d;
+
+  protected static final net.minecraft.resources.ResourceLocation PATH;
+
+  protected static final net.unusual.block_factorys_bosses.capability.entity.PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation FORWARD_ROLL;
+
+  protected static final net.unusual.block_factorys_bosses.capability.entity.PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation BACKWARD_ROLL;
+
+  protected static final net.unusual.block_factorys_bosses.capability.entity.PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation LEFT_ROLL;
+
+  protected static final net.unusual.block_factorys_bosses.capability.entity.PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation RIGHT_ROLL;
+
+  protected net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType direction;
+
+  protected int rollDuration;
+
+  protected int roll;
+
+  protected java.util.List<java.lang.Float> cooldowns;
+
+  public net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #96                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: getstatic     #99                 // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.FORWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+       8: putfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      11: aload_0
+      12: bipush        14
+      14: putfield      #103                // Field rollDuration:I
+      17: aload_0
+      18: iconst_0
+      19: putfield      #105                // Field roll:I
+      22: aload_0
+      23: new           #107                // class java/util/ArrayList
+      26: dup
+      27: invokespecial #108                // Method java/util/ArrayList."<init>":()V
+      30: putfield      #110                // Field cooldowns:Ljava/util/List;
+      33: return
+
+  public int rollCount();
+    Code:
+       0: aload_0
+       1: getfield      #110                // Field cooldowns:Ljava/util/List;
+       4: invokeinterface #119,  1          // InterfaceMethod java/util/List.size:()I
+       9: ireturn
+
+  public float getCooldown(int);
+    Code:
+       0: aload_0
+       1: getfield      #110                // Field cooldowns:Ljava/util/List;
+       4: iload_1
+       5: invokeinterface #125,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      10: checkcast     #127                // class java/lang/Float
+      13: invokevirtual #131                // Method java/lang/Float.floatValue:()F
+      16: freturn
+
+  public void startCooldown(int);
+    Code:
+       0: aload_0
+       1: getfield      #110                // Field cooldowns:Ljava/util/List;
+       4: iload_1
+       5: fconst_1
+       6: invokestatic  #138                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+       9: invokeinterface #142,  3          // InterfaceMethod java/util/List.set:(ILjava/lang/Object;)Ljava/lang/Object;
+      14: pop
+      15: aload_0
+      16: getfield      #110                // Field cooldowns:Ljava/util/List;
+      19: invokestatic  #148                // Method java/util/Collections.sort:(Ljava/util/List;)V
+      22: return
+
+  public int getRoll();
+    Code:
+       0: aload_0
+       1: getfield      #105                // Field roll:I
+       4: ireturn
+
+  public boolean isRolling();
+    Code:
+       0: aload_0
+       1: getfield      #105                // Field roll:I
+       4: ifle          11
+       7: iconst_1
+       8: goto          12
+      11: iconst_0
+      12: ireturn
+
+  public boolean isInvulnerable();
+    Code:
+       0: aload_0
+       1: getfield      #105                // Field roll:I
+       4: bipush        7
+       6: if_icmple     13
+       9: iconst_1
+      10: goto          14
+      13: iconst_0
+      14: ireturn
+
+  public int getRollDuration();
+    Code:
+       0: aload_0
+       1: getfield      #103                // Field rollDuration:I
+       4: ireturn
+
+  public net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType getDirection();
+    Code:
+       0: aload_0
+       1: getfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+       4: areturn
+
+  public boolean startRoll(net.minecraft.world.entity.player.Player, float, float);
+    Code:
+       0: aload_0
+       1: getfield      #105                // Field roll:I
+       4: bipush        -5
+       6: if_icmple     11
+       9: iconst_0
+      10: ireturn
+      11: aload_1
+      12: invokevirtual #162                // Method net/minecraft/world/entity/player/Player.m_20096_:()Z
+      15: ifne          20
+      18: iconst_0
+      19: ireturn
+      20: aload_1
+      21: invokevirtual #165                // Method net/minecraft/world/entity/player/Player.m_20067_:()Z
+      24: ifne          42
+      27: aload_1
+      28: getstatic     #171                // Field net/unusual/block_factorys_bosses/init/BossesRiseSounds.ROLL:Lnet/minecraftforge/registries/RegistryObject;
+      31: invokevirtual #176                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      34: checkcast     #178                // class net/minecraft/sounds/SoundEvent
+      37: fconst_1
+      38: fconst_1
+      39: invokevirtual #182                // Method net/minecraft/world/entity/player/Player.m_5496_:(Lnet/minecraft/sounds/SoundEvent;FF)V
+      42: aload_1
+      43: getstatic     #188                // Field net/minecraft/world/entity/Pose.CROUCHING:Lnet/minecraft/world/entity/Pose;
+      46: invokevirtual #192                // Method net/minecraft/world/entity/player/Player.setForcedPose:(Lnet/minecraft/world/entity/Pose;)V
+      49: aload_0
+      50: bipush        14
+      52: putfield      #103                // Field rollDuration:I
+      55: aload_0
+      56: aload_0
+      57: getfield      #103                // Field rollDuration:I
+      60: putfield      #105                // Field roll:I
+      63: aload_1
+      64: invokevirtual #195                // Method net/minecraft/world/entity/player/Player.m_6113_:()F
+      67: fstore        4
+      69: fload         4
+      71: fload_2
+      72: fmul
+      73: fstore        5
+      75: fload         4
+      77: fload_3
+      78: fmul
+      79: fstore        6
+      81: aload_1
+      82: invokevirtual #198                // Method net/minecraft/world/entity/player/Player.m_146908_:()F
+      85: ldc           #199                // float 0.017453292f
+      87: fmul
+      88: invokestatic  #205                // Method net/minecraft/util/Mth.m_14031_:(F)F
+      91: fstore        7
+      93: aload_1
+      94: invokevirtual #198                // Method net/minecraft/world/entity/player/Player.m_146908_:()F
+      97: ldc           #199                // float 0.017453292f
+      99: fmul
+     100: invokestatic  #208                // Method net/minecraft/util/Mth.m_14089_:(F)F
+     103: fstore        8
+     105: new           #210                // class org/joml/Vector2d
+     108: dup
+     109: fload         5
+     111: fload         8
+     113: fmul
+     114: fload         6
+     116: fload         7
+     118: fmul
+     119: fsub
+     120: f2d
+     121: fload         6
+     123: fload         8
+     125: fmul
+     126: fload         5
+     128: fload         7
+     130: fmul
+     131: fadd
+     132: f2d
+     133: invokespecial #213                // Method org/joml/Vector2d."<init>":(DD)V
+     136: astore        9
+     138: aload         9
+     140: invokevirtual #217                // Method org/joml/Vector2d.lengthSquared:()D
+     143: ldc2_w        #218                // double 0.0010000000474974513d
+     146: dcmpg
+     147: ifgt          176
+     150: new           #210                // class org/joml/Vector2d
+     153: dup
+     154: fload         7
+     156: fneg
+     157: f2d
+     158: fload         8
+     160: f2d
+     161: invokespecial #213                // Method org/joml/Vector2d."<init>":(DD)V
+     164: astore        9
+     166: aload_0
+     167: getstatic     #99                 // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.FORWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     170: putfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     173: goto          229
+     176: fload_3
+     177: invokestatic  #224                // Method java/lang/Math.abs:(F)F
+     180: fload_2
+     181: invokestatic  #224                // Method java/lang/Math.abs:(F)F
+     184: fcmpl
+     185: iflt          210
+     188: aload_0
+     189: fload_3
+     190: fconst_0
+     191: fcmpl
+     192: ifle          201
+     195: getstatic     #99                 // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.FORWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     198: goto          204
+     201: getstatic     #227                // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.BACKWARD:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     204: putfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     207: goto          229
+     210: aload_0
+     211: fload_2
+     212: fconst_0
+     213: fcmpl
+     214: ifle          223
+     217: getstatic     #230                // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.LEFT:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     220: goto          226
+     223: getstatic     #233                // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.RIGHT:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     226: putfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     229: aload_0
+     230: aload_1
+     231: aload         9
+     233: invokevirtual #237                // Method move:(Lnet/minecraft/world/entity/player/Player;Lorg/joml/Vector2d;)V
+     236: getstatic     #241                // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$1.$SwitchMap$net$unusual$block_factorys_bosses$capability$entity$RollCap$RollCapHandler$RollType:[I
+     239: aload_0
+     240: getfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     243: invokevirtual #244                // Method net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.ordinal:()I
+     246: iaload
+     247: tableswitch   { // 1 to 4
+                     1: 284
+                     2: 290
+                     3: 296
+                     4: 302
+               default: 276
+          }
+     276: new           #246                // class java/lang/IncompatibleClassChangeError
+     279: dup
+     280: invokespecial #247                // Method java/lang/IncompatibleClassChangeError."<init>":()V
+     283: athrow
+     284: getstatic     #249                // Field FORWARD_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+     287: goto          305
+     290: getstatic     #251                // Field BACKWARD_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+     293: goto          305
+     296: getstatic     #253                // Field LEFT_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+     299: goto          305
+     302: getstatic     #255                // Field RIGHT_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+     305: astore        10
+     307: aload_1
+     308: invokestatic  #259                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap.fromPlayer:(Lnet/minecraft/world/entity/player/Player;)Ljava/util/Optional;
+     311: aload_0
+     312: aload_1
+     313: aload         10
+     315: invokedynamic #279,  0            // InvokeDynamic #0:accept:(Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler;Lnet/minecraft/world/entity/player/Player;Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;)Ljava/util/function/Consumer;
+     320: invokevirtual #285                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+     323: iconst_1
+     324: ireturn
+
+  public void tick(net.minecraft.world.entity.player.Player);
+    Code:
+       0: aload_0
+       1: invokevirtual #301                // Method isRolling:()Z
+       4: ifeq          80
+       7: aload_1
+       8: iconst_0
+       9: invokevirtual #305                // Method net/minecraft/world/entity/player/Player.m_20260_:(Z)V
+      12: aload_1
+      13: invokevirtual #162                // Method net/minecraft/world/entity/player/Player.m_20096_:()Z
+      16: ifeq          80
+      19: ldc2_w        #306                // double 180.0d
+      22: aload_1
+      23: invokevirtual #311                // Method net/minecraft/world/entity/player/Player.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+      26: invokevirtual #316                // Method net/minecraft/world/phys/Vec3.m_7096_:()D
+      29: aload_1
+      30: invokevirtual #311                // Method net/minecraft/world/entity/player/Player.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+      33: invokevirtual #319                // Method net/minecraft/world/phys/Vec3.m_7094_:()D
+      36: invokestatic  #323                // Method java/lang/Math.atan2:(DD)D
+      39: ldc2_w        #324                // double -57.29577951308232d
+      42: dmul
+      43: ldc2_w        #306                // double 180.0d
+      46: dadd
+      47: dsub
+      48: invokestatic  #329                // Method java/lang/Math.toRadians:(D)D
+      51: dstore_2
+      52: aload_0
+      53: aload_1
+      54: new           #210                // class org/joml/Vector2d
+      57: dup
+      58: dload_2
+      59: invokestatic  #331                // Method java/lang/Math.sin:(D)D
+      62: ldc2_w        #332                // double 0.4d
+      65: dmul
+      66: dload_2
+      67: invokestatic  #335                // Method java/lang/Math.cos:(D)D
+      70: ldc2_w        #332                // double 0.4d
+      73: dmul
+      74: invokespecial #213                // Method org/joml/Vector2d."<init>":(DD)V
+      77: invokevirtual #237                // Method move:(Lnet/minecraft/world/entity/player/Player;Lorg/joml/Vector2d;)V
+      80: getstatic     #341                // Field net/unusual/block_factorys_bosses/configuration/ServerConfiguration.DEFAULT_ROLL_COUNT:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      83: invokevirtual #342                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+      86: checkcast     #344                // class java/lang/Integer
+      89: invokevirtual #347                // Method java/lang/Integer.intValue:()I
+      92: aload_1
+      93: getstatic     #352                // Field net/unusual/block_factorys_bosses/init/BossesRiseAttributes.ROLL_COUNT:Lnet/minecraftforge/registries/RegistryObject;
+      96: invokevirtual #356                // Method net/minecraftforge/registries/RegistryObject.getHolder:()Ljava/util/Optional;
+      99: invokevirtual #359                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+     102: checkcast     #361                // class net/minecraft/core/Holder
+     105: invokevirtual #365                // Method net/minecraft/world/entity/player/Player.m_246858_:(Lnet/minecraft/core/Holder;)D
+     108: d2i
+     109: iadd
+     110: istore_2
+     111: iload_2
+     112: ifge          117
+     115: iconst_0
+     116: istore_2
+     117: iload_2
+     118: aload_0
+     119: invokevirtual #367                // Method rollCount:()I
+     122: isub
+     123: istore_3
+     124: iload_3
+     125: ifle          167
+     128: iconst_0
+     129: istore        4
+     131: iload         4
+     133: iload_3
+     134: if_icmpge     157
+     137: aload_0
+     138: getfield      #110                // Field cooldowns:Ljava/util/List;
+     141: fconst_0
+     142: invokestatic  #138                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+     145: invokeinterface #371,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     150: pop
+     151: iinc          4, 1
+     154: goto          131
+     157: aload_0
+     158: getfield      #110                // Field cooldowns:Ljava/util/List;
+     161: invokestatic  #148                // Method java/util/Collections.sort:(Ljava/util/List;)V
+     164: goto          214
+     167: iload_3
+     168: ifge          214
+     171: iconst_0
+     172: istore        4
+     174: iload         4
+     176: iload_3
+     177: if_icmple     207
+     180: aload_0
+     181: getfield      #110                // Field cooldowns:Ljava/util/List;
+     184: aload_0
+     185: getfield      #110                // Field cooldowns:Ljava/util/List;
+     188: invokeinterface #119,  1          // InterfaceMethod java/util/List.size:()I
+     193: iconst_1
+     194: isub
+     195: invokeinterface #374,  2          // InterfaceMethod java/util/List.remove:(I)Ljava/lang/Object;
+     200: pop
+     201: iinc          4, -1
+     204: goto          174
+     207: aload_0
+     208: getfield      #110                // Field cooldowns:Ljava/util/List;
+     211: invokestatic  #148                // Method java/util/Collections.sort:(Ljava/util/List;)V
+     214: aload_0
+     215: getfield      #105                // Field roll:I
+     218: bipush        -5
+     220: if_icmple     331
+     223: aload_0
+     224: invokevirtual #301                // Method isRolling:()Z
+     227: istore        4
+     229: aload_0
+     230: dup
+     231: getfield      #105                // Field roll:I
+     234: iconst_1
+     235: isub
+     236: putfield      #105                // Field roll:I
+     239: iload         4
+     241: ifeq          328
+     244: aload_0
+     245: invokevirtual #301                // Method isRolling:()Z
+     248: ifne          328
+     251: aload_1
+     252: invokevirtual #311                // Method net/minecraft/world/entity/player/Player.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+     255: astore        5
+     257: new           #210                // class org/joml/Vector2d
+     260: dup
+     261: aload         5
+     263: getfield      #377                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     266: aload         5
+     268: getfield      #380                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     271: invokespecial #213                // Method org/joml/Vector2d."<init>":(DD)V
+     274: invokevirtual #384                // Method org/joml/Vector2d.normalize:()Lorg/joml/Vector2d;
+     277: aload_1
+     278: getstatic     #390                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+     281: invokevirtual #394                // Method net/minecraft/world/entity/player/Player.m_21133_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D
+     284: invokevirtual #398                // Method org/joml/Vector2d.mul:(D)Lorg/joml/Vector2d;
+     287: astore        6
+     289: aload_1
+     290: aload         6
+     292: getfield      #401                // Field org/joml/Vector2d.x:D
+     295: aload         5
+     297: getfield      #404                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+     300: aload         6
+     302: getfield      #407                // Field org/joml/Vector2d.y:D
+     305: invokevirtual #411                // Method net/minecraft/world/entity/player/Player.m_20334_:(DDD)V
+     308: aload_1
+     309: iconst_1
+     310: putfield      #415                // Field net/minecraft/world/entity/player/Player.f_19812_:Z
+     313: aload_1
+     314: invokevirtual #419                // Method net/minecraft/world/entity/player/Player.getForcedPose:()Lnet/minecraft/world/entity/Pose;
+     317: getstatic     #188                // Field net/minecraft/world/entity/Pose.CROUCHING:Lnet/minecraft/world/entity/Pose;
+     320: if_acmpne     328
+     323: aload_1
+     324: aconst_null
+     325: invokevirtual #192                // Method net/minecraft/world/entity/player/Player.setForcedPose:(Lnet/minecraft/world/entity/Pose;)V
+     328: goto          463
+     331: aload_0
+     332: invokevirtual #367                // Method rollCount:()I
+     335: istore        4
+     337: iload         4
+     339: iconst_1
+     340: if_icmpge     344
+     343: return
+     344: iconst_0
+     345: istore        5
+     347: iload         5
+     349: iload         4
+     351: if_icmpge     463
+     354: aload_0
+     355: getfield      #110                // Field cooldowns:Ljava/util/List;
+     358: iload         5
+     360: invokeinterface #125,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     365: checkcast     #127                // class java/lang/Float
+     368: invokevirtual #131                // Method java/lang/Float.floatValue:()F
+     371: fconst_0
+     372: fcmpl
+     373: ifle          457
+     376: getstatic     #422                // Field net/unusual/block_factorys_bosses/configuration/ServerConfiguration.ROLL_COOLDOWN:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     379: invokevirtual #342                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+     382: checkcast     #344                // class java/lang/Integer
+     385: invokevirtual #347                // Method java/lang/Integer.intValue:()I
+     388: i2f
+     389: fstore        6
+     391: fload         6
+     393: fconst_0
+     394: fcmpg
+     395: ifge          417
+     398: aload_0
+     399: getfield      #110                // Field cooldowns:Ljava/util/List;
+     402: iload         5
+     404: fconst_0
+     405: invokestatic  #138                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+     408: invokeinterface #142,  3          // InterfaceMethod java/util/List.set:(ILjava/lang/Object;)Ljava/lang/Object;
+     413: pop
+     414: goto          463
+     417: aload_0
+     418: getfield      #110                // Field cooldowns:Ljava/util/List;
+     421: iload         5
+     423: aload_0
+     424: getfield      #110                // Field cooldowns:Ljava/util/List;
+     427: iload         5
+     429: invokeinterface #125,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     434: checkcast     #127                // class java/lang/Float
+     437: invokevirtual #131                // Method java/lang/Float.floatValue:()F
+     440: fconst_1
+     441: fload         6
+     443: fdiv
+     444: fsub
+     445: invokestatic  #138                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+     448: invokeinterface #142,  3          // InterfaceMethod java/util/List.set:(ILjava/lang/Object;)Ljava/lang/Object;
+     453: pop
+     454: goto          463
+     457: iinc          5, 1
+     460: goto          347
+     463: return
+
+  private void move(net.minecraft.world.entity.player.Player, org.joml.Vector2d);
+    Code:
+       0: aload_1
+       1: invokevirtual #311                // Method net/minecraft/world/entity/player/Player.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+       4: astore_3
+       5: new           #210                // class org/joml/Vector2d
+       8: dup
+       9: aload_3
+      10: getfield      #377                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+      13: aload_2
+      14: getfield      #401                // Field org/joml/Vector2d.x:D
+      17: dadd
+      18: aload_3
+      19: getfield      #380                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      22: aload_2
+      23: getfield      #407                // Field org/joml/Vector2d.y:D
+      26: dadd
+      27: invokespecial #213                // Method org/joml/Vector2d."<init>":(DD)V
+      30: invokevirtual #384                // Method org/joml/Vector2d.normalize:()Lorg/joml/Vector2d;
+      33: aload_1
+      34: getstatic     #390                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      37: invokevirtual #394                // Method net/minecraft/world/entity/player/Player.m_21133_:(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D
+      40: ldc2_w        #77                 // double 6.0d
+      43: ldc_w         #431                // float 10.0f
+      46: aload_0
+      47: getfield      #103                // Field rollDuration:I
+      50: i2f
+      51: fdiv
+      52: f2d
+      53: dmul
+      54: dmul
+      55: invokevirtual #398                // Method org/joml/Vector2d.mul:(D)Lorg/joml/Vector2d;
+      58: astore        4
+      60: aload_1
+      61: aload         4
+      63: getfield      #401                // Field org/joml/Vector2d.x:D
+      66: aload_3
+      67: getfield      #404                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      70: aload         4
+      72: getfield      #407                // Field org/joml/Vector2d.y:D
+      75: invokevirtual #411                // Method net/minecraft/world/entity/player/Player.m_20334_:(DDD)V
+      78: aload_1
+      79: iconst_1
+      80: putfield      #415                // Field net/minecraft/world/entity/player/Player.f_19812_:Z
+      83: aload_1
+      84: getfield      #434                // Field net/minecraft/world/entity/player/Player.f_20885_:F
+      87: fstore        5
+      89: aload_1
+      90: aload_1
+      91: invokevirtual #437                // Method net/minecraft/world/entity/player/Player.m_6080_:()F
+      94: invokevirtual #441                // Method net/minecraft/world/entity/player/Player.m_146922_:(F)V
+      97: aload_1
+      98: fload         5
+     100: putfield      #444                // Field net/minecraft/world/entity/player/Player.f_19859_:F
+     103: aload_1
+     104: aload_1
+     105: invokevirtual #437                // Method net/minecraft/world/entity/player/Player.m_6080_:()F
+     108: invokevirtual #447                // Method net/minecraft/world/entity/player/Player.m_5618_:(F)V
+     111: aload_1
+     112: fload         5
+     114: putfield      #450                // Field net/minecraft/world/entity/player/Player.f_20884_:F
+     117: return
+
+  public net.minecraft.nbt.CompoundTag serializeNBT();
+    Code:
+       0: new           #456                // class net/minecraft/nbt/CompoundTag
+       3: dup
+       4: invokespecial #457                // Method net/minecraft/nbt/CompoundTag."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: ldc_w         #458                // String direction
+      12: aload_0
+      13: getfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      16: invokevirtual #244                // Method net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.ordinal:()I
+      19: invokevirtual #462                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      22: aload_1
+      23: ldc_w         #464                // String duration
+      26: aload_0
+      27: getfield      #103                // Field rollDuration:I
+      30: invokevirtual #462                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      33: aload_1
+      34: ldc_w         #465                // String roll
+      37: aload_0
+      38: getfield      #105                // Field roll:I
+      41: invokevirtual #462                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      44: aload_1
+      45: ldc_w         #467                // String roll_count
+      48: aload_0
+      49: invokevirtual #367                // Method rollCount:()I
+      52: invokevirtual #462                // Method net/minecraft/nbt/CompoundTag.m_128405_:(Ljava/lang/String;I)V
+      55: iconst_0
+      56: istore_2
+      57: iload_2
+      58: aload_0
+      59: invokevirtual #367                // Method rollCount:()I
+      62: if_icmpge     97
+      65: aload_1
+      66: iload_2
+      67: invokedynamic #479,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+      72: aload_0
+      73: getfield      #110                // Field cooldowns:Ljava/util/List;
+      76: iload_2
+      77: invokeinterface #125,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      82: checkcast     #127                // class java/lang/Float
+      85: invokevirtual #131                // Method java/lang/Float.floatValue:()F
+      88: invokevirtual #483                // Method net/minecraft/nbt/CompoundTag.m_128350_:(Ljava/lang/String;F)V
+      91: iinc          2, 1
+      94: goto          57
+      97: aload_1
+      98: areturn
+
+  public void deserializeNBT(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: invokestatic  #491                // Method net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.values:()[Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+       4: aload_1
+       5: ldc_w         #458                // String direction
+       8: invokevirtual #495                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      11: aaload
+      12: putfield      #101                // Field direction:Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+      15: aload_0
+      16: aload_1
+      17: ldc_w         #464                // String duration
+      20: invokevirtual #495                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      23: putfield      #103                // Field rollDuration:I
+      26: aload_0
+      27: aload_1
+      28: ldc_w         #465                // String roll
+      31: invokevirtual #495                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      34: putfield      #105                // Field roll:I
+      37: aload_0
+      38: new           #107                // class java/util/ArrayList
+      41: dup
+      42: invokespecial #108                // Method java/util/ArrayList."<init>":()V
+      45: putfield      #110                // Field cooldowns:Ljava/util/List;
+      48: aload_1
+      49: ldc_w         #467                // String roll_count
+      52: invokevirtual #495                // Method net/minecraft/nbt/CompoundTag.m_128451_:(Ljava/lang/String;)I
+      55: istore_2
+      56: iconst_0
+      57: istore_3
+      58: iload_3
+      59: iload_2
+      60: if_icmpge     92
+      63: aload_0
+      64: getfield      #110                // Field cooldowns:Ljava/util/List;
+      67: aload_1
+      68: iload_3
+      69: invokedynamic #479,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+      74: invokevirtual #499                // Method net/minecraft/nbt/CompoundTag.m_128457_:(Ljava/lang/String;)F
+      77: invokestatic  #138                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+      80: invokeinterface #371,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      85: pop
+      86: iinc          3, 1
+      89: goto          58
+      92: return
+
+  public static void tickEvent(net.minecraftforge.event.TickEvent$PlayerTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #507                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #510                // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpeq     11
+      10: return
+      11: aload_0
+      12: getfield      #512                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      15: invokestatic  #513                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.fromPlayer:(Lnet/minecraft/world/entity/player/Player;)Ljava/util/Optional;
+      18: aload_0
+      19: invokedynamic #523,  0            // InvokeDynamic #2:accept:(Lnet/minecraftforge/event/TickEvent$PlayerTickEvent;)Ljava/util/function/Consumer;
+      24: invokevirtual #285                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      27: return
+
+  public static void preDamage(net.minecraftforge.event.entity.living.LivingAttackEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #533                // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #159                // class net/minecraft/world/entity/player/Player
+       9: ifeq          29
+      12: aload_2
+      13: checkcast     #159                // class net/minecraft/world/entity/player/Player
+      16: astore_1
+      17: aload_1
+      18: invokestatic  #537                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.isPlayerInvulnerable:(Lnet/minecraft/world/entity/player/Player;)Z
+      21: ifeq          29
+      24: aload_0
+      25: iconst_1
+      26: invokevirtual #540                // Method net/minecraftforge/event/entity/living/LivingAttackEvent.setCanceled:(Z)V
+      29: return
+
+  public static void preImpact(net.minecraftforge.event.entity.ProjectileImpactEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #546                // Method net/minecraftforge/event/entity/ProjectileImpactEvent.getEntity:()Lnet/minecraft/world/entity/Entity;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #159                // class net/minecraft/world/entity/player/Player
+       9: ifeq          31
+      12: aload_2
+      13: checkcast     #159                // class net/minecraft/world/entity/player/Player
+      16: astore_1
+      17: aload_1
+      18: invokestatic  #537                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.isPlayerInvulnerable:(Lnet/minecraft/world/entity/player/Player;)Z
+      21: ifeq          31
+      24: aload_0
+      25: getstatic     #550                // Field net/minecraftforge/event/entity/ProjectileImpactEvent$ImpactResult.STOP_AT_CURRENT_NO_DAMAGE:Lnet/minecraftforge/event/entity/ProjectileImpactEvent$ImpactResult;
+      28: invokevirtual #554                // Method net/minecraftforge/event/entity/ProjectileImpactEvent.setImpactResult:(Lnet/minecraftforge/event/entity/ProjectileImpactEvent$ImpactResult;)V
+      31: return
+
+  public static void preEffect(net.minecraftforge.event.entity.living.MobEffectEvent$Applicable);
+    Code:
+       0: aload_0
+       1: invokevirtual #558                // Method net/minecraftforge/event/entity/living/MobEffectEvent$Applicable.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #159                // class net/minecraft/world/entity/player/Player
+       9: ifeq          31
+      12: aload_2
+      13: checkcast     #159                // class net/minecraft/world/entity/player/Player
+      16: astore_1
+      17: aload_1
+      18: invokestatic  #537                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.isPlayerInvulnerable:(Lnet/minecraft/world/entity/player/Player;)Z
+      21: ifeq          31
+      24: aload_0
+      25: getstatic     #562                // Field net/minecraftforge/eventbus/api/Event$Result.DENY:Lnet/minecraftforge/eventbus/api/Event$Result;
+      28: invokevirtual #566                // Method net/minecraftforge/event/entity/living/MobEffectEvent$Applicable.setResult:(Lnet/minecraftforge/eventbus/api/Event$Result;)V
+      31: return
+
+  public static void attach(net.minecraftforge.event.AttachCapabilitiesEvent<net.minecraft.world.entity.Entity>);
+    Code:
+       0: aload_0
+       1: invokevirtual #575                // Method net/minecraftforge/event/AttachCapabilitiesEvent.getObject:()Ljava/lang/Object;
+       4: instanceof    #159                // class net/minecraft/world/entity/player/Player
+       7: ifeq          24
+      10: aload_0
+      11: getstatic     #578                // Field ID:Lnet/minecraft/resources/ResourceLocation;
+      14: new           #52                 // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$2
+      17: dup
+      18: invokespecial #579                // Method net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$2."<init>":()V
+      21: invokevirtual #583                // Method net/minecraftforge/event/AttachCapabilitiesEvent.addCapability:(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraftforge/common/capabilities/ICapabilityProvider;)V
+      24: return
+
+  public void deserializeNBT(net.minecraft.nbt.Tag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #456                // class net/minecraft/nbt/CompoundTag
+       5: invokevirtual #588                // Method deserializeNBT:(Lnet/minecraft/nbt/CompoundTag;)V
+       8: return
+
+  public net.minecraft.nbt.Tag serializeNBT();
+    Code:
+       0: aload_0
+       1: invokevirtual #591                // Method serializeNBT:()Lnet/minecraft/nbt/CompoundTag;
+       4: areturn
+
+  private static void lambda$tickEvent$1(net.minecraftforge.event.TickEvent$PlayerTickEvent, net.unusual.block_factorys_bosses.capability.entity.RollCap);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #512                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+       5: invokeinterface #593,  2          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.tick:(Lnet/minecraft/world/entity/player/Player;)V
+      10: return
+
+  private void lambda$startRoll$0(net.minecraft.world.entity.player.Player, net.unusual.block_factorys_bosses.capability.entity.PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation, net.unusual.block_factorys_bosses.capability.entity.PlayerAnimationCap);
+    Code:
+       0: aload_3
+       1: aload_1
+       2: aload_2
+       3: aload_0
+       4: getfield      #103                // Field rollDuration:I
+       7: invokeinterface #599,  4          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap.startAnimation:(Lnet/minecraft/world/entity/player/Player;Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;I)V
+      12: return
+
+  static {};
+    Code:
+       0: new           #54                 // class net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$1
+       3: dup
+       4: invokespecial #603                // Method net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$1."<init>":()V
+       7: invokestatic  #608                // Method net/minecraftforge/common/capabilities/CapabilityManager.get:(Lnet/minecraftforge/common/capabilities/CapabilityToken;)Lnet/minecraftforge/common/capabilities/Capability;
+      10: putstatic     #610                // Field ROLL_CAP:Lnet/minecraftforge/common/capabilities/Capability;
+      13: ldc_w         #612                // String animations/player/rolls.animation.json
+      16: invokestatic  #618                // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      19: putstatic     #620                // Field PATH:Lnet/minecraft/resources/ResourceLocation;
+      22: new           #21                 // class net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation
+      25: dup
+      26: getstatic     #620                // Field PATH:Lnet/minecraft/resources/ResourceLocation;
+      29: ldc_w         #622                // String roll_forward
+      32: invokespecial #625                // Method net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation."<init>":(Lnet/minecraft/resources/ResourceLocation;Ljava/lang/String;)V
+      35: putstatic     #249                // Field FORWARD_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+      38: new           #21                 // class net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation
+      41: dup
+      42: getstatic     #620                // Field PATH:Lnet/minecraft/resources/ResourceLocation;
+      45: ldc_w         #627                // String roll_back
+      48: invokespecial #625                // Method net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation."<init>":(Lnet/minecraft/resources/ResourceLocation;Ljava/lang/String;)V
+      51: putstatic     #251                // Field BACKWARD_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+      54: new           #21                 // class net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation
+      57: dup
+      58: getstatic     #620                // Field PATH:Lnet/minecraft/resources/ResourceLocation;
+      61: ldc_w         #629                // String roll_left
+      64: invokespecial #625                // Method net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation."<init>":(Lnet/minecraft/resources/ResourceLocation;Ljava/lang/String;)V
+      67: putstatic     #253                // Field LEFT_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+      70: new           #21                 // class net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation
+      73: dup
+      74: getstatic     #620                // Field PATH:Lnet/minecraft/resources/ResourceLocation;
+      77: ldc_w         #631                // String roll_right
+      80: invokespecial #625                // Method net/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation."<init>":(Lnet/minecraft/resources/ResourceLocation;Ljava/lang/String;)V
+      83: putstatic     #255                // Field RIGHT_ROLL:Lnet/unusual/block_factorys_bosses/capability/entity/PlayerAnimationCap$PlayerAnimationHandler$PlayerAnimation;
+      86: return
+}

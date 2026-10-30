@@ -1,0 +1,97 @@
+Compiled from "TooltipSemiLivingFleshProcedure.java"
+public class net.mcreator.skarriermobs.procedures.TooltipSemiLivingFleshProcedure {
+  public net.mcreator.skarriermobs.procedures.TooltipSemiLivingFleshProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onItemTooltip(net.minecraftforge.event.entity.player.ItemTooltipEvent);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: invokevirtual #30                 // Method net/minecraftforge/event/entity/player/ItemTooltipEvent.getItemStack:()Lnet/minecraft/world/item/ItemStack;
+       5: aload_0
+       6: invokevirtual #34                 // Method net/minecraftforge/event/entity/player/ItemTooltipEvent.getToolTip:()Ljava/util/List;
+       9: invokestatic  #38                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)V
+      12: return
+
+  public static void execute(net.minecraft.world.item.ItemStack, java.util.List<net.minecraft.network.chat.Component>);
+    Code:
+       0: aconst_null
+       1: aload_0
+       2: aload_1
+       3: invokestatic  #38                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)V
+       6: return
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.item.ItemStack, java.util.List<net.minecraft.network.chat.Component>);
+    Code:
+       0: aload_2
+       1: ifnonnull     5
+       4: return
+       5: aload_1
+       6: new           #51                 // class net/minecraft/resources/ResourceLocation
+       9: dup
+      10: ldc           #53                 // String skarrier_mobs:totems
+      12: invokespecial #56                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      15: invokestatic  #62                 // Method net/minecraft/tags/ItemTags.create:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      18: invokevirtual #68                 // Method net/minecraft/world/item/ItemStack.m_204117_:(Lnet/minecraft/tags/TagKey;)Z
+      21: ifeq          162
+      24: aload_1
+      25: invokevirtual #72                 // Method net/minecraft/world/item/ItemStack.m_41784_:()Lnet/minecraft/nbt/CompoundTag;
+      28: ldc           #74                 // String CoatingApplied
+      30: invokevirtual #80                 // Method net/minecraft/nbt/CompoundTag.m_128461_:(Ljava/lang/String;)Ljava/lang/String;
+      33: ldc           #82                 // String SLFlesh
+      35: invokevirtual #88                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      38: ifeq          162
+      41: aload_2
+      42: ldc           #90                 // String §4Coated with Semi-Living Flesh
+      44: invokestatic  #96                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      47: invokeinterface #101,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      52: pop
+      53: aload_2
+      54: ldc           #103                // String §4-4 Max health
+      56: invokestatic  #96                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      59: invokeinterface #101,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      64: pop
+      65: aload_1
+      66: invokevirtual #107                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      69: getstatic     #113                // Field net/minecraft/world/item/Items.f_42747_:Lnet/minecraft/world/item/Item;
+      72: if_acmpne     87
+      75: aload_2
+      76: ldc           #115                // String §3Grants more Absorbtion hearts and resurrects the totem upon being used
+      78: invokestatic  #96                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      81: invokeinterface #101,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      86: pop
+      87: aload_1
+      88: invokevirtual #107                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      91: getstatic     #121                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.TOTEM_OF_REPULSION:Lnet/minecraftforge/registries/RegistryObject;
+      94: invokevirtual #127                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      97: if_acmpne     112
+     100: aload_2
+     101: ldc           #129                // String §3The strength of the shockwave is doubled
+     103: invokestatic  #96                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     106: invokeinterface #101,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     111: pop
+     112: aload_1
+     113: invokevirtual #107                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     116: getstatic     #132                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.TOTEM_OF_SEETHING:Lnet/minecraftforge/registries/RegistryObject;
+     119: invokevirtual #127                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     122: if_acmpne     137
+     125: aload_2
+     126: ldc           #134                // String §3Increases fire damage by 4 instead of 2
+     128: invokestatic  #96                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     131: invokeinterface #101,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     136: pop
+     137: aload_1
+     138: invokevirtual #107                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     141: getstatic     #137                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.TOTEM_OF_FREEZING:Lnet/minecraftforge/registries/RegistryObject;
+     144: invokevirtual #127                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     147: if_acmpne     162
+     150: aload_2
+     151: ldc           #139                // String §3Turns freezing into Regeneration and Frostbite into Strength, the Frostbite inflicted is stronger
+     153: invokestatic  #96                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     156: invokeinterface #101,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     161: pop
+     162: return
+}

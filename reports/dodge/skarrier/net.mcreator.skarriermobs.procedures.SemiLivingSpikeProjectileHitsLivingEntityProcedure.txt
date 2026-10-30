@@ -1,0 +1,76 @@
+Compiled from "SemiLivingSpikeProjectileHitsLivingEntityProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SemiLivingSpikeProjectileHitsLivingEntityProcedure {
+  public net.mcreator.skarriermobs.procedures.SemiLivingSpikeProjectileHitsLivingEntityProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_1
+       1: ifnull        12
+       4: aload_2
+       5: ifnull        12
+       8: aload_3
+       9: ifnonnull     13
+      12: return
+      13: aload_1
+      14: instanceof    #20                 // class net/minecraft/world/entity/TamableAnimal
+      17: ifeq          52
+      20: aload_1
+      21: checkcast     #20                 // class net/minecraft/world/entity/TamableAnimal
+      24: astore        4
+      26: aload_2
+      27: instanceof    #22                 // class net/minecraft/world/entity/LivingEntity
+      30: ifeq          52
+      33: aload_2
+      34: checkcast     #22                 // class net/minecraft/world/entity/LivingEntity
+      37: astore        5
+      39: aload         4
+      41: aload         5
+      43: invokevirtual #26                 // Method net/minecraft/world/entity/TamableAnimal.m_21830_:(Lnet/minecraft/world/entity/LivingEntity;)Z
+      46: ifeq          52
+      49: goto          148
+      52: aload_1
+      53: new           #28                 // class net/minecraft/world/damagesource/DamageSource
+      56: dup
+      57: aload_0
+      58: invokeinterface #34,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_9598_:()Lnet/minecraft/core/RegistryAccess;
+      63: getstatic     #40                 // Field net/minecraft/core/registries/Registries.f_268580_:Lnet/minecraft/resources/ResourceKey;
+      66: invokeinterface #46,  2           // InterfaceMethod net/minecraft/core/RegistryAccess.m_175515_:(Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/core/Registry;
+      71: getstatic     #40                 // Field net/minecraft/core/registries/Registries.f_268580_:Lnet/minecraft/resources/ResourceKey;
+      74: new           #48                 // class net/minecraft/resources/ResourceLocation
+      77: dup
+      78: ldc           #50                 // String skarrier_mobs:spine
+      80: invokespecial #53                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      83: invokestatic  #59                 // Method net/minecraft/resources/ResourceKey.m_135785_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/resources/ResourceKey;
+      86: invokeinterface #65,  2           // InterfaceMethod net/minecraft/core/Registry.m_246971_:(Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/core/Holder$Reference;
+      91: invokespecial #68                 // Method net/minecraft/world/damagesource/DamageSource."<init>":(Lnet/minecraft/core/Holder;)V
+      94: ldc           #69                 // float 6.0f
+      96: invokevirtual #75                 // Method net/minecraft/world/entity/Entity.m_6469_:(Lnet/minecraft/world/damagesource/DamageSource;F)Z
+      99: pop
+     100: aload_1
+     101: iconst_5
+     102: putfield      #79                 // Field net/minecraft/world/entity/Entity.f_19802_:I
+     105: aload_3
+     106: instanceof    #22                 // class net/minecraft/world/entity/LivingEntity
+     109: ifeq          148
+     112: aload_3
+     113: checkcast     #22                 // class net/minecraft/world/entity/LivingEntity
+     116: astore        6
+     118: aload         6
+     120: invokevirtual #83                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     123: invokevirtual #89                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+     126: ifne          148
+     129: aload         6
+     131: new           #91                 // class net/minecraft/world/effect/MobEffectInstance
+     134: dup
+     135: getstatic     #97                 // Field net/minecraft/world/effect/MobEffects.f_19606_:Lnet/minecraft/world/effect/MobEffect;
+     138: bipush        100
+     140: iconst_0
+     141: invokespecial #100                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     144: invokevirtual #104                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     147: pop
+     148: return
+}

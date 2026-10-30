@@ -1,0 +1,70 @@
+Compiled from "TooltipSemiLivingBootsProcedure.java"
+public class net.mcreator.skarriermobs.procedures.TooltipSemiLivingBootsProcedure {
+  public net.mcreator.skarriermobs.procedures.TooltipSemiLivingBootsProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onItemTooltip(net.minecraftforge.event.entity.player.ItemTooltipEvent);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: invokevirtual #30                 // Method net/minecraftforge/event/entity/player/ItemTooltipEvent.getItemStack:()Lnet/minecraft/world/item/ItemStack;
+       5: aload_0
+       6: invokevirtual #34                 // Method net/minecraftforge/event/entity/player/ItemTooltipEvent.getToolTip:()Ljava/util/List;
+       9: invokestatic  #38                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)V
+      12: return
+
+  public static void execute(net.minecraft.world.item.ItemStack, java.util.List<net.minecraft.network.chat.Component>);
+    Code:
+       0: aconst_null
+       1: aload_0
+       2: aload_1
+       3: invokestatic  #38                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)V
+       6: return
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.item.ItemStack, java.util.List<net.minecraft.network.chat.Component>);
+    Code:
+       0: aload_2
+       1: ifnonnull     5
+       4: return
+       5: aload_1
+       6: invokevirtual #55                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+       9: getstatic     #61                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+      12: invokevirtual #67                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      15: if_acmpne     96
+      18: aload_2
+      19: ldc           #69                 // String §3Immunity to fall damage. Double-tap W to perform a leap
+      21: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      24: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      29: pop
+      30: aload_2
+      31: ldc           #83                 // String §4-2 Armor
+      33: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      36: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      41: pop
+      42: aload_2
+      43: ldc           #85                 // String §4-1 Max health
+      45: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      48: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      53: pop
+      54: aload_2
+      55: ldc           #87                 // String §3Press Shift to view a full set bonus
+      57: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      60: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      65: pop
+      66: invokestatic  #93                 // Method net/minecraft/client/gui/screens/Screen.m_96638_:()Z
+      69: ifeq          96
+      72: aload_2
+      73: ldc           #95                 // String §4Melee attacks are followed with a bite dealing 2x of the player\'s melee damage and granting brief Regeneration II
+      75: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      78: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      83: pop
+      84: aload_2
+      85: ldc           #97                 // String §4Ranged attacks are followed with 2 spike shots that grant brief Resistance I
+      87: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      90: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      95: pop
+      96: return
+}

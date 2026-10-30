@@ -1,0 +1,114 @@
+Compiled from "SemiLivingSpikeRenderer.java"
+public class net.mcreator.skarriermobs.client.renderer.SemiLivingSpikeRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.mcreator.skarriermobs.entity.SemiLivingSpikeEntity> {
+  private static final net.minecraft.resources.ResourceLocation texture;
+
+  private final net.mcreator.skarriermobs.client.model.Modelsemi_living_spike model;
+
+  public net.mcreator.skarriermobs.client.renderer.SemiLivingSpikeRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #19                 // Method net/minecraft/client/renderer/entity/EntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+       5: aload_0
+       6: new           #21                 // class net/mcreator/skarriermobs/client/model/Modelsemi_living_spike
+       9: dup
+      10: aload_1
+      11: getstatic     #25                 // Field net/mcreator/skarriermobs/client/model/Modelsemi_living_spike.LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      14: invokevirtual #29                 // Method net/minecraft/client/renderer/entity/EntityRendererProvider$Context.m_174023_:(Lnet/minecraft/client/model/geom/ModelLayerLocation;)Lnet/minecraft/client/model/geom/ModelPart;
+      17: invokespecial #32                 // Method net/mcreator/skarriermobs/client/model/Modelsemi_living_spike."<init>":(Lnet/minecraft/client/model/geom/ModelPart;)V
+      20: putfield      #34                 // Field model:Lnet/mcreator/skarriermobs/client/model/Modelsemi_living_spike;
+      23: return
+
+  public void render(net.mcreator.skarriermobs.entity.SemiLivingSpikeEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: aload         5
+       2: aload_0
+       3: aload_1
+       4: invokevirtual #44                 // Method getTextureLocation:(Lnet/mcreator/skarriermobs/entity/SemiLivingSpikeEntity;)Lnet/minecraft/resources/ResourceLocation;
+       7: invokestatic  #50                 // Method net/minecraft/client/renderer/RenderType.m_110452_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+      10: invokeinterface #56,  2           // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.m_6299_:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      15: astore        7
+      17: aload         4
+      19: invokevirtual #62                 // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+      22: aload         4
+      24: getstatic     #68                 // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+      27: fload_3
+      28: aload_1
+      29: getfield      #74                 // Field net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity.f_19859_:F
+      32: aload_1
+      33: invokevirtual #78                 // Method net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity.m_146908_:()F
+      36: invokestatic  #84                 // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+      39: ldc           #85                 // float 90.0f
+      41: fsub
+      42: invokeinterface #89,  2           // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+      47: invokevirtual #93                 // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+      50: aload         4
+      52: getstatic     #96                 // Field com/mojang/math/Axis.f_252403_:Lcom/mojang/math/Axis;
+      55: ldc           #85                 // float 90.0f
+      57: fload_3
+      58: aload_1
+      59: getfield      #99                 // Field net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity.f_19860_:F
+      62: aload_1
+      63: invokevirtual #102                // Method net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity.m_146909_:()F
+      66: invokestatic  #84                 // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+      69: fadd
+      70: invokeinterface #89,  2           // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+      75: invokevirtual #93                 // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+      78: aload_0
+      79: getfield      #34                 // Field model:Lnet/mcreator/skarriermobs/client/model/Modelsemi_living_spike;
+      82: aload         4
+      84: aload         7
+      86: iload         6
+      88: getstatic     #108                // Field net/minecraft/client/renderer/texture/OverlayTexture.f_118083_:I
+      91: fconst_1
+      92: fconst_1
+      93: fconst_1
+      94: fconst_1
+      95: invokevirtual #112                // Method net/mcreator/skarriermobs/client/model/Modelsemi_living_spike.m_7695_:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V
+      98: aload         4
+     100: invokevirtual #115                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+     103: aload_0
+     104: aload_1
+     105: fload_2
+     106: fload_3
+     107: aload         4
+     109: aload         5
+     111: iload         6
+     113: invokespecial #119                // Method net/minecraft/client/renderer/entity/EntityRenderer.m_7392_:(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+     116: return
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.mcreator.skarriermobs.entity.SemiLivingSpikeEntity);
+    Code:
+       0: getstatic     #132                // Field texture:Lnet/minecraft/resources/ResourceLocation;
+       3: areturn
+
+  public net.minecraft.resources.ResourceLocation m_5478_(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #70                 // class net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity
+       5: invokevirtual #44                 // Method getTextureLocation:(Lnet/mcreator/skarriermobs/entity/SemiLivingSpikeEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public void m_7392_(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #70                 // class net/mcreator/skarriermobs/entity/SemiLivingSpikeEntity
+       5: fload_2
+       6: fload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: invokevirtual #137                // Method render:(Lnet/mcreator/skarriermobs/entity/SemiLivingSpikeEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+      16: return
+
+  static {};
+    Code:
+       0: new           #140                // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #142                // String skarrier_mobs:textures/entities/semi_living_spike.png
+       6: invokespecial #145                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+       9: putstatic     #132                // Field texture:Lnet/minecraft/resources/ResourceLocation;
+      12: return
+}

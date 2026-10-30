@@ -1,0 +1,30 @@
+Compiled from "SemiLivingFleshItem.java"
+public class net.mcreator.skarriermobs.item.SemiLivingFleshItem extends net.minecraft.world.item.Item {
+  public net.mcreator.skarriermobs.item.SemiLivingFleshItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #12                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #16                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #22                 // Field net/minecraft/world/item/Rarity.UNCOMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #26                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: invokespecial #29                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      22: return
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #36                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #38                 // String item.skarrier_mobs.semi_living_flesh.description_0
+      12: invokestatic  #44                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #50,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: return
+}

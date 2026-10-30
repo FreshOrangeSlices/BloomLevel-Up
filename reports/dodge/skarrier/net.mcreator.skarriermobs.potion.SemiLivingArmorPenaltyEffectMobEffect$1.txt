@@ -1,0 +1,28 @@
+Compiled from "SemiLivingArmorPenaltyEffectMobEffect.java"
+class net.mcreator.skarriermobs.potion.SemiLivingArmorPenaltyEffectMobEffect$1 implements net.minecraftforge.client.extensions.common.IClientMobEffectExtensions {
+  final net.mcreator.skarriermobs.potion.SemiLivingArmorPenaltyEffectMobEffect this$0;
+
+  net.mcreator.skarriermobs.potion.SemiLivingArmorPenaltyEffectMobEffect$1(net.mcreator.skarriermobs.potion.SemiLivingArmorPenaltyEffectMobEffect);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #18                 // Field this$0:Lnet/mcreator/skarriermobs/potion/SemiLivingArmorPenaltyEffectMobEffect;
+       5: aload_0
+       6: invokespecial #21                 // Method java/lang/Object."<init>":()V
+       9: return
+
+  public boolean isVisibleInInventory(net.minecraft.world.effect.MobEffectInstance);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean renderInventoryText(net.minecraft.world.effect.MobEffectInstance, net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen<?>, net.minecraft.client.gui.GuiGraphics, int, int, int);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean isVisibleInGui(net.minecraft.world.effect.MobEffectInstance);
+    Code:
+       0: iconst_0
+       1: ireturn
+}

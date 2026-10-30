@@ -1,0 +1,63 @@
+Compiled from "KrakenTentacleEntity.java"
+class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$2 implements software.bernie.geckolib.core.animation.AnimationController$ParticleKeyframeHandler<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity> {
+  final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity this$0;
+
+  net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$2(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #27                 // Field this$0:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+       5: aload_0
+       6: invokespecial #30                 // Method java/lang/Object."<init>":()V
+       9: return
+
+  public void handle(software.bernie.geckolib.core.keyframe.event.ParticleKeyframeEvent<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity>);
+    Code:
+       0: aload_1
+       1: invokevirtual #41                 // Method software/bernie/geckolib/core/keyframe/event/ParticleKeyframeEvent.getAnimatable:()Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;
+       4: checkcast     #10                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       7: invokevirtual #45                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      10: invokevirtual #51                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      13: ifne          17
+      16: return
+      17: aload_1
+      18: invokevirtual #55                 // Method software/bernie/geckolib/core/keyframe/event/ParticleKeyframeEvent.getKeyframeData:()Lsoftware/bernie/geckolib/core/keyframe/event/data/ParticleKeyframeData;
+      21: astore_2
+      22: getstatic     #61                 // Field net/minecraftforge/registries/ForgeRegistries.PARTICLE_TYPES:Lnet/minecraftforge/registries/IForgeRegistry;
+      25: aload_2
+      26: invokevirtual #67                 // Method software/bernie/geckolib/core/keyframe/event/data/ParticleKeyframeData.getEffect:()Ljava/lang/String;
+      29: invokestatic  #73                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      32: invokeinterface #79,  2           // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+      37: checkcast     #81                 // class net/minecraft/core/particles/ParticleType
+      40: astore_3
+      41: aload_3
+      42: ifnonnull     46
+      45: return
+      46: aload_3
+      47: invokevirtual #85                 // Method net/minecraft/core/particles/ParticleType.m_7652_:()Lcom/mojang/serialization/Codec;
+      50: getstatic     #91                 // Field net/minecraft/nbt/NbtOps.f_128958_:Lnet/minecraft/nbt/NbtOps;
+      53: new           #93                 // class net/minecraft/nbt/CompoundTag
+      56: dup
+      57: invokespecial #94                 // Method net/minecraft/nbt/CompoundTag."<init>":()V
+      60: invokeinterface #100,  3          // InterfaceMethod com/mojang/serialization/Codec.decode:(Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+      65: invokevirtual #106                // Method com/mojang/serialization/DataResult.result:()Ljava/util/Optional;
+      68: invokevirtual #112                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+      71: checkcast     #114                // class com/mojang/datafixers/util/Pair
+      74: invokevirtual #117                // Method com/mojang/datafixers/util/Pair.getFirst:()Ljava/lang/Object;
+      77: checkcast     #119                // class net/minecraft/core/particles/ParticleOptions
+      80: astore        4
+      82: getstatic     #125                // Field net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleRenderer.BONER:Ljava/util/Map;
+      85: aload_2
+      86: invokevirtual #128                // Method software/bernie/geckolib/core/keyframe/event/data/ParticleKeyframeData.getLocator:()Ljava/lang/String;
+      89: invokeinterface #134,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      94: checkcast     #136                // class net/unusual/block_factorys_bosses/geckolib/util/ParticleLocator
+      97: astore        5
+      99: aload_1
+     100: invokevirtual #41                 // Method software/bernie/geckolib/core/keyframe/event/ParticleKeyframeEvent.getAnimatable:()Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;
+     103: checkcast     #10                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+     106: aload         4
+     108: aload         5
+     110: invokestatic  #142                // Method net/unusual/block_factorys_bosses/client/particle/util/SubParticleEmitter.attachNewParticle:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/particles/ParticleOptions;Lnet/unusual/block_factorys_bosses/geckolib/util/ParticleLocator;)Lnet/unusual/block_factorys_bosses/client/particle/util/SubParticleEmitter;
+     113: pop
+     114: return
+}

@@ -1,0 +1,109 @@
+Compiled from "SemiLivingFleshArmorItem.java"
+class net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem$1 implements net.minecraft.world.item.ArmorMaterial {
+  net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem$1();
+    Code:
+       0: aload_0
+       1: invokespecial #25                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public int m_266425_(net.minecraft.world.item.ArmorItem$Type);
+    Code:
+       0: iconst_4
+       1: newarray       int
+       3: dup
+       4: iconst_0
+       5: bipush        13
+       7: iastore
+       8: dup
+       9: iconst_1
+      10: bipush        15
+      12: iastore
+      13: dup
+      14: iconst_2
+      15: bipush        16
+      17: iastore
+      18: dup
+      19: iconst_3
+      20: bipush        11
+      22: iastore
+      23: aload_1
+      24: invokevirtual #33                 // Method net/minecraft/world/item/ArmorItem$Type.m_266308_:()Lnet/minecraft/world/entity/EquipmentSlot;
+      27: invokevirtual #39                 // Method net/minecraft/world/entity/EquipmentSlot.m_20749_:()I
+      30: iaload
+      31: bipush        42
+      33: imul
+      34: ireturn
+
+  public int m_7366_(net.minecraft.world.item.ArmorItem$Type);
+    Code:
+       0: iconst_4
+       1: newarray       int
+       3: dup
+       4: iconst_0
+       5: iconst_1
+       6: iastore
+       7: dup
+       8: iconst_1
+       9: iconst_1
+      10: iastore
+      11: dup
+      12: iconst_2
+      13: iconst_1
+      14: iastore
+      15: dup
+      16: iconst_3
+      17: iconst_1
+      18: iastore
+      19: aload_1
+      20: invokevirtual #33                 // Method net/minecraft/world/item/ArmorItem$Type.m_266308_:()Lnet/minecraft/world/entity/EquipmentSlot;
+      23: invokevirtual #39                 // Method net/minecraft/world/entity/EquipmentSlot.m_20749_:()I
+      26: iaload
+      27: ireturn
+
+  public int m_6646_();
+    Code:
+       0: bipush        25
+       2: ireturn
+
+  public net.minecraft.sounds.SoundEvent m_7344_();
+    Code:
+       0: getstatic     #51                 // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       3: new           #53                 // class net/minecraft/resources/ResourceLocation
+       6: dup
+       7: ldc           #55                 // String block.nether_wart.break
+       9: invokespecial #58                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      12: invokeinterface #64,  2           // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+      17: checkcast     #66                 // class net/minecraft/sounds/SoundEvent
+      20: areturn
+
+  public net.minecraft.world.item.crafting.Ingredient m_6230_();
+    Code:
+       0: iconst_1
+       1: anewarray     #70                 // class net/minecraft/world/item/ItemStack
+       4: dup
+       5: iconst_0
+       6: new           #70                 // class net/minecraft/world/item/ItemStack
+       9: dup
+      10: getstatic     #76                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH:Lnet/minecraftforge/registries/RegistryObject;
+      13: invokevirtual #82                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      16: checkcast     #84                 // class net/minecraft/world/level/ItemLike
+      19: invokespecial #87                 // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      22: aastore
+      23: invokestatic  #93                 // Method net/minecraft/world/item/crafting/Ingredient.m_43927_:([Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/crafting/Ingredient;
+      26: areturn
+
+  public java.lang.String m_6082_();
+    Code:
+       0: ldc           #97                 // String semi_living_flesh_armor
+       2: areturn
+
+  public float m_6651_();
+    Code:
+       0: fconst_0
+       1: freturn
+
+  public float m_6649_();
+    Code:
+       0: fconst_0
+       1: freturn
+}

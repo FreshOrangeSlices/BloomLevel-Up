@@ -1,0 +1,22 @@
+Compiled from "IRoll.java"
+public interface net.saksolm.monsterexpansion.capabilities.IRoll {
+  public abstract boolean isRolling();
+
+  public abstract void setRolling(boolean);
+
+  public abstract int getTimer();
+
+  public abstract void setTimer(int);
+
+  public abstract void decreaseTimer();
+
+  public abstract int getCooldown();
+
+  public abstract void setCooldown(int);
+
+  public abstract void decreaseCooldown();
+
+  public abstract float getRollYaw();
+
+  public abstract void setRollYaw(float);
+}

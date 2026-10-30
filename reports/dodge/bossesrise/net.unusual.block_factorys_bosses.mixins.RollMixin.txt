@@ -1,0 +1,26 @@
+Compiled from "RollMixin.java"
+public class net.unusual.block_factorys_bosses.mixins.RollMixin {
+  public net.unusual.block_factorys_bosses.mixins.RollMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private void freshNeverFrozen(int, org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_0
+       1: checkcast     #26                 // class net/minecraft/world/entity/Entity
+       4: astore        4
+       6: aload         4
+       8: instanceof    #28                 // class net/minecraft/world/entity/player/Player
+      11: ifeq          31
+      14: aload         4
+      16: checkcast     #28                 // class net/minecraft/world/entity/player/Player
+      19: astore_3
+      20: aload_3
+      21: invokestatic  #34                 // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.isPlayerInvulnerable:(Lnet/minecraft/world/entity/player/Player;)Z
+      24: ifeq          31
+      27: aload_2
+      28: invokevirtual #39                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfo.cancel:()V
+      31: return
+}

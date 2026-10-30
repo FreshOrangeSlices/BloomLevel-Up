@@ -1,0 +1,113 @@
+Compiled from "SemiLivingBootsDashKeybindMessage.java"
+public class net.mcreator.skarriermobs.network.SemiLivingBootsDashKeybindMessage {
+  int type;
+
+  int pressedms;
+
+  public net.mcreator.skarriermobs.network.SemiLivingBootsDashKeybindMessage(int, int);
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #37                 // Field type:I
+       9: aload_0
+      10: iload_2
+      11: putfield      #39                 // Field pressedms:I
+      14: return
+
+  public net.mcreator.skarriermobs.network.SemiLivingBootsDashKeybindMessage(net.minecraft.network.FriendlyByteBuf);
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #48                 // Method net/minecraft/network/FriendlyByteBuf.readInt:()I
+       9: putfield      #37                 // Field type:I
+      12: aload_0
+      13: aload_1
+      14: invokevirtual #48                 // Method net/minecraft/network/FriendlyByteBuf.readInt:()I
+      17: putfield      #39                 // Field pressedms:I
+      20: return
+
+  public static void buffer(net.mcreator.skarriermobs.network.SemiLivingBootsDashKeybindMessage, net.minecraft.network.FriendlyByteBuf);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #37                 // Field type:I
+       5: invokevirtual #55                 // Method net/minecraft/network/FriendlyByteBuf.writeInt:(I)Lio/netty/buffer/ByteBuf;
+       8: pop
+       9: aload_1
+      10: aload_0
+      11: getfield      #39                 // Field pressedms:I
+      14: invokevirtual #55                 // Method net/minecraft/network/FriendlyByteBuf.writeInt:(I)Lio/netty/buffer/ByteBuf;
+      17: pop
+      18: return
+
+  public static void handler(net.mcreator.skarriermobs.network.SemiLivingBootsDashKeybindMessage, java.util.function.Supplier<net.minecraftforge.network.NetworkEvent$Context>);
+    Code:
+       0: aload_1
+       1: invokeinterface #65,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       6: checkcast     #11                 // class net/minecraftforge/network/NetworkEvent$Context
+       9: astore_2
+      10: aload_2
+      11: aload_2
+      12: aload_0
+      13: invokedynamic #82,  0             // InvokeDynamic #0:run:(Lnet/minecraftforge/network/NetworkEvent$Context;Lnet/mcreator/skarriermobs/network/SemiLivingBootsDashKeybindMessage;)Ljava/lang/Runnable;
+      18: invokevirtual #86                 // Method net/minecraftforge/network/NetworkEvent$Context.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+      21: pop
+      22: aload_2
+      23: iconst_1
+      24: invokevirtual #90                 // Method net/minecraftforge/network/NetworkEvent$Context.setPacketHandled:(Z)V
+      27: return
+
+  public static void pressAction(net.minecraft.world.entity.player.Player, int, int);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_9236_:()Lnet/minecraft/world/level/Level;
+       4: astore_3
+       5: aload_0
+       6: invokevirtual #107                // Method net/minecraft/world/entity/player/Player.m_20185_:()D
+       9: dstore        4
+      11: aload_0
+      12: invokevirtual #110                // Method net/minecraft/world/entity/player/Player.m_20186_:()D
+      15: dstore        6
+      17: aload_0
+      18: invokevirtual #113                // Method net/minecraft/world/entity/player/Player.m_20189_:()D
+      21: dstore        8
+      23: aload_3
+      24: aload_0
+      25: invokevirtual #117                // Method net/minecraft/world/entity/player/Player.m_20183_:()Lnet/minecraft/core/BlockPos;
+      28: invokevirtual #123                // Method net/minecraft/world/level/Level.m_46805_:(Lnet/minecraft/core/BlockPos;)Z
+      31: ifne          35
+      34: return
+      35: iload_1
+      36: ifne          50
+      39: aload_3
+      40: dload         4
+      42: dload         6
+      44: dload         8
+      46: aload_0
+      47: invokestatic  #129                // Method net/mcreator/skarriermobs/procedures/SemiLivingBootsDashKeybindOnKeyPressedProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+      50: return
+
+  public static void registerMessage(net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent);
+    Code:
+       0: ldc           #2                  // class net/mcreator/skarriermobs/network/SemiLivingBootsDashKeybindMessage
+       2: invokedynamic #150,  0            // InvokeDynamic #1:accept:()Ljava/util/function/BiConsumer;
+       7: invokedynamic #161,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+      12: invokedynamic #166,  0            // InvokeDynamic #3:accept:()Ljava/util/function/BiConsumer;
+      17: invokestatic  #172                // Method net/mcreator/skarriermobs/SkarrierMobsMod.addNetworkMessage:(Ljava/lang/Class;Ljava/util/function/BiConsumer;Ljava/util/function/Function;Ljava/util/function/BiConsumer;)V
+      20: return
+
+  private static void lambda$handler$0(net.minecraftforge.network.NetworkEvent$Context, net.mcreator.skarriermobs.network.SemiLivingBootsDashKeybindMessage);
+    Code:
+       0: aload_0
+       1: invokevirtual #178                // Method net/minecraftforge/network/NetworkEvent$Context.getSender:()Lnet/minecraft/server/level/ServerPlayer;
+       4: aload_1
+       5: getfield      #37                 // Field type:I
+       8: aload_1
+       9: getfield      #39                 // Field pressedms:I
+      12: invokestatic  #180                // Method pressAction:(Lnet/minecraft/world/entity/player/Player;II)V
+      15: return
+}

@@ -1,0 +1,24 @@
+Compiled from "RollEventsClient.java"
+public class net.saksolm.monsterexpansion.event.RollEventsClient$ClientModBusEvents {
+  public net.saksolm.monsterexpansion.event.RollEventsClient$ClientModBusEvents();
+    Code:
+       0: aload_0
+       1: invokespecial #29                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void registerKeys(net.minecraftforge.client.event.RegisterKeyMappingsEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #40                 // Field net/saksolm/monsterexpansion/input/KeyInit.ROLL_KEY:Lnet/minecraft/client/KeyMapping;
+       4: invokevirtual #46                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+       7: aload_0
+       8: getstatic     #49                 // Field net/saksolm/monsterexpansion/input/KeyInit.WEAPON_ACTION_KEY:Lnet/minecraft/client/KeyMapping;
+      11: invokevirtual #46                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      14: aload_0
+      15: getstatic     #52                 // Field net/saksolm/monsterexpansion/input/KeyInit.ARBORIX_CALL_KEY:Lnet/minecraft/client/KeyMapping;
+      18: invokevirtual #46                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      21: aload_0
+      22: getstatic     #55                 // Field net/saksolm/monsterexpansion/input/KeyInit.ARBORIX_JUMP_KEY:Lnet/minecraft/client/KeyMapping;
+      25: invokevirtual #46                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      28: return
+}

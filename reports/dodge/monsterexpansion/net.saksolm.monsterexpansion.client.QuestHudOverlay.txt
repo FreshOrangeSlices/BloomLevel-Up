@@ -1,0 +1,871 @@
+Compiled from "QuestHudOverlay.java"
+public class net.saksolm.monsterexpansion.client.QuestHudOverlay implements net.minecraftforge.client.gui.overlay.IGuiOverlay {
+  public static final net.saksolm.monsterexpansion.client.QuestHudOverlay INSTANCE;
+
+  private static final net.minecraft.resources.ResourceLocation BANNER;
+
+  private static final net.minecraft.resources.ResourceLocation CHECKBOX;
+
+  private static final net.minecraft.resources.ResourceLocation CHECK;
+
+  private static final net.minecraft.resources.ResourceLocation HEALTHBAR;
+
+  private static final net.minecraft.resources.ResourceLocation QUEST_STARTED;
+
+  private static final net.minecraft.resources.ResourceLocation QUEST_FAILED;
+
+  private static final net.minecraft.resources.ResourceLocation QUEST_ABANDONED;
+
+  private static final net.minecraft.resources.ResourceLocation QUEST_COMPLETED;
+
+  private static final int STARTED_W = 182;
+
+  private static final int STARTED_H = 87;
+
+  private static final int FAILED_W = 142;
+
+  private static final int FAILED_H = 87;
+
+  private static final int ABANDONED_W = 263;
+
+  private static final int ABANDONED_H = 87;
+
+  private static final int COMPLETED_W = 220;
+
+  private static final int COMPLETED_H = 95;
+
+  private static final int RIPPLE_EDGE_TICKS = 15;
+
+  private static final net.minecraft.resources.ResourceLocation GUIDEBOOK_FONT;
+
+  private static final int TOP_COLOR = 4917760;
+
+  private static final int BOT_COLOR = 6819331;
+
+  private static final int HI_COLOR = 9903116;
+
+  private static final int SH_COLOR = 14564400;
+
+  private static final int BANNER_W = 130;
+
+  private static final int BANNER_H = 31;
+
+  private static final int CB_SIZE = 8;
+
+  private static final int BAR_W = 50;
+
+  private static final int BAR_H = 8;
+
+  private static final int LEFT_X = 10;
+
+  private static final int BANNER_Y = 10;
+
+  private static final int TARGET_GAP = 2;
+
+  private static final int TARGET_ROW_H = 10;
+
+  private static final int CB_TEXT_GAP = 3;
+
+  private static final int PARTY_GAP = 6;
+
+  private static final int FAINT_ROW_GAP = 6;
+
+  private static final int NAME_BAR_GAP = 1;
+
+  private static final int PARTY_ROW_GAP = 4;
+
+  private static final int NAME_MAX_PX = 80;
+
+  private static final boolean DEBUG_SHOW_OWN_HEALTH = false;
+
+  public net.saksolm.monsterexpansion.client.QuestHudOverlay();
+    Code:
+       0: aload_0
+       1: invokespecial #97                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void render(net.minecraftforge.client.gui.overlay.ForgeGui, net.minecraft.client.gui.GuiGraphics, float, int, int);
+    Code:
+       0: invokestatic  #106                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: astore        6
+       5: aload         6
+       7: getfield      #110                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      10: getfield      #115                // Field net/minecraft/client/Options.f_92062_:Z
+      13: ifne          24
+      16: aload         6
+      18: getfield      #119                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      21: ifnonnull     25
+      24: return
+      25: invokestatic  #125                // Method net/saksolm/monsterexpansion/client/ClientQuestState.hasActiveQuest:()Z
+      28: ifeq          1104
+      31: aload         6
+      33: getfield      #129                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+      36: astore        7
+      38: bipush        10
+      40: istore        8
+      42: getstatic     #133                // Field net/saksolm/monsterexpansion/config/ModConfig.CLIENT:Lnet/saksolm/monsterexpansion/config/ModConfig$Client;
+      45: getfield      #137                // Field net/saksolm/monsterexpansion/config/ModConfig$Client.QUEST_HUD_ON_RIGHT:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      48: invokevirtual #141                // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+      51: checkcast     #143                // class java/lang/Boolean
+      54: invokevirtual #146                // Method java/lang/Boolean.booleanValue:()Z
+      57: istore        9
+      59: bipush        10
+      61: sipush        130
+      64: iload         4
+      66: iload         9
+      68: invokestatic  #150                // Method mirrorX:(IIIZ)I
+      71: istore        10
+      73: aload_2
+      74: getstatic     #152                // Field BANNER:Lnet/minecraft/resources/ResourceLocation;
+      77: iload         10
+      79: iload         8
+      81: fconst_0
+      82: fconst_0
+      83: sipush        130
+      86: bipush        31
+      88: sipush        130
+      91: bipush        31
+      93: invokevirtual #158                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+      96: ldc           #160                // String Complete the quest
+      98: invokestatic  #166                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     101: invokedynamic #185,  0            // InvokeDynamic #0:apply:()Ljava/util/function/UnaryOperator;
+     106: invokevirtual #191                // Method net/minecraft/network/chat/MutableComponent.m_130938_:(Ljava/util/function/UnaryOperator;)Lnet/minecraft/network/chat/MutableComponent;
+     109: astore        11
+     111: aload         7
+     113: aload         11
+     115: invokevirtual #197                // Method net/minecraft/client/gui/Font.m_92852_:(Lnet/minecraft/network/chat/FormattedText;)I
+     118: istore        12
+     120: aload_2
+     121: aload         7
+     123: aload         11
+     125: iload         10
+     127: sipush        130
+     130: iload         12
+     132: isub
+     133: iconst_2
+     134: idiv
+     135: iadd
+     136: iload         8
+     138: bipush        31
+     140: aload         7
+     142: invokestatic  #202                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     145: pop
+     146: bipush        9
+     148: isub
+     149: iconst_2
+     150: idiv
+     151: iadd
+     152: iconst_3
+     153: iadd
+     154: ldc           #58                 // int 4917760
+     156: ldc           #60                 // int 6819331
+     158: ldc           #62                 // int 9903116
+     160: ldc           #64                 // int 14564400
+     162: invokestatic  #208                // Method net/saksolm/monsterexpansion/screen/util/TextEffects.drawBevelText:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIIII)V
+     165: iinc          8, 33
+     168: invokestatic  #212                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getTargetStatuses:()Ljava/util/List;
+     171: astore        13
+     173: aload         13
+     175: invokeinterface #217,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     180: ifne          374
+     183: bipush        27
+     185: istore        14
+     187: iload         14
+     189: bipush        8
+     191: iload         4
+     193: iload         9
+     195: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     198: istore        15
+     200: aload         13
+     202: invokeinterface #221,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     207: astore        16
+     209: aload         16
+     211: invokeinterface #228,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     216: ifeq          374
+     219: aload         16
+     221: invokeinterface #231,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     226: checkcast     #19                 // class net/saksolm/monsterexpansion/network/QuestSyncPacket$TargetStatus
+     229: astore        17
+     231: iload         8
+     233: iconst_1
+     234: iadd
+     235: istore        18
+     237: aload_2
+     238: getstatic     #233                // Field CHECKBOX:Lnet/minecraft/resources/ResourceLocation;
+     241: iload         15
+     243: iload         18
+     245: fconst_0
+     246: fconst_0
+     247: bipush        8
+     249: bipush        8
+     251: bipush        8
+     253: bipush        8
+     255: invokevirtual #158                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+     258: aload         17
+     260: invokevirtual #236                // Method net/saksolm/monsterexpansion/network/QuestSyncPacket$TargetStatus.slain:()Z
+     263: ifeq          287
+     266: aload_2
+     267: getstatic     #238                // Field CHECK:Lnet/minecraft/resources/ResourceLocation;
+     270: iload         15
+     272: iload         18
+     274: fconst_0
+     275: fconst_0
+     276: bipush        8
+     278: bipush        8
+     280: bipush        8
+     282: bipush        8
+     284: invokevirtual #158                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+     287: aload         17
+     289: invokevirtual #242                // Method net/saksolm/monsterexpansion/network/QuestSyncPacket$TargetStatus.name:()Ljava/lang/String;
+     292: invokedynamic #254,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     297: invokestatic  #166                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     300: invokedynamic #259,  0            // InvokeDynamic #2:apply:()Ljava/util/function/UnaryOperator;
+     305: invokevirtual #191                // Method net/minecraft/network/chat/MutableComponent.m_130938_:(Ljava/util/function/UnaryOperator;)Lnet/minecraft/network/chat/MutableComponent;
+     308: astore        19
+     310: aload         7
+     312: aload         19
+     314: invokevirtual #197                // Method net/minecraft/client/gui/Font.m_92852_:(Lnet/minecraft/network/chat/FormattedText;)I
+     317: istore        20
+     319: iload         14
+     321: bipush        8
+     323: iadd
+     324: iconst_3
+     325: iadd
+     326: iload         20
+     328: iload         4
+     330: iload         9
+     332: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     335: istore        21
+     337: aload_2
+     338: aload         7
+     340: aload         19
+     342: iload         21
+     344: iload         8
+     346: bipush        10
+     348: aload         7
+     350: invokestatic  #202                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     353: pop
+     354: bipush        9
+     356: isub
+     357: iconst_2
+     358: idiv
+     359: iadd
+     360: iconst_1
+     361: iadd
+     362: iconst_m1
+     363: iconst_0
+     364: invokevirtual #263                // Method net/minecraft/client/gui/GuiGraphics.m_280614_:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I
+     367: pop
+     368: iinc          8, 10
+     371: goto          209
+     374: iinc          8, 6
+     377: invokestatic  #267                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getRemainingFaints:()I
+     380: istore        14
+     382: invokestatic  #270                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getTotalFaints:()I
+     385: istore        15
+     387: iload         14
+     389: iload         15
+     391: invokedynamic #275,  0            // InvokeDynamic #3:makeConcatWithConstants:(II)Ljava/lang/String;
+     396: invokestatic  #166                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     399: invokedynamic #280,  0            // InvokeDynamic #4:apply:()Ljava/util/function/UnaryOperator;
+     404: invokevirtual #191                // Method net/minecraft/network/chat/MutableComponent.m_130938_:(Ljava/util/function/UnaryOperator;)Lnet/minecraft/network/chat/MutableComponent;
+     407: astore        16
+     409: iload         14
+     411: iconst_1
+     412: if_icmpgt     421
+     415: ldc_w         #281                // int -43691
+     418: goto          422
+     421: iconst_m1
+     422: istore        17
+     424: bipush        10
+     426: aload         7
+     428: aload         16
+     430: invokevirtual #197                // Method net/minecraft/client/gui/Font.m_92852_:(Lnet/minecraft/network/chat/FormattedText;)I
+     433: iload         4
+     435: iload         9
+     437: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     440: istore        18
+     442: aload_2
+     443: aload         7
+     445: aload         16
+     447: iload         18
+     449: iload         8
+     451: iload         17
+     453: iconst_0
+     454: invokevirtual #263                // Method net/minecraft/client/gui/GuiGraphics.m_280614_:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I
+     457: pop
+     458: iload         8
+     460: aload         7
+     462: invokestatic  #202                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     465: pop
+     466: bipush        9
+     468: bipush        6
+     470: iadd
+     471: iadd
+     472: istore        8
+     474: iinc          8, 6
+     477: new           #283                // class java/util/ArrayList
+     480: dup
+     481: invokestatic  #286                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getPartyMembers:()Ljava/util/List;
+     484: invokespecial #289                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     487: astore        19
+     489: aload         19
+     491: invokeinterface #221,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     496: astore        20
+     498: aload         20
+     500: invokeinterface #228,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     505: ifeq          911
+     508: aload         20
+     510: invokeinterface #231,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     515: checkcast     #291                // class net/saksolm/monsterexpansion/network/PartyMemberInfo
+     518: astore        21
+     520: aload         21
+     522: invokevirtual #292                // Method net/saksolm/monsterexpansion/network/PartyMemberInfo.name:()Ljava/lang/String;
+     525: astore        22
+     527: aload         7
+     529: aload         22
+     531: invokevirtual #296                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     534: bipush        80
+     536: if_icmple     564
+     539: aload         7
+     541: aload         22
+     543: bipush        80
+     545: aload         7
+     547: ldc_w         #298                // String ...
+     550: invokevirtual #296                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     553: isub
+     554: invokevirtual #302                // Method net/minecraft/client/gui/Font.m_92834_:(Ljava/lang/String;I)Ljava/lang/String;
+     557: invokedynamic #305,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     562: astore        22
+     564: aload         21
+     566: invokevirtual #310                // Method net/saksolm/monsterexpansion/network/PartyMemberInfo.fainted:()Z
+     569: ifeq          578
+     572: ldc_w         #311                // int -7829368
+     575: goto          579
+     578: iconst_m1
+     579: istore        23
+     581: aload         22
+     583: invokestatic  #166                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     586: invokedynamic #316,  0            // InvokeDynamic #6:apply:()Ljava/util/function/UnaryOperator;
+     591: invokevirtual #191                // Method net/minecraft/network/chat/MutableComponent.m_130938_:(Ljava/util/function/UnaryOperator;)Lnet/minecraft/network/chat/MutableComponent;
+     594: astore        24
+     596: bipush        10
+     598: aload         7
+     600: aload         24
+     602: invokevirtual #197                // Method net/minecraft/client/gui/Font.m_92852_:(Lnet/minecraft/network/chat/FormattedText;)I
+     605: iload         4
+     607: iload         9
+     609: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     612: istore        25
+     614: aload_2
+     615: aload         7
+     617: aload         24
+     619: iload         25
+     621: iload         8
+     623: iconst_1
+     624: iadd
+     625: iload         23
+     627: iconst_0
+     628: invokevirtual #263                // Method net/minecraft/client/gui/GuiGraphics.m_280614_:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I
+     631: pop
+     632: iload         8
+     634: aload         7
+     636: invokestatic  #202                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     639: pop
+     640: bipush        9
+     642: iconst_1
+     643: iadd
+     644: iadd
+     645: istore        8
+     647: aload         21
+     649: invokevirtual #310                // Method net/saksolm/monsterexpansion/network/PartyMemberInfo.fainted:()Z
+     652: ifeq          731
+     655: ldc_w         #318                // String (fainted)
+     658: invokestatic  #166                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     661: invokedynamic #323,  0            // InvokeDynamic #7:apply:()Ljava/util/function/UnaryOperator;
+     666: invokevirtual #191                // Method net/minecraft/network/chat/MutableComponent.m_130938_:(Ljava/util/function/UnaryOperator;)Lnet/minecraft/network/chat/MutableComponent;
+     669: astore        26
+     671: bipush        10
+     673: aload         7
+     675: aload         26
+     677: invokevirtual #197                // Method net/minecraft/client/gui/Font.m_92852_:(Lnet/minecraft/network/chat/FormattedText;)I
+     680: iload         4
+     682: iload         9
+     684: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     687: istore        27
+     689: aload_2
+     690: aload         7
+     692: aload         26
+     694: iload         27
+     696: iload         8
+     698: iconst_2
+     699: isub
+     700: ldc_w         #324                // int 6710886
+     703: ldc_w         #325                // int 4473924
+     706: ldc_w         #326                // int 8947848
+     709: ldc_w         #327                // int 11184810
+     712: invokestatic  #208                // Method net/saksolm/monsterexpansion/screen/util/TextEffects.drawBevelText:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIIII)V
+     715: iload         8
+     717: aload         7
+     719: invokestatic  #202                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     722: pop
+     723: bipush        9
+     725: iadd
+     726: istore        8
+     728: goto          905
+     731: bipush        10
+     733: bipush        50
+     735: iload         4
+     737: iload         9
+     739: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     742: istore        26
+     744: aload         21
+     746: invokevirtual #331                // Method net/saksolm/monsterexpansion/network/PartyMemberInfo.maxHealth:()F
+     749: fconst_0
+     750: fcmpl
+     751: ifle          872
+     754: fconst_0
+     755: fconst_1
+     756: aload         21
+     758: invokevirtual #334                // Method net/saksolm/monsterexpansion/network/PartyMemberInfo.health:()F
+     761: aload         21
+     763: invokevirtual #331                // Method net/saksolm/monsterexpansion/network/PartyMemberInfo.maxHealth:()F
+     766: fdiv
+     767: invokestatic  #340                // Method java/lang/Math.min:(FF)F
+     770: invokestatic  #343                // Method java/lang/Math.max:(FF)F
+     773: fstore        27
+     775: ldc_w         #344                // float 48.0f
+     778: fload         27
+     780: fmul
+     781: f2i
+     782: istore        28
+     784: fload         27
+     786: ldc_w         #345                // float 0.5f
+     789: fcmpl
+     790: ifle          799
+     793: ldc_w         #346                // int -11141291
+     796: goto          817
+     799: fload         27
+     801: ldc_w         #347                // float 0.25f
+     804: fcmpl
+     805: ifle          814
+     808: sipush        -171
+     811: goto          817
+     814: ldc_w         #281                // int -43691
+     817: istore        29
+     819: iload         28
+     821: ifle          872
+     824: iload         9
+     826: ifeq          842
+     829: iload         26
+     831: bipush        50
+     833: iadd
+     834: iconst_1
+     835: isub
+     836: iload         28
+     838: isub
+     839: goto          846
+     842: iload         26
+     844: iconst_1
+     845: iadd
+     846: istore        30
+     848: aload_2
+     849: iload         30
+     851: iload         8
+     853: iconst_1
+     854: iadd
+     855: iload         30
+     857: iload         28
+     859: iadd
+     860: iload         8
+     862: bipush        8
+     864: iadd
+     865: iconst_2
+     866: isub
+     867: iload         29
+     869: invokevirtual #351                // Method net/minecraft/client/gui/GuiGraphics.m_280509_:(IIIII)V
+     872: invokestatic  #356                // Method com/mojang/blaze3d/systems/RenderSystem.enableBlend:()V
+     875: invokestatic  #359                // Method com/mojang/blaze3d/systems/RenderSystem.defaultBlendFunc:()V
+     878: aload_2
+     879: getstatic     #361                // Field HEALTHBAR:Lnet/minecraft/resources/ResourceLocation;
+     882: iload         26
+     884: iload         8
+     886: fconst_0
+     887: fconst_0
+     888: bipush        50
+     890: bipush        8
+     892: bipush        50
+     894: bipush        8
+     896: invokevirtual #158                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+     899: invokestatic  #364                // Method com/mojang/blaze3d/systems/RenderSystem.disableBlend:()V
+     902: iinc          8, 8
+     905: iinc          8, 4
+     908: goto          498
+     911: invokestatic  #367                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getQuestTimerTicks:()I
+     914: bipush        20
+     916: idiv
+     917: istore        20
+     919: ldc_w         #369                // String %02d:%02d
+     922: iconst_2
+     923: anewarray     #4                  // class java/lang/Object
+     926: dup
+     927: iconst_0
+     928: iload         20
+     930: bipush        60
+     932: idiv
+     933: invokestatic  #375                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     936: aastore
+     937: dup
+     938: iconst_1
+     939: iload         20
+     941: bipush        60
+     943: irem
+     944: invokestatic  #375                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     947: aastore
+     948: invokestatic  #379                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+     951: astore        21
+     953: invokestatic  #367                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getQuestTimerTicks:()I
+     956: sipush        1200
+     959: if_icmpge     968
+     962: ldc_w         #281                // int -43691
+     965: goto          969
+     968: iconst_m1
+     969: istore        22
+     971: bipush        10
+     973: aload         6
+     975: getfield      #129                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     978: aload         21
+     980: invokevirtual #296                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     983: iload         4
+     985: iload         9
+     987: ifne          994
+     990: iconst_1
+     991: goto          995
+     994: iconst_0
+     995: invokestatic  #150                // Method mirrorX:(IIIZ)I
+     998: istore        23
+    1000: aload_2
+    1001: aload         6
+    1003: getfield      #129                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+    1006: aload         21
+    1008: iload         23
+    1010: bipush        10
+    1012: iload         22
+    1014: invokevirtual #383                // Method net/minecraft/client/gui/GuiGraphics.m_280488_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)I
+    1017: pop
+    1018: invokestatic  #386                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getTetherWarningTicks:()I
+    1021: istore        24
+    1023: iload         24
+    1025: ifle          1104
+    1028: iload         24
+    1030: sipush        200
+    1033: if_icmpgt     1104
+    1036: iload         24
+    1038: bipush        19
+    1040: iadd
+    1041: bipush        20
+    1043: idiv
+    1044: istore        25
+    1046: iload         4
+    1048: iconst_2
+    1049: idiv
+    1050: istore        26
+    1052: iload         5
+    1054: iconst_2
+    1055: idiv
+    1056: bipush        30
+    1058: isub
+    1059: istore        27
+    1061: aload_2
+    1062: aload         6
+    1064: getfield      #129                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+    1067: ldc_w         #388                // String Warning: Return to the hunt!
+    1070: iload         26
+    1072: iload         27
+    1074: sipush        -22016
+    1077: invokevirtual #392                // Method net/minecraft/client/gui/GuiGraphics.m_280137_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V
+    1080: aload_2
+    1081: aload         6
+    1083: getfield      #129                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+    1086: iload         25
+    1088: invokedynamic #397,  0            // InvokeDynamic #8:makeConcatWithConstants:(I)Ljava/lang/String;
+    1093: iload         26
+    1095: iload         27
+    1097: bipush        12
+    1099: iadd
+    1100: iconst_m1
+    1101: invokevirtual #392                // Method net/minecraft/client/gui/GuiGraphics.m_280137_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V
+    1104: invokestatic  #400                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getStartDisplayTicks:()I
+    1107: istore        7
+    1109: iload         7
+    1111: ifle          1132
+    1114: aload_2
+    1115: getstatic     #402                // Field QUEST_STARTED:Lnet/minecraft/resources/ResourceLocation;
+    1118: iload         4
+    1120: iload         5
+    1122: sipush        182
+    1125: bipush        87
+    1127: iload         7
+    1129: invokestatic  #406                // Method blitRippleBanner:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;IIIII)V
+    1132: invokestatic  #410                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getResultStatus:()Lnet/saksolm/monsterexpansion/quest/QuestStatus;
+    1135: astore        8
+    1137: invokestatic  #413                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getResultDisplayTicks:()I
+    1140: istore        9
+    1142: aload         8
+    1144: ifnull        1199
+    1147: iload         9
+    1149: ifle          1199
+    1152: aload         8
+    1154: getstatic     #419                // Field net/saksolm/monsterexpansion/quest/QuestStatus.FAILED:Lnet/saksolm/monsterexpansion/quest/QuestStatus;
+    1157: if_acmpne     1181
+    1160: aload_2
+    1161: getstatic     #421                // Field QUEST_FAILED:Lnet/minecraft/resources/ResourceLocation;
+    1164: iload         4
+    1166: iload         5
+    1168: sipush        142
+    1171: bipush        87
+    1173: iload         9
+    1175: invokestatic  #406                // Method blitRippleBanner:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;IIIII)V
+    1178: goto          1199
+    1181: aload_2
+    1182: getstatic     #423                // Field QUEST_ABANDONED:Lnet/minecraft/resources/ResourceLocation;
+    1185: iload         4
+    1187: iload         5
+    1189: sipush        263
+    1192: bipush        87
+    1194: iload         9
+    1196: invokestatic  #406                // Method blitRippleBanner:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;IIIII)V
+    1199: invokestatic  #426                // Method net/saksolm/monsterexpansion/client/ClientQuestState.getCompletedDisplayTicks:()I
+    1202: istore        10
+    1204: iload         10
+    1206: ifle          1219
+    1209: aload_2
+    1210: iload         4
+    1212: iload         5
+    1214: iload         10
+    1216: invokestatic  #430                // Method blitCompletedBanner:(Lnet/minecraft/client/gui/GuiGraphics;III)V
+    1219: return
+
+  private static void blitRippleBanner(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int, int, int);
+    Code:
+       0: bipush        40
+       2: iload         6
+       4: isub
+       5: istore        7
+       7: iload         7
+       9: i2f
+      10: ldc_w         #491                // float 15.0f
+      13: fdiv
+      14: invokestatic  #495                // Method clamp01:(F)F
+      17: fstore        8
+      19: iload         6
+      21: i2f
+      22: ldc_w         #491                // float 15.0f
+      25: fdiv
+      26: invokestatic  #495                // Method clamp01:(F)F
+      29: fstore        9
+      31: fload         8
+      33: fload         9
+      35: invokestatic  #340                // Method java/lang/Math.min:(FF)F
+      38: fstore        10
+      40: iload_2
+      41: iload         4
+      43: isub
+      44: iconst_2
+      45: idiv
+      46: istore        11
+      48: iload_3
+      49: iload         5
+      51: isub
+      52: iconst_2
+      53: idiv
+      54: istore        12
+      56: fload         10
+      58: iload         4
+      60: i2f
+      61: iload         5
+      63: i2f
+      64: fdiv
+      65: invokestatic  #501                // Method net/saksolm/monsterexpansion/client/QuestRippleShader.setRippleUniforms:(FF)V
+      68: aload_1
+      69: iload         11
+      71: i2f
+      72: iload         12
+      74: i2f
+      75: iload         4
+      77: i2f
+      78: iload         5
+      80: i2f
+      81: aload_0
+      82: invokevirtual #505                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      85: invokestatic  #509                // Method net/saksolm/monsterexpansion/client/QuestRippleShader.blit:(Lnet/minecraft/resources/ResourceLocation;FFFFLcom/mojang/blaze3d/vertex/PoseStack;)V
+      88: return
+
+  private static float clamp01(float);
+    Code:
+       0: fconst_0
+       1: fconst_1
+       2: fload_0
+       3: invokestatic  #340                // Method java/lang/Math.min:(FF)F
+       6: invokestatic  #343                // Method java/lang/Math.max:(FF)F
+       9: freturn
+
+  private static void blitCompletedBanner(net.minecraft.client.gui.GuiGraphics, int, int, int);
+    Code:
+       0: bipush        60
+       2: iload_3
+       3: isub
+       4: istore        4
+       6: iload         4
+       8: i2f
+       9: ldc_w         #491                // float 15.0f
+      12: fdiv
+      13: invokestatic  #495                // Method clamp01:(F)F
+      16: fstore        5
+      18: iload_3
+      19: i2f
+      20: ldc_w         #491                // float 15.0f
+      23: fdiv
+      24: invokestatic  #495                // Method clamp01:(F)F
+      27: fstore        6
+      29: fload         5
+      31: fload         6
+      33: invokestatic  #340                // Method java/lang/Math.min:(FF)F
+      36: fstore        7
+      38: iload_1
+      39: sipush        220
+      42: isub
+      43: iconst_2
+      44: idiv
+      45: istore        8
+      47: iload_2
+      48: bipush        95
+      50: isub
+      51: iconst_2
+      52: idiv
+      53: istore        9
+      55: fload         7
+      57: ldc_w         #520                // float 2.3157895f
+      60: invokestatic  #525                // Method net/saksolm/monsterexpansion/client/QuestCompletedShader.setCompletedUniforms:(FF)V
+      63: getstatic     #527                // Field QUEST_COMPLETED:Lnet/minecraft/resources/ResourceLocation;
+      66: iload         8
+      68: i2f
+      69: iload         9
+      71: i2f
+      72: ldc_w         #528                // float 220.0f
+      75: ldc_w         #529                // float 95.0f
+      78: aload_0
+      79: invokevirtual #505                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      82: invokestatic  #530                // Method net/saksolm/monsterexpansion/client/QuestCompletedShader.blit:(Lnet/minecraft/resources/ResourceLocation;FFFFLcom/mojang/blaze3d/vertex/PoseStack;)V
+      85: return
+
+  private static int mirrorX(int, int, int, boolean);
+    Code:
+       0: iload_3
+       1: ifeq          12
+       4: iload_2
+       5: iload_0
+       6: isub
+       7: iload_1
+       8: isub
+       9: goto          13
+      12: iload_0
+      13: ireturn
+
+  private static net.minecraft.network.chat.Style lambda$render$4(net.minecraft.network.chat.Style);
+    Code:
+       0: aload_0
+       1: getstatic     #532                // Field GUIDEBOOK_FONT:Lnet/minecraft/resources/ResourceLocation;
+       4: invokevirtual #538                // Method net/minecraft/network/chat/Style.m_131150_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/chat/Style;
+       7: areturn
+
+  private static net.minecraft.network.chat.Style lambda$render$3(net.minecraft.network.chat.Style);
+    Code:
+       0: aload_0
+       1: getstatic     #532                // Field GUIDEBOOK_FONT:Lnet/minecraft/resources/ResourceLocation;
+       4: invokevirtual #538                // Method net/minecraft/network/chat/Style.m_131150_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/chat/Style;
+       7: areturn
+
+  private static net.minecraft.network.chat.Style lambda$render$2(net.minecraft.network.chat.Style);
+    Code:
+       0: aload_0
+       1: getstatic     #532                // Field GUIDEBOOK_FONT:Lnet/minecraft/resources/ResourceLocation;
+       4: invokevirtual #538                // Method net/minecraft/network/chat/Style.m_131150_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/chat/Style;
+       7: areturn
+
+  private static net.minecraft.network.chat.Style lambda$render$1(net.minecraft.network.chat.Style);
+    Code:
+       0: aload_0
+       1: getstatic     #532                // Field GUIDEBOOK_FONT:Lnet/minecraft/resources/ResourceLocation;
+       4: invokevirtual #538                // Method net/minecraft/network/chat/Style.m_131150_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/chat/Style;
+       7: areturn
+
+  private static net.minecraft.network.chat.Style lambda$render$0(net.minecraft.network.chat.Style);
+    Code:
+       0: aload_0
+       1: getstatic     #532                // Field GUIDEBOOK_FONT:Lnet/minecraft/resources/ResourceLocation;
+       4: invokevirtual #538                // Method net/minecraft/network/chat/Style.m_131150_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/chat/Style;
+       7: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/saksolm/monsterexpansion/client/QuestHudOverlay
+       3: dup
+       4: invokespecial #542                // Method "<init>":()V
+       7: putstatic     #544                // Field INSTANCE:Lnet/saksolm/monsterexpansion/client/QuestHudOverlay;
+      10: new           #546                // class net/minecraft/resources/ResourceLocation
+      13: dup
+      14: ldc_w         #548                // String monsterexpansion
+      17: ldc_w         #550                // String textures/gui/quest_banner.png
+      20: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      23: putstatic     #152                // Field BANNER:Lnet/minecraft/resources/ResourceLocation;
+      26: new           #546                // class net/minecraft/resources/ResourceLocation
+      29: dup
+      30: ldc_w         #548                // String monsterexpansion
+      33: ldc_w         #555                // String textures/gui/quest_checkbox.png
+      36: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      39: putstatic     #233                // Field CHECKBOX:Lnet/minecraft/resources/ResourceLocation;
+      42: new           #546                // class net/minecraft/resources/ResourceLocation
+      45: dup
+      46: ldc_w         #548                // String monsterexpansion
+      49: ldc_w         #557                // String textures/gui/quest_checkbox_tick.png
+      52: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      55: putstatic     #238                // Field CHECK:Lnet/minecraft/resources/ResourceLocation;
+      58: new           #546                // class net/minecraft/resources/ResourceLocation
+      61: dup
+      62: ldc_w         #548                // String monsterexpansion
+      65: ldc_w         #559                // String textures/gui/quest_healthbar.png
+      68: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      71: putstatic     #361                // Field HEALTHBAR:Lnet/minecraft/resources/ResourceLocation;
+      74: new           #546                // class net/minecraft/resources/ResourceLocation
+      77: dup
+      78: ldc_w         #548                // String monsterexpansion
+      81: ldc_w         #561                // String textures/gui/quest_started.png
+      84: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      87: putstatic     #402                // Field QUEST_STARTED:Lnet/minecraft/resources/ResourceLocation;
+      90: new           #546                // class net/minecraft/resources/ResourceLocation
+      93: dup
+      94: ldc_w         #548                // String monsterexpansion
+      97: ldc_w         #563                // String textures/gui/quest_failed.png
+     100: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     103: putstatic     #421                // Field QUEST_FAILED:Lnet/minecraft/resources/ResourceLocation;
+     106: new           #546                // class net/minecraft/resources/ResourceLocation
+     109: dup
+     110: ldc_w         #548                // String monsterexpansion
+     113: ldc_w         #565                // String textures/gui/quest_abandoned.png
+     116: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     119: putstatic     #423                // Field QUEST_ABANDONED:Lnet/minecraft/resources/ResourceLocation;
+     122: new           #546                // class net/minecraft/resources/ResourceLocation
+     125: dup
+     126: ldc_w         #548                // String monsterexpansion
+     129: ldc_w         #567                // String textures/gui/quest_completed.png
+     132: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     135: putstatic     #527                // Field QUEST_COMPLETED:Lnet/minecraft/resources/ResourceLocation;
+     138: new           #546                // class net/minecraft/resources/ResourceLocation
+     141: dup
+     142: ldc_w         #548                // String monsterexpansion
+     145: ldc_w         #569                // String guidebook_font
+     148: invokespecial #553                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     151: putstatic     #532                // Field GUIDEBOOK_FONT:Lnet/minecraft/resources/ResourceLocation;
+     154: return
+}

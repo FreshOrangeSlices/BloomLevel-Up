@@ -1,0 +1,82 @@
+Compiled from "KrakenEntity.java"
+public final class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$TentacleRespawnTimer extends java.lang.Record {
+  private final java.lang.String tentacleId;
+
+  private final long respawnAtGameTime;
+
+  public static com.mojang.serialization.Codec<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$TentacleRespawnTimer> CODEC;
+
+  public static com.mojang.serialization.Codec<java.util.List<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$TentacleRespawnTimer>> LIST_CODEC;
+
+  protected net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$TentacleRespawnTimer(java.lang.String, long);
+    Code:
+       0: aload_0
+       1: invokespecial #37                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #39                 // Field tentacleId:Ljava/lang/String;
+       9: aload_0
+      10: lload_2
+      11: putfield      #41                 // Field respawnAtGameTime:J
+      14: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #59,  0             // InvokeDynamic #0:toString:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleRespawnTimer;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #64,  0             // InvokeDynamic #0:hashCode:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleRespawnTimer;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #69,  0             // InvokeDynamic #0:equals:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleRespawnTimer;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.lang.String tentacleId();
+    Code:
+       0: aload_0
+       1: getfield      #39                 // Field tentacleId:Ljava/lang/String;
+       4: areturn
+
+  public long respawnAtGameTime();
+    Code:
+       0: aload_0
+       1: getfield      #41                 // Field respawnAtGameTime:J
+       4: lreturn
+
+  private static com.mojang.datafixers.kinds.App lambda$static$0(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    Code:
+       0: aload_0
+       1: getstatic     #80                 // Field com/mojang/serialization/Codec.STRING:Lcom/mojang/serialization/codecs/PrimitiveCodec;
+       4: ldc           #82                 // String tentacle_id
+       6: invokeinterface #88,  2           // InterfaceMethod com/mojang/serialization/codecs/PrimitiveCodec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+      11: invokedynamic #105,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      16: invokevirtual #111                // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+      19: getstatic     #114                // Field com/mojang/serialization/Codec.LONG:Lcom/mojang/serialization/codecs/PrimitiveCodec;
+      22: ldc           #116                // String respawn_at_game_time
+      24: invokeinterface #88,  2           // InterfaceMethod com/mojang/serialization/codecs/PrimitiveCodec.fieldOf:(Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+      29: invokedynamic #122,  0            // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+      34: invokevirtual #111                // Method com/mojang/serialization/MapCodec.forGetter:(Ljava/util/function/Function;)Lcom/mojang/serialization/codecs/RecordCodecBuilder;
+      37: invokevirtual #126                // Method com/mojang/serialization/codecs/RecordCodecBuilder$Instance.group:(Lcom/mojang/datafixers/kinds/App;Lcom/mojang/datafixers/kinds/App;)Lcom/mojang/datafixers/Products$P2;
+      40: aload_0
+      41: invokedynamic #136,  0            // InvokeDynamic #3:apply:()Ljava/util/function/BiFunction;
+      46: invokevirtual #139                // Method com/mojang/datafixers/Products$P2.apply:(Lcom/mojang/datafixers/kinds/Applicative;Ljava/util/function/BiFunction;)Lcom/mojang/datafixers/kinds/App;
+      49: areturn
+
+  static {};
+    Code:
+       0: invokedynamic #147,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+       5: invokestatic  #151                // Method com/mojang/serialization/codecs/RecordCodecBuilder.create:(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+       8: putstatic     #153                // Field CODEC:Lcom/mojang/serialization/Codec;
+      11: getstatic     #153                // Field CODEC:Lcom/mojang/serialization/Codec;
+      14: invokeinterface #157,  1          // InterfaceMethod com/mojang/serialization/Codec.listOf:()Lcom/mojang/serialization/Codec;
+      19: putstatic     #159                // Field LIST_CODEC:Lcom/mojang/serialization/Codec;
+      22: return
+}

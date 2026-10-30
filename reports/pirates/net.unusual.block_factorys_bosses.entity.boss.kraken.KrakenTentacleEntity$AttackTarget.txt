@@ -1,0 +1,95 @@
+Compiled from "KrakenTentacleEntity.java"
+final class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$AttackTarget extends java.lang.Record {
+  private final net.minecraft.world.entity.LivingEntity entity;
+
+  private final float distanceModifier;
+
+  private final net.minecraft.world.phys.Vec3 impulse;
+
+  private net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$AttackTarget(net.minecraft.world.entity.LivingEntity, float, net.minecraft.world.phys.Vec3);
+    Code:
+       0: aload_0
+       1: invokespecial #24                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #26                 // Field entity:Lnet/minecraft/world/entity/LivingEntity;
+       9: aload_0
+      10: fload_2
+      11: putfield      #28                 // Field distanceModifier:F
+      14: aload_0
+      15: aload_3
+      16: putfield      #30                 // Field impulse:Lnet/minecraft/world/phys/Vec3;
+      19: return
+
+  public net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$AttackTarget combinedWith(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$AttackTarget);
+    Code:
+       0: aload_1
+       1: ifnonnull     6
+       4: aload_0
+       5: areturn
+       6: new           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$AttackTarget
+       9: dup
+      10: aload_0
+      11: invokevirtual #38                 // Method entity:()Lnet/minecraft/world/entity/LivingEntity;
+      14: aload_0
+      15: invokevirtual #41                 // Method distanceModifier:()F
+      18: aload_1
+      19: invokevirtual #41                 // Method distanceModifier:()F
+      22: invokestatic  #47                 // Method java/lang/Math.max:(FF)F
+      25: aload_0
+      26: invokevirtual #50                 // Method impulse:()Lnet/minecraft/world/phys/Vec3;
+      29: invokevirtual #55                 // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+      32: aload_1
+      33: invokevirtual #50                 // Method impulse:()Lnet/minecraft/world/phys/Vec3;
+      36: invokevirtual #55                 // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+      39: invokevirtual #59                 // Method net/minecraft/world/phys/Vec3.m_82537_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+      42: aload_0
+      43: invokevirtual #50                 // Method impulse:()Lnet/minecraft/world/phys/Vec3;
+      46: invokevirtual #63                 // Method net/minecraft/world/phys/Vec3.m_82553_:()D
+      49: aload_1
+      50: invokevirtual #50                 // Method impulse:()Lnet/minecraft/world/phys/Vec3;
+      53: invokevirtual #63                 // Method net/minecraft/world/phys/Vec3.m_82553_:()D
+      56: dadd
+      57: ldc2_w        #64                 // double 2.0d
+      60: ddiv
+      61: invokevirtual #69                 // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+      64: invokespecial #71                 // Method "<init>":(Lnet/minecraft/world/entity/LivingEntity;FLnet/minecraft/world/phys/Vec3;)V
+      67: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #89,  0             // InvokeDynamic #0:toString:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$AttackTarget;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #94,  0             // InvokeDynamic #0:hashCode:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$AttackTarget;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #99,  0             // InvokeDynamic #0:equals:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$AttackTarget;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.minecraft.world.entity.LivingEntity entity();
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field entity:Lnet/minecraft/world/entity/LivingEntity;
+       4: areturn
+
+  public float distanceModifier();
+    Code:
+       0: aload_0
+       1: getfield      #28                 // Field distanceModifier:F
+       4: freturn
+
+  public net.minecraft.world.phys.Vec3 impulse();
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field impulse:Lnet/minecraft/world/phys/Vec3;
+       4: areturn
+}

@@ -1,0 +1,32 @@
+Compiled from "KrakenTentacleEntity.java"
+class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$1 extends net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal<net.minecraft.world.entity.player.Player> {
+  final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity this$0;
+
+  net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$1(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, net.minecraft.world.entity.Mob, java.lang.Class, boolean, boolean);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #17                 // Field this$0:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;
+       5: aload_0
+       6: aload_2
+       7: aload_3
+       8: iload         4
+      10: iload         5
+      12: invokespecial #20                 // Method net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal."<init>":(Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;ZZ)V
+      15: return
+
+  protected net.minecraft.world.phys.AABB m_7255_(double);
+    Code:
+       0: aload_0
+       1: getfield      #35                 // Field f_26135_:Lnet/minecraft/world/entity/Mob;
+       4: invokevirtual #41                 // Method net/minecraft/world/entity/Mob.m_20191_:()Lnet/minecraft/world/phys/AABB;
+       7: dload_1
+       8: ldc2_w        #42                 // double 4.0d
+      11: dload_1
+      12: invokevirtual #49                 // Method net/minecraft/world/phys/AABB.m_82377_:(DDD)Lnet/minecraft/world/phys/AABB;
+      15: dconst_0
+      16: ldc2_w        #50                 // double 5.0d
+      19: dconst_0
+      20: invokevirtual #54                 // Method net/minecraft/world/phys/AABB.m_82386_:(DDD)Lnet/minecraft/world/phys/AABB;
+      23: areturn
+}

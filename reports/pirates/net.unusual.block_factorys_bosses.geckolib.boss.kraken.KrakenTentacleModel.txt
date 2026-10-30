@@ -1,0 +1,40 @@
+Compiled from "KrakenTentacleModel.java"
+public class net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenTentacleModel extends net.unusual.block_factorys_bosses.geckolib.util.CustomEntityGeoModel<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity> {
+  private static final net.minecraft.resources.ResourceLocation KRAKEN_TENTACLE_BASE_LOCATION;
+
+  private static final net.minecraft.resources.ResourceLocation KRAKEN_TENTACLE_SLIM_BASE_LOCATION;
+
+  public static final net.minecraft.world.phys.Vec3 ROOT_OFFSET;
+
+  public net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenTentacleModel(boolean);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: ifeq          11
+       5: getstatic     #15                 // Field KRAKEN_TENTACLE_SLIM_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+       8: goto          14
+      11: getstatic     #17                 // Field KRAKEN_TENTACLE_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+      14: invokespecial #22                 // Method net/unusual/block_factorys_bosses/geckolib/util/CustomEntityGeoModel."<init>":(Lnet/minecraft/resources/ResourceLocation;)V
+      17: aload_0
+      18: getstatic     #27                 // Field net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenModel.KRAKEN_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+      21: invokevirtual #31                 // Method withAltTexture:(Lnet/minecraft/resources/ResourceLocation;)Lsoftware/bernie/geckolib/model/DefaultedEntityGeoModel;
+      24: pop
+      25: return
+
+  static {};
+    Code:
+       0: ldc           #39                 // String kraken_tentacle
+       2: invokestatic  #45                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #17                 // Field KRAKEN_TENTACLE_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+       8: ldc           #47                 // String kraken_tentacle_slim
+      10: invokestatic  #45                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      13: putstatic     #15                 // Field KRAKEN_TENTACLE_SLIM_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+      16: new           #49                 // class net/minecraft/world/phys/Vec3
+      19: dup
+      20: dconst_0
+      21: ldc2_w        #50                 // double -11.0d
+      24: ldc2_w        #52                 // double -8.5d
+      27: invokespecial #56                 // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+      30: putstatic     #58                 // Field ROOT_OFFSET:Lnet/minecraft/world/phys/Vec3;
+      33: return
+}

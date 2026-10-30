@@ -1,0 +1,232 @@
+Compiled from "KrakenSpawnerBlockEntity.java"
+public final class net.unusual.block_factorys_bosses.block.entity.KrakenSpawnerBlockEntity$PiratePoint<T extends net.minecraft.world.entity.monster.Monster> extends java.lang.Record {
+  private final net.minecraftforge.registries.RegistryObject<net.minecraft.world.entity.EntityType<T>> type;
+
+  private final net.minecraft.world.phys.Vec3[] offset;
+
+  public net.unusual.block_factorys_bosses.block.entity.KrakenSpawnerBlockEntity$PiratePoint(net.minecraftforge.registries.RegistryObject<net.minecraft.world.entity.EntityType<T>>, net.minecraft.world.phys.Vec3...);
+    Code:
+       0: aload_0
+       1: invokespecial #39                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #41                 // Field type:Lnet/minecraftforge/registries/RegistryObject;
+       9: aload_0
+      10: aload_2
+      11: putfield      #43                 // Field offset:[Lnet/minecraft/world/phys/Vec3;
+      14: return
+
+  public java.util.UUID trySummon(net.minecraft.server.level.ServerLevel, net.minecraft.world.phys.Vec3, net.minecraft.core.Direction);
+    Code:
+       0: aload_0
+       1: invokevirtual #52                 // Method type:()Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #58                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #60                 // class net/minecraft/world/entity/EntityType
+      10: aload_1
+      11: invokevirtual #64                 // Method net/minecraft/world/entity/EntityType.m_20615_:(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity;
+      14: checkcast     #66                 // class net/minecraft/world/entity/monster/Monster
+      17: astore        4
+      19: aload         4
+      21: ifnonnull     26
+      24: aconst_null
+      25: areturn
+      26: aload_0
+      27: invokevirtual #69                 // Method offset:()[Lnet/minecraft/world/phys/Vec3;
+      30: aload_1
+      31: getfield      #75                 // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+      34: aload_0
+      35: invokevirtual #69                 // Method offset:()[Lnet/minecraft/world/phys/Vec3;
+      38: arraylength
+      39: invokeinterface #81,  2           // InterfaceMethod net/minecraft/util/RandomSource.m_188503_:(I)I
+      44: aaload
+      45: aload_3
+      46: invokestatic  #85                 // Method net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity.rotatedPoint:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/core/Direction;)Lnet/minecraft/world/phys/Vec3;
+      49: astore        5
+      51: aload_1
+      52: getfield      #75                 // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+      55: invokestatic  #91                 // Method net/minecraft/core/Direction.m_235672_:(Lnet/minecraft/util/RandomSource;)Lnet/minecraft/core/Direction;
+      58: invokestatic  #95                 // Method net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity.rotatedRot:(Lnet/minecraft/core/Direction;)F
+      61: fstore        6
+      63: aload         4
+      65: fload         6
+      67: invokevirtual #99                 // Method net/minecraft/world/entity/monster/Monster.m_146922_:(F)V
+      70: aload         4
+      72: fload         6
+      74: putfield      #103                // Field net/minecraft/world/entity/monster/Monster.f_19859_:F
+      77: aload         4
+      79: fload         6
+      81: invokevirtual #106                // Method net/minecraft/world/entity/monster/Monster.m_5618_:(F)V
+      84: aload         4
+      86: fload         6
+      88: putfield      #109                // Field net/minecraft/world/entity/monster/Monster.f_20884_:F
+      91: aload         4
+      93: fload         6
+      95: invokevirtual #112                // Method net/minecraft/world/entity/monster/Monster.m_5616_:(F)V
+      98: aload         4
+     100: fload         6
+     102: putfield      #115                // Field net/minecraft/world/entity/monster/Monster.f_20886_:F
+     105: aload         4
+     107: aload_2
+     108: aload         5
+     110: invokevirtual #121                // Method net/minecraft/world/phys/Vec3.m_82549_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+     113: invokevirtual #125                // Method net/minecraft/world/entity/monster/Monster.m_146884_:(Lnet/minecraft/world/phys/Vec3;)V
+     116: aload         4
+     118: aload_1
+     119: aload_1
+     120: aload         4
+     122: invokevirtual #129                // Method net/minecraft/world/entity/monster/Monster.m_20183_:()Lnet/minecraft/core/BlockPos;
+     125: invokevirtual #133                // Method net/minecraft/server/level/ServerLevel.m_6436_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/DifficultyInstance;
+     128: getstatic     #139                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     131: aconst_null
+     132: aconst_null
+     133: invokestatic  #145                // Method net/minecraftforge/event/ForgeEventFactory.onFinalizeSpawn:(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+     136: pop
+     137: aload_1
+     138: aload         4
+     140: invokevirtual #149                // Method net/minecraft/server/level/ServerLevel.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     143: ifeq          154
+     146: aload         4
+     148: invokevirtual #153                // Method net/minecraft/world/entity/monster/Monster.m_20148_:()Ljava/util/UUID;
+     151: goto          155
+     154: aconst_null
+     155: areturn
+
+  public static void onDied(net.minecraftforge.event.entity.living.LivingDeathEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #173                // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: astore_1
+       5: aload_1
+       6: instanceof    #12                 // class net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$SpawnerTied
+       9: ifeq          32
+      12: aload_1
+      13: invokevirtual #179                // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      16: astore_3
+      17: aload_3
+      18: instanceof    #71                 // class net/minecraft/server/level/ServerLevel
+      21: ifeq          32
+      24: aload_3
+      25: checkcast     #71                 // class net/minecraft/server/level/ServerLevel
+      28: astore_2
+      29: goto          33
+      32: return
+      33: aload_2
+      34: invokevirtual #183                // Method net/minecraft/server/level/ServerLevel.m_8904_:()Lnet/minecraft/world/entity/ai/village/poi/PoiManager;
+      37: invokedynamic #202,  0            // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      42: aload_1
+      43: invokevirtual #203                // Method net/minecraft/world/entity/LivingEntity.m_20183_:()Lnet/minecraft/core/BlockPos;
+      46: bipush        64
+      48: getstatic     #207                // Field net/minecraft/world/entity/ai/village/poi/PoiManager$Occupancy.ANY:Lnet/minecraft/world/entity/ai/village/poi/PoiManager$Occupancy;
+      51: invokevirtual #211                // Method net/minecraft/world/entity/ai/village/poi/PoiManager.m_218002_:(Ljava/util/function/Predicate;Lnet/minecraft/core/BlockPos;ILnet/minecraft/world/entity/ai/village/poi/PoiManager$Occupancy;)Ljava/util/Optional;
+      54: aload_2
+      55: aload_1
+      56: invokedynamic #224,  0            // InvokeDynamic #1:accept:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Ljava/util/function/Consumer;
+      61: invokevirtual #230                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+      64: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #250,  0            // InvokeDynamic #2:toString:(Lnet/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$PiratePoint;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #255,  0            // InvokeDynamic #2:hashCode:(Lnet/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$PiratePoint;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #259,  0            // InvokeDynamic #2:equals:(Lnet/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$PiratePoint;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public net.minecraftforge.registries.RegistryObject<net.minecraft.world.entity.EntityType<T>> type();
+    Code:
+       0: aload_0
+       1: getfield      #41                 // Field type:Lnet/minecraftforge/registries/RegistryObject;
+       4: areturn
+
+  public net.minecraft.world.phys.Vec3[] offset();
+    Code:
+       0: aload_0
+       1: getfield      #43                 // Field offset:[Lnet/minecraft/world/phys/Vec3;
+       4: areturn
+
+  private static void lambda$onDied$2(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity, com.mojang.datafixers.util.Pair);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: invokevirtual #267                // Method com/mojang/datafixers/util/Pair.getSecond:()Ljava/lang/Object;
+       5: checkcast     #269                // class net/minecraft/core/BlockPos
+       8: invokevirtual #273                // Method net/minecraft/server/level/ServerLevel.m_7702_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/entity/BlockEntity;
+      11: astore        4
+      13: aload         4
+      15: instanceof    #8                  // class net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity
+      18: ifeq          127
+      21: aload         4
+      23: checkcast     #8                  // class net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity
+      26: astore_3
+      27: aload_3
+      28: getfield      #277                // Field net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity.pirateList:Ljava/util/List;
+      31: aload_1
+      32: invokedynamic #287,  0            // InvokeDynamic #3:test:(Lnet/minecraft/world/entity/LivingEntity;)Ljava/util/function/Predicate;
+      37: invokeinterface #293,  2          // InterfaceMethod java/util/List.removeIf:(Ljava/util/function/Predicate;)Z
+      42: pop
+      43: aload_1
+      44: invokevirtual #297                // Method net/minecraft/world/entity/LivingEntity.m_217043_:()Lnet/minecraft/util/RandomSource;
+      47: astore        4
+      49: aload_1
+      50: invokevirtual #301                // Method net/minecraft/world/entity/LivingEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+      53: aload         4
+      55: invokeinterface #305,  1          // InterfaceMethod net/minecraft/util/RandomSource.m_188501_:()F
+      60: ldc_w         #306                // float 0.5f
+      63: fsub
+      64: ldc_w         #307                // float 5.0f
+      67: fmul
+      68: f2d
+      69: ldc2_w        #308                // double -5.0d
+      72: aload         4
+      74: invokeinterface #305,  1          // InterfaceMethod net/minecraft/util/RandomSource.m_188501_:()F
+      79: ldc_w         #306                // float 0.5f
+      82: fsub
+      83: ldc_w         #307                // float 5.0f
+      86: fmul
+      87: f2d
+      88: invokevirtual #313                // Method net/minecraft/world/phys/Vec3.m_82520_:(DDD)Lnet/minecraft/world/phys/Vec3;
+      91: astore        5
+      93: aload_0
+      94: aconst_null
+      95: aload         5
+      97: getfield      #317                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     100: aload         5
+     102: getfield      #320                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+     105: aload         5
+     107: getfield      #323                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     110: getstatic     #328                // Field net/unusual/block_factorys_bosses/init/BossesRiseSounds.KRAKEN_WARNING:Lnet/minecraftforge/registries/RegistryObject;
+     113: invokevirtual #58                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     116: checkcast     #330                // class net/minecraft/sounds/SoundEvent
+     119: getstatic     #336                // Field net/minecraft/sounds/SoundSource.HOSTILE:Lnet/minecraft/sounds/SoundSource;
+     122: fconst_2
+     123: fconst_1
+     124: invokevirtual #340                // Method net/minecraft/server/level/ServerLevel.m_6263_:(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     127: return
+
+  private static boolean lambda$onDied$1(net.minecraft.world.entity.LivingEntity, java.util.UUID);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokevirtual #349                // Method net/minecraft/world/entity/LivingEntity.m_20148_:()Ljava/util/UUID;
+       5: invokevirtual #351                // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+       8: ireturn
+
+  private static boolean lambda$onDied$0(net.minecraft.core.Holder);
+    Code:
+       0: aload_0
+       1: getstatic     #358                // Field net/unusual/block_factorys_bosses/init/BossesRisePOI.KRAKEN_SPAWNER:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #362                // Method net/minecraftforge/registries/RegistryObject.getKey:()Lnet/minecraft/resources/ResourceKey;
+       7: invokeinterface #368,  2          // InterfaceMethod net/minecraft/core/Holder.m_203565_:(Lnet/minecraft/resources/ResourceKey;)Z
+      12: ireturn
+}

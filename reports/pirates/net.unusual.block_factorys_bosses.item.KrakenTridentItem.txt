@@ -1,0 +1,81 @@
+Compiled from "KrakenTridentItem.java"
+public class net.unusual.block_factorys_bosses.item.KrakenTridentItem extends net.minecraft.world.item.TridentItem {
+  private final com.google.common.collect.Multimap<net.minecraft.world.entity.ai.attributes.Attribute, net.minecraft.world.entity.ai.attributes.AttributeModifier> defaultModifiers;
+
+  public net.unusual.block_factorys_bosses.item.KrakenTridentItem(net.minecraft.world.item.Item$Properties);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #30                 // Method net/minecraft/world/item/TridentItem."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+       5: invokestatic  #34                 // Method com/google/common/collect/ImmutableMultimap.builder:()Lcom/google/common/collect/ImmutableMultimap$Builder;
+       8: astore_2
+       9: aload_2
+      10: getstatic     #40                 // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      13: new           #22                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+      16: dup
+      17: getstatic     #44                 // Field f_41374_:Ljava/util/UUID;
+      20: ldc           #46                 // String Tool modifier
+      22: ldc2_w        #47                 // double 9.0d
+      25: getstatic     #52                 // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      28: invokespecial #55                 // Method net/minecraft/world/entity/ai/attributes/AttributeModifier."<init>":(Ljava/util/UUID;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V
+      31: invokevirtual #59                 // Method com/google/common/collect/ImmutableMultimap$Builder.put:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      34: pop
+      35: aload_2
+      36: getstatic     #62                 // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22283_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      39: new           #22                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+      42: dup
+      43: getstatic     #65                 // Field f_41375_:Ljava/util/UUID;
+      46: ldc           #46                 // String Tool modifier
+      48: ldc2_w        #66                 // double -2.9000000953674316d
+      51: getstatic     #52                 // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      54: invokespecial #55                 // Method net/minecraft/world/entity/ai/attributes/AttributeModifier."<init>":(Ljava/util/UUID;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V
+      57: invokevirtual #59                 // Method com/google/common/collect/ImmutableMultimap$Builder.put:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      60: pop
+      61: aload_0
+      62: aload_2
+      63: invokevirtual #71                 // Method com/google/common/collect/ImmutableMultimap$Builder.build:()Lcom/google/common/collect/ImmutableMultimap;
+      66: putfield      #73                 // Field defaultModifiers:Lcom/google/common/collect/Multimap;
+      69: return
+
+  public com.google.common.collect.Multimap<net.minecraft.world.entity.ai.attributes.Attribute, net.minecraft.world.entity.ai.attributes.AttributeModifier> m_7167_(net.minecraft.world.entity.EquipmentSlot);
+    Code:
+       0: aload_1
+       1: getstatic     #88                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+       4: if_acmpne     14
+       7: aload_0
+       8: getfield      #73                 // Field defaultModifiers:Lcom/google/common/collect/Multimap;
+      11: goto          19
+      14: aload_0
+      15: aload_1
+      16: invokespecial #90                 // Method net/minecraft/world/item/TridentItem.m_7167_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;
+      19: areturn
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #103                // Method net/minecraft/world/item/TridentItem.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #105                // String item.block_factorys_bosses.kraken_trident.description_0
+      12: invokestatic  #111                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #117,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: aload_3
+      22: ldc           #119                // String item.block_factorys_bosses.kraken_trident.description_1
+      24: invokestatic  #111                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      27: invokeinterface #117,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      32: pop
+      33: return
+
+  public boolean m_6832_(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: getstatic     #136                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KRAKEN_TOOTH:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #142                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #12                 // class net/minecraft/world/item/Item
+      10: invokevirtual #148                // Method net/minecraft/world/item/ItemStack.m_150930_:(Lnet/minecraft/world/item/Item;)Z
+      13: ireturn
+}

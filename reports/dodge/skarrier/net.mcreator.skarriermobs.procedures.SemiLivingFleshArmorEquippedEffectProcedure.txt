@@ -1,0 +1,558 @@
+Compiled from "SemiLivingFleshArmorEquippedEffectProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SemiLivingFleshArmorEquippedEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.SemiLivingFleshArmorEquippedEffectProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #33                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onPlayerTick(net.minecraftforge.event.TickEvent$PlayerTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #42                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #45                 // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpne     46
+      10: aload_0
+      11: aload_0
+      12: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      15: invokevirtual #55                 // Method net/minecraft/world/entity/player/Player.m_9236_:()Lnet/minecraft/world/level/Level;
+      18: aload_0
+      19: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      22: invokevirtual #59                 // Method net/minecraft/world/entity/player/Player.m_20185_:()D
+      25: aload_0
+      26: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      29: invokevirtual #62                 // Method net/minecraft/world/entity/player/Player.m_20186_:()D
+      32: aload_0
+      33: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      36: invokevirtual #65                 // Method net/minecraft/world/entity/player/Player.m_20189_:()D
+      39: aload_0
+      40: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      43: invokestatic  #69                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+      46: return
+
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+    Code:
+       0: aconst_null
+       1: aload_0
+       2: dload_1
+       3: dload_3
+       4: dload         5
+       6: aload         7
+       8: invokestatic  #69                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+      11: return
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+    Code:
+       0: aload         8
+       2: ifnonnull     6
+       5: return
+       6: aload         8
+       8: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+      11: ifeq          32
+      14: aload         8
+      16: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+      19: astore        9
+      21: aload         9
+      23: getstatic     #89                 // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+      26: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+      29: goto          35
+      32: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      35: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      38: getstatic     #109                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+      41: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      44: if_acmpne     61
+      47: aload         8
+      49: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+      52: ldc           #123                // String SLFleshHelmet
+      54: dconst_1
+      55: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+      58: goto          72
+      61: aload         8
+      63: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+      66: ldc           #123                // String SLFleshHelmet
+      68: dconst_0
+      69: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+      72: aload         8
+      74: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+      77: ifeq          98
+      80: aload         8
+      82: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+      85: astore        9
+      87: aload         9
+      89: getstatic     #132                // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      92: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+      95: goto          101
+      98: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     101: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     104: getstatic     #135                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+     107: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     110: if_acmpne     127
+     113: aload         8
+     115: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     118: ldc           #137                // String SLFleshChestplate
+     120: dconst_1
+     121: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     124: goto          138
+     127: aload         8
+     129: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     132: ldc           #137                // String SLFleshChestplate
+     134: dconst_0
+     135: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     138: aload         8
+     140: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     143: ifeq          164
+     146: aload         8
+     148: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     151: astore        9
+     153: aload         9
+     155: getstatic     #140                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+     158: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     161: goto          167
+     164: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     167: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     170: getstatic     #143                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+     173: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     176: if_acmpne     193
+     179: aload         8
+     181: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     184: ldc           #145                // String SLFleshLeggings
+     186: dconst_1
+     187: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     190: goto          204
+     193: aload         8
+     195: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     198: ldc           #145                // String SLFleshLeggings
+     200: dconst_0
+     201: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     204: aload         8
+     206: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     209: ifeq          230
+     212: aload         8
+     214: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     217: astore        9
+     219: aload         9
+     221: getstatic     #148                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+     224: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     227: goto          233
+     230: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     233: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     236: getstatic     #151                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+     239: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     242: if_acmpne     259
+     245: aload         8
+     247: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     250: ldc           #153                // String SLFleshBoots
+     252: dconst_1
+     253: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     256: goto          270
+     259: aload         8
+     261: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     264: ldc           #153                // String SLFleshBoots
+     266: dconst_0
+     267: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     270: aload         8
+     272: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     275: ldc           #155                // String SLFleshSetCompletion
+     277: aload         8
+     279: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     282: ldc           #123                // String SLFleshHelmet
+     284: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     287: aload         8
+     289: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     292: ldc           #137                // String SLFleshChestplate
+     294: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     297: dadd
+     298: aload         8
+     300: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     303: ldc           #145                // String SLFleshLeggings
+     305: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     308: dadd
+     309: aload         8
+     311: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     314: ldc           #153                // String SLFleshBoots
+     316: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     319: dadd
+     320: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128347_:(Ljava/lang/String;D)V
+     323: aload         8
+     325: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     328: ldc           #155                // String SLFleshSetCompletion
+     330: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     333: dconst_1
+     334: dcmpl
+     335: iflt          403
+     338: aload         8
+     340: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     343: ifeq          403
+     346: aload         8
+     348: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     351: astore        9
+     353: aload         9
+     355: invokevirtual #160                // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     358: invokevirtual #166                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     361: ifne          403
+     364: aload         9
+     366: new           #168                // class net/minecraft/world/effect/MobEffectInstance
+     369: dup
+     370: getstatic     #173                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.SEMI_LIVING_ARMOR_PENALTY_EFFECT:Lnet/minecraftforge/registries/RegistryObject;
+     373: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     376: checkcast     #175                // class net/minecraft/world/effect/MobEffect
+     379: bipush        10
+     381: aload         8
+     383: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     386: ldc           #155                // String SLFleshSetCompletion
+     388: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     391: dconst_1
+     392: dsub
+     393: d2i
+     394: iconst_1
+     395: iconst_0
+     396: invokespecial #178                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     399: invokevirtual #182                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     402: pop
+     403: aload         8
+     405: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     408: ldc           #155                // String SLFleshSetCompletion
+     410: invokevirtual #159                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     413: dconst_0
+     414: dcmpl
+     415: ifne          448
+     418: aload         8
+     420: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     423: ifeq          448
+     426: aload         8
+     428: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     431: astore        9
+     433: aload         9
+     435: getstatic     #173                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.SEMI_LIVING_ARMOR_PENALTY_EFFECT:Lnet/minecraftforge/registries/RegistryObject;
+     438: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     441: checkcast     #175                // class net/minecraft/world/effect/MobEffect
+     444: invokevirtual #186                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     447: pop
+     448: aload         8
+     450: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     453: ifeq          474
+     456: aload         8
+     458: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     461: astore        9
+     463: aload         9
+     465: getstatic     #89                 // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     468: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     471: goto          477
+     474: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     477: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     480: getstatic     #109                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     483: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     486: if_acmpne     626
+     489: aload         8
+     491: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     494: ifeq          515
+     497: aload         8
+     499: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     502: astore        10
+     504: aload         10
+     506: getstatic     #132                // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+     509: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     512: goto          518
+     515: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     518: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     521: getstatic     #135                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+     524: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     527: if_acmpne     626
+     530: aload         8
+     532: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     535: ifeq          556
+     538: aload         8
+     540: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     543: astore        11
+     545: aload         11
+     547: getstatic     #140                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+     550: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     553: goto          559
+     556: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     559: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     562: getstatic     #143                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+     565: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     568: if_acmpne     626
+     571: aload         8
+     573: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     576: ifeq          597
+     579: aload         8
+     581: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     584: astore        12
+     586: aload         12
+     588: getstatic     #148                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+     591: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     594: goto          600
+     597: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     600: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     603: getstatic     #151                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+     606: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     609: if_acmpne     626
+     612: aload         8
+     614: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     617: ldc           #188                // String SLFleshSetComplete
+     619: iconst_1
+     620: invokevirtual #192                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     623: goto          637
+     626: aload         8
+     628: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     631: ldc           #188                // String SLFleshSetComplete
+     633: iconst_0
+     634: invokevirtual #192                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     637: aload         8
+     639: getfield      #196                // Field net/minecraft/world/entity/Entity.f_19797_:I
+     642: bipush        10
+     644: irem
+     645: ifne          927
+     648: aload         8
+     650: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     653: ifeq          674
+     656: aload         8
+     658: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     661: astore        9
+     663: aload         9
+     665: getstatic     #89                 // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     668: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     671: goto          677
+     674: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     677: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     680: getstatic     #109                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     683: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     686: if_acmpne     739
+     689: aload         8
+     691: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     694: ifeq          739
+     697: aload         8
+     699: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     702: astore        10
+     704: aload         10
+     706: getstatic     #202                // Field net/minecraft/world/effect/MobEffects.f_19612_:Lnet/minecraft/world/effect/MobEffect;
+     709: invokevirtual #205                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     712: ifeq          739
+     715: aload         8
+     717: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     720: ifeq          739
+     723: aload         8
+     725: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     728: astore        11
+     730: aload         11
+     732: getstatic     #202                // Field net/minecraft/world/effect/MobEffects.f_19612_:Lnet/minecraft/world/effect/MobEffect;
+     735: invokevirtual #186                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     738: pop
+     739: aload         8
+     741: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     744: ifeq          765
+     747: aload         8
+     749: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     752: astore        9
+     754: aload         9
+     756: getstatic     #140                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+     759: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     762: goto          768
+     765: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     768: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     771: getstatic     #143                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+     774: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     777: if_acmpne     927
+     780: aload         8
+     782: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     785: ifeq          803
+     788: aload         8
+     790: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     793: astore        10
+     795: aload         10
+     797: invokevirtual #209                // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+     800: goto          805
+     803: ldc           #210                // float -1.0f
+     805: aload         8
+     807: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     810: ifeq          828
+     813: aload         8
+     815: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     818: astore        11
+     820: aload         11
+     822: invokevirtual #213                // Method net/minecraft/world/entity/LivingEntity.m_21233_:()F
+     825: goto          830
+     828: ldc           #210                // float -1.0f
+     830: fcmpl
+     831: iflt          882
+     834: aload         8
+     836: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     839: ifeq          879
+     842: aload         8
+     844: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     847: astore        12
+     849: aload         12
+     851: invokevirtual #160                // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     854: invokevirtual #166                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     857: ifne          879
+     860: aload         12
+     862: new           #168                // class net/minecraft/world/effect/MobEffectInstance
+     865: dup
+     866: getstatic     #220                // Field net/minecraft/world/effect/MobEffects.f_19596_:Lnet/minecraft/world/effect/MobEffect;
+     869: bipush        10
+     871: iconst_2
+     872: invokespecial #223                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     875: invokevirtual #182                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     878: pop
+     879: goto          927
+     882: aload         8
+     884: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     887: ifeq          927
+     890: aload         8
+     892: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     895: astore        12
+     897: aload         12
+     899: invokevirtual #160                // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     902: invokevirtual #166                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     905: ifne          927
+     908: aload         12
+     910: new           #168                // class net/minecraft/world/effect/MobEffectInstance
+     913: dup
+     914: getstatic     #220                // Field net/minecraft/world/effect/MobEffects.f_19596_:Lnet/minecraft/world/effect/MobEffect;
+     917: bipush        10
+     919: iconst_4
+     920: invokespecial #223                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     923: invokevirtual #182                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     926: pop
+     927: aload         8
+     929: instanceof    #83                 // class net/minecraft/world/entity/LivingEntity
+     932: ifeq          953
+     935: aload         8
+     937: checkcast     #83                 // class net/minecraft/world/entity/LivingEntity
+     940: astore        9
+     942: aload         9
+     944: getstatic     #148                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+     947: invokevirtual #93                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     950: goto          956
+     953: getstatic     #99                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     956: invokevirtual #103                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+     959: getstatic     #151                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+     962: invokevirtual #115                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     965: if_acmpne     1048
+     968: aload         8
+     970: getstatic     #227                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     973: aconst_null
+     974: invokevirtual #231                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     977: new           #16                 // class net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables
+     980: dup
+     981: invokespecial #232                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables."<init>":()V
+     984: invokevirtual #238                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     987: checkcast     #16                 // class net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables
+     990: getfield      #241                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables.SLFleshDashTimer:D
+     993: dconst_0
+     994: dcmpl
+     995: ifle          1048
+     998: aload         8
+    1000: getstatic     #227                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+    1003: aconst_null
+    1004: invokevirtual #231                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+    1007: new           #16                 // class net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables
+    1010: dup
+    1011: invokespecial #232                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables."<init>":()V
+    1014: invokevirtual #238                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+    1017: checkcast     #16                 // class net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables
+    1020: getfield      #241                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables.SLFleshDashTimer:D
+    1023: dconst_1
+    1024: dsub
+    1025: dstore        10
+    1027: aload         8
+    1029: getstatic     #227                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+    1032: aconst_null
+    1033: invokevirtual #231                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+    1036: dload         10
+    1038: aload         8
+    1040: invokedynamic #261,  0            // InvokeDynamic #0:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+    1045: invokevirtual #265                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+    1048: aload         8
+    1050: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1053: ldc_w         #267                // String SLFleshWearerStroke
+    1056: invokevirtual #271                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+    1059: iconst_1
+    1060: if_icmpne     1103
+    1063: aload         8
+    1065: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1068: ldc_w         #273                // String SLFleshSetAttacking
+    1071: invokevirtual #271                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+    1074: ifne          1103
+    1077: aload         8
+    1079: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1082: ldc_w         #273                // String SLFleshSetAttacking
+    1085: iconst_1
+    1086: invokevirtual #192                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+    1089: aload         8
+    1091: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1094: ldc_w         #275                // String CurrentSLFleshAttack
+    1097: ldc_w         #277                // String Bite
+    1100: invokevirtual #281                // Method net/minecraft/nbt/CompoundTag.m_128359_:(Ljava/lang/String;Ljava/lang/String;)V
+    1103: aload         8
+    1105: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1108: ldc_w         #283                // String SLFleshWearerShot
+    1111: invokevirtual #271                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+    1114: iconst_1
+    1115: if_icmpne     1158
+    1118: aload         8
+    1120: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1123: ldc_w         #273                // String SLFleshSetAttacking
+    1126: invokevirtual #271                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+    1129: ifne          1158
+    1132: aload         8
+    1134: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1137: ldc_w         #273                // String SLFleshSetAttacking
+    1140: iconst_1
+    1141: invokevirtual #192                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+    1144: aload         8
+    1146: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1149: ldc_w         #275                // String CurrentSLFleshAttack
+    1152: ldc_w         #285                // String Shoot
+    1155: invokevirtual #281                // Method net/minecraft/nbt/CompoundTag.m_128359_:(Ljava/lang/String;Ljava/lang/String;)V
+    1158: aload         8
+    1160: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1163: ldc_w         #275                // String CurrentSLFleshAttack
+    1166: invokevirtual #289                // Method net/minecraft/nbt/CompoundTag.m_128461_:(Ljava/lang/String;)Ljava/lang/String;
+    1169: ldc_w         #277                // String Bite
+    1172: invokevirtual #295                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+    1175: ifeq          1204
+    1178: aload         8
+    1180: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1183: ldc_w         #273                // String SLFleshSetAttacking
+    1186: invokevirtual #271                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+    1189: iconst_1
+    1190: if_icmpne     1204
+    1193: aload_1
+    1194: dload_2
+    1195: dload         4
+    1197: dload         6
+    1199: aload         8
+    1201: invokestatic  #299                // Method net/mcreator/skarriermobs/procedures/SemiLivingArmorAttackBiteProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+    1204: aload         8
+    1206: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1209: ldc_w         #275                // String CurrentSLFleshAttack
+    1212: invokevirtual #289                // Method net/minecraft/nbt/CompoundTag.m_128461_:(Ljava/lang/String;)Ljava/lang/String;
+    1215: ldc_w         #285                // String Shoot
+    1218: invokevirtual #295                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+    1221: ifeq          1250
+    1224: aload         8
+    1226: invokevirtual #121                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+    1229: ldc_w         #273                // String SLFleshSetAttacking
+    1232: invokevirtual #271                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+    1235: iconst_1
+    1236: if_icmpne     1250
+    1239: aload_1
+    1240: dload_2
+    1241: dload         4
+    1243: dload         6
+    1245: aload         8
+    1247: invokestatic  #302                // Method net/mcreator/skarriermobs/procedures/SemiLivingArmorAttackShootProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+    1250: return
+
+  private static void lambda$execute$0(double, net.minecraft.world.entity.Entity, net.mcreator.skarriermobs.network.SkarrierMobsModVariables$PlayerVariables);
+    Code:
+       0: aload_3
+       1: dload_0
+       2: putfield      #241                // Field net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables.SLFleshDashTimer:D
+       5: aload_3
+       6: aload_2
+       7: invokevirtual #313                // Method net/mcreator/skarriermobs/network/SkarrierMobsModVariables$PlayerVariables.syncPlayerVariables:(Lnet/minecraft/world/entity/Entity;)V
+      10: return
+}

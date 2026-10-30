@@ -1,0 +1,84 @@
+Compiled from "KrakenEntity.java"
+class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$1 {
+  static final int[] $SwitchMap$net$minecraft$core$Direction;
+
+  static final int[] $SwitchMap$net$minecraft$world$level$block$Rotation;
+
+  static {};
+    Code:
+       0: invokestatic  #20                 // Method net/minecraft/world/level/block/Rotation.values:()[Lnet/minecraft/world/level/block/Rotation;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #22                 // Field $SwitchMap$net$minecraft$world$level$block$Rotation:[I
+       9: getstatic     #22                 // Field $SwitchMap$net$minecraft$world$level$block$Rotation:[I
+      12: getstatic     #26                 // Field net/minecraft/world/level/block/Rotation.NONE:Lnet/minecraft/world/level/block/Rotation;
+      15: invokevirtual #30                 // Method net/minecraft/world/level/block/Rotation.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: goto          24
+      23: astore_0
+      24: getstatic     #22                 // Field $SwitchMap$net$minecraft$world$level$block$Rotation:[I
+      27: getstatic     #33                 // Field net/minecraft/world/level/block/Rotation.CLOCKWISE_90:Lnet/minecraft/world/level/block/Rotation;
+      30: invokevirtual #30                 // Method net/minecraft/world/level/block/Rotation.ordinal:()I
+      33: iconst_2
+      34: iastore
+      35: goto          39
+      38: astore_0
+      39: getstatic     #22                 // Field $SwitchMap$net$minecraft$world$level$block$Rotation:[I
+      42: getstatic     #36                 // Field net/minecraft/world/level/block/Rotation.CLOCKWISE_180:Lnet/minecraft/world/level/block/Rotation;
+      45: invokevirtual #30                 // Method net/minecraft/world/level/block/Rotation.ordinal:()I
+      48: iconst_3
+      49: iastore
+      50: goto          54
+      53: astore_0
+      54: getstatic     #22                 // Field $SwitchMap$net$minecraft$world$level$block$Rotation:[I
+      57: getstatic     #39                 // Field net/minecraft/world/level/block/Rotation.COUNTERCLOCKWISE_90:Lnet/minecraft/world/level/block/Rotation;
+      60: invokevirtual #30                 // Method net/minecraft/world/level/block/Rotation.ordinal:()I
+      63: iconst_4
+      64: iastore
+      65: goto          69
+      68: astore_0
+      69: invokestatic  #44                 // Method net/minecraft/core/Direction.values:()[Lnet/minecraft/core/Direction;
+      72: arraylength
+      73: newarray       int
+      75: putstatic     #46                 // Field $SwitchMap$net$minecraft$core$Direction:[I
+      78: getstatic     #46                 // Field $SwitchMap$net$minecraft$core$Direction:[I
+      81: getstatic     #50                 // Field net/minecraft/core/Direction.NORTH:Lnet/minecraft/core/Direction;
+      84: invokevirtual #51                 // Method net/minecraft/core/Direction.ordinal:()I
+      87: iconst_1
+      88: iastore
+      89: goto          93
+      92: astore_0
+      93: getstatic     #46                 // Field $SwitchMap$net$minecraft$core$Direction:[I
+      96: getstatic     #54                 // Field net/minecraft/core/Direction.EAST:Lnet/minecraft/core/Direction;
+      99: invokevirtual #51                 // Method net/minecraft/core/Direction.ordinal:()I
+     102: iconst_2
+     103: iastore
+     104: goto          108
+     107: astore_0
+     108: getstatic     #46                 // Field $SwitchMap$net$minecraft$core$Direction:[I
+     111: getstatic     #57                 // Field net/minecraft/core/Direction.SOUTH:Lnet/minecraft/core/Direction;
+     114: invokevirtual #51                 // Method net/minecraft/core/Direction.ordinal:()I
+     117: iconst_3
+     118: iastore
+     119: goto          123
+     122: astore_0
+     123: getstatic     #46                 // Field $SwitchMap$net$minecraft$core$Direction:[I
+     126: getstatic     #60                 // Field net/minecraft/core/Direction.WEST:Lnet/minecraft/core/Direction;
+     129: invokevirtual #51                 // Method net/minecraft/core/Direction.ordinal:()I
+     132: iconst_4
+     133: iastore
+     134: goto          138
+     137: astore_0
+     138: return
+    Exception table:
+       from    to  target type
+           9    20    23   Class java/lang/NoSuchFieldError
+          24    35    38   Class java/lang/NoSuchFieldError
+          39    50    53   Class java/lang/NoSuchFieldError
+          54    65    68   Class java/lang/NoSuchFieldError
+          78    89    92   Class java/lang/NoSuchFieldError
+          93   104   107   Class java/lang/NoSuchFieldError
+         108   119   122   Class java/lang/NoSuchFieldError
+         123   134   137   Class java/lang/NoSuchFieldError
+}

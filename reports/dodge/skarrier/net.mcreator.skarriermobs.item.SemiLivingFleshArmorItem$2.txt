@@ -1,0 +1,36 @@
+Compiled from "SemiLivingFleshArmorItem.java"
+class net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem$2 implements net.minecraftforge.client.extensions.common.IClientItemExtensions {
+  private software.bernie.geckolib.renderer.GeoArmorRenderer<?> renderer;
+
+  final net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem this$0;
+
+  net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem$2(net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #21                 // Field this$0:Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;
+       5: aload_0
+       6: invokespecial #24                 // Method java/lang/Object."<init>":()V
+       9: return
+
+  public net.minecraft.client.model.HumanoidModel<?> getHumanoidArmorModel(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, net.minecraft.world.entity.EquipmentSlot, net.minecraft.client.model.HumanoidModel<?>);
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field renderer:Lsoftware/bernie/geckolib/renderer/GeoArmorRenderer;
+       4: ifnonnull     18
+       7: aload_0
+       8: new           #33                 // class net/mcreator/skarriermobs/client/renderer/SemiLivingFleshArmorArmorRenderer
+      11: dup
+      12: invokespecial #34                 // Method net/mcreator/skarriermobs/client/renderer/SemiLivingFleshArmorArmorRenderer."<init>":()V
+      15: putfield      #31                 // Field renderer:Lsoftware/bernie/geckolib/renderer/GeoArmorRenderer;
+      18: aload_0
+      19: getfield      #31                 // Field renderer:Lsoftware/bernie/geckolib/renderer/GeoArmorRenderer;
+      22: aload_1
+      23: aload_2
+      24: aload_3
+      25: aload         4
+      27: invokevirtual #40                 // Method software/bernie/geckolib/renderer/GeoArmorRenderer.prepForRender:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/client/model/HumanoidModel;)V
+      30: aload_0
+      31: getfield      #31                 // Field renderer:Lsoftware/bernie/geckolib/renderer/GeoArmorRenderer;
+      34: areturn
+}

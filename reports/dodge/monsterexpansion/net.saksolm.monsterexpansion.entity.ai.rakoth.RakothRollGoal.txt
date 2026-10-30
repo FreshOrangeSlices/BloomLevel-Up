@@ -1,0 +1,778 @@
+Compiled from "RakothRollGoal.java"
+public class net.saksolm.monsterexpansion.entity.ai.rakoth.RakothRollGoal extends net.minecraft.world.entity.ai.goal.Goal {
+  private net.saksolm.monsterexpansion.entity.custom.RakothEntity rakoth;
+
+  private int tickCount;
+
+  private boolean isExecuting;
+
+  private net.saksolm.monsterexpansion.entity.ai.rakoth.RakothRollGoal$Phase currentPhase;
+
+  public net.saksolm.monsterexpansion.entity.ai.rakoth.RakothRollGoal(net.saksolm.monsterexpansion.entity.custom.RakothEntity);
+    Code:
+       0: aload_0
+       1: invokespecial #49                 // Method net/minecraft/world/entity/ai/goal/Goal."<init>":()V
+       4: aload_0
+       5: iconst_0
+       6: putfield      #51                 // Field tickCount:I
+       9: aload_0
+      10: iconst_0
+      11: putfield      #53                 // Field isExecuting:Z
+      14: aload_0
+      15: aload_1
+      16: putfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      19: aload_0
+      20: getstatic     #59                 // Field net/minecraft/world/entity/ai/goal/Goal$Flag.MOVE:Lnet/minecraft/world/entity/ai/goal/Goal$Flag;
+      23: getstatic     #62                 // Field net/minecraft/world/entity/ai/goal/Goal$Flag.LOOK:Lnet/minecraft/world/entity/ai/goal/Goal$Flag;
+      26: invokestatic  #68                 // Method java/util/EnumSet.of:(Ljava/lang/Enum;Ljava/lang/Enum;)Ljava/util/EnumSet;
+      29: invokevirtual #72                 // Method m_7021_:(Ljava/util/EnumSet;)V
+      32: return
+
+  public boolean m_8036_();
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+       4: invokevirtual #80                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+       7: ifnull        27
+      10: aload_0
+      11: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      14: invokevirtual #84                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.getCurrentAbility:()Ljava/lang/Enum;
+      17: getstatic     #88                 // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability.ROLL:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability;
+      20: if_acmpne     27
+      23: iconst_1
+      24: goto          28
+      27: iconst_0
+      28: ireturn
+
+  public boolean m_8045_();
+    Code:
+       0: aload_0
+       1: getfield      #53                 // Field isExecuting:Z
+       4: ifeq          24
+       7: aload_0
+       8: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      11: invokevirtual #84                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.getCurrentAbility:()Ljava/lang/Enum;
+      14: getstatic     #88                 // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability.ROLL:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability;
+      17: if_acmpne     24
+      20: iconst_1
+      21: goto          25
+      24: iconst_0
+      25: ireturn
+
+  public void m_8056_();
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: putfield      #51                 // Field tickCount:I
+       5: aload_0
+       6: iconst_1
+       7: putfield      #53                 // Field isExecuting:Z
+      10: aload_0
+      11: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      14: invokevirtual #94                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_21573_:()Lnet/minecraft/world/entity/ai/navigation/PathNavigation;
+      17: invokevirtual #99                 // Method net/minecraft/world/entity/ai/navigation/PathNavigation.m_26573_:()V
+      20: aload_0
+      21: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      24: getstatic     #105                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      27: invokevirtual #109                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20256_:(Lnet/minecraft/world/phys/Vec3;)V
+      30: aload_0
+      31: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      34: iconst_1
+      35: invokevirtual #113                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setRotationManual:(Z)V
+      38: aload_0
+      39: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      42: getstatic     #117                // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.START:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState;
+      45: invokevirtual #121                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.ordinal:()I
+      48: invokevirtual #125                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setRollState:(I)V
+      51: aload_0
+      52: getstatic     #127                // Field net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase.START:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+      55: putfield      #129                // Field currentPhase:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+      58: return
+
+  public void m_8041_();
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: putfield      #53                 // Field isExecuting:Z
+       5: aload_0
+       6: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+       9: getstatic     #105                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      12: invokevirtual #109                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20256_:(Lnet/minecraft/world/phys/Vec3;)V
+      15: aload_0
+      16: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      19: invokevirtual #84                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.getCurrentAbility:()Ljava/lang/Enum;
+      22: getstatic     #88                 // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability.ROLL:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability;
+      25: if_acmpne     38
+      28: aload_0
+      29: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      32: getstatic     #133                // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability.NONE:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$Ability;
+      35: invokevirtual #137                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setCurrentAbility:(Ljava/lang/Enum;)V
+      38: aload_0
+      39: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      42: iconst_0
+      43: invokevirtual #113                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setRotationManual:(Z)V
+      46: aload_0
+      47: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      50: getstatic     #139                // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.NONE:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState;
+      53: invokevirtual #121                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.ordinal:()I
+      56: invokevirtual #125                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setRollState:(I)V
+      59: aload_0
+      60: aconst_null
+      61: putfield      #129                // Field currentPhase:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+      64: return
+
+  public void m_8037_();
+    Code:
+       0: aload_0
+       1: dup
+       2: getfield      #51                 // Field tickCount:I
+       5: iconst_1
+       6: iadd
+       7: putfield      #51                 // Field tickCount:I
+      10: getstatic     #144                // Field net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$1.$SwitchMap$net$saksolm$monsterexpansion$entity$ai$rakoth$RakothRollGoal$Phase:[I
+      13: aload_0
+      14: getfield      #129                // Field currentPhase:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+      17: invokevirtual #145                // Method net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase.ordinal:()I
+      20: iaload
+      21: tableswitch   { // 1 to 3
+                     1: 48
+                     2: 390
+                     3: 841
+               default: 1356
+          }
+      48: aload_0
+      49: getfield      #51                 // Field tickCount:I
+      52: bipush        10
+      54: if_icmplt     128
+      57: aload_0
+      58: getfield      #51                 // Field tickCount:I
+      61: iconst_5
+      62: iadd
+      63: bipush        10
+      65: irem
+      66: ifne          128
+      69: aload_0
+      70: getfield      #51                 // Field tickCount:I
+      73: bipush        32
+      75: if_icmpge     128
+      78: aload_0
+      79: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      82: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      85: aconst_null
+      86: aload_0
+      87: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      90: invokevirtual #153                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20185_:()D
+      93: aload_0
+      94: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      97: invokevirtual #156                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20186_:()D
+     100: aload_0
+     101: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     104: invokevirtual #159                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20189_:()D
+     107: getstatic     #165                // Field net/saksolm/monsterexpansion/sounds/ModSounds.RAKOTH_GALLOP:Lnet/minecraftforge/registries/RegistryObject;
+     110: invokevirtual #171                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     113: checkcast     #173                // class net/minecraft/sounds/SoundEvent
+     116: aload_0
+     117: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     120: invokevirtual #177                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5720_:()Lnet/minecraft/sounds/SoundSource;
+     123: fconst_1
+     124: fconst_1
+     125: invokevirtual #183                // Method net/minecraft/world/level/Level.m_6263_:(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     128: aload_0
+     129: getfield      #51                 // Field tickCount:I
+     132: bipush        9
+     134: if_icmple     160
+     137: aload_0
+     138: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     141: invokevirtual #187                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     144: invokevirtual #190                // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+     147: dconst_1
+     148: invokevirtual #194                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     151: astore_1
+     152: aload_0
+     153: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     156: aload_1
+     157: invokevirtual #197                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setScaledHorizontalDeltaMovement:(Lnet/minecraft/world/phys/Vec3;)V
+     160: aload_0
+     161: getfield      #51                 // Field tickCount:I
+     164: bipush        32
+     166: if_icmpne     188
+     169: aload_0
+     170: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     173: aload_0
+     174: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     177: invokevirtual #80                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+     180: sipush        170
+     183: ldc           #198                // float 2.5f
+     185: invokevirtual #202                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.startTrackingEntity:(Lnet/minecraft/world/entity/LivingEntity;IF)V
+     188: aload_0
+     189: getfield      #51                 // Field tickCount:I
+     192: bipush        30
+     194: if_icmplt     266
+     197: aload_0
+     198: getfield      #51                 // Field tickCount:I
+     201: bipush        10
+     203: irem
+     204: ifne          266
+     207: aload_0
+     208: getfield      #51                 // Field tickCount:I
+     211: bipush        45
+     213: if_icmpge     266
+     216: aload_0
+     217: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     220: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     223: aconst_null
+     224: aload_0
+     225: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     228: invokevirtual #153                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20185_:()D
+     231: aload_0
+     232: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     235: invokevirtual #156                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20186_:()D
+     238: aload_0
+     239: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     242: invokevirtual #159                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20189_:()D
+     245: getstatic     #205                // Field net/saksolm/monsterexpansion/sounds/ModSounds.RAKOTH_ROLL:Lnet/minecraftforge/registries/RegistryObject;
+     248: invokevirtual #171                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     251: checkcast     #173                // class net/minecraft/sounds/SoundEvent
+     254: aload_0
+     255: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     258: invokevirtual #177                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5720_:()Lnet/minecraft/sounds/SoundSource;
+     261: fconst_2
+     262: fconst_1
+     263: invokevirtual #183                // Method net/minecraft/world/level/Level.m_6263_:(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     266: aload_0
+     267: getfield      #51                 // Field tickCount:I
+     270: bipush        32
+     272: if_icmple     353
+     275: aload_0
+     276: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     279: getstatic     #105                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+     282: ldc           #206                // float 5.0f
+     284: iconst_5
+     285: iconst_2
+     286: iconst_1
+     287: invokevirtual #210                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnGroundEffects:(Lnet/minecraft/world/phys/Vec3;FIII)V
+     290: new           #23                 // class net/saksolm/monsterexpansion/util/AttackDefinition$Builder
+     293: dup
+     294: invokespecial #211                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder."<init>":()V
+     297: ldc           #212                // float 3.0f
+     299: invokevirtual #216                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.damage:(F)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     302: getstatic     #220                // Field net/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType.UPWARD:Lnet/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType;
+     305: dconst_1
+     306: invokevirtual #224                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.knockback:(Lnet/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType;D)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     309: sipush        200
+     312: invokevirtual #228                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.breakShield:(I)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     315: invokevirtual #232                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.build:()Lnet/saksolm/monsterexpansion/util/AttackDefinition;
+     318: astore_1
+     319: aload_0
+     320: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     323: aload_0
+     324: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     327: invokevirtual #235                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+     330: new           #101                // class net/minecraft/world/phys/Vec3
+     333: dup
+     334: dconst_0
+     335: dconst_0
+     336: dconst_0
+     337: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     340: ldc2_w        #239                // double 6.0d
+     343: ldc2_w        #241                // double 20.0d
+     346: ldc2_w        #243                // double 10.0d
+     349: aload_1
+     350: invokevirtual #248                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.dealDamageInOrientedBox:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDDLnet/saksolm/monsterexpansion/util/AttackDefinition;)V
+     353: aload_0
+     354: getfield      #51                 // Field tickCount:I
+     357: bipush        39
+     359: if_icmple     1356
+     362: aload_0
+     363: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     366: getstatic     #250                // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.ROLL:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState;
+     369: invokevirtual #121                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.ordinal:()I
+     372: invokevirtual #125                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setRollState:(I)V
+     375: aload_0
+     376: getstatic     #252                // Field net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase.ROLL:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+     379: putfield      #129                // Field currentPhase:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+     382: aload_0
+     383: iconst_0
+     384: putfield      #51                 // Field tickCount:I
+     387: goto          1356
+     390: new           #23                 // class net/saksolm/monsterexpansion/util/AttackDefinition$Builder
+     393: dup
+     394: invokespecial #211                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder."<init>":()V
+     397: ldc           #212                // float 3.0f
+     399: invokevirtual #216                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.damage:(F)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     402: getstatic     #220                // Field net/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType.UPWARD:Lnet/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType;
+     405: dconst_1
+     406: invokevirtual #224                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.knockback:(Lnet/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType;D)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     409: sipush        200
+     412: invokevirtual #228                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.breakShield:(I)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     415: bipush        55
+     417: invokevirtual #255                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.stun:(I)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     420: invokevirtual #232                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.build:()Lnet/saksolm/monsterexpansion/util/AttackDefinition;
+     423: astore_1
+     424: aload_0
+     425: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     428: aload_0
+     429: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     432: invokevirtual #235                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+     435: new           #101                // class net/minecraft/world/phys/Vec3
+     438: dup
+     439: dconst_0
+     440: dconst_0
+     441: dconst_0
+     442: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     445: ldc2_w        #239                // double 6.0d
+     448: ldc2_w        #241                // double 20.0d
+     451: ldc2_w        #243                // double 10.0d
+     454: aload_1
+     455: invokevirtual #248                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.dealDamageInOrientedBox:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDDLnet/saksolm/monsterexpansion/util/AttackDefinition;)V
+     458: aload_0
+     459: getfield      #51                 // Field tickCount:I
+     462: bipush        8
+     464: irem
+     465: ifne          518
+     468: aload_0
+     469: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     472: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     475: aconst_null
+     476: aload_0
+     477: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     480: invokevirtual #153                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20185_:()D
+     483: aload_0
+     484: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     487: invokevirtual #156                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20186_:()D
+     490: aload_0
+     491: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     494: invokevirtual #159                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20189_:()D
+     497: getstatic     #205                // Field net/saksolm/monsterexpansion/sounds/ModSounds.RAKOTH_ROLL:Lnet/minecraftforge/registries/RegistryObject;
+     500: invokevirtual #171                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     503: checkcast     #173                // class net/minecraft/sounds/SoundEvent
+     506: aload_0
+     507: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     510: invokevirtual #177                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5720_:()Lnet/minecraft/sounds/SoundSource;
+     513: fconst_2
+     514: fconst_1
+     515: invokevirtual #183                // Method net/minecraft/world/level/Level.m_6263_:(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     518: aload_0
+     519: getfield      #51                 // Field tickCount:I
+     522: iconst_1
+     523: if_icmpne     546
+     526: aload_0
+     527: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     530: aload_0
+     531: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     534: invokevirtual #80                 // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5448_:()Lnet/minecraft/world/entity/LivingEntity;
+     537: sipush        170
+     540: ldc_w         #256                // float 4.0f
+     543: invokevirtual #202                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.startTrackingEntity:(Lnet/minecraft/world/entity/LivingEntity;IF)V
+     546: aload_0
+     547: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     550: getstatic     #105                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+     553: ldc           #206                // float 5.0f
+     555: iconst_5
+     556: iconst_2
+     557: iconst_1
+     558: invokevirtual #210                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnGroundEffects:(Lnet/minecraft/world/phys/Vec3;FIII)V
+     561: aload_0
+     562: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     565: invokevirtual #187                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+     568: invokevirtual #190                // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+     571: astore_2
+     572: aload_0
+     573: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     576: invokevirtual #260                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20191_:()Lnet/minecraft/world/phys/AABB;
+     579: astore_3
+     580: aload_3
+     581: aload_2
+     582: dconst_1
+     583: invokevirtual #194                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     586: invokevirtual #266                // Method net/minecraft/world/phys/AABB.m_82383_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/AABB;
+     589: astore        4
+     591: aload         4
+     593: ldc2_w        #267                // double 0.1d
+     596: dconst_0
+     597: ldc2_w        #267                // double 0.1d
+     600: invokevirtual #272                // Method net/minecraft/world/phys/AABB.m_165897_:(DDD)Lnet/minecraft/world/phys/AABB;
+     603: astore        4
+     605: aload         4
+     607: aload_0
+     608: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     611: invokevirtual #156                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20186_:()D
+     614: ldc2_w        #273                // double 1.2d
+     617: dadd
+     618: invokevirtual #278                // Method net/minecraft/world/phys/AABB.m_165887_:(D)Lnet/minecraft/world/phys/AABB;
+     621: astore        4
+     623: aload_0
+     624: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     627: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     630: aload_0
+     631: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     634: aload         4
+     636: invokevirtual #282                // Method net/minecraft/world/level/Level.m_45756_:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z
+     639: ifne          646
+     642: iconst_1
+     643: goto          647
+     646: iconst_0
+     647: istore        5
+     649: aload_0
+     650: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     653: getfield      #285                // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity.f_19862_:Z
+     656: ifeq          662
+     659: iconst_1
+     660: istore        5
+     662: iload         5
+     664: ifeq          778
+     667: aload_0
+     668: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     671: aload_2
+     672: getfield      #289                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     675: ldc2_w        #290                // double 0.2d
+     678: dmul
+     679: ldc2_w        #292                // double 0.8d
+     682: aload_2
+     683: getfield      #296                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     686: ldc2_w        #290                // double 0.2d
+     689: dmul
+     690: invokevirtual #299                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20334_:(DDD)V
+     693: aload_0
+     694: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     697: invokevirtual #260                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20191_:()Lnet/minecraft/world/phys/AABB;
+     700: astore        6
+     702: new           #262                // class net/minecraft/world/phys/AABB
+     705: dup
+     706: aload         6
+     708: getfield      #302                // Field net/minecraft/world/phys/AABB.f_82288_:D
+     711: aload         6
+     713: getfield      #305                // Field net/minecraft/world/phys/AABB.f_82292_:D
+     716: aload         6
+     718: getfield      #308                // Field net/minecraft/world/phys/AABB.f_82290_:D
+     721: aload         6
+     723: getfield      #311                // Field net/minecraft/world/phys/AABB.f_82291_:D
+     726: aload         6
+     728: getfield      #305                // Field net/minecraft/world/phys/AABB.f_82292_:D
+     731: ldc2_w        #312                // double 2.0d
+     734: dadd
+     735: aload         6
+     737: getfield      #316                // Field net/minecraft/world/phys/AABB.f_82293_:D
+     740: invokespecial #319                // Method net/minecraft/world/phys/AABB."<init>":(DDDDDD)V
+     743: astore        7
+     745: aload         7
+     747: ldc2_w        #267                // double 0.1d
+     750: dconst_0
+     751: ldc2_w        #267                // double 0.1d
+     754: invokevirtual #272                // Method net/minecraft/world/phys/AABB.m_165897_:(DDD)Lnet/minecraft/world/phys/AABB;
+     757: astore        7
+     759: aload         7
+     761: invokestatic  #325                // Method net/minecraft/core/BlockPos.m_121921_:(Lnet/minecraft/world/phys/AABB;)Ljava/util/stream/Stream;
+     764: aload_0
+     765: invokedynamic #344,  0            // InvokeDynamic #0:accept:(Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal;)Ljava/util/function/Consumer;
+     770: invokeinterface #350,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+     775: goto          804
+     778: ldc2_w        #351                // double 1.5d
+     781: dstore        6
+     783: aload_0
+     784: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     787: aload_2
+     788: getfield      #289                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     791: dload         6
+     793: dmul
+     794: aload_2
+     795: getfield      #296                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     798: dload         6
+     800: dmul
+     801: invokevirtual #355                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setScaledHorizontalDeltaMovement:(DD)V
+     804: aload_0
+     805: getfield      #51                 // Field tickCount:I
+     808: bipush        89
+     810: if_icmple     838
+     813: aload_0
+     814: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     817: getstatic     #358                // Field net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.END:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState;
+     820: invokevirtual #121                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity$RollState.ordinal:()I
+     823: invokevirtual #125                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setRollState:(I)V
+     826: aload_0
+     827: getstatic     #360                // Field net/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase.END:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+     830: putfield      #129                // Field currentPhase:Lnet/saksolm/monsterexpansion/entity/ai/rakoth/RakothRollGoal$Phase;
+     833: aload_0
+     834: iconst_0
+     835: putfield      #51                 // Field tickCount:I
+     838: goto          1356
+     841: aload_0
+     842: getfield      #51                 // Field tickCount:I
+     845: bipush        7
+     847: if_icmpne     1269
+     850: aload_0
+     851: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     854: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     857: aconst_null
+     858: aload_0
+     859: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     862: invokevirtual #153                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20185_:()D
+     865: aload_0
+     866: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     869: invokevirtual #156                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20186_:()D
+     872: aload_0
+     873: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     876: invokevirtual #159                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20189_:()D
+     879: getstatic     #363                // Field net/saksolm/monsterexpansion/sounds/ModSounds.GENERIC_LARGE_STOMP:Lnet/minecraftforge/registries/RegistryObject;
+     882: invokevirtual #171                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     885: checkcast     #173                // class net/minecraft/sounds/SoundEvent
+     888: aload_0
+     889: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     892: invokevirtual #177                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_5720_:()Lnet/minecraft/sounds/SoundSource;
+     895: fconst_2
+     896: fconst_1
+     897: invokevirtual #183                // Method net/minecraft/world/level/Level.m_6263_:(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     900: new           #23                 // class net/saksolm/monsterexpansion/util/AttackDefinition$Builder
+     903: dup
+     904: invokespecial #211                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder."<init>":()V
+     907: ldc           #212                // float 3.0f
+     909: invokevirtual #216                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.damage:(F)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     912: getstatic     #220                // Field net/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType.UPWARD:Lnet/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType;
+     915: dconst_1
+     916: invokevirtual #224                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.knockback:(Lnet/saksolm/monsterexpansion/entity/custom/AbstractLargeMonster$KnockbackType;D)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     919: invokevirtual #367                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.ignoreShield:()Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     922: bipush        55
+     924: invokevirtual #255                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.stun:(I)Lnet/saksolm/monsterexpansion/util/AttackDefinition$Builder;
+     927: invokevirtual #232                // Method net/saksolm/monsterexpansion/util/AttackDefinition$Builder.build:()Lnet/saksolm/monsterexpansion/util/AttackDefinition;
+     930: astore_1
+     931: aload_0
+     932: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     935: new           #101                // class net/minecraft/world/phys/Vec3
+     938: dup
+     939: dconst_0
+     940: dconst_0
+     941: ldc2_w        #312                // double 2.0d
+     944: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     947: fconst_2
+     948: sipush        240
+     951: invokevirtual #371                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnSmashedGroundEffect:(Lnet/minecraft/world/phys/Vec3;FI)V
+     954: aload_0
+     955: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     958: new           #101                // class net/minecraft/world/phys/Vec3
+     961: dup
+     962: dconst_0
+     963: dconst_0
+     964: ldc2_w        #239                // double 6.0d
+     967: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     970: fconst_2
+     971: sipush        240
+     974: invokevirtual #371                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnSmashedGroundEffect:(Lnet/minecraft/world/phys/Vec3;FI)V
+     977: aload_0
+     978: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+     981: new           #101                // class net/minecraft/world/phys/Vec3
+     984: dup
+     985: dconst_0
+     986: dconst_0
+     987: ldc2_w        #243                // double 10.0d
+     990: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     993: fconst_2
+     994: sipush        240
+     997: invokevirtual #371                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnSmashedGroundEffect:(Lnet/minecraft/world/phys/Vec3;FI)V
+    1000: aload_0
+    1001: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1004: new           #101                // class net/minecraft/world/phys/Vec3
+    1007: dup
+    1008: dconst_0
+    1009: dconst_0
+    1010: ldc2_w        #312                // double 2.0d
+    1013: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1016: fconst_2
+    1017: iconst_5
+    1018: iconst_2
+    1019: iconst_2
+    1020: invokevirtual #210                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnGroundEffects:(Lnet/minecraft/world/phys/Vec3;FIII)V
+    1023: aload_0
+    1024: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1027: new           #101                // class net/minecraft/world/phys/Vec3
+    1030: dup
+    1031: dconst_0
+    1032: dconst_0
+    1033: ldc2_w        #239                // double 6.0d
+    1036: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1039: fconst_2
+    1040: iconst_5
+    1041: iconst_2
+    1042: iconst_2
+    1043: invokevirtual #210                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnGroundEffects:(Lnet/minecraft/world/phys/Vec3;FIII)V
+    1046: aload_0
+    1047: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1050: new           #101                // class net/minecraft/world/phys/Vec3
+    1053: dup
+    1054: dconst_0
+    1055: dconst_0
+    1056: ldc2_w        #243                // double 10.0d
+    1059: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1062: fconst_2
+    1063: iconst_5
+    1064: iconst_2
+    1065: iconst_2
+    1066: invokevirtual #210                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnGroundEffects:(Lnet/minecraft/world/phys/Vec3;FIII)V
+    1069: aload_0
+    1070: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1073: aload_0
+    1074: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1077: invokevirtual #235                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+    1080: new           #101                // class net/minecraft/world/phys/Vec3
+    1083: dup
+    1084: dconst_0
+    1085: dconst_0
+    1086: ldc2_w        #312                // double 2.0d
+    1089: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1092: ldc2_w        #239                // double 6.0d
+    1095: ldc2_w        #243                // double 10.0d
+    1098: ldc2_w        #239                // double 6.0d
+    1101: aload_1
+    1102: invokevirtual #248                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.dealDamageInOrientedBox:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDDLnet/saksolm/monsterexpansion/util/AttackDefinition;)V
+    1105: aload_0
+    1106: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1109: aload_0
+    1110: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1113: invokevirtual #235                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+    1116: new           #101                // class net/minecraft/world/phys/Vec3
+    1119: dup
+    1120: dconst_0
+    1121: dconst_0
+    1122: ldc2_w        #239                // double 6.0d
+    1125: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1128: ldc2_w        #239                // double 6.0d
+    1131: ldc2_w        #243                // double 10.0d
+    1134: ldc2_w        #239                // double 6.0d
+    1137: aload_1
+    1138: invokevirtual #248                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.dealDamageInOrientedBox:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDDLnet/saksolm/monsterexpansion/util/AttackDefinition;)V
+    1141: aload_0
+    1142: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1145: aload_0
+    1146: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1149: invokevirtual #235                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+    1152: new           #101                // class net/minecraft/world/phys/Vec3
+    1155: dup
+    1156: dconst_0
+    1157: dconst_0
+    1158: ldc2_w        #243                // double 10.0d
+    1161: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1164: ldc2_w        #239                // double 6.0d
+    1167: ldc2_w        #243                // double 10.0d
+    1170: ldc2_w        #239                // double 6.0d
+    1173: aload_1
+    1174: invokevirtual #248                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.dealDamageInOrientedBox:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDDLnet/saksolm/monsterexpansion/util/AttackDefinition;)V
+    1177: aload_0
+    1178: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1181: invokevirtual #374                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.isTailCut:()Z
+    1184: ifne          1269
+    1187: aload_0
+    1188: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1191: new           #101                // class net/minecraft/world/phys/Vec3
+    1194: dup
+    1195: dconst_0
+    1196: dconst_0
+    1197: ldc2_w        #375                // double 14.0d
+    1200: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1203: fconst_2
+    1204: sipush        240
+    1207: invokevirtual #371                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnSmashedGroundEffect:(Lnet/minecraft/world/phys/Vec3;FI)V
+    1210: aload_0
+    1211: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1214: new           #101                // class net/minecraft/world/phys/Vec3
+    1217: dup
+    1218: dconst_0
+    1219: dconst_0
+    1220: ldc2_w        #375                // double 14.0d
+    1223: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1226: fconst_2
+    1227: iconst_5
+    1228: iconst_2
+    1229: iconst_2
+    1230: invokevirtual #210                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.spawnGroundEffects:(Lnet/minecraft/world/phys/Vec3;FIII)V
+    1233: aload_0
+    1234: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1237: aload_0
+    1238: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1241: invokevirtual #235                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20182_:()Lnet/minecraft/world/phys/Vec3;
+    1244: new           #101                // class net/minecraft/world/phys/Vec3
+    1247: dup
+    1248: dconst_0
+    1249: dconst_0
+    1250: ldc2_w        #375                // double 14.0d
+    1253: invokespecial #238                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+    1256: ldc2_w        #239                // double 6.0d
+    1259: ldc2_w        #243                // double 10.0d
+    1262: ldc2_w        #239                // double 6.0d
+    1265: aload_1
+    1266: invokevirtual #248                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.dealDamageInOrientedBox:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;DDDLnet/saksolm/monsterexpansion/util/AttackDefinition;)V
+    1269: aload_0
+    1270: getfield      #51                 // Field tickCount:I
+    1273: bipush        6
+    1275: if_icmpgt     1301
+    1278: aload_0
+    1279: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1282: aload_0
+    1283: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1286: invokevirtual #187                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+    1289: invokevirtual #190                // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+    1292: ldc2_w        #377                // double 0.5d
+    1295: invokevirtual #194                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+    1298: invokevirtual #197                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setScaledHorizontalDeltaMovement:(Lnet/minecraft/world/phys/Vec3;)V
+    1301: aload_0
+    1302: getfield      #51                 // Field tickCount:I
+    1305: bipush        20
+    1307: if_icmplt     1342
+    1310: aload_0
+    1311: getfield      #51                 // Field tickCount:I
+    1314: bipush        26
+    1316: if_icmpgt     1342
+    1319: aload_0
+    1320: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1323: aload_0
+    1324: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+    1327: invokevirtual #187                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_20154_:()Lnet/minecraft/world/phys/Vec3;
+    1330: invokevirtual #190                // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+    1333: ldc2_w        #377                // double 0.5d
+    1336: invokevirtual #194                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+    1339: invokevirtual #197                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.setScaledHorizontalDeltaMovement:(Lnet/minecraft/world/phys/Vec3;)V
+    1342: aload_0
+    1343: getfield      #51                 // Field tickCount:I
+    1346: bipush        34
+    1348: if_icmple     1356
+    1351: aload_0
+    1352: iconst_0
+    1353: putfield      #53                 // Field isExecuting:Z
+    1356: return
+
+  private void lambda$tick$0(net.minecraft.core.BlockPos);
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+       4: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+       7: aload_1
+       8: invokevirtual #393                // Method net/minecraft/world/level/Level.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      11: astore_2
+      12: aload_2
+      13: invokevirtual #398                // Method net/minecraft/world/level/block/state/BlockState.m_60795_:()Z
+      16: ifne          70
+      19: aload_2
+      20: aload_0
+      21: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      24: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      27: aload_1
+      28: invokevirtual #402                // Method net/minecraft/world/level/block/state/BlockState.m_60800_:(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F
+      31: fconst_0
+      32: fcmpl
+      33: iflt          70
+      36: aload_0
+      37: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      40: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      43: aload_0
+      44: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      47: invokestatic  #408                // Method net/minecraftforge/event/ForgeEventFactory.getMobGriefingEvent:(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;)Z
+      50: ifeq          70
+      53: aload_0
+      54: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      57: invokevirtual #149                // Method net/saksolm/monsterexpansion/entity/custom/RakothEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      60: aload_1
+      61: iconst_1
+      62: aload_0
+      63: getfield      #55                 // Field rakoth:Lnet/saksolm/monsterexpansion/entity/custom/RakothEntity;
+      66: invokevirtual #412                // Method net/minecraft/world/level/Level.m_46953_:(Lnet/minecraft/core/BlockPos;ZLnet/minecraft/world/entity/Entity;)Z
+      69: pop
+      70: return
+}

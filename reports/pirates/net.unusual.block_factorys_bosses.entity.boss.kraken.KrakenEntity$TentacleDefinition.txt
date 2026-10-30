@@ -1,0 +1,93 @@
+Compiled from "KrakenEntity.java"
+public final class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$TentacleDefinition extends java.lang.Record {
+  private final java.lang.String id;
+
+  private final net.minecraft.world.phys.Vec3 offset;
+
+  private final float rotation;
+
+  private final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType type;
+
+  private final java.lang.String introAnimationName;
+
+  private final int respawnsAfter;
+
+  protected net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity$TentacleDefinition(java.lang.String, net.minecraft.world.phys.Vec3, float, net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType, java.lang.String, int);
+    Code:
+       0: aload_0
+       1: invokespecial #34                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #36                 // Field id:Ljava/lang/String;
+       9: aload_0
+      10: aload_2
+      11: putfield      #38                 // Field offset:Lnet/minecraft/world/phys/Vec3;
+      14: aload_0
+      15: fload_3
+      16: putfield      #40                 // Field rotation:F
+      19: aload_0
+      20: aload         4
+      22: putfield      #42                 // Field type:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      25: aload_0
+      26: aload         5
+      28: putfield      #44                 // Field introAnimationName:Ljava/lang/String;
+      31: aload_0
+      32: iload         6
+      34: putfield      #46                 // Field respawnsAfter:I
+      37: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #68,  0             // InvokeDynamic #0:toString:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleDefinition;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #73,  0             // InvokeDynamic #0:hashCode:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleDefinition;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #78,  0             // InvokeDynamic #0:equals:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity$TentacleDefinition;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.lang.String id();
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field id:Ljava/lang/String;
+       4: areturn
+
+  public net.minecraft.world.phys.Vec3 offset();
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field offset:Lnet/minecraft/world/phys/Vec3;
+       4: areturn
+
+  public float rotation();
+    Code:
+       0: aload_0
+       1: getfield      #40                 // Field rotation:F
+       4: freturn
+
+  public net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType type();
+    Code:
+       0: aload_0
+       1: getfield      #42                 // Field type:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+       4: areturn
+
+  public java.lang.String introAnimationName();
+    Code:
+       0: aload_0
+       1: getfield      #44                 // Field introAnimationName:Ljava/lang/String;
+       4: areturn
+
+  public int respawnsAfter();
+    Code:
+       0: aload_0
+       1: getfield      #46                 // Field respawnsAfter:I
+       4: ireturn
+}

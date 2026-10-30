@@ -1,0 +1,198 @@
+Compiled from "SemiLivingFleshArmorItem.java"
+public class net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem extends net.minecraft.world.item.ArmorItem implements software.bernie.geckolib.animatable.GeoItem {
+  private final software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache cache;
+
+  public java.lang.String animationprocedure;
+
+  java.lang.String prevAnim;
+
+  public net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem(net.minecraft.world.item.ArmorItem$Type, net.minecraft.world.item.Item$Properties);
+    Code:
+       0: aload_0
+       1: new           #11                 // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem$1
+       4: dup
+       5: invokespecial #47                 // Method net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem$1."<init>":()V
+       8: aload_1
+       9: aload_2
+      10: invokespecial #50                 // Method net/minecraft/world/item/ArmorItem."<init>":(Lnet/minecraft/world/item/ArmorMaterial;Lnet/minecraft/world/item/ArmorItem$Type;Lnet/minecraft/world/item/Item$Properties;)V
+      13: aload_0
+      14: aload_0
+      15: invokestatic  #56                 // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      18: putfield      #58                 // Field cache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      21: aload_0
+      22: ldc           #60                 // String empty
+      24: putfield      #62                 // Field animationprocedure:Ljava/lang/String;
+      27: aload_0
+      28: ldc           #60                 // String empty
+      30: putfield      #64                 // Field prevAnim:Ljava/lang/String;
+      33: return
+
+  public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientItemExtensions>);
+    Code:
+       0: aload_1
+       1: new           #9                  // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem$2
+       4: dup
+       5: aload_0
+       6: invokespecial #76                 // Method net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem$2."<init>":(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;)V
+       9: invokeinterface #82,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      14: return
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #90                 // Method net/minecraft/world/item/ArmorItem.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: return
+
+  private software.bernie.geckolib.core.object.PlayState predicate(software.bernie.geckolib.core.animation.AnimationState);
+    Code:
+       0: aload_0
+       1: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+       4: ldc           #60                 // String empty
+       6: invokevirtual #107                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       9: ifeq          53
+      12: aload_1
+      13: invokevirtual #113                // Method software/bernie/geckolib/core/animation/AnimationState.getController:()Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      16: invokestatic  #119                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      19: ldc           #121                // String Idle
+      21: invokevirtual #125                // Method software/bernie/geckolib/core/animation/RawAnimation.thenLoop:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      24: invokevirtual #129                // Method software/bernie/geckolib/core/animation/AnimationController.setAnimation:(Lsoftware/bernie/geckolib/core/animation/RawAnimation;)V
+      27: aload_1
+      28: getstatic     #135                // Field software/bernie/geckolib/constant/DataTickets.ENTITY:Lsoftware/bernie/geckolib/core/object/DataTicket;
+      31: invokevirtual #139                // Method software/bernie/geckolib/core/animation/AnimationState.getData:(Lsoftware/bernie/geckolib/core/object/DataTicket;)Ljava/lang/Object;
+      34: checkcast     #141                // class net/minecraft/world/entity/Entity
+      37: astore_2
+      38: aload_2
+      39: instanceof    #143                // class net/minecraft/world/entity/decoration/ArmorStand
+      42: ifeq          49
+      45: getstatic     #149                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+      48: areturn
+      49: getstatic     #149                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+      52: areturn
+      53: getstatic     #152                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+      56: areturn
+
+  private software.bernie.geckolib.core.object.PlayState procedurePredicate(software.bernie.geckolib.core.animation.AnimationState);
+    Code:
+       0: aload_0
+       1: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+       4: ldc           #60                 // String empty
+       6: invokevirtual #107                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       9: ifne          25
+      12: aload_1
+      13: invokevirtual #113                // Method software/bernie/geckolib/core/animation/AnimationState.getController:()Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      16: invokevirtual #161                // Method software/bernie/geckolib/core/animation/AnimationController.getAnimationState:()Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      19: getstatic     #165                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      22: if_acmpeq     51
+      25: aload_0
+      26: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+      29: aload_0
+      30: getfield      #64                 // Field prevAnim:Ljava/lang/String;
+      33: invokevirtual #107                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      36: ifne          141
+      39: aload_0
+      40: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+      43: ldc           #60                 // String empty
+      45: invokevirtual #107                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      48: ifne          141
+      51: aload_0
+      52: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+      55: aload_0
+      56: getfield      #64                 // Field prevAnim:Ljava/lang/String;
+      59: invokevirtual #107                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      62: ifne          72
+      65: aload_1
+      66: invokevirtual #113                // Method software/bernie/geckolib/core/animation/AnimationState.getController:()Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      69: invokevirtual #168                // Method software/bernie/geckolib/core/animation/AnimationController.forceAnimationReset:()V
+      72: aload_1
+      73: invokevirtual #113                // Method software/bernie/geckolib/core/animation/AnimationState.getController:()Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      76: invokestatic  #119                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      79: aload_0
+      80: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+      83: invokevirtual #171                // Method software/bernie/geckolib/core/animation/RawAnimation.thenPlay:(Ljava/lang/String;)Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      86: invokevirtual #129                // Method software/bernie/geckolib/core/animation/AnimationController.setAnimation:(Lsoftware/bernie/geckolib/core/animation/RawAnimation;)V
+      89: aload_1
+      90: invokevirtual #113                // Method software/bernie/geckolib/core/animation/AnimationState.getController:()Lsoftware/bernie/geckolib/core/animation/AnimationController;
+      93: invokevirtual #161                // Method software/bernie/geckolib/core/animation/AnimationController.getAnimationState:()Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      96: getstatic     #165                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      99: if_acmpne     115
+     102: aload_0
+     103: ldc           #60                 // String empty
+     105: putfield      #62                 // Field animationprocedure:Ljava/lang/String;
+     108: aload_1
+     109: invokevirtual #113                // Method software/bernie/geckolib/core/animation/AnimationState.getController:()Lsoftware/bernie/geckolib/core/animation/AnimationController;
+     112: invokevirtual #168                // Method software/bernie/geckolib/core/animation/AnimationController.forceAnimationReset:()V
+     115: aload_1
+     116: getstatic     #135                // Field software/bernie/geckolib/constant/DataTickets.ENTITY:Lsoftware/bernie/geckolib/core/object/DataTicket;
+     119: invokevirtual #139                // Method software/bernie/geckolib/core/animation/AnimationState.getData:(Lsoftware/bernie/geckolib/core/object/DataTicket;)Ljava/lang/Object;
+     122: checkcast     #141                // class net/minecraft/world/entity/Entity
+     125: astore_2
+     126: aload_2
+     127: instanceof    #143                // class net/minecraft/world/entity/decoration/ArmorStand
+     130: ifeq          137
+     133: getstatic     #149                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+     136: areturn
+     137: getstatic     #149                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+     140: areturn
+     141: aload_0
+     142: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+     145: ldc           #60                 // String empty
+     147: invokevirtual #107                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     150: ifeq          163
+     153: aload_0
+     154: ldc           #60                 // String empty
+     156: putfield      #64                 // Field prevAnim:Ljava/lang/String;
+     159: getstatic     #152                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+     162: areturn
+     163: aload_0
+     164: aload_0
+     165: getfield      #62                 // Field animationprocedure:Ljava/lang/String;
+     168: putfield      #64                 // Field prevAnim:Ljava/lang/String;
+     171: getstatic     #149                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+     174: areturn
+
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+    Code:
+       0: aload_1
+       1: iconst_1
+       2: anewarray     #23                 // class software/bernie/geckolib/core/animation/AnimationController
+       5: dup
+       6: iconst_0
+       7: new           #23                 // class software/bernie/geckolib/core/animation/AnimationController
+      10: dup
+      11: aload_0
+      12: ldc           #175                // String controller
+      14: iconst_5
+      15: aload_0
+      16: invokedynamic #190,  0            // InvokeDynamic #0:handle:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;)Lsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;
+      21: invokespecial #193                // Method software/bernie/geckolib/core/animation/AnimationController."<init>":(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;Ljava/lang/String;ILsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;)V
+      24: aastore
+      25: invokevirtual #197                // Method software/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar.add:([Lsoftware/bernie/geckolib/core/animation/AnimationController;)Lsoftware/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar;
+      28: pop
+      29: aload_1
+      30: iconst_1
+      31: anewarray     #23                 // class software/bernie/geckolib/core/animation/AnimationController
+      34: dup
+      35: iconst_0
+      36: new           #23                 // class software/bernie/geckolib/core/animation/AnimationController
+      39: dup
+      40: aload_0
+      41: ldc           #199                // String procedureController
+      43: iconst_5
+      44: aload_0
+      45: invokedynamic #203,  0            // InvokeDynamic #1:handle:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;)Lsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;
+      50: invokespecial #193                // Method software/bernie/geckolib/core/animation/AnimationController."<init>":(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;Ljava/lang/String;ILsoftware/bernie/geckolib/core/animation/AnimationController$AnimationStateHandler;)V
+      53: aastore
+      54: invokevirtual #197                // Method software/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar.add:([Lsoftware/bernie/geckolib/core/animation/AnimationController;)Lsoftware/bernie/geckolib/core/animation/AnimatableManager$ControllerRegistrar;
+      57: pop
+      58: return
+
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+    Code:
+       0: aload_0
+       1: getfield      #58                 // Field cache:Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+       4: areturn
+}

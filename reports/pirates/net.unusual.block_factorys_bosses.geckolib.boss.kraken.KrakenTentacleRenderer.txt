@@ -1,0 +1,317 @@
+Compiled from "KrakenTentacleRenderer.java"
+public class net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenTentacleRenderer extends software.bernie.geckolib.renderer.GeoEntityRenderer<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity> {
+  public static final java.util.Map<java.lang.String, net.unusual.block_factorys_bosses.geckolib.util.ParticleLocator> BONER;
+
+  private static final net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenTentacleModel MODEL;
+
+  private static final net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenTentacleModel SLIM_MODEL;
+
+  public net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenTentacleRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: getstatic     #28                 // Field MODEL:Lnet/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel;
+       5: invokespecial #31                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lsoftware/bernie/geckolib/model/GeoModel;)V
+       8: return
+
+  protected int getBlockLightLevel(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_1
+       1: invokevirtual #41                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_20202_:()Lnet/minecraft/world/entity/Entity;
+       4: astore        4
+       6: aload         4
+       8: instanceof    #43                 // class net/unusual/block_factorys_bosses/entity/decoration/CannonEntity
+      11: ifeq          30
+      14: aload         4
+      16: checkcast     #43                 // class net/unusual/block_factorys_bosses/entity/decoration/CannonEntity
+      19: astore_3
+      20: aload_0
+      21: aload_1
+      22: aload_3
+      23: invokevirtual #47                 // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.getPos:()Lnet/minecraft/core/BlockPos;
+      26: invokespecial #51                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer.m_6086_:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+      29: ireturn
+      30: aload_0
+      31: aload_1
+      32: aload_2
+      33: iconst_5
+      34: invokevirtual #57                 // Method net/minecraft/core/BlockPos.m_6630_:(I)Lnet/minecraft/core/BlockPos;
+      37: invokespecial #51                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer.m_6086_:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+      40: ireturn
+
+  protected int getSkyLightLevel(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_1
+       1: invokevirtual #41                 // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.m_20202_:()Lnet/minecraft/world/entity/Entity;
+       4: astore        4
+       6: aload         4
+       8: instanceof    #43                 // class net/unusual/block_factorys_bosses/entity/decoration/CannonEntity
+      11: ifeq          30
+      14: aload         4
+      16: checkcast     #43                 // class net/unusual/block_factorys_bosses/entity/decoration/CannonEntity
+      19: astore_3
+      20: aload_0
+      21: aload_1
+      22: aload_3
+      23: invokevirtual #47                 // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.getPos:()Lnet/minecraft/core/BlockPos;
+      26: invokespecial #67                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer.m_114508_:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+      29: ireturn
+      30: aload_0
+      31: aload_1
+      32: aload_2
+      33: iconst_5
+      34: invokevirtual #57                 // Method net/minecraft/core/BlockPos.m_6630_:(I)Lnet/minecraft/core/BlockPos;
+      37: invokespecial #67                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer.m_114508_:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+      40: ireturn
+
+  protected float getDeathMaxRotation(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity);
+    Code:
+       0: fconst_0
+       1: freturn
+
+  public int getPackedOverlay(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, float, float);
+    Code:
+       0: fload_2
+       1: invokestatic  #77                 // Method net/minecraft/client/renderer/texture/OverlayTexture.m_118088_:(F)I
+       4: aload_1
+       5: getfield      #81                 // Field net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.f_20916_:I
+       8: ifle          15
+      11: iconst_1
+      12: goto          16
+      15: iconst_0
+      16: invokestatic  #85                 // Method net/minecraft/client/renderer/texture/OverlayTexture.m_118096_:(Z)I
+      19: invokestatic  #89                 // Method net/minecraft/client/renderer/texture/OverlayTexture.m_118093_:(II)I
+      22: ireturn
+
+  public software.bernie.geckolib.model.GeoModel<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity> getGeoModel();
+    Code:
+       0: aload_0
+       1: getfield      #99                 // Field animatable:Lnet/minecraft/world/entity/Entity;
+       4: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       7: invokevirtual #103                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.getTentacleType:()Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      10: invokevirtual #107                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType.isSlim:()Z
+      13: ifeq          22
+      16: getstatic     #109                // Field SLIM_MODEL:Lnet/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel;
+      19: goto          25
+      22: getstatic     #28                 // Field MODEL:Lnet/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel;
+      25: areturn
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: aload         5
+       8: iload         6
+      10: fload         7
+      12: iload         8
+      14: iload         9
+      16: fload         10
+      18: fload         11
+      20: fload         12
+      22: fload         13
+      24: invokespecial #116                // Method software/bernie/geckolib/renderer/GeoEntityRenderer.preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      27: aload_2
+      28: aload_1
+      29: checkcast     #118                // class net/unusual/block_factorys_bosses/geckolib/CommonPoseStack
+      32: fload         7
+      34: invokevirtual #122                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.transformCrateGrab:(Lnet/unusual/block_factorys_bosses/geckolib/CommonPoseStack;F)V
+      37: return
+
+  public void renderRecursively(com.mojang.blaze3d.vertex.PoseStack, net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_2
+       1: invokevirtual #103                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity.getTentacleType:()Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+       4: invokevirtual #107                // Method net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType.isSlim:()Z
+       7: ifne          26
+      10: aload_3
+      11: invokevirtual #146                // Method software/bernie/geckolib/cache/object/GeoBone.getName:()Ljava/lang/String;
+      14: ldc           #148                // String bone_correction3
+      16: invokevirtual #154                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      19: ifeq          26
+      22: iconst_1
+      23: goto          27
+      26: iconst_0
+      27: istore        15
+      29: iload         15
+      31: ifeq          60
+      34: aload_1
+      35: invokevirtual #160                // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+      38: aload_1
+      39: getstatic     #166                // Field net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel.ROOT_OFFSET:Lnet/minecraft/world/phys/Vec3;
+      42: invokevirtual #172                // Method net/minecraft/world/phys/Vec3.m_7096_:()D
+      45: getstatic     #166                // Field net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel.ROOT_OFFSET:Lnet/minecraft/world/phys/Vec3;
+      48: invokevirtual #175                // Method net/minecraft/world/phys/Vec3.m_7098_:()D
+      51: getstatic     #166                // Field net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel.ROOT_OFFSET:Lnet/minecraft/world/phys/Vec3;
+      54: invokevirtual #178                // Method net/minecraft/world/phys/Vec3.m_7094_:()D
+      57: invokevirtual #182                // Method com/mojang/blaze3d/vertex/PoseStack.m_85837_:(DDD)V
+      60: aload_0
+      61: aload_1
+      62: aload_2
+      63: aload_3
+      64: aload         4
+      66: aload         5
+      68: aload         6
+      70: iload         7
+      72: fload         8
+      74: iload         9
+      76: iload         10
+      78: fload         11
+      80: fload         12
+      82: fload         13
+      84: fload         14
+      86: invokespecial #185                // Method software/bernie/geckolib/renderer/GeoEntityRenderer.renderRecursively:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      89: iload         15
+      91: ifeq          98
+      94: aload_1
+      95: invokevirtual #188                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+      98: return
+
+  public int getPackedOverlay(net.minecraft.world.entity.Entity, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       5: fload_2
+       6: fload_3
+       7: invokevirtual #196                // Method getPackedOverlay:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;FF)I
+      10: ireturn
+
+  protected float getDeathMaxRotation(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       5: invokevirtual #199                // Method getDeathMaxRotation:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;)F
+       8: freturn
+
+  public void renderRecursively(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.Entity, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: aload         6
+      13: iload         7
+      15: fload         8
+      17: iload         9
+      19: iload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: fload         14
+      29: invokevirtual #201                // Method renderRecursively:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      32: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.Entity, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: fload         7
+      15: iload         8
+      17: iload         9
+      19: fload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: invokevirtual #203                // Method preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      30: return
+
+  public void renderRecursively(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: aload         6
+      13: iload         7
+      15: fload         8
+      17: iload         9
+      19: iload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: fload         14
+      29: invokevirtual #201                // Method renderRecursively:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      32: return
+
+  public void preRender(com.mojang.blaze3d.vertex.PoseStack, software.bernie.geckolib.core.animatable.GeoAnimatable, software.bernie.geckolib.cache.object.BakedGeoModel, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.VertexConsumer, boolean, float, int, int, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       6: aload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: fload         7
+      15: iload         8
+      17: iload         9
+      19: fload         10
+      21: fload         11
+      23: fload         12
+      25: fload         13
+      27: invokevirtual #203                // Method preRender:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V
+      30: return
+
+  public int getPackedOverlay(software.bernie.geckolib.core.animatable.GeoAnimatable, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       5: fload_2
+       6: fload_3
+       7: invokevirtual #196                // Method getPackedOverlay:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;FF)I
+      10: ireturn
+
+  protected int m_6086_(net.minecraft.world.entity.Entity, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       5: aload_2
+       6: invokevirtual #208                // Method getBlockLightLevel:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;Lnet/minecraft/core/BlockPos;)I
+       9: ireturn
+
+  protected int m_114508_(net.minecraft.world.entity.Entity, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #17                 // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity
+       5: aload_2
+       6: invokevirtual #210                // Method getSkyLightLevel:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity;Lnet/minecraft/core/BlockPos;)I
+       9: ireturn
+
+  static {};
+    Code:
+       0: new           #213                // class java/util/HashMap
+       3: dup
+       4: invokespecial #215                // Method java/util/HashMap."<init>":()V
+       7: putstatic     #217                // Field BONER:Ljava/util/Map;
+      10: new           #162                // class net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel
+      13: dup
+      14: iconst_0
+      15: invokespecial #220                // Method net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel."<init>":(Z)V
+      18: putstatic     #28                 // Field MODEL:Lnet/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel;
+      21: new           #162                // class net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel
+      24: dup
+      25: iconst_1
+      26: invokespecial #220                // Method net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel."<init>":(Z)V
+      29: putstatic     #109                // Field SLIM_MODEL:Lnet/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenTentacleModel;
+      32: return
+}

@@ -1,0 +1,286 @@
+Compiled from "RollPacket.java"
+public class net.saksolm.monsterexpansion.network.RollPacket {
+  public static final net.minecraft.resources.ResourceLocation ROLL_ANIM;
+
+  public static final int ROLL_DURATION_TICKS = 27;
+
+  private final float strafeInput;
+
+  private final float forwardInput;
+
+  public net.saksolm.monsterexpansion.network.RollPacket(float, float);
+    Code:
+       0: aload_0
+       1: invokespecial #28                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: fload_1
+       6: putfield      #30                 // Field strafeInput:F
+       9: aload_0
+      10: fload_2
+      11: putfield      #32                 // Field forwardInput:F
+      14: return
+
+  public net.saksolm.monsterexpansion.network.RollPacket(net.minecraft.network.FriendlyByteBuf);
+    Code:
+       0: aload_0
+       1: invokespecial #28                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #41                 // Method net/minecraft/network/FriendlyByteBuf.readFloat:()F
+       9: putfield      #30                 // Field strafeInput:F
+      12: aload_0
+      13: aload_1
+      14: invokevirtual #41                 // Method net/minecraft/network/FriendlyByteBuf.readFloat:()F
+      17: putfield      #32                 // Field forwardInput:F
+      20: return
+
+  public void toBytes(net.minecraft.network.FriendlyByteBuf);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #30                 // Field strafeInput:F
+       5: invokevirtual #48                 // Method net/minecraft/network/FriendlyByteBuf.writeFloat:(F)Lio/netty/buffer/ByteBuf;
+       8: pop
+       9: aload_1
+      10: aload_0
+      11: getfield      #32                 // Field forwardInput:F
+      14: invokevirtual #48                 // Method net/minecraft/network/FriendlyByteBuf.writeFloat:(F)Lio/netty/buffer/ByteBuf;
+      17: pop
+      18: return
+
+  public boolean handle(java.util.function.Supplier<net.minecraftforge.network.NetworkEvent$Context>);
+    Code:
+       0: aload_1
+       1: invokeinterface #57,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       6: checkcast     #7                  // class net/minecraftforge/network/NetworkEvent$Context
+       9: astore_2
+      10: aload_2
+      11: aload_0
+      12: aload_2
+      13: invokedynamic #74,  0             // InvokeDynamic #0:run:(Lnet/saksolm/monsterexpansion/network/RollPacket;Lnet/minecraftforge/network/NetworkEvent$Context;)Ljava/lang/Runnable;
+      18: invokevirtual #78                 // Method net/minecraftforge/network/NetworkEvent$Context.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+      21: pop
+      22: iconst_1
+      23: ireturn
+
+  private void lambda$handle$1(net.minecraftforge.network.NetworkEvent$Context);
+    Code:
+       0: aload_1
+       1: invokevirtual #87                 // Method net/minecraftforge/network/NetworkEvent$Context.getSender:()Lnet/minecraft/server/level/ServerPlayer;
+       4: astore_2
+       5: aload_2
+       6: ifnull        15
+       9: getstatic     #93                 // Field net/saksolm/monsterexpansion/config/RollConfig.enableRoll:Z
+      12: ifne          16
+      15: return
+      16: aload_2
+      17: getstatic     #101                // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      20: invokevirtual #105                // Method net/minecraft/server/level/ServerPlayer.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      23: aload_0
+      24: aload_2
+      25: invokedynamic #118,  0            // InvokeDynamic #1:accept:(Lnet/saksolm/monsterexpansion/network/RollPacket;Lnet/minecraft/server/level/ServerPlayer;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      30: invokevirtual #124                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      33: return
+
+  private void lambda$handle$0(net.minecraft.server.level.ServerPlayer, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: aload_2
+       1: invokeinterface #132,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getCooldown:()I
+       6: ifgt          418
+       9: aload_2
+      10: invokeinterface #136,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+      15: ifne          418
+      18: aload_1
+      19: invokevirtual #139                // Method net/minecraft/server/level/ServerPlayer.m_20096_:()Z
+      22: ifeq          418
+      25: iconst_1
+      26: istore_3
+      27: aload_1
+      28: invokevirtual #143                // Method net/minecraft/server/level/ServerPlayer.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      31: astore        4
+      33: aload         4
+      35: invokevirtual #149                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      38: astore        6
+      40: aload         6
+      42: instanceof    #151                // class net/saksolm/monsterexpansion/item/GreatSwordActionItem
+      45: ifeq          111
+      48: aload         6
+      50: checkcast     #151                // class net/saksolm/monsterexpansion/item/GreatSwordActionItem
+      53: astore        5
+      55: aload_1
+      56: getstatic     #154                // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.WEAPON_ACTION_STATE:Lnet/minecraftforge/common/capabilities/Capability;
+      59: invokevirtual #105                // Method net/minecraft/server/level/ServerPlayer.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      62: astore        6
+      64: aload         6
+      66: invokevirtual #157                // Method net/minecraftforge/common/util/LazyOptional.isPresent:()Z
+      69: ifeq          111
+      72: aload         6
+      74: invokevirtual #161                // Method net/minecraftforge/common/util/LazyOptional.resolve:()Ljava/util/Optional;
+      77: invokevirtual #164                // Method java/util/Optional.get:()Ljava/lang/Object;
+      80: checkcast     #166                // class net/saksolm/monsterexpansion/capabilities/IWeaponActionState
+      83: astore        7
+      85: aload         5
+      87: aload         7
+      89: invokevirtual #170                // Method net/saksolm/monsterexpansion/item/GreatSwordActionItem.canRoll:(Lnet/saksolm/monsterexpansion/capabilities/IWeaponActionState;)Z
+      92: ifne          100
+      95: iconst_0
+      96: istore_3
+      97: goto          111
+     100: aload         5
+     102: aload         7
+     104: aload_1
+     105: invokevirtual #174                // Method net/minecraft/server/level/ServerPlayer.m_9236_:()Lnet/minecraft/world/level/Level;
+     108: invokevirtual #178                // Method net/saksolm/monsterexpansion/item/GreatSwordActionItem.forceIdle:(Lnet/saksolm/monsterexpansion/capabilities/IWeaponActionState;Lnet/minecraft/world/level/Level;)V
+     111: aload_1
+     112: getstatic     #184                // Field net/saksolm/monsterexpansion/effect/ModEffects.DISCOMBOBULATED:Lnet/minecraftforge/registries/RegistryObject;
+     115: invokevirtual #187                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     118: checkcast     #189                // class net/minecraft/world/effect/MobEffect
+     121: invokevirtual #193                // Method net/minecraft/server/level/ServerPlayer.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     124: ifne          143
+     127: aload_1
+     128: getstatic     #196                // Field net/saksolm/monsterexpansion/effect/ModEffects.STUNNED:Lnet/minecraftforge/registries/RegistryObject;
+     131: invokevirtual #187                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     134: checkcast     #189                // class net/minecraft/world/effect/MobEffect
+     137: invokevirtual #193                // Method net/minecraft/server/level/ServerPlayer.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     140: ifeq          145
+     143: iconst_0
+     144: istore_3
+     145: iload_3
+     146: ifne          150
+     149: return
+     150: aload_0
+     151: getfield      #32                 // Field forwardInput:F
+     154: fstore        5
+     156: aload_0
+     157: getfield      #30                 // Field strafeInput:F
+     160: fstore        6
+     162: fload         5
+     164: fconst_0
+     165: fcmpl
+     166: ifne          179
+     169: fload         6
+     171: fconst_0
+     172: fcmpl
+     173: ifne          179
+     176: fconst_1
+     177: fstore        5
+     179: new           #198                // class net/minecraft/world/phys/Vec3
+     182: dup
+     183: fload         6
+     185: f2d
+     186: dconst_0
+     187: fload         5
+     189: f2d
+     190: invokespecial #201                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     193: astore        7
+     195: aload         7
+     197: aload_1
+     198: invokevirtual #204                // Method net/minecraft/server/level/ServerPlayer.m_146908_:()F
+     201: fneg
+     202: f2d
+     203: invokestatic  #210                // Method java/lang/Math.toRadians:(D)D
+     206: d2f
+     207: invokevirtual #214                // Method net/minecraft/world/phys/Vec3.m_82524_:(F)Lnet/minecraft/world/phys/Vec3;
+     210: invokevirtual #218                // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+     213: astore        8
+     215: aload         8
+     217: getfield      #222                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     220: aload         8
+     222: getfield      #225                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     225: invokestatic  #229                // Method java/lang/Math.atan2:(DD)D
+     228: dstore        9
+     230: dload         9
+     232: invokestatic  #232                // Method java/lang/Math.toDegrees:(D)D
+     235: ldc2_w        #233                // double 90.0d
+     238: dsub
+     239: d2f
+     240: fstore        11
+     242: aload_2
+     243: iconst_1
+     244: invokeinterface #238,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setRolling:(Z)V
+     249: aload_2
+     250: bipush        27
+     252: invokeinterface #242,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setTimer:(I)V
+     257: aload_2
+     258: getstatic     #245                // Field net/saksolm/monsterexpansion/config/RollConfig.rollCooldown:I
+     261: invokeinterface #248,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setCooldown:(I)V
+     266: aload_2
+     267: fload         11
+     269: invokeinterface #252,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setRollYaw:(F)V
+     274: aload_1
+     275: getstatic     #255                // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+     278: invokevirtual #187                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     281: checkcast     #189                // class net/minecraft/world/effect/MobEffect
+     284: invokevirtual #259                // Method net/minecraft/server/level/ServerPlayer.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+     287: astore        12
+     289: aload         12
+     291: ifnull        362
+     294: iconst_1
+     295: aload         12
+     297: invokevirtual #264                // Method net/minecraft/world/effect/MobEffectInstance.m_19557_:()I
+     300: sipush        200
+     303: isub
+     304: invokestatic  #268                // Method java/lang/Math.max:(II)I
+     307: istore        13
+     309: aload_1
+     310: getstatic     #255                // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+     313: invokevirtual #187                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     316: checkcast     #189                // class net/minecraft/world/effect/MobEffect
+     319: invokevirtual #271                // Method net/minecraft/server/level/ServerPlayer.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     322: pop
+     323: aload_1
+     324: new           #261                // class net/minecraft/world/effect/MobEffectInstance
+     327: dup
+     328: getstatic     #255                // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+     331: invokevirtual #187                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     334: checkcast     #189                // class net/minecraft/world/effect/MobEffect
+     337: iload         13
+     339: aload         12
+     341: invokevirtual #274                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+     344: aload         12
+     346: invokevirtual #277                // Method net/minecraft/world/effect/MobEffectInstance.m_19571_:()Z
+     349: iconst_0
+     350: aload         12
+     352: invokevirtual #280                // Method net/minecraft/world/effect/MobEffectInstance.m_19575_:()Z
+     355: invokespecial #283                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+     358: invokevirtual #287                // Method net/minecraft/server/level/ServerPlayer.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     361: pop
+     362: getstatic     #290                // Field net/saksolm/monsterexpansion/config/RollConfig.rollSpeed:D
+     365: dstore        13
+     367: aload_1
+     368: aload         8
+     370: dload         13
+     372: invokevirtual #294                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     375: invokevirtual #298                // Method net/minecraft/server/level/ServerPlayer.m_20256_:(Lnet/minecraft/world/phys/Vec3;)V
+     378: aload_1
+     379: iconst_1
+     380: putfield      #301                // Field net/minecraft/server/level/ServerPlayer.f_19864_:Z
+     383: aload_1
+     384: getfield      #305                // Field net/minecraft/server/level/ServerPlayer.f_8906_:Lnet/minecraft/server/network/ServerGamePacketListenerImpl;
+     387: new           #307                // class net/minecraft/network/protocol/game/ClientboundSetEntityMotionPacket
+     390: dup
+     391: aload_1
+     392: invokespecial #310                // Method net/minecraft/network/protocol/game/ClientboundSetEntityMotionPacket."<init>":(Lnet/minecraft/world/entity/Entity;)V
+     395: invokevirtual #316                // Method net/minecraft/server/network/ServerGamePacketListenerImpl.m_9829_:(Lnet/minecraft/network/protocol/Packet;)V
+     398: aload_1
+     399: ldc_w         #317                // float 0.5f
+     402: invokevirtual #320                // Method net/minecraft/server/level/ServerPlayer.m_36399_:(F)V
+     405: aload_1
+     406: getstatic     #322                // Field ROLL_ANIM:Lnet/minecraft/resources/ResourceLocation;
+     409: bipush        27
+     411: iconst_0
+     412: fload         11
+     414: iconst_2
+     415: invokestatic  #328                // Method net/saksolm/monsterexpansion/api/AnimationAPI.transitionTo:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/resources/ResourceLocation;IZFI)V
+     418: return
+
+  static {};
+    Code:
+       0: new           #356                // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc_w         #358                // String monsterexpansion
+       7: ldc_w         #360                // String animations/roll.json
+      10: invokespecial #363                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      13: putstatic     #322                // Field ROLL_ANIM:Lnet/minecraft/resources/ResourceLocation;
+      16: return
+}

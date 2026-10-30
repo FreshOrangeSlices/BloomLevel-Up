@@ -1,0 +1,76 @@
+Compiled from "SemiLivingHelmetEatingEffectProcedure.java"
+public class net.mcreator.skarriermobs.procedures.SemiLivingHelmetEatingEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.SemiLivingHelmetEatingEffectProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #20                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onUseItemFinish(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent$Finish);
+    Code:
+       0: aload_0
+       1: ifnull        23
+       4: aload_0
+       5: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Finish.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       8: ifnull        23
+      11: aload_0
+      12: aload_0
+      13: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Finish.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: aload_0
+      17: invokevirtual #33                 // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Finish.getItem:()Lnet/minecraft/world/item/ItemStack;
+      20: invokestatic  #37                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)V
+      23: return
+
+  public static void execute(net.minecraft.world.entity.Entity, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aconst_null
+       1: aload_0
+       2: aload_1
+       3: invokestatic  #37                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)V
+       6: return
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: ifnonnull     5
+       4: return
+       5: aload_2
+       6: invokevirtual #51                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+       9: invokevirtual #57                 // Method net/minecraft/world/item/Item.m_41472_:()Z
+      12: ifeq          95
+      15: aload_1
+      16: instanceof    #59                 // class net/minecraft/world/entity/LivingEntity
+      19: ifeq          37
+      22: aload_1
+      23: checkcast     #59                 // class net/minecraft/world/entity/LivingEntity
+      26: astore_3
+      27: aload_3
+      28: getstatic     #65                 // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+      31: invokevirtual #69                 // Method net/minecraft/world/entity/LivingEntity.m_6844_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+      34: goto          40
+      37: getstatic     #72                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      40: invokevirtual #51                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      43: getstatic     #78                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.SEMI_LIVING_FLESH_ARMOR_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+      46: invokevirtual #84                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      49: if_acmpne     95
+      52: aload_1
+      53: instanceof    #59                 // class net/minecraft/world/entity/LivingEntity
+      56: ifeq          95
+      59: aload_1
+      60: checkcast     #59                 // class net/minecraft/world/entity/LivingEntity
+      63: astore        4
+      65: aload         4
+      67: invokevirtual #88                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      70: invokevirtual #93                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      73: ifne          95
+      76: aload         4
+      78: new           #95                 // class net/minecraft/world/effect/MobEffectInstance
+      81: dup
+      82: getstatic     #101                // Field net/minecraft/world/effect/MobEffects.f_19605_:Lnet/minecraft/world/effect/MobEffect;
+      85: bipush        100
+      87: iconst_2
+      88: invokespecial #104                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      91: invokevirtual #108                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      94: pop
+      95: return
+}

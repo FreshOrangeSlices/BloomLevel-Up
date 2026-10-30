@@ -1,0 +1,125 @@
+Compiled from "KrakenCinematicRenderer.java"
+public class net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenCinematicRenderer extends software.bernie.geckolib.renderer.GeoEntityRenderer<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity> implements net.unusual.block_factorys_bosses.geckolib.boss.CinematicRenderer<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity> {
+  private static final net.minecraft.resources.ResourceLocation TEXTURE;
+
+  public net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenCinematicRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: new           #10                 // class net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenCinematicRenderer$KrakenCinematicModel
+       5: dup
+       6: ldc           #22                 // String kraken_cinematic
+       8: invokestatic  #28                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      11: invokespecial #31                 // Method net/unusual/block_factorys_bosses/geckolib/boss/kraken/KrakenCinematicRenderer$KrakenCinematicModel."<init>":(Lnet/minecraft/resources/ResourceLocation;)V
+      14: invokespecial #34                 // Method software/bernie/geckolib/renderer/GeoEntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lsoftware/bernie/geckolib/model/GeoModel;)V
+      17: aload_0
+      18: aload_0
+      19: invokestatic  #40                 // Method net/unusual/block_factorys_bosses/geckolib/boneCache/BoneDataCacheLayer.forEntity:(Lsoftware/bernie/geckolib/renderer/GeoRenderer;)Lnet/unusual/block_factorys_bosses/geckolib/boneCache/BoneDataCacheLayer;
+      22: iconst_1
+      23: anewarray     #42                 // class java/lang/String
+      26: dup
+      27: iconst_0
+      28: ldc           #44                 // String camera
+      30: aastore
+      31: invokevirtual #48                 // Method net/unusual/block_factorys_bosses/geckolib/boneCache/BoneDataCacheLayer.withAlwaysWanted:([Ljava/lang/String;)Lnet/unusual/block_factorys_bosses/geckolib/boneCache/BoneDataCacheLayer;
+      34: invokevirtual #52                 // Method addRenderLayer:(Lsoftware/bernie/geckolib/renderer/layer/GeoRenderLayer;)Lsoftware/bernie/geckolib/renderer/GeoEntityRenderer;
+      37: pop
+      38: return
+
+  public boolean shouldRender(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity, net.minecraft.client.renderer.culling.Frustum, double, double, double);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public com.mojang.datafixers.util.Pair<java.lang.Float, java.lang.Float> getCinematicYawAndPitch(net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenCinematicEntity, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.player.LocalPlayer);
+    Code:
+       0: new           #71                 // class org/joml/Vector3f
+       3: dup
+       4: fconst_0
+       5: fconst_0
+       6: fconst_1
+       7: invokespecial #74                 // Method org/joml/Vector3f."<init>":(FFF)V
+      10: astore        4
+      12: aload_1
+      13: aload_2
+      14: invokevirtual #80                 // Method software/bernie/geckolib/cache/object/GeoBone.getName:()Ljava/lang/String;
+      17: invokestatic  #86                 // Method net/unusual/block_factorys_bosses/geckolib/boneCache/BoneDataCache.getInitializedBoneData:(Lnet/minecraft/world/entity/Entity;Ljava/lang/String;)Lnet/unusual/block_factorys_bosses/geckolib/boneCache/BoneData;
+      20: astore        5
+      22: aload         5
+      24: ifnull        38
+      27: aload         5
+      29: getfield      #92                 // Field net/unusual/block_factorys_bosses/geckolib/boneCache/BoneData.worldTransform:Lorg/joml/Matrix4f;
+      32: aload         4
+      34: invokevirtual #98                 // Method org/joml/Matrix4f.transformDirection:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+      37: pop
+      38: aload         4
+      40: invokevirtual #101                // Method org/joml/Vector3f.x:()F
+      43: f2d
+      44: aload         4
+      46: invokevirtual #103                // Method org/joml/Vector3f.z:()F
+      49: fneg
+      50: f2d
+      51: invokestatic  #109                // Method java/lang/Math.atan2:(DD)D
+      54: d2f
+      55: ldc           #110                // float 57.295776f
+      57: fmul
+      58: fstore        6
+      60: aload         4
+      62: invokevirtual #112                // Method org/joml/Vector3f.y:()F
+      65: f2d
+      66: aload         4
+      68: invokevirtual #101                // Method org/joml/Vector3f.x:()F
+      71: aload         4
+      73: invokevirtual #101                // Method org/joml/Vector3f.x:()F
+      76: fmul
+      77: aload         4
+      79: invokevirtual #103                // Method org/joml/Vector3f.z:()F
+      82: aload         4
+      84: invokevirtual #103                // Method org/joml/Vector3f.z:()F
+      87: fmul
+      88: fadd
+      89: invokestatic  #118                // Method net/minecraft/util/Mth.m_14116_:(F)F
+      92: f2d
+      93: invokestatic  #109                // Method java/lang/Math.atan2:(DD)D
+      96: d2f
+      97: ldc           #110                // float 57.295776f
+      99: fmul
+     100: fstore        7
+     102: new           #120                // class com/mojang/datafixers/util/Pair
+     105: dup
+     106: fload         6
+     108: invokestatic  #126                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+     111: fload         7
+     113: invokestatic  #126                // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+     116: invokespecial #129                // Method com/mojang/datafixers/util/Pair."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+     119: areturn
+
+  public boolean m_5523_(net.minecraft.world.entity.Entity, net.minecraft.client.renderer.culling.Frustum, double, double, double);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #145                // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity
+       5: aload_2
+       6: dload_3
+       7: dload         5
+       9: dload         7
+      11: invokevirtual #147                // Method shouldRender:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity;Lnet/minecraft/client/renderer/culling/Frustum;DDD)Z
+      14: ireturn
+
+  public com.mojang.datafixers.util.Pair getCinematicYawAndPitch(java.lang.Object, software.bernie.geckolib.cache.object.GeoBone, net.minecraft.client.player.LocalPlayer);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #145                // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity
+       5: aload_2
+       6: aload_3
+       7: invokevirtual #150                // Method getCinematicYawAndPitch:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenCinematicEntity;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/player/LocalPlayer;)Lcom/mojang/datafixers/util/Pair;
+      10: areturn
+
+  static {};
+    Code:
+       0: ldc           #154                // String textures/entity/kraken.png
+       2: invokestatic  #28                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #156                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+       8: return
+}

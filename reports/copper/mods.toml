@@ -1,0 +1,40 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See https://files.minecraftforge.net/ for a list of versions.
+license = "MIT" # Review your options at https://choosealicense.com/.
+[[mixins]]
+config = "copperagebackport.forge.mixins.json"
+issueTrackerURL="https://github.com/Smallinger/Copper-Age-Backport/issues" #optional
+[[mods]] #mandatory
+modId = "copperagebackport" #mandatory
+version = "0.1.5.1-pre" #mandatory
+displayName = "Copper-Age-Backport" #mandatory
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional (see https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/)
+displayURL="https://github.com/Smallinger/Copper-Age-Backport" #optional (displayed in the mod UI)
+logoFile = "logo.png" #optional (needs to be in the root of your mod jar (root of your 'resources' folder))
+credits = "Smallinger" #optional
+authors = "Smallinger" #optional
+description = '''Bringing the Copper Golem to older Minecraft versions! /n/n Discord: https://discord.com/invite/hGrWUW9vSb''' #mandatory (Supports multiline text)
+[[dependencies.copperagebackport]] #optional
+modId = "forge" #mandatory
+mandatory = true #mandatory
+versionRange = "[47.3.0,)" #mandatory
+ordering = "NONE" # The order that this dependency should load in relation to your mod, required to be either 'BEFORE' or 'AFTER' if the dependency is not mandatory
+side = "BOTH" # Side this dependency is applied on - 'BOTH', 'CLIENT' or 'SERVER'
+[[dependencies.copperagebackport]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1, 1.22)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.copperagebackport]]
+modId = "sophisticatedcore"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+[[dependencies.copperagebackport]]
+modId = "sophisticatedstorage"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"

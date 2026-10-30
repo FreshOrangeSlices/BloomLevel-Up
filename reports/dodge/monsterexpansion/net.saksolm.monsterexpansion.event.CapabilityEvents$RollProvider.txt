@@ -1,0 +1,75 @@
+Compiled from "CapabilityEvents.java"
+class net.saksolm.monsterexpansion.event.CapabilityEvents$RollProvider implements net.minecraftforge.common.capabilities.ICapabilitySerializable<net.minecraft.nbt.CompoundTag> {
+  private final net.saksolm.monsterexpansion.capabilities.RollImpl backend;
+
+  private final net.minecraftforge.common.util.LazyOptional<net.saksolm.monsterexpansion.capabilities.IRoll> optional;
+
+  private net.saksolm.monsterexpansion.event.CapabilityEvents$RollProvider();
+    Code:
+       0: aload_0
+       1: invokespecial #25                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #27                 // class net/saksolm/monsterexpansion/capabilities/RollImpl
+       8: dup
+       9: invokespecial #28                 // Method net/saksolm/monsterexpansion/capabilities/RollImpl."<init>":()V
+      12: putfield      #30                 // Field backend:Lnet/saksolm/monsterexpansion/capabilities/RollImpl;
+      15: aload_0
+      16: aload_0
+      17: invokedynamic #49,  0             // InvokeDynamic #0:get:(Lnet/saksolm/monsterexpansion/event/CapabilityEvents$RollProvider;)Lnet/minecraftforge/common/util/NonNullSupplier;
+      22: invokestatic  #55                 // Method net/minecraftforge/common/util/LazyOptional.of:(Lnet/minecraftforge/common/util/NonNullSupplier;)Lnet/minecraftforge/common/util/LazyOptional;
+      25: putfield      #57                 // Field optional:Lnet/minecraftforge/common/util/LazyOptional;
+      28: return
+
+  public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T>, net.minecraft.core.Direction);
+    Code:
+       0: aload_1
+       1: getstatic     #70                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+       4: if_acmpne     15
+       7: aload_0
+       8: getfield      #57                 // Field optional:Lnet/minecraftforge/common/util/LazyOptional;
+      11: invokevirtual #74                 // Method net/minecraftforge/common/util/LazyOptional.cast:()Lnet/minecraftforge/common/util/LazyOptional;
+      14: areturn
+      15: invokestatic  #77                 // Method net/minecraftforge/common/util/LazyOptional.empty:()Lnet/minecraftforge/common/util/LazyOptional;
+      18: areturn
+
+  public net.minecraft.nbt.CompoundTag serializeNBT();
+    Code:
+       0: new           #85                 // class net/minecraft/nbt/CompoundTag
+       3: dup
+       4: invokespecial #86                 // Method net/minecraft/nbt/CompoundTag."<init>":()V
+       7: astore_1
+       8: aload_0
+       9: getfield      #30                 // Field backend:Lnet/saksolm/monsterexpansion/capabilities/RollImpl;
+      12: aload_1
+      13: invokevirtual #90                 // Method net/saksolm/monsterexpansion/capabilities/RollImpl.saveNBT:(Lnet/minecraft/nbt/CompoundTag;)V
+      16: aload_1
+      17: areturn
+
+  public void deserializeNBT(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field backend:Lnet/saksolm/monsterexpansion/capabilities/RollImpl;
+       4: aload_1
+       5: invokevirtual #96                 // Method net/saksolm/monsterexpansion/capabilities/RollImpl.loadNBT:(Lnet/minecraft/nbt/CompoundTag;)V
+       8: return
+
+  public void deserializeNBT(net.minecraft.nbt.Tag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #85                 // class net/minecraft/nbt/CompoundTag
+       5: invokevirtual #100                // Method deserializeNBT:(Lnet/minecraft/nbt/CompoundTag;)V
+       8: return
+
+  public net.minecraft.nbt.Tag serializeNBT();
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method serializeNBT:()Lnet/minecraft/nbt/CompoundTag;
+       4: areturn
+
+  private net.saksolm.monsterexpansion.capabilities.IRoll lambda$new$0();
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field backend:Lnet/saksolm/monsterexpansion/capabilities/RollImpl;
+       4: areturn
+}

@@ -1,0 +1,95 @@
+Compiled from "RollEventsServer.java"
+public class net.saksolm.monsterexpansion.event.RollEventsServer {
+  public static final int ROLL_IFRAME_TICKS = 3;
+
+  public net.saksolm.monsterexpansion.event.RollEventsServer();
+    Code:
+       0: aload_0
+       1: invokespecial #33                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onPlayerTick(net.minecraftforge.event.TickEvent$PlayerTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #42                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #45                 // Field net/minecraftforge/event/TickEvent$Phase.START:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpne     42
+      10: aload_0
+      11: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      14: invokevirtual #55                 // Method net/minecraft/world/entity/player/Player.m_9236_:()Lnet/minecraft/world/level/Level;
+      17: getfield      #61                 // Field net/minecraft/world/level/Level.f_46443_:Z
+      20: ifne          42
+      23: aload_0
+      24: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      27: getstatic     #67                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      30: invokevirtual #71                 // Method net/minecraft/world/entity/player/Player.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      33: aload_0
+      34: invokedynamic #91,  0             // InvokeDynamic #0:accept:(Lnet/minecraftforge/event/TickEvent$PlayerTickEvent;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      39: invokevirtual #97                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      42: return
+
+  public static void onLivingAttack(net.minecraftforge.event.entity.living.LivingAttackEvent);
+    Code:
+       0: getstatic     #109                // Field net/saksolm/monsterexpansion/config/RollConfig.enableRoll:Z
+       3: ifne          7
+       6: return
+       7: aload_0
+       8: invokevirtual #115                // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      11: astore_2
+      12: aload_2
+      13: instanceof    #51                 // class net/minecraft/world/entity/player/Player
+      16: ifeq          40
+      19: aload_2
+      20: checkcast     #51                 // class net/minecraft/world/entity/player/Player
+      23: astore_1
+      24: aload_1
+      25: getstatic     #67                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      28: invokevirtual #71                 // Method net/minecraft/world/entity/player/Player.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      31: aload_0
+      32: invokedynamic #123,  0            // InvokeDynamic #1:accept:(Lnet/minecraftforge/event/entity/living/LivingAttackEvent;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      37: invokevirtual #97                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      40: return
+
+  private static void lambda$onLivingAttack$1(net.minecraftforge.event.entity.living.LivingAttackEvent, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: bipush        24
+       2: istore_2
+       3: aload_1
+       4: invokeinterface #130,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+       9: ifeq          40
+      12: aload_1
+      13: invokeinterface #134,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getTimer:()I
+      18: iload_2
+      19: if_icmple     40
+      22: aload_0
+      23: invokevirtual #138                // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      26: getstatic     #144                // Field net/minecraft/tags/DamageTypeTags.f_268738_:Lnet/minecraft/tags/TagKey;
+      29: invokevirtual #150                // Method net/minecraft/world/damagesource/DamageSource.m_269533_:(Lnet/minecraft/tags/TagKey;)Z
+      32: ifne          40
+      35: aload_0
+      36: iconst_1
+      37: invokevirtual #154                // Method net/minecraftforge/event/entity/living/LivingAttackEvent.setCanceled:(Z)V
+      40: return
+
+  private static void lambda$onPlayerTick$0(net.minecraftforge.event.TickEvent$PlayerTickEvent, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: aload_1
+       1: invokeinterface #160,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.decreaseCooldown:()V
+       6: aload_1
+       7: invokeinterface #130,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+      12: ifeq          47
+      15: aload_1
+      16: invokeinterface #163,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.decreaseTimer:()V
+      21: aload_1
+      22: invokeinterface #134,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getTimer:()I
+      27: istore_2
+      28: iload_2
+      29: bipush        20
+      31: if_icmple     37
+      34: goto          47
+      37: aload_0
+      38: getfield      #49                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      41: invokevirtual #166                // Method net/minecraft/world/entity/player/Player.m_20096_:()Z
+      44: ifeq          47
+      47: return
+}

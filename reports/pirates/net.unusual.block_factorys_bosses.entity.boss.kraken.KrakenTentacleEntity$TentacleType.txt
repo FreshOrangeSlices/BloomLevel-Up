@@ -1,0 +1,122 @@
+Compiled from "KrakenTentacleEntity.java"
+public final class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType extends java.lang.Enum<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType> implements net.minecraft.util.StringRepresentable {
+  public static final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType MELEE;
+
+  public static final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType CANNON;
+
+  public static final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType CRATE;
+
+  public static final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType RUNAWAY;
+
+  public static final net.minecraft.util.StringRepresentable$EnumCodec<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType> CODEC;
+
+  private final java.lang.String name;
+
+  private final boolean isSlim;
+
+  private static final net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType[] $VALUES;
+
+  public static net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType[] values();
+    Code:
+       0: getstatic     #37                 // Field $VALUES:[Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+       3: invokevirtual #42                 // Method "[Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;".clone:()Ljava/lang/Object;
+       6: checkcast     #38                 // class "[Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;"
+       9: areturn
+
+  public static net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+       2: aload_0
+       3: invokestatic  #47                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+       9: areturn
+
+  private net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType(java.lang.String, boolean);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #53                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: aload_3
+       8: putfield      #55                 // Field name:Ljava/lang/String;
+      11: aload_0
+      12: iload         4
+      14: putfield      #57                 // Field isSlim:Z
+      17: return
+
+  public java.lang.String m_7912_();
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field name:Ljava/lang/String;
+       4: areturn
+
+  public boolean isSlim();
+    Code:
+       0: aload_0
+       1: getfield      #57                 // Field isSlim:Z
+       4: ireturn
+
+  private static net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentacleType[] $values();
+    Code:
+       0: iconst_4
+       1: anewarray     #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+       4: dup
+       5: iconst_0
+       6: getstatic     #64                 // Field MELEE:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #66                 // Field CANNON:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #68                 // Field CRATE:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      21: aastore
+      22: dup
+      23: iconst_3
+      24: getstatic     #70                 // Field RUNAWAY:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      27: aastore
+      28: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+       3: dup
+       4: ldc           #73                 // String MELEE
+       6: iconst_0
+       7: ldc           #75                 // String melee
+       9: iconst_0
+      10: invokespecial #77                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+      13: putstatic     #64                 // Field MELEE:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      16: new           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+      19: dup
+      20: ldc           #78                 // String CANNON
+      22: iconst_1
+      23: ldc           #80                 // String cannon
+      25: iconst_1
+      26: invokespecial #77                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+      29: putstatic     #66                 // Field CANNON:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      32: new           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+      35: dup
+      36: ldc           #81                 // String CRATE
+      38: iconst_2
+      39: ldc           #83                 // String create
+      41: iconst_0
+      42: invokespecial #77                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+      45: putstatic     #68                 // Field CRATE:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      48: new           #2                  // class net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType
+      51: dup
+      52: ldc           #84                 // String RUNAWAY
+      54: iconst_3
+      55: ldc           #86                 // String runaway
+      57: iconst_1
+      58: invokespecial #77                 // Method "<init>":(Ljava/lang/String;ILjava/lang/String;Z)V
+      61: putstatic     #70                 // Field RUNAWAY:Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      64: invokestatic  #88                 // Method $values:()[Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      67: putstatic     #37                 // Field $VALUES:[Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentacleType;
+      70: invokedynamic #104,  0            // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      75: invokestatic  #108                // InterfaceMethod net/minecraft/util/StringRepresentable.m_216439_:(Ljava/util/function/Supplier;)Lnet/minecraft/util/StringRepresentable$EnumCodec;
+      78: putstatic     #110                // Field CODEC:Lnet/minecraft/util/StringRepresentable$EnumCodec;
+      81: return
+}

@@ -1,0 +1,31 @@
+Compiled from "KrakenTridentTridentItemMixin.java"
+public class net.unusual.block_factorys_bosses.mixins.KrakenTridentTridentItemMixin {
+  public net.unusual.block_factorys_bosses.mixins.KrakenTridentTridentItemMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public net.minecraft.world.entity.projectile.ThrownTrident releaseUsing(net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_3
+       1: getstatic     #28                 // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KRAKEN_TRIDENT:Lnet/minecraftforge/registries/RegistryObject;
+       4: invokevirtual #34                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       7: checkcast     #36                 // class net/minecraft/world/item/Item
+      10: invokevirtual #42                 // Method net/minecraft/world/item/ItemStack.m_150930_:(Lnet/minecraft/world/item/Item;)Z
+      13: ifeq          27
+      16: new           #44                 // class net/unusual/block_factorys_bosses/entity/projectile/ThrownKrakenTridentEntity
+      19: dup
+      20: aload_1
+      21: aload_2
+      22: aload_3
+      23: invokespecial #47                 // Method net/unusual/block_factorys_bosses/entity/projectile/ThrownKrakenTridentEntity."<init>":(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V
+      26: areturn
+      27: new           #49                 // class net/minecraft/world/entity/projectile/ThrownTrident
+      30: dup
+      31: aload_1
+      32: aload_2
+      33: aload_3
+      34: invokespecial #50                 // Method net/minecraft/world/entity/projectile/ThrownTrident."<init>":(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V
+      37: areturn
+}

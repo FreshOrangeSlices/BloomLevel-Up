@@ -1,0 +1,60 @@
+Compiled from "KrakenTentacleEntity.java"
+public final class net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentaclePartDefinition extends java.lang.Record {
+  private final java.lang.String boneName;
+
+  private final float normalSize;
+
+  private final float slimSize;
+
+  public net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenTentacleEntity$TentaclePartDefinition(java.lang.String, float, float);
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #25                 // Field boneName:Ljava/lang/String;
+       9: aload_0
+      10: fload_2
+      11: putfield      #27                 // Field normalSize:F
+      14: aload_0
+      15: fload_3
+      16: putfield      #29                 // Field slimSize:F
+      19: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #48,  0             // InvokeDynamic #0:toString:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentaclePartDefinition;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #53,  0             // InvokeDynamic #0:hashCode:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentaclePartDefinition;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #58,  0             // InvokeDynamic #0:equals:(Lnet/unusual/block_factorys_bosses/entity/boss/kraken/KrakenTentacleEntity$TentaclePartDefinition;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.lang.String boneName();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field boneName:Ljava/lang/String;
+       4: areturn
+
+  public float normalSize();
+    Code:
+       0: aload_0
+       1: getfield      #27                 // Field normalSize:F
+       4: freturn
+
+  public float slimSize();
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field slimSize:F
+       4: freturn
+}

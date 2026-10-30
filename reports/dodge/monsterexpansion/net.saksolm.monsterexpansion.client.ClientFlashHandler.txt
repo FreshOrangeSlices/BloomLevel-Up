@@ -1,0 +1,100 @@
+Compiled from "ClientFlashHandler.java"
+public class net.saksolm.monsterexpansion.client.ClientFlashHandler {
+  private static int flashTicks;
+
+  private static int invertTicks;
+
+  private static final int MAX_FLASH_TICKS = 60;
+
+  private static final int INVERT_DURATION = 0;
+
+  public net.saksolm.monsterexpansion.client.ClientFlashHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #46                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void triggerFlashbangSequence();
+    Code:
+       0: invokestatic  #55                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: astore_0
+       4: aload_0
+       5: getfield      #59                 // Field net/minecraft/client/Minecraft.f_91063_:Lnet/minecraft/client/renderer/GameRenderer;
+       8: invokevirtual #65                 // Method net/minecraft/client/renderer/GameRenderer.m_109149_:()Lnet/minecraft/client/renderer/PostChain;
+      11: ifnonnull     23
+      14: iconst_0
+      15: putstatic     #67                 // Field invertTicks:I
+      18: bipush        60
+      20: putstatic     #69                 // Field flashTicks:I
+      23: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #78                 // Field net/minecraftforge/event/TickEvent$ClientTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #81                 // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpne     24
+      10: getstatic     #69                 // Field flashTicks:I
+      13: ifle          24
+      16: getstatic     #69                 // Field flashTicks:I
+      19: iconst_1
+      20: isub
+      21: putstatic     #69                 // Field flashTicks:I
+      24: return
+
+  public static void onRenderGuiOverlay(net.minecraftforge.client.event.RenderGuiOverlayEvent$Pre);
+    Code:
+       0: getstatic     #67                 // Field invertTicks:I
+       3: ifgt          80
+       6: getstatic     #69                 // Field flashTicks:I
+       9: ifle          80
+      12: getstatic     #69                 // Field flashTicks:I
+      15: i2f
+      16: ldc           #86                 // float 60.0f
+      18: fdiv
+      19: fstore_1
+      20: fload_1
+      21: ldc           #87                 // float 1.2f
+      23: fmul
+      24: ldc           #88                 // float 0.85f
+      26: invokestatic  #94                 // Method java/lang/Math.min:(FF)F
+      29: fstore_1
+      30: aload_0
+      31: invokevirtual #98                 // Method net/minecraftforge/client/event/RenderGuiOverlayEvent$Pre.getWindow:()Lcom/mojang/blaze3d/platform/Window;
+      34: invokevirtual #104                // Method com/mojang/blaze3d/platform/Window.m_85445_:()I
+      37: istore_2
+      38: aload_0
+      39: invokevirtual #98                 // Method net/minecraftforge/client/event/RenderGuiOverlayEvent$Pre.getWindow:()Lcom/mojang/blaze3d/platform/Window;
+      42: invokevirtual #107                // Method com/mojang/blaze3d/platform/Window.m_85446_:()I
+      45: istore_3
+      46: aload_0
+      47: invokevirtual #111                // Method net/minecraftforge/client/event/RenderGuiOverlayEvent$Pre.getGuiGraphics:()Lnet/minecraft/client/gui/GuiGraphics;
+      50: astore        4
+      52: fload_1
+      53: ldc           #112                // float 255.0f
+      55: fmul
+      56: f2i
+      57: istore        5
+      59: iload         5
+      61: bipush        24
+      63: ishl
+      64: ldc           #113                // int 16777215
+      66: ior
+      67: istore        6
+      69: aload         4
+      71: iconst_0
+      72: iconst_0
+      73: iload_2
+      74: iload_3
+      75: iload         6
+      77: invokevirtual #119                // Method net/minecraft/client/gui/GuiGraphics.m_280509_:(IIIII)V
+      80: return
+
+  static {};
+    Code:
+       0: iconst_0
+       1: putstatic     #69                 // Field flashTicks:I
+       4: iconst_0
+       5: putstatic     #67                 // Field invertTicks:I
+       8: return
+}

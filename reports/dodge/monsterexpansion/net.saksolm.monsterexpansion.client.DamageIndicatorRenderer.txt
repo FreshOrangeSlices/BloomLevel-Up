@@ -1,0 +1,985 @@
+Compiled from "DamageIndicatorRenderer.java"
+public class net.saksolm.monsterexpansion.client.DamageIndicatorRenderer {
+  private static final float HZ_RANGE = 0.70000005f;
+
+  private static final float T_TENDER = 0.57142854f;
+
+  private static final float T_VULNERABLE = 0.7142856f;
+
+  private static final float T_FRAGILE = 0.8571428f;
+
+  private static final int FULL_BRIGHT_LIGHT = 15728880;
+
+  private static final float SHIMMER_SIGMA = 0.33f;
+
+  private static org.joml.Matrix4f cachedProjection;
+
+  private static org.joml.Matrix4f cachedModelView;
+
+  public net.saksolm.monsterexpansion.client.DamageIndicatorRenderer();
+    Code:
+       0: aload_0
+       1: invokespecial #99                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onRenderLevel(net.minecraftforge.client.event.RenderLevelStageEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #108                // Method net/minecraftforge/client/event/RenderLevelStageEvent.getStage:()Lnet/minecraftforge/client/event/RenderLevelStageEvent$Stage;
+       4: getstatic     #112                // Field net/minecraftforge/client/event/RenderLevelStageEvent$Stage.AFTER_PARTICLES:Lnet/minecraftforge/client/event/RenderLevelStageEvent$Stage;
+       7: if_acmpne     43
+      10: new           #114                // class org/joml/Matrix4f
+      13: dup
+      14: invokestatic  #120                // Method com/mojang/blaze3d/systems/RenderSystem.getProjectionMatrix:()Lorg/joml/Matrix4f;
+      17: invokespecial #123                // Method org/joml/Matrix4f."<init>":(Lorg/joml/Matrix4fc;)V
+      20: putstatic     #125                // Field cachedProjection:Lorg/joml/Matrix4f;
+      23: new           #114                // class org/joml/Matrix4f
+      26: dup
+      27: aload_0
+      28: invokevirtual #129                // Method net/minecraftforge/client/event/RenderLevelStageEvent.getPoseStack:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      31: invokevirtual #133                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+      34: invokevirtual #136                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.m_252922_:()Lorg/joml/Matrix4f;
+      37: invokespecial #123                // Method org/joml/Matrix4f."<init>":(Lorg/joml/Matrix4fc;)V
+      40: putstatic     #138                // Field cachedModelView:Lorg/joml/Matrix4f;
+      43: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #146                // Field net/minecraftforge/event/TickEvent$ClientTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #149                // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpne     31
+      10: invokestatic  #155                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      13: astore_1
+      14: aload_1
+      15: getfield      #159                // Field net/minecraft/client/Minecraft.f_91073_:Lnet/minecraft/client/multiplayer/ClientLevel;
+      18: ifnull        31
+      21: aload_1
+      22: invokevirtual #163                // Method net/minecraft/client/Minecraft.m_91104_:()Z
+      25: ifne          31
+      28: invokestatic  #166                // Method net/saksolm/monsterexpansion/client/DamageIndicatorManager.tick:()V
+      31: return
+
+  public static void onRenderGuiOverlay(net.minecraftforge.client.event.RenderGuiOverlayEvent$Post);
+    Code:
+       0: getstatic     #125                // Field cachedProjection:Lorg/joml/Matrix4f;
+       3: ifnull        12
+       6: getstatic     #138                // Field cachedModelView:Lorg/joml/Matrix4f;
+       9: ifnonnull     13
+      12: return
+      13: invokestatic  #155                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      16: astore_1
+      17: aload_1
+      18: getfield      #159                // Field net/minecraft/client/Minecraft.f_91073_:Lnet/minecraft/client/multiplayer/ClientLevel;
+      21: ifnull        31
+      24: aload_1
+      25: getfield      #175                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      28: ifnonnull     32
+      31: return
+      32: invokestatic  #179                // Method net/saksolm/monsterexpansion/client/DamageIndicatorManager.getEntries:()Ljava/util/List;
+      35: astore_2
+      36: aload_2
+      37: invokeinterface #184,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      42: ifeq          46
+      45: return
+      46: aload_0
+      47: invokevirtual #188                // Method net/minecraftforge/client/event/RenderGuiOverlayEvent$Post.getGuiGraphics:()Lnet/minecraft/client/gui/GuiGraphics;
+      50: astore_3
+      51: aload_1
+      52: getfield      #192                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+      55: astore        4
+      57: aload_1
+      58: getfield      #196                // Field net/minecraft/client/Minecraft.f_91063_:Lnet/minecraft/client/renderer/GameRenderer;
+      61: invokevirtual #202                // Method net/minecraft/client/renderer/GameRenderer.m_109153_:()Lnet/minecraft/client/Camera;
+      64: invokevirtual #208                // Method net/minecraft/client/Camera.m_90583_:()Lnet/minecraft/world/phys/Vec3;
+      67: astore        5
+      69: aload_0
+      70: invokevirtual #212                // Method net/minecraftforge/client/event/RenderGuiOverlayEvent$Post.getWindow:()Lcom/mojang/blaze3d/platform/Window;
+      73: invokevirtual #218                // Method com/mojang/blaze3d/platform/Window.m_85445_:()I
+      76: istore        6
+      78: aload_0
+      79: invokevirtual #212                // Method net/minecraftforge/client/event/RenderGuiOverlayEvent$Post.getWindow:()Lcom/mojang/blaze3d/platform/Window;
+      82: invokevirtual #221                // Method com/mojang/blaze3d/platform/Window.m_85446_:()I
+      85: istore        7
+      87: aload_1
+      88: invokevirtual #225                // Method net/minecraft/client/Minecraft.m_91296_:()F
+      91: fstore        8
+      93: invokestatic  #231                // Method java/lang/System.currentTimeMillis:()J
+      96: ldc2_w        #232                // long 1000l
+      99: lrem
+     100: l2d
+     101: ldc2_w        #234                // double 1000.0d
+     104: ddiv
+     105: d2f
+     106: fstore        9
+     108: ldc           #236                // float -0.33f
+     110: fload         9
+     112: ldc           #237                // float 1.6600001f
+     114: fmul
+     115: fadd
+     116: fstore        10
+     118: aload_2
+     119: invokeinterface #241,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     124: astore        11
+     126: aload         11
+     128: invokeinterface #250,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     133: ifeq          513
+     136: aload         11
+     138: invokeinterface #254,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     143: checkcast     #45                 // class net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry
+     146: astore        12
+     148: aload         12
+     150: getfield      #257                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.age:I
+     153: i2f
+     154: fload         8
+     156: fadd
+     157: fstore        13
+     159: fload         13
+     161: ldc_w         #258                // float 50.0f
+     164: fdiv
+     165: fstore        14
+     167: fload         14
+     169: ldc_w         #259                // float 0.6f
+     172: fcmpg
+     173: ifge          180
+     176: fconst_1
+     177: goto          192
+     180: fconst_1
+     181: fload         14
+     183: ldc_w         #259                // float 0.6f
+     186: fsub
+     187: ldc_w         #260                // float 0.4f
+     190: fdiv
+     191: fsub
+     192: fstore        15
+     194: fload         15
+     196: ldc_w         #261                // float 255.0f
+     199: fmul
+     200: f2i
+     201: iconst_0
+     202: sipush        255
+     205: invokestatic  #265                // Method clampInt:(III)I
+     208: istore        16
+     210: iload         16
+     212: iconst_4
+     213: if_icmpgt     219
+     216: goto          126
+     219: fload         13
+     221: f2d
+     222: ldc2_w        #266                // double 0.022d
+     225: dmul
+     226: dstore        17
+     228: aload         12
+     230: getfield      #270                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.driftX:F
+     233: f2d
+     234: fload         13
+     236: f2d
+     237: ldc2_w        #271                // double 0.04d
+     240: dmul
+     241: dconst_1
+     242: invokestatic  #278                // Method java/lang/Math.min:(DD)D
+     245: dmul
+     246: dstore        19
+     248: new           #245                // class net/minecraft/world/phys/Vec3
+     251: dup
+     252: aload         12
+     254: getfield      #282                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.worldPos:Lnet/minecraft/world/phys/Vec3;
+     257: getfield      #286                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     260: dload         19
+     262: dadd
+     263: aload         12
+     265: getfield      #282                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.worldPos:Lnet/minecraft/world/phys/Vec3;
+     268: getfield      #289                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+     271: dload         17
+     273: dadd
+     274: aload         12
+     276: getfield      #282                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.worldPos:Lnet/minecraft/world/phys/Vec3;
+     279: getfield      #292                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     282: invokespecial #295                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     285: astore        21
+     287: aload         21
+     289: aload         5
+     291: iload         6
+     293: iload         7
+     295: invokestatic  #299                // Method worldToScreen:(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;II)[F
+     298: astore        22
+     300: aload         22
+     302: ifnonnull     308
+     305: goto          126
+     308: aload         22
+     310: iconst_0
+     311: faload
+     312: fstore        23
+     314: aload         22
+     316: iconst_1
+     317: faload
+     318: fstore        24
+     320: aload         12
+     322: getfield      #304                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.rawHz:F
+     325: ldc_w         #305                // float 0.15f
+     328: fsub
+     329: ldc           #81                 // float 0.70000005f
+     331: fdiv
+     332: invokestatic  #309                // Method clamp01:(F)F
+     335: fstore        25
+     337: ldc_w         #310                // float 1.1f
+     340: fload         25
+     342: fconst_1
+     343: fmul
+     344: fadd
+     345: fstore        26
+     347: aload         12
+     349: getfield      #313                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.rawDamage:I
+     352: invokestatic  #319                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     355: astore        27
+     357: aload         4
+     359: aload         27
+     361: invokevirtual #323                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     364: istore        28
+     366: iload         28
+     368: ineg
+     369: i2f
+     370: fconst_2
+     371: fdiv
+     372: fstore        29
+     374: aload_3
+     375: aload         4
+     377: aload         27
+     379: fload         23
+     381: fload         24
+     383: fload         26
+     385: fload         29
+     387: fconst_0
+     388: fload         25
+     390: iload         16
+     392: fload         10
+     394: invokestatic  #327                // Method drawRawString:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFFIF)V
+     397: aload         12
+     399: getfield      #330                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.elemDamage:I
+     402: ifle          510
+     405: aload         12
+     407: getfield      #334                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.elemType:Lnet/saksolm/monsterexpansion/entity/util/DamageTypes$ElementType;
+     410: getstatic     #337                // Field net/saksolm/monsterexpansion/entity/util/DamageTypes$ElementType.NONE:Lnet/saksolm/monsterexpansion/entity/util/DamageTypes$ElementType;
+     413: if_acmpeq     510
+     416: fload         15
+     418: ldc_w         #338                // float 210.0f
+     421: fmul
+     422: f2i
+     423: iconst_0
+     424: sipush        255
+     427: invokestatic  #265                // Method clampInt:(III)I
+     430: istore        30
+     432: fload         26
+     434: ldc_w         #339                // float 0.65f
+     437: fmul
+     438: fstore        31
+     440: aload         12
+     442: getfield      #330                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.elemDamage:I
+     445: invokedynamic #350,  0            // InvokeDynamic #0:makeConcatWithConstants:(I)Ljava/lang/String;
+     450: astore        32
+     452: aload         4
+     454: aload         32
+     456: invokevirtual #323                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     459: ineg
+     460: i2f
+     461: fconst_2
+     462: fdiv
+     463: fstore        33
+     465: fload         24
+     467: aload         4
+     469: invokestatic  #356                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     472: pop
+     473: ldc_w         #357                // float 9.0f
+     476: fload         26
+     478: fmul
+     479: fadd
+     480: fconst_1
+     481: fadd
+     482: fstore        34
+     484: aload_3
+     485: aload         4
+     487: aload         32
+     489: fload         23
+     491: fload         34
+     493: fload         31
+     495: fload         33
+     497: fconst_0
+     498: aload         12
+     500: getfield      #334                // Field net/saksolm/monsterexpansion/client/DamageIndicatorManager$DamageIndicatorEntry.elemType:Lnet/saksolm/monsterexpansion/entity/util/DamageTypes$ElementType;
+     503: iload         30
+     505: fload         10
+     507: invokestatic  #361                // Method drawElemString:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFLnet/saksolm/monsterexpansion/entity/util/DamageTypes$ElementType;IF)V
+     510: goto          126
+     513: return
+
+  private static void drawRawString(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, java.lang.String, float, float, float, float, float, float, int, float);
+    Code:
+       0: fload         8
+       2: ldc           #83                 // float 0.57142854f
+       4: fcmpg
+       5: ifge          31
+       8: aload_0
+       9: aload_1
+      10: aload_2
+      11: fload_3
+      12: fload         4
+      14: fload         5
+      16: fload         6
+      18: fload         7
+      20: fload         8
+      22: iload         9
+      24: invokestatic  #399                // Method solidRawColor:(FI)I
+      27: invokestatic  #403                // Method drawSolid:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFI)V
+      30: return
+      31: fload         8
+      33: ldc           #85                 // float 0.7142856f
+      35: fcmpg
+      36: ifge          82
+      39: fload         8
+      41: ldc           #83                 // float 0.57142854f
+      43: fsub
+      44: ldc_w         #404                // float 0.14285707f
+      47: fdiv
+      48: fstore        14
+      50: ldc_w         #405                // int 16777147
+      53: ldc_w         #406                // int 16768324
+      56: fload         14
+      58: invokestatic  #410                // Method lerpRgb:(IIF)I
+      61: istore        11
+      63: ldc_w         #411                // int 16746496
+      66: ldc_w         #412                // int 16729088
+      69: fload         14
+      71: invokestatic  #410                // Method lerpRgb:(IIF)I
+      74: istore        12
+      76: iconst_0
+      77: istore        13
+      79: goto          176
+      82: fload         8
+      84: ldc           #87                 // float 0.8571428f
+      86: fcmpg
+      87: ifge          133
+      90: fload         8
+      92: ldc           #85                 // float 0.7142856f
+      94: fsub
+      95: ldc_w         #413                // float 0.1428572f
+      98: fdiv
+      99: fstore        14
+     101: ldc_w         #406                // int 16768324
+     104: ldc_w         #411                // int 16746496
+     107: fload         14
+     109: invokestatic  #410                // Method lerpRgb:(IIF)I
+     112: istore        11
+     114: ldc_w         #414                // int 13369344
+     117: ldc_w         #415                // int 8912896
+     120: fload         14
+     122: invokestatic  #410                // Method lerpRgb:(IIF)I
+     125: istore        12
+     127: iconst_0
+     128: istore        13
+     130: goto          176
+     133: fload         8
+     135: ldc           #87                 // float 0.8571428f
+     137: fsub
+     138: ldc_w         #413                // float 0.1428572f
+     141: fdiv
+     142: invokestatic  #309                // Method clamp01:(F)F
+     145: fstore        14
+     147: ldc_w         #416                // int 12255232
+     150: ldc_w         #417                // int 10027008
+     153: fload         14
+     155: invokestatic  #410                // Method lerpRgb:(IIF)I
+     158: istore        11
+     160: ldc_w         #418                // int 16720384
+     163: ldc_w         #416                // int 12255232
+     166: fload         14
+     168: invokestatic  #410                // Method lerpRgb:(IIF)I
+     171: istore        12
+     173: iconst_1
+     174: istore        13
+     176: iload         13
+     178: ifeq          210
+     181: aload_0
+     182: aload_1
+     183: aload_2
+     184: fload_3
+     185: fload         4
+     187: fload         5
+     189: fload         6
+     191: fload         7
+     193: iload         11
+     195: iload         12
+     197: ldc_w         #419                // int 16750950
+     200: iload         9
+     202: fload         10
+     204: invokestatic  #423                // Method drawShimmerGradient:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFIIIIF)V
+     207: goto          231
+     210: aload_0
+     211: aload_1
+     212: aload_2
+     213: fload_3
+     214: fload         4
+     216: fload         5
+     218: fload         6
+     220: fload         7
+     222: iload         11
+     224: iload         12
+     226: iload         9
+     228: invokestatic  #427                // Method drawGradient:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFIII)V
+     231: return
+
+  private static void drawElemString(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, java.lang.String, float, float, float, float, float, net.saksolm.monsterexpansion.entity.util.DamageTypes$ElementType, int, float);
+    Code:
+       0: getstatic     #440                // Field net/saksolm/monsterexpansion/client/DamageIndicatorRenderer$1.$SwitchMap$net$saksolm$monsterexpansion$entity$util$DamageTypes$ElementType:[I
+       3: aload         8
+       5: invokevirtual #443                // Method net/saksolm/monsterexpansion/entity/util/DamageTypes$ElementType.ordinal:()I
+       8: iaload
+       9: lookupswitch  { // 2
+                     1: 36
+                     2: 67
+               default: 93
+          }
+      36: aload_0
+      37: aload_1
+      38: aload_2
+      39: fload_3
+      40: fload         4
+      42: fload         5
+      44: fload         6
+      46: fload         7
+      48: ldc_w         #444                // int 13631485
+      51: ldc_w         #445                // int 6946773
+      54: ldc_w         #446                // int 16777215
+      57: iload         9
+      59: fload         10
+      61: invokestatic  #423                // Method drawShimmerGradient:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFIIIIF)V
+      64: goto          117
+      67: aload_0
+      68: aload_1
+      69: aload_2
+      70: fload_3
+      71: fload         4
+      73: fload         5
+      75: fload         6
+      77: fload         7
+      79: ldc_w         #447                // int 14487808
+      82: ldc_w         #448                // int 16772676
+      85: iload         9
+      87: invokestatic  #427                // Method drawGradient:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFIII)V
+      90: goto          117
+      93: aload_0
+      94: aload_1
+      95: aload_2
+      96: fload_3
+      97: fload         4
+      99: fload         5
+     101: fload         6
+     103: fload         7
+     105: iload         9
+     107: bipush        24
+     109: ishl
+     110: ldc_w         #446                // int 16777215
+     113: ior
+     114: invokestatic  #403                // Method drawSolid:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFI)V
+     117: return
+
+  private static void drawGradient(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, java.lang.String, float, float, float, float, float, int, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: fload_3
+       4: fload         4
+       6: fload         5
+       8: fload         6
+      10: fload         7
+      12: iload         10
+      14: iload         8
+      16: iload         9
+      18: invokedynamic #467,  0            // InvokeDynamic #1:colorAt:(III)Lnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;
+      23: invokestatic  #471                // Method drawGradientText:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFLnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)V
+      26: return
+
+  private static void drawShimmerGradient(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, java.lang.String, float, float, float, float, float, int, int, int, int, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: fload_3
+       4: fload         4
+       6: fload         5
+       8: fload         6
+      10: fload         7
+      12: iload         8
+      14: iload         9
+      16: fload         12
+      18: iload         11
+      20: iload         10
+      22: invokedynamic #479,  0            // InvokeDynamic #2:colorAt:(IIFII)Lnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;
+      27: invokestatic  #471                // Method drawGradientText:(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFFFFLnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)V
+      30: return
+
+  private static void drawGradientText(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, java.lang.String, float, float, float, float, float, net.saksolm.monsterexpansion.client.DamageIndicatorRenderer$ColorFn);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokevirtual #323                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+       5: istore        9
+       7: iload         9
+       9: ifne          13
+      12: return
+      13: fload_3
+      14: fload         6
+      16: fload         5
+      18: fmul
+      19: fadd
+      20: fstore        10
+      22: fload         10
+      24: iload         9
+      26: i2f
+      27: fload         5
+      29: fmul
+      30: fadd
+      31: fstore        11
+      33: new           #114                // class org/joml/Matrix4f
+      36: dup
+      37: aload_0
+      38: invokevirtual #483                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      41: invokevirtual #133                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+      44: invokevirtual #136                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.m_252922_:()Lorg/joml/Matrix4f;
+      47: invokespecial #123                // Method org/joml/Matrix4f."<init>":(Lorg/joml/Matrix4fc;)V
+      50: fload_3
+      51: fload         4
+      53: ldc_w         #484                // float 200.0f
+      56: invokevirtual #488                // Method org/joml/Matrix4f.translate:(FFF)Lorg/joml/Matrix4f;
+      59: fload         5
+      61: fload         5
+      63: fconst_1
+      64: invokevirtual #490                // Method org/joml/Matrix4f.scale:(FFF)Lorg/joml/Matrix4f;
+      67: astore        12
+      69: aload_0
+      70: invokevirtual #494                // Method net/minecraft/client/gui/GuiGraphics.m_280091_:()Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;
+      73: astore        13
+      75: aload         8
+      77: invokedynamic #502,  0            // InvokeDynamic #3:colorAt:(Lnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)Lnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;
+      82: astore        14
+      84: aload         13
+      86: fload         10
+      88: fload         11
+      90: aload         14
+      92: invokedynamic #513,  0            // InvokeDynamic #4:m_6299_:(Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;FFLnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)Lnet/minecraft/client/renderer/MultiBufferSource;
+      97: astore        15
+      99: aload_1
+     100: aload_2
+     101: fload         6
+     103: fconst_1
+     104: fadd
+     105: fload         7
+     107: fconst_1
+     108: fadd
+     109: iconst_m1
+     110: iconst_0
+     111: aload         12
+     113: aload         15
+     115: getstatic     #517                // Field net/minecraft/client/gui/Font$DisplayMode.NORMAL:Lnet/minecraft/client/gui/Font$DisplayMode;
+     118: iconst_0
+     119: ldc           #90                 // int 15728880
+     121: invokevirtual #521                // Method net/minecraft/client/gui/Font.m_271703_:(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)I
+     124: pop
+     125: aload         13
+     127: fload         10
+     129: fload         11
+     131: aload         8
+     133: invokedynamic #526,  0            // InvokeDynamic #5:m_6299_:(Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;FFLnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)Lnet/minecraft/client/renderer/MultiBufferSource;
+     138: astore        16
+     140: aload_1
+     141: aload_2
+     142: fload         6
+     144: fload         7
+     146: iconst_m1
+     147: iconst_0
+     148: aload         12
+     150: aload         16
+     152: getstatic     #517                // Field net/minecraft/client/gui/Font$DisplayMode.NORMAL:Lnet/minecraft/client/gui/Font$DisplayMode;
+     155: iconst_0
+     156: ldc           #90                 // int 15728880
+     158: invokevirtual #521                // Method net/minecraft/client/gui/Font.m_271703_:(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)I
+     161: pop
+     162: return
+
+  private static void drawSolid(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, java.lang.String, float, float, float, float, float, int);
+    Code:
+       0: aload_0
+       1: invokevirtual #483                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+       4: invokevirtual #541                // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+       7: aload_0
+       8: invokevirtual #483                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      11: fload_3
+      12: f2d
+      13: fload         4
+      15: f2d
+      16: ldc2_w        #542                // double 200.0d
+      19: invokevirtual #546                // Method com/mojang/blaze3d/vertex/PoseStack.m_85837_:(DDD)V
+      22: aload_0
+      23: invokevirtual #483                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      26: fload         5
+      28: fload         5
+      30: fconst_1
+      31: invokevirtual #550                // Method com/mojang/blaze3d/vertex/PoseStack.m_85841_:(FFF)V
+      34: aload_0
+      35: aload_1
+      36: aload_2
+      37: fload         6
+      39: f2i
+      40: fload         7
+      42: f2i
+      43: iload         8
+      45: iconst_1
+      46: invokevirtual #554                // Method net/minecraft/client/gui/GuiGraphics.m_280056_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+      49: pop
+      50: aload_0
+      51: invokevirtual #483                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      54: invokevirtual #557                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+      57: return
+
+  private static float[] worldToScreen(net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec3, int, int);
+    Code:
+       0: new           #560                // class org/joml/Vector4f
+       3: dup
+       4: aload_0
+       5: getfield      #286                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+       8: aload_1
+       9: getfield      #286                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+      12: dsub
+      13: d2f
+      14: aload_0
+      15: getfield      #289                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      18: aload_1
+      19: getfield      #289                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      22: dsub
+      23: d2f
+      24: aload_0
+      25: getfield      #292                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      28: aload_1
+      29: getfield      #292                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      32: dsub
+      33: d2f
+      34: fconst_1
+      35: invokespecial #563                // Method org/joml/Vector4f."<init>":(FFFF)V
+      38: astore        4
+      40: aload         4
+      42: getstatic     #138                // Field cachedModelView:Lorg/joml/Matrix4f;
+      45: invokevirtual #567                // Method org/joml/Vector4f.mul:(Lorg/joml/Matrix4fc;)Lorg/joml/Vector4f;
+      48: pop
+      49: aload         4
+      51: getstatic     #125                // Field cachedProjection:Lorg/joml/Matrix4f;
+      54: invokevirtual #567                // Method org/joml/Vector4f.mul:(Lorg/joml/Matrix4fc;)Lorg/joml/Vector4f;
+      57: pop
+      58: aload         4
+      60: invokevirtual #570                // Method org/joml/Vector4f.w:()F
+      63: fconst_0
+      64: fcmpg
+      65: ifgt          70
+      68: aconst_null
+      69: areturn
+      70: aload         4
+      72: invokevirtual #573                // Method org/joml/Vector4f.x:()F
+      75: aload         4
+      77: invokevirtual #570                // Method org/joml/Vector4f.w:()F
+      80: fdiv
+      81: fstore        5
+      83: aload         4
+      85: invokevirtual #576                // Method org/joml/Vector4f.y:()F
+      88: aload         4
+      90: invokevirtual #570                // Method org/joml/Vector4f.w:()F
+      93: fdiv
+      94: fstore        6
+      96: fload         5
+      98: ldc_w         #577                // float -1.2f
+     101: fcmpg
+     102: iflt          132
+     105: fload         5
+     107: ldc_w         #578                // float 1.2f
+     110: fcmpl
+     111: ifgt          132
+     114: fload         6
+     116: ldc_w         #577                // float -1.2f
+     119: fcmpg
+     120: iflt          132
+     123: fload         6
+     125: ldc_w         #578                // float 1.2f
+     128: fcmpl
+     129: ifle          134
+     132: aconst_null
+     133: areturn
+     134: iconst_2
+     135: newarray       float
+     137: dup
+     138: iconst_0
+     139: fload         5
+     141: fconst_1
+     142: fadd
+     143: ldc_w         #579                // float 0.5f
+     146: fmul
+     147: iload_2
+     148: i2f
+     149: fmul
+     150: fastore
+     151: dup
+     152: iconst_1
+     153: fconst_1
+     154: fload         6
+     156: fsub
+     157: ldc_w         #579                // float 0.5f
+     160: fmul
+     161: iload_3
+     162: i2f
+     163: fmul
+     164: fastore
+     165: areturn
+
+  private static int solidRawColor(float, int);
+    Code:
+       0: fload_0
+       1: ldc           #92                 // float 0.33f
+       3: fcmpg
+       4: ifge          33
+       7: fload_0
+       8: ldc           #92                 // float 0.33f
+      10: fdiv
+      11: fstore        5
+      13: sipush        170
+      16: sipush        255
+      19: fload         5
+      21: invokestatic  #588                // Method lerp:(IIF)I
+      24: istore_2
+      25: iload_2
+      26: istore_3
+      27: iload_2
+      28: istore        4
+      30: goto          91
+      33: fload_0
+      34: ldc           #83                 // float 0.57142854f
+      36: fcmpg
+      37: ifge          80
+      40: fload_0
+      41: ldc           #92                 // float 0.33f
+      43: fsub
+      44: ldc_w         #589                // float 0.24142852f
+      47: fdiv
+      48: fstore        5
+      50: sipush        255
+      53: istore_2
+      54: sipush        255
+      57: sipush        238
+      60: fload         5
+      62: invokestatic  #588                // Method lerp:(IIF)I
+      65: istore_3
+      66: sipush        255
+      69: iconst_0
+      70: fload         5
+      72: invokestatic  #588                // Method lerp:(IIF)I
+      75: istore        4
+      77: goto          91
+      80: sipush        255
+      83: istore_2
+      84: sipush        238
+      87: istore_3
+      88: iconst_0
+      89: istore        4
+      91: iload_1
+      92: bipush        24
+      94: ishl
+      95: iload_2
+      96: bipush        16
+      98: ishl
+      99: ior
+     100: iload_3
+     101: bipush        8
+     103: ishl
+     104: ior
+     105: iload         4
+     107: ior
+     108: ireturn
+
+  private static int lerpRgb(int, int, float);
+    Code:
+       0: iload_0
+       1: bipush        16
+       3: ishr
+       4: sipush        255
+       7: iand
+       8: istore_3
+       9: iload_0
+      10: bipush        8
+      12: ishr
+      13: sipush        255
+      16: iand
+      17: istore        4
+      19: iload_0
+      20: sipush        255
+      23: iand
+      24: istore        5
+      26: iload_1
+      27: bipush        16
+      29: ishr
+      30: sipush        255
+      33: iand
+      34: istore        6
+      36: iload_1
+      37: bipush        8
+      39: ishr
+      40: sipush        255
+      43: iand
+      44: istore        7
+      46: iload_1
+      47: sipush        255
+      50: iand
+      51: istore        8
+      53: iload_3
+      54: iload         6
+      56: fload_2
+      57: invokestatic  #588                // Method lerp:(IIF)I
+      60: bipush        16
+      62: ishl
+      63: iload         4
+      65: iload         7
+      67: fload_2
+      68: invokestatic  #588                // Method lerp:(IIF)I
+      71: bipush        8
+      73: ishl
+      74: ior
+      75: iload         5
+      77: iload         8
+      79: fload_2
+      80: invokestatic  #588                // Method lerp:(IIF)I
+      83: ior
+      84: ireturn
+
+  private static int lerp(int, int, float);
+    Code:
+       0: iload_0
+       1: i2f
+       2: iload_1
+       3: iload_0
+       4: isub
+       5: i2f
+       6: fload_2
+       7: fmul
+       8: fadd
+       9: invokestatic  #601                // Method java/lang/Math.round:(F)I
+      12: ireturn
+
+  private static float clamp01(float);
+    Code:
+       0: fconst_0
+       1: fconst_1
+       2: fload_0
+       3: invokestatic  #604                // Method java/lang/Math.min:(FF)F
+       6: invokestatic  #607                // Method java/lang/Math.max:(FF)F
+       9: freturn
+
+  private static int clampInt(int, int, int);
+    Code:
+       0: iload_1
+       1: iload_2
+       2: iload_0
+       3: invokestatic  #611                // Method java/lang/Math.min:(II)I
+       6: invokestatic  #613                // Method java/lang/Math.max:(II)I
+       9: ireturn
+
+  private static com.mojang.blaze3d.vertex.VertexConsumer lambda$drawGradientText$4(net.minecraft.client.renderer.MultiBufferSource$BufferSource, float, float, net.saksolm.monsterexpansion.client.DamageIndicatorRenderer$ColorFn, net.minecraft.client.renderer.RenderType);
+    Code:
+       0: new           #18                 // class net/saksolm/monsterexpansion/client/DamageIndicatorRenderer$GradientVertexConsumer
+       3: dup
+       4: aload_0
+       5: aload         4
+       7: invokevirtual #617                // Method net/minecraft/client/renderer/MultiBufferSource$BufferSource.m_6299_:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      10: fload_1
+      11: fload_2
+      12: aload_3
+      13: invokespecial #620                // Method net/saksolm/monsterexpansion/client/DamageIndicatorRenderer$GradientVertexConsumer."<init>":(Lcom/mojang/blaze3d/vertex/VertexConsumer;FFLnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)V
+      16: areturn
+
+  private static com.mojang.blaze3d.vertex.VertexConsumer lambda$drawGradientText$3(net.minecraft.client.renderer.MultiBufferSource$BufferSource, float, float, net.saksolm.monsterexpansion.client.DamageIndicatorRenderer$ColorFn, net.minecraft.client.renderer.RenderType);
+    Code:
+       0: new           #18                 // class net/saksolm/monsterexpansion/client/DamageIndicatorRenderer$GradientVertexConsumer
+       3: dup
+       4: aload_0
+       5: aload         4
+       7: invokevirtual #617                // Method net/minecraft/client/renderer/MultiBufferSource$BufferSource.m_6299_:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      10: fload_1
+      11: fload_2
+      12: aload_3
+      13: invokespecial #620                // Method net/saksolm/monsterexpansion/client/DamageIndicatorRenderer$GradientVertexConsumer."<init>":(Lcom/mojang/blaze3d/vertex/VertexConsumer;FFLnet/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn;)V
+      16: areturn
+
+  private static int lambda$drawGradientText$2(net.saksolm.monsterexpansion.client.DamageIndicatorRenderer$ColorFn, float);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: invokeinterface #624,  2          // InterfaceMethod net/saksolm/monsterexpansion/client/DamageIndicatorRenderer$ColorFn.colorAt:(F)I
+       7: istore_2
+       8: iload_2
+       9: ldc_w         #625                // int 16579836
+      12: iand
+      13: iconst_2
+      14: ishr
+      15: iload_2
+      16: ldc_w         #626                // int -16777216
+      19: iand
+      20: ior
+      21: ireturn
+
+  private static int lambda$drawShimmerGradient$1(int, int, float, int, int, float);
+    Code:
+       0: iload_0
+       1: iload_1
+       2: fload         5
+       4: invokestatic  #410                // Method lerpRgb:(IIF)I
+       7: istore        6
+       9: fload         5
+      11: fload_2
+      12: fsub
+      13: fstore        7
+      15: fload         7
+      17: fload         7
+      19: fmul
+      20: fneg
+      21: ldc_w         #628                // float 0.21780002f
+      24: fdiv
+      25: f2d
+      26: invokestatic  #632                // Method java/lang/Math.exp:(D)D
+      29: d2f
+      30: fstore        8
+      32: iload_3
+      33: bipush        24
+      35: ishl
+      36: iload         6
+      38: iload         4
+      40: fload         8
+      42: ldc_w         #633                // float 0.85f
+      45: fmul
+      46: invokestatic  #410                // Method lerpRgb:(IIF)I
+      49: ior
+      50: ireturn
+
+  private static int lambda$drawGradient$0(int, int, int, float);
+    Code:
+       0: iload_0
+       1: bipush        24
+       3: ishl
+       4: iload_1
+       5: iload_2
+       6: fload_3
+       7: invokestatic  #410                // Method lerpRgb:(IIF)I
+      10: ior
+      11: ireturn
+
+  static {};
+    Code:
+       0: aconst_null
+       1: putstatic     #125                // Field cachedProjection:Lorg/joml/Matrix4f;
+       4: aconst_null
+       5: putstatic     #138                // Field cachedModelView:Lorg/joml/Matrix4f;
+       8: return
+}

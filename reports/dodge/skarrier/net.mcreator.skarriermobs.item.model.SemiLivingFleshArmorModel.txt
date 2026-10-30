@@ -1,0 +1,59 @@
+Compiled from "SemiLivingFleshArmorModel.java"
+public class net.mcreator.skarriermobs.item.model.SemiLivingFleshArmorModel extends software.bernie.geckolib.model.GeoModel<net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem> {
+  public net.mcreator.skarriermobs.item.model.SemiLivingFleshArmorModel();
+    Code:
+       0: aload_0
+       1: invokespecial #10                 // Method software/bernie/geckolib/model/GeoModel."<init>":()V
+       4: return
+
+  public net.minecraft.resources.ResourceLocation getAnimationResource(net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem);
+    Code:
+       0: new           #16                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #18                 // String skarrier_mobs
+       6: ldc           #20                 // String animations/semi_living_flesh_armor.animation.json
+       8: invokespecial #23                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: areturn
+
+  public net.minecraft.resources.ResourceLocation getModelResource(net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem);
+    Code:
+       0: new           #16                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #18                 // String skarrier_mobs
+       6: ldc           #28                 // String geo/semi_living_flesh_armor.geo.json
+       8: invokespecial #23                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureResource(net.mcreator.skarriermobs.item.SemiLivingFleshArmorItem);
+    Code:
+       0: new           #16                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #18                 // String skarrier_mobs
+       6: ldc           #31                 // String textures/item/semi_living_flesh_armor.png
+       8: invokespecial #23                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: areturn
+
+  public net.minecraft.resources.ResourceLocation getAnimationResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #34                 // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem
+       5: invokevirtual #36                 // Method getAnimationResource:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #34                 // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem
+       5: invokevirtual #38                 // Method getTextureResource:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public net.minecraft.resources.ResourceLocation getModelResource(software.bernie.geckolib.core.animatable.GeoAnimatable);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #34                 // class net/mcreator/skarriermobs/item/SemiLivingFleshArmorItem
+       5: invokevirtual #40                 // Method getModelResource:(Lnet/mcreator/skarriermobs/item/SemiLivingFleshArmorItem;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+}

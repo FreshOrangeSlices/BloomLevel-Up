@@ -1,0 +1,18 @@
+Compiled from "KrakenModel.java"
+public class net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenModel extends net.unusual.block_factorys_bosses.geckolib.util.CustomEntityGeoModel<net.unusual.block_factorys_bosses.entity.boss.kraken.KrakenEntity> {
+  public static final net.minecraft.resources.ResourceLocation KRAKEN_BASE_LOCATION;
+
+  public net.unusual.block_factorys_bosses.geckolib.boss.kraken.KrakenModel();
+    Code:
+       0: aload_0
+       1: getstatic     #12                 // Field KRAKEN_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+       4: invokespecial #15                 // Method net/unusual/block_factorys_bosses/geckolib/util/CustomEntityGeoModel."<init>":(Lnet/minecraft/resources/ResourceLocation;)V
+       7: return
+
+  static {};
+    Code:
+       0: ldc           #20                 // String kraken
+       2: invokestatic  #26                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #12                 // Field KRAKEN_BASE_LOCATION:Lnet/minecraft/resources/ResourceLocation;
+       8: return
+}

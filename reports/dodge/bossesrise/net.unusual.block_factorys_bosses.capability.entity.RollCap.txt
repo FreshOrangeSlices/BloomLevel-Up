@@ -1,0 +1,55 @@
+Compiled from "RollCap.java"
+public interface net.unusual.block_factorys_bosses.capability.entity.RollCap extends net.minecraftforge.common.util.INBTSerializable<net.minecraft.nbt.CompoundTag> {
+  public static final net.minecraft.resources.ResourceLocation ID;
+
+  public static java.util.Optional<net.unusual.block_factorys_bosses.capability.entity.RollCap> fromPlayer(net.minecraft.world.entity.player.Player);
+    Code:
+       0: aload_0
+       1: getstatic     #32                 // Field net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler.ROLL_CAP:Lnet/minecraftforge/common/capabilities/Capability;
+       4: invokevirtual #38                 // Method net/minecraft/world/entity/player/Player.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+       7: invokevirtual #44                 // Method net/minecraftforge/common/util/LazyOptional.resolve:()Ljava/util/Optional;
+      10: areturn
+
+  public static boolean isPlayerInvulnerable(net.minecraft.world.entity.player.Player);
+    Code:
+       0: aload_0
+       1: invokestatic  #50                 // InterfaceMethod fromPlayer:(Lnet/minecraft/world/entity/player/Player;)Ljava/util/Optional;
+       4: aconst_null
+       5: invokevirtual #56                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #2                  // class net/unusual/block_factorys_bosses/capability/entity/RollCap
+      11: astore_1
+      12: aload_1
+      13: ifnonnull     18
+      16: iconst_0
+      17: ireturn
+      18: aload_1
+      19: invokeinterface #60,  1           // InterfaceMethod isInvulnerable:()Z
+      24: ireturn
+
+  public abstract int rollCount();
+
+  public abstract float getCooldown(int);
+
+  public abstract void startCooldown(int);
+
+  public abstract int getRoll();
+
+  public abstract boolean isRolling();
+
+  public abstract boolean isInvulnerable();
+
+  public abstract int getRollDuration();
+
+  public abstract net.unusual.block_factorys_bosses.capability.entity.RollCap$RollCapHandler$RollType getDirection();
+
+  public abstract boolean startRoll(net.minecraft.world.entity.player.Player, float, float);
+
+  public abstract void tick(net.minecraft.world.entity.player.Player);
+
+  static {};
+    Code:
+       0: ldc           #81                 // String cap_roll
+       2: invokestatic  #87                 // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #89                 // Field ID:Lnet/minecraft/resources/ResourceLocation;
+       8: return
+}

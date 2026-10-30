@@ -1,0 +1,52 @@
+Compiled from "StateGoal.java"
+public class net.unusual.block_factorys_bosses.state.StateGoal<T extends net.unusual.block_factorys_bosses.entity.boss.AbstractStateBossEntity> extends net.minecraft.world.entity.ai.goal.Goal {
+  private final T boss;
+
+  public net.unusual.block_factorys_bosses.state.StateGoal(T);
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method net/minecraft/world/entity/ai/goal/Goal."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #17                 // Field boss:Lnet/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity;
+       9: return
+
+  public boolean m_183429_();
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public void m_8037_();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field boss:Lnet/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity;
+       4: invokevirtual #29                 // Method net/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity.getStateController:()Lnet/unusual/block_factorys_bosses/state/StateController;
+       7: invokevirtual #34                 // Method net/unusual/block_factorys_bosses/state/StateController.tick:()V
+      10: return
+
+  public void m_8041_();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field boss:Lnet/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity;
+       4: invokevirtual #29                 // Method net/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity.getStateController:()Lnet/unusual/block_factorys_bosses/state/StateController;
+       7: invokevirtual #38                 // Method net/unusual/block_factorys_bosses/state/StateController.endAll:()V
+      10: return
+
+  public boolean m_6767_();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean m_8036_();
+    Code:
+       0: aload_0
+       1: getfield      #17                 // Field boss:Lnet/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity;
+       4: invokevirtual #29                 // Method net/unusual/block_factorys_bosses/entity/boss/AbstractStateBossEntity.getStateController:()Lnet/unusual/block_factorys_bosses/state/StateController;
+       7: invokevirtual #44                 // Method net/unusual/block_factorys_bosses/state/StateController.getRegistry:()Lnet/unusual/block_factorys_bosses/state/StateRegistry;
+      10: invokevirtual #49                 // Method net/unusual/block_factorys_bosses/state/StateRegistry.isEmpty:()Z
+      13: ifne          20
+      16: iconst_1
+      17: goto          21
+      20: iconst_0
+      21: ireturn
+}

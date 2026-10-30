@@ -1,0 +1,119 @@
+Compiled from "Enchantments_CombatRoll.java"
+public class net.combatroll.api.Enchantments_CombatRoll {
+  public static final java.lang.String distanceName = "longfooted";
+
+  public static final net.minecraft.resources.ResourceLocation distanceId;
+
+  public static final net.combatroll.enchantments.AmplifierEnchantment DISTANCE;
+
+  public static final java.lang.String rechargeName = "acrobat";
+
+  public static final net.minecraft.resources.ResourceLocation rechargeId;
+
+  public static final net.combatroll.enchantments.AmplifierEnchantment RECHARGE;
+
+  public static final java.lang.String countName = "multi_roll";
+
+  public static final net.minecraft.resources.ResourceLocation countId;
+
+  public static final net.combatroll.enchantments.AmplifierEnchantment COUNT;
+
+  public net.combatroll.api.Enchantments_CombatRoll();
+    Code:
+       0: aload_0
+       1: invokespecial #47                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private static boolean lambda$static$0(net.minecraft.world.item.ItemStack);
+    Code:
+       0: getstatic     #58                 // Field net/minecraft/world/item/enchantment/EnchantmentCategory.ARMOR_CHEST:Lnet/minecraft/world/item/enchantment/EnchantmentCategory;
+       3: aload_0
+       4: invokevirtual #64                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+       7: invokevirtual #68                 // Method net/minecraft/world/item/enchantment/EnchantmentCategory.m_7454_:(Lnet/minecraft/world/item/Item;)Z
+      10: ifne          26
+      13: getstatic     #71                 // Field net/minecraft/world/item/enchantment/EnchantmentCategory.ARMOR_LEGS:Lnet/minecraft/world/item/enchantment/EnchantmentCategory;
+      16: aload_0
+      17: invokevirtual #64                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      20: invokevirtual #68                 // Method net/minecraft/world/item/enchantment/EnchantmentCategory.m_7454_:(Lnet/minecraft/world/item/Item;)Z
+      23: ifeq          30
+      26: iconst_1
+      27: goto          31
+      30: iconst_0
+      31: ireturn
+
+  static {};
+    Code:
+       0: new           #75                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #77                 // String combatroll:longfooted
+       6: invokespecial #80                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+       9: putstatic     #82                 // Field distanceId:Lnet/minecraft/resources/ResourceLocation;
+      12: new           #14                 // class net/combatroll/enchantments/AmplifierEnchantment
+      15: dup
+      16: getstatic     #86                 // Field net/minecraft/world/item/enchantment/Enchantment$Rarity.RARE:Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;
+      19: getstatic     #90                 // Field net/combatroll/enchantments/AmplifierEnchantment$Operation.ADD:Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;
+      22: getstatic     #96                 // Field net/combatroll/CombatRoll.enchantmentConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+      25: getfield      #102                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+      28: checkcast     #104                // class net/combatroll/config/EnchantmentsConfig
+      31: getfield      #107                // Field net/combatroll/config/EnchantmentsConfig.longfooted:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      34: getstatic     #110                // Field net/minecraft/world/item/enchantment/EnchantmentCategory.ARMOR_FEET:Lnet/minecraft/world/item/enchantment/EnchantmentCategory;
+      37: iconst_1
+      38: anewarray     #112                // class net/minecraft/world/entity/EquipmentSlot
+      41: dup
+      42: iconst_0
+      43: getstatic     #116                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+      46: aastore
+      47: invokespecial #119                // Method net/combatroll/enchantments/AmplifierEnchantment."<init>":(Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;Lnet/combatroll/tinyconfig/models/EnchantmentConfig;Lnet/minecraft/world/item/enchantment/EnchantmentCategory;[Lnet/minecraft/world/entity/EquipmentSlot;)V
+      50: putstatic     #121                // Field DISTANCE:Lnet/combatroll/enchantments/AmplifierEnchantment;
+      53: new           #75                 // class net/minecraft/resources/ResourceLocation
+      56: dup
+      57: ldc           #123                // String combatroll:acrobat
+      59: invokespecial #80                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      62: putstatic     #125                // Field rechargeId:Lnet/minecraft/resources/ResourceLocation;
+      65: new           #14                 // class net/combatroll/enchantments/AmplifierEnchantment
+      68: dup
+      69: getstatic     #86                 // Field net/minecraft/world/item/enchantment/Enchantment$Rarity.RARE:Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;
+      72: getstatic     #128                // Field net/combatroll/enchantments/AmplifierEnchantment$Operation.MULTIPLY:Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;
+      75: getstatic     #96                 // Field net/combatroll/CombatRoll.enchantmentConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+      78: getfield      #102                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+      81: checkcast     #104                // class net/combatroll/config/EnchantmentsConfig
+      84: getfield      #130                // Field net/combatroll/config/EnchantmentsConfig.acrobat:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      87: getstatic     #133                // Field net/minecraft/world/item/enchantment/EnchantmentCategory.WEARABLE:Lnet/minecraft/world/item/enchantment/EnchantmentCategory;
+      90: iconst_2
+      91: anewarray     #112                // class net/minecraft/world/entity/EquipmentSlot
+      94: dup
+      95: iconst_0
+      96: getstatic     #136                // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      99: aastore
+     100: dup
+     101: iconst_1
+     102: getstatic     #139                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+     105: aastore
+     106: invokespecial #119                // Method net/combatroll/enchantments/AmplifierEnchantment."<init>":(Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;Lnet/combatroll/tinyconfig/models/EnchantmentConfig;Lnet/minecraft/world/item/enchantment/EnchantmentCategory;[Lnet/minecraft/world/entity/EquipmentSlot;)V
+     109: invokedynamic #154,  0            // InvokeDynamic #0:isAcceptableItem:()Lnet/combatroll/enchantments/CustomConditionalEnchantment$Condition;
+     114: invokevirtual #158                // Method net/combatroll/enchantments/AmplifierEnchantment.condition:(Lnet/combatroll/enchantments/CustomConditionalEnchantment$Condition;)Lnet/combatroll/enchantments/AmplifierEnchantment;
+     117: putstatic     #160                // Field RECHARGE:Lnet/combatroll/enchantments/AmplifierEnchantment;
+     120: new           #75                 // class net/minecraft/resources/ResourceLocation
+     123: dup
+     124: ldc           #162                // String combatroll:multi_roll
+     126: invokespecial #80                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     129: putstatic     #164                // Field countId:Lnet/minecraft/resources/ResourceLocation;
+     132: new           #14                 // class net/combatroll/enchantments/AmplifierEnchantment
+     135: dup
+     136: getstatic     #167                // Field net/minecraft/world/item/enchantment/Enchantment$Rarity.VERY_RARE:Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;
+     139: getstatic     #90                 // Field net/combatroll/enchantments/AmplifierEnchantment$Operation.ADD:Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;
+     142: getstatic     #96                 // Field net/combatroll/CombatRoll.enchantmentConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+     145: getfield      #102                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+     148: checkcast     #104                // class net/combatroll/config/EnchantmentsConfig
+     151: getfield      #169                // Field net/combatroll/config/EnchantmentsConfig.multi_roll:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+     154: getstatic     #172                // Field net/minecraft/world/item/enchantment/EnchantmentCategory.ARMOR_HEAD:Lnet/minecraft/world/item/enchantment/EnchantmentCategory;
+     157: iconst_1
+     158: anewarray     #112                // class net/minecraft/world/entity/EquipmentSlot
+     161: dup
+     162: iconst_0
+     163: getstatic     #175                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     166: aastore
+     167: invokespecial #119                // Method net/combatroll/enchantments/AmplifierEnchantment."<init>":(Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;Lnet/combatroll/tinyconfig/models/EnchantmentConfig;Lnet/minecraft/world/item/enchantment/EnchantmentCategory;[Lnet/minecraft/world/entity/EquipmentSlot;)V
+     170: putstatic     #177                // Field COUNT:Lnet/combatroll/enchantments/AmplifierEnchantment;
+     173: return
+}

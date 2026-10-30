@@ -1,0 +1,158 @@
+public final class org.anti_ad.mc.ipnext.config.Tweaks implements org.anti_ad.mc.common.config.builder.ConfigDeclaration {
+  public static final org.anti_ad.mc.ipnext.config.Tweaks INSTANCE;
+
+  static final kotlin.reflect.KProperty[] $$delegatedProperties;
+
+  private static final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder builder;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate PREVENT_CLOSE_GUI_DROP_ITEM$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate CONTAINER_SWIPE_MOVING_ITEMS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SWIPE_MOVE_CRAFTING_RESULT_SLOT$delegate;
+
+  private org.anti_ad.mc.ipnext.config.Tweaks();
+    Code:
+       0: aload_0
+       1: invokespecial #21                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder getBuilder();
+    Code:
+       0: getstatic     #25                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+       3: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getPREVENT_CLOSE_GUI_DROP_ITEM();
+    Code:
+       0: getstatic     #29                 // Field PREVENT_CLOSE_GUI_DROP_ITEM$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokevirtual #37                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #39                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getCONTAINER_SWIPE_MOVING_ITEMS();
+    Code:
+       0: getstatic     #42                 // Field CONTAINER_SWIPE_MOVING_ITEMS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_1
+       8: aaload
+       9: invokevirtual #37                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #39                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getSWIPE_MOVE_CRAFTING_RESULT_SLOT();
+    Code:
+       0: getstatic     #45                 // Field SWIPE_MOVE_CRAFTING_RESULT_SLOT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_2
+       8: aaload
+       9: invokevirtual #37                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #39                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      15: areturn
+
+  static {};
+    Code:
+       0: iconst_3
+       1: anewarray     #48                 // class kotlin/reflect/KProperty
+       4: dup
+       5: astore_0
+       6: iconst_0
+       7: new           #50                 // class kotlin/jvm/internal/PropertyReference1Impl
+      10: dup
+      11: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Tweaks
+      13: ldc           #52                 // String PREVENT_CLOSE_GUI_DROP_ITEM
+      15: ldc           #54                 // String getPREVENT_CLOSE_GUI_DROP_ITEM()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      17: iconst_0
+      18: invokespecial #57                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      21: checkcast     #59                 // class kotlin/jvm/internal/PropertyReference1
+      24: invokestatic  #65                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      27: aastore
+      28: aload_0
+      29: iconst_1
+      30: new           #50                 // class kotlin/jvm/internal/PropertyReference1Impl
+      33: dup
+      34: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Tweaks
+      36: ldc           #67                 // String CONTAINER_SWIPE_MOVING_ITEMS
+      38: ldc           #69                 // String getCONTAINER_SWIPE_MOVING_ITEMS()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      40: iconst_0
+      41: invokespecial #57                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      44: checkcast     #59                 // class kotlin/jvm/internal/PropertyReference1
+      47: invokestatic  #65                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      50: aastore
+      51: aload_0
+      52: iconst_2
+      53: new           #50                 // class kotlin/jvm/internal/PropertyReference1Impl
+      56: dup
+      57: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Tweaks
+      59: ldc           #71                 // String SWIPE_MOVE_CRAFTING_RESULT_SLOT
+      61: ldc           #73                 // String getSWIPE_MOVE_CRAFTING_RESULT_SLOT()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      63: iconst_0
+      64: invokespecial #57                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      67: checkcast     #59                 // class kotlin/jvm/internal/PropertyReference1
+      70: invokestatic  #65                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      73: aastore
+      74: aload_0
+      75: putstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+      78: new           #2                  // class org/anti_ad/mc/ipnext/config/Tweaks
+      81: dup
+      82: invokespecial #74                 // Method "<init>":()V
+      85: dup
+      86: putstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+      89: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+      92: invokestatic  #82                 // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.createBuilder:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+      95: ldc           #84                 // String inventoryprofiles.config.category.client_side_tweaks
+      97: invokestatic  #88                 // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     100: ldc           #90                 // String §§vgap:-5
+     102: invokestatic  #88                 // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     105: ldc           #92                 // String inventoryprofiles.config.category.inventory
+     107: invokestatic  #88                 // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     110: putstatic     #25                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     113: getstatic     #97                 // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     116: getstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+     119: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     122: iconst_0
+     123: aconst_null
+     124: iconst_2
+     125: aconst_null
+     126: invokestatic  #101                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool$default:(Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;ILjava/lang/Object;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     129: getstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+     132: getstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     135: iconst_0
+     136: aaload
+     137: invokevirtual #107                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     140: putstatic     #29                 // Field PREVENT_CLOSE_GUI_DROP_ITEM$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     143: getstatic     #97                 // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     146: getstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+     149: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     152: iconst_1
+     153: aconst_null
+     154: iconst_2
+     155: aconst_null
+     156: invokestatic  #101                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool$default:(Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;ILjava/lang/Object;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     159: getstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+     162: getstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     165: iconst_1
+     166: aaload
+     167: invokevirtual #107                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     170: putstatic     #42                 // Field CONTAINER_SWIPE_MOVING_ITEMS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     173: getstatic     #97                 // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     176: getstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+     179: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     182: iconst_0
+     183: aconst_null
+     184: iconst_2
+     185: aconst_null
+     186: invokestatic  #101                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool$default:(Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;ILjava/lang/Object;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     189: getstatic     #76                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+     192: getstatic     #31                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     195: iconst_2
+     196: aaload
+     197: invokevirtual #107                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     200: putstatic     #45                 // Field SWIPE_MOVE_CRAFTING_RESULT_SLOT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     203: return
+}

@@ -1,0 +1,441 @@
+public final class org.anti_ad.mc.ipnext.event.AutoRefillHandler {
+  public static final org.anti_ad.mc.ipnext.event.AutoRefillHandler INSTANCE;
+
+  private static org.anti_ad.mc.ipnext.event.AutoRefillHandler$AutoRefillWatchIds watchIds;
+
+  private static boolean screenOpening;
+
+  private static final java.util.Set profilesSwappedItems;
+
+  private static boolean skipTick;
+
+  private static final java.util.Set blacklist;
+
+  private static int ticksAfterUp;
+
+  private static final java.util.List monitors;
+
+  private org.anti_ad.mc.ipnext.event.AutoRefillHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #26                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.ipnext.event.AutoRefillHandler$AutoRefillWatchIds getWatchIds();
+    Code:
+       0: getstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+       3: areturn
+
+  public final void setWatchIds(org.anti_ad.mc.ipnext.event.AutoRefillHandler$AutoRefillWatchIds);
+    Code:
+       0: aload_1
+       1: ldc           #34                 // String
+       3: invokestatic  #40                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_1
+       7: putstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+      10: return
+
+  private final boolean getPressingDropKey();
+    Code:
+       0: getstatic     #47                 // Field org/anti_ad/mc/common/vanilla/Vanilla.INSTANCE:Lorg/anti_ad/mc/common/vanilla/Vanilla;
+       3: invokevirtual #51                 // Method org/anti_ad/mc/common/vanilla/Vanilla.mc:()Lnet/minecraft/client/Minecraft;
+       6: getfield      #57                 // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+       9: dup
+      10: ldc           #34                 // String
+      12: invokestatic  #60                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      15: getfield      #66                 // Field net/minecraft/client/Options.f_92094_:Lnet/minecraft/client/KeyMapping;
+      18: dup
+      19: ldc           #34                 // String
+      21: invokestatic  #60                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      24: invokevirtual #71                 // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      27: ireturn
+
+  public final boolean getScreenOpening();
+    Code:
+       0: getstatic     #74                 // Field screenOpening:Z
+       3: ireturn
+
+  public final void setScreenOpening(boolean);
+    Code:
+       0: iload_1
+       1: putstatic     #74                 // Field screenOpening:Z
+       4: return
+
+  public final java.util.Set getProfilesSwappedItems();
+    Code:
+       0: getstatic     #80                 // Field profilesSwappedItems:Ljava/util/Set;
+       3: areturn
+
+  public final boolean getSkipTick();
+    Code:
+       0: getstatic     #83                 // Field skipTick:Z
+       3: ireturn
+
+  public final void setSkipTick(boolean);
+    Code:
+       0: iload_1
+       1: putstatic     #83                 // Field skipTick:Z
+       4: return
+
+  private final boolean isBlackListed(org.anti_ad.mc.ipnext.item.ItemStack);
+    Code:
+       0: getstatic     #88                 // Field blacklist:Ljava/util/Set;
+       3: aload_1
+       4: invokevirtual #94                 // Method org/anti_ad/mc/ipnext/item/ItemStack.getItemType:()Lorg/anti_ad/mc/ipnext/item/ItemType;
+       7: astore_1
+       8: getstatic     #100                // Field net/minecraftforge/registries/ForgeRegistries.ITEMS:Lnet/minecraftforge/registries/IForgeRegistry;
+      11: aload_1
+      12: invokevirtual #106                // Method org/anti_ad/mc/ipnext/item/ItemType.getItem:()Lnet/minecraft/world/item/Item;
+      15: invokeinterface #112,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getKey:(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;
+      20: dup
+      21: invokestatic  #116                // Method kotlin/jvm/internal/Intrinsics.checkNotNull:(Ljava/lang/Object;)V
+      24: invokevirtual #122                // Method net/minecraft/resources/ResourceLocation.toString:()Ljava/lang/String;
+      27: dup
+      28: ldc           #34                 // String
+      30: invokestatic  #60                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      33: invokeinterface #128,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      38: ireturn
+
+  private final boolean getTempDisabledForDamageable();
+    Code:
+       0: getstatic     #131                // Field ticksAfterUp:I
+       3: bipush        15
+       5: if_icmpge     10
+       8: iconst_1
+       9: ireturn
+      10: iconst_0
+      11: ireturn
+
+  public final void onTickInGame();
+    Code:
+       0: getstatic     #83                 // Field skipTick:Z
+       3: ifne          125
+       6: getstatic     #137                // Field org/anti_ad/mc/ipnext/config/AutoRefillSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/AutoRefillSettings;
+       9: invokevirtual #141                // Method org/anti_ad/mc/ipnext/config/AutoRefillSettings.getAUTO_REFILL_TEMP_DISABLE_REFILL_FOR_TOOLS:()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      12: invokevirtual #146                // Method org/anti_ad/mc/common/config/options/ConfigHotkey.isPressing:()Z
+      15: ifeq          25
+      18: iconst_0
+      19: putstatic     #131                // Field ticksAfterUp:I
+      22: goto          41
+      25: getstatic     #131                // Field ticksAfterUp:I
+      28: bipush        16
+      30: if_icmpge     41
+      33: getstatic     #131                // Field ticksAfterUp:I
+      36: iconst_1
+      37: iadd
+      38: putstatic     #131                // Field ticksAfterUp:I
+      41: getstatic     #47                 // Field org/anti_ad/mc/common/vanilla/Vanilla.INSTANCE:Lorg/anti_ad/mc/common/vanilla/Vanilla;
+      44: invokevirtual #150                // Method org/anti_ad/mc/common/vanilla/Vanilla.screen:()Lnet/minecraft/client/gui/screens/Screen;
+      47: ifnonnull     92
+      50: getstatic     #137                // Field org/anti_ad/mc/ipnext/config/AutoRefillSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/AutoRefillSettings;
+      53: invokevirtual #154                // Method org/anti_ad/mc/ipnext/config/AutoRefillSettings.getDISABLE_FOR_DROP_ITEM:()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      56: invokevirtual #159                // Method org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean.getBooleanValue:()Z
+      59: ifeq          97
+      62: getstatic     #47                 // Field org/anti_ad/mc/common/vanilla/Vanilla.INSTANCE:Lorg/anti_ad/mc/common/vanilla/Vanilla;
+      65: invokevirtual #51                 // Method org/anti_ad/mc/common/vanilla/Vanilla.mc:()Lnet/minecraft/client/Minecraft;
+      68: getfield      #57                 // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      71: dup
+      72: ldc           #34                 // String
+      74: invokestatic  #60                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      77: getfield      #66                 // Field net/minecraft/client/Options.f_92094_:Lnet/minecraft/client/KeyMapping;
+      80: dup
+      81: ldc           #34                 // String
+      83: invokestatic  #60                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      86: invokevirtual #71                 // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      89: ifeq          97
+      92: iconst_1
+      93: putstatic     #74                 // Field screenOpening:Z
+      96: return
+      97: getstatic     #164                // Field org/anti_ad/mc/common/vanilla/VanillaUtil.INSTANCE:Lorg/anti_ad/mc/common/vanilla/VanillaUtil;
+     100: invokevirtual #167                // Method org/anti_ad/mc/common/vanilla/VanillaUtil.inGame:()Z
+     103: ifeq          130
+     106: getstatic     #74                 // Field screenOpening:Z
+     109: ifeq          120
+     112: iconst_0
+     113: putstatic     #74                 // Field screenOpening:Z
+     116: aload_0
+     117: invokevirtual #170                // Method init:()V
+     120: aload_0
+     121: invokevirtual #173                // Method handleAutoRefill:()V
+     124: return
+     125: iconst_0
+     126: putstatic     #83                 // Field skipTick:Z
+     129: return
+     130: return
+
+  public final void onJoinWorld();
+    Code:
+       0: aload_0
+       1: invokevirtual #170                // Method init:()V
+       4: return
+
+  public final void init();
+    Code:
+       0: getstatic     #176                // Field monitors:Ljava/util/List;
+       3: invokeinterface #181,  1          // InterfaceMethod java/util/List.clear:()V
+       8: iconst_2
+       9: anewarray     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      12: dup
+      13: astore_1
+      14: iconst_0
+      15: new           #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      18: dup
+      19: getstatic     #188                // Field org/anti_ad/mc/ipnext/event/AutoRefillHandler$init$list$1.INSTANCE:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$init$list$1;
+      22: checkcast     #190                // class kotlin/jvm/functions/Function0
+      25: invokespecial #193                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor."<init>":(Lkotlin/jvm/functions/Function0;)V
+      28: aastore
+      29: aload_1
+      30: iconst_1
+      31: new           #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      34: dup
+      35: getstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+      38: invokevirtual #199                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds.getOffHand:()I
+      41: invokespecial #202                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor."<init>":(I)V
+      44: aastore
+      45: aload_1
+      46: invokestatic  #208                // Method kotlin/collections/CollectionsKt.listOf:([Ljava/lang/Object;)Ljava/util/List;
+      49: checkcast     #210                // class java/util/Collection
+      52: getstatic     #137                // Field org/anti_ad/mc/ipnext/config/AutoRefillSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/AutoRefillSettings;
+      55: invokevirtual #213                // Method org/anti_ad/mc/ipnext/config/AutoRefillSettings.getREFILL_ARMOR:()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      58: invokevirtual #159                // Method org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean.getBooleanValue:()Z
+      61: ifne          70
+      64: invokestatic  #217                // Method kotlin/collections/CollectionsKt.emptyList:()Ljava/util/List;
+      67: goto          143
+      70: iconst_4
+      71: anewarray     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      74: dup
+      75: astore_1
+      76: iconst_0
+      77: new           #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      80: dup
+      81: getstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+      84: invokevirtual #220                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds.getHead:()I
+      87: invokespecial #202                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor."<init>":(I)V
+      90: aastore
+      91: aload_1
+      92: iconst_1
+      93: new           #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      96: dup
+      97: getstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+     100: invokevirtual #223                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds.getChest:()I
+     103: invokespecial #202                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor."<init>":(I)V
+     106: aastore
+     107: aload_1
+     108: iconst_2
+     109: new           #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     112: dup
+     113: getstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+     116: invokevirtual #226                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds.getLegs:()I
+     119: invokespecial #202                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor."<init>":(I)V
+     122: aastore
+     123: aload_1
+     124: iconst_3
+     125: new           #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     128: dup
+     129: getstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+     132: invokevirtual #229                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds.getFeet:()I
+     135: invokespecial #202                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor."<init>":(I)V
+     138: aastore
+     139: aload_1
+     140: invokestatic  #208                // Method kotlin/collections/CollectionsKt.listOf:([Ljava/lang/Object;)Ljava/util/List;
+     143: checkcast     #231                // class java/lang/Iterable
+     146: invokestatic  #235                // Method kotlin/collections/CollectionsKt.plus:(Ljava/util/Collection;Ljava/lang/Iterable;)Ljava/util/List;
+     149: dup
+     150: astore_1
+     151: iconst_0
+     152: invokeinterface #239,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     157: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     160: invokevirtual #242                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.getAnothers:()Ljava/util/List;
+     163: checkcast     #210                // class java/util/Collection
+     166: aload_1
+     167: iconst_1
+     168: invokeinterface #239,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     173: invokeinterface #245,  2          // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+     178: pop
+     179: aload_1
+     180: iconst_0
+     181: invokeinterface #239,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     186: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     189: invokevirtual #242                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.getAnothers:()Ljava/util/List;
+     192: checkcast     #210                // class java/util/Collection
+     195: aload_1
+     196: checkcast     #231                // class java/lang/Iterable
+     199: iconst_2
+     200: invokestatic  #249                // Method kotlin/collections/CollectionsKt.drop:(Ljava/lang/Iterable;I)Ljava/util/List;
+     203: checkcast     #231                // class java/lang/Iterable
+     206: invokestatic  #253                // Method kotlin/collections/CollectionsKt.addAll:(Ljava/util/Collection;Ljava/lang/Iterable;)Z
+     209: pop
+     210: aload_1
+     211: iconst_1
+     212: invokeinterface #239,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     217: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     220: invokevirtual #242                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.getAnothers:()Ljava/util/List;
+     223: checkcast     #210                // class java/util/Collection
+     226: aload_1
+     227: iconst_0
+     228: invokeinterface #239,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     233: invokeinterface #245,  2          // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+     238: pop
+     239: aload_1
+     240: iconst_1
+     241: invokeinterface #239,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     246: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     249: invokevirtual #242                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.getAnothers:()Ljava/util/List;
+     252: checkcast     #210                // class java/util/Collection
+     255: aload_1
+     256: checkcast     #231                // class java/lang/Iterable
+     259: iconst_2
+     260: invokestatic  #249                // Method kotlin/collections/CollectionsKt.drop:(Ljava/lang/Iterable;I)Ljava/util/List;
+     263: checkcast     #231                // class java/lang/Iterable
+     266: invokestatic  #253                // Method kotlin/collections/CollectionsKt.addAll:(Ljava/util/Collection;Ljava/lang/Iterable;)Z
+     269: pop
+     270: getstatic     #176                // Field monitors:Ljava/util/List;
+     273: aload_1
+     274: checkcast     #210                // class java/util/Collection
+     277: invokeinterface #256,  2          // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+     282: pop
+     283: return
+
+  public final java.util.List getMonitors();
+    Code:
+       0: getstatic     #176                // Field monitors:Ljava/util/List;
+       3: areturn
+
+  public final void handleAutoRefill();
+    Code:
+       0: getstatic     #176                // Field monitors:Ljava/util/List;
+       3: checkcast     #231                // class java/lang/Iterable
+       6: invokeinterface #263,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      11: astore_1
+      12: aload_1
+      13: invokeinterface #268,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      18: ifeq          36
+      21: aload_1
+      22: invokeinterface #272,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      27: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      30: invokevirtual #275                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.updateCurrent:()V
+      33: goto          12
+      36: getstatic     #176                // Field monitors:Ljava/util/List;
+      39: checkcast     #231                // class java/lang/Iterable
+      42: invokeinterface #263,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      47: astore_1
+      48: aload_1
+      49: invokeinterface #268,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      54: ifeq          72
+      57: aload_1
+      58: invokeinterface #272,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      63: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+      66: invokevirtual #278                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.checkShouldHandle:()V
+      69: goto          48
+      72: getstatic     #176                // Field monitors:Ljava/util/List;
+      75: checkcast     #231                // class java/lang/Iterable
+      78: invokeinterface #263,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      83: astore_1
+      84: aload_1
+      85: invokeinterface #268,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      90: ifeq          108
+      93: aload_1
+      94: invokeinterface #272,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      99: checkcast     #183                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor
+     102: invokevirtual #281                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$ItemSlotMonitor.checkHandle:()V
+     105: goto          84
+     108: getstatic     #286                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+     111: pop
+     112: return
+     113: invokevirtual #289                // Method java/lang/Throwable.printStackTrace:()V
+     116: return
+    Exception table:
+       from    to  target type
+           0   112   113   Class java/lang/Throwable
+
+  public final void blackListChanged();
+    Code:
+       0: getstatic     #88                 // Field blacklist:Ljava/util/Set;
+       3: invokeinterface #291,  1          // InterfaceMethod java/util/Set.clear:()V
+       8: getstatic     #137                // Field org/anti_ad/mc/ipnext/config/AutoRefillSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/AutoRefillSettings;
+      11: invokevirtual #295                // Method org/anti_ad/mc/ipnext/config/AutoRefillSettings.getAUTOREFILL_BLACKLIST:()Lorg/anti_ad/mc/common/config/options/HandledConfigString;
+      14: invokevirtual #300                // Method org/anti_ad/mc/common/config/options/HandledConfigString.getValue:()Ljava/lang/String;
+      17: checkcast     #302                // class java/lang/CharSequence
+      20: iconst_1
+      21: anewarray     #304                // class java/lang/String
+      24: dup
+      25: astore_1
+      26: iconst_0
+      27: ldc_w         #306                // String ,
+      30: aastore
+      31: aload_1
+      32: iconst_0
+      33: iconst_0
+      34: bipush        6
+      36: aconst_null
+      37: invokestatic  #312                // Method kotlin/text/StringsKt.split$default:(Ljava/lang/CharSequence;[Ljava/lang/String;ZIILjava/lang/Object;)Ljava/util/List;
+      40: checkcast     #231                // class java/lang/Iterable
+      43: invokeinterface #263,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      48: astore_1
+      49: aload_1
+      50: invokeinterface #268,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      55: ifeq          90
+      58: aload_1
+      59: invokeinterface #272,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      64: checkcast     #304                // class java/lang/String
+      67: astore_2
+      68: getstatic     #88                 // Field blacklist:Ljava/util/Set;
+      71: aload_2
+      72: checkcast     #302                // class java/lang/CharSequence
+      75: invokestatic  #316                // Method kotlin/text/StringsKt.trim:(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+      78: invokevirtual #317                // Method java/lang/Object.toString:()Ljava/lang/String;
+      81: invokeinterface #318,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      86: pop
+      87: goto          49
+      90: return
+
+  public static final boolean access$isBlackListed(org.anti_ad.mc.ipnext.event.AutoRefillHandler, org.anti_ad.mc.ipnext.item.ItemStack);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #322                // Method isBlackListed:(Lorg/anti_ad/mc/ipnext/item/ItemStack;)Z
+       5: ireturn
+
+  public static final boolean access$getTempDisabledForDamageable(org.anti_ad.mc.ipnext.event.AutoRefillHandler);
+    Code:
+       0: aload_0
+       1: invokespecial #326                // Method getTempDisabledForDamageable:()Z
+       4: ireturn
+
+  static {};
+    Code:
+       0: new           #2                  // class org/anti_ad/mc/ipnext/event/AutoRefillHandler
+       3: dup
+       4: invokespecial #328                // Method "<init>":()V
+       7: putstatic     #330                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler;
+      10: new           #195                // class org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds
+      13: dup
+      14: iconst_0
+      15: iconst_0
+      16: iconst_0
+      17: iconst_0
+      18: iconst_0
+      19: iconst_0
+      20: bipush        63
+      22: aconst_null
+      23: invokespecial #333                // Method org/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds."<init>":(IIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      26: putstatic     #30                 // Field watchIds:Lorg/anti_ad/mc/ipnext/event/AutoRefillHandler$AutoRefillWatchIds;
+      29: new           #335                // class java/util/LinkedHashSet
+      32: dup
+      33: invokespecial #336                // Method java/util/LinkedHashSet."<init>":()V
+      36: checkcast     #124                // class java/util/Set
+      39: putstatic     #80                 // Field profilesSwappedItems:Ljava/util/Set;
+      42: new           #335                // class java/util/LinkedHashSet
+      45: dup
+      46: invokespecial #336                // Method java/util/LinkedHashSet."<init>":()V
+      49: checkcast     #124                // class java/util/Set
+      52: putstatic     #88                 // Field blacklist:Ljava/util/Set;
+      55: bipush        16
+      57: putstatic     #131                // Field ticksAfterUp:I
+      60: new           #338                // class java/util/ArrayList
+      63: dup
+      64: invokespecial #339                // Method java/util/ArrayList."<init>":()V
+      67: checkcast     #178                // class java/util/List
+      70: putstatic     #176                // Field monitors:Ljava/util/List;
+      73: return
+}

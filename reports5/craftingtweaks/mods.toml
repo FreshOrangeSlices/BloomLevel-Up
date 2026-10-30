@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="[46,)"
+license="All rights reserved"
+issueTrackerURL="https://github.com/TwelveIterations/CraftingTweaks/issues"
+
+[[mods]]
+modId="craftingtweaks"
+version="18.2.9"
+displayName="CraftingTweaks"
+displayURL="https://mods.twelveiterations.com/minecraft/craftingtweaks"
+logoFile="craftingtweaks-icon.png"
+credits="BlayTheNinth"
+authors="BlayTheNinth"
+description='''
+Allows you to rotate, balance or clear the crafting matrix by the press of a button, in any (supported) crafting window.
+'''
+
+[[dependencies.craftingtweaks]]
+    modId="forge"
+    mandatory=true
+    versionRange="[46.0.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.craftingtweaks]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20,1.21)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.craftingtweaks]]
+    modId="balm"
+    mandatory=true
+    versionRange="[7.3.33,)"
+    ordering="NONE"
+    side="BOTH"

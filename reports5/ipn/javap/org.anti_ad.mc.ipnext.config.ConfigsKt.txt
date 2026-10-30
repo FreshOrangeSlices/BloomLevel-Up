@@ -1,0 +1,62 @@
+public final class org.anti_ad.mc.ipnext.config.ConfigsKt {
+  private static final java.lang.String category = "inventoryprofiles.config.category";
+
+  public static final java.lang.String FILE_PATH = "inventoryprofilesnext/inventoryprofiles.json";
+
+  private static final java.util.List Configs;
+
+  public static final java.util.List getConfigs();
+    Code:
+       0: getstatic     #18                 // Field Configs:Ljava/util/List;
+       3: areturn
+
+  static {};
+    Code:
+       0: bipush        10
+       2: anewarray     #22                 // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: getstatic     #28                 // Field org/anti_ad/mc/ipnext/config/ModSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/ModSettings;
+      11: aastore
+      12: aload_0
+      13: iconst_1
+      14: getstatic     #33                 // Field org/anti_ad/mc/ipnext/config/GuiSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/GuiSettings;
+      17: aastore
+      18: aload_0
+      19: iconst_2
+      20: getstatic     #38                 // Field org/anti_ad/mc/ipnext/config/LockedSlotsSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+      23: aastore
+      24: aload_0
+      25: iconst_3
+      26: getstatic     #43                 // Field org/anti_ad/mc/ipnext/config/AutoRefillSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/AutoRefillSettings;
+      29: aastore
+      30: aload_0
+      31: iconst_4
+      32: getstatic     #48                 // Field org/anti_ad/mc/ipnext/config/EditProfiles.INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+      35: aastore
+      36: aload_0
+      37: iconst_5
+      38: getstatic     #53                 // Field org/anti_ad/mc/ipnext/config/ScrollSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+      41: aastore
+      42: aload_0
+      43: bipush        6
+      45: getstatic     #58                 // Field org/anti_ad/mc/ipnext/config/Hotkeys.INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+      48: aastore
+      49: aload_0
+      50: bipush        7
+      52: getstatic     #63                 // Field org/anti_ad/mc/ipnext/config/Tweaks.INSTANCE:Lorg/anti_ad/mc/ipnext/config/Tweaks;
+      55: aastore
+      56: aload_0
+      57: bipush        8
+      59: getstatic     #68                 // Field org/anti_ad/mc/ipnext/config/Debugs.INSTANCE:Lorg/anti_ad/mc/ipnext/config/Debugs;
+      62: aastore
+      63: aload_0
+      64: bipush        9
+      66: getstatic     #73                 // Field org/anti_ad/mc/ipnext/config/Modpacks.INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+      69: aastore
+      70: aload_0
+      71: invokestatic  #79                 // Method kotlin/collections/CollectionsKt.listOf:([Ljava/lang/Object;)Ljava/util/List;
+      74: putstatic     #18                 // Field Configs:Ljava/util/List;
+      77: return
+}

@@ -1,0 +1,145 @@
+Compiled from "AmplifierEnchantment.java"
+public class net.combatroll.enchantments.AmplifierEnchantment extends net.minecraft.world.item.enchantment.Enchantment implements net.combatroll.enchantments.CustomConditionalEnchantment {
+  public net.combatroll.enchantments.AmplifierEnchantment$Operation operation;
+
+  public net.combatroll.tinyconfig.models.EnchantmentConfig properties;
+
+  private net.combatroll.enchantments.CustomConditionalEnchantment$Condition condition;
+
+  public double apply(double, int);
+    Code:
+       0: getstatic     #32                 // Field net/combatroll/enchantments/AmplifierEnchantment$1.$SwitchMap$net$combatroll$enchantments$AmplifierEnchantment$Operation:[I
+       3: aload_0
+       4: getfield      #34                 // Field operation:Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;
+       7: invokevirtual #38                 // Method net/combatroll/enchantments/AmplifierEnchantment$Operation.ordinal:()I
+      10: iaload
+      11: lookupswitch  { // 2
+                     1: 36
+                     2: 52
+               default: 70
+          }
+      36: dload_1
+      37: iload_3
+      38: i2f
+      39: aload_0
+      40: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      43: getfield      #46                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.bonus_per_level:F
+      46: fmul
+      47: f2d
+      48: dadd
+      49: dup2
+      50: dstore_1
+      51: dreturn
+      52: dload_1
+      53: fconst_1
+      54: iload_3
+      55: i2f
+      56: aload_0
+      57: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      60: getfield      #46                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.bonus_per_level:F
+      63: fmul
+      64: fadd
+      65: f2d
+      66: dmul
+      67: dup2
+      68: dstore_1
+      69: dreturn
+      70: dconst_0
+      71: dreturn
+
+  public net.combatroll.enchantments.AmplifierEnchantment(net.minecraft.world.item.enchantment.Enchantment$Rarity, net.combatroll.enchantments.AmplifierEnchantment$Operation, net.combatroll.tinyconfig.models.EnchantmentConfig, net.minecraft.world.item.enchantment.EnchantmentCategory, net.minecraft.world.entity.EquipmentSlot[]);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload         4
+       4: aload         5
+       6: invokespecial #58                 // Method net/minecraft/world/item/enchantment/Enchantment."<init>":(Lnet/minecraft/world/item/enchantment/Enchantment$Rarity;Lnet/minecraft/world/item/enchantment/EnchantmentCategory;[Lnet/minecraft/world/entity/EquipmentSlot;)V
+       9: aload_0
+      10: aload_2
+      11: putfield      #34                 // Field operation:Lnet/combatroll/enchantments/AmplifierEnchantment$Operation;
+      14: aload_0
+      15: aload_3
+      16: putfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      19: return
+
+  public int m_6586_();
+    Code:
+       0: aload_0
+       1: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+       4: getfield      #66                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.enabled:Z
+       7: ifne          12
+      10: iconst_0
+      11: ireturn
+      12: aload_0
+      13: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      16: getfield      #69                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.max_level:I
+      19: ireturn
+
+  public int m_6183_(int);
+    Code:
+       0: aload_0
+       1: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+       4: getfield      #74                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.min_cost:I
+       7: iload_1
+       8: iconst_1
+       9: isub
+      10: aload_0
+      11: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      14: getfield      #77                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.step_cost:I
+      17: imul
+      18: iadd
+      19: ireturn
+
+  public int m_6175_(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokespecial #80                 // Method net/minecraft/world/item/enchantment/Enchantment.m_6183_:(I)I
+       5: bipush        50
+       7: iadd
+       8: ireturn
+
+  public boolean m_6594_();
+    Code:
+       0: aload_0
+       1: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+       4: getfield      #66                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.enabled:Z
+       7: ireturn
+
+  public boolean m_6592_();
+    Code:
+       0: aload_0
+       1: getfield      #40                 // Field properties:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+       4: getfield      #66                 // Field net/combatroll/tinyconfig/models/EnchantmentConfig.enabled:Z
+       7: ireturn
+
+  public boolean m_6081_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getfield      #88                 // Field condition:Lnet/combatroll/enchantments/CustomConditionalEnchantment$Condition;
+       4: ifnull        18
+       7: aload_0
+       8: getfield      #88                 // Field condition:Lnet/combatroll/enchantments/CustomConditionalEnchantment$Condition;
+      11: aload_1
+      12: invokeinterface #91,  2           // InterfaceMethod net/combatroll/enchantments/CustomConditionalEnchantment$Condition.isAcceptableItem:(Lnet/minecraft/world/item/ItemStack;)Z
+      17: ireturn
+      18: aload_0
+      19: aload_1
+      20: invokespecial #93                 // Method net/minecraft/world/item/enchantment/Enchantment.m_6081_:(Lnet/minecraft/world/item/ItemStack;)Z
+      23: ireturn
+
+  public void setCondition(net.combatroll.enchantments.CustomConditionalEnchantment$Condition);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #88                 // Field condition:Lnet/combatroll/enchantments/CustomConditionalEnchantment$Condition;
+       5: return
+
+  public net.combatroll.enchantments.AmplifierEnchantment condition(net.combatroll.enchantments.CustomConditionalEnchantment$Condition);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #99                 // Method setCondition:(Lnet/combatroll/enchantments/CustomConditionalEnchantment$Condition;)V
+       5: aload_0
+       6: areturn
+}

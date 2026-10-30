@@ -1,0 +1,155 @@
+Compiled from "HudKeyVisuals.java"
+public class net.combatroll.client.gui.HudKeyVisuals {
+  private static final net.combatroll.client.gui.Drawable$Texture mouseTexture;
+
+  public static java.util.Map<java.lang.String, net.combatroll.client.gui.Drawable$Component> custom;
+
+  private static final int keyboardV = 32;
+
+  public static final net.combatroll.client.gui.Drawable$Component buttonLeading;
+
+  public static final net.combatroll.client.gui.Drawable$Component buttonCenter;
+
+  public static final net.combatroll.client.gui.Drawable$Component buttonTrailing;
+
+  public net.combatroll.client.gui.HudKeyVisuals();
+    Code:
+       0: aload_0
+       1: invokespecial #37                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: new           #7                  // class net/combatroll/client/gui/Drawable$Texture
+       3: dup
+       4: new           #42                 // class net/minecraft/resources/ResourceLocation
+       7: dup
+       8: ldc           #44                 // String combatroll
+      10: ldc           #46                 // String textures/hud/widgets.png
+      12: invokespecial #49                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      15: sipush        256
+      18: sipush        256
+      21: invokespecial #52                 // Method net/combatroll/client/gui/Drawable$Texture."<init>":(Lnet/minecraft/resources/ResourceLocation;II)V
+      24: putstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+      27: iconst_5
+      28: anewarray     #12                 // class java/util/Map$Entry
+      31: dup
+      32: iconst_0
+      33: ldc           #56                 // String key.mouse.left
+      35: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+      38: dup
+      39: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+      42: dup
+      43: iconst_0
+      44: iconst_0
+      45: bipush        10
+      47: bipush        12
+      49: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+      52: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+      55: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+      58: invokestatic  #66                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      61: aastore
+      62: dup
+      63: iconst_1
+      64: ldc           #68                 // String key.mouse.right
+      66: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+      69: dup
+      70: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+      73: dup
+      74: bipush        16
+      76: iconst_0
+      77: bipush        10
+      79: bipush        12
+      81: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+      84: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+      87: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+      90: invokestatic  #66                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      93: aastore
+      94: dup
+      95: iconst_2
+      96: ldc           #70                 // String key.mouse.middle
+      98: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+     101: dup
+     102: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+     105: dup
+     106: bipush        32
+     108: iconst_0
+     109: bipush        10
+     111: bipush        12
+     113: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+     116: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+     119: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+     122: invokestatic  #66                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+     125: aastore
+     126: dup
+     127: iconst_3
+     128: ldc           #72                 // String key.mouse.4
+     130: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+     133: dup
+     134: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+     137: dup
+     138: iconst_0
+     139: bipush        16
+     141: bipush        10
+     143: bipush        12
+     145: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+     148: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+     151: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+     154: invokestatic  #66                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+     157: aastore
+     158: dup
+     159: iconst_4
+     160: ldc           #74                 // String key.mouse.5
+     162: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+     165: dup
+     166: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+     169: dup
+     170: bipush        16
+     172: bipush        16
+     174: bipush        10
+     176: bipush        12
+     178: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+     181: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+     184: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+     187: invokestatic  #66                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+     190: aastore
+     191: invokestatic  #78                 // InterfaceMethod java/util/Map.ofEntries:([Ljava/util/Map$Entry;)Ljava/util/Map;
+     194: putstatic     #80                 // Field custom:Ljava/util/Map;
+     197: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+     200: dup
+     201: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+     204: dup
+     205: iconst_0
+     206: bipush        32
+     208: iconst_3
+     209: bipush        12
+     211: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+     214: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+     217: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+     220: putstatic     #82                 // Field buttonLeading:Lnet/combatroll/client/gui/Drawable$Component;
+     223: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+     226: dup
+     227: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+     230: dup
+     231: bipush        16
+     233: bipush        32
+     235: bipush        16
+     237: bipush        12
+     239: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+     242: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+     245: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+     248: putstatic     #84                 // Field buttonCenter:Lnet/combatroll/client/gui/Drawable$Component;
+     251: new           #17                 // class net/combatroll/client/gui/Drawable$Component
+     254: dup
+     255: new           #20                 // class net/combatroll/client/gui/Drawable$Draw
+     258: dup
+     259: bipush        13
+     261: bipush        32
+     263: iconst_3
+     264: bipush        12
+     266: invokespecial #59                 // Method net/combatroll/client/gui/Drawable$Draw."<init>":(IIII)V
+     269: getstatic     #54                 // Field mouseTexture:Lnet/combatroll/client/gui/Drawable$Texture;
+     272: invokespecial #62                 // Method net/combatroll/client/gui/Drawable$Component."<init>":(Lnet/combatroll/client/gui/Drawable$Draw;Lnet/combatroll/client/gui/Drawable$Texture;)V
+     275: putstatic     #86                 // Field buttonTrailing:Lnet/combatroll/client/gui/Drawable$Component;
+     278: return
+}

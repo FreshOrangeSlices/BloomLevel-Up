@@ -1,0 +1,98 @@
+public abstract class org.anti_ad.mc.ipnext.mixin.MixinMinecraftClient {
+  public org.anti_ad.mc.ipnext.mixin.MixinMinecraftClient();
+    Code:
+       0: aload_0
+       1: invokespecial #11                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void handleInputEvents(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_0
+       1: checkcast     #21                 // class net/minecraft/client/Minecraft
+       4: getfield      #25                 // Field net/minecraft/client/Minecraft.f_91080_:Lnet/minecraft/client/gui/screens/Screen;
+       7: astore_1
+       8: aload_0
+       9: checkcast     #21                 // class net/minecraft/client/Minecraft
+      12: getfield      #29                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      15: astore_2
+      16: aload_0
+      17: checkcast     #21                 // class net/minecraft/client/Minecraft
+      20: getfield      #33                 // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      23: astore_3
+      24: aload_2
+      25: ifnull        180
+      28: aload_3
+      29: getfield      #39                 // Field net/minecraft/client/Options.f_92094_:Lnet/minecraft/client/KeyMapping;
+      32: checkcast     #41                 // class org/anti_ad/mc/ipnext/mixin/IMixinKeyBinding
+      35: astore        4
+      37: getstatic     #47                 // Field org/anti_ad/mc/ipnext/config/LockedSlotsSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+      40: invokevirtual #51                 // Method org/anti_ad/mc/ipnext/config/LockedSlotsSettings.getLOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE:()Lorg/anti_ad/mc/common/config/options/ConfigBoolean;
+      43: invokevirtual #57                 // Method org/anti_ad/mc/common/config/options/ConfigBoolean.getValue:()Ljava/lang/Boolean;
+      46: invokevirtual #63                 // Method java/lang/Boolean.booleanValue:()Z
+      49: ifeq          111
+      52: aload_2
+      53: invokevirtual #69                 // Method net/minecraft/client/player/LocalPlayer.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      56: getfield      #75                 // Field net/minecraft/world/entity/player/Inventory.f_35977_:I
+      59: invokestatic  #79                 // Method net/minecraft/world/entity/player/Inventory.m_36045_:(I)Z
+      62: ifeq          111
+      65: aload         4
+      67: invokeinterface #83,  1           // InterfaceMethod org/anti_ad/mc/ipnext/mixin/IMixinKeyBinding.getTimesPressed:()I
+      72: ifle          111
+      75: getstatic     #88                 // Field org/anti_ad/mc/ipnext/event/LockSlotsHandler.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockSlotsHandler;
+      78: aload_2
+      79: invokevirtual #69                 // Method net/minecraft/client/player/LocalPlayer.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      82: getfield      #75                 // Field net/minecraft/world/entity/player/Inventory.f_35977_:I
+      85: bipush        36
+      87: iadd
+      88: iconst_1
+      89: invokevirtual #92                 // Method org/anti_ad/mc/ipnext/event/LockSlotsHandler.isHotbarQMoveActionAllowed:(IZ)Z
+      92: ifne          111
+      95: aload         4
+      97: iconst_0
+      98: invokeinterface #96,  2           // InterfaceMethod org/anti_ad/mc/ipnext/mixin/IMixinKeyBinding.setPressed:(Z)V
+     103: aload         4
+     105: iconst_0
+     106: invokeinterface #100,  2          // InterfaceMethod org/anti_ad/mc/ipnext/mixin/IMixinKeyBinding.setTimesPressed:(I)V
+     111: getstatic     #47                 // Field org/anti_ad/mc/ipnext/config/LockedSlotsSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     114: invokevirtual #106                // Method org/anti_ad/mc/ipnext/config/LockedSlotsSettings.getLOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED:()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+     117: invokevirtual #109                // Method org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean.getValue:()Ljava/lang/Boolean;
+     120: invokevirtual #63                 // Method java/lang/Boolean.booleanValue:()Z
+     123: ifeq          180
+     126: aload_3
+     127: getfield      #112                // Field net/minecraft/client/Options.f_92093_:Lnet/minecraft/client/KeyMapping;
+     130: checkcast     #41                 // class org/anti_ad/mc/ipnext/mixin/IMixinKeyBinding
+     133: astore_3
+     134: aload_1
+     135: ifnonnull     180
+     138: aload_2
+     139: invokevirtual #69                 // Method net/minecraft/client/player/LocalPlayer.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+     142: getfield      #75                 // Field net/minecraft/world/entity/player/Inventory.f_35977_:I
+     145: invokestatic  #79                 // Method net/minecraft/world/entity/player/Inventory.m_36045_:(I)Z
+     148: ifeq          180
+     151: aload_3
+     152: invokeinterface #83,  1           // InterfaceMethod org/anti_ad/mc/ipnext/mixin/IMixinKeyBinding.getTimesPressed:()I
+     157: ifle          180
+     160: getstatic     #117                // Field org/anti_ad/mc/ipnext/event/LockedSlotKeeper.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockedSlotKeeper;
+     163: iconst_1
+     164: invokevirtual #120                // Method org/anti_ad/mc/ipnext/event/LockedSlotKeeper.setPickingItem:(Z)V
+     167: getstatic     #117                // Field org/anti_ad/mc/ipnext/event/LockedSlotKeeper.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockedSlotKeeper;
+     170: invokevirtual #123                // Method org/anti_ad/mc/ipnext/event/LockedSlotKeeper.ignoreSelectedHotbarSlotForHandSwap:()V
+     173: getstatic     #117                // Field org/anti_ad/mc/ipnext/event/LockedSlotKeeper.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockedSlotKeeper;
+     176: iconst_0
+     177: invokevirtual #120                // Method org/anti_ad/mc/ipnext/event/LockedSlotKeeper.setPickingItem:(Z)V
+     180: return
+
+  private void doItemPickPre(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: getstatic     #117                // Field org/anti_ad/mc/ipnext/event/LockedSlotKeeper.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockedSlotKeeper;
+       3: iconst_1
+       4: invokevirtual #120                // Method org/anti_ad/mc/ipnext/event/LockedSlotKeeper.setPickingItem:(Z)V
+       7: return
+
+  private void doItemPickPost(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: getstatic     #117                // Field org/anti_ad/mc/ipnext/event/LockedSlotKeeper.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockedSlotKeeper;
+       3: iconst_0
+       4: invokevirtual #120                // Method org/anti_ad/mc/ipnext/event/LockedSlotKeeper.setPickingItem:(Z)V
+       7: return
+}

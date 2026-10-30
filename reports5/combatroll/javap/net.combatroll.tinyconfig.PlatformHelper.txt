@@ -1,0 +1,32 @@
+Compiled from "PlatformHelper.java"
+class net.combatroll.tinyconfig.PlatformHelper {
+  net.combatroll.tinyconfig.PlatformHelper();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  static java.nio.file.Path getConfigDir();
+    Code:
+       0: ldc           #17                 // String net.combatroll.fabricmc.loader.api.FabricLoader
+       2: invokestatic  #23                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+       5: astore_0
+       6: invokestatic  #27                 // Method net/combatroll/tinyconfig/FabricHelper.getConfigDir:()Ljava/nio/file/Path;
+       9: areturn
+      10: astore_0
+      11: ldc           #29                 // String net.minecraftforge.fml.loading.FMLPaths
+      13: invokestatic  #23                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+      16: astore_0
+      17: invokestatic  #32                 // Method net/combatroll/tinyconfig/ForgeHelper.getConfigDir:()Ljava/nio/file/Path;
+      20: areturn
+      21: astore_0
+      22: ldc           #34                 // String config
+      24: iconst_0
+      25: anewarray     #36                 // class java/lang/String
+      28: invokestatic  #42                 // InterfaceMethod java/nio/file/Path.of:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+      31: areturn
+    Exception table:
+       from    to  target type
+           0     9    10   Class java/lang/ClassNotFoundException
+          11    20    21   Class java/lang/ClassNotFoundException
+}

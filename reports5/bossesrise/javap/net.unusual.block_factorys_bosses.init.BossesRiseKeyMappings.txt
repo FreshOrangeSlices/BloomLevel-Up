@@ -1,0 +1,28 @@
+Compiled from "BossesRiseKeyMappings.java"
+public class net.unusual.block_factorys_bosses.init.BossesRiseKeyMappings {
+  public static final net.minecraft.client.KeyMapping DODGE_ROLL;
+
+  public net.unusual.block_factorys_bosses.init.BossesRiseKeyMappings();
+    Code:
+       0: aload_0
+       1: invokespecial #33                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void registerKeyMappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #40                 // Field DODGE_ROLL:Lnet/minecraft/client/KeyMapping;
+       4: invokevirtual #46                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+       7: return
+
+  static {};
+    Code:
+       0: new           #18                 // class net/unusual/block_factorys_bosses/init/BossesRiseKeyMappings$1
+       3: dup
+       4: ldc           #51                 // String key.block_factorys_bosses.dodge_roll
+       6: bipush        90
+       8: ldc           #53                 // String key.categories.movement
+      10: invokespecial #56                 // Method net/unusual/block_factorys_bosses/init/BossesRiseKeyMappings$1."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      13: putstatic     #40                 // Field DODGE_ROLL:Lnet/minecraft/client/KeyMapping;
+      16: return
+}

@@ -1,0 +1,296 @@
+public final class org.anti_ad.mc.ipnext.config.ScrollSettings implements org.anti_ad.mc.common.config.builder.ConfigDeclaration {
+  public static final org.anti_ad.mc.ipnext.config.ScrollSettings INSTANCE;
+
+  static final kotlin.reflect.KProperty[] $$delegatedProperties;
+
+  private static final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder builder;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DIRECTION_ABSOLUTE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_FULL_STACK$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_LEAVE_LAST$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_SPREAD$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_THROW$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate TEMP_DISABLE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_AUTO_PICKUP_NEXT_FOR_SINGLE$delegate;
+
+  private org.anti_ad.mc.ipnext.config.ScrollSettings();
+    Code:
+       0: aload_0
+       1: invokespecial #25                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder getBuilder();
+    Code:
+       0: getstatic     #29                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+       3: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigBoolean getDIRECTION_ABSOLUTE();
+    Code:
+       0: getstatic     #33                 // Field DIRECTION_ABSOLUTE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #43                 // class org/anti_ad/mc/common/config/options/ConfigBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSCROLL_FULL_STACK();
+    Code:
+       0: getstatic     #47                 // Field SCROLL_FULL_STACK$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_1
+       8: aaload
+       9: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #49                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSCROLL_LEAVE_LAST();
+    Code:
+       0: getstatic     #52                 // Field SCROLL_LEAVE_LAST$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_2
+       8: aaload
+       9: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #49                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSCROLL_SPREAD();
+    Code:
+       0: getstatic     #55                 // Field SCROLL_SPREAD$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_3
+       8: aaload
+       9: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #49                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSCROLL_THROW();
+    Code:
+       0: getstatic     #58                 // Field SCROLL_THROW$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_4
+       8: aaload
+       9: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #49                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getTEMP_DISABLE();
+    Code:
+       0: getstatic     #61                 // Field TEMP_DISABLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_5
+       8: aaload
+       9: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #49                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigBoolean getSCROLL_AUTO_PICKUP_NEXT_FOR_SINGLE();
+    Code:
+       0: getstatic     #64                 // Field SCROLL_AUTO_PICKUP_NEXT_FOR_SINGLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        6
+       9: aaload
+      10: invokevirtual #41                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #43                 // class org/anti_ad/mc/common/config/options/ConfigBoolean
+      16: areturn
+
+  static {};
+    Code:
+       0: bipush        7
+       2: anewarray     #67                 // class kotlin/reflect/KProperty
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+      11: dup
+      12: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+      14: ldc           #71                 // String DIRECTION_ABSOLUTE
+      16: ldc           #73                 // String getDIRECTION_ABSOLUTE()Lorg/anti_ad/mc/common/config/options/ConfigBoolean;
+      18: iconst_0
+      19: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      22: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+      25: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      28: aastore
+      29: aload_0
+      30: iconst_1
+      31: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+      34: dup
+      35: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+      37: ldc           #86                 // String SCROLL_FULL_STACK
+      39: ldc           #88                 // String getSCROLL_FULL_STACK()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      41: iconst_0
+      42: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      45: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+      48: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      51: aastore
+      52: aload_0
+      53: iconst_2
+      54: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+      57: dup
+      58: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+      60: ldc           #90                 // String SCROLL_LEAVE_LAST
+      62: ldc           #92                 // String getSCROLL_LEAVE_LAST()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      64: iconst_0
+      65: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      68: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+      71: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      74: aastore
+      75: aload_0
+      76: iconst_3
+      77: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+      80: dup
+      81: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+      83: ldc           #94                 // String SCROLL_SPREAD
+      85: ldc           #96                 // String getSCROLL_SPREAD()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      87: iconst_0
+      88: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      91: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+      94: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      97: aastore
+      98: aload_0
+      99: iconst_4
+     100: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+     103: dup
+     104: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+     106: ldc           #98                 // String SCROLL_THROW
+     108: ldc           #100                // String getSCROLL_THROW()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     110: iconst_0
+     111: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     114: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+     117: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     120: aastore
+     121: aload_0
+     122: iconst_5
+     123: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+     126: dup
+     127: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+     129: ldc           #102                // String TEMP_DISABLE
+     131: ldc           #104                // String getTEMP_DISABLE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     133: iconst_0
+     134: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     137: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+     140: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     143: aastore
+     144: aload_0
+     145: bipush        6
+     147: new           #69                 // class kotlin/jvm/internal/PropertyReference1Impl
+     150: dup
+     151: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+     153: ldc           #106                // String SCROLL_AUTO_PICKUP_NEXT_FOR_SINGLE
+     155: ldc           #108                // String getSCROLL_AUTO_PICKUP_NEXT_FOR_SINGLE()Lorg/anti_ad/mc/common/config/options/ConfigBoolean;
+     157: iconst_0
+     158: invokespecial #76                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     161: checkcast     #78                 // class kotlin/jvm/internal/PropertyReference1
+     164: invokestatic  #84                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     167: aastore
+     168: aload_0
+     169: putstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     172: new           #2                  // class org/anti_ad/mc/ipnext/config/ScrollSettings
+     175: dup
+     176: invokespecial #109                // Method "<init>":()V
+     179: dup
+     180: putstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     183: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     186: invokestatic  #117                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.createBuilder:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     189: ldc           #119                // String inventoryprofiles.config.category.scrolling.general
+     191: invokestatic  #123                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     194: putstatic     #29                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     197: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     200: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     203: iconst_1
+     204: invokestatic  #127                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.bool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Z)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     207: ldc           #129                // String inventoryprofiles.config.category.scroll.modifiers
+     209: invokestatic  #132                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     212: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     215: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     218: iconst_0
+     219: aaload
+     220: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     223: putstatic     #33                 // Field DIRECTION_ABSOLUTE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     226: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     229: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     232: ldc           #140                // String LEFT_SHIFT
+     234: getstatic     #146                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     237: invokevirtual #152                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     240: invokestatic  #156                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     243: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     246: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     249: iconst_1
+     250: aaload
+     251: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     254: putstatic     #47                 // Field SCROLL_FULL_STACK$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     257: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     260: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     263: ldc           #158                // String Z
+     265: getstatic     #146                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     268: invokevirtual #152                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     271: invokestatic  #156                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     274: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     277: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     280: iconst_2
+     281: aaload
+     282: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     285: putstatic     #52                 // Field SCROLL_LEAVE_LAST$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     288: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     291: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     294: ldc           #160                // String X
+     296: getstatic     #146                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     299: invokevirtual #152                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     302: invokestatic  #156                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     305: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     308: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     311: iconst_3
+     312: aaload
+     313: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     316: putstatic     #55                 // Field SCROLL_SPREAD$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     319: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     322: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     325: ldc           #162                // String C
+     327: getstatic     #146                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     330: invokevirtual #152                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     333: invokestatic  #156                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     336: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     339: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     342: iconst_4
+     343: aaload
+     344: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     347: putstatic     #58                 // Field SCROLL_THROW$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     350: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     353: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     356: ldc           #164                // String LEFT_CONTROL
+     358: getstatic     #146                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     361: invokevirtual #152                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     364: invokestatic  #156                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     367: ldc           #166                // String inventoryprofiles.config.category.scroll.single
+     369: invokestatic  #132                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     372: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     375: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     378: iconst_5
+     379: aaload
+     380: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     383: putstatic     #61                 // Field TEMP_DISABLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     386: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     389: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     392: iconst_1
+     393: invokestatic  #127                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.bool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Z)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     396: getstatic     #111                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/ScrollSettings;
+     399: getstatic     #35                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     402: bipush        6
+     404: aaload
+     405: invokevirtual #138                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     408: putstatic     #64                 // Field SCROLL_AUTO_PICKUP_NEXT_FOR_SINGLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     411: return
+}

@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.saksolm.monsterexpansion.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "monsterexpansion.refmap.json",
+  "mixins": [
+    "DamageSourceMixin",
+    "DefenseDamageReductionMixin",
+    "LivingEntityMagicAbsorbMixin",
+    "PlayerDefenseDamageReductionMixin",
+    "ProtectionEnchantmentMixin",
+    "RangedAttributeAccessor"
+  ],
+  "client": [
+    "ItemInHandLayerMixin",
+    "ArborixCameraMixin",
+    "PlayerBodyAnimationMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

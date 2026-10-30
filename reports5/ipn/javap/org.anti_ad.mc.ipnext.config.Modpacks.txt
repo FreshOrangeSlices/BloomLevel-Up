@@ -1,0 +1,224 @@
+public final class org.anti_ad.mc.ipnext.config.Modpacks implements org.anti_ad.mc.common.config.builder.ConfigDeclaration {
+  public static final org.anti_ad.mc.ipnext.config.Modpacks INSTANCE;
+
+  static final kotlin.reflect.KProperty[] $$delegatedProperties;
+
+  private static final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder builder;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate MAKE_BLOCK_SCREEN_GENERATOR_SCRIPT$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DIFF_CALCULATOR_PRIORITY$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate EXPORT_HINTS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate EXPORT_EXTERNAL_HINTS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate GEN_TEST_ARENA$delegate;
+
+  private org.anti_ad.mc.ipnext.config.Modpacks();
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder getBuilder();
+    Code:
+       0: getstatic     #27                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+       3: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigButton getMAKE_BLOCK_SCREEN_GENERATOR_SCRIPT();
+    Code:
+       0: getstatic     #31                 // Field MAKE_BLOCK_SCREEN_GENERATOR_SCRIPT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokevirtual #39                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #41                 // class org/anti_ad/mc/common/config/options/ConfigButton
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigEnum getDIFF_CALCULATOR_PRIORITY();
+    Code:
+       0: getstatic     #45                 // Field DIFF_CALCULATOR_PRIORITY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_1
+       8: aaload
+       9: invokevirtual #39                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #47                 // class org/anti_ad/mc/common/config/options/ConfigEnum
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigButton getEXPORT_HINTS();
+    Code:
+       0: getstatic     #50                 // Field EXPORT_HINTS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_2
+       8: aaload
+       9: invokevirtual #39                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #41                 // class org/anti_ad/mc/common/config/options/ConfigButton
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigButton getEXPORT_EXTERNAL_HINTS();
+    Code:
+       0: getstatic     #53                 // Field EXPORT_EXTERNAL_HINTS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_3
+       8: aaload
+       9: invokevirtual #39                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #41                 // class org/anti_ad/mc/common/config/options/ConfigButton
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getGEN_TEST_ARENA();
+    Code:
+       0: getstatic     #57                 // Field GEN_TEST_ARENA$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_4
+       8: aaload
+       9: invokevirtual #39                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #59                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  static {};
+    Code:
+       0: iconst_5
+       1: anewarray     #62                 // class kotlin/reflect/KProperty
+       4: dup
+       5: astore_0
+       6: iconst_0
+       7: new           #64                 // class kotlin/jvm/internal/PropertyReference1Impl
+      10: dup
+      11: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Modpacks
+      13: ldc           #66                 // String MAKE_BLOCK_SCREEN_GENERATOR_SCRIPT
+      15: ldc           #68                 // String getMAKE_BLOCK_SCREEN_GENERATOR_SCRIPT()Lorg/anti_ad/mc/common/config/options/ConfigButton;
+      17: iconst_0
+      18: invokespecial #71                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      21: checkcast     #73                 // class kotlin/jvm/internal/PropertyReference1
+      24: invokestatic  #79                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      27: aastore
+      28: aload_0
+      29: iconst_1
+      30: new           #64                 // class kotlin/jvm/internal/PropertyReference1Impl
+      33: dup
+      34: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Modpacks
+      36: ldc           #81                 // String DIFF_CALCULATOR_PRIORITY
+      38: ldc           #83                 // String getDIFF_CALCULATOR_PRIORITY()Lorg/anti_ad/mc/common/config/options/ConfigEnum;
+      40: iconst_0
+      41: invokespecial #71                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      44: checkcast     #73                 // class kotlin/jvm/internal/PropertyReference1
+      47: invokestatic  #79                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      50: aastore
+      51: aload_0
+      52: iconst_2
+      53: new           #64                 // class kotlin/jvm/internal/PropertyReference1Impl
+      56: dup
+      57: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Modpacks
+      59: ldc           #85                 // String EXPORT_HINTS
+      61: ldc           #87                 // String getEXPORT_HINTS()Lorg/anti_ad/mc/common/config/options/ConfigButton;
+      63: iconst_0
+      64: invokespecial #71                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      67: checkcast     #73                 // class kotlin/jvm/internal/PropertyReference1
+      70: invokestatic  #79                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      73: aastore
+      74: aload_0
+      75: iconst_3
+      76: new           #64                 // class kotlin/jvm/internal/PropertyReference1Impl
+      79: dup
+      80: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Modpacks
+      82: ldc           #89                 // String EXPORT_EXTERNAL_HINTS
+      84: ldc           #91                 // String getEXPORT_EXTERNAL_HINTS()Lorg/anti_ad/mc/common/config/options/ConfigButton;
+      86: iconst_0
+      87: invokespecial #71                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      90: checkcast     #73                 // class kotlin/jvm/internal/PropertyReference1
+      93: invokestatic  #79                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      96: aastore
+      97: aload_0
+      98: iconst_4
+      99: new           #64                 // class kotlin/jvm/internal/PropertyReference1Impl
+     102: dup
+     103: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Modpacks
+     105: ldc           #93                 // String GEN_TEST_ARENA
+     107: ldc           #95                 // String getGEN_TEST_ARENA()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     109: iconst_0
+     110: invokespecial #71                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     113: checkcast     #73                 // class kotlin/jvm/internal/PropertyReference1
+     116: invokestatic  #79                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     119: aastore
+     120: aload_0
+     121: putstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     124: new           #2                  // class org/anti_ad/mc/ipnext/config/Modpacks
+     127: dup
+     128: invokespecial #96                 // Method "<init>":()V
+     131: dup
+     132: putstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     135: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     138: invokestatic  #104                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.createBuilder:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     141: ldc           #106                // String inventoryprofiles.config.category.modpacks
+     143: invokestatic  #110                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     146: putstatic     #27                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     149: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     152: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     155: getstatic     #115                // Field org/anti_ad/mc/ipnext/debug/GenerateTagsAsJson.INSTANCE:Lorg/anti_ad/mc/ipnext/debug/GenerateTagsAsJson;
+     158: checkcast     #117                // class org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo
+     161: invokestatic  #121                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.button:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonInfo;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     164: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     167: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     170: iconst_0
+     171: aaload
+     172: invokevirtual #127                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     175: putstatic     #31                 // Field MAKE_BLOCK_SCREEN_GENERATOR_SCRIPT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     178: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     181: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     184: getstatic     #133                // Field org/anti_ad/mc/ipnext/integration/MergePriority.EXTERNAL:Lorg/anti_ad/mc/ipnext/integration/MergePriority;
+     187: checkcast     #135                // class java/lang/Enum
+     190: invokestatic  #139                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.enum:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/Enum;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     193: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     196: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     199: iconst_1
+     200: aaload
+     201: invokevirtual #127                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     204: putstatic     #45                 // Field DIFF_CALCULATOR_PRIORITY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     207: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     210: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     213: new           #141                // class org/anti_ad/mc/ipnext/config/ExportHints
+     216: dup
+     217: iconst_1
+     218: invokespecial #144                // Method org/anti_ad/mc/ipnext/config/ExportHints."<init>":(Z)V
+     221: checkcast     #117                // class org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo
+     224: invokestatic  #121                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.button:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonInfo;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     227: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     230: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     233: iconst_2
+     234: aaload
+     235: invokevirtual #127                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     238: putstatic     #50                 // Field EXPORT_HINTS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     241: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     244: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     247: new           #141                // class org/anti_ad/mc/ipnext/config/ExportHints
+     250: dup
+     251: iconst_0
+     252: invokespecial #144                // Method org/anti_ad/mc/ipnext/config/ExportHints."<init>":(Z)V
+     255: checkcast     #117                // class org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo
+     258: invokestatic  #121                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.button:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonInfo;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     261: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     264: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     267: iconst_3
+     268: aaload
+     269: invokevirtual #127                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     272: putstatic     #53                 // Field EXPORT_EXTERNAL_HINTS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     275: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     278: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     281: ldc           #146                // String
+     283: getstatic     #152                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     286: invokevirtual #158                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     289: invokestatic  #162                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     292: getstatic     #98                 // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+     295: getstatic     #33                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     298: iconst_4
+     299: aaload
+     300: invokevirtual #127                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     303: putstatic     #57                 // Field GEN_TEST_ARENA$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     306: return
+}

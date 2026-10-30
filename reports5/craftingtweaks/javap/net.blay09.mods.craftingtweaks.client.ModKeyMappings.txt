@@ -1,0 +1,818 @@
+Compiled from "ModKeyMappings.java"
+public class net.blay09.mods.craftingtweaks.client.ModKeyMappings {
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyRotate;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyRotateCounterClockwise;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyBalance;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keySpread;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyClear;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyForceClear;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyCompressOne;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyCompressStack;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyCompressAll;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyDecompressOne;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyDecompressStack;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyDecompressAll;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyRefillLast;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyRefillLastStack;
+
+  public static net.blay09.mods.kuma.api.ManagedKeyMapping keyTransferStack;
+
+  public net.blay09.mods.craftingtweaks.client.ModKeyMappings();
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void initialize();
+    Code:
+       0: new           #40                 // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc           #42                 // String craftingtweaks
+       6: ldc           #44                 // String rotate
+       8: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      11: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      14: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+      17: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      22: invokedynamic #80,  0             // InvokeDynamic #0:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+      27: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      32: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+      37: putstatic     #90                 // Field keyRotate:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+      40: new           #40                 // class net/minecraft/resources/ResourceLocation
+      43: dup
+      44: ldc           #42                 // String craftingtweaks
+      46: ldc           #92                 // String rotate_counter_clockwise
+      48: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      51: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      54: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+      57: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      62: invokedynamic #97,  0             // InvokeDynamic #1:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+      67: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      72: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+      77: putstatic     #99                 // Field keyRotateCounterClockwise:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+      80: new           #40                 // class net/minecraft/resources/ResourceLocation
+      83: dup
+      84: ldc           #42                 // String craftingtweaks
+      86: ldc           #101                // String balance
+      88: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      91: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+      94: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+      97: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     102: invokedynamic #106,  0            // InvokeDynamic #2:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     107: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     112: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     117: putstatic     #108                // Field keyBalance:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     120: new           #40                 // class net/minecraft/resources/ResourceLocation
+     123: dup
+     124: ldc           #42                 // String craftingtweaks
+     126: ldc           #110                // String spread
+     128: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     131: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     134: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     137: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     142: invokedynamic #115,  0            // InvokeDynamic #3:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     147: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     152: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     157: putstatic     #117                // Field keySpread:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     160: new           #40                 // class net/minecraft/resources/ResourceLocation
+     163: dup
+     164: ldc           #42                 // String craftingtweaks
+     166: ldc           #119                // String clear
+     168: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     171: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     174: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     177: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     182: invokedynamic #124,  0            // InvokeDynamic #4:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     187: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     192: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     197: putstatic     #126                // Field keyClear:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     200: new           #40                 // class net/minecraft/resources/ResourceLocation
+     203: dup
+     204: ldc           #42                 // String craftingtweaks
+     206: ldc           #128                // String force_clear
+     208: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     211: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     214: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     217: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     222: invokedynamic #133,  0            // InvokeDynamic #5:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     227: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     232: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     237: putstatic     #135                // Field keyForceClear:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     240: new           #40                 // class net/minecraft/resources/ResourceLocation
+     243: dup
+     244: ldc           #42                 // String craftingtweaks
+     246: ldc           #137                // String compress_one
+     248: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     251: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     254: bipush        75
+     256: iconst_1
+     257: anewarray     #139                // class net/blay09/mods/kuma/api/KeyModifier
+     260: dup
+     261: iconst_0
+     262: getstatic     #143                // Field net/blay09/mods/kuma/api/KeyModifier.CONTROL:Lnet/blay09/mods/kuma/api/KeyModifier;
+     265: aastore
+     266: invokestatic  #149                // Method net/blay09/mods/kuma/api/KeyModifiers.of:([Lnet/blay09/mods/kuma/api/KeyModifier;)Lnet/blay09/mods/kuma/api/KeyModifiers;
+     269: invokestatic  #155                // Method net/blay09/mods/kuma/api/InputBinding.key:(ILnet/blay09/mods/kuma/api/KeyModifiers;)Lnet/blay09/mods/kuma/api/InputBinding;
+     272: invokeinterface #159,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     277: invokestatic  #163                // Method net/blay09/mods/kuma/api/InputBinding.none:()Lnet/blay09/mods/kuma/api/InputBinding;
+     280: invokeinterface #166,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withFallbackDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     285: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     288: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     293: invokedynamic #171,  0            // InvokeDynamic #6:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     298: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     303: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     308: putstatic     #173                // Field keyCompressOne:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     311: new           #40                 // class net/minecraft/resources/ResourceLocation
+     314: dup
+     315: ldc           #42                 // String craftingtweaks
+     317: ldc           #175                // String compress_stack
+     319: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     322: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     325: bipush        75
+     327: invokestatic  #178                // Method net/blay09/mods/kuma/api/InputBinding.key:(I)Lnet/blay09/mods/kuma/api/InputBinding;
+     330: invokeinterface #159,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     335: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     338: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     343: invokedynamic #183,  0            // InvokeDynamic #7:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     348: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     353: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     358: putstatic     #185                // Field keyCompressStack:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     361: new           #40                 // class net/minecraft/resources/ResourceLocation
+     364: dup
+     365: ldc           #42                 // String craftingtweaks
+     367: ldc           #187                // String compress_all
+     369: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     372: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     375: bipush        75
+     377: iconst_1
+     378: anewarray     #139                // class net/blay09/mods/kuma/api/KeyModifier
+     381: dup
+     382: iconst_0
+     383: getstatic     #190                // Field net/blay09/mods/kuma/api/KeyModifier.SHIFT:Lnet/blay09/mods/kuma/api/KeyModifier;
+     386: aastore
+     387: invokestatic  #149                // Method net/blay09/mods/kuma/api/KeyModifiers.of:([Lnet/blay09/mods/kuma/api/KeyModifier;)Lnet/blay09/mods/kuma/api/KeyModifiers;
+     390: invokestatic  #155                // Method net/blay09/mods/kuma/api/InputBinding.key:(ILnet/blay09/mods/kuma/api/KeyModifiers;)Lnet/blay09/mods/kuma/api/InputBinding;
+     393: invokeinterface #159,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     398: invokestatic  #163                // Method net/blay09/mods/kuma/api/InputBinding.none:()Lnet/blay09/mods/kuma/api/InputBinding;
+     401: invokeinterface #166,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withFallbackDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     406: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     409: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     414: invokedynamic #195,  0            // InvokeDynamic #8:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     419: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     424: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     429: putstatic     #197                // Field keyCompressAll:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     432: new           #40                 // class net/minecraft/resources/ResourceLocation
+     435: dup
+     436: ldc           #42                 // String craftingtweaks
+     438: ldc           #199                // String decompress_one
+     440: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     443: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     446: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     449: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     454: invokedynamic #204,  0            // InvokeDynamic #9:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     459: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     464: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     469: putstatic     #206                // Field keyDecompressOne:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     472: new           #40                 // class net/minecraft/resources/ResourceLocation
+     475: dup
+     476: ldc           #42                 // String craftingtweaks
+     478: ldc           #208                // String decompress_stack
+     480: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     483: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     486: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     489: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     494: invokedynamic #213,  0            // InvokeDynamic #10:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     499: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     504: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     509: putstatic     #215                // Field keyDecompressStack:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     512: new           #40                 // class net/minecraft/resources/ResourceLocation
+     515: dup
+     516: ldc           #42                 // String craftingtweaks
+     518: ldc           #217                // String decompress_all
+     520: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     523: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     526: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     529: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     534: invokedynamic #222,  0            // InvokeDynamic #11:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     539: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     544: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     549: putstatic     #224                // Field keyDecompressAll:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     552: new           #40                 // class net/minecraft/resources/ResourceLocation
+     555: dup
+     556: ldc           #42                 // String craftingtweaks
+     558: ldc           #226                // String refill_last
+     560: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     563: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     566: sipush        258
+     569: iconst_1
+     570: anewarray     #139                // class net/blay09/mods/kuma/api/KeyModifier
+     573: dup
+     574: iconst_0
+     575: getstatic     #143                // Field net/blay09/mods/kuma/api/KeyModifier.CONTROL:Lnet/blay09/mods/kuma/api/KeyModifier;
+     578: aastore
+     579: invokestatic  #149                // Method net/blay09/mods/kuma/api/KeyModifiers.of:([Lnet/blay09/mods/kuma/api/KeyModifier;)Lnet/blay09/mods/kuma/api/KeyModifiers;
+     582: invokestatic  #155                // Method net/blay09/mods/kuma/api/InputBinding.key:(ILnet/blay09/mods/kuma/api/KeyModifiers;)Lnet/blay09/mods/kuma/api/InputBinding;
+     585: invokeinterface #159,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     590: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     593: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     598: invokedynamic #231,  0            // InvokeDynamic #12:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     603: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     608: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     613: putstatic     #233                // Field keyRefillLast:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     616: new           #40                 // class net/minecraft/resources/ResourceLocation
+     619: dup
+     620: ldc           #42                 // String craftingtweaks
+     622: ldc           #235                // String refill_last_stack
+     624: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     627: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     630: sipush        258
+     633: invokestatic  #178                // Method net/blay09/mods/kuma/api/InputBinding.key:(I)Lnet/blay09/mods/kuma/api/InputBinding;
+     636: invokeinterface #159,  2          // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withDefault:(Lnet/blay09/mods/kuma/api/InputBinding;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     641: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     644: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     649: invokedynamic #240,  0            // InvokeDynamic #13:handle:()Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;
+     654: invokeinterface #84,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.handleScreenInput:(Lnet/blay09/mods/kuma/api/ScreenInputEventHandler;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     659: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     664: putstatic     #242                // Field keyRefillLastStack:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     667: new           #40                 // class net/minecraft/resources/ResourceLocation
+     670: dup
+     671: ldc           #42                 // String craftingtweaks
+     673: ldc           #244                // String transfer_stack
+     675: invokespecial #47                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     678: invokestatic  #53                 // Method net/blay09/mods/kuma/api/Kuma.createKeyMapping:(Lnet/minecraft/resources/ResourceLocation;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     681: getstatic     #59                 // Field net/blay09/mods/kuma/api/KeyConflictContext.SCREEN:Lnet/blay09/mods/kuma/api/KeyConflictContext;
+     684: invokeinterface #63,  2           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.withContext:(Lnet/blay09/mods/kuma/api/KeyConflictContext;)Lnet/blay09/mods/kuma/api/ManagedKeyMapping$Builder;
+     689: invokeinterface #88,  1           // InterfaceMethod net/blay09/mods/kuma/api/ManagedKeyMapping$Builder.build:()Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     694: putstatic     #246                // Field keyTransferStack:Lnet/blay09/mods/kuma/api/ManagedKeyMapping;
+     697: return
+
+  private static boolean handleCompression(net.blay09.mods.kuma.api.ScreenInputEvent, net.blay09.mods.craftingtweaks.CompressType);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_3
+       5: aload_3
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          135
+      12: aload_3
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_2
+      17: aload_2
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_3
+      22: aload_3
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore        4
+      35: aload_2
+      36: checkcast     #276                // class net/blay09/mods/balm/mixin/AbstractContainerScreenAccessor
+      39: invokeinterface #280,  1          // InterfaceMethod net/blay09/mods/balm/mixin/AbstractContainerScreenAccessor.getHoveredSlot:()Lnet/minecraft/world/inventory/Slot;
+      44: astore        5
+      46: aload         5
+      48: ifnull        135
+      51: aload         4
+      53: ifnull        106
+      56: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      59: ifeq          86
+      62: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      65: new           #294                // class net/blay09/mods/craftingtweaks/network/CompressMessage
+      68: dup
+      69: aload         5
+      71: getfield      #300                // Field net/minecraft/world/inventory/Slot.f_40219_:I
+      74: aload_1
+      75: invokespecial #303                // Method net/blay09/mods/craftingtweaks/network/CompressMessage."<init>":(ILnet/blay09/mods/craftingtweaks/CompressType;)V
+      78: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      83: goto          104
+      86: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+      89: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      92: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      95: aload_3
+      96: aload         4
+      98: aload         5
+     100: aload_1
+     101: invokevirtual #335                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.compress:(Lnet/minecraft/client/player/LocalPlayer;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Lnet/minecraft/world/inventory/Slot;Lnet/blay09/mods/craftingtweaks/CompressType;)V
+     104: iconst_1
+     105: ireturn
+     106: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+     109: ifeq          135
+     112: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+     115: new           #294                // class net/blay09/mods/craftingtweaks/network/CompressMessage
+     118: dup
+     119: aload         5
+     121: getfield      #300                // Field net/minecraft/world/inventory/Slot.f_40219_:I
+     124: aload_1
+     125: invokespecial #303                // Method net/blay09/mods/craftingtweaks/network/CompressMessage."<init>":(ILnet/blay09/mods/craftingtweaks/CompressType;)V
+     128: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+     133: iconst_1
+     134: ireturn
+     135: iconst_0
+     136: ireturn
+
+  private static boolean lambda$initialize$13(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          112
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        112
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     112
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          95
+      77: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+      80: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      83: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      86: aload_2
+      87: aload_3
+      88: iconst_1
+      89: invokevirtual #380                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.refillLastCrafted:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+      92: goto          110
+      95: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+      98: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     101: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     104: aload_2
+     105: aload_3
+     106: iconst_1
+     107: invokevirtual #380                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.refillLastCrafted:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+     110: iconst_1
+     111: ireturn
+     112: iconst_0
+     113: ireturn
+
+  private static boolean lambda$initialize$12(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          112
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        112
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     112
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          95
+      77: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+      80: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      83: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      86: aload_2
+      87: aload_3
+      88: iconst_0
+      89: invokevirtual #380                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.refillLastCrafted:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+      92: goto          110
+      95: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+      98: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     101: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     104: aload_2
+     105: aload_3
+     106: iconst_0
+     107: invokevirtual #380                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.refillLastCrafted:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+     110: iconst_1
+     111: ireturn
+     112: iconst_0
+     113: ireturn
+
+  private static boolean lambda$initialize$11(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #387                // Field net/blay09/mods/craftingtweaks/CompressType.DECOMPRESS_ALL:Lnet/blay09/mods/craftingtweaks/CompressType;
+       4: invokestatic  #389                // Method handleCompression:(Lnet/blay09/mods/kuma/api/ScreenInputEvent;Lnet/blay09/mods/craftingtweaks/CompressType;)Z
+       7: ireturn
+
+  private static boolean lambda$initialize$10(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #392                // Field net/blay09/mods/craftingtweaks/CompressType.DECOMPRESS_STACK:Lnet/blay09/mods/craftingtweaks/CompressType;
+       4: invokestatic  #389                // Method handleCompression:(Lnet/blay09/mods/kuma/api/ScreenInputEvent;Lnet/blay09/mods/craftingtweaks/CompressType;)Z
+       7: ireturn
+
+  private static boolean lambda$initialize$9(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #395                // Field net/blay09/mods/craftingtweaks/CompressType.DECOMPRESS_ONE:Lnet/blay09/mods/craftingtweaks/CompressType;
+       4: invokestatic  #389                // Method handleCompression:(Lnet/blay09/mods/kuma/api/ScreenInputEvent;Lnet/blay09/mods/craftingtweaks/CompressType;)Z
+       7: ireturn
+
+  private static boolean lambda$initialize$8(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #398                // Field net/blay09/mods/craftingtweaks/CompressType.COMPRESS_ALL:Lnet/blay09/mods/craftingtweaks/CompressType;
+       4: invokestatic  #389                // Method handleCompression:(Lnet/blay09/mods/kuma/api/ScreenInputEvent;Lnet/blay09/mods/craftingtweaks/CompressType;)Z
+       7: ireturn
+
+  private static boolean lambda$initialize$7(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #401                // Field net/blay09/mods/craftingtweaks/CompressType.COMPRESS_STACK:Lnet/blay09/mods/craftingtweaks/CompressType;
+       4: invokestatic  #389                // Method handleCompression:(Lnet/blay09/mods/kuma/api/ScreenInputEvent;Lnet/blay09/mods/craftingtweaks/CompressType;)Z
+       7: ireturn
+
+  private static boolean lambda$initialize$6(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #404                // Field net/blay09/mods/craftingtweaks/CompressType.COMPRESS_ONE:Lnet/blay09/mods/craftingtweaks/CompressType;
+       4: invokestatic  #389                // Method handleCompression:(Lnet/blay09/mods/kuma/api/ScreenInputEvent;Lnet/blay09/mods/craftingtweaks/CompressType;)Z
+       7: ireturn
+
+  private static boolean lambda$initialize$5(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          119
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        119
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     119
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          102
+      77: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      80: new           #406                // class net/blay09/mods/craftingtweaks/network/ClearMessage
+      83: dup
+      84: aload_3
+      85: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      90: iconst_1
+      91: invokespecial #409                // Method net/blay09/mods/craftingtweaks/network/ClearMessage."<init>":(Lnet/minecraft/resources/ResourceLocation;Z)V
+      94: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      99: goto          117
+     102: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+     105: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     108: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     111: aload_2
+     112: aload_3
+     113: iconst_1
+     114: invokevirtual #412                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.clearGrid:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+     117: iconst_1
+     118: ireturn
+     119: iconst_0
+     120: ireturn
+
+  private static boolean lambda$initialize$4(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          119
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        119
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     119
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          102
+      77: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      80: new           #406                // class net/blay09/mods/craftingtweaks/network/ClearMessage
+      83: dup
+      84: aload_3
+      85: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      90: iconst_0
+      91: invokespecial #409                // Method net/blay09/mods/craftingtweaks/network/ClearMessage."<init>":(Lnet/minecraft/resources/ResourceLocation;Z)V
+      94: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      99: goto          117
+     102: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+     105: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     108: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     111: aload_2
+     112: aload_3
+     113: iconst_0
+     114: invokevirtual #412                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.clearGrid:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+     117: iconst_1
+     118: ireturn
+     119: iconst_0
+     120: ireturn
+
+  private static boolean lambda$initialize$3(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          118
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        118
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     118
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          102
+      77: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      80: new           #416                // class net/blay09/mods/craftingtweaks/network/BalanceMessage
+      83: dup
+      84: aload_3
+      85: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      90: iconst_1
+      91: invokespecial #417                // Method net/blay09/mods/craftingtweaks/network/BalanceMessage."<init>":(Lnet/minecraft/resources/ResourceLocation;Z)V
+      94: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      99: goto          116
+     102: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+     105: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     108: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     111: aload_2
+     112: aload_3
+     113: invokevirtual #421                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.spreadGrid:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;)V
+     116: iconst_1
+     117: ireturn
+     118: iconst_0
+     119: ireturn
+
+  private static boolean lambda$initialize$2(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          118
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        118
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     118
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          102
+      77: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      80: new           #416                // class net/blay09/mods/craftingtweaks/network/BalanceMessage
+      83: dup
+      84: aload_3
+      85: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      90: iconst_0
+      91: invokespecial #417                // Method net/blay09/mods/craftingtweaks/network/BalanceMessage."<init>":(Lnet/minecraft/resources/ResourceLocation;Z)V
+      94: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      99: goto          116
+     102: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+     105: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     108: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     111: aload_2
+     112: aload_3
+     113: invokevirtual #425                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.balanceGrid:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;)V
+     116: iconst_1
+     117: ireturn
+     118: iconst_0
+     119: ireturn
+
+  private static boolean lambda$initialize$1(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          119
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        119
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     119
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          102
+      77: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      80: new           #428                // class net/blay09/mods/craftingtweaks/network/RotateMessage
+      83: dup
+      84: aload_3
+      85: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      90: iconst_1
+      91: invokespecial #429                // Method net/blay09/mods/craftingtweaks/network/RotateMessage."<init>":(Lnet/minecraft/resources/ResourceLocation;Z)V
+      94: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      99: goto          117
+     102: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+     105: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     108: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     111: aload_2
+     112: aload_3
+     113: iconst_1
+     114: invokevirtual #432                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.rotateGrid:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+     117: iconst_1
+     118: ireturn
+     119: iconst_0
+     120: ireturn
+
+  private static boolean lambda$initialize$0(net.blay09.mods.kuma.api.ScreenInputEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #254                // Method net/blay09/mods/kuma/api/ScreenInputEvent.screen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+       9: ifeq          119
+      12: aload_2
+      13: checkcast     #256                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #260                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      21: astore_2
+      22: aload_2
+      23: invokestatic  #266                // Method net/blay09/mods/craftingtweaks/CraftingTweaksProviderManager.getDefaultCraftingGrid:(Lnet/minecraft/world/inventory/AbstractContainerMenu;)Ljava/util/Optional;
+      26: aconst_null
+      27: invokevirtual #272                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: checkcast     #274                // class net/blay09/mods/craftingtweaks/api/CraftingGrid
+      33: astore_3
+      34: aload_3
+      35: ifnull        119
+      38: invokestatic  #353                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+      41: aload_3
+      42: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      47: invokevirtual #361                // Method net/minecraft/resources/ResourceLocation.m_135827_:()Ljava/lang/String;
+      50: invokevirtual #367                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.getCraftingTweaksMode:(Ljava/lang/String;)Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      53: astore        4
+      55: aload         4
+      57: getstatic     #373                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      60: if_acmpeq     71
+      63: aload         4
+      65: getstatic     #376                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.HOTKEYS:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      68: if_acmpne     119
+      71: getstatic     #286                // Field net/blay09/mods/craftingtweaks/CraftingTweaks.isServerSideInstalled:Z
+      74: ifeq          102
+      77: invokestatic  #292                // Method net/blay09/mods/balm/api/Balm.getNetworking:()Lnet/blay09/mods/balm/api/network/BalmNetworking;
+      80: new           #428                // class net/blay09/mods/craftingtweaks/network/RotateMessage
+      83: dup
+      84: aload_3
+      85: invokeinterface #357,  1          // InterfaceMethod net/blay09/mods/craftingtweaks/api/CraftingGrid.getId:()Lnet/minecraft/resources/ResourceLocation;
+      90: iconst_0
+      91: invokespecial #429                // Method net/blay09/mods/craftingtweaks/network/RotateMessage."<init>":(Lnet/minecraft/resources/ResourceLocation;Z)V
+      94: invokeinterface #309,  2          // InterfaceMethod net/blay09/mods/balm/api/network/BalmNetworking.sendToServer:(Ljava/lang/Object;)V
+      99: goto          117
+     102: invokestatic  #319                // Method net/blay09/mods/craftingtweaks/client/CraftingTweaksClient.getClientProvider:()Lnet/blay09/mods/craftingtweaks/client/ClientProvider;
+     105: invokestatic  #325                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     108: getfield      #329                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     111: aload_2
+     112: aload_3
+     113: iconst_0
+     114: invokevirtual #432                // Method net/blay09/mods/craftingtweaks/client/ClientProvider.rotateGrid:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/blay09/mods/craftingtweaks/api/CraftingGrid;Z)V
+     117: iconst_1
+     118: ireturn
+     119: iconst_0
+     120: ireturn
+}

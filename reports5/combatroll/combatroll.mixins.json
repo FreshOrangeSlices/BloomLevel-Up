@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.combatroll.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EnchantmentHelperMixin",
+    "EntityAttributesMixin",
+    "LivingEntityInvulnerable",
+    "PlayerEntityAccessor",
+    "PlayerEntityMixin",
+    "RegistriesMixin"
+  ],
+  "client": [
+    "AbstractClientPlayerEntityMixin",
+    "ClientPlayerEntityMixin",
+    "MinecraftClientMixin",
+    "client.KeybindingAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "combatroll-common-common-refmap.json"
+}

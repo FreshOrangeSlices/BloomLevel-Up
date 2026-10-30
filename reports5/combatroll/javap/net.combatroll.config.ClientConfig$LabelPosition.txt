@@ -1,0 +1,63 @@
+Compiled from "ClientConfig.java"
+public final class net.combatroll.config.ClientConfig$LabelPosition extends java.lang.Enum<net.combatroll.config.ClientConfig$LabelPosition> {
+  public static final net.combatroll.config.ClientConfig$LabelPosition TOP;
+
+  public static final net.combatroll.config.ClientConfig$LabelPosition LEFT;
+
+  private static final net.combatroll.config.ClientConfig$LabelPosition[] $VALUES;
+
+  public static net.combatroll.config.ClientConfig$LabelPosition[] values();
+    Code:
+       0: getstatic     #18                 // Field $VALUES:[Lnet/combatroll/config/ClientConfig$LabelPosition;
+       3: invokevirtual #23                 // Method "[Lnet/combatroll/config/ClientConfig$LabelPosition;".clone:()Ljava/lang/Object;
+       6: checkcast     #19                 // class "[Lnet/combatroll/config/ClientConfig$LabelPosition;"
+       9: areturn
+
+  public static net.combatroll.config.ClientConfig$LabelPosition valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/combatroll/config/ClientConfig$LabelPosition
+       2: aload_0
+       3: invokestatic  #29                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/combatroll/config/ClientConfig$LabelPosition
+       9: areturn
+
+  private net.combatroll.config.ClientConfig$LabelPosition();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #35                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  private static net.combatroll.config.ClientConfig$LabelPosition[] $values();
+    Code:
+       0: iconst_2
+       1: anewarray     #2                  // class net/combatroll/config/ClientConfig$LabelPosition
+       4: dup
+       5: iconst_0
+       6: getstatic     #39                 // Field TOP:Lnet/combatroll/config/ClientConfig$LabelPosition;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #41                 // Field LEFT:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      15: aastore
+      16: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/combatroll/config/ClientConfig$LabelPosition
+       3: dup
+       4: ldc           #43                 // String TOP
+       6: iconst_0
+       7: invokespecial #44                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #39                 // Field TOP:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      13: new           #2                  // class net/combatroll/config/ClientConfig$LabelPosition
+      16: dup
+      17: ldc           #45                 // String LEFT
+      19: iconst_1
+      20: invokespecial #44                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #41                 // Field LEFT:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      26: invokestatic  #47                 // Method $values:()[Lnet/combatroll/config/ClientConfig$LabelPosition;
+      29: putstatic     #18                 // Field $VALUES:[Lnet/combatroll/config/ClientConfig$LabelPosition;
+      32: return
+}

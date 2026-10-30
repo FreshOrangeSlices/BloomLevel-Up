@@ -1,0 +1,58 @@
+public final class org.anti_ad.mc.ipnext.config.ConfigEnumsExtKt {
+  public static final org.anti_ad.mc.ipnext.item.rule.Rule rule(org.anti_ad.mc.ipnext.config.SortingMethodIndividual, java.lang.String);
+    Code:
+       0: aload_0
+       1: ldc           #12                 // String
+       3: invokestatic  #18                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_1
+       7: ldc           #12                 // String
+       9: invokestatic  #18                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_0
+      13: getstatic     #24                 // Field org/anti_ad/mc/ipnext/config/ConfigEnumsExtKt$WhenMappings.$EnumSwitchMapping$0:[I
+      16: swap
+      17: invokevirtual #30                 // Method org/anti_ad/mc/ipnext/config/SortingMethodIndividual.ordinal:()I
+      20: iaload
+      21: tableswitch   { // 1 to 2
+                     1: 44
+                     2: 60
+               default: 68
+          }
+      44: getstatic     #36                 // Field org/anti_ad/mc/ipnext/config/ModSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/ModSettings;
+      47: invokevirtual #40                 // Method org/anti_ad/mc/ipnext/config/ModSettings.getSORT_ORDER:()Lorg/anti_ad/mc/common/config/options/ConfigEnum;
+      50: invokevirtual #46                 // Method org/anti_ad/mc/common/config/options/ConfigEnum.getValue:()Ljava/lang/Enum;
+      53: checkcast     #48                 // class org/anti_ad/mc/ipnext/config/SortingMethod
+      56: invokestatic  #52                 // Method getRule:(Lorg/anti_ad/mc/ipnext/config/SortingMethod;)Lorg/anti_ad/mc/ipnext/item/rule/Rule;
+      59: areturn
+      60: getstatic     #59                 // Field org/anti_ad/mc/ipnext/parser/TemporaryRuleParser.INSTANCE:Lorg/anti_ad/mc/ipnext/parser/TemporaryRuleParser;
+      63: aload_1
+      64: invokevirtual #63                 // Method org/anti_ad/mc/ipnext/parser/TemporaryRuleParser.parse:(Ljava/lang/String;)Lorg/anti_ad/mc/ipnext/item/rule/Rule;
+      67: areturn
+      68: invokestatic  #67                 // Method org/anti_ad/mc/ipnext/config/SortingMethod.values:()[Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      71: aload_0
+      72: invokevirtual #30                 // Method org/anti_ad/mc/ipnext/config/SortingMethodIndividual.ordinal:()I
+      75: iconst_1
+      76: isub
+      77: aaload
+      78: invokestatic  #52                 // Method getRule:(Lorg/anti_ad/mc/ipnext/config/SortingMethod;)Lorg/anti_ad/mc/ipnext/item/rule/Rule;
+      81: areturn
+
+  private static final org.anti_ad.mc.ipnext.item.rule.Rule getRule(org.anti_ad.mc.ipnext.config.SortingMethod);
+    Code:
+       0: aload_0
+       1: invokevirtual #71                 // Method org/anti_ad/mc/ipnext/config/SortingMethod.getRuleName:()Ljava/lang/String;
+       4: dup
+       5: ifnull        20
+       8: astore_0
+       9: getstatic     #76                 // Field org/anti_ad/mc/ipnext/item/rule/file/RuleFileRegister.INSTANCE:Lorg/anti_ad/mc/ipnext/item/rule/file/RuleFileRegister;
+      12: aload_0
+      13: invokevirtual #79                 // Method org/anti_ad/mc/ipnext/item/rule/file/RuleFileRegister.getCustomRuleOrEmpty:(Ljava/lang/String;)Lorg/anti_ad/mc/ipnext/item/rule/Rule;
+      16: dup
+      17: ifnonnull     36
+      20: pop
+      21: getstatic     #59                 // Field org/anti_ad/mc/ipnext/parser/TemporaryRuleParser.INSTANCE:Lorg/anti_ad/mc/ipnext/parser/TemporaryRuleParser;
+      24: getstatic     #36                 // Field org/anti_ad/mc/ipnext/config/ModSettings.INSTANCE:Lorg/anti_ad/mc/ipnext/config/ModSettings;
+      27: invokevirtual #83                 // Method org/anti_ad/mc/ipnext/config/ModSettings.getCUSTOM_RULE:()Lorg/anti_ad/mc/common/config/options/ConfigString;
+      30: invokevirtual #87                 // Method org/anti_ad/mc/common/config/options/ConfigString.getValue:()Ljava/lang/String;
+      33: invokevirtual #63                 // Method org/anti_ad/mc/ipnext/parser/TemporaryRuleParser.parse:(Ljava/lang/String;)Lorg/anti_ad/mc/ipnext/item/rule/Rule;
+      36: areturn
+}

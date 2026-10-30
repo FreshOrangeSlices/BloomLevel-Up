@@ -1,0 +1,41 @@
+Compiled from "ModConfig.java"
+public class net.saksolm.monsterexpansion.config.ModConfig$LeivekilthConfig {
+  public final net.minecraftforge.common.ForgeConfigSpec$DoubleValue MAX_HEALTH;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$DoubleValue ATTACK_DAMAGE;
+
+  net.saksolm.monsterexpansion.config.ModConfig$LeivekilthConfig(net.minecraftforge.common.ForgeConfigSpec$Builder);
+    Code:
+       0: aload_0
+       1: invokespecial #24                 // Method java/lang/Object."<init>":()V
+       4: aload_1
+       5: ldc           #26                 // String Settings for the Leivekilth.
+       7: invokevirtual #30                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: ldc           #32                 // String general
+      12: invokevirtual #35                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      15: pop
+      16: aload_0
+      17: aload_1
+      18: ldc           #37                 // String Maximum health multiplier for the Leivekilth. (eg. 2 to double it, 0.5 to halve it)
+      20: invokevirtual #30                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      23: ldc           #39                 // String maxHealthMultiplier
+      25: dconst_1
+      26: dconst_0
+      27: ldc2_w        #40                 // double 1000.0d
+      30: invokevirtual #45                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      33: putfield      #47                 // Field MAX_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      36: aload_0
+      37: aload_1
+      38: ldc           #49                 // String Attack damage multiplier for the Leivekilth. (eg. 2 to double it, 0.5 to halve it)
+      40: invokevirtual #30                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      43: ldc           #51                 // String attackDamageMultiplier
+      45: dconst_1
+      46: dconst_0
+      47: ldc2_w        #40                 // double 1000.0d
+      50: invokevirtual #45                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      53: putfield      #53                 // Field ATTACK_DAMAGE:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+      56: aload_1
+      57: invokevirtual #57                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      60: pop
+      61: return
+}

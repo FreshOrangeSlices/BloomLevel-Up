@@ -1,0 +1,38 @@
+public class org.anti_ad.mc.ipnext.config.DefaultDelegatedConfigButtonInfo extends org.anti_ad.mc.common.gui.widgets.ConfigButtonInfo {
+  private org.anti_ad.mc.common.gui.widgets.ConfigButtonClickHandler delegate;
+
+  public org.anti_ad.mc.ipnext.config.DefaultDelegatedConfigButtonInfo();
+    Code:
+       0: aload_0
+       1: invokespecial #11                 // Method org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo."<init>":()V
+       4: return
+
+  public org.anti_ad.mc.common.gui.widgets.ConfigButtonClickHandler getDelegate();
+    Code:
+       0: aload_0
+       1: getfield      #15                 // Field delegate:Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonClickHandler;
+       4: areturn
+
+  public void setDelegate(org.anti_ad.mc.common.gui.widgets.ConfigButtonClickHandler);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #15                 // Field delegate:Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonClickHandler;
+       5: return
+
+  public void onClick(org.anti_ad.mc.common.gui.widgets.CustomButtonWidget);
+    Code:
+       0: aload_1
+       1: ldc           #22                 // String
+       3: invokestatic  #28                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #30                 // Method getDelegate:()Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonClickHandler;
+      10: dup
+      11: ifnull        24
+      14: getstatic     #36                 // Field org/anti_ad/mc/ipnext/config/DefaultDelegatedConfigButtonInfo$onClick$1.INSTANCE:Lorg/anti_ad/mc/ipnext/config/DefaultDelegatedConfigButtonInfo$onClick$1;
+      17: checkcast     #38                 // class kotlin/jvm/functions/Function0
+      20: invokevirtual #43                 // Method org/anti_ad/mc/common/gui/widgets/ConfigButtonClickHandler.onClick:(Lkotlin/jvm/functions/Function0;)V
+      23: return
+      24: pop
+      25: return
+}

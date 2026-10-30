@@ -1,0 +1,321 @@
+Compiled from "BossesRise.java"
+public class net.unusual.block_factorys_bosses.BossesRise {
+  public static final org.apache.logging.log4j.Logger LOGGER;
+
+  public static final java.lang.String MODID = "block_factorys_bosses";
+
+  public static final net.minecraftforge.registries.DeferredRegister<net.minecraft.world.level.levelgen.structure.StructureType<?>> STRUCTURE_TYPES;
+
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.level.levelgen.structure.StructureType<net.unusual.block_factorys_bosses.structures.DragonTowerStructure>> DRAGON_TOWER;
+
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.level.levelgen.structure.StructureType<net.unusual.block_factorys_bosses.structures.KrakenShipStructure>> KRAKEN_SHIP;
+
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.level.levelgen.structure.StructureType<net.unusual.block_factorys_bosses.structures.UnderworldArenaStructure>> UNDERWORLD_ARENA;
+
+  private static final java.util.Collection<net.minecraft.util.Tuple<java.lang.Runnable, java.lang.Integer>> workQueue;
+
+  public net.unusual.block_factorys_bosses.BossesRise(net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext);
+    Code:
+       0: aload_0
+       1: invokespecial #64                 // Method java/lang/Object."<init>":()V
+       4: getstatic     #70                 // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+       7: aload_0
+       8: invokeinterface #76,  2           // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+      13: aload_1
+      14: invokevirtual #82                 // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.getModEventBus:()Lnet/minecraftforge/eventbus/api/IEventBus;
+      17: astore_2
+      18: invokestatic  #87                 // Method net/unusual/block_factorys_bosses/forge/BossesRiseForgeNetwork.init:()V
+      21: getstatic     #92                 // Field net/unusual/block_factorys_bosses/init/BossesRiseSounds.SOUND_EVENTS:Lnet/minecraftforge/registries/DeferredRegister;
+      24: aload_2
+      25: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      28: getstatic     #102                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      31: aload_2
+      32: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      35: getstatic     #105                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlockEntities.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      38: aload_2
+      39: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      42: getstatic     #108                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      45: aload_2
+      46: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      49: getstatic     #111                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      52: aload_2
+      53: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      56: getstatic     #114                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntityDataSerializers.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      59: aload_2
+      60: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      63: getstatic     #117                // Field net/unusual/block_factorys_bosses/init/BlockFactorysBossesModTabs.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      66: aload_2
+      67: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      70: getstatic     #120                // Field net/unusual/block_factorys_bosses/init/BossesRiseParticleTypes.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      73: aload_2
+      74: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      77: getstatic     #123                // Field net/unusual/block_factorys_bosses/init/BossesRiseAttributes.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      80: aload_2
+      81: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      84: getstatic     #126                // Field net/unusual/block_factorys_bosses/init/BossesRisePOI.REGISTRY:Lnet/minecraftforge/registries/DeferredRegister;
+      87: aload_2
+      88: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      91: getstatic     #128                // Field STRUCTURE_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+      94: aload_2
+      95: invokevirtual #97                 // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      98: aload_1
+      99: getstatic     #132                // Field net/minecraftforge/fml/config/ModConfig$Type.CLIENT:Lnet/minecraftforge/fml/config/ModConfig$Type;
+     102: getstatic     #138                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+     105: invokevirtual #142                // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;)V
+     108: aload_1
+     109: getstatic     #145                // Field net/minecraftforge/fml/config/ModConfig$Type.SERVER:Lnet/minecraftforge/fml/config/ModConfig$Type;
+     112: getstatic     #148                // Field net/unusual/block_factorys_bosses/configuration/ServerConfiguration.SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+     115: invokevirtual #142                // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;)V
+     118: invokestatic  #152                // Method com/google/common/collect/ImmutableList.builder:()Lcom/google/common/collect/ImmutableList$Builder;
+     121: astore_3
+     122: aload_3
+     123: getstatic     #158                // Field net/minecraft/world/level/levelgen/feature/BasaltColumnsFeature.f_65150_:Lcom/google/common/collect/ImmutableList;
+     126: invokevirtual #162                // Method com/google/common/collect/ImmutableList$Builder.addAll:(Ljava/lang/Iterable;)Lcom/google/common/collect/ImmutableList$Builder;
+     129: pop
+     130: aload_3
+     131: getstatic     #168                // Field net/minecraft/world/level/block/Blocks.f_50668_:Lnet/minecraft/world/level/block/Block;
+     134: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     137: pop
+     138: aload_3
+     139: getstatic     #175                // Field net/minecraft/world/level/block/Blocks.f_152560_:Lnet/minecraft/world/level/block/Block;
+     142: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     145: pop
+     146: aload_3
+     147: getstatic     #178                // Field net/minecraft/world/level/block/Blocks.f_50382_:Lnet/minecraft/world/level/block/Block;
+     150: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     153: pop
+     154: aload_3
+     155: getstatic     #181                // Field net/minecraft/world/level/block/Blocks.f_50378_:Lnet/minecraft/world/level/block/Block;
+     158: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     161: pop
+     162: aload_3
+     163: getstatic     #184                // Field net/minecraft/world/level/block/Blocks.f_50379_:Lnet/minecraft/world/level/block/Block;
+     166: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     169: pop
+     170: aload_3
+     171: getstatic     #187                // Field net/minecraft/world/level/block/Blocks.f_50381_:Lnet/minecraft/world/level/block/Block;
+     174: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     177: pop
+     178: aload_3
+     179: getstatic     #190                // Field net/minecraft/world/level/block/Blocks.f_152551_:Lnet/minecraft/world/level/block/Block;
+     182: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     185: pop
+     186: aload_3
+     187: getstatic     #193                // Field net/minecraft/world/level/block/Blocks.f_152553_:Lnet/minecraft/world/level/block/Block;
+     190: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     193: pop
+     194: aload_3
+     195: getstatic     #196                // Field net/minecraft/world/level/block/Blocks.f_152550_:Lnet/minecraft/world/level/block/Block;
+     198: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     201: pop
+     202: aload_3
+     203: getstatic     #199                // Field net/minecraft/world/level/block/Blocks.f_50103_:Lnet/minecraft/world/level/block/Block;
+     206: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     209: pop
+     210: aload_3
+     211: getstatic     #202                // Field net/minecraft/world/level/block/Blocks.f_50515_:Lnet/minecraft/world/level/block/Block;
+     214: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     217: pop
+     218: aload_3
+     219: getstatic     #205                // Field net/minecraft/world/level/block/Blocks.f_50513_:Lnet/minecraft/world/level/block/Block;
+     222: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     225: pop
+     226: aload_3
+     227: getstatic     #208                // Field net/minecraft/world/level/block/Blocks.f_50380_:Lnet/minecraft/world/level/block/Block;
+     230: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     233: pop
+     234: aload_3
+     235: getstatic     #211                // Field net/minecraft/world/level/block/Blocks.f_152561_:Lnet/minecraft/world/level/block/Block;
+     238: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     241: pop
+     242: aload_3
+     243: getstatic     #214                // Field net/minecraft/world/level/block/Blocks.f_152524_:Lnet/minecraft/world/level/block/Block;
+     246: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     249: pop
+     250: aload_3
+     251: getstatic     #217                // Field net/minecraft/world/level/block/Blocks.f_152518_:Lnet/minecraft/world/level/block/Block;
+     254: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     257: pop
+     258: aload_3
+     259: getstatic     #220                // Field net/minecraft/world/level/block/Blocks.f_50605_:Lnet/minecraft/world/level/block/Block;
+     262: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     265: pop
+     266: aload_3
+     267: getstatic     #223                // Field net/minecraft/world/level/block/Blocks.f_152552_:Lnet/minecraft/world/level/block/Block;
+     270: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     273: pop
+     274: aload_3
+     275: getstatic     #226                // Field net/minecraft/world/level/block/Blocks.f_152580_:Lnet/minecraft/world/level/block/Block;
+     278: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     281: pop
+     282: aload_3
+     283: getstatic     #229                // Field net/minecraft/world/level/block/Blocks.f_50692_:Lnet/minecraft/world/level/block/Block;
+     286: invokevirtual #172                // Method com/google/common/collect/ImmutableList$Builder.add:(Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList$Builder;
+     289: pop
+     290: aload_3
+     291: invokevirtual #233                // Method com/google/common/collect/ImmutableList$Builder.build:()Lcom/google/common/collect/ImmutableList;
+     294: putstatic     #158                // Field net/minecraft/world/level/levelgen/feature/BasaltColumnsFeature.f_65150_:Lcom/google/common/collect/ImmutableList;
+     297: ldc           #46                 // String block_factorys_bosses
+     299: new           #235                // class net/unusual/block_factorys_bosses/geckolib/util/CustomBakedModelFactory
+     302: dup
+     303: invokespecial #236                // Method net/unusual/block_factorys_bosses/geckolib/util/CustomBakedModelFactory."<init>":()V
+     306: invokestatic  #242                // Method software/bernie/geckolib/util/GeckoLibUtil.addCustomBakedModelFactory:(Ljava/lang/String;Lsoftware/bernie/geckolib/loading/object/BakedModelFactory;)V
+     309: getstatic     #70                 // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+     312: invokedynamic #260,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+     317: invokeinterface #264,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+     322: invokestatic  #270                // Method net/minecraftforge/data/loading/DatagenModLoader.isRunningDataGen:()Z
+     325: ifeq          329
+     328: return
+     329: getstatic     #276                // Field net/minecraftforge/fml/loading/FMLEnvironment.dist:Lnet/minecraftforge/api/distmarker/Dist;
+     332: getstatic     #280                // Field net/minecraftforge/api/distmarker/Dist.CLIENT:Lnet/minecraftforge/api/distmarker/Dist;
+     335: if_acmpne     341
+     338: invokestatic  #285                // Method net/unusual/block_factorys_bosses/client/particle/bedrock/BedrockParticleEffectCache.registerReloadListener:()V
+     341: getstatic     #276                // Field net/minecraftforge/fml/loading/FMLEnvironment.dist:Lnet/minecraftforge/api/distmarker/Dist;
+     344: getstatic     #288                // Field net/minecraftforge/api/distmarker/Dist.DEDICATED_SERVER:Lnet/minecraftforge/api/distmarker/Dist;
+     347: if_acmpeq     353
+     350: invokestatic  #291                // Method net/unusual/block_factorys_bosses/geckolib/util/BossesRiseAnimationCache.registerReloadListener:()V
+     353: return
+
+  public static void registerGeckoLibReloadListener(net.minecraftforge.event.AddReloadListenerEvent);
+    Code:
+       0: getstatic     #276                // Field net/minecraftforge/fml/loading/FMLEnvironment.dist:Lnet/minecraftforge/api/distmarker/Dist;
+       3: getstatic     #288                // Field net/minecraftforge/api/distmarker/Dist.DEDICATED_SERVER:Lnet/minecraftforge/api/distmarker/Dist;
+       6: if_acmpne     27
+       9: aload_0
+      10: invokedynamic #310,  0            // InvokeDynamic #1:m_5540_:()Lnet/minecraft/server/packs/resources/PreparableReloadListener;
+      15: invokevirtual #315                // Method net/minecraftforge/event/AddReloadListenerEvent.addListener:(Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+      18: aload_0
+      19: invokedynamic #320,  0            // InvokeDynamic #2:m_5540_:()Lnet/minecraft/server/packs/resources/PreparableReloadListener;
+      24: invokevirtual #315                // Method net/minecraftforge/event/AddReloadListenerEvent.addListener:(Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+      27: return
+
+  public static void queueServerWork(int, java.lang.Runnable);
+    Code:
+       0: invokestatic  #330                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+       3: invokevirtual #334                // Method java/lang/Thread.getThreadGroup:()Ljava/lang/ThreadGroup;
+       6: getstatic     #339                // Field net/minecraftforge/fml/util/thread/SidedThreadGroups.SERVER:Lnet/minecraftforge/fml/util/thread/SidedThreadGroup;
+       9: if_acmpne     33
+      12: getstatic     #341                // Field workQueue:Ljava/util/Collection;
+      15: new           #343                // class net/minecraft/util/Tuple
+      18: dup
+      19: aload_1
+      20: iload_0
+      21: invokestatic  #349                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: invokespecial #352                // Method net/minecraft/util/Tuple."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+      27: invokeinterface #357,  2          // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      32: pop
+      33: return
+
+  public static net.minecraft.resources.ResourceLocation prefix(java.lang.String);
+    Code:
+       0: ldc           #46                 // String block_factorys_bosses
+       2: aload_0
+       3: invokestatic  #369                // Method net/minecraft/resources/ResourceLocation.fromNamespaceAndPath:(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       6: areturn
+
+  public static void tick(net.minecraftforge.event.TickEvent$ServerTickEvent);
+    Code:
+       0: new           #374                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #375                // Method java/util/ArrayList."<init>":()V
+       7: astore_1
+       8: getstatic     #341                // Field workQueue:Ljava/util/Collection;
+      11: aload_1
+      12: invokedynamic #385,  0            // InvokeDynamic #3:accept:(Ljava/util/List;)Ljava/util/function/Consumer;
+      17: invokeinterface #388,  2          // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+      22: aload_1
+      23: invokedynamic #393,  0            // InvokeDynamic #4:accept:()Ljava/util/function/Consumer;
+      28: invokeinterface #396,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      33: getstatic     #341                // Field workQueue:Ljava/util/Collection;
+      36: aload_1
+      37: invokeinterface #400,  2          // InterfaceMethod java/util/Collection.removeAll:(Ljava/util/Collection;)Z
+      42: pop
+      43: return
+
+  private static void lambda$tick$4(net.minecraft.util.Tuple);
+    Code:
+       0: aload_0
+       1: invokevirtual #408                // Method net/minecraft/util/Tuple.m_14418_:()Ljava/lang/Object;
+       4: checkcast     #410                // class java/lang/Runnable
+       7: invokeinterface #413,  1          // InterfaceMethod java/lang/Runnable.run:()V
+      12: return
+
+  private static void lambda$tick$3(java.util.List, net.minecraft.util.Tuple);
+    Code:
+       0: aload_1
+       1: aload_1
+       2: invokevirtual #418                // Method net/minecraft/util/Tuple.m_14419_:()Ljava/lang/Object;
+       5: checkcast     #345                // class java/lang/Integer
+       8: invokevirtual #422                // Method java/lang/Integer.intValue:()I
+      11: iconst_1
+      12: isub
+      13: invokestatic  #349                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      16: invokevirtual #425                // Method net/minecraft/util/Tuple.m_145025_:(Ljava/lang/Object;)V
+      19: aload_1
+      20: invokevirtual #418                // Method net/minecraft/util/Tuple.m_14419_:()Ljava/lang/Object;
+      23: checkcast     #345                // class java/lang/Integer
+      26: invokevirtual #422                // Method java/lang/Integer.intValue:()I
+      29: ifne          40
+      32: aload_0
+      33: aload_1
+      34: invokeinterface #426,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      39: pop
+      40: return
+
+  private static net.minecraft.world.level.levelgen.structure.StructureType lambda$static$2();
+    Code:
+       0: getstatic     #435                // Field net/unusual/block_factorys_bosses/structures/UnderworldArenaStructure.CODEC:Lcom/mojang/serialization/MapCodec;
+       3: dup
+       4: invokestatic  #441                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: pop
+       8: invokedynamic #453,  0            // InvokeDynamic #5:m_226884_:(Lcom/mojang/serialization/MapCodec;)Lnet/minecraft/world/level/levelgen/structure/StructureType;
+      13: areturn
+
+  private static net.minecraft.world.level.levelgen.structure.StructureType lambda$static$1();
+    Code:
+       0: getstatic     #457                // Field net/unusual/block_factorys_bosses/structures/KrakenShipStructure.CODEC:Lcom/mojang/serialization/MapCodec;
+       3: dup
+       4: invokestatic  #441                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: pop
+       8: invokedynamic #453,  0            // InvokeDynamic #5:m_226884_:(Lcom/mojang/serialization/MapCodec;)Lnet/minecraft/world/level/levelgen/structure/StructureType;
+      13: areturn
+
+  private static net.minecraft.world.level.levelgen.structure.StructureType lambda$static$0();
+    Code:
+       0: getstatic     #461                // Field net/unusual/block_factorys_bosses/structures/DragonTowerStructure.CODEC:Lcom/mojang/serialization/MapCodec;
+       3: dup
+       4: invokestatic  #441                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: pop
+       8: invokedynamic #453,  0            // InvokeDynamic #5:m_226884_:(Lcom/mojang/serialization/MapCodec;)Lnet/minecraft/world/level/levelgen/structure/StructureType;
+      13: areturn
+
+  static {};
+    Code:
+       0: ldc           #2                  // class net/unusual/block_factorys_bosses/BossesRise
+       2: invokestatic  #468                // Method org/apache/logging/log4j/LogManager.getLogger:(Ljava/lang/Class;)Lorg/apache/logging/log4j/Logger;
+       5: putstatic     #470                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       8: getstatic     #476                // Field net/minecraft/core/registries/Registries.f_256938_:Lnet/minecraft/resources/ResourceKey;
+      11: ldc           #46                 // String block_factorys_bosses
+      13: invokestatic  #480                // Method net/minecraftforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/DeferredRegister;
+      16: putstatic     #128                // Field STRUCTURE_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+      19: getstatic     #128                // Field STRUCTURE_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+      22: ldc_w         #482                // String dragon_tower
+      25: invokedynamic #491,  0            // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+      30: invokevirtual #494                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+      33: putstatic     #496                // Field DRAGON_TOWER:Lnet/minecraftforge/registries/RegistryObject;
+      36: getstatic     #128                // Field STRUCTURE_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+      39: ldc_w         #498                // String kraken_ship
+      42: invokedynamic #502,  0            // InvokeDynamic #7:get:()Ljava/util/function/Supplier;
+      47: invokevirtual #494                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+      50: putstatic     #504                // Field KRAKEN_SHIP:Lnet/minecraftforge/registries/RegistryObject;
+      53: getstatic     #128                // Field STRUCTURE_TYPES:Lnet/minecraftforge/registries/DeferredRegister;
+      56: ldc_w         #506                // String underworld_arena
+      59: invokedynamic #510,  0            // InvokeDynamic #8:get:()Ljava/util/function/Supplier;
+      64: invokevirtual #494                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+      67: putstatic     #512                // Field UNDERWORLD_ARENA:Lnet/minecraftforge/registries/RegistryObject;
+      70: new           #514                // class java/util/concurrent/ConcurrentLinkedQueue
+      73: dup
+      74: invokespecial #515                // Method java/util/concurrent/ConcurrentLinkedQueue."<init>":()V
+      77: putstatic     #341                // Field workQueue:Ljava/util/Collection;
+      80: return
+}

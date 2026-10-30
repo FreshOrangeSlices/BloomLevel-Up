@@ -1,0 +1,253 @@
+public final class org.anti_ad.mc.ipnext.config.EditProfiles implements org.anti_ad.mc.common.config.builder.ConfigDeclaration {
+  public static final org.anti_ad.mc.ipnext.config.EditProfiles INSTANCE;
+
+  static final kotlin.reflect.KProperty[] $$delegatedProperties;
+
+  private static final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder builder;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate OPEN_CONFIG_PROFILES_HELP$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate OPEN_SERVER_PROFILES$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate QUICK_SLOT_1_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate QUICK_SLOT_2_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate QUICK_SLOT_3_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate INCLUDE_CUSTOM_NAME$delegate;
+
+  private org.anti_ad.mc.ipnext.config.EditProfiles();
+    Code:
+       0: aload_0
+       1: invokespecial #24                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder getBuilder();
+    Code:
+       0: getstatic     #28                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+       3: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigButton getOPEN_CONFIG_PROFILES_HELP();
+    Code:
+       0: getstatic     #32                 // Field OPEN_CONFIG_PROFILES_HELP$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokevirtual #40                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #42                 // class org/anti_ad/mc/common/config/options/ConfigButton
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigButton getOPEN_SERVER_PROFILES();
+    Code:
+       0: getstatic     #45                 // Field OPEN_SERVER_PROFILES$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_1
+       8: aaload
+       9: invokevirtual #40                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #42                 // class org/anti_ad/mc/common/config/options/ConfigButton
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigString getQUICK_SLOT_1_PROFILE();
+    Code:
+       0: getstatic     #49                 // Field QUICK_SLOT_1_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_2
+       8: aaload
+       9: invokevirtual #40                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #51                 // class org/anti_ad/mc/common/config/options/ConfigString
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigString getQUICK_SLOT_2_PROFILE();
+    Code:
+       0: getstatic     #54                 // Field QUICK_SLOT_2_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_3
+       8: aaload
+       9: invokevirtual #40                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #51                 // class org/anti_ad/mc/common/config/options/ConfigString
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigString getQUICK_SLOT_3_PROFILE();
+    Code:
+       0: getstatic     #57                 // Field QUICK_SLOT_3_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_4
+       8: aaload
+       9: invokevirtual #40                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #51                 // class org/anti_ad/mc/common/config/options/ConfigString
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigBoolean getINCLUDE_CUSTOM_NAME();
+    Code:
+       0: getstatic     #61                 // Field INCLUDE_CUSTOM_NAME$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_5
+       8: aaload
+       9: invokevirtual #40                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigBoolean
+      15: areturn
+
+  static {};
+    Code:
+       0: bipush        6
+       2: anewarray     #66                 // class kotlin/reflect/KProperty
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: new           #68                 // class kotlin/jvm/internal/PropertyReference1Impl
+      11: dup
+      12: ldc           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+      14: ldc           #70                 // String OPEN_CONFIG_PROFILES_HELP
+      16: ldc           #72                 // String getOPEN_CONFIG_PROFILES_HELP()Lorg/anti_ad/mc/common/config/options/ConfigButton;
+      18: iconst_0
+      19: invokespecial #75                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      22: checkcast     #77                 // class kotlin/jvm/internal/PropertyReference1
+      25: invokestatic  #83                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      28: aastore
+      29: aload_0
+      30: iconst_1
+      31: new           #68                 // class kotlin/jvm/internal/PropertyReference1Impl
+      34: dup
+      35: ldc           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+      37: ldc           #85                 // String OPEN_SERVER_PROFILES
+      39: ldc           #87                 // String getOPEN_SERVER_PROFILES()Lorg/anti_ad/mc/common/config/options/ConfigButton;
+      41: iconst_0
+      42: invokespecial #75                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      45: checkcast     #77                 // class kotlin/jvm/internal/PropertyReference1
+      48: invokestatic  #83                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      51: aastore
+      52: aload_0
+      53: iconst_2
+      54: new           #68                 // class kotlin/jvm/internal/PropertyReference1Impl
+      57: dup
+      58: ldc           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+      60: ldc           #89                 // String QUICK_SLOT_1_PROFILE
+      62: ldc           #91                 // String getQUICK_SLOT_1_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigString;
+      64: iconst_0
+      65: invokespecial #75                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      68: checkcast     #77                 // class kotlin/jvm/internal/PropertyReference1
+      71: invokestatic  #83                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      74: aastore
+      75: aload_0
+      76: iconst_3
+      77: new           #68                 // class kotlin/jvm/internal/PropertyReference1Impl
+      80: dup
+      81: ldc           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+      83: ldc           #93                 // String QUICK_SLOT_2_PROFILE
+      85: ldc           #95                 // String getQUICK_SLOT_2_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigString;
+      87: iconst_0
+      88: invokespecial #75                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      91: checkcast     #77                 // class kotlin/jvm/internal/PropertyReference1
+      94: invokestatic  #83                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      97: aastore
+      98: aload_0
+      99: iconst_4
+     100: new           #68                 // class kotlin/jvm/internal/PropertyReference1Impl
+     103: dup
+     104: ldc           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+     106: ldc           #97                 // String QUICK_SLOT_3_PROFILE
+     108: ldc           #99                 // String getQUICK_SLOT_3_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigString;
+     110: iconst_0
+     111: invokespecial #75                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     114: checkcast     #77                 // class kotlin/jvm/internal/PropertyReference1
+     117: invokestatic  #83                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     120: aastore
+     121: aload_0
+     122: iconst_5
+     123: new           #68                 // class kotlin/jvm/internal/PropertyReference1Impl
+     126: dup
+     127: ldc           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+     129: ldc           #101                // String INCLUDE_CUSTOM_NAME
+     131: ldc           #103                // String getINCLUDE_CUSTOM_NAME()Lorg/anti_ad/mc/common/config/options/ConfigBoolean;
+     133: iconst_0
+     134: invokespecial #75                 // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     137: checkcast     #77                 // class kotlin/jvm/internal/PropertyReference1
+     140: invokestatic  #83                 // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     143: aastore
+     144: aload_0
+     145: putstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     148: new           #2                  // class org/anti_ad/mc/ipnext/config/EditProfiles
+     151: dup
+     152: invokespecial #104                // Method "<init>":()V
+     155: dup
+     156: putstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     159: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     162: invokestatic  #112                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.createBuilder:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     165: ldc           #114                // String inventoryprofiles.config.category.still_under_construction
+     167: invokestatic  #118                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     170: putstatic     #28                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     173: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     176: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     179: getstatic     #123                // Field org/anti_ad/mc/ipnext/config/OpenProfilesHelpButtonInfo.INSTANCE:Lorg/anti_ad/mc/ipnext/config/OpenProfilesHelpButtonInfo;
+     182: checkcast     #125                // class org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo
+     185: invokestatic  #129                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.button:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonInfo;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     188: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     191: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     194: iconst_0
+     195: aaload
+     196: invokevirtual #135                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     199: putstatic     #32                 // Field OPEN_CONFIG_PROFILES_HELP$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     202: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     205: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     208: getstatic     #140                // Field org/anti_ad/mc/ipnext/config/OpenProfilesConfigButtonInfo.INSTANCE:Lorg/anti_ad/mc/ipnext/config/OpenProfilesConfigButtonInfo;
+     211: checkcast     #125                // class org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo
+     214: invokestatic  #129                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.button:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Lorg/anti_ad/mc/common/gui/widgets/ConfigButtonInfo;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     217: ldc           #142                // String inventoryprofiles.config.category.quick_slots
+     219: invokestatic  #145                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     222: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     225: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     228: iconst_1
+     229: aaload
+     230: invokevirtual #135                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     233: putstatic     #45                 // Field OPEN_SERVER_PROFILES$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     236: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     239: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     242: ldc           #147                // String
+     244: invokestatic  #151                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.string:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     247: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     250: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     253: iconst_2
+     254: aaload
+     255: invokevirtual #135                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     258: putstatic     #49                 // Field QUICK_SLOT_1_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     261: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     264: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     267: ldc           #147                // String
+     269: invokestatic  #151                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.string:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     272: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     275: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     278: iconst_3
+     279: aaload
+     280: invokevirtual #135                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     283: putstatic     #54                 // Field QUICK_SLOT_2_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     286: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     289: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     292: ldc           #147                // String
+     294: invokestatic  #151                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.string:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     297: ldc           #114                // String inventoryprofiles.config.category.still_under_construction
+     299: invokestatic  #145                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     302: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     305: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     308: iconst_4
+     309: aaload
+     310: invokevirtual #135                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     313: putstatic     #57                 // Field QUICK_SLOT_3_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     316: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     319: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     322: iconst_0
+     323: invokestatic  #155                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.bool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Z)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     326: getstatic     #106                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/EditProfiles;
+     329: getstatic     #34                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     332: iconst_5
+     333: aaload
+     334: invokevirtual #135                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     337: putstatic     #61                 // Field INCLUDE_CUSTOM_NAME$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     340: return
+}

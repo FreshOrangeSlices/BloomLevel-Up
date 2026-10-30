@@ -1,0 +1,141 @@
+Compiled from "ConfigMenuScreen.java"
+public class net.combatroll.client.gui.ConfigMenuScreen extends net.minecraft.client.gui.screens.Screen {
+  private net.minecraft.client.gui.screens.Screen previous;
+
+  public net.combatroll.client.gui.ConfigMenuScreen(net.minecraft.client.gui.screens.Screen);
+    Code:
+       0: aload_0
+       1: ldc           #25                 // String gui.combatroll.config_menu
+       3: invokestatic  #31                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       6: invokespecial #34                 // Method net/minecraft/client/gui/screens/Screen."<init>":(Lnet/minecraft/network/chat/Component;)V
+       9: aload_0
+      10: aload_1
+      11: putfield      #36                 // Field previous:Lnet/minecraft/client/gui/screens/Screen;
+      14: return
+
+  protected void m_7856_();
+    Code:
+       0: bipush        120
+       2: istore_1
+       3: bipush        20
+       5: istore_2
+       6: aload_0
+       7: getfield      #44                 // Field f_96543_:I
+      10: iconst_2
+      11: idiv
+      12: iload_1
+      13: iconst_2
+      14: idiv
+      15: isub
+      16: istore_3
+      17: aload_0
+      18: getfield      #47                 // Field f_96544_:I
+      21: iconst_2
+      22: idiv
+      23: iload_2
+      24: iconst_2
+      25: idiv
+      26: isub
+      27: istore        4
+      29: aload_0
+      30: ldc           #49                 // String gui.combatroll.close
+      32: invokestatic  #31                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      35: aload_0
+      36: invokedynamic #66,  0             // InvokeDynamic #0:m_93750_:(Lnet/combatroll/client/gui/ConfigMenuScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+      41: invokestatic  #70                 // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+      44: iload_3
+      45: iload         4
+      47: bipush        30
+      49: isub
+      50: invokevirtual #74                 // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      53: iload_1
+      54: iload_2
+      55: invokevirtual #77                 // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      58: invokevirtual #81                 // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+      61: invokevirtual #85                 // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+      64: pop
+      65: aload_0
+      66: ldc           #87                 // String gui.combatroll.settings
+      68: invokestatic  #31                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      71: aload_0
+      72: invokedynamic #92,  0             // InvokeDynamic #1:m_93750_:(Lnet/combatroll/client/gui/ConfigMenuScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+      77: invokestatic  #70                 // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+      80: iload_3
+      81: iload         4
+      83: invokevirtual #74                 // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      86: iload_1
+      87: iload_2
+      88: invokevirtual #77                 // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      91: invokevirtual #81                 // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+      94: invokevirtual #85                 // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+      97: pop
+      98: aload_0
+      99: ldc           #94                 // String gui.combatroll.hud
+     101: invokestatic  #31                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     104: aload_0
+     105: invokedynamic #99,  0             // InvokeDynamic #2:m_93750_:(Lnet/combatroll/client/gui/ConfigMenuScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     110: invokestatic  #70                 // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     113: iload_3
+     114: iload         4
+     116: bipush        30
+     118: iadd
+     119: invokevirtual #74                 // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     122: iload_1
+     123: iload_2
+     124: invokevirtual #77                 // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     127: invokevirtual #81                 // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+     130: invokevirtual #85                 // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     133: pop
+     134: return
+
+  public void m_7379_();
+    Code:
+       0: aload_0
+       1: getfield      #108                // Field f_96541_:Lnet/minecraft/client/Minecraft;
+       4: aload_0
+       5: getfield      #36                 // Field previous:Lnet/minecraft/client/gui/screens/Screen;
+       8: invokevirtual #113                // Method net/minecraft/client/Minecraft.m_91152_:(Lnet/minecraft/client/gui/screens/Screen;)V
+      11: return
+
+  public void m_88315_(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #123                // Method m_280273_:(Lnet/minecraft/client/gui/GuiGraphics;)V
+       5: aload_0
+       6: aload_1
+       7: iload_2
+       8: iload_3
+       9: fload         4
+      11: invokespecial #125                // Method net/minecraft/client/gui/screens/Screen.m_88315_:(Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+      14: return
+
+  private void lambda$init$2(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: getfield      #108                // Field f_96541_:Lnet/minecraft/client/Minecraft;
+       4: new           #130                // class net/combatroll/client/gui/HudConfigScreen
+       7: dup
+       8: aload_0
+       9: invokespecial #132                // Method net/combatroll/client/gui/HudConfigScreen."<init>":(Lnet/minecraft/client/gui/screens/Screen;)V
+      12: invokevirtual #113                // Method net/minecraft/client/Minecraft.m_91152_:(Lnet/minecraft/client/gui/screens/Screen;)V
+      15: return
+
+  private void lambda$init$1(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: getfield      #108                // Field f_96541_:Lnet/minecraft/client/Minecraft;
+       4: ldc           #135                // class net/combatroll/config/ClientConfigWrapper
+       6: aload_0
+       7: invokestatic  #141                // Method me/shedaniel/autoconfig/AutoConfig.getConfigScreen:(Ljava/lang/Class;Lnet/minecraft/client/gui/screens/Screen;)Ljava/util/function/Supplier;
+      10: invokeinterface #147,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+      15: checkcast     #4                  // class net/minecraft/client/gui/screens/Screen
+      18: invokevirtual #113                // Method net/minecraft/client/Minecraft.m_91152_:(Lnet/minecraft/client/gui/screens/Screen;)V
+      21: return
+
+  private void lambda$init$0(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: invokevirtual #149                // Method m_7379_:()V
+       4: return
+}

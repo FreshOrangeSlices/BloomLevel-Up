@@ -1,0 +1,62 @@
+Compiled from "HudElement.java"
+class net.combatroll.tinyconfig.models.HudElement$1 {
+  static final int[] $SwitchMap$net$tinyconfig$models$HudElement$Origin;
+
+  static {};
+    Code:
+       0: invokestatic  #20                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.values:()[Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+       9: getstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+      12: getstatic     #26                 // Field net/combatroll/tinyconfig/models/HudElement$Origin.TOP:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      15: invokevirtual #30                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: goto          24
+      23: astore_0
+      24: getstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+      27: getstatic     #33                 // Field net/combatroll/tinyconfig/models/HudElement$Origin.TOP_LEFT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      30: invokevirtual #30                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.ordinal:()I
+      33: iconst_2
+      34: iastore
+      35: goto          39
+      38: astore_0
+      39: getstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+      42: getstatic     #36                 // Field net/combatroll/tinyconfig/models/HudElement$Origin.TOP_RIGHT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      45: invokevirtual #30                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.ordinal:()I
+      48: iconst_3
+      49: iastore
+      50: goto          54
+      53: astore_0
+      54: getstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+      57: getstatic     #39                 // Field net/combatroll/tinyconfig/models/HudElement$Origin.BOTTOM:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      60: invokevirtual #30                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.ordinal:()I
+      63: iconst_4
+      64: iastore
+      65: goto          69
+      68: astore_0
+      69: getstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+      72: getstatic     #42                 // Field net/combatroll/tinyconfig/models/HudElement$Origin.BOTTOM_LEFT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      75: invokevirtual #30                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.ordinal:()I
+      78: iconst_5
+      79: iastore
+      80: goto          84
+      83: astore_0
+      84: getstatic     #22                 // Field $SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+      87: getstatic     #45                 // Field net/combatroll/tinyconfig/models/HudElement$Origin.BOTTOM_RIGHT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      90: invokevirtual #30                 // Method net/combatroll/tinyconfig/models/HudElement$Origin.ordinal:()I
+      93: bipush        6
+      95: iastore
+      96: goto          100
+      99: astore_0
+     100: return
+    Exception table:
+       from    to  target type
+           9    20    23   Class java/lang/NoSuchFieldError
+          24    35    38   Class java/lang/NoSuchFieldError
+          39    50    53   Class java/lang/NoSuchFieldError
+          54    65    68   Class java/lang/NoSuchFieldError
+          69    80    83   Class java/lang/NoSuchFieldError
+          84    96    99   Class java/lang/NoSuchFieldError
+}

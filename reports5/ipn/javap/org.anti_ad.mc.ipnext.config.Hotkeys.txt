@@ -1,0 +1,1237 @@
+public final class org.anti_ad.mc.ipnext.config.Hotkeys implements org.anti_ad.mc.common.config.builder.ConfigDeclaration {
+  public static final org.anti_ad.mc.ipnext.config.Hotkeys INSTANCE;
+
+  static final kotlin.reflect.KProperty[] $$delegatedProperties;
+
+  private static final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder builder;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate OPEN_CONFIG_MENU$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate RELOAD_CUSTOM_CONFIGS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SORT_INVENTORY$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SORT_INVENTORY_IN_COLUMNS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SORT_INVENTORY_IN_ROWS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate MOVE_ALL_ITEMS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate THROW_ALL_ITEMS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_TO_CHEST$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SCROLL_TO_INVENTORY$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate OPEN_GUI_EDITOR$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate APPLY_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate NEXT_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate PREV_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate PROFILE_1$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate PROFILE_2$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate PROFILE_3$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SAVE_AS_PROFILE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate GLOBAL_BOOKMARK_TRADE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCAL_BOOKMARK_TRADE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DO_GLOBAL_TRADE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DO_LOCAL_TRADE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate GLOBAL_BOOKMARK_TRADE1$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCAL_BOOKMARK_TRADE1$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DO_GLOBAL_TRADE1$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DO_LOCAL_TRADE1$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate GLOBAL_BOOKMARK_TRADE2$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCAL_BOOKMARK_TRADE2$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DO_GLOBAL_TRADE2$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DO_LOCAL_TRADE2$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate DUMP_ITEM_NBT_TO_CHAT$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate COPY_NBT$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate COPY_ITEM_ID$delegate;
+
+  private org.anti_ad.mc.ipnext.config.Hotkeys();
+    Code:
+       0: aload_0
+       1: invokespecial #50                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder getBuilder();
+    Code:
+       0: getstatic     #54                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+       3: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getOPEN_CONFIG_MENU();
+    Code:
+       0: getstatic     #58                 // Field OPEN_CONFIG_MENU$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getRELOAD_CUSTOM_CONFIGS();
+    Code:
+       0: getstatic     #71                 // Field RELOAD_CUSTOM_CONFIGS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_1
+       8: aaload
+       9: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSORT_INVENTORY();
+    Code:
+       0: getstatic     #74                 // Field SORT_INVENTORY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_2
+       8: aaload
+       9: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSORT_INVENTORY_IN_COLUMNS();
+    Code:
+       0: getstatic     #77                 // Field SORT_INVENTORY_IN_COLUMNS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_3
+       8: aaload
+       9: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSORT_INVENTORY_IN_ROWS();
+    Code:
+       0: getstatic     #80                 // Field SORT_INVENTORY_IN_ROWS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_4
+       8: aaload
+       9: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getMOVE_ALL_ITEMS();
+    Code:
+       0: getstatic     #83                 // Field MOVE_ALL_ITEMS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_5
+       8: aaload
+       9: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getTHROW_ALL_ITEMS();
+    Code:
+       0: getstatic     #86                 // Field THROW_ALL_ITEMS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        6
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSCROLL_TO_CHEST();
+    Code:
+       0: getstatic     #89                 // Field SCROLL_TO_CHEST$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        7
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSCROLL_TO_INVENTORY();
+    Code:
+       0: getstatic     #92                 // Field SCROLL_TO_INVENTORY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        8
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getOPEN_GUI_EDITOR();
+    Code:
+       0: getstatic     #95                 // Field OPEN_GUI_EDITOR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        9
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getAPPLY_PROFILE();
+    Code:
+       0: getstatic     #98                 // Field APPLY_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        10
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getNEXT_PROFILE();
+    Code:
+       0: getstatic     #101                // Field NEXT_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        11
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getPREV_PROFILE();
+    Code:
+       0: getstatic     #104                // Field PREV_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        12
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getPROFILE_1();
+    Code:
+       0: getstatic     #107                // Field PROFILE_1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        13
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getPROFILE_2();
+    Code:
+       0: getstatic     #110                // Field PROFILE_2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        14
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getPROFILE_3();
+    Code:
+       0: getstatic     #113                // Field PROFILE_3$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        15
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getSAVE_AS_PROFILE();
+    Code:
+       0: getstatic     #116                // Field SAVE_AS_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        16
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getGLOBAL_BOOKMARK_TRADE();
+    Code:
+       0: getstatic     #119                // Field GLOBAL_BOOKMARK_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        17
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCAL_BOOKMARK_TRADE();
+    Code:
+       0: getstatic     #122                // Field LOCAL_BOOKMARK_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        18
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDO_GLOBAL_TRADE();
+    Code:
+       0: getstatic     #125                // Field DO_GLOBAL_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        19
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDO_LOCAL_TRADE();
+    Code:
+       0: getstatic     #128                // Field DO_LOCAL_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        20
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getGLOBAL_BOOKMARK_TRADE1();
+    Code:
+       0: getstatic     #131                // Field GLOBAL_BOOKMARK_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        21
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCAL_BOOKMARK_TRADE1();
+    Code:
+       0: getstatic     #134                // Field LOCAL_BOOKMARK_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        22
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDO_GLOBAL_TRADE1();
+    Code:
+       0: getstatic     #137                // Field DO_GLOBAL_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        23
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDO_LOCAL_TRADE1();
+    Code:
+       0: getstatic     #140                // Field DO_LOCAL_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        24
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getGLOBAL_BOOKMARK_TRADE2();
+    Code:
+       0: getstatic     #143                // Field GLOBAL_BOOKMARK_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        25
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCAL_BOOKMARK_TRADE2();
+    Code:
+       0: getstatic     #146                // Field LOCAL_BOOKMARK_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        26
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDO_GLOBAL_TRADE2();
+    Code:
+       0: getstatic     #149                // Field DO_GLOBAL_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        27
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDO_LOCAL_TRADE2();
+    Code:
+       0: getstatic     #152                // Field DO_LOCAL_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        28
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getDUMP_ITEM_NBT_TO_CHAT();
+    Code:
+       0: getstatic     #155                // Field DUMP_ITEM_NBT_TO_CHAT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        29
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getCOPY_NBT();
+    Code:
+       0: getstatic     #158                // Field COPY_NBT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        30
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getCOPY_ITEM_ID();
+    Code:
+       0: getstatic     #161                // Field COPY_ITEM_ID$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        31
+       9: aaload
+      10: invokevirtual #66                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #68                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  static {};
+    Code:
+       0: bipush        32
+       2: anewarray     #164                // class kotlin/reflect/KProperty
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+      11: dup
+      12: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+      14: ldc           #168                // String OPEN_CONFIG_MENU
+      16: ldc           #170                // String getOPEN_CONFIG_MENU()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      18: iconst_0
+      19: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      22: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+      25: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      28: aastore
+      29: aload_0
+      30: iconst_1
+      31: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+      34: dup
+      35: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+      37: ldc           #183                // String RELOAD_CUSTOM_CONFIGS
+      39: ldc           #185                // String getRELOAD_CUSTOM_CONFIGS()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      41: iconst_0
+      42: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      45: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+      48: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      51: aastore
+      52: aload_0
+      53: iconst_2
+      54: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+      57: dup
+      58: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+      60: ldc           #187                // String SORT_INVENTORY
+      62: ldc           #189                // String getSORT_INVENTORY()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      64: iconst_0
+      65: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      68: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+      71: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      74: aastore
+      75: aload_0
+      76: iconst_3
+      77: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+      80: dup
+      81: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+      83: ldc           #191                // String SORT_INVENTORY_IN_COLUMNS
+      85: ldc           #193                // String getSORT_INVENTORY_IN_COLUMNS()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+      87: iconst_0
+      88: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      91: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+      94: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      97: aastore
+      98: aload_0
+      99: iconst_4
+     100: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     103: dup
+     104: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     106: ldc           #195                // String SORT_INVENTORY_IN_ROWS
+     108: ldc           #197                // String getSORT_INVENTORY_IN_ROWS()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     110: iconst_0
+     111: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     114: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     117: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     120: aastore
+     121: aload_0
+     122: iconst_5
+     123: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     126: dup
+     127: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     129: ldc           #199                // String MOVE_ALL_ITEMS
+     131: ldc           #201                // String getMOVE_ALL_ITEMS()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     133: iconst_0
+     134: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     137: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     140: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     143: aastore
+     144: aload_0
+     145: bipush        6
+     147: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     150: dup
+     151: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     153: ldc           #203                // String THROW_ALL_ITEMS
+     155: ldc           #205                // String getTHROW_ALL_ITEMS()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     157: iconst_0
+     158: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     161: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     164: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     167: aastore
+     168: aload_0
+     169: bipush        7
+     171: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     174: dup
+     175: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     177: ldc           #207                // String SCROLL_TO_CHEST
+     179: ldc           #209                // String getSCROLL_TO_CHEST()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     181: iconst_0
+     182: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     185: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     188: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     191: aastore
+     192: aload_0
+     193: bipush        8
+     195: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     198: dup
+     199: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     201: ldc           #211                // String SCROLL_TO_INVENTORY
+     203: ldc           #213                // String getSCROLL_TO_INVENTORY()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     205: iconst_0
+     206: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     209: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     212: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     215: aastore
+     216: aload_0
+     217: bipush        9
+     219: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     222: dup
+     223: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     225: ldc           #215                // String OPEN_GUI_EDITOR
+     227: ldc           #217                // String getOPEN_GUI_EDITOR()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     229: iconst_0
+     230: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     233: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     236: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     239: aastore
+     240: aload_0
+     241: bipush        10
+     243: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     246: dup
+     247: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     249: ldc           #219                // String APPLY_PROFILE
+     251: ldc           #221                // String getAPPLY_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     253: iconst_0
+     254: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     257: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     260: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     263: aastore
+     264: aload_0
+     265: bipush        11
+     267: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     270: dup
+     271: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     273: ldc           #223                // String NEXT_PROFILE
+     275: ldc           #225                // String getNEXT_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     277: iconst_0
+     278: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     281: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     284: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     287: aastore
+     288: aload_0
+     289: bipush        12
+     291: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     294: dup
+     295: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     297: ldc           #227                // String PREV_PROFILE
+     299: ldc           #229                // String getPREV_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     301: iconst_0
+     302: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     305: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     308: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     311: aastore
+     312: aload_0
+     313: bipush        13
+     315: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     318: dup
+     319: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     321: ldc           #231                // String PROFILE_1
+     323: ldc           #233                // String getPROFILE_1()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     325: iconst_0
+     326: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     329: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     332: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     335: aastore
+     336: aload_0
+     337: bipush        14
+     339: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     342: dup
+     343: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     345: ldc           #235                // String PROFILE_2
+     347: ldc           #237                // String getPROFILE_2()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     349: iconst_0
+     350: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     353: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     356: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     359: aastore
+     360: aload_0
+     361: bipush        15
+     363: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     366: dup
+     367: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     369: ldc           #239                // String PROFILE_3
+     371: ldc           #241                // String getPROFILE_3()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     373: iconst_0
+     374: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     377: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     380: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     383: aastore
+     384: aload_0
+     385: bipush        16
+     387: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     390: dup
+     391: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     393: ldc           #243                // String SAVE_AS_PROFILE
+     395: ldc           #245                // String getSAVE_AS_PROFILE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     397: iconst_0
+     398: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     401: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     404: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     407: aastore
+     408: aload_0
+     409: bipush        17
+     411: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     414: dup
+     415: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     417: ldc           #247                // String GLOBAL_BOOKMARK_TRADE
+     419: ldc           #249                // String getGLOBAL_BOOKMARK_TRADE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     421: iconst_0
+     422: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     425: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     428: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     431: aastore
+     432: aload_0
+     433: bipush        18
+     435: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     438: dup
+     439: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     441: ldc           #251                // String LOCAL_BOOKMARK_TRADE
+     443: ldc           #253                // String getLOCAL_BOOKMARK_TRADE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     445: iconst_0
+     446: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     449: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     452: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     455: aastore
+     456: aload_0
+     457: bipush        19
+     459: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     462: dup
+     463: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     465: ldc           #255                // String DO_GLOBAL_TRADE
+     467: ldc_w         #257                // String getDO_GLOBAL_TRADE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     470: iconst_0
+     471: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     474: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     477: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     480: aastore
+     481: aload_0
+     482: bipush        20
+     484: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     487: dup
+     488: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     490: ldc_w         #259                // String DO_LOCAL_TRADE
+     493: ldc_w         #261                // String getDO_LOCAL_TRADE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     496: iconst_0
+     497: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     500: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     503: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     506: aastore
+     507: aload_0
+     508: bipush        21
+     510: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     513: dup
+     514: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     516: ldc_w         #263                // String GLOBAL_BOOKMARK_TRADE1
+     519: ldc_w         #265                // String getGLOBAL_BOOKMARK_TRADE1()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     522: iconst_0
+     523: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     526: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     529: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     532: aastore
+     533: aload_0
+     534: bipush        22
+     536: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     539: dup
+     540: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     542: ldc_w         #267                // String LOCAL_BOOKMARK_TRADE1
+     545: ldc_w         #269                // String getLOCAL_BOOKMARK_TRADE1()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     548: iconst_0
+     549: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     552: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     555: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     558: aastore
+     559: aload_0
+     560: bipush        23
+     562: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     565: dup
+     566: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     568: ldc_w         #271                // String DO_GLOBAL_TRADE1
+     571: ldc_w         #273                // String getDO_GLOBAL_TRADE1()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     574: iconst_0
+     575: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     578: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     581: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     584: aastore
+     585: aload_0
+     586: bipush        24
+     588: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     591: dup
+     592: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     594: ldc_w         #275                // String DO_LOCAL_TRADE1
+     597: ldc_w         #277                // String getDO_LOCAL_TRADE1()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     600: iconst_0
+     601: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     604: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     607: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     610: aastore
+     611: aload_0
+     612: bipush        25
+     614: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     617: dup
+     618: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     620: ldc_w         #279                // String GLOBAL_BOOKMARK_TRADE2
+     623: ldc_w         #281                // String getGLOBAL_BOOKMARK_TRADE2()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     626: iconst_0
+     627: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     630: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     633: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     636: aastore
+     637: aload_0
+     638: bipush        26
+     640: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     643: dup
+     644: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     646: ldc_w         #283                // String LOCAL_BOOKMARK_TRADE2
+     649: ldc_w         #285                // String getLOCAL_BOOKMARK_TRADE2()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     652: iconst_0
+     653: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     656: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     659: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     662: aastore
+     663: aload_0
+     664: bipush        27
+     666: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     669: dup
+     670: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     672: ldc_w         #287                // String DO_GLOBAL_TRADE2
+     675: ldc_w         #289                // String getDO_GLOBAL_TRADE2()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     678: iconst_0
+     679: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     682: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     685: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     688: aastore
+     689: aload_0
+     690: bipush        28
+     692: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     695: dup
+     696: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     698: ldc_w         #291                // String DO_LOCAL_TRADE2
+     701: ldc_w         #293                // String getDO_LOCAL_TRADE2()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     704: iconst_0
+     705: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     708: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     711: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     714: aastore
+     715: aload_0
+     716: bipush        29
+     718: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     721: dup
+     722: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     724: ldc_w         #295                // String DUMP_ITEM_NBT_TO_CHAT
+     727: ldc_w         #297                // String getDUMP_ITEM_NBT_TO_CHAT()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     730: iconst_0
+     731: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     734: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     737: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     740: aastore
+     741: aload_0
+     742: bipush        30
+     744: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     747: dup
+     748: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     750: ldc_w         #299                // String COPY_NBT
+     753: ldc_w         #301                // String getCOPY_NBT()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     756: iconst_0
+     757: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     760: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     763: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     766: aastore
+     767: aload_0
+     768: bipush        31
+     770: new           #166                // class kotlin/jvm/internal/PropertyReference1Impl
+     773: dup
+     774: ldc           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     776: ldc_w         #303                // String COPY_ITEM_ID
+     779: ldc_w         #305                // String getCOPY_ITEM_ID()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     782: iconst_0
+     783: invokespecial #173                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     786: checkcast     #175                // class kotlin/jvm/internal/PropertyReference1
+     789: invokestatic  #181                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     792: aastore
+     793: aload_0
+     794: putstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     797: new           #2                  // class org/anti_ad/mc/ipnext/config/Hotkeys
+     800: dup
+     801: invokespecial #306                // Method "<init>":()V
+     804: dup
+     805: putstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     808: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     811: invokestatic  #314                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.createBuilder:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     814: ldc_w         #316                // String inventoryprofiles.config.category.hotkeys
+     817: invokestatic  #320                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     820: putstatic     #54                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     823: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     826: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     829: ldc_w         #322                // String R,C
+     832: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     835: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     838: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     841: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     844: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     847: iconst_0
+     848: aaload
+     849: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     852: putstatic     #58                 // Field OPEN_CONFIG_MENU$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     855: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     858: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     861: ldc_w         #346                // String R,Y
+     864: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     867: invokevirtual #349                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getANY_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     870: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     873: ldc_w         #351                // String inventoryprofiles.config.category.inventory
+     876: invokestatic  #354                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     879: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     882: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     885: iconst_1
+     886: aaload
+     887: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     890: putstatic     #71                 // Field RELOAD_CUSTOM_CONFIGS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     893: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     896: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     899: ldc_w         #356                // String R
+     902: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     905: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     908: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     911: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     914: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     917: iconst_2
+     918: aaload
+     919: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     922: putstatic     #74                 // Field SORT_INVENTORY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     925: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     928: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     931: ldc_w         #361                // String
+     934: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     937: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     940: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     943: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     946: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     949: iconst_3
+     950: aaload
+     951: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     954: putstatic     #77                 // Field SORT_INVENTORY_IN_COLUMNS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     957: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     960: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     963: ldc_w         #361                // String
+     966: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     969: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     972: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     975: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     978: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     981: iconst_4
+     982: aaload
+     983: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     986: putstatic     #80                 // Field SORT_INVENTORY_IN_ROWS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     989: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+     992: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     995: ldc_w         #363                // String R,T
+     998: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1001: invokevirtual #366                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1004: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1007: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1010: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1013: iconst_5
+    1014: aaload
+    1015: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1018: putstatic     #83                 // Field MOVE_ALL_ITEMS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1021: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1024: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1027: ldc_w         #368                // String R,M
+    1030: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1033: invokevirtual #366                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1036: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1039: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1042: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1045: bipush        6
+    1047: aaload
+    1048: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1051: putstatic     #86                 // Field THROW_ALL_ITEMS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1054: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1057: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1060: ldc_w         #370                // String MOUSE_SCROLL_UP
+    1063: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1066: invokevirtual #366                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1069: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1072: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1075: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1078: bipush        7
+    1080: aaload
+    1081: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1084: putstatic     #89                 // Field SCROLL_TO_CHEST$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1087: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1090: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1093: ldc_w         #372                // String MOUSE_SCROLL_DOWN
+    1096: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1099: invokevirtual #366                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1102: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1105: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1108: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1111: bipush        8
+    1113: aaload
+    1114: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1117: putstatic     #92                 // Field SCROLL_TO_INVENTORY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1120: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1123: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1126: ldc_w         #374                // String R,G
+    1129: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1132: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1135: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1138: ldc_w         #376                // String inventoryprofiles.config.category.profiles
+    1141: invokestatic  #354                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1144: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1147: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1150: bipush        9
+    1152: aaload
+    1153: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1156: putstatic     #95                 // Field OPEN_GUI_EDITOR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1159: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1162: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1165: ldc_w         #378                // String R,H
+    1168: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1171: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1174: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1177: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1180: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1183: bipush        10
+    1185: aaload
+    1186: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1189: putstatic     #98                 // Field APPLY_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1192: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1195: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1198: ldc_w         #380                // String R,Z
+    1201: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1204: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1207: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1210: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1213: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1216: bipush        11
+    1218: aaload
+    1219: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1222: putstatic     #101                // Field NEXT_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1225: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1228: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1231: ldc_w         #382                // String R,X
+    1234: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1237: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1240: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1243: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1246: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1249: bipush        12
+    1251: aaload
+    1252: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1255: putstatic     #104                // Field PREV_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1258: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1261: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1264: ldc_w         #384                // String R,1
+    1267: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1270: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1273: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1276: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1279: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1282: bipush        13
+    1284: aaload
+    1285: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1288: putstatic     #107                // Field PROFILE_1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1291: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1294: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1297: ldc_w         #386                // String R,2
+    1300: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1303: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1306: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1309: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1312: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1315: bipush        14
+    1317: aaload
+    1318: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1321: putstatic     #110                // Field PROFILE_2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1324: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1327: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1330: ldc_w         #388                // String R,3
+    1333: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1336: invokevirtual #334                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getINGAME_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1339: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1342: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1345: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1348: bipush        15
+    1350: aaload
+    1351: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1354: putstatic     #113                // Field PROFILE_3$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1357: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1360: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1363: ldc_w         #390                // String R,P
+    1366: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1369: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1372: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1375: ldc_w         #392                // String inventoryprofiles.config.category.villager_trading
+    1378: invokestatic  #354                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1381: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1384: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1387: bipush        16
+    1389: aaload
+    1390: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1393: putstatic     #116                // Field SAVE_AS_PROFILE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1396: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1399: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1402: ldc_w         #394                // String B
+    1405: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1408: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1411: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1414: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1417: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1420: bipush        17
+    1422: aaload
+    1423: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1426: putstatic     #119                // Field GLOBAL_BOOKMARK_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1429: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1432: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1435: ldc_w         #396                // String L
+    1438: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1441: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1444: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1447: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1450: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1453: bipush        18
+    1455: aaload
+    1456: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1459: putstatic     #122                // Field LOCAL_BOOKMARK_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1462: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1465: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1468: ldc_w         #398                // String T
+    1471: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1474: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1477: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1480: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1483: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1486: bipush        19
+    1488: aaload
+    1489: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1492: putstatic     #125                // Field DO_GLOBAL_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1495: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1498: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1501: ldc_w         #400                // String LEFT_SHIFT,T
+    1504: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1507: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1510: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1513: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1516: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1519: bipush        20
+    1521: aaload
+    1522: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1525: putstatic     #128                // Field DO_LOCAL_TRADE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1528: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1531: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1534: ldc_w         #361                // String
+    1537: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1540: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1543: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1546: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1549: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1552: bipush        21
+    1554: aaload
+    1555: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1558: putstatic     #131                // Field GLOBAL_BOOKMARK_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1561: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1564: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1567: ldc_w         #361                // String
+    1570: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1573: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1576: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1579: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1582: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1585: bipush        22
+    1587: aaload
+    1588: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1591: putstatic     #134                // Field LOCAL_BOOKMARK_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1594: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1597: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1600: ldc_w         #361                // String
+    1603: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1606: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1609: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1612: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1615: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1618: bipush        23
+    1620: aaload
+    1621: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1624: putstatic     #137                // Field DO_GLOBAL_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1627: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1630: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1633: ldc_w         #361                // String
+    1636: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1639: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1642: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1645: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1648: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1651: bipush        24
+    1653: aaload
+    1654: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1657: putstatic     #140                // Field DO_LOCAL_TRADE1$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1660: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1663: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1666: ldc_w         #361                // String
+    1669: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1672: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1675: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1678: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1681: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1684: bipush        25
+    1686: aaload
+    1687: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1690: putstatic     #143                // Field GLOBAL_BOOKMARK_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1693: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1696: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1699: ldc_w         #361                // String
+    1702: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1705: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1708: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1711: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1714: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1717: bipush        26
+    1719: aaload
+    1720: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1723: putstatic     #146                // Field LOCAL_BOOKMARK_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1726: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1729: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1732: ldc_w         #361                // String
+    1735: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1738: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1741: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1744: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1747: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1750: bipush        27
+    1752: aaload
+    1753: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1756: putstatic     #149                // Field DO_GLOBAL_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1759: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1762: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1765: ldc_w         #361                // String
+    1768: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1771: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1774: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1777: ldc_w         #402                // String inventoryprofiles.config.category.misc
+    1780: invokestatic  #354                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1783: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1786: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1789: bipush        28
+    1791: aaload
+    1792: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1795: putstatic     #152                // Field DO_LOCAL_TRADE2$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1798: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1801: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1804: ldc_w         #361                // String
+    1807: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1810: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1813: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1816: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1819: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1822: bipush        29
+    1824: aaload
+    1825: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1828: putstatic     #155                // Field DUMP_ITEM_NBT_TO_CHAT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1831: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1834: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1837: ldc_w         #404                // String LEFT_CONTROL,C
+    1840: getstatic     #328                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+    1843: invokevirtual #359                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+    1846: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1849: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1852: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1855: bipush        30
+    1857: aaload
+    1858: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1861: putstatic     #158                // Field COPY_NBT$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1864: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1867: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1870: ldc_w         #406                // String LEFT_CONTROL,LEFT_SHIFT,C
+    1873: new           #324                // class org/anti_ad/mc/common/input/KeybindSettings
+    1876: dup
+    1877: getstatic     #412                // Field org/anti_ad/mc/common/input/KeybindSettings$Context.GUI:Lorg/anti_ad/mc/common/input/KeybindSettings$Context;
+    1880: getstatic     #418                // Field org/anti_ad/mc/common/input/KeybindSettings$KeyAction.PRESS:Lorg/anti_ad/mc/common/input/KeybindSettings$KeyAction;
+    1883: iconst_0
+    1884: iconst_0
+    1885: aconst_null
+    1886: bipush        16
+    1888: aconst_null
+    1889: invokespecial #421                // Method org/anti_ad/mc/common/input/KeybindSettings."<init>":(Lorg/anti_ad/mc/common/input/KeybindSettings$Context;Lorg/anti_ad/mc/common/input/KeybindSettings$KeyAction;ZZLorg/anti_ad/mc/common/input/KeybindSettings$ModifierKey;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+    1892: invokestatic  #338                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1895: getstatic     #308                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/Hotkeys;
+    1898: getstatic     #60                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1901: bipush        31
+    1903: aaload
+    1904: invokevirtual #344                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1907: putstatic     #161                // Field COPY_ITEM_ID$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1910: return
+}

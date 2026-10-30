@@ -1,0 +1,39 @@
+Compiled from "SpireShellEvents.java"
+public class net.saksolm.monsterexpansion.event.SpireShellEvents$ClientEvents {
+  public net.saksolm.monsterexpansion.event.SpireShellEvents$ClientEvents();
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$PlayerTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #44                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #47                 // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpne     65
+      10: aload_0
+      11: getfield      #51                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.side:Lnet/minecraftforge/fml/LogicalSide;
+      14: invokevirtual #57                 // Method net/minecraftforge/fml/LogicalSide.isClient:()Z
+      17: ifeq          65
+      20: aload_0
+      21: getfield      #61                 // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      24: astore_1
+      25: aload_1
+      26: invokevirtual #66                 // Method net/minecraft/world/entity/player/Player.m_6117_:()Z
+      29: ifeq          65
+      32: aload_1
+      33: invokevirtual #70                 // Method net/minecraft/world/entity/player/Player.m_21211_:()Lnet/minecraft/world/item/ItemStack;
+      36: invokevirtual #76                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      39: instanceof    #78                 // class net/saksolm/monsterexpansion/item/SpireShellBulwarkItem
+      42: ifeq          65
+      45: invokestatic  #84                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      48: getfield      #88                 // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      51: getfield      #94                 // Field net/minecraft/client/Options.f_92091_:Lnet/minecraft/client/KeyMapping;
+      54: invokevirtual #99                 // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      57: ifeq          65
+      60: aload_1
+      61: iconst_1
+      62: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_6858_:(Z)V
+      65: return
+}

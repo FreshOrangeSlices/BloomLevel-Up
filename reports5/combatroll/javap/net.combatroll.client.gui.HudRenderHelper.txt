@@ -1,0 +1,461 @@
+Compiled from "HudRenderHelper.java"
+public class net.combatroll.client.gui.HudRenderHelper {
+  private static final net.minecraft.resources.ResourceLocation ARROW;
+
+  private static final net.minecraft.resources.ResourceLocation ARROW_BACKGROUND;
+
+  public net.combatroll.client.gui.HudRenderHelper();
+    Code:
+       0: aload_0
+       1: invokespecial #46                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void render(net.minecraft.client.gui.GuiGraphics, float);
+    Code:
+       0: getstatic     #58                 // Field net/combatroll/client/CombatRollClient.config:Lnet/combatroll/config/ClientConfig;
+       3: astore_2
+       4: invokestatic  #64                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       7: astore_3
+       8: aload_3
+       9: getfield      #68                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      12: astore        4
+      14: aload         4
+      16: ifnonnull     27
+      19: invokestatic  #72                 // Method net/combatroll/client/gui/HudRenderHelper$ViewModel.mock:()Lnet/combatroll/client/gui/HudRenderHelper$ViewModel;
+      22: astore        5
+      24: goto          100
+      27: aload         4
+      29: invokevirtual #78                 // Method net/minecraft/client/player/LocalPlayer.m_7500_:()Z
+      32: ifeq          43
+      35: aload_2
+      36: getfield      #82                 // Field net/combatroll/config/ClientConfig.showHUDInCreative:Z
+      39: ifne          43
+      42: return
+      43: aload         4
+      45: invokevirtual #85                 // Method net/minecraft/client/player/LocalPlayer.m_5833_:()Z
+      48: ifeq          52
+      51: return
+      52: aload         4
+      54: checkcast     #87                 // class net/combatroll/internals/RollingEntity
+      57: astore        6
+      59: aload         6
+      61: invokeinterface #91,  1           // InterfaceMethod net/combatroll/internals/RollingEntity.getRollManager:()Lnet/combatroll/internals/RollManager;
+      66: invokevirtual #95                 // Method net/combatroll/internals/RollManager.getCooldown:()Lnet/combatroll/internals/RollManager$CooldownInfo;
+      69: astore        7
+      71: aload_2
+      72: getfield      #98                 // Field net/combatroll/config/ClientConfig.showWhenFull:Z
+      75: ifne          92
+      78: aload         7
+      80: invokevirtual #102                // Method net/combatroll/internals/RollManager$CooldownInfo.availableRolls:()I
+      83: aload         7
+      85: invokevirtual #105                // Method net/combatroll/internals/RollManager$CooldownInfo.maxRolls:()I
+      88: if_icmpne     92
+      91: return
+      92: aload         7
+      94: fload_1
+      95: invokestatic  #109                // Method net/combatroll/client/gui/HudRenderHelper$ViewModel.create:(Lnet/combatroll/internals/RollManager$CooldownInfo;F)Lnet/combatroll/client/gui/HudRenderHelper$ViewModel;
+      98: astore        5
+     100: aload_3
+     101: invokevirtual #115                // Method net/minecraft/client/Minecraft.m_91268_:()Lcom/mojang/blaze3d/platform/Window;
+     104: invokevirtual #120                // Method com/mojang/blaze3d/platform/Window.m_85445_:()I
+     107: istore        6
+     109: aload_3
+     110: invokevirtual #115                // Method net/minecraft/client/Minecraft.m_91268_:()Lcom/mojang/blaze3d/platform/Window;
+     113: invokevirtual #123                // Method com/mojang/blaze3d/platform/Window.m_85446_:()I
+     116: istore        7
+     118: getstatic     #127                // Field net/combatroll/client/CombatRollClient.hudConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+     121: getfield      #133                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+     124: checkcast     #135                // class net/combatroll/config/HudConfig
+     127: getfield      #139                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+     130: astore        8
+     132: aload         8
+     134: getfield      #143                // Field net/combatroll/client/gui/HudElement.origin:Lnet/combatroll/client/gui/HudElement$Origin;
+     137: iload         6
+     139: iload         7
+     141: invokevirtual #147                // Method net/combatroll/client/gui/HudElement$Origin.getPoint:(II)Lnet/minecraft/world/phys/Vec2;
+     144: astore        9
+     146: aload         8
+     148: getfield      #151                // Field net/combatroll/client/gui/HudElement.offset:Lnet/minecraft/world/phys/Vec2;
+     151: astore        10
+     153: bipush        8
+     155: istore        11
+     157: bipush        15
+     159: istore        12
+     161: iload         12
+     163: iload         11
+     165: aload         5
+     167: getfield      #155                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel.elements:Ljava/util/List;
+     170: invokeinterface #160,  1          // InterfaceMethod java/util/List.size:()I
+     175: imul
+     176: iadd
+     177: istore        13
+     179: iload         12
+     181: istore        14
+     183: aload         9
+     185: getfield      #166                // Field net/minecraft/world/phys/Vec2.f_82470_:F
+     188: aload         10
+     190: getfield      #166                // Field net/minecraft/world/phys/Vec2.f_82470_:F
+     193: fadd
+     194: f2i
+     195: istore        15
+     197: aload         9
+     199: getfield      #169                // Field net/minecraft/world/phys/Vec2.f_82471_:F
+     202: aload         10
+     204: getfield      #169                // Field net/minecraft/world/phys/Vec2.f_82471_:F
+     207: fadd
+     208: iload         14
+     210: iconst_2
+     211: idiv
+     212: i2f
+     213: fsub
+     214: f2i
+     215: istore        16
+     217: iconst_0
+     218: istore        17
+     220: invokestatic  #174                // Method com/mojang/blaze3d/systems/RenderSystem.enableBlend:()V
+     223: aload         5
+     225: invokevirtual #177                // Method net/combatroll/client/gui/HudRenderHelper$ViewModel.elements:()Ljava/util/List;
+     228: invokeinterface #181,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     233: astore        18
+     235: aload         18
+     237: invokeinterface #186,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     242: ifeq          512
+     245: aload         18
+     247: invokeinterface #190,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     252: checkcast     #11                 // class net/combatroll/client/gui/HudRenderHelper$ViewModel$Element
+     255: astore        19
+     257: iconst_0
+     258: istore        20
+     260: iconst_0
+     261: istore        21
+     263: iconst_0
+     264: istore        22
+     266: iconst_0
+     267: istore        23
+     269: iconst_0
+     270: istore        24
+     272: iconst_0
+     273: istore        25
+     275: iconst_0
+     276: istore        26
+     278: iload         15
+     280: iload         17
+     282: iadd
+     283: istore        20
+     285: iload         16
+     287: istore        21
+     289: iconst_0
+     290: istore        22
+     292: iconst_0
+     293: istore        23
+     295: bipush        15
+     297: dup
+     298: istore        26
+     300: dup
+     301: istore        25
+     303: istore        24
+     305: aload_0
+     306: fconst_1
+     307: fconst_1
+     308: fconst_1
+     309: aload_2
+     310: getfield      #194                // Field net/combatroll/config/ClientConfig.hudBackgroundOpacity:I
+     313: i2f
+     314: ldc           #195                // float 100.0f
+     316: fdiv
+     317: invokevirtual #199                // Method net/minecraft/client/gui/GuiGraphics.m_280246_:(FFFF)V
+     320: aload_0
+     321: getstatic     #201                // Field ARROW_BACKGROUND:Lnet/minecraft/resources/ResourceLocation;
+     324: iload         20
+     326: iload         21
+     328: iload         22
+     330: i2f
+     331: iload         23
+     333: i2f
+     334: iload         24
+     336: iload         25
+     338: iload         26
+     340: iload         26
+     342: invokevirtual #205                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+     345: aload         19
+     347: getfield      #208                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel$Element.color:I
+     350: istore        27
+     352: iload         27
+     354: bipush        16
+     356: ishr
+     357: sipush        255
+     360: iand
+     361: i2f
+     362: ldc           #209                // float 255.0f
+     364: fdiv
+     365: fstore        28
+     367: iload         27
+     369: bipush        8
+     371: ishr
+     372: sipush        255
+     375: iand
+     376: i2f
+     377: ldc           #209                // float 255.0f
+     379: fdiv
+     380: fstore        29
+     382: iload         27
+     384: sipush        255
+     387: iand
+     388: i2f
+     389: ldc           #209                // float 255.0f
+     391: fdiv
+     392: fstore        30
+     394: iload         26
+     396: istore        31
+     398: bipush        13
+     400: istore        26
+     402: iload         31
+     404: iload         26
+     406: isub
+     407: iconst_2
+     408: idiv
+     409: istore        32
+     411: iload         26
+     413: istore        24
+     415: aload         19
+     417: getfield      #212                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel$Element.full:F
+     420: iload         26
+     422: i2f
+     423: fmul
+     424: invokestatic  #218                // Method java/lang/Math.round:(F)I
+     427: istore        25
+     429: iload         15
+     431: iload         17
+     433: iadd
+     434: iload         32
+     436: iadd
+     437: istore        20
+     439: iload         16
+     441: iload         26
+     443: iadd
+     444: iload         25
+     446: isub
+     447: iload         32
+     449: iadd
+     450: istore        21
+     452: iconst_0
+     453: istore        22
+     455: iload         26
+     457: iload         25
+     459: isub
+     460: istore        23
+     462: aload_0
+     463: fload         28
+     465: fload         29
+     467: fload         30
+     469: aload         19
+     471: getfield      #212                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel$Element.full:F
+     474: invokevirtual #199                // Method net/minecraft/client/gui/GuiGraphics.m_280246_:(FFFF)V
+     477: aload_0
+     478: getstatic     #220                // Field ARROW:Lnet/minecraft/resources/ResourceLocation;
+     481: iload         20
+     483: iload         21
+     485: iload         22
+     487: i2f
+     488: iload         23
+     490: i2f
+     491: iload         24
+     493: iload         25
+     495: iload         26
+     497: iload         26
+     499: invokevirtual #205                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+     502: iload         17
+     504: iload         11
+     506: iadd
+     507: istore        17
+     509: goto          235
+     512: aload_0
+     513: fconst_1
+     514: fconst_1
+     515: fconst_1
+     516: fconst_1
+     517: invokevirtual #199                // Method net/minecraft/client/gui/GuiGraphics.m_280246_:(FFFF)V
+     520: aload_2
+     521: getfield      #223                // Field net/combatroll/config/ClientConfig.showKeybinding:Z
+     524: ifeq          875
+     527: aload_3
+     528: getfield      #227                // Field net/minecraft/client/Minecraft.f_91065_:Lnet/minecraft/client/gui/Gui;
+     531: invokevirtual #233                // Method net/minecraft/client/gui/Gui.m_93082_:()Lnet/minecraft/client/gui/Font;
+     534: astore        18
+     536: iload         15
+     538: iload         17
+     540: iconst_2
+     541: idiv
+     542: iadd
+     543: istore        19
+     545: iload         16
+     547: iconst_1
+     548: iadd
+     549: istore        20
+     551: getstatic     #237                // Field net/combatroll/client/gui/Drawable$Anchor.CENTER:Lnet/combatroll/client/gui/Drawable$Anchor;
+     554: astore        21
+     556: getstatic     #240                // Field net/combatroll/client/gui/Drawable$Anchor.TRAILING:Lnet/combatroll/client/gui/Drawable$Anchor;
+     559: astore        22
+     561: getstatic     #244                // Field net/combatroll/client/gui/HudRenderHelper$1.$SwitchMap$net$combatroll$config$ClientConfig$LabelPosition:[I
+     564: aload_2
+     565: getfield      #248                // Field net/combatroll/config/ClientConfig.keybindingLabelPosition:Lnet/combatroll/config/ClientConfig$LabelPosition;
+     568: invokevirtual #251                // Method net/combatroll/config/ClientConfig$LabelPosition.ordinal:()I
+     571: iaload
+     572: lookupswitch  { // 2
+                     1: 600
+                     2: 603
+               default: 626
+          }
+     600: goto          626
+     603: iload         15
+     605: istore        19
+     607: iload         16
+     609: iload         14
+     611: iconst_2
+     612: idiv
+     613: iadd
+     614: istore        20
+     616: getstatic     #240                // Field net/combatroll/client/gui/Drawable$Anchor.TRAILING:Lnet/combatroll/client/gui/Drawable$Anchor;
+     619: astore        21
+     621: getstatic     #237                // Field net/combatroll/client/gui/Drawable$Anchor.CENTER:Lnet/combatroll/client/gui/Drawable$Anchor;
+     624: astore        22
+     626: aload         5
+     628: getfield      #257                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel.drawable:Lnet/combatroll/client/gui/Drawable$Component;
+     631: ifnull        654
+     634: aload         5
+     636: getfield      #257                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel.drawable:Lnet/combatroll/client/gui/Drawable$Component;
+     639: aload_0
+     640: iload         19
+     642: iload         20
+     644: aload         21
+     646: aload         22
+     648: invokevirtual #261                // Method net/combatroll/client/gui/Drawable$Component.draw:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/combatroll/client/gui/Drawable$Anchor;Lnet/combatroll/client/gui/Drawable$Anchor;)V
+     651: goto          875
+     654: aload         5
+     656: getfield      #265                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel.label:Ljava/lang/String;
+     659: ifnull        875
+     662: aload         5
+     664: getfield      #265                // Field net/combatroll/client/gui/HudRenderHelper$ViewModel.label:Ljava/lang/String;
+     667: astore        23
+     669: aload         18
+     671: aload         23
+     673: invokevirtual #269                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     676: istore        24
+     678: iload         24
+     680: getstatic     #274                // Field net/combatroll/client/gui/HudKeyVisuals.buttonLeading:Lnet/combatroll/client/gui/Drawable$Component;
+     683: invokevirtual #277                // Method net/combatroll/client/gui/Drawable$Component.draw:()Lnet/combatroll/client/gui/Drawable$Draw;
+     686: invokevirtual #280                // Method net/combatroll/client/gui/Drawable$Draw.width:()I
+     689: iadd
+     690: getstatic     #283                // Field net/combatroll/client/gui/HudKeyVisuals.buttonTrailing:Lnet/combatroll/client/gui/Drawable$Component;
+     693: invokevirtual #277                // Method net/combatroll/client/gui/Drawable$Component.draw:()Lnet/combatroll/client/gui/Drawable$Draw;
+     696: invokevirtual #280                // Method net/combatroll/client/gui/Drawable$Draw.width:()I
+     699: iadd
+     700: istore        25
+     702: aload         21
+     704: getstatic     #240                // Field net/combatroll/client/gui/Drawable$Anchor.TRAILING:Lnet/combatroll/client/gui/Drawable$Anchor;
+     707: if_acmpne     719
+     710: iload         19
+     712: iload         25
+     714: iconst_2
+     715: idiv
+     716: isub
+     717: istore        19
+     719: getstatic     #274                // Field net/combatroll/client/gui/HudKeyVisuals.buttonLeading:Lnet/combatroll/client/gui/Drawable$Component;
+     722: aload_0
+     723: iload         19
+     725: iload         24
+     727: iconst_2
+     728: idiv
+     729: isub
+     730: iload         20
+     732: getstatic     #240                // Field net/combatroll/client/gui/Drawable$Anchor.TRAILING:Lnet/combatroll/client/gui/Drawable$Anchor;
+     735: aload         22
+     737: invokevirtual #261                // Method net/combatroll/client/gui/Drawable$Component.draw:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/combatroll/client/gui/Drawable$Anchor;Lnet/combatroll/client/gui/Drawable$Anchor;)V
+     740: getstatic     #288                // Field net/combatroll/client/gui/HudKeyVisuals.buttonCenter:Lnet/combatroll/client/gui/Drawable$Component;
+     743: aload_0
+     744: iload         19
+     746: iload         24
+     748: iconst_2
+     749: idiv
+     750: isub
+     751: iload         20
+     753: iload         24
+     755: aload         22
+     757: invokevirtual #292                // Method net/combatroll/client/gui/Drawable$Component.drawFlexibleWidth:(Lnet/minecraft/client/gui/GuiGraphics;IIILnet/combatroll/client/gui/Drawable$Anchor;)V
+     760: getstatic     #283                // Field net/combatroll/client/gui/HudKeyVisuals.buttonTrailing:Lnet/combatroll/client/gui/Drawable$Component;
+     763: aload_0
+     764: iload         19
+     766: iload         24
+     768: iconst_2
+     769: idiv
+     770: iadd
+     771: iload         20
+     773: getstatic     #295                // Field net/combatroll/client/gui/Drawable$Anchor.LEADING:Lnet/combatroll/client/gui/Drawable$Anchor;
+     776: aload         22
+     778: invokevirtual #261                // Method net/combatroll/client/gui/Drawable$Component.draw:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/combatroll/client/gui/Drawable$Anchor;Lnet/combatroll/client/gui/Drawable$Anchor;)V
+     781: aload         18
+     783: invokestatic  #301                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     786: pop
+     787: bipush        9
+     789: iconst_1
+     790: iadd
+     791: istore        26
+     793: iload         20
+     795: istore        27
+     797: getstatic     #304                // Field net/combatroll/client/gui/HudRenderHelper$1.$SwitchMap$net$combatroll$client$gui$Drawable$Anchor:[I
+     800: aload         22
+     802: invokevirtual #305                // Method net/combatroll/client/gui/Drawable$Anchor.ordinal:()I
+     805: iaload
+     806: tableswitch   { // 1 to 3
+                     1: 832
+                     2: 839
+                     3: 849
+               default: 860
+          }
+     832: iload         27
+     834: istore        27
+     836: goto          860
+     839: iload         27
+     841: iload         26
+     843: isub
+     844: istore        27
+     846: goto          860
+     849: iload         27
+     851: iload         26
+     853: iconst_2
+     854: idiv
+     855: iconst_1
+     856: isub
+     857: isub
+     858: istore        27
+     860: aload_0
+     861: aload         18
+     863: aload         23
+     865: iload         19
+     867: iload         27
+     869: ldc_w         #306                // int 16777215
+     872: invokevirtual #310                // Method net/minecraft/client/gui/GuiGraphics.m_280137_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V
+     875: aload_0
+     876: fconst_1
+     877: fconst_1
+     878: fconst_1
+     879: fconst_1
+     880: invokevirtual #199                // Method net/minecraft/client/gui/GuiGraphics.m_280246_:(FFFF)V
+     883: return
+
+  static {};
+    Code:
+       0: new           #357                // class net/minecraft/resources/ResourceLocation
+       3: dup
+       4: ldc_w         #359                // String combatroll
+       7: ldc_w         #361                // String textures/hud/arrow.png
+      10: invokespecial #364                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      13: putstatic     #220                // Field ARROW:Lnet/minecraft/resources/ResourceLocation;
+      16: new           #357                // class net/minecraft/resources/ResourceLocation
+      19: dup
+      20: ldc_w         #359                // String combatroll
+      23: ldc_w         #366                // String textures/hud/arrow_background.png
+      26: invokespecial #364                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      29: putstatic     #201                // Field ARROW_BACKGROUND:Lnet/minecraft/resources/ResourceLocation;
+      32: return
+}

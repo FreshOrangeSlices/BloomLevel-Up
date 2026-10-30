@@ -1,0 +1,15 @@
+Compiled from "ClientConfigWrapper.java"
+public class net.combatroll.config.ClientConfigWrapper extends me.shedaniel.autoconfig.serializer.PartitioningSerializer$GlobalData {
+  public net.combatroll.config.ClientConfig client;
+
+  public net.combatroll.config.ClientConfigWrapper();
+    Code:
+       0: aload_0
+       1: invokespecial #31                 // Method me/shedaniel/autoconfig/serializer/PartitioningSerializer$GlobalData."<init>":()V
+       4: aload_0
+       5: new           #33                 // class net/combatroll/config/ClientConfig
+       8: dup
+       9: invokespecial #34                 // Method net/combatroll/config/ClientConfig."<init>":()V
+      12: putfield      #36                 // Field client:Lnet/combatroll/config/ClientConfig;
+      15: return
+}

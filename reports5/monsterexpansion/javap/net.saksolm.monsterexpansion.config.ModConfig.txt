@@ -1,0 +1,44 @@
+Compiled from "ModConfig.java"
+public class net.saksolm.monsterexpansion.config.ModConfig {
+  public static final net.minecraftforge.common.ForgeConfigSpec SERVER_SPEC;
+
+  public static final net.saksolm.monsterexpansion.config.ModConfig$Server SERVER;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec CLIENT_SPEC;
+
+  public static final net.saksolm.monsterexpansion.config.ModConfig$Client CLIENT;
+
+  public net.saksolm.monsterexpansion.config.ModConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #45                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: new           #23                 // class net/minecraftforge/common/ForgeConfigSpec$Builder
+       3: dup
+       4: invokespecial #49                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder."<init>":()V
+       7: astore_0
+       8: new           #19                 // class net/saksolm/monsterexpansion/config/ModConfig$Server
+      11: dup
+      12: aload_0
+      13: invokespecial #52                 // Method net/saksolm/monsterexpansion/config/ModConfig$Server."<init>":(Lnet/minecraftforge/common/ForgeConfigSpec$Builder;)V
+      16: putstatic     #54                 // Field SERVER:Lnet/saksolm/monsterexpansion/config/ModConfig$Server;
+      19: aload_0
+      20: invokevirtual #58                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.build:()Lnet/minecraftforge/common/ForgeConfigSpec;
+      23: putstatic     #60                 // Field SERVER_SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+      26: new           #23                 // class net/minecraftforge/common/ForgeConfigSpec$Builder
+      29: dup
+      30: invokespecial #49                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder."<init>":()V
+      33: astore_1
+      34: new           #21                 // class net/saksolm/monsterexpansion/config/ModConfig$Client
+      37: dup
+      38: aload_1
+      39: invokespecial #61                 // Method net/saksolm/monsterexpansion/config/ModConfig$Client."<init>":(Lnet/minecraftforge/common/ForgeConfigSpec$Builder;)V
+      42: putstatic     #63                 // Field CLIENT:Lnet/saksolm/monsterexpansion/config/ModConfig$Client;
+      45: aload_1
+      46: invokevirtual #58                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.build:()Lnet/minecraftforge/common/ForgeConfigSpec;
+      49: putstatic     #65                 // Field CLIENT_SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+      52: return
+}

@@ -1,0 +1,92 @@
+public final class org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification extends java.lang.Enum {
+  public static final org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification SUBTITLE;
+
+  public static final org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification HOTBAR;
+
+  public static final org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification CHAT;
+
+  private static final org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification[] $VALUES;
+
+  private org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification(java.lang.String, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #14                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public final java.lang.String toString();
+    Code:
+       0: getstatic     #23                 // Field org/anti_ad/mc/common/vanilla/alias/glue/I18n.INSTANCE:Lorg/anti_ad/mc/common/vanilla/alias/glue/I18n;
+       3: aload_0
+       4: invokevirtual #26                 // Method name:()Ljava/lang/String;
+       7: getstatic     #32                 // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      10: invokevirtual #38                 // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      13: dup
+      14: ldc           #40                 // String
+      16: invokestatic  #46                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      19: invokedynamic #58,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      24: iconst_0
+      25: anewarray     #60                 // class java/lang/Object
+      28: invokevirtual #64                 // Method org/anti_ad/mc/common/vanilla/alias/glue/I18n.translate:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      31: areturn
+
+  public static org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification[] values();
+    Code:
+       0: getstatic     #68                 // Field $VALUES:[Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+       3: invokevirtual #74                 // Method "[Ljava/lang/Object;".clone:()Ljava/lang/Object;
+       6: checkcast     #75                 // class "[Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;"
+       9: areturn
+
+  public static org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class org/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification
+       2: aload_0
+       3: invokestatic  #80                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class org/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification
+       9: areturn
+
+  private static final org.anti_ad.mc.ipnext.config.ToolReplaceVisualNotification[] $values();
+    Code:
+       0: iconst_3
+       1: anewarray     #2                  // class org/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification
+       4: dup
+       5: astore_0
+       6: iconst_0
+       7: getstatic     #83                 // Field SUBTITLE:Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      10: aastore
+      11: aload_0
+      12: iconst_1
+      13: getstatic     #85                 // Field HOTBAR:Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      16: aastore
+      17: aload_0
+      18: iconst_2
+      19: getstatic     #87                 // Field CHAT:Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      22: aastore
+      23: aload_0
+      24: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class org/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification
+       3: dup
+       4: ldc           #90                 // String SUBTITLE
+       6: iconst_0
+       7: invokespecial #91                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #83                 // Field SUBTITLE:Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      13: new           #2                  // class org/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification
+      16: dup
+      17: ldc           #92                 // String HOTBAR
+      19: iconst_1
+      20: invokespecial #91                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #85                 // Field HOTBAR:Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      26: new           #2                  // class org/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification
+      29: dup
+      30: ldc           #93                 // String CHAT
+      32: iconst_2
+      33: invokespecial #91                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #87                 // Field CHAT:Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      39: invokestatic  #95                 // Method $values:()[Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      42: putstatic     #68                 // Field $VALUES:[Lorg/anti_ad/mc/ipnext/config/ToolReplaceVisualNotification;
+      45: return
+}

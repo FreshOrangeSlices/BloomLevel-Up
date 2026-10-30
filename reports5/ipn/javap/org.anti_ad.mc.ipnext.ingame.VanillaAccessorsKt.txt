@@ -1,0 +1,725 @@
+public final class org.anti_ad.mc.ipnext.ingame.VanillaAccessorsKt {
+  public static final boolean capsEquals(net.minecraft.world.item.ItemStack, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: if_acmpne     7
+       5: iconst_1
+       6: ireturn
+       7: aload_0
+       8: ifnonnull     17
+      11: aload_1
+      12: ifnonnull     17
+      15: iconst_1
+      16: ireturn
+      17: aload_0
+      18: ifnull        27
+      21: aload_1
+      22: ifnonnull     27
+      25: iconst_0
+      26: ireturn
+      27: aload_0
+      28: ifnonnull     37
+      31: aload_1
+      32: ifnull        37
+      35: iconst_0
+      36: ireturn
+      37: aload_0
+      38: ifnull        48
+      41: aload_1
+      42: instanceof    #12                 // class net/minecraft/world/item/ItemStack
+      45: ifne          50
+      48: iconst_0
+      49: ireturn
+      50: aload_0
+      51: checkcast     #14                 // class org/anti_ad/mc/ipnext/mixinhelpers/IMixinSerializedCapsAccessor
+      54: invokeinterface #18,  1           // InterfaceMethod org/anti_ad/mc/ipnext/mixinhelpers/IMixinSerializedCapsAccessor.IPN$serializeCaps:()Lnet/minecraft/nbt/CompoundTag;
+      59: astore_0
+      60: aload_1
+      61: checkcast     #14                 // class org/anti_ad/mc/ipnext/mixinhelpers/IMixinSerializedCapsAccessor
+      64: invokeinterface #18,  1           // InterfaceMethod org/anti_ad/mc/ipnext/mixinhelpers/IMixinSerializedCapsAccessor.IPN$serializeCaps:()Lnet/minecraft/nbt/CompoundTag;
+      69: astore_1
+      70: aload_0
+      71: aload_1
+      72: invokestatic  #24                 // Method kotlin/jvm/internal/Intrinsics.areEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      75: ireturn
+
+  public static final org.anti_ad.mc.ipnext.item.ItemType get(itemType)(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: new           #35                 // class org/anti_ad/mc/ipnext/item/ItemType
+       9: dup
+      10: aload_0
+      11: invokevirtual #39                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      14: dup
+      15: ldc           #29                 // String
+      17: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      20: aload_0
+      21: invokevirtual #45                 // Method net/minecraft/world/item/ItemStack.m_41783_:()Lnet/minecraft/nbt/CompoundTag;
+      24: new           #47                 // class "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"
+      27: dup
+      28: aload_0
+      29: invokespecial #51                 // Method "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"."<init>":(Lnet/minecraft/world/item/ItemStack;)V
+      32: checkcast     #53                 // class kotlin/jvm/functions/Function0
+      35: iconst_0
+      36: iconst_0
+      37: aload_0
+      38: getstatic     #59                 // Field "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2".INSTANCE:Lorg/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2;
+      41: checkcast     #61                 // class kotlin/jvm/functions/Function2
+      44: bipush        24
+      46: aconst_null
+      47: invokespecial #64                 // Method org/anti_ad/mc/ipnext/item/ItemType."<init>":(Lnet/minecraft/world/item/Item;Lnet/minecraft/nbt/CompoundTag;Lkotlin/jvm/functions/Function0;ZZLnet/minecraft/world/item/ItemStack;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      50: areturn
+
+  public static final org.anti_ad.mc.ipnext.item.ItemStack get(itemStack)(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #70                 // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      10: ifeq          20
+      13: getstatic     #76                 // Field org/anti_ad/mc/ipnext/item/ItemStack.Companion:Lorg/anti_ad/mc/ipnext/item/ItemStack$Companion;
+      16: invokestatic  #82                 // Method org/anti_ad/mc/ipnext/item/ItemStackExtensionsKt.getEMPTY:(Lorg/anti_ad/mc/ipnext/item/ItemStack$Companion;)Lorg/anti_ad/mc/ipnext/item/ItemStack;
+      19: areturn
+      20: getstatic     #76                 // Field org/anti_ad/mc/ipnext/item/ItemStack.Companion:Lorg/anti_ad/mc/ipnext/item/ItemStack$Companion;
+      23: aload_0
+      24: astore_1
+      25: new           #35                 // class org/anti_ad/mc/ipnext/item/ItemType
+      28: dup
+      29: aload_1
+      30: invokevirtual #39                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      33: dup
+      34: ldc           #29                 // String
+      36: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      39: aload_1
+      40: invokevirtual #45                 // Method net/minecraft/world/item/ItemStack.m_41783_:()Lnet/minecraft/nbt/CompoundTag;
+      43: new           #47                 // class "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"
+      46: dup
+      47: aload_1
+      48: invokespecial #51                 // Method "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"."<init>":(Lnet/minecraft/world/item/ItemStack;)V
+      51: checkcast     #53                 // class kotlin/jvm/functions/Function0
+      54: iconst_0
+      55: iconst_0
+      56: aload_1
+      57: getstatic     #59                 // Field "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2".INSTANCE:Lorg/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2;
+      60: checkcast     #61                 // class kotlin/jvm/functions/Function2
+      63: bipush        24
+      65: aconst_null
+      66: invokespecial #64                 // Method org/anti_ad/mc/ipnext/item/ItemType."<init>":(Lnet/minecraft/world/item/Item;Lnet/minecraft/nbt/CompoundTag;Lkotlin/jvm/functions/Function0;ZZLnet/minecraft/world/item/ItemStack;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      69: aload_0
+      70: invokevirtual #86                 // Method net/minecraft/world/item/ItemStack.m_41613_:()I
+      73: invokevirtual #92                 // Method org/anti_ad/mc/ipnext/item/ItemStack$Companion.invoke:(Lorg/anti_ad/mc/ipnext/item/ItemType;I)Lorg/anti_ad/mc/ipnext/item/ItemStack;
+      76: areturn
+
+  public static final org.anti_ad.mc.ipnext.item.MutableItemStack get(mutableItemStack)(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #70                 // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      10: ifeq          20
+      13: getstatic     #99                 // Field org/anti_ad/mc/ipnext/item/MutableItemStack.Companion:Lorg/anti_ad/mc/ipnext/item/MutableItemStack$Companion;
+      16: invokestatic  #103                // Method org/anti_ad/mc/ipnext/item/ItemStackExtensionsKt.empty:(Lorg/anti_ad/mc/ipnext/item/MutableItemStack$Companion;)Lorg/anti_ad/mc/ipnext/item/MutableItemStack;
+      19: areturn
+      20: new           #96                 // class org/anti_ad/mc/ipnext/item/MutableItemStack
+      23: dup
+      24: aload_0
+      25: astore_1
+      26: new           #35                 // class org/anti_ad/mc/ipnext/item/ItemType
+      29: dup
+      30: aload_1
+      31: invokevirtual #39                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      34: dup
+      35: ldc           #29                 // String
+      37: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      40: aload_1
+      41: invokevirtual #45                 // Method net/minecraft/world/item/ItemStack.m_41783_:()Lnet/minecraft/nbt/CompoundTag;
+      44: new           #47                 // class "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"
+      47: dup
+      48: aload_1
+      49: invokespecial #51                 // Method "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"."<init>":(Lnet/minecraft/world/item/ItemStack;)V
+      52: checkcast     #53                 // class kotlin/jvm/functions/Function0
+      55: iconst_0
+      56: iconst_0
+      57: aload_1
+      58: getstatic     #59                 // Field "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2".INSTANCE:Lorg/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2;
+      61: checkcast     #61                 // class kotlin/jvm/functions/Function2
+      64: bipush        24
+      66: aconst_null
+      67: invokespecial #64                 // Method org/anti_ad/mc/ipnext/item/ItemType."<init>":(Lnet/minecraft/world/item/Item;Lnet/minecraft/nbt/CompoundTag;Lkotlin/jvm/functions/Function0;ZZLnet/minecraft/world/item/ItemStack;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      70: aload_0
+      71: invokevirtual #86                 // Method net/minecraft/world/item/ItemStack.m_41613_:()I
+      74: aconst_null
+      75: iconst_4
+      76: aconst_null
+      77: invokespecial #106                // Method org/anti_ad/mc/ipnext/item/MutableItemStack."<init>":(Lorg/anti_ad/mc/ipnext/item/ItemType;ILnet/minecraft/world/inventory/Slot;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      80: areturn
+
+  public static final java.util.List get(slots)(net.minecraft.world.inventory.AbstractContainerMenu);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #114                // Field net/minecraft/world/inventory/AbstractContainerMenu.f_38839_:Lnet/minecraft/core/NonNullList;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: checkcast     #116                // class java/util/List
+      19: areturn
+
+  public static final int get(syncId)(net.minecraft.world.inventory.AbstractContainerMenu);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #122                // Field net/minecraft/world/inventory/AbstractContainerMenu.f_38840_:I
+      10: ireturn
+
+  public static final int get(id)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #129                // Field net/minecraft/world/inventory/Slot.f_40219_:I
+      10: ireturn
+
+  public static final int get(invSlot)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #133                // Method net/minecraft/world/inventory/Slot.getSlotIndex:()I
+      10: ireturn
+
+  public static final org.anti_ad.mc.ipnext.item.ItemStack get(itemStack)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #138                // Method net/minecraft/world/inventory/Slot.m_7993_:()Lnet/minecraft/world/item/ItemStack;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: dup
+      17: astore_0
+      18: invokevirtual #70                 // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      21: ifeq          31
+      24: getstatic     #76                 // Field org/anti_ad/mc/ipnext/item/ItemStack.Companion:Lorg/anti_ad/mc/ipnext/item/ItemStack$Companion;
+      27: invokestatic  #82                 // Method org/anti_ad/mc/ipnext/item/ItemStackExtensionsKt.getEMPTY:(Lorg/anti_ad/mc/ipnext/item/ItemStack$Companion;)Lorg/anti_ad/mc/ipnext/item/ItemStack;
+      30: areturn
+      31: getstatic     #76                 // Field org/anti_ad/mc/ipnext/item/ItemStack.Companion:Lorg/anti_ad/mc/ipnext/item/ItemStack$Companion;
+      34: aload_0
+      35: astore_1
+      36: new           #35                 // class org/anti_ad/mc/ipnext/item/ItemType
+      39: dup
+      40: aload_1
+      41: invokevirtual #39                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      44: dup
+      45: ldc           #29                 // String
+      47: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      50: aload_1
+      51: invokevirtual #45                 // Method net/minecraft/world/item/ItemStack.m_41783_:()Lnet/minecraft/nbt/CompoundTag;
+      54: new           #47                 // class "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"
+      57: dup
+      58: aload_1
+      59: invokespecial #51                 // Method "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"."<init>":(Lnet/minecraft/world/item/ItemStack;)V
+      62: checkcast     #53                 // class kotlin/jvm/functions/Function0
+      65: iconst_0
+      66: iconst_0
+      67: aload_1
+      68: getstatic     #59                 // Field "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2".INSTANCE:Lorg/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2;
+      71: checkcast     #61                 // class kotlin/jvm/functions/Function2
+      74: bipush        24
+      76: aconst_null
+      77: invokespecial #64                 // Method org/anti_ad/mc/ipnext/item/ItemType."<init>":(Lnet/minecraft/world/item/Item;Lnet/minecraft/nbt/CompoundTag;Lkotlin/jvm/functions/Function0;ZZLnet/minecraft/world/item/ItemStack;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      80: aload_0
+      81: invokevirtual #86                 // Method net/minecraft/world/item/ItemStack.m_41613_:()I
+      84: invokevirtual #92                 // Method org/anti_ad/mc/ipnext/item/ItemStack$Companion.invoke:(Lorg/anti_ad/mc/ipnext/item/ItemType;I)Lorg/anti_ad/mc/ipnext/item/ItemStack;
+      87: areturn
+
+  public static final net.minecraft.world.item.ItemStack get(vanillaStack)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #138                // Method net/minecraft/world/inventory/Slot.m_7993_:()Lnet/minecraft/world/item/ItemStack;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final org.anti_ad.mc.ipnext.item.MutableItemStack get(mutableItemStack)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #138                // Method net/minecraft/world/inventory/Slot.m_7993_:()Lnet/minecraft/world/item/ItemStack;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: dup
+      17: astore_0
+      18: invokevirtual #70                 // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      21: ifeq          31
+      24: getstatic     #99                 // Field org/anti_ad/mc/ipnext/item/MutableItemStack.Companion:Lorg/anti_ad/mc/ipnext/item/MutableItemStack$Companion;
+      27: invokestatic  #103                // Method org/anti_ad/mc/ipnext/item/ItemStackExtensionsKt.empty:(Lorg/anti_ad/mc/ipnext/item/MutableItemStack$Companion;)Lorg/anti_ad/mc/ipnext/item/MutableItemStack;
+      30: areturn
+      31: new           #96                 // class org/anti_ad/mc/ipnext/item/MutableItemStack
+      34: dup
+      35: aload_0
+      36: astore_1
+      37: new           #35                 // class org/anti_ad/mc/ipnext/item/ItemType
+      40: dup
+      41: aload_1
+      42: invokevirtual #39                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      45: dup
+      46: ldc           #29                 // String
+      48: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      51: aload_1
+      52: invokevirtual #45                 // Method net/minecraft/world/item/ItemStack.m_41783_:()Lnet/minecraft/nbt/CompoundTag;
+      55: new           #47                 // class "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"
+      58: dup
+      59: aload_1
+      60: invokespecial #51                 // Method "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$1"."<init>":(Lnet/minecraft/world/item/ItemStack;)V
+      63: checkcast     #53                 // class kotlin/jvm/functions/Function0
+      66: iconst_0
+      67: iconst_0
+      68: aload_1
+      69: getstatic     #59                 // Field "org/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2".INSTANCE:Lorg/anti_ad/mc/ipnext/ingame/VanillaAccessorsKt$(itemType)$2;
+      72: checkcast     #61                 // class kotlin/jvm/functions/Function2
+      75: bipush        24
+      77: aconst_null
+      78: invokespecial #64                 // Method org/anti_ad/mc/ipnext/item/ItemType."<init>":(Lnet/minecraft/world/item/Item;Lnet/minecraft/nbt/CompoundTag;Lkotlin/jvm/functions/Function0;ZZLnet/minecraft/world/item/ItemStack;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      81: aload_0
+      82: invokevirtual #86                 // Method net/minecraft/world/item/ItemStack.m_41613_:()I
+      85: aconst_null
+      86: iconst_4
+      87: aconst_null
+      88: invokespecial #106                // Method org/anti_ad/mc/ipnext/item/MutableItemStack."<init>":(Lorg/anti_ad/mc/ipnext/item/ItemType;ILnet/minecraft/world/inventory/Slot;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+      91: areturn
+
+  public static final net.minecraft.world.Container get(inventory)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #147                // Field net/minecraft/world/inventory/Slot.f_40218_:Lnet/minecraft/world/Container;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final net.minecraft.world.Container get(inventoryOrNull)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #147                // Field net/minecraft/world/inventory/Slot.f_40218_:Lnet/minecraft/world/Container;
+      10: areturn
+
+  public static final int get(left)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #152                // Field net/minecraft/world/inventory/Slot.f_40220_:I
+      10: ireturn
+
+  public static final int get(top)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #156                // Field net/minecraft/world/inventory/Slot.f_40221_:I
+      10: ireturn
+
+  public static final org.anti_ad.mc.common.math2d.Point get(topLeft)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: new           #160                // class org/anti_ad/mc/common/math2d/Point
+       9: dup
+      10: aload_0
+      11: getfield      #152                // Field net/minecraft/world/inventory/Slot.f_40220_:I
+      14: aload_0
+      15: getfield      #156                // Field net/minecraft/world/inventory/Slot.f_40221_:I
+      18: invokespecial #163                // Method org/anti_ad/mc/common/math2d/Point."<init>":(II)V
+      21: areturn
+
+  public static final boolean (canInsert)(net.minecraft.world.inventory.Slot, org.anti_ad.mc.ipnext.item.ItemStack);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_1
+       7: ldc           #29                 // String
+       9: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_0
+      13: aload_1
+      14: invokestatic  #169                // Method org/anti_ad/mc/ipnext/item/ItemStackExtensionsKt.getVanillaStack:(Lorg/anti_ad/mc/ipnext/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;
+      17: invokevirtual #173                // Method net/minecraft/world/inventory/Slot.m_5857_:(Lnet/minecraft/world/item/ItemStack;)Z
+      20: ireturn
+
+  public static final net.minecraft.world.inventory.Slot get(focusedSlot)(net.minecraft.client.gui.screens.Screen);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: instanceof    #177                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      10: ifeq          20
+      13: aload_0
+      14: checkcast     #177                // class net/minecraft/client/gui/screens/inventory/AbstractContainerScreen
+      17: goto          21
+      20: aconst_null
+      21: dup
+      22: ifnull        37
+      25: invokevirtual #181                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.getSlotUnderMouse:()Lnet/minecraft/world/inventory/Slot;
+      28: dup
+      29: ifnull        37
+      32: aload_0
+      33: invokestatic  #187                // Method org/anti_ad/mc/ipnext/ingame/InventoryKt.vPlayerSlotOf:(Lnet/minecraft/world/inventory/Slot;Lnet/minecraft/client/gui/screens/Screen;)Lnet/minecraft/world/inventory/Slot;
+      36: areturn
+      37: pop
+      38: aconst_null
+      39: areturn
+
+  public static final net.minecraft.world.inventory.Slot get(rawFocusedSlot)(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #181                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.getSlotUnderMouse:()Lnet/minecraft/world/inventory/Slot;
+      10: areturn
+
+  public static final org.anti_ad.mc.common.math2d.Rectangle get(containerBounds)(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: new           #193                // class org/anti_ad/mc/common/math2d/Rectangle
+       9: dup
+      10: aload_0
+      11: invokevirtual #196                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.getGuiLeft:()I
+      14: aload_0
+      15: invokevirtual #199                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.getGuiTop:()I
+      18: aload_0
+      19: invokevirtual #202                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.getXSize:()I
+      22: aload_0
+      23: invokevirtual #205                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.getYSize:()I
+      26: invokespecial #208                // Method org/anti_ad/mc/common/math2d/Rectangle."<init>":(IIII)V
+      29: areturn
+
+  public static final net.minecraft.world.inventory.AbstractContainerMenu get(container)(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #214                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_6262_:()Lnet/minecraft/world/inventory/AbstractContainerMenu;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final int get(selectedSlot)(net.minecraft.world.entity.player.Inventory);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #221                // Field net/minecraft/world/entity/player/Inventory.f_35977_:I
+      10: ireturn
+
+  public static final void set(selectedSlot)(net.minecraft.world.entity.player.Inventory, int);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: iload_1
+       8: putfield      #221                // Field net/minecraft/world/entity/player/Inventory.f_35977_:I
+      11: return
+
+  public static final boolean get(isInventoryTab)(net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #230                // Method net/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen.m_258017_:()Z
+      10: ireturn
+
+  public static final net.minecraft.resources.ResourceLocation (getIdentifier)(net.minecraft.core.DefaultedRegistry, java.lang.Object);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: aload_1
+       8: invokeinterface #238,  2          // InterfaceMethod net/minecraft/core/DefaultedRegistry.m_7981_:(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;
+      13: dup
+      14: ldc           #29                 // String
+      16: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      19: areturn
+
+  public static final int (getRawId)(net.minecraft.core.DefaultedRegistry, java.lang.Object);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: aload_1
+       8: invokeinterface #244,  2          // InterfaceMethod net/minecraft/core/DefaultedRegistry.m_7447_:(Ljava/lang/Object;)I
+      13: ireturn
+
+  public static final java.lang.Object (getByIdentifier)(net.minecraft.core.DefaultedRegistry, net.minecraft.resources.ResourceLocation);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_1
+       7: ldc           #29                 // String
+       9: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_0
+      13: aload_1
+      14: invokeinterface #250,  2          // InterfaceMethod net/minecraft/core/DefaultedRegistry.m_7745_:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+      19: areturn
+
+  public static final net.minecraft.resources.ResourceLocation (getIdentifier)(net.minecraft.core.Registry, java.lang.Object);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: aload_1
+       8: invokeinterface #254,  2          // InterfaceMethod net/minecraft/core/Registry.m_7981_:(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;
+      13: areturn
+
+  public static final int (getRawId)(net.minecraft.core.Registry, java.lang.Object);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: aload_1
+       8: invokeinterface #256,  2          // InterfaceMethod net/minecraft/core/Registry.m_7447_:(Ljava/lang/Object;)I
+      13: ireturn
+
+  public static final java.lang.Object (getByIdentifier)(net.minecraft.core.Registry, net.minecraft.resources.ResourceLocation);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_1
+       7: ldc           #29                 // String
+       9: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_0
+      13: aload_1
+      14: invokeinterface #258,  2          // InterfaceMethod net/minecraft/core/Registry.m_7745_:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+      19: areturn
+
+  public static final int get(type)(net.minecraft.nbt.Tag);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokeinterface #266,  1          // InterfaceMethod net/minecraft/nbt/Tag.m_7060_:()B
+      12: ireturn
+
+  public static final java.lang.String get(asString)(net.minecraft.nbt.Tag);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokeinterface #272,  1          // InterfaceMethod net/minecraft/nbt/Tag.m_7916_:()Ljava/lang/String;
+      12: dup
+      13: ldc           #29                 // String
+      15: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      18: areturn
+
+  public static final java.util.Set get(keys)(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #280                // Method net/minecraft/nbt/CompoundTag.m_128431_:()Ljava/util/Set;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final com.mojang.blaze3d.platform.Window get(window)(net.minecraft.client.Minecraft);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #288                // Method net/minecraft/client/Minecraft.m_91268_:()Lcom/mojang/blaze3d/platform/Window;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final net.minecraft.client.Options get(options)(net.minecraft.client.Minecraft);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #294                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final net.minecraft.client.KeyMapping get(keyDrop)(net.minecraft.client.Options);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #302                // Field net/minecraft/client/Options.f_92094_:Lnet/minecraft/client/KeyMapping;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final boolean get(isPressed)(net.minecraft.client.KeyMapping);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #309                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      10: ireturn
+
+  public static final int get(scaledWidth)(com.mojang.blaze3d.platform.Window);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #316                // Method com/mojang/blaze3d/platform/Window.m_85445_:()I
+      10: ireturn
+
+  public static final int get(scaledHeight)(com.mojang.blaze3d.platform.Window);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #320                // Method com/mojang/blaze3d/platform/Window.m_85446_:()I
+      10: ireturn
+
+  public static final net.minecraft.world.entity.EquipmentSlot get(equipmentSlot)(net.minecraft.world.item.ArmorItem);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #328                // Method net/minecraft/world/item/ArmorItem.m_40402_:()Lnet/minecraft/world/entity/EquipmentSlot;
+      10: dup
+      11: ldc           #29                 // String
+      13: invokestatic  #42                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      16: areturn
+
+  public static final void (clickSlot)(net.minecraft.client.multiplayer.MultiPlayerGameMode, int, int, int, net.minecraft.world.inventory.ClickType, net.minecraft.world.entity.player.Player);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload         4
+       8: ldc           #29                 // String
+      10: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      13: aload         5
+      15: ldc           #29                 // String
+      17: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      20: aload_0
+      21: iload_1
+      22: iload_2
+      23: iload_3
+      24: aload         4
+      26: aload         5
+      28: invokevirtual #336                // Method net/minecraft/client/multiplayer/MultiPlayerGameMode.m_171799_:(IIILnet/minecraft/world/inventory/ClickType;Lnet/minecraft/world/entity/player/Player;)V
+      31: return
+
+  public static final void (onSlotClick)(net.minecraft.world.inventory.InventoryMenu, int, int, net.minecraft.world.inventory.ClickType, net.minecraft.world.entity.player.Player);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_3
+       7: ldc           #29                 // String
+       9: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload         4
+      14: ldc           #29                 // String
+      16: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      19: aload_0
+      20: iload_1
+      21: iload_2
+      22: aload_3
+      23: aload         4
+      25: invokevirtual #344                // Method net/minecraft/world/inventory/InventoryMenu.m_150399_:(IILnet/minecraft/world/inventory/ClickType;Lnet/minecraft/world/entity/player/Player;)V
+      28: return
+
+  public static final void (sendContentUpdates)(net.minecraft.world.inventory.InventoryMenu);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #350                // Method net/minecraft/world/inventory/InventoryMenu.m_38946_:()V
+      10: return
+
+  public static final int get(selectedRecipe)(net.minecraft.world.inventory.StonecutterMenu);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #357                // Method net/minecraft/world/inventory/StonecutterMenu.m_40338_:()I
+      10: ireturn
+
+  public static final void (send)(net.minecraft.client.Minecraft, java.lang.Runnable);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_1
+       7: ldc           #29                 // String
+       9: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+      12: aload_0
+      13: aload_1
+      14: invokevirtual #363                // Method net/minecraft/client/Minecraft.m_6937_:(Ljava/lang/Runnable;)V
+      17: return
+
+  public static final boolean get(isEnabled)(net.minecraft.world.inventory.Slot);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String
+       3: invokestatic  #33                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: invokevirtual #368                // Method net/minecraft/world/inventory/Slot.m_6659_:()Z
+      10: ireturn
+}

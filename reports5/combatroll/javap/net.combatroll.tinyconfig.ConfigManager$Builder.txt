@@ -1,0 +1,88 @@
+Compiled from "ConfigManager.java"
+public class net.combatroll.tinyconfig.ConfigManager$Builder {
+  net.combatroll.tinyconfig.ConfigManager<Config> manager;
+
+  final net.combatroll.tinyconfig.ConfigManager this$0;
+
+  net.combatroll.tinyconfig.ConfigManager$Builder(net.combatroll.tinyconfig.ConfigManager<Config>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #17                 // Field this$0:Lnet/combatroll/tinyconfig/ConfigManager;
+       5: aload_0
+       6: invokespecial #20                 // Method java/lang/Object."<init>":()V
+       9: aload_0
+      10: aload_2
+      11: putfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+      14: return
+
+  public net.combatroll.tinyconfig.ConfigManager<Config>.Builder enableLogging(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: iload_1
+       5: putfield      #33                 // Field net/combatroll/tinyconfig/ConfigManager.isLoggingEnabled:Z
+       8: aload_0
+       9: areturn
+
+  public net.combatroll.tinyconfig.ConfigManager<Config>.Builder setDirectory(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: aload_1
+       5: putfield      #40                 // Field net/combatroll/tinyconfig/ConfigManager.directory:Ljava/lang/String;
+       8: aload_0
+       9: areturn
+
+  public net.combatroll.tinyconfig.ConfigManager<Config>.Builder sanitize(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: iload_1
+       5: putfield      #43                 // Field net/combatroll/tinyconfig/ConfigManager.sanitize:Z
+       8: aload_0
+       9: areturn
+
+  public net.combatroll.tinyconfig.ConfigManager<Config>.Builder schemaVersion(int);
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: getfield      #51                 // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+       7: instanceof    #53                 // class net/combatroll/tinyconfig/versioning/Versionable
+      10: ifne          23
+      13: new           #55                 // class java/lang/ExceptionInInitializerError
+      16: dup
+      17: ldc           #57                 // String To use `schemaVersion` your config type has to extend `VersionableConfig` or provide a custom implementation for `Versionable`.
+      19: invokespecial #60                 // Method java/lang/ExceptionInInitializerError."<init>":(Ljava/lang/String;)V
+      22: athrow
+      23: aload_0
+      24: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+      27: iload_1
+      28: putfield      #64                 // Field net/combatroll/tinyconfig/ConfigManager.requiredSchemaVersion:I
+      31: aload_0
+      32: areturn
+
+  public net.combatroll.tinyconfig.ConfigManager<Config>.Builder validate(java.util.function.Function<Config, java.lang.Boolean>);
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: aload_1
+       5: putfield      #71                 // Field net/combatroll/tinyconfig/ConfigManager.validator:Ljava/util/function/Function;
+       8: aload_0
+       9: areturn
+
+  public net.combatroll.tinyconfig.ConfigManager<Config>.Builder constrain(java.util.function.Function<Config, Config>);
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: aload_1
+       5: putfield      #77                 // Field net/combatroll/tinyconfig/ConfigManager.constraint:Ljava/util/function/Function;
+       8: aload_0
+       9: areturn
+
+  public net.combatroll.tinyconfig.ConfigManager<Config> build();
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field manager:Lnet/combatroll/tinyconfig/ConfigManager;
+       4: areturn
+}

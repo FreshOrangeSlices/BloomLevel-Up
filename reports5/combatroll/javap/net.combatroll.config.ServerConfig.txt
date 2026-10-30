@@ -1,0 +1,58 @@
+Compiled from "ServerConfig.java"
+public class net.combatroll.config.ServerConfig implements me.shedaniel.autoconfig.ConfigData {
+  public int invulnerable_ticks_upon_roll;
+
+  public int roll_duration;
+
+  public boolean allow_auto_jump_while_rolling;
+
+  public boolean allow_jump_while_rolling;
+
+  public boolean allow_rolling_while_weapon_cooldown;
+
+  public boolean allow_rolling_while_airborn;
+
+  public float exhaust_on_roll;
+
+  public float food_level_required;
+
+  public float roll_cooldown;
+
+  public float additional_roll_distance;
+
+  public net.combatroll.config.ServerConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #39                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_0
+       6: putfield      #41                 // Field invulnerable_ticks_upon_roll:I
+       9: aload_0
+      10: bipush        8
+      12: putfield      #43                 // Field roll_duration:I
+      15: aload_0
+      16: iconst_1
+      17: putfield      #45                 // Field allow_auto_jump_while_rolling:Z
+      20: aload_0
+      21: iconst_0
+      22: putfield      #47                 // Field allow_jump_while_rolling:Z
+      25: aload_0
+      26: iconst_0
+      27: putfield      #49                 // Field allow_rolling_while_weapon_cooldown:Z
+      30: aload_0
+      31: iconst_0
+      32: putfield      #51                 // Field allow_rolling_while_airborn:Z
+      35: aload_0
+      36: ldc           #52                 // float 0.1f
+      38: putfield      #54                 // Field exhaust_on_roll:F
+      41: aload_0
+      42: ldc           #55                 // float 6.0f
+      44: putfield      #57                 // Field food_level_required:F
+      47: aload_0
+      48: ldc           #58                 // float 4.0f
+      50: putfield      #60                 // Field roll_cooldown:F
+      53: aload_0
+      54: fconst_0
+      55: putfield      #62                 // Field additional_roll_distance:F
+      58: return
+}

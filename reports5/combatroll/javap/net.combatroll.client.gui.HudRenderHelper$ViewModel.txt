@@ -1,0 +1,323 @@
+Compiled from "HudRenderHelper.java"
+final class net.combatroll.client.gui.HudRenderHelper$ViewModel extends java.lang.Record {
+  private final java.util.List<net.combatroll.client.gui.HudRenderHelper$ViewModel$Element> elements;
+
+  private final java.lang.String label;
+
+  private final net.combatroll.client.gui.Drawable$Component drawable;
+
+  private net.combatroll.client.gui.HudRenderHelper$ViewModel(java.util.List<net.combatroll.client.gui.HudRenderHelper$ViewModel$Element>, java.lang.String, net.combatroll.client.gui.Drawable$Component);
+    Code:
+       0: aload_0
+       1: invokespecial #45                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #47                 // Field elements:Ljava/util/List;
+       9: aload_0
+      10: aload_2
+      11: putfield      #49                 // Field label:Ljava/lang/String;
+      14: aload_0
+      15: aload_3
+      16: putfield      #51                 // Field drawable:Lnet/combatroll/client/gui/Drawable$Component;
+      19: return
+
+  static net.combatroll.client.gui.HudRenderHelper$ViewModel create(net.combatroll.internals.RollManager$CooldownInfo, float);
+    Code:
+       0: getstatic     #63                 // Field net/combatroll/client/CombatRollClient.config:Lnet/combatroll/config/ClientConfig;
+       3: astore_2
+       4: new           #65                 // class java/util/ArrayList
+       7: dup
+       8: invokespecial #66                 // Method java/util/ArrayList."<init>":()V
+      11: astore_3
+      12: iconst_0
+      13: istore        4
+      15: iload         4
+      17: aload_0
+      18: invokevirtual #72                 // Method net/combatroll/internals/RollManager$CooldownInfo.maxRolls:()I
+      21: if_icmpge     254
+      24: aload_2
+      25: getfield      #76                 // Field net/combatroll/config/ClientConfig.hudArrowColor:I
+      28: istore        5
+      30: fconst_0
+      31: fstore        6
+      33: iload         4
+      35: aload_0
+      36: invokevirtual #79                 // Method net/combatroll/internals/RollManager$CooldownInfo.availableRolls:()I
+      39: if_icmpne     220
+      42: aload_0
+      43: invokevirtual #82                 // Method net/combatroll/internals/RollManager$CooldownInfo.elapsed:()I
+      46: i2f
+      47: aload_0
+      48: invokevirtual #85                 // Method net/combatroll/internals/RollManager$CooldownInfo.total:()I
+      51: i2f
+      52: fdiv
+      53: fstore        6
+      55: fload         6
+      57: fconst_1
+      58: invokestatic  #91                 // Method java/lang/Math.min:(FF)F
+      61: fstore        6
+      63: aload_2
+      64: getfield      #95                 // Field net/combatroll/config/ClientConfig.playCooldownFlash:Z
+      67: ifeq          220
+      70: aload_0
+      71: invokevirtual #85                 // Method net/combatroll/internals/RollManager$CooldownInfo.total:()I
+      74: aload_0
+      75: invokevirtual #82                 // Method net/combatroll/internals/RollManager$CooldownInfo.elapsed:()I
+      78: isub
+      79: istore        7
+      81: iconst_2
+      82: istore        8
+      84: iload         7
+      86: iload         8
+      88: if_icmpgt     220
+      91: iload         8
+      93: iconst_2
+      94: idiv
+      95: i2f
+      96: iload         7
+      98: iconst_1
+      99: isub
+     100: i2f
+     101: fconst_1
+     102: fload_1
+     103: fsub
+     104: fadd
+     105: iload         8
+     107: i2f
+     108: fdiv
+     109: fsub
+     110: fstore        9
+     112: iload         5
+     114: bipush        16
+     116: ishr
+     117: sipush        255
+     120: iand
+     121: i2f
+     122: ldc           #96                 // float 255.0f
+     124: fdiv
+     125: fstore        10
+     127: iload         5
+     129: bipush        8
+     131: ishr
+     132: sipush        255
+     135: iand
+     136: i2f
+     137: ldc           #96                 // float 255.0f
+     139: fdiv
+     140: fstore        11
+     142: iload         5
+     144: sipush        255
+     147: iand
+     148: i2f
+     149: ldc           #96                 // float 255.0f
+     151: fdiv
+     152: fstore        12
+     154: fload         10
+     156: fconst_1
+     157: fload         9
+     159: invokestatic  #100                // Method mixNumberFloat:(FFF)F
+     162: ldc           #96                 // float 255.0f
+     164: fmul
+     165: f2i
+     166: istore        13
+     168: fload         11
+     170: fconst_1
+     171: fload         9
+     173: invokestatic  #100                // Method mixNumberFloat:(FFF)F
+     176: ldc           #96                 // float 255.0f
+     178: fmul
+     179: f2i
+     180: istore        14
+     182: fload         12
+     184: fconst_1
+     185: fload         9
+     187: invokestatic  #100                // Method mixNumberFloat:(FFF)F
+     190: ldc           #96                 // float 255.0f
+     192: fmul
+     193: f2i
+     194: istore        15
+     196: iload         13
+     198: istore        5
+     200: iload         5
+     202: bipush        8
+     204: ishl
+     205: iload         14
+     207: iadd
+     208: istore        5
+     210: iload         5
+     212: bipush        8
+     214: ishl
+     215: iload         15
+     217: iadd
+     218: istore        5
+     220: iload         4
+     222: aload_0
+     223: invokevirtual #79                 // Method net/combatroll/internals/RollManager$CooldownInfo.availableRolls:()I
+     226: if_icmpge     232
+     229: fconst_1
+     230: fstore        6
+     232: aload_3
+     233: new           #20                 // class net/combatroll/client/gui/HudRenderHelper$ViewModel$Element
+     236: dup
+     237: iload         5
+     239: fload         6
+     241: invokespecial #103                // Method net/combatroll/client/gui/HudRenderHelper$ViewModel$Element."<init>":(IF)V
+     244: invokevirtual #107                // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+     247: pop
+     248: iinc          4, 1
+     251: goto          15
+     254: getstatic     #113                // Field net/combatroll/client/Keybindings.roll:Lnet/minecraft/client/KeyMapping;
+     257: astore        4
+     259: aload         4
+     261: checkcast     #115                // class net/combatroll/mixin/client/KeybindingAccessor
+     264: invokeinterface #119,  1          // InterfaceMethod net/combatroll/mixin/client/KeybindingAccessor.getBoundKey:()Lcom/mojang/blaze3d/platform/InputConstants$Key;
+     269: invokevirtual #123                // Method com/mojang/blaze3d/platform/InputConstants$Key.toString:()Ljava/lang/String;
+     272: astore        5
+     274: getstatic     #129                // Field net/combatroll/client/gui/HudKeyVisuals.custom:Ljava/util/Map;
+     277: aload         5
+     279: invokeinterface #135,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     284: checkcast     #10                 // class net/combatroll/client/gui/Drawable$Component
+     287: astore        6
+     289: aload         4
+     291: invokevirtual #141                // Method net/minecraft/client/KeyMapping.m_90863_:()Lnet/minecraft/network/chat/Component;
+     294: invokeinterface #146,  1          // InterfaceMethod net/minecraft/network/chat/Component.getString:()Ljava/lang/String;
+     299: getstatic     #152                // Field java/util/Locale.US:Ljava/util/Locale;
+     302: invokevirtual #158                // Method java/lang/String.toUpperCase:(Ljava/util/Locale;)Ljava/lang/String;
+     305: astore        7
+     307: aload         7
+     309: iconst_3
+     310: invokestatic  #162                // Method acronym:(Ljava/lang/String;I)Ljava/lang/String;
+     313: astore        7
+     315: new           #2                  // class net/combatroll/client/gui/HudRenderHelper$ViewModel
+     318: dup
+     319: aload_3
+     320: aload         7
+     322: aload         6
+     324: invokespecial #164                // Method "<init>":(Ljava/util/List;Ljava/lang/String;Lnet/combatroll/client/gui/Drawable$Component;)V
+     327: areturn
+
+  static net.combatroll.client.gui.HudRenderHelper$ViewModel mock();
+    Code:
+       0: getstatic     #63                 // Field net/combatroll/client/CombatRollClient.config:Lnet/combatroll/config/ClientConfig;
+       3: astore_0
+       4: aload_0
+       5: getfield      #76                 // Field net/combatroll/config/ClientConfig.hudArrowColor:I
+       8: istore_1
+       9: new           #2                  // class net/combatroll/client/gui/HudRenderHelper$ViewModel
+      12: dup
+      13: new           #20                 // class net/combatroll/client/gui/HudRenderHelper$ViewModel$Element
+      16: dup
+      17: iload_1
+      18: fconst_1
+      19: invokespecial #103                // Method net/combatroll/client/gui/HudRenderHelper$ViewModel$Element."<init>":(IF)V
+      22: new           #20                 // class net/combatroll/client/gui/HudRenderHelper$ViewModel$Element
+      25: dup
+      26: iload_1
+      27: ldc           #185                // float 0.5f
+      29: invokespecial #103                // Method net/combatroll/client/gui/HudRenderHelper$ViewModel$Element."<init>":(IF)V
+      32: new           #20                 // class net/combatroll/client/gui/HudRenderHelper$ViewModel$Element
+      35: dup
+      36: iload_1
+      37: fconst_0
+      38: invokespecial #103                // Method net/combatroll/client/gui/HudRenderHelper$ViewModel$Element."<init>":(IF)V
+      41: invokestatic  #191                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+      44: ldc           #193                // String R
+      46: aconst_null
+      47: invokespecial #164                // Method "<init>":(Ljava/util/List;Ljava/lang/String;Lnet/combatroll/client/gui/Drawable$Component;)V
+      50: areturn
+
+  private static float mixNumberFloat(float, float, float);
+    Code:
+       0: fload_0
+       1: fload_1
+       2: fload_0
+       3: fsub
+       4: fload_2
+       5: fmul
+       6: fadd
+       7: freturn
+
+  private static java.lang.String acronym(java.lang.String, int);
+    Code:
+       0: new           #200                // class java/lang/StringBuilder
+       3: dup
+       4: invokespecial #201                // Method java/lang/StringBuilder."<init>":()V
+       7: astore_2
+       8: aload_0
+       9: ldc           #203                // String \\s+
+      11: invokevirtual #207                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+      14: astore_3
+      15: aload_3
+      16: arraylength
+      17: istore        4
+      19: iconst_0
+      20: istore        5
+      22: iload         5
+      24: iload         4
+      26: if_icmpge     55
+      29: aload_3
+      30: iload         5
+      32: aaload
+      33: astore        6
+      35: aload_2
+      36: aload         6
+      38: invokevirtual #211                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+      41: iconst_0
+      42: invokevirtual #215                // Method java/lang/String.charAt:(I)C
+      45: invokevirtual #219                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+      48: pop
+      49: iinc          5, 1
+      52: goto          22
+      55: aload_2
+      56: invokevirtual #220                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      59: astore_3
+      60: aload_3
+      61: invokevirtual #223                // Method java/lang/String.length:()I
+      64: iload_1
+      65: if_icmple     75
+      68: aload_3
+      69: iconst_0
+      70: iload_1
+      71: invokevirtual #227                // Method java/lang/String.substring:(II)Ljava/lang/String;
+      74: astore_3
+      75: aload_2
+      76: invokevirtual #220                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      79: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #246,  0            // InvokeDynamic #0:toString:(Lnet/combatroll/client/gui/HudRenderHelper$ViewModel;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #250,  0            // InvokeDynamic #0:hashCode:(Lnet/combatroll/client/gui/HudRenderHelper$ViewModel;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #255,  0            // InvokeDynamic #0:equals:(Lnet/combatroll/client/gui/HudRenderHelper$ViewModel;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public java.util.List<net.combatroll.client.gui.HudRenderHelper$ViewModel$Element> elements();
+    Code:
+       0: aload_0
+       1: getfield      #47                 // Field elements:Ljava/util/List;
+       4: areturn
+
+  public java.lang.String label();
+    Code:
+       0: aload_0
+       1: getfield      #49                 // Field label:Ljava/lang/String;
+       4: areturn
+
+  public net.combatroll.client.gui.Drawable$Component drawable();
+    Code:
+       0: aload_0
+       1: getfield      #51                 // Field drawable:Lnet/combatroll/client/gui/Drawable$Component;
+       4: areturn
+}

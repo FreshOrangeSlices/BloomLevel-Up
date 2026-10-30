@@ -1,0 +1,625 @@
+Compiled from "BossesRiseLangGen.java"
+public class net.unusual.block_factorys_bosses.data.gen.BossesRiseLangGen extends net.unusual.block_factorys_bosses.data.util.BossesRiseLangProvider {
+  public net.unusual.block_factorys_bosses.data.gen.BossesRiseLangGen(net.minecraft.data.PackOutput);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #9                  // Method net/unusual/block_factorys_bosses/data/util/BossesRiseLangProvider."<init>":(Lnet/minecraft/data/PackOutput;)V
+       5: return
+
+  protected void addCustomTranslations();
+    Code:
+       0: aload_0
+       1: getstatic     #21                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.YETI:Lnet/minecraftforge/registries/RegistryObject;
+       4: ldc           #23                 // String Skor, The Yeti
+       6: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+       9: aload_0
+      10: getstatic     #30                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.GLACIAL_SHOVE:Lnet/minecraftforge/registries/RegistryObject;
+      13: ldc           #32                 // String Ice Cube
+      15: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      18: aload_0
+      19: getstatic     #39                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.ICE_SPIKE:Lnet/minecraftforge/registries/RegistryObject;
+      22: ldc           #41                 // String Ice Spike
+      24: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      27: aload_0
+      28: getstatic     #44                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.ICE_SPIKE_CLUSTER:Lnet/minecraftforge/registries/RegistryObject;
+      31: ldc           #46                 // String Ice Spike Cluster
+      33: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      36: aload_0
+      37: getstatic     #49                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.ICE_SPIKE_PR:Lnet/minecraftforge/registries/RegistryObject;
+      40: ldc           #51                 // String Ice Spike Projectile
+      42: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      45: aload_0
+      46: getstatic     #54                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.FROZEN_SKELETON:Lnet/minecraftforge/registries/RegistryObject;
+      49: ldc           #56                 // String Frozen Skeleton
+      51: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      54: aload_0
+      55: getstatic     #59                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.INFERNAL_DRAGON:Lnet/minecraftforge/registries/RegistryObject;
+      58: ldc           #61                 // String Ashlord, The Infernal Dragon
+      60: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+      63: aload_0
+      64: getstatic     #64                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.BLAZING_FIRE_BALL:Lnet/minecraftforge/registries/RegistryObject;
+      67: ldc           #66                 // String Blazing Fireball
+      69: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      72: aload_0
+      73: getstatic     #69                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.FIRE_AREA:Lnet/minecraftforge/registries/RegistryObject;
+      76: ldc           #71                 // String Fire Arena
+      78: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+      81: aload_0
+      82: getstatic     #74                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.DRAGON_GUARD_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+      85: ldc           #76                 // String Ashlord Guard
+      87: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+      90: aload_0
+      91: getstatic     #79                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.FLAMING_SKELETON_GUARD_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+      94: ldc           #81                 // String Flaming Ashlord Guard
+      96: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+      99: aload_0
+     100: getstatic     #84                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.FLAMING_SKELETON_GUARD_FIREBALL:Lnet/minecraftforge/registries/RegistryObject;
+     103: ldc           #86                 // String Flaming Ashlord Shooter
+     105: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     108: aload_0
+     109: getstatic     #89                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.UNDERWORLD_KNIGHT:Lnet/minecraftforge/registries/RegistryObject;
+     112: ldc           #91                 // String Helvar, the Underworld Knight
+     114: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     117: aload_0
+     118: getstatic     #94                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.SOUL_KNIGHT_WITHER_SKELETON:Lnet/minecraftforge/registries/RegistryObject;
+     121: ldc           #96                 // String Wither Knight
+     123: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     126: aload_0
+     127: getstatic     #99                 // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.SOUL_SKELETON:Lnet/minecraftforge/registries/RegistryObject;
+     130: ldc           #101                // String Soul Skeleton
+     132: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     135: aload_0
+     136: getstatic     #104                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.SOUL_SHOCKWAVE:Lnet/minecraftforge/registries/RegistryObject;
+     139: ldc           #106                // String Soul Shockwave
+     141: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     144: aload_0
+     145: getstatic     #109                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.SWORD_WAVE:Lnet/minecraftforge/registries/RegistryObject;
+     148: ldc           #111                // String Sword Wave
+     150: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     153: aload_0
+     154: getstatic     #114                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.RIFT:Lnet/minecraftforge/registries/RegistryObject;
+     157: ldc           #116                // String Helvar Rift
+     159: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     162: aload_0
+     163: getstatic     #119                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.RIFT_PROJECTILE:Lnet/minecraftforge/registries/RegistryObject;
+     166: ldc           #121                // String Helvar Rift Projectile
+     168: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     171: aload_0
+     172: getstatic     #124                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.BIG_RIFT_PROJECTILE:Lnet/minecraftforge/registries/RegistryObject;
+     175: ldc           #126                // String Helvar Rift Projectile Deluxe
+     177: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     180: aload_0
+     181: getstatic     #129                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.KNIGHT_MARK:Lnet/minecraftforge/registries/RegistryObject;
+     184: ldc           #131                // String Helvar\'s Weakness
+     186: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     189: aload_0
+     190: getstatic     #134                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.SANDWORM:Lnet/minecraftforge/registries/RegistryObject;
+     193: ldc           #136                // String Sirok, The Sandworm
+     195: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     198: aload_0
+     199: getstatic     #139                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.SAND_COLUMN:Lnet/minecraftforge/registries/RegistryObject;
+     202: ldc           #141                // String Sand Column
+     204: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     207: aload_0
+     208: getstatic     #144                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.POISON_AREA:Lnet/minecraftforge/registries/RegistryObject;
+     211: ldc           #146                // String Poison Area
+     213: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     216: aload_0
+     217: getstatic     #149                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.POISON_SPIT_PR:Lnet/minecraftforge/registries/RegistryObject;
+     220: ldc           #151                // String Poison Spit
+     222: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     225: aload_0
+     226: getstatic     #154                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.KRAKEN:Lnet/minecraftforge/registries/RegistryObject;
+     229: ldc           #156                // String Nerakyss, The Kraken
+     231: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     234: aload_0
+     235: getstatic     #159                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.KRAKEN_TENTACLE:Lnet/minecraftforge/registries/RegistryObject;
+     238: ldc           #161                // String Kraken Tentacle
+     240: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     243: aload_0
+     244: getstatic     #164                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.PIRATE_CAPTAIN:Lnet/minecraftforge/registries/RegistryObject;
+     247: ldc           #166                // String Pirate Captain
+     249: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     252: aload_0
+     253: getstatic     #169                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.PIRATE_ROOK:Lnet/minecraftforge/registries/RegistryObject;
+     256: ldc           #171                // String Pirate Rook
+     258: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     261: aload_0
+     262: getstatic     #174                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.CROSSBOW_PIRATE:Lnet/minecraftforge/registries/RegistryObject;
+     265: ldc           #176                // String Crossbow Pirate
+     267: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     270: aload_0
+     271: getstatic     #179                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.THROWN_CRATE:Lnet/minecraftforge/registries/RegistryObject;
+     274: ldc           #181                // String Crate
+     276: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     279: aload_0
+     280: getstatic     #184                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.CRATE_PILE:Lnet/minecraftforge/registries/RegistryObject;
+     283: ldc           #186                // String Crate Pile
+     285: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     288: aload_0
+     289: getstatic     #191                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.CRATE:Lnet/minecraftforge/registries/RegistryObject;
+     292: ldc           #181                // String Crate
+     294: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     297: aload_0
+     298: getstatic     #197                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.ANCHOR:Lnet/minecraftforge/registries/RegistryObject;
+     301: ldc           #199                // String Anchor
+     303: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     306: aload_0
+     307: getstatic     #202                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.ANCHOR_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     310: ldc           #199                // String Anchor
+     312: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     315: aload_0
+     316: getstatic     #205                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.PILE_OF_BONES:Lnet/minecraftforge/registries/RegistryObject;
+     319: ldc           #207                // String Pile Of Bones
+     321: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+     324: aload_0
+     325: getstatic     #210                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.CAGE:Lnet/minecraftforge/registries/RegistryObject;
+     328: ldc           #212                // String Cage
+     330: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     333: aload_0
+     334: getstatic     #215                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.CAGE_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     337: ldc           #212                // String Cage
+     339: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     342: aload_0
+     343: getstatic     #218                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.CAGE_SKELLY:Lnet/minecraftforge/registries/RegistryObject;
+     346: ldc           #220                // String Cage With Skelly
+     348: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     351: aload_0
+     352: getstatic     #223                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.CAGE_SKELLY_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     355: ldc           #220                // String Cage With Skelly
+     357: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     360: aload_0
+     361: getstatic     #226                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.BIG_CAGE:Lnet/minecraftforge/registries/RegistryObject;
+     364: ldc           #228                // String Big Cage
+     366: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     369: aload_0
+     370: getstatic     #231                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.BIG_CAGE_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     373: ldc           #228                // String Big Cage
+     375: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     378: aload_0
+     379: getstatic     #234                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.BIG_CAGE_SKELLY:Lnet/minecraftforge/registries/RegistryObject;
+     382: ldc           #236                // String Big Cage With Skelly
+     384: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     387: aload_0
+     388: getstatic     #239                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.BIG_CAGE_SKELLY_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     391: ldc           #236                // String Big Cage With Skelly
+     393: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     396: aload_0
+     397: getstatic     #242                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.KRAKEN_CANNON:Lnet/minecraftforge/registries/RegistryObject;
+     400: ldc           #244                // String Kraken Cannon
+     402: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     405: aload_0
+     406: getstatic     #247                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KRAKEN_CANNON_ITEM:Lnet/minecraftforge/registries/RegistryObject;
+     409: ldc           #244                // String Kraken Cannon
+     411: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     414: aload_0
+     415: getstatic     #250                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.CANNONBALL:Lnet/minecraftforge/registries/RegistryObject;
+     418: ldc           #252                // String Cannonball
+     420: invokevirtual #36                 // Method addEntityType:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     423: aload_0
+     424: getstatic     #255                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.CANNONBALL:Lnet/minecraftforge/registries/RegistryObject;
+     427: ldc           #252                // String Cannonball
+     429: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     432: aload_0
+     433: getstatic     #261                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.PLANK:Lnet/minecraftforge/registries/RegistryObject;
+     436: ldc_w         #263                // String Pile of Planks
+     439: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     442: aload_0
+     443: getstatic     #266                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS:Lnet/minecraftforge/registries/RegistryObject;
+     446: ldc_w         #268                // String Big Oak Planks
+     449: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     452: aload_0
+     453: getstatic     #271                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_BROKEN:Lnet/minecraftforge/registries/RegistryObject;
+     456: ldc_w         #273                // String Broken Big Oak Planks
+     459: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     462: aload_0
+     463: getstatic     #276                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_CRACKED:Lnet/minecraftforge/registries/RegistryObject;
+     466: ldc_w         #278                // String Cracked Big Oak Planks
+     469: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     472: aload_0
+     473: getstatic     #281                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_STRAIGHT:Lnet/minecraftforge/registries/RegistryObject;
+     476: ldc_w         #283                // String Big Oak Planks (straight)
+     479: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     482: aload_0
+     483: getstatic     #286                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_VARIATION:Lnet/minecraftforge/registries/RegistryObject;
+     486: ldc_w         #288                // String Big Oak Planks (variant)
+     489: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     492: aload_0
+     493: getstatic     #291                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_WET:Lnet/minecraftforge/registries/RegistryObject;
+     496: ldc_w         #293                // String Big Wet Oak Planks
+     499: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     502: aload_0
+     503: getstatic     #296                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_WET_BROKEN:Lnet/minecraftforge/registries/RegistryObject;
+     506: ldc_w         #298                // String Broken Big Wet Oak Planks
+     509: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     512: aload_0
+     513: getstatic     #301                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_WET_CRACKED:Lnet/minecraftforge/registries/RegistryObject;
+     516: ldc_w         #303                // String Cracked Big Wet Oak Planks
+     519: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     522: aload_0
+     523: getstatic     #306                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_WET_STRAIGHT:Lnet/minecraftforge/registries/RegistryObject;
+     526: ldc_w         #308                // String Big Wet Oak Planks (straight)
+     529: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     532: aload_0
+     533: getstatic     #311                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_OAK_PLANKS_WET_VARIATION:Lnet/minecraftforge/registries/RegistryObject;
+     536: ldc_w         #313                // String Big Wet Oak Planks (variant)
+     539: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     542: aload_0
+     543: getstatic     #316                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.GUARDRAIL:Lnet/minecraftforge/registries/RegistryObject;
+     546: ldc_w         #318                // String Guardrail
+     549: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     552: aload_0
+     553: getstatic     #321                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.GUARDRAIL_DIAGONAL:Lnet/minecraftforge/registries/RegistryObject;
+     556: ldc_w         #323                // String Diagonal Guardrail
+     559: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     562: aload_0
+     563: getstatic     #326                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.SHIP_LANTERN:Lnet/minecraftforge/registries/RegistryObject;
+     566: ldc_w         #328                // String Ship Lantern
+     569: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     572: aload_0
+     573: getstatic     #331                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.COIN_PILE:Lnet/minecraftforge/registries/RegistryObject;
+     576: ldc_w         #333                // String Coin Pile
+     579: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     582: aload_0
+     583: getstatic     #336                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.ROPE_ROLL:Lnet/minecraftforge/registries/RegistryObject;
+     586: ldc_w         #338                // String Rope Roll
+     589: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     592: aload_0
+     593: getstatic     #341                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.SHIP_STEERING_WHEEL:Lnet/minecraftforge/registries/RegistryObject;
+     596: ldc_w         #343                // String Ship Steering Wheel
+     599: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     602: aload_0
+     603: getstatic     #346                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.NET:Lnet/minecraftforge/registries/RegistryObject;
+     606: ldc_w         #348                // String Net
+     609: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     612: aload_0
+     613: getstatic     #351                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.VASE:Lnet/minecraftforge/registries/RegistryObject;
+     616: ldc_w         #353                // String Vase
+     619: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     622: aload_0
+     623: getstatic     #356                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.TALL_VASE:Lnet/minecraftforge/registries/RegistryObject;
+     626: ldc_w         #358                // String Tall Vase
+     629: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     632: aload_0
+     633: getstatic     #361                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.WALL_TORCH:Lnet/minecraftforge/registries/RegistryObject;
+     636: ldc_w         #363                // String Wall Torch
+     639: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     642: aload_0
+     643: getstatic     #366                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.UNDERWOLD_WALL_TORCH:Lnet/minecraftforge/registries/RegistryObject;
+     646: ldc_w         #368                // String Soul Wall Torch
+     649: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     652: aload_0
+     653: getstatic     #371                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.CANDLES:Lnet/minecraftforge/registries/RegistryObject;
+     656: ldc_w         #373                // String Small Candelabra
+     659: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     662: aload_0
+     663: getstatic     #376                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.UNDERWOLD_CANDLES:Lnet/minecraftforge/registries/RegistryObject;
+     666: ldc_w         #378                // String Small Soul Candelabra
+     669: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     672: aload_0
+     673: getstatic     #381                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.TALL_CANDLES:Lnet/minecraftforge/registries/RegistryObject;
+     676: ldc_w         #383                // String Tall Candelabra
+     679: iconst_1
+     680: anewarray     #385                // class java/lang/String
+     683: dup
+     684: iconst_0
+     685: ldc_w         #387                // String §7Twisted
+     688: aastore
+     689: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     692: aload_0
+     693: getstatic     #394                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.UNDERWORLD_TALL_CANDLES:Lnet/minecraftforge/registries/RegistryObject;
+     696: ldc_w         #396                // String Tall Soul Candelabra
+     699: iconst_1
+     700: anewarray     #385                // class java/lang/String
+     703: dup
+     704: iconst_0
+     705: ldc_w         #387                // String §7Twisted
+     708: aastore
+     709: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     712: aload_0
+     713: getstatic     #399                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.TALL_CANDLES_CROSS:Lnet/minecraftforge/registries/RegistryObject;
+     716: ldc_w         #401                // String Tall Cross Candelabra
+     719: iconst_1
+     720: anewarray     #385                // class java/lang/String
+     723: dup
+     724: iconst_0
+     725: ldc_w         #403                // String §7Cross
+     728: aastore
+     729: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     732: aload_0
+     733: getstatic     #406                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.UNDER_WORLD_TALL_CANDLE_CROSS:Lnet/minecraftforge/registries/RegistryObject;
+     736: ldc_w         #408                // String Tall Cross Soul Candelabra
+     739: iconst_1
+     740: anewarray     #385                // class java/lang/String
+     743: dup
+     744: iconst_0
+     745: ldc_w         #403                // String §7Cross
+     748: aastore
+     749: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     752: aload_0
+     753: getstatic     #411                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BONE_REMAINS:Lnet/minecraftforge/registries/RegistryObject;
+     756: ldc_w         #413                // String Bone Remains
+     759: iconst_1
+     760: anewarray     #385                // class java/lang/String
+     763: dup
+     764: iconst_0
+     765: ldc_w         #415                // String §7Body
+     768: aastore
+     769: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     772: aload_0
+     773: getstatic     #418                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BONE_REMAINS_LEGS:Lnet/minecraftforge/registries/RegistryObject;
+     776: ldc_w         #413                // String Bone Remains
+     779: iconst_1
+     780: anewarray     #385                // class java/lang/String
+     783: dup
+     784: iconst_0
+     785: ldc_w         #420                // String §7Legs
+     788: aastore
+     789: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     792: aload_0
+     793: getstatic     #423                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BONE_REMAINS_RIB_CAGE:Lnet/minecraftforge/registries/RegistryObject;
+     796: ldc_w         #413                // String Bone Remains
+     799: iconst_1
+     800: anewarray     #385                // class java/lang/String
+     803: dup
+     804: iconst_0
+     805: ldc_w         #425                // String §7Rib Cage
+     808: aastore
+     809: invokevirtual #391                // Method addBlockAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     812: aload_0
+     813: getstatic     #428                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.CORPSE:Lnet/minecraftforge/registries/RegistryObject;
+     816: ldc_w         #430                // String Corpse
+     819: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     822: aload_0
+     823: getstatic     #433                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BIG_CHAIN:Lnet/minecraftforge/registries/RegistryObject;
+     826: ldc_w         #435                // String Big Chain
+     829: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     832: aload_0
+     833: getstatic     #438                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.PRISON_DOOR:Lnet/minecraftforge/registries/RegistryObject;
+     836: ldc_w         #440                // String Prison Door
+     839: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     842: aload_0
+     843: getstatic     #443                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.RUSTY_PRISON_DOOR:Lnet/minecraftforge/registries/RegistryObject;
+     846: ldc_w         #445                // String Rusty Prison Door
+     849: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     852: aload_0
+     853: getstatic     #448                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.ICE_BLOCK_PARTICULES:Lnet/minecraftforge/registries/RegistryObject;
+     856: ldc_w         #450                // String Ice Block Particles
+     859: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     862: aload_0
+     863: getstatic     #453                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.DRAGON_BANNER:Lnet/minecraftforge/registries/RegistryObject;
+     866: ldc_w         #455                // String Dragon Banner
+     869: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     872: aload_0
+     873: getstatic     #458                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.DRAGON_SKULL:Lnet/minecraftforge/registries/RegistryObject;
+     876: ldc_w         #460                // String Ashlord Skull
+     879: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     882: aload_0
+     883: getstatic     #463                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.BOSS_SPAWNER:Lnet/minecraftforge/registries/RegistryObject;
+     886: ldc_w         #465                // String Boss Spawner
+     889: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     892: aload_0
+     893: getstatic     #468                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.KRAKEN_SPAWNER:Lnet/minecraftforge/registries/RegistryObject;
+     896: ldc_w         #470                // String Kraken Spawner
+     899: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     902: aload_0
+     903: getstatic     #473                // Field net/unusual/block_factorys_bosses/init/BossesRiseBlocks.UNDERWORLD_ARENA_DOOR:Lnet/minecraftforge/registries/RegistryObject;
+     906: ldc_w         #475                // String Underworld Arena Door
+     909: invokevirtual #258                // Method addBlock:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     912: aload_0
+     913: getstatic     #478                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.PIRATE_SABER:Lnet/minecraftforge/registries/RegistryObject;
+     916: ldc_w         #480                // String Pirate Saber
+     919: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     922: aload_0
+     923: getstatic     #483                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KRAKEN_TOOTH:Lnet/minecraftforge/registries/RegistryObject;
+     926: ldc_w         #485                // String Kraken Tooth
+     929: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+     932: aload_0
+     933: getstatic     #488                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KRAKEN_TRIDENT:Lnet/minecraftforge/registries/RegistryObject;
+     936: ldc_w         #490                // String Kraken Trident
+     939: iconst_2
+     940: anewarray     #385                // class java/lang/String
+     943: dup
+     944: iconst_0
+     945: ldc_w         #492                // String §7On Collision:
+     948: aastore
+     949: dup
+     950: iconst_1
+     951: ldc_w         #494                // String §9Damages and pulls nearby entities
+     954: aastore
+     955: invokevirtual #497                // Method addItemAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     958: aload_0
+     959: getstatic     #500                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.UNDYING_TENTACLE:Lnet/minecraftforge/registries/RegistryObject;
+     962: ldc_w         #502                // String Undying Tentacle
+     965: iconst_4
+     966: anewarray     #385                // class java/lang/String
+     969: dup
+     970: iconst_0
+     971: ldc_w         #504                // String §7On Use:
+     974: aastore
+     975: dup
+     976: iconst_1
+     977: ldc_w         #506                // String §9Hook yourself to block, or an entity to yourself.
+     980: aastore
+     981: dup
+     982: iconst_2
+     983: ldc_w         #508                // String §7On Shift-Use:
+     986: aastore
+     987: dup
+     988: iconst_3
+     989: ldc_w         #510                // String §9Summon tentacles to fight enemies.
+     992: aastore
+     993: invokevirtual #497                // Method addItemAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+     996: aload_0
+     997: getstatic     #513                // Field net/unusual/block_factorys_bosses/init/BossesRiseEntities.GHOST_TENTACLE:Lnet/minecraftforge/registries/RegistryObject;
+    1000: ldc_w         #515                // String Ghost Tentacle
+    1003: invokevirtual #27                 // Method addEntityAndEgg:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+    1006: aload_0
+    1007: getstatic     #518                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DRAGON_GUARD_SHIELD:Lnet/minecraftforge/registries/RegistryObject;
+    1010: ldc_w         #520                // String Dragon Guard Shield
+    1013: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1016: aload_0
+    1017: getstatic     #523                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.ENHANCED_SHIELD:Lnet/minecraftforge/registries/RegistryObject;
+    1020: ldc_w         #525                // String Enhanced Shield
+    1023: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1026: aload_0
+    1027: getstatic     #528                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DRAGON_BONES_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+    1030: ldc_w         #530                // String Dragon Bones Chestplate
+    1033: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1036: aload_0
+    1037: getstatic     #533                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DRAGON_BONES_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+    1040: ldc_w         #535                // String Dragon Bones Leggings
+    1043: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1046: aload_0
+    1047: getstatic     #538                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DRAGON_BONES_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+    1050: ldc_w         #540                // String Dragon Bones Boots
+    1053: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1056: aload_0
+    1057: getstatic     #543                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.ICE_GAUNTLET:Lnet/minecraftforge/registries/RegistryObject;
+    1060: ldc_w         #545                // String Skor Gauntlet
+    1063: bipush        7
+    1065: anewarray     #385                // class java/lang/String
+    1068: dup
+    1069: iconst_0
+    1070: ldc_w         #547                // String §7On Hit:
+    1073: aastore
+    1074: dup
+    1075: iconst_1
+    1076: ldc_w         #549                // String §9Freeze Target
+    1079: aastore
+    1080: dup
+    1081: iconst_2
+    1082: ldc_w         #551                // String §7On Sneak-Right-Click Release:
+    1085: aastore
+    1086: dup
+    1087: iconst_3
+    1088: ldc_w         #553                // String §9Fire wave of ice-spikes
+    1091: aastore
+    1092: dup
+    1093: iconst_4
+    1094: ldc_w         #555                // String §7On jump while holding Right-Click:
+    1097: aastore
+    1098: dup
+    1099: iconst_5
+    1100: ldc_w         #557                // String §9Perform an ice-slam-leap
+    1103: aastore
+    1104: dup
+    1105: bipush        6
+    1107: ldc_w         #559                // String §8Can be used as a Shield
+    1110: aastore
+    1111: invokevirtual #497                // Method addItemAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+    1114: aload_0
+    1115: getstatic     #562                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KNIGHT_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+    1118: ldc_w         #564                // String Knight Helmet
+    1121: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1124: aload_0
+    1125: getstatic     #567                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KNIGHT_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+    1128: ldc_w         #569                // String Knight Chestplate
+    1131: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1134: aload_0
+    1135: getstatic     #572                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KNIGHT_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+    1138: ldc_w         #574                // String Knight Leggings
+    1141: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1144: aload_0
+    1145: getstatic     #577                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KNIGHT_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+    1148: ldc_w         #579                // String Knight Boots
+    1151: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1154: aload_0
+    1155: getstatic     #582                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.LARGE_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+    1158: ldc_w         #584                // String Large Sword
+    1161: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1164: aload_0
+    1165: getstatic     #587                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.WARRIOR_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+    1168: ldc_w         #589                // String Warrior Sword
+    1171: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1174: aload_0
+    1175: getstatic     #592                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DAGGER:Lnet/minecraftforge/registries/RegistryObject;
+    1178: ldc_w         #594                // String Dagger
+    1181: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1184: aload_0
+    1185: getstatic     #597                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DRAGON_BONE:Lnet/minecraftforge/registries/RegistryObject;
+    1188: ldc_w         #599                // String Dragon Bone
+    1191: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1194: aload_0
+    1195: getstatic     #602                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.KNIGHT_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+    1198: ldc_w         #604                // String Helvar\'s Sword
+    1201: iconst_2
+    1202: anewarray     #385                // class java/lang/String
+    1205: dup
+    1206: iconst_0
+    1207: ldc_w         #606                // String §7On Right-Click:
+    1210: aastore
+    1211: dup
+    1212: iconst_1
+    1213: ldc_w         #608                // String §9Throw a powerful Slash
+    1216: aastore
+    1217: invokevirtual #497                // Method addItemAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+    1220: aload_0
+    1221: getstatic     #611                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.SANDWORM_GAUNTLET:Lnet/minecraftforge/registries/RegistryObject;
+    1224: ldc_w         #613                // String Sirok Gauntlet
+    1227: iconst_2
+    1228: anewarray     #385                // class java/lang/String
+    1231: dup
+    1232: iconst_0
+    1233: ldc_w         #615                // String §7On Hold-Right-Click:
+    1236: aastore
+    1237: dup
+    1238: iconst_1
+    1239: ldc_w         #617                // String §9Shoot Poison
+    1242: aastore
+    1243: invokevirtual #497                // Method addItemAndDesc:(Ljava/util/function/Supplier;Ljava/lang/String;[Ljava/lang/String;)V
+    1246: aload_0
+    1247: getstatic     #620                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.DRAGON_SHANK:Lnet/minecraftforge/registries/RegistryObject;
+    1250: ldc_w         #622                // String Dragon Shank
+    1253: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1256: aload_0
+    1257: getstatic     #625                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.ANCIENT_TRIAL_KEY:Lnet/minecraftforge/registries/RegistryObject;
+    1260: ldc_w         #627                // String Ancient Trial Key
+    1263: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1266: aload_0
+    1267: getstatic     #630                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.UNDERWORLD_ARENA_KEY:Lnet/minecraftforge/registries/RegistryObject;
+    1270: ldc_w         #632                // String Underworld Arena Key
+    1273: invokevirtual #194                // Method addItem:(Ljava/util/function/Supplier;Ljava/lang/String;)V
+    1276: aload_0
+    1277: getstatic     #638                // Field net/unusual/block_factorys_bosses/init/BossesRiseDamageTypes.CANNONBALL_HIT:Lnet/minecraft/resources/ResourceKey;
+    1280: ldc_w         #640                // String %1$s got flattened with a cannonball
+    1283: aconst_null
+    1284: ldc_w         #642                // String %2$s flattened %1$s with a cannonball
+    1287: invokevirtual #646                // Method addDamageType:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+    1290: aload_0
+    1291: getstatic     #649                // Field net/unusual/block_factorys_bosses/init/BossesRiseDamageTypes.KRAKEN_TENTACLE_SMASH:Lnet/minecraft/resources/ResourceKey;
+    1294: ldc_w         #651                // String %1$s got smashed by a tentacle
+    1297: aconst_null
+    1298: ldc_w         #653                // String %2$s smashed %1$s with a tentacle
+    1301: invokevirtual #646                // Method addDamageType:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+    1304: aload_0
+    1305: ldc_w         #655                // String block_factorys_bosses
+    1308: ldc_w         #657                // String Bosses\' Rise
+    1311: invokevirtual #661                // Method add:(Ljava/lang/String;Ljava/lang/String;)V
+    1314: aload_0
+    1315: getstatic     #666                // Field net/unusual/block_factorys_bosses/init/BlockFactorysBossesModTabs.BLOCKFACTORYSBOSSESTAB:Lnet/minecraftforge/registries/RegistryObject;
+    1318: ldc_w         #657                // String Bosses\' Rise
+    1321: invokevirtual #669                // Method addCreativeTab:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+    1324: aload_0
+    1325: getstatic     #674                // Field net/unusual/block_factorys_bosses/init/BossesRiseAttributes.ROLL_COUNT:Lnet/minecraftforge/registries/RegistryObject;
+    1328: ldc_w         #676                // String Roll Count
+    1331: invokevirtual #679                // Method addAttribute:(Lnet/minecraftforge/registries/RegistryObject;Ljava/lang/String;)V
+    1334: aload_0
+    1335: getstatic     #685                // Field net/unusual/block_factorys_bosses/init/BossesRiseKeyMappings.DODGE_ROLL:Lnet/minecraft/client/KeyMapping;
+    1338: ldc_w         #687                // String Dodge Roll
+    1341: invokevirtual #691                // Method addKeyMapping:(Lnet/minecraft/client/KeyMapping;Ljava/lang/String;)V
+    1344: aload_0
+    1345: getstatic     #697                // Field net/unusual/block_factorys_bosses/event/StructureDestructionEvents.DESTRUCTION_CANCEL_MESSAGE:Ljava/lang/String;
+    1348: ldc_w         #699                // String The Dragon Tower is protected by ancient magic!
+    1351: invokevirtual #661                // Method add:(Ljava/lang/String;Ljava/lang/String;)V
+    1354: aload_0
+    1355: getstatic     #704                // Field net/unusual/block_factorys_bosses/entity/boss/knight/UnderworldKnightEntity.KNOCKED_DOWN_MESSAGE:Ljava/lang/String;
+    1358: ldc_w         #706                // String Helvar is knocked down!
+    1361: invokevirtual #661                // Method add:(Ljava/lang/String;Ljava/lang/String;)V
+    1364: aload_0
+    1365: getstatic     #711                // Field net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.NO_BALLS_MESSAGE:Ljava/lang/String;
+    1368: ldc_w         #713                // String No ammo!
+    1371: invokevirtual #661                // Method add:(Ljava/lang/String;Ljava/lang/String;)V
+    1374: return
+}

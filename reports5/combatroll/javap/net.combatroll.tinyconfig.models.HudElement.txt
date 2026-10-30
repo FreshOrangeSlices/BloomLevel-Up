@@ -1,0 +1,18 @@
+Compiled from "HudElement.java"
+public class net.combatroll.tinyconfig.models.HudElement {
+  public net.combatroll.tinyconfig.models.HudElement$Origin origin;
+
+  public net.combatroll.tinyconfig.models.Vec2f offset;
+
+  public net.combatroll.tinyconfig.models.HudElement(net.combatroll.tinyconfig.models.HudElement$Origin, net.combatroll.tinyconfig.models.Vec2f);
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #21                 // Field origin:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+       9: aload_0
+      10: aload_2
+      11: putfield      #23                 // Field offset:Lnet/combatroll/tinyconfig/models/Vec2f;
+      14: return
+}

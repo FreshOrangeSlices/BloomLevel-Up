@@ -1,0 +1,37 @@
+Compiled from "ModConfig.java"
+public class net.saksolm.monsterexpansion.config.ModConfig$Client {
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue QUEST_HUD_ON_RIGHT;
+
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue SHOW_DAMAGE_INDICATORS;
+
+  net.saksolm.monsterexpansion.config.ModConfig$Client(net.minecraftforge.common.ForgeConfigSpec$Builder);
+    Code:
+       0: aload_0
+       1: invokespecial #24                 // Method java/lang/Object."<init>":()V
+       4: aload_1
+       5: ldc           #26                 // String Client-side HUD settings.
+       7: invokevirtual #30                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: ldc           #32                 // String hud
+      12: invokevirtual #35                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      15: pop
+      16: aload_0
+      17: aload_1
+      18: ldc           #37                 // String Show the quest HUD (banner, targets, party health) on the right side of the screen instead of the left.
+      20: invokevirtual #30                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      23: ldc           #39                 // String questHudOnRight
+      25: iconst_0
+      26: invokevirtual #43                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      29: putfield      #45                 // Field QUEST_HUD_ON_RIGHT:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      32: aload_0
+      33: aload_1
+      34: ldc           #47                 // String Show floating damage number indicators when you hit a monster.
+      36: invokevirtual #30                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      39: ldc           #49                 // String showDamageIndicators
+      41: iconst_1
+      42: invokevirtual #43                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      45: putfield      #51                 // Field SHOW_DAMAGE_INDICATORS:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      48: aload_1
+      49: invokevirtual #55                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      52: pop
+      53: return
+}

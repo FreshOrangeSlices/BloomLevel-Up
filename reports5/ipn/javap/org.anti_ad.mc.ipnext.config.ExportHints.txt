@@ -1,0 +1,55 @@
+public final class org.anti_ad.mc.ipnext.config.ExportHints extends org.anti_ad.mc.common.gui.widgets.ConfigButtonInfo {
+  private final boolean asInternal;
+
+  public org.anti_ad.mc.ipnext.config.ExportHints(boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #11                 // Method org/anti_ad/mc/common/gui/widgets/ConfigButtonInfo."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #13                 // Field asInternal:Z
+       9: return
+
+  public final boolean getAsInternal();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field asInternal:Z
+       4: ireturn
+
+  public final java.lang.String getButtonText();
+    Code:
+       0: aload_0
+       1: getfield      #13                 // Field asInternal:Z
+       4: ifeq          12
+       7: ldc           #20                 // String for integration
+       9: goto          14
+      12: ldc           #22                 // String as separate files
+      14: invokedynamic #36,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      19: areturn
+
+  public final void onClick(org.anti_ad.mc.common.gui.widgets.CustomButtonWidget);
+    Code:
+       0: aload_1
+       1: ldc           #40                 // String
+       3: invokestatic  #46                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: aload_0
+       7: getfield      #13                 // Field asInternal:Z
+      10: ifeq          40
+      13: getstatic     #52                 // Field org/anti_ad/mc/common/TellPlayer.INSTANCE:Lorg/anti_ad/mc/common/TellPlayer;
+      16: ldc           #54                 // String Generating ModIntegrationExport.json
+      18: invokevirtual #58                 // Method org/anti_ad/mc/common/TellPlayer.chat:(Ljava/lang/String;)V
+      21: getstatic     #63                 // Field org/anti_ad/mc/ipnext/integration/HintsManagerNG.INSTANCE:Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG;
+      24: getstatic     #68                 // Field org/anti_ad/mc/ipnext/config/Modpacks.INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+      27: invokevirtual #72                 // Method org/anti_ad/mc/ipnext/config/Modpacks.getDIFF_CALCULATOR_PRIORITY:()Lorg/anti_ad/mc/common/config/options/ConfigEnum;
+      30: invokevirtual #78                 // Method org/anti_ad/mc/common/config/options/ConfigEnum.getValue:()Ljava/lang/Enum;
+      33: checkcast     #80                 // class org/anti_ad/mc/ipnext/integration/MergePriority
+      36: invokevirtual #84                 // Method org/anti_ad/mc/ipnext/integration/HintsManagerNG.saveAllAsIntegrated:(Lorg/anti_ad/mc/ipnext/integration/MergePriority;)V
+      39: return
+      40: getstatic     #63                 // Field org/anti_ad/mc/ipnext/integration/HintsManagerNG.INSTANCE:Lorg/anti_ad/mc/ipnext/integration/HintsManagerNG;
+      43: getstatic     #68                 // Field org/anti_ad/mc/ipnext/config/Modpacks.INSTANCE:Lorg/anti_ad/mc/ipnext/config/Modpacks;
+      46: invokevirtual #72                 // Method org/anti_ad/mc/ipnext/config/Modpacks.getDIFF_CALCULATOR_PRIORITY:()Lorg/anti_ad/mc/common/config/options/ConfigEnum;
+      49: invokevirtual #78                 // Method org/anti_ad/mc/common/config/options/ConfigEnum.getValue:()Ljava/lang/Enum;
+      52: checkcast     #80                 // class org/anti_ad/mc/ipnext/integration/MergePriority
+      55: invokevirtual #87                 // Method org/anti_ad/mc/ipnext/integration/HintsManagerNG.saveAllAsSeparate:(Lorg/anti_ad/mc/ipnext/integration/MergePriority;)V
+      58: return
+}

@@ -1,0 +1,26 @@
+Compiled from "VersionableConfig.java"
+public class net.combatroll.tinyconfig.versioning.VersionableConfig implements net.combatroll.tinyconfig.versioning.Versionable {
+  public int schema_version;
+
+  public net.combatroll.tinyconfig.versioning.VersionableConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_0
+       6: putfield      #15                 // Field schema_version:I
+       9: return
+
+  public int getSchemaVersion();
+    Code:
+       0: aload_0
+       1: getfield      #15                 // Field schema_version:I
+       4: ireturn
+
+  public void setSchemaVersion(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #15                 // Field schema_version:I
+       5: return
+}

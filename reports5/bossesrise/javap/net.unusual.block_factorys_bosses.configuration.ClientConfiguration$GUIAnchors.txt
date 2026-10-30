@@ -1,0 +1,131 @@
+Compiled from "ClientConfiguration.java"
+public final class net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors extends java.lang.Enum<net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors> implements net.minecraft.util.StringRepresentable {
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors HOTBAR_RIGHT;
+
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors HOTBAR_LEFT;
+
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors TOP_LEFT;
+
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors TOP_RIGHT;
+
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors BOTTOM_LEFT;
+
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors BOTTOM_RIGHT;
+
+  public static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors SCREEN_CENTER;
+
+  private static final net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors[] $VALUES;
+
+  public static net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors[] values();
+    Code:
+       0: getstatic     #25                 // Field $VALUES:[Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+       3: invokevirtual #30                 // Method "[Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;".clone:()Ljava/lang/Object;
+       6: checkcast     #26                 // class "[Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;"
+       9: areturn
+
+  public static net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+       2: aload_0
+       3: invokestatic  #35                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+       9: areturn
+
+  private net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #42                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public java.lang.String m_7912_();
+    Code:
+       0: aload_0
+       1: invokevirtual #48                 // Method toString:()Ljava/lang/String;
+       4: getstatic     #54                 // Field java/util/Locale.ROOT:Ljava/util/Locale;
+       7: invokevirtual #60                 // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      10: areturn
+
+  private static net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors[] $values();
+    Code:
+       0: bipush        7
+       2: anewarray     #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+       5: dup
+       6: iconst_0
+       7: getstatic     #63                 // Field HOTBAR_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: getstatic     #65                 // Field HOTBAR_LEFT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      16: aastore
+      17: dup
+      18: iconst_2
+      19: getstatic     #67                 // Field TOP_LEFT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      22: aastore
+      23: dup
+      24: iconst_3
+      25: getstatic     #69                 // Field TOP_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      28: aastore
+      29: dup
+      30: iconst_4
+      31: getstatic     #71                 // Field BOTTOM_LEFT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      34: aastore
+      35: dup
+      36: iconst_5
+      37: getstatic     #73                 // Field BOTTOM_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      40: aastore
+      41: dup
+      42: bipush        6
+      44: getstatic     #75                 // Field SCREEN_CENTER:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      47: aastore
+      48: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+       3: dup
+       4: ldc           #77                 // String HOTBAR_RIGHT
+       6: iconst_0
+       7: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #63                 // Field HOTBAR_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      13: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+      16: dup
+      17: ldc           #79                 // String HOTBAR_LEFT
+      19: iconst_1
+      20: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #65                 // Field HOTBAR_LEFT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      26: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+      29: dup
+      30: ldc           #80                 // String TOP_LEFT
+      32: iconst_2
+      33: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #67                 // Field TOP_LEFT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      39: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+      42: dup
+      43: ldc           #81                 // String TOP_RIGHT
+      45: iconst_3
+      46: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      49: putstatic     #69                 // Field TOP_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      52: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+      55: dup
+      56: ldc           #82                 // String BOTTOM_LEFT
+      58: iconst_4
+      59: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      62: putstatic     #71                 // Field BOTTOM_LEFT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      65: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+      68: dup
+      69: ldc           #83                 // String BOTTOM_RIGHT
+      71: iconst_5
+      72: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      75: putstatic     #73                 // Field BOTTOM_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      78: new           #2                  // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+      81: dup
+      82: ldc           #84                 // String SCREEN_CENTER
+      84: bipush        6
+      86: invokespecial #78                 // Method "<init>":(Ljava/lang/String;I)V
+      89: putstatic     #75                 // Field SCREEN_CENTER:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      92: invokestatic  #86                 // Method $values:()[Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      95: putstatic     #25                 // Field $VALUES:[Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+      98: return
+}

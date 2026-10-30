@@ -1,0 +1,266 @@
+Compiled from "HudElement.java"
+public final class net.combatroll.client.gui.HudElement$Origin extends java.lang.Enum<net.combatroll.client.gui.HudElement$Origin> {
+  public static final net.combatroll.client.gui.HudElement$Origin TOP;
+
+  public static final net.combatroll.client.gui.HudElement$Origin TOP_LEFT;
+
+  public static final net.combatroll.client.gui.HudElement$Origin TOP_RIGHT;
+
+  public static final net.combatroll.client.gui.HudElement$Origin BOTTOM;
+
+  public static final net.combatroll.client.gui.HudElement$Origin BOTTOM_LEFT;
+
+  public static final net.combatroll.client.gui.HudElement$Origin BOTTOM_RIGHT;
+
+  private static final net.combatroll.client.gui.HudElement$Origin[] $VALUES;
+
+  public static net.combatroll.client.gui.HudElement$Origin[] values();
+    Code:
+       0: getstatic     #24                 // Field $VALUES:[Lnet/combatroll/client/gui/HudElement$Origin;
+       3: invokevirtual #29                 // Method "[Lnet/combatroll/client/gui/HudElement$Origin;".clone:()Ljava/lang/Object;
+       6: checkcast     #25                 // class "[Lnet/combatroll/client/gui/HudElement$Origin;"
+       9: areturn
+
+  public static net.combatroll.client.gui.HudElement$Origin valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/combatroll/client/gui/HudElement$Origin
+       2: aload_0
+       3: invokestatic  #35                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/combatroll/client/gui/HudElement$Origin
+       9: areturn
+
+  private net.combatroll.client.gui.HudElement$Origin();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #41                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public net.minecraft.world.phys.Vec2 getPoint(int, int);
+    Code:
+       0: getstatic     #50                 // Field net/combatroll/client/gui/HudElement$1.$SwitchMap$net$combatroll$client$gui$HudElement$Origin:[I
+       3: aload_0
+       4: invokevirtual #54                 // Method ordinal:()I
+       7: iaload
+       8: tableswitch   { // 1 to 6
+                     1: 48
+                     2: 61
+                     3: 71
+                     4: 82
+                     5: 96
+                     6: 107
+               default: 119
+          }
+      48: new           #56                 // class net/minecraft/world/phys/Vec2
+      51: dup
+      52: iload_1
+      53: i2f
+      54: fconst_2
+      55: fdiv
+      56: fconst_0
+      57: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      60: areturn
+      61: new           #56                 // class net/minecraft/world/phys/Vec2
+      64: dup
+      65: fconst_0
+      66: fconst_0
+      67: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      70: areturn
+      71: new           #56                 // class net/minecraft/world/phys/Vec2
+      74: dup
+      75: iload_1
+      76: i2f
+      77: fconst_0
+      78: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      81: areturn
+      82: new           #56                 // class net/minecraft/world/phys/Vec2
+      85: dup
+      86: iload_1
+      87: i2f
+      88: fconst_2
+      89: fdiv
+      90: iload_2
+      91: i2f
+      92: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      95: areturn
+      96: new           #56                 // class net/minecraft/world/phys/Vec2
+      99: dup
+     100: fconst_0
+     101: iload_2
+     102: i2f
+     103: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+     106: areturn
+     107: new           #56                 // class net/minecraft/world/phys/Vec2
+     110: dup
+     111: iload_1
+     112: i2f
+     113: iload_2
+     114: i2f
+     115: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+     118: areturn
+     119: new           #56                 // class net/minecraft/world/phys/Vec2
+     122: dup
+     123: iload_1
+     124: i2f
+     125: fconst_2
+     126: fdiv
+     127: iload_2
+     128: i2f
+     129: fconst_2
+     130: fdiv
+     131: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+     134: areturn
+
+  public net.minecraft.world.phys.Vec2 initialOffset();
+    Code:
+       0: bipush        12
+       2: istore_1
+       3: getstatic     #50                 // Field net/combatroll/client/gui/HudElement$1.$SwitchMap$net$combatroll$client$gui$HudElement$Origin:[I
+       6: aload_0
+       7: invokevirtual #54                 // Method ordinal:()I
+      10: iaload
+      11: tableswitch   { // 1 to 6
+                     1: 48
+                     2: 59
+                     3: 71
+                     4: 85
+                     5: 98
+                     6: 112
+               default: 128
+          }
+      48: new           #56                 // class net/minecraft/world/phys/Vec2
+      51: dup
+      52: fconst_0
+      53: iload_1
+      54: i2f
+      55: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      58: areturn
+      59: new           #56                 // class net/minecraft/world/phys/Vec2
+      62: dup
+      63: iload_1
+      64: i2f
+      65: iload_1
+      66: i2f
+      67: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      70: areturn
+      71: new           #56                 // class net/minecraft/world/phys/Vec2
+      74: dup
+      75: iconst_m1
+      76: iload_1
+      77: imul
+      78: i2f
+      79: iload_1
+      80: i2f
+      81: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      84: areturn
+      85: new           #56                 // class net/minecraft/world/phys/Vec2
+      88: dup
+      89: fconst_0
+      90: iconst_m1
+      91: iload_1
+      92: imul
+      93: i2f
+      94: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      97: areturn
+      98: new           #56                 // class net/minecraft/world/phys/Vec2
+     101: dup
+     102: iload_1
+     103: i2f
+     104: iconst_m1
+     105: iload_1
+     106: imul
+     107: i2f
+     108: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+     111: areturn
+     112: new           #56                 // class net/minecraft/world/phys/Vec2
+     115: dup
+     116: iconst_m1
+     117: iload_1
+     118: imul
+     119: i2f
+     120: iconst_m1
+     121: iload_1
+     122: imul
+     123: i2f
+     124: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+     127: areturn
+     128: new           #56                 // class net/minecraft/world/phys/Vec2
+     131: dup
+     132: fconst_0
+     133: fconst_0
+     134: invokespecial #59                 // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+     137: areturn
+
+  private static net.combatroll.client.gui.HudElement$Origin[] $values();
+    Code:
+       0: bipush        6
+       2: anewarray     #2                  // class net/combatroll/client/gui/HudElement$Origin
+       5: dup
+       6: iconst_0
+       7: getstatic     #66                 // Field TOP:Lnet/combatroll/client/gui/HudElement$Origin;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: getstatic     #68                 // Field TOP_LEFT:Lnet/combatroll/client/gui/HudElement$Origin;
+      16: aastore
+      17: dup
+      18: iconst_2
+      19: getstatic     #70                 // Field TOP_RIGHT:Lnet/combatroll/client/gui/HudElement$Origin;
+      22: aastore
+      23: dup
+      24: iconst_3
+      25: getstatic     #72                 // Field BOTTOM:Lnet/combatroll/client/gui/HudElement$Origin;
+      28: aastore
+      29: dup
+      30: iconst_4
+      31: getstatic     #74                 // Field BOTTOM_LEFT:Lnet/combatroll/client/gui/HudElement$Origin;
+      34: aastore
+      35: dup
+      36: iconst_5
+      37: getstatic     #76                 // Field BOTTOM_RIGHT:Lnet/combatroll/client/gui/HudElement$Origin;
+      40: aastore
+      41: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/combatroll/client/gui/HudElement$Origin
+       3: dup
+       4: ldc           #78                 // String TOP
+       6: iconst_0
+       7: invokespecial #79                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #66                 // Field TOP:Lnet/combatroll/client/gui/HudElement$Origin;
+      13: new           #2                  // class net/combatroll/client/gui/HudElement$Origin
+      16: dup
+      17: ldc           #80                 // String TOP_LEFT
+      19: iconst_1
+      20: invokespecial #79                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #68                 // Field TOP_LEFT:Lnet/combatroll/client/gui/HudElement$Origin;
+      26: new           #2                  // class net/combatroll/client/gui/HudElement$Origin
+      29: dup
+      30: ldc           #81                 // String TOP_RIGHT
+      32: iconst_2
+      33: invokespecial #79                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #70                 // Field TOP_RIGHT:Lnet/combatroll/client/gui/HudElement$Origin;
+      39: new           #2                  // class net/combatroll/client/gui/HudElement$Origin
+      42: dup
+      43: ldc           #82                 // String BOTTOM
+      45: iconst_3
+      46: invokespecial #79                 // Method "<init>":(Ljava/lang/String;I)V
+      49: putstatic     #72                 // Field BOTTOM:Lnet/combatroll/client/gui/HudElement$Origin;
+      52: new           #2                  // class net/combatroll/client/gui/HudElement$Origin
+      55: dup
+      56: ldc           #83                 // String BOTTOM_LEFT
+      58: iconst_4
+      59: invokespecial #79                 // Method "<init>":(Ljava/lang/String;I)V
+      62: putstatic     #74                 // Field BOTTOM_LEFT:Lnet/combatroll/client/gui/HudElement$Origin;
+      65: new           #2                  // class net/combatroll/client/gui/HudElement$Origin
+      68: dup
+      69: ldc           #84                 // String BOTTOM_RIGHT
+      71: iconst_5
+      72: invokespecial #79                 // Method "<init>":(Ljava/lang/String;I)V
+      75: putstatic     #76                 // Field BOTTOM_RIGHT:Lnet/combatroll/client/gui/HudElement$Origin;
+      78: invokestatic  #86                 // Method $values:()[Lnet/combatroll/client/gui/HudElement$Origin;
+      81: putstatic     #24                 // Field $VALUES:[Lnet/combatroll/client/gui/HudElement$Origin;
+      84: return
+}

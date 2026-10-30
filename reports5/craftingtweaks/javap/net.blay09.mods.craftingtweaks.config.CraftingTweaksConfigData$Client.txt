@@ -1,0 +1,35 @@
+Compiled from "CraftingTweaksConfigData.java"
+public class net.blay09.mods.craftingtweaks.config.CraftingTweaksConfigData$Client {
+  public boolean rightClickCraftsStack;
+
+  public boolean hideVanillaCraftingGuide;
+
+  public boolean hyperOptimizedClientsideBalancing;
+
+  public net.blay09.mods.craftingtweaks.config.CraftingTweaksMode mode;
+
+  public java.util.List<java.lang.String> disabledAddons;
+
+  public net.blay09.mods.craftingtweaks.config.CraftingTweaksConfigData$Client();
+    Code:
+       0: aload_0
+       1: invokespecial #30                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_1
+       6: putfield      #32                 // Field rightClickCraftsStack:Z
+       9: aload_0
+      10: iconst_0
+      11: putfield      #34                 // Field hideVanillaCraftingGuide:Z
+      14: aload_0
+      15: iconst_0
+      16: putfield      #36                 // Field hyperOptimizedClientsideBalancing:Z
+      19: aload_0
+      20: getstatic     #41                 // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksMode.DEFAULT:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      23: putfield      #43                 // Field mode:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksMode;
+      26: aload_0
+      27: new           #45                 // class java/util/ArrayList
+      30: dup
+      31: invokespecial #46                 // Method java/util/ArrayList."<init>":()V
+      34: putfield      #48                 // Field disabledAddons:Ljava/util/List;
+      37: return
+}

@@ -1,0 +1,53 @@
+Compiled from "ClientConfig.java"
+public class net.combatroll.config.ClientConfig implements me.shedaniel.autoconfig.ConfigData {
+  public boolean playCooldownSound;
+
+  public boolean playCooldownFlash;
+
+  public boolean playRollSound;
+
+  public int hudArrowColor;
+
+  public int hudBackgroundOpacity;
+
+  public boolean showWhenFull;
+
+  public boolean showHUDInCreative;
+
+  public boolean showKeybinding;
+
+  public net.combatroll.config.ClientConfig$LabelPosition keybindingLabelPosition;
+
+  public net.combatroll.config.ClientConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #45                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_1
+       6: putfield      #47                 // Field playCooldownSound:Z
+       9: aload_0
+      10: iconst_1
+      11: putfield      #49                 // Field playCooldownFlash:Z
+      14: aload_0
+      15: iconst_1
+      16: putfield      #51                 // Field playRollSound:Z
+      19: aload_0
+      20: ldc           #52                 // int 5540067
+      22: putfield      #54                 // Field hudArrowColor:I
+      25: aload_0
+      26: bipush        75
+      28: putfield      #56                 // Field hudBackgroundOpacity:I
+      31: aload_0
+      32: iconst_1
+      33: putfield      #58                 // Field showWhenFull:Z
+      36: aload_0
+      37: iconst_0
+      38: putfield      #60                 // Field showHUDInCreative:Z
+      41: aload_0
+      42: iconst_1
+      43: putfield      #62                 // Field showKeybinding:Z
+      46: aload_0
+      47: getstatic     #65                 // Field net/combatroll/config/ClientConfig$LabelPosition.LEFT:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      50: putfield      #67                 // Field keybindingLabelPosition:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      53: return
+}

@@ -1,0 +1,318 @@
+Compiled from "RollEventsClient.java"
+public class net.saksolm.monsterexpansion.event.RollEventsClient {
+  public net.saksolm.monsterexpansion.event.RollEventsClient();
+    Code:
+       0: aload_0
+       1: invokespecial #44                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onInputUpdate(net.minecraftforge.client.event.MovementInputUpdateEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #55                 // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #57                 // class net/minecraft/client/player/LocalPlayer
+       9: ifeq          33
+      12: aload_2
+      13: checkcast     #57                 // class net/minecraft/client/player/LocalPlayer
+      16: astore_1
+      17: aload_1
+      18: getstatic     #63                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      21: invokevirtual #67                 // Method net/minecraft/client/player/LocalPlayer.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      24: aload_0
+      25: invokedynamic #87,  0             // InvokeDynamic #0:accept:(Lnet/minecraftforge/client/event/MovementInputUpdateEvent;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      30: invokevirtual #93                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      33: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #103                // Field net/minecraftforge/event/TickEvent$ClientTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #106                // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpeq     11
+      10: return
+      11: invokestatic  #112                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      14: astore_1
+      15: aload_1
+      16: getfield      #115                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      19: astore_2
+      20: aload_2
+      21: ifnonnull     25
+      24: return
+      25: getstatic     #121                // Field net/saksolm/monsterexpansion/input/KeyInit.ROLL_KEY:Lnet/minecraft/client/KeyMapping;
+      28: invokevirtual #127                // Method net/minecraft/client/KeyMapping.m_90859_:()Z
+      31: ifeq          92
+      34: aload_2
+      35: invokevirtual #130                // Method net/minecraft/client/player/LocalPlayer.m_20096_:()Z
+      38: ifeq          25
+      41: aload_2
+      42: getstatic     #136                // Field net/saksolm/monsterexpansion/effect/ModEffects.DISCOMBOBULATED:Lnet/minecraftforge/registries/RegistryObject;
+      45: invokevirtual #142                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      48: checkcast     #144                // class net/minecraft/world/effect/MobEffect
+      51: invokevirtual #148                // Method net/minecraft/client/player/LocalPlayer.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      54: ifne          25
+      57: aload_2
+      58: getstatic     #151                // Field net/saksolm/monsterexpansion/effect/ModEffects.STUNNED:Lnet/minecraftforge/registries/RegistryObject;
+      61: invokevirtual #142                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      64: checkcast     #144                // class net/minecraft/world/effect/MobEffect
+      67: invokevirtual #148                // Method net/minecraft/client/player/LocalPlayer.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      70: ifne          25
+      73: aload_2
+      74: getstatic     #63                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      77: invokevirtual #67                 // Method net/minecraft/client/player/LocalPlayer.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      80: aload_1
+      81: invokedynamic #159,  0            // InvokeDynamic #1:accept:(Lnet/minecraft/client/Minecraft;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      86: invokevirtual #93                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      89: goto          25
+      92: return
+
+  public static void onPlayerTick(net.minecraftforge.event.TickEvent$PlayerTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #165                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #106                // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpne     42
+      10: aload_0
+      11: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      14: invokevirtual #174                // Method net/minecraft/world/entity/player/Player.m_9236_:()Lnet/minecraft/world/level/Level;
+      17: getfield      #180                // Field net/minecraft/world/level/Level.f_46443_:Z
+      20: ifeq          42
+      23: aload_0
+      24: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      27: getstatic     #63                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      30: invokevirtual #181                // Method net/minecraft/world/entity/player/Player.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      33: aload_0
+      34: invokedynamic #189,  0            // InvokeDynamic #2:accept:(Lnet/minecraftforge/event/TickEvent$PlayerTickEvent;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      39: invokevirtual #93                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      42: return
+
+  public static void onInteractionInput(net.minecraftforge.client.event.InputEvent$InteractionKeyMappingTriggered);
+    Code:
+       0: aload_0
+       1: invokevirtual #195                // Method net/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered.isAttack:()Z
+       4: ifne          14
+       7: aload_0
+       8: invokevirtual #198                // Method net/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered.isUseItem:()Z
+      11: ifeq          41
+      14: invokestatic  #112                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      17: getfield      #115                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      20: astore_1
+      21: aload_1
+      22: ifnull        41
+      25: aload_1
+      26: getstatic     #63                 // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ROLL_DATA:Lnet/minecraftforge/common/capabilities/Capability;
+      29: invokevirtual #67                 // Method net/minecraft/client/player/LocalPlayer.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      32: aload_0
+      33: invokedynamic #206,  0            // InvokeDynamic #3:accept:(Lnet/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      38: invokevirtual #93                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      41: return
+
+  private static void lambda$onInteractionInput$4(net.minecraftforge.client.event.InputEvent$InteractionKeyMappingTriggered, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: aload_1
+       1: invokeinterface #212,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+       6: ifeq          19
+       9: aload_0
+      10: iconst_1
+      11: invokevirtual #216                // Method net/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered.setCanceled:(Z)V
+      14: aload_0
+      15: iconst_0
+      16: invokevirtual #219                // Method net/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered.setSwingHand:(Z)V
+      19: return
+
+  private static void lambda$onPlayerTick$3(net.minecraftforge.event.TickEvent$PlayerTickEvent, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: aload_1
+       1: invokeinterface #224,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.decreaseCooldown:()V
+       6: aload_0
+       7: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      10: getstatic     #227                // Field net/saksolm/monsterexpansion/capabilities/ModCapabilities.ACTION_ANIMATOR:Lnet/minecraftforge/common/capabilities/Capability;
+      13: invokevirtual #181                // Method net/minecraft/world/entity/player/Player.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;
+      16: aload_1
+      17: invokedynamic #237,  0            // InvokeDynamic #4:accept:(Lnet/saksolm/monsterexpansion/capabilities/IRoll;)Lnet/minecraftforge/common/util/NonNullConsumer;
+      22: invokevirtual #93                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      25: aload_1
+      26: invokeinterface #212,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+      31: ifeq          199
+      34: aload_1
+      35: invokeinterface #240,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.decreaseTimer:()V
+      40: aload_1
+      41: invokeinterface #244,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getTimer:()I
+      46: istore_2
+      47: iload_2
+      48: bipush        15
+      50: if_icmple     121
+      53: aload_1
+      54: invokeinterface #248,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getRollYaw:()F
+      59: fstore_3
+      60: fconst_0
+      61: fload_3
+      62: invokestatic  #254                // Method net/minecraft/world/phys/Vec3.m_82498_:(FF)Lnet/minecraft/world/phys/Vec3;
+      65: getstatic     #260                // Field net/saksolm/monsterexpansion/config/RollConfig.rollSpeed:D
+      68: invokevirtual #264                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+      71: ldc2_w        #265                // double 0.6499999761581421d
+      74: invokevirtual #264                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+      77: astore        4
+      79: aload_0
+      80: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      83: invokevirtual #270                // Method net/minecraft/world/entity/player/Player.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+      86: getfield      #273                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      89: dstore        5
+      91: aload_0
+      92: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      95: aload         4
+      97: getfield      #276                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     100: ldc2_w        #277                // double 0.699999988079071d
+     103: dmul
+     104: dload         5
+     106: aload         4
+     108: getfield      #281                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     111: ldc2_w        #277                // double 0.699999988079071d
+     114: dmul
+     115: invokevirtual #285                // Method net/minecraft/world/entity/player/Player.m_20334_:(DDD)V
+     118: goto          155
+     121: aload_0
+     122: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     125: invokevirtual #286                // Method net/minecraft/world/entity/player/Player.m_20096_:()Z
+     128: ifeq          155
+     131: aload_0
+     132: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     135: aload_0
+     136: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     139: invokevirtual #270                // Method net/minecraft/world/entity/player/Player.m_20184_:()Lnet/minecraft/world/phys/Vec3;
+     142: ldc2_w        #287                // double 0.8d
+     145: dconst_1
+     146: ldc2_w        #287                // double 0.8d
+     149: invokevirtual #292                // Method net/minecraft/world/phys/Vec3.m_82542_:(DDD)Lnet/minecraft/world/phys/Vec3;
+     152: invokevirtual #296                // Method net/minecraft/world/entity/player/Player.m_20256_:(Lnet/minecraft/world/phys/Vec3;)V
+     155: aload_0
+     156: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     159: invokevirtual #299                // Method net/minecraft/world/entity/player/Player.m_7578_:()Z
+     162: ifne          199
+     165: aload_1
+     166: invokeinterface #248,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getRollYaw:()F
+     171: fstore_3
+     172: aload_0
+     173: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     176: fload_3
+     177: invokevirtual #303                // Method net/minecraft/world/entity/player/Player.m_5618_:(F)V
+     180: aload_0
+     181: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     184: fload_3
+     185: invokevirtual #306                // Method net/minecraft/world/entity/player/Player.m_5616_:(F)V
+     188: aload_0
+     189: getfield      #168                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+     192: getfield      #310                // Field net/minecraft/world/entity/player/Player.f_267362_:Lnet/minecraft/world/entity/WalkAnimationState;
+     195: fconst_0
+     196: invokevirtual #315                // Method net/minecraft/world/entity/WalkAnimationState.m_267771_:(F)V
+     199: return
+
+  private static void lambda$onPlayerTick$2(net.saksolm.monsterexpansion.capabilities.IRoll, net.saksolm.monsterexpansion.capabilities.IActionAnimator);
+    Code:
+       0: aload_1
+       1: invokeinterface #328,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IActionAnimator.isPlaying:()Z
+       6: ifeq          73
+       9: aload_1
+      10: invokeinterface #332,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IActionAnimator.getAnimationID:()Lnet/minecraft/resources/ResourceLocation;
+      15: ifnull        73
+      18: aload_1
+      19: invokeinterface #332,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IActionAnimator.getAnimationID:()Lnet/minecraft/resources/ResourceLocation;
+      24: getstatic     #338                // Field net/saksolm/monsterexpansion/network/RollPacket.ROLL_ANIM:Lnet/minecraft/resources/ResourceLocation;
+      27: invokevirtual #344                // Method net/minecraft/resources/ResourceLocation.equals:(Ljava/lang/Object;)Z
+      30: ifeq          73
+      33: aload_0
+      34: invokeinterface #212,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+      39: ifne          73
+      42: aload_0
+      43: iconst_1
+      44: invokeinterface #347,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setRolling:(Z)V
+      49: aload_0
+      50: aload_1
+      51: invokeinterface #348,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IActionAnimator.getTimer:()I
+      56: invokeinterface #352,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setTimer:(I)V
+      61: aload_0
+      62: aload_1
+      63: invokeinterface #355,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IActionAnimator.getForcedYaw:()F
+      68: invokeinterface #358,  2          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.setRollYaw:(F)V
+      73: return
+
+  private static void lambda$onClientTick$1(net.minecraft.client.Minecraft, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: aload_1
+       1: invokeinterface #363,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.getCooldown:()I
+       6: ifgt          102
+       9: aload_1
+      10: invokeinterface #212,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+      15: ifne          102
+      18: fconst_0
+      19: fstore_2
+      20: fconst_0
+      21: fstore_3
+      22: aload_0
+      23: getfield      #367                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      26: getfield      #372                // Field net/minecraft/client/Options.f_92085_:Lnet/minecraft/client/KeyMapping;
+      29: invokevirtual #375                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      32: ifeq          39
+      35: fload_2
+      36: fconst_1
+      37: fadd
+      38: fstore_2
+      39: aload_0
+      40: getfield      #367                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      43: getfield      #378                // Field net/minecraft/client/Options.f_92087_:Lnet/minecraft/client/KeyMapping;
+      46: invokevirtual #375                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      49: ifeq          56
+      52: fload_2
+      53: fconst_1
+      54: fsub
+      55: fstore_2
+      56: aload_0
+      57: getfield      #367                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      60: getfield      #381                // Field net/minecraft/client/Options.f_92086_:Lnet/minecraft/client/KeyMapping;
+      63: invokevirtual #375                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      66: ifeq          73
+      69: fload_3
+      70: fconst_1
+      71: fadd
+      72: fstore_3
+      73: aload_0
+      74: getfield      #367                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      77: getfield      #384                // Field net/minecraft/client/Options.f_92088_:Lnet/minecraft/client/KeyMapping;
+      80: invokevirtual #375                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      83: ifeq          90
+      86: fload_3
+      87: fconst_1
+      88: fsub
+      89: fstore_3
+      90: new           #334                // class net/saksolm/monsterexpansion/network/RollPacket
+      93: dup
+      94: fload_3
+      95: fload_2
+      96: invokespecial #387                // Method net/saksolm/monsterexpansion/network/RollPacket."<init>":(FF)V
+      99: invokestatic  #392                // Method net/saksolm/monsterexpansion/network/ModNetwork.sendToServer:(Ljava/lang/Object;)V
+     102: return
+
+  private static void lambda$onInputUpdate$0(net.minecraftforge.client.event.MovementInputUpdateEvent, net.saksolm.monsterexpansion.capabilities.IRoll);
+    Code:
+       0: aload_1
+       1: invokeinterface #212,  1          // InterfaceMethod net/saksolm/monsterexpansion/capabilities/IRoll.isRolling:()Z
+       6: ifeq          41
+       9: aload_0
+      10: invokevirtual #398                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      13: fconst_0
+      14: putfield      #403                // Field net/minecraft/client/player/Input.f_108567_:F
+      17: aload_0
+      18: invokevirtual #398                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      21: fconst_0
+      22: putfield      #406                // Field net/minecraft/client/player/Input.f_108566_:F
+      25: aload_0
+      26: invokevirtual #398                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      29: iconst_0
+      30: putfield      #409                // Field net/minecraft/client/player/Input.f_108572_:Z
+      33: aload_0
+      34: invokevirtual #398                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      37: iconst_0
+      38: putfield      #412                // Field net/minecraft/client/player/Input.f_108573_:Z
+      41: return
+}

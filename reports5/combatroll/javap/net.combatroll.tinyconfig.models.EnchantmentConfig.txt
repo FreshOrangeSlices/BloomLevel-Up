@@ -1,0 +1,66 @@
+Compiled from "EnchantmentConfig.java"
+public class net.combatroll.tinyconfig.models.EnchantmentConfig {
+  public boolean enabled;
+
+  public int max_level;
+
+  public int min_cost;
+
+  public int step_cost;
+
+  public float bonus_per_level;
+
+  public net.combatroll.tinyconfig.models.EnchantmentConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_1
+       6: putfield      #19                 // Field enabled:Z
+       9: aload_0
+      10: iconst_0
+      11: putfield      #21                 // Field max_level:I
+      14: aload_0
+      15: iconst_0
+      16: putfield      #23                 // Field min_cost:I
+      19: aload_0
+      20: iconst_0
+      21: putfield      #25                 // Field step_cost:I
+      24: aload_0
+      25: fconst_0
+      26: putfield      #27                 // Field bonus_per_level:F
+      29: return
+
+  public net.combatroll.tinyconfig.models.EnchantmentConfig(int, int, int, float);
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_1
+       6: putfield      #19                 // Field enabled:Z
+       9: aload_0
+      10: iconst_0
+      11: putfield      #21                 // Field max_level:I
+      14: aload_0
+      15: iconst_0
+      16: putfield      #23                 // Field min_cost:I
+      19: aload_0
+      20: iconst_0
+      21: putfield      #25                 // Field step_cost:I
+      24: aload_0
+      25: fconst_0
+      26: putfield      #27                 // Field bonus_per_level:F
+      29: aload_0
+      30: iload_1
+      31: putfield      #21                 // Field max_level:I
+      34: aload_0
+      35: iload_2
+      36: putfield      #23                 // Field min_cost:I
+      39: aload_0
+      40: iload_3
+      41: putfield      #25                 // Field step_cost:I
+      44: aload_0
+      45: fload         4
+      47: putfield      #27                 // Field bonus_per_level:F
+      50: return
+}

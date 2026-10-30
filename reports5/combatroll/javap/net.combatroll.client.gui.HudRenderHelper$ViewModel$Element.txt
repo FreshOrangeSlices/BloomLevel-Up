@@ -1,0 +1,49 @@
+Compiled from "HudRenderHelper.java"
+final class net.combatroll.client.gui.HudRenderHelper$ViewModel$Element extends java.lang.Record {
+  private final int color;
+
+  private final float full;
+
+  net.combatroll.client.gui.HudRenderHelper$ViewModel$Element(int, float);
+    Code:
+       0: aload_0
+       1: invokespecial #25                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #27                 // Field color:I
+       9: aload_0
+      10: fload_2
+      11: putfield      #29                 // Field full:F
+      14: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #47,  0             // InvokeDynamic #0:toString:(Lnet/combatroll/client/gui/HudRenderHelper$ViewModel$Element;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #52,  0             // InvokeDynamic #0:hashCode:(Lnet/combatroll/client/gui/HudRenderHelper$ViewModel$Element;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #58,  0             // InvokeDynamic #0:equals:(Lnet/combatroll/client/gui/HudRenderHelper$ViewModel$Element;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public int color();
+    Code:
+       0: aload_0
+       1: getfield      #27                 // Field color:I
+       4: ireturn
+
+  public float full();
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field full:F
+       4: freturn
+}

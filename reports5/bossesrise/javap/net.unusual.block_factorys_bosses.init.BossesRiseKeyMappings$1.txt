@@ -1,0 +1,57 @@
+Compiled from "BossesRiseKeyMappings.java"
+class net.unusual.block_factorys_bosses.init.BossesRiseKeyMappings$1 extends net.minecraft.client.KeyMapping {
+  private boolean isDownOld;
+
+  net.unusual.block_factorys_bosses.init.BossesRiseKeyMappings$1(java.lang.String, int, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: aload_3
+       4: invokespecial #13                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+       7: aload_0
+       8: iconst_0
+       9: putfield      #15                 // Field isDownOld:Z
+      12: return
+
+  public void m_7249_(boolean);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokespecial #26                 // Method net/minecraft/client/KeyMapping.m_7249_:(Z)V
+       5: aload_0
+       6: getfield      #15                 // Field isDownOld:Z
+       9: iload_1
+      10: if_icmpeq     72
+      13: iload_1
+      14: ifeq          72
+      17: invokestatic  #32                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      20: getfield      #36                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      23: astore_2
+      24: aload_2
+      25: ifnull        72
+      28: new           #38                 // class net/unusual/block_factorys_bosses/network/DodgeRollMessage
+      31: dup
+      32: iconst_0
+      33: aload_2
+      34: getfield      #44                 // Field net/minecraft/client/player/LocalPlayer.f_108618_:Lnet/minecraft/client/player/Input;
+      37: getfield      #50                 // Field net/minecraft/client/player/Input.f_108566_:F
+      40: aload_2
+      41: getfield      #44                 // Field net/minecraft/client/player/LocalPlayer.f_108618_:Lnet/minecraft/client/player/Input;
+      44: getfield      #53                 // Field net/minecraft/client/player/Input.f_108567_:F
+      47: invokespecial #56                 // Method net/unusual/block_factorys_bosses/network/DodgeRollMessage."<init>":(IFF)V
+      50: invokestatic  #62                 // Method net/unusual/block_factorys_bosses/forge/BossesRiseForgeNetwork.sendToServer:(Ljava/lang/Object;)V
+      53: aload_2
+      54: iconst_0
+      55: aload_2
+      56: getfield      #44                 // Field net/minecraft/client/player/LocalPlayer.f_108618_:Lnet/minecraft/client/player/Input;
+      59: getfield      #50                 // Field net/minecraft/client/player/Input.f_108566_:F
+      62: aload_2
+      63: getfield      #44                 // Field net/minecraft/client/player/LocalPlayer.f_108618_:Lnet/minecraft/client/player/Input;
+      66: getfield      #53                 // Field net/minecraft/client/player/Input.f_108567_:F
+      69: invokestatic  #66                 // Method net/unusual/block_factorys_bosses/network/DodgeRollMessage.pressAction:(Lnet/minecraft/world/entity/player/Player;IFF)V
+      72: aload_0
+      73: iload_1
+      74: putfield      #15                 // Field isDownOld:Z
+      77: return
+}

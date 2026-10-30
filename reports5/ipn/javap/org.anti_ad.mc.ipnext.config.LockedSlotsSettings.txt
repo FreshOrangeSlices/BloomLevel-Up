@@ -1,0 +1,726 @@
+public final class org.anti_ad.mc.ipnext.config.LockedSlotsSettings implements org.anti_ad.mc.common.config.builder.ConfigDeclaration {
+  public static final org.anti_ad.mc.ipnext.config.LockedSlotsSettings INSTANCE;
+
+  static final kotlin.reflect.KProperty[] $$delegatedProperties;
+
+  private static final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder builder;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_DISABLE_QUICK_MOVE_THROW$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCK_SLOTS_DISABLE_USER_INTERACTION$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_ALLOW_PICKUP_INTO_EMPTY$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_DELAY_KEEPER_REINIT_TICKS$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCK_SLOTS_SWITCH_CONFIG_MODIFIER$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCK_SLOTS_CONFIG_KEY$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCK_SLOTS_QUICK_CONFIG_KEY$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCK_SLOTS_QUICK_DISABLE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCK_SLOTS_CONFIG_SWITCH_TYPE$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SHOW_LOCKED_SLOTS_BACKGROUND$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SHOW_LOCKED_SLOTS_FOREGROUND$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SHOW_LOCKED_SLOTS_BG_COLOR$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate SHOW_LOCKED_SLOTS_HOTBAR_COLOR$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate ALSO_SHOW_LOCKED_SLOTS_IN_HOTBAR$delegate;
+
+  private static final org.anti_ad.mc.common.extensions.AsDelegate LOCKED_SLOTS_FOREGROUND_STYLE$delegate;
+
+  private org.anti_ad.mc.ipnext.config.LockedSlotsSettings();
+    Code:
+       0: aload_0
+       1: invokespecial #36                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final org.anti_ad.mc.common.config.builder.ConfigDeclarationBuilder getBuilder();
+    Code:
+       0: getstatic     #40                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+       3: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigBoolean getLOCKED_SLOTS_DISABLE_QUICK_MOVE_THROW();
+    Code:
+       0: getstatic     #44                 // Field LOCKED_SLOTS_DISABLE_QUICK_MOVE_THROW$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #54                 // class org/anti_ad/mc/common/config/options/ConfigBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigBoolean getLOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE();
+    Code:
+       0: getstatic     #57                 // Field LOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_1
+       8: aaload
+       9: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #54                 // class org/anti_ad/mc/common/config/options/ConfigBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getLOCK_SLOTS_DISABLE_USER_INTERACTION();
+    Code:
+       0: getstatic     #61                 // Field LOCK_SLOTS_DISABLE_USER_INTERACTION$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_2
+       8: aaload
+       9: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getLOCKED_SLOTS_ALLOW_PICKUP_INTO_EMPTY();
+    Code:
+       0: getstatic     #66                 // Field LOCKED_SLOTS_ALLOW_PICKUP_INTO_EMPTY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_3
+       8: aaload
+       9: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigInteger getLOCKED_SLOTS_DELAY_KEEPER_REINIT_TICKS();
+    Code:
+       0: getstatic     #70                 // Field LOCKED_SLOTS_DELAY_KEEPER_REINIT_TICKS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_4
+       8: aaload
+       9: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #72                 // class org/anti_ad/mc/common/config/options/ConfigInteger
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getLOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED();
+    Code:
+       0: getstatic     #75                 // Field LOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_5
+       8: aaload
+       9: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      12: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      15: areturn
+
+  public final org.anti_ad.mc.common.config.options.HandledConfigString getLOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST();
+    Code:
+       0: getstatic     #79                 // Field LOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        6
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #81                 // class org/anti_ad/mc/common/config/options/HandledConfigString
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCK_SLOTS_SWITCH_CONFIG_MODIFIER();
+    Code:
+       0: getstatic     #85                 // Field LOCK_SLOTS_SWITCH_CONFIG_MODIFIER$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        7
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #87                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCK_SLOTS_CONFIG_KEY();
+    Code:
+       0: getstatic     #90                 // Field LOCK_SLOTS_CONFIG_KEY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        8
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #87                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCK_SLOTS_QUICK_CONFIG_KEY();
+    Code:
+       0: getstatic     #93                 // Field LOCK_SLOTS_QUICK_CONFIG_KEY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        9
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #87                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigHotkey getLOCK_SLOTS_QUICK_DISABLE();
+    Code:
+       0: getstatic     #96                 // Field LOCK_SLOTS_QUICK_DISABLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        10
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #87                 // class org/anti_ad/mc/common/config/options/ConfigHotkey
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigEnum getLOCK_SLOTS_CONFIG_SWITCH_TYPE();
+    Code:
+       0: getstatic     #100                // Field LOCK_SLOTS_CONFIG_SWITCH_TYPE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        11
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #102                // class org/anti_ad/mc/common/config/options/ConfigEnum
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getSHOW_LOCKED_SLOTS_BACKGROUND();
+    Code:
+       0: getstatic     #105                // Field SHOW_LOCKED_SLOTS_BACKGROUND$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        12
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getSHOW_LOCKED_SLOTS_FOREGROUND();
+    Code:
+       0: getstatic     #108                // Field SHOW_LOCKED_SLOTS_FOREGROUND$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        13
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigColorPicker getSHOW_LOCKED_SLOTS_BG_COLOR();
+    Code:
+       0: getstatic     #112                // Field SHOW_LOCKED_SLOTS_BG_COLOR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        14
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #114                // class org/anti_ad/mc/common/config/options/ConfigColorPicker
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigColorPicker getSHOW_LOCKED_SLOTS_HOTBAR_COLOR();
+    Code:
+       0: getstatic     #117                // Field SHOW_LOCKED_SLOTS_HOTBAR_COLOR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        15
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #114                // class org/anti_ad/mc/common/config/options/ConfigColorPicker
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigKeyToggleBoolean getALSO_SHOW_LOCKED_SLOTS_IN_HOTBAR();
+    Code:
+       0: getstatic     #120                // Field ALSO_SHOW_LOCKED_SLOTS_IN_HOTBAR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        16
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #63                 // class org/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean
+      16: areturn
+
+  public final org.anti_ad.mc.common.config.options.ConfigInteger getLOCKED_SLOTS_FOREGROUND_STYLE();
+    Code:
+       0: getstatic     #123                // Field LOCKED_SLOTS_FOREGROUND_STYLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+       3: aload_0
+       4: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: bipush        17
+       9: aaload
+      10: invokevirtual #52                 // Method org/anti_ad/mc/common/extensions/AsDelegate.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      13: checkcast     #72                 // class org/anti_ad/mc/common/config/options/ConfigInteger
+      16: areturn
+
+  static {};
+    Code:
+       0: bipush        18
+       2: anewarray     #126                // class kotlin/reflect/KProperty
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+      11: dup
+      12: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+      14: ldc           #130                // String LOCKED_SLOTS_DISABLE_QUICK_MOVE_THROW
+      16: ldc           #132                // String getLOCKED_SLOTS_DISABLE_QUICK_MOVE_THROW()Lorg/anti_ad/mc/common/config/options/ConfigBoolean;
+      18: iconst_0
+      19: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      22: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+      25: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      28: aastore
+      29: aload_0
+      30: iconst_1
+      31: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+      34: dup
+      35: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+      37: ldc           #145                // String LOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE
+      39: ldc           #147                // String getLOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE()Lorg/anti_ad/mc/common/config/options/ConfigBoolean;
+      41: iconst_0
+      42: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      45: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+      48: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      51: aastore
+      52: aload_0
+      53: iconst_2
+      54: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+      57: dup
+      58: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+      60: ldc           #149                // String LOCK_SLOTS_DISABLE_USER_INTERACTION
+      62: ldc           #151                // String getLOCK_SLOTS_DISABLE_USER_INTERACTION()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      64: iconst_0
+      65: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      68: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+      71: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      74: aastore
+      75: aload_0
+      76: iconst_3
+      77: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+      80: dup
+      81: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+      83: ldc           #153                // String LOCKED_SLOTS_ALLOW_PICKUP_INTO_EMPTY
+      85: ldc           #155                // String getLOCKED_SLOTS_ALLOW_PICKUP_INTO_EMPTY()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+      87: iconst_0
+      88: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      91: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+      94: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+      97: aastore
+      98: aload_0
+      99: iconst_4
+     100: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     103: dup
+     104: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     106: ldc           #157                // String LOCKED_SLOTS_DELAY_KEEPER_REINIT_TICKS
+     108: ldc           #159                // String getLOCKED_SLOTS_DELAY_KEEPER_REINIT_TICKS()Lorg/anti_ad/mc/common/config/options/ConfigInteger;
+     110: iconst_0
+     111: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     114: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     117: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     120: aastore
+     121: aload_0
+     122: iconst_5
+     123: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     126: dup
+     127: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     129: ldc           #161                // String LOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED
+     131: ldc           #163                // String getLOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+     133: iconst_0
+     134: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     137: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     140: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     143: aastore
+     144: aload_0
+     145: bipush        6
+     147: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     150: dup
+     151: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     153: ldc           #165                // String LOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST
+     155: ldc           #167                // String getLOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST()Lorg/anti_ad/mc/common/config/options/HandledConfigString;
+     157: iconst_0
+     158: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     161: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     164: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     167: aastore
+     168: aload_0
+     169: bipush        7
+     171: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     174: dup
+     175: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     177: ldc           #169                // String LOCK_SLOTS_SWITCH_CONFIG_MODIFIER
+     179: ldc           #171                // String getLOCK_SLOTS_SWITCH_CONFIG_MODIFIER()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     181: iconst_0
+     182: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     185: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     188: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     191: aastore
+     192: aload_0
+     193: bipush        8
+     195: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     198: dup
+     199: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     201: ldc           #173                // String LOCK_SLOTS_CONFIG_KEY
+     203: ldc           #175                // String getLOCK_SLOTS_CONFIG_KEY()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     205: iconst_0
+     206: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     209: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     212: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     215: aastore
+     216: aload_0
+     217: bipush        9
+     219: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     222: dup
+     223: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     225: ldc           #177                // String LOCK_SLOTS_QUICK_CONFIG_KEY
+     227: ldc           #179                // String getLOCK_SLOTS_QUICK_CONFIG_KEY()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     229: iconst_0
+     230: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     233: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     236: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     239: aastore
+     240: aload_0
+     241: bipush        10
+     243: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     246: dup
+     247: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     249: ldc           #181                // String LOCK_SLOTS_QUICK_DISABLE
+     251: ldc           #183                // String getLOCK_SLOTS_QUICK_DISABLE()Lorg/anti_ad/mc/common/config/options/ConfigHotkey;
+     253: iconst_0
+     254: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     257: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     260: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     263: aastore
+     264: aload_0
+     265: bipush        11
+     267: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     270: dup
+     271: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     273: ldc           #185                // String LOCK_SLOTS_CONFIG_SWITCH_TYPE
+     275: ldc           #187                // String getLOCK_SLOTS_CONFIG_SWITCH_TYPE()Lorg/anti_ad/mc/common/config/options/ConfigEnum;
+     277: iconst_0
+     278: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     281: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     284: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     287: aastore
+     288: aload_0
+     289: bipush        12
+     291: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     294: dup
+     295: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     297: ldc           #189                // String SHOW_LOCKED_SLOTS_BACKGROUND
+     299: ldc           #191                // String getSHOW_LOCKED_SLOTS_BACKGROUND()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+     301: iconst_0
+     302: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     305: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     308: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     311: aastore
+     312: aload_0
+     313: bipush        13
+     315: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     318: dup
+     319: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     321: ldc           #193                // String SHOW_LOCKED_SLOTS_FOREGROUND
+     323: ldc           #195                // String getSHOW_LOCKED_SLOTS_FOREGROUND()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+     325: iconst_0
+     326: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     329: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     332: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     335: aastore
+     336: aload_0
+     337: bipush        14
+     339: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     342: dup
+     343: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     345: ldc           #197                // String SHOW_LOCKED_SLOTS_BG_COLOR
+     347: ldc           #199                // String getSHOW_LOCKED_SLOTS_BG_COLOR()Lorg/anti_ad/mc/common/config/options/ConfigColorPicker;
+     349: iconst_0
+     350: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     353: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     356: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     359: aastore
+     360: aload_0
+     361: bipush        15
+     363: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     366: dup
+     367: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     369: ldc           #201                // String SHOW_LOCKED_SLOTS_HOTBAR_COLOR
+     371: ldc           #203                // String getSHOW_LOCKED_SLOTS_HOTBAR_COLOR()Lorg/anti_ad/mc/common/config/options/ConfigColorPicker;
+     373: iconst_0
+     374: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     377: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     380: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     383: aastore
+     384: aload_0
+     385: bipush        16
+     387: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     390: dup
+     391: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     393: ldc           #205                // String ALSO_SHOW_LOCKED_SLOTS_IN_HOTBAR
+     395: ldc           #207                // String getALSO_SHOW_LOCKED_SLOTS_IN_HOTBAR()Lorg/anti_ad/mc/common/config/options/ConfigKeyToggleBoolean;
+     397: iconst_0
+     398: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     401: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     404: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     407: aastore
+     408: aload_0
+     409: bipush        17
+     411: new           #128                // class kotlin/jvm/internal/PropertyReference1Impl
+     414: dup
+     415: ldc           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     417: ldc           #209                // String LOCKED_SLOTS_FOREGROUND_STYLE
+     419: ldc           #211                // String getLOCKED_SLOTS_FOREGROUND_STYLE()Lorg/anti_ad/mc/common/config/options/ConfigInteger;
+     421: iconst_0
+     422: invokespecial #135                // Method kotlin/jvm/internal/PropertyReference1Impl."<init>":(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+     425: checkcast     #137                // class kotlin/jvm/internal/PropertyReference1
+     428: invokestatic  #143                // Method kotlin/jvm/internal/Reflection.property1:(Lkotlin/jvm/internal/PropertyReference1;)Lkotlin/reflect/KProperty1;
+     431: aastore
+     432: aload_0
+     433: putstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     436: new           #2                  // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings
+     439: dup
+     440: invokespecial #212                // Method "<init>":()V
+     443: dup
+     444: putstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     447: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     450: invokestatic  #220                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.createBuilder:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     453: ldc           #222                // String §§vgap:3
+     455: invokestatic  #226                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     458: putstatic     #40                 // Field builder:Lorg/anti_ad/mc/common/config/builder/ConfigDeclarationBuilder;
+     461: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     464: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     467: iconst_1
+     468: invokestatic  #230                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.bool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Z)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     471: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     474: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     477: iconst_0
+     478: aaload
+     479: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     482: putstatic     #44                 // Field LOCKED_SLOTS_DISABLE_QUICK_MOVE_THROW$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     485: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     488: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     491: iconst_1
+     492: invokestatic  #230                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.bool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Z)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     495: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     498: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     501: iconst_1
+     502: aaload
+     503: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     506: putstatic     #57                 // Field LOCKED_SLOTS_DISABLE_THROW_FOR_NON_STACKABLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     509: getstatic     #241                // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     512: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     515: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     518: iconst_0
+     519: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     522: invokevirtual #253                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     525: invokevirtual #257                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     528: ldc_w         #259                // String inventoryprofiles.config.category.lock_slots.empty
+     531: invokestatic  #262                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     534: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     537: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     540: iconst_2
+     541: aaload
+     542: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     545: putstatic     #61                 // Field LOCK_SLOTS_DISABLE_USER_INTERACTION$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     548: getstatic     #241                // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     551: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     554: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     557: iconst_0
+     558: aconst_null
+     559: iconst_2
+     560: aconst_null
+     561: invokestatic  #266                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool$default:(Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;ILjava/lang/Object;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     564: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     567: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     570: iconst_3
+     571: aaload
+     572: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     575: putstatic     #66                 // Field LOCKED_SLOTS_ALLOW_PICKUP_INTO_EMPTY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     578: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     581: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     584: bipush        50
+     586: bipush        20
+     588: sipush        400
+     591: invokestatic  #270                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.int:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;III)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     594: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     597: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     600: iconst_4
+     601: aaload
+     602: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     605: putstatic     #70                 // Field LOCKED_SLOTS_DELAY_KEEPER_REINIT_TICKS$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     608: getstatic     #241                // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     611: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     614: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     617: iconst_0
+     618: aconst_null
+     619: iconst_2
+     620: aconst_null
+     621: invokestatic  #266                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool$default:(Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;ILjava/lang/Object;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     624: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     627: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     630: iconst_5
+     631: aaload
+     632: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     635: putstatic     #75                 // Field LOCKED_SLOTS_EMPTY_HOTBAR_AS_SEMI_LOCKED$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     638: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     641: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     644: ldc_w         #272                // String carryon
+     647: new           #274                // class org/anti_ad/mc/ipnext/config/LockedSlotsSettings$LOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST$2
+     650: dup
+     651: getstatic     #279                // Field org/anti_ad/mc/ipnext/event/LockedSlotKeeper.INSTANCE:Lorg/anti_ad/mc/ipnext/event/LockedSlotKeeper;
+     654: invokespecial #282                // Method org/anti_ad/mc/ipnext/config/LockedSlotsSettings$LOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST$2."<init>":(Ljava/lang/Object;)V
+     657: checkcast     #284                // class kotlin/jvm/functions/Function0
+     660: invokestatic  #288                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.handledString:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     663: ldc_w         #290                // String inventoryprofiles.config.category.hotkeys
+     666: invokestatic  #262                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     669: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     672: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     675: bipush        6
+     677: aaload
+     678: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     681: putstatic     #79                 // Field LOCKED_SLOTS_EMPTY_HOTBAR_BLACKLIST$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     684: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     687: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     690: ldc_w         #292                // String LEFT_ALT
+     693: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     696: invokevirtual #295                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     699: invokestatic  #299                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     702: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     705: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     708: bipush        7
+     710: aaload
+     711: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     714: putstatic     #85                 // Field LOCK_SLOTS_SWITCH_CONFIG_MODIFIER$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     717: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     720: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     723: ldc_w         #301                // String BUTTON_1
+     726: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     729: invokevirtual #295                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     732: invokestatic  #299                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     735: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     738: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     741: bipush        8
+     743: aaload
+     744: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     747: putstatic     #90                 // Field LOCK_SLOTS_CONFIG_KEY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     750: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     753: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     756: ldc_w         #303                // String
+     759: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     762: invokevirtual #295                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     765: invokestatic  #299                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     768: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     771: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     774: bipush        9
+     776: aaload
+     777: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     780: putstatic     #93                 // Field LOCK_SLOTS_QUICK_CONFIG_KEY$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     783: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     786: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     789: ldc_w         #303                // String
+     792: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     795: invokevirtual #295                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_EXTRA:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     798: invokestatic  #299                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.hotkey:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/String;Lorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     801: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     804: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     807: bipush        10
+     809: aaload
+     810: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     813: putstatic     #96                 // Field LOCK_SLOTS_QUICK_DISABLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     816: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     819: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     822: getstatic     #309                // Field org/anti_ad/mc/ipnext/config/SwitchType.HOLD:Lorg/anti_ad/mc/ipnext/config/SwitchType;
+     825: checkcast     #311                // class java/lang/Enum
+     828: invokestatic  #315                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.enum:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;Ljava/lang/Enum;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     831: ldc_w         #317                // String inventoryprofiles.config.category.lock_slots.gui
+     834: invokestatic  #262                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.CATEGORY:(Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;Ljava/lang/String;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     837: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     840: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     843: bipush        11
+     845: aaload
+     846: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     849: putstatic     #100                // Field LOCK_SLOTS_CONFIG_SWITCH_TYPE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     852: getstatic     #241                // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     855: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     858: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     861: iconst_1
+     862: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     865: invokevirtual #253                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     868: invokevirtual #257                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     871: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     874: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     877: bipush        12
+     879: aaload
+     880: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     883: putstatic     #105                // Field SHOW_LOCKED_SLOTS_BACKGROUND$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     886: getstatic     #241                // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+     889: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     892: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     895: iconst_1
+     896: getstatic     #247                // Field org/anti_ad/mc/common/input/KeybindSettings.Companion:Lorg/anti_ad/mc/common/input/KeybindSettings$Companion;
+     899: invokevirtual #253                // Method org/anti_ad/mc/common/input/KeybindSettings$Companion.getGUI_DEFAULT:()Lorg/anti_ad/mc/common/input/KeybindSettings;
+     902: invokevirtual #257                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     905: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     908: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     911: bipush        13
+     913: aaload
+     914: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     917: putstatic     #108                // Field SHOW_LOCKED_SLOTS_FOREGROUND$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     920: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     923: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     926: sipush        192
+     929: invokestatic  #323                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.asAlpha:(I)I
+     932: sipush        255
+     935: invokestatic  #327                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.red:(II)I
+     938: bipush        85
+     940: invokestatic  #330                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.green:(II)I
+     943: bipush        85
+     945: invokestatic  #333                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.blue:(II)I
+     948: invokestatic  #337                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.color:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;I)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     951: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     954: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+     957: bipush        14
+     959: aaload
+     960: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     963: putstatic     #112                // Field SHOW_LOCKED_SLOTS_BG_COLOR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+     966: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     969: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+     972: bipush        94
+     974: invokestatic  #323                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.asAlpha:(I)I
+     977: sipush        255
+     980: invokestatic  #327                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.red:(II)I
+     983: bipush        94
+     985: invokestatic  #330                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.green:(II)I
+     988: bipush        65
+     990: invokestatic  #333                // Method org/anti_ad/mc/common/vanilla/render/ColorKt.blue:(II)I
+     993: invokestatic  #337                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.color:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;I)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+     996: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+     999: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1002: bipush        15
+    1004: aaload
+    1005: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1008: putstatic     #117                // Field SHOW_LOCKED_SLOTS_HOTBAR_COLOR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1011: getstatic     #241                // Field org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.INSTANCE:Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;
+    1014: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+    1017: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1020: iconst_1
+    1021: aconst_null
+    1022: iconst_2
+    1023: aconst_null
+    1024: invokestatic  #266                // Method org/anti_ad/mc/ipnext/gui/ConfigScreeHelper.keyToggleBool$default:(Lorg/anti_ad/mc/ipnext/gui/ConfigScreeHelper;Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;ZLorg/anti_ad/mc/common/input/KeybindSettings;ILjava/lang/Object;)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1027: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+    1030: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1033: bipush        16
+    1035: aaload
+    1036: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1039: putstatic     #120                // Field ALSO_SHOW_LOCKED_SLOTS_IN_HOTBAR$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1042: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+    1045: checkcast     #6                  // class org/anti_ad/mc/common/config/builder/ConfigDeclaration
+    1048: iconst_2
+    1049: iconst_1
+    1050: bipush        6
+    1052: invokestatic  #270                // Method org/anti_ad/mc/common/config/builder/ConfigDeclarationBuilderKt.int:(Lorg/anti_ad/mc/common/config/builder/ConfigDeclaration;III)Lorg/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider;
+    1055: getstatic     #214                // Field INSTANCE:Lorg/anti_ad/mc/ipnext/config/LockedSlotsSettings;
+    1058: getstatic     #46                 // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+    1061: bipush        17
+    1063: aaload
+    1064: invokevirtual #236                // Method org/anti_ad/mc/common/config/builder/ConfigOptionDelegateProvider.provideDelegate:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1067: putstatic     #123                // Field LOCKED_SLOTS_FOREGROUND_STYLE$delegate:Lorg/anti_ad/mc/common/extensions/AsDelegate;
+    1070: return
+}

@@ -1,0 +1,131 @@
+Compiled from "RoarStunEffectClientEvents.java"
+public class net.saksolm.monsterexpansion.event.RoarStunEffectClientEvents {
+  private static boolean wasStunned;
+
+  private static final net.minecraft.resources.ResourceLocation ROAR_SHADER;
+
+  public net.saksolm.monsterexpansion.event.RoarStunEffectClientEvents();
+    Code:
+       0: aload_0
+       1: invokespecial #42                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #53                 // Field net/minecraftforge/event/TickEvent$ClientTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #56                 // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpeq     11
+      10: return
+      11: invokestatic  #62                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      14: astore_1
+      15: aload_1
+      16: getfield      #66                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      19: ifnull        29
+      22: aload_1
+      23: getfield      #70                 // Field net/minecraft/client/Minecraft.f_91073_:Lnet/minecraft/client/multiplayer/ClientLevel;
+      26: ifnonnull     30
+      29: return
+      30: aload_1
+      31: getfield      #66                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      34: getstatic     #76                 // Field net/saksolm/monsterexpansion/effect/ModEffects.DISCOMBOBULATED:Lnet/minecraftforge/registries/RegistryObject;
+      37: invokevirtual #82                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      40: checkcast     #84                 // class net/minecraft/world/effect/MobEffect
+      43: invokevirtual #90                 // Method net/minecraft/client/player/LocalPlayer.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      46: istore_2
+      47: iload_2
+      48: ifeq          91
+      51: getstatic     #92                 // Field wasStunned:Z
+      54: ifne          91
+      57: aload_1
+      58: getfield      #96                 // Field net/minecraft/client/Minecraft.f_91063_:Lnet/minecraft/client/renderer/GameRenderer;
+      61: getstatic     #98                 // Field ROAR_SHADER:Lnet/minecraft/resources/ResourceLocation;
+      64: invokevirtual #104                // Method net/minecraft/client/renderer/GameRenderer.m_109128_:(Lnet/minecraft/resources/ResourceLocation;)V
+      67: goto          108
+      70: astore_3
+      71: getstatic     #110                // Field net/saksolm/monsterexpansion/MonsterExpansion.LOGGER:Lorg/apache/logging/log4j/Logger;
+      74: getstatic     #98                 // Field ROAR_SHADER:Lnet/minecraft/resources/ResourceLocation;
+      77: invokedynamic #122,  0            // InvokeDynamic #0:makeConcatWithConstants:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/String;
+      82: aload_3
+      83: invokeinterface #128,  3          // InterfaceMethod org/apache/logging/log4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Throwable;)V
+      88: goto          108
+      91: iload_2
+      92: ifne          108
+      95: getstatic     #92                 // Field wasStunned:Z
+      98: ifeq          108
+     101: aload_1
+     102: getfield      #96                 // Field net/minecraft/client/Minecraft.f_91063_:Lnet/minecraft/client/renderer/GameRenderer;
+     105: invokevirtual #131                // Method net/minecraft/client/renderer/GameRenderer.m_109086_:()V
+     108: iload_2
+     109: putstatic     #92                 // Field wasStunned:Z
+     112: return
+    Exception table:
+       from    to  target type
+          57    67    70   Class java/lang/Exception
+
+  public static void onMovementInput(net.minecraftforge.client.event.MovementInputUpdateEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #146                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_1
+       5: aload_1
+       6: getstatic     #76                 // Field net/saksolm/monsterexpansion/effect/ModEffects.DISCOMBOBULATED:Lnet/minecraftforge/registries/RegistryObject;
+       9: invokevirtual #82                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      12: checkcast     #84                 // class net/minecraft/world/effect/MobEffect
+      15: invokevirtual #149                // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      18: ifeq          53
+      21: aload_0
+      22: invokevirtual #153                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      25: fconst_0
+      26: putfield      #159                // Field net/minecraft/client/player/Input.f_108567_:F
+      29: aload_0
+      30: invokevirtual #153                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      33: fconst_0
+      34: putfield      #162                // Field net/minecraft/client/player/Input.f_108566_:F
+      37: aload_0
+      38: invokevirtual #153                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      41: iconst_0
+      42: putfield      #165                // Field net/minecraft/client/player/Input.f_108572_:Z
+      45: aload_0
+      46: invokevirtual #153                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      49: iconst_0
+      50: putfield      #168                // Field net/minecraft/client/player/Input.f_108573_:Z
+      53: return
+
+  public static void onMouseClick(net.minecraftforge.client.event.InputEvent$InteractionKeyMappingTriggered);
+    Code:
+       0: invokestatic  #62                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: getfield      #66                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       6: astore_1
+       7: invokestatic  #62                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      10: getfield      #177                // Field net/minecraft/client/Minecraft.f_91080_:Lnet/minecraft/client/gui/screens/Screen;
+      13: ifnull        17
+      16: return
+      17: aload_1
+      18: ifnull        47
+      21: aload_1
+      22: getstatic     #76                 // Field net/saksolm/monsterexpansion/effect/ModEffects.DISCOMBOBULATED:Lnet/minecraftforge/registries/RegistryObject;
+      25: invokevirtual #82                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      28: checkcast     #84                 // class net/minecraft/world/effect/MobEffect
+      31: invokevirtual #90                 // Method net/minecraft/client/player/LocalPlayer.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      34: ifeq          47
+      37: aload_0
+      38: iconst_1
+      39: invokevirtual #181                // Method net/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered.setCanceled:(Z)V
+      42: aload_0
+      43: iconst_0
+      44: invokevirtual #184                // Method net/minecraftforge/client/event/InputEvent$InteractionKeyMappingTriggered.setSwingHand:(Z)V
+      47: return
+
+  static {};
+    Code:
+       0: iconst_0
+       1: putstatic     #92                 // Field wasStunned:Z
+       4: new           #188                // class net/minecraft/resources/ResourceLocation
+       7: dup
+       8: ldc           #189                // String monsterexpansion
+      10: ldc           #191                // String shaders/post/tunnel_blur.json
+      12: invokespecial #194                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      15: putstatic     #98                 // Field ROAR_SHADER:Lnet/minecraft/resources/ResourceLocation;
+      18: return
+}

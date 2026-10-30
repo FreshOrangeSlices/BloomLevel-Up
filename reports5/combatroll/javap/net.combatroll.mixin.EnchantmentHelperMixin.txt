@@ -1,0 +1,50 @@
+Compiled from "EnchantmentHelperMixin.java"
+public class net.combatroll.mixin.EnchantmentHelperMixin {
+  public net.combatroll.mixin.EnchantmentHelperMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private static void getPossibleEntries_Return(int, net.minecraft.world.item.ItemStack, boolean, org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<java.util.List<net.minecraft.world.item.enchantment.EnchantmentInstance>>);
+    Code:
+       0: aload_3
+       1: invokevirtual #33                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable.getReturnValue:()Ljava/lang/Object;
+       4: checkcast     #35                 // class java/util/List
+       7: astore        4
+       9: new           #37                 // class java/util/ArrayList
+      12: dup
+      13: invokespecial #38                 // Method java/util/ArrayList."<init>":()V
+      16: astore        5
+      18: aload         4
+      20: invokeinterface #42,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      25: astore        6
+      27: aload         6
+      29: invokeinterface #48,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      34: ifeq          87
+      37: aload         6
+      39: invokeinterface #51,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      44: checkcast     #53                 // class net/minecraft/world/item/enchantment/EnchantmentInstance
+      47: astore        7
+      49: aload         7
+      51: getfield      #57                 // Field net/minecraft/world/item/enchantment/EnchantmentInstance.f_44947_:Lnet/minecraft/world/item/enchantment/Enchantment;
+      54: astore        8
+      56: aload         8
+      58: instanceof    #59                 // class net/combatroll/enchantments/CustomConditionalEnchantment
+      61: ifeq          84
+      64: aload         7
+      66: getfield      #57                 // Field net/minecraft/world/item/enchantment/EnchantmentInstance.f_44947_:Lnet/minecraft/world/item/enchantment/Enchantment;
+      69: aload_1
+      70: invokevirtual #65                 // Method net/minecraft/world/item/enchantment/Enchantment.m_6081_:(Lnet/minecraft/world/item/ItemStack;)Z
+      73: ifne          84
+      76: aload         5
+      78: aload         7
+      80: invokevirtual #69                 // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+      83: pop
+      84: goto          27
+      87: aload         4
+      89: aload         5
+      91: invokeinterface #73,  2           // InterfaceMethod java/util/List.removeAll:(Ljava/util/Collection;)Z
+      96: pop
+      97: return
+}

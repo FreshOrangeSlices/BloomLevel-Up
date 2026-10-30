@@ -1,0 +1,280 @@
+Compiled from "Vec2f.java"
+public class net.combatroll.tinyconfig.models.Vec2f {
+  public static final net.combatroll.tinyconfig.models.Vec2f ZERO;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f UP_RIGHT_UNIT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f RIGHT_UNIT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f LEFT_UNIT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f DOWN_UNIT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f UP_UNIT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f DOWN_LEFT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f MAX_UP_RIGHT;
+
+  public static final net.combatroll.tinyconfig.models.Vec2f MIN_DOWN_LEFT;
+
+  public final float x;
+
+  public final float y;
+
+  public net.combatroll.tinyconfig.models.Vec2f(float, float);
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: fload_1
+       6: putfield      #25                 // Field x:F
+       9: aload_0
+      10: fload_2
+      11: putfield      #27                 // Field y:F
+      14: return
+
+  public net.combatroll.tinyconfig.models.Vec2f multiply(float);
+    Code:
+       0: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+       3: dup
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fload_1
+       9: fmul
+      10: aload_0
+      11: getfield      #27                 // Field y:F
+      14: fload_1
+      15: fmul
+      16: invokespecial #33                 // Method "<init>":(FF)V
+      19: areturn
+
+  public float dot(net.combatroll.tinyconfig.models.Vec2f);
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field x:F
+       4: aload_1
+       5: getfield      #25                 // Field x:F
+       8: fmul
+       9: aload_0
+      10: getfield      #27                 // Field y:F
+      13: aload_1
+      14: getfield      #27                 // Field y:F
+      17: fmul
+      18: fadd
+      19: freturn
+
+  public net.combatroll.tinyconfig.models.Vec2f add(net.combatroll.tinyconfig.models.Vec2f);
+    Code:
+       0: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+       3: dup
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: aload_1
+       9: getfield      #25                 // Field x:F
+      12: fadd
+      13: aload_0
+      14: getfield      #27                 // Field y:F
+      17: aload_1
+      18: getfield      #27                 // Field y:F
+      21: fadd
+      22: invokespecial #33                 // Method "<init>":(FF)V
+      25: areturn
+
+  public net.combatroll.tinyconfig.models.Vec2f add(float);
+    Code:
+       0: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+       3: dup
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fload_1
+       9: fadd
+      10: aload_0
+      11: getfield      #27                 // Field y:F
+      14: fload_1
+      15: fadd
+      16: invokespecial #33                 // Method "<init>":(FF)V
+      19: areturn
+
+  public boolean equals(net.combatroll.tinyconfig.models.Vec2f);
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field x:F
+       4: aload_1
+       5: getfield      #25                 // Field x:F
+       8: fcmpl
+       9: ifne          28
+      12: aload_0
+      13: getfield      #27                 // Field y:F
+      16: aload_1
+      17: getfield      #27                 // Field y:F
+      20: fcmpl
+      21: ifne          28
+      24: iconst_1
+      25: goto          29
+      28: iconst_0
+      29: ireturn
+
+  public net.combatroll.tinyconfig.models.Vec2f normalize();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field x:F
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fmul
+       9: aload_0
+      10: getfield      #27                 // Field y:F
+      13: aload_0
+      14: getfield      #27                 // Field y:F
+      17: fmul
+      18: fadd
+      19: f2d
+      20: invokestatic  #49                 // Method java/lang/Math.sqrt:(D)D
+      23: d2f
+      24: fstore_1
+      25: fload_1
+      26: ldc           #50                 // float 1.0E-4f
+      28: fcmpg
+      29: ifge          38
+      32: getstatic     #52                 // Field ZERO:Lnet/combatroll/tinyconfig/models/Vec2f;
+      35: goto          57
+      38: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      41: dup
+      42: aload_0
+      43: getfield      #25                 // Field x:F
+      46: fload_1
+      47: fdiv
+      48: aload_0
+      49: getfield      #27                 // Field y:F
+      52: fload_1
+      53: fdiv
+      54: invokespecial #33                 // Method "<init>":(FF)V
+      57: areturn
+
+  public float length();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field x:F
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fmul
+       9: aload_0
+      10: getfield      #27                 // Field y:F
+      13: aload_0
+      14: getfield      #27                 // Field y:F
+      17: fmul
+      18: fadd
+      19: f2d
+      20: invokestatic  #49                 // Method java/lang/Math.sqrt:(D)D
+      23: d2f
+      24: freturn
+
+  public float lengthSquared();
+    Code:
+       0: aload_0
+       1: getfield      #25                 // Field x:F
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fmul
+       9: aload_0
+      10: getfield      #27                 // Field y:F
+      13: aload_0
+      14: getfield      #27                 // Field y:F
+      17: fmul
+      18: fadd
+      19: freturn
+
+  public float distanceSquared(net.combatroll.tinyconfig.models.Vec2f);
+    Code:
+       0: aload_1
+       1: getfield      #25                 // Field x:F
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fsub
+       9: fstore_2
+      10: aload_1
+      11: getfield      #27                 // Field y:F
+      14: aload_0
+      15: getfield      #27                 // Field y:F
+      18: fsub
+      19: fstore_3
+      20: fload_2
+      21: fload_2
+      22: fmul
+      23: fload_3
+      24: fload_3
+      25: fmul
+      26: fadd
+      27: freturn
+
+  public net.combatroll.tinyconfig.models.Vec2f negate();
+    Code:
+       0: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+       3: dup
+       4: aload_0
+       5: getfield      #25                 // Field x:F
+       8: fneg
+       9: aload_0
+      10: getfield      #27                 // Field y:F
+      13: fneg
+      14: invokespecial #33                 // Method "<init>":(FF)V
+      17: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+       3: dup
+       4: fconst_0
+       5: fconst_0
+       6: invokespecial #33                 // Method "<init>":(FF)V
+       9: putstatic     #52                 // Field ZERO:Lnet/combatroll/tinyconfig/models/Vec2f;
+      12: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      15: dup
+      16: fconst_1
+      17: fconst_1
+      18: invokespecial #33                 // Method "<init>":(FF)V
+      21: putstatic     #62                 // Field UP_RIGHT_UNIT:Lnet/combatroll/tinyconfig/models/Vec2f;
+      24: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      27: dup
+      28: fconst_1
+      29: fconst_0
+      30: invokespecial #33                 // Method "<init>":(FF)V
+      33: putstatic     #64                 // Field RIGHT_UNIT:Lnet/combatroll/tinyconfig/models/Vec2f;
+      36: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      39: dup
+      40: ldc           #65                 // float -1.0f
+      42: fconst_0
+      43: invokespecial #33                 // Method "<init>":(FF)V
+      46: putstatic     #67                 // Field LEFT_UNIT:Lnet/combatroll/tinyconfig/models/Vec2f;
+      49: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      52: dup
+      53: fconst_0
+      54: fconst_1
+      55: invokespecial #33                 // Method "<init>":(FF)V
+      58: putstatic     #69                 // Field DOWN_UNIT:Lnet/combatroll/tinyconfig/models/Vec2f;
+      61: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      64: dup
+      65: fconst_0
+      66: ldc           #65                 // float -1.0f
+      68: invokespecial #33                 // Method "<init>":(FF)V
+      71: putstatic     #71                 // Field UP_UNIT:Lnet/combatroll/tinyconfig/models/Vec2f;
+      74: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      77: dup
+      78: ldc           #65                 // float -1.0f
+      80: ldc           #65                 // float -1.0f
+      82: invokespecial #33                 // Method "<init>":(FF)V
+      85: putstatic     #73                 // Field DOWN_LEFT:Lnet/combatroll/tinyconfig/models/Vec2f;
+      88: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+      91: dup
+      92: ldc           #74                 // float 3.4028235E38f
+      94: ldc           #74                 // float 3.4028235E38f
+      96: invokespecial #33                 // Method "<init>":(FF)V
+      99: putstatic     #76                 // Field MAX_UP_RIGHT:Lnet/combatroll/tinyconfig/models/Vec2f;
+     102: new           #2                  // class net/combatroll/tinyconfig/models/Vec2f
+     105: dup
+     106: ldc           #77                 // float 1.4E-45f
+     108: ldc           #77                 // float 1.4E-45f
+     110: invokespecial #33                 // Method "<init>":(FF)V
+     113: putstatic     #79                 // Field MIN_DOWN_LEFT:Lnet/combatroll/tinyconfig/models/Vec2f;
+     116: return
+}

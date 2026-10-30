@@ -1,0 +1,43 @@
+{
+	"required": true,
+	"package": "net.unusual.block_factorys_bosses.mixins",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "block_factorys_bosses.mixin-refmap.json",
+	"mixins": [
+		"ControlMixin",
+		"KrakenTridentTridentItemMixin",
+		"ProjectileSandwormPartMixin",
+		"RollMixin",
+		"accessor.AnimatableManagerAccessor",
+		"accessor.AnimationControllerAccessor",
+		"accessor.AnimationProcessorAccessor",
+		"accessor.GeckoLibCacheAccessor",
+		"server.EndDragonFightMixin",
+		"server.ServerBossEventMixin",
+		"server.WardenMixin",
+		"server.WitherMixin"
+	],
+	"client": [
+		"client.CameraMixin",
+		"client.CapeLayerMixin",
+		"client.CinematicEntitiesMixin",
+		"client.ElytraLayerMixin",
+		"client.GameRendererMixin",
+		"client.GameRendererNightVisionMixin",
+		"client.LevelRendererMixin",
+		"client.MouseHandlerMixin",
+		"client.MusicManagerMixin",
+		"client.PlayerAnimationMixin",
+		"client.PoseStackMixin",
+		"client.accessor.EntityRenderDispatcherAccessor",
+		"client.accessor.SoundEngineAccessor",
+		"client.accessor.SoundManagerAccessor"
+	],
+	"server": [
+		"server.GeoModelMixin"
+	],
+	"minVersion": "0.8",
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

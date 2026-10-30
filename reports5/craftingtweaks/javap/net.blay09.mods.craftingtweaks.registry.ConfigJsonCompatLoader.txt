@@ -1,0 +1,205 @@
+Compiled from "ConfigJsonCompatLoader.java"
+public class net.blay09.mods.craftingtweaks.registry.ConfigJsonCompatLoader {
+  private static final org.slf4j.Logger logger;
+
+  private static final com.google.gson.Gson gson;
+
+  private static final java.util.List<net.blay09.mods.craftingtweaks.api.CraftingGridProvider> providersFromConfig;
+
+  public net.blay09.mods.craftingtweaks.registry.ConfigJsonCompatLoader();
+    Code:
+       0: aload_0
+       1: invokespecial #26                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void load();
+    Code:
+       0: getstatic     #35                 // Field providersFromConfig:Ljava/util/List;
+       3: invokeinterface #41,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       8: astore_0
+       9: aload_0
+      10: invokeinterface #47,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      15: ifeq          35
+      18: aload_0
+      19: invokeinterface #51,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      24: checkcast     #53                 // class net/blay09/mods/craftingtweaks/api/CraftingGridProvider
+      27: astore_1
+      28: aload_1
+      29: invokestatic  #59                 // Method net/blay09/mods/craftingtweaks/api/CraftingTweaksAPI.unregisterCraftingGridProvider:(Lnet/blay09/mods/craftingtweaks/api/CraftingGridProvider;)V
+      32: goto          9
+      35: getstatic     #35                 // Field providersFromConfig:Ljava/util/List;
+      38: invokeinterface #62,  1           // InterfaceMethod java/util/List.clear:()V
+      43: new           #64                 // class java/io/File
+      46: dup
+      47: invokestatic  #70                 // Method net/blay09/mods/balm/api/Balm.getConfig:()Lnet/blay09/mods/balm/api/config/BalmConfig;
+      50: invokeinterface #76,  1           // InterfaceMethod net/blay09/mods/balm/api/config/BalmConfig.getConfigDir:()Ljava/io/File;
+      55: ldc           #78                 // String craftingtweaks/grids
+      57: invokespecial #81                 // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+      60: astore_0
+      61: aload_0
+      62: invokevirtual #84                 // Method java/io/File.exists:()Z
+      65: ifne          87
+      68: aload_0
+      69: invokevirtual #87                 // Method java/io/File.mkdirs:()Z
+      72: ifne          87
+      75: getstatic     #89                 // Field logger:Lorg/slf4j/Logger;
+      78: ldc           #91                 // String Failed to create CraftingTweaks config directory {}
+      80: aload_0
+      81: invokeinterface #97,  3           // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;)V
+      86: return
+      87: aload_0
+      88: invokedynamic #114,  0            // InvokeDynamic #0:accept:()Ljava/io/FileFilter;
+      93: invokevirtual #118                // Method java/io/File.listFiles:(Ljava/io/FileFilter;)[Ljava/io/File;
+      96: astore_1
+      97: aload_1
+      98: ifnonnull     102
+     101: return
+     102: aload_1
+     103: astore_2
+     104: aload_2
+     105: arraylength
+     106: istore_3
+     107: iconst_0
+     108: istore        4
+     110: iload         4
+     112: iload_3
+     113: if_icmpge     233
+     116: aload_2
+     117: iload         4
+     119: aaload
+     120: astore        5
+     122: aload         5
+     124: invokevirtual #124                // Method java/io/File.toPath:()Ljava/nio/file/Path;
+     127: invokestatic  #130                // Method java/nio/file/Files.newBufferedReader:(Ljava/nio/file/Path;)Ljava/io/BufferedReader;
+     130: astore        6
+     132: aload         5
+     134: getstatic     #132                // Field gson:Lcom/google/gson/Gson;
+     137: aload         6
+     139: ldc           #134                // class net/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData
+     141: invokevirtual #140                // Method com/google/gson/Gson.fromJson:(Ljava/io/Reader;Ljava/lang/Class;)Ljava/lang/Object;
+     144: checkcast     #134                // class net/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData
+     147: invokestatic  #143                // Method load:(Ljava/io/File;Lnet/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData;)Lnet/blay09/mods/craftingtweaks/api/CraftingGridProvider;
+     150: astore        7
+     152: aload         7
+     154: ifnull        168
+     157: getstatic     #35                 // Field providersFromConfig:Ljava/util/List;
+     160: aload         7
+     162: invokeinterface #147,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     167: pop
+     168: aload         6
+     170: ifnull        208
+     173: aload         6
+     175: invokevirtual #152                // Method java/io/BufferedReader.close:()V
+     178: goto          208
+     181: astore        7
+     183: aload         6
+     185: ifnull        205
+     188: aload         6
+     190: invokevirtual #152                // Method java/io/BufferedReader.close:()V
+     193: goto          205
+     196: astore        8
+     198: aload         7
+     200: aload         8
+     202: invokevirtual #156                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     205: aload         7
+     207: athrow
+     208: goto          227
+     211: astore        6
+     213: getstatic     #89                 // Field logger:Lorg/slf4j/Logger;
+     216: ldc           #158                // String Failed to load CraftingTweaks file {}
+     218: aload         5
+     220: aload         6
+     222: invokeinterface #161,  4          // InterfaceMethod org/slf4j/Logger.error:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+     227: iinc          4, 1
+     230: goto          110
+     233: return
+    Exception table:
+       from    to  target type
+         132   168   181   Class java/lang/Throwable
+         188   193   196   Class java/lang/Throwable
+         122   208   211   Class java/io/IOException
+
+  private static boolean isCompatEnabled(java.lang.String);
+    Code:
+       0: invokestatic  #180                // Method net/blay09/mods/craftingtweaks/config/CraftingTweaksConfig.getActive:()Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData;
+       3: getfield      #184                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData.client:Lnet/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData$Client;
+       6: getfield      #187                // Field net/blay09/mods/craftingtweaks/config/CraftingTweaksConfigData$Client.disabledAddons:Ljava/util/List;
+       9: aload_0
+      10: invokeinterface #190,  2          // InterfaceMethod java/util/List.contains:(Ljava/lang/Object;)Z
+      15: ifne          22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+
+  private static net.blay09.mods.craftingtweaks.api.CraftingGridProvider load(java.io.File, net.blay09.mods.craftingtweaks.registry.CraftingTweaksRegistrationData);
+    Code:
+       0: aload_1
+       1: invokevirtual #196                // Method net/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData.getModId:()Ljava/lang/String;
+       4: astore_2
+       5: aload_2
+       6: ldc           #198                // String minecraft
+       8: invokevirtual #203                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      11: ifne          21
+      14: aload_2
+      15: invokestatic  #206                // Method net/blay09/mods/balm/api/Balm.isModLoaded:(Ljava/lang/String;)Z
+      18: ifeq          35
+      21: aload_2
+      22: invokestatic  #208                // Method isCompatEnabled:(Ljava/lang/String;)Z
+      25: ifeq          35
+      28: aload_1
+      29: invokevirtual #211                // Method net/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData.isEnabled:()Z
+      32: ifne          37
+      35: aconst_null
+      36: areturn
+      37: aload_1
+      38: invokestatic  #217                // Method net/blay09/mods/craftingtweaks/registry/DataDrivenGridFactory.createGridProvider:(Lnet/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData;)Lnet/blay09/mods/craftingtweaks/api/CraftingGridProvider;
+      41: astore_3
+      42: aload_3
+      43: ifnull        79
+      46: aload_3
+      47: invokestatic  #220                // Method net/blay09/mods/craftingtweaks/api/CraftingTweaksAPI.registerCraftingGridProvider:(Lnet/blay09/mods/craftingtweaks/api/CraftingGridProvider;)V
+      50: getstatic     #89                 // Field logger:Lorg/slf4j/Logger;
+      53: ldc           #222                // String Config file {} has registered {} of {} with CraftingTweaks
+      55: iconst_3
+      56: anewarray     #4                  // class java/lang/Object
+      59: dup
+      60: iconst_0
+      61: aload_0
+      62: aastore
+      63: dup
+      64: iconst_1
+      65: aload_1
+      66: invokevirtual #225                // Method net/blay09/mods/craftingtweaks/registry/CraftingTweaksRegistrationData.getContainerClass:()Ljava/lang/String;
+      69: aastore
+      70: dup
+      71: iconst_2
+      72: aload_2
+      73: aastore
+      74: invokeinterface #229,  3          // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+      79: aload_3
+      80: areturn
+
+  private static boolean lambda$load$0(java.io.File);
+    Code:
+       0: aload_0
+       1: invokevirtual #235                // Method java/io/File.getName:()Ljava/lang/String;
+       4: ldc           #237                // String .json
+       6: invokevirtual #240                // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+       9: ireturn
+
+  static {};
+    Code:
+       0: ldc           #2                  // class net/blay09/mods/craftingtweaks/registry/ConfigJsonCompatLoader
+       2: invokestatic  #248                // Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+       5: putstatic     #89                 // Field logger:Lorg/slf4j/Logger;
+       8: new           #136                // class com/google/gson/Gson
+      11: dup
+      12: invokespecial #249                // Method com/google/gson/Gson."<init>":()V
+      15: putstatic     #132                // Field gson:Lcom/google/gson/Gson;
+      18: new           #251                // class java/util/ArrayList
+      21: dup
+      22: invokespecial #252                // Method java/util/ArrayList."<init>":()V
+      25: putstatic     #35                 // Field providersFromConfig:Ljava/util/List;
+      28: return
+}

@@ -1,0 +1,197 @@
+Compiled from "ClientConfiguration.java"
+public class net.unusual.block_factorys_bosses.configuration.ClientConfiguration {
+  public static final net.minecraftforge.common.ForgeConfigSpec$Builder BUILDER;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec SPEC;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarDefaultStyle> DEFAULT_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> WARDEN_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> ENDER_DRAGON_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> WITHER_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> YETI_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> DRAGON_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> SANDWORM_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> KNIGHT_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.util.BossHandling$HealthBarStyle> KRAKEN_BOSSBAR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> FIRST_PERSON_ROLL;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> ROLL_GUI;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<net.unusual.block_factorys_bosses.configuration.ClientConfiguration$GUIAnchors> ROLL_GUI_OFFSET_ANCHOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> ROLL_GUI_OFFSET_X;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> ROLL_GUI_OFFSET_Y;
+
+  public net.unusual.block_factorys_bosses.configuration.ClientConfiguration();
+    Code:
+       0: aload_0
+       1: invokespecial #60                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: new           #11                 // class net/minecraftforge/common/ForgeConfigSpec$Builder
+       3: dup
+       4: invokespecial #64                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder."<init>":()V
+       7: putstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      13: ldc           #68                 // String Boss bars
+      15: invokevirtual #72                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      18: pop
+      19: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      22: ldc           #74                 // String Our mod has the ability to modify how the healthbars of certain bosses appear. Pick the one that suits you most.
+      24: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      27: pop
+      28: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      31: ldc           #79                 // String \"OFF\" : Disable the healthbar from rendering.
+      33: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      36: pop
+      37: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      40: ldc           #81                 // String \"VANILLA\" : All healthbars will appear vanilla.
+      42: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      45: pop
+      46: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      49: ldc           #83                 // String \"SIMPLE\" : Render the healthbar in a simple custom texture.
+      51: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      54: pop
+      55: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      58: ldc           #85                 // String \"FANCY\" : Render the healthbar in a fancy custom texture.
+      60: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      63: pop
+      64: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      67: ldc           #87                 // String Select the \"DEFAULT\" option on a boss to have the setting follow the default one.
+      69: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      72: pop
+      73: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      76: ldc           #89                 // String What kind of healthbar should be used by default?
+      78: getstatic     #93                 // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarDefaultStyle.FANCY:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarDefaultStyle;
+      81: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+      84: putstatic     #99                 // Field DEFAULT_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      87: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      90: ldc           #101                // String What kind of healthbar should the Warden use?
+      92: getstatic     #105                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.OFF:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+      95: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+      98: putstatic     #107                // Field WARDEN_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     101: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     104: ldc           #109                // String What kind of healthbar should the Ender Dragon use?
+     106: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     109: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     112: putstatic     #114                // Field ENDER_DRAGON_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     115: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     118: ldc           #116                // String What kind of healthbar should the Wither use?
+     120: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     123: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     126: putstatic     #118                // Field WITHER_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     129: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     132: ldc           #120                // String What kind of healthbar should Skor, The Yeti use?
+     134: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     137: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     140: putstatic     #122                // Field YETI_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     143: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     146: ldc           #124                // String What kind of healthbar should Ashlord, The Infernal Dragon use?
+     148: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     151: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     154: putstatic     #126                // Field DRAGON_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     157: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     160: ldc           #128                // String What kind of healthbar should Sirok, The Sandworm use?
+     162: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     165: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     168: putstatic     #130                // Field SANDWORM_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     171: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     174: ldc           #132                // String What kind of healthbar should Helvar, the Underworld Knight use?
+     176: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     179: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     182: putstatic     #134                // Field KNIGHT_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     185: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     188: ldc           #136                // String What kind of healthbar should Volrak, the Kraken use?
+     190: getstatic     #112                // Field net/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle.DEFAULT:Lnet/unusual/block_factorys_bosses/util/BossHandling$HealthBarStyle;
+     193: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     196: putstatic     #138                // Field KRAKEN_BOSSBAR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     199: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     202: invokevirtual #142                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     205: pop
+     206: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     209: ldc           #144                // String Rolling
+     211: invokevirtual #72                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     214: pop
+     215: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     218: ldc           #146                // String Will the camera rotate when rolling while in first-person view
+     220: iconst_0
+     221: invokevirtual #150                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     224: putstatic     #152                // Field FIRST_PERSON_ROLL:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     227: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     230: ldc           #154                // String Will there be a GUI element displaying current roll count
+     232: iconst_1
+     233: invokevirtual #150                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     236: putstatic     #156                // Field ROLL_GUI:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     239: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     242: ldc           #158                // String GUI anchors are preset locations for the rolling GUI visual to appear. Pick the one that suits you most.
+     244: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     247: pop
+     248: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     251: ldc           #160                // String \"HOTBAR_RIGHT\" : At the immediate right of your hotbar.
+     253: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     256: pop
+     257: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     260: ldc           #162                // String \"HOTBAR_LEFT\" : At the immediate left of your hotbar.
+     262: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     265: pop
+     266: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     269: ldc           #164                // String \"TOP_LEFT\" : In the top left corner of your screen.
+     271: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     274: pop
+     275: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     278: ldc           #166                // String \"TOP_RIGHT\" : In the top right corner of your screen.
+     280: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     283: pop
+     284: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     287: ldc           #168                // String \"BOTTOM_LEFT\" : In the bottom left corner of your screen.
+     289: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     292: pop
+     293: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     296: ldc           #170                // String \"BOTTOM_RIGHT\" : In the bottom right corner of your screen.
+     298: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     301: pop
+     302: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     305: ldc           #172                // String \"SCREEN_CENTER\" : At the exact middle of your screen?
+     307: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     310: pop
+     311: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     314: ldc           #174                // String The GUI anchor will be
+     316: getstatic     #178                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors.HOTBAR_RIGHT:Lnet/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors;
+     319: invokevirtual #97                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineEnum:(Ljava/lang/String;Ljava/lang/Enum;)Lnet/minecraftforge/common/ForgeConfigSpec$EnumValue;
+     322: putstatic     #180                // Field ROLL_GUI_OFFSET_ANCHOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     325: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     328: ldc           #182                // String You can also additionally offset the GUI element with the use of the X and Y offset values.
+     330: invokevirtual #77                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     333: pop
+     334: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     337: ldc           #184                // String Roll GUI element X offset (Bigger number goes right, negative goes left)
+     339: iconst_0
+     340: invokestatic  #190                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     343: invokevirtual #193                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     346: putstatic     #195                // Field ROLL_GUI_OFFSET_X:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     349: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     352: ldc           #197                // String Roll GUI element Y offset (Bigger number goes down, negative goes up)
+     354: iconst_0
+     355: invokestatic  #190                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     358: invokevirtual #193                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     361: putstatic     #199                // Field ROLL_GUI_OFFSET_Y:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     364: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     367: invokevirtual #142                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     370: pop
+     371: getstatic     #66                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     374: invokevirtual #203                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.build:()Lnet/minecraftforge/common/ForgeConfigSpec;
+     377: putstatic     #205                // Field SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+     380: return
+}

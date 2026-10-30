@@ -1,0 +1,334 @@
+Compiled from "MinecraftClientMixin.java"
+public abstract class net.combatroll.mixin.MinecraftClientMixin {
+  private int f_91011_;
+
+  public net.minecraft.client.player.LocalPlayer f_91074_;
+
+  public net.combatroll.mixin.MinecraftClientMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #38                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private void doAttack_HEAD(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<java.lang.Boolean>);
+    Code:
+       0: aload_0
+       1: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       4: checkcast     #56                 // class net/combatroll/internals/RollingEntity
+       7: astore_2
+       8: aload_2
+       9: ifnull        36
+      12: aload_2
+      13: invokeinterface #60,  1           // InterfaceMethod net/combatroll/internals/RollingEntity.getRollManager:()Lnet/combatroll/internals/RollManager;
+      18: invokevirtual #66                 // Method net/combatroll/internals/RollManager.isRolling:()Z
+      21: ifeq          36
+      24: aload_1
+      25: iconst_0
+      26: invokestatic  #72                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      29: invokevirtual #78                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable.setReturnValue:(Ljava/lang/Object;)V
+      32: aload_1
+      33: invokevirtual #81                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable.cancel:()V
+      36: return
+
+  private void handleBlockBreaking_HEAD(boolean, org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_0
+       1: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       4: checkcast     #56                 // class net/combatroll/internals/RollingEntity
+       7: astore_3
+       8: aload_3
+       9: ifnull        28
+      12: aload_3
+      13: invokeinterface #60,  1           // InterfaceMethod net/combatroll/internals/RollingEntity.getRollManager:()Lnet/combatroll/internals/RollManager;
+      18: invokevirtual #66                 // Method net/combatroll/internals/RollManager.isRolling:()Z
+      21: ifeq          28
+      24: aload_2
+      25: invokevirtual #93                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfo.cancel:()V
+      28: return
+
+  private void doItemUse_HEAD(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_0
+       1: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       4: checkcast     #56                 // class net/combatroll/internals/RollingEntity
+       7: astore_2
+       8: aload_2
+       9: ifnull        28
+      12: aload_2
+      13: invokeinterface #60,  1           // InterfaceMethod net/combatroll/internals/RollingEntity.getRollManager:()Lnet/combatroll/internals/RollManager;
+      18: invokevirtual #66                 // Method net/combatroll/internals/RollManager.isRolling:()Z
+      21: ifeq          28
+      24: aload_1
+      25: invokevirtual #93                 // Method org/spongepowered/asm/mixin/injection/callback/CallbackInfo.cancel:()V
+      28: return
+
+  private void handleInputEvents_TAIL(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_0
+       1: invokevirtual #104                // Method tryRolling:()V
+       4: return
+
+  private void tryRolling();
+    Code:
+       0: aload_0
+       1: checkcast     #106                // class net/minecraft/client/Minecraft
+       4: astore_1
+       5: aload_0
+       6: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       9: ifnull        26
+      12: aload_1
+      13: invokevirtual #109                // Method net/minecraft/client/Minecraft.m_91104_:()Z
+      16: ifne          26
+      19: aload_1
+      20: getfield      #113                // Field net/minecraft/client/Minecraft.f_91080_:Lnet/minecraft/client/gui/screens/Screen;
+      23: ifnull        27
+      26: return
+      27: aload_0
+      28: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      31: checkcast     #56                 // class net/combatroll/internals/RollingEntity
+      34: astore_2
+      35: aload_2
+      36: invokeinterface #60,  1           // InterfaceMethod net/combatroll/internals/RollingEntity.getRollManager:()Lnet/combatroll/internals/RollManager;
+      41: astore_3
+      42: getstatic     #119                // Field net/combatroll/client/Keybindings.roll:Lnet/minecraft/client/KeyMapping;
+      45: invokevirtual #124                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      48: ifeq          580
+      51: aload_3
+      52: aload_0
+      53: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      56: invokevirtual #128                // Method net/combatroll/internals/RollManager.isRollAvailable:(Lnet/minecraft/world/entity/player/Player;)Z
+      59: ifne          63
+      62: return
+      63: getstatic     #134                // Field net/combatroll/CombatRoll.config:Lnet/combatroll/config/ServerConfig;
+      66: getfield      #139                // Field net/combatroll/config/ServerConfig.allow_rolling_while_airborn:Z
+      69: ifne          83
+      72: aload_0
+      73: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      76: invokevirtual #144                // Method net/minecraft/client/player/LocalPlayer.m_20096_:()Z
+      79: ifne          83
+      82: return
+      83: aload_0
+      84: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      87: invokevirtual #148                // Method net/minecraft/client/player/LocalPlayer.m_36324_:()Lnet/minecraft/world/food/FoodData;
+      90: invokevirtual #154                // Method net/minecraft/world/food/FoodData.m_38702_:()I
+      93: i2f
+      94: getstatic     #134                // Field net/combatroll/CombatRoll.config:Lnet/combatroll/config/ServerConfig;
+      97: getfield      #158                // Field net/combatroll/config/ServerConfig.food_level_required:F
+     100: fcmpg
+     101: ifgt          105
+     104: return
+     105: aload_0
+     106: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     109: invokevirtual #161                // Method net/minecraft/client/player/LocalPlayer.m_6069_:()Z
+     112: ifne          125
+     115: aload_0
+     116: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     119: invokevirtual #164                // Method net/minecraft/client/player/LocalPlayer.m_20143_:()Z
+     122: ifeq          126
+     125: return
+     126: aload_0
+     127: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     130: invokevirtual #168                // Method net/minecraft/client/player/LocalPlayer.m_20202_:()Lnet/minecraft/world/entity/Entity;
+     133: ifnull        137
+     136: return
+     137: aload_0
+     138: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     141: invokevirtual #171                // Method net/minecraft/client/player/LocalPlayer.m_6117_:()Z
+     144: ifne          157
+     147: aload_0
+     148: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     151: invokevirtual #174                // Method net/minecraft/client/player/LocalPlayer.m_21254_:()Z
+     154: ifeq          158
+     157: return
+     158: getstatic     #134                // Field net/combatroll/CombatRoll.config:Lnet/combatroll/config/ServerConfig;
+     161: getfield      #177                // Field net/combatroll/config/ServerConfig.allow_rolling_while_weapon_cooldown:Z
+     164: ifne          184
+     167: aload_0
+     168: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     171: fconst_0
+     172: invokevirtual #181                // Method net/minecraft/client/player/LocalPlayer.m_36403_:(F)F
+     175: f2d
+     176: ldc2_w        #182                // double 0.95d
+     179: dcmpg
+     180: ifge          184
+     183: return
+     184: invokestatic  #188                // Method net/combatroll/compatibility/BetterCombatHelper.isDoingUpswing:()Z
+     187: ifeq          196
+     190: invokestatic  #191                // Method net/combatroll/compatibility/BetterCombatHelper.cancelUpswing:()V
+     193: goto          210
+     196: aload_1
+     197: getfield      #195                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+     200: getfield      #200                // Field net/minecraft/client/Options.f_92096_:Lnet/minecraft/client/KeyMapping;
+     203: invokevirtual #124                // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+     206: ifeq          210
+     209: return
+     210: aload_0
+     211: getfield      #202                // Field f_91011_:I
+     214: ifle          218
+     217: return
+     218: aload_0
+     219: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     222: getfield      #206                // Field net/minecraft/client/player/LocalPlayer.f_108618_:Lnet/minecraft/client/player/Input;
+     225: getfield      #211                // Field net/minecraft/client/player/Input.f_108567_:F
+     228: fstore        4
+     230: aload_0
+     231: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     234: getfield      #206                // Field net/minecraft/client/player/LocalPlayer.f_108618_:Lnet/minecraft/client/player/Input;
+     237: getfield      #214                // Field net/minecraft/client/player/Input.f_108566_:F
+     240: fstore        5
+     242: fload         4
+     244: fconst_0
+     245: fcmpl
+     246: ifne          271
+     249: fload         5
+     251: fconst_0
+     252: fcmpl
+     253: ifne          271
+     256: new           #216                // class net/minecraft/world/phys/Vec3
+     259: dup
+     260: dconst_0
+     261: dconst_0
+     262: dconst_1
+     263: invokespecial #219                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     266: astore        6
+     268: goto          290
+     271: new           #216                // class net/minecraft/world/phys/Vec3
+     274: dup
+     275: fload         5
+     277: f2d
+     278: dconst_0
+     279: fload         4
+     281: f2d
+     282: invokespecial #219                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     285: invokevirtual #223                // Method net/minecraft/world/phys/Vec3.m_82541_:()Lnet/minecraft/world/phys/Vec3;
+     288: astore        6
+     290: aload         6
+     292: ldc2_w        #224                // double -1.0d
+     295: aload_0
+     296: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     299: invokevirtual #229                // Method net/minecraft/client/player/LocalPlayer.m_146908_:()F
+     302: f2d
+     303: dmul
+     304: invokestatic  #235                // Method java/lang/Math.toRadians:(D)D
+     307: d2f
+     308: invokevirtual #239                // Method net/minecraft/world/phys/Vec3.m_82524_:(F)Lnet/minecraft/world/phys/Vec3;
+     311: astore        6
+     313: ldc2_w        #240                // double 0.475d
+     316: aload_0
+     317: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     320: getstatic     #245                // Field net/combatroll/api/EntityAttributes_CombatRoll$Type.DISTANCE:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+     323: invokestatic  #249                // Method net/combatroll/api/EntityAttributes_CombatRoll.getAttributeValue:(Lnet/minecraft/world/entity/player/Player;Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;)D
+     326: getstatic     #134                // Field net/combatroll/CombatRoll.config:Lnet/combatroll/config/ServerConfig;
+     329: getfield      #252                // Field net/combatroll/config/ServerConfig.additional_roll_distance:F
+     332: f2d
+     333: dadd
+     334: dmul
+     335: dstore        7
+     337: aload         6
+     339: dload         7
+     341: invokevirtual #256                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     344: astore        6
+     346: aload_0
+     347: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     350: invokevirtual #259                // Method net/minecraft/client/player/LocalPlayer.m_20069_:()Z
+     353: ifeq          389
+     356: aload_0
+     357: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     360: getstatic     #265                // Field net/minecraft/tags/FluidTags.f_13131_:Lnet/minecraft/tags/TagKey;
+     363: invokevirtual #269                // Method net/minecraft/client/player/LocalPlayer.m_204036_:(Lnet/minecraft/tags/TagKey;)D
+     366: dstore        9
+     368: dload         9
+     370: dconst_1
+     371: invokestatic  #273                // Method java/lang/Math.min:(DD)D
+     374: dstore        9
+     376: aload         6
+     378: dload         9
+     380: ldc2_w        #274                // double 0.5d
+     383: dmul
+     384: invokevirtual #256                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     387: astore        6
+     389: aload_0
+     390: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     393: invokevirtual #278                // Method net/minecraft/client/player/LocalPlayer.m_20077_:()Z
+     396: ifeq          429
+     399: aload_0
+     400: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     403: getstatic     #281                // Field net/minecraft/tags/FluidTags.f_13132_:Lnet/minecraft/tags/TagKey;
+     406: invokevirtual #269                // Method net/minecraft/client/player/LocalPlayer.m_204036_:(Lnet/minecraft/tags/TagKey;)D
+     409: dstore        9
+     411: dload         9
+     413: dconst_1
+     414: invokestatic  #273                // Method java/lang/Math.min:(DD)D
+     417: dstore        9
+     419: aload         6
+     421: ldc2_w        #282                // double 0.3d
+     424: invokevirtual #256                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     427: astore        6
+     429: aload_0
+     430: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     433: invokevirtual #287                // Method net/minecraft/client/player/LocalPlayer.m_9236_:()Lnet/minecraft/world/level/Level;
+     436: aload_0
+     437: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     440: invokevirtual #291                // Method net/minecraft/client/player/LocalPlayer.m_20183_:()Lnet/minecraft/core/BlockPos;
+     443: invokevirtual #296                // Method net/minecraft/core/BlockPos.m_7495_:()Lnet/minecraft/core/BlockPos;
+     446: invokevirtual #302                // Method net/minecraft/world/level/Level.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     449: invokevirtual #308                // Method net/minecraft/world/level/block/state/BlockState.m_60734_:()Lnet/minecraft/world/level/block/Block;
+     452: astore        9
+     454: aload         9
+     456: invokevirtual #313                // Method net/minecraft/world/level/block/Block.m_49958_:()F
+     459: fstore        10
+     461: getstatic     #319                // Field net/minecraft/world/level/block/Blocks.f_50034_:Lnet/minecraft/world/level/block/Block;
+     464: invokevirtual #313                // Method net/minecraft/world/level/block/Block.m_49958_:()F
+     467: fstore        11
+     469: fload         10
+     471: fload         11
+     473: fcmpl
+     474: ifle          497
+     477: fload         11
+     479: fload         10
+     481: fdiv
+     482: fstore        12
+     484: aload         6
+     486: fload         12
+     488: fload         12
+     490: fmul
+     491: f2d
+     492: invokevirtual #256                // Method net/minecraft/world/phys/Vec3.m_82490_:(D)Lnet/minecraft/world/phys/Vec3;
+     495: astore        6
+     497: aload_0
+     498: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     501: aload         6
+     503: getfield      #323                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     506: aload         6
+     508: getfield      #326                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+     511: aload         6
+     513: getfield      #329                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     516: invokevirtual #332                // Method net/minecraft/client/player/LocalPlayer.m_5997_:(DDD)V
+     519: aload_3
+     520: aload_0
+     521: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     524: invokevirtual #336                // Method net/combatroll/internals/RollManager.onRoll:(Lnet/minecraft/client/player/LocalPlayer;)V
+     527: new           #17                 // class net/combatroll/client/RollEffect$Visuals
+     530: dup
+     531: ldc_w         #338                // String combatroll:roll
+     534: getstatic     #342                // Field net/combatroll/client/RollEffect$Particles.PUFF:Lnet/combatroll/client/RollEffect$Particles;
+     537: invokespecial #345                // Method net/combatroll/client/RollEffect$Visuals."<init>":(Ljava/lang/String;Lnet/combatroll/client/RollEffect$Particles;)V
+     540: astore        12
+     542: getstatic     #349                // Field net/combatroll/network/Packets$RollPublish.ID:Lnet/minecraft/resources/ResourceLocation;
+     545: new           #25                 // class net/combatroll/network/Packets$RollPublish
+     548: dup
+     549: aload_0
+     550: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     553: invokevirtual #352                // Method net/minecraft/client/player/LocalPlayer.m_19879_:()I
+     556: aload         12
+     558: aload         6
+     560: invokespecial #355                // Method net/combatroll/network/Packets$RollPublish."<init>":(ILnet/combatroll/client/RollEffect$Visuals;Lnet/minecraft/world/phys/Vec3;)V
+     563: invokevirtual #359                // Method net/combatroll/network/Packets$RollPublish.write:()Lnet/minecraft/network/FriendlyByteBuf;
+     566: invokestatic  #365                // Method net/combatroll/fabricmc/fabric/api/client/networking/v1/ClientPlayNetworking.send:(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/network/FriendlyByteBuf;)V
+     569: aload         12
+     571: aload_0
+     572: getfield      #54                 // Field f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     575: aload         6
+     577: invokestatic  #369                // Method net/combatroll/client/RollEffect.playVisuals:(Lnet/combatroll/client/RollEffect$Visuals;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/phys/Vec3;)V
+     580: return
+}

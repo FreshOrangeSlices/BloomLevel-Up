@@ -1,0 +1,75 @@
+Compiled from "EntityAttributes_CombatRoll.java"
+public final class net.combatroll.api.EntityAttributes_CombatRoll$Type extends java.lang.Enum<net.combatroll.api.EntityAttributes_CombatRoll$Type> {
+  public static final net.combatroll.api.EntityAttributes_CombatRoll$Type DISTANCE;
+
+  public static final net.combatroll.api.EntityAttributes_CombatRoll$Type RECHARGE;
+
+  public static final net.combatroll.api.EntityAttributes_CombatRoll$Type COUNT;
+
+  private static final net.combatroll.api.EntityAttributes_CombatRoll$Type[] $VALUES;
+
+  public static net.combatroll.api.EntityAttributes_CombatRoll$Type[] values();
+    Code:
+       0: getstatic     #19                 // Field $VALUES:[Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+       3: invokevirtual #24                 // Method "[Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;".clone:()Ljava/lang/Object;
+       6: checkcast     #20                 // class "[Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;"
+       9: areturn
+
+  public static net.combatroll.api.EntityAttributes_CombatRoll$Type valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/combatroll/api/EntityAttributes_CombatRoll$Type
+       2: aload_0
+       3: invokestatic  #30                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/combatroll/api/EntityAttributes_CombatRoll$Type
+       9: areturn
+
+  private net.combatroll.api.EntityAttributes_CombatRoll$Type();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #36                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  private static net.combatroll.api.EntityAttributes_CombatRoll$Type[] $values();
+    Code:
+       0: iconst_3
+       1: anewarray     #2                  // class net/combatroll/api/EntityAttributes_CombatRoll$Type
+       4: dup
+       5: iconst_0
+       6: getstatic     #40                 // Field DISTANCE:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #42                 // Field RECHARGE:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #44                 // Field COUNT:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      21: aastore
+      22: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/combatroll/api/EntityAttributes_CombatRoll$Type
+       3: dup
+       4: ldc           #46                 // String DISTANCE
+       6: iconst_0
+       7: invokespecial #47                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #40                 // Field DISTANCE:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      13: new           #2                  // class net/combatroll/api/EntityAttributes_CombatRoll$Type
+      16: dup
+      17: ldc           #48                 // String RECHARGE
+      19: iconst_1
+      20: invokespecial #47                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #42                 // Field RECHARGE:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      26: new           #2                  // class net/combatroll/api/EntityAttributes_CombatRoll$Type
+      29: dup
+      30: ldc           #49                 // String COUNT
+      32: iconst_2
+      33: invokespecial #47                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #44                 // Field COUNT:Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      39: invokestatic  #51                 // Method $values:()[Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      42: putstatic     #19                 // Field $VALUES:[Lnet/combatroll/api/EntityAttributes_CombatRoll$Type;
+      45: return
+}

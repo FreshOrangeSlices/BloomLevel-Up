@@ -1,0 +1,15 @@
+Compiled from "ServerConfigWrapper.java"
+public class net.combatroll.config.ServerConfigWrapper extends me.shedaniel.autoconfig.serializer.PartitioningSerializer$GlobalData {
+  public net.combatroll.config.ServerConfig server;
+
+  public net.combatroll.config.ServerConfigWrapper();
+    Code:
+       0: aload_0
+       1: invokespecial #31                 // Method me/shedaniel/autoconfig/serializer/PartitioningSerializer$GlobalData."<init>":()V
+       4: aload_0
+       5: new           #33                 // class net/combatroll/config/ServerConfig
+       8: dup
+       9: invokespecial #34                 // Method net/combatroll/config/ServerConfig."<init>":()V
+      12: putfield      #36                 // Field server:Lnet/combatroll/config/ServerConfig;
+      15: return
+}

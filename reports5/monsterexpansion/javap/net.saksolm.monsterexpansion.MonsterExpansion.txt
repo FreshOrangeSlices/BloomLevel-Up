@@ -1,0 +1,111 @@
+Compiled from "MonsterExpansion.java"
+public class net.saksolm.monsterexpansion.MonsterExpansion {
+  public static final java.lang.String MOD_ID = "monsterexpansion";
+
+  public static final org.apache.logging.log4j.Logger LOGGER;
+
+  public static final boolean DEBUG_MODE = false;
+
+  public static final net.minecraft.resources.ResourceLocation ROTATED_PROPERTY;
+
+  public net.saksolm.monsterexpansion.MonsterExpansion();
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: invokestatic  #41                 // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.get:()Lnet/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext;
+       7: invokevirtual #45                 // Method net/minecraftforge/fml/javafmlmod/FMLJavaModLoadingContext.getModEventBus:()Lnet/minecraftforge/eventbus/api/IEventBus;
+      10: astore_1
+      11: aload_1
+      12: aload_0
+      13: invokedynamic #64,  0             // InvokeDynamic #0:accept:(Lnet/saksolm/monsterexpansion/MonsterExpansion;)Ljava/util/function/Consumer;
+      18: invokeinterface #70,  2           // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+      23: invokestatic  #75                 // Method net/minecraftforge/fml/ModLoadingContext.get:()Lnet/minecraftforge/fml/ModLoadingContext;
+      26: getstatic     #79                 // Field net/minecraftforge/fml/config/ModConfig$Type.SERVER:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      29: getstatic     #85                 // Field net/saksolm/monsterexpansion/config/ModConfig.SERVER_SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+      32: invokevirtual #89                 // Method net/minecraftforge/fml/ModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;)V
+      35: invokestatic  #75                 // Method net/minecraftforge/fml/ModLoadingContext.get:()Lnet/minecraftforge/fml/ModLoadingContext;
+      38: getstatic     #92                 // Field net/minecraftforge/fml/config/ModConfig$Type.COMMON:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      41: getstatic     #97                 // Field net/saksolm/monsterexpansion/config/RollConfig.SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+      44: ldc           #99                 // String monsterexpansion-rolls.toml
+      46: invokevirtual #102                // Method net/minecraftforge/fml/ModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;Ljava/lang/String;)V
+      49: invokestatic  #75                 // Method net/minecraftforge/fml/ModLoadingContext.get:()Lnet/minecraftforge/fml/ModLoadingContext;
+      52: getstatic     #105                // Field net/minecraftforge/fml/config/ModConfig$Type.CLIENT:Lnet/minecraftforge/fml/config/ModConfig$Type;
+      55: getstatic     #108                // Field net/saksolm/monsterexpansion/config/ModConfig.CLIENT_SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+      58: invokevirtual #89                 // Method net/minecraftforge/fml/ModLoadingContext.registerConfig:(Lnet/minecraftforge/fml/config/ModConfig$Type;Lnet/minecraftforge/fml/config/IConfigSpec;)V
+      61: invokestatic  #113                // Method net/saksolm/monsterexpansion/network/ModNetwork.register:()V
+      64: aload_1
+      65: invokestatic  #118                // Method net/saksolm/monsterexpansion/item/armor/ModAttributes.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      68: aload_1
+      69: invokestatic  #121                // Method net/saksolm/monsterexpansion/item/ModItems.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      72: aload_1
+      73: invokestatic  #124                // Method net/saksolm/monsterexpansion/item/ModCreativeModTabs.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      76: aload_1
+      77: invokestatic  #127                // Method net/saksolm/monsterexpansion/particles/ModParticles.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      80: aload_1
+      81: invokestatic  #130                // Method net/saksolm/monsterexpansion/sounds/ModSounds.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      84: aload_1
+      85: invokestatic  #133                // Method net/saksolm/monsterexpansion/entity/ModEntities.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      88: aload_1
+      89: invokestatic  #136                // Method net/saksolm/monsterexpansion/block/ModBlocks.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      92: aload_1
+      93: invokestatic  #139                // Method net/saksolm/monsterexpansion/block/ModBlockEntities.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      96: aload_1
+      97: invokestatic  #142                // Method net/saksolm/monsterexpansion/screen/ModMenuTypes.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     100: aload_1
+     101: invokestatic  #145                // Method net/saksolm/monsterexpansion/effect/ModEffects.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     104: aload_1
+     105: invokestatic  #148                // Method net/saksolm/monsterexpansion/block/ModPaintings.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     108: aload_1
+     109: invokestatic  #151                // Method net/saksolm/monsterexpansion/worldgen/ModStructureProcessors.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+     112: invokestatic  #154                // Method net/saksolm/monsterexpansion/recipe/FoundryTriggers.register:()V
+     115: aload_1
+     116: aload_0
+     117: invokedynamic #161,  0            // InvokeDynamic #1:accept:(Lnet/saksolm/monsterexpansion/MonsterExpansion;)Ljava/util/function/Consumer;
+     122: invokeinterface #70,  2           // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.addListener:(Ljava/util/function/Consumer;)V
+     127: return
+
+  private void commonSetup(net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent);
+    Code:
+       0: getstatic     #171                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       3: checkcast     #173                // class net/saksolm/monsterexpansion/mixin/RangedAttributeAccessor
+       6: ldc2_w        #174                // double 1.7976931348623157E308d
+       9: invokeinterface #179,  3          // InterfaceMethod net/saksolm/monsterexpansion/mixin/RangedAttributeAccessor.setMaxValue:(D)V
+      14: getstatic     #184                // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+      17: aload_0
+      18: invokeinterface #186,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+      23: getstatic     #184                // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+      26: new           #188                // class net/saksolm/monsterexpansion/event/KillEventHandler
+      29: dup
+      30: invokespecial #189                // Method net/saksolm/monsterexpansion/event/KillEventHandler."<init>":()V
+      33: invokeinterface #186,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+      38: invokestatic  #194                // Method net/minecraftforge/fml/ModList.get:()Lnet/minecraftforge/fml/ModList;
+      41: ldc           #196                // String epicfight
+      43: invokevirtual #200                // Method net/minecraftforge/fml/ModList.isLoaded:(Ljava/lang/String;)Z
+      46: ifeq          62
+      49: invokestatic  #205                // Method net/saksolm/monsterexpansion/compat/EpicFightCompat.registerCompat:()V
+      52: getstatic     #184                // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+      55: ldc           #202                // class net/saksolm/monsterexpansion/compat/EpicFightCompat
+      57: invokeinterface #186,  2          // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+      62: return
+
+  private void addCreative(net.minecraftforge.event.BuildCreativeModeTabContentsEvent);
+    Code:
+       0: return
+
+  public void onServerStarting(net.minecraftforge.event.server.ServerStartingEvent);
+    Code:
+       0: return
+
+  static {};
+    Code:
+       0: ldc           #24                 // String monsterexpansion
+       2: invokestatic  #219                // Method org/apache/logging/log4j/LogManager.getLogger:(Ljava/lang/String;)Lorg/apache/logging/log4j/Logger;
+       5: putstatic     #221                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+       8: new           #223                // class net/minecraft/resources/ResourceLocation
+      11: dup
+      12: ldc           #24                 // String monsterexpansion
+      14: ldc           #225                // String is_rotated
+      16: invokespecial #228                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      19: putstatic     #230                // Field ROTATED_PROPERTY:Lnet/minecraft/resources/ResourceLocation;
+      22: return
+}

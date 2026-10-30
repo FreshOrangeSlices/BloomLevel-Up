@@ -1,0 +1,186 @@
+Compiled from "HudElement.java"
+public final class net.combatroll.tinyconfig.models.HudElement$Origin extends java.lang.Enum<net.combatroll.tinyconfig.models.HudElement$Origin> {
+  public static final net.combatroll.tinyconfig.models.HudElement$Origin TOP;
+
+  public static final net.combatroll.tinyconfig.models.HudElement$Origin TOP_LEFT;
+
+  public static final net.combatroll.tinyconfig.models.HudElement$Origin TOP_RIGHT;
+
+  public static final net.combatroll.tinyconfig.models.HudElement$Origin BOTTOM;
+
+  public static final net.combatroll.tinyconfig.models.HudElement$Origin BOTTOM_LEFT;
+
+  public static final net.combatroll.tinyconfig.models.HudElement$Origin BOTTOM_RIGHT;
+
+  private static final net.combatroll.tinyconfig.models.HudElement$Origin[] $VALUES;
+
+  public static net.combatroll.tinyconfig.models.HudElement$Origin[] values();
+    Code:
+       0: getstatic     #24                 // Field $VALUES:[Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+       3: invokevirtual #29                 // Method "[Lnet/combatroll/tinyconfig/models/HudElement$Origin;".clone:()Ljava/lang/Object;
+       6: checkcast     #25                 // class "[Lnet/combatroll/tinyconfig/models/HudElement$Origin;"
+       9: areturn
+
+  public static net.combatroll.tinyconfig.models.HudElement$Origin valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+       2: aload_0
+       3: invokestatic  #35                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+       9: areturn
+
+  private net.combatroll.tinyconfig.models.HudElement$Origin();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #41                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public net.combatroll.tinyconfig.models.Vec2f getPoint(int, int);
+    Code:
+       0: getstatic     #50                 // Field net/combatroll/tinyconfig/models/HudElement$1.$SwitchMap$net$tinyconfig$models$HudElement$Origin:[I
+       3: aload_0
+       4: invokevirtual #54                 // Method ordinal:()I
+       7: iaload
+       8: tableswitch   { // 1 to 6
+                     1: 48
+                     2: 61
+                     3: 71
+                     4: 82
+                     5: 96
+                     6: 107
+               default: 119
+          }
+      48: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+      51: dup
+      52: iload_1
+      53: i2f
+      54: fconst_2
+      55: fdiv
+      56: fconst_0
+      57: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+      60: areturn
+      61: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+      64: dup
+      65: fconst_0
+      66: fconst_0
+      67: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+      70: areturn
+      71: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+      74: dup
+      75: iload_1
+      76: i2f
+      77: fconst_0
+      78: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+      81: areturn
+      82: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+      85: dup
+      86: iload_1
+      87: i2f
+      88: fconst_2
+      89: fdiv
+      90: iload_2
+      91: i2f
+      92: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+      95: areturn
+      96: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+      99: dup
+     100: fconst_0
+     101: iload_2
+     102: i2f
+     103: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+     106: areturn
+     107: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+     110: dup
+     111: iload_1
+     112: i2f
+     113: iload_2
+     114: i2f
+     115: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+     118: areturn
+     119: new           #56                 // class net/combatroll/tinyconfig/models/Vec2f
+     122: dup
+     123: iload_1
+     124: i2f
+     125: fconst_2
+     126: fdiv
+     127: iload_2
+     128: i2f
+     129: fconst_2
+     130: fdiv
+     131: invokespecial #59                 // Method net/combatroll/tinyconfig/models/Vec2f."<init>":(FF)V
+     134: areturn
+
+  private static net.combatroll.tinyconfig.models.HudElement$Origin[] $values();
+    Code:
+       0: bipush        6
+       2: anewarray     #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+       5: dup
+       6: iconst_0
+       7: getstatic     #63                 // Field TOP:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: getstatic     #65                 // Field TOP_LEFT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      16: aastore
+      17: dup
+      18: iconst_2
+      19: getstatic     #67                 // Field TOP_RIGHT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      22: aastore
+      23: dup
+      24: iconst_3
+      25: getstatic     #69                 // Field BOTTOM:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      28: aastore
+      29: dup
+      30: iconst_4
+      31: getstatic     #71                 // Field BOTTOM_LEFT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      34: aastore
+      35: dup
+      36: iconst_5
+      37: getstatic     #73                 // Field BOTTOM_RIGHT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      40: aastore
+      41: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+       3: dup
+       4: ldc           #75                 // String TOP
+       6: iconst_0
+       7: invokespecial #76                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #63                 // Field TOP:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      13: new           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+      16: dup
+      17: ldc           #77                 // String TOP_LEFT
+      19: iconst_1
+      20: invokespecial #76                 // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #65                 // Field TOP_LEFT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      26: new           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+      29: dup
+      30: ldc           #78                 // String TOP_RIGHT
+      32: iconst_2
+      33: invokespecial #76                 // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #67                 // Field TOP_RIGHT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      39: new           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+      42: dup
+      43: ldc           #79                 // String BOTTOM
+      45: iconst_3
+      46: invokespecial #76                 // Method "<init>":(Ljava/lang/String;I)V
+      49: putstatic     #69                 // Field BOTTOM:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      52: new           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+      55: dup
+      56: ldc           #80                 // String BOTTOM_LEFT
+      58: iconst_4
+      59: invokespecial #76                 // Method "<init>":(Ljava/lang/String;I)V
+      62: putstatic     #71                 // Field BOTTOM_LEFT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      65: new           #2                  // class net/combatroll/tinyconfig/models/HudElement$Origin
+      68: dup
+      69: ldc           #81                 // String BOTTOM_RIGHT
+      71: iconst_5
+      72: invokespecial #76                 // Method "<init>":(Ljava/lang/String;I)V
+      75: putstatic     #73                 // Field BOTTOM_RIGHT:Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      78: invokestatic  #83                 // Method $values:()[Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      81: putstatic     #24                 // Field $VALUES:[Lnet/combatroll/tinyconfig/models/HudElement$Origin;
+      84: return
+}

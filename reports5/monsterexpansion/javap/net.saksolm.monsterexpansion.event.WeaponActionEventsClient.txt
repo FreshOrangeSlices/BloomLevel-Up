@@ -1,0 +1,157 @@
+Compiled from "WeaponActionEventsClient.java"
+public class net.saksolm.monsterexpansion.event.WeaponActionEventsClient {
+  private static boolean wasKeyDown;
+
+  private static boolean wasRightClickDown;
+
+  private static int holdDuration;
+
+  public net.saksolm.monsterexpansion.event.WeaponActionEventsClient();
+    Code:
+       0: aload_0
+       1: invokespecial #38                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #47                 // Field net/minecraftforge/event/TickEvent$ClientTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #50                 // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpeq     11
+      10: return
+      11: invokestatic  #56                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      14: astore_1
+      15: aload_1
+      16: getfield      #60                 // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      19: astore_2
+      20: aload_2
+      21: ifnonnull     25
+      24: return
+      25: aload_2
+      26: invokevirtual #66                 // Method net/minecraft/world/entity/player/Player.m_21205_:()Lnet/minecraft/world/item/ItemStack;
+      29: astore_3
+      30: aload_3
+      31: invokevirtual #72                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      34: instanceof    #74                 // class net/saksolm/monsterexpansion/item/ActionWeaponItem
+      37: ifne          53
+      40: iconst_0
+      41: putstatic     #76                 // Field wasKeyDown:Z
+      44: iconst_0
+      45: putstatic     #78                 // Field wasRightClickDown:Z
+      48: iconst_0
+      49: putstatic     #80                 // Field holdDuration:I
+      52: return
+      53: aload_1
+      54: getfield      #84                 // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      57: getfield      #90                 // Field net/minecraft/client/Options.f_92095_:Lnet/minecraft/client/KeyMapping;
+      60: invokevirtual #96                 // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+      63: istore        4
+      65: aload_3
+      66: invokevirtual #72                 // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      69: checkcast     #74                 // class net/saksolm/monsterexpansion/item/ActionWeaponItem
+      72: astore        5
+      74: aload         5
+      76: invokevirtual #99                 // Method net/saksolm/monsterexpansion/item/ActionWeaponItem.useVanillaLeftClick:()Z
+      79: ifeq          119
+      82: iload         4
+      84: getstatic     #78                 // Field wasRightClickDown:Z
+      87: if_icmpeq     105
+      90: new           #101                // class net/saksolm/monsterexpansion/network/WeaponActionPacket
+      93: dup
+      94: ldc           #103                // String HOLD
+      96: iconst_0
+      97: iload         4
+      99: invokespecial #106                // Method net/saksolm/monsterexpansion/network/WeaponActionPacket."<init>":(Ljava/lang/String;ZZ)V
+     102: invokestatic  #112                // Method net/saksolm/monsterexpansion/network/ModNetwork.sendToServer:(Ljava/lang/Object;)V
+     105: iload         4
+     107: putstatic     #78                 // Field wasRightClickDown:Z
+     110: iconst_0
+     111: putstatic     #76                 // Field wasKeyDown:Z
+     114: iconst_0
+     115: putstatic     #80                 // Field holdDuration:I
+     118: return
+     119: getstatic     #117                // Field net/saksolm/monsterexpansion/input/KeyInit.WEAPON_ACTION_KEY:Lnet/minecraft/client/KeyMapping;
+     122: invokevirtual #96                 // Method net/minecraft/client/KeyMapping.m_90857_:()Z
+     125: istore        6
+     127: iconst_0
+     128: istore        7
+     130: ldc           #103                // String HOLD
+     132: astore        8
+     134: iconst_0
+     135: istore        9
+     137: iload         6
+     139: ifeq          162
+     142: getstatic     #76                 // Field wasKeyDown:Z
+     145: ifne          162
+     148: iconst_0
+     149: putstatic     #80                 // Field holdDuration:I
+     152: ldc           #119                // String PRESS
+     154: astore        8
+     156: iconst_1
+     157: istore        7
+     159: goto          216
+     162: iload         6
+     164: ifeq          194
+     167: getstatic     #76                 // Field wasKeyDown:Z
+     170: ifeq          194
+     173: getstatic     #80                 // Field holdDuration:I
+     176: iconst_1
+     177: iadd
+     178: putstatic     #80                 // Field holdDuration:I
+     181: ldc           #103                // String HOLD
+     183: astore        8
+     185: iconst_1
+     186: istore        9
+     188: iconst_1
+     189: istore        7
+     191: goto          216
+     194: iload         6
+     196: ifne          216
+     199: getstatic     #76                 // Field wasKeyDown:Z
+     202: ifeq          216
+     205: ldc           #123                // String RELEASE
+     207: astore        8
+     209: iconst_0
+     210: putstatic     #80                 // Field holdDuration:I
+     213: iconst_1
+     214: istore        7
+     216: iload         4
+     218: getstatic     #78                 // Field wasRightClickDown:Z
+     221: if_icmpeq     227
+     224: iconst_1
+     225: istore        7
+     227: iload         7
+     229: ifeq          248
+     232: new           #101                // class net/saksolm/monsterexpansion/network/WeaponActionPacket
+     235: dup
+     236: aload         8
+     238: iload         9
+     240: iload         4
+     242: invokespecial #106                // Method net/saksolm/monsterexpansion/network/WeaponActionPacket."<init>":(Ljava/lang/String;ZZ)V
+     245: invokestatic  #112                // Method net/saksolm/monsterexpansion/network/ModNetwork.sendToServer:(Ljava/lang/Object;)V
+     248: iload         6
+     250: putstatic     #76                 // Field wasKeyDown:Z
+     253: iload         4
+     255: putstatic     #78                 // Field wasRightClickDown:Z
+     258: return
+
+  public static void onPlayerLoggedOut(net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent);
+    Code:
+       0: iconst_0
+       1: putstatic     #76                 // Field wasKeyDown:Z
+       4: iconst_0
+       5: putstatic     #78                 // Field wasRightClickDown:Z
+       8: iconst_0
+       9: putstatic     #80                 // Field holdDuration:I
+      12: return
+
+  static {};
+    Code:
+       0: iconst_0
+       1: putstatic     #76                 // Field wasKeyDown:Z
+       4: iconst_0
+       5: putstatic     #78                 // Field wasRightClickDown:Z
+       8: iconst_0
+       9: putstatic     #80                 // Field holdDuration:I
+      12: return
+}

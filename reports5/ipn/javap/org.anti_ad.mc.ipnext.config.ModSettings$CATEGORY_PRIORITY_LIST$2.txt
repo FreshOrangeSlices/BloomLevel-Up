@@ -1,0 +1,28 @@
+final class org.anti_ad.mc.ipnext.config.ModSettings$CATEGORY_PRIORITY_LIST$2 extends kotlin.jvm.internal.FunctionReferenceImpl implements kotlin.jvm.functions.Function0 {
+  org.anti_ad.mc.ipnext.config.ModSettings$CATEGORY_PRIORITY_LIST$2(java.lang.Object);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: aload_1
+       3: ldc           #10                 // class org/anti_ad/mc/ipnext/item/ItemTypeExtensionsObject
+       5: ldc           #12                 // String priorityListChanged
+       7: ldc           #14                 // String priorityListChanged()V
+       9: iconst_0
+      10: invokespecial #17                 // Method kotlin/jvm/internal/FunctionReferenceImpl."<init>":(ILjava/lang/Object;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+      13: return
+
+  public final void invoke();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field receiver:Ljava/lang/Object;
+       4: checkcast     #10                 // class org/anti_ad/mc/ipnext/item/ItemTypeExtensionsObject
+       7: invokevirtual #25                 // Method org/anti_ad/mc/ipnext/item/ItemTypeExtensionsObject.priorityListChanged:()V
+      10: return
+
+  public final java.lang.Object invoke();
+    Code:
+       0: aload_0
+       1: invokevirtual #28                 // Method invoke:()V
+       4: getstatic     #34                 // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+       7: areturn
+}

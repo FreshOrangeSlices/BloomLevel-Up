@@ -1,0 +1,41 @@
+Compiled from "EnchantmentsConfig.java"
+public class net.combatroll.config.EnchantmentsConfig {
+  public net.combatroll.tinyconfig.models.EnchantmentConfig longfooted;
+
+  public net.combatroll.tinyconfig.models.EnchantmentConfig acrobat;
+
+  public net.combatroll.tinyconfig.models.EnchantmentConfig multi_roll;
+
+  public net.combatroll.config.EnchantmentsConfig();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #15                 // class net/combatroll/tinyconfig/models/EnchantmentConfig
+       8: dup
+       9: iconst_5
+      10: bipush        12
+      12: bipush        12
+      14: fconst_1
+      15: invokespecial #18                 // Method net/combatroll/tinyconfig/models/EnchantmentConfig."<init>":(IIIF)V
+      18: putfield      #20                 // Field longfooted:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      21: aload_0
+      22: new           #15                 // class net/combatroll/tinyconfig/models/EnchantmentConfig
+      25: dup
+      26: bipush        10
+      28: bipush        15
+      30: bipush        14
+      32: ldc           #21                 // float 0.1f
+      34: invokespecial #18                 // Method net/combatroll/tinyconfig/models/EnchantmentConfig."<init>":(IIIF)V
+      37: putfield      #23                 // Field acrobat:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      40: aload_0
+      41: new           #15                 // class net/combatroll/tinyconfig/models/EnchantmentConfig
+      44: dup
+      45: iconst_4
+      46: bipush        15
+      48: bipush        17
+      50: fconst_1
+      51: invokespecial #18                 // Method net/combatroll/tinyconfig/models/EnchantmentConfig."<init>":(IIIF)V
+      54: putfield      #25                 // Field multi_roll:Lnet/combatroll/tinyconfig/models/EnchantmentConfig;
+      57: return
+}

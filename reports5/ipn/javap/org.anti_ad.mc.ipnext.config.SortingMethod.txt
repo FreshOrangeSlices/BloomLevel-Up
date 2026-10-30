@@ -1,0 +1,158 @@
+public final class org.anti_ad.mc.ipnext.config.SortingMethod extends java.lang.Enum {
+  private final java.lang.String ruleName;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod DEFAULT;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod ITEM_NAME;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod ITEM_ID;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod RAW_ID;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod ACCUMULATED_COUNT_DESCENDING;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod ACCUMULATED_COUNT_ASCENDING;
+
+  public static final org.anti_ad.mc.ipnext.config.SortingMethod CUSTOM;
+
+  private static final org.anti_ad.mc.ipnext.config.SortingMethod[] $VALUES;
+
+  private org.anti_ad.mc.ipnext.config.SortingMethod(java.lang.String, int, java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #22                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: aload_0
+       7: aload_3
+       8: putfield      #24                 // Field ruleName:Ljava/lang/String;
+      11: return
+
+  public final java.lang.String getRuleName();
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field ruleName:Ljava/lang/String;
+       4: areturn
+
+  public final java.lang.String toString();
+    Code:
+       0: getstatic     #34                 // Field org/anti_ad/mc/common/vanilla/alias/glue/I18n.INSTANCE:Lorg/anti_ad/mc/common/vanilla/alias/glue/I18n;
+       3: aload_0
+       4: invokevirtual #37                 // Method name:()Ljava/lang/String;
+       7: getstatic     #43                 // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      10: invokevirtual #49                 // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      13: dup
+      14: ldc           #51                 // String
+      16: invokestatic  #57                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      19: invokedynamic #69,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      24: iconst_0
+      25: anewarray     #71                 // class java/lang/Object
+      28: invokevirtual #75                 // Method org/anti_ad/mc/common/vanilla/alias/glue/I18n.translate:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      31: areturn
+
+  public static org.anti_ad.mc.ipnext.config.SortingMethod[] values();
+    Code:
+       0: getstatic     #79                 // Field $VALUES:[Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+       3: invokevirtual #85                 // Method "[Ljava/lang/Object;".clone:()Ljava/lang/Object;
+       6: checkcast     #86                 // class "[Lorg/anti_ad/mc/ipnext/config/SortingMethod;"
+       9: areturn
+
+  public static org.anti_ad.mc.ipnext.config.SortingMethod valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+       2: aload_0
+       3: invokestatic  #91                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+       9: areturn
+
+  private static final org.anti_ad.mc.ipnext.config.SortingMethod[] $values();
+    Code:
+       0: bipush        7
+       2: anewarray     #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: getstatic     #94                 // Field DEFAULT:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      11: aastore
+      12: aload_0
+      13: iconst_1
+      14: getstatic     #96                 // Field ITEM_NAME:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      17: aastore
+      18: aload_0
+      19: iconst_2
+      20: getstatic     #98                 // Field ITEM_ID:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      23: aastore
+      24: aload_0
+      25: iconst_3
+      26: getstatic     #100                // Field RAW_ID:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      29: aastore
+      30: aload_0
+      31: iconst_4
+      32: getstatic     #102                // Field ACCUMULATED_COUNT_DESCENDING:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      35: aastore
+      36: aload_0
+      37: iconst_5
+      38: getstatic     #104                // Field ACCUMULATED_COUNT_ASCENDING:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      41: aastore
+      42: aload_0
+      43: bipush        6
+      45: getstatic     #106                // Field CUSTOM:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      48: aastore
+      49: aload_0
+      50: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+       3: dup
+       4: ldc           #109                // String DEFAULT
+       6: iconst_0
+       7: ldc           #111                // String default
+       9: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      12: putstatic     #94                 // Field DEFAULT:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      15: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+      18: dup
+      19: ldc           #114                // String ITEM_NAME
+      21: iconst_1
+      22: ldc           #116                // String item_name
+      24: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      27: putstatic     #96                 // Field ITEM_NAME:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      30: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+      33: dup
+      34: ldc           #117                // String ITEM_ID
+      36: iconst_2
+      37: ldc           #119                // String item_id
+      39: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      42: putstatic     #98                 // Field ITEM_ID:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      45: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+      48: dup
+      49: ldc           #120                // String RAW_ID
+      51: iconst_3
+      52: ldc           #122                // String raw_id
+      54: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      57: putstatic     #100                // Field RAW_ID:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      60: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+      63: dup
+      64: ldc           #123                // String ACCUMULATED_COUNT_DESCENDING
+      66: iconst_4
+      67: ldc           #125                // String accumulated_count_descending
+      69: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      72: putstatic     #102                // Field ACCUMULATED_COUNT_DESCENDING:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      75: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+      78: dup
+      79: ldc           #126                // String ACCUMULATED_COUNT_ASCENDING
+      81: iconst_5
+      82: ldc           #128                // String accumulated_count_ascending
+      84: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      87: putstatic     #104                // Field ACCUMULATED_COUNT_ASCENDING:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+      90: new           #2                  // class org/anti_ad/mc/ipnext/config/SortingMethod
+      93: dup
+      94: ldc           #129                // String CUSTOM
+      96: bipush        6
+      98: aconst_null
+      99: invokespecial #113                // Method "<init>":(Ljava/lang/String;ILjava/lang/String;)V
+     102: putstatic     #106                // Field CUSTOM:Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+     105: invokestatic  #131                // Method $values:()[Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+     108: putstatic     #79                 // Field $VALUES:[Lorg/anti_ad/mc/ipnext/config/SortingMethod;
+     111: return
+}

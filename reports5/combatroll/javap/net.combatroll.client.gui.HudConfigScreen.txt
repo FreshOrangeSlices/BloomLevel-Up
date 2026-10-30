@@ -1,0 +1,234 @@
+Compiled from "HudConfigScreen.java"
+public class net.combatroll.client.gui.HudConfigScreen extends net.minecraft.client.gui.screens.Screen {
+  private net.minecraft.client.gui.screens.Screen previous;
+
+  public net.combatroll.client.gui.HudConfigScreen(net.minecraft.client.gui.screens.Screen);
+    Code:
+       0: aload_0
+       1: ldc           #29                 // String gui.combatroll.hud
+       3: invokestatic  #35                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       6: invokespecial #38                 // Method net/minecraft/client/gui/screens/Screen."<init>":(Lnet/minecraft/network/chat/Component;)V
+       9: aload_0
+      10: aload_1
+      11: putfield      #40                 // Field previous:Lnet/minecraft/client/gui/screens/Screen;
+      14: return
+
+  protected void m_7856_();
+    Code:
+       0: bipush        120
+       2: istore_1
+       3: bipush        20
+       5: istore_2
+       6: aload_0
+       7: getfield      #48                 // Field f_96543_:I
+      10: iconst_2
+      11: idiv
+      12: iload_1
+      13: iconst_2
+      14: idiv
+      15: isub
+      16: istore_3
+      17: aload_0
+      18: getfield      #51                 // Field f_96544_:I
+      21: iconst_2
+      22: idiv
+      23: iload_2
+      24: iconst_2
+      25: idiv
+      26: isub
+      27: istore        4
+      29: aload_0
+      30: ldc           #53                 // String gui.combatroll.close
+      32: invokestatic  #35                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      35: aload_0
+      36: invokedynamic #70,  0             // InvokeDynamic #0:m_93750_:(Lnet/combatroll/client/gui/HudConfigScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+      41: invokestatic  #74                 // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+      44: iload_3
+      45: iload         4
+      47: bipush        30
+      49: isub
+      50: invokevirtual #78                 // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      53: iload_1
+      54: iload_2
+      55: invokevirtual #81                 // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      58: invokevirtual #85                 // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+      61: invokevirtual #89                 // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+      64: pop
+      65: aload_0
+      66: ldc           #91                 // String gui.combatroll.corner
+      68: invokestatic  #35                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      71: invokedynamic #98,  0             // InvokeDynamic #1:m_93750_:()Lnet/minecraft/client/gui/components/Button$OnPress;
+      76: invokestatic  #74                 // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+      79: iload_3
+      80: iload         4
+      82: invokevirtual #78                 // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      85: iload_1
+      86: iload_2
+      87: invokevirtual #81                 // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+      90: invokevirtual #85                 // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+      93: invokevirtual #89                 // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+      96: pop
+      97: aload_0
+      98: ldc           #100                // String gui.combatroll.reset
+     100: invokestatic  #35                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     103: aload_0
+     104: invokedynamic #105,  0            // InvokeDynamic #2:m_93750_:(Lnet/combatroll/client/gui/HudConfigScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     109: invokestatic  #74                 // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     112: iload_3
+     113: iload         4
+     115: bipush        30
+     117: iadd
+     118: invokevirtual #78                 // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     121: iload_1
+     122: iload_2
+     123: invokevirtual #81                 // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     126: invokevirtual #85                 // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+     129: invokevirtual #89                 // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     132: pop
+     133: return
+
+  public void m_7379_();
+    Code:
+       0: aload_0
+       1: invokevirtual #113                // Method save:()V
+       4: aload_0
+       5: getfield      #117                // Field f_96541_:Lnet/minecraft/client/Minecraft;
+       8: aload_0
+       9: getfield      #40                 // Field previous:Lnet/minecraft/client/gui/screens/Screen;
+      12: invokevirtual #122                // Method net/minecraft/client/Minecraft.m_91152_:(Lnet/minecraft/client/gui/screens/Screen;)V
+      15: return
+
+  public void m_88315_(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #132                // Method m_280273_:(Lnet/minecraft/client/gui/GuiGraphics;)V
+       5: aload_1
+       6: fload         4
+       8: invokestatic  #138                // Method net/combatroll/client/gui/HudRenderHelper.render:(Lnet/minecraft/client/gui/GuiGraphics;F)V
+      11: aload_0
+      12: aload_1
+      13: iload_2
+      14: iload_3
+      15: fload         4
+      17: invokespecial #140                // Method net/minecraft/client/gui/screens/Screen.m_88315_:(Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+      20: return
+
+  public boolean m_7979_(double, double, int, double, double);
+    Code:
+       0: aload_0
+       1: invokevirtual #151                // Method m_7282_:()Z
+       4: ifne          70
+       7: iload         5
+       9: ifne          70
+      12: getstatic     #157                // Field net/combatroll/client/CombatRollClient.hudConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+      15: getfield      #163                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+      18: checkcast     #165                // class net/combatroll/config/HudConfig
+      21: astore        10
+      23: aload         10
+      25: getfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      28: new           #171                // class net/minecraft/world/phys/Vec2
+      31: dup
+      32: aload         10
+      34: getfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      37: getfield      #175                // Field net/combatroll/client/gui/HudElement.offset:Lnet/minecraft/world/phys/Vec2;
+      40: getfield      #178                // Field net/minecraft/world/phys/Vec2.f_82470_:F
+      43: f2d
+      44: dload         6
+      46: dadd
+      47: d2f
+      48: aload         10
+      50: getfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      53: getfield      #175                // Field net/combatroll/client/gui/HudElement.offset:Lnet/minecraft/world/phys/Vec2;
+      56: getfield      #181                // Field net/minecraft/world/phys/Vec2.f_82471_:F
+      59: f2d
+      60: dload         8
+      62: dadd
+      63: d2f
+      64: invokespecial #184                // Method net/minecraft/world/phys/Vec2."<init>":(FF)V
+      67: putfield      #175                // Field net/combatroll/client/gui/HudElement.offset:Lnet/minecraft/world/phys/Vec2;
+      70: aload_0
+      71: dload_1
+      72: dload_3
+      73: iload         5
+      75: dload         6
+      77: dload         8
+      79: invokespecial #186                // Method net/minecraft/client/gui/screens/Screen.m_7979_:(DDIDD)Z
+      82: ireturn
+
+  public static void nextOrigin();
+    Code:
+       0: getstatic     #157                // Field net/combatroll/client/CombatRollClient.hudConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+       3: getfield      #163                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+       6: checkcast     #165                // class net/combatroll/config/HudConfig
+       9: astore_0
+      10: invokestatic  #196                // Method net/combatroll/client/gui/HudElement$Origin.values:()[Lnet/combatroll/client/gui/HudElement$Origin;
+      13: aload_0
+      14: getfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      17: getfield      #200                // Field net/combatroll/client/gui/HudElement.origin:Lnet/combatroll/client/gui/HudElement$Origin;
+      20: invokevirtual #204                // Method net/combatroll/client/gui/HudElement$Origin.ordinal:()I
+      23: iconst_1
+      24: iadd
+      25: aaload
+      26: astore_1
+      27: aload_0
+      28: new           #17                 // class net/combatroll/client/gui/HudElement
+      31: dup
+      32: aload_1
+      33: aload_1
+      34: invokevirtual #208                // Method net/combatroll/client/gui/HudElement$Origin.initialOffset:()Lnet/minecraft/world/phys/Vec2;
+      37: invokespecial #211                // Method net/combatroll/client/gui/HudElement."<init>":(Lnet/combatroll/client/gui/HudElement$Origin;Lnet/minecraft/world/phys/Vec2;)V
+      40: putfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      43: goto          69
+      46: astore_2
+      47: invokestatic  #196                // Method net/combatroll/client/gui/HudElement$Origin.values:()[Lnet/combatroll/client/gui/HudElement$Origin;
+      50: iconst_0
+      51: aaload
+      52: astore_1
+      53: aload_0
+      54: new           #17                 // class net/combatroll/client/gui/HudElement
+      57: dup
+      58: aload_1
+      59: aload_1
+      60: invokevirtual #208                // Method net/combatroll/client/gui/HudElement$Origin.initialOffset:()Lnet/minecraft/world/phys/Vec2;
+      63: invokespecial #211                // Method net/combatroll/client/gui/HudElement."<init>":(Lnet/combatroll/client/gui/HudElement$Origin;Lnet/minecraft/world/phys/Vec2;)V
+      66: putfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      69: return
+    Exception table:
+       from    to  target type
+          10    43    46   Class java/lang/Exception
+
+  public void save();
+    Code:
+       0: getstatic     #157                // Field net/combatroll/client/CombatRollClient.hudConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+       3: invokevirtual #214                // Method net/combatroll/tinyconfig/ConfigManager.save:()V
+       6: return
+
+  public void reset();
+    Code:
+       0: getstatic     #157                // Field net/combatroll/client/CombatRollClient.hudConfig:Lnet/combatroll/tinyconfig/ConfigManager;
+       3: getfield      #163                // Field net/combatroll/tinyconfig/ConfigManager.value:Ljava/lang/Object;
+       6: checkcast     #165                // class net/combatroll/config/HudConfig
+       9: astore_1
+      10: aload_1
+      11: invokestatic  #219                // Method net/combatroll/config/HudConfig.createDefaultRollWidget:()Lnet/combatroll/client/gui/HudElement;
+      14: putfield      #169                // Field net/combatroll/config/HudConfig.rollWidget:Lnet/combatroll/client/gui/HudElement;
+      17: return
+
+  private void lambda$init$2(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: invokevirtual #221                // Method reset:()V
+       4: return
+
+  private static void lambda$init$1(net.minecraft.client.gui.components.Button);
+    Code:
+       0: invokestatic  #224                // Method nextOrigin:()V
+       3: return
+
+  private void lambda$init$0(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: invokevirtual #226                // Method m_7379_:()V
+       4: return
+}

@@ -1,0 +1,15 @@
+Compiled from "EntityAttributesMixin.java"
+public class net.combatroll.mixin.EntityAttributesMixin {
+  public net.combatroll.mixin.EntityAttributesMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private static void static_tail_CombatRoll(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: getstatic     #29                 // Field net/combatroll/Platform.Fabric:Z
+       3: ifeq          9
+       6: invokestatic  #34                 // Method net/combatroll/CombatRoll.registerAttributes:()V
+       9: return
+}

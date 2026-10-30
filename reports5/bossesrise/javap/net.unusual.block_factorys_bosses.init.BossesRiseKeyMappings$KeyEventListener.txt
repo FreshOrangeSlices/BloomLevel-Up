@@ -1,0 +1,18 @@
+Compiled from "BossesRiseKeyMappings.java"
+public class net.unusual.block_factorys_bosses.init.BossesRiseKeyMappings$KeyEventListener {
+  public net.unusual.block_factorys_bosses.init.BossesRiseKeyMappings$KeyEventListener();
+    Code:
+       0: aload_0
+       1: invokespecial #26                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onClientTick(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: invokestatic  #37                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: getfield      #41                 // Field net/minecraft/client/Minecraft.f_91080_:Lnet/minecraft/client/gui/screens/Screen;
+       6: ifnonnull     16
+       9: getstatic     #45                 // Field net/unusual/block_factorys_bosses/init/BossesRiseKeyMappings.DODGE_ROLL:Lnet/minecraft/client/KeyMapping;
+      12: invokevirtual #51                 // Method net/minecraft/client/KeyMapping.m_90859_:()Z
+      15: pop
+      16: return
+}

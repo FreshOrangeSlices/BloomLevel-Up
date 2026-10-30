@@ -1,0 +1,140 @@
+public final class org.anti_ad.mc.ipnext.config.PostAction extends java.lang.Enum {
+  public static final org.anti_ad.mc.ipnext.config.PostAction NONE;
+
+  public static final org.anti_ad.mc.ipnext.config.PostAction GROUP_IN_ROWS;
+
+  public static final org.anti_ad.mc.ipnext.config.PostAction GROUP_IN_COLUMNS;
+
+  public static final org.anti_ad.mc.ipnext.config.PostAction DISTRIBUTE_EVENLY;
+
+  public static final org.anti_ad.mc.ipnext.config.PostAction SHUFFLE;
+
+  public static final org.anti_ad.mc.ipnext.config.PostAction FILL_ONE;
+
+  public static final org.anti_ad.mc.ipnext.config.PostAction REVERSE;
+
+  private static final org.anti_ad.mc.ipnext.config.PostAction[] $VALUES;
+
+  private org.anti_ad.mc.ipnext.config.PostAction(java.lang.String, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #18                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public final java.lang.String toString();
+    Code:
+       0: getstatic     #27                 // Field org/anti_ad/mc/common/vanilla/alias/glue/I18n.INSTANCE:Lorg/anti_ad/mc/common/vanilla/alias/glue/I18n;
+       3: aload_0
+       4: invokevirtual #30                 // Method name:()Ljava/lang/String;
+       7: getstatic     #36                 // Field java/util/Locale.ROOT:Ljava/util/Locale;
+      10: invokevirtual #42                 // Method java/lang/String.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String;
+      13: dup
+      14: ldc           #44                 // String
+      16: invokestatic  #50                 // Method kotlin/jvm/internal/Intrinsics.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V
+      19: invokedynamic #62,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      24: iconst_0
+      25: anewarray     #64                 // class java/lang/Object
+      28: invokevirtual #68                 // Method org/anti_ad/mc/common/vanilla/alias/glue/I18n.translate:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      31: areturn
+
+  public static org.anti_ad.mc.ipnext.config.PostAction[] values();
+    Code:
+       0: getstatic     #72                 // Field $VALUES:[Lorg/anti_ad/mc/ipnext/config/PostAction;
+       3: invokevirtual #78                 // Method "[Ljava/lang/Object;".clone:()Ljava/lang/Object;
+       6: checkcast     #79                 // class "[Lorg/anti_ad/mc/ipnext/config/PostAction;"
+       9: areturn
+
+  public static org.anti_ad.mc.ipnext.config.PostAction valueOf(java.lang.String);
+    Code:
+       0: ldc           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+       2: aload_0
+       3: invokestatic  #84                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+       9: areturn
+
+  private static final org.anti_ad.mc.ipnext.config.PostAction[] $values();
+    Code:
+       0: bipush        7
+       2: anewarray     #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+       5: dup
+       6: astore_0
+       7: iconst_0
+       8: getstatic     #87                 // Field NONE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      11: aastore
+      12: aload_0
+      13: iconst_1
+      14: getstatic     #89                 // Field GROUP_IN_ROWS:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      17: aastore
+      18: aload_0
+      19: iconst_2
+      20: getstatic     #91                 // Field GROUP_IN_COLUMNS:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      23: aastore
+      24: aload_0
+      25: iconst_3
+      26: getstatic     #93                 // Field DISTRIBUTE_EVENLY:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      29: aastore
+      30: aload_0
+      31: iconst_4
+      32: getstatic     #95                 // Field SHUFFLE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      35: aastore
+      36: aload_0
+      37: iconst_5
+      38: getstatic     #97                 // Field FILL_ONE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      41: aastore
+      42: aload_0
+      43: bipush        6
+      45: getstatic     #99                 // Field REVERSE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      48: aastore
+      49: aload_0
+      50: areturn
+
+  static {};
+    Code:
+       0: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+       3: dup
+       4: ldc           #102                // String NONE
+       6: iconst_0
+       7: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #87                 // Field NONE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      13: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+      16: dup
+      17: ldc           #104                // String GROUP_IN_ROWS
+      19: iconst_1
+      20: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      23: putstatic     #89                 // Field GROUP_IN_ROWS:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      26: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+      29: dup
+      30: ldc           #105                // String GROUP_IN_COLUMNS
+      32: iconst_2
+      33: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      36: putstatic     #91                 // Field GROUP_IN_COLUMNS:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      39: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+      42: dup
+      43: ldc           #106                // String DISTRIBUTE_EVENLY
+      45: iconst_3
+      46: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      49: putstatic     #93                 // Field DISTRIBUTE_EVENLY:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      52: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+      55: dup
+      56: ldc           #107                // String SHUFFLE
+      58: iconst_4
+      59: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      62: putstatic     #95                 // Field SHUFFLE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      65: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+      68: dup
+      69: ldc           #108                // String FILL_ONE
+      71: iconst_5
+      72: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      75: putstatic     #97                 // Field FILL_ONE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      78: new           #2                  // class org/anti_ad/mc/ipnext/config/PostAction
+      81: dup
+      82: ldc           #109                // String REVERSE
+      84: bipush        6
+      86: invokespecial #103                // Method "<init>":(Ljava/lang/String;I)V
+      89: putstatic     #99                 // Field REVERSE:Lorg/anti_ad/mc/ipnext/config/PostAction;
+      92: invokestatic  #111                // Method $values:()[Lorg/anti_ad/mc/ipnext/config/PostAction;
+      95: putstatic     #72                 // Field $VALUES:[Lorg/anti_ad/mc/ipnext/config/PostAction;
+      98: return
+}

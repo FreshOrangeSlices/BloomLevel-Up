@@ -1,0 +1,28 @@
+Compiled from "CraftingTweaksConfigData.java"
+public class net.blay09.mods.craftingtweaks.config.CraftingTweaksConfigData$Common {
+  public boolean compressRequiresCraftingGrid;
+
+  public java.util.List<java.lang.String> compressDenylist;
+
+  public net.blay09.mods.craftingtweaks.config.CraftingTweaksConfigData$Common();
+    Code:
+       0: aload_0
+       1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iconst_1
+       6: putfield      #25                 // Field compressRequiresCraftingGrid:Z
+       9: aload_0
+      10: iconst_2
+      11: anewarray     #27                 // class java/lang/String
+      14: dup
+      15: iconst_0
+      16: ldc           #29                 // String minecraft:sandstone
+      18: aastore
+      19: dup
+      20: iconst_1
+      21: ldc           #31                 // String minecraft:iron_trapdoor
+      23: aastore
+      24: invokestatic  #37                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      27: putfield      #39                 // Field compressDenylist:Ljava/util/List;
+      30: return
+}

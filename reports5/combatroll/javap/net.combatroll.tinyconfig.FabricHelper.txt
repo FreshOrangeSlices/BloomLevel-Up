@@ -1,0 +1,14 @@
+Compiled from "FabricHelper.java"
+public class net.combatroll.tinyconfig.FabricHelper {
+  public net.combatroll.tinyconfig.FabricHelper();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  static java.nio.file.Path getConfigDir();
+    Code:
+       0: invokestatic  #19                 // InterfaceMethod net/combatroll/fabricmc/loader/api/FabricLoader.getInstance:()Lnet/combatroll/fabricmc/loader/api/FabricLoader;
+       3: invokeinterface #21,  1           // InterfaceMethod net/combatroll/fabricmc/loader/api/FabricLoader.getConfigDir:()Ljava/nio/file/Path;
+       8: areturn
+}

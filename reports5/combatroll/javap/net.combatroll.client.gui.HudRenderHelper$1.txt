@@ -1,0 +1,60 @@
+Compiled from "HudRenderHelper.java"
+class net.combatroll.client.gui.HudRenderHelper$1 {
+  static final int[] $SwitchMap$net$combatroll$config$ClientConfig$LabelPosition;
+
+  static final int[] $SwitchMap$net$combatroll$client$gui$Drawable$Anchor;
+
+  static {};
+    Code:
+       0: invokestatic  #28                 // Method net/combatroll/client/gui/Drawable$Anchor.values:()[Lnet/combatroll/client/gui/Drawable$Anchor;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #30                 // Field $SwitchMap$net$combatroll$client$gui$Drawable$Anchor:[I
+       9: getstatic     #30                 // Field $SwitchMap$net$combatroll$client$gui$Drawable$Anchor:[I
+      12: getstatic     #34                 // Field net/combatroll/client/gui/Drawable$Anchor.LEADING:Lnet/combatroll/client/gui/Drawable$Anchor;
+      15: invokevirtual #38                 // Method net/combatroll/client/gui/Drawable$Anchor.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: goto          24
+      23: astore_0
+      24: getstatic     #30                 // Field $SwitchMap$net$combatroll$client$gui$Drawable$Anchor:[I
+      27: getstatic     #41                 // Field net/combatroll/client/gui/Drawable$Anchor.TRAILING:Lnet/combatroll/client/gui/Drawable$Anchor;
+      30: invokevirtual #38                 // Method net/combatroll/client/gui/Drawable$Anchor.ordinal:()I
+      33: iconst_2
+      34: iastore
+      35: goto          39
+      38: astore_0
+      39: getstatic     #30                 // Field $SwitchMap$net$combatroll$client$gui$Drawable$Anchor:[I
+      42: getstatic     #44                 // Field net/combatroll/client/gui/Drawable$Anchor.CENTER:Lnet/combatroll/client/gui/Drawable$Anchor;
+      45: invokevirtual #38                 // Method net/combatroll/client/gui/Drawable$Anchor.ordinal:()I
+      48: iconst_3
+      49: iastore
+      50: goto          54
+      53: astore_0
+      54: invokestatic  #47                 // Method net/combatroll/config/ClientConfig$LabelPosition.values:()[Lnet/combatroll/config/ClientConfig$LabelPosition;
+      57: arraylength
+      58: newarray       int
+      60: putstatic     #49                 // Field $SwitchMap$net$combatroll$config$ClientConfig$LabelPosition:[I
+      63: getstatic     #49                 // Field $SwitchMap$net$combatroll$config$ClientConfig$LabelPosition:[I
+      66: getstatic     #53                 // Field net/combatroll/config/ClientConfig$LabelPosition.TOP:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      69: invokevirtual #54                 // Method net/combatroll/config/ClientConfig$LabelPosition.ordinal:()I
+      72: iconst_1
+      73: iastore
+      74: goto          78
+      77: astore_0
+      78: getstatic     #49                 // Field $SwitchMap$net$combatroll$config$ClientConfig$LabelPosition:[I
+      81: getstatic     #57                 // Field net/combatroll/config/ClientConfig$LabelPosition.LEFT:Lnet/combatroll/config/ClientConfig$LabelPosition;
+      84: invokevirtual #54                 // Method net/combatroll/config/ClientConfig$LabelPosition.ordinal:()I
+      87: iconst_2
+      88: iastore
+      89: goto          93
+      92: astore_0
+      93: return
+    Exception table:
+       from    to  target type
+           9    20    23   Class java/lang/NoSuchFieldError
+          24    35    38   Class java/lang/NoSuchFieldError
+          39    50    53   Class java/lang/NoSuchFieldError
+          63    74    77   Class java/lang/NoSuchFieldError
+          78    89    92   Class java/lang/NoSuchFieldError
+}

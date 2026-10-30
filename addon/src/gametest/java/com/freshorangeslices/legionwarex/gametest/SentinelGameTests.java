@@ -91,7 +91,7 @@ public final class SentinelGameTests {
 	@GameTest(template = "room", timeoutTicks = 300)
 	public static void aSentinelIsDressedAndHoldsItsPost(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		BlockPos post = helper.absolutePos(new BlockPos(3, 1, 3));
+		BlockPos post = helper.absolutePos(Rooms.on(helper, 3, 3));
 		Mob zombie = Sentinels.spawn(level, new SentinelTable.Entry(ZOMBIE, 1, List.of(), false), post, false);
 		helper.assertTrue(zombie != null, "A zombie sentinel was placed");
 
@@ -139,7 +139,7 @@ public final class SentinelGameTests {
 		List<Mob> placed = new ArrayList<>();
 
 		try {
-			Mob scout = Sentinels.spawn(level, new SentinelTable.Entry(PILLAGER, 1, List.of(), true), helper.absolutePos(new BlockPos(2, 1, 2)), false);
+			Mob scout = Sentinels.spawn(level, new SentinelTable.Entry(PILLAGER, 1, List.of(), true), helper.absolutePos(Rooms.on(helper, 2, 2)), false);
 			placed.add(scout);
 			helper.assertTrue(scout != null && Sentinels.isSentinel(scout) && Sentinels.postOf(scout) == null, "A scout has no post");
 			helper.assertTrue(scout.goalSelector.getAvailableGoals().stream().noneMatch(goal -> goal.getGoal() instanceof HoldPostGoal), "A scout wanders");

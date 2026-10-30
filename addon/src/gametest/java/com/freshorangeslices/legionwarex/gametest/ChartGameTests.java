@@ -127,9 +127,9 @@ public final class ChartGameTests {
 	@GameTest(template = "room")
 	public static void aBandPirateDropsAChartAbout1In15(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(new BlockPos(1, 1, 1)), RandomSource.create(2), 1, false);
+		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 1, 1)), RandomSource.create(2), 1, false);
 		Mob crew = helper.spawn((EntityType<Mob>) ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("block_factorys_bosses", "pirate_rook")),
-				new BlockPos(3, 1, 3));
+				Rooms.on(helper, 3, 3));
 
 		try {
 			helper.assertTrue(!band.isEmpty() && Bands.kindOf(band.get(0)) == BandKind.PIRATE, "A band pirate knows its band's kind");

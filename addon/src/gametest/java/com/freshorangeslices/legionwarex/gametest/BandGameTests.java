@@ -48,7 +48,7 @@ public final class BandGameTests {
 	@GameTest(template = "room")
 	public static void aWarBandIsAPatrolLedByTheBanner(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		List<Mob> band = Bands.spawn(level, BandKind.WAR, helper.absolutePos(new BlockPos(4, 1, 4)), RandomSource.create(7), 5, false);
+		List<Mob> band = Bands.spawn(level, BandKind.WAR, helper.absolutePos(Rooms.on(helper, 4, 4)), RandomSource.create(7), 5, false);
 
 		try {
 			helper.assertTrue(band.size() >= 3, "Most of a band of 5 found room on flat ground: " + Bands.describe(BandKind.WAR, band));
@@ -119,7 +119,7 @@ public final class BandGameTests {
 	public static void aPirateBandKeepsToItsRookAndKillingItSummonsNoBoss(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
 		helper.assertTrue(ForgeRegistries.ENTITY_TYPES.containsKey(CAPTAIN), "Bosses'Rise is loaded in the dev run");
-		BlockPos at = helper.absolutePos(new BlockPos(4, 1, 4));
+		BlockPos at = helper.absolutePos(Rooms.on(helper, 4, 4));
 		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, at, RandomSource.create(3), 4, false);
 		helper.assertTrue(band.size() >= 3, "Most of a pirate band of 4 found room: " + Bands.describe(BandKind.PIRATE, band));
 		Mob leader = band.get(0);
@@ -148,7 +148,7 @@ public final class BandGameTests {
 		// Bosses'Rise keeps every pirate for good; these despawn like monsters (BandEvents), unless a player keeps them.
 		helper.assertTrue(band.stream().allMatch(Mob::isPersistenceRequired), "Pirates are kept for good by their mod");
 		helper.assertFalse(Despawning.keptByPlayer(leader), "Nothing keeps the leader");
-		Mob loner = helper.spawn((EntityType<Mob>) ForgeRegistries.ENTITY_TYPES.getValue(ROOK), new BlockPos(2, 1, 2));
+		Mob loner = helper.spawn((EntityType<Mob>) ForgeRegistries.ENTITY_TYPES.getValue(ROOK), Rooms.on(helper, 2, 2));
 		helper.assertFalse(Bands.inBand(loner), "A pirate the add-on didn't send (the Kraken's crew) is left to its mod");
 		helper.assertTrue(loner.getAttributeValue(Attributes.MOVEMENT_SPEED) == loner.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue(),
 				"The Kraken's crew keeps its own speed");
@@ -174,12 +174,12 @@ public final class BandGameTests {
 	@GameTest(template = "room", timeoutTicks = 100)
 	public static void aBandRookSwingsSooner(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(new BlockPos(1, 1, 1)), RandomSource.create(3), 1, false);
+		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 1, 1)), RandomSource.create(3), 1, false);
 		helper.assertTrue(band.size() == 1 && PirateTuning.hasSwingCounters(band.get(0)), "A band's rook, with Bosses'Rise's swing counters: "
 				+ Bands.describe(BandKind.PIRATE, band));
 		Mob quick = band.get(0);
-		Mob crew = helper.spawn((EntityType<Mob>) ForgeRegistries.ENTITY_TYPES.getValue(ROOK), new BlockPos(1, 1, 7));
-		Mob target = helper.spawn(EntityType.VILLAGER, new BlockPos(5, 1, 4));
+		Mob crew = helper.spawn((EntityType<Mob>) ForgeRegistries.ENTITY_TYPES.getValue(ROOK), Rooms.on(helper, 1, 7));
+		Mob target = helper.spawn(EntityType.VILLAGER, Rooms.on(helper, 5, 4));
 
 		for (Mob mob : List.of(quick, crew, target)) {
 			mob.setNoAi(true);

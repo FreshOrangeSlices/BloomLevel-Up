@@ -40,6 +40,28 @@ def java_pid(parent):
         return parent
 
 
+def chart_check(process, log, root):
+    """The LegionWareX add-on's pirate charts in the shipped world (a normal Overworld with structures, as a friend's
+    server makes it; the client test's world is flat with structures off): a chart read at the world's spawn, from the
+    server console. Prints what it found (server-chart), a warning when it found no lair within reach."""
+    if not any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(root, "mods"))):
+        return
+    esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+    lines = []
+    for command, pattern in (("legionwarex chart lairs", r"LegionWareX chart: \d+ lairs"), ("legionwarex chart find", r"LegionWareX chart: found")):
+        mark = len(log)
+        process.stdin.write(command + "\n")
+        process.stdin.flush()
+        end = time.time() + 240
+        found = None
+        while time.time() < end and found is None:
+            time.sleep(1)
+            found = next((l for l in log[mark:] if re.search(pattern, l)), None)
+        lines.append(found.split("LegionWareX chart: ", 1)[1].strip() if found else f"{command}: no answer within 4 minutes")
+    level = "warning" if any("found no lair" in l or "no answer" in l for l in lines) else "notice"
+    print(f"::{level} title=server-chart::{esc(chr(10).join(lines)[:3900])}")
+
+
 def main():
     server_zip = sys.argv[1]
     root = sys.argv[2] if len(sys.argv) > 2 else "server"
@@ -77,6 +99,7 @@ def main():
         if done is not None and stop_sent is None:
             time.sleep(5)
             memory = rss_mb(java_pid(process.pid))
+            chart_check(process, log, root)
             process.stdin.write("stop\n")
             process.stdin.flush()
             stop_sent = time.time()

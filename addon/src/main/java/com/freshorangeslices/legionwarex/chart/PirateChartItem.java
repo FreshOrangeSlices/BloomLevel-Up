@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
  * A pirate chart, not yet read: use it and it works out where it leads (the nearest boss lair no one on the world has
  * beaten, within a few thousand blocks; {@link LairSearch}) and becomes that treasure map ({@link Charts#read}). Reading
  * takes a moment, a tick per lair structure, so the server never stalls on it. Nothing in reach: the chart stays blank
- * and comes back, to try somewhere else.
+ * and comes back, to try somewhere else. Charts are of the Overworld: read in another dimension, nothing happens.
  */
 public final class PirateChartItem extends Item {
 	public PirateChartItem(Properties properties) {
@@ -30,6 +30,12 @@ public final class PirateChartItem extends Item {
 
 		if (!(level instanceof ServerLevel server) || !(player instanceof ServerPlayer reader)) {
 			return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+		}
+
+		// Pirate charts are of the Overworld (FreshOrangeSlices): read anywhere else, it stays blank.
+		if (server.dimension() != Level.OVERWORLD) {
+			reader.displayClientMessage(Component.translatable("message.legionwarex.chart_overworld"), true);
+			return InteractionResultHolder.fail(stack);
 		}
 
 		if (ChartReading.isReading(reader)) {

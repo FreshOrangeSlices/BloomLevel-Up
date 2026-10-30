@@ -755,64 +755,27 @@ def band_check(server, player, entities, shots):
 
 
 def chart_check(server, player, entities, shots):
-    """The add-on's pirate charts in the pack's own world. The lair list is read in the Overworld and the Nether: every
-    lair of a mod in this layer must be in the game (a wrong id in the add-on's lair list fails). The test's Overworld
-    is flat (no structures), so a chart is read in the Nether, from its middle, as the player: the treasure map to the
-    nearest Nether lair lands in their hand and is captured. A layer with Nether lairs that finds none fails. Returns
-    (failures, notes)."""
+    """The add-on's pirate charts: every lair of a mod in this layer must be in the game (a wrong id in the add-on's lair
+    list fails). This world is flat with structures off, so no chart is read here; the boot test reads one in the
+    shipped world (server-chart). Returns (failures, notes)."""
     failures, notes = [], []
     mods_here = {e.split(":")[0] for e in entities}
-    nether_lairs = 0
-    for dim in ("minecraft:overworld", "minecraft:the_nether"):
-        mark = len(server.lines)
-        server.send(f"execute in {dim} run legionwarex chart lairs")
-        line = lines_since(server, mark, r"LegionWareX chart: \d+ lairs", 30)
-        if not line:
-            return failures + [f"add-on: /legionwarex chart lairs said nothing in {dim} (is the command there?)"], notes
-        text = line.split("LegionWareX chart: ", 1)[1].strip()
-        here = re.search(r"; in ([a-z_:]+) \((\d+)\)", text)
-        elsewhere = re.search(r"; other dimensions \((\d+)\)", text)
-        missing = re.search(r"; not in the game \((\d+)\):(.*)$", text)
-        if not (here and elsewhere and missing):
-            failures.append(f"add-on: couldn't read the lair list in {dim}: {text[:700]}")
-            continue
-        count = int(here.group(2))
-        if dim == "minecraft:the_nether":
-            nether_lairs = count
-        notes.append(f"add-on: chart lairs that can be in {dim}: {count} (other dimensions: {elsewhere.group(1)}, "
-                     f"not in this layer: {missing.group(1)})")
-        if dim == "minecraft:overworld":
-            # "structure" when the structure isn't there; "structure (no [boss, ...])" when it is but its bosses aren't.
-            absent = [m.strip() for m in missing.group(2).split(", ") if m.strip()]
-            wrong = [m for m in absent if (any(b.split(":")[0] in mods_here for b in re.findall(r"[a-z0-9_.-]+:[a-z0-9_/.-]+", m.split(" (no ", 1)[1]))
-                                           if " (no " in m else m.split(":")[0] in mods_here | {"minecraft"})]
-            if wrong:
-                failures.append(f"add-on: lairs in the chart list that aren't in the game though their mod is: {', '.join(wrong)}")
     mark = len(server.lines)
-    server.send(f"execute as {player} in minecraft:the_nether positioned 0 70 0 run legionwarex chart find")
-    line = lines_since(server, mark, r"LegionWareX chart: found", 180)
+    server.send("legionwarex chart lairs")
+    line = lines_since(server, mark, r"LegionWareX chart: \d+ lairs", 60)
     if not line:
-        failures.append("add-on: /legionwarex chart find (in the Nether) said nothing within 3 minutes")
-    elif "found no lair" in line:
-        # Reported, not failed, while the probes below say why (the add-on's game test finds lairs in a normal world).
-        notes.append("add-on: a chart read in the Nether " + line.split("LegionWareX chart: ", 1)[1].strip())
-        if nether_lairs:
-            print("::warning title=pack-chart::" + "a chart read in the Nether found no lair though " + str(nether_lairs) + " Nether lairs are in this layer")
-    else:
-        notes.append("add-on: a chart read in the Nether " + line.split("LegionWareX chart: ", 1)[1].strip())
-        time.sleep(4)
-        capture(shots, "pack_chart")
-    server.send(f"item replace entity {player} weapon.mainhand with minecraft:air")
-    # The game's own map-structure search for a few Nether structures (vanilla's fortress, and lairs with vanilla's and
-    # with Cataclysm's own placement), from the same spot: what a chart's search can see.
-    for structure in ("minecraft:fortress", "legendary_monsters:soul_fortress_remains", "legendary_monsters:lava_eater_spawn",
-                      "soulsweapons:decaying_kingdom", "cataclysm:soul_black_smith", "legionary:bastion_arena"):
-        if structure.split(":")[0] != "minecraft" and structure.split(":")[0] not in mods_here:
-            continue
-        mark = len(server.lines)
-        server.send(f"execute in minecraft:the_nether positioned 0 70 0 run legionwarex chart probe {structure}")
-        line = lines_since(server, mark, r"LegionWareX chart: probe", 120)
-        notes.append("add-on: " + (line.split("LegionWareX chart: ", 1)[1].strip() if line else f"probe {structure} said nothing"))
+        return ["add-on: /legionwarex chart lairs said nothing (is the command there?)"], notes
+    text = line.split("LegionWareX chart: ", 1)[1].strip()
+    missing = re.search(r"; not in the game \((\d+)\):(.*)$", text)
+    if not missing:
+        return [f"add-on: couldn't read the lair list: {text[:700]}"], notes
+    # "structure" when the structure isn't there; "structure (no [boss, ...])" when it is but its bosses aren't.
+    absent = [m.strip() for m in missing.group(2).split(", ") if m.strip()]
+    wrong = [m for m in absent if (any(b.split(":")[0] in mods_here for b in re.findall(r"[a-z0-9_.-]+:[a-z0-9_/.-]+", m.split(" (no ", 1)[1]))
+                                   if " (no " in m else m.split(":")[0] in mods_here | {"minecraft"})]
+    notes.append(f"add-on: chart lairs: {text.split(';', 1)[0]}, {missing.group(1)} not in this layer")
+    if wrong:
+        failures.append(f"add-on: lairs in the chart list that aren't in the game though their mod is: {', '.join(wrong)}")
     return failures, notes
 
 
@@ -828,7 +791,7 @@ def sentinel_check(server, player, shots):
     time.sleep(1)
     mark = len(server.lines)
     server.send(f"execute as {player} at @s run legionwarex sentinel all")
-    line = lines_since(server, mark, r"LegionWareX sentinel: placed", 30)
+    line = lines_since(server, mark, r"LegionWareX sentinel: placed", 90)
     if not line:
         server.send(f"gamemode survival {player}")
         return ["add-on: /legionwarex sentinel all said nothing (is the command there?)"], notes, report

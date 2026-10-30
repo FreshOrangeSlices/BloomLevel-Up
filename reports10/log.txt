@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/runner/work/BloomLevel-Up/BloomLevel-Up/check/reports10.py", line 85, in <module>
+    report = {b: {"health": r.get("health"), "category": r.get("category"), "tags": [t for t in r.get("tags", []) if "boss" in t],
+                            ^
+NameError: name 'r' is not defined. Did you mean: 're'?

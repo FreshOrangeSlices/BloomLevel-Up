@@ -342,6 +342,37 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
                 problems.append(f"pack_data.recipe_edits: {ident} has no {old_item}")
             original = original.replace(f'"{old_item}"', f'"{new_item}"')
         out[f"{root}/data/{namespace}/recipes/{path}.json"] = json.loads(original)
+    # A mod's own data file with some of its values changed: {"<namespace>:<path under data/<namespace>>": {"why": ...,
+    # "merge": {...}}}, the file from the jars with "merge" merged in (objects key by key), so a mod update's new
+    # values stay. Skipped when the mod isn't in the layers built.
+    for ident, edit in data.get("data_edits", {}).items():
+        if ident.startswith("_"):
+            continue
+        namespace, path = ident.split(":", 1)
+        if jars is not None and namespace not in mods_in(jars):
+            continue
+        original = None
+        for jar_data in (jars or {}).values():
+            try:
+                original = json.loads(zipfile.ZipFile(io.BytesIO(jar_data)).read(f"data/{namespace}/{path}.json").decode("utf-8"))
+                break
+            except (KeyError, zipfile.BadZipFile):
+                continue
+        if original is None:
+            if jars:
+                problems.append(f"pack_data.data_edits: no data/{namespace}/{path}.json in the pack's jars")
+            continue
+
+        def merge(into, changes):
+            for key, value in changes.items():
+                if isinstance(value, dict) and isinstance(into.get(key), dict):
+                    merge(into[key], value)
+                else:
+                    into[key] = value
+        merge(original, edit["merge"])
+        out[f"{root}/data/{namespace}/{path}.json"] = original
+        if notes is not None:
+            notes.append(f"data edit: {ident} ({', '.join(edit['merge'])})")
     # Worldgen files replaced outright (vanilla's or a mod's): the pack's data pack loads after both.
     for ident, spec in data.get("worldgen", {}).items():
         if ident.startswith("_"):

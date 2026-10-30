@@ -53,6 +53,15 @@
       ],
       "external": [
         {
+          "name": "Fauna Engine",
+          "_why": "Book of Dragons 1.4's library (mod id liberanimalium; CurseForge only, not listed as a dependency on Modrinth)",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/fauna-engine",
+          "file": "liberanimalium-1.0+1.20.1-forge.jar",
+          "urls": ["https://mediafilez.forgecdn.net/files/9327/825/liberanimalium-1.0%2B1.20.1-forge.jar", "https://edge.forgecdn.net/files/9327/825/liberanimalium-1.0%2B1.20.1-forge.jar"],
+          "client": "required",
+          "server": "required"
+        },
+        {
           "name": "Framework",
           "page": "https://www.curseforge.com/minecraft/mc-mods/framework",
           "file": "framework-forge-1.20.1-0.8.0.jar",
@@ -160,12 +169,13 @@
     },
     {
       "name": "world-and-decor",
-      "_comment": "Biomes O' Plenty for the world (FreshOrangeSlices' pick; Terralith's biomes felt too big), and Decorative Blocks and Handcrafted for building (beams, braziers, chains, lattices and seats; vanilla-style furniture). BOP's Nether is cut back (config_files): Visceral Heap and Withered Abyss are off, and its Nether regions weigh 5 against vanilla's 10 (BOP's default is 13, more than half the Nether). Every Compat (Wood Good) makes the decor in BOP's woods too (and in any other mod's woods it knows); its blocks have their own creative tab.",
+      "_comment": "Copper Age Backport (FreshOrangeSlices, 2026-10-29: copper tools and armor, which 1.20.1 doesn't have, and the rest of its copper lineup: chests, shelves, bars, chains, lanterns, torches, bulbs, doors and the copper golem; held at its last release). Biomes O' Plenty for the world (FreshOrangeSlices' pick; Terralith's biomes felt too big), and Decorative Blocks and Handcrafted for building (beams, braziers, chains, lattices and seats; vanilla-style furniture). BOP's Nether is cut back (config_files): Visceral Heap and Withered Abyss are off, and its Nether regions weigh 5 against vanilla's 10 (BOP's default is 13, more than half the Nether). Every Compat (Wood Good) makes the decor in BOP's woods too (and in any other mod's woods it knows); its blocks have their own creative tab.",
       "modrinth": [
         "biomes-o-plenty",
         "decorative-blocks",
         "handcrafted",
-        "every-compat"
+        "every-compat",
+        "backport-copper-age"
       ]
     }
   ],
@@ -204,6 +214,18 @@
   },
   "pins": {
     "_comment": "Mods held at a version, even with --update (the lock only holds the last tested): each with why, so it can go once a fixed version is out.",
+    "backport-copper-age": {
+      "version": "1.20.1-0.1.4",
+      "why": "its last release (2025-12-01); 0.1.5 and 0.1.5.1-pre (2026-10) are betas"
+    },
+    "azurelib": {
+      "version": "3.2.0",
+      "why": "Book of Dragons 1.4 and its Fauna Engine ask for exactly 3.2.0 (only they use AzureLib)"
+    },
+    "book-of-dragons": {
+      "version": "1.4-1.20.1",
+      "why": "1.4 (2026-10-27) over the locked 1.31, for the playtest patch; goes once the lock has it"
+    },
     "keybind-atlas": {
       "version": "2.0.0",
       "why": "2.1.0 (2026-10-28) isn't remapped for a real game (built with development names), so the client crashes while loading"
@@ -228,7 +250,7 @@
         "magistuarmory:jousting_chestplate", "magistuarmory:jousting_leggings", "magistuarmory:jousting_boots", "magistuarmory:stechhelm",
         "irons_spellbooks:gold_crown"
       ],
-      "Epic Knights: most of its material grid (every type keeps iron, diamond and netherite, plus the extra tiers FreshOrangeSlices picked; the shortswords that bastard swords, claymores and zweihanders are made from stay), all the jousting lances, and five one-offs": [
+      "Epic Knights: most of its material grid (every type keeps iron, diamond and netherite, plus the extra tiers FreshOrangeSlices picked, and since the 2026-10-29 playtest copper again (\"went too hard on copper\"), but for its lance; the shortswords that bastard swords, claymores and zweihanders are made from stay), all the jousting lances, and five one-offs": [
         "magistuarmory:barbedclub", "magistuarmory:blacksmith_hammer", "magistuarmory:bronze_ahlspiess",
         "magistuarmory:bronze_bastardsword", "magistuarmory:bronze_chainmorgenstern", "magistuarmory:bronze_chivalrylance",
         "magistuarmory:bronze_claymore", "magistuarmory:bronze_concavehalberd", "magistuarmory:bronze_estoc",
@@ -236,12 +258,7 @@
         "magistuarmory:bronze_heavywarhammer", "magistuarmory:bronze_katzbalger", "magistuarmory:bronze_lochaberaxe",
         "magistuarmory:bronze_lucernhammer", "magistuarmory:bronze_morgenstern", "magistuarmory:bronze_pike",
         "magistuarmory:bronze_ranseur", "magistuarmory:bronze_shortsword", "magistuarmory:bronze_stylet",
-        "magistuarmory:bronze_zweihander", "magistuarmory:club", "magistuarmory:copper_ahlspiess",
-        "magistuarmory:copper_chainmorgenstern", "magistuarmory:copper_chivalrylance", "magistuarmory:copper_concavehalberd",
-        "magistuarmory:copper_estoc", "magistuarmory:copper_guisarme", "magistuarmory:copper_heavymace",
-        "magistuarmory:copper_heavywarhammer", "magistuarmory:copper_katzbalger", "magistuarmory:copper_lochaberaxe",
-        "magistuarmory:copper_lucernhammer", "magistuarmory:copper_morgenstern", "magistuarmory:copper_pike",
-        "magistuarmory:copper_ranseur", "magistuarmory:copper_stylet", "magistuarmory:diamond_chivalrylance",
+        "magistuarmory:bronze_zweihander", "magistuarmory:club", "magistuarmory:copper_chivalrylance", "magistuarmory:diamond_chivalrylance",
         "magistuarmory:gold_ahlspiess", "magistuarmory:gold_chainmorgenstern", "magistuarmory:gold_chivalrylance",
         "magistuarmory:gold_claymore", "magistuarmory:gold_concavehalberd", "magistuarmory:gold_estoc",
         "magistuarmory:gold_flamebladedsword", "magistuarmory:gold_guisarme", "magistuarmory:gold_heavymace",
@@ -374,6 +391,13 @@
           "argument2": {"type": "minecraft:mul", "argument1": 0.65, "argument2": "legionwarex:erosion_noise"}}}
       }
     },
+    "data_edits": {
+      "_comment": "A mod's own data file with some of its values changed (the rest, and a mod update's new ones, stay): data/<namespace>/<path>.json.",
+      "bookofdragons:spawn_settings": {
+        "why": "Book of Dragons 1.4's dragons out in the wild, away from roosts (new in 1.4), at half its numbers so dragons stay a find: at most 7 in the world (its default 14) plus 2 per extra player (3), and 2 within 128 blocks (4). The roosts, doubled earlier, stay the main place to meet one.",
+        "merge": {"roostless_cap": 7, "per_extra_player": 2, "density_cap": 2}
+      }
+    },
     "spawns": {
       "_comment": "FreshOrangeSlices' playtest (2 hours, almost no modded mobs): the pack's natural spawns, aimed at about 1 in 5 of the mobs that spawn at night in every overworld biome (Biomes O' Plenty's included) being modded, about 1 in 20 being a structure's regulars out in biomes that fit them, bosses only in their lairs, at the same mob cap (vanilla's). Counted by mobs, not weight: vanilla monsters come in fours, most modded ones alone. Skarrier Mobs listed 15 of its mobs in every biome of every dimension at high weights, though each only spawns in one biome, underground, or after the Wither is beaten, so about half of all spawn picks failed; those are put back only where they can spawn. Graveyard and Cataclysm pick their biomes by tags, which only named vanilla biomes; the tags now take BOP's in. Mutant Monsters' weights are in its config (config_files). The pack test reports each biome's modded share (pack-spawns).",
       "off": {
@@ -435,7 +459,9 @@
         "_nether": "The Nether's structures a quarter closer together, so nearly twice as many per area (FreshOrangeSlices: travelling there is dangerous, so they should be easier to find). Bosses'Rise's Underworld Arena (the Underworld Knight; huge) stays as it was, and so do fortresses and bastions (vanilla's nether_complexes): the arena keeps 8 chunks from them, so more of them would make it rarer. Legionary's Bastion Arena (the Unbreakable) was 320/128, one per 5000 Nether blocks: now 80/32.",
         "cataclysm:burning_arena": {"spacing": 60, "separation": 38},
         "cataclysm:soul_black_smith": {"spacing": 45, "separation": 38},
-        "irons_spellbooks:ancient_battleground": {"spacing": 26, "separation": 9},
+        "_ice_spider": "Iron's Spells' Ice Spider Dens about twice as common (FreshOrangeSlices, 2026-10-29: hard to find): spacing 60 and separation 35 chunks, from 85 and 50, so one chance per about 960-block square instead of 1,360 (still only where that spot is snowy).",
+      "irons_spellbooks:ice_spider_den": {"spacing": 60, "separation": 35},
+      "irons_spellbooks:ancient_battleground": {"spacing": 26, "separation": 9},
         "irons_spellbooks:citadel": {"spacing": 75, "separation": 60},
         "legendary_monsters:lava_eater_spawn": {"spacing": 19, "separation": 10},
         "legendary_monsters:skeletosaurus_nest": {"spacing": 19, "separation": 10},

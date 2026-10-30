@@ -20,7 +20,7 @@ jobs:
       - run: echo "RUN_ID=$(cat check/run-id.txt)" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
-          name: pack-screenshots-L5
+          name: pack-screenshots-L6
           path: shots
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
@@ -31,9 +31,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          rm -rf data-out; mkdir -p data-out/reports6
-          python3 check/reports6.py "$(ls pack/*server*.zip | head -1)" shots data-out/reports6 | tee log.txt
-          echo "::notice title=reports6::$(head -c 3500 data-out/reports6/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          rm -rf data-out; mkdir -p data-out/reports8
+          python3 check/reports8.py "$(ls pack/*server*.zip | head -1)" shots data-out/reports8 | tee log.txt
+          echo "::notice title=reports8::$(head -c 3500 data-out/reports8/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          rm -rf data/reports6 && mkdir -p data/reports6 && cp -r data-out/reports6/* data/reports6/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "reports6" && git push -q origin ci/data && echo pushed
+          rm -rf data/reports8 && mkdir -p data/reports8 && cp -r data-out/reports8/* data/reports8/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "reports8" && git push -q origin ci/data && echo pushed

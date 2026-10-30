@@ -37,6 +37,9 @@ import urllib.parse
 import urllib.request
 import zipfile
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import quest_book  # noqa: E402 (pack/quest_book.py)
+
 API = "https://api.modrinth.com/v2"
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up pack builder (github actions)"}
 FOLDERS = {"mod": "mods", "resourcepack": "resourcepacks", "shader": "shaderpacks", "datapack": "datapacks"}
@@ -843,6 +846,13 @@ def main():
     for path, content in pack_data_files(spec.get("pack_data"), "open-loader" in by_slug, problems, every_jar, notes).items():
         overrides[path] = (json.dumps(content, indent=2) + "\n").encode()
         sides[path] = {"client": "required", "server": "required"}
+    # The quest book (FTB Quests): pack/quests/*.json written out as FTB Quests' own files, for both sides (a server's
+    # copy is what its players see; a singleplayer world reads the client's), with only what this layer's mods have.
+    spaces = mods_in(every_jar)
+    if "ftbquests" in spaces:
+        for path, data in quest_book.build(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quests"), spaces, notes).items():
+            overrides[path] = data
+            sides[path] = {"client": "required", "server": "required"}
 
     # ---- the .mrpack
     index = {

@@ -33,7 +33,45 @@
         "lmd",
         "chunky",
         "spark",
-        "open-loader"
+        "open-loader",
+        "architectury-api"
+      ],
+      "external": [
+        {
+          "name": "FTB Library",
+          "_why": "Playtest patch, chunk 6: the quest book (FTB Quests) runs on FTB Library and FTB Teams (FTB's own mods are on CurseForge only; Architectury is on Modrinth). Each player starts in a team of their own, so their quest progress is their own unless they make a party.",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
+          "file": "ftb-library-forge-2001.2.13.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/8226/927/ftb-library-forge-2001.2.13.jar",
+            "https://edge.forgecdn.net/files/8226/927/ftb-library-forge-2001.2.13.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        },
+        {
+          "name": "FTB Teams",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
+          "file": "ftb-teams-forge-2001.3.2.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/7499/810/ftb-teams-forge-2001.3.2.jar",
+            "https://edge.forgecdn.net/files/7499/810/ftb-teams-forge-2001.3.2.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        },
+        {
+          "name": "FTB Quests",
+          "_why": "The quest book (the book button at the top-left of the inventory). Its chapters are written in pack/quests/ and built into config/ftbquests/quests by pack/quest_book.py, with only what each layer's mods have.",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge",
+          "file": "ftb-quests-forge-2001.4.22.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/8078/538/ftb-quests-forge-2001.4.22.jar",
+            "https://edge.forgecdn.net/files/8078/538/ftb-quests-forge-2001.4.22.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        }
       ]
     },
     {

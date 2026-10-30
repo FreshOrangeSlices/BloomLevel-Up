@@ -400,6 +400,9 @@ jobs:
           # Every installed kind of daytime sentinel in rows in front of the player.
           - layers: 6
             shot: pack_sentinels
+          # The quest book, opened in the full pack.
+          - layers: 6
+            shot: pack_quests
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

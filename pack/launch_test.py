@@ -25,6 +25,9 @@ import threading
 import time
 import zipfile
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import quest_book  # noqa: E402 (pack/quest_book.py: which ids the quest book names)
+
 PLAYER = "BloomTester"
 TITLE_LIMIT = 1200  # seconds for the first start (installs Forge's client, then loads every mod) to reach the title screen
 JOIN_LIMIT = 900  # seconds for the second start to join
@@ -835,6 +838,41 @@ def sentinel_check(server, player, shots):
     return failures, notes, report
 
 
+def quest_check(server_dir, dump_file, server_lines):
+    """The quest book (FTB Quests): it loaded every chapter build_pack wrote into config/ftbquests/quests (its "Loaded N
+    chapter groups, N chapters, N quests" line), with no errors of its own, and every item, entity, structure and biome
+    its quests name is in the game (the server's registry dump). Nothing to check in a layer without it. Returns
+    (failures, notes)."""
+    failures, notes = [], []
+    folder = os.path.join(server_dir, "config", "ftbquests", "quests", "chapters")
+    if not os.path.isdir(folder):
+        return failures, notes
+    written = len([f for f in os.listdir(folder) if f.endswith(".snbt")])
+    loaded = next((l for l in server_lines if "chapter groups" in l and "Loaded" in l), None)
+    if loaded is None:
+        failures.append(f"quest book: FTB Quests never said it loaded the book ({written} chapters written)")
+    else:
+        counts = re.search(r"(\d+) chapters, (\d+) quests", loaded)
+        notes.append("quest book: " + loaded.split("Loaded", 1)[1].strip())
+        if counts and int(counts.group(1)) != written:
+            failures.append(f"quest book: {written} chapters written, FTB Quests loaded {counts.group(1)}")
+    errors = [l.strip() for l in server_lines if "ftbquests" in l.lower().replace(" ", "") and ("ERROR" in l or "Exception" in l)]
+    if errors:
+        failures.append("quest book: FTB Quests errors: " + " | ".join(errors[:4])[:900])
+    if not os.path.exists(dump_file):
+        return failures, notes
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    have = {kind: {r["id"] for r in rows if r.get("kind") == kind} for kind in ("item", "entity", "structure", "biome")}
+    spaces = {i.split(":", 1)[0] for ids in have.values() for i in ids}
+    used = quest_book.ids_used(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quests"), spaces | quest_book.ALWAYS)
+    missing = [f"{kind} {i}" for kind in have for i in sorted(used[kind]) if i not in have[kind]]
+    if missing:
+        failures.append(f"quest book: {len(missing)} ids the game doesn't have: " + ", ".join(missing[:40]))
+    else:
+        notes.append(f"quest book: all {sum(len(used[k]) for k in have)} items, mobs, structures and biomes it names are in the game")
+    return failures, notes
+
+
 def terrain_check(server_dir, spec_file):
     """The add-on's terrain survey (-Dlegionwarex.terrain): the Overworld the server would make beside vanilla's for the
     same seed, and where a new world's spawn goes. Fails when the survey didn't run, a spawn search found no mainland,
@@ -1002,6 +1040,14 @@ def main():
                 for n, i in enumerate(range(0, min(len(text), 3900 * 2), 3900)):
                     print(f"::notice title=pack-sentinels-{n}::{esc(text[i:i + 3900])}")
             progress("sentinel check done")
+        # The quest book, opened the way its command does (the inventory's book button opens the same screen).
+        if os.path.isdir(os.path.join(server_dir, "config", "ftbquests", "quests")):
+            server.send(f"execute as {PLAYER} run ftbquests open_book")
+            time.sleep(4)
+            capture(shots, "pack_quests")
+            press("Escape")
+            time.sleep(1)
+            progress("quest book shown")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")
@@ -1019,6 +1065,10 @@ def main():
         text = chr(10).join(leftovers)
         for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
             print(f"::warning title=pack-leftovers-{n}::{esc(text[i:i + 3900])}")
+    # ---- the quest book: loaded, and naming only what the game has
+    quest_failures, quest_notes = quest_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
+    failures += quest_failures
+    notes += quest_notes
     # ---- the pack's own data pack: recipes out, items hidden from JEI
     data_failures, data_notes = pack_data_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
     failures += data_failures

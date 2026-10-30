@@ -1,4 +1,4 @@
-# Throwaway (never merged): what in the pack touches underground generation (underground.py), pushed to ci/data.
+# Throwaway (never merged): the playtest report round (reports.py), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -25,9 +25,9 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          rm -rf data-out; mkdir -p data-out/underground
-          python3 check/underground.py "$(ls pack/*server*.zip | head -1)" data-out/underground/scan.json | tee data-out/underground/summary.txt
-          echo "::notice title=underground::$(head -c 3000 data-out/underground/summary.txt | tr '\n' '|')"
+          rm -rf data-out; mkdir -p data-out/reports
+          python3 check/reports.py "$(ls pack/*server*.zip | head -1)" data-out/reports | tee log.txt
+          echo "::notice title=reports::$(head -c 3500 data-out/reports/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/underground && cp -r data-out/underground/* data/underground/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "underground" && git push -q origin ci/data && echo pushed
+          rm -rf data/reports && mkdir -p data/reports && cp -r data-out/reports/* data/reports/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "reports" && git push -q origin ci/data && echo pushed

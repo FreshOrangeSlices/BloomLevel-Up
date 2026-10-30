@@ -25,9 +25,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Making a band: the leader first (no band without one), then its followers within 4 blocks of it, each on the ground
- * like a patrol member (an empty block to stand in, a block below a mob can spawn on, little torchlight). Spawned as a
- * patrol (MobSpawnType.PATROL): illagers then patrol, the leader with the ominous banner heading off and its
- * followers keeping up, as vanilla's patrols do. Pirates aren't patrollers: they keep near their leader
+ * like a patrol member (an empty block to stand in, a block below a mob can spawn on, little torchlight). Illagers
+ * patrol, the leader with the ominous banner heading off and its followers keeping up, as vanilla's patrols do. Pirates aren't patrollers: they keep near their leader
  * ({@link FollowLeaderGoal}). Every member carries the scoreboard tag {@link #TAG} and, in its persistent data, the
  * band's kind and its leader.
  */
@@ -133,10 +132,15 @@ public final class Bands {
 		}
 
 		mob.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, random.nextFloat() * 360.0F, 0.0F);
-		// Straight to the mob's own finalizeSpawn (its gear, a leader's banner), not through Forge's spawn event: a spawn
-		// rule meant for natural spawns (Easy Mob Spawn Control's night-only rule for Illager Invasion's illagers in the
-		// pack) would otherwise turn a band's members away as they're made, by day.
-		mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.PATROL, null, null);
+		// Straight to the mob's own finalizeSpawn (its gear, a leader's banner), as an event spawn rather than a patrol: a
+		// spawn rule for natural and patrol spawns (Easy Mob Spawn Control's night-only rule for Illager Invasion's
+		// illagers in the pack) turned a daytime band's members away as they joined. Patrollers are set patrolling here,
+		// as a patrol spawn would.
+		mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null, null);
+
+		if (mob instanceof PatrollingMonster patroller) {
+			patroller.setPatrolling(true);
+		}
 
 		if (kind == BandKind.PIRATE) {
 			PirateTuning.quicken(mob);

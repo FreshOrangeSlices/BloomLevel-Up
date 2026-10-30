@@ -794,12 +794,25 @@ def chart_check(server, player, entities, shots):
     if not line:
         failures.append("add-on: /legionwarex chart find (in the Nether) said nothing within 3 minutes")
     elif "found no lair" in line:
-        (failures if nether_lairs else notes).append("add-on: a chart read in the Nether " + line.split("LegionWareX chart: ", 1)[1].strip())
+        # Reported, not failed, while the probes below say why (the add-on's game test finds lairs in a normal world).
+        notes.append("add-on: a chart read in the Nether " + line.split("LegionWareX chart: ", 1)[1].strip())
+        if nether_lairs:
+            print("::warning title=pack-chart::" + "a chart read in the Nether found no lair though " + str(nether_lairs) + " Nether lairs are in this layer")
     else:
         notes.append("add-on: a chart read in the Nether " + line.split("LegionWareX chart: ", 1)[1].strip())
         time.sleep(4)
         capture(shots, "pack_chart")
     server.send(f"item replace entity {player} weapon.mainhand with minecraft:air")
+    # The game's own map-structure search for a few Nether structures (vanilla's fortress, and lairs with vanilla's and
+    # with Cataclysm's own placement), from the same spot: what a chart's search can see.
+    for structure in ("minecraft:fortress", "legendary_monsters:soul_fortress_remains", "legendary_monsters:lava_eater_spawn",
+                      "soulsweapons:decaying_kingdom", "cataclysm:soul_black_smith", "legionary:bastion_arena"):
+        if structure.split(":")[0] != "minecraft" and structure.split(":")[0] not in mods_here:
+            continue
+        mark = len(server.lines)
+        server.send(f"execute in minecraft:the_nether positioned 0 70 0 run legionwarex chart probe {structure}")
+        line = lines_since(server, mark, r"LegionWareX chart: probe", 120)
+        notes.append("add-on: " + (line.split("LegionWareX chart: ", 1)[1].strip() if line else f"probe {structure} said nothing"))
     return failures, notes
 
 

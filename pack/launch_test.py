@@ -512,6 +512,122 @@ def capture(folder, name):
     return os.path.exists(path)
 
 
+def setting_now(path, key, value):
+    """Whether a config file (after the run: the mod has read it and may have written it back) still has the value."""
+    if not os.path.exists(path):
+        return False, "no file"
+    text = open(path, encoding="utf-8", errors="replace").read()
+    if path.endswith(".json"):
+        try:
+            node = json.loads(text)
+            for part in key.split("/"):
+                node = node[part]
+        except (ValueError, KeyError, TypeError):
+            return False, "no " + key
+        return node == json.loads(value), json.dumps(node)
+    if path.endswith(".toml"):
+        section, name = "", key
+        if key.startswith("[") and "]" in key:
+            section, name = key[1:key.index("]")], key[key.index("]") + 1:]
+        current = ""
+        for line in text.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("[") and "]" in stripped:
+                current = ".".join(part.strip().strip('"') for part in stripped[1:stripped.rindex("]")].split("."))
+            elif current == section and "=" in stripped and not stripped.startswith("#"):
+                if stripped.split("=", 1)[0].strip().strip('"') == name:
+                    found = stripped.split("=", 1)[1].strip()
+                    return found == value, found
+        return False, "no " + key
+    for line in text.splitlines():
+        if "=" in line and not line.strip().startswith("#") and line.split("=", 1)[0].strip() == key:
+            found = line.split("=", 1)[1].strip()
+            return found == value, found
+    return False, "no " + key
+
+
+def client_settings_check(game_dir):
+    """The pack's keys and mod settings (config/bloomlevelup/pack-defaults.properties), as the client has them after the
+    run: each key in options.txt, nothing else on the dodge's key, each setting in its file, each copied file as shipped."""
+    failures, notes = [], []
+    defaults_file = os.path.join(game_dir, "config", "bloomlevelup", "pack-defaults.properties")
+    if not os.path.exists(defaults_file):
+        return failures, notes
+    lines = open(defaults_file, encoding="utf-8").read().splitlines()
+    options_file = os.path.join(game_dir, "options.txt")
+    bound = {}
+    if os.path.exists(options_file):
+        for line in open(options_file, encoding="utf-8", errors="replace").read().splitlines():
+            if line.startswith("key_") and ":" in line:
+                name, key = line[4:].split(":", 1)
+                bound[name] = key
+    keys = next((l.split("=", 1)[1] for l in lines if l.startswith("keys=")), "")
+    wanted = {}
+    for entry in filter(None, keys.split("|")):
+        name, _, key = entry.partition(":key.")
+        wanted[name] = "key." + key
+    mods = os.listdir(os.path.join(game_dir, "mods"))
+    present = {name for name in wanted if name in bound}
+    wrong = [f"{name} is {bound[name]}, not {key}" for name, key in wanted.items() if name in bound and bound[name] != key]
+    if wrong:
+        failures.append("client keys not as the pack sets them: " + "; ".join(wrong))
+    for name, key in wanted.items():
+        if key != "key.keyboard.unknown":
+            others = sorted(other for other, k in bound.items() if k.split(":")[0] == key.split(":")[0] and other != name
+                            and k.split(":")[1:] == key.split(":")[1:])
+            if others and name in bound:
+                failures.append(f"{key} is {name}'s, but {', '.join(others)} start(s) on it too")
+    checked, kept = 0, 0
+    for line in lines:
+        word, _, rest = line.partition("=")
+        if word not in ("setting", "patch") or rest.count("|") < 2:
+            continue
+        path, key, value = rest.split("|", 2)
+        target = os.path.join(game_dir, "config", path)
+        if word == "patch" and not os.path.exists(target):
+            continue
+        checked += 1
+        ok, found = setting_now(target, key, value)
+        if ok:
+            kept += 1
+        else:
+            failures.append(f"client setting not kept: {path} {key} should be {value}, is {found}")
+    copies = 0
+    for line in lines:
+        if line.startswith("copy=") and "|" in line:
+            source, target = line[5:].split("|", 1)
+            source, target = os.path.join(game_dir, "config", source), os.path.join(game_dir, "config", target)
+            copies += 1
+            same = os.path.exists(target) and open(target, "rb").read() == open(source, "rb").read()
+            if not same and os.path.exists(target) and target.endswith(".json"):
+                try:  # the mod may write the same thing back in its own layout
+                    same = json.load(open(target, encoding="utf-8")) == json.load(open(source, encoding="utf-8"))
+                except ValueError:
+                    pass
+            if not same:
+                failures.append(f"client file not as the pack ships it after the run: {os.path.relpath(target, game_dir)}")
+    notes.append(f"client presets: {len(present)}/{len(wanted)} keys in options.txt, {kept}/{checked} settings kept, {copies} files copied"
+                 + ("" if any(m.startswith("combatroll") for m in mods) else " (no Combat Roll in this layer)"))
+    return failures, notes
+
+
+def radar_shot(server, player, shots):
+    """The minimap with one of each radar color around the player: a zombie (hostile, red), a cow (passive, green), a
+    wolf (neutral, yellow), and a dropped item and an arrow (both hidden). The mobs stand still and are removed after."""
+    for command in (f"summon minecraft:zombie ~5 ~ ~ {{NoAI:1b,Silent:1b,PersistenceRequired:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:cow ~-5 ~ ~ {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:wolf ~ ~ ~5 {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:item ~ ~ ~-5 {{Item:{{id:\"minecraft:diamond\",Count:1b}},PickupDelay:32767,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:arrow ~4 ~ ~4 {{NoGravity:1b,Tags:[\"lwx_radar\"]}}"):
+        server.send(f"execute as {player} at @s run {command}")
+        time.sleep(0.2)
+    time.sleep(4)
+    shot = capture(shots, "pack_minimap")
+    server.send("kill @e[tag=lwx_radar]")
+    time.sleep(1)
+    return shot
+
+
 def lines_since(process, mark, pattern, limit):
     """The first line from index {mark} on matching {pattern}, waiting up to {limit} seconds; None if none came."""
     end = time.time() + limit
@@ -687,6 +803,7 @@ def main():
         server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 180 15")
         time.sleep(4)
         capture(shots, "pack_back")
+        radar_shot(server, PLAYER, shots)
         # The inventory: where Bloom's buttons sit next to what other mods put around it, with a status effect showing
         # (the game draws effects outside the panel's right edge, beside JEI's item list).
         server.send(f"effect give {PLAYER} minecraft:resistance 60 0 true")
@@ -782,6 +899,10 @@ def main():
                             + " / ".join(l for l in text.splitlines() if "north" in l or "profile" in l)[:300])
         else:
             notes.append("minimap: locked north (from the pack's defaultconfigs)")
+    # The pack's keys and mod settings, as the client has them after the run (a mod may have rewritten its file).
+    setting_failures, setting_notes = client_settings_check(game_dir)
+    failures += setting_failures
+    notes += setting_notes
     # The pack's shader, when it has one: switched on in Oculus's settings, and what Oculus said about it.
     defaults_file = os.path.join(game_dir, "config", "bloomlevelup", "pack-defaults.properties")
     wanted = next((l.split("=", 1)[1] for l in open(defaults_file).read().splitlines() if l.startswith("shaderPack=")), None) \

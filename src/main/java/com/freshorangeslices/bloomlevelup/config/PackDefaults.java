@@ -12,12 +12,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * The Bloom Pack's first-launch setup: its resource packs switched on in the right order, its shader picked and a few
- * key bindings moved so no two mods start on the same key.
+ * The Bloom Pack's first-launch setup: its resource packs switched on in the right order, its shader picked, a few
+ * key bindings moved so no two mods start on the same key, and a few settings in other mods' config files.
  * Launchers don't reliably copy a pack's own options.txt (and copying it would wipe a player's settings on every
  * update), so the pack ships {@code config/bloomlevelup/pack-defaults.properties} instead and Bloom applies it
- * before the game starts, once per change of that file. Only the resource pack list, the shader and the listed keys
- * are touched; every other setting stays the player's. Plain Java, no game classes, so it can be unit tested.
+ * before the game starts. Each part is applied once per change of that part: the marker file records what was set,
+ * so a pack update that adds a key or a setting sets just that, and what the player changed since stays theirs. Only
+ * the resource pack list, the shader, the listed keys and the listed settings are touched. Plain Java, no game
+ * classes, so it can be unit tested.
  */
 public final class PackDefaults {
 	public static final String FILE = "bloomlevelup/pack-defaults.properties";
@@ -29,20 +31,44 @@ public final class PackDefaults {
 	}
 
 	/**
-	 * What the pack wants: resource packs bottom to top (ids as options.txt has them), a shader pack or null, and key
-	 * bindings by name ({@code iris.keybind.reload}) with the key each starts on ({@code key.keyboard.v}).
+	 * What the pack wants: resource packs bottom to top (ids as options.txt has them), a shader pack or null, key
+	 * bindings by name ({@code iris.keybind.reload}) with the key each starts on ({@code key.keyboard.v}), settings in
+	 * other mods' config files and files copied in whole.
 	 */
-	public record Defaults(List<String> resourcePacks, String shaderPack, Map<String, String> keys) {
+	public record Defaults(List<String> resourcePacks, String shaderPack, Map<String, String> keys, List<Setting> settings, List<Copy> copies) {
+		public Defaults(List<String> resourcePacks, String shaderPack, Map<String, String> keys) {
+			this(resourcePacks, shaderPack, keys, List.of(), List.of());
+		}
+	}
+
+	/**
+	 * One value in a config file under config/ ({@link PackSettings} for the kinds of file and how keys are written).
+	 * A {@code setting} starts the file if it isn't there yet; a {@code patch} only changes a file that's there (where
+	 * a mod copies its own defaults in on a first start, from defaultconfigs/, and the pack ships those).
+	 */
+	public record Setting(String file, String key, String value, boolean create) {
+		public Setting(String file, String key, String value) {
+			this(file, key, value, true);
+		}
+	}
+
+	/** A file the pack ships under config/ copied over another one (a mod's whole default file). */
+	public record Copy(String source, String target) {
 	}
 
 	/**
 	 * Reads {@code resourcePacks=a|b|c}, {@code shaderPack=name} and {@code keys=name:key|name:key} lines (a key can
-	 * carry a Forge modifier, {@code name:key.keyboard.k:CONTROL}); anything else is ignored.
+	 * carry a Forge modifier, {@code name:key.keyboard.k:CONTROL}), and any number of {@code setting=file|key|value}
+	 * (a file under config/; the value is everything after the second bar), {@code patch=file|key|value} (the same, for
+	 * a file that's already there) and {@code copy=source|target} lines;
+	 * anything else is ignored.
 	 */
 	public static Defaults parse(List<String> lines) {
 		List<String> packs = new ArrayList<>();
 		String shader = null;
 		Map<String, String> keys = new LinkedHashMap<>();
+		List<Setting> settings = new ArrayList<>();
+		List<Copy> copies = new ArrayList<>();
 
 		for (String raw : lines) {
 			String line = raw.strip();
@@ -75,10 +101,22 @@ public final class PackDefaults {
 						keys.put(entry.substring(0, colon).strip(), entry.substring(colon + 1).strip());
 					}
 				}
+			} else if (key.equals("setting") || key.equals("patch")) {
+				String[] parts = value.split("\\|", 3);
+
+				if (parts.length == 3 && !parts[0].isBlank() && !parts[1].isBlank()) {
+					settings.add(new Setting(parts[0].strip(), parts[1].strip(), parts[2].strip(), key.equals("setting")));
+				}
+			} else if (key.equals("copy")) {
+				String[] parts = value.split("\\|", 2);
+
+				if (parts.length == 2 && !parts[0].isBlank() && !parts[1].isBlank()) {
+					copies.add(new Copy(parts[0].strip(), parts[1].strip()));
+				}
 			}
 		}
 
-		return new Defaults(List.copyOf(packs), shader, Map.copyOf(keys));
+		return new Defaults(List.copyOf(packs), shader, Map.copyOf(keys), List.copyOf(settings), List.copyOf(copies));
 	}
 
 	/**
@@ -151,13 +189,14 @@ public final class PackDefaults {
 	}
 
 	/**
-	 * Applies the defaults in {@code configDir} to {@code optionsFile} and Oculus's config, unless this exact version
-	 * of them was applied before. Returns whether it changed anything.
+	 * Applies the defaults in {@code configDir} to {@code optionsFile}, Oculus's config and the listed config files:
+	 * each part that this version of them hasn't set before (the marker file keeps what was set). Returns whether it
+	 * changed anything.
 	 *
 	 * <p>{@code dataVersion} (the game's, from its version.json) goes on an options.txt Bloom writes from nothing: an
 	 * options.txt without a version line is read as one from long ago and run through every old fix, and the 1.13 one
 	 * reads each {@code key_} value as a number, so a key written by name fails the whole file. Without it, keys are
-	 * only set in an options.txt that already has its version.
+	 * only set in an options.txt that already has its version (and wait for a later start otherwise).
 	 */
 	public static boolean apply(Path configDir, Path optionsFile, Integer dataVersion, Consumer<String> log) throws IOException {
 		Path file = configDir.resolve(FILE);
@@ -167,30 +206,50 @@ public final class PackDefaults {
 		}
 
 		List<String> raw = Files.readAllLines(file, StandardCharsets.UTF_8);
-		String stamp = Integer.toHexString(String.join("\n", raw).strip().hashCode());
+		Defaults defaults = parse(raw);
 		Path marker = configDir.resolve(MARKER);
+		Map<String, String> done = readMarker(marker, defaults, raw);
+		Map<String, String> record = new LinkedHashMap<>(done);
+		List<String> changes = new ArrayList<>();
 
-		if (Files.isRegularFile(marker) && Files.readString(marker, StandardCharsets.UTF_8).strip().equals(stamp)) {
-			return false;
+		String packsStamp = String.join("|", defaults.resourcePacks());
+		boolean packsDue = !defaults.resourcePacks().isEmpty() && !packsStamp.equals(done.get("resourcePacks"));
+		Map<String, String> keysDue = new java.util.TreeMap<>();
+
+		for (Map.Entry<String, String> key : defaults.keys().entrySet()) {
+			if (!key.getValue().equals(done.get("key." + key.getKey()))) {
+				keysDue.put(key.getKey(), key.getValue());
+			}
 		}
 
-		Defaults defaults = parse(raw);
-
-		Map<String, String> keys = defaults.keys();
-
-		if (!defaults.resourcePacks().isEmpty() || !keys.isEmpty()) {
+		if (packsDue || !keysDue.isEmpty()) {
 			List<String> options = withVersion(Files.isRegularFile(optionsFile) ? Files.readAllLines(optionsFile, StandardCharsets.UTF_8)
 					: List.of(), dataVersion);
 
-			if (!keys.isEmpty() && value(options, "version") == null) {
-				log.accept("Bloom Pack defaults: the game's data version is unknown, so the key bindings are left as they are");
-				keys = Map.of();
+			if (!keysDue.isEmpty() && value(options, "version") == null) {
+				log.accept("Bloom Pack defaults: the game's data version is unknown, so the key bindings wait for the next start");
+				keysDue = Map.of();
 			}
 
-			Files.write(optionsFile, mergeOptions(options, defaults.resourcePacks(), keys), StandardCharsets.UTF_8);
+			if (packsDue || !keysDue.isEmpty()) {
+				Files.write(optionsFile, mergeOptions(options, packsDue ? defaults.resourcePacks() : List.of(), keysDue), StandardCharsets.UTF_8);
+			}
+
+			if (packsDue) {
+				record.put("resourcePacks", packsStamp);
+				changes.add(defaults.resourcePacks().size() + " resource packs on");
+			}
+
+			for (Map.Entry<String, String> key : keysDue.entrySet()) {
+				record.put("key." + key.getKey(), key.getValue());
+			}
+
+			if (!keysDue.isEmpty()) {
+				changes.add("keys " + keysDue);
+			}
 		}
 
-		if (defaults.shaderPack() != null) {
+		if (defaults.shaderPack() != null && !defaults.shaderPack().equals(done.get("shaderPack"))) {
 			for (String name : SHADER_CONFIGS) {
 				Path shaderConfig = configDir.resolve(name);
 
@@ -199,14 +258,128 @@ public final class PackDefaults {
 					Files.write(shaderConfig, mergeIris(lines, defaults.shaderPack()), StandardCharsets.UTF_8);
 				}
 			}
+
+			record.put("shaderPack", defaults.shaderPack());
+			changes.add("shader " + defaults.shaderPack());
 		}
 
-		Files.createDirectories(marker.getParent());
-		Files.writeString(marker, stamp + "\n", StandardCharsets.UTF_8);
-		log.accept("Bloom Pack defaults applied: " + defaults.resourcePacks().size() + " resource packs on"
-				+ (defaults.shaderPack() == null ? "" : ", shader " + defaults.shaderPack())
-				+ (keys.isEmpty() ? "" : ", keys " + new java.util.TreeMap<>(keys)));
+		for (Copy copy : defaults.copies()) {
+			Path source = inside(configDir, copy.source());
+			Path target = inside(configDir, copy.target());
+
+			if (source == null || target == null || !Files.isRegularFile(source)) {
+				log.accept("Bloom Pack defaults: can't copy " + copy.source() + " to " + copy.target());
+				continue;
+			}
+
+			String stamp = stamp(Files.readString(source, StandardCharsets.UTF_8));
+
+			if (!stamp.equals(done.get("copy." + copy.target()))) {
+				Files.createDirectories(target.getParent());
+				Files.copy(source, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+				record.put("copy." + copy.target(), stamp);
+				changes.add(copy.target());
+			}
+		}
+
+		for (Setting setting : defaults.settings()) {
+			String id = "setting." + setting.file() + "|" + setting.key();
+			String stamp = stamp(setting.value());
+
+			if (stamp.equals(done.get(id))) {
+				continue;
+			}
+
+			Path target = inside(configDir, setting.file());
+
+			if (target != null && !setting.create() && !Files.isRegularFile(target)) {
+				// Not there yet: the mod starts it from the pack's defaultconfigs/ copy, which already has the value.
+				record.put(id, stamp);
+				continue;
+			}
+
+			List<String> lines = target == null ? null
+					: Files.isRegularFile(target) ? Files.readAllLines(target, StandardCharsets.UTF_8) : new ArrayList<>();
+			List<String> out = lines == null ? null : PackSettings.apply(setting.file(), lines, setting.key(), setting.value());
+
+			if (out == null) {
+				log.accept("Bloom Pack defaults: can't set " + setting.key() + " in " + setting.file() + " (not a file of its kind)");
+				continue;
+			}
+
+			Files.createDirectories(target.getParent());
+			Files.write(target, out, StandardCharsets.UTF_8);
+			record.put(id, stamp);
+			changes.add(setting.file() + " " + setting.key());
+		}
+
+		if (!record.equals(done) || !Files.isRegularFile(marker)) {
+			writeMarker(marker, record);
+		}
+
+		if (changes.isEmpty()) {
+			return false;
+		}
+
+		log.accept("Bloom Pack defaults applied: " + String.join(", ", changes));
 		return true;
+	}
+
+	/** A path under config/, or null for one that would leave it. */
+	private static Path inside(Path configDir, String relative) {
+		Path base = configDir.toAbsolutePath().normalize();
+		Path path = base.resolve(relative).normalize();
+		return path.startsWith(base) && !path.equals(base) ? path : null;
+	}
+
+	private static String stamp(String text) {
+		return Integer.toHexString(text.strip().hashCode());
+	}
+
+	/**
+	 * What was set before, as {@code part=value} lines. A marker from before the parts were tracked holds one stamp for
+	 * the whole file: if it's this file's, everything in it was set; if not (an update since), the resource packs and
+	 * the shader count as set (an update shouldn't switch shaders back on), and the keys and settings are set again.
+	 */
+	static Map<String, String> readMarker(Path marker, Defaults defaults, List<String> raw) throws IOException {
+		Map<String, String> done = new LinkedHashMap<>();
+
+		if (!Files.isRegularFile(marker)) {
+			return done;
+		}
+
+		List<String> lines = Files.readAllLines(marker, StandardCharsets.UTF_8);
+
+		if (lines.stream().noneMatch(line -> line.contains("="))) {
+			String old = String.join("", lines).strip();
+			done.put("resourcePacks", String.join("|", defaults.resourcePacks()));
+
+			if (defaults.shaderPack() != null) {
+				done.put("shaderPack", defaults.shaderPack());
+			}
+
+			if (old.equals(Integer.toHexString(String.join("\n", raw).strip().hashCode()))) {
+				defaults.keys().forEach((name, key) -> done.put("key." + name, key));
+			}
+
+			return done;
+		}
+
+		for (String line : lines) {
+			if (!line.startsWith("#") && line.contains("=")) {
+				done.put(line.substring(0, line.indexOf('=')), line.substring(line.indexOf('=') + 1));
+			}
+		}
+
+		return done;
+	}
+
+	private static void writeMarker(Path marker, Map<String, String> record) throws IOException {
+		List<String> out = new ArrayList<>();
+		out.add("# What the Bloom Pack's defaults have set, so each part is set once per change (delete this file to set them all again).");
+		record.forEach((part, value) -> out.add(part + "=" + value));
+		Files.createDirectories(marker.getParent());
+		Files.write(marker, out, StandardCharsets.UTF_8);
 	}
 
 	/** options.txt lines with a {@code version:} line first if they have none and the data version is known. */

@@ -7,9 +7,10 @@
   "layers": [
     {
       "name": "core",
-      "_comment": "Bloom with Better Combat and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
+      "_comment": "Bloom with Better Combat, Combat Roll (the pack's one dodge roll, on Z: its roll animates through Player Animator, which Better Combat brings too) and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
       "modrinth": [
         "better-combat",
+        "combatroll",
         "playeranimator",
         "cloth-config",
         "entity-model-features",
@@ -178,6 +179,10 @@
     "config/mutantmonsters-common.toml": "mutant_creeper_spawn_weight = 0.1\nmutant_enderman_spawn_weight = 0.1\nmutant_skeleton_spawn_weight = 0.1\nmutant_zombie_spawn_weight = 0.1\n",
     "_bloomlevelup": "Bloom's XP, half as fast again in every category (FreshOrangeSlices' playtest: XP gain faster overall). Only these lines are set; Bloom fills in the rest of its file with its own defaults when it loads, and writes them back.",
     "config/bloomlevelup.json": {"configVersion": 6, "utilityXpMultiplier": 1.5, "combatXpMultiplier": 1.5, "armorXpMultiplier": 1.5, "miscXpMultiplier": 1.5},
+    "_dodge": "One dodge in the pack (FreshOrangeSlices): Combat Roll. Its server settings: you can't be hit for the whole roll (8 ticks; its default is 0), a 3 s cooldown (4 s by default; tuned in play) and a roll even while the weapon recharges (Better Combat's swings would otherwise block most rolls in a fight). Bosses'Rise's roll (a server setting, read from defaultconfigs/ by every new world) and Monster Expansion's (a common setting) are switched off.",
+    "config/combatroll/server.json5": {"invulnerable_ticks_upon_roll": 8, "roll_cooldown": 3.0, "allow_rolling_while_weapon_cooldown": true},
+    "defaultconfigs/block_factorys_bosses-server.toml": "[\"Gameplay Changes\"]\n\t\"Can players use the Roll ability\" = false\n",
+    "config/monsterexpansion-rolls.toml": "[\"Roll Mechanics\"]\n\tenable_roll = false\n",
     "_easymsc": "Easy Mob Spawn Control's files (its in-game menu edits the same ones). Shybroom no longer lives in villages (FreshOrangeSlices found her in none of 10): its structure spawn lists are left empty, and she spawns in plains instead (spawns.add.migamigos_shybroom). The roaming Queen of Orchid and Draugr Boss despawn once idle for 2 minutes with no player within 64 blocks (unless name-tagged or in sight), and at most one of each is loaded at a time.",
     "config/EasyMSC/structure_spawns.json": [],
     "config/EasyMSC/structure_spawn_assignments.json": {},
@@ -679,12 +684,48 @@
     "_shader": "Shaders on with Complementary Unbound at first launch (and once per change of this line); K turns shaders off, O picks another pack (Solas and the much lighter MakeUp Ultra Fast ship too).",
     "keys": {
       "iris.keybind.reload": "key.keyboard.unknown",
-      "key.keybindatlas.open_keyboard": "key.keyboard.k:CONTROL"
+      "key.keybindatlas.open_keyboard": "key.keyboard.k:CONTROL",
+      "keybinds.combatroll.roll": "key.keyboard.z",
+      "key.block_factorys_bosses.dodge_roll": "key.keyboard.unknown",
+      "key.monsterexpansion.roll": "key.keyboard.unknown"
     },
-    "_keys": "Key bindings set once per change of this list (by name, as options.txt has them): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets').",
+    "_keys": "Key bindings, each set once per change of it (by name, as options.txt has them; a player's own change afterwards stays): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets'). Combat Roll is the one dodge, on Z (FreshOrangeSlices); Bosses'Rise's and Monster Expansion's rolls are switched off (config_files) and their keys unbound, so the Controls list has no live second dodge.",
+    "settings": {
+      "_comment": "Settings in other mods' client config files, each set once per change of it, the rest of the file left as the player has it (Bloom's PackDefaults: a .json key is a / path, a .toml key has its [Section] in front). A file that isn't there yet is started with these lines and the mod fills in the rest. FreshOrangeSlices' playtest: a simple craft screen (no Crafting Tweaks buttons, which keep their keys; no IPN auto-crafting checkbox; no IPN profiles), and tools that break like in normal Minecraft (IPN's auto-refill off, with all its warnings). Bosses'Rise's roll indicator by the hotbar is hidden (its roll is off; Combat Roll has its own).",
+      "inventoryprofilesnext/inventoryprofiles.json": {
+        "ModSettings/enable_auto_refill": false,
+        "ModSettings/enable_profiles": false,
+        "GuiSettings/show_continuous_crafting_checkbox": false,
+        "GuiSettings/enable_profiles_ui": false,
+        "GuiSettings/enable_profiles_announcement": false,
+        "AutoRefillSettings/visual_durability_notification": false,
+        "AutoRefillSettings/audio_durability_notification": false,
+        "AutoRefillSettings/visual_replace_failed_notification": false,
+        "AutoRefillSettings/audio_replace_failed_notification": false,
+        "AutoRefillSettings/visual_replace_success_notification": false,
+        "AutoRefillSettings/audio_replace_success_notification": false
+      },
+      "craftingtweaks-common.toml": {
+        "[client]mode": "HOTKEYS"
+      },
+      "block_factorys_bosses-client.toml": {
+        "[Rolling]Will there be a GUI element displaying current roll count": false
+      }
+    },
+    "patches": {
+      "_comment": "The same, for a file a mod starts from the pack's defaultconfigs/ copy on a first start (so a new install has these already and an older one gets them once): Xaero's Minimap locked north and round.",
+      "xaero/minimap/profiles/default.cfg": {
+        "minimap_north_locked": true,
+        "minimap_shape": 1
+      }
+    },
+    "copies": {
+      "_comment": "Whole files copied over a mod's own once per change of their content. Xaero's Minimap's radar colors (FreshOrangeSlices: hostile red, passive green, neutral yellow, your own pets sky blue, players as their heads, no dropped items or projectiles, bigger dots): its default categories file, which every minimap profile without radar categories of its own reads. Neutral is a category of its own (mobs that only fight back), ahead of Hostile so endermen and piglins land there; tamed mobs anywhere are sky blue. Colors are Minecraft's chat colors by number (10 green, 11 aqua, 12 red, 14 yellow, 15 white). A \"file:\" value is a file under pack/files.",
+      "xaero/minimap/default_radar_categories_client.json": "file:xaero/default_radar_categories_client.json"
+    },
     "files": {
       "_comment": "Client config files, as given (the mod fills in every setting left out). A file under defaultconfigs/ is a mod's default, copied in only where the player has no config of their own yet (so an update never resets their settings). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",
-      "defaultconfigs/xaero/minimap/profiles/default.cfg": "# LegionWareX: the minimap keeps north at the top instead of turning with you (FreshOrangeSlices). Xaero's Minimap copies this into config/xaero/minimap/profiles/ on a first start and fills in every other setting; after that it's the player's own (Minimap Settings, Lock Minimap North).\nprofile_name = Default\nminimap_north_locked = true\n",
+      "defaultconfigs/xaero/minimap/profiles/default.cfg": "# LegionWareX: the minimap keeps north at the top instead of turning with you, and is round (FreshOrangeSlices). Xaero's Minimap copies this into config/xaero/minimap/profiles/ on a first start and fills in every other setting; after that it's the player's own (Minimap Settings, Lock Minimap North).\nprofile_name = Default\nminimap_north_locked = true\nminimap_shape = 1\n",
       "config/obscuria/aquamirae-early.json": {
         "themed_main_menu": false
       },

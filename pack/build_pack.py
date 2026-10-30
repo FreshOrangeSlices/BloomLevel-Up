@@ -257,6 +257,17 @@ def forge_installer(game, forge):
     return http(f"https://maven.minecraftforge.net/net/minecraftforge/forge/{version}/forge-{version}-installer.jar", binary=True)
 
 
+def setting_value(path, value):
+    """A setting's value as its file writes it: JSON for .json, TOML for .toml (strings quoted), plain text otherwise."""
+    if path.endswith(".json"):
+        return json.dumps(value)
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if path.endswith(".toml") and isinstance(value, str):
+        return json.dumps(value)
+    return str(value)
+
+
 def locked_version(pin, record, game, loader):
     """A Modrinth version rebuilt from the lock, for one its author has taken off the project (the CDN still has the file)."""
     url = f"https://cdn.modrinth.com/data/{record['project']}/versions/{record['id']}/{urllib.parse.quote(record['file'])}"
@@ -759,7 +770,29 @@ def main():
     if shader in by_slug:  # (not when the layers built leave it out)
         lines.append("shaderPack=" + os.path.basename(by_slug[shader]["path"]))
     if presets.get("keys"):
-        lines.append("keys=" + "|".join(f"{binding}:{key}" for binding, key in presets["keys"].items()))
+        lines.append("keys=" + "|".join(f"{binding}:{key}" for binding, key in presets["keys"].items() if not binding.startswith("_")))
+    # Settings in other mods' client config files, set once per change of each (Bloom's PackDefaults/PackSettings):
+    # "settings" starts a file that isn't there yet, "patches" only changes one that is (a mod that copies its
+    # defaults in from defaultconfigs/ on a first start, which the pack ships too). Paths under config/; a .json key is
+    # a / path, a .toml key may have its [Section] in front, the rest are key = value lines.
+    for kind, word in (("settings", "setting"), ("patches", "patch")):
+        for path, values in presets.get(kind, {}).items():
+            if path.startswith("_"):
+                continue
+            for key, value in values.items():
+                if not key.startswith("_"):
+                    lines.append(f"{word}={path}|{key}|{setting_value(path, value)}")
+    # Whole files copied over a mod's own once per change of their content (shipped under config/bloomlevelup/pack-files/).
+    for target, content in presets.get("copies", {}).items():
+        if target.startswith("_"):
+            continue
+        source = f"bloomlevelup/pack-files/{target}"
+        if isinstance(content, str) and content.startswith("file:"):
+            data = open(os.path.join(os.path.dirname(__file__), "files", content[5:]), "rb").read()
+        else:
+            data = (json.dumps(content, indent=2) if isinstance(content, (dict, list)) else str(content)).encode()
+        pack_defaults[f"config/{source}"] = data
+        lines.append(f"copy={source}|{target}")
     if len(lines) > 1:
         pack_defaults["config/bloomlevelup/pack-defaults.properties"] = ("\n".join(lines) + "\n").encode()
     # Other client config files, as given (a JSON object is written as JSON). A mod fills in the settings left out.

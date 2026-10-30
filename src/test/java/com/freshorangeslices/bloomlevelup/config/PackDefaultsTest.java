@@ -145,4 +145,86 @@ class PackDefaultsTest {
 		// Outside the pack (no defaults file): nothing.
 		assertFalse(PackDefaults.apply(dir.resolve("nothing"), options, logs::add));
 	}
+
+	@Test
+	void readsSettingsAndCopies() {
+		PackDefaults.Defaults defaults = PackDefaults.parse(PackDefaults.lines(
+				"setting=xaero/minimap/profiles/default.cfg|minimap_shape|1\nsetting=a.json|A/b|{\"x\": \"|\"}\ncopy=bloomlevelup/pack-files/r.json|xaero/r.json\nsetting=bad\npatch=p.cfg|k|v"));
+		assertEquals(List.of(new PackDefaults.Setting("xaero/minimap/profiles/default.cfg", "minimap_shape", "1"),
+				new PackDefaults.Setting("a.json", "A/b", "{\"x\": \"|\"}"), new PackDefaults.Setting("p.cfg", "k", "v", false)), defaults.settings(),
+				"the value keeps any bars in it; a patch is a setting that doesn't start a file");
+		assertEquals(List.of(new PackDefaults.Copy("bloomlevelup/pack-files/r.json", "xaero/r.json")), defaults.copies());
+	}
+
+	@Test
+	void setsEachPartOncePerChangeOfThatPart() throws Exception {
+		Path dir = Files.createTempDirectory("bloom-pack-defaults-parts");
+		Path config = dir.resolve("config");
+		Path options = dir.resolve("options.txt");
+		Files.createDirectories(config.resolve("bloomlevelup/pack-files"));
+		Files.writeString(config.resolve("bloomlevelup/pack-files/radar.json"), "{\"a\": 1}\n", StandardCharsets.UTF_8);
+		Files.createDirectories(config.resolve("xaero"));
+		Files.writeString(config.resolve("xaero/profile.cfg"), "profile_name = Default\nminimap_shape = 0\n", StandardCharsets.UTF_8);
+		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip\nshaderPack=C.zip\nkeys=key.roll:key.keyboard.z\n"
+				+ "setting=xaero/profile.cfg|minimap_shape|1\ncopy=bloomlevelup/pack-files/radar.json|xaero/radar.json\n", StandardCharsets.UTF_8);
+		List<String> logs = new ArrayList<>();
+
+		assertTrue(PackDefaults.apply(config, options, 3465, logs::add));
+		assertTrue(Files.readString(config.resolve("xaero/profile.cfg")).contains("minimap_shape = 1"));
+		assertEquals("{\"a\": 1}\n", Files.readString(config.resolve("xaero/radar.json")));
+		assertTrue(Files.readString(options).contains("key_key.roll:key.keyboard.z"));
+
+		// The player changes all of it back; the same defaults leave it.
+		Files.writeString(config.resolve("xaero/profile.cfg"), "profile_name = Default\nminimap_shape = 0\n", StandardCharsets.UTF_8);
+		Files.writeString(config.resolve("oculus.properties"), "enableShaders=false\nshaderPack=C.zip\n", StandardCharsets.UTF_8);
+		Files.writeString(options, "version:3465\nresourcePacks:[\"vanilla\"]\nkey_key.roll:key.keyboard.r\n", StandardCharsets.UTF_8);
+		assertFalse(PackDefaults.apply(config, options, 3465, logs::add));
+		assertTrue(Files.readString(config.resolve("xaero/profile.cfg")).contains("minimap_shape = 0"));
+
+		// An update adds a key and a setting: just those are set; shaders stay off, the player's pack choice stays.
+		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip\nshaderPack=C.zip\nkeys=key.roll:key.keyboard.z|key.old:key.keyboard.unknown\n"
+				+ "setting=xaero/profile.cfg|minimap_shape|1\nsetting=xaero/profile.cfg|radar_main_dot_size|3\n"
+				+ "copy=bloomlevelup/pack-files/radar.json|xaero/radar.json\n", StandardCharsets.UTF_8);
+		assertTrue(PackDefaults.apply(config, options, 3465, logs::add));
+		String profile = Files.readString(config.resolve("xaero/profile.cfg"));
+		assertTrue(profile.contains("minimap_shape = 0") && profile.contains("radar_main_dot_size = 3"), profile);
+		String now = Files.readString(options);
+		assertTrue(now.contains("key_key.roll:key.keyboard.r") && now.contains("key_key.old:key.keyboard.unknown") && !now.contains("FA.zip"), now);
+		assertTrue(Files.readString(config.resolve("oculus.properties")).contains("enableShaders=false"));
+
+		// A new version of a copied file is copied again.
+		Files.writeString(config.resolve("bloomlevelup/pack-files/radar.json"), "{\"a\": 2}\n", StandardCharsets.UTF_8);
+		assertTrue(PackDefaults.apply(config, options, 3465, logs::add));
+		assertEquals("{\"a\": 2}\n", Files.readString(config.resolve("xaero/radar.json")));
+
+		// A patch only changes a file that's there; a missing one is left to the mod (and its defaultconfigs copy).
+		Files.writeString(config.resolve(PackDefaults.FILE), "patch=xaero/profile.cfg|minimap_frame|2\npatch=xaero/none.cfg|a|1\n", StandardCharsets.UTF_8);
+		assertTrue(PackDefaults.apply(config, options, 3465, logs::add));
+		assertTrue(Files.readString(config.resolve("xaero/profile.cfg")).contains("minimap_frame = 2"));
+		assertFalse(Files.exists(config.resolve("xaero/none.cfg")));
+		assertFalse(PackDefaults.apply(config, options, 3465, logs::add), "and isn't tried again");
+
+		// A path out of config/ is refused.
+		Files.writeString(config.resolve(PackDefaults.FILE), "setting=../outside.cfg|a|1\n", StandardCharsets.UTF_8);
+		assertFalse(PackDefaults.apply(config, options, 3465, logs::add));
+		assertFalse(Files.exists(dir.resolve("outside.cfg")));
+	}
+
+	@Test
+	void anOldMarkerKeepsThePacksAndShaderAndSetsTheRest() throws Exception {
+		Path dir = Files.createTempDirectory("bloom-pack-defaults-old");
+		Path config = dir.resolve("config");
+		Path options = dir.resolve("options.txt");
+		Files.createDirectories(config.resolve("bloomlevelup"));
+		Files.writeString(config.resolve(PackDefaults.FILE), "resourcePacks=file/FA.zip\nshaderPack=C.zip\nkeys=key.roll:key.keyboard.z\n", StandardCharsets.UTF_8);
+		// What an older Bloom wrote for an older version of the file: one stamp.
+		Files.writeString(config.resolve(PackDefaults.MARKER), "1a2b3c\n", StandardCharsets.UTF_8);
+		Files.writeString(options, "version:3465\nresourcePacks:[\"vanilla\"]\n", StandardCharsets.UTF_8);
+
+		assertTrue(PackDefaults.apply(config, options, 3465, line -> { }));
+		String now = Files.readString(options);
+		assertTrue(now.contains("key_key.roll:key.keyboard.z") && !now.contains("FA.zip"), now);
+		assertFalse(Files.exists(config.resolve("oculus.properties")), "the shader isn't switched on again");
+		assertTrue(Files.readString(config.resolve(PackDefaults.MARKER)).contains("key.key.roll=key.keyboard.z"), "the marker now has the parts");
+	}
 }

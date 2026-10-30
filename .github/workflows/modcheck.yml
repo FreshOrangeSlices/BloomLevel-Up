@@ -1,4 +1,4 @@
-# Throwaway (never merged): the pack's natural spawns, from a pack run's artifacts (spawnscan.py), pushed to ci/data.
+# Throwaway (never merged): what in the pack touches underground generation (underground.py), pushed to ci/data.
 name: modcheck
 on: [push, workflow_dispatch]
 permissions:
@@ -20,20 +20,14 @@ jobs:
       - run: echo "RUN_ID=$(cat check/run-id.txt)" >> "$GITHUB_ENV"
       - uses: actions/download-artifact@v4
         with:
-          name: pack-screenshots-L6
-          path: shots
-          run-id: ${{ env.RUN_ID }}
-          github-token: ${{ github.token }}
-      - uses: actions/download-artifact@v4
-        with:
           name: legionwarex
           path: pack
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          rm -rf data-out; mkdir -p data-out/companions
-          python3 check/companions.py "$(ls pack/*server*.zip | head -1)" data-out/companions | tee summary.txt
-          echo "::notice title=companions::$(tr '\n' '|' < summary.txt)"
+          rm -rf data-out; mkdir -p data-out/underground
+          python3 check/underground.py "$(ls pack/*server*.zip | head -1)" data-out/underground/scan.json | tee data-out/underground/summary.txt
+          echo "::notice title=underground::$(head -c 3000 data-out/underground/summary.txt | tr '\n' '|')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
-          mkdir -p data/bod14 && cp -r data-out/companions/* data/bod14/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "companions" && git push -q origin ci/data && echo pushed
+          mkdir -p data/underground && cp -r data-out/underground/* data/underground/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "underground" && git push -q origin ci/data && echo pushed

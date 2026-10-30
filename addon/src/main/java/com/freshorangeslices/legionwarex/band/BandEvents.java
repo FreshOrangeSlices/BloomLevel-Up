@@ -28,7 +28,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * Bands in the Overworld: every so often (the config's cadence) a war band may come by day and a pirate band may land
- * on a coast near a player. Pirates in a band keep near their captain and despawn like monsters (Bosses'Rise keeps
+ * on a coast near a player. Pirates in a band keep near the rook leading it and despawn like monsters (Bosses'Rise keeps
  * every pirate for good); illagers are patrollers and despawn as vanilla's patrols do.
  */
 public final class BandEvents {
@@ -197,11 +197,19 @@ public final class BandEvents {
 		}
 	}
 
-	/** Band members the game would keep for good (pirates) despawn like monsters, unless a player keeps them. */
+	/**
+	 * Band members the game would keep for good (pirates) despawn like monsters, unless a player keeps them; a band's
+	 * pirate rooks swing sooner ({@link PirateTuning}).
+	 */
 	@SubscribeEvent
 	public static void onTick(LivingEvent.LivingTickEvent event) {
-		if (event.getEntity() instanceof Mob mob && mob.tickCount % 20 == 7 && !mob.level().isClientSide && Bands.inBand(mob)
-				&& mob.isPersistenceRequired() && !Despawning.keptByPlayer(mob)) {
+		if (!(event.getEntity() instanceof Mob mob) || mob.level().isClientSide || !Bands.inBand(mob)) {
+			return;
+		}
+
+		PirateTuning.tick(mob);
+
+		if (mob.tickCount % 20 == 7 && mob.isPersistenceRequired() && !Despawning.keptByPlayer(mob)) {
 			Despawning.tick(mob);
 		}
 	}

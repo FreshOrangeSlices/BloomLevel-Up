@@ -19,9 +19,12 @@ public enum BandKind {
 			weights("minecraft:pillager", 4, "minecraft:vindicator", 3, "illagerinvasion:marauder", 3),
 			weights("minecraft:pillager", 30, "minecraft:vindicator", 20, "illagerinvasion:marauder", 15,
 					"illagerinvasion:provoker", 10, "illagerinvasion:alchemist", 10, "illagerinvasion:basher", 8)),
-	/** Bosses'Rise's pirates (the Kraken's crew, out on their own): a captain with rooks and crossbow pirates. */
+	/**
+	 * Bosses'Rise's pirates (the Kraken's crew, out on their own): rooks and crossbow pirates, led by a rook. The Pirate
+	 * Captain stays the Kraken ship's own (FreshOrangeSlices: too fine a figure for a band grunt).
+	 */
 	PIRATE("pirate",
-			weights("block_factorys_bosses:pirate_captain", 1),
+			weights("block_factorys_bosses:pirate_rook", 1),
 			weights("block_factorys_bosses:pirate_rook", 6, "block_factorys_bosses:crossbow_pirate", 4));
 
 	public final String id;

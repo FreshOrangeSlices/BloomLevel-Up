@@ -708,10 +708,11 @@ def lines_since(process, mark, pattern, limit):
 
 def band_check(server, player, entities, shots):
     """The LegionWareX add-on's bands, called by its command in front of the player (14 and 9 blocks ahead): a war band of 5
-    and a pirate band of 4. Each must come whole, the war band led by its banner carrier; each is captured, then
-    cleared. A band whose mod isn't in this layer is only noted. Returns (failures, notes)."""
+    and a pirate band of 4. Each must come whole, the war band led by its banner carrier and the pirate band by a rook
+    (no captain); each is captured, then cleared. A band whose mod isn't in this layer is only noted. Returns (failures,
+    notes)."""
     failures, notes = [], []
-    wanted = {"war": ("minecraft:pillager", 5), "pirate": ("block_factorys_bosses:pirate_captain", 4)}
+    wanted = {"war": ("minecraft:pillager", 5), "pirate": ("block_factorys_bosses:pirate_rook", 4)}
     server.send(f"effect give {player} minecraft:resistance 60 4 true")  # they attack at once
     for kind, (leader, size) in wanted.items():
         if leader not in entities and not leader.startswith("minecraft:"):
@@ -734,6 +735,8 @@ def band_check(server, player, entities, shots):
             failures.append(f"add-on: a {kind} band of {size} came with {count} on flat ground: {members}")
         if kind == "war" and "banner" not in members:
             failures.append(f"add-on: the war band's leader carries no banner: {members}")
+        if kind == "pirate" and ("pirate_captain" in members or not members.startswith("block_factorys_bosses:pirate_rook (leader")):
+            failures.append(f"add-on: the pirate band should be led by a rook, with no captain: {members}")
         time.sleep(3.5 if kind == "war" else 4)
         capture(shots, f"pack_band_{kind}")
         # Still there a moment later (Easy Mob Spawn Control or another mod could take them away as they join).
@@ -748,6 +751,45 @@ def band_check(server, player, entities, shots):
         time.sleep(3)
         server.send(f"execute as {player} at @s run kill @e[type=item,distance=..64]")
     server.send(f"effect clear {player}")
+    return failures, notes
+
+
+def chart_check(server, player, entities, shots):
+    """The add-on's pirate charts in the pack's own world: which lairs of its list are in the game and which can be in the
+    Overworld, and a chart read where the player stands (the treasure map lands in their hand and is captured). Fails
+    when a lair of a mod in this layer isn't in the game (a wrong id in the add-on's lair list), or when a layer with boss
+    mods finds no lair within a chart's reach. Returns (failures, notes)."""
+    failures, notes = [], []
+    mark = len(server.lines)
+    server.send("legionwarex chart lairs")
+    line = lines_since(server, mark, r"LegionWareX chart: \d+ lairs", 30)
+    if not line:
+        return ["add-on: /legionwarex chart lairs said nothing (is the command there?)"], notes
+    found = re.search(r"(\d+) lairs; in minecraft:overworld \((\d+)\): (.*?); other dimensions \((\d+)\): (.*?); not in the game \((\d+)\): (.*)$", line)
+    if not found:
+        return [f"add-on: couldn't read the lair list: {line.strip()[-400:]}"], notes
+    here, elsewhere = int(found.group(2)), int(found.group(4))
+    missing = [m.strip() for m in found.group(7).split(", ") if m.strip()]
+    mods_here = {e.split(":")[0] for e in entities}
+    # "structure" when the structure isn't there; "structure (no [boss, ...])" when it is but its bosses aren't.
+    wrong = [m for m in missing if (any(b.split(":")[0] in mods_here for b in re.findall(r"[a-z0-9_.-]+:[a-z0-9_/.-]+", m.split(" (no ", 1)[1]))
+                                    if " (no " in m else m.split(":")[0] in mods_here | {"minecraft"})]
+    notes.append(f"add-on: chart lairs: {here} can be in the Overworld, {elsewhere} in other dimensions, "
+                 f"{len(missing)} not in this layer")
+    if wrong:
+        failures.append(f"add-on: lairs in the chart list that aren't in the game though their mod is: {', '.join(wrong)}")
+    mark = len(server.lines)
+    server.send(f"execute as {player} at @s run legionwarex chart find")
+    line = lines_since(server, mark, r"LegionWareX chart: found", 180)
+    if not line:
+        failures.append("add-on: /legionwarex chart find said nothing within 3 minutes")
+    elif "found no lair" in line:
+        (failures if here else notes).append("add-on: a chart read at the test spot " + line.split("LegionWareX chart: ", 1)[1].strip())
+    else:
+        notes.append("add-on: a chart read at the test spot " + line.split("LegionWareX chart: ", 1)[1].strip())
+        time.sleep(4)
+        capture(shots, "pack_chart")
+    server.send(f"item replace entity {player} weapon.mainhand with minecraft:air")
     return failures, notes
 
 
@@ -898,6 +940,10 @@ def main():
             failures += band_failures
             notes += band_notes
             progress("band check done")
+            chart_failures, chart_notes = chart_check(server, PLAYER, entities, shots)
+            failures += chart_failures
+            notes += chart_notes
+            progress("chart check done")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")

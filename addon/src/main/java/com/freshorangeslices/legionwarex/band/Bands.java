@@ -28,7 +28,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * Making a band: the leader first (no band without one), then its followers within 4 blocks of it, each on the ground
  * like a patrol member (an empty block to stand in, a block below a mob can spawn on, little torchlight). Spawned as a
  * patrol (MobSpawnType.PATROL): illagers then patrol, the leader with the ominous banner heading off and its
- * followers keeping up, as vanilla's patrols do. Pirates aren't patrollers: they keep near their captain
+ * followers keeping up, as vanilla's patrols do. Pirates aren't patrollers: they keep near their leader
  * ({@link FollowLeaderGoal}). Every member carries the scoreboard tag {@link #TAG} and, in its persistent data, the
  * band's kind and its leader.
  */
@@ -135,6 +135,11 @@ public final class Bands {
 
 		mob.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, random.nextFloat() * 360.0F, 0.0F);
 		ForgeEventFactory.onFinalizeSpawn(mob, level, level.getCurrentDifficultyAt(pos), MobSpawnType.PATROL, null, null);
+
+		if (kind == BandKind.PIRATE) {
+			PirateTuning.quicken(mob);
+		}
+
 		mob.addTag(TAG);
 		CompoundTag data = new CompoundTag();
 		data.putString("kind", kind.id);
@@ -145,7 +150,7 @@ public final class Bands {
 
 		mob.getPersistentData().put(DATA, data);
 
-		// Joining the level is when a pirate follower is given its captain to keep near (BandEvents.onJoin).
+		// Joining the level is when a pirate follower is given its leader to keep near (BandEvents.onJoin).
 		return level.addFreshEntity(mob) ? mob : null;
 	}
 
@@ -157,6 +162,11 @@ public final class Bands {
 
 	public static boolean inBand(Entity entity) {
 		return entity.getTags().contains(TAG);
+	}
+
+	/** The kind of band it's in, or null for something not in one. */
+	public static BandKind kindOf(Entity entity) {
+		return inBand(entity) ? BandKind.byId(entity.getPersistentData().getCompound(DATA).getString("kind")) : null;
 	}
 
 	/** "war band of 4 at x, y, z: minecraft:pillager (leader, banner), ..." for logs and the command. */

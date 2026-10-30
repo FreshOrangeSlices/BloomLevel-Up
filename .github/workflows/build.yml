@@ -384,6 +384,9 @@ jobs:
           # The minimap's radar colors, with one mob of each kind placed around the player.
           - layers: 6
             shot: pack_minimap
+          # A pirate chart read where the player stands: the treasure map in hand.
+          - layers: 6
+            shot: pack_chart
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

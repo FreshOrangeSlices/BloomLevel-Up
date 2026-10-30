@@ -20,6 +20,9 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue PIRATE_BAND_CHANCE;
 	private static final ForgeConfigSpec.IntValue PIRATE_BAND_FROM_DAY;
 	private static final ForgeConfigSpec.BooleanValue MAINLAND_SPAWN;
+	private static final ForgeConfigSpec.DoubleValue CHART_DROP_CHANCE;
+	private static final ForgeConfigSpec.IntValue CHART_REACH;
+	private static final ForgeConfigSpec.IntValue CHART_ARRIVE;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -50,9 +53,10 @@ public final class AddonConfig {
 				.comment("The first day bands come (day 0 is the world's first; vanilla's patrols start on day 5).")
 				.defineInRange("warBandFromDay", 5, 0, 1000);
 		PIRATE_BANDS = builder
-				.comment("Bosses'Rise's pirates on the coasts, day or night: a captain with rooks and crossbow pirates, landing on a",
-						"beach or the shore by the sea near a player (never close to a Kraken's ship). Pirates never despawn by",
-						"themselves, so the add-on despawns these ones the way monsters despawn.")
+				.comment("Bosses'Rise's pirates on the coasts, day or night: rooks and crossbow pirates led by a rook (the captain stays",
+						"on the Kraken's ship), landing on a beach or the shore by the sea near a player (never close to a Kraken's ship).",
+						"They walk 40% faster than the ship's crew, and rooks wait 1.25 s between swings instead of 2 s. Pirates never",
+						"despawn by themselves, so the add-on despawns these ones the way monsters despawn.")
 				.define("pirateBands", true);
 		PIRATE_BAND_EVERY = builder
 				.comment("How often a pirate band is tried, in ticks (plus up to a minute); it only comes when a player is near a coast.")
@@ -63,6 +67,22 @@ public final class AddonConfig {
 		PIRATE_BAND_FROM_DAY = builder
 				.comment("The first day pirate bands come.")
 				.defineInRange("pirateBandFromDay", 3, 0, 1000);
+		builder.pop();
+
+		builder.comment("Pirate charts: band pirates drop them, and they turn up in shipwreck and buried-treasure chests (the add-on's loot",
+				"modifiers). Reading one leads to the nearest boss lair no one on the world has beaten (the add-on's lair list,",
+				"data/<mod>/legionwarex/lairs), as a treasure map; it crumbles once you get there. /legionwarex chart find|lairs|beaten|forget",
+				"for testing.").push("charts");
+		CHART_DROP_CHANCE = builder
+				.comment("The chance a band pirate killed by a player drops a chart (1 in 15 by default).")
+				.defineInRange("chartDropChance", 1.0 / 15.0, 0.0, 1.0);
+		CHART_REACH = builder
+				.comment("How far a chart looks for a lair, in blocks from where it's read. Further takes longer to read (a structure a",
+						"tick, each looking further) and leads further.")
+				.defineInRange("chartReachBlocks", 3000, 256, 20000);
+		CHART_ARRIVE = builder
+				.comment("How close to the chart's X counts as there (the chart crumbles), in blocks.")
+				.defineInRange("chartArriveBlocks", 32, 4, 256);
 		builder.pop();
 
 		builder.push("world");
@@ -129,5 +149,17 @@ public final class AddonConfig {
 
 	public static boolean mainlandSpawn() {
 		return get(MAINLAND_SPAWN, true);
+	}
+
+	public static double chartDropChance() {
+		return get(CHART_DROP_CHANCE, 1.0 / 15.0);
+	}
+
+	public static int chartReach() {
+		return get(CHART_REACH, 3000);
+	}
+
+	public static int chartArriveBlocks() {
+		return get(CHART_ARRIVE, 32);
 	}
 }

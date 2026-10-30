@@ -1,0 +1,14 @@
+{
+  "type": "legionwarex:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/shipwreck_map"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.3
+    }
+  ],
+  "item": "legionwarex:pirate_chart"
+}

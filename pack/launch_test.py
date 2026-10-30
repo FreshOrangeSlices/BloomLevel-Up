@@ -675,16 +675,17 @@ def client_settings_check(game_dir):
 
 
 def radar_shot(server, player, shots):
-    """The minimap with one of each radar color around the player, everything else nearby cleared first: a zombie to
-    the east (hostile, red), a cow to the west (passive, green), a wolf to the north (neutral, yellow), and a dropped
-    item to the south and an arrow (both hidden). The mobs stand still and are removed after."""
+    """The minimap with one of each radar color around the player, everything else nearby cleared first: a zombie 20
+    blocks east (hostile, red), a cow west (passive, green), a wolf north and an iron golem south (neutral, yellow; 20
+    blocks out, clear of the player's own arrow in the middle), and a dropped item and an arrow (both hidden). The mobs stand still and are removed after."""
     server.send(f"execute as {player} at @s run kill @e[type=!player,distance=..64]")
     time.sleep(1)
-    for command in (f"summon minecraft:zombie ~10 ~ ~ {{NoAI:1b,Silent:1b,PersistenceRequired:1b,Tags:[\"lwx_radar\"]}}",
-                    f"summon minecraft:cow ~-10 ~ ~ {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}",
-                    f"summon minecraft:wolf ~ ~ ~-10 {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}",
-                    f"summon minecraft:item ~ ~ ~10 {{Item:{{id:\"minecraft:diamond\",Count:1b}},PickupDelay:32767,Tags:[\"lwx_radar\"]}}",
-                    f"summon minecraft:arrow ~7 ~ ~7 {{NoGravity:1b,Tags:[\"lwx_radar\"]}}"):
+    for command in (f"summon minecraft:zombie ~20 ~ ~ {{NoAI:1b,Silent:1b,PersistenceRequired:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:cow ~-20 ~ ~ {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:wolf ~ ~ ~-20 {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:item ~6 ~ ~14 {{Item:{{id:\"minecraft:diamond\",Count:1b}},PickupDelay:32767,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:arrow ~-14 ~ ~14 {{NoGravity:1b,Tags:[\"lwx_radar\"]}}",
+                    f"summon minecraft:iron_golem ~ ~ ~20 {{NoAI:1b,Silent:1b,Tags:[\"lwx_radar\"]}}"):
         server.send(f"execute as {player} at @s run {command}")
         time.sleep(0.2)
     time.sleep(4)

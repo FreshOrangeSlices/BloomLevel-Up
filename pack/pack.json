@@ -38,12 +38,13 @@
     },
     {
       "name": "creatures",
-      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere. Zoni's Companions (FreshOrangeSlices' pick, beside Migamigos) are only summoned, from devices players craft, never found in the wild; its Ultimate Summon Device (catches any mob, bosses included) is taken out and its creative-only items are hidden (pack_data).",
+      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere. Zoni's Companions (FreshOrangeSlices' pick, beside Migamigos) are only summoned, from devices players craft, never found in the wild; its Ultimate Summon Device (catches any mob, bosses included) is taken out and its creative-only items are hidden (pack_data). Harder mobs mainly by day (playtest patch, chunk 5): Undead Unleashed – Continued (Dreadknights, Wraiths, Flamebreathers), its own Overworld spawns off; they come as the add-on's daytime sentinels.",
       "modrinth": [
         "aquamirae",
         "book-of-dragons",
         "monster-expansion",
         "mutant-monsters",
+        "undead-unleashed",
         "myths-and-legends",
         "legionary",
         "migamigos",
@@ -401,6 +402,10 @@
       "off": {
         "Skarrier Mobs, in every biome of every dimension: put back below only where each can spawn": ["skarrier_mobs:bowlder_biome_modifier", "skarrier_mobs:breacher_biome_modifier", "skarrier_mobs:dragger_biome_modifier", "skarrier_mobs:eater_biome_modifier", "skarrier_mobs:freeze_biome_modifier", "skarrier_mobs:frost_biome_modifier", "skarrier_mobs:gadlisk_biome_modifier", "skarrier_mobs:glowin_biome_modifier", "skarrier_mobs:gorger_biome_modifier", "skarrier_mobs:slither_matriarch_biome_modifier", "skarrier_mobs:slither_spawner_dummy_biome_modifier", "skarrier_mobs:viruleon_biome_modifier", "skarrier_mobs:voidrake_biome_modifier", "skarrier_mobs:wretch_biome_modifier", "skarrier_mobs:wrought_biome_modifier"],
         "Monster Expansion's Arborix and Kobeko, named vanilla biomes only: put back below with BOP's": ["monsterexpansion:add_arborix_spawn", "monsterexpansion:add_kobeko_spawn"],
+        "Undead Unleashed – Continued (playtest patch, chunk 5: harder mobs mainly by day, as the add-on's sentinels): its Wraiths came in twos and threes at weight 67 and its Dreadknights at 10 in every Overworld biome; the Flamebreather keeps its few Nether spawns": [
+          "undead_unleashed:dreadknight_biome_modifier",
+          "undead_unleashed:wraith_biome_modifier"
+        ],
         "Migamigos' companions, a few named vanilla biomes only at weight 1: put back below with BOP's, at 2": ["migamigos:amigo_claymore", "migamigos:amigo_cocogoat", "migamigos:amigo_pollypounce", "migamigos:amigo_wavelyn"]
       },
       "quiet": {

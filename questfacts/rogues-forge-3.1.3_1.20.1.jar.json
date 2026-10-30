@@ -1,0 +1,2801 @@
+{
+ "jar": "rogues-forge-3.1.3+1.20.1.jar",
+ "namespaces": [
+  "minecraft",
+  "rogues",
+  "rpg_series",
+  "spell_engine"
+ ],
+ "advancements": [
+  {
+   "id": "rogues:recipes/combat/assassin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:rabbit_hide",
+    "recipe=rogues:assassin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:assassin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/assassin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:rabbit_hide",
+    "recipe=rogues:assassin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:assassin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/assassin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:rabbit_hide",
+    "recipe=rogues:assassin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:assassin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/assassin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:rabbit_hide",
+    "recipe=rogues:assassin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:assassin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/berserker_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_scrap",
+    "recipe=rogues:berserker_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:berserker_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/berserker_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_scrap",
+    "recipe=rogues:berserker_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:berserker_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/berserker_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_scrap",
+    "recipe=rogues:berserker_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:berserker_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/berserker_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_scrap",
+    "recipe=rogues:berserker_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:berserker_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/diamond_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=rogues:diamond_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:diamond_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/diamond_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=rogues:diamond_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:diamond_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/diamond_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=rogues:diamond_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:diamond_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/diamond_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=rogues:diamond_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:diamond_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/flint_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:flint",
+    "recipe=rogues:flint_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:flint_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/golden_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=rogues:golden_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:golden_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/golden_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=rogues:golden_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:golden_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/golden_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=rogues:golden_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:golden_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/golden_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=rogues:golden_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:golden_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/iron_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:iron_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:iron_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/iron_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:iron_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:iron_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/iron_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:iron_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:iron_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/iron_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:iron_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:iron_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_assassin_armor_chest_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_assassin_armor_chest_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_assassin_armor_chest_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_assassin_armor_feet_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_assassin_armor_feet_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_assassin_armor_feet_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_assassin_armor_head_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_assassin_armor_head_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_assassin_armor_head_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_assassin_armor_legs_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_assassin_armor_legs_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_assassin_armor_legs_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_berserker_armor_chest_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_berserker_armor_chest_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_berserker_armor_chest_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_berserker_armor_feet_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_berserker_armor_feet_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_berserker_armor_feet_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_berserker_armor_head_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_berserker_armor_head_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_berserker_armor_head_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_berserker_armor_legs_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_berserker_armor_legs_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_berserker_armor_legs_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_dagger_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_dagger_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_dagger_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_double_axe_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_double_axe_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_double_axe_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_glaive_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_glaive_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_glaive_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/netherite_sickle_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_sickle_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_sickle_smithing"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/rogue_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:leather",
+    "recipe=rogues:rogue_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:rogue_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/rogue_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:leather",
+    "recipe=rogues:rogue_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:rogue_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/rogue_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:leather",
+    "recipe=rogues:rogue_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:rogue_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/rogue_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:leather",
+    "recipe=rogues:rogue_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:rogue_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/stone_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:cobblestone",
+    "recipe=rogues:stone_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:stone_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/warrior_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:warrior_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:warrior_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/warrior_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:warrior_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:warrior_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/warrior_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:warrior_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:warrior_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/combat/warrior_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=rogues:warrior_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:warrior_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/arms_workbench",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:paper",
+    "recipe=rogues:arms_workbench"
+   ],
+   "rewards": {
+    "recipes": [
+     "rogues:arms_workbench"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_blasting_berserker_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_chest",
+    "recipe=minecraft:chain_from_blasting_berserker_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_blasting_berserker_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_blasting_berserker_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_feet",
+    "recipe=minecraft:chain_from_blasting_berserker_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_blasting_berserker_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_blasting_berserker_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_head",
+    "recipe=minecraft:chain_from_blasting_berserker_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_blasting_berserker_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_blasting_berserker_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_legs",
+    "recipe=minecraft:chain_from_blasting_berserker_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_blasting_berserker_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_smelting_berserker_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_chest",
+    "recipe=minecraft:chain_from_smelting_berserker_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_smelting_berserker_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_smelting_berserker_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_feet",
+    "recipe=minecraft:chain_from_smelting_berserker_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_smelting_berserker_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_smelting_berserker_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_head",
+    "recipe=minecraft:chain_from_smelting_berserker_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_smelting_berserker_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/chain_from_smelting_berserker_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:berserker_armor_legs",
+    "recipe=minecraft:chain_from_smelting_berserker_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:chain_from_smelting_berserker_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/flint_from_blasting_flint_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:flint_dagger",
+    "recipe=minecraft:flint_from_blasting_flint_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:flint_from_blasting_flint_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/flint_from_smelting_flint_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:flint_dagger",
+    "recipe=minecraft:flint_from_smelting_flint_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:flint_from_smelting_flint_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_blasting_golden_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_dagger",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_blasting_golden_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_double_axe",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_blasting_golden_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_glaive",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_blasting_golden_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_sickle",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_smelting_golden_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_dagger",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_smelting_golden_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_double_axe",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_smelting_golden_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_glaive",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/gold_nugget_from_smelting_golden_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:golden_sickle",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_iron_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_dagger",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_iron_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_double_axe",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_iron_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_glaive",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_iron_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_sickle",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_warrior_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_chest",
+    "recipe=minecraft:iron_nugget_from_blasting_warrior_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_warrior_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_warrior_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_feet",
+    "recipe=minecraft:iron_nugget_from_blasting_warrior_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_warrior_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_warrior_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_head",
+    "recipe=minecraft:iron_nugget_from_blasting_warrior_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_warrior_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_blasting_warrior_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_legs",
+    "recipe=minecraft:iron_nugget_from_blasting_warrior_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_warrior_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_iron_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_dagger",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_iron_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_double_axe",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_iron_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_glaive",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_iron_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:iron_sickle",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_warrior_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_chest",
+    "recipe=minecraft:iron_nugget_from_smelting_warrior_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_warrior_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_warrior_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_feet",
+    "recipe=minecraft:iron_nugget_from_smelting_warrior_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_warrior_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_warrior_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_head",
+    "recipe=minecraft:iron_nugget_from_smelting_warrior_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_warrior_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/iron_nugget_from_smelting_warrior_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:warrior_armor_legs",
+    "recipe=minecraft:iron_nugget_from_smelting_warrior_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_warrior_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_blasting_rogue_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_chest",
+    "recipe=minecraft:leather_from_blasting_rogue_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_blasting_rogue_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_blasting_rogue_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_feet",
+    "recipe=minecraft:leather_from_blasting_rogue_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_blasting_rogue_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_blasting_rogue_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_head",
+    "recipe=minecraft:leather_from_blasting_rogue_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_blasting_rogue_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_blasting_rogue_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_legs",
+    "recipe=minecraft:leather_from_blasting_rogue_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_blasting_rogue_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_smelting_rogue_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_chest",
+    "recipe=minecraft:leather_from_smelting_rogue_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_smelting_rogue_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_smelting_rogue_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_feet",
+    "recipe=minecraft:leather_from_smelting_rogue_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_smelting_rogue_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_smelting_rogue_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_head",
+    "recipe=minecraft:leather_from_smelting_rogue_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_smelting_rogue_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/leather_from_smelting_rogue_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:rogue_armor_legs",
+    "recipe=minecraft:leather_from_smelting_rogue_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:leather_from_smelting_rogue_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_assassin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_chest",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_assassin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_feet",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_assassin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_head",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_assassin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_legs",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_assassin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_berserker_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_chest",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_berserker_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_feet",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_berserker_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_head",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_berserker_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_legs",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_berserker_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_dagger",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_double_axe",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_glaive",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_blasting_netherite_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_sickle",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_assassin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_chest",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_assassin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_feet",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_assassin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_head",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_assassin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_assassin_armor_legs",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_assassin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_berserker_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_chest",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_berserker_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_feet",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_berserker_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_head",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_berserker_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_berserker_armor_legs",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_berserker_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_dagger",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_dagger"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_double_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_double_axe",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_double_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_double_axe"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_glaive",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_glaive"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/netherite_scrap_from_smelting_netherite_sickle",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:netherite_sickle",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_sickle"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_sickle"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_blasting_assassin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_chest",
+    "recipe=minecraft:rabbit_hide_from_blasting_assassin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_blasting_assassin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_blasting_assassin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_feet",
+    "recipe=minecraft:rabbit_hide_from_blasting_assassin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_blasting_assassin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_blasting_assassin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_head",
+    "recipe=minecraft:rabbit_hide_from_blasting_assassin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_blasting_assassin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_blasting_assassin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_legs",
+    "recipe=minecraft:rabbit_hide_from_blasting_assassin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_blasting_assassin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_smelting_assassin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_chest",
+    "recipe=minecraft:rabbit_hide_from_smelting_assassin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_smelting_assassin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_smelting_assassin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_feet",
+    "recipe=minecraft:rabbit_hide_from_smelting_assassin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_smelting_assassin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_smelting_assassin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_head",
+    "recipe=minecraft:rabbit_hide_from_smelting_assassin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_smelting_assassin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "rogues:recipes/misc/rabbit_hide_from_smelting_assassin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=rogues:assassin_armor_legs",
+    "recipe=minecraft:rabbit_hide_from_smelting_assassin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:rabbit_hide_from_smelting_assassin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "rpg_series:path_choose_rogue",
+   "parent": "rpg_series:classes",
+   "title": "Path of Tricks",
+   "description": "Create a Rogue Handbook",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_book_creation"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:path_choose_warrior",
+   "parent": "rpg_series:classes",
+   "title": "Path of Strength",
+   "description": "Create a Warrior's Codex",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_book_creation"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_cast_rogue_book",
+   "parent": "rpg_series:spell_novice_rogue",
+   "title": "Rogue Training",
+   "description": "Use a skill from the Rogue Handbook",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_cast"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_cast_warrior_book",
+   "parent": "rpg_series:spell_novice_warrior",
+   "title": "Warrior Training",
+   "description": "Use a skill from the Warrior's Codex",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_cast"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_master_rogue",
+   "parent": "rpg_series:spell_novice_rogue",
+   "title": "Master of Deception",
+   "description": "Obtain all Rogue skills",
+   "icon": "rogues:diamond_sickle",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_master_warrior",
+   "parent": "rpg_series:spell_novice_warrior",
+   "title": "Rampage!",
+   "description": "Obtain all Warrior skills",
+   "icon": "rogues:netherite_double_axe",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_novice_rogue",
+   "parent": "rpg_series:path_choose_rogue",
+   "title": "Sinister Intentions",
+   "description": "Obtain your first Rogue skill",
+   "icon": "rogues:iron_dagger",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_novice_warrior",
+   "parent": "rpg_series:path_choose_warrior",
+   "title": "Taste for Blood",
+   "description": "Obtain your first Warrior skill",
+   "icon": "rogues:stone_double_axe",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:trade_with_arms_dealer",
+   "parent": "rpg_series:misc_items",
+   "title": "Arms Deal",
+   "description": "Trade with an Arms Dealer villager",
+   "icon": "rogues:iron_double_axe",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:villager_trade"
+   ],
+   "ids": [],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.rogues.arms_workbench": "Arms Station",
+  "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers.",
+  "effect.rogues.bear_trap": "Trapped",
+  "effect.rogues.bear_trap.description": "Prevents movement and jumping",
+  "effect.rogues.charge": "Charge",
+  "effect.rogues.charge.description": "Increases movement speed",
+  "effect.rogues.demoralize": "Demoralized",
+  "effect.rogues.demoralize.description": "Reduces attack damage",
+  "effect.rogues.last_stand": "Last Stand",
+  "effect.rogues.last_stand.description": "Increases maximum health and reduces damage taken",
+  "effect.rogues.net_trap": "Netted",
+  "effect.rogues.net_trap.description": "Prevents movement and jumping",
+  "effect.rogues.shadow_step": "Shadowstep",
+  "effect.rogues.shadow_step.description": "Untraceable",
+  "effect.rogues.shatter": "Shattered Armor",
+  "effect.rogues.shatter.description": "Reduces armor",
+  "effect.rogues.shock": "Stunned",
+  "effect.rogues.shock.description": "Prevents movement and actions",
+  "effect.rogues.slice_and_dice": "Slice & Dice",
+  "effect.rogues.slice_and_dice.description": "Increases attack damage",
+  "effect.rogues.stealth": "Stealth",
+  "effect.rogues.stealth.description": "Invisible to enemies",
+  "effect.rogues.stealth_speed": "Stealth Speed",
+  "effect.rogues.stealth_speed.description": "Faster movement in stealth",
+  "entity.minecraft.villager.arms_merchant": "Arms Dealer",
+  "entity.minecraft.villager.rogues.arms_merchant": "Arms Dealer",
+  "entity.rogues.bear_trap": "Bear Trap",
+  "item.rogues.aeternium_dagger": "Aeternium Dagger",
+  "item.rogues.aeternium_double_axe": "Aeternium Double Axe",
+  "item.rogues.aeternium_glaive": "Aeternium Glaive",
+  "item.rogues.aeternium_sickle": "Aeternium Sickle",
+  "item.rogues.aether_dagger": "Valkyrie Shiv",
+  "item.rogues.aether_double_axe": "Holy Double Axe",
+  "item.rogues.aether_glaive": "Gilded Battle Glaive",
+  "item.rogues.aether_sickle": "Heavenly Harvester",
+  "item.rogues.assassin_armor_chest": "Assassin Tunic",
+  "item.rogues.assassin_armor_feet": "Assassin Boots",
+  "item.rogues.assassin_armor_head": "Assassin Mask",
+  "item.rogues.assassin_armor_legs": "Assassin Pants",
+  "item.rogues.berserker_armor_chest": "Berserker Chestplate",
+  "item.rogues.berserker_armor_feet": "Berserker Boots",
+  "item.rogues.berserker_armor_head": "Berserker Helmet",
+  "item.rogues.berserker_armor_legs": "Berserker Leggings",
+  "item.rogues.diamond_dagger": "Diamond Dagger",
+  "item.rogues.diamond_double_axe": "Diamond Double Axe",
+  "item.rogues.diamond_glaive": "Diamond Glaive",
+  "item.rogues.diamond_sickle": "Diamond Sickle",
+  "item.rogues.flint_dagger": "Flint Dagger",
+  "item.rogues.golden_dagger": "Golden Dagger",
+  "item.rogues.golden_double_axe": "Golden Double Axe",
+  "item.rogues.golden_glaive": "Golden Glaive",
+  "item.rogues.golden_sickle": "Golden Sickle",
+  "item.rogues.iron_dagger": "Iron Dagger",
+  "item.rogues.iron_double_axe": "Iron Double Axe",
+  "item.rogues.iron_glaive": "Iron Glaive",
+  "item.rogues.iron_sickle": "Iron Sickle",
+  "item.rogues.netherite_assassin_armor_chest": "Netherite Assassin Tunic",
+  "item.rogues.netherite_assassin_armor_feet": "Netherite Assassin Boots",
+  "item.rogues.netherite_assassin_armor_head": "Netherite Assassin Mask",
+  "item.rogues.netherite_assassin_armor_legs": "Netherite Assassin Pants",
+  "item.rogues.netherite_berserker_armor_chest": "Netherite Berserker Chestplate",
+  "item.rogues.netherite_berserker_armor_feet": "Netherite Berserker Boots",
+  "item.rogues.netherite_berserker_armor_head": "Netherite Berserker Helmet",
+  "item.rogues.netherite_berserker_armor_legs": "Netherite Berserker Leggings",
+  "item.rogues.netherite_dagger": "Netherite Dagger",
+  "item.rogues.netherite_double_axe": "Netherite Double Axe",
+  "item.rogues.netherite_glaive": "Netherite Glaive",
+  "item.rogues.netherite_sickle": "Netherite Sickle",
+  "item.rogues.rogue_armor_chest": "Rogue Tunic",
+  "item.rogues.rogue_armor_feet": "Rogue Boots",
+  "item.rogues.rogue_armor_head": "Rogue Mask",
+  "item.rogues.rogue_armor_legs": "Rogue Pants",
+  "item.rogues.ruby_dagger": "Ruby Dagger",
+  "item.rogues.ruby_double_axe": "Ruby Double Axe",
+  "item.rogues.ruby_glaive": "Ruby Glaive",
+  "item.rogues.ruby_sickle": "Ruby Sickle",
+  "item.rogues.spell_book/rogue": "Rogue Handbook",
+  "item.rogues.spell_book/rogue.spell_binding.description": "Spell Book of Rogues, using quick weapons and skills to strike enemies from the shadows\n- Strengths: High mobility and melee attack damage\n- Weaknesses: Mediocre defense and limited ranged attacks\n- Equipment: Moderately armored",
+  "item.rogues.spell_book/warrior": "Warriors' Codex",
+  "item.rogues.spell_book/warrior.spell_binding.description": "Spell Book of Warriors, using heavy weapons and skills to dominate close combat\n- Strengths: Strong melee attacks with good mobility\n- Weaknesses: Limited ranged attacks and supportive skills\n- Equipment: Heavily armored",
+  "item.rogues.spell_scroll/rogue": "Rogue Skill Scroll",
+  "item.rogues.spell_scroll/warrior": "Warriors Skill Scroll",
+  "item.rogues.stone_double_axe": "Stone Double Axe",
+  "item.rogues.warrior_armor_chest": "Warrior Chestplate",
+  "item.rogues.warrior_armor_feet": "Warrior Boots",
+  "item.rogues.warrior_armor_head": "Warrior Helmet",
+  "item.rogues.warrior_armor_legs": "Warrior Leggings"
+ }
+}

@@ -1,0 +1,739 @@
+{
+ "jar": "bookofdragons-1.4-1.20.1.jar",
+ "namespaces": [
+  "bookofdragons",
+  "minecraft",
+  "xaerominimap"
+ ],
+ "advancements": [
+  {
+   "id": "bookofdragons:class_collector",
+   "parent": "bookofdragons:we_have_dragons",
+   "title": "Strike Class, Fear Class, Mystery Class",
+   "description": "See a dragon of every class",
+   "icon": "bookofdragons:book_of_dragons",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:dragon_master",
+   "parent": "bookofdragons:every_dragon_we_know_of",
+   "title": "Dragon Master",
+   "description": "Fill every dragon's entry in the Book of Dragons",
+   "icon": "minecraft:dragon_head",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 1000
+   }
+  },
+  {
+   "id": "bookofdragons:dragon_rider",
+   "parent": "bookofdragons:sworn_you_had_teeth",
+   "title": "Dragon Rider",
+   "description": "Hold on until a wild dragon stops bucking",
+   "icon": "minecraft:elytra",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:dragon_tamer",
+   "parent": "bookofdragons:sworn_you_had_teeth",
+   "title": "Dragon Tamer",
+   "description": "Tame your first dragon",
+   "icon": "minecraft:saddle",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:every_dragon_we_know_of",
+   "parent": "bookofdragons:kill_on_sight",
+   "title": "Every Dragon We Know Of",
+   "description": "Learn most of what there is to know about every dragon species",
+   "icon": "minecraft:bookshelf",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:everything_we_know",
+   "parent": "bookofdragons:we_have_dragons",
+   "title": "Everything We Know About Them Is Wrong",
+   "description": "Write a first fact in the Book of Dragons",
+   "icon": "minecraft:feather",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:first_plush",
+   "parent": "bookofdragons:root",
+   "title": "A Friend to Hug",
+   "description": "Pick up your first plush",
+   "icon": "bookofdragons:sheep_plush",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=bookofdragons:ball_plush",
+    "items=bookofdragons:fish_plush",
+    "items=bookofdragons:fury_plush",
+    "items=bookofdragons:nightmare_plush",
+    "items=bookofdragons:sheep_plush",
+    "items=bookofdragons:steak_plush",
+    "items=bookofdragons:terror_plush"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:hide_and_pray",
+   "parent": "bookofdragons:we_have_dragons",
+   "title": "Hide and Pray",
+   "description": "See a dragon unlike the rest of its kind",
+   "icon": "minecraft:white_dye",
+   "frame": "goal",
+   "hidden": true,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:i_alone_control",
+   "parent": "bookofdragons:dragon_tamer",
+   "title": "I Alone Control the Dragons",
+   "description": "Bind a dragon to a Rattlestaff or a Dragon Whistle",
+   "icon": "bookofdragons:rattlestaff",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:kill_on_sight",
+   "parent": "bookofdragons:everything_we_know",
+   "title": "Kill on Sight",
+   "description": "Learn most of what there is to know about one dragon species",
+   "icon": "minecraft:writable_book",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:lightning_and_death",
+   "parent": "bookofdragons:dragon_tamer",
+   "title": "Offspring of Lightning and Death",
+   "description": "Tame a Night Fury",
+   "icon": "bookofdragons:nightfury_scales",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:meet_hooligan",
+   "parent": "bookofdragons:root",
+   "title": "Meet the Hooligans",
+   "description": "Trade with a Hooligan",
+   "icon": "bookofdragons:viking_anvil",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:villager_trade"
+   ],
+   "ids": [
+    "type=bookofdragons:hooligan_drifter",
+    "type=minecraft:villager"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:nice_and_slow",
+   "parent": "bookofdragons:dragon_rider",
+   "title": "Nice and Slow",
+   "description": "Take off on a dragon",
+   "icon": "minecraft:phantom_membrane",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:not_so_fireproof",
+   "parent": "bookofdragons:nice_and_slow",
+   "title": "Not So Fireproof on the Inside",
+   "description": "Fire a dragon's breath from its back",
+   "icon": "minecraft:fire_charge",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:plush_collector",
+   "parent": "bookofdragons:first_plush",
+   "title": "Dragon Plush Hoarder",
+   "description": "Collect every dragon plush",
+   "icon": "bookofdragons:fury_plush",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=bookofdragons:fury_plush",
+    "items=bookofdragons:nightmare_plush",
+    "items=bookofdragons:terror_plush"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:position_four",
+   "parent": "bookofdragons:nice_and_slow",
+   "title": "Position Four... No, Three",
+   "description": "Dodge in the air on a dragon",
+   "icon": "minecraft:paper",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:recipes/ball_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:leather",
+    "recipe=bookofdragons:ball_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:ball_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:recipes/fish_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=bookofdragons:fish_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:fish_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:recipes/fury_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=bookofdragons:fury_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:fury_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:recipes/nightmare_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=bookofdragons:nightmare_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:nightmare_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:recipes/sheep_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:black_wool",
+    "items=minecraft:blue_wool",
+    "items=minecraft:brown_wool",
+    "items=minecraft:cyan_wool",
+    "items=minecraft:gray_wool",
+    "items=minecraft:green_wool",
+    "items=minecraft:light_blue_wool",
+    "items=minecraft:light_gray_wool",
+    "items=minecraft:lime_wool",
+    "items=minecraft:magenta_wool",
+    "items=minecraft:orange_wool",
+    "items=minecraft:pink_wool",
+    "items=minecraft:purple_wool",
+    "items=minecraft:red_wool",
+    "items=minecraft:white_wool",
+    "items=minecraft:yellow_wool",
+    "recipe=bookofdragons:sheep_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:sheep_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:recipes/steak_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=bookofdragons:steak_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:steak_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:recipes/terror_plush",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=bookofdragons:terror_plush"
+   ],
+   "rewards": {
+    "recipes": [
+     "bookofdragons:terror_plush"
+    ]
+   }
+  },
+  {
+   "id": "bookofdragons:roost_discoverer",
+   "parent": "bookofdragons:root",
+   "title": "Roost Discoverer",
+   "description": "Find and enter a dragon roost",
+   "icon": "minecraft:spyglass",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:location"
+   ],
+   "ids": [
+    "structure=bookofdragons:roost_barrens",
+    "structure=bookofdragons:roost_cave",
+    "structure=bookofdragons:roost_cliff",
+    "structure=bookofdragons:roost_glade",
+    "structure=bookofdragons:roost_wetland"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:root",
+   "parent": "",
+   "title": "Book of Dragons",
+   "description": "Get the Book of Dragons from a Hooligan",
+   "icon": "bookofdragons:book_of_dragons",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=bookofdragons:book_of_dragons"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:scale_collector",
+   "parent": "bookofdragons:trail_tracker",
+   "title": "Scale Collector",
+   "description": "Pick up a scale of every dragon species",
+   "icon": "bookofdragons:nightfury_scales",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=bookofdragons:deadlynadder_scales",
+    "items=bookofdragons:gronckle_scales",
+    "items=bookofdragons:hiddeouszippleback_scales",
+    "items=bookofdragons:monstrousnightmare_scales",
+    "items=bookofdragons:nightfury_scales",
+    "items=bookofdragons:skrill_scales",
+    "items=bookofdragons:speed_stinger_scales",
+    "items=bookofdragons:terrible_terror_scales",
+    "items=bookofdragons:whisperingdeath_scales"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:soul_of_a_dragon",
+   "parent": "bookofdragons:dragon_tamer",
+   "title": "The Soul of a Dragon",
+   "description": "Tame a dragon of every species",
+   "icon": "minecraft:name_tag",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:sworn_you_had_teeth",
+   "parent": "bookofdragons:root",
+   "title": "I Could've Sworn You Had Teeth",
+   "description": "Give a wild dragon what it asks of you",
+   "icon": "minecraft:cod",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:trail_tracker",
+   "parent": "bookofdragons:root",
+   "title": "Trail Tracker",
+   "description": "Approach a dragon roost",
+   "icon": "bookofdragons:nightfury_scales",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:true_bond",
+   "parent": "bookofdragons:dragon_tamer",
+   "title": "True Bond",
+   "description": "Bond with a dragon",
+   "icon": "minecraft:golden_apple",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "bookofdragons:we_have_dragons",
+   "parent": "bookofdragons:root",
+   "title": "We Have Dragons",
+   "description": "See a dragon",
+   "icon": "minecraft:ender_eye",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "bookofdragons:dragon"
+   ],
+   "ids": [],
+   "rewards": {}
+  }
+ ],
+ "books": [
+  {
+   "file": "assets/bookofdragons/book/rider_manual.json",
+   "name": "",
+   "category": "",
+   "icon": "",
+   "pages": [
+    {
+     "title": "book.bookofdragons.manual.ground"
+    },
+    {
+     "title": "book.bookofdragons.manual.air"
+    },
+    {
+     "title": "book.bookofdragons.manual.water"
+    },
+    {
+     "title": "book.bookofdragons.manual.fight"
+    },
+    {
+     "title": "book.bookofdragons.manual.keeping"
+    },
+    {
+     "title": "book.bookofdragons.manual.staff"
+    },
+    {
+     "title": "book.bookofdragons.manual.peace"
+    }
+   ]
+  }
+ ],
+ "names": {
+  "block.bookofdragons.placeable_gronckle_scales": "Gronckle Scales",
+  "block.bookofdragons.placeable_nadder_scales": "Deadly Nadder Scales",
+  "block.bookofdragons.placeable_nightfury_scales": "Night Fury Scales",
+  "block.bookofdragons.placeable_nightmare_scales": "Monstrous Nightmare Scales",
+  "block.bookofdragons.placeable_skrill_scales": "Skrill Scales",
+  "block.bookofdragons.placeable_speedstinger_scales": "Speed Stinger Scales",
+  "block.bookofdragons.placeable_terribleterror_scales": "Terrible Terror Scales",
+  "block.bookofdragons.placeable_whisperingdeath_scales": "Whispering Death Scales",
+  "block.bookofdragons.placeable_zippleback_scales": "Hideous Zippleback Scales",
+  "block.bookofdragons.roost_controller": "Dragon Roost",
+  "block.bookofdragons.viking_anvil": "Viking Anvil",
+  "effect.bookofdragons.paralysis": "Paralysis",
+  "entity.bookofdragons.ball_plush": "Ball Plush",
+  "entity.bookofdragons.deadlynadder": "Deadly Nadder",
+  "entity.bookofdragons.dragon_egg": "Dragon Egg",
+  "entity.bookofdragons.dragon_egg.activated": "✓ Activated - Incubating",
+  "entity.bookofdragons.dragon_egg.activation": "%s Egg - Activation: %s%%",
+  "entity.bookofdragons.dragon_egg.condition.and": " and ",
+  "entity.bookofdragons.dragon_egg.condition.darkness": "Darkness, light level of %s or less",
+  "entity.bookofdragons.dragon_egg.condition.in_lava": "Submerged in lava",
+  "entity.bookofdragons.dragon_egg.condition.in_water": "Submerged in water",
+  "entity.bookofdragons.dragon_egg.condition.light_level": "Light level of %s or more",
+  "entity.bookofdragons.dragon_egg.condition.none": "No special conditions",
+  "entity.bookofdragons.dragon_egg.condition.on_fire": "On fire",
+  "entity.bookofdragons.dragon_egg.conditions_met": "✓ Hatching conditions met!",
+  "entity.bookofdragons.dragon_egg.conditions_not_met": "✗ Requires: %s",
+  "entity.bookofdragons.dragon_egg.info": "%s Egg - %s%% hatched",
+  "entity.bookofdragons.dragon_egg.picked_up": "Picked up %s Egg",
+  "entity.bookofdragons.fish_plush": "Fish Plush",
+  "entity.bookofdragons.fury_plush": "Fury Plush",
+  "entity.bookofdragons.gronckle": "Gronckle",
+  "entity.bookofdragons.hiddeous_zippleback": "Hiddeous Zippleback",
+  "entity.bookofdragons.hooligan_drifter": "Hooligan Drifter",
+  "entity.bookofdragons.hooligan_drifter.arrived": "A wandering Hooligan trader has arrived nearby!",
+  "entity.bookofdragons.monstrousnightmare": "Monstrous Nightmare",
+  "entity.bookofdragons.nightfury": "Night Fury",
+  "entity.bookofdragons.nightmare_plush": "Nightmare Plush",
+  "entity.bookofdragons.sheep_plush": "Sheep Plush",
+  "entity.bookofdragons.skrill": "Skrill",
+  "entity.bookofdragons.speed_stinger": "Speed Stinger",
+  "entity.bookofdragons.spike_projectile": "Spike",
+  "entity.bookofdragons.steak_plush": "Steak Plush",
+  "entity.bookofdragons.terrible_terror": "Terrible Terror",
+  "entity.bookofdragons.terror_plush": "Terror Plush",
+  "entity.bookofdragons.whispering_death": "Whispering Death",
+  "entity.minecraft.villager.bookofdragons.hooligan": "Hooligan Villager",
+  "item.bookofdragons.ball_plush": "Ball Plush",
+  "item.bookofdragons.ball_plush.desc": "A soft, bouncy ball.",
+  "item.bookofdragons.barrens_roost_map": "Barrens Roost Map",
+  "item.bookofdragons.barrens_roost_map.roost": "Barrens Roost",
+  "item.bookofdragons.book_of_dragons": "Book of Dragons",
+  "item.bookofdragons.book_of_dragons.tooltip": "In your hands you hold the ultimate source of information on dragons!",
+  "item.bookofdragons.book_of_dragons.tooltip.shift_use": "Shift+Right-click a tamed dragon to view its details",
+  "item.bookofdragons.cave_roost_map": "Cave Roost Map",
+  "item.bookofdragons.cave_roost_map.roost": "Cave Roost",
+  "item.bookofdragons.cliff_roost_map": "Cliff Roost Map",
+  "item.bookofdragons.cliff_roost_map.roost": "Cliff Roost",
+  "item.bookofdragons.deadly_nadder_egg": "Deadly Nadder Egg",
+  "item.bookofdragons.deadlynadder_scales": "Deadly Nadder Scales",
+  "item.bookofdragons.deadlynadder_spawn_egg": "Deadly Nadder Spawn Egg",
+  "item.bookofdragons.debug_tame_stick": "Debug Tame Stick",
+  "item.bookofdragons.dragon_egg.fresh": "Unincubated",
+  "item.bookofdragons.dragon_egg.has_data": "Place to continue incubation",
+  "item.bookofdragons.dragon_egg.progress": "Hatching Progress: %s%%",
+  "item.bookofdragons.dragon_egg.tamed_lineage": "From Tamed Parents",
+  "item.bookofdragons.dragon_egg.type": "Dragon: %s",
+  "item.bookofdragons.dragon_whistle": "Dragon Whistle",
+  "item.bookofdragons.dragon_whistle.already_bound": "Unbind first to bind a new dragon",
+  "item.bookofdragons.dragon_whistle.bound": "Bound whistle to %s",
+  "item.bookofdragons.dragon_whistle.carrying": "%s is carrying someone",
+  "item.bookofdragons.dragon_whistle.down": "%s is too hurt to answer the whistle",
+  "item.bookofdragons.dragon_whistle.dragon_not_found": "Your dragon could not be found",
+  "item.bookofdragons.dragon_whistle.lost_trail": "%s did not answer from where it was last seen",
+  "item.bookofdragons.dragon_whistle.none_stored": "No dragon of yours is kept in a whistle",
+  "item.bookofdragons.dragon_whistle.not_outside": "The whistle only works outside in the Overworld",
+  "item.bookofdragons.dragon_whistle.not_owner": "You can only bind dragons you own!",
+  "item.bookofdragons.dragon_whistle.not_yours": "That dragon is no longer yours",
+  "item.bookofdragons.dragon_whistle.other_world": "%s is in another world",
+  "item.bookofdragons.dragon_whistle.out_of_reach": "%s is too far away to hear the whistle",
+  "item.bookofdragons.dragon_whistle.reaching": "%s hears you from far away...",
+  "item.bookofdragons.dragon_whistle.summoning": "Summoning %s...",
+  "item.bookofdragons.dragon_whistle.tooltip.bound": "Bound to: %s",
+  "item.bookofdragons.dragon_whistle.tooltip.shift_unbind": "Shift+Right-click to unbind",
+  "item.bookofdragons.dragon_whistle.tooltip.unbound": "Right-click a tamed dragon to bind",
+  "item.bookofdragons.dragon_whistle.unbound": "Unbound whistle",
+  "item.bookofdragons.fireproof_scalemail": "Fireproof Scalemail",
+  "item.bookofdragons.fireproof_scalemail.crafting_hint": "Can be used in high-tier crafting recipes",
+  "item.bookofdragons.fireproof_scalemail.description": "Advanced fireproof material woven from dragon scales",
+  "item.bookofdragons.fireproof_scalemail.properties": "Immune to fire and lava damage",
+  "item.bookofdragons.fireproof_scales.crafting_hint": "Used in advanced dragon equipment",
+  "item.bookofdragons.fireproof_scales.description": "Resistant to fire and lava",
+  "item.bookofdragons.fireproof_scales.dragon_type": "From: %s",
+  "item.bookofdragons.fish_plush": "Fish Plush",
+  "item.bookofdragons.fish_plush.desc": "A stuffed fish.",
+  "item.bookofdragons.fury_plush": "Fury Plush",
+  "item.bookofdragons.fury_plush.desc": "A stuffed Night Fury. Can be dyed.",
+  "item.bookofdragons.glade_roost_map": "Glade Roost Map",
+  "item.bookofdragons.glade_roost_map.roost": "Glade Roost",
+  "item.bookofdragons.gronckle_egg": "Gronckle Egg",
+  "item.bookofdragons.gronckle_iron": "Gronckle Iron",
+  "item.bookofdragons.gronckle_scales": "Gronckle Scales",
+  "item.bookofdragons.gronckle_spawn_egg": "Gronckle Spawn Egg",
+  "item.bookofdragons.hiddeous_zippleback_egg": "Hideous Zippleback Egg",
+  "item.bookofdragons.hiddeous_zippleback_spawn_egg": "Hideous Zippleback Spawn Egg",
+  "item.bookofdragons.hiddeouszippleback_scales": "Hideous Zippleback Scales",
+  "item.bookofdragons.monstrous_nightmare_egg": "Monstrous Nightmare Egg",
+  "item.bookofdragons.monstrousnightmare_scales": "Monstrous Nightmare Scales",
+  "item.bookofdragons.monstrousnightmare_spawn_egg": "Monstrous Nightmare Spawn Egg",
+  "item.bookofdragons.nightfury_egg": "Night Fury Egg",
+  "item.bookofdragons.nightfury_scales": "Night Fury Scales",
+  "item.bookofdragons.nightfury_spawn_egg": "Night Fury Spawn Egg",
+  "item.bookofdragons.nightmare_plush": "Nightmare Plush",
+  "item.bookofdragons.nightmare_plush.desc": "A stuffed Monstrous Nightmare. Can be dyed.",
+  "item.bookofdragons.placeable_scales.placement_hint": "Right-click to place as decoration",
+  "item.bookofdragons.rattlestaff": "Rattle-Staff",
+  "item.bookofdragons.rattlestaff.all_unbound": "Unbound all %s dragons from this staff.",
+  "item.bookofdragons.rattlestaff.attack": "Set %s dragons on %s.",
+  "item.bookofdragons.rattlestaff.bindings_count": "%s dragons bound to this staff.",
+  "item.bookofdragons.rattlestaff.bound": "%s has been bound to this staff.",
+  "item.bookofdragons.rattlestaff.command_all": "%s dragons are now %s.",
+  "item.bookofdragons.rattlestaff.move_and_sit": "%s dragons moving to sit.",
+  "item.bookofdragons.rattlestaff.move_to": "%s dragons moving to position.",
+  "item.bookofdragons.rattlestaff.no_bindings": "No dragons bound. Shift+Right-click a dragon to bind.",
+  "item.bookofdragons.rattlestaff.no_bound_dragons_near": "No bound dragons nearby.",
+  "item.bookofdragons.rattlestaff.no_dragons_near": "No owned dragons nearby.",
+  "item.bookofdragons.rattlestaff.not_owner": "This is not your dragon.",
+  "item.bookofdragons.rattlestaff.refused": "(%s ignored you)",
+  "item.bookofdragons.rattlestaff.stand_down": "Called %s dragons off %s.",
+  "item.bookofdragons.rattlestaff.tooltip.all_dragons": "Controls all owned dragons",
+  "item.bookofdragons.rattlestaff.tooltip.bound_count": "Bound to %s dragon(s)",
+  "item.bookofdragons.rattlestaff.tooltip.hold_shift": "Hold Shift for details",
+  "item.bookofdragons.rattlestaff.tooltip.shift_bind": "Shift+Right-click a dragon to bind",
+  "item.bookofdragons.rattlestaff.tooltip.unloaded": "(Unloaded: %s)",
+  "item.bookofdragons.rattlestaff.tooltip.usage_click": "Click: Follow / Move / Stand Down",
+  "item.bookofdragons.rattlestaff.tooltip.usage_hold": "Hold: Sit / Attack Target",
+  "item.bookofdragons.rattlestaff.unbound": "%s has been unbound from this staff.",
+  "item.bookofdragons.roost_map.fail": "No roost found within the search radius!",
+  "item.bookofdragons.roost_map.instruction": "Right-click to locate the roost",
+  "item.bookofdragons.roost_map.tooltip": "Points to a %s",
+  "item.bookofdragons.sheep_plush": "Sheep Plush",
+  "item.bookofdragons.sheep_plush.desc": "A stuffed sheep. Can be dyed.",
+  "item.bookofdragons.skrill_egg": "Skrill Egg",
+  "item.bookofdragons.skrill_scales": "Skrill Scales",
+  "item.bookofdragons.skrill_spawn_egg": "Skrill Spawn Egg",
+  "item.bookofdragons.speed_stinger_egg": "Speed Stinger Egg",
+  "item.bookofdragons.speed_stinger_scales": "Speed Stinger Scales",
+  "item.bookofdragons.speed_stinger_spawn_egg": "Speed Stinger Spawn Egg",
+  "item.bookofdragons.steak_plush": "Steak Plush",
+  "item.bookofdragons.steak_plush.desc": "A stuffed steak.",
+  "item.bookofdragons.strike_roost_map": "Strike Roost Map",
+  "item.bookofdragons.strike_roost_map.roost": "Strike Roost",
+  "item.bookofdragons.terrible_terror_egg": "Terrible Terror Egg",
+  "item.bookofdragons.terrible_terror_scales": "Terrible Terror Scales",
+  "item.bookofdragons.terrible_terror_spawn_egg": "Terrible Terror Spawn Egg",
+  "item.bookofdragons.terror_plush": "Terror Plush",
+  "item.bookofdragons.terror_plush.desc": "A stuffed Terrible Terror. Can be dyed.",
+  "item.bookofdragons.wetland_roost_map": "Wetland Roost Map",
+  "item.bookofdragons.wetland_roost_map.roost": "Wetland Roost",
+  "item.bookofdragons.whispering_death_egg": "Whispering Death Egg",
+  "item.bookofdragons.whispering_death_spawn_egg": "Whispering Death Spawn Egg",
+  "item.bookofdragons.whisperingdeath_scales": "Whispering Death Scales"
+ }
+}

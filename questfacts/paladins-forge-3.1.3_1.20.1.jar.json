@@ -1,0 +1,3128 @@
+{
+ "jar": "paladins-forge-3.1.3+1.20.1.jar",
+ "namespaces": [
+  "c",
+  "merchantmarkers",
+  "minecraft",
+  "paladins",
+  "rpg_series",
+  "spell_engine"
+ ],
+ "advancements": [
+  {
+   "id": "paladins:recipes/combat/acolyte_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:string",
+    "recipe=paladins:acolyte_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:acolyte_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/crusader_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:crusader_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:crusader_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/crusader_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:crusader_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:crusader_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/crusader_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:crusader_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:crusader_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/crusader_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:crusader_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:crusader_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/diamond_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=paladins:diamond_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:diamond_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/diamond_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=paladins:diamond_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:diamond_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/diamond_holy_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=paladins:diamond_holy_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:diamond_holy_staff"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/diamond_holy_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=paladins:diamond_holy_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:diamond_holy_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/diamond_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=paladins:diamond_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:diamond_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/diamond_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:diamond",
+    "recipe=paladins:diamond_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:diamond_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/golden_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:golden_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:golden_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/golden_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:golden_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:golden_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/golden_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:golden_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:golden_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/golden_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:golden_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:golden_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/holy_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:holy_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:holy_staff"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/holy_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:holy_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:holy_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/iron_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=paladins:iron_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:iron_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/iron_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=paladins:iron_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:iron_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/iron_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=paladins:iron_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:iron_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/iron_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=paladins:iron_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:iron_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_claymore_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_claymore_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_claymore_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_crusader_armor_chest_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_crusader_armor_chest_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_crusader_armor_chest_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_crusader_armor_feet_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_crusader_armor_feet_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_crusader_armor_feet_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_crusader_armor_head_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_crusader_armor_head_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_crusader_armor_head_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_crusader_armor_legs_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_crusader_armor_legs_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_crusader_armor_legs_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_great_hammer_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_great_hammer_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_great_hammer_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_holy_staff_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_holy_staff_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_holy_staff_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_holy_wand_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_holy_wand_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_holy_wand_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_kite_shield_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_kite_shield_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_kite_shield_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_mace_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_mace_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_mace_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_prior_robe_chest_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_prior_robe_chest_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_prior_robe_chest_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_prior_robe_feet_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_prior_robe_feet_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_prior_robe_feet_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_prior_robe_head_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_prior_robe_head_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_prior_robe_head_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/netherite_prior_robe_legs_smithing",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:netherite_ingot",
+    "recipe=minecraft:netherite_prior_robe_legs_smithing"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_prior_robe_legs_smithing"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/paladin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:copper_ingot",
+    "recipe=paladins:paladin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:paladin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/paladin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:copper_ingot",
+    "recipe=paladins:paladin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:paladin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/paladin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:copper_ingot",
+    "recipe=paladins:paladin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:paladin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/paladin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:copper_ingot",
+    "recipe=paladins:paladin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:paladin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/priest_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:chain",
+    "recipe=paladins:priest_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:priest_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/priest_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:chain",
+    "recipe=paladins:priest_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:priest_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/priest_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:chain",
+    "recipe=paladins:priest_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:priest_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/priest_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:chain",
+    "recipe=paladins:priest_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:priest_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/prior_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:prior_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:prior_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/prior_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=paladins:prior_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:prior_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/prior_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:prior_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:prior_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/prior_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:prior_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:prior_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/stone_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:cobblestone",
+    "recipe=paladins:stone_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:stone_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/stone_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:cobblestone",
+    "recipe=paladins:stone_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:stone_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/combat/wooden_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:oak_log",
+    "recipe=paladins:wooden_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:wooden_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_crusader_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_chest",
+    "recipe=minecraft:gold_nugget_from_blasting_crusader_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_crusader_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_crusader_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_feet",
+    "recipe=minecraft:gold_nugget_from_blasting_crusader_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_crusader_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_crusader_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_head",
+    "recipe=minecraft:gold_nugget_from_blasting_crusader_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_crusader_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_crusader_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_legs",
+    "recipe=minecraft:gold_nugget_from_blasting_crusader_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_crusader_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_golden_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_claymore",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_golden_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_great_hammer",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_golden_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_kite_shield",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_golden_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_mace",
+    "recipe=minecraft:gold_nugget_from_blasting_golden_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_golden_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_holy_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:holy_staff",
+    "recipe=minecraft:gold_nugget_from_blasting_holy_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_holy_staff"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_holy_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:holy_wand",
+    "recipe=minecraft:gold_nugget_from_blasting_holy_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_holy_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_prior_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_chest",
+    "recipe=minecraft:gold_nugget_from_blasting_prior_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_prior_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_prior_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_feet",
+    "recipe=minecraft:gold_nugget_from_blasting_prior_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_prior_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_prior_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_head",
+    "recipe=minecraft:gold_nugget_from_blasting_prior_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_prior_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_blasting_prior_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_legs",
+    "recipe=minecraft:gold_nugget_from_blasting_prior_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_blasting_prior_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_crusader_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_chest",
+    "recipe=minecraft:gold_nugget_from_smelting_crusader_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_crusader_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_crusader_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_feet",
+    "recipe=minecraft:gold_nugget_from_smelting_crusader_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_crusader_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_crusader_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_head",
+    "recipe=minecraft:gold_nugget_from_smelting_crusader_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_crusader_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_crusader_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:crusader_armor_legs",
+    "recipe=minecraft:gold_nugget_from_smelting_crusader_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_crusader_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_golden_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_claymore",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_golden_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_great_hammer",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_golden_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_kite_shield",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_golden_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:golden_mace",
+    "recipe=minecraft:gold_nugget_from_smelting_golden_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_golden_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_holy_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:holy_staff",
+    "recipe=minecraft:gold_nugget_from_smelting_holy_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_holy_staff"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_holy_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:holy_wand",
+    "recipe=minecraft:gold_nugget_from_smelting_holy_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_holy_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_prior_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_chest",
+    "recipe=minecraft:gold_nugget_from_smelting_prior_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_prior_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_prior_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_feet",
+    "recipe=minecraft:gold_nugget_from_smelting_prior_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_prior_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_prior_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_head",
+    "recipe=minecraft:gold_nugget_from_smelting_prior_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_prior_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/gold_nugget_from_smelting_prior_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:prior_robe_legs",
+    "recipe=minecraft:gold_nugget_from_smelting_prior_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:gold_nugget_from_smelting_prior_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_iron_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_claymore",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_iron_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_great_hammer",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_iron_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_kite_shield",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_iron_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_mace",
+    "recipe=minecraft:iron_nugget_from_blasting_iron_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_iron_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_paladin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_chest",
+    "recipe=minecraft:iron_nugget_from_blasting_paladin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_paladin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_paladin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_feet",
+    "recipe=minecraft:iron_nugget_from_blasting_paladin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_paladin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_paladin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_head",
+    "recipe=minecraft:iron_nugget_from_blasting_paladin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_paladin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_paladin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_legs",
+    "recipe=minecraft:iron_nugget_from_blasting_paladin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_paladin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_priest_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_chest",
+    "recipe=minecraft:iron_nugget_from_blasting_priest_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_priest_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_priest_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_feet",
+    "recipe=minecraft:iron_nugget_from_blasting_priest_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_priest_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_priest_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_head",
+    "recipe=minecraft:iron_nugget_from_blasting_priest_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_priest_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_blasting_priest_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_legs",
+    "recipe=minecraft:iron_nugget_from_blasting_priest_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_blasting_priest_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_iron_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_claymore",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_iron_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_great_hammer",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_iron_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_kite_shield",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_iron_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:iron_mace",
+    "recipe=minecraft:iron_nugget_from_smelting_iron_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_iron_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_paladin_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_chest",
+    "recipe=minecraft:iron_nugget_from_smelting_paladin_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_paladin_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_paladin_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_feet",
+    "recipe=minecraft:iron_nugget_from_smelting_paladin_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_paladin_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_paladin_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_head",
+    "recipe=minecraft:iron_nugget_from_smelting_paladin_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_paladin_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_paladin_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:paladin_armor_legs",
+    "recipe=minecraft:iron_nugget_from_smelting_paladin_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_paladin_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_priest_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_chest",
+    "recipe=minecraft:iron_nugget_from_smelting_priest_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_priest_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_priest_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_feet",
+    "recipe=minecraft:iron_nugget_from_smelting_priest_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_priest_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_priest_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_head",
+    "recipe=minecraft:iron_nugget_from_smelting_priest_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_priest_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/iron_nugget_from_smelting_priest_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:priest_robe_legs",
+    "recipe=minecraft:iron_nugget_from_smelting_priest_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:iron_nugget_from_smelting_priest_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/monk_workbench",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:ghast_tear",
+    "recipe=paladins:monk_workbench"
+   ],
+   "rewards": {
+    "recipes": [
+     "paladins:monk_workbench"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_claymore",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_crusader_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_chest",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_crusader_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_feet",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_crusader_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_head",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_crusader_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_legs",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_crusader_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_great_hammer",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_holy_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_holy_staff",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_holy_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_holy_staff"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_holy_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_holy_wand",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_holy_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_holy_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_kite_shield",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_mace",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_prior_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_chest",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_prior_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_prior_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_prior_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_feet",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_prior_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_prior_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_prior_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_head",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_prior_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_prior_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_blasting_netherite_prior_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_legs",
+    "recipe=minecraft:netherite_scrap_from_blasting_netherite_prior_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_blasting_netherite_prior_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_claymore",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_claymore",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_claymore"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_claymore"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_crusader_armor_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_chest",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_crusader_armor_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_feet",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_crusader_armor_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_head",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_crusader_armor_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_crusader_armor_legs",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_crusader_armor_legs"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_great_hammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_great_hammer",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_great_hammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_great_hammer"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_holy_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_holy_staff",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_holy_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_holy_staff"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_holy_wand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_holy_wand",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_holy_wand"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_holy_wand"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_kite_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_kite_shield",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_kite_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_kite_shield"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_mace",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_mace",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_mace"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_mace"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_prior_robe_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_chest",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_prior_robe_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_prior_robe_chest"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_prior_robe_feet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_feet",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_prior_robe_feet"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_prior_robe_feet"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_prior_robe_head",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_head",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_prior_robe_head"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_prior_robe_head"
+    ]
+   }
+  },
+  {
+   "id": "paladins:recipes/misc/netherite_scrap_from_smelting_netherite_prior_robe_legs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=paladins:netherite_prior_robe_legs",
+    "recipe=minecraft:netherite_scrap_from_smelting_netherite_prior_robe_legs"
+   ],
+   "rewards": {
+    "recipes": [
+     "minecraft:netherite_scrap_from_smelting_netherite_prior_robe_legs"
+    ]
+   }
+  },
+  {
+   "id": "rpg_series:path_choose_paladin",
+   "parent": "rpg_series:classes",
+   "title": "Path of Justice",
+   "description": "Create a Paladin Libram",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_book_creation"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:path_choose_priest",
+   "parent": "rpg_series:classes",
+   "title": "Path of Light",
+   "description": "Create a Holy Book",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_book_creation"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_cast_paladin_book",
+   "parent": "rpg_series:spell_novice_paladin",
+   "title": "Paladin Training",
+   "description": "Cast a spell from the Paladin Libram",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_cast"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_cast_priest_book",
+   "parent": "rpg_series:spell_novice_priest",
+   "title": "Holy Empowerment",
+   "description": "Cast a spell from the Holy Book",
+   "icon": "spell_engine:spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_cast"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_cast_priest_wand",
+   "parent": "rpg_series:path_choose_priest",
+   "title": "Heals for Feels",
+   "description": "Cast a spell with a healing wand",
+   "icon": "paladins:acolyte_wand",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_cast"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_master_paladin",
+   "parent": "rpg_series:spell_novice_paladin",
+   "title": "Judgement Time",
+   "description": "Obtain all Paladin Spells",
+   "icon": "paladins:golden_great_hammer",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_master_priest",
+   "parent": "rpg_series:spell_novice_priest",
+   "title": "Servant of the Ori",
+   "description": "Obtain all Priest Spells",
+   "icon": "paladins:holy_staff",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_novice_paladin",
+   "parent": "rpg_series:path_choose_paladin",
+   "title": "Ardent Defender",
+   "description": "Obtain your first Paladin Spell",
+   "icon": "paladins:iron_mace",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:spell_novice_priest",
+   "parent": "rpg_series:path_choose_priest",
+   "title": "Promise of Ascension",
+   "description": "Obtain your first Priest Spell",
+   "icon": "paladins:holy_wand",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:trade_with_monk",
+   "parent": "rpg_series:misc_items",
+   "title": "Healers Exchange",
+   "description": "Purchase an item from a Monk Villager",
+   "icon": "minecraft:emerald",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:villager_trade"
+   ],
+   "ids": [],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.paladins.monk_workbench": "Monk Workbench",
+  "block.paladins.monk_workbench.hint": "Workbench for Monk Villagers.",
+  "effect.paladins.battle_banner": "Battle Banner",
+  "effect.paladins.battle_banner.description": "Increases attack speed and knockback resistance",
+  "effect.paladins.blessed_strikes": "Blessed Strikes",
+  "effect.paladins.blessed_strikes.description": "Your weapon is charged with holy light, searing enemies you strike",
+  "effect.paladins.divine_protection": "Divine Protection",
+  "effect.paladins.divine_protection.description": "Protects you from the incoming attack",
+  "effect.paladins.judgement": "Stunned",
+  "effect.paladins.judgement.description": "Prevents movement and actions",
+  "effect.paladins.levitate": "Levitate",
+  "effect.paladins.levitate.description": "You drift gently through the air.",
+  "effect.paladins.priest_absorption": "Absorption",
+  "effect.paladins.priest_absorption.description": "Absorbs some damage you would take",
+  "entity.minecraft.villager.monk": "Monk",
+  "entity.minecraft.villager.paladins.monk": "Monk",
+  "entity.paladins.barrier": "Barrier",
+  "entity.paladins.battle_banner": "Battle Banner",
+  "entity.paladins.lightwell": "Lightwell",
+  "item.paladins.acolyte_wand": "Acolyte Wand",
+  "item.paladins.aeternium_claymore": "Aeternium Claymore",
+  "item.paladins.aeternium_great_hammer": "Aeternium Great Hammer",
+  "item.paladins.aeternium_kite_shield": "Aeternium Kite Shield",
+  "item.paladins.aeternium_mace": "Aeternium Mace",
+  "item.paladins.aether_claymore": "Holy Claymore",
+  "item.paladins.aether_great_hammer": "Valkyrie Great Hammer",
+  "item.paladins.aether_holy_staff": "Silver Staff of the Valkyrie",
+  "item.paladins.aether_kite_shield": "Valkyrie Bulwark",
+  "item.paladins.aether_mace": "Sun's Mace",
+  "item.paladins.crusader_armor_chest": "Crusader Chestplate",
+  "item.paladins.crusader_armor_feet": "Crusader Boots",
+  "item.paladins.crusader_armor_head": "Crusader Helmet",
+  "item.paladins.crusader_armor_legs": "Crusader Leggings",
+  "item.paladins.diamond_claymore": "Diamond Claymore",
+  "item.paladins.diamond_great_hammer": "Diamond Great Hammer",
+  "item.paladins.diamond_holy_staff": "Diamond Holy Staff",
+  "item.paladins.diamond_holy_wand": "Diamond Holy Wand",
+  "item.paladins.diamond_kite_shield": "Diamond Kite Shield",
+  "item.paladins.diamond_mace": "Diamond Mace",
+  "item.paladins.golden_claymore": "Golden Claymore",
+  "item.paladins.golden_great_hammer": "Golden Great Hammer",
+  "item.paladins.golden_kite_shield": "Golden Kite Shield",
+  "item.paladins.golden_mace": "Golden Mace",
+  "item.paladins.holy_staff": "Holy Staff",
+  "item.paladins.holy_wand": "Holy Wand",
+  "item.paladins.iron_claymore": "Iron Claymore",
+  "item.paladins.iron_great_hammer": "Iron Great Hammer",
+  "item.paladins.iron_kite_shield": "Iron Kite Shield",
+  "item.paladins.iron_mace": "Iron Mace",
+  "item.paladins.netherite_claymore": "Netherite Claymore",
+  "item.paladins.netherite_crusader_armor_chest": "Netherite Crusader Chestplate",
+  "item.paladins.netherite_crusader_armor_feet": "Netherite Crusader Boots",
+  "item.paladins.netherite_crusader_armor_head": "Netherite Crusader Helmet",
+  "item.paladins.netherite_crusader_armor_legs": "Netherite Crusader Leggings",
+  "item.paladins.netherite_great_hammer": "Netherite Great Hammer",
+  "item.paladins.netherite_holy_staff": "Netherite Holy Staff",
+  "item.paladins.netherite_holy_wand": "Netherite Holy Wand",
+  "item.paladins.netherite_kite_shield": "Netherite Kite Shield",
+  "item.paladins.netherite_mace": "Netherite Mace",
+  "item.paladins.netherite_prior_robe_chest": "Netherite Prior Vestment",
+  "item.paladins.netherite_prior_robe_feet": "Netherite Prior Boots",
+  "item.paladins.netherite_prior_robe_head": "Netherite Prior Collar",
+  "item.paladins.netherite_prior_robe_legs": "Netherite Prior Trousers",
+  "item.paladins.paladin_armor_chest": "Paladin Chestplate",
+  "item.paladins.paladin_armor_feet": "Paladin Boots",
+  "item.paladins.paladin_armor_head": "Paladin Helmet",
+  "item.paladins.paladin_armor_legs": "Paladin Leggings",
+  "item.paladins.priest_robe_chest": "Priest Vestment",
+  "item.paladins.priest_robe_feet": "Priest Boots",
+  "item.paladins.priest_robe_head": "Priest Collar",
+  "item.paladins.priest_robe_legs": "Priest Trousers",
+  "item.paladins.prior_robe_chest": "Prior Vestment",
+  "item.paladins.prior_robe_feet": "Prior Boots",
+  "item.paladins.prior_robe_head": "Prior Collar",
+  "item.paladins.prior_robe_legs": "Prior Trousers",
+  "item.paladins.ruby_claymore": "Ruby Claymore",
+  "item.paladins.ruby_great_hammer": "Ruby Great Hammer",
+  "item.paladins.ruby_holy_staff": "Ruby Holy Staff",
+  "item.paladins.ruby_kite_shield": "Ruby Kite Shield",
+  "item.paladins.ruby_mace": "Ruby Mace",
+  "item.paladins.spell_book/paladin": "Paladin Libram",
+  "item.paladins.spell_book/paladin.spell_binding.description": "Spell Book of Paladins, using weapons and spells to attack enemies and support allies\n- Strengths: Versatile in battle, able to heal, strike, and defend\n- Weaknesses: Limited ranged attacks and mobility\n- Equipment: Heavily armored",
+  "item.paladins.spell_book/priest": "Holy Book",
+  "item.paladins.spell_book/priest.spell_binding.description": "Spell Book of Priests, using holy magic to heal allies and damage enemies\n- Strengths: Supporting and healing allies, destroying undead\n- Weaknesses: Low damage and poor physical defense\n- Equipment: Lightly armored",
+  "item.paladins.spell_scroll/paladin": "Paladin Spell Scroll",
+  "item.paladins.spell_scroll/priest": "Holy Spell Scroll",
+  "item.paladins.stone_claymore": "Stone Claymore",
+  "item.paladins.stone_great_hammer": "Stone Great Hammer",
+  "item.paladins.stone_mace": "Stone Mace",
+  "item.paladins.wooden_great_hammer": "Wooden Great Hammer"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+ "namespaces": [
+  "illagerinvasion",
+  "minecraft",
+  "numismatic-overhaul"
+ ],
+ "advancements": [
+  {
+   "id": "illagerinvasion:recipes/decorations/imbuing_table",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=illagerinvasion:primal_essence",
+    "recipe=illagerinvasion:imbuing_table"
+   ],
+   "rewards": {
+    "recipes": [
+     "illagerinvasion:imbuing_table"
+    ]
+   }
+  },
+  {
+   "id": "illagerinvasion:recipes/misc/hallowed_gem",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=illagerinvasion:illusionary_dust",
+    "items=illagerinvasion:unusual_dust",
+    "recipe=illagerinvasion:hallowed_gem"
+   ],
+   "rewards": {
+    "recipes": [
+     "illagerinvasion:hallowed_gem"
+    ]
+   }
+  },
+  {
+   "id": "illagerinvasion:recipes/misc/platinum_sheet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=illagerinvasion:platinum_chunk",
+    "recipe=illagerinvasion:platinum_sheet"
+   ],
+   "rewards": {
+    "recipes": [
+     "illagerinvasion:platinum_sheet"
+    ]
+   }
+  },
+  {
+   "id": "illagerinvasion:recipes/tools/horn_of_sight",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=illagerinvasion:hallowed_gem",
+    "recipe=illagerinvasion:horn_of_sight"
+   ],
+   "rewards": {
+    "recipes": [
+     "illagerinvasion:horn_of_sight"
+    ]
+   }
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.illagerinvasion.imbuing_table": "Imbuing Table",
+  "block.illagerinvasion.magic_fire": "Magic Fire",
+  "entity.illagerinvasion.alchemist": "Alchemist",
+  "entity.illagerinvasion.archivist": "Archivist",
+  "entity.illagerinvasion.basher": "Basher",
+  "entity.illagerinvasion.firecaller": "Firecaller",
+  "entity.illagerinvasion.inquisitor": "Inquisitor",
+  "entity.illagerinvasion.invoker": "Invoker",
+  "entity.illagerinvasion.marauder": "Marauder",
+  "entity.illagerinvasion.necromancer": "Necromancer",
+  "entity.illagerinvasion.provoker": "Provoker",
+  "entity.illagerinvasion.sorcerer": "Sorcerer",
+  "entity.illagerinvasion.surrendered": "Surrendered",
+  "item.illagerinvasion.alchemist_spawn_egg": "Alchemist Spawn Egg",
+  "item.illagerinvasion.archivist_spawn_egg": "Archivist Spawn Egg",
+  "item.illagerinvasion.basher_spawn_egg": "Basher Spawn Egg",
+  "item.illagerinvasion.firecaller_spawn_egg": "Firecaller Spawn Egg",
+  "item.illagerinvasion.hallowed_gem": "Hallowed Gem",
+  "item.illagerinvasion.horn_of_sight": "Horn of Sight",
+  "item.illagerinvasion.illusionary_dust": "Illusionary Dust",
+  "item.illagerinvasion.illusioner_spawn_egg": "Illusioner Spawn Egg",
+  "item.illagerinvasion.inquisitor_spawn_egg": "Inquisitor Spawn Egg",
+  "item.illagerinvasion.invoker_spawn_egg": "Invoker Spawn Egg",
+  "item.illagerinvasion.lost_candle": "Lost Candle",
+  "item.illagerinvasion.magical_fire_charge": "Magical Fire Charge",
+  "item.illagerinvasion.marauder_spawn_egg": "Marauder Spawn Egg",
+  "item.illagerinvasion.necromancer_spawn_egg": "Necromancer Spawn Egg",
+  "item.illagerinvasion.platinum_chunk": "Platinum Chunk",
+  "item.illagerinvasion.platinum_infused_hatchet": "Platinum Infused Hatchet",
+  "item.illagerinvasion.platinum_sheet": "Platinum Sheet",
+  "item.illagerinvasion.primal_essence": "Primal Essence",
+  "item.illagerinvasion.provoker_spawn_egg": "Provoker Spawn Egg",
+  "item.illagerinvasion.sorcerer_spawn_egg": "Sorcerer Spawn Egg",
+  "item.illagerinvasion.surrendered_spawn_egg": "Surrendered Spawn Egg",
+  "item.illagerinvasion.unusual_dust": "Unusual Dust",
+  "item.minecraft.lingering_potion.effect.berserking": "Lingering Potion of Berserking",
+  "item.minecraft.potion.effect.berserking": "Potion of Berserking",
+  "item.minecraft.splash_potion.effect.berserking": "Splash Potion of Berserking",
+  "item.minecraft.tipped_arrow.effect.berserking": "Arrow of Berserking"
+ }
+}

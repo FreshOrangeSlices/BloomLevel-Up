@@ -1,0 +1,1800 @@
+{
+ "jar": "mythsandlegends-1.0.6.jar",
+ "namespaces": [
+  "c",
+  "curios",
+  "forge",
+  "minecraft",
+  "mythsandlegends",
+  "painting_variant"
+ ],
+ "advancements": [
+  {
+   "id": "mythsandlegends:abyss_stares_back",
+   "parent": "mythsandlegends:root",
+   "title": "The Abyss Stares Back",
+   "description": "You have ventured where light dares not follow.",
+   "icon": "mythsandlegends:abyss_stares_back",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:location"
+   ],
+   "ids": [
+    "biome=mythsandlegends:umbral_wasteland"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:adventure/dawn_of_the_living",
+   "parent": "mythsandlegends:root",
+   "title": "Dawn of the Living",
+   "description": "Survive a Blood Moon until sunrise.",
+   "icon": "mythsandlegends:blood_moon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 100
+   }
+  },
+  {
+   "id": "mythsandlegends:ars_lapidem",
+   "parent": "mythsandlegends:cursed_power",
+   "title": "Ars Lapidem",
+   "description": "Through forbidden rites, you grant motion to stone.",
+   "icon": "mythsandlegends:gargoyle_effigy",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:gargoyle_effigy"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:bound_by_darkness",
+   "parent": "mythsandlegends:bound_soul_ingot",
+   "title": "Bound by Darkness",
+   "description": "Wear the armor that is bound by dark forces.",
+   "icon": "mythsandlegends:ironshade_helmet",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:ironshade_helmet"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:bound_soul_ingot",
+   "parent": "mythsandlegends:cursed_power",
+   "title": "Bound Soul Ingot",
+   "description": "Obtain a powerful ingot.",
+   "icon": "mythsandlegends:bound_soul_ingot",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:bound_soul_ingot"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:cursed_power",
+   "parent": "mythsandlegends:root",
+   "title": "Cursed Power",
+   "description": "Feel the malevolent energy of the Cursed Core.",
+   "icon": "mythsandlegends:cursed_core",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:echo_in_the_frost",
+   "parent": "mythsandlegends:root",
+   "title": "Hunt a Karakondjul",
+   "description": "Defeat the midnight hunter",
+   "icon": "mythsandlegends:karakondjul_horn",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=mythsandlegends:karakondjul"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:forged_by_frost",
+   "parent": "mythsandlegends:howl_of_the_lonely_end",
+   "title": "Forged by Frost",
+   "description": "Craft a weapon infused with the essence of the Amarok.",
+   "icon": "mythsandlegends:glacial_binding",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:glacial_binding"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:fragment_of_power",
+   "parent": "mythsandlegends:root",
+   "title": "Fragment of Power",
+   "description": "Find a sturdy Gargoyle fragment.",
+   "icon": "mythsandlegends:gargoyle_fragment",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:gargoyle_fragment"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:heart_of_fire",
+   "parent": "mythsandlegends:root",
+   "title": "Heart of Fire",
+   "description": "Obtain a heart that burns with an eternal flame.",
+   "icon": "mythsandlegends:fire_heart",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:fire_heart"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:howl_of_the_lonely_end",
+   "parent": "mythsandlegends:root",
+   "title": "Howl of the Lonely End",
+   "description": "You have faced the spirit-wolf that stalks those who wander the snow alone.",
+   "icon": "mythsandlegends:amarok_essence",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=mythsandlegends:amarok"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:master_of_the_blade",
+   "parent": "mythsandlegends:shard_collector",
+   "title": "Master of the Blade",
+   "description": "Craft the mighty Gargoyle Axe",
+   "icon": "mythsandlegends:gargoyle_axe",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:gargoyle_axe"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:payment_collected",
+   "parent": "mythsandlegends:root",
+   "title": "Payment Collected",
+   "description": "Slay an undead using the Copper Coin Sword.",
+   "icon": "mythsandlegends:ancient_copper_coin",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "items=mythsandlegends:copper_coin_sword",
+    "type=#mythsandlegends:undead_mobs"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/bound_soul_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:bound_soul_ingot",
+    "recipe=mythsandlegends:bound_soul_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:bound_soul_block"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/brass_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:brass_ingot",
+    "recipe=mythsandlegends:brass_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:brass_block"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/chiseled_forsaken_stone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:forsaken_stone_brick_slab",
+    "recipe=mythsandlegends:chiseled_forsaken_stone"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:chiseled_forsaken_stone"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/chiseled_umbral_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:umbral_sandstone_slab",
+    "recipe=mythsandlegends:chiseled_umbral_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:chiseled_umbral_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/cursed_core_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:cursed_core_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:cursed_core_block"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/forsaken_stone_brick_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:forsaken_stone_brick",
+    "recipe=mythsandlegends:forsaken_stone_brick_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:forsaken_stone_brick_slab"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/forsaken_stone_brick_wall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:forsaken_stone_brick",
+    "recipe=mythsandlegends:forsaken_stone_brick_wall"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:forsaken_stone_brick_wall"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/infernum_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_ingot",
+    "recipe=mythsandlegends:infernum_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_block"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/karakondjul_pelt_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:karakondjul_pelt",
+    "recipe=mythsandlegends:karakondjul_pelt_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:karakondjul_pelt_block"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/scorched_bone_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:scorched_bone",
+    "recipe=mythsandlegends:scorched_bone_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:scorched_bone_block"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/umbral_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:umbral_sand",
+    "recipe=mythsandlegends:umbral_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:umbral_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/umbral_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:umbral_sandstone",
+    "recipe=mythsandlegends:umbral_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:umbral_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/building_blocks/umbral_sandstone_wall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:umbral_sandstone",
+    "recipe=mythsandlegends:umbral_sandstone_wall"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:umbral_sandstone_wall"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/copper_coin_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:copper_coin_sword"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:copper_coin_sword"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/infernum_warplate_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_ingot",
+    "recipe=mythsandlegends:infernum_warplate_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_warplate_boots"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/infernum_warplate_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_ingot",
+    "recipe=mythsandlegends:infernum_warplate_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_warplate_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/infernum_warplate_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_ingot",
+    "recipe=mythsandlegends:infernum_warplate_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_warplate_helmet"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/infernum_warplate_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_ingot",
+    "recipe=mythsandlegends:infernum_warplate_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_warplate_leggings"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/ironshade_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:bound_soul_ingot",
+    "recipe=mythsandlegends:ironshade_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:ironshade_boots"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/ironshade_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:ironshade_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:ironshade_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/ironshade_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:ironshade_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:ironshade_helmet"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/ironshade_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:ironshade_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:ironshade_leggings"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/maledictum_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_ingot",
+    "recipe=mythsandlegends:maledictum_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:maledictum_shield"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/molten_fist",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:molten_fist"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:molten_fist"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/nightfrost_dagger",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:nightfrost_dagger"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:nightfrost_dagger"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/noctifer_tenebris",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:noctifer_tenebris"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:noctifer_tenebris"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/soulpiercer_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:bound_soul_ingot",
+    "recipe=mythsandlegends:soulpiercer_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:soulpiercer_boots"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/soulpiercer_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:soulpiercer_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:soulpiercer_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/soulpiercer_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:soulpiercer_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:soulpiercer_helmet"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/soulpiercer_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core",
+    "recipe=mythsandlegends:soulpiercer_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:soulpiercer_leggings"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/stony_shield",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:stony_shield"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:stony_shield"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/winter_stalker_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:winter_stalker_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:winter_stalker_boots"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/winter_stalker_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:winter_stalker_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:winter_stalker_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/winter_stalker_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:winter_stalker_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:winter_stalker_helmet"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/combat/winter_stalker_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:winter_stalker_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:winter_stalker_leggings"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/decorations/candle_wall_sconce",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=mythsandlegends:candle_wall_sconce",
+    "tag=minecraft:candles"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:candle_wall_sconce"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/decorations/wooden_barricade",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=mythsandlegends:wooden_barricade",
+    "tag=minecraft:logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:wooden_barricade"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/altar_of_the_dead",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:skeleton_skull",
+    "items=mythsandlegends:altar_of_the_dead",
+    "recipe=mythsandlegends:altar_of_the_dead"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:altar_of_the_dead"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/antique_emblem",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:antique_emblem",
+    "recipe=mythsandlegends:antique_emblem"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:antique_emblem"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/bound_soul_ingot",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:bound_soul_block",
+    "recipe=mythsandlegends:bound_soul_ingot"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:bound_soul_ingot"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/bound_soul_ingot_from_blasting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:possessed_armor_fragment",
+    "recipe=mythsandlegends:bound_soul_ingot_from_blasting"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:bound_soul_ingot_from_blasting"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/brass_ingot",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:brass_block",
+    "recipe=mythsandlegends:brass_ingot"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:brass_ingot"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/cursed_core",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:cursed_core_block",
+    "recipe=mythsandlegends:cursed_core"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:cursed_core"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/ethereal_flame_from_blasting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:soul_lantern",
+    "recipe=mythsandlegends:ethereal_flame_from_blasting"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:ethereal_flame_from_blasting"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/infernum_ingot",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_block",
+    "recipe=mythsandlegends:infernum_ingot"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_ingot"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/infernum_upgrade_smithing_template",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:infernum_upgrade_smithing_template",
+    "recipe=mythsandlegends:infernum_upgrade_smithing_template"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:infernum_upgrade_smithing_template"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/karakondjul_pelt",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:karakondjul_pelt_block",
+    "recipe=mythsandlegends:karakondjul_pelt"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:karakondjul_pelt"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/necklace_of_torngarsuk",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:necklace_of_torngarsuk"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:necklace_of_torngarsuk"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/refined_tenebrite",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:refined_tenebrite"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:refined_tenebrite"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/scorched_bone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=mythsandlegends:scorched_bone_block",
+    "recipe=mythsandlegends:scorched_bone"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:scorched_bone"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/soulbinder_amulet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "items=minecraft:gold_nugget",
+    "items=mythsandlegends:ethereal_flame",
+    "recipe=mythsandlegends:soulbinder_amulet"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:soulbinder_amulet"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/misc/stone_sanctum_table",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:stone_sanctum_table"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:stone_sanctum_table"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/gargoyle_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:gargoyle_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:gargoyle_axe"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/higa_amulet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:higa_amulet"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:higa_amulet"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/nightfrost_axe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:nightfrost_axe"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:nightfrost_axe"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/nightfrost_hoe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:nightfrost_hoe"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:nightfrost_hoe"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/nightfrost_pickaxe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:nightfrost_pickaxe"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:nightfrost_pickaxe"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/nightfrost_shovel",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:nightfrost_shovel"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:nightfrost_shovel"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:recipes/tools/spirit_suppressing_bell",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:air",
+    "recipe=mythsandlegends:spirit_suppressing_bell"
+   ],
+   "rewards": {
+    "recipes": [
+     "mythsandlegends:spirit_suppressing_bell"
+    ]
+   }
+  },
+  {
+   "id": "mythsandlegends:relic_of_the_forge_god",
+   "parent": "mythsandlegends:root",
+   "title": "Relic of the Forge God",
+   "description": "You have found the legendary ring of Svarog, forged in the primoridial flames.",
+   "icon": "mythsandlegends:svarogs_ring",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:svarogs_ring"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:rider_of_the_shadows",
+   "parent": "mythsandlegends:abyss_stares_back",
+   "title": "Rider of the Shadows",
+   "description": "You dared to summon the Black Charro and survived to tell the tale.",
+   "icon": "mythsandlegends:soulbinder_amulet",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=mythsandlegends:black_charro"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:root",
+   "parent": "",
+   "title": "Myths & Legends",
+   "description": "Legends Awaken! \nBegin your journey through Myths & Legends.",
+   "icon": "mythsandlegends:antique_emblem",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tick"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:shard_collector",
+   "parent": "mythsandlegends:root",
+   "title": "Shard Collector",
+   "description": "Obtain your first Gargoyle shard.",
+   "icon": "mythsandlegends:gargoyle_shard",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:gargoyle_shard"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:the_stonewall",
+   "parent": "mythsandlegends:fragment_of_power",
+   "title": "The Stonewall",
+   "description": "Forge the impenetrable Stony Shield.",
+   "icon": "mythsandlegends:stony_shield",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:stony_shield"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mythsandlegends:whisper_of_the_northern_spirit",
+   "parent": "mythsandlegends:howl_of_the_lonely_end",
+   "title": "Whisper of the Northern Spirit",
+   "description": "You forged a talisman that calls upon the guidance of the spirit of the hunt and the winds.",
+   "icon": "mythsandlegends:necklace_of_torngarsuk",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=mythsandlegends:necklace_of_torngarsuk"
+   ],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "biome.mythsandlegends.umbral_wasteland": "Umbral Wasteland",
+  "block.mythsandlegends.altar_of_the_dead": "Altar of the Dead",
+  "block.mythsandlegends.stone_sanctum_table": "Stone Sanctum Table",
+  "block.mythsandlegends.tombstone": "Tombstone",
+  "block.mythsandlegends.infernum_block": "Block of Infernum",
+  "block.mythsandlegends.bloodstone_brick": "Bloodstone Bricks",
+  "block.mythsandlegends.bloodstone_brick_stairs": "Bloodstone Bricks Stairs",
+  "block.mythsandlegends.bloodstone_brick_slab": "Bloodstone Bricks Slab",
+  "block.mythsandlegends.bloodstone_brick_wall": "Bloodstone Bricks Wall",
+  "block.mythsandlegends.pointed_bloodstone": "Pointed Bloodstone",
+  "block.mythsandlegends.polished_bloodstone": "Polished Bloodstone",
+  "block.mythsandlegends.polished_bloodstone_stairs": "Polished Bloodstone Stairs",
+  "block.mythsandlegends.polished_bloodstone_slab": "Polished Bloodstone Slab",
+  "block.mythsandlegends.marigold": "Marigold",
+  "block.mythsandlegends.brass_block": "Block of Brass",
+  "block.mythsandlegends.brass_bars": "Brass Bars",
+  "block.mythsandlegends.brass_grate": "Brass Grate",
+  "block.mythsandlegends.cut_brass": "Cut Brass",
+  "block.mythsandlegends.brass_chute": "Brass Chute",
+  "block.mythsandlegends.brass_stairs": "Brass Stairs",
+  "block.mythsandlegends.brass_slab": "Brass Slab",
+  "block.mythsandlegends.brass_wall": "Brass Wall",
+  "block.mythsandlegends.bound_soul_block": "Block of Bound Soul",
+  "block.mythsandlegends.bound_soul_stairs": "Bound Soul Stairs",
+  "block.mythsandlegends.bound_soul_slab": "Bound Soul Slab",
+  "block.mythsandlegends.cursed_core_block": "Cursed Core Block",
+  "block.mythsandlegends.scorched_bone_block": "Scorched Bone Block",
+  "block.mythsandlegends.karakondjul_pelt_block": "Karakondjul Pelt Block",
+  "block.mythsandlegends.karakondjul_pelt_carpet": "Karakondjul Pelt Carpet",
+  "block.mythsandlegends.umbral_sand": "Umbral Sand",
+  "block.mythsandlegends.umbral_sandstone": "Umbral Sandstone",
+  "block.mythsandlegends.umbral_sandstone_stairs": "Umbral Sandstone Stairs",
+  "block.mythsandlegends.umbral_sandstone_slab": "Umbral Sandstone Slab",
+  "block.mythsandlegends.umbral_sandstone_wall": "Umbral Sandstone Wall",
+  "block.mythsandlegends.chiseled_umbral_sandstone": "Chiseled Umbral Sandstone",
+  "block.mythsandlegends.cut_umbral_sandstone": "Cut Umbral Sandstone",
+  "block.mythsandlegends.cut_umbral_sandstone_slab": "Cut Umbral Sandstone Slab",
+  "block.mythsandlegends.smooth_umbral_sandstone": "Smooth Umbral Sandstone",
+  "block.mythsandlegends.smooth_umbral_sandstone_stairs": "Smooth Umbral Sandstone Stairs",
+  "block.mythsandlegends.smooth_umbral_sandstone_slab": "Smooth Umbral Sandstone Slab",
+  "block.mythsandlegends.abyss_bush": "Abyss Bush",
+  "block.mythsandlegends.cast_shroom": "Sticky Shroom",
+  "block.mythsandlegends.mourning_thorns": "Mourning Thorns",
+  "block.mythsandlegends.lantern_of_hecate": "Lantern of Hecate",
+  "block.mythsandlegends.forsaken_stone": "Forsaken Stone",
+  "block.mythsandlegends.chiseled_forsaken_stone": "Chiseled Forsaken Stone",
+  "block.mythsandlegends.forsaken_stone_brick": "Forsaken Stone Brick",
+  "block.mythsandlegends.forsaken_stone_brick_stairs": "Forsaken Stone Brick Stairs",
+  "block.mythsandlegends.forsaken_stone_brick_slab": "Forsaken Stone Brick Slab",
+  "block.mythsandlegends.forsaken_stone_brick_wall": "Forsaken Stone Brick Wall",
+  "block.mythsandlegends.wooden_barricade": "Wooden Barricade",
+  "block.mythsandlegends.steam_vent": "Steam Vent",
+  "block.mythsandlegends.candle_wall_sconce": "Candle Wall Sconce",
+  "effect.mythsandlegends.petrified": "Petrified",
+  "effect.mythsandlegends.spirit_suppression": "Spirit Suppression",
+  "entity.mythsandlegends.imp": "Imp",
+  "entity.mythsandlegends.possessed_armor": "Possessed Armor Knight",
+  "entity.mythsandlegends.possessed_armor_archer": "Possessed Armor Archer",
+  "entity.mythsandlegends.possessed_armor_lancer": "Possessed Armor Lancer",
+  "entity.mythsandlegends.possessed_armor_inquisitor": "Possessed Armor Inquisitor",
+  "entity.mythsandlegends.imp_clone": "Imp Clone",
+  "entity.mythsandlegends.gargoyle": "Gargoyle",
+  "entity.mythsandlegends.black_charro": "The Black Charro",
+  "entity.mythsandlegends.umbral_orb": "Umbral Orb",
+  "entity.mythsandlegends.shadow_horse": "Shadow Horse",
+  "entity.mythsandlegends.condemned": "Condemned Soul",
+  "entity.mythsandlegends.lampad": "Lampad",
+  "entity.mythsandlegends.warborn_aegis": "Warborn Aegis",
+  "entity.mythsandlegends.molten_thorn": "Molten Thorn",
+  "entity.mythsandlegends.abaddon": "Abaddon",
+  "entity.mythsandlegends.scorched_sentinel": "Scorched Sentinel",
+  "entity.mythsandlegends.alp": "Alp",
+  "entity.mythsandlegends.karakondjul": "Karakondjul",
+  "entity.mythsandlegends.candle_keeper": "Candle Keeper",
+  "entity.mythsandlegends.amarok": "Amarok",
+  "entity.mythsandlegends.frost_spike": "Frost Spike",
+  "entity.mythsandlegends.molten_ball": "Molten Rock",
+  "entity.mythsandlegends.cogwork_construct": "Cogwork Construct",
+  "entity.mythsandlegends.cogling": "Cogling",
+  "entity.mythsandlegends.gearbound_headsman": "Gearbound Headsman",
+  "entity.mythsandlegends.jiangshi": "Jiangshi",
+  "entity.mythsandlegends.eidolon": "Eidolon",
+  "entity.mythsandlegends.shade_jelly": "Shade Jelly",
+  "entity.mythsandlegends.umbral_hand": "Umbral Hand",
+  "entity.mythsandlegends.chronicler": "The Chronicler",
+  "entity.mythsandlegends.omecuaime": "Omecuaime",
+  "entity.mythsandlegends.draugr": "Draugr",
+  "item.mythsandlegends.imp_spawn_egg": "Imp Spawn Egg",
+  "item.mythsandlegends.fire_heart": "Fire Heart",
+  "item.mythsandlegends.possessed_armor_spawn_egg": "Possessed Armor Spawn Egg",
+  "item.mythsandlegends.possessed_armor_archer_spawn_egg": "Possessed Armor Archer Spawn Egg",
+  "item.mythsandlegends.possessed_armor_lancer_spawn_egg": "Possessed Armor Lancer Spawn Egg",
+  "item.mythsandlegends.possessed_armor_inquisitor_spawn_egg": "Possessed Armor Inquisitor Spawn Egg",
+  "item.mythsandlegends.cursed_core": "Cursed Core",
+  "item.mythsandlegends.bound_soul_ingot": "Bound Soul Ingot",
+  "item.mythsandlegends.possessed_armor_fragment": "Possessed Armor Fragment",
+  "item.mythsandlegends.ironshade_helmet": "Ironshade Helmet",
+  "item.mythsandlegends.ironshade_chestplate": "Ironshade Chestplate",
+  "item.mythsandlegends.ironshade_leggings": "Ironshade Leggings",
+  "item.mythsandlegends.ironshade_boots": "Ironshade Boots",
+  "item.mythsandlegends.soulpiercer_helmet": "Soulpiercer Helmet",
+  "item.mythsandlegends.soulpiercer_chestplate": "Soulpiercer Chestplate",
+  "item.mythsandlegends.soulpiercer_leggings": "Soulpiercer Leggings",
+  "item.mythsandlegends.soulpiercer_boots": "Soulpiercer Boots",
+  "item.mythsandlegends.antique_emblem": "Antique Emblem",
+  "item.mythsandlegends.gargoyle_spawn_egg": "Gargoyle Spawn Egg",
+  "item.mythsandlegends.gargoyle_fragment": "Gargoyle Fragment",
+  "item.mythsandlegends.gargoyle_shard": "Gargoyle Shard",
+  "item.mythsandlegends.stony_shield": "Stony Shield",
+  "item.mythsandlegends.gargoyle_axe": "Gargoyle Axe",
+  "item.mythsandlegends.gargoyle_effigy": "Gargoyle Effigy",
+  "item.mythsandlegends.noctifer_tenebris": "Noctifer Tenebris",
+  "item.mythsandlegends.black_charro_spawn_egg": "Black Charro Spawn Egg",
+  "item.mythsandlegends.condemned_spawn_egg": "Condemned Soul Spawn Egg",
+  "item.mythsandlegends.ethereal_flame": "Ethereal Flame",
+  "item.mythsandlegends.soulbinder_amulet": "Soulbinder Amulet",
+  "item.mythsandlegends.lampad_spawn_egg": "Lampad Spawn Egg",
+  "item.mythsandlegends.warborn_aegis_spawn_egg": "Warborn Aegis Spawn Egg",
+  "item.mythsandlegends.infernum_upgrade_smithing_template": "§cSmithing Template",
+  "item.mythsandlegends.infernum_ingot": "Infernum Ingot",
+  "item.mythsandlegends.infernum_warplate_helmet": "Infernum Warplate Helmet",
+  "item.mythsandlegends.infernum_warplate_chestplate": "Infernum Warplate Chestplate",
+  "item.mythsandlegends.infernum_warplate_leggings": "Infernum Warplate Leggings",
+  "item.mythsandlegends.infernum_warplate_boots": "Infernum Warplate Boots",
+  "item.mythsandlegends.maledictum_shield": "Maledictum Shield",
+  "item.mythsandlegends.svarogs_ring": "Svarog's Ring",
+  "item.mythsandlegends.abaddon_spawn_egg": "Abaddon Spawn Egg",
+  "item.mythsandlegends.core_of_abaddon": "Core of Abaddon",
+  "item.mythsandlegends.molten_fist": "Molten Fist",
+  "item.mythsandlegends.scorched_sentinel_spawn_egg": "Scorched Sentinel Spawn Egg",
+  "item.mythsandlegends.scorched_skin": "Scorched Skin",
+  "item.mythsandlegends.scorched_bone": "Scorched Bone",
+  "item.mythsandlegends.alp_spawn_egg": "Alp Spawn Egg",
+  "item.mythsandlegends.karakondjul_spawn_egg": "Karakondjul Spawn Egg",
+  "item.mythsandlegends.karakondjul_pelt": "Karakondjul Pelt",
+  "item.mythsandlegends.gargoyle_head": "Gargoyle Head",
+  "item.mythsandlegends.gargoyle_torso": "Gargoyle Torso",
+  "item.mythsandlegends.gargoyle_arm": "Gargoyle Arm",
+  "item.mythsandlegends.gargoyle_leg": "Gargoyle Leg",
+  "item.mythsandlegends.gargoyle_wing": "Gargoyle Wing",
+  "item.mythsandlegends.amarok_spawn_egg": "Amarok Spawn Egg",
+  "item.mythsandlegends.amarok_essence": "Amarok Essence",
+  "item.mythsandlegends.winter_stalker_helmet": "Winter Stalker Helmet",
+  "item.mythsandlegends.winter_stalker_chestplate": "Winter Stalker Chestplate",
+  "item.mythsandlegends.winter_stalker_leggings": "Winter Stalker Leggings",
+  "item.mythsandlegends.winter_stalker_boots": "Winter Stalker boots",
+  "item.mythsandlegends.necklace_of_torngarsuk": "Necklace of Torngarsuk",
+  "item.mythsandlegends.higa_amulet": "Higa Amulet",
+  "item.mythsandlegends.cogwork_construct_spawn_egg": "Cogwork Construct Spawn Egg",
+  "item.mythsandlegends.cogling_spawn_egg": "Coglin Spawn Egg",
+  "item.mythsandlegends.gearbound_headsman_spawn_egg": "Gearbound Headsman Spawn Egg",
+  "item.mythsandlegends.cogcore": "Cogcore",
+  "item.mythsandlegends.glacial_binding": "Glacial Binding",
+  "item.mythsandlegends.nightfrost_dagger": "Nightfrost Dagger",
+  "item.mythsandlegends.nightfrost_pickaxe": "Nightfrost Pickaxe",
+  "item.mythsandlegends.nightfrost_axe": "Nightfrost Axe",
+  "item.mythsandlegends.nightfrost_shovel": "Nightfrost Shovel",
+  "item.mythsandlegends.nightfrost_hoe": "Nightfrost Hoe",
+  "item.mythsandlegends.jiangshi_spawn_egg": "Jiangshi Spawn Egg",
+  "item.mythsandlegends.ancient_copper_coin": "Ancient Copper Coin",
+  "item.mythsandlegends.copper_coin_sword": "Copper Coin Sword",
+  "item.mythsandlegends.tainted_bell": "Tainted Bell",
+  "item.mythsandlegends.spirit_suppressing_bell": "Spirit-Suppressing Bell",
+  "item.mythsandlegends.eidolon_spawn_egg": "Eidolon Spawn Egg",
+  "item.mythsandlegends.music_disc_cursed_rider": "Music Disc",
+  "item.mythsandlegends.music_disc_cursed_rider.desc": "oVinter - Cursed Rider ",
+  "item.mythsandlegends.music_disc_dormant_sentinel": "Music Disc",
+  "item.mythsandlegends.music_disc_dormant_sentinel.desc": "oVinter - Dormant Sentinel",
+  "item.mythsandlegends.music_disc_bloody_remnants": "Music Disc",
+  "item.mythsandlegends.music_disc_bloody_remnants.desc": "oVinter - Bloody Remnants",
+  "item.mythsandlegends.shade_jelly_spawn_egg": "Shade Jelly Spawn Egg",
+  "item.mythsandlegends.karakondjul_horn": "Karakondjul's Horn Icon",
+  "item.mythsandlegends.abyss_stares_back": "Abyss Icon",
+  "item.mythsandlegends.blood_moon": "Blood Moon Icon",
+  "item.mythsandlegends.chronicler_spawn_egg": "Chronicler Spawn Egg",
+  "item.mythsandlegends.research_notes": "Research Notes",
+  "item.mythsandlegends.tenebrite_shard": "Tenebrite Shard",
+  "item.mythsandlegends.refined_tenebrite": "Refined Tenebrite",
+  "item.mythsandlegends.omecuaime_spawn_egg": "Omecuaime Spawn Egg",
+  "item.mythsandlegends.draugr_spawn_egg": "Draugr Spawn Egg"
+ }
+}

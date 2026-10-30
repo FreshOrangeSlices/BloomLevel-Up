@@ -1,0 +1,2323 @@
+{
+ "jar": "irons_spellbooks-1.20.1-3.16.3.jar",
+ "namespaces": [
+  "apotheosis",
+  "curios",
+  "forge",
+  "irons_jewelry",
+  "irons_spellbooks",
+  "minecraft",
+  "neoforge",
+  "tetra"
+ ],
+ "advancements": [
+  {
+   "id": "irons_spellbooks:recipes/misc/archevoker_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:archevoker_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:archevoker_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/archevoker_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:archevoker_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:archevoker_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/archevoker_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:archevoker_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:archevoker_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/archevoker_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:archevoker_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:archevoker_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/blood_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:blood_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:blood_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cooldown_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:cooldown_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cooldown_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cryomancer_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:cryomancer_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cryomancer_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cryomancer_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:cryomancer_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cryomancer_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cryomancer_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:cryomancer_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cryomancer_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cryomancer_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:cryomancer_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cryomancer_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cultist_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:cultist_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cultist_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cultist_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:cultist_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cultist_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cultist_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:cultist_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cultist_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/cultist_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:cultist_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:cultist_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/electromancer_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:electromancer_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:electromancer_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/electromancer_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:electromancer_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:electromancer_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/electromancer_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:electromancer_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:electromancer_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/electromancer_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:electromancer_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:electromancer_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/ender_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:ender_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:ender_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/evocation_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:evocation_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:evocation_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/fire_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:fire_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:fire_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/holy_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:holy_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:holy_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/ice_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:ice_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:ice_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/lightning_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:lightning_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:lightning_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/mana_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:mana_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:mana_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/nature_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:nature_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:nature_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/plagued_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:plagued_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:plagued_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/plagued_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:plagued_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:plagued_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/plagued_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:plagued_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:plagued_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/plagued_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:plagued_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:plagued_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/priest_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:priest_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:priest_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/priest_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:priest_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:priest_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/priest_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:priest_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:priest_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/priest_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:priest_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:priest_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/protection_upgrade_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=irons_spellbooks:upgrade_orb",
+    "recipe=irons_spellbooks:protection_upgrade_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:protection_upgrade_orb"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/pyromancer_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:pyromancer_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:pyromancer_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/pyromancer_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:pyromancer_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:pyromancer_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/pyromancer_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:pyromancer_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:pyromancer_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/pyromancer_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:pyromancer_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:pyromancer_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/shadowwalker_boots_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_boots",
+    "recipe=irons_spellbooks:shadowwalker_boots_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:shadowwalker_boots_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/shadowwalker_chestplate_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_chestplate",
+    "recipe=irons_spellbooks:shadowwalker_chestplate_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:shadowwalker_chestplate_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/shadowwalker_helmet_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_helmet",
+    "recipe=irons_spellbooks:shadowwalker_helmet_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:shadowwalker_helmet_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:recipes/misc/shadowwalker_leggings_crafting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=#irons_spellbooks:wizard_base_leggings",
+    "recipe=irons_spellbooks:shadowwalker_leggings_crafting"
+   ],
+   "rewards": {
+    "recipes": [
+     "irons_spellbooks:shadowwalker_leggings_crafting"
+    ]
+   }
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/enter_catacombs",
+   "parent": "irons_spellbooks:irons_spellbooks/make_wayward_compass",
+   "title": "Dungeon Delving",
+   "description": "Enter the Catacombs",
+   "icon": "minecraft:skeleton_skull",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:location"
+   ],
+   "ids": [
+    "structure=irons_spellbooks:catacombs"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/ink_legendary",
+   "parent": "irons_spellbooks:irons_spellbooks/ink_root",
+   "title": "Premium!",
+   "description": "Acquire legendary ink.",
+   "icon": "irons_spellbooks:legendary_ink",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:legendary_ink"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/ink_root",
+   "parent": "irons_spellbooks:irons_spellbooks/root",
+   "title": "Tools of the Trade",
+   "description": "Acquire any type of ink.",
+   "icon": "irons_spellbooks:common_ink",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:common_ink",
+    "items=irons_spellbooks:epic_ink",
+    "items=irons_spellbooks:legendary_ink",
+    "items=irons_spellbooks:rare_ink",
+    "items=irons_spellbooks:uncommon_ink"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/make_arcane_anvil",
+   "parent": "irons_spellbooks:irons_spellbooks/make_scroll_forge",
+   "title": "It's Purple!",
+   "description": "Craft an Arcane Anvil",
+   "icon": "irons_spellbooks:arcane_anvil",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:arcane_anvil"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/make_inscription_table",
+   "parent": "irons_spellbooks:irons_spellbooks/root",
+   "title": "Quaint Scribe",
+   "description": "Craft an Inscription Table",
+   "icon": "irons_spellbooks:inscription_table",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:inscription_table"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/make_scroll_forge",
+   "parent": "irons_spellbooks:irons_spellbooks/make_inscription_table",
+   "title": "New Age Librarian",
+   "description": "Craft a Scroll Forge",
+   "icon": "irons_spellbooks:scroll_forge",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:scroll_forge"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/make_wayward_compass",
+   "parent": "irons_spellbooks:irons_spellbooks/root",
+   "title": "And so a Quest Begins!",
+   "description": "Craft a wayward compass, and find out where it leads...",
+   "icon": "irons_spellbooks:wayward_compass",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:wayward_compass"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/root",
+   "parent": "",
+   "title": "Iron's Spells 'n Spellbooks",
+   "description": "There's more than meets the eye to this world...",
+   "icon": "irons_spellbooks:gold_spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:inscription_table"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_blaze",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "title": "Defunct Machinery",
+   "description": "Obtain a Blaze Instruction Manual.",
+   "icon": "irons_spellbooks:blaze_spell_book",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:blaze_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_blood",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_diamond",
+   "title": "A piece of Yourself",
+   "description": "Craft the Vampiric Spellbook",
+   "icon": "irons_spellbooks:cursed_doll_spell_book",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:cursed_doll_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_dead_king",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "title": "Necronomicon",
+   "description": "Acquire the Dead King's unique tome of tricks.",
+   "icon": "irons_spellbooks:necronomicon_spell_book",
+   "frame": "challenge",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:necronomicon_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_diamond",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_gold",
+   "title": "Master Enchanter",
+   "description": "Craft an Enchanted Spell Book.",
+   "icon": "irons_spellbooks:diamond_spell_book",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:diamond_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_dragon",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_diamond",
+   "title": "Elder Power",
+   "description": "Craft the Dragonskin Spell Book.",
+   "icon": "irons_spellbooks:dragonskin_spell_book",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:dragonskin_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_druidic",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_rotten",
+   "title": "One with Nature",
+   "description": "Obtain a Druidic Tome.",
+   "icon": "irons_spellbooks:druidic_spell_book",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:druidic_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "parent": "irons_spellbooks:irons_spellbooks/root",
+   "title": "Magery",
+   "description": "Equip a spell book.",
+   "icon": "irons_spellbooks:copper_spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "curios:equip_curio"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_evoker",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "title": "Grimoire of Evokation",
+   "description": "Obtain the unique spell book from the illagers.",
+   "icon": "irons_spellbooks:evoker_spell_book",
+   "frame": "challenge",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:evoker_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_frostbranded",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_diamond",
+   "title": "Cold to the Touch",
+   "description": "Craft the Frostbranded Book",
+   "icon": "irons_spellbooks:ice_spell_book",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:ice_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_gold",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_iron",
+   "title": "Getting the Hang of It",
+   "description": "Craft an Apprentice's Spell Book.",
+   "icon": "irons_spellbooks:gold_spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:gold_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_iron",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "title": "Knowledge Unchained",
+   "description": "Craft the Ironbound Tome.",
+   "icon": "irons_spellbooks:iron_spell_book",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:iron_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_netherite",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_diamond",
+   "title": "Ancient Knowledge",
+   "description": "Restore the Ancient Codex.",
+   "icon": "irons_spellbooks:netherite_spell_book",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:netherite_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_rotten",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "title": "How long's this been here?",
+   "description": "Obtain a Rotten Spell Book.",
+   "icon": "irons_spellbooks:rotten_spell_book",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:rotten_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/spell_book_villager",
+   "parent": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "title": "Enlightenment",
+   "description": "Obtain a Villager Bible.",
+   "icon": "irons_spellbooks:villager_spell_book",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:villager_spell_book"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/staff_artificer",
+   "parent": "irons_spellbooks:irons_spellbooks/staff_root",
+   "title": "Quite the Walking Stick",
+   "description": "Acquire an Artificer's Cane.",
+   "icon": "irons_spellbooks:artificer_cane",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:artificer_cane"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/staff_blood_staff",
+   "parent": "irons_spellbooks:irons_spellbooks/staff_root",
+   "title": "Staff of Blood",
+   "description": "Acquire the Dead King's scepter.",
+   "icon": "irons_spellbooks:blood_staff",
+   "frame": "challenge",
+   "hidden": true,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:blood_staff"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/staff_ice",
+   "parent": "irons_spellbooks:irons_spellbooks/staff_root",
+   "title": "Mournful Magic",
+   "description": "Construct an Ice Staff.",
+   "icon": "irons_spellbooks:ice_staff",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:ice_staff"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/staff_lightning_rod",
+   "parent": "irons_spellbooks:irons_spellbooks/staff_root",
+   "title": "Shocking Discovery",
+   "description": "Transform a Lightning Rod into a Rod O' Lightning... And hopefully survive the process.",
+   "icon": "irons_spellbooks:lightning_rod",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:lightning_rod"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/staff_pyrium",
+   "parent": "irons_spellbooks:irons_spellbooks/staff_root",
+   "title": "Ancient Beckonings",
+   "description": "Forge a fiery staff from Pyrium",
+   "icon": "irons_spellbooks:pyrium_staff",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:pyrium_staff"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/staff_root",
+   "parent": "irons_spellbooks:irons_spellbooks/root",
+   "title": "No Longer Short-Staffed",
+   "description": "Acquire a Staff casting implement. Use to Cast!",
+   "icon": "irons_spellbooks:graybeard_staff",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:artificer_cane",
+    "items=irons_spellbooks:blood_staff",
+    "items=irons_spellbooks:graybeard_staff",
+    "items=irons_spellbooks:ice_staff"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/steal_from_wizard",
+   "parent": "irons_spellbooks:irons_spellbooks/root",
+   "title": "A Fool's Folly",
+   "description": "Anger a wizard by looting a nearby chest",
+   "icon": "minecraft:chest",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "irons_spellbooks:make_inscription_table",
+   "parent": "minecraft:story/mine_stone",
+   "title": "Quaint Scribe",
+   "description": "Craft an Inscription Table",
+   "icon": "irons_spellbooks:inscription_table",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=irons_spellbooks:inscription_table"
+   ],
+   "rewards": {}
+  }
+ ],
+ "books": [
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/progression/early_game.json",
+   "name": "Early Game",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:inscription_table",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Overview",
+     "text": "Early game progression is dominated by exploring and looting. The world is full of magic loot, especially in new magic structures that can be found dotted across the lands. But be careful! Each magic structure is home to a powerful mage, who will not take kindly to you."
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Scrolls",
+     "text": "Scrolls will be your first taste of magic. While they can be consumed to cast the spell they hold, it is better to save them until you can inscribe it into a spell book, where it can be used repeatedly, via an Inscription Table >>>",
+     "item": "irons_spellbooks:scroll"
+    },
+    {
+     "type": "patchouli:text",
+     "title": "Inscription Table",
+     "text": "In order to properly use a Spell Book, you must inscribe spells into it with the Inscription Table by using scrolls. Scrolls can be retrieved once put into a Spell Book, but it will uninscribe the spell. Beginner spell books can be crafted with basic materials."
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:inscription_table"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Basic Materials",
+     "text": "Some basic materials can even be found sparsely in vanilla structures.$(br2)Arcane Essence can be combined with leather armor to craft Wandering Magician armor, an early source of additional max mana.",
+     "item": "irons_spellbooks:arcane_essence"
+    },
+    {
+     "type": "patchouli:entity",
+     "entity": "minecraft:armor_stand{ArmorItems:[{id:'irons_spellbooks:wandering_magician_boots',Count:1b},{id:'irons_spellbooks:wandering_magician_leggings',Count:1b},{id:'irons_spellbooks:wandering_magician_chestplate',Count:1b},{id:'irons_spellbooks:wandering_magician_helmet',Count:1b}],NoBasePlate:1b}"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/progression/ink.json",
+   "name": "Ink",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:epic_ink",
+   "pages": [
+    {
+     "type": "patchouli:spotlight",
+     "text": "The most common of the inks (ergo the name), common ink can craft the lowest level of spells. If a spell's lowest level is above common, it cannot be crafted with common ink. The same goes for all other inks.",
+     "item": "irons_spellbooks:common_ink"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "Less common than common, it can craft slightly more powerful spells.",
+     "item": "irons_spellbooks:uncommon_ink"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "The rare ink should be able to be found regularly in magic treasure chests or by killing spellcasting mobs.",
+     "item": "irons_spellbooks:rare_ink"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "The best place for epic ink and all other high rarity inks is from magic treasure or killing spellcasting mobs.",
+     "item": "irons_spellbooks:epic_ink"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "The most rare ink, it will craft the most powerful spells. Keep in mind, some spells have multiple legendary levels, requiring use of the Arcane Anvil to obtain them.",
+     "item": "irons_spellbooks:legendary_ink"
+    },
+    {
+     "type": "patchouli:empty"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/progression/late_game.json",
+   "name": "Late Game",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:arcane_anvil",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Arcane Anvil",
+     "text": "Late game is reached by obtaining netherite and vast quantities of basic resources, and powered by the Arcane Anvil.$(br2)The Arcane Anvil is the most powerful crafting station, used to level up your scrolls, upgrade armor and spell books, and imbue weapons with spells."
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:arcane_anvil"
+    },
+    {
+     "type": "patchouli:crafting",
+     "title": "More Spell Books",
+     "text": "The best craftable spell books are shown here. The ruined book is found in Ancient Cities",
+     "recipe": "irons_spellbooks:netherite_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "text": "Dragonskin is dropped by the Ender Dragon",
+     "recipe": "irons_spellbooks:dragonskin_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "title": "School Armor",
+     "recipe": "irons_spellbooks:cryomancer_helmet"
+    },
+    {
+     "type": "patchouli:entity",
+     "text": "School armor is made from arcane cloth and a particular school rune, following this template",
+     "entity": "minecraft:armor_stand{ArmorItems:[{id:'irons_spellbooks:cryomancer_boots',Count:1b},{id:'irons_spellbooks:cryomancer_leggings',Count:1b},{id:'irons_spellbooks:cryomancer_chestplate',Count:1b},{id:'irons_spellbooks:cryomancer_helmet',Count:1b}],NoBasePlate:1b}"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Upgrading",
+     "text": "Upgrades are the final form of progression. By default, any armor as well as spell books can be upgraded.$(br2)Upgrade orbs of a specific attribute are made from a base upgrade orb, and 8 runes of the desired attribute.",
+     "item": "irons_spellbooks:upgrade_orb"
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:upgrade_orb"
+    },
+    {
+     "type": "patchouli:multiblock",
+     "text": "Mithril is a rare Overworld ore, found below y = -38 and unexposed to air. It requires a netherite pickaxe."
+    },
+    {
+     "type": "patchouli:entity",
+     "text": "Cinder Essence is dropped from Ancient Knights, which can be awakened by breaking armor piles in the nether.",
+     "entity": "irons_spellbooks:citadel_keeper"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/progression/mid_game.json",
+   "name": "Mid Game",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:scroll_forge",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Scroll Forge",
+     "text": "Upon reaching nether level resources, you will unlock an entirely new dynamic to gaining power: The Scroll Forge$(br2)The Scroll Forge is used to craft scrolls by using ink, paper, and a focus. The ink determines the rarity (and therefore level), and the focus determines spell's school."
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:scroll_forge"
+    },
+    {
+     "type": "patchouli:crafting",
+     "title": "New Spell Books",
+     "text": "Furthermore, intermediate spell books can be crafted using nether resources",
+     "recipe": "irons_spellbooks:gold_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "text": "Hogskin is dropped by Hoglins",
+     "recipe": "irons_spellbooks:diamond_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "title": "New Materials",
+     "text": "You should also start to craft stronger armor using arcane cloth. In order to get high quantities of arcane essence, you will need to focus on raiding magical structures.",
+     "recipe": "irons_spellbooks:magic_cloth"
+    },
+    {
+     "type": "patchouli:entity",
+     "entity": "minecraft:armor_stand{ArmorItems:[{id:'irons_spellbooks:pumpkin_boots',Count:1b},{id:'irons_spellbooks:pumpkin_leggings',Count:1b},{id:'irons_spellbooks:pumpkin_chestplate',Count:1b},{id:'irons_spellbooks:pumpkin_helmet',Count:1b}],NoBasePlate:1b}"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Rare Materials",
+     "text": "In order to continue progressing, keep an eye out for runestones in magical structures. Runestones are used to craft even more powerful armor. Class mages always drop a rune of their school.",
+     "item": "irons_spellbooks:blank_rune"
+    },
+    {
+     "type": "patchouli:empty"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/schools.json",
+   "name": "Schools of Magic",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:lightning_bottle",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Overview",
+     "text": "Each magical spell belong to a school of magic. Each school encapsulates a theme, both visually and functionally, and each have a Focus: a representative item used as a crafting ingredient. Furthermore, each school can be empowered by specific school related gear, allowing you to become a powerful master of a single school, or mix and match to become a jack of all trades."
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Fire",
+     "text": "The Fire school, with a Blaze Rod as its Focus, is centered around damage and damage over time.",
+     "item": "minecraft:blaze_rod"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Ice",
+     "text": "The Ice school, with Frozen Bones as its Focus, is centered around damage and crowd control.",
+     "item": "irons_spellbooks:frozen_bone"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Lightning",
+     "text": "The Lightning school, with a Bottle o' Lightning as its Focus, is centered around concentrated damage.",
+     "item": "irons_spellbooks:lightning_bottle"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Holy",
+     "text": "The Holy school, with the Divine Pearl as its Focus, is centered around support, healing, and buffing allies.",
+     "item": "irons_spellbooks:divine_pearl"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Ender",
+     "text": "The Ender school, with an Ender Pearl as its Focus, is themed around all things arcane and mystical, with spells that range from damage to utility to mobility.",
+     "item": "minecraft:ender_pearl"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Blood",
+     "text": "The Blood school, with a Blood Vial as its Focus, is themed around evil; you will find elements of necromancy, wither, and blood magic here, with spells focusing on damage that buffs the caster.",
+     "item": "irons_spellbooks:blood_vial"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Evocation",
+     "text": "The Evocation school, with an Emerald as its Focus, is themed around magical trickery and conjuration, covering the broadest range of offensive, defensive, and utility spells.",
+     "item": "minecraft:emerald"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Nature",
+     "text": "The Nature school, with a Poisonous Potato as its Focus, is focused on applying debuffs to enemies, with elements of damage to finish them off.",
+     "item": "minecraft:poisonous_potato"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Eldritch",
+     "text": "The Eldritch school is not like the others. It is an ancient and powerful way of magic, one that has all but been forgotten; you will be unable to immediately craft or cast Eldritch spells. However, shreds of ancient Eldritch manuscripts can still be found scattered throughout the world, and may even be pieced back together with the help of an echo shard.",
+     "item": "irons_spellbooks:eldritch_manuscript"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Eldritch, continued",
+     "text": "Once a manuscript has been restored, it can be consumed to learn a single Eldritch spell, enabling the crafting and casting of it. After being learned, the Echo Shard is used as the focus.",
+     "item": "minecraft:echo_shard"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/spell_books/casting_implements.json",
+   "name": "Casting Implements",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:graybeard_staff",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Casting Implements",
+     "text": "Casting Implements are items that can be right-clicked (used) in order to cast your active spell. Most often, they also provide passive benefits, allowing for a dedicated wizard playstyle."
+    },
+    {
+     "type": "patchouli:crafting",
+     "text": "A simple stick is all it takes to get the crystal ball rolling.",
+     "recipe": "irons_spellbooks:graybeard_staff"
+    },
+    {
+     "type": "patchouli:crafting",
+     "text": "Sometimes, additional style is all it takes to bring your casting to the next level.",
+     "recipe": "irons_spellbooks:artificer_cane"
+    },
+    {
+     "type": "patchouli:crafting",
+     "text": "Pieces of a mystical frosted staff are rumored to lie about the overworld. The Cryomancer may have research stowed away in his tower revealing more.",
+     "recipe": "irons_spellbooks:ice_staff"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "An ancient scepter with unmatched summoning abilities, it can only be acquired by taking it from its undead owner.",
+     "item": "irons_spellbooks:blood_staff"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/spell_books/craftable_spell_books.json",
+   "name": "Basic Spell Books",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:iron_spell_book",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Craftable Spell Books",
+     "text": "Many spell Books can be crafted from a combination of vanilla and arcane materials. Each further tier crafted increases the slot count of the spell book and often comes with extra bonuses, increasing the power and quantity of spells it can contain."
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:copper_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:gold_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "recipe": "irons_spellbooks:netherite_spell_book"
+    },
+    {
+     "type": "patchouli:text",
+     "title": "Named Spell Books",
+     "text": "Named spell books can be found nestled in many corners of the world, often offering bonuses to lucky adventurers looking in the right places."
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "What may have once been a more powerful book has since rotted away, leaving but three pages. Yet, still more powerful than most Overworld spell books. They can be looted from equally rotten places all across the Overworld.",
+     "item": "irons_spellbooks:rotten_spell_book"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "A regular book with a little blessing makes a suitable channel for divine magic. Building a reputation with the villagers, especially by freeing captives from the Archevoker, will ensure one falls into your hands eventually.",
+     "item": "irons_spellbooks:villager_spell_book"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "Every Blaze, unbeknownst to them, comes with one of these tucked away. The trick is killing them and hoping it doesn't turn into ash.",
+     "item": "irons_spellbooks:blaze_spell_book"
+    },
+    {
+     "type": "patchouli:crafting",
+     "text": "A strong magical energy still persists within the Rotten Spell Book. The book may be blessed anew if a proper remedy were applied.",
+     "recipe": "irons_spellbooks:druidic_spell_book"
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/spell_books/scrolls.json",
+   "name": "Scrolls",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:scroll",
+   "pages": [
+    {
+     "type": "patchouli:spotlight",
+     "title": "Scrolls",
+     "text": "Scrolls can be found in chests, looted from mobs, or crafted. Each Scroll contains a spell with a level, similar to an enchanted book. Scrolls can be upgraded in the Arcane Anvil by combining them with the corresponding rarity of ink of their next level.",
+     "item": "irons_spellbooks:scroll"
+    },
+    {
+     "type": "patchouli:text",
+     "text": "Scrolls can be used on their own to cast their spell, subverting mana costs and cooldown, but consuming the scroll in the process. Primarily, they are inscribed into spell books for continued use, or recycled via the Alchemist Cauldron to be turned into more useful spells."
+    }
+   ]
+  },
+  {
+   "file": "assets/irons_spellbooks/patchouli_books/iss_guide_book/en_us/entries/spell_books/uncraftable_spell_books.json",
+   "name": "Unique Spell Books",
+   "category": "irons_spellbooks:root",
+   "icon": "irons_spellbooks:evoker_spell_book",
+   "pages": [
+    {
+     "type": "patchouli:text",
+     "title": "Unique Spell Books",
+     "text": "Unique spell books are rare drops from certain mobs that come with spells inscribed, which cannot be removed or edited. Not every spell book can be manufactured -- it is called the arcane art, after all."
+    },
+    {
+     "type": "patchouli:spotlight",
+     "title": "Unique Improvements",
+     "text": "The spells in a unique spell book are locked, but can be improved. By combining a unique spell book in the Arcane Anvil with a higher-level scroll of the same spell from the spell book, you can raise the level of the locked spell.",
+     "item": "irons_spellbooks:arcane_anvil"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "A book full of foundational illager magick, the Grimoire of Evokation can be dropped by Evokers or their more powerful casting cousin, Archevokers.",
+     "item": "irons_spellbooks:evoker_spell_book"
+    },
+    {
+     "type": "patchouli:spotlight",
+     "text": "An ancient book holding a host of dark spells, it can only be acquired by taking it from its undead owner.",
+     "item": "irons_spellbooks:necronomicon_spell_book"
+    }
+   ]
+  }
+ ],
+ "names": {
+  "item.irons_spellbooks.spell_book": "Spell Book",
+  "item.irons_spellbooks.wimpy_spell_book": "Wimpy Spell Book",
+  "item.irons_spellbooks.evoker_spell_book": "Grimoire of Evokation",
+  "item.irons_spellbooks.necronomicon_spell_book": "Necronomicon",
+  "item.irons_spellbooks.illusioner_spell_book": "Book of Illusions",
+  "item.irons_spellbooks.rotten_spell_book": "Rotten Spell Book",
+  "item.irons_spellbooks.blaze_spell_book": "Blaze Instruction Manual",
+  "item.irons_spellbooks.dragonskin_spell_book": "Dragonskin Spell Book",
+  "item.irons_spellbooks.villager_spell_book": "Villager Bible",
+  "item.irons_spellbooks.netherite_spell_book": "Ancient Codex",
+  "item.irons_spellbooks.diamond_spell_book": "Enchanted Spell Book",
+  "item.irons_spellbooks.gold_spell_book": "Apprentice's Spell Book",
+  "item.irons_spellbooks.iron_spell_book": "Ironbound Tome",
+  "item.irons_spellbooks.copper_spell_book": "Flimsy Journal",
+  "item.irons_spellbooks.druidic_spell_book": "Druidic Tome",
+  "item.irons_spellbooks.scroll": "Scroll",
+  "item.irons_spellbooks.scroll.unlearned": "Unlearned Scroll",
+  "item.irons_spellbooks.common_ink": "Common Ink",
+  "item.irons_spellbooks.uncommon_ink": "Uncommon Ink",
+  "item.irons_spellbooks.rare_ink": "Rare Ink",
+  "item.irons_spellbooks.epic_ink": "Epic Ink",
+  "item.irons_spellbooks.legendary_ink": "Legendary Ink",
+  "item.irons_spellbooks.lightning_bottle": "Bottle o' Lightning",
+  "item.irons_spellbooks.lightning_bottle.guide": "Use an empty bottle on a charged creeper to obtain.",
+  "item.irons_spellbooks.frozen_bone": "Frozen Bone",
+  "item.irons_spellbooks.frozen_bone.guide": "Dropped from strays.",
+  "item.irons_spellbooks.blood_vial": "Blood Vial",
+  "item.irons_spellbooks.blood_vial.guide": "By heating up a Minecraft cauldron with a campfire below, or by using an Alchemist cauldron, mobs placed inside can be cooked for blood.",
+  "item.irons_spellbooks.ice_venom_vial": "Ice Venom Vial",
+  "item.irons_spellbooks.divine_pearl": "Divine Pearl",
+  "item.irons_spellbooks.hogskin": "Hogskin",
+  "item.irons_spellbooks.hogskin.guide": "Dropped from hoglins.",
+  "item.irons_spellbooks.dragonskin": "Dragonskin",
+  "item.irons_spellbooks.dragonskin.guide": "Dropped from the Ender Dragon.",
+  "item.irons_spellbooks.ruined_book": "Ruined Book",
+  "item.irons_spellbooks.ruined_book.guide": "Found in likewise sculk-infested cities.",
+  "item.irons_spellbooks.arcane_essence": "Arcane Essence",
+  "item.irons_spellbooks.cinder_essence": "Cinder Essence",
+  "item.irons_spellbooks.cinder_essence.guide": "Dropped from Ancient Knights.",
+  "item.irons_spellbooks.dev_staff": "Staff of Testing",
+  "item.irons_spellbooks.staff_of_the_nines": "Staff of the Nines",
+  "item.irons_spellbooks.arcane_salvage": "Arcane Salvage",
+  "item.irons_spellbooks.arcane_salvage_desc": "Power still radiates from this forgotten material",
+  "item.irons_spellbooks.timeless_slurry": "Timeless Slurry",
+  "item.irons_spellbooks.pyrium_ingot": "Pyrium Ingot",
+  "item.irons_spellbooks.mithril_ingot": "Mithril Ingot",
+  "item.irons_spellbooks.mithril_scrap": "Mithril Scrap",
+  "item.irons_spellbooks.raw_mithril": "Raw Mithril",
+  "item.irons_spellbooks.weapon_parts": "Weapon Parts",
+  "item.irons_spellbooks.shriving_stone": "Shriving Stone",
+  "item.irons_spellbooks.shriving_stone_desc": "Use in Anvil to remove Imbuement or Upgrades",
+  "item.irons_spellbooks.lesser_spell_slot_upgrade": "Lesser Spell Slot Improvement",
+  "item.irons_spellbooks.spell_slot_upgrade_desc": "Improves Spell Book capacity, up to %s Slots",
+  "item.irons_spellbooks.arcane_ingot": "Arcane Ingot",
+  "item.irons_spellbooks.magic_cloth": "Arcane Cloth",
+  "item.irons_spellbooks.tarnished_helmet": "Tarnished Crown",
+  "item.irons_spellbooks.gold_crown": "Iron's Crown",
+  "item.irons_spellbooks.wandering_magician_helmet": "Wandering Magician Hood",
+  "item.irons_spellbooks.wandering_magician_chestplate": "Wandering Magician Robe",
+  "item.irons_spellbooks.wandering_magician_leggings": "Wandering Magician Pants",
+  "item.irons_spellbooks.wandering_magician_boots": "Wandering Magician Shoes",
+  "item.irons_spellbooks.pyromancer_helmet": "Pyromancer Hat",
+  "item.irons_spellbooks.pyromancer_chestplate": "Pyromancer Robe",
+  "item.irons_spellbooks.pyromancer_leggings": "Pyromancer Leggings",
+  "item.irons_spellbooks.pyromancer_boots": "Pyromancer Boots",
+  "item.irons_spellbooks.electromancer_helmet": "Electromancer Hat",
+  "item.irons_spellbooks.electromancer_chestplate": "Electromancer Robe",
+  "item.irons_spellbooks.electromancer_leggings": "Electromancer Leggings",
+  "item.irons_spellbooks.electromancer_boots": "Electromancer Boots",
+  "item.irons_spellbooks.cultist_helmet": "Cultist Hood",
+  "item.irons_spellbooks.cultist_chestplate": "Cultist Armor",
+  "item.irons_spellbooks.cultist_leggings": "Cultist Leggings",
+  "item.irons_spellbooks.cultist_boots": "Cultist Boots",
+  "item.irons_spellbooks.archevoker_helmet": "Archevoker Hat",
+  "item.irons_spellbooks.archevoker_chestplate": "Archevoker Coat",
+  "item.irons_spellbooks.archevoker_leggings": "Archevoker Leggings",
+  "item.irons_spellbooks.archevoker_boots": "Archevoker Boots",
+  "item.irons_spellbooks.cryomancer_helmet": "Cryomancer Hood",
+  "item.irons_spellbooks.cryomancer_chestplate": "Cryomancer Coat",
+  "item.irons_spellbooks.cryomancer_leggings": "Cryomancer Leggings",
+  "item.irons_spellbooks.cryomancer_boots": "Cryomancer Boots",
+  "item.irons_spellbooks.shadowwalker_helmet": "Shadow-Walker Mask",
+  "item.irons_spellbooks.shadowwalker_chestplate": "Shadow-Walker Armor",
+  "item.irons_spellbooks.shadowwalker_leggings": "Shadow-Walker Leggings",
+  "item.irons_spellbooks.shadowwalker_boots": "Shadow-Walker Boots",
+  "item.irons_spellbooks.priest_helmet": "Priest Mask",
+  "item.irons_spellbooks.priest_chestplate": "Priest Robes",
+  "item.irons_spellbooks.priest_leggings": "Priest Leggings",
+  "item.irons_spellbooks.priest_boots": "Priest Boots",
+  "item.irons_spellbooks.plagued_helmet": "Plagued Mask",
+  "item.irons_spellbooks.plagued_chestplate": "Plagued Coat",
+  "item.irons_spellbooks.plagued_leggings": "Plagued Leggings",
+  "item.irons_spellbooks.plagued_boots": "Plagued Boots",
+  "item.irons_spellbooks.pumpkin_helmet": "Scarecrow Hat",
+  "item.irons_spellbooks.pumpkin_chestplate": "Scarecrow Coat",
+  "item.irons_spellbooks.pumpkin_leggings": "Scarecrow Leggings",
+  "item.irons_spellbooks.pumpkin_boots": "Scarecrow Boots",
+  "item.irons_spellbooks.tarnished_crown": "Tarnished Crown",
+  "item.irons_spellbooks.netherite_mage_helmet": "Netherite Battlemage Hat",
+  "item.irons_spellbooks.netherite_mage_chestplate": "Netherite Battlemage Robes",
+  "item.irons_spellbooks.netherite_mage_leggings": "Netherite Battlemage Leggings",
+  "item.irons_spellbooks.netherite_mage_boots": "Netherite Battlemage Boots",
+  "item.irons_spellbooks.wizard_helmet": "Wizard Helmet",
+  "item.irons_spellbooks.wizard_helmet.hood": "Wizard Hood",
+  "item.irons_spellbooks.wizard_helmet.hat": "Wizard Hat",
+  "item.irons_spellbooks.wizard_chestplate": "Wizard Robes",
+  "item.irons_spellbooks.wizard_leggings": "Wizard Leggings",
+  "item.irons_spellbooks.wizard_boots": "Wizard Boots",
+  "item.irons_spellbooks.blank_rune": "Blank Runestone",
+  "item.irons_spellbooks.fire_rune": "Fire Rune",
+  "item.irons_spellbooks.ice_rune": "Ice Rune",
+  "item.irons_spellbooks.lightning_rune": "Lightning Rune",
+  "item.irons_spellbooks.holy_rune": "Holy Rune",
+  "item.irons_spellbooks.blood_rune": "Blood Rune",
+  "item.irons_spellbooks.evocation_rune": "Evocation Rune",
+  "item.irons_spellbooks.ender_rune": "Ender Rune",
+  "item.irons_spellbooks.arcane_rune": "Arcane Rune",
+  "item.irons_spellbooks.cooldown_rune": "Recovery Rune",
+  "item.irons_spellbooks.protection_rune": "Protective Rune",
+  "item.irons_spellbooks.nature_rune": "Nature Rune",
+  "item.irons_spellbooks.crypt_skull": "Skull of No-One Important",
+  "item.irons_spellbooks.blood_staff": "The Blood Staff",
+  "item.irons_spellbooks.improved_blood_staff": "Improved Blood Staff",
+  "item.irons_spellbooks.wayward_compass": "Wayward Compass",
+  "item.irons_spellbooks.wayward_compass_desc": "The trapped soul points toward its home",
+  "item.irons_spellbooks.wayward_compass.error": "No catacombs loaded. [%s] to search",
+  "item.irons_spellbooks.antiquated_compass": "Antiquated Compass",
+  "item.irons_spellbooks.antiquated_compass_desc": "A magical resonance pulls strongly towards... Something.",
+  "item.irons_spellbooks.magehunter": "Magehunter",
+  "item.irons_spellbooks.spellbreaker": "Spellbreaker",
+  "item.irons_spellbooks.amethyst_rapier": "Amethyst Rapier",
+  "item.irons_spellbooks.truthseeker": "Truthseeker",
+  "item.irons_spellbooks.claymore": "Claymore",
+  "item.irons_spellbooks.misery": "Misery",
+  "item.irons_spellbooks.keeper_flamberge": "Decrepit Flamberge",
+  "item.irons_spellbooks.upgrade_orb": "Empty Upgrade Orb",
+  "item.irons_spellbooks.fire_upgrade_orb": "Fire Upgrade Orb",
+  "item.irons_spellbooks.ice_upgrade_orb": "Ice Upgrade Orb",
+  "item.irons_spellbooks.lightning_upgrade_orb": "Lightning Upgrade Orb",
+  "item.irons_spellbooks.holy_upgrade_orb": "Holy Upgrade Orb",
+  "item.irons_spellbooks.ender_upgrade_orb": "Ender Upgrade Orb",
+  "item.irons_spellbooks.blood_upgrade_orb": "Blood Upgrade Orb",
+  "item.irons_spellbooks.evocation_upgrade_orb": "Evocation Upgrade Orb",
+  "item.irons_spellbooks.nature_upgrade_orb": "Nature Upgrade Orb",
+  "item.irons_spellbooks.mana_upgrade_orb": "Mana Upgrade Orb",
+  "item.irons_spellbooks.cooldown_upgrade_orb": "Cooldown Upgrade Orb",
+  "item.irons_spellbooks.protection_upgrade_orb": "Protection Upgrade Orb",
+  "item.irons_spellbooks.enchanted_ward_amulet": "Amulet of Warding",
+  "item.irons_spellbooks.enchanted_ward_amulet_desc": "The instilled ancient magic can protect against the Lost Citadel's magical ward",
+  "item.irons_spellbooks.mana_ring": "Ring of Mana",
+  "item.irons_spellbooks.silver_ring": "Silver Ring",
+  "item.irons_spellbooks.cooldown_ring": "Ring of Recovery",
+  "item.irons_spellbooks.cast_time_ring": "Ring of Expediency",
+  "item.irons_spellbooks.emerald_stoneplate_ring": "Emerald Stoneplate Ring",
+  "item.irons_spellbooks.emerald_stoneplate_ring.desc": "Slain creatures drop +25% experience",
+  "item.irons_spellbooks.fireward_ring": "Fireward Ring",
+  "item.irons_spellbooks.fireward_ring.desc": "Grants fire immunity",
+  "item.irons_spellbooks.poisonward_ring": "Poisonward Ring",
+  "item.irons_spellbooks.poisonward_ring.desc": "Grants poison immunity",
+  "item.irons_spellbooks.frostward_ring": "Frostward Ring",
+  "item.irons_spellbooks.frostward_ring.desc": "Grants freezing immunity",
+  "item.irons_spellbooks.heavy_chain_necklace": "Heavy Chain",
+  "item.irons_spellbooks.conjurers_talisman": "Conjurer's Talisman",
+  "item.irons_spellbooks.greater_conjurers_talisman": "Greater Conjurer's Talisman",
+  "item.irons_spellbooks.greater_conjurers_talisman.desc": "Summon spells that time-out do not go on cooldown",
+  "item.irons_spellbooks.affinity_ring": "Ring of %s Affinity",
+  "item.irons_spellbooks.concentration_amulet": "Amulet of Concentration",
+  "item.irons_spellbooks.concentration_amulet.desc": "Long Casts become uninterruptible",
+  "item.irons_spellbooks.invisibility_ring": "Ring of Invisibility",
+  "item.irons_spellbooks.invisibility_ring.desc": "I would say read the fine print, but I can't see it",
+  "item.irons_spellbooks.casters_tea": "Caster's Tea",
+  "item.irons_spellbooks.casters_tea.desc": " Reduces Active Spell Cooldowns by 15%",
+  "item.irons_spellbooks.oakskin_elixir": "Oakskin Elixir",
+  "item.irons_spellbooks.greater_oakskin_elixir": "Greater Oakskin Elixir",
+  "item.irons_spellbooks.greater_healing_potion": "Greater Potion of Healing",
+  "item.irons_spellbooks.invisibility_elixir": "Invisibility Elixir",
+  "item.irons_spellbooks.greater_invisibility_elixir": "Greater Invisibility Elixir",
+  "item.irons_spellbooks.evasion_elixir": "Evasion Elixir",
+  "item.irons_spellbooks.greater_evasion_elixir": "Greater Evasion Elixir",
+  "item.irons_spellbooks.ice_spider_pheromones": "Ice Spider Pheromones",
+  "item.irons_spellbooks.lurker_ring": "Ring of the Lurker",
+  "item.irons_spellbooks.lurker_ring.desc": "Your first attack while invisible deals +%d%% damage",
+  "item.irons_spellbooks.amethyst_resonance_charm": "Amethyst Resonance Charm",
+  "item.irons_spellbooks.expulsion_ring": "Ring of Expulsion",
+  "item.irons_spellbooks.expulsion_ring.desc": "When attacked, emit an expulsive burst of air",
+  "item.irons_spellbooks.visibility_ring": "Ring of Visibility",
+  "item.irons_spellbooks.visibility_ring.desc": "Allows visible creatures to be seen",
+  "item.irons_spellbooks.eldritch_manuscript": "Eldritch Manuscript",
+  "item.irons_spellbooks.eldritch_manuscript_desc": "Use to learn Eldritch spells",
+  "item.irons_spellbooks.ancient_knowledge_fragment": "Ancient Knowledge Fragment",
+  "item.irons_spellbooks.autoloader_crossbow": "Autoloader Crossbow",
+  "item.irons_spellbooks.autoloader_crossbow.desc": "> Automatically loads next available projectile while in inventory. Crouch-Click to cancel",
+  "item.irons_spellbooks.scroll_pouch": "Mystery Scroll Pouch",
+  "item.irons_spellbooks.furled_map": "Furled Map",
+  "item.irons_spellbooks.furled_map_ancient": "Ancient Furled Map",
+  "item.irons_spellbooks.furled_map_descriptor_framing": "[%s]",
+  "item.irons_spellbooks.furled_map.dimension_fail": "This map does not lead to anything in this dimension.",
+  "item.irons_spellbooks.furled_map.guide": "Furled Maps hold a map leading to a set structure within. They can be found, traded for, or crafted, aiding you in your journeys.",
+  "item.irons_spellbooks.evoker_fort_battle_plans": "Evoker Fort Attack Plans",
+  "item.irons_spellbooks.failed_arctic_voyage_map": "Arctic Expedition Route",
+  "item.irons_spellbooks.ancient_battleground_map": "Legion Outpost",
+  "item.irons_spellbooks.citadel_map": "The Citadel",
+  "item.irons_spellbooks.ice_spider_den_map": "Infested Ruin",
+  "item.irons_spellbooks.alchemical_trade_route": "Alchemical Trade Route",
+  "item.irons_spellbooks.pyrium_staff": "Pyrium Staff",
+  "item.irons_spellbooks.graybeard_staff": "Graybeard Staff",
+  "item.irons_spellbooks.artificer_cane": "Artificer's Cane",
+  "item.irons_spellbooks.handwritten_invoice": "Handwritten Invoice",
+  "item.irons_spellbooks.handwritten_invoice.desc": "\"...1/4th on departure, the rest on completion...\"",
+  "item.irons_spellbooks.frosted_helve": "Frosted Helve",
+  "item.irons_spellbooks.permafrost_shard": "Permafrost Shard",
+  "item.irons_spellbooks.translated_archevoker_log": "Translated Research Journal",
+  "item.irons_spellbooks.archevoker_log": "Research Journal",
+  "item.irons_spellbooks.archevoker_log.header": "Day ",
+  "item.irons_spellbooks.archevoker_log.page_1": "We arrived at the location He sent us to just before last dusk, a march of many days. One last time, we slept on the dirt; this morning we rose with purpose anew, beginning to etch a barrier of logs and home of stone.",
+  "item.irons_spellbooks.archevoker_log.page_2": "Construction is near complete. As I write, supplies make their way into our hospice - freshly hewn wood from the area, a shipment of glass from fort greater. Discovery awaits.",
+  "item.irons_spellbooks.archevoker_log.page_3": "I had never thought it possible, this magic seems to be messing with my mind. I swear there used to be a cellar below the chapel, yet even my second in command says it were never so... Surely I cannot be the one going mad?",
+  "item.irons_spellbooks.archevoker_log.page_4": "Scouts have returned with fantastic news, that of a village, and not too far to return the supplies here with ease after laying siege. However, magical research in this area seems to be inconclusive. We may be abandoning soon.",
+  "item.irons_spellbooks.archevoker_log.entry_1.1": "We reached the location to which He bade us journey, a laborious march spanning many days. As the sun surrendered to dusk, we rested our wearied bodies upon the earth for what I trust to be the final time. This morn,",
+  "item.irons_spellbooks.archevoker_log.entry_1.2": "we rose with purpose anew, and began to etch a barrier of logs and home of stone.",
+  "item.irons_spellbooks.archevoker_log.entry_2.1": "Our construction draws nigh its completion. As I pen these very words, the final shipment of supplies flow into our haven - enough timber, freshly hewn from the surrounding wilds, to finish the enclosure, and panes of glass",
+  "item.irons_spellbooks.archevoker_log.entry_2.2": "sent from Fort Greater. Soon shall the research commence, the likes of which may yet shake the pillars of the world.",
+  "item.irons_spellbooks.archevoker_log.entry_3.1": "A strange unease takes root within my mind. This magic - though wondrous - doth twist the senses. I could have sworn there was a cellar beneath the chapel's floor, and yet now none recall it. Even my most trusted lieutenant",
+  "item.irons_spellbooks.archevoker_log.entry_3.2": "claims such a thing never was. Am I alone in this delusion? Has madness begun to gnaw at me?",
+  "item.irons_spellbooks.archevoker_log.entry_4.1": "Our scouts return with tidings of a village, not far from our encampment. This is good news, for supplies dwindle. We shall lay siege and easily procure what is needed, for the distance is not great.",
+  "item.irons_spellbooks.archevoker_log.entry_4.2": "However, the magical research in these lands proves troublesome - few are the answers we seek. It may soon come to pass that we abandon this place, move to the next site.",
+  "item.irons_spellbooks.ice_staff": "Ice Staff",
+  "item.irons_spellbooks.lightning_rod": "Rod o' Lightning",
+  "item.irons_spellbooks.lightning_rod.guide": "Obtained by using an Energized Core on a Lightning Rod",
+  "item.irons_spellbooks.hither_thither_wand": "Hither-Thither Wand",
+  "item.irons_spellbooks.teleportation_amulet": "Amulet of Teleportation",
+  "item.irons_spellbooks.teleportation_amulet.desc": "Gain Evasion for 3 seconds after teleporting",
+  "item.irons_spellbooks.teleportation_amulet.desc.alt": "A cracked pearl, hung on a chain",
+  "item.irons_spellbooks.fire_ale": "Fire Ale",
+  "item.irons_spellbooks.netherward_tincture": "Netherward Tincture",
+  "item.irons_spellbooks.netherward_tincture.desc": "Protects against Overworld zombification",
+  "item.irons_spellbooks.tincture_of_forgetfulness": "Tincture of Forgetfulness",
+  "item.irons_spellbooks.tincture_of_forgetfulness.desc": "Resets Trial Vaults",
+  "item.irons_spellbooks.tincture_of_forgetfulness.guide": "Dropped from Ominous Bosses",
+  "item.irons_spellbooks.ominous_bottle": "Ominous Bottle",
+  "item.irons_spellbooks.energized_core": "Energized Core",
+  "item.irons_spellbooks.energized_core.failure": "A calm sky holds no power; the core remains inert",
+  "item.minecraft.potion.effect.mana": "Potion of Mana",
+  "item.minecraft.splash_potion.effect.mana": "Splash Potion of Mana",
+  "item.minecraft.lingering_potion.effect.mana": "Lingering Potion of Mana",
+  "item.minecraft.tipped_arrow.effect.mana": "Arrow of Mana",
+  "item.irons_spellbooks.keeper_spawn_egg": "Ancient Knight Spawn Egg",
+  "item.irons_spellbooks.necromancer_spawn_egg": "Necromancer Spawn Egg",
+  "item.irons_spellbooks.pyromancer_spawn_egg": "Pyromancer Spawn Egg",
+  "item.irons_spellbooks.cryomancer_spawn_egg": "Cryomancer Spawn Egg",
+  "item.irons_spellbooks.archevoker_spawn_egg": "Archevoker Spawn Egg",
+  "item.irons_spellbooks.dead_king_corpse_spawn_egg": "Dead King Corpse Spawn Egg",
+  "item.irons_spellbooks.priest_spawn_egg": "Priest Spawn Egg",
+  "item.irons_spellbooks.apothecarist_spawn_egg": "Apothecarist Spawn Egg",
+  "item.irons_spellbooks.ice_spider_spawn_egg": "Ice Spider Spawn Egg",
+  "item.irons_spellbooks.music_disc_dead_king_lullaby": "Music Disc",
+  "item.irons_spellbooks.music_disc_flame_still_burns": "Music Disc",
+  "item.irons_spellbooks.music_disc_whispers_of_ice": "Music Disc",
+  "item.irons_spellbooks.disc_fragment_flame_still_burns": "Disc Fragment",
+  "item.irons_spellbooks.disc_fragment_flame_still_burns.desc": "Music Disc - The Flame Still Burns",
+  "item.irons_spellbooks.archevoker_logbook_translated": "Archevoker's Logbook",
+  "item.irons_spellbooks.archevoker_logbook_untranslated": "Archevoker's Logbook",
+  "item.irons_spellbooks.paladin_chestplate": "Lightbringer Chestplate",
+  "item.irons_spellbooks.infernal_sorcerer_chestplate": "Infernal Sorcerer Chestplate",
+  "item.irons_spellbooks.infernal_sorcerer_chestplate.desc": "Dealing Fire Spell Damage adds a stack of Immolation to the creature",
+  "item.irons_spellbooks.infernal_sorcerer_chestplate.immolate.desc": "At 3 Immolation stacks, cause an explosion (%s damage), spreading Immolation",
+  "item.irons_spellbooks.speed_boots": "Boots of Speed",
+  "item.irons_spellbooks.mithril_weave": "Mithril Weave",
+  "item.irons_spellbooks.cinderous_soulcaller": "Cinderous Soulcaller",
+  "item.irons_spellbooks.cinderous_soulcaller.failure.no_soul": "Nothing echoes back...",
+  "item.irons_spellbooks.cinderous_soulcaller.failure.in_progress": "An echo has already answered.",
+  "item.irons_spellbooks.decrepit_key": "Decrepit Key",
+  "item.irons_spellbooks.decrepit_key.description": "Unlocks Citadel Vaults",
+  "item.irons_spellbooks.bone_key": "Bone Key",
+  "item.irons_spellbooks.bone_key.description": "Unlocks Catacombs Vaults",
+  "item.irons_spellbooks.hellrazor": "Hellrazor",
+  "item.irons_spellbooks.decrepit_scythe": "Decrepit Scythe",
+  "item.irons_spellbooks.legionnaire_flamberge": "Legionnaire Flamberge",
+  "item.irons_spellbooks.chained_book": "Chained Book",
+  "item.irons_spellbooks.unchained_book": "Unchained Book",
+  "item.irons_spellbooks.divine_soulshard": "Divine Soulshard",
+  "item.irons_spellbooks.betrayer_signet": "Signet of the Betrayer",
+  "item.irons_spellbooks.betrayer_signet.desc": "Deal extra damage to creatures based on their maximum mana",
+  "item.irons_spellbooks.bloody_vellum": "Bloody Vellum",
+  "item.irons_spellbooks.cursed_doll_spell_book": "Vampiric Spell Book",
+  "item.irons_spellbooks.cursed_doll_spell_book.guide": "A hexed Spell Book created by the Ancient Magician known as Apshock.",
+  "item.irons_spellbooks.icy_fang": "Icy Fang",
+  "item.irons_spellbooks.prepared_ice_spider_egg": "Prepared Ice Spider Egg",
+  "item.irons_spellbooks.cooked_ice_spider_egg": "Cooked Ice Spider Egg",
+  "item.irons_spellbooks.boreal_blade": "Boreal Blade",
+  "item.irons_spellbooks.ice_spell_book": "Frostbranded Book",
+  "item.irons_spellbooks.twilight_gale": "Twilight Gale",
+  "item.irons_spellbooks.chronicle": "The Chronicle",
+  "item.irons_spellbooks.chronicle.chapter": "Chapter %s:\n",
+  "item.irons_spellbooks.chronicle.chapter_1": "The Loyal Souls",
+  "item.irons_spellbooks.chronicle.chapter_2": "The Faithful Souls",
+  "item.irons_spellbooks.chronicle.chapter_3": "The Lost Souls",
+  "item.irons_spellbooks.wicked_bone_ring": "Wicked Bone Ring",
+  "item.irons_spellbooks.wicked_bone_ring.desc": "+1 Spell Projectile Ricochet",
+  "item.irons_spellbooks.dead_king_phylactery": "Dead King Phylactery",
+  "item.irons_spellbooks.dead_king_phylactery.description": "Use on Dead King Soul to respawn Dead King",
+  "item.irons_spellbooks.dead_king_phylactery_shard": "Dead King Phylactery Shard",
+  "block.irons_spellbooks.inscription_table": "Inscription Table",
+  "block.irons_spellbooks.scroll_forge": "Scroll Forge",
+  "block.irons_spellbooks.pedestal": "Pedestal",
+  "block.irons_spellbooks.arcane_anvil": "Arcane Anvil",
+  "block.irons_spellbooks.arcane_debris": "Arcane Debris",
+  "block.irons_spellbooks.armor_pile": "Armor Pile",
+  "block.irons_spellbooks.alchemist_cauldron": "Alchemist Cauldron",
+  "block.irons_spellbooks.firefly_jar": "Firefly Jar",
+  "block.irons_spellbooks.deepslate_mithril_ore": "Deepslate Mithril Ore",
+  "block.irons_spellbooks.mithril_ore": "Mithril Ore",
+  "block.irons_spellbooks.portal_frame": "Portal Frame",
+  "block.irons_spellbooks.portal_frame.desc": "Can be connected with Portal spell",
+  "block.irons_spellbooks.brazier": "Brazier",
+  "block.irons_spellbooks.brazier_soul": "Soul Brazier",
+  "block.irons_spellbooks.book_stack": "Book Stack",
+  "block.irons_spellbooks.book_stack.description": "Decoration Block",
+  "block.irons_spellbooks.wisewood_bookshelf": "Wisewood Bookshelf",
+  "block.irons_spellbooks.wisewood_chiseled_bookshelf": "Wisewood Chiseled Bookshelf",
+  "block.irons_spellbooks.nether_brick_pillar": "Nether Brick Pillar",
+  "block.irons_spellbooks.cinderous_soul_rune": "Cinderous Soul Rune",
+  "block.irons_spellbooks.voidstone": "Voidstone",
+  "block.irons_spellbooks.pocket_dimension_portal_frame": "Pocket Dimension Portal Frame",
+  "block.irons_spellbooks.ice_spider_egg": "Ice Spider Egg",
+  "block.irons_spellbooks.cooked_ice_spider_egg": "Cooked Ice Spider Egg",
+  "block.irons_spellbooks.trial_spawner": "Magic Spawner",
+  "block.irons_spellbooks.vault": "Magic Vault",
+  "block.irons_spellbooks.tyros_statue": "Tyros Statue",
+  "block.irons_spellbooks.bone_vault": "Bone Vault",
+  "block.irons_spellbooks.cinderous_vault": "Cinderous Vault",
+  "effect.irons_spellbooks.blood_slashed": "Blood Slashed",
+  "effect.irons_spellbooks.angel_wings": "Angel Wings",
+  "effect.irons_spellbooks.heartstop": "Heartstop",
+  "effect.irons_spellbooks.abyssal_shroud": "Abyssal Shroud",
+  "effect.irons_spellbooks.true_invisibility": "True Invisibility",
+  "effect.irons_spellbooks.ascension": "Ascension",
+  "effect.irons_spellbooks.fortify": "Fortified",
+  "effect.irons_spellbooks.enchanted_ward": "Enchanted Ward",
+  "effect.irons_spellbooks.evasion": "Evasion",
+  "effect.irons_spellbooks.charged": "Charged",
+  "effect.irons_spellbooks.rend": "Rend",
+  "effect.irons_spellbooks.spider_aspect": "Aspect of the Spider",
+  "effect.irons_spellbooks.blight": "Blighted",
+  "effect.irons_spellbooks.guided": "Guided",
+  "effect.irons_spellbooks.airborne": "Airborne",
+  "effect.irons_spellbooks.vigor": "Vigor",
+  "effect.irons_spellbooks.instant_mana": "Instant Mana",
+  "effect.irons_spellbooks.oakskin": "Oakskin",
+  "effect.irons_spellbooks.planar_sight": "Planar Sight",
+  "effect.irons_spellbooks.antigravity": "Anti-Gravity",
+  "effect.irons_spellbooks.chilled": "Chilled",
+  "effect.irons_spellbooks.slowed": "Slowed",
+  "effect.irons_spellbooks.hastened": "Hastened",
+  "effect.irons_spellbooks.burning_dash": "Burning Dash",
+  "effect.irons_spellbooks.gluttony": "Gluttony",
+  "effect.irons_spellbooks.echoing_strikes": "Echoing Strikes",
+  "effect.irons_spellbooks.thunderstorm": "Thunderstorm",
+  "effect.irons_spellbooks.frostbite": "Frostbite",
+  "effect.irons_spellbooks.immolate": "Immolation",
+  "effect.irons_spellbooks.fall_damage_immunity": "Fall Damage Immunity",
+  "effect.irons_spellbooks.ice_spider_lure": "Ice Spider Lure",
+  "effect.irons_spellbooks.soul_burn": "Soul Burn",
+  "effect.irons_spellbooks.sacrificial_mark": "Sacrificial Mark",
+  "effect.irons_spellbooks.trial_omen": "Trial Omen",
+  "effect.irons_spellbooks.trial_omen.description": "Transforms nearby trial spawners into ominous trial spawners",
+  "effect.irons_spellbooks.heartstop.description": "Become temporarily invulnerable, but take 50% of accumulated damage once it wears off",
+  "effect.irons_spellbooks.angel_wings.description": "Grants spectral elytra wings",
+  "effect.irons_spellbooks.abyssal_shroud.description": "Dodge any attack while under its effects, taking no damage",
+  "effect.irons_spellbooks.true_invisibility.description": "Your body as well as armor and items become invisible while under its effects",
+  "effect.irons_spellbooks.ascension.description": "Provides lingering weightlessness from the Ascension spell",
+  "effect.irons_spellbooks.fortify.description": "Provides absorption hearts",
+  "effect.irons_spellbooks.enchanted_ward.description": "Your body rapidly degrades under this oppressive magic field",
+  "effect.irons_spellbooks.evasion.description": "Teleport away from any attack while under its effects, taking no damage",
+  "effect.irons_spellbooks.charged.description": "Increases attack damage by 10% per level, spell power by 5% per level, and speed by 20% per level",
+  "effect.irons_spellbooks.rend.description": "Decreases your armor by 5% per level",
+  "effect.irons_spellbooks.spider_aspect.description": "Increases your damage dealt against targets with poison by 5% per level",
+  "effect.irons_spellbooks.blight.description": "Decreases your outgoing damage by 5% per level and incoming healing by 10% per level",
+  "effect.irons_spellbooks.guided.description": "Nearby projectiles are attracted towards you.",
+  "effect.irons_spellbooks.airborne.description": "You are vulnerable to taking kinetic damage",
+  "effect.irons_spellbooks.vigor.description": "Gain 1 additional heart of max hp per level",
+  "effect.irons_spellbooks.instant_mana.description": "Restores 25 mana + 5% of your max mana per level",
+  "effect.irons_spellbooks.oakskin.description": "Grants 15% damage reduction, and an additional 5% per level",
+  "effect.irons_spellbooks.planar_sight.description": "Shift your vision in between planes, gaining the ability to see creatures through solid material",
+  "effect.irons_spellbooks.antigravity.description": "Produces Weightlessness",
+  "effect.irons_spellbooks.chilled.description": "Decreases movement speed and doubles incoming freeze time",
+  "effect.irons_spellbooks.slowed.description": "Decreases movement speed, attack speed, mining speed, and cast time reduction",
+  "effect.irons_spellbooks.hastened.description": "Increases movement speed, attack speed, mining speed, and cast time reduction",
+  "effect.irons_spellbooks.gluttony.description": "Converts food eaten into mana based on its nutrition",
+  "effect.irons_spellbooks.echoing_strikes.description": "Non-magical attacks will create an echo, producing a spectral sword to slam down in an area, or a piercing magical arrow to shoot the same target. Echoes do a percent of the original attack's damage.",
+  "effect.irons_spellbooks.thunderstorm.description": "While under the effects of the spell, small bolts of lightning strike nearby creatures every 2 seconds.",
+  "effect.irons_spellbooks.frostbite.description": "While under the effects of the spell, any fully-frozen creature you kill turn into an Ice Shadow. Ice Shadows shatter into icicles after 5 seconds or upon taking any damage.",
+  "effect.irons_spellbooks.immolate.description": "Upon reaching 3 stacks of Immolation, the creature explodes, dealing damage and Immolating nearby creatures",
+  "effect.irons_spellbooks.fall_damage_immunity.description": "Prevented from taking fall damage while under its effects",
+  "effect.irons_spellbooks.ice_spider_lure.description": "Will cause an Ice Spider to spawn and hunt you down upon wearing off",
+  "effect.irons_spellbooks.soul_burn.description": "Decreases incoming healing by 5% per level",
+  "entity.irons_spellbooks.acid_orb": "Acid Orb",
+  "entity.irons_spellbooks.apothecarist": "Apothecarist",
+  "entity.irons_spellbooks.arcane_shackle": "Arcane Shackle",
+  "entity.irons_spellbooks.archevoker": "Archevoker",
+  "entity.irons_spellbooks.arrow_volley": "Arrow Volley",
+  "entity.irons_spellbooks.ball_lightning": "Ball Lightning",
+  "entity.irons_spellbooks.black_hole": "Black Hole",
+  "entity.irons_spellbooks.blizzard_aoe": "Blizzard",
+  "entity.irons_spellbooks.blood_needle": "Blood Needle",
+  "entity.irons_spellbooks.blood_slash": "Blood Slash",
+  "entity.irons_spellbooks.catacombs_zombie": "Catacombs Zombie",
+  "entity.irons_spellbooks.chain_lightning": "Chain Lightning",
+  "entity.irons_spellbooks.citadel_keeper": "Ancient Knight",
+  "entity.irons_spellbooks.comet": "Comet",
+  "entity.irons_spellbooks.cone_of_cold": "Cone of Cold",
+  "entity.irons_spellbooks.creeper_head": "Creeper Head",
+  "entity.irons_spellbooks.cryomancer": "Cryomancer",
+  "entity.irons_spellbooks.cultist": "Cultist",
+  "entity.irons_spellbooks.cursed_armor_stand": "Cursed Armor Stand",
+  "entity.irons_spellbooks.dead_king": "The Dead King",
+  "entity.irons_spellbooks.dead_king_corpse": "Skeleton",
+  "entity.irons_spellbooks.dead_king_soul": "Dead King Soul",
+  "entity.irons_spellbooks.debug_wizard": "Debug Wizard",
+  "entity.irons_spellbooks.devour_jaw": "Devour Jaw",
+  "entity.irons_spellbooks.dragon_breath": "Dragon Breath",
+  "entity.irons_spellbooks.dragon_breath_pool": "Dragon Breath",
+  "entity.irons_spellbooks.earthquake_aoe": "Earthquake",
+  "entity.irons_spellbooks.echoing_strike": "Echoing Strike",
+  "entity.irons_spellbooks.echoing_sword": "Echoing Strike",
+  "entity.irons_spellbooks.echoing_arrow": "Echoing Arrow",
+  "entity.irons_spellbooks.eldritch_blast": "Eldritch Blast",
+  "entity.irons_spellbooks.electrocute": "Electrocute",
+  "entity.irons_spellbooks.ender_chain": "Ender Chain",
+  "entity.irons_spellbooks.fang_swirl": "Fang Swirl",
+  "entity.irons_spellbooks.fire_arrow": "Fire Arrow",
+  "entity.irons_spellbooks.fire_boss": "Echo of Tyros, First Flamebearer",
+  "entity.irons_spellbooks.fire_breath": "Fire Breath",
+  "entity.irons_spellbooks.fire_eruption": "Fire Eruption",
+  "entity.irons_spellbooks.fire_field": "Fiery Field",
+  "entity.irons_spellbooks.fireball": "Large Fireball",
+  "entity.irons_spellbooks.firebolt": "Firebolt",
+  "entity.irons_spellbooks.fiery_dagger": "Fiery Dagger",
+  "entity.irons_spellbooks.firefly_swarm": "Firefly Swarm",
+  "entity.irons_spellbooks.frost_field": "Frost Field",
+  "entity.irons_spellbooks.frozen_humanoid": "Frozen",
+  "entity.irons_spellbooks.guiding_bolt": "Guiding Bolt",
+  "entity.irons_spellbooks.gust": "Gust",
+  "entity.irons_spellbooks.healing_aoe": "Healing Aoe",
+  "entity.irons_spellbooks.ice_block_projectile": "Iceologer Block",
+  "entity.irons_spellbooks.ice_spider": "Ice Spider",
+  "entity.irons_spellbooks.ice_spike": "Ice Spike",
+  "entity.irons_spellbooks.ice_tomb": "Ice Tomb",
+  "entity.irons_spellbooks.icicle": "Icicle",
+  "entity.irons_spellbooks.lightning_lance": "Lightning Lance",
+  "entity.irons_spellbooks.lightning_strike": "Lightning Strike",
+  "entity.irons_spellbooks.magehunter_vindicator": "Magehunter Vindicator",
+  "entity.irons_spellbooks.magic_arrow": "Magic Arrow",
+  "entity.irons_spellbooks.magic_missile": "Magic Missile",
+  "entity.irons_spellbooks.magma_ball": "Magma Bomb",
+  "entity.irons_spellbooks.necromancer": "Necromancer",
+  "entity.irons_spellbooks.ominous_fire_orb": "Ominous Fire Orb",
+  "entity.irons_spellbooks.poison_arrow": "Poison Arrow",
+  "entity.irons_spellbooks.poison_breath": "Poison Breath",
+  "entity.irons_spellbooks.poison_cloud": "Poison Cloud",
+  "entity.irons_spellbooks.poison_splash": "Poison Splash",
+  "entity.irons_spellbooks.portal": "Portal",
+  "entity.irons_spellbooks.priest": "Priest",
+  "entity.irons_spellbooks.pyromancer": "Pyromancer",
+  "entity.irons_spellbooks.ray_of_frost": "Ray of Frost",
+  "entity.irons_spellbooks.root": "Root",
+  "entity.irons_spellbooks.sculk_tentacle": "Sculk Tentacle",
+  "entity.irons_spellbooks.shield": "Shield",
+  "entity.irons_spellbooks.small_fireball": "Small Fireball",
+  "entity.irons_spellbooks.small_magic_arrow": "Magic Arrow",
+  "entity.irons_spellbooks.snowball": "Snowball",
+  "entity.irons_spellbooks.spear": "Spear",
+  "entity.irons_spellbooks.spectral_hammer": "Spectral Hammer",
+  "entity.irons_spellbooks.spectral_steed": "Spectral Steed",
+  "entity.irons_spellbooks.stomp_aoe": "Stomp",
+  "entity.irons_spellbooks.summoned_claymore": "Summoned Claymore",
+  "entity.irons_spellbooks.summoned_polar_bear": "Summoned Polar Bear",
+  "entity.irons_spellbooks.summoned_rapier": "Summoned Rapier",
+  "entity.irons_spellbooks.summoned_skeleton": "Summoned Skeleton",
+  "entity.irons_spellbooks.summoned_sword": "Summoned Sword",
+  "entity.irons_spellbooks.summoned_vex": "Summoned Vex",
+  "entity.irons_spellbooks.summoned_zombie": "Summoned Zombie",
+  "entity.irons_spellbooks.sunbeam": "Sunbeam",
+  "entity.irons_spellbooks.target_area": "Target Area",
+  "entity.irons_spellbooks.thrown_item": "Thrown Item",
+  "entity.irons_spellbooks.thunderstep_orb": "Thunderstep",
+  "entity.irons_spellbooks.undead_rift": "Undead Rift",
+  "entity.irons_spellbooks.visual_falling_block": "Falling Block",
+  "entity.irons_spellbooks.wall_of_fire": "Wall of Fire",
+  "entity.irons_spellbooks.wisp": "Wisp",
+  "entity.irons_spellbooks.wither_skull": "Wither Skull",
+  "item.irons_spellbooks.music_disc_whispers_of_ice.desc": "Caner Crebes - Whispers of Ice",
+  "item.irons_spellbooks.music_disc_dead_king_lullaby.desc": "Caner Crebes - King's Lullaby",
+  "item.irons_spellbooks.music_disc_flame_still_burns.desc": "Caner Crebes - The Flame Still Burns"
+ }
+}

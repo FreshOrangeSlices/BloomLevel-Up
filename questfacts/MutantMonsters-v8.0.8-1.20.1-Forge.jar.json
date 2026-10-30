@@ -1,0 +1,196 @@
+{
+ "jar": "MutantMonsters-v8.0.8-1.20.1-Forge.jar",
+ "namespaces": [
+  "forge",
+  "minecraft",
+  "mutantmonsters"
+ ],
+ "advancements": [
+  {
+   "id": "mutantmonsters:burn_zombie_burn",
+   "parent": "mutantmonsters:root",
+   "title": "Burn Zombie Burn",
+   "description": "Use a flint and steel to light a mutant zombie on fire when it's down",
+   "icon": "minecraft:flint_and_steel",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_interacted_with_entity"
+   ],
+   "ids": [
+    "items=minecraft:fire_charge",
+    "items=minecraft:flint_and_steel",
+    "type=mutantmonsters:mutant_zombie"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:frosty_the_snow_golem",
+   "parent": "mutantmonsters:gunpowder_spice",
+   "title": "Frosty the Snow Golem",
+   "description": "Create a Mutant Snow Golem",
+   "icon": "minecraft:jack_o_lantern",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:summoned_entity"
+   ],
+   "ids": [
+    "type=mutantmonsters:mutant_snow_golem"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:gunpowder_spice",
+   "parent": "mutantmonsters:root",
+   "title": "Gunpowder, spice...",
+   "description": "...and everything nice. Obtain a potion of Chemical X.",
+   "icon": "minecraft:gunpowder",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=minecraft:potion"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:hulk_smash",
+   "parent": "mutantmonsters:burn_zombie_burn",
+   "title": "Hulk Smash!",
+   "description": "Kill a Mutant Zombie using a Hulk Hammer",
+   "icon": "mutantmonsters:hulk_hammer",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "items=mutantmonsters:hulk_hammer",
+    "type=mutantmonsters:mutant_zombie"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:no_bones_about_it",
+   "parent": "mutantmonsters:root",
+   "title": "No Bones About It",
+   "description": "Kill a Mutant Skeleton using a crossbow while wearing a full set of Mutant Skeleton armor",
+   "icon": "mutantmonsters:mutant_skeleton_skull",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "items=mutantmonsters:mutant_skeleton_boots",
+    "items=mutantmonsters:mutant_skeleton_chestplate",
+    "items=mutantmonsters:mutant_skeleton_leggings",
+    "items=mutantmonsters:mutant_skeleton_skull",
+    "type=#minecraft:arrows",
+    "type=mutantmonsters:mutant_skeleton"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:root",
+   "parent": "",
+   "title": "Mutant Monsters",
+   "description": "",
+   "icon": "mutantmonsters:endersoul_hand",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:entity_killed_player",
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:spider_pig_spider_pig",
+   "parent": "mutantmonsters:gunpowder_spice",
+   "title": "Spider-Pig, Spider-Pig...",
+   "description": "Feed a Pig a Fermented Spider Eye and throw Chemical X at it",
+   "icon": "minecraft:cobweb",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:summoned_entity"
+   ],
+   "ids": [
+    "type=mutantmonsters:spider_pig"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "mutantmonsters:you_da_bomby",
+   "parent": "mutantmonsters:root",
+   "title": "You da Bomby",
+   "description": "Hatch a Creeper Minion from its egg",
+   "icon": "minecraft:creeper_head",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tame_animal"
+   ],
+   "ids": [
+    "type=mutantmonsters:creeper_minion"
+   ],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.mutantmonsters.mutant_skeleton_skull": "Mutant Skeleton Skull",
+  "block.mutantmonsters.mutant_skeleton_wall_skull": "Mutant Skeleton Wall Skull",
+  "entity.mutantmonsters.body_part": "Body Part",
+  "entity.mutantmonsters.chemical_x": "Chemical X",
+  "entity.mutantmonsters.creeper_minion": "Creeper Minion",
+  "entity.mutantmonsters.creeper_minion_egg": "Creeper Minion Egg",
+  "entity.mutantmonsters.endersoul_clone": "Endersoul Clone",
+  "entity.mutantmonsters.endersoul_fragment": "Endersoul Fragment",
+  "entity.mutantmonsters.mutant_arrow": "Mutant Arrow",
+  "entity.mutantmonsters.mutant_creeper": "Mutant Creeper",
+  "entity.mutantmonsters.mutant_enderman": "Mutant Enderman",
+  "entity.mutantmonsters.mutant_skeleton": "Mutant Skeleton",
+  "entity.mutantmonsters.mutant_snow_golem": "Mutant Snow Golem",
+  "entity.mutantmonsters.mutant_zombie": "Mutant Zombie",
+  "entity.mutantmonsters.mutant_zombie_villager": "Mutant Zombie Villager",
+  "entity.mutantmonsters.skull_spirit": "Skull Spirit",
+  "entity.mutantmonsters.spider_pig": "Spider-Pig",
+  "entity.mutantmonsters.throwable_block": "Throwable Block",
+  "item.mutantmonsters.creeper_minion_spawn_egg": "Creeper Minion Spawn Egg",
+  "item.mutantmonsters.mutant_creeper_spawn_egg": "Mutant Creeper Spawn Egg",
+  "item.mutantmonsters.mutant_enderman_spawn_egg": "Mutant Enderman Spawn Egg",
+  "item.mutantmonsters.mutant_skeleton_spawn_egg": "Mutant Skeleton Spawn Egg",
+  "item.mutantmonsters.mutant_snow_golem_spawn_egg": "Mutant Snow Golem Spawn Egg",
+  "item.mutantmonsters.mutant_zombie_spawn_egg": "Mutant Zombie Spawn Egg",
+  "item.mutantmonsters.mutant_zombie_villager_spawn_egg": "Mutant Zombie Villager Spawn Egg",
+  "item.mutantmonsters.spider_pig_spawn_egg": "Spider-Pig Spawn Egg",
+  "item.mutantmonsters.creeper_minion_tracker": "Creeper Minion Tracker",
+  "item.mutantmonsters.creeper_minion_tracker.tame_success": "%1$s was tamed by %2$s",
+  "item.mutantmonsters.creeper_shard": "Creeper Shard",
+  "item.mutantmonsters.hulk_hammer": "Hulk Hammer",
+  "item.mutantmonsters.chemical_x": "Chemical X",
+  "item.mutantmonsters.endersoul_hand": "Endersoul Hand",
+  "item.mutantmonsters.endersoul_hand.teleport_failed": "Unable to teleport to location",
+  "item.mutantmonsters.mutant_skeleton_arms": "Mutant Skeleton Arms",
+  "item.mutantmonsters.mutant_skeleton_limb": "Mutant Skeleton Limb",
+  "item.mutantmonsters.mutant_skeleton_pelvis": "Mutant Skeleton Pelvis",
+  "item.mutantmonsters.mutant_skeleton_rib_cage": "Mutant Skeleton Rib Cage",
+  "item.mutantmonsters.mutant_skeleton_rib": "Mutant Skeleton Rib",
+  "item.mutantmonsters.mutant_skeleton_shoulder_pad": "Mutant Skeleton Shoulder Pad",
+  "item.mutantmonsters.mutant_skeleton_skull": "Mutant Skeleton Skull",
+  "item.mutantmonsters.mutant_skeleton_chestplate": "Mutant Skeleton Chestplate",
+  "item.mutantmonsters.mutant_skeleton_leggings": "Mutant Skeleton Leggings",
+  "item.mutantmonsters.mutant_skeleton_boots": "Mutant Skeleton Boots",
+  "item.minecraft.tipped_arrow.effect.chemical_x": "Arrow of Chemical X",
+  "item.minecraft.potion.effect.chemical_x": "Potion of Chemical X",
+  "item.minecraft.splash_potion.effect.chemical_x": "Splash Potion of Chemical X",
+  "item.minecraft.lingering_potion.effect.chemical_x": "Lingering Potion of Chemical X",
+  "effect.mutantmonsters.chemical_x": "Chemical X"
+ }
+}

@@ -1,0 +1,3836 @@
+{
+ "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar",
+ "namespaces": [
+  "arsenal",
+  "forge",
+  "minecraft",
+  "soulsweapons"
+ ],
+ "advancements": [
+  {
+   "id": "soulsweapons:all_moonlight_weapons",
+   "parent": "soulsweapons:moonlight_tools",
+   "title": "Mooning",
+   "description": "Acquire all the different moonlight blades. Swords, greatswords, katanas, you name it!",
+   "icon": "soulsweapons:dark_moon_greatsword",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:bluemoon_greatsword",
+    "items=soulsweapons:bluemoon_shortsword",
+    "items=soulsweapons:dark_moon_greatsword",
+    "items=soulsweapons:holy_moonlight_greatsword",
+    "items=soulsweapons:holy_moonlight_sword",
+    "items=soulsweapons:moonlight_greatsword",
+    "items=soulsweapons:moonlight_shortsword",
+    "items=soulsweapons:moonveil",
+    "items=soulsweapons:pure_moonlight_greatsword"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:all_weapons",
+   "parent": "soulsweapons:all_moonlight_weapons",
+   "title": "A Master at Work",
+   "description": "Acquire all the Legendary Weapons from this mod",
+   "icon": "soulsweapons:lord_soul_purple",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:bloodlust",
+    "items=soulsweapons:bloodthirster",
+    "items=soulsweapons:bluemoon_greatsword",
+    "items=soulsweapons:bluemoon_shortsword",
+    "items=soulsweapons:chungus_staff",
+    "items=soulsweapons:comet_spear",
+    "items=soulsweapons:crucible_sword",
+    "items=soulsweapons:dark_moon_greatsword",
+    "items=soulsweapons:darkin_blade",
+    "items=soulsweapons:darkin_scythe",
+    "items=soulsweapons:darkin_scythe_pre",
+    "items=soulsweapons:darkmoon_longbow",
+    "items=soulsweapons:dawnbreaker",
+    "items=soulsweapons:dragon_staff",
+    "items=soulsweapons:dragonbane",
+    "items=soulsweapons:dragonslayer_swordspear",
+    "items=soulsweapons:draugr",
+    "items=soulsweapons:draupnir_spear",
+    "items=soulsweapons:empowered_dawnbreaker",
+    "items=soulsweapons:excalibur",
+    "items=soulsweapons:featherlight",
+    "items=soulsweapons:forlorn_scythe",
+    "items=soulsweapons:freyr_sword",
+    "items=soulsweapons:frostmourne",
+    "items=soulsweapons:galeforce",
+    "items=soulsweapons:glaive_of_hodir",
+    "items=soulsweapons:guts_sword",
+    "items=soulsweapons:holy_moonlight_greatsword",
+    "items=soulsweapons:holy_moonlight_sword",
+    "items=soulsweapons:kraken_slayer_crossbow",
+    "items=soulsweapons:leviathan_axe",
+    "items=soulsweapons:lich_bane",
+    "items=soulsweapons:master_sword",
+    "items=soulsweapons:mehrunes_razor",
+    "items=soulsweapons:mjolnir",
+    "items=soulsweapons:moonlight_greatsword",
+    "items=soulsweapons:moonlight_shortsword",
+    "items=soulsweapons:moonveil",
+    "items=soulsweapons:nightfall",
+    "items=soulsweapons:nightlords_sword",
+    "items=soulsweapons:nights_edge_item",
+    "items=soulsweapons:pure_moonlight_greatsword",
+    "items=soulsweapons:rageblade",
+    "items=soulsweapons:shadow_assassin_scythe",
+    "items=soulsweapons:simons_blade",
+    "items=soulsweapons:simons_bowblade",
+    "items=soulsweapons:skofnung",
+    "items=soulsweapons:soul_reaper",
+    "items=soulsweapons:sting",
+    "items=soulsweapons:supernova",
+    "items=soulsweapons:tonitrus",
+    "items=soulsweapons:whirligig_sawblade",
+    "items=soulsweapons:withered_wabbajack"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:arkenplate",
+   "parent": "soulsweapons:returning_knight",
+   "title": "Redemption Ark",
+   "description": "Craft the Arkenplate and become stronger than diamonds",
+   "icon": "soulsweapons:arkenplate",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:arkenplate"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:bloodthirsty",
+   "parent": "soulsweapons:demon_heart",
+   "title": "Color Me Blood",
+   "description": "Use the Bloodthirster while being Bloodthirsty",
+   "icon": "soulsweapons:bloodthirster",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:effects_changed",
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:bloodthirster"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:bluemoon_tools",
+   "parent": "soulsweapons:moonstone",
+   "title": "A... Fake?",
+   "description": "Create weapons of the finest gems, the only thing they need now is raw power...",
+   "icon": "soulsweapons:bluemoon_greatsword",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:bluemoon_greatsword",
+    "items=soulsweapons:bluemoon_shortsword"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:blunderbuss",
+   "parent": "soulsweapons:hunter_pistol",
+   "title": "Doomsday",
+   "description": "Craft the Hunter Blunderbuss, the bigger the blast, the bigger the damage!",
+   "icon": "soulsweapons:blunderbuss",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:blunderbuss"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:cannon",
+   "parent": "soulsweapons:gatling_gun",
+   "title": "Maybe a little over the top?",
+   "description": "Craft the Hunter Cannon, aim for the sparrows and unleash a devastating blast!",
+   "icon": "soulsweapons:hunter_cannon",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:hunter_cannon"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:chaos_orb",
+   "parent": "soulsweapons:end_of_reigns",
+   "title": "Contained Nebula",
+   "description": "Craft the Chaos Orb",
+   "icon": "soulsweapons:chaos_orb",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:chaos_orb"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:demon_heart",
+   "parent": "soulsweapons:root",
+   "title": "Demon Slayer",
+   "description": "Acquire a Demon Heart",
+   "icon": "soulsweapons:demon_heart",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:demon_heart"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:dragonslayer_swordspear",
+   "parent": "soulsweapons:lord_soul",
+   "title": "What was his name again?",
+   "description": "Acquire Dragonslayer Swordspear. Behold! The Power of the Heavens!",
+   "icon": "soulsweapons:dragonslayer_swordspear",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:dragonslayer_swordspear"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:draugr_boss",
+   "parent": "soulsweapons:root",
+   "title": "Restless Sleepwalker",
+   "description": "Defeat the Old Champion and the creature that has possessed it's remains",
+   "icon": "soulsweapons:essence_of_eventide",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "items=soulsweapons:essence_of_eventide",
+    "type=soulsweapons:draugr_boss"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:dream_on",
+   "parent": "soulsweapons:lord_soul",
+   "title": "Dream On",
+   "description": "Fall at least 50 blocks and survive thanks to Calculated Fall status effect.",
+   "icon": "minecraft:golden_boots",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:fall_from_height"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:end_of_reigns",
+   "parent": "soulsweapons:bloodthirsty",
+   "title": "Oh, The Misery",
+   "description": "End The Decaying King's suffering",
+   "icon": "soulsweapons:withered_demon_heart",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=soulsweapons:accursed_lord_boss"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:ender_of_world_ender",
+   "parent": "soulsweapons:uncertainty",
+   "title": "The End of the World Ender",
+   "description": "Defeat the Monarch of Chaos",
+   "icon": "soulsweapons:chaos_crown",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=soulsweapons:chaos_monarch"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:excalibur",
+   "parent": "soulsweapons:lord_soul",
+   "title": "Right back at ya!",
+   "description": "Kill the Warden after acquiring the Excalibur.",
+   "icon": "soulsweapons:excalibur",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "items=soulsweapons:excalibur",
+    "type=minecraft:warden"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:gatling_gun",
+   "parent": "soulsweapons:blunderbuss",
+   "title": "Bullets for Dinner",
+   "description": "Craft the Gatling Gun and watch it drain all your ammunition in an instant",
+   "icon": "soulsweapons:gatling_gun",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:gatling_gun"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:glaive_of_hodir",
+   "parent": "soulsweapons:lord_soul",
+   "title": "Schizo Ring",
+   "description": "Acquire the Glaive of Hodir, decimate your foes with never-ending aggression.",
+   "icon": "soulsweapons:glaive_of_hodir",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:glaive_of_hodir"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:hallowheart",
+   "parent": "soulsweapons:end_of_reigns",
+   "title": "or pvp boss",
+   "description": "Craft the Hallowheart and reject the withering",
+   "icon": "soulsweapons:withered_chest",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:withered_chest"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:heap_of_iron",
+   "parent": "soulsweapons:root",
+   "title": "My Brother",
+   "description": "Acquire the Dragonslayer, the heap of raw iron",
+   "icon": "soulsweapons:guts_sword",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:guts_sword"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:hunter_pistol",
+   "parent": "soulsweapons:root",
+   "title": "A new Hunter in Town",
+   "description": "Craft the Hunter Pistol, a simple, but powerful gun",
+   "icon": "soulsweapons:hunter_pistol",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:hunter_pistol"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:infused_arkenplate",
+   "parent": "soulsweapons:arkenplate",
+   "title": "ZABITO BOGA",
+   "description": "Infuse the Arkenplate with the soul of the Night Prowler",
+   "icon": "soulsweapons:enhanced_arkenplate",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:enhanced_arkenplate"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:infused_hallowheart",
+   "parent": "soulsweapons:hallowheart",
+   "title": "HATEFUL",
+   "description": "Infuse the Hallowheart with the soul of the Day Stalker",
+   "icon": "soulsweapons:enhanced_withered_chest",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:enhanced_withered_chest"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:kill_day_night_boss",
+   "parent": "soulsweapons:chaos_orb",
+   "title": "Heat Death of the Universe",
+   "description": "Use the Chaos Orb to summon the Day Stalker and Night Prowler, and acquire either of their souls.",
+   "icon": "soulsweapons:lord_soul_day_stalker",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "tag=soulsweapons:duo_boss_souls"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:leviathan_axe",
+   "parent": "soulsweapons:verglas",
+   "title": "Give or Take",
+   "description": "Aquire the Leviathan Axe",
+   "icon": "soulsweapons:leviathan_axe",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:leviathan_axe"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:lord_soul",
+   "parent": "soulsweapons:root",
+   "title": "Steeped in Strength",
+   "description": "Acquire a Lord Soul, the remnants of their excistence",
+   "icon": "soulsweapons:lord_soul_rose",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:lords_on_stick",
+   "parent": "soulsweapons:ender_of_world_ender",
+   "title": "Staves of Might and Magic",
+   "description": "Acquire the Dragon Staff, and it's chaotic counterpart the Withered Wabbajack",
+   "icon": "soulsweapons:dragon_staff",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:dragon_staff",
+    "items=soulsweapons:withered_wabbajack"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:moonknight",
+   "parent": "soulsweapons:draugr_boss",
+   "title": "Blue Steel",
+   "description": "Return the Essence of Eventide to it's rightful body, and defeat the godlike being that appears.",
+   "icon": "soulsweapons:essence_of_luminescence",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=soulsweapons:moonknight"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:moonlight_tools",
+   "parent": "soulsweapons:bluemoon_tools",
+   "title": "From the Software itself",
+   "description": "Enhance the weapons to their prime",
+   "icon": "soulsweapons:moonlight_greatsword",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:moonlight_greatsword",
+    "items=soulsweapons:moonlight_shortsword"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:moonstone",
+   "parent": "soulsweapons:root",
+   "title": "Full Moon in a Pocket",
+   "description": "Acquire a moonstone, gems shinier than diamonds!",
+   "icon": "soulsweapons:moonstone",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:nightfall",
+   "parent": "soulsweapons:returning_knight",
+   "title": "3rd Time's the Charm!",
+   "description": "Acquire the Nightfall and command your own undead army!",
+   "icon": "soulsweapons:nightfall",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:nightfall"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:rageblade",
+   "parent": "soulsweapons:lord_soul",
+   "title": "Standing here, I realize...",
+   "description": "Acquire Guinsoo's Rageblade, attack at light speed!",
+   "icon": "soulsweapons:rageblade",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:rageblade"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:recipes/building_blocks/chungus_emerald_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:chungus_emerald",
+    "recipe=soulsweapons:chungus_emerald_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chungus_emerald_block"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/building_blocks/cracked_infused_blackstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:cracked_infused_blackstone",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:cracked_infused_blackstone"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/building_blocks/infused_blackstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:infused_blackstone",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:infused_blackstone"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/building_blocks/moonstone_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_block"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/building_blocks/soulfire_stain",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:soulfire_stain",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soulfire_stain"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/building_blocks/verglas_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:verglas",
+    "recipe=soulsweapons:verglas_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:verglas_block"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/arkenplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:arkenstone",
+    "recipe=soulsweapons:arkenplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:arkenplate"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/armors/boots_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:armors/boots_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:armors/boots_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/armors/chestplates_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:armors/chestplates_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:armors/chestplates_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/armors/helmets_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:armors/helmets_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:armors/helmets_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/armors/leggings_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:armors/leggings_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:armors/leggings_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/axes_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:axes_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:axes_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/bloodlust",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:bloodlust",
+    "tag=forge:ingots/iron"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:bloodlust"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/bloodthirster",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:crimson_ingot",
+    "recipe=soulsweapons:bloodthirster"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:bloodthirster"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/bluemoon_greatsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:bluemoon_greatsword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:bluemoon_greatsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/bluemoon_shortsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:bluemoon_shortsword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:bluemoon_shortsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/blunderbuss",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:blunderbuss",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:blunderbuss"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/chaos_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:chaos_crown",
+    "recipe=soulsweapons:chaos_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chaos_helmet"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/chaos_orb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:essence_of_luminescence",
+    "recipe=soulsweapons:chaos_orb"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chaos_orb"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/chungus_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:essence_of_eventide",
+    "recipe=soulsweapons:chungus_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chungus_staff"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/comet_spear",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:comet_spear",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:comet_spear"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/crucible_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:crucible_sword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:crucible_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/dark_moon_greatsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:dark_moon_greatsword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:dark_moon_greatsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/darkin_blade",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:darkin_blade",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:darkin_blade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/darkin_scythe_pre",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:darkin_scythe_pre",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:darkin_scythe_pre"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/darkmoon_longbow",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:essence_of_eventide",
+    "recipe=soulsweapons:darkmoon_longbow"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:darkmoon_longbow"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/dawnbreaker",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:dawnbreaker",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:dawnbreaker"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/dragon_staff",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:blaze_rod",
+    "recipe=soulsweapons:dragon_staff"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:dragon_staff"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/dragonbane",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:dragonbane",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:dragonbane"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/dragonslayer_swordspear",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:dragonslayer_swordspear",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:dragonslayer_swordspear"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/draugr",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:essence_of_eventide",
+    "recipe=soulsweapons:draugr"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:draugr"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/draupnir_spear",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:draupnir_spear",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:draupnir_spear"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/empowered_dawnbreaker",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:lord_soul_day_stalker",
+    "recipe=soulsweapons:empowered_dawnbreaker"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:empowered_dawnbreaker"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/enhanced_arkenplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:lord_soul_night_prowler",
+    "recipe=soulsweapons:enhanced_arkenplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:enhanced_arkenplate"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/enhanced_withered_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:lord_soul_day_stalker",
+    "recipe=soulsweapons:enhanced_withered_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:enhanced_withered_chest"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/excalibur",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:excalibur",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:excalibur"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/featherlight",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:amethyst_shard",
+    "recipe=soulsweapons:featherlight"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:featherlight"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/forlorn_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:crimson_ingot",
+    "recipe=soulsweapons:forlorn_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:forlorn_boots"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/forlorn_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:crimson_ingot",
+    "recipe=soulsweapons:forlorn_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:forlorn_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/forlorn_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:crimson_ingot",
+    "recipe=soulsweapons:forlorn_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:forlorn_helmet"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/forlorn_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:crimson_ingot",
+    "recipe=soulsweapons:forlorn_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:forlorn_leggings"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/forlorn_scythe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:forlorn_scythe",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:forlorn_scythe"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/freyr_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:freyr_sword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:freyr_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/frostmourne",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:frostmourne",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:frostmourne"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/galeforce",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:galeforce",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:galeforce"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/gatling_gun",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:gatling_gun",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:gatling_gun"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/glaive_of_hodir",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:glaive_of_hodir",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:glaive_of_hodir"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/guts_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_block",
+    "recipe=soulsweapons:guts_sword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:guts_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/hoes_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:hoes_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:hoes_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/holy_greatsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=soulsweapons:holy_greatsword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:holy_greatsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/holy_moonlight_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:holy_moonlight_sword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:holy_moonlight_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/hunter_cannon",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:hunter_cannon",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:hunter_cannon"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/hunter_pistol",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:hunter_pistol",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:hunter_pistol"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/kirkhammer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_sword",
+    "recipe=soulsweapons:kirkhammer"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:kirkhammer"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/kraken_slayer",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:kraken_slayer",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:kraken_slayer"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/kraken_slayer_crossbow",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:kraken_slayer_crossbow",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:kraken_slayer_crossbow"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/leviathan_axe_left",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:leviathan_axe_left",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:leviathan_axe_left"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/leviathan_axe_right",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:leviathan_axe_right",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:leviathan_axe_right"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/lich_bane",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:lich_bane",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:lich_bane"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/master_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:master_sword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:master_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/mehrunes_razor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:mehrunes_razor",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:mehrunes_razor"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/melee_item_upgradables_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:melee_item_upgradables_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:melee_item_upgradables_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/mjolnir",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:mjolnir",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:mjolnir"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/moonlight_greatsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:moonlight_greatsword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonlight_greatsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/moonlight_shortsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:moonlight_shortsword",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonlight_shortsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/moonstone_ring_left",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:arkenstone",
+    "recipe=soulsweapons:moonstone_ring_left"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_ring_left"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/moonstone_ring_right",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:arkenstone",
+    "recipe=soulsweapons:moonstone_ring_right"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_ring_right"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/moonveil",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:moonveil",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonveil"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/nightfall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:nightfall",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:nightfall"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/nightlords_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:lord_soul_night_prowler",
+    "recipe=soulsweapons:nightlords_sword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:nightlords_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/nights_edge_item",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:lord_soul_night_prowler",
+    "recipe=soulsweapons:nights_edge_item"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:nights_edge_item"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/pickaxes_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:pickaxes_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:pickaxes_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/pure_moonlight_greatsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:essence_of_luminescence",
+    "recipe=soulsweapons:pure_moonlight_greatsword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:pure_moonlight_greatsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/rageblade",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:rageblade",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:rageblade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/ranged_item_upgradables_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:ranged_item_upgradables_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:ranged_item_upgradables_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/shovels_upgrade",
+   "parent": "",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:stick",
+    "recipe=soulsweapons:shovels_upgrade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:shovels_upgrade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/silver_bullet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:silver_bullet",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:silver_bullet"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/silver_bullet_iron_ingot",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:silver_bullet_iron_ingot",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:silver_bullet_iron_ingot"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/simons_bowblade",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:iron_ingot",
+    "recipe=soulsweapons:simons_bowblade"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:simons_bowblade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/skofnung",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:skofnung",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:skofnung"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/skofnung_stone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:verglas",
+    "recipe=soulsweapons:skofnung_stone"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:skofnung_stone"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_ingot_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_ingot_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_ingot_boots"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_ingot_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_ingot_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_ingot_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_ingot_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_ingot_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_ingot_helmet"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_ingot_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_ingot_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_ingot_leggings"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_reaper",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:soul_reaper",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_reaper"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_robes_boots",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_robes_boots"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_robes_boots"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_robes_chestplate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_robes_chestplate"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_robes_chestplate"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_robes_helmet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_robes_helmet"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_robes_helmet"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/soul_robes_leggings",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:soul_robes_leggings"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_robes_leggings"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/sting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:verglas",
+    "recipe=soulsweapons:sting"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:sting"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/supernova",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:supernova",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:supernova"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/tonitrus",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:tonitrus",
+    "tag=forge:ingots/iron"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:tonitrus"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/translucent_double_greatsword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:translucent_double_greatsword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:translucent_double_greatsword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/translucent_glaive",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:translucent_glaive"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:translucent_glaive"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/translucent_sword",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:soul_ingot",
+    "recipe=soulsweapons:translucent_sword"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:translucent_sword"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/whirligig_sawblade",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:whirligig_sawblade",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:whirligig_sawblade"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/withered_chest",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:withered_demon_heart",
+    "recipe=soulsweapons:withered_chest"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:withered_chest"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/combat/withered_wabbajack",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:wither_skeleton_skull",
+    "recipe=soulsweapons:withered_wabbajack"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:withered_wabbajack"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/decorations/altar_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:altar_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:altar_block"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/decorations/blackstone_pedestal",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:blackstone_pedestal"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:blackstone_pedestal"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/decorations/chungus_monolith",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:golden_carrot",
+    "recipe=soulsweapons:chungus_monolith"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chungus_monolith"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/decorations/crimson_obsidian",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:demon_heart",
+    "recipe=soulsweapons:crimson_obsidian"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:crimson_obsidian"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/decorations/soul_lamp",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:soul_lamp",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_lamp"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/decorations/soul_lantern_lost_soul",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:soul_lantern_lost_soul",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_lantern_lost_soul"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/chungus_disc",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:chungus_emerald",
+    "recipe=soulsweapons:chungus_disc"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chungus_disc"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/chungus_emerald",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:chungus_emerald",
+    "recipe=soulsweapons:chungus_emerald"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:chungus_emerald"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/crimson_ingot",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:demon_heart",
+    "recipe=soulsweapons:crimson_ingot"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:crimson_ingot"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/demon_chunk",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:demon_heart",
+    "recipe=soulsweapons:demon_chunk"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:demon_chunk"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/draugr_boss_disc",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:draugr_boss_disc"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:draugr_boss_disc"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/fallen_icon_disc",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:fallen_icon_disc"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:fallen_icon_disc"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/glass_vial",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:glass",
+    "recipe=soulsweapons:glass_vial"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:glass_vial"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/hydrangea_dye",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:hydrangea",
+    "recipe=soulsweapons:hydrangea_dye"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:hydrangea_dye"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/iron_skull",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:iron_skull",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:iron_skull"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/lost_soul",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:soul_sand",
+    "recipe=soulsweapons:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:lost_soul"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/molten_demon_heart",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:molten_demon_heart",
+    "tag=forge:demon_hearts"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:molten_demon_heart"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/moonstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/oleander_dye",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:oleander",
+    "recipe=soulsweapons:oleander_dye"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:oleander_dye"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/smelt_withered_demon_heart",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:withered_demon_heart",
+    "recipe=soulsweapons:smelt_withered_demon_heart"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:smelt_withered_demon_heart"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/soul_ingot",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:soul_ingot",
+    "tag=forge:lost_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:soul_ingot"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/twinkling_titanite",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=soulsweapons:twinkling_titanite",
+    "tag=soulsweapons:lord_soul"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:twinkling_titanite"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/misc/verglas",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:verglas",
+    "recipe=soulsweapons:verglas"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:verglas"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/boss_compass",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:boss_compass"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:boss_compass"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/moonstone_axe_left",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_axe_left"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_axe_left"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/moonstone_axe_right",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_axe_right"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_axe_right"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/moonstone_hoe_left",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_hoe_left"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_hoe_left"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/moonstone_hoe_right",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_hoe_right"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_hoe_right"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/moonstone_pickaxe",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_pickaxe"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_pickaxe"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:recipes/tools/moonstone_shovel",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=soulsweapons:moonstone",
+    "recipe=soulsweapons:moonstone_shovel"
+   ],
+   "rewards": {
+    "recipes": [
+     "soulsweapons:moonstone_shovel"
+    ]
+   }
+  },
+  {
+   "id": "soulsweapons:returning_knight",
+   "parent": "soulsweapons:root",
+   "title": "Last Arrival",
+   "description": "Defeat the Returning Knight",
+   "icon": "soulsweapons:arkenstone",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=soulsweapons:returning_knight"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:root",
+   "parent": "",
+   "title": "Soulslike Weaponry",
+   "description": "Unique achievements for the worthy!",
+   "icon": "soulsweapons:lost_soul",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=minecraft:crafting_table"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:transform_scythe",
+   "parent": "soulsweapons:lord_soul",
+   "title": "Winner takes all",
+   "description": "Feed the Darkin Scythe enough souls to transform itself into a new empowered form.",
+   "icon": "soulsweapons:darkin_scythe_pre",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:darkin_scythe",
+    "items=soulsweapons:shadow_assassin_scythe"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:trickweapon",
+   "parent": "soulsweapons:hunter_pistol",
+   "title": "Switcharoo!",
+   "description": "Acquire your first trickweapon, a weapon that can transform itself into other weaponry!",
+   "icon": "soulsweapons:holy_greatsword",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "tag=soulsweapons:trick_weapons"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:uncertainty",
+   "parent": "soulsweapons:root",
+   "title": "Destructive Tendencies",
+   "description": "Acquire the Shard of Uncertainty",
+   "icon": "soulsweapons:shard_of_uncertainty",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:shard_of_uncertainty"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:verglas",
+   "parent": "soulsweapons:root",
+   "title": "False Water",
+   "description": "Aquire Verglas, a cold, smooth material that seems to have some particular liquid trapped inside",
+   "icon": "soulsweapons:verglas",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:verglas"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "soulsweapons:whirligig_sawblade",
+   "parent": "soulsweapons:lord_soul",
+   "title": "Rip and Tear... until it is done.",
+   "description": "Acquire the Whirligig Sawblade. Shred your foes out of excistence!",
+   "icon": "soulsweapons:whirligig_sawblade",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=soulsweapons:whirligig_sawblade"
+   ],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.soulsweapons.moonstone_block": "Block of Moonstone",
+  "block.soulsweapons.moonstone_ore": "Moonstone Ore",
+  "block.soulsweapons.moonstone_ore_deepslate": "Deepslate Moonstone Ore",
+  "block.soulsweapons.crimson_obsidian": "Crimson Obsidian",
+  "block.soulsweapons.infused_blackstone": "Soul Infused Blackstone Bricks",
+  "block.soulsweapons.cracked_infused_blackstone": "Cracked Soul Infused Blackstone Bricks",
+  "block.soulsweapons.altar_block": "Old Moon Altar",
+  "block.soulsweapons.withered_dirt": "Withered Dirt",
+  "block.soulsweapons.withered_grass_block": "Withered Grass Block",
+  "block.soulsweapons.withered_grass": "Withered Grass",
+  "block.soulsweapons.withered_fern": "Withered Fern",
+  "block.soulsweapons.withered_berry_bush": "Withered Berry Bush",
+  "block.soulsweapons.withered_tall_grass": "Withered Tall Grass",
+  "block.soulsweapons.withered_large_fern": "Withered Large Fern",
+  "block.soulsweapons.hydrangea": "Hydrangea",
+  "block.soulsweapons.oleander": "Oleander",
+  "block.soulsweapons.blackstone_pedestal": "Blackstone Pedestal",
+  "block.soulsweapons.verglas_ore": "Verglas Ore",
+  "block.soulsweapons.verglas_ore_deepslate": "Deepslate Verglas Ore",
+  "block.soulsweapons.verglas_block": "Verglas Block",
+  "block.soulsweapons.soulfire_stain": "Soulfire Stain Block",
+  "block.soulsweapons.soul_lamp": "Soulfire Lamp",
+  "block.soulsweapons.chungus_monolith": "Chungus Monolith",
+  "block.soulsweapons.chungus_emerald_block": "Chungus Emerald Block",
+  "block.soulsweapons.purified_blood_block": "Purified Blood",
+  "block.soulsweapons.purified_blood_cauldron": "Cauldron of Purified Blood",
+  "item.soulsweapons.lord_soul_red": "Lord Soul",
+  "item.soulsweapons.lord_soul_rose": "Lord Soul",
+  "item.soulsweapons.lord_soul_void": "Lord Soul",
+  "item.soulsweapons.lord_soul_dark": "Lord Soul",
+  "item.soulsweapons.lord_soul_purple": "Lord Soul",
+  "item.soulsweapons.lord_soul_white": "Lord Soul",
+  "item.soulsweapons.lord_soul_day_stalker": "Lord Soul",
+  "item.soulsweapons.lord_soul_night_prowler": "Lord Soul",
+  "item.soulsweapons.chaos_orb": "Chaos Orb",
+  "item.soulsweapons.chungus_emerald": "Chungus Emerald",
+  "item.soulsweapons.demon_heart": "Demon Heart",
+  "item.soulsweapons.molten_demon_heart": "Molten Demon Heart",
+  "item.soulsweapons.demon_chunk": "Demonite Chunk",
+  "item.soulsweapons.crimson_ingot": "Crimson Ingot",
+  "item.soulsweapons.moonstone": "Moonstone",
+  "item.soulsweapons.lost_soul": "Lost Soul",
+  "item.soulsweapons.soul_ingot": "Soul Infused Ingot",
+  "item.soulsweapons.silver_bullet": "Infused Quicksilver Bullet",
+  "item.soulsweapons.boss_compass": "Moonstone Compass",
+  "item.soulsweapons.shard_of_uncertainty": "Shard of Uncertainty",
+  "item.soulsweapons.withered_demon_heart": "Withered Demon Heart",
+  "item.soulsweapons.arkenstone": "Arkenstone",
+  "item.soulsweapons.essence_of_eventide": "Essence of Eventide",
+  "item.soulsweapons.essence_of_luminescence": "Essence of Luminescence",
+  "item.soulsweapons.chaos_crown": "Crown of Chaos",
+  "item.soulsweapons.chaos_helmet": "Helm of Chaos",
+  "item.soulsweapons.arkenplate": "Arkenplate",
+  "item.soulsweapons.enhanced_arkenplate": "Infused Arkenplate",
+  "item.soulsweapons.withered_chest": "Hallowheart",
+  "item.soulsweapons.enhanced_withered_chest": "Infused Hallowheart",
+  "item.soulsweapons.chaos_robes": "Cape of Chaos",
+  "item.soulsweapons.moonstone_ring": "Lunar Ring",
+  "item.soulsweapons.moonstone_shovel": "Moonstone Shovel",
+  "item.soulsweapons.moonstone_pickaxe": "Moonstone Pickaxe",
+  "item.soulsweapons.moonstone_axe": "Moonstone Axe",
+  "item.soulsweapons.moonstone_hoe": "Moonstone Hoe",
+  "item.soulsweapons.test_item": "Test Item",
+  "item.soulsweapons.iron_skull": "Iron Skull",
+  "item.soulsweapons.glass_vial": "Glass Vial",
+  "item.soulsweapons.blood_vial": "Blood Vial",
+  "item.soulsweapons.purified_blood_bucket": "Bucket of Purified Blood",
+  "item.soulsweapons.blood_vial_recipe_page": "Recipe Page",
+  "item.soulsweapons.twinkling_titanite": "Twinkling Titanite",
+  "item.soulsweapons.chungus_disc": "Big Chungus Music Disc",
+  "item.soulsweapons.chungus_disc.desc": "Endigo - Big Chungus (Official Main Theme)",
+  "item.soulsweapons.fallen_icon_disc": "Fallen Icon Music Disc",
+  "item.soulsweapons.fallen_icon_disc.desc": "NoRestForWicked - The Fallen Icon",
+  "item.soulsweapons.draugr_boss_disc": "Champion's Music Disc",
+  "item.soulsweapons.draugr_boss_disc.desc": "NoRestForWicked - Gladius ad Gladium",
+  "item.soulsweapons.frenzied_shade_disc": "Shaded Music Disc",
+  "item.soulsweapons.frenzied_shade_disc.desc": "NoRestForWicked - Frenzied Shade",
+  "item.soulsweapons.soul_ingot_helmet": "Soul Ingot Helmet",
+  "item.soulsweapons.soul_ingot_chestplate": "Soul Ingot Chestplate",
+  "item.soulsweapons.soul_ingot_leggings": "Soul Ingot Leggings",
+  "item.soulsweapons.soul_ingot_boots": "Soul Ingot Boots",
+  "item.soulsweapons.soul_robes_helmet": "Dark Sorcerer Hood",
+  "item.soulsweapons.soul_robes_chestplate": "Dark Sorcerer Robe",
+  "item.soulsweapons.soul_robes_leggings": "Dark Sorcerer Pants",
+  "item.soulsweapons.soul_robes_boots": "Dark Sorcerer Boots",
+  "item.soulsweapons.forlorn_helmet": "Forlorn Helmet",
+  "item.soulsweapons.forlorn_chestplate": "Forlorn Chestplate",
+  "item.soulsweapons.forlorn_leggings": "Forlorn Leggings",
+  "item.soulsweapons.forlorn_boots": "Forlorn Boots",
+  "item.soulsweapons.bloodthirster": "Bloodthirster",
+  "item.soulsweapons.darkin_blade": "The Darkin Blade",
+  "item.soulsweapons.moonlight_shortsword": "Moonlight Shortsword",
+  "item.soulsweapons.bluemoon_shortsword": "Bluemoon Shortsword",
+  "item.soulsweapons.moonlight_greatsword": "Moonlight Greatsword",
+  "item.soulsweapons.pure_moonlight_greatsword": "Pure Moonlight Greatsword",
+  "item.soulsweapons.pure_moonlight_shortsword": "Pure Moonlight Shortsword",
+  "item.soulsweapons.bluemoon_greatsword": "Bluemoon Greatsword",
+  "item.soulsweapons.whirligig_sawblade": "Whirligig Sawblade",
+  "item.soulsweapons.dragon_staff": "Dragon Staff",
+  "item.soulsweapons.dragonslayer_swordspear": "Dragonslayer Swordspear",
+  "item.soulsweapons.withered_wabbajack": "Withered Wabbajack",
+  "item.soulsweapons.rageblade": "Guinsoo's Rageblade",
+  "item.soulsweapons.guts_sword": "Heap of Raw Iron",
+  "item.soulsweapons.galeforce": "Galeforce",
+  "item.soulsweapons.blunderbuss": "Hunter Blunderbuss",
+  "item.soulsweapons.hunter_pistol": "Hunter Pistol",
+  "item.soulsweapons.gatling_gun": "Gatling Gun",
+  "item.soulsweapons.hunter_cannon": "Hunter Cannon",
+  "item.soulsweapons.nightfall": "Nightfall",
+  "item.soulsweapons.comet_spear": "Comet Spear",
+  "item.soulsweapons.lich_bane": "Lich Bane",
+  "item.soulsweapons.translucent_sword": "Translucent Sword",
+  "item.soulsweapons.translucent_glaive": "Translucent Glaive",
+  "item.soulsweapons.translucent_double_greatsword": "Translucent Double-Edged Greatsword",
+  "item.soulsweapons.draugr": "Draugr",
+  "item.soulsweapons.dawnbreaker": "Dawnbreaker",
+  "item.soulsweapons.soul_reaper": "Soul Reaper",
+  "item.soulsweapons.forlorn_scythe": "Scythe of the Forlorn",
+  "item.soulsweapons.leviathan_axe": "Leviathan Axe",
+  "item.soulsweapons.verglas": "Verglas",
+  "item.soulsweapons.skofnung": "Skofnung",
+  "item.soulsweapons.skofnung_stone": "Skofnung Stone",
+  "item.soulsweapons.mjolnir": "Mjölnir",
+  "item.soulsweapons.freyr_sword": "Sword of Freyr",
+  "item.soulsweapons.sting": "Sting",
+  "item.soulsweapons.featherlight": "Featherlight",
+  "item.soulsweapons.crucible_sword": "Crucible Sword",
+  "item.soulsweapons.darkin_scythe_pre": "The Darkin Scythe",
+  "item.soulsweapons.darkin_scythe": "The Darkin Scythe",
+  "item.soulsweapons.shadow_assassin_scythe": "Shadow Assassin Scythe",
+  "item.soulsweapons.kirkhammer": "Kirkhammer",
+  "item.soulsweapons.silver_sword": "Silver Sword",
+  "item.soulsweapons.holy_greatsword": "Ludwig's Holy Blade",
+  "item.soulsweapons.draupnir_spear": "Draupnir Spear",
+  "item.soulsweapons.holy_moonlight_greatsword": "Holy Moonlight Greatsword",
+  "item.soulsweapons.holy_moonlight_sword": "Holy Moonlight Sword",
+  "item.soulsweapons.frostmourne": "Frostmourne",
+  "item.soulsweapons.master_sword": "Master Sword",
+  "item.soulsweapons.nights_edge_item": "Night's Edge",
+  "item.soulsweapons.empowered_dawnbreaker": "Genesis Fracture",
+  "item.soulsweapons.kraken_slayer": "Kraken Slayer Spear Bow",
+  "item.soulsweapons.kraken_slayer_crossbow": "Kraken Slayer Crossbow",
+  "item.soulsweapons.darkmoon_longbow": "Darkmoon Longbow",
+  "item.soulsweapons.chungus_staff": "Chungus Staff",
+  "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
+  "item.soulsweapons.glaive_of_hodir": "Glaive of Hodir",
+  "item.soulsweapons.excalibur": "Excalibur",
+  "item.soulsweapons.moonveil": "Moonveil",
+  "item.soulsweapons.simons_bowblade": "Simon's Bowblade",
+  "item.soulsweapons.simons_blade": "Simon's Blade",
+  "item.soulsweapons.dragonbane": "Dragonbane",
+  "item.soulsweapons.supernova": "Supernova",
+  "item.soulsweapons.mehrunes_razor": "Mehrunes' Razor",
+  "item.soulsweapons.tonitrus": "Tonitrus",
+  "item.soulsweapons.bloodlust": "Bloodlust",
+  "item.soulsweapons.nightlords_sword": "Sword of the Nightlord",
+  "item.soulsweapons.big_chungus_spawn_egg": "Moderately Sized Chungus Spawn Egg",
+  "item.soulsweapons.withered_demon_spawn_egg": "Withered Demon Spawn Egg",
+  "item.soulsweapons.remnant_spawn_egg": "Remnant Spawn Egg",
+  "item.soulsweapons.dark_sorcerer_spawn_egg": "Dark Sorcerer Spawn Egg",
+  "item.soulsweapons.accursed_lord_boss_spawn_egg": "The Decaying King Spawn Egg",
+  "item.soulsweapons.draugr_boss_spawn_egg": "Old Champion Spawn Egg",
+  "item.soulsweapons.night_shade_spawn_egg": "Frenzied Shade Spawn Egg",
+  "item.soulsweapons.returning_knight_spawn_egg": "Returning Knight Spawn Egg",
+  "item.soulsweapons.soul_reaper_ghost_spawn_egg": "Familiar Ghost Spawn Egg",
+  "item.soulsweapons.forlorn_spawn_egg": "Forlorn Spawn Egg",
+  "item.soulsweapons.evil_forlorn_spawn_egg": "Invading Forlorn Spawn Egg",
+  "item.soulsweapons.soulmass_spawn_egg": "Soulmass Spawn Egg",
+  "item.soulsweapons.chaos_monarch_spawn_egg": "Monarch of Chaos Spawn Egg",
+  "item.soulsweapons.moonknight_spawn_egg": "Fallen Icon Spawn Egg",
+  "item.soulsweapons.frost_giant_spawn_egg": "Frost Giant Spawn Egg",
+  "item.soulsweapons.rime_spectre_spawn_egg": "Rime Spectre Spawn Egg",
+  "item.soulsweapons.day_stalker_spawn_egg": "Day Stalker Spawn Egg",
+  "item.soulsweapons.night_prowler_spawn_egg": "Night Prowler Spawn Egg",
+  "item.soulsweapons.warmth_entity_spawn_egg": "Sphere of Warmth Spawn Egg",
+  "entity.soulsweapons.big_chungus": "Moderately Sized Chungus",
+  "entity.soulsweapons.withered_demon": "Withered Demon",
+  "entity.soulsweapons.accursed_lord_boss": "The Decaying King",
+  "entity.soulsweapons.draugr_boss": "Old Champion's Remains",
+  "entity.soulsweapons.night_shade": "Frenzied Shade",
+  "entity.soulsweapons.returning_knight": "Returning Knight",
+  "entity.soulsweapons.remnant": "Remnant",
+  "entity.soulsweapons.dark_sorcerer": "Dark Sorcerer",
+  "entity.soulsweapons.soul_reaper_ghost": "Familiar Ghost",
+  "entity.soulsweapons.forlorn": "Forlorn",
+  "entity.soulsweapons.evil_forlorn": "Invading Forlorn",
+  "entity.soulsweapons.soulmass": "Soulmass",
+  "entity.soulsweapons.chaos_monarch": "Monarch of Chaos",
+  "entity.soulsweapons.moonknight": "Fallen Icon",
+  "entity.soulsweapons.moonknight_phase_2": "Harbinger of Moonlight",
+  "entity.soulsweapons.day_stalker": "Day Stalker",
+  "entity.soulsweapons.night_prowler": "Night Prowler",
+  "entity.soulsweapons.frost_giant": "Frost Giant",
+  "entity.soulsweapons.rime_spectre": "Rime Spectre",
+  "entity.soulsweapons.warmth_entity": "Sphere of Warmth",
+  "entity.soulsweapons.comet_spear_entity": "Comet Spear",
+  "entity.soulsweapons.swordspear_entity": "Dragonslayer Swordspear",
+  "entity.soulsweapons.big_moonlight_projectile": "Moonlight Wave",
+  "entity.soulsweapons.moonlight_projectile": "Moonlight Spear",
+  "entity.soulsweapons.vertical_moonlight_projectile": "Large Moonlight Wave",
+  "entity.soulsweapons.horizontal_moonlight_projectile": "Large Moonlight Wave",
+  "entity.soulsweapons.sunlight_projectile_small": "Sunlight Wave",
+  "entity.soulsweapons.sunlight_projectile_big": "Sunlight Spear",
+  "entity.soulsweapons.vertical_sunlight_projectile": "Large Sunlight Wave",
+  "entity.soulsweapons.charged_arrow_entity": "Charged Arrow",
+  "entity.soulsweapons.silver_bullet_entity": "Silver Bullet",
+  "entity.soulsweapons.cannonball_entity_type": "Silver Cannonball",
+  "entity.soulsweapons.leviathan_axe_entity": "Leviathan Axe",
+  "entity.soulsweapons.mjolnir_entity": "Mjölnir",
+  "entity.soulsweapons.freyr_sword_entity": "Sword of Freyr",
+  "entity.soulsweapons.shadow_orb_entity": "Shadow Orb",
+  "entity.soulsweapons.draupnir_spear_entity": "Draupnir Spear",
+  "entity.soulsweapons.area_effect_sphere": "Area Effect Sphere",
+  "entity.soulsweapons.dragon_staff_projectile": "Dragon Staff Projectile",
+  "entity.soulsweapons.withered_wabbajack_projectile": "Withered Wabbajack Projectile",
+  "entity.soulsweapons.chaos_skull": "Chaos Skull",
+  "entity.soulsweapons.chaos_orb_entity": "Chaos Orb",
+  "entity.soulsweapons.growing_fireball": "Conflagration",
+  "entity.soulsweapons.night_skull": "Night Skull",
+  "entity.soulsweapons.fog_entity": "Engulfing fog",
+  "entity.soulsweapons.blackflame_snake_entity": "Blackflame Snake",
+  "entity.soulsweapons.no_drag_wither_skull": "Wither Skull",
+  "entity.soulsweapons.death_spiral": "Death Spiral",
+  "entity.soulsweapons.nights_edge": "Night's Edge",
+  "entity.soulsweapons.night_wave": "Night Wave",
+  "entity.soulsweapons.flame_pillar": "Flame Pillar",
+  "entity.soulsweapons.kraken_slayer_projectile": "Kraken Slayer Bolt",
+  "entity.soulsweapons.moonlight_arrow": "Moonlight Arrow",
+  "entity.soulsweapons.arrow_storm_entity": "Arrow Storm",
+  "entity.soulsweapons.holy_moonlight_pillar": "Holy Moonlight Pillar",
+  "entity.soulsweapons.warmup_lightning": "Warmup Lightning",
+  "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
+  "entity.soulsweapons.moonveil_horizontal": "Moonveil Horizontal Wave",
+  "entity.soulsweapons.moonveil_vertical": "Moonveil Vertical Wave",
+  "entity.soulsweapons.blackflame_explosion_entity": "Blackflame Explosion",
+  "entity.soulsweapons.absorbed_projectiles_orb_entity": "Orb of Absorbed Projectiles",
+  "entity.soulsweapons.frozen_lightning": "Frozen Lightning",
+  "entity.soulsweapons.air_combustion": "Air Combustion",
+  "entity.soulsweapons.molten_metal": "Molten Metal",
+  "effect.soulsweapons.hallowed_dragon_mist": "Purified Mist",
+  "effect.soulsweapons.bloodthirsty": "Bloodthirsty",
+  "effect.soulsweapons.posture_break": "Posture Break",
+  "effect.soulsweapons.life_leach": "Life Leach",
+  "effect.soulsweapons.retribution": "Retribution",
+  "effect.soulsweapons.fear": "Undead Fear",
+  "effect.soulsweapons.magic_resistance": "Magic Resistance",
+  "effect.soulsweapons.decay": "Decay",
+  "effect.soulsweapons.moon_herald": "Lunar Herald",
+  "effect.soulsweapons.freezing": "Permafrost",
+  "effect.soulsweapons.disable_heal": "Cursed Wounds",
+  "effect.soulsweapons.bleed": "Bleed",
+  "effect.soulsweapons.calculated_fall": "Calculated Fall",
+  "effect.soulsweapons.veil_of_fire": "Veil of Fire",
+  "effect.soulsweapons.blight": "Blight",
+  "effect.soulsweapons.shadow_step": "Shadow Step",
+  "effect.soulsweapons.cooldown": "Cooldown",
+  "effect.soulsweapons.ghostly": "Ghostly",
+  "effect.soulsweapons.chungus_tonic_effect": "Chungus Tonic",
+  "effect.soulsweapons.frost_moon": "Frost Moon",
+  "effect.soulsweapons.blade_dance": "Blade Dance",
+  "effect.soulsweapons.stormveil": "Stormveil",
+  "effect.soulsweapons.potency": "Potency",
+  "effect.soulsweapons.soul_of_cinder": "Soul of Cinder",
+  "effect.soulsweapons.exalted": "Exalted",
+  "effect.soulsweapons.echo": "Echo",
+  "item.minecraft.potion.effect.warding": "Potion of Magical Warding",
+  "item.minecraft.splash_potion.effect.warding": "Splash Potion of Magical Warding",
+  "item.minecraft.lingering_potion.effect.warding": "Lingering Potion of Magical Warding",
+  "item.minecraft.tipped_arrow.effect.warding": "Arrow of Magical Warding",
+  "item.minecraft.potion.effect.long_warding": "Potion of Magical Warding",
+  "item.minecraft.splash_potion.effect.long_warding": "Splash Potion of Magical Warding",
+  "item.minecraft.lingering_potion.effect.long_warding": "Lingering Potion of Magical Warding",
+  "item.minecraft.tipped_arrow.effect.long_warding": "Arrow of Magical Warding",
+  "item.minecraft.potion.effect.strong_warding": "Potion of Magical Warding",
+  "item.minecraft.splash_potion.effect.strong_warding": "Splash Potion of Magical Warding",
+  "item.minecraft.lingering_potion.effect.strong_warding": "Lingering Potion of Magical Warding",
+  "item.minecraft.tipped_arrow.effect.strong_warding": "Arrow of Magical Warding",
+  "item.minecraft.potion.effect.tainted_ambrosia": "§cTainted Ambrosia§r",
+  "item.minecraft.splash_potion.effect.tainted_ambrosia": "§cSplash Tainted Ambrosia§r",
+  "item.minecraft.lingering_potion.effect.tainted_ambrosia": "§cLingering Tainted Ambrosia§r",
+  "item.minecraft.tipped_arrow.effect.tainted_ambrosia": "§cArrow of Tainted Ambrosia§r",
+  "item.minecraft.potion.effect.chungus_tonic": "§3Chungus Tonic§r",
+  "item.minecraft.splash_potion.effect.chungus_tonic": "§3Splash Chungus Tonic§r",
+  "item.minecraft.lingering_potion.effect.chungus_tonic": "§3Lingering Chungus Tonic§r",
+  "item.minecraft.tipped_arrow.effect.chungus_tonic": "§3Arrow of Chungus Tonic§r",
+  "enchantment.soulsweapons.fast_hands": "Quick Reload",
+  "enchantment.soulsweapons.fast_hands.desc": "Reduce charge time or increase use time for Guns.",
+  "enchantment.soulsweapons.visceral": "Posture Breaker",
+  "enchantment.soulsweapons.visceral.desc": "Increases 'Posture Loss' Silver Bullets apply.",
+  "enchantment.soulsweapons.stagger": "Stagger",
+  "enchantment.soulsweapons.stagger.desc": "Apply 'Posture Loss' on target. At max loss, Posture Break target.",
+  "enchantment.soulsweapons.ethereal": "Ethereal Ammunition",
+  "enchantment.soulsweapons.ethereal.desc": "Silver Bullets can go through walls.",
+  "enchantment.soulsweapons.explosive_rounds": "Explosive Rounds",
+  "enchantment.soulsweapons.explosive_rounds.desc": "Silver Bullets explode when hitting an entity.",
+  "enchantment.soulsweapons.chain_lightning": "Chain Lightning",
+  "enchantment.soulsweapons.chain_lightning.desc": "Silver Bullets damage nearby entities with soul infused lightning.",
+  "enchantment.soulsweapons.misfire_curse": "Curse of Misfire",
+  "enchantment.soulsweapons.misfire_curse.desc": "Each Silver Bullet has a chance to explode and damage the user when shot.",
+  "enchantment.soulsweapons.blight_carrier": "Blight Carrier",
+  "enchantment.soulsweapons.blight_carrier.desc": "Silver Bullets apply stacking Blight: more armor = more damage taken.",
+  "enchantment.soulsweapons.frostsilver": "Frostsilver",
+  "enchantment.soulsweapons.frostsilver.desc": "Silver Bullets apply strong Permafrost upon Posture Break.",
+  "enchantment.soulsweapons.phantom_trace": "Phantom Trace",
+  "enchantment.soulsweapons.phantom_trace.desc": "Guns shoot additional delayed copies of the original bullet.",
+  "enchantment.soulsweapons.tether": "Tether",
+  "enchantment.soulsweapons.tether.desc": "Silver Bullets drag the target toward you if outside a certain range.",
+  "enchantment.soulsweapons.ricochet": "Ricochet",
+  "enchantment.soulsweapons.ricochet.desc": "Silver Bullets ricochet off of walls a random direction or towards closest mob."
+ }
+}

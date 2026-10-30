@@ -1,0 +1,166 @@
+{
+ "jar": "lootr-forge-1.20-0.7.35.94.jar",
+ "namespaces": [
+  "forge",
+  "ftbchunks",
+  "lootr",
+  "minecraft"
+ ],
+ "advancements": [
+  {
+   "id": "lootr:100loot",
+   "parent": "lootr:50loot",
+   "title": "Centennial",
+   "description": "Open 100 instanced, per-player Loot containers and collect your rewards!",
+   "icon": "minecraft:netherite_block",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "lootr:score"
+   ],
+   "ids": [],
+   "rewards": {
+    "loot": [
+     "lootr:trophy"
+    ]
+   }
+  },
+  {
+   "id": "lootr:10loot",
+   "parent": "lootr:1chest",
+   "title": "Delightful Decade",
+   "description": "Open 10 instanced, per-player Loot containers and collect your rewards!",
+   "icon": "minecraft:gold_block",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:score"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:1barrel",
+   "parent": "lootr:root",
+   "title": "Barrel Booty",
+   "description": "Open your first instanced, per-player Loot barrel and collect your rewards!",
+   "icon": "lootr:lootr_barrel",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:barrel_opened"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:1cart",
+   "parent": "lootr:root",
+   "title": "Tunnel Treasures",
+   "description": "Open your first instanced, per-player Loot minecart and collect your rewards!",
+   "icon": "minecraft:chest_minecart",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:cart_opened"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:1chest",
+   "parent": "lootr:root",
+   "title": "'X' Marks the Spot",
+   "description": "Open your first instanced, per-player Loot chest and collect your rewards!",
+   "icon": "lootr:lootr_chest",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:chest_opened"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:1shulker",
+   "parent": "lootr:root",
+   "title": "Bounty Box",
+   "description": "Open your first instanced, per-played Loot shulker and collect your rewards!",
+   "icon": "lootr:lootr_shulker",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:shulker_opened"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:25loot",
+   "parent": "lootr:10loot",
+   "title": "Close Quarters",
+   "description": "Open 25 instanced, per-player Loot containers and collect your rewards!",
+   "icon": "minecraft:emerald_block",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:score"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:50loot",
+   "parent": "lootr:25loot",
+   "title": "Penteconter",
+   "description": "Open 50 instanced, per-player Loot containers and collect your rewards!",
+   "icon": "minecraft:diamond_block",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "lootr:score"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:root",
+   "parent": "",
+   "title": "Belongs in a Museum",
+   "description": "Bring instanced, per-player Loot into your world.",
+   "icon": "minecraft:chest",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tick"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "lootr:social",
+   "parent": "lootr:1chest",
+   "title": "Socialised Loot",
+   "description": "Open one of every type of instanced, per-player Loot container in the world!",
+   "icon": "minecraft:enchanted_golden_apple",
+   "frame": "challenge",
+   "hidden": true,
+   "triggers": [
+    "lootr:advancement"
+   ],
+   "ids": [],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.lootr.lootr_chest": "Loot Chest",
+  "block.lootr.lootr_trapped_chest": "Loot Chest",
+  "block.lootr.lootr_barrel": "Loot Barrel",
+  "block.lootr.lootr_inventory": "Loot Chest",
+  "block.lootr.lootr_shulker": "Loot Shulker",
+  "block.lootr.trophy": "Centennial Trophy",
+  "entity.lootr.lootr_minecart": "Minecart with Chest",
+  "item.lootr.crown": "Crown of the Master Looter"
+ }
+}

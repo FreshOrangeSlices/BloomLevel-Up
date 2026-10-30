@@ -1,0 +1,7503 @@
+{
+ "jar": "BiomesOPlenty-forge-1.20.1-19.0.0.96.jar",
+ "namespaces": [
+  "biomesoplenty",
+  "forge",
+  "minecraft",
+  "sereneseasons",
+  "toughasnails"
+ ],
+ "advancements": [
+  {
+   "id": "biomesoplenty:biomesoplenty/all_biomes",
+   "parent": "biomesoplenty:biomesoplenty/root",
+   "title": "Wanderer",
+   "description": "Discover every biome in Biomes O' Plenty",
+   "icon": "biomesoplenty:bop_icon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:location"
+   ],
+   "ids": [
+    "biome=biomesoplenty:aspen_glade",
+    "biome=biomesoplenty:auroral_garden",
+    "biome=biomesoplenty:bayou",
+    "biome=biomesoplenty:bog",
+    "biome=biomesoplenty:cold_desert",
+    "biome=biomesoplenty:coniferous_forest",
+    "biome=biomesoplenty:crag",
+    "biome=biomesoplenty:crystalline_chasm",
+    "biome=biomesoplenty:dead_forest",
+    "biome=biomesoplenty:dryland",
+    "biome=biomesoplenty:dune_beach",
+    "biome=biomesoplenty:erupting_inferno",
+    "biome=biomesoplenty:field",
+    "biome=biomesoplenty:fir_clearing",
+    "biome=biomesoplenty:floodplain",
+    "biome=biomesoplenty:forested_field",
+    "biome=biomesoplenty:fungal_jungle",
+    "biome=biomesoplenty:glowing_grotto",
+    "biome=biomesoplenty:grassland",
+    "biome=biomesoplenty:gravel_beach",
+    "biome=biomesoplenty:highland",
+    "biome=biomesoplenty:hot_springs",
+    "biome=biomesoplenty:jacaranda_glade",
+    "biome=biomesoplenty:jade_cliffs",
+    "biome=biomesoplenty:lavender_field",
+    "biome=biomesoplenty:lush_desert",
+    "biome=biomesoplenty:lush_savanna",
+    "biome=biomesoplenty:maple_woods",
+    "biome=biomesoplenty:marsh",
+    "biome=biomesoplenty:mediterranean_forest",
+    "biome=biomesoplenty:moor",
+    "biome=biomesoplenty:muskeg",
+    "biome=biomesoplenty:mystic_grove",
+    "biome=biomesoplenty:old_growth_dead_forest",
+    "biome=biomesoplenty:old_growth_woodland",
+    "biome=biomesoplenty:ominous_woods",
+    "biome=biomesoplenty:orchard",
+    "biome=biomesoplenty:origin_valley",
+    "biome=biomesoplenty:overgrown_greens",
+    "biome=biomesoplenty:pasture",
+    "biome=biomesoplenty:prairie",
+    "biome=biomesoplenty:pumpkin_patch",
+    "biome=biomesoplenty:rainforest",
+    "biome=biomesoplenty:redwood_forest",
+    "biome=biomesoplenty:rocky_rainforest",
+    "biome=biomesoplenty:rocky_shrubland",
+    "biome=biomesoplenty:scrubland",
+    "biome=biomesoplenty:seasonal_forest",
+    "biome=biomesoplenty:shrubland",
+    "biome=biomesoplenty:snowblossom_grove",
+    "biome=biomesoplenty:snowy_coniferous_forest",
+    "biome=biomesoplenty:snowy_fir_clearing",
+    "biome=biomesoplenty:snowy_maple_woods",
+    "biome=biomesoplenty:spider_nest",
+    "biome=biomesoplenty:tropics",
+    "biome=biomesoplenty:tundra",
+    "biome=biomesoplenty:undergrowth",
+    "biome=biomesoplenty:visceral_heap",
+    "biome=biomesoplenty:volcanic_plains",
+    "biome=biomesoplenty:volcano",
+    "biome=biomesoplenty:wasteland",
+    "biome=biomesoplenty:wasteland_steppe",
+    "biome=biomesoplenty:wetland",
+    "biome=biomesoplenty:wintry_origin_valley",
+    "biome=biomesoplenty:withered_abyss",
+    "biome=biomesoplenty:woodland"
+   ],
+   "rewards": {
+    "experience": 1000,
+    "loot": [
+     "biomesoplenty:advancements/all_biomes"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:biomesoplenty/root",
+   "parent": "",
+   "title": "Biomes O' Plenty",
+   "description": "Explore the world around you",
+   "icon": "biomesoplenty:fir_sapling",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:location"
+   ],
+   "ids": [
+    "biome=biomesoplenty:aspen_glade",
+    "biome=biomesoplenty:auroral_garden",
+    "biome=biomesoplenty:bayou",
+    "biome=biomesoplenty:bog",
+    "biome=biomesoplenty:cold_desert",
+    "biome=biomesoplenty:coniferous_forest",
+    "biome=biomesoplenty:crag",
+    "biome=biomesoplenty:crystalline_chasm",
+    "biome=biomesoplenty:dead_forest",
+    "biome=biomesoplenty:dryland",
+    "biome=biomesoplenty:dune_beach",
+    "biome=biomesoplenty:erupting_inferno",
+    "biome=biomesoplenty:field",
+    "biome=biomesoplenty:fir_clearing",
+    "biome=biomesoplenty:floodplain",
+    "biome=biomesoplenty:forested_field",
+    "biome=biomesoplenty:fungal_jungle",
+    "biome=biomesoplenty:glowing_grotto",
+    "biome=biomesoplenty:grassland",
+    "biome=biomesoplenty:gravel_beach",
+    "biome=biomesoplenty:highland",
+    "biome=biomesoplenty:hot_springs",
+    "biome=biomesoplenty:jacaranda_glade",
+    "biome=biomesoplenty:jade_cliffs",
+    "biome=biomesoplenty:lavender_field",
+    "biome=biomesoplenty:lush_desert",
+    "biome=biomesoplenty:lush_savanna",
+    "biome=biomesoplenty:maple_woods",
+    "biome=biomesoplenty:marsh",
+    "biome=biomesoplenty:mediterranean_forest",
+    "biome=biomesoplenty:moor",
+    "biome=biomesoplenty:muskeg",
+    "biome=biomesoplenty:mystic_grove",
+    "biome=biomesoplenty:old_growth_dead_forest",
+    "biome=biomesoplenty:old_growth_woodland",
+    "biome=biomesoplenty:ominous_woods",
+    "biome=biomesoplenty:orchard",
+    "biome=biomesoplenty:origin_valley",
+    "biome=biomesoplenty:overgrown_greens",
+    "biome=biomesoplenty:pasture",
+    "biome=biomesoplenty:prairie",
+    "biome=biomesoplenty:pumpkin_patch",
+    "biome=biomesoplenty:rainforest",
+    "biome=biomesoplenty:redwood_forest",
+    "biome=biomesoplenty:rocky_rainforest",
+    "biome=biomesoplenty:rocky_shrubland",
+    "biome=biomesoplenty:scrubland",
+    "biome=biomesoplenty:seasonal_forest",
+    "biome=biomesoplenty:shrubland",
+    "biome=biomesoplenty:snowblossom_grove",
+    "biome=biomesoplenty:snowy_coniferous_forest",
+    "biome=biomesoplenty:snowy_fir_clearing",
+    "biome=biomesoplenty:snowy_maple_woods",
+    "biome=biomesoplenty:spider_nest",
+    "biome=biomesoplenty:tropics",
+    "biome=biomesoplenty:tundra",
+    "biome=biomesoplenty:undergrowth",
+    "biome=biomesoplenty:visceral_heap",
+    "biome=biomesoplenty:volcanic_plains",
+    "biome=biomesoplenty:volcano",
+    "biome=biomesoplenty:wasteland",
+    "biome=biomesoplenty:wasteland_steppe",
+    "biome=biomesoplenty:wetland",
+    "biome=biomesoplenty:wintry_origin_valley",
+    "biome=biomesoplenty:withered_abyss",
+    "biome=biomesoplenty:woodland"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/algal_end_stone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:enderphyte",
+    "recipe=biomesoplenty:algal_end_stone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:algal_end_stone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/black_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sand",
+    "recipe=biomesoplenty:black_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/black_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "items=biomesoplenty:chiseled_black_sandstone",
+    "recipe=biomesoplenty:black_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/black_sandstone_slab_from_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:black_sandstone_slab_from_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone_slab_from_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/black_sandstone_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "items=biomesoplenty:chiseled_black_sandstone",
+    "items=biomesoplenty:cut_black_sandstone",
+    "recipe=biomesoplenty:black_sandstone_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/black_sandstone_stairs_from_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:black_sandstone_stairs_from_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone_stairs_from_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_brick_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:brimstone_brick_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_brick_slab_from_brimstone_bricks_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:brimstone_brick_slab_from_brimstone_bricks_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_slab_from_brimstone_bricks_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_brick_slab_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_brick_slab_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_slab_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_brick_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:brimstone_brick_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_brick_stairs_from_brimstone_bricks_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:brimstone_brick_stairs_from_brimstone_bricks_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_stairs_from_brimstone_bricks_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_brick_stairs_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_brick_stairs_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_stairs_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_bricks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_bricks"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_bricks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/brimstone_bricks_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_bricks_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_bricks_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_black_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "items=biomesoplenty:chiseled_black_sandstone",
+    "items=biomesoplenty:cut_black_sandstone",
+    "recipe=biomesoplenty:chiseled_black_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_black_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_black_sandstone_from_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:chiseled_black_sandstone_from_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_black_sandstone_from_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_brimstone_bricks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "items=biomesoplenty:chiseled_brimstone_bricks",
+    "recipe=biomesoplenty:chiseled_brimstone_bricks"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_brimstone_bricks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_brimstone_bricks_from_brimstone_bricks_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:chiseled_brimstone_bricks_from_brimstone_bricks_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_brimstone_bricks_from_brimstone_bricks_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_brimstone_bricks_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:chiseled_brimstone_bricks_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_brimstone_bricks_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_orange_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:chiseled_orange_sandstone",
+    "items=biomesoplenty:cut_orange_sandstone",
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:chiseled_orange_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_orange_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_orange_sandstone_from_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:chiseled_orange_sandstone_from_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_orange_sandstone_from_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_white_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:chiseled_white_sandstone",
+    "items=biomesoplenty:cut_white_sandstone",
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:chiseled_white_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_white_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/chiseled_white_sandstone_from_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:chiseled_white_sandstone_from_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:chiseled_white_sandstone_from_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_black_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:cut_black_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_black_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_black_sandstone_from_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:cut_black_sandstone_from_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_black_sandstone_from_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_black_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cut_black_sandstone",
+    "recipe=biomesoplenty:cut_black_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_black_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_black_sandstone_slab_from_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:cut_black_sandstone_slab_from_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_black_sandstone_slab_from_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_black_sandstone_slab_from_cut_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cut_black_sandstone",
+    "recipe=biomesoplenty:cut_black_sandstone_slab_from_cut_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_black_sandstone_slab_from_cut_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_orange_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:cut_orange_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_orange_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_orange_sandstone_from_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:cut_orange_sandstone_from_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_orange_sandstone_from_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_orange_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cut_orange_sandstone",
+    "recipe=biomesoplenty:cut_orange_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_orange_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_orange_sandstone_slab_from_cut_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cut_orange_sandstone",
+    "recipe=biomesoplenty:cut_orange_sandstone_slab_from_cut_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_orange_sandstone_slab_from_cut_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_orange_sandstone_slab_from_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:cut_orange_sandstone_slab_from_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_orange_sandstone_slab_from_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_white_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:cut_white_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_white_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_white_sandstone_from_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:cut_white_sandstone_from_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_white_sandstone_from_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_white_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cut_white_sandstone",
+    "recipe=biomesoplenty:cut_white_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_white_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_white_sandstone_slab_from_cut_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cut_white_sandstone",
+    "recipe=biomesoplenty:cut_white_sandstone_slab_from_cut_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_white_sandstone_slab_from_cut_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/cut_white_sandstone_slab_from_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:cut_white_sandstone_slab_from_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cut_white_sandstone_slab_from_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/dead_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:dead_planks",
+    "tag=biomesoplenty:dead_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/dead_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/dead_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/dead_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_log",
+    "recipe=biomesoplenty:dead_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/empyreal_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:empyreal_planks",
+    "tag=biomesoplenty:empyreal_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/empyreal_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/empyreal_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/empyreal_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_log",
+    "recipe=biomesoplenty:empyreal_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/fir_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:fir_planks",
+    "tag=biomesoplenty:fir_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/fir_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/fir_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/fir_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_log",
+    "recipe=biomesoplenty:fir_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/flesh",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:blood_bucket",
+    "recipe=biomesoplenty:flesh"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:flesh"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/hellbark_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:hellbark_planks",
+    "tag=biomesoplenty:hellbark_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/hellbark_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/hellbark_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/hellbark_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_log",
+    "recipe=biomesoplenty:hellbark_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/jacaranda_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:jacaranda_planks",
+    "tag=biomesoplenty:jacaranda_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/jacaranda_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/jacaranda_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/jacaranda_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_log",
+    "recipe=biomesoplenty:jacaranda_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/magic_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:magic_planks",
+    "tag=biomesoplenty:magic_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/magic_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/magic_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/magic_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_log",
+    "recipe=biomesoplenty:magic_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mahogany_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:mahogany_planks",
+    "tag=biomesoplenty:mahogany_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mahogany_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mahogany_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mahogany_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_log",
+    "recipe=biomesoplenty:mahogany_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/maple_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:maple_planks",
+    "tag=biomesoplenty:maple_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/maple_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/maple_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/maple_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_log",
+    "recipe=biomesoplenty:maple_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mossy_black_sand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:moss_block",
+    "recipe=biomesoplenty:mossy_black_sand"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mossy_black_sand"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mossy_cobblestone_from_willow_vine",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_vine",
+    "recipe=biomesoplenty:mossy_cobblestone_from_willow_vine"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mossy_cobblestone_from_willow_vine"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/mossy_stone_bricks_from_willow_vine",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_vine",
+    "recipe=biomesoplenty:mossy_stone_bricks_from_willow_vine"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mossy_stone_bricks_from_willow_vine"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/null_end_stone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:null_leaves",
+    "recipe=biomesoplenty:null_end_stone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:null_end_stone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/orange_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sand",
+    "recipe=biomesoplenty:orange_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/orange_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:chiseled_orange_sandstone",
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:orange_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/orange_sandstone_slab_from_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:orange_sandstone_slab_from_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone_slab_from_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/orange_sandstone_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:chiseled_orange_sandstone",
+    "items=biomesoplenty:cut_orange_sandstone",
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:orange_sandstone_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/orange_sandstone_stairs_from_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:orange_sandstone_stairs_from_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone_stairs_from_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/palm_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:palm_planks",
+    "tag=biomesoplenty:palm_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/palm_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/palm_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/palm_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_log",
+    "recipe=biomesoplenty:palm_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/pine_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:pine_planks",
+    "tag=biomesoplenty:pine_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/pine_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/pine_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/pine_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_log",
+    "recipe=biomesoplenty:pine_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/redwood_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:redwood_planks",
+    "tag=biomesoplenty:redwood_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/redwood_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/redwood_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/redwood_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_log",
+    "recipe=biomesoplenty:redwood_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/rose_quartz_block",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:rose_quartz_chunk",
+    "recipe=biomesoplenty:rose_quartz_block"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:rose_quartz_block"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_black_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:smooth_black_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_black_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_black_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_black_sandstone",
+    "recipe=biomesoplenty:smooth_black_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_black_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_black_sandstone_slab_from_smooth_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_black_sandstone",
+    "recipe=biomesoplenty:smooth_black_sandstone_slab_from_smooth_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_black_sandstone_slab_from_smooth_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_black_sandstone_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_black_sandstone",
+    "recipe=biomesoplenty:smooth_black_sandstone_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_black_sandstone_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_black_sandstone_stairs_from_smooth_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_black_sandstone",
+    "recipe=biomesoplenty:smooth_black_sandstone_stairs_from_smooth_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_black_sandstone_stairs_from_smooth_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_orange_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:smooth_orange_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_orange_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_orange_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_orange_sandstone",
+    "recipe=biomesoplenty:smooth_orange_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_orange_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_orange_sandstone_slab_from_smooth_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_orange_sandstone",
+    "recipe=biomesoplenty:smooth_orange_sandstone_slab_from_smooth_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_orange_sandstone_slab_from_smooth_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_orange_sandstone_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_orange_sandstone",
+    "recipe=biomesoplenty:smooth_orange_sandstone_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_orange_sandstone_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_orange_sandstone_stairs_from_smooth_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_orange_sandstone",
+    "recipe=biomesoplenty:smooth_orange_sandstone_stairs_from_smooth_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_orange_sandstone_stairs_from_smooth_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_white_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:smooth_white_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_white_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_white_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_white_sandstone",
+    "recipe=biomesoplenty:smooth_white_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_white_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_white_sandstone_slab_from_smooth_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_white_sandstone",
+    "recipe=biomesoplenty:smooth_white_sandstone_slab_from_smooth_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_white_sandstone_slab_from_smooth_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_white_sandstone_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_white_sandstone",
+    "recipe=biomesoplenty:smooth_white_sandstone_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_white_sandstone_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/smooth_white_sandstone_stairs_from_smooth_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:smooth_white_sandstone",
+    "recipe=biomesoplenty:smooth_white_sandstone_stairs_from_smooth_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:smooth_white_sandstone_stairs_from_smooth_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_dead_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_dead_log",
+    "recipe=biomesoplenty:stripped_dead_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_dead_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_empyreal_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_empyreal_log",
+    "recipe=biomesoplenty:stripped_empyreal_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_empyreal_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_fir_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_fir_log",
+    "recipe=biomesoplenty:stripped_fir_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_fir_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_hellbark_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_hellbark_log",
+    "recipe=biomesoplenty:stripped_hellbark_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_hellbark_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_jacaranda_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_jacaranda_log",
+    "recipe=biomesoplenty:stripped_jacaranda_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_jacaranda_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_magic_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_magic_log",
+    "recipe=biomesoplenty:stripped_magic_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_magic_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_mahogany_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_mahogany_log",
+    "recipe=biomesoplenty:stripped_mahogany_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_mahogany_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_maple_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_maple_log",
+    "recipe=biomesoplenty:stripped_maple_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_maple_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_palm_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_palm_log",
+    "recipe=biomesoplenty:stripped_palm_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_palm_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_pine_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_pine_log",
+    "recipe=biomesoplenty:stripped_pine_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_pine_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_redwood_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_redwood_log",
+    "recipe=biomesoplenty:stripped_redwood_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_redwood_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_umbran_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_umbran_log",
+    "recipe=biomesoplenty:stripped_umbran_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_umbran_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/stripped_willow_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_willow_log",
+    "recipe=biomesoplenty:stripped_willow_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:stripped_willow_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/umbran_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:umbran_planks",
+    "tag=biomesoplenty:umbran_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/umbran_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/umbran_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/umbran_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_log",
+    "recipe=biomesoplenty:umbran_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/unmapped_end_stone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:liquid_null_bucket",
+    "recipe=biomesoplenty:unmapped_end_stone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:unmapped_end_stone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/white_sandstone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sand",
+    "recipe=biomesoplenty:white_sandstone"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/white_sandstone_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:chiseled_white_sandstone",
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:white_sandstone_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/white_sandstone_slab_from_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:white_sandstone_slab_from_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone_slab_from_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/white_sandstone_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:chiseled_white_sandstone",
+    "items=biomesoplenty:cut_white_sandstone",
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:white_sandstone_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/white_sandstone_stairs_from_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:white_sandstone_stairs_from_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone_stairs_from_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/willow_planks",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:willow_planks",
+    "tag=biomesoplenty:willow_logs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_planks"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/willow_slab",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_slab"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_slab"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/willow_stairs",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_stairs"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_stairs"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/building_blocks/willow_wood",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_log",
+    "recipe=biomesoplenty:willow_wood"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_wood"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/black_sandstone_wall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:black_sandstone_wall"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone_wall"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/black_sandstone_wall_from_black_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:black_sandstone",
+    "recipe=biomesoplenty:black_sandstone_wall_from_black_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:black_sandstone_wall_from_black_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/blackstone_bulb",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:blackstone",
+    "recipe=biomesoplenty:blackstone_bulb"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:blackstone_bulb"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/blackstone_spines",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:blackstone",
+    "recipe=biomesoplenty:blackstone_spines"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:blackstone_spines"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/blackstone_spines_from_blackstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:blackstone",
+    "recipe=biomesoplenty:blackstone_spines_from_blackstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:blackstone_spines_from_blackstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_brick_wall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:brimstone_brick_wall"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_wall"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_brick_wall_from_brimstone_bricks_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone_bricks",
+    "recipe=biomesoplenty:brimstone_brick_wall_from_brimstone_bricks_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_wall_from_brimstone_bricks_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_brick_wall_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_brick_wall_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_brick_wall_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_bud",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_bud"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_bud"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_bud_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_bud_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_bud_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_cluster",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_cluster"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_cluster"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_cluster_from_brimstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_cluster_from_brimstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_cluster_from_brimstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/brimstone_fumarole",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:brimstone",
+    "recipe=biomesoplenty:brimstone_fumarole"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brimstone_fumarole"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/dead_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/dead_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_dead_log",
+    "recipe=biomesoplenty:dead_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/dead_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/empyreal_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/empyreal_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_empyreal_log",
+    "recipe=biomesoplenty:empyreal_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/empyreal_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/fir_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/fir_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_fir_log",
+    "recipe=biomesoplenty:fir_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/fir_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/hellbark_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/hellbark_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_hellbark_log",
+    "recipe=biomesoplenty:hellbark_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/hellbark_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/jacaranda_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/jacaranda_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_jacaranda_log",
+    "recipe=biomesoplenty:jacaranda_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/jacaranda_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/magic_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/magic_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_magic_log",
+    "recipe=biomesoplenty:magic_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/magic_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/mahogany_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/mahogany_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_mahogany_log",
+    "recipe=biomesoplenty:mahogany_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/mahogany_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/maple_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/maple_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_maple_log",
+    "recipe=biomesoplenty:maple_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/maple_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/orange_maple_leaf_pile",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_maple_leaves",
+    "recipe=biomesoplenty:orange_maple_leaf_pile"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_maple_leaf_pile"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/orange_sandstone_wall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:orange_sandstone_wall"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone_wall"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/orange_sandstone_wall_from_orange_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_sandstone",
+    "recipe=biomesoplenty:orange_sandstone_wall_from_orange_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_sandstone_wall_from_orange_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/palm_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/palm_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_palm_log",
+    "recipe=biomesoplenty:palm_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/palm_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/pine_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/pine_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_pine_log",
+    "recipe=biomesoplenty:pine_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/pine_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/red_maple_leaf_pile",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:red_maple_leaves",
+    "recipe=biomesoplenty:red_maple_leaf_pile"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:red_maple_leaf_pile"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/redwood_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/redwood_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_redwood_log",
+    "recipe=biomesoplenty:redwood_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/redwood_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/umbran_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/umbran_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_umbran_log",
+    "recipe=biomesoplenty:umbran_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/umbran_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/white_sandstone_wall",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:white_sandstone_wall"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone_wall"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/white_sandstone_wall_from_white_sandstone_stonecutting",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_sandstone",
+    "recipe=biomesoplenty:white_sandstone_wall_from_white_sandstone_stonecutting"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_sandstone_wall_from_white_sandstone_stonecutting"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/willow_fence",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_fence"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_fence"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/willow_hanging_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:stripped_willow_log",
+    "recipe=biomesoplenty:willow_hanging_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_hanging_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/willow_sign",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_sign"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_sign"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/decorations/yellow_maple_leaf_pile",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:yellow_maple_leaves",
+    "recipe=biomesoplenty:yellow_maple_leaf_pile"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:yellow_maple_leaf_pile"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/food/rabbit_stew_from_toadstool",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:cooked_rabbit",
+    "recipe=biomesoplenty:rabbit_stew_from_toadstool"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:rabbit_stew_from_toadstool"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/brown_dye_from_cattail",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:cattail",
+    "recipe=biomesoplenty:brown_dye_from_cattail"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:brown_dye_from_cattail"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/cyan_dye_from_glowflower",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:glowflower",
+    "recipe=biomesoplenty:cyan_dye_from_glowflower"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:cyan_dye_from_glowflower"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/gray_dye_from_wilted_lily",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:wilted_lily",
+    "recipe=biomesoplenty:gray_dye_from_wilted_lily"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:gray_dye_from_wilted_lily"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/green_dye_from_tiny_cactus",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:tiny_cactus",
+    "recipe=biomesoplenty:green_dye_from_tiny_cactus"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:green_dye_from_tiny_cactus"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/light_blue_dye_from_blue_hydrangea",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:blue_hydrangea",
+    "recipe=biomesoplenty:light_blue_dye_from_blue_hydrangea"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:light_blue_dye_from_blue_hydrangea"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/light_blue_dye_from_icy_iris",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:icy_iris",
+    "recipe=biomesoplenty:light_blue_dye_from_icy_iris"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:light_blue_dye_from_icy_iris"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/light_gray_dye_from_endbloom",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:endbloom",
+    "recipe=biomesoplenty:light_gray_dye_from_endbloom"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:light_gray_dye_from_endbloom"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/magenta_dye_from_wildflower",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:wildflower",
+    "recipe=biomesoplenty:magenta_dye_from_wildflower"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magenta_dye_from_wildflower"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/orange_dye_from_burning_blossom",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:burning_blossom",
+    "recipe=biomesoplenty:orange_dye_from_burning_blossom"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_dye_from_burning_blossom"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/orange_dye_from_orange_cosmos",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:orange_cosmos",
+    "recipe=biomesoplenty:orange_dye_from_orange_cosmos"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:orange_dye_from_orange_cosmos"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/pink_dye_from_pink_daffodil",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pink_daffodil",
+    "recipe=biomesoplenty:pink_dye_from_pink_daffodil"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pink_dye_from_pink_daffodil"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/pink_dye_from_pink_hibiscus",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pink_hibiscus",
+    "recipe=biomesoplenty:pink_dye_from_pink_hibiscus"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pink_dye_from_pink_hibiscus"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/purple_dye_from_lavender",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:lavender",
+    "recipe=biomesoplenty:purple_dye_from_lavender"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:purple_dye_from_lavender"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/purple_dye_from_tall_lavender",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:tall_lavender",
+    "recipe=biomesoplenty:purple_dye_from_tall_lavender"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:purple_dye_from_tall_lavender"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/purple_dye_from_violet",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:violet",
+    "recipe=biomesoplenty:purple_dye_from_violet"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:purple_dye_from_violet"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/red_dye_from_rose",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:rose",
+    "recipe=biomesoplenty:red_dye_from_rose"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:red_dye_from_rose"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/red_dye_from_waterlily",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:waterlily",
+    "recipe=biomesoplenty:red_dye_from_waterlily"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:red_dye_from_waterlily"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/white_dye_from_tall_white_lavender",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:tall_white_lavender",
+    "recipe=biomesoplenty:white_dye_from_tall_white_lavender"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_dye_from_tall_white_lavender"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/white_dye_from_white_lavender",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_lavender",
+    "recipe=biomesoplenty:white_dye_from_white_lavender"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_dye_from_white_lavender"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/white_dye_from_white_petals",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:white_petals",
+    "recipe=biomesoplenty:white_dye_from_white_petals"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:white_dye_from_white_petals"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/misc/yellow_dye_from_goldenrod",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:goldenrod",
+    "recipe=biomesoplenty:yellow_dye_from_goldenrod"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:yellow_dye_from_goldenrod"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/dead_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/dead_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/dead_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/dead_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/dead_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:dead_planks",
+    "recipe=biomesoplenty:dead_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/empyreal_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/empyreal_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/empyreal_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/empyreal_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/empyreal_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:empyreal_planks",
+    "recipe=biomesoplenty:empyreal_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/fir_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/fir_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/fir_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/fir_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/fir_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:fir_planks",
+    "recipe=biomesoplenty:fir_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/hellbark_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/hellbark_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/hellbark_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/hellbark_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/hellbark_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:hellbark_planks",
+    "recipe=biomesoplenty:hellbark_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/jacaranda_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/jacaranda_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/jacaranda_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/jacaranda_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/jacaranda_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:jacaranda_planks",
+    "recipe=biomesoplenty:jacaranda_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/magic_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/magic_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/magic_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/magic_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/magic_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:magic_planks",
+    "recipe=biomesoplenty:magic_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/mahogany_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/mahogany_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/mahogany_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/mahogany_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/mahogany_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:mahogany_planks",
+    "recipe=biomesoplenty:mahogany_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/maple_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/maple_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/maple_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/maple_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/maple_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:maple_planks",
+    "recipe=biomesoplenty:maple_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/palm_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/palm_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/palm_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/palm_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/palm_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:palm_planks",
+    "recipe=biomesoplenty:palm_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/pine_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/pine_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/pine_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/pine_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/pine_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:pine_planks",
+    "recipe=biomesoplenty:pine_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/redwood_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/redwood_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/redwood_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/redwood_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/redwood_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:redwood_planks",
+    "recipe=biomesoplenty:redwood_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/tnt_from_bop_sand",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gunpowder",
+    "recipe=biomesoplenty:tnt_from_bop_sand"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:tnt_from_bop_sand"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/umbran_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/umbran_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/umbran_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/umbran_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/umbran_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:umbran_planks",
+    "recipe=biomesoplenty:umbran_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/willow_button",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_button"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_button"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/willow_door",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_door"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_door"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/willow_fence_gate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_fence_gate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_fence_gate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/willow_pressure_plate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_pressure_plate"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_pressure_plate"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/redstone/willow_trapdoor",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=biomesoplenty:willow_planks",
+    "recipe=biomesoplenty:willow_trapdoor"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_trapdoor"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/dead_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:dead_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/dead_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:dead_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:dead_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/empyreal_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:empyreal_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/empyreal_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:empyreal_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:empyreal_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/fir_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:fir_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/fir_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:fir_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:fir_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/hellbark_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:hellbark_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/hellbark_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:hellbark_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:hellbark_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/jacaranda_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:jacaranda_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/jacaranda_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:jacaranda_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:jacaranda_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/magic_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:magic_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/magic_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:magic_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:magic_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/mahogany_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:mahogany_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/mahogany_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:mahogany_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:mahogany_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/maple_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:maple_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/maple_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:maple_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:maple_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/palm_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:palm_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/palm_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:palm_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:palm_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/pine_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:pine_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/pine_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:pine_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:pine_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/redwood_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:redwood_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/redwood_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:redwood_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:redwood_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/umbran_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:umbran_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/umbran_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:umbran_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:umbran_chest_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/willow_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:enter_block",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "block=minecraft:water",
+    "recipe=biomesoplenty:willow_boat"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_boat"
+    ]
+   }
+  },
+  {
+   "id": "biomesoplenty:recipes/transportation/willow_chest_boat",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "recipe=biomesoplenty:willow_chest_boat",
+    "tag=minecraft:boats"
+   ],
+   "rewards": {
+    "recipes": [
+     "biomesoplenty:willow_chest_boat"
+    ]
+   }
+  }
+ ],
+ "books": [],
+ "names": {
+  "biome.biomesoplenty.aspen_glade": "Aspen Glade",
+  "biome.biomesoplenty.auroral_garden": "Auroral Garden",
+  "biome.biomesoplenty.bayou": "Bayou",
+  "biome.biomesoplenty.bog": "Bog",
+  "biome.biomesoplenty.cold_desert": "Cold Desert",
+  "biome.biomesoplenty.coniferous_forest": "Coniferous Forest",
+  "biome.biomesoplenty.crag": "Crag",
+  "biome.biomesoplenty.crystalline_chasm": "Crystalline Chasm",
+  "biome.biomesoplenty.dead_forest": "Dead Forest",
+  "biome.biomesoplenty.dryland": "Dryland",
+  "biome.biomesoplenty.dune_beach": "Dune Beach",
+  "biome.biomesoplenty.erupting_inferno": "Erupting Inferno",
+  "biome.biomesoplenty.field": "Field",
+  "biome.biomesoplenty.fir_clearing": "Fir Clearing",
+  "biome.biomesoplenty.floodplain": "Floodplain",
+  "biome.biomesoplenty.forested_field": "Forested Field",
+  "biome.biomesoplenty.fungal_jungle": "Fungal Jungle",
+  "biome.biomesoplenty.glowing_grotto": "Glowing Grotto",
+  "biome.biomesoplenty.grassland": "Grassland",
+  "biome.biomesoplenty.gravel_beach": "Gravel Beach",
+  "biome.biomesoplenty.highland": "Highland",
+  "biome.biomesoplenty.hot_springs": "Hot Springs",
+  "biome.biomesoplenty.jacaranda_glade": "Jacaranda Glade",
+  "biome.biomesoplenty.jade_cliffs": "Jade Cliffs",
+  "biome.biomesoplenty.lavender_field": "Lavender Field",
+  "biome.biomesoplenty.lush_desert": "Lush Desert",
+  "biome.biomesoplenty.lush_savanna": "Lush Savanna",
+  "biome.biomesoplenty.maple_woods": "Maple Woods",
+  "biome.biomesoplenty.marsh": "Marsh",
+  "biome.biomesoplenty.mediterranean_forest": "Mediterranean Forest",
+  "biome.biomesoplenty.moor": "Moor",
+  "biome.biomesoplenty.muskeg": "Muskeg",
+  "biome.biomesoplenty.mystic_grove": "Mystic Grove",
+  "biome.biomesoplenty.old_growth_dead_forest": "Old Growth Dead Forest",
+  "biome.biomesoplenty.old_growth_woodland": "Old Growth Woodland",
+  "biome.biomesoplenty.ominous_woods": "Ominous Woods",
+  "biome.biomesoplenty.orchard": "Orchard",
+  "biome.biomesoplenty.origin_valley": "Origin Valley",
+  "biome.biomesoplenty.overgrown_greens": "Overgrown Greens",
+  "biome.biomesoplenty.pasture": "Pasture",
+  "biome.biomesoplenty.prairie": "Prairie",
+  "biome.biomesoplenty.pumpkin_patch": "Pumpkin Patch",
+  "biome.biomesoplenty.rainforest": "Rainforest",
+  "biome.biomesoplenty.redwood_forest": "Redwood Forest",
+  "biome.biomesoplenty.rocky_rainforest": "Rocky Rainforest",
+  "biome.biomesoplenty.rocky_shrubland": "Rocky Shrubland",
+  "biome.biomesoplenty.scrubland": "Scrubland",
+  "biome.biomesoplenty.seasonal_forest": "Seasonal Forest",
+  "biome.biomesoplenty.shrubland": "Shrubland",
+  "biome.biomesoplenty.snowblossom_grove": "Snowblossom Grove",
+  "biome.biomesoplenty.snowy_coniferous_forest": "Snowy Coniferous Forest",
+  "biome.biomesoplenty.snowy_fir_clearing": "Snowy Fir Clearing",
+  "biome.biomesoplenty.snowy_maple_woods": "Snowy Maple Woods",
+  "biome.biomesoplenty.spider_nest": "Spider Nest",
+  "biome.biomesoplenty.tropics": "Tropics",
+  "biome.biomesoplenty.tundra": "Tundra",
+  "biome.biomesoplenty.undergrowth": "Undergrowth",
+  "biome.biomesoplenty.visceral_heap": "Visceral Heap",
+  "biome.biomesoplenty.volcanic_plains": "Volcanic Plains",
+  "biome.biomesoplenty.volcano": "Volcano",
+  "biome.biomesoplenty.wasteland": "Wasteland",
+  "biome.biomesoplenty.wasteland_steppe": "Wasteland Steppe",
+  "biome.biomesoplenty.wetland": "Wetland",
+  "biome.biomesoplenty.wintry_origin_valley": "Wintry Origin Valley",
+  "biome.biomesoplenty.withered_abyss": "Withered Abyss",
+  "biome.biomesoplenty.woodland": "Woodland",
+  "item.biomesoplenty.blood_bucket": "Blood Bucket",
+  "item.biomesoplenty.bop_icon": "BOP Icon",
+  "item.biomesoplenty.dead_boat": "Dead Boat",
+  "item.biomesoplenty.dead_chest_boat": "Dead Boat with Chest",
+  "item.biomesoplenty.empyreal_boat": "Empyreal Boat",
+  "item.biomesoplenty.empyreal_chest_boat": "Empyreal Boat with Chest",
+  "item.biomesoplenty.fir_boat": "Fir Boat",
+  "item.biomesoplenty.fir_chest_boat": "Fir Boat with Chest",
+  "item.biomesoplenty.hellbark_boat": "Hellbark Boat",
+  "item.biomesoplenty.hellbark_chest_boat": "Hellbark Boat with Chest",
+  "item.biomesoplenty.jacaranda_boat": "Jacaranda Boat",
+  "item.biomesoplenty.jacaranda_chest_boat": "Jacaranda Boat with Chest",
+  "item.biomesoplenty.liquid_null_bucket": "���� Bucket",
+  "item.biomesoplenty.magic_boat": "Magic Boat",
+  "item.biomesoplenty.magic_chest_boat": "Magic Boat with Chest",
+  "item.biomesoplenty.mahogany_boat": "Mahogany Boat",
+  "item.biomesoplenty.mahogany_chest_boat": "Mahogany Boat with Chest",
+  "item.biomesoplenty.maple_boat": "Maple Boat",
+  "item.biomesoplenty.maple_chest_boat": "Maple Boat with Chest",
+  "item.biomesoplenty.music_disc_wanderer": "Music Disc",
+  "item.biomesoplenty.music_disc_wanderer.desc": "Tim Rurkowski - Wanderer",
+  "item.biomesoplenty.palm_boat": "Palm Boat",
+  "item.biomesoplenty.palm_chest_boat": "Palm Boat with Chest",
+  "item.biomesoplenty.pine_boat": "Pine Boat",
+  "item.biomesoplenty.pine_chest_boat": "Pine Boat with Chest",
+  "item.biomesoplenty.redwood_boat": "Redwood Boat",
+  "item.biomesoplenty.redwood_chest_boat": "Redwood Boat with Chest",
+  "item.biomesoplenty.rose_quartz_chunk": "Rose Quartz Chunk",
+  "item.biomesoplenty.umbran_boat": "Umbran Boat",
+  "item.biomesoplenty.umbran_chest_boat": "Umbran Boat with Chest",
+  "item.biomesoplenty.willow_boat": "Willow Boat",
+  "item.biomesoplenty.willow_chest_boat": "Willow Boat with Chest",
+  "block.biomesoplenty.algal_end_stone": "Algal End Stone",
+  "block.biomesoplenty.anomaly": "§kANOMALY",
+  "block.biomesoplenty.barley": "Barley",
+  "block.biomesoplenty.barnacles": "Barnacles",
+  "block.biomesoplenty.black_sand": "Black Sand",
+  "block.biomesoplenty.black_sandstone": "Black Sandstone",
+  "block.biomesoplenty.black_sandstone_slab": "Black Sandstone Slab",
+  "block.biomesoplenty.black_sandstone_stairs": "Black Sandstone Stairs",
+  "block.biomesoplenty.black_sandstone_wall": "Black Sandstone Wall",
+  "block.biomesoplenty.blackstone_bulb": "Blackstone Bulb",
+  "block.biomesoplenty.blackstone_spines": "Blackstone Spines",
+  "block.biomesoplenty.blood": "Blood",
+  "block.biomesoplenty.blue_hydrangea": "Blue Hydrangea",
+  "block.biomesoplenty.bramble": "Bramble",
+  "block.biomesoplenty.bramble_leaves": "Bramble Leaves",
+  "block.biomesoplenty.brimstone": "Brimstone",
+  "block.biomesoplenty.brimstone_bricks": "Brimstone Bricks",
+  "block.biomesoplenty.brimstone_brick_slab": "Brimstone Brick Slab",
+  "block.biomesoplenty.brimstone_brick_stairs": "Brimstone Brick Stairs",
+  "block.biomesoplenty.brimstone_brick_wall": "Brimstone Brick Wall",
+  "block.biomesoplenty.brimstone_bud": "Brimstone Bud",
+  "block.biomesoplenty.brimstone_cluster": "Brimstone Cluster",
+  "block.biomesoplenty.brimstone_fumarole": "Brimstone Fumarole",
+  "block.biomesoplenty.burning_blossom": "Burning Blossom",
+  "block.biomesoplenty.bush": "Bush",
+  "block.biomesoplenty.cattail": "Cattail",
+  "block.biomesoplenty.chiseled_brimstone_bricks": "Chiseled Brimstone Bricks",
+  "block.biomesoplenty.chiseled_black_sandstone": "Chiseled Black Sandstone",
+  "block.biomesoplenty.chiseled_orange_sandstone": "Chiseled Orange Sandstone",
+  "block.biomesoplenty.chiseled_white_sandstone": "Chiseled White Sandstone",
+  "block.biomesoplenty.clover": "Clover",
+  "block.biomesoplenty.cut_black_sandstone": "Cut Black Sandstone",
+  "block.biomesoplenty.cut_black_sandstone_slab": "Cut Black Sandstone Slab",
+  "block.biomesoplenty.cut_orange_sandstone": "Cut Orange Sandstone",
+  "block.biomesoplenty.cut_orange_sandstone_slab": "Cut Orange Sandstone Slab",
+  "block.biomesoplenty.cut_white_sandstone": "Cut White Sandstone",
+  "block.biomesoplenty.cut_white_sandstone_slab": "Cut White Sandstone Slab",
+  "block.biomesoplenty.cypress_leaves": "Cypress Leaves",
+  "block.biomesoplenty.cypress_sapling": "Cypress Sapling",
+  "block.biomesoplenty.dead_branch": "Dead Branch",
+  "block.biomesoplenty.dead_button": "Dead Button",
+  "block.biomesoplenty.dead_door": "Dead Door",
+  "block.biomesoplenty.dead_fence": "Dead Fence",
+  "block.biomesoplenty.dead_fence_gate": "Dead Fence Gate",
+  "block.biomesoplenty.dead_grass": "Dead Grass",
+  "block.biomesoplenty.dead_hanging_sign": "Dead Hanging Sign",
+  "block.biomesoplenty.dead_leaves": "Dead Leaves",
+  "block.biomesoplenty.dead_log": "Dead Log",
+  "block.biomesoplenty.dead_planks": "Dead Planks",
+  "block.biomesoplenty.dead_pressure_plate": "Dead Pressure Plate",
+  "block.biomesoplenty.dead_sapling": "Dead Sapling",
+  "block.biomesoplenty.dead_sign": "Dead Sign",
+  "block.biomesoplenty.dead_slab": "Dead Slab",
+  "block.biomesoplenty.dead_stairs": "Dead Stairs",
+  "block.biomesoplenty.dead_trapdoor": "Dead Trapdoor",
+  "block.biomesoplenty.dead_wall_sign": "Dead Wall Sign",
+  "block.biomesoplenty.dead_wall_hanging_sign": "Dead Wall Hanging Sign",
+  "block.biomesoplenty.dead_wood": "Dead Wood",
+  "block.biomesoplenty.desert_grass": "Desert Grass",
+  "block.biomesoplenty.dried_salt": "Dried Salt",
+  "block.biomesoplenty.dune_grass": "Dune Grass",
+  "block.biomesoplenty.empyreal_button": "Empyreal Button",
+  "block.biomesoplenty.empyreal_door": "Empyreal Door",
+  "block.biomesoplenty.empyreal_fence": "Empyreal Fence",
+  "block.biomesoplenty.empyreal_fence_gate": "Empyreal Fence Gate",
+  "block.biomesoplenty.empyreal_hanging_sign": "Empyreal Hanging Sign",
+  "block.biomesoplenty.empyreal_leaves": "Empyreal Leaves",
+  "block.biomesoplenty.empyreal_log": "Empyreal Log",
+  "block.biomesoplenty.empyreal_planks": "Empyreal Planks",
+  "block.biomesoplenty.empyreal_pressure_plate": "Empyreal Pressure Plate",
+  "block.biomesoplenty.empyreal_sapling": "Empyreal Sapling",
+  "block.biomesoplenty.empyreal_sign": "Empyreal Sign",
+  "block.biomesoplenty.empyreal_slab": "Empyreal Slab",
+  "block.biomesoplenty.empyreal_stairs": "Empyreal Stairs",
+  "block.biomesoplenty.empyreal_trapdoor": "Empyreal Trapdoor",
+  "block.biomesoplenty.empyreal_wall_sign": "Empyreal Wall Sign",
+  "block.biomesoplenty.empyreal_wall_hanging_sign": "Empyreal Wall Hanging Sign",
+  "block.biomesoplenty.empyreal_wood": "Empyreal Wood",
+  "block.biomesoplenty.endbloom": "Endbloom",
+  "block.biomesoplenty.enderphyte": "Enderphyte",
+  "block.biomesoplenty.eyebulb": "Eyebulb",
+  "block.biomesoplenty.fir_button": "Fir Button",
+  "block.biomesoplenty.fir_door": "Fir Door",
+  "block.biomesoplenty.fir_fence": "Fir Fence",
+  "block.biomesoplenty.fir_fence_gate": "Fir Fence Gate",
+  "block.biomesoplenty.fir_hanging_sign": "Fir Hanging Sign",
+  "block.biomesoplenty.fir_leaves": "Fir Leaves",
+  "block.biomesoplenty.fir_log": "Fir Log",
+  "block.biomesoplenty.fir_planks": "Fir Planks",
+  "block.biomesoplenty.fir_pressure_plate": "Fir Pressure Plate",
+  "block.biomesoplenty.fir_sapling": "Fir Sapling",
+  "block.biomesoplenty.fir_sign": "Fir Sign",
+  "block.biomesoplenty.fir_slab": "Fir Slab",
+  "block.biomesoplenty.fir_stairs": "Fir Stairs",
+  "block.biomesoplenty.fir_trapdoor": "Fir Trapdoor",
+  "block.biomesoplenty.fir_wall_sign": "Fir Wall Sign",
+  "block.biomesoplenty.fir_wall_hanging_sign": "Fir Wall Hanging Sign",
+  "block.biomesoplenty.fir_wood": "Fir Wood",
+  "block.biomesoplenty.flesh": "Flesh",
+  "block.biomesoplenty.flesh_tendons": "Flesh Tendons",
+  "block.biomesoplenty.flesh_tendons_strand": "Flesh Tendons Strand",
+  "block.biomesoplenty.flowering_oak_leaves": "Flowering Oak Leaves",
+  "block.biomesoplenty.flowering_oak_sapling": "Flowering Oak Sapling",
+  "block.biomesoplenty.glowflower": "Glowflower",
+  "block.biomesoplenty.glowing_moss_block": "Glowing Moss Block",
+  "block.biomesoplenty.glowing_moss_carpet": "Glowing Moss Carpet",
+  "block.biomesoplenty.glowshroom": "Glowshroom",
+  "block.biomesoplenty.glowshroom_block": "Glowshroom Block",
+  "block.biomesoplenty.glowworm_silk": "Glowworm Silk",
+  "block.biomesoplenty.glowworm_silk_strand": "Glowworm Silk Strand",
+  "block.biomesoplenty.goldenrod": "Goldenrod",
+  "block.biomesoplenty.hair": "Hair",
+  "block.biomesoplenty.hanging_cobweb": "Hanging Cobweb",
+  "block.biomesoplenty.hanging_cobweb_strand": "Hanging Cobweb Strand",
+  "block.biomesoplenty.hellbark_button": "Hellbark Button",
+  "block.biomesoplenty.hellbark_door": "Hellbark Door",
+  "block.biomesoplenty.hellbark_fence": "Hellbark Fence",
+  "block.biomesoplenty.hellbark_fence_gate": "Hellbark Fence Gate",
+  "block.biomesoplenty.hellbark_hanging_sign": "Hellbark Hanging Sign",
+  "block.biomesoplenty.hellbark_leaves": "Hellbark Leaves",
+  "block.biomesoplenty.hellbark_log": "Hellbark Log",
+  "block.biomesoplenty.hellbark_planks": "Hellbark Planks",
+  "block.biomesoplenty.hellbark_pressure_plate": "Hellbark Pressure Plate",
+  "block.biomesoplenty.hellbark_sapling": "Hellbark Sapling",
+  "block.biomesoplenty.hellbark_sign": "Hellbark Sign",
+  "block.biomesoplenty.hellbark_slab": "Hellbark Slab",
+  "block.biomesoplenty.hellbark_stairs": "Hellbark Stairs",
+  "block.biomesoplenty.hellbark_trapdoor": "Hellbark Trapdoor",
+  "block.biomesoplenty.hellbark_wall_sign": "Hellbark Wall Sign",
+  "block.biomesoplenty.hellbark_wall_hanging_sign": "Hellbark Wall Hanging Sign",
+  "block.biomesoplenty.hellbark_wood": "Hellbark Wood",
+  "block.biomesoplenty.high_grass": "High Grass",
+  "block.biomesoplenty.high_grass_plant": "High Grass Plant",
+  "block.biomesoplenty.huge_clover_petal": "Huge Clover Petal",
+  "block.biomesoplenty.huge_lily_pad": "Huge Lily Pad",
+  "block.biomesoplenty.icy_iris": "Icy Iris",
+  "block.biomesoplenty.jacaranda_button": "Jacaranda Button",
+  "block.biomesoplenty.jacaranda_door": "Jacaranda Door",
+  "block.biomesoplenty.jacaranda_fence": "Jacaranda Fence",
+  "block.biomesoplenty.jacaranda_fence_gate": "Jacaranda Fence Gate",
+  "block.biomesoplenty.jacaranda_hanging_sign": "Jacaranda Hanging Sign",
+  "block.biomesoplenty.jacaranda_leaves": "Jacaranda Leaves",
+  "block.biomesoplenty.jacaranda_log": "Jacaranda Log",
+  "block.biomesoplenty.jacaranda_planks": "Jacaranda Planks",
+  "block.biomesoplenty.jacaranda_pressure_plate": "Jacaranda Pressure Plate",
+  "block.biomesoplenty.jacaranda_sapling": "Jacaranda Sapling",
+  "block.biomesoplenty.jacaranda_sign": "Jacaranda Sign",
+  "block.biomesoplenty.jacaranda_slab": "Jacaranda Slab",
+  "block.biomesoplenty.jacaranda_stairs": "Jacaranda Stairs",
+  "block.biomesoplenty.jacaranda_trapdoor": "Jacaranda Trapdoor",
+  "block.biomesoplenty.jacaranda_wall_sign": "Jacaranda Wall Sign",
+  "block.biomesoplenty.jacaranda_wall_hanging_sign": "Jacaranda Wall Hanging Sign",
+  "block.biomesoplenty.jacaranda_wood": "Jacaranda Wood",
+  "block.biomesoplenty.large_rose_quartz_bud": "Large Rose Quartz Bud",
+  "block.biomesoplenty.lavender": "Lavender",
+  "block.biomesoplenty.liquid_null": "����",
+  "block.biomesoplenty.lumaloop": "Lumaloop",
+  "block.biomesoplenty.lumaloop_plant": "Lumaloop Plant",
+  "block.biomesoplenty.magic_button": "Magic Button",
+  "block.biomesoplenty.magic_door": "Magic Door",
+  "block.biomesoplenty.magic_fence": "Magic Fence",
+  "block.biomesoplenty.magic_fence_gate": "Magic Fence Gate",
+  "block.biomesoplenty.magic_hanging_sign": "Magic Hanging Sign",
+  "block.biomesoplenty.magic_leaves": "Magic Leaves",
+  "block.biomesoplenty.magic_log": "Magic Log",
+  "block.biomesoplenty.magic_planks": "Magic Planks",
+  "block.biomesoplenty.magic_pressure_plate": "Magic Pressure Plate",
+  "block.biomesoplenty.magic_sapling": "Magic Sapling",
+  "block.biomesoplenty.magic_sign": "Magic Sign",
+  "block.biomesoplenty.magic_slab": "Magic Slab",
+  "block.biomesoplenty.magic_stairs": "Magic Stairs",
+  "block.biomesoplenty.magic_trapdoor": "Magic Trapdoor",
+  "block.biomesoplenty.magic_wall_sign": "Magic Wall Sign",
+  "block.biomesoplenty.magic_wall_hanging_sign": "Magic Wall Hanging Sign",
+  "block.biomesoplenty.magic_wood": "Magic Wood",
+  "block.biomesoplenty.mahogany_button": "Mahogany Button",
+  "block.biomesoplenty.mahogany_door": "Mahogany Door",
+  "block.biomesoplenty.mahogany_fence": "Mahogany Fence",
+  "block.biomesoplenty.mahogany_fence_gate": "Mahogany Fence Gate",
+  "block.biomesoplenty.mahogany_hanging_sign": "Mahogany Hanging Sign",
+  "block.biomesoplenty.mahogany_leaves": "Mahogany Leaves",
+  "block.biomesoplenty.mahogany_log": "Mahogany Log",
+  "block.biomesoplenty.mahogany_planks": "Mahogany Planks",
+  "block.biomesoplenty.mahogany_pressure_plate": "Mahogany Pressure Plate",
+  "block.biomesoplenty.mahogany_sapling": "Mahogany Sapling",
+  "block.biomesoplenty.mahogany_sign": "Mahogany Sign",
+  "block.biomesoplenty.mahogany_slab": "Mahogany Slab",
+  "block.biomesoplenty.mahogany_stairs": "Mahogany Stairs",
+  "block.biomesoplenty.mahogany_trapdoor": "Mahogany Trapdoor",
+  "block.biomesoplenty.mahogany_wall_sign": "Mahogany Wall Sign",
+  "block.biomesoplenty.mahogany_wall_hanging_sign": "Mahogany Wall Hanging Sign",
+  "block.biomesoplenty.mahogany_wood": "Mahogany Wood",
+  "block.biomesoplenty.maple_button": "Maple Button",
+  "block.biomesoplenty.maple_door": "Maple Door",
+  "block.biomesoplenty.maple_fence": "Maple Fence",
+  "block.biomesoplenty.maple_fence_gate": "Maple Fence Gate",
+  "block.biomesoplenty.maple_hanging_sign": "Maple Hanging Sign",
+  "block.biomesoplenty.maple_log": "Maple Log",
+  "block.biomesoplenty.maple_planks": "Maple Planks",
+  "block.biomesoplenty.maple_pressure_plate": "Maple Pressure Plate",
+  "block.biomesoplenty.maple_sign": "Maple Sign",
+  "block.biomesoplenty.maple_slab": "Maple Slab",
+  "block.biomesoplenty.maple_stairs": "Maple Stairs",
+  "block.biomesoplenty.maple_trapdoor": "Maple Trapdoor",
+  "block.biomesoplenty.maple_wall_sign": "Maple Wall Sign",
+  "block.biomesoplenty.maple_wall_hanging_sign": "Maple Wall Hanging Sign",
+  "block.biomesoplenty.maple_wood": "Maple Wood",
+  "block.biomesoplenty.medium_rose_quartz_bud": "Medium Rose Quartz Bud",
+  "block.biomesoplenty.mossy_black_sand": "Mossy Black Sand",
+  "block.biomesoplenty.null_end_stone": "En�d��St�o�ne",
+  "block.biomesoplenty.null_block": "�����",
+  "block.biomesoplenty.null_leaves": "� �� � �",
+  "block.biomesoplenty.null_plant": "��� �����",
+  "block.biomesoplenty.orange_cosmos": "Orange Cosmos",
+  "block.biomesoplenty.orange_maple_leaf_pile": "Orange Maple Leaf Pile",
+  "block.biomesoplenty.orange_maple_leaves": "Orange Maple Leaves",
+  "block.biomesoplenty.orange_maple_sapling": "Orange Maple Sapling",
+  "block.biomesoplenty.orange_sand": "Orange Sand",
+  "block.biomesoplenty.orange_sandstone": "Orange Sandstone",
+  "block.biomesoplenty.orange_sandstone_slab": "Orange Sandstone Slab",
+  "block.biomesoplenty.orange_sandstone_stairs": "Orange Sandstone Stairs",
+  "block.biomesoplenty.orange_sandstone_wall": "Orange Sandstone Wall",
+  "block.biomesoplenty.origin_grass_block": "Origin Grass Block",
+  "block.biomesoplenty.origin_leaves": "Origin Leaves",
+  "block.biomesoplenty.origin_sapling": "Origin Sapling",
+  "block.biomesoplenty.palm_button": "Palm Button",
+  "block.biomesoplenty.palm_door": "Palm Door",
+  "block.biomesoplenty.palm_fence": "Palm Fence",
+  "block.biomesoplenty.palm_fence_gate": "Palm Fence Gate",
+  "block.biomesoplenty.palm_hanging_sign": "Palm Hanging Sign",
+  "block.biomesoplenty.palm_leaves": "Palm Leaves",
+  "block.biomesoplenty.palm_log": "Palm Log",
+  "block.biomesoplenty.palm_planks": "Palm Planks",
+  "block.biomesoplenty.palm_pressure_plate": "Palm Pressure Plate",
+  "block.biomesoplenty.palm_sapling": "Palm Sapling",
+  "block.biomesoplenty.palm_sign": "Palm Sign",
+  "block.biomesoplenty.palm_slab": "Palm Slab",
+  "block.biomesoplenty.palm_stairs": "Palm Stairs",
+  "block.biomesoplenty.palm_trapdoor": "Palm Trapdoor",
+  "block.biomesoplenty.palm_wall_sign": "Palm Wall Sign",
+  "block.biomesoplenty.palm_wall_hanging_sign": "Palm Wall Hanging Sign",
+  "block.biomesoplenty.palm_wood": "Palm Wood",
+  "block.biomesoplenty.pine_button": "Pine Button",
+  "block.biomesoplenty.pine_door": "Pine Door",
+  "block.biomesoplenty.pine_fence": "Pine Fence",
+  "block.biomesoplenty.pine_fence_gate": "Pine Fence Gate",
+  "block.biomesoplenty.pine_hanging_sign": "Pine Hanging Sign",
+  "block.biomesoplenty.pine_leaves": "Pine Leaves",
+  "block.biomesoplenty.pine_log": "Pine Log",
+  "block.biomesoplenty.pine_planks": "Pine Planks",
+  "block.biomesoplenty.pine_pressure_plate": "Pine Pressure Plate",
+  "block.biomesoplenty.pine_sapling": "Pine Sapling",
+  "block.biomesoplenty.pine_sign": "Pine Sign",
+  "block.biomesoplenty.pine_slab": "Pine Slab",
+  "block.biomesoplenty.pine_stairs": "Pine Stairs",
+  "block.biomesoplenty.pine_trapdoor": "Pine Trapdoor",
+  "block.biomesoplenty.pine_wall_sign": "Pine Wall Sign",
+  "block.biomesoplenty.pine_wall_hanging_sign": "Pine Wall Hanging Sign",
+  "block.biomesoplenty.pine_wood": "Pine Wood",
+  "block.biomesoplenty.pink_daffodil": "Pink Daffodil",
+  "block.biomesoplenty.pink_hibiscus": "Pink Hibiscus",
+  "block.biomesoplenty.porous_flesh": "Porous Flesh",
+  "block.biomesoplenty.potted_burning_blossom": "Potted Burning Blossom",
+  "block.biomesoplenty.potted_cypress_sapling": "Potted Cypress Sapling",
+  "block.biomesoplenty.potted_dead_sapling": "Potted Dead Sapling",
+  "block.biomesoplenty.potted_empyreal_sapling": "Potted Empyreal Sapling",
+  "block.biomesoplenty.potted_endbloom": "Potted Endbloom",
+  "block.biomesoplenty.potted_fir_sapling": "Potted Fir Sapling",
+  "block.biomesoplenty.potted_flowering_oak_sapling": "Potted Flowering Oak Sapling",
+  "block.biomesoplenty.potted_glowflower": "Potted Glowflower",
+  "block.biomesoplenty.potted_glowshroom": "Potted Glowshroom",
+  "block.biomesoplenty.potted_hellbark_sapling": "Potted Hellbark Sapling",
+  "block.biomesoplenty.potted_jacaranda_sapling": "Potted Jacaranda Sapling",
+  "block.biomesoplenty.potted_lavender": "Potted Lavender",
+  "block.biomesoplenty.potted_magic_sapling": "Potted Magic Sapling",
+  "block.biomesoplenty.potted_mahogany_sapling": "Potted Mahogany Sapling",
+  "block.biomesoplenty.potted_orange_maple_sapling": "Potted Orange Maple Sapling",
+  "block.biomesoplenty.potted_orange_cosmos": "Potted Orange Cosmos",
+  "block.biomesoplenty.potted_origin_sapling": "Potted Origin Sapling",
+  "block.biomesoplenty.potted_palm_sapling": "Potted Palm Sapling",
+  "block.biomesoplenty.potted_pine_sapling": "Potted Pine Sapling",
+  "block.biomesoplenty.potted_pink_daffodil": "Potted Pink Daffodil",
+  "block.biomesoplenty.potted_pink_hibiscus": "Potted Pink Hibiscus",
+  "block.biomesoplenty.potted_rainbow_birch_sapling": "Potted Rainbow Birch Sapling",
+  "block.biomesoplenty.potted_redwood_sapling": "Potted Redwood Sapling",
+  "block.biomesoplenty.potted_red_maple_sapling": "Potted Red Maple Sapling",
+  "block.biomesoplenty.potted_rose": "Potted Rose",
+  "block.biomesoplenty.potted_sprout": "Potted Sprout",
+  "block.biomesoplenty.potted_tiny_cactus": "Potted Tiny Cactus",
+  "block.biomesoplenty.potted_toadstool": "Potted Toadstool",
+  "block.biomesoplenty.potted_umbran_sapling": "Potted Umbran Sapling",
+  "block.biomesoplenty.potted_violet": "Potted Violet",
+  "block.biomesoplenty.potted_snowblossom_sapling": "Potted Snowblossom Sapling",
+  "block.biomesoplenty.potted_white_lavender": "Potted White Lavender",
+  "block.biomesoplenty.potted_willow_sapling": "Potted Willow Sapling",
+  "block.biomesoplenty.potted_wilted_lily": "Potted Wilted Lily",
+  "block.biomesoplenty.potted_yellow_maple_sapling": "Potted Yellow Maple Sapling",
+  "block.biomesoplenty.pus_bubble": "Pus Bubble",
+  "block.biomesoplenty.rainbow_birch_leaves": "Rainbow Birch Leaves",
+  "block.biomesoplenty.rainbow_birch_sapling": "Rainbow Birch Sapling",
+  "block.biomesoplenty.red_maple_leaf_pile": "Red Maple Leaf Pile",
+  "block.biomesoplenty.red_maple_leaves": "Red Maple Leaves",
+  "block.biomesoplenty.red_maple_sapling": "Red Maple Sapling",
+  "block.biomesoplenty.redwood_button": "Redwood Button",
+  "block.biomesoplenty.redwood_door": "Redwood Door",
+  "block.biomesoplenty.redwood_fence": "Redwood Fence",
+  "block.biomesoplenty.redwood_fence_gate": "Redwood Fence Gate",
+  "block.biomesoplenty.redwood_hanging_sign": "Redwood Hanging Sign",
+  "block.biomesoplenty.redwood_leaves": "Redwood Leaves",
+  "block.biomesoplenty.redwood_log": "Redwood Log",
+  "block.biomesoplenty.redwood_planks": "Redwood Planks",
+  "block.biomesoplenty.redwood_pressure_plate": "Redwood Pressure Plate",
+  "block.biomesoplenty.redwood_sapling": "Redwood Sapling",
+  "block.biomesoplenty.redwood_sign": "Redwood Sign",
+  "block.biomesoplenty.redwood_slab": "Redwood Slab",
+  "block.biomesoplenty.redwood_stairs": "Redwood Stairs",
+  "block.biomesoplenty.redwood_trapdoor": "Redwood Trapdoor",
+  "block.biomesoplenty.redwood_wall_sign": "Redwood Wall Sign",
+  "block.biomesoplenty.redwood_wall_hanging_sign": "Redwood Wall Hanging Sign",
+  "block.biomesoplenty.redwood_wood": "Redwood Wood",
+  "block.biomesoplenty.reed": "Reed",
+  "block.biomesoplenty.rose": "Rose",
+  "block.biomesoplenty.rose_quartz_block": "Block of Rose Quartz",
+  "block.biomesoplenty.rose_quartz_cluster": "Rose Quartz Cluster",
+  "block.biomesoplenty.sea_oats": "Sea Oats",
+  "block.biomesoplenty.small_rose_quartz_bud": "Small Rose Quartz Bud",
+  "block.biomesoplenty.smooth_black_sandstone": "Smooth Black Sandstone",
+  "block.biomesoplenty.smooth_black_sandstone_slab": "Smooth Black Sandstone Slab",
+  "block.biomesoplenty.smooth_black_sandstone_stairs": "Smooth Black Sandstone Stairs",
+  "block.biomesoplenty.smooth_orange_sandstone": "Smooth Orange Sandstone",
+  "block.biomesoplenty.smooth_orange_sandstone_slab": "Smooth Orange Sandstone Slab",
+  "block.biomesoplenty.smooth_orange_sandstone_stairs": "Smooth Orange Sandstone Stairs",
+  "block.biomesoplenty.smooth_white_sandstone": "Smooth White Sandstone",
+  "block.biomesoplenty.smooth_white_sandstone_slab": "Smooth White Sandstone Slab",
+  "block.biomesoplenty.smooth_white_sandstone_stairs": "Smooth White Sandstone Stairs",
+  "block.biomesoplenty.snowblossom_leaves": "Snowblossom Leaves",
+  "block.biomesoplenty.snowblossom_sapling": "Snowblossom Sapling",
+  "block.biomesoplenty.spanish_moss": "Spanish Moss",
+  "block.biomesoplenty.spanish_moss_plant": "Spanish Moss Plant",
+  "block.biomesoplenty.spider_egg": "Spider Egg",
+  "block.biomesoplenty.sprout": "Sprout",
+  "block.biomesoplenty.stringy_cobweb": "Stringy Cobweb",
+  "block.biomesoplenty.stripped_dead_log": "Stripped Dead Log",
+  "block.biomesoplenty.stripped_dead_wood": "Stripped Dead Wood",
+  "block.biomesoplenty.stripped_empyreal_log": "Stripped Empyreal Log",
+  "block.biomesoplenty.stripped_empyreal_wood": "Stripped Empyreal Wood",
+  "block.biomesoplenty.stripped_fir_log": "Stripped Fir Log",
+  "block.biomesoplenty.stripped_fir_wood": "Stripped Fir Wood",
+  "block.biomesoplenty.stripped_hellbark_log": "Stripped Hellbark Log",
+  "block.biomesoplenty.stripped_hellbark_wood": "Stripped Hellbark Wood",
+  "block.biomesoplenty.stripped_jacaranda_log": "Stripped Jacaranda Log",
+  "block.biomesoplenty.stripped_jacaranda_wood": "Stripped Jacaranda Wood",
+  "block.biomesoplenty.stripped_magic_log": "Stripped Magic Log",
+  "block.biomesoplenty.stripped_magic_wood": "Stripped Magic Wood",
+  "block.biomesoplenty.stripped_mahogany_log": "Stripped Mahogany Log",
+  "block.biomesoplenty.stripped_mahogany_wood": "Stripped Mahogany Wood",
+  "block.biomesoplenty.stripped_maple_log": "Stripped Maple Log",
+  "block.biomesoplenty.stripped_maple_wood": "Stripped Maple Wood",
+  "block.biomesoplenty.stripped_palm_log": "Stripped Palm Log",
+  "block.biomesoplenty.stripped_palm_wood": "Stripped Palm Wood",
+  "block.biomesoplenty.stripped_pine_log": "Stripped Pine Log",
+  "block.biomesoplenty.stripped_pine_wood": "Stripped Pine Wood",
+  "block.biomesoplenty.stripped_redwood_log": "Stripped Redwood Log",
+  "block.biomesoplenty.stripped_redwood_wood": "Stripped Redwood Wood",
+  "block.biomesoplenty.stripped_umbran_log": "Stripped Umbran Log",
+  "block.biomesoplenty.stripped_umbran_wood": "Stripped Umbran Wood",
+  "block.biomesoplenty.stripped_willow_log": "Stripped Willow Log",
+  "block.biomesoplenty.stripped_willow_wood": "Stripped Willow Wood",
+  "block.biomesoplenty.tall_lavender": "Tall Lavender",
+  "block.biomesoplenty.tall_white_lavender": "Tall White Lavender",
+  "block.biomesoplenty.thermal_calcite": "Thermal Calcite",
+  "block.biomesoplenty.thermal_calcite_vent": "Thermal Calcite Vent",
+  "block.biomesoplenty.tiny_cactus": "Tiny Cactus",
+  "block.biomesoplenty.toadstool": "Toadstool",
+  "block.biomesoplenty.toadstool_block": "Toadstool Block",
+  "block.biomesoplenty.tundra_shrub": "Tundra Shrub",
+  "block.biomesoplenty.umbran_button": "Umbran Button",
+  "block.biomesoplenty.umbran_door": "Umbran Door",
+  "block.biomesoplenty.umbran_fence": "Umbran Fence",
+  "block.biomesoplenty.umbran_fence_gate": "Umbran Fence Gate",
+  "block.biomesoplenty.umbran_hanging_sign": "Umbran Hanging Sign",
+  "block.biomesoplenty.umbran_leaves": "Umbran Leaves",
+  "block.biomesoplenty.umbran_log": "Umbran Log",
+  "block.biomesoplenty.umbran_planks": "Umbran Planks",
+  "block.biomesoplenty.umbran_pressure_plate": "Umbran Pressure Plate",
+  "block.biomesoplenty.umbran_sapling": "Umbran Sapling",
+  "block.biomesoplenty.umbran_sign": "Umbran Sign",
+  "block.biomesoplenty.umbran_slab": "Umbran Slab",
+  "block.biomesoplenty.umbran_stairs": "Umbran Stairs",
+  "block.biomesoplenty.umbran_trapdoor": "Umbran Trapdoor",
+  "block.biomesoplenty.umbran_wall_sign": "Umbran Wall Sign",
+  "block.biomesoplenty.umbran_wall_hanging_sign": "Umbran Wall Hanging Sign",
+  "block.biomesoplenty.umbran_wood": "Umbran Wood",
+  "block.biomesoplenty.unmapped_end_stone": "§mEnd Stone",
+  "block.biomesoplenty.violet": "Violet",
+  "block.biomesoplenty.watergrass": "Watergrass",
+  "block.biomesoplenty.waterlily": "Waterlily",
+  "block.biomesoplenty.webbing": "Webbing",
+  "block.biomesoplenty.white_lavender": "White Lavender",
+  "block.biomesoplenty.white_petals": "White Petals",
+  "block.biomesoplenty.white_sand": "White Sand",
+  "block.biomesoplenty.white_sandstone": "White Sandstone",
+  "block.biomesoplenty.white_sandstone_slab": "White Sandstone Slab",
+  "block.biomesoplenty.white_sandstone_stairs": "White Sandstone Stairs",
+  "block.biomesoplenty.white_sandstone_wall": "White Sandstone Wall",
+  "block.biomesoplenty.wildflower": "Wildflower",
+  "block.biomesoplenty.willow_button": "Willow Button",
+  "block.biomesoplenty.willow_door": "Willow Door",
+  "block.biomesoplenty.willow_fence": "Willow Fence",
+  "block.biomesoplenty.willow_fence_gate": "Willow Fence Gate",
+  "block.biomesoplenty.willow_hanging_sign": "Willow Hanging Sign",
+  "block.biomesoplenty.willow_leaves": "Willow Leaves",
+  "block.biomesoplenty.willow_log": "Willow Log",
+  "block.biomesoplenty.willow_planks": "Willow Planks",
+  "block.biomesoplenty.willow_pressure_plate": "Willow Pressure Plate",
+  "block.biomesoplenty.willow_sapling": "Willow Sapling",
+  "block.biomesoplenty.willow_sign": "Willow Sign",
+  "block.biomesoplenty.willow_slab": "Willow Slab",
+  "block.biomesoplenty.willow_stairs": "Willow Stairs",
+  "block.biomesoplenty.willow_trapdoor": "Willow Trapdoor",
+  "block.biomesoplenty.willow_vine": "Willow Vine",
+  "block.biomesoplenty.willow_wall_sign": "Willow Wall Sign",
+  "block.biomesoplenty.willow_wall_hanging_sign": "Willow Wall Hanging Sign",
+  "block.biomesoplenty.willow_wood": "Willow Wood",
+  "block.biomesoplenty.wilted_lily": "Wilted Lily",
+  "block.biomesoplenty.wispjelly": "Wispjelly",
+  "block.biomesoplenty.yellow_maple_leaf_pile": "Yellow Maple Leaf Pile",
+  "block.biomesoplenty.yellow_maple_leaves": "Yellow Maple Leaves",
+  "block.biomesoplenty.yellow_maple_sapling": "Yellow Maple Sapling",
+  "entity.biomesoplenty.boat": "Boat",
+  "entity.biomesoplenty.chest_boat": "Boat with Chest"
+ }
+}

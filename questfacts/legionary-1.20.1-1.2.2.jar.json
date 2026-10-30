@@ -1,0 +1,187 @@
+{
+ "jar": "legionary-1.20.1-1.2.2.jar",
+ "namespaces": [
+  "blueprint",
+  "caverns_and_chasms",
+  "fieldguide",
+  "forge",
+  "legionary",
+  "minecraft"
+ ],
+ "advancements": [
+  {
+   "id": "legionary:broken",
+   "parent": "minecraft:nether/find_bastion",
+   "title": "Broken",
+   "description": "Defeat the Unbreakable",
+   "icon": "legionary:gold_shards",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "legionary:recipes/misc/forgotten_bone_crate_from_forgotten_bone",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=legionary:forgotten_bone",
+    "recipe=legionary:forgotten_bone_crate_from_forgotten_bone"
+   ],
+   "rewards": {
+    "recipes": [
+     "legionary:forgotten_bone_crate_from_forgotten_bone"
+    ]
+   }
+  },
+  {
+   "id": "legionary:recipes/misc/forgotten_bone_from_forgotten_bone_crate",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=legionary:forgotten_bone_crate",
+    "recipe=legionary:forgotten_bone_from_forgotten_bone_crate"
+   ],
+   "rewards": {
+    "recipes": [
+     "legionary:forgotten_bone_from_forgotten_bone_crate"
+    ]
+   }
+  },
+  {
+   "id": "legionary:recipes/misc/golden_chain",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:gold_ingot",
+    "recipe=legionary:golden_chain"
+   ],
+   "rewards": {
+    "recipes": [
+     "legionary:golden_chain"
+    ]
+   }
+  },
+  {
+   "id": "legionary:recipes/misc/golden_cupric_lantern",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=caverns_and_chasms:cupric_lantern",
+    "recipe=legionary:golden_cupric_lantern"
+   ],
+   "rewards": {
+    "recipes": [
+     "legionary:golden_cupric_lantern"
+    ]
+   }
+  },
+  {
+   "id": "legionary:recipes/misc/golden_lantern",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:lantern",
+    "recipe=legionary:golden_lantern"
+   ],
+   "rewards": {
+    "recipes": [
+     "legionary:golden_lantern"
+    ]
+   }
+  },
+  {
+   "id": "legionary:recipes/misc/golden_soul_lantern",
+   "parent": "minecraft:recipes/root",
+   "title": "",
+   "description": "",
+   "icon": "",
+   "frame": "",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed",
+    "minecraft:recipe_unlocked"
+   ],
+   "ids": [
+    "items=minecraft:soul_lantern",
+    "recipe=legionary:golden_soul_lantern"
+   ],
+   "rewards": {
+    "recipes": [
+     "legionary:golden_soul_lantern"
+    ]
+   }
+  }
+ ],
+ "books": [],
+ "names": {
+  "block.legionary.forgotten_bone_crate": "Forgotten Bone Crate",
+  "block.legionary.golden_chain": "Golden Chain",
+  "block.legionary.golden_lantern": "Golden Lantern",
+  "block.legionary.golden_soul_lantern": "Golden Soul Lantern",
+  "block.legionary.golden_cupric_lantern": "Golden Cupric Lantern",
+  "block.legionary.unbreakable_head": "The Unbreakable Head",
+  "item.legionary.cudgel": "Cudgel",
+  "item.legionary.forgotten_bone": "Forgotten Bone",
+  "item.legionary.thermal_stone": "Thermal Stone",
+  "item.legionary.gold_shards": "Gold Shards",
+  "item.minecraft.tipped_arrow.effect.piercing": "Arrow of Piercing",
+  "item.minecraft.potion.effect.piercing": "Potion of Piercing",
+  "item.minecraft.splash_potion.effect.piercing": "Splash Potion of Piercing",
+  "item.minecraft.lingering_potion.effect.piercing": "Lingering Potion of Piercing",
+  "item.legionary.unbreakable_spawn_egg": "The Unbreakable Spawn Egg",
+  "entity.legionary.unbreakable": "The Unbreakable",
+  "entity.legionary.flaming_skull": "Flaming Skull",
+  "entity.legionary.giant_magma_block": "Giant Magma Block",
+  "entity.legionary.wheel_of_death": "Wheel of Death",
+  "entity.legionary.debris": "Debris",
+  "effect.legionary.pierced": "Pierced",
+  "enchantment.legionary.reckless": "Reckless",
+  "enchantment.legionary.reckless.desc": "Charged attacks additionally damage nearby mobs at the expense of your health",
+  "enchantment.legionary.ramming": "Ramming",
+  "enchantment.legionary.ramming.desc": "Charged attacks transfer your kinetic force to the target"
+ }
+}

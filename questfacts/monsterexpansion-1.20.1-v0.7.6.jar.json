@@ -1,0 +1,311 @@
+{
+ "jar": "monsterexpansion-1.20.1-v0.7.6.jar",
+ "namespaces": [
+  "minecraft",
+  "monsterexpansion"
+ ],
+ "advancements": [
+  {
+   "id": "monsterexpansion:craft_duskrend",
+   "parent": "minecraft:recipes/root",
+   "title": "Claw to Blade",
+   "description": "Forge Duskrend at the foundry.",
+   "icon": "monsterexpansion:duskrend",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "monsterexpansion:foundry_crafted"
+   ],
+   "ids": [
+    "recipe_id=monsterexpansion:duskrend"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:craft_horn_of_the_shattercry",
+   "parent": "minecraft:recipes/root",
+   "title": "The Shattercry",
+   "description": "Forge Horn of The Shattercry at the foundry.",
+   "icon": "monsterexpansion:horn_of_the_shattercry",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "monsterexpansion:foundry_crafted"
+   ],
+   "ids": [
+    "recipe_id=monsterexpansion:horn_of_the_shattercry"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:craft_monster_armor",
+   "parent": "minecraft:recipes/root",
+   "title": "All that to become my pants",
+   "description": "Craft a piece of armor from a Large Monster's materials.",
+   "icon": "monsterexpansion:skrythe_leggings",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "monsterexpansion:foundry_crafted"
+   ],
+   "ids": [
+    "recipe_id=monsterexpansion:rhyza_boots",
+    "recipe_id=monsterexpansion:rhyza_chestplate",
+    "recipe_id=monsterexpansion:rhyza_helmet",
+    "recipe_id=monsterexpansion:rhyza_leggings",
+    "recipe_id=monsterexpansion:skrythe_boots",
+    "recipe_id=monsterexpansion:skrythe_chestplate",
+    "recipe_id=monsterexpansion:skrythe_helmet",
+    "recipe_id=monsterexpansion:skrythe_leggings"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:crafted_spire_shell_bulwark",
+   "parent": "minecraft:recipes/root",
+   "title": "The Moving Immovable",
+   "description": "Forge Spire Shell Bulwark at the foundry.",
+   "icon": "monsterexpansion:spire_shell_bulwark",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "monsterexpansion:foundry_crafted"
+   ],
+   "ids": [
+    "recipe_id=monsterexpansion:spire_shell_bulwark"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:hunt_large_monster",
+   "parent": "minecraft:adventure/root",
+   "title": "Monster... Hunter",
+   "description": "Hunt your first Large Monster.",
+   "icon": "monsterexpansion:skrythe_fang",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=monsterexpansion:ignathos",
+    "type=monsterexpansion:leivekilth",
+    "type=monsterexpansion:rakoth",
+    "type=monsterexpansion:rhyza",
+    "type=monsterexpansion:skrythe"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:hunt_leivekilth",
+   "parent": "minecraft:adventure/root",
+   "title": "That's one big ice cube.",
+   "description": "Hunt a Leivekilth.",
+   "icon": "monsterexpansion:leivekilth_tusk",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=monsterexpansion:leivekilth"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:hunt_rakoth",
+   "parent": "minecraft:adventure/root",
+   "title": "Wow, an angry rock?",
+   "description": "Hunt a Rakoth.",
+   "icon": "monsterexpansion:rhyza_claw",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=monsterexpansion:rakoth"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:hunt_rhyza",
+   "parent": "minecraft:adventure/root",
+   "title": "Clawver girl!",
+   "description": "Hunt a Rhyza.",
+   "icon": "monsterexpansion:rhyza_claw",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=monsterexpansion:rhyza"
+   ],
+   "rewards": {}
+  },
+  {
+   "id": "monsterexpansion:hunt_skrythe",
+   "parent": "minecraft:adventure/root",
+   "title": "Forgot to bring earplugs.",
+   "description": "Hunt a Skrythe.",
+   "icon": "monsterexpansion:skrythe_frill",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:player_killed_entity"
+   ],
+   "ids": [
+    "type=monsterexpansion:skrythe"
+   ],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "entity.monsterexpansion.arborix": "Arborix",
+  "entity.monsterexpansion.skrythe": "Skrythe",
+  "entity.monsterexpansion.skrythe_tail": "Skrythe Tail",
+  "entity.monsterexpansion.skrythe_part": "Skrythe Part",
+  "entity.monsterexpansion.ignathos": "Ignathos",
+  "entity.monsterexpansion.ignathos_tail": "Ignathos Tail",
+  "entity.monsterexpansion.ignathos_part": "Ignathos Part",
+  "entity.monsterexpansion.rhyza": "Rhyza",
+  "entity.monsterexpansion.rhyza_tail": "Rhyza Tail",
+  "entity.monsterexpansion.rhyza_part": "Rhyza Part",
+  "entity.monsterexpansion.leivekilth": "Leivekilth",
+  "entity.monsterexpansion.leivekilth_tail": "Leivekilth Tail",
+  "entity.monsterexpansion.leivekilth_part": "Leivekilth Part",
+  "entity.monsterexpansion.rakoth": "Rakoth",
+  "entity.monsterexpansion.rakoth_tail": "Rakoth Tail",
+  "entity.monsterexpansion.rakoth_part": "Rakoth Part",
+  "entity.monsterexpansion.kobeko": "Kobeko",
+  "block.monsterexpansion.foundry_placeholder": "The Foundry",
+  "block.monsterexpansion.foundry": "The Foundry",
+  "effect.monsterexpansion.cloaked": "Cloaked",
+  "effect.monsterexpansion.cloaked_cooldown": "Cloaked Cooldown",
+  "effect.monsterexpansion.blinded": "Blinded",
+  "effect.monsterexpansion.discombobulated": "Discombobulated",
+  "effect.monsterexpansion.stunned": "Stunned",
+  "effect.monsterexpansion.bleeding": "Bleeding",
+  "effect.monsterexpansion.lethargy": "Lethargy",
+  "effect.monsterexpansion.frostvein": "Frostvein",
+  "effect.monsterexpansion.flarevein": "Flarevein",
+  "item.monsterexpansion.skrythe_spawn_egg": "Skrythe Spawn Egg",
+  "item.monsterexpansion.ignathos_spawn_egg": "Ignathos Spawn Egg",
+  "item.monsterexpansion.rhyza_spawn_egg": "Rhyza Spawn Egg",
+  "item.monsterexpansion.leivekilth_spawn_egg": "Leivekilth Spawn Egg",
+  "item.monsterexpansion.rakoth_spawn_egg": "Rakoth Spawn Egg",
+  "item.monsterexpansion.kobeko_spawn_egg": "Kobeko Spawn Egg",
+  "item.monsterexpansion.arborix_spawn_egg": "Arborix Spawn Egg",
+  "item.monsterexpansion.skrythe_fang": "Skrythe Fang",
+  "item.monsterexpansion.skrythe_armorplate": "Skrythe Armorplate",
+  "item.monsterexpansion.skrythe_wing_membrane": "Skrythe Wing Membrane",
+  "item.monsterexpansion.skrythe_frill": "Skrythe Frill",
+  "item.monsterexpansion.skrythe_tail": "Skrythe Tail",
+  "item.monsterexpansion.vocal_resonance_fold": "Vocal Resonance Fold",
+  "item.monsterexpansion.ignathos_talon": "Ignathos Talon",
+  "item.monsterexpansion.ignathos_hide": "Ignathos Hide",
+  "item.monsterexpansion.ignathos_feather": "Ignathos Feather",
+  "item.monsterexpansion.ignathos_beak": "Ignathos Beak",
+  "item.monsterexpansion.catalytic_ignition_crop": "Catalytic Ignition Crop",
+  "item.monsterexpansion.ignathos_tail": "Ignathos Tail",
+  "item.monsterexpansion.rhyza_claw": "Rhyza Claw",
+  "item.monsterexpansion.rhyza_fur": "Rhyza Fur",
+  "item.monsterexpansion.rhyza_carapace": "Rhyza Carapace",
+  "item.monsterexpansion.rhyza_scale": "Rhyza Scale",
+  "item.monsterexpansion.rhyza_tail": "Rhyza Tail",
+  "item.monsterexpansion.rhyza_gleam_core": "Rhyza Gleam Core",
+  "item.monsterexpansion.serrated_sharpclaw": "Serrated Sharpclaw",
+  "item.monsterexpansion.leivekilth_armorplate": "Leivekilth Armorplate",
+  "item.monsterexpansion.leivekilth_rimepelt": "Leivekilth Rimepelt",
+  "item.monsterexpansion.leivekilth_tusk": "Leivekilth Tusk",
+  "item.monsterexpansion.leivekilth_tail": "Leivekilth Tail",
+  "item.monsterexpansion.hoarfrost_shard": "Hoarfrost Shard",
+  "item.monsterexpansion.deepfreeze_gland": "Deepfreeze Gland",
+  "item.monsterexpansion.rakoth_underplate": "Rakoth Underplate",
+  "item.monsterexpansion.rakoth_carapace": "Rakoth Carapace",
+  "item.monsterexpansion.rakoth_horn": "Rakoth Horn",
+  "item.monsterexpansion.rakoth_tail": "Rakoth Tail",
+  "item.monsterexpansion.sedimentary_scarp_shell": "Sedimentary Scarp Shell",
+  "item.monsterexpansion.bedrock_core": "Bedrock Core",
+  "item.monsterexpansion.monster_hardbone": "Monster Hardbone",
+  "item.monsterexpansion.flash_arrow": "Flash Arrow",
+  "item.monsterexpansion.guidebook": "Hunter's Notes",
+  "item.monsterexpansion.wooden_mace": "Wooden Mace",
+  "item.monsterexpansion.stone_mace": "Stone Mace",
+  "item.monsterexpansion.iron_mace": "Iron Mace",
+  "item.monsterexpansion.golden_mace": "Golden Mace",
+  "item.monsterexpansion.diamond_mace": "Diamond Mace",
+  "item.monsterexpansion.netherite_mace": "Netherite Mace",
+  "item.monsterexpansion.wooden_spear": "Wooden Spear",
+  "item.monsterexpansion.stone_spear": "Stone Spear",
+  "item.monsterexpansion.iron_spear": "Iron Spear",
+  "item.monsterexpansion.golden_spear": "Golden Spear",
+  "item.monsterexpansion.diamond_spear": "Diamond Spear",
+  "item.monsterexpansion.netherite_spear": "Netherite Spear",
+  "item.monsterexpansion.horn_of_the_shattercry": "Horn Of The Shattercry",
+  "item.monsterexpansion.duskrend": "Duskrend",
+  "item.monsterexpansion.rimescourge": "Rimescourge",
+  "item.monsterexpansion.charcraw": "Charcraw",
+  "item.monsterexpansion.spire_shell_bulwark": "Spire Shell Bulwark",
+  "item.monsterexpansion.taunt_shield": "Taunt Shield",
+  "item.monsterexpansion.whistlewind_horn": "Whistlewind Horn",
+  "item.monsterexpansion.vigor_belt": "Vigor Belt",
+  "item.monsterexpansion.flash_bundle": "Flash Bundle",
+  "item.monsterexpansion.kobeko_locator": "Kobeko Locator",
+  "item.monsterexpansion.skrythe_helmet": "Skrythe Helmet",
+  "item.monsterexpansion.skrythe_chestplate": "Skrythe Chestplate",
+  "item.monsterexpansion.skrythe_leggings": "Skrythe Leggings",
+  "item.monsterexpansion.skrythe_boots": "Skrythe Boots",
+  "item.monsterexpansion.ignathos_helmet": "Ignathos Helmet",
+  "item.monsterexpansion.ignathos_chestplate": "Ignathos Chestplate",
+  "item.monsterexpansion.ignathos_leggings": "Ignathos Leggings",
+  "item.monsterexpansion.ignathos_boots": "Ignathos Boots",
+  "item.monsterexpansion.rhyza_helmet": "Rhyza Helmet",
+  "item.monsterexpansion.rhyza_chestplate": "Rhyza Chestplate",
+  "item.monsterexpansion.rhyza_leggings": "Rhyza Leggings",
+  "item.monsterexpansion.rhyza_boots": "Rhyza Boots",
+  "item.monsterexpansion.leivekilth_helmet": "Leivekilth Helmet",
+  "item.monsterexpansion.leivekilth_chestplate": "Leivekilth Chestplate",
+  "item.monsterexpansion.leivekilth_leggings": "Leivekilth Leggings",
+  "item.monsterexpansion.leivekilth_boots": "Leivekilth Boots",
+  "item.monsterexpansion.rakoth_helmet": "Rakoth Helmet",
+  "item.monsterexpansion.rakoth_chestplate": "Rakoth Chestplate",
+  "item.monsterexpansion.rakoth_leggings": "Rakoth Leggings",
+  "item.monsterexpansion.rakoth_boots": "Rakoth Boots",
+  "item.monsterexpansion.kobeko_skrythe_helmet": "Skrythe Kobeko Helmet",
+  "item.monsterexpansion.kobeko_skrythe_chestplate": "Skrythe Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_rhyza_helmet": "Rhyza Kobeko Helmet",
+  "item.monsterexpansion.kobeko_rhyza_chestplate": "Rhyza Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_leivekilth_helmet": "Leivekilth Kobeko Helmet",
+  "item.monsterexpansion.kobeko_leivekilth_chestplate": "Leivekilth Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_rakoth_helmet": "Rakoth Kobeko Helmet",
+  "item.monsterexpansion.kobeko_rakoth_chestplate": "Rakoth Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_ignathos_helmet": "Ignathos Kobeko Helmet",
+  "item.monsterexpansion.kobeko_ignathos_chestplate": "Ignathos Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_iron_helmet": "Iron Kobeko Helmet",
+  "item.monsterexpansion.kobeko_iron_chestplate": "Iron Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_gold_helmet": "Gold Kobeko Helmet",
+  "item.monsterexpansion.kobeko_gold_chestplate": "Gold Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_diamond_helmet": "Diamond Kobeko Helmet",
+  "item.monsterexpansion.kobeko_diamond_chestplate": "Diamond Kobeko Chestplate",
+  "item.monsterexpansion.kobeko_netherite_helmet": "Netherite Kobeko Helmet",
+  "item.monsterexpansion.kobeko_netherite_chestplate": "Netherite Kobeko Chestplate",
+  "item.monsterexpansion.arborix_royal_cosmetic_head": "Arborix Royal Cosmetic Head",
+  "item.monsterexpansion.arborix_royal_cosmetic_chest": "Arborix Royal Cosmetic Chest",
+  "item.monsterexpansion.arborix_royal_cosmetic_tail": "Arborix Royal Cosmetic Tail",
+  "item.monsterexpansion.arborix_tophat_cosmetic_head": "Arborix Top-hat Cosmetic Head",
+  "item.monsterexpansion.arborix_skull_cosmetic_head": "Arborix Skull Cosmetic Head",
+  "effect.monsterexpansion.discombobulated.guidebook_description": "Makes you unable to move nor attack for a short duration. This status is very common and can be inflicted by most monsters' roars. However as common as it is, the monsters also do not attack when roaring, making the status not as dangerous. As the effect will likely end before the monster can finish roaring.",
+  "effect.monsterexpansion.stunned.guidebook_description": "Makes you unable to move nor attack for a short duration. This can be inflicted by all monsters if the hunter is often hit by attacks. The effect instantly ends if the hunter is hit again. The damage source does not matter, making allies and self-inflicted damage a viable way to end the effect early. However this effect is still very dangerous as the monster may follow up with a devastating attack before the hunter can recover.",
+  "effect.monsterexpansion.bleeding.guidebook_description": "Makes you take damage over time. This effect can stack, making the damage interval shorter. On its own, the damage isn't anything to be afraid of, but it can be devastating if its allowed to stack up. This status' duration will go down slower depending on how fast you are moving. To get rid of it the fastest, the hunter must crouch while staying still.",
+  "effect.monsterexpansion.flarevein.guidebook_description": "Makes you take damage over time. This effect can stack, making the damage interval shorter. On its own, the damage isn't anything to be afraid of, but it can be devastating if its allowed to stack up. This status' duration will go down slower depending on how slow you are moving. To get rid of it the fastest, the hunter must be sprinting, or even better, roll around until the status is cured. The hunter must be careful as to not stay still, as doing so will increase the duration instead.",
+  "effect.monsterexpansion.frostvein.guidebook_description": "Makes you move slower, attack slower and jump lower. This effect can stack, making the movement speed decrease more severe. This effect can really be devastating if its allowed to stack up as you may not be able to jump over even a singular block. This status currently does not have a remedy making it incredibly dangerous if the hunter is fighting in rough terrain.",
+  "effect.monsterexpansion.remedy.no_remedy": "No Remedy",
+  "effect.monsterexpansion.remedy.dont_move": "Dont move.",
+  "effect.monsterexpansion.remedy.crouch": "Crouch.",
+  "effect.monsterexpansion.remedy.sprint": "Sprint",
+  "effect.monsterexpansion.remedy.roll": "Roll."
+ }
+}

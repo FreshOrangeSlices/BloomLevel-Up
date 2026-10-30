@@ -1,0 +1,1710 @@
+{
+ "jar": "born_in_chaos_[Forge]1.20.1_1.7.5.jar",
+ "namespaces": [
+  "born_in_chaos_v1",
+  "forge",
+  "minecraft"
+ ],
+ "advancements": [
+  {
+   "id": "born_in_chaos_v1:arachnophobes_nightmare",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Arachnophobe's Nightmare",
+   "description": "Kill Spiders Mother",
+   "icon": "born_in_chaos_v1:spider_mandible",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20,
+    "recipes": [
+     "born_in_chaos_v1:spider_bite_craft"
+    ]
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:big_boy",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Big Boy",
+   "description": "Kill the Dire Hound Leader",
+   "icon": "born_in_chaos_v1:fangofthe_hound_leader",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:bonk",
+   "parent": "born_in_chaos_v1:dark_blacksmith",
+   "title": "Bonk!",
+   "description": "Stun someone with the Skullbreaker Hammer",
+   "icon": "born_in_chaos_v1:skullbreaker_hammer",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:bornin_chaos",
+   "parent": "",
+   "title": "Born in Chaos",
+   "description": "Enter a world full of dangers",
+   "icon": "born_in_chaos_v1:chaos_icon",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tick"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "born_in_chaos_v1:bury_them_all",
+   "parent": "born_in_chaos_v1:grave_ravager",
+   "title": "Bury Them All",
+   "description": "Collect all the tombstones of immortalized people",
+   "icon": "born_in_chaos_v1:burythemall_icon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:tombstone_2003wise",
+    "items=born_in_chaos_v1:tombstone_2_dling",
+    "items=born_in_chaos_v1:tombstone_carrion",
+    "items=born_in_chaos_v1:tombstone_d_4rkdevilx",
+    "items=born_in_chaos_v1:tombstone_dark_titan_066",
+    "items=born_in_chaos_v1:tombstone_derivas",
+    "items=born_in_chaos_v1:tombstone_euthymia",
+    "items=born_in_chaos_v1:tombstone_feral",
+    "items=born_in_chaos_v1:tombstone_fubuki_banzai",
+    "items=born_in_chaos_v1:tombstone_memesus",
+    "items=born_in_chaos_v1:tombstone_mike_rory",
+    "items=born_in_chaos_v1:tombstone_nino_4416",
+    "items=born_in_chaos_v1:tombstone_orion",
+    "items=born_in_chaos_v1:tombstone_petasi",
+    "items=born_in_chaos_v1:tombstone_plug",
+    "items=born_in_chaos_v1:tombstone_rotborne",
+    "items=born_in_chaos_v1:tombstone_somfunambulist",
+    "items=born_in_chaos_v1:tombstone_tem_187",
+    "items=born_in_chaos_v1:tombstone_the_gentleman_frog"
+   ],
+   "rewards": {
+    "experience": 100
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:bypassingthe_expiration_date",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Bypassing the Expiration Date",
+   "description": "Eat Smoked Food",
+   "icon": "born_in_chaos_v1:smoked_flesh",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 5
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:chaos_knight",
+   "parent": "born_in_chaos_v1:dark_forging",
+   "title": "Chaos Knight",
+   "description": "Equip a full set of Dark Metal Armor",
+   "icon": "born_in_chaos_v1:dark_metal_armor_helmet",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 35
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:charm_collector",
+   "parent": "born_in_chaos_v1:dark_creator",
+   "title": "Charm Collector",
+   "description": "Collect all types of Charms in your inventory",
+   "icon": "born_in_chaos_v1:all_charm",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:charmof_endurance",
+    "items=born_in_chaos_v1:charmof_fury",
+    "items=born_in_chaos_v1:charmof_power",
+    "items=born_in_chaos_v1:charmof_resistance",
+    "items=born_in_chaos_v1:charmof_stealth"
+   ],
+   "rewards": {
+    "experience": 35
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:compact_necromancy",
+   "parent": "born_in_chaos_v1:junior_summoner",
+   "title": "Compact Necromancy",
+   "description": "Craft the Bonescaller Staff",
+   "icon": "born_in_chaos_v1:bonescaller_staff",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:cultural_attribute",
+   "parent": "born_in_chaos_v1:guidetothenextworld",
+   "title": "Cultural Attribute",
+   "description": "Get the Spirit Guide Sombrero",
+   "icon": "born_in_chaos_v1:spiritual_guide_sombrero_helmet",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:spiritual_guide_sombrero_helmet"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:dark_blacksmith",
+   "parent": "born_in_chaos_v1:dark_forging",
+   "title": "Dark Blacksmith",
+   "description": "Craft any dark metal weapon",
+   "icon": "born_in_chaos_v1:sharpened_dark_metal_sword",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:dark_creator",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Dark Creator",
+   "description": "Kill the Missionary",
+   "icon": "born_in_chaos_v1:missionaryicon",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:dark_forging",
+   "parent": "born_in_chaos_v1:dark_metallurgy",
+   "title": "Dark Forging",
+   "description": "Craft a Dark Metal Ingot",
+   "icon": "born_in_chaos_v1:dark_metal_ingot",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:dark_metallurgy",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Dark Metallurgy",
+   "description": "Get a piece of dark metal",
+   "icon": "born_in_chaos_v1:pieceofdarkmetal",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:pieceofdarkmetal"
+   ],
+   "rewards": {
+    "experience": 4
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:deceived_hopes",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Deceived Hopes",
+   "description": "Mine Infested Diamond Ore",
+   "icon": "born_in_chaos_v1:deceived_hopes_icon",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 4
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:disgusting_lootbox",
+   "parent": "born_in_chaos_v1:horrorofthe_depths",
+   "title": "Disgusting Lootbox",
+   "description": "Rip open Glutton Fish Stomach",
+   "icon": "born_in_chaos_v1:sea_terror_stomach",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 5
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:dismantledto_bones",
+   "parent": "born_in_chaos_v1:junior_summoner",
+   "title": "Senior Summoner",
+   "description": "Kill the Supreme Bonescaller",
+   "icon": "born_in_chaos_v1:orbofthe_summoner",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 25
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:double_trouble",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Double Trouble",
+   "description": "Make the Phantom Creeper split up by attacking it",
+   "icon": "born_in_chaos_v1:double_troubleicon",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 2
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:excessive_fly_swatter",
+   "parent": "born_in_chaos_v1:my_size",
+   "title": "Excessive Fly Swatter",
+   "description": "Kill a Corpse Fly with a Dark Warblade while under the effects of a stage 5 rampage.",
+   "icon": "born_in_chaos_v1:excessflyswattericon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:exorcism",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Exorcism",
+   "description": "Kill a mob possessed by the spirit of chaos",
+   "icon": "born_in_chaos_v1:exorcism_icon",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:explosive_temper",
+   "parent": "born_in_chaos_v1:good_demoman",
+   "title": "Explosive Temper",
+   "description": "Put on the Damned Demoman Hat",
+   "icon": "born_in_chaos_v1:damned_demomans_hat_helmet",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 35
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:fighting_nightmares",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Fighting Nightmares",
+   "description": "Kill the Nightmare Stalker",
+   "icon": "born_in_chaos_v1:nightmare_stalker_skull",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:food_fight",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Food Fight",
+   "description": "Hit someone with monster flesh",
+   "icon": "born_in_chaos_v1:monster_flesh",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 4
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:freshen_your_breath",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Freshen Your Breath",
+   "description": "Remove Rotten Stink by eating Mint Candy",
+   "icon": "born_in_chaos_v1:mint_candy",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 12
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:good_demoman",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Good Demoman",
+   "description": "Kill the Skeleton Demoman",
+   "icon": "born_in_chaos_v1:good_demoman_icon",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 5
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:grave_ravager",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Grave Ravager",
+   "description": "Break down the gravestone of the immortalized person",
+   "icon": "born_in_chaos_v1:gravestone_icon",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:guidetothenextworld",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "The day of the Dead",
+   "description": "Kill the Spirit Guide",
+   "icon": "born_in_chaos_v1:spirit_guideicon",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 9
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:hat_for_dark_deeds",
+   "parent": "born_in_chaos_v1:dark_creator",
+   "title": "Hat for dark affairs",
+   "description": "Get the Missionary Hat",
+   "icon": "born_in_chaos_v1:missionary_hat_helmet",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:missionary_hat_helmet"
+   ],
+   "rewards": {
+    "experience": 17
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:hatman",
+   "parent": "born_in_chaos_v1:infernal_hatman",
+   "title": "Hatman",
+   "description": "Collect all hats from Born in Chaos",
+   "icon": "born_in_chaos_v1:hats",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:damned_demomans_hat_helmet",
+    "items=born_in_chaos_v1:lord_pumpkinheads_hat_helmet",
+    "items=born_in_chaos_v1:missionary_hat_helmet",
+    "items=born_in_chaos_v1:spiritual_guide_sombrero_helmet"
+   ],
+   "rewards": {
+    "experience": 70
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:heart_thief",
+   "parent": "born_in_chaos_v1:horror_underthe_mantle",
+   "title": "Heart Thief",
+   "description": "Get Elixir of Vampirism",
+   "icon": "born_in_chaos_v1:elixir_of_vampirism",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:elixir_of_vampirism"
+   ],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:horror_underthe_mantle",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Horror Under the Mantle",
+   "description": "Kill Lifestealer",
+   "icon": "born_in_chaos_v1:lifestealer_bone",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:horrorofthe_depths",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Horror of the Depths",
+   "description": "Kill Glutton Fish",
+   "icon": "born_in_chaos_v1:sea_terror_eye",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:infernal_hatman",
+   "parent": "born_in_chaos_v1:pumpkin_lord",
+   "title": "Infernal Musketeer",
+   "description": "Get Lord Pumpkinhead Hat",
+   "icon": "born_in_chaos_v1:lord_pumpkinheads_hat_helmet",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:lord_pumpkinheads_hat_helmet"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:infernal_medicine",
+   "parent": "born_in_chaos_v1:transmutalogy",
+   "title": "Infernal Medicine",
+   "description": "Transform Seared Spirit into Infernal Spirit using Transmuting Elixir",
+   "icon": "born_in_chaos_v1:infernal_medicine_icon",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 30
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:insect_repellent",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Insect Repellent",
+   "description": "Get Elixir of Insect Protection",
+   "icon": "born_in_chaos_v1:elixirof_insect_protection",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:elixirof_insect_protection"
+   ],
+   "rewards": {
+    "experience": 8
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:junior_summoner",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Junior Summoner",
+   "description": "Kill the Bonecaller",
+   "icon": "born_in_chaos_v1:shattered_skull",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 5
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:lifeturnedouttobeacomedy",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Life turned out to be a comedy",
+   "description": "Kill the zombie clown",
+   "icon": "born_in_chaos_v1:lifeturnedouttobeacomedyicon",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 5
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:mr_decoction",
+   "parent": "born_in_chaos_v1:lifeturnedouttobeacomedy",
+   "title": "Mr. Decoction",
+   "description": "Create an Intoxication or Stimulation Bomb",
+   "icon": "born_in_chaos_v1:intoxicatind_bomb",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 8
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:my_size",
+   "parent": "born_in_chaos_v1:dark_blacksmith",
+   "title": "My Size!",
+   "description": "Craft a Dark Warblade",
+   "icon": "born_in_chaos_v1:darkwarblade",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 25
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:naughty_child",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Naughty Child",
+   "description": "Do enough mischief to make Krampus come for you",
+   "icon": "born_in_chaos_v1:spiritual_gingerbread",
+   "frame": "goal",
+   "hidden": true,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 5
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:one_explosion_is_good_two_is_better",
+   "parent": "born_in_chaos_v1:double_trouble",
+   "title": "Double Bang",
+   "description": "Craft a Phantom Bomb",
+   "icon": "born_in_chaos_v1:phantom_bomb",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "born_in_chaos_v1:protectedby_darkness",
+   "parent": "born_in_chaos_v1:horror_underthe_mantle",
+   "title": "Protected by Darkness",
+   "description": "Craft Dark Atrium",
+   "icon": "born_in_chaos_v1:dark_atrium",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:pumpkin_lord",
+   "parent": "born_in_chaos_v1:transmutalogy",
+   "title": "Last Night",
+   "description": "Kill Lord Pumpkinhead",
+   "icon": "born_in_chaos_v1:lord_pumpkinhead_icon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 90
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:pumpkin_sir",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Pumpkin Sir",
+   "description": "Kill Sir Pumpkinhead",
+   "icon": "born_in_chaos_v1:pumpkinhead_icon",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 30
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:rampage",
+   "parent": "born_in_chaos_v1:dark_blacksmith",
+   "title": "RAMPAGE!",
+   "description": "Get a five-kill streak with the Great Reaper Ax in a short period of time",
+   "icon": "born_in_chaos_v1:great_reaper_axe",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:scarecrow",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Scarecrow",
+   "description": "Create your own Pumpkin Spirit",
+   "icon": "born_in_chaos_v1:pumpkin_spirit_icon",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 16
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:shakeand_mix",
+   "parent": "born_in_chaos_v1:lifeturnedouttobeacomedy",
+   "title": "Shake and Mix",
+   "description": "Be under the effects of Intoxication and Stimulation at the same time",
+   "icon": "born_in_chaos_v1:shakeand_mixicon",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 8
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:shell_warrior",
+   "parent": "born_in_chaos_v1:waste_recycler",
+   "title": "Shell Warrior",
+   "description": "Equip a full set of Spiny Shell Armor",
+   "icon": "born_in_chaos_v1:spiny_shell_armor_chestplate",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:soul_eater",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Soul Eater",
+   "description": "Collect 64 Ethereal Spirits into your inventory",
+   "icon": "born_in_chaos_v1:ethereal_spirit",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:ethereal_spirit"
+   ],
+   "rewards": {
+    "experience": 25
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:spider_warlord",
+   "parent": "born_in_chaos_v1:arachnophobes_nightmare",
+   "title": "Spider Warlord",
+   "description": "Craft Spider Bite",
+   "icon": "born_in_chaos_v1:spider_bite_sword",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 16
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:spruce_cowboyinthe_moonlight",
+   "parent": "born_in_chaos_v1:explosive_temper",
+   "title": "Spruce Cowboy In The Moonlight",
+   "description": "Standing on a spruce log and while mounted, wearing Damned Demoman's Hat under the moon, kill any monster.",
+   "icon": "born_in_chaos_v1:spruce_cowboy_in_the_moonlighticon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 300
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:squireofthe_dark_lord",
+   "parent": "born_in_chaos_v1:my_size",
+   "title": "Squire of the Dark Lord",
+   "description": "Have all types of dark metal weapons in your inventory",
+   "icon": "born_in_chaos_v1:squireofthedarklordicon",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:dark_ritual_dagger",
+    "items=born_in_chaos_v1:darkwarblade",
+    "items=born_in_chaos_v1:frostbitten_blade",
+    "items=born_in_chaos_v1:great_reaper_axe",
+    "items=born_in_chaos_v1:intoxicating_dagger",
+    "items=born_in_chaos_v1:nightmare_scythe",
+    "items=born_in_chaos_v1:sharpened_dark_metal_sword",
+    "items=born_in_chaos_v1:skullbreaker_hammer",
+    "items=born_in_chaos_v1:soul_cutlass",
+    "items=born_in_chaos_v1:spider_bite_sword",
+    "items=born_in_chaos_v1:spiritual_sword"
+   ],
+   "rewards": {
+    "experience": 45
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:sweet_battle",
+   "parent": "born_in_chaos_v1:pumpkin_sir",
+   "title": "Sweet Battle",
+   "description": "Craft a Sweet Axe or Sword",
+   "icon": "born_in_chaos_v1:sweet_sword",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 15
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:symphonyof_chaos",
+   "parent": "born_in_chaos_v1:pumpkin_sir",
+   "title": "Symphony of Chaos",
+   "description": "Get all the Born in Chaos music discs",
+   "icon": "born_in_chaos_v1:serpumpkinhead_m",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:anluka_doors",
+    "items=born_in_chaos_v1:serpumpkinhead_m"
+   ],
+   "rewards": {
+    "experience": 25
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:the_wind_darkening",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "The Wind Darkening",
+   "description": "Kill the dark vortex",
+   "icon": "born_in_chaos_v1:dark_charge",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 10
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:transmutalogy",
+   "parent": "born_in_chaos_v1:pumpkin_sir",
+   "title": "Transmutalogy",
+   "description": "Create Transmuting Elixir",
+   "icon": "born_in_chaos_v1:transmuting_elixir",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:trickor_treat",
+   "parent": "born_in_chaos_v1:yoursatietywillbe_eternal",
+   "title": "Trick or Treat",
+   "description": "Collect all kinds of sweets from Born in Chaos",
+   "icon": "born_in_chaos_v1:holiday_candy",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=born_in_chaos_v1:caramel_pepper",
+    "items=born_in_chaos_v1:chocolate_heart",
+    "items=born_in_chaos_v1:coffee_candy",
+    "items=born_in_chaos_v1:eternal_candy",
+    "items=born_in_chaos_v1:gummy_vampire_teeth",
+    "items=born_in_chaos_v1:holiday_candy",
+    "items=born_in_chaos_v1:magical_holiday_candy",
+    "items=born_in_chaos_v1:mint_candy",
+    "items=born_in_chaos_v1:mint_ice_cream"
+   ],
+   "rewards": {
+    "experience": 30
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:unitywith_darknessachievement",
+   "parent": "born_in_chaos_v1:fighting_nightmares",
+   "title": "Unity with Darkness",
+   "description": "Equip a full set of Nightmare Armor",
+   "icon": "born_in_chaos_v1:nightmare_mantleofthe_night_helmet",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 27
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:unlucky_hunter",
+   "parent": "born_in_chaos_v1:big_boy",
+   "title": "Unlucky Hunter",
+   "description": "Step into a hound trap",
+   "icon": "born_in_chaos_v1:hound_trap",
+   "frame": "task",
+   "hidden": true,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 1
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:waste_recycler",
+   "parent": "born_in_chaos_v1:bornin_chaos",
+   "title": "Waste Recycler",
+   "description": "Feed the Thornshell Crab rotten flesh or rotten fish",
+   "icon": "born_in_chaos_v1:spiny_shell",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 14
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:wrong_santa",
+   "parent": "born_in_chaos_v1:naughty_child",
+   "title": "Wrong Santa",
+   "description": "Kill the Krampus",
+   "icon": "born_in_chaos_v1:krampuss_bag",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 25
+   }
+  },
+  {
+   "id": "born_in_chaos_v1:yoursatietywillbe_eternal",
+   "parent": "born_in_chaos_v1:transmutalogy",
+   "title": "Your satiety will be Eternal!",
+   "description": "Craft Eternal Candy",
+   "icon": "born_in_chaos_v1:eternal_candy",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:impossible"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 25
+   }
+  }
+ ],
+ "books": [],
+ "names": {
+  "effect.born_in_chaos_v1.bad_feeling": "Bad Feeling",
+  "effect.born_in_chaos_v1.insect_protection": "Insect Protection",
+  "effect.born_in_chaos_v1.barbedattack": "Barbed attack",
+  "block.born_in_chaos_v1.infected_deepslate_diamond_ore": "§3Infected Diamond Ore",
+  "entity.born_in_chaos_v1.mr_pumpkin": "Mr. Pumpkin",
+  "item.born_in_chaos_v1.restless_spirit_spawn_egg": "Restless Spirit Spawn Egg",
+  "effect.born_in_chaos_v1.detonation": "Detonation",
+  "item.born_in_chaos_v1.monster_flesh": "Monster Flesh",
+  "block.born_in_chaos_v1.tombstone_memesus.description_0": "§8Someone consumed by the VOID and the passion for it",
+  "item.minecraft.splash_potion.effect.intoxication_potion": "Splash Potion of Intoxication",
+  "item.born_in_chaos_v1.dark_metal_armor_helmet": "§6Dark Metal Helmet",
+  "item.born_in_chaos_v1.great_reaper_axe.description_0": "§8-When you kill an enemy, you enter a rampage, each subsequent kill in a row increases the effect of the rampage up to five times",
+  "effect.born_in_chaos_v1.light_rampage": "Rampage",
+  "item.born_in_chaos_v1.skullbreaker_hammer.description_0": "§8-Jumping attacks stun the enemy",
+  "item.born_in_chaos_v1.charmof_stealth": "§2Charm of Stealth",
+  "item.born_in_chaos_v1.nightmare_mantleofthe_night_helmet.description_1": "§8-Increases the effectiveness of dark magic weapons and items",
+  "item.born_in_chaos_v1.nightmare_mantleofthe_night_helmet.description_0": "§7-You move faster in the dark",
+  "effect.born_in_chaos_v1.stimulation": "Stimulation",
+  "effect.born_in_chaos_v1.stone_persistence": "Stone Persistence",
+  "block.born_in_chaos_v1.scorched_planks_fence": "Scorched Fence",
+  "item.born_in_chaos_v1.ai": "§4Ai",
+  "block.born_in_chaos_v1.tombstone_nino_4416.description_0": "§8The Coven grows impatient of your desecration...",
+  "item.born_in_chaos_v1.transformative_flower": "Transformative Flower",
+  "item.born_in_chaos_v1.sea_terror_stomach": "Glutton Fish Stomach",
+  "item.born_in_chaos_v1.creepy_cookies_with_milk.description_0": "§9Removes all effects",
+  "item.born_in_chaos_v1.charmof_fury": "§4Charm of Fury",
+  "item.born_in_chaos_v1.creepy_cookies_with_milk.description_1": "§9-3 to naughtiness",
+  "item.born_in_chaos_v1.riding_lords_felsteed_spawn_egg": "Felsteed Spawn Egg",
+  "block.born_in_chaos_v1.stained_black_argillite_brick_n": "§4Cursed Stained Black Argillite Brick",
+  "item.born_in_chaos_v1.bone_handle": "Bone Handle",
+  "item.minecraft.tipped_arrow.effect.stimulating_potion": "Arrow of Stimulations",
+  "item.born_in_chaos_v1.lifestealer_true_form_spawn_egg": "Lifestealer Spawn Egg",
+  "item.minecraft.lingering_potion.effect.intoxication_potion": "Lingering Potion of Intoxication",
+  "entity.born_in_chaos_v1.baby_skeleton_minion": "Baby Skeleton",
+  "entity.born_in_chaos_v1.door_knight_not_despawn": "Door Knight",
+  "item.born_in_chaos_v1.baby_spider_spawn_egg": "Baby Spider Spawn Egg",
+  "item.born_in_chaos_v1.spider_mandible": "Spider Mandible",
+  "item.born_in_chaos_v1.intoxicating_decoction.description_0": "§9Intoxication (0:05)",
+  "item.minecraft.splash_potion.effect.potion_of_magical_depletion": "Splash Potion of Magical Depletion",
+  "entity.born_in_chaos_v1.phantom_bomb_entity": "Phantom Bomb",
+  "item.born_in_chaos_v1.corpse_fly_spawn_egg": "Corpse Fly Spawn Egg",
+  "item.born_in_chaos_v1.missionaryicon": "Missionary icon",
+  "item.born_in_chaos_v1.caramel_pepper": "Caramel Pepper",
+  "block.born_in_chaos_v1.scorched_planks_button": "Scorched Button",
+  "effect.born_in_chaos_v1.infernal_flame": "§aInfernal Flame",
+  "item.born_in_chaos_v1.door_knight_spawn_egg": "Door Knight Spawn Egg",
+  "item.born_in_chaos_v1.lifestealer_bone": "Lifestealer Bone",
+  "item.born_in_chaos_v1.pumpkin_spirit_icon": "Pumpkin Spirit Icon",
+  "item.born_in_chaos_v1.frostbitten_blade.description_0": "§7-Attacks freeze the enemy, gradually slowing them down, each repeated attack on the target increases the effect",
+  "entity.born_in_chaos_v1.missioner": "Missionary",
+  "effect.born_in_chaos_v1.snow_storm": "Snow Storm",
+  "item.born_in_chaos_v1.frostbitten_blade.description_1": "§7-Right click to create an icy splash that freezes all enemies around you",
+  "entity.born_in_chaos_v1.missionary_raider": "Missionary",
+  "item.born_in_chaos_v1.zombie_lumberjack_spawn_egg": "Zombie Lumberjack Spawn Egg",
+  "effect.born_in_chaos_v1.undead_summonun": "Undead Summonundead",
+  "item.born_in_chaos_v1.frostbitten_blade.description_2": "§8-Increases the power of ice splash",
+  "block.born_in_chaos_v1.tombstone_mike_rory.description_0": "§8Here lie the lovers",
+  "item.born_in_chaos_v1.lord_pumpkinheads_lamp.description_0": "§8Right-click on the block to summon felsteed",
+  "block.born_in_chaos_v1.tombstone_fubuki_banzai.description_0": "§8The moon is hollow,",
+  "block.born_in_chaos_v1.tombstone_fubuki_banzai.description_1": "§8Fate's cold hand closes, unseen—",
+  "block.born_in_chaos_v1.tombstone_fubuki_banzai.description_2": "§8All light fades to black.",
+  "item.born_in_chaos_v1.wood_splitter_axe": "§6Wood Splitter",
+  "entity.born_in_chaos_v1.lord_pumpkinhead_withouta_horse": "§aLord Pumpkinhead",
+  "entity.born_in_chaos_v1.swarmer": "Swarmer",
+  "entity.born_in_chaos_v1.phantom_creeper_copy": "Phantom Creeper",
+  "item.born_in_chaos_v1.anluka_doors": "§cMusic Disc",
+  "item.born_in_chaos_v1.nightmare_mantleofthe_night_helmet": "§6Nightmare Mask",
+  "item.born_in_chaos_v1.all_charm": "All Charm",
+  "block.born_in_chaos_v1.tombstone_carrion.description_0": "§8Where does it begin and when will it end",
+  "item.born_in_chaos_v1.nightmare_claw": "Nightmare Claw",
+  "item.born_in_chaos_v1.maggot_spawn_egg": "Corpse Maggot Spawn Egg",
+  "item.born_in_chaos_v1.mint_candy": "Mint Candy",
+  "block.born_in_chaos_v1.black_argillite_button": "Black Argillite Button",
+  "item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet": "§6Lord Pumpkinhead's Hat",
+  "block.born_in_chaos_v1.tombstone_2003wise": "§bTombstone: 2003wise",
+  "item.born_in_chaos_v1.nightmare_mantleofthe_night_leggings": "§6Nightmare Pants",
+  "block.born_in_chaos_v1.black_argillite_column_slab": "Black Argillite Column Slab",
+  "item.born_in_chaos_v1.stormcallers_horn": "§6Stormcaller's Horn",
+  "item.born_in_chaos_v1.sweet_sword": "§6Sweet Sword",
+  "entity.born_in_chaos_v1.dire_hound_leader": "Dire Hound Leader",
+  "item.born_in_chaos_v1.mint_ice_cream": "Mint Ice Cream",
+  "block.born_in_chaos_v1.black_argillite_brick_slab": "Black Argillite Brick Slab",
+  "item.born_in_chaos_v1.good_demoman_icon": "Good Demoman Icon",
+  "entity.born_in_chaos_v1.bloody_gadfly": "Bloody Gadfly",
+  "effect.born_in_chaos_v1.curseofthe_boat": "Curse of the Boat",
+  "item.born_in_chaos_v1.sweet_sword.description_0": "§8-Right click to take a bite to restore a small amount of hunger",
+  "entity.born_in_chaos_v1.decaying_zombie": "Decaying Zombie",
+  "entity.born_in_chaos_v1.dread_hound_not_despawn": "Dread Hound",
+  "item.born_in_chaos_v1.mrs_pumpkin_spawn_egg": "Mrs Pumpkin Spawn Egg",
+  "block.born_in_chaos_v1.tombstone_memesus": "§6Tombstone: Memesus",
+  "block.born_in_chaos_v1.marigolds": "Marigolds",
+  "block.born_in_chaos_v1.dark_grid": "Dark Grid",
+  "block.born_in_chaos_v1.tombstone_the_gentleman_frog": "§aTombstone: The Gentleman Frog",
+  "item.born_in_chaos_v1.seared_spirit_not_despawn_spawn_egg": "Seared Spirit Spawn Egg",
+  "item.born_in_chaos_v1.pumpkinhead_icon": "Pumpkinhead Icon",
+  "block.born_in_chaos_v1.tombstone_d_4rkdevilx": "§cTombstone: D4rkDevilX",
+  "item.born_in_chaos_v1.elixirof_ice_barrier": "§bElixir of Ice Barrier",
+  "item.born_in_chaos_v1.krampus_henchman_spawn_egg": "Krampus Henchman Spawn Egg",
+  "item.born_in_chaos_v1.lord_pumpkinhead_withouta_horse_spawn_egg": "§aLord Pumpkinhead Spawn Egg",
+  "effect.born_in_chaos_v1.dark_splash": "Dark Splash",
+  "item.born_in_chaos_v1.soul_cutlass.description_0": "§7-Attacks apply soul stratification, which slows the target and, when the effect ends, deals damage based on the target's current health",
+  "item.born_in_chaos_v1.darkwarblade.description_1": "§c-This weapon is excessively heavy, making it difficult to use without a strength effect",
+  "item.born_in_chaos_v1.darkwarblade.description_0": "§7-The attacks have a devastating effect",
+  "item.born_in_chaos_v1.fel_lamp.description_0": "§8Right-click on the block to summon felsteed",
+  "item.minecraft.lingering_potion.effect.potion_of_living_cocoon": "Lingering Potion of Living Cocoon",
+  "effect.born_in_chaos_v1.block_break": "Block Break",
+  "item.born_in_chaos_v1.dark_upgrade.description_5": " §9Dark Metal Armor Plate",
+  "block.born_in_chaos_v1.flaming_evil_pumpkin": "Flaming Evil Pumpkin",
+  "item.born_in_chaos_v1.dark_upgrade.description_3": " §9Netherite Equipment",
+  "item.born_in_chaos_v1.dark_upgrade.description_4": "§7Ingredients:",
+  "item.born_in_chaos_v1.dark_upgrade.description_1": "",
+  "item.born_in_chaos_v1.dark_upgrade.description_2": "§7Applies to:",
+  "item.born_in_chaos_v1.dark_upgrade.description_0": "§7Dark Metal Upgrade",
+  "item.born_in_chaos_v1.lord_pumpkinheads_empty_lamp": "Lord Pumpkinhead's Empty Lamp",
+  "item.born_in_chaos_v1.staff_of_magic_arrows": "§6Staff of Magic Arrows",
+  "item.born_in_chaos_v1.soul_cutlass.description_1": "§8-Reduces the effect's activation time",
+  "entity.born_in_chaos_v1.pumpkin_bruiser": "Pumpkin Bruiser",
+  "entity.born_in_chaos_v1.baby_spider_controlled": "Baby Spider",
+  "item.born_in_chaos_v1.pumpkin_dunce_spawn_egg": "Pumpkin Dunce Spawn Egg",
+  "item.born_in_chaos_v1.ethereal_spirit": "Ethereal Spirit",
+  "entity.born_in_chaos_v1.dread_hound": "Dread Hound",
+  "item.born_in_chaos_v1.damned_demomans_hat_helmet.description_0": "§c-The hat cannot be taken off",
+  "item.born_in_chaos_v1.damned_demomans_hat_helmet.description_1": "§c-You detonate when your health is low",
+  "entity.born_in_chaos_v1.lifestealer_true_form": "Lifestealer",
+  "entity.born_in_chaos_v1.controlled_spiritual_assistant": "Controlled Baby Skeleton",
+  "entity.born_in_chaos_v1.firelight": "Firelight",
+  "item.born_in_chaos_v1.sea_terror_eye": "Glutton Fish Eye",
+  "item.born_in_chaos_v1.smoked_fish": "Smoked Fish",
+  "entity.born_in_chaos_v1.zombie_bruiser": "Zombie Bruiser",
+  "effect.born_in_chaos_v1.lifesteal": "§cLifesteal",
+  "item.born_in_chaos_v1.thornshell_crab_spawn_egg": "Thornshell Crab Spawn Egg",
+  "block.born_in_chaos_v1.creepy_nutcracker": "Creepy Nutcracker",
+  "entity.born_in_chaos_v1.dark_vortex": "Dark Vortex",
+  "item.born_in_chaos_v1.creepy_gift.description_0": "§8Right-click to open",
+  "entity.born_in_chaos_v1.skeleton_demoman": "Skeleton Demoman",
+  "item.born_in_chaos_v1.spider_bite_sword.description_2": "§8-Makes all baby spiders you summon automatically tamed",
+  "item.born_in_chaos_v1.skullbreaker_hammer": "§6Skullbreaker Hammer",
+  "item.born_in_chaos_v1.spider_bite_sword.description_0": "§7-Attacks infect the target. When an infected enemy dies, a baby spider may appear",
+  "item.born_in_chaos_v1.spider_bite_sword.description_1": "§7While in inventory:",
+  "item.minecraft.potion.effect.potion_of_living_cocoon": "Potion of Living Cocoon",
+  "item.born_in_chaos_v1.shell_mace": "§6Shell Mace",
+  "block.born_in_chaos_v1.scarlet_stained_glass": "Scarlet Ornate Glass",
+  "block.born_in_chaos_v1.dark_metal_block": "Dark Metal Block",
+  "block.born_in_chaos_v1.purple_stained_glass": "Purple Ornate Glass",
+  "block.born_in_chaos_v1.tombstone_the_gentleman_frog.description_0": "§8I tried my best, I did what I could. Never stop trying",
+  "item.born_in_chaos_v1.bagof_candy.description_0": "§8Right-click to open",
+  "item.born_in_chaos_v1.pumpkin_bullet": "§6Pumpkin Bullet",
+  "item.born_in_chaos_v1.dark_metal_armor_helmet.description_0": "§7Full set bonus:",
+  "effect.born_in_chaos_v1.overly_heavy_weapon": "Overly Heavy Weapon",
+  "item.born_in_chaos_v1.pumpkinhead_spawn_egg": "Pumpkinhead Spawn Egg",
+  "item.born_in_chaos_v1.dark_metal_armor_helmet.description_1": "§8-You go into a rampage when your health is low",
+  "item.born_in_chaos_v1.dark_metal_armor_helmet.description_2": "§8-Wither resistance",
+  "effect.born_in_chaos_v1.fish_breath": "Fish Breath",
+  "entity.born_in_chaos_v1.baby_spider": "Baby Spider",
+  "item.born_in_chaos_v1.bottle_of_magical_energy": "§cBottle of Magical Energy",
+  "item.minecraft.potion.effect.stimulating_potion": "Potion of Stimulations",
+  "item.born_in_chaos_v1.exorcism_icon": "Exorcism Icon",
+  "block.born_in_chaos_v1.scorched_planks_fence_gate": "Scorched Fence Gate",
+  "effect.born_in_chaos_v1.living_cocoon_player_side": "Living Cocoon",
+  "item.born_in_chaos_v1.birch_branches.description_0": "§8-Deals more damage to naughty players",
+  "item.born_in_chaos_v1.birch_branches": "§6Birch Branches",
+  "item.born_in_chaos_v1.bonescaller_spawn_egg": "Bonescaller Spawn Egg",
+  "block.born_in_chaos_v1.tombstone_rotborne.description_0": "§8..in his madness, lies the deluge of his rot and sacrifice",
+  "item.born_in_chaos_v1.charmof_resistance": "§bCharm of Resistance",
+  "item.born_in_chaos_v1.monstrous_easter_egg": "Monstrous Easter Egg",
+  "item.born_in_chaos_v1.seared_spirit_spawn_egg": "Seared Spirit Spawn Egg",
+  "item.born_in_chaos_v1.spiny_shell": "Spiny Shell",
+  "item.born_in_chaos_v1.coffee_candy.description_0": "§9Speed II (0:15)",
+  "block.born_in_chaos_v1.lifestealer_skull": "Lifestealer Skull",
+  "block.born_in_chaos_v1.smoldering_scorched_wood": "Smoldering Scorched Wood",
+  "item.born_in_chaos_v1.spruce_cowboy_in_the_moonlighticon": "Spruce Cowboy In The Moonlighticon",
+  "block.born_in_chaos_v1.dark_stained_glass": "Ornate Glass",
+  "item.born_in_chaos_v1.eternal_candy.description_1": "§8May grant a random set of effects when eaten",
+  "item.born_in_chaos_v1.eternal_candy.description_0": "§8You can eat as much as you want",
+  "item.born_in_chaos_v1.transmuting_elixir.description_0": "§8Right-clicking on some mobs or blocks will turn them into something else",
+  "item.born_in_chaos_v1.spiritual_gingerbread.description_1": "§9+3 to naughtiness",
+  "item.born_in_chaos_v1.spiritual_gingerbread.description_0": "§9Removes magic depletion",
+  "item.born_in_chaos_v1.bone_imp_minion_spawn_egg": "Bone Imp Spawn Egg",
+  "entity.born_in_chaos_v1.controlled_baby_skeleton": "Controlled Baby Skeleton",
+  "effect.born_in_chaos_v1.vampiric_touch": "§cVampiric Touch",
+  "item.born_in_chaos_v1.frostbitten_blade": "§6Frostbitten Blade",
+  "entity.born_in_chaos_v1.siamese_skeletonsleft": "Siamese Skeleton",
+  "block.born_in_chaos_v1.tombstone_feral.description_0": "§8Blood pumps through my garden’s veins, the crops mature. Shifting tendons shape anatomy, mutation of the heart",
+  "item.born_in_chaos_v1.nut_hammer": "§6Nut Hammer",
+  "item.born_in_chaos_v1.nightmare_scythe": "§6Nightmare Scythe",
+  "item.born_in_chaos_v1.mint_ice_cream.description_0": "§8Extinguishes you when eaten",
+  "item.born_in_chaos_v1.controlled_spiritual_assistant_spawn_egg": "Controlled Baby Skeleton Spawn Egg",
+  "item.born_in_chaos_v1.spirit_guideicon": "Spirit Guideicon",
+  "entity.born_in_chaos_v1.skeleton_thrasher_not_despawn": "Skeleton Thrasher",
+  "block.born_in_chaos_v1.tombstone_plug": "§4Tombstone: Plug",
+  "block.born_in_chaos_v1.dark_metal_deposit": "Dark Metal Deposit",
+  "item.born_in_chaos_v1.missionary_hat_helmet.description_0": "§8-Summons a controlled baby skeleton when you are attacked by a monster. When triggered, casts magic depletion on you",
+  "block.born_in_chaos_v1.tombstone_orion": "§6Tombstone: Orion",
+  "block.born_in_chaos_v1.tombstone_tem_187": "§6Tombstone: TEM187",
+  "item.born_in_chaos_v1.spirit_guide_assistant_spawn_egg": "Spirit Guide Assistant Spawn Egg",
+  "entity.born_in_chaos_v1.maggot": "Corpse Maggot",
+  "item.born_in_chaos_v1.spiritual_gingerbread": "Spiritual Gingerbread",
+  "item.born_in_chaos_v1.dark_metal_armor_chestplate": "§6Dark Metal Chestplate",
+  "item.born_in_chaos_v1.lord_pumpkinhead_spawn_egg": "§aLord Pumpkinhead Spawn Egg",
+  "entity.born_in_chaos_v1.minibosseswarning": "§cSomething powerful is invading this world...",
+  "item.born_in_chaos_v1.charmof_endurance.description_1": "§7Grants §9Speed III (1:50) §7when used",
+  "item.born_in_chaos_v1.charmof_endurance.description_0": "§7Requires Ethereal Spirit to use",
+  "entity.born_in_chaos_v1.bone_imp": "Bone Imp",
+  "entity.born_in_chaos_v1.pumpkin_spirit": "Pumpkin Spirit",
+  "item.born_in_chaos_v1.stop_hammer": "§4Stop Hammer",
+  "item.born_in_chaos_v1.firelight_not_despawn_spawn_egg": "Firelight Spawn Egg",
+  "block.born_in_chaos_v1.evil_carved_pumpkin": "Evil Carved Pumpkin",
+  "block.born_in_chaos_v1.scorched_planks_slab": "Scorched Planks Slab",
+  "item.born_in_chaos_v1.charmof_power.description_0": "§7Requires Ethereal Spirit to use",
+  "block.born_in_chaos_v1.mossy_black_argillite_brick": "Mossy Black Argillite Brick",
+  "item.born_in_chaos_v1.charmof_power.description_1": "§7Grants §9Strength III (1:50) §7when used",
+  "item.born_in_chaos_v1.dark_vortex_spawn_egg": "Dark Vortex Spawn Egg",
+  "item.born_in_chaos_v1.riding_felsteed_spawn_egg": "Felsteed Spawn Egg",
+  "item.born_in_chaos_v1.fangofthe_hound_leader": "Fang of the Hound Leader",
+  "item.born_in_chaos_v1.zombie_fisherman_spawn_egg": "Zombie Fisherman Spawn Egg",
+  "item.born_in_chaos_v1.smoked_monster_flesh": "Smoked Monster Flesh",
+  "block.born_in_chaos_v1.tombstone_nino_4416": "§bTombstone: Nino4416",
+  "item.born_in_chaos_v1.creepy_gift": "Creepy Gift",
+  "item.born_in_chaos_v1.diamond_termite_spawn_egg": "Diamond Termite Spawn Egg",
+  "item.born_in_chaos_v1.elixirof_ice_barrier.description_0": "§9Ice Barrier (6:00)",
+  "item.born_in_chaos_v1.elixirof_insect_protection.description_0": "§9Insect Protection (12:00)",
+  "entity.born_in_chaos_v1.fallen_chaos_knight": "Fallen Chaos Knight",
+  "block.born_in_chaos_v1.scorched_wood": "Scorched Wood",
+  "item.born_in_chaos_v1.serpumpkinhead_m.desc": "Anluka - Sir Pumpkinhead",
+  "item.born_in_chaos_v1.fire_dust": "Fire Light Dust",
+  "block.born_in_chaos_v1.black_argillite_stairs_n": "§4Cursed Black Argillite Stairs",
+  "block.born_in_chaos_v1.black_argillite_brick_wall": "Black Argillite Brick Wall",
+  "block.born_in_chaos_v1.mesh_door": "Mesh Door",
+  "item.born_in_chaos_v1.gummy_vampire_teeth": "Gummy Vampire Teeth",
+  "item.born_in_chaos_v1.death_totem": "§6Death Totem",
+  "effect.born_in_chaos_v1.rampant_rampage": "Rampage",
+  "block.born_in_chaos_v1.orange_stained_glass_panel": "Orange Ornate Glass Pane",
+  "effect.born_in_chaos_v1.lost_items": "Lost Items",
+  "effect.born_in_chaos_v1.bone_fracture": "Bone Fracture",
+  "item.born_in_chaos_v1.staffof_blindness": "Staff of Blindness",
+  "item.born_in_chaos_v1.magicskull": "Magicskull",
+  "block.born_in_chaos_v1.scorched_planks_stairs": "Scorched Planks Stairs",
+  "item.born_in_chaos_v1.lord_pumpkinhead_icon": "Lord Pumpkinhead Icon",
+  "block.born_in_chaos_v1.mossy_black_argillite_brick_n": "§4Cursed Mossy Black Argillite Brick",
+  "item.born_in_chaos_v1.decrepit_skeleton_spawn_egg": "Decrepit Skeleton Spawn Egg",
+  "item.born_in_chaos_v1.holiday_candy": "Holiday Candy",
+  "item.born_in_chaos_v1.sea_terror_stomach.description_0": "§8Right-click to rip",
+  "item.born_in_chaos_v1.bloody_gadfly_spawn_egg": "Bloody Gadfly Spawn Egg",
+  "entity.born_in_chaos_v1.zombie_fisherman": "Zombie Fisherman",
+  "item.born_in_chaos_v1.baby_skeleton_spawn_egg": "Baby Skeleton Spawn Egg",
+  "entity.born_in_chaos_v1.lifestealer": "Lifestealer",
+  "block.born_in_chaos_v1.cobweb_cover": "Cobweb Cover",
+  "effect.born_in_chaos_v1.furious_rampage": "Rampage",
+  "entity.born_in_chaos_v1.pumpkin_bomb": "Pumpkin Bomb",
+  "block.born_in_chaos_v1.tombstone_derivas": "§dTombstone: Derivas",
+  "item.born_in_chaos_v1.phantom_creeper_spawn_egg": "Phantom Creeper Spawn Egg",
+  "entity.born_in_chaos_v1.pumpkinhead": "Pumpkinhead",
+  "item.born_in_chaos_v1.supreme_bonescaller_not_despawn_spawn_egg": "Supreme Bonescaller Spawn Egg",
+  "item.minecraft.lingering_potion.effect.stimulating_potion": "Lingering Potion of Stimulations",
+  "item.born_in_chaos_v1.spawn_structures_lookout_tower": "Spawn Structures: §6Lookout Tower",
+  "entity.born_in_chaos_v1.seared_spirit": "Seared Spirit",
+  "item.born_in_chaos_v1.nightmare_mantleofthe_night_chestplate": "§6Nightmare Robe",
+  "block.born_in_chaos_v1.scorched_log": "Scorched Log",
+  "item.born_in_chaos_v1.dark_metal_nugget": "Dark Metal Nugget",
+  "item.born_in_chaos_v1.death_totem.description_1": "§8-Saves from lethal damage and temporarily grants a strength effect in exchange for your satiety",
+  "item.born_in_chaos_v1.felsteed_spawn_egg": "Felsteed Spawn Egg",
+  "item.born_in_chaos_v1.death_totem.description_0": "§7While in hand:",
+  "item.born_in_chaos_v1.death_totem.description_3": "§8-No longer removes your entire hunger bar when triggered",
+  "effect.born_in_chaos_v1.stranglehold": "§cStranglehold",
+  "item.born_in_chaos_v1.death_totem.description_2": "§7When wearing a full set of Nightmare Armor:",
+  "block.born_in_chaos_v1.tombstone_fubuki_banzai": "§bTombstone: Fubuki Banzai",
+  "item.born_in_chaos_v1.nightmare_scythe.description_0": "§7-Attacks heal you, wither the attacked target and prevent them from using some magical abilities",
+  "item.born_in_chaos_v1.nightmare_scythe.description_1": "§8-Increases scythe lifesteal and wither damage",
+  "item.born_in_chaos_v1.dark_charge": "Dark Charge",
+  "block.born_in_chaos_v1.puddleofintoxication": "Puddle of intoxication",
+  "item.born_in_chaos_v1.evilometer.description_1": "§8-At critically high value, grants the Strength effect",
+  "item.born_in_chaos_v1.mother_spider_spawn_egg": "Spiders Mother Spawn Egg",
+  "item.born_in_chaos_v1.evilometer.description_0": "§8-When used, displays your number of naughtiness points",
+  "item.born_in_chaos_v1.intoxicating_dagger.description_0": "§8-Attacks inflict intoxication on the enemy",
+  "block.born_in_chaos_v1.black_argillite_brick_wall_n": "§4Cursed Black Argillite Brick Wall",
+  "entity.born_in_chaos_v1.bone_imp_minion": "Bone Imp",
+  "item.born_in_chaos_v1.dark_rod": "Dark Rod",
+  "block.born_in_chaos_v1.stripped_scorched_wood": "Stripped Scorched Wood",
+  "entity.born_in_chaos_v1.supreme_bonescaller_not_despawn": "Supreme Bonescaller",
+  "item.born_in_chaos_v1.spiritual_easter_egg": "Spiritual Easter Egg",
+  "item.born_in_chaos_v1.dark_atrium": "§cDark Atrium",
+  "item.born_in_chaos_v1.krampus_spawn_egg": "Krampus Spawn Egg",
+  "item.born_in_chaos_v1.lord_the_headless_spawn_egg": "§aLord The Headless Spawn Egg",
+  "effect.born_in_chaos_v1.dogtruce": "Dog Truce",
+  "item.born_in_chaos_v1.transforming_easter_cake.description_2": "§9Stone Persistence (10:00-30:00)",
+  "item.born_in_chaos_v1.transforming_easter_cake.description_3": "§9Predator's Desire (10:00-30:00)",
+  "item.born_in_chaos_v1.anluka_doors.desc": "Anluka - Doors",
+  "item.born_in_chaos_v1.transforming_easter_cake.description_0": "§8Random effect:",
+  "item.born_in_chaos_v1.transforming_easter_cake.description_1": "§9Rabbit Agility (10:00-30:00)",
+  "item.minecraft.potion.effect.potion_of_magical_depletion": "Potion of Magical Depletion",
+  "block.born_in_chaos_v1.black_argillite": "Black Argillite",
+  "item.born_in_chaos_v1.magical_holiday_candy": "§bMagical Holiday Candy",
+  "block.born_in_chaos_v1.black_argillitepressureplate": "Black Argillite Pressure Plate",
+  "block.born_in_chaos_v1.webbed_cobblestone": "Webbed Stone",
+  "block.born_in_chaos_v1.green_stained_glass_panel": "Green Ornate Glass Pane",
+  "block.born_in_chaos_v1.black_argillite_n": "§4Cursed Black Argillite",
+  "item.born_in_chaos_v1.excessflyswattericon": "Excessflyswattericon",
+  "item.born_in_chaos_v1.pumpkin_bruiser_spawn_egg": "Pumpkin Bruiser Spawn Egg",
+  "block.born_in_chaos_v1.black_argillite_brick": "Black Argillite Brick",
+  "item.born_in_chaos_v1.spiny_shell_armor_helmet": "§6Spiny Shell Helmet",
+  "item.born_in_chaos_v1.krampuss_bag": "Krampus's Bag",
+  "item.born_in_chaos_v1.chaos_icon": "Chaos Icon",
+  "item.born_in_chaos_v1.potion_of_rampage": "§cElixir of Rampage",
+  "entity.born_in_chaos_v1.spiritof_chaos": "Spirit of Chaos",
+  "item.born_in_chaos_v1.sir_pumpkinhead_spawn_egg": "Sir Pumpkinhead Spawn Egg",
+  "item.born_in_chaos_v1.intoxicatind_bomb": "§dIntoxicating Bomb",
+  "item.born_in_chaos_v1.stimulating_decoction": "Stimulating Decoction",
+  "block.born_in_chaos_v1.fired_black_argillite": "Fired Black Argillite",
+  "block.born_in_chaos_v1.black_argillite_wall_n": "§4Cursed Black Argillite Wall",
+  "item.born_in_chaos_v1.dark_ritual_dagger": "§6Dark Ritual Dagger",
+  "effect.born_in_chaos_v1.predators_desire": "Predator's Desire",
+  "block.born_in_chaos_v1.black_argillite_column_n": "§4Cursed Black Argillite Column",
+  "item.born_in_chaos_v1.diamond_termite_shard": "Diamond Termite Shard",
+  "block.born_in_chaos_v1.scorched_planks": "Scorched Planks",
+  "block.born_in_chaos_v1.tombstone_derivas.description_0": "§8Now you will be eternal",
+  "block.born_in_chaos_v1.tombstone_carrion": "§cTombstone: Carrion.exe",
+  "entity.born_in_chaos_v1.sir_the_headless": "Sir The Headless",
+  "item.born_in_chaos_v1.potion_of_rampage.description_0": "§9Rampage (1:50)",
+  "item.born_in_chaos_v1.potion_of_rampage.description_1": "§8Effect stacks",
+  "entity.born_in_chaos_v1.krampus_henchman": "Krampus Henchman",
+  "item.born_in_chaos_v1.serpumpkinhead_m": "§6Music Disc",
+  "block.born_in_chaos_v1.c_black_argillite_brick_n": "§4Cursed Cracked Black Argillite Brick",
+  "item.born_in_chaos_v1.intoxicating_decoction": "Intoxicating Decoction",
+  "item.born_in_chaos_v1.mr_pumpkin_controlled_spawn_egg": "Mr. Pumpkin Spawn Egg",
+  "item.born_in_chaos_v1.infernal_spirit_spawn_egg": "Infernal Spirit Spawn Egg",
+  "entity.born_in_chaos_v1.spirit_guide_assistant": "Spirit Guide Assistant",
+  "effect.born_in_chaos_v1.strong_rampage": "Rampage",
+  "block.born_in_chaos_v1.tombstone_orion.description_1": "§8is not time wasted",
+  "block.born_in_chaos_v1.tombstone_mike_rory": "§bTombstone: Mike & Rory",
+  "block.born_in_chaos_v1.tombstone_somfunambulist": "§7Tombstone: Somfunambulist",
+  "block.born_in_chaos_v1.tombstone_orion.description_0": "§8Time you enjoy wasting,",
+  "item.born_in_chaos_v1.sharpened_dark_metal_sword.description_0": "§8-Deals more damage to undead",
+  "entity.born_in_chaos_v1.restless_spirit": "Restless Spirit",
+  "item.born_in_chaos_v1.lord_pumpkinheads_empty_lamp.description_0": "§8Capable of storing the spirit of felsteed",
+  "item.born_in_chaos_v1.spirit_guide_spawn_egg": "Spirit Guide Spawn Egg",
+  "entity.born_in_chaos_v1.siamese_skeletons": "Siamese Skeletons",
+  "item.born_in_chaos_v1.stormcallers_horn.description_0": "§7-When used, summons a small snow storm around you",
+  "item.born_in_chaos_v1.stormcallers_horn.description_1": "§8-Increases the duration of snow storm and decreases the cooldown of horn",
+  "item.born_in_chaos_v1.bonescaller_staff": "§6Bonescaller Staff",
+  "item.born_in_chaos_v1.trident_hayfork": "§6Pitchfork",
+  "item.born_in_chaos_v1.spawn_structures_farm": "Spawn Structures: §eFarm",
+  "entity.born_in_chaos_v1.seared_spirit_not_despawn": "Seared Spirit",
+  "entity.born_in_chaos_v1.pumpkin_dunce": "Pumpkin Dunce",
+  "item.born_in_chaos_v1.pumpkin_spirit_spawn_egg": "Pumpkin Spirit Spawn Egg",
+  "block.born_in_chaos_v1.stripped_scorched_log": "Stripped Scorched Log",
+  "block.born_in_chaos_v1.cultivated_pumpkin": "Cultivated Pumpkin",
+  "block.born_in_chaos_v1.tombstone_somfunambulist.description_0": "§8Memory sometimes makes merciful deletions",
+  "item.born_in_chaos_v1.dread_hound_spawn_egg": "Dread Hound Spawn Egg",
+  "effect.born_in_chaos_v1.stimulatingsurge": "Stimulating Surge",
+  "block.born_in_chaos_v1.tombstone_2_dling.description_0": "§8Not every problem has an answer, sometimes all you need is to let go",
+  "item.born_in_chaos_v1.bagof_candy": "§6Bag of Candy",
+  "entity.born_in_chaos_v1.zombie_clown_not_despawn": "Zombie Clown",
+  "item.born_in_chaos_v1.dire_hound_leader_spawn_egg": "Dire Hound Leader Spawn Egg",
+  "block.born_in_chaos_v1.black_argillite_brick_slab_n": "§4Cursed Black Argillite Brick Slab",
+  "entity.born_in_chaos_v1.sir_pumpkinhead": "Sir Pumpkinhead",
+  "block.born_in_chaos_v1.tombstone_euthymia": "§7Tombstone: Euthymia_",
+  "item.born_in_chaos_v1.krampus_horn": "Krampus Horn",
+  "item.born_in_chaos_v1.corpse_fish_spawn_egg": "Corpse Fish Spawn Egg",
+  "block.born_in_chaos_v1.dark_stained_glass_panel": "Ornate Glass Pane",
+  "block.born_in_chaos_v1.rotten_infernal_pumpkin": "Rotten Infernal Pumpkin",
+  "item.born_in_chaos_v1.zombie_bruiser_spawn_egg": "Zombie Bruiser Spawn Egg",
+  "item.born_in_chaos_v1.deceived_hopes_icon": "Deceived Hopes Icon",
+  "item.born_in_chaos_v1.dark_metal_ingot": "Dark Metal Ingot",
+  "item.born_in_chaos_v1.nut_hammer.description_0": "§8-Attacks have a chance to knock off the headgear of the attacked target",
+  "block.born_in_chaos_v1.black_argillite_brick_stairs": "Black Argillite Brick Stairs",
+  "item.born_in_chaos_v1.baby_skeleton_minion_spawn_egg": "Baby Skeleton Spawn Egg",
+  "item.born_in_chaos_v1.great_reaper_axe": "§6Great Reaper Axe",
+  "item.born_in_chaos_v1.carrot_sword": "§6Carrot Sword",
+  "block.born_in_chaos_v1.lifestealer_skull.description_0": "§8+5 to Enchantment Table enchantment power",
+  "effect.born_in_chaos_v1.dark_ward": "Dark Ward",
+  "item.born_in_chaos_v1.supreme_measure": "§4Supreme Measure",
+  "block.born_in_chaos_v1.gnawed_bones": "Gnawed Bones",
+  "block.born_in_chaos_v1.purple_stained_glass_panel": "Purple Ornate Glass Pane",
+  "effect.born_in_chaos_v1.myiasis": "Myiasis",
+  "item.born_in_chaos_v1.firelight_spawn_egg": "Firelight Spawn Egg",
+  "block.born_in_chaos_v1.tombstone_2_dling": "§bTombstone: 2D_ling",
+  "entity.born_in_chaos_v1.thornshell_crab": "Thornshell Crab",
+  "effect.born_in_chaos_v1.stunning_strike": "Stunning Strike",
+  "item.born_in_chaos_v1.supreme_bonescaller_spawn_egg": "Supreme Bonescaller Spawn Egg",
+  "item.born_in_chaos_v1.elixirof_wither_resistance.description_0": "§9Wither Resistance (8:00)",
+  "item.born_in_chaos_v1.lords_felsteed_spawn_egg": "§aLord's Felsteed Spawn Egg",
+  "item.born_in_chaos_v1.sweet_axe": "§6Sweet Axe",
+  "block.born_in_chaos_v1.infernal_evil_pumpkin_s": "§aInfernal Evil Pumpkin",
+  "item.born_in_chaos_v1.darkwarblade": "§6Dark Warblade",
+  "item.born_in_chaos_v1.skeleton_thrasher_not_despawn_spawn_egg": "Skeleton Thrasher Spawn Egg",
+  "effect.born_in_chaos_v1.wither_resistance": "Wither Resistance",
+  "item.born_in_chaos_v1.empty_fel_lamp.description_0": "§8Capable of storing the spirit of felsteed",
+  "item.born_in_chaos_v1.pieceofdarkmetal": "Piece of Dark Metal",
+  "block.born_in_chaos_v1.tombstone_petasi": "§6Tombstone: Petasi",
+  "item.born_in_chaos_v1.burythemall_icon": "Bury them all",
+  "item.born_in_chaos_v1.pumpkinstaffa": "§6Pumpkin Staff",
+  "item.born_in_chaos_v1.chaos_component": "§cChaos Component",
+  "effect.born_in_chaos_v1.stun": "Stun",
+  "entity.born_in_chaos_v1.sir_pumpkinhead_without_horse": "Sir Pumpkinhead",
+  "item.born_in_chaos_v1.mr_pumpkin_spawn_egg": "Mr. Pumpkin Spawn Egg",
+  "item.born_in_chaos_v1.decaying_zombie_not_despawn_spawn_egg": "Decaying Zombie Spawn Egg",
+  "item.born_in_chaos_v1.bone_heart": "Bone Heart",
+  "item.born_in_chaos_v1.charmof_power": "§cCharm of Strength",
+  "entity.born_in_chaos_v1.nightmare_stalker": "Nightmare Stalker",
+  "entity.born_in_chaos_v1.scarlet_persecutor": "Scarlet Persecutor",
+  "effect.born_in_chaos_v1.rotten_smell": "Rotten Stink",
+  "block.born_in_chaos_v1.tombstone_d_4rkdevilx.description_0": "§8Arise from darkness... Death is just the beginning.",
+  "block.born_in_chaos_v1.tombstone_d_4rkdevilx.description_1": "§8Embrace the Seven Curses and let evil consume you.",
+  "item.born_in_chaos_v1.dark_metal_armor_boots": "§6Dark Metal Boots",
+  "item.born_in_chaos_v1.lord_pumpkinhead_head_spawn_egg": "§aLord Pumpkinhead Spawn Egg",
+  "item.born_in_chaos_v1.monster_skin": "Monster Skin",
+  "effect.born_in_chaos_v1.bone_chilling": "Bone Chilling",
+  "item.born_in_chaos_v1.damned_demomans_hat_helmet": "§6Damned Demoman's Hat",
+  "block.born_in_chaos_v1.chipped_black_argillite_brick": "Cracked Black Argillite Brick",
+  "entity.born_in_chaos_v1.riding_lords_felsteed": "Felsteed",
+  "item.born_in_chaos_v1.spiritual_dust": "Spiritual Dust",
+  "item.borninchaos.tooltip": "§8Press Shift to show tooltip",
+  "item.minecraft.tipped_arrow.effect.potion_of_magical_depletion": "Arrow of Magical Depletion",
+  "effect.born_in_chaos_v1.soul_stratification": "Soul Stratification",
+  "item.born_in_chaos_v1.smoked_flesh": "Smoked Flesh",
+  "item.born_in_chaos_v1.spiritual_guide_sombrero_helmet.description_0": "§8-Enhances baby skeleton summoned by bonescaller staff",
+  "block.born_in_chaos_v1.pile_of_skulls": "Pile of Skulls",
+  "effect.born_in_chaos_v1.bone_barrier": "Bone Barrier",
+  "block.born_in_chaos_v1.spooky_snowman_head": "Creepy Snowman Head",
+  "entity.born_in_chaos_v1.supreme_bonescaller_stage_2": "Supreme Bonescaller",
+  "item.born_in_chaos_v1.permafrost_shard": "Permafrost Shard",
+  "item.born_in_chaos_v1.rotten_easter_egg": "Rotten Easter Egg",
+  "effect.born_in_chaos_v1.living_cocoon": "Living Cocoon",
+  "item.born_in_chaos_v1.coffee_candy": "Coffee Candy",
+  "item.born_in_chaos_v1.pumpkin_bomb_spawn_egg": "Pumpkin Bomb Spawn Egg",
+  "item.born_in_chaos_v1.caramel_pepper.description_0": "§9Fire Resistance (0:15)",
+  "effect.born_in_chaos_v1.unity_with_darkness": "Unity With Darkness",
+  "entity.born_in_chaos_v1.bonescaller": "Bonescaller",
+  "item.born_in_chaos_v1.fried_maggot": "Fried Maggot",
+  "item.born_in_chaos_v1.lord_pumpkinheads_lamp": "§aLord Pumpkinhead's Lamp",
+  "effect.born_in_chaos_v1.minion_summon": "Minion Summon",
+  "entity.born_in_chaos_v1.riding_felsteed": "Felsteed",
+  "item.minecraft.tipped_arrow.effect.potion_of_living_cocoon": "Arrow of Living Cocoon",
+  "item.born_in_chaos_v1.charmof_resistance.description_0": "§7Requires Ethereal Spirit to use",
+  "item.born_in_chaos_v1.charmof_resistance.description_1": "§7Grants §9Resistance II (1:50) §7when used",
+  "item.minecraft.splash_potion.effect.potion_of_living_cocoon": "Splash Potion of Living Cocoon",
+  "block.born_in_chaos_v1.tombstone_plug.description_0": "§8The way of heaven atop ones palm",
+  "block.born_in_chaos_v1.black_argillite_column": "Black Argillite Column",
+  "item.born_in_chaos_v1.dark_atrium.description_0": "§8When used, grants the §9Dark Ward (60:00) §8effect, which can save you from death",
+  "item.born_in_chaos_v1.transforming_easter_cake": "§bTransmuting Easter Cake",
+  "item.born_in_chaos_v1.spiritual_dust.description_0": "§8Increases the power of shots fired from the Staff of Magic Arrows",
+  "entity.born_in_chaos_v1.baby_skeleton": "Baby Skeleton",
+  "item.born_in_chaos_v1.elixir_of_vampirism": "§cElixir of Vampirism",
+  "item.born_in_chaos_v1.door_knight_not_despawn_spawn_egg": "Door Knight Spawn Egg",
+  "entity.born_in_chaos_v1.skeleton_thrasher": "Skeleton Thrasher",
+  "item.born_in_chaos_v1.fallen_chaos_knight_spawn_egg": "Fallen Chaos Knight Spawn Egg",
+  "block.born_in_chaos_v1.tombstone_dark_titan_066": "§cTombstone: DarkTitan066",
+  "block.born_in_chaos_v1.nightmare_stalker_skull": "Nightmare Stalker Skull",
+  "block.born_in_chaos_v1.tombstone_feral": "§bTombstone: Feral",
+  "block.born_in_chaos_v1.black_argillite_slab": "Black Argillite Slab",
+  "item.born_in_chaos_v1.nightmare_mantleofthe_night_boots": "§6Nightmare Boots",
+  "block.born_in_chaos_v1.rotten_soil": "Rotten Soil",
+  "item.born_in_chaos_v1.hats": "Hats",
+  "entity.born_in_chaos_v1.decrepit_skeleton": "Decrepit Skeleton",
+  "item.born_in_chaos_v1.corpse_maggot": "Corpse Maggot",
+  "entity.born_in_chaos_v1.mother_spider": "Spiders Mother",
+  "item.born_in_chaos_v1.baby_spider_controlled_spawn_egg": "Baby Spider Spawn Egg",
+  "item.born_in_chaos_v1.elixir_of_vampirism.description_0": "§9Vampiric Touch (6:00)",
+  "entity.born_in_chaos_v1.spirit_guide": "Spirit Guide",
+  "item.minecraft.potion.effect.intoxication_potion": "Potion of Intoxication",
+  "effect.born_in_chaos_v1.cursed_mark": "Cursed Mark",
+  "block.born_in_chaos_v1.fired_black_argillite_n": "§4Cursed Fired Black Argillite",
+  "item.born_in_chaos_v1.creepy_cookies_with_milk": "Creepy Cookies With Milk",
+  "item.born_in_chaos_v1.sharpened_dark_metal_sword": "§6Sharpened Dark Metal Sword",
+  "effect.born_in_chaos_v1.infestationof_flies": "Infestation of Flies",
+  "entity.born_in_chaos_v1.phantom_creeper": "Phantom Creeper",
+  "item.born_in_chaos_v1.dark_upgrade": "Smithing Template",
+  "block.born_in_chaos_v1.tombstone_dark_titan_066.description_1": "§8and Graverobber, you will know fear...",
+  "block.born_in_chaos_v1.tombstone_dark_titan_066.description_0": "§8How dare you awaken me! Betrayer",
+  "effect.born_in_chaos_v1.experience_container": "Experience Container",
+  "entity.born_in_chaos_v1.infernal_spirit": "Infernal Spirit",
+  "item.born_in_chaos_v1.siamese_skeletonsleft_spawn_egg": "Siamese Skeleton Spawn Egg",
+  "item.born_in_chaos_v1.squireofthedarklordicon": "Squire of the dark lord",
+  "item.born_in_chaos_v1.elixirof_wither_resistance": "§cElixir of Wither Resistance",
+  "item.born_in_chaos_v1.spider_bite_sword": "§6Spider Bite",
+  "item.born_in_chaos_v1.dark_ritual_dagger.description_0": "§7-Right clicking on an animal or minion will sacrifice it, healing you and granting you the strength effect",
+  "block.born_in_chaos_v1.carved_black_argillite": "Carved Black Argillite",
+  "item.born_in_chaos_v1.dark_ritual_dagger.description_1": "§8-Extends and enhances the effects received from sacrifice",
+  "entity.born_in_chaos_v1.firelight_not_despawn": "Firelight",
+  "item.born_in_chaos_v1.bonescaller_not_despawn_spawn_egg": "Bonescaller Spawn Egg",
+  "block.born_in_chaos_v1.black_argillite_brick_stairs_n": "§4Cursed Black Argillite Brick Stairs",
+  "item.born_in_chaos_v1.mint_candy.description_0": "§8Removes rotten stink and hunger when eating",
+  "item.born_in_chaos_v1.sir_pumpkinhead_without_horse_spawn_egg": "Sir Pumpkinhead Spawn Egg",
+  "entity.born_in_chaos_v1.lord_pumpkinhead": "§aLord Pumpkinhead",
+  "item.born_in_chaos_v1.zombie_clown_not_despawn_spawn_egg": "Zombie Clown Spawn Egg",
+  "item.born_in_chaos_v1.charmof_endurance": "§eCharm of Endurance",
+  "item.born_in_chaos_v1.skeleton_demoman_spawn_egg": "Skeleton Demoman Spawn Egg",
+  "entity.born_in_chaos_v1.lord_pumpkinhead_head": "§aLord Pumpkinhead",
+  "item.born_in_chaos_v1.dark_metal_armor_leggings": "§6Dark Metal Leggings",
+  "entity.born_in_chaos_v1.stalkerwarning": "§cYou feel like something is chasing you...",
+  "item.born_in_chaos_v1.siamese_skeletonsright_spawn_egg": "Siamese Skeleton Spawn Egg",
+  "entity.born_in_chaos_v1.barrel_zombie": "Barrel Zombie",
+  "block.born_in_chaos_v1.black_argillite_wall": "Black Argillite Wall",
+  "item.minecraft.tipped_arrow.effect.intoxication_potion": "Arrow of Intoxication",
+  "item.born_in_chaos_v1.transmuting_elixir": "§bTransmuting Elixir",
+  "item.born_in_chaos_v1.eternal_candy": "§9Et§ber§ana§el §eC§6an§cdy",
+  "item.born_in_chaos_v1.spiritual_sword": "§6Spirit Divider",
+  "item.born_in_chaos_v1.evilometer": "Evilometer",
+  "item.born_in_chaos_v1.supreme_measure.description_0": "§8Available only in creative",
+  "item.born_in_chaos_v1.seedof_chaos": "Seed of Chaos",
+  "entity.born_in_chaos_v1.zombie_lumberjack": "Zombie Lumberjack",
+  "item.born_in_chaos_v1.killer_rabbit_ears_helmet": "§dKiller Rabbit Ears",
+  "item.born_in_chaos_v1.rotten_fish": "Rotten Fish",
+  "block.born_in_chaos_v1.closed_hound_trap": "§6Closed Hound Trap",
+  "block.born_in_chaos_v1.argillite_lamp": "Argillite Lamp",
+  "item.born_in_chaos_v1.charmof_stealth.description_1": "§7Grants §9Invisibility III (1:50) §7when used",
+  "item.born_in_chaos_v1.charmof_stealth.description_0": "§7Requires Ethereal Spirit to use",
+  "item.born_in_chaos_v1.armor_plate_from_dark_metal": "Dark Metal Armor Plate",
+  "item.born_in_chaos_v1.soulbane": "§6Soulbane",
+  "effect.born_in_chaos_v1.sweet_madness": "Sweet Madness",
+  "block.born_in_chaos_v1.scarlet_stained_glass_panel": "Scarlet Ornate Glass Pane",
+  "item.minecraft.splash_potion.effect.stimulating_potion": "Splash Potion of Stimulations",
+  "effect.born_in_chaos_v1.terrifying_presence": "Terrifying Presence",
+  "item.born_in_chaos_v1.spiny_shell_armor_chestplate": "§6Spiny Shell Chestplate",
+  "block.born_in_chaos_v1.scorched_planks_trapdoor": "Scorched Trapdoor",
+  "item.born_in_chaos_v1.gummy_vampire_teeth.description_0": "§9Vampiric Touch (0:15)",
+  "item.born_in_chaos_v1.glutton_fish_spawn_egg": "Glutton Fish Spawn Egg",
+  "block.born_in_chaos_v1.tombstone_tem_187.description_0": "§8Note: When your friend Midas says you shouldn't touch him, listen...",
+  "item.born_in_chaos_v1.pileof_dark_metal": "Pile of Dark Metal",
+  "block.born_in_chaos_v1.tombstone_petasi.description_0": "§8Don't tell me... You can see me?",
+  "item.born_in_chaos_v1.krampuss_bag.description_0": "§8Right-click to open",
+  "item.born_in_chaos_v1.fused_bone": "Fused Bone",
+  "item.born_in_chaos_v1.zombie_clown_spawn_egg": "Zombie Clown Spawn Egg",
+  "item.born_in_chaos_v1.shattered_skull": "Shattered Skull",
+  "item.born_in_chaos_v1.phantom_powder": "Phantom Powder",
+  "item.born_in_chaos_v1.elixirof_insect_protection": "§cElixir of Insect Protection",
+  "item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet.description_0": "§8-Enhances pumpkin weapons",
+  "block.born_in_chaos_v1.cursed_scarlet_ornate_glass_pane": "§4Cursed Scarlet Ornate Glass Pane",
+  "item.minecraft.lingering_potion.effect.potion_of_magical_depletion": "Lingering Potion of Magical Depletion",
+  "block.born_in_chaos_v1.orange_stained_glass": "Orange Ornate Glass",
+  "item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet.description_1": "§8-Makes you immune to fire and soul stratification",
+  "item.born_in_chaos_v1.barrel_zombie_spawn_egg": "Barrel Zombie Spawn Egg",
+  "item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet.description_2": "§8-Envelops the one who attacks you with infernal fire",
+  "block.born_in_chaos_v1.tombstone_rotborne": "§bTombstone: Rotborne",
+  "entity.born_in_chaos_v1.krampus": "Krampus",
+  "item.born_in_chaos_v1.bone_imp_spawn_egg": "Bone Imp Spawn Egg",
+  "effect.born_in_chaos_v1.magic_depletion": "Magic Depletion",
+  "block.born_in_chaos_v1.green_stained_glass": "Green Ornate Glass",
+  "block.born_in_chaos_v1.smoldering_scorched_log": "Smoldering Scorched Log",
+  "item.born_in_chaos_v1.bottle_of_magical_energy.description_0": "§8Removes Magic Depletion",
+  "entity.born_in_chaos_v1.bonescaller_not_despawn": "Bonescaller",
+  "block.born_in_chaos_v1.infernal_evil_pumpkin": "Infernal Evil Pumpkin",
+  "entity.born_in_chaos_v1.supreme_bonescaller": "Supreme Bonescaller",
+  "item.born_in_chaos_v1.missionary_raider_spawn_egg": "Missionary Spawn Egg",
+  "effect.born_in_chaos_v1.ice_barrier": "Ice Barrier",
+  "item.born_in_chaos_v1.infernal_medicine_icon": "Infernal Medicine Icon",
+  "entity.born_in_chaos_v1.diamond_termite": "Diamond Termite",
+  "block.born_in_chaos_v1.bundle_of_bones": "Bundle of Bones",
+  "block.born_in_chaos_v1.fel_soil_destructible": "§aFel Soil",
+  "effect.born_in_chaos_v1.obsession": "Obsession",
+  "entity.born_in_chaos_v1.mr_pumpkin_controlled": "Mr. Pumpkin",
+  "block.born_in_chaos_v1.dark_ice": "Dark Ice",
+  "block.born_in_chaos_v1.black_argillite_brick_n": "§4Cursed Black Argillite Brick",
+  "block.born_in_chaos_v1.scorched_planks_pressure_plates": "Scorched Pressure Plate",
+  "item.born_in_chaos_v1.fel_lamp": "§aFel Lamp",
+  "item.born_in_chaos_v1.spiritof_chaos_spawn_egg": "Spirit of Chaos Spawn Egg",
+  "item.born_in_chaos_v1.soul_cutlass": "§6Soul Saber",
+  "item.born_in_chaos_v1.spiritual_guide_sombrero_helmet": "§6Spiritual Guide Sombrero",
+  "block.born_in_chaos_v1.black_argillite_stairs": "Black Argillite Stairs",
+  "item.born_in_chaos_v1.shell_mace.description_0": "§8-Deals more damage to enemies in water or rain",
+  "item.born_in_chaos_v1.intoxicating_dagger": "§6Intoxicating Dagger",
+  "item.born_in_chaos_v1.spawn_structures_dark_tower": "Spawn Structures: §4Dark Tower",
+  "block.born_in_chaos_v1.fel_soil": "§aFel Soil",
+  "item.born_in_chaos_v1.siamese_skeletons_spawn_egg": "Siamese Skeletons Spawn Egg",
+  "item.born_in_chaos_v1.nightmare_stalker_spawn_egg": "Nightmare Stalker Spawn Egg",
+  "item.born_in_chaos_v1.phantom_bomb": "§dPhantom Bomb",
+  "item.born_in_chaos_v1.sir_the_headless_spawn_egg": "Sir The Headless Spawn Egg",
+  "item.born_in_chaos_v1.shakeand_mixicon": "Shake and Mix",
+  "entity.born_in_chaos_v1.decaying_zombie_not_despawn": "Decaying Zombie",
+  "effect.born_in_chaos_v1.gaze_of_terror": "Gaze of Terror",
+  "block.born_in_chaos_v1.puddleof_stimulation": "Puddle of stimulation",
+  "effect.born_in_chaos_v1.sacrifice": "Sacrifice",
+  "effect.born_in_chaos_v1.jawattack": "jaw attack",
+  "item.born_in_chaos_v1.phantom_creeper_copy_spawn_egg": "Phantom Creeper Spawn Egg",
+  "item.born_in_chaos_v1.supreme_bonescaller_stage_2_spawn_egg": "Supreme Bonescaller Spawn Egg",
+  "item.born_in_chaos_v1.pumpkinhandgun": "§6Pumpkin Pistol",
+  "block.born_in_chaos_v1.spiny_shell_trap": "§6Spiny Shell Trap",
+  "item.born_in_chaos_v1.controlled_baby_skeleton_spawn_egg": "Controlled Baby Skeleton Spawn Egg",
+  "item.born_in_chaos_v1.lifeturnedouttobeacomedyicon": "Lifeturnedouttobeacomedyicon",
+  "item.born_in_chaos_v1.rotten_easter_egg.description_0": "§8When thrown, randomly buffs all monsters in the area of impact, but increases the experience gained from them when killed",
+  "item.born_in_chaos_v1.gravestone_icon": "Gravestone Icon",
+  "block.born_in_chaos_v1.hound_trap": "§6Hound Trap",
+  "item.born_in_chaos_v1.bloody_gadfly_eye": "Bloody Gadfly Eye",
+  "item.born_in_chaos_v1.skeleton_thrasher_spawn_egg": "Skeleton Thrasher Spawn Egg",
+  "item.born_in_chaos_v1.missioner_spawn_egg": "Missionary Spawn Egg",
+  "effect.born_in_chaos_v1.rabbit_agility": "Rabbit Agility",
+  "item.born_in_chaos_v1.swarmer_spawn_egg": "Swarmer Spawn Egg",
+  "entity.born_in_chaos_v1.zombie_clown": "Zombie Clown",
+  "effect.born_in_chaos_v1.living_bomb": "§aLiving Bomb",
+  "entity.born_in_chaos_v1.siamese_skeletonsright": "Siamese Skeleton",
+  "entity.born_in_chaos_v1.lord_the_headless": "§aLord The Headless",
+  "item.born_in_chaos_v1.sea_terror_eye.description_0": "§8Fully replenishes oxygen when eaten",
+  "item.born_in_chaos_v1.spawn_structures_firewell": "Spawn Structures: §cFirewell",
+  "item.born_in_chaos_v1.double_troubleicon": "Double Troubleicon",
+  "effect.born_in_chaos_v1.medium_rampage": "Rampage",
+  "entity.born_in_chaos_v1.glutton_fish": "Glutton Fish",
+  "block.born_in_chaos_v1.stained_black_argillite_brick": "Stained Black Argillite Brick",
+  "item.born_in_chaos_v1.charmof_fury.description_0": "§7Requires Ethereal Spirit to use",
+  "item.born_in_chaos_v1.charmof_fury.description_1": "§7Grants §9Rampage (1:50) §7when used",
+  "entity.born_in_chaos_v1.lords_felsteed": "§aLord's Felsteed",
+  "item.born_in_chaos_v1.stimulating_decoction.description_0": "§9Stimulation (0:10)",
+  "item.born_in_chaos_v1.spawn_structures_clown_cart": "Spawn Structures: §5Clown Caravan",
+  "item.born_in_chaos_v1.empty_fel_lamp": "Empty Fel Lamp",
+  "effect.born_in_chaos_v1.intoxication": "Intoxication",
+  "item.born_in_chaos_v1.decaying_zombie_spawn_egg": "Decaying Zombie Spawn Egg",
+  "item.born_in_chaos_v1.lifestealer_spawn_egg": "Lifestealer Spawn Egg",
+  "block.born_in_chaos_v1.infected_diamond_ore": "§3Infected Diamond Ore",
+  "entity.born_in_chaos_v1.corpse_fish": "Corpse Fish",
+  "item.born_in_chaos_v1.chocolate_heart": "Chocolate Heart",
+  "item.born_in_chaos_v1.stimulating_bomb": "§6Stimulating Bomb",
+  "block.born_in_chaos_v1.fragile_scorched_boards": "Fragile Scorched Planks",
+  "item.born_in_chaos_v1.bone_heart.description_0": "§8When used, grants a §9Bone Barrier (50:00) §8capable of blocking one hit",
+  "item.born_in_chaos_v1.smoldering_infernal_ember": "§aSmoldering Infernal Ember",
+  "entity.born_in_chaos_v1.door_knight": "Door Knight",
+  "item.born_in_chaos_v1.missionary_hat_helmet": "§6Missionary Hat",
+  "item.born_in_chaos_v1.orbofthe_summoner": "§4Orb of the Summoner",
+  "entity.born_in_chaos_v1.mrs_pumpkin": "Mrs Pumpkin",
+  "item.born_in_chaos_v1.spiny_shell_armor_helmet.description_0": "§7-Deals retaliatory damage to whoever attacks you",
+  "item.born_in_chaos_v1.spiny_shell_armor_helmet.description_1": "§8-Doubles retaliation damage. You no longer take damage from spiny shell",
+  "block.born_in_chaos_v1.black_argillite_column_slab_n": "§4Cursed Black Argillite Column Slab",
+  "item.born_in_chaos_v1.scarlet_persecutor_spawn_egg": "Scarlet Persecutor Spawn Egg",
+  "item.born_in_chaos_v1.senor_pumpkin_spawn_egg": "Senor Pumpkin Spawn Egg",
+  "item.born_in_chaos_v1.icy_sweetness": "§6Icy Sweetness",
+  "block.born_in_chaos_v1.river_mint": "River Mint",
+  "block.born_in_chaos_v1.carved_black_argillite_n": "§4Cursed Carved Black Argillite",
+  "entity.born_in_chaos_v1.corpse_fly": "Corpse Fly",
+  "item.born_in_chaos_v1.dread_hound_not_despawn_spawn_egg": "Dread Hound Spawn Egg",
+  "block.born_in_chaos_v1.scorched_planks_door": "Scorched Planks Door",
+  "item.born_in_chaos_v1.chocolate_heart.description_0": "§9Restores 2 HP",
+  "block.born_in_chaos_v1.black_argillite_slab_n": "§4Cursed Black Argillite Slab",
+  "item.born_in_chaos_v1.soulbane.description_1": "§7When wearing Lord Pumpkinhead's hat:",
+  "item.born_in_chaos_v1.soulbane.description_0": "§7-Attacks apply soul stratification and envelope the enemy in infernal fire, which slows the target and, when the effect ends, deals damage based on the target's current health",
+  "item.born_in_chaos_v1.spiritual_sword.description_0": "§8-Deals more damage to spirits",
+  "item.born_in_chaos_v1.spawn_structure_mound_hounds": "Spawn Structure: §7Mound Hounds",
+  "entity.born_in_chaos_v1.senor_pumpkin": "Senor Pumpkin",
+  "entity.born_in_chaos_v1.felsteed": "Felsteed"
+ }
+}

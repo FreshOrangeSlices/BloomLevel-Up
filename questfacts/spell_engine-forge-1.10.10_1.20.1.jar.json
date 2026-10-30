@@ -1,0 +1,90 @@
+{
+ "jar": "spell_engine-forge-1.10.10+1.20.1.jar",
+ "namespaces": [
+  "c",
+  "curios",
+  "minecraft",
+  "rpg_series",
+  "spell_engine",
+  "spell_power"
+ ],
+ "advancements": [
+  {
+   "id": "rpg_series:classes",
+   "parent": "rpg_series:root",
+   "title": "Choose your path",
+   "description": "Visit a Spell Binding Table to create your first Spell Book!",
+   "icon": "minecraft:book",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:spell_binding"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:enchant_spell_infinity",
+   "parent": "rpg_series:misc_items",
+   "title": "Free Energy",
+   "description": "Obtain Spell Infinity enchantment from the Enchanting Table",
+   "icon": "minecraft:enchanted_book",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "spell_engine:enchant_specific"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:misc_items",
+   "parent": "rpg_series:root",
+   "title": "Magical Items",
+   "description": "Discover various items essential for spell casting!",
+   "icon": "minecraft:chest",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tick"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "rpg_series:root",
+   "parent": "",
+   "title": "Spells",
+   "description": "Discover the art of magical combat!",
+   "icon": "spell_engine:spell_binding",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tick"
+   ],
+   "ids": [],
+   "rewards": {}
+  }
+ ],
+ "books": [],
+ "names": {
+  "enchantment.spell_engine.spell_infinity": "Spell Infinity",
+  "enchantment.spell_engine.spell_infinity.desc": "Spells are free to cast",
+  "item.spell_engine.scroll": "Spell Scroll",
+  "item.spell_engine.spell_scroll": "Spell Scroll",
+  "item.spell_engine.spell_book": "Spell Book",
+  "item.spell_engine.scroll.table_hint": "Attachable to Spell Book using Spell Binding Table",
+  "entity.spell_engine.spell_projectile": "Spell",
+  "entity.spell_engine.spell_area_effect": "Area Effect",
+  "effect.spell_engine.stun": "Stunned",
+  "effect.spell_engine.stun.description": "Cannot move or act.",
+  "effect.spell_engine.immobilize": "Immobilized",
+  "effect.spell_engine.immobilize.description": "Cannot move or jump",
+  "effect.spell_engine.bleed": "Bleed",
+  "effect.spell_engine.bleed.description": "Losing health over time, worse while moving.",
+  "effect.spell_engine.energy": "Energy",
+  "effect.spell_engine.energy.description": "The held weapon burns with energy.",
+  "block.spell_engine.spell_binding": "Spell Binding Table",
+  "block.spell_engine.spell_binding.description": "Use it to create and fill Spell Books."
+ }
+}

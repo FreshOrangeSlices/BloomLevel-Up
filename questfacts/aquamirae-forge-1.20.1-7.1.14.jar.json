@@ -1,0 +1,444 @@
+{
+ "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+ "namespaces": [
+  "aquamirae",
+  "minecraft"
+ ],
+ "advancements": [
+  {
+   "id": "aquamirae:adventure/encounter_the_shipbreaker",
+   "parent": "aquamirae:adventure/find_ice_maze",
+   "title": "The Shipbreaker",
+   "description": "Encounter the most fearsome inhabitant of the Ice Maze",
+   "icon": "aquamirae:fin",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "aquamirae:shipbreaker"
+   ],
+   "ids": [],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "aquamirae:adventure/find_ice_maze",
+   "parent": "aquamirae:adventure/root",
+   "title": "Ice Maze",
+   "description": "Enter the Ice Maze that covers the Deep Frozen Ocean biome",
+   "icon": "minecraft:packed_ice",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:location"
+   ],
+   "ids": [
+    "biome=minecraft:deep_cold_ocean",
+    "biome=minecraft:deep_frozen_ocean"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_abyssal_upgrade_smithing_template",
+   "parent": "aquamirae:adventure/obtain_terrible_upgrade_smithing_template",
+   "title": "Abyssal Upgrade",
+   "description": "Obtain an Abyssal Upgrade Smithing Template",
+   "icon": "aquamirae:abyssal_upgrade_smithing_template",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:abyssal_upgrade_smithing_template"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_all_abyssal_armor",
+   "parent": "aquamirae:adventure/obtain_abyssal_upgrade_smithing_template",
+   "title": "One with the Abyss",
+   "description": "Get a full suit of Abyssal Armor",
+   "icon": "aquamirae:abyssal_brigandine",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:abyssal_boots",
+    "items=aquamirae:abyssal_brigandine",
+    "items=aquamirae:abyssal_heaume",
+    "items=aquamirae:abyssal_leggings",
+    "items=aquamirae:abyssal_tiara"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_all_abyssal_weapons",
+   "parent": "aquamirae:adventure/obtain_abyssal_upgrade_smithing_template",
+   "title": "Abyssal Arsenal",
+   "description": "Obtain all Abyssal Weapons",
+   "icon": "aquamirae:shatterblade",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:maze_rose",
+    "items=aquamirae:shatterblade",
+    "items=aquamirae:shatterspike"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_all_salvager_armor",
+   "parent": "aquamirae:adventure/obtain_frozen_key",
+   "title": "Dressed for the Deep",
+   "description": "Get a full suit of Salvager Armor",
+   "icon": "aquamirae:salvager_helmet",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:salvager_boots",
+    "items=aquamirae:salvager_helmet",
+    "items=aquamirae:salvager_suit",
+    "items=aquamirae:salvager_waders"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_all_terrible_armor",
+   "parent": "aquamirae:adventure/obtain_terrible_upgrade_smithing_template",
+   "title": "Terribly Equipped",
+   "description": "Get a full suit of Terrible Armor",
+   "icon": "aquamirae:terrible_chestplate",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:terrible_boots",
+    "items=aquamirae:terrible_chestplate",
+    "items=aquamirae:terrible_helmet",
+    "items=aquamirae:terrible_leggings"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_all_terrible_weapons",
+   "parent": "aquamirae:adventure/obtain_terrible_upgrade_smithing_template",
+   "title": "Terrible Arsenal",
+   "description": "Obtain all Terrible Weapons",
+   "icon": "aquamirae:terrible_fang",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:remnant_saber",
+    "items=aquamirae:terrible_blade",
+    "items=aquamirae:terrible_chakram",
+    "items=aquamirae:terrible_cleaver",
+    "items=aquamirae:terrible_fang"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_frozen_key",
+   "parent": "aquamirae:adventure/obtain_shell_horn",
+   "title": "The Dead Sea",
+   "description": "Claim the key from the restless Ghost of Captain Cornelia",
+   "icon": "aquamirae:frozen_key",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:frozen_key"
+   ],
+   "rewards": {
+    "experience": 200
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_pirate_pouch",
+   "parent": "aquamirae:adventure/find_ice_maze",
+   "title": "Left Behind",
+   "description": "Find an abandoned Pirate Pouch somewhere in the Ice Maze",
+   "icon": "aquamirae:pirate_pouch",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:pirate_pouch"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_rune_of_the_storm",
+   "parent": "aquamirae:adventure/obtain_all_salvager_armor",
+   "title": "Relic of the Deep",
+   "description": "Find an ancient rune buried beneath the frozen depths of the Ice Maze",
+   "icon": "aquamirae:rune_of_the_storm",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:rune_of_the_storm"
+   ],
+   "rewards": {
+    "experience": 200
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_shell_horn",
+   "parent": "aquamirae:adventure/find_ice_maze",
+   "title": "Curious Find",
+   "description": "Discover a Shell Horn while exploring frozen pirate ships",
+   "icon": "aquamirae:shell_horn",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:shell_horn"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_ship_graveyard_echo",
+   "parent": "aquamirae:adventure/encounter_the_shipbreaker",
+   "title": "Trace of the Leviathan",
+   "description": "Collect the eerie trace left behind by the Shipbreaker",
+   "icon": "aquamirae:ship_graveyard_echo",
+   "frame": "goal",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:ship_graveyard_echo"
+   ],
+   "rewards": {
+    "experience": 40
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_terrible_upgrade_smithing_template",
+   "parent": "aquamirae:adventure/obtain_pirate_pouch",
+   "title": "Terrible Upgrade",
+   "description": "Obtain a Terrible Upgrade Smithing Template",
+   "icon": "aquamirae:terrible_upgrade_smithing_template",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:terrible_upgrade_smithing_template"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  },
+  {
+   "id": "aquamirae:adventure/obtain_tidepiercer",
+   "parent": "aquamirae:adventure/obtain_frozen_key",
+   "title": "Cornelia's Legacy",
+   "description": "Loot the Tidepiercer from the fallen Ghost of Captain Cornelia",
+   "icon": "aquamirae:tidepiercer",
+   "frame": "challenge",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [
+    "items=aquamirae:tidepiercer"
+   ],
+   "rewards": {
+    "experience": 200
+   }
+  },
+  {
+   "id": "aquamirae:adventure/root",
+   "parent": "",
+   "title": "Aquamirae",
+   "description": "Explore the ship graveyard and its terrifying creatures",
+   "icon": "aquamirae:rune_of_the_storm",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:inventory_changed"
+   ],
+   "ids": [],
+   "rewards": {}
+  },
+  {
+   "id": "aquamirae:adventure/tame_shellback",
+   "parent": "aquamirae:adventure/find_ice_maze",
+   "title": "Beast of Burden",
+   "description": "Raise a Scuttler into a mighty Shellback and tame it as your mount",
+   "icon": "minecraft:chest",
+   "frame": "task",
+   "hidden": false,
+   "triggers": [
+    "minecraft:tame_animal"
+   ],
+   "ids": [
+    "type=aquamirae:shellback"
+   ],
+   "rewards": {
+    "experience": 20
+   }
+  }
+ ],
+ "books": [],
+ "names": {
+  "item.aquamirae.niveis_tear": "Niveis Tear",
+  "item.aquamirae.shell_horn": "Shell Horn",
+  "item.aquamirae.golden_moth_spawn_egg": "Golden Moth Spawn Egg",
+  "item.aquamirae.spinefish_spawn_egg": "Spinefish Spawn Egg",
+  "item.aquamirae.abyssal_scyphoid_spawn_egg": "Abyssal Scyphoid Spawn Egg",
+  "item.aquamirae.maw_spawn_egg": "Maw Spawn Egg",
+  "item.aquamirae.anglerfish_spawn_egg": "Anglerfish Spawn Egg",
+  "item.aquamirae.maze_mother_spawn_egg": "Maze Mother Spawn Egg",
+  "item.aquamirae.captain_cornelia_spawn_egg": "Captain Cornelia Spawn Egg",
+  "item.aquamirae.eel_spawn_egg": "Eel Spawn Egg",
+  "item.aquamirae.tortured_soul_spawn_egg": "Tortured Soul Spawn Egg",
+  "item.aquamirae.scuttler_spawn_egg": "Scuttler Spawn Egg",
+  "item.aquamirae.shellback_spawn_egg": "Shellback Spawn Egg",
+  "item.aquamirae.rune_of_the_storm": "Rune of the Storm",
+  "item.aquamirae.terrible_upgrade_smithing_template": "Smithing Template",
+  "item.aquamirae.terrible_upgrade_smithing_template.applies_to": "Iron Armor",
+  "item.aquamirae.terrible_upgrade_smithing_template.ingredients": "Fin",
+  "item.aquamirae.terrible_upgrade_smithing_template.base_slot_description": "Add a piece of armor",
+  "item.aquamirae.terrible_upgrade_smithing_template.additions_slot_description": "Add Angler's Fang",
+  "item.aquamirae.terrible_helmet": "Terrible Helmet",
+  "item.aquamirae.terrible_chestplate": "Terrible Chestplate",
+  "item.aquamirae.terrible_leggings": "Terrible Leggings",
+  "item.aquamirae.terrible_boots": "Terrible Boots",
+  "item.aquamirae.terrible_cleaver": "Terrible Cleaver",
+  "item.aquamirae.terrible_blade": "Terrible Blade",
+  "item.aquamirae.terrible_fang": "Terrible Fang",
+  "item.aquamirae.remnant_saber": "Remnant Saber",
+  "item.aquamirae.salvager_helmet": "Salvager Helmet",
+  "item.aquamirae.salvager_suit": "Salvager Suit",
+  "item.aquamirae.salvager_waders": "Salvager Waders",
+  "item.aquamirae.salvager_boots": "Salvager Boots",
+  "item.aquamirae.abyssal_upgrade_smithing_template": "Smithing Template",
+  "item.aquamirae.abyssal_upgrade_smithing_template.applies_to": "Diamond Armor",
+  "item.aquamirae.abyssal_upgrade_smithing_template.ingredients": "Abyssal Amethyst",
+  "item.aquamirae.abyssal_upgrade_smithing_template.base_slot_description": "Add a piece of armor",
+  "item.aquamirae.abyssal_upgrade_smithing_template.additions_slot_description": "Add Abyssal Amethyst",
+  "item.aquamirae.abyssal_amethyst": "Abyssal Amethyst",
+  "item.aquamirae.abyssal_tiara": "Abyssal Tiara",
+  "item.aquamirae.abyssal_heaume": "Abyssal Heaume",
+  "item.aquamirae.abyssal_brigandine": "Abyssal Brigandine",
+  "item.aquamirae.abyssal_leggings": "Abyssal Leggings",
+  "item.aquamirae.abyssal_boots": "Abyssal Boots",
+  "item.aquamirae.shatterblade": "Shatterblade",
+  "item.aquamirae.shatterspike": "Shatterspike",
+  "item.aquamirae.dagger_of_greed": "Dagger of Greed",
+  "item.aquamirae.tidepiercer": "Tidepiercer",
+  "item.aquamirae.echo_compass": "Echo Compass",
+  "item.aquamirae.wisteria_niveis": "Wisteria Niveis",
+  "item.aquamirae.sharp_bones": "Sharp Bones",
+  "item.aquamirae.fin": "Fin",
+  "item.aquamirae.esca": "Esca",
+  "item.aquamirae.esca_skewer": "Esca Skewer",
+  "item.aquamirae.angler_fang": "Angler Fang",
+  "item.aquamirae.spinefish": "Spinefish",
+  "item.aquamirae.cooked_spinefish": "Cooked Spinefish",
+  "item.aquamirae.jellyfish_jelly": "Jellyfish Jelly",
+  "item.aquamirae.sea_casserole": "Sea Casserole",
+  "item.aquamirae.sea_stew": "Sea Stew",
+  "item.aquamirae.poseidon_breakfast": "Poseidon Breakfast",
+  "item.aquamirae.ship_graveyard_echo": "Ship Graveyard Echo",
+  "item.aquamirae.luminescent_bubble": "Luminescent Bubble",
+  "item.aquamirae.frozen_key": "Frozen Key",
+  "item.aquamirae.logbook": "Logbook",
+  "item.aquamirae.terrible_chakram": "Terrible Chakram",
+  "item.aquamirae.maze_rose": "Maze Rose",
+  "item.aquamirae.cracked_record": "Cracked Record",
+  "item.aquamirae.cracked_record.desc": "One last song...",
+  "item.aquamirae.music_disc_horizon": "Music Disc",
+  "item.aquamirae.music_disc_horizon.desc": "Bertsz - Horizon",
+  "item.aquamirae.music_disc_forsaken_drownage": "Music Disc",
+  "item.aquamirae.music_disc_forsaken_drownage.desc": "The Exiled Fellow - Forsaken Drownage",
+  "item.aquamirae.void_squid": "Void Squid",
+  "item.aquamirae.oxygen_tank": "Oxygen Tank",
+  "item.aquamirae.dead_sea_scroll": "Dead Sea Scroll",
+  "item.aquamirae.tempest_trident": "Tempest Trident",
+  "item.aquamirae.jawbreaker": "Jawbreaker",
+  "item.aquamirae.oxyhelium": "Oxyhelium",
+  "block.aquamirae.pirate_pouch": "Pirate Pouch",
+  "block.aquamirae.treasure_pouch": "Treasure Pouch",
+  "block.aquamirae.golden_moth_jar": "Golden Moth Jar",
+  "block.aquamirae.frozen_chest": "Frozen Chest",
+  "block.aquamirae.oxyhelium": "Oxyhelium",
+  "block.aquamirae.luminescent_lamp": "Luminescent Lamp",
+  "block.aquamirae.luminescent_bubble": "Luminescent Bubble",
+  "block.aquamirae.wisteria_niveis": "Wisteria Niveis",
+  "block.aquamirae.painting_anglerfish": "Collectible Painting",
+  "block.aquamirae.painting_anglerfish.desc": "Anglerfish by Obscuria",
+  "block.aquamirae.painting_aurora": "Collectible Painting",
+  "block.aquamirae.painting_aurora.desc": "Aurora by Obscuria",
+  "block.aquamirae.painting_oxyhelium": "Collectible Painting",
+  "block.aquamirae.painting_oxyhelium.desc": "Oxyhelium by Obscuria",
+  "block.aquamirae.painting_tortured_soul": "Collectible Painting",
+  "block.aquamirae.painting_tortured_soul.desc": "Tortured Soul by Obscuria",
+  "effect.aquamirae.maelstrom_omen": "Maelstrom Omen",
+  "effect.aquamirae.fury_of_the_depths": "Fury of the Depths",
+  "effect.aquamirae.resilience_of_the_depths": "Resilience of the Depths",
+  "effect.aquamirae.health_shatter": "Health Shatter",
+  "effect.aquamirae.armor_shatter": "Armor Shatter",
+  "effect.aquamirae.devouring_curse": "Devouring Curse",
+  "effect.aquamirae.crystallization": "Crystallization",
+  "effect.aquamirae.poison_immunity": "Poison Immunity",
+  "entity.aquamirae.scuttler": "Scuttler",
+  "entity.aquamirae.shellback": "Shellback",
+  "entity.aquamirae.golden_moth": "Golden Moth",
+  "entity.aquamirae.maw": "Maw",
+  "entity.aquamirae.spinefish": "Spinefish",
+  "entity.aquamirae.abyssal_scyphoid": "Abyssal Scyphoid",
+  "entity.aquamirae.anglerfish": "Anglerfish",
+  "entity.aquamirae.maze_mother": "Maze Mother",
+  "entity.aquamirae.captain_cornelia": "Ghost of Captain Cornelia",
+  "entity.aquamirae.eel": "Eel",
+  "entity.aquamirae.tortured_soul": "Tortured Soul",
+  "entity.aquamirae.terrible_chakram": "Terrible Chakram",
+  "entity.aquamirae.maze_rose": "Maze Rose",
+  "entity.aquamirae.shipbreaker": "Shipbreaker"
+ }
+}

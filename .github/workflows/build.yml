@@ -190,8 +190,9 @@ jobs:
           for n, chunk in enumerate([text[i:i + 3900] for i in range(0, len(text), 3900)][:10]):
               print(f"::error title=addon-build-errors-{n:02d}::{esc(chunk)}")
           PY
+      # Whenever the jar was built, even if a game test failed, so the pack jobs still test the pack.
       - name: capture the add-on jar
-        if: success()
+        if: always() && hashFiles('addon/build/libs/*.jar') != ''
         uses: actions/upload-artifact@v7
         with:
           name: legionwarex-addon-jar

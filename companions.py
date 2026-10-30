@@ -1,5 +1,5 @@
-"""Throwaway: which mods in the pack bind a dodge or roll key (every jar in the server zip, plus the client-only ones
-from their download links), and Xaero's radar category defaults. Usage: companions.py <server.zip> <out dir>"""
+"""Throwaway: Book of Dragons 1.4 (Forge 1.20.1): is it on Modrinth, what it depends on, and what its data looks like
+next to 1.31's (roost structures, biome tags, spawns, configs), for updating the pack. Usage: companions.py <server.zip> <out dir>"""
 import io
 import json
 import os
@@ -10,37 +10,55 @@ import zipfile
 
 out = sys.argv[2]
 os.makedirs(out, exist_ok=True)
-jars = {}
+lines = []
+def get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "FreshOrangeSlices/BloomLevel-Up pack check"})
+    return urllib.request.urlopen(req, timeout=120).read()
+try:
+    versions = json.loads(get("https://api.modrinth.com/v2/project/fJee0CPJ/version"))
+    for v in versions[:8]:
+        lines.append(f"MODRINTH {v['version_number']} {v['date_published'][:10]} {v['game_versions']} {v['loaders']} id={v['id']} "
+                     f"files={[f['filename'] for f in v['files']]} deps={[(d.get('project_id'), d.get('version_id'), d.get('dependency_type')) for d in v['dependencies']]}")
+except Exception as error:
+    lines.append(f"MODRINTH failed: {error}")
+new = None
+for url in ["https://mediafilez.forgecdn.net/files/9339/901/bookofdragons-1.4-1.20.1.jar", "https://edge.forgecdn.net/files/9339/901/bookofdragons-1.4-1.20.1.jar"]:
+    try:
+        new = get(url)
+        lines.append(f"CF download ok {url} {len(new)} bytes")
+        break
+    except Exception as error:
+        lines.append(f"CF download failed {url}: {error}")
+old = None
 server = zipfile.ZipFile(sys.argv[1])
 for name in server.namelist():
-    if name.endswith(".jar"):
-        jars[name] = server.read(name)
-for url in ["https://mediafilez.forgecdn.net/files/9205/892/touch_n_motion_forge_1.20.1_1.0.4.jar",
-            "https://cdn.modrinth.com/data/IAzUFvS6/versions/bOJEwehn/fwa%2B1.20.1-forge-1.2.31.jar",
-            "https://cdn.modrinth.com/data/8aoMKplv/versions/jzgRarPk/punchy-2.8g-forge-1.20.1.jar",
-            "https://cdn.modrinth.com/data/pZ2wrerK/versions/2f5mEUPY/emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar"]:
-    try:
-        jars[url.rsplit("/", 1)[1]] = urllib.request.urlopen(url).read()
-    except Exception as error:
-        print("couldn't fetch", url, error)
-lines = []
-def scan(label, data):
-    try:
-        jar = zipfile.ZipFile(io.BytesIO(data))
-    except zipfile.BadZipFile:
-        return
-    for entry in jar.namelist():
-        if entry.endswith(".jar"):
-            scan(label + "!" + entry, jar.read(entry))
-        elif entry.endswith("en_us.json"):
-            try:
-                lang = json.loads(jar.read(entry).decode("utf-8", "replace"))
-            except ValueError:
-                continue
-            for key, value in lang.items():
-                if re.search(r"(?i)(roll|dodge|dash|evade|evasion|sidestep|slide)", key + " " + str(value)) and re.search(r"(?i)^key|keybind|category", key):
-                    lines.append(f"{label}\t{key} = {str(value)[:150]}")
-for label, data in jars.items():
-    scan(os.path.basename(label), data)
-open(os.path.join(out, "rolls.txt"), "w").write("\n".join(sorted(set(lines))))
+    if "bookofdragons" in name.lower() and name.endswith(".jar"):
+        old = server.read(name)
+        lines.append(f"OLD {name} {len(old)} bytes")
+def describe(label, data):
+    jar = zipfile.ZipFile(io.BytesIO(data))
+    names = jar.namelist()
+    toml = jar.read("META-INF/mods.toml").decode("utf-8", "replace") if "META-INF/mods.toml" in names else ""
+    lines.append(f"== {label} mods.toml")
+    lines.extend(l for l in toml.splitlines() if re.search(r"modId|versionRange|mandatory|version=|side", l) and not l.strip().startswith("#"))
+    lines.append(f"== {label} jarjar: " + ", ".join(n for n in names if n.startswith("META-INF/jarjar/")))
+    data_files = sorted(n for n in names if n.startswith("data/") and n.endswith(".json"))
+    lines.append(f"== {label} data ({len(data_files)} files)")
+    for n in data_files:
+        if re.search(r"structure_set|tags/worldgen|biome_modifier|/spawn|roost|territor|config", n):
+            body = jar.read(n).decode("utf-8", "replace")
+            lines.append(f"{label} {n} :: {re.sub(r'\s+', ' ', body)[:400]}")
+    lines.append(f"== {label} other data dirs: " + ", ".join(sorted(set("/".join(n.split("/")[:3]) for n in data_files))))
+    lines.append(f"== {label} assets sounds/lang: " + ", ".join(n for n in names if n.endswith("en_us.json")))
+    return jar
+if old:
+    describe("OLD", old)
+if new:
+    open(os.path.join(out, "bookofdragons-1.4.jar.bin"), "wb").write(new)
+    jar = describe("NEW", new)
+    lang = next((n for n in jar.namelist() if n.endswith("en_us.json") and "bookofdragons" in n), None)
+    if lang:
+        data = json.loads(jar.read(lang).decode("utf-8", "replace"))
+        lines.append("== NEW entities and items: " + ", ".join(sorted(k for k in data if k.startswith("entity.") or k.startswith("item.bookofdragons"))[:300]))
+open(os.path.join(out, "bookofdragons.txt"), "w").write("\n".join(lines))
 print(len(lines), "lines")

@@ -113,13 +113,16 @@ public final class Sentinels {
 		mob.setDropChance(EquipmentSlot.HEAD, 0.0F);
 	}
 
-	/** A post-holding sentinel notices players within 16 blocks at most (its own follow range may reach much further). */
+	/**
+	 * A post-holding sentinel notices players within 16 blocks at most (its own follow range may reach much further). Scaled
+	 * down from what it has after spawning (a monster's spawn adds a small random bonus to its range), so it lands on 16.
+	 */
 	static void shortenSight(Mob mob) {
 		AttributeInstance range = mob.getAttribute(Attributes.FOLLOW_RANGE);
 
-		if (range != null && range.getModifier(SIGHT_ID) == null && range.getBaseValue() > SIGHT) {
-			range.addPermanentModifier(new AttributeModifier(SIGHT_ID, "LegionWareX sentinel sight", SIGHT - range.getBaseValue(),
-					AttributeModifier.Operation.ADDITION));
+		if (range != null && range.getModifier(SIGHT_ID) == null && range.getValue() > SIGHT) {
+			range.addPermanentModifier(new AttributeModifier(SIGHT_ID, "LegionWareX sentinel sight", SIGHT / range.getValue() - 1.0,
+					AttributeModifier.Operation.MULTIPLY_TOTAL));
 		}
 	}
 

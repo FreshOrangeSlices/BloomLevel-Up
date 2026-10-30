@@ -1,0 +1,35 @@
+# FAUNA Engine - the creature library: fauna (perception, memory, drives, behaviour).
+modLoader="javafml" #mandatory
+loaderVersion="[47,)" #mandatory
+license="ARR"
+
+[[mods]] #mandatory
+modId="liberanimalium" #mandatory
+version="1.0" #mandatory
+displayName="FAUNA Engine" #mandatory
+authors="MrMagister" #optional
+description='''FAUNA Engine: an entity engine with a lot of features.'''
+
+[[dependencies.liberanimalium]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[47.4.0,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.liberanimalium]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+# AzureLib: only the versions this library is built and tested against.
+[[dependencies.liberanimalium]]
+    modId="azurelib"
+    mandatory=true
+    versionRange="[3.2.0]"
+    ordering="NONE"
+    side="BOTH"
+
+[[mixins]]
+config = "liberanimalium.forge.mixins.json"

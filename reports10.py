@@ -84,7 +84,7 @@ summary = [f"dump: {dump_file} ({len(rows)} rows), bosses: {len(bosses)}"]
 
 report = {b: {"health": r.get("health"), "category": r.get("category"), "tags": [t for t in r.get("tags", []) if "boss" in t],
               "bossBar": r.get("bossBar"), "despawns": r.get("despawns"), "templates": {}, "structures": set(), "code": set(),
-              "structureSpawns": [], "biomeSpawns": [], "advancements": [], "name": None} for b in bosses}
+              "structureSpawns": [], "biomeSpawns": [], "advancements": [], "name": None} for b, r in bosses.items()}
 
 for r in rows:
     if r.get("kind") == "structure":

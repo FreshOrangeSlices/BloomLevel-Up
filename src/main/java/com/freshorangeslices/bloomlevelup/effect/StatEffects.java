@@ -103,6 +103,11 @@ public final class StatEffects {
 		});
 	}
 
+	/** Titan Hide's armor for this much Defense armor: its innate armor added, then doubled. */
+	public static double titanHideArmor(double defenseArmor, BloomConfig config) {
+		return (defenseArmor + config.titanHideInnateArmor) * 2.0;
+	}
+
 	public static boolean titanHide(ServerPlayer player) {
 		return BloomServices.progression().isMajorActive(BloomAttachments.profile(player), TITAN_HIDE) && armorSlotsEmpty(player);
 	}
@@ -160,8 +165,8 @@ public final class StatEffects {
 		double defenseArmor = StatFormulas.defenseArmor(service.statValue(profile, DEFENSE));
 
 		if (titanHide) {
-			// +2 innate armor first, then the whole Defense value doubles.
-			defenseArmor = (defenseArmor + 2.0) * 2.0;
+			// Its innate armor first (+2 by default, config), then the whole Defense value doubles.
+			defenseArmor = titanHideArmor(defenseArmor, BloomServices.config());
 		}
 
 		List<HeldModifier> modifiers = new java.util.ArrayList<>(List.of(

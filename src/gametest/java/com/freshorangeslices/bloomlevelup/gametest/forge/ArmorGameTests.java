@@ -285,6 +285,26 @@ public final class ArmorGameTests {
 		helper.succeed();
 	}
 
+	/** Titan Hide's innate armor is a setting (a pack can raise it: LegionWareX uses +4, 8 armor at 0 Defense). */
+	@GameTest(template = "empty")
+	public static void titanHidesInnateArmorIsASetting(GameTestHelper helper) {
+		com.freshorangeslices.bloomlevelup.config.BloomConfig config = BloomServices.config();
+		double before = config.titanHideInnateArmor;
+
+		try {
+			config.titanHideInnateArmor = 4.0;
+			ServerPlayer player = player(helper);
+			grant(player, ArmorIds.TITAN_HIDE);
+			StatEffects.refresh(player);
+			near(helper, 8.0, player.getAttributeValue(Attributes.ARMOR), "(0 Defense + 4) x 2");
+			near(helper, 28.0, StatEffects.titanHideArmor(10.0, config), "100 Defense (10 armor): (10 + 4) x 2");
+		} finally {
+			config.titanHideInnateArmor = before;
+		}
+
+		helper.succeed();
+	}
+
 	@GameTest(template = "empty")
 	public static void lastBreathSavesTheFirstLethalHit(GameTestHelper helper) {
 		ServerPlayer player = player(helper);

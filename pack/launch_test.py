@@ -429,6 +429,36 @@ def bloom_sorting(dump_file):
     return f"Bloom sorting: {weapons} weapons, {armor} armor pieces, {daggers} daggers, {bosses} bosses with a boss bar; {len(unsorted)} unsorted", unsorted
 
 
+MATERIAL_TAGS = ("forge:ingots", "forge:nuggets", "forge:gems", "forge:raw_materials", "forge:dusts", "forge:rods", "forge:leather")
+MATERIAL_NAMES = re.compile(r"(_ingot|_nugget|_gem|_shard|_scales?|_plating|_plate|_fragment|_crystal|_chunk|_alloy|_hide)$|^raw_")
+
+
+def leftover_check(dump_file, spec_file):
+    """Materials (ingots, nuggets, gems, scales, plates and the like) that no recipe the server loaded takes any more:
+    what a gear trim can leave behind (FreshOrangeSlices: copper had almost nothing left to make). Items the pack
+    takes out or hides don't count. Returns (note, lines), the lines one per leftover with what still makes it."""
+    if not os.path.exists(dump_file):
+        return "leftovers: no registry dump", []
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    spec = json.load(open(spec_file)).get("pack_data", {})
+    gone = {i for field in ("removed_items", "hidden_items") for reason, ids in spec.get(field, {}).items()
+            if not reason.startswith("_") for i in ids}
+    used, made = set(), {}
+    for r in rows:
+        if r.get("kind") == "recipe":
+            used.update(r.get("ingredients", []))
+            if r.get("result"):
+                made.setdefault(r["result"], []).append(r["id"])
+    materials = [r for r in rows if r.get("kind") == "item" and r["id"] not in gone and not r.get("durability") and "armor" not in r
+                 and (any(t.startswith(MATERIAL_TAGS) for t in r.get("tags", [])) or MATERIAL_NAMES.search(r["id"].split(":", 1)[1]))]
+    if not any(r.get("kind") == "recipe" and "ingredients" in r for r in rows):
+        return "leftovers: the dump has no recipe ingredients", []
+    leftovers = sorted(r["id"] for r in materials if r["id"] not in used)
+    lines = [f"{item} ({next((r.get('name') for r in materials if r['id'] == item), '')}): nothing takes it; "
+             + (f"made by {', '.join(made[item][:3])}" if item in made else "no recipe makes it (a drop or loot)") for item in leftovers]
+    return f"leftovers: {len(leftovers)} of {len(materials)} materials have no recipe that takes them", lines
+
+
 def crash_summary(folder, lines):
     """What a crashed process said: the newest crash report's description and first lines, else its last errors."""
     reports = sorted((os.path.join(folder, "crash-reports", f) for f in os.listdir(os.path.join(folder, "crash-reports"))),
@@ -840,6 +870,14 @@ def main():
     notes.append(sorting)
     if unsorted:
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
+    # ---- materials a trim left with nothing to make (reviewed by hand: some are drops with uses outside recipes)
+    leftover_note, leftovers = leftover_check(os.path.join(server_dir, "bloom-dump.jsonl"),
+                                              os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
+    notes.append(leftover_note)
+    if leftovers:
+        text = chr(10).join(leftovers)
+        for n, i in enumerate(range(0, min(len(text), 3900 * 3), 3900)):
+            print(f"::warning title=pack-leftovers-{n}::{esc(text[i:i + 3900])}")
     # ---- the pack's own data pack: recipes out, items hidden from JEI
     data_failures, data_notes = pack_data_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
     failures += data_failures

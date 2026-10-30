@@ -161,7 +161,7 @@ final class ArmorSheet {
 
 		double defense = StatFormulas.defenseArmor(service.statValue(profile, ArmorIds.DEFENSE));
 		boolean titan = service.isMajorActive(profile, ArmorIds.TITAN_HIDE) && StatEffects.armorSlotsEmpty(player);
-		double defenseShown = titan ? (defense + 2.0) * 2.0 : defense;
+		double defenseShown = titan ? StatEffects.titanHideArmor(defense, config) : defense;
 		double rawArmor = body.rawArmor();
 		sheet.row(Sheet.plus(gear), "armor.gear");
 		sheet.row(Sheet.plus(defenseShown), titan ? "armor.defense_titan" : "armor.defense", Sheet.num(service.statValue(profile, ArmorIds.DEFENSE)));

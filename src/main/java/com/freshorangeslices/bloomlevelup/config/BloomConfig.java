@@ -88,6 +88,8 @@ public final class BloomConfig {
 	public int braceDelayTicks = 1;
 	/** Brace!: once it ends, how long before it can take hold again (10 seconds). */
 	public int braceCooldownTicks = 200;
+	/** Titan Hide: innate armor points added before its doubling (2 = +4 armor at 0 Defense). */
+	public double titanHideInnateArmor = 2.0;
 
 	// ---------------------------------------------------------------- Utility tuning
 
@@ -299,6 +301,7 @@ public final class BloomConfig {
 		castleOfStoneRestTicks = Math.max(1, castleOfStoneRestTicks);
 		braceDelayTicks = Math.max(1, braceDelayTicks);
 		braceCooldownTicks = Math.max(0, braceCooldownTicks);
+		titanHideInnateArmor = Math.max(0.0, Math.min(100.0, titanHideInnateArmor));
 		utilityFishingXp = Math.max(0.0, utilityFishingXp);
 		utilityShearXp = Math.max(0.0, utilityShearXp);
 		veinMiningMaxBlocks = Math.max(1, Math.min(4096, veinMiningMaxBlocks));

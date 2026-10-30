@@ -411,7 +411,7 @@ Requires all four armor slots to be empty.
 
 Doubles the player's Defense stat while active.
 
-Grants +2 innate armor points before Titan Hide's doubling behavior, effectively contributing +4 armor points while active.
+Grants +2 innate armor points before Titan Hide's doubling behavior, effectively contributing +4 armor points while active. (A config value, `titanHideInnateArmor`, so a modpack can tune it; LegionWareX uses +4.)
 
 The player receives 2x normal knockback.
 

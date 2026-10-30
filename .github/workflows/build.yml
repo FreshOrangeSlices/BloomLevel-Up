@@ -147,7 +147,8 @@ jobs:
           if not os.path.exists('addon.log'):
               raise SystemExit(0)
           lines = open('addon.log', encoding='utf-8', errors='replace').read().splitlines()
-          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|tests? failed|failed!|GameTestAssert|Task :runGameTestServer|passed|legionwarex', l)]
+          hits = [l.strip() for l in lines if re.search(r'GAME TESTS|required tests|tests? failed|failed!|GameTestAssert|Task :runGameTestServer|passed|legionwarex', l)
+                  and 'warning:' not in l]
           text = '\n'.join(hits[-40:]) or 'no game test output found'
           esc = lambda t: t.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
           print(f"::notice title=addon-gametest-summary::{esc(text[:3900])}")
@@ -174,8 +175,14 @@ jobs:
           if not os.path.exists('addon.log'):
               raise SystemExit(0)
           lines = open('addon.log', encoding='utf-8', errors='replace').read().splitlines()
+          # Each failed game test with its message first (compile warnings name gametest paths and would crowd them out).
+          fails = [l.strip() for l in lines if 'failed!' in l]
+          if fails:
+              print("::error title=addon-test-failures::" + '\n'.join(fails)[:3900].replace('%', '%25').replace('\n', '%0A'))
           keep = []
           for i, line in enumerate(lines):
+              if 'warning:' in line:
+                  continue
               if re.search(r'(error:|FAILED|What went wrong|Exception|> Task .*FAILED|GameTest|gametest|Could not)', line):
                   keep.extend(lines[max(0, i - 1):i + 6])
           text = '\n'.join(dict.fromkeys(keep)) or '\n'.join(lines[-200:])
@@ -387,6 +394,9 @@ jobs:
           # A pirate chart read where the player stands: the treasure map in hand.
           - layers: 6
             shot: pack_chart
+          # Every installed kind of daytime sentinel in rows in front of the player.
+          - layers: 6
+            shot: pack_sentinels
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

@@ -793,6 +793,57 @@ def chart_check(server, player, entities, shots):
     return failures, notes
 
 
+def sentinel_check(server, player, shots):
+    """The add-on's daytime sentinels: every installed kind of its table placed in rows in front of the player (in creative,
+    so they hold their posts for the picture), captured, then checked 10 seconds later in daylight: each should still be
+    there and not burning (undead ones wear a sun-proof helmet). Fails when the table has installed kinds and none could
+    be placed; kinds that vanished or burn are listed (pack-sentinels). Returns (failures, notes, report lines)."""
+    failures, notes, report = [], [], []
+    server.send(f"gamemode creative {player}")
+    server.send("time set 1000")
+    server.send(f"execute as {player} at @s run kill @e[type=!player,distance=..64]")
+    time.sleep(1)
+    mark = len(server.lines)
+    server.send(f"execute as {player} at @s run legionwarex sentinel all")
+    line = lines_since(server, mark, r"LegionWareX sentinel: placed", 30)
+    if not line:
+        server.send(f"gamemode survival {player}")
+        return ["add-on: /legionwarex sentinel all said nothing (is the command there?)"], notes, report
+    placed = re.search(r"placed (\d+) of (\d+) installed kinds: (.*?)(?:; couldn't place: (.*))?$", line)
+    if not placed:
+        server.send(f"gamemode survival {player}")
+        return [f"add-on: couldn't read the sentinel line: {line.strip()[-300:]}"], notes, report
+    count, kinds = int(placed.group(1)), int(placed.group(2))
+    names = [n.strip() for n in placed.group(3).split(", ") if n.strip()]
+    if kinds and not count:
+        failures.append("add-on: no sentinel could be placed: " + line.strip()[-300:])
+    if placed.group(4):
+        report.append("couldn't place: " + placed.group(4))
+    time.sleep(5)
+    capture(shots, "pack_sentinels")
+    time.sleep(5)
+    mark = len(server.lines)
+    server.send(f"execute as {player} at @s run legionwarex sentinel check")
+    line = lines_since(server, mark, r"LegionWareX sentinel: \d+ sentinels near", 20) or ""
+    rows = line.split("sentinels near: ", 1)[1].split("; ") if "sentinels near: " in line else []
+    alive = {r.split(" (", 1)[0] for r in rows}
+    gone = [n for n in names if n not in alive]
+    burning = [r for r in rows if "burning" in r]
+    notes.append(f"add-on: sentinels: {count} of {kinds} installed kinds placed; 10 s later in daylight {len(rows)} there, "
+                 f"{len(burning)} burning")
+    report.append("placed: " + ", ".join(names))
+    report.append("10 s later: " + "; ".join(rows))
+    if gone:
+        report.append("gone: " + ", ".join(gone))
+    if burning:
+        report.append("burning: " + "; ".join(burning))
+    server.send(f"execute as {player} at @s run kill @e[tag=legionwarex_sentinel,distance=..96]")
+    time.sleep(2)
+    server.send(f"execute as {player} at @s run kill @e[type=item,distance=..96]")
+    server.send(f"gamemode survival {player}")
+    return failures, notes, report
+
+
 def terrain_check(server_dir, spec_file):
     """The add-on's terrain survey (-Dlegionwarex.terrain): the Overworld the server would make beside vanilla's for the
     same seed, and where a new world's spawn goes. Fails when the survey didn't run, a spawn search found no mainland,
@@ -944,6 +995,14 @@ def main():
             failures += chart_failures
             notes += chart_notes
             progress("chart check done")
+            sentinel_failures, sentinel_notes, sentinel_report = sentinel_check(server, PLAYER, shots)
+            failures += sentinel_failures
+            notes += sentinel_notes
+            if sentinel_report:
+                text = chr(10).join(sentinel_report)
+                for n, i in enumerate(range(0, min(len(text), 3900 * 2), 3900)):
+                    print(f"::notice title=pack-sentinels-{n}::{esc(text[i:i + 3900])}")
+            progress("sentinel check done")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")

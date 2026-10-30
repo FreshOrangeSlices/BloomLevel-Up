@@ -23,6 +23,12 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue CHART_DROP_CHANCE;
 	private static final ForgeConfigSpec.IntValue CHART_REACH;
 	private static final ForgeConfigSpec.IntValue CHART_ARRIVE;
+	private static final ForgeConfigSpec.BooleanValue SENTINELS;
+	private static final ForgeConfigSpec.IntValue SENTINEL_EVERY;
+	private static final ForgeConfigSpec.DoubleValue SENTINEL_CHANCE;
+	private static final ForgeConfigSpec.DoubleValue SENTINEL_VANILLA_SHARE;
+	private static final ForgeConfigSpec.DoubleValue SCOUT_SHARE;
+	private static final ForgeConfigSpec.IntValue SENTINEL_FROM_DAY;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -83,6 +89,31 @@ public final class AddonConfig {
 		CHART_ARRIVE = builder
 				.comment("How close to the chart's X counts as there (the chart crumbles), in blocks.")
 				.defineInRange("chartArriveBlocks", 32, 4, 256);
+		builder.pop();
+
+		builder.comment("Sentinels: one harder mob, alone and out by day, that holds its spot and watches, takes on a player who comes within",
+				"16 blocks and despawns once players are far away; undead ones wear a helmet the sun can't wear out (it never drops).",
+				"Who stands where is the add-on's sentinel table (data/<mod>/legionwarex/sentinels). Sometimes a pillager scout",
+				"wanders instead. /legionwarex sentinel [<entity>|all|check] for testing.").push("sentinels");
+		SENTINELS = builder
+				.comment("Whether sentinels come at all.")
+				.define("sentinels", true);
+		SENTINEL_EVERY = builder
+				.comment("How often each player may get one, in ticks (plus up to a minute); only by day, and never a second while one is",
+						"within 96 blocks of them.")
+				.defineInRange("sentinelEveryTicks", 6000, 200, DAY * 10);
+		SENTINEL_CHANCE = builder
+				.comment("The chance a try brings one. With the defaults, about one a day near each player.")
+				.defineInRange("sentinelChance", 0.5, 0.0, 1.0);
+		SENTINEL_VANILLA_SHARE = builder
+				.comment("In vanilla's own biomes a try goes ahead only this share of the time (vanilla's biomes get the smallest share).")
+				.defineInRange("sentinelVanillaBiomeShare", 0.6, 0.0, 1.0);
+		SCOUT_SHARE = builder
+				.comment("The share of tries that bring a pillager scout (where the table has one for that biome) instead of a sentinel.")
+				.defineInRange("scoutShare", 0.25, 0.0, 1.0);
+		SENTINEL_FROM_DAY = builder
+				.comment("The first day sentinels come (day 0 is the world's first).")
+				.defineInRange("sentinelFromDay", 1, 0, 1000);
 		builder.pop();
 
 		builder.push("world");
@@ -161,5 +192,29 @@ public final class AddonConfig {
 
 	public static int chartArriveBlocks() {
 		return get(CHART_ARRIVE, 32);
+	}
+
+	public static boolean sentinels() {
+		return get(SENTINELS, true);
+	}
+
+	public static int sentinelEvery() {
+		return get(SENTINEL_EVERY, 6000);
+	}
+
+	public static double sentinelChance() {
+		return get(SENTINEL_CHANCE, 0.5);
+	}
+
+	public static double sentinelVanillaShare() {
+		return get(SENTINEL_VANILLA_SHARE, 0.6);
+	}
+
+	public static double scoutShare() {
+		return get(SCOUT_SHARE, 0.25);
+	}
+
+	public static int sentinelFromDay() {
+		return get(SENTINEL_FROM_DAY, 1);
 	}
 }

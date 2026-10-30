@@ -1,0 +1,142 @@
+{
+  "_comment": "The pack's own harder mobs (not bosses), placed where they fit. FreshOrangeSlices' playtest: daytime is meh and plains feel too safe. A sentinel with no biomes stands anywhere on land; roams: wanders instead of holding its spot.",
+  "sentinels": [
+    {
+      "entity": "legendary_monsters:haunted_knight",
+      "weight": 10,
+      "biomes": [
+        "#forge:is_plains",
+        "#minecraft:is_savanna",
+        "#forge:is_plateau",
+        "#minecraft:is_forest",
+        "#minecraft:is_taiga",
+        "minecraft:meadow"
+      ]
+    },
+    {
+      "entity": "legendary_monsters:haunted_guard",
+      "weight": 8,
+      "biomes": [
+        "#forge:is_plains",
+        "#minecraft:is_savanna",
+        "#forge:is_plateau",
+        "#minecraft:is_forest",
+        "#minecraft:is_taiga",
+        "minecraft:meadow"
+      ]
+    },
+    {
+      "entity": "illagerinvasion:inquisitor",
+      "weight": 8,
+      "biomes": [
+        "#forge:is_plains",
+        "#minecraft:is_savanna",
+        "#forge:is_plateau",
+        "#minecraft:is_forest",
+        "#minecraft:is_taiga",
+        "minecraft:meadow",
+        "#minecraft:is_forest",
+        "#minecraft:is_taiga",
+        "#forge:is_coniferous",
+        "#forge:is_dense"
+      ]
+    },
+    {
+      "entity": "mythsandlegends:possessed_armor_lancer",
+      "weight": 8,
+      "biomes": [
+        "#minecraft:is_mountain",
+        "#forge:is_mountain",
+        "#minecraft:is_hill",
+        "#forge:is_plateau"
+      ]
+    },
+    {
+      "entity": "mythsandlegends:gargoyle",
+      "weight": 8,
+      "biomes": [
+        "#minecraft:is_mountain",
+        "#forge:is_mountain",
+        "#minecraft:is_hill",
+        "#forge:is_plateau"
+      ]
+    },
+    {
+      "entity": "skarrier_mobs:wrought",
+      "weight": 6,
+      "biomes": [
+        "#minecraft:is_mountain",
+        "#forge:is_mountain",
+        "#minecraft:is_hill",
+        "#forge:is_plateau"
+      ]
+    },
+    {
+      "entity": "mythsandlegends:amarok",
+      "weight": 10,
+      "biomes": [
+        "#forge:is_snowy"
+      ]
+    },
+    {
+      "entity": "soulsweapons:frost_giant",
+      "weight": 8,
+      "biomes": [
+        "#forge:is_snowy"
+      ]
+    },
+    {
+      "entity": "cataclysm:royal_draugr",
+      "weight": 6,
+      "biomes": [
+        "#forge:is_snowy"
+      ]
+    },
+    {
+      "entity": "mythsandlegends:scorched_sentinel",
+      "weight": 10,
+      "biomes": [
+        "#forge:is_desert",
+        "#minecraft:is_badlands",
+        "#forge:is_sandy",
+        "#forge:is_wasteland"
+      ]
+    },
+    {
+      "entity": "legendary_monsters:ambusher",
+      "weight": 10,
+      "biomes": [
+        "#forge:is_desert",
+        "#minecraft:is_badlands",
+        "#forge:is_sandy",
+        "#forge:is_wasteland"
+      ]
+    },
+    {
+      "entity": "graveyard:nightmare",
+      "weight": 10,
+      "biomes": [
+        "minecraft:dark_forest",
+        "#forge:is_swamp",
+        "#forge:is_spooky",
+        "#forge:is_dead",
+        "biomesoplenty:ominous_woods",
+        "biomesoplenty:dead_forest",
+        "biomesoplenty:old_growth_dead_forest"
+      ]
+    },
+    {
+      "entity": "minecraft:pillager",
+      "weight": 10,
+      "biomes": [
+        "#minecraft:has_structure/pillager_outpost",
+        "#forge:is_plains",
+        "#minecraft:is_savanna",
+        "#minecraft:is_taiga",
+        "#forge:is_snowy",
+        "#forge:is_desert"
+      ],
+      "roams": true
+    }
+  ]
+}

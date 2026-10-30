@@ -16,6 +16,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -26,7 +28,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -78,15 +79,11 @@ public final class ChartGameTests {
 			helper.assertTrue(map.is(Items.FILLED_MAP) && Charts.isReadChart(map), "A read chart is a filled map");
 			CompoundTag chart = map.getTag().getCompound(Charts.TAG);
 			helper.assertTrue(chart.getInt("x") == first.pos().getX() && chart.getString("boss").equals(first.boss().toString()), "It keeps where it leads: " + chart);
-			MapItemSavedData data = MapItem.getSavedData(map, level);
-			helper.assertTrue(data != null && data.getDecorations().iterator().hasNext(), "The map has its X");
-			boolean redX = false;
-
-			for (MapDecoration decoration : data.getDecorations()) {
-				redX |= decoration.getType() == MapDecoration.Type.RED_X;
-			}
-
-			helper.assertTrue(redX, "The X is a red X");
+			// The X lives on the item, as on vanilla's explorer maps (the map's data takes it up once the map is carried).
+			helper.assertTrue(MapItem.getSavedData(map, level) != null, "The map's data exists");
+			ListTag decorations = map.getTag().getList("Decorations", Tag.TAG_COMPOUND);
+			helper.assertTrue(decorations.size() == 1 && decorations.getCompound(0).getByte("type") == MapDecoration.Type.RED_X.getIcon()
+					&& decorations.getCompound(0).getDouble("x") == first.pos().getX(), "The map has a red X on the lair: " + decorations);
 
 			// Beaten: the next chart goes elsewhere; with every one beaten, the nearest comes back as a rematch.
 			beaten.add(first.boss());
@@ -127,7 +124,7 @@ public final class ChartGameTests {
 
 	/** The drop, by its event: about 1 in 15 for a band pirate a player hit, never for one of the Kraken's crew. */
 	@SuppressWarnings("unchecked")
-	@GameTest(template = "empty")
+	@GameTest(template = "room")
 	public static void aBandPirateDropsAChartAbout1In15(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
 		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(new BlockPos(1, 1, 1)), RandomSource.create(2), 1, false);

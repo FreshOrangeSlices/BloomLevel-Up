@@ -1,0 +1,23 @@
+{
+  "_comment": "Undead Unleashed \u2013 Continued: its Dreadknight anywhere on land (its own Overworld spawns are off), its Wraiths in dark places. A sentinel with no biomes stands anywhere on land; roams: wanders instead of holding its spot.",
+  "sentinels": [
+    {
+      "entity": "undead_unleashed:dreadknight",
+      "weight": 10
+    },
+    {
+      "entity": "undead_unleashed:wraith",
+      "weight": 6,
+      "biomes": [
+        "minecraft:dark_forest",
+        "#forge:is_swamp",
+        "#forge:is_spooky",
+        "#forge:is_dead",
+        "biomesoplenty:ominous_woods",
+        "biomesoplenty:dead_forest",
+        "biomesoplenty:old_growth_dead_forest",
+        "#minecraft:is_taiga"
+      ]
+    }
+  ]
+}

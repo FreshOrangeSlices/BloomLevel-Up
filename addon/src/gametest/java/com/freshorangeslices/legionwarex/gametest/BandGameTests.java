@@ -45,10 +45,9 @@ public final class BandGameTests {
 		band.forEach(Entity::discard);
 	}
 
-	@GameTest(template = "empty")
+	@GameTest(template = "room")
 	public static void aWarBandIsAPatrolLedByTheBanner(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		room(helper, -2, 9);
 		List<Mob> band = Bands.spawn(level, BandKind.WAR, helper.absolutePos(new BlockPos(4, 1, 4)), RandomSource.create(7), 5, false);
 
 		try {
@@ -97,7 +96,9 @@ public final class BandGameTests {
 
 	/**
 	 * A closed stone room around the test (a floor at y 0, air from 1 to 4, a ceiling and walls): the game test server
-	 * makes a normal world, so a test can sit in the sea or a hillside, and water flows into its cleared space.
+	 * makes a normal world, so a test can sit in the sea or a hillside, and water flows into its cleared space. Tests that
+	 * need a big one use the "room" template instead (12 by 12, stone all round), which also keeps the next test's
+	 * blocks out of theirs.
 	 */
 	private static void room(GameTestHelper helper, int from, int to) {
 		for (int x = from; x <= to; x++) {
@@ -114,11 +115,10 @@ public final class BandGameTests {
 	}
 
 	@SuppressWarnings("unchecked")
-	@GameTest(template = "empty", timeoutTicks = 200)
+	@GameTest(template = "room", timeoutTicks = 200)
 	public static void aPirateBandKeepsToItsRookAndKillingItSummonsNoBoss(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
 		helper.assertTrue(ForgeRegistries.ENTITY_TYPES.containsKey(CAPTAIN), "Bosses'Rise is loaded in the dev run");
-		room(helper, -2, 9);
 		BlockPos at = helper.absolutePos(new BlockPos(4, 1, 4));
 		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, at, RandomSource.create(3), 4, false);
 		helper.assertTrue(band.size() >= 3, "Most of a pirate band of 4 found room: " + Bands.describe(BandKind.PIRATE, band));
@@ -171,10 +171,9 @@ public final class BandGameTests {
 	 * 1.5 no swing starts. Bosses'Rise's own counting runs in the rook's base tick, which runs without AI too.
 	 */
 	@SuppressWarnings("unchecked")
-	@GameTest(template = "empty", timeoutTicks = 100)
+	@GameTest(template = "room", timeoutTicks = 100)
 	public static void aBandRookSwingsSooner(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		room(helper, -2, 9);
 		List<Mob> band = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(new BlockPos(1, 1, 1)), RandomSource.create(3), 1, false);
 		helper.assertTrue(band.size() == 1 && PirateTuning.hasSwingCounters(band.get(0)), "A band's rook, with Bosses'Rise's swing counters: "
 				+ Bands.describe(BandKind.PIRATE, band));

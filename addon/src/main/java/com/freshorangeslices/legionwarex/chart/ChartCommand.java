@@ -99,7 +99,7 @@ public final class ChartCommand {
 		}
 
 		// As a chart read here: the next one leads elsewhere.
-		BeatenBosses.of(level.getServer()).chart(found.chunk());
+		BeatenBosses.of(level.getServer()).chart(found);
 		say(source, "found " + found.boss() + " in " + found.structure() + " at " + found.pos().getX() + ", " + found.pos().getZ() + ", "
 				+ Math.round(found.distance()) + " blocks from " + from.toShortString() + (found.rematch() ? " (a rematch)" : "") + " ("
 				+ search.searched() + " of " + size + " lairs in this dimension, " + search.millis() + " ms)");
@@ -147,7 +147,7 @@ public final class ChartCommand {
 	private static int beaten(CommandContext<CommandSourceStack> context) {
 		BeatenBosses log = BeatenBosses.of(context.getSource().getServer());
 		Set<ResourceLocation> beaten = log.all();
-		say(context.getSource(), beaten.size() + " bosses beaten: " + beaten + "; " + log.chartedCount() + " lairs charted");
+		say(context.getSource(), beaten.size() + " bosses beaten: " + beaten + "; " + log.chartedCount() + " lairs charted, by boss: " + log.chartedBosses());
 		return beaten.size();
 	}
 

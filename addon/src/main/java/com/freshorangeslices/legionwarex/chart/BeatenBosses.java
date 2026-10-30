@@ -1,6 +1,8 @@
 package com.freshorangeslices.legionwarex.chart;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -13,7 +15,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 
 /**
  * The lair bosses someone on this world has beaten (a player, or a player's pet, landed the killing blow), and the lairs
- * charts have led to (by the chunk the lair starts in), kept with the world (data/legionwarex_beaten_bosses.dat). Shared
+ * charts have led to (by the chunk the lair starts in, and how often to each boss), kept with the world (data/legionwarex_beaten_bosses.dat). Shared
  * by everyone: a chart read by one player skips a boss their friend has beaten, and a lair their friend's chart showed,
  * since they play the world together.
  */
@@ -21,6 +23,7 @@ public final class BeatenBosses extends SavedData {
 	private static final String NAME = "legionwarex_beaten_bosses";
 	private final Set<ResourceLocation> beaten = new LinkedHashSet<>();
 	private final Set<Long> charted = new LinkedHashSet<>();
+	private final Map<ResourceLocation, Integer> chartedBosses = new LinkedHashMap<>();
 
 	public static BeatenBosses of(MinecraftServer server) {
 		return server.overworld().getDataStorage().computeIfAbsent(BeatenBosses::load, BeatenBosses::new, NAME);
@@ -41,6 +44,16 @@ public final class BeatenBosses extends SavedData {
 			data.charted.add(chunk);
 		}
 
+		CompoundTag bosses = tag.getCompound("chartedBosses");
+
+		for (String id : bosses.getAllKeys()) {
+			ResourceLocation boss = ResourceLocation.tryParse(id);
+
+			if (boss != null) {
+				data.chartedBosses.put(boss, bosses.getInt(id));
+			}
+		}
+
 		return data;
 	}
 
@@ -50,6 +63,9 @@ public final class BeatenBosses extends SavedData {
 		beaten.forEach(id -> list.add(StringTag.valueOf(id.toString())));
 		tag.put("beaten", list);
 		tag.put("charted", new LongArrayTag(charted.stream().mapToLong(Long::longValue).toArray()));
+		CompoundTag bosses = new CompoundTag();
+		chartedBosses.forEach((boss, count) -> bosses.putInt(boss.toString(), count));
+		tag.put("chartedBosses", bosses);
 		return tag;
 	}
 
@@ -78,30 +94,42 @@ public final class BeatenBosses extends SavedData {
 		return charted.contains(chunk);
 	}
 
-	/** A chart now leads to the lair starting in this chunk: later charts lead elsewhere. */
-	public void chart(long chunk) {
-		if (charted.add(chunk)) {
-			setDirty();
-		}
+	/** How many charts have led to this boss (charts favour the boss they've led to least). */
+	public int timesCharted(ResourceLocation boss) {
+		return chartedBosses.getOrDefault(boss, 0);
+	}
+
+	/** A chart now leads to this lair: later charts lead to other lairs, and other bosses first. */
+	public void chart(LairSearch.Found found) {
+		charted.add(found.chunk());
+		chartedBosses.merge(found.boss(), 1, Integer::sum);
+		setDirty();
 	}
 
 	public int chartedCount() {
 		return charted.size();
 	}
 
+	/** Each boss charts have led to, and how many times. */
+	public Map<ResourceLocation, Integer> chartedBosses() {
+		return Map.copyOf(chartedBosses);
+	}
+
 	/** For the game tests and /legionwarex chart forget: beaten bosses and charted lairs alike. */
 	public void clear() {
-		if (!beaten.isEmpty() || !charted.isEmpty()) {
+		if (!beaten.isEmpty() || !charted.isEmpty() || !chartedBosses.isEmpty()) {
 			beaten.clear();
 			charted.clear();
+			chartedBosses.clear();
 			setDirty();
 		}
 	}
 
 	/** Only the charted lairs (the game tests). */
 	public void clearCharted() {
-		if (!charted.isEmpty()) {
+		if (!charted.isEmpty() || !chartedBosses.isEmpty()) {
 			charted.clear();
+			chartedBosses.clear();
 			setDirty();
 		}
 	}

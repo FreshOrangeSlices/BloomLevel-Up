@@ -67,7 +67,7 @@ public final class ChartReading {
 				continue;
 			}
 
-			BeatenBosses.of(server).chart(found.chunk());
+			BeatenBosses.of(server).chart(found);
 			give(player, Charts.read(job.level(), found));
 			player.level().playSound(null, player.blockPosition(), SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, SoundSource.PLAYERS, 1.0F, 1.0F);
 			player.sendSystemMessage(Component.translatable(found.rematch() ? "message.legionwarex.chart_read_beaten" : "message.legionwarex.chart_read",

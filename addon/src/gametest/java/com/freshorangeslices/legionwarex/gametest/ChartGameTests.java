@@ -86,11 +86,16 @@ public final class ChartGameTests {
 			helper.assertTrue(decorations.size() == 1 && decorations.getCompound(0).getByte("type") == MapDecoration.Type.RED_X.getIcon()
 					&& decorations.getCompound(0).getDouble("x") == first.pos().getX(), "The map has a red X on the lair: " + decorations);
 
-			// Charted: the next chart leads to another lair (each one somewhere new, as vanilla's explorer maps).
-			beaten.chart(first.chunk());
+			// Charted: the next chart leads to another lair (each one somewhere new, as vanilla's explorer maps), and to
+			// another boss while one is in reach (charts favour the boss they've led to least, then the nearest lair).
+			beaten.chart(first);
 			LairSearch.Found next = new LairSearch(level, from, REACH, bossesRiseLairs(), beaten).run();
 			helper.assertTrue(next != null && !next.pos().equals(first.pos()) && !next.rematch(), "A charted lair is skipped: " + next + " after " + first);
-			beaten.chart(next.chunk());
+			List<Lairs.Lair> otherBosses = bossesRiseLairs().stream().filter(lair -> !lair.bosses().contains(first.boss())).toList();
+			boolean otherBossInReach = new LairSearch(level, from, REACH, otherBosses, beaten).run() != null;
+			helper.assertTrue(!otherBossInReach || !next.boss().equals(first.boss()), "Another boss next: " + next.boss() + " after " + first.boss());
+			LegionWareX.LOGGER.info("LegionWareX chart test: then {} at {} ({} blocks)", next.boss(), next.pos().toShortString(), Math.round(next.distance()));
+			beaten.chart(next);
 			LairSearch.Found third = new LairSearch(level, from, REACH, bossesRiseLairs(), beaten).run();
 			helper.assertTrue(third == null || (!third.pos().equals(first.pos()) && !third.pos().equals(next.pos())), "And the next one too: " + third);
 			beaten.clearCharted();
@@ -103,9 +108,10 @@ public final class ChartGameTests {
 			LairSearch.Found rematch = new LairSearch(level, from, REACH, bossesRiseLairs(), beaten).run();
 			helper.assertTrue(rematch != null && rematch.rematch() && rematch.pos().equals(first.pos()),
 					"All beaten: the nearest lair again, as a rematch: " + rematch);
-			beaten.chart(first.chunk());
+			beaten.chart(rematch);
 			LairSearch.Found again = new LairSearch(level, from, REACH, bossesRiseLairs(), beaten).run();
-			helper.assertTrue(again != null && again.rematch() && again.pos().equals(first.pos()), "A rematch doesn't mind charts: " + again);
+			helper.assertTrue(again != null && again.rematch() && (!otherBossInReach || !again.boss().equals(rematch.boss())),
+					"Rematches go round the bosses too, charted lairs allowed: " + again);
 
 			// Out of reach: nothing (a lair can't be nearer than the next placement cell).
 			LairSearch.Found none = new LairSearch(level, from, 300, List.of(new Lairs.Lair(KRAKEN_SHIP, List.of(KRAKEN))), beaten).run();

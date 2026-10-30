@@ -29,11 +29,11 @@ import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * Where a pirate chart leads: the nearest lair (of {@link Lairs}) within reach whose bosses aren't all beaten and that no
- * earlier chart has led to, or, when every lair in reach is beaten, the nearest one for a rematch. It looks one lair
- * structure at a time ({@link #step()}), so a chart read in the game spreads the work over a tick per structure instead
- * of freezing the server, and it never looks further than its reach: each structure's search stops at the ring of its
- * placement grid that covers it.
+ * Where a pirate chart leads: a lair (of {@link Lairs}) within reach whose bosses aren't all beaten and that no earlier
+ * chart has led to, the boss charts have led to least first and then the nearest; or, when every lair in reach is
+ * beaten, one for a rematch the same way. It looks one lair structure at a time ({@link #step()}), so a chart read in
+ * the game spreads the work over a tick per structure instead of freezing the server, and it never looks further than
+ * its reach: each structure's search stops at the ring of its placement grid that covers it.
  */
 public final class LairSearch {
 	private final ServerLevel level;
@@ -200,16 +200,30 @@ public final class LairSearch {
 		}
 	}
 
+	/**
+	 * A lair within reach: kept when its boss is one charts have led to fewer times than the best so far's, or as often
+	 * and nearer (so back-to-back charts go to different bosses while another is in reach, not the commonest lair's).
+	 */
 	private void offer(Candidate candidate, BlockPos pos, long chunk) {
 		double distance = Math.sqrt(Math.pow(pos.getX() - from.getX(), 2) + Math.pow(pos.getZ() - from.getZ(), 2));
 
-		if (distance > reach || (best != null && distance >= best.distance())) {
+		if (distance > reach) {
 			return;
 		}
 
 		ResourceLocation boss = candidate.lair().bosses().stream()
 				.filter(id -> ForgeRegistries.ENTITY_TYPES.containsKey(id) && (rematch || !log.isBeaten(id)))
 				.findFirst().orElse(candidate.lair().bosses().get(0));
+		int times = log.timesCharted(boss);
+
+		if (best != null) {
+			int bestTimes = log.timesCharted(best.boss());
+
+			if (times > bestTimes || (times == bestTimes && distance >= best.distance())) {
+				return;
+			}
+		}
+
 		best = new Found(pos, candidate.lair().structure(), boss, distance, rematch, chunk);
 	}
 

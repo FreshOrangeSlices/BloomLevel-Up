@@ -1,5 +1,5 @@
-"""Throwaway: Jade's and Inventory Profiles Next's lang lines and option/key names (from Modrinth), for turning off
-IPN's continuous crafting and break warnings and Jade's overlay. Usage: companions.py <server.zip> <out dir>"""
+"""Throwaway: which mods in the pack bind a dodge or roll key (every jar in the server zip, plus the client-only ones
+from their download links), and Xaero's radar category defaults. Usage: companions.py <server.zip> <out dir>"""
 import io
 import json
 import os
@@ -10,23 +10,37 @@ import zipfile
 
 out = sys.argv[2]
 os.makedirs(out, exist_ok=True)
-jars = {
-    "jade": "https://cdn.modrinth.com/data/nvQzSEkH/versions/xJQHCmWJ/Jade-1.20.1-Forge-11.13.3.jar",
-    "ipn": "https://cdn.modrinth.com/data/O7RBXm3n/versions/CrtAI3P9/InventoryProfilesNext-forge-1.20-1.10.20.jar",
-}
+jars = {}
+server = zipfile.ZipFile(sys.argv[1])
+for name in server.namelist():
+    if name.endswith(".jar"):
+        jars[name] = server.read(name)
+for url in ["https://mediafilez.forgecdn.net/files/9205/892/touch_n_motion_forge_1.20.1_1.0.4.jar",
+            "https://cdn.modrinth.com/data/IAzUFvS6/versions/bOJEwehn/fwa%2B1.20.1-forge-1.2.31.jar",
+            "https://cdn.modrinth.com/data/8aoMKplv/versions/jzgRarPk/punchy-2.8g-forge-1.20.1.jar",
+            "https://cdn.modrinth.com/data/pZ2wrerK/versions/2f5mEUPY/emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar"]:
+    try:
+        jars[url.rsplit("/", 1)[1]] = urllib.request.urlopen(url).read()
+    except Exception as error:
+        print("couldn't fetch", url, error)
 lines = []
-for name, url in jars.items():
-    jar = zipfile.ZipFile(io.BytesIO(urllib.request.urlopen(url).read()))
+def scan(label, data):
+    try:
+        jar = zipfile.ZipFile(io.BytesIO(data))
+    except zipfile.BadZipFile:
+        return
     for entry in jar.namelist():
-        if entry.endswith("en_us.json"):
-            data = json.loads(jar.read(entry).decode("utf-8", "replace"))
-            for key, value in data.items():
-                if re.search(r"(?i)key\.|keybind|overlay|display|craft|refill|break|damage|durab|notif|warn|alert", key + value):
-                    lines.append(f"{name} LANG {key} = {value[:200]}")
-        elif entry.endswith(".class") and ("Key" in entry or "Config" in entry or "Setting" in entry or "ModSettings" in entry):
-            text = jar.read(entry).decode("latin-1")
-            for word in sorted(set(re.findall(r"[A-Za-z0-9_.]{4,60}", text))):
-                if re.search(r"(?i)^key\.jade|continuous|auto_?craft|refill|damage|break|notif|warning|keypad|kp_|GLFW", word):
-                    lines.append(f"{name} CLASS {entry} {word}")
-open(os.path.join(out, "qol.txt"), "w").write("\n".join(lines))
+        if entry.endswith(".jar"):
+            scan(label + "!" + entry, jar.read(entry))
+        elif entry.endswith("en_us.json"):
+            try:
+                lang = json.loads(jar.read(entry).decode("utf-8", "replace"))
+            except ValueError:
+                continue
+            for key, value in lang.items():
+                if re.search(r"(?i)(roll|dodge|dash|evade|evasion|sidestep|slide)", key + " " + str(value)) and re.search(r"(?i)^key|keybind|category", key):
+                    lines.append(f"{label}\t{key} = {str(value)[:150]}")
+for label, data in jars.items():
+    scan(os.path.basename(label), data)
+open(os.path.join(out, "rolls.txt"), "w").write("\n".join(sorted(set(lines))))
 print(len(lines), "lines")

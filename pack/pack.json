@@ -7,10 +7,10 @@
   "layers": [
     {
       "name": "core",
-      "_comment": "Bloom with Better Combat, Combat Roll (the pack's one dodge roll, on Z: its roll animates through Player Animator, which Better Combat brings too; listed by its Modrinth id, wGKYL7st) and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
+      "_comment": "Bloom with Better Combat, Combat Roll (the pack's one dodge roll, on Z: its roll animates through Player Animator, which Better Combat brings too) and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
       "modrinth": [
         "better-combat",
-        "wGKYL7st",
+        "combat-roll",
         "playeranimator",
         "cloth-config",
         "entity-model-features",
@@ -691,19 +691,19 @@
     },
     "_keys": "Key bindings, each set once per change of it (by name, as options.txt has them; a player's own change afterwards stays): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets'). Combat Roll is the one dodge, on Z (FreshOrangeSlices); Bosses'Rise's and Monster Expansion's rolls are switched off (config_files) and their keys unbound, so the Controls list has no live second dodge.",
     "settings": {
-      "_comment": "Settings in other mods' client config files, each set once per change of it, the rest of the file left as the player has it (Bloom's PackDefaults: a .json key is a / path, a .toml key has its [Section] in front). A file that isn't there yet is started with these lines and the mod fills in the rest. FreshOrangeSlices' playtest: a simple craft screen (no Crafting Tweaks buttons, which keep their keys; no IPN auto-crafting checkbox; no IPN profiles), and tools that break like in normal Minecraft (IPN's auto-refill off, with all its warnings). Bosses'Rise's roll indicator by the hotbar is hidden (its roll is off; Combat Roll has its own).",
+      "_comment": "Settings in other mods' client config files, each set once per change of it, the rest of the file left as the player has it (Bloom's PackDefaults: a .json key is a / path, IPN keeping each option as {\"value\": ...}; a .toml key has its [Section] in front). A file that isn't there yet is started with these lines and the mod fills in the rest. FreshOrangeSlices' playtest: a simple craft screen (no Crafting Tweaks buttons, which keep their keys; no IPN auto-crafting checkbox; no IPN profiles), and tools that break like in normal Minecraft (IPN's auto-refill off, with all its warnings). Bosses'Rise's roll indicator by the hotbar is hidden (its roll is off; Combat Roll has its own).",
       "inventoryprofilesnext/inventoryprofiles.json": {
-        "ModSettings/enable_auto_refill": false,
-        "ModSettings/enable_profiles": false,
-        "GuiSettings/show_continuous_crafting_checkbox": false,
-        "GuiSettings/enable_profiles_ui": false,
-        "GuiSettings/enable_profiles_announcement": false,
-        "AutoRefillSettings/visual_durability_notification": false,
-        "AutoRefillSettings/audio_durability_notification": false,
-        "AutoRefillSettings/visual_replace_failed_notification": false,
-        "AutoRefillSettings/audio_replace_failed_notification": false,
-        "AutoRefillSettings/visual_replace_success_notification": false,
-        "AutoRefillSettings/audio_replace_success_notification": false
+        "ModSettings/enable_auto_refill/value": false,
+        "ModSettings/enable_profiles/value": false,
+        "GuiSettings/show_continuous_crafting_checkbox/value": false,
+        "GuiSettings/enable_profiles_ui/value": false,
+        "GuiSettings/enable_profiles_announcement/value": false,
+        "AutoRefillSettings/visual_durability_notification/value": false,
+        "AutoRefillSettings/audio_durability_notification/value": false,
+        "AutoRefillSettings/visual_replace_failed_notification/value": false,
+        "AutoRefillSettings/audio_replace_failed_notification/value": false,
+        "AutoRefillSettings/visual_replace_success_notification/value": false,
+        "AutoRefillSettings/audio_replace_success_notification/value": false
       },
       "craftingtweaks-common.toml": {
         "[client]mode": "HOTKEYS"

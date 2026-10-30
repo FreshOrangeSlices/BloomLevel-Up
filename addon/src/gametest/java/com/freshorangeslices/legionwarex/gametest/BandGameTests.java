@@ -24,6 +24,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.PatrollingMonster;
 import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.gametest.GameTestHolder;
@@ -216,14 +217,20 @@ public final class BandGameTests {
 		room(helper, 0, 6);
 		helper.setBlock(new BlockPos(3, 1, 3), Blocks.WATER);
 		helper.setBlock(new BlockPos(4, 1, 2), Blocks.STONE);
-		// Room just above the floor; none inside it, in water, or on a block in mid-air's way (a lone stone, then air under 3 up).
-		helper.assertTrue(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 1, 2)), EntityType.PILLAGER), "On the floor");
-		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 0, 2)), EntityType.PILLAGER), "Not inside the floor");
-		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(3, 1, 3)), EntityType.PILLAGER), "Not in water");
-		helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 3, 2)), EntityType.PILLAGER), "Not in mid-air");
-		helper.assertTrue(Bands.canStand(level, helper.absolutePos(new BlockPos(4, 2, 2)), EntityType.PILLAGER), "On a block");
-		helper.assertTrue(BandKind.byId("war") == BandKind.WAR && BandKind.byId("pirate") == BandKind.PIRATE && BandKind.byId("navy") == null,
-				"Bands by name, as the command takes them");
-		helper.succeed();
+		// A moment later: block light catches up with the new blocks over a tick or two (the test sits wherever the world
+		// put it, sometimes beside lava or glow lichen, and canStand reads block light).
+		helper.runAfterDelay(20, () -> {
+			// Room just above the floor; none inside it, in water, or on a block in mid-air's way (a lone stone, then air under 3 up).
+			BlockPos floor = helper.absolutePos(new BlockPos(2, 1, 2));
+			helper.assertTrue(Bands.canStand(level, floor, EntityType.PILLAGER), "On the floor: " + level.getBlockState(floor) + " over "
+					+ level.getBlockState(floor.below()) + ", block light " + level.getBrightness(LightLayer.BLOCK, floor));
+			helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 0, 2)), EntityType.PILLAGER), "Not inside the floor");
+			helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(3, 1, 3)), EntityType.PILLAGER), "Not in water");
+			helper.assertFalse(Bands.canStand(level, helper.absolutePos(new BlockPos(2, 3, 2)), EntityType.PILLAGER), "Not in mid-air");
+			helper.assertTrue(Bands.canStand(level, helper.absolutePos(new BlockPos(4, 2, 2)), EntityType.PILLAGER), "On a block");
+			helper.assertTrue(BandKind.byId("war") == BandKind.WAR && BandKind.byId("pirate") == BandKind.PIRATE && BandKind.byId("navy") == null,
+					"Bands by name, as the command takes them");
+			helper.succeed();
+		});
 	}
 }

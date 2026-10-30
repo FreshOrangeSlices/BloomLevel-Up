@@ -1,0 +1,974 @@
+# Advancements (boss mods)
+  aquamirae:adventure/encounter_the_shipbreaker: [The Shipbreaker] Encounter the most fearsome inhabitant of the Ice Maze | {'encounter_the_shipbreaker': 'aquamirae:shipbreaker'} | ['aquamirae:shipbreaker']
+  aquamirae:adventure/find_ice_maze: [Ice Maze] Enter the Ice Maze that covers the Deep Frozen Ocean biome | {'deep_frozen_ocean': 'minecraft:location', 'deep_cold_ocean': 'minecraft:location'} | ['minecraft:deep_cold_ocean', 'minecraft:deep_frozen_ocean', 'minecraft:entity_properties', 'minecraft:location']
+  aquamirae:adventure/obtain_abyssal_upgrade_smithing_template: [Abyssal Upgrade] Obtain an Abyssal Upgrade Smithing Template | {'obtain_abyssal_upgrade_smithing_template': 'minecraft:inventory_changed'} | ['aquamirae:abyssal_upgrade_smithing_template', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_all_abyssal_armor: [One with the Abyss] Get a full suit of Abyssal Armor | {'obtain_all_abyssal_armor': 'minecraft:inventory_changed'} | ['aquamirae:abyssal_boots', 'aquamirae:abyssal_brigandine', 'aquamirae:abyssal_heaume', 'aquamirae:abyssal_leggings', 'aquamirae:abyssal_tiara', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_all_abyssal_weapons: [Abyssal Arsenal] Obtain all Abyssal Weapons | {'aquamirae:shatterblade': 'minecraft:inventory_changed', 'aquamirae:shatterspike': 'minecraft:inventory_changed', 'aquamirae:maze_rose': 'minecraft:inventory_changed'} | ['aquamirae:maze_rose', 'aquamirae:shatterblade', 'aquamirae:shatterspike', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_all_salvager_armor: [Dressed for the Deep] Get a full suit of Salvager Armor | {'obtain_all_salvager_armor': 'minecraft:inventory_changed'} | ['aquamirae:salvager_boots', 'aquamirae:salvager_helmet', 'aquamirae:salvager_suit', 'aquamirae:salvager_waders', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_all_terrible_armor: [Terribly Equipped] Get a full suit of Terrible Armor | {'obtain_all_terrible_armor': 'minecraft:inventory_changed'} | ['aquamirae:terrible_boots', 'aquamirae:terrible_chestplate', 'aquamirae:terrible_helmet', 'aquamirae:terrible_leggings', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_all_terrible_weapons: [Terrible Arsenal] Obtain all Terrible Weapons | {'aquamirae:remnant_saber': 'minecraft:inventory_changed', 'aquamirae:terrible_cleaver': 'minecraft:inventory_changed', 'aquamirae:terrible_blade': 'minecraft:inventory_changed', 'aquamirae:terrible_fang': 'minecraft:inventory_changed', 'aquamirae:terrible_chakram': 'minecraft:inventory_changed'} | ['aquamirae:remnant_saber', 'aquamirae:terrible_blade', 'aquamirae:terrible_chakram', 'aquamirae:terrible_cleaver', 'aquamirae:terrible_fang', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_frozen_key: [The Dead Sea] Claim the key from the restless Ghost of Captain Cornelia | {'obtain_frozen_key': 'minecraft:inventory_changed'} | ['aquamirae:frozen_key', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_pirate_pouch: [Left Behind] Find an abandoned Pirate Pouch somewhere in the Ice Maze | {'obtain_pirate_pouch': 'minecraft:inventory_changed'} | ['aquamirae:pirate_pouch', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_rune_of_the_storm: [Relic of the Deep] Find an ancient rune buried beneath the frozen depths of the Ice Maze | {'obtain_frozen_key': 'minecraft:inventory_changed'} | ['aquamirae:rune_of_the_storm', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_shell_horn: [Curious Find] Discover a Shell Horn while exploring frozen pirate ships | {'obtain_shell_horn': 'minecraft:inventory_changed'} | ['aquamirae:shell_horn', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_ship_graveyard_echo: [Trace of the Leviathan] Collect the eerie trace left behind by the Shipbreaker | {'obtain_ship_graveyard_echo': 'minecraft:inventory_changed'} | ['aquamirae:ship_graveyard_echo', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_terrible_upgrade_smithing_template: [Terrible Upgrade] Obtain a Terrible Upgrade Smithing Template | {'obtain_terrible_upgrade_smithing_template': 'minecraft:inventory_changed'} | ['aquamirae:terrible_upgrade_smithing_template', 'minecraft:inventory_changed']
+  aquamirae:adventure/obtain_tidepiercer: [Cornelia's Legacy] Loot the Tidepiercer from the fallen Ghost of Captain Cornelia | {'obtain_frozen_key': 'minecraft:inventory_changed'} | ['aquamirae:tidepiercer', 'minecraft:inventory_changed']
+  aquamirae:adventure/root: [Aquamirae] Explore the ship graveyard and its terrifying creatures | {'crafting_table': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed']
+  aquamirae:adventure/tame_shellback: [Beast of Burden] Raise a Scuttler into a mighty Shellback and tame it as your mount | {'tame_shellback': 'minecraft:tame_animal'} | ['aquamirae:shellback', 'minecraft:tame_animal']
+  block_factorys_bosses:die_boss: [Bosses' Rise] Die fighting a Boss | {'die_to_boss': 'minecraft:entity_killed_player'} | ['minecraft:entity_killed_player', 'minecraft:entity_properties']
+  block_factorys_bosses:kill_all_bosses: [Unbound] Defeat all Bosses | {'kill_dragon': 'minecraft:player_killed_entity', 'kill_knight': 'minecraft:player_killed_entity', 'kill_kraken': 'minecraft:player_killed_entity', 'kill_worm': 'minecraft:player_killed_entity', 'kill_yeti': 'minecraft:player_killed_entity'} | ['block_factorys_bosses:infernal_dragon', 'block_factorys_bosses:kraken', 'block_factorys_bosses:sandworm', 'block_factorys_bosses:underworld_knight', 'block_factorys_bosses:yeti', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  block_factorys_bosses:kill_boss_under_minute: [Overclocker] Defeat a Boss under a minute | {'kill_boss_under_minute_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  block_factorys_bosses:kill_dragon: [Dragon Slayer] Defeat Ashlord, the Infernal Dragon | {'kill': 'minecraft:player_killed_entity'} | ['block_factorys_bosses:infernal_dragon', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  block_factorys_bosses:kill_kraken: [Terror of the Depths] Defeat Nerakyss, the Kraken | {'kill': 'minecraft:player_killed_entity'} | ['block_factorys_bosses:kraken', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  block_factorys_bosses:kill_sandworm: [The Beast Below] Defeat Sirok, the Sandworm | {'kill': 'minecraft:player_killed_entity'} | ['block_factorys_bosses:sandworm', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  block_factorys_bosses:kill_underworld_knight: [Back Into Hell!] Defeat Helvar, the Underworld Knight | {'kill': 'minecraft:player_killed_entity'} | ['block_factorys_bosses:underworld_knight', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  block_factorys_bosses:kill_yeti: [Lost in the Snow] Defeat Skor, the Yeti | {'kill': 'minecraft:player_killed_entity'} | ['block_factorys_bosses:yeti', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  block_factorys_bosses:no_hit_dragon: [Dragon Hunter] Kill the Infernal Dragon without getting hit | {'no_hit_dragon_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  block_factorys_bosses:no_hit_kraken: [Wraith of the Tide] Kill Nerakyss, the Kraken, without getting hit | {'no_hit_kraken_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  block_factorys_bosses:no_hit_sandworm: [Desert Power] Kill Sirok, the Sandworm, without getting hit | {'no_hit_sandworm_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  block_factorys_bosses:no_hit_underworld_knight: [Beyond Death] Kill the Underworld Knight without getting hit | {'no_hit_underworld_knight_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  block_factorys_bosses:no_hit_yeti: [King of the Hill] Kill Skor without getting hit | {'no_hit_yeti_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  block_factorys_bosses:recipes/building_blocks/coin_pile: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:coin_pile', 'forge:nuggets/gold', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/lighting/candles_extra: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/candles_extra', 'forge:ingots/gold', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/lighting/ship_lantern: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/ship_lantern', 'minecraft:blaze_powder', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/lighting/small_candles: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/small_candles', 'forge:ingots/gold', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/lighting/underworld_candles_extra: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/underworld_candles_extra', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:soul_fire_base_blocks']
+  block_factorys_bosses:recipes/building_blocks/lighting/underworld_small_candles: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/underworld_small_candles', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:soul_fire_base_blocks']
+  block_factorys_bosses:recipes/building_blocks/lighting/underworld_wall_torch: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/underworld_wall_torch', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:soul_fire_base_blocks']
+  block_factorys_bosses:recipes/building_blocks/lighting/wall_torch: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:lighting/wall_torch', 'forge:nuggets/iron', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/net: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:net', 'forge:string', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/plank: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:plank/plank', 'minecraft:inventory_changed', 'minecraft:planks', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/plank_block: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:plank', 'block_factorys_bosses:plank/plank_block', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/oak_planks_broken: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks', 'block_factorys_bosses:plank/sawmill/oak_planks_broken', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/oak_planks_cracked: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks', 'block_factorys_bosses:plank/sawmill/oak_planks_cracked', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/oak_planks_straight: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks', 'block_factorys_bosses:plank/sawmill/oak_planks_straight', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/oak_planks_variation: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks', 'block_factorys_bosses:plank/sawmill/oak_planks_variation', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/wet_oak_planks_broken: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_wet', 'block_factorys_bosses:plank/sawmill/wet_oak_planks_broken', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/wet_oak_planks_cracked: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_wet', 'block_factorys_bosses:plank/sawmill/wet_oak_planks_cracked', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/wet_oak_planks_straight: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_wet', 'block_factorys_bosses:plank/sawmill/wet_oak_planks_straight', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/sawmill/wet_oak_planks_variation: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_wet', 'block_factorys_bosses:plank/sawmill/wet_oak_planks_variation', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/wet_plank_block: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks', 'block_factorys_bosses:plank/wet_plank_block', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/wet_plank_block_broken: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_broken', 'block_factorys_bosses:plank/wet_plank_block_broken', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/wet_plank_block_cracked: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_cracked', 'block_factorys_bosses:plank/wet_plank_block_cracked', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/wet_plank_block_straight: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_straight', 'block_factorys_bosses:plank/wet_plank_block_straight', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/plank/wet_plank_block_variation: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_oak_planks_variation', 'block_factorys_bosses:plank/wet_plank_block_variation', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/prison_door: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:prison_door', 'minecraft:inventory_changed', 'minecraft:iron_bars', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/rope_roll: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:rope_roll', 'forge:string', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/rusty_prison_door: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:rusty_prison_door', 'minecraft:inventory_changed', 'minecraft:iron_bars', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/ship_rail: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:ship_rail', 'minecraft:inventory_changed', 'minecraft:planks', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/tall_candles: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:tall_candles', 'block_factorys_bosses:tall_candles_cross', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/building_blocks/underworld_tall_candles: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:under_world_tall_candle_cross', 'block_factorys_bosses:underworld_tall_candles', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/combat/cannonball: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:cannonball', 'forge:ingots/iron', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/combat/dragon_bones_boots: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:dragon_bone', 'block_factorys_bosses:dragon_bones_boots', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/combat/dragon_bones_chestplate: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:dragon_bone', 'block_factorys_bosses:dragon_bones_chestplate', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/combat/dragon_bones_leggings: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:dragon_bone', 'block_factorys_bosses:dragon_bones_leggings', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/combat/kraken_trident: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:kraken_tooth', 'block_factorys_bosses:kraken_trident', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/combat/undying_tentacle: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:kraken_tooth', 'block_factorys_bosses:undying_tentacle', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/misc/big_chain: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:big_chain', 'forge:ingots/iron', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/misc/corpse_to_bones: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:corpse', 'block_factorys_bosses:corpse_to_bones', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  block_factorys_bosses:recipes/misc/remains_to_bones: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['block_factorys_bosses:bone_remains', 'block_factorys_bosses:remains_to_bones', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  cataclysm:find_acropolis: [Why in the Sky?] Find the Acropolis | {'acropolis': 'minecraft:location'} | ['cataclysm:acropolis', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_ancient_factory: [Out-of-Place] Find the Ancient Factory | {'factory': 'minecraft:location'} | ['cataclysm:ancient_factory', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_burning_arena: [A Massive Arena] Find the Burning Arena | {'arena': 'minecraft:location'} | ['cataclysm:burning_arena', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_cursed_pyramid: [Desert Pyramid Revamped] Find the Cursed Pyramid | {'pyramid': 'minecraft:location'} | ['cataclysm:cursed_pyramid', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_frosted_prison: [Jail of Cold] Find the Frosted Prison | {'prison': 'minecraft:location'} | ['cataclysm:frosted_prison', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_ruined_citadel: [Another Stronghold?!] Find the Ruined Citadel | {'citadel': 'minecraft:location'} | ['cataclysm:ruined_citadel', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_soul_black_smith: [Where the Monstrous be Forged] Find the Soul Forge | {'blacksmith': 'minecraft:location'} | ['cataclysm:soul_black_smith', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:find_sunken_city: [Sunken in the Sea] Find the Sunken City | {'factory': 'minecraft:location'} | ['cataclysm:sunken_city', 'minecraft:entity_properties', 'minecraft:location']
+  cataclysm:kill_all_bosses: [The Cataclysmfarer] You have reached the summit of Cataclysm! | {'cataclysm:ignis': 'minecraft:player_killed_entity', 'cataclysm:the_leviathan': 'minecraft:player_killed_entity', 'cataclysm:the_harbinger': 'minecraft:player_killed_entity', 'cataclysm:ender_guardian': 'minecraft:player_killed_entity', 'cataclysm:maledictus': 'minecraft:player_killed_entity', 'cataclysm:ancient_remnant': 'minecraft:player_killed_entity', 'cataclysm:netherite_monstrosity': 'minecraft:player_killed_entity', 'cataclysm:scylla': 'minecraft:player_killed_entity'} | ['cataclysm:ancient_remnant', 'cataclysm:ender_guardian', 'cataclysm:ignis', 'cataclysm:maledictus', 'cataclysm:netherite_monstrosity', 'cataclysm:scylla', 'cataclysm:the_harbinger', 'cataclysm:the_leviathan', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  cataclysm:kill_clawdian: [Not so Shrimple Now] Kill an Clawdian | {'endergolem': 'minecraft:player_killed_entity'} | ['cataclysm:clawdian', 'minecraft:player_killed_entity']
+  cataclysm:kill_ender_golem: [Palette Swap] Kill an Ender Golem | {'endergolem': 'minecraft:player_killed_entity'} | ['cataclysm:ender_golem', 'minecraft:player_killed_entity']
+  cataclysm:kill_ender_guardian: [Wasn't that a Shulker?] Defeat the Ender Guardian | {'enderguardian': 'minecraft:player_killed_entity'} | ['cataclysm:ender_guardian', 'minecraft:player_killed_entity']
+  cataclysm:kill_harbinger: [The Thing of Ancient Civilization] Wake and Defeat the Harbinger | {'theharbinger': 'minecraft:player_killed_entity'} | ['cataclysm:the_harbinger', 'minecraft:player_killed_entity']
+  cataclysm:kill_ignis: [The Extinguished Fire] Summon and Defeat the Ignis | {'ignis': 'minecraft:player_killed_entity'} | ['cataclysm:ignis', 'minecraft:player_killed_entity']
+  cataclysm:kill_leviathan: [A Multidimensional Predator] Summon and Defeat the Leviathan | {'ignis': 'minecraft:player_killed_entity'} | ['cataclysm:the_leviathan', 'minecraft:player_killed_entity']
+  cataclysm:kill_maledictus: [Crusade Against Curse] Summon and Defeat Maledictus | {'ignis': 'minecraft:player_killed_entity'} | ['cataclysm:maledictus', 'minecraft:player_killed_entity']
+  cataclysm:kill_monstrosity: [The Broken Nether's Warmachine] Kill the Netherite Monstrosity | {'netheritemonstrosity': 'minecraft:player_killed_entity'} | ['cataclysm:netherite_monstrosity', 'minecraft:player_killed_entity']
+  cataclysm:kill_remnant: [Death Finds a Way] Excavate from the suspicious sand within the cursed pyramid to wake up and knock down the Ancient Remnant | {'ignis': 'minecraft:player_killed_entity'} | ['cataclysm:ancient_remnant', 'minecraft:player_killed_entity']
+  cataclysm:kill_revenant: [Imperfect thing] Kill an Ignited Revenant | {'endergolem': 'minecraft:player_killed_entity'} | ['cataclysm:ignited_revenant', 'minecraft:player_killed_entity']
+  cataclysm:kill_scylla: [The Calm after the Storm] Defeat the Storm Empress, Scylla | {'ignis': 'minecraft:player_killed_entity'} | ['cataclysm:scylla', 'minecraft:player_killed_entity']
+  cataclysm:root: [Cataclysm] Cataclysm! | {'custom_test_name': 'minecraft:tick'} | ['minecraft:tick']
+  graveyard:graveyard/all_overrun_villages: [Five Roads to Ash] Enter all five kinds of overrun village. | {'plains': 'minecraft:location', 'savanna': 'minecraft:location', 'taiga': 'minecraft:location', 'snowy': 'minecraft:location', 'desert': 'minecraft:location'} | ['graveyard:overrun_desert_village', 'graveyard:overrun_plains_village', 'graveyard:overrun_savanna_village', 'graveyard:overrun_snowy_village', 'graveyard:overrun_taiga_village', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/black_bone_staff: [Staff of Nortoq'gul] Attain the Staff of Nortoq'gul. | {'black_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:black_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/bone_collector: [Bone Collector] Own ten different skeleton decorations. | {'collect': 'graveyard:bone_collector'} | ['graveyard:bone_collector']
+  graveyard:graveyard/chronicle_act_one: [The World Remembers] Find every page of the first act of the chronicle. | {'act': 'graveyard:chronicle_act_one'} | ['graveyard:chronicle_act_one']
+  graveyard:graveyard/chronicle_act_two: [Dear Diary] Find every page of the second act of the chronicle. | {'act': 'graveyard:chronicle_act_two'} | ['graveyard:chronicle_act_two']
+  graveyard:graveyard/corruption: [Source of Evil] Obtain corruption from graves or graveyard mobs. | {'corruption': 'minecraft:inventory_changed'} | ['graveyard:corruption', 'minecraft:inventory_changed']
+  graveyard:graveyard/craft_charred_wood: [Charcoal Carpenter] Get charred or scorched planks or logs. | {'charred_planks': 'minecraft:inventory_changed', 'scorched_planks': 'minecraft:inventory_changed', 'charred_log': 'minecraft:inventory_changed', 'scorched_log': 'minecraft:inventory_changed'} | ['graveyard:charred_log', 'graveyard:charred_planks', 'graveyard:scorched_log', 'graveyard:scorched_planks', 'minecraft:inventory_changed']
+  graveyard:graveyard/craft_coffin: [Well prepared] Obtain a coffin. | {'coffin': 'minecraft:inventory_changed'} | ['graveyard:acacia_coffin', 'graveyard:bamboo_coffin', 'graveyard:birch_coffin', 'graveyard:cherry_coffin', 'graveyard:crimson_coffin', 'graveyard:dark_oak_coffin', 'graveyard:jungle_coffin', 'graveyard:mangrove_coffin', 'graveyard:oak_coffin', 'graveyard:sarcophagus', 'graveyard:spruce_coffin', 'graveyard:warped_coffin']
+  graveyard:graveyard/crypt: [Into Darkness] Find an underground crypt. | {'crypt': 'minecraft:location'} | ['graveyard:crypt', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/cyan_bone_staff: [Staff of Mynakta'gul] Attain the Staff of Mynakta'gul. | {'cyan_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:cyan_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/dark_iron: [Iron, but dark] Obtain a dark iron ingot. | {'dark_iron': 'minecraft:inventory_changed'} | ['graveyard:dark_iron_ingot', 'minecraft:inventory_changed']
+  graveyard:graveyard/dead_tree: [Hanging Tree] Discover the truth about the dead tree. | {'dead_tree': 'minecraft:location'} | ['graveyard:dead_tree', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/desert_graveyard: [Dust, Sand and Bones] Find a desert graveyard. | {'small_desert_graveyard': 'minecraft:location'} | ['graveyard:small_desert_graveyard', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/equip_ghouling_coffin: [The dead shall serve] Equip a Ghouling with a coffin or sarcophagus. | {'equip_coffin': 'graveyard:equip_coffin'} | ['graveyard:equip_coffin']
+  graveyard:graveyard/extinguish_smoldering: [Still Warm] Put out a smoldering block. | {'extinguish': 'graveyard:extinguish_smoldering'} | ['graveyard:extinguish_smoldering']
+  graveyard:graveyard/find_skeleton: [Pseudo Archaeologist] Obtain a decorative skeleton. | {'skeleton': 'minecraft:inventory_changed'} | ['graveyard:creeper_skeleton', 'graveyard:leaning_skeleton', 'graveyard:leaning_wither_skeleton', 'graveyard:lying_skeleton', 'graveyard:lying_wither_skeleton', 'graveyard:skeleton_hand', 'graveyard:skull_pile', 'graveyard:skull_with_rib_cage', 'graveyard:wither_skeleton_hand', 'graveyard:wither_skull_pile', 'graveyard:wither_skull_with_rib_cage', 'minecraft:inventory_changed']
+  graveyard:graveyard/first_chronicle_page: [Loose Leaf] Find your first chronicle page. | {'page': 'graveyard:first_chronicle_page'} | ['graveyard:first_chronicle_page']
+  graveyard:graveyard/ghoul_emerges: [It Came from Below] Stand near as a ghoul claws its way out of the ground. | {'emerge': 'graveyard:ghoul_emerges'} | ['graveyard:ghoul_emerges']
+  graveyard:graveyard/giant_mushroom: [Corrupting the Paradise] Find a mutated mushroom on the mushroom islands. | {'giant_mushroom': 'minecraft:location'} | ['graveyard:giant_mushroom', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/haunted_house: [Invitation to the Tea Party] Accept the invitation to the house in the woods. | {'haunted_house': 'minecraft:location'} | ['graveyard:haunted_house', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/ignite_smoldering: [Playing with Embers] Light a charred or scorched block. | {'ignite': 'graveyard:ignite_smoldering'} | ['graveyard:ignite_smoldering']
+  graveyard:graveyard/kill_acolyte_bone_dagger: [Turning the tables] Kill an acolyte with a bone dagger. | {'killed_by_bone_dagger': 'graveyard:killed_by_bone_dagger'} | ['graveyard:killed_by_bone_dagger']
+  graveyard:graveyard/kill_graveyard_mob: [Stay dead] Kill a graveyard mob. | {'ghoul': 'minecraft:player_killed_entity', 'skeleton_creeper': 'minecraft:player_killed_entity', 'revenant': 'minecraft:player_killed_entity', 'reaper': 'minecraft:player_killed_entity'} | ['graveyard:ghoul', 'graveyard:reaper', 'graveyard:revenant', 'graveyard:skeleton_creeper', 'minecraft:entity_properties', 'minecraft:player_killed_entity']
+  graveyard:graveyard/kill_horde: [Walking Dead] Decimate a graveyard horde, spawning at night. | {'kill_horde': 'graveyard:kill_horde'} | ['graveyard:kill_horde']
+  graveyard:graveyard/kill_while_blinded: [Peekaboo, I (still) see you!] Kill a nightmare while under the blindness effect. | {'kill_while_blinded': 'graveyard:kill_while_blinded'} | ['graveyard:kill_while_blinded']
+  graveyard:graveyard/kill_wraith: [Taking from the Dead] Summon a wraith by desecrating its coffin. | {'wraith': 'graveyard:spawn_wraith'} | ['graveyard:spawn_wraith']
+  graveyard:graveyard/large_graveyard: [Disturbing the Dead II] Enter a large graveyard. | {'large_graveyard': 'minecraft:location'} | ['graveyard:large_graveyard', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/lich_prison: [Cursed Island] Find the altar of the Corrupted Champion. | {'lich_prison': 'minecraft:location'} | ['graveyard:lich_prison', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/lower_bone_staff: [Broken Parts I] Collect the lower piece of the bone staff. | {'lower_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:lower_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/magpie_loot: [Thieving Magpie] Make a magpie drop the item it stole. | {'loot': 'graveyard:magpie_loot'} | ['graveyard:magpie_loot']
+  graveyard:graveyard/medium_graveyard: [Disturbing the Dead I] Enter a medium graveyard. | {'medium_graveyard': 'minecraft:location'} | ['graveyard:medium_graveyard', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/middle_bone_staff: [Broken Parts II] Collect the middle piece of the bone staff. | {'middle_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:middle_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/overrun_village: [Too Late] Enter an overrun village. | {'plains': 'minecraft:location', 'savanna': 'minecraft:location', 'taiga': 'minecraft:location', 'snowy': 'minecraft:location', 'desert': 'minecraft:location'} | ['graveyard:overrun_desert_village', 'graveyard:overrun_plains_village', 'graveyard:overrun_savanna_village', 'graveyard:overrun_snowy_village', 'graveyard:overrun_taiga_village', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/place_lore_book: [Left for the Next One] Lay a lore book page in the world. | {'place': 'graveyard:place_lore_book'} | ['graveyard:place_lore_book']
+  graveyard:graveyard/purple_bone_staff: [Staff of Xaphnok'gul] Attain the Staff of Xaphnok'gul. | {'purple_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:purple_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/raven_on_gravestone: [Nevermore] Stand near a raven perched on a gravestone. | {'raven': 'graveyard:raven_on_gravestone'} | ['graveyard:raven_on_gravestone']
+  graveyard:graveyard/red_bone_staff: [Staff of Azrata'gul] Attain the Staff of Azrata'gul. | {'red_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:red_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/redeem_ten_tormented_villagers: [Last Rites] Redeem ten tormented villagers. | {'1': 'minecraft:impossible', '2': 'minecraft:impossible', '3': 'minecraft:impossible', '4': 'minecraft:impossible', '5': 'minecraft:impossible', '6': 'minecraft:impossible', '7': 'minecraft:impossible', '8': 'minecraft:impossible', '9': 'minecraft:impossible', '10': 'minecraft:impossible'} | ['minecraft:impossible']
+  graveyard:graveyard/redeem_tormented_villager: [For Whom the Bell Tolls] Redeem a tormented villager with a bell. | {'redeem': 'graveyard:redeem_tormented_villager'} | ['graveyard:redeem_tormented_villager']
+  graveyard:graveyard/root: [Gravedigger] Find a small grave. | {'grave_01': 'minecraft:location', 'grave_02': 'minecraft:location', 'grave_03': 'minecraft:location', 'grave_04': 'minecraft:location'} | ['graveyard:small_desert_grave', 'graveyard:small_grave', 'graveyard:small_mountain_grave', 'graveyard:small_savanna_grave', 'minecraft:entity_properties', 'minecraft:location']
+  graveyard:graveyard/scare_crows: [A Murder of Crows] Startle a flock of at least six crows. | {'scare': 'graveyard:scare_crows'} | ['graveyard:scare_crows']
+  graveyard:graveyard/scarecrow: [Scarecrow] Watch crows flee from a scarecrow. | {'scarecrow': 'graveyard:scarecrow'} | ['graveyard:scarecrow']
+  graveyard:graveyard/summon_lich: [Wrath of the Champion] Summon the Corrupted Champion at an altar with a full vial of blood and all three bone staff pieces at night. | {'summoned': 'minecraft:summoned_entity'} | ['graveyard:lich', 'minecraft:entity_properties', 'minecraft:summoned_entity']
+  graveyard:graveyard/tormented_villager_dawn: [Gone by Morning] Watch a tormented villager fade away at dawn. | {'dawn': 'graveyard:tormented_villager_dawn'} | ['graveyard:tormented_villager_dawn']
+  graveyard:graveyard/upper_bone_staff: [Broken Parts III] Collect the upper piece of the bone staff. | {'upper_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:upper_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/vial_of_blood: [Blood "Donation"] Collect blood from villagers with a bone dagger. Keep an empty glass bottle or a vial on your hotbar. | {'vial_of_blood': 'minecraft:inventory_changed'} | ['graveyard:vial_of_blood', 'minecraft:inventory_changed']
+  graveyard:graveyard/white_bone_staff: [Staff of Zatraq'gul] Attain the Staff of Zatraq'gul. | {'white_bone_staff': 'minecraft:inventory_changed'} | ['graveyard:white_bone_staff', 'minecraft:inventory_changed']
+  graveyard:graveyard/wraith_dim_light: [Who turned the lights off?] Witness a wraith extinguish a light source. | {'dim_light': 'graveyard:dim_light'} | ['graveyard:dim_light']
+  graveyard:recipes/black_bone_staff: [None] None | {'has_staff': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['graveyard:black_bone_staff', 'graveyard:cyan_bone_staff', 'graveyard:purple_bone_staff', 'graveyard:red_bone_staff', 'graveyard:white_bone_staff', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  graveyard:recipes/cyan_bone_staff: [None] None | {'has_staff': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['graveyard:black_bone_staff', 'graveyard:cyan_bone_staff', 'graveyard:purple_bone_staff', 'graveyard:red_bone_staff', 'graveyard:white_bone_staff', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  graveyard:recipes/purple_bone_staff: [None] None | {'has_staff': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['graveyard:black_bone_staff', 'graveyard:cyan_bone_staff', 'graveyard:purple_bone_staff', 'graveyard:red_bone_staff', 'graveyard:white_bone_staff', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  graveyard:recipes/red_bone_staff: [None] None | {'has_staff': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['graveyard:black_bone_staff', 'graveyard:cyan_bone_staff', 'graveyard:purple_bone_staff', 'graveyard:red_bone_staff', 'graveyard:white_bone_staff', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  graveyard:recipes/white_bone_staff: [None] None | {'has_staff': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['graveyard:black_bone_staff', 'graveyard:cyan_bone_staff', 'graveyard:purple_bone_staff', 'graveyard:red_bone_staff', 'graveyard:white_bone_staff', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  illagerinvasion:recipes/decorations/imbuing_table: [None] None | {'has_primal_essence': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['illagerinvasion:imbuing_table', 'illagerinvasion:primal_essence', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  illagerinvasion:recipes/misc/hallowed_gem: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'has_unusual_dust_and_illusionary_dust': 'minecraft:inventory_changed'} | ['illagerinvasion:hallowed_gem', 'illagerinvasion:illusionary_dust', 'illagerinvasion:unusual_dust', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  illagerinvasion:recipes/misc/platinum_sheet: [None] None | {'has_platinum_chunk': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['illagerinvasion:platinum_chunk', 'illagerinvasion:platinum_sheet', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  illagerinvasion:recipes/tools/horn_of_sight: [None] None | {'has_hallowed_gem': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['illagerinvasion:hallowed_gem', 'illagerinvasion:horn_of_sight', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  irons_spellbooks:irons_spellbooks/enter_catacombs: [Dungeon Delving] Enter the Catacombs | {'in_catacombs': 'minecraft:location'} | ['irons_spellbooks:catacombs', 'minecraft:entity_properties', 'minecraft:location']
+  irons_spellbooks:irons_spellbooks/ink_legendary: [Premium!] Acquire legendary ink. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:legendary_ink', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/ink_root: [Tools of the Trade] Acquire any type of ink. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:common_ink', 'irons_spellbooks:epic_ink', 'irons_spellbooks:legendary_ink', 'irons_spellbooks:rare_ink', 'irons_spellbooks:uncommon_ink', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/make_arcane_anvil: [It's Purple!] Craft an Arcane Anvil | {'arcane_anvil': 'minecraft:inventory_changed'} | ['irons_spellbooks:arcane_anvil', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/make_inscription_table: [Quaint Scribe] Craft an Inscription Table | {'inscription_table': 'minecraft:inventory_changed'} | ['irons_spellbooks:inscription_table', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/make_scroll_forge: [New Age Librarian] Craft a Scroll Forge | {'scroll_forge': 'minecraft:inventory_changed'} | ['irons_spellbooks:scroll_forge', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/make_wayward_compass: [And so a Quest Begins!] Craft a wayward compass, and find out where it leads... | {'inscription_table': 'minecraft:inventory_changed'} | ['irons_spellbooks:wayward_compass', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/root: [Iron's Spells 'n Spellbooks] There's more than meets the eye to this world... | {'inscription_table': 'minecraft:inventory_changed'} | ['irons_spellbooks:inscription_table', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_blaze: [Defunct Machinery] Obtain a Blaze Instruction Manual. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:blaze_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_blood: [A piece of Yourself] Craft the Vampiric Spellbook | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:cursed_doll_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_dead_king: [Necronomicon] Acquire the Dead King's unique tome of tricks. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:necronomicon_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_diamond: [Master Enchanter] Craft an Enchanted Spell Book. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:diamond_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_dragon: [Elder Power] Craft the Dragonskin Spell Book. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:dragonskin_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_druidic: [One with Nature] Obtain a Druidic Tome. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:druidic_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_equip: [Magery] Equip a spell book. | {'requirement': 'curios:equip_curio'} | ['curios:equip_curio', 'curios:slot']
+  irons_spellbooks:irons_spellbooks/spell_book_evoker: [Grimoire of Evokation] Obtain the unique spell book from the illagers. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:evoker_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_frostbranded: [Cold to the Touch] Craft the Frostbranded Book | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:ice_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_gold: [Getting the Hang of It] Craft an Apprentice's Spell Book. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:gold_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_iron: [Knowledge Unchained] Craft the Ironbound Tome. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:iron_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_netherite: [Ancient Knowledge] Restore the Ancient Codex. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:netherite_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_rotten: [How long's this been here?] Obtain a Rotten Spell Book. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:rotten_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/spell_book_villager: [Enlightenment] Obtain a Villager Bible. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:villager_spell_book', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/staff_artificer: [Quite the Walking Stick] Acquire an Artificer's Cane. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:artificer_cane', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/staff_blood_staff: [Staff of Blood] Acquire the Dead King's scepter. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:blood_staff', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/staff_ice: [Mournful Magic] Construct an Ice Staff. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:ice_staff', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/staff_lightning_rod: [Shocking Discovery] Transform a Lightning Rod into a Rod O' Lightning... And hopefully survive the process. | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:lightning_rod', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/staff_pyrium: [Ancient Beckonings] Forge a fiery staff from Pyrium | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:pyrium_staff', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/staff_root: [No Longer Short-Staffed] Acquire a Staff casting implement. Use to Cast! | {'requirement': 'minecraft:inventory_changed'} | ['irons_spellbooks:artificer_cane', 'irons_spellbooks:blood_staff', 'irons_spellbooks:graybeard_staff', 'irons_spellbooks:ice_staff', 'minecraft:inventory_changed']
+  irons_spellbooks:irons_spellbooks/steal_from_wizard: [A Fool's Folly] Anger a wizard by looting a nearby chest | {'anger_wizard': 'minecraft:impossible'} | ['minecraft:impossible']
+  irons_spellbooks:make_inscription_table: [Quaint Scribe] Craft an Inscription Table | {'inscription_table': 'minecraft:inventory_changed'} | ['irons_spellbooks:inscription_table', 'minecraft:inventory_changed']
+  legendary_monsters:defeat_ambusher: [An Imposter] Defeat the Ambusher | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:ambusher', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_annihilation_pursuer: [Slowing Down A Bit...] Defeat Annihilation Pursuer | {'annihilation_pursuer': 'minecraft:player_killed_entity'} | ['legendary_monsters:annihilation_pursuer', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_beheaded_knight: [Headless KnightMan] Defeat the Beheaded Knight | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:beheaded_knight', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_bomber: [Sandstone Bomb] Defeat Bomber | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:bomber', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_chorusling: [The Chorus Infection] Defeat the chorusling | {'chorusling': 'minecraft:player_killed_entity'} | ['legendary_monsters:chorusling', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_cloud_golem: [Against The Gods] Defeat the Cloud Golem | {'cloud_golem': 'minecraft:player_killed_entity'} | ['legendary_monsters:cloud_golem', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_dune_sentinel: [Ancient War Machine] Defeat Dune Sentinel | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:dune_sentinel', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_endersent: [The Tall Guy] Defeat the Chorusent | {'endersent': 'minecraft:player_killed_entity'} | ['legendary_monsters:endersent', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_flame_drifter: [Professional Drifter] Defeat The Flame Drifter | {'flame_drifter': 'minecraft:player_killed_entity'} | ['legendary_monsters:flame_drifter', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_flameborn_guard: [Flame Of The End] Defeat Flameborn Guard and Warrior | {'flameborn_guard': 'minecraft:player_killed_entity', 'flameborn_warrior': 'minecraft:player_killed_entity'} | ['legendary_monsters:flameborn_guard', 'legendary_monsters:flameborn_warrior', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_fractured: [No Body, Yet Still Alive] Defeat the Fractured | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:fractured', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_fractured_apostle: [Mage Class Detected] Defeat the Fractured Apostle | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:fractured_apostle', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_frostbitten_golem: [The Coldest Golem] Defeat the Frostbitten Golem | {'frostbitten_golem': 'minecraft:player_killed_entity'} | ['legendary_monsters:frostbitten_golem', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_haunted_duo: [The Power Of Friendship] Defeat the Haunted Duo | {'beheaded_knight': 'minecraft:player_killed_entity', 'resurrected_knight': 'minecraft:player_killed_entity'} | ['legendary_monsters:beheaded_knight', 'legendary_monsters:resurrected_knight', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_haunted_guard: [A Lost Guard] Defeat the Haunted Guard | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:haunted_guard', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_haunted_knight: [Living Armor] Defeat the Haunted Knight | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:haunted_knight', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_lava_eater: [Fiery Beast] Defeat the Lava Eater | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:lava_eater', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_overgrown_colossus: [The Mossy Beast] Defeat the Overgrown Colossus | {'colossus': 'minecraft:player_killed_entity'} | ['legendary_monsters:overgrown_colossus', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_posessed_paladin: [Finally Free] Defeat the Possessed Paladin | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:posessed_paladin', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_resurrected_knight: [My Head Is Back!] Defeat the Resurrected Knight | {'ambusher': 'minecraft:player_killed_entity'} | ['legendary_monsters:resurrected_knight', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_shulker_mimic: [Spooky Scary Shulker Box] Defeat the Shulker Mimic | {'shulker_mimic': 'minecraft:player_killed_entity'} | ['legendary_monsters:shulker_mimic', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_skeletosaurus: [The Ancient Skeleton] Defeat the Skeletosaurus | {'skeletosaurus': 'minecraft:player_killed_entity'} | ['legendary_monsters:skeletosaurus', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_spiky_bug: [A Disgusting Worm] Defeat the Spiky Worm | {'spiky_bug': 'minecraft:player_killed_entity'} | ['legendary_monsters:spiky_bug', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_the_ancient_guardian: [The One - Armed Monster] Defeat the Ancient Guardian | {'guardian': 'minecraft:player_killed_entity'} | ['legendary_monsters:ancient_guardian', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_the_obliterator: [Obliteration for Obliterator] Defeat The Obliterator | {'the_obliterator': 'minecraft:player_killed_entity'} | ['legendary_monsters:the_obliterator', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_wandering_eye: [Float f1] Defeat the Wandering Eye | {'wandering_eye': 'minecraft:player_killed_entity'} | ['legendary_monsters:wandering_eye', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_warped_fungussus: [It's Teleporting!] Defeat the Warped Fungussus | {'fungussus': 'minecraft:player_killed_entity'} | ['legendary_monsters:warped_fungussus', 'minecraft:player_killed_entity']
+  legendary_monsters:defeat_withered_abomination: [The Soul Eater] Defeat the Withered Abomination | {'abomination': 'minecraft:player_killed_entity'} | ['legendary_monsters:withered_abomination', 'minecraft:player_killed_entity']
+  legendary_monsters:end_root: [Legendary Monsters: End] New Challenges in the End! | {'custom_test_name': 'minecraft:tick'} | ['minecraft:tick']
+  legendary_monsters:legendary_monsters_root: [Legendary Monsters] New challenging mobs! | {'custom_test_name': 'minecraft:tick'} | ['minecraft:tick']
+  legendary_monsters:locate_abandoned_crypt: [The Echo Of Past Battle] Locate The Collapsed Kingdom | {'abandoned_crypt': 'minecraft:location'} | ['legendary_monsters:collapsed_kingdom', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_ancient_stronghold: [Dripstone Everywhere] locate the Ancient Stronghold | {'ancient_stronghold': 'minecraft:location'} | ['legendary_monsters:ancient_stronghold', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_ancient_tower_remains: [Far Away From Home] Locate the ancient tower remains | {'ancient_tower_remains': 'minecraft:location'} | ['legendary_monsters:ancient_tower_remains', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_cloudy_temple: [Made From Clouds...] Locate the Cloudy Temple | {'cloudy_temple': 'minecraft:location'} | ['legendary_monsters:cloudy_temple', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_frostbitten_temple: [A Freezing Place] Locate The Frostbitten Temple | {'frostbitten_temple': 'minecraft:location'} | ['legendary_monsters:frostbitten_temple', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_lava_eater: [A Voltanic Place] Find The Lava Eater's Nest | {'lava_eater': 'minecraft:location'} | ['legendary_monsters:lava_eater_spawn', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_mossy_temple: [Covered in Moss] locate the Mossy Temple | {'mossy_temple': 'minecraft:location'} | ['legendary_monsters:mossy_temple', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_ruined_pyramid: [Another Desert Temple!] Locate The Ruined Pyramid | {'ruined_pyramid': 'minecraft:location'} | ['legendary_monsters:ruined_pyramid', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_shulker_tower: [There Is No Gravity Here!] Locate the Shulker Tower | {'tower': 'minecraft:location'} | ['legendary_monsters:shulker_tower', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_skeletosaurus_nest: [Long Time Ago] locate the skeletosaurus nest | {'nest': 'minecraft:location'} | ['legendary_monsters:skeletosaurus_nest', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_soul_fortress_remains: [The Soul Fortress] locate the soul fortress remains | {'soul_fortress': 'minecraft:location'} | ['legendary_monsters:soul_fortress_remains', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:locate_space_station: [The Place Of The Beginning] Locate the Space Station | {'space_station': 'minecraft:location'} | ['legendary_monsters:space_station', 'minecraft:entity_properties', 'minecraft:location']
+  legendary_monsters:nether_root: [Legendary Monsters: Nether] New Challenges in the Nether! | {'custom_test_name': 'minecraft:tick'} | ['minecraft:tick']
+  legionary:broken: [Broken] Defeat the Unbreakable | {'requirement': 'minecraft:impossible'} | ['minecraft:impossible']
+  legionary:recipes/misc/forgotten_bone_crate_from_forgotten_bone: [None] None | {'has_forgotten_bone': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['legionary:forgotten_bone', 'legionary:forgotten_bone_crate_from_forgotten_bone', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  legionary:recipes/misc/forgotten_bone_from_forgotten_bone_crate: [None] None | {'has_forgotten_bone_crate': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['legionary:forgotten_bone_crate', 'legionary:forgotten_bone_from_forgotten_bone_crate', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  legionary:recipes/misc/golden_chain: [None] None | {'has_gold_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['legionary:golden_chain', 'minecraft:gold_ingot', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  legionary:recipes/misc/golden_cupric_lantern: [None] None | {'has_cupric_lantern': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['caverns_and_chasms:cupric_lantern', 'legionary:golden_cupric_lantern', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked']
+  legionary:recipes/misc/golden_lantern: [None] None | {'has_lantern': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['legionary:golden_lantern', 'minecraft:inventory_changed', 'minecraft:lantern', 'minecraft:recipe_unlocked']
+  legionary:recipes/misc/golden_soul_lantern: [None] None | {'has_soul_lantern': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['legionary:golden_soul_lantern', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:soul_lantern']
+  monsterexpansion:craft_duskrend: [advancements.monsterexpansion.craft_duskrend.title] advancements.monsterexpansion.craft_duskrend.description | {'crafted_duskrend': 'monsterexpansion:foundry_crafted'} | ['monsterexpansion:duskrend', 'monsterexpansion:foundry_crafted']
+  monsterexpansion:craft_horn_of_the_shattercry: [advancements.monsterexpansion.craft_horn_of_the_shattercry.title] advancements.monsterexpansion.craft_horn_of_the_shattercry.description | {'crafted_horn_of_the_shattercry': 'monsterexpansion:foundry_crafted'} | ['monsterexpansion:foundry_crafted', 'monsterexpansion:horn_of_the_shattercry']
+  monsterexpansion:craft_monster_armor: [advancements.monsterexpansion.craft_monster_armor.title] advancements.monsterexpansion.craft_monster_armor.description | {'crafted_skrythe_helmet': 'monsterexpansion:foundry_crafted', 'crafted_skrythe_chestplate': 'monsterexpansion:foundry_crafted', 'crafted_skrythe_leggings': 'monsterexpansion:foundry_crafted', 'crafted_skrythe_boots': 'monsterexpansion:foundry_crafted', 'crafted_rhyza_helmet': 'monsterexpansion:foundry_crafted', 'crafted_rhyza_chestplate': 'monsterexpansion:foundry_crafted', 'crafted_rhyza_leggings': 'monsterexpansion:foundry_crafted', 'crafted_rhyza_boots': 'monsterexpansion:foundry_crafted'} | ['monsterexpansion:foundry_crafted', 'monsterexpansion:rhyza_boots', 'monsterexpansion:rhyza_chestplate', 'monsterexpansion:rhyza_helmet', 'monsterexpansion:rhyza_leggings', 'monsterexpansion:skrythe_boots', 'monsterexpansion:skrythe_chestplate', 'monsterexpansion:skrythe_helmet', 'monsterexpansion:skrythe_leggings']
+  monsterexpansion:crafted_spire_shell_bulwark: [advancements.monsterexpansion.craft_spire_shell_bulwark.title] advancements.monsterexpansion.craft_spire_shell_bulwark.description | {'crafted_spire_shell_bulwark': 'monsterexpansion:foundry_crafted'} | ['monsterexpansion:foundry_crafted', 'monsterexpansion:spire_shell_bulwark']
+  monsterexpansion:hunt_large_monster: [advancements.monsterexpansion.hunt_large_monster.title] advancements.monsterexpansion.hunt_large_monster.description | {'killed_skrythe': 'minecraft:player_killed_entity', 'killed_rakoth': 'minecraft:player_killed_entity', 'killed_leivekilth': 'minecraft:player_killed_entity', 'killed_ignathos': 'minecraft:player_killed_entity', 'killed_rhyza': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'monsterexpansion:ignathos', 'monsterexpansion:leivekilth', 'monsterexpansion:rakoth', 'monsterexpansion:rhyza', 'monsterexpansion:skrythe']
+  monsterexpansion:hunt_leivekilth: [advancements.monsterexpansion.hunt_leivekilth.title] advancements.monsterexpansion.hunt_leivekilth.description | {'killed_large_monster': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'monsterexpansion:leivekilth']
+  monsterexpansion:hunt_rakoth: [advancements.monsterexpansion.hunt_rakoth.title] advancements.monsterexpansion.hunt_rakoth.description | {'killed_large_monster': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'monsterexpansion:rakoth']
+  monsterexpansion:hunt_rhyza: [advancements.monsterexpansion.hunt_rhyza.title] advancements.monsterexpansion.hunt_rhyza.description | {'killed_large_monster': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'monsterexpansion:rhyza']
+  monsterexpansion:hunt_skrythe: [advancements.monsterexpansion.hunt_skrythe.title] advancements.monsterexpansion.hunt_skrythe.description | {'killed_large_monster': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'monsterexpansion:skrythe']
+  mutantmonsters:burn_zombie_burn: [Burn Zombie Burn] Use a flint and steel to light a mutant zombie on fire when it's down | {'used_flint_and_steel': 'minecraft:player_interacted_with_entity'} | ['minecraft:entity_properties', 'minecraft:fire_charge', 'minecraft:flint_and_steel', 'minecraft:player_interacted_with_entity', 'mutantmonsters:mutant_zombie']
+  mutantmonsters:frosty_the_snow_golem: [Frosty the Snow Golem] Create a Mutant Snow Golem | {'created_mutant_snow_golem': 'minecraft:summoned_entity'} | ['minecraft:summoned_entity', 'mutantmonsters:mutant_snow_golem']
+  mutantmonsters:gunpowder_spice: [Gunpowder, spice...] ...and everything nice. Obtain a potion of Chemical X. | {'obtained_chemical_x': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:potion', 'mutantmonsters:chemical_x']
+  mutantmonsters:hulk_smash: [Hulk Smash!] Kill a Mutant Zombie using a Hulk Hammer | {'hammer_in_mainhand': 'minecraft:player_killed_entity', 'hammer_in_offhand': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'mutantmonsters:hulk_hammer', 'mutantmonsters:mutant_zombie']
+  mutantmonsters:no_bones_about_it: [No Bones About It] Kill a Mutant Skeleton using a crossbow while wearing a full set of Mutant Skeleton armor | {'killed_mutant_skeleton': 'minecraft:player_killed_entity'} | ['minecraft:player_killed_entity', 'mutantmonsters:mutant_skeleton', 'mutantmonsters:mutant_skeleton_boots', 'mutantmonsters:mutant_skeleton_chestplate', 'mutantmonsters:mutant_skeleton_leggings', 'mutantmonsters:mutant_skeleton_skull']
+  mutantmonsters:root: [Mutant Monsters]  | {'killed_something': 'minecraft:player_killed_entity', 'killed_by_something': 'minecraft:entity_killed_player'} | ['minecraft:entity_killed_player', 'minecraft:player_killed_entity']
+  mutantmonsters:spider_pig_spider_pig: [Spider-Pig, Spider-Pig...] Feed a Pig a Fermented Spider Eye and throw Chemical X at it | {'created_spider_pig': 'minecraft:summoned_entity'} | ['minecraft:summoned_entity', 'mutantmonsters:spider_pig']
+  mutantmonsters:you_da_bomby: [You da Bomby] Hatch a Creeper Minion from its egg | {'tamed_creeper_minion': 'minecraft:tame_animal'} | ['minecraft:tame_animal', 'mutantmonsters:creeper_minion']
+  mythsandlegends:abyss_stares_back: [The Abyss Stares Back] You have ventured where light dares not follow. | {'umbral_wasteland': 'minecraft:location'} | ['minecraft:entity_properties', 'minecraft:location', 'mythsandlegends:umbral_wasteland']
+  mythsandlegends:adventure/dawn_of_the_living: [Dawn of the Living] Survive a Blood Moon until sunrise. | {'survived': 'minecraft:impossible'} | ['minecraft:impossible']
+  mythsandlegends:ars_lapidem: [Ars Lapidem] Through forbidden rites, you grant motion to stone. | {'obtain_ars_lapidem': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:gargoyle_effigy']
+  mythsandlegends:bound_by_darkness: [Bound by Darkness] Wear the armor that is bound by dark forces. | {'obtain_bound_by_darkness': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:ironshade_helmet']
+  mythsandlegends:bound_soul_ingot: [Bound Soul Ingot] Obtain a powerful ingot. | {'obtain_bound_soul_ingot': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:bound_soul_ingot']
+  mythsandlegends:cursed_power: [Cursed Power] Feel the malevolent energy of the Cursed Core. | {'obtain_cursed_power': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:cursed_core']
+  mythsandlegends:echo_in_the_frost: [Hunt a Karakondjul] Defeat the midnight hunter | {'kill_echo_in_the_frost': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'mythsandlegends:karakondjul']
+  mythsandlegends:forged_by_frost: [Forged by Frost] Craft a weapon infused with the essence of the Amarok. | {'craft_forged_by_frost': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:glacial_binding']
+  mythsandlegends:fragment_of_power: [Fragment of Power] Find a sturdy Gargoyle fragment. | {'obtain_fragment_of_power': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:gargoyle_fragment']
+  mythsandlegends:heart_of_fire: [Heart of Fire] Obtain a heart that burns with an eternal flame. | {'obtain_heart_of_fire': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:fire_heart']
+  mythsandlegends:howl_of_the_lonely_end: [Howl of the Lonely End] You have faced the spirit-wolf that stalks those who wander the snow alone. | {'kill_howl_of_the_lonely_end': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'mythsandlegends:amarok']
+  mythsandlegends:master_of_the_blade: [Master of the Blade] Craft the mighty Gargoyle Axe | {'craft_master_of_the_blade': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:gargoyle_axe']
+  mythsandlegends:payment_collected: [Payment Collected] Slay an undead using the Copper Coin Sword. | {'kill_payment_collected': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'mythsandlegends:copper_coin_sword']
+  mythsandlegends:recipes/building_blocks/bound_soul_block: [None] None | {'has_bound_soul_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:bound_soul_block', 'mythsandlegends:bound_soul_ingot']
+  mythsandlegends:recipes/building_blocks/brass_block: [None] None | {'has_brass_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:brass_block', 'mythsandlegends:brass_ingot']
+  mythsandlegends:recipes/building_blocks/chiseled_forsaken_stone: [None] None | {'has_forsaken_stone_brick_slab': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:chiseled_forsaken_stone', 'mythsandlegends:forsaken_stone_brick_slab']
+  mythsandlegends:recipes/building_blocks/chiseled_umbral_sandstone: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'has_umbral_sandstone_slab': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:chiseled_umbral_sandstone', 'mythsandlegends:umbral_sandstone_slab']
+  mythsandlegends:recipes/building_blocks/cursed_core_block: [None] None | {'has_cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:cursed_core_block']
+  mythsandlegends:recipes/building_blocks/forsaken_stone_brick_slab: [None] None | {'has_forsaken_stone_brick': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:forsaken_stone_brick', 'mythsandlegends:forsaken_stone_brick_slab']
+  mythsandlegends:recipes/building_blocks/forsaken_stone_brick_wall: [None] None | {'has_forsaken_stone_brick': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:forsaken_stone_brick', 'mythsandlegends:forsaken_stone_brick_wall']
+  mythsandlegends:recipes/building_blocks/infernum_block: [None] None | {'has_infernum_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_block', 'mythsandlegends:infernum_ingot']
+  mythsandlegends:recipes/building_blocks/karakondjul_pelt_block: [None] None | {'has_karakondjul_pelt': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:karakondjul_pelt', 'mythsandlegends:karakondjul_pelt_block']
+  mythsandlegends:recipes/building_blocks/scorched_bone_block: [None] None | {'has_scorched_bone': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:scorched_bone', 'mythsandlegends:scorched_bone_block']
+  mythsandlegends:recipes/building_blocks/umbral_sandstone: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'has_umbral_sand': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:umbral_sand', 'mythsandlegends:umbral_sandstone']
+  mythsandlegends:recipes/building_blocks/umbral_sandstone_slab: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'has_umbral_sandstone': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:umbral_sandstone', 'mythsandlegends:umbral_sandstone_slab']
+  mythsandlegends:recipes/building_blocks/umbral_sandstone_wall: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'has_umbral_sandstone': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:umbral_sandstone', 'mythsandlegends:umbral_sandstone_wall']
+  mythsandlegends:recipes/combat/copper_coin_sword: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:copper_coin_sword']
+  mythsandlegends:recipes/combat/infernum_warplate_boots: [None] None | {'has_item.infernum_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_ingot', 'mythsandlegends:infernum_warplate_boots']
+  mythsandlegends:recipes/combat/infernum_warplate_chestplate: [None] None | {'has_item.infernum_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_ingot', 'mythsandlegends:infernum_warplate_chestplate']
+  mythsandlegends:recipes/combat/infernum_warplate_helmet: [None] None | {'has_item.infernum_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_ingot', 'mythsandlegends:infernum_warplate_helmet']
+  mythsandlegends:recipes/combat/infernum_warplate_leggings: [None] None | {'has_item.infernum_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_ingot', 'mythsandlegends:infernum_warplate_leggings']
+  mythsandlegends:recipes/combat/ironshade_boots: [None] None | {'bound_soul_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:bound_soul_ingot', 'mythsandlegends:ironshade_boots']
+  mythsandlegends:recipes/combat/ironshade_chestplate: [None] None | {'cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:ironshade_chestplate']
+  mythsandlegends:recipes/combat/ironshade_helmet: [None] None | {'cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:ironshade_helmet']
+  mythsandlegends:recipes/combat/ironshade_leggings: [None] None | {'cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:ironshade_leggings']
+  mythsandlegends:recipes/combat/maledictum_shield: [None] None | {'has_item.infernum_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_ingot', 'mythsandlegends:maledictum_shield']
+  mythsandlegends:recipes/combat/molten_fist: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:molten_fist']
+  mythsandlegends:recipes/combat/nightfrost_dagger: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:nightfrost_dagger']
+  mythsandlegends:recipes/combat/noctifer_tenebris: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:noctifer_tenebris']
+  mythsandlegends:recipes/combat/soulpiercer_boots: [None] None | {'bound_soul_ingot': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:bound_soul_ingot', 'mythsandlegends:soulpiercer_boots']
+  mythsandlegends:recipes/combat/soulpiercer_chestplate: [None] None | {'cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:soulpiercer_chestplate']
+  mythsandlegends:recipes/combat/soulpiercer_helmet: [None] None | {'cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:soulpiercer_helmet']
+  mythsandlegends:recipes/combat/soulpiercer_leggings: [None] None | {'cursed_core': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:soulpiercer_leggings']
+  mythsandlegends:recipes/combat/stony_shield: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:stony_shield']
+  mythsandlegends:recipes/combat/winter_stalker_boots: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:winter_stalker_boots']
+  mythsandlegends:recipes/combat/winter_stalker_chestplate: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:winter_stalker_chestplate']
+  mythsandlegends:recipes/combat/winter_stalker_helmet: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:winter_stalker_helmet']
+  mythsandlegends:recipes/combat/winter_stalker_leggings: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:winter_stalker_leggings']
+  mythsandlegends:recipes/decorations/candle_wall_sconce: [None] None | {'has_candles': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:candles', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:candle_wall_sconce']
+  mythsandlegends:recipes/decorations/wooden_barricade: [None] None | {'has_logs': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:logs', 'minecraft:recipe_unlocked', 'mythsandlegends:wooden_barricade']
+  mythsandlegends:recipes/misc/altar_of_the_dead: [None] None | {'altar_of_the_dead': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked', 'skeleton_skull': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:skeleton_skull', 'mythsandlegends:altar_of_the_dead']
+  mythsandlegends:recipes/misc/antique_emblem: [None] None | {'antique_emblem': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:antique_emblem']
+  mythsandlegends:recipes/misc/bound_soul_ingot: [None] None | {'has_bound_soul_block': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:bound_soul_block', 'mythsandlegends:bound_soul_ingot']
+  mythsandlegends:recipes/misc/bound_soul_ingot_from_blasting: [None] None | {'has_fragment': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:bound_soul_ingot_from_blasting', 'mythsandlegends:possessed_armor_fragment']
+  mythsandlegends:recipes/misc/brass_ingot: [None] None | {'has_brass_block': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:brass_block', 'mythsandlegends:brass_ingot']
+  mythsandlegends:recipes/misc/cursed_core: [None] None | {'has_cursed_core_block': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:cursed_core', 'mythsandlegends:cursed_core_block']
+  mythsandlegends:recipes/misc/ethereal_flame_from_blasting: [None] None | {'has_lantern': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:soul_lantern', 'mythsandlegends:ethereal_flame_from_blasting']
+  mythsandlegends:recipes/misc/infernum_ingot: [None] None | {'has_infernum_block': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_block', 'mythsandlegends:infernum_ingot']
+  mythsandlegends:recipes/misc/infernum_upgrade_smithing_template: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'infernum_upgrade_smithing_template': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:infernum_upgrade_smithing_template']
+  mythsandlegends:recipes/misc/karakondjul_pelt: [None] None | {'has_karakondjul_pelt_block': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:karakondjul_pelt', 'mythsandlegends:karakondjul_pelt_block']
+  mythsandlegends:recipes/misc/necklace_of_torngarsuk: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:necklace_of_torngarsuk']
+  mythsandlegends:recipes/misc/refined_tenebrite: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:refined_tenebrite']
+  mythsandlegends:recipes/misc/scorched_bone: [None] None | {'has_scorched_bone_block': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:scorched_bone', 'mythsandlegends:scorched_bone_block']
+  mythsandlegends:recipes/misc/soulbinder_amulet: [None] None | {'ethereal_flame': 'minecraft:inventory_changed', 'gold_ingot': 'minecraft:inventory_changed', 'gold_nugget': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:gold_ingot', 'minecraft:gold_nugget', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:ethereal_flame', 'mythsandlegends:soulbinder_amulet']
+  mythsandlegends:recipes/misc/stone_sanctum_table: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:stone_sanctum_table']
+  mythsandlegends:recipes/tools/gargoyle_axe: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:gargoyle_axe']
+  mythsandlegends:recipes/tools/higa_amulet: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:higa_amulet']
+  mythsandlegends:recipes/tools/nightfrost_axe: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:nightfrost_axe']
+  mythsandlegends:recipes/tools/nightfrost_hoe: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:nightfrost_hoe']
+  mythsandlegends:recipes/tools/nightfrost_pickaxe: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:nightfrost_pickaxe']
+  mythsandlegends:recipes/tools/nightfrost_shovel: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:nightfrost_shovel']
+  mythsandlegends:recipes/tools/spirit_suppressing_bell: [None] None | {'has_the_recipe': 'minecraft:recipe_unlocked', 'research': 'minecraft:inventory_changed'} | ['minecraft:air', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'mythsandlegends:spirit_suppressing_bell']
+  mythsandlegends:relic_of_the_forge_god: [Relic of the Forge God] You have found the legendary ring of Svarog, forged in the primoridial flames. | {'obtain_relic_of_the_forge_god': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:svarogs_ring']
+  mythsandlegends:rider_of_the_shadows: [Rider of the Shadows] You dared to summon the Black Charro and survived to tell the tale. | {'kill_rider_of_the_shadows': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'mythsandlegends:black_charro']
+  mythsandlegends:root: [Myths & Legends] Legends Awaken! 
+Begin your journey through Myths & Legends. | {'mythsandlegends': 'minecraft:tick'} | ['minecraft:tick']
+  mythsandlegends:shard_collector: [Shard Collector] Obtain your first Gargoyle shard. | {'obtain_shard_collector': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:gargoyle_shard']
+  mythsandlegends:the_stonewall: [The Stonewall] Forge the impenetrable Stony Shield. | {'craft_the_stonewall': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:stony_shield']
+  mythsandlegends:whisper_of_the_northern_spirit: [Whisper of the Northern Spirit] You forged a talisman that calls upon the guidance of the spirit of the hunt and the winds. | {'obtain_whisper_of_the_northern_spirit': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'mythsandlegends:necklace_of_torngarsuk']
+  skarrier_mobs:fast_food: [Fast Food] Eat a Cooked Slither | {'fast_food_0': 'minecraft:consume_item'} | ['minecraft:consume_item', 'skarrier_mobs:cooked_slither']
+  skarrier_mobs:grab_that: [Grab That!] Kill a Trawler by tricking it into eating a primed TNT | {'grab_that_0': 'minecraft:impossible'} | ['minecraft:impossible']
+  skarrier_mobs:its_roe: [Touch it, it's ROE!!!] Cook a Roe | {'its_roe_0': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'skarrier_mobs:cooked_roe']
+  soulsweapons:all_moonlight_weapons: [Mooning] Acquire all the different moonlight blades. Swords, greatswords, katanas, you name it! | {'bluemoon_greatsword': 'minecraft:inventory_changed', 'bluemoon_shortsword': 'minecraft:inventory_changed', 'dark_moon_greatsword': 'minecraft:inventory_changed', 'holy_moonlight_greatsword': 'minecraft:inventory_changed', 'holy_moonlight_sword': 'minecraft:inventory_changed', 'moonlight_greatsword': 'minecraft:inventory_changed', 'moonlight_shortsword': 'minecraft:inventory_changed', 'moonveil': 'minecraft:inventory_changed', 'pure_moonlight_greatsword': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:bluemoon_greatsword', 'soulsweapons:bluemoon_shortsword', 'soulsweapons:dark_moon_greatsword', 'soulsweapons:holy_moonlight_greatsword', 'soulsweapons:holy_moonlight_sword', 'soulsweapons:moonlight_greatsword', 'soulsweapons:moonlight_shortsword', 'soulsweapons:moonveil', 'soulsweapons:pure_moonlight_greatsword']
+  soulsweapons:all_weapons: [A Master at Work] Acquire all the Legendary Weapons from this mod | {'bloodlust': 'minecraft:inventory_changed', 'bloodthirster': 'minecraft:inventory_changed', 'bluemoon_greatsword': 'minecraft:inventory_changed', 'bluemoon_shortsword': 'minecraft:inventory_changed', 'chungus_staff': 'minecraft:inventory_changed', 'comet_spear': 'minecraft:inventory_changed', 'crucible_sword': 'minecraft:inventory_changed', 'dark_moon_greatsword': 'minecraft:inventory_changed', 'darkin_blade': 'minecraft:inventory_changed', 'darkin_scythe': 'minecraft:inventory_changed', 'darkin_scythe_pre': 'minecraft:inventory_changed', 'darkmoon_longbow': 'minecraft:inventory_changed', 'dawnbreaker': 'minecraft:inventory_changed', 'dragon_staff': 'minecraft:inventory_changed', 'dragonbane': 'minecraft:inventory_changed', 'dragonslayer_swordspear': 'minecraft:inventory_changed', 'draugr': 'minecraft:inventory_changed', 'draupnir_spear': 'minecraft:inventory_changed', 'empowered_dawnbreaker': 'minecraft:inventory_changed', 'excalibur': 'minecraft:inventory_changed', 'featherlight': 'minecraft:inventory_changed', 'forlorn_scythe': 'minecraft:inventory_changed', 'freyr_sword': 'minecraft:inventory_changed', 'frostmourne': 'minecraft:inventory_changed', 'galeforce': 'minecraft:inventory_changed', 'glaive_of_hodir': 'minecraft:inventory_changed', 'guts_sword': 'minecraft:inventory_changed', 'holy_moonlight_greatsword': 'minecraft:inventory_changed', 'holy_moonlight_sword': 'minecraft:inventory_changed', 'kraken_slayer_crossbow': 'minecraft:inventory_changed', 'leviathan_axe': 'minecraft:inventory_changed', 'lich_bane': 'minecraft:inventory_changed', 'master_sword': 'minecraft:inventory_changed', 'mehrunes_razor': 'minecraft:inventory_changed', 'mjolnir': 'minecraft:inventory_changed', 'moonlight_greatsword': 'minecraft:inventory_changed', 'moonlight_shortsword': 'minecraft:inventory_changed', 'moonveil': 'minecraft:inventory_changed', 'nightfall': 'minecraft:inventory_changed', 'nightlords_sword': 'minecraft:inventory_changed', 'nights_edge_item': 'minecraft:inventory_changed', 'pure_moonlight_greatsword': 'minecraft:inventory_changed', 'rageblade': 'minecraft:inventory_changed', 'shadow_assassin_scythe': 'minecraft:inventory_changed', 'simons_blade': 'minecraft:inventory_changed', 'simons_bowblade': 'minecraft:inventory_changed', 'skofnung': 'minecraft:inventory_changed', 'soul_reaper': 'minecraft:inventory_changed', 'sting': 'minecraft:inventory_changed', 'supernova': 'minecraft:inventory_changed', 'tonitrus': 'minecraft:inventory_changed', 'whirligig_sawblade': 'minecraft:inventory_changed', 'withered_wabbajack': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:bloodlust', 'soulsweapons:bloodthirster', 'soulsweapons:bluemoon_greatsword', 'soulsweapons:bluemoon_shortsword', 'soulsweapons:chungus_staff', 'soulsweapons:comet_spear', 'soulsweapons:crucible_sword', 'soulsweapons:dark_moon_greatsword', 'soulsweapons:darkin_blade', 'soulsweapons:darkin_scythe', 'soulsweapons:darkin_scythe_pre']
+  soulsweapons:arkenplate: [Redemption Ark] Craft the Arkenplate and become stronger than diamonds | {'arkenplate': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:arkenplate']
+  soulsweapons:bloodthirsty: [Color Me Blood] Use the Bloodthirster while being Bloodthirsty | {'condition_0': 'minecraft:inventory_changed', 'condition_1': 'minecraft:effects_changed'} | ['minecraft:effects_changed', 'minecraft:inventory_changed', 'soulsweapons:bloodthirster', 'soulsweapons:bloodthirsty']
+  soulsweapons:bluemoon_tools: [A... Fake?] Create weapons of the finest gems, the only thing they need now is raw power... | {'bluemoon_greatsword': 'minecraft:inventory_changed', 'bluemoon_shortsword': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:bluemoon_greatsword', 'soulsweapons:bluemoon_shortsword']
+  soulsweapons:blunderbuss: [Doomsday] Craft the Hunter Blunderbuss, the bigger the blast, the bigger the damage! | {'blunderbuss': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:blunderbuss']
+  soulsweapons:cannon: [Maybe a little over the top?] Craft the Hunter Cannon, aim for the sparrows and unleash a devastating blast! | {'hunter_cannon': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:hunter_cannon']
+  soulsweapons:chaos_orb: [Contained Nebula] Craft the Chaos Orb | {'chaos_orb': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:chaos_orb']
+  soulsweapons:demon_heart: [Demon Slayer] Acquire a Demon Heart | {'demon_heart': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:demon_heart']
+  soulsweapons:dragonslayer_swordspear: [What was his name again?] Acquire Dragonslayer Swordspear. Behold! The Power of the Heavens! | {'dragonslayer_swordspear': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:dragonslayer_swordspear']
+  soulsweapons:draugr_boss: [Restless Sleepwalker] Defeat the Old Champion and the creature that has possessed it's remains | {'condition_0': 'minecraft:player_killed_entity', 'condition_1': 'minecraft:inventory_changed'} | ['minecraft:entity_properties', 'minecraft:inventory_changed', 'minecraft:player_killed_entity', 'soulsweapons:draugr_boss', 'soulsweapons:essence_of_eventide']
+  soulsweapons:dream_on: [Dream On] Fall at least 50 blocks and survive thanks to Calculated Fall status effect. | {'condition_0': 'minecraft:fall_from_height'} | ['minecraft:entity_properties', 'minecraft:fall_from_height', 'soulsweapons:calculated_fall']
+  soulsweapons:end_of_reigns: [Oh, The Misery] End The Decaying King's suffering | {'condition_0': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'soulsweapons:accursed_lord_boss']
+  soulsweapons:ender_of_world_ender: [The End of the World Ender] Defeat the Monarch of Chaos | {'condition_0': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'soulsweapons:chaos_monarch']
+  soulsweapons:excalibur: [Right back at ya!] Kill the Warden after acquiring the Excalibur. | {'condition_0': 'minecraft:inventory_changed', 'condition_1': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:inventory_changed', 'minecraft:player_killed_entity', 'minecraft:warden', 'soulsweapons:excalibur']
+  soulsweapons:gatling_gun: [Bullets for Dinner] Craft the Gatling Gun and watch it drain all your ammunition in an instant | {'gatling_gun': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:gatling_gun']
+  soulsweapons:glaive_of_hodir: [Schizo Ring] Acquire the Glaive of Hodir, decimate your foes with never-ending aggression. | {'glaive_of_hodir': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:glaive_of_hodir']
+  soulsweapons:hallowheart: [or pvp boss] Craft the Hallowheart and reject the withering | {'withered_chest': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:withered_chest']
+  soulsweapons:heap_of_iron: [My Brother] Acquire the Dragonslayer, the heap of raw iron | {'guts_sword': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:guts_sword']
+  soulsweapons:hunter_pistol: [A new Hunter in Town] Craft the Hunter Pistol, a simple, but powerful gun | {'hunter_pistol': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:hunter_pistol']
+  soulsweapons:infused_arkenplate: [ZABITO BOGA] Infuse the Arkenplate with the soul of the Night Prowler | {'enhanced_arkenplate': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:enhanced_arkenplate']
+  soulsweapons:infused_hallowheart: [HATEFUL] Infuse the Hallowheart with the soul of the Day Stalker | {'enhanced_withered_chest': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:enhanced_withered_chest']
+  soulsweapons:kill_day_night_boss: [Heat Death of the Universe] Use the Chaos Orb to summon the Day Stalker and Night Prowler, and acquire either of their souls. | {'condition_0': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:duo_boss_souls']
+  soulsweapons:leviathan_axe: [Give or Take] Aquire the Leviathan Axe | {'leviathan_axe': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:leviathan_axe']
+  soulsweapons:lord_soul: [Steeped in Strength] Acquire a Lord Soul, the remnants of their excistence | {'condition_0': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:lord_soul']
+  soulsweapons:lords_on_stick: [Staves of Might and Magic] Acquire the Dragon Staff, and it's chaotic counterpart the Withered Wabbajack | {'dragon_staff': 'minecraft:inventory_changed', 'withered_wabbajack': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:dragon_staff', 'soulsweapons:withered_wabbajack']
+  soulsweapons:moonknight: [Blue Steel] Return the Essence of Eventide to it's rightful body, and defeat the godlike being that appears. | {'condition_0': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'soulsweapons:moonknight']
+  soulsweapons:moonlight_tools: [From the Software itself] Enhance the weapons to their prime | {'moonlight_greatsword': 'minecraft:inventory_changed', 'moonlight_shortsword': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:moonlight_greatsword', 'soulsweapons:moonlight_shortsword']
+  soulsweapons:moonstone: [Full Moon in a Pocket] Acquire a moonstone, gems shinier than diamonds! | {'moonstone': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:moonstone']
+  soulsweapons:nightfall: [3rd Time's the Charm!] Acquire the Nightfall and command your own undead army! | {'nightfall': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:nightfall']
+  soulsweapons:rageblade: [Standing here, I realize...] Acquire Guinsoo's Rageblade, attack at light speed! | {'rageblade': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:rageblade']
+  soulsweapons:recipes/building_blocks/chungus_emerald_block: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chungus_emerald', 'soulsweapons:chungus_emerald_block']
+  soulsweapons:recipes/building_blocks/cracked_infused_blackstone: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:cracked_infused_blackstone']
+  soulsweapons:recipes/building_blocks/infused_blackstone: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:infused_blackstone']
+  soulsweapons:recipes/building_blocks/moonstone_block: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_block']
+  soulsweapons:recipes/building_blocks/soulfire_stain: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soulfire_stain']
+  soulsweapons:recipes/building_blocks/verglas_block: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:verglas', 'soulsweapons:verglas_block']
+  soulsweapons:recipes/combat/arkenplate: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:arkenplate', 'soulsweapons:arkenstone']
+  soulsweapons:recipes/combat/armors/boots_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:armors/boots_upgrade']
+  soulsweapons:recipes/combat/armors/chestplates_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:armors/chestplates_upgrade']
+  soulsweapons:recipes/combat/armors/helmets_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:armors/helmets_upgrade']
+  soulsweapons:recipes/combat/armors/leggings_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:armors/leggings_upgrade']
+  soulsweapons:recipes/combat/axes_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:axes_upgrade']
+  soulsweapons:recipes/combat/bloodlust: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:ingots/iron', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:bloodlust']
+  soulsweapons:recipes/combat/bloodthirster: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:bloodthirster', 'soulsweapons:crimson_ingot']
+  soulsweapons:recipes/combat/bluemoon_greatsword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:bluemoon_greatsword', 'soulsweapons:moonstone']
+  soulsweapons:recipes/combat/bluemoon_shortsword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:bluemoon_shortsword', 'soulsweapons:moonstone']
+  soulsweapons:recipes/combat/blunderbuss: [None] None | {'has_lost_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:blunderbuss']
+  soulsweapons:recipes/combat/chaos_helmet: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chaos_crown', 'soulsweapons:chaos_helmet']
+  soulsweapons:recipes/combat/chaos_orb: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chaos_orb', 'soulsweapons:essence_of_luminescence']
+  soulsweapons:recipes/combat/chungus_staff: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chungus_staff', 'soulsweapons:essence_of_eventide']
+  soulsweapons:recipes/combat/comet_spear: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:comet_spear', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/crucible_sword: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crucible_sword', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/dark_moon_greatsword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:dark_moon_greatsword', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/darkin_blade: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:darkin_blade', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/darkin_scythe_pre: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:darkin_scythe_pre', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/darkmoon_longbow: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:darkmoon_longbow', 'soulsweapons:essence_of_eventide']
+  soulsweapons:recipes/combat/dawnbreaker: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:dawnbreaker', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/dragon_staff: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:blaze_rod', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:dragon_staff']
+  soulsweapons:recipes/combat/dragonbane: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:dragonbane', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/dragonslayer_swordspear: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:dragonslayer_swordspear', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/draugr: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:draugr', 'soulsweapons:essence_of_eventide']
+  soulsweapons:recipes/combat/draupnir_spear: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:draupnir_spear', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/empowered_dawnbreaker: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:empowered_dawnbreaker', 'soulsweapons:lord_soul_day_stalker']
+  soulsweapons:recipes/combat/enhanced_arkenplate: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:enhanced_arkenplate', 'soulsweapons:lord_soul_night_prowler']
+  soulsweapons:recipes/combat/enhanced_withered_chest: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:enhanced_withered_chest', 'soulsweapons:lord_soul_day_stalker']
+  soulsweapons:recipes/combat/excalibur: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:excalibur', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/featherlight: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:amethyst_shard', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:featherlight']
+  soulsweapons:recipes/combat/forlorn_boots: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crimson_ingot', 'soulsweapons:forlorn_boots']
+  soulsweapons:recipes/combat/forlorn_chestplate: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crimson_ingot', 'soulsweapons:forlorn_chestplate']
+  soulsweapons:recipes/combat/forlorn_helmet: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crimson_ingot', 'soulsweapons:forlorn_helmet']
+  soulsweapons:recipes/combat/forlorn_leggings: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crimson_ingot', 'soulsweapons:forlorn_leggings']
+  soulsweapons:recipes/combat/forlorn_scythe: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:forlorn_scythe', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/freyr_sword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:freyr_sword', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/frostmourne: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:frostmourne', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/galeforce: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:galeforce', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/gatling_gun: [None] None | {'has_lost_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:gatling_gun']
+  soulsweapons:recipes/combat/glaive_of_hodir: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:glaive_of_hodir', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/guts_sword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:iron_block', 'minecraft:recipe_unlocked', 'soulsweapons:guts_sword']
+  soulsweapons:recipes/combat/hoes_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:hoes_upgrade']
+  soulsweapons:recipes/combat/holy_greatsword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:iron_ingot', 'minecraft:recipe_unlocked', 'soulsweapons:holy_greatsword']
+  soulsweapons:recipes/combat/holy_moonlight_sword: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:holy_moonlight_sword', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/hunter_cannon: [None] None | {'has_lost_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:hunter_cannon']
+  soulsweapons:recipes/combat/hunter_pistol: [None] None | {'has_lost_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:hunter_pistol']
+  soulsweapons:recipes/combat/kirkhammer: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:iron_sword', 'minecraft:recipe_unlocked', 'soulsweapons:kirkhammer']
+  soulsweapons:recipes/combat/kraken_slayer: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:kraken_slayer', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/kraken_slayer_crossbow: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:kraken_slayer_crossbow', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/leviathan_axe_left: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:leviathan_axe_left', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/leviathan_axe_right: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:leviathan_axe_right', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/lich_bane: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lich_bane', 'soulsweapons:lord_soul']
+  soulsweapons:recipes/combat/master_sword: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:master_sword']
+  soulsweapons:recipes/combat/mehrunes_razor: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:mehrunes_razor']
+  soulsweapons:recipes/combat/melee_item_upgradables_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:melee_item_upgradables_upgrade']
+  soulsweapons:recipes/combat/mjolnir: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:mjolnir']
+  soulsweapons:recipes/combat/moonlight_greatsword: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:moonlight_greatsword']
+  soulsweapons:recipes/combat/moonlight_shortsword: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:moonlight_shortsword']
+  soulsweapons:recipes/combat/moonstone_ring_left: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:arkenstone', 'soulsweapons:moonstone_ring_left']
+  soulsweapons:recipes/combat/moonstone_ring_right: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:arkenstone', 'soulsweapons:moonstone_ring_right']
+  soulsweapons:recipes/combat/moonveil: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:moonveil']
+  soulsweapons:recipes/combat/nightfall: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:nightfall']
+  soulsweapons:recipes/combat/nightlords_sword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul_night_prowler', 'soulsweapons:nightlords_sword']
+  soulsweapons:recipes/combat/nights_edge_item: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul_night_prowler', 'soulsweapons:nights_edge_item']
+  soulsweapons:recipes/combat/pickaxes_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:pickaxes_upgrade']
+  soulsweapons:recipes/combat/pure_moonlight_greatsword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:essence_of_luminescence', 'soulsweapons:pure_moonlight_greatsword']
+  soulsweapons:recipes/combat/rageblade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:rageblade']
+  soulsweapons:recipes/combat/ranged_item_upgradables_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:ranged_item_upgradables_upgrade']
+  soulsweapons:recipes/combat/shovels_upgrade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:stick', 'soulsweapons:shovels_upgrade']
+  soulsweapons:recipes/combat/silver_bullet: [None] None | {'has_lost_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:silver_bullet']
+  soulsweapons:recipes/combat/silver_bullet_iron_ingot: [None] None | {'has_lost_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:silver_bullet_iron_ingot']
+  soulsweapons:recipes/combat/simons_bowblade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:iron_ingot', 'minecraft:recipe_unlocked', 'soulsweapons:simons_bowblade']
+  soulsweapons:recipes/combat/skofnung: [None] None | {'has_lord_soul': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:skofnung']
+  soulsweapons:recipes/combat/skofnung_stone: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:skofnung_stone', 'soulsweapons:verglas']
+  soulsweapons:recipes/combat/soul_ingot_boots: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_ingot_boots']
+  soulsweapons:recipes/combat/soul_ingot_chestplate: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_ingot_chestplate']
+  soulsweapons:recipes/combat/soul_ingot_helmet: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_ingot_helmet']
+  soulsweapons:recipes/combat/soul_ingot_leggings: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_ingot_leggings']
+  soulsweapons:recipes/combat/soul_reaper: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:soul_reaper']
+  soulsweapons:recipes/combat/soul_robes_boots: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_robes_boots']
+  soulsweapons:recipes/combat/soul_robes_chestplate: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_robes_chestplate']
+  soulsweapons:recipes/combat/soul_robes_helmet: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_robes_helmet']
+  soulsweapons:recipes/combat/soul_robes_leggings: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:soul_robes_leggings']
+  soulsweapons:recipes/combat/sting: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:sting', 'soulsweapons:verglas']
+  soulsweapons:recipes/combat/supernova: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:supernova']
+  soulsweapons:recipes/combat/tonitrus: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:ingots/iron', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:tonitrus']
+  soulsweapons:recipes/combat/translucent_double_greatsword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:translucent_double_greatsword']
+  soulsweapons:recipes/combat/translucent_glaive: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:translucent_glaive']
+  soulsweapons:recipes/combat/translucent_sword: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot', 'soulsweapons:translucent_sword']
+  soulsweapons:recipes/combat/whirligig_sawblade: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:whirligig_sawblade']
+  soulsweapons:recipes/combat/withered_chest: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:withered_chest', 'soulsweapons:withered_demon_heart']
+  soulsweapons:recipes/combat/withered_wabbajack: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:wither_skeleton_skull', 'soulsweapons:withered_wabbajack']
+  soulsweapons:recipes/decorations/altar_block: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:altar_block', 'soulsweapons:moonstone']
+  soulsweapons:recipes/decorations/blackstone_pedestal: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:blackstone_pedestal', 'soulsweapons:moonstone']
+  soulsweapons:recipes/decorations/chungus_monolith: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:golden_carrot', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chungus_monolith']
+  soulsweapons:recipes/decorations/crimson_obsidian: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crimson_obsidian', 'soulsweapons:demon_heart']
+  soulsweapons:recipes/decorations/soul_lamp: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_lamp']
+  soulsweapons:recipes/decorations/soul_lantern_lost_soul: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_lantern_lost_soul']
+  soulsweapons:recipes/misc/chungus_disc: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chungus_disc', 'soulsweapons:chungus_emerald']
+  soulsweapons:recipes/misc/chungus_emerald: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:chungus_emerald']
+  soulsweapons:recipes/misc/crimson_ingot: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:crimson_ingot', 'soulsweapons:demon_heart']
+  soulsweapons:recipes/misc/demon_chunk: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:demon_chunk', 'soulsweapons:demon_heart']
+  soulsweapons:recipes/misc/draugr_boss_disc: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:draugr_boss_disc', 'soulsweapons:moonstone']
+  soulsweapons:recipes/misc/fallen_icon_disc: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:fallen_icon_disc', 'soulsweapons:moonstone']
+  soulsweapons:recipes/misc/glass_vial: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:glass', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:glass_vial']
+  soulsweapons:recipes/misc/hydrangea_dye: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:hydrangea', 'soulsweapons:hydrangea_dye']
+  soulsweapons:recipes/misc/iron_skull: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:iron_skull']
+  soulsweapons:recipes/misc/lost_soul: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'minecraft:soul_sand', 'soulsweapons:lost_soul']
+  soulsweapons:recipes/misc/molten_demon_heart: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:demon_hearts', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:molten_demon_heart']
+  soulsweapons:recipes/misc/moonstone: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone']
+  soulsweapons:recipes/misc/oleander_dye: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:oleander', 'soulsweapons:oleander_dye']
+  soulsweapons:recipes/misc/smelt_withered_demon_heart: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:smelt_withered_demon_heart', 'soulsweapons:withered_demon_heart']
+  soulsweapons:recipes/misc/soul_ingot: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['forge:lost_soul', 'minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:soul_ingot']
+  soulsweapons:recipes/misc/twinkling_titanite: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:lord_soul', 'soulsweapons:twinkling_titanite']
+  soulsweapons:recipes/misc/verglas: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:verglas']
+  soulsweapons:recipes/tools/boss_compass: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:boss_compass', 'soulsweapons:moonstone']
+  soulsweapons:recipes/tools/moonstone_axe_left: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_axe_left']
+  soulsweapons:recipes/tools/moonstone_axe_right: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_axe_right']
+  soulsweapons:recipes/tools/moonstone_hoe_left: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_hoe_left']
+  soulsweapons:recipes/tools/moonstone_hoe_right: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_hoe_right']
+  soulsweapons:recipes/tools/moonstone_pickaxe: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_pickaxe']
+  soulsweapons:recipes/tools/moonstone_shovel: [None] None | {'has_item': 'minecraft:inventory_changed', 'has_the_recipe': 'minecraft:recipe_unlocked'} | ['minecraft:inventory_changed', 'minecraft:recipe_unlocked', 'soulsweapons:moonstone', 'soulsweapons:moonstone_shovel']
+  soulsweapons:returning_knight: [Last Arrival] Defeat the Returning Knight | {'condition_0': 'minecraft:player_killed_entity'} | ['minecraft:entity_properties', 'minecraft:player_killed_entity', 'soulsweapons:returning_knight']
+  soulsweapons:root: [Soulslike Weaponry] Unique achievements for the worthy! | {'crafting_table': 'minecraft:inventory_changed'} | ['minecraft:crafting_table', 'minecraft:inventory_changed']
+  soulsweapons:transform_scythe: [Winner takes all] Feed the Darkin Scythe enough souls to transform itself into a new empowered form. | {'darkin_scythe': 'minecraft:inventory_changed', 'shadow_assassin_scythe': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:darkin_scythe', 'soulsweapons:shadow_assassin_scythe']
+  soulsweapons:trickweapon: [Switcharoo!] Acquire your first trickweapon, a weapon that can transform itself into other weaponry! | {'condition_0': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:trick_weapons']
+  soulsweapons:uncertainty: [Destructive Tendencies] Acquire the Shard of Uncertainty | {'shard_of_uncertainty': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:shard_of_uncertainty']
+  soulsweapons:verglas: [False Water] Aquire Verglas, a cold, smooth material that seems to have some particular liquid trapped inside | {'verglas': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:verglas']
+  soulsweapons:whirligig_sawblade: [Rip and Tear... until it is done.] Acquire the Whirligig Sawblade. Shred your foes out of excistence! | {'whirligig_sawblade': 'minecraft:inventory_changed'} | ['minecraft:inventory_changed', 'soulsweapons:whirligig_sawblade']
+
+# Lang lines about summoning, altars, bosses
+  advancement.die_boss.desc = Die fighting a Boss
+  advancement.die_boss.title = Bosses' Rise
+  advancement.kill_all_bosses.desc = Defeat all Bosses
+  advancement.kill_all_bosses.title = Unbound
+  advancement.kill_boss_under_minute.desc = Defeat a Boss under a minute
+  advancement.kill_boss_under_minute.title = Overclocker
+  advancements.aquamirae.obtain_niveis_tear.description = Distill the essence of Wisteria Niveis into a tear that calls forth the Maelstrom
+  advancements.cataclysm.kill_all_bosses.description = You have reached the summit of Cataclysm!
+  advancements.cataclysm.kill_all_bosses.title = The Cataclysmfarer
+  advancements.cataclysm.kill_ignis.description = Summon and Defeat the Ignis
+  advancements.cataclysm.kill_leviathan.description = Summon and Defeat the Leviathan
+  advancements.cataclysm.kill_maledictus.description = Summon and Defeat Maledictus
+  advancements.graveyard.kill_wraith.description = Summon a wraith by desecrating its coffin.
+  advancements.graveyard.lich_prison.description = Find the altar of the Corrupted Champion.
+  advancements.graveyard.summon_lich.description = Summon the Corrupted Champion at an altar with a full vial of blood and all three bone staff pieces at night.
+  advancements.graveyard.summon_lich.title = Wrath of the Champion
+  advancements.legendary_monsters.end_root.description = New Challenges in the End!
+  advancements.legendary_monsters.nether_root.description = New Challenges in the Nether!
+  advancements.mythsandlegends.rider_of_the_shadows.description = You dared to summon the Black Charro and survived to tell the tale.
+  advancements.mythsandlegends.root.description = Legends Awaken! 
+Begin your journey through Myths & Legends.
+  advancements.mythsandlegends.whisper_of_the_northern_spirit.description = You forged a talisman that calls upon the guidance of the spirit of the hunt and the winds.
+  advancements.soulsweapons.draugr_boss.description = Defeat the Old Champion and the creature that has possessed it's remains
+  advancements.soulsweapons.draugr_boss.title = Restless Sleepwalker
+  advancements.soulsweapons.hallowheart.title = or pvp boss
+  advancements.soulsweapons.kill_day_night_boss.description = Use the Chaos Orb to summon the Day Stalker and Night Prowler, and acquire either of their souls.
+  advancements.soulsweapons.kill_day_night_boss.title = Heat Death of the Universe
+  attribute.block_factorys_bosses.roll_count = Roll Count
+  attribute.irons_spellbooks.summon_damage = Summon Damage
+  block.block_factorys_bosses.big_chain = Big Chain
+  block.block_factorys_bosses.big_oak_planks = Big Oak Planks
+  block.block_factorys_bosses.big_oak_planks_broken = Broken Big Oak Planks
+  block.block_factorys_bosses.big_oak_planks_cracked = Cracked Big Oak Planks
+  block.block_factorys_bosses.big_oak_planks_straight = Big Oak Planks (straight)
+  block.block_factorys_bosses.big_oak_planks_variation = Big Oak Planks (variant)
+  block.block_factorys_bosses.big_oak_planks_wet = Big Wet Oak Planks
+  block.block_factorys_bosses.big_oak_planks_wet_broken = Broken Big Wet Oak Planks
+  block.block_factorys_bosses.big_oak_planks_wet_cracked = Cracked Big Wet Oak Planks
+  block.block_factorys_bosses.big_oak_planks_wet_straight = Big Wet Oak Planks (straight)
+  block.block_factorys_bosses.big_oak_planks_wet_variation = Big Wet Oak Planks (variant)
+  block.block_factorys_bosses.bone_remains = Bone Remains
+  block.block_factorys_bosses.bone_remains.description_0 = §7Body
+  block.block_factorys_bosses.bone_remains_legs = Bone Remains
+  block.block_factorys_bosses.bone_remains_legs.description_0 = §7Legs
+  block.block_factorys_bosses.bone_remains_rib_cage = Bone Remains
+  block.block_factorys_bosses.bone_remains_rib_cage.description_0 = §7Rib Cage
+  block.block_factorys_bosses.boss_spawner = Boss Spawner
+  block.block_factorys_bosses.candles = Small Candelabra
+  block.block_factorys_bosses.cannonball = Cannonball
+  block.block_factorys_bosses.coin_pile = Coin Pile
+  block.block_factorys_bosses.corpse = Corpse
+  block.block_factorys_bosses.dragon_banner = Dragon Banner
+  block.block_factorys_bosses.dragon_skull = Ashlord Skull
+  block.block_factorys_bosses.guardrail = Guardrail
+  block.block_factorys_bosses.guardrail_diagonal = Diagonal Guardrail
+  block.block_factorys_bosses.ice_block_particules = Ice Block Particles
+  block.block_factorys_bosses.kraken_spawner = Kraken Spawner
+  block.block_factorys_bosses.net = Net
+  block.block_factorys_bosses.plank = Pile of Planks
+  block.block_factorys_bosses.prison_door = Prison Door
+  block.block_factorys_bosses.rope_roll = Rope Roll
+  block.block_factorys_bosses.rusty_prison_door = Rusty Prison Door
+  block.block_factorys_bosses.ship_lantern = Ship Lantern
+  block.block_factorys_bosses.ship_steering_wheel = Ship Steering Wheel
+  block.block_factorys_bosses.tall_candles = Tall Candelabra
+  block.block_factorys_bosses.tall_candles.description_0 = §7Twisted
+  block.block_factorys_bosses.tall_candles_cross = Tall Cross Candelabra
+  block.block_factorys_bosses.tall_candles_cross.description_0 = §7Cross
+  block.block_factorys_bosses.tall_vase = Tall Vase
+  block.block_factorys_bosses.under_world_tall_candle_cross = Tall Cross Soul Candelabra
+  block.block_factorys_bosses.under_world_tall_candle_cross.description_0 = §7Cross
+  block.block_factorys_bosses.underwold_candles = Small Soul Candelabra
+  block.block_factorys_bosses.underwold_wall_torch = Soul Wall Torch
+  block.block_factorys_bosses.underworld_arena_door = Underworld Arena Door
+  block.block_factorys_bosses.underworld_tall_candles = Tall Soul Candelabra
+  block.block_factorys_bosses.underworld_tall_candles.description_0 = §7Twisted
+  block.block_factorys_bosses.vase = Vase
+  block.block_factorys_bosses.wall_torch = Wall Torch
+  block.cataclysm.altar_of_abyss = Altar of Abyss
+  block.cataclysm.altar_of_amethyst = Altar of Amethyst
+  block.cataclysm.altar_of_fire = Altar of Fire
+  block.cataclysm.altar_of_void = Altar of Void
+  block.cataclysm.boss_respawner = Boss Respawner
+  block.graveyard.altar = Altar
+  block.graveyard.altar.missing_fragments = The altar needs all three bone staff pieces.
+  block.graveyard.altar.night_only = The altar answers only at night.
+  block.graveyard.altar.peaceful = The dead do not rise on peaceful.
+  block.graveyard.altar.vial_not_full = The vial is not full yet.
+  block.graveyard.altar.wrong_order = The middle piece must lie between the two ends.
+  block.graveyard.altar_center = Corrupted Deepslate Center
+  block.graveyard.altar_corner = Corrupted Deepslate Corner
+  block.graveyard.altar_side = Corrupted Deepslate Side
+  block.graveyard.bone_staff_fragment.end.lore = An end of the staff. It rests at one side of the row before the altar.
+  block.mythsandlegends.altar_of_the_dead = Altar of the Dead
+  block.oddities.orchid_altar = Orchid Altar
+  block.soulsweapons.altar_block = Old Moon Altar
+  block_factorys_bosses = Bosses' Rise
+  cataclysm.gui.altar_of_amethyst_blessing = Blessing
+  chronicle.graveyard.page.tome_of_rituals.title = Tome of Rituals
+  config.aquamirae.option.shell_horn_search_radius.desc = How far from the point of use to search for a valid location to spawn Captain Cornelia.
+  config.aquamirae.option.shell_horn_summon_delay = Summon Delay
+  config.aquamirae.option.shell_horn_summon_delay.desc = Delay between using the Shell Horn and spawning Captain Cornelia or reporting a failed summon.
+  effect.irons_spellbooks.ice_spider_lure = Ice Spider Lure
+  effect.irons_spellbooks.ice_spider_lure.description = Will cause an Ice Spider to spawn and hunt you down upon wearing off
+  entity.block_factorys_bosses.anchor = Anchor
+  entity.block_factorys_bosses.big_cage = Big Cage
+  entity.block_factorys_bosses.big_cage_skelly = Big Cage With Skelly
+  entity.block_factorys_bosses.big_rift_projectile = Helvar Rift Projectile Deluxe
+  entity.block_factorys_bosses.blazing_fire_ball = Blazing Fireball
+  entity.block_factorys_bosses.cage = Cage
+  entity.block_factorys_bosses.cage_skelly = Cage With Skelly
+  entity.block_factorys_bosses.cannonball = Cannonball
+  entity.block_factorys_bosses.crate_pile = Crate Pile
+  entity.block_factorys_bosses.crossbow_pirate = Crossbow Pirate
+  entity.block_factorys_bosses.dragon_guard_sword = Ashlord Guard
+  entity.block_factorys_bosses.fire_area = Fire Arena
+  entity.block_factorys_bosses.flaming_skeleton_guard_fireball = Flaming Ashlord Shooter
+  entity.block_factorys_bosses.flaming_skeleton_guard_sword = Flaming Ashlord Guard
+  entity.block_factorys_bosses.frozen_skeleton = Frozen Skeleton
+  entity.block_factorys_bosses.ghost_tentacle = Ghost Tentacle
+  entity.block_factorys_bosses.glacial_shove = Ice Cube
+  entity.block_factorys_bosses.ice_spike = Ice Spike
+  entity.block_factorys_bosses.ice_spike_cluster = Ice Spike Cluster
+  entity.block_factorys_bosses.ice_spike_pr = Ice Spike Projectile
+  entity.block_factorys_bosses.infernal_dragon = Ashlord, The Infernal Dragon
+  entity.block_factorys_bosses.knight_mark = Helvar's Weakness
+  entity.block_factorys_bosses.kraken = Nerakyss, The Kraken
+  entity.block_factorys_bosses.kraken_cannon = Kraken Cannon
+  entity.block_factorys_bosses.kraken_tentacle = Kraken Tentacle
+  entity.block_factorys_bosses.pile_of_bones = Pile Of Bones
+  entity.block_factorys_bosses.pirate_captain = Pirate Captain
+  entity.block_factorys_bosses.pirate_rook = Pirate Rook
+  entity.block_factorys_bosses.poison_area = Poison Area
+  entity.block_factorys_bosses.poison_spit_pr = Poison Spit
+  entity.block_factorys_bosses.rift = Helvar Rift
+  entity.block_factorys_bosses.rift_projectile = Helvar Rift Projectile
+  entity.block_factorys_bosses.sand_column = Sand Column
+  entity.block_factorys_bosses.sandworm = Sirok, The Sandworm
+  entity.block_factorys_bosses.soul_knight_wither_skeleton = Wither Knight
+  entity.block_factorys_bosses.soul_shockwave = Soul Shockwave
+  entity.block_factorys_bosses.soul_skeleton = Soul Skeleton
+  entity.block_factorys_bosses.sword_wave = Sword Wave
+  entity.block_factorys_bosses.thrown_crate = Crate
+  entity.block_factorys_bosses.underworld_knight = Helvar, the Underworld Knight
+  entity.block_factorys_bosses.yeti = Skor, The Yeti
+  entity.cataclysm.ignis.defeat_message = Within Nether Fortresses, Ignited Beserkers have awakend...
+  entity.irons_spellbooks.fire_boss = Echo of Tyros, First Flamebearer
+  entity.irons_spellbooks.summoned_claymore = Summoned Claymore
+  entity.irons_spellbooks.summoned_polar_bear = Summoned Polar Bear
+  entity.irons_spellbooks.summoned_rapier = Summoned Rapier
+  entity.irons_spellbooks.summoned_skeleton = Summoned Skeleton
+  entity.irons_spellbooks.summoned_sword = Summoned Sword
+  entity.irons_spellbooks.summoned_vex = Summoned Vex
+  entity.irons_spellbooks.summoned_zombie = Summoned Zombie
+  entity.skarrier_mobs.roe_summon = Roe
+  entity.soulsweapons.accursed_lord_boss = The Decaying King
+  entity.soulsweapons.draugr_boss = Old Champion's Remains
+  feedback.aquamirae.summon_captain_cornelia = Ghost of Captain `Cornelia was awakened!
+  item.apotheosis.gem.irons_spellbooks:summoning = Necromancy Gem
+  item.block_factorys_bosses.anchor = Anchor
+  item.block_factorys_bosses.anchor_spawn_egg = Anchor Spawn Egg
+  item.block_factorys_bosses.ancient_trial_key = Ancient Trial Key
+  item.block_factorys_bosses.big_cage_item = Big Cage
+  item.block_factorys_bosses.big_cage_skelly_item = Big Cage With Skelly
+  item.block_factorys_bosses.cage_item = Cage
+  item.block_factorys_bosses.cage_skelly_item = Cage With Skelly
+  item.block_factorys_bosses.crate = Crate
+  item.block_factorys_bosses.crate_pile_spawn_egg = Crate Pile Spawn Egg
+  item.block_factorys_bosses.crossbow_pirate_spawn_egg = Crossbow Pirate Spawn Egg
+  item.block_factorys_bosses.dagger = Dagger
+  item.block_factorys_bosses.dragon_bone = Dragon Bone
+  item.block_factorys_bosses.dragon_bones_boots = Dragon Bones Boots
+  item.block_factorys_bosses.dragon_bones_chestplate = Dragon Bones Chestplate
+  item.block_factorys_bosses.dragon_bones_leggings = Dragon Bones Leggings
+  item.block_factorys_bosses.dragon_guard_shield = Dragon Guard Shield
+  item.block_factorys_bosses.dragon_guard_sword_spawn_egg = Ashlord Guard Spawn Egg
+  item.block_factorys_bosses.dragon_shank = Dragon Shank
+  item.block_factorys_bosses.enhanced_shield = Enhanced Shield
+  item.block_factorys_bosses.flaming_skeleton_guard_fireball_spawn_egg = Flaming Ashlord Shooter Spawn Egg
+  item.block_factorys_bosses.flaming_skeleton_guard_sword_spawn_egg = Flaming Ashlord Guard Spawn Egg
+  item.block_factorys_bosses.ghost_tentacle_spawn_egg = Ghost Tentacle Spawn Egg
+  item.block_factorys_bosses.ice_gauntlet = Skor Gauntlet
+  item.block_factorys_bosses.ice_gauntlet.description_0 = §7On Hit:
+  item.block_factorys_bosses.ice_gauntlet.description_1 = §9Freeze Target
+  item.block_factorys_bosses.ice_gauntlet.description_2 = §7On Sneak-Right-Click Release:
+  item.block_factorys_bosses.ice_gauntlet.description_3 = §9Fire wave of ice-spikes
+  item.block_factorys_bosses.ice_gauntlet.description_4 = §7On jump while holding Right-Click:
+  item.block_factorys_bosses.ice_gauntlet.description_5 = §9Perform an ice-slam-leap
+  item.block_factorys_bosses.ice_gauntlet.description_6 = §8Can be used as a Shield
+  item.block_factorys_bosses.infernal_dragon_spawn_egg = Ashlord, The Infernal Dragon Spawn Egg
+  item.block_factorys_bosses.knight_boots = Knight Boots
+  item.block_factorys_bosses.knight_chestplate = Knight Chestplate
+  item.block_factorys_bosses.knight_helmet = Knight Helmet
+  item.block_factorys_bosses.knight_leggings = Knight Leggings
+  item.block_factorys_bosses.knight_sword = Helvar's Sword
+  item.block_factorys_bosses.knight_sword.description_0 = §7On Right-Click:
+  item.block_factorys_bosses.knight_sword.description_1 = §9Throw a powerful Slash
+  item.block_factorys_bosses.kraken_cannon_item = Kraken Cannon
+  item.block_factorys_bosses.kraken_spawn_egg = Nerakyss, The Kraken Spawn Egg
+  item.block_factorys_bosses.kraken_tooth = Kraken Tooth
+  item.block_factorys_bosses.kraken_trident = Kraken Trident
+  item.block_factorys_bosses.kraken_trident.description_0 = §7On Collision:
+  item.block_factorys_bosses.kraken_trident.description_1 = §9Damages and pulls nearby entities
+  item.block_factorys_bosses.large_sword = Large Sword
+  item.block_factorys_bosses.pile_of_bones_spawn_egg = Pile Of Bones Spawn Egg
+  item.block_factorys_bosses.pirate_captain_spawn_egg = Pirate Captain Spawn Egg
+  item.block_factorys_bosses.pirate_rook_spawn_egg = Pirate Rook Spawn Egg
+  item.block_factorys_bosses.pirate_saber = Pirate Saber
+  item.block_factorys_bosses.sandworm_gauntlet = Sirok Gauntlet
+  item.block_factorys_bosses.sandworm_gauntlet.description_0 = §7On Hold-Right-Click:
+  item.block_factorys_bosses.sandworm_gauntlet.description_1 = §9Shoot Poison
+  item.block_factorys_bosses.sandworm_spawn_egg = Sirok, The Sandworm Spawn Egg
+  item.block_factorys_bosses.soul_knight_wither_skeleton_spawn_egg = Wither Knight Spawn Egg
+  item.block_factorys_bosses.soul_skeleton_spawn_egg = Soul Skeleton Spawn Egg
+  item.block_factorys_bosses.underworld_arena_key = Underworld Arena Key
+  item.block_factorys_bosses.underworld_knight_spawn_egg = Helvar, the Underworld Knight Spawn Egg
+  item.block_factorys_bosses.undying_tentacle = Undying Tentacle
+  item.block_factorys_bosses.undying_tentacle.description_0 = §7On Use:
+  item.block_factorys_bosses.undying_tentacle.description_1 = §9Hook yourself to block, or an entity to yourself.
+  item.block_factorys_bosses.undying_tentacle.description_2 = §7On Shift-Use:
+  item.block_factorys_bosses.undying_tentacle.description_3 = §9Summon tentacles to fight enemies.
+  item.block_factorys_bosses.warrior_sword = Warrior Sword
+  item.block_factorys_bosses.yeti_spawn_egg = Skor, The Yeti Spawn Egg
+  item.cataclysm.ceraunus2.desc = When used while sneaking, it summons Waves in a Fan pattern
+  item.cataclysm.gauntlet_of_maelstrom.desc = Right click to summon a Void Vortex
+  item.cataclysm.immolator2.desc = If you hold it in both hands, you can charge it for 2 seconds for summon Flame strike
+  item.cataclysm.incinerator2.desc = When released, summons a flame strike in the direction you are facing
+  item.cataclysm.netherite_effigy.desc = Summon Netherite Ministrosity, can be tamed through Lava Power Cell
+  item.cataclysm.remnant_skull.desc = Summon Modern Remnant, can be tamed through Sniffer Egg
+  item.cataclysm.sandstorm_in_a_bottle.desc = Right click to summon 2 orbiting Sandstorms
+  item.cataclysm.soul_render2.desc = When used while sneaking, it summons Phantom Halberds in a spiral pattern
+  item.cataclysm.symbiocto_spawn_egg = Symbiocto Spawn Egg
+  item.cataclysm.void_core.desc = Right click to summon Void Runes
+  item.cataclysm.void_forge.desc = When in main hand, right click at a block to summon Void Runes in a fan shape
+  item.graveyard.vial_of_blood.hint = Kill villagers with a bone dagger to fill it. Pour it on the altar by night.
+  item.irons_spellbooks.cinderous_soulcaller.failure.in_progress = An echo has already answered.
+  item.irons_spellbooks.cinderous_soulcaller.failure.no_soul = Nothing echoes back...
+  item.irons_spellbooks.energized_core.failure = A calm sky holds no power; the core remains inert
+  item.irons_spellbooks.greater_conjurers_talisman.desc = Summon spells that time-out do not go on cooldown
+  item.irons_spellbooks.tincture_of_forgetfulness.guide = Dropped from Ominous Bosses
+  item.legendary_monsters.axe_of_lightning1 = §6Special Ability:§7 right click to summon Lightning Strike§6[9 Damage per Tick, Bypass Armor],
+  item.legendary_monsters.axe_of_lightning2 = §7Right Click on block to summon Electric Burst shockwave in the direction
+  item.legendary_monsters.deactivated_guard_summoner = Deactivated Guard Summoner
+  item.legendary_monsters.deactivated_knight_summoner = Deactivated Knight Summoner
+  item.legendary_monsters.dino_club1 = §6Special Ability: §7right click on a block to spawn
+  item.legendary_monsters.great_frost1 = §6Special Ability: §7Right Click to summon Ice Spikes
+  item.legendary_monsters.great_frost2 = §6Special Ability 2: §7Right Click + shift on block to summon Ice Spikes around you
+  item.legendary_monsters.guard_summoner = Guard Summoner
+  item.legendary_monsters.guard_summoner1 = §7Right Click on the ground to summon a guard 
+  item.legendary_monsters.guard_summoner2 = §7it's Automatically tamed on spawn
+  item.legendary_monsters.guard_summoner3 = §7Deals more damage and in bigger ARC than knight but is slower.
+  item.legendary_monsters.guard_summoner4 = §7can be easily respawned after death using iron ingots and deactivated summoner
+  item.legendary_monsters.guard_summoner5 = §7You can re-color him while holding valuable materials or change it's behavior state with shift + right click.
+  item.legendary_monsters.knight_summoner = Knight Summoner
+  item.legendary_monsters.knight_summoner1 = §7Right click on block to summon a knight
+  item.legendary_monsters.knight_summoner2 = §7it's Automatically tamed on spawn
+  item.legendary_monsters.knight_summoner3 = §7Deals less damage than guard but can do fast combos and can block incoming attacks
+  item.legendary_monsters.knight_summoner4 = §7can be easily respawned after death using iron ingots and deactivated summoner
+  item.legendary_monsters.knight_summoner5 = §7You can re-color him while holding valuable materials or change it's behavior state with shift + right click.
+  item.legendary_monsters.mossy_chestplate1 = §6Special Ability: §7 Use 'R' key to spawn poison clouds around you, 
+  item.legendary_monsters.the_tesseract1 = §7Hold right click for 1.5s to summon Annihilation Portals in a Star pattern.
+  item.legendary_monsters.the_tesseract2 = §7During Portal summoning nearby entities are affected by their gravity pull.
+  item.legendary_monsters.totem_of_moss.desc = Right - Click to summon Mossy Golem that assists you in battles and speeds up nearby crop grow speed while near young crops. golem can be respawned when it dies
+  item.legendary_monsters.totem_of_moss1 = §6Right - Click on a Block to summon a Mossy Golem that makes crops grow way faster while near ungrown crops 
+  item.legendary_monsters.wand_of_clouds1 = §6Special Ability: §7 Summons 1 Big explosive cloud [14 dmg] and
+  item.soulsweapons.accursed_lord_boss_spawn_egg = The Decaying King Spawn Egg
+  item.soulsweapons.boss_compass = Moonstone Compass
+  item.soulsweapons.draugr_boss_disc = Champion's Music Disc
+  item.soulsweapons.draugr_boss_disc.desc = NoRestForWicked - Gladius ad Gladium
+  item.soulsweapons.draugr_boss_spawn_egg = Old Champion Spawn Egg
+  item_group.block_factorys_bosses.blockfactorysbossestab = Bosses' Rise
+  jukebox_song.mythsandlegends.dormant_sentinel = The ancient gears awaken, and the Sentinel rises once more.
+  key.block_factorys_bosses.dodge_roll = Dodge Roll
+  key.soulsweapons.collect_summons_soul_reaper = Collect summons to item
+  legendary_monsters.message.teleport_machine = §aInsert an 'Eye Crystal' in the teleport machine to summon the boss
+  lore.citadel_book.cinderous_rituals = A fragment of a ritual text, partially burned. It details undergoing some intense process, with symbology of souls and fire...
+  message.block_factorys_bosses.cannon.no_balls = No ammo!
+  message.block_factorys_bosses.dragon_tower.block_protection = The Dragon Tower is protected by ancient magic!
+  message.block_factorys_bosses.helvar.knocked_down = Helvar is knocked down!
+  monstrosityawaken.sub = Netherite Monstrosity wakes up
+  mythsandlegends.configuration.music = Boss Music
+  research.mythsandlegends.molten_fist.progress2 = The scorched remains begin to merge with the core. This weapon was not forged... it was awakened.
+  research.mythsandlegends.sanctum_table.progress2 = Interesting... these fragments belonged to an ancient workstation. Its surface bears traces of rituals and countless years of use.
+  soulsweapons.weapon.bossRespawnDisabled = §4This boss respawn mechanic has been disabled!§r
+  spell.irons_spellbooks.arrow_volley.guide = Around a targeted creature or block, summon a rolling wave of magical arrows from the sky.
+  spell.irons_spellbooks.lightning_bolt.guide = Down from the heavens, summon a bolt of lightning.
+  spell.irons_spellbooks.raise_dead.guide = Cast to summon undead minions from the earth beneath you. The higher the power, the better equipment they will have.
+  spell.irons_spellbooks.sacrifice.guide = Target one of your magic summons to cause them to explode, killing them instantly, and dealing large damage in the area around them. The summon's remaining health boosts the damage dealt and radius of explosion.
+  spell.irons_spellbooks.summon_ender_chest = Summon Ender Chest
+  spell.irons_spellbooks.summon_ender_chest.guide = Apparate your Ender Chest inventory upon casting.
+  spell.irons_spellbooks.summon_horse = Summon Horse
+  spell.irons_spellbooks.summon_horse.guide = Conjure a spectral steed that will follow you around and only let you ride. The horse's speed, health, and jump height scales with spell power.
+  spell.irons_spellbooks.summon_polar_bear = Summon Polar Bear
+  spell.irons_spellbooks.summon_polar_bear.guide = Cast to summon a polar bear who will follow, protect, and fight for you, as well as providing a mount.
+  spell.irons_spellbooks.summon_swords = Summon Swords
+  spell.irons_spellbooks.summon_swords.guide = Conjure a trio of spectral armaments to aid in battle: a brawling shortsword, a quick rapier, and a tanking claymore. Created by the Ancient Magician known as Hazentouvel.
+  spell.irons_spellbooks.summon_vex = Summon Vex
+  spell.irons_spellbooks.summon_vex.guide = Cast to conjure vexes that will follow, protect, and fight for you.
+  tag.entity_type.c.bosses = Bosses
+  tag.item.soulsweapons.duo_boss_souls = Duo Boss Lord Souls
+  tag.item.soulsweapons.summonable_weapons = Summonable Weapons
+  text.mythsandlegends.black_charro_awakening = A chill runs through your spine... The Black Charro rides again!
+  text.mythsandlegends.black_charro_fail = The shadows linger, unbroken... Your offering was unworthy of their gaze.
+  text.mythsandlegends.black_charro_summon_condemned0 = Rise from the void, condemned soul. Obey my will!
+  text.mythsandlegends.black_charro_summon_condemned1 = Awaken, lost spirit. Your torment is not yet over!
+  text.mythsandlegends.black_charro_summon_condemned2 = TBy my command, the shadows stir once more!
+  text.mythsandlegends.black_charro_summon_condemned3 = Wraiths of pain and sorrow, answer my summons!
+  text.mythsandlegends.black_charro_summon_condemned4 = Another forsaken soul joins my legion
+  text.mythsandlegends.black_charro_summon_condemned5 = Your chains are broken—serve me in undeath!
+  tooltip.aquamirae.shell_horn = [color=light_purple]Summons Captain Cornelia.[/color] [/br][/br] Can be used near water in the Ice Maze.
+  tooltip.mythsandlegends.copper_coin_sword = §5Forged from offerings long buried, its edge is especially cruel to the restless dead.
+  tooltip.mythsandlegends.cursed_core = §5A dark core pulsating with malevolent energy, used in a sinister ritual.
+  tooltip.mythsandlegends.higa_amulet = §5An ancient charm said to ward off curses. Its protection awakens at the brink of danger.
+  tooltip.mythsandlegends.noctifer_tenebris_tooltip_shift_down2 = §6[Sneak + Right-click] §8while looking at a creature to summon an Umbral Hand.
+  tooltip.mythsandlegends.soulbinder_amulet = §5This dark amulet pulses with unholy energy, forged to summon the Black Charro from his eternal vigil.
+  tooltip.soulsweapons.arrow_storm.1 = - Summon a cloud that rains down §3Moonlight Arrows§r
+  tooltip.soulsweapons.chaos_orb.2 = this orb. Throw it into the sky to summon
+  tooltip.soulsweapons.collect_2 = summons back into your Soul Harvesting Weapon if in hand.
+  tooltip.soulsweapons.demon_chunk.part_1 = Use on the Blackstone Pedestal to summon a long, lost king
+  tooltip.soulsweapons.draugr_info.part_1 = Use on the Old Moon Altar to fight the Old Champion once again
+  tooltip.soulsweapons.draupnirs_call.1 = - Summon %s §6Draupnir Spears§r from the sky around you
+  tooltip.soulsweapons.draupnirs_wail.2 = - All §6Draupnir Spears§r you've summoned will explode
+  tooltip.soulsweapons.essence_of_eventide.part_3 = Perhaps bringing it to the Old Moon Altar
+  tooltip.soulsweapons.flameburst.1 = - Use to summon §6Flame Pillars§r in a path ahead, leaving
+  tooltip.soulsweapons.ghost_summoner = Children of the Grave
+  tooltip.soulsweapons.ghost_summoner.description.1 = - May raise §3Remnant§r companion when killing undead.
+  tooltip.soulsweapons.lightning_call.1 = - Summon §eLightning§r on all nearby mobs
+  tooltip.soulsweapons.lord_soul_night_prowler.part_2 = godhood if she was summoned. Destruction
+  tooltip.soulsweapons.lost_soul.part_4 = There is an altar that seems to crave
+  tooltip.soulsweapons.mjolnir_lightning_call.description.1 = - Smash the ground and call forth §eLightning§r 
+  tooltip.soulsweapons.mjolnir_throw.1 = - Throw the weapon at enemies, summoning
+  tooltip.soulsweapons.moonfall.1 = - Charge the weapon and smash the ground, summoning
+  tooltip.soulsweapons.nights_edge.1 = - Use to summon a line of §dEdges of Night§r
+  tooltip.soulsweapons.nights_edge.2 = - Summon circles of §dEdges of Night§r around you
+  tooltip.soulsweapons.soul_release.1 = - Use to summon familiar with strength
+  tooltip.soulsweapons.soul_release_random.1 = - Use to summon random familiar
+  tooltip.soulsweapons.summon_weapon = Bound Armament
+  tooltip.soulsweapons.summon_weapon.1 = - Use to summon the weapon by your side
+  tooltip.soulsweapons.summon_weapon.2 = Press %s or right click the weapon to pick it up
+  tooltip.soulsweapons.summon_weapon.3 = Press %s to switch between stationary & following
+  tooltip.soulsweapons.summon_weapon.4 = Only one summoned weapon may exist at a time
+  tooltip.soulsweapons.summon_weapon.5 = Quitting will place it on quit spot until picked up
+  tooltip.soulsweapons.throw_dragonslayer_swordspear.1 = - Throw the weapon at enemies, summoning
+  tooltip.soulsweapons.wabbajack_description = - Summon random projectiles with random effects.
+  ui.irons_spellbooks.portal_break_failure = Portals can only be destroyed by their owner!
+  ui.irons_spellbooks.portal_dye_failure = Portals can only be dyed by their owner!
+  ui.irons_spellbooks.portal_target_failure = Target another empty Portal Frame to finish the connection.
+  ui.irons_spellbooks.sacrifice_target_failure = You must target one of your summons
+  ui.irons_spellbooks.summon_count = %d Summons
+  ui.irons_spellbooks.summon_despawn_message = %s faded from this world.
+
+# Templates with altar / summon / spawner blocks (and structures reaching them directly)
+  block_factorys_bosses:dragon_tower2: ['block_factorys_bosses:boss_spawner'] <- []
+  block_factorys_bosses:kraken_ship_front: ['block_factorys_bosses:kraken_spawner'] <- []
+  block_factorys_bosses:underworld_arena_soul_skeleton_spawner: ['minecraft:spawner'] <- []
+  block_factorys_bosses:underworld_arena_tower: ['minecraft:spawner'] <- []
+  block_factorys_bosses:underworld_arena_wither_knight_spawner: ['minecraft:spawner'] <- []
+  cataclysm:burning_arena2: ['cataclysm:altar_of_fire'] <- []
+  cataclysm:frosted_prison_bottom_7: ['cataclysm:cursed_tombstone'] <- []
+  cataclysm:ruined_citadel5: ['cataclysm:altar_of_void'] <- []
+  cataclysm:sunken_city_lower: ['cataclysm:altar_of_abyss'] <- []
+  cataclysm:sunken_city_temple2: ['cataclysm:altar_of_amethyst'] <- []
+  graveyard:altar/altar_01: ['graveyard:pedestal'] <- ['graveyard:altar']
+  graveyard:crypt/corridor_pool/corner_01: ['graveyard:pedestal', 'graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/corner_02: ['graveyard:pedestal', 'graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_01: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_02: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_03: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_04: ['graveyard:pedestal', 'graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_05: ['minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/corridor_06: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_07: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/corridor_08: ['minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/corridor_10: ['graveyard:pedestal'] <- []
+  graveyard:crypt/corridor_pool/end_02: ['minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/end_03: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/end_04: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/end_05: ['graveyard:pedestal', 'graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/end_06: ['graveyard:pedestal'] <- []
+  graveyard:crypt/corridor_pool/labyrinth_01: ['graveyard:pedestal', 'minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/library_01: ['graveyard:pedestal'] <- []
+  graveyard:crypt/corridor_pool/library_02: ['graveyard:pedestal'] <- []
+  graveyard:crypt/corridor_pool/room_01: ['graveyard:pedestal', 'graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/room_02: ['minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/room_04: ['graveyard:pedestal', 'graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:crypt/corridor_pool/stair_01: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/stair_02: ['graveyard:sarcophagus'] <- []
+  graveyard:crypt/corridor_pool/stair_03: ['minecraft:spawner'] <- []
+  graveyard:crypt/start_pool/start_room: ['graveyard:pedestal'] <- ['graveyard:crypt']
+  graveyard:haunted_house/downstairs_pool/haunted_house_downstairs: ['minecraft:spawner'] <- []
+  graveyard:haunted_house/start_pool/haunted_house_01: ['graveyard:sarcophagus', 'minecraft:spawner'] <- ['graveyard:haunted_house']
+  graveyard:large_graveyard/branch_pool/branch_graves_02: ['graveyard:sarcophagus'] <- []
+  graveyard:large_graveyard/branch_pool/branch_graves_05: ['graveyard:sarcophagus'] <- []
+  graveyard:large_graveyard/branch_pool/branch_large_grave_01: ['graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:large_graveyard/branch_pool/branch_large_grave_02: ['graveyard:sarcophagus'] <- []
+  graveyard:large_graveyard/branch_pool/branch_looted_graves_02: ['graveyard:sarcophagus'] <- []
+  graveyard:large_graveyard/branch_pool/branch_lost_grave: ['graveyard:sarcophagus'] <- []
+  graveyard:large_graveyard/branch_pool/branch_spider_den: ['minecraft:spawner'] <- []
+  graveyard:large_graveyard/crossroad_01: ['graveyard:sarcophagus', 'minecraft:spawner'] <- ['graveyard:large_graveyard']
+  graveyard:large_graveyard/crossroad_02: ['graveyard:sarcophagus', 'minecraft:spawner'] <- ['graveyard:large_graveyard']
+  graveyard:large_graveyard/feature_pool/gallows_hill: ['minecraft:spawner'] <- []
+  graveyard:large_graveyard/feature_pool/walled_graves_with_crypt: ['graveyard:sarcophagus'] <- []
+  graveyard:large_graveyard/feature_pool/walled_street_01: ['graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:large_graveyard/feature_pool/walled_street_02: ['graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:large_graveyard/feature_pool/walled_street_03: ['graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:large_graveyard/feature_pool/wither_skeleton_mill: ['graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:large_graveyard/small_crypt_pool/small_crypt: ['minecraft:spawner'] <- []
+  graveyard:large_graveyard/street_pool/graveyard_entrance: ['minecraft:spawner'] <- []
+  graveyard:large_graveyard/street_pool/street_02: ['graveyard:sarcophagus', 'minecraft:spawner'] <- []
+  graveyard:large_graveyard/street_pool/street_04: ['graveyard:sarcophagus'] <- []
+  graveyard:lich_prison/lich_prison: ['graveyard:altar', 'graveyard:altar_center', 'graveyard:altar_corner', 'graveyard:altar_side'] <- ['graveyard:lich_prison']
+  graveyard:medium_graveyard/medium_graveyard_01: ['graveyard:sarcophagus', 'minecraft:spawner'] <- ['graveyard:medium_graveyard']
+  graveyard:medium_graveyard/medium_graveyard_02: ['graveyard:sarcophagus'] <- ['graveyard:medium_graveyard']
+  graveyard:mushroom_grave/mushroom_grave_01: ['graveyard:sarcophagus'] <- ['graveyard:mushroom_grave']
+  graveyard:mushroom_grave/mushroom_grave_02: ['graveyard:sarcophagus'] <- ['graveyard:mushroom_grave']
+  graveyard:mushroom_grave/mushroom_grave_03: ['graveyard:sarcophagus'] <- ['graveyard:mushroom_grave']
+  graveyard:overrun_village/lots/gallows: ['graveyard:pedestal'] <- []
+  graveyard:small_desert_graveyard/small_desert_graveyard_01: ['graveyard:sarcophagus', 'minecraft:spawner'] <- ['graveyard:small_desert_graveyard']
+  graveyard:small_graveyard/small_graveyard_01: ['minecraft:spawner'] <- []
+  graveyard:small_graveyard/small_graveyard_02: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_03: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_04: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_05: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_06: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_07: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_08: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_graveyard/small_graveyard_09: ['minecraft:spawner'] <- ['graveyard:small_graveyard']
+  graveyard:small_mountain_grave/small_mountains_grave_01: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_02: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_03: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_04: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_05: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_06: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_07: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_08: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_09: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_10: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  graveyard:small_mountain_grave/small_mountains_grave_11: ['graveyard:sarcophagus'] <- ['graveyard:small_mountain_grave']
+  irons_spellbooks:battleground/origin: ['irons_spellbooks:trial_spawner'] <- ['irons_spellbooks:ancient_battleground']
+  irons_spellbooks:catacombs/hallway/hallway_stairway: ['irons_spellbooks:pedestal', 'minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/hallway/hallway_straight_2: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/hallway/hallway_tee_1: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/hallway/hallway_turn_1: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/armorstand: ['irons_spellbooks:trial_spawner'] <- []
+  irons_spellbooks:catacombs/room/balcony: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/crypt_1: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/crypt_2: ['irons_spellbooks:trial_spawner', 'minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/dormitories_1: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/dormitories_2: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/dropdown_hallway: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/large_crypt_1: ['irons_spellbooks:trial_spawner'] <- []
+  irons_spellbooks:catacombs/room/small_spawner_1: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room/wall_crypt: ['minecraft:spawner'] <- []
+  irons_spellbooks:catacombs/room_origin_spawner_1: ['irons_spellbooks:trial_spawner'] <- []
+  irons_spellbooks:citadel/citadel: ['irons_spellbooks:trial_spawner'] <- ['irons_spellbooks:citadel']
+  irons_spellbooks:citadel/rampart/decoration/rampart/spawner: ['irons_spellbooks:trial_spawner'] <- []
+  irons_spellbooks:citadel/rampart/decoration/trophy/spawner: ['irons_spellbooks:trial_spawner'] <- []
+  irons_spellbooks:evoker_fort/tower: ['minecraft:spawner'] <- []
+  irons_spellbooks:ice_spider_den/dungeon/5x5_decorator/spawner: ['irons_spellbooks:trial_spawner'] <- []
+  irons_spellbooks:ice_spider_den/fort: ['irons_spellbooks:trial_spawner'] <- ['irons_spellbooks:ice_spider_den']
+  irons_spellbooks:mountain_tower: ['irons_spellbooks:pedestal'] <- []
+  irons_spellbooks:pyromancer_tower/basement: ['irons_spellbooks:pedestal'] <- []
+  legendary_monsters:ancient_stronghold: ['minecraft:spawner'] <- ['legendary_monsters:ancient_stronghold']
+  legendary_monsters:ancient_tower_remains: ['minecraft:spawner'] <- ['legendary_monsters:ancient_tower_remains']
+  legendary_monsters:ruined_pyramid: ['minecraft:spawner'] <- ['legendary_monsters:ruined_pyramid']
+  legendary_monsters:soul_fortress_remains: ['minecraft:spawner'] <- ['legendary_monsters:soul_fortress_remains']
+  mythsandlegends:ancient_vestiges/ancient_vestiges_center: ['minecraft:spawner'] <- ['mythsandlegends:ancient_vestiges']
+  mythsandlegends:ancient_vestiges/ancient_vestiges_left: ['minecraft:spawner'] <- []
+  mythsandlegends:ancient_vestiges/ancient_vestiges_right: ['minecraft:spawner'] <- []
+  mythsandlegends:mausoleum/mausoleum_arena: ['mythsandlegends:altar_of_the_dead'] <- []
+  mythsandlegends:mausoleum/mausoleum_connector: ['mythsandlegends:tombstone'] <- ['mythsandlegends:mausoleum']
+  mythsandlegends:mausoleum/mausoleum_staircase: ['mythsandlegends:tombstone'] <- []
+  mythsandlegends:old_camp/old_camp: ['minecraft:spawner'] <- ['mythsandlegends:old_camp']
+  oddities:orchid_shrine_1: ['oddities:orchid_altar'] <- ['oddities:orchid_shrine']
+  soulsweapons:cathedral_of_resurrection: ['soulsweapons:altar_block'] <- ['soulsweapons:cathedral_of_resurrection']
+  soulsweapons:cathedral_of_resurrection_old: ['soulsweapons:altar_block'] <- []
+  soulsweapons:corrupt_altar_main: ['soulsweapons:altar_block'] <- []
+  soulsweapons:corrupt_altar_main_altarnate: ['soulsweapons:altar_block'] <- ['soulsweapons:corrupt_altar']

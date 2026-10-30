@@ -63,7 +63,10 @@ def chart_check(process, log, root):
     spots = [m.group(1) for m in (re.search(r" at (-?\d+, -?\d+),", l) for l in lines[1:]) if m]
     if len(set(spots)) < len(spots):
         lines.append("the same lair twice: " + ", ".join(spots))
-    level = "warning" if any("found no lair" in l or "no answer" in l or "same lair" in l for l in lines) else "notice"
+    # A layer without boss mods has no lair to find: that's only noted.
+    lairs = re.search(r"in minecraft:overworld \((\d+)\)", lines[0])
+    none_here = lairs is not None and lairs.group(1) == "0"
+    level = "warning" if any(("found no lair" in l and not none_here) or "no answer" in l or "same lair" in l for l in lines) else "notice"
     print(f"::{level} title=server-chart::{esc(chr(10).join(lines)[:3900])}")
 
 

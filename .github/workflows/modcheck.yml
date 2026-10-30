@@ -31,10 +31,10 @@ jobs:
           run-id: ${{ env.RUN_ID }}
           github-token: ${{ github.token }}
       - run: |
-          rm -rf data-out; mkdir -p data-out/reports12
-          python3 check/reports12.py "$(ls pack/*server*.zip | head -1)" shots data-out/reports12 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
-          echo "::notice title=reports12::$(head -c 3500 data-out/reports12/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          rm -rf data-out; mkdir -p data-out/reports13
+          python3 check/reports13.py "$(ls pack/*server*.zip | head -1)" shots data-out/reports13 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          echo "::notice title=reports13::$(head -c 3500 data-out/reports13/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data 2> git.txt || echo "::error title=clone::$(tr '\n' '|' < git.txt)"
-          cp log.txt data-out/reports12/log.txt
-          rm -rf data/reports12 && mkdir -p data/reports12 && cp -r data-out/reports12/* data/reports12/ && cd data && git add -A
-          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "reports12" && git push -q origin ci/data 2> ../push.txt && echo pushed || echo "::error title=push::$(tr '\n' '|' < ../push.txt)"
+          cp log.txt data-out/reports13/log.txt
+          rm -rf data/reports13 && mkdir -p data/reports13 && cp -r data-out/reports13/* data/reports13/ && cd data && git add -A
+          git -c user.name=ci -c user.email=ci@example.invalid commit -qm "reports13" && git push -q origin ci/data 2> ../push.txt && echo pushed || echo "::error title=push::$(tr '\n' '|' < ../push.txt)"

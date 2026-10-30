@@ -75,6 +75,15 @@ public final class PirateTuning {
 		return COUNTERS.computeIfAbsent(mob.getClass(), Counters::of) != Counters.NONE;
 	}
 
+	/** Sets a rook's swing cooldown (the game tests start both rooks from 0; Bosses'Rise starts a new rook part-way). */
+	public static void setCooldown(Mob mob, int value) {
+		Counters counters = COUNTERS.computeIfAbsent(mob.getClass(), Counters::of);
+
+		if (counters != Counters.NONE) {
+			mob.getEntityData().set(counters.cooldown, value);
+		}
+	}
+
 	/** The rook's swing cooldown now, or -1 for a mob without one (the game tests). */
 	public static int cooldown(Mob mob) {
 		Counters counters = COUNTERS.computeIfAbsent(mob.getClass(), Counters::of);

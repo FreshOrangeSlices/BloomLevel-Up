@@ -187,6 +187,8 @@ public final class BandGameTests {
 
 		quick.setTarget(target);
 		crew.setTarget(target);
+		PirateTuning.setCooldown(quick, 0);
+		PirateTuning.setCooldown(crew, 0);
 		int quickStart = PirateTuning.cooldown(quick);
 		int crewStart = PirateTuning.cooldown(crew);
 		helper.runAfterDelay(PirateTuning.COOLDOWN_TICKS + 1, () -> {

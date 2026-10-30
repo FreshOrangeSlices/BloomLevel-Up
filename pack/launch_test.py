@@ -430,16 +430,48 @@ def bloom_sorting(dump_file):
 
 
 MATERIAL_TAGS = ("forge:ingots", "forge:nuggets", "forge:gems", "forge:raw_materials", "forge:dusts", "forge:rods", "forge:leather")
-MATERIAL_NAMES = re.compile(r"(_ingot|_nugget|_gem|_shard|_scales?|_plating|_plate|_fragment|_crystal|_chunk|_alloy|_hide)$|^raw_")
+MATERIAL_NAMES = re.compile(r"(_ingot|_nugget|_gem|_shard|_scales?|_plating|_fragment|_crystal|_chunk|_alloy|_hide)$|^raw_")
+COOKING = ("minecraft:smelting", "minecraft:blasting", "minecraft:smoking", "minecraft:campfire_cooking")
 
 
-def leftover_check(dump_file, spec_file):
-    """Materials (ingots, nuggets, gems, scales, plates and the like) that no recipe the server loaded takes any more:
-    what a gear trim can leave behind (FreshOrangeSlices: copper had almost nothing left to make). Items the pack
-    takes out or hides don't count. Returns (note, lines), the lines one per leftover with what still makes it."""
+def recipe_mentions(server_dir, ids):
+    """For each id, the recipe files in the server's jars that name it (any recipe type: a mod's own crafting stations
+    don't always say what they take), leaving out those the pack's data pack replaces."""
+    replaced = set()
+    data_root = os.path.join(server_dir, "config", "openloader", "data")
+    for root, _, files in os.walk(data_root):
+        for f in files:
+            rel = os.path.relpath(os.path.join(root, f), data_root).replace(os.sep, "/")
+            if "/data/" in rel and "/recipes/" in rel:
+                replaced.add(rel.split("/data/", 1)[1])  # <pack>/data/<namespace>/recipes/... -> <namespace>/recipes/...
+    found = {i: [] for i in ids}
+    mods = os.path.join(server_dir, "mods")
+    for jar in sorted(os.listdir(mods)) if os.path.isdir(mods) else []:
+        try:
+            z = zipfile.ZipFile(os.path.join(mods, jar))
+        except (zipfile.BadZipFile, OSError):
+            continue
+        for name in z.namelist():
+            if not (name.startswith("data/") and "/recipes/" in name and name.endswith(".json")) or name[5:] in replaced:
+                continue
+            text = z.read(name).decode("utf-8", "replace")
+            for i in ids:
+                if f'"{i}"' in text:
+                    found[i].append(name[5:])
+    return found
+
+
+def leftover_check(dump_file, spec_file, server_dir):
+    """Materials (ingots, nuggets, gems, scales, plates and the like) that nothing takes any more: what a gear trim can
+    leave behind (FreshOrangeSlices: copper had almost nothing left to make). A material here is one no recipe crafts
+    (a drop or loot) or one only cooked; something crafted is an end product, and food, blocks and other usable items
+    have their use. Taken means named by a loaded recipe or by any recipe file in the jars the pack doesn't replace (a mod's
+    own station may not say what it takes). Items the pack takes out or hides don't count. Returns (note, lines)."""
     if not os.path.exists(dump_file):
         return "leftovers: no registry dump", []
     rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    if not any(r.get("kind") == "recipe" and "ingredients" in r for r in rows):
+        return "leftovers: the dump has no recipe ingredients", []
     spec = json.load(open(spec_file)).get("pack_data", {})
     gone = {i for field in ("removed_items", "hidden_items") for reason, ids in spec.get(field, {}).items()
             if not reason.startswith("_") for i in ids}
@@ -448,15 +480,16 @@ def leftover_check(dump_file, spec_file):
         if r.get("kind") == "recipe":
             used.update(r.get("ingredients", []))
             if r.get("result"):
-                made.setdefault(r["result"], []).append(r["id"])
+                made.setdefault(r["result"], []).append(r.get("type"))
     materials = [r for r in rows if r.get("kind") == "item" and r["id"] not in gone and not r.get("durability") and "armor" not in r
+                 and r.get("use", "none") == "none" and "BlockItem" not in r.get("classes", []) and all(t in COOKING for t in made.get(r["id"], []))
                  and (any(t.startswith(MATERIAL_TAGS) for t in r.get("tags", [])) or MATERIAL_NAMES.search(r["id"].split(":", 1)[1]))]
-    if not any(r.get("kind") == "recipe" and "ingredients" in r for r in rows):
-        return "leftovers: the dump has no recipe ingredients", []
-    leftovers = sorted(r["id"] for r in materials if r["id"] not in used)
-    lines = [f"{item} ({next((r.get('name') for r in materials if r['id'] == item), '')}): nothing takes it; "
-             + (f"made by {', '.join(made[item][:3])}" if item in made else "no recipe makes it (a drop or loot)") for item in leftovers]
-    return f"leftovers: {len(leftovers)} of {len(materials)} materials have no recipe that takes them", lines
+    candidates = [r["id"] for r in materials if r["id"] not in used]
+    mentions = recipe_mentions(server_dir, candidates)
+    leftovers = sorted(i for i in candidates if not mentions[i])
+    names = {r["id"]: r.get("name", "") for r in materials}
+    lines = [f"{item} ({names[item]}): nothing takes it; " + ("cooked" if item in made else "a drop or loot") for item in leftovers]
+    return f"leftovers: {len(leftovers)} of {len(materials)} materials have nothing that takes them", lines
 
 
 def crash_summary(folder, lines):
@@ -872,7 +905,7 @@ def main():
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
     # ---- materials a trim left with nothing to make (reviewed by hand: some are drops with uses outside recipes)
     leftover_note, leftovers = leftover_check(os.path.join(server_dir, "bloom-dump.jsonl"),
-                                              os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
+                                              os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)
     notes.append(leftover_note)
     if leftovers:
         text = chr(10).join(leftovers)

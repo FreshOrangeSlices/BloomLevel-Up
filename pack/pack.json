@@ -222,10 +222,6 @@
       "version": "3.2.0",
       "why": "Book of Dragons 1.4 and its Fauna Engine ask for exactly 3.2.0 (only they use AzureLib)"
     },
-    "book-of-dragons": {
-      "version": "1.4-1.20.1",
-      "why": "1.4 (2026-10-27) over the locked 1.31, for the playtest patch; goes once the lock has it"
-    },
     "keybind-atlas": {
       "version": "2.0.0",
       "why": "2.1.0 (2026-10-28) isn't remapped for a real game (built with development names), so the client crashes while loading"
@@ -314,6 +310,7 @@
         "legendary_monsters:enderitium_sword", "legendary_monsters:resurrected_javelin", "legendary_monsters:sharp_sai",
         "legendary_monsters:the_great_frost", "legendary_monsters:void_sword", "legendary_monsters:wand_of_clouds"
       ],
+      "Leftovers (the pack test's leftover check, 2026-10-30): Legendary Monsters' Void Gem, whose one use was the Void Sword the armory trim cut": ["legendary_monsters:void_gem"],
       "Paladins & Priests: the ones marked Cut": [
         "paladins:diamond_claymore", "paladins:golden_claymore", "paladins:golden_great_hammer",
         "paladins:golden_mace", "paladins:iron_claymore", "paladins:netherite_claymore",
@@ -723,7 +720,6 @@
         "ModSettings/enable_profiles/value": false,
         "GuiSettings/show_continuous_crafting_checkbox/value": false,
         "GuiSettings/enable_profiles_ui/value": false,
-        "GuiSettings/enable_profiles_announcement/value": false,
         "AutoRefillSettings/visual_durability_notification/value": false,
         "AutoRefillSettings/audio_durability_notification/value": false,
         "AutoRefillSettings/visual_replace_failed_notification/value": false,

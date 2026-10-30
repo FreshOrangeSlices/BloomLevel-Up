@@ -135,11 +135,13 @@ public final class Bands {
 		// Straight to the mob's own finalizeSpawn (its gear, a leader's banner), as an event spawn rather than a patrol: a
 		// spawn rule for natural and patrol spawns (Easy Mob Spawn Control's night-only rule for Illager Invasion's
 		// illagers in the pack) turned a daytime band's members away as they joined. Patrollers are set patrolling here,
-		// as a patrol spawn would.
+		// as a patrol spawn would (its setter isn't public: through the mob's saved data, as a reload would).
 		mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null, null);
 
-		if (mob instanceof PatrollingMonster patroller) {
-			patroller.setPatrolling(true);
+		if (mob instanceof PatrollingMonster) {
+			CompoundTag saved = mob.saveWithoutId(new CompoundTag());
+			saved.putBoolean("Patrolling", true);
+			mob.load(saved);
 		}
 
 		if (kind == BandKind.PIRATE) {

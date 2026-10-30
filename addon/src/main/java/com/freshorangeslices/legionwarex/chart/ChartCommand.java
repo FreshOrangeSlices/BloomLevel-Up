@@ -29,8 +29,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * {@code /legionwarex chart find|lairs|beaten|forget|probe <structure>} (operators): read a chart where the command runs, at once (a player
- * running it gets the treasure map in hand); list the lairs and whether each is in this dimension; list or forget the
- * beaten bosses. Each answer is also logged as "LegionWareX chart: ..." for the pack test.
+ * running it gets the treasure map in hand, and the lair counts as charted); list the lairs and whether each is in this
+ * dimension; list or forget the beaten bosses and charted lairs. Each answer is also logged as "LegionWareX chart: ..." for the pack test.
  */
 public final class ChartCommand {
 	private ChartCommand() {
@@ -98,6 +98,8 @@ public final class ChartCommand {
 			return 0;
 		}
 
+		// As a chart read here: the next one leads elsewhere.
+		BeatenBosses.of(level.getServer()).chart(found.chunk());
 		say(source, "found " + found.boss() + " in " + found.structure() + " at " + found.pos().getX() + ", " + found.pos().getZ() + ", "
 				+ Math.round(found.distance()) + " blocks from " + from.toShortString() + (found.rematch() ? " (a rematch)" : "") + " ("
 				+ search.searched() + " of " + size + " lairs in this dimension, " + search.millis() + " ms)");
@@ -143,14 +145,15 @@ public final class ChartCommand {
 	}
 
 	private static int beaten(CommandContext<CommandSourceStack> context) {
-		Set<ResourceLocation> beaten = BeatenBosses.of(context.getSource().getServer()).all();
-		say(context.getSource(), beaten.size() + " bosses beaten: " + beaten);
+		BeatenBosses log = BeatenBosses.of(context.getSource().getServer());
+		Set<ResourceLocation> beaten = log.all();
+		say(context.getSource(), beaten.size() + " bosses beaten: " + beaten + "; " + log.chartedCount() + " lairs charted");
 		return beaten.size();
 	}
 
 	private static int forget(CommandContext<CommandSourceStack> context) {
 		BeatenBosses.of(context.getSource().getServer()).clear();
-		say(context.getSource(), "beaten bosses forgotten");
+		say(context.getSource(), "beaten bosses and charted lairs forgotten");
 		return 1;
 	}
 }

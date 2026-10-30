@@ -64,6 +64,11 @@ public final class Bands {
 	 * at's height instead of the top of its column (the game tests' closed rooms, whatever the world is around them).
 	 */
 	public static List<Mob> spawn(ServerLevel level, BandKind kind, BlockPos at, RandomSource random, int size, boolean onSurface) {
+		return spawn(level, kind, at, random, size, onSurface, new ArrayList<>());
+	}
+
+	/** As above, noting in 'leftOut' each member that couldn't come and why ("minecraft:pillager at x, y, z: block light 12"). */
+	public static List<Mob> spawn(ServerLevel level, BandKind kind, BlockPos at, RandomSource random, int size, boolean onSurface, List<String> leftOut) {
 		List<Mob> band = new ArrayList<>();
 		EntityType<?> leaderType = kind.pickLeader(random);
 
@@ -79,7 +84,7 @@ public final class Bands {
 				pos.setY(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY());
 			}
 
-			Mob mob = member(level, kind, i == 0 ? leaderType : kind.pickMember(random), pos.immutable(), random, leader);
+			Mob mob = member(level, kind, i == 0 ? leaderType : kind.pickMember(random), pos.immutable(), random, leader, leftOut);
 
 			if (mob == null && i == 0) {
 				return band;
@@ -110,8 +115,37 @@ public final class Bands {
 				&& level.getBrightness(LightLayer.BLOCK, pos) <= 8;
 	}
 
-	private static Mob member(ServerLevel level, BandKind kind, EntityType<?> type, BlockPos pos, RandomSource random, UUID leader) {
-		if (type == null || !canStand(level, pos, type)) {
+	/** Why a band member can't stand here, as {@link #canStand} sees it ("" when it can). */
+	public static String whyNot(ServerLevel level, BlockPos pos, EntityType<?> type) {
+		BlockState state = level.getBlockState(pos);
+		BlockPos below = pos.below();
+		List<String> reasons = new ArrayList<>();
+
+		if (!NaturalSpawner.isValidEmptySpawnBlock(level, pos, state, state.getFluidState(), type)) {
+			reasons.add("no room (" + ForgeRegistries.BLOCKS.getKey(state.getBlock()) + (state.getFluidState().isEmpty() ? "" : ", fluid") + ")");
+		}
+
+		if (!level.getBlockState(below).isValidSpawn(level, below, type)) {
+			reasons.add("can't stand on " + ForgeRegistries.BLOCKS.getKey(level.getBlockState(below).getBlock()));
+		}
+
+		if (level.getBrightness(LightLayer.BLOCK, pos) > 8) {
+			reasons.add("block light " + level.getBrightness(LightLayer.BLOCK, pos));
+		}
+
+		return String.join(", ", reasons);
+	}
+
+	private static Mob member(ServerLevel level, BandKind kind, EntityType<?> type, BlockPos pos, RandomSource random, UUID leader, List<String> leftOut) {
+		if (type == null) {
+			leftOut.add("a member whose mod isn't installed");
+			return null;
+		}
+
+		String where = ForgeRegistries.ENTITY_TYPES.getKey(type) + " at " + pos.toShortString();
+
+		if (!canStand(level, pos, type)) {
+			leftOut.add(where + ": " + whyNot(level, pos, type));
 			return null;
 		}
 
@@ -159,7 +193,12 @@ public final class Bands {
 		mob.getPersistentData().put(DATA, data);
 
 		// Joining the level is when a pirate follower is given its leader to keep near (BandEvents.onJoin).
-		return level.addFreshEntity(mob) ? mob : null;
+		if (!level.addFreshEntity(mob)) {
+			leftOut.add(where + ": turned away as it joined the world");
+			return null;
+		}
+
+		return mob;
 	}
 
 	/** The band's leader, or null for the leader itself (or something not in a band). */

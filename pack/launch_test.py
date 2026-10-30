@@ -973,6 +973,12 @@ def main():
                 print(f"::warning title=pack-mobs-{n}::{esc(text[i:i + 3900])}")
         if any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(server_dir, "mods"))):
             server.send(f"execute as {PLAYER} at @s run tp @s ~ ~ ~ 0 8")
+            # The mob check can leave things on the ground (fire, webs, a block a mob put down, a crater): the bands and
+            # sentinels get the flat world's ground back first, so a band left short says something about the band.
+            server.send(f"execute as {PLAYER} at @s run fill ~-24 ~-1 ~-24 ~24 ~-1 ~24 minecraft:grass_block")
+            server.send(f"execute as {PLAYER} at @s run fill ~-24 ~ ~-24 ~24 ~8 ~24 minecraft:air")
+            server.send(f"execute as {PLAYER} at @s run kill @e[type=!minecraft:player,distance=..48]")
+            time.sleep(2)
             band_failures, band_notes = band_check(server, PLAYER, entities, shots)
             failures += band_failures
             notes += band_notes

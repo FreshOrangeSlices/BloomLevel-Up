@@ -43,12 +43,14 @@ def java_pid(parent):
 def chart_check(process, log, root):
     """The LegionWareX add-on's pirate charts in the shipped world (a normal Overworld with structures, as a friend's
     server makes it; the client test's world is flat with structures off): a chart read at the world's spawn, from the
-    server console. Prints what it found (server-chart), a warning when it found no lair within reach."""
+    server console, three times (each leads to a lair no earlier chart showed). Prints what it found (server-chart), a
+    warning when it found no lair within reach or led to the same lair twice."""
     if not any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(root, "mods"))):
         return
     esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
     lines = []
-    for command, pattern in (("legionwarex chart lairs", r"LegionWareX chart: \d+ lairs"), ("legionwarex chart find", r"LegionWareX chart: found")):
+    finds = [("legionwarex chart find", r"LegionWareX chart: found")] * 3
+    for command, pattern in [("legionwarex chart lairs", r"LegionWareX chart: \d+ lairs")] + finds:
         mark = len(log)
         process.stdin.write(command + "\n")
         process.stdin.flush()
@@ -58,7 +60,10 @@ def chart_check(process, log, root):
             time.sleep(1)
             found = next((l for l in log[mark:] if re.search(pattern, l)), None)
         lines.append(found.split("LegionWareX chart: ", 1)[1].strip() if found else f"{command}: no answer within 4 minutes")
-    level = "warning" if any("found no lair" in l or "no answer" in l for l in lines) else "notice"
+    spots = [m.group(1) for m in (re.search(r" at (-?\d+, -?\d+),", l) for l in lines[1:]) if m]
+    if len(set(spots)) < len(spots):
+        lines.append("the same lair twice: " + ", ".join(spots))
+    level = "warning" if any("found no lair" in l or "no answer" in l or "same lair" in l for l in lines) else "notice"
     print(f"::{level} title=server-chart::{esc(chr(10).join(lines)[:3900])}")
 
 

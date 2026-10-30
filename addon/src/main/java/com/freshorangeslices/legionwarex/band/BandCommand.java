@@ -3,6 +3,7 @@ package com.freshorangeslices.legionwarex.band;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -46,10 +47,11 @@ public final class BandCommand {
 
 		for (int attempt = 0; attempt < 24; attempt++) {
 			BlockPos spot = attempt == 0 ? origin : Bands.offset(origin, random, 1, 6);
-			List<Mob> band = Bands.spawn(level, kind, spot, random, size > 0 ? size : Bands.vanillaSize(level, spot));
+			List<String> leftOut = new ArrayList<>();
+			List<Mob> band = Bands.spawn(level, kind, spot, random, size > 0 ? size : Bands.vanillaSize(level, spot), true, leftOut);
 
 			if (!band.isEmpty()) {
-				String text = Bands.describe(kind, band);
+				String text = Bands.describe(kind, band) + (leftOut.isEmpty() ? "" : "; left out: " + String.join("; ", leftOut));
 				Bands.log(text + " (by command)");
 				source.sendSuccess(() -> Component.literal("LegionWareX band: " + text), true);
 				return band.size();

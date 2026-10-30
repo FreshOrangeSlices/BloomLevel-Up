@@ -21,7 +21,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
@@ -134,7 +133,10 @@ public final class Bands {
 		}
 
 		mob.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, random.nextFloat() * 360.0F, 0.0F);
-		ForgeEventFactory.onFinalizeSpawn(mob, level, level.getCurrentDifficultyAt(pos), MobSpawnType.PATROL, null, null);
+		// Straight to the mob's own finalizeSpawn (its gear, a leader's banner), not through Forge's spawn event: a spawn
+		// rule meant for natural spawns (Easy Mob Spawn Control's night-only rule for Illager Invasion's illagers in the
+		// pack) would otherwise turn a band's members away as they're made, by day.
+		mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.PATROL, null, null);
 
 		if (kind == BandKind.PIRATE) {
 			PirateTuning.quicken(mob);

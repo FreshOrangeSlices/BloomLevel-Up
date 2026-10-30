@@ -21,7 +21,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
 
 /**
  * A sentinel: one harder mob, alone, out by day. It holds its spot and watches ({@link HoldPostGoal}), takes on a player
@@ -77,7 +76,8 @@ public final class Sentinels {
 			return null;
 		}
 
-		ForgeEventFactory.onFinalizeSpawn(mob, level, level.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null, null);
+		// The mob's own finalizeSpawn, not Forge's spawn event (a night-only rule for natural spawns would turn it away).
+		mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null, null);
 		dress(mob);
 		mob.addTag(TAG);
 		CompoundTag data = new CompoundTag();

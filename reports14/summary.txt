@@ -1,0 +1,1095 @@
+## HalloweenEventSpawnProcedure: called from []
+### HalloweenEventSpawnProcedure.class
+public class net.mcreator.borninchaosv.procedures.HalloweenEventSpawnProcedure {
+  public net.mcreator.borninchaosv.procedures.HalloweenEventSpawnProcedure();
+  public static void onEntitySpawned(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+       9: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+      30: getstatic     #69                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      36: iconst_1
+      37: if_icmpne     578
+      40: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      43: iconst_2
+      44: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      47: bipush        9
+      49: if_icmpne     76
+      52: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      55: iconst_5
+      56: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      59: bipush        25
+      61: if_icmplt     76
+      64: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      67: iconst_5
+      68: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      71: bipush        31
+      73: if_icmple     132
+      76: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      79: iconst_2
+      80: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      83: bipush        10
+      85: if_icmpne     111
+      88: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      91: iconst_5
+      92: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      95: iconst_1
+      96: if_icmplt     111
+      99: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+     102: iconst_5
+     103: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+     106: bipush        7
+     108: if_icmple     132
+     122: getstatic     #86                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.HALLOWEEN_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+     128: iconst_1
+     129: if_icmpne     578
+     139: invokestatic  #92                 // Method java/lang/Math.random:()D
+     181: iconst_3
+     186: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.ROTTEN_INFERNAL_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     228: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     235: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.ROTTEN_INFERNAL_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     250: invokestatic  #92                 // Method java/lang/Math.random:()D
+     276: getstatic     #158                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_AXE:Lnet/minecraftforge/registries/RegistryObject;
+     295: iconst_1
+     300: getstatic     #172                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     348: getstatic     #179                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     367: iconst_1
+     372: getstatic     #172                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     408: invokestatic  #92                 // Method java/lang/Math.random:()D
+     427: invokestatic  #92                 // Method java/lang/Math.random:()D
+     453: getstatic     #158                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_AXE:Lnet/minecraftforge/registries/RegistryObject;
+     472: iconst_1
+     477: getstatic     #172                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     525: getstatic     #179                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     544: iconst_1
+     549: getstatic     #172                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+## ChillingHorrorEventSpawnProcedure: called from []
+### ChillingHorrorEventSpawnProcedure.class
+public class net.mcreator.borninchaosv.procedures.ChillingHorrorEventSpawnProcedure {
+  public net.mcreator.borninchaosv.procedures.ChillingHorrorEventSpawnProcedure();
+  public static void onEntitySpawned(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+       9: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+      30: getstatic     #69                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      36: iconst_1
+      37: if_icmpne     870
+      40: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      43: iconst_2
+      44: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      47: bipush        11
+      49: if_icmpne     76
+      52: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      55: iconst_5
+      56: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      59: bipush        21
+      61: if_icmplt     76
+      64: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      67: iconst_5
+      68: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      71: bipush        31
+      73: if_icmple     130
+      76: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      79: iconst_2
+      80: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      86: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      89: iconst_5
+      90: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      93: iconst_1
+      94: if_icmplt     109
+      97: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+     100: iconst_5
+     101: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+     104: bipush        10
+     106: if_icmple     130
+     120: getstatic     #86                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.CHILLING_HORROR_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+     126: iconst_1
+     127: if_icmpne     870
+     137: invokestatic  #92                 // Method java/lang/Math.random:()D
+     179: iconst_3
+     184: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.CREEPY_NUTCRACKER:Lnet/minecraftforge/registries/RegistryObject;
+     226: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     233: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.CREEPY_NUTCRACKER:Lnet/minecraftforge/registries/RegistryObject;
+     264: getstatic     #156                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.NUT_HAMMER:Lnet/minecraftforge/registries/RegistryObject;
+     283: iconst_1
+     288: getstatic     #170                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     320: invokestatic  #92                 // Method java/lang/Math.random:()D
+     362: iconst_3
+     367: getstatic     #177                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.SPOOKY_SNOWMAN_HEAD:Lnet/minecraftforge/registries/RegistryObject;
+     409: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     416: getstatic     #177                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.SPOOKY_SNOWMAN_HEAD:Lnet/minecraftforge/registries/RegistryObject;
+     447: getstatic     #180                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.ICY_SWEETNESS:Lnet/minecraftforge/registries/RegistryObject;
+     466: iconst_1
+     471: getstatic     #170                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     507: invokestatic  #92                 // Method java/lang/Math.random:()D
+     549: iconst_3
+     554: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.CREEPY_NUTCRACKER:Lnet/minecraftforge/registries/RegistryObject;
+     596: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     603: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.CREEPY_NUTCRACKER:Lnet/minecraftforge/registries/RegistryObject;
+     634: getstatic     #156                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.NUT_HAMMER:Lnet/minecraftforge/registries/RegistryObject;
+     653: iconst_1
+     658: getstatic     #170                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     690: invokestatic  #92                 // Method java/lang/Math.random:()D
+     732: iconst_3
+     737: getstatic     #177                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.SPOOKY_SNOWMAN_HEAD:Lnet/minecraftforge/registries/RegistryObject;
+     779: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     786: getstatic     #177                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.SPOOKY_SNOWMAN_HEAD:Lnet/minecraftforge/registries/RegistryObject;
+     817: getstatic     #180                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.ICY_SWEETNESS:Lnet/minecraftforge/registries/RegistryObject;
+     836: iconst_1
+     841: getstatic     #170                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+## ChaoticSpringEventSpawnProcedure: called from []
+### ChaoticSpringEventSpawnProcedure.class
+public class net.mcreator.borninchaosv.procedures.ChaoticSpringEventSpawnProcedure {
+  public net.mcreator.borninchaosv.procedures.ChaoticSpringEventSpawnProcedure();
+  public static void onEntitySpawned(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+       9: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+      30: getstatic     #69                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      36: iconst_1
+      37: if_icmpne     564
+      40: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      43: iconst_2
+      44: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      47: iconst_3
+      48: if_icmpne     75
+      51: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      54: iconst_5
+      55: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      58: bipush        10
+      60: if_icmplt     75
+      63: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      66: iconst_5
+      67: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      70: bipush        22
+      72: if_icmple     96
+      86: getstatic     #86                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.CHAOTIC_SPRING_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+      92: iconst_1
+      93: if_icmpne     564
+     103: invokestatic  #92                 // Method java/lang/Math.random:()D
+     145: iconst_3
+     150: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     192: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     199: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     230: getstatic     #154                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.CARROT_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     249: iconst_1
+     254: getstatic     #168                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     310: getstatic     #186                // Field net/minecraft/world/effect/MobEffects.f_19603_:Lnet/minecraft/world/effect/MobEffect;
+     315: iconst_1
+     316: iconst_0
+     317: iconst_0
+     332: invokestatic  #92                 // Method java/lang/Math.random:()D
+     374: iconst_3
+     379: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     421: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     428: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     470: getstatic     #186                // Field net/minecraft/world/effect/MobEffects.f_19603_:Lnet/minecraft/world/effect/MobEffect;
+     475: iconst_1
+     476: iconst_0
+     477: iconst_0
+     485: invokestatic  #92                 // Method java/lang/Math.random:()D
+     511: getstatic     #154                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.CARROT_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     530: iconst_1
+     535: getstatic     #168                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+## SerPumpkinheadSpavnProcedure: called from ['MrPumpkinEntity.class', 'MrsPumpkinEntity.class', 'PumpkinBruiserEntity.class', 'SenorPumpkinEntity.class', 'SirPumpkinheadEntity.class']
+### SerPumpkinheadSpavnProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadSpavnProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadSpavnProcedure();
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+      11: getstatic     #36                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SERPUMPKINHEADSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      17: iconst_1
+      18: if_icmpne     393
+      32: getstatic     #43                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      38: iconst_1
+      39: if_icmpne     393
+      42: invokestatic  #49                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      45: iconst_2
+      46: invokevirtual #53                 // Method java/util/Calendar.get:(I)I
+      49: bipush        9
+      51: if_icmpne     78
+      54: invokestatic  #49                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      57: iconst_5
+      58: invokevirtual #53                 // Method java/util/Calendar.get:(I)I
+      61: bipush        25
+      63: if_icmplt     78
+      66: invokestatic  #49                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      69: iconst_5
+      70: invokevirtual #53                 // Method java/util/Calendar.get:(I)I
+      73: bipush        31
+      75: if_icmple     134
+      78: invokestatic  #49                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      81: iconst_2
+      82: invokevirtual #53                 // Method java/util/Calendar.get:(I)I
+      85: bipush        10
+      87: if_icmpne     113
+      90: invokestatic  #49                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      93: iconst_5
+      94: invokevirtual #53                 // Method java/util/Calendar.get:(I)I
+      97: iconst_1
+      98: if_icmplt     113
+     101: invokestatic  #49                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+     104: iconst_5
+     105: invokevirtual #53                 // Method java/util/Calendar.get:(I)I
+     108: bipush        7
+     110: if_icmple     134
+     124: getstatic     #56                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.HALLOWEEN_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+     130: iconst_1
+     131: if_icmpne     393
+     141: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     157: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     165: iconst_4
+     166: if_icmple     203
+     176: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     192: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     208: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     220: ldc           #78                 // String deep_dark
+     238: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     250: ldc           #89                 // String mushroom_fields
+     268: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     276: getstatic     #95                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     283: ldc           #97                 // String minecraft:is_overworld
+     288: invokestatic  #103                // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     304: invokestatic  #62                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     312: getstatic     #95                 // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     319: ldc           #109                // String terralith:all_terralith_biomes
+     324: invokestatic  #103                // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     382: getstatic     #127                // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+     385: getstatic     #127                // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+     391: iconst_1
+     393: iconst_0
+### MrPumpkinEntity.class
+public class net.mcreator.borninchaosv.entity.MrPumpkinEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  java.lang.String prevAnim;
+  public net.mcreator.borninchaosv.entity.MrPumpkinEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #83                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #91                 // class net/minecraft/world/entity/EntityType
+      11: invokespecial #94                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+  public net.mcreator.borninchaosv.entity.MrPumpkinEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.MrPumpkinEntity>, net.minecraft.world.level.Level);
+       3: invokespecial #102                // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: invokestatic  #108                // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      15: ldc           #112                // String empty
+      21: ldc           #112                // String empty
+      27: iconst_2
+      32: iconst_0
+      48: bipush        10
+      50: iconst_1
+       8: getstatic     #151                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: iconst_0
+      12: invokestatic  #157                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      22: getstatic     #165                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      25: ldc           #167                // String undefined
+      34: getstatic     #169                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      37: ldc           #171                // String mrpumpkin_aggressive
+  public void setTexture(java.lang.String);
+       4: getstatic     #169                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public java.lang.String getTexture();
+       4: getstatic     #169                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+       1: invokestatic  #194                // Method net/minecraftforge/network/NetworkHooks.getEntitySpawningPacket:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/network/protocol/Packet;
+       8: iconst_1
+      24: iconst_2
+      34: iconst_0
+      45: iconst_3
+      53: iconst_0
+      54: iconst_0
+      65: iconst_4
+      75: bipush        20
+      87: iconst_5
+     103: bipush        6
+     112: iconst_0
+     113: iconst_0
+     124: bipush        7
+     133: iconst_0
+     134: iconst_0
+     145: bipush        8
+     154: iconst_0
+     155: iconst_0
+     166: bipush        9
+     173: iconst_0
+  public net.minecraft.world.entity.MobType m_6336_();
+       0: getstatic     #263                // Field net/minecraft/world/entity/MobType.f_21640_:Lnet/minecraft/world/entity/MobType;
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       0: getstatic     #271                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #275                // String block.azalea_leaves.step
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       0: getstatic     #271                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #289                // String entity.fox.hurt
+  public net.minecraft.sounds.SoundEvent m_5592_();
+       0: getstatic     #271                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #294                // String entity.fox.death
+  public boolean m_142535_(float, float, net.minecraft.world.damagesource.DamageSource);
+       0: iconst_0
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+       1: getstatic     #308                // Field net/minecraft/world/damagesource/DamageTypes.f_268671_:Lnet/minecraft/resources/ResourceKey;
+      10: iconst_0
+      13: getstatic     #317                // Field net/minecraft/world/damagesource/DamageTypes.f_268585_:Lnet/minecraft/resources/ResourceKey;
+      22: iconst_0
+      25: getstatic     #320                // Field net/minecraft/world/damagesource/DamageTypes.f_268722_:Lnet/minecraft/resources/ResourceKey;
+      34: iconst_0
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #329                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #329                // String Texture
+      17: ldc_w         #329                // String Texture
+  public void m_6075_();
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public boolean m_6094_();
+       0: iconst_0
+  public void m_20242_(boolean);
+       1: iconst_1
+  public void m_8107_();
+       5: iconst_1
+  public static void init();
+       0: getstatic     #83                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       6: checkcast     #91                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #399                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #403                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      20: invokestatic  #424                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       0: invokestatic  #431                // Method net/minecraft/world/entity/Mob.m_21552_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       5: getstatic     #437                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      16: getstatic     #446                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      27: getstatic     #451                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22284_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      36: getstatic     #454                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      47: getstatic     #459                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      58: getstatic     #464                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22278_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      69: getstatic     #469                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22282_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      80: getstatic     #474                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22280_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       4: ldc           #112                // String empty
+      42: invokestatic  #499                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      45: ldc_w         #501                // String walk
+      63: invokestatic  #499                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      66: ldc_w         #514                // String death
+      77: invokestatic  #499                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      80: ldc_w         #519                // String idle
+      90: getstatic     #525                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+       4: ldc           #112                // String empty
+      19: getstatic     #540                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      43: ldc           #112                // String empty
+      76: invokestatic  #499                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      96: getstatic     #540                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     103: ldc           #112                // String empty
+     122: ldc           #112                // String empty
+     131: ldc           #112                // String empty
+     136: getstatic     #525                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+     148: getstatic     #550                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       5: iconst_1
+      14: bipush        20
+      16: if_icmpne     30
+      20: getstatic     #558                // Field net/minecraft/world/entity/Entity$RemovalReason.KILLED:Lnet/minecraft/world/entity/Entity$RemovalReason;
+  public java.lang.String getSyncedAnimation();
+       4: getstatic     #165                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void setAnimation(java.lang.String);
+       4: getstatic     #165                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       1: iconst_1
+       6: iconst_0
+      12: ldc_w         #571                // String movement
+      15: iconst_4
+      31: iconst_1
+      36: iconst_0
+      42: ldc_w         #588                // String procedure
+      45: iconst_4
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+  private static boolean lambda$init$0(net.minecraft.world.entity.EntityType, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.MobSpawnType, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+      28: invokestatic  #614                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadSpavnProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDD)Z
+  static net.minecraft.world.entity.ai.control.MoveControl access$000(net.mcreator.borninchaosv.entity.MrPumpkinEntity);
+  static net.minecraft.world.entity.ai.control.MoveControl access$100(net.mcreator.borninchaosv.entity.MrPumpkinEntity);
+  static {};
+       2: getstatic     #633                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135035_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+       5: invokestatic  #637                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: putstatic     #151                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      13: getstatic     #640                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      16: invokestatic  #637                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      19: putstatic     #165                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      24: getstatic     #640                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      27: invokestatic  #637                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      30: putstatic     #169                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+### MrsPumpkinEntity.class
+public class net.mcreator.borninchaosv.entity.MrsPumpkinEntity extends net.minecraft.world.entity.monster.Monster implements net.minecraft.world.entity.monster.RangedAttackMob,software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  java.lang.String prevAnim;
+  public net.mcreator.borninchaosv.entity.MrsPumpkinEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #84                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MRS_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #92                 // class net/minecraft/world/entity/EntityType
+      11: invokespecial #95                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+  public net.mcreator.borninchaosv.entity.MrsPumpkinEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.MrsPumpkinEntity>, net.minecraft.world.level.Level);
+       3: invokespecial #103                // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: invokestatic  #109                // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      15: ldc           #113                // String empty
+      21: ldc           #113                // String empty
+      27: bipush        8
+      33: iconst_0
+       8: getstatic     #143                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: iconst_0
+      12: invokestatic  #149                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      22: getstatic     #157                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      25: ldc           #159                // String undefined
+      34: getstatic     #161                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      37: ldc           #163                // String mrspumpkin
+  public void setTexture(java.lang.String);
+       4: getstatic     #161                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public java.lang.String getTexture();
+       4: getstatic     #161                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+       1: invokestatic  #186                // Method net/minecraftforge/network/NetworkHooks.getEntitySpawningPacket:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/network/protocol/Packet;
+       8: iconst_1
+      14: iconst_0
+      21: iconst_0
+      35: iconst_2
+      54: iconst_3
+      70: iconst_4
+      86: iconst_5
+      94: iconst_0
+      95: iconst_0
+     106: iconst_1
+     116: bipush        60
+  public net.minecraft.world.entity.MobType m_6336_();
+       0: getstatic     #249                // Field net/minecraft/world/entity/MobType.f_21640_:Lnet/minecraft/world/entity/MobType;
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       0: getstatic     #257                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #261                // String block.azalea_leaves.step
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       0: getstatic     #257                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #275                // String entity.fox.hurt
+  public net.minecraft.sounds.SoundEvent m_5592_();
+       0: getstatic     #257                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #280                // String entity.fox.death
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+       1: getstatic     #288                // Field net/minecraft/world/damagesource/DamageTypes.f_268631_:Lnet/minecraft/resources/ResourceKey;
+      10: iconst_0
+      13: getstatic     #297                // Field net/minecraft/world/damagesource/DamageTypes.f_268671_:Lnet/minecraft/resources/ResourceKey;
+      22: iconst_0
+      25: getstatic     #300                // Field net/minecraft/world/damagesource/DamageTypes.f_268585_:Lnet/minecraft/resources/ResourceKey;
+      34: iconst_0
+      37: getstatic     #303                // Field net/minecraft/world/damagesource/DamageTypes.f_268722_:Lnet/minecraft/resources/ResourceKey;
+      46: iconst_0
+      49: getstatic     #306                // Field net/minecraft/world/damagesource/DamageTypes.f_268450_:Lnet/minecraft/resources/ResourceKey;
+      58: iconst_0
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #317                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #317                // String Texture
+      17: ldc_w         #317                // String Texture
+  public void m_6075_();
+      21: invokestatic  #363                // Method net/mcreator/borninchaosv/procedures/MrsPumpkinPriObnovlieniiTikaSushchnostiProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public void m_6504_(net.minecraft.world.entity.LivingEntity, float);
+       2: invokestatic  #386                // Method net/mcreator/borninchaosv/entity/PumpkinStaff2ProjectileEntity.shoot:(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Lnet/mcreator/borninchaosv/entity/PumpkinStaff2ProjectileEntity;
+  public static void init();
+       0: getstatic     #84                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MRS_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       6: checkcast     #92                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #394                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #398                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      20: invokestatic  #419                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       0: invokestatic  #426                // Method net/minecraft/world/entity/Mob.m_21552_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       5: getstatic     #432                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      16: getstatic     #441                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      27: getstatic     #446                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22284_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      36: getstatic     #449                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      47: getstatic     #454                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      58: getstatic     #459                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22278_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       4: ldc           #113                // String empty
+      42: invokestatic  #485                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      45: ldc_w         #487                // String walk
+      63: invokestatic  #485                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      66: ldc_w         #500                // String death
+      77: invokestatic  #485                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      80: ldc_w         #505                // String idle
+      90: getstatic     #511                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+      30: invokestatic  #527                // Method java/lang/Math.sqrt:(D)D
+      57: iconst_1
+      99: iconst_0
+     114: getstatic     #143                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+     136: getstatic     #561                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     150: invokestatic  #485                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+     153: ldc_w         #566                // String attack
+     163: getstatic     #569                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       4: ldc           #113                // String empty
+      19: getstatic     #561                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      43: ldc           #113                // String empty
+      76: invokestatic  #485                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      96: getstatic     #561                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     103: ldc           #113                // String empty
+     122: ldc           #113                // String empty
+     131: ldc           #113                // String empty
+     136: getstatic     #511                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+     148: getstatic     #569                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       5: iconst_1
+      14: bipush        20
+      16: if_icmpne     30
+      20: getstatic     #585                // Field net/minecraft/world/entity/Entity$RemovalReason.KILLED:Lnet/minecraft/world/entity/Entity$RemovalReason;
+  public java.lang.String getSyncedAnimation();
+       4: getstatic     #157                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void setAnimation(java.lang.String);
+       4: getstatic     #157                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       1: iconst_1
+       6: iconst_0
+      12: ldc_w         #598                // String movement
+      15: iconst_4
+      31: iconst_1
+      36: iconst_0
+      42: ldc_w         #615                // String attacking
+      45: iconst_4
+      61: iconst_1
+      66: iconst_0
+      72: ldc_w         #621                // String procedure
+      75: iconst_4
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+  private static boolean lambda$init$0(net.minecraft.world.entity.EntityType, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.MobSpawnType, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+      28: invokestatic  #646                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadSpavnProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDD)Z
+  static net.minecraft.network.syncher.SynchedEntityData access$000(net.mcreator.borninchaosv.entity.MrsPumpkinEntity);
+  static net.minecraft.network.syncher.SynchedEntityData access$100(net.mcreator.borninchaosv.entity.MrsPumpkinEntity);
+  static net.minecraft.network.syncher.SynchedEntityData access$200(net.mcreator.borninchaosv.entity.MrsPumpkinEntity);
+  static net.minecraft.network.syncher.SynchedEntityData access$300(net.mcreator.borninchaosv.entity.MrsPumpkinEntity);
+  static {};
+       2: getstatic     #670                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135035_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+       5: invokestatic  #674                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: putstatic     #143                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      13: getstatic     #677                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      16: invokestatic  #674                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      19: putstatic     #157                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      24: getstatic     #677                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      27: invokestatic  #674                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      30: putstatic     #161                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+### PumpkinBruiserEntity.class
+public class net.mcreator.borninchaosv.entity.PumpkinBruiserEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  java.lang.String prevAnim;
+  public net.mcreator.borninchaosv.entity.PumpkinBruiserEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_BRUISER:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+      11: invokespecial #90                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+  public net.mcreator.borninchaosv.entity.PumpkinBruiserEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.PumpkinBruiserEntity>, net.minecraft.world.level.Level);
+       3: invokespecial #98                 // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: invokestatic  #104                // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      15: ldc           #108                // String empty
+      21: ldc           #108                // String empty
+      27: bipush        26
+      33: iconst_0
+       8: getstatic     #138                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: iconst_0
+      12: invokestatic  #144                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      22: getstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      25: ldc           #154                // String undefined
+      34: getstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      37: ldc           #158                // String pumpkinbruiser
+  public void setTexture(java.lang.String);
+       4: getstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public java.lang.String getTexture();
+       4: getstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+       1: invokestatic  #181                // Method net/minecraftforge/network/NetworkHooks.getEntitySpawningPacket:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/network/protocol/Packet;
+       8: iconst_1
+      18: iconst_0
+      29: iconst_2
+      37: iconst_0
+      38: iconst_0
+      49: iconst_3
+      55: iconst_0
+      62: iconst_0
+      76: iconst_4
+      95: iconst_5
+     111: bipush        6
+     120: iconst_0
+     121: iconst_0
+  public net.minecraft.world.entity.MobType m_6336_();
+       0: getstatic     #242                // Field net/minecraft/world/entity/MobType.f_21640_:Lnet/minecraft/world/entity/MobType;
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       0: getstatic     #250                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc           #254                // String born_in_chaos_v1:zombie_brute_idle
+  public void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       1: getstatic     #250                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       8: ldc_w         #268                // String born_in_chaos_v1:brute_zombie_step
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       0: getstatic     #250                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #281                // String born_in_chaos_v1:zombie_brute_hurt
+  public net.minecraft.sounds.SoundEvent m_5592_();
+       0: getstatic     #250                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #286                // String born_in_chaos_v1:zombie_brute_death
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+       1: getstatic     #294                // Field net/minecraft/world/damagesource/DamageTypes.f_268631_:Lnet/minecraft/resources/ResourceKey;
+      10: iconst_0
+      13: getstatic     #303                // Field net/minecraft/world/damagesource/DamageTypes.f_268722_:Lnet/minecraft/resources/ResourceKey;
+      22: iconst_0
+      25: getstatic     #306                // Field net/minecraft/world/damagesource/DamageTypes.f_268450_:Lnet/minecraft/resources/ResourceKey;
+      34: iconst_0
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #317                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #317                // String Texture
+      17: ldc_w         #317                // String Texture
+  public void m_6075_();
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public static void init();
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_BRUISER:Lnet/minecraftforge/registries/RegistryObject;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #363                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #367                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      20: invokestatic  #388                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       0: invokestatic  #395                // Method net/minecraft/world/entity/Mob.m_21552_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       5: getstatic     #401                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      16: getstatic     #410                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      27: getstatic     #415                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22284_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      38: getstatic     #420                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      49: getstatic     #425                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      60: getstatic     #430                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22278_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      71: getstatic     #433                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22282_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       4: ldc           #108                // String empty
+      49: invokestatic  #463                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      52: ldc_w         #465                // String walk
+      70: invokestatic  #463                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      73: ldc_w         #478                // String death
+      98: invokestatic  #463                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+     101: ldc_w         #483                // String aggression
+     112: invokestatic  #463                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+     115: ldc_w         #485                // String idle
+     125: getstatic     #491                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+      30: invokestatic  #514                // Method java/lang/Math.sqrt:(D)D
+      57: iconst_1
+      99: iconst_0
+     117: getstatic     #549                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     131: invokestatic  #463                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+     134: ldc_w         #554                // String attack
+     144: getstatic     #557                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       4: ldc           #108                // String empty
+      19: getstatic     #549                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      43: ldc           #108                // String empty
+      76: invokestatic  #463                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      96: getstatic     #549                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     103: ldc           #108                // String empty
+     122: ldc           #108                // String empty
+     131: ldc           #108                // String empty
+     136: getstatic     #491                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+     148: getstatic     #557                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       5: iconst_1
+      14: bipush        30
+      16: if_icmpne     50
+      20: getstatic     #573                // Field net/minecraft/world/entity/Entity$RemovalReason.KILLED:Lnet/minecraft/world/entity/Entity$RemovalReason;
+      47: invokestatic  #589                // Method net/mcreator/borninchaosv/procedures/PumpkinBruiserDeathTimeIsReachedProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  public java.lang.String getSyncedAnimation();
+       4: getstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void setAnimation(java.lang.String);
+       4: getstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       1: iconst_1
+       6: iconst_0
+      12: ldc_w         #595                // String movement
+      15: iconst_4
+      31: iconst_1
+      36: iconst_0
+      42: ldc_w         #612                // String attacking
+      45: iconst_4
+      61: iconst_1
+      66: iconst_0
+      72: ldc_w         #618                // String procedure
+      75: iconst_4
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+  private static boolean lambda$init$0(net.minecraft.world.entity.EntityType, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.MobSpawnType, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+      28: invokestatic  #643                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadSpavnProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDD)Z
+  static {};
+       2: getstatic     #659                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135035_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+       5: invokestatic  #663                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: putstatic     #138                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      13: getstatic     #666                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      16: invokestatic  #663                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      19: putstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      24: getstatic     #666                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      27: invokestatic  #663                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      30: putstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+### SenorPumpkinEntity.class
+public class net.mcreator.borninchaosv.entity.SenorPumpkinEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  java.lang.String prevAnim;
+  public net.mcreator.borninchaosv.entity.SenorPumpkinEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #81                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SENOR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #89                 // class net/minecraft/world/entity/EntityType
+      11: invokespecial #92                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+  public net.mcreator.borninchaosv.entity.SenorPumpkinEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.SenorPumpkinEntity>, net.minecraft.world.level.Level);
+       3: invokespecial #100                // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: invokestatic  #106                // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      15: ldc           #110                // String empty
+      21: ldc           #110                // String empty
+      27: iconst_3
+      32: iconst_0
+      48: bipush        10
+      50: iconst_1
+       8: getstatic     #149                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: iconst_0
+      12: invokestatic  #155                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      22: getstatic     #163                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      25: ldc           #165                // String undefined
+      34: getstatic     #167                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      37: ldc           #169                // String senorpumpkin
+  public void setTexture(java.lang.String);
+       4: getstatic     #167                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public java.lang.String getTexture();
+       4: getstatic     #167                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+       1: invokestatic  #192                // Method net/minecraftforge/network/NetworkHooks.getEntitySpawningPacket:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/network/protocol/Packet;
+       8: iconst_1
+      18: iconst_0
+      29: iconst_2
+      37: iconst_0
+      38: iconst_0
+      49: iconst_3
+      59: bipush        20
+      71: iconst_4
+      89: iconst_5
+     105: bipush        6
+     114: iconst_0
+     115: iconst_0
+     126: bipush        7
+     135: iconst_0
+     136: iconst_0
+     147: bipush        8
+     156: iconst_0
+     157: iconst_0
+     168: bipush        9
+     177: iconst_0
+     178: iconst_0
+     189: bipush        10
+     198: iconst_0
+     199: iconst_0
+     210: bipush        11
+     217: iconst_0
+  public net.minecraft.world.entity.MobType m_6336_();
+       0: getstatic     #268                // Field net/minecraft/world/entity/MobType.f_21640_:Lnet/minecraft/world/entity/MobType;
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       0: getstatic     #276                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #280                // String block.azalea_leaves.step
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       0: getstatic     #276                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #294                // String entity.fox.hurt
+  public net.minecraft.sounds.SoundEvent m_5592_();
+       0: getstatic     #276                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #299                // String entity.fox.death
+  public boolean m_142535_(float, float, net.minecraft.world.damagesource.DamageSource);
+       0: iconst_0
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+       1: getstatic     #313                // Field net/minecraft/world/damagesource/DamageTypes.f_268631_:Lnet/minecraft/resources/ResourceKey;
+      10: iconst_0
+      13: getstatic     #322                // Field net/minecraft/world/damagesource/DamageTypes.f_268671_:Lnet/minecraft/resources/ResourceKey;
+      22: iconst_0
+      25: getstatic     #325                // Field net/minecraft/world/damagesource/DamageTypes.f_268585_:Lnet/minecraft/resources/ResourceKey;
+      34: iconst_0
+      37: getstatic     #328                // Field net/minecraft/world/damagesource/DamageTypes.f_268722_:Lnet/minecraft/resources/ResourceKey;
+      46: iconst_0
+      49: getstatic     #331                // Field net/minecraft/world/damagesource/DamageTypes.f_268450_:Lnet/minecraft/resources/ResourceKey;
+      58: iconst_0
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #340                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #340                // String Texture
+      17: ldc_w         #340                // String Texture
+  public void m_6075_();
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public boolean m_6094_();
+       0: iconst_0
+  public void m_20242_(boolean);
+       1: iconst_1
+  public void m_8107_();
+       5: iconst_1
+  public static void init();
+       0: getstatic     #81                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SENOR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       6: checkcast     #89                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #410                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #414                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      20: invokestatic  #435                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       0: invokestatic  #442                // Method net/minecraft/world/entity/Mob.m_21552_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       5: getstatic     #448                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      16: getstatic     #457                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      27: getstatic     #462                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22284_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      38: getstatic     #465                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      49: getstatic     #470                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      60: getstatic     #475                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22278_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      71: getstatic     #480                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22282_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      80: getstatic     #483                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22280_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       4: ldc           #110                // String empty
+      42: invokestatic  #508                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      45: ldc_w         #510                // String walk
+      63: invokestatic  #508                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      66: ldc_w         #523                // String death
+      77: invokestatic  #508                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      80: ldc_w         #528                // String idle
+      90: getstatic     #534                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+       4: ldc           #110                // String empty
+      19: getstatic     #549                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      43: ldc           #110                // String empty
+      76: invokestatic  #508                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      96: getstatic     #549                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     103: ldc           #110                // String empty
+     122: ldc           #110                // String empty
+     131: ldc           #110                // String empty
+     136: getstatic     #534                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+     148: getstatic     #559                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       5: iconst_1
+      14: bipush        20
+      16: if_icmpne     30
+      20: getstatic     #567                // Field net/minecraft/world/entity/Entity$RemovalReason.KILLED:Lnet/minecraft/world/entity/Entity$RemovalReason;
+  public java.lang.String getSyncedAnimation();
+       4: getstatic     #163                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void setAnimation(java.lang.String);
+       4: getstatic     #163                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       1: iconst_1
+       6: iconst_0
+      12: ldc_w         #580                // String movement
+      15: iconst_4
+      31: iconst_1
+      36: iconst_0
+      42: ldc_w         #597                // String procedure
+      45: iconst_4
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+  private static boolean lambda$init$0(net.minecraft.world.entity.EntityType, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.MobSpawnType, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+      28: invokestatic  #623                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadSpavnProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDD)Z
+  static {};
+       2: getstatic     #638                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135035_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+       5: invokestatic  #642                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: putstatic     #149                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      13: getstatic     #645                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      16: invokestatic  #642                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      19: putstatic     #163                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      24: getstatic     #645                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      27: invokestatic  #642                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      30: putstatic     #167                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+### SirPumpkinheadEntity.class
+public class net.mcreator.borninchaosv.entity.SirPumpkinheadEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  java.lang.String prevAnim;
+  public net.mcreator.borninchaosv.entity.SirPumpkinheadEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+      11: invokespecial #90                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+  public net.mcreator.borninchaosv.entity.SirPumpkinheadEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.SirPumpkinheadEntity>, net.minecraft.world.level.Level);
+       3: invokespecial #98                 // Method net/minecraft/world/entity/monster/Monster."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: invokestatic  #104                // Method software/bernie/geckolib/util/GeckoLibUtil.createInstanceCache:(Lsoftware/bernie/geckolib/core/animatable/GeoAnimatable;)Lsoftware/bernie/geckolib/core/animatable/instance/AnimatableInstanceCache;
+      15: ldc           #108                // String empty
+      21: ldc           #108                // String empty
+      27: iconst_0
+      32: iconst_0
+       8: getstatic     #138                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      11: iconst_0
+      12: invokestatic  #144                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      22: getstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      25: ldc           #154                // String undefined
+      34: getstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      37: ldc           #158                // String pumpkinheadrider
+  public void setTexture(java.lang.String);
+       4: getstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public java.lang.String getTexture();
+       4: getstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+       1: invokestatic  #181                // Method net/minecraftforge/network/NetworkHooks.getEntitySpawningPacket:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/network/protocol/Packet;
+       8: iconst_1
+      16: iconst_0
+      27: iconst_2
+      33: iconst_0
+      47: iconst_3
+      55: iconst_0
+      56: iconst_0
+      67: iconst_4
+      84: iconst_5
+     104: bipush        6
+     121: bipush        7
+  public net.minecraft.world.entity.MobType m_6336_();
+       0: getstatic     #241                // Field net/minecraft/world/entity/MobType.f_21640_:Lnet/minecraft/world/entity/MobType;
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       0: getstatic     #249                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc           #253                // String born_in_chaos_v1:haha
+  public void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       1: getstatic     #249                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       8: ldc_w         #267                // String entity.horse.step
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       0: getstatic     #249                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #280                // String entity.skeleton_horse.hurt
+  public net.minecraft.sounds.SoundEvent m_5592_();
+       0: getstatic     #249                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       7: ldc_w         #285                // String entity.skeleton_horse.death
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+      17: invokestatic  #307                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadPiProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+      21: getstatic     #313                // Field net/minecraft/world/damagesource/DamageTypes.f_268631_:Lnet/minecraft/resources/ResourceKey;
+      30: iconst_0
+      33: getstatic     #322                // Field net/minecraft/world/damagesource/DamageTypes.f_268671_:Lnet/minecraft/resources/ResourceKey;
+      42: iconst_0
+      45: getstatic     #325                // Field net/minecraft/world/damagesource/DamageTypes.f_268722_:Lnet/minecraft/resources/ResourceKey;
+      54: iconst_0
+      57: getstatic     #328                // Field net/minecraft/world/damagesource/DamageTypes.f_268450_:Lnet/minecraft/resources/ResourceKey;
+      66: iconst_0
+      69: getstatic     #331                // Field net/minecraft/world/damagesource/DamageTypes.f_268565_:Lnet/minecraft/resources/ResourceKey;
+      78: iconst_0
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #342                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #342                // String Texture
+      17: ldc_w         #342                // String Texture
+  public void m_6075_();
+      21: invokestatic  #371                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadGProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public static void init();
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD:Lnet/minecraftforge/registries/RegistryObject;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #391                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #395                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      20: invokestatic  #416                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       0: invokestatic  #423                // Method net/minecraft/world/entity/Mob.m_21552_:()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+       5: getstatic     #429                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22279_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      16: getstatic     #438                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22276_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      27: getstatic     #443                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22284_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      38: getstatic     #448                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      49: getstatic     #453                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22277_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      60: getstatic     #458                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22278_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      71: getstatic     #463                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22282_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+       4: ldc           #108                // String empty
+      42: invokestatic  #490                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      45: ldc_w         #492                // String walk
+      56: invokestatic  #490                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      59: ldc_w         #502                // String idle
+      69: getstatic     #508                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+      30: invokestatic  #524                // Method java/lang/Math.sqrt:(D)D
+      57: iconst_1
+      99: iconst_0
+     117: getstatic     #555                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     131: invokestatic  #490                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+     134: ldc_w         #560                // String attack
+     144: getstatic     #566                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       4: ldc           #108                // String empty
+      19: getstatic     #555                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+      43: ldc           #108                // String empty
+      76: invokestatic  #490                // Method software/bernie/geckolib/core/animation/RawAnimation.begin:()Lsoftware/bernie/geckolib/core/animation/RawAnimation;
+      96: getstatic     #555                // Field software/bernie/geckolib/core/animation/AnimationController$State.STOPPED:Lsoftware/bernie/geckolib/core/animation/AnimationController$State;
+     103: ldc           #108                // String empty
+     122: ldc           #108                // String empty
+     131: ldc           #108                // String empty
+     136: getstatic     #508                // Field software/bernie/geckolib/core/object/PlayState.STOP:Lsoftware/bernie/geckolib/core/object/PlayState;
+     148: getstatic     #566                // Field software/bernie/geckolib/core/object/PlayState.CONTINUE:Lsoftware/bernie/geckolib/core/object/PlayState;
+       5: iconst_1
+      14: bipush        20
+      16: if_icmpne     30
+      20: getstatic     #582                // Field net/minecraft/world/entity/Entity$RemovalReason.KILLED:Lnet/minecraft/world/entity/Entity$RemovalReason;
+  public java.lang.String getSyncedAnimation();
+       4: getstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void setAnimation(java.lang.String);
+       4: getstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       1: iconst_1
+       6: iconst_0
+      12: ldc_w         #595                // String movement
+      15: iconst_4
+      31: iconst_1
+      36: iconst_0
+      42: ldc_w         #612                // String attacking
+      45: iconst_4
+      61: iconst_1
+      66: iconst_0
+      72: ldc_w         #618                // String procedure
+      75: iconst_4
+  public software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache getAnimatableInstanceCache();
+  private static boolean lambda$init$0(net.minecraft.world.entity.EntityType, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.MobSpawnType, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+      28: invokestatic  #643                // Method net/mcreator/borninchaosv/procedures/SerPumpkinheadSpavnProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDD)Z
+  static {};
+       2: getstatic     #659                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135035_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+       5: invokestatic  #663                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: putstatic     #138                // Field SHOOT:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      13: getstatic     #666                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      16: invokestatic  #663                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      19: putstatic     #152                // Field ANIMATION:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      24: getstatic     #666                // Field net/minecraft/network/syncher/EntityDataSerializers.f_135030_:Lnet/minecraft/network/syncher/EntityDataSerializer;
+      27: invokestatic  #663                // Method net/minecraft/network/syncher/SynchedEntityData.m_135353_:(Ljava/lang/Class;Lnet/minecraft/network/syncher/EntityDataSerializer;)Lnet/minecraft/network/syncher/EntityDataAccessor;
+      30: putstatic     #156                // Field TEXTURE:Lnet/minecraft/network/syncher/EntityDataAccessor;
+## HalloweenEventDropProcedure: called from []
+### HalloweenEventDropProcedure.class
+public class net.mcreator.borninchaosv.procedures.HalloweenEventDropProcedure {
+  public net.mcreator.borninchaosv.procedures.HalloweenEventDropProcedure();
+  public static void onEntityDeath(net.minecraftforge.event.entity.living.LivingDeathEvent);
+      44: invokestatic  #56                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: invokestatic  #56                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+      33: getstatic     #90                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      39: iconst_1
+      40: if_icmpne     623
+      43: invokestatic  #100                // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      46: iconst_2
+      47: invokevirtual #104                // Method java/util/Calendar.get:(I)I
+      50: bipush        9
+      52: if_icmpne     79
+      55: invokestatic  #100                // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      58: iconst_5
+      59: invokevirtual #104                // Method java/util/Calendar.get:(I)I
+      62: bipush        25
+      64: if_icmplt     79
+      67: invokestatic  #100                // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      70: iconst_5
+      71: invokevirtual #104                // Method java/util/Calendar.get:(I)I
+      74: bipush        31
+      76: if_icmple     135
+      79: invokestatic  #100                // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      82: iconst_2
+      83: invokevirtual #104                // Method java/util/Calendar.get:(I)I
+      86: bipush        10
+      88: if_icmpne     114
+      91: invokestatic  #100                // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      94: iconst_5
+      95: invokevirtual #104                // Method java/util/Calendar.get:(I)I
+      98: iconst_1
+      99: if_icmplt     114
+     102: invokestatic  #100                // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+     105: iconst_5
+     106: invokevirtual #104                // Method java/util/Calendar.get:(I)I
+     109: bipush        7
+     111: if_icmple     135
+     125: getstatic     #107                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.HALLOWEEN_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+     131: iconst_1
+     132: if_icmpne     623
+     168: getstatic     #113                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     177: getstatic     #123                // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     183: getstatic     #133                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.ROTTEN_INFERNAL_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     221: getstatic     #123                // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     227: getstatic     #152                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     259: getstatic     #123                // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     265: getstatic     #155                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_AXE:Lnet/minecraftforge/registries/RegistryObject;
+     274: invokestatic  #160                // Method java/lang/Math.random:()D
+     284: iconst_0
+     289: invokestatic  #172                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     292: iconst_1
+     293: iconst_2
+     294: invokestatic  #178                // Method net/minecraft/util/Mth.m_216271_:(Lnet/minecraft/util/RandomSource;II)I
+     297: if_icmpge     415
+     342: getstatic     #191                // Field net/minecraftforge/registries/ForgeRegistries.ITEMS:Lnet/minecraftforge/registries/IForgeRegistry;
+     354: ldc           #201                // String born_in_chaos_v1:sweets
+     359: invokestatic  #210                // Method net/minecraft/tags/ItemTags.create:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     367: invokestatic  #172                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     396: bipush        10
+     430: getstatic     #265                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModParticleTypes.CANDY_ORANGE:Lnet/minecraftforge/registries/RegistryObject;
+     456: iconst_3
+     488: getstatic     #278                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModParticleTypes.CANDYGREN:Lnet/minecraftforge/registries/RegistryObject;
+     514: iconst_3
+     546: getstatic     #281                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModParticleTypes.CANDYPURPLE:Lnet/minecraftforge/registries/RegistryObject;
+     572: iconst_3
+     615: iconst_2
+  private static net.minecraft.world.item.Item lambda$execute$0();
+       0: getstatic     #302                // Field net/minecraft/world/item/Items.f_41852_:Lnet/minecraft/world/item/Item;

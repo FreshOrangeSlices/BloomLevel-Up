@@ -1,0 +1,46 @@
+## HalloweenEventSpawnProcedure: called from []
+### HalloweenEventSpawnProcedure.class
+public class net.mcreator.borninchaosv.procedures.HalloweenEventSpawnProcedure {
+  public net.mcreator.borninchaosv.procedures.HalloweenEventSpawnProcedure();
+  public static void onEntitySpawned(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+       9: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+      30: getstatic     #69                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      36: iconst_1
+      37: if_icmpne     578
+      40: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      43: iconst_2
+      44: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      47: bipush        9
+      49: if_icmpne     76
+      52: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      55: iconst_5
+      56: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      59: bipush        25
+      61: if_icmplt     76
+      64: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      67: iconst_5
+      68: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      71: bipush        31
+      73: if_icmple     132
+      76: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      79: iconst_2
+      80: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      83: bipush        10
+      85: if_icmpne     111
+      88: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      91: iconst_5
+      92: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      95: iconst_1
+      96: if_icmplt     111
+      99: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+     102: iconst_5
+     103: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+     106: bipush        7
+     108: if_icmple     132
+     122: getstatic     #86                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.HALLOWEEN_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+     128: iconst_1
+     129: if_icmpne     578
+     139: invokestatic  #92                 //

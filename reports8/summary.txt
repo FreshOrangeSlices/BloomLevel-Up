@@ -1,0 +1,39 @@
+cataclysm:enderite_ingot {'name': 'Enderite Ingot', 'use': 'none', 'stack': 64, 'classes': ['ItemInventoryOnly']}
+   recipes: []
+   loot: []
+cataclysm:void_crystal {'name': 'Void Crystal', 'use': 'none', 'stack': 64, 'classes': ['BlockItem']}
+   recipes: []
+   loot: ['cataclysm/loot_tables/blocks/void_crystal.json']
+cataclysm:void_shard {'name': 'Void Shard', 'use': 'none', 'stack': 64, 'classes': ['ItemInventoryOnly']}
+   recipes: []
+   loot: []
+legendary_monsters:void_gem {'name': 'Void Gem', 'use': 'none', 'stack': 64, 'classes': []}
+   recipes: ['legendary_monsters/recipes/void_sword.json [minecraft:crafting_shaped]']
+   loot: []
+skarrier_mobs:ascendant_ingot {'name': 'Eldritch Ingot', 'use': 'none', 'stack': 64, 'classes': ['AscendantIngotItem']}
+   recipes: []
+   loot: []
+skarrier_mobs:contagium_ingot {'name': 'Contagium Ingot', 'use': 'none', 'stack': 64, 'classes': ['ContagiumIngotItem']}
+   recipes: []
+   loot: []
+skarrier_mobs:decayerite_ingot {'name': 'Decayerite Ingot', 'use': 'none', 'stack': 64, 'classes': ['DecayeriteIngotItem']}
+   recipes: []
+   loot: []
+skarrier_mobs:eldritch_plate {'name': 'Eldritch Plate', 'use': 'none', 'stack': 64, 'classes': ['EldritchPlateItem']}
+   recipes: []
+   loot: []
+skarrier_mobs:pristinium_ingot {'name': 'Pristinium Ingot', 'use': 'none', 'stack': 64, 'classes': ['PristiniumIngotItem']}
+   recipes: []
+   loot: []
+skarrier_mobs:raw_krill {'name': 'Raw Krill', 'use': 'eat', 'stack': 64, 'classes': ['RawKrillItem']}
+   recipes: []
+   loot: ['skarrier_mobs/loot_tables/entities/krill.json']
+waystones:attuned_shard {'name': 'Attuned Shard', 'use': 'none', 'stack': 1, 'classes': ['AttunedShardItem', 'AbstractAttunedShardItem']}
+   recipes: ['waystones/recipes/attuned_shard.json [waystones:warp_plate]']
+   loot: []
+waystones:crumbling_attuned_shard {'name': 'Crumbling Attuned Shard', 'use': 'none', 'stack': 4, 'classes': ['CrumblingAttunedShardItem', 'AbstractAttunedShardItem']}
+   recipes: ['waystones/recipes/crumbling_attuned_shard.json [waystones:warp_plate]']
+   loot: []
+waystones:warp_plate {'name': 'Warp Plate', 'use': 'none', 'stack': 64, 'classes': ['BlockItem']}
+   recipes: ['waystones/recipes/attuned_shard.json [waystones:warp_plate]', 'waystones/recipes/crumbling_attuned_shard.json [waystones:warp_plate]', 'waystones/recipes/warp_plate.json [minecraft:crafting_shaped]']
+   loot: ['waystones/loot_tables/blocks/warp_plate.json']

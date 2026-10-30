@@ -38,7 +38,7 @@
     },
     {
       "name": "creatures",
-      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere. Zoni's Companions (FreshOrangeSlices' pick, beside Migamigos) are only summoned, from devices players craft, never found in the wild; its Ultimate Summon Device (catches any mob, bosses included) is taken out and its creative-only items are hidden (pack_data). Harder mobs mainly by day (playtest patch, chunk 5), each with its own spawns off or low so they come as the add-on's daytime sentinels and in their own structures: Undead Unleashed – Continued (Dreadknights, Wraiths, Flamebreathers) and Born in Chaos (about 80 mobs, its graves, caravans and towers; its Halloween and winter mobs stay on).",
+      "_comment": "Creatures, bosses and companions, and the spawn and structure control that keeps them memorable instead of everywhere. Zoni's Companions (FreshOrangeSlices' pick, beside Migamigos) are only summoned, from devices players craft, never found in the wild; its Ultimate Summon Device (catches any mob, bosses included) is taken out and its creative-only items are hidden (pack_data). Harder mobs mainly by day (playtest patch, chunk 5), each with its own spawns off or low so they come as the add-on's daytime sentinels and in their own structures: Undead Unleashed – Continued (Dreadknights, Wraiths, Flamebreathers), Born in Chaos (about 80 mobs, its graves, caravans and towers; its Halloween and winter mobs stay on) and Dungeon Denizens (classic fantasy: orcs, skeleton warriors, gargoyles, wights; CurseForge only, with its library gottsch's Monster Manual, and GottschCore).",
       "modrinth": [
         "aquamirae",
         "book-of-dragons",
@@ -46,6 +46,7 @@
         "mutant-monsters",
         "undead-unleashed",
         "borninchaos",
+        "gottschcore",
         "myths-and-legends",
         "legionary",
         "migamigos",
@@ -82,6 +83,24 @@
             "https://mediafilez.forgecdn.net/files/9296/241/skarrier_mobs-1.1.2-forge-1.20.1.jar",
             "https://edge.forgecdn.net/files/9296/241/skarrier_mobs-1.1.2-forge-1.20.1.jar"
           ],
+          "client": "required",
+          "server": "required"
+        },
+        {
+          "name": "Dungeon Denizens",
+          "_why": "Playtest patch, chunk 5: harder mobs by day (CurseForge only). 2.0 runs on gottsch's Monster Manual and GottschCore (on Modrinth)",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/dungeon-denizens",
+          "file": "ddenizens-1.20.1-2.0.0.jar",
+          "urls": ["https://mediafilez.forgecdn.net/files/8457/533/ddenizens-1.20.1-2.0.0.jar", "https://edge.forgecdn.net/files/8457/533/ddenizens-1.20.1-2.0.0.jar"],
+          "client": "required",
+          "server": "required"
+        },
+        {
+          "name": "gottsch's Monster Manual",
+          "_why": "Dungeon Denizens 2.0's library of mob classes (CurseForge only)",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/gottschs-monster-manual",
+          "file": "monster-manual-1.20.1-1.0.1.jar",
+          "urls": ["https://mediafilez.forgecdn.net/files/8457/360/monster-manual-1.20.1-1.0.1.jar", "https://edge.forgecdn.net/files/8457/360/monster-manual-1.20.1-1.0.1.jar"],
           "client": "required",
           "server": "required"
         }
@@ -403,6 +422,46 @@
       "off": {
         "Skarrier Mobs, in every biome of every dimension: put back below only where each can spawn": ["skarrier_mobs:bowlder_biome_modifier", "skarrier_mobs:breacher_biome_modifier", "skarrier_mobs:dragger_biome_modifier", "skarrier_mobs:eater_biome_modifier", "skarrier_mobs:freeze_biome_modifier", "skarrier_mobs:frost_biome_modifier", "skarrier_mobs:gadlisk_biome_modifier", "skarrier_mobs:glowin_biome_modifier", "skarrier_mobs:gorger_biome_modifier", "skarrier_mobs:slither_matriarch_biome_modifier", "skarrier_mobs:slither_spawner_dummy_biome_modifier", "skarrier_mobs:viruleon_biome_modifier", "skarrier_mobs:voidrake_biome_modifier", "skarrier_mobs:wretch_biome_modifier", "skarrier_mobs:wrought_biome_modifier"],
         "Monster Expansion's Arborix and Kobeko, named vanilla biomes only: put back below with BOP's": ["monsterexpansion:add_arborix_spawn", "monsterexpansion:add_kobeko_spawn"],
+        "Dungeon Denizens (chunk 5): 38 of its mobs across the Overworld; they come as the add-on's sentinels instead (its Nether ones stay)": [
+          "ddenizens:acid_skeleton",
+          "ddenizens:alligator_gar",
+          "ddenizens:animated_weapon",
+          "ddenizens:beholder",
+          "ddenizens:bloater",
+          "ddenizens:bloody_bones",
+          "ddenizens:bodak",
+          "ddenizens:boulder",
+          "ddenizens:burning_skeleton",
+          "ddenizens:daemon",
+          "ddenizens:death_tyrant",
+          "ddenizens:electric_skeleton",
+          "ddenizens:frost_skeleton",
+          "ddenizens:gargoyle",
+          "ddenizens:gazer",
+          "ddenizens:gelatinous_cube",
+          "ddenizens:ghoul",
+          "ddenizens:grave_zombie",
+          "ddenizens:gray_ooze",
+          "ddenizens:headless",
+          "ddenizens:iron_skeleton",
+          "ddenizens:magma_skeleton",
+          "ddenizens:margoyle",
+          "ddenizens:ochre_jelly",
+          "ddenizens:orc",
+          "ddenizens:orc_shaman",
+          "ddenizens:rat",
+          "ddenizens:sewer_ghoul",
+          "ddenizens:shadow",
+          "ddenizens:shadowlord",
+          "ddenizens:shrieker",
+          "ddenizens:skeleton_champion",
+          "ddenizens:skeleton_warrior",
+          "ddenizens:spectator",
+          "ddenizens:tainted_skeleton",
+          "ddenizens:violet_fungus",
+          "ddenizens:wight",
+          "ddenizens:winged_skeleton"
+        ],
         "Born in Chaos (chunk 5): 35 of its mobs in every biome of every dimension, most at weights of 10 to 30; they come as the add-on's sentinels and in its own structures instead. Its holiday mobs stay (FreshOrangeSlices): the pumpkin family (its spawn rule lets them out only from 25 October to 7 November) and Krampus with his henchmen; and its two Nether mobs": [
           "born_in_chaos_v1:baby_skeleton_biome_modifier",
           "born_in_chaos_v1:baby_spider_biome_modifier",

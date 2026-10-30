@@ -1,0 +1,1181 @@
+dump: shots/server/bloom-dump.jsonl (10426 rows), bosses: 83
+
+## aquamirae:captain_cornelia — Ghost of Captain Cornelia (hp 20.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['ShellHornItem$SummonEvent.class']
+
+## block_factorys_bosses:infernal_dragon — Ashlord, The Infernal Dragon (hp 250.0, monster, bar True, despawns False, tags ['block_factorys_bosses:bf_boss', 'bloomlevelup:bosses', 'forge:bosses'])
+  code: ['BossSpawnerBlockEntity.class']
+  advancement: block_factorys_bosses:kill_all_bosses [Unbound]
+  advancement: block_factorys_bosses:kill_dragon [Dragon Slayer]
+
+## block_factorys_bosses:kraken — Nerakyss, The Kraken (hp 500.0, monster, bar True, despawns False, tags ['block_factorys_bosses:bf_boss', 'bloomlevelup:bosses', 'forge:bosses'])
+  structure: block_factorys_bosses:kraken_ship type=block_factorys_bosses:kraken_ship biomes=#block_factorys_bosses:kraken_ship set=block_factorys_bosses:kraken_ship (minecraft:random_spread, spacing 52, separation 24; now (52, 24))
+  template: block_factorys_bosses:kraken_ship_back
+  template: block_factorys_bosses:kraken_ship_destroyed_back
+  template: block_factorys_bosses:kraken_ship_destroyed_front
+  template: block_factorys_bosses:kraken_ship_destroyed_seed
+  template: block_factorys_bosses:kraken_ship_destroyed_top
+  template: block_factorys_bosses:kraken_ship_front
+  template: block_factorys_bosses:kraken_ship_seed
+  code: ['KrakenShipStructure.class', 'KrakenSpawnerBlockEntity$PiratePoint.class', 'KrakenSpawnerBlockEntity.class']
+  advancement: block_factorys_bosses:kill_all_bosses [Unbound]
+  advancement: block_factorys_bosses:kill_kraken [Terror of the Depths]
+
+## block_factorys_bosses:sandworm — Sirok, The Sandworm (hp 150.0, monster, bar True, despawns False, tags ['block_factorys_bosses:bf_boss', 'bloomlevelup:bosses', 'forge:bosses'])
+  structure: block_factorys_bosses:sandworm_nest type=minecraft:jigsaw biomes=#block_factorys_bosses:sandworm_nest set=block_factorys_bosses:sandworm_nest (minecraft:random_spread, spacing 45, separation 30; now (45, 30))
+  template: block_factorys_bosses:sandworm_nest
+  advancement: block_factorys_bosses:kill_all_bosses [Unbound]
+  advancement: block_factorys_bosses:kill_sandworm [The Beast Below]
+
+## block_factorys_bosses:underworld_knight — Helvar, the Underworld Knight (hp 250.0, monster, bar True, despawns False, tags ['block_factorys_bosses:bf_boss', 'bloomlevelup:bosses', 'forge:bosses'])
+  structure: block_factorys_bosses:underworld_arena type=block_factorys_bosses:underworld_arena biomes=#block_factorys_bosses:underworld_arena set=block_factorys_bosses:underworld_arena (minecraft:random_spread, spacing 48, separation 40; now (48, 40))
+  template: block_factorys_bosses:underworld_arena_1
+  advancement: block_factorys_bosses:kill_all_bosses [Unbound]
+  advancement: block_factorys_bosses:kill_underworld_knight [Back Into Hell!]
+
+## block_factorys_bosses:yeti — Skor, The Yeti (hp 250.0, monster, bar True, despawns False, tags ['block_factorys_bosses:bf_boss', 'bloomlevelup:bosses', 'forge:bosses'])
+  structure: block_factorys_bosses:yeti_hideout type=minecraft:jigsaw biomes=#block_factorys_bosses:yeti_hideout set=block_factorys_bosses:yeti_hideout (minecraft:random_spread, spacing 30, separation 25; now (30, 25))
+  template: block_factorys_bosses:yeti_arena
+  advancement: block_factorys_bosses:kill_all_bosses [Unbound]
+  advancement: block_factorys_bosses:kill_yeti [Lost in the Snow]
+
+## cataclysm:amethyst_crab — Amethyst Crab (hp 200.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: cataclysm:amethyst_nest type=minecraft:jigsaw biomes=minecraft:lush_caves set=cataclysm:amethyst_nest (minecraft:random_spread, spacing 32, separation 8; now (32, 8))
+  structure: cataclysm:amethyst_nest (named in the structure) type=minecraft:jigsaw biomes=minecraft:lush_caves set=cataclysm:amethyst_nest (minecraft:random_spread, spacing 32, separation 8; now (32, 8))
+  template: cataclysm:amethyst_crab
+  structure spawn: cataclysm:amethyst_nest (monster, weight 1)
+  biome spawns (1): ['minecraft:lush_caves (monster, 1)']
+
+## cataclysm:ancient_remnant — Ancient Remnant (hp 450.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['Cursed_Pyramid_Structure$Piece.class']
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_remnant [Death Finds a Way]
+
+## cataclysm:aptrgangr — Aptrgangr (hp 160.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: cataclysm:abandoned_spire type=minecraft:jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:abandoned_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20))
+  structure: cataclysm:abandoned_temple type=minecraft:jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:abandoned_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20))
+  structure: cataclysm:frosted_prison type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:frosted_prison (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50))
+  template: cataclysm:aptrgangr
+  template: cataclysm:frosted_prison_upper_6
+
+## cataclysm:clawdian — Clawdian (hp 225.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: cataclysm:acropolis type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/acropolis_biomes set=cataclysm:acropolis (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50))
+  template: cataclysm:clawdian
+  advancement: cataclysm:kill_clawdian [Not so Shrimple Now]
+
+## cataclysm:coralssus — Coralssus (hp 160.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  template: cataclysm:coralssus_blue
+  template: cataclysm:coralssus_red
+  template: cataclysm:coralssus_yellow
+  code: ['Sunken_City_Structure$Piece.class']
+
+## cataclysm:ender_golem — Ender Golem (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['RuinedCitadelStructure$Piece.class']
+  advancement: cataclysm:kill_ender_golem [Palette Swap]
+
+## cataclysm:ender_guardian — Ender Guardian (hp 333.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['AltarOfVoid_Block_Entity.class']
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_ender_guardian [Wasn't that a Shulker?]
+
+## cataclysm:ignis — Ignis (hp 450.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['AltarOfFire_Block_Entity.class']
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_ignis [The Extinguished Fire]
+
+## cataclysm:ignited_revenant — Ignited Revenant (hp 80.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['Burning_Arena_Structure$Piece.class']
+  advancement: cataclysm:kill_revenant [Imperfect thing]
+
+## cataclysm:kobolediator — Kobolediator (hp 180.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  template: cataclysm:kobolediator
+  code: ['Cursed_Pyramid_Structure$Piece.class']
+
+## cataclysm:maledictus — Maledictus (hp 420.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_maledictus [Crusade Against Curse]
+
+## cataclysm:netherite_monstrosity — Netherite Monstrosity (hp 600.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: cataclysm:soul_black_smith type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/soul_black_smith_biomes set=cataclysm:soul_black_smith (cataclysm:cataclysm_random_spread, spacing 60, separation 50; now (45, 38))
+  template: cataclysm:monstrosity
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_monstrosity [The Broken Nether's Warmachine]
+
+## cataclysm:scylla — Scylla (hp 390.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: cataclysm:acropolis type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/acropolis_biomes set=cataclysm:acropolis (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50))
+  template: cataclysm:scylla
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_scylla [The Calm after the Storm]
+
+## cataclysm:the_harbinger — The Harbinger (hp 390.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: cataclysm:ancient_factory type=minecraft:jigsaw biomes=#cataclysm:has_structure/ancient_factory_biomes set=cataclysm:ancient_factory (minecraft:random_spread, spacing 112, separation 70; now (112, 70))
+  template: cataclysm:the_harbinger
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_harbinger [The Thing of Ancient Civilization]
+
+## cataclysm:the_leviathan — The Leviathan (hp 400.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['AltarOfAbyss_Block_Entity.class']
+  advancement: cataclysm:kill_all_bosses [The Cataclysmfarer]
+  advancement: cataclysm:kill_leviathan [A Multidimensional Predator]
+
+## cataclysm:the_prowler — The Prowler (hp 160.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: cataclysm:ancient_factory type=minecraft:jigsaw biomes=#cataclysm:has_structure/ancient_factory_biomes set=cataclysm:ancient_factory (minecraft:random_spread, spacing 112, separation 70; now (112, 70))
+  template: cataclysm:the_prowler
+
+## cataclysm:wadjet — Wadjet (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: cataclysm:desert_occupied_village type=minecraft:jigsaw biomes=#cataclysm:has_structure/cursed_pyramid_biomes set=cataclysm:desert_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20))
+  structure: cataclysm:desert_site type=minecraft:jigsaw biomes=#cataclysm:has_structure/cursed_pyramid_biomes set=cataclysm:desert_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20))
+  template: cataclysm:wadjet
+  code: ['Cursed_Pyramid_Structure$Piece.class']
+
+## graveyard:lich — Corrupted Champion (hp 400.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['AltarBlock.class', 'TGStructures.class']
+  advancement: graveyard:graveyard/summon_lich [Wrath of the Champion]
+
+## illagerinvasion:invoker — Invoker (hp 250.0, monster, bar True, despawns True, tags ['bloomlevelup:bosses'])
+  code: ['Invoker$SummonVexGoal.class', 'WoodlandMansionPieceMixin.class']
+
+## irons_spellbooks:dead_king — The Dead King (hp 500.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  template: irons_spellbooks:catacombs/catacombs_origin
+
+## irons_spellbooks:fire_boss — Echo of Tyros, First Flamebearer (hp 1000.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+
+## legendary_monsters:ancient_guardian — Ancient Guardian (hp 170.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:ancient_stronghold type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/ancient_stronghold_biomes set=legendary_monsters:ancient_stronghold (minecraft:random_spread, spacing 40, separation 30; now (40, 30))
+  template: legendary_monsters:ancient_stronghold
+  template: legendary_monsters:ancient_stronghold_old
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_the_ancient_guardian [The One - Armed Monster]
+
+## legendary_monsters:annihilation_pursuer — Annihilation Pursuer (hp 210.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:space_station type=legendary_monsters:lm_jigsaw biomes=#legendary_monsters:has_structure/space_station_biomes set=legendary_monsters:space_station (minecraft:random_spread, spacing 110, separation 75; now (110, 75))
+  template: legendary_monsters:space_station
+  template: legendary_monsters:space_station_main
+  template: legendary_monsters:space_station_part2
+  template: legendary_monsters:space_station_part8
+  code: ['LegendaryMonsters$ClientModEvents.class', 'ModEventBusClientEvents.class', 'ModEventBusEvents.class']
+  advancement: legendary_monsters:defeat_annihilation_pursuer [Slowing Down A Bit...]
+
+## legendary_monsters:beheaded_knight — Beheaded Knight (hp 195.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:collapsed_kingdom type=legendary_monsters:lm_jigsaw biomes=#legendary_monsters:has_structure/collapsed_kingdom_biomes set=legendary_monsters:collapsed_kingdom (minecraft:random_spread, spacing 110, separation 80; now (110, 80))
+  template: legendary_monsters:collapsed_kingdom_dungeon11
+  template: legendary_monsters:collapsed_kingdom_part3
+  code: ['LegendaryMonsters$ClientModEvents.class', 'ModEventBusClientEvents.class', 'ModEventBusEvents.class', 'ModParticleFactiories.class']
+  advancement: legendary_monsters:defeat_beheaded_knight [Headless KnightMan]
+  advancement: legendary_monsters:defeat_haunted_duo [The Power Of Friendship]
+
+## legendary_monsters:cloud_golem — Cumulonimbus (hp 350.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: legendary_monsters:cloudy_temple type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/cloudy_temple_biomes set=legendary_monsters:cloudy_temple (minecraft:random_spread, spacing 70, separation 50; now (70, 50))
+  template: legendary_monsters:cloudy_temple
+  template: legendary_monsters:cloudy_temple_arena
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_cloud_golem [Against The Gods]
+
+## legendary_monsters:dune_sentinel — Dune Sentinel (hp 170.0, creature, bar False, despawns True, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:ruined_pyramid type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/ruined_pyramid_biomes set=legendary_monsters:ruined_pyramid (minecraft:random_spread, spacing 40, separation 30; now (40, 30))
+  template: legendary_monsters:ruined_pyramid
+  advancement: legendary_monsters:defeat_dune_sentinel [Ancient War Machine]
+
+## legendary_monsters:endersent — Chorusent (hp 200.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:ancient_tower_remains type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/ancient_tower_remains_biomes set=legendary_monsters:ancient_tower_remains (minecraft:random_spread, spacing 65, separation 35; now (65, 35))
+  template: legendary_monsters:ancient_tower_remains
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_endersent [The Tall Guy]
+
+## legendary_monsters:frostbitten_golem — Frostbitten Golem (hp 220.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:frostbitten_temple type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/frostbitten_temple_biomes set=legendary_monsters:frostbitten_temple (minecraft:random_spread, spacing 38, separation 28; now (38, 28))
+  template: legendary_monsters:frostbitten_temple
+  template: legendary_monsters:frostbitten_temple2
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_frostbitten_golem [The Coldest Golem]
+
+## legendary_monsters:lava_eater — Lava Eater (hp 170.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:lava_eater_spawn type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/lava_eater_spawn_biomes set=legendary_monsters:lava_eater_spawn (minecraft:random_spread, spacing 25, separation 13; now (19, 10))
+  template: legendary_monsters:lava_eater_spawn
+  template: legendary_monsters:lava_eater_spawn2
+  code: ['ModEventBusClientEvents.class', 'ModStructureTags.class']
+  advancement: legendary_monsters:defeat_lava_eater [Fiery Beast]
+
+## legendary_monsters:overgrown_colossus — Overgrown Colossus (hp 170.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:mossy_temple type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/mossy_temple_biomes set=legendary_monsters:mossy_temple (minecraft:random_spread, spacing 35, separation 24; now (35, 24))
+  template: legendary_monsters:mossy_temple
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_overgrown_colossus [The Mossy Beast]
+
+## legendary_monsters:posessed_paladin — Possessed Paladin (hp 400.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: legendary_monsters:collapsed_kingdom type=legendary_monsters:lm_jigsaw biomes=#legendary_monsters:has_structure/collapsed_kingdom_biomes set=legendary_monsters:collapsed_kingdom (minecraft:random_spread, spacing 110, separation 80; now (110, 80))
+  template: legendary_monsters:collapsed_kingdom_arena
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_posessed_paladin [Finally Free]
+
+## legendary_monsters:resurrected_knight — Resurrected Knight (hp 190.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:collapsed_kingdom type=legendary_monsters:lm_jigsaw biomes=#legendary_monsters:has_structure/collapsed_kingdom_biomes set=legendary_monsters:collapsed_kingdom (minecraft:random_spread, spacing 110, separation 80; now (110, 80))
+  template: legendary_monsters:collapsed_kingdom_dungeon11
+  template: legendary_monsters:collapsed_kingdom_part3
+  code: ['LegendaryMonsters$ClientModEvents.class', 'ModEventBusClientEvents.class', 'ModEventBusEvents.class']
+  advancement: legendary_monsters:defeat_haunted_duo [The Power Of Friendship]
+  advancement: legendary_monsters:defeat_resurrected_knight [My Head Is Back!]
+
+## legendary_monsters:shulker_mimic — Shulker Mimic (hp 200.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:shulker_tower type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/shulker_tower_biomes set=legendary_monsters:shulker_tower (minecraft:random_spread, spacing 65, separation 35; now (65, 35))
+  template: legendary_monsters:shulker_tower
+  template: legendary_monsters:shulker_tower_new_old
+  template: legendary_monsters:shulker_tower_old
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_shulker_mimic [Spooky Scary Shulker Box]
+
+## legendary_monsters:skeletosaurus — Skeletosaurus (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:skeletosaurus_nest type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/skeletosaurus_nest_biomes set=legendary_monsters:skeletosaurus_nest (minecraft:random_spread, spacing 25, separation 14; now (19, 10))
+  template: legendary_monsters:skeletosaurus_nest
+  template: legendary_monsters:skeletosaurus_nest2
+  code: ['ModEventBusClientEvents.class', 'ModStructureTags.class']
+  biome spawns (1): ['minecraft:soul_sand_valley (monster, 0)']
+  advancement: legendary_monsters:defeat_skeletosaurus [The Ancient Skeleton]
+
+## legendary_monsters:the_obliterator — The Obliterator (hp 550.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['LegendaryMonsters$ClientModEvents.class', 'ModEventBusClientEvents.class', 'ModEventBusEvents.class']
+  advancement: legendary_monsters:defeat_the_obliterator [Obliteration for Obliterator]
+
+## legendary_monsters:withered_abomination — Withered Abomination (hp 190.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: legendary_monsters:soul_fortress_remains type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/soul_fortress_remains_biomes set=legendary_monsters:soul_fortress_remains (minecraft:random_spread, spacing 27, separation 18; now (20, 13))
+  template: legendary_monsters:soul_fortress_remains
+  code: ['ModEventBusClientEvents.class']
+  advancement: legendary_monsters:defeat_withered_abomination [The Soul Eater]
+
+## legionary:unbreakable — The Unbreakable (hp 400.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'fieldguide:bosses', 'forge:bosses'])
+  template: legionary:bastion_arena/tomb
+
+## minecraft:elder_guardian — elder_guardian (hp 80.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## minecraft:ender_dragon — ender_dragon (hp 200.0, monster, bar False, despawns True, tags ['bloomlevelup:bosses', 'forge:bosses'])
+
+## minecraft:warden — warden (hp 500.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  advancement: soulsweapons:excalibur [Right back at ya!]
+
+## minecraft:wither — wither (hp 300.0, monster, bar True, despawns True, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: cataclysm:ancient_factory type=minecraft:jigsaw biomes=#cataclysm:has_structure/ancient_factory_biomes set=cataclysm:ancient_factory (minecraft:random_spread, spacing 112, separation 70; now (112, 70))
+  structure: cataclysm:frosted_prison type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:frosted_prison (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50))
+  structure: cataclysm:soul_black_smith type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/soul_black_smith_biomes set=cataclysm:soul_black_smith (cataclysm:cataclysm_random_spread, spacing 60, separation 50; now (45, 38))
+  structure: graveyard:crypt type=graveyard:crypt biomes=#graveyard:has_structure/crypt set=graveyard:crypt_structure (minecraft:random_spread, spacing 24, separation 22; now (24, 22))
+  structure: graveyard:haunted_house type=graveyard:haunted_house biomes=#graveyard:has_structure/haunted_house set=graveyard:haunted_house_structure (minecraft:random_spread, spacing 20, separation 18; now (20, 18))
+  structure: graveyard:large_graveyard type=graveyard:large_graveyard biomes=#graveyard:has_structure/large_graveyard set=graveyard:large_graveyard_structure (minecraft:random_spread, spacing 25, separation 20; now (25, 20))
+  structure: graveyard:medium_graveyard type=graveyard:medium_graveyard biomes=#graveyard:has_structure/medium_graveyard set=graveyard:medium_graveyard_structure (minecraft:random_spread, spacing 18, separation 16; now (18, 16))
+  structure: graveyard:memorial_tree type=graveyard:memorial_tree biomes=#graveyard:has_structure/memorial_tree set=graveyard:memorial_tree_structure (minecraft:random_spread, spacing 14, separation 12; now (14, 12))
+  structure: graveyard:small_desert_graveyard type=graveyard:small_desert_graveyard biomes=#graveyard:has_structure/small_desert_graveyard set=graveyard:small_desert_graveyard_structure (minecraft:random_spread, spacing 32, separation 28; now (32, 28))
+  structure: illagerinvasion:labyrinth type=illagerinvasion:labyrinth biomes=#illagerinvasion:has_structure/labyrinth set=illagerinvasion:labyrinth (minecraft:random_spread, spacing 48, separation 26; now (48, 26))
+  structure: irons_spellbooks:ancient_battleground type=minecraft:jigsaw biomes=#minecraft:has_structure/bastion_remnant set=None
+  structure: legendary_monsters:soul_fortress_remains type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/soul_fortress_remains_biomes set=legendary_monsters:soul_fortress_remains (minecraft:random_spread, spacing 27, separation 18; now (20, 13))
+  structure: soulsweapons:decaying_kingdom type=minecraft:jigsaw biomes=#minecraft:is_nether set=soulsweapons:nether_structures (minecraft:random_spread, spacing 60, separation 30; now (45, 22))
+  template: irons_spellbooks:battleground/branch_4
+  template: irons_spellbooks:battleground/branch_5
+  template: irons_spellbooks:battleground/decorations/burial_3
+  template: irons_spellbooks:battleground/decorations/skull_pile
+  template: irons_spellbooks:battleground/decorations/wall_4
+  template: irons_spellbooks:mangrove_hut
+  template: soulsweapons:decaying_kingdom_altarnate
+  template: soulsweapons:decaying_kingdom_main
+  template: cataclysm:ancient_factory1
+  template: cataclysm:ancient_factory2
+  template: cataclysm:ancient_factory_a
+  template: cataclysm:ancient_factory_s
+  code: ['ModBusEvents.class', 'ModEventBusClientEvents.class', 'SwitchSpawnerProcessor.class', 'WitheredRibcageHurt.class', 'WitheredScytheAttackedEvent.class', 'WitheredScytheDropGoldEventHandler.class', 'WitheredScytheUndead.class']
+
+## monsterexpansion:ignathos — Ignathos (hp 500.0, creature, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: monsterexpansion:ignathos_structure type=minecraft:jigsaw biomes=#monsterexpansion:ignathos_biomes set=monsterexpansion:ignathos_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20))
+  template: monsterexpansion:ignathos_anchor
+  code: ['IgnathosSetBonusEvents.class', 'ModEventBusEvents.class', 'MonsterExpansion$ClientModEvents.class']
+  advancement: monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]
+
+## monsterexpansion:leivekilth — Leivekilth (hp 1000.0, creature, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: monsterexpansion:leivekilth_structure type=minecraft:jigsaw biomes=#monsterexpansion:leivekilth_biomes set=monsterexpansion:leivekilth_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20))
+  template: monsterexpansion:leivekilth_anchor
+  code: ['LeivekilthSetBonusEvents.class', 'ModEventBusEvents.class', 'MonsterExpansion$ClientModEvents.class']
+  advancement: monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]
+  advancement: monsterexpansion:hunt_leivekilth [advancements.monsterexpansion.hunt_leivekilth.title]
+
+## monsterexpansion:rakoth — Rakoth (hp 750.0, creature, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: monsterexpansion:rakoth_structure type=minecraft:jigsaw biomes=#monsterexpansion:rakoth_biomes set=monsterexpansion:rakoth_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20))
+  template: monsterexpansion:rakoth_anchor
+  code: ['ModEventBusEvents.class', 'MonsterExpansion$ClientModEvents.class', 'RakothSetBonusEvents.class']
+  advancement: monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]
+  advancement: monsterexpansion:hunt_rakoth [advancements.monsterexpansion.hunt_rakoth.title]
+
+## monsterexpansion:rhyza — Rhyza (hp 500.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: monsterexpansion:rhyza_structure type=minecraft:jigsaw biomes=#monsterexpansion:rhyza_biomes set=monsterexpansion:rhyza_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20))
+  template: monsterexpansion:rhyza_anchor
+  code: ['KobekoRhyzaSetBonusEvents.class', 'ModEventBusEvents.class', 'MonsterExpansion$ClientModEvents.class', 'RhyzaSetBonusEvents.class']
+  advancement: monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]
+  advancement: monsterexpansion:hunt_rhyza [advancements.monsterexpansion.hunt_rhyza.title]
+
+## monsterexpansion:skrythe — Skrythe (hp 750.0, creature, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: monsterexpansion:skrythe_structure type=minecraft:jigsaw biomes=#monsterexpansion:skrythe_biomes set=monsterexpansion:skrythe_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20))
+  template: monsterexpansion:skrythe_anchor
+  code: ['KobekoSkrytheSetBonusEvents.class', 'ModEventBusEvents.class', 'MonsterExpansion$ClientModEvents.class', 'SkrytheSetBonusEvents.class']
+  advancement: monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]
+  advancement: monsterexpansion:hunt_skrythe [advancements.monsterexpansion.hunt_skrythe.title]
+
+## mutantmonsters:mutant_enderman — Mutant Enderman (hp 200.0, monster, bar False, despawns True, tags ['bloomlevelup:bosses'])
+  biome spawns (116): ['biomesoplenty:spider_nest (monster, 1)', 'minecraft:stony_peaks (monster, 1)', 'minecraft:end_highlands (monster, 1)', 'minecraft:swamp (monster, 1)', 'biomesoplenty:wasteland_steppe (monster, 1)', 'minecraft:frozen_ocean (monster, 1)']
+
+## mutantmonsters:mutant_skeleton — Mutant Skeleton (hp 150.0, monster, bar False, despawns True, tags ['bloomlevelup:bosses'])
+  code: ['PlayerEventsHandler.class']
+  biome spawns (108): ['biomesoplenty:spider_nest (monster, 10)', 'minecraft:stony_peaks (monster, 10)', 'minecraft:swamp (monster, 10)', 'biomesoplenty:wasteland_steppe (monster, 10)', 'minecraft:frozen_ocean (monster, 10)', 'biomesoplenty:seasonal_forest (monster, 10)']
+  advancement: mutantmonsters:no_bones_about_it [No Bones About It]
+
+## mutantmonsters:mutant_zombie — Mutant Zombie (hp 150.0, monster, bar False, despawns True, tags ['bloomlevelup:bosses'])
+  biome spawns (107): ['biomesoplenty:spider_nest (monster, 9)', 'minecraft:stony_peaks (monster, 9)', 'minecraft:swamp (monster, 9)', 'biomesoplenty:wasteland_steppe (monster, 9)', 'minecraft:frozen_ocean (monster, 9)', 'biomesoplenty:seasonal_forest (monster, 9)']
+  advancement: mutantmonsters:burn_zombie_burn [Burn Zombie Burn]
+  advancement: mutantmonsters:hulk_smash [Hulk Smash!]
+
+## mythsandlegends:black_charro — The Black Charro (hp 370.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['AltarOfTheDeadBlock.class', 'AltarOfTheDeadBlockEntity.class', 'ModEvents.class', 'MythsAndLegends$ClientModEvents.class', 'SummonAttackBehavior.class']
+  advancement: mythsandlegends:rider_of_the_shadows [Rider of the Shadows]
+
+## mythsandlegends:cogwork_construct — Cogwork Construct (hp 280.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['ModEvents.class', 'MythsAndLegends$ClientModEvents.class']
+
+## mythsandlegends:warborn_aegis — Warborn Aegis (hp 400.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['ModEvents.class', 'MythsAndLegends$ClientModEvents.class']
+
+## oddities:queen_of_orchid — Queen Of Orchid (hp 300.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+  code: ['OrchidAltarOnTickUpdateProcedure.class']
+  biome spawns (7): ['biomesoplenty:jacaranda_glade (monster, 12)', 'minecraft:cherry_grove (monster, 12)', 'biomesoplenty:snowblossom_grove (monster, 12)', 'biomesoplenty:lavender_field (monster, 12)', 'minecraft:meadow (monster, 12)', 'biomesoplenty:orchard (monster, 12)']
+
+## skarrier_mobs:carnager — Carnager (hp 300.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_body — Endorah (hp 1000.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_head_main — Main Endorah Head (hp 500.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_head_main_flying — Main Endorah Head (hp 400.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_head_melee — Endorah Head (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_head_melee_flying — Endorah Head (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_head_ranged — Endorah Head (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:endorah_head_ranged_flying — Endorah Head (hp 150.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:grave_construct — Grave Construct (hp 150.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:grave_construct_phase_melee — Grave Construct (Phase 2) (hp 200.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:grave_construct_phase_ranged — Grave Construct (Phase 2) (hp 100.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:istukan — Istukan (hp 160.0, creature, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## skarrier_mobs:trawler — Trawler (hp 160.0, monster, bar False, despawns True, tags ['bloomlevelup:bosses'])
+  biome spawns (2): ['minecraft:eroded_badlands (monster, 10)', 'minecraft:badlands (monster, 10)']
+
+## skarrier_mobs:tunnel_gore — Tunnel Gore (hp 1000.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+  structure: skarrier_mobs:tunnel_gore_lair_x type=minecraft:jigsaw biomes=#minecraft:is_overworld set=skarrier_mobs:tunnel_gore_lair_x (minecraft:random_spread, spacing 22, separation 12; now (22, 12))
+  structure: skarrier_mobs:tunnel_gore_tunnel_1 type=minecraft:jigsaw biomes=#skarrier_mobs:empty_biome_tag set=skarrier_mobs:tunnel_gore_tunnel_1 (minecraft:random_spread, spacing 5, separation 2; now (5, 2))
+  structure: skarrier_mobs:tunnel_gore_tunnel_2 type=minecraft:jigsaw biomes=#skarrier_mobs:empty_biome_tag set=skarrier_mobs:tunnel_gore_tunnel_2 (minecraft:random_spread, spacing 5, separation 2; now (5, 2))
+  structure: skarrier_mobs:tunnel_gore_tunnel_3 type=minecraft:jigsaw biomes=#skarrier_mobs:empty_biome_tag set=skarrier_mobs:tunnel_gore_tunnel_3 (minecraft:random_spread, spacing 5, separation 2; now (5, 2))
+  template: skarrier_mobs:tg_lair_tunnel1
+  template: skarrier_mobs:tg_lair_tunnel2
+  template: skarrier_mobs:tg_lair_tunnel3
+  template: skarrier_mobs:tg_lair_x
+
+## skarrier_mobs:voidrake — Voidrake (hp 160.0, monster, bar False, despawns True, tags ['bloomlevelup:bosses'])
+  biome spawns (2): ['minecraft:end_highlands (monster, 10)', 'minecraft:end_barrens (monster, 10)']
+
+## skarrier_mobs:wretch — Wretch (hp 300.0, monster, bar False, despawns False, tags ['bloomlevelup:bosses'])
+
+## soulsweapons:accursed_lord_boss — The Decaying King (hp 600.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: soulsweapons:decaying_kingdom type=minecraft:jigsaw biomes=#minecraft:is_nether set=soulsweapons:nether_structures (minecraft:random_spread, spacing 60, separation 30; now (45, 22))
+  template: soulsweapons:decaying_kingdom_altarnate
+  template: soulsweapons:decaying_kingdom_main
+  code: ['ModBusEvents.class']
+  advancement: soulsweapons:end_of_reigns [Oh, The Misery]
+
+## soulsweapons:chaos_monarch — Monarch of Chaos (hp 450.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['ModBusEvents.class']
+  advancement: soulsweapons:ender_of_world_ender [The End of the World Ender]
+
+## soulsweapons:day_stalker — Day Stalker (hp 600.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['ModBusEvents.class']
+
+## soulsweapons:draugr_boss — Old Champion's Remains (hp 300.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  structure: soulsweapons:champions_graves type=minecraft:jigsaw biomes=#minecraft:is_taiga set=soulsweapons:overworld_structures (minecraft:random_spread, spacing 60, separation 30; now (60, 30))
+  template: soulsweapons:champions_graves_altarnate
+  template: soulsweapons:champions_graves_main
+  code: ['AltarBlock.class', 'ModBusEvents.class']
+  biome spawns (16): ['minecraft:frozen_ocean (monster, 15)', 'minecraft:snowy_plains (monster, 15)', 'minecraft:frozen_peaks (monster, 15)', 'minecraft:jagged_peaks (monster, 15)', 'biomesoplenty:snowy_fir_clearing (monster, 15)', 'biomesoplenty:snowblossom_grove (monster, 15)']
+  advancement: soulsweapons:draugr_boss [Restless Sleepwalker]
+  advancement: soulsweapons:moonknight [Blue Steel]
+
+## soulsweapons:moonknight — Fallen Icon (hp 550.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['AltarBlock.class', 'ModBusEvents.class']
+  advancement: soulsweapons:moonknight [Blue Steel]
+
+## soulsweapons:night_prowler — Night Prowler (hp 500.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['ModBusEvents.class']
+
+## soulsweapons:night_shade — Frenzied Shade (hp 150.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['ModBusEvents.class']
+
+## soulsweapons:returning_knight — Returning Knight (hp 500.0, monster, bar True, despawns False, tags ['bloomlevelup:bosses', 'forge:bosses'])
+  code: ['AltarBlock.class', 'ModBusEvents.class']
+  advancement: soulsweapons:arkenplate [Redemption Ark]
+  advancement: soulsweapons:nightfall [3rd Time's the Charm!]
+  advancement: soulsweapons:returning_knight [Last Arrival]
+
+# Structures of boss mods (all)
+  aquamirae:pirate_outpost: type=minecraft:jigsaw biomes=#aquamirae:ice_maze set=aquamirae:pirate_outpost (minecraft:random_spread, spacing 18, separation 10; now (18, 10)) reached=1
+  aquamirae:pirate_shelter: type=minecraft:jigsaw biomes=#aquamirae:ice_maze set=aquamirae:pirate_shelter (minecraft:random_spread, spacing 30, separation 20; now (30, 20)) reached=3
+  aquamirae:pirate_ship: type=minecraft:jigsaw biomes=#aquamirae:ice_maze set=aquamirae:pirate_ship (minecraft:random_spread, spacing 25, separation 10; now (25, 10)) reached=1
+  aquamirae:shipwreck: type=minecraft:shipwreck biomes=#aquamirae:ice_maze set=aquamirae:shipwreck (minecraft:random_spread, spacing 6, separation 1; now (6, 1)) reached=None
+  aquamirae:surface/arch: type=minecraft:jigsaw biomes=#aquamirae:ice_maze set=aquamirae:surface (minecraft:random_spread, spacing 4, separation 0; now (4, 0)) reached=1
+  aquamirae:surface/spiral: type=minecraft:jigsaw biomes=#aquamirae:ice_maze set=aquamirae:surface (minecraft:random_spread, spacing 4, separation 0; now (4, 0)) reached=1
+  block_factorys_bosses:dragon_tower: type=block_factorys_bosses:dragon_tower biomes=#block_factorys_bosses:dragon_tower set=block_factorys_bosses:dragon_tower (minecraft:random_spread, spacing 96, separation 24; now (96, 24)) reached=3
+  block_factorys_bosses:kraken_ship: type=block_factorys_bosses:kraken_ship biomes=#block_factorys_bosses:kraken_ship set=block_factorys_bosses:kraken_ship (minecraft:random_spread, spacing 52, separation 24; now (52, 24)) reached=4
+  block_factorys_bosses:sandworm_nest: type=minecraft:jigsaw biomes=#block_factorys_bosses:sandworm_nest set=block_factorys_bosses:sandworm_nest (minecraft:random_spread, spacing 45, separation 30; now (45, 30)) reached=1
+  block_factorys_bosses:underworld_arena: type=block_factorys_bosses:underworld_arena biomes=#block_factorys_bosses:underworld_arena set=block_factorys_bosses:underworld_arena (minecraft:random_spread, spacing 48, separation 40; now (48, 40)) reached=20
+  block_factorys_bosses:yeti_hideout: type=minecraft:jigsaw biomes=#block_factorys_bosses:yeti_hideout set=block_factorys_bosses:yeti_hideout (minecraft:random_spread, spacing 30, separation 25; now (30, 25)) reached=1
+  cataclysm:abandoned_spire: type=minecraft:jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:abandoned_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20)) reached=7
+  cataclysm:abandoned_temple: type=minecraft:jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:abandoned_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20)) reached=7
+  cataclysm:abandoned_village: type=minecraft:jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:abandoned_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20)) reached=6
+  cataclysm:acropolis: type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/acropolis_biomes set=cataclysm:acropolis (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50)) reached=39
+  cataclysm:amethyst_nest: type=minecraft:jigsaw biomes=minecraft:lush_caves set=cataclysm:amethyst_nest (minecraft:random_spread, spacing 32, separation 8; now (32, 8)) reached=2
+  cataclysm:ancient_factory: type=minecraft:jigsaw biomes=#cataclysm:has_structure/ancient_factory_biomes set=cataclysm:ancient_factory (minecraft:random_spread, spacing 112, separation 70; now (112, 70)) reached=9
+  cataclysm:burning_arena: type=cataclysm:burning_arena biomes=#cataclysm:has_structure/burning_arena_biomes set=cataclysm:burning_arena (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (60, 38)) reached=None
+  cataclysm:cursed_pyramid: type=cataclysm:cursed_pyramid biomes=#cataclysm:has_structure/cursed_pyramid_biomes set=cataclysm:cursed_pyramid (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50)) reached=None
+  cataclysm:desert_occupied_village: type=minecraft:jigsaw biomes=#cataclysm:has_structure/cursed_pyramid_biomes set=cataclysm:desert_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20)) reached=5
+  cataclysm:desert_site: type=minecraft:jigsaw biomes=#cataclysm:has_structure/cursed_pyramid_biomes set=cataclysm:desert_structures (cataclysm:cataclysm_random_spread, spacing 30, separation 20; now (30, 20)) reached=3
+  cataclysm:frosted_prison: type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/frosted_prison_biomes set=cataclysm:frosted_prison (cataclysm:cataclysm_random_spread, spacing 80, separation 50; now (80, 50)) reached=30
+  cataclysm:ruined_citadel: type=cataclysm:ruined_citadel biomes=#cataclysm:has_structure/ruined_citadel_biomes set=cataclysm:ruined_citadel (minecraft:random_spread, spacing 50, separation 25; now (50, 25)) reached=None
+  cataclysm:soul_black_smith: type=cataclysm:cataclysm_jigsaw biomes=#cataclysm:has_structure/soul_black_smith_biomes set=cataclysm:soul_black_smith (cataclysm:cataclysm_random_spread, spacing 60, separation 50; now (45, 38)) reached=10
+  cataclysm:sunken_city: type=cataclysm:sunken_city biomes=#cataclysm:has_structure/sunken_city_biomes set=cataclysm:sunken_city (cataclysm:cataclysm_random_spread, spacing 100, separation 70; now (100, 70)) reached=None
+  graveyard:altar: type=graveyard:altar biomes=#graveyard:has_structure/altar set=graveyard:altar_structure (minecraft:random_spread, spacing 30, separation 24; now (30, 24)) reached=1
+  graveyard:crypt: type=graveyard:crypt biomes=#graveyard:has_structure/crypt set=graveyard:crypt_structure (minecraft:random_spread, spacing 24, separation 22; now (24, 22)) reached=33
+  graveyard:dead_tree: type=graveyard:dead_tree biomes=#graveyard:has_structure/dead_tree set=graveyard:dead_tree_structure (minecraft:random_spread, spacing 28, separation 16; now (28, 16)) reached=1
+  graveyard:giant_mushroom: type=graveyard:giant_mushroom biomes=#graveyard:has_structure/giant_mushroom set=graveyard:giant_mushroom_structure (minecraft:random_spread, spacing 34, separation 26; now (34, 26)) reached=4
+  graveyard:haunted_house: type=graveyard:haunted_house biomes=#graveyard:has_structure/haunted_house set=graveyard:haunted_house_structure (minecraft:random_spread, spacing 20, separation 18; now (20, 18)) reached=2
+  graveyard:large_graveyard: type=graveyard:large_graveyard biomes=#graveyard:has_structure/large_graveyard set=graveyard:large_graveyard_structure (minecraft:random_spread, spacing 25, separation 20; now (25, 20)) reached=47
+  graveyard:lich_prison: type=graveyard:lich_prison biomes=#graveyard:has_structure/lich_prison set=graveyard:lich_prison_structure (minecraft:random_spread, spacing 120, separation 100; now (120, 100)) reached=1
+  graveyard:medium_graveyard: type=graveyard:medium_graveyard biomes=#graveyard:has_structure/medium_graveyard set=graveyard:medium_graveyard_structure (minecraft:random_spread, spacing 18, separation 16; now (18, 16)) reached=2
+  graveyard:memorial_tree: type=graveyard:memorial_tree biomes=#graveyard:has_structure/memorial_tree set=graveyard:memorial_tree_structure (minecraft:random_spread, spacing 14, separation 12; now (14, 12)) reached=1
+  graveyard:mushroom_grave: type=graveyard:mushroom_grave biomes=#graveyard:has_structure/mushroom_grave set=graveyard:mushroom_grave_structure (minecraft:random_spread, spacing 24, separation 18; now (24, 18)) reached=3
+  graveyard:overrun_desert_village: type=graveyard:tg_jigsaw biomes=#graveyard:has_structure/overrun_desert_village set=graveyard:overrun_villages (minecraft:random_spread, spacing 40, separation 12; now (40, 12)) reached=3
+  graveyard:overrun_plains_village: type=graveyard:tg_jigsaw biomes=#graveyard:has_structure/overrun_plains_village set=graveyard:overrun_villages (minecraft:random_spread, spacing 40, separation 12; now (40, 12)) reached=4
+  graveyard:overrun_savanna_village: type=graveyard:tg_jigsaw biomes=#graveyard:has_structure/overrun_savanna_village set=graveyard:overrun_villages (minecraft:random_spread, spacing 40, separation 12; now (40, 12)) reached=4
+  graveyard:overrun_snowy_village: type=graveyard:tg_jigsaw biomes=#graveyard:has_structure/overrun_snowy_village set=graveyard:overrun_villages (minecraft:random_spread, spacing 40, separation 12; now (40, 12)) reached=3
+  graveyard:overrun_taiga_village: type=graveyard:tg_jigsaw biomes=#graveyard:has_structure/overrun_taiga_village set=graveyard:overrun_villages (minecraft:random_spread, spacing 40, separation 12; now (40, 12)) reached=2
+  graveyard:ruins: type=graveyard:ruins biomes=#graveyard:has_structure/ruins set=graveyard:ruins_structure (minecraft:random_spread, spacing 16, separation 12; now (16, 12)) reached=3
+  graveyard:small_desert_grave: type=graveyard:small_desert_grave biomes=#graveyard:has_structure/small_desert_grave set=graveyard:small_desert_grave_structure (minecraft:random_spread, spacing 20, separation 16; now (20, 16)) reached=14
+  graveyard:small_desert_graveyard: type=graveyard:small_desert_graveyard biomes=#graveyard:has_structure/small_desert_graveyard set=graveyard:small_desert_graveyard_structure (minecraft:random_spread, spacing 32, separation 28; now (32, 28)) reached=1
+  graveyard:small_grave: type=graveyard:small_grave biomes=#graveyard:has_structure/small_grave set=graveyard:small_grave_structure (minecraft:random_spread, spacing 12, separation 8; now (12, 8)) reached=19
+  graveyard:small_graveyard: type=graveyard:small_graveyard biomes=#graveyard:has_structure/small_graveyard set=graveyard:small_graveyard_structure (minecraft:random_spread, spacing 20, separation 18; now (20, 18)) reached=8
+  graveyard:small_mountain_grave: type=graveyard:small_mountain_grave biomes=#graveyard:has_structure/small_mountain_grave set=graveyard:small_mountain_grave_structure (minecraft:random_spread, spacing 12, separation 8; now (12, 8)) reached=11
+  graveyard:small_savanna_grave: type=graveyard:small_savanna_grave biomes=#graveyard:has_structure/small_savanna_grave set=graveyard:small_savanna_grave_structure (minecraft:random_spread, spacing 12, separation 8; now (12, 8)) reached=8
+  illagerinvasion:firecaller_hut: type=minecraft:jigsaw biomes=#illagerinvasion:has_structure/firecaller_hut set=illagerinvasion:firecaller_hut (minecraft:random_spread, spacing 42, separation 28; now (42, 28)) reached=9
+  illagerinvasion:illager_fort: type=minecraft:jigsaw biomes=#illagerinvasion:has_structure/illager_fort set=illagerinvasion:illager_fort (minecraft:random_spread, spacing 42, separation 28; now (42, 28)) reached=4
+  illagerinvasion:illusioner_tower: type=minecraft:jigsaw biomes=#illagerinvasion:has_structure/illusioner_tower set=illagerinvasion:illusioner_tower (minecraft:random_spread, spacing 42, separation 28; now (42, 28)) reached=11
+  illagerinvasion:labyrinth: type=illagerinvasion:labyrinth biomes=#illagerinvasion:has_structure/labyrinth set=illagerinvasion:labyrinth (minecraft:random_spread, spacing 48, separation 26; now (48, 26)) reached=30
+  illagerinvasion:sorcerer_hut: type=minecraft:jigsaw biomes=#illagerinvasion:has_structure/sorcerer_hut set=illagerinvasion:sorcerer_hut (minecraft:random_spread, spacing 18, separation 14; now (18, 14)) reached=3
+  irons_spellbooks:ancient_battleground: type=minecraft:jigsaw biomes=#minecraft:has_structure/bastion_remnant set=None reached=28
+  irons_spellbooks:citadel: type=minecraft:jigsaw biomes=#minecraft:has_structure/bastion_remnant set=None reached=35
+  irons_spellbooks:ice_spider_den: type=minecraft:jigsaw biomes=#irons_spellbooks:has_structure/ice_spider_den set=irons_spellbooks:ice_spider_den (minecraft:random_spread, spacing 85, separation 50; now (60, 35)) reached=47
+  irons_spellbooks:impaled_icebreaker: type=minecraft:jigsaw biomes=#irons_spellbooks:has_structure/impaled_icebreaker set=irons_spellbooks:impaled_icebreaker (minecraft:random_spread, spacing 75, separation 50; now (75, 50)) reached=1
+  irons_spellbooks:pyromancer_tower: type=minecraft:jigsaw biomes=#irons_spellbooks:has_structure/pyromancer_tower set=None reached=23
+  legendary_monsters:ancient_stronghold: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/ancient_stronghold_biomes set=legendary_monsters:ancient_stronghold (minecraft:random_spread, spacing 40, separation 30; now (40, 30)) reached=1
+  legendary_monsters:ancient_tower_remains: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/ancient_tower_remains_biomes set=legendary_monsters:ancient_tower_remains (minecraft:random_spread, spacing 65, separation 35; now (65, 35)) reached=1
+  legendary_monsters:cloudy_temple: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/cloudy_temple_biomes set=legendary_monsters:cloudy_temple (minecraft:random_spread, spacing 70, separation 50; now (70, 50)) reached=7
+  legendary_monsters:collapsed_kingdom: type=legendary_monsters:lm_jigsaw biomes=#legendary_monsters:has_structure/collapsed_kingdom_biomes set=legendary_monsters:collapsed_kingdom (minecraft:random_spread, spacing 110, separation 80; now (110, 80)) reached=31
+  legendary_monsters:frostbitten_temple: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/frostbitten_temple_biomes set=legendary_monsters:frostbitten_temple (minecraft:random_spread, spacing 38, separation 28; now (38, 28)) reached=1
+  legendary_monsters:lava_eater_spawn: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/lava_eater_spawn_biomes set=legendary_monsters:lava_eater_spawn (minecraft:random_spread, spacing 25, separation 13; now (19, 10)) reached=1
+  legendary_monsters:mossy_temple: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/mossy_temple_biomes set=legendary_monsters:mossy_temple (minecraft:random_spread, spacing 35, separation 24; now (35, 24)) reached=1
+  legendary_monsters:ruined_pyramid: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/ruined_pyramid_biomes set=legendary_monsters:ruined_pyramid (minecraft:random_spread, spacing 40, separation 30; now (40, 30)) reached=1
+  legendary_monsters:shulker_tower: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/shulker_tower_biomes set=legendary_monsters:shulker_tower (minecraft:random_spread, spacing 65, separation 35; now (65, 35)) reached=1
+  legendary_monsters:skeletosaurus_nest: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/skeletosaurus_nest_biomes set=legendary_monsters:skeletosaurus_nest (minecraft:random_spread, spacing 25, separation 14; now (19, 10)) reached=1
+  legendary_monsters:soul_fortress_remains: type=minecraft:jigsaw biomes=#legendary_monsters:has_structure/soul_fortress_remains_biomes set=legendary_monsters:soul_fortress_remains (minecraft:random_spread, spacing 27, separation 18; now (20, 13)) reached=1
+  legendary_monsters:space_station: type=legendary_monsters:lm_jigsaw biomes=#legendary_monsters:has_structure/space_station_biomes set=legendary_monsters:space_station (minecraft:random_spread, spacing 110, separation 75; now (110, 75)) reached=10
+  legendary_monsters:warped_fungussus_nest: type=minecraft:jigsaw biomes=['warped_forest'] set=legendary_monsters:warped_fungussus_nest (minecraft:random_spread, spacing 7, separation 5; now (7, 5)) reached=1
+  legionary:bastion_arena: type=legionary:bastion_arena biomes=minecraft:nether_wastes set=legionary:bastion_arena (minecraft:random_spread, spacing 320, separation 128; now (80, 32)) reached=None
+  monsterexpansion:ignathos_structure: type=minecraft:jigsaw biomes=#monsterexpansion:ignathos_biomes set=monsterexpansion:ignathos_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20)) reached=1
+  monsterexpansion:leivekilth_structure: type=minecraft:jigsaw biomes=#monsterexpansion:leivekilth_biomes set=monsterexpansion:leivekilth_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20)) reached=1
+  monsterexpansion:rakoth_structure: type=minecraft:jigsaw biomes=#monsterexpansion:rakoth_biomes set=monsterexpansion:rakoth_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20)) reached=1
+  monsterexpansion:rhyza_structure: type=minecraft:jigsaw biomes=#monsterexpansion:rhyza_biomes set=monsterexpansion:rhyza_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20)) reached=1
+  monsterexpansion:skrythe_structure: type=minecraft:jigsaw biomes=#monsterexpansion:skrythe_biomes set=monsterexpansion:skrythe_placement (minecraft:random_spread, spacing 60, separation 20; now (60, 20)) reached=1
+  mythsandlegends:ancient_vestiges: type=minecraft:jigsaw biomes=#mythsandlegends:ancient_vestiges_biomes set=mythsandlegends:ancient_vestiges (minecraft:random_spread, spacing 64, separation 50; now (64, 50)) reached=3
+  mythsandlegends:chronicler_house: type=minecraft:jigsaw biomes=#minecraft:is_overworld set=mythsandlegends:chronicler_house (minecraft:concentric_rings, spacing None, separation None; now None) reached=1
+  mythsandlegends:mausoleum: type=minecraft:jigsaw biomes=#mythsandlegends:mausoleum_biomes set=mythsandlegends:mausoleum (minecraft:random_spread, spacing 64, separation 50; now (64, 50)) reached=3
+  mythsandlegends:old_camp: type=minecraft:jigsaw biomes=#mythsandlegends:old_camp_biomes set=mythsandlegends:old_camp (minecraft:random_spread, spacing 64, separation 50; now (64, 50)) reached=2
+  mythsandlegends:scorched_nest: type=minecraft:jigsaw biomes=#mythsandlegends:scorched_nest_biomes set=mythsandlegends:scorched_nest (minecraft:random_spread, spacing 27, separation 4; now (20, 3)) reached=2
+  oddities:orchid_shrine: type=minecraft:jigsaw biomes=#minecraft:is_forest set=oddities:orchid_shrine (minecraft:random_spread, spacing 70, separation 20; now (70, 20)) reached=4
+  skarrier_mobs:stone_golem_circle: type=minecraft:jigsaw biomes=['plains', 'birch_forest', 'forest', 'taiga', 'snowy_plains'] set=skarrier_mobs:stone_golem_circle (minecraft:random_spread, spacing 26, separation 18; now (26, 18)) reached=1
+  skarrier_mobs:tunnel_gore_lair_x: type=minecraft:jigsaw biomes=#minecraft:is_overworld set=skarrier_mobs:tunnel_gore_lair_x (minecraft:random_spread, spacing 22, separation 12; now (22, 12)) reached=5
+  skarrier_mobs:tunnel_gore_tunnel_1: type=minecraft:jigsaw biomes=#skarrier_mobs:empty_biome_tag set=skarrier_mobs:tunnel_gore_tunnel_1 (minecraft:random_spread, spacing 5, separation 2; now (5, 2)) reached=4
+  skarrier_mobs:tunnel_gore_tunnel_2: type=minecraft:jigsaw biomes=#skarrier_mobs:empty_biome_tag set=skarrier_mobs:tunnel_gore_tunnel_2 (minecraft:random_spread, spacing 5, separation 2; now (5, 2)) reached=3
+  skarrier_mobs:tunnel_gore_tunnel_3: type=minecraft:jigsaw biomes=#skarrier_mobs:empty_biome_tag set=skarrier_mobs:tunnel_gore_tunnel_3 (minecraft:random_spread, spacing 5, separation 2; now (5, 2)) reached=2
+  soulsweapons:cathedral_of_resurrection: type=minecraft:jigsaw biomes=#minecraft:is_hill set=soulsweapons:overworld_structures (minecraft:random_spread, spacing 60, separation 30; now (60, 30)) reached=1
+  soulsweapons:champions_graves: type=minecraft:jigsaw biomes=#minecraft:is_taiga set=soulsweapons:overworld_structures (minecraft:random_spread, spacing 60, separation 30; now (60, 30)) reached=1
+  soulsweapons:corrupt_altar: type=minecraft:jigsaw biomes=['minecraft:savanna', 'minecraft:plains'] set=None reached=1
+  soulsweapons:decaying_kingdom: type=minecraft:jigsaw biomes=#minecraft:is_nether set=soulsweapons:nether_structures (minecraft:random_spread, spacing 60, separation 30; now (45, 22)) reached=1
+
+# Advancements naming a structure (boss mods)
+  irons_spellbooks:irons_spellbooks/enter_catacombs [Dungeon Delving]: ['irons_spellbooks:catacombs']
+  cataclysm:find_acropolis [Why in the Sky?]: ['cataclysm:acropolis']
+  cataclysm:find_ancient_factory [Out-of-Place]: ['cataclysm:ancient_factory']
+  cataclysm:find_burning_arena [A Massive Arena]: ['cataclysm:burning_arena']
+  cataclysm:find_cursed_pyramid [Desert Pyramid Revamped]: ['cataclysm:cursed_pyramid']
+  cataclysm:find_frosted_prison [Jail of Cold]: ['cataclysm:frosted_prison']
+  cataclysm:find_ruined_citadel [Another Stronghold?!]: ['cataclysm:ruined_citadel']
+  cataclysm:find_soul_black_smith [Where the Monstrous be Forged]: ['cataclysm:soul_black_smith']
+  cataclysm:find_sunken_city [Sunken in the Sea]: ['cataclysm:sunken_city']
+  legendary_monsters:locate_abandoned_crypt [The Echo Of Past Battle]: ['legendary_monsters:collapsed_kingdom']
+  legendary_monsters:locate_ancient_stronghold [Dripstone Everywhere]: ['legendary_monsters:ancient_stronghold']
+  legendary_monsters:locate_ancient_tower_remains [Far Away From Home]: ['legendary_monsters:ancient_tower_remains']
+  legendary_monsters:locate_cloudy_temple [Made From Clouds...]: ['legendary_monsters:cloudy_temple']
+  legendary_monsters:locate_frostbitten_temple [A Freezing Place]: ['legendary_monsters:frostbitten_temple']
+  legendary_monsters:locate_lava_eater [A Voltanic Place]: ['legendary_monsters:lava_eater_spawn']
+  legendary_monsters:locate_mossy_temple [Covered in Moss]: ['legendary_monsters:mossy_temple']
+  legendary_monsters:locate_ruined_pyramid [Another Desert Temple!]: ['legendary_monsters:ruined_pyramid']
+  legendary_monsters:locate_shulker_tower [There Is No Gravity Here!]: ['legendary_monsters:shulker_tower']
+  legendary_monsters:locate_skeletosaurus_nest [Long Time Ago]: ['legendary_monsters:skeletosaurus_nest']
+  legendary_monsters:locate_soul_fortress_remains [The Soul Fortress]: ['legendary_monsters:soul_fortress_remains']
+  legendary_monsters:locate_space_station [The Place Of The Beginning]: ['legendary_monsters:space_station']
+  graveyard:graveyard/all_overrun_villages [Five Roads to Ash]: ['graveyard:overrun_desert_village', 'graveyard:overrun_plains_village', 'graveyard:overrun_savanna_village', 'graveyard:overrun_snowy_village', 'graveyard:overrun_taiga_village']
+  graveyard:graveyard/crypt [Into Darkness]: ['graveyard:crypt']
+  graveyard:graveyard/dead_tree [Hanging Tree]: ['graveyard:dead_tree']
+  graveyard:graveyard/desert_graveyard [Dust, Sand and Bones]: ['graveyard:small_desert_graveyard']
+  graveyard:graveyard/giant_mushroom [Corrupting the Paradise]: ['graveyard:giant_mushroom']
+  graveyard:graveyard/haunted_house [Invitation to the Tea Party]: ['graveyard:haunted_house']
+  graveyard:graveyard/large_graveyard [Disturbing the Dead II]: ['graveyard:large_graveyard']
+  graveyard:graveyard/lich_prison [Cursed Island]: ['graveyard:lich_prison']
+  graveyard:graveyard/medium_graveyard [Disturbing the Dead I]: ['graveyard:medium_graveyard']
+  graveyard:graveyard/overrun_village [Too Late]: ['graveyard:overrun_desert_village', 'graveyard:overrun_plains_village', 'graveyard:overrun_savanna_village', 'graveyard:overrun_snowy_village', 'graveyard:overrun_taiga_village']
+  graveyard:graveyard/root [Gravedigger]: ['graveyard:small_desert_grave', 'graveyard:small_grave', 'graveyard:small_mountain_grave', 'graveyard:small_savanna_grave']
+
+# Exploration maps in loot
+  irons_spellbooks:chests/citadel/citadel_bookshelf -> ['irons_spellbooks:ancient_battleground'] (irons_spellbooks-1.20.1-3.16.3.jar)
+  irons_spellbooks:chests/mountain_tower/mountain_tower -> ['irons_spellbooks:impaled_icebreaker'] (irons_spellbooks-1.20.1-3.16.3.jar)
+
+# Structure tags of boss mods
+  cataclysm:berserker_spawn: ['minecraft:fortress']
+  cataclysm:blocked_basalt: ['cataclysm:burning_arena', 'cataclysm:soul_black_smith']
+  cataclysm:blocked_geode: ['cataclysm:sunken_city', 'cataclysm:ancient_factory', 'cataclysm:cursed_pyramid']
+  cataclysm:blocked_lake: ['cataclysm:sunken_city', 'cataclysm:ancient_factory', 'cataclysm:cursed_pyramid']
+  cataclysm:blocked_magma_block: ['cataclysm:sunken_city']
+  cataclysm:blocked_multiface: ['cataclysm:sunken_city']
+  cataclysm:blocked_ore: ['cataclysm:sunken_city', 'cataclysm:ancient_factory', 'cataclysm:cursed_pyramid']
+  cataclysm:eye_of_abyss_located: ['cataclysm:sunken_city']
+  cataclysm:eye_of_curse_located: ['cataclysm:frosted_prison']
+  cataclysm:eye_of_desert_located: ['cataclysm:cursed_pyramid']
+  cataclysm:eye_of_flame_located: ['cataclysm:burning_arena']
+  cataclysm:eye_of_mech_located: ['cataclysm:ancient_factory']
+  cataclysm:eye_of_monstrous_located: ['cataclysm:soul_black_smith']
+  cataclysm:eye_of_ruined_located: ['cataclysm:ruined_citadel']
+  cataclysm:eye_of_storm_located: ['cataclysm:acropolis']
+  graveyard:on_ruins_explorer_maps: ['graveyard:ruins']
+  irons_spellbooks:wayward_compass_locator: ['irons_spellbooks:catacombs']
+  legendary_monsters:ancient_stronghold_eye_located: ['legendary_monsters:ancient_stronghold']
+  legendary_monsters:ancient_tower_remains_eye_located: ['legendary_monsters:ancient_tower_remains']
+  legendary_monsters:cloudy_temple_eye_located: ['legendary_monsters:cloudy_temple']
+  legendary_monsters:collapsed_kingdom_eye_located: ['legendary_monsters:collapsed_kingdom']
+  legendary_monsters:frostbitten_temple_eye_located: ['legendary_monsters:frostbitten_temple']
+  legendary_monsters:lava_eater_spawn_eye_located: ['legendary_monsters:lava_eater_spawn']
+  legendary_monsters:mossy_temple_eye_located: ['legendary_monsters:mossy_temple']
+  legendary_monsters:ruined_pyramid_eye_located: ['legendary_monsters:ruined_pyramid']
+  legendary_monsters:shulker_tower_eye_located: ['legendary_monsters:shulker_tower']
+  legendary_monsters:skeletosaurus_nest_eye_located: ['legendary_monsters:skeletosaurus_nest']
+  legendary_monsters:soul_fortress_remains_eye_located: ['legendary_monsters:soul_fortress_remains']
+  legendary_monsters:space_station_eye_located: ['legendary_monsters:space_station']
+  soulsweapons:champions_graves: ['soulsweapons:champions_graves']
+  soulsweapons:decaying_kingdom: ['soulsweapons:decaying_kingdom']
+
+# Items that look like finders or summons (boss mods)
+  item.aquamirae.abyssal_leggings = Abyssal Leggings
+  item.aquamirae.abyssal_scyphoid_spawn_egg = Abyssal Scyphoid Spawn Egg
+  item.aquamirae.anglerfish_spawn_egg = Anglerfish Spawn Egg
+  item.aquamirae.captain_cornelia_spawn_egg = Captain Cornelia Spawn Egg
+  item.aquamirae.dead_sea_scroll = Dead Sea Scroll
+  item.aquamirae.echo_compass = Echo Compass
+  item.aquamirae.eel_spawn_egg = Eel Spawn Egg
+  item.aquamirae.frozen_key = Frozen Key
+  item.aquamirae.golden_moth_spawn_egg = Golden Moth Spawn Egg
+  item.aquamirae.maw_spawn_egg = Maw Spawn Egg
+  item.aquamirae.maze_mother_spawn_egg = Maze Mother Spawn Egg
+  item.aquamirae.scuttler_spawn_egg = Scuttler Spawn Egg
+  item.aquamirae.shell_horn = Shell Horn
+  item.aquamirae.shellback_spawn_egg = Shellback Spawn Egg
+  item.aquamirae.spinefish_spawn_egg = Spinefish Spawn Egg
+  item.aquamirae.terrible_leggings = Terrible Leggings
+  item.aquamirae.tortured_soul_spawn_egg = Tortured Soul Spawn Egg
+  item.block_factorys_bosses.anchor_spawn_egg = Anchor Spawn Egg
+  item.block_factorys_bosses.ancient_trial_key = Ancient Trial Key
+  item.block_factorys_bosses.crate_pile_spawn_egg = Crate Pile Spawn Egg
+  item.block_factorys_bosses.crossbow_pirate_spawn_egg = Crossbow Pirate Spawn Egg
+  item.block_factorys_bosses.dragon_bones_leggings = Dragon Bones Leggings
+  item.block_factorys_bosses.dragon_guard_sword_spawn_egg = Ashlord Guard Spawn Egg
+  item.block_factorys_bosses.flaming_skeleton_guard_fireball_spawn_egg = Flaming Ashlord Shooter Spawn Egg
+  item.block_factorys_bosses.flaming_skeleton_guard_sword_spawn_egg = Flaming Ashlord Guard Spawn Egg
+  item.block_factorys_bosses.ghost_tentacle_spawn_egg = Ghost Tentacle Spawn Egg
+  item.block_factorys_bosses.infernal_dragon_spawn_egg = Ashlord, The Infernal Dragon Spawn Egg
+  item.block_factorys_bosses.knight_leggings = Knight Leggings
+  item.block_factorys_bosses.kraken_spawn_egg = Nerakyss, The Kraken Spawn Egg
+  item.block_factorys_bosses.pile_of_bones_spawn_egg = Pile Of Bones Spawn Egg
+  item.block_factorys_bosses.pirate_captain_spawn_egg = Pirate Captain Spawn Egg
+  item.block_factorys_bosses.pirate_rook_spawn_egg = Pirate Rook Spawn Egg
+  item.block_factorys_bosses.sandworm_spawn_egg = Sirok, The Sandworm Spawn Egg
+  item.block_factorys_bosses.soul_knight_wither_skeleton_spawn_egg = Wither Knight Spawn Egg
+  item.block_factorys_bosses.soul_skeleton_spawn_egg = Soul Skeleton Spawn Egg
+  item.block_factorys_bosses.underworld_arena_key = Underworld Arena Key
+  item.block_factorys_bosses.underworld_knight_spawn_egg = Helvar, the Underworld Knight Spawn Egg
+  item.block_factorys_bosses.undying_tentacle.description_3 = §9Summon tentacles to fight enemies.
+  item.block_factorys_bosses.yeti_spawn_egg = Skor, The Yeti Spawn Egg
+  item.cataclysm.abyss_eye = Eye of Abyss
+  item.cataclysm.abyssal_egg = Abyssal Egg
+  item.cataclysm.amethyst_crab_spawn_egg = Amethyst Crab Spawn Egg
+  item.cataclysm.ancient_remnant_spawn_egg = Ancient Remnant Spawn Egg
+  item.cataclysm.aptrgangr_spawn_egg = Aptrgangr Spawn Egg
+  item.cataclysm.ceraunus2.desc = When used while sneaking, it summons Waves in a Fan pattern
+  item.cataclysm.cindaria_spawn_egg = Cindaria Spawn Egg
+  item.cataclysm.clawdian_spawn_egg = Clawdian Spawn Egg
+  item.cataclysm.coral_golem_spawn_egg = Coral Golem Spawn Egg
+  item.cataclysm.coralssus_spawn_egg = Coralssus Spawn Egg
+  item.cataclysm.cursed_eye = Eye of Curse
+  item.cataclysm.cursium_leggings = Cursium Leggings
+  item.cataclysm.cursium_leggings.desc = Ghost Dodge
+  item.cataclysm.cursium_leggings.desc2 = Ignore the attack with a low probability. The probability increases if the attack is a projectile
+  item.cataclysm.deepling_angler_spawn_egg = Deepling Angler Spawn Egg
+  item.cataclysm.deepling_brute_spawn_egg = Deepling Brute Spawn Egg
+  item.cataclysm.deepling_priest_spawn_egg = Deepling Priest Spawn Egg
+  item.cataclysm.deepling_spawn_egg = Deepling Spawn Egg
+  item.cataclysm.deepling_warlock_spawn_egg = Deepling Warlock Spawn Egg
+  item.cataclysm.desert_eye = Eye of Desert
+  item.cataclysm.draugr_spawn_egg = Draugr Spawn Egg
+  item.cataclysm.elite_draugr_spawn_egg = Elite Draugr Spawn Egg
+  item.cataclysm.ender_golem_spawn_egg = Ender Golem Spawn Egg
+  item.cataclysm.ender_guardian_spawn_egg = Ender Guardian Spawn Egg
+  item.cataclysm.endermaptera_spawn_egg = Endermaptera Spawn Egg
+  item.cataclysm.flame_eye = Eye of Flame
+  item.cataclysm.gauntlet_of_maelstrom.desc = Right click to summon a Void Vortex
+  item.cataclysm.hippocamtus_spawn_egg = Hippocamtus Spawn Egg
+  item.cataclysm.ignis_spawn_egg = Ignis Spawn Egg
+  item.cataclysm.ignited_berserker_spawn_egg = Ignited Berserker Spawn Egg
+  item.cataclysm.ignited_revenant_spawn_egg = Ignited Revenant Spawn Egg
+  item.cataclysm.ignitium_leggings = Ignitium Leggings
+  item.cataclysm.ignitium_leggings.desc = Flame Reflex
+  item.cataclysm.immolator2.desc = If you hold it in both hands, you can charge it for 2 seconds for summon Flame strike
+  item.cataclysm.incinerator2.desc = When released, summons a flame strike in the direction you are facing
+  item.cataclysm.kobolediator_spawn_egg = Kobolediator Spawn Egg
+  item.cataclysm.koboleton_spawn_egg = Koboleton Spawn Egg
+  item.cataclysm.lionfish_spawn_egg = Lionfish Spawn Egg
+  item.cataclysm.maledictus_spawn_egg = Maledictus Spawn Egg
+  item.cataclysm.mech_eye = Eye of Mech
+  item.cataclysm.modern_remnant_spawn_egg = Modern Remnant Spawn Egg
+  item.cataclysm.monstrous_eye = Eye of Monstrous
+  item.cataclysm.monstrous_horn = Monstrous Horn
+  item.cataclysm.nameless_sorcerer_spawn_egg = Nameless Sorcerer Spawn Egg
+  item.cataclysm.netherite_effigy.desc = Summon Netherite Ministrosity, can be tamed through Lava Power Cell
+  item.cataclysm.netherite_ministrosity_spawn_egg = Netherite Ministrosity Spawn Egg
+  item.cataclysm.netherite_monstrosity_spawn_egg = Netherite Monstrosity Spawn Egg
+  item.cataclysm.octohost_spawn_egg = Octohost Spawn Egg
+  item.cataclysm.onyx_spawn_egg = Onyx Spawn Egg
+  item.cataclysm.remnant_skull.desc = Summon Modern Remnant, can be tamed through Sniffer Egg
+  item.cataclysm.royal_draugr_spawn_egg = Royal Draugr Spawn Egg
+  item.cataclysm.sandstorm_in_a_bottle.desc = Right click to summon 2 orbiting Sandstorms
+  item.cataclysm.scylla_spawn_egg = Scylla Spawn Egg
+  item.cataclysm.soul_render2.desc = When used while sneaking, it summons Phantom Halberds in a spiral pattern
+  item.cataclysm.storm_eye = Eye of Storm
+  item.cataclysm.strange_key = Strange Key
+  item.cataclysm.strange_key.desc = Can open the Door of Seal
+  item.cataclysm.symbiocto_spawn_egg = Symbiocto Spawn Egg
+  item.cataclysm.the_baby_leviathan_spawn_egg = The Baby Leviathan Spawn Egg
+  item.cataclysm.the_harbinger_spawn_egg = The Harbinger Spawn Egg
+  item.cataclysm.the_leviathan_spawn_egg = The Leviathan Spawn Egg
+  item.cataclysm.the_prowler_spawn_egg = The Prowler Spawn Egg
+  item.cataclysm.the_watcher_spawn_egg = The Watcher Spawn Egg
+  item.cataclysm.urchinkin_spawn_egg = Urchinkin Spawn Egg
+  item.cataclysm.void_core = Void Core
+  item.cataclysm.void_core.desc = Right click to summon Void Runes
+  item.cataclysm.void_eye = Eye of Void
+  item.cataclysm.void_forge.desc = When in main hand, right click at a block to summon Void Runes in a fan shape
+  item.cataclysm.wadjet_spawn_egg = Wadjet Spawn Egg
+  item.graveyard.acolyte_spawn_egg = Acolyte Spawn Egg
+  item.graveyard.corrupted_evoker_spawn_egg = Corrupted Evoker Spawn Egg
+  item.graveyard.corrupted_pillager_spawn_egg = Corrupted Pillager Spawn Egg
+  item.graveyard.corrupted_vindicator_spawn_egg = Corrupted Vindicator Spawn Egg
+  item.graveyard.crow_spawn_egg = Crow Spawn Egg
+  item.graveyard.ghoul_spawn_egg = Ghoul Spawn Egg
+  item.graveyard.lich_spawn_egg = Corrupted Champion Spawn Egg
+  item.graveyard.magpie_spawn_egg = Magpie Spawn Egg
+  item.graveyard.nameless_hanged_spawn_egg = Nameless Hanged Spawn Egg
+  item.graveyard.nightmare_spawn_egg = Nightmare Spawn Egg
+  item.graveyard.raven_spawn_egg = Raven Spawn Egg
+  item.graveyard.reaper_spawn_egg = Reaper Spawn Egg
+  item.graveyard.revenant_spawn_egg = Revenant Spawn Egg
+  item.graveyard.skeleton_creeper_spawn_egg = Skeleton Creeper Spawn Egg
+  item.graveyard.tormented_villager_spawn_egg = Tormented Villager Spawn Egg
+  item.graveyard.vial_of_blood.hint = Kill villagers with a bone dagger to fill it. Pour it on the altar by night.
+  item.graveyard.wraith_spawn_egg = Wraith Spawn Egg
+  item.illagerinvasion.alchemist_spawn_egg = Alchemist Spawn Egg
+  item.illagerinvasion.archivist_spawn_egg = Archivist Spawn Egg
+  item.illagerinvasion.basher_spawn_egg = Basher Spawn Egg
+  item.illagerinvasion.firecaller_spawn_egg = Firecaller Spawn Egg
+  item.illagerinvasion.horn_of_sight = Horn of Sight
+  item.illagerinvasion.illusioner_spawn_egg = Illusioner Spawn Egg
+  item.illagerinvasion.inquisitor_spawn_egg = Inquisitor Spawn Egg
+  item.illagerinvasion.invoker_spawn_egg = Invoker Spawn Egg
+  item.illagerinvasion.marauder_spawn_egg = Marauder Spawn Egg
+  item.illagerinvasion.necromancer_spawn_egg = Necromancer Spawn Egg
+  item.illagerinvasion.provoker_spawn_egg = Provoker Spawn Egg
+  item.illagerinvasion.sorcerer_spawn_egg = Sorcerer Spawn Egg
+  item.illagerinvasion.surrendered_spawn_egg = Surrendered Spawn Egg
+  item.irons_spellbooks.ancient_battleground_map = Legion Outpost
+  item.irons_spellbooks.antiquated_compass = Antiquated Compass
+  item.irons_spellbooks.antiquated_compass_desc = A magical resonance pulls strongly towards... Something.
+  item.irons_spellbooks.apothecarist_spawn_egg = Apothecarist Spawn Egg
+  item.irons_spellbooks.archevoker_leggings = Archevoker Leggings
+  item.irons_spellbooks.archevoker_log.entry_3.1 = A strange unease takes root within my mind. This magic - though wondrous - doth twist the senses. I could have sworn there was a cellar beneath the chapel's floor, and yet now none recall it. Even my most trusted lieutenant
+  item.irons_spellbooks.archevoker_spawn_egg = Archevoker Spawn Egg
+  item.irons_spellbooks.autoloader_crossbow.desc = > Automatically loads next available projectile while in inventory. Crouch-Click to cancel
+  item.irons_spellbooks.bone_key = Bone Key
+  item.irons_spellbooks.bone_key.description = Unlocks Catacombs Vaults
+  item.irons_spellbooks.cinderous_soulcaller = Cinderous Soulcaller
+  item.irons_spellbooks.cinderous_soulcaller.failure.in_progress = An echo has already answered.
+  item.irons_spellbooks.cinderous_soulcaller.failure.no_soul = Nothing echoes back...
+  item.irons_spellbooks.citadel_map = The Citadel
+  item.irons_spellbooks.cooked_ice_spider_egg = Cooked Ice Spider Egg
+  item.irons_spellbooks.cryomancer_leggings = Cryomancer Leggings
+  item.irons_spellbooks.cryomancer_spawn_egg = Cryomancer Spawn Egg
+  item.irons_spellbooks.cultist_leggings = Cultist Leggings
+  item.irons_spellbooks.dead_king_corpse_spawn_egg = Dead King Corpse Spawn Egg
+  item.irons_spellbooks.decrepit_key = Decrepit Key
+  item.irons_spellbooks.decrepit_key.description = Unlocks Citadel Vaults
+  item.irons_spellbooks.electromancer_leggings = Electromancer Leggings
+  item.irons_spellbooks.energized_core = Energized Core
+  item.irons_spellbooks.energized_core.failure = A calm sky holds no power; the core remains inert
+  item.irons_spellbooks.failed_arctic_voyage_map = Arctic Expedition Route
+  item.irons_spellbooks.furled_map = Furled Map
+  item.irons_spellbooks.furled_map.dimension_fail = This map does not lead to anything in this dimension.
+  item.irons_spellbooks.furled_map.guide = Furled Maps hold a map leading to a set structure within. They can be found, traded for, or crafted, aiding you in your journeys.
+  item.irons_spellbooks.furled_map_ancient = Ancient Furled Map
+  item.irons_spellbooks.greater_conjurers_talisman.desc = Summon spells that time-out do not go on cooldown
+  item.irons_spellbooks.ice_spider_den_map = Infested Ruin
+  item.irons_spellbooks.ice_spider_spawn_egg = Ice Spider Spawn Egg
+  item.irons_spellbooks.keeper_spawn_egg = Ancient Knight Spawn Egg
+  item.irons_spellbooks.lightning_rod.guide = Obtained by using an Energized Core on a Lightning Rod
+  item.irons_spellbooks.necromancer_spawn_egg = Necromancer Spawn Egg
+  item.irons_spellbooks.netherite_mage_leggings = Netherite Battlemage Leggings
+  item.irons_spellbooks.plagued_leggings = Plagued Leggings
+  item.irons_spellbooks.prepared_ice_spider_egg = Prepared Ice Spider Egg
+  item.irons_spellbooks.priest_leggings = Priest Leggings
+  item.irons_spellbooks.priest_spawn_egg = Priest Spawn Egg
+  item.irons_spellbooks.pumpkin_leggings = Scarecrow Leggings
+  item.irons_spellbooks.pyromancer_leggings = Pyromancer Leggings
+  item.irons_spellbooks.pyromancer_spawn_egg = Pyromancer Spawn Egg
+  item.irons_spellbooks.scroll = Scroll
+  item.irons_spellbooks.scroll.unlearned = Unlearned Scroll
+  item.irons_spellbooks.scroll_pouch = Mystery Scroll Pouch
+  item.irons_spellbooks.shadowwalker_leggings = Shadow-Walker Leggings
+  item.irons_spellbooks.wandering_magician_leggings = Wandering Magician Pants
+  item.irons_spellbooks.wayward_compass = Wayward Compass
+  item.irons_spellbooks.wayward_compass.error = No catacombs loaded. [%s] to search
+  item.irons_spellbooks.wayward_compass_desc = The trapped soul points toward its home
+  item.irons_spellbooks.wizard_leggings = Wizard Leggings
+  item.legendary_monsters.ambusher_spawn_egg = Ambusher Spawn Egg
+  item.legendary_monsters.ancient_guardian_spawn_egg = Ancient Guardian Spawn Egg
+  item.legendary_monsters.annihilation_pursuer_spawn_egg = Annihilation Pursuer Spawn Egg
+  item.legendary_monsters.annihilator_helmet1 = You don't aggro endermen when you look at them, Press 'C' key to instantly teleport to position you are looking at (in 15 block range)
+  item.legendary_monsters.annihilator_leggings = Annihilator's Leggings
+  item.legendary_monsters.annihilator_leggings1 = 25% Chance of turning your attack into bypass armor AOE, (your current WeaponDamage / 2) upon landing a crit
+  item.legendary_monsters.atom_splitter3 = §7And don't get fooled by the ammo system! it's unbreakable! automatically reloads with Annihilation Bottles in inventory 
+  item.legendary_monsters.axe_of_lightning1 = §6Special Ability:§7 right click to summon Lightning Strike§6[9 Damage per Tick, Bypass Armor],
+  item.legendary_monsters.axe_of_lightning2 = §7Right Click on block to summon Electric Burst shockwave in the direction
+  item.legendary_monsters.beheaded_knight_spawn_egg = Beheaded Knight Spawn Egg
+  item.legendary_monsters.bomber_spawn_egg = Bomber Spawn Egg
+  item.legendary_monsters.chorusling_spawn_egg = Chorusling Spawn Egg
+  item.legendary_monsters.cloud_golem_spawn_egg = Cumulonimbus, The Cloud Golem Spawn Egg
+  item.legendary_monsters.deactivated_guard_summoner = Deactivated Guard Summoner
+  item.legendary_monsters.deactivated_knight_summoner = Deactivated Knight Summoner
+  item.legendary_monsters.dune_sentinel_spawn_egg = Dune Sentinel Spawn Egg
+  item.legendary_monsters.endersent_spawn_egg = Chorusent Spawn Egg
+  item.legendary_monsters.eye_of_air = Eye Of Air
+  item.legendary_monsters.eye_of_annihilation = Eye Of Annihilation
+  item.legendary_monsters.eye_of_bones = Eye Of Bones
+  item.legendary_monsters.eye_of_chorus = Eye Of Chorus
+  item.legendary_monsters.eye_of_frost = Eye Of Frost
+  item.legendary_monsters.eye_of_ghost = Eye Of Ghost
+  item.legendary_monsters.eye_of_magma = Eye Of Magma
+  item.legendary_monsters.eye_of_many_ribs = Eye Of Many Ribs
+  item.legendary_monsters.eye_of_moss = Eye Of Moss
+  item.legendary_monsters.eye_of_sandstorm = Eye Of Sandstorm
+  item.legendary_monsters.eye_of_shulker = Eye Of Shulker
+  item.legendary_monsters.eye_of_soul = Eye Of Soul
+  item.legendary_monsters.fatal_mortar = Fatal Mortar Spawn Egg
+  item.legendary_monsters.fatal_mortar_spawn_egg = Fatal Mortar Spawn Egg
+  item.legendary_monsters.fiery_boots1 = §6Special Ability: §7Use 'X' Key to spread fire on your position while walking.
+  item.legendary_monsters.flame_drifter_spawn_egg = Flame Drifter Spawn Egg
+  item.legendary_monsters.flameborn_guard_spawn_egg = Flameborn Guard Spawn Egg
+  item.legendary_monsters.flameborn_warrior_spawn_egg = Flameborn Warrior Spawn Egg
+  item.legendary_monsters.fractured_apostle_spawn_egg = Fractured Apostle Spawn Egg
+  item.legendary_monsters.fractured_spawn_egg = Fractured Spawn Egg
+  item.legendary_monsters.frostbitten_golem_spawn_egg = Frostbitten Golem Spawn Egg
+  item.legendary_monsters.great_frost1 = §6Special Ability: §7Right Click to summon Ice Spikes
+  item.legendary_monsters.great_frost2 = §6Special Ability 2: §7Right Click + shift on block to summon Ice Spikes around you
+  item.legendary_monsters.guard_summoner = Guard Summoner
+  item.legendary_monsters.guard_summoner1 = §7Right Click on the ground to summon a guard 
+  item.legendary_monsters.guard_summoner2 = §7it's Automatically tamed on spawn
+  item.legendary_monsters.guard_summoner3 = §7Deals more damage and in bigger ARC than knight but is slower.
+  item.legendary_monsters.guard_summoner4 = §7can be easily respawned after death using iron ingots and deactivated summoner
+  item.legendary_monsters.guard_summoner5 = §7You can re-color him while holding valuable materials or change it's behavior state with shift + right click.
+  item.legendary_monsters.haunted_guard_spawn_egg = Haunted Guard Spawn Egg
+  item.legendary_monsters.haunted_knight_spawn_egg = Haunted Knight Spawn Egg
+  item.legendary_monsters.heart_of_tornado = Heart Of Tornado
+  item.legendary_monsters.heartoftornado1 = §6Hold Rightclick to shoot a tornado that grabs entities[lasts for 3 seconds]
+  item.legendary_monsters.hovering_hurricane_spawn_egg = Hovering Hurricane Spawn Egg
+  item.legendary_monsters.knight_summoner = Knight Summoner
+  item.legendary_monsters.knight_summoner1 = §7Right click on block to summon a knight
+  item.legendary_monsters.knight_summoner2 = §7it's Automatically tamed on spawn
+  item.legendary_monsters.knight_summoner3 = §7Deals less damage than guard but can do fast combos and can block incoming attacks
+  item.legendary_monsters.knight_summoner4 = §7can be easily respawned after death using iron ingots and deactivated summoner
+  item.legendary_monsters.knight_summoner5 = §7You can re-color him while holding valuable materials or change it's behavior state with shift + right click.
+  item.legendary_monsters.lava_eater_spawn_egg = Lava Eater Spawn Egg
+  item.legendary_monsters.mossy_chestplate1 = §6Special Ability: §7 Use 'R' key to spawn poison clouds around you, 
+  item.legendary_monsters.mossy_golem_spawn_egg = Mossy Golem Spawn Egg
+  item.legendary_monsters.overgrown_colossus_spawn_egg = Overgrown Colossus Spawn Egg
+  item.legendary_monsters.posessed_paladin_spawn_egg = Possessed Paladin Spawn Egg
+  item.legendary_monsters.resurrected_knight_spawn_egg = Resurrected Knight Spawn Egg
+  item.legendary_monsters.shulker_mimic_spawn_egg = Shulker Mimic Spawn Egg
+  item.legendary_monsters.skeletosaurus_spawn_egg = Skeletosaurus Spawn Egg
+  item.legendary_monsters.skeloraptor_spawn_egg = Skeloraptor Spawn Egg
+  item.legendary_monsters.somber_key = Somber Key
+  item.legendary_monsters.somber_key_blade = Somber Key Blade
+  item.legendary_monsters.somber_key_part = Combine with another key part to create Somber Key
+  item.legendary_monsters.somber_key_ring = Somber Key Ring
+  item.legendary_monsters.spike_bug_spawn_egg = Spiky Worm Spawn Egg
+  item.legendary_monsters.stratling_spawn_egg = Stratling Spawn Egg
+  item.legendary_monsters.the_obliterator_spawn_egg = The Obliterator Spawn Egg
+  item.legendary_monsters.the_tesseract1 = §7Hold right click for 1.5s to summon Annihilation Portals in a Star pattern.
+  item.legendary_monsters.the_tesseract2 = §7During Portal summoning nearby entities are affected by their gravity pull.
+  item.legendary_monsters.totem_of_moss = Totem Of Moss
+  item.legendary_monsters.totem_of_moss.desc = Right - Click to summon Mossy Golem that assists you in battles and speeds up nearby crop grow speed while near young crops. golem can be respawned when it dies
+  item.legendary_monsters.totem_of_moss1 = §6Right - Click on a Block to summon a Mossy Golem that makes crops grow way faster while near ungrown crops 
+  item.legendary_monsters.totem_of_moss2 = §7and can help you during fights. Golem is automatically tamed. It can be respawned easily after death 
+  item.legendary_monsters.totem_of_moss3 = §fShift + Right Click on golem to enable '§aStand Still Mode§7'
+  item.legendary_monsters.wand_of_clouds1 = §6Special Ability: §7 Summons 1 Big explosive cloud [14 dmg] and
+  item.legendary_monsters.wandering_eye_spawn_egg = Wandering Eye Spawn Egg
+  item.legendary_monsters.warped_fungussus_spawn_egg = Warped Fungussus Spawn Egg
+  item.legendary_monsters.withered_abomination_spawn_egg = Withered Abomination Spawn Egg
+  item.legendary_monsters.withered_horn = Withered Horn
+  item.legionary.unbreakable_spawn_egg = The Unbreakable Spawn Egg
+  item.minecraft.copper_golem_spawn_egg = Copper Golem Spawn Egg
+  item.minecraft.copper_leggings = Copper Leggings
+  item.monsterexpansion.arborix_spawn_egg = Arborix Spawn Egg
+  item.monsterexpansion.bedrock_core = Bedrock Core
+  item.monsterexpansion.horn_of_the_shattercry = Horn Of The Shattercry
+  item.monsterexpansion.ignathos_leggings = Ignathos Leggings
+  item.monsterexpansion.ignathos_spawn_egg = Ignathos Spawn Egg
+  item.monsterexpansion.kobeko_spawn_egg = Kobeko Spawn Egg
+  item.monsterexpansion.leivekilth_leggings = Leivekilth Leggings
+  item.monsterexpansion.leivekilth_spawn_egg = Leivekilth Spawn Egg
+  item.monsterexpansion.rakoth_horn = Rakoth Horn
+  item.monsterexpansion.rakoth_leggings = Rakoth Leggings
+  item.monsterexpansion.rakoth_spawn_egg = Rakoth Spawn Egg
+  item.monsterexpansion.rhyza_gleam_core = Rhyza Gleam Core
+  item.monsterexpansion.rhyza_leggings = Rhyza Leggings
+  item.monsterexpansion.rhyza_spawn_egg = Rhyza Spawn Egg
+  item.monsterexpansion.skrythe_leggings = Skrythe Leggings
+  item.monsterexpansion.skrythe_spawn_egg = Skrythe Spawn Egg
+  item.monsterexpansion.whistlewind_horn = Whistlewind Horn
+  item.mutantmonsters.creeper_minion_spawn_egg = Creeper Minion Spawn Egg
+  item.mutantmonsters.mutant_creeper_spawn_egg = Mutant Creeper Spawn Egg
+  item.mutantmonsters.mutant_enderman_spawn_egg = Mutant Enderman Spawn Egg
+  item.mutantmonsters.mutant_skeleton_leggings = Mutant Skeleton Leggings
+  item.mutantmonsters.mutant_skeleton_spawn_egg = Mutant Skeleton Spawn Egg
+  item.mutantmonsters.mutant_snow_golem_spawn_egg = Mutant Snow Golem Spawn Egg
+  item.mutantmonsters.mutant_zombie_spawn_egg = Mutant Zombie Spawn Egg
+  item.mutantmonsters.mutant_zombie_villager_spawn_egg = Mutant Zombie Villager Spawn Egg
+  item.mutantmonsters.spider_pig_spawn_egg = Spider-Pig Spawn Egg
+  item.mythsandlegends.abaddon_spawn_egg = Abaddon Spawn Egg
+  item.mythsandlegends.alp_spawn_egg = Alp Spawn Egg
+  item.mythsandlegends.amarok_spawn_egg = Amarok Spawn Egg
+  item.mythsandlegends.black_charro_spawn_egg = Black Charro Spawn Egg
+  item.mythsandlegends.chronicler_spawn_egg = Chronicler Spawn Egg
+  item.mythsandlegends.cogcore = Cogcore
+  item.mythsandlegends.cogling_spawn_egg = Coglin Spawn Egg
+  item.mythsandlegends.cogwork_construct_spawn_egg = Cogwork Construct Spawn Egg
+  item.mythsandlegends.condemned_spawn_egg = Condemned Soul Spawn Egg
+  item.mythsandlegends.core_of_abaddon = Core of Abaddon
+  item.mythsandlegends.cursed_core = Cursed Core
+  item.mythsandlegends.draugr_spawn_egg = Draugr Spawn Egg
+  item.mythsandlegends.eidolon_spawn_egg = Eidolon Spawn Egg
+  item.mythsandlegends.fire_heart = Fire Heart
+  item.mythsandlegends.gargoyle_spawn_egg = Gargoyle Spawn Egg
+  item.mythsandlegends.gearbound_headsman_spawn_egg = Gearbound Headsman Spawn Egg
+  item.mythsandlegends.imp_spawn_egg = Imp Spawn Egg
+  item.mythsandlegends.infernum_warplate_leggings = Infernum Warplate Leggings
+  item.mythsandlegends.ironshade_leggings = Ironshade Leggings
+  item.mythsandlegends.jiangshi_spawn_egg = Jiangshi Spawn Egg
+  item.mythsandlegends.karakondjul_horn = Karakondjul's Horn Icon
+  item.mythsandlegends.karakondjul_spawn_egg = Karakondjul Spawn Egg
+  item.mythsandlegends.lampad_spawn_egg = Lampad Spawn Egg
+  item.mythsandlegends.omecuaime_spawn_egg = Omecuaime Spawn Egg
+  item.mythsandlegends.possessed_armor_archer_spawn_egg = Possessed Armor Archer Spawn Egg
+  item.mythsandlegends.possessed_armor_inquisitor_spawn_egg = Possessed Armor Inquisitor Spawn Egg
+  item.mythsandlegends.possessed_armor_lancer_spawn_egg = Possessed Armor Lancer Spawn Egg
+  item.mythsandlegends.possessed_armor_spawn_egg = Possessed Armor Spawn Egg
+  item.mythsandlegends.scorched_sentinel_spawn_egg = Scorched Sentinel Spawn Egg
+  item.mythsandlegends.shade_jelly_spawn_egg = Shade Jelly Spawn Egg
+  item.mythsandlegends.soulpiercer_leggings = Soulpiercer Leggings
+  item.mythsandlegends.warborn_aegis_spawn_egg = Warborn Aegis Spawn Egg
+  item.mythsandlegends.winter_stalker_leggings = Winter Stalker Leggings
+  item.oddities.orchid_heart = Orchid Heart
+  item.oddities.orchid_heart.description_0 = §7Seems to have a use in the §dOrchid Shrine.
+  item.oddities.orchid_mantis_eye = Orchid Mantis Eye
+  item.oddities.queen_of_orchid_spawn_egg = Queen Of Orchid Spawn Egg
+  item.skarrier_mobs.blank_totem = Blank Totem
+  item.skarrier_mobs.blare_spawn_egg = Blare Spawn Egg
+  item.skarrier_mobs.blaring_horn = Blaring Horn
+  item.skarrier_mobs.bowlder_spawn_egg = Bowlder Spawn Egg
+  item.skarrier_mobs.breacher_spawn_egg = Breacher Spawn Egg
+  item.skarrier_mobs.carnager_spawn_egg = Carnager Spawn Egg
+  item.skarrier_mobs.carniflore_spawn_egg = Carniflore Spawn Egg
+  item.skarrier_mobs.crimlin_spawn_egg = Crimlin Spawn Egg
+  item.skarrier_mobs.dangle_spawn_egg = Dangle Spawn Egg
+  item.skarrier_mobs.deep_alloy_armor_leggings = Deep Alloy Leggings
+  item.skarrier_mobs.deep_alloy_armor_leggings.description_0 = §3Repairs itself on kill
+  item.skarrier_mobs.deep_alloy_armor_leggings.description_1 = §3When under Blindness effect: grants Warden's Might buff
+  item.skarrier_mobs.devourer_tunnel_segment_ore_gen_dummy_spawn_egg = Devourer Tunnel Segment Ore Gen Dummy Spawn Egg
+  item.skarrier_mobs.dragger_spawn_egg = Dragger Spawn Egg
+  item.skarrier_mobs.eater_spawn_egg = Eater Spawn Egg
+  item.skarrier_mobs.endorah_body_spawn_egg = Endorah Spawn Egg
+  item.skarrier_mobs.endorah_energy_jaws_big_spawn_egg = Big Endorah Energy Jaws Spawn Egg
+  item.skarrier_mobs.endorah_energy_jaws_spawn_egg = Endorah Energy Jaws Spawn Egg
+  item.skarrier_mobs.endorah_head_main_flying_spawn_egg = Main Endorah Head Spawn Egg
+  item.skarrier_mobs.endorah_head_main_spawn_egg = Main Endorah Head Spawn Egg
+  item.skarrier_mobs.endorah_head_melee_flying_spawn_egg = Endorah Head Spawn Egg
+  item.skarrier_mobs.endorah_head_melee_spawn_egg = Endorah Head Spawn Egg
+  item.skarrier_mobs.endorah_head_ranged_flying_spawn_egg = Endorah Head Spawn Egg
+  item.skarrier_mobs.endorah_head_ranged_spawn_egg = Endorah Head Spawn Egg
+  item.skarrier_mobs.flore_head_spawn_egg = Flore Head Spawn Egg
+  item.skarrier_mobs.freeze_spawn_egg = Freeze Spawn Egg
+  item.skarrier_mobs.frost_spawn_egg = Frost Spawn Egg
+  item.skarrier_mobs.gadlisk_spawn_egg = Gadlisk Spawn Egg
+  item.skarrier_mobs.glowin_spawn_egg = Glowin Spawn Egg
+  item.skarrier_mobs.gorger_spawn_egg = Gorger Spawn Egg
+  item.skarrier_mobs.grave_construct_phase_melee_spawn_egg = Grave Construct (Phase 2) Spawn Egg
+  item.skarrier_mobs.grave_construct_phase_ranged_spawn_egg = Grave Construct (Phase 2) Spawn Egg
+  item.skarrier_mobs.grave_construct_spawn_egg = Grave Construct Spawn Egg
+  item.skarrier_mobs.grave_skull_big_spawn_egg = Grave Skull Spawn Egg
+  item.skarrier_mobs.grave_skull_spawn_egg = Grave Skull Spawn Egg
+  item.skarrier_mobs.grave_spike_spawn_egg = Grave Spike Spawn Egg
+  item.skarrier_mobs.grave_totem_melee_spawn_egg = Grave Totem Spawn Egg
+  item.skarrier_mobs.grave_totem_ranged_spawn_egg = Grave Totem Spawn Egg
+  item.skarrier_mobs.grave_totem_spawn_egg = Grave Totem Spawn Egg
+  item.skarrier_mobs.heart_of_tranquility = Heart Of Tranquility
+  item.skarrier_mobs.heart_of_tranquility.description_0 = §3Use to receive a Tranquility effect for 2 minutes
+  item.skarrier_mobs.hellamander_spawn_egg = Hellamander Spawn Egg
+  item.skarrier_mobs.invulnerite_armor_leggings = Invulnerite Leggings
+  item.skarrier_mobs.invulnerite_armor_leggings.description_0 = §3Unbreakable
+  item.skarrier_mobs.istukan_spawn_egg = Istukan Spawn Egg
+  item.skarrier_mobs.krill_spawn_egg = Krill Spawn Egg
+  item.skarrier_mobs.lit_tremor_bomb_spawn_egg = Lit Tremor Bomb Spawn Egg
+  item.skarrier_mobs.quake_spawn_egg = Quake Spawn Egg
+  item.skarrier_mobs.rager_spawn_egg = Rager Spawn Egg
+  item.skarrier_mobs.resisteel_leggings = Resisteel Leggings
+  item.skarrier_mobs.resisteel_leggings.description_0 = §3Grants a stacking defence boost that increases armor by 20% per level
+  item.skarrier_mobs.resisteel_leggings.description_1 = §3Slows the wearer down
+  item.skarrier_mobs.roe_spawn_egg = Roe Spawn Egg
+  item.skarrier_mobs.semi_living_flesh.description_0 = §4When appiled to Totem: Empowers the totem's effect, but reduces maximum health by 4 when held
+  item.skarrier_mobs.semi_living_flesh_armor_leggings = Semi-Living Legs
+  item.skarrier_mobs.semi_living_helmet_bite_spawn_egg = Semi Living Helmet Bite Spawn Egg
+  item.skarrier_mobs.serene_spawn_egg = Serene Spawn Egg
+  item.skarrier_mobs.slither_matriarch_spawn_egg = Slither Matriarch Spawn Egg
+  item.skarrier_mobs.slither_spawn_egg = Slither Spawn Egg
+  item.skarrier_mobs.snap_egg = Snap Egg
+  item.skarrier_mobs.snap_egg.description_0 = §3Right-click on block to create a friendly Snap Trap
+  item.skarrier_mobs.snap_spawn_egg = Snap Spawn Egg
+  item.skarrier_mobs.snap_trap_spawn_egg = Snap Spawn Egg
+  item.skarrier_mobs.sorcerer_spawn_egg = Sorcerer Spawn Egg
+  item.skarrier_mobs.stone_golem_spawn_egg = Stone Golem Spawn Egg
+  item.skarrier_mobs.totem_of_extinction = Totem Of Extinction
+  item.skarrier_mobs.totem_of_extinction.description_0 = §3Right-click on a mob to bind this totem to the mob type
+  item.skarrier_mobs.totem_of_extinction.description_1 = §3When in off-hand: increases damage dealt to the bound mob type by 30%
+  item.skarrier_mobs.totem_of_freezing = Totem Of Freezing
+  item.skarrier_mobs.totem_of_freezing.description_0 = §3When in off-hand: immunity to Freezing and Frostbite, all attacks inflict Frostbite
+  item.skarrier_mobs.totem_of_melding = Totem Of Melding
+  item.skarrier_mobs.totem_of_melding.description_0 = §3Right-click on a mob to store its base stats
+  item.skarrier_mobs.totem_of_melding.description_1 = §3Right-click again on another mob to transfer the stats to it
+  item.skarrier_mobs.totem_of_repulsion = Totem Of Repulsion
+  item.skarrier_mobs.totem_of_repulsion.description_0 = §3When in off-hand: attacks create a wind blast
+  item.skarrier_mobs.totem_of_seething = Totem Of Seething
+  item.skarrier_mobs.totem_of_seething.description_0 = §6When in off-hand: mobs nearby take 2 more damage from burning
+  item.skarrier_mobs.trawler_spawn_egg = Trawler Spawn Egg
+  item.skarrier_mobs.tunnel_gore_spawn_egg = Tunnel Gore Spawn Egg
+  item.skarrier_mobs.viruleon_spawn_egg = Viruleon Spawn Egg
+  item.skarrier_mobs.voidrake_spawn_egg = Voidrake Spawn Egg
+  item.skarrier_mobs.wretch_spawn_egg = Wretch Spawn Egg
+  item.skarrier_mobs.wrought_spawn_egg = Wrought Spawn Egg
+  item.skarrier_mobs.zombiflore_spawn_egg = Zombiflore Spawn Egg
+  item.soulsweapons.accursed_lord_boss_spawn_egg = The Decaying King Spawn Egg
+  item.soulsweapons.big_chungus_spawn_egg = Moderately Sized Chungus Spawn Egg
+  item.soulsweapons.boss_compass = Moonstone Compass
+  item.soulsweapons.chaos_monarch_spawn_egg = Monarch of Chaos Spawn Egg
+  item.soulsweapons.dark_sorcerer_spawn_egg = Dark Sorcerer Spawn Egg
+  item.soulsweapons.day_stalker_spawn_egg = Day Stalker Spawn Egg
+  item.soulsweapons.demon_heart = Demon Heart
+  item.soulsweapons.draugr_boss_spawn_egg = Old Champion Spawn Egg
+  item.soulsweapons.enhanced_withered_chest = Infused Hallowheart
+  item.soulsweapons.evil_forlorn_spawn_egg = Invading Forlorn Spawn Egg
+  item.soulsweapons.forlorn_leggings = Forlorn Leggings
+  item.soulsweapons.forlorn_spawn_egg = Forlorn Spawn Egg
+  item.soulsweapons.frost_giant_spawn_egg = Frost Giant Spawn Egg
+  item.soulsweapons.molten_demon_heart = Molten Demon Heart
+  item.soulsweapons.moonknight_spawn_egg = Fallen Icon Spawn Egg
+  item.soulsweapons.night_prowler_spawn_egg = Night Prowler Spawn Egg
+  item.soulsweapons.night_shade_spawn_egg = Frenzied Shade Spawn Egg
+  item.soulsweapons.remnant_spawn_egg = Remnant Spawn Egg
+  item.soulsweapons.returning_knight_spawn_egg = Returning Knight Spawn Egg
+  item.soulsweapons.rime_spectre_spawn_egg = Rime Spectre Spawn Egg
+  item.soulsweapons.soul_ingot_leggings = Soul Ingot Leggings
+  item.soulsweapons.soul_reaper_ghost_spawn_egg = Familiar Ghost Spawn Egg
+  item.soulsweapons.soul_robes_leggings = Dark Sorcerer Pants
+  item.soulsweapons.soulmass_spawn_egg = Soulmass Spawn Egg
+  item.soulsweapons.warmth_entity_spawn_egg = Sphere of Warmth Spawn Egg
+  item.soulsweapons.withered_chest = Hallowheart
+  item.soulsweapons.withered_demon_heart = Withered Demon Heart
+  item.soulsweapons.withered_demon_spawn_egg = Withered Demon Spawn Egg
+
+# Templates holding a boss that no jigsaw structure reaches (code-built lairs)
+  block_factorys_bosses:kraken_ship_back: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:kraken_ship_destroyed_back: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:kraken_ship_destroyed_front: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:kraken_ship_destroyed_seed: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:kraken_ship_destroyed_top: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:kraken_ship_front: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:kraken_ship_seed: ['block_factorys_bosses:kraken']
+  block_factorys_bosses:sandworm_nest: ['block_factorys_bosses:sandworm']
+  block_factorys_bosses:underworld_arena_1: ['block_factorys_bosses:underworld_knight']
+  block_factorys_bosses:yeti_arena: ['block_factorys_bosses:yeti']
+  cataclysm:amethyst_crab: ['cataclysm:amethyst_crab']
+  cataclysm:ancient_factory1: ['minecraft:wither']
+  cataclysm:ancient_factory2: ['minecraft:wither']
+  cataclysm:ancient_factory_a: ['minecraft:wither']
+  cataclysm:ancient_factory_s: ['minecraft:wither']
+  cataclysm:aptrgangr: ['cataclysm:aptrgangr']
+  cataclysm:clawdian: ['cataclysm:clawdian']
+  cataclysm:coralssus_blue: ['cataclysm:coralssus']
+  cataclysm:coralssus_red: ['cataclysm:coralssus']
+  cataclysm:coralssus_yellow: ['cataclysm:coralssus']
+  cataclysm:frosted_prison_bottom_6: ['minecraft:wither']
+  cataclysm:frosted_prison_bottom_7: ['minecraft:wither']
+  cataclysm:frosted_prison_mid_5: ['minecraft:wither']
+  cataclysm:frosted_prison_mid_7: ['minecraft:wither']
+  cataclysm:frosted_prison_upper_6: ['cataclysm:aptrgangr']
+  cataclysm:kobolediator: ['cataclysm:kobolediator']
+  cataclysm:monstrosity: ['cataclysm:netherite_monstrosity']
+  cataclysm:scylla: ['cataclysm:scylla']
+  cataclysm:soul_black_smith_8: ['minecraft:wither']
+  cataclysm:the_harbinger: ['cataclysm:the_harbinger']
+  cataclysm:the_prowler: ['cataclysm:the_prowler']
+  cataclysm:wadjet: ['cataclysm:wadjet']
+  graveyard:crypt/corridor_pool/corner_01: ['minecraft:wither']
+  graveyard:crypt/corridor_pool/library_02: ['minecraft:wither']
+  graveyard:crypt/corridor_pool/room_02: ['minecraft:wither']
+  graveyard:haunted_house/start_pool/haunted_house_01: ['minecraft:wither']
+  graveyard:large_graveyard/crossroad_02: ['minecraft:wither']
+  graveyard:large_graveyard/feature_pool/walled_street_01: ['minecraft:wither']
+  graveyard:large_graveyard/feature_pool/walled_street_02: ['minecraft:wither']
+  graveyard:large_graveyard/feature_pool/wither_skeleton_mill: ['minecraft:wither']
+  graveyard:large_graveyard/small_crypt_pool/small_crypt: ['minecraft:wither']
+  graveyard:large_graveyard/street_pool/graveyard_entrance: ['minecraft:wither']
+  graveyard:medium_graveyard/medium_graveyard_01: ['minecraft:wither']
+  graveyard:memorial_tree/memorial_tree_01: ['minecraft:wither']
+  graveyard:small_desert_graveyard/small_desert_graveyard_01: ['minecraft:wither']
+  illagerinvasion:labyrinth/rooms/room_1: ['minecraft:wither']
+  irons_spellbooks:battleground/branch_4: ['minecraft:wither']
+  irons_spellbooks:battleground/branch_5: ['minecraft:wither']
+  irons_spellbooks:battleground/decorations/burial_3: ['minecraft:wither']
+  irons_spellbooks:battleground/decorations/skull_pile: ['minecraft:wither']
+  irons_spellbooks:battleground/decorations/wall_4: ['minecraft:wither']
+  irons_spellbooks:catacombs/catacombs_origin: ['irons_spellbooks:dead_king']
+  irons_spellbooks:mangrove_hut: ['minecraft:wither']
+  legendary_monsters:ancient_stronghold: ['legendary_monsters:ancient_guardian']
+  legendary_monsters:ancient_stronghold_old: ['legendary_monsters:ancient_guardian']
+  legendary_monsters:ancient_tower_remains: ['legendary_monsters:endersent']
+  legendary_monsters:cloudy_temple: ['legendary_monsters:cloud_golem']
+  legendary_monsters:cloudy_temple_arena: ['legendary_monsters:cloud_golem']
+  legendary_monsters:collapsed_kingdom_arena: ['legendary_monsters:posessed_paladin']
+  legendary_monsters:collapsed_kingdom_dungeon11: ['legendary_monsters:beheaded_knight', 'legendary_monsters:resurrected_knight']
+  legendary_monsters:collapsed_kingdom_part3: ['legendary_monsters:beheaded_knight', 'legendary_monsters:resurrected_knight']
+  legendary_monsters:frostbitten_temple: ['legendary_monsters:frostbitten_golem']
+  legendary_monsters:frostbitten_temple2: ['legendary_monsters:frostbitten_golem']
+  legendary_monsters:lava_eater_spawn: ['legendary_monsters:lava_eater']
+  legendary_monsters:lava_eater_spawn2: ['legendary_monsters:lava_eater']
+  legendary_monsters:mossy_temple: ['legendary_monsters:overgrown_colossus']
+  legendary_monsters:ruined_pyramid: ['legendary_monsters:dune_sentinel']
+  legendary_monsters:shulker_tower: ['legendary_monsters:shulker_mimic']
+  legendary_monsters:shulker_tower_new_old: ['legendary_monsters:shulker_mimic']
+  legendary_monsters:shulker_tower_old: ['legendary_monsters:shulker_mimic']
+  legendary_monsters:skeletosaurus_nest: ['legendary_monsters:skeletosaurus']
+  legendary_monsters:skeletosaurus_nest2: ['legendary_monsters:skeletosaurus']
+  legendary_monsters:soul_fortress_remains: ['legendary_monsters:withered_abomination', 'minecraft:wither']
+  legendary_monsters:space_station: ['legendary_monsters:annihilation_pursuer']
+  legendary_monsters:space_station_main: ['legendary_monsters:annihilation_pursuer']
+  legendary_monsters:space_station_part2: ['legendary_monsters:annihilation_pursuer']
+  legendary_monsters:space_station_part8: ['legendary_monsters:annihilation_pursuer']
+  legionary:bastion_arena/tomb: ['legionary:unbreakable']
+  monsterexpansion:ignathos_anchor: ['monsterexpansion:ignathos']
+  monsterexpansion:leivekilth_anchor: ['monsterexpansion:leivekilth']
+  monsterexpansion:rakoth_anchor: ['monsterexpansion:rakoth']
+  monsterexpansion:rhyza_anchor: ['monsterexpansion:rhyza']
+  monsterexpansion:skrythe_anchor: ['monsterexpansion:skrythe']
+  skarrier_mobs:tg_lair_tunnel1: ['skarrier_mobs:tunnel_gore']
+  skarrier_mobs:tg_lair_tunnel2: ['skarrier_mobs:tunnel_gore']
+  skarrier_mobs:tg_lair_tunnel3: ['skarrier_mobs:tunnel_gore']
+  skarrier_mobs:tg_lair_x: ['skarrier_mobs:tunnel_gore']
+  soulsweapons:champions_graves_altarnate: ['soulsweapons:draugr_boss']
+  soulsweapons:champions_graves_main: ['soulsweapons:draugr_boss']
+  soulsweapons:decaying_kingdom_altarnate: ['minecraft:wither', 'soulsweapons:accursed_lord_boss']
+  soulsweapons:decaying_kingdom_main: ['minecraft:wither', 'soulsweapons:accursed_lord_boss']
+
+# Classes naming a boss in structure-ish code
+  dev/obscuria/aquamirae/common/item/ShellHornItem$SummonEvent.class: ['aquamirae:captain_cornelia']
+  net/saksolm/monsterexpansion/MonsterExpansion$ClientModEvents.class: ['monsterexpansion:rhyza', 'monsterexpansion:skrythe', 'monsterexpansion:ignathos', 'monsterexpansion:rakoth', 'monsterexpansion:leivekilth']
+  net/saksolm/monsterexpansion/event/IgnathosSetBonusEvents.class: ['monsterexpansion:ignathos']
+  net/saksolm/monsterexpansion/event/KobekoRhyzaSetBonusEvents.class: ['monsterexpansion:rhyza']
+  net/saksolm/monsterexpansion/event/KobekoSkrytheSetBonusEvents.class: ['monsterexpansion:skrythe']
+  net/saksolm/monsterexpansion/event/LeivekilthSetBonusEvents.class: ['monsterexpansion:leivekilth']
+  net/saksolm/monsterexpansion/event/ModEventBusEvents.class: ['monsterexpansion:rhyza', 'monsterexpansion:skrythe', 'monsterexpansion:ignathos', 'monsterexpansion:rakoth', 'monsterexpansion:leivekilth']
+  net/saksolm/monsterexpansion/event/RakothSetBonusEvents.class: ['monsterexpansion:rakoth']
+  net/saksolm/monsterexpansion/event/RhyzaSetBonusEvents.class: ['monsterexpansion:rhyza']
+  net/saksolm/monsterexpansion/event/SkrytheSetBonusEvents.class: ['monsterexpansion:skrythe']
+  fuzs/mutantmonsters/handler/PlayerEventsHandler.class: ['mutantmonsters:mutant_skeleton']
+  com/ovinter/mythsandlegends/MythsAndLegends$ClientModEvents.class: ['mythsandlegends:warborn_aegis', 'mythsandlegends:black_charro', 'mythsandlegends:cogwork_construct']
+  com/ovinter/mythsandlegends/block/AltarOfTheDeadBlock.class: ['mythsandlegends:black_charro']
+  com/ovinter/mythsandlegends/block/entity/AltarOfTheDeadBlockEntity.class: ['mythsandlegends:black_charro']
+  com/ovinter/mythsandlegends/entity/ai/behavior/black_charro/SummonAttackBehavior.class: ['mythsandlegends:black_charro']
+  com/ovinter/mythsandlegends/event/ModEvents.class: ['mythsandlegends:warborn_aegis', 'mythsandlegends:black_charro', 'mythsandlegends:cogwork_construct']
+  net/soulsweaponry/blocks/AltarBlock.class: ['soulsweapons:returning_knight', 'soulsweapons:moonknight', 'soulsweapons:draugr_boss']
+  net/soulsweaponry/events/ModBusEvents.class: ['soulsweapons:chaos_monarch', 'soulsweapons:returning_knight', 'soulsweapons:night_shade', 'minecraft:wither', 'soulsweapons:accursed_lord_boss', 'soulsweapons:moonknight', 'soulsweapons:day_stalker', 'soulsweapons:night_prowler', 'soulsweapons:draugr_boss']
+  com/github/L_Ender/cataclysm/blockentities/AltarOfAbyss_Block_Entity.class: ['cataclysm:the_leviathan']
+  com/github/L_Ender/cataclysm/blockentities/AltarOfFire_Block_Entity.class: ['cataclysm:ignis']
+  com/github/L_Ender/cataclysm/blockentities/AltarOfVoid_Block_Entity.class: ['cataclysm:ender_guardian']
+  com/github/L_Ender/cataclysm/structures/Burning_Arena_Structure$Piece.class: ['cataclysm:ignited_revenant']
+  com/github/L_Ender/cataclysm/structures/Cursed_Pyramid_Structure$Piece.class: ['cataclysm:wadjet', 'cataclysm:kobolediator', 'cataclysm:ancient_remnant']
+  com/github/L_Ender/cataclysm/structures/RuinedCitadelStructure$Piece.class: ['cataclysm:ender_golem']
+  com/github/L_Ender/cataclysm/structures/Sunken_City_Structure$Piece.class: ['cataclysm:coralssus']
+  net/miauczel/legendary_monsters/LegendaryMonsters$ClientModEvents.class: ['legendary_monsters:beheaded_knight', 'legendary_monsters:resurrected_knight', 'legendary_monsters:the_obliterator', 'legendary_monsters:annihilation_pursuer']
+  net/miauczel/legendary_monsters/event/ModEventBusClientEvents.class: ['legendary_monsters:cloud_golem', 'legendary_monsters:frostbitten_golem', 'legendary_monsters:skeletosaurus', 'legendary_monsters:endersent', 'legendary_monsters:ancient_guardian', 'minecraft:wither', 'legendary_monsters:beheaded_knight', 'legendary_monsters:resurrected_knight', 'legendary_monsters:the_obliterator', 'legendary_monsters:annihilation_pursuer', 'legendary_monsters:overgrown_colossus', 'legendary_monsters:withered_abomination', 'legendary_monsters:posessed_paladin', 'legendary_monsters:lava_eater', 'legendary_monsters:shulker_mimic']
+  net/miauczel/legendary_monsters/event/ModEventBusEvents.class: ['legendary_monsters:beheaded_knight', 'legendary_monsters:resurrected_knight', 'legendary_monsters:the_obliterator', 'legendary_monsters:annihilation_pursuer']
+  net/miauczel/legendary_monsters/event/ModParticleFactiories.class: ['legendary_monsters:beheaded_knight']
+  net/miauczel/legendary_monsters/item/custom/CustomItemEvents/WitheredRibcageHurt.class: ['minecraft:wither']
+  net/miauczel/legendary_monsters/item/custom/CustomItemEvents/WitheredScytheAttackedEvent.class: ['minecraft:wither']
+  net/miauczel/legendary_monsters/item/custom/CustomItemEvents/WitheredScytheDropGoldEventHandler.class: ['minecraft:wither']
+  net/miauczel/legendary_monsters/item/custom/CustomItemEvents/WitheredScytheUndead.class: ['minecraft:wither']
+  net/miauczel/legendary_monsters/tag/ModStructureTags.class: ['legendary_monsters:skeletosaurus', 'legendary_monsters:lava_eater']
+  net/unusual/block_factorys_bosses/block/entity/BossSpawnerBlockEntity.class: ['block_factorys_bosses:infernal_dragon']
+  net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity$PiratePoint.class: ['block_factorys_bosses:kraken']
+  net/unusual/block_factorys_bosses/block/entity/KrakenSpawnerBlockEntity.class: ['block_factorys_bosses:kraken']
+  net/unusual/block_factorys_bosses/structures/KrakenShipStructure.class: ['block_factorys_bosses:kraken']
+  com/lion/graveyard/blocks/AltarBlock.class: ['graveyard:lich']
+  com/lion/graveyard/init/TGStructures.class: ['graveyard:lich']
+  com/lion/graveyard/world/processors/SwitchSpawnerProcessor.class: ['minecraft:wither']
+  fuzs/illagerinvasion/mixin/WoodlandMansionPieceMixin.class: ['illagerinvasion:invoker']
+  fuzs/illagerinvasion/world/entity/monster/Invoker$SummonVexGoal.class: ['illagerinvasion:invoker']
+  net/mcreator/oddities/procedures/OrchidAltarOnTickUpdateProcedure.class: ['oddities:queen_of_orchid']

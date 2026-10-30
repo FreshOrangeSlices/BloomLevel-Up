@@ -1,0 +1,2211 @@
+{
+ "minecraft:elder_guardian": {
+  "health": 80.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "elder_guardian"
+ },
+ "minecraft:ender_dragon": {
+  "health": 200.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "ender_dragon"
+ },
+ "minecraft:warden": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "soulsweapons:excalibur [Right back at ya!]"
+  ],
+  "name": "warden"
+ },
+ "minecraft:wither": {
+  "health": 300.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": true,
+  "templates": [
+   "cataclysm:ancient_factory1",
+   "cataclysm:ancient_factory2",
+   "cataclysm:ancient_factory_a",
+   "cataclysm:ancient_factory_s",
+   "cataclysm:frosted_prison_bottom_6",
+   "cataclysm:frosted_prison_bottom_7",
+   "cataclysm:frosted_prison_mid_5",
+   "cataclysm:frosted_prison_mid_7",
+   "cataclysm:soul_black_smith_8",
+   "graveyard:crypt/corridor_pool/corner_01",
+   "graveyard:crypt/corridor_pool/library_02",
+   "graveyard:crypt/corridor_pool/room_02",
+   "graveyard:haunted_house/start_pool/haunted_house_01",
+   "graveyard:large_graveyard/crossroad_02",
+   "graveyard:large_graveyard/feature_pool/walled_street_01",
+   "graveyard:large_graveyard/feature_pool/walled_street_02",
+   "graveyard:large_graveyard/feature_pool/wither_skeleton_mill",
+   "graveyard:large_graveyard/small_crypt_pool/small_crypt",
+   "graveyard:large_graveyard/street_pool/graveyard_entrance",
+   "graveyard:medium_graveyard/medium_graveyard_01",
+   "graveyard:memorial_tree/memorial_tree_01",
+   "graveyard:small_desert_graveyard/small_desert_graveyard_01",
+   "illagerinvasion:labyrinth/rooms/room_1",
+   "irons_spellbooks:battleground/branch_4",
+   "irons_spellbooks:battleground/branch_5",
+   "irons_spellbooks:battleground/decorations/burial_3",
+   "irons_spellbooks:battleground/decorations/skull_pile",
+   "irons_spellbooks:battleground/decorations/wall_4",
+   "irons_spellbooks:mangrove_hut",
+   "legendary_monsters:soul_fortress_remains",
+   "soulsweapons:decaying_kingdom_altarnate",
+   "soulsweapons:decaying_kingdom_main"
+  ],
+  "structures": [
+   "cataclysm:ancient_factory",
+   "cataclysm:frosted_prison",
+   "cataclysm:soul_black_smith",
+   "graveyard:crypt",
+   "graveyard:haunted_house",
+   "graveyard:large_graveyard",
+   "graveyard:medium_graveyard",
+   "graveyard:memorial_tree",
+   "graveyard:small_desert_graveyard",
+   "illagerinvasion:labyrinth",
+   "irons_spellbooks:ancient_battleground",
+   "legendary_monsters:soul_fortress_remains",
+   "soulsweapons:decaying_kingdom"
+  ],
+  "code": [
+   "ModBusEvents.class",
+   "ModEventBusClientEvents.class",
+   "SwitchSpawnerProcessor.class",
+   "WitheredRibcageHurt.class",
+   "WitheredScytheAttackedEvent.class",
+   "WitheredScytheDropGoldEventHandler.class",
+   "WitheredScytheUndead.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "wither"
+ },
+ "illagerinvasion:invoker": {
+  "health": 250.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "Invoker$SummonVexGoal.class",
+   "WoodlandMansionPieceMixin.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Invoker"
+ },
+ "legionary:unbreakable": {
+  "health": 400.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "fieldguide:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "legionary:bastion_arena/tomb"
+  ],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "The Unbreakable"
+ },
+ "block_factorys_bosses:yeti": {
+  "health": 250.0,
+  "category": "monster",
+  "tags": [
+   "block_factorys_bosses:bf_boss",
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "block_factorys_bosses:yeti_arena"
+  ],
+  "structures": [
+   "block_factorys_bosses:yeti_hideout"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "block_factorys_bosses:kill_all_bosses [Unbound]",
+   "block_factorys_bosses:kill_yeti [Lost in the Snow]"
+  ],
+  "name": "Skor, The Yeti"
+ },
+ "block_factorys_bosses:infernal_dragon": {
+  "health": 250.0,
+  "category": "monster",
+  "tags": [
+   "block_factorys_bosses:bf_boss",
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "BossSpawnerBlockEntity.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "block_factorys_bosses:kill_all_bosses [Unbound]",
+   "block_factorys_bosses:kill_dragon [Dragon Slayer]"
+  ],
+  "name": "Ashlord, The Infernal Dragon"
+ },
+ "block_factorys_bosses:underworld_knight": {
+  "health": 250.0,
+  "category": "monster",
+  "tags": [
+   "block_factorys_bosses:bf_boss",
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "block_factorys_bosses:underworld_arena_1"
+  ],
+  "structures": [
+   "block_factorys_bosses:underworld_arena"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "block_factorys_bosses:kill_all_bosses [Unbound]",
+   "block_factorys_bosses:kill_underworld_knight [Back Into Hell!]"
+  ],
+  "name": "Helvar, the Underworld Knight"
+ },
+ "block_factorys_bosses:sandworm": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "block_factorys_bosses:bf_boss",
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "block_factorys_bosses:sandworm_nest"
+  ],
+  "structures": [
+   "block_factorys_bosses:sandworm_nest"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "block_factorys_bosses:kill_all_bosses [Unbound]",
+   "block_factorys_bosses:kill_sandworm [The Beast Below]"
+  ],
+  "name": "Sirok, The Sandworm"
+ },
+ "block_factorys_bosses:kraken": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "block_factorys_bosses:bf_boss",
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "block_factorys_bosses:kraken_ship_back",
+   "block_factorys_bosses:kraken_ship_destroyed_back",
+   "block_factorys_bosses:kraken_ship_destroyed_front",
+   "block_factorys_bosses:kraken_ship_destroyed_seed",
+   "block_factorys_bosses:kraken_ship_destroyed_top",
+   "block_factorys_bosses:kraken_ship_front",
+   "block_factorys_bosses:kraken_ship_seed"
+  ],
+  "structures": [
+   "block_factorys_bosses:kraken_ship"
+  ],
+  "code": [
+   "KrakenShipStructure.class",
+   "KrakenSpawnerBlockEntity$PiratePoint.class",
+   "KrakenSpawnerBlockEntity.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "block_factorys_bosses:kill_all_bosses [Unbound]",
+   "block_factorys_bosses:kill_kraken [Terror of the Depths]"
+  ],
+  "name": "Nerakyss, The Kraken"
+ },
+ "cataclysm:ender_golem": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "RuinedCitadelStructure$Piece.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_ender_golem [Palette Swap]"
+  ],
+  "name": "Ender Golem"
+ },
+ "cataclysm:ender_guardian": {
+  "health": 333.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarOfVoid_Block_Entity.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_ender_guardian [Wasn't that a Shulker?]"
+  ],
+  "name": "Ender Guardian"
+ },
+ "cataclysm:netherite_monstrosity": {
+  "health": 600.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "cataclysm:monstrosity"
+  ],
+  "structures": [
+   "cataclysm:soul_black_smith"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_monstrosity [The Broken Nether's Warmachine]"
+  ],
+  "name": "Netherite Monstrosity"
+ },
+ "cataclysm:ignis": {
+  "health": 450.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarOfFire_Block_Entity.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_ignis [The Extinguished Fire]"
+  ],
+  "name": "Ignis"
+ },
+ "cataclysm:coralssus": {
+  "health": 160.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:coralssus_blue",
+   "cataclysm:coralssus_red",
+   "cataclysm:coralssus_yellow"
+  ],
+  "structures": [],
+  "code": [
+   "Sunken_City_Structure$Piece.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Coralssus"
+ },
+ "cataclysm:ignited_revenant": {
+  "health": 80.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "Burning_Arena_Structure$Piece.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_revenant [Imperfect thing]"
+  ],
+  "name": "Ignited Revenant"
+ },
+ "cataclysm:the_harbinger": {
+  "health": 390.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "cataclysm:the_harbinger"
+  ],
+  "structures": [
+   "cataclysm:ancient_factory"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_harbinger [The Thing of Ancient Civilization]"
+  ],
+  "name": "The Harbinger"
+ },
+ "cataclysm:the_prowler": {
+  "health": 160.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:the_prowler"
+  ],
+  "structures": [
+   "cataclysm:ancient_factory"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "The Prowler"
+ },
+ "cataclysm:the_leviathan": {
+  "health": 400.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarOfAbyss_Block_Entity.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_leviathan [A Multidimensional Predator]"
+  ],
+  "name": "The Leviathan"
+ },
+ "cataclysm:amethyst_crab": {
+  "health": 200.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:amethyst_crab"
+  ],
+  "structures": [
+   "cataclysm:amethyst_nest",
+   "cataclysm:amethyst_nest (named in the structure)"
+  ],
+  "code": [],
+  "structureSpawns": [
+   "cataclysm:amethyst_nest (monster, weight 1)"
+  ],
+  "biomeSpawns": [
+   "minecraft:lush_caves (monster, 1)"
+  ],
+  "advancements": [],
+  "name": "Amethyst Crab"
+ },
+ "cataclysm:ancient_remnant": {
+  "health": 450.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "Cursed_Pyramid_Structure$Piece.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_remnant [Death Finds a Way]"
+  ],
+  "name": "Ancient Remnant"
+ },
+ "cataclysm:kobolediator": {
+  "health": 180.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:kobolediator"
+  ],
+  "structures": [],
+  "code": [
+   "Cursed_Pyramid_Structure$Piece.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Kobolediator"
+ },
+ "cataclysm:wadjet": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:wadjet"
+  ],
+  "structures": [
+   "cataclysm:desert_occupied_village",
+   "cataclysm:desert_site"
+  ],
+  "code": [
+   "Cursed_Pyramid_Structure$Piece.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Wadjet"
+ },
+ "cataclysm:maledictus": {
+  "health": 420.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_maledictus [Crusade Against Curse]"
+  ],
+  "name": "Maledictus"
+ },
+ "cataclysm:aptrgangr": {
+  "health": 160.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:aptrgangr",
+   "cataclysm:frosted_prison_upper_6"
+  ],
+  "structures": [
+   "cataclysm:abandoned_spire",
+   "cataclysm:abandoned_temple",
+   "cataclysm:frosted_prison"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Aptrgangr"
+ },
+ "cataclysm:clawdian": {
+  "health": 225.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "cataclysm:clawdian"
+  ],
+  "structures": [
+   "cataclysm:acropolis"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_clawdian [Not so Shrimple Now]"
+  ],
+  "name": "Clawdian"
+ },
+ "cataclysm:scylla": {
+  "health": 390.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "cataclysm:scylla"
+  ],
+  "structures": [
+   "cataclysm:acropolis"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "cataclysm:kill_all_bosses [The Cataclysmfarer]",
+   "cataclysm:kill_scylla [The Calm after the Storm]"
+  ],
+  "name": "Scylla"
+ },
+ "soulsweapons:accursed_lord_boss": {
+  "health": 600.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "soulsweapons:decaying_kingdom_altarnate",
+   "soulsweapons:decaying_kingdom_main"
+  ],
+  "structures": [
+   "soulsweapons:decaying_kingdom"
+  ],
+  "code": [
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "soulsweapons:end_of_reigns [Oh, The Misery]"
+  ],
+  "name": "The Decaying King"
+ },
+ "soulsweapons:draugr_boss": {
+  "health": 300.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "soulsweapons:champions_graves_altarnate",
+   "soulsweapons:champions_graves_main"
+  ],
+  "structures": [
+   "soulsweapons:champions_graves"
+  ],
+  "code": [
+   "AltarBlock.class",
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "minecraft:frozen_ocean (monster, 15)",
+   "minecraft:snowy_plains (monster, 15)",
+   "minecraft:frozen_peaks (monster, 15)",
+   "minecraft:jagged_peaks (monster, 15)",
+   "biomesoplenty:snowy_fir_clearing (monster, 15)",
+   "biomesoplenty:snowblossom_grove (monster, 15)",
+   "biomesoplenty:muskeg (monster, 15)",
+   "minecraft:snowy_slopes (monster, 15)",
+   "biomesoplenty:snowy_maple_woods (monster, 15)",
+   "minecraft:snowy_taiga (monster, 15)",
+   "biomesoplenty:cold_desert (monster, 15)",
+   "minecraft:frozen_river (monster, 15)",
+   "minecraft:ice_spikes (monster, 15)",
+   "minecraft:grove (monster, 15)",
+   "biomesoplenty:snowy_coniferous_forest (monster, 15)",
+   "minecraft:snowy_beach (monster, 15)"
+  ],
+  "advancements": [
+   "soulsweapons:draugr_boss [Restless Sleepwalker]",
+   "soulsweapons:moonknight [Blue Steel]"
+  ],
+  "name": "Old Champion's Remains"
+ },
+ "soulsweapons:night_shade": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Frenzied Shade"
+ },
+ "soulsweapons:returning_knight": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarBlock.class",
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "soulsweapons:arkenplate [Redemption Ark]",
+   "soulsweapons:nightfall [3rd Time's the Charm!]",
+   "soulsweapons:returning_knight [Last Arrival]"
+  ],
+  "name": "Returning Knight"
+ },
+ "soulsweapons:chaos_monarch": {
+  "health": 450.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "soulsweapons:ender_of_world_ender [The End of the World Ender]"
+  ],
+  "name": "Monarch of Chaos"
+ },
+ "soulsweapons:moonknight": {
+  "health": 550.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarBlock.class",
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "soulsweapons:moonknight [Blue Steel]"
+  ],
+  "name": "Fallen Icon"
+ },
+ "soulsweapons:day_stalker": {
+  "health": 600.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Day Stalker"
+ },
+ "soulsweapons:night_prowler": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ModBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Night Prowler"
+ },
+ "mutantmonsters:mutant_enderman": {
+  "health": 200.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "biomesoplenty:spider_nest (monster, 1)",
+   "minecraft:stony_peaks (monster, 1)",
+   "minecraft:end_highlands (monster, 1)",
+   "minecraft:swamp (monster, 1)",
+   "biomesoplenty:wasteland_steppe (monster, 1)",
+   "minecraft:frozen_ocean (monster, 1)",
+   "biomesoplenty:seasonal_forest (monster, 1)",
+   "minecraft:beach (monster, 1)",
+   "biomesoplenty:rainforest (monster, 1)",
+   "minecraft:snowy_plains (monster, 1)",
+   "minecraft:sparse_jungle (monster, 1)",
+   "minecraft:eroded_badlands (monster, 1)",
+   "biomesoplenty:rocky_rainforest (monster, 1)",
+   "minecraft:desert (monster, 1)",
+   "minecraft:old_growth_spruce_taiga (monster, 1)",
+   "minecraft:dark_forest (monster, 1)",
+   "minecraft:birch_forest (monster, 1)",
+   "minecraft:river (monster, 1)",
+   "minecraft:lukewarm_ocean (monster, 1)",
+   "minecraft:stony_shore (monster, 1)",
+   "minecraft:old_growth_birch_forest (monster, 1)",
+   "minecraft:nether_wastes (monster, 1)",
+   "minecraft:bamboo_jungle (monster, 1)",
+   "minecraft:forest (monster, 1)",
+   "biomesoplenty:erupting_inferno (monster, 1)",
+   "biomesoplenty:grassland (monster, 1)",
+   "biomesoplenty:wetland (monster, 1)",
+   "minecraft:the_end (monster, 1)",
+   "biomesoplenty:fungal_jungle (monster, 1)",
+   "minecraft:deep_ocean (monster, 1)",
+   "biomesoplenty:shrubland (monster, 1)",
+   "biomesoplenty:crag (monster, 1)",
+   "biomesoplenty:fir_clearing (monster, 1)",
+   "biomesoplenty:jacaranda_glade (monster, 1)",
+   "biomesoplenty:old_growth_dead_forest (monster, 1)",
+   "minecraft:frozen_peaks (monster, 1)",
+   "minecraft:deep_lukewarm_ocean (monster, 1)",
+   "minecraft:cherry_grove (monster, 1)",
+   "minecraft:jagged_peaks (monster, 1)",
+   "biomesoplenty:marsh (monster, 1)",
+   "biomesoplenty:snowy_fir_clearing (monster, 1)",
+   "biomesoplenty:snowblossom_grove (monster, 1)",
+   "biomesoplenty:prairie (monster, 1)",
+   "biomesoplenty:rocky_shrubland (monster, 1)",
+   "biomesoplenty:tropics (monster, 1)",
+   "biomesoplenty:coniferous_forest (monster, 1)",
+   "biomesoplenty:jade_cliffs (monster, 1)",
+   "biomesoplenty:lush_desert (monster, 1)",
+   "biomesoplenty:pumpkin_patch (monster, 1)",
+   "minecraft:lush_caves (monster, 1)",
+   "biomesoplenty:muskeg (monster, 1)",
+   "biomesoplenty:ominous_woods (monster, 1)",
+   "minecraft:taiga (monster, 1)",
+   "biomesoplenty:lush_savanna (monster, 1)",
+   "biomesoplenty:volcano (monster, 1)",
+   "biomesoplenty:lavender_field (monster, 1)",
+   "biomesoplenty:wasteland (monster, 1)",
+   "biomesoplenty:dead_forest (monster, 1)",
+   "minecraft:mangrove_swamp (monster, 1)",
+   "biomesoplenty:bayou (monster, 1)",
+   "minecraft:savanna_plateau (monster, 1)",
+   "minecraft:warm_ocean (monster, 1)",
+   "minecraft:small_end_islands (monster, 1)",
+   "minecraft:jungle (monster, 1)",
+   "biomesoplenty:dryland (monster, 1)",
+   "minecraft:snowy_slopes (monster, 1)",
+   "biomesoplenty:volcanic_plains (monster, 1)",
+   "biomesoplenty:snowy_maple_woods (monster, 1)",
+   "minecraft:old_growth_pine_taiga (monster, 1)",
+   "minecraft:snowy_taiga (monster, 1)",
+   "minecraft:badlands (monster, 1)",
+   "biomesoplenty:pasture (monster, 1)",
+   "minecraft:plains (monster, 1)",
+   "biomesoplenty:dune_beach (monster, 1)",
+   "biomesoplenty:old_growth_woodland (monster, 1)",
+   "minecraft:warped_forest (monster, 1)",
+   "biomesoplenty:cold_desert (monster, 1)",
+   "minecraft:frozen_river (monster, 1)",
+   "biomesoplenty:maple_woods (monster, 1)",
+   "biomesoplenty:forested_field (monster, 1)",
+   "minecraft:wooded_badlands (monster, 1)",
+   "biomesoplenty:floodplain (monster, 1)",
+   "biomesoplenty:bog (monster, 1)",
+   "minecraft:soul_sand_valley (monster, 1)",
+   "biomesoplenty:highland (monster, 1)",
+   "minecraft:savanna (monster, 1)",
+   "minecraft:windswept_gravelly_hills (monster, 1)",
+   "minecraft:ocean (monster, 1)",
+   "minecraft:ice_spikes (monster, 1)",
+   "biomesoplenty:overgrown_greens (monster, 1)",
+   "biomesoplenty:glowing_grotto (monster, 1)",
+   "minecraft:cold_ocean (monster, 1)",
+   "biomesoplenty:moor (monster, 1)",
+   "minecraft:meadow (monster, 1)",
+   "minecraft:windswept_savanna (monster, 1)",
+   "minecraft:grove (monster, 1)",
+   "biomesoplenty:aspen_glade (monster, 1)",
+   "minecraft:end_midlands (monster, 1)",
+   "biomesoplenty:woodland (monster, 1)",
+   "minecraft:end_barrens (monster, 1)",
+   "biomesoplenty:snowy_coniferous_forest (monster, 1)",
+   "biomesoplenty:orchard (monster, 1)",
+   "minecraft:snowy_beach (monster, 1)",
+   "minecraft:flower_forest (monster, 1)",
+   "minecraft:sunflower_plains (monster, 1)",
+   "biomesoplenty:redwood_forest (monster, 1)",
+   "biomesoplenty:mediterranean_forest (monster, 1)",
+   "minecraft:dripstone_caves (monster, 1)",
+   "biomesoplenty:tundra (monster, 1)",
+   "biomesoplenty:gravel_beach (monster, 1)",
+   "biomesoplenty:withered_abyss (monster, 5)",
+   "biomesoplenty:field (monster, 1)",
+   "minecraft:windswept_hills (monster, 1)",
+   "minecraft:windswept_forest (monster, 1)",
+   "biomesoplenty:scrubland (monster, 1)",
+   "biomesoplenty:hot_springs (monster, 1)"
+  ],
+  "advancements": [],
+  "name": "Mutant Enderman"
+ },
+ "mutantmonsters:mutant_skeleton": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "PlayerEventsHandler.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "biomesoplenty:spider_nest (monster, 10)",
+   "minecraft:stony_peaks (monster, 10)",
+   "minecraft:swamp (monster, 10)",
+   "biomesoplenty:wasteland_steppe (monster, 10)",
+   "minecraft:frozen_ocean (monster, 10)",
+   "biomesoplenty:seasonal_forest (monster, 10)",
+   "minecraft:beach (monster, 10)",
+   "biomesoplenty:rainforest (monster, 10)",
+   "minecraft:snowy_plains (monster, 2)",
+   "minecraft:sparse_jungle (monster, 10)",
+   "minecraft:eroded_badlands (monster, 10)",
+   "biomesoplenty:rocky_rainforest (monster, 10)",
+   "minecraft:desert (monster, 10)",
+   "minecraft:old_growth_spruce_taiga (monster, 10)",
+   "minecraft:dark_forest (monster, 10)",
+   "minecraft:birch_forest (monster, 10)",
+   "minecraft:river (monster, 10)",
+   "minecraft:lukewarm_ocean (monster, 10)",
+   "minecraft:stony_shore (monster, 10)",
+   "minecraft:old_growth_birch_forest (monster, 10)",
+   "minecraft:bamboo_jungle (monster, 10)",
+   "minecraft:forest (monster, 10)",
+   "biomesoplenty:grassland (monster, 10)",
+   "biomesoplenty:wetland (monster, 10)",
+   "biomesoplenty:fungal_jungle (monster, 10)",
+   "minecraft:deep_ocean (monster, 10)",
+   "biomesoplenty:shrubland (monster, 10)",
+   "biomesoplenty:crag (monster, 10)",
+   "biomesoplenty:fir_clearing (monster, 10)",
+   "biomesoplenty:jacaranda_glade (monster, 10)",
+   "biomesoplenty:old_growth_dead_forest (monster, 10)",
+   "minecraft:frozen_peaks (monster, 10)",
+   "minecraft:deep_lukewarm_ocean (monster, 10)",
+   "minecraft:cherry_grove (monster, 10)",
+   "minecraft:jagged_peaks (monster, 10)",
+   "biomesoplenty:marsh (monster, 10)",
+   "biomesoplenty:snowy_fir_clearing (monster, 10)",
+   "biomesoplenty:snowblossom_grove (monster, 10)",
+   "biomesoplenty:prairie (monster, 10)",
+   "biomesoplenty:rocky_shrubland (monster, 10)",
+   "biomesoplenty:tropics (monster, 10)",
+   "biomesoplenty:coniferous_forest (monster, 10)",
+   "biomesoplenty:jade_cliffs (monster, 10)",
+   "biomesoplenty:lush_desert (monster, 10)",
+   "biomesoplenty:pumpkin_patch (monster, 10)",
+   "minecraft:lush_caves (monster, 10)",
+   "biomesoplenty:muskeg (monster, 10)",
+   "minecraft:taiga (monster, 10)",
+   "biomesoplenty:lush_savanna (monster, 10)",
+   "biomesoplenty:volcano (monster, 10)",
+   "biomesoplenty:lavender_field (monster, 10)",
+   "biomesoplenty:wasteland (monster, 10)",
+   "biomesoplenty:dead_forest (monster, 10)",
+   "minecraft:mangrove_swamp (monster, 10)",
+   "biomesoplenty:bayou (monster, 10)",
+   "minecraft:savanna_plateau (monster, 10)",
+   "minecraft:warm_ocean (monster, 10)",
+   "minecraft:jungle (monster, 10)",
+   "biomesoplenty:dryland (monster, 10)",
+   "minecraft:snowy_slopes (monster, 10)",
+   "biomesoplenty:volcanic_plains (monster, 10)",
+   "biomesoplenty:snowy_maple_woods (monster, 10)",
+   "minecraft:old_growth_pine_taiga (monster, 10)",
+   "minecraft:snowy_taiga (monster, 10)",
+   "minecraft:badlands (monster, 10)",
+   "biomesoplenty:pasture (monster, 10)",
+   "biomesoplenty:origin_valley (monster, 10)",
+   "minecraft:plains (monster, 10)",
+   "biomesoplenty:dune_beach (monster, 10)",
+   "biomesoplenty:old_growth_woodland (monster, 10)",
+   "biomesoplenty:cold_desert (monster, 10)",
+   "minecraft:frozen_river (monster, 10)",
+   "biomesoplenty:maple_woods (monster, 10)",
+   "biomesoplenty:forested_field (monster, 10)",
+   "minecraft:wooded_badlands (monster, 10)",
+   "biomesoplenty:floodplain (monster, 10)",
+   "biomesoplenty:bog (monster, 10)",
+   "minecraft:soul_sand_valley (monster, 2)",
+   "biomesoplenty:highland (monster, 10)",
+   "minecraft:savanna (monster, 10)",
+   "biomesoplenty:wintry_origin_valley (monster, 10)",
+   "minecraft:windswept_gravelly_hills (monster, 10)",
+   "minecraft:ocean (monster, 10)",
+   "minecraft:ice_spikes (monster, 2)",
+   "biomesoplenty:overgrown_greens (monster, 10)",
+   "biomesoplenty:glowing_grotto (monster, 10)",
+   "minecraft:cold_ocean (monster, 10)",
+   "biomesoplenty:moor (monster, 10)",
+   "minecraft:meadow (monster, 10)",
+   "minecraft:windswept_savanna (monster, 10)",
+   "minecraft:grove (monster, 10)",
+   "biomesoplenty:aspen_glade (monster, 10)",
+   "biomesoplenty:woodland (monster, 10)",
+   "biomesoplenty:snowy_coniferous_forest (monster, 10)",
+   "biomesoplenty:orchard (monster, 10)",
+   "minecraft:snowy_beach (monster, 10)",
+   "minecraft:flower_forest (monster, 10)",
+   "minecraft:sunflower_plains (monster, 10)",
+   "biomesoplenty:redwood_forest (monster, 10)",
+   "biomesoplenty:mediterranean_forest (monster, 10)",
+   "minecraft:dripstone_caves (monster, 10)",
+   "biomesoplenty:tundra (monster, 10)",
+   "biomesoplenty:gravel_beach (monster, 10)",
+   "biomesoplenty:field (monster, 10)",
+   "minecraft:windswept_hills (monster, 10)",
+   "minecraft:windswept_forest (monster, 10)",
+   "biomesoplenty:scrubland (monster, 10)",
+   "biomesoplenty:hot_springs (monster, 10)"
+  ],
+  "advancements": [
+   "mutantmonsters:no_bones_about_it [No Bones About It]"
+  ],
+  "name": "Mutant Skeleton"
+ },
+ "mutantmonsters:mutant_zombie": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "biomesoplenty:spider_nest (monster, 9)",
+   "minecraft:stony_peaks (monster, 9)",
+   "minecraft:swamp (monster, 9)",
+   "biomesoplenty:wasteland_steppe (monster, 9)",
+   "minecraft:frozen_ocean (monster, 9)",
+   "biomesoplenty:seasonal_forest (monster, 9)",
+   "minecraft:beach (monster, 9)",
+   "biomesoplenty:rainforest (monster, 9)",
+   "minecraft:snowy_plains (monster, 9)",
+   "minecraft:sparse_jungle (monster, 9)",
+   "minecraft:eroded_badlands (monster, 9)",
+   "biomesoplenty:rocky_rainforest (monster, 9)",
+   "minecraft:desert (monster, 1)",
+   "minecraft:old_growth_spruce_taiga (monster, 9)",
+   "minecraft:dark_forest (monster, 9)",
+   "minecraft:birch_forest (monster, 9)",
+   "minecraft:river (monster, 9)",
+   "minecraft:lukewarm_ocean (monster, 9)",
+   "minecraft:stony_shore (monster, 9)",
+   "minecraft:old_growth_birch_forest (monster, 9)",
+   "minecraft:bamboo_jungle (monster, 9)",
+   "minecraft:forest (monster, 9)",
+   "biomesoplenty:grassland (monster, 9)",
+   "biomesoplenty:wetland (monster, 9)",
+   "biomesoplenty:fungal_jungle (monster, 9)",
+   "minecraft:deep_ocean (monster, 9)",
+   "biomesoplenty:shrubland (monster, 9)",
+   "biomesoplenty:crag (monster, 9)",
+   "biomesoplenty:fir_clearing (monster, 9)",
+   "biomesoplenty:jacaranda_glade (monster, 9)",
+   "biomesoplenty:old_growth_dead_forest (monster, 9)",
+   "minecraft:frozen_peaks (monster, 9)",
+   "minecraft:deep_lukewarm_ocean (monster, 9)",
+   "minecraft:cherry_grove (monster, 9)",
+   "minecraft:jagged_peaks (monster, 9)",
+   "biomesoplenty:marsh (monster, 9)",
+   "biomesoplenty:snowy_fir_clearing (monster, 9)",
+   "biomesoplenty:snowblossom_grove (monster, 9)",
+   "biomesoplenty:prairie (monster, 9)",
+   "biomesoplenty:rocky_shrubland (monster, 9)",
+   "biomesoplenty:tropics (monster, 9)",
+   "biomesoplenty:coniferous_forest (monster, 9)",
+   "biomesoplenty:jade_cliffs (monster, 9)",
+   "biomesoplenty:lush_desert (monster, 9)",
+   "biomesoplenty:pumpkin_patch (monster, 9)",
+   "minecraft:lush_caves (monster, 9)",
+   "biomesoplenty:muskeg (monster, 9)",
+   "minecraft:taiga (monster, 9)",
+   "biomesoplenty:lush_savanna (monster, 9)",
+   "biomesoplenty:volcano (monster, 9)",
+   "biomesoplenty:lavender_field (monster, 9)",
+   "biomesoplenty:wasteland (monster, 9)",
+   "biomesoplenty:dead_forest (monster, 9)",
+   "minecraft:mangrove_swamp (monster, 9)",
+   "biomesoplenty:bayou (monster, 9)",
+   "minecraft:savanna_plateau (monster, 9)",
+   "minecraft:warm_ocean (monster, 9)",
+   "minecraft:jungle (monster, 9)",
+   "biomesoplenty:dryland (monster, 9)",
+   "minecraft:snowy_slopes (monster, 9)",
+   "biomesoplenty:volcanic_plains (monster, 9)",
+   "biomesoplenty:snowy_maple_woods (monster, 9)",
+   "minecraft:old_growth_pine_taiga (monster, 10)",
+   "minecraft:snowy_taiga (monster, 9)",
+   "minecraft:badlands (monster, 9)",
+   "biomesoplenty:pasture (monster, 9)",
+   "biomesoplenty:origin_valley (monster, 9)",
+   "minecraft:plains (monster, 9)",
+   "biomesoplenty:dune_beach (monster, 9)",
+   "biomesoplenty:old_growth_woodland (monster, 9)",
+   "biomesoplenty:cold_desert (monster, 9)",
+   "minecraft:frozen_river (monster, 9)",
+   "biomesoplenty:maple_woods (monster, 9)",
+   "biomesoplenty:forested_field (monster, 9)",
+   "minecraft:wooded_badlands (monster, 9)",
+   "biomesoplenty:floodplain (monster, 9)",
+   "biomesoplenty:bog (monster, 9)",
+   "biomesoplenty:highland (monster, 9)",
+   "minecraft:savanna (monster, 9)",
+   "biomesoplenty:wintry_origin_valley (monster, 9)",
+   "minecraft:windswept_gravelly_hills (monster, 9)",
+   "minecraft:ocean (monster, 9)",
+   "minecraft:ice_spikes (monster, 9)",
+   "biomesoplenty:overgrown_greens (monster, 9)",
+   "biomesoplenty:glowing_grotto (monster, 9)",
+   "minecraft:cold_ocean (monster, 9)",
+   "biomesoplenty:moor (monster, 9)",
+   "minecraft:meadow (monster, 9)",
+   "minecraft:windswept_savanna (monster, 9)",
+   "minecraft:grove (monster, 9)",
+   "biomesoplenty:aspen_glade (monster, 9)",
+   "biomesoplenty:woodland (monster, 9)",
+   "biomesoplenty:snowy_coniferous_forest (monster, 9)",
+   "biomesoplenty:orchard (monster, 9)",
+   "minecraft:snowy_beach (monster, 9)",
+   "minecraft:flower_forest (monster, 9)",
+   "minecraft:sunflower_plains (monster, 9)",
+   "biomesoplenty:redwood_forest (monster, 9)",
+   "biomesoplenty:mediterranean_forest (monster, 9)",
+   "minecraft:dripstone_caves (monster, 9)",
+   "biomesoplenty:tundra (monster, 9)",
+   "biomesoplenty:gravel_beach (monster, 9)",
+   "biomesoplenty:field (monster, 9)",
+   "minecraft:windswept_hills (monster, 9)",
+   "minecraft:windswept_forest (monster, 9)",
+   "biomesoplenty:scrubland (monster, 9)",
+   "biomesoplenty:hot_springs (monster, 9)"
+  ],
+  "advancements": [
+   "mutantmonsters:burn_zombie_burn [Burn Zombie Burn]",
+   "mutantmonsters:hulk_smash [Hulk Smash!]"
+  ],
+  "name": "Mutant Zombie"
+ },
+ "skarrier_mobs:carnager": {
+  "health": 300.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Carnager"
+ },
+ "skarrier_mobs:tunnel_gore": {
+  "health": 1000.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "skarrier_mobs:tg_lair_tunnel1",
+   "skarrier_mobs:tg_lair_tunnel2",
+   "skarrier_mobs:tg_lair_tunnel3",
+   "skarrier_mobs:tg_lair_x"
+  ],
+  "structures": [
+   "skarrier_mobs:tunnel_gore_lair_x",
+   "skarrier_mobs:tunnel_gore_tunnel_1",
+   "skarrier_mobs:tunnel_gore_tunnel_2",
+   "skarrier_mobs:tunnel_gore_tunnel_3"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Tunnel Gore"
+ },
+ "skarrier_mobs:endorah_head_main": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Main Endorah Head"
+ },
+ "skarrier_mobs:endorah_head_melee": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Endorah Head"
+ },
+ "skarrier_mobs:endorah_head_ranged": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Endorah Head"
+ },
+ "skarrier_mobs:endorah_body": {
+  "health": 1000.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Endorah"
+ },
+ "skarrier_mobs:trawler": {
+  "health": 160.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "minecraft:eroded_badlands (monster, 10)",
+   "minecraft:badlands (monster, 10)"
+  ],
+  "advancements": [],
+  "name": "Trawler"
+ },
+ "skarrier_mobs:istukan": {
+  "health": 160.0,
+  "category": "creature",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Istukan"
+ },
+ "skarrier_mobs:grave_construct": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Grave Construct"
+ },
+ "skarrier_mobs:grave_construct_phase_ranged": {
+  "health": 100.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Grave Construct (Phase 2)"
+ },
+ "skarrier_mobs:grave_construct_phase_melee": {
+  "health": 200.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Grave Construct (Phase 2)"
+ },
+ "skarrier_mobs:wretch": {
+  "health": 300.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Wretch"
+ },
+ "skarrier_mobs:endorah_head_main_flying": {
+  "health": 400.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Main Endorah Head"
+ },
+ "skarrier_mobs:endorah_head_melee_flying": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Endorah Head"
+ },
+ "skarrier_mobs:endorah_head_ranged_flying": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Endorah Head"
+ },
+ "skarrier_mobs:voidrake": {
+  "health": 160.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "minecraft:end_highlands (monster, 10)",
+   "minecraft:end_barrens (monster, 10)"
+  ],
+  "advancements": [],
+  "name": "Voidrake"
+ },
+ "monsterexpansion:skrythe": {
+  "health": 750.0,
+  "category": "creature",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "monsterexpansion:skrythe_anchor"
+  ],
+  "structures": [
+   "monsterexpansion:skrythe_structure"
+  ],
+  "code": [
+   "KobekoSkrytheSetBonusEvents.class",
+   "ModEventBusEvents.class",
+   "MonsterExpansion$ClientModEvents.class",
+   "SkrytheSetBonusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]",
+   "monsterexpansion:hunt_skrythe [advancements.monsterexpansion.hunt_skrythe.title]"
+  ],
+  "name": "Skrythe"
+ },
+ "monsterexpansion:rhyza": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "monsterexpansion:rhyza_anchor"
+  ],
+  "structures": [
+   "monsterexpansion:rhyza_structure"
+  ],
+  "code": [
+   "KobekoRhyzaSetBonusEvents.class",
+   "ModEventBusEvents.class",
+   "MonsterExpansion$ClientModEvents.class",
+   "RhyzaSetBonusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]",
+   "monsterexpansion:hunt_rhyza [advancements.monsterexpansion.hunt_rhyza.title]"
+  ],
+  "name": "Rhyza"
+ },
+ "monsterexpansion:leivekilth": {
+  "health": 1000.0,
+  "category": "creature",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "monsterexpansion:leivekilth_anchor"
+  ],
+  "structures": [
+   "monsterexpansion:leivekilth_structure"
+  ],
+  "code": [
+   "LeivekilthSetBonusEvents.class",
+   "ModEventBusEvents.class",
+   "MonsterExpansion$ClientModEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]",
+   "monsterexpansion:hunt_leivekilth [advancements.monsterexpansion.hunt_leivekilth.title]"
+  ],
+  "name": "Leivekilth"
+ },
+ "monsterexpansion:rakoth": {
+  "health": 750.0,
+  "category": "creature",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "monsterexpansion:rakoth_anchor"
+  ],
+  "structures": [
+   "monsterexpansion:rakoth_structure"
+  ],
+  "code": [
+   "ModEventBusEvents.class",
+   "MonsterExpansion$ClientModEvents.class",
+   "RakothSetBonusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]",
+   "monsterexpansion:hunt_rakoth [advancements.monsterexpansion.hunt_rakoth.title]"
+  ],
+  "name": "Rakoth"
+ },
+ "monsterexpansion:ignathos": {
+  "health": 500.0,
+  "category": "creature",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "monsterexpansion:ignathos_anchor"
+  ],
+  "structures": [
+   "monsterexpansion:ignathos_structure"
+  ],
+  "code": [
+   "IgnathosSetBonusEvents.class",
+   "ModEventBusEvents.class",
+   "MonsterExpansion$ClientModEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "monsterexpansion:hunt_large_monster [advancements.monsterexpansion.hunt_large_monster.title]"
+  ],
+  "name": "Ignathos"
+ },
+ "oddities:queen_of_orchid": {
+  "health": 300.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "OrchidAltarOnTickUpdateProcedure.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "biomesoplenty:jacaranda_glade (monster, 12)",
+   "minecraft:cherry_grove (monster, 12)",
+   "biomesoplenty:snowblossom_grove (monster, 12)",
+   "biomesoplenty:lavender_field (monster, 12)",
+   "minecraft:meadow (monster, 12)",
+   "biomesoplenty:orchard (monster, 12)",
+   "minecraft:flower_forest (monster, 12)"
+  ],
+  "advancements": [],
+  "name": "Queen Of Orchid"
+ },
+ "graveyard:lich": {
+  "health": 400.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarBlock.class",
+   "TGStructures.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "graveyard:graveyard/summon_lich [Wrath of the Champion]"
+  ],
+  "name": "Corrupted Champion"
+ },
+ "legendary_monsters:skeletosaurus": {
+  "health": 150.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:skeletosaurus_nest",
+   "legendary_monsters:skeletosaurus_nest2"
+  ],
+  "structures": [
+   "legendary_monsters:skeletosaurus_nest"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class",
+   "ModStructureTags.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [
+   "minecraft:soul_sand_valley (monster, 0)"
+  ],
+  "advancements": [
+   "legendary_monsters:defeat_skeletosaurus [The Ancient Skeleton]"
+  ],
+  "name": "Skeletosaurus"
+ },
+ "legendary_monsters:overgrown_colossus": {
+  "health": 170.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:mossy_temple"
+  ],
+  "structures": [
+   "legendary_monsters:mossy_temple"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_overgrown_colossus [The Mossy Beast]"
+  ],
+  "name": "Overgrown Colossus"
+ },
+ "legendary_monsters:endersent": {
+  "health": 200.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:ancient_tower_remains"
+  ],
+  "structures": [
+   "legendary_monsters:ancient_tower_remains"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_endersent [The Tall Guy]"
+  ],
+  "name": "Chorusent"
+ },
+ "legendary_monsters:lava_eater": {
+  "health": 170.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:lava_eater_spawn",
+   "legendary_monsters:lava_eater_spawn2"
+  ],
+  "structures": [
+   "legendary_monsters:lava_eater_spawn"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class",
+   "ModStructureTags.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_lava_eater [Fiery Beast]"
+  ],
+  "name": "Lava Eater"
+ },
+ "legendary_monsters:frostbitten_golem": {
+  "health": 220.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:frostbitten_temple",
+   "legendary_monsters:frostbitten_temple2"
+  ],
+  "structures": [
+   "legendary_monsters:frostbitten_temple"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_frostbitten_golem [The Coldest Golem]"
+  ],
+  "name": "Frostbitten Golem"
+ },
+ "legendary_monsters:shulker_mimic": {
+  "health": 200.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:shulker_tower",
+   "legendary_monsters:shulker_tower_new_old",
+   "legendary_monsters:shulker_tower_old"
+  ],
+  "structures": [
+   "legendary_monsters:shulker_tower"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_shulker_mimic [Spooky Scary Shulker Box]"
+  ],
+  "name": "Shulker Mimic"
+ },
+ "legendary_monsters:withered_abomination": {
+  "health": 190.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:soul_fortress_remains"
+  ],
+  "structures": [
+   "legendary_monsters:soul_fortress_remains"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_withered_abomination [The Soul Eater]"
+  ],
+  "name": "Withered Abomination"
+ },
+ "legendary_monsters:ancient_guardian": {
+  "health": 170.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:ancient_stronghold",
+   "legendary_monsters:ancient_stronghold_old"
+  ],
+  "structures": [
+   "legendary_monsters:ancient_stronghold"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_the_ancient_guardian [The One - Armed Monster]"
+  ],
+  "name": "Ancient Guardian"
+ },
+ "legendary_monsters:cloud_golem": {
+  "health": 350.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:cloudy_temple",
+   "legendary_monsters:cloudy_temple_arena"
+  ],
+  "structures": [
+   "legendary_monsters:cloudy_temple"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_cloud_golem [Against The Gods]"
+  ],
+  "name": "Cumulonimbus"
+ },
+ "legendary_monsters:posessed_paladin": {
+  "health": 400.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:collapsed_kingdom_arena"
+  ],
+  "structures": [
+   "legendary_monsters:collapsed_kingdom"
+  ],
+  "code": [
+   "ModEventBusClientEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_posessed_paladin [Finally Free]"
+  ],
+  "name": "Possessed Paladin"
+ },
+ "legendary_monsters:dune_sentinel": {
+  "health": 170.0,
+  "category": "creature",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": true,
+  "templates": [
+   "legendary_monsters:ruined_pyramid"
+  ],
+  "structures": [
+   "legendary_monsters:ruined_pyramid"
+  ],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_dune_sentinel [Ancient War Machine]"
+  ],
+  "name": "Dune Sentinel"
+ },
+ "legendary_monsters:the_obliterator": {
+  "health": 550.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "LegendaryMonsters$ClientModEvents.class",
+   "ModEventBusClientEvents.class",
+   "ModEventBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_the_obliterator [Obliteration for Obliterator]"
+  ],
+  "name": "The Obliterator"
+ },
+ "legendary_monsters:annihilation_pursuer": {
+  "health": 210.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:space_station",
+   "legendary_monsters:space_station_main",
+   "legendary_monsters:space_station_part2",
+   "legendary_monsters:space_station_part8"
+  ],
+  "structures": [
+   "legendary_monsters:space_station"
+  ],
+  "code": [
+   "LegendaryMonsters$ClientModEvents.class",
+   "ModEventBusClientEvents.class",
+   "ModEventBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_annihilation_pursuer [Slowing Down A Bit...]"
+  ],
+  "name": "Annihilation Pursuer"
+ },
+ "legendary_monsters:beheaded_knight": {
+  "health": 195.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:collapsed_kingdom_dungeon11",
+   "legendary_monsters:collapsed_kingdom_part3"
+  ],
+  "structures": [
+   "legendary_monsters:collapsed_kingdom"
+  ],
+  "code": [
+   "LegendaryMonsters$ClientModEvents.class",
+   "ModEventBusClientEvents.class",
+   "ModEventBusEvents.class",
+   "ModParticleFactiories.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_beheaded_knight [Headless KnightMan]",
+   "legendary_monsters:defeat_haunted_duo [The Power Of Friendship]"
+  ],
+  "name": "Beheaded Knight"
+ },
+ "legendary_monsters:resurrected_knight": {
+  "health": 190.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": false,
+  "despawns": false,
+  "templates": [
+   "legendary_monsters:collapsed_kingdom_dungeon11",
+   "legendary_monsters:collapsed_kingdom_part3"
+  ],
+  "structures": [
+   "legendary_monsters:collapsed_kingdom"
+  ],
+  "code": [
+   "LegendaryMonsters$ClientModEvents.class",
+   "ModEventBusClientEvents.class",
+   "ModEventBusEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "legendary_monsters:defeat_haunted_duo [The Power Of Friendship]",
+   "legendary_monsters:defeat_resurrected_knight [My Head Is Back!]"
+  ],
+  "name": "Resurrected Knight"
+ },
+ "irons_spellbooks:dead_king": {
+  "health": 500.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [
+   "irons_spellbooks:catacombs/catacombs_origin"
+  ],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "The Dead King"
+ },
+ "irons_spellbooks:fire_boss": {
+  "health": 1000.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses",
+   "forge:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Echo of Tyros, First Flamebearer"
+ },
+ "mythsandlegends:black_charro": {
+  "health": 370.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "AltarOfTheDeadBlock.class",
+   "AltarOfTheDeadBlockEntity.class",
+   "ModEvents.class",
+   "MythsAndLegends$ClientModEvents.class",
+   "SummonAttackBehavior.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [
+   "mythsandlegends:rider_of_the_shadows [Rider of the Shadows]"
+  ],
+  "name": "The Black Charro"
+ },
+ "mythsandlegends:warborn_aegis": {
+  "health": 400.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ModEvents.class",
+   "MythsAndLegends$ClientModEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Warborn Aegis"
+ },
+ "mythsandlegends:cogwork_construct": {
+  "health": 280.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ModEvents.class",
+   "MythsAndLegends$ClientModEvents.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Cogwork Construct"
+ },
+ "aquamirae:captain_cornelia": {
+  "health": 20.0,
+  "category": "monster",
+  "tags": [
+   "bloomlevelup:bosses"
+  ],
+  "bossBar": true,
+  "despawns": false,
+  "templates": [],
+  "structures": [],
+  "code": [
+   "ShellHornItem$SummonEvent.class"
+  ],
+  "structureSpawns": [],
+  "biomeSpawns": [],
+  "advancements": [],
+  "name": "Ghost of Captain Cornelia"
+ }
+}

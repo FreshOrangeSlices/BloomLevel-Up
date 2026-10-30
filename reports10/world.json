@@ -1,0 +1,2809 @@
+{
+ "structures": {
+  "aquamirae:pirate_outpost": {
+   "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "aquamirae:pirate_outpost",
+   "biomes": "#aquamirae:ice_maze",
+   "step": "top_layer_modification",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "aquamirae:pirate_shelter": {
+   "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "aquamirae:shelter/tunnel_top",
+   "biomes": "#aquamirae:ice_maze",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "aquamirae:pirate_ship": {
+   "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "aquamirae:pirate_ship",
+   "biomes": "#aquamirae:ice_maze",
+   "step": "top_layer_modification",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "aquamirae:shipwreck": {
+   "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+   "type": "minecraft:shipwreck",
+   "start_pool": null,
+   "biomes": "#aquamirae:ice_maze",
+   "step": "surface_structures",
+   "mentions": []
+  },
+  "aquamirae:surface/arch": {
+   "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "aquamirae:surface/arch",
+   "biomes": "#aquamirae:ice_maze",
+   "step": "fluid_springs",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "aquamirae:surface/spiral": {
+   "jar": "aquamirae-forge-1.20.1-7.1.14.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "aquamirae:surface/spiral",
+   "biomes": "#aquamirae:ice_maze",
+   "step": "fluid_springs",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "bookofdragons:roost_barrens": {
+   "jar": "bookofdragons-1.4-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "bookofdragons:roost_barrens",
+   "biomes": "#bookofdragons:has_roost_barrens",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 5
+  },
+  "bookofdragons:roost_cave": {
+   "jar": "bookofdragons-1.4-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "bookofdragons:roost_cave",
+   "biomes": "#bookofdragons:has_roost_cave",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "bookofdragons:roost_cliff": {
+   "jar": "bookofdragons-1.4-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "bookofdragons:roost_cliff",
+   "biomes": "#bookofdragons:has_roost_cliff",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "bookofdragons:roost_glade": {
+   "jar": "bookofdragons-1.4-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "bookofdragons:roost_glade",
+   "biomes": "#bookofdragons:has_roost_glade",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "bookofdragons:roost_wetland": {
+   "jar": "bookofdragons-1.4-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "bookofdragons:roost_wetland",
+   "biomes": "#bookofdragons:has_roost_wetland",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "monsterexpansion:ignathos_structure": {
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "monsterexpansion:ignathos_pool",
+   "biomes": "#monsterexpansion:ignathos_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "monsterexpansion:leivekilth_structure": {
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "monsterexpansion:leivekilth_pool",
+   "biomes": "#monsterexpansion:leivekilth_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "monsterexpansion:rakoth_structure": {
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "monsterexpansion:rakoth_pool",
+   "biomes": "#monsterexpansion:rakoth_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "monsterexpansion:rhyza_structure": {
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "monsterexpansion:rhyza_pool",
+   "biomes": "#monsterexpansion:rhyza_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "monsterexpansion:skrythe_structure": {
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "monsterexpansion:skrythe_pool",
+   "biomes": "#monsterexpansion:skrythe_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "mythsandlegends:ancient_vestiges": {
+   "jar": "mythsandlegends-1.0.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "mythsandlegends:ancient_vestiges/ancient_vestiges_center",
+   "biomes": "#mythsandlegends:ancient_vestiges_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "mythsandlegends:chronicler_house": {
+   "jar": "mythsandlegends-1.0.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "mythsandlegends:chronicler_house",
+   "biomes": "#minecraft:is_overworld",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "mythsandlegends:mausoleum": {
+   "jar": "mythsandlegends-1.0.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "mythsandlegends:mausoleum/mausoleum_connector",
+   "biomes": "#mythsandlegends:mausoleum_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "mythsandlegends:old_camp": {
+   "jar": "mythsandlegends-1.0.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "mythsandlegends:old_camp/old_camp",
+   "biomes": "#mythsandlegends:old_camp_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "mythsandlegends:scorched_nest": {
+   "jar": "mythsandlegends-1.0.6.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "mythsandlegends:scorched_nest/scorched_nest",
+   "biomes": "#mythsandlegends:scorched_nest_biomes",
+   "step": "lakes",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "legionary:bastion_arena": {
+   "jar": "legionary-1.20.1-1.2.2.jar",
+   "type": "legionary:bastion_arena",
+   "start_pool": null,
+   "biomes": "minecraft:nether_wastes",
+   "step": "surface_structures",
+   "mentions": []
+  },
+  "irons_spellbooks:ancient_battleground": {
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "irons_spellbooks:battleground/start_pool",
+   "biomes": "#minecraft:has_structure/bastion_remnant",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 28
+  },
+  "irons_spellbooks:citadel": {
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "irons_spellbooks:citadel/start_pool",
+   "biomes": "#minecraft:has_structure/bastion_remnant",
+   "step": "fluid_springs",
+   "mentions": [],
+   "templates_reached": 35
+  },
+  "irons_spellbooks:ice_spider_den": {
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "irons_spellbooks:ice_spider_den/start_pool",
+   "biomes": "#irons_spellbooks:has_structure/ice_spider_den",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 47
+  },
+  "irons_spellbooks:impaled_icebreaker": {
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "irons_spellbooks:impaled_icebreaker_pool",
+   "biomes": "#irons_spellbooks:has_structure/impaled_icebreaker",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "irons_spellbooks:pyromancer_tower": {
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "irons_spellbooks:pyromancer_tower/start_pool",
+   "biomes": "#irons_spellbooks:has_structure/pyromancer_tower",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 23
+  },
+  "soulsweapons:cathedral_of_resurrection": {
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "soulsweapons:cathedral_of_resurrection",
+   "biomes": "#minecraft:is_hill",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "soulsweapons:champions_graves": {
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "soulsweapons:champions_graves",
+   "biomes": "#minecraft:is_taiga",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "soulsweapons:corrupt_altar": {
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "soulsweapons:corrupt_altar",
+   "biomes": [
+    "minecraft:savanna",
+    "minecraft:plains"
+   ],
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "soulsweapons:decaying_kingdom": {
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "soulsweapons:decaying_kingdom",
+   "biomes": "#minecraft:is_nether",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "cataclysm:abandoned_spire": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:abandoned_spire/start_pool",
+   "biomes": "#cataclysm:has_structure/frosted_prison_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 7
+  },
+  "cataclysm:abandoned_temple": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:abandoned_temple/start_pool",
+   "biomes": "#cataclysm:has_structure/frosted_prison_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 7
+  },
+  "cataclysm:abandoned_village": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:abandoned_village/start_pool",
+   "biomes": "#cataclysm:has_structure/frosted_prison_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 6
+  },
+  "cataclysm:acropolis": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:cataclysm_jigsaw",
+   "start_pool": "cataclysm:acropolis/start_pool",
+   "biomes": "#cataclysm:has_structure/acropolis_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 39
+  },
+  "cataclysm:amethyst_nest": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:amethyst_nest/start_pool",
+   "biomes": "minecraft:lush_caves",
+   "step": "underground_decoration",
+   "mentions": [
+    "cataclysm:amethyst_crab"
+   ],
+   "templates_reached": 2
+  },
+  "cataclysm:ancient_factory": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:ancient_factory/start_pool",
+   "biomes": "#cataclysm:has_structure/ancient_factory_biomes",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 9
+  },
+  "cataclysm:burning_arena": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:burning_arena",
+   "start_pool": null,
+   "biomes": "#cataclysm:has_structure/burning_arena_biomes",
+   "step": "surface_structures",
+   "mentions": []
+  },
+  "cataclysm:cursed_pyramid": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:cursed_pyramid",
+   "start_pool": null,
+   "biomes": "#cataclysm:has_structure/cursed_pyramid_biomes",
+   "step": "surface_structures",
+   "mentions": []
+  },
+  "cataclysm:desert_occupied_village": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:desert_occupied_village/start_pool",
+   "biomes": "#cataclysm:has_structure/cursed_pyramid_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 5
+  },
+  "cataclysm:desert_site": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "cataclysm:desert_site/start_pool",
+   "biomes": "#cataclysm:has_structure/cursed_pyramid_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "cataclysm:frosted_prison": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:cataclysm_jigsaw",
+   "start_pool": "cataclysm:frosted_prison/start_pool",
+   "biomes": "#cataclysm:has_structure/frosted_prison_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 30
+  },
+  "cataclysm:ruined_citadel": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:ruined_citadel",
+   "start_pool": null,
+   "biomes": "#cataclysm:has_structure/ruined_citadel_biomes",
+   "step": "surface_structures",
+   "mentions": []
+  },
+  "cataclysm:soul_black_smith": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:cataclysm_jigsaw",
+   "start_pool": "cataclysm:soul_black_smith/start_pool",
+   "biomes": "#cataclysm:has_structure/soul_black_smith_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 10
+  },
+  "cataclysm:sunken_city": {
+   "jar": "L_Enders_Cataclysm-3.31.jar",
+   "type": "cataclysm:sunken_city",
+   "start_pool": null,
+   "biomes": "#cataclysm:has_structure/sunken_city_biomes",
+   "step": "surface_structures",
+   "mentions": []
+  },
+  "legendary_monsters:ancient_stronghold": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:ancient_stronghold",
+   "biomes": "#legendary_monsters:has_structure/ancient_stronghold_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:ancient_tower_remains": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:ancient_tower_remains",
+   "biomes": "#legendary_monsters:has_structure/ancient_tower_remains_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:cloudy_temple": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:cloudy_temple/start",
+   "biomes": "#legendary_monsters:has_structure/cloudy_temple_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 7
+  },
+  "legendary_monsters:collapsed_kingdom": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "legendary_monsters:lm_jigsaw",
+   "start_pool": "legendary_monsters:collapsed_kingdom/part1",
+   "biomes": "#legendary_monsters:has_structure/collapsed_kingdom_biomes",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 31
+  },
+  "legendary_monsters:frostbitten_temple": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:frostbitten_temple",
+   "biomes": "#legendary_monsters:has_structure/frostbitten_temple_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:lava_eater_spawn": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:lava_eater_spawn",
+   "biomes": "#legendary_monsters:has_structure/lava_eater_spawn_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:mossy_temple": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:mossy_temple",
+   "biomes": "#legendary_monsters:has_structure/mossy_temple_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:ruined_pyramid": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:ruined_pyramid",
+   "biomes": "#legendary_monsters:has_structure/ruined_pyramid_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:shulker_tower": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:shulker_tower",
+   "biomes": "#legendary_monsters:has_structure/shulker_tower_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:skeletosaurus_nest": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:skeletosaurus_nest",
+   "biomes": "#legendary_monsters:has_structure/skeletosaurus_nest_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:soul_fortress_remains": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:soul_fortress_remains",
+   "biomes": "#legendary_monsters:has_structure/soul_fortress_remains_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "legendary_monsters:space_station": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "legendary_monsters:lm_jigsaw",
+   "start_pool": "legendary_monsters:space_station/start",
+   "biomes": "#legendary_monsters:has_structure/space_station_biomes",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 10
+  },
+  "legendary_monsters:warped_fungussus_nest": {
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "legendary_monsters:warped_fungussus_nest",
+   "biomes": [
+    "warped_forest"
+   ],
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "block_factorys_bosses:dragon_tower": {
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar",
+   "type": "block_factorys_bosses:dragon_tower",
+   "start_pool": "block_factorys_bosses:dragon_tower",
+   "biomes": "#block_factorys_bosses:dragon_tower",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "block_factorys_bosses:kraken_ship": {
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar",
+   "type": "block_factorys_bosses:kraken_ship",
+   "start_pool": "block_factorys_bosses:kraken_ship_seed",
+   "biomes": "#block_factorys_bosses:kraken_ship",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "block_factorys_bosses:sandworm_nest": {
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "block_factorys_bosses:sandworm_nest",
+   "biomes": "#block_factorys_bosses:sandworm_nest",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "block_factorys_bosses:underworld_arena": {
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar",
+   "type": "block_factorys_bosses:underworld_arena",
+   "start_pool": "block_factorys_bosses:underworld_arena",
+   "biomes": "#block_factorys_bosses:underworld_arena",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 20
+  },
+  "block_factorys_bosses:yeti_hideout": {
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "block_factorys_bosses:yeti_hideout",
+   "biomes": "#block_factorys_bosses:yeti_hideout",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "graveyard:altar": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:altar",
+   "start_pool": "graveyard:altar/start_pool",
+   "biomes": "#graveyard:has_structure/altar",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "graveyard:crypt": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:crypt",
+   "start_pool": "graveyard:crypt/start_pool",
+   "biomes": "#graveyard:has_structure/crypt",
+   "step": "underground_structures",
+   "mentions": [],
+   "templates_reached": 33
+  },
+  "graveyard:dead_tree": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:dead_tree",
+   "start_pool": "graveyard:dead_tree/start_pool",
+   "biomes": "#graveyard:has_structure/dead_tree",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "graveyard:giant_mushroom": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:giant_mushroom",
+   "start_pool": "graveyard:giant_mushroom/start_pool",
+   "biomes": "#graveyard:has_structure/giant_mushroom",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "graveyard:haunted_house": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:haunted_house",
+   "start_pool": "graveyard:haunted_house/start_pool",
+   "biomes": "#graveyard:has_structure/haunted_house",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "graveyard:large_graveyard": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:large_graveyard",
+   "start_pool": "graveyard:large_walled_graveyard/start_pool",
+   "biomes": "#graveyard:has_structure/large_graveyard",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 47
+  },
+  "graveyard:lich_prison": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:lich_prison",
+   "start_pool": "graveyard:lich_prison/start_pool",
+   "biomes": "#graveyard:has_structure/lich_prison",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "graveyard:medium_graveyard": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:medium_graveyard",
+   "start_pool": "graveyard:medium_graveyard/start_pool",
+   "biomes": "#graveyard:has_structure/medium_graveyard",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "graveyard:memorial_tree": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:memorial_tree",
+   "start_pool": "graveyard:memorial_tree/start_pool",
+   "biomes": "#graveyard:has_structure/memorial_tree",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "graveyard:mushroom_grave": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:mushroom_grave",
+   "start_pool": "graveyard:mushroom_grave/start_pool",
+   "biomes": "#graveyard:has_structure/mushroom_grave",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "graveyard:overrun_desert_village": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:tg_jigsaw",
+   "start_pool": "graveyard:overrun_village/desert/town_centers",
+   "biomes": "#graveyard:has_structure/overrun_desert_village",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "graveyard:overrun_plains_village": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:tg_jigsaw",
+   "start_pool": "graveyard:overrun_village/town_centers",
+   "biomes": "#graveyard:has_structure/overrun_plains_village",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "graveyard:overrun_savanna_village": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:tg_jigsaw",
+   "start_pool": "graveyard:overrun_village/savanna/town_centers",
+   "biomes": "#graveyard:has_structure/overrun_savanna_village",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "graveyard:overrun_snowy_village": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:tg_jigsaw",
+   "start_pool": "graveyard:overrun_village/snowy/town_centers",
+   "biomes": "#graveyard:has_structure/overrun_snowy_village",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "graveyard:overrun_taiga_village": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:tg_jigsaw",
+   "start_pool": "graveyard:overrun_village/taiga/town_centers",
+   "biomes": "#graveyard:has_structure/overrun_taiga_village",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "graveyard:ruins": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:ruins",
+   "start_pool": "graveyard:ruins/start_pool",
+   "biomes": "#graveyard:has_structure/ruins",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "graveyard:small_desert_grave": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:small_desert_grave",
+   "start_pool": "graveyard:small_desert_grave/start_pool",
+   "biomes": "#graveyard:has_structure/small_desert_grave",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 14
+  },
+  "graveyard:small_desert_graveyard": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:small_desert_graveyard",
+   "start_pool": "graveyard:small_desert_graveyard/start_pool",
+   "biomes": "#graveyard:has_structure/small_desert_graveyard",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "graveyard:small_grave": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:small_grave",
+   "start_pool": "graveyard:small_grave/start_pool",
+   "biomes": "#graveyard:has_structure/small_grave",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 19
+  },
+  "graveyard:small_graveyard": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:small_graveyard",
+   "start_pool": "graveyard:small_graveyard/start_pool",
+   "biomes": "#graveyard:has_structure/small_graveyard",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 8
+  },
+  "graveyard:small_mountain_grave": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:small_mountain_grave",
+   "start_pool": "graveyard:small_mountain_grave/start_pool",
+   "biomes": "#graveyard:has_structure/small_mountain_grave",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 11
+  },
+  "graveyard:small_savanna_grave": {
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar",
+   "type": "graveyard:small_savanna_grave",
+   "start_pool": "graveyard:small_savanna_grave/start_pool",
+   "biomes": "#graveyard:has_structure/small_savanna_grave",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 8
+  },
+  "illagerinvasion:firecaller_hut": {
+   "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "illagerinvasion:firecaller_hut/base_plates",
+   "biomes": "#illagerinvasion:has_structure/firecaller_hut",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 9
+  },
+  "illagerinvasion:illager_fort": {
+   "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "illagerinvasion:illager_fort/illager_fort",
+   "biomes": "#illagerinvasion:has_structure/illager_fort",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "illagerinvasion:illusioner_tower": {
+   "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "illagerinvasion:illusioner_tower/illusioner_tower",
+   "biomes": "#illagerinvasion:has_structure/illusioner_tower",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 11
+  },
+  "illagerinvasion:labyrinth": {
+   "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+   "type": "illagerinvasion:labyrinth",
+   "start_pool": "illagerinvasion:labyrinth/towers",
+   "biomes": "#illagerinvasion:has_structure/labyrinth",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 30
+  },
+  "illagerinvasion:sorcerer_hut": {
+   "jar": "IllagerInvasion-v8.0.7-1.20.1-Forge.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "illagerinvasion:sorcerer_hut/sorcerer_hut",
+   "biomes": "#illagerinvasion:has_structure/sorcerer_hut",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "skarrier_mobs:stone_golem_circle": {
+   "jar": "skarrier_mobs-1.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "skarrier_mobs:stone_golem_circle",
+   "biomes": [
+    "plains",
+    "birch_forest",
+    "forest",
+    "taiga",
+    "snowy_plains"
+   ],
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 1
+  },
+  "skarrier_mobs:tunnel_gore_lair_x": {
+   "jar": "skarrier_mobs-1.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "skarrier_mobs:tunnel_gore_lair_x",
+   "biomes": "#minecraft:is_overworld",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 5
+  },
+  "skarrier_mobs:tunnel_gore_tunnel_1": {
+   "jar": "skarrier_mobs-1.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "skarrier_mobs:tunnel_gore_tunnel_1",
+   "biomes": "#skarrier_mobs:empty_biome_tag",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 4
+  },
+  "skarrier_mobs:tunnel_gore_tunnel_2": {
+   "jar": "skarrier_mobs-1.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "skarrier_mobs:tunnel_gore_tunnel_2",
+   "biomes": "#skarrier_mobs:empty_biome_tag",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 3
+  },
+  "skarrier_mobs:tunnel_gore_tunnel_3": {
+   "jar": "skarrier_mobs-1.1.2-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "skarrier_mobs:tunnel_gore_tunnel_3",
+   "biomes": "#skarrier_mobs:empty_biome_tag",
+   "step": "underground_decoration",
+   "mentions": [],
+   "templates_reached": 2
+  },
+  "oddities:orchid_shrine": {
+   "jar": "oddities-1.0.1-forge-1.20.1.jar",
+   "type": "minecraft:jigsaw",
+   "start_pool": "oddities:orchid_shrine",
+   "biomes": "#minecraft:is_forest",
+   "step": "surface_structures",
+   "mentions": [],
+   "templates_reached": 4
+  }
+ },
+ "sets": {
+  "aquamirae:pirate_outpost": {
+   "structures": [
+    "aquamirae:pirate_outpost"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 9291764181,
+    "spacing": 18,
+    "separation": 10
+   }
+  },
+  "aquamirae:pirate_shelter": {
+   "structures": [
+    "aquamirae:pirate_shelter"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 9491766081,
+    "spacing": 30,
+    "separation": 20
+   }
+  },
+  "aquamirae:pirate_ship": {
+   "structures": [
+    "aquamirae:pirate_ship"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 9391766081,
+    "spacing": 25,
+    "separation": 10
+   }
+  },
+  "aquamirae:shipwreck": {
+   "structures": [
+    "aquamirae:shipwreck"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 165745295,
+    "spacing": 6,
+    "separation": 1
+   }
+  },
+  "aquamirae:surface": {
+   "structures": [
+    "aquamirae:surface/arch",
+    "aquamirae:surface/spiral"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 9191766080,
+    "spacing": 4,
+    "separation": 0
+   }
+  },
+  "bookofdragons:roost_barrens": {
+   "structures": [
+    "bookofdragons:roost_barrens"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 24,
+    "separation": 12,
+    "salt": 1665432005
+   }
+  },
+  "bookofdragons:roost_cave": {
+   "structures": [
+    "bookofdragons:roost_cave"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 20,
+    "separation": 10,
+    "salt": 1665432002
+   }
+  },
+  "bookofdragons:roost_cliff": {
+   "structures": [
+    "bookofdragons:roost_cliff"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 32,
+    "separation": 16,
+    "salt": 1665432001
+   }
+  },
+  "bookofdragons:roost_glade": {
+   "structures": [
+    "bookofdragons:roost_glade"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 24,
+    "separation": 12,
+    "salt": 1665432003
+   }
+  },
+  "bookofdragons:roost_wetland": {
+   "structures": [
+    "bookofdragons:roost_wetland"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 24,
+    "separation": 12,
+    "salt": 1665432004
+   }
+  },
+  "monsterexpansion:ignathos_placement": {
+   "structures": [
+    "monsterexpansion:ignathos_structure"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 20,
+    "salt": 56789012
+   }
+  },
+  "monsterexpansion:leivekilth_placement": {
+   "structures": [
+    "monsterexpansion:leivekilth_structure"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 20,
+    "salt": 45678901
+   }
+  },
+  "monsterexpansion:rakoth_placement": {
+   "structures": [
+    "monsterexpansion:rakoth_structure"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 20,
+    "salt": 34567890
+   }
+  },
+  "monsterexpansion:rhyza_placement": {
+   "structures": [
+    "monsterexpansion:rhyza_structure"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 20,
+    "salt": 23456789
+   }
+  },
+  "monsterexpansion:skrythe_placement": {
+   "structures": [
+    "monsterexpansion:skrythe_structure"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 20,
+    "salt": 12345678
+   }
+  },
+  "mythsandlegends:ancient_vestiges": {
+   "structures": [
+    "mythsandlegends:ancient_vestiges"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1694767080,
+    "separation": 50,
+    "spacing": 64
+   }
+  },
+  "mythsandlegends:chronicler_house": {
+   "structures": [
+    "mythsandlegends:chronicler_house"
+   ],
+   "placement": {
+    "type": "minecraft:concentric_rings",
+    "count": 1,
+    "distance": 8,
+    "preferred_biomes": "#mythsandlegends:has_chronicler_house",
+    "salt": 1694767084,
+    "spread": 1
+   }
+  },
+  "mythsandlegends:mausoleum": {
+   "structures": [
+    "mythsandlegends:mausoleum"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1694767081,
+    "separation": 50,
+    "spacing": 64,
+    "spread_type": "triangular"
+   }
+  },
+  "mythsandlegends:old_camp": {
+   "structures": [
+    "mythsandlegends:old_camp"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1694767082,
+    "separation": 50,
+    "spacing": 64
+   }
+  },
+  "mythsandlegends:scorched_nest": {
+   "structures": [
+    "mythsandlegends:scorched_nest"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1694767083,
+    "separation": 4,
+    "spacing": 27
+   }
+  },
+  "legionary:bastion_arena": {
+   "structures": [
+    "legionary:bastion_arena"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 320,
+    "separation": 128,
+    "salt": 1413749916
+   }
+  },
+  "irons_spellbooks:catacombs": {
+   "structures": [
+    "irons_spellbooks:catacombs"
+   ],
+   "placement": {
+    "salt": 1794563212,
+    "spacing": 72,
+    "separation": 48,
+    "type": "minecraft:random_spread"
+   }
+  },
+  "irons_spellbooks:ice_spider_den": {
+   "structures": [
+    "irons_spellbooks:ice_spider_den"
+   ],
+   "placement": {
+    "salt": 126346,
+    "spacing": 85,
+    "separation": 50,
+    "type": "minecraft:random_spread"
+   }
+  },
+  "irons_spellbooks:impaled_icebreaker": {
+   "structures": [
+    "irons_spellbooks:impaled_icebreaker"
+   ],
+   "placement": {
+    "salt": 87959402,
+    "spacing": 75,
+    "separation": 50,
+    "type": "minecraft:random_spread"
+   }
+  },
+  "soulsweapons:nether_structures": {
+   "structures": [
+    "soulsweapons:decaying_kingdom"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 30,
+    "salt": 92177219
+   }
+  },
+  "soulsweapons:overworld_structures": {
+   "structures": [
+    "soulsweapons:cathedral_of_resurrection",
+    "soulsweapons:champions_graves"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 30,
+    "salt": 1646207470
+   }
+  },
+  "cataclysm:abandoned_structures": {
+   "structures": [
+    "cataclysm:abandoned_spire",
+    "cataclysm:abandoned_temple",
+    "cataclysm:abandoned_village"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 514659267,
+    "spacing": 30,
+    "separation": 20,
+    "super_exclusion_zone": {
+     "chunk_count": 8,
+     "other_set": "#cataclysm:abandoned_structures_avoid"
+    }
+   }
+  },
+  "cataclysm:acropolis": {
+   "structures": [
+    "cataclysm:acropolis"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 913530101,
+    "spacing": 80,
+    "separation": 50,
+    "super_exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "#cataclysm:acropolis_avoid"
+    }
+   }
+  },
+  "cataclysm:amethyst_nest": {
+   "structures": [
+    "cataclysm:amethyst_nest"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 14325760,
+    "separation": 8,
+    "spacing": 32
+   }
+  },
+  "cataclysm:ancient_factory": {
+   "structures": [
+    "cataclysm:ancient_factory"
+   ],
+   "placement": {
+    "salt": 319514301,
+    "spacing": 112,
+    "separation": 70,
+    "type": "minecraft:random_spread"
+   }
+  },
+  "cataclysm:burning_arena": {
+   "structures": [
+    "cataclysm:burning_arena"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 9123456789,
+    "spacing": 80,
+    "separation": 50,
+    "super_exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "#cataclysm:burning_arena_avoid"
+    }
+   }
+  },
+  "cataclysm:cursed_pyramid": {
+   "structures": [
+    "cataclysm:cursed_pyramid"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 9167234589,
+    "spacing": 80,
+    "separation": 50,
+    "super_exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "#cataclysm:cursed_pyramid_avoid"
+    }
+   }
+  },
+  "cataclysm:desert_structures": {
+   "structures": [
+    "cataclysm:desert_site",
+    "cataclysm:desert_occupied_village"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 31547671,
+    "spacing": 30,
+    "separation": 20,
+    "super_exclusion_zone": {
+     "chunk_count": 8,
+     "other_set": "#cataclysm:desert_structures_avoid"
+    }
+   }
+  },
+  "cataclysm:frosted_prison": {
+   "structures": [
+    "cataclysm:frosted_prison"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 5872139439,
+    "spacing": 80,
+    "separation": 50,
+    "super_exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "#cataclysm:frosted_prison_avoid"
+    }
+   }
+  },
+  "cataclysm:ruined_citadel": {
+   "structures": [
+    "cataclysm:ruined_citadel"
+   ],
+   "placement": {
+    "salt": 367895146,
+    "spacing": 50,
+    "separation": 25,
+    "type": "minecraft:random_spread"
+   }
+  },
+  "cataclysm:soul_black_smith": {
+   "structures": [
+    "cataclysm:soul_black_smith"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 1984567320,
+    "spacing": 60,
+    "separation": 50,
+    "super_exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "#cataclysm:soul_black_smith_avoid"
+    }
+   }
+  },
+  "cataclysm:sunken_city": {
+   "structures": [
+    "cataclysm:sunken_city"
+   ],
+   "placement": {
+    "type": "cataclysm:cataclysm_random_spread",
+    "salt": 1673928450,
+    "spacing": 100,
+    "separation": 70,
+    "spread_type": "triangular",
+    "super_exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "#cataclysm:sunken_city_avoid"
+    }
+   }
+  },
+  "legendary_monsters:ancient_stronghold": {
+   "structures": [
+    "legendary_monsters:ancient_stronghold"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 40,
+    "separation": 30,
+    "salt": 5792349
+   }
+  },
+  "legendary_monsters:ancient_tower_remains": {
+   "structures": [
+    "legendary_monsters:ancient_tower_remains"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 65,
+    "separation": 35,
+    "salt": 12466453
+   }
+  },
+  "legendary_monsters:cloudy_temple": {
+   "structures": [
+    "legendary_monsters:cloudy_temple"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 70,
+    "separation": 50,
+    "salt": 443951123
+   }
+  },
+  "legendary_monsters:collapsed_kingdom": {
+   "structures": [
+    "legendary_monsters:collapsed_kingdom"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 542863,
+    "separation": 80,
+    "spacing": 110
+   }
+  },
+  "legendary_monsters:frostbitten_temple": {
+   "structures": [
+    "legendary_monsters:frostbitten_temple"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 38,
+    "separation": 28,
+    "salt": 6538645
+   }
+  },
+  "legendary_monsters:lava_eater_spawn": {
+   "structures": [
+    "legendary_monsters:lava_eater_spawn"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 25,
+    "separation": 13,
+    "salt": 435246
+   }
+  },
+  "legendary_monsters:mossy_temple": {
+   "structures": [
+    "legendary_monsters:mossy_temple"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 35,
+    "separation": 24,
+    "salt": 12381234
+   }
+  },
+  "legendary_monsters:ruined_pyramid": {
+   "structures": [
+    "legendary_monsters:ruined_pyramid"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 40,
+    "separation": 30,
+    "salt": 5792349
+   }
+  },
+  "legendary_monsters:shulker_tower": {
+   "structures": [
+    "legendary_monsters:shulker_tower"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 65,
+    "separation": 35,
+    "salt": 7539258
+   }
+  },
+  "legendary_monsters:skeletosaurus_nest": {
+   "structures": [
+    "legendary_monsters:skeletosaurus_nest"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 25,
+    "separation": 14,
+    "salt": 93781234
+   }
+  },
+  "legendary_monsters:soul_fortress_remains": {
+   "structures": [
+    "legendary_monsters:soul_fortress_remains"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 27,
+    "separation": 18,
+    "salt": 5478396
+   }
+  },
+  "legendary_monsters:space_station": {
+   "structures": [
+    "legendary_monsters:space_station"
+   ],
+   "placement": {
+    "frequency": 0.75,
+    "frequency_reduction_method": "legacy_type_1",
+    "type": "minecraft:random_spread",
+    "spacing": 110,
+    "separation": 75,
+    "salt": 8570437
+   }
+  },
+  "legendary_monsters:warped_fungussus_nest": {
+   "structures": [
+    "legendary_monsters:warped_fungussus_nest"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 7,
+    "separation": 5,
+    "salt": 5546645
+   }
+  },
+  "block_factorys_bosses:dragon_tower": {
+   "structures": [
+    "block_factorys_bosses:dragon_tower"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 96,
+    "separation": 24,
+    "salt": 178711064
+   }
+  },
+  "block_factorys_bosses:kraken_ship": {
+   "structures": [
+    "block_factorys_bosses:kraken_ship"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 52,
+    "separation": 24,
+    "salt": 496078896
+   }
+  },
+  "block_factorys_bosses:sandworm_nest": {
+   "structures": [
+    "block_factorys_bosses:sandworm_nest"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 45,
+    "separation": 30,
+    "salt": 1779810129
+   }
+  },
+  "block_factorys_bosses:underworld_arena": {
+   "structures": [
+    "block_factorys_bosses:underworld_arena"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 48,
+    "separation": 40,
+    "salt": 565960105,
+    "exclusion_zone": {
+     "chunk_count": 8,
+     "other_set": "minecraft:nether_complexes"
+    }
+   }
+  },
+  "block_factorys_bosses:yeti_hideout": {
+   "structures": [
+    "block_factorys_bosses:yeti_hideout"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 30,
+    "separation": 25,
+    "salt": 787478644
+   }
+  },
+  "graveyard:altar_structure": {
+   "structures": [
+    "graveyard:altar"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1093123913,
+    "spacing": 30,
+    "separation": 24
+   }
+  },
+  "graveyard:crypt_structure": {
+   "structures": [
+    "graveyard:crypt"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 893183913,
+    "spacing": 24,
+    "separation": 22
+   }
+  },
+  "graveyard:dead_tree_structure": {
+   "structures": [
+    "graveyard:dead_tree"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 781897819,
+    "spacing": 28,
+    "separation": 16
+   }
+  },
+  "graveyard:giant_mushroom_structure": {
+   "structures": [
+    "graveyard:giant_mushroom"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 365012356,
+    "spacing": 34,
+    "separation": 26
+   }
+  },
+  "graveyard:haunted_house_structure": {
+   "structures": [
+    "graveyard:haunted_house"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 451235912,
+    "spacing": 20,
+    "separation": 18
+   }
+  },
+  "graveyard:large_graveyard_structure": {
+   "structures": [
+    "graveyard:large_graveyard"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 304812394,
+    "spacing": 25,
+    "separation": 20
+   }
+  },
+  "graveyard:lich_prison_structure": {
+   "structures": [
+    "graveyard:lich_prison"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 258195719,
+    "spacing": 120,
+    "separation": 100
+   }
+  },
+  "graveyard:medium_graveyard_structure": {
+   "structures": [
+    "graveyard:medium_graveyard"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1690192399,
+    "spacing": 18,
+    "separation": 16
+   }
+  },
+  "graveyard:memorial_tree_structure": {
+   "structures": [
+    "graveyard:memorial_tree"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 529239621,
+    "spacing": 14,
+    "separation": 12
+   }
+  },
+  "graveyard:mushroom_grave_structure": {
+   "structures": [
+    "graveyard:mushroom_grave"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 379123039,
+    "spacing": 24,
+    "separation": 18
+   }
+  },
+  "graveyard:overrun_villages": {
+   "structures": [
+    "graveyard:overrun_plains_village",
+    "graveyard:overrun_savanna_village",
+    "graveyard:overrun_taiga_village",
+    "graveyard:overrun_snowy_village",
+    "graveyard:overrun_desert_village"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1820462391,
+    "spacing": 40,
+    "separation": 12,
+    "exclusion_zone": {
+     "other_set": "minecraft:villages",
+     "chunk_count": 8
+    }
+   }
+  },
+  "graveyard:ruins_structure": {
+   "structures": [
+    "graveyard:ruins"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 467108394,
+    "spacing": 16,
+    "separation": 12
+   }
+  },
+  "graveyard:small_desert_grave_structure": {
+   "structures": [
+    "graveyard:small_desert_grave"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 681236914,
+    "spacing": 20,
+    "separation": 16
+   }
+  },
+  "graveyard:small_desert_graveyard_structure": {
+   "structures": [
+    "graveyard:small_desert_graveyard"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 598017285,
+    "spacing": 32,
+    "separation": 28
+   }
+  },
+  "graveyard:small_grave_structure": {
+   "structures": [
+    "graveyard:small_grave"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 240451934,
+    "spacing": 12,
+    "separation": 8
+   }
+  },
+  "graveyard:small_graveyard_structure": {
+   "structures": [
+    "graveyard:small_graveyard"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 598017285,
+    "spacing": 20,
+    "separation": 18
+   }
+  },
+  "graveyard:small_mountain_grave_structure": {
+   "structures": [
+    "graveyard:small_mountain_grave"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 725689810,
+    "spacing": 12,
+    "separation": 8
+   }
+  },
+  "graveyard:small_savanna_grave_structure": {
+   "structures": [
+    "graveyard:small_savanna_grave"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 709787761,
+    "spacing": 12,
+    "separation": 8
+   }
+  },
+  "illagerinvasion:firecaller_hut": {
+   "structures": [
+    "illagerinvasion:firecaller_hut"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 169476076,
+    "separation": 28,
+    "spacing": 42
+   }
+  },
+  "illagerinvasion:illager_fort": {
+   "structures": [
+    "illagerinvasion:illager_fort"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "minecraft:villages"
+    },
+    "frequency": 0.2,
+    "frequency_reduction_method": "legacy_type_1",
+    "salt": 169476082,
+    "separation": 28,
+    "spacing": 42
+   }
+  },
+  "illagerinvasion:illusioner_tower": {
+   "structures": [
+    "illagerinvasion:illusioner_tower"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "minecraft:villages"
+    },
+    "salt": 169476081,
+    "separation": 28,
+    "spacing": 42
+   }
+  },
+  "illagerinvasion:labyrinth": {
+   "structures": [
+    "illagerinvasion:labyrinth"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+     "chunk_count": 10,
+     "other_set": "minecraft:villages"
+    },
+    "salt": 169476079,
+    "separation": 26,
+    "spacing": 48
+   }
+  },
+  "illagerinvasion:sorcerer_hut": {
+   "structures": [
+    "illagerinvasion:sorcerer_hut"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 169476080,
+    "separation": 14,
+    "spacing": 18
+   }
+  },
+  "skarrier_mobs:stone_golem_circle": {
+   "structures": [
+    "skarrier_mobs:stone_golem_circle"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 26,
+    "separation": 18,
+    "salt": 518608786
+   }
+  },
+  "skarrier_mobs:tunnel_gore_lair_x": {
+   "structures": [
+    "skarrier_mobs:tunnel_gore_lair_x"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 22,
+    "separation": 12,
+    "salt": 489090257
+   }
+  },
+  "skarrier_mobs:tunnel_gore_tunnel_1": {
+   "structures": [
+    "skarrier_mobs:tunnel_gore_tunnel_1"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 5,
+    "separation": 2,
+    "salt": 971659559
+   }
+  },
+  "skarrier_mobs:tunnel_gore_tunnel_2": {
+   "structures": [
+    "skarrier_mobs:tunnel_gore_tunnel_2"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 5,
+    "separation": 2,
+    "salt": 970697687
+   }
+  },
+  "skarrier_mobs:tunnel_gore_tunnel_3": {
+   "structures": [
+    "skarrier_mobs:tunnel_gore_tunnel_3"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 5,
+    "separation": 2,
+    "salt": 970505313
+   }
+  },
+  "oddities:orchid_shrine": {
+   "structures": [
+    "oddities:orchid_shrine"
+   ],
+   "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 70,
+    "separation": 20,
+    "salt": 1685267439
+   }
+  }
+ },
+ "struct_tags": {
+  "bookofdragons:on_roost_maps": [
+   "bookofdragons:roost_cliff",
+   "bookofdragons:roost_cave",
+   "bookofdragons:roost_glade",
+   "bookofdragons:roost_wetland",
+   "bookofdragons:roost_barrens"
+  ],
+  "bookofdragons:roost_barrens": [
+   "bookofdragons:roost_barrens"
+  ],
+  "bookofdragons:roost_cave": [
+   "bookofdragons:roost_cave"
+  ],
+  "bookofdragons:roost_cliff": [
+   "bookofdragons:roost_cliff"
+  ],
+  "bookofdragons:roost_glade": [
+   "bookofdragons:roost_glade"
+  ],
+  "bookofdragons:roost_wetland": [
+   "bookofdragons:roost_wetland"
+  ],
+  "irons_spellbooks:wayward_compass_locator": [
+   "irons_spellbooks:catacombs"
+  ],
+  "soulsweapons:champions_graves": [
+   "soulsweapons:champions_graves"
+  ],
+  "soulsweapons:decaying_kingdom": [
+   "soulsweapons:decaying_kingdom"
+  ],
+  "cataclysm:berserker_spawn": [
+   "minecraft:fortress"
+  ],
+  "cataclysm:blocked_basalt": [
+   "cataclysm:burning_arena",
+   "cataclysm:soul_black_smith"
+  ],
+  "cataclysm:blocked_geode": [
+   "cataclysm:sunken_city",
+   "cataclysm:ancient_factory",
+   "cataclysm:cursed_pyramid"
+  ],
+  "cataclysm:blocked_lake": [
+   "cataclysm:sunken_city",
+   "cataclysm:ancient_factory",
+   "cataclysm:cursed_pyramid"
+  ],
+  "cataclysm:blocked_magma_block": [
+   "cataclysm:sunken_city"
+  ],
+  "cataclysm:blocked_multiface": [
+   "cataclysm:sunken_city"
+  ],
+  "cataclysm:blocked_ore": [
+   "cataclysm:sunken_city",
+   "cataclysm:ancient_factory",
+   "cataclysm:cursed_pyramid"
+  ],
+  "cataclysm:eye_of_abyss_located": [
+   "cataclysm:sunken_city"
+  ],
+  "cataclysm:eye_of_curse_located": [
+   "cataclysm:frosted_prison"
+  ],
+  "cataclysm:eye_of_desert_located": [
+   "cataclysm:cursed_pyramid"
+  ],
+  "cataclysm:eye_of_flame_located": [
+   "cataclysm:burning_arena"
+  ],
+  "cataclysm:eye_of_mech_located": [
+   "cataclysm:ancient_factory"
+  ],
+  "cataclysm:eye_of_monstrous_located": [
+   "cataclysm:soul_black_smith"
+  ],
+  "cataclysm:eye_of_ruined_located": [
+   "cataclysm:ruined_citadel"
+  ],
+  "cataclysm:eye_of_storm_located": [
+   "cataclysm:acropolis"
+  ],
+  "legendary_monsters:ancient_stronghold_eye_located": [
+   "legendary_monsters:ancient_stronghold"
+  ],
+  "legendary_monsters:ancient_tower_remains_eye_located": [
+   "legendary_monsters:ancient_tower_remains"
+  ],
+  "legendary_monsters:cloudy_temple_eye_located": [
+   "legendary_monsters:cloudy_temple"
+  ],
+  "legendary_monsters:collapsed_kingdom_eye_located": [
+   "legendary_monsters:collapsed_kingdom"
+  ],
+  "legendary_monsters:frostbitten_temple_eye_located": [
+   "legendary_monsters:frostbitten_temple"
+  ],
+  "legendary_monsters:lava_eater_spawn_eye_located": [
+   "legendary_monsters:lava_eater_spawn"
+  ],
+  "legendary_monsters:mossy_temple_eye_located": [
+   "legendary_monsters:mossy_temple"
+  ],
+  "legendary_monsters:ruined_pyramid_eye_located": [
+   "legendary_monsters:ruined_pyramid"
+  ],
+  "legendary_monsters:shulker_tower_eye_located": [
+   "legendary_monsters:shulker_tower"
+  ],
+  "legendary_monsters:skeletosaurus_nest_eye_located": [
+   "legendary_monsters:skeletosaurus_nest"
+  ],
+  "legendary_monsters:soul_fortress_remains_eye_located": [
+   "legendary_monsters:soul_fortress_remains"
+  ],
+  "legendary_monsters:space_station_eye_located": [
+   "legendary_monsters:space_station"
+  ],
+  "graveyard:on_ruins_explorer_maps": [
+   "graveyard:ruins"
+  ]
+ },
+ "maps": [
+  {
+   "table": "irons_spellbooks:chests/citadel/citadel_bookshelf",
+   "destinations": [
+    "irons_spellbooks:ancient_battleground"
+   ],
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar"
+  },
+  {
+   "table": "irons_spellbooks:chests/mountain_tower/mountain_tower",
+   "destinations": [
+    "irons_spellbooks:impaled_icebreaker"
+   ],
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar"
+  }
+ ],
+ "advancements": [
+  {
+   "id": "bookofdragons:roost_discoverer",
+   "title": "advancements.bookofdragons.roost_discoverer.title",
+   "bosses": [],
+   "structures": [
+    "bookofdragons:roost_barrens",
+    "bookofdragons:roost_cave",
+    "bookofdragons:roost_cliff",
+    "bookofdragons:roost_glade",
+    "bookofdragons:roost_wetland"
+   ],
+   "jar": "bookofdragons-1.4-1.20.1.jar"
+  },
+  {
+   "id": "monsterexpansion:hunt_large_monster",
+   "title": "advancements.monsterexpansion.hunt_large_monster.title",
+   "bosses": [
+    "monsterexpansion:ignathos",
+    "monsterexpansion:leivekilth",
+    "monsterexpansion:rakoth",
+    "monsterexpansion:rhyza",
+    "monsterexpansion:skrythe"
+   ],
+   "structures": [],
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar"
+  },
+  {
+   "id": "monsterexpansion:hunt_leivekilth",
+   "title": "advancements.monsterexpansion.hunt_leivekilth.title",
+   "bosses": [
+    "monsterexpansion:leivekilth"
+   ],
+   "structures": [],
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar"
+  },
+  {
+   "id": "monsterexpansion:hunt_rakoth",
+   "title": "advancements.monsterexpansion.hunt_rakoth.title",
+   "bosses": [
+    "monsterexpansion:rakoth"
+   ],
+   "structures": [],
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar"
+  },
+  {
+   "id": "monsterexpansion:hunt_rhyza",
+   "title": "advancements.monsterexpansion.hunt_rhyza.title",
+   "bosses": [
+    "monsterexpansion:rhyza"
+   ],
+   "structures": [],
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar"
+  },
+  {
+   "id": "monsterexpansion:hunt_skrythe",
+   "title": "advancements.monsterexpansion.hunt_skrythe.title",
+   "bosses": [
+    "monsterexpansion:skrythe"
+   ],
+   "structures": [],
+   "jar": "monsterexpansion-1.20.1-v0.7.6.jar"
+  },
+  {
+   "id": "mutantmonsters:burn_zombie_burn",
+   "title": "advancements.mutantmonsters.burn_zombie_burn.title",
+   "bosses": [
+    "mutantmonsters:mutant_zombie"
+   ],
+   "structures": [],
+   "jar": "MutantMonsters-v8.0.8-1.20.1-Forge.jar"
+  },
+  {
+   "id": "mutantmonsters:hulk_smash",
+   "title": "advancements.mutantmonsters.hulk_smash.title",
+   "bosses": [
+    "mutantmonsters:mutant_zombie"
+   ],
+   "structures": [],
+   "jar": "MutantMonsters-v8.0.8-1.20.1-Forge.jar"
+  },
+  {
+   "id": "mutantmonsters:no_bones_about_it",
+   "title": "advancements.mutantmonsters.no_bones_about_it.title",
+   "bosses": [
+    "mutantmonsters:mutant_skeleton"
+   ],
+   "structures": [],
+   "jar": "MutantMonsters-v8.0.8-1.20.1-Forge.jar"
+  },
+  {
+   "id": "mythsandlegends:rider_of_the_shadows",
+   "title": "advancements.mythsandlegends.rider_of_the_shadows.title",
+   "bosses": [
+    "mythsandlegends:black_charro"
+   ],
+   "structures": [],
+   "jar": "mythsandlegends-1.0.6.jar"
+  },
+  {
+   "id": "irons_spellbooks:irons_spellbooks/enter_catacombs",
+   "title": "advancements.irons_spellbooks.enter_catacombs.title",
+   "bosses": [],
+   "structures": [
+    "irons_spellbooks:catacombs"
+   ],
+   "jar": "irons_spellbooks-1.20.1-3.16.3.jar"
+  },
+  {
+   "id": "soulsweapons:arkenplate",
+   "title": "advancements.soulsweapons.arkenplate.title",
+   "bosses": [
+    "soulsweapons:returning_knight"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:draugr_boss",
+   "title": "advancements.soulsweapons.draugr_boss.title",
+   "bosses": [
+    "soulsweapons:draugr_boss"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:end_of_reigns",
+   "title": "advancements.soulsweapons.end_of_reigns.title",
+   "bosses": [
+    "soulsweapons:accursed_lord_boss"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:ender_of_world_ender",
+   "title": "advancements.soulsweapons.ender_of_world_ender.title",
+   "bosses": [
+    "soulsweapons:chaos_monarch"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:excalibur",
+   "title": "advancements.soulsweapons.excalibur.title",
+   "bosses": [
+    "minecraft:warden"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:moonknight",
+   "title": "advancements.soulsweapons.moonknight.title",
+   "bosses": [
+    "soulsweapons:draugr_boss",
+    "soulsweapons:moonknight"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:nightfall",
+   "title": "advancements.soulsweapons.nightfall.title",
+   "bosses": [
+    "soulsweapons:returning_knight"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "soulsweapons:returning_knight",
+   "title": "advancements.soulsweapons.returning_knight.title",
+   "bosses": [
+    "soulsweapons:returning_knight"
+   ],
+   "structures": [],
+   "jar": "soulslike-weaponry-1.4.10-1.20.1-forge.jar"
+  },
+  {
+   "id": "cataclysm:find_acropolis",
+   "title": "advancements.cataclysm.acropolis.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:acropolis"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_ancient_factory",
+   "title": "advancements.cataclysm.ancient_factory.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:ancient_factory"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_burning_arena",
+   "title": "advancements.cataclysm.burning_arena.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:burning_arena"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_cursed_pyramid",
+   "title": "advancements.cataclysm.cursed_pyramid.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:cursed_pyramid"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_frosted_prison",
+   "title": "advancements.cataclysm.frosted_prison.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:frosted_prison"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_ruined_citadel",
+   "title": "advancements.cataclysm.find_ruined_citadel.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:ruined_citadel"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_soul_black_smith",
+   "title": "advancements.cataclysm.find_soul_black_smith.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:soul_black_smith"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:find_sunken_city",
+   "title": "advancements.cataclysm.sunken_city.title",
+   "bosses": [],
+   "structures": [
+    "cataclysm:sunken_city"
+   ],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_all_bosses",
+   "title": "advancements.cataclysm.kill_all_bosses.title",
+   "bosses": [
+    "cataclysm:ancient_remnant",
+    "cataclysm:ender_guardian",
+    "cataclysm:ignis",
+    "cataclysm:maledictus",
+    "cataclysm:netherite_monstrosity",
+    "cataclysm:scylla",
+    "cataclysm:the_harbinger",
+    "cataclysm:the_leviathan"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_clawdian",
+   "title": "advancements.cataclysm.kill_clawdian.title",
+   "bosses": [
+    "cataclysm:clawdian"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_ender_golem",
+   "title": "advancements.cataclysm.kill_ender_golem.title",
+   "bosses": [
+    "cataclysm:ender_golem"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_ender_guardian",
+   "title": "advancements.cataclysm.kill_ender_guardian.title",
+   "bosses": [
+    "cataclysm:ender_guardian"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_harbinger",
+   "title": "advancements.cataclysm.kill_harbinger.title",
+   "bosses": [
+    "cataclysm:the_harbinger"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_ignis",
+   "title": "advancements.cataclysm.kill_ignis.title",
+   "bosses": [
+    "cataclysm:ignis"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_leviathan",
+   "title": "advancements.cataclysm.kill_leviathan.title",
+   "bosses": [
+    "cataclysm:the_leviathan"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_maledictus",
+   "title": "advancements.cataclysm.kill_maledictus.title",
+   "bosses": [
+    "cataclysm:maledictus"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_monstrosity",
+   "title": "advancements.cataclysm.kill_monstrosity.title",
+   "bosses": [
+    "cataclysm:netherite_monstrosity"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_remnant",
+   "title": "advancements.cataclysm.kill_remnant.title",
+   "bosses": [
+    "cataclysm:ancient_remnant"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_revenant",
+   "title": "advancements.cataclysm.kill_revenant.title",
+   "bosses": [
+    "cataclysm:ignited_revenant"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "cataclysm:kill_scylla",
+   "title": "advancements.cataclysm.kill_scylla.title",
+   "bosses": [
+    "cataclysm:scylla"
+   ],
+   "structures": [],
+   "jar": "L_Enders_Cataclysm-3.31.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_annihilation_pursuer",
+   "title": "advancements.legendary_monsters.defeat_annihilation_pursuer.title",
+   "bosses": [
+    "legendary_monsters:annihilation_pursuer"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_beheaded_knight",
+   "title": "advancements.legendary_monsters.defeat_beheaded_knight.title",
+   "bosses": [
+    "legendary_monsters:beheaded_knight"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_cloud_golem",
+   "title": "advancements.legendary_monsters.defeat_cloud_golem.title",
+   "bosses": [
+    "legendary_monsters:cloud_golem"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_dune_sentinel",
+   "title": "advancements.legendary_monsters.defeat_dune_sentinel.title",
+   "bosses": [
+    "legendary_monsters:dune_sentinel"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_endersent",
+   "title": "advancements.legendary_monsters.defeat_endersent.title",
+   "bosses": [
+    "legendary_monsters:endersent"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_frostbitten_golem",
+   "title": "advancements.legendary_monsters.defeat_frostbitten_golem.title",
+   "bosses": [
+    "legendary_monsters:frostbitten_golem"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_haunted_duo",
+   "title": "advancements.legendary_monsters.defeat_haunted_duo.title",
+   "bosses": [
+    "legendary_monsters:beheaded_knight",
+    "legendary_monsters:resurrected_knight"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_lava_eater",
+   "title": "advancements.legendary_monsters.defeat_lava_eater.title",
+   "bosses": [
+    "legendary_monsters:lava_eater"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_overgrown_colossus",
+   "title": "advancements.legendary_monsters.defeat_overgrown_colossus.title",
+   "bosses": [
+    "legendary_monsters:overgrown_colossus"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_posessed_paladin",
+   "title": "advancements.legendary_monsters.defeat_posessed_paladin.title",
+   "bosses": [
+    "legendary_monsters:posessed_paladin"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_resurrected_knight",
+   "title": "advancements.legendary_monsters.defeat_resurrected_knight.title",
+   "bosses": [
+    "legendary_monsters:resurrected_knight"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_shulker_mimic",
+   "title": "advancements.legendary_monsters.defeat_shulker_mimic.title",
+   "bosses": [
+    "legendary_monsters:shulker_mimic"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_skeletosaurus",
+   "title": "advancements.legendary_monsters.defeat_skeletosaurus.title",
+   "bosses": [
+    "legendary_monsters:skeletosaurus"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_the_ancient_guardian",
+   "title": "advancements.legendary_monsters.defeat_ancient_guardian.title",
+   "bosses": [
+    "legendary_monsters:ancient_guardian"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_the_obliterator",
+   "title": "advancements.legendary_monsters.defeat_the_obliterator.title",
+   "bosses": [
+    "legendary_monsters:the_obliterator"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:defeat_withered_abomination",
+   "title": "advancements.legendary_monsters.defeat_withered_abomination.title",
+   "bosses": [
+    "legendary_monsters:withered_abomination"
+   ],
+   "structures": [],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_abandoned_crypt",
+   "title": "advancements.legendary_monsters.locate_abandoned_crypt.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:collapsed_kingdom"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_ancient_stronghold",
+   "title": "advancements.legendary_monsters.locate_ancient_stronghold.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:ancient_stronghold"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_ancient_tower_remains",
+   "title": "advancements.legendary_monsters.locate_ancient_tower_remains.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:ancient_tower_remains"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_cloudy_temple",
+   "title": "advancements.legendary_monsters.locate_cloudy_temple.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:cloudy_temple"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_frostbitten_temple",
+   "title": "advancements.legendary_monsters.locate_frostbitten_temple.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:frostbitten_temple"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_lava_eater",
+   "title": "advancements.legendary_monsters.locate_lava_eater.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:lava_eater_spawn"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_mossy_temple",
+   "title": "advancements.legendary_monsters.locate_mossy_temple.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:mossy_temple"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_ruined_pyramid",
+   "title": "advancements.legendary_monsters.locate_ruined_pyramid.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:ruined_pyramid"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_shulker_tower",
+   "title": "advancements.legendary_monsters.locate_shulker_tower.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:shulker_tower"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_skeletosaurus_nest",
+   "title": "advancements.legendary_monsters.locate_skeletosaurus_nest.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:skeletosaurus_nest"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_soul_fortress_remains",
+   "title": "advancements.legendary_monsters.locate_soul_fortress_remains.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:soul_fortress_remains"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "legendary_monsters:locate_space_station",
+   "title": "advancements.legendary_monsters.locate_space_station.title",
+   "bosses": [],
+   "structures": [
+    "legendary_monsters:space_station"
+   ],
+   "jar": "legendarymonsters-2.2.4 MC 1.20.1.jar"
+  },
+  {
+   "id": "block_factorys_bosses:kill_all_bosses",
+   "title": "advancement.kill_all_bosses.title",
+   "bosses": [
+    "block_factorys_bosses:infernal_dragon",
+    "block_factorys_bosses:kraken",
+    "block_factorys_bosses:sandworm",
+    "block_factorys_bosses:underworld_knight",
+    "block_factorys_bosses:yeti"
+   ],
+   "structures": [],
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar"
+  },
+  {
+   "id": "block_factorys_bosses:kill_dragon",
+   "title": "advancement.kill_dragon.title",
+   "bosses": [
+    "block_factorys_bosses:infernal_dragon"
+   ],
+   "structures": [],
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar"
+  },
+  {
+   "id": "block_factorys_bosses:kill_kraken",
+   "title": "advancement.kill_kraken.title",
+   "bosses": [
+    "block_factorys_bosses:kraken"
+   ],
+   "structures": [],
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar"
+  },
+  {
+   "id": "block_factorys_bosses:kill_sandworm",
+   "title": "advancement.kill_sandworm.title",
+   "bosses": [
+    "block_factorys_bosses:sandworm"
+   ],
+   "structures": [],
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar"
+  },
+  {
+   "id": "block_factorys_bosses:kill_underworld_knight",
+   "title": "advancement.kill_underworld_knight.title",
+   "bosses": [
+    "block_factorys_bosses:underworld_knight"
+   ],
+   "structures": [],
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar"
+  },
+  {
+   "id": "block_factorys_bosses:kill_yeti",
+   "title": "advancement.kill_yeti.title",
+   "bosses": [
+    "block_factorys_bosses:yeti"
+   ],
+   "structures": [],
+   "jar": "block_factorys_bosses-2.1.2-forge-1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/all_overrun_villages",
+   "title": "advancements.graveyard.all_overrun_villages.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:overrun_desert_village",
+    "graveyard:overrun_plains_village",
+    "graveyard:overrun_savanna_village",
+    "graveyard:overrun_snowy_village",
+    "graveyard:overrun_taiga_village"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/crypt",
+   "title": "advancements.graveyard.crypt.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:crypt"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/dead_tree",
+   "title": "advancements.graveyard.dead_tree.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:dead_tree"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/desert_graveyard",
+   "title": "advancements.graveyard.desert_graveyard.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:small_desert_graveyard"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/giant_mushroom",
+   "title": "advancements.graveyard.giant_mushroom.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:giant_mushroom"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/haunted_house",
+   "title": "advancements.graveyard.haunted_house.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:haunted_house"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/large_graveyard",
+   "title": "advancements.graveyard.large_graveyard.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:large_graveyard"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/lich_prison",
+   "title": "advancements.graveyard.lich_prison.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:lich_prison"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/medium_graveyard",
+   "title": "advancements.graveyard.medium_graveyard.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:medium_graveyard"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/overrun_village",
+   "title": "advancements.graveyard.overrun_village.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:overrun_desert_village",
+    "graveyard:overrun_plains_village",
+    "graveyard:overrun_savanna_village",
+    "graveyard:overrun_snowy_village",
+    "graveyard:overrun_taiga_village"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/root",
+   "title": "advancements.graveyard.root.title",
+   "bosses": [],
+   "structures": [
+    "graveyard:small_desert_grave",
+    "graveyard:small_grave",
+    "graveyard:small_mountain_grave",
+    "graveyard:small_savanna_grave"
+   ],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  },
+  {
+   "id": "graveyard:graveyard/summon_lich",
+   "title": "advancements.graveyard.summon_lich.title",
+   "bosses": [
+    "graveyard:lich"
+   ],
+   "structures": [],
+   "jar": "graveyard-FORGE-4.0.0+mc1.20.1.jar"
+  }
+ ]
+}

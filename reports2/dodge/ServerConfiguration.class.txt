@@ -1,0 +1,208 @@
+Compiled from "ServerConfiguration.java"
+public class net.unusual.block_factorys_bosses.configuration.ServerConfiguration {
+  public static final net.minecraftforge.common.ForgeConfigSpec$Builder BUILDER;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec SPEC;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> SANDWORM_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> YETI_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> DRAGON_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> KNIGHT_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> KRAKEN_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> SANDWORM_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> YETI_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> DRAGON_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> KNIGHT_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> KRAKEN_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> SANDWORM_ATK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> YETI_ATK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> DRAGON_ATK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> KNIGHT_ATK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> KRAKEN_ATK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> CAN_USE_ROLL;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> DEFAULT_ROLL_COUNT;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> ROLL_COOLDOWN;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> ROLL_COOLDOWN_MORE;
+
+  public net.unusual.block_factorys_bosses.configuration.ServerConfiguration();
+    Code:
+       0: aload_0
+       1: invokespecial #47                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: new           #7                  // class net/minecraftforge/common/ForgeConfigSpec$Builder
+       3: dup
+       4: invokespecial #51                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder."<init>":()V
+       7: putstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      13: ldc           #55                 // String Boss Health
+      15: invokevirtual #59                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      18: pop
+      19: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      22: ldc           #61                 // String Max Health : 1024
+      24: invokevirtual #64                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      27: ldc           #66                 // String Sandworm Health
+      29: ldc2_w        #67                 // double 200.0d
+      32: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      35: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      38: putstatic     #80                 // Field SANDWORM_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      41: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      44: ldc           #82                 // String Yeti Health
+      46: ldc2_w        #83                 // double 250.0d
+      49: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      52: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      55: putstatic     #86                 // Field YETI_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      58: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      61: ldc           #88                 // String Dragon Health
+      63: ldc2_w        #83                 // double 250.0d
+      66: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      69: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      72: putstatic     #90                 // Field DRAGON_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      75: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      78: ldc           #92                 // String Knight Health
+      80: ldc2_w        #93                 // double 280.0d
+      83: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      86: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      89: putstatic     #96                 // Field KNIGHT_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      92: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      95: ldc           #98                 // String Kraken Health
+      97: ldc2_w        #99                 // double 500.0d
+     100: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     103: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     106: putstatic     #102                // Field KRAKEN_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     109: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     112: invokevirtual #106                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     115: pop
+     116: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     119: ldc           #108                // String Boss Armor
+     121: invokevirtual #59                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     124: pop
+     125: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     128: ldc           #110                // String Max Armor : 30
+     130: invokevirtual #64                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     133: ldc           #112                // String Sandworm Armor
+     135: ldc2_w        #113                // double 20.0d
+     138: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     141: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     144: putstatic     #116                // Field SANDWORM_ARMOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     147: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     150: ldc           #118                // String Yeti Armor
+     152: ldc2_w        #119                // double 5.0d
+     155: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     158: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     161: putstatic     #122                // Field YETI_ARMOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     164: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     167: ldc           #124                // String Dragon Armor
+     169: ldc2_w        #125                // double 25.0d
+     172: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     175: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     178: putstatic     #128                // Field DRAGON_ARMOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     181: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     184: ldc           #130                // String Knight Armor
+     186: ldc2_w        #131                // double 10.0d
+     189: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     192: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     195: putstatic     #134                // Field KNIGHT_ARMOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     198: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     201: ldc           #136                // String Kraken Armor
+     203: ldc2_w        #113                // double 20.0d
+     206: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     209: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     212: putstatic     #138                // Field KRAKEN_ARMOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     215: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     218: invokevirtual #106                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     221: pop
+     222: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     225: ldc           #140                // String Base Boss Damages
+     227: invokevirtual #59                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     230: pop
+     231: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     234: ldc           #142                // String Not all damages sources depends on this variable !
+     236: invokevirtual #64                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     239: ldc           #144                // String Sandworm Damage
+     241: ldc2_w        #131                // double 10.0d
+     244: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     247: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     250: putstatic     #146                // Field SANDWORM_ATK:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     253: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     256: ldc           #148                // String Yeti Damage
+     258: ldc2_w        #149                // double 18.0d
+     261: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     264: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     267: putstatic     #152                // Field YETI_ATK:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     270: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     273: ldc           #154                // String Dragon Damage
+     275: ldc2_w        #155                // double 15.0d
+     278: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     281: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     284: putstatic     #158                // Field DRAGON_ATK:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     287: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     290: ldc           #160                // String Knight Damage
+     292: ldc2_w        #161                // double 13.0d
+     295: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     298: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     301: putstatic     #164                // Field KNIGHT_ATK:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     304: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     307: ldc           #166                // String Kraken Damage
+     309: ldc2_w        #131                // double 10.0d
+     312: invokestatic  #74                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     315: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     318: putstatic     #168                // Field KRAKEN_ATK:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     321: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     324: invokevirtual #106                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     327: pop
+     328: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     331: ldc           #170                // String Gameplay Changes
+     333: invokevirtual #59                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     336: pop
+     337: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     340: ldc           #172                // String Can players use the Roll ability
+     342: iconst_1
+     343: invokevirtual #175                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+     346: putstatic     #177                // Field CAN_USE_ROLL:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     349: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     352: ldc           #179                // String How many roll charges does the player have by default?
+     354: iconst_2
+     355: invokestatic  #184                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     358: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     361: putstatic     #186                // Field DEFAULT_ROLL_COUNT:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     364: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     367: ldc           #188                // String How many ticks does it take for a roll to cooldown? (20 ticks is 1 second)
+     369: bipush        40
+     371: invokestatic  #184                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     374: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     377: putstatic     #190                // Field ROLL_COOLDOWN:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     380: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     383: ldc           #192                // String How many additional ticks should each roll above 1 take to cooldown? (20 ticks is 1 second)
+     385: bipush        20
+     387: invokestatic  #184                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     390: invokevirtual #78                 // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Ljava/lang/Object;)Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     393: putstatic     #194                // Field ROLL_COOLDOWN_MORE:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     396: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     399: invokevirtual #106                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     402: pop
+     403: getstatic     #53                 // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     406: invokevirtual #198                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.build:()Lnet/minecraftforge/common/ForgeConfigSpec;
+     409: putstatic     #200                // Field SPEC:Lnet/minecraftforge/common/ForgeConfigSpec;
+     412: return
+}

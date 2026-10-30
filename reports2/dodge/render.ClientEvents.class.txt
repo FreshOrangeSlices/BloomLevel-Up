@@ -1,0 +1,927 @@
+Compiled from "ClientEvents.java"
+public class net.unusual.block_factorys_bosses.event.ClientEvents {
+  public static final java.util.Map<net.unusual.block_factorys_bosses.entity.boss.knight.UnderworldKnightEntity, net.unusual.block_factorys_bosses.client.particle.util.SubParticleEmitter> PARTICULARS;
+
+  private static final net.minecraft.resources.ResourceLocation DASH_GREEN;
+
+  private static final net.minecraft.resources.ResourceLocation DASH_YELLOW;
+
+  private static final net.minecraft.resources.ResourceLocation DASH_ORANGE;
+
+  private static final net.minecraft.resources.ResourceLocation DASH_RED;
+
+  private static final net.minecraft.resources.ResourceLocation DASH_GREY;
+
+  private static final int TEXTURE_SIZE = 18;
+
+  public net.unusual.block_factorys_bosses.event.ClientEvents();
+    Code:
+       0: aload_0
+       1: invokespecial #97                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void renderGUI(net.minecraft.client.gui.GuiGraphics, float);
+    Code:
+       0: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: astore_2
+       4: aload_2
+       5: getfield      #111                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+       8: getfield      #117                // Field net/minecraft/client/Options.f_92062_:Z
+      11: ifne          31
+      14: aload_2
+      15: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      18: ifnull        31
+      21: aload_2
+      22: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      25: invokevirtual #127                // Method net/minecraft/client/player/LocalPlayer.m_5833_:()Z
+      28: ifeq          32
+      31: return
+      32: getstatic     #131                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.ROLL_GUI:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      35: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+      38: checkcast     #137                // class java/lang/Boolean
+      41: invokevirtual #140                // Method java/lang/Boolean.booleanValue:()Z
+      44: ifne          48
+      47: return
+      48: getstatic     #145                // Field net/unusual/block_factorys_bosses/configuration/ServerConfiguration.CAN_USE_ROLL:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+      51: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+      54: checkcast     #137                // class java/lang/Boolean
+      57: invokevirtual #140                // Method java/lang/Boolean.booleanValue:()Z
+      60: ifne          64
+      63: return
+      64: aload_0
+      65: aload_2
+      66: aload_0
+      67: invokedynamic #162,  0            // InvokeDynamic #0:run:(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/GuiGraphics;)Ljava/lang/Runnable;
+      72: invokevirtual #168                // Method net/minecraft/client/gui/GuiGraphics.m_286007_:(Ljava/lang/Runnable;)V
+      75: return
+
+  private static void renderRollGUI(net.minecraft.client.Minecraft, net.minecraft.client.gui.GuiGraphics);
+    Code:
+       0: aload_0
+       1: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       4: ifnonnull     8
+       7: return
+       8: invokestatic  #180                // Method com/mojang/blaze3d/systems/RenderSystem.enableBlend:()V
+      11: aload_0
+      12: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      15: invokestatic  #184                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.fromPlayer:(Lnet/minecraft/world/entity/player/Player;)Ljava/util/Optional;
+      18: astore_2
+      19: aload_2
+      20: invokevirtual #189                // Method java/util/Optional.isEmpty:()Z
+      23: ifeq          27
+      26: return
+      27: aload_1
+      28: invokevirtual #193                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      31: invokevirtual #198                // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+      34: aload_2
+      35: invokevirtual #199                // Method java/util/Optional.get:()Ljava/lang/Object;
+      38: checkcast     #37                 // class net/unusual/block_factorys_bosses/capability/entity/RollCap
+      41: invokeinterface #203,  1          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.rollCount:()I
+      46: istore_3
+      47: fconst_0
+      48: fstore        4
+      50: iconst_0
+      51: istore        5
+      53: iload         5
+      55: iload_3
+      56: if_icmpge     86
+      59: fload         4
+      61: fconst_1
+      62: aload_2
+      63: invokevirtual #199                // Method java/util/Optional.get:()Ljava/lang/Object;
+      66: checkcast     #37                 // class net/unusual/block_factorys_bosses/capability/entity/RollCap
+      69: iload         5
+      71: invokeinterface #207,  2          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.getCooldown:(I)F
+      76: fsub
+      77: fadd
+      78: fstore        4
+      80: iinc          5, 1
+      83: goto          53
+      86: getstatic     #209                // Field DASH_GREY:Lnet/minecraft/resources/ResourceLocation;
+      89: astore        5
+      91: ldc           #210                // int 3487029
+      93: istore        6
+      95: fload         4
+      97: fconst_1
+      98: fsub
+      99: iload_3
+     100: iconst_1
+     101: isub
+     102: i2f
+     103: ldc           #211                // float 0.75f
+     105: fmul
+     106: fcmpl
+     107: iflt          122
+     110: getstatic     #213                // Field DASH_GREEN:Lnet/minecraft/resources/ResourceLocation;
+     113: astore        5
+     115: ldc           #214                // int 7654656
+     117: istore        6
+     119: goto          192
+     122: fload         4
+     124: fconst_1
+     125: fsub
+     126: iload_3
+     127: iconst_1
+     128: isub
+     129: i2f
+     130: ldc           #217                // float 0.5f
+     132: fmul
+     133: fcmpl
+     134: iflt          149
+     137: getstatic     #219                // Field DASH_YELLOW:Lnet/minecraft/resources/ResourceLocation;
+     140: astore        5
+     142: ldc           #220                // int 15250688
+     144: istore        6
+     146: goto          192
+     149: fload         4
+     151: fconst_1
+     152: fsub
+     153: iload_3
+     154: iconst_1
+     155: isub
+     156: i2f
+     157: ldc           #221                // float 0.25f
+     159: fmul
+     160: fcmpl
+     161: iflt          176
+     164: getstatic     #223                // Field DASH_ORANGE:Lnet/minecraft/resources/ResourceLocation;
+     167: astore        5
+     169: ldc           #224                // int 15224064
+     171: istore        6
+     173: goto          192
+     176: fload         4
+     178: fconst_1
+     179: fcmpl
+     180: iflt          192
+     183: getstatic     #226                // Field DASH_RED:Lnet/minecraft/resources/ResourceLocation;
+     186: astore        5
+     188: ldc           #227                // int 14221315
+     190: istore        6
+     192: getstatic     #230                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.ROLL_GUI_OFFSET_X:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     195: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+     198: checkcast     #232                // class java/lang/Integer
+     201: invokevirtual #235                // Method java/lang/Integer.intValue:()I
+     204: istore        7
+     206: getstatic     #238                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.ROLL_GUI_OFFSET_Y:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     209: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+     212: checkcast     #232                // class java/lang/Integer
+     215: invokevirtual #235                // Method java/lang/Integer.intValue:()I
+     218: istore        8
+     220: getstatic     #242                // Field net/unusual/block_factorys_bosses/event/ClientEvents$1.$SwitchMap$net$unusual$block_factorys_bosses$configuration$ClientConfiguration$GUIAnchors:[I
+     223: getstatic     #245                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.ROLL_GUI_OFFSET_ANCHOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     226: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+     229: checkcast     #20                 // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+     232: invokevirtual #248                // Method net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors.ordinal:()I
+     235: iaload
+     236: tableswitch   { // 1 to 7
+                     1: 288
+                     2: 300
+                     3: 328
+                     4: 328
+                     5: 332
+                     6: 332
+                     7: 360
+               default: 280
+          }
+     280: new           #250                // class java/lang/IncompatibleClassChangeError
+     283: dup
+     284: invokespecial #251                // Method java/lang/IncompatibleClassChangeError."<init>":()V
+     287: athrow
+     288: aload_1
+     289: invokevirtual #254                // Method net/minecraft/client/gui/GuiGraphics.m_280182_:()I
+     292: iconst_2
+     293: idiv
+     294: bipush        92
+     296: iadd
+     297: goto          369
+     300: aload_1
+     301: invokevirtual #254                // Method net/minecraft/client/gui/GuiGraphics.m_280182_:()I
+     304: iconst_2
+     305: idiv
+     306: bipush        110
+     308: isub
+     309: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     312: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     315: fload         4
+     317: f2i
+     318: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     321: invokevirtual #270                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     324: isub
+     325: goto          369
+     328: iconst_1
+     329: goto          369
+     332: aload_1
+     333: invokevirtual #254                // Method net/minecraft/client/gui/GuiGraphics.m_280182_:()I
+     336: bipush        18
+     338: isub
+     339: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     342: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     345: fload         4
+     347: f2i
+     348: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     351: invokevirtual #270                // Method net/minecraft/client/gui/Font.m_92895_:(Ljava/lang/String;)I
+     354: isub
+     355: iconst_1
+     356: isub
+     357: goto          369
+     360: aload_1
+     361: invokevirtual #254                // Method net/minecraft/client/gui/GuiGraphics.m_280182_:()I
+     364: iconst_2
+     365: idiv
+     366: bipush        9
+     368: isub
+     369: istore        9
+     371: getstatic     #242                // Field net/unusual/block_factorys_bosses/event/ClientEvents$1.$SwitchMap$net$unusual$block_factorys_bosses$configuration$ClientConfiguration$GUIAnchors:[I
+     374: getstatic     #245                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.ROLL_GUI_OFFSET_ANCHOR:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+     377: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+     380: checkcast     #20                 // class net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors
+     383: invokevirtual #248                // Method net/unusual/block_factorys_bosses/configuration/ClientConfiguration$GUIAnchors.ordinal:()I
+     386: iaload
+     387: tableswitch   { // 1 to 7
+                     1: 436
+                     2: 436
+                     3: 445
+                     4: 436
+                     5: 445
+                     6: 436
+                     7: 450
+               default: 428
+          }
+     428: new           #250                // class java/lang/IncompatibleClassChangeError
+     431: dup
+     432: invokespecial #251                // Method java/lang/IncompatibleClassChangeError."<init>":()V
+     435: athrow
+     436: aload_1
+     437: invokevirtual #273                // Method net/minecraft/client/gui/GuiGraphics.m_280206_:()I
+     440: iconst_1
+     441: isub
+     442: goto          462
+     445: bipush        19
+     447: goto          462
+     450: aload_1
+     451: invokevirtual #273                // Method net/minecraft/client/gui/GuiGraphics.m_280206_:()I
+     454: iconst_2
+     455: idiv
+     456: bipush        9
+     458: isub
+     459: bipush        18
+     461: iadd
+     462: istore        10
+     464: aload_1
+     465: aload         5
+     467: iload         9
+     469: iload         7
+     471: iadd
+     472: iload         10
+     474: bipush        18
+     476: isub
+     477: iload         8
+     479: iadd
+     480: fconst_0
+     481: fconst_0
+     482: bipush        18
+     484: bipush        18
+     486: bipush        18
+     488: bipush        18
+     490: invokevirtual #277                // Method net/minecraft/client/gui/GuiGraphics.m_280163_:(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+     493: aload_1
+     494: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     497: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     500: fload         4
+     502: f2i
+     503: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     506: iload         9
+     508: bipush        18
+     510: iadd
+     511: iload         7
+     513: iadd
+     514: iconst_1
+     515: iadd
+     516: iload         10
+     518: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     521: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     524: invokestatic  #283                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     527: pop
+     528: bipush        9
+     530: isub
+     531: iload         8
+     533: iadd
+     534: iconst_0
+     535: iconst_0
+     536: invokevirtual #287                // Method net/minecraft/client/gui/GuiGraphics.m_280056_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+     539: pop
+     540: aload_1
+     541: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     544: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     547: fload         4
+     549: f2i
+     550: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     553: iload         9
+     555: bipush        18
+     557: iadd
+     558: iload         7
+     560: iadd
+     561: iconst_1
+     562: isub
+     563: iload         10
+     565: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     568: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     571: invokestatic  #283                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     574: pop
+     575: bipush        9
+     577: isub
+     578: iload         8
+     580: iadd
+     581: iconst_0
+     582: iconst_0
+     583: invokevirtual #287                // Method net/minecraft/client/gui/GuiGraphics.m_280056_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+     586: pop
+     587: aload_1
+     588: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     591: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     594: fload         4
+     596: f2i
+     597: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     600: iload         9
+     602: bipush        18
+     604: iadd
+     605: iload         7
+     607: iadd
+     608: iload         10
+     610: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     613: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     616: invokestatic  #283                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     619: pop
+     620: bipush        9
+     622: isub
+     623: iload         8
+     625: iadd
+     626: iconst_1
+     627: iadd
+     628: iconst_0
+     629: iconst_0
+     630: invokevirtual #287                // Method net/minecraft/client/gui/GuiGraphics.m_280056_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+     633: pop
+     634: aload_1
+     635: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     638: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     641: fload         4
+     643: f2i
+     644: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     647: iload         9
+     649: bipush        18
+     651: iadd
+     652: iload         7
+     654: iadd
+     655: iload         10
+     657: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     660: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     663: invokestatic  #283                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     666: pop
+     667: bipush        9
+     669: isub
+     670: iload         8
+     672: iadd
+     673: iconst_1
+     674: isub
+     675: iconst_0
+     676: iconst_0
+     677: invokevirtual #287                // Method net/minecraft/client/gui/GuiGraphics.m_280056_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+     680: pop
+     681: aload_1
+     682: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     685: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     688: fload         4
+     690: f2i
+     691: invokestatic  #264                // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     694: iload         9
+     696: bipush        18
+     698: iadd
+     699: iload         7
+     701: iadd
+     702: iload         10
+     704: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     707: getfield      #258                // Field net/minecraft/client/Minecraft.f_91062_:Lnet/minecraft/client/gui/Font;
+     710: invokestatic  #283                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     713: pop
+     714: bipush        9
+     716: isub
+     717: iload         8
+     719: iadd
+     720: iload         6
+     722: iconst_0
+     723: invokevirtual #287                // Method net/minecraft/client/gui/GuiGraphics.m_280056_:(Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+     726: pop
+     727: aload_1
+     728: invokevirtual #193                // Method net/minecraft/client/gui/GuiGraphics.m_280168_:()Lcom/mojang/blaze3d/vertex/PoseStack;
+     731: invokevirtual #290                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+     734: invokestatic  #293                // Method com/mojang/blaze3d/systems/RenderSystem.disableBlend:()V
+     737: return
+
+  public static void onPreRenderGui(net.minecraftforge.client.event.RenderGuiEvent$Pre);
+    Code:
+       0: aload_0
+       1: invokevirtual #312                // Method net/minecraftforge/client/event/RenderGuiEvent$Pre.getGuiGraphics:()Lnet/minecraft/client/gui/GuiGraphics;
+       4: aload_0
+       5: invokevirtual #316                // Method net/minecraftforge/client/event/RenderGuiEvent$Pre.getPartialTick:()F
+       8: invokestatic  #318                // Method renderGUI:(Lnet/minecraft/client/gui/GuiGraphics;F)V
+      11: return
+
+  public static void computeCameraAngles(net.minecraftforge.client.event.ViewportEvent$ComputeCameraAngles);
+    Code:
+       0: getstatic     #325                // Field net/unusual/block_factorys_bosses/configuration/ClientConfiguration.FIRST_PERSON_ROLL:Lnet/minecraftforge/common/ForgeConfigSpec$ConfigValue;
+       3: invokevirtual #135                // Method net/minecraftforge/common/ForgeConfigSpec$ConfigValue.get:()Ljava/lang/Object;
+       6: checkcast     #137                // class java/lang/Boolean
+       9: invokevirtual #140                // Method java/lang/Boolean.booleanValue:()Z
+      12: ifne          16
+      15: return
+      16: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      19: astore_1
+      20: aload_1
+      21: getfield      #329                // Field net/minecraft/client/Minecraft.f_91073_:Lnet/minecraft/client/multiplayer/ClientLevel;
+      24: astore_2
+      25: aload_2
+      26: ifnull        213
+      29: aload_1
+      30: getfield      #111                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      33: invokevirtual #333                // Method net/minecraft/client/Options.m_92176_:()Lnet/minecraft/client/CameraType;
+      36: getstatic     #339                // Field net/minecraft/client/CameraType.FIRST_PERSON:Lnet/minecraft/client/CameraType;
+      39: if_acmpne     213
+      42: aload_1
+      43: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      46: ifnull        213
+      49: aload_1
+      50: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      53: invokestatic  #184                // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.fromPlayer:(Lnet/minecraft/world/entity/player/Player;)Ljava/util/Optional;
+      56: aconst_null
+      57: invokevirtual #342                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      60: checkcast     #37                 // class net/unusual/block_factorys_bosses/capability/entity/RollCap
+      63: astore_3
+      64: aload_3
+      65: ifnull        213
+      68: aload_3
+      69: invokeinterface #345,  1          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.isRolling:()Z
+      74: ifeq          213
+      77: aload_3
+      78: invokeinterface #348,  1          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.getRoll:()I
+      83: i2d
+      84: aload_0
+      85: invokevirtual #351                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getPartialTick:()D
+      88: dsub
+      89: aload_3
+      90: invokeinterface #354,  1          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.getRollDuration:()I
+      95: i2f
+      96: f2d
+      97: ddiv
+      98: d2f
+      99: fstore        4
+     101: getstatic     #357                // Field net/unusual/block_factorys_bosses/event/ClientEvents$1.$SwitchMap$net$unusual$block_factorys_bosses$capability$entity$RollCap$RollCapHandler$RollType:[I
+     104: aload_3
+     105: invokeinterface #361,  1          // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.getDirection:()Lnet/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType;
+     110: invokevirtual #362                // Method net/unusual/block_factorys_bosses/capability/entity/RollCap$RollCapHandler$RollType.ordinal:()I
+     113: iaload
+     114: tableswitch   { // 1 to 4
+                     1: 144
+                     2: 162
+                     3: 180
+                     4: 198
+               default: 213
+          }
+     144: aload_0
+     145: aload_0
+     146: invokevirtual #367                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getPitch:()F
+     149: fload         4
+     151: ldc_w         #368                // float 360.0f
+     154: fmul
+     155: fsub
+     156: invokevirtual #372                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setPitch:(F)V
+     159: goto          213
+     162: aload_0
+     163: aload_0
+     164: invokevirtual #367                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getPitch:()F
+     167: fload         4
+     169: ldc_w         #368                // float 360.0f
+     172: fmul
+     173: fadd
+     174: invokevirtual #372                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setPitch:(F)V
+     177: goto          213
+     180: aload_0
+     181: aload_0
+     182: invokevirtual #374                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getRoll:()F
+     185: fload         4
+     187: ldc_w         #368                // float 360.0f
+     190: fmul
+     191: fadd
+     192: invokevirtual #377                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setRoll:(F)V
+     195: goto          213
+     198: aload_0
+     199: aload_0
+     200: invokevirtual #374                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getRoll:()F
+     203: fload         4
+     205: ldc_w         #368                // float 360.0f
+     208: fmul
+     209: fsub
+     210: invokevirtual #377                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setRoll:(F)V
+     213: return
+
+  public static void updateMovementInput(net.minecraftforge.client.event.MovementInputUpdateEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #390                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #123                // class net/minecraft/client/player/LocalPlayer
+       9: ifeq          102
+      12: aload_2
+      13: checkcast     #123                // class net/minecraft/client/player/LocalPlayer
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #394                // Method net/minecraft/client/player/LocalPlayer.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: ldc_w         #396                // class net/unusual/block_factorys_bosses/entity/boss/yeti/YetiEntity
+      24: aload_1
+      25: invokevirtual #400                // Method net/minecraft/client/player/LocalPlayer.m_20191_:()Lnet/minecraft/world/phys/AABB;
+      28: ldc2_w        #401                // double 16.0d
+      31: invokevirtual #408                // Method net/minecraft/world/phys/AABB.m_82400_:(D)Lnet/minecraft/world/phys/AABB;
+      34: invokedynamic #420,  0            // InvokeDynamic #1:test:()Ljava/util/function/Predicate;
+      39: invokevirtual #426                // Method net/minecraft/world/level/Level.m_6443_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+      42: aload_0
+      43: invokedynamic #439,  0            // InvokeDynamic #2:accept:(Lnet/minecraftforge/client/event/MovementInputUpdateEvent;)Ljava/util/function/Consumer;
+      48: invokeinterface #445,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      53: aload_1
+      54: invokevirtual #448                // Method net/minecraft/client/player/LocalPlayer.m_6117_:()Z
+      57: ifeq          102
+      60: aload_1
+      61: invokevirtual #452                // Method net/minecraft/client/player/LocalPlayer.m_21211_:()Lnet/minecraft/world/item/ItemStack;
+      64: invokevirtual #458                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      67: getstatic     #464                // Field net/unusual/block_factorys_bosses/init/BossesRiseItems.ICE_GAUNTLET:Lnet/minecraftforge/registries/RegistryObject;
+      70: invokevirtual #467                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      73: if_acmpne     102
+      76: aload_0
+      77: invokevirtual #471                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      80: dup
+      81: getfield      #476                // Field net/minecraft/client/player/Input.f_108566_:F
+      84: fconst_2
+      85: fmul
+      86: putfield      #476                // Field net/minecraft/client/player/Input.f_108566_:F
+      89: aload_0
+      90: invokevirtual #471                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      93: dup
+      94: getfield      #479                // Field net/minecraft/client/player/Input.f_108567_:F
+      97: fconst_2
+      98: fmul
+      99: putfield      #479                // Field net/minecraft/client/player/Input.f_108567_:F
+     102: return
+
+  public static void onTickPre(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: getstatic     #485                // Field PARTICULARS:Ljava/util/Map;
+       3: invokeinterface #491,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+       8: invokeinterface #497,  1          // InterfaceMethod java/util/Set.stream:()Ljava/util/stream/Stream;
+      13: invokedynamic #506,  0            // InvokeDynamic #3:test:()Ljava/util/function/Predicate;
+      18: invokeinterface #512,  2          // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+      23: invokeinterface #516,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+      28: astore_1
+      29: aload_1
+      30: invokeinterface #520,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      35: astore_2
+      36: aload_2
+      37: invokeinterface #525,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      42: ifeq          68
+      45: aload_2
+      46: invokeinterface #528,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      51: checkcast     #530                // class net/unusual/block_factorys_bosses/entity/boss/knight/UnderworldKnightEntity
+      54: astore_3
+      55: getstatic     #485                // Field PARTICULARS:Ljava/util/Map;
+      58: aload_3
+      59: invokeinterface #533,  2          // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      64: pop
+      65: goto          36
+      68: invokestatic  #538                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.isCameraActive:()Z
+      71: ifeq          122
+      74: invokestatic  #542                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.getTrackedObject:()Lnet/unusual/block_factorys_bosses/client/CinematicEntity;
+      77: astore_2
+      78: aload_2
+      79: instanceof    #499                // class net/minecraft/world/entity/Entity
+      82: ifeq          100
+      85: aload_2
+      86: checkcast     #499                // class net/minecraft/world/entity/Entity
+      89: astore_3
+      90: aload_3
+      91: invokevirtual #502                // Method net/minecraft/world/entity/Entity.m_213877_:()Z
+      94: ifeq          100
+      97: invokestatic  #545                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.stopCinematicCamera:()V
+     100: aload_2
+     101: instanceof    #549                // class net/minecraft/world/level/block/entity/BlockEntity
+     104: ifeq          122
+     107: aload_2
+     108: checkcast     #549                // class net/minecraft/world/level/block/entity/BlockEntity
+     111: astore_3
+     112: aload_3
+     113: invokevirtual #552                // Method net/minecraft/world/level/block/entity/BlockEntity.m_58901_:()Z
+     116: ifeq          122
+     119: invokestatic  #545                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.stopCinematicCamera:()V
+     122: invokestatic  #555                // Method onTick:()V
+     125: return
+
+  public static void onTick();
+    Code:
+       0: invokestatic  #570                // Method isGameActive:()Z
+       3: ifne          7
+       6: return
+       7: invokestatic  #575                // Method net/unusual/block_factorys_bosses/client/renderer/DragonBonesFirstPersonRenderer.clientTick:()V
+      10: invokestatic  #578                // Method net/unusual/block_factorys_bosses/client/renderer/KnightFirstPersonRenderer.clientTick:()V
+      13: invokestatic  #583                // Method net/unusual/block_factorys_bosses/client/AnimationTickHolder.tick:()V
+      16: return
+
+  public static void onLoadWorld(net.minecraftforge.event.level.LevelEvent$Load);
+    Code:
+       0: aload_0
+       1: invokevirtual #589                // Method net/minecraftforge/event/level/LevelEvent$Load.getLevel:()Lnet/minecraft/world/level/LevelAccessor;
+       4: astore_1
+       5: aload_1
+       6: invokeinterface #594,  1          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_5776_:()Z
+      11: ifeq          24
+      14: aload_1
+      15: instanceof    #364                // class net/minecraft/client/multiplayer/ClientLevel
+      18: ifeq          24
+      21: invokestatic  #597                // Method net/unusual/block_factorys_bosses/client/AnimationTickHolder.reset:()V
+      24: return
+
+  public static void onUnloadWorld(net.minecraftforge.event.level.LevelEvent$Unload);
+    Code:
+       0: aload_0
+       1: invokevirtual #603                // Method net/minecraftforge/event/level/LevelEvent$Unload.getLevel:()Lnet/minecraft/world/level/LevelAccessor;
+       4: invokeinterface #594,  1          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_5776_:()Z
+       9: ifne          13
+      12: return
+      13: invokestatic  #597                // Method net/unusual/block_factorys_bosses/client/AnimationTickHolder.reset:()V
+      16: return
+
+  public static void serverQuit(net.minecraftforge.event.server.ServerStoppingEvent);
+    Code:
+       0: invokestatic  #545                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.stopCinematicCamera:()V
+       3: return
+
+  public static void playerQuit(net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent);
+    Code:
+       0: invokestatic  #545                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.stopCinematicCamera:()V
+       3: return
+
+  public static void entityDeath(net.minecraftforge.event.entity.living.LivingDeathEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #617                // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #547                // class net/unusual/block_factorys_bosses/client/CinematicEntity
+       9: ifeq          20
+      12: aload_2
+      13: checkcast     #547                // class net/unusual/block_factorys_bosses/client/CinematicEntity
+      16: astore_1
+      17: goto          21
+      20: return
+      21: aload_1
+      22: invokestatic  #542                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.getTrackedObject:()Lnet/unusual/block_factorys_bosses/client/CinematicEntity;
+      25: if_acmpeq     29
+      28: return
+      29: invokestatic  #545                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.stopCinematicCamera:()V
+      32: return
+
+  public static void playerDeath(net.minecraftforge.event.entity.player.PlayerEvent$PlayerRespawnEvent);
+    Code:
+       0: invokestatic  #545                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.stopCinematicCamera:()V
+       3: return
+
+  public static void onRenderPlayerEvent(net.minecraftforge.client.event.RenderPlayerEvent$Pre);
+    Code:
+       0: aload_0
+       1: invokevirtual #624                // Method net/minecraftforge/client/event/RenderPlayerEvent$Pre.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_3
+       5: aload_3
+       6: instanceof    #123                // class net/minecraft/client/player/LocalPlayer
+       9: ifeq          217
+      12: aload_3
+      13: checkcast     #123                // class net/minecraft/client/player/LocalPlayer
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #628                // Method net/minecraft/client/player/LocalPlayer.m_275832_:()Lnet/minecraft/world/entity/Entity;
+      21: astore_3
+      22: aload_3
+      23: instanceof    #630                // class net/unusual/block_factorys_bosses/entity/decoration/CannonEntity
+      26: ifeq          217
+      29: aload_3
+      30: checkcast     #630                // class net/unusual/block_factorys_bosses/entity/decoration/CannonEntity
+      33: astore_2
+      34: aload_2
+      35: getfield      #634                // Field net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.bonePos:Lorg/joml/Vector3d;
+      38: ifnull        217
+      41: aload_0
+      42: invokevirtual #637                // Method net/minecraftforge/client/event/RenderPlayerEvent$Pre.getPoseStack:()Lcom/mojang/blaze3d/vertex/PoseStack;
+      45: astore_3
+      46: aload_0
+      47: invokevirtual #638                // Method net/minecraftforge/client/event/RenderPlayerEvent$Pre.getPartialTick:()F
+      50: fstore        4
+      52: aload_1
+      53: fload         4
+      55: invokevirtual #642                // Method net/minecraft/client/player/LocalPlayer.m_20318_:(F)Lnet/minecraft/world/phys/Vec3;
+      58: aload_2
+      59: fload         4
+      61: invokevirtual #643                // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.m_20318_:(F)Lnet/minecraft/world/phys/Vec3;
+      64: invokevirtual #649                // Method net/minecraft/world/phys/Vec3.m_82546_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+      67: new           #645                // class net/minecraft/world/phys/Vec3
+      70: dup
+      71: dconst_0
+      72: aload_1
+      73: invokevirtual #652                // Method net/minecraft/client/player/LocalPlayer.m_6049_:()D
+      76: dneg
+      77: dconst_0
+      78: invokespecial #655                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+      81: aload_2
+      82: fload         4
+      84: invokevirtual #659                // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.m_5686_:(F)F
+      87: ldc_w         #660                // float 0.017453292f
+      90: fmul
+      91: invokevirtual #663                // Method net/minecraft/world/phys/Vec3.m_82496_:(F)Lnet/minecraft/world/phys/Vec3;
+      94: aload_2
+      95: fload         4
+      97: invokevirtual #666                // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.m_5675_:(F)F
+     100: fneg
+     101: ldc_w         #667                // float 180.0f
+     104: fsub
+     105: ldc_w         #660                // float 0.017453292f
+     108: fmul
+     109: invokevirtual #670                // Method net/minecraft/world/phys/Vec3.m_82524_:(F)Lnet/minecraft/world/phys/Vec3;
+     112: invokevirtual #673                // Method net/minecraft/world/phys/Vec3.m_82549_:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+     115: astore        5
+     117: aload_3
+     118: aload         5
+     120: getfield      #677                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+     123: dneg
+     124: aload         5
+     126: getfield      #680                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+     129: dneg
+     130: aload         5
+     132: getfield      #683                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+     135: dneg
+     136: invokevirtual #686                // Method com/mojang/blaze3d/vertex/PoseStack.m_85837_:(DDD)V
+     139: aload_3
+     140: aload_2
+     141: getfield      #634                // Field net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.bonePos:Lorg/joml/Vector3d;
+     144: getfield      #690                // Field org/joml/Vector3d.x:D
+     147: aload_2
+     148: getfield      #634                // Field net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.bonePos:Lorg/joml/Vector3d;
+     151: getfield      #692                // Field org/joml/Vector3d.y:D
+     154: aload_2
+     155: getfield      #634                // Field net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.bonePos:Lorg/joml/Vector3d;
+     158: getfield      #695                // Field org/joml/Vector3d.z:D
+     161: invokevirtual #686                // Method com/mojang/blaze3d/vertex/PoseStack.m_85837_:(DDD)V
+     164: aload_3
+     165: getstatic     #701                // Field com/mojang/math/Axis.f_252392_:Lcom/mojang/math/Axis;
+     168: aload_2
+     169: invokevirtual #704                // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.m_146908_:()F
+     172: invokeinterface #708,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     177: invokevirtual #712                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     180: aload_3
+     181: getstatic     #715                // Field com/mojang/math/Axis.f_252495_:Lcom/mojang/math/Axis;
+     184: aload_2
+     185: aload_0
+     186: invokevirtual #638                // Method net/minecraftforge/client/event/RenderPlayerEvent$Pre.getPartialTick:()F
+     189: invokevirtual #659                // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.m_5686_:(F)F
+     192: fneg
+     193: invokeinterface #708,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     198: invokevirtual #712                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     201: aload_3
+     202: getstatic     #718                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+     205: aload_2
+     206: invokevirtual #704                // Method net/unusual/block_factorys_bosses/entity/decoration/CannonEntity.m_146908_:()F
+     209: invokeinterface #708,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     214: invokevirtual #712                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     217: return
+
+  public static void onClientTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #729                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #530                // class net/unusual/block_factorys_bosses/entity/boss/knight/UnderworldKnightEntity
+       9: ifeq          95
+      12: aload_2
+      13: checkcast     #530                // class net/unusual/block_factorys_bosses/entity/boss/knight/UnderworldKnightEntity
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #730                // Method net/unusual/block_factorys_bosses/entity/boss/knight/UnderworldKnightEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: getfield      #733                // Field net/minecraft/world/level/Level.f_46443_:Z
+      24: ifeq          95
+      27: getstatic     #485                // Field PARTICULARS:Ljava/util/Map;
+      30: aload_1
+      31: invokeinterface #736,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      36: ifne          95
+      39: aload_1
+      40: invokevirtual #739                // Method net/unusual/block_factorys_bosses/entity/boss/knight/UnderworldKnightEntity.isTransformed:()Z
+      43: ifeq          95
+      46: getstatic     #744                // Field net/unusual/block_factorys_bosses/geckolib/boss/knight/UnderworldKnightRenderer.BONER:Ljava/util/Map;
+      49: ldc_w         #746                // String head
+      52: invokeinterface #748,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      57: checkcast     #750                // class net/unusual/block_factorys_bosses/geckolib/util/ParticleLocator
+      60: astore_2
+      61: aload_2
+      62: ifnull        95
+      65: aload_1
+      66: getstatic     #755                // Field net/unusual/block_factorys_bosses/init/BossesRiseParticleTypes.PHASE_TRANSITION_10:Lnet/minecraftforge/registries/RegistryObject;
+      69: invokevirtual #467                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      72: checkcast     #757                // class net/minecraft/core/particles/ParticleOptions
+      75: aload_2
+      76: invokestatic  #763                // Method net/unusual/block_factorys_bosses/client/particle/util/SubParticleEmitter.attachNewParticle:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/particles/ParticleOptions;Lnet/unusual/block_factorys_bosses/geckolib/util/ParticleLocator;)Lnet/unusual/block_factorys_bosses/client/particle/util/SubParticleEmitter;
+      79: astore_3
+      80: aload_3
+      81: ifnull        95
+      84: getstatic     #485                // Field PARTICULARS:Ljava/util/Map;
+      87: aload_1
+      88: aload_3
+      89: invokeinterface #767,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      94: pop
+      95: return
+
+  protected static boolean isGameActive();
+    Code:
+       0: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: getfield      #329                // Field net/minecraft/client/Minecraft.f_91073_:Lnet/minecraft/client/multiplayer/ClientLevel;
+       6: ifnull        22
+       9: invokestatic  #107                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      12: getfield      #121                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+      15: ifnull        22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+
+  private static void lambda$updateMovementInput$2(net.minecraftforge.client.event.MovementInputUpdateEvent, net.unusual.block_factorys_bosses.entity.boss.yeti.YetiEntity);
+    Code:
+       0: aload_1
+       1: invokevirtual #776                // Method net/unusual/block_factorys_bosses/entity/boss/yeti/YetiEntity.m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+       4: getstatic     #780                // Field net/unusual/block_factorys_bosses/entity/boss/yeti/YetiEntity.DATA_GROUNDSMASH_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+       7: invokevirtual #786                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      10: checkcast     #232                // class java/lang/Integer
+      13: invokevirtual #235                // Method java/lang/Integer.intValue:()I
+      16: bipush        10
+      18: if_icmple     68
+      21: aload_1
+      22: invokevirtual #776                // Method net/unusual/block_factorys_bosses/entity/boss/yeti/YetiEntity.m_20088_:()Lnet/minecraft/network/syncher/SynchedEntityData;
+      25: getstatic     #780                // Field net/unusual/block_factorys_bosses/entity/boss/yeti/YetiEntity.DATA_GROUNDSMASH_ANIMTIME:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      28: invokevirtual #786                // Method net/minecraft/network/syncher/SynchedEntityData.m_135370_:(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;
+      31: checkcast     #232                // class java/lang/Integer
+      34: invokevirtual #235                // Method java/lang/Integer.intValue:()I
+      37: bipush        109
+      39: if_icmpgt     68
+      42: aload_0
+      43: invokevirtual #471                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      46: dup
+      47: getfield      #476                // Field net/minecraft/client/player/Input.f_108566_:F
+      50: fconst_0
+      51: fmul
+      52: putfield      #476                // Field net/minecraft/client/player/Input.f_108566_:F
+      55: aload_0
+      56: invokevirtual #471                // Method net/minecraftforge/client/event/MovementInputUpdateEvent.getInput:()Lnet/minecraft/client/player/Input;
+      59: dup
+      60: getfield      #479                // Field net/minecraft/client/player/Input.f_108567_:F
+      63: fconst_0
+      64: fmul
+      65: putfield      #479                // Field net/minecraft/client/player/Input.f_108567_:F
+      68: return
+
+  private static boolean lambda$updateMovementInput$1(net.unusual.block_factorys_bosses.entity.boss.yeti.YetiEntity);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  private static void lambda$renderGUI$0(net.minecraft.client.Minecraft, net.minecraft.client.gui.GuiGraphics);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #791                // Method renderRollGUI:(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/GuiGraphics;)V
+       5: return
+
+  static {};
+    Code:
+       0: new           #794                // class java/util/HashMap
+       3: dup
+       4: invokespecial #795                // Method java/util/HashMap."<init>":()V
+       7: putstatic     #485                // Field PARTICULARS:Ljava/util/Map;
+      10: ldc_w         #797                // String textures/gui/roll/dash_green.png
+      13: invokestatic  #803                // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      16: putstatic     #213                // Field DASH_GREEN:Lnet/minecraft/resources/ResourceLocation;
+      19: ldc_w         #805                // String textures/gui/roll/dash_yellow.png
+      22: invokestatic  #803                // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      25: putstatic     #219                // Field DASH_YELLOW:Lnet/minecraft/resources/ResourceLocation;
+      28: ldc_w         #807                // String textures/gui/roll/dash_orange.png
+      31: invokestatic  #803                // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      34: putstatic     #223                // Field DASH_ORANGE:Lnet/minecraft/resources/ResourceLocation;
+      37: ldc_w         #809                // String textures/gui/roll/dash_red.png
+      40: invokestatic  #803                // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      43: putstatic     #226                // Field DASH_RED:Lnet/minecraft/resources/ResourceLocation;
+      46: ldc_w         #811                // String textures/gui/roll/dash_grey.png
+      49: invokestatic  #803                // Method net/unusual/block_factorys_bosses/BossesRise.prefix:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      52: putstatic     #209                // Field DASH_GREY:Lnet/minecraft/resources/ResourceLocation;
+      55: return
+}

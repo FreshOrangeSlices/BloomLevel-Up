@@ -1,0 +1,192 @@
+Compiled from "ElytraLayerMixin.java"
+public abstract class net.unusual.block_factorys_bosses.mixins.client.ElytraLayerMixin<T extends net.minecraft.world.entity.LivingEntity> {
+  private net.minecraft.client.model.geom.ModelPart f_102533_;
+
+  private net.minecraft.client.model.geom.ModelPart f_102532_;
+
+  public net.unusual.block_factorys_bosses.mixins.client.ElytraLayerMixin();
+    Code:
+       0: aload_0
+       1: invokespecial #20                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  private void preSetup(T, float, float, float, float, float, org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_1
+       1: instanceof    #34                 // class net/minecraft/client/player/AbstractClientPlayer
+       4: ifeq          21
+       7: aload_0
+       8: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+      11: invokevirtual #41                 // Method net/minecraft/client/model/geom/ModelPart.m_233569_:()V
+      14: aload_0
+      15: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+      18: invokevirtual #41                 // Method net/minecraft/client/model/geom/ModelPart.m_233569_:()V
+      21: return
+
+  private void postSetup(T, float, float, float, float, float, org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+    Code:
+       0: aload_1
+       1: instanceof    #34                 // class net/minecraft/client/player/AbstractClientPlayer
+       4: ifeq          367
+       7: aload_1
+       8: checkcast     #34                 // class net/minecraft/client/player/AbstractClientPlayer
+      11: astore        8
+      13: aload         8
+      15: invokestatic  #62                 // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.fromPlayer:(Lnet/minecraft/world/entity/player/Player;)Ljava/util/Optional;
+      18: aconst_null
+      19: invokevirtual #68                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      22: checkcast     #58                 // class net/unusual/block_factorys_bosses/capability/entity/RollCap
+      25: astore        9
+      27: aload         9
+      29: ifnull        367
+      32: aload         9
+      34: invokeinterface #72,  1           // InterfaceMethod net/unusual/block_factorys_bosses/capability/entity/RollCap.isRolling:()Z
+      39: ifeq          367
+      42: invokestatic  #78                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+      45: invokevirtual #82                 // Method net/minecraft/client/Minecraft.m_91290_:()Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+      48: aload         8
+      50: invokevirtual #88                 // Method net/minecraft/client/renderer/entity/EntityRenderDispatcher.m_114382_:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/client/renderer/entity/EntityRenderer;
+      53: astore        11
+      55: aload         11
+      57: instanceof    #90                 // class net/minecraft/client/renderer/entity/player/PlayerRenderer
+      60: ifeq          367
+      63: aload         11
+      65: checkcast     #90                 // class net/minecraft/client/renderer/entity/player/PlayerRenderer
+      68: astore        10
+      70: aload         10
+      72: invokevirtual #94                 // Method net/minecraft/client/renderer/entity/player/PlayerRenderer.m_7200_:()Lnet/minecraft/client/model/EntityModel;
+      75: checkcast     #96                 // class net/minecraft/client/model/PlayerModel
+      78: getfield      #99                 // Field net/minecraft/client/model/PlayerModel.f_102810_:Lnet/minecraft/client/model/geom/ModelPart;
+      81: astore        11
+      83: aload_0
+      84: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+      87: invokevirtual #41                 // Method net/minecraft/client/model/geom/ModelPart.m_233569_:()V
+      90: new           #38                 // class net/minecraft/client/model/geom/ModelPart
+      93: dup
+      94: invokestatic  #105                // Method java/util/Collections.emptyList:()Ljava/util/List;
+      97: invokestatic  #109                // Method java/util/Collections.emptyMap:()Ljava/util/Map;
+     100: invokespecial #112                // Method net/minecraft/client/model/geom/ModelPart."<init>":(Ljava/util/List;Ljava/util/Map;)V
+     103: astore        12
+     105: aload         12
+     107: aload_0
+     108: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     111: invokevirtual #116                // Method net/minecraft/client/model/geom/ModelPart.m_104315_:(Lnet/minecraft/client/model/geom/ModelPart;)V
+     114: aload_0
+     115: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     118: aload         11
+     120: invokevirtual #116                // Method net/minecraft/client/model/geom/ModelPart.m_104315_:(Lnet/minecraft/client/model/geom/ModelPart;)V
+     123: aload_0
+     124: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     127: dup
+     128: getfield      #119                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     131: aload         12
+     133: getfield      #119                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     136: fadd
+     137: putfield      #119                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     140: aload_0
+     141: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     144: dup
+     145: getfield      #122                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     148: aload         12
+     150: getfield      #122                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     153: fadd
+     154: putfield      #122                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     157: aload_0
+     158: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     161: dup
+     162: getfield      #125                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     165: aload         12
+     167: getfield      #125                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     170: fadd
+     171: putfield      #125                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     174: aload_0
+     175: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     178: dup
+     179: getfield      #128                // Field net/minecraft/client/model/geom/ModelPart.f_104203_:F
+     182: aload         12
+     184: getfield      #128                // Field net/minecraft/client/model/geom/ModelPart.f_104203_:F
+     187: fadd
+     188: putfield      #128                // Field net/minecraft/client/model/geom/ModelPart.f_104203_:F
+     191: aload_0
+     192: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     195: dup
+     196: getfield      #131                // Field net/minecraft/client/model/geom/ModelPart.f_104204_:F
+     199: aload         12
+     201: getfield      #131                // Field net/minecraft/client/model/geom/ModelPart.f_104204_:F
+     204: fadd
+     205: putfield      #131                // Field net/minecraft/client/model/geom/ModelPart.f_104204_:F
+     208: aload_0
+     209: getfield      #36                 // Field f_102533_:Lnet/minecraft/client/model/geom/ModelPart;
+     212: dup
+     213: getfield      #134                // Field net/minecraft/client/model/geom/ModelPart.f_104205_:F
+     216: aload         12
+     218: getfield      #134                // Field net/minecraft/client/model/geom/ModelPart.f_104205_:F
+     221: fadd
+     222: putfield      #134                // Field net/minecraft/client/model/geom/ModelPart.f_104205_:F
+     225: aload_0
+     226: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     229: invokevirtual #41                 // Method net/minecraft/client/model/geom/ModelPart.m_233569_:()V
+     232: new           #38                 // class net/minecraft/client/model/geom/ModelPart
+     235: dup
+     236: invokestatic  #105                // Method java/util/Collections.emptyList:()Ljava/util/List;
+     239: invokestatic  #109                // Method java/util/Collections.emptyMap:()Ljava/util/Map;
+     242: invokespecial #112                // Method net/minecraft/client/model/geom/ModelPart."<init>":(Ljava/util/List;Ljava/util/Map;)V
+     245: astore        13
+     247: aload         13
+     249: aload_0
+     250: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     253: invokevirtual #116                // Method net/minecraft/client/model/geom/ModelPart.m_104315_:(Lnet/minecraft/client/model/geom/ModelPart;)V
+     256: aload_0
+     257: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     260: aload         11
+     262: invokevirtual #116                // Method net/minecraft/client/model/geom/ModelPart.m_104315_:(Lnet/minecraft/client/model/geom/ModelPart;)V
+     265: aload_0
+     266: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     269: dup
+     270: getfield      #119                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     273: aload         13
+     275: getfield      #119                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     278: fadd
+     279: putfield      #119                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     282: aload_0
+     283: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     286: dup
+     287: getfield      #122                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     290: aload         13
+     292: getfield      #122                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     295: fadd
+     296: putfield      #122                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     299: aload_0
+     300: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     303: dup
+     304: getfield      #125                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     307: aload         13
+     309: getfield      #125                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     312: fadd
+     313: putfield      #125                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     316: aload_0
+     317: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     320: dup
+     321: getfield      #128                // Field net/minecraft/client/model/geom/ModelPart.f_104203_:F
+     324: aload         13
+     326: getfield      #128                // Field net/minecraft/client/model/geom/ModelPart.f_104203_:F
+     329: fadd
+     330: putfield      #128                // Field net/minecraft/client/model/geom/ModelPart.f_104203_:F
+     333: aload_0
+     334: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     337: dup
+     338: getfield      #131                // Field net/minecraft/client/model/geom/ModelPart.f_104204_:F
+     341: aload         13
+     343: getfield      #131                // Field net/minecraft/client/model/geom/ModelPart.f_104204_:F
+     346: fadd
+     347: putfield      #131                // Field net/minecraft/client/model/geom/ModelPart.f_104204_:F
+     350: aload_0
+     351: getfield      #43                 // Field f_102532_:Lnet/minecraft/client/model/geom/ModelPart;
+     354: dup
+     355: getfield      #134                // Field net/minecraft/client/model/geom/ModelPart.f_104205_:F
+     358: aload         13
+     360: getfield      #134                // Field net/minecraft/client/model/geom/ModelPart.f_104205_:F
+     363: fadd
+     364: putfield      #134                // Field net/minecraft/client/model/geom/ModelPart.f_104205_:F
+     367: return
+}

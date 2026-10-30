@@ -1,0 +1,467 @@
+{
+ "net/magister/bookofdragons/block/entity/RoostControllerBlockEntity": {
+  "get": [
+   "Archetype",
+   "BoundsMaxX",
+   "BoundsMaxY",
+   "BoundsMaxZ",
+   "BoundsMinX",
+   "BoundsMinY",
+   "BoundsMinZ",
+   "BoundsScanDone",
+   "MissingOccupantTicks",
+   "OccupantUUID",
+   "OccupiedSince",
+   "RefillCooldown",
+   "RoostState",
+   "TotalOccupied",
+   "TotalVacant",
+   "VacantSince"
+  ],
+  "put": [
+   "Archetype",
+   "BoundsScanDone",
+   "OccupantUUID",
+   "OccupiedSince",
+   "TotalOccupied",
+   "TotalVacant",
+   "VacantSince"
+  ]
+ },
+ "net/magister/bookofdragons/datagen/data/DragonRegistryData": {
+  "get": [
+   "Dragons"
+  ],
+  "put": [
+   "Dragons"
+  ]
+ },
+ "net/magister/bookofdragons/datagen/data/DragonRegistryEntry": {
+  "get": [
+   "Affection",
+   "CustomName",
+   "Dimension",
+   "DragonUUID",
+   "HasChest",
+   "HasSaddle",
+   "Health",
+   "LastUpdate",
+   "MaxHealth",
+   "OwnerUUID",
+   "PosX",
+   "PosY",
+   "PosZ",
+   "Stage",
+   "Type"
+  ],
+  "put": [
+   "CustomName",
+   "Dimension",
+   "DragonUUID",
+   "HasChest",
+   "HasSaddle",
+   "Health",
+   "LastUpdate",
+   "MaxHealth",
+   "OwnerUUID",
+   "Stage",
+   "Type"
+  ]
+ },
+ "net/magister/bookofdragons/entity/base/dragon/DragonBase": {
+  "get": [
+   "Command",
+   "DragonDataVersion",
+   "EntityArtVersion",
+   "HasClearAirspace",
+   "IsAlpha",
+   "IsOnSolidGround",
+   "IsRoaring",
+   "LayerMood",
+   "LayerMotion",
+   "LayerStance",
+   "MountTime",
+   "Personality",
+   "SeatLocked",
+   "TransportMode",
+   "Variant"
+  ],
+  "put": [
+   "HasClearAirspace",
+   "IsAlpha",
+   "IsOnSolidGround",
+   "IsRoaring",
+   "SeatLocked"
+  ]
+ },
+ "net/magister/bookofdragons/entity/base/dragon/DragonFlyingRideableBase": {
+  "get": [
+   "IsFreeLooking",
+   "IsGoingDown",
+   "SmoothedPitch",
+   "SmoothedRoll",
+   "ThrottleLevel"
+  ],
+  "put": [
+   "IsFreeLooking",
+   "IsGoingDown",
+   "SmoothedPitch",
+   "SmoothedRoll",
+   "ThrottleLevel"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/BreedingComponent": {
+  "get": [
+   "Genetics",
+   "IsFromTamedParents",
+   "PaletteDraws",
+   "TamedLineageOwner"
+  ],
+  "put": [
+   "Genetics",
+   "IsFromTamedParents",
+   "TamedLineageOwner"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/CombatComponent": {
+  "get": [
+   "IsDoingAerialAttack",
+   "ShouldDoAerialAttack"
+  ],
+  "put": [
+   "IsDoingAerialAttack",
+   "SecondaryAbility",
+   "ShouldDoAerialAttack"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/CommandComponent": {
+  "get": [
+   "Command"
+  ],
+  "put": []
+ },
+ "net/magister/bookofdragons/entity/component/DragonFlightRotationComponent": {
+  "get": [
+   "DragonIsRolling",
+   "DragonRoll",
+   "OrientW",
+   "OrientX",
+   "OrientY",
+   "OrientZ"
+  ],
+  "put": [
+   "DragonIsRolling",
+   "DragonRoll",
+   "OrientW",
+   "OrientX",
+   "OrientY",
+   "OrientZ"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/EnvironmentDetectionComponent": {
+  "get": [
+   "HasClearAirspace",
+   "IsOnSolidGround"
+  ],
+  "put": [
+   "HasClearAirspace",
+   "IsOnSolidGround"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/FeedingComponent": {
+  "get": [
+   "EatingTicks",
+   "HasConsumedFood"
+  ],
+  "put": [
+   "HasConsumedFood"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/GrowthComponent": {
+  "get": [
+   "GrowthProgress",
+   "GrowthStage",
+   "SpawnScaleTicks"
+  ],
+  "put": []
+ },
+ "net/magister/bookofdragons/entity/component/InventoryComponent": {
+  "get": [
+   "Inventory",
+   "Slot"
+  ],
+  "put": [
+   "Inventory",
+   "Slot"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/NavigationComponent": {
+  "get": [
+   "UseGroundNav"
+  ],
+  "put": [
+   "UseGroundNav"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/PositionHistoryComponent": {
+  "get": [
+   "PH_SmoothedEntityPitch",
+   "PH_SmoothedMovementYaw",
+   "PH_UnwrappedMovementYaw",
+   "PH_UnwrappedRoll",
+   "PH_UnwrappedYaw"
+  ],
+  "put": [
+   "PH_SmoothedEntityPitch",
+   "PH_SmoothedMovementYaw",
+   "PH_UnwrappedMovementYaw",
+   "PH_UnwrappedRoll",
+   "PH_UnwrappedYaw"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/RollComponent": {
+  "get": [
+   "AccumulatedRoll"
+  ],
+  "put": [
+   "AccumulatedRoll"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/RoostComponent": {
+  "get": [
+   "RoostX",
+   "RoostY",
+   "RoostZ"
+  ],
+  "put": []
+ },
+ "net/magister/bookofdragons/entity/component/ShearingComponent": {
+  "get": [
+   "ShearingCooldown"
+  ],
+  "put": []
+ },
+ "net/magister/bookofdragons/entity/component/TamingComponent": {
+  "get": [
+   "AffectionMap",
+   "AwaitingTamingRitual",
+   "TamingRitualCompleted",
+   "TamingRitualTimer"
+  ],
+  "put": [
+   "AffectionMap",
+   "AwaitingTamingRitual",
+   "TamingRitualCompleted"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/ranged/OmniAttackHandler": {
+  "get": [
+   "OAH_BreathCooldown",
+   "OAH_CurrentFuel",
+   "OAH_FullRechargeCooldown",
+   "OAH_PendingScale"
+  ],
+  "put": [
+   "OAH_PendingScale"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/simulation/DragonNeedsSystem": {
+  "get": [
+   "dragonNeeds",
+   "exhaustionLevel",
+   "foodLevel",
+   "saturationLevel",
+   "tickTimer"
+  ],
+  "put": [
+   "dragonNeeds",
+   "exhaustionLevel",
+   "saturationLevel"
+  ]
+ },
+ "net/magister/bookofdragons/entity/component/simulation/DragonStaminaSystem": {
+  "get": [
+   "dragonStamina",
+   "regenPauseTicks"
+  ],
+  "put": [
+   "dragonStamina"
+  ]
+ },
+ "net/magister/bookofdragons/entity/custom/dragon/GronckleEntity": {
+  "get": [
+   "IronCreationTimer"
+  ],
+  "put": []
+ },
+ "net/magister/bookofdragons/entity/custom/dragon/GronckleIronRecipe": {
+  "get": [
+   "GronckleIronRecipe"
+  ],
+  "put": [
+   "GronckleIronRecipe"
+  ]
+ },
+ "net/magister/bookofdragons/entity/custom/effects/EntityDigEffect": {
+  "get": [
+   "block",
+   "isEmerge",
+   "lifetime"
+  ],
+  "put": [
+   "block",
+   "isEmerge"
+  ]
+ },
+ "net/magister/bookofdragons/entity/custom/effects/EntityFallingBlockDebris": {
+  "get": [
+   "block",
+   "lifetime"
+  ],
+  "put": [
+   "block"
+  ]
+ },
+ "net/magister/bookofdragons/entity/custom/egg/DragonEggEntity": {
+  "get": [
+   "CurrentHatchTime",
+   "DragonType",
+   "EggDataVersion",
+   "EntityTag",
+   "IsActivated",
+   "IsFromTamedParents",
+   "OwnerUUID",
+   "Parent1Genetics",
+   "Parent1Variant",
+   "Parent2Genetics",
+   "Parent2Variant",
+   "RequiredActivationTime",
+   "RequirementProgress",
+   "TotalHatchTime"
+  ],
+  "put": [
+   "DragonType",
+   "EntityTag",
+   "IsActivated",
+   "IsFromTamedParents",
+   "OwnerUUID",
+   "Parent1Genetics",
+   "Parent2Genetics"
+  ]
+ },
+ "net/magister/bookofdragons/entity/custom/projectile/OmniBreathEntity": {
+  "get": [
+   "AirburstTime",
+   "AttackId",
+   "ChargeScale",
+   "FlightTime",
+   "SlideAlpha",
+   "SlideBouncesRemaining",
+   "SlideTick"
+  ],
+  "put": [
+   "AttackId",
+   "ChargeScale",
+   "SlideAlpha"
+  ]
+ },
+ "net/magister/bookofdragons/event/DrifterSpawnHandler": {
+  "get": [
+   "bookofdragons_drifter_chance",
+   "bookofdragons_drifter_last_spawn",
+   "bookofdragons_drifter_unlocked"
+  ],
+  "put": [
+   "bookofdragons_drifter_last_spawn",
+   "bookofdragons_drifter_unlocked"
+  ]
+ },
+ "net/magister/bookofdragons/genetics/GeneticsNBT": {
+  "get": [
+   "Genotype",
+   "Species"
+  ],
+  "put": [
+   "Genotype",
+   "Species"
+  ]
+ },
+ "net/magister/bookofdragons/genetics/PaletteDraws": {
+  "get": [
+   "Draws",
+   "PaletteDraws"
+  ],
+  "put": [
+   "Draws",
+   "PaletteDraws"
+  ]
+ },
+ "net/magister/bookofdragons/item/custom/DragonDiggingDebugStickItem": {
+  "get": [
+   "SelectedDragonId"
+  ],
+  "put": []
+ },
+ "net/magister/bookofdragons/item/custom/DragonEggItem": {
+  "get": [
+   "CurrentHatchTime",
+   "EntityTag",
+   "IsFromTamedParents",
+   "Parent1Variant",
+   "Parent2Variant",
+   "TotalHatchTime"
+  ],
+  "put": [
+   "DragonType",
+   "EntityTag",
+   "IsFromTamedParents",
+   "OwnerUUID"
+  ]
+ },
+ "net/magister/bookofdragons/item/custom/DragonPathfindingDebugStickItem": {
+  "get": [
+   "BoundDragonUUID",
+   "WaypointX",
+   "WaypointY",
+   "WaypointZ"
+  ],
+  "put": [
+   "BoundDragonUUID",
+   "WaypointX",
+   "WaypointY",
+   "WaypointZ"
+  ]
+ },
+ "net/magister/bookofdragons/item/custom/DragonWhistleItem": {
+  "get": [
+   "BoundDragonName",
+   "BoundDragonUUID",
+   "DragonDimension",
+   "DragonPosX",
+   "DragonPosY",
+   "DragonPosZ"
+  ],
+  "put": [
+   "BoundDragonName",
+   "BoundDragonUUID",
+   "DragonDimension"
+  ]
+ },
+ "net/magister/bookofdragons/item/custom/RattlestaffItem": {
+  "get": [
+   "BoundDragons"
+  ],
+  "put": [
+   "BoundDragons"
+  ]
+ },
+ "net/magister/bookofdragons/worldgen/DragonSpawnProcessor": {
+  "get": [
+   "RoostState"
+  ],
+  "put": [
+   "Archetype",
+   "bookofdragons:roost_controller_entity"
+  ]
+ }
+}

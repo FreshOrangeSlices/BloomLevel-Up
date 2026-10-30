@@ -1,0 +1,494 @@
+Compiled from "CameraRenderer.java"
+public class net.unusual.block_factorys_bosses.client.camera.renderer.CameraRenderer implements net.unusual.block_factorys_bosses.client.camera.internal.CameraHandler {
+  private static net.unusual.block_factorys_bosses.client.CameraInject camera;
+
+  public static int viewBobCancel;
+
+  private static net.minecraft.client.CameraType previousCameraType;
+
+  private static float yaw;
+
+  private static float pitch;
+
+  private static net.minecraft.world.phys.Vec3 pos;
+
+  private static float yawO;
+
+  private static float pitchO;
+
+  private static net.minecraft.world.phys.Vec3 posO;
+
+  public net.unusual.block_factorys_bosses.client.camera.renderer.CameraRenderer();
+    Code:
+       0: aload_0
+       1: invokespecial #55                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onRenderBlockOverlay(net.minecraftforge.client.event.RenderBlockScreenEffectEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #64                 // Method net/minecraftforge/client/event/RenderBlockScreenEffectEvent.getOverlayType:()Lnet/minecraftforge/client/event/RenderBlockScreenEffectEvent$OverlayType;
+       4: getstatic     #68                 // Field net/minecraftforge/client/event/RenderBlockScreenEffectEvent$OverlayType.FIRE:Lnet/minecraftforge/client/event/RenderBlockScreenEffectEvent$OverlayType;
+       7: if_acmpeq     11
+      10: return
+      11: getstatic     #74                 // Field net/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes.CAMERA:Lnet/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes;
+      14: invokestatic  #80                 // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.isHandlerActive:(Lnet/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes;)Z
+      17: ifne          21
+      20: return
+      21: aload_0
+      22: iconst_1
+      23: invokevirtual #84                 // Method net/minecraftforge/client/event/RenderBlockScreenEffectEvent.setCanceled:(Z)V
+      26: return
+
+  public static void computeCameraAngles(net.minecraftforge.client.event.ViewportEvent$ComputeCameraAngles);
+    Code:
+       0: invokestatic  #94                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: getfield      #98                 // Field net/minecraft/client/Minecraft.f_91073_:Lnet/minecraft/client/multiplayer/ClientLevel;
+       6: astore_1
+       7: aload_0
+       8: invokevirtual #102                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getCamera:()Lnet/minecraft/client/Camera;
+      11: checkcast     #104                // class net/unusual/block_factorys_bosses/client/CameraInject
+      14: putstatic     #106                // Field camera:Lnet/unusual/block_factorys_bosses/client/CameraInject;
+      17: aload_1
+      18: ifnonnull     22
+      21: return
+      22: getstatic     #74                 // Field net/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes.CAMERA:Lnet/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes;
+      25: invokestatic  #80                 // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.isHandlerActive:(Lnet/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes;)Z
+      28: ifne          32
+      31: return
+      32: aload_0
+      33: invokevirtual #112                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.getPartialTick:()D
+      36: d2f
+      37: fstore_2
+      38: new           #114                // class net/minecraft/world/phys/Vec3
+      41: dup
+      42: fload_2
+      43: f2d
+      44: getstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+      47: getfield      #120                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+      50: getstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+      53: getfield      #120                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+      56: invokestatic  #128                // Method net/minecraft/util/Mth.m_14139_:(DDD)D
+      59: fload_2
+      60: f2d
+      61: getstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+      64: getfield      #131                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      67: getstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+      70: getfield      #131                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      73: invokestatic  #128                // Method net/minecraft/util/Mth.m_14139_:(DDD)D
+      76: fload_2
+      77: f2d
+      78: getstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+      81: getfield      #134                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      84: getstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+      87: getfield      #134                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      90: invokestatic  #128                // Method net/minecraft/util/Mth.m_14139_:(DDD)D
+      93: invokespecial #137                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+      96: astore_3
+      97: aload_3
+      98: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+     101: invokevirtual #144                // Method net/minecraft/world/phys/Vec3.equals:(Ljava/lang/Object;)Z
+     104: ifne          128
+     107: getstatic     #106                // Field camera:Lnet/unusual/block_factorys_bosses/client/CameraInject;
+     110: iconst_1
+     111: invokeinterface #147,  2          // InterfaceMethod net/unusual/block_factorys_bosses/client/CameraInject.setCinematic:(Z)V
+     116: getstatic     #106                // Field camera:Lnet/unusual/block_factorys_bosses/client/CameraInject;
+     119: aload_3
+     120: invokeinterface #151,  2          // InterfaceMethod net/unusual/block_factorys_bosses/client/CameraInject.setCinematicPosition:(Lnet/minecraft/world/phys/Vec3;)V
+     125: goto          141
+     128: getstatic     #106                // Field camera:Lnet/unusual/block_factorys_bosses/client/CameraInject;
+     131: iconst_0
+     132: invokeinterface #147,  2          // InterfaceMethod net/unusual/block_factorys_bosses/client/CameraInject.setCinematic:(Z)V
+     137: iconst_3
+     138: putstatic     #153                // Field viewBobCancel:I
+     141: aload_0
+     142: fload_2
+     143: getstatic     #155                // Field yawO:F
+     146: getstatic     #157                // Field yaw:F
+     149: invokestatic  #161                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     152: invokevirtual #165                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setYaw:(F)V
+     155: aload_0
+     156: fload_2
+     157: getstatic     #167                // Field pitchO:F
+     160: getstatic     #169                // Field pitch:F
+     163: invokestatic  #161                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     166: invokevirtual #172                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setPitch:(F)V
+     169: aload_0
+     170: fconst_0
+     171: invokevirtual #175                // Method net/minecraftforge/client/event/ViewportEvent$ComputeCameraAngles.setRoll:(F)V
+     174: return
+
+  public static void onTickPre(net.minecraftforge.event.TickEvent$ClientTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #185                // Field net/minecraftforge/event/TickEvent$ClientTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #188                // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpeq     11
+      10: return
+      11: getstatic     #74                 // Field net/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes.CAMERA:Lnet/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes;
+      14: invokestatic  #80                 // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.isHandlerActive:(Lnet/unusual/block_factorys_bosses/client/camera/CinematicCameraTypes;)Z
+      17: ifne          21
+      20: return
+      21: invokestatic  #191                // Method updateTickState:()V
+      24: return
+
+  public static void updateTickState();
+    Code:
+       0: getstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+       3: putstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+       6: getstatic     #157                // Field yaw:F
+       9: putstatic     #155                // Field yawO:F
+      12: getstatic     #169                // Field pitch:F
+      15: putstatic     #167                // Field pitchO:F
+      18: invokestatic  #196                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.getCameraBone:()Lsoftware/bernie/geckolib/cache/object/GeoBone;
+      21: astore_0
+      22: aload_0
+      23: ifnonnull     44
+      26: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      29: putstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+      32: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      35: putstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+      38: invokestatic  #199                // Method calculateAngles:()V
+      41: goto          48
+      44: aload_0
+      45: invokestatic  #205                // Method updateCameraBoneState:(Lsoftware/bernie/geckolib/cache/object/GeoBone;)V
+      48: return
+
+  private static void calculateAngles();
+    Code:
+       0: invokestatic  #94                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: getfield      #211                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+       6: astore_0
+       7: aload_0
+       8: ifnonnull     12
+      11: return
+      12: aload_0
+      13: invokevirtual #217                // Method net/minecraft/world/entity/player/Player.m_146892_:()Lnet/minecraft/world/phys/Vec3;
+      16: astore_1
+      17: aconst_null
+      18: astore_2
+      19: invokestatic  #221                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.getTrackedObject:()Lnet/unusual/block_factorys_bosses/client/CinematicEntity;
+      22: astore_3
+      23: aload_3
+      24: instanceof    #223                // class net/minecraft/world/level/block/entity/BlockEntity
+      27: ifeq          45
+      30: aload_3
+      31: checkcast     #223                // class net/minecraft/world/level/block/entity/BlockEntity
+      34: astore        4
+      36: aload         4
+      38: invokevirtual #227                // Method net/minecraft/world/level/block/entity/BlockEntity.m_58899_:()Lnet/minecraft/core/BlockPos;
+      41: invokevirtual #232                // Method net/minecraft/core/BlockPos.m_252807_:()Lnet/minecraft/world/phys/Vec3;
+      44: astore_2
+      45: aload_3
+      46: instanceof    #234                // class net/minecraft/world/entity/Entity
+      49: ifeq          64
+      52: aload_3
+      53: checkcast     #234                // class net/minecraft/world/entity/Entity
+      56: astore        4
+      58: aload         4
+      60: invokevirtual #235                // Method net/minecraft/world/entity/Entity.m_146892_:()Lnet/minecraft/world/phys/Vec3;
+      63: astore_2
+      64: aload_2
+      65: ifnonnull     69
+      68: return
+      69: aload_1
+      70: getfield      #120                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+      73: aload_2
+      74: getfield      #120                // Field net/minecraft/world/phys/Vec3.f_82479_:D
+      77: dsub
+      78: dstore        4
+      80: aload_1
+      81: getfield      #131                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      84: aload_2
+      85: getfield      #131                // Field net/minecraft/world/phys/Vec3.f_82480_:D
+      88: dsub
+      89: dstore        6
+      91: aload_1
+      92: getfield      #134                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      95: aload_2
+      96: getfield      #134                // Field net/minecraft/world/phys/Vec3.f_82481_:D
+      99: dsub
+     100: dstore        8
+     102: dload         4
+     104: dload         8
+     106: invokestatic  #241                // Method java/lang/Math.atan2:(DD)D
+     109: d2f
+     110: ldc           #242                // float -57.295776f
+     112: fmul
+     113: ldc           #243                // float 180.0f
+     115: fadd
+     116: putstatic     #157                // Field yaw:F
+     119: dload         6
+     121: dload         4
+     123: dload         4
+     125: dmul
+     126: dload         8
+     128: dload         8
+     130: dmul
+     131: dadd
+     132: invokestatic  #247                // Method java/lang/Math.sqrt:(D)D
+     135: invokestatic  #241                // Method java/lang/Math.atan2:(DD)D
+     138: d2f
+     139: ldc           #248                // float 57.295776f
+     141: fmul
+     142: putstatic     #169                // Field pitch:F
+     145: return
+
+  private static org.joml.Quaternionf rotateBlock(net.minecraft.core.Direction);
+    Code:
+       0: getstatic     #267                // Field net/unusual/block_factorys_bosses/client/camera/renderer/CameraRenderer$1.$SwitchMap$net$minecraft$core$Direction:[I
+       3: aload_0
+       4: invokevirtual #273                // Method net/minecraft/core/Direction.ordinal:()I
+       7: iaload
+       8: tableswitch   { // 1 to 6
+                     1: 56
+                     2: 69
+                     3: 83
+                     4: 95
+                     5: 109
+                     6: 123
+               default: 48
+          }
+      48: new           #275                // class java/lang/IncompatibleClassChangeError
+      51: dup
+      52: invokespecial #276                // Method java/lang/IncompatibleClassChangeError."<init>":()V
+      55: athrow
+      56: getstatic     #282                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+      59: ldc           #243                // float 180.0f
+      61: invokeinterface #286,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+      66: goto          134
+      69: getstatic     #282                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+      72: ldc_w         #287                // float 90.0f
+      75: invokeinterface #286,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+      80: goto          134
+      83: getstatic     #282                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+      86: fconst_0
+      87: invokeinterface #286,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+      92: goto          134
+      95: getstatic     #282                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+      98: ldc_w         #288                // float 270.0f
+     101: invokeinterface #286,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     106: goto          134
+     109: getstatic     #291                // Field com/mojang/math/Axis.f_252529_:Lcom/mojang/math/Axis;
+     112: ldc_w         #287                // float 90.0f
+     115: invokeinterface #286,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     120: goto          134
+     123: getstatic     #294                // Field com/mojang/math/Axis.f_252495_:Lcom/mojang/math/Axis;
+     126: ldc_w         #287                // float 90.0f
+     129: invokeinterface #286,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     134: areturn
+
+  private static void updateCameraBoneState(software.bernie.geckolib.cache.object.GeoBone);
+    Code:
+       0: invokestatic  #221                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.getTrackedObject:()Lnet/unusual/block_factorys_bosses/client/CinematicEntity;
+       3: astore        4
+       5: aload         4
+       7: instanceof    #223                // class net/minecraft/world/level/block/entity/BlockEntity
+      10: ifeq          193
+      13: aload         4
+      15: checkcast     #223                // class net/minecraft/world/level/block/entity/BlockEntity
+      18: astore_3
+      19: aload_3
+      20: invokevirtual #227                // Method net/minecraft/world/level/block/entity/BlockEntity.m_58899_:()Lnet/minecraft/core/BlockPos;
+      23: astore        4
+      25: aload_3
+      26: invokevirtual #302                // Method net/minecraft/world/level/block/entity/BlockEntity.m_58900_:()Lnet/minecraft/world/level/block/state/BlockState;
+      29: getstatic     #308                // Field net/minecraft/world/level/block/state/properties/BlockStateProperties.f_61374_:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      32: invokevirtual #314                // Method net/minecraft/world/level/block/state/BlockState.m_61143_:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      35: checkcast     #269                // class net/minecraft/core/Direction
+      38: astore        5
+      40: aload         5
+      42: invokestatic  #316                // Method rotateBlock:(Lnet/minecraft/core/Direction;)Lorg/joml/Quaternionf;
+      45: astore        6
+      47: aload_0
+      48: invokevirtual #320                // Method software/bernie/geckolib/cache/object/GeoBone.getLocalPosition:()Lorg/joml/Vector3d;
+      51: invokestatic  #324                // Method toVec3f:(Lorg/joml/Vector3d;)Lorg/joml/Vector3f;
+      54: aload         6
+      56: invokevirtual #330                // Method org/joml/Vector3f.rotate:(Lorg/joml/Quaternionfc;)Lorg/joml/Vector3f;
+      59: aload         4
+      61: invokevirtual #333                // Method net/minecraft/core/BlockPos.m_123341_:()I
+      64: i2f
+      65: ldc_w         #334                // float 0.5f
+      68: fadd
+      69: aload         4
+      71: invokevirtual #337                // Method net/minecraft/core/BlockPos.m_123342_:()I
+      74: i2f
+      75: aload         4
+      77: invokevirtual #340                // Method net/minecraft/core/BlockPos.m_123343_:()I
+      80: i2f
+      81: ldc_w         #334                // float 0.5f
+      84: fadd
+      85: invokevirtual #344                // Method org/joml/Vector3f.add:(FFF)Lorg/joml/Vector3f;
+      88: astore_1
+      89: aload_0
+      90: invokevirtual #348                // Method software/bernie/geckolib/cache/object/GeoBone.getWorldSpaceMatrix:()Lorg/joml/Matrix4f;
+      93: new           #326                // class org/joml/Vector3f
+      96: dup
+      97: fconst_0
+      98: fconst_0
+      99: fconst_1
+     100: invokespecial #351                // Method org/joml/Vector3f."<init>":(FFF)V
+     103: invokevirtual #357                // Method org/joml/Matrix4f.transformDirection:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+     106: aload         6
+     108: invokevirtual #330                // Method org/joml/Vector3f.rotate:(Lorg/joml/Quaternionfc;)Lorg/joml/Vector3f;
+     111: astore_2
+     112: aload_3
+     113: instanceof    #359                // class net/unusual/block_factorys_bosses/block/entity/HugeDoorBlockEntity
+     116: ifeq          131
+     119: aload_1
+     120: aload_3
+     121: invokevirtual #302                // Method net/minecraft/world/level/block/entity/BlockEntity.m_58900_:()Lnet/minecraft/world/level/block/state/BlockState;
+     124: invokestatic  #365                // Method net/unusual/block_factorys_bosses/block/HugeDoorBlock.getHorizontalCenterOffset:(Lnet/minecraft/world/level/block/state/BlockState;)Lorg/joml/Vector3f;
+     127: invokevirtual #368                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     130: astore_1
+     131: aload_2
+     132: invokevirtual #372                // Method org/joml/Vector3f.x:()F
+     135: f2d
+     136: aload_2
+     137: invokevirtual #375                // Method org/joml/Vector3f.z:()F
+     140: fneg
+     141: f2d
+     142: invokestatic  #378                // Method net/minecraft/util/Mth.m_14136_:(DD)D
+     145: d2f
+     146: ldc           #248                // float 57.295776f
+     148: fmul
+     149: putstatic     #157                // Field yaw:F
+     152: aload_2
+     153: invokevirtual #381                // Method org/joml/Vector3f.y:()F
+     156: f2d
+     157: aload_2
+     158: invokevirtual #372                // Method org/joml/Vector3f.x:()F
+     161: aload_2
+     162: invokevirtual #372                // Method org/joml/Vector3f.x:()F
+     165: fmul
+     166: aload_2
+     167: invokevirtual #375                // Method org/joml/Vector3f.z:()F
+     170: aload_2
+     171: invokevirtual #375                // Method org/joml/Vector3f.z:()F
+     174: fmul
+     175: fadd
+     176: invokestatic  #385                // Method net/minecraft/util/Mth.m_14116_:(F)F
+     179: f2d
+     180: invokestatic  #378                // Method net/minecraft/util/Mth.m_14136_:(DD)D
+     183: d2f
+     184: ldc           #248                // float 57.295776f
+     186: fmul
+     187: putstatic     #169                // Field pitch:F
+     190: goto          271
+     193: aload_0
+     194: invokevirtual #388                // Method software/bernie/geckolib/cache/object/GeoBone.getWorldPosition:()Lorg/joml/Vector3d;
+     197: invokestatic  #324                // Method toVec3f:(Lorg/joml/Vector3d;)Lorg/joml/Vector3f;
+     200: astore_1
+     201: invokestatic  #221                // Method net/unusual/block_factorys_bosses/client/camera/BossesRiseClientCinematicCamera.getTrackedObject:()Lnet/unusual/block_factorys_bosses/client/CinematicEntity;
+     204: checkcast     #390                // class net/minecraft/world/entity/monster/Monster
+     207: astore        4
+     209: invokestatic  #94                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     212: invokevirtual #394                // Method net/minecraft/client/Minecraft.m_91290_:()Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+     215: aload         4
+     217: invokevirtual #400                // Method net/minecraft/client/renderer/entity/EntityRenderDispatcher.m_114382_:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/client/renderer/entity/EntityRenderer;
+     220: checkcast     #402                // class net/unusual/block_factorys_bosses/geckolib/boss/CinematicRenderer
+     223: astore        5
+     225: aload         5
+     227: aload         4
+     229: aload_0
+     230: invokestatic  #94                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     233: getfield      #211                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     236: invokeinterface #406,  4          // InterfaceMethod net/unusual/block_factorys_bosses/geckolib/boss/CinematicRenderer.getCinematicYawAndPitch:(Ljava/lang/Object;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/player/LocalPlayer;)Lcom/mojang/datafixers/util/Pair;
+     241: astore        6
+     243: aload         6
+     245: invokevirtual #412                // Method com/mojang/datafixers/util/Pair.getFirst:()Ljava/lang/Object;
+     248: checkcast     #414                // class java/lang/Float
+     251: invokevirtual #417                // Method java/lang/Float.floatValue:()F
+     254: putstatic     #157                // Field yaw:F
+     257: aload         6
+     259: invokevirtual #420                // Method com/mojang/datafixers/util/Pair.getSecond:()Ljava/lang/Object;
+     262: checkcast     #414                // class java/lang/Float
+     265: invokevirtual #417                // Method java/lang/Float.floatValue:()F
+     268: putstatic     #169                // Field pitch:F
+     271: aload_1
+     272: fconst_0
+     273: fconst_0
+     274: fconst_0
+     275: invokevirtual #423                // Method org/joml/Vector3f.equals:(FFF)Z
+     278: ifeq          282
+     281: return
+     282: new           #114                // class net/minecraft/world/phys/Vec3
+     285: dup
+     286: aload_1
+     287: getfield      #425                // Field org/joml/Vector3f.x:F
+     290: f2d
+     291: aload_1
+     292: getfield      #427                // Field org/joml/Vector3f.y:F
+     295: f2d
+     296: aload_1
+     297: getfield      #429                // Field org/joml/Vector3f.z:F
+     300: f2d
+     301: invokespecial #137                // Method net/minecraft/world/phys/Vec3."<init>":(DDD)V
+     304: putstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+     307: return
+
+  private static org.joml.Vector3f toVec3f(org.joml.Vector3d);
+    Code:
+       0: new           #326                // class org/joml/Vector3f
+       3: dup
+       4: aload_0
+       5: invokevirtual #448                // Method org/joml/Vector3d.x:()D
+       8: d2f
+       9: aload_0
+      10: invokevirtual #450                // Method org/joml/Vector3d.y:()D
+      13: d2f
+      14: aload_0
+      15: invokevirtual #452                // Method org/joml/Vector3d.z:()D
+      18: d2f
+      19: invokespecial #351                // Method org/joml/Vector3f."<init>":(FFF)V
+      22: areturn
+
+  public void init();
+    Code:
+       0: invokestatic  #94                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: astore_1
+       4: aload_1
+       5: getfield      #459                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+       8: invokevirtual #465                // Method net/minecraft/client/Options.m_92176_:()Lnet/minecraft/client/CameraType;
+      11: putstatic     #467                // Field previousCameraType:Lnet/minecraft/client/CameraType;
+      14: return
+
+  public void cleanup();
+    Code:
+       0: getstatic     #467                // Field previousCameraType:Lnet/minecraft/client/CameraType;
+       3: ifnull        22
+       6: invokestatic  #94                 // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       9: getfield      #459                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      12: getstatic     #467                // Field previousCameraType:Lnet/minecraft/client/CameraType;
+      15: invokevirtual #474                // Method net/minecraft/client/Options.m_92157_:(Lnet/minecraft/client/CameraType;)V
+      18: aconst_null
+      19: putstatic     #467                // Field previousCameraType:Lnet/minecraft/client/CameraType;
+      22: getstatic     #106                // Field camera:Lnet/unusual/block_factorys_bosses/client/CameraInject;
+      25: iconst_0
+      26: invokeinterface #147,  2          // InterfaceMethod net/unusual/block_factorys_bosses/client/CameraInject.setCinematic:(Z)V
+      31: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      34: putstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+      37: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      40: putstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+      43: fconst_0
+      44: dup
+      45: putstatic     #155                // Field yawO:F
+      48: putstatic     #157                // Field yaw:F
+      51: fconst_0
+      52: dup
+      53: putstatic     #167                // Field pitchO:F
+      56: putstatic     #169                // Field pitch:F
+      59: return
+
+  static {};
+    Code:
+       0: iconst_0
+       1: putstatic     #153                // Field viewBobCancel:I
+       4: aconst_null
+       5: putstatic     #467                // Field previousCameraType:Lnet/minecraft/client/CameraType;
+       8: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      11: putstatic     #122                // Field pos:Lnet/minecraft/world/phys/Vec3;
+      14: getstatic     #140                // Field net/minecraft/world/phys/Vec3.f_82478_:Lnet/minecraft/world/phys/Vec3;
+      17: putstatic     #116                // Field posO:Lnet/minecraft/world/phys/Vec3;
+      20: return
+}

@@ -1,0 +1,884 @@
+## PlayerVariables fields
+Compiled from "BornInChaosV1ModVariables.java"
+public class net.mcreator.borninchaosv.network.BornInChaosV1ModVariables$PlayerVariables {
+  public double naughtiness;
+  public net.mcreator.borninchaosv.network.BornInChaosV1ModVariables$PlayerVariables();
+  public void syncPlayerVariables(net.minecraft.world.entity.Entity);
+  public net.minecraft.nbt.Tag writeNBT();
+  public void readNBT(net.minecraft.nbt.Tag);
+  private static net.minecraft.server.level.ServerPlayer lambda$syncPlayerVariables$0(net.minecraft.server.level.ServerPlayer);
+}
+
+# naughtiness-ish fields: naughtiness
+## net/mcreator/borninchaosv/procedures/KillingVillagersProcedure.class in full
+Compiled from "KillingVillagersProcedure.java"
+public class net.mcreator.borninchaosv.procedures.KillingVillagersProcedure {
+  public net.mcreator.borninchaosv.procedures.KillingVillagersProcedure();
+    Code:
+
+  public static void onEntityDeath(net.minecraftforge.event.entity.living.LivingDeathEvent);
+    Code:
+       1: ifnull        54
+       5: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       8: ifnull        54
+      13: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #47                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      20: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      23: invokevirtual #51                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      27: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      30: invokevirtual #54                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      34: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      37: invokevirtual #57                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      41: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      45: invokevirtual #61                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      48: invokevirtual #67                 // Method net/minecraft/world/damagesource/DamageSource.m_7639_:()Lnet/minecraft/world/entity/Entity;
+      51: invokestatic  #71                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+    Code:
+       0: aconst_null
+      10: invokestatic  #71                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+    Code:
+       2: ifnull        10
+       7: ifnonnull     11
+      13: instanceof    #86                 // class net/minecraft/world/entity/player/Player
+      16: ifeq          1870
+      21: instanceof    #88                 // class net/minecraft/world/entity/npc/Villager
+      24: ifne          35
+      29: instanceof    #90                 // class net/minecraft/world/entity/npc/WanderingTrader
+      32: ifeq          1870
+      36: invokeinterface #96,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+      41: invokeinterface #102,  1          // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+      46: getstatic     #108                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      49: invokevirtual #112                // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+      52: iconst_1
+      53: if_icmpne     1870
+      58: instanceof    #43                 // class net/minecraft/world/entity/LivingEntity
+      61: ifeq          134
+      73: invokevirtual #116                // Method net/minecraft/world/entity/LivingEntity.m_6162_:()Z
+      76: ifeq          134
+      81: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      84: aconst_null
+      85: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+      92: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+      95: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     101: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     104: ldc2_w        #137                // double 15.0d
+     107: dadd
+     112: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     115: aconst_null
+     116: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     123: invokedynamic #158,  0            // InvokeDynamic #0:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+     128: invokevirtual #162                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     136: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     139: aconst_null
+     140: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     147: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     150: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     156: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     159: ldc2_w        #163                // double 10.0d
+     162: dadd
+     167: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     170: aconst_null
+     171: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     178: invokedynamic #169,  0            // InvokeDynamic #1:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+     183: invokevirtual #162                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     188: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     191: ldc           #175                // String firstwarning
+     193: invokevirtual #181                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     196: ifne          387
+     201: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     204: aconst_null
+     205: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     212: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     215: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     221: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     224: ldc2_w        #182                // double 35.0d
+     227: dcmpl
+     228: iflt          387
+     233: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     236: aconst_null
+     237: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     244: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     247: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     253: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     256: ldc2_w        #184                // double 50.0d
+     259: dcmpg
+     260: ifgt          387
+     265: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     268: ldc           #175                // String firstwarning
+     270: iconst_1
+     271: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     275: invokeinterface #192,  1          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_5776_:()Z
+     280: ifne          819
+     284: instanceof    #194                // class net/minecraft/world/level/Level
+     287: ifeq          384
+     298: invokevirtual #195                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     301: ifne          347
+     306: aconst_null
+     312: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     315: getstatic     #207                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     322: ldc           #211                // String born_in_chaos_v1:krampus_alert_far
+     324: invokespecial #214                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     327: invokeinterface #220,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     335: getstatic     #228                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     338: ldc           #229                // float 0.7f
+     340: fconst_1
+     341: invokevirtual #233                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     354: getstatic     #207                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     361: ldc           #211                // String born_in_chaos_v1:krampus_alert_far
+     363: invokespecial #214                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     366: invokeinterface #220,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     374: getstatic     #228                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     377: ldc           #229                // float 0.7f
+     379: fconst_1
+     380: iconst_0
+     381: invokevirtual #237                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     389: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     392: ldc           #239                // String secondwarning
+     394: invokevirtual #181                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     397: ifne          599
+     402: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     405: aconst_null
+     406: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     413: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     416: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     422: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     425: ldc2_w        #240                // double 65.0d
+     428: dcmpl
+     429: iflt          599
+     434: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     437: aconst_null
+     438: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     445: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     448: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     454: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     457: ldc2_w        #242                // double 75.0d
+     460: dcmpg
+     461: ifgt          599
+     466: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     469: ldc           #239                // String secondwarning
+     471: iconst_1
+     472: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     477: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     480: ldc           #175                // String firstwarning
+     482: iconst_0
+     483: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     487: invokeinterface #192,  1          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_5776_:()Z
+     492: ifne          819
+     496: instanceof    #194                // class net/minecraft/world/level/Level
+     499: ifeq          596
+     510: invokevirtual #195                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     513: ifne          559
+     518: aconst_null
+     524: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     527: getstatic     #207                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     534: ldc           #245                // String born_in_chaos_v1:krampus_alert
+     536: invokespecial #214                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     539: invokeinterface #220,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     547: getstatic     #228                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     550: ldc           #229                // float 0.7f
+     552: fconst_1
+     553: invokevirtual #233                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     566: getstatic     #207                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     573: ldc           #245                // String born_in_chaos_v1:krampus_alert
+     575: invokespecial #214                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     578: invokeinterface #220,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     586: getstatic     #228                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     589: ldc           #229                // float 0.7f
+     591: fconst_1
+     592: iconst_0
+     593: invokevirtual #237                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     601: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     604: ldc           #247                // String finalwarning
+     606: invokevirtual #181                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     609: ifne          819
+     614: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     617: aconst_null
+     618: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     625: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     628: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     634: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     637: ldc2_w        #248                // double 85.0d
+     640: dcmpl
+     641: iflt          819
+     646: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     649: aconst_null
+     650: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     657: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     660: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     666: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     669: ldc2_w        #250                // double 95.0d
+     672: dcmpg
+     673: ifgt          819
+     678: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     681: ldc           #247                // String finalwarning
+     683: iconst_1
+     684: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     689: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     692: ldc           #239                // String secondwarning
+     694: iconst_0
+     695: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     700: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     703: ldc           #175                // String firstwarning
+     705: iconst_0
+     706: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     710: invokeinterface #192,  1          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_5776_:()Z
+     715: ifne          819
+     719: instanceof    #194                // class net/minecraft/world/level/Level
+     722: ifeq          819
+     733: invokevirtual #195                // Method net/minecraft/world/level/Level.m_5776_:()Z
+     736: ifne          782
+     741: aconst_null
+     747: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     750: getstatic     #207                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     757: ldc           #253                // String born_in_chaos_v1:krampus_alert_close
+     759: invokespecial #214                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     762: invokeinterface #220,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     770: getstatic     #228                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     773: ldc           #254                // float 0.8f
+     775: fconst_1
+     776: invokevirtual #233                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     789: getstatic     #207                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     796: ldc           #253                // String born_in_chaos_v1:krampus_alert_close
+     798: invokespecial #214                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     801: invokeinterface #220,  2          // InterfaceMethod net/minecraftforge/registries/IForgeRegistry.getValue:(Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/Object;
+     809: getstatic     #228                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     812: ldc           #254                // float 0.8f
+     814: fconst_1
+     815: iconst_0
+     816: invokevirtual #237                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     821: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     824: ldc_w         #256                // String punishment
+     827: invokevirtual #260                // Method net/minecraft/nbt/CompoundTag.m_128459_:(Ljava/lang/String;)D
+     830: dconst_0
+     831: dcmpl
+     832: ifne          1297
+     837: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     840: aconst_null
+     841: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     848: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     851: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     857: getfield      #136                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     860: ldc2_w        #261                // double 100.0d
+     863: dcmpl
+     864: iflt          1297
+     870: invokevirtual #263                // Method net/minecraft/world/entity/Entity.m_20185_:()D
+     873: dconst_1
+     874: dadd
+     877: invokevirtual #264                // Method net/minecraft/world/entity/Entity.m_20186_:()D
+     880: dconst_1
+     881: dsub
+     884: invokevirtual #265                // Method net/minecraft/world/entity/Entity.m_20189_:()D
+     887: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     890: invokeinterface #269,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     895: invokevirtual #274                // Method net/minecraft/world/level/block/state/BlockState.m_60815_:()Z
+     898: ifeq          1297
+     904: invokevirtual #263                // Method net/minecraft/world/entity/Entity.m_20185_:()D
+     907: dconst_1
+     908: dadd
+     911: invokevirtual #264                // Method net/minecraft/world/entity/Entity.m_20186_:()D
+     914: dconst_1
+     915: dadd
+     918: invokevirtual #265                // Method net/minecraft/world/entity/Entity.m_20189_:()D
+     921: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     924: invokeinterface #269,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     929: invokevirtual #278                // Method net/minecraft/world/level/block/state/BlockState.m_60734_:()Lnet/minecraft/world/level/block/Block;
+     932: getstatic     #284                // Field net/minecraft/world/level/block/Blocks.f_50016_:Lnet/minecraft/world/level/block/Block;
+     935: if_acmpne     1297
+     941: invokevirtual #263                // Method net/minecraft/world/entity/Entity.m_20185_:()D
+     944: dconst_1
+     945: dadd
+     948: invokevirtual #264                // Method net/minecraft/world/entity/Entity.m_20186_:()D
+     953: invokevirtual #265                // Method net/minecraft/world/entity/Entity.m_20189_:()D
+     956: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     959: invokeinterface #269,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     964: invokevirtual #278                // Method net/minecraft/world/level/block/state/BlockState.m_60734_:()Lnet/minecraft/world/level/block/Block;
+     967: getstatic     #284                // Field net/minecraft/world/level/block/Blocks.f_50016_:Lnet/minecraft/world/level/block/Block;
+     970: if_acmpeq     1040
+     976: invokevirtual #263                // Method net/minecraft/world/entity/Entity.m_20185_:()D
+     979: dconst_1
+     980: dadd
+     983: invokevirtual #264                // Method net/minecraft/world/entity/Entity.m_20186_:()D
+     988: invokevirtual #265                // Method net/minecraft/world/entity/Entity.m_20189_:()D
+     991: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     994: invokeinterface #269,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     999: invokevirtual #278                // Method net/minecraft/world/level/block/state/BlockState.m_60734_:()Lnet/minecraft/world/level/block/Block;
+    1002: getstatic     #287                // Field net/minecraft/world/level/block/Blocks.f_50125_:Lnet/minecraft/world/level/block/Block;
+    1005: if_acmpeq     1040
+    1011: invokevirtual #263                // Method net/minecraft/world/entity/Entity.m_20185_:()D
+    1014: dconst_1
+    1015: dadd
+    1018: invokevirtual #264                // Method net/minecraft/world/entity/Entity.m_20186_:()D
+    1023: invokevirtual #265                // Method net/minecraft/world/entity/Entity.m_20189_:()D
+    1026: invokestatic  #201                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+    1029: invokeinterface #269,  2          // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/wo
+# procedures touching naughtiness: BirchBranchesPriUdariePoSushchnostiInstrumientomProcedure.class, CreepyCookiesWithMilkPriZaviershieniiIspolzovaniiaProcedure.class, CreepyGiftPriShchielchkiePKMProcedure.class, EvilometerKazhdyiTikVInvientarieProcedure.class, EvilometerPriShchielchkiePKMProcedure.class, EvilometerZnachieniieSvoistva2Procedure.class, EvilometerZnachieniieSvoistva3Procedure.class, EvilometerZnachieniieSvoistva4Procedure.class, EvilometerZnachieniieSvoistvaProcedure.class, KillingVillagersProcedure.class, KillinganimalsProcedure.class, KrampusPriGibieliSushchnostiProcedure.class, PositiveFertilizerProcedure.class, PositiveTamingProcedure.class, SpiritualGingerbreadPriZaviershieniiIspolzovaniiaProcedure.class
+## net/mcreator/borninchaosv/procedures/BirchBranchesPriUdariePoSushchnostiInstrumientomProcedure.class
+public class net.mcreator.borninchaosv.procedures.BirchBranchesPriUdariePoSushchnostiInstrumientomProcedure {
+  public net.mcreator.borninchaosv.procedures.BirchBranchesPriUdariePoSushchnostiInstrumientomProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, net.minecraft.world.item.ItemStack);
+       1: ifnull        8
+       5: ifnonnull     9
+      10: instanceof    #25                 // class net/minecraft/world/entity/player/Player
+      13: ifeq          37
+      34: ifne          144
+      48: getstatic     #55                 // Field net/minecraft/core/registries/Registries.f_268580_:Lnet/minecraft/resources/ResourceKey;
+      56: getstatic     #55                 // Field net/minecraft/core/registries/Registries.f_268580_:Lnet/minecraft/resources/ResourceKey;
+      63: ldc           #65                 // String born_in_chaos_v1:punishment
+      65: invokespecial #68                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      68: invokestatic  #74                 // Method net/minecraft/resources/ResourceKey.m_135785_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/resources/ResourceKey;
+      81: getstatic     #87                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     101: getfield      #104                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     104: ldc2_w        #105                // double 0.3d
+     108: ldc2_w        #107                // double 3.0d
+     118: instanceof    #25                 // class net/minecraft/world/entity/player/Player
+     121: ifeq          144
+     139: bipush        8
+## net/mcreator/borninchaosv/procedures/CreepyCookiesWithMilkPriZaviershieniiIspolzovaniiaProcedure.class
+public class net.mcreator.borninchaosv.procedures.CreepyCookiesWithMilkPriZaviershieniiIspolzovaniiaProcedure {
+  public net.mcreator.borninchaosv.procedures.CreepyCookiesWithMilkPriZaviershieniiIspolzovaniiaProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       1: ifnonnull     5
+       6: instanceof    #30                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          22
+      23: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      43: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      46: ldc2_w        #56                 // double 3.0d
+      49: dcmpl
+      50: iflt          342
+      64: getstatic     #75                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      71: if_icmpne     342
+      75: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      95: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      98: ldc2_w        #56                 // double 3.0d
+     104: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     118: invokevirtual #103                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     122: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     142: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     145: ldc2_w        #104                // double 35.0d
+     148: dcmpg
+     149: ifge          185
+     156: ldc           #111                // String firstwarning
+     159: invokevirtual #117                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     166: ldc           #119                // String secondwarning
+     169: invokevirtual #117                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     176: ldc           #121                // String finalwarning
+     179: invokevirtual #117                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     186: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     206: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     209: ldc2_w        #122                // double 50.0d
+     212: dcmpl
+     213: ifle          270
+     217: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     237: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     240: ldc2_w        #124                // double 65.0d
+     243: dcmpg
+     244: ifge          270
+     251: ldc           #119                // String secondwarning
+     254: invokevirtual #117                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     261: ldc           #121                // String finalwarning
+     264: invokevirtual #117                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     271: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     291: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     294: ldc2_w        #126                // double 75.0d
+     297: dcmpl
+     298: ifle          342
+     302: getstatic     #38                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     322: getfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     325: ldc2_w        #128                // double 85.0d
+     328: dcmpg
+     329: ifge          342
+     336: ldc           #121                // String finalwarning
+     339: invokevirtual #117                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+       2: putfield      #55                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+## net/mcreator/borninchaosv/procedures/CreepyGiftPriShchielchkiePKMProcedure.class
+Compiled from "CreepyGiftPriShchielchkiePKMProcedure.java"
+public class net.mcreator.borninchaosv.procedures.CreepyGiftPriShchielchkiePKMProcedure {
+  public net.mcreator.borninchaosv.procedures.CreepyGiftPriShchielchkiePKMProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.item.ItemStack);
+       2: ifnonnull     6
+       8: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      11: ifeq          29
+      29: getstatic     #30                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      35: getstatic     #40                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.CREEPY_GIFT:Lnet/minecraftforge/registries/RegistryObject;
+      41: if_acmpne     71
+      46: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      49: ifeq          68
+      61: getstatic     #52                 // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+      73: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      76: ifeq          94
+      94: getstatic     #30                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     100: getstatic     #40                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.CREEPY_GIFT:Lnet/minecraftforge/registries/RegistryObject;
+     106: if_acmpne     133
+     111: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     114: ifeq          133
+     126: getstatic     #59                 // Field net/minecraft/world/InteractionHand.OFF_HAND:Lnet/minecraft/world/InteractionHand;
+     141: instanceof    #65                 // class net/minecraft/world/entity/player/Player
+     144: ifeq          169
+     164: bipush        10
+     170: instanceof    #77                 // class net/minecraft/world/level/Level
+     173: ifeq          270
+     187: ifne          233
+     197: invokestatic  #87                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     200: getstatic     #93                 // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     207: ldc           #97                 // String block.wool.break
+     209: invokespecial #100                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     220: getstatic     #114                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     223: ldc           #115                // float 0.8f
+     225: ldc           #116                // float 1.1f
+     239: getstatic     #93                 // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     246: ldc           #97                 // String block.wool.break
+     248: invokespecial #100                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     259: getstatic     #114                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     262: ldc           #115                // float 0.8f
+     264: ldc           #116                // float 1.1f
+     271: instanceof    #126                // class net/minecraft/server/level/ServerLevel
+     274: ifeq          329
+     285: getstatic     #131                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModParticleTypes.LITTLESNOWFLAKE:Lnet/minecraftforge/registries/RegistryObject;
+     311: bipush        7
+     313: ldc2_w        #146                // double 0.25d
+     316: ldc2_w        #146                // double 0.25d
+     319: ldc2_w        #146                // double 0.25d
+     322: ldc2_w        #148                // double 0.1d
+     331: getstatic     #157                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     351: getfield      #172                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     354: ldc2_w        #173                // double 80.0d
+     357: dcmpg
+     358: ifgt          585
+     361: invokestatic  #179                // Method java/lang/Math.random:()D
+     364: ldc2_w        #180                // double 0.55d
+     367: dcmpg
+     368: ifge          585
+     371: invokestatic  #179                // Method java/lang/Math.random:()D
+     374: ldc2_w        #182                // double 0.5d
+     377: dcmpg
+     378: ifge          478
+     386: invokestatic  #189                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     391: invokestatic  #195                // Method net/minecraft/util/Mth.m_216271_:(Lnet/minecraft/util/RandomSource;II)I
+     394: if_icmpge     475
+     398: instanceof    #126                // class net/minecraft/server/level/ServerLevel
+     401: ifeq          469
+     437: getstatic     #200                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.CREEPY_COOKIES_WITH_MILK:Lnet/minecraftforge/registries/RegistryObject;
+     456: bipush        10
+     478: invokestatic  #179                // Method java/lang/Math.random:()D
+     481: ldc2_w        #216                // double 0.9d
+     484: dcmpg
+     485: ifge          1412
+     493: invokestatic  #189                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     498: invokestatic  #195                // Method net/minecraft/util/Mth.m_216271_:(Lnet/minecraft/util/RandomSource;II)I
+     501: if_icmpge     582
+     505: instanceof    #126                // class net/minecraft/server/level/ServerLevel
+     508: ifeq          576
+     544: getstatic     #220                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SPIRITUAL_GINGERBREAD:Lnet/minecraftforge/registries/RegistryObject;
+     563: bipush        10
+     587: getstatic     #157                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     607: getfield      #172                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     610: ldc2_w        #173                // double 80.0d
+     613: dcmpg
+     614: ifge          1292
+     617: invokestatic  #179                // Method java/lang/Math.random:()D
+     620: ldc2_w        #180                // double 0.55d
+     623: dcmpg
+     624: ifge          1292
+     627: invokestatic  #179                // Method java/lang/Math.random:()D
+     630: ldc2_w        #221                // dou
+## net/mcreator/borninchaosv/procedures/EvilometerKazhdyiTikVInvientarieProcedure.class
+public class net.mcreator.borninchaosv.procedures.EvilometerKazhdyiTikVInvientarieProcedure {
+  public net.mcreator.borninchaosv.procedures.EvilometerKazhdyiTikVInvientarieProcedure();
+  public static void execute(net.minecraft.world.entity.Entity);
+       1: ifnonnull     5
+       6: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      26: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      29: ldc2_w        #40                 // double 90.0d
+      32: dcmpl
+      33: iflt          78
+      37: instanceof    #43                 // class net/minecraft/world/entity/LivingEntity
+      40: ifeq          78
+      55: ifne          78
+      63: getstatic     #61                 // Field net/minecraft/world/effect/MobEffects.f_19600_:Lnet/minecraft/world/effect/MobEffect;
+      66: bipush        10
+## net/mcreator/borninchaosv/procedures/EvilometerPriShchielchkiePKMProcedure.class
+public class net.mcreator.borninchaosv.procedures.EvilometerPriShchielchkiePKMProcedure {
+  public net.mcreator.borninchaosv.procedures.EvilometerPriShchielchkiePKMProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.item.ItemStack);
+       2: ifnonnull     6
+      11: instanceof    #20                 // class net/minecraft/world/entity/player/Player
+      14: ifeq          40
+      37: ifne          366
+      42: instanceof    #20                 // class net/minecraft/world/entity/player/Player
+      45: ifeq          112
+      63: ifne          112
+      72: ldc           #50                 // String ##.##
+      74: invokespecial #53                 // Method java/text/DecimalFormat."<init>":(Ljava/lang/String;)V
+      79: getstatic     #57                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      99: getfield      #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     102: invokevirtual #78                 // Method java/text/DecimalFormat.format:(D)Ljava/lang/String;
+     105: invokestatic  #84                 // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     114: instanceof    #20                 // class net/minecraft/world/entity/player/Player
+     117: ifeq          142
+     137: bipush        15
+     143: instanceof    #42                 // class net/minecraft/world/level/Level
+     146: ifeq          241
+     160: ifne          205
+     170: invokestatic  #98                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     173: getstatic     #104                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     180: ldc           #108                // String block.dispenser.fail
+     182: invokespecial #109                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     193: getstatic     #123                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     196: ldc           #124                // float 0.9f
+     211: getstatic     #104                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     218: ldc           #108                // String block.dispenser.fail
+     220: invokespecial #109                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     231: getstatic     #123                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     234: ldc           #124                // float 0.9f
+     243: instanceof    #134                // class net/minecraft/world/entity/LivingEntity
+     246: ifeq          264
+     264: getstatic     #142                // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     275: if_acmpne     305
+     280: instanceof    #134                // class net/minecraft/world/entity/LivingEntity
+     283: ifeq          302
+     295: getstatic     #148                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     307: instanceof    #134                // class net/minecraft/world/entity/LivingEntity
+     310: ifeq          328
+     328: getstatic     #142                // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     339: if_acmpne     366
+     344: instanceof    #134                // class net/minecraft/world/entity/LivingEntity
+     347: ifeq          366
+     359: getstatic     #158                // Field net/minecraft/world/InteractionHand.OFF_HAND:Lnet/minecraft/world/InteractionHand;
+## net/mcreator/borninchaosv/procedures/EvilometerZnachieniieSvoistva2Procedure.class
+public class net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistva2Procedure {
+  public net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistva2Procedure();
+  public static double execute(net.minecraft.world.entity.Entity);
+       1: ifnonnull     6
+       7: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      27: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      30: ldc2_w        #40                 // double 45.0d
+      33: dcmpl
+      34: iflt          70
+      38: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      58: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      61: ldc2_w        #42                 // double 65.0d
+      64: dcmpg
+      65: ifge          70
+## net/mcreator/borninchaosv/procedures/EvilometerZnachieniieSvoistva3Procedure.class
+public class net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistva3Procedure {
+  public net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistva3Procedure();
+  public static double execute(net.minecraft.world.entity.Entity);
+       1: ifnonnull     6
+       7: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      27: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      30: ldc2_w        #40                 // double 65.0d
+      33: dcmpl
+      34: iflt          70
+      38: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      58: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      61: ldc2_w        #42                 // double 90.0d
+      64: dcmpg
+      65: ifge          70
+## net/mcreator/borninchaosv/procedures/EvilometerZnachieniieSvoistva4Procedure.class
+public class net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistva4Procedure {
+  public net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistva4Procedure();
+  public static double execute(net.minecraft.world.entity.Entity);
+       1: ifnonnull     6
+       7: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      27: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      30: ldc2_w        #40                 // double 90.0d
+      33: dcmpl
+      34: iflt          39
+## net/mcreator/borninchaosv/procedures/EvilometerZnachieniieSvoistvaProcedure.class
+public class net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistvaProcedure {
+  public net.mcreator.borninchaosv.procedures.EvilometerZnachieniieSvoistvaProcedure();
+  public static double execute(net.minecraft.world.entity.Entity);
+       1: ifnonnull     6
+       7: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      27: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      30: ldc2_w        #40                 // double 25.0d
+      33: dcmpl
+      34: iflt          70
+      38: getstatic     #22                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      58: getfield      #39                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      61: ldc2_w        #42                 // double 45.0d
+      64: dcmpg
+      65: ifge          70
+## net/mcreator/borninchaosv/procedures/KrampusPriGibieliSushchnostiProcedure.class
+public class net.mcreator.borninchaosv.procedures.KrampusPriGibieliSushchnostiProcedure {
+  public net.mcreator.borninchaosv.procedures.KrampusPriGibieliSushchnostiProcedure();
+  public static void execute(net.minecraft.world.entity.Entity);
+       1: ifnonnull     5
+       5: ldc2_w        #24                 // double 15.0d
+      10: getstatic     #29                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      24: invokevirtual #61                 // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+      28: instanceof    #63                 // class net/minecraft/server/level/ServerPlayer
+      31: ifeq          122
+      40: getfield      #67                 // Field net/minecraft/server/level/ServerPlayer.f_8924_:Lnet/minecraft/server/MinecraftServer;
+      50: ldc           #77                 // String born_in_chaos_v1:wrong_santa
+      52: invokespecial #80                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      72: ifne          122
+      93: ifeq          122
+     115: invokevirtual #129                // Method net/minecraft/server/PlayerAdvancements.m_135988_:(Lnet/minecraft/advancements/Advancement;Ljava/lang/String;)Z
+       2: putfield      #144                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+## net/mcreator/borninchaosv/procedures/PositiveFertilizerProcedure.class
+public class net.mcreator.borninchaosv.procedures.PositiveFertilizerProcedure {
+  public net.mcreator.borninchaosv.procedures.PositiveFertilizerProcedure();
+  public static void onBonemeal(net.minecraftforge.event.entity.player.BonemealEvent);
+       9: invokestatic  #49                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #49                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+       1: ifnonnull     5
+      16: getstatic     #75                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      23: if_icmpne     328
+      27: instanceof    #81                 // class net/minecraft/world/entity/player/Player
+      30: ifeq          328
+      34: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      54: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      58: dcmpl
+      59: ifle          328
+      63: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      83: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      90: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     104: invokevirtual #126                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     108: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     128: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     131: ldc2_w        #127                // double 35.0d
+     134: dcmpg
+     135: ifge          171
+     142: ldc           #134                // String firstwarning
+     145: invokevirtual #140                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     152: ldc           #142                // String secondwarning
+     155: invokevirtual #140                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     162: ldc           #144                // String finalwarning
+     165: invokevirtual #140                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     172: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     192: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     195: ldc2_w        #145                // double 50.0d
+     198: dcmpl
+     199: ifle          256
+     203: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     223: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     226: ldc2_w        #147                // double 65.0d
+     229: dcmpg
+     230: ifge          256
+     237: ldc           #142                // String secondwarning
+     240: invokevirtual #140                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     247: ldc           #144                // String finalwarning
+     250: invokevirtual #140                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     257: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     277: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     280: ldc2_w        #149                // double 75.0d
+     283: dcmpl
+     284: ifle          328
+     288: getstatic     #85                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     308: getfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     311: ldc2_w        #151                // double 85.0d
+     314: dcmpg
+     315: ifge          328
+     322: ldc           #144                // String finalwarning
+     325: invokevirtual #140                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+       2: putfield      #102                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+## net/mcreator/borninchaosv/procedures/PositiveTamingProcedure.class
+public class net.mcreator.borninchaosv.procedures.PositiveTamingProcedure {
+  public net.mcreator.borninchaosv.procedures.PositiveTamingProcedure();
+  public static void onEntityTamed(net.minecraftforge.event.entity.living.AnimalTameEvent);
+      12: invokestatic  #55                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #55                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+       1: ifnonnull     5
+      16: getstatic     #81                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      23: if_icmpne     332
+      27: instanceof    #87                 // class net/minecraft/world/entity/player/Player
+      30: ifeq          332
+      34: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      54: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      57: ldc2_w        #109                // double 5.0d
+      60: dcmpl
+      61: iflt          332
+      65: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      85: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      88: ldc2_w        #109                // double 5.0d
+      94: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     108: invokevirtual #134                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     112: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     132: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     135: ldc2_w        #135                // double 35.0d
+     138: dcmpg
+     139: ifge          175
+     146: ldc           #142                // String firstwarning
+     149: invokevirtual #148                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     156: ldc           #150                // String secondwarning
+     159: invokevirtual #148                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     166: ldc           #152                // String finalwarning
+     169: invokevirtual #148                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     176: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     196: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     199: ldc2_w        #153                // double 50.0d
+     202: dcmpl
+     203: ifle          260
+     207: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     227: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     230: ldc2_w        #155                // double 65.0d
+     233: dcmpg
+     234: ifge          260
+     241: ldc           #150                // String secondwarning
+     244: invokevirtual #148                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     251: ldc           #152                // String finalwarning
+     254: invokevirtual #148                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     261: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     281: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     284: ldc2_w        #157                // double 75.0d
+     287: dcmpl
+     288: ifle          332
+     292: getstatic     #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     312: getfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     315: ldc2_w        #159                // double 85.0d
+     318: dcmpg
+     319: ifge          332
+     326: ldc           #152                // String finalwarning
+     329: invokevirtual #148                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+       2: putfield      #108                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+## net/mcreator/borninchaosv/procedures/SpiritualGingerbreadPriZaviershieniiIspolzovaniiaProcedure.class
+public class net.mcreator.borninchaosv.procedures.SpiritualGingerbreadPriZaviershieniiIspolzovaniiaProcedure {
+  public net.mcreator.borninchaosv.procedures.SpiritualGingerbreadPriZaviershieniiIspolzovaniiaProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       2: ifnonnull     6
+       8: instanceof    #30                 // class net/minecraft/world/entity/LivingEntity
+      11: ifeq          36
+      23: getstatic     #36                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModMobEffects.MAGIC_DEPLETION:Lnet/minecraftforge/registries/RegistryObject;
+      47: getstatic     #66                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      54: if_icmpne     1249
+      59: getstatic     #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      79: getfield      #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+      82: ldc2_w        #92                 // double 3.0d
+      90: getstatic     #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     106: invokevirtual #117                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     114: ldc           #123                // String firstwarning
+     116: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     119: ifne          308
+     124: getstatic     #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     144: getfield      #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     147: ldc2_w        #130                // double 35.0d
+     150: dcmpl
+     151: iflt          308
+     156: getstatic     #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     176: getfield      #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     179: ldc2_w        #132                // double 50.0d
+     182: dcmpg
+     183: ifgt          308
+     191: ldc           #123                // String firstwarning
+     194: invokevirtual #137                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     203: ifne          736
+     207: instanceof    #143                // class net/minecraft/world/level/Level
+     210: ifeq          305
+     224: ifne          269
+     234: invokestatic  #150                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     237: getstatic     #156                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     244: ldc           #160                // String born_in_chaos_v1:krampus_alert_far
+     246: invokespecial #163                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     257: getstatic     #177                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     260: ldc           #178                // float 0.7f
+     275: getstatic     #156                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     282: ldc           #160                // String born_in_chaos_v1:krampus_alert_far
+     284: invokespecial #163                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     295: getstatic     #177                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     298: ldc           #178                // float 0.7f
+     313: ldc           #188                // String secondwarning
+     315: invokevirtual #129                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     318: ifne          518
+     323: getstatic     #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     343: getfield      #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     346: ldc2_w        #189                // double 65.0d
+     349: dcmpl
+     350: iflt          518
+     355: getstatic     #74                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     375: getfield      #91                 // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables.naughtiness:D
+     378: ldc2_w        #191                // double 75.0d
+     381: dcmpg
+     382: ifgt          518
+     390: ldc           #188                // String secondwarning
+     393: invokevirtual #137                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     401: ldc           #123                // String firstwarning
+     404: invokevirtual #137                // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+     413: ifne          736
+     417: instanceof    #143                // class net/minecraft/world/level/Level
+     420: ifeq          515
+     434: ifne          479
+     444: invokestatic  #150                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     447: getstatic     #156                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     454: ldc           #194                // String born_in_chaos_v1:krampus_alert
+     456: invokespecial #163                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     467: getstatic     #177                // Field net/minecraft/sounds/SoundSource.NEUTRAL:Lnet/minecraft/sounds/SoundSource;
+     470: ldc           #178                // float 0.7f
+     485: getstatic     #156                // Field net/minecraftforge/registries/ForgeRegistries.SOUND_EVENTS:Lnet/minecraftforge/registries/IForgeRegistry;
+     492: ldc           #194                // String born_in_chaos_v1:krampus_alert
+     494: invokespecial #163                // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+   
+## net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.class
+       0: ldc           #84                 // String generationofInfectedDiamonds
+       5: iconst_1
+       6: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      12: putstatic     #98                 // Field GENERATIONOFINFECTEDDIAMONDS:Lnet/minecraft/world/level/GameRules$Key;
+      15: ldc           #100                // String theappearanceoftheNightmareStalker
+      20: iconst_1
+      21: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      27: putstatic     #102                // Field THEAPPEARANCEOFTHENIGHTMARESTALKER:Lnet/minecraft/world/level/GameRules$Key;
+      30: ldc           #104                // String decrepitSkeletonSpawn
+      35: iconst_1
+      36: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      42: putstatic     #106                // Field DECREPITSKELETONSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      45: ldc           #108                // String skeletonBombSpawn
+      50: iconst_1
+      51: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      57: putstatic     #110                // Field SKELETONBOMBSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      60: ldc           #112                // String decayingZombieSpawn
+      65: iconst_1
+      66: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      72: putstatic     #114                // Field DECAYINGZOMBIESPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      75: ldc           #116                // String babySkeletonSpawn
+      80: iconst_1
+      81: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      87: putstatic     #118                // Field BABYSKELETONSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      90: ldc           #120                // String zombiesinaBarrelSpawn
+      95: iconst_1
+      96: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     102: putstatic     #125                // Field ZOMBIESINABARRELSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     105: ldc           #127                // String phantomCreeperSpawn
+     110: iconst_1
+     111: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     117: putstatic     #129                // Field PHANTOMCREEPERSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     120: ldc           #131                // String doorKnightSpawn
+     125: iconst_1
+     126: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     132: putstatic     #133                // Field DOORKNIGHTSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     135: ldc           #135                // String restlessSpiritSpawn
+     140: iconst_1
+     141: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     147: putstatic     #137                // Field RESTLESSSPIRITSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     150: ldc           #139                // String skeletonThrasherSpawn
+     155: iconst_1
+     156: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     162: putstatic     #141                // Field SKELETONTHRASHERSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     165: ldc           #143                // String firelightSpawn
+     170: iconst_1
+     171: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     177: putstatic     #145                // Field FIRELIGHTSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     180: ldc           #147                // String bonescallerSpawn
+     185: iconst_1
+     186: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     192: putstatic     #149                // Field BONESCALLERSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     195: ldc           #151                // String boneImpSpawn
+     200: iconst_1
+     201: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     207: putstatic     #153                // Field BONEIMPSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     210: ldc           #155                // String darkVortexSpawn
+     215: iconst_1
+     216: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     222: putstatic     #157                // Field DARKVORTEXSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     225: ldc           #159                // String dreadHoundSpawn
+     230: iconst_1
+     231: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     237: putstatic     #161                // Field DREADHOUNDSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     240: ldc           #163                // String fallenChaosKnightSpawn
+     245: iconst_1
+     246: invokestatic  #92                 // Met

@@ -1,237 +1,622 @@
-## ttv/migami/migamigos/client/ClientHandler.class
-Compiled from "ClientHandler.java"
-public class ttv.migami.migamigos.client.ClientHandler {
-  private static java.lang.reflect.Field mouseOptionsField;
+## ttv/migami/migamigos/client/screen/AmigoScreen.class
+Compiled from "AmigoScreen.java"
+public class ttv.migami.migamigos.client.screen.AmigoScreen extends net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<ttv.migami.migamigos.common.container.AmigoContainer> {
+  private static final net.minecraft.resources.ResourceLocation GUI_ICONS_LOCATION;
 
-  public ttv.migami.migamigos.client.ClientHandler();
-    Code:
-       0: aload_0
-       1: invokespecial #59                 // Method java/lang/Object."<init>":()V
-       4: return
+  private static final net.minecraft.resources.ResourceLocation TEXTURE;
 
-  public static void setup();
-    Code:
-       0: invokestatic  #65                 // Method registerScreenFactories:()V
-       3: return
+  public static final net.minecraft.resources.ResourceLocation EMPTY_ARMOR_SLOT_HELMET;
 
-  private static void registerScreenFactories();
-    Code:
-       0: getstatic     #71                 // Field ttv/migami/migamigos/init/ModContainers.AMIGO_CONTAINER:Lnet/minecraftforge/registries/RegistryObject;
-       3: invokevirtual #77                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
-       6: checkcast     #79                 // class net/minecraft/world/inventory/MenuType
-       9: invokedynamic #100,  0            // InvokeDynamic #0:m_96214_:()Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;
-      14: invokestatic  #104                // Method net/minecraft/client/gui/screens/MenuScreens.m_96206_:(Lnet/minecraft/world/inventory/MenuType;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V
-      17: return
+  public static final net.minecraft.resources.ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE;
 
-  public static void onScreenInit(net.minecraftforge.client.event.ScreenEvent$Init$Post);
-    Code:
-       0: aload_0
-       1: invokevirtual #113                // Method net/minecraftforge/client/event/ScreenEvent$Init$Post.getScreen:()Lnet/minecraft/client/gui/screens/Screen;
-       4: instanceof    #115                // class net/minecraft/client/gui/screens/MouseSettingsScreen
-       7: ifeq          60
-      10: aload_0
-      11: invokevirtual #113                // Method net/minecraftforge/client/event/ScreenEvent$Init$Post.getScreen:()Lnet/minecraft/client/gui/screens/Screen;
-      14: checkcast     #115                // class net/minecraft/client/gui/screens/MouseSettingsScreen
-      17: astore_1
-      18: getstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
-      21: ifnonnull     41
-      24: ldc           #115                // class net/minecraft/client/gui/screens/MouseSettingsScreen
-      26: ldc           #119                // String f_96218_
-      28: invokestatic  #125                // Method net/minecraftforge/fml/util/ObfuscationReflectionHelper.findField:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/reflect/Field;
-      31: putstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
-      34: getstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
-      37: iconst_1
-      38: invokevirtual #131                // Method java/lang/reflect/Field.setAccessible:(Z)V
-      41: getstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
-      44: aload_1
-      45: invokevirtual #134                // Method java/lang/reflect/Field.get:(Ljava/lang/Object;)Ljava/lang/Object;
-      48: checkcast     #136                // class net/minecraft/client/gui/components/OptionsList
-      51: astore_2
-      52: goto          60
-      55: astore_2
-      56: aload_2
-      57: invokevirtual #139                // Method java/lang/IllegalAccessException.printStackTrace:()V
-      60: return
-    Exception table:
-       from    to  target type
-          41    52    55   Class java/lang/IllegalAccessException
+  public static final net.minecraft.resources.ResourceLocation EMPTY_ARMOR_SLOT_LEGGINGS;
 
-  public static void onRegisterCreativeTab(net.minecraftforge.eventbus.api.IEventBus);
-    Code:
-       0: getstatic     #153                // Field net/minecraft/core/registries/Registries.f_279569_:Lnet/minecraft/resources/ResourceKey;
-       3: ldc           #154                // String migamigos
-       5: invokestatic  #160                // Method net/minecraftforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/DeferredRegister;
-       8: astore_1
-       9: invokestatic  #164                // Method net/minecraft/world/item/CreativeModeTab.builder:()Lnet/minecraft/world/item/CreativeModeTab$Builder;
-      12: astore_2
-      13: aload_2
-      14: ldc           #166                // String itemGroup.migamigos
-      16: invokestatic  #172                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
-      19: invokevirtual #176                // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257941_:(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
-      22: pop
-      23: aload_2
-      24: invokedynamic #186,  0            // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
-      29: invokevirtual #190                // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257737_:(Ljava/util/function/Supplier;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
-      32: pop
-      33: aload_2
-      34: invokedynamic #200,  0            // InvokeDynamic #2:m_257865_:()Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;
-      39: invokevirtual #204                // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257501_:(Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
-      42: pop
-      43: aload_1
-      44: ldc           #206                // String creative_tab
-      46: aload_2
-      47: dup
-      48: invokestatic  #211                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
-      51: pop
-      52: invokedynamic #220,  0            // InvokeDynamic #3:get:(Lnet/minecraft/world/item/CreativeModeTab$Builder;)Ljava/util/function/Supplier;
-      57: invokevirtual #224                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
-      60: pop
-      61: aload_1
-      62: aload_0
-      63: invokevirtual #226                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
-      66: return
+  public static final net.minecraft.resources.ResourceLocation EMPTY_ARMOR_SLOT_BOOTS;
 
-  public static void onKeyPressed(net.minecraftforge.client.event.InputEvent$Key);
-    Code:
-       0: return
+  public static final net.minecraft.resources.ResourceLocation EMPTY_ARMOR_SLOT_SHIELD;
 
-  private static void lambda$onRegisterCreativeTab$2(net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters, net.minecraft.world.item.CreativeModeTab$Output);
-    Code:
-       0: getstatic     #239                // Field ttv/migami/migamigos/init/ModItems.REGISTER:Lnet/minecraftforge/registries/DeferredRegister;
-       3: invokevirtual #243                // Method net/minecraftforge/registries/DeferredRegister.getEntries:()Ljava/util/Collection;
-       6: aload_1
-       7: invokedynamic #256,  0            // InvokeDynamic #4:accept:(Lnet/minecraft/world/item/CreativeModeTab$Output;)Ljava/util/function/Consumer;
-      12: invokeinterface #262,  2          // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
-      17: return
+  private final ttv.migami.migamigos.entity.AmigoEntity amigoEntity;
 
-  private static void lambda$onRegisterCreativeTab$1(net.minecraft.world.item.CreativeModeTab$Output, net.minecraftforge.registries.RegistryObject);
+  private final java.util.List<net.minecraft.client.gui.components.Button> buttons;
+
+  private final int maxHearts = 10;
+
+  private final int healthBarX = 0;
+
+  private final int healthBarY = -11;
+
+  private final int levelBarY = -9;
+
+  public ttv.migami.migamigos.client.screen.AmigoScreen(ttv.migami.migamigos.common.container.AmigoContainer, net.minecraft.world.entity.player.Inventory, net.minecraft.network.chat.Component);
     Code:
        0: aload_0
        1: aload_1
-       2: invokevirtual #77                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
-       5: checkcast     #268                // class net/minecraft/world/level/ItemLike
-       8: invokeinterface #272,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
-      13: return
-
-  private static net.minecraft.world.item.ItemStack lambda$onRegisterCreativeTab$0();
-    Code:
-       0: new           #275                // class net/minecraft/world/item/ItemStack
-       3: dup
-       4: getstatic     #278                // Field ttv/migami/migamigos/init/ModItems.COCOGOAT_SPAWN_FLOWER:Lnet/minecraftforge/registries/RegistryObject;
-       7: invokevirtual #77                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
-      10: checkcast     #268                // class net/minecraft/world/level/ItemLike
-      13: invokespecial #280                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
-      16: astore_0
-      17: aload_0
-      18: areturn
-}
-
-## ttv/migami/migamigos/client/KeyBinds.class
-Compiled from "KeyBinds.java"
-public class ttv.migami.migamigos.client.KeyBinds {
-  public static final net.minecraft.client.KeyMapping KEY_Z_ACTION;
-
-  public static final net.minecraft.client.KeyMapping KEY_X_ACTION;
-
-  public static final net.minecraft.client.KeyMapping KEY_C_ACTION;
-
-  public static final net.minecraft.client.KeyMapping KEY_V_ACTION;
-
-  public static final net.minecraft.client.KeyMapping KEY_R_ACTION;
-
-  public static final net.minecraft.client.KeyMapping BLESSING_MENU;
-
-  public ttv.migami.migamigos.client.KeyBinds();
-    Code:
-       0: aload_0
-       1: invokespecial #16                 // Method java/lang/Object."<init>":()V
-       4: return
-
-  public static void registerKeyMappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent);
-    Code:
-       0: aload_0
-       1: getstatic     #22                 // Field KEY_Z_ACTION:Lnet/minecraft/client/KeyMapping;
-       4: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+       2: aload_2
+       3: aload_3
+       4: invokespecial #51                 // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen."<init>":(Lnet/minecraft/world/inventory/AbstractContainerMenu;Lnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/network/chat/Component;)V
        7: aload_0
-       8: getstatic     #30                 // Field KEY_X_ACTION:Lnet/minecraft/client/KeyMapping;
-      11: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
-      14: aload_0
-      15: getstatic     #32                 // Field KEY_C_ACTION:Lnet/minecraft/client/KeyMapping;
-      18: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
-      21: aload_0
-      22: getstatic     #34                 // Field KEY_V_ACTION:Lnet/minecraft/client/KeyMapping;
-      25: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
-      28: aload_0
-      29: getstatic     #36                 // Field KEY_R_ACTION:Lnet/minecraft/client/KeyMapping;
-      32: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+       8: new           #53                 // class java/util/ArrayList
+      11: dup
+      12: invokespecial #56                 // Method java/util/ArrayList."<init>":()V
+      15: putfield      #58                 // Field buttons:Ljava/util/List;
+      18: aload_0
+      19: bipush        10
+      21: putfield      #60                 // Field maxHearts:I
+      24: aload_0
+      25: iconst_0
+      26: putfield      #62                 // Field healthBarX:I
+      29: aload_0
+      30: bipush        -11
+      32: putfield      #64                 // Field healthBarY:I
       35: aload_0
-      36: getstatic     #38                 // Field BLESSING_MENU:Lnet/minecraft/client/KeyMapping;
-      39: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
-      42: return
+      36: bipush        -9
+      38: putfield      #66                 // Field levelBarY:I
+      41: aload_0
+      42: aload_1
+      43: invokevirtual #72                 // Method ttv/migami/migamigos/common/container/AmigoContainer.getAmigo:()Lttv/migami/migamigos/entity/AmigoEntity;
+      46: putfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+      49: aload_0
+      50: sipush        176
+      53: putfield      #77                 // Field f_97726_:I
+      56: aload_0
+      57: sipush        176
+      60: putfield      #80                 // Field f_97727_:I
+      63: return
 
-  static {};
+  protected void m_7856_();
     Code:
-       0: new           #43                 // class net/minecraft/client/KeyMapping
-       3: dup
-       4: ldc           #45                 // String key.mdf.z_action
-       6: bipush        90
-       8: ldc           #47                 // String key.categories.mdf
-      10: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
-      13: putstatic     #22                 // Field KEY_Z_ACTION:Lnet/minecraft/client/KeyMapping;
-      16: new           #43                 // class net/minecraft/client/KeyMapping
-      19: dup
-      20: ldc           #52                 // String key.mdf.x_action
-      22: bipush        88
-      24: ldc           #47                 // String key.categories.mdf
-      26: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
-      29: putstatic     #30                 // Field KEY_X_ACTION:Lnet/minecraft/client/KeyMapping;
-      32: new           #43                 // class net/minecraft/client/KeyMapping
+       0: aload_0
+       1: invokespecial #91                 // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_7856_:()V
+       4: bipush        120
+       6: istore_1
+       7: bipush        20
+       9: istore_2
+      10: aload_0
+      11: getfield      #94                 // Field f_97735_:I
+      14: aload_0
+      15: getfield      #77                 // Field f_97726_:I
+      18: iadd
+      19: iconst_5
+      20: iadd
+      21: istore_3
+      22: aload_0
+      23: getfield      #97                 // Field f_97736_:I
+      26: istore        4
+      28: iconst_5
+      29: istore        5
+      31: aload_0
+      32: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
       35: dup
-      36: ldc           #54                 // String key.mdf.c_action
-      38: bipush        67
-      40: ldc           #47                 // String key.categories.mdf
-      42: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
-      45: putstatic     #32                 // Field KEY_C_ACTION:Lnet/minecraft/client/KeyMapping;
-      48: new           #43                 // class net/minecraft/client/KeyMapping
-      51: dup
-      52: ldc           #56                 // String key.mdf.v_action
-      54: bipush        86
-      56: ldc           #47                 // String key.categories.mdf
-      58: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
-      61: putstatic     #34                 // Field KEY_V_ACTION:Lnet/minecraft/client/KeyMapping;
-      64: new           #43                 // class net/minecraft/client/KeyMapping
-      67: dup
-      68: ldc           #58                 // String key.mdf.r_action
-      70: bipush        82
-      72: ldc           #47                 // String key.categories.mdf
-      74: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
-      77: putstatic     #36                 // Field KEY_R_ACTION:Lnet/minecraft/client/KeyMapping;
-      80: new           #43                 // class net/minecraft/client/KeyMapping
-      83: dup
-      84: ldc           #60                 // String key.mdf.blessing_menu
-      86: bipush        66
-      88: ldc           #47                 // String key.categories.mdf
-      90: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
-      93: putstatic     #38                 // Field BLESSING_MENU:Lnet/minecraft/client/KeyMapping;
-      96: return
-}
+      36: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      39: pop
+      40: invokedynamic #125,  0            // InvokeDynamic #0:get:(Lttv/migami/migamigos/entity/AmigoEntity;)Ljava/util/function/Supplier;
+      45: iconst_2
+      46: anewarray     #127                // class java/lang/String
+      49: dup
+      50: iconst_0
+      51: ldc           #129                // String gui.migamigos.amigo_inventory.attacking_any_entity.false
+      53: aastore
+      54: dup
+      55: iconst_1
+      56: ldc           #131                // String gui.migamigos.amigo_inventory.attacking_any_entity.true
+      58: aastore
+      59: invokestatic  #137                // Method com/mojang/datafixers/util/Pair.of:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Pair;
+      62: aload_0
+      63: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+      66: dup
+      67: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      70: pop
+      71: invokedynamic #142,  0            // InvokeDynamic #1:get:(Lttv/migami/migamigos/entity/AmigoEntity;)Ljava/util/function/Supplier;
+      76: iconst_2
+      77: anewarray     #127                // class java/lang/String
+      80: dup
+      81: iconst_0
+      82: ldc           #144                // String gui.migamigos.amigo_inventory.defend_player_only.false
+      84: aastore
+      85: dup
+      86: iconst_1
+      87: ldc           #146                // String gui.migamigos.amigo_inventory.defend_player_only.true
+      89: aastore
+      90: invokestatic  #137                // Method com/mojang/datafixers/util/Pair.of:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Pair;
+      93: aload_0
+      94: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+      97: dup
+      98: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     101: pop
+     102: invokedynamic #151,  0            // InvokeDynamic #2:get:(Lttv/migami/migamigos/entity/AmigoEntity;)Ljava/util/function/Supplier;
+     107: iconst_2
+     108: anewarray     #127                // class java/lang/String
+     111: dup
+     112: iconst_0
+     113: ldc           #153                // String gui.migamigos.amigo_inventory.focus_on_main_target.false
+     115: aastore
+     116: dup
+     117: iconst_1
+     118: ldc           #155                // String gui.migamigos.amigo_inventory.focus_on_main_target.true
+     120: aastore
+     121: invokestatic  #137                // Method com/mojang/datafixers/util/Pair.of:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Pair;
+     124: aload_0
+     125: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     128: dup
+     129: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     132: pop
+     133: invokedynamic #160,  0            // InvokeDynamic #3:get:(Lttv/migami/migamigos/entity/AmigoEntity;)Ljava/util/function/Supplier;
+     138: iconst_2
+     139: anewarray     #127                // class java/lang/String
+     142: dup
+     143: iconst_0
+     144: ldc           #162                // String gui.migamigos.amigo_inventory.allow_wandering.false
+     146: aastore
+     147: dup
+     148: iconst_1
+     149: ldc           #164                // String gui.migamigos.amigo_inventory.allow_wandering.true
+     151: aastore
+     152: invokestatic  #137                // Method com/mojang/datafixers/util/Pair.of:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Pair;
+     155: aload_0
+     156: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     159: dup
+     160: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     163: pop
+     164: invokedynamic #169,  0            // InvokeDynamic #4:get:(Lttv/migami/migamigos/entity/AmigoEntity;)Ljava/util/function/Supplier;
+     169: iconst_2
+     170: anewarray     #127                // class java/lang/String
+     173: dup
+     174: iconst_0
+     175: ldc           #171                // String gui.migamigos.amigo_inventory.following.false
+     177: aastore
+     178: dup
+     179: iconst_1
+     180: ldc           #173                // String gui.migamigos.amigo_inventory.following.true
+     182: aastore
+     183: invokestatic  #137                // Method com/mojang/datafixers/util/Pair.of:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/mojang/datafixers/util/Pair;
+     186: invokestatic  #178                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+     189: astore        6
+     191: iconst_0
+     192: istore        7
+     194: iload         7
+     196: aload         6
+     198: invokeinterface #182,  1          // InterfaceMethod java/util/List.size:()I
+     203: if_icmpge     314
+     206: iload         4
+     208: iload         7
+     210: iload_2
+     211: iload         5
+     213: iadd
+     214: imul
+     215: iadd
+     216: istore        8
+     218: aload         6
+     220: iload         7
+     222: invokeinterface #185,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     227: checkcast     #133                // class com/mojang/datafixers/util/Pair
+     230: invokevirtual #188                // Method com/mojang/datafixers/util/Pair.getFirst:()Ljava/lang/Object;
+     233: checkcast     #190                // class java/util/function/Supplier
+     236: astore        9
+     238: aload         6
+     240: iload         7
+     242: invokeinterface #185,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     247: checkcast     #133                // class com/mojang/datafixers/util/Pair
+     250: invokevirtual #193                // Method com/mojang/datafixers/util/Pair.getSecond:()Ljava/lang/Object;
+     253: checkcast     #195                // class "[Ljava/lang/String;"
+     256: astore        10
+     258: iload         7
+     260: istore        11
+     262: aload_0
+     263: aload_0
+     264: aload         9
+     266: aload         10
+     268: iconst_0
+     269: invokevirtual #199                // Method getButtonTranslationKey:(Ljava/util/function/Supplier;[Ljava/lang/String;Z)Ljava/lang/String;
+     272: invokestatic  #205                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     275: aload_0
+     276: iload         11
+     278: aload         9
+     280: aload         10
+     282: invokedynamic #216,  0            // InvokeDynamic #5:m_93750_:(Lttv/migami/migamigos/client/screen/AmigoScreen;ILjava/util/function/Supplier;[Ljava/lang/String;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     287: invokestatic  #220                // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     290: iload_3
+     291: iload         8
+     293: invokevirtual #224                // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     296: iload_1
+     297: iload_2
+     298: invokevirtual #227                // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     301: invokevirtual #231                // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+     304: invokevirtual #235                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     307: pop
+     308: iinc          7, 1
+     311: goto          194
+     314: aload         6
+     316: invokeinterface #182,  1          // InterfaceMethod java/util/List.size:()I
+     321: istore        7
+     323: invokestatic  #241                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     326: getfield      #245                // Field net/minecraft/client/Minecraft.f_91074_:Lnet/minecraft/client/player/LocalPlayer;
+     329: astore        8
+     331: aload         8
+     333: ifnull        373
+     336: aload_0
+     337: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     340: aload         8
+     342: invokevirtual #249                // Method ttv/migami/migamigos/entity/AmigoEntity.canRideWithPlayer:(Lnet/minecraft/world/entity/player/Player;)Z
+     345: ifne          358
+     348: aload_0
+     349: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     352: invokevirtual #253                // Method ttv/migami/migamigos/entity/AmigoEntity.m_20202_:()Lnet/minecraft/world/entity/Entity;
+     355: ifnull        373
+     358: aload_0
+     359: aload         8
+     361: iload         7
+     363: iload         4
+     365: iload_3
+     366: iload_1
+     367: iload_2
+     368: iload         5
+     370: invokevirtual #259                // Method addRideWithPlayerButton:(Lnet/minecraft/client/player/LocalPlayer;IIIIII)V
+     373: return
 
-## ttv/migami/migamigos/client/network/ClientPlayHandler.class
-Compiled from "ClientPlayHandler.java"
-public class ttv.migami.migamigos.client.network.ClientPlayHandler {
-  public ttv.migami.migamigos.client.network.ClientPlayHandler();
+  private void onButtonClick(int);
+    Code:
+       0: invokestatic  #283                // Method ttv/migami/migamigos/network/PacketHandler.getPlayChannel:()Lcom/mrcrayfish/framework/api/network/FrameworkNetwork;
+       3: new           #285                // class ttv/migami/migamigos/network/message/C2SAmigoSwitchAttitude
+       6: dup
+       7: aload_0
+       8: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+      11: invokevirtual #289                // Method ttv/migami/migamigos/entity/AmigoEntity.m_20148_:()Ljava/util/UUID;
+      14: iload_1
+      15: invokespecial #292                // Method ttv/migami/migamigos/network/message/C2SAmigoSwitchAttitude."<init>":(Ljava/util/UUID;I)V
+      18: invokeinterface #298,  2          // InterfaceMethod com/mrcrayfish/framework/api/network/FrameworkNetwork.sendToServer:(Lcom/mrcrayfish/framework/network/message/IMessage;)V
+      23: return
+
+  private java.lang.String getButtonTranslationKey(java.util.function.Supplier<java.lang.Boolean>, java.lang.String[], boolean);
+    Code:
+       0: aload_1
+       1: invokeinterface #302,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       6: checkcast     #304                // class java/lang/Boolean
+       9: invokevirtual #307                // Method java/lang/Boolean.booleanValue:()Z
+      12: istore        4
+      14: iload_3
+      15: ifeq          31
+      18: aload_2
+      19: iload         4
+      21: ifeq          28
+      24: iconst_0
+      25: goto          29
+      28: iconst_1
+      29: aaload
+      30: areturn
+      31: aload_2
+      32: iload         4
+      34: ifeq          41
+      37: iconst_1
+      38: goto          42
+      41: iconst_0
+      42: aaload
+      43: areturn
+
+  private void addRideWithPlayerButton(net.minecraft.client.player.LocalPlayer, int, int, int, int, int, int);
     Code:
        0: aload_0
-       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
-       4: return
+       1: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+       4: invokevirtual #253                // Method ttv/migami/migamigos/entity/AmigoEntity.m_20202_:()Lnet/minecraft/world/entity/Entity;
+       7: astore        8
+       9: aload_1
+      10: invokevirtual #311                // Method net/minecraft/client/player/LocalPlayer.m_20202_:()Lnet/minecraft/world/entity/Entity;
+      13: astore        9
+      15: aload         8
+      17: ifnonnull     26
+      20: aload         9
+      22: ifnonnull     26
+      25: return
+      26: aload         8
+      28: ifnonnull     37
+      31: ldc_w         #315                // String gui.migamigos.amigo_inventory.ride_with_player
+      34: goto          40
+      37: ldc_w         #317                // String gui.migamigos.amigo_inventory.stop_riding
+      40: invokestatic  #205                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      43: astore        10
+      45: aload         10
+      47: invokevirtual #323                // Method net/minecraft/network/chat/MutableComponent.getString:()Ljava/lang/String;
+      50: iconst_1
+      51: anewarray     #325                // class java/lang/Object
+      54: dup
+      55: iconst_0
+      56: aload         8
+      58: ifnonnull     74
+      61: aload         9
+      63: invokevirtual #329                // Method net/minecraft/world/entity/Entity.m_7755_:()Lnet/minecraft/network/chat/Component;
+      66: invokeinterface #330,  1          // InterfaceMethod net/minecraft/network/chat/Component.getString:()Ljava/lang/String;
+      71: goto          84
+      74: aload         8
+      76: invokevirtual #329                // Method net/minecraft/world/entity/Entity.m_7755_:()Lnet/minecraft/network/chat/Component;
+      79: invokeinterface #330,  1          // InterfaceMethod net/minecraft/network/chat/Component.getString:()Ljava/lang/String;
+      84: aastore
+      85: invokevirtual #336                // Method java/lang/String.formatted:([Ljava/lang/Object;)Ljava/lang/String;
+      88: astore        11
+      90: iload_3
+      91: iload_2
+      92: iload         6
+      94: iload         7
+      96: iadd
+      97: imul
+      98: iadd
+      99: istore        12
+     101: aload_0
+     102: aload         11
+     104: invokestatic  #339                // InterfaceMethod net/minecraft/network/chat/Component.m_237113_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     107: aload_0
+     108: iload_2
+     109: aload         11
+     111: invokedynamic #347,  0            // InvokeDynamic #6:m_93750_:(Lttv/migami/migamigos/client/screen/AmigoScreen;ILjava/lang/String;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     116: invokestatic  #220                // Method net/minecraft/client/gui/components/Button.m_253074_:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     119: iload         4
+     121: iload         12
+     123: invokevirtual #224                // Method net/minecraft/client/gui/components/Button$Builder.m_252794_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     126: iload         5
+     128: iload         6
+     130: invokevirtual #227                // Method net/minecraft/client/gui/components/Button$Builder.m_253046_:(II)Lnet/minecraft/client/gui/components/Button$Builder;
+     133: invokevirtual #231                // Method net/minecraft/client/gui/components/Button$Builder.m_253136_:()Lnet/minecraft/client/gui/components/Button;
+     136: invokevirtual #235                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     139: pop
+     140: return
 
-  public static void handleUpdateAmigos(ttv.migami.migamigos.network.message.S2CMessageUpdateAmigos);
+  protected void m_7286_(net.minecraft.client.gui.GuiGraphics, float, int, int);
     Code:
        0: aload_0
-       1: invokestatic  #19                 // Method ttv/migami/migamigos/common/NetworkAmigoManager.updateRegisteredAmigos:(Lttv/migami/migamigos/network/message/S2CMessageUpdateAmigos;)Z
-       4: pop
+       1: aload_1
+       2: invokevirtual #363                // Method m_280273_:(Lnet/minecraft/client/gui/GuiGraphics;)V
+       5: aload_1
+       6: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+       9: aload_0
+      10: getfield      #94                 // Field f_97735_:I
+      13: aload_0
+      14: getfield      #97                 // Field f_97736_:I
+      17: iconst_0
+      18: iconst_0
+      19: aload_0
+      20: getfield      #77                 // Field f_97726_:I
+      23: aload_0
+      24: getfield      #80                 // Field f_97727_:I
+      27: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+      30: aload_0
+      31: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+      34: invokevirtual #374                // Method ttv/migami/migamigos/entity/AmigoEntity.isShowingHelmet:()Z
+      37: ifeq          71
+      40: aload_1
+      41: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+      44: aload_0
+      45: getfield      #94                 // Field f_97735_:I
+      48: iconst_4
+      49: iadd
+      50: aload_0
+      51: getfield      #97                 // Field f_97736_:I
+      54: bipush        23
+      56: iadd
+      57: sipush        246
+      60: bipush        9
+      62: iconst_3
+      63: bipush        6
+      65: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+      68: goto          99
+      71: aload_1
+      72: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+      75: aload_0
+      76: getfield      #94                 // Field f_97735_:I
+      79: iconst_4
+      80: iadd
+      81: aload_0
+      82: getfield      #97                 // Field f_97736_:I
+      85: bipush        23
+      87: iadd
+      88: sipush        249
+      91: bipush        9
+      93: iconst_3
+      94: bipush        6
+      96: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+      99: aload_0
+     100: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     103: invokevirtual #377                // Method ttv/migami/migamigos/entity/AmigoEntity.isShowingChestplate:()Z
+     106: ifeq          140
+     109: aload_1
+     110: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     113: aload_0
+     114: getfield      #94                 // Field f_97735_:I
+     117: iconst_4
+     118: iadd
+     119: aload_0
+     120: getfield      #97                 // Field f_97736_:I
+     123: bipush        41
+     125: iadd
+     126: sipush        246
+     129: bipush        9
+     131: iconst_3
+     132: bipush        6
+     134: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     137: goto          168
+     140: aload_1
+     141: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     144: aload_0
+     145: getfield      #94                 // Field f_97735_:I
+     148: iconst_4
+     149: iadd
+     150: aload_0
+     151: getfield      #97                 // Field f_97736_:I
+     154: bipush        41
+     156: iadd
+     157: sipush        249
+     160: bipush        9
+     162: iconst_3
+     163: bipush        6
+     165: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     168: aload_0
+     169: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     172: invokevirtual #380                // Method ttv/migami/migamigos/entity/AmigoEntity.isShowingLeggings:()Z
+     175: ifeq          209
+     178: aload_1
+     179: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     182: aload_0
+     183: getfield      #94                 // Field f_97735_:I
+     186: iconst_4
+     187: iadd
+     188: aload_0
+     189: getfield      #97                 // Field f_97736_:I
+     192: bipush        59
+     194: iadd
+     195: sipush        246
+     198: bipush        9
+     200: iconst_3
+     201: bipush        6
+     203: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     206: goto          237
+     209: aload_1
+     210: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     213: aload_0
+     214: getfield      #94                 // Field f_97735_:I
+     217: iconst_4
+     218: iadd
+     219: aload_0
+     220: getfield      #97                 // Field f_97736_:I
+     223: bipush        59
+     225: iadd
+     226: sipush        249
+     229: bipush        9
+     231: iconst_3
+     232: bipush        6
+     234: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     237: aload_0
+     238: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     241: invokevirtual #383                // Method ttv/migami/migamigos/entity/AmigoEntity.isShowingBoots:()Z
+     244: ifeq          278
+     247: aload_1
+     248: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     251: aload_0
+     252: getfield      #94                 // Field f_97735_:I
+     255: iconst_4
+     256: iadd
+     257: aload_0
+     258: getfield      #97                 // Field f_97736_:I
+     261: bipush        77
+     263: iadd
+     264: sipush        246
+     267: bipush        9
+     269: iconst_3
+     270: bipush        6
+     272: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     275: goto          306
+     278: aload_1
+     279: getstatic     #365                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     282: aload_0
+     283: getfield      #94                 // Field f_97735_:I
+     286: iconst_4
+     287: iadd
+     288: aload_0
+     289: getfield      #97                 // Field f_97736_:I
+     292: bipush        77
+     294: iadd
+     295: sipush        249
+     298: bipush        9
+     300: iconst_3
+     301: bipush        6
+     303: invokevirtual #371                // Method net/minecraft/client/gui/GuiGraphics.m_280218_:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     306: fconst_1
+     307: fconst_1
+     308: fconst_1
+     309: fconst_1
+     310: invokestatic  #389                // Method com/mojang/blaze3d/systems/RenderSystem.clearColor:(FFFF)V
+     313: aload_0
+     314: getfield      #392                // Field f_96543_:I
+     317: aload_0
+     318: getfield      #77                 // Field f_97726_:I
+     321: isub
+     322: iconst_2
+     323: idiv
+     324: istore        5
+     326: aload_0
+     327: getfield      #395                // Field f_96544_:I
+     330: aload_0
+     331: getfield      #80                 // Field f_97727_:I
+     334: isub
+     335: iconst_2
+     336: idiv
+     337: istore        6
+     339: aload_1
+     340: iload         5
+     342: bipush        50
+     344: iadd
+     345: iload         6
+     347: bipush        82
+     349: iadd
+     350: bipush        30
+     352: iload         5
+     354: bipush        50
+     356: iadd
+     357: i2f
+     358: iload_3
+     359: i2f
+     360: fsub
+     361: iload         6
+     363: bipush        75
+     365: iadd
+     366: bipush        50
+     368: isub
+     369: i2f
+     370: iload         4
+     372: i2f
+     373: fsub
+     374: aload_0
+     375: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     378: invokestatic  #401                // Method net/minecraft/client/gui/screens/inventory/InventoryScreen.m_274545_:(Lnet/minecraft/client/gui/GuiGraphics;IIIFFLnet/minecraft/world/entity/LivingEntity;)V
+     381: aload_0
+     382: aload_1
+     383: aload_0
+     384: getfield      #94                 // Field f_97735_:I
+     387: aload_0
+     388: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     391: pop
+     392: iconst_0
+     393: iadd
+     394: aload_0
+     395: getfield      #97                 // Field f_97736_:I
+     398: aload_0
+     399: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     402: pop
+     403: bipush        -11
+     405: iadd
+     406: aload_0
+     407: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+     410: invokevirtual #405                // Method renderAmigoHealthBar:(Lnet/minecraft/client/gui/GuiGraphics;IILttv/migami/migamigos/entity/AmigoEntity;)V
+     413: return
+
+  public void m_88315_(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #363                // Method m_280273_:(Lnet/minecraft/client/gui/GuiGraphics;)V
        5: aload_0
-       6: invokestatic  #24                 // Method ttv/migami/migamigos/client/CustomAmigoManager.updateCustomAmigos:(Lttv/migami/migamigos/network/message/S2CMessageUpdateAmigos;)Z
-       9: pop
-      10: return
-}
+       6: aload_1
+       7: iload_2
+       8: iload_3
+       9: fload         4
+      11: invokespecial #416                // Method net/minecraft/client/gui/screens/inventory/AbstractContainerScreen.m_88315_:(Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+      14: aload_0
+      15: aload_1
+      16: iload_2
+      17: iload_3
+      18: invokevirtual #420                // Method m_280072_:(Lnet/minecraft/client/gui/GuiGraphics;II)V
+      21: aload_0
+      22: aload_1
+      23: aload_0
+      24: getfield      #94                 // Field f_97735_:I
+      27: aload_0
+      28: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      31: pop
+      32: iconst_0
+      33: iadd
+      34: aload_0
+      35: getfield      #97                 // Field f_97736_:I
+      38: aload_0
+      39: invokestatic  #103                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      42: pop
+      43: bipush        -11
+      45: iadd
+      46: aload_0
+      47: getfield      #74                 // Field amigoEntity:Lttv/migami/migamigos/entity/AmigoEntity;
+      50: invoke

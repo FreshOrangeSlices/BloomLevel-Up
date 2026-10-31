@@ -1,0 +1,2003 @@
+## Warionex build.346 server.zip::mods/Voiceless Survival-forge-1.20.1-2.2.0.jar::META-INF/mods.toml
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "All Rights Reserved"
+[[mods]]
+modId = "ezvcsurvival"
+version = "2.0.2"
+displayName = "Voiceless Survival"
+authors = "armilp, skynetcloud"
+description = '''
+This mod introduces a thrilling new survival mechanic by integrating sound-based hostile mob AI. 
+The mod allows you to add custom hostile mobs that can hear and react to player voices.
+''' 
+[[dependencies.ezvcsurvival]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.ezvcsurvival]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,1.21)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.ezvcsurvival]]
+modId="voicechat"
+mandatory=false
+versionRange="[1.20.1-2.6.0, 1.20.1-3.0.0)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.ezvcsurvival]]
+modId = "plasmovoice"
+mandatory = false
+versionRange = "[2.1.17,)"
+ordering = "AFTER"
+side = "BOTH"
+## Warionex build.346 server.zip::mods/Voiceless Survival-forge-1.20.1-2.2.0.jar::assets/ezvcsurvival/lang/en_us.json
+{
+  "screen.ezvcsurvival.config_editor": "Configuration Editor",
+  "screen.ezvcsurvival.config_editor.subtitle": "Select the type of configuration you want to edit",
+  "screen.ezvcsurvival.config_editor.info": "Configure the behavior of entities and sounds in your world",
+  "screen.ezvcsurvival.entity_config_list": "Entity Configuration",
+  "screen.ezvcsurvival.general_sounds_config_list": "General Sounds Configuration",
+  "screen.ezvcsurvival.gunfire_config_list": "Gunfire Configuration",
+  "screen.ezvcsurvival.entity_config_edit": "Edit Entity: %s",
+  "screen.ezvcsurvival.general_sound_config_edit": "Edit Sound: %s",
+  "screen.ezvcsurvival.general_sound_entity_edit": "Edit Sound Entity: %s",
+  "screen.ezvcsurvival.gunfire_entity_edit": "Edit Gunfire Entity: %s",
+
+  "button.ezvcsurvival.entity_config": "Entity Voice Config",
+  "button.ezvcsurvival.general_sounds": "General Sounds",
+  "button.ezvcsurvival.gunfire_config": "Gunfire Config (TACZ)",
+  "button.ezvcsurvival.back": "Back",
+  "button.ezvcsurvival.save": "Save",
+  "button.ezvcsurvival.cancel": "Cancel",
+  "button.ezvcsurvival.reset": "Reset",
+  "button.ezvcsurvival.show_entities": "Show Entities",
+  "button.ezvcsurvival.show_sounds": "Show Sounds",
+  "button.ezvcsurvival.enabled": "Enabled",
+  "button.ezvcsurvival.disabled": "Disabled",
+  "button.ezvcsurvival.disable_all": "Disable Config",
+  "button.ezvcsurvival.enable_all": "Enable Config",
+  "button.ezvcsurvival.no_changes": "No Changes",
+  "button.ezvcsurvival.priority_on": "Priority: ON",
+  "button.ezvcsurvival.priority_off": "Priority: OFF",
+
+  "textbox.ezvcsurvival.search": "Search...",
+
+  "gui.ezvcsurvival.entity_count": "Entities: %d",
+  "gui.ezvcsurvival.sound_count": "Sounds: %d",
+  "gui.ezvcsurvival.click_to_edit_entity": "Click on any entity to edit",
+  "gui.ezvcsurvival.click_to_edit_sound": "Click on any sound to edit",
+  "gui.ezvcsurvival.search": "Search",
+  "gui.ezvcsurvival.enabled": "Enabled",
+  "gui.ezvcsurvival.disabled": "Disabled",
+
+  "tooltip.ezvcsurvival.configuration": "§a§lConfiguration:",
+  "tooltip.ezvcsurvival.enabled": "§f• %s",
+  "tooltip.ezvcsurvival.speed": "§f• Speed: %s",
+  "tooltip.ezvcsurvival.range": "§f• Range: %s",
+  "tooltip.ezvcsurvival.threshold": "§f• Threshold: %s",
+  "tooltip.ezvcsurvival.speed_multiplier": "§f• Speed Multiplier: %s",
+  "tooltip.ezvcsurvival.range_multiplier": "§f• Range Multiplier: %s",
+  "tooltip.ezvcsurvival.priority_sound": "§f• Priority Sound: %s",
+  "tooltip.ezvcsurvival.sound_reaction": "§a§lSound Reaction:",
+  "tooltip.ezvcsurvival.gunfire_reaction": "§a§lGunfire Reaction:"
+}
+## Warionex build.346 server.zip::mods/Voiceless Survival-forge-1.20.1-2.2.0.jar::data/minecraft/tags/game_events/vibrations.json
+{
+  "replace": false,
+  "values": [
+    "ezvcsurvival:voice_talk"
+  ]
+}
+## Warionex build.346 server.zip::mods/Voiceless Survival-forge-1.20.1-2.2.0.jar::data/minecraft/tags/game_events/warden_can_listen.json
+{
+  "replace": false,
+  "values": [
+    "ezvcsurvival:voice_talk"
+  ]
+}
+## Warionex build.346 server.zip::mods/Voiceless Survival-forge-1.20.1-2.2.0.jar::ezvcsurvival.mixins.json
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.armilp.ezvcsurvival.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "ezvcsurvival.refmap.json",
+  "mixins": [
+    "MobEntityMixin",
+    "MobTargetMixin"
+  ],
+  "client": [],
+  "server": [],
+  "verbose": true
+}
+## Warionex build.346 server.zip::mods/Voiceless Survival-forge-1.20.1-2.2.0.jar::ezvcsurvival.refmap.json
+{
+  "mappings": {
+    "com/armilp/ezvcsurvival/mixins/MobEntityMixin": {
+      "finalizeSpawn": "Lnet/minecraft/world/entity/Mob;m_6518_(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;",
+      "readAdditionalSaveData": "Lnet/minecraft/world/entity/Mob;m_7378_(Lnet/minecraft/nbt/CompoundTag;)V",
+      "registerGoals": "Lnet/minecraft/world/entity/Mob;m_8099_()V"
+    },
+    "com/armilp/ezvcsurvival/mixins/MobTargetMixin": {
+      "tick": "Lnet/minecraft/world/entity/Mob;m_8119_()V"
+    }
+  },
+  "data": {
+    "searge": {
+      "com/armilp/ezvcsurvival/mixins/MobEntityMixin": {
+        "finalizeSpawn": "Lnet/minecraft/world/entity/Mob;m_6518_(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;",
+        "readAdditionalSaveData": "Lnet/minecraft/world/entity/Mob;m_7378_(Lnet/minecraft/nbt/CompoundTag;)V",
+        "registerGoals": "Lnet/minecraft/world/entity/Mob;m_8099_()V"
+      },
+      "com/armilp/ezvcsurvival/mixins/MobTargetMixin": {
+        "tick": "Lnet/minecraft/world/entity/Mob;m_8119_()V"
+      }
+    }
+  }
+}
+## shots/game/config/ezvcsurvival/generalsounds.json
+{
+  "enabled": true,
+  "mobs": {
+    "cataclysm:maledictus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "legendary_monsters:overgrown_colossus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "migamigos:pollypounce": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:gorger": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "cataclysm:coral_golem": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:mother_spider": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "illagerinvasion:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:wrought": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:siamese_skeletonsleft": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "zonis_companions:koyan_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "zonis_companions:bocchi": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "irons_spellbooks:archevoker": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "bookofdragons:hiddeous_zippleback": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:siamese_skeletonsright": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:trader_llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "aquamirae:abyssal_scyphoid": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "irons_spellbooks:catacombs_zombie": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "irons_spellbooks:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "simplyswords:caelestis_riftling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:warden": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:horse": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "block_factorys_bosses:ghost_tentacle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:endorah_head_ranged_flying": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:lifestealer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "legendary_monsters:flameborn_warrior": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:devourer_tunnel_segment_ore_gen_dummy": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:riding_felsteed": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:pumpkin_bomb": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:skeleton_demoman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "graveyard:skeleton_creeper": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:crimlin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "cataclysm:ender_guardian": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "cataclysm:deepling_warlock": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:tadpole": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "minecraft:enderman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "migamigos:shybroom": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "minecraft:dolphin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "soulsweapons:returning_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "ddenizens:gargoyle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "aquamirae:maw": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:supreme_bonescaller": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "aquamirae:scuttler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:pumpkin_bruiser": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    
+## shots/game/config/ezvcsurvival/voices.toml
+
+#Debug Config
+[debugging]
+	debug = false
+
+#Entity Voice Config Generation
+#If true, automatically adds new entities to entities_voices.json when detected
+#If false, only uses entities already in the file (allows manual control)
+[entity_voice_generation]
+	enable_generation = true
+
+#Whisper Config
+#Multipliers that affect the detection range and movement speed when the player is whispering.
+[whisper_configs]
+	#Range: 0.0 ~ 1.0
+	whisper_range_multiplier = 0.5
+	#Range: 0.0 ~ 1.0
+	whisper_speed_multiplier = 0.8
+
+#Mob Speed Boost Config
+#Enable or disable the mob speed boost when targeting speaking players
+[mob_speed_boost]
+	mob_speed_boost_enabled = true
+
+#Misc Config
+#Multipliers that affect the detection range of voices in specific situations.
+[misc_config]
+	#Range: 0.0 ~ 1.0
+	thunder_range_multiplier = 0.65
+	#Range: 0.0 ~ 1.0
+	sneaking_range_multiplier = 0.5
+
+#Sculk Sensor Voice Detection Config
+#Configure sculk sensors to activate when players speak via voice chat
+#Enable: Toggle sculk sensor activation from voice
+#Threshold: Minimum audio level (dB) required to trigger sculk sensors (-127 to 0)
+#Range: Maximum distance (blocks) from player to activate sculk sensors
+#Frequency: Redstone signal strength output (1-15)
+[sculk_sensor_config]
+	sculk_sensor_enabled = true
+	#Range: -127.0 ~ 0.0
+	sculk_sensor_threshold = -45.0
+	#Range: 1 ~ 100
+	sculk_sensor_range = 16
+	#Range: 1 ~ 15
+	sculk_sensor_frequency = 8
+
+#Armor Effects Config
+#Define multipliers for mob detection range and speed when a player wears specific armor items.
+#Format: item_id=speedMultiplier,rangeMultiplier
+#Example: minecraft:diamond_helmet=0.5,0.5
+[armor_effects]
+	effects = ["minecraft:diamond_helmet=0.9,0.6", "minecraft:diamond_chestplate=1.0,0.7"]
+
+#Death Angels Mod Config
+#Defines the threshold detection (how hard the player must speak)
+#You need this mod for this parameter: https://www.curseforge.com/minecraft/mc-mods/death-angels
+[death_angels_config]
+	#Range: -127.0 ~ 0.0
+	death_angels_threshold = -20.0
+
+#OverMan's Quiet place Mod Config
+#Defines the threshold detection (how hard the player must speak)
+#You need this mod for this parameter: https://www.curseforge.com/minecraft/mc-mods/overmans-quiet-place
+[quiet_place_overman_config]
+	#Range: -127.0 ~ 0.0
+	quiet_place_overman_threshold = -30.0
+
+
+## shots/game/config/ezvcsurvival/gunfire.json
+{
+  "enabled": true,
+  "mobs": {
+    "cataclysm:maledictus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:overgrown_colossus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "migamigos:pollypounce": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "skarrier_mobs:gorger": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "cataclysm:coral_golem": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:mother_spider": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "illagerinvasion:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:wrought": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsleft": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:koyan_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:bocchi": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "irons_spellbooks:archevoker": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "bookofdragons:hiddeous_zippleback": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsright": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:trader_llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "aquamirae:abyssal_scyphoid": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "irons_spellbooks:catacombs_zombie": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "irons_spellbooks:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "simplyswords:caelestis_riftling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:warden": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:horse": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "block_factorys_bosses:ghost_tentacle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:endorah_head_ranged_flying": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:lifestealer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:flameborn_warrior": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:devourer_tunnel_segment_ore_gen_dummy": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:riding_felsteed": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:pumpkin_bomb": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:skeleton_demoman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "graveyard:skeleton_creeper": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:crimlin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "cataclysm:ender_guardian": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "cataclysm:deepling_warlock": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:tadpole": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "minecraft:enderman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "migamigos:shybroom": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "minecraft:dolphin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "soulsweapons:returning_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "ddenizens:gargoyle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "aquamirae:maw": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:supreme_bonescaller": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "aquamirae:scuttler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:pumpkin_bruiser": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "monsterexpansion:rhyza": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "mythsandlegends:imp_clone": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:rain": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:derek_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "soulsweapons:warmth_entity": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "mythsandlegends:cogling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "graveyard:nightmare": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:shulker_mimic": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:haunted_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:fractured": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:trawler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:creeper": {
+      "enabled": false,
+      "speed": 1.0
+## shots/game/config/ezvcsurvival/entities_voices.json
+{
+  "enabled": true,
+  "monsters": {
+    "cataclysm:maledictus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:overgrown_colossus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:gorger": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "cataclysm:coral_golem": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:mother_spider": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "illagerinvasion:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:wrought": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsleft": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:koyan_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:bocchi": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "irons_spellbooks:archevoker": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsright": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "irons_spellbooks:catacombs_zombie": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "irons_spellbooks:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "simplyswords:caelestis_riftling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "minecraft:warden": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "block_factorys_bosses:ghost_tentacle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:endorah_head_ranged_flying": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:lifestealer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:flameborn_warrior": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:riding_felsteed": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:pumpkin_bomb": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:skeleton_demoman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "graveyard:skeleton_creeper": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:crimlin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "cataclysm:ender_guardian": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "cataclysm:deepling_warlock": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "minecraft:enderman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "soulsweapons:returning_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "ddenizens:gargoyle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "aquamirae:maw": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:supreme_bonescaller": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:pumpkin_bruiser": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "monsterexpansion:rhyza": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "mythsandlegends:imp_clone": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:rain": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:derek_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "soulsweapons:warmth_entity": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "mythsandlegends:cogling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "graveyard:nightmare": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:shulker_mimic": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:haunted_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:fractured": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:trawler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "minecraft:creeper": {
+      "enabled": false,
+      "speed":
+## shots/game/config/ezvcsurvival/sounds.toml
+
+#GunFire Generation
+#If true, automatically adds new entities to gunfire.json when detected
+#If false, only uses entities already in the file (allows manual control)
+[gunfire_generation]
+	enable_generation = true
+
+#GeneralSounds Generation
+#If true, automatically adds new entities to generalsounds.json when detected
+#If false, only uses entities and sounds already in the file (allows manual control)
+[generalsounds_generation]
+	enable_generation = true
+
+#Debug Mode
+[debugging]
+	debug = false
+
+[weather]
+	#Range: 0.0 ~ 1.0
+	thunder_range_multiplier = 0.8
+
+[tacz_gun_modifiers]
+	#Gun type modifiers in format: type=speed,range
+	#Speed: multiplier for mob reaction speed
+	#Range: multiplier for detection range
+	#Example: 'pistol=1.0,3.8' means normal speed, 3.8x range
+	modifiers = ["pistol=1.0,3.8", "sniper=1.0,8.0", "rifle=1.0,6.5", "shotgun=1.0,4.8", "smg=1.0,3.0", "rpg=1.0,10.0", "mg=1.0,4.0"]
+
+[tacz_silenced_guns]
+	ids = ["daffas_arsenal:hk45_sup", "daffas_arsenal:apacoba9_sup"]
+
+[tacz_silencer_modifiers]
+	#If false, silenced guns are completely ignored by mobs (original behavior)
+	enabled = true
+	#Silencer modifiers per gun type in format: type=speed,range
+	modifiers = ["pistol=0.5,0.4", "sniper=0.5,0.35", "rifle=0.5,0.4", "shotgun=0.5,0.45", "smg=0.5,0.4", "rpg=0.5,0.5", "mg=0.5,0.45"]
+
+
+## shots/server/config/ezvcsurvival/generalsounds.json
+{
+  "enabled": true,
+  "mobs": {
+    "cataclysm:maledictus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "legendary_monsters:overgrown_colossus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "migamigos:pollypounce": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:gorger": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "cataclysm:coral_golem": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:mother_spider": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "illagerinvasion:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:wrought": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:siamese_skeletonsleft": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "zonis_companions:koyan_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "zonis_companions:bocchi": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "irons_spellbooks:archevoker": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "bookofdragons:hiddeous_zippleback": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:siamese_skeletonsright": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:trader_llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "aquamirae:abyssal_scyphoid": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "irons_spellbooks:catacombs_zombie": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "irons_spellbooks:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "simplyswords:caelestis_riftling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:warden": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:horse": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "block_factorys_bosses:ghost_tentacle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:endorah_head_ranged_flying": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:lifestealer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "legendary_monsters:flameborn_warrior": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:devourer_tunnel_segment_ore_gen_dummy": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:riding_felsteed": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:pumpkin_bomb": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:skeleton_demoman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "graveyard:skeleton_creeper": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "skarrier_mobs:crimlin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "cataclysm:ender_guardian": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "cataclysm:deepling_warlock": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "minecraft:tadpole": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "minecraft:enderman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "migamigos:shybroom": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "minecraft:dolphin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "soulsweapons:returning_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "ddenizens:gargoyle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "aquamirae:maw": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:supreme_bonescaller": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    "aquamirae:scuttler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0,
+      "blocked_sounds": []
+    },
+    "born_in_chaos_v1:pumpkin_bruiser": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "blocked_sounds": []
+    },
+    
+## shots/server/config/ezvcsurvival/voices.toml
+
+#Debug Config
+[debugging]
+	debug = false
+
+#Entity Voice Config Generation
+#If true, automatically adds new entities to entities_voices.json when detected
+#If false, only uses entities already in the file (allows manual control)
+[entity_voice_generation]
+	enable_generation = true
+
+#Whisper Config
+#Multipliers that affect the detection range and movement speed when the player is whispering.
+[whisper_configs]
+	#Range: 0.0 ~ 1.0
+	whisper_range_multiplier = 0.5
+	#Range: 0.0 ~ 1.0
+	whisper_speed_multiplier = 0.8
+
+#Mob Speed Boost Config
+#Enable or disable the mob speed boost when targeting speaking players
+[mob_speed_boost]
+	mob_speed_boost_enabled = true
+
+#Misc Config
+#Multipliers that affect the detection range of voices in specific situations.
+[misc_config]
+	#Range: 0.0 ~ 1.0
+	thunder_range_multiplier = 0.65
+	#Range: 0.0 ~ 1.0
+	sneaking_range_multiplier = 0.5
+
+#Sculk Sensor Voice Detection Config
+#Configure sculk sensors to activate when players speak via voice chat
+#Enable: Toggle sculk sensor activation from voice
+#Threshold: Minimum audio level (dB) required to trigger sculk sensors (-127 to 0)
+#Range: Maximum distance (blocks) from player to activate sculk sensors
+#Frequency: Redstone signal strength output (1-15)
+[sculk_sensor_config]
+	sculk_sensor_enabled = true
+	#Range: -127.0 ~ 0.0
+	sculk_sensor_threshold = -45.0
+	#Range: 1 ~ 100
+	sculk_sensor_range = 16
+	#Range: 1 ~ 15
+	sculk_sensor_frequency = 8
+
+#Armor Effects Config
+#Define multipliers for mob detection range and speed when a player wears specific armor items.
+#Format: item_id=speedMultiplier,rangeMultiplier
+#Example: minecraft:diamond_helmet=0.5,0.5
+[armor_effects]
+	effects = ["minecraft:diamond_helmet=0.9,0.6", "minecraft:diamond_chestplate=1.0,0.7"]
+
+#Death Angels Mod Config
+#Defines the threshold detection (how hard the player must speak)
+#You need this mod for this parameter: https://www.curseforge.com/minecraft/mc-mods/death-angels
+[death_angels_config]
+	#Range: -127.0 ~ 0.0
+	death_angels_threshold = -20.0
+
+#OverMan's Quiet place Mod Config
+#Defines the threshold detection (how hard the player must speak)
+#You need this mod for this parameter: https://www.curseforge.com/minecraft/mc-mods/overmans-quiet-place
+[quiet_place_overman_config]
+	#Range: -127.0 ~ 0.0
+	quiet_place_overman_threshold = -30.0
+
+
+## shots/server/config/ezvcsurvival/gunfire.json
+{
+  "enabled": true,
+  "mobs": {
+    "cataclysm:maledictus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:overgrown_colossus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "migamigos:pollypounce": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "skarrier_mobs:gorger": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "cataclysm:coral_golem": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:mother_spider": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "illagerinvasion:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:wrought": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsleft": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:koyan_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:bocchi": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "irons_spellbooks:archevoker": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "bookofdragons:hiddeous_zippleback": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsright": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:trader_llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "aquamirae:abyssal_scyphoid": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "irons_spellbooks:catacombs_zombie": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "irons_spellbooks:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "simplyswords:caelestis_riftling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:warden": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:horse": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "block_factorys_bosses:ghost_tentacle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:endorah_head_ranged_flying": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:lifestealer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:flameborn_warrior": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:devourer_tunnel_segment_ore_gen_dummy": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:riding_felsteed": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:pumpkin_bomb": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:llama": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:skeleton_demoman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "graveyard:skeleton_creeper": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:crimlin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "cataclysm:ender_guardian": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "cataclysm:deepling_warlock": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:tadpole": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "minecraft:enderman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "migamigos:shybroom": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "minecraft:dolphin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "soulsweapons:returning_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "ddenizens:gargoyle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "aquamirae:maw": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "born_in_chaos_v1:supreme_bonescaller": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "aquamirae:scuttler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 40.0
+    },
+    "born_in_chaos_v1:pumpkin_bruiser": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "monsterexpansion:rhyza": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "mythsandlegends:imp_clone": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:rain": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "zonis_companions:derek_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "soulsweapons:warmth_entity": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "mythsandlegends:cogling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "graveyard:nightmare": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:shulker_mimic": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:haunted_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "legendary_monsters:fractured": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "skarrier_mobs:trawler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 50.0
+    },
+    "minecraft:creeper": {
+      "enabled": false,
+      "speed": 1.0
+## shots/server/config/ezvcsurvival/entities_voices.json
+{
+  "enabled": true,
+  "monsters": {
+    "cataclysm:maledictus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:overgrown_colossus": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:gorger": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "cataclysm:coral_golem": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:mother_spider": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "illagerinvasion:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:wrought": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsleft": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:koyan_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:bocchi": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "irons_spellbooks:archevoker": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:siamese_skeletonsright": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "irons_spellbooks:catacombs_zombie": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "irons_spellbooks:necromancer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "simplyswords:caelestis_riftling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "minecraft:warden": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "block_factorys_bosses:ghost_tentacle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:endorah_head_ranged_flying": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:lifestealer": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:flameborn_warrior": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:riding_felsteed": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:pumpkin_bomb": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:skeleton_demoman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "graveyard:skeleton_creeper": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:crimlin": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "cataclysm:ender_guardian": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "cataclysm:deepling_warlock": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "minecraft:enderman": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "soulsweapons:returning_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "ddenizens:gargoyle": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "aquamirae:maw": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:supreme_bonescaller": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "born_in_chaos_v1:pumpkin_bruiser": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "monsterexpansion:rhyza": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "mythsandlegends:imp_clone": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:rain": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "zonis_companions:derek_jba": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "soulsweapons:warmth_entity": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "mythsandlegends:cogling": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "graveyard:nightmare": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:shulker_mimic": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:haunted_knight": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "legendary_monsters:fractured": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "skarrier_mobs:trawler": {
+      "enabled": false,
+      "speed": 1.0,
+      "range": 60.0,
+      "threshold": -20.0
+    },
+    "minecraft:creeper": {
+      "enabled": false,
+      "speed":
+## shots/server/config/ezvcsurvival/sounds.toml
+
+#GunFire Generation
+#If true, automatically adds new entities to gunfire.json when detected
+#If false, only uses entities already in the file (allows manual control)
+[gunfire_generation]
+	enable_generation = true
+
+#GeneralSounds Generation
+#If true, automatically adds new entities to generalsounds.json when detected
+#If false, only uses entities and sounds already in the file (allows manual control)
+[generalsounds_generation]
+	enable_generation = true
+
+#Debug Mode
+[debugging]
+	debug = false
+
+[weather]
+	#Range: 0.0 ~ 1.0
+	thunder_range_multiplier = 0.8
+
+[tacz_gun_modifiers]
+	#Gun type modifiers in format: type=speed,range
+	#Speed: multiplier for mob reaction speed
+	#Range: multiplier for detection range
+	#Example: 'pistol=1.0,3.8' means normal speed, 3.8x range
+	modifiers = ["pistol=1.0,3.8", "sniper=1.0,8.0", "rifle=1.0,6.5", "shotgun=1.0,4.8", "smg=1.0,3.0", "rpg=1.0,10.0", "mg=1.0,4.0"]
+
+[tacz_silenced_guns]
+	ids = ["daffas_arsenal:hk45_sup", "daffas_arsenal:apacoba9_sup"]
+
+[tacz_silencer_modifiers]
+	#If false, silenced guns are completely ignored by mobs (original behavior)
+	enabled = true
+	#Silencer modifiers per gun type in format: type=speed,range
+	modifiers = ["pistol=0.5,0.4", "sniper=0.5,0.35", "rifle=0.5,0.4", "shotgun=0.5,0.45", "smg=0.5,0.4", "rpg=0.5,0.5", "mg=0.5,0.45"]
+

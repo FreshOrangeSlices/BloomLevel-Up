@@ -59,5 +59,12 @@ with tempfile.TemporaryDirectory() as tmp:
         report.append(f"## {n} bootstrap methods\n" + v[i:i + 3000])
 for n, text in javap(bic, [n for n in names if re.search(r"/procedures/(KrampusSpawnPro|KillingVillagers|Killinganimals)Procedure\.class$", n)]).items():
     report.append(f"## {n}\n" + "\n".join(l for l in text.splitlines() if re.search(r"invoke|getstatic|ldc|iconst|bipush|sipush|if|instanceof|public", l))[:9000])
+# The spawn predicates in full (javap output past the earlier limit) and the date checks in KrampusSpawnPro.
+for n, text in javap(bic, ents, limit=10**7).items():
+    i = text.find("lambda$init$0")
+    j = text.find("lambda$init$0", i + 1)
+    report.append(f"## {n} lambda$init$0\n" + text[j - 200:j + 6000] if j > 0 else f"## {n}: no lambda body found")
+for n, text in javap(bic, [n for n in names if n.endswith("/procedures/KrampusSpawnProProcedure.class")], limit=10**7).items():
+    report.append(f"## {n} in full\n" + text[:20000])
 open(os.path.join(out, "summary.txt"), "w").write("\n".join(report))
 print("\n".join(report)[:3000])

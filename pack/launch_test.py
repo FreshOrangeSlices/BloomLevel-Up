@@ -231,6 +231,29 @@ def pack_data_check(server_dir, dump_file, server_lines):
     return failures, notes
 
 
+def voice_check(server_dir, spec_file):
+    """Voiceless Survival's mob list as the server left it: every mob the pack switches on (pack.json's config_files) should
+    still be on after the mod has added the ones it found itself. Nothing to check without the mod. Returns (failures, notes)."""
+    name = "config/ezvcsurvival/entities_voices.json"
+    if not any("voiceless" in f.lower() for f in os.listdir(os.path.join(server_dir, "mods"))):
+        return [], []
+    shipped = (json.load(open(spec_file)).get("config_files") or {}).get(name, {}) if os.path.exists(spec_file) else {}
+    path = os.path.join(server_dir, name)
+    if not shipped or not os.path.exists(path):
+        return ([f"voice: {name} isn't on the server"] if shipped else []), []
+    try:
+        have = json.load(open(path))
+    except ValueError as e:
+        return [f"voice: {name} can't be read: {e}"], []
+    off = [f"{kind} {mob}" for kind in ("monsters", "animals") for mob, entry in (shipped.get(kind) or {}).items()
+           if entry.get("enabled") and not (have.get(kind) or {}).get(mob, {}).get("enabled")]
+    listed = sum(len(have.get(kind) or {}) for kind in ("monsters", "animals"))
+    heard = sum(1 for kind in ("monsters", "animals") for entry in (have.get(kind) or {}).values() if entry.get("enabled"))
+    if off:
+        return [f"voice: {len(off)} mobs the pack turns on are off on the server: " + ", ".join(off[:20])], []
+    return [], [f"voice: {heard} of {listed} mobs hear voice chat (the pack's {sum(len(shipped.get(k) or {}) for k in ('monsters', 'animals'))} kept)"]
+
+
 def spawn_check(server_dir, dump_file, spec_file):
     """The pack's natural spawns (pack_data.spawns, as biome modifiers in its data pack), from the biome rows of Bloom's
     registry dump (every biome's spawn list after all mods' modifiers). Fails when a mob the pack adds is missing from
@@ -1194,6 +1217,9 @@ def main():
                                                             os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
     failures += spawn_failures
     notes += spawn_notes
+    voice_failures, voice_notes = voice_check(server_dir, os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
+    failures += voice_failures
+    notes += voice_notes
     # The LegionWareX add-on (addon/, packed in like Bloom): loaded, with its keepsake and its companion tag.
     if any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(server_dir, "mods"))):
         dump_rows = [json.loads(line) for line in open(os.path.join(server_dir, "bloom-dump.jsonl")) if line.strip()] \

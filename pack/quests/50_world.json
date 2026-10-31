@@ -258,6 +258,27 @@
       ]
     },
     {
+      "id": "the_dead_hear_you",
+      "title": "The Dead Hear You",
+      "icon": "minecraft:skeleton_skull",
+      "x": 3, "y": 6,
+      "shape": "circle",
+      "optional": true,
+      "mods": ["ezvcsurvival"],
+      "description": [
+        "Talk on voice chat and the dead hear you. Zombies and their kin (ghouls, draugr, husks, the drowned) hear a loud voice from up to 60 blocks, skeletons and the other undead from 40, and they come for you faster than they walk. An undead sentinel may leave its post for it.",
+        "",
+        "Whispering or sneaking halves that, thunder covers you a little, and a diamond helmet or chestplate muffles you. Near an ancient city the Warden hears you too. Cows and pigs run from loud voices; bosses don't care."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Keep your voice down"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100}
+      ]
+    },
+    {
       "id": "war_band",
       "title": "War Bands",
       "icon": "minecraft:crossbow",

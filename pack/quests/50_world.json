@@ -213,6 +213,51 @@
       ]
     },
     {
+      "id": "enemigo",
+      "title": "A Friend Gone Wrong",
+      "icon": "minecraft:wither_rose",
+      "x": 0, "y": 6,
+      "shape": "circle",
+      "optional": true,
+      "mods": ["migamigos"],
+      "deps": ["sentinels"],
+      "description": [
+        "Now and then a sentinel is one of the Migamigos companions turned hostile: an Enemigo, red-eyed, stronger and tougher than its friendly self, with all its own moves. Each one stands where its friendly kind lives.",
+        "",
+        "There's no talking one round: beat it, and it pays 25 experience on top of its own. Raids can bring one too."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "legionwarex:enemigo", "title": "Beat an Enemigo"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "combat", "xp": 300},
+        {"type": "item", "item": "minecraft:golden_apple", "count": 1}
+      ]
+    },
+    {
+      "id": "krampus",
+      "title": "Krampus",
+      "icon": "minecraft:cookie",
+      "x": 1.5, "y": 6,
+      "shape": "circle",
+      "optional": true,
+      "mods": ["born_in_chaos_v1"],
+      "description": [
+        "In the snow, after a world's first ten days or so, Krampus walks at night with his henchmen. He has 250 health and hits hard.",
+        "",
+        "He keeps a list, too. Kill villagers or wandering traders and your naughtiness grows: you'll get warnings, and then he comes for you, wherever you are. Animals don't count here."
+      ],
+      "tasks": [
+        {"type": "kill", "entity": "born_in_chaos_v1:krampus", "count": 1}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 8},
+        {"type": "bloom_xp", "tab": "combat", "xp": 500},
+        {"type": "item", "item": "minecraft:cookie", "count": 12}
+      ]
+    },
+    {
       "id": "war_band",
       "title": "War Bands",
       "icon": "minecraft:crossbow",

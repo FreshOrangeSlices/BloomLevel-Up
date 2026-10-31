@@ -2,9 +2,13 @@ package com.freshorangeslices.legionwarex.companion;
 
 import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.Despawning;
+import com.freshorangeslices.legionwarex.LegionWareX;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,9 +23,32 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-/** A befriended companion's death leaves its owner a keepsake; wild companions despawn like monsters. */
+/**
+ * A befriended companion's death leaves its owner a keepsake; wild companions despawn like monsters; a player who beats
+ * an Enemigo (Migamigos' hostile mode) earns the hidden advancement {@link #ENEMIGO}, which the quest book asks for.
+ */
 public final class CompanionEvents {
+	/** Beat an Enemigo: no display of its own (the quest book shows it), granted by {@link #onEnemigoDeath}. */
+	public static final ResourceLocation ENEMIGO = new ResourceLocation(LegionWareX.MOD_ID, "enemigo");
+
 	private CompanionEvents() {
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onEnemigoDeath(LivingDeathEvent event) {
+		if (event.isCanceled() || !(event.getSource().getEntity() instanceof ServerPlayer player) || !Companions.isEnemigo(event.getEntity())) {
+			return;
+		}
+
+		Advancement advancement = player.server.getAdvancements().getAdvancement(ENEMIGO);
+
+		if (advancement != null) {
+			AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
+
+			for (String criterion : progress.getRemainingCriteria()) {
+				player.getAdvancements().award(advancement, criterion);
+			}
+		}
 	}
 
 	// Lowest, so a totem or another mod that cancels the death has had its say.

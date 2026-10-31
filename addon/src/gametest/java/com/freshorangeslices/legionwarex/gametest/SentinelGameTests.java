@@ -1,6 +1,8 @@
 package com.freshorangeslices.legionwarex.gametest;
 
 import com.freshorangeslices.legionwarex.LegionWareX;
+import com.freshorangeslices.legionwarex.companion.CompanionEvents;
+import com.freshorangeslices.legionwarex.companion.Companions;
 import com.freshorangeslices.legionwarex.sentinel.HoldPostGoal;
 import com.freshorangeslices.legionwarex.sentinel.SentinelTable;
 import com.freshorangeslices.legionwarex.sentinel.Sentinels;
@@ -173,12 +175,21 @@ public final class SentinelGameTests {
 		Mob enemigo = Sentinels.spawn(level, new SentinelTable.Entry(claymore, 1, List.of(), false, nbt, 25), helper.absolutePos(Rooms.on(helper, 3, 3)), false);
 		helper.assertTrue(enemigo != null, "An Enemigo Claymore was placed");
 
+		Mob friendly = (Mob) ForgeRegistries.ENTITY_TYPES.getValue(claymore).create(level);
+
 		try {
-			helper.assertTrue(enemigo.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo"), "It came as an Enemigo");
+			helper.assertTrue(enemigo.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo") && Companions.isEnemigo(enemigo), "It came as an Enemigo");
+			helper.assertTrue(friendly != null && !Companions.isEnemigo(friendly), "A plain Claymore isn't one");
 			helper.assertTrue(Sentinels.isSentinel(enemigo) && Sentinels.bonusXp(enemigo) == 25, "It's a sentinel worth 25 more experience");
+			helper.assertTrue(level.getServer().getAdvancements().getAdvancement(CompanionEvents.ENEMIGO) != null,
+					"Beating one has its advancement, for the quest book: " + CompanionEvents.ENEMIGO);
 		} catch (RuntimeException e) {
 			enemigo.discard();
 			throw e;
+		} finally {
+			if (friendly != null) {
+				friendly.discard();
+			}
 		}
 
 		AABB around = new AABB(enemigo.blockPosition()).inflate(6.0);

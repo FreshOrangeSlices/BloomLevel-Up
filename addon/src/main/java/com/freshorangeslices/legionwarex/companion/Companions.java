@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -46,6 +47,11 @@ public final class Companions {
 		} catch (IllegalAccessException | ClassCastException e) {
 			return null;
 		}
+	}
+
+	/** Migamigos' hostile mode: an Enemigo (a sentinel, or a raid's swapped-in witch or vindicator). Read from its saved data. */
+	public static boolean isEnemigo(Entity entity) {
+		return isCompanion(entity) && entity.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo");
 	}
 
 	/**

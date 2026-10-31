@@ -13,6 +13,7 @@ import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
 import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
 import com.freshorangeslices.legionwarex.companion.CompanionKeepsakeItem;
 import com.freshorangeslices.legionwarex.world.BannedMobs;
+import com.freshorangeslices.legionwarex.world.KrampusNaughtiness;
 import com.freshorangeslices.legionwarex.world.MobKillDrops;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
 import com.freshorangeslices.legionwarex.world.ZombieBuffs;
@@ -78,6 +79,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(MobKillDrops.class);
 		MinecraftForge.EVENT_BUS.register(ZombieBuffs.class);
 		MinecraftForge.EVENT_BUS.register(BannedMobs.class);
+		MinecraftForge.EVENT_BUS.register(KrampusNaughtiness.class);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 

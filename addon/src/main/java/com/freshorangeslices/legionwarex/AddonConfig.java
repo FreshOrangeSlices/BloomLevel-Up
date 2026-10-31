@@ -34,6 +34,7 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.BooleanValue HARVEST_ALL_YEAR;
 	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
 	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
+	private static final ForgeConfigSpec.BooleanValue KRAMPUS_ANIMALS;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOBS;
 	/** Never in a world (FreshOrangeSlices, 2026-10-30/31): Born in Chaos's flies, maggots, termites, firelights and baby
 	 * skeletons; Dungeon Denizens' orcs, ghouls, alligator gar, boulders and floating eyes. Always applies; the config's
@@ -157,6 +158,10 @@ public final class AddonConfig {
 						"Off: refused whoever gives them, and taken off zombies already in the world when they load; the first refusal from",
 						"each place in the code is logged as \"LegionWareX buffs\".")
 				.define("zombieEndlessBuffs", false);
+		KRAMPUS_ANIMALS = builder
+				.comment("Whether killing animals adds to Born in Chaos's naughtiness (its Krampus meter: warnings, then Krampus comes for",
+						"the player). Off: only villagers and wandering traders count. Applied when the server starts.")
+				.define("krampusAnimalNaughtiness", false);
 		BANNED_MOBS = builder
 				.comment("More mobs that never join a world, on top of the pack's own list (Born in Chaos's flies, maggots, termites,",
 						"firelights and baby skeletons; Dungeon Denizens' orcs, ghouls, alligator gar, boulders and floating eyes), however they'd",
@@ -275,6 +280,10 @@ public final class AddonConfig {
 	/** The config's extra bans (the pack's own list is {@link #BANNED_DEFAULT}, always in force). */
 	public static List<? extends String> bannedMobs() {
 		return get(BANNED_MOBS, List.of());
+	}
+
+	public static boolean krampusAnimalNaughtiness() {
+		return get(KRAMPUS_ANIMALS, false);
 	}
 
 	public static boolean harvestAllYear() {

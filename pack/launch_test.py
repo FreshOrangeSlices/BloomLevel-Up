@@ -853,6 +853,19 @@ def sentinel_check(server, player, shots):
     return failures, notes, report
 
 
+def naughtiness_check(server):
+    """The add-on's switch on Born in Chaos's Krampus meter: with the pack's config, killing animals doesn't count (only
+    villagers and traders), logged once the server has started. Fails when the add-on couldn't change Born in Chaos's
+    handler or found it still listening; nothing to check without Born in Chaos. Returns (failures, notes)."""
+    lines = [l for l in server.lines if "LegionWareX naughtiness:" in l]
+    if not lines:
+        return [], ["add-on: naughtiness: no line (no Born in Chaos in this layer)"]
+    line = lines[-1].split("LegionWareX naughtiness:", 1)[1].strip()
+    if "couldn't" in line or "still on the bus" in line or "not on the bus" in line or "killing animals counts" in line:
+        return [f"add-on: Born in Chaos's naughtiness from killing animals isn't off: {line[:300]}"], []
+    return [], [f"add-on: naughtiness: {line[:300]}"]
+
+
 def harvest_check(server, player):
     """The add-on's Harvest Court (Born in Chaos's pumpkin folk all year): /legionwarex harvest at midnight and at noon,
     where the player stands. At midnight each of them should be allowed some of the 40 tries by the add-on's all-year
@@ -1094,6 +1107,9 @@ def main():
             failures += harvest_failures
             notes += harvest_notes
             progress("harvest check done")
+            naughty_failures, naughty_notes = naughtiness_check(server)
+            failures += naughty_failures
+            notes += naughty_notes
         # The quest book, opened the way its command does (the inventory's book button opens the same screen).
         if os.path.isdir(os.path.join(server_dir, "config", "ftbquests", "quests")):
             server.send(f"execute as {PLAYER} run ftbquests open_book")

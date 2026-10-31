@@ -853,13 +853,16 @@ def sentinel_check(server, player, shots):
     return failures, notes, report
 
 
-def naughtiness_check(server):
+def naughtiness_check(server, server_dir):
     """The add-on's switch on Born in Chaos's Krampus meter: with the pack's config, killing animals doesn't count (only
-    villagers and traders), logged once the server has started. Fails when the add-on couldn't change Born in Chaos's
-    handler or found it still listening; nothing to check without Born in Chaos. Returns (failures, notes)."""
+    villagers and traders), logged once the server has started. Fails when Born in Chaos is in the layer and the add-on
+    said nothing, couldn't change Born in Chaos's handler or found it still listening. Returns (failures, notes)."""
     lines = [l for l in server.lines if "LegionWareX naughtiness:" in l]
+    mods = os.listdir(os.path.join(server_dir, "mods")) if os.path.isdir(os.path.join(server_dir, "mods")) else []
     if not lines:
-        return [], ["add-on: naughtiness: no line (no Born in Chaos in this layer)"]
+        if any("born_in_chaos" in m.lower() for m in mods):
+            return ["add-on: Born in Chaos is here but the add-on said nothing about its naughtiness (LegionWareX naughtiness:)"], []
+        return [], ["add-on: naughtiness: no Born in Chaos in this layer"]
     line = lines[-1].split("LegionWareX naughtiness:", 1)[1].strip()
     if "couldn't" in line or "still on the bus" in line or "not on the bus" in line or "killing animals counts" in line:
         return [f"add-on: Born in Chaos's naughtiness from killing animals isn't off: {line[:300]}"], []
@@ -1107,7 +1110,7 @@ def main():
             failures += harvest_failures
             notes += harvest_notes
             progress("harvest check done")
-            naughty_failures, naughty_notes = naughtiness_check(server)
+            naughty_failures, naughty_notes = naughtiness_check(server, server_dir)
             failures += naughty_failures
             notes += naughty_notes
         # The quest book, opened the way its command does (the inventory's book button opens the same screen).

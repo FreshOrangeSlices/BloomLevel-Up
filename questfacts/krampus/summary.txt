@@ -54,3 +54,269 @@
 # net/mcreator/borninchaosv/procedures/KillinganimalsProcedure.class names KRAMPUS with a date or game rule
 # net/mcreator/borninchaosv/procedures/KrampusSpawnProProcedure.class names KRAMPUS with a date or game rule
 # net/mcreator/borninchaosv/procedures/SpiritualGingerbreadPriZaviershieniiIspolzovaniiaProcedure.class names KRAMPUS with a date or game rule
+## net/mcreator/borninchaosv/entity/KrampusEntity.class bootstrap methods
+BootstrapMethods:
+  0: #446 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #435 (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+      #439 REF_invokeStatic net/mcreator/borninchaosv/entity/KrampusEntity.lambda$init$0:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+      #435 (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+  1: #446 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #644 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #647 REF_invokeVirtual net/mcreator/borninchaosv/entity/KrampusEntity.movementPredicate:(Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #644 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+  2: #446 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #644 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #663 REF_invokeVirtual net/mcreator/borninchaosv/entity/KrampusEntity.attackingPredicate:(Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #644 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+  3: #446 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #644 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #669 REF_invokeVirtual net/mcreator/borninchaosv/entity/KrampusEntity.procedurePredicate:
+## net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.class bootstrap methods
+BootstrapMethods:
+  0: #412 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #401 (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+      #405 REF_invokeStatic net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.lambda$init$0:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+      #401 (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+  1: #412 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #621 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #624 REF_invokeVirtual net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.movementPredicate:(Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #621 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+  2: #412 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #621 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #640 REF_invokeVirtual net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.attackingPredicate:(Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #621 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+  3: #412 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #621 (Lsoftware/bernie/geckolib/core/animation/AnimationState;)Lsoftware/bernie/geckolib/core/object/PlayState;
+      #646 REF_invokeVirtual net/mcreator/borninchaosv/entity/KrampusHe
+## net/mcreator/borninchaosv/procedures/KillingVillagersProcedure.class
+public class net.mcreator.borninchaosv.procedures.KillingVillagersProcedure {
+  public net.mcreator.borninchaosv.procedures.KillingVillagersProcedure();
+       1: invokespecial #30                 // Method java/lang/Object."<init>":()V
+  public static void onEntityDeath(net.minecraftforge.event.entity.living.LivingDeathEvent);
+       1: ifnull        54
+       5: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       8: ifnull        54
+      13: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #47                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      20: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      23: invokevirtual #51                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      27: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      30: invokevirtual #54                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      34: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      37: invokevirtual #57                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      41: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      45: invokevirtual #61                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      48: invokevirtual #67                 // Method net/minecraft/world/damagesource/DamageSource.m_7639_:()Lnet/minecraft/world/entity/Entity;
+      51: invokestatic  #71                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #71                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+       2: ifnull        10
+       7: ifnonnull     11
+      13: instanceof    #86                 // class net/minecraft/world/entity/player/Player
+      16: ifeq          1870
+      21: instanceof    #88                 // class net/minecraft/world/entity/npc/Villager
+      24: ifne          35
+      29: instanceof    #90                 // class net/minecraft/world/entity/npc/WanderingTrader
+      32: ifeq          1870
+      36: invokeinterface #96,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+      41: invokeinterface #102,  1          // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+      46: getstatic     #108                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      49: invokevirtual #112                // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+      52: iconst_1
+      53: if_icmpne     1870
+      58: instanceof    #43                 // class net/minecraft/world/entity/LivingEntity
+      61: ifeq          134
+      73: invokevirtual #116                // Method net/minecraft/world/entity/LivingEntity.m_6162_:()Z
+      76: ifeq          134
+      81: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      85: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+      92: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+      95: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     104: ldc2_w        #137                // double 15.0d
+     112: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     116: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     123: invokedynamic #158,  0            // InvokeDynamic #0:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+     128: invokevirtual #162                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     136: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     140: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     147: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     150: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     159: ldc2_w        #163                // double 10.0d
+     167: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     171: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     178: invokedynamic #169,  0            // InvokeDynamic #1:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+     183: invokevirtual #162                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     188: invokevirtual #173                // Method net/minecraft/world/entity/Entity.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     191: ldc           #175                // String firstwarning
+     193: invokevirtual #181                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+     196: ifne          387
+     201: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     205: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     212: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     215: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     224: ldc2_w        #182                // double 35.0d
+     228: iflt          387
+     233: getstatic     #120                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     237: invokevirtual #126                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     244: invokespecial #127                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     247: invokevirtual #133                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     2
+## net/mcreator/borninchaosv/procedures/KillinganimalsProcedure.class
+public class net.mcreator.borninchaosv.procedures.KillinganimalsProcedure {
+  public net.mcreator.borninchaosv.procedures.KillinganimalsProcedure();
+       1: invokespecial #30                 // Method java/lang/Object."<init>":()V
+  public static void onEntityDeath(net.minecraftforge.event.entity.living.LivingDeathEvent);
+       1: ifnull        54
+       5: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       8: ifnull        54
+      13: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #47                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      20: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      23: invokevirtual #51                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      27: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      30: invokevirtual #54                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      34: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      37: invokevirtual #57                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      41: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      45: invokevirtual #61                 // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      48: invokevirtual #67                 // Method net/minecraft/world/damagesource/DamageSource.m_7639_:()Lnet/minecraft/world/entity/Entity;
+      51: invokestatic  #71                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #71                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+       2: ifnull        10
+       7: ifnonnull     11
+      13: instanceof    #86                 // class net/minecraft/world/entity/player/Player
+      16: ifeq          2038
+      21: instanceof    #88                 // class net/minecraft/world/entity/animal/Animal
+      24: ifeq          2038
+      28: invokeinterface #94,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+      33: invokeinterface #100,  1          // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+      38: getstatic     #106                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.NAUGHTINESS_MECHANICS:Lnet/minecraft/world/level/GameRules$Key;
+      41: invokevirtual #110                // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+      44: iconst_1
+      45: if_icmpne     2038
+      50: instanceof    #43                 // class net/minecraft/world/entity/LivingEntity
+      53: ifeq          126
+      65: invokevirtual #114                // Method net/minecraft/world/entity/LivingEntity.m_6162_:()Z
+      68: ifeq          126
+      73: getstatic     #118                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      77: invokevirtual #124                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+      84: invokespecial #125                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+      87: invokevirtual #131                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      96: ldc2_w        #135                // double 10.0d
+     104: getstatic     #118                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     108: invokevirtual #124                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     115: invokedynamic #156,  0            // InvokeDynamic #0:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+     120: invokevirtual #160                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     128: instanceof    #162                // class net/minecraft/world/entity/animal/axolotl/Axolotl
+     131: ifne          166
+     136: instanceof    #164                // class net/minecraft/world/entity/animal/frog/Tadpole
+     139: ifne          166
+     144: instanceof    #166                // class net/minecraft/world/entity/animal/Parrot
+     147: ifne          166
+     152: instanceof    #168                // class net/minecraft/world/entity/animal/Turtle
+     155: ifne          166
+     160: instanceof    #170                // class net/minecraft/world/entity/animal/Panda
+     163: ifeq          221
+     168: getstatic     #118                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     172: invokevirtual #124                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     179: invokespecial #125                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     182: invokevirtual #131                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     191: ldc2_w        #171                // double 4.0d
+     199: getstatic     #118                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     203: invokevirtual #124                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     210: invokedynamic #177,  0            // InvokeDynamic #1:accept:(DLnet/minecraft/world/entity/Entity;)Lnet/minecraftforge/common/util/NonNullConsumer;
+     215: invokevirtual #160                // Method net/minecraftforge/common/util/LazyOptional.ifPresent:(Lnet/minecraftforge/common/util/NonNullConsumer;)V
+     223: instanceof    #179                // class net/minecraft/world/entity/animal/sniffer/Sniffer
+     226: ifne          237
+     231: instanceof    #181                // class net/minecraft/world/entity/animal/allay/Allay
+     234: ifeq          292
+     239: getstatic     #118                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     243: invokevirtual #124                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;
+     250: invokespecial #125                // Method net/mcreator/borninchaosv/network/BornInChaosV1ModVariables$PlayerVariables."<init>":()V
+     253: invokevirtual #131                // Method net/minecraftforge/common/util/LazyOptional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+     262: ldc2_w        #182                // double 7.0d
+     270: getstatic     #118                // Field net/mcreator/borninchaosv/network/BornInChaosV1ModVariables.PLAYER_VARIABLES_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+     274: invokevirtual #124                // Method net/minecraft/world/entity/Entity.getCapability:(Lnet/minecraftforge/common/capabilities/Capability
+## net/mcreator/borninchaosv/procedures/KrampusSpawnProProcedure.class
+public class net.mcreator.borninchaosv.procedures.KrampusSpawnProProcedure {
+  public net.mcreator.borninchaosv.procedures.KrampusSpawnProProcedure();
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+       1: invokeinterface #24,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8044_:()J
+       6: ldc2_w        #25                 // long 228400l
+      10: iflt          328
+      20: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      23: invokeinterface #36,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      28: ifeq          48
+      36: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      39: invokeinterface #40,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46803_:(Lnet/minecraft/core/BlockPos;)I
+      44: iconst_4
+      45: if_icmple     82
+      55: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      58: invokeinterface #36,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      63: ifne          328
+      71: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      74: invokeinterface #40,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46803_:(Lnet/minecraft/core/BlockPos;)I
+      79: ifgt          328
+      87: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      90: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      99: ldc           #48                 // String deep_dark
+     101: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     104: invokeinterface #57,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     109: ifne          328
+     117: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     120: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     129: ldc           #59                 // String mushroom_fields
+     131: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     134: invokeinterface #57,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     139: ifne          328
+     143: invokeinterface #63,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+     148: invokeinterface #69,  1           // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+     153: getstatic     #75                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.KRAMPUS_SPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     156: invokevirtual #79                 // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+     159: iconst_1
+     160: if_icmpne     328
+     164: instanceof    #81                 // class net/minecraft/world/level/Level
+     167: ifeq          184
+     178: invokevirtual #85                 // Method net/minecraft/world/level/Level.m_46472_:()Lnet/minecraft/resources/ResourceKey;
+     185: instanceof    #87                 // class net/minecraft/world/level/WorldGenLevel
+     188: ifeq          210
+     199: invokeinterface #91,  1           // InterfaceMethod net/minecraft/world/level/WorldGenLevel.m_6018_:()Lnet/minecraft/server/level/ServerLevel;
+     204: invokevirtual #94                 // Method net/minecraft/server/level/ServerLevel.m_46472_:()Lnet/minecraft/resources/ResourceKey;
+     210: getstatic     #98                 // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+     213: getstatic     #98                 // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+     216: if_acmpne     328
+     224: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     227: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     232: getstatic     #105                // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     239: ldc           #107                // String minecraft:is_overworld
+     241: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     244: invokestatic  #113                // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     247: invokeinterface #117,  2          // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     252: ifne          291
+     260: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     263: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     268: getstatic     #105                // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     275: ldc           #119                // String terralith:all_terralith_biomes
+     277: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     280: invokestatic  #113                // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     283: invokeinterface #117,  2          // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     288: ifeq          328
+     296: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     299: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     304: invokeinterface #123,  1          // InterfaceMethod net/minecraft/core/Holder.m_203334_:()Ljava/lang/Object;
+     312: invokevirtual #129                // Method net/minecraft/world/level/biome/Biome.m_47554_:()F
+     315: ldc           #130                // float 100.0f
+     319: ldc2_w        #131                // double 0.15d
+     323: ifgt          328
+     326: iconst_1
+     328: iconst_0

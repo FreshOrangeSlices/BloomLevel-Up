@@ -81,7 +81,7 @@ eula=false
 # Only what the pack needs; the server fills in every other setting on its first start.
 SERVER_PROPERTIES = """motd={name}
 view-distance=8
-simulation-distance=8
+simulation-distance=6
 max-players=10
 difficulty=normal
 spawn-protection=0

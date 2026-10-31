@@ -7,7 +7,7 @@
   "layers": [
     {
       "name": "core",
-      "_comment": "Bloom with Better Combat, Combat Roll (the pack's one dodge roll, on Z: its roll animates through Player Animator, which Better Combat brings too) and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world) and spark (find what lags). Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
+      "_comment": "Bloom with Better Combat, Combat Roll (the pack's one dodge roll, on Z: its roll animates through Player Animator, which Better Combat brings too) and the Fresh Animations set (the earlier Forge pack; FA+ Spiders out, FreshOrangeSlices found it broken in play, so spiders are vanilla), plus the performance mods, since they change how everything renders: Embeddium, ModernFix, FerriteCore, Clumps, Entity Culling (doesn't draw what's out of sight), ImmediatelyFast (faster HUD and text drawing), AI Improvements (cheaper mob AI), Let Me Despawn (mobs that picked up items still despawn, dropping them), and for the server, Chunky (pre-generate the world), spark (find what lags), Canary (Lithium's server and AI optimizations for Forge; each of its patches can be turned off in its config if one clashes with a mod) and Async Locator (vanilla's structure searches, /locate, explorer maps and dolphins, off the main thread so they don't freeze the server; the add-on's pirate charts already spread their search over ticks). The server's simulation distance is 6 with view distance 8 (FreshOrangeSlices, 2026-10-31: 3 to 5 players, lag): the world looks as far, and the ground where mobs spawn and move is about 40% smaller. Open Loader puts the pack's own data pack (pack_data) into every world and the server.",
       "modrinth": [
         "better-combat",
         "combat-roll",
@@ -33,6 +33,8 @@
         "lmd",
         "chunky",
         "spark",
+        "canary",
+        "async-locator",
         "open-loader",
         "architectury-api"
       ],

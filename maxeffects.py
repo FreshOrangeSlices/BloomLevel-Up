@@ -5,18 +5,32 @@ server_zip, shots, out = sys.argv[1:4]
 os.makedirs(out, exist_ok=True)
 server = zipfile.ZipFile(server_zip)
 report = []
-jars = {n: zipfile.ZipFile(io.BytesIO(server.read(n))) for n in server.namelist() if n.startswith("mods/") and n.endswith(".jar")}
+jars = {}
+def add(label, data, depth=0):
+    try:
+        z = zipfile.ZipFile(io.BytesIO(data))
+    except Exception:
+        return
+    jars[label] = z
+    if depth < 2:
+        for n in z.namelist():
+            if n.endswith(".jar"):
+                add(label + "!" + n, z.read(n), depth + 1)
+for n in server.namelist():
+    if n.startswith("mods/") and n.endswith(".jar"):
+        add(n, server.read(n))
 MAX = b"\x03\x7f\xff\xff\xff"
-ADD = re.compile(rb"m_7292_|m_147207_|MobEffectInstance")
+ADD = re.compile(rb"m_7292_|m_147207_|MobEffectInstance|world/effect/MobEffect|addEffect")
 picked = []
 for jname, jar in jars.items():
     for n in jar.namelist():
         if n.endswith(".class"):
             b = jar.read(n)
-            if MAX in b and ADD.search(b):
+            if MAX in b and ADD.search(b) and not n.startswith(("io/redspace/", "fuzs/mutantmonsters/init", "net/sweenus/simplyswords/world/Hivemind")):
                 picked.append((jname, n))
 report.append(f"# {len(picked)} classes with Integer.MAX_VALUE and effects")
-report += [f"{j.rsplit('/', 1)[1]} :: {n}" for j, n in picked]
+report += [f"{j} :: {n}" for j, n in picked]
+report.append("# nested jars scanned: " + ", ".join(k for k in jars if "!" in k))
 with tempfile.TemporaryDirectory() as tmp:
     for j, n in picked[:60]:
         path = os.path.join(tmp, n.replace("/", "_"))

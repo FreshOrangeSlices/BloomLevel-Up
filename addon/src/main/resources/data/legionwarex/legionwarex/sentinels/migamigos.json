@@ -1,0 +1,68 @@
+{
+  "_comment": "Migamigos' companions as Enemigos, its own hostile mode (red eyes, stronger, they fight players; the mod itself only uses it in raids, a witch or vindicator now and then swapped for an Enemigo Shybroom: \"A new foe has appeared!\"). Each stands sentinel, rarely, in the biomes where its friendly self lives (the pack's spawn groups), and pays 25 experience on top of its own when a player kills it (FreshOrangeSlices, 2026-10-31: just kill them, maybe extra XP). A beaten Enemigo dies like any sentinel; the friendly ones are untouched.",
+  "sentinels": [
+    {
+      "entity": "migamigos:claymore",
+      "weight": 4,
+      "biomes": [
+        "#minecraft:is_forest",
+        "#minecraft:is_taiga",
+        "#forge:is_coniferous",
+        "#forge:is_dense"
+      ],
+      "nbt": "{IsEnemigo:1b}",
+      "xp": 25
+    },
+    {
+      "entity": "migamigos:wavelyn",
+      "weight": 4,
+      "biomes": [
+        "#forge:is_plains",
+        "minecraft:birch_forest",
+        "minecraft:old_growth_birch_forest",
+        "minecraft:cherry_grove"
+      ],
+      "nbt": "{IsEnemigo:1b}",
+      "xp": 25
+    },
+    {
+      "entity": "migamigos:cocogoat",
+      "weight": 4,
+      "biomes": [
+        "#minecraft:is_hill",
+        "#minecraft:is_mountain",
+        "#forge:is_mountain"
+      ],
+      "nbt": "{IsEnemigo:1b}",
+      "xp": 25
+    },
+    {
+      "entity": "migamigos:pollypounce",
+      "weight": 4,
+      "biomes": [
+        "#minecraft:is_beach",
+        "minecraft:stony_shore",
+        "minecraft:old_growth_birch_forest",
+        "minecraft:cherry_grove"
+      ],
+      "nbt": "{IsEnemigo:1b}",
+      "xp": 25
+    },
+    {
+      "entity": "migamigos:shybroom",
+      "weight": 4,
+      "biomes": [
+        "minecraft:plains",
+        "minecraft:sunflower_plains",
+        "biomesoplenty:lavender_field",
+        "biomesoplenty:grassland",
+        "biomesoplenty:pasture",
+        "biomesoplenty:prairie",
+        "biomesoplenty:orchard",
+        "biomesoplenty:overgrown_greens"
+      ],
+      "nbt": "{IsEnemigo:1b}",
+      "xp": 25
+    }
+  ]
+}

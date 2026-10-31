@@ -20,14 +20,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /** Daytime sentinels: their table, how they're placed and dressed, and holding their post. */
 @GameTestHolder(LegionWareX.MOD_ID)
@@ -149,5 +153,44 @@ public final class SentinelGameTests {
 		}
 
 		helper.succeed();
+	}
+
+	/**
+	 * Migamigos' Enemigos as sentinels (a table entry's nbt and xp): the shipped table has each companion as one, a placed
+	 * one comes hostile, and a player's kill pays its 25 experience on top of its own. Migamigos is in the dev run.
+	 */
+	@GameTest(template = "room", timeoutTicks = 100)
+	public static void anEnemigoSentinelComesHostileAndPaysExtraExperience(GameTestHelper helper) {
+		ResourceLocation claymore = new ResourceLocation("migamigos", "claymore");
+		helper.assertTrue(ForgeRegistries.ENTITY_TYPES.containsKey(claymore), "Migamigos is in the dev run");
+		List<SentinelTable.Entry> enemigos = SentinelTable.all().stream().filter(entry -> entry.entity().getNamespace().equals("migamigos")).toList();
+		helper.assertTrue(enemigos.size() == 5 && enemigos.stream().allMatch(entry -> entry.nbt() != null && entry.nbt().getBoolean("IsEnemigo") && entry.xp() == 25),
+				"The table has the five companions as Enemigos, 25 experience each: " + enemigos);
+
+		ServerLevel level = helper.getLevel();
+		CompoundTag nbt = new CompoundTag();
+		nbt.putBoolean("IsEnemigo", true);
+		Mob enemigo = Sentinels.spawn(level, new SentinelTable.Entry(claymore, 1, List.of(), false, nbt, 25), helper.absolutePos(Rooms.on(helper, 3, 3)), false);
+		helper.assertTrue(enemigo != null, "An Enemigo Claymore was placed");
+
+		try {
+			helper.assertTrue(enemigo.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo"), "It came as an Enemigo");
+			helper.assertTrue(Sentinels.isSentinel(enemigo) && Sentinels.bonusXp(enemigo) == 25, "It's a sentinel worth 25 more experience");
+		} catch (RuntimeException e) {
+			enemigo.discard();
+			throw e;
+		}
+
+		AABB around = new AABB(enemigo.blockPosition()).inflate(6.0);
+		Player player = helper.makeMockPlayer();
+		enemigo.hurt(level.damageSources().playerAttack(player), 10000.0F);
+		helper.assertTrue(enemigo.isDeadOrDying(), "A player killed it");
+		helper.runAfterDelay(25, () -> {
+			List<ExperienceOrb> orbs = level.getEntitiesOfClass(ExperienceOrb.class, around);
+			int xp = orbs.stream().mapToInt(ExperienceOrb::getValue).sum();
+			orbs.forEach(Entity::discard);
+			helper.assertTrue(xp >= 25, "It dropped its 25 extra experience: " + xp);
+			helper.succeed();
+		});
 	}
 }

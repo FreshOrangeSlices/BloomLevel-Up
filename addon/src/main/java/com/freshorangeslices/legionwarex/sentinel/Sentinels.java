@@ -28,7 +28,8 @@ import net.minecraft.world.level.block.state.BlockState;
  * monster once players are far away. Undead ones get a plain helmet that never wears out and never drops, which keeps
  * the sun off them the way Minecraft's own helmet rule does. A pillager scout (a roamer) wanders instead.
  * <p>
- * Each one carries the scoreboard tag {@link #TAG} and, in its persistent data, its post (where it was placed).
+ * Each one carries the scoreboard tag {@link #TAG} and, in its persistent data, its post (where it was placed) and any
+ * experience its table entry adds when a player kills it.
  */
 public final class Sentinels {
 	public static final String TAG = "legionwarex_sentinel";
@@ -78,6 +79,14 @@ public final class Sentinels {
 
 		// The mob's own finalizeSpawn, not Forge's spawn event (a night-only rule for natural spawns would turn it away).
 		mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null, null);
+
+		// A mod's own variant (Migamigos' Enemigos), the way its own command makes one: through the mob's saved data.
+		if (entry.nbt() != null) {
+			CompoundTag saved = mob.saveWithoutId(new CompoundTag());
+			saved.merge(entry.nbt().copy());
+			mob.load(saved);
+		}
+
 		dress(mob);
 		mob.addTag(TAG);
 		CompoundTag data = new CompoundTag();
@@ -87,8 +96,17 @@ public final class Sentinels {
 			shortenSight(mob);
 		}
 
+		if (entry.xp() > 0) {
+			data.putInt("xp", entry.xp());
+		}
+
 		mob.getPersistentData().put(DATA, data);
 		return level.addFreshEntity(mob) ? mob : null;
+	}
+
+	/** The experience its table entry adds when a player kills it (0 for most). */
+	public static int bonusXp(Entity entity) {
+		return isSentinel(entity) ? entity.getPersistentData().getCompound(DATA).getInt("xp") : 0;
 	}
 
 	/** An undead sentinel's helmet: kept on, never worn out by the sun, never dropped. */

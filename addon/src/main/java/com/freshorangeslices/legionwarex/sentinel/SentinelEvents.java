@@ -20,6 +20,7 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -137,6 +138,16 @@ public final class SentinelEvents {
 
 		if (post != null) {
 			mob.goalSelector.addGoal(1, new HoldPostGoal(mob, post));
+		}
+	}
+
+	/** A sentinel whose table entry adds experience (the Enemigos) pays it on top of its own when a player kills it. */
+	@SubscribeEvent
+	public static void onExperience(LivingExperienceDropEvent event) {
+		int bonus = Sentinels.bonusXp(event.getEntity());
+
+		if (bonus > 0) {
+			event.setDroppedExperience(event.getDroppedExperience() + bonus);
 		}
 	}
 

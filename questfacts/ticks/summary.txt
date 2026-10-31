@@ -1,0 +1,934 @@
+# classes adding effects from a living-tick handler, or naming Born in Chaos's Halloween gear
+monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/compat/EpicFightCompat.class
+monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/BleedingEffectEvents.class
+monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/FlareveinEffectEvents.class
+monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/FrostveinEffectEvents.class
+monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/KobekoRhyzaSetBonusEvents.class
+irons_spellbooks-1.20.1-3.16.3.jar :: io/redspace/ironsspellbooks/player/ServerPlayerEvents.class
+soulslike-weaponry-1.4.10-1.20.1-forge.jar :: net/soulsweaponry/events/ModEvents.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/event/ServerEventHandler.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/CrushingPauldronEffectProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/DeepAlloyArmorEffectBuffProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/OffhandOccupiedEffectTriggerProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/ResisteelArmorEquippedEffectProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/ResisteelSwordEffectProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/ResisteelToolsEffectProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/SLFleshTotemHeldEffectProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/TotemOfFreezingEffectProcedure.class
+skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/TotemOfSeethingEffectProcedure.class
+## monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/compat/EpicFightCompat.class
+public class net.saksolm.monsterexpansion.compat.EpicFightCompat {
+  private static final net.minecraft.world.effect.MobEffect STUN_IMMUNITY;
+  public net.saksolm.monsterexpansion.compat.EpicFightCompat();
+  public static void registerCompat();
+       0: invokestatic  #25                 // Method net/minecraftforge/fml/ModList.get:()Lnet/minecraftforge/fml/ModList;
+       3: ldc           #27                 // String epicfight
+      11: getstatic     #37                 // Field net/minecraftforge/common/MinecraftForge.EVENT_BUS:Lnet/minecraftforge/eventbus/api/IEventBus;
+      14: ldc           #39                 // class net/saksolm/monsterexpansion/compat/MixinPreventStun
+      16: invokeinterface #45,  2           // InterfaceMethod net/minecraftforge/eventbus/api/IEventBus.register:(Ljava/lang/Object;)V
+  public static void onLivingTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       0: getstatic     #50                 // Field STUN_IMMUNITY:Lnet/minecraft/world/effect/MobEffect;
+       8: invokevirtual #54                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      13: instanceof    #56                 // class net/saksolm/monsterexpansion/entity/custom/SkrytheEntity
+      20: checkcast     #56                 // class net/saksolm/monsterexpansion/entity/custom/SkrytheEntity
+      25: getstatic     #50                 // Field STUN_IMMUNITY:Lnet/minecraft/world/effect/MobEffect;
+      28: invokevirtual #60                 // Method net/saksolm/monsterexpansion/entity/custom/SkrytheEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      35: new           #62                 // class net/minecraft/world/effect/MobEffectInstance
+      39: getstatic     #50                 // Field STUN_IMMUNITY:Lnet/minecraft/world/effect/MobEffect;
+      48: invokespecial #65                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+      51: invokevirtual #69                 // Method net/saksolm/monsterexpansion/entity/custom/SkrytheEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public static net.minecraft.world.damagesource.DamageSource addGuardPuncture(net.minecraft.world.damagesource.DamageSource);
+       1: instanceof    #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+       8: checkcast     #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+      17: new           #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+      27: getstatic     #86                 // Field yesman/epicfight/world/damagesource/EpicFightDamageTypeTags.GUARD_PUNCTURE:Lnet/minecraft/tags/TagKey;
+  public static net.minecraft.world.damagesource.DamageSource addDodgeBypass(net.minecraft.world.damagesource.DamageSource);
+       1: instanceof    #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+       8: checkcast     #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+      17: new           #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+      27: getstatic     #99                 // Field yesman/epicfight/world/damagesource/EpicFightDamageTypeTags.BYPASS_DODGE:Lnet/minecraft/tags/TagKey;
+  public static net.minecraft.world.damagesource.DamageSource createGuardBreakDamageSource(net.minecraft.world.entity.LivingEntity);
+       9: new           #77                 // class yesman/epicfight/world/damagesource/EpicFightDamageSource
+      18: ldc           #113                // float 100.0f
+  static {};
+       0: getstatic     #129                // Field net/minecraftforge/registries/ForgeRegistries.MOB_EFFECTS:Lnet/minecraftforge/registries/IForgeRegistry;
+       3: new           #131                // class net/minecraft/resources/ResourceLocation
+       7: ldc           #27                 // String epicfight
+       9: ldc           #133                // String stun_immunity
+      19: checkcast     #144                // class net/minecraft/world/effect/MobEffect
+      22: putstatic     #50                 // Field STUN_IMMUNITY:Lnet/minecraft/world/effect/MobEffect;
+## monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/BleedingEffectEvents.class
+Compiled from "BleedingEffectEvents.java"
+public class net.saksolm.monsterexpansion.event.BleedingEffectEvents {
+  private static final java.util.Map<java.util.UUID, net.minecraft.world.phys.Vec3> previousPositions;
+  public net.saksolm.monsterexpansion.event.BleedingEffectEvents();
+  public static void onLivingTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       1: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #41                 // class net/minecraft/world/entity/player/Player
+      13: checkcast     #41                 // class net/minecraft/world/entity/player/Player
+      33: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.BLEEDING:Lnet/minecraftforge/registries/RegistryObject;
+      39: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+      42: invokevirtual #69                 // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      48: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+      63: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.BLEEDING:Lnet/minecraftforge/registries/RegistryObject;
+      69: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+      72: invokevirtual #85                 // Method net/minecraft/world/entity/player/Player.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      82: invokevirtual #91                 // Method net/minecraft/world/effect/MobEffectInstance.m_19557_:()I
+      98: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+     112: checkcast     #101                // class net/minecraft/world/phys/Vec3
+     128: ldc2_w        #106                // double 4.0E-4d
+     142: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+     215: getfield      #120                // Field net/minecraft/world/entity/player/Player.f_19797_:I
+     236: new           #87                 // class net/minecraft/world/effect/MobEffectInstance
+     240: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.BLEEDING:Lnet/minecraftforge/registries/RegistryObject;
+     246: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+     252: invokevirtual #123                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+     256: invokevirtual #126                // Method net/minecraft/world/effect/MobEffectInstance.m_19571_:()Z
+     260: invokevirtual #129                // Method net/minecraft/world/effect/MobEffectInstance.m_19572_:()Z
+     264: invokevirtual #132                // Method net/minecraft/world/effect/MobEffectInstance.m_19575_:()Z
+     267: invokespecial #135                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+     273: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.BLEEDING:Lnet/minecraftforge/registries/RegistryObject;
+     279: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+     282: invokevirtual #138                // Method net/minecraft/world/entity/player/Player.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     289: invokevirtual #142                // Method net/minecraft/world/entity/player/Player.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public static void onPlayerLogout(net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent);
+       0: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+       4: invokevirtual #164                // Method net/minecraftforge/event/entity/player/PlayerEvent$PlayerLoggedOutEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+  static {};
+       0: new           #168                // class java/util/HashMap
+       7: putstatic     #71                 // Field previousPositions:Ljava/util/Map;
+## monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/FlareveinEffectEvents.class
+Compiled from "FlareveinEffectEvents.java"
+public class net.saksolm.monsterexpansion.event.FlareveinEffectEvents {
+  private static final java.util.Map<java.util.UUID, net.minecraft.world.phys.Vec3> previousPositions;
+  public net.saksolm.monsterexpansion.event.FlareveinEffectEvents();
+  public static void onLivingTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       1: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #41                 // class net/minecraft/world/entity/player/Player
+      13: checkcast     #41                 // class net/minecraft/world/entity/player/Player
+      33: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+      39: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+      42: invokevirtual #69                 // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      48: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+      63: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+      69: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+      72: invokevirtual #85                 // Method net/minecraft/world/entity/player/Player.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      82: invokevirtual #91                 // Method net/minecraft/world/effect/MobEffectInstance.m_19557_:()I
+      98: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+     112: checkcast     #101                // class net/minecraft/world/phys/Vec3
+     128: ldc2_w        #106                // double 4.0E-4d
+     142: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+     187: getfield      #117                // Field net/minecraft/world/entity/player/Player.f_19797_:I
+     228: new           #87                 // class net/minecraft/world/effect/MobEffectInstance
+     232: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+     238: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+     244: invokevirtual #120                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+     248: invokevirtual #123                // Method net/minecraft/world/effect/MobEffectInstance.m_19571_:()Z
+     253: invokevirtual #126                // Method net/minecraft/world/effect/MobEffectInstance.m_19575_:()Z
+     256: invokespecial #129                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+     262: getstatic     #57                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FLAREVEIN:Lnet/minecraftforge/registries/RegistryObject;
+     268: checkcast     #65                 // class net/minecraft/world/effect/MobEffect
+     271: invokevirtual #132                // Method net/minecraft/world/entity/player/Player.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     278: invokevirtual #136                // Method net/minecraft/world/entity/player/Player.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public static void onPlayerLogout(net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent);
+       0: getstatic     #71                 // Field previousPositions:Ljava/util/Map;
+       4: invokevirtual #158                // Method net/minecraftforge/event/entity/player/PlayerEvent$PlayerLoggedOutEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+  static {};
+       0: new           #162                // class java/util/HashMap
+       7: putstatic     #71                 // Field previousPositions:Ljava/util/Map;
+## monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/FrostveinEffectEvents.class
+Compiled from "FrostveinEffectEvents.java"
+public class net.saksolm.monsterexpansion.event.FrostveinEffectEvents {
+  public net.saksolm.monsterexpansion.event.FrostveinEffectEvents();
+  public static void onLivingTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       1: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #33                 // class net/minecraft/world/entity/player/Player
+      13: checkcast     #33                 // class net/minecraft/world/entity/player/Player
+      33: getstatic     #49                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FROSTVEIN:Lnet/minecraftforge/registries/RegistryObject;
+      39: checkcast     #57                 // class net/minecraft/world/effect/MobEffect
+      42: invokevirtual #61                 // Method net/minecraft/world/entity/player/Player.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      52: invokevirtual #66                 // Method net/minecraft/world/effect/MobEffectInstance.m_19572_:()Z
+      59: getstatic     #49                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FROSTVEIN:Lnet/minecraftforge/registries/RegistryObject;
+      65: checkcast     #57                 // class net/minecraft/world/effect/MobEffect
+      68: invokevirtual #70                 // Method net/minecraft/world/entity/player/Player.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      73: new           #63                 // class net/minecraft/world/effect/MobEffectInstance
+      77: getstatic     #49                 // Field net/saksolm/monsterexpansion/effect/ModEffects.FROSTVEIN:Lnet/minecraftforge/registries/RegistryObject;
+      83: checkcast     #57                 // class net/minecraft/world/effect/MobEffect
+      87: invokevirtual #74                 // Method net/minecraft/world/effect/MobEffectInstance.m_19557_:()I
+      91: invokevirtual #77                 // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+      95: invokevirtual #80                 // Method net/minecraft/world/effect/MobEffectInstance.m_19571_:()Z
+     100: invokevirtual #83                 // Method net/minecraft/world/effect/MobEffectInstance.m_19575_:()Z
+     103: invokespecial #86                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+     106: invokevirtual #90                 // Method net/minecraft/world/entity/player/Player.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+## monsterexpansion-1.20.1-v0.7.6.jar :: net/saksolm/monsterexpansion/event/KobekoRhyzaSetBonusEvents.class
+Compiled from "KobekoRhyzaSetBonusEvents.java"
+public class net.saksolm.monsterexpansion.event.KobekoRhyzaSetBonusEvents {
+  public net.saksolm.monsterexpansion.event.KobekoRhyzaSetBonusEvents();
+  public static void onLivingTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       1: invokevirtual #37                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #39                 // class net/saksolm/monsterexpansion/entity/custom/KobekoEntity
+      13: checkcast     #39                 // class net/saksolm/monsterexpansion/entity/custom/KobekoEntity
+      18: getstatic     #45                 // Field net/minecraft/world/effect/MobEffects.f_19596_:Lnet/minecraft/world/effect/MobEffect;
+      21: invokevirtual #49                 // Method net/saksolm/monsterexpansion/entity/custom/KobekoEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      28: invokestatic  #53                 // Method isFullSetWorn:(Lnet/saksolm/monsterexpansion/entity/custom/KobekoEntity;)Z
+      35: new           #55                 // class net/minecraft/world/effect/MobEffectInstance
+      39: getstatic     #45                 // Field net/minecraft/world/effect/MobEffects.f_19596_:Lnet/minecraft/world/effect/MobEffect;
+      48: invokespecial #58                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+      51: invokevirtual #62                 // Method net/saksolm/monsterexpansion/entity/custom/KobekoEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public static boolean isFullSetWorn(net.saksolm.monsterexpansion.entity.custom.KobekoEntity);
+      14: getstatic     #85                 // Field net/saksolm/monsterexpansion/item/ModItems.RHYZA_KOBEKO_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+      27: getstatic     #94                 // Field net/saksolm/monsterexpansion/item/ModItems.RHYZA_KOBEKO_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+## irons_spellbooks-1.20.1-3.16.3.jar :: io/redspace/ironsspellbooks/player/ServerPlayerEvents.class
+Compiled from "ServerPlayerEvents.java"
+public class io.redspace.ironsspellbooks.player.ServerPlayerEvents {
+  public io.redspace.ironsspellbooks.player.ServerPlayerEvents();
+  public static void onUseItem(net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickItem);
+       1: invokevirtual #120                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       6: getfield      #126                // Field net/minecraft/world/entity/player/Player.f_19853_:Lnet/minecraft/world/level/Level;
+      17: invokedynamic #152,  0            // InvokeDynamic #0:accept:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem;)Ljava/util/function/Consumer;
+      22: invokestatic  #158                // Method io/redspace/ironsspellbooks/util/MinecraftInstanceHelper.ifPlayerPresent:(Ljava/util/function/Consumer;)V
+      29: invokestatic  #164                // Method io/redspace/ironsspellbooks/api/magic/MagicData.getPlayerMagicData:(Lnet/minecraft/world/entity/LivingEntity;)Lio/redspace/ironsspellbooks/api/magic/MagicData;
+      41: invokevirtual #172                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getItemStack:()Lnet/minecraft/world/item/ItemStack;
+      53: invokevirtual #179                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.setCanceled:(Z)V
+      57: invokevirtual #182                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.isCanceled:()Z
+      65: getfield      #126                // Field net/minecraft/world/entity/player/Player.f_19853_:Lnet/minecraft/world/level/Level;
+      70: invokevirtual #186                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getHand:()Lnet/minecraft/world/InteractionHand;
+      83: invokestatic  #196                // Method io/redspace/ironsspellbooks/api/item/CastingImplementData.has:(Lnet/minecraft/world/item/ItemStack;)Z
+      91: invokestatic  #199                // Method io/redspace/ironsspellbooks/api/item/CastingImplementData.get:(Lnet/minecraft/world/item/ItemStack;)Z
+      97: new           #15                 // class io/redspace/ironsspellbooks/api/magic/SpellSelectionManager
+     124: getstatic     #214                // Field io/redspace/ironsspellbooks/api/spells/SpellData.EMPTY:Lio/redspace/ironsspellbooks/api/spells/SpellData;
+     164: invokestatic  #242                // Method io/redspace/ironsspellbooks/player/ClientMagicData.isCasting:()Z
+     171: getstatic     #248                // Field net/minecraft/world/InteractionResult.CONSUME:Lnet/minecraft/world/InteractionResult;
+     174: invokevirtual #252                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.setCancellationResult:(Lnet/minecraft/world/InteractionResult;)V
+     180: invokestatic  #255                // Method io/redspace/ironsspellbooks/player/ClientMagicData.getPlayerMana:()I
+     196: invokestatic  #263                // Method io/redspace/ironsspellbooks/player/ClientMagicData.getCooldowns:()Lio/redspace/ironsspellbooks/capabilities/magic/PlayerCooldowns;
+     211: invokestatic  #273                // Method io/redspace/ironsspellbooks/player/ClientMagicData.getSyncedSpellData:(Lnet/minecraft/world/entity/LivingEntity;)Lio/redspace/ironsspellbooks/capabilities/magic/SyncedSpellData;
+     227: getstatic     #248                // Field net/minecraft/world/InteractionResult.CONSUME:Lnet/minecraft/world/InteractionResult;
+     230: invokevirtual #252                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.setCancellationResult:(Lnet/minecraft/world/InteractionResult;)V
+     240: getstatic     #285                // Field io/redspace/ironsspellbooks/api/magic/SpellSelectionManager.MAINHAND:Ljava/lang/String;
+     246: getstatic     #288                // Field io/redspace/ironsspellbooks/api/magic/SpellSelectionManager.OFFHAND:Ljava/lang/String;
+     277: getstatic     #248                // Field net/minecraft/world/InteractionResult.CONSUME:Lnet/minecraft/world/InteractionResult;
+     280: invokevirtual #252                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.setCancellationResult:(Lnet/minecraft/world/InteractionResult;)V
+     287: getstatic     #301                // Field net/minecraft/world/InteractionResult.FAIL:Lnet/minecraft/world/InteractionResult;
+     290: invokevirtual #252                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.setCancellationResult:(Lnet/minecraft/world/InteractionResult;)V
+     295: invokevirtual #179                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.setCanceled:(Z)V
+  public static void onPlayerDropItem(net.minecraftforge.event.entity.item.ItemTossEvent);
+       1: invokevirtual #326                // Method net/minecraftforge/event/entity/item/ItemTossEvent.getEntity:()Lnet/minecraft/world/entity/item/ItemEntity;
+      12: instanceof    #337                // class io/redspace/ironsspellbooks/item/Scroll
+      19: invokevirtual #340                // Method net/minecraftforge/event/entity/item/ItemTossEvent.getPlayer:()Lnet/minecraft/world/entity/player/Player;
+      22: invokestatic  #164                // Method io/redspace/ironsspellbooks/api/magic/MagicData.getPlayerMagicData:(Lnet/minecraft/world/entity/LivingEntity;)Lio/redspace/ironsspellbooks/api/magic/MagicData;
+      37: getstatic     #347                // Field io/redspace/ironsspellbooks/api/spells/CastSource.SCROLL:Lio/redspace/ironsspellbooks/api/spells/CastSource;
+      47: getstatic     #357                // Field io/redspace/ironsspellbooks/api/spells/CastType.CONTINUOUS:Lio/redspace/ironsspellbooks/api/spells/CastType;
+  public static void onLevelLoaded(net.minecraftforge.event.level.LevelEvent$Load);
+       1: invokevirtual #367                // Method net/minecraftforge/event/level/LevelEvent$Load.getLevel:()Lnet/minecraft/world/level/LevelAccessor;
+       6: instanceof    #369                // class net/minecraft/server/level/ServerLevel
+      13: checkcast     #369                // class net/minecraft/server/level/ServerLevel
+      21: getstatic     #377                // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+      31: invokestatic  #387                // Method io/redspace/ironsspellbooks/data/IronsDataStorage.init:(Lnet/minecraft/world/level/storage/DimensionDataStorage;)V
+  public static void onServerStoppedEvent(net.minecraftforge.event.server.ServerStoppedEvent);
+       1: putstatic     #398                // Field io/redspace/ironsspellbooks/IronsSpellbooks.MCS:Lnet/minecraft/server/MinecraftServer;
+       5: putstatic     #401                // Field io/redspace/ironsspellbooks/IronsSpellbooks.OVERWORLD:Lnet/minecraft/server/level/ServerLevel;
+  public static void onServerStarted(net.minecraftforge.event.server.ServerStartedEvent);
+       1: invokevirtual #410                // Method net/minecraftforge/event/server/ServerStartedEvent.getServer:()Lnet/minecraft/server/MinecraftServer;
+       4: putstatic     #398                // Field io/redspace/ironsspellbooks/IronsSpellbooks.MCS:Lnet/minecraft/server/MinecraftServer;
+       7: getstatic     #398                // Field io/redspace/ironsspellbooks/IronsSpellbooks.MCS:Lnet/minecraft/server/MinecraftServer;
+      13: putstatic     #401                // Field io/redspace/ironsspellbooks/IronsSpellbooks.OVERWORLD:Lnet/minecraft/server/level/ServerLevel;
+  public static void onLivingEquipmentChangeEvent(net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent);
+       1: invokevirtual #424                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #426                // class net/minecraft/server/level/ServerPlayer
+      13: checkcast     #426                // class net/minecraft/server/level/ServerPlayer
+      18: invokestatic  #164                // Method io/redspace/ironsspellbooks/api/magic/MagicData.getPlayerMagicData:(Lnet/minecraft/world/entity/LivingEntity;)Lio/redspace/ironsspellbooks/api/magic/MagicData;
+      30: invokevirtual #429                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getFrom:()Lnet/minecraft/world/item/ItemStack;
+      36: instanceof    #431                // class io/redspace/ironsspellbooks/item/CastingItem
+      43: invokevirtual #434                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getTo:()Lnet/minecraft/world/item/ItemStack;
+      49: instanceof    #431                // class io/redspace/ironsspellbooks/item/CastingItem
+      56: invokestatic  #440                // Method io/redspace/ironsspellbooks/api/util/Utils.serverSideCancelCast:(Lnet/minecraft/server/level/ServerPlayer;)V
+      60: new           #442                // class io/redspace/ironsspellbooks/network/EquipmentChangedPacket
+      67: invokestatic  #449                // Method io/redspace/ironsspellbooks/setup/PacketDistributor.sendToPlayer:(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/Object;)V
+      72: invokevirtual #429                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getFrom:()Lnet/minecraft/world/item/ItemStack;
+      75: invokestatic  #454                // InterfaceMethod io/redspace/ironsspellbooks/api/spells/ISpellContainer.isSpellContainer:(Lnet/minecraft/world/item/ItemStack;)Z
+      84: invokevirtual #429                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getFrom:()Lnet/minecraft/world/item/ItemStack;
+      87: invokestatic  #457                // InterfaceMethod io/redspace/ironsspellbooks/api/spells/ISpellContainer.get:(Lnet/minecraft/world/item/ItemStack;)Lio/redspace/ironsspellbooks/api/spells/ISpellContainer;
+     106: invokevirtual #429                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getFrom:()Lnet/minecraft/world/item/ItemStack;
+     110: invokevirtual #434                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getTo:()Lnet/minecraft/world/item/ItemStack;
+     113: invokestatic  #469                // Method io/redspace/ironsspellbooks/api/util/Utils.isSameItemSameComponentsIgnoreDurability:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z
+     127: invokestatic  #440                // Method io/redspace/ironsspellbooks/api/util/Utils.serverSideCancelCast:(Lnet/minecraft/server/level/ServerPlayer;)V
+     131: new           #442                // class io/redspace/ironsspellbooks/network/EquipmentChangedPacket
+     138: invokestatic  #449                // Method io/redspace/ironsspellbooks/setup/PacketDistributor.sendToPlayer:(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/Object;)V
+     149: invokevirtual #434                // Method net/minecraftforge/event/entity/living/LivingEquipmentChangeEvent.getTo:()Lnet/minecraft/world/item/ItemStack;
+     152: invokestatic  #454                // InterfaceMethod io/redspace/ironsspellbooks/api/spells/ISpellContainer.isSpellContainer:(Lnet/minecraft/world/item/ItemStack;)Z
+     159: new           #442                // class io/redspace/ironsspellbooks/network/EquipmentChangedPacket
+     166: invokestatic  #449                // Method io/redspace/ironsspellbooks/setup/PacketDistributor.sendToPlayer:(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/Object;)V
+  public static void onCurioChangeEvent(top.theillusivec4.curios.api.event.CurioChangeEvent);
+       1: invokevirtual #479                // Method top/theillusivec4/curios/api/event/CurioChangeEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #426                // class net/minecraft/server/level/ServerPlayer
+      13: checkcast     #426                // class net/minecraft/server/level/ServerPlayer
+      18: invokevirtual #480                // Method top/theillusivec4/curios/api/event/CurioChangeEvent.getFrom:()Lnet/minecraft/world/item/ItemStack;
+      21: invokestatic  #454                // InterfaceMethod io/redspace/ironsspellbooks/api/spells/ISpellContainer.isSpellContainer:(Lnet/minecraft/world/item/ItemStack;)Z
+      28: invokevirtual #481                // Method top/theillusivec4/curios/api/event/CurioChangeEvent.getTo:()Lnet/minecraft/world/item/ItemStack;
+      31: invokestatic  #454                // InterfaceMethod io/redspace/ironsspellbooks/api/spells/ISpellContainer.isSpellContainer:(Lnet/minecraft/world/item/ItemStack;)Z
+      38: new           #442                // class io/redspace/ironsspellbooks/network/EquipmentChangedPacket
+      45: invokestatic  #449                // Method io/redspace/ironsspellbooks/setup/PacketDistributor.sendToPlayer:(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/Object;)V
+  public static void onPlayerLogOut(net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent);
+       1: invokevirtual #489                // Method net/minecraftforge/event/entity/player/PlayerEvent$PlayerLoggedOutEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       6: instanceof    #426                // class net/minecraft/server/level/ServerPlayer
+      13: checkcast     #426                // class net/minecraft/server/level/ServerPlayer
+      18: invokestatic  #440                // Method io/redspace/ironsspellbooks/api/util/Utils.serverSideCancelCast:(Lnet/minecraft/server/level/ServerPlayer;)V
+  public static void onPlayerOpenContainer(net.minecraftforge.event.entity.player.PlayerContainerEvent$Open);
+       1: invokevirtual #493                // Method net/minecraftforge/event/entity/player/PlayerContainerEvent$Open.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: getfield      #126                // Field net/minecraft/world/entity/player/Player.f_19853_:Lnet/minecraft/world/level/Level;
+      15: invokevirtual #493                // Method net/minecraftforge/event/entity/player/PlayerContainerEvent$Open.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      20: instanceof    #426                // class net/minecraft/server/level/ServerPlayer
+      27: checkcast     #426                // class net/minecraft/server/level/ServerPlayer
+      32: invokestatic  #164                // Method io/redspace/ironsspellbooks/api/magic/MagicData.getPlayerMagicData:(Lnet/minecraft/world/entity/LivingEntity;)Lio/redspace/ironsspellbooks/api/magic/MagicData;
+      44: invokestatic  #440                // Method io/redspace/ironsspellbooks/api/util/Utils.serverSideCancelCast:(Lnet/minecraft/server/level/ServerPlayer;)V
+  public static void handleUpgradeModifiers(net.minecraftforge.event.ItemAttributeModifierEvent);
+       1: invokevirtual #499                // Method net/minecraftforge/event/ItemAttributeModifierEvent.getItemStack:()Lnet/minecraft/world/item/ItemStack;
+       4: invokestatic  #505                // Method io/redspace/ironsspellbooks/api/item/UpgradeData.getUpgradeData:(Lnet/minecraft/world/item/ItemStack;)Lio/redspace/ironsspellbooks/api/item/UpgradeData;
+       9: getstatic     #509                // Field io/redspace/ironsspellbooks/api/item/UpgradeData.NONE:Lio/redspace/ironsspellbooks/api/item/UpgradeData;
+      20: invokevirtual #517                // Method net/minecraftforge/event/ItemAttributeModifierEvent.getSlotType:()Lnet/minecraft/world/entity/EquipmentSlot;
+      33: invokevirtual #527                // Method net/minecraftforge/event/ItemAttributeModifierEvent.getModifiers:()Lcom/google/common/collect/Multimap;
+      39: invokestatic  #533                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      43: invokedynamic #545,  0            // InvokeDynamic #1:accept:(Lnet/minecraftforge/event/ItemAttributeModifierEvent;)Ljava/util/function/BiConsumer;
+      50: invokestatic  #533                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      54: invokedynamic #550,  0            // InvokeDynamic #2:accept:(Lnet/minecraftforge/event/ItemAttributeModifierEvent;)Ljava/util/function/BiConsumer;
+      59: invokestatic  #556                // Method java/util/Optional.empty:()Ljava/util/Optional;
+      62: invokestatic  #562                // Method io/redspace/ironsspellbooks/util/UpgradeUtils.handleAttributeEvent:(Lcom/google/common/collect/Multimap;Lio/redspace/ironsspellbooks/api/item/UpgradeData;Ljava/util/function/BiConsumer;Ljava/util/function/BiConsumer;Ljava/util/Optional;)V
+  public static void handleCurioUpgradeModifiers(top.theillusivec4.curios.api.event.CurioAttributeModifierEvent);
+       1: invokevirtual #569                // Method top/theillusivec4/curios/api/event/CurioAttributeModifierEvent.getItemStack:()Lnet/minecraft/world/item/ItemStack;
+       4: invokestatic  #505                // Method io/redspace/ironsspellbooks/api/item/UpgradeData.getUpgradeData:(Lnet/minecraft/world/item/ItemStack;)Lio/redspace/ironsspellbooks/api/item/UpgradeData;
+       9: getstatic     #509                // Field io/redspace/ironsspellbooks/api/item/UpgradeData.NONE:Lio/redspace/ironsspellbooks/api/item/UpgradeData;
+      20: invokevirtual #573                // Method top/theillusivec4/curios/api/event/CurioAttributeModifierEvent.getSlotContext:()Ltop/theillusivec4/curios/api/SlotContext;
+## soulslike-weaponry-1.4.10-1.20.1-forge.jar :: net/soulsweaponry/events/ModEvents.class
+Compiled from "ModEvents.java"
+public class net.soulsweaponry.events.ModEvents {
+  public net.soulsweaponry.events.ModEvents();
+  public static void onAddReloadListeners(net.minecraftforge.event.AddReloadListenerEvent);
+       1: new           #51                 // class net/soulsweaponry/api/entitystats/EntityStatsUtil
+       8: invokevirtual #58                 // Method net/minecraftforge/event/AddReloadListenerEvent.addListener:(Lnet/minecraft/server/packs/resources/PreparableReloadListener;)V
+  public static void onServerStarting(net.minecraftforge.event.server.ServerStartingEvent);
+       1: invokevirtual #67                 // Method net/minecraftforge/event/server/ServerStartingEvent.getServer:()Lnet/minecraft/server/MinecraftServer;
+       4: invokestatic  #73                 // Method net/soulsweaponry/api/trickweapon/TrickWeaponUtil.loadMappings:(Lnet/minecraft/server/MinecraftServer;)V
+       8: invokevirtual #67                 // Method net/minecraftforge/event/server/ServerStartingEvent.getServer:()Lnet/minecraft/server/MinecraftServer;
+      14: invokestatic  #85                 // Method net/soulsweaponry/util/UpgradeUtil.rebuildRecipeCache:(Lnet/minecraft/world/item/crafting/RecipeManager;)V
+  public static void onDatapackReload(net.minecraftforge.event.OnDatapackSyncEvent);
+       1: invokevirtual #94                 // Method net/minecraftforge/event/OnDatapackSyncEvent.getPlayerList:()Lnet/minecraft/server/players/PlayerList;
+      12: invokestatic  #85                 // Method net/soulsweaponry/util/UpgradeUtil.rebuildRecipeCache:(Lnet/minecraft/world/item/crafting/RecipeManager;)V
+  public static void onPlayerCloned(net.minecraftforge.event.entity.player.PlayerEvent$Clone);
+       1: invokevirtual #108                // Method net/minecraftforge/event/entity/player/PlayerEvent$Clone.isWasDeath:()Z
+       8: invokevirtual #112                // Method net/minecraftforge/event/entity/player/PlayerEvent$Clone.getOriginal:()Lnet/minecraft/world/entity/player/Player;
+      15: invokevirtual #112                // Method net/minecraftforge/event/entity/player/PlayerEvent$Clone.getOriginal:()Lnet/minecraft/world/entity/player/Player;
+      20: invokevirtual #120                // Method net/minecraftforge/event/entity/player/PlayerEvent$Clone.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      26: invokestatic  #126                // Method net/soulsweaponry/entitydata/PostureData.getPosture:(Lnet/minecraft/world/entity/LivingEntity;)I
+      29: invokestatic  #130                // Method net/soulsweaponry/entitydata/PostureData.setPosture:(Lnet/minecraft/world/entity/LivingEntity;I)V
+      44: ldc           #136                // String returning_projectile_uuid
+      53: instanceof    #144                // class net/minecraft/server/level/ServerPlayer
+      60: checkcast     #144                // class net/minecraft/server/level/ServerPlayer
+      66: ldc           #136                // String returning_projectile_uuid
+      75: ldc           #136                // String returning_projectile_uuid
+      86: invokestatic  #158                // Method net/soulsweaponry/entitydata/ReturningProjectileData.syncData:(Ljava/util/UUID;Lnet/minecraft/server/level/ServerPlayer;)V
+      90: invokevirtual #112                // Method net/minecraftforge/event/entity/player/PlayerEvent$Clone.getOriginal:()Lnet/minecraft/world/entity/player/Player;
+  public static void onRegisterCapabilities(net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent);
+  public static void onPlayerTick(net.minecraftforge.event.TickEvent$PlayerTickEvent);
+       1: getfield      #181                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.side:Lnet/minecraftforge/fml/LogicalSide;
+       4: getstatic     #186                // Field net/minecraftforge/fml/LogicalSide.SERVER:Lnet/minecraftforge/fml/LogicalSide;
+      11: getfield      #189                // Field net/minecraftforge/event/TickEvent$PlayerTickEvent.player:Lnet/minecraft/world/entity/player/Player;
+      16: invokestatic  #195                // Method net/soulsweaponry/entitydata/ParryData.getParryTicks:(Lnet/minecraft/world/entity/player/Player;)I
+      27: invokestatic  #199                // Method net/soulsweaponry/entitydata/ParryData.addParryTicks:(Lnet/minecraft/world/entity/player/Player;I)V
+      46: invokestatic  #212                // Method net/soulsweaponry/entitydata/TargetPostureData.updateTargetPosture:(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)V
+      53: invokestatic  #216                // Method net/soulsweaponry/entitydata/TargetPostureData.resetValues:(Lnet/minecraft/world/entity/LivingEntity;)V
+  public static void onLivingEntityTicks(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       1: invokevirtual #223                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: invokestatic  #126                // Method net/soulsweaponry/entitydata/PostureData.getPosture:(Lnet/minecraft/world/entity/LivingEntity;)I
+      11: invokestatic  #228                // Method net/soulsweaponry/entitydata/BleedData.getBleed:(Lnet/minecraft/world/entity/LivingEntity;)I
+      16: invokestatic  #233                // Method net/soulsweaponry/entitydata/FrostData.getFrost:(Lnet/minecraft/world/entity/LivingEntity;)I
+      22: invokestatic  #237                // Method net/soulsweaponry/entitydata/FrostData.isFrostCoolingDown:(Lnet/minecraft/world/entity/LivingEntity;)Z
+      28: invokestatic  #242                // Method net/soulsweaponry/api/entitystats/EntityPosture.isPostureDisabled:(Lnet/minecraft/world/entity/LivingEntity;)Z
+      36: invokestatic  #245                // Method net/soulsweaponry/api/entitystats/EntityPosture.getMaxPostureLoss:(Lnet/minecraft/world/entity/LivingEntity;)I
+      43: invokestatic  #245                // Method net/soulsweaponry/api/entitystats/EntityPosture.getMaxPostureLoss:(Lnet/minecraft/world/entity/LivingEntity;)I
+      50: getstatic     #251                // Field net/soulsweaponry/registry/EffectRegistry.POSTURE_BREAK:Lnet/minecraftforge/registries/RegistryObject;
+      56: checkcast     #259                // class net/minecraft/world/effect/MobEffect
+      59: invokevirtual #265                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      74: getstatic     #278                // Field net/soulsweaponry/registry/SoundRegistry.POSTURE_BREAK_EVENT:Lnet/minecraftforge/registries/RegistryObject;
+      80: checkcast     #280                // class net/minecraft/sounds/SoundEvent
+      83: getstatic     #286                // Field net/minecraft/sounds/SoundSource.PLAYERS:Lnet/minecraft/sounds/SoundSource;
+      86: ldc_w         #287                // float 0.5f
+      90: invokevirtual #293                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+      94: new           #295                // class net/minecraft/world/effect/MobEffectInstance
+      98: getstatic     #251                // Field net/soulsweaponry/registry/EffectRegistry.POSTURE_BREAK:Lnet/minecraftforge/registries/RegistryObject;
+     104: checkcast     #259                // class net/minecraft/world/effect/MobEffect
+     110: invokespecial #298                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     113: invokevirtual #302                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     119: invokestatic  #130                // Method net/soulsweaponry/entitydata/PostureData.setPosture:(Lnet/minecraft/world/entity/LivingEntity;I)V
+     123: invokestatic  #307                // Method net/soulsweaponry/api/entitystats/EntityBleed.isBleedDisabled:(Lnet/minecraft/world/entity/LivingEntity;)Z
+     131: invokestatic  #310                // Method net/soulsweaponry/api/entitystats/EntityBleed.getMaxBleed:(Lnet/minecraft/world/entity/LivingEntity;)I
+     138: invokestatic  #313                // Method net/soulsweaponry/api/entitystats/EntityBleed.triggerBloodLoss:(Lnet/minecraft/world/entity/LivingEntity;)V
+     142: invokestatic  #318                // Method net/soulsweaponry/api/entitystats/EntityFrost.isFrostBuildupDisabled:(Lnet/minecraft/world/entity/LivingEntity;)Z
+     151: invokestatic  #321                // Method net/soulsweaponry/api/entitystats/EntityFrost.getMaxFrostBuildup:(Lnet/minecraft/world/entity/LivingEntity;)I
+     163: invokestatic  #324                // Method net/soulsweaponry/api/entitystats/EntityFrost.triggerFrost:(Lnet/minecraft/world/entity/LivingEntity;)V
+     177: getfield      #331                // Field net/minecraft/world/entity/LivingEntity.f_19797_:I
+     180: getstatic     #337                // Field net/soulsweaponry/config/ConfigConstructor.posture_loss_reduction_interval:F
+     193: getstatic     #340                // Field net/soulsweaponry/config/ConfigConstructor.posture_loss_reduction_amount:F
+     197: invokestatic  #343                // Method net/soulsweaponry/entitydata/PostureData.reducePosture:(Lnet/minecraft/world/entity/LivingEntity;I)V
+     201: getfield      #331                // Field net/minecraft/world/entity/LivingEntity.f_19797_:I
+     204: getstatic     #346                // Field net/soulsweaponry/config/ConfigConstructor.bleed_reduction_interval:F
+     217: getstatic     #349                // Field net/soulsweaponry/config/ConfigConstructor.bleed_reduction_amount:F
+     222: invokestatic  #310                // Method net/soulsweaponry/api/entitystats/EntityBleed.getMaxBleed:(Lnet/minecraft/world/entity/LivingEntity;)I
+     225: invokestatic  #353                // Method net/soulsweaponry/entitydata/BleedData.reduceBleed:(Lnet/minecraft/world/entity/LivingEntity;II)I
+     230: getfield      #331                // Field net/minecraft/world/entity/LivingEntity.f_19797_:I
+     233: getstatic     #356                // Field net/soulsweaponry/config/ConfigConstructor.frost_reduction_interval:F
+     242: getstatic     #359                // Field net/soulsweaponry/registry/EffectRegistry.FREEZING:Lnet/minecraftforge/registries/RegistryObject;
+     248: checkcast     #259                // class net/minecraft/world/effect/MobEffect
+     251: invokevirtual #265                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     263: getstatic     #362                // Field net/soulsweaponry/config/ConfigConstructor.frost_reduction_amount:F
+     268: invokestatic  #321                // Method net/soulsweaponry/api/entitystats/EntityFrost.getMaxFrostBuildup:(Lnet/minecraft/world/entity/LivingEntity;)I
+     271: invokestatic  #365                // Method net/soulsweaponry/entitydata/FrostData.reduceFrost:(Lnet/minecraft/world/entity/LivingEntity;II)I
+     283: invokestatic  #369                // Method net/soulsweaponry/entitydata/FrostData.setFrostCoolingDown:(Lnet/minecraft/world/entity/LivingEntity;Z)Z
+  public static void onRightClickItem(net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickItem);
+       1: invokevirtual #380                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       6: invokevirtual #383                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getLevel:()Lnet/minecraft/world/level/Level;
+      11: invokevirtual #387                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getHand:()Lnet/minecraft/world/InteractionHand;
+      16: invokevirtual #391                // Method net/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickItem.getItemStack:()Lnet/minecraft/world/item/ItemStack;
+      23: getstatic     #397                // Field net/minecraft/world/item/Items.f_42589_:Lnet/minecraft/world/item/Item;
+      34: getstatic     #406                // Field net/minecraft/world/item/Items.f_42736_:Lnet/minecraft/world/item/Item;
+      45: getstatic     #409                // Field net/minecraft/world/item/Items.f_42739_:Lnet/minecraft/world/item/Item;
+      56: getstatic     #412                // Field net/minecraft/world/item/Items.f_42738_:Lnet/minecraft/world/item/Item;
+      68: invokestatic  #420                // Method net/minecraft/world/item/alchemy/PotionUtils.m_43579_:(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/alchemy/Potion;
+      80: getstatic     #423                // Field net/soulsweaponry/registry/EffectRegistry.CHUNGUS_TONIC_POTION:Lnet/minecraftforge/registries/RegistryObject;
+     112: ldc_w         #437                // String CustomPotionColor
+     115: invokestatic  #441                // Method net/soulsweaponry/registry/EffectRegistry.randomVibrantRGBA:()I
+## L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/event/ServerEventHandler.class
+Compiled from "ServerEventHandler.java"
+public class com.github.L_Ender.cataclysm.event.ServerEventHandler {
+  public com.github.L_Ender.cataclysm.event.ServerEventHandler();
+  public void onLivingUpdateEvent(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       1: invokevirtual #172                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: getstatic     #178                // Field com/github/L_Ender/cataclysm/init/ModCapabilities.HOOK_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+       7: invokestatic  #182                // Method com/github/L_Ender/cataclysm/init/ModCapabilities.getCapability:(Lnet/minecraft/world/entity/Entity;Lnet/minecraftforge/common/capabilities/Capability;)Ljava/lang/Object;
+      10: checkcast     #15                 // class com/github/L_Ender/cataclysm/capabilities/HookCapability$IHookCapability
+      20: invokevirtual #172                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      29: invokevirtual #172                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      32: getstatic     #189                // Field com/github/L_Ender/cataclysm/init/ModCapabilities.CHARGE_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      35: invokestatic  #182                // Method com/github/L_Ender/cataclysm/init/ModCapabilities.getCapability:(Lnet/minecraft/world/entity/Entity;Lnet/minecraftforge/common/capabilities/Capability;)Ljava/lang/Object;
+      38: checkcast     #20                 // class com/github/L_Ender/cataclysm/capabilities/ChargeCapability$IChargeCapability
+      48: invokevirtual #172                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      57: invokevirtual #172                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      60: getstatic     #193                // Field com/github/L_Ender/cataclysm/init/ModCapabilities.RENDER_RUSH_CAPABILITY:Lnet/minecraftforge/common/capabilities/Capability;
+      63: invokestatic  #182                // Method com/github/L_Ender/cataclysm/init/ModCapabilities.getCapability:(Lnet/minecraft/world/entity/Entity;Lnet/minecraftforge/common/capabilities/Capability;)Ljava/lang/Object;
+      66: checkcast     #25                 // class com/github/L_Ender/cataclysm/capabilities/RenderRushCapability$IRenderRushCapability
+      79: invokevirtual #172                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+  public void StandOnFluidEventEvent(com.github.L_Ender.lionfishapi.server.event.StandOnFluidEvent);
+       1: invokevirtual #207                // Method com/github/L_Ender/lionfishapi/server/event/StandOnFluidEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: getstatic     #213                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+      17: invokevirtual #207                // Method com/github/L_Ender/lionfishapi/server/event/StandOnFluidEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      20: getstatic     #213                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+      29: getstatic     #235                // Field com/github/L_Ender/cataclysm/init/ModItems.IGNITIUM_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+      39: invokevirtual #207                // Method com/github/L_Ender/lionfishapi/server/event/StandOnFluidEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      49: invokevirtual #248                // Method com/github/L_Ender/lionfishapi/server/event/StandOnFluidEvent.getFluidState:()Lnet/minecraft/world/level/material/FluidState;
+      52: getstatic     #254                // Field net/minecraft/world/level/material/Fluids.f_76195_:Lnet/minecraft/world/level/material/FlowingFluid;
+      62: invokevirtual #248                // Method com/github/L_Ender/lionfishapi/server/event/StandOnFluidEvent.getFluidState:()Lnet/minecraft/world/level/material/FluidState;
+      65: getstatic     #263                // Field net/minecraft/world/level/material/Fluids.f_76194_:Lnet/minecraft/world/level/material/FlowingFluid;
+      76: invokevirtual #267                // Method com/github/L_Ender/lionfishapi/server/event/StandOnFluidEvent.setCanceled:(Z)V
+  public void onLivingDamage(net.minecraftforge.event.entity.living.LivingHurtEvent);
+       1: invokevirtual #273                // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #286                // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      26: instanceof    #215                // class net/minecraft/world/entity/LivingEntity
+      34: checkcast     #215                // class net/minecraft/world/entity/LivingEntity
+      38: invokestatic  #298                // Method top/theillusivec4/curios/api/CuriosApi.getCuriosHelper:()Ltop/theillusivec4/curios/api/type/util/ICuriosHelper;
+      65: invokevirtual #273                // Method net/minecraftforge/event/entity/living/LivingHurtEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      76: ldc_w         #339                // float 0.15f
+      92: new           #345                // class net/minecraft/world/effect/MobEffectInstance
+      96: getstatic     #350                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTBLAZING_BRAND:Lnet/minecraftforge/registries/RegistryObject;
+     102: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+     108: invokespecial #355                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     116: invokevirtual #359                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public void onPlayerAttack(net.minecraftforge.event.entity.player.AttackEntityEvent);
+       1: invokevirtual #375                // Method net/minecraftforge/event/entity/player/AttackEntityEvent.isCancelable:()Z
+       8: invokevirtual #378                // Method net/minecraftforge/event/entity/player/AttackEntityEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      11: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      17: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      20: invokevirtual #387                // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      28: invokevirtual #388                // Method net/minecraftforge/event/entity/player/AttackEntityEvent.setCanceled:(Z)V
+      32: invokevirtual #375                // Method net/minecraftforge/event/entity/player/AttackEntityEvent.isCancelable:()Z
+      39: invokevirtual #378                // Method net/minecraftforge/event/entity/player/AttackEntityEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      42: getstatic     #391                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTGHOST_FORM:Lnet/minecraftforge/registries/RegistryObject;
+      48: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      51: invokevirtual #387                // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      59: invokevirtual #388                // Method net/minecraftforge/event/entity/player/AttackEntityEvent.setCanceled:(Z)V
+  public void BlockHeal(net.minecraftforge.event.entity.living.LivingHealEvent);
+       1: invokevirtual #397                // Method net/minecraftforge/event/entity/living/LivingHealEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: getstatic     #400                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTABYSSAL_FEAR:Lnet/minecraftforge/registries/RegistryObject;
+      10: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      13: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      21: invokevirtual #402                // Method net/minecraftforge/event/entity/living/LivingHealEvent.setCanceled:(Z)V
+  public static void onLivingJump(net.minecraftforge.event.entity.living.LivingEvent$LivingJumpEvent);
+       1: invokevirtual #406                // Method net/minecraftforge/event/entity/living/LivingEvent$LivingJumpEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      12: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      15: invokevirtual #410                // Method net/minecraft/world/entity/LivingEntity.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+  public static void onUseItemStart(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent$Start);
+       1: invokevirtual #432                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Start.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: invokevirtual #436                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Start.getItem:()Lnet/minecraft/world/item/ItemStack;
+      11: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      17: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      20: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      28: invokevirtual #437                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Start.setCanceled:(Z)V
+      32: getstatic     #391                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTGHOST_FORM:Lnet/minecraftforge/registries/RegistryObject;
+      38: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      41: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      49: invokevirtual #437                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent$Start.setCanceled:(Z)V
+  public void onUseItem(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent);
+       1: invokevirtual #443                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: invokevirtual #444                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent.isCancelable:()Z
+      13: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      19: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      22: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      30: invokevirtual #445                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent.setCanceled:(Z)V
+      34: invokevirtual #444                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent.isCancelable:()Z
+      41: getstatic     #391                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTGHOST_FORM:Lnet/minecraftforge/registries/RegistryObject;
+      47: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      50: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      58: invokevirtual #445                // Method net/minecraftforge/event/entity/living/LivingEntityUseItemEvent.setCanceled:(Z)V
+  public void onPlaceBlock(net.minecraftforge.event.level.BlockEvent$EntityPlaceEvent);
+       1: invokevirtual #450                // Method net/minecraftforge/event/level/BlockEvent$EntityPlaceEvent.getEntity:()Lnet/minecraft/world/entity/Entity;
+       6: instanceof    #215                // class net/minecraft/world/entity/LivingEntity
+      13: checkcast     #215                // class net/minecraft/world/entity/LivingEntity
+      18: invokevirtual #451                // Method net/minecraftforge/event/level/BlockEvent$EntityPlaceEvent.isCancelable:()Z
+      25: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      31: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      34: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      42: invokevirtual #452                // Method net/minecraftforge/event/level/BlockEvent$EntityPlaceEvent.setCanceled:(Z)V
+  public void KnockbackEvent(net.minecraftforge.event.entity.living.LivingKnockBackEvent);
+       1: invokevirtual #461                // Method net/minecraftforge/event/entity/living/LivingKnockBackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       6: instanceof    #463                // class com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/Draugar/Royal_Draugr_Entity
+      13: checkcast     #463                // class com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/Draugar/Royal_Draugr_Entity
+      18: invokevirtual #466                // Method com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/Draugar/Royal_Draugr_Entity.isDraugrBlocking:()Z
+      26: invokevirtual #467                // Method net/minecraftforge/event/entity/living/LivingKnockBackEvent.setCanceled:(Z)V
+  public void onFillBucket(net.minecraftforge.event.entity.player.FillBucketEvent);
+       1: invokevirtual #475                // Method net/minecraftforge/event/entity/player/FillBucketEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+      10: invokevirtual #476                // Method net/minecraftforge/event/entity/player/FillBucketEvent.isCancelable:()Z
+      17: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      23: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      26: invokevirtual #401                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      34: invokevirtual #477                // Method net/minecraftforge/event/entity/player/FillBucketEvent.setCanceled:(Z)V
+  public void onBreakBlock(net.minecraftforge.event.level.BlockEvent$BreakEvent);
+       1: invokevirtual #481                // Method net/minecraftforge/event/level/BlockEvent$BreakEvent.isCancelable:()Z
+       8: invokevirtual #484                // Method net/minecraftforge/event/level/BlockEvent$BreakEvent.getPlayer:()Lnet/minecraft/world/entity/player/Player;
+      11: getstatic     #381                // Field com/github/L_Ender/cataclysm/init/ModEffect.EFFECTSTUN:Lnet/minecraftforge/registries/RegistryObject;
+      17: checkcast     #352                // class net/minecraft/world/effect/MobEffect
+      20: invokevirtual #387                // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      28: invokevirtual #485                // Method net/minecraftforge/event/level/BlockEvent$BreakEvent.setCanceled:(Z)V
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/CrushingPauldronEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.CrushingPauldronEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.CrushingPauldronEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       9: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      23: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      30: invokevirtual #39                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      33: invokestatic  #59                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: invokestatic  #59                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+      16: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+      24: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+      31: getstatic     #83                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      40: getstatic     #93                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      46: getstatic     #103                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.CRUSHING_PAULDRON_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+      57: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+      65: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+      83: new           #116                // class net/minecraft/world/effect/MobEffectInstance
+      87: getstatic     #121                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.PAULDRON_ARMOR_BOOST:Lnet/minecraftforge/registries/RegistryObject;
+      93: checkcast     #123                // class net/minecraft/world/effect/MobEffect
+     100: invokespecial #126                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     103: invokevirtual #130                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     107: new           #132                // class net/minecraft/world/phys/Vec3
+     114: ldc2_w        #133                // double 1.5d
+     126: ldc           #73                 // class net/minecraft/world/entity/Entity
+     128: new           #139                // class net/minecraft/world/phys/AABB
+     139: ldc2_w        #143                // double 1.2d
+     167: invokestatic  #198                // InterfaceMethod java/util/Comparator.comparingDouble:(Ljava/util/function/ToDoubleFunction;)Ljava/util/Comparator;
+     208: checkcast     #73                 // class net/minecraft/world/entity/Entity
+     222: instanceof    #224                // class net/minecraft/world/entity/TamableAnimal
+     230: checkcast     #224                // class net/minecraft/world/entity/TamableAnimal
+     237: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+     245: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+     265: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+     273: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+     292: instanceof    #234                // class net/minecraft/world/entity/item/ItemEntity
+     300: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+     308: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+     323: new           #239                // class net/minecraft/world/damagesource/DamageSource
+     333: getstatic     #249                // Field net/minecraft/core/registries/Registries.f_268580_:Lnet/minecraft/resources/ResourceKey;
+     341: getstatic     #260                // Field net/minecraft/world/damagesource/DamageTypes.f_268464_:Lnet/minecraft/resources/ResourceKey;
+     354: ldc_w         #270                // float 4.0f
+     361: invokestatic  #279                // Method java/lang/Math.random:()D
+     364: ldc2_w        #280                // double 0.08d
+     373: instanceof    #283                // class net/minecraft/world/entity/player/Player
+     381: checkcast     #283                // class net/minecraft/world/entity/player/Player
+     393: instanceof    #283                // class net/minecraft/world/entity/player/Player
+     401: checkcast     #283                // class net/minecraft/world/entity/player/Player
+     427: instanceof    #299                // class net/minecraft/server/level/ServerLevel
+     434: checkcast     #299                // class net/minecraft/server/level/ServerLevel
+     441: getstatic     #305                // Field net/minecraft/core/particles/ParticleTypes.f_123762_:Lnet/minecraft/core/particles/SimpleParticleType;
+     447: ldc2_w        #133                // double 1.5d
+     453: invokestatic  #311                // InterfaceMethod net/minecraft/util/RandomSource.m_216327_:()Lnet/minecraft/util/RandomSource;
+     458: invokestatic  #317                // Method net/minecraft/util/Mth.m_216271_:(Lnet/minecraft/util/RandomSource;II)I
+     461: ldc2_w        #318                // double 0.2d
+     464: ldc2_w        #318                // double 0.2d
+     467: ldc2_w        #318                // double 0.2d
+     470: ldc2_w        #320                // double 0.02d
+  private static double lambda$execute$1(net.minecraft.world.phys.Vec3, net.minecraft.world.entity.Entity);
+  private static boolean lambda$execute$0(net.minecraft.world.entity.Entity);
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/DeepAlloyArmorEffectBuffProcedure.class
+public class net.mcreator.skarriermobs.procedures.DeepAlloyArmorEffectBuffProcedure {
+  public net.mcreator.skarriermobs.procedures.DeepAlloyArmorEffectBuffProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      23: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      28: getstatic     #53                 // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+      37: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      43: getstatic     #73                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.DEEP_ALLOY_ARMOR_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+      56: ldc           #85                 // String DeepAlloyHelmet
+      69: ldc           #85                 // String DeepAlloyHelmet
+      76: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      83: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      88: getstatic     #94                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      97: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     103: getstatic     #97                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.DEEP_ALLOY_ARMOR_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+     116: ldc           #99                 // String DeepAlloyChestplate
+     129: ldc           #99                 // String DeepAlloyChestplate
+     136: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     143: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     148: getstatic     #102                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+     157: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     163: getstatic     #105                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.DEEP_ALLOY_ARMOR_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+     176: ldc           #107                // String DeepAlloyLeggings
+     189: ldc           #107                // String DeepAlloyLeggings
+     196: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     203: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     208: getstatic     #110                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+     217: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     223: getstatic     #113                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.DEEP_ALLOY_ARMOR_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+     236: ldc           #115                // String DeepAlloyBoots
+     249: ldc           #115                // String DeepAlloyBoots
+     259: ldc           #117                // String DeepAlloySetCompletion
+     265: ldc           #85                 // String DeepAlloyHelmet
+     274: ldc           #99                 // String DeepAlloyChestplate
+     284: ldc           #107                // String DeepAlloyLeggings
+     294: ldc           #115                // String DeepAlloyBoots
+     307: ldc           #117                // String DeepAlloySetCompletion
+     318: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     325: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     330: getstatic     #127                // Field net/minecraft/world/effect/MobEffects.f_19610_:Lnet/minecraft/world/effect/MobEffect;
+     333: invokevirtual #131                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     340: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     347: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     362: new           #143                // class net/minecraft/world/effect/MobEffectInstance
+     366: getstatic     #148                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.WARDENS_MIGHT:Lnet/minecraftforge/registries/RegistryObject;
+     372: checkcast     #150                // class net/minecraft/world/effect/MobEffect
+     382: ldc           #117                // String DeepAlloySetCompletion
+     392: invokespecial #153                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     395: invokevirtual #157                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     403: ldc           #117                // String DeepAlloySetCompletion
+     414: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     421: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     426: getstatic     #127                // Field net/minecraft/world/effect/MobEffects.f_19610_:Lnet/minecraft/world/effect/MobEffect;
+     429: invokevirtual #131                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     436: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     443: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     448: getstatic     #148                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.WARDENS_MIGHT:Lnet/minecraftforge/registries/RegistryObject;
+     454: checkcast     #150                // class net/minecraft/world/effect/MobEffect
+     457: invokevirtual #160                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/OffhandOccupiedEffectTriggerProcedure.class
+public class net.mcreator.skarriermobs.procedures.OffhandOccupiedEffectTriggerProcedure {
+  public net.mcreator.skarriermobs.procedures.OffhandOccupiedEffectTriggerProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/player/Player
+      23: instanceof    #49                 // class net/minecraft/world/entity/LivingEntity
+      30: checkcast     #49                 // class net/minecraft/world/entity/LivingEntity
+      41: getstatic     #59                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      47: getstatic     #59                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      57: instanceof    #49                 // class net/minecraft/world/entity/LivingEntity
+      64: checkcast     #49                 // class net/minecraft/world/entity/LivingEntity
+      79: new           #75                 // class net/minecraft/world/effect/MobEffectInstance
+      83: getstatic     #81                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.OFF_HAND_OCCUPIED:Lnet/minecraftforge/registries/RegistryObject;
+      89: checkcast     #89                 // class net/minecraft/world/effect/MobEffect
+      97: invokespecial #92                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     100: invokevirtual #96                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/ResisteelArmorEquippedEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.ResisteelArmorEquippedEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.ResisteelArmorEquippedEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      23: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      28: getstatic     #53                 // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+      37: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      43: getstatic     #73                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.RESISTEEL_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+      56: ldc           #85                 // String ResisteelHelmet
+      69: ldc           #85                 // String ResisteelHelmet
+      76: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      83: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      88: getstatic     #94                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      97: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     103: getstatic     #97                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.RESISTEEL_CHESTPLATE:Lnet/minecraftforge/registries/RegistryObject;
+     116: ldc           #99                 // String ResisteelChestplate
+     129: ldc           #99                 // String ResisteelChestplate
+     136: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     143: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     148: getstatic     #102                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+     157: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     163: getstatic     #105                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.RESISTEEL_LEGGINGS:Lnet/minecraftforge/registries/RegistryObject;
+     176: ldc           #107                // String ResisteelLeggings
+     189: ldc           #107                // String ResisteelLeggings
+     196: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     203: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     208: getstatic     #110                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+     217: getstatic     #63                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     223: getstatic     #113                // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.RESISTEEL_BOOTS:Lnet/minecraftforge/registries/RegistryObject;
+     236: ldc           #115                // String ResisteelBoots
+     249: ldc           #115                // String ResisteelBoots
+     259: ldc           #117                // String ResisteelSetCompletion
+     265: ldc           #85                 // String ResisteelHelmet
+     274: ldc           #99                 // String ResisteelChestplate
+     284: ldc           #107                // String ResisteelLeggings
+     294: ldc           #115                // String ResisteelBoots
+     307: ldc           #117                // String ResisteelSetCompletion
+     318: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     325: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     340: new           #133                // class net/minecraft/world/effect/MobEffectInstance
+     344: getstatic     #138                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.RESISTEEL_SLOWNESS_EFFECT:Lnet/minecraftforge/registries/RegistryObject;
+     350: checkcast     #140                // class net/minecraft/world/effect/MobEffect
+     359: ldc           #117                // String ResisteelSetCompletion
+     369: invokespecial #143                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     372: invokevirtual #147                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     377: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     384: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     399: new           #133                // class net/minecraft/world/effect/MobEffectInstance
+     403: getstatic     #150                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.DEFENCE_BOOST:Lnet/minecraftforge/registries/RegistryObject;
+     409: checkcast     #140                // class net/minecraft/world/effect/MobEffect
+     418: ldc           #117                // String ResisteelSetCompletion
+     428: invokespecial #143                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     431: invokevirtual #147                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     439: ldc           #117                // String ResisteelSetCompletion
+     450: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     457: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     462: getstatic     #150                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.DEFENCE_BOOST:Lnet/minecraftforge/registries/RegistryObject;
+     468: checkcast     #140                // class net/minecraft/world/effect/MobEffect
+     471: invokevirtual #154                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     476: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     483: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     488: getstatic     #138                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.RESISTEEL_SLOWNESS_EFFECT:Lnet/minecraftforge/registries/RegistryObject;
+     494: checkcast     #140                // class net/minecraft/world/effect/MobEffect
+     497: invokevirtual #154                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/ResisteelSwordEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.ResisteelSwordEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.ResisteelSwordEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      23: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      34: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      40: getstatic     #67                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.RESISTEEL_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+      50: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      57: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      75: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      82: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     100: new           #89                 // class net/minecraft/world/effect/MobEffectInstance
+     104: getstatic     #94                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.RESISTEEL_DAMAGE_BOOST:Lnet/minecraftforge/registries/RegistryObject;
+     110: checkcast     #96                 // class net/minecraft/world/effect/MobEffect
+     116: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     123: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     141: ldc2_w        #99                 // double 0.5d
+     147: invokestatic  #106                // Method java/lang/Math.ceil:(D)D
+     153: invokespecial #109                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     156: invokevirtual #113                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     164: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     171: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     178: getstatic     #94                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.RESISTEEL_DAMAGE_BOOST:Lnet/minecraftforge/registries/RegistryObject;
+     184: checkcast     #96                 // class net/minecraft/world/effect/MobEffect
+     187: invokevirtual #117                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/ResisteelToolsEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.ResisteelToolsEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.ResisteelToolsEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      23: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      34: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      37: new           #59                 // class net/minecraft/resources/ResourceLocation
+      41: ldc           #61                 // String skarrier_mobs:resisteel_tools
+      46: invokestatic  #70                 // Method net/minecraft/tags/ItemTags.create:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      56: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      63: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      88: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      95: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     113: new           #93                 // class net/minecraft/world/effect/MobEffectInstance
+     117: getstatic     #99                 // Field net/minecraft/world/effect/MobEffects.f_19598_:Lnet/minecraft/world/effect/MobEffect;
+     123: invokespecial #102                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     126: invokevirtual #106                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     131: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     138: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     156: new           #93                 // class net/minecraft/world/effect/MobEffectInstance
+     160: getstatic     #112                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.RESISTEEL_SLOWNESS_EFFECT:Lnet/minecraftforge/registries/RegistryObject;
+     166: checkcast     #120                // class net/minecraft/world/effect/MobEffect
+     175: invokespecial #123                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     178: invokevirtual #106                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/SLFleshTotemHeldEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.SLFleshTotemHeldEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.SLFleshTotemHeldEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      23: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      34: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      37: new           #59                 // class net/minecraft/resources/ResourceLocation
+      41: ldc           #61                 // String skarrier_mobs:totems
+      46: invokestatic  #70                 // Method net/minecraft/tags/ItemTags.create:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+      56: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      63: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      74: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      80: ldc           #80                 // String CoatingApplied
+      85: ldc           #88                 // String SLFlesh
+      94: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     101: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     119: new           #106                // class net/minecraft/world/effect/MobEffectInstance
+     123: getstatic     #112                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.SEMI_LIVING_FLESH_PENALTY_EFFECT:Lnet/minecraftforge/registries/RegistryObject;
+     129: checkcast     #120                // class net/minecraft/world/effect/MobEffect
+     137: invokespecial #123                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     140: invokevirtual #127                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/TotemOfFreezingEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.TotemOfFreezingEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.TotemOfFreezingEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #29                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       5: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.entity.Entity);
+       2: invokestatic  #33                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.entity.Entity);
+       6: getfield      #45                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      16: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      23: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      34: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      40: getstatic     #67                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.TOTEM_OF_FREEZING:Lnet/minecraftforge/registries/RegistryObject;
+      62: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+      69: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+      80: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      86: ldc           #87                 // String CoatingApplied
+      91: ldc           #95                 // String SLFlesh
+     100: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     107: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     125: new           #113                // class net/minecraft/world/effect/MobEffectInstance
+     129: getstatic     #119                // Field net/minecraft/world/effect/MobEffects.f_19605_:Lnet/minecraft/world/effect/MobEffect;
+     135: invokespecial #122                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     138: invokevirtual #126                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     143: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     150: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     155: getstatic     #131                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.FROSTBITE:Lnet/minecraftforge/registries/RegistryObject;
+     161: checkcast     #133                // class net/minecraft/world/effect/MobEffect
+     164: invokevirtual #137                // Method net/minecraft/world/entity/LivingEntity.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     171: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     178: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     185: getstatic     #131                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.FROSTBITE:Lnet/minecraftforge/registries/RegistryObject;
+     191: checkcast     #133                // class net/minecraft/world/effect/MobEffect
+     194: invokevirtual #140                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     199: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     206: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     213: getstatic     #143                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.FROSTBITE_HEALTH_REDUCTION:Lnet/minecraftforge/registries/RegistryObject;
+     219: checkcast     #133                // class net/minecraft/world/effect/MobEffect
+     222: invokevirtual #140                // Method net/minecraft/world/entity/LivingEntity.m_21195_:(Lnet/minecraft/world/effect/MobEffect;)Z
+     227: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     234: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     245: getstatic     #57                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     251: ldc           #87                 // String CoatingApplied
+     256: ldc           #95                 // String SLFlesh
+     265: instanceof    #47                 // class net/minecraft/world/entity/LivingEntity
+     272: checkcast     #47                 // class net/minecraft/world/entity/LivingEntity
+     290: new           #113                // class net/minecraft/world/effect/MobEffectInstance
+     294: getstatic     #146                // Field net/minecraft/world/effect/MobEffects.f_19600_:Lnet/minecraft/world/effect/MobEffect;
+     300: invokespecial #122                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     303: invokevirtual #126                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+## skarrier_mobs-1.1.2-forge-1.20.1.jar :: net/mcreator/skarriermobs/procedures/TotemOfSeethingEffectProcedure.class
+public class net.mcreator.skarriermobs.procedures.TotemOfSeethingEffectProcedure {
+  public net.mcreator.skarriermobs.procedures.TotemOfSeethingEffectProcedure();
+  public static void onEntityTick(net.minecraftforge.event.entity.living.LivingEvent$LivingTickEvent);
+       2: invokevirtual #34                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       9: invokevirtual #34                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      16: invokevirtual #34                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      23: invokevirtual #34                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      30: invokevirtual #34                 // Method net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      33: invokestatic  #54                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: invokestatic  #54                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: getfield      #72                 // Field net/minecraft/world/entity/Entity.f_19797_:I
+      19: instanceof    #36                 // class net/minecraft/world/entity/LivingEntity
+      27: checkcast     #36                 // class net/minecraft/world/entity/LivingEntity
+      40: getstatic     #82                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+      46: getstatic     #92                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModItems.TOTEM_OF_SEETHING:Lnet/minecraftforge/registries/RegistryObject;
+      55: new           #100                // class net/minecraft/world/phys/Vec3
+      70: ldc           #68                 // class net/minecraft/world/entity/Entity
+      72: new           #105                // class net/minecraft/world/phys/AABB
+      83: ldc2_w        #109                // double 10.0d
+     111: invokestatic  #164                // InterfaceMethod java/util/Comparator.comparingDouble:(Ljava/util/function/ToDoubleFunction;)Ljava/util/Comparator;
+     152: checkcast     #68                 // class net/minecraft/world/entity/Entity
+     159: instanceof    #191                // class net/minecraft/world/entity/TamableAnimal
+     167: checkcast     #191                // class net/minecraft/world/entity/TamableAnimal
+     174: instanceof    #36                 // class net/minecraft/world/entity/LivingEntity
+     182: checkcast     #36                 // class net/minecraft/world/entity/LivingEntity
+     202: instanceof    #36                 // class net/minecraft/world/entity/LivingEntity
+     217: instanceof    #36                 // class net/minecraft/world/entity/LivingEntity
+     225: checkcast     #36                 // class net/minecraft/world/entity/LivingEntity
+     238: getstatic     #82                 // Field net/minecraft/world/item/ItemStack.f_41583_:Lnet/minecraft/world/item/ItemStack;
+     244: ldc           #201                // String CoatingApplied
+     249: ldc           #209                // String SLFlesh
+     259: instanceof    #36                 // class net/minecraft/world/entity/LivingEntity
+     267: checkcast     #36                 // class net/minecraft/world/entity/LivingEntity
+     285: new           #221                // class net/minecraft/world/effect/MobEffectInstance
+     289: getstatic     #226                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.FIRE_HEX:Lnet/minecraftforge/registries/RegistryObject;
+     295: checkcast     #228                // class net/minecraft/world/effect/MobEffect
+     301: invokespecial #231                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     304: invokevirtual #235                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     313: instanceof    #36                 // class net/minecraft/world/entity/LivingEntity
+     321: checkcast     #36                 // class net/minecraft/world/entity/LivingEntity
+     339: new           #221                // class net/minecraft/world/effect/MobEffectInstance
+     343: getstatic     #226                // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.FIRE_HEX:Lnet/minecraftforge/registries/RegistryObject;
+     349: checkcast     #228                // class net/minecraft/world/effect/MobEffect
+     355: invokespecial #231                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     358: invokevirtual #235                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  private static double lambda$execute$1(net.minecraft.world.phys.Vec3, net.minecraft.world.entity.Entity);
+  private static boolean lambda$execute$0(net.minecraft.world.entity.Entity);

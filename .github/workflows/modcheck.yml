@@ -32,9 +32,9 @@ jobs:
           github-token: ${{ github.token }}
       - run: |
           rm -rf data-out; mkdir -p data-out/questfacts
-          python3 check/questfacts.py "$(ls pack/*server*.zip | head -1)" data-out/questfacts && python3 check/lairinfo.py shots "$(ls pack/*server*.zip | head -1)" data-out/questfacts/lairs >> log.txt 2>&1 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          python3 check/keys.py shots "$(ls pack/*server*.zip | head -1)" data-out/questfacts/keys >> log.txt 2>&1 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
           echo "::notice title=questfacts::$(head -c 3500 data-out/questfacts/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data 2> git.txt || echo "::error title=clone::$(tr '\n' '|' < git.txt)"
           cp log.txt data-out/questfacts/log.txt
-          rm -rf data/questfacts && mkdir -p data/questfacts && cp -r data-out/questfacts/* data/questfacts/ && cd data && git add -A
+          mkdir -p data/questfacts && cp -r data-out/questfacts/* data/questfacts/ && cd data && git add -A
           git -c user.name=ci -c user.email=ci@example.invalid commit -qm "questfacts" && git push -q origin ci/data 2> ../push.txt && echo pushed || echo "::error title=push::$(tr '\n' '|' < ../push.txt)"

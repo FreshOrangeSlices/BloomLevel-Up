@@ -59,10 +59,10 @@ public final class DropsGameTests {
 	}
 
 	@GameTest(template = "empty")
-	public static void aMobThatFallsDropsAsUsual(GameTestHelper helper) {
+	public static void aMobThatDiesWithNoKillerDropsAsUsual(GameTestHelper helper) {
 		Chicken chicken = chicken(helper, new BlockPos(1, 2, 1));
-		chicken.hurt(helper.getLevel().damageSources().fall(), 100.0F);
-		helper.assertTrue(chicken.isDeadOrDying(), "The fall killed the chicken");
+		chicken.hurt(helper.getLevel().damageSources().generic(), 100.0F);
+		helper.assertTrue(chicken.isDeadOrDying(), "It died with no killer (chickens take no fall damage, so generic damage)");
 		helper.assertTrue(drops(helper, chicken).stream().anyMatch(i -> i.getItem().is(Items.CHICKEN)), "No killer, so it drops as usual");
 		helper.succeed();
 	}

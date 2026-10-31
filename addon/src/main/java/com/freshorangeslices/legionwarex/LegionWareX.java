@@ -12,6 +12,7 @@ import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
 import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
 import com.freshorangeslices.legionwarex.companion.CompanionKeepsakeItem;
+import com.freshorangeslices.legionwarex.world.EffectWatch;
 import com.freshorangeslices.legionwarex.world.MobKillDrops;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
 import com.mojang.logging.LogUtils;
@@ -74,6 +75,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(SentinelEvents.class);
 		MinecraftForge.EVENT_BUS.register(HarvestCourt.class);
 		MinecraftForge.EVENT_BUS.register(MobKillDrops.class);
+		MinecraftForge.EVENT_BUS.register(EffectWatch.class);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 

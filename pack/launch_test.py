@@ -877,8 +877,12 @@ def harvest_check(server, player):
         if int(yes) == 0:
             failures.append(f"add-on: Harvest Court: {mob}'s spawn rule never says yes at midnight (0/{n}): the all-year rule isn't taking")
     for mob, yes, n, own in rows.get("noon", []):
-        if int(yes) or int(own):
-            failures.append(f"add-on: Harvest Court: {mob} may spawn at noon ({yes}/{n}, all-year rule {own}/{n})")
+        if int(own):
+            failures.append(f"add-on: Harvest Court: the all-year rule lets {mob} out at noon ({own}/{n})")
+        elif int(yes):
+            # Born in Chaos's own rule, in its season, doesn't ask for the dark: Easy Mob Spawn Control's night rule
+            # (the pack's config) keeps them to the night then.
+            notes.append(f"add-on: Harvest Court: {mob}'s own rule allows noon in its season ({yes}/{n}); the night rule keeps it to the night")
     server.send("time set 1000")
     return failures, notes
 

@@ -1,0 +1,56 @@
+## data/born_in_chaos_v1/forge/biome_modifier/krampus_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:krampus",
+    "weight": 2,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/krampus_henchman_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:krampus_henchman",
+    "weight": 9,
+    "minCount": 2,
+    "maxCount": 3
+  }
+}
+# entity classes: net/mcreator/borninchaosv/entity/KrampusEntity.class, net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.class
+## net/mcreator/borninchaosv/entity/KrampusEntity.class calls: ['KrampusPriGibieliSushchnostiProcedure', 'KrampusPriNachalnomPrizyvieSushchnostiProcedure', 'KrampusPriObnovlieniiTikaSushchnostiProcedure', 'KrampusPriRanieniiSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.KRAMPUS:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #429                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #433                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #450,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #454                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.class calls: ['KrampusHenchmanPriNachalnomPrizyvieSushchnostiProcedure', 'KrampusHenchmanPriObnovlieniiTikaSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.KRAMPUS_HENCHMAN:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #395                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #399                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #416,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #420                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+# spawn-ish procedures: 
+# net/mcreator/borninchaosv/procedures/KillingVillagersProcedure.class names KRAMPUS with a date or game rule
+# net/mcreator/borninchaosv/procedures/KillinganimalsProcedure.class names KRAMPUS with a date or game rule
+# net/mcreator/borninchaosv/procedures/KrampusSpawnProProcedure.class names KRAMPUS with a date or game rule
+# net/mcreator/borninchaosv/procedures/SpiritualGingerbreadPriZaviershieniiIspolzovaniiaProcedure.class names KRAMPUS with a date or game rule

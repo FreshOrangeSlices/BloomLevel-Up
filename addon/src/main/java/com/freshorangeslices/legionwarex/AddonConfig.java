@@ -1,6 +1,8 @@
 package com.freshorangeslices.legionwarex;
 
+import java.util.List;
 import java.util.function.Supplier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 /** The add-on's settings, per world (world/serverconfig/legionwarex-server.toml). */
@@ -29,6 +31,12 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue SENTINEL_VANILLA_SHARE;
 	private static final ForgeConfigSpec.DoubleValue SCOUT_SHARE;
 	private static final ForgeConfigSpec.IntValue SENTINEL_FROM_DAY;
+	private static final ForgeConfigSpec.BooleanValue HARVEST_ALL_YEAR;
+	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HARVEST_MOBS;
+	/** Born in Chaos's pumpkin folk that spawn in the wild (its Lord Pumpkinhead and the rest come from them or from items). */
+	public static final List<String> HARVEST_DEFAULT = List.of("born_in_chaos_v1:mr_pumpkin", "born_in_chaos_v1:mrs_pumpkin",
+			"born_in_chaos_v1:senor_pumpkin", "born_in_chaos_v1:pumpkin_bruiser", "born_in_chaos_v1:sir_pumpkinhead");
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -116,7 +124,23 @@ public final class AddonConfig {
 				.defineInRange("sentinelFromDay", 1, 0, 1000);
 		builder.pop();
 
+		builder.comment("The Harvest Court: Born in Chaos's pumpkin folk. Its spawn rule only lets them out from 25 October to 7 November;",
+				"the add-on lets them out all year on the same terms otherwise (the Overworld at night or in the dark, not the deep",
+				"dark or mushroom fields, not on peaceful). How many come is the pack's spawn weights (its data pack).",
+				"/legionwarex harvest for testing.").push("harvest");
+		HARVEST_ALL_YEAR = builder
+				.comment("Whether the pumpkin folk spawn all year.")
+				.define("harvestCourtAllYear", true);
+		HARVEST_MOBS = builder
+				.comment("Which mobs spawn all year (entity ids).")
+				.defineListAllowEmpty("harvestCourtMobs", HARVEST_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+		builder.pop();
+
 		builder.push("world");
+		MOB_KILL_DROPS = builder
+				.comment("Whether a mob killed by another mob (an iron golem, a rival, a creeper) drops its loot. Off: it drops nothing unless",
+						"a player, their pet or companion hit it at some point in the fight. Deaths with no killer (falls, lava) drop as usual.")
+				.define("dropsWhenKilledByMobs", false);
 		MAINLAND_SPAWN = builder
 				.comment("A new world's spawn on the mainland: the land nearest the middle of the world that is well inland (no sea",
 						"within about 250 blocks), not a beach, river or mountain, and not too high. Off: vanilla's spawn (which can be",
@@ -216,5 +240,17 @@ public final class AddonConfig {
 
 	public static int sentinelFromDay() {
 		return get(SENTINEL_FROM_DAY, 1);
+	}
+
+	public static boolean dropsWhenKilledByMobs() {
+		return get(MOB_KILL_DROPS, false);
+	}
+
+	public static boolean harvestAllYear() {
+		return get(HARVEST_ALL_YEAR, true);
+	}
+
+	public static List<? extends String> harvestMobs() {
+		return get(HARVEST_MOBS, HARVEST_DEFAULT);
 	}
 }

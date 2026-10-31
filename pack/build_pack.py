@@ -1,4 +1,4 @@
-"""Builds the Forge 1.20.1 pack in pack/pack.json (LegionWareX) for sharing with friends: a Modrinth pack file (.mrpack)
+"""Builds the Forge 1.20.1 pack in pack/pack.json (Warionex) for sharing with friends: a Modrinth pack file (.mrpack)
 and a ready-to-run server folder.
 
 Usage: python3 pack/build_pack.py <bloom jar> <version> <out dir> [--extra-jar <jar>]... [--layers N] [--client-run <dir>] [--without <slug,slug>] [--update]
@@ -645,7 +645,7 @@ def main():
         at = args.index("--layers")
         layers = int(args[at + 1])
         del args[at:at + 2]
-    # Other mods built from this repository (the LegionWareX add-on), packed inside like Bloom.
+    # Other mods built from this repository (the Warionex add-on, mod id legionwarex), packed inside like Bloom.
     extra_jars = []
     while "--extra-jar" in args:
         at = args.index("--extra-jar")
@@ -865,7 +865,7 @@ def main():
     # copy is what its players see; a singleplayer world reads the client's), with only what this layer's mods have.
     spaces = mods_in(every_jar)
     if "ftbquests" in spaces:
-        for path, data in quest_book.build(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quests"), spaces, notes).items():
+        for path, data in quest_book.build(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quests"), spaces, notes, title=name).items():
             overrides[path] = data
             sides[path] = {"client": "required", "server": "required"}
 

@@ -1,9 +1,9 @@
 {
-  "name": "LegionWareX",
+  "name": "Warionex",
   "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, bosses, magic, knights, new biomes, decor, shaders and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
   "minecraft": "1.20.1",
   "forge": "47.4.28",
-  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight); Better Mob Combat is shelved (its mob animation hook crashes the server on creatures from Mowzie's, Migamigos, Cataclysm, Legendary Monsters and Monster Expansion, and with the whole pack on vanilla wolves too; its last build is from January 2025). After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out, and a bosses layer in their place. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). Voice chat: Simple Voice Chat, set up ahead of time so friends join with nothing extra to do (FreshOrangeSlices, 2026-10-30, reversing the first call of no voice chat): no setup wizard, push-to-talk on Caps Lock, plus Sound Physics Remastered (voices echo and muffle) and Voiceless Survival (hostile mobs hear you talk). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
+  "_comment": "FreshOrangeSlices' Warionex (named LegionWareX until 2026-10-30; its own ids, folders and commands keep legionwarex) (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight); Better Mob Combat is shelved (its mob animation hook crashes the server on creatures from Mowzie's, Migamigos, Cataclysm, Legendary Monsters and Monster Expansion, and with the whole pack on vanilla wolves too; its last build is from January 2025). After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out, and a bosses layer in their place. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). Voice chat: Simple Voice Chat, set up ahead of time so friends join with nothing extra to do (FreshOrangeSlices, 2026-10-30, reversing the first call of no voice chat): no setup wizard, push-to-talk on Caps Lock, plus Sound Physics Remastered (voices echo and muffle) and Voiceless Survival (hostile mobs hear you talk). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
   "layers": [
     {
       "name": "core",
@@ -260,7 +260,7 @@
     "config/EasyMSC/structure_spawn_assignments.json": {},
     "config/EasyMSC/despawn.json": {"oddities:queen_of_orchid": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}, "soulsweapons:draugr_boss": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}},
     "config/EasyMSC/mob_caps.json": {"oddities:queen_of_orchid": {"enabled": true, "percent": false, "value": 1.0, "global": true}, "soulsweapons:draugr_boss": {"enabled": true, "percent": false, "value": 1.0, "global": true}},
-    "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Also for mobs whose rules allow daylight: Illager Invasion's illagers use vanilla's patrol rules (any light), so out of their structures they spawned by day (FreshOrangeSlices). Both rules hold in the Overworld only (elsewhere the mobs keep their own rules: the Graveyard's corrupted illagers in the Nether). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies, Illager Invasion's marauders, provokers, bashers and alchemists, Myths & Legends' possessed armor): night (13000-23000), sky light 8 or more (outdoors or under trees, not caves), no torchlight, standing on ground (the block below). The Graveyard's acolytes and corrupted pillagers and vindicators (in swampy, magical and dark biomes, spawns.add.dark_crew): whenever it's dark (light 7 or less, as at night or under thick cover; FreshOrangeSlices), no torchlight, some sky (not caves), on the ground. The add-on's daytime war bands come as patrols and aren't held to these rules (FreshOrangeSlices: illagers by day are fine as war bands). Skarrier's Breacher and Dragger (cave mobs whose rules let them out by day): no sky light and no torchlight, so caves only, at any hour. Never on animals: Easy Mob Spawn Control checks a rule against the world itself, and animals spawn while chunks generate, so the check waits on a chunk that can't load until it's done (the server hung starting, build #282). The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
+    "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Also for mobs whose rules allow daylight: Illager Invasion's illagers use vanilla's patrol rules (any light), so out of their structures they spawned by day (FreshOrangeSlices). Both rules hold in the Overworld only (elsewhere the mobs keep their own rules: the Graveyard's corrupted illagers in the Nether). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies, Illager Invasion's marauders, provokers, bashers and alchemists, Myths & Legends' possessed armor): night (13000-23000), sky light 8 or more (outdoors or under trees, not caves), no torchlight, standing on ground (the block below). The Graveyard's acolytes and corrupted pillagers and vindicators (in swampy, magical and dark biomes, spawns.add.dark_crew): whenever it's dark (light 7 or less, as at night or under thick cover; FreshOrangeSlices), no torchlight, some sky (not caves), on the ground. The add-on's daytime war bands come as patrols and aren't held to these rules (FreshOrangeSlices: illagers by day are fine as war bands). Skarrier's Breacher and Dragger (cave mobs whose rules let them out by day): no sky light and no torchlight, so caves only, at any hour. Born in Chaos's pumpkin folk, the Harvest Court (all year now, FreshOrangeSlices): night_ground, so they keep to the fields at night, not caves. Never on animals: Easy Mob Spawn Control checks a rule against the world itself, and animals spawn while chunks generate, so the check waits on a chunk that can't load until it's done (the server hung starting, build #282). The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
     "config/EasyMSC/spawn_rules.json": [{"name": "legionwarex_night_ground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxBlockLight": 0, "minSkyLight": 8, "dayFrom": 13000, "dayTo": 23000, "strict": false,
       "blockIds": ["minecraft:grass_block", "minecraft:dirt", "minecraft:coarse_dirt", "minecraft:podzol", "minecraft:rooted_dirt", "minecraft:moss_block", "minecraft:mud", "minecraft:mycelium", "minecraft:sand", "minecraft:red_sand", "minecraft:gravel", "minecraft:stone", "minecraft:calcite", "minecraft:snow", "minecraft:snow_block", "minecraft:packed_ice", "minecraft:dirt_path", "minecraft:clay", "minecraft:terracotta", "minecraft:white_terracotta", "minecraft:orange_terracotta", "minecraft:yellow_terracotta", "minecraft:brown_terracotta", "minecraft:red_terracotta", "minecraft:light_gray_terracotta", "biomesoplenty:origin_grass_block", "biomesoplenty:white_sand", "biomesoplenty:orange_sand", "biomesoplenty:black_sand"]},
       {"name": "legionwarex_underground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxSkyLight": 0, "maxBlockLight": 0, "strict": false},
@@ -272,7 +272,9 @@
       "illagerinvasion:marauder": ["legionwarex_night_ground"], "illagerinvasion:provoker": ["legionwarex_night_ground"], "illagerinvasion:basher": ["legionwarex_night_ground"], "illagerinvasion:alchemist": ["legionwarex_night_ground"],
       "graveyard:acolyte": ["legionwarex_dark"], "graveyard:corrupted_pillager": ["legionwarex_dark"], "graveyard:corrupted_vindicator": ["legionwarex_dark"],
       "mythsandlegends:possessed_armor": ["legionwarex_night_ground"], "mythsandlegends:possessed_armor_archer": ["legionwarex_night_ground"],
-      "skarrier_mobs:breacher": ["legionwarex_underground"], "skarrier_mobs:dragger": ["legionwarex_underground"]}
+      "skarrier_mobs:breacher": ["legionwarex_underground"], "skarrier_mobs:dragger": ["legionwarex_underground"],
+      "born_in_chaos_v1:mr_pumpkin": ["legionwarex_night_ground"], "born_in_chaos_v1:mrs_pumpkin": ["legionwarex_night_ground"], "born_in_chaos_v1:senor_pumpkin": ["legionwarex_night_ground"],
+      "born_in_chaos_v1:pumpkin_bruiser": ["legionwarex_night_ground"], "born_in_chaos_v1:sir_pumpkinhead": ["legionwarex_night_ground"]}
   },
   "pins": {
     "_comment": "Mods held at a version, even with --update (the lock only holds the last tested): each with why, so it can go once a fixed version is out.",
@@ -290,9 +292,9 @@
     }
   },
   "pack_data": {
-    "_comment": "LegionWareX's own data pack, loaded into every world (new and old) and the server by Open Loader, from config/openloader/data/legionwarex: the recipes the pack takes out (each replaced by one that never loads), the items it takes out of the game (removed_items: their recipes, loot table entries and JEI listing, found in the mods' own files when the pack is built), and the items it hides from JEI (the c:hidden_from_recipe_viewers tag). Grouped by reason. CI checks the recipes are gone and the hidden items carry the tag (pack-data, from Bloom's registry dump).",
+    "_comment": "Warionex's own data pack, loaded into every world (new and old) and the server by Open Loader, from config/openloader/data/legionwarex: the recipes the pack takes out (each replaced by one that never loads), the items it takes out of the game (removed_items: their recipes, loot table entries and JEI listing, found in the mods' own files when the pack is built), and the items it hides from JEI (the c:hidden_from_recipe_viewers tag). Grouped by reason. CI checks the recipes are gone and the hidden items carry the tag (pack-data, from Bloom's registry dump).",
     "name": "legionwarex",
-    "description": "LegionWareX: recipes the pack takes out, items it hides from JEI",
+    "description": "Warionex: recipes the pack takes out, items it hides from JEI",
     "removed_recipes": {
       "Zoni's Ultimate Summon Device catches any mob, bosses included, and the mob is gone from the world once caught (a boss fight skipped, or a boss let out in someone's base). The Advanced Summon Device stays: it only carries your own tamed pets.": [
         "zonis_companions:ultimate_craft"
@@ -517,7 +519,7 @@
           "ddenizens:wight",
           "ddenizens:winged_skeleton"
         ],
-        "Born in Chaos (chunk 5): 35 of its mobs in every biome of every dimension, most at weights of 10 to 30; they come as the add-on's sentinels and in its own structures instead. Its holiday mobs stay (FreshOrangeSlices): the pumpkin family (its spawn rule lets them out only from 25 October to 7 November) and Krampus with his henchmen; and its two Nether mobs": [
+        "Born in Chaos (chunk 5): 35 of its mobs in every biome of every dimension, most at weights of 10 to 30; they come as the add-on's sentinels and in its own structures instead. Its holiday mobs stay (FreshOrangeSlices): the pumpkin family (now all year, below) and Krampus with his henchmen; and its two Nether mobs": [
           "born_in_chaos_v1:baby_skeleton_biome_modifier",
           "born_in_chaos_v1:baby_spider_biome_modifier",
           "born_in_chaos_v1:barrel_zombie_biome_modifier",
@@ -553,6 +555,13 @@
           "born_in_chaos_v1:zombie_clown_biome_modifier",
           "born_in_chaos_v1:zombie_fisherman_biome_modifier",
           "born_in_chaos_v1:zombie_lumberjack_biome_modifier"
+        ],
+        "Born in Chaos's pumpkin folk (FreshOrangeSlices, 2026-10-30: all year, the Harvest Court; the horse rider, Mrs Pumpkin and the others a bit rarer): put back below at lower weights": [
+          "born_in_chaos_v1:mr_pumpkin_biome_modifier",
+          "born_in_chaos_v1:mrs_pumpkin_biome_modifier",
+          "born_in_chaos_v1:senor_pumpkin_biome_modifier",
+          "born_in_chaos_v1:pumpkin_bruiser_biome_modifier",
+          "born_in_chaos_v1:sir_pumpkinhead_biome_modifier"
         ],
         "Undead Unleashed – Continued (playtest patch, chunk 5: harder mobs mainly by day, as the add-on's sentinels): its Wraiths came in twos and threes at weight 67 and its Dreadknights at 10 in every Overworld biome; the Flamebreather keeps its few Nether spawns": [
           "undead_unleashed:dreadknight_biome_modifier",
@@ -642,6 +651,20 @@
         }
       },
       "add": {
+        "harvest_court": {
+          "why": "Born in Chaos's pumpkin folk, the Harvest Court, all year (FreshOrangeSlices, 2026-10-30): its spawn rule only lets them out from 25 October to 7 November, so the add-on lets them out the rest of the year on the same terms (the Overworld at night, not the deep dark or mushroom fields). Its weights were for a fortnight's festival: about a quarter lower now, Sir Pumpkinhead (the felsteed rider) 4 to 3, Mrs Pumpkin 13 to 9, Mr. Pumpkin 15 to 11, Senor Pumpkin 10 to 7, the Pumpkin Bruiser 10 to 8. It listed every biome of every dimension (forge:any); its rule only ever passed the Overworld's.",
+          "category": "monster",
+          "biomes": [
+            "#minecraft:is_overworld"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:mr_pumpkin": [11, 1, 3],
+            "born_in_chaos_v1:mrs_pumpkin": [9, 1, 1],
+            "born_in_chaos_v1:senor_pumpkin": [7, 1, 2],
+            "born_in_chaos_v1:pumpkin_bruiser": [8, 1, 1],
+            "born_in_chaos_v1:sir_pumpkinhead": [3, 1, 1]
+          }
+        },
         "ghouls": {
           "why": "The Graveyard's ghouls (packs of 2-5): vanilla forests, taigas and swamps at weight 25; now all Overworld land (BOP's too) at 40. Overworld only: Forge's plain is_dry tag has the Nether and the End in it, so the pack uses is_dry/overworld (FreshOrangeSlices: no ghouls in the Nether).",
           "category": "monster",
@@ -953,7 +976,7 @@
     },
     "files": {
       "_comment": "Client config files, as given (the mod fills in every setting left out). A file under defaultconfigs/ is a mod's default, copied in only where the player has no config of their own yet (so an update never resets their settings). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",
-      "defaultconfigs/xaero/minimap/profiles/default.cfg": "# LegionWareX: the minimap keeps north at the top instead of turning with you, and is round (FreshOrangeSlices). Xaero's Minimap copies this into config/xaero/minimap/profiles/ on a first start and fills in every other setting; after that it's the player's own (Minimap Settings, Lock Minimap North).\nprofile_name = Default\nminimap_north_locked = true\nminimap_shape = 1\n",
+      "defaultconfigs/xaero/minimap/profiles/default.cfg": "# Warionex: the minimap keeps north at the top instead of turning with you, and is round (FreshOrangeSlices). Xaero's Minimap copies this into config/xaero/minimap/profiles/ on a first start and fills in every other setting; after that it's the player's own (Minimap Settings, Lock Minimap North).\nprofile_name = Default\nminimap_north_locked = true\nminimap_shape = 1\n",
       "config/obscuria/aquamirae-early.json": {
         "themed_main_menu": false
       },

@@ -119,7 +119,7 @@ jobs:
           name: test-reports-${{ matrix.variant }}
           path: build/reports/
 
-  # The LegionWareX add-on (addon/): its own small Forge mod for the pack, not part of Bloom. Built with the same
+  # The Warionex add-on (addon/, mod id legionwarex): its own small Forge mod for the pack, not part of Bloom. Built with the same
   # Gradle wrapper and game-tested on a real dedicated server with Migamigos loaded; the pack jobs pack its jar in.
   addon:
     runs-on: ubuntu-24.04
@@ -295,8 +295,8 @@ jobs:
       - name: screenshot
         run: python3 .github/scripts/emit_screenshot.py shots bloom_${{ matrix.shot }} 28 ${{ matrix.variant == 'bettercombat' && 'bc' || '' }}
 
-  # LegionWareX (pack/pack.json): FreshOrangeSlices' medieval high-fantasy pack built around Bloom, as a Modrinth pack
-  # file (.mrpack) and a server zip, under "Artifacts" as legionwarex. Its mods are in six cumulative layers and each is
+  # Warionex (pack/pack.json, named LegionWareX at first): FreshOrangeSlices' medieval high-fantasy pack built around Bloom, as a Modrinth pack
+  # file (.mrpack) and a server zip, under "Artifacts" as warionex. Its mods are in six cumulative layers and each is
   # tested on its own: a real Forge server boots from the layer's server zip the way a friend would start it
   # (installing Forge first), then a real Forge client with the layer's client side starts to the title screen and
   # joins it (pack/launch_test.py: no crash, Fresh Animations and the shader on, every modded creature summoned once).
@@ -333,7 +333,7 @@ jobs:
         if: matrix.layers == 6
         uses: actions/upload-artifact@v7
         with:
-          name: legionwarex
+          name: warionex
           path: |
             out/*.mrpack
             out/*.zip

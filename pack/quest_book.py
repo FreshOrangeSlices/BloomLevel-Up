@@ -1,4 +1,4 @@
-"""The LegionWareX quest book: pack/quests/*.json written out as FTB Quests' own files (config/ftbquests/quests/).
+"""The Warionex quest book: pack/quests/*.json written out as FTB Quests' own files (config/ftbquests/quests/).
 
 One JSON file per chapter (its file name sorts the chapters). A chapter, quest, task or reward that names a mod the
 pack (or a layer of it) leaves out is skipped, so every layer gets a book that only shows what it has. The ids FTB
@@ -200,7 +200,7 @@ def mode(obj, where):
     return obj["progression_mode"]
 
 
-def build(quest_dir, present, notes=None, title="LegionWareX"):
+def build(quest_dir, present, notes=None, title="Warionex"):
     """{path: bytes} for config/ftbquests/quests, with only what the present mods (namespaces) can show."""
     present = set(present) | ALWAYS
     files = {}

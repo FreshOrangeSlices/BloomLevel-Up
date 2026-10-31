@@ -853,6 +853,36 @@ def sentinel_check(server, player, shots):
     return failures, notes, report
 
 
+def harvest_check(server, player):
+    """The add-on's Harvest Court (Born in Chaos's pumpkin folk all year): /legionwarex harvest at midnight and at noon,
+    where the player stands. At midnight each of them should be allowed some of the 40 tries by the add-on's all-year
+    rule (and by its spawn rule as a whole: in Born in Chaos's own season, 25 October to 7 November, that is its rule
+    alone); at noon by neither. Nothing to check without Born in Chaos. Returns (failures, notes)."""
+    failures, notes, rows = [], [], {}
+    for hour, label in ((18000, "midnight"), (6000, "noon")):
+        server.send(f"time set {hour}")
+        time.sleep(1)
+        mark = len(server.lines)
+        server.send(f"execute as {player} at @s run legionwarex harvest")
+        line = lines_since(server, mark, r"LegionWareX harvest: ", 20)
+        if not line:
+            return ["add-on: /legionwarex harvest said nothing (is the command there?)"], notes
+        if "no Harvest Court mobs" in line:
+            return failures, ["add-on: Harvest Court: no pumpkin folk in this layer"]
+        rows[label] = re.findall(r"(\S+) (\d+)/(\d+) \(all-year rule (\d+)/\d+\)", line)
+        notes.append(f"add-on: Harvest Court at {label}: " + ", ".join(f"{m.split(':')[-1]} {yes}/{n} (own {own})" for m, yes, n, own in rows[label]))
+    for mob, yes, n, own in rows.get("midnight", []):
+        if int(own) == 0:
+            failures.append(f"add-on: Harvest Court: the all-year rule never lets {mob} out at midnight (0/{n})")
+        if int(yes) == 0:
+            failures.append(f"add-on: Harvest Court: {mob}'s spawn rule never says yes at midnight (0/{n}): the all-year rule isn't taking")
+    for mob, yes, n, own in rows.get("noon", []):
+        if int(yes) or int(own):
+            failures.append(f"add-on: Harvest Court: {mob} may spawn at noon ({yes}/{n}, all-year rule {own}/{n})")
+    server.send("time set 1000")
+    return failures, notes
+
+
 def quest_check(server_dir, dump_file, server_lines):
     """The quest book (FTB Quests): it loaded every chapter build_pack wrote into config/ftbquests/quests (its "Loaded N
     chapter groups, N chapters, N quests" line), with no errors of its own, and every item, entity, structure and biome
@@ -1056,6 +1086,10 @@ def main():
                 for n, i in enumerate(range(0, min(len(text), 3900 * 2), 3900)):
                     print(f"::notice title=pack-sentinels-{n}::{esc(text[i:i + 3900])}")
             progress("sentinel check done")
+            harvest_failures, harvest_notes = harvest_check(server, PLAYER)
+            failures += harvest_failures
+            notes += harvest_notes
+            progress("harvest check done")
         # The quest book, opened the way its command does (the inventory's book button opens the same screen).
         if os.path.isdir(os.path.join(server_dir, "config", "ftbquests", "quests")):
             server.send(f"execute as {PLAYER} run ftbquests open_book")

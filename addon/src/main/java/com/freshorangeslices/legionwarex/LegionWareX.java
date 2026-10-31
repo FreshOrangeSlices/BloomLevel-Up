@@ -7,9 +7,12 @@ import com.freshorangeslices.legionwarex.chart.ChartCommand;
 import com.freshorangeslices.legionwarex.chart.ChartEvents;
 import com.freshorangeslices.legionwarex.chart.PirateChartItem;
 import com.freshorangeslices.legionwarex.companion.CompanionEvents;
+import com.freshorangeslices.legionwarex.harvest.HarvestCommand;
+import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
 import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
 import com.freshorangeslices.legionwarex.companion.CompanionKeepsakeItem;
+import com.freshorangeslices.legionwarex.world.MobKillDrops;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
@@ -30,11 +33,13 @@ import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 /**
- * The LegionWareX add-on: what FreshOrangeSlices' pack needs that no mod does. A befriended Migamigos companion that
+ * The Warionex add-on: what FreshOrangeSlices' pack needs that no mod does. A befriended Migamigos companion that
  * dies leaves its owner a keepsake that brings that same companion back after a day's rest, and wild companions
  * despawn the way monsters do (Migamigos keeps every one for good). Illager war bands roam by day and pirate bands
- * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/); a
- * new world starts on the mainland (world/).
+ * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/);
+ * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, and mobs other mobs kill
+ * drop nothing unless a player took part (world/). The pack was
+ * LegionWareX at first and is Warionex now; the mod id, commands and saved data keep the first name.
  */
 @Mod(LegionWareX.MOD_ID)
 public final class LegionWareX {
@@ -67,12 +72,14 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(WorldEvents.class);
 		MinecraftForge.EVENT_BUS.register(ChartEvents.class);
 		MinecraftForge.EVENT_BUS.register(SentinelEvents.class);
+		MinecraftForge.EVENT_BUS.register(HarvestCourt.class);
+		MinecraftForge.EVENT_BUS.register(MobKillDrops.class);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 
-	/** {@code /legionwarex band|chart|sentinel ...} (operators). */
+	/** {@code /legionwarex band|chart|sentinel|harvest ...} (operators). */
 	private static void registerCommands(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
-				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()));
+				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node()));
 	}
 }

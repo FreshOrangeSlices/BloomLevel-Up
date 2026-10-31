@@ -644,8 +644,9 @@ def client_settings_check(game_dir):
         failures.append("client keys not as the pack sets them: " + "; ".join(wrong))
     for name, key in wanted.items():
         if key != "key.keyboard.unknown":
+            # Keys the pack itself gives to several bindings (one per armor slot, Soulslike's weapon actions) are shared on purpose.
             others = sorted(other for other, k in bound.items() if k.split(":")[0] == key.split(":")[0] and other != name
-                            and k.split(":")[1:] == key.split(":")[1:])
+                            and k.split(":")[1:] == key.split(":")[1:] and wanted.get(other) != key)
             if others and name in bound:
                 failures.append(f"{key} is {name}'s, but {', '.join(others)} start(s) on it too")
     # Keys that must do one thing only, by the client's live key list (every mod's binding, from Bloom's tooltip dump;

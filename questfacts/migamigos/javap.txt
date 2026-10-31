@@ -1,0 +1,237 @@
+## ttv/migami/migamigos/client/ClientHandler.class
+Compiled from "ClientHandler.java"
+public class ttv.migami.migamigos.client.ClientHandler {
+  private static java.lang.reflect.Field mouseOptionsField;
+
+  public ttv.migami.migamigos.client.ClientHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #59                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void setup();
+    Code:
+       0: invokestatic  #65                 // Method registerScreenFactories:()V
+       3: return
+
+  private static void registerScreenFactories();
+    Code:
+       0: getstatic     #71                 // Field ttv/migami/migamigos/init/ModContainers.AMIGO_CONTAINER:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #77                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #79                 // class net/minecraft/world/inventory/MenuType
+       9: invokedynamic #100,  0            // InvokeDynamic #0:m_96214_:()Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;
+      14: invokestatic  #104                // Method net/minecraft/client/gui/screens/MenuScreens.m_96206_:(Lnet/minecraft/world/inventory/MenuType;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V
+      17: return
+
+  public static void onScreenInit(net.minecraftforge.client.event.ScreenEvent$Init$Post);
+    Code:
+       0: aload_0
+       1: invokevirtual #113                // Method net/minecraftforge/client/event/ScreenEvent$Init$Post.getScreen:()Lnet/minecraft/client/gui/screens/Screen;
+       4: instanceof    #115                // class net/minecraft/client/gui/screens/MouseSettingsScreen
+       7: ifeq          60
+      10: aload_0
+      11: invokevirtual #113                // Method net/minecraftforge/client/event/ScreenEvent$Init$Post.getScreen:()Lnet/minecraft/client/gui/screens/Screen;
+      14: checkcast     #115                // class net/minecraft/client/gui/screens/MouseSettingsScreen
+      17: astore_1
+      18: getstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
+      21: ifnonnull     41
+      24: ldc           #115                // class net/minecraft/client/gui/screens/MouseSettingsScreen
+      26: ldc           #119                // String f_96218_
+      28: invokestatic  #125                // Method net/minecraftforge/fml/util/ObfuscationReflectionHelper.findField:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/reflect/Field;
+      31: putstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
+      34: getstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
+      37: iconst_1
+      38: invokevirtual #131                // Method java/lang/reflect/Field.setAccessible:(Z)V
+      41: getstatic     #117                // Field mouseOptionsField:Ljava/lang/reflect/Field;
+      44: aload_1
+      45: invokevirtual #134                // Method java/lang/reflect/Field.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      48: checkcast     #136                // class net/minecraft/client/gui/components/OptionsList
+      51: astore_2
+      52: goto          60
+      55: astore_2
+      56: aload_2
+      57: invokevirtual #139                // Method java/lang/IllegalAccessException.printStackTrace:()V
+      60: return
+    Exception table:
+       from    to  target type
+          41    52    55   Class java/lang/IllegalAccessException
+
+  public static void onRegisterCreativeTab(net.minecraftforge.eventbus.api.IEventBus);
+    Code:
+       0: getstatic     #153                // Field net/minecraft/core/registries/Registries.f_279569_:Lnet/minecraft/resources/ResourceKey;
+       3: ldc           #154                // String migamigos
+       5: invokestatic  #160                // Method net/minecraftforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/minecraftforge/registries/DeferredRegister;
+       8: astore_1
+       9: invokestatic  #164                // Method net/minecraft/world/item/CreativeModeTab.builder:()Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      12: astore_2
+      13: aload_2
+      14: ldc           #166                // String itemGroup.migamigos
+      16: invokestatic  #172                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      19: invokevirtual #176                // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257941_:(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      22: pop
+      23: aload_2
+      24: invokedynamic #186,  0            // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+      29: invokevirtual #190                // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257737_:(Ljava/util/function/Supplier;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      32: pop
+      33: aload_2
+      34: invokedynamic #200,  0            // InvokeDynamic #2:m_257865_:()Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;
+      39: invokevirtual #204                // Method net/minecraft/world/item/CreativeModeTab$Builder.m_257501_:(Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;)Lnet/minecraft/world/item/CreativeModeTab$Builder;
+      42: pop
+      43: aload_1
+      44: ldc           #206                // String creative_tab
+      46: aload_2
+      47: dup
+      48: invokestatic  #211                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+      51: pop
+      52: invokedynamic #220,  0            // InvokeDynamic #3:get:(Lnet/minecraft/world/item/CreativeModeTab$Builder;)Ljava/util/function/Supplier;
+      57: invokevirtual #224                // Method net/minecraftforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraftforge/registries/RegistryObject;
+      60: pop
+      61: aload_1
+      62: aload_0
+      63: invokevirtual #226                // Method net/minecraftforge/registries/DeferredRegister.register:(Lnet/minecraftforge/eventbus/api/IEventBus;)V
+      66: return
+
+  public static void onKeyPressed(net.minecraftforge.client.event.InputEvent$Key);
+    Code:
+       0: return
+
+  private static void lambda$onRegisterCreativeTab$2(net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters, net.minecraft.world.item.CreativeModeTab$Output);
+    Code:
+       0: getstatic     #239                // Field ttv/migami/migamigos/init/ModItems.REGISTER:Lnet/minecraftforge/registries/DeferredRegister;
+       3: invokevirtual #243                // Method net/minecraftforge/registries/DeferredRegister.getEntries:()Ljava/util/Collection;
+       6: aload_1
+       7: invokedynamic #256,  0            // InvokeDynamic #4:accept:(Lnet/minecraft/world/item/CreativeModeTab$Output;)Ljava/util/function/Consumer;
+      12: invokeinterface #262,  2          // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+      17: return
+
+  private static void lambda$onRegisterCreativeTab$1(net.minecraft.world.item.CreativeModeTab$Output, net.minecraftforge.registries.RegistryObject);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #77                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       5: checkcast     #268                // class net/minecraft/world/level/ItemLike
+       8: invokeinterface #272,  2          // InterfaceMethod net/minecraft/world/item/CreativeModeTab$Output.m_246326_:(Lnet/minecraft/world/level/ItemLike;)V
+      13: return
+
+  private static net.minecraft.world.item.ItemStack lambda$onRegisterCreativeTab$0();
+    Code:
+       0: new           #275                // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #278                // Field ttv/migami/migamigos/init/ModItems.COCOGOAT_SPAWN_FLOWER:Lnet/minecraftforge/registries/RegistryObject;
+       7: invokevirtual #77                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      10: checkcast     #268                // class net/minecraft/world/level/ItemLike
+      13: invokespecial #280                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      16: astore_0
+      17: aload_0
+      18: areturn
+}
+
+## ttv/migami/migamigos/client/KeyBinds.class
+Compiled from "KeyBinds.java"
+public class ttv.migami.migamigos.client.KeyBinds {
+  public static final net.minecraft.client.KeyMapping KEY_Z_ACTION;
+
+  public static final net.minecraft.client.KeyMapping KEY_X_ACTION;
+
+  public static final net.minecraft.client.KeyMapping KEY_C_ACTION;
+
+  public static final net.minecraft.client.KeyMapping KEY_V_ACTION;
+
+  public static final net.minecraft.client.KeyMapping KEY_R_ACTION;
+
+  public static final net.minecraft.client.KeyMapping BLESSING_MENU;
+
+  public ttv.migami.migamigos.client.KeyBinds();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void registerKeyMappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent);
+    Code:
+       0: aload_0
+       1: getstatic     #22                 // Field KEY_Z_ACTION:Lnet/minecraft/client/KeyMapping;
+       4: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+       7: aload_0
+       8: getstatic     #30                 // Field KEY_X_ACTION:Lnet/minecraft/client/KeyMapping;
+      11: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      14: aload_0
+      15: getstatic     #32                 // Field KEY_C_ACTION:Lnet/minecraft/client/KeyMapping;
+      18: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      21: aload_0
+      22: getstatic     #34                 // Field KEY_V_ACTION:Lnet/minecraft/client/KeyMapping;
+      25: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      28: aload_0
+      29: getstatic     #36                 // Field KEY_R_ACTION:Lnet/minecraft/client/KeyMapping;
+      32: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      35: aload_0
+      36: getstatic     #38                 // Field BLESSING_MENU:Lnet/minecraft/client/KeyMapping;
+      39: invokevirtual #28                 // Method net/minecraftforge/client/event/RegisterKeyMappingsEvent.register:(Lnet/minecraft/client/KeyMapping;)V
+      42: return
+
+  static {};
+    Code:
+       0: new           #43                 // class net/minecraft/client/KeyMapping
+       3: dup
+       4: ldc           #45                 // String key.mdf.z_action
+       6: bipush        90
+       8: ldc           #47                 // String key.categories.mdf
+      10: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      13: putstatic     #22                 // Field KEY_Z_ACTION:Lnet/minecraft/client/KeyMapping;
+      16: new           #43                 // class net/minecraft/client/KeyMapping
+      19: dup
+      20: ldc           #52                 // String key.mdf.x_action
+      22: bipush        88
+      24: ldc           #47                 // String key.categories.mdf
+      26: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      29: putstatic     #30                 // Field KEY_X_ACTION:Lnet/minecraft/client/KeyMapping;
+      32: new           #43                 // class net/minecraft/client/KeyMapping
+      35: dup
+      36: ldc           #54                 // String key.mdf.c_action
+      38: bipush        67
+      40: ldc           #47                 // String key.categories.mdf
+      42: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      45: putstatic     #32                 // Field KEY_C_ACTION:Lnet/minecraft/client/KeyMapping;
+      48: new           #43                 // class net/minecraft/client/KeyMapping
+      51: dup
+      52: ldc           #56                 // String key.mdf.v_action
+      54: bipush        86
+      56: ldc           #47                 // String key.categories.mdf
+      58: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      61: putstatic     #34                 // Field KEY_V_ACTION:Lnet/minecraft/client/KeyMapping;
+      64: new           #43                 // class net/minecraft/client/KeyMapping
+      67: dup
+      68: ldc           #58                 // String key.mdf.r_action
+      70: bipush        82
+      72: ldc           #47                 // String key.categories.mdf
+      74: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      77: putstatic     #36                 // Field KEY_R_ACTION:Lnet/minecraft/client/KeyMapping;
+      80: new           #43                 // class net/minecraft/client/KeyMapping
+      83: dup
+      84: ldc           #60                 // String key.mdf.blessing_menu
+      86: bipush        66
+      88: ldc           #47                 // String key.categories.mdf
+      90: invokespecial #50                 // Method net/minecraft/client/KeyMapping."<init>":(Ljava/lang/String;ILjava/lang/String;)V
+      93: putstatic     #38                 // Field BLESSING_MENU:Lnet/minecraft/client/KeyMapping;
+      96: return
+}
+
+## ttv/migami/migamigos/client/network/ClientPlayHandler.class
+Compiled from "ClientPlayHandler.java"
+public class ttv.migami.migamigos.client.network.ClientPlayHandler {
+  public ttv.migami.migamigos.client.network.ClientPlayHandler();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void handleUpdateAmigos(ttv.migami.migamigos.network.message.S2CMessageUpdateAmigos);
+    Code:
+       0: aload_0
+       1: invokestatic  #19                 // Method ttv/migami/migamigos/common/NetworkAmigoManager.updateRegisteredAmigos:(Lttv/migami/migamigos/network/message/S2CMessageUpdateAmigos;)Z
+       4: pop
+       5: aload_0
+       6: invokestatic  #24                 // Method ttv/migami/migamigos/client/CustomAmigoManager.updateCustomAmigos:(Lttv/migami/migamigos/network/message/S2CMessageUpdateAmigos;)Z
+       9: pop
+      10: return
+}

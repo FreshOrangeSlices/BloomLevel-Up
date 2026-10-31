@@ -869,6 +869,37 @@ def naughtiness_check(server, server_dir):
     return [], [f"add-on: naughtiness: {line[:300]}"]
 
 
+def krampus_check(server, player):
+    """The add-on's Krampus count (Born in Chaos's meter, filled by villager kills only): the meter set to 0, then five
+    villagers summoned beside the player and killed by them; the 5th should bring Krampus (logged "Krampus came"), none
+    before it. Nothing to check when the add-on doesn't run the count (no Born in Chaos). Returns (failures, notes)."""
+    started = [l for l in server.lines if "LegionWareX naughtiness:" in l and "Krampus at the" in l]
+    if not started or "Born in Chaos's own count" in started[-1]:
+        return [], []
+    failures, results = [], []
+    server.send(f"gamemode creative {player}")
+    server.send(f"execute as {player} at @s run legionwarex naughtiness set 0")
+    time.sleep(1)
+    for _ in range(5):
+        mark = len(server.lines)
+        server.send(f"execute as {player} at @s run summon minecraft:villager ~4 ~ ~ {{NoAI:1b,Tags:[\"lwx_naughty\"]}}")
+        time.sleep(1)
+        server.send(f"execute as {player} at @s run damage @e[type=minecraft:villager,tag=lwx_naughty,limit=1,sort=nearest] 1000 minecraft:player_attack by {player}")
+        line = lines_since(server, mark, r"LegionWareX naughtiness: \S+ killed", 10)
+        results.append(line.split(" killed ", 1)[1].strip() if line else "no line")
+    for n, result in enumerate(results, 1):
+        if n < 5 and "Krampus" in result:
+            failures.append(f"add-on: Krampus came before the 5th villager (at the {n}th: {result})")
+    if "Krampus came" not in results[-1]:
+        failures.append(f"add-on: the 5th villager didn't bring Krampus: {results[-1]}")
+    for mob in ("born_in_chaos_v1:krampus", "born_in_chaos_v1:krampus_henchman"):
+        server.send(f"execute as {player} at @s run kill @e[type={mob},distance=..32]")
+    server.send(f"execute as {player} at @s run kill @e[type=item,distance=..32]")
+    server.send(f"execute as {player} at @s run legionwarex naughtiness set 0")
+    server.send(f"gamemode survival {player}")
+    return failures, ["add-on: Krampus count: " + "; ".join(f"{n}: {r}" for n, r in enumerate(results, 1))]
+
+
 def harvest_check(server, player):
     """The add-on's Harvest Court (Born in Chaos's pumpkin folk all year): /legionwarex harvest at midnight and at noon,
     where the player stands. At midnight each of them should be allowed some of the 40 tries by the add-on's all-year
@@ -1113,6 +1144,10 @@ def main():
             naughty_failures, naughty_notes = naughtiness_check(server, server_dir)
             failures += naughty_failures
             notes += naughty_notes
+            krampus_failures, krampus_notes = krampus_check(server, PLAYER)
+            failures += krampus_failures
+            notes += krampus_notes
+            progress("krampus check done")
         # The quest book, opened the way its command does (the inventory's book button opens the same screen).
         if os.path.isdir(os.path.join(server_dir, "config", "ftbquests", "quests")):
             server.send(f"execute as {PLAYER} run ftbquests open_book")

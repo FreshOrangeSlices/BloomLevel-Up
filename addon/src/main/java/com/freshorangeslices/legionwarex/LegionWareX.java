@@ -83,9 +83,10 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 
-	/** {@code /legionwarex band|chart|sentinel|harvest ...} (operators). */
+	/** {@code /legionwarex band|chart|sentinel|harvest|naughtiness ...} (operators). */
 	private static void registerCommands(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
-				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node()));
+				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node())
+				.then(KrampusNaughtiness.node()));
 	}
 }

@@ -386,6 +386,46 @@
      "count": 2
     }
    ]
+  },
+  {
+   "id": "sir_pumpkinhead",
+   "title": "Sir Pumpkinhead",
+   "subtitle": "Born in Chaos · 250 health",
+   "x": 6.0,
+   "y": 3.0,
+   "shape": "hexagon",
+   "icon": "minecraft:filled_map",
+   "description": [
+    "Rides open land and forests at night on his felsteed, now and then, one at a time. Below 30 health his horse is gone and he fights on foot: beat him then."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "born_in_chaos_v1:sir_pumpkinhead_without_horse",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
   }
  ]
 }

@@ -255,12 +255,12 @@
     "config/combatroll/server.json5": {"invulnerable_ticks_upon_roll": 8, "roll_cooldown": 3.0, "allow_rolling_while_weapon_cooldown": true},
     "defaultconfigs/block_factorys_bosses-server.toml": "[\"Gameplay Changes\"]\n\t\"Can players use the Roll ability\" = false\n",
     "config/monsterexpansion-rolls.toml": "[\"Roll Mechanics\"]\n\tenable_roll = false\n",
-    "_easymsc": "Easy Mob Spawn Control's files (its in-game menu edits the same ones). Shybroom no longer lives in villages (FreshOrangeSlices found her in none of 10): its structure spawn lists are left empty, and she spawns in plains instead (spawns.add.migamigos_shybroom). The roaming Queen of Orchid and Draugr Boss despawn once idle for 2 minutes with no player within 64 blocks (unless name-tagged or in sight), and at most one of each is loaded at a time.",
+    "_easymsc": "Easy Mob Spawn Control's files (its in-game menu edits the same ones). Shybroom no longer lives in villages (FreshOrangeSlices found her in none of 10): its structure spawn lists are left empty, and she spawns in plains instead (spawns.add.migamigos_shybroom). The roaming Queen of Orchid and Draugr Boss despawn once idle for 2 minutes with no player within 64 blocks (unless name-tagged or in sight), and at most one of each is loaded at a time; Dungeon Denizens' Wood Golem despawns the same way, and one roaming Sir Pumpkinhead is loaded at a time.",
     "config/EasyMSC/structure_spawns.json": [],
     "config/EasyMSC/structure_spawn_assignments.json": {},
-    "config/EasyMSC/despawn.json": {"oddities:queen_of_orchid": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}, "soulsweapons:draugr_boss": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}},
-    "config/EasyMSC/mob_caps.json": {"oddities:queen_of_orchid": {"enabled": true, "percent": false, "value": 1.0, "global": true}, "soulsweapons:draugr_boss": {"enabled": true, "percent": false, "value": 1.0, "global": true}},
-    "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Also for mobs whose rules allow daylight: Illager Invasion's illagers use vanilla's patrol rules (any light), so out of their structures they spawned by day (FreshOrangeSlices). Both rules hold in the Overworld only (elsewhere the mobs keep their own rules: the Graveyard's corrupted illagers in the Nether). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies, Illager Invasion's marauders, provokers, bashers and alchemists, Myths & Legends' possessed armor): night (13000-23000), sky light 8 or more (outdoors or under trees, not caves), no torchlight, standing on ground (the block below). The Graveyard's acolytes and corrupted pillagers and vindicators (in swampy, magical and dark biomes, spawns.add.dark_crew): whenever it's dark (light 7 or less, as at night or under thick cover; FreshOrangeSlices), no torchlight, some sky (not caves), on the ground. The add-on's daytime war bands come as patrols and aren't held to these rules (FreshOrangeSlices: illagers by day are fine as war bands). Skarrier's Breacher and Dragger (cave mobs whose rules let them out by day): no sky light and no torchlight, so caves only, at any hour. Born in Chaos's pumpkin folk, the Harvest Court (all year now, FreshOrangeSlices): night_ground, so they keep to the fields at night, not caves. Never on animals: Easy Mob Spawn Control checks a rule against the world itself, and animals spawn while chunks generate, so the check waits on a chunk that can't load until it's done (the server hung starting, build #282). The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
+    "config/EasyMSC/despawn.json": {"oddities:queen_of_orchid": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}, "ddenizens:wood_golem": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}, "soulsweapons:draugr_boss": {"enabled": true, "minRange": 64, "idleSeconds": 120, "keepTagged": true, "keepWithItems": true, "keepVisible": true}},
+    "config/EasyMSC/mob_caps.json": {"oddities:queen_of_orchid": {"enabled": true, "percent": false, "value": 1.0, "global": true}, "born_in_chaos_v1:sir_pumpkinhead": {"enabled": true, "percent": false, "value": 1.0, "global": true}, "soulsweapons:draugr_boss": {"enabled": true, "percent": false, "value": 1.0, "global": true}},
+    "_easymsc_rules": "Spawn rules for mobs whose mod gives them none (no SpawnPlacements entry: a natural spawn then ignores light, time and ground, so the Queen of Orchid turned up in daylight; FreshOrangeSlices). Also for mobs whose rules allow daylight: Illager Invasion's illagers use vanilla's patrol rules (any light), so out of their structures they spawned by day (FreshOrangeSlices). Both rules hold in the Overworld only (elsewhere the mobs keep their own rules: the Graveyard's corrupted illagers in the Nether). Monsters (the roaming bosses, Cataclysm's draugrs, Iron's catacombs zombies, Illager Invasion's marauders, provokers, bashers and alchemists, Myths & Legends' possessed armor): night (13000-23000), sky light 8 or more (outdoors or under trees, not caves), no torchlight, standing on ground (the block below). The Graveyard's acolytes and corrupted pillagers and vindicators (in swampy, magical and dark biomes, spawns.add.dark_crew): whenever it's dark (light 7 or less, as at night or under thick cover; FreshOrangeSlices), no torchlight, some sky (not caves), on the ground. The add-on's daytime war bands come as patrols and aren't held to these rules (FreshOrangeSlices: illagers by day are fine as war bands). Skarrier's Breacher and Dragger (cave mobs whose rules let them out by day): no sky light and no torchlight, so caves only, at any hour. Born in Chaos's pumpkin folk, the Harvest Court (all year now, FreshOrangeSlices): night_ground, so they keep to the fields at night, not caves. Dungeon Denizens' Headless (its rules allow daylight): night_ground. Never on animals: Easy Mob Spawn Control checks a rule against the world itself, and animals spawn while chunks generate, so the check waits on a chunk that can't load until it's done (the server hung starting, build #282). The pack test fails when a mob the pack adds has neither rules of its own nor one of these.",
     "config/EasyMSC/spawn_rules.json": [{"name": "legionwarex_night_ground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxBlockLight": 0, "minSkyLight": 8, "dayFrom": 13000, "dayTo": 23000, "strict": false,
       "blockIds": ["minecraft:grass_block", "minecraft:dirt", "minecraft:coarse_dirt", "minecraft:podzol", "minecraft:rooted_dirt", "minecraft:moss_block", "minecraft:mud", "minecraft:mycelium", "minecraft:sand", "minecraft:red_sand", "minecraft:gravel", "minecraft:stone", "minecraft:calcite", "minecraft:snow", "minecraft:snow_block", "minecraft:packed_ice", "minecraft:dirt_path", "minecraft:clay", "minecraft:terracotta", "minecraft:white_terracotta", "minecraft:orange_terracotta", "minecraft:yellow_terracotta", "minecraft:brown_terracotta", "minecraft:red_terracotta", "minecraft:light_gray_terracotta", "biomesoplenty:origin_grass_block", "biomesoplenty:white_sand", "biomesoplenty:orange_sand", "biomesoplenty:black_sand"]},
       {"name": "legionwarex_underground", "priority": 0, "biomeIds": ["#minecraft:is_overworld"], "maxSkyLight": 0, "maxBlockLight": 0, "strict": false},
@@ -274,7 +274,8 @@
       "mythsandlegends:possessed_armor": ["legionwarex_night_ground"], "mythsandlegends:possessed_armor_archer": ["legionwarex_night_ground"],
       "skarrier_mobs:breacher": ["legionwarex_underground"], "skarrier_mobs:dragger": ["legionwarex_underground"],
       "born_in_chaos_v1:mr_pumpkin": ["legionwarex_night_ground"], "born_in_chaos_v1:mrs_pumpkin": ["legionwarex_night_ground"], "born_in_chaos_v1:senor_pumpkin": ["legionwarex_night_ground"],
-      "born_in_chaos_v1:pumpkin_bruiser": ["legionwarex_night_ground"], "born_in_chaos_v1:sir_pumpkinhead": ["legionwarex_night_ground"]}
+      "born_in_chaos_v1:pumpkin_bruiser": ["legionwarex_night_ground"], "born_in_chaos_v1:sir_pumpkinhead": ["legionwarex_night_ground"],
+      "ddenizens:headless": ["legionwarex_night_ground"]}
   },
   "pins": {
     "_comment": "Mods held at a version, even with --update (the lock only holds the last tested): each with why, so it can go once a fixed version is out.",
@@ -434,6 +435,7 @@
       ]
     },
     "hidden_items": {
+      "Spawn eggs of mobs the pack keeps out of every world (FreshOrangeSlices, 2026-10-31; the add-on's bannedMobs): they'd do nothing": ["born_in_chaos_v1:corpse_fly_spawn_egg", "born_in_chaos_v1:maggot_spawn_egg", "born_in_chaos_v1:bloody_gadfly_spawn_egg", "born_in_chaos_v1:swarmer_spawn_egg", "born_in_chaos_v1:diamond_termite_spawn_egg", "born_in_chaos_v1:firelight_spawn_egg", "born_in_chaos_v1:firelight_not_despawn_spawn_egg", "born_in_chaos_v1:baby_skeleton_spawn_egg", "born_in_chaos_v1:baby_skeleton_minion_spawn_egg", "born_in_chaos_v1:controlled_baby_skeleton_spawn_egg", "ddenizens:orc_egg", "ddenizens:orc_shaman_egg", "ddenizens:ghoul_egg", "ddenizens:sewer_ghoul_egg", "ddenizens:alligator_gar_egg", "ddenizens:boulder_egg", "ddenizens:beholder_egg", "ddenizens:death_tyrant_egg", "ddenizens:gazer_egg"],
       "Zoni's Ultimate Summon Device, now uncraftable": [
         "zonis_companions:ultimate_summon_device"
       ],
@@ -479,7 +481,7 @@
       "off": {
         "Skarrier Mobs, in every biome of every dimension: put back below only where each can spawn": ["skarrier_mobs:bowlder_biome_modifier", "skarrier_mobs:breacher_biome_modifier", "skarrier_mobs:dragger_biome_modifier", "skarrier_mobs:eater_biome_modifier", "skarrier_mobs:freeze_biome_modifier", "skarrier_mobs:frost_biome_modifier", "skarrier_mobs:gadlisk_biome_modifier", "skarrier_mobs:glowin_biome_modifier", "skarrier_mobs:gorger_biome_modifier", "skarrier_mobs:slither_matriarch_biome_modifier", "skarrier_mobs:slither_spawner_dummy_biome_modifier", "skarrier_mobs:viruleon_biome_modifier", "skarrier_mobs:voidrake_biome_modifier", "skarrier_mobs:wretch_biome_modifier", "skarrier_mobs:wrought_biome_modifier"],
         "Monster Expansion's Arborix and Kobeko, named vanilla biomes only: put back below with BOP's": ["monsterexpansion:add_arborix_spawn", "monsterexpansion:add_kobeko_spawn"],
-        "Dungeon Denizens (chunk 5): 38 of its mobs across the Overworld; they come as the add-on's sentinels instead (its Nether ones stay)": [
+        "Dungeon Denizens (chunk 5): 38 of its mobs across the Overworld, at its own weights (up to 50 each); they come as the add-on's sentinels, and since 2026-10-31 (FreshOrangeSlices: the new mobs in the normal spawns) at the pack's weights in the biomes that fit them (spawns.add chaos_*), less the ones kept out of every world. Its Nether ones stay, less the floating eyes": [
           "ddenizens:acid_skeleton",
           "ddenizens:alligator_gar",
           "ddenizens:animated_weapon",
@@ -519,7 +521,7 @@
           "ddenizens:wight",
           "ddenizens:winged_skeleton"
         ],
-        "Born in Chaos (chunk 5): 35 of its mobs in every biome of every dimension, most at weights of 10 to 30; they come as the add-on's sentinels and in its own structures instead. Its holiday mobs stay (FreshOrangeSlices): the pumpkin family (now all year, below) and Krampus with his henchmen; and its two Nether mobs": [
+        "Born in Chaos (chunk 5): 35 of its mobs in every biome of every dimension, most at weights of 10 to 30; they come as the add-on's sentinels, in its own structures, and since 2026-10-31 at the pack's weights in the biomes that fit them (spawns.add chaos_*), less the ones kept out of every world. Its holiday mobs stay (FreshOrangeSlices): the pumpkin family (all year now, rare, below) and Krampus with his henchmen; and its Nether Bone Imp": [
           "born_in_chaos_v1:baby_skeleton_biome_modifier",
           "born_in_chaos_v1:baby_spider_biome_modifier",
           "born_in_chaos_v1:barrel_zombie_biome_modifier",
@@ -556,7 +558,13 @@
           "born_in_chaos_v1:zombie_fisherman_biome_modifier",
           "born_in_chaos_v1:zombie_lumberjack_biome_modifier"
         ],
-        "Born in Chaos's pumpkin folk (FreshOrangeSlices, 2026-10-30: all year, the Harvest Court; the horse rider, Mrs Pumpkin and the others a bit rarer): put back below at lower weights": [
+        "Mobs the pack keeps out of every world (FreshOrangeSlices, 2026-10-31; the add-on's bannedMobs stops them however they'd come): their Nether spawns, Born in Chaos's Firelight and Dungeon Denizens' floating eyes": [
+          "born_in_chaos_v1:firelight_biome_modifier",
+          "ddenizens:beholder_nether",
+          "ddenizens:death_tyrant_nether",
+          "ddenizens:gazer_nether"
+        ],
+        "Born in Chaos's pumpkin folk (FreshOrangeSlices, 2026-10-30: all year, the Harvest Court; 2026-10-31: a very low chance, Sir Pumpkinhead a roaming boss): put back below": [
           "born_in_chaos_v1:mr_pumpkin_biome_modifier",
           "born_in_chaos_v1:mrs_pumpkin_biome_modifier",
           "born_in_chaos_v1:senor_pumpkin_biome_modifier",
@@ -652,17 +660,254 @@
       },
       "add": {
         "harvest_court": {
-          "why": "Born in Chaos's pumpkin folk, the Harvest Court, all year (FreshOrangeSlices, 2026-10-30): its spawn rule only lets them out from 25 October to 7 November, so the add-on lets them out the rest of the year on the same terms (the Overworld at night, not the deep dark or mushroom fields). Its weights were for a fortnight's festival: about a quarter lower now, Sir Pumpkinhead (the felsteed rider) 4 to 3, Mrs Pumpkin 13 to 9, Mr. Pumpkin 15 to 11, Senor Pumpkin 10 to 7, the Pumpkin Bruiser 10 to 8. It listed every biome of every dimension (forge:any); its rule only ever passed the Overworld's.",
+          "why": "Born in Chaos's pumpkin folk, the Harvest Court, all year (FreshOrangeSlices, 2026-10-30): its spawn rule only lets them out from 25 October to 7 November, so the add-on lets them out the rest of the year on the same terms, and Easy Mob Spawn Control keeps them to open ground at night. A very low chance beside the other families (FreshOrangeSlices, 2026-10-31): Mr. Pumpkin 15 to 3, Mrs Pumpkin 13 to 2, Senor Pumpkin 10 to 2, the Pumpkin Bruiser 10 to 2 (Born in Chaos's festival weights first). Sir Pumpkinhead roams on his own (roaming_sir_pumpkinhead).",
           "category": "monster",
           "biomes": [
             "#minecraft:is_overworld"
           ],
           "spawners": {
-            "born_in_chaos_v1:mr_pumpkin": [11, 1, 3],
-            "born_in_chaos_v1:mrs_pumpkin": [9, 1, 1],
-            "born_in_chaos_v1:senor_pumpkin": [7, 1, 2],
-            "born_in_chaos_v1:pumpkin_bruiser": [8, 1, 1],
-            "born_in_chaos_v1:sir_pumpkinhead": [3, 1, 1]
+            "born_in_chaos_v1:mr_pumpkin": [3, 1, 2],
+            "born_in_chaos_v1:mrs_pumpkin": [2, 1, 1],
+            "born_in_chaos_v1:senor_pumpkin": [2, 1, 1],
+            "born_in_chaos_v1:pumpkin_bruiser": [2, 1, 1]
+          }
+        },
+        "roaming_sir_pumpkinhead": {
+          "why": "Roaming bosses: Born in Chaos's Sir Pumpkinhead, a mid-tier boss on his felsteed (FreshOrangeSlices, 2026-10-31), across the Overworld's open land at night; one loaded at a time (config_files). Below 30 health his horse is gone and he fights on foot (born_in_chaos_v1:sir_pumpkinhead_without_horse, 120 health).",
+          "category": "monster",
+          "biomes": [
+            "#forge:is_plains",
+            "#minecraft:is_savanna",
+            "#forge:is_plateau",
+            "#forge:is_grassland",
+            "minecraft:meadow",
+            "#minecraft:is_forest",
+            "#minecraft:is_taiga",
+            "#forge:is_coniferous",
+            "#forge:is_dense"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:sir_pumpkinhead": [4, 1, 1]
+          }
+        },
+        "chaos_land": {
+          "why": "Born in Chaos and Dungeon Denizens in the night's spawns (FreshOrangeSlices, 2026-10-31: the new mobs in the roster for normal spawns, but not the flies, maggots, termites, firelights, baby skeletons, orcs, ghouls, alligator gar, boulders or floating eyes, which the add-on keeps out of every world): the ones at home anywhere on land, at weights that make the new mobs about a tenth of the night's monsters together with the groups for their biomes.",
+          "category": "monster",
+          "biomes": [
+            "#minecraft:is_forest",
+            "#minecraft:is_taiga",
+            "#forge:is_coniferous",
+            "#forge:is_dense",
+            "#forge:is_swamp",
+            "#minecraft:is_jungle",
+            "#forge:is_lush",
+            "#forge:is_plains",
+            "#minecraft:is_savanna",
+            "#forge:is_grassland",
+            "#forge:is_plateau",
+            "#minecraft:is_mountain",
+            "#forge:is_mountain",
+            "#minecraft:is_hill",
+            "#forge:is_desert",
+            "#minecraft:is_badlands",
+            "#forge:is_dry/overworld",
+            "#forge:is_sandy",
+            "#forge:is_wasteland",
+            "#minecraft:is_beach",
+            "#minecraft:is_river",
+            "#forge:is_snowy"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:decaying_zombie": [25, 1, 1],
+            "born_in_chaos_v1:decrepit_skeleton": [25, 1, 1],
+            "born_in_chaos_v1:skeleton_thrasher": [6, 1, 1],
+            "born_in_chaos_v1:phantom_creeper": [8, 1, 1],
+            "ddenizens:skeleton_warrior": [20, 1, 2],
+            "ddenizens:skeleton_champion": [4, 1, 1],
+            "ddenizens:winged_skeleton": [8, 1, 2],
+            "ddenizens:rat": [10, 1, 3]
+          }
+        },
+        "chaos_open": {
+          "why": "Born in Chaos and Dungeon Denizens on open land: plains, savannas, meadows.",
+          "category": "monster",
+          "biomes": [
+            "#forge:is_plains",
+            "#minecraft:is_savanna",
+            "#forge:is_plateau",
+            "#forge:is_grassland",
+            "minecraft:meadow"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:zombie_bruiser": [12, 1, 1],
+            "born_in_chaos_v1:skeleton_demoman": [10, 1, 1],
+            "born_in_chaos_v1:door_knight": [12, 1, 1],
+            "born_in_chaos_v1:seared_spirit": [6, 1, 1],
+            "ddenizens:electric_skeleton": [12, 1, 2],
+            "ddenizens:headless": [10, 1, 1],
+            "ddenizens:animated_armor": [8, 1, 1]
+          }
+        },
+        "chaos_woods": {
+          "why": "Born in Chaos and Dungeon Denizens in forests and taigas: lumberjacks, hound packs, the Spiders Mother, grave zombies.",
+          "category": "monster",
+          "biomes": [
+            "#minecraft:is_forest",
+            "#minecraft:is_taiga",
+            "#forge:is_coniferous",
+            "#forge:is_dense"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:zombie_lumberjack": [25, 1, 1],
+            "born_in_chaos_v1:dread_hound": [8, 2, 4],
+            "born_in_chaos_v1:dire_hound_leader": [3, 1, 1],
+            "born_in_chaos_v1:mother_spider": [10, 1, 1],
+            "ddenizens:grave_zombie": [15, 1, 2]
+          }
+        },
+        "wood_golems": {
+          "why": "Dungeon Denizens' Wood Golem in vanilla's own forests (FreshOrangeSlices, 2026-10-31: a normal vanilla forest). It never despawns by itself: Easy Mob Spawn Control despawns it once idle with no player within 64 blocks (config_files).",
+          "category": "monster",
+          "biomes": [
+            "minecraft:forest",
+            "minecraft:birch_forest",
+            "minecraft:old_growth_birch_forest",
+            "minecraft:flower_forest"
+          ],
+          "spawners": {
+            "ddenizens:wood_golem": [6, 1, 1]
+          }
+        },
+        "chaos_dark": {
+          "why": "Born in Chaos and Dungeon Denizens in dark forests, swamps and dead woods: spirits, shadows, casters and the rarer knights.",
+          "category": "monster",
+          "biomes": [
+            "minecraft:dark_forest",
+            "#forge:is_swamp",
+            "biomesoplenty:ominous_woods",
+            "biomesoplenty:dead_forest",
+            "biomesoplenty:old_growth_dead_forest"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:restless_spirit": [15, 1, 1],
+            "born_in_chaos_v1:spirit_guide": [8, 1, 1],
+            "born_in_chaos_v1:spirit_guide_assistant": [6, 2, 2],
+            "born_in_chaos_v1:spiritof_chaos": [8, 1, 1],
+            "born_in_chaos_v1:dark_vortex": [8, 1, 1],
+            "born_in_chaos_v1:bonescaller": [6, 1, 1],
+            "born_in_chaos_v1:fallen_chaos_knight": [4, 1, 1],
+            "born_in_chaos_v1:lifestealer": [2, 1, 1],
+            "born_in_chaos_v1:nightmare_stalker": [2, 1, 1],
+            "born_in_chaos_v1:supreme_bonescaller": [1, 1, 1],
+            "born_in_chaos_v1:zombie_clown": [5, 1, 1],
+            "ddenizens:tainted_skeleton": [12, 1, 1],
+            "ddenizens:shadow": [12, 1, 1],
+            "ddenizens:shadowlord": [2, 1, 1],
+            "ddenizens:bodak": [4, 1, 1],
+            "ddenizens:wight": [4, 1, 1],
+            "ddenizens:animated_weapon": [6, 1, 2],
+            "ddenizens:bloody_bones": [10, 1, 2]
+          }
+        },
+        "chaos_swamp": {
+          "why": "Dungeon Denizens in swamps: acid skeletons and bloaters.",
+          "category": "monster",
+          "biomes": [
+            "#forge:is_swamp"
+          ],
+          "spawners": {
+            "ddenizens:acid_skeleton": [18, 1, 2],
+            "ddenizens:bloater": [12, 1, 2]
+          }
+        },
+        "chaos_snow": {
+          "why": "Dungeon Denizens in snow: frost skeletons and wights.",
+          "category": "monster",
+          "biomes": [
+            "#forge:is_snowy"
+          ],
+          "spawners": {
+            "ddenizens:frost_skeleton": [25, 1, 2],
+            "ddenizens:wight": [4, 1, 1]
+          }
+        },
+        "chaos_dry": {
+          "why": "Born in Chaos and Dungeon Denizens in deserts and badlands: siamese skeletons, burning and magma skeletons.",
+          "category": "monster",
+          "biomes": [
+            "#forge:is_desert",
+            "#minecraft:is_badlands",
+            "#forge:is_sandy",
+            "#forge:is_wasteland"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:siamese_skeletons": [20, 1, 1],
+            "ddenizens:burning_skeleton": [25, 1, 2],
+            "ddenizens:magma_skeleton": [6, 1, 1]
+          }
+        },
+        "chaos_high": {
+          "why": "Dungeon Denizens on mountains and hills: iron skeletons and gargoyles.",
+          "category": "monster",
+          "biomes": [
+            "#minecraft:is_mountain",
+            "#forge:is_mountain",
+            "#minecraft:is_hill",
+            "#forge:is_plateau"
+          ],
+          "spawners": {
+            "ddenizens:iron_skeleton": [12, 1, 1],
+            "ddenizens:gargoyle": [12, 1, 2],
+            "ddenizens:margoyle": [5, 1, 1]
+          }
+        },
+        "chaos_shore": {
+          "why": "Born in Chaos's Zombie Fisherman on beaches and stony shores.",
+          "category": "monster",
+          "biomes": [
+            "#minecraft:is_beach",
+            "minecraft:stony_shore"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:zombie_fisherman": [25, 1, 1]
+          }
+        },
+        "chaos_caves": {
+          "why": "Dungeon Denizens' oozes, jellies and cave plants in dripstone and lush caves (the Deep Dark stays the Warden's).",
+          "category": "monster",
+          "biomes": [
+            "minecraft:dripstone_caves",
+            "minecraft:lush_caves"
+          ],
+          "spawners": {
+            "ddenizens:gelatinous_cube": [12, 1, 1],
+            "ddenizens:ochre_jelly": [12, 1, 1],
+            "ddenizens:gray_ooze": [10, 1, 1],
+            "ddenizens:shrieker": [12, 1, 3],
+            "ddenizens:violet_fungus": [10, 1, 2]
+          }
+        },
+        "chaos_waters": {
+          "why": "Born in Chaos's Corpse Fish in rivers and swamps, and the rare Glutton Fish (90 health) in rivers.",
+          "category": "water_creature",
+          "biomes": [
+            "#minecraft:is_river",
+            "#forge:is_swamp"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:corpse_fish": [3, 2, 4],
+            "born_in_chaos_v1:glutton_fish": [1, 1, 1]
+          }
+        },
+        "thornshell_crabs": {
+          "why": "Born in Chaos's Thornshell Crab on beaches and stony shores, as animals are.",
+          "category": "creature",
+          "biomes": [
+            "#minecraft:is_beach",
+            "minecraft:stony_shore"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:thornshell_crab": [3, 1, 1]
           }
         },
         "ghouls": {
@@ -853,8 +1098,8 @@
         "mobs": ["monsterexpansion:arborix"]
       },
       "persistent": {
-        "why": "Monsters that never despawn but stay in the pack's spawns: Skarrier has them spawn in these vanilla biomes (Glowin in Dark Forests, Slithers in swamps), as they did before at higher weights; the Queen of Orchid and the Draugr Boss get a despawn rule from Easy Mob Spawn Control. The pack test fails on any other added monster that never despawns.",
-        "mobs": ["skarrier_mobs:glowin", "skarrier_mobs:slither_matriarch", "skarrier_mobs:slither_spawner_dummy", "oddities:queen_of_orchid", "soulsweapons:draugr_boss"]
+        "why": "Monsters that never despawn but stay in the pack's spawns: Skarrier has them spawn in these vanilla biomes (Glowin in Dark Forests, Slithers in swamps), as they did before at higher weights; the Queen of Orchid, the Draugr Boss and Dungeon Denizens' Wood Golem get a despawn rule from Easy Mob Spawn Control. The pack test fails on any other added monster that never despawns.",
+        "mobs": ["skarrier_mobs:glowin", "skarrier_mobs:slither_matriarch", "skarrier_mobs:slither_spawner_dummy", "oddities:queen_of_orchid", "soulsweapons:draugr_boss", "ddenizens:wood_golem"]
       },
       "conditional": {
         "_comment": "Mobs the pack test leaves out of a biome's modded share: they only spawn underground, after the Wither, or under a condition of their own.",

@@ -1,30 +1,6 @@
 {
-  "_comment": "Dungeon Denizens 2.0 (its own Overworld spawns are off): its fighters as sentinels where they fit. A sentinel with no biomes stands anywhere on land.",
+  "_comment": "Dungeon Denizens 2.0: its fighters as sentinels where they fit (most also spawn at night now, the pack's spawn groups). A sentinel with no biomes stands anywhere on land. No orcs, orc shamans or boulders (FreshOrangeSlices, 2026-10-30: never in a world, the add-on's bannedMobs).",
   "sentinels": [
-    {
-      "entity": "ddenizens:orc",
-      "weight": 10,
-      "biomes": [
-        "#forge:is_plains",
-        "#minecraft:is_savanna",
-        "#forge:is_plateau",
-        "minecraft:meadow",
-        "#minecraft:is_forest",
-        "#minecraft:is_taiga",
-        "#forge:is_coniferous",
-        "#forge:is_dense"
-      ]
-    },
-    {
-      "entity": "ddenizens:orc_shaman",
-      "weight": 5,
-      "biomes": [
-        "#forge:is_plains",
-        "#minecraft:is_savanna",
-        "#forge:is_plateau",
-        "minecraft:meadow"
-      ]
-    },
     {
       "entity": "ddenizens:skeleton_warrior",
       "weight": 8
@@ -132,16 +108,6 @@
         "biomesoplenty:ominous_woods",
         "biomesoplenty:dead_forest",
         "biomesoplenty:old_growth_dead_forest"
-      ]
-    },
-    {
-      "entity": "ddenizens:boulder",
-      "weight": 6,
-      "biomes": [
-        "#minecraft:is_mountain",
-        "#forge:is_mountain",
-        "#minecraft:is_hill",
-        "#forge:is_plateau"
       ]
     },
     {

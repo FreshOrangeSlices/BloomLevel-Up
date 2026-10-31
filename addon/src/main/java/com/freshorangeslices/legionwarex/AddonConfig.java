@@ -34,6 +34,15 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.BooleanValue HARVEST_ALL_YEAR;
 	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
 	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOBS;
+	/** Never in a world (FreshOrangeSlices, 2026-10-30): Born in Chaos's flies, maggots, termites, firelights and baby
+	 * skeletons; Dungeon Denizens' orcs, ghouls, alligator gar, boulders and floating eyes (not its spectator). */
+	public static final List<String> BANNED_DEFAULT = List.of(
+			"born_in_chaos_v1:corpse_fly", "born_in_chaos_v1:maggot", "born_in_chaos_v1:bloody_gadfly", "born_in_chaos_v1:swarmer",
+			"born_in_chaos_v1:diamond_termite", "born_in_chaos_v1:firelight", "born_in_chaos_v1:firelight_not_despawn",
+			"born_in_chaos_v1:baby_skeleton", "born_in_chaos_v1:baby_skeleton_minion", "born_in_chaos_v1:controlled_baby_skeleton",
+			"ddenizens:orc", "ddenizens:orc_shaman", "ddenizens:ghoul", "ddenizens:sewer_ghoul", "ddenizens:alligator_gar",
+			"ddenizens:boulder", "ddenizens:beholder", "ddenizens:death_tyrant", "ddenizens:gazer");
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HARVEST_MOBS;
 	/** Born in Chaos's pumpkin folk that spawn in the wild (its Lord Pumpkinhead and the rest come from them or from items). */
 	public static final List<String> HARVEST_DEFAULT = List.of("born_in_chaos_v1:mr_pumpkin", "born_in_chaos_v1:mrs_pumpkin",
@@ -147,6 +156,10 @@ public final class AddonConfig {
 						"Off: refused whoever gives them, and taken off zombies already in the world when they load; the first refusal from",
 						"each place in the code is logged as \"LegionWareX buffs\".")
 				.define("zombieEndlessBuffs", false);
+		BANNED_MOBS = builder
+				.comment("Mobs that never join a world, however they'd come (natural spawns, structures, spawners, other mobs' summons,",
+						"spawn eggs, commands); ones already in a world vanish when their chunk loads. Entity ids.")
+				.defineListAllowEmpty("bannedMobs", BANNED_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
 		MAINLAND_SPAWN = builder
 				.comment("A new world's spawn on the mainland: the land nearest the middle of the world that is well inland (no sea",
 						"within about 250 blocks), not a beach, river or mountain, and not too high. Off: vanilla's spawn (which can be",
@@ -254,6 +267,10 @@ public final class AddonConfig {
 
 	public static boolean zombieEndlessBuffs() {
 		return get(ZOMBIE_ENDLESS_BUFFS, false);
+	}
+
+	public static List<? extends String> bannedMobs() {
+		return get(BANNED_MOBS, BANNED_DEFAULT);
 	}
 
 	public static boolean harvestAllYear() {

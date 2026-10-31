@@ -15,7 +15,7 @@
    "y": 0.0,
    "shape": "circle",
    "description": [
-    "Lives in a Space Station.",
+    "Lives in a Space Station, out on the End's islands.",
     "The Wandering Eye floats around the station too.",
     "",
     "The Eye of Annihilation flies toward the nearest one."
@@ -64,7 +64,7 @@
    "shape": "hexagon",
    "description": [
     "Lives in a Ruined Citadel.",
-    "TODO",
+    "No item needed: walk up to the Altar of Void and he appears.",
     "",
     "The Eye of Void flies toward the nearest one."
    ],
@@ -198,6 +198,59 @@
    ]
   },
   {
+   "id": "the_obliterator",
+   "title": "The Obliterator",
+   "subtitle": "Legendary Monsters · 550 health",
+   "x": 6.0,
+   "y": 0.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in a Space Station, out on the End's islands.",
+    "Insert an Eye Crystal into the station's Teleport Machine. The Annihilation Pursuers are said to drop the crystals.",
+    "",
+    "The Eye of Annihilation flies toward the nearest station."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:space_station",
+     "optional": true,
+     "title": "Find a Space Station"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:the_obliterator",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1100
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
    "id": "rhyza",
    "title": "Rhyza",
    "subtitle": "Monster Expansion · 500 health",
@@ -310,21 +363,26 @@
     {
      "type": "bloom_xp",
      "tab": "combat",
-     "xp": 400
+     "xp": 1000
     },
     {
      "type": "xp_levels",
-     "levels": 5
+     "levels": 15
     },
     {
      "type": "item",
      "item": "minecraft:diamond",
-     "count": 3
+     "count": 8
     },
     {
      "type": "item",
-     "item": "minecraft:golden_apple",
+     "item": "minecraft:netherite_scrap",
      "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
     }
    ]
   }

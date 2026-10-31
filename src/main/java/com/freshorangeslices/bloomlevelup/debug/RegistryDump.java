@@ -164,6 +164,13 @@ public final class RegistryDump {
 					lines.add(GSON.toJson(row));
 					places++;
 				}
+
+				// Every structure's id on its own row too (the rows above are only those with mobs of their own), so a
+				// pack's quest book can be checked against what the world can generate.
+				JsonObject id = new JsonObject();
+				id.addProperty("kind", "structure_id");
+				id.addProperty("id", entry.getKey().location().toString());
+				lines.add(GSON.toJson(id));
 			} catch (Throwable e) {
 				lines.add(GSON.toJson(error("structure", entry.getKey().location().toString(), e)));
 			}

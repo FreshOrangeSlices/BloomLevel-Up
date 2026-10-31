@@ -863,6 +863,7 @@ def quest_check(server_dir, dump_file, server_lines):
         return failures, notes
     rows = [json.loads(line) for line in open(dump_file) if line.strip()]
     have = {kind: {r["id"] for r in rows if r.get("kind") == kind} for kind in ("item", "entity", "structure", "biome")}
+    have["structure"] |= {r["id"] for r in rows if r.get("kind") == "structure_id"}
     spaces = {i.split(":", 1)[0] for ids in have.values() for i in ids}
     used = quest_book.ids_used(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quests"), spaces | quest_book.ALWAYS)
     missing = [f"{kind} {i}" for kind in have for i in sorted(used[kind]) if i not in have[kind]]

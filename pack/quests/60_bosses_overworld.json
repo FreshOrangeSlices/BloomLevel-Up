@@ -15,8 +15,8 @@
    "y": 0.0,
    "shape": "hexagon",
    "description": [
-    "Lives in an Ancient Factory.",
-    "Wake it in the factory's core. The Prowler guards the halls.",
+    "Lives in an Ancient Factory, deep underground.",
+    "Right-click the dormant Harbinger with a Nether Star (it's used up), so beat the Wither first. The Prowler guards the halls.",
     "",
     "The Eye of Mech flies toward the nearest one.",
     "A pirate chart can lead here too."
@@ -65,7 +65,7 @@
    "shape": "hexagon",
    "description": [
     "Lives in a Sunken City, under the sea.",
-    "Summon it at the Altar of Abyss inside the city. Coralssus roams the ruins.",
+    "Place an Abyssal Sacrifice on the Altar of Abyss inside the city. Craft it from a nautilus shell, an Athame (the city's Deepling Priests and Warlocks drop it), a Coral Chunk (from its Coralssus), a heart of the sea, and a block each of diamond, emerald, iron, amethyst and gold.",
     "",
     "The Eye of Abyss flies toward the nearest one.",
     "A pirate chart can lead here too."
@@ -163,7 +163,7 @@
    "shape": "hexagon",
    "description": [
     "Lives in a Cursed Pyramid, in the desert.",
-    "Brush the suspicious sand inside the pyramid to wake it. Kobolediators and a Wadjet guard the way.",
+    "Brush the suspicious sand inside the pyramid to find the Necklace of the Desert, then right-click the dormant Remnant with it. Kobolediators and a Wadjet guard the way.",
     "",
     "The Eye of Desert flies toward the nearest one.",
     "A pirate chart can lead here too."
@@ -212,7 +212,7 @@
    "shape": "hexagon",
    "description": [
     "Lives in a Frosted Prison, in snowy lands.",
-    "Summon it inside the prison. The Aptrgangr stands guard.",
+    "Beat the Aptrgangr for its Strange Key and open the Door of Seal with it. Then right-click the Cursed Tombstone once it has gathered its power (about a minute).",
     "",
     "The Eye of Curse flies toward the nearest one.",
     "A pirate chart can lead here too."
@@ -1052,7 +1052,7 @@
    "shape": "hexagon",
    "description": [
     "Lives in the Champion's Graves, in the taiga.",
-    "Also roams snowy biomes, one at a time.",
+    "Also roams snowy biomes, one at a time. When it falls, the Frenzied Shade rises where it died.",
     "",
     "A pirate chart can lead here."
    ],
@@ -1092,15 +1092,54 @@
    ]
   },
   {
+   "id": "night_shade",
+   "title": "Frenzied Shade",
+   "subtitle": "Marium's Soulslike Weaponry · 150 health",
+   "x": 1.5,
+   "y": 7.5,
+   "shape": "circle",
+   "description": [
+    "Rises where the Old Champion's Remains falls. It drops the Essence of Eventide, which calls up the Fallen Icon."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "soulsweapons:night_shade",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 300
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
    "id": "moonknight",
    "title": "Fallen Icon",
    "subtitle": "Marium's Soulslike Weaponry · 550 health",
-   "x": 1.5,
+   "x": 3.0,
    "y": 7.5,
    "shape": "octagon",
    "description": [
     "Lives in the Cathedral of Resurrection, in the hills.",
-    "TODO",
+    "Right-click an Old Moon Altar (one stands in the cathedral) with the Essence of Eventide, which the Frenzied Shade drops.",
     "",
     "A pirate chart can lead here."
    ],
@@ -1148,7 +1187,7 @@
    "id": "lich",
    "title": "Corrupted Champion",
    "subtitle": "The Graveyard · 400 health",
-   "x": 3.0,
+   "x": 4.5,
    "y": 7.5,
    "shape": "hexagon",
    "description": [
@@ -1196,7 +1235,7 @@
    "id": "dead_king",
    "title": "The Dead King",
    "subtitle": "Iron's Spells 'n Spellbooks · 500 health",
-   "x": 4.5,
+   "x": 6.0,
    "y": 7.5,
    "shape": "octagon",
    "description": [
@@ -1249,12 +1288,12 @@
    "id": "black_charro",
    "title": "The Black Charro",
    "subtitle": "Myths & Legends · 370 health",
-   "x": 6.0,
+   "x": 7.5,
    "y": 7.5,
    "shape": "hexagon",
    "description": [
-    "Lives in a Mausoleum.",
-    "TODO",
+    "Lives in a Mausoleum, in deserts and badlands.",
+    "An Altar of the Dead stands in the Mausoleum's arena. Bring a Soulbinder Amulet (gold nuggets, a gold ingot and an Ethereal Flame) to start the ritual.",
     "",
     "A pirate chart can lead here."
    ],

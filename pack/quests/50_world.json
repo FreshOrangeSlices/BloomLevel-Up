@@ -1,0 +1,321 @@
+{
+  "id": "world",
+  "title": "The Wide World",
+  "subtitle": ["What's out there to find, by land and by sea."],
+  "icon": "minecraft:compass",
+  "group": "guides",
+  "mods": [],
+  "quests": [
+    {
+      "id": "redwood_forest",
+      "title": "Redwood Giants",
+      "icon": "biomesoplenty:redwood_log",
+      "x": 0, "y": 0,
+      "shape": "circle",
+      "description": [
+        "Biomes O' Plenty adds dozens of new biomes. Start with a Redwood Forest, where redwood trees grow tall on thick trunks.",
+        "",
+        "Keep your eyes open as you travel: this chapter only names a few."
+      ],
+      "tasks": [
+        {"type": "biome", "biome": "biomesoplenty:redwood_forest"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:bread", "count": 6},
+        {"type": "item", "item": "minecraft:torch", "count": 16}
+      ]
+    },
+    {
+      "id": "lavender_field",
+      "title": "Lavender Fields",
+      "icon": "biomesoplenty:lavender",
+      "x": 1.5, "y": 0,
+      "shape": "circle",
+      "description": [
+        "Lavender Fields are open meadows grown over with lavender, easy ground to travel.",
+        "",
+        "A map helps you find your way back to the ones you like."
+      ],
+      "tasks": [
+        {"type": "biome", "biome": "biomesoplenty:lavender_field"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:map", "count": 1},
+        {"type": "item", "item": "minecraft:baked_potato", "count": 6}
+      ]
+    },
+    {
+      "id": "glowing_grotto",
+      "title": "The Glowing Grotto",
+      "icon": "biomesoplenty:glowshroom",
+      "x": 3, "y": 0,
+      "shape": "circle",
+      "description": [
+        "Underground, the Glowing Grotto is a cave lit by glowshrooms, glowing moss and hanging strands of glowworm silk.",
+        "",
+        "Look for it while you mine, and bring torches for the dark stretches on the way."
+      ],
+      "tasks": [
+        {"type": "biome", "biome": "biomesoplenty:glowing_grotto"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:torch", "count": 32}
+      ]
+    },
+    {
+      "id": "crystalline_chasm",
+      "title": "Crystalline Chasm",
+      "icon": "biomesoplenty:rose_quartz_chunk",
+      "x": 4.5, "y": 0,
+      "shape": "diamond",
+      "description": [
+        "In the Nether, Biomes O' Plenty's Crystalline Chasm is grown through with rose quartz.",
+        "",
+        "About a third of this Nether is Biomes O' Plenty's; the rest is vanilla's, so it can take some searching."
+      ],
+      "tasks": [
+        {"type": "biome", "biome": "biomesoplenty:crystalline_chasm"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:ender_pearl", "count": 2},
+        {"type": "item", "item": "minecraft:cooked_beef", "count": 8}
+      ]
+    },
+    {
+      "id": "lootr",
+      "title": "Loot for Everyone",
+      "icon": "minecraft:chest",
+      "x": 0, "y": 1.5,
+      "shape": "circle",
+      "description": [
+        "Loot chests, barrels and minecart chests out in the world are per player here: each of you gets your own loot from the same chest.",
+        "",
+        "No need to race your friends to a dungeon. Open one to start."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "lootr:1chest"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:torch", "count": 16},
+        {"type": "item", "item": "minecraft:bread", "count": 4}
+      ]
+    },
+    {
+      "id": "waystones",
+      "title": "Waystones",
+      "icon": "waystones:waystone",
+      "x": 1.5, "y": 1.5,
+      "shape": "circle",
+      "description": [
+        "Waystones stand in villages and out in the wild. Right-click one to activate it; any waystone can then take you to any other you've activated.",
+        "",
+        "A Warp Stone (four amethyst shards, four ender pearls and an emerald) does the same from wherever you are."
+      ],
+      "tasks": [
+        {"type": "item", "item": "waystones:warp_stone"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:ender_pearl", "count": 2}
+      ]
+    },
+    {
+      "id": "ice_maze",
+      "title": "The Ice Maze",
+      "icon": "minecraft:blue_ice",
+      "x": 0, "y": 3,
+      "shape": "hexagon",
+      "description": [
+        "Aquamirae's Ice Maze spreads over the Deep Frozen Ocean: a maze of ice with frozen pirate ships and outposts in it, and creatures that hunt in the cold water.",
+        "",
+        "Bring a boat, food and light. Its bosses have their own chapter."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "aquamirae:adventure/find_ice_maze"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:cooked_beef", "count": 8},
+        {"type": "item", "item": "minecraft:torch", "count": 16}
+      ]
+    },
+    {
+      "id": "pirate_pouch",
+      "title": "Left Behind",
+      "icon": "aquamirae:pirate_pouch",
+      "x": 1.5, "y": 3,
+      "shape": "circle",
+      "description": [
+        "The Ice Maze's pirates left Pirate Pouches behind them. Search the maze for one and see what they couldn't carry."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "aquamirae:adventure/obtain_pirate_pouch"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:bread", "count": 6}
+      ]
+    },
+    {
+      "id": "graveyard",
+      "title": "Disturbing the Dead",
+      "icon": "graveyard:gravestone",
+      "x": 0, "y": 4.5,
+      "shape": "circle",
+      "description": [
+        "The Graveyard fills the world with burial grounds: small graves in many places, graveyards in forests, larger ones in taigas and sandy ones in deserts.",
+        "",
+        "Step into a forest graveyard. The dead there don't rest easy, so come armed."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "graveyard:graveyard/medium_graveyard"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:torch", "count": 16},
+        {"type": "item", "item": "minecraft:bread", "count": 4}
+      ]
+    },
+    {
+      "id": "overrun_village",
+      "title": "Too Late",
+      "icon": "minecraft:bell",
+      "x": 1.5, "y": 4.5,
+      "shape": "circle",
+      "description": [
+        "Some villages were overrun before you got there: charred houses and tormented villagers. They turn up in plains, deserts, savannas, taigas and snowy clearings.",
+        "",
+        "Tormented villagers can be redeemed with a bell."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "graveyard:graveyard/overrun_village"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:bell", "count": 1},
+        {"type": "item", "item": "minecraft:baked_potato", "count": 6}
+      ]
+    },
+    {
+      "id": "pumpkin_season",
+      "title": "Pumpkin Season",
+      "icon": "minecraft:jack_o_lantern",
+      "x": 3, "y": 4.5,
+      "shape": "circle",
+      "optional": true,
+      "description": [
+        "Around Halloween, late October to early November by the real date, Born in Chaos's pumpkin folk come out all over the world: Mr. and Mrs. Pumpkin, Senor Pumpkin, Pumpkin Bruisers and Sir Pumpkinhead.",
+        "",
+        "The rest of the year they stay away, so this one waits for the season. The mod's other creatures turn up as sentinels and around its graves and towers."
+      ],
+      "tasks": [
+        {"type": "kill", "entity": "born_in_chaos_v1:mr_pumpkin", "count": 1}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "combat", "xp": 300},
+        {"type": "item", "item": "minecraft:pumpkin_pie", "count": 6}
+      ]
+    },
+    {
+      "id": "sentinels",
+      "title": "Sentinels",
+      "icon": "minecraft:iron_helmet",
+      "x": 0, "y": 6,
+      "shape": "circle",
+      "description": [
+        "By day, about once a day, a lone sentinel may stand guard somewhere near you: orcs and knights on open land, lumberjacks and wood golems in woods, frost skeletons and the Amarok in snow.",
+        "",
+        "A sentinel holds its spot and only comes for you within 16 blocks, so you choose the fight. Dreadknights can stand anywhere. Now and then a pillager scout wanders by instead."
+      ],
+      "tasks": [
+        {"type": "kill", "entity": "undead_unleashed:dreadknight", "count": 1}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "combat", "xp": 300},
+        {"type": "item", "item": "minecraft:cooked_beef", "count": 6}
+      ]
+    },
+    {
+      "id": "war_band",
+      "title": "War Bands",
+      "icon": "minecraft:crossbow",
+      "x": 1.5, "y": 6,
+      "shape": "circle",
+      "description": [
+        "From day 5, illager war bands march by day the way patrols do, away from villages: pillagers, vindicators and Illager Invasion's marauders, provokers, alchemists and the odd basher.",
+        "",
+        "The one carrying the banner leads. Kill it and you get Bad Omen, as with a patrol."
+      ],
+      "tasks": [
+        {"type": "kill", "entity": "illagerinvasion:marauder", "count": 1}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "combat", "xp": 300},
+        {"type": "item", "item": "minecraft:cooked_porkchop", "count": 6},
+        {"type": "item", "item": "minecraft:torch", "count": 16}
+      ]
+    },
+    {
+      "id": "pirate_band",
+      "title": "Pirates Ashore",
+      "icon": "minecraft:oak_boat",
+      "x": 3, "y": 6,
+      "shape": "circle",
+      "description": [
+        "From day 3, pirate bands land on beaches and shores by the sea near you, day or night: Bosses'Rise's rooks and crossbow pirates, led by a rook, and quicker than the Kraken's crew.",
+        "",
+        "A band pirate you've hit may drop a Pirate Chart when it dies."
+      ],
+      "tasks": [
+        {"type": "kill", "entity": "block_factorys_bosses:pirate_rook", "count": 1}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "combat", "xp": 300},
+        {"type": "item", "item": "minecraft:cooked_beef", "count": 6},
+        {"type": "item", "item": "minecraft:torch", "count": 16}
+      ]
+    },
+    {
+      "id": "pirate_chart",
+      "title": "Pirate Charts",
+      "icon": "legionwarex:pirate_chart",
+      "x": 4.5, "y": 6,
+      "shape": "diamond",
+      "mods": ["block_factorys_bosses"],
+      "description": [
+        "Pirate Charts come from band pirates you've hit (about one in fifteen), from buried treasure (more often than not) and from shipwreck chests.",
+        "",
+        "Use one in the Overworld to read it: it becomes a treasure map to the lair of a boss no one on this world has beaten yet, within about 3000 blocks. It crumbles when you reach the X.",
+        "It's the surest way to find the bosses in the Bosses chapters."
+      ],
+      "tasks": [
+        {"type": "item", "item": "legionwarex:pirate_chart"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:ender_pearl", "count": 2},
+        {"type": "item", "item": "minecraft:golden_carrot", "count": 8}
+      ]
+    }
+  ]
+}

@@ -15,15 +15,15 @@
    "y": 0.0,
    "shape": "hexagon",
    "description": [
-    "Lives in an underworld arena.",
-    "The arena door opens with the Underworld Arena Key."
+    "Lives in an Underworld Arena, in Nether Wastes and Soul Sand Valleys.",
+    "He waits behind the arena door, which opens with an Underworld Arena Key: the arena's Soul Skeletons and Wither Knights sometimes drop one, and its rarer chests may hold one."
    ],
    "tasks": [
     {
      "type": "structure",
      "structure": "block_factorys_bosses:underworld_arena",
      "optional": true,
-     "title": "Find an underworld arena"
+     "title": "Find an Underworld Arena"
     },
     {
      "type": "kill",
@@ -104,10 +104,61 @@
    ]
   },
   {
+   "id": "fire_boss",
+   "title": "Echo of Tyros",
+   "subtitle": "Iron's Spells 'n Spellbooks · 1000 health",
+   "x": 3.0,
+   "y": 0.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in a Citadel, in bastion country in the Nether.",
+    "Craft a Cinderous Soulcaller (6 Cinder Essence, 2 netherite scrap, an echo shard) and use it near the Citadel's Cinderous Soul Rune. The Citadel's Ancient Knights drop Cinder Essence; an Ancient Furled Map leads there."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "irons_spellbooks:citadel",
+     "optional": true,
+     "title": "Find a Citadel"
+    },
+    {
+     "type": "kill",
+     "entity": "irons_spellbooks:fire_boss",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 2000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
    "id": "unbreakable",
    "title": "The Unbreakable",
    "subtitle": "Legionary · 400 health",
-   "x": 3.0,
+   "x": 4.5,
    "y": 0.0,
    "shape": "hexagon",
    "description": [
@@ -157,7 +208,7 @@
    "shape": "hexagon",
    "description": [
     "Lives in a Burning Arena.",
-    "TODO",
+    "Right-click the Altar of Fire with Burning Ashes: the arena's two Ignited Revenants always drop some.",
     "",
     "The Eye of Flame flies toward the nearest one."
    ],

@@ -1,0 +1,156 @@
+{
+  "id": "companions",
+  "group": "guides",
+  "title": "Companions",
+  "subtitle": ["Friends who fight at your side."],
+  "icon": "legionwarex:companion_keepsake",
+  "mods": [],
+  "quests": [
+    {
+      "id": "summon_device",
+      "title": "A Summon Device",
+      "icon": "zonis_companions:empty_summon_item",
+      "x": 0, "y": 0,
+      "description": [
+        "Every one of Zoni's companions lives in a Summon Device. Craft an empty one from eight amethyst shards around an iron block.",
+        "",
+        "Keep a spare empty device on you once you have companions: if one falls, they go back into it instead of being lost."
+      ],
+      "tasks": [{"type": "item", "item": "zonis_companions:empty_summon_item"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:soul_lantern"}
+      ]
+    },
+    {
+      "id": "choose_companion",
+      "title": "Choose a Companion",
+      "icon": "zonis_companions:bocchi_summon_item",
+      "shape": "hexagon",
+      "x": 1.5, "y": 0,
+      "description": [
+        "At a smithing table, put in a soul lantern, an empty Summon Device and the item that calls the companion you want, then use the device on the spot where they should appear.",
+        "Sugar calls Asuna, a dandelion Jean, a cornflower Eugeo, a blue orchid Rain, a cherry sapling Niomus, a note block Bocchi, an iron block Mash, packed ice Eula, soul sand Hu Tao, redstone Arlecchino, a clock Zani, TNT Klee and a golden pickaxe Derek.",
+        "Harder to come by: a blaze rod for Astolfo, a diamond sword for Melusine, a wither skeleton skull for Nagako and an end crystal for Jorge.",
+        "",
+        "Each has a gift of their own: Bocchi gives allies regeneration, Mash shrugs off blows and draws enemies in, Eugeo roots foes in place, Jean throws them into the air."
+      ],
+      "tasks": [{"type": "checkmark", "title": "Summon a companion"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:gold_ingot", "count": 4}
+      ]
+    },
+    {
+      "id": "pendant",
+      "title": "Companion Pendant",
+      "icon": "zonis_companions:companion_pendant",
+      "x": 3, "y": 0,
+      "description": [
+        "Craft a Companion Pendant from four gold ingots, four red dye and a heart of the sea. Use it on a companion to make them stay put, or follow you again.",
+        "",
+        "To put a companion away, gear and all, shift-right-click them holding an empty Summon Device."
+      ],
+      "tasks": [{"type": "item", "item": "zonis_companions:companion_pendant"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:sugar", "count": 8}
+      ]
+    },
+    {
+      "id": "recover_pills",
+      "title": "Recover Pills",
+      "icon": "zonis_companions:recover_pill",
+      "x": 4.5, "y": 0,
+      "description": [
+        "A golden apple ringed with four sugar makes four Recover Pills. Use them to heal your companions.",
+        "",
+        "Companions can be given weapons and armour to fight with, and better gear means fewer pills."
+      ],
+      "tasks": [{"type": "item", "item": "zonis_companions:recover_pill"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:amethyst_shard", "count": 8}
+      ]
+    },
+    {
+      "id": "advanced_device",
+      "title": "Advanced Summon Device",
+      "icon": "zonis_companions:advanced_summon_item",
+      "shape": "diamond",
+      "x": 6, "y": 0,
+      "description": [
+        "At a smithing table, a netherite upgrade template, an empty Summon Device and a totem of undying make an Advanced Summon Device.",
+        "",
+        "Shift-right-click one of your own tamed pets with it to carry them, with their gear, wherever you go. Use it again to let them out."
+      ],
+      "tasks": [{"type": "item", "item": "zonis_companions:advanced_summon_item"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:name_tag"}
+      ]
+    },
+    {
+      "id": "befriend_amigo",
+      "title": "Befriend an Amigo",
+      "icon": "migamigos:wavelyn_spawn_cookie",
+      "shape": "hexagon",
+      "mods": ["migamigos"],
+      "x": 0, "y": 1.5,
+      "description": [
+        "Amigos roam the wild: Claymore in forests and taiga, Wavelyn in plains and birch forests, Cocogoat in hills and mountains, Pollypounce on beaches, Shybroom in green plains.",
+        "Right-click one and it tells you what it likes (Claymore cooked salmon, Wavelyn cookies, Cocogoat azure bluets, Pollypounce cod, Shybroom cooked chicken).",
+        "Give it its favourite until its health and tolerance are full, then keep giving: each gift after that has a 1 in 4 chance to win it over.",
+        "",
+        "A wild amigo you walk away from can vanish the way monsters do. A befriended one never does."
+      ],
+      "tasks": [{"type": "checkmark", "title": "Befriend an amigo"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 8}
+      ]
+    },
+    {
+      "id": "amigo_backpack",
+      "title": "The Amigo's Backpack",
+      "icon": "migamigos:claymore_spawn_tortilla",
+      "mods": ["migamigos"],
+      "x": 1.5, "y": 1.5,
+      "description": [
+        "Right-click your amigo to open its backpack. Give it armour there, and set how it behaves: follow you or stay, wander or not, attack every hostile or only your targets, defend just you or your whole team.",
+        "",
+        "Amigos level up from the foes they defeat, and every level makes them stronger. Their favourite food heals them when they're hurt."
+      ],
+      "tasks": [{"type": "checkmark", "title": "Open your amigo's backpack"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:name_tag"}
+      ]
+    },
+    {
+      "id": "keepsake",
+      "title": "A Keepsake",
+      "icon": "legionwarex:companion_keepsake",
+      "mods": ["migamigos"],
+      "x": 3, "y": 1.5,
+      "description": [
+        "If your amigo falls, a Keepsake of them comes to you (or waits until you next log in). Their backpack spills where they fell, so go back for it.",
+        "",
+        "After a day's rest (20 minutes of play), use the keepsake on the ground and your amigo comes back at full health, with its name, level and settings."
+      ],
+      "tasks": [{"type": "item", "item": "legionwarex:companion_keepsake"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 4}
+      ]
+    }
+  ]
+}

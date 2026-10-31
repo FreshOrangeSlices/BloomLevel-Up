@@ -1,0 +1,278 @@
+{
+  "id": "dragons",
+  "group": "guides",
+  "title": "Dragons",
+  "subtitle": ["Find a roost, win a dragon's trust and take to the sky."],
+  "icon": "bookofdragons:book_of_dragons",
+  "mods": ["bookofdragons"],
+  "quests": [
+    {
+      "id": "book_of_dragons",
+      "title": "The Book of Dragons",
+      "icon": "bookofdragons:book_of_dragons",
+      "shape": "hexagon",
+      "x": 0, "y": 0,
+      "description": [
+        "Smelt your first iron and a Hooligan Drifter, a wandering Viking trader, starts turning up near you. He trades the Book of Dragons for a single iron ingot.",
+        "",
+        "The Book fills in as you meet dragons: where they live, what they eat and how to win them over. Its Dragon Rider's Manual shows every riding control."
+      ],
+      "tasks": [{"type": "item", "item": "bookofdragons:book_of_dragons"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 5}
+      ]
+    },
+    {
+      "id": "hooligan",
+      "title": "A Hooligan of Your Own",
+      "icon": "bookofdragons:viking_anvil",
+      "shape": "gear",
+      "x": 1.5, "y": 0,
+      "description": [
+        "Craft a Viking Anvil (an iron block over an iron ingot, on three logs) and set it near a villager without a job. They take it as their workstation and become a Hooligan.",
+        "",
+        "Hooligans sell the Book of Dragons too and, as they gain levels, maps to the nearest dragon roost. Right-click a map to find its roost."
+      ],
+      "tasks": [{"type": "item", "item": "bookofdragons:viking_anvil"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:emerald", "count": 12}
+      ]
+    },
+    {
+      "id": "roost",
+      "title": "Find a Roost",
+      "icon": "bookofdragons:cliff_roost_map",
+      "x": 3, "y": 0,
+      "description": [
+        "Roosts are the surest place to meet a dragon. Cliff roosts on peaks and mountains hold Skrills and Night Furies, cave roosts in the hills Gronckles and Whispering Deaths.",
+        "Glade roosts in forests and jungles hold Deadly Nadders, wetland roosts in swamps Hideous Zipplebacks, and barrens roosts in deserts, badlands and savannas Monstrous Nightmares.",
+        "",
+        "A roost's dragon guards the ground around it. Walk in unarmed if you hope to make friends."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:roost_discoverer"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:chicken", "count": 8},
+        {"type": "item", "item": "minecraft:beef", "count": 8}
+      ]
+    },
+    {
+      "id": "first_fact",
+      "title": "Everything We Know",
+      "icon": "minecraft:writable_book",
+      "x": 4.5, "y": 0,
+      "description": [
+        "Watch a dragon for a while and the Book of Dragons writes down what you learn: its habits, its diet, how it treats people.",
+        "",
+        "Not every dragon keeps to a roost. Terrible Terrors run in packs along beaches and coasts, Gronckles nose around shallow caves near ore, and Speed Stingers hunt cold woods at night."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:everything_we_know"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:cod", "count": 8}
+      ]
+    },
+    {
+      "id": "one_kind",
+      "title": "Know One Kind Well",
+      "icon": "minecraft:salmon",
+      "shape": "hexagon",
+      "x": 6, "y": 0,
+      "description": [
+        "Keep studying one kind of dragon until its page in the Book is mostly filled in.",
+        "",
+        "Favourite foods: salmon for the Night Fury, Hideous Zippleback and Speed Stinger, chicken for the Deadly Nadder, mutton for the Gronckle, Skrill and Whispering Death, beef for the Monstrous Nightmare, cod for the Terrible Terror.",
+        "Each also has a treat it prizes and a food it refuses. The Book lists them."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:kill_on_sight"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:spyglass"}
+      ]
+    },
+    {
+      "id": "every_dragon",
+      "title": "Every Dragon We Know Of",
+      "icon": "minecraft:bookshelf",
+      "shape": "diamond",
+      "x": 7.5, "y": 0,
+      "description": [
+        "Fill in most of the page for all nine kinds of dragon.",
+        "",
+        "Some keep strange hours: Hideous Zipplebacks and Speed Stingers come out at night, Skrills ride thunderstorms, Monstrous Nightmares haunt hot lands and lava pools, and Whispering Deaths bore through deep caves below height 0."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:every_dragon_we_know_of"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 10},
+        {"type": "bloom_xp", "tab": "misc", "xp": 600},
+        {"type": "item", "item": "minecraft:diamond", "count": 3}
+      ]
+    },
+    {
+      "id": "asks",
+      "title": "What It Asks",
+      "icon": "minecraft:cod",
+      "x": 0, "y": 1.5,
+      "description": [
+        "Take off your armour, put away weapons and shields, and approach a wild dragon slowly.",
+        "",
+        "It asks for one thing at a time, shown on your screen: to be petted, to share a meal of its favourite food, to rest or walk beside you, to play tag, or for treasure from its hoard. Give it what it asks."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:sworn_you_had_teeth"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:salmon", "count": 8},
+        {"type": "item", "item": "minecraft:mutton", "count": 8}
+      ]
+    },
+    {
+      "id": "bucking",
+      "title": "Ride Out the Bucking",
+      "icon": "minecraft:leather",
+      "x": 1.5, "y": 1.5,
+      "description": [
+        "Near the end, a big dragon turns its back to you: climb on and hold tight while it bucks.",
+        "Press the letter keys it shows (F, G, H, J, K and L by default) until it calms down. Small dragons like the Terrible Terror skip this."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:dragon_rider"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:tropical_fish", "count": 4}
+      ]
+    },
+    {
+      "id": "tamer",
+      "title": "Dragon Tamer",
+      "icon": "bookofdragons:terror_plush",
+      "shape": "hexagon",
+      "x": 3, "y": 1.5,
+      "description": [
+        "Grant every wish and the dragon is yours. A Terrible Terror makes a gentle first friend: no bucking, and a fish keeps it at your heels.",
+        "",
+        "Shift-right-click your dragon to have it stay, follow or roam. Do it holding the Book of Dragons to see its health, food, stamina and temperament instead."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:dragon_tamer"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:saddle"}
+      ]
+    },
+    {
+      "id": "bond",
+      "title": "True Bond",
+      "icon": "minecraft:golden_apple",
+      "x": 4.5, "y": 1.5,
+      "description": [
+        "A tamed dragon still has to grow close to you. Look after it: keep it fed with what it likes and let it rest when it tires. The Book of Dragons shows what it needs.",
+        "",
+        "Its page in the Book shows how your bond is coming along."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:true_bond"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:salmon", "count": 16}
+      ]
+    },
+    {
+      "id": "night_fury",
+      "title": "Lightning and Death",
+      "icon": "bookofdragons:nightfury_scales",
+      "shape": "diamond",
+      "x": 6, "y": 1.5,
+      "description": [
+        "The rarest dragon of all. Night Furies come out at night in cold lands: high above snowy peaks and taiga, on cold sea cliffs, and near cliff roosts left empty.",
+        "",
+        "To win one: approach slowly, defend it, play tag, pet it, share salmon, rest and walk beside it, bring it amethyst or echo shards for its hoard, then ride out its bucking."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:lightning_and_death"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 10},
+        {"type": "bloom_xp", "tab": "misc", "xp": 600},
+        {"type": "item", "item": "minecraft:diamond", "count": 3}
+      ]
+    },
+    {
+      "id": "every_species",
+      "title": "The Soul of a Dragon",
+      "icon": "minecraft:name_tag",
+      "shape": "diamond",
+      "x": 7.5, "y": 1.5,
+      "description": [
+        "Tame one of each of the nine kinds.",
+        "",
+        "The fierce ones (Skrill, Monstrous Nightmare, Whispering Death, Speed Stinger) want you to spar with them, bring them live prey and hunt at their side.",
+        "A Whispering Death wants grooming with a brush, while Skrills and Monstrous Nightmares hate being groomed at all."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:soul_of_a_dragon"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 10},
+        {"type": "bloom_xp", "tab": "misc", "xp": 600},
+        {"type": "item", "item": "minecraft:diamond", "count": 5}
+      ]
+    },
+    {
+      "id": "saddle_up",
+      "title": "Saddle Up",
+      "icon": "minecraft:saddle",
+      "x": 3, "y": 3,
+      "description": [
+        "Use a saddle on your tamed dragon, climb on with an empty hand and jump to take off.",
+        "Steer with the mouse, W and S for faster and slower, Space to beat harder, hold sneak to dive. Fly low over open ground to land.",
+        "",
+        "Use a chest on it to give it a pack, and press G to open its saddle and pack. Small ones like the Terrible Terror perch on your shoulder instead."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:nice_and_slow"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:cooked_beef", "count": 16},
+        {"type": "item", "item": "minecraft:chest"}
+      ]
+    },
+    {
+      "id": "breath",
+      "title": "Not So Fireproof",
+      "icon": "minecraft:fire_charge",
+      "x": 4.5, "y": 3,
+      "description": [
+        "In the saddle, the Primary Ability key (left mouse button by default) breathes fire, fires a bolt or bites, whatever your dragon does best. C uses its own special move.",
+        "",
+        "Breath costs stamina, so let your dragon rest between fights."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:not_so_fireproof"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 100},
+        {"type": "item", "item": "minecraft:cooked_mutton", "count": 12}
+      ]
+    },
+    {
+      "id": "whistle",
+      "title": "Whistle and Staff",
+      "icon": "bookofdragons:dragon_whistle",
+      "x": 3, "y": 4.5,
+      "description": [
+        "Craft a Dragon Whistle (two bones and an iron nugget) and right-click your dragon with it to bind them. Blow it outdoors in the Overworld to call your dragon from far away.",
+        "",
+        "A Rattle-Staff (an iron ingot, an iron nugget, three bones and three sticks) commands every dragon bound to it: shift-right-click a dragon to bind it, click to have them follow or move, hold to make them sit or attack. Dragons obey it even in a temper."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "bookofdragons:i_alone_control"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:salmon", "count": 8}
+      ]
+    }
+  ]
+}

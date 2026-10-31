@@ -1,0 +1,997 @@
+## mod/gottsch/forge/gmm/core/entity/monster/GelatinousCube.class
+public class mod.gottsch.forge.gmm.core.entity.monster.GelatinousCube extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  public mod.gottsch.forge.gmm.core.entity.monster.GelatinousCube(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  public void m_8097_();
+       5: getfield      #68                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #87                 // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+      14: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      17: ldc           #95                 // String size
+      20: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+  public float getSizeScale();
+       1: getfield      #68                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      10: checkcast     #72                 // class java/lang/Float
+  public void setSizeScale(float);
+       1: getfield      #68                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public void m_6210_();
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc           #179                // String SizeScale
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc           #179                // String SizeScale
+      16: ldc           #179                // String SizeScale
+  public void m_8107_();
+      11: getfield      #208                // Field f_19797_:I
+      36: checkcast     #225                // class net/minecraft/core/particles/ParticleOptions
+      40: ldc2_w        #226                // double 0.4d
+      50: ldc2_w        #232                // double 0.02d
+      55: ldc2_w        #226                // double 0.4d
+      61: ldc2_w        #237                // double 0.7099999785423279d
+      64: ldc2_w        #239                // double 0.5899999737739563d
+      67: ldc2_w        #241                // double 0.38999998569488525d
+  protected void m_8099_();
+       5: new           #267                // class net/minecraft/world/entity/ai/goal/FloatGoal
+      21: new           #278                // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+      39: new           #283                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+      56: new           #291                // class mod/gottsch/forge/gmm/core/entity/ai/goal/target/SummonedOwnerTargetGoal
+      72: new           #294                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+      78: anewarray     #296                // class java/lang/Class
+      92: new           #301                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      97: ldc_w         #303                // class net/minecraft/world/entity/player/Player
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #324                // double 24.0d
+      15: ldc2_w        #333                // double 0.15d
+      24: ldc2_w        #338                // double 4.0d
+  protected net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+  protected net.minecraft.sounds.SoundEvent m_5592_();
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       4: ldc_w         #360                // float 0.15f
+  public boolean m_7327_(net.minecraft.world.entity.Entity);
+       1: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #372                // String attackCooldown
+       7: ldc2_w        #373                // double 40.0d
+      10: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      16: getfield      #208                // Field f_19797_:I
+      42: getfield      #208                // Field f_19797_:I
+      54: getfield      #383                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      63: getfield      #383                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      72: ldc_w         #389                // float 0.2f
+      82: instanceof    #391                // class net/minecraft/world/entity/LivingEntity
+      89: checkcast     #391                // class net/minecraft/world/entity/LivingEntity
+       1: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #402                // String engulf
+       8: invokevirtual #406                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+      29: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      32: ldc_w         #420                // String holdDuration
+      35: ldc2_w        #421                // double 20.0d
+      38: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      48: new           #424                // class net/minecraft/world/effect/MobEffectInstance
+      52: getstatic     #429                // Field mod/gottsch/forge/gmm/core/effect/GMMMobEffects.PARALYZED:Lnet/minecraftforge/registries/RegistryObject;
+      58: checkcast     #431                // class net/minecraft/world/effect/MobEffect
+      66: invokespecial #434                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+      70: invokevirtual #438                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+      75: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      78: ldc_w         #440                // String slownessDuration
+      81: ldc2_w        #441                // double 100.0d
+      84: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      90: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      93: ldc_w         #444                // String slownessAmplifier
+      97: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     104: new           #424                // class net/minecraft/world/effect/MobEffectInstance
+     108: getstatic     #450                // Field net/minecraft/world/effect/MobEffects.f_19597_:Lnet/minecraft/world/effect/MobEffect;
+     114: invokespecial #453                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     118: invokevirtual #438                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+     123: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+     126: ldc_w         #455                // String acidDuration
+     129: ldc2_w        #456                // double 60.0d
+     132: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     139: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+     142: ldc_w         #459                // String acidAmplifier
+     146: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     153: new           #424                // class net/minecraft/world/effect/MobEffectInstance
+     157: getstatic     #462                // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+     164: invokespecial #453                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     168: invokevirtual #438                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+       1: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #467                // String corrodeGear
+       8: invokevirtual #406                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+      16: instanceof    #303                // class net/minecraft/world/entity/player/Player
+      23: checkcast     #303                // class net/minecraft/world/entity/player/Player
+      38: new           #478                // class java/util/ArrayList
+     132: getfield      #383                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     151: checkcast     #482                // class net/minecraft/world/entity/EquipmentSlot
+     156: invokestatic  #93                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+     159: ldc_w         #529                // String corrosion
+     162: ldc2_w        #530                // double 8.0d
+     165: invokevirtual #101                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       0: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/GelatinousCube
+## mod/gottsch/forge/gmm/core/entity/monster/Shadow.class
+public class mod.gottsch.forge.gmm.core.entity.monster.Shadow extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  public static java.util.function.Supplier<net.minecraft.sounds.SoundEvent> ambientSound;
+  public mod.gottsch.forge.gmm.core.entity.monster.Shadow(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  protected void m_8099_();
+       5: new           #48                 // class net/minecraft/world/entity/ai/goal/RestrictSunGoal
+      21: new           #59                 // class net/minecraft/world/entity/ai/goal/FleeSunGoal
+      38: new           #7                  // class mod/gottsch/forge/gmm/core/entity/monster/Shadow$ShadowFleeGoal
+      43: ldc           #64                 // class net/minecraft/world/entity/player/Player
+      45: ldc           #65                 // float 6.0f
+      47: ldc2_w        #66                 // double 1.2d
+      50: ldc2_w        #66                 // double 1.2d
+      64: new           #72                 // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+      83: new           #77                 // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+     101: new           #80                 // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+     106: ldc           #64                 // class net/minecraft/world/entity/player/Player
+     108: ldc           #81                 // float 8.0f
+     122: new           #86                 // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     138: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     143: ldc           #64                 // class net/minecraft/world/entity/player/Player
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #111                // double 2.0d
+      21: ldc2_w        #127                // double 0.5d
+      30: ldc2_w        #132                // double 0.2800000011920929d
+  public net.minecraft.world.entity.MobType m_6336_();
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #145                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  protected void m_213945_(net.minecraft.util.RandomSource, net.minecraft.world.DifficultyInstance);
+      10: ldc           #181                // float 0.75f
+      30: getfield      #206                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      58: checkcast     #239                // class net/minecraft/world/item/ItemStack
+  public void m_8107_();
+  public boolean m_7327_(net.minecraft.world.entity.Entity);
+       9: instanceof    #64                 // class net/minecraft/world/entity/player/Player
+      16: invokestatic  #275                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      21: checkcast     #64                 // class net/minecraft/world/entity/player/Player
+      49: getfield      #206                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      53: ldc_w         #299                // String blindnessProbability
+      56: ldc2_w        #300                // double 75.0d
+      59: invokevirtual #305                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      62: invokestatic  #311                // Method mod/gottsch/forge/gottschcore/random/RandomHelper.checkProbability:(Lnet/minecraft/util/RandomSource;D)Z
+      69: ldc_w         #313                // String blindnessDuration
+      72: ldc2_w        #314                // double 60.0d
+      75: invokevirtual #305                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      87: checkcast     #317                // class net/minecraft/world/entity/LivingEntity
+      90: new           #319                // class net/minecraft/world/effect/MobEffectInstance
+      94: getstatic     #325                // Field net/minecraft/world/effect/MobEffects.f_19610_:Lnet/minecraft/world/effect/MobEffect;
+     100: invokespecial #328                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     104: invokevirtual #332                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+     109: getfield      #206                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     113: ldc_w         #334                // String weaknessProbability
+     116: ldc2_w        #335                // double 20.0d
+     119: invokevirtual #305                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     122: invokestatic  #311                // Method mod/gottsch/forge/gottschcore/random/RandomHelper.checkProbability:(Lnet/minecraft/util/RandomSource;D)Z
+     129: ldc_w         #338                // String weaknessDuration
+     132: ldc2_w        #339                // double 100.0d
+     135: invokevirtual #305                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     147: checkcast     #317                // class net/minecraft/world/entity/LivingEntity
+     150: new           #319                // class net/minecraft/world/effect/MobEffectInstance
+     154: getstatic     #343                // Field net/minecraft/world/effect/MobEffects.f_19613_:Lnet/minecraft/world/effect/MobEffect;
+     160: invokespecial #328                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     164: invokevirtual #332                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+      25: instanceof    #64                 // class net/minecraft/world/entity/player/Player
+      33: checkcast     #64                 // class net/minecraft/world/entity/player/Player
+     120: instanceof    #401                // class net/minecraft/world/item/TieredItem
+     128: checkcast     #401                // class net/minecraft/world/item/TieredItem
+     149: ldc_w         #412                // float -3.0f
+     166: ldc_w         #418                // float -2.0f
+     183: ldc_w         #422                // float -1.0f
+     192: ldc_w         #423                // float 4.0f
+     202: ldc_w         #437                // String strike with [{}] -> new amount {}
+       1: getstatic     #343                // Field net/minecraft/world/effect/MobEffects.f_19613_:Lnet/minecraft/world/effect/MobEffect;
+       4: invokevirtual #476                // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      10: ldc_w         #423                // float 4.0f
+      14: getstatic     #343                // Field net/minecraft/world/effect/MobEffects.f_19613_:Lnet/minecraft/world/effect/MobEffect;
+      17: invokevirtual #480                // Method net/minecraft/world/entity/player/Player.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      20: invokevirtual #483                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+      14: checkcast     #495                // class net/minecraft/sounds/SoundEvent
+       0: new           #239                // class net/minecraft/world/item/ItemStack
+       6: checkcast     #495                // class net/minecraft/sounds/SoundEvent
+## mod/gottsch/forge/gmm/core/entity/monster/Shadowlord.class
+public class mod.gottsch.forge.gmm.core.entity.monster.Shadowlord extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  protected static final double MELEE_DISTANCE_SQUARED = 16.0d;
+  protected static final double SUMMON_DISTANCE_SQUARED = 1024.0d;
+  protected static final double SHOOT_DISTANCE_SQUARED = 4096.0d;
+  protected static final int SUMMON_CHARGE_TIME = 2400;
+  public static mod.gottsch.forge.gmm.core.entity.ai.goal.CastSpellGoal$SpellLauncher spellCaster;
+  public static mod.gottsch.forge.gottschcore.random.WeightedCollection<java.lang.Double, net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.Mob>> summonMobs;
+  public static net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.Mob> summonDaemon;
+  public static java.util.function.Supplier<net.minecraft.sounds.SoundEvent> ambientSound;
+  public static java.util.function.Supplier<net.minecraft.sounds.SoundEvent> stepSound;
+  public static java.util.function.Supplier<net.minecraft.world.item.Item> weapon;
+  public mod.gottsch.forge.gmm.core.entity.monster.Shadowlord(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  protected void m_8099_();
+       1: invokestatic  #78                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      10: new           #84                 // class net/minecraft/world/entity/ai/goal/RestrictSunGoal
+      26: new           #95                 // class net/minecraft/world/entity/ai/goal/FleeSunGoal
+      31: ldc2_w        #96                 // double 1.1d
+      51: new           #9                  // class mod/gottsch/forge/gmm/core/entity/ai/goal/CastSpellGoal
+      57: ldc           #104                // String harmChargeTime
+      59: ldc2_w        #105                // double 50.0d
+      62: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      66: ldc2_w        #31                 // double 16.0d
+      78: getstatic     #117                // Field summonMobs:Lmod/gottsch/forge/gottschcore/random/WeightedCollection;
+      90: new           #119                // class mod/gottsch/forge/gmm/core/entity/ai/goal/WeightedChanceSummonGoal
+      96: ldc           #121                // String summonCooldownTime
+      98: ldc2_w        #122                // double 1200.0d
+     101: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     105: ldc2_w        #124                // double 100.0d
+     108: getstatic     #117                // Field summonMobs:Lmod/gottsch/forge/gottschcore/random/WeightedCollection;
+     112: ldc           #127                // String minSummonSpawns
+     115: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     120: ldc           #129                // String maxSummonSpawns
+     122: ldc2_w        #130                // double 2.0d
+     125: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     129: invokespecial #134                // Method mod/gottsch/forge/gmm/core/entity/ai/goal/WeightedChanceSummonGoal."<init>":(Lnet/minecraft/world/entity/Mob;IDLmod/gottsch/forge/gottschcore/random/WeightedCollection;II)V
+     147: new           #119                // class mod/gottsch/forge/gmm/core/entity/ai/goal/WeightedChanceSummonGoal
+     153: ldc           #138                // String summonDaemonCooldownTime
+     155: ldc2_w        #139                // double 2400.0d
+     158: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     163: ldc           #142                // String summonDaemonProbability
+     165: ldc2_w        #143                // double 25.0d
+     168: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     187: new           #149                // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+     192: ldc2_w        #96                 // double 1.1d
+     208: new           #154                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+     226: new           #157                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+     231: ldc           #159                // class net/minecraft/world/entity/player/Player
+     233: ldc           #160                // float 16.0f
+     247: new           #165                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     263: new           #173                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     269: anewarray     #175                // class java/lang/Class
+     283: new           #180                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     288: ldc           #159                // class net/minecraft/world/entity/player/Player
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #199                // double 8.0d
+      15: ldc2_w        #105                // double 50.0d
+      24: ldc2_w        #211                // double 10.0d
+      40: ldc2_w        #219                // double 0.8d
+      49: ldc2_w        #224                // double 0.20000000298023224d
+      58: ldc2_w        #229                // double 80.0d
+  public boolean m_8023_();
+       1: invokestatic  #78                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #234                // String despawn
+       7: invokevirtual #238                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+  public net.minecraft.world.entity.MobType m_6336_();
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #250                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  protected void m_213945_(net.minecraft.util.RandomSource, net.minecraft.world.DifficultyInstance);
+      10: ldc_w         #286                // float 0.75f
+      24: new           #290                // class net/minecraft/world/item/ItemStack
+      36: checkcast     #297                // class net/minecraft/world/level/ItemLike
+  public void drain(net.minecraft.world.entity.LivingEntity, float);
+      10: invokestatic  #78                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      13: ldc_w         #310                // String drainCooldownTime
+      16: ldc2_w        #311                // double 400.0d
+      19: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      62: getfield      #342                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      70: ldc2_w        #349                // double 0.02d
+      77: getfield      #342                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      85: ldc2_w        #349                // double 0.02d
+      92: getfield      #342                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     100: ldc2_w        #349                // double 0.02d
+     110: checkcast     #352                // class net/minecraft/server/level/ServerLevel
+     124: ldc2_w        #368                // double 0.5d
+     144: ldc2_w        #368                // double 0.5d
+     155: ldc2_w        #376                // double 0.15000000596046448d
+  public void m_8107_();
+      25: ldc2_w        #368                // double 0.5d
+      36: ldc2_w        #368                // double 0.5d
+     123: ldc2_w        #130                // double 2.0d
+     143: ldc2_w        #130                // double 2.0d
+     169: ldc2_w        #433                // double 360.0d
+     176: ldc2_w        #130                // double 2.0d
+     198: ldc           #159                // class net/minecraft/world/entity/player/Player
+     235: checkcast     #159                // class net/minecraft/world/entity/player/Player
+     271: new           #490                // class net/minecraft/world/effect/MobEffectInstance
+     275: getstatic     #496                // Field net/minecraft/world/effect/MobEffects.f_19610_:Lnet/minecraft/world/effect/MobEffect;
+     279: invokestatic  #78                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+     282: ldc_w         #498                // String blindnessDuration
+     285: ldc2_w        #499                // double 40.0d
+     288: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     293: invokespecial #503                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     297: invokevirtual #507                // Method net/minecraft/world/entity/player/Player.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+  public boolean m_7327_(net.minecraft.world.entity.Entity);
+       9: instanceof    #159                // class net/minecraft/world/entity/player/Player
+      16: getfield      #342                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      20: invokestatic  #78                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      23: ldc_w         #541                // String poisonProbability
+      26: ldc2_w        #143                // double 25.0d
+      29: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      32: invokestatic  #547                // Method mod/gottsch/forge/gottschcore/random/RandomHelper.checkProbability:(Lnet/minecraft/util/RandomSource;D)Z
+      39: checkcast     #549                // class net/minecraft/world/entity/LivingEntity
+      42: new           #490                // class net/minecraft/world/effect/MobEffectInstance
+      46: getstatic     #552                // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+      50: invokestatic  #78                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      53: ldc_w         #554                // String poisonDuration
+      56: ldc2_w        #555                // double 200.0d
+      59: invokevirtual #112                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      64: invokespecial #503                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      68: invokevirtual #557                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+      27: instanceof    #159                // class net/minecraft/world/entity/player/Player
+      35: checkcast     #159                // class net/minecraft/world/entity/player/Player
+      99: instanceof    #597                // class net/minecraft/world/item/TieredItem
+     107: checkcast     #597                // class net/minecraft/world/item/TieredItem
+     192: ldc_w         #622                // float 4.0f
+     202: ldc_w         #632                // String new strike amount -> {}
+       1: getstatic     #658                // Field net/minecraft/world/effect/MobEffects.f_19613_:Lnet/minecraft/world/effect/MobEffect;
+       4: invokevirtual #662                // Method net/minecraft/world/entity/player/Player.m_21023_:(Lnet/minecraft/world/effect/MobEffect;)Z
+      10: ldc_w         #622                // float 4.0f
+      14: getstatic     #658                // Field net/minecraft/world/effect/MobEffects.f_19613_:Lnet/minecraft/world/effect/MobEffect;
+      17: invokevirtual #666                // Method net/minecraft/world/entity/player/Player.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      20: invokevirtual #669                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+      14: checkcast     #676                // class net/minecraft/sounds/SoundEvent
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       5: ldc_w         #682                // float 0.15f
+  protected net.minecraft.sounds.SoundEvent getStepSound();
+      14: checkcast     #676                // class net/minecraft/sounds/SoundEvent
+       6: checkcast     #676                // class net/minecraft/sounds/SoundEvent
+       6: checkcast     #676                // class net/minecraft/sounds/SoundEvent
+## mod/gottsch/forge/gmm/core/entity/monster/gargoyle/Gargoyle.class
+public class mod.gottsch.forge.gmm.core.entity.monster.gargoyle.Gargoyle extends mod.gottsch.forge.gmm.core.entity.monster.WingedHumanoid {
+  public static java.util.function.Supplier<net.minecraft.sounds.SoundEvent> ambientSound;
+  public mod.gottsch.forge.gmm.core.entity.monster.gargoyle.Gargoyle(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  protected void m_8099_();
+       9: new           #40                 // class mod/gottsch/forge/gmm/core/entity/ai/goal/volant/VolantCombatGoal
+      14: ldc2_w        #41                 // double 2.5d
+      17: ldc2_w        #43                 // double 6.0d
+      21: ldc2_w        #45                 // double 1.2d
+      35: new           #57                 // class mod/gottsch/forge/gmm/core/entity/ai/goal/volant/VolantLandGoal
+      40: ldc2_w        #58                 // double 0.8d
+      55: new           #64                 // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+      73: new           #69                 // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+      78: ldc           #71                 // class net/minecraft/world/entity/player/Player
+      80: ldc           #72                 // float 8.0f
+      94: new           #77                 // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     110: new           #85                 // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     116: anewarray     #87                 // class java/lang/Class
+     130: new           #92                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     135: ldc           #71                 // class net/minecraft/world/entity/player/Player
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #109                // double 4.0d
+      15: ldc2_w        #109                // double 4.0d
+      24: ldc2_w        #121                // double 0.1d
+      33: ldc2_w        #126                // double 25.0d
+      42: ldc2_w        #131                // double 0.24d
+      51: ldc2_w        #131                // double 0.24d
+      60: ldc2_w        #139                // double 50.0d
+  public boolean m_7301_(net.minecraft.world.effect.MobEffectInstance);
+       1: invokevirtual #148                // Method net/minecraft/world/effect/MobEffectInstance.m_19544_:()Lnet/minecraft/world/effect/MobEffect;
+       4: getstatic     #154                // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+      13: invokevirtual #148                // Method net/minecraft/world/effect/MobEffectInstance.m_19544_:()Lnet/minecraft/world/effect/MobEffect;
+      16: getstatic     #157                // Field net/minecraft/world/effect/MobEffects.f_19597_:Lnet/minecraft/world/effect/MobEffect;
+      23: invokevirtual #161                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+      34: invokespecial #163                // Method mod/gottsch/forge/gmm/core/entity/monster/WingedHumanoid.m_7301_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+  public int m_8100_();
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+      14: checkcast     #185                // class net/minecraft/sounds/SoundEvent
+  protected net.minecraft.sounds.SoundEvent getStepSound();
+  public net.minecraft.world.entity.MobType m_6336_();
+  protected float m_6431_(net.minecraft.world.entity.Pose, net.minecraft.world.entity.EntityDimensions);
+       0: ldc           #198                // float 1.74f
+       6: checkcast     #185                // class net/minecraft/sounds/SoundEvent
+## mod/gottsch/forge/gmm/core/entity/monster/ghoul/AbstractGhoul.class
+public abstract class mod.gottsch.forge.gmm.core.entity.monster.ghoul.AbstractGhoul extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster implements mod.gottsch.forge.gmm.core.entity.monster.ghoul.IGhoul {
+  public static final int INVENTORY_MAX_SIZE = 5;
+  public static final java.lang.String INVENTORY_TAG = "mobInventory";
+  protected mod.gottsch.forge.gmm.core.entity.monster.ghoul.AbstractGhoul(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+       7: new           #56                 // class net/minecraftforge/items/ItemStackHandler
+      35: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      40: ldc           #96                 // class net/minecraft/world/entity/animal/Chicken
+      50: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      55: ldc           #103                // class net/minecraft/world/entity/animal/Cow
+      65: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      70: ldc           #107                // class net/minecraft/world/entity/animal/horse/Horse
+      80: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      85: ldc           #111                // class net/minecraft/world/entity/animal/Pig
+      95: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     100: ldc           #115                // class net/minecraft/world/entity/animal/Sheep
+     110: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     115: ldc           #119                // class net/minecraft/world/entity/animal/Turtle
+  public net.minecraft.world.entity.MobType m_6336_();
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+  protected net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+  protected net.minecraft.sounds.SoundEvent m_5592_();
+  protected net.minecraft.sounds.SoundEvent getStepSound();
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       5: ldc           #172                // float 0.15f
+  protected void m_8099_();
+       5: new           #187                // class net/minecraft/world/entity/ai/goal/RestrictSunGoal
+      21: new           #198                // class net/minecraft/world/entity/ai/goal/FleeSunGoal
+      38: new           #203                // class mod/gottsch/forge/gmm/core/entity/ai/goal/ghoul/GhoulHealGoal
+      54: new           #208                // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+      73: new           #213                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+      91: new           #216                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+      96: ldc           #218                // class net/minecraft/world/entity/player/Player
+      98: ldc           #219                // float 8.0f
+     112: new           #224                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     128: new           #232                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     134: anewarray     #234                // class java/lang/Class
+     148: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     153: ldc           #218                // class net/minecraft/world/entity/player/Player
+     167: new           #94                 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     172: ldc           #239                // class net/minecraft/world/entity/npc/Villager
+  public void reassessHuntingGoal();
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #260                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+      22: invokestatic  #275                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/resources/ResourceLocation;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      25: ldc_w         #276                // String canOpenDoors
+      29: invokevirtual #282                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+      46: checkcast     #293                // class net/minecraft/world/entity/ai/navigation/GroundPathNavigation
+      58: new           #298                // class net/minecraft/world/entity/ai/goal/OpenDoorGoal
+      75: getfield      #305                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      83: ldc2_w        #312                // double 1.5d
+     109: new           #11                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+     113: ldc_w         #331                // String random ghoul-spawn bonus
+     128: getfield      #305                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     139: ldc2_w        #348                // double 0.05000000074505806d
+     154: new           #11                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+     158: ldc_w         #331                // String random ghoul-spawn bonus
+     162: getfield      #305                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     170: ldc2_w        #353                // double 3.0d
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc           #34                 // String mobInventory
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc           #34                 // String mobInventory
+      19: ldc           #34                 // String mobInventory
+  public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T>, net.minecraft.core.Direction);
+  public void invalidateCaps();
+  public boolean m_7301_(net.minecraft.world.effect.MobEffectInstance);
+       1: invokevirtual #428                // Method net/minecraft/world/effect/MobEffectInstance.m_19544_:()Lnet/minecraft/world/effect/MobEffect;
+       4: getstatic     #434                // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+      11: invokevirtual #428                // Method net/minecraft/world/effect/MobEffectInstance.m_19544_:()Lnet/minecraft/world/effect/MobEffect;
+      14: getstatic     #437                // Field net/minecraft/world/effect/MobEffects.f_19615_:Lnet/minecraft/world/effect/MobEffect;
+      24: invokespecial #439                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_7301_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  protected void m_6668_(net.minecraft.world.damagesource.DamageSource);
+  public boolean m_7243_(net.minecraft.world.item.ItemStack);
+  public net.minecraft.world.item.ItemStack m_255207_(net.minecraft.world.item.ItemStack);
+  public net.minecraftforge.items.ItemStackHandler getInventory();
+  public int getOnFireDuration();
+  public boolean burnsInSun();
+  public void m_8107_();
+  protected void m_7581_(net.minecraft.world.entity.item.ItemEntity);
+  public java.util.OptionalInt getFoodInventory();
+  public float getHealAmount();
+       1: invokestatic  #558                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #560                // String healAmount
+       7: ldc2_w        #561                // double 4.0d
+      10: invokevirtual #566                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+  public int getInventoryMaxSize();
+  public boolean isInventoryFull();
+  public java.util.OptionalInt getFirstEmptySlot();
+  public boolean canOpenDoors();
+  public void setCanOpenDoors(boolean);
+## mod/gottsch/forge/gmm/core/entity/monster/plant/Shrieker.class
+public class mod.gottsch.forge.gmm.core.entity.monster.plant.Shrieker extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  public mod.gottsch.forge.gmm.core.entity.monster.plant.Shrieker(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  public void m_8097_();
+       5: getfield      #74                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      19: getfield      #74                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #100                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #18                 // double 8.0d
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #145                // String alertRange
+       6: ldc2_w        #21                 // double 6.0d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #153                // String broadcastRange
+       6: ldc2_w        #24                 // double 16.0d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+  private int alertCooldownTicksConfig();
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #156                // String alertCooldownTicks
+       6: ldc2_w        #157                // double 200.0d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #160                // String maxAlerts
+       6: ldc2_w        #161                // double -1.0d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #164                // String swayDurationTicks
+       6: ldc2_w        #165                // double 40.0d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #168                // String darknessSeconds
+       6: ldc2_w        #169                // double 5.0d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #172                // String darknessOpacity
+       6: ldc2_w        #38                 // double 0.92d
+       9: invokevirtual #151                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #144                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #175                // String alertsAllies
+       7: invokevirtual #179                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+  public boolean isAlerting();
+       1: getfield      #74                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      10: checkcast     #78                 // class java/lang/Boolean
+       1: getfield      #74                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public float getSwayIntensity();
+       1: getfield      #74                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      10: checkcast     #92                 // class java/lang/Float
+       1: getfield      #74                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public void m_8119_();
+      81: ldc           #223                // float 15.0f
+     106: getfield      #228                // Field f_19797_:I
+      13: invokevirtual #267                // Method alertCooldownTicksConfig:()I
+      72: ldc2_w        #291                // double 100.0d
+      88: new           #304                // class net/minecraft/world/effect/MobEffectInstance
+      92: getstatic     #310                // Field mod/gottsch/forge/gmm/core/effect/GMMMobEffects.SHRIEKER_DARKNESS:Lnet/minecraftforge/registries/RegistryObject;
+      98: checkcast     #317                // class net/minecraft/world/effect/MobEffect
+     109: invokespecial #322                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     112: invokevirtual #326                // Method net/minecraft/world/entity/player/Player.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     120: ldc_w         #333                // float 4.0f
+  public void m_8107_();
+      36: ldc2_w        #351                // double 0.7d
+      43: ldc2_w        #351                // double 0.7d
+      50: getfield      #363                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      58: ldc2_w        #369                // double 0.5d
+      64: ldc2_w        #351                // double 0.7d
+      71: ldc2_w        #374                // double 0.01d
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc           #50                 // String AlertCount
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc           #50                 // String AlertCount
+      16: ldc           #50                 // String AlertCount
+       0: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/plant/Shrieker
+      11: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/plant/Shrieker
+## mod/gottsch/forge/gmm/core/entity/monster/plant/VioletFungus.class
+public class mod.gottsch.forge.gmm.core.entity.monster.plant.VioletFungus extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  public mod.gottsch.forge.gmm.core.entity.monster.plant.VioletFungus(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  public void m_8097_();
+       5: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      19: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #87                 // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #13                 // double 14.0d
+      22: ldc2_w        #16                 // double 3.0d
+       1: invokestatic  #131                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #132                // String lashRange
+       6: ldc2_w        #16                 // double 3.0d
+       9: invokevirtual #138                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+  private int lashCooldownTicksConfig();
+       1: invokestatic  #131                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #141                // String lashCooldownTicks
+       6: ldc2_w        #142                // double 30.0d
+       9: invokevirtual #138                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #131                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #145                // String witherDurationTicks
+       6: ldc2_w        #146                // double 100.0d
+       9: invokevirtual #138                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #131                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #149                // String maxWitherStacks
+       6: ldc2_w        #150                // double 2.0d
+       9: invokevirtual #138                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #131                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #154                // String appliesWither
+       7: invokevirtual #158                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+  public float getSwayIntensity();
+       1: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      10: checkcast     #79                 // class java/lang/Float
+       1: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public void m_8119_();
+      37: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+     106: invokevirtual #217                // Method lashCooldownTicksConfig:()I
+       1: getfield      #234                // Field f_19797_:I
+     107: ldc           #241                // float 15.0f
+  public boolean m_7327_(net.minecraft.world.entity.Entity);
+      11: instanceof    #245                // class net/minecraft/world/entity/LivingEntity
+      18: checkcast     #245                // class net/minecraft/world/entity/LivingEntity
+      35: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      61: ldc_w         #263                // float 0.7f
+       1: getstatic     #278                // Field mod/gottsch/forge/gmm/core/effect/GMMMobEffects.WITHERED:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #285                // class net/minecraft/world/effect/MobEffect
+      10: invokevirtual #289                // Method net/minecraft/world/entity/LivingEntity.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      29: invokevirtual #296                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+      39: new           #291                // class net/minecraft/world/effect/MobEffectInstance
+      43: getstatic     #278                // Field mod/gottsch/forge/gmm/core/effect/GMMMobEffects.WITHERED:Lnet/minecraftforge/registries/RegistryObject;
+      49: checkcast     #285                // class net/minecraft/world/effect/MobEffect
+      60: invokespecial #304                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+      64: invokevirtual #308                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+  public void m_8107_();
+      16: getfield      #61                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      25: checkcast     #65                 // class java/lang/Integer
+      61: ldc2_w        #329                // double 0.4d
+      99: ldc2_w        #340                // double 0.3d
+     102: ldc2_w        #342                // double 3.141592653589793d
+     126: checkcast     #356                // class net/minecraft/core/particles/ParticleOptions
+     148: getfield      #363                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     156: ldc2_w        #369                // double 0.5d
+     183: getfield      #363                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     191: ldc2_w        #369                // double 0.5d
+     218: getfield      #363                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     226: ldc2_w        #369                // double 0.5d
+     234: ldc2_w        #377                // double 0.35d
+     237: ldc2_w        #379                // double 0.75d
+     240: ldc2_w        #340                // double 0.3d
+       0: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/plant/VioletFungus
+      11: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/plant/VioletFungus
+## mod/gottsch/forge/gmm/core/entity/monster/skeleton/FrostSkeleton.class
+public class mod.gottsch.forge.gmm.core.entity.monster.skeleton.FrostSkeleton extends mod.gottsch.forge.gmm.core.entity.monster.skeleton.BowSkeleton {
+  public mod.gottsch.forge.gmm.core.entity.monster.skeleton.FrostSkeleton(net.minecraft.world.entity.EntityType<? extends mod.gottsch.forge.gmm.core.entity.monster.skeleton.BowSkeleton>, net.minecraft.world.level.Level);
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #33                 // double 20.0d
+      15: ldc2_w        #42                 // double 2.0d
+  protected void m_213945_(net.minecraft.util.RandomSource, net.minecraft.world.DifficultyInstance);
+       3: invokestatic  #51                 // Method mod/gottsch/forge/gottschcore/random/RandomHelper.checkProbability:(Lnet/minecraft/util/RandomSource;I)Z
+      13: new           #59                 // class net/minecraft/world/item/ItemStack
+  protected net.minecraft.world.entity.projectile.AbstractArrow getArrow(net.minecraft.world.item.ItemStack, float);
+       8: instanceof    #82                 // class net/minecraft/world/entity/projectile/Arrow
+      15: checkcast     #82                 // class net/minecraft/world/entity/projectile/Arrow
+      22: new           #84                 // class net/minecraft/world/effect/MobEffectInstance
+      26: getstatic     #90                 // Field net/minecraft/world/effect/MobEffects.f_19597_:Lnet/minecraft/world/effect/MobEffect;
+      33: invokespecial #93                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      36: invokevirtual #97                 // Method net/minecraft/world/entity/projectile/Arrow.m_36870_:(Lnet/minecraft/world/effect/MobEffectInstance;)V
+  public boolean m_7327_(net.minecraft.world.entity.Entity);
+      11: instanceof    #113                // class net/minecraft/world/entity/LivingEntity
+      18: checkcast     #113                // class net/minecraft/world/entity/LivingEntity
+      23: new           #84                 // class net/minecraft/world/effect/MobEffectInstance
+      27: getstatic     #90                 // Field net/minecraft/world/effect/MobEffects.f_19597_:Lnet/minecraft/world/effect/MobEffect;
+      33: invokespecial #93                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      36: invokevirtual #117                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public boolean m_142079_();
+  public void m_8119_();
+## mod/gottsch/forge/gmm/core/entity/monster/skeleton/SkeletonChampion.class
+public class mod.gottsch.forge.gmm.core.entity.monster.skeleton.SkeletonChampion extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  public mod.gottsch.forge.gmm.core.entity.monster.skeleton.SkeletonChampion(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  protected void m_8099_();
+       1: invokestatic  #65                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      10: new           #71                 // class net/minecraft/world/entity/ai/goal/FloatGoal
+      26: new           #82                 // class net/minecraft/world/entity/ai/goal/RestrictSunGoal
+      42: new           #87                 // class net/minecraft/world/entity/ai/goal/FleeSunGoal
+      55: ldc           #92                 // String avoidCrowd
+      58: invokevirtual #98                 // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+      69: new           #100                // class mod/gottsch/forge/gmm/core/entity/ai/goal/AvoidCrowdGoal
+      75: ldc           #102                // String crowdRadius
+      77: ldc2_w        #34                 // double 4.0d
+      80: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      84: ldc           #108                // String minCrowd
+      86: ldc2_w        #109                // double 2.0d
+      89: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      94: ldc           #112                // String spacingMaxTargetDistance
+      96: ldc2_w        #39                 // double 12.0d
+      99: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     102: ldc2_w        #113                // double 1.1d
+     116: new           #119                // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+     130: ldc           #124                // String shieldBlocking
+     133: invokevirtual #98                 // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+     144: new           #126                // class mod/gottsch/forge/gmm/core/entity/ai/goal/RaiseShieldGoal
+     150: ldc           #128                // String shieldBlockRange
+     152: ldc2_w        #34                 // double 4.0d
+     155: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     159: ldc           #130                // String shieldBlockCooldown
+     161: ldc2_w        #131                // double 40.0d
+     164: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     169: ldc           #134                // String shieldMaxBlockTicks
+     171: ldc2_w        #135                // double 100.0d
+     174: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     190: new           #141                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+     208: new           #144                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+     213: ldc           #146                // class net/minecraft/world/entity/player/Player
+     215: ldc           #147                // float 8.0f
+     229: new           #152                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     245: new           #158                // class mod/gottsch/forge/gmm/core/entity/ai/goal/target/SummonedOwnerTargetGoal
+     261: new           #161                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     267: anewarray     #163                // class java/lang/Class
+     281: new           #168                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     286: ldc           #146                // class net/minecraft/world/entity/player/Player
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #131                // double 40.0d
+      15: ldc2_w        #198                // double 0.25d
+      24: ldc2_w        #203                // double 6.0d
+      33: ldc2_w        #208                // double 15.0d
+      49: ldc2_w        #216                // double 0.3d
+       1: invokestatic  #65                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #220                // String rallyRange
+       6: ldc2_w        #26                 // double 8.0d
+       9: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #65                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #223                // String rallyInterval
+       6: ldc2_w        #224                // double 200.0d
+       9: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #65                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #227                // String rallyDuration
+       6: ldc2_w        #228                // double 240.0d
+       9: invokevirtual #106                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #65                 // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #233                // String rally
+       7: invokevirtual #98                 // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #237                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  protected void m_213945_(net.minecraft.util.RandomSource, net.minecraft.world.DifficultyInstance);
+      17: getfield      #282                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      43: ldc_w         #307                // float 0.15f
+      51: new           #309                // class net/minecraft/world/item/ItemStack
+      59: checkcast     #314                // class net/minecraft/world/level/ItemLike
+      85: getfield      #282                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+     113: ldc_w         #307                // float 0.15f
+     121: new           #309                // class net/minecraft/world/item/ItemStack
+     130: checkcast     #314                // class net/minecraft/world/level/ItemLike
+  protected void m_8024_();
+      12: getfield      #340                // Field f_19797_:I
+      33: instanceof    #354                // class net/minecraft/server/level/ServerLevel
+      40: checkcast     #354                // class net/minecraft/server/level/ServerLevel
+       1: ldc_w         #361                // class net/minecraft/world/entity/Mob
+      65: checkcast     #361                // class net/minecraft/world/entity/Mob
+      72: new           #417                // class net/minecraft/world/effect/MobEffectInstance
+      76: getstatic     #423                // Field net/minecraft/world/effect/MobEffects.f_19600_:Lnet/minecraft/world/effect/MobEffect;
+      84: invokespecial #426                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+      88: invokevirtual #430                // Method net/minecraft/world/entity/Mob.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+      94: new           #417                // class net/minecraft/world/effect/MobEffectInstance
+      98: getstatic     #433                // Field net/minecraft/world/effect/MobEffects.f_19596_:Lnet/minecraft/world/effect/MobEffect;
+     106: invokespecial #426                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+     110: invokevirtual #430                // Method net/minecraft/world/entity/Mob.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+     125: ldc2_w        #443                // double 0.6d
+     138: ldc2_w        #198                // double 0.25d
+     141: ldc2_w        #452                // double 0.4d
+     144: ldc2_w        #198                // double 0.25d
+     147: ldc2_w        #454                // double 0.05d
+     176: ldc2_w        #452                // double 0.4d
+     179: ldc2_w        #443                // double 0.6d
+     182: ldc2_w        #452                // double 0.4d
+     185: ldc2_w        #463                // double 0.15d
+  public net.minecraft.world.entity.MobType m_6336_();
+  public void m_8107_();
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       4: ldc_w         #307                // float 0.15f
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+  protected net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+  protected net.minecraft.sounds.SoundEvent m_5592_();
+  protected float m_6431_(net.minecraft.world.entity.Pose, net.minecraft.world.entity.EntityDimensions);
+       0: ldc_w         #523                // float 2.088f
+## mod/gottsch/forge/gmm/core/entity/monster/zombie/Bloater.class
+public class mod.gottsch.forge.gmm.core.entity.monster.zombie.Bloater extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster {
+  public static java.util.function.BiFunction<net.minecraft.world.entity.LivingEntity, net.minecraft.world.level.Level, net.minecraft.world.entity.projectile.AbstractArrow> armFactory;
+  public mod.gottsch.forge.gmm.core.entity.monster.zombie.Bloater(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+  public void m_8097_();
+       5: getfield      #57                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public boolean areArmsDetached();
+       1: getfield      #57                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      10: checkcast     #61                 // class java/lang/Boolean
+  protected void m_8099_();
+       5: new           #87                 // class net/minecraft/world/entity/ai/goal/FloatGoal
+      21: new           #98                 // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+      39: new           #103                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+      57: new           #108                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+      62: ldc           #110                // class net/minecraft/world/entity/player/Player
+      64: ldc           #111                // float 8.0f
+      78: new           #116                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+      94: new           #122                // class mod/gottsch/forge/gmm/core/entity/ai/goal/target/SummonedOwnerTargetGoal
+     110: new           #125                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     116: anewarray     #127                // class java/lang/Class
+     130: new           #132                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     135: ldc           #110                // class net/minecraft/world/entity/player/Player
+     153: new           #132                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     158: ldc           #141                // class net/minecraft/world/entity/npc/Villager
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #158                // double 30.0d
+      15: ldc2_w        #167                // double 0.2d
+      24: ldc2_w        #172                // double 4.0d
+      33: ldc2_w        #177                // double 0.5d
+      42: ldc2_w        #182                // double 2.0d
+      51: ldc2_w        #187                // double 24.0d
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #197                // String cloudRadius
+       6: ldc2_w        #198                // double 3.0d
+       9: invokevirtual #205                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #208                // String cloudDuration
+       6: ldc2_w        #209                // double 160.0d
+       9: invokevirtual #205                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #212                // String poisonDuration
+       6: ldc2_w        #213                // double 100.0d
+       9: invokevirtual #205                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #216                // String poisonAmplifier
+       7: invokevirtual #205                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #219                // String burstOnDeath
+       7: invokevirtual #223                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #226                // String hunger
+       7: invokevirtual #223                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #229                // String nausea
+       7: invokevirtual #223                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #232                // String launchArms
+       7: invokevirtual #223                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+       1: invokestatic  #196                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc           #234                // String armCount
+       6: ldc2_w        #182                // double 2.0d
+       9: invokevirtual #205                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+  public void m_6667_(net.minecraft.world.damagesource.DamageSource);
+      40: new           #262                // class net/minecraft/world/entity/AreaEffectCloud
+      53: ldc2_w        #267                // double 0.25d
+      80: ldc           #27                 // int 7113260
+     111: new           #311                // class net/minecraft/world/effect/MobEffectInstance
+     115: getstatic     #317                // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+     126: invokespecial #324                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     129: invokevirtual #328                // Method net/minecraft/world/entity/AreaEffectCloud.m_19716_:(Lnet/minecraft/world/effect/MobEffectInstance;)V
+     140: new           #311                // class net/minecraft/world/effect/MobEffectInstance
+     144: getstatic     #333                // Field net/minecraft/world/effect/MobEffects.f_19612_:Lnet/minecraft/world/effect/MobEffect;
+     152: invokespecial #324                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     155: invokevirtual #328                // Method net/minecraft/world/entity/AreaEffectCloud.m_19716_:(Lnet/minecraft/world/effect/MobEffectInstance;)V
+     166: new           #311                // class net/minecraft/world/effect/MobEffectInstance
+     170: getstatic     #338                // Field net/minecraft/world/effect/MobEffects.f_19604_:Lnet/minecraft/world/effect/MobEffect;
+     178: invokespecial #324                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     181: invokevirtual #328                // Method net/minecraft/world/entity/AreaEffectCloud.m_19716_:(Lnet/minecraft/world/effect/MobEffectInstance;)V
+     205: getfield      #57                 // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      31: checkcast     #14                 // class net/minecraft/world/entity/projectile/AbstractArrow
+      37: new           #365                // class net/minecraft/world/entity/projectile/Arrow
+      51: getfield      #372                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      59: ldc2_w        #177                // double 0.5d
+      66: getfield      #372                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      74: ldc2_w        #381                // double 0.4d
+      78: ldc2_w        #167                // double 0.2d
+      85: getfield      #372                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      93: ldc2_w        #177                // double 0.5d
+     105: ldc2_w        #383                // double 0.6d
+     125: ldc_w         #389                // float 0.28f
+     128: ldc           #18                 // float 3.0f
+  public net.minecraft.world.entity.MobType m_6336_();
+  public boolean m_7301_(net.minecraft.world.effect.MobEffectInstance);
+       1: invokevirtual #430                // Method net/minecraft/world/effect/MobEffectInstance.m_19544_:()Lnet/minecraft/world/effect/MobEffect;
+       4: getstatic     #317                // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+      14: invokespecial #432                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_7301_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+  public void m_8107_();
+      24: getfield      #372                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      45: ldc2_w        #177                // double 0.5d
+      55: ldc2_w        #167                // double 0.2d
+      60: getfield      #372                // Field f_19796_:Lnet/minecraft/util/RandomSource;
+      68: ldc2_w        #455                // double 1.4d
+      74: ldc2_w        #177                // double 0.5d
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       4: ldc_w         #474                // float 0.15f
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+  protected net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+  protected net.minecraft.sounds.SoundEvent m_5592_();
+  protected float m_6431_(net.minecraft.world.entity.Pose, net.minecraft.world.entity.EntityDimensions);
+       0: ldc_w         #499                // float 1.9f
+       0: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/zombie/Bloater
+## mod/gottsch/forge/gmm/core/entity/monster/zombie/Wight.class
+public class mod.gottsch.forge.gmm.core.entity.monster.zombie.Wight extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster implements net.minecraft.world.entity.monster.RangedAttackMob,mod.gottsch.forge.gmm.core.entity.monster.ICastingMob {
+  protected net.minecraft.world.entity.ai.goal.Goal meleeGoal;
+  protected final mod.gottsch.forge.gmm.core.entity.ai.goal.VariantPowerRangedBowAttackGoal<mod.gottsch.forge.gmm.core.entity.monster.zombie.Wight> bowGoal;
+  public mod.gottsch.forge.gmm.core.entity.monster.zombie.Wight(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+       7: new           #87                 // class net/minecraft/world/entity/ai/goal/MeleeAttackGoal
+      21: new           #94                 // class mod/gottsch/forge/gmm/core/entity/ai/goal/VariantPowerRangedBowAttackGoal
+      29: ldc           #95                 // float 15.0f
+  public void m_8097_();
+       5: getfield      #118                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  public boolean isCasting();
+       1: getfield      #118                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+      10: checkcast     #122                // class java/lang/Boolean
+  public void setCasting(boolean);
+       1: getfield      #118                // Field f_19804_:Lnet/minecraft/network/syncher/SynchedEntityData;
+  protected net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> getCompanionPool();
+  protected void m_8099_();
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      10: new           #168                // class net/minecraft/world/entity/ai/goal/FloatGoal
+      26: new           #179                // class net/minecraft/world/entity/ai/goal/RestrictSunGoal
+      42: new           #184                // class net/minecraft/world/entity/ai/goal/FleeSunGoal
+      59: new           #189                // class mod/gottsch/forge/gmm/core/entity/ai/goal/SummonThrallGoal
+      68: ldc           #194                // String summonChargeTime
+      70: ldc2_w        #195                // double 60.0d
+      73: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      78: ldc           #204                // String summonCooldownTime
+      80: ldc2_w        #205                // double 600.0d
+      83: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      88: ldc           #208                // String maxThralls
+      90: ldc2_w        #209                // double 3.0d
+      93: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      98: ldc           #212                // String summonSpawnRadius
+     100: ldc2_w        #57                 // double 2.5d
+     103: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     117: new           #217                // class mod/gottsch/forge/gmm/core/entity/ai/goal/EnthrallGoal
+     126: ldc           #222                // String enthrallChargeTime
+     128: ldc2_w        #223                // double 100.0d
+     131: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     136: ldc           #226                // String enthrallCooldownTime
+     138: ldc2_w        #205                // double 600.0d
+     141: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     146: ldc           #208                // String maxThralls
+     148: ldc2_w        #209                // double 3.0d
+     151: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     156: ldc           #228                // String enthrallRange
+     158: ldc2_w        #63                 // double 16.0d
+     161: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     171: ldc           #231                // String shieldBlocking
+     174: invokevirtual #235                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+     185: new           #237                // class mod/gottsch/forge/gmm/core/entity/ai/goal/RaiseShieldGoal
+     191: ldc           #239                // String shieldBlockRange
+     193: ldc2_w        #39                 // double 4.0d
+     196: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     200: ldc           #241                // String shieldBlockCooldown
+     202: ldc2_w        #242                // double 40.0d
+     205: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     210: ldc           #245                // String shieldMaxBlockTicks
+     212: ldc2_w        #223                // double 100.0d
+     215: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     230: new           #250                // class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal
+     248: new           #253                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+     253: ldc           #255                // class net/minecraft/world/entity/player/Player
+     255: ldc_w         #256                // float 8.0f
+     270: new           #261                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     286: new           #267                // class mod/gottsch/forge/gmm/core/entity/ai/goal/target/SummonedOwnerTargetGoal
+     302: new           #270                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+     308: anewarray     #272                // class java/lang/Class
+     322: new           #277                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     327: ldc           #255                // class net/minecraft/world/entity/player/Player
+     345: new           #277                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     350: ldc_w         #286                // class net/minecraft/world/entity/npc/Villager
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       6: ldc2_w        #33                 // double 41.0d
+      15: ldc2_w        #36                 // double 0.25d
+      24: ldc2_w        #39                 // double 4.0d
+      33: ldc2_w        #42                 // double 2.0d
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #320                // String wither
+       8: invokevirtual #235                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #323                // String witherDuration
+       7: ldc2_w        #324                // double 200.0d
+      10: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #327                // String maxWitherStacks
+       7: ldc2_w        #328                // double 5.0d
+      10: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #333                // String lifesteal
+       7: ldc2_w        #50                 // double 0.5d
+      10: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+       4: ldc_w         #335                // String shieldProbability
+       7: ldc2_w        #68                 // double 0.35d
+      10: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #340                // Method mod/gottsch/forge/gmm/core/entity/monster/GMMMonster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  protected void m_213945_(net.minecraft.util.RandomSource, net.minecraft.world.DifficultyInstance);
+      40: instanceof    #424                // class net/minecraft/world/item/BowItem
+      95: new           #418                // class net/minecraft/world/item/ItemStack
+     116: instanceof    #450                // class net/minecraft/world/item/DyeableLeatherItem
+     124: checkcast     #450                // class net/minecraft/world/item/DyeableLeatherItem
+     133: ldc           #75                 // int 4868688
+  public void m_8061_(net.minecraft.world.entity.EquipmentSlot, net.minecraft.world.item.ItemStack);
+  public void reassessWeaponGoal();
+      47: instanceof    #424                // class net/minecraft/world/item/BowItem
+  public void m_6504_(net.minecraft.world.entity.LivingEntity, float);
+      38: ldc2_w        #543                // double 0.3333333333333333d
+      87: ldc2_w        #563                // double 0.20000000298023224d
+      94: ldc_w         #565                // float 1.6f
+     131: ldc_w         #592                // float 0.4f
+     135: ldc_w         #593                // float 0.8f
+  public boolean m_5886_(net.minecraft.world.item.ProjectileWeaponItem);
+  public boolean m_7327_(net.minecraft.world.entity.Entity);
+       1: instanceof    #538                // class net/minecraft/world/entity/LivingEntity
+       8: checkcast     #538                // class net/minecraft/world/entity/LivingEntity
+      32: instanceof    #538                // class net/minecraft/world/entity/LivingEntity
+      39: checkcast     #538                // class net/minecraft/world/entity/LivingEntity
+       9: getstatic     #651                // Field mod/gottsch/forge/gmm/core/effect/GMMMobEffects.WITHERED:Lnet/minecraftforge/registries/RegistryObject;
+      15: checkcast     #658                // class net/minecraft/world/effect/MobEffect
+      18: invokevirtual #662                // Method net/minecraft/world/entity/LivingEntity.m_21124_:(Lnet/minecraft/world/effect/MobEffect;)Lnet/minecraft/world/effect/MobEffectInstance;
+      37: invokevirtual #669                // Method net/minecraft/world/effect/MobEffectInstance.m_19564_:()I
+      47: new           #664                // class net/minecraft/world/effect/MobEffectInstance
+      51: getstatic     #651                // Field mod/gottsch/forge/gmm/core/effect/GMMMobEffects.WITHERED:Lnet/minecraftforge/registries/RegistryObject;
+      57: checkcast     #658                // class net/minecraft/world/effect/MobEffect
+      68: invokespecial #678                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V
+      72: invokevirtual #682                // Method net/minecraft/world/entity/LivingEntity.m_147207_:(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z
+  public net.minecraft.world.entity.MobType m_6336_();
+  public void m_8107_();
+  protected void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       4: ldc_w         #715                // float 0.15f
+  protected net.minecraft.sounds.SoundEvent m_7515_();
+  protected net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+  protected net.minecraft.sounds.SoundEvent m_5592_();
+       1: instanceof    #424                // class net/minecraft/world/item/BowItem
+       4: new           #418                // class net/minecraft/world/item/ItemStack
+       4: new           #418                // class net/minecraft/world/item/ItemStack
+       0: ldc           #2                  // class mod/gottsch/forge/gmm/core/entity/monster/zombie/Wight
+## file mod/gottsch/forge/gmm/core/config/
+

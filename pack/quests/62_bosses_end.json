@@ -1,0 +1,332 @@
+{
+ "id": "bosses_end",
+ "title": "End Bosses",
+ "subtitle": [
+  "The End and its outer islands."
+ ],
+ "icon": "minecraft:dragon_head",
+ "group": "bosses",
+ "quests": [
+  {
+   "id": "annihilation_pursuer",
+   "title": "Annihilation Pursuer",
+   "subtitle": "Legendary Monsters · 210 health",
+   "x": 0.0,
+   "y": 0.0,
+   "shape": "circle",
+   "description": [
+    "Lives in a Space Station.",
+    "The Wandering Eye floats around the station too.",
+    "",
+    "The Eye of Annihilation flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:space_station",
+     "optional": true,
+     "title": "Find a Space Station"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:annihilation_pursuer",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "ender_guardian",
+   "title": "Ender Guardian",
+   "subtitle": "L_Ender's Cataclysm · 333 health",
+   "x": 1.5,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Ruined Citadel.",
+    "TODO",
+    "",
+    "The Eye of Void flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:ruined_citadel",
+     "optional": true,
+     "title": "Find a Ruined Citadel"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:ender_guardian",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 650
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "endersent",
+   "title": "Chorusent",
+   "subtitle": "Legendary Monsters · 200 health",
+   "x": 3.0,
+   "y": 0.0,
+   "shape": "circle",
+   "description": [
+    "Lives in the remains of an Ancient Tower.",
+    "",
+    "The Eye of Chorus flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:ancient_tower_remains",
+     "optional": true,
+     "title": "Find an Ancient Tower"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:endersent",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "shulker_mimic",
+   "title": "Shulker Mimic",
+   "subtitle": "Legendary Monsters · 200 health",
+   "x": 4.5,
+   "y": 0.0,
+   "shape": "circle",
+   "description": [
+    "Lives in a Shulker Tower.",
+    "",
+    "The Eye of Shulker flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:shulker_tower",
+     "optional": true,
+     "title": "Find a Shulker Tower"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:shulker_mimic",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "rhyza",
+   "title": "Rhyza",
+   "subtitle": "Monster Expansion · 500 health",
+   "x": 0.0,
+   "y": 1.5,
+   "shape": "octagon",
+   "description": [
+    "Lives in its lair on the outer End islands.",
+    "Its lairs are in the End's highlands, midlands and barrens, past the main island."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "monsterexpansion:rhyza_structure",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "monsterexpansion:rhyza",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "voidrake",
+   "title": "Voidrake",
+   "subtitle": "Skarrier Mobs · 160 health",
+   "x": 1.5,
+   "y": 1.5,
+   "shape": "circle",
+   "description": [
+    "Lives in the End's highlands and barrens.",
+    "Roams the outer End islands once the Wither has been beaten."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "skarrier_mobs:voidrake",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 300
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "ender_dragon",
+   "title": "The Ender Dragon",
+   "subtitle": "Minecraft · 200 health",
+   "x": 3.0,
+   "y": 1.5,
+   "shape": "circle",
+   "description": [
+    "Lives in the End.",
+    "Through a stronghold's End portal: eyes of ender lead the way."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "minecraft:ender_dragon",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  }
+ ]
+}

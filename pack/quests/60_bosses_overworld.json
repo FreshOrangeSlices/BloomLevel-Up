@@ -1,0 +1,1538 @@
+{
+ "id": "bosses_overworld",
+ "title": "Overworld Bosses",
+ "subtitle": [
+  "Lairs across the Overworld. Free order: pick any."
+ ],
+ "icon": "minecraft:diamond_sword",
+ "group": "bosses",
+ "quests": [
+  {
+   "id": "the_harbinger",
+   "title": "The Harbinger",
+   "subtitle": "L_Ender's Cataclysm · 390 health",
+   "x": 0.0,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in an Ancient Factory.",
+    "Wake it in the factory's core. The Prowler guards the halls.",
+    "",
+    "The Eye of Mech flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:ancient_factory",
+     "optional": true,
+     "title": "Find an Ancient Factory"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:the_harbinger",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 800
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "the_leviathan",
+   "title": "The Leviathan",
+   "subtitle": "L_Ender's Cataclysm · 400 health",
+   "x": 1.5,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Sunken City, under the sea.",
+    "Summon it at the Altar of Abyss inside the city. Coralssus roams the ruins.",
+    "",
+    "The Eye of Abyss flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:sunken_city",
+     "optional": true,
+     "title": "Find a Sunken City"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:the_leviathan",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 800
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "scylla",
+   "title": "Scylla",
+   "subtitle": "L_Ender's Cataclysm · 390 health",
+   "x": 3.0,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in an Acropolis, out at sea.",
+    "The Storm Empress waits in the Acropolis, with Clawdians around her.",
+    "",
+    "The Eye of Storm flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:acropolis",
+     "optional": true,
+     "title": "Find an Acropolis"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:scylla",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 800
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "ancient_remnant",
+   "title": "Ancient Remnant",
+   "subtitle": "L_Ender's Cataclysm · 450 health",
+   "x": 4.5,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Cursed Pyramid, in the desert.",
+    "Brush the suspicious sand inside the pyramid to wake it. Kobolediators and a Wadjet guard the way.",
+    "",
+    "The Eye of Desert flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:cursed_pyramid",
+     "optional": true,
+     "title": "Find a Cursed Pyramid"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:ancient_remnant",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 900
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "maledictus",
+   "title": "Maledictus",
+   "subtitle": "L_Ender's Cataclysm · 420 health",
+   "x": 6.0,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Frosted Prison, in snowy lands.",
+    "Summon it inside the prison. The Aptrgangr stands guard.",
+    "",
+    "The Eye of Curse flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:frosted_prison",
+     "optional": true,
+     "title": "Find a Frosted Prison"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:maledictus",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 850
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "amethyst_crab",
+   "title": "Amethyst Crab",
+   "subtitle": "L_Ender's Cataclysm · 200 health",
+   "x": 7.5,
+   "y": 0.0,
+   "shape": "circle",
+   "description": [
+    "Lives in an Amethyst Nest, in lush caves.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:amethyst_nest",
+     "optional": true,
+     "title": "Find an Amethyst Nest"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:amethyst_crab",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "kraken",
+   "title": "Nerakyss, the Kraken",
+   "subtitle": "Bosses'Rise · 500 health",
+   "x": 0.0,
+   "y": 1.5,
+   "shape": "octagon",
+   "description": [
+    "Lives in the Kraken's ship, at sea.",
+    "Clear the ship's pirate crew and the Kraken rises. The pirate bands on the coasts never call it.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "block_factorys_bosses:kraken_ship",
+     "optional": true,
+     "title": "Find the Kraken's ship"
+    },
+    {
+     "type": "kill",
+     "entity": "block_factorys_bosses:kraken",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "sandworm",
+   "title": "Sirok, the Sandworm",
+   "subtitle": "Bosses'Rise · 150 health",
+   "x": 1.5,
+   "y": 1.5,
+   "shape": "circle",
+   "description": [
+    "Lives in a sandworm nest, in deserts.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "block_factorys_bosses:sandworm_nest",
+     "optional": true,
+     "title": "Find a sandworm nest"
+    },
+    {
+     "type": "kill",
+     "entity": "block_factorys_bosses:sandworm",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 300
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "yeti",
+   "title": "Skor, the Yeti",
+   "subtitle": "Bosses'Rise · 250 health",
+   "x": 3.0,
+   "y": 1.5,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a yeti hideout, in snowy lands.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "block_factorys_bosses:yeti_hideout",
+     "optional": true,
+     "title": "Find a yeti hideout"
+    },
+    {
+     "type": "kill",
+     "entity": "block_factorys_bosses:yeti",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "infernal_dragon",
+   "title": "Ashlord, the Infernal Dragon",
+   "subtitle": "Bosses'Rise · 250 health",
+   "x": 4.5,
+   "y": 1.5,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a dragon tower.",
+    "Comes out of the tower's boss spawner. Towers stand in jungles, swamps, plains, savannas and hills.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "block_factorys_bosses:dragon_tower",
+     "optional": true,
+     "title": "Find a dragon tower"
+    },
+    {
+     "type": "kill",
+     "entity": "block_factorys_bosses:infernal_dragon",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "posessed_paladin",
+   "title": "Possessed Paladin",
+   "subtitle": "Legendary Monsters · 400 health",
+   "x": 0.0,
+   "y": 3.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Collapsed Kingdom.",
+    "Waits in the kingdom once the Beheaded Knight has fallen.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:collapsed_kingdom",
+     "optional": true,
+     "title": "Find a Collapsed Kingdom"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:posessed_paladin",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 800
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "haunted_duo",
+   "title": "The Haunted Duo",
+   "subtitle": "Legendary Monsters · 195 health",
+   "x": 1.5,
+   "y": 3.0,
+   "shape": "circle",
+   "description": [
+    "Lives in a Collapsed Kingdom.",
+    "The Haunted Knight and its kin haunt the kingdom's halls: beat the Resurrected Knight and the Beheaded Knight.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:collapsed_kingdom",
+     "optional": true,
+     "title": "Find a Collapsed Kingdom"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:beheaded_knight",
+     "count": 1
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:resurrected_knight",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "cloud_golem",
+   "title": "Cumulonimbus",
+   "subtitle": "Legendary Monsters · 350 health",
+   "x": 3.0,
+   "y": 3.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Cloudy Temple.",
+    "",
+    "The Eye of Air flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:cloudy_temple",
+     "optional": true,
+     "title": "Find a Cloudy Temple"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:cloud_golem",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 700
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "ancient_guardian",
+   "title": "Ancient Guardian",
+   "subtitle": "Legendary Monsters · 170 health",
+   "x": 4.5,
+   "y": 3.0,
+   "shape": "circle",
+   "description": [
+    "Lives in an Ancient Stronghold.",
+    "Deep in a dripstone stronghold, with the Ambusher and the Spiky Worm.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:ancient_stronghold",
+     "optional": true,
+     "title": "Find an Ancient Stronghold"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:ancient_guardian",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 350
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "frostbitten_golem",
+   "title": "Frostbitten Golem",
+   "subtitle": "Legendary Monsters · 220 health",
+   "x": 0.0,
+   "y": 4.5,
+   "shape": "circle",
+   "description": [
+    "Lives in a Frostbitten Temple.",
+    "",
+    "The Eye of Frost flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:frostbitten_temple",
+     "optional": true,
+     "title": "Find a Frostbitten Temple"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:frostbitten_golem",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 450
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "overgrown_colossus",
+   "title": "Overgrown Colossus",
+   "subtitle": "Legendary Monsters · 170 health",
+   "x": 1.5,
+   "y": 4.5,
+   "shape": "circle",
+   "description": [
+    "Lives in a Mossy Temple.",
+    "",
+    "The Eye of Moss flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:mossy_temple",
+     "optional": true,
+     "title": "Find a Mossy Temple"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:overgrown_colossus",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 350
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "dune_sentinel",
+   "title": "Dune Sentinel",
+   "subtitle": "Legendary Monsters · 170 health",
+   "x": 3.0,
+   "y": 4.5,
+   "shape": "circle",
+   "description": [
+    "Lives in a Ruined Pyramid.",
+    "",
+    "The Eye of Sandstorm flies toward the nearest one.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:ruined_pyramid",
+     "optional": true,
+     "title": "Find a Ruined Pyramid"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:dune_sentinel",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 350
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "leivekilth",
+   "title": "Leivekilth",
+   "subtitle": "Monster Expansion · 1000 health",
+   "x": 0.0,
+   "y": 6.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in its lair in frozen oceans.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "monsterexpansion:leivekilth_structure",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "monsterexpansion:leivekilth",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 2000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "rakoth",
+   "title": "Rakoth",
+   "subtitle": "Monster Expansion · 750 health",
+   "x": 1.5,
+   "y": 6.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in its lair in deserts and badlands.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "monsterexpansion:rakoth_structure",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "monsterexpansion:rakoth",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "skrythe",
+   "title": "Skrythe",
+   "subtitle": "Monster Expansion · 750 health",
+   "x": 3.0,
+   "y": 6.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in its lair, out in the open in most lands.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "monsterexpansion:skrythe_structure",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "monsterexpansion:skrythe",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "ignathos",
+   "title": "Ignathos",
+   "subtitle": "Monster Expansion · 500 health",
+   "x": 4.5,
+   "y": 6.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in its lair in forests and windswept hills.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "monsterexpansion:ignathos_structure",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "monsterexpansion:ignathos",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "draugr_boss",
+   "title": "Old Champion's Remains",
+   "subtitle": "Marium's Soulslike Weaponry · 300 health",
+   "x": 0.0,
+   "y": 7.5,
+   "shape": "hexagon",
+   "description": [
+    "Lives in the Champion's Graves, in the taiga.",
+    "Also roams snowy biomes, one at a time.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "soulsweapons:champions_graves",
+     "optional": true,
+     "title": "Find the Champion's Graves"
+    },
+    {
+     "type": "kill",
+     "entity": "soulsweapons:draugr_boss",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 600
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "moonknight",
+   "title": "Fallen Icon",
+   "subtitle": "Marium's Soulslike Weaponry · 550 health",
+   "x": 1.5,
+   "y": 7.5,
+   "shape": "octagon",
+   "description": [
+    "Lives in the Cathedral of Resurrection, in the hills.",
+    "TODO",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "soulsweapons:cathedral_of_resurrection",
+     "optional": true,
+     "title": "Find the Cathedral of Resurrection"
+    },
+    {
+     "type": "kill",
+     "entity": "soulsweapons:moonknight",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1100
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "lich",
+   "title": "Corrupted Champion",
+   "subtitle": "The Graveyard · 400 health",
+   "x": 3.0,
+   "y": 7.5,
+   "shape": "hexagon",
+   "description": [
+    "Lives in the Lich's prison, on the Cursed Island.",
+    "Summon it at the prison's altar at night, with a full vial of blood (filled from villagers with a bone dagger) and the three bone staff pieces.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "graveyard:lich_prison",
+     "optional": true,
+     "title": "Find the Lich's prison"
+    },
+    {
+     "type": "kill",
+     "entity": "graveyard:lich",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 800
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "dead_king",
+   "title": "The Dead King",
+   "subtitle": "Iron's Spells 'n Spellbooks · 500 health",
+   "x": 4.5,
+   "y": 7.5,
+   "shape": "octagon",
+   "description": [
+    "Lives in the Catacombs, underground.",
+    "",
+    "A Wayward Compass points to the nearest one (see the Magic chapter).",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "irons_spellbooks:catacombs",
+     "optional": true,
+     "title": "Find the Catacombs"
+    },
+    {
+     "type": "kill",
+     "entity": "irons_spellbooks:dead_king",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "black_charro",
+   "title": "The Black Charro",
+   "subtitle": "Myths & Legends · 370 health",
+   "x": 6.0,
+   "y": 7.5,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Mausoleum.",
+    "TODO",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "mythsandlegends:mausoleum",
+     "optional": true,
+     "title": "Find a Mausoleum"
+    },
+    {
+     "type": "kill",
+     "entity": "mythsandlegends:black_charro",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 750
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "queen_of_orchid",
+   "title": "Queen of Orchid",
+   "subtitle": "Bosses Oddities · 300 health",
+   "x": 0.0,
+   "y": 9.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in an Orchid Shrine, in forests.",
+    "The giant mantis. She also roams flowery biomes now and then.",
+    "",
+    "A pirate chart can lead here."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "oddities:orchid_shrine",
+     "optional": true,
+     "title": "Find an Orchid Shrine"
+    },
+    {
+     "type": "kill",
+     "entity": "oddities:queen_of_orchid",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 600
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "invoker",
+   "title": "Invoker",
+   "subtitle": "Illager Invasion · 250 health",
+   "x": 1.5,
+   "y": 9.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a woodland mansion.",
+    "The illagers' sorcerer.",
+    "",
+    "Cartographer villagers sell woodland explorer maps.",
+    "A pirate chart can lead here too."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "minecraft:mansion",
+     "optional": true,
+     "title": "Find a woodland mansion"
+    },
+    {
+     "type": "kill",
+     "entity": "illagerinvasion:invoker",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "tunnel_gore",
+   "title": "Tunnel Gore",
+   "subtitle": "Skarrier Mobs · 1000 health",
+   "x": 3.0,
+   "y": 9.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in its lairs, underground.",
+    "Its lairs are underground and almost everywhere: dig and you may break into one. Charts don't lead to it."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "skarrier_mobs:tunnel_gore",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 2000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "warden",
+   "title": "Warden",
+   "subtitle": "Minecraft · 500 health",
+   "x": 4.5,
+   "y": 9.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in an ancient city, deep underground.",
+    "Sculk shriekers call it up when you make too much noise."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "minecraft:ancient_city",
+     "optional": true,
+     "title": "Find an ancient city"
+    },
+    {
+     "type": "kill",
+     "entity": "minecraft:warden",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1000
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "elder_guardian",
+   "title": "Elder Guardian",
+   "subtitle": "Minecraft · 80 health",
+   "x": 6.0,
+   "y": 9.0,
+   "shape": "circle",
+   "description": [
+    "Lives in an ocean monument.",
+    "Three of them in every monument.",
+    "",
+    "Cartographer villagers sell ocean explorer maps."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "minecraft:monument",
+     "optional": true,
+     "title": "Find an ocean monument"
+    },
+    {
+     "type": "kill",
+     "entity": "minecraft:elder_guardian",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 200
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  }
+ ]
+}

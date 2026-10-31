@@ -1,0 +1,446 @@
+{
+ "id": "boss_hunter",
+ "title": "Boss Hunter",
+ "subtitle": [
+  "A Major Level for every milestone of bosses beaten."
+ ],
+ "icon": "minecraft:nether_star",
+ "group": "bosses",
+ "quests": [
+  {
+   "id": "slayer_5",
+   "title": "5 Bosses Down",
+   "x": 0.0,
+   "y": 0,
+   "shape": "gear",
+   "size": 1.25,
+   "subtitle": "+1 Major Level",
+   "icon": "minecraft:nether_star",
+   "description": [
+    "Beat any 5 different bosses from the boss chapters, in any order, then claim this.",
+    "",
+    "Major Levels are Bloom's build currency: spend them on Majors in any tab."
+   ],
+   "deps": [
+    "bosses_overworld/the_harbinger",
+    "bosses_overworld/the_leviathan",
+    "bosses_overworld/scylla",
+    "bosses_overworld/ancient_remnant",
+    "bosses_overworld/maledictus",
+    "bosses_overworld/amethyst_crab",
+    "bosses_overworld/kraken",
+    "bosses_overworld/sandworm",
+    "bosses_overworld/yeti",
+    "bosses_overworld/infernal_dragon",
+    "bosses_overworld/posessed_paladin",
+    "bosses_overworld/haunted_duo",
+    "bosses_overworld/cloud_golem",
+    "bosses_overworld/ancient_guardian",
+    "bosses_overworld/frostbitten_golem",
+    "bosses_overworld/overgrown_colossus",
+    "bosses_overworld/dune_sentinel",
+    "bosses_overworld/leivekilth",
+    "bosses_overworld/rakoth",
+    "bosses_overworld/skrythe",
+    "bosses_overworld/ignathos",
+    "bosses_overworld/draugr_boss",
+    "bosses_overworld/moonknight",
+    "bosses_overworld/lich",
+    "bosses_overworld/dead_king",
+    "bosses_overworld/black_charro",
+    "bosses_overworld/queen_of_orchid",
+    "bosses_overworld/invoker",
+    "bosses_overworld/tunnel_gore",
+    "bosses_overworld/warden",
+    "bosses_overworld/elder_guardian",
+    "bosses_nether/underworld_knight",
+    "bosses_nether/accursed_lord",
+    "bosses_nether/unbreakable",
+    "bosses_nether/ignis",
+    "bosses_nether/netherite_monstrosity",
+    "bosses_nether/lava_eater",
+    "bosses_nether/skeletosaurus",
+    "bosses_nether/withered_abomination",
+    "bosses_end/annihilation_pursuer",
+    "bosses_end/ender_guardian",
+    "bosses_end/endersent",
+    "bosses_end/shulker_mimic",
+    "bosses_end/rhyza",
+    "bosses_end/voidrake",
+    "bosses_end/ender_dragon"
+   ],
+   "min_deps": 5,
+   "hide_dependency_lines": true,
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "Claim"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "major_levels",
+     "count": 1
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "id": "slayer_10",
+   "title": "10 Bosses Down",
+   "x": 1.5,
+   "y": 0,
+   "shape": "gear",
+   "size": 1.25,
+   "subtitle": "+1 Major Level",
+   "icon": "minecraft:nether_star",
+   "description": [
+    "Beat any 10 different bosses from the boss chapters, in any order, then claim this.",
+    "",
+    "Major Levels are Bloom's build currency: spend them on Majors in any tab."
+   ],
+   "deps": [
+    "bosses_overworld/the_harbinger",
+    "bosses_overworld/the_leviathan",
+    "bosses_overworld/scylla",
+    "bosses_overworld/ancient_remnant",
+    "bosses_overworld/maledictus",
+    "bosses_overworld/amethyst_crab",
+    "bosses_overworld/kraken",
+    "bosses_overworld/sandworm",
+    "bosses_overworld/yeti",
+    "bosses_overworld/infernal_dragon",
+    "bosses_overworld/posessed_paladin",
+    "bosses_overworld/haunted_duo",
+    "bosses_overworld/cloud_golem",
+    "bosses_overworld/ancient_guardian",
+    "bosses_overworld/frostbitten_golem",
+    "bosses_overworld/overgrown_colossus",
+    "bosses_overworld/dune_sentinel",
+    "bosses_overworld/leivekilth",
+    "bosses_overworld/rakoth",
+    "bosses_overworld/skrythe",
+    "bosses_overworld/ignathos",
+    "bosses_overworld/draugr_boss",
+    "bosses_overworld/moonknight",
+    "bosses_overworld/lich",
+    "bosses_overworld/dead_king",
+    "bosses_overworld/black_charro",
+    "bosses_overworld/queen_of_orchid",
+    "bosses_overworld/invoker",
+    "bosses_overworld/tunnel_gore",
+    "bosses_overworld/warden",
+    "bosses_overworld/elder_guardian",
+    "bosses_nether/underworld_knight",
+    "bosses_nether/accursed_lord",
+    "bosses_nether/unbreakable",
+    "bosses_nether/ignis",
+    "bosses_nether/netherite_monstrosity",
+    "bosses_nether/lava_eater",
+    "bosses_nether/skeletosaurus",
+    "bosses_nether/withered_abomination",
+    "bosses_end/annihilation_pursuer",
+    "bosses_end/ender_guardian",
+    "bosses_end/endersent",
+    "bosses_end/shulker_mimic",
+    "bosses_end/rhyza",
+    "bosses_end/voidrake",
+    "bosses_end/ender_dragon"
+   ],
+   "min_deps": 10,
+   "hide_dependency_lines": true,
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "Claim"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "major_levels",
+     "count": 1
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    }
+   ]
+  },
+  {
+   "id": "slayer_20",
+   "title": "20 Bosses Down",
+   "x": 3.0,
+   "y": 0,
+   "shape": "gear",
+   "size": 1.25,
+   "subtitle": "+1 Major Level",
+   "icon": "minecraft:nether_star",
+   "description": [
+    "Beat any 20 different bosses from the boss chapters, in any order, then claim this.",
+    "",
+    "Major Levels are Bloom's build currency: spend them on Majors in any tab."
+   ],
+   "deps": [
+    "bosses_overworld/the_harbinger",
+    "bosses_overworld/the_leviathan",
+    "bosses_overworld/scylla",
+    "bosses_overworld/ancient_remnant",
+    "bosses_overworld/maledictus",
+    "bosses_overworld/amethyst_crab",
+    "bosses_overworld/kraken",
+    "bosses_overworld/sandworm",
+    "bosses_overworld/yeti",
+    "bosses_overworld/infernal_dragon",
+    "bosses_overworld/posessed_paladin",
+    "bosses_overworld/haunted_duo",
+    "bosses_overworld/cloud_golem",
+    "bosses_overworld/ancient_guardian",
+    "bosses_overworld/frostbitten_golem",
+    "bosses_overworld/overgrown_colossus",
+    "bosses_overworld/dune_sentinel",
+    "bosses_overworld/leivekilth",
+    "bosses_overworld/rakoth",
+    "bosses_overworld/skrythe",
+    "bosses_overworld/ignathos",
+    "bosses_overworld/draugr_boss",
+    "bosses_overworld/moonknight",
+    "bosses_overworld/lich",
+    "bosses_overworld/dead_king",
+    "bosses_overworld/black_charro",
+    "bosses_overworld/queen_of_orchid",
+    "bosses_overworld/invoker",
+    "bosses_overworld/tunnel_gore",
+    "bosses_overworld/warden",
+    "bosses_overworld/elder_guardian",
+    "bosses_nether/underworld_knight",
+    "bosses_nether/accursed_lord",
+    "bosses_nether/unbreakable",
+    "bosses_nether/ignis",
+    "bosses_nether/netherite_monstrosity",
+    "bosses_nether/lava_eater",
+    "bosses_nether/skeletosaurus",
+    "bosses_nether/withered_abomination",
+    "bosses_end/annihilation_pursuer",
+    "bosses_end/ender_guardian",
+    "bosses_end/endersent",
+    "bosses_end/shulker_mimic",
+    "bosses_end/rhyza",
+    "bosses_end/voidrake",
+    "bosses_end/ender_dragon"
+   ],
+   "min_deps": 20,
+   "hide_dependency_lines": true,
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "Claim"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "major_levels",
+     "count": 1
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_ingot",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "slayer_30",
+   "title": "30 Bosses Down",
+   "x": 4.5,
+   "y": 0,
+   "shape": "gear",
+   "size": 1.25,
+   "subtitle": "+1 Major Level",
+   "icon": "minecraft:nether_star",
+   "description": [
+    "Beat any 30 different bosses from the boss chapters, in any order, then claim this.",
+    "",
+    "Major Levels are Bloom's build currency: spend them on Majors in any tab."
+   ],
+   "deps": [
+    "bosses_overworld/the_harbinger",
+    "bosses_overworld/the_leviathan",
+    "bosses_overworld/scylla",
+    "bosses_overworld/ancient_remnant",
+    "bosses_overworld/maledictus",
+    "bosses_overworld/amethyst_crab",
+    "bosses_overworld/kraken",
+    "bosses_overworld/sandworm",
+    "bosses_overworld/yeti",
+    "bosses_overworld/infernal_dragon",
+    "bosses_overworld/posessed_paladin",
+    "bosses_overworld/haunted_duo",
+    "bosses_overworld/cloud_golem",
+    "bosses_overworld/ancient_guardian",
+    "bosses_overworld/frostbitten_golem",
+    "bosses_overworld/overgrown_colossus",
+    "bosses_overworld/dune_sentinel",
+    "bosses_overworld/leivekilth",
+    "bosses_overworld/rakoth",
+    "bosses_overworld/skrythe",
+    "bosses_overworld/ignathos",
+    "bosses_overworld/draugr_boss",
+    "bosses_overworld/moonknight",
+    "bosses_overworld/lich",
+    "bosses_overworld/dead_king",
+    "bosses_overworld/black_charro",
+    "bosses_overworld/queen_of_orchid",
+    "bosses_overworld/invoker",
+    "bosses_overworld/tunnel_gore",
+    "bosses_overworld/warden",
+    "bosses_overworld/elder_guardian",
+    "bosses_nether/underworld_knight",
+    "bosses_nether/accursed_lord",
+    "bosses_nether/unbreakable",
+    "bosses_nether/ignis",
+    "bosses_nether/netherite_monstrosity",
+    "bosses_nether/lava_eater",
+    "bosses_nether/skeletosaurus",
+    "bosses_nether/withered_abomination",
+    "bosses_end/annihilation_pursuer",
+    "bosses_end/ender_guardian",
+    "bosses_end/endersent",
+    "bosses_end/shulker_mimic",
+    "bosses_end/rhyza",
+    "bosses_end/voidrake",
+    "bosses_end/ender_dragon"
+   ],
+   "min_deps": 30,
+   "hide_dependency_lines": true,
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "Claim"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "major_levels",
+     "count": 1
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_ingot",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "slayer_40",
+   "title": "40 Bosses Down",
+   "x": 6.0,
+   "y": 0,
+   "shape": "gear",
+   "size": 1.25,
+   "subtitle": "+1 Major Level",
+   "icon": "minecraft:nether_star",
+   "description": [
+    "Beat any 40 different bosses from the boss chapters, in any order, then claim this.",
+    "",
+    "Major Levels are Bloom's build currency: spend them on Majors in any tab."
+   ],
+   "deps": [
+    "bosses_overworld/the_harbinger",
+    "bosses_overworld/the_leviathan",
+    "bosses_overworld/scylla",
+    "bosses_overworld/ancient_remnant",
+    "bosses_overworld/maledictus",
+    "bosses_overworld/amethyst_crab",
+    "bosses_overworld/kraken",
+    "bosses_overworld/sandworm",
+    "bosses_overworld/yeti",
+    "bosses_overworld/infernal_dragon",
+    "bosses_overworld/posessed_paladin",
+    "bosses_overworld/haunted_duo",
+    "bosses_overworld/cloud_golem",
+    "bosses_overworld/ancient_guardian",
+    "bosses_overworld/frostbitten_golem",
+    "bosses_overworld/overgrown_colossus",
+    "bosses_overworld/dune_sentinel",
+    "bosses_overworld/leivekilth",
+    "bosses_overworld/rakoth",
+    "bosses_overworld/skrythe",
+    "bosses_overworld/ignathos",
+    "bosses_overworld/draugr_boss",
+    "bosses_overworld/moonknight",
+    "bosses_overworld/lich",
+    "bosses_overworld/dead_king",
+    "bosses_overworld/black_charro",
+    "bosses_overworld/queen_of_orchid",
+    "bosses_overworld/invoker",
+    "bosses_overworld/tunnel_gore",
+    "bosses_overworld/warden",
+    "bosses_overworld/elder_guardian",
+    "bosses_nether/underworld_knight",
+    "bosses_nether/accursed_lord",
+    "bosses_nether/unbreakable",
+    "bosses_nether/ignis",
+    "bosses_nether/netherite_monstrosity",
+    "bosses_nether/lava_eater",
+    "bosses_nether/skeletosaurus",
+    "bosses_nether/withered_abomination",
+    "bosses_end/annihilation_pursuer",
+    "bosses_end/ender_guardian",
+    "bosses_end/endersent",
+    "bosses_end/shulker_mimic",
+    "bosses_end/rhyza",
+    "bosses_end/voidrake",
+    "bosses_end/ender_dragon"
+   ],
+   "min_deps": 40,
+   "hide_dependency_lines": true,
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "Claim"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "major_levels",
+     "count": 1
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:enchanted_golden_apple",
+     "count": 1
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_ingot",
+     "count": 2
+    }
+   ]
+  }
+ ]
+}

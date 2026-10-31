@@ -1,0 +1,365 @@
+{
+  "id": "welcome",
+  "title": "Getting Started",
+  "subtitle": ["Bloom's skill tabs, the controls, and getting around."],
+  "icon": "minecraft:compass",
+  "group": "guides",
+  "mods": [],
+  "quests": [
+    {
+      "id": "quest_book",
+      "title": "Your Quest Book",
+      "subtitle": "Start here",
+      "icon": "minecraft:writable_book",
+      "x": 0, "y": 0,
+      "shape": "circle",
+      "description": [
+        "This book suggests things to try. Nothing in it is locked, so pick any quest in any order.",
+        "Open it with the book button at the top-left of your inventory, or give \"Open Quests\" a key in Controls.",
+        "",
+        "Click a checkmark task to tick it, then click a reward to claim it. Your progress is your own.",
+        "Ctrl+K opens Keybind Atlas: a map of your keyboard and mouse showing what each key does in this pack."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Ready to go"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 25},
+        {"type": "bloom_xp", "tab": "armor", "xp": 25},
+        {"type": "bloom_xp", "tab": "utility", "xp": 25},
+        {"type": "bloom_xp", "tab": "misc", "xp": 25},
+        {"type": "item", "item": "minecraft:bread", "count": 8}
+      ]
+    },
+    {
+      "id": "recipes_and_labels",
+      "title": "Recipes and Labels",
+      "icon": "minecraft:crafting_table",
+      "x": 1.5, "y": 0,
+      "shape": "circle",
+      "mods": ["jei", "jade"],
+      "description": [
+        "JEI lists every item beside your inventory. Search for one, or hover over any item and press R to see how it's made, U to see what it's used for.",
+        "",
+        "Jade's small panel at the top of the screen names the block or creature you're looking at, and the mod it comes from."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Look up a recipe"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "utility", "xp": 100},
+        {"type": "item", "item": "minecraft:oak_log", "count": 8}
+      ]
+    },
+    {
+      "id": "roll_and_swing",
+      "title": "Roll and Swing",
+      "icon": "minecraft:iron_sword",
+      "x": 3, "y": 0,
+      "shape": "circle",
+      "mods": ["combatroll", "bettercombat"],
+      "description": [
+        "Press Z to dodge roll the way you're moving. Nothing can hit you mid-roll, and it's ready again after about 3 seconds. You can't roll in the air or when you're low on food.",
+        "",
+        "Better Combat gives every weapon its own swings. Keep attacking, or hold the button, for a combo; one swing can hit several mobs.",
+        "Two-Handed weapons (the tooltip says so) ignore your off hand. With a one-handed weapon in each hand, your swings alternate between them."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Roll, then swing"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 100},
+        {"type": "item", "item": "minecraft:cooked_beef", "count": 4}
+      ]
+    },
+    {
+      "id": "carry_on",
+      "title": "Carry On",
+      "icon": "minecraft:chest",
+      "x": 4.5, "y": 0,
+      "shape": "circle",
+      "mods": ["carryon"],
+      "description": [
+        "With both hands empty, hold Shift and right-click a chest, barrel or furnace to pick it up with everything inside. Right-click a spot to set it down.",
+        "Most animals can be carried the same way, but not monsters. Heavy things slow you down."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Carry a chest"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "utility", "xp": 100},
+        {"type": "item", "item": "minecraft:chest", "count": 1}
+      ]
+    },
+    {
+      "id": "skill_hub",
+      "title": "The Skill Hub",
+      "subtitle": "The heart of the pack",
+      "icon": "minecraft:flowering_azalea",
+      "x": 0, "y": 1.5,
+      "shape": "hexagon",
+      "description": [
+        "Bloom gives you four skill tabs, Combat, Armor, Utility and Misc, each levelling from 0 to 100 through its own kind of play.",
+        "Open the Skill Hub with its button in the column along the left side of your inventory, or give \"Open Skill Hub\" a key in Controls.",
+        "",
+        "Each level is one stat point for that tab: spend it with the + beside a stat on the left. Click a stat's icon to switch it off or on.",
+        "Points stay where you put them until that tab reaches level 100, so choose with some care. This quest's reward is one level in every tab."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Open the Skill Hub"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 50},
+        {"type": "bloom_xp", "tab": "armor", "xp": 50},
+        {"type": "bloom_xp", "tab": "utility", "xp": 50},
+        {"type": "bloom_xp", "tab": "misc", "xp": 50}
+      ]
+    },
+    {
+      "id": "majors",
+      "title": "Majors",
+      "icon": "minecraft:nether_star",
+      "x": 1.5, "y": 1.5,
+      "shape": "circle",
+      "description": [
+        "Majors are the big abilities: weapon tricks, new defenses, odd rules, even flight. They cost Major Levels, not stat points.",
+        "You get one Major Level for every 10 levels in any tab, and can spend it in any tab. The strip under the page shows how many are free.",
+        "",
+        "Click a Major to buy it, click it again to switch it off or on, and right-click an owned one for its details. A locked one only says Prerequisite Required.",
+        "Single Majors can't be refunded: a tab's white arrows (top right) refund all of its Majors, then need 20 minutes before the next time."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Read a Major"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 25},
+        {"type": "bloom_xp", "tab": "armor", "xp": 25},
+        {"type": "bloom_xp", "tab": "utility", "xp": 25},
+        {"type": "bloom_xp", "tab": "misc", "xp": 25}
+      ]
+    },
+    {
+      "id": "spend_your_xp",
+      "title": "Spend Your XP",
+      "icon": "minecraft:experience_bottle",
+      "x": 3, "y": 1.5,
+      "shape": "circle",
+      "description": [
+        "Under a tab's stats, the \"+1 level\" button buys that tab its next level with vanilla XP. It never takes more than the level needs.",
+        "It's a way to raise a tab you rarely play. Here are a few levels to try it with.",
+        "",
+        "At level 100 it becomes \"Buy point\": extra stat points that stay yours for good."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Buy a level with XP"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "combat", "xp": 25},
+        {"type": "bloom_xp", "tab": "armor", "xp": 25},
+        {"type": "bloom_xp", "tab": "utility", "xp": 25},
+        {"type": "bloom_xp", "tab": "misc", "xp": 25}
+      ]
+    },
+    {
+      "id": "pocket_and_runes",
+      "title": "Pocket and Runes",
+      "icon": "minecraft:enchanted_book",
+      "x": 4.5, "y": 1.5,
+      "shape": "diamond",
+      "description": [
+        "Two Misc Majors open screens of their own, from the chest and enchanted book buttons under the Skill Hub button (or /bloom pocket and /bloom runes, or a key of your own in Controls).",
+        "Hoarder's Pocket (5 Major Levels): nine slots that keep their items through death. No shulker boxes or bundles.",
+        "Rune Embedding (6 Major Levels): five slots for enchanted books. Slots 1-4 work while you wear no armor, slot 5 while your main hand is empty. The books aren't used up."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Find the two buttons"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:book", "count": 3}
+      ]
+    },
+    {
+      "id": "combat_tab",
+      "title": "The Combat Tab",
+      "subtitle": "XP from fighting",
+      "icon": "minecraft:diamond_sword",
+      "x": 0, "y": 3,
+      "shape": "circle",
+      "description": [
+        "Combat XP comes from the damage you deal to mobs, with a bonus for the killing blow.",
+        "Stats: Power (damage), Tempo (attack speed), Critical (harder crits), Penetration (ignore armor) and Looting (better drops).",
+        "Majors grow from six weapon trees (sword, axe, bow, crossbow, trident, bare hands) plus a row for any weapon. The pack's spears and daggers count as swords, its maces and hammers as axes.",
+        "Majors that need a key use Weapon skill, on V."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Open the Combat tab"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 100},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 2}
+      ]
+    },
+    {
+      "id": "armor_tab",
+      "title": "The Armor Tab",
+      "subtitle": "XP from taking hits",
+      "icon": "minecraft:diamond_chestplate",
+      "x": 1.5, "y": 3,
+      "shape": "circle",
+      "description": [
+        "Armor XP comes from damage you take, with extra for hits you block with a shield or avoid with Dodge.",
+        "Stats: Vitality (more hearts), Defense (armor of your own), Dodge (a chance to avoid a hit) and Durability (armor and shields wear slower).",
+        "",
+        "Each armor piece is Light (leather, chainmail, robes), Medium (iron, gold, copper) or Heavy (diamond, netherite, full knight's plate).",
+        "With the Fitting Armor Major (2 Major Levels), a full set gives its bonus: Light dodges more and falls softer, Medium and Heavy take less damage."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Open the Armor tab"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "armor", "xp": 100},
+        {"type": "item", "item": "minecraft:shield", "count": 1}
+      ]
+    },
+    {
+      "id": "utility_tab",
+      "title": "The Utility Tab",
+      "subtitle": "XP from gathering",
+      "icon": "minecraft:diamond_pickaxe",
+      "x": 3, "y": 3,
+      "shape": "circle",
+      "description": [
+        "Utility XP comes from mining, chopping, digging, harvesting ripe crops, fishing and shearing. Ores are worth the most.",
+        "Use the right tool for the block; blocks you placed yourself give nothing.",
+        "Stats: Efficiency (faster tool work), Yield (extra drops from ores, logs and crops) and Preservation (tools wear slower).",
+        "Its Majors include Vein Mining and Timber, which take a whole ore vein or tree at once. Sneak to break just the one block."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Open the Utility tab"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "utility", "xp": 100},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 3}
+      ]
+    },
+    {
+      "id": "misc_tab",
+      "title": "The Misc Tab",
+      "subtitle": "XP from experience orbs",
+      "icon": "minecraft:feather",
+      "x": 4.5, "y": 3,
+      "shape": "circle",
+      "description": [
+        "Misc XP comes from the experience orbs you pick up, and you still get all of their vanilla XP.",
+        "Stats: Wisdom (more XP from orbs), Speed (move faster) and Endurance (food lasts longer).",
+        "Its Majors are the strange ones: safer food, effects that last, more storage, even flight (Ascension, 20 Major Levels)."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Open the Misc tab"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:experience_bottle", "count": 8}
+      ]
+    },
+    {
+      "id": "maps",
+      "title": "Maps",
+      "icon": "minecraft:map",
+      "x": 0, "y": 4.5,
+      "shape": "circle",
+      "mods": ["xaerominimap", "xaeroworldmap"],
+      "description": [
+        "The round minimap keeps north at the top. Hostile mobs show red, animals green, neutral mobs yellow and your own pets sky blue.",
+        "Press M for the world map, B to save a waypoint where you stand, and Y for the minimap's settings.",
+        "When you die, the map marks the spot as Latest Death.",
+        "",
+        "The reward is what a Warp Stone takes (see Waystones)."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Open the world map"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:amethyst_shard", "count": 4},
+        {"type": "item", "item": "minecraft:ender_pearl", "count": 4},
+        {"type": "item", "item": "minecraft:emerald", "count": 1}
+      ]
+    },
+    {
+      "id": "waystones",
+      "title": "Waystones",
+      "icon": "waystones:waystone",
+      "x": 1.5, "y": 4.5,
+      "shape": "hexagon",
+      "description": [
+        "Waystones stand in many villages and here and there in the wild. Right-click one to activate it; after that, right-click any waystone to travel to the others you've activated.",
+        "A Warp Stone (4 amethyst shards, 4 ender pearls and an emerald) opens the same list anywhere: hold right-click. It needs 30 seconds between uses.",
+        "Or craft it with 3 stone bricks and 3 obsidian into a waystone of your own, for your base."
+      ],
+      "tasks": [
+        {"type": "item", "item": "waystones:warp_stone", "title": "Craft a Warp Stone"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:obsidian", "count": 3},
+        {"type": "item", "item": "minecraft:stone_bricks", "count": 3}
+      ]
+    },
+    {
+      "id": "after_a_death",
+      "title": "After a Death",
+      "icon": "minecraft:skeleton_skull",
+      "x": 3, "y": 4.5,
+      "shape": "circle",
+      "mods": ["corpse"],
+      "description": [
+        "When you die, your body stays where you fell with all your items on it. It won't burn in lava or fall into the void, and it waits for you.",
+        "Right-click it and press Transfer Items to put everything back where it was. An empty body disappears; after an hour a full one turns to a skeleton, still holding everything.",
+        "Anyone can open it, so friends can bring your things back for you."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Good to know"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "armor", "xp": 100},
+        {"type": "item", "item": "minecraft:torch", "count": 16}
+      ]
+    },
+    {
+      "id": "loot_for_everyone",
+      "title": "Loot for Everyone",
+      "icon": "minecraft:barrel",
+      "x": 4.5, "y": 4.5,
+      "shape": "circle",
+      "description": [
+        "Chests, barrels and chest minecarts that come with the world hold a separate share of loot for every player.",
+        "If a friend looted one first, your share is still waiting, so there's no need to race each other."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "lootr:1chest", "title": "Open a loot chest"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:bread", "count": 6}
+      ]
+    }
+  ]
+}

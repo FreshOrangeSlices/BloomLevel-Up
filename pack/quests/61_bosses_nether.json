@@ -1,0 +1,395 @@
+{
+ "id": "bosses_nether",
+ "title": "Nether Bosses",
+ "subtitle": [
+  "Lairs in the Nether."
+ ],
+ "icon": "minecraft:netherite_sword",
+ "group": "bosses",
+ "quests": [
+  {
+   "id": "underworld_knight",
+   "title": "Helvar, the Underworld Knight",
+   "subtitle": "Bosses'Rise · 250 health",
+   "x": 0.0,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in an underworld arena.",
+    "The arena door opens with the Underworld Arena Key."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "block_factorys_bosses:underworld_arena",
+     "optional": true,
+     "title": "Find an underworld arena"
+    },
+    {
+     "type": "kill",
+     "entity": "block_factorys_bosses:underworld_knight",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 500
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "accursed_lord",
+   "title": "The Decaying King",
+   "subtitle": "Marium's Soulslike Weaponry · 600 health",
+   "x": 1.5,
+   "y": 0.0,
+   "shape": "octagon",
+   "description": [
+    "Lives in the Decaying Kingdom."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "soulsweapons:decaying_kingdom",
+     "optional": true,
+     "title": "Find the Decaying Kingdom"
+    },
+    {
+     "type": "kill",
+     "entity": "soulsweapons:accursed_lord_boss",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1200
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "unbreakable",
+   "title": "The Unbreakable",
+   "subtitle": "Legionary · 400 health",
+   "x": 3.0,
+   "y": 0.0,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Bastion Arena, in the Nether Wastes."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legionary:bastion_arena",
+     "optional": true,
+     "title": "Find a Bastion Arena"
+    },
+    {
+     "type": "kill",
+     "entity": "legionary:unbreakable",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 800
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "ignis",
+   "title": "Ignis",
+   "subtitle": "L_Ender's Cataclysm · 450 health",
+   "x": 0.0,
+   "y": 1.5,
+   "shape": "hexagon",
+   "description": [
+    "Lives in a Burning Arena.",
+    "TODO",
+    "",
+    "The Eye of Flame flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:burning_arena",
+     "optional": true,
+     "title": "Find a Burning Arena"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:ignis",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 900
+    },
+    {
+     "type": "xp_levels",
+     "levels": 10
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "netherite_monstrosity",
+   "title": "Netherite Monstrosity",
+   "subtitle": "L_Ender's Cataclysm · 600 health",
+   "x": 1.5,
+   "y": 1.5,
+   "shape": "octagon",
+   "description": [
+    "Lives in a Soul Black Smith.",
+    "Sleeps in the forge.",
+    "",
+    "The Eye of Monstrous flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "cataclysm:soul_black_smith",
+     "optional": true,
+     "title": "Find a Soul Black Smith"
+    },
+    {
+     "type": "kill",
+     "entity": "cataclysm:netherite_monstrosity",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 1200
+    },
+    {
+     "type": "xp_levels",
+     "levels": 15
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 8
+    },
+    {
+     "type": "item",
+     "item": "minecraft:netherite_scrap",
+     "count": 2
+    },
+    {
+     "type": "item",
+     "item": "minecraft:totem_of_undying",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "lava_eater",
+   "title": "Lava Eater",
+   "subtitle": "Legendary Monsters · 170 health",
+   "x": 0.0,
+   "y": 3.0,
+   "shape": "circle",
+   "description": [
+    "Lives in its spawn in the Nether.",
+    "",
+    "The Eye of Magma flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:lava_eater_spawn",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:lava_eater",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 350
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "skeletosaurus",
+   "title": "Skeletosaurus",
+   "subtitle": "Legendary Monsters · 150 health",
+   "x": 1.5,
+   "y": 3.0,
+   "shape": "circle",
+   "description": [
+    "Lives in its nest in the Nether.",
+    "The bone dinosaur.",
+    "",
+    "The Eye of Bones flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:skeletosaurus_nest",
+     "optional": true,
+     "title": "Find its lair"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:skeletosaurus",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 300
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "withered_abomination",
+   "title": "Withered Abomination",
+   "subtitle": "Legendary Monsters · 190 health",
+   "x": 3.0,
+   "y": 3.0,
+   "shape": "circle",
+   "description": [
+    "Lives in the remains of a Soul Fortress.",
+    "",
+    "The Eye of Soul flies toward the nearest one."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "legendary_monsters:soul_fortress_remains",
+     "optional": true,
+     "title": "Find a Soul Fortress"
+    },
+    {
+     "type": "kill",
+     "entity": "legendary_monsters:withered_abomination",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 400
+    },
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 3
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 2
+    }
+   ]
+  }
+ ]
+}

@@ -908,6 +908,13 @@
     "_keys": "Key bindings, each set once per change of it (by name, as options.txt has them; a player's own change afterwards stays): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets'). Combat Roll is the one dodge, on Z (FreshOrangeSlices); Bosses'Rise's and Monster Expansion's rolls are switched off (config_files) and their keys unbound, so the Controls list has no live second dodge.",
     "settings": {
       "_comment": "Settings in other mods' client config files, each set once per change of it, the rest of the file left as the player has it (Bloom's PackDefaults: a .json key is a / path, IPN keeping each option as {\"value\": ...}; a .toml key has its [Section] in front). A file that isn't there yet is started with these lines and the mod fills in the rest. FreshOrangeSlices' playtest: a simple craft screen (no Crafting Tweaks buttons, which keep their keys; no IPN auto-crafting checkbox; no IPN profiles), and tools that break like in normal Minecraft (IPN's auto-refill off, with all its warnings). Bosses'Rise's roll indicator by the hotbar is hidden (its roll is off; Combat Roll has its own).",
+      "sidebar_buttons.json": {
+        "_comment": "FTB Library's buttons at the inventory's top-left: the quest book and FTB Teams stay; its four op-only cheat buttons (game mode, rain, day, night) are off, since they overlapped the buttons below them (FreshOrangeSlices' screenshot, 2026-10-30). Ops still have the commands.",
+        "ftblibrary/toggle.gamemode": false,
+        "ftblibrary/toggle.rain": false,
+        "ftblibrary/toggle.day": false,
+        "ftblibrary/toggle.night": false
+      },
       "voicechat/voicechat-client.properties": {
         "_comment": "Simple Voice Chat ready on first join: its setup wizard counted as done (config_version must be there too, or it migrates the file and sets the wizard back), push-to-talk (its default) on the pack's Caps Lock key.",
         "config_version": 1,

@@ -132,11 +132,18 @@ def ids_used(quest_dir, present):
     return used
 
 
+def text(value):
+    """Words as FTB Quests shows them: '&' starts a colour code there ('&a'), so a plain '&' is written '\\&'."""
+    if isinstance(value, list):
+        return [text(v) for v in value]
+    return value.replace("\\&", "&").replace("&", "\\&")
+
+
 def task_data(chapter_id, quest_id, n, task):
     kind = task["type"]
     out = {"id": fid(chapter_id, quest_id, "task", str(n)), "type": kind}
     if task.get("title"):
-        out["title"] = task["title"]
+        out["title"] = text(task["title"])
     if task.get("optional"):
         out["optional_task"] = True
     if kind == "item":
@@ -178,7 +185,7 @@ def reward_data(chapter_id, quest_id, n, reward):
     else:
         raise ValueError(f"{chapter_id}/{quest_id}: unknown reward type {kind}")
     if reward.get("title") and kind not in ("bloom_xp", "major_levels"):
-        out["title"] = reward["title"]
+        out["title"] = text(reward["title"])
     return out
 
 
@@ -216,18 +223,18 @@ def build(quest_dir, present, notes=None, title="LegionWareX"):
             if quest.get("tasks") and not tasks:
                 skipped.append(f"{cid}/{qid} (no task left)")
                 continue
-            data = {"id": fid(cid, qid), "title": quest["title"], "x": float(quest.get("x", 0)), "y": float(quest.get("y", 0)),
+            data = {"id": fid(cid, qid), "title": text(quest["title"]), "x": float(quest.get("x", 0)), "y": float(quest.get("y", 0)),
                     "tasks": tasks,
                     "rewards": [reward_data(cid, qid, n, r) for n, r in enumerate(quest.get("rewards", [])) if kept(r, present)]}
             for key, out_key in (("subtitle", "subtitle"), ("icon", "icon"), ("shape", "shape")):
                 if quest.get(key):
-                    data[out_key] = quest[key]
+                    data[out_key] = text(quest[key]) if key == "subtitle" else quest[key]
             if quest.get("shape") and quest["shape"] not in SHAPES:
                 raise ValueError(f"{cid}/{qid}: unknown shape {quest['shape']}")
             if quest.get("size"):
                 data["size"] = float(quest["size"])
             if quest.get("description"):
-                data["description"] = list(quest["description"])
+                data["description"] = text(list(quest["description"]))
             if quest.get("optional"):
                 data["optional"] = True
             deps = []
@@ -252,10 +259,10 @@ def build(quest_dir, present, notes=None, title="LegionWareX"):
         index = order.setdefault(group, 0)
         order[group] += 1
         chapter_data = {"id": fid(cid), "filename": cid, "group": fid("group", group) if group else "", "order_index": index,
-                        "title": chapter["title"], "icon": chapter.get("icon", ""), "default_quest_shape": "",
+                        "title": text(chapter["title"]), "icon": chapter.get("icon", ""), "default_quest_shape": "",
                         "default_hide_dependency_lines": False, "quests": quests, "quest_links": []}
         if chapter.get("subtitle"):
-            chapter_data["subtitle"] = list(chapter["subtitle"]) if isinstance(chapter["subtitle"], list) else [chapter["subtitle"]]
+            chapter_data["subtitle"] = text(list(chapter["subtitle"]) if isinstance(chapter["subtitle"], list) else [chapter["subtitle"]])
         files[f"config/ftbquests/quests/chapters/{cid}.snbt"] = (snbt(chapter_data) + "\n").encode()
         totals[0] += 1
         totals[1] += len(quests)

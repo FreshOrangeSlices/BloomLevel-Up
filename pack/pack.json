@@ -572,6 +572,10 @@
           "born_in_chaos_v1:pumpkin_bruiser_biome_modifier",
           "born_in_chaos_v1:sir_pumpkinhead_biome_modifier"
         ],
+        "Born in Chaos's Krampus and his henchmen, in every biome of every dimension (FreshOrangeSlices, 2026-10-31: snowy biomes only, all year): put back below": [
+          "born_in_chaos_v1:krampus_biome_modifier",
+          "born_in_chaos_v1:krampus_henchman_biome_modifier"
+        ],
         "Undead Unleashed – Continued (playtest patch, chunk 5: harder mobs mainly by day, as the add-on's sentinels): its Wraiths came in twos and threes at weight 67 and its Dreadknights at 10 in every Overworld biome; the Flamebreather keeps its few Nether spawns": [
           "undead_unleashed:dreadknight_biome_modifier",
           "undead_unleashed:wraith_biome_modifier"
@@ -689,6 +693,17 @@
           ],
           "spawners": {
             "born_in_chaos_v1:sir_pumpkinhead": [4, 1, 1]
+          }
+        },
+        "krampus_snow": {
+          "why": "Born in Chaos's Krampus (250 health) and his henchmen in snowy biomes only (FreshOrangeSlices, 2026-10-31), at Born in Chaos's own weights: Krampus 2, his henchmen 9 in twos and threes. Their own spawns put them in every biome of every dimension. All year as before: their spawn rule asks for no date, only the Overworld in the dark, a world past its first ten days or so and Born in Chaos's krampusSpawn game rule (its holiday is the naughtiness mechanic, killing villagers or animals).",
+          "category": "monster",
+          "biomes": [
+            "#forge:is_snowy"
+          ],
+          "spawners": {
+            "born_in_chaos_v1:krampus": [2, 1, 1],
+            "born_in_chaos_v1:krampus_henchman": [9, 2, 3]
           }
         },
         "chaos_land": {

@@ -320,3 +320,155 @@ public class net.mcreator.borninchaosv.procedures.KrampusSpawnProProcedure {
      323: ifgt          328
      326: iconst_1
      328: iconst_0
+## net/mcreator/borninchaosv/entity/KrampusEntity.class: no lambda body found
+## net/mcreator/borninchaosv/entity/KrampusHenchmanEntity.class: no lambda body found
+## net/mcreator/borninchaosv/procedures/KrampusSpawnProProcedure.class in full
+Compiled from "KrampusSpawnProProcedure.java"
+public class net.mcreator.borninchaosv.procedures.KrampusSpawnProProcedure {
+  public net.mcreator.borninchaosv.procedures.KrampusSpawnProProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+    Code:
+       0: aload_0
+       1: invokeinterface #24,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_8044_:()J
+       6: ldc2_w        #25                 // long 228400l
+       9: lcmp
+      10: iflt          328
+      13: aload_0
+      14: dload_1
+      15: dload_3
+      16: dconst_1
+      17: dadd
+      18: dload         5
+      20: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      23: invokeinterface #36,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      28: ifeq          48
+      31: aload_0
+      32: dload_1
+      33: dload_3
+      34: dload         5
+      36: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      39: invokeinterface #40,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46803_:(Lnet/minecraft/core/BlockPos;)I
+      44: iconst_4
+      45: if_icmple     82
+      48: aload_0
+      49: dload_1
+      50: dload_3
+      51: dconst_1
+      52: dadd
+      53: dload         5
+      55: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      58: invokeinterface #36,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46861_:(Lnet/minecraft/core/BlockPos;)Z
+      63: ifne          328
+      66: aload_0
+      67: dload_1
+      68: dload_3
+      69: dload         5
+      71: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      74: invokeinterface #40,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_46803_:(Lnet/minecraft/core/BlockPos;)I
+      79: ifgt          328
+      82: aload_0
+      83: dload_1
+      84: dload_3
+      85: dload         5
+      87: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      90: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+      95: new           #46                 // class net/minecraft/resources/ResourceLocation
+      98: dup
+      99: ldc           #48                 // String deep_dark
+     101: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     104: invokeinterface #57,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     109: ifne          328
+     112: aload_0
+     113: dload_1
+     114: dload_3
+     115: dload         5
+     117: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     120: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     125: new           #46                 // class net/minecraft/resources/ResourceLocation
+     128: dup
+     129: ldc           #59                 // String mushroom_fields
+     131: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     134: invokeinterface #57,  2           // InterfaceMethod net/minecraft/core/Holder.m_203373_:(Lnet/minecraft/resources/ResourceLocation;)Z
+     139: ifne          328
+     142: aload_0
+     143: invokeinterface #63,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+     148: invokeinterface #69,  1           // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+     153: getstatic     #75                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.KRAMPUS_SPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     156: invokevirtual #79                 // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+     159: iconst_1
+     160: if_icmpne     328
+     163: aload_0
+     164: instanceof    #81                 // class net/minecraft/world/level/Level
+     167: ifeq          184
+     170: aload_0
+     171: checkcast     #81                 // class net/minecraft/world/level/Level
+     174: astore        7
+     176: aload         7
+     178: invokevirtual #85                 // Method net/minecraft/world/level/Level.m_46472_:()Lnet/minecraft/resources/ResourceKey;
+     181: goto          213
+     184: aload_0
+     185: instanceof    #87                 // class net/minecraft/world/level/WorldGenLevel
+     188: ifeq          210
+     191: aload_0
+     192: checkcast     #87                 // class net/minecraft/world/level/WorldGenLevel
+     195: astore        8
+     197: aload         8
+     199: invokeinterface #91,  1           // InterfaceMethod net/minecraft/world/level/WorldGenLevel.m_6018_:()Lnet/minecraft/server/level/ServerLevel;
+     204: invokevirtual #94                 // Method net/minecraft/server/level/ServerLevel.m_46472_:()Lnet/minecraft/resources/ResourceKey;
+     207: goto          213
+     210: getstatic     #98                 // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+     213: getstatic     #98                 // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+     216: if_acmpne     328
+     219: aload_0
+     220: dload_1
+     221: dload_3
+     222: dload         5
+     224: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     227: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     232: getstatic     #105                // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     235: new           #46                 // class net/minecraft/resources/ResourceLocation
+     238: dup
+     239: ldc           #107                // String minecraft:is_overworld
+     241: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     244: invokestatic  #113                // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     247: invokeinterface #117,  2          // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     252: ifne          291
+     255: aload_0
+     256: dload_1
+     257: dload_3
+     258: dload         5
+     260: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     263: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     268: getstatic     #105                // Field net/minecraft/core/registries/Registries.f_256952_:Lnet/minecraft/resources/ResourceKey;
+     271: new           #46                 // class net/minecraft/resources/ResourceLocation
+     274: dup
+     275: ldc           #119                // String terralith:all_terralith_biomes
+     277: invokespecial #51                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+     280: invokestatic  #113                // Method net/minecraft/tags/TagKey.m_203882_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;
+     283: invokeinterface #117,  2          // InterfaceMethod net/minecraft/core/Holder.m_203656_:(Lnet/minecraft/tags/TagKey;)Z
+     288: ifeq          328
+     291: aload_0
+     292: dload_1
+     293: dload_3
+     294: dload         5
+     296: invokestatic  #32                 // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+     299: invokeinterface #44,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_204166_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+     304: invokeinterface #123,  1          // InterfaceMethod net/minecraft/core/Holder.m_203334_:()Ljava/lang/Object;
+     309: checkcast     #125                // class net/minecraft/world/level/biome/Biome
+     312: invokevirtual #129                // Method net/minecraft/world/level/biome/Biome.m_47554_:()F
+     315: ldc           #130                // float 100.0f
+     317: fmul
+     318: f2d
+     319: ldc2_w        #131                // double 0.15d
+     322: dcmpg
+     323: ifgt          328
+     326: iconst_1
+     327: ireturn
+     328: iconst_0
+     329: ireturn
+}

@@ -33,6 +33,7 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.IntValue SENTINEL_FROM_DAY;
 	private static final ForgeConfigSpec.BooleanValue HARVEST_ALL_YEAR;
 	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
+	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HARVEST_MOBS;
 	/** Born in Chaos's pumpkin folk that spawn in the wild (its Lord Pumpkinhead and the rest come from them or from items). */
 	public static final List<String> HARVEST_DEFAULT = List.of("born_in_chaos_v1:mr_pumpkin", "born_in_chaos_v1:mrs_pumpkin",
@@ -141,6 +142,11 @@ public final class AddonConfig {
 				.comment("Whether a mob killed by another mob (an iron golem, a rival, a creeper) drops its loot. Off: it drops nothing unless",
 						"a player, their pet or companion hit it at some point in the fight. Deaths with no killer (falls, lava) drop as usual.")
 				.define("dropsWhenKilledByMobs", false);
+		ZOMBIE_ENDLESS_BUFFS = builder
+				.comment("Whether zombies may carry good effects over an hour long (endless strength, regeneration, invisibility, resistance).",
+						"Off: refused whoever gives them, and taken off zombies already in the world when they load; the first refusal from",
+						"each place in the code is logged as \"LegionWareX buffs\".")
+				.define("zombieEndlessBuffs", false);
 		MAINLAND_SPAWN = builder
 				.comment("A new world's spawn on the mainland: the land nearest the middle of the world that is well inland (no sea",
 						"within about 250 blocks), not a beach, river or mountain, and not too high. Off: vanilla's spawn (which can be",
@@ -244,6 +250,10 @@ public final class AddonConfig {
 
 	public static boolean dropsWhenKilledByMobs() {
 		return get(MOB_KILL_DROPS, false);
+	}
+
+	public static boolean zombieEndlessBuffs() {
+		return get(ZOMBIE_ENDLESS_BUFFS, false);
 	}
 
 	public static boolean harvestAllYear() {

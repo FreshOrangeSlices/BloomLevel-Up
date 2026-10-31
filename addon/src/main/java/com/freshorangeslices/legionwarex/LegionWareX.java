@@ -12,9 +12,9 @@ import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
 import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
 import com.freshorangeslices.legionwarex.companion.CompanionKeepsakeItem;
-import com.freshorangeslices.legionwarex.world.EffectWatch;
 import com.freshorangeslices.legionwarex.world.MobKillDrops;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
+import com.freshorangeslices.legionwarex.world.ZombieBuffs;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import net.minecraft.commands.Commands;
@@ -38,8 +38,8 @@ import org.slf4j.Logger;
  * dies leaves its owner a keepsake that brings that same companion back after a day's rest, and wild companions
  * despawn the way monsters do (Migamigos keeps every one for good). Illager war bands roam by day and pirate bands
  * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/);
- * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, and mobs other mobs kill
- * drop nothing unless a player took part (world/). The pack was
+ * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, mobs other mobs kill
+ * drop nothing unless a player took part, and zombies get no endless buffs (world/). The pack was
  * LegionWareX at first and is Warionex now; the mod id, commands and saved data keep the first name.
  */
 @Mod(LegionWareX.MOD_ID)
@@ -75,7 +75,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(SentinelEvents.class);
 		MinecraftForge.EVENT_BUS.register(HarvestCourt.class);
 		MinecraftForge.EVENT_BUS.register(MobKillDrops.class);
-		MinecraftForge.EVENT_BUS.register(EffectWatch.class);
+		MinecraftForge.EVENT_BUS.register(ZombieBuffs.class);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 

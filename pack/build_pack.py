@@ -675,6 +675,7 @@ def main():
         notes.append("layers: " + ", ".join(layer["name"] for layer in chosen))
     queue = [(slug, None) for slug in spec["modrinth"]]
     pins = {slug: pin for slug, pin in spec.get("pins", {}).items() if not slug.startswith("_")}
+    skip_dependencies = {slug: why for slug, why in spec.get("skip_dependencies", {}).items() if not slug.startswith("_")}
     notes += [f"{slug} held at {pin['version']}: {pin.get('why', 'pinned')}" for slug, pin in sorted(pins.items()) if slug in spec["modrinth"]]
     seen = set()
     lock_path = os.path.join(os.path.dirname(__file__), "pack.lock.json")
@@ -692,6 +693,11 @@ def main():
         if project["id"] in seen:
             continue
         seen.add(project["id"])
+        # A dependency a mod's Modrinth page calls required but its jar doesn't need (pack.json's skip_dependencies,
+        # each with why): e.g. Voiceless Survival lists both voice mods, and works with either.
+        if project["slug"] in skip_dependencies and project["slug"] not in spec["modrinth"]:
+            notes.append(f"{project['title']} left out (listed as a dependency): {skip_dependencies[project['slug']]}")
+            continue
         version = None
         held = pins.get(project["slug"], {}).get("version")  # pack.json's pins hold a version even with --update
         pin = held or (None if update else locked.get(project["slug"]))

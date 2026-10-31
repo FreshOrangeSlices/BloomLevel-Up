@@ -841,6 +841,10 @@
       }
     }
   },
+  "skip_dependencies": {
+    "_comment": "Projects a mod's Modrinth page lists as required that the pack leaves out, each with why (its jar works without them).",
+    "plasmo-voice": "Voiceless Survival lists both voice chat mods as required, but works with either; the pack's voice chat is Simple Voice Chat (FreshOrangeSlices, 2026-10-30), and a second voice mod would put its own keys and server port next to it."
+  },
   "env_overrides": {
     "playeranimator": {
       "server": "required"

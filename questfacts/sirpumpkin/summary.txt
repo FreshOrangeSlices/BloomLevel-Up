@@ -1,0 +1,1265 @@
+# SIR_PUMPKINHEAD_WITHOUT_HORSE: ['SirPumpkinheadWithoutHorseEntity.class', 'BornInChaosV1ModEntities.class', 'BornInChaosV1ModEntityRenderers.class', 'BornInChaosV1ModItems.class', 'SerPumpkinheadGProcedure.class']
+# SIR_PUMPKINHEAD:: []
+# LORD_PUMPKINHEAD_WITHOUTA_HORSE: ['LordPumpkinheadWithoutaHorseEntity.class', 'BornInChaosV1ModEntities.class', 'BornInChaosV1ModEntityRenderers.class', 'BornInChaosV1ModItems.class', 'LordPumpkinheadPriObnovlieniiTikaSushchnostiProcedure.class']
+# LORD_PUMPKINHEAD:: []
+# FELSTEED:: []
+## SirPumpkinheadEntity.class
+public class net.mcreator.borninchaosv.entity.SirPumpkinheadEntity extends net.minecraft.world.entity.monster.Monster implements software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  public net.mcreator.borninchaosv.entity.SirPumpkinheadEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+  public net.mcreator.borninchaosv.entity.SirPumpkinheadEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.SirPumpkinheadEntity>, net.minecraft.world.level.Level);
+      15: ldc           #108                // String empty
+      21: ldc           #108                // String empty
+      37: ldc           #121                // float 1.6f
+  protected void m_8097_();
+      25: ldc           #154                // String undefined
+      37: ldc           #158                // String pumpkinheadrider
+  public void setTexture(java.lang.String);
+  public java.lang.String getTexture();
+      10: checkcast     #172                // class java/lang/String
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+  protected void m_8099_();
+       9: new           #9                  // class net/mcreator/borninchaosv/entity/SirPumpkinheadEntity$1
+      28: new           #202                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+      34: anewarray     #204                // class java/lang/Class
+      48: new           #209                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      53: ldc           #211                // class net/minecraft/world/entity/player/Player
+      68: new           #216                // class net/minecraft/world/entity/ai/goal/RandomStrollGoal
+      85: new           #221                // class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal
+      90: ldc           #211                // class net/minecraft/world/entity/player/Player
+      92: ldc           #222                // float 20.0f
+     106: new           #227                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+     123: new           #232                // class net/minecraft/world/entity/ai/goal/FloatGoal
+  public net.minecraft.world.entity.MobType m_6336_();
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       3: new           #251                // class net/minecraft/resources/ResourceLocation
+       7: ldc           #253                // String born_in_chaos_v1:haha
+      17: checkcast     #263                // class net/minecraft/sounds/SoundEvent
+  public void m_7355_(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+       4: new           #251                // class net/minecraft/resources/ResourceLocation
+       8: ldc_w         #267                // String entity.horse.step
+      19: checkcast     #263                // class net/minecraft/sounds/SoundEvent
+      22: ldc_w         #268                // float 0.15f
+      26: invokevirtual #272                // Method m_5496_:(Lnet/minecraft/sounds/SoundEvent;FF)V
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       3: new           #251                // class net/minecraft/resources/ResourceLocation
+       7: ldc_w         #280                // String entity.skeleton_horse.hurt
+      18: checkcast     #263                // class net/minecraft/sounds/SoundEvent
+  public net.minecraft.sounds.SoundEvent m_5592_();
+       3: new           #251                // class net/minecraft/resources/ResourceLocation
+       7: ldc_w         #285                // String entity.skeleton_horse.death
+      18: checkcast     #263                // class net/minecraft/sounds/SoundEvent
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #342                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #342                // String Texture
+      17: ldc_w         #342                // String Texture
+  public void m_6075_();
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public static void init();
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD:Lnet/minecraftforge/registries/RegistryObject;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       8: ldc2_w        #430                // double 0.36d
+      19: ldc2_w        #439                // double 160.0d
+      30: ldc2_w        #444                // double 9.0d
+      41: ldc2_w        #449                // double 6.0d
+      52: ldc2_w        #454                // double 20.0d
+      63: ldc2_w        #459                // double 0.9d
+      74: ldc2_w        #464                // double 1.2d
+       4: ldc           #108                // String empty
+      23: ldc_w         #484                // float -0.15f
+      34: ldc_w         #268                // float 0.15f
+      45: ldc_w         #492                // String walk
+      59: ldc_w         #502                // String idle
+      83: ldc2_w        #542                // long 7l
+     134: ldc_w         #560                // String attack
+       4: ldc           #108                // String empty
+      43: ldc           #108                // String empty
+     103: ldc           #108                // String empty
+     122: ldc           #108                // String empty
+     131: ldc           #108                // String empty
+  protected void m_6153_();
+  public java.lang.String getSyncedAnimation();
+      10: checkcast     #172                // class java/lang/String
+  public void setAnimation(java.lang.String);
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       2: anewarray     #31                 // class software/bernie/geckolib/core/animation/AnimationController
+       7: new           #31                 // class software/bernie/geckolib/core/animation/AnimationController
+      12: ldc_w         #595                // String movement
+      32: anewarray     #31                 // class software/bernie/geckolib/core/animation/AnimationController
+## SirPumpkinheadWithoutHorseEntity.class
+public class net.mcreator.borninchaosv.entity.SirPumpkinheadWithoutHorseEntity extends net.minecraft.world.entity.monster.Monster implements net.minecraft.world.entity.monster.RangedAttackMob,software.bernie.geckolib.animatable.GeoEntity {
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> SHOOT;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> ANIMATION;
+  public static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.String> TEXTURE;
+  public java.lang.String animationprocedure;
+  public net.mcreator.borninchaosv.entity.SirPumpkinheadWithoutHorseEntity(net.minecraftforge.network.PlayMessages$SpawnEntity, net.minecraft.world.level.Level);
+       1: getstatic     #71                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD_WITHOUT_HORSE:Lnet/minecraftforge/registries/RegistryObject;
+       7: checkcast     #79                 // class net/minecraft/world/entity/EntityType
+  public net.mcreator.borninchaosv.entity.SirPumpkinheadWithoutHorseEntity(net.minecraft.world.entity.EntityType<net.mcreator.borninchaosv.entity.SirPumpkinheadWithoutHorseEntity>, net.minecraft.world.level.Level);
+      15: ldc           #100                // String empty
+      21: ldc           #100                // String empty
+      37: ldc           #113                // float 0.6f
+  protected void m_8097_();
+      25: ldc           #149                // String undefined
+      37: ldc           #153                // String pumpkinheadrider
+  public void setTexture(java.lang.String);
+  public java.lang.String getTexture();
+      10: checkcast     #167                // class java/lang/String
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> m_5654_();
+  protected void m_8099_();
+       9: new           #185                // class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal
+      15: anewarray     #187                // class java/lang/Class
+      29: new           #198                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      34: ldc           #200                // class net/minecraft/world/entity/player/Player
+      49: new           #208                // class net/minecraft/world/entity/ai/goal/RandomStrollGoal
+      54: ldc2_w        #209                // double 0.9d
+      68: new           #215                // class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal
+      84: new           #220                // class net/minecraft/world/entity/ai/goal/FloatGoal
+     101: new           #198                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     106: ldc           #223                // class net/minecraft/world/entity/animal/IronGolem
+     122: new           #198                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     127: ldc           #225                // class net/mcreator/borninchaosv/entity/PumpkinSpiritEntity
+     143: new           #198                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     148: ldc           #227                // class net/mcreator/borninchaosv/entity/MrPumpkinControlledEntity
+     164: new           #198                // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+     169: ldc           #229                // class net/mcreator/borninchaosv/entity/ControlledBabySkeletonEntity
+     184: new           #13                 // class net/mcreator/borninchaosv/entity/SirPumpkinheadWithoutHorseEntity$1
+     190: ldc2_w        #230                // double 1.25d
+     195: ldc           #232                // float 10.0f
+  public net.minecraft.world.entity.MobType m_6336_();
+  public boolean m_6785_(double);
+  public net.minecraft.sounds.SoundEvent m_7515_();
+       3: new           #257                // class net/minecraft/resources/ResourceLocation
+       7: ldc_w         #259                // String born_in_chaos_v1:haha
+      18: checkcast     #269                // class net/minecraft/sounds/SoundEvent
+  public net.minecraft.sounds.SoundEvent m_7975_(net.minecraft.world.damagesource.DamageSource);
+       3: new           #257                // class net/minecraft/resources/ResourceLocation
+       7: ldc_w         #273                // String born_in_chaos_v1:pumpkin_spirit_hurt
+      18: checkcast     #269                // class net/minecraft/sounds/SoundEvent
+  public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+  public net.minecraft.world.entity.SpawnGroupData m_6518_(net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.MobSpawnType, net.minecraft.world.entity.SpawnGroupData, net.minecraft.nbt.CompoundTag);
+       8: invokespecial #331                // Method net/minecraft/world/entity/monster/Monster.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+  public void m_7380_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #352                // String Texture
+  public void m_7378_(net.minecraft.nbt.CompoundTag);
+       6: ldc_w         #352                // String Texture
+      17: ldc_w         #352                // String Texture
+  public void m_6075_();
+  public net.minecraft.world.entity.EntityDimensions m_6972_(net.minecraft.world.entity.Pose);
+  public void m_6504_(net.minecraft.world.entity.LivingEntity, float);
+  public static void init();
+  public static net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder createAttributes();
+       8: ldc2_w        #421                // double 0.25d
+      19: ldc2_w        #430                // double 120.0d
+      30: ldc2_w        #435                // double 4.0d
+      41: ldc2_w        #440                // double 3.0d
+      52: ldc2_w        #445                // double 30.0d
+      63: ldc2_w        #450                // double 0.3d
+       4: ldc           #100                // String empty
+      23: ldc_w         #470                // float -0.15f
+      34: ldc_w         #471                // float 0.15f
+      45: ldc_w         #479                // String walk
+      59: ldc_w         #489                // String idle
+      83: ldc2_w        #528                // long 7l
+     120: checkcast     #135                // class java/lang/Boolean
+     153: ldc_w         #549                // String attack
+       4: ldc           #100                // String empty
+      43: ldc           #100                // String empty
+     103: ldc           #100                // String empty
+     122: ldc           #100                // String empty
+     131: ldc           #100                // String empty
+  protected void m_6153_();
+  public java.lang.String getSyncedAnimation();
+      10: checkcast     #167                // class java/lang/String
+  public void setAnimation(java.lang.String);
+  public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager$ControllerRegistrar);
+       2: anewarray     #22                 // class software/bernie/geckolib/core/animation/AnimationController
+       7: new           #22                 // class software/bernie/geckolib/core/animation/AnimationController
+      12: ldc_w         #584                // String movement
+      32: anewarray     #22                 // class software/bernie/geckolib/core/animation/AnimationController
+## LordPumpkinheadsLampItem.class
+public class net.mcreator.borninchaosv.item.LordPumpkinheadsLampItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.LordPumpkinheadsLampItem();
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+      10: ldc           #42                 // String item.born_in_chaos_v1.lord_pumpkinheads_lamp.description_0
+  public net.minecraft.world.InteractionResult m_6225_(net.minecraft.world.item.context.UseOnContext);
+## LordPumpkinheadDedProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadDedProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadDedProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       7: instanceof    #15                 // class net/minecraft/world/level/Level
+      14: checkcast     #15                 // class net/minecraft/world/level/Level
+      40: new           #33                 // class net/minecraft/resources/ResourceLocation
+      44: ldc           #35                 // String entity.wither.death
+      54: checkcast     #46                 // class net/minecraft/sounds/SoundEvent
+      60: ldc           #53                 // float 0.6f
+      62: ldc           #54                 // float 1.6f
+      64: invokevirtual #58                 // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+      79: new           #33                 // class net/minecraft/resources/ResourceLocation
+      83: ldc           #35                 // String entity.wither.death
+      93: checkcast     #46                 // class net/minecraft/sounds/SoundEvent
+      99: ldc           #53                 // float 0.6f
+     101: ldc           #54                 // float 1.6f
+     104: invokevirtual #62                 // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     108: instanceof    #64                 // class net/minecraft/server/level/ServerLevel
+     115: checkcast     #64                 // class net/minecraft/server/level/ServerLevel
+     128: checkcast     #78                 // class net/minecraft/core/particles/SimpleParticleType
+     133: ldc2_w        #79                 // double 1.8d
+     141: ldc2_w        #81                 // double 0.3d
+     144: ldc2_w        #81                 // double 0.3d
+     147: ldc2_w        #81                 // double 0.3d
+     150: ldc2_w        #83                 // double 0.1d
+     199: instanceof    #108                // class net/minecraft/world/entity/player/Player
+     207: instanceof    #110                // class net/minecraft/server/level/ServerPlayer
+     215: checkcast     #110                // class net/minecraft/server/level/ServerPlayer
+     228: new           #33                 // class net/minecraft/resources/ResourceLocation
+     232: ldc           #122                // String born_in_chaos_v1:pumpkin_lord
+     291: checkcast     #167                // class java/lang/String
+## LordPumpkinheadHeadPriObnovlieniiTikaSushchnostiProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadHeadPriObnovlieniiTikaSushchnostiProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadHeadPriObnovlieniiTikaSushchnostiProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+     142: checkcast     #63                 // class net/minecraft/world/level/block/Block
+     156: instanceof    #73                 // class net/minecraft/server/level/ServerLevel
+     163: checkcast     #73                 // class net/minecraft/server/level/ServerLevel
+     176: checkcast     #80                 // class net/minecraft/core/particles/SimpleParticleType
+     181: ldc2_w        #81                 // double 2.0d
+     188: ldc2_w        #83                 // double 0.2d
+     191: ldc2_w        #83                 // double 0.2d
+     194: ldc2_w        #83                 // double 0.2d
+     197: ldc2_w        #85                 // double 0.1d
+     230: ldc2_w        #81                 // double 2.0d
+     241: instanceof    #105                // class net/minecraft/server/level/ServerPlayer
+     249: checkcast     #105                // class net/minecraft/server/level/ServerPlayer
+     263: ldc2_w        #81                 // double 2.0d
+## LordPumpkinheadHeadhitProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadHeadhitProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadHeadhitProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      16: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      23: invokevirtual #24                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      29: ldc           #25                 // float -1.0f
+      31: ldc           #26                 // float 30.0f
+      39: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      47: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      60: checkcast     #40                 // class net/minecraft/world/effect/MobEffect
+      71: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      79: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      97: new           #56                 // class net/minecraft/world/effect/MobEffectInstance
+     118: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     126: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+     144: new           #56                 // class net/minecraft/world/effect/MobEffectInstance
+     154: checkcast     #40                 // class net/minecraft/world/effect/MobEffect
+     171: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     179: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+     197: new           #56                 // class net/minecraft/world/effect/MobEffectInstance
+     220: ldc2_w        #79                 // double 0.35d
+     228: instanceof    #82                 // class net/minecraft/server/level/ServerLevel
+     235: checkcast     #82                 // class net/minecraft/server/level/ServerLevel
+     240: getstatic     #87                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_BOMB:Lnet/minecraftforge/registries/RegistryObject;
+     246: checkcast     #89                 // class net/minecraft/world/entity/EntityType
+     252: ldc2_w        #90                 // double 0.5d
+     261: ldc2_w        #90                 // double 0.5d
+     268: getstatic     #103                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     271: invokevirtual #107                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     322: instanceof    #82                 // class net/minecraft/server/level/ServerLevel
+     329: checkcast     #82                 // class net/minecraft/server/level/ServerLevel
+     342: checkcast     #135                // class net/minecraft/core/particles/SimpleParticleType
+     346: ldc2_w        #90                 // double 0.5d
+     355: ldc2_w        #90                 // double 0.5d
+     361: ldc2_w        #136                // double 0.2d
+     364: ldc2_w        #138                // double 0.3d
+     367: ldc2_w        #136                // double 0.2d
+     370: ldc2_w        #140                // double 0.1d
+     378: instanceof    #82                 // class net/minecraft/server/level/ServerLevel
+     385: checkcast     #82                 // class net/minecraft/server/level/ServerLevel
+     398: checkcast     #135                // class net/minecraft/core/particles/SimpleParticleType
+     402: ldc2_w        #90                 // double 0.5d
+     411: ldc2_w        #90                 // double 0.5d
+     417: ldc2_w        #136                // double 0.2d
+     420: ldc2_w        #138                // double 0.3d
+     423: ldc2_w        #136                // double 0.2d
+     426: ldc2_w        #140                // double 0.1d
+     443: instanceof    #50                 // class net/minecraft/world/level/Level
+     450: checkcast     #50                 // class net/minecraft/world/level/Level
+     476: new           #159                // class net/minecraft/resources/ResourceLocation
+     480: ldc           #161                // String entity.glow_squid.squirt
+     490: checkcast     #172                // class net/minecraft/sounds/SoundEvent
+     496: ldc           #179                // float 0.8f
+     499: invokevirtual #183                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     514: new           #159                // class net/minecraft/resources/ResourceLocation
+     518: ldc           #161                // String entity.glow_squid.squirt
+     528: checkcast     #172                // class net/minecraft/sounds/SoundEvent
+     534: ldc           #179                // float 0.8f
+     538: invokevirtual #187                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     542: instanceof    #82                 // class net/minecraft/server/level/ServerLevel
+     549: checkcast     #82                 // class net/minecraft/server/level/ServerLevel
+     562: checkcast     #135                // class net/minecraft/core/particles/SimpleParticleType
+     571: ldc2_w        #138                // double 0.3d
+     574: ldc2_w        #188                // double 0.8d
+     577: ldc2_w        #138                // double 0.3d
+     595: instanceof    #50                 // class net/minecraft/world/level/Level
+     602: checkcast     #50                 // class net/minecraft/world/level/Level
+     628: new           #159                // class net/minecraft/resources/ResourceLocation
+     632: ldc           #191                // String entity.enderman.teleport
+     642: checkcast     #172                // class net/minecraft/sounds/SoundEvent
+     648: ldc           #179                // float 0.8f
+     651: invokevirtual #183                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     666: new           #159                // class net/minecraft/resources/ResourceLocation
+     670: ldc           #191                // String entity.enderman.teleport
+     680: checkcast     #172                // class net/minecraft/sounds/SoundEvent
+     686: ldc           #179                // float 0.8f
+     690: invokevirtual #187                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     696: ldc2_w        #192                // double 0.6d
+     705: ldc2_w        #194                // double 13.0d
+     710: ldc2_w        #196                // double 2.0d
+     716: ldc2_w        #90                 // double 0.5d
+     736: ldc2_w        #194                // double 13.0d
+     745: ldc2_w        #90                 // double 0.5d
+     765: ldc2_w        #194                // double 13.0d
+     774: ldc2_w        #90                 // double 0.5d
+     802: ldc2_w        #194                // double 13.0d
+     811: ldc2_w        #90                 // double 0.5d
+     820: instanceof    #222                // class net/minecraft/server/level/ServerPlayer
+     828: checkcast     #222                // class net/minecraft/server/level/ServerPlayer
+## LordPumpkinheadPriObnovlieniiTikaSushchnostiProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadPriObnovlieniiTikaSushchnostiProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadPriObnovlieniiTikaSushchnostiProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       7: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+      14: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+      27: checkcast     #29                 // class net/minecraft/core/particles/SimpleParticleType
+      32: ldc2_w        #30                 // double 1.6d
+      39: ldc2_w        #32                 // double 0.3d
+      42: ldc2_w        #32                 // double 0.3d
+      45: ldc2_w        #32                 // double 0.3d
+      48: ldc2_w        #34                 // double 0.1d
+     191: checkcast     #82                 // class net/minecraft/world/level/block/Block
+     206: instanceof    #92                 // class net/minecraft/world/entity/LivingEntity
+     214: checkcast     #92                 // class net/minecraft/world/entity/LivingEntity
+     221: invokevirtual #96                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+     227: ldc           #97                 // float -1.0f
+     229: ldc           #98                 // float 30.0f
+     248: invokevirtual #113                // Method net/minecraft/world/entity/Entity.m_146870_:()V
+     252: instanceof    #106                // class net/minecraft/world/level/Level
+     259: checkcast     #106                // class net/minecraft/world/level/Level
+     285: new           #121                // class net/minecraft/resources/ResourceLocation
+     289: ldc           #123                // String item.trident.thunder
+     299: checkcast     #134                // class net/minecraft/sounds/SoundEvent
+     306: ldc           #141                // float 0.9f
+     308: invokevirtual #145                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     323: new           #121                // class net/minecraft/resources/ResourceLocation
+     327: ldc           #123                // String item.trident.thunder
+     337: checkcast     #134                // class net/minecraft/sounds/SoundEvent
+     344: ldc           #141                // float 0.9f
+     347: invokevirtual #149                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     351: instanceof    #106                // class net/minecraft/world/level/Level
+     358: checkcast     #106                // class net/minecraft/world/level/Level
+     384: new           #121                // class net/minecraft/resources/ResourceLocation
+     388: ldc           #151                // String entity.elder_guardian.ambient
+     398: checkcast     #134                // class net/minecraft/sounds/SoundEvent
+     404: ldc           #152                // float 1.6f
+     406: ldc           #153                // float 0.6f
+     408: invokevirtual #145                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     423: new           #121                // class net/minecraft/resources/ResourceLocation
+     427: ldc           #151                // String entity.elder_guardian.ambient
+     437: checkcast     #134                // class net/minecraft/sounds/SoundEvent
+     443: ldc           #152                // float 1.6f
+     445: ldc           #153                // float 0.6f
+     448: invokevirtual #149                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     452: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     459: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     472: checkcast     #29                 // class net/minecraft/core/particles/SimpleParticleType
+     481: ldc2_w        #157                // double 0.5d
+     485: ldc2_w        #157                // double 0.5d
+     488: ldc2_w        #34                 // double 0.1d
+     496: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     503: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     508: getstatic     #163                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.LORDS_FELSTEED:Lnet/minecraftforge/registries/RegistryObject;
+     514: checkcast     #165                // class net/minecraft/world/entity/EntityType
+     526: getstatic     #171                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     529: invokevirtual #175                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     580: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     587: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     592: getstatic     #197                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.LORD_PUMPKINHEAD_WITHOUTA_HORSE:Lnet/minecraftforge/registries/RegistryObject;
+     598: checkcast     #165                // class net/minecraft/world/entity/EntityType
+     605: ldc2_w        #198                // double 1.3d
+     614: getstatic     #171                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     617: invokevirtual #175                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     668: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     675: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     688: checkcast     #209                // class net/minecraft/world/entity/LightningBolt
+     696: ldc2_w        #210                // double 2.0d
+     716: invokevirtual #225                // Method net/minecraft/server/level/ServerLevel.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     721: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     728: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     741: checkcast     #209                // class net/minecraft/world/entity/LightningBolt
+     749: ldc2_w        #210                // double 2.0d
+     769: invokevirtual #225                // Method net/minecraft/server/level/ServerLevel.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     774: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     781: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     794: checkcast     #209                // class net/minecraft/world/entity/LightningBolt
+     805: ldc2_w        #210                // double 2.0d
+     822: invokevirtual #225                // Method net/minecraft/server/level/ServerLevel.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     888: ldc2_w        #157                // double 0.5d
+     902: ldc2_w        #254                // double 3.0d
+     907: ldc2_w        #254                // double 3.0d
+     918: instanceof    #261                // class net/minecraft/server/level/ServerPlayer
+     926: checkcast     #261                // class net/minecraft/server/level/ServerPlayer
+     937: ldc2_w        #254                // double 3.0d
+     942: ldc2_w        #254                // double 3.0d
+     967: ldc2_w        #157                // double 0.5d
+     982: ldc2_w        #254                // double 3.0d
+     988: ldc2_w        #254                // double 3.0d
+     997: instanceof    #261                // class net/minecraft/server/level/ServerPlayer
+    1005: checkcast     #261                // class net/minecraft/server/level/ServerPlayer
+## LordPumpkinheadPriRanieniiSushchnostiProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadPriRanieniiSushchnostiProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadPriRanieniiSushchnostiProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      16: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      23: invokevirtual #24                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      29: ldc           #25                 // float -1.0f
+      31: ldc           #26                 // float 40.0f
+      39: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      47: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      60: checkcast     #40                 // class net/minecraft/world/effect/MobEffect
+      71: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      79: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      97: new           #56                 // class net/minecraft/world/effect/MobEffectInstance
+     118: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     126: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+     144: new           #56                 // class net/minecraft/world/effect/MobEffectInstance
+     154: checkcast     #40                 // class net/minecraft/world/effect/MobEffect
+     173: ldc2_w        #76                 // double 0.45d
+     189: ldc2_w        #78                 // double 0.5d
+     216: ldc2_w        #78                 // double 0.5d
+     238: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     245: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     258: checkcast     #115                // class net/minecraft/core/particles/SimpleParticleType
+     269: ldc2_w        #78                 // double 0.5d
+     275: ldc2_w        #116                // double 0.2d
+     278: ldc2_w        #118                // double 0.3d
+     281: ldc2_w        #116                // double 0.2d
+     284: ldc2_w        #120                // double 0.1d
+     292: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     299: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     312: checkcast     #115                // class net/minecraft/core/particles/SimpleParticleType
+     323: ldc2_w        #78                 // double 0.5d
+     329: ldc2_w        #116                // double 0.2d
+     332: ldc2_w        #118                // double 0.3d
+     335: ldc2_w        #116                // double 0.2d
+     338: ldc2_w        #120                // double 0.1d
+     355: instanceof    #50                 // class net/minecraft/world/level/Level
+     362: checkcast     #50                 // class net/minecraft/world/level/Level
+     388: new           #137                // class net/minecraft/resources/ResourceLocation
+     392: ldc           #139                // String entity.glow_squid.squirt
+     402: checkcast     #150                // class net/minecraft/sounds/SoundEvent
+     408: ldc           #157                // float 0.8f
+     411: invokevirtual #161                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     426: new           #137                // class net/minecraft/resources/ResourceLocation
+     430: ldc           #139                // String entity.glow_squid.squirt
+     440: checkcast     #150                // class net/minecraft/sounds/SoundEvent
+     446: ldc           #157                // float 0.8f
+     450: invokevirtual #165                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     456: ldc2_w        #118                // double 0.3d
+     464: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     471: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     476: getstatic     #170                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MRS_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     482: checkcast     #172                // class net/minecraft/world/entity/EntityType
+     495: ldc2_w        #78                 // double 0.5d
+     502: getstatic     #178                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     505: invokevirtual #182                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     561: ldc2_w        #204                // double 0.15d
+     569: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     576: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     581: getstatic     #208                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_BRUISER:Lnet/minecraftforge/registries/RegistryObject;
+     587: checkcast     #172                // class net/minecraft/world/entity/EntityType
+     598: ldc2_w        #78                 // double 0.5d
+     605: getstatic     #178                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     608: invokevirtual #182                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     664: ldc2_w        #209                // double 0.35d
+     681: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     688: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     693: getstatic     #213                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_DUNCE:Lnet/minecraftforge/registries/RegistryObject;
+     699: checkcast     #172                // class net/minecraft/world/entity/EntityType
+     712: ldc2_w        #78                 // double 0.5d
+     719: getstatic     #178                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     722: invokevirtual #182                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     782: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     789: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     794: getstatic     #216                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SENOR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     800: checkcast     #172                // class net/minecraft/world/entity/EntityType
+     813: ldc2_w        #78                 // double 0.5d
+     820: getstatic     #178                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     823: invokevirtual #182                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     882: ldc2_w        #78                 // double 0.5d
+     909: ldc2_w        #78                 // double 0.5d
+     931: instanceof    #108                // class net/minecraft/server/level/ServerLevel
+     938: checkcast     #108                // class net/minecraft/server/level/ServerLevel
+     951: checkcast     #115                // class net/minecraft/core/particles/SimpleParticleType
+     962: ldc2_w        #78                 // double 0.5d
+     968: ldc2_w        #116                // double 0.2d
+     971: ldc2_w        #118                // double 0.3d
+     974: ldc2_w        #116                // double 0.2d
+     977: ldc2_w        #120                // double 0.1d
+## LordPumpkinheadTicProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadTicProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadTicProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       7: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+      14: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+      27: checkcast     #29                 // class net/minecraft/core/particles/SimpleParticleType
+      32: ldc2_w        #30                 // double 2.0d
+      39: ldc2_w        #32                 // double 0.2d
+      42: ldc2_w        #32                 // double 0.2d
+      45: ldc2_w        #32                 // double 0.2d
+      48: ldc2_w        #34                 // double 0.1d
+     191: checkcast     #82                 // class net/minecraft/world/level/block/Block
+     206: instanceof    #92                 // class net/minecraft/world/entity/LivingEntity
+     214: checkcast     #92                 // class net/minecraft/world/entity/LivingEntity
+     221: invokevirtual #96                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+     227: ldc           #97                 // float -1.0f
+     229: ldc           #98                 // float 20.0f
+     248: invokevirtual #113                // Method net/minecraft/world/entity/Entity.m_146870_:()V
+     252: instanceof    #106                // class net/minecraft/world/level/Level
+     259: checkcast     #106                // class net/minecraft/world/level/Level
+     285: new           #121                // class net/minecraft/resources/ResourceLocation
+     289: ldc           #123                // String item.totem.use
+     299: checkcast     #134                // class net/minecraft/sounds/SoundEvent
+     305: ldc           #141                // float 0.6f
+     307: ldc           #142                // float 0.9f
+     309: invokevirtual #146                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     324: new           #121                // class net/minecraft/resources/ResourceLocation
+     328: ldc           #123                // String item.totem.use
+     338: checkcast     #134                // class net/minecraft/sounds/SoundEvent
+     344: ldc           #141                // float 0.6f
+     346: ldc           #142                // float 0.9f
+     349: invokevirtual #150                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     353: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     360: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     373: checkcast     #29                 // class net/minecraft/core/particles/SimpleParticleType
+     385: ldc2_w        #34                 // double 0.1d
+     393: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     400: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     405: getstatic     #155                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.LORD_THE_HEADLESS:Lnet/minecraftforge/registries/RegistryObject;
+     411: checkcast     #157                // class net/minecraft/world/entity/EntityType
+     423: getstatic     #163                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     426: invokevirtual #167                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     477: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     484: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     489: getstatic     #189                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.LORD_PUMPKINHEAD_HEAD:Lnet/minecraftforge/registries/RegistryObject;
+     495: checkcast     #157                // class net/minecraft/world/entity/EntityType
+     507: getstatic     #163                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     510: invokevirtual #167                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     582: ldc2_w        #202                // double 0.5d
+     596: ldc2_w        #204                // double 3.0d
+     601: ldc2_w        #204                // double 3.0d
+     612: instanceof    #211                // class net/minecraft/server/level/ServerPlayer
+     620: checkcast     #211                // class net/minecraft/server/level/ServerPlayer
+     631: ldc2_w        #204                // double 3.0d
+     636: ldc2_w        #204                // double 3.0d
+     661: ldc2_w        #202                // double 0.5d
+     676: ldc2_w        #204                // double 3.0d
+     682: ldc2_w        #204                // double 3.0d
+     691: instanceof    #211                // class net/minecraft/server/level/ServerPlayer
+     699: checkcast     #211                // class net/minecraft/server/level/ServerPlayer
+     711: ldc2_w        #204                // double 3.0d
+     717: ldc2_w        #204                // double 3.0d
+## LordPumpkinheadWithoutaHorsePriNachalnomPrizyvieSushchnostiProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadWithoutaHorsePriNachalnomPrizyvieSushchnostiProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadWithoutaHorsePriNachalnomPrizyvieSushchnostiProcedure();
+  public static void execute(net.minecraft.world.entity.Entity);
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+## LordPumpkinheadatackProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadatackProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadatackProcedure();
+  public static void onEntityAttacked(net.minecraftforge.event.entity.living.LivingAttackEvent);
+       5: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      13: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      20: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      27: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      34: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      41: invokevirtual #26                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      45: invokevirtual #46                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      51: invokestatic  #56                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #56                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      13: instanceof    #71                 // class net/mcreator/borninchaosv/entity/LordPumpkinheadEntity
+      21: instanceof    #73                 // class net/minecraft/world/entity/Mob
+      29: instanceof    #75                 // class net/minecraft/world/entity/monster/Monster
+      37: instanceof    #77                 // class net/minecraft/world/entity/player/Player
+      45: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+      53: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+      60: invokevirtual #81                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      66: ldc           #82                 // float -1.0f
+      70: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+      78: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+      91: ldc           #82                 // float -1.0f
+      95: ldc           #92                 // float 50.0f
+     104: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     112: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     125: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+     136: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     144: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     162: new           #118                // class net/minecraft/world/effect/MobEffectInstance
+     172: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+     187: instanceof    #127                // class net/minecraft/server/level/ServerLevel
+     194: checkcast     #127                // class net/minecraft/server/level/ServerLevel
+     207: checkcast     #134                // class net/minecraft/core/particles/SimpleParticleType
+     219: ldc2_w        #135                // double 0.2d
+     222: ldc2_w        #137                // double 0.3d
+     225: ldc2_w        #135                // double 0.2d
+     228: ldc2_w        #139                // double 0.1d
+     237: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     245: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     260: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     268: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     286: new           #118                // class net/minecraft/world/effect/MobEffectInstance
+     296: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+     315: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     323: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     330: invokevirtual #81                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+     336: ldc           #82                 // float -1.0f
+     340: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     348: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     361: ldc           #82                 // float -1.0f
+     365: ldc           #92                 // float 50.0f
+     374: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     382: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     395: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+     405: instanceof    #112                // class net/minecraft/world/level/Level
+     412: checkcast     #112                // class net/minecraft/world/level/Level
+     439: new           #167                // class net/minecraft/resources/ResourceLocation
+     443: ldc           #169                // String born_in_chaos_v1:pumpkinhead_bomb_curse
+     453: checkcast     #180                // class net/minecraft/sounds/SoundEvent
+     461: invokevirtual #190                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     477: new           #167                // class net/minecraft/resources/ResourceLocation
+     481: ldc           #169                // String born_in_chaos_v1:pumpkinhead_bomb_curse
+     491: checkcast     #180                // class net/minecraft/sounds/SoundEvent
+     500: invokevirtual #194                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     504: instanceof    #127                // class net/minecraft/server/level/ServerLevel
+     511: checkcast     #127                // class net/minecraft/server/level/ServerLevel
+     524: checkcast     #134                // class net/minecraft/core/particles/SimpleParticleType
+     536: ldc2_w        #135                // double 0.2d
+     539: ldc2_w        #137                // double 0.3d
+     542: ldc2_w        #135                // double 0.2d
+     545: ldc2_w        #139                // double 0.1d
+     554: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     562: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     580: new           #118                // class net/minecraft/world/effect/MobEffectInstance
+     590: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+     606: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     614: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     629: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     637: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     655: new           #118                // class net/minecraft/world/effect/MobEffectInstance
+     665: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+     681: instanceof    #77                 // class net/minecraft/world/entity/player/Player
+     689: instanceof    #28                 // class net/minecraft/world/entity/LivingEntity
+     697: checkcast     #28                 // class net/minecraft/world/entity/LivingEntity
+     715: new           #118                // class net/minecraft/world/effect/MobEffectInstance
+## LordPumpkinheadhitProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadhitProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadhitProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      16: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      23: invokevirtual #24                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      29: ldc           #25                 // float -1.0f
+      31: ldc           #26                 // float 20.0f
+      39: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      47: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      54: invokevirtual #24                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      60: ldc           #25                 // float -1.0f
+      64: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+      72: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+      85: ldc           #25                 // float -1.0f
+      87: ldc           #34                 // float 10.0f
+      96: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     104: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+     117: checkcast     #48                 // class net/minecraft/world/effect/MobEffect
+     128: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     136: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+     154: new           #64                 // class net/minecraft/world/effect/MobEffectInstance
+     175: instanceof    #20                 // class net/minecraft/world/entity/LivingEntity
+     183: checkcast     #20                 // class net/minecraft/world/entity/LivingEntity
+     201: new           #64                 // class net/minecraft/world/effect/MobEffectInstance
+     211: checkcast     #48                 // class net/minecraft/world/effect/MobEffect
+     229: ldc2_w        #84                 // double 0.3d
+     238: ldc2_w        #86                 // double 0.5d
+     247: ldc2_w        #86                 // double 0.5d
+     267: ldc2_w        #86                 // double 0.5d
+     276: ldc2_w        #86                 // double 0.5d
+     298: instanceof    #114                // class net/minecraft/server/level/ServerLevel
+     305: checkcast     #114                // class net/minecraft/server/level/ServerLevel
+     318: checkcast     #121                // class net/minecraft/core/particles/SimpleParticleType
+     322: ldc2_w        #86                 // double 0.5d
+     331: ldc2_w        #86                 // double 0.5d
+     337: ldc2_w        #122                // double 0.2d
+     340: ldc2_w        #84                 // double 0.3d
+     343: ldc2_w        #122                // double 0.2d
+     346: ldc2_w        #124                // double 0.1d
+     354: instanceof    #114                // class net/minecraft/server/level/ServerLevel
+     361: checkcast     #114                // class net/minecraft/server/level/ServerLevel
+     374: checkcast     #121                // class net/minecraft/core/particles/SimpleParticleType
+     378: ldc2_w        #86                 // double 0.5d
+     387: ldc2_w        #86                 // double 0.5d
+     393: ldc2_w        #122                // double 0.2d
+     396: ldc2_w        #84                 // double 0.3d
+     399: ldc2_w        #122                // double 0.2d
+     402: ldc2_w        #124                // double 0.1d
+     419: instanceof    #58                 // class net/minecraft/world/level/Level
+     426: checkcast     #58                 // class net/minecraft/world/level/Level
+     452: new           #141                // class net/minecraft/resources/ResourceLocation
+     456: ldc           #143                // String entity.glow_squid.squirt
+     466: checkcast     #154                // class net/minecraft/sounds/SoundEvent
+     472: ldc           #161                // float 0.8f
+     475: invokevirtual #165                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     490: new           #141                // class net/minecraft/resources/ResourceLocation
+     494: ldc           #143                // String entity.glow_squid.squirt
+     504: checkcast     #154                // class net/minecraft/sounds/SoundEvent
+     510: ldc           #161                // float 0.8f
+     514: invokevirtual #169                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     520: ldc2_w        #84                 // double 0.3d
+     528: instanceof    #114                // class net/minecraft/server/level/ServerLevel
+     535: checkcast     #114                // class net/minecraft/server/level/ServerLevel
+     540: getstatic     #174                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MRS_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     546: checkcast     #176                // class net/minecraft/world/entity/EntityType
+     552: ldc2_w        #86                 // double 0.5d
+     561: ldc2_w        #86                 // double 0.5d
+     568: getstatic     #182                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     571: invokevirtual #186                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     627: ldc2_w        #206                // double 0.13d
+     635: instanceof    #114                // class net/minecraft/server/level/ServerLevel
+     642: checkcast     #114                // class net/minecraft/server/level/ServerLevel
+     647: getstatic     #210                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_BRUISER:Lnet/minecraftforge/registries/RegistryObject;
+     653: checkcast     #176                // class net/minecraft/world/entity/EntityType
+     659: ldc2_w        #86                 // double 0.5d
+     668: ldc2_w        #86                 // double 0.5d
+     675: getstatic     #182                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     678: invokevirtual #186                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     734: ldc2_w        #84                 // double 0.3d
+     751: instanceof    #114                // class net/minecraft/server/level/ServerLevel
+     758: checkcast     #114                // class net/minecraft/server/level/ServerLevel
+     763: getstatic     #213                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_DUNCE:Lnet/minecraftforge/registries/RegistryObject;
+     769: checkcast     #176                // class net/minecraft/world/entity/EntityType
+     775: ldc2_w        #86                 // double 0.5d
+     784: ldc2_w        #86                 // double 0.5d
+     791: getstatic     #182                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     794: invokevirtual #186                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     854: instanceof    #114                // class net/minecraft/server/level/ServerLevel
+     861: checkcast     #114                // class net/minecraft/server/level/ServerLevel
+## LordPumpkinheadsHatDopolnitielnaiaInformatsiiaProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadsHatDopolnitielnaiaInformatsiiaProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadsHatDopolnitielnaiaInformatsiiaProcedure();
+  public static java.lang.String execute();
+       6: ldc           #26                 // String item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet.description_0
+      14: ldc           #39                 // String item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet.description_1
+      22: ldc           #41                 // String item.born_in_chaos_v1.lord_pumpkinheads_hat_helmet.description_2
+      36: ldc           #55                 // String item.borninchaos.tooltip
+## LordPumpkinheadsHatHitProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadsHatHitProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadsHatHitProcedure();
+  public static void onEntityAttacked(net.minecraftforge.event.entity.living.LivingAttackEvent);
+       5: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      13: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      20: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      27: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      34: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      41: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      45: invokevirtual #51                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      51: invokestatic  #61                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      10: invokestatic  #61                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      13: instanceof    #76                 // class net/minecraft/world/entity/player/Player
+      21: instanceof    #33                 // class net/minecraft/world/entity/LivingEntity
+      29: checkcast     #33                 // class net/minecraft/world/entity/LivingEntity
+      62: instanceof    #110                // class net/minecraft/world/entity/Mob
+      70: instanceof    #112                // class net/minecraft/world/entity/monster/Monster
+      78: instanceof    #33                 // class net/minecraft/world/entity/LivingEntity
+      86: checkcast     #33                 // class net/minecraft/world/entity/LivingEntity
+      99: checkcast     #119                // class net/minecraft/world/effect/MobEffect
+     110: instanceof    #33                 // class net/minecraft/world/entity/LivingEntity
+     118: checkcast     #33                 // class net/minecraft/world/entity/LivingEntity
+     136: new           #131                // class net/minecraft/world/effect/MobEffectInstance
+     146: checkcast     #119                // class net/minecraft/world/effect/MobEffect
+     162: new           #53                 // class net/minecraft/world/damagesource/DamageSource
+     191: ldc           #171                // float 3.0f
+     198: instanceof    #125                // class net/minecraft/world/level/Level
+     205: checkcast     #125                // class net/minecraft/world/level/Level
+     232: new           #191                // class net/minecraft/resources/ResourceLocation
+     236: ldc           #193                // String entity.player.hurt_on_fire
+     246: checkcast     #204                // class net/minecraft/sounds/SoundEvent
+     252: ldc           #211                // float 0.6f
+     255: invokevirtual #215                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     271: new           #191                // class net/minecraft/resources/ResourceLocation
+     275: ldc           #193                // String entity.player.hurt_on_fire
+     285: checkcast     #204                // class net/minecraft/sounds/SoundEvent
+     291: ldc           #211                // float 0.6f
+     295: invokevirtual #219                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     299: instanceof    #221                // class net/minecraft/server/level/ServerLevel
+     306: checkcast     #221                // class net/minecraft/server/level/ServerLevel
+     319: checkcast     #228                // class net/minecraft/core/particles/SimpleParticleType
+     340: ldc2_w        #232                // double 0.2d
+     343: ldc2_w        #232                // double 0.2d
+     346: ldc2_w        #232                // double 0.2d
+     349: ldc2_w        #234                // double 0.1d
+## LordPumpkinheadsHatKazhdyiTikDliaShliemaProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadsHatKazhdyiTikDliaShliemaProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadsHatKazhdyiTikDliaShliemaProcedure();
+  public static void execute(net.minecraft.world.entity.Entity);
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      48: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      55: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      66: checkcast     #54                 // class net/minecraft/world/effect/MobEffect
+      74: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      81: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      92: checkcast     #54                 // class net/minecraft/world/effect/MobEffect
+     100: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+     107: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     118: checkcast     #54                 // class net/minecraft/world/effect/MobEffect
+## LordPumpkinheadsLampclicProcedure.class
+public class net.mcreator.borninchaosv.procedures.LordPumpkinheadsLampclicProcedure {
+  public net.mcreator.borninchaosv.procedures.LordPumpkinheadsLampclicProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      16: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      46: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      54: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      67: checkcast     #48                 // class net/minecraft/world/effect/MobEffect
+     100: ldc2_w        #71                 // double 2.0d
+     122: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+     130: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     146: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+     154: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     176: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+     184: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     189: new           #21                 // class net/minecraft/world/item/ItemStack
+     199: checkcast     #91                 // class net/minecraft/world/level/ItemLike
+     228: instanceof    #106                // class net/minecraft/world/entity/player/Player
+     236: checkcast     #106                // class net/minecraft/world/entity/player/Player
+     250: instanceof    #117                // class net/minecraft/server/level/ServerLevel
+     257: checkcast     #117                // class net/minecraft/server/level/ServerLevel
+     262: getstatic     #122                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.RIDING_LORDS_FELSTEED:Lnet/minecraftforge/registries/RegistryObject;
+     268: checkcast     #124                // class net/minecraft/world/entity/EntityType
+     274: ldc2_w        #125                // double 0.5d
+     283: ldc2_w        #125                // double 0.5d
+     290: getstatic     #132                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     293: invokevirtual #136                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     316: ldc           #147                // float 360.0f
+     323: instanceof    #117                // class net/minecraft/server/level/ServerLevel
+     330: checkcast     #117                // class net/minecraft/server/level/ServerLevel
+     341: ldc2_w        #125                // double 0.5d
+     350: ldc2_w        #125                // double 0.5d
+     356: ldc2_w        #160                // double 0.3d
+     359: ldc2_w        #160                // double 0.3d
+     362: ldc2_w        #160                // double 0.3d
+     365: ldc2_w        #162                // double 0.1d
+     373: instanceof    #117                // class net/minecraft/server/level/ServerLevel
+     380: checkcast     #117                // class net/minecraft/server/level/ServerLevel
+     393: checkcast     #174                // class net/minecraft/core/particles/SimpleParticleType
+     397: ldc2_w        #125                // double 0.5d
+     406: ldc2_w        #125                // double 0.5d
+     412: ldc2_w        #160                // double 0.3d
+     415: ldc2_w        #160                // double 0.3d
+     418: ldc2_w        #160                // double 0.3d
+     421: ldc2_w        #162                // double 0.1d
+     429: instanceof    #176                // class net/minecraft/world/level/Level
+     436: checkcast     #176                // class net/minecraft/world/level/Level
+     464: new           #187                // class net/minecraft/resources/ResourceLocation
+     468: ldc           #189                // String entity.skeleton_horse.ambient
+     478: checkcast     #200                // class net/minecraft/sounds/SoundEvent
+     484: ldc           #207                // float 1.3f
+     486: ldc           #208                // float 0.8f
+     488: invokevirtual #212                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     505: new           #187                // class net/minecraft/resources/ResourceLocation
+     509: ldc           #189                // String entity.skeleton_horse.ambient
+     519: checkcast     #200                // class net/minecraft/sounds/SoundEvent
+     525: ldc           #207                // float 1.3f
+     527: ldc           #208                // float 0.8f
+     530: invokevirtual #216                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     535: instanceof    #106                // class net/minecraft/world/entity/player/Player
+     543: checkcast     #106                // class net/minecraft/world/entity/player/Player
+     559: checkcast     #222                // class net/minecraft/world/item/Item
+## SerPumpkinheadAtacProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadAtacProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadAtacProcedure();
+  public static void onEntityAttacked(net.minecraftforge.event.entity.living.LivingAttackEvent);
+       5: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      13: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      20: invokevirtual #31                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      24: invokevirtual #41                 // Method net/minecraftforge/event/entity/living/LivingAttackEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      30: invokestatic  #51                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+       4: invokestatic  #51                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity);
+      31: instanceof    #84                 // class net/mcreator/borninchaosv/entity/SirPumpkinheadEntity
+      38: instanceof    #86                 // class net/mcreator/borninchaosv/entity/SirTheHeadlessEntity
+      45: instanceof    #88                 // class net/minecraft/world/entity/player/Player
+      52: instanceof    #90                 // class net/minecraft/world/entity/monster/Monster
+      59: instanceof    #92                 // class net/minecraft/world/entity/Mob
+      66: instanceof    #33                 // class net/minecraft/world/entity/LivingEntity
+      73: checkcast     #33                 // class net/minecraft/world/entity/LivingEntity
+      86: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+      96: instanceof    #33                 // class net/minecraft/world/entity/LivingEntity
+     103: checkcast     #33                 // class net/minecraft/world/entity/LivingEntity
+     121: new           #118                // class net/minecraft/world/effect/MobEffectInstance
+     131: checkcast     #106                // class net/minecraft/world/effect/MobEffect
+## SerPumpkinheadGProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadGProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadGProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       7: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+      14: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+      27: checkcast     #29                 // class net/minecraft/core/particles/SimpleParticleType
+      32: ldc2_w        #30                 // double 1.2d
+      39: ldc2_w        #32                 // double 0.3d
+      42: ldc2_w        #32                 // double 0.3d
+      45: ldc2_w        #32                 // double 0.3d
+      48: ldc2_w        #34                 // double 0.1d
+      57: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+      65: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+      72: invokevirtual #45                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      78: ldc           #46                 // float -1.0f
+      80: ldc           #47                 // float 30.0f
+      99: invokevirtual #62                 // Method net/minecraft/world/entity/Entity.m_146870_:()V
+     103: instanceof    #55                 // class net/minecraft/world/level/Level
+     110: checkcast     #55                 // class net/minecraft/world/level/Level
+     136: new           #76                 // class net/minecraft/resources/ResourceLocation
+     140: ldc           #78                 // String item.trident.thunder
+     150: checkcast     #89                 // class net/minecraft/sounds/SoundEvent
+     157: ldc           #96                 // float 0.9f
+     159: invokevirtual #100                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     174: new           #76                 // class net/minecraft/resources/ResourceLocation
+     178: ldc           #78                 // String item.trident.thunder
+     188: checkcast     #89                 // class net/minecraft/sounds/SoundEvent
+     195: ldc           #96                 // float 0.9f
+     198: invokevirtual #104                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     202: instanceof    #55                 // class net/minecraft/world/level/Level
+     209: checkcast     #55                 // class net/minecraft/world/level/Level
+     235: new           #76                 // class net/minecraft/resources/ResourceLocation
+     239: ldc           #106                // String entity.elder_guardian.ambient
+     249: checkcast     #89                 // class net/minecraft/sounds/SoundEvent
+     255: ldc           #107                // float 1.6f
+     257: ldc           #108                // float 0.6f
+     259: invokevirtual #100                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     274: new           #76                 // class net/minecraft/resources/ResourceLocation
+     278: ldc           #106                // String entity.elder_guardian.ambient
+     288: checkcast     #89                 // class net/minecraft/sounds/SoundEvent
+     294: ldc           #107                // float 1.6f
+     296: ldc           #108                // float 0.6f
+     299: invokevirtual #104                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     303: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     310: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     323: checkcast     #29                 // class net/minecraft/core/particles/SimpleParticleType
+     335: ldc2_w        #34                 // double 0.1d
+     343: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     350: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     355: getstatic     #113                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.FELSTEED:Lnet/minecraftforge/registries/RegistryObject;
+     361: checkcast     #115                // class net/minecraft/world/entity/EntityType
+     373: getstatic     #121                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     376: invokevirtual #125                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     427: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     434: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     439: getstatic     #147                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD_WITHOUT_HORSE:Lnet/minecraftforge/registries/RegistryObject;
+     445: checkcast     #115                // class net/minecraft/world/entity/EntityType
+     452: ldc2_w        #148                // double 1.3d
+     461: getstatic     #121                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     464: invokevirtual #125                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     515: instanceof    #15                 // class net/minecraft/server/level/ServerLevel
+     522: checkcast     #15                 // class net/minecraft/server/level/ServerLevel
+     535: checkcast     #159                // class net/minecraft/world/entity/LightningBolt
+     559: invokevirtual #173                // Method net/minecraft/server/level/ServerLevel.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     625: ldc2_w        #204                // double 0.5d
+     639: ldc2_w        #206                // double 3.0d
+     644: ldc2_w        #206                // double 3.0d
+     655: instanceof    #213                // class net/minecraft/server/level/ServerPlayer
+     663: checkcast     #213                // class net/minecraft/server/level/ServerPlayer
+     674: ldc2_w        #206                // double 3.0d
+     679: ldc2_w        #206                // double 3.0d
+     704: ldc2_w        #204                // double 0.5d
+     719: ldc2_w        #206                // double 3.0d
+     725: ldc2_w        #206                // double 3.0d
+     734: instanceof    #213                // class net/minecraft/server/level/ServerPlayer
+     742: checkcast     #213                // class net/minecraft/server/level/ServerPlayer
+     754: ldc2_w        #206                // double 3.0d
+     760: ldc2_w        #206                // double 3.0d
+     913: checkcast     #258                // class net/minecraft/world/level/block/Block
+## SerPumpkinheadPiProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadPiProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadPiProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+      16: instanceof    #26                 // class net/minecraft/world/entity/LivingEntity
+      24: checkcast     #26                 // class net/minecraft/world/entity/LivingEntity
+      37: checkcast     #40                 // class net/minecraft/world/effect/MobEffect
+      48: instanceof    #26                 // class net/minecraft/world/entity/LivingEntity
+      56: checkcast     #26                 // class net/minecraft/world/entity/LivingEntity
+      74: new           #55                 // class net/minecraft/world/effect/MobEffectInstance
+      96: instanceof    #26                 // class net/minecraft/world/entity/LivingEntity
+     104: checkcast     #26                 // class net/minecraft/world/entity/LivingEntity
+     122: new           #55                 // class net/minecraft/world/effect/MobEffectInstance
+     132: checkcast     #40                 // class net/minecraft/world/effect/MobEffect
+     150: ldc2_w        #69                 // double 2.0d
+     157: ldc2_w        #71                 // double 0.5d
+     177: ldc2_w        #69                 // double 2.0d
+     184: ldc2_w        #71                 // double 0.5d
+     206: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     213: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     218: getstatic     #106                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     224: checkcast     #108                // class net/minecraft/world/entity/EntityType
+     230: ldc2_w        #69                 // double 2.0d
+     237: ldc2_w        #71                 // double 0.5d
+     244: getstatic     #114                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     247: invokevirtual #118                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     298: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     305: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     318: checkcast     #145                // class net/minecraft/core/particles/SimpleParticleType
+     322: ldc2_w        #69                 // double 2.0d
+     329: ldc2_w        #71                 // double 0.5d
+     335: ldc2_w        #146                // double 0.3d
+     338: ldc2_w        #146                // double 0.3d
+     341: ldc2_w        #146                // double 0.3d
+     344: ldc2_w        #148                // double 0.1d
+     352: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     359: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     370: ldc2_w        #69                 // double 2.0d
+     377: ldc2_w        #71                 // double 0.5d
+     383: ldc2_w        #146                // double 0.3d
+     386: ldc2_w        #146                // double 0.3d
+     389: ldc2_w        #146                // double 0.3d
+     392: ldc2_w        #148                // double 0.1d
+     409: instanceof    #50                 // class net/minecraft/world/level/Level
+     416: checkcast     #50                 // class net/minecraft/world/level/Level
+     442: new           #168                // class net/minecraft/resources/ResourceLocation
+     446: ldc           #170                // String entity.glow_squid.squirt
+     456: checkcast     #181                // class net/minecraft/sounds/SoundEvent
+     462: ldc           #188                // float 0.8f
+     465: invokevirtual #192                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     480: new           #168                // class net/minecraft/resources/ResourceLocation
+     484: ldc           #170                // String entity.glow_squid.squirt
+     494: checkcast     #181                // class net/minecraft/sounds/SoundEvent
+     500: ldc           #188                // float 0.8f
+     504: invokevirtual #196                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     509: ldc2_w        #69                 // double 2.0d
+     516: ldc2_w        #71                 // double 0.5d
+     536: ldc2_w        #69                 // double 2.0d
+     543: ldc2_w        #71                 // double 0.5d
+     565: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     572: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     577: getstatic     #106                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     583: checkcast     #108                // class net/minecraft/world/entity/EntityType
+     589: ldc2_w        #69                 // double 2.0d
+     596: ldc2_w        #71                 // double 0.5d
+     603: getstatic     #114                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     606: invokevirtual #118                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     657: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     664: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     677: checkcast     #145                // class net/minecraft/core/particles/SimpleParticleType
+     681: ldc2_w        #69                 // double 2.0d
+     688: ldc2_w        #71                 // double 0.5d
+     694: ldc2_w        #146                // double 0.3d
+     697: ldc2_w        #146                // double 0.3d
+     700: ldc2_w        #146                // double 0.3d
+     703: ldc2_w        #148                // double 0.1d
+     711: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     718: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     729: ldc2_w        #69                 // double 2.0d
+     736: ldc2_w        #71                 // double 0.5d
+     742: ldc2_w        #146                // double 0.3d
+     745: ldc2_w        #146                // double 0.3d
+     748: ldc2_w        #146                // double 0.3d
+     751: ldc2_w        #148                // double 0.1d
+     768: instanceof    #50                 // class net/minecraft/world/level/Level
+     775: checkcast     #50                 // class net/minecraft/world/level/Level
+     801: new           #168                // class net/minecraft/resources/ResourceLocation
+     805: ldc           #170                // String entity.glow_squid.squirt
+     815: checkcast     #181                // class net/minecraft/sounds/SoundEvent
+     821: ldc           #188                // float 0.8f
+     824: invokevirtual #192                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+## SerPumpkinheadSpavnProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadSpavnProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadSpavnProcedure();
+  public static boolean execute(net.minecraft.world.level.LevelAccessor, double, double, double);
+     216: new           #76                 // class net/minecraft/resources/ResourceLocation
+     220: ldc           #78                 // String deep_dark
+     246: new           #76                 // class net/minecraft/resources/ResourceLocation
+     250: ldc           #89                 // String mushroom_fields
+     279: new           #76                 // class net/minecraft/resources/ResourceLocation
+     283: ldc           #97                 // String minecraft:is_overworld
+     315: new           #76                 // class net/minecraft/resources/ResourceLocation
+     319: ldc           #109                // String terralith:all_terralith_biomes
+     336: instanceof    #111                // class net/minecraft/world/level/Level
+     343: checkcast     #111                // class net/minecraft/world/level/Level
+     357: instanceof    #117                // class net/minecraft/world/level/WorldGenLevel
+     364: checkcast     #117                // class net/minecraft/world/level/WorldGenLevel
+## SerPumpkinheadWTelProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadWTelProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadWTelProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      16: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      29: checkcast     #29                 // class net/minecraft/world/effect/MobEffect
+      48: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      56: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      63: invokevirtual #43                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      69: ldc           #44                 // float -1.0f
+      73: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      81: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      94: ldc           #44                 // float -1.0f
+      96: ldc           #50                 // float 5.0f
+     105: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+     113: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     131: new           #61                 // class net/minecraft/world/effect/MobEffectInstance
+     153: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+     161: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     179: new           #61                 // class net/minecraft/world/effect/MobEffectInstance
+     189: checkcast     #29                 // class net/minecraft/world/effect/MobEffect
+     247: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     254: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     259: getstatic     #106                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     265: checkcast     #108                // class net/minecraft/world/entity/EntityType
+     277: getstatic     #114                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     280: invokevirtual #118                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     331: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     338: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     351: checkcast     #144                // class net/minecraft/core/particles/SimpleParticleType
+     360: ldc2_w        #145                // double 0.3d
+     363: ldc2_w        #145                // double 0.3d
+     366: ldc2_w        #145                // double 0.3d
+     369: ldc2_w        #147                // double 0.1d
+     377: instanceof    #101                // class net/minecraft/server/level/ServerLevel
+     384: checkcast     #101                // class net/minecraft/server/level/ServerLevel
+     400: ldc2_w        #145                // double 0.3d
+     403: ldc2_w        #145                // double 0.3d
+     406: ldc2_w        #145                // double 0.3d
+     409: ldc2_w        #147                // double 0.1d
+     426: instanceof    #56                 // class net/minecraft/world/level/Level
+     433: checkcast     #56                 // class net/minecraft/world/level/Level
+     459: new           #167                // class net/minecraft/resources/ResourceLocation
+     463: ldc           #169                // String entity.glow_squid.squirt
+     473: checkcast     #180                // class net/minecraft/sounds/SoundEvent
+     481: invokevirtual #190                // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     496: new           #167                // class net/minecraft/resources/ResourceLocation
+     500: ldc           #169                // String entity.glow_squid.squirt
+     510: checkcast     #180                // class net/minecraft/sounds/SoundEvent
+     519: invokevirtual #194                // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     524: ldc2_w        #195                // double 8.0d
+     533: ldc2_w        #197                // double 0.5d
+     553: ldc2_w        #195                // double 8.0d
+     562: ldc2_w        #197                // double 0.5d
+     585: ldc2_w        #195                // double 8.0d
+     594: ldc2_w        #197                // double 0.5d
+     617: ldc2_w        #195                // double 8.0d
+     624: ldc2_w        #197                // double 0.5d
+     652: ldc2_w        #195                // double 8.0d
+     661: ldc2_w        #197                // double 0.5d
+     670: instanceof    #210                // class net/minecraft/server/level/ServerPlayer
+     678: checkcast     #210                // class net/minecraft/server/level/ServerPlayer
+     689: ldc2_w        #195                // double 8.0d
+     698: ldc2_w        #197                // double 0.5d
+     720: ldc2_w        #195                // double 8.0d
+     729: ldc2_w        #197                // double 0.5d
+     749: ldc2_w        #195                // double 8.0d
+     758: ldc2_w        #197                // double 0.5d
+     781: ldc2_w        #195                // double 8.0d
+     790: ldc2_w        #197                // double 0.5d
+     813: ldc2_w        #195                // double 8.0d
+     820: ldc2_w        #197                // double 0.5d
+     848: ldc2_w        #195                // double 8.0d
+     857: ldc2_w        #197                // double 0.5d
+     866: instanceof    #210                // class net/minecraft/server/level/ServerPlayer
+     874: checkcast     #210                // class net/minecraft/server/level/ServerPlayer
+     885: ldc2_w        #195                // double 8.0d
+     894: ldc2_w        #197                // double 0.5d
+     916: ldc2_w        #197                // double 0.5d
+     925: ldc2_w        #195                // double 8.0d
+     945: ldc2_w        #197                // double 0.5d
+     954: ldc2_w        #195                // double 8.0d
+     977: ldc2_w        #197                // double 0.5d
+     986: ldc2_w        #195                // double 8.0d
+    1009: ldc2_w        #197                // double 0.5d
+    1016: ldc2_w        #195                // double 8.0d
+    1044: ldc2_w        #197                // double 0.5d
+    1053: ldc2_w        #195                // double 8.0d
+    1062: instanceof    #210                // class net/minecraft/server/level/ServerPlayer
+    1070: checkcast     #210                // class net/minecraft/server/level/ServerPlayer
+## SerPumpkinheadWithoutHorseNaNachalnomPoiavlieniiSushchnostiProcedure.class
+public class net.mcreator.borninchaosv.procedures.SerPumpkinheadWithoutHorseNaNachalnomPoiavlieniiSushchnostiProcedure {
+  public net.mcreator.borninchaosv.procedures.SerPumpkinheadWithoutHorseNaNachalnomPoiavlieniiSushchnostiProcedure();
+  public static void execute(net.minecraft.world.entity.Entity);
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+## WithoutHorsePProcedure.class
+public class net.mcreator.borninchaosv.procedures.WithoutHorsePProcedure {
+  public net.mcreator.borninchaosv.procedures.WithoutHorsePProcedure();
+  public static void execute(net.minecraft.world.level.LevelAccessor, double, double, double, net.minecraft.world.entity.Entity);
+       8: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      16: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      23: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_21223_:()F
+      29: ldc           #20                 // float -1.0f
+      31: ldc           #21                 // float 20.0f
+      50: invokevirtual #36                 // Method net/minecraft/world/entity/Entity.m_146870_:()V
+      54: instanceof    #29                 // class net/minecraft/world/level/Level
+      61: checkcast     #29                 // class net/minecraft/world/level/Level
+      87: new           #50                 // class net/minecraft/resources/ResourceLocation
+      91: ldc           #52                 // String item.totem.use
+     101: checkcast     #63                 // class net/minecraft/sounds/SoundEvent
+     107: ldc           #70                 // float 0.6f
+     109: ldc           #71                 // float 0.9f
+     111: invokevirtual #75                 // Method net/minecraft/world/level/Level.m_5594_:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     126: new           #50                 // class net/minecraft/resources/ResourceLocation
+     130: ldc           #52                 // String item.totem.use
+     140: checkcast     #63                 // class net/minecraft/sounds/SoundEvent
+     146: ldc           #70                 // float 0.6f
+     148: ldc           #71                 // float 0.9f
+     151: invokevirtual #79                 // Method net/minecraft/world/level/Level.m_7785_:(DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V
+     155: instanceof    #81                 // class net/minecraft/server/level/ServerLevel
+     162: checkcast     #81                 // class net/minecraft/server/level/ServerLevel
+     175: checkcast     #95                 // class net/minecraft/core/particles/SimpleParticleType
+     187: ldc2_w        #96                 // double 0.1d
+     195: instanceof    #81                 // class net/minecraft/server/level/ServerLevel
+     202: checkcast     #81                 // class net/minecraft/server/level/ServerLevel
+     207: getstatic     #106                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_THE_HEADLESS:Lnet/minecraftforge/registries/RegistryObject;
+     213: checkcast     #108                // class net/minecraft/world/entity/EntityType
+     225: getstatic     #114                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     228: invokevirtual #118                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     279: instanceof    #81                 // class net/minecraft/server/level/ServerLevel
+     286: checkcast     #81                 // class net/minecraft/server/level/ServerLevel
+     291: getstatic     #140                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKINHEAD:Lnet/minecraftforge/registries/RegistryObject;
+     297: checkcast     #108                // class net/minecraft/world/entity/EntityType
+     309: getstatic     #114                // Field net/minecraft/world/entity/MobSpawnType.MOB_SUMMONED:Lnet/minecraft/world/entity/MobSpawnType;
+     312: invokevirtual #118                // Method net/minecraft/world/entity/EntityType.m_262496_:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;)Lnet/minecraft/world/entity/Entity;
+     384: ldc2_w        #153                // double 0.5d
+     398: ldc2_w        #155                // double 3.0d
+     403: ldc2_w        #155                // double 3.0d
+     414: instanceof    #162                // class net/minecraft/server/level/ServerPlayer
+     422: checkcast     #162                // class net/minecraft/server/level/ServerPlayer
+     433: ldc2_w        #155                // double 3.0d
+     438: ldc2_w        #155                // double 3.0d
+     463: ldc2_w        #153                // double 0.5d
+     478: ldc2_w        #155                // double 3.0d
+     484: ldc2_w        #155                // double 3.0d
+     493: instanceof    #162                // class net/minecraft/server/level/ServerPlayer
+     501: checkcast     #162                // class net/minecraft/server/level/ServerPlayer
+     513: ldc2_w        #155                // double 3.0d
+     519: ldc2_w        #155                // double 3.0d
+     672: checkcast     #209                // class net/minecraft/world/level/block/Block

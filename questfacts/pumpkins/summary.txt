@@ -1,0 +1,1002 @@
+# Born in Chaos biome modifiers (pumpkin family, plus a sample of others)
+## data/born_in_chaos_v1/forge/biome_modifier/mr_pumpkin_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:mr_pumpkin",
+    "weight": 15,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/mrs_pumpkin_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:mrs_pumpkin",
+    "weight": 13,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/pumpkin_bruiser_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:pumpkin_bruiser",
+    "weight": 10,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/restless_spirit_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:restless_spirit",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/seared_spirit_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "plains",
+    "sunflower_plains"
+  ],
+  "spawners": {
+    "type": "born_in_chaos_v1:seared_spirit",
+    "weight": 5,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/senor_pumpkin_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:senor_pumpkin",
+    "weight": 10,
+    "minCount": 1,
+    "maxCount": 2
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/sir_pumpkinhead_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:sir_pumpkinhead",
+    "weight": 4,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/spirit_guide_assistant_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:spirit_guide_assistant",
+    "weight": 9,
+    "minCount": 2,
+    "maxCount": 2
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/spirit_guide_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:spirit_guide",
+    "weight": 16,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+## data/born_in_chaos_v1/forge/biome_modifier/spiritof_chaos_biome_modifier.json
+{
+  "type": "forge:add_spawns",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "spawners": {
+    "type": "born_in_chaos_v1:spiritof_chaos",
+    "weight": 8,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
+# all biome modifier files: , baby_skeleton_biome_modifier.json, baby_spider_biome_modifier.json, barrel_zombie_biome_modifier.json, black_argillite_biome_modifier.json, bloody_gadfly_biome_modifier.json, bone_imp_biome_modifier.json, bonescaller_biome_modifier.json, corpse_fish_biome_modifier.json, corpse_fly_biome_modifier.json, dark_vortex_biome_modifier.json, decaying_zombie_biome_modifier.json, decrepit_skeleton_biome_modifier.json, dire_hound_leader_biome_modifier.json, door_knight_biome_modifier.json, dread_hound_biome_modifier.json, fallen_chaos_knight_biome_modifier.json, firelight_biome_modifier.json, glutton_fish_biome_modifier.json, infected_deepslate_diamond_ore_feature_biome_modifier.json, infected_diamond_ore_feature_biome_modifier.json, krampus_biome_modifier.json, krampus_henchman_biome_modifier.json, lifestealer_biome_modifier.json, marigolds_biome_modifier.json, missioner_biome_modifier.json, mother_spider_biome_modifier.json, mr_pumpkin_biome_modifier.json, mrs_pumpkin_biome_modifier.json, nightmare_stalker_biome_modifier.json, phantom_creeper_biome_modifier.json, pumpkin_bruiser_biome_modifier.json, restless_spirit_biome_modifier.json, river_mint_biome_modifier.json, seared_spirit_biome_modifier.json, senor_pumpkin_biome_modifier.json, siamese_skeletons_biome_modifier.json, sir_pumpkinhead_biome_modifier.json, skeleton_demoman_biome_modifier.json, skeleton_thrasher_biome_modifier.json, spirit_guide_assistant_biome_modifier.json, spirit_guide_biome_modifier.json, spiritof_chaos_biome_modifier.json, supreme_bonescaller_biome_modifier.json, swarmer_biome_modifier.json, thornshell_crab_biome_modifier.json, zombie_bruiser_biome_modifier.json, zombie_clown_biome_modifier.json, zombie_fisherman_biome_modifier.json, zombie_lumberjack_biome_modifier.json
+# pumpkin entity classes: ControlledSpiritualAssistantEntity.class, FelsteedEntity.class, InfernalSpiritEntity.class, LordPumpkinheadEntity.class, LordPumpkinheadHeadEntity.class, LordPumpkinheadWithoutaHorseEntity.class, LordsFelsteedEntity.class, MrPumpkinControlledEntity.class, MrPumpkinEntity.class, MrsPumpkinEntity.class, PumpkinBombEntity.class, PumpkinBruiserEntity.class, PumpkinDunceEntity.class, PumpkinPistolProjectileEntity.class, PumpkinSpiritEntity.class, PumpkinStaffProjectileEntity.class, PumpkinheadEntity.class, RestlessSpiritEntity.class, RidingFelsteedEntity.class, RidingLordsFelsteedEntity.class, SearedSpiritEntity.class, SearedSpiritNotDespawnEntity.class, SenorPumpkinEntity.class, SirPumpkinheadEntity.class, SirPumpkinheadWithoutHorseEntity.class, SpiritGuideAssistantEntity.class, SpiritGuideEntity.class, SpiritofChaosEntity.class, SpiritualEasterEggProjectileEntity.class
+## ControlledSpiritualAssistantEntity.class calls: ['ControlledBabySkeletonNaNachalnomPoiavlieniiSushchnostiProcedure', 'ControlledBabySkeletonPriObnovlieniiTaktaSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## FelsteedEntity.class calls: ['FelsteedParProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## InfernalSpiritEntity.class calls: []
+  public static void init();
+    Code:
+       0: return
+
+## LordPumpkinheadEntity.class calls: ['LordPumpkinheadPriObnovlieniiTikaSushchnostiProcedure', 'LordPumpkinheadPriRanieniiSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## LordPumpkinheadHeadEntity.class calls: ['LordPumpkinheadDedProcedure', 'LordPumpkinheadHeadPriObnovlieniiTikaSushchnostiProcedure', 'LordPumpkinheadHeadhitProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## LordPumpkinheadWithoutaHorseEntity.class calls: ['LordPumpkinheadTicProcedure', 'LordPumpkinheadWithoutaHorsePriNachalnomPrizyvieSushchnostiProcedure', 'LordPumpkinheadhitProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## LordsFelsteedEntity.class calls: ['FelsteedParProcedure', 'LordsFelsteedPriRanieniiSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## MrPumpkinControlledEntity.class calls: ['MrPumpkinControlNaNachalnomPoiavlieniiSushchnostiProcedure', 'MrPumpkinPProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## MrPumpkinEntity.class calls: []
+  public static void init();
+    Code:
+       0: getstatic     #83                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #89                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #91                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #399                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #403                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #420,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #424                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## MrsPumpkinEntity.class calls: ['MrsPumpkinPriObnovlieniiTikaSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #84                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.MRS_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #90                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #92                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #394                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #398                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #415,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #419                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## PumpkinBombEntity.class calls: ['PumpkinBombPriNachalnomPrizyvieSushchnostiProcedure', 'PumpkinBombPriObnovlieniiTikaSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## PumpkinBruiserEntity.class calls: ['PumpkinBruiserDeathTimeIsReachedProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.PUMPKIN_BRUISER:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #363                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #367                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #384,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #388                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## PumpkinDunceEntity.class calls: ['PumpkinDunceDeathTimeIsReachedProcedure', 'PumpkinDuncePriNachalnomPrizyvieSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## PumpkinPistolProjectileEntity.class calls: ['PumpkinBlockHitProcedure', 'PumpkinPistolHitProcedure', 'PumpkinPistolKazhdyiTikPriPoliotieSnariadaProcedure']
+
+## PumpkinSpiritEntity.class calls: ['PumpkinSpiritPriObnovlieniiTaktaSushchnostiProcedure', 'PumpkinSpiritPriShchielchkiePKMPoSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## PumpkinStaffProjectileEntity.class calls: ['PumpkinStaffKoghdaSnariadPopadaietVSushchnostProcedure', 'PumpkinStaffPartProcedure', 'PumpkinStaffProProcedure']
+
+## PumpkinheadEntity.class calls: ['PumpkinheadKoghdaSushchnostUmiraietProcedure', 'PumpkinheadPriObnovlieniiTaktaSushchnostiProcedure', 'PumpkinheadTelProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## RestlessSpiritEntity.class calls: ['SpiritGonProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #83                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.RESTLESS_SPIRIT:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #89                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #91                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #428                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #432                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #449,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #453                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## RidingFelsteedEntity.class calls: ['FelsteedParProcedure', 'RidingFelsteedPriNazhatiiPravoiKnopkiNaSushchnostProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## RidingLordsFelsteedEntity.class calls: ['FelsteedParProcedure', 'RidinglordsfelsteedclickProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## SearedSpiritEntity.class calls: ['SearedSpiritKoghdaSushchnostRanienaProcedure', 'SearedSpiritPriObnovlieniiTaktaSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SEARED_SPIRIT:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #371                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #375                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #392,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #396                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## SearedSpiritNotDespawnEntity.class calls: ['SearedSpiritKoghdaSushchnostRanienaProcedure', 'SearedSpiritPriObnovlieniiTaktaSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## SenorPumpkinEntity.class calls: []
+  public static void init();
+    Code:
+       0: getstatic     #81                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SENOR_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #87                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #89                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #410                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #414                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #431,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #435                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## SirPumpkinheadEntity.class calls: ['SerPumpkinheadGProcedure', 'SerPumpkinheadPiProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SIR_PUMPKINHEAD:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #391                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #395                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #412,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #416                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## SirPumpkinheadWithoutHorseEntity.class calls: ['SerPumpkinheadWTelProcedure', 'SerPumpkinheadWithoutHorseNaNachalnomPoiavlieniiSushchnostiProcedure', 'WithoutHorsePProcedure']
+  public static void init();
+    Code:
+       0: return
+
+## SpiritGuideAssistantEntity.class calls: []
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SPIRIT_GUIDE_ASSISTANT:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #369                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #373                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #390,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #394                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## SpiritGuideEntity.class calls: ['SpiritGudSproProcedure', 'SpiritGuidePriGibieliSushchnostiProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SPIRIT_GUIDE:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #391                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #395                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #412,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #416                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## SpiritofChaosEntity.class calls: ['SpiritofChaosPriNachalnomPrizyvieSushchnostiProcedure', 'SpiritofChaosticProcedure']
+  public static void init();
+    Code:
+       0: getstatic     #79                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModEntities.SPIRITOF_CHAOS:Lnet/minecraftforge/registries/RegistryObject;
+       3: invokevirtual #85                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+       6: checkcast     #87                 // class net/minecraft/world/entity/EntityType
+       9: getstatic     #423                // Field net/minecraft/world/entity/SpawnPlacements$Type.ON_GROUND:Lnet/minecraft/world/entity/SpawnPlacements$Type;
+      12: getstatic     #427                // Field net/minecraft/world/level/levelgen/Heightmap$Types.MOTION_BLOCKING_NO_LEAVES:Lnet/minecraft/world/level/levelgen/Heightmap$Types;
+      15: invokedynamic #444,  0            // InvokeDynamic #0:m_217080_:()Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;
+      20: invokestatic  #448                // Method net/minecraft/world/entity/SpawnPlacements.m_21754_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+      23: return
+
+## SpiritualEasterEggProjectileEntity.class calls: ['SpiritualEasterEggHitProcedureProcedure', 'SpiritualEasterEggProjectileKazhdyiTikPriPoliotieSnariadaProcedure']
+
+# spawn-ish procedures they call: 
+# classes naming LORD_PUMPKINHEAD: ['LordPumpkinheadEntity.class', 'LordPumpkinheadHeadEntity.class', 'LordPumpkinheadWithoutaHorseEntity.class', 'BornInChaosV1ModEntities.class', 'BornInChaosV1ModEntityRenderers.class', 'BornInChaosV1ModItems.class', 'BornInChaosV1ModTabs.class', 'BurningoutthesoulProcedure.class', 'LordPumpkinheadPriObnovlieniiTikaSushchnostiProcedure.class', 'LordPumpkinheadTicProcedure.class', 'LordPumpkinheadsHatHitProcedure.class', 'LordPumpkinheadsLampclicProcedure.class', 'PumpkinBlockHitProcedure.class', 'PumpkinLordPistolBlockHitProcedure.class', 'PumpkinLordPistolHitProcedure.class', 'PumpkinPistolHitProcedure.class', 'PumpkinPistolshotProcedure.class', 'PumpkinStaffAtacProcedure.class', 'PumpkinStaffKoghdaSnariadPopadaietVSushchnostProcedure.class', 'PumpkinStaffSirHitProcedure.class', 'RidinglordsfelsteedclickProcedure.class', 'SoulStratificationKazhdyiTikVoVriemiaEffiektaProcedure.class', 'TransmutingElixirPriShchielchkiePKMPoBlokuProcedure.class']
+# classes naming PUMPKIN_SPIRIT: ['PumpkinSpiritEntity.class', 'BornInChaosV1ModEntities.class', 'BornInChaosV1ModEntityRenderers.class', 'BornInChaosV1ModItems.class', 'BornInChaosV1ModSounds.class', 'BornInChaosV1ModTabs.class', 'EtherealSpiritPriShchielchkiePravoiKnopkoiMyshiNaBlokieProcedure.class']
+# classes naming PUMPKIN_DUNCE: ['PumpkinDunceEntity.class', 'BornInChaosV1ModEntities.class', 'BornInChaosV1ModEntityRenderers.class', 'BornInChaosV1ModItems.class', 'BornInChaosV1ModTabs.class', 'LordPumpkinheadPriRanieniiSushchnostiProcedure.class', 'LordPumpkinheadhitProcedure.class', 'PumpkinBruiserDeathTimeIsReachedProcedure.class']
+# classes naming PUMPKINHEAD:: []
+## net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.class
+       0: ldc           #84                 // String generationofInfectedDiamonds
+       2: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+       5: iconst_1
+       6: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      12: putstatic     #98                 // Field GENERATIONOFINFECTEDDIAMONDS:Lnet/minecraft/world/level/GameRules$Key;
+      15: ldc           #100                // String theappearanceoftheNightmareStalker
+      17: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+      20: iconst_1
+      21: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      27: putstatic     #102                // Field THEAPPEARANCEOFTHENIGHTMARESTALKER:Lnet/minecraft/world/level/GameRules$Key;
+      30: ldc           #104                // String decrepitSkeletonSpawn
+      32: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+      35: iconst_1
+      36: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      42: putstatic     #106                // Field DECREPITSKELETONSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      45: ldc           #108                // String skeletonBombSpawn
+      47: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+      50: iconst_1
+      51: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      57: putstatic     #110                // Field SKELETONBOMBSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      60: ldc           #112                // String decayingZombieSpawn
+      62: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+      65: iconst_1
+      66: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      72: putstatic     #114                // Field DECAYINGZOMBIESPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      75: ldc           #116                // String babySkeletonSpawn
+      77: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+      80: iconst_1
+      81: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+      87: putstatic     #118                // Field BABYSKELETONSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+      90: ldc           #120                // String zombiesinaBarrelSpawn
+      92: getstatic     #123                // Field net/minecraft/world/level/GameRules$Category.MOBS:Lnet/minecraft/world/level/GameRules$Category;
+      95: iconst_1
+      96: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     102: putstatic     #125                // Field ZOMBIESINABARRELSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     105: ldc           #127                // String phantomCreeperSpawn
+     107: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     110: iconst_1
+     111: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     117: putstatic     #129                // Field PHANTOMCREEPERSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     120: ldc           #131                // String doorKnightSpawn
+     122: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     125: iconst_1
+     126: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     132: putstatic     #133                // Field DOORKNIGHTSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     135: ldc           #135                // String restlessSpiritSpawn
+     137: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     140: iconst_1
+     141: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     147: putstatic     #137                // Field RESTLESSSPIRITSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     150: ldc           #139                // String skeletonThrasherSpawn
+     152: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     155: iconst_1
+     156: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     162: putstatic     #141                // Field SKELETONTHRASHERSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     165: ldc           #143                // String firelightSpawn
+     167: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     170: iconst_1
+     171: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     177: putstatic     #145                // Field FIRELIGHTSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     180: ldc           #147                // String bonescallerSpawn
+     182: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     185: iconst_1
+     186: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     192: putstatic     #149                // Field BONESCALLERSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     195: ldc           #151                // String boneImpSpawn
+     197: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     200: iconst_1
+     201: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     207: putstatic     #153                // Field BONEIMPSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     210: ldc           #155                // String darkVortexSpawn
+     212: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/level/GameRules$Category;
+     215: iconst_1
+     216: invokestatic  #92                 // Method net/minecraft/world/level/GameRules$BooleanValue.m_46250_:(Z)Lnet/minecraft/world/level/GameRules$Type;
+     222: putstatic     #157                // Field DARKVORTEXSPAWN:Lnet/minecraft/world/level/GameRules$Key;
+     225: ldc           #159                // String dreadHoundSpawn
+     227: getstatic     #88                 // Field net/minecraft/world/level/GameRules$Category.SPAWNING:Lnet/minecraft/world/
+## net/mcreator/borninchaosv/procedures/HalloweenEventSpawnProcedure.class
+Compiled from "HalloweenEventSpawnProcedure.java"
+public class net.mcreator.borninchaosv.procedures.HalloweenEventSpawnProcedure {
+  public net.mcreator.borninchaosv.procedures.HalloweenEventSpawnProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #20                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onEntitySpawned(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: invokevirtual #31                 // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getLevel:()Lnet/minecraft/world/level/Level;
+       5: aload_0
+       6: invokevirtual #35                 // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getEntity:()Lnet/minecraft/world/entity/Entity;
+       9: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+      12: return
+
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+    Code:
+       0: aconst_null
+       1: aload_0
+       2: aload_1
+       3: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+       6: return
+
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_2
+       1: ifnonnull     5
+       4: return
+       5: aload_2
+       6: instanceof    #49                 // class net/minecraft/world/entity/monster/Zombie
+       9: ifne          19
+      12: aload_2
+      13: instanceof    #51                 // class net/minecraft/world/entity/monster/Skeleton
+      16: ifeq          578
+      19: aload_1
+      20: invokeinterface #57,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+      25: invokeinterface #63,  1           // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+      30: getstatic     #69                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      33: invokevirtual #73                 // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+      36: iconst_1
+      37: if_icmpne     578
+      40: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      43: iconst_2
+      44: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      47: bipush        9
+      49: if_icmpne     76
+      52: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      55: iconst_5
+      56: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      59: bipush        25
+      61: if_icmplt     76
+      64: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      67: iconst_5
+      68: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      71: bipush        31
+      73: if_icmple     132
+      76: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      79: iconst_2
+      80: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      83: bipush        10
+      85: if_icmpne     111
+      88: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      91: iconst_5
+      92: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+      95: iconst_1
+      96: if_icmplt     111
+      99: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+     102: iconst_5
+     103: invokevirtual #83                 // Method java/util/Calendar.get:(I)I
+     106: bipush        7
+     108: if_icmple     132
+     111: aload_1
+     112: invokeinterface #57,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_6106_:()Lnet/minecraft/world/level/storage/LevelData;
+     117: invokeinterface #63,  1           // InterfaceMethod net/minecraft/world/level/storage/LevelData.m_5470_:()Lnet/minecraft/world/level/GameRules;
+     122: getstatic     #86                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.HALLOWEEN_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+     125: invokevirtual #73                 // Method net/minecraft/world/level/GameRules.m_46207_:(Lnet/minecraft/world/level/GameRules$Key;)Z
+     128: iconst_1
+     129: if_icmpne     578
+     132: aload_2
+     133: instanceof    #49                 // class net/minecraft/world/entity/monster/Zombie
+     136: ifeq          401
+     139: invokestatic  #92                 // Method java/lang/Math.random:()D
+     142: ldc2_w        #93                 // double 0.35d
+     145: dcmpg
+     146: ifge          401
+     149: aload_1
+     150: invokeinterface #98,  1           // InterfaceMethod net/minecraft/world/level/LevelAccessor.m_5776_:()Z
+     155: ifne          401
+     158: aload_2
+     159: astore_3
+     160: aload_3
+     161: instanceof    #100                // class net/minecraft/world/entity/player/Player
+     164: ifeq          213
+     167: aload_3
+     168: checkcast     #100                // class net/minecraft/world/entity/player/Player
+     171: astore        4
+     173: aload         4
+     175: invokevirtual #104                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+     178: getfield      #110                // Field net/minecraft/world/entity/player/Inventory.f_35975_:Lnet/minecraft/core/NonNullList;
+     181: iconst_3
+     182: new           #112                // class net/minecraft/world/item/ItemStack
+     185: dup
+     186: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.ROTTEN_INFERNAL_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     189: invokevirtual #123                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     192: checkcast     #125                // class net/minecraft/world/level/ItemLike
+     195: invokespecial #128                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     198: invokevirtual #134                // Method net/minecraft/core/NonNullList.set:(ILjava/lang/Object;)Ljava/lang/Object;
+     201: pop
+     202: aload         4
+     204: invokevirtual #104                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+     207: invokevirtual #137                // Method net/minecraft/world/entity/player/Inventory.m_6596_:()V
+     210: goto          250
+     213: aload_3
+     214: instanceof    #141                // class net/minecraft/world/entity/LivingEntity
+     217: ifeq          250
+     220: aload_3
+     221: checkcast     #141                // class net/minecraft/world/entity/LivingEntity
+     224: astore        5
+     226: aload         5
+     228: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     231: new           #112                // class net/minecraft/world/item/ItemStack
+     234: dup
+     235: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModBlocks.ROTTEN_INFERNAL_PUMPKIN:Lnet/minecraftforge/registries/RegistryObject;
+     238: invokevirtual #123                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     241: checkcast     #125                // class net/minecraft/world/level/ItemLike
+     244: invokespecial #128                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     247: invokevirtual #151                // Method net/minecraft/world/entity/LivingEntity.m_8061_:(Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;)V
+     250: invokestatic  #92                 // Method java/lang/Math.random:()D
+     253: ldc2_w        #152                // double 0.2d
+     256: dcmpg
+     257: ifge          332
+     260: aload_2
+     261: instanceof    #141                // class net/minecraft/world/entity/LivingEntity
+     264: ifeq          329
+     267: aload_2
+     268: checkcast     #141                // class net/minecraft/world/entity/LivingEntity
+     271: astore_3
+     272: new           #112                // class net/minecraft/world/item/ItemStack
+     275: dup
+     276: getstatic     #158                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_AXE:Lnet/minecraftforge/registries/RegistryObject;
+     279: invokevirtual #123                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     282: checkcast     #125                // class net/minecraft/world/level/ItemLike
+     285: invokespecial #128                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     288: invokevirtual #162                // Method net/minecraft/world/item/ItemStack.m_41777_:()Lnet/minecraft/world/item/ItemStack;
+     291: astore        4
+     293: aload         4
+     295: iconst_1
+     296: invokevirtual #166                // Method net/minecraft/world/item/ItemStack.m_41764_:(I)V
+     299: aload_3
+     300: getstatic     #172                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     303: aload         4
+     305: invokevirtual #176                // Method net/minecraft/world/entity/LivingEntity.m_21008_:(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V
+     308: aload_3
+     309: instanceof    #100                // class net/minecraft/world/entity/player/Player
+     312: ifeq          329
+     315: aload_3
+     316: checkcast     #100                // class net/minecraft/world/entity/player/Player
+     319: astore        5
+     321: aload         5
+     323: invokevirtual #104                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+     326: invokevirtual #137                // Method net/minecraft/world/entity/player/Inventory.m_6596_:()V
+     329: goto          401
+     332: aload_2
+     333: instanceof    #141                // class net/minecraft/world/entity/LivingEntity
+     336: ifeq          401
+     339: aload_2
+     340: checkcast     #141                // class net/minecraft/world/entity/LivingEntity
+     343: astore_3
+     344: new           #112                // class net/minecraft/world/item/ItemStack
+     347: dup
+     348: getstatic     #179                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.SWEET_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     351: invokevirtual #123                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     354: checkcast     #125                // class net/minecraft/world/level/ItemLike
+     357: invokespecial #128                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     360: invokevirtual #162                // Method net/minecraft/world/item/ItemStack.m_41777_:()Lnet/minecraft/world/item/ItemStack;
+     363: astore        4
+     365: aload         4
+     367: iconst_1
+     368: invokevirtual #166                // Method net/minecraft/world/item/ItemStack.m_41764_:(I)V
+     371: aload_3
+     372: getstatic     #172                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+
+# classes that add effects on spawn/join (any mod)
+aquamirae-forge-1.20.1-7.1.14.jar :: dev/obscuria/aquamirae/common/entity/AbyssalScyphoid.class
+aquamirae-forge-1.20.1-7.1.14.jar :: dev/obscuria/aquamirae/common/entity/CaptainCorneliaBoss.class
+aquamirae-forge-1.20.1-7.1.14.jar :: dev/obscuria/aquamirae/common/entity/Eel.class
+bookofdragons-1.4-1.20.1.jar :: net/magister/bookofdragons/platform/forge/ParalysisEventsForge.class
+ZOMBIE born_in_chaos_[Forge]1.20.1_1.7.5.jar :: net/mcreator/borninchaosv/procedures/ChaoticSpringEventSpawnProcedure.class
+mythsandlegends-1.0.6.jar :: com/ovinter/mythsandlegends/entity/enemy/monster/GargoyleEntity.class
+mythsandlegends-1.0.6.jar :: com/ovinter/mythsandlegends/event/ServerEvents.class
+irons_spellbooks-1.20.1-3.16.3.jar :: io/redspace/ironsspellbooks/entity/mobs/dead_king_boss/DeadKingBoss.class
+irons_spellbooks-1.20.1-3.16.3.jar :: io/redspace/ironsspellbooks/entity/mobs/wizards/alchemist/ApothecaristEntity.class
+irons_spellbooks-1.20.1-3.16.3.jar :: io/redspace/ironsspellbooks/player/ServerPlayerEvents.class
+soulslike-weaponry-1.4.10-1.20.1-forge.jar :: net/soulsweaponry/entity/projectile/WitheredWabbajackProjectile.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/AnimationMonster/BossMonsters/LLibrary_Boss_Monster.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/Deepling/Deepling_Angler_Entity.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/Deepling/Deepling_Priest_Entity.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/Coralssus_Entity.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/IABossMonsters/Ancient_Remnant/Ancient_Remnant_Entity.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/IABossMonsters/IABoss_monster.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/IABossMonsters/NewNetherite_Monstrosity/Netherite_Monstrosity_Entity.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/Kobolediator_Entity.class
+L_Enders_Cataclysm-3.31.jar :: com/github/L_Ender/cataclysm/entity/InternalAnimationMonster/Wadjet_Entity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/IAnimatedBoss/CloudGolem/Cloud_GolemEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/IAnimatedBoss/PossessedPaladin/PossessedPaladinEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/AncientStronghold/Ancient_GuardianEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/Chorusling/EndersentEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/CollapsedKingdom/BeheadedKnight/BeheadedKnightEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/CollapsedKingdom/HauntedKnightEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/CollapsedKingdom/PosessedPaladinEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/CollapsedKingdom/ResurrectedKnight/ResurrectedKnightEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/Frostbitten_GolemEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/Lava_eaterEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/Overgrown_colossusEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/ShulkerTower/Shulker_MimicEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/SkeletosaurusEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/SpaceStation/Flameborn/AnnihilationPursuer/AnnihilationPursuerEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/Mobs/Withered_AbominationEntity.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/OriginClasses/IAnimatedBoss.class
+legendarymonsters-2.2.4 MC 1.20.1.jar :: net/miauczel/legendary_monsters/entity/AnimatedMonster/OriginClasses/IAnimatedMiniBoss.class
+block_factorys_bosses-2.1.2-forge-1.20.1.jar :: net/unusual/block_factorys_bosses/entity/boss/dragon/boss/InfernalDragonEntity.class
+block_factorys_bosses-2.1.2-forge-1.20.1.jar :: net/unusual/block_factorys_bosses/entity/boss/kraken/KrakenEntity.class
+block_factorys_bosses-2.1.2-forge-1.20.1.jar :: net/unusual/block_factorys_bosses/entity/boss/sandworm/SandwormEntity.class
+block_factorys_bosses-2.1.2-forge-1.20.1.jar :: net/unusual/block_factorys_bosses/entity/boss/yeti/YetiEntity.class
+IllagerInvasion-v8.0.7-1.20.1-Forge.jar :: fuzs/illagerinvasion/world/entity/monster/Alchemist.class
+IllagerInvasion-v8.0.7-1.20.1-Forge.jar :: fuzs/illagerinvasion/world/entity/monster/Inquisitor.class
+IllagerInvasion-v8.0.7-1.20.1-Forge.jar :: fuzs/illagerinvasion/world/entity/monster/Surrendered.class
+PuzzlesLib-v8.1.36-1.20.1-Forge.jar :: fuzs/puzzleslib/impl/event/ForgeEventInvokerRegistryImpl.class
+bloomlevelup-forge-1.20.1-0.1.0+build.335.jar :: com/freshorangeslices/bloomlevelup/skill/combat/CombatSkill.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/GelatinousCube.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/Shadow.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/Shadowlord.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/ghoul/AbstractGhoul.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/plant/Shrieker.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/plant/VioletFungus.class
+monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/skeleton/SkeletonChampion.class
+ZOMBIE monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/zombie/Wight.class
+## born_in_chaos_[Forge]1.20.1_1.7.5.jar :: net/mcreator/borninchaosv/procedures/ChaoticSpringEventSpawnProcedure.class
+Compiled from "ChaoticSpringEventSpawnProcedure.java"
+public class net.mcreator.borninchaosv.procedures.ChaoticSpringEventSpawnProcedure {
+  public net.mcreator.borninchaosv.procedures.ChaoticSpringEventSpawnProcedure();
+  public static void onEntitySpawned(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+       2: invokevirtual #31                 // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getLevel:()Lnet/minecraft/world/level/Level;
+       6: invokevirtual #35                 // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getEntity:()Lnet/minecraft/world/entity/Entity;
+       9: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  public static void execute(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       3: invokestatic  #39                 // Method execute:(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/Entity;)V
+  private static void execute(net.minecraftforge.eventbus.api.Event, net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.Entity);
+       1: ifnonnull     5
+       6: instanceof    #49                 // class net/minecraft/world/entity/monster/Zombie
+       9: ifne          19
+      16: ifeq          564
+      30: getstatic     #69                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.SEASONAL_EVENTS:Lnet/minecraft/world/level/GameRules$Key;
+      37: if_icmpne     564
+      40: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      48: if_icmpne     75
+      51: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      60: if_icmplt     75
+      63: invokestatic  #79                 // Method java/util/Calendar.getInstance:()Ljava/util/Calendar;
+      72: if_icmple     96
+      86: getstatic     #86                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModGameRules.CHAOTIC_SPRING_EVENT:Lnet/minecraft/world/level/GameRules$Key;
+      93: if_icmpne     564
+      97: instanceof    #49                 // class net/minecraft/world/entity/monster/Zombie
+     100: ifeq          325
+     103: invokestatic  #92                 // Method java/lang/Math.random:()D
+     106: ldc2_w        #93                 // double 0.35d
+     110: ifge          325
+     119: ifne          325
+     128: ifeq          177
+     150: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     181: ifeq          214
+     192: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     199: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     218: ifeq          283
+     230: getstatic     #154                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.CARROT_SWORD:Lnet/minecraftforge/registries/RegistryObject;
+     254: getstatic     #168                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+     266: ifeq          283
+     287: ifeq          325
+     302: ifne          325
+     306: new           #180                // class net/minecraft/world/effect/MobEffectInstance
+     310: getstatic     #186                // Field net/minecraft/world/effect/MobEffects.f_19603_:Lnet/minecraft/world/effect/MobEffect;
+     313: ldc           #187                // int 2147483647
+     318: invokespecial #190                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;IIZZ)V
+     321: invokevirtual #194                // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     329: ifeq          564
+     332: invokestatic  #92                 // Method java/lang/Math.random:()D
+     335: ldc2_w        #195                // double 0.25d
+     339: ifge          564
+     348: ifne          564
+     357: ifeq          406
+     379: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     410: ifeq          443
+     421: getstatic     #147                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+     428: getstatic     #118                // Field net/mcreator/borninchaosv/init/BornInChaosV1ModItems.KILLER_RABBIT_EARS_HELMET:Lnet/minecraftforge/registries/RegistryObject;
+     447: ifeq          485
+     462: ifne          485
+## monster-manual-1.20.1-1.0.1.jar :: mod/gottsch/forge/gmm/core/entity/monster/zombie/Wight.class
+public class mod.gottsch.forge.gmm.core.entity.monster.zombie.Wight extends mod.gottsch.forge.gmm.core.entity.monster.GMMMonster implements net.minecraft.world.entity.monster.RangedAttackMob,mod.gottsch.forge.gmm.core.entity.monster.ICastingMob {
+  private static final net.minecraft.network.syncher.EntityDataAccessor<java.lang.Boolean> DATA_CASTING;
+  private static final double DEFAULT_MAX_HEALTH = 41.0d;
+  private static final double DEFAULT_MOVEMENT_SPEED = 0.25d;
+  private static final double DEFAULT_ATTACK_DAMAGE = 4.0d;
+  private static final double DEFAULT_ARMOR = 2.0d;
+  private static final int DEFAULT_WITHER_DURATION = 200;
+  private static final int DEFAULT_MAX_WITHER_STACKS = 5;
+  private static final double DEFAULT_LIFESTEAL = 0.5d;
+  private static final int DEFAULT_SUMMON_CHARGE_TIME = 60;
+  private static final int DEFAULT_SUMMON_COOLDOWN_TIME = 600;
+  private static final double DEFAULT_SUMMON_SPAWN_RADIUS = 2.5d;
+  private static final int DEFAULT_ENTHRALL_CHARGE_TIME = 100;
+  private static final int DEFAULT_ENTHRALL_COOLDOWN_TIME = 600;
+  private static final double DEFAULT_ENTHRALL_RANGE = 16.0d;
+  private static final int DEFAULT_MAX_THRALLS = 3;
+  private static final double DEFAULT_SHIELD_PROBABILITY = 0.35d;
+  private static final double DEFAULT_SHIELD_BLOCK_RANGE = 4.0d;
+  private static final int DEFAULT_SHIELD_BLOCK_COOLDOWN = 40;
+  private static final int DEFAULT_SHIELD_MAX_BLOCK_TICKS = 100;
+  private static final int ROBE_COLOR = 4868688;
+  protected final mod.gottsch.forge.gmm.core.entity.ai.goal.VariantPowerRangedBowAttackGoal<mod.gottsch.forge.gmm.core.entity.monster.zombie.Wight> bowGoal;
+  public mod.gottsch.forge.gmm.core.entity.monster.zombie.Wight(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);
+      29: ldc           #95                 // float 15.0f
+  public void m_8097_();
+       8: getstatic     #120                // Field DATA_CASTING:Lnet/minecraft/network/syncher/EntityDataAccessor;
+      12: invokestatic  #126                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+  public boolean isCasting();
+       4: getstatic     #120                // Field DATA_CASTING:Lnet/minecraft/network/syncher/EntityDataAccessor;
+  public void setCasting(boolean);
+       4: getstatic     #120                // Field DATA_CASTING:Lnet/minecraft/network/syncher/EntityDataAccessor;
+       8: invokestatic  #126                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       0: getstatic     #155                // Field mod/gottsch/forge/gmm/core/tag/GMMTags$EntityTypes.WIGHT_COMPANIONS:Lnet/minecraft/tags/TagKey;
+       1: invokestatic  #162                // Method mod/gottsch/forge/gmm/core/config/MobConfigHelper.get:(Lnet/minecraft/world/entity/Entity;)Lmod/gottsch/forge/gmm/core/config/MobConfig;
+      64: getstatic     #192                // Field mod/gottsch/forge/gmm/core/tag/GMMTags$EntityTypes.WIGHT_SUMMON_ALLIES:Lnet/minecraft/tags/TagKey;
+      68: ldc           #194                // String summonChargeTime
+      70: ldc2_w        #195                // double 60.0d
+      73: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      78: ldc           #204                // String summonCooldownTime
+      80: ldc2_w        #205                // double 600.0d
+      83: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      88: ldc           #208                // String maxThralls
+      90: ldc2_w        #209                // double 3.0d
+      93: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+      98: ldc           #212                // String summonSpawnRadius
+     100: ldc2_w        #57                 // double 2.5d
+     103: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     122: getstatic     #220                // Field mod/gottsch/forge/gmm/core/tag/GMMTags$EntityTypes.WIGHT_ENTHRALL_CANDIDATES:Lnet/minecraft/tags/TagKey;
+     126: ldc           #222                // String enthrallChargeTime
+     128: ldc2_w        #223                // double 100.0d
+     131: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     136: ldc           #226                // String enthrallCooldownTime
+     138: ldc2_w        #205                // double 600.0d
+     141: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     146: ldc           #208                // String maxThralls
+     148: ldc2_w        #209                // double 3.0d
+     151: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     156: ldc           #228                // String enthrallRange
+     158: ldc2_w        #63                 // double 16.0d
+     161: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     171: ldc           #231                // String shieldBlocking
+     174: invokevirtual #235                // Method mod/gottsch/forge/gmm/core/config/MobConfig.flag:(Ljava/lang/String;Z)Z
+     177: ifeq          225
+     191: ldc           #239                // String shieldBlockRange
+     193: ldc2_w        #39                 // double 4.0d
+     196: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/String;D)D
+     200: ldc           #241                // String shieldBlockCooldown
+     202: ldc2_w        #242                // double 40.0d
+     205: invokevirtual #202                // Method mod/gottsch/forge/gmm/core/config/MobConfig.number:(Ljava/lang/Str
+# mixins naming Zombie / finalizeSpawn
+modernfix-forge-5.27.91+mc1.20.1.jar :: modernfix-modernfix.mixins.json :: ['perf.potential_spawns_alloc.PotentialSpawnsMixin']
+letmedespawn-forge-1.20.1-1.26.10.1.jar :: letmedespawn.mixins.json :: ['BaseSpawnerMixin', 'MobAccessor', 'MobMixin']
+architectury-9.2.14-forge.jar :: architectury.mixins.json :: ['MixinEntitySpawnExtension']
+mythsandlegends-1.0.6.jar :: mythsandlegends.mixins.json :: ['ZombieMixin']
+easy_mob_spawn_control-1.6.2.jar :: mixins.easy_mob_spawn_control.json :: ['MobCategoryMixin', 'MobDespawnMixin', 'NaturalSpawnerMixin']
+irons_spellbooks-1.20.1-3.16.3.jar :: mixins.irons_spellbooks.json :: ['MobEffectMixin']
+simplyswords-forge-neoforge-1.70.2-1.20.1.jar :: simplyswords-common.mixins.json :: ['MobEntityMixin']
+Voiceless Survival-forge-1.20.1-2.2.0.jar :: ezvcsurvival.mixins.json :: ['MobEntityMixin', 'MobTargetMixin']
+graveyard-FORGE-4.0.0+mc1.20.1.jar :: graveyard-common.mixins.json :: ['MobEntityAccessor', 'MobEntitySpawnMixin']
+IllagerInvasion-v8.0.7-1.20.1-Forge.jar :: illagerinvasion.common.mixins.json :: ['PatrolSpawnerMixin']
+almanac-forge-1.20.1-1.26.10.3.jar :: almanac.mixins.json :: ['MobPersistenceMixin']
+PuzzlesLib-v8.1.36-1.20.1-Forge.jar :: puzzleslib.forge.mixins.json :: ['accessor.MobSpawnSettingsBuilderForgeAccessor']
+spell_engine-forge-1.10.10+1.20.1.jar :: spell_engine.mixins.json :: ['action_impair.MobEntityActionImpairing']
+moonlight-1.20-2.16.37-forge.jar :: moonlight.mixins.json :: ['SelfEntitySpawnDataMixin']
+bloomlevelup-forge-1.20.1-0.1.0+build.335.jar :: bloomlevelup.forge.mixins.json :: ['MobEffectInstanceAccessor']
+# config lines about zombies or effects (server and client config)
+## game/config/jade/sort-order.json
+"minecraft:potion_effects": null,
+"minecraft:zombie_villager": null,
+## game/config/jade/plugins.json
+"harvest_tool.effective_tool": true,
+"zombie_villager": true,
+"potion_effects": true,
+## game/config/sound_physics_remastered/allowed_sounds.properties
+born_in_chaos_v1\:brute_zombie_attack=true
+born_in_chaos_v1\:brute_zombie_step=true
+born_in_chaos_v1\:zombie_brute_death=true
+born_in_chaos_v1\:zombie_brute_hurt=true
+born_in_chaos_v1\:zombie_brute_idle=true
+born_in_chaos_v1\:zombie_clown_attack=true
+irons_spellbooks\:apply_effect.bad_omen=true
+irons_spellbooks\:dark_magic_buff_03_custom_1=true
+minecraft\:block.note_block.imitate.zombie=true
+minecraft\:entity.husk.converted_to_zombie=true
+minecraft\:entity.lingering_potion.throw=true
+minecraft\:entity.parrot.imitate.zombie=true
+minecraft\:entity.parrot.imitate.zombie_villager=true
+minecraft\:entity.splash_potion.break=true
+minecraft\:entity.splash_potion.throw=true
+minecraft\:entity.wandering_trader.drink_potion=true
+minecraft\:entity.zombie.ambient=true
+minecraft\:entity.zombie.attack_iron_door=true
+minecraft\:entity.zombie.attack_wooden_door=true
+minecraft\:entity.zombie.break_wooden_door=true
+minecraft\:entity.zombie.converted_to_drowned=true
+minecraft\:entity.zombie.death=true
+minecraft\:entity.zombie.destroy_egg=true
+minecraft\:entity.zombie.hurt=true
+minecraft\:entity.zombie.infect=true
+minecraft\:entity.zombie.step=true
+minecraft\:entity.zombie_horse.ambient=true
+minecraft\:entity.zombie_horse.death=true
+minecraft\:entity.zombie_horse.hurt=true
+minecraft\:entity.zombie_villager.ambient=true
+minecraft\:entity.zombie_villager.converted=true
+minecraft\:entity.zombie_villager.cure=true
+minecraft\:entity.zombie_villager.death=true
+minecraft\:entity.zombie_villager.hurt=true
+minecraft\:entity.zombie_villager.step=true
+mutantmonsters\:entity.mutant_zombie.ambient=true
+mutantmonsters\:entity.mutant_zombie.attack=true
+mutantmonsters\:entity.mutant_zombie.death=true
+mutantmonsters\:entity.mutant_zombie.grunt=true
+mutantmonsters\:entity.mutant_zombie.hurt=true
+mutantmonsters\:entity.mutant_zombie.roar=true
+mythsandlegends\:petrified_effect=true
+soulsweapons\:warmth_buff=true
+## game/config/soulsweapons/soulsweapons_chungus_tonic_whitelist.json
+"soulsweapons:area_effect_sphere",
+"minecraft:zombie_villager",
+"minecraft:zombie_horse",
+"minecraft:zombie",
+"minecraft:area_effect_cloud",
+## game/config/ezvcsurvival/generalsounds.json
+"irons_spellbooks:catacombs_zombie": {
+"mutantmonsters:mutant_zombie": {
+"minecraft:zombie": {
+"born_in_chaos_v1:zombie_lumberjack": {
+"ddenizens:grave_zombie": {
+"born_in_chaos_v1:zombie_fisherman": {
+"born_in_chaos_v1:zombie_clown_not_despawn": {
+"minecraft:zombie_villager": {
+"born_in_chaos_v1:barrel_zombie": {
+"born_in_chaos_v1:decaying_zombie": {
+"born_in_chaos_v1:zombie_clown": {
+"born_in_chaos_v1:decaying_zombie_not_despawn": {
+"born_in_chaos_v1:zombie_bruiser": {
+"minecraft:zombie_horse": {
+"minecraft:entity.zombie.break_wooden_door": {
+"born_in_chaos_v1:zombie_brute_idle": {
+"minecraft:block.note_block.imitate.zombie": {
+"minecraft:entity.zombie_horse.hurt": {
+"minecraft:entity.husk.converted_to_zombie": {
+"soulsweapons:warmth_buff": {
+"minecraft:entity.zombie_villager.hurt": {
+"born_in_chaos_v1:zombie_brute_death": {
+"minecraft:entity.zombie_villager.converted": {
+"minecraft:entity.zombie_villager.ambient": {
+"minecraft:entity.zombie.death": {
+"minecraft:entity.splash_potion.throw": {
+"minecraft:entity.zombie_horse.ambient": {
+"minecraft:entity.zombie.infect": {
+"minecraft:entity.zombie.converted_to_drowned": {
+"mutantmonsters:entity.mutant_zombie.roar": {
+"minecraft:entity.parrot.imitate.zombie_villager": {
+"mutantmonsters:entity.mutant_zombie.death": {
+"born_in_chaos_v1:brute_zombie_attack": {
+"minecraft:entity.zombie.hurt": {
+"minecraft:entity.wandering_trader.drink_potion": {
+"irons_spellbooks:dark_magic_buff_03_custom_1": {
+"mutantmonsters:entity.mutant_zombie.grunt": {
+"minecraft:entity.zombie_villager.death": {
+"irons_spellbooks:apply_effect.bad_omen": {
+"born_in_chaos_v1:zombie_brute_hurt": {
+"born_in_chaos_v1:brute_zombie_step": {
+"mythsandlegends:petrified_effect": {
+"minecraft:entity.parrot.imitate.zombie": {
+"born_in_chaos_v1:zombie_clown_attack": {
+"minecraft:entity.zombie.step": {
+"minecraft:entity.zombie.ambient": {
+"mutantmonsters:entity.mutant_zombie.attack": {
+"minecraft:entity.zombie_horse.death": {
+"minecraft:entity.lingering_potion.throw": {
+"minecraft:entity.zombie.attack_iron_door": {
+"minecraft:entity.splash_potion.break": {
+"minecraft:entity.zombie_villager.step": {
+"mutantmonsters:entity.mutant_zombie.ambient": {
+"minecraft:entity.zombie_villager.cure": {
+"minecraft:entity.zombie.attack_wooden_door": {
+"mutantmonsters:entity.mutant_zombie.hurt": {
+"minecraft:entity.zombie.destroy_egg": {
+## server/config/mutantmonsters-server.toml
+#When infested with a Mutant X potion, what mutant mob should the target transform into. Otherwise the target will ony explode and take damage.
+mutant_x_conversions = ["minecraft:creeper,mutantmonsters:mutant_creeper", "minecraft:enderman,mutantmonsters:mutant_enderman", "minecraft:skeleton,mutantmonsters:mutant_skeleton", "minecraft:snow_golem,mutantmonsters:mutant_snow_golem", "minecraft:zombie,mutantmonsters:mutant_zombie", "minecraft:pig,mutantmonsters:spider_pig"]
+## server/config/jade/sort-order.json
+"minecraft:potion_effects": null,
+"minecraft:zombie_villager": null
+## server/config/soulsweapons/soulsweapons_chungus_tonic_whitelist.json
+"soulsweapons:area_effect_sphere",
+"minecraft:zombie_villager",
+"minecraft:zombie_horse",
+"minecraft:zombie",
+"minecraft:area_effect_cloud",
+## server/config/ezvcsurvival/generalsounds.json
+"irons_spellbooks:catacombs_zombie": {
+"mutantmonsters:mutant_zombie": {
+"minecraft:zombie": {
+"born_in_chaos_v1:zombie_lumberjack": {
+"ddenizens:grave_zombie": {
+"born_in_chaos_v1:zombie_fisherman": {
+"born_in_chaos_v1:zombie_clown_not_despawn": {
+"minecraft:zombie_villager": {
+"born_in_chaos_v1:barrel_zombie": {
+"born_in_chaos_v1:decaying_zombie": {
+"born_in_chaos_v1:zombie_clown": {
+"born_in_chaos_v1:decaying_zombie_not_despawn": {
+"born_in_chaos_v1:zombie_bruiser": {
+"minecraft:zombie_horse": {
+"minecraft:entity.zombie.break_wooden_door": {
+"born_in_chaos_v1:zombie_brute_idle": {
+"minecraft:block.note_block.imitate.zombie": {
+"minecraft:entity.zombie_horse.hurt": {
+"minecraft:entity.husk.converted_to_zombie": {
+"soulsweapons:warmth_buff": {
+"minecraft:entity.zombie_villager.hurt": {
+"born_in_chaos_v1:zombie_brute_death": {
+"minecraft:entity.zombie_villager.converted": {
+"minecraft:entity.zombie_villager.ambient": {
+"minecraft:entity.zombie.death": {
+"minecraft:entity.splash_potion.throw": {
+"minecraft:entity.zombie_horse.ambient": {
+"minecraft:entity.zombie.infect": {
+"minecraft:entity.zombie.converted_to_drowned": {
+"mutantmonsters:entity.mutant_zombie.roar": {
+"minecraft:entity.parrot.imitate.zombie_villager": {
+"mutantmonsters:entity.mutant_zombie.death": {
+"born_in_chaos_v1:brute_zombie_attack": {
+"minecraft:entity.zombie.hurt": {
+"minecraft:entity.wandering_trader.drink_potion": {
+"irons_spellbooks:dark_magic_buff_03_custom_1": {
+"mutantmonsters:entity.mutant_zombie.grunt": {
+"minecraft:entity.zombie_villager.death": {
+"irons_spellbooks:apply_effect.bad_omen": {
+"born_in_chaos_v1:zombie_brute_hurt": {
+"born_in_chaos_v1:brute_zombie_step": {
+"mythsandlegends:petrified_effect": {
+"minecraft:entity.parrot.imitate.zombie": {
+"born_in_chaos_v1:zombie_clown_attack": {
+"minecraft:entity.zombie.step": {
+"minecraft:entity.zombie.ambient": {
+"mutantmonsters:entity.mutant_zombie.attack": {
+"minecraft:entity.zombie_horse.death": {
+"minecraft:entity.lingering_potion.throw": {
+"minecraft:entity.zombie.attack_iron_door": {
+"minecraft:entity.splash_potion.break": {
+"minecraft:entity.zombie_villager.step": {
+"mutantmonsters:entity.mutant_zombie.ambient": {
+"minecraft:entity.zombie_villager.cure": {
+"minecraft:entity.zombie.attack_wooden_door": {
+"mutantmonsters:entity.mutant_zombie.hurt": {
+"minecraft:entity.zombie.destroy_egg": {
+# pumpkin family in the dump's biome spawn lists
+{"max": 1, "min": 1, "type": "born_in_chaos_v1:mrs_pumpkin", "weight": 13} in 134 biomes: biomesoplenty:aspen_glade, biomesoplenty:auroral_garden, biomesoplenty:bayou, biomesoplenty:bog, biomesoplenty:cold_desert, biomesoplenty:coniferous_forest, biomesoplenty:crag, biomesoplenty:crystalline_chasm, biomesoplenty:dead_forest, biomesoplenty:dryland, biomesoplenty:dune_beach, biomesoplenty:end_corruption, biomesoplenty:end_reef, biomesoplenty:end_wilds, biomesoplenty:erupting_inferno, biomesoplenty:field, biomesoplenty:fir_clearing, biomesoplenty:floodplain, biomesoplenty:forested_field, biomesoplenty:fungal_jungle, biomesoplenty:glowing_grotto, biomesoplenty:grassland, biomesoplenty:gravel_beach, biomesoplenty:highland, biomesoplenty:hot_springs, biomesoplenty:jacaranda_glade, biomesoplenty:jade_cliffs, biomesoplenty:lavender_field, biomesoplenty:lush_desert, biomesoplenty:lush_savanna, biomesoplenty:maple_woods, biomesoplenty:marsh, biomesoplenty:mediterranean_forest, biomesoplenty:moor, biomesoplenty:muskeg, biomesoplenty:mystic_grove, biomesoplenty:old_growth_dead_forest, biomesoplenty:old_growth_woodland, biomesoplenty:ominous_woods, biomesoplenty:orchard, biomesoplenty:origin_valley, biomesoplenty:overgrown_greens, biomesoplenty:pasture, biomesoplenty:prairie, biomesoplenty:pumpkin_patch, biomesoplenty:rainforest, biomesoplenty:redwood_forest, biomesoplenty:rocky_rainforest, biomesoplenty:rocky_shrubland, biomesoplenty:scrubland, biomesoplenty:seasonal_forest, biomesoplenty:shrubland, biomesoplenty:snowblossom_grove, biomesoplenty:snowy_coniferous_forest, biome
+{"max": 1, "min": 1, "type": "born_in_chaos_v1:pumpkin_bruiser", "weight": 10} in 134 biomes: biomesoplenty:aspen_glade, biomesoplenty:auroral_garden, biomesoplenty:bayou, biomesoplenty:bog, biomesoplenty:cold_desert, biomesoplenty:coniferous_forest, biomesoplenty:crag, biomesoplenty:crystalline_chasm, biomesoplenty:dead_forest, biomesoplenty:dryland, biomesoplenty:dune_beach, biomesoplenty:end_corruption, biomesoplenty:end_reef, biomesoplenty:end_wilds, biomesoplenty:erupting_inferno, biomesoplenty:field, biomesoplenty:fir_clearing, biomesoplenty:floodplain, biomesoplenty:forested_field, biomesoplenty:fungal_jungle, biomesoplenty:glowing_grotto, biomesoplenty:grassland, biomesoplenty:gravel_beach, biomesoplenty:highland, biomesoplenty:hot_springs, biomesoplenty:jacaranda_glade, biomesoplenty:jade_cliffs, biomesoplenty:lavender_field, biomesoplenty:lush_desert, biomesoplenty:lush_savanna, biomesoplenty:maple_woods, biomesoplenty:marsh, biomesoplenty:mediterranean_forest, biomesoplenty:moor, biomesoplenty:muskeg, biomesoplenty:mystic_grove, biomesoplenty:old_growth_dead_forest, biomesoplenty:old_growth_woodland, biomesoplenty:ominous_woods, biomesoplenty:orchard, biomesoplenty:origin_valley, biomesoplenty:overgrown_greens, biomesoplenty:pasture, biomesoplenty:prairie, biomesoplenty:pumpkin_patch, biomesoplenty:rainforest, biomesoplenty:redwood_forest, biomesoplenty:rocky_rainforest, biomesoplenty:rocky_shrubland, biomesoplenty:scrubland, biomesoplenty:seasonal_forest, biomesoplenty:shrubland, biomesoplenty:snowblossom_grove, biomesoplenty:snowy_coniferous_forest, biome
+{"max": 1, "min": 1, "type": "born_in_chaos_v1:sir_pumpkinhead", "weight": 4} in 134 biomes: biomesoplenty:aspen_glade, biomesoplenty:auroral_garden, biomesoplenty:bayou, biomesoplenty:bog, biomesoplenty:cold_desert, biomesoplenty:coniferous_forest, biomesoplenty:crag, biomesoplenty:crystalline_chasm, biomesoplenty:dead_forest, biomesoplenty:dryland, biomesoplenty:dune_beach, biomesoplenty:end_corruption, biomesoplenty:end_reef, biomesoplenty:end_wilds, biomesoplenty:erupting_inferno, biomesoplenty:field, biomesoplenty:fir_clearing, biomesoplenty:floodplain, biomesoplenty:forested_field, biomesoplenty:fungal_jungle, biomesoplenty:glowing_grotto, biomesoplenty:grassland, biomesoplenty:gravel_beach, biomesoplenty:highland, biomesoplenty:hot_springs, biomesoplenty:jacaranda_glade, biomesoplenty:jade_cliffs, biomesoplenty:lavender_field, biomesoplenty:lush_desert, biomesoplenty:lush_savanna, biomesoplenty:maple_woods, biomesoplenty:marsh, biomesoplenty:mediterranean_forest, biomesoplenty:moor, biomesoplenty:muskeg, biomesoplenty:mystic_grove, biomesoplenty:old_growth_dead_forest, biomesoplenty:old_growth_woodland, biomesoplenty:ominous_woods, biomesoplenty:orchard, biomesoplenty:origin_valley, biomesoplenty:overgrown_greens, biomesoplenty:pasture, biomesoplenty:prairie, biomesoplenty:pumpkin_patch, biomesoplenty:rainforest, biomesoplenty:redwood_forest, biomesoplenty:rocky_rainforest, biomesoplenty:rocky_shrubland, biomesoplenty:scrubland, biomesoplenty:seasonal_forest, biomesoplenty:shrubland, biomesoplenty:snowblossom_grove, biomesoplenty:snowy_coniferous_forest, biome
+{"max": 2, "min": 1, "type": "born_in_chaos_v1:senor_pumpkin", "weight": 10} in 134 biomes: biomesoplenty:aspen_glade, biomesoplenty:auroral_garden, biomesoplenty:bayou, biomesoplenty:bog, biomesoplenty:cold_desert, biomesoplenty:coniferous_forest, biomesoplenty:crag, biomesoplenty:crystalline_chasm, biomesoplenty:dead_forest, biomesoplenty:dryland, biomesoplenty:dune_beach, biomesoplenty:end_corruption, biomesoplenty:end_reef, biomesoplenty:end_wilds, biomesoplenty:erupting_inferno, biomesoplenty:field, biomesoplenty:fir_clearing, biomesoplenty:floodplain, biomesoplenty:forested_field, biomesoplenty:fungal_jungle, biomesoplenty:glowing_grotto, biomesoplenty:grassland, biomesoplenty:gravel_beach, biomesoplenty:highland, biomesoplenty:hot_springs, biomesoplenty:jacaranda_glade, biomesoplenty:jade_cliffs, biomesoplenty:lavender_field, biomesoplenty:lush_desert, biomesoplenty:lush_savanna, biomesoplenty:maple_woods, biomesoplenty:marsh, biomesoplenty:mediterranean_forest, biomesoplenty:moor, biomesoplenty:muskeg, biomesoplenty:mystic_grove, biomesoplenty:old_growth_dead_forest, biomesoplenty:old_growth_woodland, biomesoplenty:ominous_woods, biomesoplenty:orchard, biomesoplenty:origin_valley, biomesoplenty:overgrown_greens, biomesoplenty:pasture, biomesoplenty:prairie, biomesoplenty:pumpkin_patch, biomesoplenty:rainforest, biomesoplenty:redwood_forest, biomesoplenty:rocky_rainforest, biomesoplenty:rocky_shrubland, biomesoplenty:scrubland, biomesoplenty:seasonal_forest, biomesoplenty:shrubland, biomesoplenty:snowblossom_grove, biomesoplenty:snowy_coniferous_forest, biome
+{"max": 3, "min": 1, "type": "born_in_chaos_v1:mr_pumpkin", "weight": 15} in 134 biomes: biomesoplenty:aspen_glade, biomesoplenty:auroral_garden, biomesoplenty:bayou, biomesoplenty:bog, biomesoplenty:cold_desert, biomesoplenty:coniferous_forest, biomesoplenty:crag, biomesoplenty:crystalline_chasm, biomesoplenty:dead_forest, biomesoplenty:dryland, biomesoplenty:dune_beach, biomesoplenty:end_corruption, biomesoplenty:end_reef, biomesoplenty:end_wilds, biomesoplenty:erupting_inferno, biomesoplenty:field, biomesoplenty:fir_clearing, biomesoplenty:floodplain, biomesoplenty:forested_field, biomesoplenty:fungal_jungle, biomesoplenty:glowing_grotto, biomesoplenty:grassland, biomesoplenty:gravel_beach, biomesoplenty:highland, biomesoplenty:hot_springs, biomesoplenty:jacaranda_glade, biomesoplenty:jade_cliffs, biomesoplenty:lavender_field, biomesoplenty:lush_desert, biomesoplenty:lush_savanna, biomesoplenty:maple_woods, biomesoplenty:marsh, biomesoplenty:mediterranean_forest, biomesoplenty:moor, biomesoplenty:muskeg, biomesoplenty:mystic_grove, biomesoplenty:old_growth_dead_forest, biomesoplenty:old_growth_woodland, biomesoplenty:ominous_woods, biomesoplenty:orchard, biomesoplenty:origin_valley, biomesoplenty:overgrown_greens, biomesoplenty:pasture, biomesoplenty:prairie, biomesoplenty:pumpkin_patch, biomesoplenty:rainforest, biomesoplenty:redwood_forest, biomesoplenty:rocky_rainforest, biomesoplenty:rocky_shrubland, biomesoplenty:scrubland, biomesoplenty:seasonal_forest, biomesoplenty:shrubland, biomesoplenty:snowblossom_grove, biomesoplenty:snowy_coniferous_forest, biome
+# plains row: {"kind":"biome","id":"minecraft:plains","tags":["block_factorys_bosses:dragon_tower","bloomlevelup:excavation/forest","ddenizens:is_overworld_nether","forge:is_grassland","forge:is_plains","forge:with_default_monster_spawns","graveyard:acolyte_spawns","graveyard:corrupted_evoker_spawns","graveyard:corrupted_pillager_spawns","graveyard:corrupted_vindicator_spawns","graveyard:has_structure/overrun_plains_village","graveyard:has_structure/small_grave","graveyard:has_structure/small_graveyard","graveyard:magpie_spawns","graveyard:skeleton_creeper_spawns","graveyard:tormented_villager_spawns","graveyard:wraith_spawns","irons_spellbooks:has_structure/catacombs","irons_spellbooks:has_structure/evoker_fort","irons_spellbooks:has_structure/pyromancer_tower","legendary_monsters:has_structure/collapsed_kingdom_biomes","legionwarex:spawns/ghouls","legionwarex:spawns/migamigos_shybroom","legionwarex:spawns/migamigos_wavelyn","legionwarex:spawns/monster_expansion_animals","legionwarex:spawns/nightmares","legionwarex:spawns/skarrier_caves","legionwarex:spawns/village_crew","minecraft:has_structure/mineshaft","minecraft:has_structure/pillager_outpost","minecraft:has_structure/ruined_portal_standard","minecraft:has_structure/stronghold","minecraft:has_structure/village_plains","minecraft:is_overworld","minecraft:stronghold_biased_to","monsterexpansion:skrythe_spawn_biomes","mythsandlegends:ancient_vestiges_biomes","mythsandlegends:has_chronicler_house","waystones:has_structure/waystone"],"creatureProbability":0.1,"spawns":{"monster":[{"type":"minecraft:spider","weight":100,"min":4,"max":4},{"type":"minecraft:zombie","weight":95,"min":4,"max":4},{"type":"minecraft:zombie_villager","weight":5,"min":1,"max":1},{"type":"minecraft:skeleton","weight":100,"min":4,"max":4},{"type":"minecraft:creeper","weight":100,"min":4,"max":4},{"type":"minecraft:slime","weight":100,"min":4,"max":4},{"type":"minecraft:enderman","weight":10,"min":1,"max":4},{"type":"minecraft:witch","weight":5,"min":1,"max":1},{"type":"graveyard:skeleton_creeper","weight":25,"min":1,"max":4},{"type":"born_in_chaos_v1:krampus","weight":2,"min":1,"max":1},{"type":"born_in_chaos_v1:krampus_henchman","weight":9,"min":2,"max":3},{"type":"born_in_chaos_v1:mr_pumpkin","weight":15,"min":1,"max":3},{"type":"born_in_chaos_v1:mrs_pumpkin","weight":13,"min":1,"max":1},{"type":"mutantmonsters:mutant_creeper","weight":10,"min":1,"max":1},{"type":"mutantmonsters:mutant_enderman","weight":1,"min":1,"max":1},{"type":"mutantmonsters:mutant_skeleton","weight":10,"min":1,"max":1},{"type":"mutantmonsters:mutant_zombie","weight":9,"min":1,"max":1},{"type":"irons_spellbooks:necromancer","weight":18,"min":1,"max":1},{"type":"born_in_chaos_v1:pumpkin_bruiser","weight":10,"min":1,"max":1},{"type":"born_in_chaos_v1:senor_pumpkin","weight":10,"min":1,"max":2},{"type":"born_in_chaos_v1:sir_pumpkinhead","weight":4,"min":1,"max":1},{"type":"graveyard:ghoul","weight":40,"min":2,"max":5},{"type":"graveyard:nightmare","weight":20,"min":1,"max":1},{"type":"skarrier_mobs:breacher","weight":10,"min":1,"max":1},{"type":"skarrier_mobs:dragger","weight":14,"min":1,"max":1},{"type":"skarrier_mobs:eater","weight":60,"min":1,"max":3},{"type":"skarrier_mobs:wrought","weight":34,"min":1,"max":1},{"type":"skarrier_mobs:bowlder","weight":34,"min":1,"max":1},{"type":"skarrier_mobs:gorger","weight":30,"min":1,"max":2},{"type":"graveyard:tormented_villager","weight":10,"min":1,"max":1},{"type":"illagerinvasion:marauder","weight":12,"min":1,"max":2},{"type":"irons_spellbooks:catacombs_zombie","weight":20,"min":1,"max":2}],"creature":[{"type":"minecraft:sheep","weight":12,"min":4,"max":4},{"type":"minecraft:pig","weight":10,"min":4,"max":4},{"type":"minecraft:chicken","weight":10,"min":4,"max":4},{"type":"minecraft:cow","weight":8,"min":4,"max":4},{"type":"minecraft:horse","weight":5,"min":2,"max":6},{"type":"minecraft:donkey","weight":1,"min":1,"max":3},{"type":"migamigos:shybroom","weight":5,"min":1,"max":1},{"type":"migamigos:wavel

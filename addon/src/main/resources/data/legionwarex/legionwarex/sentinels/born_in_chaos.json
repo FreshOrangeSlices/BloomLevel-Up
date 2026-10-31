@@ -1,5 +1,5 @@
 {
-  "_comment": "Born in Chaos (its own spawns are off but for its holiday and Nether mobs): its tougher ground mobs as sentinels where they fit. A sentinel with no biomes stands anywhere on land.",
+  "_comment": "Born in Chaos (its own spawns are off but for its holiday and Nether mobs): its tougher ground mobs as sentinels where they fit, and the Spiders Mother in the woods. A sentinel with no biomes stands anywhere on land. No Siamese Skeletons or Zombie Fisherman (FreshOrangeSlices, 2026-10-31: plain skeletons and zombies with a new coat of paint; they still spawn at night).",
   "sentinels": [
     {
       "entity": "born_in_chaos_v1:door_knight",
@@ -51,11 +51,15 @@
       ]
     },
     {
-      "entity": "born_in_chaos_v1:zombie_fisherman",
-      "weight": 10,
+      "entity": "born_in_chaos_v1:mother_spider",
+      "weight": 6,
       "biomes": [
-        "#minecraft:is_beach",
-        "minecraft:stony_shore"
+        "#minecraft:is_forest",
+        "#minecraft:is_taiga",
+        "#forge:is_coniferous",
+        "#forge:is_dense",
+        "#minecraft:is_jungle",
+        "minecraft:dark_forest"
       ]
     },
     {
@@ -64,16 +68,6 @@
       "biomes": [
         "#minecraft:is_beach",
         "minecraft:stony_shore"
-      ]
-    },
-    {
-      "entity": "born_in_chaos_v1:siamese_skeletons",
-      "weight": 10,
-      "biomes": [
-        "#forge:is_desert",
-        "#minecraft:is_badlands",
-        "#forge:is_sandy",
-        "#forge:is_wasteland"
       ]
     },
     {

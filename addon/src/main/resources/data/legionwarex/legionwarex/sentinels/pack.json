@@ -1,5 +1,5 @@
 {
-  "_comment": "The pack's own harder mobs (not bosses), placed where they fit. FreshOrangeSlices' playtest: daytime is meh and plains feel too safe. A sentinel with no biomes stands anywhere on land; roams: wanders instead of holding its spot.",
+  "_comment": "The pack's own harder mobs (not bosses), placed where they fit. FreshOrangeSlices' playtest: daytime is meh and plains feel too safe. Illager Invasion's Necromancer in dark places, the Skeletosaurus (the bone dinosaur, Legendary Monsters' Nether mini-boss) rarely in dry lands, and the Mutant Enderman anywhere, rarely (FreshOrangeSlices, 2026-10-31: he acts like an enderman, peaceful until looked at or hit; the other mutants stay night-only, the Mutant Zombie has to burn to stay dead). A sentinel with no biomes stands anywhere on land; roams: wanders instead of holding its spot.",
   "sentinels": [
     {
       "entity": "legendary_monsters:haunted_knight",
@@ -113,6 +113,16 @@
       ]
     },
     {
+      "entity": "legendary_monsters:skeletosaurus",
+      "weight": 2,
+      "biomes": [
+        "#forge:is_desert",
+        "#minecraft:is_badlands",
+        "#forge:is_sandy",
+        "#forge:is_wasteland"
+      ]
+    },
+    {
       "entity": "graveyard:nightmare",
       "weight": 10,
       "biomes": [
@@ -124,6 +134,23 @@
         "biomesoplenty:dead_forest",
         "biomesoplenty:old_growth_dead_forest"
       ]
+    },
+    {
+      "entity": "illagerinvasion:necromancer",
+      "weight": 6,
+      "biomes": [
+        "minecraft:dark_forest",
+        "#forge:is_swamp",
+        "#forge:is_spooky",
+        "#forge:is_dead",
+        "biomesoplenty:ominous_woods",
+        "biomesoplenty:dead_forest",
+        "biomesoplenty:old_growth_dead_forest"
+      ]
+    },
+    {
+      "entity": "mutantmonsters:mutant_enderman",
+      "weight": 3
     },
     {
       "entity": "minecraft:pillager",

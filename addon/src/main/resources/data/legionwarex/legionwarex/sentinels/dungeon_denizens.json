@@ -1,10 +1,6 @@
 {
-  "_comment": "Dungeon Denizens 2.0: its fighters as sentinels where they fit (most also spawn at night now, the pack's spawn groups). A sentinel with no biomes stands anywhere on land. No orcs, orc shamans or boulders (FreshOrangeSlices, 2026-10-30: never in a world, the add-on's bannedMobs).",
+  "_comment": "Dungeon Denizens 2.0: its tougher fighters as sentinels where they fit (most also spawn at night, the pack's spawn groups). A sentinel with no biomes stands anywhere on land. No orcs, orc shamans or boulders (FreshOrangeSlices, 2026-10-30: never in a world, the add-on's bannedMobs). Its plain skeletons (warrior, frost, burning, acid, electric, tainted, Bloody Bones) and the Headless aren't sentinels (FreshOrangeSlices, 2026-10-31: normal skeletons with a fresh coat of paint); they still spawn at night. The Skeleton Champion and the Iron Skeleton stay, tougher ones, so some undead are still out by day.",
   "sentinels": [
-    {
-      "entity": "ddenizens:skeleton_warrior",
-      "weight": 8
-    },
     {
       "entity": "ddenizens:skeleton_champion",
       "weight": 3
@@ -17,70 +13,6 @@
         "#forge:is_mountain",
         "#minecraft:is_hill",
         "#forge:is_plateau"
-      ]
-    },
-    {
-      "entity": "ddenizens:frost_skeleton",
-      "weight": 8,
-      "biomes": [
-        "#forge:is_snowy"
-      ]
-    },
-    {
-      "entity": "ddenizens:burning_skeleton",
-      "weight": 8,
-      "biomes": [
-        "#forge:is_desert",
-        "#minecraft:is_badlands",
-        "#forge:is_sandy",
-        "#forge:is_wasteland"
-      ]
-    },
-    {
-      "entity": "ddenizens:acid_skeleton",
-      "weight": 8,
-      "biomes": [
-        "#forge:is_swamp"
-      ]
-    },
-    {
-      "entity": "ddenizens:electric_skeleton",
-      "weight": 6,
-      "biomes": [
-        "#minecraft:is_mountain",
-        "#forge:is_mountain",
-        "#minecraft:is_hill",
-        "#forge:is_plateau"
-      ]
-    },
-    {
-      "entity": "ddenizens:tainted_skeleton",
-      "weight": 6,
-      "biomes": [
-        "minecraft:dark_forest",
-        "#forge:is_swamp",
-        "#forge:is_spooky",
-        "#forge:is_dead",
-        "biomesoplenty:ominous_woods",
-        "biomesoplenty:dead_forest",
-        "biomesoplenty:old_growth_dead_forest"
-      ]
-    },
-    {
-      "entity": "ddenizens:headless",
-      "weight": 6,
-      "biomes": [
-        "minecraft:dark_forest",
-        "#forge:is_swamp",
-        "#forge:is_spooky",
-        "#forge:is_dead",
-        "biomesoplenty:ominous_woods",
-        "biomesoplenty:dead_forest",
-        "biomesoplenty:old_growth_dead_forest",
-        "#forge:is_plains",
-        "#minecraft:is_savanna",
-        "#forge:is_plateau",
-        "minecraft:meadow"
       ]
     },
     {
@@ -143,13 +75,6 @@
         "#forge:is_coniferous",
         "#forge:is_dense",
         "#minecraft:is_jungle"
-      ]
-    },
-    {
-      "entity": "ddenizens:bloody_bones",
-      "weight": 6,
-      "biomes": [
-        "#forge:is_swamp"
       ]
     },
     {

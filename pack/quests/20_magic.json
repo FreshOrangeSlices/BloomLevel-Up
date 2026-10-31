@@ -1,0 +1,314 @@
+{
+  "id": "magic",
+  "title": "Magic",
+  "subtitle": ["Iron's Spells 'n Spellbooks: from a first scroll to legendary ink"],
+  "icon": "irons_spellbooks:gold_spell_book",
+  "group": "guides",
+  "mods": ["irons_spellbooks"],
+  "quests": [
+    {
+      "id": "inscription_table",
+      "title": "Inscription Table",
+      "x": 0, "y": 0,
+      "shape": "gear",
+      "icon": "irons_spellbooks:inscription_table",
+      "description": [
+        "Magic here is learned from scrolls and kept in spell books.",
+        "Craft an Inscription Table: a book on top of three wooden slabs and two fences.",
+        "",
+        "It's where you write a scroll's spell into a spell book, so you can cast it again and again."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:inscription_table"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:paper", "count": 6},
+        {"type": "item", "item": "minecraft:copper_ingot", "count": 2}
+      ]
+    },
+    {
+      "id": "first_spell_book",
+      "title": "A First Spell Book",
+      "x": 1.5, "y": 0,
+      "shape": "hexagon",
+      "icon": "irons_spellbooks:iron_spell_book",
+      "description": [
+        "Spell books hold your spells. The first two are cheap: the Flimsy Journal (copper, string and paper) and the Ironbound Tome (chains, leather and paper).",
+        "",
+        "Equip one: a spell book goes in its own Curios slot."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "irons_spellbooks:irons_spellbooks/spell_book_equip", "title": "Equip a spell book"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300}
+      ]
+    },
+    {
+      "id": "scrolls",
+      "title": "Scrolls",
+      "x": 3, "y": 0,
+      "icon": "irons_spellbooks:scroll",
+      "description": [
+        "Scrolls are your first spells. You find them in chests, take them from spellcasting mobs, or make them later at a Scroll Forge.",
+        "",
+        "Reading a scroll casts its spell once and uses it up. Better: put the scroll and your spell book in the Inscription Table and inscribe the spell into the book.",
+        "You can take the scroll back out later; the spell leaves the book with it."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:scroll"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100}
+      ]
+    },
+    {
+      "id": "casting",
+      "title": "Casting Spells",
+      "x": 4.5, "y": 0,
+      "icon": "irons_spellbooks:copper_spell_book",
+      "description": [
+        "With a spell book equipped, hold R to open the spell wheel and pick a spell, then press V to cast it. Left Alt with the mouse wheel also steps through your spells.",
+        "",
+        "Every cast costs mana, which refills over time.",
+        "These are the default keys: Controls lists them under Iron's Spells 'n Spellbooks."
+      ],
+      "tasks": [{"type": "checkmark", "title": "I've cast a spell from my spell book"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100}
+      ]
+    },
+    {
+      "id": "wandering_magician",
+      "title": "Wandering Magician",
+      "x": 0, "y": 1.5,
+      "icon": "irons_spellbooks:wandering_magician_chestplate",
+      "description": [
+        "Arcane Essence is the base of most magic gear. A little turns up in chests, even in vanilla structures; far more in the mod's magic structures, each guarded by a mage who won't like you taking it.",
+        "",
+        "Craft a leather chestplate with one Arcane Essence: Wandering Magician armor raises your max mana. The other leather pieces work the same way."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:wandering_magician_chestplate"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "armor", "xp": 100},
+        {"type": "item", "item": "irons_spellbooks:arcane_essence", "count": 8}
+      ]
+    },
+    {
+      "id": "wizard_robes",
+      "title": "Wizard Robes",
+      "x": 1.5, "y": 1.5,
+      "shape": "hexagon",
+      "icon": "irons_spellbooks:wizard_chestplate",
+      "description": [
+        "Arcane Cloth is eight Arcane Essence around a block of wool. Eight cloth make the Wizard Robes; the hat or hood, leggings and boots are cloth too.",
+        "",
+        "Later, craft a piece with a school rune and one Arcane Essence (or use the rune as a smithing template) to turn it into that school's armor: Pyromancer for fire, Cryomancer for ice, and so on."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:wizard_chestplate"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "armor", "xp": 300},
+        {"type": "item", "item": "irons_spellbooks:arcane_essence", "count": 4}
+      ]
+    },
+    {
+      "id": "ink",
+      "title": "Ink",
+      "x": 0, "y": 3,
+      "icon": "irons_spellbooks:common_ink",
+      "description": [
+        "Ink comes in five rarities, common to legendary. You find it in magic chests and on spellcasting mobs.",
+        "",
+        "The rarer the ink, the higher the level of the scroll you can make with it."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "irons_spellbooks:irons_spellbooks/ink_root", "title": "Get any ink"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:paper", "count": 8},
+        {"type": "item", "item": "minecraft:crying_obsidian", "count": 2}
+      ]
+    },
+    {
+      "id": "scroll_forge",
+      "title": "Scroll Forge",
+      "x": 1.5, "y": 3,
+      "shape": "gear",
+      "icon": "irons_spellbooks:scroll_forge",
+      "description": [
+        "Craft a Scroll Forge from three polished deepslate and four crying obsidian.",
+        "",
+        "Put in ink, paper and a school's focus item, then pick a spell from the list: the focus sets the school, the ink the rarity. Now you choose your spells instead of hoping for them."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:scroll_forge"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "irons_spellbooks:common_ink", "count": 2},
+        {"type": "item", "item": "minecraft:paper", "count": 4}
+      ]
+    },
+    {
+      "id": "runestones",
+      "title": "Schools and Runes",
+      "x": 3, "y": 3,
+      "icon": "irons_spellbooks:blank_rune",
+      "description": [
+        "Each school of magic has a focus item: blaze rod (fire), frozen bone (ice), Bottle o' Lightning (lightning), divine pearl (holy), ender pearl (ender), blood vial (blood), emerald (evocation), poisonous potato (nature).",
+        "",
+        "Blank Runestones turn up in magic structures. Ring one with eight of a focus to make that school's rune, for school armor. A school's mage always drops its rune."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:blank_rune"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:emerald", "count": 8}
+      ]
+    },
+    {
+      "id": "alchemist_cauldron",
+      "title": "Alchemist Cauldron",
+      "x": 4.5, "y": 3,
+      "shape": "gear",
+      "icon": "irons_spellbooks:alchemist_cauldron",
+      "description": [
+        "The Alchemist Cauldron is a cauldron, iron, Arcane Essence and Cinder Essence. Cinder Essence drops from Ancient Knights, who wake when you break armor piles in the Nether.",
+        "",
+        "Pour in four bottles of common ink and add a copper ingot for a bottle of uncommon; iron, gold and amethyst step up the rarer inks the same way.",
+        "Scrolls you don't need, put in while it holds water, can melt into ink of their rarity."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:alchemist_cauldron"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:copper_ingot", "count": 4},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 4}
+      ]
+    },
+    {
+      "id": "arcane_anvil",
+      "title": "Arcane Anvil",
+      "x": 0, "y": 4.5,
+      "shape": "gear",
+      "icon": "irons_spellbooks:arcane_anvil",
+      "description": [
+        "Craft the Arcane Anvil: three amethyst blocks, a diamond, an anvil and two polished deepslate.",
+        "",
+        "Combine a scroll with ink one rarity up to raise the spell's level. Combine a weapon with a scroll to imbue the weapon with that spell. Upgrade orbs improve armor and spell books here too."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:arcane_anvil"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "irons_spellbooks:uncommon_ink", "count": 2}
+      ]
+    },
+    {
+      "id": "enchanted_spell_book",
+      "title": "Enchanted Spell Book",
+      "x": 1.5, "y": 4.5,
+      "shape": "hexagon",
+      "icon": "irons_spellbooks:diamond_spell_book",
+      "description": [
+        "Each better book holds more spells. The Apprentice's Spell Book is gold, Arcane Essence and hogskin (hoglins drop it).",
+        "",
+        "The Enchanted Spell Book is diamonds, hogskin, Arcane Cloth and an enchanted book."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:diamond_spell_book"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "irons_spellbooks:arcane_essence", "count": 16}
+      ]
+    },
+    {
+      "id": "ancient_codex",
+      "title": "Ancient Codex",
+      "x": 3, "y": 4.5,
+      "shape": "diamond",
+      "icon": "irons_spellbooks:netherite_spell_book",
+      "description": [
+        "Restore a Ruined Book, found in Ancient Cities, into the Ancient Codex with netherite, Arcane Cloth, two Blood Vials and a Bottle o' Lightning.",
+        "",
+        "Blood Vials come from cooking mobs in a cauldron with a campfire under it, or in an Alchemist Cauldron. A Bottle o' Lightning is an empty bottle used on a charged creeper."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:netherite_spell_book"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 10},
+        {"type": "bloom_xp", "tab": "misc", "xp": 600},
+        {"type": "item", "item": "irons_spellbooks:epic_ink", "count": 2}
+      ]
+    },
+    {
+      "id": "wayward_compass",
+      "title": "Wayward Compass",
+      "x": 0, "y": 6,
+      "icon": "irons_spellbooks:wayward_compass",
+      "description": [
+        "Craft a Wayward Compass: four Arcane Essence and four iron around a soul lantern.",
+        "",
+        "The soul trapped in it points toward the Catacombs, a crypt deep underground."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:wayward_compass"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:torch", "count": 16}
+      ]
+    },
+    {
+      "id": "catacombs",
+      "title": "The Catacombs",
+      "x": 1.5, "y": 6,
+      "shape": "hexagon",
+      "icon": "irons_spellbooks:crypt_skull",
+      "description": [
+        "Follow the compass down into the Catacombs.",
+        "",
+        "Its crypts hold scrolls, runestones and Blood Vials, and the Dead King lies at its heart. Bring light and food."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "irons_spellbooks:irons_spellbooks/enter_catacombs", "title": "Enter the Catacombs"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:golden_apple", "count": 1}
+      ]
+    },
+    {
+      "id": "artificer_cane",
+      "title": "Artificer's Cane",
+      "x": 0, "y": 7.5,
+      "icon": "irons_spellbooks:artificer_cane",
+      "description": [
+        "Staffs and canes are casting implements: hold one and press use (right-click) to cast your selected spell. Most also strengthen your magic while held.",
+        "",
+        "The Artificer's Cane is crimson planks, gold and an amethyst shard."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:artificer_cane"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "irons_spellbooks:arcane_essence", "count": 8}
+      ]
+    },
+    {
+      "id": "ice_staff",
+      "title": "Ice Staff",
+      "x": 1.5, "y": 7.5,
+      "shape": "diamond",
+      "icon": "irons_spellbooks:ice_staff",
+      "description": [
+        "The Ice Staff joins a Frosted Helve with a Permafrost Shard.",
+        "",
+        "The helve is frozen bones (strays drop them) and Arcane Ingots (eight Arcane Essence around an iron, copper or gold ingot). The shard waits in the captain's quarters of a wrecked icebreaker, in frozen oceans, ice spikes and frozen peaks."
+      ],
+      "tasks": [{"type": "item", "item": "irons_spellbooks:ice_staff"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 10},
+        {"type": "bloom_xp", "tab": "misc", "xp": 600},
+        {"type": "item", "item": "irons_spellbooks:rare_ink", "count": 2}
+      ]
+    }
+  ]
+}

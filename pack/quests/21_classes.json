@@ -1,0 +1,322 @@
+{
+  "id": "classes",
+  "title": "Paladins, Priests, Rogues & Warriors",
+  "subtitle": ["The RPG Series classes: a weapon, a class book, its armor"],
+  "icon": "spell_engine:spell_binding",
+  "group": "guides",
+  "mods": ["spell_engine"],
+  "quests": [
+    {
+      "id": "spell_binding_table",
+      "title": "Spell Binding Table",
+      "x": 0, "y": 0,
+      "shape": "gear",
+      "icon": "spell_engine:spell_binding",
+      "description": [
+        "The Spell Binding Table is where you take up a class: Paladin, Priest, Rogue or Warrior.",
+        "Craft one (JEI shows the recipe) and set bookshelves around it, as you would an enchanting table.",
+        "",
+        "Use it to create your class's spell book (one level), then bind the class's spells into that book for levels and lapis lazuli."
+      ],
+      "tasks": [{"type": "item", "item": "spell_engine:spell_binding"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:lapis_lazuli", "count": 8}
+      ]
+    },
+    {
+      "id": "spell_scrolls",
+      "title": "Spell Scrolls",
+      "x": 1.5, "y": 0,
+      "icon": "spell_engine:spell_scroll",
+      "description": [
+        "Spell Scrolls turn up in dungeon, temple, pyramid, outpost and stronghold chests (they aren't Iron's Spells scrolls).",
+        "",
+        "Each holds one spell, which the Spell Binding Table can add to your spell book."
+      ],
+      "tasks": [{"type": "item", "item": "spell_engine:spell_scroll"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:lapis_lazuli", "count": 4}
+      ]
+    },
+    {
+      "id": "monk",
+      "title": "The Monk",
+      "x": 3, "y": 0,
+      "icon": "paladins:monk_workbench",
+      "mods": ["paladins"],
+      "description": [
+        "Some villages have a Sanctuary, home of the Monk: a villager who sells Paladin and Priest gear.",
+        "",
+        "A villager without a job becomes a Monk at a Monk Workbench, which you can also craft. Buy something from one."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "rpg_series:trade_with_monk", "title": "Buy from a Monk"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:emerald", "count": 4}
+      ]
+    },
+    {
+      "id": "arms_dealer",
+      "title": "The Arms Dealer",
+      "x": 4.5, "y": 0,
+      "icon": "rogues:arms_workbench",
+      "mods": ["rogues"],
+      "description": [
+        "Some villages have Barracks, home of the Arms Dealer, the Rogues & Warriors villager.",
+        "",
+        "A villager without a job becomes an Arms Dealer at an Arms Station, which you can also craft. Trade with one."
+      ],
+      "tasks": [{"type": "advancement", "advancement": "rpg_series:trade_with_arms_dealer", "title": "Trade with an Arms Dealer"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:emerald", "count": 4}
+      ]
+    },
+    {
+      "id": "paladin_weapon",
+      "title": "A Paladin's Mace",
+      "x": 0, "y": 1.5,
+      "icon": "paladins:iron_mace",
+      "mods": ["paladins"],
+      "description": [
+        "Paladins wear heavy armor and fight with maces, great hammers and kite shields, healing and shielding their friends as they go.",
+        "",
+        "Craft an Iron Mace (JEI shows the recipe). Its spell, Smash, comes with it: hold the mace and press use (right-click) to cast. Great hammers carry Ground Slam.",
+        "The spell bar on your screen shows what you can cast."
+      ],
+      "tasks": [{"type": "item", "item": "paladins:iron_mace"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 100},
+        {"type": "item", "item": "minecraft:lapis_lazuli", "count": 6}
+      ]
+    },
+    {
+      "id": "paladin_libram",
+      "title": "Paladin Libram",
+      "x": 1.5, "y": 1.5,
+      "shape": "hexagon",
+      "icon": "spell_engine:spell_book",
+      "mods": ["paladins"],
+      "description": [
+        "At the Spell Binding Table, create a Paladin Libram and bind your first Paladin spell into it.",
+        "",
+        "Equip the libram in its spell book slot and hold a weapon: its spells join your weapon's on the spell bar. Cast one.",
+        "It suits heavy weapons best, with a shield for a more defensive style."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "rpg_series:path_choose_paladin", "title": "Create a Paladin Libram"},
+        {"type": "advancement", "advancement": "rpg_series:spell_cast_paladin_book", "title": "Cast a spell from it"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 8}
+      ]
+    },
+    {
+      "id": "paladin_armor",
+      "title": "Paladin Armor",
+      "x": 3, "y": 1.5,
+      "icon": "paladins:paladin_armor_chest",
+      "mods": ["paladins"],
+      "description": [
+        "Paladin armor is heavy plate that also adds healing power. Craft it (JEI shows the recipe) or buy it from a Monk.",
+        "",
+        "Crusader armor comes next, made with gold and ghast tears, and then its netherite version at the smithing table."
+      ],
+      "tasks": [{"type": "item", "item": "paladins:paladin_armor_chest"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "armor", "xp": 300},
+        {"type": "item", "item": "minecraft:gold_ingot", "count": 4},
+        {"type": "item", "item": "minecraft:ghast_tear", "count": 1}
+      ]
+    },
+    {
+      "id": "priest_wand",
+      "title": "Acolyte Wand",
+      "x": 0, "y": 3,
+      "icon": "paladins:acolyte_wand",
+      "mods": ["paladins"],
+      "description": [
+        "Priests heal and protect their friends, and are the bane of the undead.",
+        "",
+        "Craft an Acolyte Wand (JEI shows the recipe). It carries Heal and adds healing power: hold it and press use (right-click) to cast.",
+        "Holy Wands and Holy Staves, made with gold, are stronger; the staves carry Holy Shock."
+      ],
+      "tasks": [
+        {"type": "item", "item": "paladins:acolyte_wand"},
+        {"type": "advancement", "advancement": "rpg_series:spell_cast_priest_wand", "title": "Cast a spell with a healing wand"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "misc", "xp": 100},
+        {"type": "item", "item": "minecraft:lapis_lazuli", "count": 6}
+      ]
+    },
+    {
+      "id": "holy_book",
+      "title": "Holy Book",
+      "x": 1.5, "y": 3,
+      "shape": "hexagon",
+      "icon": "spell_engine:spell_book",
+      "mods": ["paladins"],
+      "description": [
+        "At the Spell Binding Table, create a Holy Book and bind your first Priest spell into it.",
+        "",
+        "Equip it in its spell book slot and hold a Holy Staff or Wand, whose healing power its spells draw on. Cast one."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "rpg_series:path_choose_priest", "title": "Create a Holy Book"},
+        {"type": "advancement", "advancement": "rpg_series:spell_cast_priest_book", "title": "Cast a spell from it"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:chain", "count": 4}
+      ]
+    },
+    {
+      "id": "priest_robes",
+      "title": "Priest Robes",
+      "x": 3, "y": 3,
+      "icon": "paladins:priest_robe_chest",
+      "mods": ["paladins"],
+      "description": [
+        "Priest robes give little armor, but each piece adds a fifth to your healing power. Craft them (JEI shows the recipe) or buy them from a Monk.",
+        "",
+        "Prior robes come next, made with gold and ghast tears, and then their netherite version at the smithing table."
+      ],
+      "tasks": [{"type": "item", "item": "paladins:priest_robe_chest"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "armor", "xp": 300},
+        {"type": "item", "item": "minecraft:gold_ingot", "count": 4},
+        {"type": "item", "item": "minecraft:ghast_tear", "count": 1}
+      ]
+    },
+    {
+      "id": "rogue_weapon",
+      "title": "A Rogue's Dagger",
+      "x": 0, "y": 4.5,
+      "icon": "rogues:iron_dagger",
+      "mods": ["rogues"],
+      "description": [
+        "Rogues are quick: daggers and sickles, light armor, and skills that strike from the shadows.",
+        "",
+        "Craft an Iron Dagger (JEI shows the recipe). It carries Fan of Knives; sickles carry Swipe. Hold it and press use (right-click) to use the skill."
+      ],
+      "tasks": [{"type": "item", "item": "rogues:iron_dagger"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 100},
+        {"type": "item", "item": "minecraft:lapis_lazuli", "count": 6}
+      ]
+    },
+    {
+      "id": "rogue_handbook",
+      "title": "Rogue Handbook",
+      "x": 1.5, "y": 4.5,
+      "shape": "hexagon",
+      "icon": "spell_engine:spell_book",
+      "mods": ["rogues"],
+      "description": [
+        "At the Spell Binding Table, create a Rogue Handbook and bind your first Rogue skill into it.",
+        "",
+        "Equip it in its spell book slot and hold your weapon: its skills join the weapon's on the spell bar. Use one."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "rpg_series:path_choose_rogue", "title": "Create a Rogue Handbook"},
+        {"type": "advancement", "advancement": "rpg_series:spell_cast_rogue_book", "title": "Use a skill from it"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:leather", "count": 8}
+      ]
+    },
+    {
+      "id": "rogue_armor",
+      "title": "Rogue Armor",
+      "x": 3, "y": 4.5,
+      "icon": "rogues:rogue_armor_chest",
+      "mods": ["rogues"],
+      "description": [
+        "Rogue armor is leather that adds evasion and attack speed. Craft it (JEI shows the recipe).",
+        "",
+        "Assassin armor comes next, made with rabbit hide, and then its netherite version at the smithing table."
+      ],
+      "tasks": [{"type": "item", "item": "rogues:rogue_armor_chest"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "armor", "xp": 300},
+        {"type": "item", "item": "minecraft:rabbit_hide", "count": 8}
+      ]
+    },
+    {
+      "id": "warrior_weapon",
+      "title": "A Warrior's Axe",
+      "x": 0, "y": 6,
+      "icon": "rogues:iron_double_axe",
+      "mods": ["rogues"],
+      "description": [
+        "Warriors wear heavy armor and swing big weapons, at their best in the thick of a fight.",
+        "",
+        "Craft an Iron Double Axe (JEI shows the recipe). It carries Whirlwind: hold it and press use (right-click) to use the skill."
+      ],
+      "tasks": [{"type": "item", "item": "rogues:iron_double_axe"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 2},
+        {"type": "bloom_xp", "tab": "combat", "xp": 100},
+        {"type": "item", "item": "minecraft:lapis_lazuli", "count": 6}
+      ]
+    },
+    {
+      "id": "warriors_codex",
+      "title": "Warriors' Codex",
+      "x": 1.5, "y": 6,
+      "shape": "hexagon",
+      "icon": "spell_engine:spell_book",
+      "mods": ["rogues"],
+      "description": [
+        "At the Spell Binding Table, create a Warriors' Codex and bind your first Warrior skill into it.",
+        "",
+        "Equip it in its spell book slot and hold your weapon: its skills join the weapon's on the spell bar. Use one."
+      ],
+      "tasks": [
+        {"type": "advancement", "advancement": "rpg_series:path_choose_warrior", "title": "Create a Warriors' Codex"},
+        {"type": "advancement", "advancement": "rpg_series:spell_cast_warrior_book", "title": "Use a skill from it"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "misc", "xp": 300},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 8}
+      ]
+    },
+    {
+      "id": "warrior_armor",
+      "title": "Warrior Armor",
+      "x": 3, "y": 6,
+      "icon": "rogues:warrior_armor_chest",
+      "mods": ["rogues"],
+      "description": [
+        "Warrior armor is iron plate that adds attack damage. Craft it (JEI shows the recipe).",
+        "",
+        "Berserker armor comes next, made with chains and netherite scrap, and then its netherite version at the smithing table."
+      ],
+      "tasks": [{"type": "item", "item": "rogues:warrior_armor_chest"}],
+      "rewards": [
+        {"type": "xp_levels", "levels": 5},
+        {"type": "bloom_xp", "tab": "armor", "xp": 300},
+        {"type": "item", "item": "minecraft:chain", "count": 4}
+      ]
+    }
+  ]
+}

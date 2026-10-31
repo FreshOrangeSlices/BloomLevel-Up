@@ -3,7 +3,7 @@
   "summary": "A medieval high-fantasy adventure sandbox built around Bloom Level-Up: dragons, monsters, bosses, magic, knights, new biomes, decor, shaders and Fresh Animations, with Better Combat. Minecraft 1.20.1 (Forge).",
   "minecraft": "1.20.1",
   "forge": "47.4.28",
-  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight); Better Mob Combat is shelved (its mob animation hook crashes the server on creatures from Mowzie's, Migamigos, Cataclysm, Legendary Monsters and Monster Expansion, and with the whole pack on vanilla wolves too; its last build is from January 2025). After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out, and a bosses layer in their place. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). No voice chat (friends should be able to join with nothing extra). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
+  "_comment": "FreshOrangeSlices' LegionWareX (2026-10-26), from the Medieval High Fantasy master list and goals docs: a sandbox full of optional content, no required ending, dangerous but not miserable, multiplayer first. Combat route: Better Combat (not Epic Fight); Better Mob Combat is shelved (its mob animation hook crashes the server on creatures from Mowzie's, Migamigos, Cataclysm, Legendary Monsters and Monster Expansion, and with the whole pack on vanilla wolves too; its last build is from January 2025). After the first playtest: Novum's Altitude out (its sky effects made the world disorienting), Ice and Fire out (its dragons wreck buildings, and its 1.20.1 build is a beta), Mowzie's Mobs out, and a bosses layer in their place. Magic: Iron's Spells, plus the RPG Series' Paladins & Priests and Rogues & Warriors (no Wizards, Elemental Wizards or Archers). Voice chat: Simple Voice Chat, set up ahead of time so friends join with nothing extra to do (FreshOrangeSlices, 2026-10-30, reversing the first call of no voice chat): no setup wizard, push-to-talk on Caps Lock, plus Sound Physics Remastered (voices echo and muffle) and Voiceless Survival (hostile mobs hear you talk). Mods are in cumulative layers so CI can tell which layer breaks what; the shipped pack is every layer. Forge 47.4.28 (1.20.1's recommended; Iron's Spells and others need 47.4+). Modrinth projects by slug (newest 1.20.1 Forge release or beta; required dependencies are added automatically, and the few a mod needs without saying so on Modrinth, such as Iron's Lib, are listed next to it; Migamigos' Framework is CurseForge-only, so it's packed inside). Bloom and the CurseForge-only mods ('external') are packed inside, which is fine for sharing with friends but not for publishing.",
   "layers": [
     {
       "name": "core",
@@ -185,7 +185,10 @@
         "oculus",
         "complementary-unbound",
         "solas-shader",
-        "makeup-ultra-fast-shaders"
+        "makeup-ultra-fast-shaders",
+        "simple-voice-chat",
+        "sound-physics-remastered",
+        "voiceless-survival"
       ],
       "external": [
         {
@@ -889,11 +892,24 @@
       "gui.xaero_minimap_settings": "key.keyboard.backslash",
       "key.easy_mob_spawn_control.openspawncrontrolscreen": "key.keyboard.unknown",
       "key.bloomlevelup.open_hub": "key.keyboard.j",
-      "key.punchy.triggerable.punchy_sword_inspect_old": "key.keyboard.unknown"
+      "key.punchy.triggerable.punchy_sword_inspect_old": "key.keyboard.unknown",
+      "_keys_voice": "Simple Voice Chat (FreshOrangeSlices, 2026-10-30): push-to-talk on Caps Lock (it has no key of its own, and its setup wizard is skipped), its menu on Ctrl+V and groups on Ctrl+G (V is Bloom's weapon skill, G Curios), mute on Shift+M (M is Xaero's world map), turning voice off on Shift+N (N is Soulslike's), its hide-icons key off (H is the helmet abilities').",
+      "key.push_to_talk": "key.keyboard.caps.lock",
+      "key.voice_chat": "key.keyboard.v:CONTROL",
+      "key.voice_chat_group": "key.keyboard.g:CONTROL",
+      "key.mute_microphone": "key.keyboard.m:SHIFT",
+      "key.disable_voice_chat": "key.keyboard.n:SHIFT",
+      "key.hide_icons": "key.keyboard.unknown"
     },
     "_keys": "Key bindings, each set once per change of it (by name, as options.txt has them; a player's own change afterwards stays): Oculus's 'reload shaders' is unbound (it was R, and a stray press freezes the game for seconds while the shader rebuilds), and Keybind Atlas opens on Ctrl+K (it started on K, Oculus's shader toggle; Alt+K is its own 'cycle keybind sets'). Combat Roll is the one dodge, on Z (FreshOrangeSlices); Bosses'Rise's and Monster Expansion's rolls are switched off (config_files) and their keys unbound, so the Controls list has no live second dodge.",
     "settings": {
       "_comment": "Settings in other mods' client config files, each set once per change of it, the rest of the file left as the player has it (Bloom's PackDefaults: a .json key is a / path, IPN keeping each option as {\"value\": ...}; a .toml key has its [Section] in front). A file that isn't there yet is started with these lines and the mod fills in the rest. FreshOrangeSlices' playtest: a simple craft screen (no Crafting Tweaks buttons, which keep their keys; no IPN auto-crafting checkbox; no IPN profiles), and tools that break like in normal Minecraft (IPN's auto-refill off, with all its warnings). Bosses'Rise's roll indicator by the hotbar is hidden (its roll is off; Combat Roll has its own).",
+      "voicechat/voicechat-client.properties": {
+        "_comment": "Simple Voice Chat ready on first join: its setup wizard counted as done (config_version must be there too, or it migrates the file and sets the wizard back), push-to-talk (its default) on the pack's Caps Lock key.",
+        "config_version": 1,
+        "onboarding_finished": true,
+        "microphone_activation_type": "PTT"
+      },
       "inventoryprofilesnext/inventoryprofiles.json": {
         "ModSettings/enable_auto_refill/value": false,
         "ModSettings/enable_profiles/value": false,

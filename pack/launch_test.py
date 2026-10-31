@@ -649,12 +649,12 @@ def client_settings_check(game_dir):
             if others and name in bound:
                 failures.append(f"{key} is {name}'s, but {', '.join(others)} start(s) on it too")
     # Keys that must do one thing only, by the client's live key list (every mod's binding, from Bloom's tooltip dump;
-    # options.txt only has the keys the pack set): the dodge roll and Bloom's weapon skill. A binding that only acts in
+    # options.txt only has the keys the pack set): the dodge roll, Bloom's weapon skill and voice chat's push-to-talk. A binding that only acts in
     # a screen (GUI, JEI's hover contexts) or another context (Book of Dragons' taming) doesn't count.
     tips = os.path.join(game_dir, "tooltips.jsonl")
     if os.path.exists(tips):
         live = [json.loads(l) for l in open(tips, encoding="utf-8", errors="replace") if '"kind":"key"' in l.replace(" ", "")]
-        for name in ("keybinds.combatroll.roll", "key.bloomlevelup.weapon_skill"):
+        for name in ("keybinds.combatroll.roll", "key.bloomlevelup.weapon_skill", "key.push_to_talk"):
             mine = next((r for r in live if r.get("id") == name), None)
             if mine is None or mine.get("key") == "key.keyboard.unknown":
                 continue
@@ -1084,6 +1084,14 @@ def main():
     quest_failures, quest_notes = quest_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
     failures += quest_failures
     notes += quest_notes
+    # ---- voice chat: Simple Voice Chat's server came up on its UDP port (the client side can't talk on CI: no microphone)
+    if any(f.startswith("voicechat") for f in os.listdir(os.path.join(server_dir, "mods"))):
+        started = next((l for l in server.lines if "Voice chat server started" in l), None)
+        failed = next((l for l in server.lines if "Failed to start voice chat server" in l), None)
+        if failed or not started:
+            failures.append("voice chat: its server didn't start: " + (failed or "no 'Voice chat server started' line").strip()[-300:])
+        else:
+            notes.append("voice chat: " + started.split("]: ", 1)[-1].strip())
     # ---- the pack's own data pack: recipes out, items hidden from JEI
     data_failures, data_notes = pack_data_check(server_dir, os.path.join(server_dir, "bloom-dump.jsonl"), server.lines)
     failures += data_failures

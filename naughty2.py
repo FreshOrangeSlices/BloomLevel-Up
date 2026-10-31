@@ -29,7 +29,9 @@ naughty = [f for f in field_names if re.search(r"naught|krampus|sin|bad", f, re.
 report.append("# naughtiness-ish fields: " + ", ".join(naughty))
 for n in names:
     if n.endswith("/KillingVillagersProcedure.class"):
-        report.append(f"## {n} in full\n" + slim(javap(n))[:30000])
+        text = slim(javap(n))
+        keep = [l for l in text.splitlines() if re.search(r"(?:^  \S)|ldc|String|Entities|EntityType|naughtiness|punishment|m_128347_|m_128379_|m_128459_|m_128471_|dcmp|dadd|dsub|m_7967_|m_6518_|m_20219_|m_6034_|m_7678_|lambda|sipush|bipush|m_216271_|m_188503_|Math", l)]
+        report.append(f"## {n} filtered\n" + "\n".join(keep)[:40000])
 touch = []
 for n in names:
     if n.endswith(".class") and "/procedures/" in n:

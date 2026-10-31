@@ -6,6 +6,9 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+
+import com.freshorangeslices.bloomlevelup.BloomLevelUp;
 
 import com.freshorangeslices.bloomlevelup.client.IconTextures;
 
@@ -15,6 +18,8 @@ import com.freshorangeslices.bloomlevelup.client.IconTextures;
  */
 public final class HubButton extends AbstractButton {
 	private static final int SIZE = 20;
+	/** FreshOrangeSlices' Skill Hub picture (64x64, drawn at 16). */
+	private static final ResourceLocation ICON = BloomLevelUp.id("textures/gui/hub_button.png");
 	private final AbstractContainerScreen<?> screen;
 
 	public HubButton(AbstractContainerScreen<?> screen) {
@@ -38,7 +43,7 @@ public final class HubButton extends AbstractButton {
 		BloomGraphics g = BloomGraphics.of(graphics);
 		reposition();
 		g.buttonBackground(this);
-		g.blit(BloomGraphics.GUI_TEXTURED, IconTextures.PLACEHOLDER, this.getX() + 2, this.getY() + 2, 0.0F, 0.0F, 16, 16,
+		g.blit(BloomGraphics.GUI_TEXTURED, ICON, this.getX() + 2, this.getY() + 2, 0.0F, 0.0F, 16, 16,
 				IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE, IconTextures.SOURCE_SIZE);
 	}
 

@@ -49,5 +49,15 @@ for n in names:
         b = bic.read(n)
         if b"KRAMPUS" in b and (b"java/util/Calendar" in b or b"GameRules" in b or b"LocalDate" in b):
             report.append(f"# {n} names KRAMPUS with a date or game rule")
+# The spawn predicate's target (javap -v: the bootstrap method arguments), and the Krampus procedures.
+with tempfile.TemporaryDirectory() as tmp:
+    for n in ents:
+        path = os.path.join(tmp, "e.class")
+        open(path, "wb").write(bic.read(n))
+        v = subprocess.run(["javap", "-v", "-p", path], capture_output=True, text=True).stdout
+        i = v.find("BootstrapMethods:")
+        report.append(f"## {n} bootstrap methods\n" + v[i:i + 3000])
+for n, text in javap(bic, [n for n in names if re.search(r"/procedures/(KrampusSpawnPro|KillingVillagers|Killinganimals)Procedure\.class$", n)]).items():
+    report.append(f"## {n}\n" + "\n".join(l for l in text.splitlines() if re.search(r"invoke|getstatic|ldc|iconst|bipush|sipush|if|instanceof|public", l))[:9000])
 open(os.path.join(out, "summary.txt"), "w").write("\n".join(report))
 print("\n".join(report)[:3000])

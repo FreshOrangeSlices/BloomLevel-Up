@@ -648,6 +648,20 @@ def client_settings_check(game_dir):
                             and k.split(":")[1:] == key.split(":")[1:])
             if others and name in bound:
                 failures.append(f"{key} is {name}'s, but {', '.join(others)} start(s) on it too")
+    # Keys that must do one thing only, by the client's live key list (every mod's binding, from Bloom's tooltip dump;
+    # options.txt only has the keys the pack set): the dodge roll and Bloom's weapon skill. A binding that only acts in
+    # a screen (GUI, JEI's hover contexts) or another context (Book of Dragons' taming) doesn't count.
+    tips = os.path.join(game_dir, "tooltips.jsonl")
+    if os.path.exists(tips):
+        live = [json.loads(l) for l in open(tips, encoding="utf-8", errors="replace") if '"kind":"key"' in l.replace(" ", "")]
+        for name in ("keybinds.combatroll.roll", "key.bloomlevelup.weapon_skill"):
+            mine = next((r for r in live if r.get("id") == name), None)
+            if mine is None or mine.get("key") == "key.keyboard.unknown":
+                continue
+            others = sorted(r["id"] for r in live if r.get("id") != name and r.get("key") == mine.get("key")
+                            and r.get("modifier", "NONE") == mine.get("modifier", "NONE") and r.get("context") in ("IN_GAME", "UNIVERSAL"))
+            if others:
+                failures.append(f"{mine['key']} should be {name}'s alone, but {', '.join(others)} use(s) it too")
     checked, kept = 0, 0
     for line in lines:
         word, _, rest = line.partition("=")

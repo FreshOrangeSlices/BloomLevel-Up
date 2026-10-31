@@ -32,7 +32,7 @@ jobs:
           github-token: ${{ github.token }}
       - run: |
           rm -rf data-out; mkdir -p data-out/questfacts
-          python3 check/javapmod.py "$(ls pack/*server*.zip | head -1)" data-out/questfacts/migamigos Migamigos "client/(KeyBinds|.*Key.*|.*Input.*|.*ClientEvents.*|.*Handler.*)\.class$" >> log.txt 2>&1 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          python3 check/findstr.py "$(ls pack/*server*.zip | head -1)" data-out/questfacts/findstr ttv/migami/migamigos/client/KeyBinds && python3 check/javapmod.py "$(ls pack/*server*.zip | head -1)" data-out/questfacts/migamigos Migamigos "(ClientEvents|ClientForgeEvents|KeyInput|ClientTick|AmigoScreen|Ability|Blessing).*\.class$" >> log.txt 2>&1 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
           echo "::notice title=questfacts::$(head -c 3500 data-out/questfacts/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data 2> git.txt || echo "::error title=clone::$(tr '\n' '|' < git.txt)"
           cp log.txt data-out/questfacts/log.txt

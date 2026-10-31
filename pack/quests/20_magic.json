@@ -5,6 +5,7 @@
   "icon": "irons_spellbooks:gold_spell_book",
   "group": "guides",
   "mods": ["irons_spellbooks"],
+  "progression_mode": "flexible",
   "quests": [
     {
       "id": "inscription_table",
@@ -29,7 +30,7 @@
     {
       "id": "first_spell_book",
       "title": "A First Spell Book",
-      "x": 1.5, "y": 0,
+      "x": 0, "y": 1.5,
       "shape": "hexagon",
       "icon": "irons_spellbooks:iron_spell_book",
       "description": [
@@ -46,7 +47,8 @@
     {
       "id": "scrolls",
       "title": "Scrolls",
-      "x": 3, "y": 0,
+      "x": 1.5, "y": 0.75,
+      "deps": ["inscription_table", "first_spell_book"],
       "icon": "irons_spellbooks:scroll",
       "description": [
         "Scrolls are your first spells. You find them in chests, take them from spellcasting mobs, or make them later at a Scroll Forge.",
@@ -63,7 +65,8 @@
     {
       "id": "casting",
       "title": "Casting Spells",
-      "x": 4.5, "y": 0,
+      "x": 3, "y": 0.75,
+      "deps": ["scrolls"],
       "icon": "irons_spellbooks:copper_spell_book",
       "description": [
         "With a spell book equipped, hold R to open the spell wheel and pick a spell, then press V to cast it. Left Alt with the mouse wheel also steps through your spells.",
@@ -80,7 +83,7 @@
     {
       "id": "wandering_magician",
       "title": "Wandering Magician",
-      "x": 0, "y": 1.5,
+      "x": 0, "y": 4.5,
       "icon": "irons_spellbooks:wandering_magician_chestplate",
       "description": [
         "Arcane Essence is the base of most magic gear. A little turns up in chests, even in vanilla structures; far more in the mod's magic structures, each guarded by a mage who won't like you taking it.",
@@ -97,7 +100,8 @@
     {
       "id": "wizard_robes",
       "title": "Wizard Robes",
-      "x": 1.5, "y": 1.5,
+      "x": 1.5, "y": 4.5,
+      "deps": ["wandering_magician"],
       "shape": "hexagon",
       "icon": "irons_spellbooks:wizard_chestplate",
       "description": [
@@ -115,7 +119,7 @@
     {
       "id": "ink",
       "title": "Ink",
-      "x": 0, "y": 3,
+      "x": 0, "y": 6,
       "icon": "irons_spellbooks:common_ink",
       "description": [
         "Ink comes in five rarities, common to legendary. You find it in magic chests and on spellcasting mobs.",
@@ -133,7 +137,8 @@
     {
       "id": "scroll_forge",
       "title": "Scroll Forge",
-      "x": 1.5, "y": 3,
+      "x": 1.5, "y": 6,
+      "deps": ["ink"],
       "shape": "gear",
       "icon": "irons_spellbooks:scroll_forge",
       "description": [
@@ -152,7 +157,8 @@
     {
       "id": "runestones",
       "title": "Schools and Runes",
-      "x": 3, "y": 3,
+      "x": 3, "y": 4.5,
+      "deps": ["wizard_robes"],
       "icon": "irons_spellbooks:blank_rune",
       "description": [
         "Each school of magic has a focus item: blaze rod (fire), frozen bone (ice), Bottle o' Lightning (lightning), divine pearl (holy), ender pearl (ender), blood vial (blood), emerald (evocation), poisonous potato (nature).",
@@ -169,7 +175,8 @@
     {
       "id": "alchemist_cauldron",
       "title": "Alchemist Cauldron",
-      "x": 4.5, "y": 3,
+      "x": 0, "y": 7.5,
+      "deps": ["ink"],
       "shape": "gear",
       "icon": "irons_spellbooks:alchemist_cauldron",
       "description": [
@@ -189,7 +196,8 @@
     {
       "id": "arcane_anvil",
       "title": "Arcane Anvil",
-      "x": 0, "y": 4.5,
+      "x": 3, "y": 6,
+      "deps": ["scroll_forge"],
       "shape": "gear",
       "icon": "irons_spellbooks:arcane_anvil",
       "description": [
@@ -207,7 +215,8 @@
     {
       "id": "enchanted_spell_book",
       "title": "Enchanted Spell Book",
-      "x": 1.5, "y": 4.5,
+      "x": 1.5, "y": 3,
+      "deps": ["first_spell_book"],
       "shape": "hexagon",
       "icon": "irons_spellbooks:diamond_spell_book",
       "description": [
@@ -225,7 +234,8 @@
     {
       "id": "ancient_codex",
       "title": "Ancient Codex",
-      "x": 3, "y": 4.5,
+      "x": 3, "y": 3,
+      "deps": ["enchanted_spell_book"],
       "shape": "diamond",
       "icon": "irons_spellbooks:netherite_spell_book",
       "description": [
@@ -243,7 +253,7 @@
     {
       "id": "wayward_compass",
       "title": "Wayward Compass",
-      "x": 0, "y": 6,
+      "x": 0, "y": 9,
       "icon": "irons_spellbooks:wayward_compass",
       "description": [
         "Craft a Wayward Compass: four Arcane Essence and four iron around a soul lantern.",
@@ -260,7 +270,8 @@
     {
       "id": "catacombs",
       "title": "The Catacombs",
-      "x": 1.5, "y": 6,
+      "x": 1.5, "y": 9,
+      "deps": ["wayward_compass"],
       "shape": "hexagon",
       "icon": "minecraft:skeleton_skull",
       "description": [
@@ -278,7 +289,8 @@
     {
       "id": "artificer_cane",
       "title": "Artificer's Cane",
-      "x": 0, "y": 7.5,
+      "x": 4.5, "y": 0,
+      "deps": ["casting"],
       "icon": "irons_spellbooks:artificer_cane",
       "description": [
         "Staffs and canes are casting implements: hold one and press use (right-click) to cast your selected spell. Most also strengthen your magic while held.",
@@ -295,7 +307,8 @@
     {
       "id": "ice_staff",
       "title": "Ice Staff",
-      "x": 1.5, "y": 7.5,
+      "x": 4.5, "y": 1.5,
+      "deps": ["casting"],
       "shape": "diamond",
       "icon": "irons_spellbooks:ice_staff",
       "description": [

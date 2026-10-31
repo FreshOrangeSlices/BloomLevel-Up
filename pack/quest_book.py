@@ -7,12 +7,16 @@ progress is kept by id).
 
 Chapter file:
   {"id": "magic", "title": "...", "subtitle": ["..."], "icon": "ns:item", "group": "guides" (see GROUPS),
-   "mods": ["ns", ...] (the chapter needs all of them), "quests": [quest, ...]}
+   "mods": ["ns", ...] (the chapter needs all of them), "progression_mode": "flexible", "quests": [quest, ...]}
+  progression_mode (a chapter's or a quest's own): "linear", the book's default, keeps a quest's tasks shut until its
+  dependencies are done; "flexible" lets a player do any quest at any time, and one done early (a grey tick) pays out
+  once the quests before it are done. The guide chapters are flexible: their lines suggest an order, nothing locks
+  (so their quests get no lock icon).
 Quest:
   {"id": "inscription_table", "title": "...", "subtitle": "...", "icon": "ns:item", "x": 0, "y": 0,
    "shape": "circle|square|rsquare|diamond|pentagon|hexagon|octagon|heart|gear", "size": 1.0,
    "description": ["line", "", "line"], "deps": ["quest id" or "chapter/quest id"], "min_deps": 0,
-   "optional": false, "mods": [...], "tasks": [task, ...], "rewards": [reward, ...]}
+   "optional": false, "progression_mode": "flexible", "mods": [...], "tasks": [task, ...], "rewards": [reward, ...]}
 Tasks:
   {"type": "item", "item": "ns:id", "count": 1}       held in the inventory (never taken)
   {"type": "kill", "entity": "ns:id", "count": 1}
@@ -38,6 +42,7 @@ GROUPS = {"guides": "Guides", "bosses": "Bosses"}
 TABS = {"combat": "Combat", "armor": "Armor", "utility": "Utility", "misc": "Misc"}
 ALWAYS = {"minecraft", "forge", "bloomlevelup", "legionwarex", "ftbquests"}
 SHAPES = {"circle", "square", "rsquare", "diamond", "pentagon", "hexagon", "octagon", "heart", "gear", "none"}
+MODES = {"default", "linear", "flexible"}
 
 
 def fid(*parts):
@@ -189,6 +194,12 @@ def reward_data(chapter_id, quest_id, n, reward):
     return out
 
 
+def mode(obj, where):
+    if obj["progression_mode"] not in MODES:
+        raise ValueError(f"{where}: unknown progression_mode {obj['progression_mode']}")
+    return obj["progression_mode"]
+
+
 def build(quest_dir, present, notes=None, title="LegionWareX"):
     """{path: bytes} for config/ftbquests/quests, with only what the present mods (namespaces) can show."""
     present = set(present) | ALWAYS
@@ -252,6 +263,10 @@ def build(quest_dir, present, notes=None, title="LegionWareX"):
                     data["min_required_dependencies"] = int(quest["min_deps"])
             if quest.get("hide_dependency_lines"):
                 data["hide_dependency_lines"] = True
+            if quest.get("progression_mode"):
+                data["progression_mode"] = mode(quest, f"{cid}/{qid}")
+            if deps and (quest.get("progression_mode") or chapter.get("progression_mode")) == "flexible":
+                data["hide_lock_icon"] = True  # nothing is locked: tasks count from the start
             quests.append(data)
         if not quests:
             skipped.append(f"chapter {cid} (no quest left)")
@@ -261,6 +276,8 @@ def build(quest_dir, present, notes=None, title="LegionWareX"):
         chapter_data = {"id": fid(cid), "filename": cid, "group": fid("group", group) if group else "", "order_index": index,
                         "title": text(chapter["title"]), "icon": chapter.get("icon", ""), "default_quest_shape": "",
                         "default_hide_dependency_lines": False, "quests": quests, "quest_links": []}
+        if chapter.get("progression_mode"):
+            chapter_data["progression_mode"] = mode(chapter, cid)
         if chapter.get("subtitle"):
             chapter_data["subtitle"] = text(list(chapter["subtitle"]) if isinstance(chapter["subtitle"], list) else [chapter["subtitle"]])
         files[f"config/ftbquests/quests/chapters/{cid}.snbt"] = (snbt(chapter_data) + "\n").encode()

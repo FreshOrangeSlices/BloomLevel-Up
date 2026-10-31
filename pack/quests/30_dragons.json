@@ -5,6 +5,7 @@
   "subtitle": ["Find a roost, win a dragon's trust and take to the sky."],
   "icon": "bookofdragons:book_of_dragons",
   "mods": ["bookofdragons"],
+  "progression_mode": "flexible",
   "quests": [
     {
       "id": "book_of_dragons",
@@ -29,7 +30,7 @@
       "title": "A Hooligan of Your Own",
       "icon": "bookofdragons:viking_anvil",
       "shape": "gear",
-      "x": 1.5, "y": 0,
+      "x": 0, "y": -1.5,
       "description": [
         "Craft a Viking Anvil (an iron block over an iron ingot, on three logs) and set it near a villager without a job. They take it as their workstation and become a Hooligan.",
         "",
@@ -46,7 +47,7 @@
       "id": "roost",
       "title": "Find a Roost",
       "icon": "bookofdragons:cliff_roost_map",
-      "x": 3, "y": 0,
+      "x": 1.5, "y": -1.5,
       "description": [
         "Roosts are the surest place to meet a dragon. Cliff roosts on peaks and mountains hold Skrills and Night Furies, cave roosts in the hills Gronckles and Whispering Deaths.",
         "Glade roosts in forests and jungles hold Deadly Nadders, wetland roosts in swamps Hideous Zipplebacks, and barrens roosts in deserts, badlands and savannas Monstrous Nightmares.",
@@ -65,7 +66,8 @@
       "id": "first_fact",
       "title": "Everything We Know",
       "icon": "minecraft:writable_book",
-      "x": 4.5, "y": 0,
+      "x": 1.5, "y": 0,
+      "deps": ["book_of_dragons"],
       "description": [
         "Watch a dragon for a while and the Book of Dragons writes down what you learn: its habits, its diet, how it treats people.",
         "",
@@ -83,7 +85,8 @@
       "title": "Know One Kind Well",
       "icon": "minecraft:salmon",
       "shape": "hexagon",
-      "x": 6, "y": 0,
+      "x": 3, "y": 0,
+      "deps": ["first_fact"],
       "description": [
         "Keep studying one kind of dragon until its page in the Book is mostly filled in.",
         "",
@@ -102,7 +105,8 @@
       "title": "Every Dragon We Know Of",
       "icon": "minecraft:bookshelf",
       "shape": "diamond",
-      "x": 7.5, "y": 0,
+      "x": 4.5, "y": 0,
+      "deps": ["one_kind"],
       "description": [
         "Fill in most of the page for all nine kinds of dragon.",
         "",
@@ -137,7 +141,8 @@
       "id": "bucking",
       "title": "Ride Out the Bucking",
       "icon": "minecraft:leather",
-      "x": 1.5, "y": 1.5,
+      "x": 0, "y": 3,
+      "deps": ["asks"],
       "description": [
         "Near the end, a big dragon turns its back to you: climb on and hold tight while it bucks.",
         "Press the letter keys it shows (F, G, H, J, K and L by default) until it calms down. Small dragons like the Terrible Terror skip this."
@@ -154,7 +159,8 @@
       "title": "Dragon Tamer",
       "icon": "bookofdragons:terror_plush",
       "shape": "hexagon",
-      "x": 3, "y": 1.5,
+      "x": 1.5, "y": 1.5,
+      "deps": ["asks"],
       "description": [
         "Grant every wish and the dragon is yours. A Terrible Terror makes a gentle first friend: no bucking, and a fish keeps it at your heels.",
         "",
@@ -171,7 +177,8 @@
       "id": "bond",
       "title": "True Bond",
       "icon": "minecraft:golden_apple",
-      "x": 4.5, "y": 1.5,
+      "x": 1.5, "y": 3,
+      "deps": ["tamer"],
       "description": [
         "A tamed dragon still has to grow close to you. Look after it: keep it fed with what it likes and let it rest when it tires. The Book of Dragons shows what it needs.",
         "",
@@ -189,7 +196,8 @@
       "title": "Lightning and Death",
       "icon": "bookofdragons:nightfury_scales",
       "shape": "diamond",
-      "x": 6, "y": 1.5,
+      "x": 3, "y": 1.5,
+      "deps": ["tamer"],
       "description": [
         "The rarest dragon of all. Night Furies come out at night in cold lands: high above snowy peaks and taiga, on cold sea cliffs, and near cliff roosts left empty.",
         "",
@@ -207,7 +215,8 @@
       "title": "The Soul of a Dragon",
       "icon": "minecraft:name_tag",
       "shape": "diamond",
-      "x": 7.5, "y": 1.5,
+      "x": 4.5, "y": 1.5,
+      "deps": ["night_fury"],
       "description": [
         "Tame one of each of the nine kinds.",
         "",
@@ -226,6 +235,7 @@
       "title": "Saddle Up",
       "icon": "minecraft:saddle",
       "x": 3, "y": 3,
+      "deps": ["tamer"],
       "description": [
         "Use a saddle on your tamed dragon, climb on with an empty hand and jump to take off.",
         "Steer with the mouse, W and S for faster and slower, Space to beat harder, hold sneak to dive. Fly low over open ground to land.",
@@ -245,6 +255,7 @@
       "title": "Not So Fireproof",
       "icon": "minecraft:fire_charge",
       "x": 4.5, "y": 3,
+      "deps": ["saddle_up"],
       "description": [
         "In the saddle, the Primary Ability key (left mouse button by default) breathes fire, fires a bolt or bites, whatever your dragon does best. C uses its own special move.",
         "",
@@ -262,6 +273,7 @@
       "title": "Whistle and Staff",
       "icon": "bookofdragons:dragon_whistle",
       "x": 3, "y": 4.5,
+      "deps": ["tamer"],
       "description": [
         "Craft a Dragon Whistle (two bones and an iron nugget) and right-click your dragon with it to bind them. Blow it outdoors in the Overworld to call your dragon from far away.",
         "",

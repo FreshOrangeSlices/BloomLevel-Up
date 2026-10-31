@@ -9,12 +9,13 @@
  "mods": [
   "spell_engine"
  ],
+ "progression_mode": "flexible",
  "quests": [
   {
    "id": "spell_binding_table",
    "title": "Spell Binding Table",
-   "x": 0,
-   "y": 0,
+   "x": 1.5,
+   "y": 2.25,
    "shape": "gear",
    "icon": "spell_engine:spell_binding",
    "description": [
@@ -50,7 +51,7 @@
    "id": "spell_scrolls",
    "title": "Spell Scrolls",
    "x": 1.5,
-   "y": 0,
+   "y": -1.5,
    "icon": "spell_engine:spell_scroll",
    "description": [
     "Spell Scrolls turn up in dungeon, temple, pyramid, outpost and stronghold chests (they aren't Iron's Spells scrolls).",
@@ -83,8 +84,8 @@
   {
    "id": "monk",
    "title": "The Monk",
-   "x": 3,
-   "y": 0,
+   "x": 0,
+   "y": -1.5,
    "icon": "paladins:monk_workbench",
    "mods": [
     "paladins"
@@ -121,8 +122,8 @@
   {
    "id": "arms_dealer",
    "title": "The Arms Dealer",
-   "x": 4.5,
-   "y": 0,
+   "x": 3,
+   "y": -1.5,
    "icon": "rogues:arms_workbench",
    "mods": [
     "rogues"
@@ -160,7 +161,7 @@
    "id": "paladin_weapon",
    "title": "A Paladin's Mace",
    "x": 0,
-   "y": 1.5,
+   "y": 0,
    "icon": "paladins:iron_mace",
    "mods": [
     "paladins"
@@ -197,8 +198,12 @@
   {
    "id": "paladin_libram",
    "title": "Paladin Libram",
-   "x": 1.5,
-   "y": 1.5,
+   "x": 3,
+   "y": 0,
+   "deps": [
+    "paladin_weapon",
+    "spell_binding_table"
+   ],
    "shape": "hexagon",
    "icon": "spell_engine:spell_book",
    "mods": [
@@ -242,8 +247,11 @@
   {
    "id": "paladin_armor",
    "title": "Paladin Armor",
-   "x": 3,
-   "y": 1.5,
+   "x": 4.5,
+   "y": 0,
+   "deps": [
+    "paladin_libram"
+   ],
    "icon": "paladins:paladin_armor_chest",
    "mods": [
     "paladins"
@@ -285,7 +293,7 @@
    "id": "priest_wand",
    "title": "Acolyte Wand",
    "x": 0,
-   "y": 3,
+   "y": 1.5,
    "icon": "paladins:acolyte_wand",
    "mods": [
     "paladins"
@@ -327,8 +335,12 @@
   {
    "id": "holy_book",
    "title": "Holy Book",
-   "x": 1.5,
-   "y": 3,
+   "x": 3,
+   "y": 1.5,
+   "deps": [
+    "priest_wand",
+    "spell_binding_table"
+   ],
    "shape": "hexagon",
    "icon": "spell_engine:spell_book",
    "mods": [
@@ -371,8 +383,11 @@
   {
    "id": "priest_robes",
    "title": "Priest Robes",
-   "x": 3,
-   "y": 3,
+   "x": 4.5,
+   "y": 1.5,
+   "deps": [
+    "holy_book"
+   ],
    "icon": "paladins:priest_robe_chest",
    "mods": [
     "paladins"
@@ -414,7 +429,7 @@
    "id": "rogue_weapon",
    "title": "A Rogue's Dagger",
    "x": 0,
-   "y": 4.5,
+   "y": 3,
    "icon": "rogues:iron_dagger",
    "mods": [
     "rogues"
@@ -450,8 +465,12 @@
   {
    "id": "rogue_handbook",
    "title": "Rogue Handbook",
-   "x": 1.5,
-   "y": 4.5,
+   "x": 3,
+   "y": 3,
+   "deps": [
+    "rogue_weapon",
+    "spell_binding_table"
+   ],
    "shape": "hexagon",
    "icon": "spell_engine:spell_book",
    "mods": [
@@ -494,8 +513,11 @@
   {
    "id": "rogue_armor",
    "title": "Rogue Armor",
-   "x": 3,
-   "y": 4.5,
+   "x": 4.5,
+   "y": 3,
+   "deps": [
+    "rogue_handbook"
+   ],
    "icon": "rogues:rogue_armor_chest",
    "mods": [
     "rogues"
@@ -532,7 +554,7 @@
    "id": "warrior_weapon",
    "title": "A Warrior's Axe",
    "x": 0,
-   "y": 6,
+   "y": 4.5,
    "icon": "rogues:iron_double_axe",
    "mods": [
     "rogues"
@@ -568,8 +590,12 @@
   {
    "id": "warriors_codex",
    "title": "Warriors' Codex",
-   "x": 1.5,
-   "y": 6,
+   "x": 3,
+   "y": 4.5,
+   "deps": [
+    "warrior_weapon",
+    "spell_binding_table"
+   ],
    "shape": "hexagon",
    "icon": "spell_engine:spell_book",
    "mods": [
@@ -612,8 +638,11 @@
   {
    "id": "warrior_armor",
    "title": "Warrior Armor",
-   "x": 3,
-   "y": 6,
+   "x": 4.5,
+   "y": 4.5,
+   "deps": [
+    "warriors_codex"
+   ],
    "icon": "rogues:warrior_armor_chest",
    "mods": [
     "rogues"

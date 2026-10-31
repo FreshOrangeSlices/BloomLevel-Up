@@ -5,6 +5,7 @@
   "icon": "minecraft:iron_sword",
   "group": "guides",
   "mods": [],
+  "progression_mode": "flexible",
   "quests": [
     {
       "id": "weight_classes",
@@ -72,7 +73,7 @@
       "id": "short_sword",
       "title": "Hilt and Blade",
       "icon": "magistuarmory:iron_shortsword",
-      "x": 1.5, "y": 1.5,
+      "x": 0, "y": 3,
       "shape": "circle",
       "description": [
         "Epic Knights' weapons start with a Hilt: a stick and a Leather Strip (two leather make six strips). Two iron ingots on a hilt make a Short Sword.",
@@ -92,7 +93,8 @@
       "id": "shield",
       "title": "Raise a Shield",
       "icon": "magistuarmory:iron_heatershield",
-      "x": 3, "y": 1.5,
+      "x": 1.5, "y": 3,
+      "deps": ["steel"],
       "shape": "circle",
       "description": [
         "A Wooden Heater Shield is planks and a steel ingot; four iron ingots around it make an Iron Heater Shield. Most other shapes go the same way.",
@@ -112,7 +114,8 @@
       "id": "knight_plate",
       "title": "Knight's Plate",
       "icon": "magistuarmory:knight_chestplate",
-      "x": 4.5, "y": 1.5,
+      "x": 1.5, "y": 1.5,
+      "deps": ["steel"],
       "shape": "hexagon",
       "description": [
         "Knight Armor is Half-Armor with five Steel Plates on it, and an Armet is a Barbute with three. Knight Leggings take seven plates and the boots four.",
@@ -132,7 +135,7 @@
       "id": "new_blades",
       "title": "New Weapon Shapes",
       "icon": "simplyswords:iron_longsword",
-      "x": 0, "y": 3,
+      "x": 0, "y": 4.5,
       "shape": "circle",
       "description": [
         "Simply Swords adds fifteen weapon types in iron, diamond and netherite: longswords, katanas, rapiers, sai, twinblades, spears, glaives, scythes, greataxes, greathammers and more.",
@@ -152,7 +155,7 @@
       "id": "runic_tablet",
       "title": "Runic Tablet",
       "icon": "simplyswords:runic_tablet",
-      "x": 1.5, "y": 3,
+      "x": 0, "y": 6,
       "shape": "diamond",
       "description": [
         "Runic Tablets are found in chests out in the world, modded structures' too. After enough chests without one, the next is sure to have one, so keep looting.",
@@ -172,7 +175,8 @@
       "id": "rune_etching",
       "title": "Rune Etching",
       "icon": "simplyswords:runic_longsword",
-      "x": 3, "y": 3,
+      "x": 1.5, "y": 4.5,
+      "deps": ["new_blades", "runic_tablet"],
       "shape": "hexagon",
       "description": [
         "In a Smithing Table: a Runic Tablet as the template, a netherite Simply Swords weapon and a diamond. Click the unidentified result in your inventory to see its Runic Power.",
@@ -192,7 +196,8 @@
       "id": "runic_forge",
       "title": "The Runic Forge",
       "icon": "simplyswords:runic_forge",
-      "x": 4.5, "y": 3,
+      "x": 1.5, "y": 6,
+      "deps": ["runic_tablet"],
       "shape": "gear",
       "description": [
         "Unique weapons, Simply Swords' named blades with abilities of their own, turn up in chest loot asleep: weaker, with the ability sealed until awakening level 4.",
@@ -212,7 +217,8 @@
       "id": "gem_socket",
       "title": "Socket a Gem",
       "icon": "simplyswords:runefused_gem",
-      "x": 6, "y": 3,
+      "x": 3, "y": 6,
+      "deps": ["runic_forge"],
       "shape": "diamond",
       "description": [
         "Smelt a unique weapon you won't use and you get an Empowered Remnant. In a Smithing Table, a Runic Tablet, the remnant and Crying Obsidian make a Runefused Gem; a Netherite Ingot instead makes a Netherfused Gem.",
@@ -232,7 +238,7 @@
       "id": "moonstone",
       "title": "Moonstone",
       "icon": "soulsweapons:moonstone",
-      "x": 0, "y": 4.5,
+      "x": 0, "y": 7.5,
       "shape": "circle",
       "description": [
         "Moonstone Ore lies deep in the Overworld, below y 16 and thickest around y -32, deepslate included. Mine it with an iron pickaxe or better.",
@@ -252,7 +258,8 @@
       "id": "bluemoon",
       "title": "Bluemoon Blade",
       "icon": "soulsweapons:bluemoon_shortsword",
-      "x": 1.5, "y": 4.5,
+      "x": 1.5, "y": 7.5,
+      "deps": ["moonstone"],
       "shape": "circle",
       "description": [
         "Two moonstone on a stick make a Bluemoon Shortsword; six on a stick, a Bluemoon Greatsword.",
@@ -273,7 +280,8 @@
       "id": "moon_altar",
       "title": "Old Moon Altar",
       "icon": "soulsweapons:altar_block",
-      "x": 3, "y": 4.5,
+      "x": 1.5, "y": 9,
+      "deps": ["moonstone"],
       "shape": "gear",
       "description": [
         "Smelt Soul Sand into Lost Souls. An Iron Skull (four bones, four iron ingots and a Lost Soul) on obsidian with two moonstone makes the Old Moon Altar.",
@@ -293,7 +301,8 @@
       "id": "lord_soul",
       "title": "A Lord Soul",
       "icon": "soulsweapons:lord_soul_red",
-      "x": 4.5, "y": 4.5,
+      "x": 3, "y": 9,
+      "deps": ["moon_altar"],
       "shape": "diamond",
       "description": [
         "Soulslike Weaponry's bosses leave Lord Souls, and its legendary weapons are made from them.",
@@ -313,7 +322,8 @@
       "id": "moonlight",
       "title": "Moonlight Blade",
       "icon": "soulsweapons:moonlight_shortsword",
-      "x": 6, "y": 4.5,
+      "x": 4.5, "y": 8.25,
+      "deps": ["bluemoon", "lord_soul"],
       "shape": "hexagon",
       "description": [
         "A Bluemoon blade, a Lord Soul and a Netherite Upgrade template in a Smithing Table make a Moonlight Shortsword or Greatsword.",

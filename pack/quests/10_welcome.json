@@ -5,17 +5,20 @@
   "icon": "minecraft:compass",
   "group": "guides",
   "mods": [],
+  "progression_mode": "flexible",
   "quests": [
     {
       "id": "quest_book",
       "title": "Your Quest Book",
       "subtitle": "Start here",
       "icon": "minecraft:writable_book",
-      "x": 0, "y": 0,
+      "x": 0.75, "y": 0,
       "shape": "circle",
       "description": [
         "This book suggests things to try. Nothing in it is locked, so pick any quest in any order.",
         "Open it with the book button at the top-left of your inventory, or give \"Open Quests\" a key in Controls.",
+        "",
+        "Lines show a good order: what usually comes first. Do a quest early and it gets a grey tick; it pays out once the quests before it are done.",
         "",
         "Click a checkmark task to tick it, then click a reward to claim it. Your progress is your own.",
         "Ctrl+K opens Keybind Atlas: a map of your keyboard and mouse showing what each key does in this pack."
@@ -36,7 +39,7 @@
       "id": "recipes_and_labels",
       "title": "Recipes and Labels",
       "icon": "minecraft:crafting_table",
-      "x": 1.5, "y": 0,
+      "x": 2.25, "y": 0,
       "shape": "circle",
       "mods": ["jei", "jade"],
       "description": [
@@ -57,7 +60,7 @@
       "id": "roll_and_swing",
       "title": "Roll and Swing",
       "icon": "minecraft:iron_sword",
-      "x": 3, "y": 0,
+      "x": 3.75, "y": 0,
       "shape": "circle",
       "mods": ["combatroll", "bettercombat"],
       "description": [
@@ -79,7 +82,7 @@
       "id": "carry_on",
       "title": "Carry On",
       "icon": "minecraft:chest",
-      "x": 4.5, "y": 0,
+      "x": 5.25, "y": 0,
       "shape": "circle",
       "mods": ["carryon"],
       "description": [
@@ -100,7 +103,7 @@
       "title": "The Skill Hub",
       "subtitle": "The heart of the pack",
       "icon": "minecraft:flowering_azalea",
-      "x": 0, "y": 1.5,
+      "x": 3, "y": 1.5,
       "shape": "hexagon",
       "description": [
         "Bloom gives you four skill tabs, Combat, Armor, Utility and Misc, each levelling from 0 to 100 through its own kind of play.",
@@ -124,7 +127,8 @@
       "id": "majors",
       "title": "Majors",
       "icon": "minecraft:nether_star",
-      "x": 1.5, "y": 1.5,
+      "x": 4.5, "y": 1.5,
+      "deps": ["skill_hub"],
       "shape": "circle",
       "description": [
         "Majors are the big abilities: weapon tricks, new defenses, odd rules, even flight. They cost Major Levels, not stat points.",
@@ -148,7 +152,8 @@
       "id": "spend_your_xp",
       "title": "Spend Your XP",
       "icon": "minecraft:experience_bottle",
-      "x": 3, "y": 1.5,
+      "x": 1.5, "y": 1.5,
+      "deps": ["skill_hub"],
       "shape": "circle",
       "description": [
         "Under a tab's stats, the \"+1 level\" button buys that tab its next level with vanilla XP. It never takes more than the level needs.",
@@ -171,7 +176,8 @@
       "id": "pocket_and_runes",
       "title": "Pocket and Runes",
       "icon": "minecraft:enchanted_book",
-      "x": 4.5, "y": 1.5,
+      "x": 6, "y": 1.5,
+      "deps": ["majors"],
       "shape": "diamond",
       "description": [
         "Two Misc Majors open screens of their own, from the chest and enchanted book buttons under the Skill Hub button (or /bloom pocket and /bloom runes, or a key of your own in Controls).",
@@ -192,7 +198,8 @@
       "title": "The Combat Tab",
       "subtitle": "XP from fighting",
       "icon": "minecraft:diamond_sword",
-      "x": 0, "y": 3,
+      "x": 0.75, "y": 3,
+      "deps": ["skill_hub"],
       "shape": "circle",
       "description": [
         "Combat XP comes from the damage you deal to mobs, with a bonus for the killing blow.",
@@ -214,7 +221,8 @@
       "title": "The Armor Tab",
       "subtitle": "XP from taking hits",
       "icon": "minecraft:diamond_chestplate",
-      "x": 1.5, "y": 3,
+      "x": 2.25, "y": 3,
+      "deps": ["skill_hub"],
       "shape": "circle",
       "description": [
         "Armor XP comes from damage you take, with extra for hits you block with a shield or avoid with Dodge.",
@@ -237,7 +245,8 @@
       "title": "The Utility Tab",
       "subtitle": "XP from gathering",
       "icon": "minecraft:diamond_pickaxe",
-      "x": 3, "y": 3,
+      "x": 3.75, "y": 3,
+      "deps": ["skill_hub"],
       "shape": "circle",
       "description": [
         "Utility XP comes from mining, chopping, digging, harvesting ripe crops, fishing and shearing. Ores are worth the most.",
@@ -259,7 +268,8 @@
       "title": "The Misc Tab",
       "subtitle": "XP from experience orbs",
       "icon": "minecraft:feather",
-      "x": 4.5, "y": 3,
+      "x": 5.25, "y": 3,
+      "deps": ["skill_hub"],
       "shape": "circle",
       "description": [
         "Misc XP comes from the experience orbs you pick up, and you still get all of their vanilla XP.",
@@ -279,7 +289,7 @@
       "id": "maps",
       "title": "Maps",
       "icon": "minecraft:map",
-      "x": 0, "y": 4.5,
+      "x": 0.75, "y": 4.5,
       "shape": "circle",
       "mods": ["xaerominimap", "xaeroworldmap"],
       "description": [
@@ -304,7 +314,8 @@
       "id": "waystones",
       "title": "Waystones",
       "icon": "waystones:waystone",
-      "x": 1.5, "y": 4.5,
+      "x": 2.25, "y": 4.5,
+      "deps": ["maps"],
       "shape": "hexagon",
       "description": [
         "Waystones stand in many villages and here and there in the wild. Right-click one to activate it; after that, right-click any waystone to travel to the others you've activated.",
@@ -325,7 +336,7 @@
       "id": "after_a_death",
       "title": "After a Death",
       "icon": "minecraft:skeleton_skull",
-      "x": 3, "y": 4.5,
+      "x": 3.75, "y": 4.5,
       "shape": "circle",
       "mods": ["corpse"],
       "description": [
@@ -346,7 +357,7 @@
       "id": "loot_for_everyone",
       "title": "Loot for Everyone",
       "icon": "minecraft:barrel",
-      "x": 4.5, "y": 4.5,
+      "x": 5.25, "y": 4.5,
       "shape": "circle",
       "description": [
         "Chests, barrels and chest minecarts that come with the world hold a separate share of loot for every player.",

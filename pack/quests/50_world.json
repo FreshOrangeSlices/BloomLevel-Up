@@ -5,6 +5,7 @@
   "icon": "minecraft:compass",
   "group": "guides",
   "mods": [],
+  "progression_mode": "flexible",
   "quests": [
     {
       "id": "redwood_forest",
@@ -90,51 +91,10 @@
       ]
     },
     {
-      "id": "lootr",
-      "title": "Loot for Everyone",
-      "icon": "minecraft:chest",
-      "x": 0, "y": 1.5,
-      "shape": "circle",
-      "description": [
-        "Loot chests, barrels and minecart chests out in the world are per player here: each of you gets your own loot from the same chest.",
-        "",
-        "No need to race your friends to a dungeon. Open one to start."
-      ],
-      "tasks": [
-        {"type": "advancement", "advancement": "lootr:1chest"}
-      ],
-      "rewards": [
-        {"type": "xp_levels", "levels": 2},
-        {"type": "bloom_xp", "tab": "misc", "xp": 100},
-        {"type": "item", "item": "minecraft:torch", "count": 16},
-        {"type": "item", "item": "minecraft:bread", "count": 4}
-      ]
-    },
-    {
-      "id": "waystones",
-      "title": "Waystones",
-      "icon": "waystones:waystone",
-      "x": 1.5, "y": 1.5,
-      "shape": "circle",
-      "description": [
-        "Waystones stand in villages and out in the wild. Right-click one to activate it; any waystone can then take you to any other you've activated.",
-        "",
-        "A Warp Stone (four amethyst shards, four ender pearls and an emerald) does the same from wherever you are."
-      ],
-      "tasks": [
-        {"type": "item", "item": "waystones:warp_stone"}
-      ],
-      "rewards": [
-        {"type": "xp_levels", "levels": 5},
-        {"type": "bloom_xp", "tab": "misc", "xp": 300},
-        {"type": "item", "item": "minecraft:ender_pearl", "count": 2}
-      ]
-    },
-    {
       "id": "ice_maze",
       "title": "The Ice Maze",
       "icon": "minecraft:blue_ice",
-      "x": 0, "y": 3,
+      "x": 0, "y": 1.5,
       "shape": "hexagon",
       "description": [
         "Aquamirae's Ice Maze spreads over the Deep Frozen Ocean: a maze of ice with frozen pirate ships and outposts in it, and creatures that hunt in the cold water.",
@@ -155,7 +115,8 @@
       "id": "pirate_pouch",
       "title": "Left Behind",
       "icon": "aquamirae:pirate_pouch",
-      "x": 1.5, "y": 3,
+      "x": 1.5, "y": 1.5,
+      "deps": ["ice_maze"],
       "shape": "circle",
       "description": [
         "The Ice Maze's pirates left Pirate Pouches behind them. Search the maze for one and see what they couldn't carry."
@@ -173,7 +134,7 @@
       "id": "graveyard",
       "title": "Disturbing the Dead",
       "icon": "graveyard:gravestone",
-      "x": 0, "y": 4.5,
+      "x": 0, "y": 3,
       "shape": "circle",
       "description": [
         "The Graveyard fills the world with burial grounds: small graves in many places, graveyards in forests, larger ones in taigas and sandy ones in deserts.",
@@ -194,7 +155,7 @@
       "id": "overrun_village",
       "title": "Too Late",
       "icon": "minecraft:bell",
-      "x": 1.5, "y": 4.5,
+      "x": 1.5, "y": 3,
       "shape": "circle",
       "description": [
         "Some villages were overrun before you got there: charred houses and tormented villagers. They turn up in plains, deserts, savannas, taigas and snowy clearings.",
@@ -215,7 +176,7 @@
       "id": "pumpkin_season",
       "title": "Pumpkin Season",
       "icon": "minecraft:jack_o_lantern",
-      "x": 3, "y": 4.5,
+      "x": 3, "y": 3,
       "shape": "circle",
       "optional": true,
       "description": [
@@ -236,7 +197,7 @@
       "id": "sentinels",
       "title": "Sentinels",
       "icon": "minecraft:iron_helmet",
-      "x": 0, "y": 6,
+      "x": 0, "y": 4.5,
       "shape": "circle",
       "description": [
         "By day, about once a day, a lone sentinel may stand guard somewhere near you: orcs and knights on open land, lumberjacks and wood golems in woods, frost skeletons and the Amarok in snow.",
@@ -256,7 +217,7 @@
       "id": "war_band",
       "title": "War Bands",
       "icon": "minecraft:crossbow",
-      "x": 1.5, "y": 6,
+      "x": 1.5, "y": 4.5,
       "shape": "circle",
       "description": [
         "From day 5, illager war bands march by day the way patrols do, away from villages: pillagers, vindicators and Illager Invasion's marauders, provokers, alchemists and the odd basher.",
@@ -277,7 +238,7 @@
       "id": "pirate_band",
       "title": "Pirates Ashore",
       "icon": "minecraft:oak_boat",
-      "x": 3, "y": 6,
+      "x": 3, "y": 4.5,
       "shape": "circle",
       "description": [
         "From day 3, pirate bands land on beaches and shores by the sea near you, day or night: Bosses'Rise's rooks and crossbow pirates, led by a rook, and quicker than the Kraken's crew.",
@@ -298,7 +259,7 @@
       "id": "pirate_chart",
       "title": "Pirate Charts",
       "icon": "legionwarex:pirate_chart",
-      "x": 4.5, "y": 6,
+      "x": 4.5, "y": 4.5,
       "shape": "diamond",
       "mods": ["block_factorys_bosses"],
       "description": [

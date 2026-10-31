@@ -32,8 +32,8 @@ jobs:
           github-token: ${{ github.token }}
       - run: |
           rm -rf data-out; mkdir -p data-out/questfacts
-          python3 check/spawnmap.py "$(ls pack/*server*.zip | head -1)" shots data-out/questfacts/spawnmap >> log.txt 2>&1 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
-          echo "::notice title=questfacts::$(head -c 3500 data-out/questfacts/spawnmap/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          python3 check/krampus.py "$(ls pack/*server*.zip | head -1)" shots data-out/questfacts/krampus >> log.txt 2>&1 > log.txt 2>&1 || echo "::error title=py::$(tail -c 3000 log.txt | tr '\n' '|' | sed 's/%/%25/g')"
+          echo "::notice title=questfacts::$(head -c 3500 data-out/questfacts/krampus/summary.txt | tr '\n' '|' | sed 's/%/%25/g')"
           git clone -q --depth 1 -b ci/data "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data 2> git.txt || echo "::error title=clone::$(tr '\n' '|' < git.txt)"
           cp log.txt data-out/questfacts/log.txt
           mkdir -p data/questfacts && cp -r data-out/questfacts/* data/questfacts/ && cd data && git add -A

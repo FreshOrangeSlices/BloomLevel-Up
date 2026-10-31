@@ -1,0 +1,3802 @@
+# Myths & Legends classes naming the blood moon: com/ovinter/mythsandlegends/api/command/MLCommands.class, com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.class, com/ovinter/mythsandlegends/api/spawner/BloodMoonSpawner.class, com/ovinter/mythsandlegends/event/BloodMoonServerEvents.class, com/ovinter/mythsandlegends/event/ClientEvents.class, com/ovinter/mythsandlegends/event/ServerEvents.class, com/ovinter/mythsandlegends/mixin/MoonMixin.class, com/ovinter/mythsandlegends/network/MLNetwork.class, com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket.class
+## com/ovinter/mythsandlegends/Config.class
+Compiled from "Config.java"
+public class com.ovinter.mythsandlegends.Config {
+  private static final net.minecraftforge.common.ForgeConfigSpec$Builder BUILDER;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec SPEC;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$BooleanValue ENABLE_BOSS_MUSIC;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$BooleanValue ENABLE_IMP;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue IMP_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue IMP_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue IMP_FLYING_SPEED;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue IMP_CLONE_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue IMP_CLONE_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue IMP_CLONE_FLYING_SPEED;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GARGOYLE_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GARGOYLE_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GARGOYLE_ATTACK_KNOCKBACK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GARGOYLE_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue BLACK_CHARRO_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue BLACK_CHARRO_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue BLACK_CHARRO_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue BLACK_CHARRO_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$IntValue BLACK_CHARRO_MESSAGE_COOLDOWN;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue CONDEMNED_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue CONDEMNED_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARCHER_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARCHER_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARCHER_ARMOR_TOUGHNESS;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARCHER_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARCHER_ATTACK_KNOCKBACK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARCHER_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ARMOR_TOUGHNESS;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_ATTACK_KNOCKBACK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_LANCER_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_LANCER_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_LANCER_TOUGHNESS;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_LANCER_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_LANCER_ATTACK_KNOCKBACK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_LANCER_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_INQUISITOR_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_INQUISITOR_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_INQUISITOR_ARMOR_TOUGHNESS;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_INQUISITOR_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_INQUISITOR_ATTACK_KNOCKBACK;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue POSSESSED_ARMOR_INQUISITOR_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue ALP_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue ABADDON_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue ABADDON_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue ABADDON_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue SCORCHED_SENTINEL_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue SCORCHED_SENTINEL_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue KARAKONDJUL_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue KARAKONDJUL_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue KARAKONDJUL_ARMOR_TOUGHNESS;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue KARAKONDJUL_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue KARAKONDJUL_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue LAMPAD_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue LAMPAD_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue LAMPAD_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue AMAROK_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue AMAROK_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue AMAROK_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue EIDOLON_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue EIDOLON_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue EIDOLON_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue JIANGSHI_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue JIANGSHI_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue JIANGSHI_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue SHADE_JELLY_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue SHADE_JELLY_FLYING_SPEED;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue SHADE_JELLY_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GEARBOUND_HEADSMAN_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GEARBOUND_HEADSMAN_ARMOR_TOUGHNESS;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GEARBOUND_HEADSMAN_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue GEARBOUND_HEADSMAN_KNOCKBACK_RESISTANCE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue OMECUAIME_HEALTH;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue OMECUAIME_ARMOR;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue OMECUAIME_DAMAGE;
+
+  public static final net.minecraftforge.common.ForgeConfigSpec$DoubleValue OMECUAIME_ATTACK_KNOCKBACK;
+
+  public com.ovinter.mythsandlegends.Config();
+    Code:
+       0: aload_0
+       1: invokespecial #121                // Method java/lang/Object."<init>":()V
+       4: return
+
+  static void onLoad(net.minecraftforge.fml.event.config.ModConfigEvent);
+    Code:
+       0: return
+
+  static {};
+    Code:
+       0: new           #13                 // class net/minecraftforge/common/ForgeConfigSpec$Builder
+       3: dup
+       4: invokespecial #130                // Method net/minecraftforge/common/ForgeConfigSpec$Builder."<init>":()V
+       7: putstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      10: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      13: ldc           #134                // String music
+      15: invokevirtual #138                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      18: pop
+      19: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      22: ldc           #140                // String Enable or disable Boss Music
+      24: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      27: ldc           #145                // String enable
+      29: iconst_1
+      30: invokevirtual #149                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      33: putstatic     #151                // Field ENABLE_BOSS_MUSIC:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      36: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      39: invokevirtual #155                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      42: pop
+      43: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      46: ldc           #157                // String mobs
+      48: invokevirtual #138                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      51: pop
+      52: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      55: ldc           #159                // String Enable or disable Imp
+      57: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      60: ldc           #161                // String disable_imp
+      62: iconst_0
+      63: invokevirtual #149                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.define:(Ljava/lang/String;Z)Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      66: putstatic     #163                // Field ENABLE_IMP:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      69: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      72: invokevirtual #155                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      75: pop
+      76: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      79: ldc           #165                // String imp
+      81: invokevirtual #138                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      84: pop
+      85: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      88: ldc           #167                // String Health for Imp
+      90: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+      93: ldc           #169                // String health
+      95: getstatic     #174                // Field com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.IMP_HEALTH:D
+      98: ldc2_w        #175                // double 2.5d
+     101: ldc2_w        #177                // double 1.7976931348623157E308d
+     104: invokevirtual #182                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     107: putstatic     #184                // Field IMP_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     110: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     113: ldc           #186                // String Damage for Imp
+     115: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     118: ldc           #188                // String damage
+     120: getstatic     #190                // Field com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.IMP_DAMAGE:D
+     123: ldc2_w        #191                // double 1.5d
+     126: ldc2_w        #177                // double 1.7976931348623157E308d
+     129: invokevirtual #182                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     132: putstatic     #194                // Field IMP_DAMAGE:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     135: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     138: ldc           #196                // String Flying Speed for Imp
+     140: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     143: ldc           #198                // String flying_speed
+     145: getstatic     #200                // Field com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.IMP_FLYING_SPEED:D
+     148: ldc2_w        #201                // double 0.5d
+     151: ldc2_w        #177                // double 1.7976931348623157E308d
+     154: invokevirtual #182                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     157: putstatic     #204                // Field IMP_FLYING_SPEED:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     160: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     163: invokevirtual #155                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     166: pop
+     167: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     170: ldc           #206                // String imp_clone
+     172: invokevirtual #138                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     175: pop
+     176: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     179: ldc           #208                // String Health for Imp Clone
+     181: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     184: ldc           #169                // String health
+     186: getstatic     #210                // Field com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.IMP_CLONE_HEALTH:D
+     189: ldc2_w        #211                // double 1.25d
+     192: ldc2_w        #177                // double 1.7976931348623157E308d
+     195: invokevirtual #182                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     198: putstatic     #214                // Field IMP_CLONE_HEALTH:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     201: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     204: ldc           #216                // String Damage for Imp Clone
+     206: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     209: ldc           #188                // String damage
+     211: getstatic     #218                // Field com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.IMP_CLONE_DAMAGE:D
+     214: ldc2_w        #219                // double 0.75d
+     217: ldc2_w        #177                // double 1.7976931348623157E308d
+     220: invokevirtual #182                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     223: putstatic     #222                // Field IMP_CLONE_DAMAGE:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     226: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     229: ldc           #224                // String Flying Speed for Imp Clone
+     231: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     234: ldc           #198                // String flying_speed
+     236: getstatic     #226                // Field com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.IMP_CLONE_FLYING_SPEED:D
+     239: ldc2_w        #201                // double 0.5d
+     242: ldc2_w        #177                // double 1.7976931348623157E308d
+     245: invokevirtual #182                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.defineInRange:(Ljava/lang/String;DDD)Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     248: putstatic     #228                // Field IMP_CLONE_FLYING_SPEED:Lnet/minecraftforge/common/ForgeConfigSpec$DoubleValue;
+     251: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     254: invokevirtual #155                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.pop:()Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     257: pop
+     258: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     261: ldc           #230                // String gargoyle
+     263: invokevirtual #138                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.push:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     266: pop
+     267: getstatic     #132                // Field BUILDER:Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     270: ldc           #232                // String Health for Gargoyle
+     272: invokevirtual #143                // Method net/minecraftforge/common/ForgeConfigSpec$Builder.comment:(Ljava/lang/String;)Lnet/minecraftforge/common/ForgeConfigSpec$Builder;
+     275: ldc           #169                // String health
+     277: getstatic     #234                // Field com/ovinter/mythsandlegends/client/
+## com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.class
+Compiled from "BloodMoonSavedData.java"
+public class com.ovinter.mythsandlegends.api.data.BloodMoonSavedData extends net.minecraft.world.level.saveddata.SavedData {
+  private static final java.lang.String KEY = "mythsandlegends_blood_moon";
+
+  private static final int BASE_INTERVAL = 20;
+
+  private static final int VARIANCE = 10;
+
+  private boolean isActive;
+
+  private long lastBloodMoon;
+
+  private long nextBloodMoon;
+
+  public com.ovinter.mythsandlegends.api.data.BloodMoonSavedData();
+    Code:
+       0: aload_0
+       1: invokespecial #28                 // Method net/minecraft/world/level/saveddata/SavedData."<init>":()V
+       4: aload_0
+       5: iconst_0
+       6: putfield      #30                 // Field isActive:Z
+       9: aload_0
+      10: ldc2_w        #31                 // long -1l
+      13: putfield      #34                 // Field lastBloodMoon:J
+      16: aload_0
+      17: ldc2_w        #31                 // long -1l
+      20: putfield      #36                 // Field nextBloodMoon:J
+      23: return
+
+  public boolean isActive();
+    Code:
+       0: aload_0
+       1: getfield      #30                 // Field isActive:Z
+       4: ireturn
+
+  public long getLastBloodMoon();
+    Code:
+       0: aload_0
+       1: getfield      #34                 // Field lastBloodMoon:J
+       4: lreturn
+
+  public long getNextBloodMoon();
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field nextBloodMoon:J
+       4: lreturn
+
+  public net.minecraft.nbt.CompoundTag m_7176_(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_1
+       1: ldc           #46                 // String IsActive
+       3: aload_0
+       4: getfield      #30                 // Field isActive:Z
+       7: invokevirtual #52                 // Method net/minecraft/nbt/CompoundTag.m_128379_:(Ljava/lang/String;Z)V
+      10: aload_1
+      11: ldc           #54                 // String LastBloodMoon
+      13: aload_0
+      14: getfield      #34                 // Field lastBloodMoon:J
+      17: invokevirtual #58                 // Method net/minecraft/nbt/CompoundTag.m_128356_:(Ljava/lang/String;J)V
+      20: aload_1
+      21: ldc           #60                 // String NextBloodMoon
+      23: aload_0
+      24: getfield      #36                 // Field nextBloodMoon:J
+      27: invokevirtual #58                 // Method net/minecraft/nbt/CompoundTag.m_128356_:(Ljava/lang/String;J)V
+      30: aload_1
+      31: areturn
+
+  public static com.ovinter.mythsandlegends.api.data.BloodMoonSavedData get(net.minecraft.server.level.ServerLevel);
+    Code:
+       0: aload_0
+       1: invokevirtual #70                 // Method net/minecraft/server/level/ServerLevel.m_8895_:()Lnet/minecraft/world/level/storage/DimensionDataStorage;
+       4: invokedynamic #89,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+       9: invokedynamic #98,  0             // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+      14: ldc           #14                 // String mythsandlegends_blood_moon
+      16: invokevirtual #104                // Method net/minecraft/world/level/storage/DimensionDataStorage.m_164861_:(Ljava/util/function/Function;Ljava/util/function/Supplier;Ljava/lang/String;)Lnet/minecraft/world/level/saveddata/SavedData;
+      19: checkcast     #2                  // class com/ovinter/mythsandlegends/api/data/BloodMoonSavedData
+      22: areturn
+
+  public static com.ovinter.mythsandlegends.api.data.BloodMoonSavedData load(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: new           #2                  // class com/ovinter/mythsandlegends/api/data/BloodMoonSavedData
+       3: dup
+       4: invokespecial #92                 // Method "<init>":()V
+       7: astore_1
+       8: aload_1
+       9: aload_0
+      10: ldc           #46                 // String IsActive
+      12: invokevirtual #110                // Method net/minecraft/nbt/CompoundTag.m_128471_:(Ljava/lang/String;)Z
+      15: putfield      #30                 // Field isActive:Z
+      18: aload_1
+      19: aload_0
+      20: ldc           #54                 // String LastBloodMoon
+      22: invokevirtual #114                // Method net/minecraft/nbt/CompoundTag.m_128454_:(Ljava/lang/String;)J
+      25: putfield      #34                 // Field lastBloodMoon:J
+      28: aload_1
+      29: aload_0
+      30: ldc           #60                 // String NextBloodMoon
+      32: invokevirtual #114                // Method net/minecraft/nbt/CompoundTag.m_128454_:(Ljava/lang/String;)J
+      35: putfield      #36                 // Field nextBloodMoon:J
+      38: aload_1
+      39: areturn
+
+  public void setActive(boolean);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #30                 // Field isActive:Z
+       5: aload_0
+       6: invokevirtual #120                // Method m_77762_:()V
+       9: return
+
+  public void scheduleNext(long, net.minecraft.util.RandomSource);
+    Code:
+       0: aload_0
+       1: lload_1
+       2: putfield      #34                 // Field lastBloodMoon:J
+       5: aload_0
+       6: lload_1
+       7: ldc2_w        #124                // long 20l
+      10: ladd
+      11: aload_3
+      12: bipush        10
+      14: invokeinterface #131,  2          // InterfaceMethod net/minecraft/util/RandomSource.m_188503_:(I)I
+      19: i2l
+      20: ladd
+      21: putfield      #36                 // Field nextBloodMoon:J
+      24: aload_0
+      25: invokevirtual #120                // Method m_77762_:()V
+      28: return
+
+  public void initIfNeeded(long, net.minecraft.util.RandomSource);
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field nextBloodMoon:J
+       4: lconst_0
+       5: lcmp
+       6: ifge          32
+       9: aload_0
+      10: lload_1
+      11: ldc2_w        #124                // long 20l
+      14: ladd
+      15: aload_3
+      16: bipush        10
+      18: invokeinterface #131,  2          // InterfaceMethod net/minecraft/util/RandomSource.m_188503_:(I)I
+      23: i2l
+      24: ladd
+      25: putfield      #36                 // Field nextBloodMoon:J
+      28: aload_0
+      29: invokevirtual #120                // Method m_77762_:()V
+      32: return
+
+  public boolean isDue(long);
+    Code:
+       0: aload_0
+       1: getfield      #36                 // Field nextBloodMoon:J
+       4: lconst_0
+       5: lcmp
+       6: iflt          22
+       9: lload_1
+      10: aload_0
+      11: getfield      #36                 // Field nextBloodMoon:J
+      14: lcmp
+      15: iflt          22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+}
+
+## com/ovinter/mythsandlegends/api/spawner/BloodMoonSpawner.class
+Compiled from "BloodMoonSpawner.java"
+public class com.ovinter.mythsandlegends.api.spawner.BloodMoonSpawner {
+  private static final java.util.Map<java.util.UUID, java.lang.Integer> PLAYER_COOLDOWNS;
+
+  private static final int SPAWN_RADIUS = 48;
+
+  private static final int GLOBAL_JIANGSHI_CAP = 5;
+
+  private static final int MIN_DISTANCE_SQ = 64;
+
+  public com.ovinter.mythsandlegends.api.spawner.BloodMoonSpawner();
+    Code:
+       0: aload_0
+       1: invokespecial #29                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void tick(net.minecraft.server.level.ServerLevel, long);
+    Code:
+       0: aload_0
+       1: invokestatic  #39                 // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.get:(Lnet/minecraft/server/level/ServerLevel;)Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;
+       4: invokevirtual #43                 // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+       7: ifne          11
+      10: return
+      11: aload_0
+      12: invokevirtual #48                 // Method net/minecraft/server/level/ServerLevel.m_46461_:()Z
+      15: ifeq          19
+      18: return
+      19: getstatic     #50                 // Field PLAYER_COOLDOWNS:Ljava/util/Map;
+      22: invokeinterface #56,  1           // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+      27: aload_0
+      28: invokedynamic #76,  0             // InvokeDynamic #0:test:(Lnet/minecraft/server/level/ServerLevel;)Ljava/util/function/Predicate;
+      33: invokeinterface #82,  2           // InterfaceMethod java/util/Set.removeIf:(Ljava/util/function/Predicate;)Z
+      38: pop
+      39: aload_0
+      40: invokevirtual #86                 // Method net/minecraft/server/level/ServerLevel.m_6907_:()Ljava/util/List;
+      43: invokeinterface #92,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      48: astore_3
+      49: aload_3
+      50: invokeinterface #97,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      55: ifeq          212
+      58: aload_3
+      59: invokeinterface #101,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      64: checkcast     #103                // class net/minecraft/server/level/ServerPlayer
+      67: astore        4
+      69: aload_0
+      70: ldc           #105                // class com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity
+      72: aload_0
+      73: invokevirtual #109                // Method net/minecraft/server/level/ServerLevel.m_6857_:()Lnet/minecraft/world/level/border/WorldBorder;
+      76: invokevirtual #115                // Method net/minecraft/world/level/border/WorldBorder.m_61946_:()Lnet/minecraft/world/phys/shapes/VoxelShape;
+      79: invokevirtual #121                // Method net/minecraft/world/phys/shapes/VoxelShape.m_83215_:()Lnet/minecraft/world/phys/AABB;
+      82: invokevirtual #125                // Method net/minecraft/server/level/ServerLevel.m_45976_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;
+      85: invokeinterface #129,  1          // InterfaceMethod java/util/List.size:()I
+      90: istore        5
+      92: iload         5
+      94: iconst_5
+      95: if_icmplt     101
+      98: goto          212
+     101: getstatic     #50                 // Field PLAYER_COOLDOWNS:Ljava/util/Map;
+     104: aload         4
+     106: invokevirtual #133                // Method net/minecraft/server/level/ServerPlayer.m_20148_:()Ljava/util/UUID;
+     109: iconst_0
+     110: invokestatic  #139                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     113: invokeinterface #143,  3          // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     118: checkcast     #135                // class java/lang/Integer
+     121: invokevirtual #146                // Method java/lang/Integer.intValue:()I
+     124: istore        6
+     126: iload         6
+     128: ifle          155
+     131: getstatic     #50                 // Field PLAYER_COOLDOWNS:Ljava/util/Map;
+     134: aload         4
+     136: invokevirtual #133                // Method net/minecraft/server/level/ServerPlayer.m_20148_:()Ljava/util/UUID;
+     139: iload         6
+     141: iconst_1
+     142: isub
+     143: invokestatic  #139                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     146: invokeinterface #149,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     151: pop
+     152: goto          49
+     155: aload_0
+     156: aload         4
+     158: invokestatic  #153                // Method hasNearbyJiangshi:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;)Z
+     161: ifeq          167
+     164: goto          49
+     167: aload_0
+     168: aload         4
+     170: invokestatic  #156                // Method spawnJiangshiNearPlayer:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;)Z
+     173: ifeq          209
+     176: getstatic     #50                 // Field PLAYER_COOLDOWNS:Ljava/util/Map;
+     179: aload         4
+     181: invokevirtual #133                // Method net/minecraft/server/level/ServerPlayer.m_20148_:()Ljava/util/UUID;
+     184: sipush        1200
+     187: aload_0
+     188: getfield      #160                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+     191: sipush        2400
+     194: invokeinterface #166,  2          // InterfaceMethod net/minecraft/util/RandomSource.m_188503_:(I)I
+     199: iadd
+     200: invokestatic  #139                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     203: invokeinterface #149,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     208: pop
+     209: goto          49
+     212: return
+
+  private static boolean hasNearbyJiangshi(net.minecraft.server.level.ServerLevel, net.minecraft.server.level.ServerPlayer);
+    Code:
+       0: aload_0
+       1: ldc           #105                // class com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity
+       3: aload_1
+       4: invokevirtual #177                // Method net/minecraft/server/level/ServerPlayer.m_20191_:()Lnet/minecraft/world/phys/AABB;
+       7: ldc2_w        #178                // double 48.0d
+      10: invokevirtual #185                // Method net/minecraft/world/phys/AABB.m_82400_:(D)Lnet/minecraft/world/phys/AABB;
+      13: invokevirtual #125                // Method net/minecraft/server/level/ServerLevel.m_45976_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;
+      16: invokeinterface #188,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+      21: ifne          28
+      24: iconst_1
+      25: goto          29
+      28: iconst_0
+      29: ireturn
+
+  private static boolean spawnJiangshiNearPlayer(net.minecraft.server.level.ServerLevel, net.minecraft.server.level.ServerPlayer);
+    Code:
+       0: iconst_0
+       1: istore_2
+       2: iload_2
+       3: bipush        20
+       5: if_icmpge     320
+       8: aload_0
+       9: getfield      #160                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+      12: bipush        96
+      14: invokeinterface #166,  2          // InterfaceMethod net/minecraft/util/RandomSource.m_188503_:(I)I
+      19: bipush        48
+      21: isub
+      22: istore_3
+      23: aload_0
+      24: getfield      #160                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+      27: bipush        96
+      29: invokeinterface #166,  2          // InterfaceMethod net/minecraft/util/RandomSource.m_188503_:(I)I
+      34: bipush        48
+      36: isub
+      37: istore        4
+      39: aload_1
+      40: invokevirtual #192                // Method net/minecraft/server/level/ServerPlayer.m_20185_:()D
+      43: iload_3
+      44: i2d
+      45: dadd
+      46: aload_1
+      47: invokevirtual #195                // Method net/minecraft/server/level/ServerPlayer.m_20186_:()D
+      50: aload_1
+      51: invokevirtual #198                // Method net/minecraft/server/level/ServerPlayer.m_20189_:()D
+      54: iload         4
+      56: i2d
+      57: dadd
+      58: invokestatic  #204                // Method net/minecraft/core/BlockPos.m_274561_:(DDD)Lnet/minecraft/core/BlockPos;
+      61: astore        5
+      63: aload         5
+      65: aload_1
+      66: invokevirtual #208                // Method net/minecraft/server/level/ServerPlayer.m_20183_:()Lnet/minecraft/core/BlockPos;
+      69: invokevirtual #212                // Method net/minecraft/core/BlockPos.m_123331_:(Lnet/minecraft/core/Vec3i;)D
+      72: ldc2_w        #213                // double 64.0d
+      75: dcmpg
+      76: ifge          82
+      79: goto          314
+      82: aload_0
+      83: aload         5
+      85: invokestatic  #218                // Method findSpawnPos:(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/BlockPos;
+      88: astore        6
+      90: aload         6
+      92: ifnonnull     98
+      95: goto          314
+      98: getstatic     #224                // Field com/ovinter/mythsandlegends/registry/MLEntities.JIANGSHI:Lnet/minecraftforge/registries/RegistryObject;
+     101: invokevirtual #228                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     104: checkcast     #230                // class net/minecraft/world/entity/EntityType
+     107: invokestatic  #234                // Method net/minecraft/world/entity/SpawnPlacements.m_21752_:(Lnet/minecraft/world/entity/EntityType;)Lnet/minecraft/world/entity/SpawnPlacements$Type;
+     110: aload_0
+     111: aload         6
+     113: getstatic     #224                // Field com/ovinter/mythsandlegends/registry/MLEntities.JIANGSHI:Lnet/minecraftforge/registries/RegistryObject;
+     116: invokevirtual #228                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     119: checkcast     #230                // class net/minecraft/world/entity/EntityType
+     122: invokevirtual #238                // Method net/minecraft/world/entity/SpawnPlacements$Type.canSpawnAt:(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/EntityType;)Z
+     125: ifne          131
+     128: goto          314
+     131: getstatic     #224                // Field com/ovinter/mythsandlegends/registry/MLEntities.JIANGSHI:Lnet/minecraftforge/registries/RegistryObject;
+     134: invokevirtual #228                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     137: checkcast     #230                // class net/minecraft/world/entity/EntityType
+     140: aload_0
+     141: getstatic     #244                // Field net/minecraft/world/entity/MobSpawnType.EVENT:Lnet/minecraft/world/entity/MobSpawnType;
+     144: aload         6
+     146: aload_0
+     147: getfield      #160                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+     150: invokestatic  #248                // Method net/minecraft/world/entity/SpawnPlacements.m_217074_:(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z
+     153: ifne          159
+     156: goto          314
+     159: aload_0
+     160: getstatic     #224                // Field com/ovinter/mythsandlegends/registry/MLEntities.JIANGSHI:Lnet/minecraftforge/registries/RegistryObject;
+     163: invokevirtual #228                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     166: checkcast     #230                // class net/minecraft/world/entity/EntityType
+     169: aload         6
+     171: invokevirtual #251                // Method net/minecraft/core/BlockPos.m_123341_:()I
+     174: i2d
+     175: ldc2_w        #252                // double 0.5d
+     178: dadd
+     179: aload         6
+     181: invokevirtual #256                // Method net/minecraft/core/BlockPos.m_123342_:()I
+     184: i2d
+     185: aload         6
+     187: invokevirtual #259                // Method net/minecraft/core/BlockPos.m_123343_:()I
+     190: i2d
+     191: ldc2_w        #252                // double 0.5d
+     194: dadd
+     195: invokevirtual #263                // Method net/minecraft/world/entity/EntityType.m_20585_:(DDD)Lnet/minecraft/world/phys/AABB;
+     198: invokevirtual #267                // Method net/minecraft/server/level/ServerLevel.m_45772_:(Lnet/minecraft/world/phys/AABB;)Z
+     201: ifne          207
+     204: goto          314
+     207: getstatic     #224                // Field com/ovinter/mythsandlegends/registry/MLEntities.JIANGSHI:Lnet/minecraftforge/registries/RegistryObject;
+     210: invokevirtual #228                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     213: checkcast     #230                // class net/minecraft/world/entity/EntityType
+     216: aload_0
+     217: invokevirtual #271                // Method net/minecraft/world/entity/EntityType.m_20615_:(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity;
+     220: checkcast     #105                // class com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity
+     223: astore        7
+     225: aload         7
+     227: ifnonnull     233
+     230: goto          314
+     233: aload         7
+     235: aload_1
+     236: invokevirtual #133                // Method net/minecraft/server/level/ServerPlayer.m_20148_:()Ljava/util/UUID;
+     239: invokevirtual #275                // Method com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity.setTargetPlayer:(Ljava/util/UUID;)V
+     242: aload         7
+     244: aload         6
+     246: invokevirtual #251                // Method net/minecraft/core/BlockPos.m_123341_:()I
+     249: i2d
+     250: ldc2_w        #252                // double 0.5d
+     253: dadd
+     254: aload         6
+     256: invokevirtual #256                // Method net/minecraft/core/BlockPos.m_123342_:()I
+     259: i2d
+     260: aload         6
+     262: invokevirtual #259                // Method net/minecraft/core/BlockPos.m_123343_:()I
+     265: i2d
+     266: ldc2_w        #252                // double 0.5d
+     269: dadd
+     270: aload_0
+     271: getfield      #160                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+     274: invokeinterface #279,  1          // InterfaceMethod net/minecraft/util/RandomSource.m_188501_:()F
+     279: ldc_w         #280                // float 360.0f
+     282: fmul
+     283: fconst_0
+     284: invokevirtual #284                // Method com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity.m_7678_:(DDDFF)V
+     287: aload         7
+     289: aload_0
+     290: aload_0
+     291: aload         6
+     293: invokevirtual #288                // Method net/minecraft/server/level/ServerLevel.m_6436_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/DifficultyInstance;
+     296: getstatic     #244                // Field net/minecraft/world/entity/MobSpawnType.EVENT:Lnet/minecraft/world/entity/MobSpawnType;
+     299: aconst_null
+     300: aconst_null
+     301: invokevirtual #292                // Method com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity.m_6518_:(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;
+     304: pop
+     305: aload_0
+     306: aload         7
+     308: invokevirtual #296                // Method net/minecraft/server/level/ServerLevel.m_7967_:(Lnet/minecraft/world/entity/Entity;)Z
+     311: pop
+     312: iconst_1
+     313: ireturn
+     314: iinc          2, 1
+     317: goto          2
+     320: iconst_0
+     321: ireturn
+
+  private static net.minecraft.core.BlockPos findSpawnPos(net.minecraft.server.level.ServerLevel, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_1
+       1: astore_2
+       2: iconst_0
+       3: istore_3
+       4: iload_3
+       5: bipush        10
+       7: if_icmpge     48
+      10: aload_0
+      11: aload_2
+      12: invokevirtual #308                // Method net/minecraft/server/level/ServerLevel.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      15: invokevirtual #313                // Method net/minecraft/world/level/block/state/BlockState.m_60795_:()Z
+      18: ifeq          37
+      21: aload_0
+      22: aload_2
+      23: invokevirtual #316                // Method net/minecraft/core/BlockPos.m_7495_:()Lnet/minecraft/core/BlockPos;
+      26: invokevirtual #308                // Method net/minecraft/server/level/ServerLevel.m_8055_:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      29: invokevirtual #319                // Method net/minecraft/world/level/block/state/BlockState.m_280296_:()Z
+      32: ifeq          37
+      35: aload_2
+      36: areturn
+      37: aload_2
+      38: invokevirtual #316                // Method net/minecraft/core/BlockPos.m_7495_:()Lnet/minecraft/core/BlockPos;
+      41: astore_2
+      42: iinc          3, 1
+      45: goto          4
+      48: aconst_null
+      49: areturn
+
+  public static void reset();
+    Code:
+       0: getstatic     #50                 // Field PLAYER_COOLDOWNS:Ljava/util/Map;
+       3: invokeinterface #326,  1          // InterfaceMethod java/util/Map.clear:()V
+       8: return
+
+  private static boolean lambda$tick$0(net.minecraft.server.level.ServerLevel, java.util.UUID);
+    Code:
+       0: aload_0
+       1: invokevirtual #330                // Method net/minecraft/server/level/ServerLevel.m_7654_:()Lnet/minecraft/server/MinecraftServer;
+       4: invokevirtual #336                // Method net/minecraft/server/MinecraftServer.m_6846_:()Lnet/minecraft/server/players/PlayerList;
+       7: aload_1
+       8: invokevirtual #342                // Method net/minecraft/server/players/PlayerList.m_11259_:(Ljava/util/UUID;)Lnet/minecraft/server/level/ServerPlayer;
+      11: ifnonnull     18
+      14: iconst_1
+      15: goto          19
+      18: iconst_0
+      19: ireturn
+
+  static {};
+    Code:
+       0: new           #347                // class java/util/HashMap
+       3: dup
+       4: invokespecial #348                // Method java/util/HashMap."<init>":()V
+       7: putstatic     #50                 // Field PLAYER_COOLDOWNS:Ljava/util/Map;
+      10: return
+}
+
+## com/ovinter/mythsandlegends/client/config/DefaultMobAttributes.class
+Compiled from "DefaultMobAttributes.java"
+public class com.ovinter.mythsandlegends.client.config.DefaultMobAttributes {
+  public static double IMP_HEALTH;
+
+  public static double IMP_FLYING_SPEED;
+
+  public static double IMP_DAMAGE;
+
+  public static double IMP_FOLLOW_RANGE;
+
+  public static int IMP_SHOOT_ATTACK_COOLDOWN;
+
+  public static double IMP_CLONE_HEALTH;
+
+  public static double IMP_CLONE_FLYING_SPEED;
+
+  public static double IMP_CLONE_DAMAGE;
+
+  public static double IMP_CLONE_FOLLOW_RANGE;
+
+  public static double POSSESSED_ARMOR_HEALTH;
+
+  public static double POSSESSED_ARMOR_ARMOR;
+
+  public static double POSSESSED_ARMOR_ARMOR_TOUGHNESS;
+
+  public static double POSSESSED_ARMOR_DAMAGE;
+
+  public static double POSSESSED_ARMOR_ATTACK_KNOCKBACK;
+
+  public static double POSSESSED_ARMOR_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_WATER_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_KNOCKBACK_RESISTANCE;
+
+  public static double POSSESSED_ARMOR_FOLLOW_RANGE;
+
+  public static double POSSESSED_ARMOR_ARCHER_HEALTH;
+
+  public static double POSSESSED_ARMOR_ARCHER_ARMOR;
+
+  public static double POSSESSED_ARMOR_ARCHER_ARMOR_TOUGHNESS;
+
+  public static double POSSESSED_ARMOR_ARCHER_DAMAGE;
+
+  public static double POSSESSED_ARMOR_ARCHER_ATTACK_KNOCKBACK;
+
+  public static double POSSESSED_ARMOR_ARCHER_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_ARCHER_WATER_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_ARCHER_KNOCKBACK_RESISTANCE;
+
+  public static double POSSESSED_ARMOR_ARCHER_FOLLOW_RANGE;
+
+  public static double POSSESSED_ARMOR_LANCER_HEALTH;
+
+  public static double POSSESSED_ARMOR_LANCER_ARMOR;
+
+  public static double POSSESSED_ARMOR_LANCER_ARMOR_TOUGHNESS;
+
+  public static double POSSESSED_ARMOR_LANCER_TOUGHNESS;
+
+  public static double POSSESSED_ARMOR_LANCER_DAMAGE;
+
+  public static double POSSESSED_ARMOR_LANCER_ATTACK_KNOCKBACK;
+
+  public static double POSSESSED_ARMOR_LANCER_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_LANCER_WATER_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_LANCER_KNOCKBACK_RESISTANCE;
+
+  public static double POSSESSED_ARMOR_LANCER_FOLLOW_RANGE;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_HEALTH;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_ARMOR;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_ARMOR_TOUGHNESS;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_DAMAGE;
+
+  public static double POSSESSED_ARMOR_ATTACK_INQUISITOR_KNOCKBACK;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_WATER_MOVEMENT;
+
+  public static double POSSESSED_ARMOR_INQUISITOR_KNOCKBACK_RESISTANCE;
+
+  public static double POSSESSED_ARMOR_FOLLOW_RANGE_INQUISITOR;
+
+  public static double GARGOYLE_HEALTH;
+
+  public static double GARGOYLE_DAMAGE;
+
+  public static double GARGOYLE_ATTACK_KNOCKBACK;
+
+  public static double GARGOYLE_MOVEMENT;
+
+  public static double GARGOYLE_KNOCKBACK_RESISTANCE;
+
+  public static double GARGOYLE_FOLLOW_RANGE;
+
+  public static int GARGOYLE_ABILITY_COOLDOWN;
+
+  public static double BLACK_CHARRO_HEALTH;
+
+  public static double BLACK_CHARRO_ARMOR;
+
+  public static double BLACK_CHARRO_DAMAGE;
+
+  public static double BLACK_CHARRO_KNOCKBACK_RESISTANCE;
+
+  public static double BLACK_CHARRO_MOVEMENT;
+
+  public static double BLACK_CHARRO_FOLLOW_RANGE;
+
+  public static int BLACK_CHARRO_MESSAGE_COOLDOWN;
+
+  public static double CONDEMNED_HEALTH;
+
+  public static double CONDEMNED_DAMAGE;
+
+  public static double CONDEMNED_MOVEMENT;
+
+  public static double CONDEMNED_FOLLOW_RANGE;
+
+  public static double LAMPAD_HEALTH;
+
+  public static double LAMPAD_ARMOR;
+
+  public static double LAMPAD_DAMAGE;
+
+  public static double LAMPAD_MOVEMENT;
+
+  public static double LAMPAD_FOLLOW_RANGE;
+
+  public static double WARBORN_AEGIS_HEALTH;
+
+  public static double WARBORN_AEGIS_ARMOR;
+
+  public static double WARBORN_AEGIS_ARMOR_TOUGHNESS;
+
+  public static double WARBORN_AEGIS_ATTACK_DAMAGE;
+
+  public static double WARBORN_AEGIS_ATTACK_SPEED;
+
+  public static double WARBORN_AEGIS_MOVEMENT;
+
+  public static double WARBORN_AEGIS_KNOCKBACK_RESISTANCE;
+
+  public static double WARBORN_AEGIS_FOLLOW_RANGE;
+
+  public static int WARBORN_AEGIS_METEOR_COOLDOWN;
+
+  public static int WARBORN_AEGIS_RAGE_METEOR_COOLDOWN;
+
+  public static int WARBORN_AEGIS_STAMPEDE_COOLDOWN;
+
+  public static int WARBORN_AEGIS_RAGE_STAMPEDE_COOLDOWN;
+
+  public static int WARBORN_AEGIS_KICK_COOLDOWN;
+
+  public static int WARBORN_AEGIS_RAGE_KICK_COOLDOWN;
+
+  public static int WARBORN_AEGIS_COMBO_COOLDOWN;
+
+  public static double ALP_HEALTH;
+
+  public static double ALP_MOVEMENT_SPEED;
+
+  public static double ALP_FOLLOW_RANGE;
+
+  public static double SCORCHED_HEALTH;
+
+  public static double SCORCHED_DAMAGE;
+
+  public static double SCORCHED_MOVEMENT;
+
+  public static double SCORCHED_FOLLOW_RANGE;
+
+  public static double ABADDON_HEALTH;
+
+  public static double ABADDON_DAMAGE;
+
+  public static double ABADDON_ARMOR;
+
+  public static double ABADDON_MOVEMENT;
+
+  public static double ABADDON_FOLLOW_RANGE;
+
+  public static double KARAKONDJUL_HEALTH;
+
+  public static double KARAKONDJUL_DAMAGE;
+
+  public static double KARAKONDJUL_ARMOR;
+
+  public static double KARAKONDJUL_ARMOR_TOUGHNESS;
+
+  public static double KARAKONDJUL_MOVEMENT;
+
+  public static double KARAKONDJUL_FOLLOW_RANGE;
+
+  public static double KARAKONDJUL_KNOCKBACK_RESISTANCE;
+
+  public static double AMAROK_HEALTH;
+
+  public static double AMAROK_ARMOR;
+
+  public static double AMAROK_DAMAGE;
+
+  public static double AMAROK_MOVEMENT;
+
+  public static double AMAROK_KNOCKBACK_RESISTANCE;
+
+  public static double AMAROK_FOLLOW_RANGE;
+
+  public static double AMAROK_SAFE_FALL_DISTANCE;
+
+  public static int AMAROK_SPIN_COOLDOWN;
+
+  public static int AMAROK_RANGED_COOLDOWN;
+
+  public static double COGWORK_CONSTRUCT_HEALTH;
+
+  public static double COGWORK_CONSTRUCT_ARMOR;
+
+  public static double COGWORK_CONSTRUCT_ARMOR_TOUGHNESS;
+
+  public static double COGWORK_CONSTRUCT_DAMAGE;
+
+  public static double COGWORK_CONSTRUCT_MOVEMENT;
+
+  public static double COGWORK_CONSTRUCT_KNOCKBACK_RESISTANCE;
+
+  public static double COGWORK_CONSTRUCT_FOLLOW_RANGE;
+
+  public static int COGWORK_ABILITY_COOLDOWN;
+
+  public static double COGLIN_HEALTH;
+
+  public static double COGLIN_ARMOR;
+
+  public static double COGLIN_DAMAGE;
+
+  public static double COGLIN_MOVEMENT;
+
+  public static double COGLIN_FOLLOW_RANGE;
+
+  public static double JIANGSHI_HEALTH;
+
+  public static double JIANGSHI_ARMOR;
+
+  public static double JIANGSHI_DAMAGE;
+
+  public static double JIANGSHI_MOVEMENT;
+
+  public static double JIANGSHI_FOLLOW_RANGE;
+
+  public static double SHADE_JELLY_HEALTH;
+
+  public static double SHADE_JELLY_MOVEMENT_SPEED;
+
+  public static double SHADE_JELLY_FLYING_SPEED;
+
+  public static double SHADE_JELLY_KNOCKBACK_RESISTANCE;
+
+  public static double SHADE_JELLY_FOLLOW_RANGE;
+
+  public static double EIDOLON_HEALTH;
+
+  public static double EIDOLON_DAMAGE;
+
+  public static double EIDOLON_FLYING_SPEED;
+
+  public static double EIDOLON_MOVEMENT;
+
+  public static double EIDOLON_FOLLOW_RANGE;
+
+  public static double EIDOLON_KNOCKBACK_RESISTANCE;
+
+  public static double GEARBOUND_HEADSMAN_HEALTH;
+
+  public static double GEARBOUND_HEADSMAN_ARMOR_TOUGHNESS;
+
+  public static double GEARBOUND_HEADSMAN_DAMAGE;
+
+  public static double GEARBOUND_HEADSMAN_MOVEMENT;
+
+  public static double GEARBOUND_HEADSMAN_FOLLOW_RANGE;
+
+  public static double GEARBOUND_HEADSMAN_KNOCKBACK_RESISTANCE;
+
+  public static double OMECUAIME_HEALTH;
+
+  public static double OMECUAIME_ARMOR;
+
+  public static double OMECUAIME_DAMAGE;
+
+  public static double OMECUAIME_ATTACK_KNOCKBACK;
+
+  public static double OMECUAIME_MOVEMENT;
+
+  public static double OMECUAIME_FOLLOW_RANGE;
+
+  public static double OMECUAIME_KNOCKBACK_RESISTANCE;
+
+  public static double DRAUGR_HEALTH;
+
+  public static double DRAUGR_ARMOR;
+
+  public static double DRAUGR_DAMAGE;
+
+  public static double DRAUGR_MOVEMENT;
+
+  public static double DRAUGR_FOLLOW_RANGE;
+
+  public com.ovinter.mythsandlegends.client.config.DefaultMobAttributes();
+    Code:
+       0: aload_0
+       1: invokespecial #170                // Method java/lang/Object."<init>":()V
+       4: return
+
+  static {};
+    Code:
+       0: ldc2_w        #174                // double 5.0d
+       3: putstatic     #177                // Field IMP_HEALTH:D
+       6: ldc2_w        #178                // double 0.6d
+       9: putstatic     #181                // Field IMP_FLYING_SPEED:D
+      12: ldc2_w        #182                // double 3.0d
+      15: putstatic     #185                // Field IMP_DAMAGE:D
+      18: ldc2_w        #186                // double 30.0d
+      21: putstatic     #189                // Field IMP_FOLLOW_RANGE:D
+      24: sipush        300
+      27: putstatic     #191                // Field IMP_SHOOT_ATTACK_COOLDOWN:I
+      30: ldc2_w        #192                // double 2.5d
+      33: putstatic     #195                // Field IMP_CLONE_HEALTH:D
+      36: getstatic     #181                // Field IMP_FLYING_SPEED:D
+      39: putstatic     #197                // Field IMP_CLONE_FLYING_SPEED:D
+      42: ldc2_w        #198                // double 1.5d
+      45: putstatic     #201                // Field IMP_CLONE_DAMAGE:D
+      48: getstatic     #189                // Field IMP_FOLLOW_RANGE:D
+      51: putstatic     #203                // Field IMP_CLONE_FOLLOW_RANGE:D
+      54: ldc2_w        #186                // double 30.0d
+      57: putstatic     #205                // Field POSSESSED_ARMOR_HEALTH:D
+      60: ldc2_w        #206                // double 8.0d
+      63: putstatic     #209                // Field POSSESSED_ARMOR_ARMOR:D
+      66: ldc2_w        #206                // double 8.0d
+      69: putstatic     #211                // Field POSSESSED_ARMOR_ARMOR_TOUGHNESS:D
+      72: ldc2_w        #212                // double 2.0d
+      75: putstatic     #215                // Field POSSESSED_ARMOR_DAMAGE:D
+      78: dconst_1
+      79: putstatic     #217                // Field POSSESSED_ARMOR_ATTACK_KNOCKBACK:D
+      82: ldc2_w        #218                // double 0.3d
+      85: putstatic     #221                // Field POSSESSED_ARMOR_MOVEMENT:D
+      88: ldc2_w        #222                // double 0.2d
+      91: putstatic     #225                // Field POSSESSED_ARMOR_WATER_MOVEMENT:D
+      94: dconst_1
+      95: putstatic     #227                // Field POSSESSED_ARMOR_KNOCKBACK_RESISTANCE:D
+      98: ldc2_w        #228                // double 20.0d
+     101: putstatic     #231                // Field POSSESSED_ARMOR_FOLLOW_RANGE:D
+     104: ldc2_w        #232                // double 25.0d
+     107: putstatic     #235                // Field POSSESSED_ARMOR_ARCHER_HEALTH:D
+     110: ldc2_w        #236                // double 4.0d
+     113: putstatic     #239                // Field POSSESSED_ARMOR_ARCHER_ARMOR:D
+     116: ldc2_w        #212                // double 2.0d
+     119: putstatic     #241                // Field POSSESSED_ARMOR_ARCHER_ARMOR_TOUGHNESS:D
+     122: ldc2_w        #212                // double 2.0d
+     125: putstatic     #243                // Field POSSESSED_ARMOR_ARCHER_DAMAGE:D
+     128: ldc2_w        #244                // double 0.5d
+     131: putstatic     #247                // Field POSSESSED_ARMOR_ARCHER_ATTACK_KNOCKBACK:D
+     134: ldc2_w        #248                // double 0.32d
+     137: putstatic     #251                // Field POSSESSED_ARMOR_ARCHER_MOVEMENT:D
+     140: ldc2_w        #252                // double 0.44d
+     143: putstatic     #255                // Field POSSESSED_ARMOR_ARCHER_WATER_MOVEMENT:D
+     146: ldc2_w        #256                // double 0.65d
+     149: putstatic     #259                // Field POSSESSED_ARMOR_ARCHER_KNOCKBACK_RESISTANCE:D
+     152: ldc2_w        #232                // double 25.0d
+     155: putstatic     #261                // Field POSSESSED_ARMOR_ARCHER_FOLLOW_RANGE:D
+     158: ldc2_w        #262                // double 60.0d
+     161: putstatic     #265                // Field POSSESSED_ARMOR_LANCER_HEALTH:D
+     164: ldc2_w        #266                // double 10.0d
+     167: putstatic     #269                // Field POSSESSED_ARMOR_LANCER_ARMOR:D
+     170: ldc2_w        #266                // double 10.0d
+     173: putstatic     #271                // Field POSSESSED_ARMOR_LANCER_ARMOR_TOUGHNESS:D
+     176: ldc2_w        #206                // double 8.0d
+     179: putstatic     #273                // Field POSSESSED_ARMOR_LANCER_TOUGHNESS:D
+     182: ldc2_w        #274                // double 6.0d
+     185: putstatic     #277                // Field POSSESSED_ARMOR_LANCER_DAMAGE:D
+     188: dconst_1
+     189: putstatic     #279                // Field POSSESSED_ARMOR_LANCER_ATTACK_KNOCKBACK:D
+     192: ldc2_w        #218                // double 0.3d
+     195: putstatic     #281                // Field POSSESSED_ARMOR_LANCER_MOVEMENT:D
+     198: ldc2_w        #222                // double 0.2d
+     201: putstatic     #283                // Field POSSESSED_ARMOR_LANCER_WATER_MOVEMENT:D
+     204: dconst_1
+     205: putstatic     #285                // Field POSSESSED_ARMOR_LANCER_KNOCKBACK_RESISTANCE:D
+     208: ldc2_w        #228                // double 20.0d
+     211: putstatic     #287                // Field POSSESSED_ARMOR_LANCER_FOLLOW_RANGE:D
+     214: ldc2_w        #288                // double 120.0d
+     217: putstatic     #291                // Field POSSESSED_ARMOR_INQUISITOR_HEALTH:D
+     220: ldc2_w        #292                // double 12.0d
+     223: putstatic     #295                // Field POSSESSED_ARMOR_INQUISITOR_ARMOR:D
+     226: ldc2_w        #292                // double 12.0d
+     229: putstatic     #297                // Field POSSESSED_ARMOR_INQUISITOR_ARMOR_TOUGHNESS:D
+     232: ldc2_w        #206                // double 8.0d
+     235: putstatic     #299                // Field POSSESSED_ARMOR_INQUISITOR_DAMAGE:D
+     238: dconst_1
+     239: putstatic     #301                // Field POSSESSED_ARMOR_ATTACK_INQUISITOR_KNOCKBACK:D
+     242: ldc2_w        #218                // double 0.3d
+     245: putstatic     #303                // Field POSSESSED_ARMOR_INQUISITOR_MOVEMENT:D
+     248: ldc2_w        #222                // double 0.2d
+     251: putstatic     #305                // Field POSSESSED_ARMOR_INQUISITOR_WATER_MOVEMENT:D
+     254: dconst_1
+     255: putstatic     #307                // Field POSSESSED_ARMOR_INQUISITOR_KNOCKBACK_RESISTANCE:D
+     258: ldc2_w        #232                // double 25.0d
+     261: putstatic     #309                // Field POSSESSED_ARMOR_FOLLOW_RANGE_INQUISITOR:D
+     264: ldc2_w        #262                // double 60.0d
+     267: putstatic     #311                // Field GARGOYLE_HEALTH:D
+     270: ldc2_w        #274                // double 6.0d
+     273: putstatic     #313                // Field GARGOYLE_DAMAGE:D
+     276: ldc2_w        #314                // double 1.2d
+     279: putstatic     #317                // Field GARGOYLE_ATTACK_KNOCKBACK:D
+     282: ldc2_w        #318                // double 0.25d
+     285: putstatic     #321                // Field GARGOYLE_MOVEMENT:D
+     288: dconst_1
+     289: putstatic     #323                // Field GARGOYLE_KNOCKBACK_RESISTANCE:D
+     292: ldc2_w        #228                // double 20.0d
+     295: putstatic     #325                // Field GARGOYLE_FOLLOW_RANGE:D
+     298: sipush        200
+     301: putstatic     #327                // Field GARGOYLE_ABILITY_COOLDOWN:I
+     304: ldc2_w        #328                // double 370.0d
+     307: putstatic     #331                // Field BLACK_CHARRO_HEALTH:D
+     310: ldc2_w        #236                // double 4.0d
+     313: putstatic     #333                // Field BLACK_CHARRO_ARMOR:D
+     316: ldc2_w        #174                // double 5.0d
+     319: putstatic     #335                // Field BLACK_CHARRO_DAMAGE:D
+     322: dconst_1
+     323: putstatic     #337                // Field BLACK_CHARRO_KNOCKBACK_RESISTANCE:D
+     326: ldc2_w        #218                // double 0.3d
+     329: putstatic     #339                // Field BLACK_CHARRO_MOVEMENT:D
+     332: ldc2_w        #340                // double 50.0d
+     335: putstatic     #343                // Field BLACK_CHARRO_FOLLOW_RANGE:D
+     338: sipush        350
+     341: putstatic     #345                // Field BLACK_CHARRO_MESSAGE_COOLDOWN:I
+     344: ldc2_w        #292                // double 12.0d
+     347: putstatic     #347                // Field CONDEMNED_HEALTH:D
+     350: ldc2_w        #212                // double 2.0d
+     353: putstatic     #349                // Field CONDEMNED_DAMAGE:D
+     356: ldc2_w        #350                // double 0.35d
+     359: putstatic     #353                // Field CONDEMNED_MOVEMENT:D
+     362: ldc2_w        #186                // double 30.0d
+     365: putstatic     #355                // Field CONDEMNED_FOLLOW_RANGE:D
+     368: ldc2_w        #186                // double 30.0d
+     371: putstatic     #357                // Field LAMPAD_HEALTH:D
+     374: ldc2_w        #212                // double 2.0d
+     377: putstatic     #359                // Field LAMPAD_ARMOR:D
+     380: ldc2_w        #274                // double 6.0d
+     383: putstatic     #361                // Field LAMPAD_DAMAGE:D
+     386: ldc2_w        #362                // double 0.36d
+     389: putstatic     #365                // Field LAMPAD_MOVEMENT:D
+     392: ldc2_w        #228                // double 20.0d
+     395: putstatic     #367                // Field LAMPAD_FOLLOW_RANGE:D
+     398: ldc2_w        #368                // double 400.0d
+     401: putstatic     #371                // Field WARBORN_AEGIS_HEALTH:D
+     404: ldc2_w        #292                // double 12.0d
+     407: putstatic     #373                // Field WARBORN_AEGIS_ARMOR:D
+     410: ldc2_w        #274                // double 6.0d
+     413: putstatic     #375                // Field WARBORN_AEGIS_ARMOR_TOUGHNESS:D
+     416: ldc2_w        #206                // double 8.0d
+     419: putstatic     #377                // Field WARBORN_AEGIS_ATTACK_DAMAGE:D
+     422: ldc2_w        #236                // double 4.0d
+     425: putstatic     #379                // Field WARBORN_AEGIS_ATTACK_SPEED:D
+     428: ldc2_w        #350                // double 0.35d
+     431: putstatic     #381                // Field WARBORN_AEGIS_MOVEMENT:D
+     434: dconst_1
+     435: putstatic     #383                // Field WARBORN_AEGIS_KNOCKBACK_RESISTANCE:D
+     438: ldc2_w        #186                // double 30.0d
+     441: putstatic     #385                // Field WARBORN_AEGIS_FOLLOW_RANGE:D
+     444: sipush        210
+     447: putstatic     #387                // Field WARBORN_AEGIS_METEOR_COOLDOWN:I
+     450: sipush        140
+     453: putstatic     #389                // Field WARBORN_AEGIS_RAGE_METEOR_COOLDOWN:I
+     456: sipush        180
+     459: putstatic     #391                // Field WARBORN_AEGIS_STAMPEDE_COOLDOWN:I
+     462: bipush        110
+     464: putstatic     #393                // Field WARBORN_AEGIS_RAGE_STAMPEDE_COOLDOWN:I
+     467: bipush        100
+     469: putstatic     #395                // Field WARBORN_AEGIS_KICK_COOLDOWN:I
+     472: bipush        50
+     474: putstatic     #397                // Field WARBORN_AEGIS_RAGE_KICK_COOLDOWN:I
+     477: bipush        15
+     479: putstatic     #399                // Field WARBORN_AEGIS_COMBO_COOLDOWN:I
+     482: ldc2_w        #266                // double 10.0d
+     485: putstatic     #401                // Field ALP_HEALTH:D
+     488: ldc2_w        #318                // double 0.25d
+     491: putstatic     #403                // Field ALP_MOVEMENT_SPEED:D
+     494: ldc2_w        #228                // double 20.0d
+     497: putstatic     #405                // Field ALP_FOLLOW_RANGE:D
+     500: ldc2_w        #406                // double 35.0d
+
+## com/ovinter/mythsandlegends/client/config/DisableEntityEvent.class
+Compiled from "DisableEntityEvent.java"
+public class com.ovinter.mythsandlegends.client.config.DisableEntityEvent {
+  public com.ovinter.mythsandlegends.client.config.DisableEntityEvent();
+    Code:
+       0: aload_0
+       1: invokespecial #28                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onEntityJoinLevel(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #39                 // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getEntity:()Lnet/minecraft/world/entity/Entity;
+       4: astore_1
+       5: aload_1
+       6: instanceof    #41                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          20
+      12: aload_1
+      13: checkcast     #41                 // class net/minecraft/world/entity/LivingEntity
+      16: astore_2
+      17: goto          21
+      20: return
+      21: getstatic     #49                 // Field com/ovinter/mythsandlegends/Config.ENABLE_IMP:Lnet/minecraftforge/common/ForgeConfigSpec$BooleanValue;
+      24: invokevirtual #53                 // Method net/minecraftforge/common/ForgeConfigSpec$BooleanValue.get:()Ljava/lang/Object;
+      27: checkcast     #55                 // class java/lang/Boolean
+      30: invokevirtual #59                 // Method java/lang/Boolean.booleanValue:()Z
+      33: ifeq          53
+      36: aload_2
+      37: invokevirtual #63                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      40: ldc           #65                 // class com/ovinter/mythsandlegends/entity/enemy/monster/ImpEntity
+      42: invokevirtual #69                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+      45: ifeq          53
+      48: aload_0
+      49: iconst_1
+      50: invokevirtual #73                 // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.setCanceled:(Z)V
+      53: return
+}
+
+## com/ovinter/mythsandlegends/event/BloodMoonServerEvents.class
+Compiled from "BloodMoonServerEvents.java"
+public class com.ovinter.mythsandlegends.event.BloodMoonServerEvents {
+  private static long lastWarnedDay;
+
+  private static final java.util.Set<java.util.UUID> DEAD_THIS_BLOODMOON;
+
+  private static final java.util.UUID BLOOD_MOON_DAMAGE_UUID;
+
+  private static final java.util.UUID BLOOD_MOON_HEALTH_UUID;
+
+  private static final java.util.UUID BLOOD_MOON_ARMOR_UUID;
+
+  private static final java.util.UUID BLOOD_MOON_SPEED_UUID;
+
+  public static final net.minecraft.resources.ResourceLocation SURVIVE_BLOOD_MOON;
+
+  public com.ovinter.mythsandlegends.event.BloodMoonServerEvents();
+    Code:
+       0: aload_0
+       1: invokespecial #61                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onPlayerJoin(net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedInEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #70                 // Method net/minecraftforge/event/entity/player/PlayerEvent$PlayerLoggedInEvent.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #72                 // class net/minecraft/server/level/ServerPlayer
+       9: ifeq          20
+      12: aload_2
+      13: checkcast     #72                 // class net/minecraft/server/level/ServerPlayer
+      16: astore_1
+      17: goto          21
+      20: return
+      21: aload_1
+      22: invokevirtual #76                 // Method net/minecraft/server/level/ServerPlayer.m_9236_:()Lnet/minecraft/world/level/Level;
+      25: checkcast     #78                 // class net/minecraft/server/level/ServerLevel
+      28: astore_2
+      29: aload_2
+      30: invokevirtual #82                 // Method net/minecraft/server/level/ServerLevel.m_46472_:()Lnet/minecraft/resources/ResourceKey;
+      33: getstatic     #86                 // Field net/minecraft/server/level/ServerLevel.f_46428_:Lnet/minecraft/resources/ResourceKey;
+      36: invokevirtual #92                 // Method net/minecraft/resources/ResourceKey.equals:(Ljava/lang/Object;)Z
+      39: ifne          43
+      42: return
+      43: aload_2
+      44: invokestatic  #98                 // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.get:(Lnet/minecraft/server/level/ServerLevel;)Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;
+      47: invokevirtual #102                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+      50: istore_3
+      51: new           #104                // class com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket
+      54: dup
+      55: iload_3
+      56: invokespecial #107                // Method com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket."<init>":(Z)V
+      59: aload_1
+      60: invokestatic  #113                // Method com/ovinter/mythsandlegends/network/MLNetwork.sendToPlayer:(Ljava/lang/Object;Lnet/minecraft/server/level/ServerPlayer;)V
+      63: return
+
+  public static void onLevelTick(net.minecraftforge.event.TickEvent$LevelTickEvent);
+    Code:
+       0: aload_0
+       1: getfield      #127                // Field net/minecraftforge/event/TickEvent$LevelTickEvent.phase:Lnet/minecraftforge/event/TickEvent$Phase;
+       4: getstatic     #130                // Field net/minecraftforge/event/TickEvent$Phase.END:Lnet/minecraftforge/event/TickEvent$Phase;
+       7: if_acmpeq     11
+      10: return
+      11: aload_0
+      12: getfield      #133                // Field net/minecraftforge/event/TickEvent$LevelTickEvent.level:Lnet/minecraft/world/level/Level;
+      15: astore_2
+      16: aload_2
+      17: instanceof    #78                 // class net/minecraft/server/level/ServerLevel
+      20: ifeq          31
+      23: aload_2
+      24: checkcast     #78                 // class net/minecraft/server/level/ServerLevel
+      27: astore_1
+      28: goto          32
+      31: return
+      32: aload_1
+      33: invokevirtual #82                 // Method net/minecraft/server/level/ServerLevel.m_46472_:()Lnet/minecraft/resources/ResourceKey;
+      36: getstatic     #136                // Field net/minecraft/world/level/Level.f_46428_:Lnet/minecraft/resources/ResourceKey;
+      39: invokevirtual #92                 // Method net/minecraft/resources/ResourceKey.equals:(Ljava/lang/Object;)Z
+      42: ifne          46
+      45: return
+      46: aload_1
+      47: invokestatic  #98                 // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.get:(Lnet/minecraft/server/level/ServerLevel;)Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;
+      50: astore_2
+      51: aload_1
+      52: invokevirtual #140                // Method net/minecraft/server/level/ServerLevel.m_46468_:()J
+      55: ldc2_w        #141                // long 24000l
+      58: ldiv
+      59: lstore_3
+      60: aload_2
+      61: lload_3
+      62: aload_1
+      63: getfield      #146                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+      66: invokevirtual #150                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.initIfNeeded:(JLnet/minecraft/util/RandomSource;)V
+      69: aload_1
+      70: invokevirtual #153                // Method net/minecraft/server/level/ServerLevel.m_46461_:()Z
+      73: ifne          80
+      76: iconst_1
+      77: goto          81
+      80: iconst_0
+      81: istore        5
+      83: aload_2
+      84: invokevirtual #102                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+      87: ifne          112
+      90: iload         5
+      92: ifeq          112
+      95: aload_2
+      96: lload_3
+      97: invokevirtual #157                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isDue:(J)Z
+     100: ifeq          112
+     103: aload_1
+     104: aload_2
+     105: lload_3
+     106: invokestatic  #161                // Method startBloodMoon:(Lnet/minecraft/server/level/ServerLevel;Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;J)V
+     109: goto          146
+     112: aload_2
+     113: invokevirtual #102                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+     116: ifne          146
+     119: aload_2
+     120: invokevirtual #164                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.getNextBloodMoon:()J
+     123: lload_3
+     124: lconst_1
+     125: ladd
+     126: lcmp
+     127: ifne          146
+     130: getstatic     #166                // Field lastWarnedDay:J
+     133: lload_3
+     134: lcmp
+     135: ifeq          146
+     138: lload_3
+     139: putstatic     #166                // Field lastWarnedDay:J
+     142: aload_1
+     143: invokestatic  #170                // Method warnPlayers:(Lnet/minecraft/server/level/ServerLevel;)V
+     146: aload_2
+     147: invokevirtual #102                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+     150: ifeq          165
+     153: aload_1
+     154: invokevirtual #153                // Method net/minecraft/server/level/ServerLevel.m_46461_:()Z
+     157: ifeq          165
+     160: aload_1
+     161: aload_2
+     162: invokestatic  #174                // Method endBloodMoon:(Lnet/minecraft/server/level/ServerLevel;Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;)V
+     165: aload_1
+     166: aload_1
+     167: invokevirtual #177                // Method net/minecraft/server/level/ServerLevel.m_46467_:()J
+     170: invokestatic  #183                // Method com/ovinter/mythsandlegends/api/spawner/BloodMoonSpawner.tick:(Lnet/minecraft/server/level/ServerLevel;J)V
+     173: return
+
+  public static void onEntityJoinLevel(net.minecraftforge.event.entity.EntityJoinLevelEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #195                // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getLevel:()Lnet/minecraft/world/level/Level;
+       4: invokevirtual #198                // Method net/minecraft/world/level/Level.m_5776_:()Z
+       7: ifeq          11
+      10: return
+      11: aload_0
+      12: invokevirtual #201                // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getEntity:()Lnet/minecraft/world/entity/Entity;
+      15: astore_2
+      16: aload_2
+      17: instanceof    #203                // class net/minecraft/world/entity/monster/Monster
+      20: ifeq          31
+      23: aload_2
+      24: checkcast     #203                // class net/minecraft/world/entity/monster/Monster
+      27: astore_1
+      28: goto          32
+      31: return
+      32: aload_0
+      33: invokevirtual #195                // Method net/minecraftforge/event/entity/EntityJoinLevelEvent.getLevel:()Lnet/minecraft/world/level/Level;
+      36: astore_3
+      37: aload_3
+      38: instanceof    #78                 // class net/minecraft/server/level/ServerLevel
+      41: ifeq          52
+      44: aload_3
+      45: checkcast     #78                 // class net/minecraft/server/level/ServerLevel
+      48: astore_2
+      49: goto          53
+      52: return
+      53: aload_2
+      54: invokestatic  #98                 // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.get:(Lnet/minecraft/server/level/ServerLevel;)Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;
+      57: invokevirtual #102                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+      60: ifeq          67
+      63: aload_1
+      64: invokestatic  #207                // Method applyBloodMoonBuffs:(Lnet/minecraft/world/entity/Mob;)V
+      67: return
+
+  public static void onPlayerDeath(net.minecraftforge.event.entity.living.LivingDeathEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #217                // Method net/minecraftforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: astore_2
+       5: aload_2
+       6: instanceof    #72                 // class net/minecraft/server/level/ServerPlayer
+       9: ifeq          20
+      12: aload_2
+      13: checkcast     #72                 // class net/minecraft/server/level/ServerPlayer
+      16: astore_1
+      17: goto          21
+      20: return
+      21: aload_1
+      22: invokevirtual #76                 // Method net/minecraft/server/level/ServerPlayer.m_9236_:()Lnet/minecraft/world/level/Level;
+      25: checkcast     #78                 // class net/minecraft/server/level/ServerLevel
+      28: astore_2
+      29: aload_2
+      30: ldc           #219                // class com/ovinter/mythsandlegends/entity/enemy/monster/JiangshiEntity
+      32: aload_1
+      33: invokevirtual #223                // Method net/minecraft/server/level/ServerPlayer.m_20191_:()Lnet/minecraft/world/phys/AABB;
+      36: ldc2_w        #224                // double 32.0d
+      39: invokevirtual #231                // Method net/minecraft/world/phys/AABB.m_82400_:(D)Lnet/minecraft/world/phys/AABB;
+      42: invokevirtual #235                // Method net/minecraft/server/level/ServerLevel.m_45976_:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;
+      45: invokedynamic #254,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      50: invokeinterface #260,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      55: aload_2
+      56: invokestatic  #98                 // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.get:(Lnet/minecraft/server/level/ServerLevel;)Lcom/ovinter/mythsandlegends/api/data/BloodMoonSavedData;
+      59: invokevirtual #102                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.isActive:()Z
+      62: ifne          66
+      65: return
+      66: getstatic     #262                // Field DEAD_THIS_BLOODMOON:Ljava/util/Set;
+      69: aload_1
+      70: invokevirtual #266                // Method net/minecraft/server/level/ServerPlayer.m_20148_:()Ljava/util/UUID;
+      73: invokeinterface #271,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+      78: pop
+      79: return
+
+  private static void startBloodMoon(net.minecraft.server.level.ServerLevel, com.ovinter.mythsandlegends.api.data.BloodMoonSavedData, long);
+    Code:
+       0: getstatic     #262                // Field DEAD_THIS_BLOODMOON:Ljava/util/Set;
+       3: invokeinterface #275,  1          // InterfaceMethod java/util/Set.clear:()V
+       8: aload_1
+       9: iconst_1
+      10: invokevirtual #278                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.setActive:(Z)V
+      13: aload_1
+      14: lload_2
+      15: aload_0
+      16: getfield      #146                // Field net/minecraft/server/level/ServerLevel.f_46441_:Lnet/minecraft/util/RandomSource;
+      19: invokevirtual #281                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.scheduleNext:(JLnet/minecraft/util/RandomSource;)V
+      22: getstatic     #285                // Field com/ovinter/mythsandlegends/network/MLNetwork.CHANNEL:Lnet/minecraftforge/network/simple/SimpleChannel;
+      25: getstatic     #289                // Field net/minecraftforge/network/PacketDistributor.ALL:Lnet/minecraftforge/network/PacketDistributor;
+      28: invokevirtual #293                // Method net/minecraftforge/network/PacketDistributor.noArg:()Lnet/minecraftforge/network/PacketDistributor$PacketTarget;
+      31: new           #104                // class com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket
+      34: dup
+      35: iconst_1
+      36: invokespecial #107                // Method com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket."<init>":(Z)V
+      39: invokevirtual #299                // Method net/minecraftforge/network/simple/SimpleChannel.send:(Lnet/minecraftforge/network/PacketDistributor$PacketTarget;Ljava/lang/Object;)V
+      42: aload_0
+      43: invokestatic  #302                // Method applyBloodMoonBuffsToExistingMobs:(Lnet/minecraft/server/level/ServerLevel;)V
+      46: aload_0
+      47: invokevirtual #306                // Method net/minecraft/server/level/ServerLevel.m_6907_:()Ljava/util/List;
+      50: invokeinterface #310,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      55: astore        4
+      57: aload         4
+      59: invokeinterface #315,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      64: ifeq          129
+      67: aload         4
+      69: invokeinterface #319,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      74: checkcast     #72                 // class net/minecraft/server/level/ServerPlayer
+      77: astore        5
+      79: aload         5
+      81: ldc_w         #321                // String text.mythsandlegends.blood_moon_start.title
+      84: invokestatic  #327                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      87: ldc_w         #329                // String text.mythsandlegends.blood_moon_start.subtitle
+      90: invokestatic  #327                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      93: invokestatic  #333                // Method sendTitle:(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;)V
+      96: ldc_w         #335                // String text.mythsandlegends.blood_moon_start.message
+      99: invokestatic  #327                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     102: aload         5
+     104: invokestatic  #341                // Method com/ovinter/mythsandlegends/api/util/MLSendMessageToPlayerHelper.sendMessage:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/world/entity/player/Player;)V
+     107: aload         5
+     109: getstatic     #347                // Field com/ovinter/mythsandlegends/registry/MLSounds.BLOOD_MOON_EVENT:Lnet/minecraftforge/registries/RegistryObject;
+     112: invokevirtual #351                // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     115: checkcast     #353                // class net/minecraft/sounds/SoundEvent
+     118: getstatic     #359                // Field net/minecraft/sounds/SoundSource.AMBIENT:Lnet/minecraft/sounds/SoundSource;
+     121: fconst_1
+     122: fconst_1
+     123: invokevirtual #363                // Method net/minecraft/server/level/ServerPlayer.m_6330_:(Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     126: goto          57
+     129: return
+
+  private static void endBloodMoon(net.minecraft.server.level.ServerLevel, com.ovinter.mythsandlegends.api.data.BloodMoonSavedData);
+    Code:
+       0: aload_1
+       1: iconst_0
+       2: invokevirtual #278                // Method com/ovinter/mythsandlegends/api/data/BloodMoonSavedData.setActive:(Z)V
+       5: invokestatic  #366                // Method com/ovinter/mythsandlegends/api/spawner/BloodMoonSpawner.reset:()V
+       8: getstatic     #285                // Field com/ovinter/mythsandlegends/network/MLNetwork.CHANNEL:Lnet/minecraftforge/network/simple/SimpleChannel;
+      11: getstatic     #289                // Field net/minecraftforge/network/PacketDistributor.ALL:Lnet/minecraftforge/network/PacketDistributor;
+      14: invokevirtual #293                // Method net/minecraftforge/network/PacketDistributor.noArg:()Lnet/minecraftforge/network/PacketDistributor$PacketTarget;
+      17: new           #104                // class com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket
+      20: dup
+      21: iconst_0
+      22: invokespecial #107                // Method com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket."<init>":(Z)V
+      25: invokevirtual #299                // Method net/minecraftforge/network/simple/SimpleChannel.send:(Lnet/minecraftforge/network/PacketDistributor$PacketTarget;Ljava/lang/Object;)V
+      28: aload_0
+      29: invokestatic  #369                // Method removeBuffsFromHostiles:(Lnet/minecraft/server/level/ServerLevel;)V
+      32: aload_0
+      33: invokevirtual #306                // Method net/minecraft/server/level/ServerLevel.m_6907_:()Ljava/util/List;
+      36: invokeinterface #310,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      41: astore_2
+      42: aload_2
+      43: invokeinterface #315,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      48: ifeq          113
+      51: aload_2
+      52: invokeinterface #319,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      57: checkcast     #72                 // class net/minecraft/server/level/ServerPlayer
+      60: astore_3
+      61: getstatic     #262                // Field DEAD_THIS_BLOODMOON:Ljava/util/Set;
+      64: aload_3
+      65: invokevirtual #266                // Method net/minecraft/server/level/ServerPlayer.m_20148_:()Ljava/util/UUID;
+      68: invokeinterface #372,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      73: ifne          84
+      76: aload_3
+      77: getstatic     #374                // Field SURVIVE_BLOOD_MOON:Lnet/minecraft/resources/ResourceLocation;
+      80: invokestatic  #380                // Method com/ovinter/mythsandlegends/api/util/MLAdvancementHelper.grant:(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/resources/ResourceLocation;)Z
+      83: pop
+      84: aload_3
+      85: ldc_w         #382                // String text.mythsandlegends.blood_moon_end.title
+      88: invokestatic  #327                // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/Mutab
+## com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket.class
+Compiled from "BloodMoonSyncPacket.java"
+public final class com.ovinter.mythsandlegends.network.packet.BloodMoonSyncPacket extends java.lang.Record {
+  private final boolean active;
+
+  public com.ovinter.mythsandlegends.network.packet.BloodMoonSyncPacket(boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #22                 // Method java/lang/Record."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #24                 // Field active:Z
+       9: return
+
+  public static void encode(com.ovinter.mythsandlegends.network.packet.BloodMoonSyncPacket, net.minecraft.network.FriendlyByteBuf);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: invokevirtual #31                 // Method active:()Z
+       5: invokevirtual #37                 // Method net/minecraft/network/FriendlyByteBuf.writeBoolean:(Z)Lio/netty/buffer/ByteBuf;
+       8: pop
+       9: return
+
+  public static com.ovinter.mythsandlegends.network.packet.BloodMoonSyncPacket decode(net.minecraft.network.FriendlyByteBuf);
+    Code:
+       0: new           #2                  // class com/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket
+       3: dup
+       4: aload_0
+       5: invokevirtual #45                 // Method net/minecraft/network/FriendlyByteBuf.readBoolean:()Z
+       8: invokespecial #47                 // Method "<init>":(Z)V
+      11: areturn
+
+  public static void handle(com.ovinter.mythsandlegends.network.packet.BloodMoonSyncPacket, java.util.function.Supplier<net.minecraftforge.network.NetworkEvent$Context>);
+    Code:
+       0: aload_1
+       1: invokeinterface #56,  1           // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       6: checkcast     #7                  // class net/minecraftforge/network/NetworkEvent$Context
+       9: astore_2
+      10: aload_2
+      11: aload_0
+      12: invokedynamic #73,  0             // InvokeDynamic #0:run:(Lcom/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket;)Ljava/lang/Runnable;
+      17: invokevirtual #77                 // Method net/minecraftforge/network/NetworkEvent$Context.enqueueWork:(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;
+      20: pop
+      21: aload_2
+      22: iconst_1
+      23: invokevirtual #80                 // Method net/minecraftforge/network/NetworkEvent$Context.setPacketHandled:(Z)V
+      26: return
+
+  public final java.lang.String toString();
+    Code:
+       0: aload_0
+       1: invokedynamic #99,  0             // InvokeDynamic #1:toString:(Lcom/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket;)Ljava/lang/String;
+       6: areturn
+
+  public final int hashCode();
+    Code:
+       0: aload_0
+       1: invokedynamic #104,  0            // InvokeDynamic #1:hashCode:(Lcom/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket;)I
+       6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #109,  0            // InvokeDynamic #1:equals:(Lcom/ovinter/mythsandlegends/network/packet/BloodMoonSyncPacket;Ljava/lang/Object;)Z
+       7: ireturn
+
+  public boolean active();
+    Code:
+       0: aload_0
+       1: getfield      #24                 // Field active:Z
+       4: ireturn
+
+  private static void lambda$handle$0(com.ovinter.mythsandlegends.network.packet.BloodMoonSyncPacket);
+    Code:
+       0: aload_0
+       1: invokevirtual #31                 // Method active:()Z
+       4: putstatic     #116                // Field com/ovinter/mythsandlegends/event/ClientEvents.isBloodMoonActive:Z
+       7: return
+}
+
+## com/ovinter/mythsandlegends/world/worldgen/biome/feature/MLConfiguredFeatures.class
+Compiled from "MLConfiguredFeatures.java"
+public class com.ovinter.mythsandlegends.world.worldgen.biome.feature.MLConfiguredFeatures {
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> ABYSS_BUSH;
+
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> CAST_SHROOM;
+
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> MOURNING_THORNS;
+
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> UMBRAL_SPIKE;
+
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> GIANT_BONE_HAND;
+
+  public com.ovinter.mythsandlegends.world.worldgen.biome.feature.MLConfiguredFeatures();
+    Code:
+       0: aload_0
+       1: invokespecial #21                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void bootstrap(net.minecraft.data.worldgen.BootstapContext<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>>);
+    Code:
+       0: aload_0
+       1: getstatic     #28                 // Field ABYSS_BUSH:Lnet/minecraft/resources/ResourceKey;
+       4: getstatic     #34                 // Field net/minecraft/world/level/levelgen/feature/Feature.f_65763_:Lnet/minecraft/world/level/levelgen/feature/Feature;
+       7: getstatic     #37                 // Field net/minecraft/world/level/levelgen/feature/Feature.f_65741_:Lnet/minecraft/world/level/levelgen/feature/Feature;
+      10: new           #39                 // class net/minecraft/world/level/levelgen/feature/configurations/SimpleBlockConfiguration
+      13: dup
+      14: getstatic     #44                 // Field com/ovinter/mythsandlegends/registry/MLBlocks.ABYSS_BUSH:Lnet/minecraftforge/registries/RegistryObject;
+      17: invokevirtual #50                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      20: checkcast     #52                 // class net/minecraft/world/level/block/Block
+      23: invokestatic  #58                 // Method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider.m_191382_:(Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/world/level/levelgen/feature/stateproviders/SimpleStateProvider;
+      26: invokespecial #61                 // Method net/minecraft/world/level/levelgen/feature/configurations/SimpleBlockConfiguration."<init>":(Lnet/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider;)V
+      29: invokestatic  #67                 // Method net/minecraft/data/worldgen/features/FeatureUtils.m_206473_:(Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)Lnet/minecraft/world/level/levelgen/feature/configurations/RandomPatchConfiguration;
+      32: invokestatic  #71                 // Method register:(Lnet/minecraft/data/worldgen/BootstapContext;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)V
+      35: aload_0
+      36: getstatic     #73                 // Field MOURNING_THORNS:Lnet/minecraft/resources/ResourceKey;
+      39: getstatic     #34                 // Field net/minecraft/world/level/levelgen/feature/Feature.f_65763_:Lnet/minecraft/world/level/levelgen/feature/Feature;
+      42: getstatic     #37                 // Field net/minecraft/world/level/levelgen/feature/Feature.f_65741_:Lnet/minecraft/world/level/levelgen/feature/Feature;
+      45: new           #39                 // class net/minecraft/world/level/levelgen/feature/configurations/SimpleBlockConfiguration
+      48: dup
+      49: getstatic     #75                 // Field com/ovinter/mythsandlegends/registry/MLBlocks.MOURNING_THORNS:Lnet/minecraftforge/registries/RegistryObject;
+      52: invokevirtual #50                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      55: checkcast     #52                 // class net/minecraft/world/level/block/Block
+      58: invokestatic  #58                 // Method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider.m_191382_:(Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/world/level/levelgen/feature/stateproviders/SimpleStateProvider;
+      61: invokespecial #61                 // Method net/minecraft/world/level/levelgen/feature/configurations/SimpleBlockConfiguration."<init>":(Lnet/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider;)V
+      64: invokestatic  #67                 // Method net/minecraft/data/worldgen/features/FeatureUtils.m_206473_:(Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)Lnet/minecraft/world/level/levelgen/feature/configurations/RandomPatchConfiguration;
+      67: invokestatic  #71                 // Method register:(Lnet/minecraft/data/worldgen/BootstapContext;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)V
+      70: aload_0
+      71: getstatic     #77                 // Field CAST_SHROOM:Lnet/minecraft/resources/ResourceKey;
+      74: getstatic     #81                 // Field com/ovinter/mythsandlegends/registry/MLFeatures.CAST_SHROOM:Lnet/minecraftforge/registries/RegistryObject;
+      77: invokevirtual #50                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      80: checkcast     #83                 // class com/ovinter/mythsandlegends/world/worldgen/biome/feature/StickyShroomFeature
+      83: getstatic     #89                 // Field net/minecraft/world/level/levelgen/feature/configurations/NoneFeatureConfiguration.f_67816_:Lnet/minecraft/world/level/levelgen/feature/configurations/NoneFeatureConfiguration;
+      86: invokestatic  #71                 // Method register:(Lnet/minecraft/data/worldgen/BootstapContext;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)V
+      89: aload_0
+      90: getstatic     #91                 // Field UMBRAL_SPIKE:Lnet/minecraft/resources/ResourceKey;
+      93: getstatic     #93                 // Field com/ovinter/mythsandlegends/registry/MLFeatures.UMBRAL_SPIKE:Lnet/minecraftforge/registries/RegistryObject;
+      96: invokevirtual #50                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      99: checkcast     #95                 // class com/ovinter/mythsandlegends/world/worldgen/biome/feature/UmbralSpikeFeature
+     102: getstatic     #89                 // Field net/minecraft/world/level/levelgen/feature/configurations/NoneFeatureConfiguration.f_67816_:Lnet/minecraft/world/level/levelgen/feature/configurations/NoneFeatureConfiguration;
+     105: invokestatic  #71                 // Method register:(Lnet/minecraft/data/worldgen/BootstapContext;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)V
+     108: aload_0
+     109: getstatic     #97                 // Field GIANT_BONE_HAND:Lnet/minecraft/resources/ResourceKey;
+     112: getstatic     #99                 // Field com/ovinter/mythsandlegends/registry/MLFeatures.GIANT_BONE_HAND:Lnet/minecraftforge/registries/RegistryObject;
+     115: invokevirtual #50                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     118: checkcast     #101                // class com/ovinter/mythsandlegends/world/worldgen/biome/feature/GiantBoneHandFeature
+     121: getstatic     #89                 // Field net/minecraft/world/level/levelgen/feature/configurations/NoneFeatureConfiguration.f_67816_:Lnet/minecraft/world/level/levelgen/feature/configurations/NoneFeatureConfiguration;
+     124: invokestatic  #71                 // Method register:(Lnet/minecraft/data/worldgen/BootstapContext;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)V
+     127: return
+
+  private static net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> registerKey(java.lang.String);
+    Code:
+       0: getstatic     #112                // Field net/minecraft/core/registries/Registries.f_256911_:Lnet/minecraft/resources/ResourceKey;
+       3: ldc           #114                // String mythsandlegends
+       5: aload_0
+       6: invokestatic  #120                // Method net/minecraft/resources/ResourceLocation.fromNamespaceAndPath:(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       9: invokestatic  #126                // Method net/minecraft/resources/ResourceKey.m_135785_:(Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/resources/ResourceKey;
+      12: areturn
+
+  private static <FC extends net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration, F extends net.minecraft.world.level.levelgen.feature.Feature<FC>> void register(net.minecraft.data.worldgen.BootstapContext<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>>, net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>>, F, FC);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: new           #131                // class net/minecraft/world/level/levelgen/feature/ConfiguredFeature
+       5: dup
+       6: aload_2
+       7: aload_3
+       8: invokespecial #134                // Method net/minecraft/world/level/levelgen/feature/ConfiguredFeature."<init>":(Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)V
+      11: invokeinterface #140,  3          // InterfaceMethod net/minecraft/data/worldgen/BootstapContext.m_255272_:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/Object;)Lnet/minecraft/core/Holder$Reference;
+      16: pop
+      17: return
+
+  static {};
+    Code:
+       0: ldc           #149                // String abyss_bush
+       2: invokestatic  #151                // Method registerKey:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceKey;
+       5: putstatic     #28                 // Field ABYSS_BUSH:Lnet/minecraft/resources/ResourceKey;
+       8: ldc           #153                // String cast_shroom
+      10: invokestatic  #151                // Method registerKey:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceKey;
+      13: putstatic     #77                 // Field CAST_SHROOM:Lnet/minecraft/resources/ResourceKey;
+      16: ldc           #155                // String mourning_thorns
+      18: invokestatic  #151                // Method registerKey:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceKey;
+      21: putstatic     #73                 // Field MOURNING_THORNS:Lnet/minecraft/resources/ResourceKey;
+      24: ldc           #157                // String umbral_spike
+      26: invokestatic  #151                // Method registerKey:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceKey;
+      29: putstatic     #91                 // Field UMBRAL_SPIKE:Lnet/minecraft/resources/ResourceKey;
+      32: ldc           #159                // String giant_bone_hand
+      34: invokestatic  #151                // Method registerKey:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceKey;
+      37: putstatic     #97                 // Field GIANT_BONE_HAND:Lnet/minecraft/resources/ResourceKey;
+      40: return
+}
+
+## file assets/mythsandlegends/blockstates/bloodstone_brick.json
+{
+  "variants": {
+    "": {
+      "model": "mythsandlegends:block/bloodstone_brick"
+    }
+  }
+}
+## file assets/mythsandlegends/blockstates/bloodstone_brick_slab.json
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mythsandlegends:block/bloodstone_brick_slab"
+    },
+    "type=double": {
+      "model": "mythsandlegends:block/bloodstone_brick"
+    },
+    "type=top": {
+      "model": "mythsandlegends:block/bloodstone_brick_slab_top"
+    }
+  }
+}
+## file assets/mythsandlegends/blockstates/bloodstone_brick_stairs.json
+{
+  "variants": {
+    "facing=east,half=bottom,shape=inner_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,shape=inner_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner"
+    },
+    "facing=east,half=bottom,shape=outer_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,shape=outer_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer"
+    },
+    "facing=east,half=bottom,shape=straight": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs"
+    },
+    "facing=east,half=top,shape=inner_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,shape=inner_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,shape=outer_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,shape=outer_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,shape=straight": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=inner_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,shape=inner_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,shape=outer_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,shape=outer_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,shape=straight": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=top,shape=inner_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,shape=inner_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top,shape=outer_left": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,shape=outer_right": {
+      "model": "mythsandlegends:block/bloodstone_brick_stairs_oute
+## file assets/mythsandlegends/blockstates/bloodstone_brick_wall.json
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_post"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side",
+        "uvlock": true
+      },
+      "when": {
+        "north": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "mythsandlegends:block/bloodstone_brick_wall_side_tall",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "tall"
+      }
+    }
+  ]
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone.json
+{
+  "variants": {
+    "thickness=base,vertical_direction=down": {
+      "model": "mythsandlegends:block/pointed_bloodstone_down_base"
+    },
+    "thickness=base,vertical_direction=up": {
+      "model": "mythsandlegends:block/pointed_bloodstone_up_base"
+    },
+    "thickness=frustum,vertical_direction=down": {
+      "model": "mythsandlegends:block/pointed_bloodstone_down_frustum"
+    },
+    "thickness=frustum,vertical_direction=up": {
+      "model": "mythsandlegends:block/pointed_bloodstone_up_frustum"
+    },
+    "thickness=middle,vertical_direction=down": {
+      "model": "mythsandlegends:block/pointed_bloodstone_down_middle"
+    },
+    "thickness=middle,vertical_direction=up": {
+      "model": "mythsandlegends:block/pointed_bloodstone_up_middle"
+    },
+    "thickness=tip,vertical_direction=down": {
+      "model": "mythsandlegends:block/pointed_bloodstone_down_tip"
+    },
+    "thickness=tip,vertical_direction=up": {
+      "model": "mythsandlegends:block/pointed_bloodstone_up_tip"
+    },
+    "thickness=tip_merge,vertical_direction=down": {
+      "model": "mythsandlegends:block/pointed_bloodstone_down_tip_merge"
+    },
+    "thickness=tip_merge,vertical_direction=up": {
+      "model": "mythsandlegends:block/pointed_bloodstone_up_tip_merge"
+    }
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_down_base.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_base"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_down_frustum.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_frustum"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_down_middle.json
+{
+  "parent": "cataclysm:block/pointed_icicle",
+  "textures": {
+    "cross": "cataclysm:block/pointed_icicle_down_middle"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_down_tip.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_tip"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_down_tip_merge.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_tip_merge"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_up_base.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_base"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_up_frustum.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_frustum"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_up_middle.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_middle"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_up_tip.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_tip"
+  }
+}
+## file assets/mythsandlegends/blockstates/pointed_bloodstone_up_tip_merge.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_tip_merge"
+  }
+}
+## file assets/mythsandlegends/blockstates/polished_bloodstone.json
+{
+  "variants": {
+    "": {
+      "model": "mythsandlegends:block/polished_bloodstone"
+    }
+  }
+}
+## file assets/mythsandlegends/blockstates/polished_bloodstone_slab.json
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mythsandlegends:block/polished_bloodstone_slab"
+    },
+    "type=double": {
+      "model": "mythsandlegends:block/polished_bloodstone"
+    },
+    "type=top": {
+      "model": "mythsandlegends:block/polished_bloodstone_slab_top"
+    }
+  }
+}
+## file assets/mythsandlegends/blockstates/polished_bloodstone_stairs.json
+{
+  "variants": {
+    "facing=east,half=bottom,shape=inner_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,shape=inner_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner"
+    },
+    "facing=east,half=bottom,shape=outer_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=bottom,shape=outer_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer"
+    },
+    "facing=east,half=bottom,shape=straight": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs"
+    },
+    "facing=east,half=top,shape=inner_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,shape=inner_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,shape=outer_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=east,half=top,shape=outer_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top,shape=straight": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=bottom,shape=inner_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,shape=inner_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,shape=outer_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=bottom,shape=outer_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom,shape=straight": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=top,shape=inner_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,shape=inner_right": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_inner",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top,shape=outer_left": {
+      "model": "mythsandlegends:block/polished_bloodstone_stairs_outer",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=north,half=top,shape=outer_right": {
+      "model
+## file assets/mythsandlegends/models/block/bloodstone_brick.json
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_slab.json
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "mythsandlegends:block/bloodstone_brick",
+    "side": "mythsandlegends:block/bloodstone_brick",
+    "top": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_slab_top.json
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "mythsandlegends:block/bloodstone_brick",
+    "side": "mythsandlegends:block/bloodstone_brick",
+    "top": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_stairs.json
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "mythsandlegends:block/bloodstone_brick",
+    "side": "mythsandlegends:block/bloodstone_brick",
+    "top": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_stairs_inner.json
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "mythsandlegends:block/bloodstone_brick",
+    "side": "mythsandlegends:block/bloodstone_brick",
+    "top": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_stairs_outer.json
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "mythsandlegends:block/bloodstone_brick",
+    "side": "mythsandlegends:block/bloodstone_brick",
+    "top": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_wall_post.json
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_wall_side.json
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/bloodstone_brick_wall_side_tall.json
+{
+  "parent": "minecraft:block/template_wall_side_tall",
+  "textures": {
+    "wall": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone.json
+{
+  "render_type": "cutout",
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "#cross"
+  },
+  "elements": [
+    {   "from": [ 0.8, 0, 8 ],
+      "to": [ 15.2, 16, 8 ],
+      "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
+      "shade": false,
+      "faces": {
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" }
+      }
+    },
+    {   "from": [ 8, 0, 0.8 ],
+      "to": [ 8, 16, 15.2 ],
+      "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45, "rescale": true },
+      "shade": false,
+      "faces": {
+        "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" },
+        "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#cross" }
+      }
+    }
+  ]
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_down_base.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_base"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_down_frustum.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_frustum"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_down_middle.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_middle"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_down_tip.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_tip"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_down_tip_merge.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_down_tip_merge"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_up_base.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_base"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_up_frustum.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_frustum"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_up_middle.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_middle"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_up_tip.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_tip"
+  }
+}
+## file assets/mythsandlegends/models/block/pointed_bloodstone_up_tip_merge.json
+{
+  "parent": "mythsandlegends:block/pointed_bloodstone",
+  "textures": {
+    "cross": "mythsandlegends:block/pointed_bloodstone_up_tip_merge"
+  }
+}
+## file assets/mythsandlegends/models/block/polished_bloodstone.json
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mythsandlegends:block/polished_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/block/polished_bloodstone_slab.json
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "mythsandlegends:block/polished_bloodstone",
+    "side": "mythsandlegends:block/polished_bloodstone",
+    "top": "mythsandlegends:block/polished_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/block/polished_bloodstone_slab_top.json
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "mythsandlegends:block/polished_bloodstone",
+    "side": "mythsandlegends:block/polished_bloodstone",
+    "top": "mythsandlegends:block/polished_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/block/polished_bloodstone_stairs.json
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "mythsandlegends:block/polished_bloodstone",
+    "side": "mythsandlegends:block/polished_bloodstone",
+    "top": "mythsandlegends:block/polished_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/block/polished_bloodstone_stairs_inner.json
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "mythsandlegends:block/polished_bloodstone",
+    "side": "mythsandlegends:block/polished_bloodstone",
+    "top": "mythsandlegends:block/polished_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/block/polished_bloodstone_stairs_outer.json
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "mythsandlegends:block/polished_bloodstone",
+    "side": "mythsandlegends:block/polished_bloodstone",
+    "top": "mythsandlegends:block/polished_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/item/blood_moon.json
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mythsandlegends:item/blood_moon"
+  }
+}
+## file assets/mythsandlegends/models/item/bloodstone_brick.json
+{
+  "parent": "mythsandlegends:block/bloodstone_brick"
+}
+## file assets/mythsandlegends/models/item/bloodstone_brick_slab.json
+{
+  "parent": "mythsandlegends:block/bloodstone_brick_slab"
+}
+## file assets/mythsandlegends/models/item/bloodstone_brick_stairs.json
+{
+  "parent": "mythsandlegends:block/bloodstone_brick_stairs"
+}
+## file assets/mythsandlegends/models/item/bloodstone_brick_wall.json
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "mythsandlegends:block/bloodstone_brick"
+  }
+}
+## file assets/mythsandlegends/models/item/music_disc_bloody_remnants.json
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mythsandlegends:item/music_disc_bloody_remnants"
+  }
+}
+## file assets/mythsandlegends/models/item/pointed_bloodstone.json
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mythsandlegends:item/pointed_bloodstone"
+  }
+}
+## file assets/mythsandlegends/models/item/polished_bloodstone.json
+{
+  "parent": "mythsandlegends:block/polished_bloodstone"
+}
+## file assets/mythsandlegends/models/item/polished_bloodstone_slab.json
+{
+  "parent": "mythsandlegends:block/polished_bloodstone_slab"
+}
+## file assets/mythsandlegends/models/item/polished_bloodstone_stairs.json
+{
+  "parent": "mythsandlegends:block/polished_bloodstone_stairs"
+}
+## file com/ovinter/mythsandlegends/client/config/
+
+## file data/mythsandlegends/loot_tables/blocks/bloodstone_brick.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mythsandlegends:bloodstone_brick"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/bloodstone_brick"
+}
+## file data/mythsandlegends/loot_tables/blocks/bloodstone_brick_slab.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "mythsandlegends:bloodstone_brick_slab",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "type": "double"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "mythsandlegends:bloodstone_brick_slab"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/bloodstone_brick_slab"
+}
+## file data/mythsandlegends/loot_tables/blocks/bloodstone_brick_stairs.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mythsandlegends:bloodstone_brick_stairs"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/bloodstone_brick_stairs"
+}
+## file data/mythsandlegends/loot_tables/blocks/bloodstone_brick_wall.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mythsandlegends:bloodstone_brick_wall"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/bloodstone_brick_wall"
+}
+## file data/mythsandlegends/loot_tables/blocks/pointed_bloodstone.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mythsandlegends:pointed_bloodstone"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/pointed_bloodstone"
+}
+## file data/mythsandlegends/loot_tables/blocks/polished_bloodstone.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mythsandlegends:polished_bloodstone"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/polished_bloodstone"
+}
+## file data/mythsandlegends/loot_tables/blocks/polished_bloodstone_slab.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "mythsandlegends:polished_bloodstone_slab",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "type": "double"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "mythsandlegends:polished_bloodstone_slab"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/polished_bloodstone_slab"
+}
+## file data/mythsandlegends/loot_tables/blocks/polished_bloodstone_stairs.json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mythsandlegends:polished_bloodstone_stairs"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mythsandlegends:blocks/polished_bloodstone_stairs"
+}
+## file data/mythsandlegends/worldgen/configured_feature/
+
+## file data/mythsandlegends/worldgen/configured_feature/abyss_bush.json
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "mythsandlegends:abyss_bush"
+            }
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 96,
+    "xz_spread": 7,
+    "y_spread": 3
+  }
+}
+## file data/mythsandlegends/worldgen/configured_feature/cast_shroom.json
+{
+  "type": "mythsandlegends:cast_shroom",
+  "config": {}
+}
+## file data/mythsandlegends/worldgen/configured_feature/giant_bone_hand.json
+{
+  "type": "mythsandlegends:giant_bone_hand",
+  "config": {}
+}
+## file data/mythsandlegends/worldgen/configured_feature/mourning_thorns.json
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "mythsandlegends:mourning_thorns"
+            }
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 96,
+    "xz_spread": 7,
+    "y_spread": 3
+  }
+}
+## file data/mythsandlegends/worldgen/configured_feature/umbral_spike.json
+{
+  "type": "mythsandlegends:umbral_spike",
+  "config": {}
+}
+# lang lines about the blood moon
+"advancements.mythsandlegends.dawn_of_the_living.description": "Survive a Blood Moon until sunrise.",
+"block.mythsandlegends.bloodstone_brick": "Bloodstone Bricks",
+"block.mythsandlegends.bloodstone_brick_stairs": "Bloodstone Bricks Stairs",
+"block.mythsandlegends.bloodstone_brick_slab": "Bloodstone Bricks Slab",
+"block.mythsandlegends.bloodstone_brick_wall": "Bloodstone Bricks Wall",
+"block.mythsandlegends.pointed_bloodstone": "Pointed Bloodstone",
+"block.mythsandlegends.polished_bloodstone":   "Polished Bloodstone",
+"block.mythsandlegends.polished_bloodstone_stairs": "Polished Bloodstone Stairs",
+"block.mythsandlegends.polished_bloodstone_slab": "Polished Bloodstone Slab",
+"item.mythsandlegends.music_disc_bloody_remnants": "Music Disc",
+"item.mythsandlegends.music_disc_bloody_remnants.desc": "oVinter - Bloody Remnants",
+"item.mythsandlegends.blood_moon": "Blood Moon Icon",
+"jukebox_song.mythsandlegends.bloody_remnants": "An ancient melody echoes through bloodstained ruins.",
+"text.mythsandlegends.blood_moon_start.title": "§4The Veil Grows Thin",
+"text.mythsandlegends.blood_moon_start.subtitle": "The dead remember the way home.",
+"text.mythsandlegends.blood_moon_start.message": "§7An unsettling chill spreads as the moon drinks the night.",
+"text.mythsandlegends.blood_moon_end.title": "§7The Veil Seals",
+"text.mythsandlegends.blood_moon_end.subtitle": "The restless dead return to silence.",
+"text.mythsandlegends.blood_moon_end.message": "§7The oppressive presence that haunted the night has lifted.",
+"text.mythsandlegends.blood_moon_warning.message": "§7An unsettling silence falls upon the land. Something stirs with the coming dusk.",
+# config files of Myths & Legends (server and client)
+## game/config/legendary_monsters-common.toml
+
+["Item Settings"]
+
+	["Item Settings"."General Item Settings"]
+		#allow Soul Great Sword Parry Ability
+		"Allow Soul Great Sword Parry Ability" = true
+
+	["Item Settings"."The Tesseract"]
+		#The Tesseract Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Damage multiplier" = 1.0
+		#The Tesseract Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Ability Damage multiplier" = 1.0
+		#The Tesseract Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Speed multiplier" = 1.0
+		#The Tesseract Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Range multiplier" = 1.0
+
+	["Item Settings"."Fiery Jaw"]
+		#Fiery Jaw Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Fiery Jaw Damage multiplier" = 1.0
+		#Fiery Jaw Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Fiery Jaw Ability Damage multiplier" = 1.0
+		#Fiery Jaw Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Fiery Jaw Speed multiplier" = 1.0
+
+	["Item Settings"."Spiky Shield"]
+		#Spiky Shield Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Spiky Shield Damage multiplier" = 1.0
+
+	["Item Settings"."Buckler Of Annihilation"]
+		#Buckler Of Annihilation Slash Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Buckler Of Annihilation Slash Damage multiplier" = 1.0
+		#Buckler Of Annihilation Bomb Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Buckler Of Annihilation Bomb Damage multiplier" = 1.0
+
+	["Item Settings"."Knights Sword"]
+		#Knights Sword Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Knights Sword Damage multiplier" = 1.0
+		#Knights Sword Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Knights Sword Speed multiplier" = 1.0
+
+	["Item Settings"."Guards Axe"]
+		#Guards Axe Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Guards Axe Damage multiplier" = 1.0
+		#Guards Axe Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Guards Axe Range multiplier" = 1.0
+		#Guards Axe Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Guards Axe Speed multiplier" = 1.0
+
+	["Item Settings"."Somber Key"]
+		#Somber Key Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Somber Key Damage multiplier" = 1.0
+		#Somber Key Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Somber Key Speed multiplier" = 1.0
+
+	["Item Settings"."Anchor Handle"]
+		#Anchor Handle Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Anchor Handle Damage multiplier" = 1.0
+		#Anchor Handle Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Anchor Handle Speed multiplier" = 1.0
+
+	["Item Settings"."Monstrous Anchor"]
+		#Monstrous Anchor Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Damage multiplier" = 1.0
+		#Monstrous Anchor Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Ability Damage multiplier" = 1.0
+		#Monstrous Anchor Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Speed multiplier" = 1.0
+		#Monstrous Anchor Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Range multiplier" = 1.0
+
+	["Item Settings"."Resurrected Javelin"]
+		#Resurrected Javelin Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Resurrected Javelin Damage multiplier" = 1.0
+		#Resurrected Javelin Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Resurrected Javelin Speed multiplier" = 1.0
+		#Resurrected Javelin Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Resurrected Javelin Range multiplier" = 1.0
+
+	["Item Settings"."Shattered Great Sword"]
+		#Shattered Great Sword Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Shattered Great Sword Damage Multiplier" = 1.0
+		#Shattered Great Sword Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Shattered Great Sword Speed multiplier" = 1.0
+		#Shattered Great Sword Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Shattered Great Sword Range multiplier" = 1.0
+
+	["Item Settings"."Wand Of Clouds"]
+		#Wand Of Clouds Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Wand Of Clouds Damage multiplier" = 1.0
+		#Wand Of Clouds Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Wand Of Clouds Ability Damage multiplier" = 1.0
+		#Wand Of Clouds Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Wand Of Clouds Speed multiplier" = 1.0
+
+	["Item Settings"."Mossy Hammer"]
+		#Mossy Hammer Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Mossy Hammer multiplier" = 1.0
+		#Mossy Hammer Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Mossy Hammer Ability Damage multiplier" = 1.0
+		#Mossy Hammer Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Mossy Hammer Speed multiplier" = 1.0
+
+	["Item Settings"."Chorus Blade"]
+		#Chorus Blade Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Chorus Blade multiplier" = 1.0
+		#Chorus Blade Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Chorus Blade Speed multiplier" = 1.0
+
+	["Item Settings"."Soul Great Sword"]
+		#Soul Great Sword Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Damage multiplier" = 1.0
+		#Soul Great Sword Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Ability Damage multiplier" = 1.0
+		#Soul Great Sword Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Speed multiplier" = 1.0
+		#Soul Great Sword Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Range multiplier" = 1.0
+
+	["Item Settings"."Dinosaur Bone Club"]
+		#Dinosaur Bone Club Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Dinosaur Bone Club Damage multiplier" = 1.0
+		#Dinosaur Bone Club Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Dinosaur Bone Club Ability Damage multiplier" = 1.0
+		#Dinosaur Bone Club Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Dinosaur Bone Club Speed multiplier" = 1.0
+
+	["Item Settings"."Axe Of Lightning"]
+		#Axe Of Lightning Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Axe Of Lightning Damage multiplier" = 1.0
+		#Axe Of Lightning Bolt Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Axe Of Lightning Bolt Damage multiplier" = 1.0
+		#Axe Of Lightning Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Axe Of Lightning Speed multiplier" = 1.0
+
+	["Item Settings"."The Great Frost"]
+		#The Great Frost Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Great Frost Damage multiplier" = 1.0
+		#The Great Frost Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Great Frost Ability Damage multiplier" = 1.0
+		#The Great Fr
+## game/config/mythsandlegends-common.toml
+
+[music]
+	#Enable or disable Boss Music
+	enable = true
+
+[mobs]
+	#Enable or disable Imp
+	disable_imp = false
+
+[imp]
+	#Health for Imp
+	#Range: 2.5 ~ 1.7976931348623157E308
+	health = 5.0
+	#Damage for Imp
+	#Range: 1.5 ~ 1.7976931348623157E308
+	damage = 3.0
+	#Flying Speed for Imp
+	#Range: 0.5 ~ 1.7976931348623157E308
+	flying_speed = 0.6
+
+[imp_clone]
+	#Health for Imp Clone
+	#Range: 1.25 ~ 1.7976931348623157E308
+	health = 2.5
+	#Damage for Imp Clone
+	#Range: 0.75 ~ 1.7976931348623157E308
+	damage = 1.5
+	#Flying Speed for Imp Clone
+	#Range: 0.5 ~ 1.7976931348623157E308
+	flying_speed = 0.6
+
+[gargoyle]
+	#Health for Gargoyle
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 60.0
+	#Damage for Gargoyle
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Gargoyle
+	#Range: 0.5 ~ 2.0
+	attack_knockback = 1.2
+	#Knockback Resistance for Gargoyle
+	#Range: 0.3 ~ 1.0
+	knockback_resistance = 1.0
+
+[black_charro]
+	#Health for Black Charro
+	#Range: 300.0 ~ 1.7976931348623157E308
+	health = 370.0
+	#Armor for Black Charro
+	#Range: 0.0 ~ 1.7976931348623157E308
+	armor = 4.0
+	#Damage for Black Charro
+	#Range: 3.0 ~ 1.7976931348623157E308
+	damage = 5.0
+	#Knockback Resistance for Black Charro
+	#Range: 0.25 ~ 1.0
+	knockback_resistance = 1.0
+	#Message Cooldown for Black Charro
+	#Range: > 300
+	message_cooldown = 350
+
+[condemned]
+	#Health for Condemned Soul
+	#Range: 8.0 ~ 1.7976931348623157E308
+	health = 12.0
+	#Damage for Condemned Soul
+	#Range: 2.0 ~ 1.7976931348623157E308
+	damage = 2.0
+
+[possessed_armor]
+	#Health for Possessed Armor
+	#Range: 15.0 ~ 1.7976931348623157E308
+	health = 30.0
+	#Armor value for Possessed Armor
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor = 8.0
+	#Armor toughness for Possessed Armor
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor_toughness = 8.0
+	#Damage for Possessed Armor
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Possessed Armor
+	#Range: 0.4 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor
+	#Range: 0.4 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[possessed_armor_archer]
+	#Health for Possessed Armor Archer
+	#Range: 15.0 ~ 1.7976931348623157E308
+	health = 30.0
+	#Armor value for Possessed Armor Archer
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor = 8.0
+	#Armor toughness for Possessed Armor Archer
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor_toughness = 8.0
+	#Damage for Possessed Armor Archer
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Possessed Armor Archer
+	#Range: 0.4 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor Archer
+	#Range: 0.4 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[possessed_armor_lancer]
+	#Health for Possessed Armor Lancer
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 60.0
+	#Armor value for Possessed Armor Lancer
+	#Range: 5.0 ~ 1.7976931348623157E308
+	armor = 10.0
+	#Armor toughness for Possessed Armor Lancer
+	#Range: 5.0 ~ 1.7976931348623157E308
+	armor_toughness = 8.0
+	#Damage for Possessed Armor Lancer
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Possessed Armor Lancer
+	#Range: 0.4 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor Lancer
+	#Range: 0.5 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[possessed_armor_inquisitor]
+	#Health for Possessed Armor Inquisitor
+	#Range: 120.0 ~ 1.7976931348623157E308
+	health = 120.0
+	#Armor value for Possessed Armor Inquisitor
+	#Range: 10.0 ~ 1.7976931348623157E308
+	armor = 12.0
+	#Armor toughness for Possessed Armor Inquisitor
+	#Range: 10.0 ~ 1.7976931348623157E308
+	armor_toughness = 12.0
+	#Damage for Possessed Armor Inquisitor
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 8.0
+	#Attack Knockback for Possessed Armor Inquisitor
+	#Range: 0.6 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor Inquisitor
+	#Range: 0.6 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[alp]
+	#Health for Alp
+	#Range: 10.0 ~ 1.7976931348623157E308
+	health = 10.0
+
+[abaddon]
+	#Health for Abaddon
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 45.0
+	#Armor value for Abaddon
+	#Range: 3.5 ~ 1.7976931348623157E308
+	armor = 3.5
+	#Damage for Abaddon
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 6.5
+
+[scorched_sentinel]
+	#Health for Scorched Sentinel
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 35.0
+	#Damage for Scorched Sentinel
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 6.0
+
+[karakondjul]
+	#Health for Karakondjul
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 50.0
+	#Armor for Karakondjul
+	#Range: 2.5 ~ 1.7976931348623157E308
+	armor = 5.0
+	#Armor Toughness for Karakondjul
+	#Range: 1.5 ~ 1.7976931348623157E308
+	armor_toughness = 2.5
+	#Damage for Karakondjul
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 5.5
+	#Knockback Resistance for Karakondjul
+	#Range: 0.2 ~ 1.7976931348623157E308
+	knockback_resistance = 0.3
+
+[lampad]
+	#Health for Lampad
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 35.0
+	#Armor for Lampad
+	#Range: 0.0 ~ 1.7976931348623157E308
+	armor = 2.0
+	#Damage for Lampad
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 6.0
+
+[amarok]
+	#Health for Amarok
+	#Range: 50.0 ~ 1.7976931348623157E308
+	health = 100.0
+	#Armor for Amarok
+	#Range: 2.0 ~ 6.0
+	armor = 4.0
+	#Damage for Amarok
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 8.0
+
+[eidolon]
+	#Health for Eidolon
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 45.0
+	#Damage for Eidolon
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 6.5
+	#Knockback Resistance for Eidolon
+	#Range: 0.5 ~ 1.0
+	knockback_resistance = 0.8
+
+[jiangshi]
+	#Health for Jiangshi
+	#Range: 15.0 ~ 1.7976931348623157E308
+	health = 25.0
+	#Armor for Jiangshi
+	#Range: 1.0 ~ 1.7976931348623157E308
+	armor = 2.0
+	#Damage for Jiangshi
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 4.0
+
+[gearbound_headsman]
+	#Health for Gearbound Headsman
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 45.0
+	#Armor Toughness for Gearbound Headsman
+	#Range:
+## game/config/openloader/data/legionwarex/data/born_in_chaos_v1/forge/biome_modifier/bloody_gadfly_biome_modifier.json
+{
+  "type": "forge:none"
+}
+
+## game/config/openloader/data/legionwarex/data/ddenizens/forge/biome_modifier/bloody_bones.json
+{
+  "type": "forge:none"
+}
+
+## server/config/legendary_monsters-common.toml
+
+["Item Settings"]
+
+	["Item Settings"."General Item Settings"]
+		#allow Soul Great Sword Parry Ability
+		"Allow Soul Great Sword Parry Ability" = true
+
+	["Item Settings"."The Tesseract"]
+		#The Tesseract Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Damage multiplier" = 1.0
+		#The Tesseract Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Ability Damage multiplier" = 1.0
+		#The Tesseract Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Speed multiplier" = 1.0
+		#The Tesseract Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Tesseract Range multiplier" = 1.0
+
+	["Item Settings"."Fiery Jaw"]
+		#Fiery Jaw Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Fiery Jaw Damage multiplier" = 1.0
+		#Fiery Jaw Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Fiery Jaw Ability Damage multiplier" = 1.0
+		#Fiery Jaw Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Fiery Jaw Speed multiplier" = 1.0
+
+	["Item Settings"."Spiky Shield"]
+		#Spiky Shield Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Spiky Shield Damage multiplier" = 1.0
+
+	["Item Settings"."Buckler Of Annihilation"]
+		#Buckler Of Annihilation Slash Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Buckler Of Annihilation Slash Damage multiplier" = 1.0
+		#Buckler Of Annihilation Bomb Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Buckler Of Annihilation Bomb Damage multiplier" = 1.0
+
+	["Item Settings"."Knights Sword"]
+		#Knights Sword Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Knights Sword Damage multiplier" = 1.0
+		#Knights Sword Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Knights Sword Speed multiplier" = 1.0
+
+	["Item Settings"."Guards Axe"]
+		#Guards Axe Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Guards Axe Damage multiplier" = 1.0
+		#Guards Axe Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Guards Axe Range multiplier" = 1.0
+		#Guards Axe Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Guards Axe Speed multiplier" = 1.0
+
+	["Item Settings"."Somber Key"]
+		#Somber Key Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Somber Key Damage multiplier" = 1.0
+		#Somber Key Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Somber Key Speed multiplier" = 1.0
+
+	["Item Settings"."Anchor Handle"]
+		#Anchor Handle Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Anchor Handle Damage multiplier" = 1.0
+		#Anchor Handle Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Anchor Handle Speed multiplier" = 1.0
+
+	["Item Settings"."Monstrous Anchor"]
+		#Monstrous Anchor Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Damage multiplier" = 1.0
+		#Monstrous Anchor Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Ability Damage multiplier" = 1.0
+		#Monstrous Anchor Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Speed multiplier" = 1.0
+		#Monstrous Anchor Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Monstrous Anchor Range multiplier" = 1.0
+
+	["Item Settings"."Resurrected Javelin"]
+		#Resurrected Javelin Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Resurrected Javelin Damage multiplier" = 1.0
+		#Resurrected Javelin Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Resurrected Javelin Speed multiplier" = 1.0
+		#Resurrected Javelin Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Resurrected Javelin Range multiplier" = 1.0
+
+	["Item Settings"."Shattered Great Sword"]
+		#Shattered Great Sword Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Shattered Great Sword Damage Multiplier" = 1.0
+		#Shattered Great Sword Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Shattered Great Sword Speed multiplier" = 1.0
+		#Shattered Great Sword Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Shattered Great Sword Range multiplier" = 1.0
+
+	["Item Settings"."Wand Of Clouds"]
+		#Wand Of Clouds Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Wand Of Clouds Damage multiplier" = 1.0
+		#Wand Of Clouds Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Wand Of Clouds Ability Damage multiplier" = 1.0
+		#Wand Of Clouds Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Wand Of Clouds Speed multiplier" = 1.0
+
+	["Item Settings"."Mossy Hammer"]
+		#Mossy Hammer Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Mossy Hammer multiplier" = 1.0
+		#Mossy Hammer Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Mossy Hammer Ability Damage multiplier" = 1.0
+		#Mossy Hammer Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Mossy Hammer Speed multiplier" = 1.0
+
+	["Item Settings"."Chorus Blade"]
+		#Chorus Blade Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Chorus Blade multiplier" = 1.0
+		#Chorus Blade Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Chorus Blade Speed multiplier" = 1.0
+
+	["Item Settings"."Soul Great Sword"]
+		#Soul Great Sword Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Damage multiplier" = 1.0
+		#Soul Great Sword Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Ability Damage multiplier" = 1.0
+		#Soul Great Sword Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Speed multiplier" = 1.0
+		#Soul Great Sword Range Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Soul Great Sword Range multiplier" = 1.0
+
+	["Item Settings"."Dinosaur Bone Club"]
+		#Dinosaur Bone Club Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Dinosaur Bone Club Damage multiplier" = 1.0
+		#Dinosaur Bone Club Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Dinosaur Bone Club Ability Damage multiplier" = 1.0
+		#Dinosaur Bone Club Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Dinosaur Bone Club Speed multiplier" = 1.0
+
+	["Item Settings"."Axe Of Lightning"]
+		#Axe Of Lightning Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Axe Of Lightning Damage multiplier" = 1.0
+		#Axe Of Lightning Bolt Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Axe Of Lightning Bolt Damage multiplier" = 1.0
+		#Axe Of Lightning Speed Multiplier
+		#Range: 0.0 ~ 1000.0
+		"Axe Of Lightning Speed multiplier" = 1.0
+
+	["Item Settings"."The Great Frost"]
+		#The Great Frost Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Great Frost Damage multiplier" = 1.0
+		#The Great Frost Ability Damage Multiplier
+		#Range: 0.0 ~ 1000.0
+		"The Great Frost Ability Damage multiplier" = 1.0
+		#The Great Fr
+## server/config/mythsandlegends-common.toml
+
+[music]
+	#Enable or disable Boss Music
+	enable = true
+
+[mobs]
+	#Enable or disable Imp
+	disable_imp = false
+
+[imp]
+	#Health for Imp
+	#Range: 2.5 ~ 1.7976931348623157E308
+	health = 5.0
+	#Damage for Imp
+	#Range: 1.5 ~ 1.7976931348623157E308
+	damage = 3.0
+	#Flying Speed for Imp
+	#Range: 0.5 ~ 1.7976931348623157E308
+	flying_speed = 0.6
+
+[imp_clone]
+	#Health for Imp Clone
+	#Range: 1.25 ~ 1.7976931348623157E308
+	health = 2.5
+	#Damage for Imp Clone
+	#Range: 0.75 ~ 1.7976931348623157E308
+	damage = 1.5
+	#Flying Speed for Imp Clone
+	#Range: 0.5 ~ 1.7976931348623157E308
+	flying_speed = 0.6
+
+[gargoyle]
+	#Health for Gargoyle
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 60.0
+	#Damage for Gargoyle
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Gargoyle
+	#Range: 0.5 ~ 2.0
+	attack_knockback = 1.2
+	#Knockback Resistance for Gargoyle
+	#Range: 0.3 ~ 1.0
+	knockback_resistance = 1.0
+
+[black_charro]
+	#Health for Black Charro
+	#Range: 300.0 ~ 1.7976931348623157E308
+	health = 370.0
+	#Armor for Black Charro
+	#Range: 0.0 ~ 1.7976931348623157E308
+	armor = 4.0
+	#Damage for Black Charro
+	#Range: 3.0 ~ 1.7976931348623157E308
+	damage = 5.0
+	#Knockback Resistance for Black Charro
+	#Range: 0.25 ~ 1.0
+	knockback_resistance = 1.0
+	#Message Cooldown for Black Charro
+	#Range: > 300
+	message_cooldown = 350
+
+[condemned]
+	#Health for Condemned Soul
+	#Range: 8.0 ~ 1.7976931348623157E308
+	health = 12.0
+	#Damage for Condemned Soul
+	#Range: 2.0 ~ 1.7976931348623157E308
+	damage = 2.0
+
+[possessed_armor]
+	#Health for Possessed Armor
+	#Range: 15.0 ~ 1.7976931348623157E308
+	health = 30.0
+	#Armor value for Possessed Armor
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor = 8.0
+	#Armor toughness for Possessed Armor
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor_toughness = 8.0
+	#Damage for Possessed Armor
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Possessed Armor
+	#Range: 0.4 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor
+	#Range: 0.4 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[possessed_armor_archer]
+	#Health for Possessed Armor Archer
+	#Range: 15.0 ~ 1.7976931348623157E308
+	health = 30.0
+	#Armor value for Possessed Armor Archer
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor = 8.0
+	#Armor toughness for Possessed Armor Archer
+	#Range: 4.0 ~ 1.7976931348623157E308
+	armor_toughness = 8.0
+	#Damage for Possessed Armor Archer
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Possessed Armor Archer
+	#Range: 0.4 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor Archer
+	#Range: 0.4 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[possessed_armor_lancer]
+	#Health for Possessed Armor Lancer
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 60.0
+	#Armor value for Possessed Armor Lancer
+	#Range: 5.0 ~ 1.7976931348623157E308
+	armor = 10.0
+	#Armor toughness for Possessed Armor Lancer
+	#Range: 5.0 ~ 1.7976931348623157E308
+	armor_toughness = 8.0
+	#Damage for Possessed Armor Lancer
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 6.0
+	#Attack Knockback for Possessed Armor Lancer
+	#Range: 0.4 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor Lancer
+	#Range: 0.5 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[possessed_armor_inquisitor]
+	#Health for Possessed Armor Inquisitor
+	#Range: 120.0 ~ 1.7976931348623157E308
+	health = 120.0
+	#Armor value for Possessed Armor Inquisitor
+	#Range: 10.0 ~ 1.7976931348623157E308
+	armor = 12.0
+	#Armor toughness for Possessed Armor Inquisitor
+	#Range: 10.0 ~ 1.7976931348623157E308
+	armor_toughness = 12.0
+	#Damage for Possessed Armor Inquisitor
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 8.0
+	#Attack Knockback for Possessed Armor Inquisitor
+	#Range: 0.6 ~ 1.7976931348623157E308
+	attack_knockback = 1.0
+	#Knockback Resistance for Possessed Armor Inquisitor
+	#Range: 0.6 ~ 1.7976931348623157E308
+	knockback_resistance = 1.0
+
+[alp]
+	#Health for Alp
+	#Range: 10.0 ~ 1.7976931348623157E308
+	health = 10.0
+
+[abaddon]
+	#Health for Abaddon
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 45.0
+	#Armor value for Abaddon
+	#Range: 3.5 ~ 1.7976931348623157E308
+	armor = 3.5
+	#Damage for Abaddon
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 6.5
+
+[scorched_sentinel]
+	#Health for Scorched Sentinel
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 35.0
+	#Damage for Scorched Sentinel
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 6.0
+
+[karakondjul]
+	#Health for Karakondjul
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 50.0
+	#Armor for Karakondjul
+	#Range: 2.5 ~ 1.7976931348623157E308
+	armor = 5.0
+	#Armor Toughness for Karakondjul
+	#Range: 1.5 ~ 1.7976931348623157E308
+	armor_toughness = 2.5
+	#Damage for Karakondjul
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 5.5
+	#Knockback Resistance for Karakondjul
+	#Range: 0.2 ~ 1.7976931348623157E308
+	knockback_resistance = 0.3
+
+[lampad]
+	#Health for Lampad
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 35.0
+	#Armor for Lampad
+	#Range: 0.0 ~ 1.7976931348623157E308
+	armor = 2.0
+	#Damage for Lampad
+	#Range: 5.0 ~ 1.7976931348623157E308
+	damage = 6.0
+
+[amarok]
+	#Health for Amarok
+	#Range: 50.0 ~ 1.7976931348623157E308
+	health = 100.0
+	#Armor for Amarok
+	#Range: 2.0 ~ 6.0
+	armor = 4.0
+	#Damage for Amarok
+	#Range: 6.0 ~ 1.7976931348623157E308
+	damage = 8.0
+
+[eidolon]
+	#Health for Eidolon
+	#Range: 35.0 ~ 1.7976931348623157E308
+	health = 45.0
+	#Damage for Eidolon
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 6.5
+	#Knockback Resistance for Eidolon
+	#Range: 0.5 ~ 1.0
+	knockback_resistance = 0.8
+
+[jiangshi]
+	#Health for Jiangshi
+	#Range: 15.0 ~ 1.7976931348623157E308
+	health = 25.0
+	#Armor for Jiangshi
+	#Range: 1.0 ~ 1.7976931348623157E308
+	armor = 2.0
+	#Damage for Jiangshi
+	#Range: 4.0 ~ 1.7976931348623157E308
+	damage = 4.0
+
+[gearbound_headsman]
+	#Health for Gearbound Headsman
+	#Range: 30.0 ~ 1.7976931348623157E308
+	health = 45.0
+	#Armor Toughness for Gearbound Headsman
+	#Range:
+## server/config/openloader/data/legionwarex/data/born_in_chaos_v1/forge/biome_modifier/bloody_gadfly_biome_modifier.json
+{
+  "type": "forge:none"
+}
+
+## server/config/openloader/data/legionwarex/data/ddenizens/forge/biome_modifier/bloody_bones.json
+{
+  "type": "forge:none"
+}
+
+## mentions in game/config/sound_physics_remastered/allowed_sounds.properties
+mythsandlegends\:blood_moon_event=true
+mythsandlegends\:blood_moon_warning=true
+## mentions in game/config/ezvcsurvival/generalsounds.json
+"mythsandlegends:blood_moon_warning": {
+"mythsandlegends:blood_moon_event": {
+## mentions in server/config/ezvcsurvival/generalsounds.json
+"mythsandlegends:blood_moon_warning": {
+"mythsandlegends:blood_moon_event": {
+# pumpkin folk: gravity and flying hints
+## MrPumpkinEntity
+37: ldc           #125                // float 0.6f
+43: new           #131                // class net/minecraft/world/entity/ai/control/FlyingMoveControl
+51: invokespecial #134                // Method net/minecraft/world/entity/ai/control/FlyingMoveControl."<init>":(Lnet/minecraft/world/entity/Mob;IZ)V
+25: ldc           #167                // String undefined
+37: ldc           #171                // String mrpumpkin_aggressive
+0: new           #198                // class net/minecraft/world/entity/ai/navigation/FlyingPathNavigation
+6: invokespecial #201                // Method net/minecraft/world/entity/ai/navigation/FlyingPathNavigation."<init>":(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V
+public boolean m_142535_(float, float, net.minecraft.world.damagesource.DamageSource);
+public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+protected void m_7840_(double, boolean, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos);
+public void m_20242_(boolean);
+2: invokespecial #389                // Method net/minecraft/world/entity/monster/Monster.m_20242_:(Z)V
+6: invokevirtual #394                // Method m_20242_:(Z)V
+23: ldc_w         #492                // float -0.15f
+34: ldc_w         #493                // float 0.15f
+## MrsPumpkinEntity
+38: ldc           #126                // float 3.0f
+25: ldc           #159                // String undefined
+37: ldc           #163                // String mrspumpkin
+118: ldc           #238                // float 15.0f
+public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+public void m_6504_(net.minecraft.world.entity.LivingEntity, float);
+23: ldc_w         #478                // float -0.15f
+34: ldc_w         #479                // float 0.15f
+## SenorPumpkinEntity
+37: ldc           #123                // float 0.6f
+43: new           #129                // class net/minecraft/world/entity/ai/control/FlyingMoveControl
+51: invokespecial #132                // Method net/minecraft/world/entity/ai/control/FlyingMoveControl."<init>":(Lnet/minecraft/world/entity/Mob;IZ)V
+25: ldc           #165                // String undefined
+37: ldc           #169                // String senorpumpkin
+0: new           #196                // class net/minecraft/world/entity/ai/navigation/FlyingPathNavigation
+6: invokespecial #199                // Method net/minecraft/world/entity/ai/navigation/FlyingPathNavigation."<init>":(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V
+77: ldc           #235                // float 0.5f
+public boolean m_142535_(float, float, net.minecraft.world.damagesource.DamageSource);
+public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+protected void m_7840_(double, boolean, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos);
+public void m_20242_(boolean);
+2: invokespecial #400                // Method net/minecraft/world/entity/monster/Monster.m_20242_:(Z)V
+6: invokevirtual #405                // Method m_20242_:(Z)V
+23: ldc_w         #501                // float -0.15f
+34: ldc_w         #502                // float 0.15f
+## PumpkinBruiserEntity
+38: ldc           #121                // float 1.6f
+25: ldc           #154                // String undefined
+37: ldc           #158                // String pumpkinbruiser
+7: ldc           #254                // String born_in_chaos_v1:zombie_brute_idle
+22: ldc_w         #269                // float 0.15f
+public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+23: ldc_w         #454                // float -0.15f
+34: ldc_w         #269                // float 0.15f
+## SirPumpkinheadEntity
+37: ldc           #121                // float 1.6f
+25: ldc           #154                // String undefined
+37: ldc           #158                // String pumpkinheadrider
+92: ldc           #222                // float 20.0f
+7: ldc           #253                // String born_in_chaos_v1:haha
+22: ldc_w         #268                // float 0.15f
+public boolean m_6469_(net.minecraft.world.damagesource.DamageSource, float);
+23: ldc_w         #484                // float -0.15f
+34: ldc_w         #268                // float 0.15f
+## assets/born_in_chaos_v1/animations/mrpumpkin.animation.json: animations []
+## assets/born_in_chaos_v1/animations/mrspumpkin.animation.json: animations []
+## assets/born_in_chaos_v1/animations/pumpkinbruiser.animation.json: animations []
+## assets/born_in_chaos_v1/animations/senorpumpkin.animation.json: animations []

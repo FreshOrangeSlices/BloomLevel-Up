@@ -2,30 +2,2938 @@
  "options": "shots/game/options.txt",
  "bindings": [
   {
-   "binding": "iris.keybind.reload",
+   "binding": "key.attack",
+   "key": "key.mouse.left",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.mouse.left",
+   "category": "Gameplay",
+   "name": "Attack/Destroy"
+  },
+  {
+   "binding": "key.use",
+   "key": "key.mouse.right",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.mouse.right",
+   "category": "Gameplay",
+   "name": "Use Item/Place Block"
+  },
+  {
+   "binding": "key.forward",
+   "key": "key.keyboard.w",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.w",
+   "category": "Movement",
+   "name": "Walk Forwards"
+  },
+  {
+   "binding": "key.left",
+   "key": "key.keyboard.a",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.a",
+   "category": "Movement",
+   "name": "Strafe Left"
+  },
+  {
+   "binding": "key.back",
+   "key": "key.keyboard.s",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.s",
+   "category": "Movement",
+   "name": "Walk Backwards"
+  },
+  {
+   "binding": "key.right",
+   "key": "key.keyboard.d",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.d",
+   "category": "Movement",
+   "name": "Strafe Right"
+  },
+  {
+   "binding": "key.jump",
+   "key": "key.keyboard.space",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.space",
+   "category": "Movement",
+   "name": "Jump"
+  },
+  {
+   "binding": "key.sneak",
+   "key": "key.keyboard.left.shift",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.left.shift",
+   "category": "Movement",
+   "name": "Sneak"
+  },
+  {
+   "binding": "key.sprint",
+   "key": "key.keyboard.left.control",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.left.control",
+   "category": "Movement",
+   "name": "Sprint"
+  },
+  {
+   "binding": "key.drop",
+   "key": "key.keyboard.q",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.q",
+   "category": "Inventory",
+   "name": "Drop Selected Item"
+  },
+  {
+   "binding": "key.inventory",
+   "key": "key.keyboard.e",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.e",
+   "category": "Inventory",
+   "name": "Open/Close Inventory"
+  },
+  {
+   "binding": "key.chat",
+   "key": "key.keyboard.t",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.t",
+   "category": "Multiplayer",
+   "name": "Open Chat"
+  },
+  {
+   "binding": "key.playerlist",
+   "key": "key.keyboard.tab",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.tab",
+   "category": "Multiplayer",
+   "name": "List Players"
+  },
+  {
+   "binding": "key.pickItem",
+   "key": "key.mouse.middle",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.mouse.middle",
+   "category": "Gameplay",
+   "name": "Pick Block"
+  },
+  {
+   "binding": "key.command",
+   "key": "key.keyboard.slash",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.slash",
+   "category": "Multiplayer",
+   "name": "Open Command"
+  },
+  {
+   "binding": "key.socialInteractions",
+   "key": "key.keyboard.p",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.p",
+   "category": "Multiplayer",
+   "name": "Social Interactions Screen"
+  },
+  {
+   "binding": "key.screenshot",
+   "key": "key.keyboard.f2",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.f2",
+   "category": "Miscellaneous",
+   "name": "Take Screenshot"
+  },
+  {
+   "binding": "key.togglePerspective",
+   "key": "key.keyboard.f5",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.f5",
+   "category": "Miscellaneous",
+   "name": "Toggle Perspective"
+  },
+  {
+   "binding": "key.smoothCamera",
    "key": "key.keyboard.unknown",
-   "name": ""
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Miscellaneous",
+   "name": "Toggle Cinematic Camera"
+  },
+  {
+   "binding": "key.fullscreen",
+   "key": "key.keyboard.f11",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.f11",
+   "category": "Miscellaneous",
+   "name": "Toggle Fullscreen"
+  },
+  {
+   "binding": "key.spectatorOutlines",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Miscellaneous",
+   "name": "Highlight Players (Spectators)"
+  },
+  {
+   "binding": "key.swapOffhand",
+   "key": "key.keyboard.f",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.f",
+   "category": "Inventory",
+   "name": "Swap Item With Offhand"
+  },
+  {
+   "binding": "key.saveToolbarActivator",
+   "key": "key.keyboard.c",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.c",
+   "category": "Creative Mode",
+   "name": "Save Hotbar Activator"
+  },
+  {
+   "binding": "key.loadToolbarActivator",
+   "key": "key.keyboard.x",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.x",
+   "category": "Creative Mode",
+   "name": "Load Hotbar Activator"
+  },
+  {
+   "binding": "key.advancements",
+   "key": "key.keyboard.l",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.l",
+   "category": "Miscellaneous",
+   "name": "Advancements"
+  },
+  {
+   "binding": "key.hotbar.1",
+   "key": "key.keyboard.1",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.1",
+   "category": "Inventory",
+   "name": "Hotbar Slot 1"
+  },
+  {
+   "binding": "key.hotbar.2",
+   "key": "key.keyboard.2",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.2",
+   "category": "Inventory",
+   "name": "Hotbar Slot 2"
+  },
+  {
+   "binding": "key.hotbar.3",
+   "key": "key.keyboard.3",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.3",
+   "category": "Inventory",
+   "name": "Hotbar Slot 3"
+  },
+  {
+   "binding": "key.hotbar.4",
+   "key": "key.keyboard.4",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.4",
+   "category": "Inventory",
+   "name": "Hotbar Slot 4"
+  },
+  {
+   "binding": "key.hotbar.5",
+   "key": "key.keyboard.5",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.5",
+   "category": "Inventory",
+   "name": "Hotbar Slot 5"
+  },
+  {
+   "binding": "key.hotbar.6",
+   "key": "key.keyboard.6",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.6",
+   "category": "Inventory",
+   "name": "Hotbar Slot 6"
+  },
+  {
+   "binding": "key.hotbar.7",
+   "key": "key.keyboard.7",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.7",
+   "category": "Inventory",
+   "name": "Hotbar Slot 7"
+  },
+  {
+   "binding": "key.hotbar.8",
+   "key": "key.keyboard.8",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.8",
+   "category": "Inventory",
+   "name": "Hotbar Slot 8"
+  },
+  {
+   "binding": "key.hotbar.9",
+   "key": "key.keyboard.9",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.9",
+   "category": "Inventory",
+   "name": "Hotbar Slot 9"
+  },
+  {
+   "binding": "key.entityculling.toggle",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "EntityCulling",
+   "name": "Debug toggle culling"
+  },
+  {
+   "binding": "key.craftingtweaks.rotate",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Rotate Grid"
+  },
+  {
+   "binding": "key.craftingtweaks.rotate_counter_clockwise",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Rotate Grid (CCW)"
+  },
+  {
+   "binding": "key.craftingtweaks.balance",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Balance Grid"
+  },
+  {
+   "binding": "key.craftingtweaks.spread",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Spread Grid"
+  },
+  {
+   "binding": "key.craftingtweaks.clear",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Clear Grid"
+  },
+  {
+   "binding": "key.craftingtweaks.force_clear",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Force Clear Grid"
+  },
+  {
+   "binding": "key.craftingtweaks.compress_one",
+   "key": "key.keyboard.k",
+   "modifier": "CONTROL",
+   "context": "GUI",
+   "default": "key.keyboard.k",
+   "category": "Crafting Tweaks",
+   "name": "Compress Item"
+  },
+  {
+   "binding": "key.craftingtweaks.compress_stack",
+   "key": "key.keyboard.k",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.k",
+   "category": "Crafting Tweaks",
+   "name": "Compress Stack"
+  },
+  {
+   "binding": "key.craftingtweaks.compress_all",
+   "key": "key.keyboard.k",
+   "modifier": "SHIFT",
+   "context": "GUI",
+   "default": "key.keyboard.k",
+   "category": "Crafting Tweaks",
+   "name": "Compress All"
+  },
+  {
+   "binding": "key.craftingtweaks.decompress_one",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Decompress Item"
+  },
+  {
+   "binding": "key.craftingtweaks.decompress_stack",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Decompress Stack"
+  },
+  {
+   "binding": "key.craftingtweaks.decompress_all",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Decompress All"
+  },
+  {
+   "binding": "key.craftingtweaks.refill_last",
+   "key": "key.keyboard.tab",
+   "modifier": "CONTROL",
+   "context": "GUI",
+   "default": "key.keyboard.tab",
+   "category": "Crafting Tweaks",
+   "name": "Refill Last"
+  },
+  {
+   "binding": "key.craftingtweaks.refill_last_stack",
+   "key": "key.keyboard.tab",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.tab",
+   "category": "Crafting Tweaks",
+   "name": "Refill Last (Stack)"
+  },
+  {
+   "binding": "key.craftingtweaks.transfer_stack",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Crafting Tweaks",
+   "name": "Transfer to Crafting Grid"
+  },
+  {
+   "binding": "gui.xaero_open_map",
+   "key": "key.keyboard.m",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.m",
+   "category": "Xaero's World Map",
+   "name": "Open World Map"
+  },
+  {
+   "binding": "gui.xaero_open_settings",
+   "key": "key.keyboard.right.bracket",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.right.bracket",
+   "category": "Xaero's World Map",
+   "name": "Open Settings"
+  },
+  {
+   "binding": "gui.xaero_world_map_server_settings",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's World Map",
+   "name": "Open Server Settings"
+  },
+  {
+   "binding": "gui.xaero_map_zoom_in",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's World Map",
+   "name": "Zoom In (alternative)"
+  },
+  {
+   "binding": "gui.xaero_map_zoom_out",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's World Map",
+   "name": "Zoom Out (alternative)"
+  },
+  {
+   "binding": "gui.xaero_quick_confirm",
+   "key": "key.keyboard.right.shift",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.right.shift",
+   "category": "Xaero's World Map",
+   "name": "Quick Manual Confirmation"
+  },
+  {
+   "binding": "gui.xaero_toggle_dimension",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's World Map",
+   "name": "Toggle Dimension"
+  },
+  {
+   "binding": "key.modernfix.config",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "ModernFix",
+   "name": "Open config screen"
+  },
+  {
+   "binding": "key.keybindatlas.open_keyboard",
+   "key": "key.keyboard.k",
+   "modifier": "CONTROL",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.k",
+   "category": "Miscellaneous",
+   "name": "Open Keybind Atlas"
+  },
+  {
+   "binding": "key.keybindatlas.cycle_sets",
+   "key": "key.keyboard.k",
+   "modifier": "ALT",
+   "context": "IN_GAME",
+   "default": "key.keyboard.k",
+   "category": "Miscellaneous",
+   "name": "Cycle Keybind Sets"
+  },
+  {
+   "binding": "key.carry.desc",
+   "key": "key.keyboard.left.shift",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.left.shift",
+   "category": "Carry On",
+   "name": "Carry"
+  },
+  {
+   "binding": "key.corpse.death_history",
+   "key": "key.keyboard.u",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.u",
+   "category": "Miscellaneous",
+   "name": "Open Player Death History"
   },
   {
    "binding": "key.block_factorys_bosses.dodge_roll",
    "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.z",
+   "category": "Movement",
    "name": "Dodge Roll"
   },
   {
-   "binding": "key.keybindatlas.open_keyboard",
-   "key": "key.keyboard.k:CONTROL",
-   "name": ""
+   "binding": "key.cataclysm.ability",
+   "key": "key.keyboard.x",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.x",
+   "category": "Cataclysm Key Category",
+   "name": "Cataclysm Ability"
   },
   {
-   "binding": "key.monsterexpansion.roll",
+   "binding": "key.cataclysm.helmet_ability",
+   "key": "key.keyboard.c",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.c",
+   "category": "Cataclysm Key Category",
+   "name": "Cataclysm Helmet Ability"
+  },
+  {
+   "binding": "key.cataclysm.chestplate_ability",
+   "key": "key.keyboard.y",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.y",
+   "category": "Cataclysm Key Category",
+   "name": "Cataclysm Chestplate Ability"
+  },
+  {
+   "binding": "key.cataclysm.boots_ability",
+   "key": "key.keyboard.v",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.v",
+   "category": "Cataclysm Key Category",
+   "name": "Cataclysm Boots Ability"
+  },
+  {
+   "binding": "key.curios.open.desc",
+   "key": "key.keyboard.g",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.g",
+   "category": "Curios",
+   "name": "Open/Close Curios Inventory"
+  },
+  {
+   "binding": "iris.keybind.reload",
    "key": "key.keyboard.unknown",
-   "name": "Roll"
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.r",
+   "category": "Oculus",
+   "name": "Reload Shaders"
+  },
+  {
+   "binding": "iris.keybind.toggleShaders",
+   "key": "key.keyboard.k",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.k",
+   "category": "Oculus",
+   "name": "Toggle Shaders"
+  },
+  {
+   "binding": "iris.keybind.shaderPackSelection",
+   "key": "key.keyboard.o",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.o",
+   "category": "Oculus",
+   "name": "Shaderpack Selection Screen"
+  },
+  {
+   "binding": "key.ftbteams.open_gui",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "FTB Teams",
+   "name": "Open Teams GUI"
+  },
+  {
+   "binding": "key.ftbquests.quests",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "FTB Quests",
+   "name": "Open Quests"
+  },
+  {
+   "binding": "key.simplyswords.mainhand_ability",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Simply Swords",
+   "name": "Use Mainhand Weapon Ability"
+  },
+  {
+   "binding": "key.simplyswords.offhand_ability",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Simply Swords",
+   "name": "Use Offhand Weapon Ability"
+  },
+  {
+   "binding": "key.simplytooltips.cycle_tab",
+   "key": "key.keyboard.g",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.g",
+   "category": "Simply Tooltips",
+   "name": "Cycle Tooltip Tab"
+  },
+  {
+   "binding": "key.simplytooltips.capture_gif",
+   "key": "key.keyboard.h",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.h",
+   "category": "Simply Tooltips",
+   "name": "Capture Tooltip GIF"
+  },
+  {
+   "binding": "key.mdf.z_action",
+   "key": "key.keyboard.z",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.z",
+   "category": "key.categories.mdf",
+   "name": "key.mdf.z_action"
+  },
+  {
+   "binding": "key.mdf.x_action",
+   "key": "key.keyboard.x",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.x",
+   "category": "key.categories.mdf",
+   "name": "key.mdf.x_action"
+  },
+  {
+   "binding": "key.mdf.c_action",
+   "key": "key.keyboard.c",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.c",
+   "category": "key.categories.mdf",
+   "name": "key.mdf.c_action"
+  },
+  {
+   "binding": "key.mdf.v_action",
+   "key": "key.keyboard.v",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.v",
+   "category": "key.categories.mdf",
+   "name": "key.mdf.v_action"
+  },
+  {
+   "binding": "key.mdf.r_action",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.r",
+   "category": "key.categories.mdf",
+   "name": "key.mdf.r_action"
+  },
+  {
+   "binding": "key.mdf.blessing_menu",
+   "key": "key.keyboard.b",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.b",
+   "category": "key.categories.mdf",
+   "name": "key.mdf.blessing_menu"
+  },
+  {
+   "binding": "key.bookofdragons.open_inventory",
+   "key": "key.keyboard.g",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.g",
+   "category": "Book of Dragons",
+   "name": "Open Dragon Inventory"
+  },
+  {
+   "binding": "key.bookofdragons.secondary_ability",
+   "key": "key.keyboard.c",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.c",
+   "category": "Book of Dragons",
+   "name": "Secondary Ability"
+  },
+  {
+   "binding": "key.bookofdragons.dragon_sprint",
+   "key": "key.keyboard.left.control",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.left.control",
+   "category": "Book of Dragons",
+   "name": "Dragon Sprint"
+  },
+  {
+   "binding": "key.bookofdragons.primary_ability",
+   "key": "key.mouse.left",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.mouse.left",
+   "category": "Book of Dragons",
+   "name": "Primary Ability (Breath)"
+  },
+  {
+   "binding": "key.bookofdragons.free_camera",
+   "key": "key.mouse.right",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.mouse.right",
+   "category": "Book of Dragons",
+   "name": "Free Camera"
+  },
+  {
+   "binding": "key.bookofdragons.dismount",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.r",
+   "category": "Book of Dragons",
+   "name": "Dismount (press twice)"
+  },
+  {
+   "binding": "key.bookofdragons.grab",
+   "key": "key.keyboard.x",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.x",
+   "category": "Book of Dragons",
+   "name": "Grab (hold to reach, press to let go)"
+  },
+  {
+   "binding": "key.bookofdragons.taming_letter_1",
+   "key": "key.keyboard.f",
+   "modifier": "NONE",
+   "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+   "default": "key.keyboard.f",
+   "category": "Book of Dragons: Taming",
+   "name": "Taming Letter 1 (F)"
+  },
+  {
+   "binding": "key.bookofdragons.taming_letter_2",
+   "key": "key.keyboard.g",
+   "modifier": "NONE",
+   "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+   "default": "key.keyboard.g",
+   "category": "Book of Dragons: Taming",
+   "name": "Taming Letter 2 (G)"
+  },
+  {
+   "binding": "key.bookofdragons.taming_letter_3",
+   "key": "key.keyboard.h",
+   "modifier": "NONE",
+   "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+   "default": "key.keyboard.h",
+   "category": "Book of Dragons: Taming",
+   "name": "Taming Letter 3 (H)"
+  },
+  {
+   "binding": "key.bookofdragons.taming_letter_4",
+   "key": "key.keyboard.j",
+   "modifier": "NONE",
+   "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+   "default": "key.keyboard.j",
+   "category": "Book of Dragons: Taming",
+   "name": "Taming Letter 4 (J)"
+  },
+  {
+   "binding": "key.bookofdragons.taming_letter_5",
+   "key": "key.keyboard.k",
+   "modifier": "NONE",
+   "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+   "default": "key.keyboard.k",
+   "category": "Book of Dragons: Taming",
+   "name": "Taming Letter 5 (K)"
+  },
+  {
+   "binding": "key.bookofdragons.taming_letter_6",
+   "key": "key.keyboard.l",
+   "modifier": "NONE",
+   "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+   "default": "key.keyboard.l",
+   "category": "Book of Dragons: Taming",
+   "name": "Taming Letter 6 (L)"
+  },
+  {
+   "binding": "key.soulsweapons.return_freyr_sword",
+   "key": "key.keyboard.z",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.z",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Return Freyr Sword to owner"
+  },
+  {
+   "binding": "key.soulsweapons.freyr_sword_stationary",
+   "key": "key.keyboard.right.alt",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.right.alt",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Freyr Sword stationary or guarding"
+  },
+  {
+   "binding": "key.soulsweapons.collect_summons_soul_reaper",
+   "key": "key.keyboard.v",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.v",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Collect summons to item"
+  },
+  {
+   "binding": "key.soulsweapons.switch_weapon",
+   "key": "key.keyboard.b",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.b",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Transform Trick Weapon"
+  },
+  {
+   "binding": "key.soulsweapons.keybind_ability",
+   "key": "key.keyboard.left.alt",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.left.alt",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Use item's special ability"
+  },
+  {
+   "binding": "key.soulsweapons.parry",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.r",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Parry with shield"
+  },
+  {
+   "binding": "key.soulsweapons.effect_shoot_moonlight",
+   "key": "key.keyboard.h",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.h",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Lunar Herald shoot moonlight"
+  },
+  {
+   "binding": "key.soulsweapons.return_thrown_weapon",
+   "key": "key.keyboard.n",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.n",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Call back 'Soulbound' weapon"
+  },
+  {
+   "binding": "key.soulsweapons.show_tooltip",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Show Item Tooltip"
+  },
+  {
+   "binding": "key.soulsweapons.show_lore",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Marium's Soulslike Weaponry",
+   "name": "Show Item Lore"
+  },
+  {
+   "binding": "keybindings.spell_engine.tooltip_details",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Tooltip spell details"
+  },
+  {
+   "binding": "keybindings.spell_engine.bypass_spell_hotbar",
+   "key": "key.keyboard.left.alt",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.left.alt",
+   "category": "Spell Engine",
+   "name": "Bypass Spell Hotbar"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_1",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 1"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_2",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 2"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_3",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 3"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_4",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 4"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_5",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 5"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_6",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 6"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_7",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 7"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_8",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 8"
+  },
+  {
+   "binding": "keybindings.spell_engine.spell_hotbar_9",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Spell Engine",
+   "name": "Spell Hotbar Slot 9"
+  },
+  {
+   "binding": "key.easy_mob_spawn_control.openspawncrontrolscreen",
+   "key": "key.keyboard.k",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.k",
+   "category": "Easy Mob Spawn Control",
+   "name": "Open spawn control screen"
+  },
+  {
+   "binding": "key.bloomlevelup.open_hub",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Bloom Level-Up",
+   "name": "Open Skill Hub"
+  },
+  {
+   "binding": "key.bloomlevelup.open_sheet",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Bloom Level-Up",
+   "name": "Open Stat Sheet"
+  },
+  {
+   "binding": "key.bloomlevelup.open_pocket",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Bloom Level-Up",
+   "name": "Open Hoarder's Pocket"
+  },
+  {
+   "binding": "key.bloomlevelup.open_runes",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Bloom Level-Up",
+   "name": "Open Rune Embedding"
+  },
+  {
+   "binding": "key.bloomlevelup.weapon_skill",
+   "key": "key.keyboard.v",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.v",
+   "category": "Bloom Level-Up",
+   "name": "Weapon skill (charge, throw, lightning)"
+  },
+  {
+   "binding": "key.emotecraft.fastchoose",
+   "key": "key.keyboard.b",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.b",
+   "category": "Emotecraft",
+   "name": "Open Emote Wheel"
+  },
+  {
+   "binding": "key.emotecraft.stop",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Emotecraft",
+   "name": "Stop Playing Emote"
+  },
+  {
+   "binding": "key.skarrier_mobs.semi_living_boots_dash_keybind",
+   "key": "key.keyboard.w",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.w",
+   "category": "Movement",
+   "name": "Semi Living Boots Dash"
+  },
+  {
+   "binding": "keybinds.bettercombat.feint",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Better Combat",
+   "name": "Feint"
+  },
+  {
+   "binding": "keybinds.bettercombat.toggle_mine_with_weapons",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Better Combat",
+   "name": "Toggle Mine with weapons"
   },
   {
    "binding": "keybinds.combatroll.roll",
    "key": "key.keyboard.z",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.r",
+   "category": "Combat Roll",
    "name": "Roll"
+  },
+  {
+   "binding": "key.monsterexpansion.roll",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.x",
+   "category": "Monster Expansion",
+   "name": "Roll"
+  },
+  {
+   "binding": "key.monsterexpansion.weapon_action",
+   "key": "key.mouse.left",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.mouse.left",
+   "category": "Monster Expansion",
+   "name": "Weapon Action"
+  },
+  {
+   "binding": "key.monsterexpansion.arborix_call_key",
+   "key": "key.keyboard.c",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.c",
+   "category": "Monster Expansion",
+   "name": "Call Arborix"
+  },
+  {
+   "binding": "key.monsterexpansion.arborix_jump",
+   "key": "key.keyboard.x",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.x",
+   "category": "Monster Expansion",
+   "name": "Arborix Jump"
+  },
+  {
+   "binding": "key.punchy.open_main_menu",
+   "key": "key.keyboard.f8",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.f8",
+   "category": "Punchy!",
+   "name": "Open Punchy Menu"
+  },
+  {
+   "binding": "key.punchy.inspect",
+   "key": "key.keyboard.i",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.i",
+   "category": "Punchy!",
+   "name": "Inspect"
+  },
+  {
+   "binding": "key.jade.config",
+   "key": "key.keyboard.keypad.0",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.keypad.0",
+   "category": "Jade",
+   "name": "Open Config"
+  },
+  {
+   "binding": "key.jade.show_overlay",
+   "key": "key.keyboard.keypad.1",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.keypad.1",
+   "category": "Jade",
+   "name": "Show Overlay"
+  },
+  {
+   "binding": "key.jade.toggle_liquid",
+   "key": "key.keyboard.keypad.2",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.keypad.2",
+   "category": "Jade",
+   "name": "Toggle Fluid"
+  },
+  {
+   "binding": "key.jade.show_recipes",
+   "key": "key.keyboard.keypad.3",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.keypad.3",
+   "category": "Jade",
+   "name": "Show Recipes"
+  },
+  {
+   "binding": "key.jade.show_uses",
+   "key": "key.keyboard.keypad.4",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.keypad.4",
+   "category": "Jade",
+   "name": "Show Uses"
+  },
+  {
+   "binding": "key.jade.narrate",
+   "key": "key.keyboard.keypad.5",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.keypad.5",
+   "category": "Jade",
+   "name": "Narrate"
+  },
+  {
+   "binding": "key.jade.show_details",
+   "key": "key.keyboard.left.shift",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.left.shift",
+   "category": "Jade",
+   "name": "Show Details"
+  },
+  {
+   "binding": "gui.xaero_minimap_settings",
+   "key": "key.keyboard.y",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.y",
+   "category": "Xaero's Minimap",
+   "name": "Minimap Settings"
+  },
+  {
+   "binding": "gui.xaero_minimap_server_profiles",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Minimap Server Settings"
+  },
+  {
+   "binding": "gui.xaero_zoom_in",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Zoom In Minimap"
+  },
+  {
+   "binding": "gui.xaero_zoom_out",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Zoom Out Minimap"
+  },
+  {
+   "binding": "gui.xaero_new_waypoint",
+   "key": "key.keyboard.b",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.b",
+   "category": "Xaero's Minimap",
+   "name": "New Waypoint"
+  },
+  {
+   "binding": "gui.xaero_waypoints_key",
+   "key": "key.keyboard.u",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.u",
+   "category": "Xaero's Minimap",
+   "name": "Open Waypoint Screen"
+  },
+  {
+   "binding": "gui.xaero_enlarge_map",
+   "key": "key.keyboard.z",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.z",
+   "category": "Xaero's Minimap",
+   "name": "Enlarge Minimap"
+  },
+  {
+   "binding": "gui.xaero_toggle_map",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Minimap"
+  },
+  {
+   "binding": "gui.xaero_toggle_waypoints",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle In-World Waypoints"
+  },
+  {
+   "binding": "gui.xaero_toggle_map_waypoints",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle On-Map Waypoints"
+  },
+  {
+   "binding": "gui.xaero_toggle_slime",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Slime Chunks"
+  },
+  {
+   "binding": "gui.xaero_toggle_grid",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Chunk Grid"
+  },
+  {
+   "binding": "gui.xaero_instant_waypoint",
+   "key": "key.keyboard.keypad.add",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.keypad.add",
+   "category": "Xaero's Minimap",
+   "name": "Quick Waypoint"
+  },
+  {
+   "binding": "gui.xaero_switch_waypoint_set",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Switch Waypoint Set"
+  },
+  {
+   "binding": "gui.xaero_display_all_sets",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle All WP Sets Render"
+  },
+  {
+   "binding": "gui.xaero_toggle_light_overlay",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Light Overlay"
+  },
+  {
+   "binding": "gui.xaero_toggle_entity_radar",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Entity Radar"
+  },
+  {
+   "binding": "gui.xaero_reverse_entity_radar",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Reverse Radar Render Order"
+  },
+  {
+   "binding": "gui.xaero_toggle_manual_cave_mode",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Manual Cave Mode"
+  },
+  {
+   "binding": "gui.xaero_alternative_list_players",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "\"List Players\" Alternative"
+  },
+  {
+   "binding": "gui.xaero_toggle_tracked_players_on_map",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Tracked Players On Map"
+  },
+  {
+   "binding": "gui.xaero_toggle_tracked_players_in_world",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Tracked Players In World"
+  },
+  {
+   "binding": "gui.xaero_toggle_pac_chunk_claims",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.unknown",
+   "category": "Xaero's Minimap",
+   "name": "Toggle Chunk Claims"
+  },
+  {
+   "binding": "key.legendary_monsters.fiery_boots_ability",
+   "key": "key.keyboard.x",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.x",
+   "category": "Legendary Monsters Key Category",
+   "name": "Legendary Monsters Boots Ability"
+  },
+  {
+   "binding": "key.legendary_monsters.mossy_chestplate_ability",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.r",
+   "category": "Legendary Monsters Key Category",
+   "name": "Legendary Monsters Chestplate Ability"
+  },
+  {
+   "binding": "key.legendary_monsters.roar_ability",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.r",
+   "category": "Legendary Monsters Key Category",
+   "name": "key.legendary_monsters.roar_ability"
+  },
+  {
+   "binding": "key.legendary_monsters.helmet_ability",
+   "key": "key.keyboard.c",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.c",
+   "category": "Legendary Monsters Key Category",
+   "name": "key.legendary_monsters.helmet_ability"
+  },
+  {
+   "binding": "key.jei.cheatItemStack2",
+   "key": "key.mouse.middle",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER_CHEAT_MODE",
+   "default": "key.mouse.middle",
+   "category": "JEI (Cheat Mode)",
+   "name": "Cheat One Stack (Alternate)"
+  },
+  {
+   "binding": "key.jei.transferRecipeBookmark",
+   "key": "key.mouse.left",
+   "modifier": "SHIFT",
+   "context": "JEI_GUI_HOVER_BOOKMARK",
+   "default": "key.mouse.left",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Craft Bookmarked Recipe (One)"
+  },
+  {
+   "binding": "key.jei.pauseRecipeCycling",
+   "key": "key.keyboard.left.shift",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.left.shift",
+   "category": "JEI (Recipes)",
+   "name": "Pause Recipe Ingredient Cycling"
+  },
+  {
+   "binding": "key.jei.focusSearch",
+   "key": "key.keyboard.f",
+   "modifier": "CONTROL",
+   "context": "GUI",
+   "default": "key.keyboard.f",
+   "category": "JEI (Overlays)",
+   "name": "Select Search Bar"
+  },
+  {
+   "binding": "key.jei.maxTransferRecipeBookmark",
+   "key": "key.mouse.left",
+   "modifier": "CONTROL",
+   "context": "JEI_GUI_HOVER_BOOKMARK",
+   "default": "key.mouse.left",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Craft Bookmarked Recipe (Many)"
+  },
+  {
+   "binding": "key.jei.toggleBookmarkOverlay",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Overlays)",
+   "name": "Show/Hide Bookmarked Ingredients"
+  },
+  {
+   "binding": "key.jei.cheatItemStack",
+   "key": "key.mouse.left",
+   "modifier": "SHIFT",
+   "context": "JEI_GUI_HOVER_CHEAT_MODE",
+   "default": "key.mouse.left",
+   "category": "JEI (Cheat Mode)",
+   "name": "Cheat One Stack"
+  },
+  {
+   "binding": "key.jei.nextSearch",
+   "key": "key.keyboard.down",
+   "modifier": "ALT",
+   "context": "JEI_GUI_FOCUSED_SEARCH",
+   "default": "key.keyboard.down",
+   "category": "JEI (Search Filter)",
+   "name": "Next Search"
+  },
+  {
+   "binding": "key.jei.toggleOverlay",
+   "key": "key.keyboard.o",
+   "modifier": "CONTROL",
+   "context": "GUI",
+   "default": "key.keyboard.o",
+   "category": "JEI (Overlays)",
+   "name": "Show/Hide JEI Overlays"
+  },
+  {
+   "binding": "key.jei.nextCategory",
+   "key": "key.keyboard.page.down",
+   "modifier": "SHIFT",
+   "context": "GUI",
+   "default": "key.keyboard.page.down",
+   "category": "JEI (Recipes)",
+   "name": "Next Recipe Category"
+  },
+  {
+   "binding": "key.jei.showRecipe2",
+   "key": "key.mouse.left",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.mouse.left",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Show Recipe for Hovered Ingredient (Alternate)"
+  },
+  {
+   "binding": "key.jei.cheatItemStackToInventory",
+   "key": "key.mouse.left",
+   "modifier": "ALT",
+   "context": "JEI_GUI_HOVER_CHEAT_MODE",
+   "default": "key.mouse.left",
+   "category": "JEI (Cheat Mode)",
+   "name": "Cheat One Stack to Inventory"
+  },
+  {
+   "binding": "key.jei.toggleEditMode",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Edit Mode)",
+   "name": "Toggle Hide Ingredients Mode"
+  },
+  {
+   "binding": "key.jei.shareToChat",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Share Item to Chat"
+  },
+  {
+   "binding": "key.jei.previousSearch",
+   "key": "key.keyboard.up",
+   "modifier": "ALT",
+   "context": "JEI_GUI_FOCUSED_SEARCH",
+   "default": "key.keyboard.up",
+   "category": "JEI (Search Filter)",
+   "name": "Previous Search"
+  },
+  {
+   "binding": "key.jei.toggleHideIngredient",
+   "key": "key.mouse.left",
+   "modifier": "CONTROL",
+   "context": "JEI_GUI_HOVER_INGREDIENT",
+   "default": "key.mouse.left",
+   "category": "JEI (Edit Mode)",
+   "name": "Hide Ingredient"
+  },
+  {
+   "binding": "key.jei.transferRecipeGui",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Recipes)",
+   "name": "Craft Hovered Recipe (One)"
+  },
+  {
+   "binding": "key.jei.nextRecipePage",
+   "key": "key.keyboard.page.down",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.page.down",
+   "category": "JEI (Recipes)",
+   "name": "Next Recipe Page"
+  },
+  {
+   "binding": "key.jei.quickMove",
+   "key": "key.mouse.left",
+   "modifier": "SHIFT",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.mouse.left",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Quick Move Ghost Item"
+  },
+  {
+   "binding": "key.jei.toggleWildcardHideIngredient",
+   "key": "key.mouse.right",
+   "modifier": "CONTROL",
+   "context": "JEI_GUI_HOVER_INGREDIENT",
+   "default": "key.mouse.right",
+   "category": "JEI (Edit Mode)",
+   "name": "Hide Ingredient (With Wildcard)"
+  },
+  {
+   "binding": "key.jei.toggleCheatMode",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Cheat Mode)",
+   "name": "Toggle Cheat Mode"
+  },
+  {
+   "binding": "key.jei.toggleCheatModeConfigButton",
+   "key": "key.mouse.left",
+   "modifier": "CONTROL",
+   "context": "JEI_GUI_HOVER_CONFIG_BUTTON",
+   "default": "key.mouse.left",
+   "category": "JEI (Hovering With Mouse Over Config Button)",
+   "name": "Toggle Cheat Mode"
+  },
+  {
+   "binding": "key.jei.bookmark",
+   "key": "key.keyboard.a",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.keyboard.a",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Add/Remove Bookmark"
+  },
+  {
+   "binding": "key.jei.clearSearchBar",
+   "key": "key.mouse.right",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER_SEARCH",
+   "default": "key.mouse.right",
+   "category": "JEI (Search Filter)",
+   "name": "Clear Search Filter"
+  },
+  {
+   "binding": "key.jei.closeRecipeGui",
+   "key": "key.keyboard.escape",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.escape",
+   "category": "JEI (Recipes)",
+   "name": "Close Recipes GUI"
+  },
+  {
+   "binding": "key.jei.toggleHideIngredientsWhenNotSearching",
+   "key": "key.mouse.right",
+   "modifier": "CONTROL",
+   "context": "JEI_GUI_HOVER_CONFIG_BUTTON",
+   "default": "key.mouse.right",
+   "category": "JEI (Hovering With Mouse Over Config Button)",
+   "name": "Toggle Hide Ingredients When Not Searching"
+  },
+  {
+   "binding": "key.jei.recipeBack",
+   "key": "key.keyboard.backspace",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.backspace",
+   "category": "JEI (Recipes)",
+   "name": "Previous Recipe"
+  },
+  {
+   "binding": "key.jei.cheatOneItemToInventory",
+   "key": "key.mouse.right",
+   "modifier": "ALT",
+   "context": "JEI_GUI_HOVER_CHEAT_MODE",
+   "default": "key.mouse.right",
+   "category": "JEI (Cheat Mode)",
+   "name": "Cheat One Item to Inventory"
+  },
+  {
+   "binding": "key.jei.previousRecipePage",
+   "key": "key.keyboard.page.up",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.page.up",
+   "category": "JEI (Recipes)",
+   "name": "Previous Recipe Page"
+  },
+  {
+   "binding": "key.jei.previousCategory",
+   "key": "key.keyboard.page.up",
+   "modifier": "SHIFT",
+   "context": "GUI",
+   "default": "key.keyboard.page.up",
+   "category": "JEI (Recipes)",
+   "name": "Previous Recipe Category"
+  },
+  {
+   "binding": "key.jei.copy.recipe.id",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Dev Tools)",
+   "name": "Copy Recipe ID to Clipboard"
+  },
+  {
+   "binding": "key.jei.previousPage",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Overlays)",
+   "name": "Previous Page"
+  },
+  {
+   "binding": "key.jei.showRecipe",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.keyboard.r",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Show Recipe for Hovered Ingredient"
+  },
+  {
+   "binding": "key.jei.cheatOneItem",
+   "key": "key.mouse.left",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER_CHEAT_MODE",
+   "default": "key.mouse.left",
+   "category": "JEI (Cheat Mode)",
+   "name": "Cheat One Item"
+  },
+  {
+   "binding": "key.jei.nextPage",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Overlays)",
+   "name": "Next Page"
+  },
+  {
+   "binding": "key.jei.showUses",
+   "key": "key.keyboard.u",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.keyboard.u",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Show Uses for Hovered Ingredient"
+  },
+  {
+   "binding": "key.jei.showUses2",
+   "key": "key.mouse.right",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER",
+   "default": "key.mouse.right",
+   "category": "JEI (Hovering With Mouse)",
+   "name": "Show Uses for Hovered Ingredient (Alternate)"
+  },
+  {
+   "binding": "key.jei.maxTransferRecipeGui",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Recipes)",
+   "name": "Craft Hovered Recipe (Many)"
+  },
+  {
+   "binding": "key.jei.cheatOneItem2",
+   "key": "key.mouse.right",
+   "modifier": "NONE",
+   "context": "JEI_GUI_HOVER_CHEAT_MODE",
+   "default": "key.mouse.right",
+   "category": "JEI (Cheat Mode)",
+   "name": "Cheat One Item (Alternate)"
+  },
+  {
+   "binding": "key.jei.recipeForward",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "GUI",
+   "default": "key.keyboard.unknown",
+   "category": "JEI (Recipes)",
+   "name": "Next Recipe"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_wheel",
+   "key": "key.keyboard.r",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.r",
+   "category": "Iron's Spells 'n Spellbooks - General",
+   "name": "Spell Wheel Hold"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_wheel_toggle",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - General",
+   "name": "Spell Wheel Toggle"
+  },
+  {
+   "binding": "key.irons_spellbooks.spellbook_cast",
+   "key": "key.keyboard.v",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.v",
+   "category": "Iron's Spells 'n Spellbooks - General",
+   "name": "Cast Selected Spell"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_bar_modifier",
+   "key": "key.keyboard.left.alt",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.left.alt",
+   "category": "Iron's Spells 'n Spellbooks - General",
+   "name": "Spell Bar Scroll Modifier"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_1",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 01"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_2",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 02"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_3",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 03"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_4",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 04"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_5",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 05"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_6",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 06"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_7",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 07"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_8",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 08"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_9",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 09"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_10",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 10"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_11",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 11"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_12",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 12"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_13",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 13"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_14",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 14"
+  },
+  {
+   "binding": "key.irons_spellbooks.spell_quick_cast_15",
+   "key": "key.keyboard.unknown",
+   "modifier": "NONE",
+   "context": "IN_GAME",
+   "default": "key.keyboard.unknown",
+   "category": "Iron's Spells 'n Spellbooks - Quick Cast",
+   "name": "Quick Cast Slot 15"
+  },
+  {
+   "binding": "key.punchy.triggerable.punchy_sword_inspect_old",
+   "key": "key.keyboard.j",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.j",
+   "category": "Punchy!",
+   "name": "Sword Inspect Classic"
+  },
+  {
+   "binding": "key.punchy.triggerable.punchy_sword_inspect_rework",
+   "key": "key.keyboard.g",
+   "modifier": "NONE",
+   "context": "UNIVERSAL",
+   "default": "key.keyboard.g",
+   "category": "Punchy!",
+   "name": "Sword inspect — reworked"
   }
  ],
- "clashes": {}
+ "clashes": {
+  "key.mouse.left": [
+   {
+    "binding": "key.attack",
+    "key": "key.mouse.left",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.mouse.left",
+    "category": "Gameplay",
+    "name": "Attack/Destroy"
+   },
+   {
+    "binding": "key.bookofdragons.primary_ability",
+    "key": "key.mouse.left",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.mouse.left",
+    "category": "Book of Dragons",
+    "name": "Primary Ability (Breath)"
+   },
+   {
+    "binding": "key.monsterexpansion.weapon_action",
+    "key": "key.mouse.left",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.mouse.left",
+    "category": "Monster Expansion",
+    "name": "Weapon Action"
+   },
+   {
+    "binding": "key.jei.showRecipe2",
+    "key": "key.mouse.left",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER",
+    "default": "key.mouse.left",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Show Recipe for Hovered Ingredient (Alternate)"
+   },
+   {
+    "binding": "key.jei.cheatOneItem",
+    "key": "key.mouse.left",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER_CHEAT_MODE",
+    "default": "key.mouse.left",
+    "category": "JEI (Cheat Mode)",
+    "name": "Cheat One Item"
+   }
+  ],
+  "key.mouse.right": [
+   {
+    "binding": "key.use",
+    "key": "key.mouse.right",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.mouse.right",
+    "category": "Gameplay",
+    "name": "Use Item/Place Block"
+   },
+   {
+    "binding": "key.bookofdragons.free_camera",
+    "key": "key.mouse.right",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.mouse.right",
+    "category": "Book of Dragons",
+    "name": "Free Camera"
+   },
+   {
+    "binding": "key.jei.clearSearchBar",
+    "key": "key.mouse.right",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER_SEARCH",
+    "default": "key.mouse.right",
+    "category": "JEI (Search Filter)",
+    "name": "Clear Search Filter"
+   },
+   {
+    "binding": "key.jei.showUses2",
+    "key": "key.mouse.right",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER",
+    "default": "key.mouse.right",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Show Uses for Hovered Ingredient (Alternate)"
+   },
+   {
+    "binding": "key.jei.cheatOneItem2",
+    "key": "key.mouse.right",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER_CHEAT_MODE",
+    "default": "key.mouse.right",
+    "category": "JEI (Cheat Mode)",
+    "name": "Cheat One Item (Alternate)"
+   }
+  ],
+  "key.keyboard.w": [
+   {
+    "binding": "key.forward",
+    "key": "key.keyboard.w",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.w",
+    "category": "Movement",
+    "name": "Walk Forwards"
+   },
+   {
+    "binding": "key.skarrier_mobs.semi_living_boots_dash_keybind",
+    "key": "key.keyboard.w",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.w",
+    "category": "Movement",
+    "name": "Semi Living Boots Dash"
+   }
+  ],
+  "key.keyboard.a": [
+   {
+    "binding": "key.left",
+    "key": "key.keyboard.a",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.a",
+    "category": "Movement",
+    "name": "Strafe Left"
+   },
+   {
+    "binding": "key.jei.bookmark",
+    "key": "key.keyboard.a",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER",
+    "default": "key.keyboard.a",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Add/Remove Bookmark"
+   }
+  ],
+  "key.keyboard.left.shift": [
+   {
+    "binding": "key.sneak",
+    "key": "key.keyboard.left.shift",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.left.shift",
+    "category": "Movement",
+    "name": "Sneak"
+   },
+   {
+    "binding": "key.carry.desc",
+    "key": "key.keyboard.left.shift",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.left.shift",
+    "category": "Carry On",
+    "name": "Carry"
+   },
+   {
+    "binding": "key.jade.show_details",
+    "key": "key.keyboard.left.shift",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.left.shift",
+    "category": "Jade",
+    "name": "Show Details"
+   },
+   {
+    "binding": "key.jei.pauseRecipeCycling",
+    "key": "key.keyboard.left.shift",
+    "modifier": "NONE",
+    "context": "GUI",
+    "default": "key.keyboard.left.shift",
+    "category": "JEI (Recipes)",
+    "name": "Pause Recipe Ingredient Cycling"
+   }
+  ],
+  "key.keyboard.left.control": [
+   {
+    "binding": "key.sprint",
+    "key": "key.keyboard.left.control",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.left.control",
+    "category": "Movement",
+    "name": "Sprint"
+   },
+   {
+    "binding": "key.bookofdragons.dragon_sprint",
+    "key": "key.keyboard.left.control",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.left.control",
+    "category": "Book of Dragons",
+    "name": "Dragon Sprint"
+   }
+  ],
+  "key.mouse.middle": [
+   {
+    "binding": "key.pickItem",
+    "key": "key.mouse.middle",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.mouse.middle",
+    "category": "Gameplay",
+    "name": "Pick Block"
+   },
+   {
+    "binding": "key.jei.cheatItemStack2",
+    "key": "key.mouse.middle",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER_CHEAT_MODE",
+    "default": "key.mouse.middle",
+    "category": "JEI (Cheat Mode)",
+    "name": "Cheat One Stack (Alternate)"
+   }
+  ],
+  "key.keyboard.f": [
+   {
+    "binding": "key.swapOffhand",
+    "key": "key.keyboard.f",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.f",
+    "category": "Inventory",
+    "name": "Swap Item With Offhand"
+   },
+   {
+    "binding": "key.bookofdragons.taming_letter_1",
+    "key": "key.keyboard.f",
+    "modifier": "NONE",
+    "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+    "default": "key.keyboard.f",
+    "category": "Book of Dragons: Taming",
+    "name": "Taming Letter 1 (F)"
+   }
+  ],
+  "key.keyboard.c": [
+   {
+    "binding": "key.saveToolbarActivator",
+    "key": "key.keyboard.c",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.c",
+    "category": "Creative Mode",
+    "name": "Save Hotbar Activator"
+   },
+   {
+    "binding": "key.cataclysm.helmet_ability",
+    "key": "key.keyboard.c",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.c",
+    "category": "Cataclysm Key Category",
+    "name": "Cataclysm Helmet Ability"
+   },
+   {
+    "binding": "key.mdf.c_action",
+    "key": "key.keyboard.c",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.c",
+    "category": "key.categories.mdf",
+    "name": "key.mdf.c_action"
+   },
+   {
+    "binding": "key.bookofdragons.secondary_ability",
+    "key": "key.keyboard.c",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.c",
+    "category": "Book of Dragons",
+    "name": "Secondary Ability"
+   },
+   {
+    "binding": "key.monsterexpansion.arborix_call_key",
+    "key": "key.keyboard.c",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.c",
+    "category": "Monster Expansion",
+    "name": "Call Arborix"
+   },
+   {
+    "binding": "key.legendary_monsters.helmet_ability",
+    "key": "key.keyboard.c",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.c",
+    "category": "Legendary Monsters Key Category",
+    "name": "key.legendary_monsters.helmet_ability"
+   }
+  ],
+  "key.keyboard.x": [
+   {
+    "binding": "key.loadToolbarActivator",
+    "key": "key.keyboard.x",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.x",
+    "category": "Creative Mode",
+    "name": "Load Hotbar Activator"
+   },
+   {
+    "binding": "key.cataclysm.ability",
+    "key": "key.keyboard.x",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.x",
+    "category": "Cataclysm Key Category",
+    "name": "Cataclysm Ability"
+   },
+   {
+    "binding": "key.mdf.x_action",
+    "key": "key.keyboard.x",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.x",
+    "category": "key.categories.mdf",
+    "name": "key.mdf.x_action"
+   },
+   {
+    "binding": "key.bookofdragons.grab",
+    "key": "key.keyboard.x",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.x",
+    "category": "Book of Dragons",
+    "name": "Grab (hold to reach, press to let go)"
+   },
+   {
+    "binding": "key.monsterexpansion.arborix_jump",
+    "key": "key.keyboard.x",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.x",
+    "category": "Monster Expansion",
+    "name": "Arborix Jump"
+   },
+   {
+    "binding": "key.legendary_monsters.fiery_boots_ability",
+    "key": "key.keyboard.x",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.x",
+    "category": "Legendary Monsters Key Category",
+    "name": "Legendary Monsters Boots Ability"
+   }
+  ],
+  "key.keyboard.l": [
+   {
+    "binding": "key.advancements",
+    "key": "key.keyboard.l",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.l",
+    "category": "Miscellaneous",
+    "name": "Advancements"
+   },
+   {
+    "binding": "key.bookofdragons.taming_letter_6",
+    "key": "key.keyboard.l",
+    "modifier": "NONE",
+    "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+    "default": "key.keyboard.l",
+    "category": "Book of Dragons: Taming",
+    "name": "Taming Letter 6 (L)"
+   }
+  ],
+  "key.keyboard.k+CONTROL": [
+   {
+    "binding": "key.craftingtweaks.compress_one",
+    "key": "key.keyboard.k",
+    "modifier": "CONTROL",
+    "context": "GUI",
+    "default": "key.keyboard.k",
+    "category": "Crafting Tweaks",
+    "name": "Compress Item"
+   },
+   {
+    "binding": "key.keybindatlas.open_keyboard",
+    "key": "key.keyboard.k",
+    "modifier": "CONTROL",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.k",
+    "category": "Miscellaneous",
+    "name": "Open Keybind Atlas"
+   }
+  ],
+  "key.keyboard.k": [
+   {
+    "binding": "key.craftingtweaks.compress_stack",
+    "key": "key.keyboard.k",
+    "modifier": "NONE",
+    "context": "GUI",
+    "default": "key.keyboard.k",
+    "category": "Crafting Tweaks",
+    "name": "Compress Stack"
+   },
+   {
+    "binding": "iris.keybind.toggleShaders",
+    "key": "key.keyboard.k",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.k",
+    "category": "Oculus",
+    "name": "Toggle Shaders"
+   },
+   {
+    "binding": "key.bookofdragons.taming_letter_5",
+    "key": "key.keyboard.k",
+    "modifier": "NONE",
+    "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+    "default": "key.keyboard.k",
+    "category": "Book of Dragons: Taming",
+    "name": "Taming Letter 5 (K)"
+   },
+   {
+    "binding": "key.easy_mob_spawn_control.openspawncrontrolscreen",
+    "key": "key.keyboard.k",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.k",
+    "category": "Easy Mob Spawn Control",
+    "name": "Open spawn control screen"
+   }
+  ],
+  "key.keyboard.u": [
+   {
+    "binding": "key.corpse.death_history",
+    "key": "key.keyboard.u",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.u",
+    "category": "Miscellaneous",
+    "name": "Open Player Death History"
+   },
+   {
+    "binding": "gui.xaero_waypoints_key",
+    "key": "key.keyboard.u",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.u",
+    "category": "Xaero's Minimap",
+    "name": "Open Waypoint Screen"
+   },
+   {
+    "binding": "key.jei.showUses",
+    "key": "key.keyboard.u",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER",
+    "default": "key.keyboard.u",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Show Uses for Hovered Ingredient"
+   }
+  ],
+  "key.keyboard.y": [
+   {
+    "binding": "key.cataclysm.chestplate_ability",
+    "key": "key.keyboard.y",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.y",
+    "category": "Cataclysm Key Category",
+    "name": "Cataclysm Chestplate Ability"
+   },
+   {
+    "binding": "gui.xaero_minimap_settings",
+    "key": "key.keyboard.y",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.y",
+    "category": "Xaero's Minimap",
+    "name": "Minimap Settings"
+   }
+  ],
+  "key.keyboard.v": [
+   {
+    "binding": "key.cataclysm.boots_ability",
+    "key": "key.keyboard.v",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.v",
+    "category": "Cataclysm Key Category",
+    "name": "Cataclysm Boots Ability"
+   },
+   {
+    "binding": "key.mdf.v_action",
+    "key": "key.keyboard.v",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.v",
+    "category": "key.categories.mdf",
+    "name": "key.mdf.v_action"
+   },
+   {
+    "binding": "key.soulsweapons.collect_summons_soul_reaper",
+    "key": "key.keyboard.v",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.v",
+    "category": "Marium's Soulslike Weaponry",
+    "name": "Collect summons to item"
+   },
+   {
+    "binding": "key.bloomlevelup.weapon_skill",
+    "key": "key.keyboard.v",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.v",
+    "category": "Bloom Level-Up",
+    "name": "Weapon skill (charge, throw, lightning)"
+   },
+   {
+    "binding": "key.irons_spellbooks.spellbook_cast",
+    "key": "key.keyboard.v",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.v",
+    "category": "Iron's Spells 'n Spellbooks - General",
+    "name": "Cast Selected Spell"
+   }
+  ],
+  "key.keyboard.g": [
+   {
+    "binding": "key.curios.open.desc",
+    "key": "key.keyboard.g",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.g",
+    "category": "Curios",
+    "name": "Open/Close Curios Inventory"
+   },
+   {
+    "binding": "key.simplytooltips.cycle_tab",
+    "key": "key.keyboard.g",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.g",
+    "category": "Simply Tooltips",
+    "name": "Cycle Tooltip Tab"
+   },
+   {
+    "binding": "key.bookofdragons.open_inventory",
+    "key": "key.keyboard.g",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.g",
+    "category": "Book of Dragons",
+    "name": "Open Dragon Inventory"
+   },
+   {
+    "binding": "key.bookofdragons.taming_letter_2",
+    "key": "key.keyboard.g",
+    "modifier": "NONE",
+    "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+    "default": "key.keyboard.g",
+    "category": "Book of Dragons: Taming",
+    "name": "Taming Letter 2 (G)"
+   },
+   {
+    "binding": "key.punchy.triggerable.punchy_sword_inspect_rework",
+    "key": "key.keyboard.g",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.g",
+    "category": "Punchy!",
+    "name": "Sword inspect — reworked"
+   }
+  ],
+  "key.keyboard.h": [
+   {
+    "binding": "key.simplytooltips.capture_gif",
+    "key": "key.keyboard.h",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.h",
+    "category": "Simply Tooltips",
+    "name": "Capture Tooltip GIF"
+   },
+   {
+    "binding": "key.bookofdragons.taming_letter_3",
+    "key": "key.keyboard.h",
+    "modifier": "NONE",
+    "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+    "default": "key.keyboard.h",
+    "category": "Book of Dragons: Taming",
+    "name": "Taming Letter 3 (H)"
+   },
+   {
+    "binding": "key.soulsweapons.effect_shoot_moonlight",
+    "key": "key.keyboard.h",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.h",
+    "category": "Marium's Soulslike Weaponry",
+    "name": "Lunar Herald shoot moonlight"
+   }
+  ],
+  "key.keyboard.z": [
+   {
+    "binding": "key.mdf.z_action",
+    "key": "key.keyboard.z",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.z",
+    "category": "key.categories.mdf",
+    "name": "key.mdf.z_action"
+   },
+   {
+    "binding": "key.soulsweapons.return_freyr_sword",
+    "key": "key.keyboard.z",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.z",
+    "category": "Marium's Soulslike Weaponry",
+    "name": "Return Freyr Sword to owner"
+   },
+   {
+    "binding": "keybinds.combatroll.roll",
+    "key": "key.keyboard.z",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.r",
+    "category": "Combat Roll",
+    "name": "Roll"
+   },
+   {
+    "binding": "gui.xaero_enlarge_map",
+    "key": "key.keyboard.z",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.z",
+    "category": "Xaero's Minimap",
+    "name": "Enlarge Minimap"
+   }
+  ],
+  "key.keyboard.r": [
+   {
+    "binding": "key.mdf.r_action",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.r",
+    "category": "key.categories.mdf",
+    "name": "key.mdf.r_action"
+   },
+   {
+    "binding": "key.bookofdragons.dismount",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.r",
+    "category": "Book of Dragons",
+    "name": "Dismount (press twice)"
+   },
+   {
+    "binding": "key.soulsweapons.parry",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.r",
+    "category": "Marium's Soulslike Weaponry",
+    "name": "Parry with shield"
+   },
+   {
+    "binding": "key.legendary_monsters.mossy_chestplate_ability",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.r",
+    "category": "Legendary Monsters Key Category",
+    "name": "Legendary Monsters Chestplate Ability"
+   },
+   {
+    "binding": "key.legendary_monsters.roar_ability",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.r",
+    "category": "Legendary Monsters Key Category",
+    "name": "key.legendary_monsters.roar_ability"
+   },
+   {
+    "binding": "key.jei.showRecipe",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "JEI_GUI_HOVER",
+    "default": "key.keyboard.r",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Show Recipe for Hovered Ingredient"
+   },
+   {
+    "binding": "key.irons_spellbooks.spell_wheel",
+    "key": "key.keyboard.r",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.r",
+    "category": "Iron's Spells 'n Spellbooks - General",
+    "name": "Spell Wheel Hold"
+   }
+  ],
+  "key.keyboard.b": [
+   {
+    "binding": "key.mdf.blessing_menu",
+    "key": "key.keyboard.b",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.b",
+    "category": "key.categories.mdf",
+    "name": "key.mdf.blessing_menu"
+   },
+   {
+    "binding": "key.soulsweapons.switch_weapon",
+    "key": "key.keyboard.b",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.b",
+    "category": "Marium's Soulslike Weaponry",
+    "name": "Transform Trick Weapon"
+   },
+   {
+    "binding": "key.emotecraft.fastchoose",
+    "key": "key.keyboard.b",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.b",
+    "category": "Emotecraft",
+    "name": "Open Emote Wheel"
+   },
+   {
+    "binding": "gui.xaero_new_waypoint",
+    "key": "key.keyboard.b",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.b",
+    "category": "Xaero's Minimap",
+    "name": "New Waypoint"
+   }
+  ],
+  "key.keyboard.j": [
+   {
+    "binding": "key.bookofdragons.taming_letter_4",
+    "key": "key.keyboard.j",
+    "modifier": "NONE",
+    "context": "net.magister.liberanimalium.platform.forge.ForgeClientServices$1@f25ba52",
+    "default": "key.keyboard.j",
+    "category": "Book of Dragons: Taming",
+    "name": "Taming Letter 4 (J)"
+   },
+   {
+    "binding": "key.punchy.triggerable.punchy_sword_inspect_old",
+    "key": "key.keyboard.j",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.j",
+    "category": "Punchy!",
+    "name": "Sword Inspect Classic"
+   }
+  ],
+  "key.keyboard.left.alt": [
+   {
+    "binding": "key.soulsweapons.keybind_ability",
+    "key": "key.keyboard.left.alt",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.left.alt",
+    "category": "Marium's Soulslike Weaponry",
+    "name": "Use item's special ability"
+   },
+   {
+    "binding": "keybindings.spell_engine.bypass_spell_hotbar",
+    "key": "key.keyboard.left.alt",
+    "modifier": "NONE",
+    "context": "UNIVERSAL",
+    "default": "key.keyboard.left.alt",
+    "category": "Spell Engine",
+    "name": "Bypass Spell Hotbar"
+   },
+   {
+    "binding": "key.irons_spellbooks.spell_bar_modifier",
+    "key": "key.keyboard.left.alt",
+    "modifier": "NONE",
+    "context": "IN_GAME",
+    "default": "key.keyboard.left.alt",
+    "category": "Iron's Spells 'n Spellbooks - General",
+    "name": "Spell Bar Scroll Modifier"
+   }
+  ],
+  "key.mouse.left+SHIFT": [
+   {
+    "binding": "key.jei.transferRecipeBookmark",
+    "key": "key.mouse.left",
+    "modifier": "SHIFT",
+    "context": "JEI_GUI_HOVER_BOOKMARK",
+    "default": "key.mouse.left",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Craft Bookmarked Recipe (One)"
+   },
+   {
+    "binding": "key.jei.cheatItemStack",
+    "key": "key.mouse.left",
+    "modifier": "SHIFT",
+    "context": "JEI_GUI_HOVER_CHEAT_MODE",
+    "default": "key.mouse.left",
+    "category": "JEI (Cheat Mode)",
+    "name": "Cheat One Stack"
+   },
+   {
+    "binding": "key.jei.quickMove",
+    "key": "key.mouse.left",
+    "modifier": "SHIFT",
+    "context": "JEI_GUI_HOVER",
+    "default": "key.mouse.left",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Quick Move Ghost Item"
+   }
+  ],
+  "key.mouse.left+CONTROL": [
+   {
+    "binding": "key.jei.maxTransferRecipeBookmark",
+    "key": "key.mouse.left",
+    "modifier": "CONTROL",
+    "context": "JEI_GUI_HOVER_BOOKMARK",
+    "default": "key.mouse.left",
+    "category": "JEI (Hovering With Mouse)",
+    "name": "Craft Bookmarked Recipe (Many)"
+   },
+   {
+    "binding": "key.jei.toggleHideIngredient",
+    "key": "key.mouse.left",
+    "modifier": "CONTROL",
+    "context": "JEI_GUI_HOVER_INGREDIENT",
+    "default": "key.mouse.left",
+    "category": "JEI (Edit Mode)",
+    "name": "Hide Ingredient"
+   },
+   {
+    "binding": "key.jei.toggleCheatModeConfigButton",
+    "key": "key.mouse.left",
+    "modifier": "CONTROL",
+    "context": "JEI_GUI_HOVER_CONFIG_BUTTON",
+    "default": "key.mouse.left",
+    "category": "JEI (Hovering With Mouse Over Config Button)",
+    "name": "Toggle Cheat Mode"
+   }
+  ],
+  "key.mouse.right+CONTROL": [
+   {
+    "binding": "key.jei.toggleWildcardHideIngredient",
+    "key": "key.mouse.right",
+    "modifier": "CONTROL",
+    "context": "JEI_GUI_HOVER_INGREDIENT",
+    "default": "key.mouse.right",
+    "category": "JEI (Edit Mode)",
+    "name": "Hide Ingredient (With Wildcard)"
+   },
+   {
+    "binding": "key.jei.toggleHideIngredientsWhenNotSearching",
+    "key": "key.mouse.right",
+    "modifier": "CONTROL",
+    "context": "JEI_GUI_HOVER_CONFIG_BUTTON",
+    "default": "key.mouse.right",
+    "category": "JEI (Hovering With Mouse Over Config Button)",
+    "name": "Toggle Hide Ingredients When Not Searching"
+   }
+  ]
+ }
 }

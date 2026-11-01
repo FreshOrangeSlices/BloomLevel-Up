@@ -1,0 +1,334 @@
+# EMSC classes: io/github/catomon/easymobspawncontrol/AttributeStorage$1.class, io/github/catomon/easymobspawncontrol/AttributeStorage.class, io/github/catomon/easymobspawncontrol/BiomeUtil.class, io/github/catomon/easymobspawncontrol/ClientConfig.class, io/github/catomon/easymobspawncontrol/ClientEventHandler$1.class, io/github/catomon/easymobspawncontrol/ClientEventHandler.class, io/github/catomon/easymobspawncontrol/CommonConfig.class, io/github/catomon/easymobspawncontrol/CommonEventHandler.class, io/github/catomon/easymobspawncontrol/Const.class, io/github/catomon/easymobspawncontrol/CustomSpawnModifier$SpawnEntry.class, io/github/catomon/easymobspawncontrol/CustomSpawnModifier.class, io/github/catomon/easymobspawncontrol/DebugLogger.class, io/github/catomon/easymobspawncontrol/DespawnStorage$1.class, io/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule.class, io/github/catomon/easymobspawncontrol/DespawnStorage.class, io/github/catomon/easymobspawncontrol/DropStorage$1.class, io/github/catomon/easymobspawncontrol/DropStorage$2.class, io/github/catomon/easymobspawncontrol/DropStorage$DropEntry.class, io/github/catomon/easymobspawncontrol/DropStorage.class, io/github/catomon/easymobspawncontrol/EntityUtil.class, io/github/catomon/easymobspawncontrol/EquipmentStorage$1.class, io/github/catomon/easymobspawncontrol/EquipmentStorage$EquipmentEntry.class, io/github/catomon/easymobspawncontrol/EquipmentStorage.class, io/github/catomon/easymobspawncontrol/IEasyMobCategory.class, io/github/catomon/easymobspawncontrol/KeyInputHandler.class, io/github/catomon/easymobspawncontrol/Keybindings.class, io/github/catomon/easymobspawncontrol/MobCapContext.class, io/github/catomon/easymobspawncontrol/MobCapHandler$LevelCounts.class, io/github/catomon/easymobspawncontrol/MobCapHandler.class, io/github/catomon/easymobspawncontrol/MobCapStorage$1.class, io/github/catomon/easymobspawncontrol/MobCapStorage$2.class, io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.class, io/github/catomon/easymobspawncontrol/MobCapStorage.class, io/github/catomon/easymobspawncontrol/ModBiomeModifiers.class, io/github/catomon/easymobspawncontrol/ModClient.class, io/github/catomon/easymobspawncontrol/ModCommon.class, io/github/catomon/easymobspawncontrol/RegisterServerCommands.class, io/github/catomon/easymobspawncontrol/ServerEventsHandler$SparsePackTracker.class, io/github/catomon/easymobspawncontrol/ServerEventsHandler.class, io/github/catomon/easymobspawncontrol/SpawnDataStorage$1.class, io/github/catomon/easymobspawncontrol/SpawnDataStorage$SpawnDataOverride.class, io/github/catomon/easymobspawncontrol/SpawnDataStorage.class, io/github/catomon/easymobspawncontrol/Storage$1.class, io/github/catomon/easymobspawncontrol/Storage$2.class, io/github/catomon/easymobspawncontrol/Storage$3.class, io/github/catomon/easymobspawncontrol/Storage$4.class, io/github/catomon/easymobspawncontrol/Storage$5.class, io/github/catomon/easymobspawncontrol/Storage$6.class, io/github/catomon/ea
+## io/github/catomon/easymobspawncontrol/DespawnStorage$1.class
+Compiled from "DespawnStorage.java"
+class io.github.catomon.easymobspawncontrol.DespawnStorage$1 extends com.google.gson.reflect.TypeToken<java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule>> {
+  io.github.catomon.easymobspawncontrol.DespawnStorage$1();
+}
+## io/github/catomon/easymobspawncontrol/DespawnStorage$DespawnRule.class
+Compiled from "DespawnStorage.java"
+public final class io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule extends java.lang.Record {
+  private final boolean enabled;
+  private final int minRange;
+  private final int idleSeconds;
+  private final boolean keepTagged;
+  private final boolean keepWithItems;
+  private final boolean keepVisible;
+  public static final io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule DEFAULT;
+  public io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule(boolean, int, int, boolean, boolean, boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public boolean enabled();
+  public int minRange();
+  public int idleSeconds();
+  public boolean keepTagged();
+  public boolean keepWithItems();
+  public boolean keepVisible();
+  static {};
+}
+## io/github/catomon/easymobspawncontrol/DespawnStorage.class
+Compiled from "DespawnStorage.java"
+public class io.github.catomon.easymobspawncontrol.DespawnStorage {
+  private static final org.slf4j.Logger LOGGER;
+  private static final com.google.gson.Gson GSON;
+  public static final java.nio.file.Path DESPAWN_FILE;
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule> despawnRules;
+  private static java.util.Map<net.minecraft.world.entity.EntityType<?>, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule> runtimeRules;
+  private static final java.lang.reflect.Type MAP_TYPE;
+  public io.github.catomon.easymobspawncontrol.DespawnStorage();
+  public static void reload();
+  public static void save();
+  public static io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule getRule(java.lang.String);
+  public static io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule getRule(net.minecraft.world.entity.EntityType<?>);
+  private static void rebuildRuntime();
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+  private static void lambda$rebuildRuntime$1(java.util.Map, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule, net.minecraft.world.entity.EntityType);
+  private static boolean lambda$reload$0(java.util.Map$Entry);
+  static {};
+}
+## io/github/catomon/easymobspawncontrol/MobCapContext.class
+Compiled from "MobCapContext.java"
+public class io.github.catomon.easymobspawncontrol.MobCapContext {
+  private static final java.lang.ThreadLocal<java.util.Deque<net.minecraft.server.level.ServerLevel>> LEVEL_STACK;
+  public io.github.catomon.easymobspawncontrol.MobCapContext();
+  public static void pushLevel(net.minecraft.server.level.ServerLevel);
+  public static void popLevel();
+  public static net.minecraft.server.level.ServerLevel getCurrentLevel();
+  static {};
+}
+## io/github/catomon/easymobspawncontrol/MobCapHandler$LevelCounts.class
+Compiled from "MobCapHandler.java"
+final class io.github.catomon.easymobspawncontrol.MobCapHandler$LevelCounts {
+  long tick;
+  final java.util.Map<net.minecraft.world.entity.EntityType<?>, java.lang.Integer> counts;
+  private io.github.catomon.easymobspawncontrol.MobCapHandler$LevelCounts();
+}
+## io/github/catomon/easymobspawncontrol/MobCapHandler.class
+Compiled from "MobCapHandler.java"
+public final class io.github.catomon.easymobspawncontrol.MobCapHandler {
+  private static final double LOCAL_RADIUS;
+  private static final java.util.Map<net.minecraft.server.level.ServerLevel, io.github.catomon.easymobspawncontrol.MobCapHandler$LevelCounts> GLOBAL_COUNTS;
+  private io.github.catomon.easymobspawncontrol.MobCapHandler();
+  public static boolean shouldDeny(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.EntityType<?>, java.lang.String, net.minecraft.world.phys.Vec3, net.minecraft.world.entity.MobSpawnType);
+       2: getstatic     #40                 // Field net/minecraft/world/entity/MobSpawnType.NATURAL:Lnet/minecraft/world/entity/MobSpawnType;
+      10: getstatic     #43                 // Field net/minecraft/world/entity/MobSpawnType.CHUNK_GENERATION:Lnet/minecraft/world/entity/MobSpawnType;
+  private static int limit(net.minecraft.world.entity.EntityType<?>, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule);
+  private static int countGlobal(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.EntityType<?>);
+  private static int countLocal(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.EntityType<?>, net.minecraft.world.phys.Vec3);
+  private static io.github.catomon.easymobspawncontrol.MobCapHandler$LevelCounts countsFor(net.minecraft.server.level.ServerLevel);
+  private static boolean lambda$countLocal$0(net.minecraft.world.entity.EntityType, net.minecraft.world.entity.Entity);
+  static {};
+}
+## io/github/catomon/easymobspawncontrol/MobCapStorage$1.class
+Compiled from "MobCapStorage.java"
+class io.github.catomon.easymobspawncontrol.MobCapStorage$1 extends com.google.gson.reflect.TypeToken<java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> {
+  io.github.catomon.easymobspawncontrol.MobCapStorage$1();
+}
+## io/github/catomon/easymobspawncontrol/MobCapStorage$2.class
+Compiled from "MobCapStorage.java"
+class io.github.catomon.easymobspawncontrol.MobCapStorage$2 extends com.google.gson.reflect.TypeToken<java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>>> {
+  io.github.catomon.easymobspawncontrol.MobCapStorage$2();
+}
+## io/github/catomon/easymobspawncontrol/MobCapStorage$MobCapRule.class
+Compiled from "MobCapStorage.java"
+public final class io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule extends java.lang.Record {
+  private final boolean enabled;
+  private final boolean percent;
+  private final double value;
+  private final boolean global;
+  public static final io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule DEFAULT;
+  public io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule(boolean, boolean, double, boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public boolean enabled();
+  public boolean percent();
+  public double value();
+  public boolean global();
+  static {};
+}
+## io/github/catomon/easymobspawncontrol/MobCapStorage.class
+Compiled from "MobCapStorage.java"
+public class io.github.catomon.easymobspawncontrol.MobCapStorage {
+  private static final org.slf4j.Logger LOGGER;
+  private static final com.google.gson.Gson GSON;
+  public static final java.nio.file.Path MOB_CAPS_FILE;
+  public static final java.nio.file.Path DIMENSION_MOB_CAPS_FILE;
+  public static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule> mobCaps;
+  public static java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> dimensionMobCaps;
+  private static final java.lang.reflect.Type MAP_TYPE;
+  private static final java.lang.reflect.Type NESTED_TYPE;
+  public io.github.catomon.easymobspawncontrol.MobCapStorage();
+  public static void reload();
+  public static void save();
+  public static boolean isEmpty();
+  public static io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule getRule(java.lang.String);
+  public static io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule getRule(java.lang.String, java.lang.String);
+  private static java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule> sanitize(java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>);
+  private static java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> sanitizeNested(java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>>);
+  private static io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule sanitizeRule(io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule);
+  private static <T> T readJson(java.nio.file.Path, T, java.lang.reflect.Type);
+  private static void writeJson(java.nio.file.Path, java.lang.Object);
+  static {};
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/DespawnScreen$1.class
+Compiled from "DespawnScreen.java"
+class io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen$1 extends net.minecraft.client.gui.components.Checkbox {
+  final java.util.function.Consumer val$onChange;
+  final io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen this$0;
+  io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen$1(io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen, int, int, int, int, net.minecraft.network.chat.Component, boolean, java.util.function.Consumer);
+  public void m_5691_();
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/DespawnScreen$LabelEntry.class
+Compiled from "DespawnScreen.java"
+final class io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen$LabelEntry extends java.lang.Record {
+  private final net.minecraft.network.chat.Component text;
+  private final int x;
+  private final int y;
+  private io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen$LabelEntry(net.minecraft.network.chat.Component, int, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.network.chat.Component text();
+  public int x();
+  public int y();
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/DespawnScreen.class
+Compiled from "DespawnScreen.java"
+public class io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen extends net.minecraft.client.gui.screens.Screen {
+  private final net.minecraft.client.gui.screens.Screen parent;
+  private final java.lang.String mobId;
+  private final java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule> despawnMap;
+  private final java.util.List<io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen$LabelEntry> labels;
+  private boolean enabled;
+  private int minRange;
+  private int idleSeconds;
+  private boolean keepTagged;
+  private boolean keepWithItems;
+  private boolean keepVisible;
+  public io.github.catomon.easymobspawncontrol.gui.screens.DespawnScreen(net.minecraft.client.gui.screens.Screen, java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule>);
+  protected void m_7856_();
+     144: invokevirtual #200                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     224: invokevirtual #200                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     356: invokevirtual #200                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+  private void addCheckbox(int, int, net.minecraft.network.chat.Component, boolean, java.util.function.Consumer<java.lang.Boolean>, java.lang.String);
+      31: invokevirtual #200                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+  private static void tooltip(net.minecraft.client.gui.components.AbstractWidget, java.lang.String);
+  private void addLabel(int, int, net.minecraft.network.chat.Component);
+  public void m_88315_(net.minecraft.client.gui.GuiGraphics, int, int, float);
+  private void apply();
+  private void lambda$init$6(net.minecraft.client.gui.components.Button);
+  private void lambda$init$5(java.lang.Boolean);
+  private void lambda$init$4(java.lang.Boolean);
+  private void lambda$init$3(java.lang.Boolean);
+  private void lambda$init$2(java.lang.String);
+  private void lambda$init$1(java.lang.String);
+  private void lambda$init$0(java.lang.Boolean);
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/MobCapScreen$1.class
+Compiled from "MobCapScreen.java"
+class io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen$1 extends net.minecraft.client.gui.components.Checkbox {
+  final io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen this$0;
+  io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen$1(io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen, int, int, int, int, net.minecraft.network.chat.Component, boolean);
+  public void m_5691_();
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/MobCapScreen$LabelEntry.class
+Compiled from "MobCapScreen.java"
+final class io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen$LabelEntry extends java.lang.Record {
+  private final net.minecraft.network.chat.Component text;
+  private final int x;
+  private final int y;
+  private io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen$LabelEntry(net.minecraft.network.chat.Component, int, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.network.chat.Component text();
+  public int x();
+  public int y();
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/MobCapScreen.class
+Compiled from "MobCapScreen.java"
+public class io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen extends net.minecraft.client.gui.screens.Screen {
+  private final net.minecraft.client.gui.screens.Screen parent;
+  private final java.lang.String mobId;
+  private final java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule> targetAll;
+  private final java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> targetDims;
+  private final java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule> workingAll;
+  private final java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>> workingDims;
+  private final java.util.List<io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen$LabelEntry> labels;
+  private java.lang.String currentDimension;
+  private java.util.List<java.lang.String> availableDimensions;
+  private io.github.catomon.easymobspawncontrol.gui.HorizontalButtonScrollPanel dimSelector;
+  private int titleY;
+  private boolean enabled;
+  private boolean percent;
+  private boolean global;
+  private java.lang.String valueText;
+  public io.github.catomon.easymobspawncontrol.gui.screens.MobCapScreen(net.minecraft.client.gui.screens.Screen, java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>, java.util.Map<java.lang.String, java.util.Map<java.lang.String, io.github.catomon.easymobspawncontrol.MobCapStorage$MobCapRule>>);
+  private void loadAvailableDimensions();
+  public void setAvailableDimensions(java.util.List<java.lang.String>);
+  protected void m_7856_();
+      87: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     167: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     224: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     324: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     396: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     461: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     496: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+  private void buildDimensionSelector();
+     181: invokevirtual #288                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+  private static void tooltip(net.minecraft.client.gui.components.AbstractWidget, java.lang.String);
+  private void switchDimension(java.lang.String);
+  private void loadFields();
+  private void commitFields();
+  private void apply();
+  private double parseValue();
+  private static java.lang.String formatValue(double);
+  private void addLabel(int, int, net.minecraft.network.chat.Component);
+  public void m_88315_(net.minecraft.client.gui.GuiGraphics, int, int, float);
+  private void lambda$apply$11(java.lang.String, java.util.Map);
+  private static java.util.Map lambda$commitFields$10(java.lang.String);
+  private void lambda$buildDimensionSelector$9(java.lang.String, net.minecraft.client.gui.components.Button);
+  private void lambda$buildDimensionSelector$8(net.minecraft.client.gui.components.Button);
+  private void lambda$init$7(net.minecraft.client.gui.components.Button);
+  private void lambda$init$6(net.minecraft.client.gui.components.Button);
+  private void lambda$init$5(net.minecraft.client.gui.components.Button);
+  private void lambda$init$4(java.lang.String);
+  private static boolean lambda$init$3(java.lang.String);
+  private void lambda$init$2(net.minecraft.client.gui.components.Button);
+  private void lambda$init$1(net.minecraft.client.gui.components.Button);
+  private void lambda$new$0(java.lang.String, java.util.Map);
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/SpawnCapEditScreen$CapScrollPanel.class
+Compiled from "SpawnCapEditScreen.java"
+final class io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen$CapScrollPanel extends net.minecraftforge.client.gui.widget.ScrollPanel {
+  private final java.util.List<net.minecraft.world.entity.MobCategory> categories;
+  final io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen this$0;
+  public io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen$CapScrollPanel(io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen, net.minecraft.client.Minecraft, int, int, int, int);
+  protected void drawBackground(net.minecraft.client.gui.GuiGraphics, com.mojang.blaze3d.vertex.Tesselator, float);
+  protected int getContentHeight();
+  protected void drawPanel(net.minecraft.client.gui.GuiGraphics, int, int, com.mojang.blaze3d.vertex.Tesselator, int, int);
+  public net.minecraft.client.gui.narration.NarratableEntry$NarrationPriority m_142684_();
+  public void m_142291_(net.minecraft.client.gui.narration.NarrationElementOutput);
+}
+## io/github/catomon/easymobspawncontrol/gui/screens/SpawnCapEditScreen.class
+Compiled from "SpawnCapEditScreen.java"
+public class io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen extends net.minecraft.client.gui.screens.Screen {
+  private final java.util.Map<java.lang.String, java.lang.Integer> previewCaps;
+  private final java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.Integer>> previewDimCaps;
+  private java.lang.String currentDimension;
+  private io.github.catomon.easymobspawncontrol.gui.HorizontalButtonScrollPanel dimSelector;
+  private final java.util.Map<net.minecraft.world.entity.MobCategory, net.minecraft.client.gui.components.EditBox> capFields;
+  private java.util.List<java.lang.String> availableDimensions;
+  private net.minecraft.client.gui.components.Button confirmButton;
+  private net.minecraft.client.gui.components.Button cancelButton;
+  private net.minecraft.client.gui.components.Button resetButton;
+  private final boolean isDedicatedServer;
+  private final io.github.catomon.easymobspawncontrol.gui.screens.SpawnControlScreen spawnControlScreen;
+  private io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen$CapScrollPanel capPanel;
+  public io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen(io.github.catomon.easymobspawncontrol.gui.screens.SpawnControlScreen);
+  private void loadAvailableDimensions();
+  public void setAvailableDimensions(java.util.List<java.lang.String>);
+  protected void m_7856_();
+      65: invokevirtual #287                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     254: invokevirtual #287                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     410: invokevirtual #287                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     438: invokevirtual #287                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     461: invokevirtual #287                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     513: invokevirtual #287                // Method m_142416_:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+  public void m_88315_(net.minecraft.client.gui.GuiGraphics, int, int, float);
+  private net.minecraft.client.gui.components.EditBox createField(net.minecraft.world.entity.MobCategory, java.lang.Integer, int, int);
+  private void lambda$createField$12(net.minecraft.world.entity.MobCategory, java.lang.String);
+  private static java.util.Map lambda$createField$11(java.lang.String);
+  private static boolean lambda$createField$10(java.lang.String);
+  private void lambda$init$9(net.minecraft.client.gui.components.Button);
+      56: invokestatic  #628                // Method io/github/catomon/easymobspawncontrol/ServerEventsHandler.updateSpawnCaps:()V
+  private void lambda$init$8(net.minecraft.client.gui.components.Button);
+  private void lambda$init$7(net.minecraft.client.gui.components.Button);
+  private void lambda$init$6(java.lang.String, java.util.Map);
+  private static void lambda$init$5(java.util.HashMap, java.lang.String, java.lang.Integer);
+  private static void lambda$init$4(java.util.HashMap, java.lang.String, java.lang.Integer);
+  private static boolean lambda$init$3(java.lang.String);
+  private void lambda$init$2(java.lang.String, net.minecraft.client.gui.components.Button);
+  private void lambda$init$1(net.minecraft.client.gui.components.Button);
+  private void lambda$new$0(java.lang.String, java.util.Map);
+  static net.minecraft.client.gui.Font access$000(io.github.catomon.easymobspawncontrol.gui.screens.SpawnCapEditScreen);
+}
+## io/github/catomon/easymobspawncontrol/mixin/MobDespawnMixin.class
+Compiled from "MobDespawnMixin.java"
+public abstract class io.github.catomon.easymobspawncontrol.mixin.MobDespawnMixin {
+  private static final double OBSERVE_RANGE;
+  public io.github.catomon.easymobspawncontrol.mixin.MobDespawnMixin();
+  private void emsc$customDespawn(org.spongepowered.asm.mixin.injection.callback.CallbackInfo);
+  private static boolean isProtected(net.minecraft.world.entity.Mob, io.github.catomon.easymobspawncontrol.DespawnStorage$DespawnRule);
+       8: invokevirtual #108                // Method net/minecraft/world/entity/Mob.m_21532_:()Z
+  private static boolean hasAnyItem(net.minecraft.world.entity.Mob);
+  private static boolean isObserved(net.minecraft.world.entity.Mob);
+}
+## mods/oddities-1.0.1-forge-1.20.1.jar::data/oddities/structures/orchid_shrine_1.nbt names: ['oddities:big_purple_orchid', 'oddities:big_white_orchid', 'oddities:chests/orchid_shrine_loot_chest', 'oddities:giant_purple_orchid', 'oddities:giant_white_orchid', 'oddities:orchid_altar', 'oddities:orchid_shrine_main', 'oddities:purple_orchid_vine', 'oddities:tall_purple_orchid', 'oddities:tall_white_orchid', 'oddities:white_orchid_vine']
+## mods/oddities-1.0.1-forge-1.20.1.jar::data/oddities/structures/orchid_shrine_2.nbt names: ['oddities:big_purple_orchid', 'oddities:big_white_orchid', 'oddities:orchid_shrine_main', 'oddities:purple_orchid_vine', 'oddities:tall_purple_orchid', 'oddities:tall_white_orchid', 'oddities:white_orchid_vine']
+## mods/oddities-1.0.1-forge-1.20.1.jar::data/oddities/structures/orchid_shrine_3.nbt names: ['oddities:big_purple_orchid', 'oddities:big_white_orchid', 'oddities:chests/orchid_shrine_loot_chest', 'oddities:giant_purple_orchid', 'oddities:giant_white_orchid', 'oddities:purple_orchid_vine', 'oddities:tall_purple_orchid', 'oddities:tall_white_orchid', 'oddities:white_orchid_vine']
+## mods/oddities-1.0.1-forge-1.20.1.jar::data/oddities/structures/orchid_shrine_4.nbt names: ['oddities:big_purple_orchid', 'oddities:big_white_orchid', 'oddities:purple_orchid_vine', 'oddities:tall_purple_orchid', 'oddities:tall_white_orchid', 'oddities:white_orchid_vine']
+## mods/soulslike-weaponry-1.4.10-1.20.1-forge.jar::data/soulsweapons/structures/champions_graves_altarnate.nbt names: ['soulsweapons:draugr_boss']
+## mods/soulslike-weaponry-1.4.10-1.20.1-forge.jar::data/soulsweapons/structures/champions_graves_main.nbt names: ['soulsweapons:draugr_boss']

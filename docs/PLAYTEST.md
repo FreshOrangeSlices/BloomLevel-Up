@@ -1,0 +1,20 @@
+# Playtest notes
+
+Notes from playing on the server, with what the code says about each. Nothing here is built yet; an item moves to
+`DECISIONS.md` once it's settled and done.
+
+## 2026-11-02 (first days on the server, 2 players, no enchanted gear, nothing past iron/steel)
+
+| # | Note | What the code says | Status |
+|---|---|---|---|
+| 1 | Mobs hit very hard; Medieval Armory's rusted sets (`magistuarmory:rusted*`, kastenbrust) are the gear most mobs wear; bosses crush us. | Intended: the pack is meant to be hard this early. | Keep, watch |
+| 2 | No crashes. | Since `-Xmx6500M` on the 8 GB plan. | - |
+| 3 | Bosses are hard and good. | - | Keep |
+| 4 | Iron Stomach misses some bad foods. | It goes by the tag `bloomlevelup:food/unsafe`: vanilla raw meat and fish, rotten flesh, spider eye, pufferfish, poisonous potato, plus the `c`/`forge` raw-meat, raw-fish and food-poisoning tags. A mod's food with a bad effect that isn't in those tags is missed. Possible fix in Bloom: also count any food whose own effects include a harmful one (no list to keep up). | Which foods? |
+| 5 | Timber fells logs that structures placed. | Placed-block memory only knows logs a player placed; worldgen logs count as natural. Timber needs the connected logs to touch natural (non-persistent) leaves, but *any* log in the connected group will do, so a cabin's beams that touch a real tree, or a structure's own tree, pass. Possible fixes: skip logs inside a structure's pieces, or only fell logs above the cut that reach leaves. | Building or tree? |
+| 6 | Leveling: Armor fastest (40-50), Combat 30-40, Utility and Misc 20-30. Wisdom ~20 and vanilla levels come fast (20-40). | Armor XP comes from damage taken, and mobs hit hard (note 1), so it runs ahead. Wisdom multiplies vanilla XP orbs by 1 + 4% a point (x1.8 at 20), on top of modded mobs' and sentinels' big XP drops. | Not disliked; watch |
+| 7 | Companions: owners shouldn't be able to hurt their own. | Each owner hit costs Migamigos tolerance; 0 turns it on you (likely how the Claymore was lost: Better Combat sweeps). Approved. | Approved, to build |
+| 8 | Reuse Migamigos' hide-armor toggles for players and for Zoni's Companions. | Migamigos has per-piece toggles (`toggleArmorPiece`) on its companion screen. Players would need small toggle buttons in the inventory and a render hook, synced to others; Zoni's would need a hook in its renderer. | Idea, look into |
+| 9 | Companion "Cannot Wander" doesn't stop wandering. | Migamigos' own AI: "Cannot Wander" only stops idle strolling while *following*. A *staying* companion runs `MoveBackToPostGoal`, which picks a spot up to 10 blocks out toward its post every few ticks and never checks the toggle, so it mills about. Possible fix in the add-on: while staying with wandering off, only walk back when it's pushed off its post. | Found, to fix |
+| 10 | Raid's "A new foe has appeared!" came about 3 times, but no Enemigo showed up. Thought: spawned underground. | More likely the add-on: a raid's Enemigo has no owner and no name, so the wild-companion despawn treats it as wild. Raid waves spawn up to ~64 blocks from the village, and the Enemigo isn't a raider (doesn't march in), so past 32 blocks it's gone within a minute or so, past 128 at once. Fix: Enemigos never count as wild companions. | Found, to fix |
+| 11 | Axes disable shields (players' and mobs'), hammers and other heavy weapons don't. Good balance or misleading? | Vanilla: only `AxeItem`s disable shields; mobs with shields follow the same check. Option: a tag of heavy weapons (Medieval Armory hammers, maces, etc.) that also disable shields, maybe for a shorter time than an axe. | Undecided |

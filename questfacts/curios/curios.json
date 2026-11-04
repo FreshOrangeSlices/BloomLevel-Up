@@ -1,0 +1,554 @@
+{
+ "slots": {
+  "feet": [
+   [
+    "L_Enders_Cataclysm-3.31.jar",
+    {
+     "size": 1,
+     "order": 190,
+     "icon": "minecraft:item/empty_armor_slot_boots"
+    }
+   ]
+  ],
+  "hands": [
+   [
+    "L_Enders_Cataclysm-3.31.jar",
+    {
+     "size": 2
+    }
+   ],
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 140,
+     "icon": "curios:slot/empty_hands_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ]
+  ],
+  "rings": [
+   [
+    "L_Enders_Cataclysm-3.31.jar",
+    {
+     "size": 2,
+     "order": 110,
+     "icon": "cataclysm:item/empty_ring_slot"
+    }
+   ]
+  ],
+  "talisman": [
+   [
+    "L_Enders_Cataclysm-3.31.jar",
+    {
+     "size": 0,
+     "order": 180,
+     "icon": "cataclysm:item/empty_talisman_slot"
+    }
+   ]
+  ],
+  "waist": [
+   [
+    "L_Enders_Cataclysm-3.31.jar",
+    {
+     "size": 1,
+     "order": 170,
+     "icon": "cataclysm:item/empty_waist_slot"
+    }
+   ]
+  ],
+  "back": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 80,
+     "icon": "curios:slot/empty_back_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ]
+  ],
+  "belt": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 180,
+     "icon": "curios:slot/empty_belt_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ]
+  ],
+  "body": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 100,
+     "icon": "curios:slot/empty_body_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ]
+  ],
+  "bracelet": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 120,
+     "icon": "curios:slot/empty_bracelet_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ]
+  ],
+  "charm": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 200,
+     "icon": "curios:slot/empty_charm_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ],
+   [
+    "mythsandlegends-1.0.6.jar",
+    {
+     "size": 1
+    }
+   ]
+  ],
+  "curio": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 20,
+     "icon": "curios:slot/empty_curio_slot"
+    }
+   ]
+  ],
+  "head": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 40,
+     "icon": "curios:slot/empty_head_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ]
+  ],
+  "necklace": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 60,
+     "icon": "curios:slot/empty_necklace_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ],
+   [
+    "irons_spellbooks-1.20.1-3.16.3.jar",
+    {
+     "size": 1
+    }
+   ]
+  ],
+  "ring": [
+   [
+    "curios-forge-5.14.1+1.20.1.jar",
+    {
+     "order": 160,
+     "icon": "curios:slot/empty_ring_slot",
+     "validators": [
+      "curios:tag"
+     ]
+    }
+   ],
+   [
+    "irons_spellbooks-1.20.1-3.16.3.jar",
+    {
+     "size": 2
+    }
+   ]
+  ],
+  "spellbook": [
+   [
+    "irons_spellbooks-1.20.1-3.16.3.jar",
+    {
+     "replace": false,
+     "size": 1,
+     "order": 500,
+     "icon": "curios:slot/spellbook_slot"
+    }
+   ]
+  ],
+  "belt_slot": [
+   [
+    "mythsandlegends-1.0.6.jar",
+    {
+     "size": 1
+    }
+   ]
+  ],
+  "body_slot": [
+   [
+    "mythsandlegends-1.0.6.jar",
+    {
+     "size": 1
+    }
+   ]
+  ],
+  "necklace_slot": [
+   [
+    "mythsandlegends-1.0.6.jar",
+    {
+     "size": 1
+    }
+   ]
+  ],
+  "ring_slot": [
+   [
+    "mythsandlegends-1.0.6.jar",
+    {
+     "size": 1
+    }
+   ]
+  ],
+  "spell_book": [
+   [
+    "spell_engine-forge-1.10.10+1.20.1.jar",
+    {
+     "icon": "spell_engine:slot/spell_book",
+     "order": 2,
+     "drop_rule": "ALWAYS_KEEP"
+    }
+   ]
+  ],
+  "spell_quiver": [
+   [
+    "spell_engine-forge-1.10.10+1.20.1.jar",
+    {
+     "icon": "spell_engine:slot/spell_quiver",
+     "order": 3
+    }
+   ]
+  ],
+  "spell_scroll": [
+   [
+    "spell_engine-forge-1.10.10+1.20.1.jar",
+    {
+     "icon": "spell_engine:slot/spell_scroll",
+     "order": 0
+    }
+   ]
+  ],
+  "spell_trinket": [
+   [
+    "spell_engine-forge-1.10.10+1.20.1.jar",
+    {
+     "icon": "spell_engine:slot/spell_trinket",
+     "order": 1
+    }
+   ]
+  ]
+ },
+ "fits": {
+  "belt": [
+   {
+    "id": "mythsandlegends:fire_heart",
+    "name": "Fire Heart"
+   }
+  ],
+  "body": [
+   {
+    "id": "mythsandlegends:antique_emblem",
+    "name": "Antique Emblem"
+   }
+  ],
+  "charm": [
+   {
+    "id": "mythsandlegends:higa_amulet",
+    "name": "Higa Amulet"
+   }
+  ],
+  "feet": [
+   {
+    "id": "cataclysm:sturdy_boots",
+    "name": "Sturdy Boots"
+   }
+  ],
+  "hands": [
+   {
+    "id": "cataclysm:blazing_grips",
+    "name": "Blazing Grips"
+   },
+   {
+    "id": "cataclysm:chitin_claw",
+    "name": "Chitin Claw"
+   },
+   {
+    "id": "cataclysm:sticky_gloves",
+    "name": "Sticky Gloves"
+   }
+  ],
+  "head": [
+   {
+    "id": "cataclysm:aptrgangr_head",
+    "name": "Aptrgangr Head"
+   },
+   {
+    "id": "cataclysm:draugr_head",
+    "name": "Draugr Head"
+   },
+   {
+    "id": "cataclysm:kobolediator_skull",
+    "name": "Kobolediator Skull"
+   }
+  ],
+  "necklace": [
+   {
+    "id": "cataclysm:berserker_soul_amulet",
+    "name": "Berserker Soul Amulet"
+   },
+   {
+    "id": "cataclysm:vitality_ankh",
+    "name": "Vitality Ankh"
+   },
+   {
+    "id": "irons_spellbooks:amethyst_resonance_charm",
+    "name": "Amethyst Resonance Charm"
+   },
+   {
+    "id": "irons_spellbooks:concentration_amulet",
+    "name": "Amulet of Concentration"
+   },
+   {
+    "id": "irons_spellbooks:conjurers_talisman",
+    "name": "Conjurer's Talisman"
+   },
+   {
+    "id": "irons_spellbooks:enchanted_ward_amulet",
+    "name": "Amulet of Warding"
+   },
+   {
+    "id": "irons_spellbooks:greater_conjurers_talisman",
+    "name": "Greater Conjurer's Talisman"
+   },
+   {
+    "id": "irons_spellbooks:heavy_chain_necklace",
+    "name": "Heavy Chain"
+   },
+   {
+    "id": "irons_spellbooks:teleportation_amulet",
+    "name": "Amulet of Teleportation"
+   },
+   {
+    "id": "mythsandlegends:necklace_of_torngarsuk",
+    "name": "Necklace of Torngarsuk"
+   }
+  ],
+  "ring": [
+   {
+    "id": "irons_spellbooks:affinity_ring",
+    "name": "Ring of %s Affinity"
+   },
+   {
+    "id": "irons_spellbooks:betrayer_signet",
+    "name": "Signet of the Betrayer"
+   },
+   {
+    "id": "irons_spellbooks:cast_time_ring",
+    "name": "Ring of Expediency"
+   },
+   {
+    "id": "irons_spellbooks:cooldown_ring",
+    "name": "Ring of Recovery"
+   },
+   {
+    "id": "irons_spellbooks:emerald_stoneplate_ring",
+    "name": "Emerald Stoneplate Ring"
+   },
+   {
+    "id": "irons_spellbooks:expulsion_ring",
+    "name": "Ring of Expulsion"
+   },
+   {
+    "id": "irons_spellbooks:fireward_ring",
+    "name": "Fireward Ring"
+   },
+   {
+    "id": "irons_spellbooks:frostward_ring",
+    "name": "Frostward Ring"
+   },
+   {
+    "id": "irons_spellbooks:invisibility_ring",
+    "name": "Ring of Invisibility"
+   },
+   {
+    "id": "irons_spellbooks:lurker_ring",
+    "name": "Ring of the Lurker"
+   },
+   {
+    "id": "irons_spellbooks:mana_ring",
+    "name": "Ring of Mana"
+   },
+   {
+    "id": "irons_spellbooks:poisonward_ring",
+    "name": "Poisonward Ring"
+   },
+   {
+    "id": "irons_spellbooks:silver_ring",
+    "name": "Silver Ring"
+   },
+   {
+    "id": "irons_spellbooks:visibility_ring",
+    "name": "Ring of Visibility"
+   },
+   {
+    "id": "irons_spellbooks:wicked_bone_ring",
+    "name": "Wicked Bone Ring"
+   },
+   {
+    "id": "mythsandlegends:svarogs_ring",
+    "name": "Svarog's Ring"
+   }
+  ],
+  "rings": [
+   {
+    "id": "cataclysm:ring_of_grudged",
+    "name": "Ring of Grudged"
+   }
+  ],
+  "spell_book": [
+   {
+    "id": "spell_engine:spell_book",
+    "name": "Spell Book"
+   },
+   {
+    "id": "spell_engine:spell_scroll",
+    "name": "Spell Scroll"
+   }
+  ],
+  "spell_quiver": [],
+  "spell_scroll": [
+   {
+    "id": "spell_engine:spell_scroll",
+    "name": "Spell Scroll"
+   }
+  ],
+  "spell_trinket": [],
+  "spellbook": [
+   {
+    "id": "irons_spellbooks:blaze_spell_book",
+    "name": "Blaze Instruction Manual"
+   },
+   {
+    "id": "irons_spellbooks:copper_spell_book",
+    "name": "Flimsy Journal"
+   },
+   {
+    "id": "irons_spellbooks:cursed_doll_spell_book",
+    "name": "Vampiric Spell Book"
+   },
+   {
+    "id": "irons_spellbooks:diamond_spell_book",
+    "name": "Enchanted Spell Book"
+   },
+   {
+    "id": "irons_spellbooks:dragonskin_spell_book",
+    "name": "Dragonskin Spell Book"
+   },
+   {
+    "id": "irons_spellbooks:druidic_spell_book",
+    "name": "Druidic Tome"
+   },
+   {
+    "id": "irons_spellbooks:evoker_spell_book",
+    "name": "Grimoire of Evokation"
+   },
+   {
+    "id": "irons_spellbooks:gold_spell_book",
+    "name": "Apprentice's Spell Book"
+   },
+   {
+    "id": "irons_spellbooks:ice_spell_book",
+    "name": "Frostbranded Book"
+   },
+   {
+    "id": "irons_spellbooks:iron_spell_book",
+    "name": "Ironbound Tome"
+   },
+   {
+    "id": "irons_spellbooks:legendary_spell_book",
+    "name": "legendary_spell_book"
+   },
+   {
+    "id": "irons_spellbooks:necronomicon_spell_book",
+    "name": "Necronomicon"
+   },
+   {
+    "id": "irons_spellbooks:netherite_spell_book",
+    "name": "Ancient Codex"
+   },
+   {
+    "id": "irons_spellbooks:rotten_spell_book",
+    "name": "Rotten Spell Book"
+   },
+   {
+    "id": "irons_spellbooks:villager_spell_book",
+    "name": "Villager Bible"
+   },
+   {
+    "id": "irons_spellbooks:wimpy_spell_book",
+    "name": "Wimpy Spell Book"
+   }
+  ],
+  "talisman": [
+   {
+    "id": "cataclysm:unbreakable_skull",
+    "name": "Unbreakable Skull"
+   }
+  ],
+  "waist": [
+   {
+    "id": "cataclysm:belt_of_beginner",
+    "name": "Belt of Beginner"
+   },
+   {
+    "id": "cataclysm:belt_of_monstrosity",
+    "name": "belt_of_monstrosity"
+   }
+  ]
+ },
+ "slotnames": {
+  "feet": "Feet",
+  "rings": "Rings",
+  "talisman": "Talisman",
+  "waist": "Waist",
+  "curio": "Curio",
+  "necklace": "Necklace",
+  "ring": "Ring",
+  "head": "Head",
+  "back": "Back",
+  "belt": "Belt",
+  "body": "Body",
+  "charm": "Charm",
+  "hands": "Hands",
+  "bracelet": "Bracelet",
+  "spellbook": "Spell Book",
+  "spell_book": "Spell Book",
+  "spell_scroll": "Spell Scroll",
+  "spell_quiver": "Quiver",
+  "spell_trinket": "Trinket"
+ }
+}

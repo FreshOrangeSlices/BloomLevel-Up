@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.mojang.datafixers.util.Pair;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +30,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PotionItem;
@@ -146,6 +149,35 @@ public final class MiscSkill {
 		return instance.getEffect().getCategory() == MobEffectCategory.HARMFUL;
 	}
 
+	/**
+	 * Unsafe food for Iron Stomach: tagged ({@code bloomlevelup:food/unsafe}: raw meat, rotten flesh, and modded food
+	 * whose bad effects come from its own code), or any food whose effects include a harmful one, so a mod's spoiled
+	 * food counts without being listed (FreshOrangeSlices, 2026-11-02: Born in Chaos's rotten fish still poisoned).
+	 */
+	public static boolean unsafeFood(ItemStack stack, LivingEntity eater) {
+		if (stack.isEmpty()) {
+			return false;
+		}
+
+		if (stack.is(BloomTags.FOOD_UNSAFE)) {
+			return true;
+		}
+
+		FoodProperties food = stack.getFoodProperties(eater);
+
+		if (food == null) {
+			return false;
+		}
+
+		for (Pair<MobEffectInstance, Float> effect : food.getEffects()) {
+			if (effect.getFirst() != null && effect.getSecond() > 0.0F && harmful(effect.getFirst())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	// ------------------------------------------------------------------ XP orbs (Forge's pickup event, ExperienceOrb mixin)
 
 	/** Misc XP mirrors the orb's own value: before Wisdom, and whatever Mending takes. */
@@ -189,7 +221,7 @@ public final class MiscSkill {
 	public static Food ironStomachFood(LivingEntity eater, ItemStack stack, int nutrition, float saturationModifier) {
 		Food food = new Food(nutrition, saturationModifier);
 
-		if (!(eater instanceof ServerPlayer player) || stack == null || !stack.is(BloomTags.FOOD_UNSAFE) || !active(player, MiscIds.IRON_STOMACH)) {
+		if (!(eater instanceof ServerPlayer player) || stack == null || !unsafeFood(stack, player) || !active(player, MiscIds.IRON_STOMACH)) {
 			return food;
 		}
 
@@ -202,7 +234,7 @@ public final class MiscSkill {
 	/** Iron Stomach: harmful effects from unsafe food you chose to eat never land. */
 	private static boolean allowEffect(MobEffectInstance instance, ServerPlayer player) {
 		ItemStack eating = ConsumeContext.consumed(player);
-		return eating.isEmpty() || !harmful(instance) || !eating.is(BloomTags.FOOD_UNSAFE) || !active(player, MiscIds.IRON_STOMACH);
+		return eating.isEmpty() || !harmful(instance) || !unsafeFood(eating, player) || !active(player, MiscIds.IRON_STOMACH);
 	}
 
 	/** Selective Cleansing: while drinking milk, an effect that isn't harmful stays (milk only cures the harmful ones). */

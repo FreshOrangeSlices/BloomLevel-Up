@@ -21,6 +21,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -46,6 +47,7 @@ import com.freshorangeslices.bloomlevelup.progression.ActionResult;
 import com.freshorangeslices.bloomlevelup.progression.ProgressionService;
 import com.freshorangeslices.bloomlevelup.skill.DurabilitySaves;
 import com.freshorangeslices.bloomlevelup.skill.SkillXp;
+import com.freshorangeslices.bloomlevelup.skill.utility.ChainBreaker;
 import com.freshorangeslices.bloomlevelup.skill.utility.PlacedBlocks;
 import com.freshorangeslices.bloomlevelup.skill.utility.UtilityIds;
 import com.freshorangeslices.bloomlevelup.skill.utility.UtilitySkill;
@@ -320,6 +322,7 @@ public final class UtilityGameTests {
 	public static void timberFellsNaturalTrees(GameTestHelper helper) {
 		ServerPlayer player = player(helper, new ItemStack(Items.DIAMOND_AXE));
 		grant(player, List.of(SkillXp.COMBAT), UtilityIds.TIMBER);
+		helper.setBlock(new BlockPos(1, 0, 1), Blocks.GRASS_BLOCK); // a tree stands on the ground
 
 		for (int y = 1; y <= 5; y++) {
 			helper.setBlock(new BlockPos(1, y, 1), Blocks.OAK_LOG);
@@ -346,6 +349,8 @@ public final class UtilityGameTests {
 		grant(player, List.of(SkillXp.COMBAT), UtilityIds.TIMBER);
 
 		// A pillar with no leaves is not a tree.
+		helper.setBlock(new BlockPos(1, 0, 1), Blocks.DIRT);
+
 		for (int y = 1; y <= 3; y++) {
 			helper.setBlock(new BlockPos(1, y, 1), Blocks.OAK_LOG);
 		}
@@ -355,6 +360,8 @@ public final class UtilityGameTests {
 		helper.assertBlockPresent(Blocks.OAK_LOG, new BlockPos(1, 2, 1));
 
 		// Placed logs are skipped even when leaves are next to them.
+		helper.setBlock(new BlockPos(3, 0, 3), Blocks.DIRT);
+
 		for (int y = 1; y <= 3; y++) {
 			helper.setBlock(new BlockPos(3, y, 3), Blocks.OAK_LOG);
 			PlacedBlocks.mark(helper.getLevel(), helper.absolutePos(new BlockPos(3, y, 3)));
@@ -366,6 +373,40 @@ public final class UtilityGameTests {
 		player.gameMode.destroyBlock(helper.absolutePos(new BlockPos(3, 1, 3)));
 		UtilitySkill.runChains();
 		helper.assertBlockPresent(Blocks.OAK_LOG, new BlockPos(3, 2, 3));
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
+	public static void timberLeavesAHousesBeams(GameTestHelper helper) {
+		ServerPlayer player = player(helper, new ItemStack(Items.DIAMOND_AXE));
+		grant(player, List.of(SkillXp.COMBAT), UtilityIds.TIMBER);
+
+		// A spruce frame as a structure builds it (worldgen logs, never marked as placed): a post on a stone floor, a
+		// beam across, and a tree's natural leaves touching the beam's end.
+		helper.setBlock(new BlockPos(1, 0, 1), Blocks.COBBLESTONE);
+
+		for (int y = 1; y <= 3; y++) {
+			helper.setBlock(new BlockPos(1, y, 1), Blocks.SPRUCE_LOG);
+		}
+
+		for (int x = 2; x <= 5; x++) {
+			helper.setBlock(new BlockPos(x, 3, 1), Blocks.SPRUCE_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X));
+		}
+
+		helper.setBlock(new BlockPos(6, 3, 1), Blocks.SPRUCE_LEAVES);
+
+		// Cut in the middle of the beam: nothing under it but air, so not a trunk.
+		player.gameMode.destroyBlock(helper.absolutePos(new BlockPos(3, 3, 1)));
+		UtilitySkill.runChains();
+		helper.assertBlockPresent(Blocks.SPRUCE_LOG, new BlockPos(4, 3, 1));
+		helper.assertBlockPresent(Blocks.SPRUCE_LOG, new BlockPos(2, 3, 1));
+
+		// Cut at the post's foot: it stands on cobblestone, not the ground, so still not a tree.
+		player.gameMode.destroyBlock(helper.absolutePos(new BlockPos(1, 1, 1)));
+		UtilitySkill.runChains();
+		helper.assertBlockPresent(Blocks.SPRUCE_LOG, new BlockPos(1, 2, 1));
+		helper.assertTrue(ChainBreaker.onTrunk(helper.getLevel(), helper.absolutePos(new BlockPos(1, 3, 1))) == false,
+				"A post on a cobblestone floor isn't a trunk");
 		helper.succeed();
 	}
 

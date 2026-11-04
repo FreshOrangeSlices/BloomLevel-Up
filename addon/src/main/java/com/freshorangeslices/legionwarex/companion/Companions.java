@@ -13,6 +13,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.OwnableEntity;
 
 /**
  * Companions, as the add-on finds them: the entity types in its tag {@code legionwarex:companions} (Migamigos' five;
@@ -51,7 +52,25 @@ public final class Companions {
 
 	/** Migamigos' hostile mode: an Enemigo (a sentinel, or a raid's swapped-in witch or vindicator). Read from its saved data. */
 	public static boolean isEnemigo(Entity entity) {
-		return isCompanion(entity) && entity.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo");
+		if (!isCompanion(entity)) {
+			return false;
+		}
+
+		Boolean enemigo = Amigos.enemigo(entity);
+		return enemigo != null ? enemigo : entity.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo");
+	}
+
+	/** The player a companion or pet belongs to (Migamigos' owner, or a tamed animal's), or null. */
+	public static UUID ownerOf(Entity entity) {
+		if (entity == null) {
+			return null;
+		}
+
+		if (isCompanion(entity)) {
+			return owner(entity);
+		}
+
+		return entity instanceof OwnableEntity owned ? owned.getOwnerUUID() : null;
 	}
 
 	/**

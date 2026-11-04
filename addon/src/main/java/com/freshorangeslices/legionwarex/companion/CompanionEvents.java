@@ -15,8 +15,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -24,8 +26,9 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
- * A befriended companion's death leaves its owner a keepsake; wild companions despawn like monsters; a player who beats
- * an Enemigo (Migamigos' hostile mode) earns the hidden advancement {@link #ENEMIGO}, which the quest book asks for.
+ * A befriended companion's death leaves its owner a keepsake; wild companions despawn like monsters (a raid's Enemigo
+ * only once the raid is over); a companion told to stay with wandering off stays put ({@link StayPutGoal}); a player who
+ * beats an Enemigo (Migamigos' hostile mode) earns the hidden advancement {@link #ENEMIGO}, which the quest book asks for.
  */
 public final class CompanionEvents {
 	/** Beat an Enemigo: no display of its own (the quest book shows it), granted by {@link #onEnemigoDeath}. */
@@ -103,11 +106,21 @@ public final class CompanionEvents {
 		}
 	}
 
+	/** A wild companion despawns like a monster, except a wild Enemigo while a raid is on near it ({@link RaidEnemigos}). */
 	@SubscribeEvent
 	public static void onTick(LivingEvent.LivingTickEvent event) {
 		if (event.getEntity() instanceof Mob mob && mob.tickCount % 20 == 0 && !mob.level().isClientSide
-				&& AddonConfig.wildDespawn() && Companions.isWild(mob)) {
+				&& AddonConfig.wildDespawn() && Companions.isWild(mob) && RaidEnemigos.raid(mob) == null) {
 			Despawning.tick(mob);
+		}
+	}
+
+	/** Goals aren't saved, so a companion gets the add-on's whenever it joins a level: staying put, and marching with a raid. */
+	@SubscribeEvent
+	public static void onJoin(EntityJoinLevelEvent event) {
+		if (!event.getLevel().isClientSide() && event.getEntity() instanceof PathfinderMob mob && Companions.isCompanion(mob)) {
+			mob.goalSelector.addGoal(StayPutGoal.PRIORITY, new StayPutGoal(mob));
+			mob.goalSelector.addGoal(RaidEnemigos.MarchGoal.PRIORITY, new RaidEnemigos.MarchGoal(mob));
 		}
 	}
 

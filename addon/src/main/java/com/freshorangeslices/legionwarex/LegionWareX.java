@@ -7,6 +7,7 @@ import com.freshorangeslices.legionwarex.chart.ChartCommand;
 import com.freshorangeslices.legionwarex.chart.ChartEvents;
 import com.freshorangeslices.legionwarex.chart.PirateChartItem;
 import com.freshorangeslices.legionwarex.companion.CompanionEvents;
+import com.freshorangeslices.legionwarex.companion.OwnerHits;
 import com.freshorangeslices.legionwarex.harvest.HarvestCommand;
 import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
@@ -71,6 +72,7 @@ public final class LegionWareX {
 		LOOT_MODIFIERS.register(modBus);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, AddonConfig.SPEC);
 		MinecraftForge.EVENT_BUS.register(CompanionEvents.class);
+		MinecraftForge.EVENT_BUS.register(OwnerHits.class);
 		MinecraftForge.EVENT_BUS.register(BandEvents.class);
 		MinecraftForge.EVENT_BUS.register(WorldEvents.class);
 		MinecraftForge.EVENT_BUS.register(ChartEvents.class);

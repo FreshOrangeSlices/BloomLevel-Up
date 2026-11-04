@@ -189,6 +189,19 @@ public final class MiscGameTests {
 	}
 
 	@GameTest(template = "empty")
+	public static void ironStomachKnowsBadFoodByItsEffects(GameTestHelper helper) {
+		ServerPlayer player = player(helper);
+		// Tagged, and with a harmful effect of its own.
+		helper.assertTrue(MiscSkill.unsafeFood(new ItemStack(Items.PUFFERFISH), player), "Pufferfish is unsafe");
+		helper.assertTrue(MiscSkill.unsafeFood(new ItemStack(Items.SPIDER_EYE), player), "A spider eye is unsafe");
+		// Good food, and food whose effects are all good, isn't.
+		helper.assertFalse(MiscSkill.unsafeFood(new ItemStack(Items.BREAD), player), "Bread is safe");
+		helper.assertFalse(MiscSkill.unsafeFood(new ItemStack(Items.GOLDEN_APPLE), player), "A golden apple's effects are all good");
+		helper.assertFalse(MiscSkill.unsafeFood(new ItemStack(Items.STONE), player), "Stone isn't food");
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
 	public static void selectiveCleansingKeepsBuffs(GameTestHelper helper) {
 		ServerPlayer player = player(helper);
 		grant(player, MiscIds.SELECTIVE_CLEANSING);

@@ -58,6 +58,8 @@ public final class BloomTags {
 	public static final TagKey<Block> VEIN_MINEABLE = block("vein_mineable");
 	public static final TagKey<Block> TIMBER_LOGS = block("timber_logs");
 	public static final TagKey<Block> TIMBER_LEAVES = block("timber_leaves");
+	/** What a tree's trunk stands on (dirt, sand, nylium, stone...): Timber only fells a cut log with logs straight down to it. */
+	public static final TagKey<Block> TIMBER_GROUND = block("timber_ground");
 	public static final TagKey<Block> YIELD_ELIGIBLE = block("yield_eligible");
 	public static final TagKey<Block> GROWTH_AURA_CROPS = block("growth_aura_crops");
 	/** Natural dig blocks that can turn up Shovel Mastery treasure. */

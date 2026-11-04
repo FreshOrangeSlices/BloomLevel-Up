@@ -1,0 +1,1459 @@
+## net/mcreator/borninchaosv/item/IntoxicatingDecoctionItem.class
+Compiled from "IntoxicatingDecoctionItem.java"
+public class net.mcreator.borninchaosv.item.IntoxicatingDecoctionItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.IntoxicatingDecoctionItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_0
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: fconst_0
+      31: invokevirtual #40                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      34: invokevirtual #44                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38765_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      37: invokevirtual #48                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      40: invokevirtual #52                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      43: invokespecial #55                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      46: return
+
+  public net.minecraft.world.item.UseAnim m_6164_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: getstatic     #65                 // Field net/minecraft/world/item/UseAnim.DRINK:Lnet/minecraft/world/item/UseAnim;
+       3: areturn
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        38
+       2: ireturn
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #74                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #76                 // String item.born_in_chaos_v1.intoxicating_decoction.description_0
+      12: invokestatic  #82                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #88,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: new           #99                 // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #105                // Field net/minecraft/world/item/Items.f_42590_:Lnet/minecraft/world/item/Item;
+       7: invokespecial #108                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      10: astore        4
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: invokespecial #110                // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+      19: pop
+      20: aload_3
+      21: invokevirtual #116                // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      24: dstore        5
+      26: aload_3
+      27: invokevirtual #119                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      30: dstore        7
+      32: aload_3
+      33: invokevirtual #122                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      36: dstore        9
+      38: aload_3
+      39: invokestatic  #128                // Method net/mcreator/borninchaosv/procedures/IntoxicatingDecoctionIghrokZakanchivaietIspolzovaniiePriedmietaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      42: aload_1
+      43: invokevirtual #132                // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      46: ifeq          52
+      49: aload         4
+      51: areturn
+      52: aload_3
+      53: instanceof    #136                // class net/minecraft/world/entity/player/Player
+      56: ifeq          98
+      59: aload_3
+      60: checkcast     #136                // class net/minecraft/world/entity/player/Player
+      63: astore        11
+      65: aload         11
+      67: invokevirtual #140                // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+      70: getfield      #146                // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+      73: ifne          98
+      76: aload         11
+      78: invokevirtual #150                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      81: aload         4
+      83: invokevirtual #156                // Method net/minecraft/world/entity/player/Inventory.m_36054_:(Lnet/minecraft/world/item/ItemStack;)Z
+      86: ifne          98
+      89: aload         11
+      91: aload         4
+      93: iconst_0
+      94: invokevirtual #160                // Method net/minecraft/world/entity/player/Player.m_36176_:(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/entity/item/ItemEntity;
+      97: pop
+      98: aload_1
+      99: areturn
+}
+
+## net/mcreator/borninchaosv/item/MonsterFleshItem.class
+Compiled from "MonsterFleshItem.java"
+public class net.mcreator.borninchaosv.item.MonsterFleshItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.MonsterFleshItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #26                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #30                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #36                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #40                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #41                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: bipush        6
+      28: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      31: ldc           #46                 // float 0.1f
+      33: invokevirtual #50                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      36: invokevirtual #54                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38757_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      39: invokevirtual #58                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      42: invokevirtual #62                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      45: invokespecial #65                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      48: return
+
+  public int m_6473_();
+    Code:
+       0: iconst_5
+       1: ireturn
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        40
+       2: ireturn
+
+  public com.google.common.collect.Multimap<net.minecraft.world.entity.ai.attributes.Attribute, net.minecraft.world.entity.ai.attributes.AttributeModifier> m_7167_(net.minecraft.world.entity.EquipmentSlot);
+    Code:
+       0: aload_1
+       1: getstatic     #82                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+       4: if_acmpne     78
+       7: invokestatic  #86                 // Method com/google/common/collect/ImmutableMultimap.builder:()Lcom/google/common/collect/ImmutableMultimap$Builder;
+      10: astore_2
+      11: aload_2
+      12: aload_0
+      13: aload_1
+      14: invokespecial #88                 // Method net/minecraft/world/item/Item.m_7167_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;
+      17: invokevirtual #92                 // Method com/google/common/collect/ImmutableMultimap$Builder.putAll:(Lcom/google/common/collect/Multimap;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      20: pop
+      21: aload_2
+      22: getstatic     #98                 // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      25: new           #21                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+      28: dup
+      29: getstatic     #102                // Field f_41374_:Ljava/util/UUID;
+      32: ldc           #104                // String Item modifier
+      34: ldc2_w        #105                // double 3.0d
+      37: getstatic     #110                // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      40: invokespecial #113                // Method net/minecraft/world/entity/ai/attributes/AttributeModifier."<init>":(Ljava/util/UUID;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V
+      43: invokevirtual #117                // Method com/google/common/collect/ImmutableMultimap$Builder.put:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      46: pop
+      47: aload_2
+      48: getstatic     #120                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22283_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      51: new           #21                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+      54: dup
+      55: getstatic     #123                // Field f_41375_:Ljava/util/UUID;
+      58: ldc           #104                // String Item modifier
+      60: ldc2_w        #124                // double -2.4d
+      63: getstatic     #110                // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      66: invokespecial #113                // Method net/minecraft/world/entity/ai/attributes/AttributeModifier."<init>":(Ljava/util/UUID;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V
+      69: invokevirtual #117                // Method com/google/common/collect/ImmutableMultimap$Builder.put:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      72: pop
+      73: aload_2
+      74: invokevirtual #129                // Method com/google/common/collect/ImmutableMultimap$Builder.build:()Lcom/google/common/collect/ImmutableMultimap;
+      77: areturn
+      78: aload_0
+      79: aload_1
+      80: invokespecial #88                 // Method net/minecraft/world/item/Item.m_7167_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;
+      83: areturn
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: new           #136                // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #142                // Field net/minecraft/world/item/Items.f_42500_:Lnet/minecraft/world/item/Item;
+       7: invokespecial #145                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      10: astore        4
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: invokespecial #147                // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+      19: pop
+      20: aload_3
+      21: invokevirtual #153                // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      24: dstore        5
+      26: aload_3
+      27: invokevirtual #156                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      30: dstore        7
+      32: aload_3
+      33: invokevirtual #159                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      36: dstore        9
+      38: aload_3
+      39: invokestatic  #165                // Method net/mcreator/borninchaosv/procedures/MonsterFleshPriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      42: aload_1
+      43: invokevirtual #169                // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      46: ifeq          52
+      49: aload         4
+      51: areturn
+      52: aload_3
+      53: instanceof    #173                // class net/minecraft/world/entity/player/Player
+      56: ifeq          98
+      59: aload_3
+      60: checkcast     #173                // class net/minecraft/world/entity/player/Player
+      63: astore        11
+      65: aload         11
+      67: invokevirtual #177                // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+      70: getfield      #183                // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+      73: ifne          98
+      76: aload         11
+      78: invokevirtual #187                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      81: aload         4
+      83: invokevirtual #193                // Method net/minecraft/world/entity/player/Inventory.m_36054_:(Lnet/minecraft/world/item/ItemStack;)Z
+      86: ifne          98
+      89: aload         11
+      91: aload         4
+      93: iconst_0
+      94: invokevirtual #197                // Method net/minecraft/world/entity/player/Player.m_36176_:(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/entity/item/ItemEntity;
+      97: pop
+      98: aload_1
+      99: areturn
+
+  public boolean m_7579_(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #212                // Method net/minecraft/world/item/Item.m_7579_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Z
+       7: istore        4
+       9: aload_3
+      10: invokestatic  #215                // Method net/mcreator/borninchaosv/procedures/MonsterFleshPriUdariePoSushchnostiPriedmietomProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      13: iload         4
+      15: ireturn
+}
+
+## net/mcreator/borninchaosv/item/PotionofRageItem.class
+Compiled from "PotionofRageItem.java"
+public class net.mcreator.borninchaosv.item.PotionofRageItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.PotionofRageItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        16
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_0
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: fconst_0
+      31: invokevirtual #40                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      34: invokevirtual #44                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38765_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      37: invokevirtual #48                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      40: invokevirtual #52                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      43: invokespecial #55                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      46: return
+
+  public net.minecraft.world.item.UseAnim m_6164_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: getstatic     #65                 // Field net/minecraft/world/item/UseAnim.DRINK:Lnet/minecraft/world/item/UseAnim;
+       3: areturn
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        25
+       2: ireturn
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #74                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #76                 // String item.born_in_chaos_v1.potion_of_rampage.description_0
+      12: invokestatic  #82                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #88,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: aload_3
+      22: ldc           #90                 // String item.born_in_chaos_v1.potion_of_rampage.description_1
+      24: invokestatic  #82                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      27: invokeinterface #88,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      32: pop
+      33: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: new           #101                // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #107                // Field net/minecraft/world/item/Items.f_42590_:Lnet/minecraft/world/item/Item;
+       7: invokespecial #110                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      10: astore        4
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: invokespecial #112                // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+      19: pop
+      20: aload_3
+      21: invokevirtual #118                // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      24: dstore        5
+      26: aload_3
+      27: invokevirtual #121                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      30: dstore        7
+      32: aload_3
+      33: invokevirtual #124                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      36: dstore        9
+      38: aload_2
+      39: dload         5
+      41: dload         7
+      43: dload         9
+      45: aload_3
+      46: invokestatic  #130                // Method net/mcreator/borninchaosv/procedures/PotionofRagePriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;)V
+      49: aload_1
+      50: invokevirtual #134                // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      53: ifeq          59
+      56: aload         4
+      58: areturn
+      59: aload_3
+      60: instanceof    #138                // class net/minecraft/world/entity/player/Player
+      63: ifeq          105
+      66: aload_3
+      67: checkcast     #138                // class net/minecraft/world/entity/player/Player
+      70: astore        11
+      72: aload         11
+      74: invokevirtual #142                // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+      77: getfield      #148                // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+      80: ifne          105
+      83: aload         11
+      85: invokevirtual #152                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      88: aload         4
+      90: invokevirtual #158                // Method net/minecraft/world/entity/player/Inventory.m_36054_:(Lnet/minecraft/world/item/ItemStack;)Z
+      93: ifne          105
+      96: aload         11
+      98: aload         4
+     100: iconst_0
+     101: invokevirtual #162                // Method net/minecraft/world/entity/player/Player.m_36176_:(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/entity/item/ItemEntity;
+     104: pop
+     105: aload_1
+     106: areturn
+}
+
+## net/mcreator/borninchaosv/item/RottenFishItem.class
+Compiled from "RottenFishItem.java"
+public class net.mcreator.borninchaosv.item.RottenFishItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.RottenFishItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_3
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: ldc           #37                 // float 0.3f
+      32: invokevirtual #41                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      35: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      38: invokevirtual #49                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      41: invokespecial #52                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      44: return
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        30
+       2: ireturn
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #62                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       7: astore        4
+       9: aload_3
+      10: invokevirtual #68                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      13: dstore        5
+      15: aload_3
+      16: invokevirtual #71                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      19: dstore        7
+      21: aload_3
+      22: invokevirtual #74                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      25: dstore        9
+      27: aload_3
+      28: invokestatic  #80                 // Method net/mcreator/borninchaosv/procedures/RottenFishPriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      31: aload         4
+      33: areturn
+}
+
+## net/mcreator/borninchaosv/item/SeaTerrorEyeItem.class
+Compiled from "SeaTerrorEyeItem.java"
+public class net.mcreator.borninchaosv.item.SeaTerrorEyeItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.SeaTerrorEyeItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_1
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: ldc           #37                 // float 0.5f
+      32: invokevirtual #41                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      35: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38765_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      38: invokevirtual #49                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      41: invokevirtual #53                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      44: invokespecial #56                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      47: return
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        18
+       2: ireturn
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #67                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #69                 // String item.born_in_chaos_v1.sea_terror_eye.description_0
+      12: invokestatic  #75                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #92                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       7: astore        4
+       9: aload_3
+      10: invokevirtual #98                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      13: dstore        5
+      15: aload_3
+      16: invokevirtual #101                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      19: dstore        7
+      21: aload_3
+      22: invokevirtual #104                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      25: dstore        9
+      27: aload_3
+      28: invokestatic  #110                // Method net/mcreator/borninchaosv/procedures/SeaTerrorEyePriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      31: aload         4
+      33: areturn
+}
+
+## net/mcreator/borninchaosv/item/SmokedFishItem.class
+Compiled from "SmokedFishItem.java"
+public class net.mcreator.borninchaosv.item.SmokedFishItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.SmokedFishItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_3
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: fconst_1
+      31: invokevirtual #40                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      34: invokevirtual #44                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      37: invokevirtual #48                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      40: invokespecial #51                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      43: return
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        30
+       2: ireturn
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #61                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       7: astore        4
+       9: aload_3
+      10: invokevirtual #67                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      13: dstore        5
+      15: aload_3
+      16: invokevirtual #70                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      19: dstore        7
+      21: aload_3
+      22: invokevirtual #73                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      25: dstore        9
+      27: aload_3
+      28: invokestatic  #79                 // Method net/mcreator/borninchaosv/procedures/SmokedFleshPriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      31: aload         4
+      33: areturn
+}
+
+## net/mcreator/borninchaosv/item/SmokedFleshItem.class
+Compiled from "SmokedFleshItem.java"
+public class net.mcreator.borninchaosv.item.SmokedFleshItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.SmokedFleshItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_4
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: ldc           #37                 // float 0.3f
+      32: invokevirtual #41                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      35: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38757_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      38: invokevirtual #49                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      41: invokevirtual #53                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      44: invokespecial #56                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      47: return
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        30
+       2: ireturn
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #66                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       7: astore        4
+       9: aload_3
+      10: invokevirtual #72                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      13: dstore        5
+      15: aload_3
+      16: invokevirtual #75                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      19: dstore        7
+      21: aload_3
+      22: invokevirtual #78                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      25: dstore        9
+      27: aload_3
+      28: invokestatic  #84                 // Method net/mcreator/borninchaosv/procedures/SmokedFleshPriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      31: aload         4
+      33: areturn
+}
+
+## net/mcreator/borninchaosv/item/SmokedMonsterFleshItem.class
+Compiled from "SmokedMonsterFleshItem.java"
+public class net.mcreator.borninchaosv.item.SmokedMonsterFleshItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.SmokedMonsterFleshItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #26                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #30                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #36                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #40                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #41                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: bipush        6
+      28: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      31: ldc           #46                 // float 0.5f
+      33: invokevirtual #50                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      36: invokevirtual #54                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38757_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      39: invokevirtual #58                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      42: invokevirtual #62                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      45: invokespecial #65                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      48: return
+
+  public int m_6473_();
+    Code:
+       0: iconst_5
+       1: ireturn
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        40
+       2: ireturn
+
+  public com.google.common.collect.Multimap<net.minecraft.world.entity.ai.attributes.Attribute, net.minecraft.world.entity.ai.attributes.AttributeModifier> m_7167_(net.minecraft.world.entity.EquipmentSlot);
+    Code:
+       0: aload_1
+       1: getstatic     #82                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+       4: if_acmpne     78
+       7: invokestatic  #86                 // Method com/google/common/collect/ImmutableMultimap.builder:()Lcom/google/common/collect/ImmutableMultimap$Builder;
+      10: astore_2
+      11: aload_2
+      12: aload_0
+      13: aload_1
+      14: invokespecial #88                 // Method net/minecraft/world/item/Item.m_7167_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;
+      17: invokevirtual #92                 // Method com/google/common/collect/ImmutableMultimap$Builder.putAll:(Lcom/google/common/collect/Multimap;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      20: pop
+      21: aload_2
+      22: getstatic     #98                 // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22281_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      25: new           #21                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+      28: dup
+      29: getstatic     #102                // Field f_41374_:Ljava/util/UUID;
+      32: ldc           #104                // String Item modifier
+      34: ldc2_w        #105                // double 3.0d
+      37: getstatic     #110                // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      40: invokespecial #113                // Method net/minecraft/world/entity/ai/attributes/AttributeModifier."<init>":(Ljava/util/UUID;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V
+      43: invokevirtual #117                // Method com/google/common/collect/ImmutableMultimap$Builder.put:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      46: pop
+      47: aload_2
+      48: getstatic     #120                // Field net/minecraft/world/entity/ai/attributes/Attributes.f_22283_:Lnet/minecraft/world/entity/ai/attributes/Attribute;
+      51: new           #21                 // class net/minecraft/world/entity/ai/attributes/AttributeModifier
+      54: dup
+      55: getstatic     #123                // Field f_41375_:Ljava/util/UUID;
+      58: ldc           #104                // String Item modifier
+      60: ldc2_w        #124                // double -2.4d
+      63: getstatic     #110                // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADDITION:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      66: invokespecial #113                // Method net/minecraft/world/entity/ai/attributes/AttributeModifier."<init>":(Ljava/util/UUID;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V
+      69: invokevirtual #117                // Method com/google/common/collect/ImmutableMultimap$Builder.put:(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMultimap$Builder;
+      72: pop
+      73: aload_2
+      74: invokevirtual #129                // Method com/google/common/collect/ImmutableMultimap$Builder.build:()Lcom/google/common/collect/ImmutableMultimap;
+      77: areturn
+      78: aload_0
+      79: aload_1
+      80: invokespecial #88                 // Method net/minecraft/world/item/Item.m_7167_:(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;
+      83: areturn
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: new           #136                // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #142                // Field net/minecraft/world/item/Items.f_42500_:Lnet/minecraft/world/item/Item;
+       7: invokespecial #145                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      10: astore        4
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: invokespecial #147                // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+      19: pop
+      20: aload_3
+      21: invokevirtual #153                // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      24: dstore        5
+      26: aload_3
+      27: invokevirtual #156                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      30: dstore        7
+      32: aload_3
+      33: invokevirtual #159                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      36: dstore        9
+      38: aload_3
+      39: invokestatic  #165                // Method net/mcreator/borninchaosv/procedures/SmokedFleshPriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      42: aload_1
+      43: invokevirtual #169                // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      46: ifeq          52
+      49: aload         4
+      51: areturn
+      52: aload_3
+      53: instanceof    #173                // class net/minecraft/world/entity/player/Player
+      56: ifeq          98
+      59: aload_3
+      60: checkcast     #173                // class net/minecraft/world/entity/player/Player
+      63: astore        11
+      65: aload         11
+      67: invokevirtual #177                // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+      70: getfield      #183                // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+      73: ifne          98
+      76: aload         11
+      78: invokevirtual #187                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      81: aload         4
+      83: invokevirtual #193                // Method net/minecraft/world/entity/player/Inventory.m_36054_:(Lnet/minecraft/world/item/ItemStack;)Z
+      86: ifne          98
+      89: aload         11
+      91: aload         4
+      93: iconst_0
+      94: invokevirtual #197                // Method net/minecraft/world/entity/player/Player.m_36176_:(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/entity/item/ItemEntity;
+      97: pop
+      98: aload_1
+      99: areturn
+
+  public boolean m_7579_(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #212                // Method net/minecraft/world/item/Item.m_7579_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;)Z
+       7: istore        4
+       9: aload_3
+      10: invokestatic  #215                // Method net/mcreator/borninchaosv/procedures/MonsterFleshPriUdariePoSushchnostiPriedmietomProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      13: iload         4
+      15: ireturn
+}
+
+## net/mcreator/borninchaosv/item/StimulatingDecoctionItem.class
+Compiled from "StimulatingDecoctionItem.java"
+public class net.mcreator.borninchaosv.item.StimulatingDecoctionItem extends net.minecraft.world.item.Item {
+  public net.mcreator.borninchaosv.item.StimulatingDecoctionItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_0
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: fconst_0
+      31: invokevirtual #40                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      34: invokevirtual #44                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38765_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      37: invokevirtual #48                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      40: invokevirtual #52                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      43: invokespecial #55                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      46: return
+
+  public net.minecraft.world.item.UseAnim m_6164_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: getstatic     #65                 // Field net/minecraft/world/item/UseAnim.DRINK:Lnet/minecraft/world/item/UseAnim;
+       3: areturn
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        30
+       2: ireturn
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #74                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #76                 // String item.born_in_chaos_v1.stimulating_decoction.description_0
+      12: invokestatic  #82                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #88,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: new           #99                 // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #105                // Field net/minecraft/world/item/Items.f_42590_:Lnet/minecraft/world/item/Item;
+       7: invokespecial #108                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      10: astore        4
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: invokespecial #110                // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+      19: pop
+      20: aload_3
+      21: invokevirtual #116                // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      24: dstore        5
+      26: aload_3
+      27: invokevirtual #119                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      30: dstore        7
+      32: aload_3
+      33: invokevirtual #122                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      36: dstore        9
+      38: aload_3
+      39: invokestatic  #128                // Method net/mcreator/borninchaosv/procedures/StimulatingDecoctionPriZaviershieniiIspolzovaniiaProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      42: aload_1
+      43: invokevirtual #132                // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      46: ifeq          52
+      49: aload         4
+      51: areturn
+      52: aload_3
+      53: instanceof    #136                // class net/minecraft/world/entity/player/Player
+      56: ifeq          98
+      59: aload_3
+      60: checkcast     #136                // class net/minecraft/world/entity/player/Player
+      63: astore        11
+      65: aload         11
+      67: invokevirtual #140                // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+      70: getfield      #146                // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+      73: ifne          98
+      76: aload         11
+      78: invokevirtual #150                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      81: aload         4
+      83: invokevirtual #156                // Method net/minecraft/world/entity/player/Inventory.m_36054_:(Lnet/minecraft/world/item/ItemStack;)Z
+      86: ifne          98
+      89: aload         11
+      91: aload         4
+      93: iconst_0
+      94: invokevirtual #160                // Method net/minecraft/world/entity/player/Player.m_36176_:(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/entity/item/ItemEntity;
+      97: pop
+      98: aload_1
+      99: areturn
+}
+
+## net/mcreator/borninchaosv/procedures/IntoxicatingDecoctionIghrokZakanchivaietIspolzovaniiePriedmietaProcedure.class
+Compiled from "IntoxicatingDecoctionIghrokZakanchivaietIspolzovaniiePriedmietaProcedure.java"
+public class net.mcreator.borninchaosv.procedures.IntoxicatingDecoctionIghrokZakanchivaietIspolzovaniiePriedmietaProcedure {
+  public net.mcreator.borninchaosv.procedures.IntoxicatingDecoctionIghrokZakanchivaietIspolzovaniiePriedmietaProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          51
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      24: ifne          51
+      27: aload_1
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      31: dup
+      32: getstatic     #33                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModMobEffects.INTOXICATION:Lnet/minecraftforge/registries/RegistryObject;
+      35: invokevirtual #39                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      38: checkcast     #41                 // class net/minecraft/world/effect/MobEffect
+      41: bipush        100
+      43: iconst_0
+      44: invokespecial #44                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      47: invokevirtual #48                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      50: pop
+      51: return
+}
+
+## net/mcreator/borninchaosv/procedures/MonsterFleshPriUdariePoSushchnostiPriedmietomProcedure.class
+Compiled from "MonsterFleshPriUdariePoSushchnostiPriedmietomProcedure.java"
+public class net.mcreator.borninchaosv.procedures.MonsterFleshPriUdariePoSushchnostiPriedmietomProcedure {
+  public net.mcreator.borninchaosv.procedures.MonsterFleshPriUdariePoSushchnostiPriedmietomProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/server/level/ServerPlayer
+       9: ifeq          100
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/server/level/ServerPlayer
+      16: astore_1
+      17: aload_1
+      18: getfield      #19                 // Field net/minecraft/server/level/ServerPlayer.f_8924_:Lnet/minecraft/server/MinecraftServer;
+      21: invokevirtual #25                 // Method net/minecraft/server/MinecraftServer.m_129889_:()Lnet/minecraft/server/ServerAdvancementManager;
+      24: new           #27                 // class net/minecraft/resources/ResourceLocation
+      27: dup
+      28: ldc           #29                 // String born_in_chaos_v1:food_fight
+      30: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      33: invokevirtual #38                 // Method net/minecraft/server/ServerAdvancementManager.m_136041_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/advancements/Advancement;
+      36: astore_2
+      37: aload_1
+      38: invokevirtual #42                 // Method net/minecraft/server/level/ServerPlayer.m_8960_:()Lnet/minecraft/server/PlayerAdvancements;
+      41: aload_2
+      42: invokevirtual #48                 // Method net/minecraft/server/PlayerAdvancements.m_135996_:(Lnet/minecraft/advancements/Advancement;)Lnet/minecraft/advancements/AdvancementProgress;
+      45: astore_3
+      46: aload_3
+      47: invokevirtual #54                 // Method net/minecraft/advancements/AdvancementProgress.m_8193_:()Z
+      50: ifne          100
+      53: aload_3
+      54: invokevirtual #58                 // Method net/minecraft/advancements/AdvancementProgress.m_8219_:()Ljava/lang/Iterable;
+      57: invokeinterface #64,  1           // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      62: astore        4
+      64: aload         4
+      66: invokeinterface #73,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      71: ifeq          100
+      74: aload         4
+      76: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      81: checkcast     #79                 // class java/lang/String
+      84: astore        5
+      86: aload_1
+      87: invokevirtual #42                 // Method net/minecraft/server/level/ServerPlayer.m_8960_:()Lnet/minecraft/server/PlayerAdvancements;
+      90: aload_2
+      91: aload         5
+      93: invokevirtual #83                 // Method net/minecraft/server/PlayerAdvancements.m_135988_:(Lnet/minecraft/advancements/Advancement;Ljava/lang/String;)Z
+      96: pop
+      97: goto          64
+     100: return
+}
+
+## net/mcreator/borninchaosv/procedures/MonsterFleshPriZaviershieniiIspolzovaniiaProcedure.class
+Compiled from "MonsterFleshPriZaviershieniiIspolzovaniiaProcedure.java"
+public class net.mcreator.borninchaosv.procedures.MonsterFleshPriZaviershieniiIspolzovaniiaProcedure {
+  public net.mcreator.borninchaosv.procedures.MonsterFleshPriZaviershieniiIspolzovaniiaProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          46
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      24: ifne          46
+      27: aload_1
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      31: dup
+      32: getstatic     #33                 // Field net/minecraft/world/effect/MobEffects.f_19612_:Lnet/minecraft/world/effect/MobEffect;
+      35: sipush        140
+      38: iconst_0
+      39: invokespecial #36                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      42: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      45: pop
+      46: aload_0
+      47: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      50: ifeq          86
+      53: aload_0
+      54: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      57: astore_1
+      58: aload_1
+      59: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      62: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      65: ifne          86
+      68: aload_1
+      69: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      72: dup
+      73: getstatic     #43                 // Field net/minecraft/world/effect/MobEffects.f_19614_:Lnet/minecraft/world/effect/MobEffect;
+      76: bipush        80
+      78: iconst_0
+      79: invokespecial #36                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      82: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      85: pop
+      86: aload_0
+      87: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      90: ifeq          133
+      93: aload_0
+      94: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      97: astore_1
+      98: aload_1
+      99: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     102: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+     105: ifne          133
+     108: aload_1
+     109: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+     112: dup
+     113: getstatic     #49                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModMobEffects.ROTTEN_SMELL:Lnet/minecraftforge/registries/RegistryObject;
+     116: invokevirtual #55                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+     119: checkcast     #57                 // class net/minecraft/world/effect/MobEffect
+     122: sipush        800
+     125: iconst_0
+     126: invokespecial #36                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     129: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     132: pop
+     133: return
+}
+
+## net/mcreator/borninchaosv/procedures/RottenFishPriZaviershieniiIspolzovaniiaProcedure.class
+Compiled from "RottenFishPriZaviershieniiIspolzovaniiaProcedure.java"
+public class net.mcreator.borninchaosv.procedures.RottenFishPriZaviershieniiIspolzovaniiaProcedure {
+  public net.mcreator.borninchaosv.procedures.RottenFishPriZaviershieniiIspolzovaniiaProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          46
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      24: ifne          46
+      27: aload_1
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      31: dup
+      32: getstatic     #33                 // Field net/minecraft/world/effect/MobEffects.f_19612_:Lnet/minecraft/world/effect/MobEffect;
+      35: sipush        240
+      38: iconst_0
+      39: invokespecial #36                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      42: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      45: pop
+      46: aload_0
+      47: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      50: ifeq          93
+      53: aload_0
+      54: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      57: astore_1
+      58: aload_1
+      59: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      62: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      65: ifne          93
+      68: aload_1
+      69: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      72: dup
+      73: getstatic     #46                 // Field net/mcreator/borninchaosv/init/BornInChaosV1ModMobEffects.ROTTEN_SMELL:Lnet/minecraftforge/registries/RegistryObject;
+      76: invokevirtual #52                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      79: checkcast     #54                 // class net/minecraft/world/effect/MobEffect
+      82: sipush        1200
+      85: iconst_0
+      86: invokespecial #36                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      89: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      92: pop
+      93: return
+}
+
+## net/mcreator/borninchaosv/procedures/SeaTerrorEyePriZaviershieniiIspolzovaniiaProcedure.class
+Compiled from "SeaTerrorEyePriZaviershieniiIspolzovaniiaProcedure.java"
+public class net.mcreator.borninchaosv.procedures.SeaTerrorEyePriZaviershieniiIspolzovaniiaProcedure {
+  public net.mcreator.borninchaosv.procedures.SeaTerrorEyePriZaviershieniiIspolzovaniiaProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: sipush        300
+       9: invokevirtual #19                 // Method net/minecraft/world/entity/Entity.m_20301_:(I)V
+      12: return
+}
+
+## net/mcreator/borninchaosv/procedures/SmokedFleshPriZaviershieniiIspolzovaniiaProcedure.class
+Compiled from "SmokedFleshPriZaviershieniiIspolzovaniiaProcedure.java"
+public class net.mcreator.borninchaosv.procedures.SmokedFleshPriZaviershieniiIspolzovaniiaProcedure {
+  public net.mcreator.borninchaosv.procedures.SmokedFleshPriZaviershieniiIspolzovaniiaProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/server/level/ServerPlayer
+       9: ifeq          100
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/server/level/ServerPlayer
+      16: astore_1
+      17: aload_1
+      18: getfield      #19                 // Field net/minecraft/server/level/ServerPlayer.f_8924_:Lnet/minecraft/server/MinecraftServer;
+      21: invokevirtual #25                 // Method net/minecraft/server/MinecraftServer.m_129889_:()Lnet/minecraft/server/ServerAdvancementManager;
+      24: new           #27                 // class net/minecraft/resources/ResourceLocation
+      27: dup
+      28: ldc           #29                 // String born_in_chaos_v1:bypassingthe_expiration_date
+      30: invokespecial #32                 // Method net/minecraft/resources/ResourceLocation."<init>":(Ljava/lang/String;)V
+      33: invokevirtual #38                 // Method net/minecraft/server/ServerAdvancementManager.m_136041_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/advancements/Advancement;
+      36: astore_2
+      37: aload_1
+      38: invokevirtual #42                 // Method net/minecraft/server/level/ServerPlayer.m_8960_:()Lnet/minecraft/server/PlayerAdvancements;
+      41: aload_2
+      42: invokevirtual #48                 // Method net/minecraft/server/PlayerAdvancements.m_135996_:(Lnet/minecraft/advancements/Advancement;)Lnet/minecraft/advancements/AdvancementProgress;
+      45: astore_3
+      46: aload_3
+      47: invokevirtual #54                 // Method net/minecraft/advancements/AdvancementProgress.m_8193_:()Z
+      50: ifne          100
+      53: aload_3
+      54: invokevirtual #58                 // Method net/minecraft/advancements/AdvancementProgress.m_8219_:()Ljava/lang/Iterable;
+      57: invokeinterface #64,  1           // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      62: astore        4
+      64: aload         4
+      66: invokeinterface #73,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      71: ifeq          100
+      74: aload         4
+      76: invokeinterface #77,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      81: checkcast     #79                 // class java/lang/String
+      84: astore        5
+      86: aload_1
+      87: invokevirtual #42                 // Method net/minecraft/server/level/ServerPlayer.m_8960_:()Lnet/minecraft/server/PlayerAdvancements;
+      90: aload_2
+      91: aload         5
+      93: invokevirtual #83                 // Method net/minecraft/server/PlayerAdvancements.m_135988_:(Lnet/minecraft/advancements/Advancement;Ljava/lang/String;)Z
+      96: pop
+      97: goto          64
+     100: return
+}
+
+## net/mcreator/skarriermobs/item/LeechingSackItem.class
+Compiled from "LeechingSackItem.java"
+public class net.mcreator.skarriermobs.item.LeechingSackItem extends net.minecraft.world.item.Item {
+  public net.mcreator.skarriermobs.item.LeechingSackItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: bipush        6
+      28: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      31: ldc           #37                 // float 0.2f
+      33: invokevirtual #41                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      36: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38765_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      39: invokevirtual #48                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38757_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      42: invokevirtual #52                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      45: invokevirtual #56                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      48: invokespecial #59                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      51: return
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        64
+       2: ireturn
+
+  public void m_7373_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: aload         4
+       6: invokespecial #70                 // Method net/minecraft/world/item/Item.m_7373_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+       9: aload_3
+      10: ldc           #72                 // String item.skarrier_mobs.leeching_sack.description_0
+      12: invokestatic  #78                 // InterfaceMethod net/minecraft/network/chat/Component.m_237115_:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      15: invokeinterface #84,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      20: pop
+      21: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #95                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       7: astore        4
+       9: aload_3
+      10: invokevirtual #101                // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      13: dstore        5
+      15: aload_3
+      16: invokevirtual #104                // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      19: dstore        7
+      21: aload_3
+      22: invokevirtual #107                // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      25: dstore        9
+      27: aload_3
+      28: invokestatic  #113                // Method net/mcreator/skarriermobs/procedures/LeechingSackPlayerFinishesUsingItemProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      31: aload         4
+      33: areturn
+}
+
+## net/mcreator/skarriermobs/item/RawSlitherItem.class
+Compiled from "RawSlitherItem.java"
+public class net.mcreator.skarriermobs.item.RawSlitherItem extends net.minecraft.world.item.Item {
+  public net.mcreator.skarriermobs.item.RawSlitherItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: bipush        64
+      10: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      13: getstatic     #27                 // Field net/minecraft/world/item/Rarity.COMMON:Lnet/minecraft/world/item/Rarity;
+      16: invokevirtual #31                 // Method net/minecraft/world/item/Item$Properties.m_41497_:(Lnet/minecraft/world/item/Rarity;)Lnet/minecraft/world/item/Item$Properties;
+      19: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      22: dup
+      23: invokespecial #32                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      26: iconst_2
+      27: invokevirtual #36                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      30: ldc           #37                 // float 0.1f
+      32: invokevirtual #41                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      35: invokevirtual #45                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38757_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      38: invokevirtual #49                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      41: invokevirtual #53                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      44: invokespecial #56                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      47: return
+
+  public int m_8105_(net.minecraft.world.item.ItemStack);
+    Code:
+       0: bipush        16
+       2: ireturn
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: aload_3
+       4: invokespecial #66                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       7: astore        4
+       9: aload_3
+      10: invokevirtual #72                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      13: dstore        5
+      15: aload_3
+      16: invokevirtual #75                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      19: dstore        7
+      21: aload_3
+      22: invokevirtual #78                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      25: dstore        9
+      27: aload_3
+      28: invokestatic  #84                 // Method net/mcreator/skarriermobs/procedures/RawSlitherPlayerFinishesUsingItemProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      31: aload         4
+      33: areturn
+}
+
+## net/mcreator/skarriermobs/procedures/LeechingSackPlayerFinishesUsingItemProcedure.class
+Compiled from "LeechingSackPlayerFinishesUsingItemProcedure.java"
+public class net.mcreator.skarriermobs.procedures.LeechingSackPlayerFinishesUsingItemProcedure {
+  public net.mcreator.skarriermobs.procedures.LeechingSackPlayerFinishesUsingItemProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          52
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      24: ifne          52
+      27: aload_1
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      31: dup
+      32: getstatic     #33                 // Field net/mcreator/skarriermobs/init/SkarrierMobsModMobEffects.LEECHING_TOUCH:Lnet/minecraftforge/registries/RegistryObject;
+      35: invokevirtual #39                 // Method net/minecraftforge/registries/RegistryObject.get:()Ljava/lang/Object;
+      38: checkcast     #41                 // class net/minecraft/world/effect/MobEffect
+      41: sipush        3600
+      44: iconst_0
+      45: invokespecial #44                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      48: invokevirtual #48                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      51: pop
+      52: aload_0
+      53: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      56: ifeq          93
+      59: aload_0
+      60: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      63: astore_1
+      64: aload_1
+      65: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      68: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      71: ifne          93
+      74: aload_1
+      75: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      78: dup
+      79: getstatic     #54                 // Field net/minecraft/world/effect/MobEffects.f_19597_:Lnet/minecraft/world/effect/MobEffect;
+      82: sipush        3600
+      85: iconst_1
+      86: invokespecial #44                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      89: invokevirtual #48                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      92: pop
+      93: aload_0
+      94: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+      97: ifeq          134
+     100: aload_0
+     101: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+     104: astore_1
+     105: aload_1
+     106: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+     109: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+     112: ifne          134
+     115: aload_1
+     116: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+     119: dup
+     120: getstatic     #57                 // Field net/minecraft/world/effect/MobEffects.f_19613_:Lnet/minecraft/world/effect/MobEffect;
+     123: sipush        3600
+     126: iconst_0
+     127: invokespecial #44                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+     130: invokevirtual #48                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     133: pop
+     134: return
+}
+
+## net/mcreator/skarriermobs/procedures/RawSlitherPlayerFinishesUsingItemProcedure.class
+Compiled from "RawSlitherPlayerFinishesUsingItemProcedure.java"
+public class net.mcreator.skarriermobs.procedures.RawSlitherPlayerFinishesUsingItemProcedure {
+  public net.mcreator.skarriermobs.procedures.RawSlitherPlayerFinishesUsingItemProcedure();
+    Code:
+       0: aload_0
+       1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void execute(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: ifnonnull     5
+       4: return
+       5: aload_0
+       6: instanceof    #15                 // class net/minecraft/world/entity/LivingEntity
+       9: ifeq          46
+      12: aload_0
+      13: checkcast     #15                 // class net/minecraft/world/entity/LivingEntity
+      16: astore_1
+      17: aload_1
+      18: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.m_9236_:()Lnet/minecraft/world/level/Level;
+      21: invokevirtual #25                 // Method net/minecraft/world/level/Level.m_5776_:()Z
+      24: ifne          46
+      27: aload_1
+      28: new           #27                 // class net/minecraft/world/effect/MobEffectInstance
+      31: dup
+      32: getstatic     #33                 // Field net/minecraft/world/effect/MobEffects.f_19612_:Lnet/minecraft/world/effect/MobEffect;
+      35: sipush        200
+      38: iconst_0
+      39: invokespecial #36                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/world/effect/MobEffect;II)V
+      42: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.m_7292_:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      45: pop
+      46: return
+}
+
+## net/mcreator/undeadunleashed/item/DemonStewItem.class
+Compiled from "DemonStewItem.java"
+public class net.mcreator.undeadunleashed.item.DemonStewItem extends net.minecraft.world.item.Item {
+  public net.mcreator.undeadunleashed.item.DemonStewItem();
+    Code:
+       0: aload_0
+       1: new           #7                  // class net/minecraft/world/item/Item$Properties
+       4: dup
+       5: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+       8: iconst_1
+       9: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.m_41487_:(I)Lnet/minecraft/world/item/Item$Properties;
+      12: new           #10                 // class net/minecraft/world/food/FoodProperties$Builder
+      15: dup
+      16: invokespecial #22                 // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+      19: bipush        6
+      21: invokevirtual #26                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38760_:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      24: ldc           #27                 // float 0.7f
+      26: invokevirtual #31                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38758_:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      29: invokevirtual #35                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38765_:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      32: invokevirtual #39                 // Method net/minecraft/world/food/FoodProperties$Builder.m_38767_:()Lnet/minecraft/world/food/FoodProperties;
+      35: invokevirtual #43                 // Method net/minecraft/world/item/Item$Properties.m_41489_:(Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/Item$Properties;
+      38: invokespecial #46                 // Method net/minecraft/world/item/Item."<init>":(Lnet/minecraft/world/item/Item$Properties;)V
+      41: return
+
+  public net.minecraft.world.item.ItemStack m_5922_(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: new           #52                 // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: getstatic     #58                 // Field net/minecraft/world/item/Items.f_42399_:Lnet/minecraft/world/item/Item;
+       7: invokespecial #61                 // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      10: astore        4
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: aload_3
+      16: invokespecial #63                 // Method net/minecraft/world/item/Item.m_5922_:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+      19: pop
+      20: aload_3
+      21: invokevirtual #69                 // Method net/minecraft/world/entity/LivingEntity.m_20185_:()D
+      24: dstore        5
+      26: aload_3
+      27: invokevirtual #72                 // Method net/minecraft/world/entity/LivingEntity.m_20186_:()D
+      30: dstore        7
+      32: aload_3
+      33: invokevirtual #75                 // Method net/minecraft/world/entity/LivingEntity.m_20189_:()D
+      36: dstore        9
+      38: aload_3
+      39: invokestatic  #81                 // Method net/mcreator/undeadunleashed/procedures/DemonBrothPlayerFinishesUsingItemProcedure.execute:(Lnet/minecraft/world/entity/Entity;)V
+      42: aload_1
+      43: invokevirtual #85                 // Method net/minecraft/world/item/ItemStack.m_41619_:()Z
+      46: ifeq          52
+      49: aload         4
+      51: areturn
+      52: aload_3
+      53: instanceof    #89                 // class net/minecraft/world/entity/player/Player
+      56: ifeq          98
+      59: aload_3
+      60: checkcast     #89                 // class net/minecraft/world/entity/player/Player
+      63: astore        11
+      65: aload         11
+      67: invokevirtual #93                 // Method net/minecraft/world/entity/player/Player.m_150110_:()Lnet/minecraft/world/entity/player/Abilities;
+      70: getfield      #99                 // Field net/minecraft/world/entity/player/Abilities.f_35937_:Z
+      73: ifne          98
+      76: aload         11
+      78: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.m_150109_:()Lnet/minecraft/world/entity/player/Inventory;
+      81: aload         4
+      83: invokevirtual #109                // Method net/minecraft/world/entity/player/Inventory.m_36054_:(Lnet/minecraft/world/item/ItemStack;)Z
+      86: ifne          98
+      89: aload         11
+      91: aload         4
+      93: iconst_0
+      94: invokevirtual #113                // Method net/minecraft/world/entity/player/Player.m_36176_:(Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/entity/item/ItemEntity;
+      97: pop
+      98: aload_1
+      99: areturn
+}

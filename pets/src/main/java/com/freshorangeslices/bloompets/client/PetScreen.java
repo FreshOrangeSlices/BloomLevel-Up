@@ -313,7 +313,7 @@ public final class PetScreen extends Screen {
 
 		long party = list.pets().stream().filter(PetsNetwork.Entry::party).count();
 		String follows = list.pets().stream().filter(PetsNetwork.Entry::party).map(PetsNetwork.Entry::name).findFirst().orElse("-");
-		g.drawString(font, font.plainSubstrByWidth(Component.translatable("bloompets.screen.follows", follows).getString(), LIST_W - 10),
+		g.drawString(font, font.plainSubstrByWidth(Component.translatable("bloompets.screen.follows", follows).getString(), LIST_W - 12),
 				left + 6, top + H - 14, party > 0 ? PARTY : SOFT, false);
 	}
 
@@ -366,21 +366,31 @@ public final class PetScreen extends Screen {
 		g.fill(barX, infoY, barX + barW, infoY + 7, 0xFF3A1010);
 		g.fill(barX, infoY, barX + (int) (barW * fraction), infoY + 7, 0xFFD23C3C);
 		g.drawString(font, String.format(Locale.ROOT, "%.0f/%.0f", pet.health(), pet.maxHealth()), barX + barW + 4, infoY, SOFT, false);
-		g.drawString(font, font.plainSubstrByWidth(status(pet), W - LIST_W - 16), mainLeft + 4, infoY + 12, SOFT, false);
+		// Two lines: how it's doing (and how far), then where it is.
+		g.drawString(font, font.plainSubstrByWidth(state(pet), W - LIST_W - 16), mainLeft + 4, infoY + 12, SOFT, false);
+		g.drawString(font, font.plainSubstrByWidth(where(pet), W - LIST_W - 16), mainLeft + 4, infoY + 22, SOFT, false);
 	}
 
-	private String status(PetsNetwork.Entry pet) {
+	private String state(PetsNetwork.Entry pet) {
 		Minecraft minecraft = Minecraft.getInstance();
-		String where = dimensionName(pet.dimension()) + " " + pet.pos().getX() + " " + pet.pos().getY() + " " + pet.pos().getZ();
-
-		if (minecraft.player != null && minecraft.player.level().dimension().location().toString().equals(pet.dimension())) {
-			where += String.format(Locale.ROOT, " (%d m)", (int) Math.sqrt(minecraft.player.blockPosition().distSqr(pet.pos())));
-		}
-
 		String state = pet.kind() == Pets.Kind.MODDED ? Component.translatable("bloompets.screen.state.companion").getString()
 				: pet.party() ? Component.translatable("bloompets.screen.state.party").getString()
 				: Component.translatable("bloompets.screen.state.home").getString();
-		return state + " · " + where + (pet.loaded() ? "" : " · " + Component.translatable("bloompets.screen.state.away").getString());
+
+		if (!pet.loaded()) {
+			return state + " · " + Component.translatable("bloompets.screen.state.away").getString();
+		}
+
+		if (minecraft.player != null && minecraft.player.level().dimension().location().toString().equals(pet.dimension())) {
+			return state + " · " + Component.translatable("bloompets.screen.state.distance",
+					(int) Math.sqrt(minecraft.player.blockPosition().distSqr(pet.pos()))).getString();
+		}
+
+		return state;
+	}
+
+	private String where(PetsNetwork.Entry pet) {
+		return dimensionName(pet.dimension()) + "  " + pet.pos().getX() + ", " + pet.pos().getY() + ", " + pet.pos().getZ();
 	}
 
 	private static String dimensionName(String dimension) {

@@ -187,6 +187,12 @@ public final class PetTrees {
 
 	/** Brings the cached "has One and the Same" up to date for a player (online, or a test's fake one). */
 	public static void remember(ServerPlayer player) {
+		// A player on the death screen has no Bloom profile until they respawn (Bloom would answer "no" and log a
+		// warning each time): what was last seen stands until then.
+		if (player.isRemoved() || !player.isAlive()) {
+			return;
+		}
+
 		PetRegistry.get(player.server).setOneAndTheSame(player.getUUID(), BloomBridge.oneAndTheSame(player));
 	}
 

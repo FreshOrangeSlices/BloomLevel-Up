@@ -774,6 +774,30 @@ def radar_shot(server, player, shots):
     return shot
 
 
+def alive(server, player):
+    """Whether the player is alive (not on the death screen): @e only finds living entities. True if the server didn't say."""
+    mark = len(server.lines)
+    server.send(f"execute if entity @e[type=minecraft:player,name={player}]")
+    line = lines_since(server, mark, r"Test (passed|failed)", 10)
+    return line is None or "passed" in line
+
+
+def respawn_if_dead(server, player):
+    """The checks before can get the player killed (the bands and sentinels come for them once the mob check puts them
+    back in survival); a player on the death screen has no Bloom profile until they respawn. Respawns them from the death
+    screen (Tab to its Respawn button, Enter). Returns a note, or None if they were alive."""
+    if alive(server, player):
+        return None
+    for attempt in range(3):
+        press("Tab")
+        time.sleep(0.5)
+        press("Return")
+        time.sleep(3)
+        if alive(server, player):
+            return f"the player had died before the pet screen: respawned ({attempt + 1} tries)"
+    return "the player had died before the pet screen and didn't respawn"
+
+
 def lines_since(process, mark, pattern, limit):
     """The first line from index {mark} on matching {pattern}, waiting up to {limit} seconds; None if none came."""
     end = time.time() + limit
@@ -1217,6 +1241,12 @@ def main():
         if any(f.startswith("bloompets") for f in os.listdir(os.path.join(server_dir, "mods"))):
             server.send("difficulty peaceful")
             time.sleep(2)
+            revived = respawn_if_dead(server, PLAYER)
+            if revived:
+                progress(revived)
+                notes.insert(0, "bloom pets: " + revived)
+                if "didn't" in revived:
+                    failures.append("bloom pets: " + revived)
             for species in ("wolf", "cow", "fox"):
                 server.send(f"bloompets give {species} {PLAYER}")
             time.sleep(2)

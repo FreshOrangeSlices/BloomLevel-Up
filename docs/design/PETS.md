@@ -20,11 +20,11 @@ What carries over from the plugin, and what changes:
 
 | Plugin | In the Forge mod |
 |---|---|
-| Pets live with the player, summoned from a menu | Migamigos and Zoni's companions stay in the world (storing and respawning other mods' mobs broke a dragon with Carry On). The screen **calls** any pet to you, for everyone (**Open**: Bloom pets live with you and are summoned, as in the plugin, or stay in the world too?) |
+| Pets live with the player, summoned from a menu | Migamigos and Zoni's companions stay in the world (storing and respawning other mods' mobs broke a dragon with Carry On). The screen **calls** any pet to you, for everyone (**Open**: in the plugin they live in the book and come out when summoned, and from level 8 up to 3 can be out in the world at posts; probably only the modded ones stay in the world; to think through) |
 | One pet out at a time | Up to **3 bonded pets** (the ones that level up and get skills); every other owned pet is just listed |
 | Levels 1 to 10, skills from the player's mcMMO Taming level (0 to 1000) | **Pet levels 1 to 100**, and the skills come from the pet's own level (Bloom has no Taming skill) |
 | Pets never die: they faint and rest | Kept for bonded pets |
-| Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding is for its mood, not for healing (**Open**: how a pet heals then) |
+| Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding still heals, and pets get a **second bar, hunger**, like the player's food: a pet has to be fed, and one with food in its own inventory takes it and eats by itself |
 | Bonus for the owner while a pet is out, per species | Kept, per kind of pet (**Open**) |
 | Posts with jobs at level 8 | **Open** (Migamigos already has "stay") |
 | Riding any pet, storage per pet | Dropped: modded pets ride and carry the way their own mod says; the screen opens the pet's own inventory where it has one |

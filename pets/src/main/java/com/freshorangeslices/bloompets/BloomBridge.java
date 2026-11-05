@@ -26,6 +26,7 @@ public final class BloomBridge {
 	private static final Map<UUID, Boolean> TEST_OVERRIDES = new ConcurrentHashMap<>();
 	private static Method isMajorActive;
 	private static boolean looked;
+	private static boolean failureLogged;
 
 	private BloomBridge() {
 	}
@@ -47,6 +48,11 @@ public final class BloomBridge {
 		try {
 			return Boolean.TRUE.equals(method.invoke(null, player, ONE_AND_THE_SAME));
 		} catch (ReflectiveOperationException | RuntimeException e) {
+			if (!failureLogged) {
+				failureLogged = true;
+				BloomPets.LOGGER.warn("Bloom Pets: asking Bloom's API about One and the Same failed", e);
+			}
+
 			return false;
 		}
 	}
@@ -62,8 +68,10 @@ public final class BloomBridge {
 
 			try {
 				isMajorActive = Class.forName("com.freshorangeslices.bloomlevelup.api.BloomApi").getMethod("isMajorActive", Player.class, String.class);
-			} catch (ReflectiveOperationException | RuntimeException e) {
+				BloomPets.LOGGER.info("Bloom Pets: Bloom's API found (One and the Same is asked of it)");
+			} catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
 				isMajorActive = null;
+				BloomPets.LOGGER.info("Bloom Pets: Bloom's API not found ({}): no pet trees", e.toString());
 			}
 		}
 

@@ -1233,11 +1233,21 @@ def main():
             progress("pet screen shown")
             # One and the Same (Bloom's Combat Major, 3 points): the wolf follows the Sword tree, shown in the screen's
             # Bloom view (Slash and Full Sweep open at its level 40, Execute and Aura Sword still dim).
+            mark = len(server.lines)
             server.send(f"bloom admin majorlevels {PLAYER} 3")
             server.send(f"execute as {PLAYER} run bloom buy bloomlevelup:combat/one_and_the_same")
-            time.sleep(1)
+            time.sleep(2)
             server.send(f"execute as {PLAYER} run bloompets tree sword 1")
-            time.sleep(1)
+            time.sleep(2)
+            # What the server said to those (Bloom's answers, the tree's) and what Bloom Pets found of Bloom's API.
+            said = [line[-160:] for line in server.lines[mark:] if re.search(r"Major|major|tree|Sword|One and the Same|bloom", line)]
+            # (First in the notes: the summary is cut at 3900 characters.)
+            notes.insert(0, "bloom pets: One and the Same for the screenshot: " + (" | ".join(said[:6]) or "no answer")[:600])
+            bridge = next((line for line in server.lines if "Bloom Pets: Bloom's API" in line), None)
+            if bridge and "not found" in bridge:
+                failures.append("bloom pets: " + bridge[-200:])
+            elif bridge:
+                notes.insert(1, "bloom pets: " + bridge[-120:])
             server.send(f"execute as {PLAYER} run bloompets screen bloom")
             time.sleep(4)
             capture(shots, "pack_pets_bloom")

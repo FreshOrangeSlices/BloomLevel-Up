@@ -237,10 +237,18 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 - **It shows the pet screen's Pet / Bloom toggle** (2026-11-05: rather than a pet slot of its own): without it the toggle
   isn't there; with it, the Bloom view lets the player **pick which weapon tree the pet follows**. The choice stays;
   **the player can reset it, but that resets the pet's whole level** (back to 1).
+- **Who picks a tree** (2026-11-05): combat Bloom pets (Wolf, Iron Golem, Polar Bear, Goat, Panda; the Vex when it
+  comes) and modded companions, one tree each (Sword, Axe, Trident, Unarmed; Bow for pets that shoot; Crossbow no).
+  Non-combat pets don't (their bonus and job are what they bring). A tree works while the pet is in the party or at
+  its post, like its skills; **leaving the party only disables it**: nothing is reset or undone.
+- **The pet's own level opens its tree** (2026-11-05: "pet based", not the player's Major Levels).
+- **Its own skills and its tree work together** (2026-11-05: strong on purpose).
+- **One and the Same off or lost** (toggled off, or a Major reset): the pets' trees are disabled, their picks and
+  levels kept; owning it again brings everything back as it was.
 - Earlier note (2026-11-04, before the party changed to one Bloom pet): owning it lets the player give **the 3 pets in
   the party one weapon tree each** (Sword, Axe, Trident, Unarmed; Bow maybe for pets that shoot; Crossbow no).
-- How much of a tree a pet can use grows with the **player's total Major Levels earned** (the whole tree at about 10 to
-  15), not with what the player bought for themselves.
+- ~~How much of a tree a pet can use grows with the player's total Major Levels earned~~ (replaced 2026-11-05: the
+  pet's own level opens it).
 - Passive effects work on the pet's own hits; effects the player triggers with a key become **cooldown abilities** the
   pet uses itself every 20 to 30 seconds, each switchable off.
 

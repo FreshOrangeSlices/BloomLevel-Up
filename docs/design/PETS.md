@@ -72,9 +72,14 @@ FreshOrangeSlices' sketch: `art/pets-screen-sketch.png`; with suggestions added:
 
 **The curve is Bloom's own, cut in half** (FreshOrangeSlices, 2026-11-05): XP from level L to L+1 = 25 + 5 x L (Bloom's
 50 + 10 x L halved), so 30 XP for level 2, 275 at level 50, 520 for the last one, about 27,250 from 1 to 100 (a Bloom
-tab takes about 54,500). The plugin's 40 + 30 x n per level was far too steep for 100 levels.
+tab takes about 54,500). The plugin's 40 + 30 x n per level was far too steep for 100 levels. **Non-combat pets take a
+quarter of Bloom's curve** (12.5 + 2.5 x L, about 13,600 to 100), since they level the slowest.
 
-XP sources from the plugin (numbers to retune for that curve):
+**How they earn it** (2026-11-05): **combat pets the way Bloom's Combat tab does**, 0.5 XP per point of real damage they
+deal (after armor, never more than the target had left), and the killing blow adds 50% of what that kill took.
+**Non-combat pets** from time together, walking with you and feeding (numbers to set).
+
+For reference, the plugin's XP sources (replaced by the above):
 
 | Source | Plugin XP |
 |---|---|
@@ -86,7 +91,7 @@ XP sources from the plugin (numbers to retune for that curve):
 | Walking around with it | 1 per 20 blocks |
 | Playing fetch | 2, at most every 15 seconds |
 
-**Non-combat pets need half the XP per level** (they level slower otherwise); combat pets as they are. XP comes from attacks, kills, time with the player, feeding and play. AFK leveling is fine (FreshOrangeSlices). Levels stay on the pet itself, so a Migamigos companion back from its
+AFK leveling is fine (FreshOrangeSlices). Levels stay on the pet itself, so a Migamigos companion back from its
 keepsake keeps its level.
 
 ## Pet skills, by the pet's level

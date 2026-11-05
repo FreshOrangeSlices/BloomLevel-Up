@@ -14,15 +14,13 @@ for slug in ("sophisticated-backpacks", "sophisticated-core"):
     jar = zipfile.ZipFile(io.BytesIO(get(f["url"])))
     with tempfile.TemporaryDirectory() as tmp:
         for n in jar.namelist():
-            if n.endswith(".class") and (b"keybind." in jar.read(n) or "Keybind" in n or "KeyMapping" in n):
+            if n.endswith(".class") and b"net/minecraft/client/KeyMapping" in jar.read(n):
                 data = jar.read(n)
-                if b"keybind." not in data:
-                    continue
                 path = os.path.join(tmp, n)
                 os.makedirs(os.path.dirname(path), exist_ok=True)
                 open(path, "wb").write(data)
                 text = subprocess.run(["javap", "-c", "-p", "-constants", path], capture_output=True, text=True).stdout
-                for m in re.finditer(r'ldc\s+#\d+\s+// String (keybind\.[\w.]+)(.{0,600})', text, re.S):
+                for m in re.finditer(r'ldc\s+#\d+\s+// String ((?:key|keybind|keybinding)[\w.]*sophisticated[\w.]+)(.{0,600})', text, re.S):
                     tail = m.group(2)
                     consts = re.findall(r'(?:bipush|sipush|iconst_\w+|ldc)\s+(?:#\d+\s+// (?:int|String) )?(-?\w+)', tail)[:6]
                     fields = re.findall(r'Field [\w/$]+\.(\w+):L[\w/$]*(?:KeyModifier|KeyConflictContext|IKeyConflictContext)', tail)[:3]

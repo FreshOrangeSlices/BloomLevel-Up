@@ -25,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * The roster, from data/&lt;namespace&gt;/bloompets/species/*.json: {"species": [{"entity", "category", "foods", "feeds",
- * "storage"}]}. Files are read in id order; a later entry for the same animal replaces an earlier one. An entity or
+ * "storage", "skills", "xp_multiplier"}]}. Files are read in id order; a later entry for the same animal replaces an earlier one. An entity or
  * food that isn't in the game is skipped with a warning.
  */
 public final class SpeciesData extends SimpleJsonResourceReloadListener {
@@ -109,6 +109,22 @@ public final class SpeciesData extends SimpleJsonResourceReloadListener {
 
 		return new Species(id, ForgeRegistries.ENTITY_TYPES.getValue(id), GsonHelper.getAsString(json, "category", "utility"),
 				Set.copyOf(foods), List.copyOf(tags), Math.max(1, GsonHelper.getAsInt(json, "feeds", 5)),
-				slots(GsonHelper.getAsString(json, "storage", "medium")));
+				slots(GsonHelper.getAsString(json, "storage", "medium")), skills(json, file),
+				Math.max(0.0, GsonHelper.getAsDouble(json, "xp_multiplier", 0.0)));
+	}
+
+	private static String skills(JsonObject json, ResourceLocation file) {
+		String skills = GsonHelper.getAsString(json, "skills", "");
+
+		if (skills.isEmpty()) {
+			return null;
+		}
+
+		if (PetSkills.Kind.byId(skills) == null) {
+			BloomPets.LOGGER.warn("Bloom Pets: {} names the skill tree {}, which doesn't exist", file, skills);
+			return null;
+		}
+
+		return skills;
 	}
 }

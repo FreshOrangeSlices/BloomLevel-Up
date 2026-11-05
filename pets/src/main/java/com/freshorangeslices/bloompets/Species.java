@@ -10,10 +10,12 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * A kind of Bloom pet (data/bloompets/bloompets/species): the animal, its category (combat, pack, speedster, utility),
- * the food that bonds it and how many feedings that takes, and how many storage slots it has.
+ * the food that bonds it and how many feedings that takes, how many storage slots it has, and for combat pets the
+ * skill tree it uses ({@code skills}, a {@link PetSkills.Kind}, or null) and its XP multiplier (so kinds that hit hard
+ * don't level faster than the rest; 0 works it out from the pet's attack damage).
  */
 public record Species(ResourceLocation id, EntityType<?> type, String category, Set<Item> foods, List<TagKey<Item>> foodTags,
-		int feeds, int storage) {
+		int feeds, int storage, String skills, double xpMultiplier) {
 	public boolean isFood(ItemStack stack) {
 		if (stack.isEmpty()) {
 			return false;

@@ -3,10 +3,15 @@ package com.freshorangeslices.bloompets;
 import java.util.EnumSet;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.target.TargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
@@ -14,8 +19,10 @@ import net.minecraft.world.entity.player.Player;
 
 /**
  * What a Bloom pet does about its owner: the party pet follows them (and pops back to their side when it falls far
- * behind); one outside the party stays near where it was left. Wolves and cats keep their own vanilla following and
- * sitting. Animals run by a "brain" (goats, camels, sniffers, allays, frogs, axolotls) are steered through it.
+ * behind); one outside the party stays near where it was left. A combat pet in the party fights for its owner: whatever
+ * hurts them, and whatever they hit (never a player, nor the owner's own pets). Wolves and cats keep their own vanilla
+ * following, sitting and fighting. Animals run by a "brain" (goats, camels, sniffers, allays, frogs, axolotls) are
+ * steered through it.
  */
 public final class PetGoals {
 	private PetGoals() {
@@ -29,6 +36,111 @@ public final class PetGoals {
 
 		mob.goalSelector.addGoal(2, new FollowOwner(mob));
 		mob.goalSelector.addGoal(3, new StayNearHome(mob));
+		Species species = Pets.species(mob);
+
+		if (species != null && species.combat()) {
+			mob.targetSelector.addGoal(1, new DefendOwner(mob));
+			mob.targetSelector.addGoal(2, new AssistOwner(mob));
+
+			// One that has no melee attack of its own (the goat) gets one.
+			if (mob instanceof PathfinderMob pathfinder && mob.goalSelector.getAvailableGoals().stream().noneMatch(g -> g.getGoal() instanceof MeleeAttackGoal)) {
+				mob.goalSelector.addGoal(1, new Fight(pathfinder));
+			}
+		}
+	}
+
+	/** Someone the pet may fight for its owner: alive, not a player, not one of the owner's own. */
+	static boolean fair(Mob mob, LivingEntity target) {
+		return target != null && target.isAlive() && !(target instanceof Player) && target != mob && !PetXp.sameSide(mob, target);
+	}
+
+	/** Whatever hurts the owner. */
+	public static final class DefendOwner extends TargetGoal {
+		private LivingEntity attacker;
+		private int stamp;
+
+		DefendOwner(Mob mob) {
+			super(mob, false);
+			setFlags(EnumSet.of(Flag.TARGET));
+		}
+
+		@Override
+		public boolean canUse() {
+			Player owner = Pets.inParty(mob) && !Fainting.fainted(mob) ? owner(mob) : null;
+
+			if (owner == null || owner.getLastHurtByMobTimestamp() == stamp) {
+				return false;
+			}
+
+			attacker = owner.getLastHurtByMob();
+			return fair(mob, attacker) && canAttack(attacker, TargetingConditions.DEFAULT);
+		}
+
+		@Override
+		public void start() {
+			mob.setTarget(attacker);
+			Player owner = owner(mob);
+			stamp = owner == null ? stamp : owner.getLastHurtByMobTimestamp();
+			super.start();
+		}
+	}
+
+	/** Whatever the owner hits. */
+	public static final class AssistOwner extends TargetGoal {
+		private LivingEntity victim;
+		private int stamp;
+
+		AssistOwner(Mob mob) {
+			super(mob, false);
+			setFlags(EnumSet.of(Flag.TARGET));
+		}
+
+		@Override
+		public boolean canUse() {
+			Player owner = Pets.inParty(mob) && !Fainting.fainted(mob) ? owner(mob) : null;
+
+			if (owner == null || owner.getLastHurtMobTimestamp() == stamp) {
+				return false;
+			}
+
+			victim = owner.getLastHurtMob();
+			return fair(mob, victim) && canAttack(victim, TargetingConditions.DEFAULT);
+		}
+
+		@Override
+		public void start() {
+			mob.setTarget(victim);
+			Player owner = owner(mob);
+			stamp = owner == null ? stamp : owner.getLastHurtMobTimestamp();
+			super.start();
+		}
+	}
+
+	/** A melee attack for a combat pet that has none (the goat), only while it's in the party. */
+	public static final class Fight extends MeleeAttackGoal {
+		private final PathfinderMob pet;
+
+		Fight(PathfinderMob pet) {
+			super(pet, 1.25, true);
+			this.pet = pet;
+		}
+
+		@Override
+		public boolean canUse() {
+			return Pets.inParty(pet) && !Fainting.fainted(pet) && super.canUse();
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			return Pets.inParty(pet) && !Fainting.fainted(pet) && super.canContinueToUse();
+		}
+
+		@Override
+		public void tick() {
+			// Its brain would walk it elsewhere.
+			pet.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+			super.tick();
+		}
 	}
 
 	/** Steers a brain-run animal toward a spot; false if it has no brain walk target (then its navigation is used). */
@@ -65,7 +177,7 @@ public final class PetGoals {
 
 		@Override
 		public boolean canUse() {
-			if (!Pets.inParty(mob) || !free(mob)) {
+			if (!Pets.inParty(mob) || !free(mob) || Fainting.fainted(mob)) {
 				return false;
 			}
 

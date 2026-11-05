@@ -50,6 +50,10 @@ public final class PetRegistry extends SavedData {
 		/** How it looks (its saved data without inventories and the like), for the pet screen when it isn't nearby. */
 		public CompoundTag look = new CompoundTag();
 		public long lookSeen;
+		/** Its level and XP as last seen (the pet itself carries them), and when its rest ends if it fainted. */
+		public int level = 1;
+		public double xp;
+		public long faintedUntil;
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -67,6 +71,9 @@ public final class PetRegistry extends SavedData {
 			tag.putFloat("health", health);
 			tag.putFloat("maxHealth", maxHealth);
 			tag.put("look", look);
+			tag.putInt("level", level);
+			tag.putDouble("xp", xp);
+			tag.putLong("faintedUntil", faintedUntil);
 			return tag;
 		}
 
@@ -86,6 +93,9 @@ public final class PetRegistry extends SavedData {
 			record.health = tag.getFloat("health");
 			record.maxHealth = tag.getFloat("maxHealth");
 			record.look = tag.getCompound("look");
+			record.level = Math.max(1, tag.getInt("level"));
+			record.xp = tag.getDouble("xp");
+			record.faintedUntil = tag.getLong("faintedUntil");
 			return record;
 		}
 	}
@@ -153,6 +163,11 @@ public final class PetRegistry extends SavedData {
 			record.health = living.getHealth();
 			record.maxHealth = living.getMaxHealth();
 		}
+
+		record.level = PetLevels.level(entity);
+		record.xp = PetLevels.xp(entity);
+		CompoundTag data = Pets.dataOrNull(entity);
+		record.faintedUntil = data == null ? 0L : data.getLong("faintedUntil");
 
 		// Its look, at most once a minute (a pet's saved data isn't small).
 		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {

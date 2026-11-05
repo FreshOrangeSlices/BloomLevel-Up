@@ -36,7 +36,10 @@ import net.minecraftforge.registries.ForgeRegistries;
  * by name (no compile-time dependency).
  */
 public final class Pets {
-	/** The pet's own data, under its persistent data: owner, party, home, bond (feedings so far, per player). */
+	/**
+	 * The pet's own data, under its persistent data: owner, party, home, bond (feedings so far, per player), level and
+	 * XP, and its rest when it fainted.
+	 */
 	public static final String DATA = "bloompets";
 	private static final String MIGAMIGOS_OWNER = "followingPlayerUUID";
 	private static final Map<Class<?>, Optional<Field>> OWNER_FIELDS = new ConcurrentHashMap<>();
@@ -62,7 +65,7 @@ public final class Pets {
 		return root.getCompound(DATA);
 	}
 
-	private static CompoundTag dataOrNull(Entity entity) {
+	static CompoundTag dataOrNull(Entity entity) {
 		CompoundTag root = entity.getPersistentData();
 		return root.contains(DATA, Tag.TAG_COMPOUND) ? root.getCompound(DATA) : null;
 	}
@@ -140,6 +143,12 @@ public final class Pets {
 
 		if (!party) {
 			setHome(entity, entity.blockPosition());
+		} else {
+			Fainting.cameOut(entity);
+		}
+
+		if (entity instanceof LivingEntity living) {
+			PetSkills.refresh(living);
 		}
 	}
 

@@ -5,12 +5,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -18,8 +21,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * Keeps each player's pet list up to date (when a pet loads, every 5 seconds while it's loaded, when it unloads or
- * dies), gives Bloom pets their goals and the party mark they should have, and keeps a player's own hits (and their
- * pets') off their pets.
+ * dies), gives Bloom pets their goals and the party mark they should have, keeps a player's own hits (and their pets')
+ * off their pets and pets' off players (co-op: no pet PvP), lets a party pet faint instead of dying, and runs each
+ * pet's once-a-second work (XP for time together, a fainted pet's rest, Alpha Howl, a level-100 sparkle).
  */
 public final class PetEvents {
 	private static final int SEEN_EVERY = 100;
@@ -56,9 +60,15 @@ public final class PetEvents {
 			Pets.setParty(mob, record.party);
 		}
 
+		PetSkills.refresh(mob);
+
 		if (record.heal) {
 			mob.setHealth(mob.getMaxHealth());
 			record.heal = false;
+		}
+
+		if (PetLevels.level(mob) >= PetLevels.MAX) {
+			PetSkills.goldName(mob);
 		}
 
 		mob.setPersistenceRequired();
@@ -69,7 +79,23 @@ public final class PetEvents {
 	public static void onTick(LivingEvent.LivingTickEvent event) {
 		LivingEntity entity = event.getEntity();
 
-		if (entity.tickCount % SEEN_EVERY == 0 && !entity.level().isClientSide() && Pets.listed(entity)) {
+		if (entity.level().isClientSide()) {
+			return;
+		}
+
+		if (Fainting.resting(entity)) {
+			Fainting.rest(entity);
+		}
+
+		if (entity.tickCount % 20 != 0 || !Pets.listed(entity)) {
+			return;
+		}
+
+		Fainting.check(entity);
+		PetXp.second(entity);
+		PetSkills.second(entity);
+
+		if (entity.tickCount % SEEN_EVERY == 0) {
 			observe(entity);
 		}
 	}
@@ -92,6 +118,12 @@ public final class PetEvents {
 			return;
 		}
 
+		// A party pet faints (or gets its second wind) instead.
+		if (Fainting.save(entity, event.getSource())) {
+			event.setCanceled(true);
+			return;
+		}
+
 		MinecraftServer server = level.getServer();
 		PetRegistry.Record record = PetRegistry.get(server).remove(entity.getUUID());
 
@@ -107,19 +139,58 @@ public final class PetEvents {
 		}
 	}
 
-	/** A player's own hits never land on their pets, nor their other pets' (a sweep, an arrow, a pet's bite). */
+	/**
+	 * A player's own hits never land on their pets, nor their other pets' (a sweep, an arrow, a pet's bite); a pet's never
+	 * land on a player (co-op: the plugin's pet PvP is dropped). A fainted pet can't be hurt (but {@code /kill} and the
+	 * void still reach it), and can't hurt anything.
+	 */
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onAttack(LivingAttackEvent event) {
 		LivingEntity target = event.getEntity();
 		Entity attacker = event.getSource().getEntity();
 
-		if (attacker == null || attacker == target || target.level().isClientSide() || !Pets.listed(target)) {
+		if (target.level().isClientSide()) {
+			return;
+		}
+
+		boolean pet = Pets.listed(target);
+
+		if (pet && Fainting.fainted(target) && !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+			event.setCanceled(true);
+			return;
+		}
+
+		if (attacker == null || attacker == target) {
+			return;
+		}
+
+		if (Pets.listed(attacker) && (target instanceof Player || Fainting.fainted(attacker))) {
+			event.setCanceled(true);
+			return;
+		}
+
+		if (!pet) {
 			return;
 		}
 
 		UUID owner = Pets.owner(target);
 
 		if (owner.equals(attacker.getUUID()) || owner.equals(Pets.owner(attacker))) {
+			event.setCanceled(true);
+		}
+	}
+
+	/** Pets never go after players (co-op) or their owner's other pets, and a fainted one goes after nothing. */
+	@SubscribeEvent
+	public static void onTarget(LivingChangeTargetEvent event) {
+		LivingEntity pet = event.getEntity();
+		LivingEntity target = event.getNewTarget();
+
+		if (target == null || pet.level().isClientSide() || !Pets.listed(pet)) {
+			return;
+		}
+
+		if (target instanceof Player || PetXp.sameSide(pet, target) || Fainting.fainted(pet)) {
 			event.setCanceled(true);
 		}
 	}

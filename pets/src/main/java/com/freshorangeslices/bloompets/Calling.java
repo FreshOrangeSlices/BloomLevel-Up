@@ -47,6 +47,7 @@ public final class Calling {
 		Entity pet = Pets.loaded(player.server, record.pet);
 
 		if (pet != null) {
+			Fainting.cameOut(pet);
 			bring(pet, player);
 			return Component.translatable("bloompets.call.came", record.name);
 		}
@@ -85,6 +86,7 @@ public final class Calling {
 			Entity pet = Pets.loaded(server, pending.pet());
 
 			if (pet != null) {
+				Fainting.cameOut(pet);
 				bring(pet, player);
 				player.displayClientMessage(Component.translatable("bloompets.call.came", pending.name()), true);
 				it.remove();

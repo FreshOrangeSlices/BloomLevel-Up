@@ -1,5 +1,5 @@
 {
-  "_comment": "Bloom Pets' roster (from the BloomPets plugin, docs/design/PETS.md): the animal, its category (combat, pack, speedster, utility), the food that bonds it (sneak + right-click a wild one, 'feeds' times; '#' for an item tag), and its storage (none, small 9, medium 18, pack 27). A data pack can add more files here; a later file's entry for the same animal replaces the earlier one. Left out for now: the Vex (it comes with its gear) and the Armadillo (not in 1.20.1).",
+  "_comment": "Bloom Pets' roster (from the BloomPets plugin, docs/design/PETS.md): the animal, its category (combat, pack, speedster, utility), the food that bonds it (sneak + right-click a wild one, 'feeds' times; '#' for an item tag), its storage (none, small 9, medium 18, pack 27), and for combat pets their skill tree ('skills': wolf, iron_golem, polar_bear, goat, panda) and XP multiplier (a wolf bites for about 4, a golem for about 15, a goat's ram for about 2: each kind's multiplier makes them level at about the same pace; left out, it's worked out from the pet's attack damage). A data pack can add more files here; a later file's entry for the same animal replaces the earlier one. Left out for now: the Vex (it comes with its gear) and the Armadillo (not in 1.20.1).",
   "species": [
     {
       "entity": "minecraft:wolf",
@@ -18,7 +18,9 @@
         "minecraft:rotten_flesh"
       ],
       "feeds": 5,
-      "storage": "medium"
+      "storage": "medium",
+      "skills": "wolf",
+      "xp_multiplier": 1.0
     },
     {
       "entity": "minecraft:polar_bear",
@@ -28,7 +30,9 @@
         "minecraft:cooked_salmon"
       ],
       "feeds": 5,
-      "storage": "medium"
+      "storage": "medium",
+      "skills": "polar_bear",
+      "xp_multiplier": 0.7
     },
     {
       "entity": "minecraft:iron_golem",
@@ -37,7 +41,9 @@
         "minecraft:iron_ingot"
       ],
       "feeds": 8,
-      "storage": "medium"
+      "storage": "medium",
+      "skills": "iron_golem",
+      "xp_multiplier": 0.3
     },
     {
       "entity": "minecraft:goat",
@@ -46,7 +52,9 @@
         "minecraft:wheat"
       ],
       "feeds": 5,
-      "storage": "medium"
+      "storage": "medium",
+      "skills": "goat",
+      "xp_multiplier": 2.0
     },
     {
       "entity": "minecraft:panda",
@@ -55,7 +63,9 @@
         "minecraft:bamboo"
       ],
       "feeds": 5,
-      "storage": "medium"
+      "storage": "medium",
+      "skills": "panda",
+      "xp_multiplier": 0.7
     },
     {
       "entity": "minecraft:donkey",

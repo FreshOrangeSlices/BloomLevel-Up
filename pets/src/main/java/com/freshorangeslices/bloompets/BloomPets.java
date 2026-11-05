@@ -20,7 +20,8 @@ import org.slf4j.Logger;
  * roster in data/bloompets/bloompets/species) and the companions other mods give them (Migamigos, Zoni's Companions).
  * Every pet stays out in the world; one Bloom pet is in the player's party and follows them; any pet can be called to
  * its owner; Bloom pets carry a storage. Phase 1: bonding, the list of a player's pets, the party, calling and storage,
- * and the pet screen (a key, K, or the paw beside Bloom's hub button; {@code /bloompets} too); levels and skills next.
+ * and the pet screen (a key, K, or the tab beside Bloom's hub button; {@code /bloompets} too). Phase 2: pet levels
+ * (1 to 100) and XP, combat pets' skills, fainting instead of dying, the level-100 perks.
  */
 @Mod(BloomPets.MOD_ID)
 public final class BloomPets {
@@ -35,6 +36,8 @@ public final class BloomPets {
 		MinecraftForge.EVENT_BUS.register(Bonding.class);
 		MinecraftForge.EVENT_BUS.register(PetEvents.class);
 		MinecraftForge.EVENT_BUS.register(Calling.class);
+		MinecraftForge.EVENT_BUS.register(PetXp.class);
+		MinecraftForge.EVENT_BUS.register(PetSkills.class);
 		MinecraftForge.EVENT_BUS.addListener(BloomPets::reload);
 		MinecraftForge.EVENT_BUS.addListener(BloomPets::commands);
 	}

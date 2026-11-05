@@ -17,14 +17,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 /**
  * Bonding, the plugin's way: sneak and right-click a wild animal of the roster with its favourite food. Each feeding
  * counts (hearts above the hotbar show how far along); after enough (5 for most) it's the player's pet. Feeding without
- * sneaking still breeds animals as usual.
+ * sneaking still breeds animals as usual. Sneak-feeding your own pet heals it (and gives a non-combat party pet XP).
  */
 public final class Bonding {
 	private Bonding() {
 	}
 
 	public enum Result {
-		NOT_FOOD, OWNED_BY_YOU, OWNED_BY_SOMEONE, FED, BONDED
+		/** Not its food; yours already, and it didn't need feeding; someone else's; one feeding toward bonding; bonded. */
+		NOT_FOOD, OWNED_BY_YOU, OWNED_BY_SOMEONE, FED, BONDED,
+		/** Your own pet, fed: it healed (and a non-combat party pet earned XP). */
+		FED_OWN
 	}
 
 	@SubscribeEvent
@@ -57,10 +60,13 @@ public final class Bonding {
 
 		UUID owner = Pets.owner(mob);
 
+		if (owner != null && owner.equals(player.getUUID())) {
+			return PetXp.feed(player, mob, food);
+		}
+
 		if (owner != null) {
-			boolean yours = owner.equals(player.getUUID());
-			player.displayClientMessage(Component.translatable(yours ? "bloompets.bond.yours" : "bloompets.bond.taken", mob.getName()), true);
-			return yours ? Result.OWNED_BY_YOU : Result.OWNED_BY_SOMEONE;
+			player.displayClientMessage(Component.translatable("bloompets.bond.taken", mob.getName()), true);
+			return Result.OWNED_BY_SOMEONE;
 		}
 
 		if (!player.getAbilities().instabuild) {

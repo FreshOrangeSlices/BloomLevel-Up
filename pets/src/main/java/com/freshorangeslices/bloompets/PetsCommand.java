@@ -1,6 +1,7 @@
 package com.freshorangeslices.bloompets;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -16,11 +17,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 
 /**
- * {@code /bloompets} (also {@code /pets}), until the pet screen: list your pets, put one in your party, call one,
- * open one's storage, the roster; and for operators, give a player a bonded pet.
+ * {@code /bloompets} (also {@code /pets}): list your pets, put one in your party, call one, open one's storage, the
+ * roster, the pet screen; and for operators, give a player a bonded pet, set a pet's level or give it XP.
  */
 public final class PetsCommand {
 	private PetsCommand() {
@@ -38,6 +40,10 @@ public final class PetsCommand {
 					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
 					return 1;
 				}))
+				.then(Commands.literal("level").requires(source -> source.hasPermission(2))
+						.then(Commands.argument("level", IntegerArgumentType.integer(1, PetLevels.MAX)).then(pet().executes(c -> level(c, false)))))
+				.then(Commands.literal("xp").requires(source -> source.hasPermission(2))
+						.then(Commands.argument("amount", IntegerArgumentType.integer(1)).then(pet().executes(c -> level(c, true)))))
 				.then(Commands.literal("give").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("species", StringArgumentType.word())
 								.suggests((c, b) -> SharedSuggestionProvider.suggest(SpeciesData.all().stream().map(s -> s.id().getPath()), b))
@@ -96,6 +102,33 @@ public final class PetsCommand {
 		return 1;
 	}
 
+	/** Operators: sets one of their pets' level, or gives it XP (it has to be loaded: the pet carries its level). */
+	private static int level(CommandContext<CommandSourceStack> context, boolean xp) throws CommandSyntaxException {
+		ServerPlayer player = context.getSource().getPlayerOrException();
+		String wanted = StringArgumentType.getString(context, "pet");
+		PetRegistry.Record record = find(player, wanted);
+		Entity pet = record == null ? null : Pets.loaded(player.server, record.pet);
+
+		if (record == null) {
+			context.getSource().sendFailure(Component.translatable("bloompets.command.nopet", wanted));
+			return 0;
+		}
+
+		if (!(pet instanceof LivingEntity living)) {
+			context.getSource().sendFailure(Component.translatable("bloompets.command.notloaded", record.name));
+			return 0;
+		}
+
+		if (xp) {
+			PetLevels.addXp(living, IntegerArgumentType.getInteger(context, "amount"));
+		} else {
+			PetLevels.setLevel(living, IntegerArgumentType.getInteger(context, "level"));
+		}
+
+		context.getSource().sendSuccess(() -> Component.translatable("bloompets.command.level", record.name, PetLevels.level(living)), true);
+		return PetLevels.level(living);
+	}
+
 	private static int list(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
 		ServerPlayer player = context.getSource().getPlayerOrException();
 		List<PetRegistry.Record> pets = PetRegistry.get(player.server).pets(player.getUUID());
@@ -114,7 +147,7 @@ public final class PetsCommand {
 			text.append(Component.literal("\n" + (i + 1) + ". ").withStyle(ChatFormatting.GRAY))
 					.append(Component.literal(r.name).withStyle(r.party ? ChatFormatting.LIGHT_PURPLE
 							: r.kind == Pets.Kind.MODDED ? ChatFormatting.DARK_RED : ChatFormatting.GOLD))
-					.append(Component.literal(String.format(Locale.ROOT, "  %s, %s  %s %d %d %d%s", shortType(r.type), kind,
+					.append(Component.literal(String.format(Locale.ROOT, "  Lv %d %s, %s  %s %d %d %d%s", r.level, shortType(r.type), kind,
 							shortDim(r.dimension), r.pos.getX(), r.pos.getY(), r.pos.getZ(), here ? "" : " (not loaded)")).withStyle(ChatFormatting.GRAY));
 		}
 

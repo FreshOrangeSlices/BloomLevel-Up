@@ -50,6 +50,11 @@ public final class PetsClient {
 		PetsNetwork.CHANNEL.sendToServer(PetsNetwork.Request.list());
 	}
 
+	/** The list again, for the open screen (levels and health as they change). */
+	public static void refresh() {
+		PetsNetwork.CHANNEL.sendToServer(new PetsNetwork.Request(PetsNetwork.Action.REFRESH, new UUID(0, 0)));
+	}
+
 	public static void act(PetsNetwork.Action action, UUID pet) {
 		PetsNetwork.CHANNEL.sendToServer(new PetsNetwork.Request(action, pet));
 	}

@@ -2,7 +2,9 @@ package com.freshorangeslices.bloompets.network;
 
 import com.freshorangeslices.bloompets.BloomPets;
 import com.freshorangeslices.bloompets.Calling;
+import com.freshorangeslices.bloompets.Fainting;
 import com.freshorangeslices.bloompets.Party;
+import com.freshorangeslices.bloompets.PetLevels;
 import com.freshorangeslices.bloompets.PetRegistry;
 import com.freshorangeslices.bloompets.PetStorage;
 import com.freshorangeslices.bloompets.Pets;
@@ -34,7 +36,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "1";
+	private static final String VERSION = "2";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -48,9 +50,9 @@ public final class PetsNetwork {
 				.encoder(PetList::encode).decoder(PetList::decode).consumerMainThread(PetList::handle).add();
 	}
 
-	/** What the player can do with a pet from the screen. */
+	/** What the player can do with a pet from the screen (REFRESH: the list again for an open screen, never opening it). */
 	public enum Action {
-		LIST, CALL, PARTY, STORAGE
+		LIST, CALL, PARTY, STORAGE, REFRESH
 	}
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
@@ -81,8 +83,8 @@ public final class PetsNetwork {
 				return;
 			}
 
-			if (action == Action.LIST) {
-				sendList(player, true, null);
+			if (action == Action.LIST || action == Action.REFRESH) {
+				sendList(player, action == Action.LIST, null);
 				return;
 			}
 
@@ -107,9 +109,14 @@ public final class PetsNetwork {
 		}
 	}
 
-	/** One pet as the screen shows it. */
+	/**
+	 * One pet as the screen shows it: also its level, its XP into that level and what the next takes (0 at 100), the
+	 * ticks left of its rest if it fainted, and its skill tree (a {@link com.freshorangeslices.bloompets.PetSkills.Kind}
+	 * id, or empty).
+	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
-			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look) {
+			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
+			int rest, String skills) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -124,11 +131,17 @@ public final class PetsNetwork {
 			buf.writeFloat(maxHealth);
 			buf.writeVarInt(slots);
 			buf.writeNbt(look);
+			buf.writeVarInt(level);
+			buf.writeFloat(xp);
+			buf.writeFloat(xpNext);
+			buf.writeVarInt(rest);
+			buf.writeUtf(skills);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
 			return new Entry(buf.readUUID(), buf.readUtf(), buf.readUtf(), buf.readEnum(Pets.Kind.class), buf.readUtf(), buf.readUtf(),
-					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt());
+					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
+					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf());
 		}
 	}
 
@@ -147,15 +160,22 @@ public final class PetsNetwork {
 				float max = live instanceof LivingEntity living ? living.getMaxHealth() : r.maxHealth;
 				CompoundTag look = r.look;
 				String category = "companion";
+				Species species = null;
 
 				if (r.kind == Pets.Kind.BLOOM) {
 					var type = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(r.type));
-					Species species = type == null ? null : com.freshorangeslices.bloompets.SpeciesData.of(type);
+					species = type == null ? null : com.freshorangeslices.bloompets.SpeciesData.of(type);
 					category = species == null ? "utility" : species.category();
 				}
 
+				int level = live != null ? PetLevels.level(live) : r.level;
+				double xp = live != null ? PetLevels.xp(live) : r.xp;
+				boolean combat = r.kind == Pets.Kind.MODDED || species != null && species.combat();
+				float next = level >= PetLevels.MAX ? 0.0F : (float) PetLevels.xpToNext(level, combat);
+				int rest = live != null ? Fainting.ticksLeft(live) : (int) Math.max(0, r.faintedUntil - now);
+				String skills = species == null || species.skills() == null ? "" : species.skills();
 				pets.add(new Entry(r.pet, r.name, r.type, r.kind, category, r.dimension, r.pos, r.party, live != null, health, max,
-						r.slots, look == null ? new CompoundTag() : look));
+						r.slots, look == null ? new CompoundTag() : look, level, (float) xp, next, rest, skills));
 			}
 
 			return new PetList(open, wait, pets, message);

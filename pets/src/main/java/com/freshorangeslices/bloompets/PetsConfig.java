@@ -11,6 +11,17 @@ public final class PetsConfig {
 	private static final ForgeConfigSpec.DoubleValue TELEPORT_DISTANCE;
 	private static final ForgeConfigSpec.DoubleValue HOME_RANGE;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> MODDED;
+	private static final ForgeConfigSpec.DoubleValue CURVE_BASE;
+	private static final ForgeConfigSpec.DoubleValue CURVE_LINEAR;
+	private static final ForgeConfigSpec.DoubleValue PASSIVE_CURVE;
+	private static final ForgeConfigSpec.DoubleValue COMBAT_XP;
+	private static final ForgeConfigSpec.DoubleValue KILL_BONUS;
+	private static final ForgeConfigSpec.DoubleValue TIME_XP;
+	private static final ForgeConfigSpec.IntValue WALK_BLOCKS;
+	private static final ForgeConfigSpec.DoubleValue FEED_XP;
+	private static final ForgeConfigSpec.IntValue FEED_COOLDOWN;
+	private static final ForgeConfigSpec.IntValue REST_SECONDS;
+	private static final ForgeConfigSpec.DoubleValue REST_HEALTH;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -27,6 +38,31 @@ public final class PetsConfig {
 		builder.push("companions");
 		MODDED = builder.comment("Mods whose tamed companions are listed with their owner's pets (always with them, no party place needed). Dragons are left out on purpose.")
 				.defineListAllowEmpty("moddedNamespaces", List.of("migamigos", "zonis_companions"), o -> o instanceof String);
+		builder.pop();
+		builder.push("levels");
+		CURVE_BASE = builder.comment("XP a combat pet needs from level L to L+1 = curveBase + curveLinear x L (Bloom's own curve, halved).")
+				.defineInRange("curveBase", 25.0, 1.0, 10000.0);
+		CURVE_LINEAR = builder.defineInRange("curveLinear", 5.0, 0.0, 10000.0);
+		PASSIVE_CURVE = builder.comment("Non-combat pets need this share of a combat pet's XP per level (a quarter of Bloom's curve).")
+				.defineInRange("passiveCurveFactor", 0.5, 0.01, 10.0);
+		COMBAT_XP = builder.comment("A combat pet's XP per point of real damage it deals, before its kind's multiplier (Bloom's Combat tab gives a player 0.5; a pet a quarter of that, so one takes about 16 hours of fighting to reach 100).")
+				.defineInRange("combatXpPerDamage", 0.125, 0.0, 100.0);
+		KILL_BONUS = builder.comment("The killing blow adds this share of the XP the pet earned on that kill.")
+				.defineInRange("killBonus", 0.5, 0.0, 10.0);
+		TIME_XP = builder.comment("A non-combat party pet's XP per minute near its owner (within 32 blocks; about 8 hours to level 100 with walking and feeding).")
+				.defineInRange("timeXpPerMinute", 22.0, 0.0, 10000.0);
+		WALK_BLOCKS = builder.comment("A non-combat party pet earns 1 XP each time its owner walks this many blocks with it near.")
+				.defineInRange("walkBlocksPerXp", 10, 1, 10000);
+		FEED_XP = builder.comment("XP for feeding a non-combat party pet its favourite food (sneak + right-click).")
+				.defineInRange("feedXp", 10.0, 0.0, 10000.0);
+		FEED_COOLDOWN = builder.comment("Seconds between feedings that give XP.")
+				.defineInRange("feedCooldownSeconds", 30, 0, 3600);
+		builder.pop();
+		builder.push("fainting");
+		REST_SECONDS = builder.comment("A party pet that would die faints and rests this long instead (it can't be hurt meanwhile).")
+				.defineInRange("restSeconds", 60, 1, 3600);
+		REST_HEALTH = builder.comment("Share of its health it gets back when it's on its feet again.")
+				.defineInRange("comesBackWithHealth", 0.5, 0.05, 1.0);
 		builder.pop();
 		SPEC = builder.build();
 	}
@@ -48,6 +84,50 @@ public final class PetsConfig {
 
 	public static double homeRange() {
 		return SPEC.isLoaded() ? HOME_RANGE.get() : 16.0;
+	}
+
+	public static double curveBase() {
+		return SPEC.isLoaded() ? CURVE_BASE.get() : 25.0;
+	}
+
+	public static double curveLinear() {
+		return SPEC.isLoaded() ? CURVE_LINEAR.get() : 5.0;
+	}
+
+	public static double passiveCurveFactor() {
+		return SPEC.isLoaded() ? PASSIVE_CURVE.get() : 0.5;
+	}
+
+	public static double combatXpPerDamage() {
+		return SPEC.isLoaded() ? COMBAT_XP.get() : 0.125;
+	}
+
+	public static double killBonus() {
+		return SPEC.isLoaded() ? KILL_BONUS.get() : 0.5;
+	}
+
+	public static double timeXpPerMinute() {
+		return SPEC.isLoaded() ? TIME_XP.get() : 22.0;
+	}
+
+	public static int walkBlocksPerXp() {
+		return SPEC.isLoaded() ? WALK_BLOCKS.get() : 10;
+	}
+
+	public static double feedXp() {
+		return SPEC.isLoaded() ? FEED_XP.get() : 10.0;
+	}
+
+	public static int feedCooldownTicks() {
+		return (SPEC.isLoaded() ? FEED_COOLDOWN.get() : 30) * 20;
+	}
+
+	public static int restTicks() {
+		return (SPEC.isLoaded() ? REST_SECONDS.get() : 60) * 20;
+	}
+
+	public static double restHealth() {
+		return SPEC.isLoaded() ? REST_HEALTH.get() : 0.5;
 	}
 
 	public static List<? extends String> moddedNamespaces() {

@@ -1212,12 +1212,16 @@ def main():
             press("Escape")
             time.sleep(1)
             progress("quest book shown")
-        # Bloom Pets' screen, with a wolf (in the party), a cow and a fox given to the player.
+        # Bloom Pets' screen, with a wolf (in the party, level 40 with some XP: skills open up to Moonblessed), a cow
+        # and a fox given to the player.
         if any(f.startswith("bloompets") for f in os.listdir(os.path.join(server_dir, "mods"))):
             for species in ("wolf", "cow", "fox"):
                 server.send(f"bloompets give {species} {PLAYER}")
             time.sleep(2)
             server.send(f"execute as {PLAYER} run bloompets party 1")
+            time.sleep(1)
+            server.send(f"execute as {PLAYER} run bloompets level 40 1")
+            server.send(f"execute as {PLAYER} run bloompets xp 100 1")
             time.sleep(1)
             server.send(f"execute as {PLAYER} run bloompets screen")
             time.sleep(4)

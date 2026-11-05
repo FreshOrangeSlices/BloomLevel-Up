@@ -1,6 +1,7 @@
 package com.freshorangeslices.bloompets.client;
 
 import com.freshorangeslices.bloompets.BloomPets;
+import com.freshorangeslices.bloompets.PetSkills;
 import com.freshorangeslices.bloompets.Pets;
 import com.freshorangeslices.bloompets.network.PetsNetwork;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -17,25 +18,30 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * The pet screen (FreshOrangeSlices' sketch, docs/design/art/pets-screen-sketch.png), in the Skill Hub's look: a dark
  * panel in the hub's gold frame. The player's pets on the left, Bloom pets first (orange) then companions (red), the
  * party's marked pink; the chosen pet in the middle, standing on a piece of the hub's art (the combat cave for fighters
- * and companions, the meadow for the rest) and turning to follow the mouse, with its skill slots on either side (filled
- * from Phase 2: pet levels) and a switch between its own traits and its Bloom weapon tree (One and the Same); its
- * health and where it is under it; Call, the party and its storage at the bottom.
+ * and companions, the meadow for the rest) and turning to follow the mouse, with its skill slots on either side (a
+ * combat pet's nine skills and the level-100 perk, dimmed until its level opens them) and a switch between its own
+ * traits and its Bloom weapon tree (One and the Same); its level and XP, health and where it is; Call, the party and
+ * its storage at the bottom.
  */
 public final class PetScreen extends Screen {
 	private static final int W = 340;
-	private static final int H = 210;
+	private static final int H = 232;
 	/** The gold frame, drawn this far outside the panel (as the hub's). */
 	private static final int FRAME = 6;
 	/** The list panel's right edge, from the panel's left. */
@@ -44,8 +50,10 @@ public final class PetScreen extends Screen {
 	private static final int LIST_TOP = 42;
 	/** The divider under the pet's name. */
 	private static final int HEAD = 36;
-	private static final int SLOT = 22;
-	private static final int SLOT_GAP = 3;
+	private static final int SLOT = 20;
+	private static final int SLOT_GAP = 2;
+	/** Skill slots a side: the nine skills and the level-100 perk. */
+	private static final int SLOTS = 5;
 	private static final float BIG = 1.5F;
 
 	// The Skill Hub's palette (Bloom's HubScreen and its details window).
@@ -68,6 +76,11 @@ public final class PetScreen extends Screen {
 	private static final int PARTY_EDGE = 0xFF7A2450;
 	private static final int HEALTH = 0xFFD8453A;
 	private static final int HEALTH_SHINE = 0xFFF0705F;
+	/** The hub's XP green. */
+	private static final int XP_FILL = 0xFF7CC242;
+	private static final int XP_SHINE = 0xFF9AD65E;
+	private static final int SKILL_EDGE = 0xFFC98F1F;
+	private static final int SKILL_TEXT = 0xFFEFE6D2;
 
 	private static final ResourceLocation FRAME_TEXTURE = new ResourceLocation(BloomPets.MOD_ID, "textures/gui/frame.png");
 	private static final int FRAME_SIZE = 28;
@@ -98,6 +111,7 @@ public final class PetScreen extends Screen {
 	private Button callButton;
 	private Button partyButton;
 	private Button storageButton;
+	private int ticks;
 
 	public PetScreen(PetsNetwork.PetList list) {
 		super(Component.translatable("bloompets.screen.title"));
@@ -189,7 +203,7 @@ public final class PetScreen extends Screen {
 	}
 
 	private int canvasBottom() {
-		return slotY(3) + SLOT;
+		return slotY(SLOTS - 1) + SLOT;
 	}
 
 	@Override
@@ -273,6 +287,11 @@ public final class PetScreen extends Screen {
 
 	@Override
 	public void tick() {
+		// Levels, health and rest as they change.
+		if (++ticks % 40 == 0) {
+			PetsClient.refresh();
+		}
+
 		// The party cooldown counts down on its button; the button comes back on when it's over.
 		PetsNetwork.Entry pet = current();
 
@@ -346,7 +365,7 @@ public final class PetScreen extends Screen {
 		}
 
 		if (pet != null) {
-			slotTooltip(g, mouseX, mouseY);
+			slotTooltip(g, pet, mouseX, mouseY);
 		}
 	}
 
@@ -380,7 +399,10 @@ public final class PetScreen extends Screen {
 				g.fill(rowLeft, y, rowRight, y + ROW_H, 0x22EFE6D2);
 			}
 
-			g.drawString(font, font.plainSubstrByWidth(e.name(), rowRight - rowLeft - 24), rowLeft + 5, y + 3, color);
+			String level = "Lv " + e.level();
+			int levelX = rowRight - 19 - font.width(level);
+			g.drawString(font, font.plainSubstrByWidth(e.name(), levelX - rowLeft - 9), rowLeft + 5, y + 3, color);
+			g.drawString(font, level, levelX, y + 3, e.rest() > 0 ? MODDED : FAINT);
 
 			if (e.party() || e.kind() == Pets.Kind.MODDED) {
 				// Pink: in the party (companions always are).
@@ -436,38 +458,51 @@ public final class PetScreen extends Screen {
 		int viewX = mainRight - 20 - font.width(view);
 		g.drawString(font, view, viewX, top + 12, MUTED);
 		big(g, bold(pet.name(), (int) ((viewX - 6 - mainLeft) / BIG)), mainLeft, top + 9, GOLD);
-		String kind = typeName(pet) + " · " + Component.translatable("bloompets.category." + pet.category()).getString();
-		g.drawString(font, font.plainSubstrByWidth(kind, mainRight - mainLeft), mainLeft, top + 25, MUTED);
+		Component level = Component.translatable("bloompets.screen.level", pet.level());
+		g.drawString(font, level, mainLeft, top + 25, pet.level() >= PetSkills.Slot.MAX.level ? GOLD : ACCENT);
+		int kindX = mainLeft + font.width(level);
+		String kind = " · " + typeName(pet) + " · " + Component.translatable("bloompets.category." + pet.category()).getString();
+		g.drawString(font, font.plainSubstrByWidth(kind, mainRight - kindX), kindX, top + 25, MUTED);
 		g.fill(mainLeft, top + HEAD, mainRight, top + HEAD + 1, DIVIDER);
 
-		// The skill slots, four a side (filled in Phase 2), and the pet between them.
-		for (int i = 0; i < 4; i++) {
-			slot(g, mainLeft, slotY(i), mouseX, mouseY);
-			slot(g, mainRight - SLOT, slotY(i), mouseX, mouseY);
+		// The skill slots, five a side, and the pet between them.
+		for (int i = 0; i < SLOTS; i++) {
+			slot(g, pet, i, mainLeft, slotY(i), mouseX, mouseY);
+			slot(g, pet, SLOTS + i, mainRight - SLOT, slotY(i), mouseX, mouseY);
 		}
 
 		canvas(g, pet, mainLeft + SLOT + 6, canvasTop(), mainRight - SLOT - 6, canvasBottom(), mouseX, mouseY);
 
-		// Health, as the hub's level bar.
+		// Health and XP, as the hub's level bar.
 		int y = canvasBottom() + 7;
 		Component health = Component.translatable("bloompets.screen.health");
-		g.drawString(font, health, mainLeft, y, MUTED);
-		String amount = String.format(Locale.ROOT, "%.0f/%.0f", pet.health(), pet.maxHealth());
-		int barX0 = mainLeft + font.width(health) + 6;
-		int barX1 = mainRight - font.width(amount) - 6;
-		float fraction = pet.maxHealth() > 0 ? Mth.clamp(pet.health() / pet.maxHealth(), 0.0F, 1.0F) : 0.0F;
-		int fill = barX0 + Math.round((barX1 - barX0) * fraction);
+		Component xp = Component.translatable("bloompets.screen.xp");
+		int barX0 = mainLeft + Math.max(font.width(health), font.width(xp)) + 6;
+		bar(g, health, String.format(Locale.ROOT, "%.0f/%.0f", pet.health(), pet.maxHealth()),
+				pet.maxHealth() > 0 ? pet.health() / pet.maxHealth() : 0.0F, HEALTH, HEALTH_SHINE, TEXT, mainLeft, barX0, mainRight, y);
+		boolean max = pet.xpNext() <= 0;
+		bar(g, xp, max ? Component.translatable("bloompets.screen.max").getString()
+				: String.format(Locale.ROOT, "%,d / %,d", (int) pet.xp(), (int) Math.ceil(pet.xpNext())),
+				max ? 1.0F : pet.xp() / pet.xpNext(), max ? SKILL_EDGE : XP_FILL, max ? GOLD : XP_SHINE, max ? GOLD : TEXT, mainLeft, barX0, mainRight, y + 11);
+		// How it's doing (and how far), then where it is: labels in orange, as the hub's numbers.
+		labelled(g, "bloompets.screen.status", state(pet), mainLeft, y + 23, mainRight);
+		labelled(g, "bloompets.screen.where", where(pet), mainLeft, y + 34, mainRight);
+	}
+
+	/** A label, a bar filled to {@code fraction}, and the amount at the right. */
+	private void bar(GuiGraphics g, Component label, String amount, float fraction, int fillColor, int shine, int amountColor, int x,
+			int barX0, int right, int y) {
+		g.drawString(font, label, x, y, MUTED);
+		int barX1 = right - font.width(amount) - 6;
+		int fill = barX0 + Math.round((barX1 - barX0) * Mth.clamp(fraction, 0.0F, 1.0F));
 		g.fill(barX0, y + 1, barX1, y + 7, BAR_BACK);
 
 		if (fill > barX0) {
-			g.fill(barX0, y + 1, fill, y + 7, HEALTH);
-			g.fill(barX0, y + 1, fill, y + 2, HEALTH_SHINE);
+			g.fill(barX0, y + 1, fill, y + 7, fillColor);
+			g.fill(barX0, y + 1, fill, y + 2, shine);
 		}
 
-		g.drawString(font, amount, mainRight - font.width(amount), y, TEXT);
-		// How it's doing (and how far), then where it is: labels in orange, as the hub's numbers.
-		labelled(g, "bloompets.screen.status", state(pet), mainLeft, y + 12, mainRight);
-		labelled(g, "bloompets.screen.where", where(pet), mainLeft, y + 23, mainRight);
+		g.drawString(font, amount, right - font.width(amount), y, amountColor);
 	}
 
 	private void labelled(GuiGraphics g, String labelKey, String value, int x, int y, int right) {
@@ -537,6 +572,12 @@ public final class PetScreen extends Screen {
 
 	private String state(PetsNetwork.Entry pet) {
 		Minecraft minecraft = Minecraft.getInstance();
+		int rest = pet.rest() - (int) ((System.currentTimeMillis() - receivedAt) / 50);
+
+		if (rest > 0) {
+			return Component.translatable("bloompets.screen.state.fainted", time(rest)).getString();
+		}
+
 		String state = pet.kind() == Pets.Kind.MODDED ? Component.translatable("bloompets.screen.state.companion").getString()
 				: pet.party() ? Component.translatable("bloompets.screen.state.party").getString()
 				: Component.translatable("bloompets.screen.state.home").getString();
@@ -612,22 +653,92 @@ public final class PetScreen extends Screen {
 		return mouseX >= x && mouseX < x + SLOT && mouseY >= y && mouseY < y + SLOT;
 	}
 
-	private void slotTooltip(GuiGraphics g, int mouseX, int mouseY) {
-		for (int i = 0; i < 4; i++) {
-			for (int x : new int[] {mainLeft(), mainRight() - SLOT}) {
-				if (overSlot(x, slotY(i), mouseX, mouseY)) {
-					g.renderTooltip(font, Component.translatable(bloomView ? "bloompets.screen.slot.bloom" : "bloompets.screen.slot.pet"), mouseX, mouseY);
-					return;
-				}
+	/** The skill in slot {@code index} (0 to 9: the left column, then the right), or null for an empty slot. */
+	private PetSkills.Slot skillAt(PetsNetwork.Entry pet, int index) {
+		if (bloomView || pet.kind() != Pets.Kind.BLOOM) {
+			return null;
+		}
+
+		PetSkills.Slot slot = PetSkills.Slot.values()[index];
+		return PetSkills.Kind.byId(pet.skills()) != null || slot == PetSkills.Slot.MAX ? slot : null;
+	}
+
+	private void slotTooltip(GuiGraphics g, PetsNetwork.Entry pet, int mouseX, int mouseY) {
+		for (int i = 0; i < SLOTS * 2; i++) {
+			int x = i < SLOTS ? mainLeft() : mainRight() - SLOT;
+
+			if (!overSlot(x, slotY(i % SLOTS), mouseX, mouseY)) {
+				continue;
 			}
+
+			PetSkills.Slot slot = skillAt(pet, i);
+
+			if (slot == null) {
+				String key = bloomView ? "bloompets.screen.slot.bloom" : pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.slot.modded"
+						: "bloompets.screen.slot.passive";
+				g.renderTooltip(font, font.split(Component.translatable(key), 200), mouseX, mouseY);
+				return;
+			}
+
+			PetSkills.Kind kind = PetSkills.Kind.byId(pet.skills());
+			boolean open = pet.level() >= slot.level;
+			List<FormattedCharSequence> lines = new ArrayList<>();
+			lines.add(Component.translatable(PetSkills.nameKey(kind, slot)).withStyle(st -> st.withColor(GOLD & 0xFFFFFF).withBold(true))
+					.getVisualOrderText());
+			lines.add(Component.translatable(open ? "bloompets.screen.skill.open" : "bloompets.screen.skill.locked", slot.level)
+					.withStyle(st -> st.withColor((open ? XP_FILL : MUTED) & 0xFFFFFF)).getVisualOrderText());
+			lines.addAll(font.split(describe(kind, slot, open ? pet.level() : slot.level).withStyle(st -> st.withColor(SKILL_TEXT & 0xFFFFFF)), 200));
+			g.renderTooltip(font, lines, mouseX, mouseY);
+			return;
 		}
 	}
 
-	/** An empty skill slot, as the hub's locked icons: near black, a brown edge (orange under the mouse). */
-	private void slot(GuiGraphics g, int x, int y, int mouseX, int mouseY) {
+	/** What the skill does, with its numbers at this level (a kind's own wording first, then the shared one). */
+	private static MutableComponent describe(PetSkills.Kind kind, PetSkills.Slot slot, int level) {
+		String own = kind == null ? null : "bloompets.skill." + kind.id() + "." + slot.id() + ".desc";
+		String key = slot == PetSkills.Slot.MAX ? "bloompets.skill.max.desc" : own != null && I18n.exists(own) ? own : "bloompets.skill." + slot.id() + ".desc";
+		Object[] args = switch (slot) {
+			case GORE -> new Object[] {number(PetSkills.goreChance(level))};
+			case FIRST -> kind == PetSkills.Kind.IRON_GOLEM ? new Object[] {number(PetSkills.colossusHealth(level))} : new Object[0];
+			case SPECIAL -> kind == PetSkills.Kind.POLAR_BEAR ? new Object[] {PetSkills.crushHigh(level) ? "IV" : "II", PetSkills.crushHigh(level) ? "II" : "I"}
+					: kind == PetSkills.Kind.PANDA ? new Object[] {number(PetSkills.soothChance(level)), PetSkills.soothHeal(level)} : new Object[0];
+			default -> new Object[0];
+		};
+		return Component.translatable(key, args);
+	}
+
+	private static String number(double value) {
+		return value == Math.rint(value) ? Long.toString((long) value) : String.format(Locale.ROOT, "%.1f", value);
+	}
+
+	/**
+	 * A skill slot, as the hub's Major icons: its icon on near black with a gold edge once it's open; dimmed with the
+	 * level it opens at until then; a "?" in an empty one (non-combat pets' and companions' slots, and the Bloom view).
+	 */
+	private void slot(GuiGraphics g, PetsNetwork.Entry pet, int index, int x, int y, int mouseX, int mouseY) {
+		boolean hover = overSlot(x, y, mouseX, mouseY);
+		PetSkills.Slot slot = skillAt(pet, index);
 		g.fill(x, y, x + SLOT, y + SLOT, 0xFF0E0C0A);
-		frame(g, x, y, x + SLOT, y + SLOT, overSlot(x, y, mouseX, mouseY) ? ACCENT : PANEL_EDGE);
-		g.drawCenteredString(font, "?", x + SLOT / 2, y + 7, FAINT);
+
+		if (slot == null) {
+			frame(g, x, y, x + SLOT, y + SLOT, hover ? ACCENT : PANEL_EDGE);
+			g.drawCenteredString(font, "?", x + SLOT / 2, y + 6, FAINT);
+			return;
+		}
+
+		boolean open = pet.level() >= slot.level;
+		frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : open ? SKILL_EDGE : PANEL_EDGE);
+		g.renderItem(new ItemStack(PetSkills.icon(PetSkills.Kind.byId(pet.skills()), slot)), x + 2, y + 2);
+
+		if (!open) {
+			// Over the item (drawn at depth 150).
+			g.pose().pushPose();
+			g.pose().translate(0.0F, 0.0F, 200.0F);
+			g.fill(x + 1, y + 1, x + SLOT - 1, y + SLOT - 1, 0xC8100E0C);
+			String level = Integer.toString(slot.level);
+			g.drawString(font, level, x + (SLOT - font.width(level)) / 2 + 1, y + 6, MUTED);
+			g.pose().popPose();
+		}
 	}
 
 	/** A one-pixel outline. */

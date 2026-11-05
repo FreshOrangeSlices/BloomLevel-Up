@@ -69,7 +69,7 @@ public final class AmigoGameTests {
 
 		// Counted from its level (74), nothing owed for the past; far more than a Bloom pet needs to reach 100.
 		PetLevels.addXp(amigo, 100_000.0);
-		helper.assertTrue(Amigos.xp(amigo) == Amigos.xpNext(amigo, 74) && Amigos.owedLevel(amigo) == PetLevels.AMIGO_PACE_CAP,
+		helper.assertTrue(Amigos.xp(amigo).intValue() == Amigos.xpNext(amigo, 74).intValue() && Amigos.owedLevel(amigo) == PetLevels.AMIGO_PACE_CAP,
 				"One level's worth, to 75, and no more (XP " + Amigos.xp(amigo) + ", owed " + Amigos.owedLevel(amigo) + ")");
 		helper.succeed();
 	}

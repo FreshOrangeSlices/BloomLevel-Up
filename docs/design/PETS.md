@@ -291,6 +291,17 @@ rest's countdown, the list kept fresh every 2 seconds. Operators: `/bloompets le
 `/bloompets xp <amount> <pet>`. Not yet: modded companions' Spirit and its reroll (Phase 5; they level already), job XP
 for pets at posts (Phase 3).
 
+**Phase 3a (built, 2026-11-05): mood and hunger** (`PetMood`), the plugin's happiness with a food bar beside it, for
+Bloom pets (modded companions keep their own mods' needs until Phase 5). Mood 0 to 100, shown as 10 hearts (a bar in
+the screen): it drops a point every 3 minutes in the party (three times as fast once it's tired, after 90 minutes in the
+party; twice while hungry, four times starving; a quarter while it loves you); at home it rests (tiredness gone in 5
+minutes) and, if fed, cheers up 10 a minute. Feeding cheers it up 15 (once a minute), a pat (sneak + right-click with
+an empty hand; not horses, donkeys, mules, llamas or camels, which open their inventory that way) 5 (every 30 seconds);
+full mood from your care and it loves you for 30 minutes (fainting ends it). Under 30 it sulks: no skills, bonus, job or
+storage until it cheers up. Hunger 0 to 20: a point every 4 minutes in the party (a full bar lasts 80 minutes); its
+favourite food fills 6 (feeding it, or by itself from its storage at 14 and under); 15 and up it slowly heals. The
+screen shows both bars (with tooltips) and "sulking" in its status.
+
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 
 1. **The mod and the list**: the `bloompets` mod and its CI job; tracking owned pets; the party (3 places); the screen with

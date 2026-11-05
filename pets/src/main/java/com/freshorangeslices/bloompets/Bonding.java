@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -17,7 +18,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 /**
  * Bonding, the plugin's way: sneak and right-click a wild animal of the roster with its favourite food. Each feeding
  * counts (hearts above the hotbar show how far along); after enough (5 for most) it's the player's pet. Feeding without
- * sneaking still breeds animals as usual. Sneak-feeding your own pet heals it (and gives a non-combat party pet XP).
+ * sneaking still breeds animals as usual. Sneak-feeding your own pet feeds it (health, hunger, mood, and XP for a
+ * non-combat party pet); sneak + right-click with an empty hand pats it.
  */
 public final class Bonding {
 	private Bonding() {
@@ -41,7 +43,22 @@ public final class Bonding {
 
 		Species species = Pets.species(mob);
 
-		if (species == null || !species.isFood(event.getItemStack())) {
+		if (species == null) {
+			return;
+		}
+
+		// An empty hand: its owner pats it (horses, donkeys, llamas and camels open their inventory that way instead).
+		if (event.getItemStack().isEmpty()) {
+			if (player.getUUID().equals(Pets.owner(mob)) && !(mob instanceof AbstractHorse)) {
+				event.setCanceled(true);
+				event.setCancellationResult(InteractionResult.SUCCESS);
+				PetMood.pat(serverPlayer, mob);
+			}
+
+			return;
+		}
+
+		if (!species.isFood(event.getItemStack())) {
 			return;
 		}
 

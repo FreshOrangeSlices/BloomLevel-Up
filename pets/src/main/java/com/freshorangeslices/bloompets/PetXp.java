@@ -144,17 +144,19 @@ public final class PetXp {
 	}
 
 	/**
-	 * Its owner feeds the pet its favourite food (sneak + right-click): it heals two hearts, and a non-combat pet in the
-	 * party earns XP (at most every 30 seconds). Nothing is eaten if it would do neither. Public for the game tests.
+	 * Its owner feeds the pet its favourite food (sneak + right-click): it heals two hearts, fills 6 hunger, cheers up
+	 * (once a minute), and a non-combat pet in the party earns XP (at most every 30 seconds). Nothing is eaten if it's
+	 * full, unhurt and has no XP to gain. Public for the game tests.
 	 */
 	public static Bonding.Result feed(ServerPlayer player, Mob pet, ItemStack food) {
 		CompoundTag data = Pets.data(pet);
 		long now = player.server.overworld().getGameTime();
 		boolean hurt = pet.getHealth() < pet.getMaxHealth();
+		boolean hungry = PetMood.hunger(pet) < PetMood.MAX_HUNGER;
 		boolean xp = !PetLevels.combat(pet) && PetLevels.active(pet) && PetLevels.level(pet) < PetLevels.MAX
 				&& (!data.contains("fedAt") || now - data.getLong("fedAt") >= PetsConfig.feedCooldownTicks());
 
-		if (!hurt && !xp) {
+		if (!hurt && !hungry && !xp) {
 			player.displayClientMessage(Component.translatable("bloompets.feed.full", pet.getName()), true);
 			return Bonding.Result.OWNED_BY_YOU;
 		}
@@ -164,6 +166,7 @@ public final class PetXp {
 		}
 
 		pet.heal(4.0F);
+		PetMood.fed(player, pet);
 		ServerLevel level = player.serverLevel();
 		level.sendParticles(ParticleTypes.HEART, pet.getX(), pet.getY() + pet.getBbHeight() * 0.8, pet.getZ(), 2, 0.3, 0.2, 0.3, 0.0);
 		level.playSound(null, pet.blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL, 0.6F, 1.0F);

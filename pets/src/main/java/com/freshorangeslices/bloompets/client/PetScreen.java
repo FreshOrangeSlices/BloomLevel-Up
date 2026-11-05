@@ -50,7 +50,7 @@ public final class PetScreen extends Screen {
 	private static final int LIST_TOP = 42;
 	/** The divider under the pet's name. */
 	private static final int HEAD = 36;
-	private static final int SLOT = 20;
+	private static final int SLOT = 18;
 	private static final int SLOT_GAP = 2;
 	/** Skill slots a side: the nine skills and the level-100 perk. */
 	private static final int SLOTS = 5;
@@ -81,6 +81,9 @@ public final class PetScreen extends Screen {
 	private static final int XP_SHINE = 0xFF9AD65E;
 	private static final int SKILL_EDGE = 0xFFC98F1F;
 	private static final int SKILL_TEXT = 0xFFEFE6D2;
+	private static final int MOOD_OK = 0xFFE0B040;
+	private static final int FOOD = 0xFFD08A3A;
+	private static final int FOOD_SHINE = 0xFFE8A65A;
 
 	private static final ResourceLocation FRAME_TEXTURE = new ResourceLocation(BloomPets.MOD_ID, "textures/gui/frame.png");
 	private static final int FRAME_SIZE = 28;
@@ -112,6 +115,8 @@ public final class PetScreen extends Screen {
 	private Button partyButton;
 	private Button storageButton;
 	private int ticks;
+	/** A tooltip for something drawn in the pet's panel (its mood or hunger), drawn last, over the buttons. */
+	private List<Component> panelTip;
 
 	public PetScreen(PetsNetwork.PetList list) {
 		super(Component.translatable("bloompets.screen.title"));
@@ -366,6 +371,10 @@ public final class PetScreen extends Screen {
 
 		if (pet != null) {
 			slotTooltip(g, pet, mouseX, mouseY);
+
+			if (panelTip != null) {
+				g.renderComponentTooltip(font, panelTip, mouseX, mouseY);
+			}
 		}
 	}
 
@@ -477,7 +486,8 @@ public final class PetScreen extends Screen {
 		int y = canvasBottom() + 7;
 		Component health = Component.translatable("bloompets.screen.health");
 		Component xp = Component.translatable("bloompets.screen.xp");
-		int barX0 = mainLeft + Math.max(font.width(health), font.width(xp)) + 6;
+		Component mood = Component.translatable("bloompets.screen.mood");
+		int barX0 = mainLeft + Math.max(Math.max(font.width(health), font.width(xp)), font.width(mood)) + 6;
 		bar(g, health, String.format(Locale.ROOT, "%.0f/%.0f", pet.health(), pet.maxHealth()),
 				pet.maxHealth() > 0 ? pet.health() / pet.maxHealth() : 0.0F, HEALTH, HEALTH_SHINE, TEXT, mainLeft, barX0, mainRight, y);
 		boolean max = pet.xpNext() <= 0;
@@ -485,8 +495,53 @@ public final class PetScreen extends Screen {
 				: String.format(Locale.ROOT, "%,d / %,d", (int) pet.xp(), (int) Math.ceil(pet.xpNext())),
 				max ? 1.0F : pet.xp() / pet.xpNext(), max ? SKILL_EDGE : XP_FILL, max ? GOLD : XP_SHINE, max ? GOLD : TEXT, mainLeft, barX0, mainRight, y + 11);
 		// How it's doing (and how far), then where it is: labels in orange, as the hub's numbers.
-		labelled(g, "bloompets.screen.status", state(pet), mainLeft, y + 23, mainRight);
-		labelled(g, "bloompets.screen.where", where(pet), mainLeft, y + 34, mainRight);
+		moodRow(g, pet, mood, barX0, mainLeft, mainRight, y + 22, mouseX, mouseY);
+		labelled(g, "bloompets.screen.status", state(pet), mainLeft, y + 33, mainRight);
+		labelled(g, "bloompets.screen.where", where(pet), mainLeft, y + 44, mainRight);
+	}
+
+	/** Mood (hearts as a bar: green, gold, red when it sulks, pink when it loves you) and hunger, side by side. */
+	private void moodRow(GuiGraphics g, PetsNetwork.Entry pet, Component mood, int barX0, int x0, int x1, int y, int mouseX, int mouseY) {
+		panelTip = null;
+
+		if (pet.mood() < 0) {
+			labelled(g, "bloompets.screen.mood", Component.translatable("bloompets.screen.mood.modded").getString(), x0, y, x1);
+			return;
+		}
+
+		int middle = x0 + (x1 - x0) / 2;
+		boolean sad = pet.mood() < 30.0F;
+		int color = pet.loved() ? PARTY : sad ? HEALTH : pet.mood() >= 70.0F ? XP_FILL : MOOD_OK;
+		bar(g, mood, "", pet.mood() / 100.0F, color, 0x30FFFFFF | color & 0x00FFFFFF, TEXT, x0, barX0, middle - 2, y);
+		Component food = Component.translatable("bloompets.screen.hunger");
+		int foodX = middle + 6;
+		bar(g, food, "", pet.hunger() / 20.0F, pet.hunger() <= 6.0F ? HEALTH : FOOD, FOOD_SHINE, TEXT, foodX, foodX + font.width(food) + 6, x1, y);
+
+		if (mouseY >= y - 1 && mouseY < y + 9 && mouseX >= x0 && mouseX < x1) {
+			int hearts = Math.max(1, Math.min(10, (int) Math.ceil(pet.mood() / 10.0F - 1.0E-6F)));
+			String word = pet.loved() ? "loved" : sad ? "sad" : hearts >= 10 ? "overjoyed" : hearts >= 8 ? "happy" : hearts >= 6 ? "content" : "okay";
+			List<Component> tip = new ArrayList<>();
+
+			if (mouseX < middle) {
+				tip.add(Component.translatable("bloompets.screen.mood.tip", Component.translatable("bloompets.screen.mood." + word), hearts)
+						.withStyle(st -> st.withColor(color & 0xFFFFFF)));
+
+				if (sad) {
+					tip.add(Component.translatable("bloompets.screen.mood.sulking").withStyle(ChatFormatting.GRAY));
+				}
+
+				if (pet.tired()) {
+					tip.add(Component.translatable("bloompets.screen.mood.tired").withStyle(ChatFormatting.GRAY));
+				}
+
+				tip.add(Component.translatable("bloompets.screen.mood.how").withStyle(ChatFormatting.DARK_GRAY));
+			} else {
+				tip.add(Component.translatable("bloompets.screen.hunger.tip", (int) Math.ceil(pet.hunger())).withStyle(st -> st.withColor(FOOD & 0xFFFFFF)));
+				tip.add(Component.translatable("bloompets.screen.hunger.how").withStyle(ChatFormatting.DARK_GRAY));
+			}
+
+			panelTip = tip;
+		}
 	}
 
 	/** A label, a bar filled to {@code fraction}, and the amount at the right. */
@@ -581,6 +636,10 @@ public final class PetScreen extends Screen {
 		String state = pet.kind() == Pets.Kind.MODDED ? Component.translatable("bloompets.screen.state.companion").getString()
 				: pet.party() ? Component.translatable("bloompets.screen.state.party").getString()
 				: Component.translatable("bloompets.screen.state.home").getString();
+
+		if (pet.mood() >= 0 && pet.mood() < 30.0F) {
+			state += " · " + Component.translatable("bloompets.screen.state.sulking").getString();
+		}
 
 		if (!pet.loaded()) {
 			return state + " · " + Component.translatable("bloompets.screen.state.away").getString();
@@ -722,13 +781,13 @@ public final class PetScreen extends Screen {
 
 		if (slot == null) {
 			frame(g, x, y, x + SLOT, y + SLOT, hover ? ACCENT : PANEL_EDGE);
-			g.drawCenteredString(font, "?", x + SLOT / 2, y + 6, FAINT);
+			g.drawCenteredString(font, "?", x + SLOT / 2, y + 5, FAINT);
 			return;
 		}
 
 		boolean open = pet.level() >= slot.level;
 		frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : open ? SKILL_EDGE : PANEL_EDGE);
-		g.renderItem(new ItemStack(PetSkills.icon(PetSkills.Kind.byId(pet.skills()), slot)), x + 2, y + 2);
+		g.renderItem(new ItemStack(PetSkills.icon(PetSkills.Kind.byId(pet.skills()), slot)), x + 1, y + 1);
 
 		if (!open) {
 			// Over the item (drawn at depth 150).
@@ -736,7 +795,7 @@ public final class PetScreen extends Screen {
 			g.pose().translate(0.0F, 0.0F, 200.0F);
 			g.fill(x + 1, y + 1, x + SLOT - 1, y + SLOT - 1, 0xC8100E0C);
 			String level = Integer.toString(slot.level);
-			g.drawString(font, level, x + (SLOT - font.width(level)) / 2 + 1, y + 6, MUTED);
+			g.drawString(font, level, x + (SLOT - font.width(level)) / 2 + 1, y + 5, MUTED);
 			g.pose().popPose();
 		}
 	}

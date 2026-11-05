@@ -142,10 +142,10 @@ public final class PetSkills {
 		return level >= 50;
 	}
 
-	/** The pet's level if its skills work right now (in the party, awake), else -1. */
+	/** The pet's level if its skills work right now (in the party, awake, not sulking), else -1. */
 	static int skillLevel(Entity pet) {
 		if (!(pet instanceof LivingEntity) || pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.BLOOM || !Pets.inParty(pet)
-				|| Fainting.fainted(pet) || Pets.owner(pet) == null) {
+				|| Fainting.fainted(pet) || PetMood.sad(pet) || Pets.owner(pet) == null) {
 			return -1;
 		}
 
@@ -172,7 +172,7 @@ public final class PetSkills {
 			return;
 		}
 
-		double bonus = kind(pet) == Kind.IRON_GOLEM && Pets.inParty(pet) ? colossusHealth(PetLevels.level(pet)) : 0.0;
+		double bonus = kind(pet) == Kind.IRON_GOLEM && Pets.inParty(pet) && !PetMood.sad(pet) ? colossusHealth(PetLevels.level(pet)) : 0.0;
 		AttributeModifier old = health.getModifier(COLOSSUS);
 
 		if (old != null && old.getAmount() == bonus) {

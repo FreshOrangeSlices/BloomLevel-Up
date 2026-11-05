@@ -110,6 +110,7 @@ public final class Fainting {
 
 		data.putLong(UNTIL, now(pet) + PetsConfig.restTicks());
 		RESTING.add(pet.getUUID());
+		PetMood.fainted(pet);
 		pet.setHealth(1.0F);
 		pet.clearFire();
 		pet.removeAllEffects();

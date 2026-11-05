@@ -54,6 +54,11 @@ public final class PetRegistry extends SavedData {
 		public int level = 1;
 		public double xp;
 		public long faintedUntil;
+		/** Its mood and hunger as last seen, and whether it loves its owner or is tired. */
+		public double mood = PetMood.START_MOOD;
+		public double hunger = PetMood.MAX_HUNGER;
+		public boolean loved;
+		public boolean tired;
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -74,6 +79,8 @@ public final class PetRegistry extends SavedData {
 			tag.putInt("level", level);
 			tag.putDouble("xp", xp);
 			tag.putLong("faintedUntil", faintedUntil);
+			tag.putDouble("mood", mood);
+			tag.putDouble("hunger", hunger);
 			return tag;
 		}
 
@@ -96,6 +103,8 @@ public final class PetRegistry extends SavedData {
 			record.level = Math.max(1, tag.getInt("level"));
 			record.xp = tag.getDouble("xp");
 			record.faintedUntil = tag.getLong("faintedUntil");
+			record.mood = tag.contains("mood") ? tag.getDouble("mood") : PetMood.START_MOOD;
+			record.hunger = tag.contains("hunger") ? tag.getDouble("hunger") : PetMood.MAX_HUNGER;
 			return record;
 		}
 	}
@@ -168,6 +177,10 @@ public final class PetRegistry extends SavedData {
 		record.xp = PetLevels.xp(entity);
 		CompoundTag data = Pets.dataOrNull(entity);
 		record.faintedUntil = data == null ? 0L : data.getLong("faintedUntil");
+		record.mood = PetMood.mood(entity);
+		record.hunger = PetMood.hunger(entity);
+		record.loved = PetMood.loved(entity);
+		record.tired = PetMood.tired(entity);
 
 		// Its look, at most once a minute (a pet's saved data isn't small).
 		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {

@@ -92,6 +92,7 @@ public final class PetEvents {
 		}
 
 		Fainting.check(entity);
+		PetMood.second(entity);
 		PetXp.second(entity);
 		PetSkills.second(entity);
 

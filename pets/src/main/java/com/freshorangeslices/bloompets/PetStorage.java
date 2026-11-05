@@ -23,6 +23,13 @@ public final class PetStorage {
 			return Component.translatable("bloompets.storage.none", record.name);
 		}
 
+		// A sulking pet won't carry things (what it has stays safe).
+		Entity live = Pets.loaded(player.server, record.pet);
+
+		if (live != null ? PetMood.sad(live) : record.mood < PetMood.SAD_BELOW) {
+			return Component.translatable("bloompets.storage.sad", record.name);
+		}
+
 		int rows = Math.min(6, Math.max(1, record.slots / 9));
 		MenuType<?> type = switch (rows) {
 			case 1 -> MenuType.GENERIC_9x1;

@@ -21,6 +21,8 @@ public final class PetsConfig {
 	private static final ForgeConfigSpec.DoubleValue FEED_XP;
 	private static final ForgeConfigSpec.IntValue FEED_COOLDOWN;
 	private static final ForgeConfigSpec.IntValue REST_SECONDS;
+	private static final ForgeConfigSpec.IntValue POST_LEVEL;
+	private static final ForgeConfigSpec.IntValue MAX_POSTS;
 	private static final ForgeConfigSpec.DoubleValue REST_HEALTH;
 
 	static {
@@ -57,6 +59,12 @@ public final class PetsConfig {
 				.defineInRange("feedXp", 10.0, 0.0, 10000.0);
 		FEED_COOLDOWN = builder.comment("Seconds between feedings that give XP.")
 				.defineInRange("feedCooldownSeconds", 30, 0, 3600);
+		builder.pop();
+		builder.push("posts");
+		POST_LEVEL = builder.comment("The level a pet can be left at a post from (the plugin's level 8).")
+				.defineInRange("postLevel", 8, 1, 100);
+		MAX_POSTS = builder.comment("How many of a player's pets can keep a post at once.")
+				.defineInRange("maxPosts", 3, 0, 100);
 		builder.pop();
 		builder.push("fainting");
 		REST_SECONDS = builder.comment("A party pet that would die faints and rests this long instead (it can't be hurt meanwhile; 5 minutes, FreshOrangeSlices 2026-11-05).")
@@ -120,6 +128,14 @@ public final class PetsConfig {
 
 	public static int feedCooldownTicks() {
 		return (SPEC.isLoaded() ? FEED_COOLDOWN.get() : 30) * 20;
+	}
+
+	public static int postLevel() {
+		return SPEC.isLoaded() ? POST_LEVEL.get() : 8;
+	}
+
+	public static int maxPosts() {
+		return SPEC.isLoaded() ? MAX_POSTS.get() : 3;
 	}
 
 	public static int restTicks() {

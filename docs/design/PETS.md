@@ -311,11 +311,23 @@ short-lived flag on the player (`bloompets.growth`/`growthUntil`, `timberUntil` 
 `UtilitySkill` honours it, so there's one aura and one Timber, and owning the Major too is no faster. The screen: the
 bonus under the mouse on a pet's level line, and in a non-combat pet's first slot (its spawn egg).
 
+**Phase 3c (built, 2026-11-05): posts and jobs** (`PetPosts`). From level 8 (`postLevel`) a Bloom pet out of the party
+can be left where it stands (the screen's Post button, `/bloompets post`), 3 posts a player (`maxPosts`). It strolls
+around its post (6 blocks; called away, or a long chase, it pops back) and does its job: combat pets guard (the nearest
+monster within 16 blocks, not creepers, endermen and piglins only once angry), the Bee tends crops and saplings (4 every
+3 seconds ÷ its power, 6 blocks), the Allay collects drops and loose XP (as bottles) into its storage (8 blocks; not if
+another player is nearer), the Sniffer digs (every 4 minutes ÷ power; a trim now and then while its owner's about), the
+Llama spits at monsters (10 blocks), the Cat and Ocelot keep creepers and phantoms off everyone near (24 blocks). Level
+100: half again the area. A pet at its post uses its skills, faints rather than dying, gets hungry and glum (a point
+every 2 minutes) only while its owner's online, and earns **job XP**: a point a crop, an item or bottle, 10 a find, 2 a
+spit, 30 a minute at most (guards earn their fighting XP). Calling it, or adding it to the party, takes it off its post.
+
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 
 1. **The mod and the list**: the `bloompets` mod and its CI job; tracking owned pets; the party (3 places); the screen with
    Call and Inventory.
 2. **Levels and skills**: XP sources, levels 1 to 100, the skill table, fainting instead of dying, max-level perks.
-3. **Mood and bonuses** (whatever of the plugin's engagement layer is kept): mood, petting, owner bonuses, maybe posts.
+3. **Mood and bonuses** (whatever of the plugin's engagement layer is kept): mood, petting, owner bonuses, posts (built
+   as 3a, 3b, 3c; fetch is left for later).
 4. **One and the Same**: the Major in Bloom, weapon trees on pets, cooldown abilities and their switches.
 5. **The pack**: Migamigos and Zoni's per-kind skills, dragons' limits, a quest chapter, tuning.

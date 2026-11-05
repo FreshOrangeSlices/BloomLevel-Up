@@ -117,6 +117,7 @@ public final class PetScreen extends Screen {
 	private Button callButton;
 	private Button partyButton;
 	private Button storageButton;
+	private Button postButton;
 	private int ticks;
 	/** A tooltip for something drawn in the pet's panel (its mood or hunger), drawn last, over the buttons. */
 	private List<FormattedCharSequence> panelTip;
@@ -228,10 +229,12 @@ public final class PetScreen extends Screen {
 			updateButtons();
 		}));
 		int buttonsY = top + H - 26;
-		callButton = addRenderableWidget(new PetButton(mainLeft(), buttonsY, 56, 18, Component.translatable("bloompets.screen.call"),
+		// Call, the party, a post and storage along the bottom.
+		callButton = addRenderableWidget(new PetButton(mainLeft(), buttonsY, 40, 18, Component.translatable("bloompets.screen.call"),
 				b -> act(PetsNetwork.Action.CALL)));
-		partyButton = addRenderableWidget(new PetButton(mainLeft() + 60, buttonsY, 90, 18, Component.empty(), b -> act(PetsNetwork.Action.PARTY)));
-		storageButton = addRenderableWidget(new PetButton(mainRight() - 60, buttonsY, 60, 18, Component.translatable("bloompets.screen.storage"),
+		partyButton = addRenderableWidget(new PetButton(mainLeft() + 42, buttonsY, 84, 18, Component.empty(), b -> act(PetsNetwork.Action.PARTY)));
+		postButton = addRenderableWidget(new PetButton(mainLeft() + 128, buttonsY, 40, 18, Component.empty(), b -> act(PetsNetwork.Action.POST)));
+		storageButton = addRenderableWidget(new PetButton(mainRight() - 44, buttonsY, 44, 18, Component.translatable("bloompets.screen.storage"),
 				b -> act(PetsNetwork.Action.STORAGE)));
 		updateButtons();
 	}
@@ -255,7 +258,7 @@ public final class PetScreen extends Screen {
 
 		PetsNetwork.Entry pet = current();
 		boolean any = pet != null;
-		callButton.visible = partyButton.visible = storageButton.visible = any;
+		callButton.visible = partyButton.visible = storageButton.visible = postButton.visible = any;
 		viewButton.visible = any;
 		viewButton.setTooltip(Tooltip.create(Component.translatable(bloomView ? "bloompets.screen.view.bloom" : "bloompets.screen.view.pet")));
 
@@ -269,6 +272,11 @@ public final class PetScreen extends Screen {
 		storageButton.active = storage;
 		storageButton.setTooltip(Tooltip.create(storage ? Component.translatable("bloompets.screen.storage.tip", pet.slots())
 				: Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.storage.modded" : "bloompets.storage.none", pet.name())));
+		// A post: Bloom pets out of the party; "Unpost" calls one off its post.
+		postButton.active = pet.kind() == Pets.Kind.BLOOM && (pet.posted() || !pet.party());
+		postButton.setMessage(Component.translatable(pet.posted() ? "bloompets.screen.unpost" : "bloompets.screen.post"));
+		postButton.setTooltip(Tooltip.create(Component.translatable(pet.kind() != Pets.Kind.BLOOM ? "bloompets.screen.post.modded"
+				: pet.posted() ? "bloompets.screen.unpost.tip" : pet.party() ? "bloompets.screen.post.party" : "bloompets.screen.post.tip")));
 	}
 
 	/** Join or leave, with the time left while the party can't change yet. */
@@ -642,6 +650,7 @@ public final class PetScreen extends Screen {
 
 		String state = pet.kind() == Pets.Kind.MODDED ? Component.translatable("bloompets.screen.state.companion").getString()
 				: pet.party() ? Component.translatable("bloompets.screen.state.party").getString()
+				: pet.posted() ? Component.translatable("bloompets.screen.state.post").getString()
 				: Component.translatable("bloompets.screen.state.home").getString();
 
 		if (pet.mood() >= 0 && pet.mood() < 30.0F) {

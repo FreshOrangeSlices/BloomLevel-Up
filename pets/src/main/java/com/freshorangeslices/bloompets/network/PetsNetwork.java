@@ -37,7 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "3";
+	private static final String VERSION = "4";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -53,7 +53,7 @@ public final class PetsNetwork {
 
 	/** What the player can do with a pet from the screen (REFRESH: the list again for an open screen, never opening it). */
 	public enum Action {
-		LIST, CALL, PARTY, STORAGE, REFRESH
+		LIST, CALL, PARTY, STORAGE, REFRESH, POST
 	}
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
@@ -99,6 +99,7 @@ public final class PetsNetwork {
 				case CALL -> Calling.call(player, record);
 				case PARTY -> Party.toggle(player, record);
 				case STORAGE -> PetStorage.open(player, record);
+				case POST -> com.freshorangeslices.bloompets.PetPosts.toggle(player, record);
 				default -> null;
 			};
 
@@ -114,11 +115,11 @@ public final class PetsNetwork {
 	 * One pet as the screen shows it: also its level, its XP into that level and what the next takes (0 at 100), the
 	 * ticks left of its rest if it fainted, its skill tree (a {@link com.freshorangeslices.bloompets.PetSkills.Kind}
 	 * id, or empty), and its mood (0 to 100; -1 for companions, which keep their own mods' needs) and hunger (0 to 20),
-	 * whether it loves you, whether it's tired.
+	 * whether it loves you, whether it's tired, whether it keeps a post.
 	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
-			int rest, String skills, float mood, float hunger, boolean loved, boolean tired) {
+			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -142,13 +143,14 @@ public final class PetsNetwork {
 			buf.writeFloat(hunger);
 			buf.writeBoolean(loved);
 			buf.writeBoolean(tired);
+			buf.writeBoolean(posted);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
 			return new Entry(buf.readUUID(), buf.readUtf(), buf.readUtf(), buf.readEnum(Pets.Kind.class), buf.readUtf(), buf.readUtf(),
 					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
 					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf(), buf.readFloat(), buf.readFloat(),
-					buf.readBoolean(), buf.readBoolean());
+					buf.readBoolean(), buf.readBoolean(), buf.readBoolean());
 		}
 	}
 
@@ -187,7 +189,8 @@ public final class PetsNetwork {
 				boolean loved = bloom && (live != null ? PetMood.loved(live) : r.loved);
 				boolean tired = bloom && (live != null ? PetMood.tired(live) : r.tired);
 				pets.add(new Entry(r.pet, r.name, r.type, r.kind, category, r.dimension, r.pos, r.party, live != null, health, max,
-						r.slots, look == null ? new CompoundTag() : look, level, (float) xp, next, rest, skills, mood, hunger, loved, tired));
+						r.slots, look == null ? new CompoundTag() : look, level, (float) xp, next, rest, skills, mood, hunger, loved, tired,
+						live != null ? com.freshorangeslices.bloompets.PetPosts.posted(live) : r.post != null));
 			}
 
 			return new PetList(open, wait, pets, message);

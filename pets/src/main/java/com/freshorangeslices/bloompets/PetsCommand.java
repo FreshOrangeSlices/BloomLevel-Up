@@ -35,6 +35,7 @@ public final class PetsCommand {
 				.then(Commands.literal("party").then(pet().executes(c -> act(c, Action.PARTY))))
 				.then(Commands.literal("call").then(pet().executes(c -> act(c, Action.CALL))))
 				.then(Commands.literal("storage").then(pet().executes(c -> act(c, Action.STORAGE))))
+				.then(Commands.literal("post").then(pet().executes(c -> act(c, Action.POST))))
 				.then(Commands.literal("species").executes(PetsCommand::species))
 				.then(Commands.literal("screen").executes(c -> {
 					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
@@ -55,7 +56,7 @@ public final class PetsCommand {
 	}
 
 	private enum Action {
-		PARTY, CALL, STORAGE
+		PARTY, CALL, STORAGE, POST
 	}
 
 	private static com.mojang.brigadier.builder.RequiredArgumentBuilder<CommandSourceStack, String> pet() {
@@ -93,6 +94,7 @@ public final class PetsCommand {
 			case PARTY -> Party.toggle(player, record);
 			case CALL -> Calling.call(player, record);
 			case STORAGE -> PetStorage.open(player, record);
+			case POST -> PetPosts.toggle(player, record);
 		};
 
 		if (message != null) {
@@ -143,7 +145,7 @@ public final class PetsCommand {
 		for (int i = 0; i < pets.size(); i++) {
 			PetRegistry.Record r = pets.get(i);
 			boolean here = Pets.loaded(player.server, r.pet) != null;
-			String kind = r.kind == Pets.Kind.MODDED ? "companion" : (r.party ? "party" : "Bloom pet");
+			String kind = r.kind == Pets.Kind.MODDED ? "companion" : r.party ? "party" : r.post != null ? "at its post" : "Bloom pet";
 			text.append(Component.literal("\n" + (i + 1) + ". ").withStyle(ChatFormatting.GRAY))
 					.append(Component.literal(r.name).withStyle(r.party ? ChatFormatting.LIGHT_PURPLE
 							: r.kind == Pets.Kind.MODDED ? ChatFormatting.DARK_RED : ChatFormatting.GOLD))

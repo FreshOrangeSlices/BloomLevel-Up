@@ -142,10 +142,10 @@ public final class PetSkills {
 		return level >= 50;
 	}
 
-	/** The pet's level if its skills work right now (in the party, awake, not sulking), else -1. */
+	/** The pet's level if its skills work right now (in the party or at its post, awake, not sulking), else -1. */
 	static int skillLevel(Entity pet) {
-		if (!(pet instanceof LivingEntity) || pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.BLOOM || !Pets.inParty(pet)
-				|| Fainting.fainted(pet) || PetMood.sad(pet) || Pets.owner(pet) == null) {
+		if (!(pet instanceof LivingEntity) || pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.BLOOM
+				|| !Pets.inParty(pet) && !PetPosts.posted(pet) || Fainting.fainted(pet) || PetMood.sad(pet) || Pets.owner(pet) == null) {
 			return -1;
 		}
 

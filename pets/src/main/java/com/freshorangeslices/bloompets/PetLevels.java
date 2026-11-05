@@ -53,14 +53,14 @@ public final class PetLevels {
 		return data == null ? 0.0 : data.getDouble("xp");
 	}
 
-	/** Whether the pet earns XP (and, for Bloom pets, uses its skills) right now. */
+	/** Whether the pet earns XP right now: a Bloom pet in the party or at its post and awake, or a modded companion. */
 	public static boolean active(Entity pet) {
 		if (Pets.owner(pet) == null) {
 			return false;
 		}
 
 		Pets.Kind kind = Pets.kind(pet);
-		return kind == Pets.Kind.MODDED || kind == Pets.Kind.BLOOM && Pets.inParty(pet) && !Fainting.fainted(pet);
+		return kind == Pets.Kind.MODDED || kind == Pets.Kind.BLOOM && (Pets.inParty(pet) || PetPosts.posted(pet)) && !Fainting.fainted(pet);
 	}
 
 	/** Adds XP to an active pet, levelling it up as it fills; returns the levels gained. */

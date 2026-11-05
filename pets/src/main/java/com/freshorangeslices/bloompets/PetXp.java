@@ -101,7 +101,7 @@ public final class PetXp {
 
 	/** Once a second for a loaded non-combat party pet: time near its owner, and the blocks they walked together. */
 	static void second(LivingEntity pet) {
-		if (PetLevels.combat(pet) || Pets.kind(pet) != Pets.Kind.BLOOM || !PetLevels.active(pet) || pet.getServer() == null) {
+		if (PetLevels.combat(pet) || Pets.kind(pet) != Pets.Kind.BLOOM || !Pets.inParty(pet) || !PetLevels.active(pet) || pet.getServer() == null) {
 			WALKS.remove(pet.getUUID());
 			return;
 		}

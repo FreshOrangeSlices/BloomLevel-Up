@@ -30,15 +30,23 @@ public final class PetGoals {
 
 	/** Gives a Bloom pet its goals (they aren't saved, so on every load). */
 	public static void add(Mob mob) {
+		Species species = Pets.species(mob);
+		boolean combat = species != null && species.combat();
+		// At its post (any pet, wolves and cats too: it keeps them from following their owner off).
+		mob.goalSelector.addGoal(2, new HoldPost(mob));
+
+		if (combat) {
+			mob.targetSelector.addGoal(1, new GuardPost(mob));
+		}
+
 		if (mob instanceof TamableAnimal tamable && tamable.isTame()) {
 			return;
 		}
 
 		mob.goalSelector.addGoal(2, new FollowOwner(mob));
 		mob.goalSelector.addGoal(3, new StayNearHome(mob));
-		Species species = Pets.species(mob);
 
-		if (species != null && species.combat()) {
+		if (combat) {
 			mob.targetSelector.addGoal(1, new DefendOwner(mob));
 			mob.targetSelector.addGoal(2, new AssistOwner(mob));
 
@@ -127,12 +135,12 @@ public final class PetGoals {
 
 		@Override
 		public boolean canUse() {
-			return Pets.inParty(pet) && !Fainting.fainted(pet) && super.canUse();
+			return (Pets.inParty(pet) || PetPosts.posted(pet)) && !Fainting.fainted(pet) && super.canUse();
 		}
 
 		@Override
 		public boolean canContinueToUse() {
-			return Pets.inParty(pet) && !Fainting.fainted(pet) && super.canContinueToUse();
+			return (Pets.inParty(pet) || PetPosts.posted(pet)) && !Fainting.fainted(pet) && super.canContinueToUse();
 		}
 
 		@Override
@@ -247,7 +255,7 @@ public final class PetGoals {
 
 		@Override
 		public boolean canUse() {
-			if (Pets.inParty(mob) || !free(mob)) {
+			if (Pets.inParty(mob) || PetPosts.posted(mob) || !free(mob)) {
 				return false;
 			}
 
@@ -257,7 +265,7 @@ public final class PetGoals {
 
 		@Override
 		public boolean canContinueToUse() {
-			return home != null && !Pets.inParty(mob) && free(mob) && mob.blockPosition().distSqr(home) > 4.0 * 4.0;
+			return home != null && !Pets.inParty(mob) && !PetPosts.posted(mob) && free(mob) && mob.blockPosition().distSqr(home) > 4.0 * 4.0;
 		}
 
 		@Override
@@ -281,6 +289,128 @@ public final class PetGoals {
 			if (!walkByBrain(mob, new WalkTarget(home, 1.0F, 2))) {
 				mob.getNavigation().moveTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5, 1.0);
 			}
+		}
+	}
+
+	/**
+	 * A pet at its post strolls around it (within 6 blocks), now and then standing at the post itself; a fight comes
+	 * first, and afterwards it heads back. Far off (called away and back, a long chase) it pops back to its post.
+	 */
+	public static final class HoldPost extends Goal {
+		private final Mob mob;
+		private BlockPos post;
+		private BlockPos spot;
+		private int next;
+		private int repath;
+
+		HoldPost(Mob mob) {
+			this.mob = mob;
+			setFlags(EnumSet.of(Flag.MOVE));
+		}
+
+		private boolean fighting() {
+			return mob.getTarget() != null && mob.getTarget().isAlive();
+		}
+
+		@Override
+		public boolean canUse() {
+			post = PetPosts.post(mob);
+			return post != null && free(mob) && !fighting();
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			return post != null && post.equals(PetPosts.post(mob)) && free(mob) && !fighting();
+		}
+
+		@Override
+		public void start() {
+			spot = null;
+			next = 0;
+			repath = 0;
+		}
+
+		@Override
+		public void stop() {
+			mob.getNavigation().stop();
+		}
+
+		@Override
+		public void tick() {
+			if (Fainting.fainted(mob)) {
+				return;
+			}
+
+			double away = mob.blockPosition().distSqr(post);
+
+			if (away > 48.0 * 48.0) {
+				mob.teleportTo(post.getX() + 0.5, post.getY(), post.getZ() + 0.5);
+				mob.getNavigation().stop();
+				return;
+			}
+
+			if (--next <= 0) {
+				// 5 to 13 seconds a spot; one time in four, the post itself.
+				next = adjustedTickDelay(100 + mob.getRandom().nextInt(160));
+				spot = mob.getRandom().nextInt(4) == 0 ? null
+						: post.offset((int) Math.round((mob.getRandom().nextDouble() * 2 - 1) * PetPosts.ROAM), 0,
+								(int) Math.round((mob.getRandom().nextDouble() * 2 - 1) * PetPosts.ROAM));
+			}
+
+			BlockPos goal = away > sq(PetPosts.ROAM) || spot == null ? post : spot;
+
+			if (mob.blockPosition().distSqr(goal) <= 2.0 || --repath > 0) {
+				return;
+			}
+
+			repath = adjustedTickDelay(20);
+
+			if (!walkByBrain(mob, new WalkTarget(goal, 0.8F, 1))) {
+				mob.getNavigation().moveTo(goal.getX() + 0.5, goal.getY(), goal.getZ() + 0.5, 0.8);
+			}
+		}
+	}
+
+	/** A combat pet at its post goes for the nearest monster within 16 blocks of it (24 at level 100), not too far after. */
+	public static final class GuardPost extends TargetGoal {
+		private LivingEntity found;
+		private int wait;
+
+		GuardPost(Mob mob) {
+			super(mob, false);
+			setFlags(EnumSet.of(Flag.TARGET));
+		}
+
+		@Override
+		public boolean canUse() {
+			if (--wait > 0) {
+				return false;
+			}
+
+			wait = 10;
+			BlockPos post = PetPosts.post(mob);
+
+			if (post == null || Fainting.fainted(mob) || PetMood.sad(mob) || !(mob.level() instanceof net.minecraft.server.level.ServerLevel level)) {
+				return false;
+			}
+
+			found = PetPosts.nearestMonster(level, post, PetPosts.guardRadius(mob), mob);
+			return found != null;
+		}
+
+		@Override
+		public void start() {
+			mob.setTarget(found);
+			super.start();
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			BlockPos post = PetPosts.post(mob);
+			LivingEntity target = mob.getTarget();
+			double reach = PetPosts.guardRadius(mob) + 8.0;
+			return post != null && target != null && target.isAlive() && !Fainting.fainted(mob)
+					&& target.distanceToSqr(post.getX() + 0.5, post.getY(), post.getZ() + 0.5) <= reach * reach;
 		}
 	}
 

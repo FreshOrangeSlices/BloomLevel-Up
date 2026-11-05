@@ -39,6 +39,7 @@ public final class BloomPets {
 		MinecraftForge.EVENT_BUS.register(PetXp.class);
 		MinecraftForge.EVENT_BUS.register(PetSkills.class);
 		MinecraftForge.EVENT_BUS.register(PetBonuses.class);
+		MinecraftForge.EVENT_BUS.register(PetPosts.class);
 		MinecraftForge.EVENT_BUS.addListener(BloomPets::reload);
 		MinecraftForge.EVENT_BUS.addListener(BloomPets::commands);
 	}

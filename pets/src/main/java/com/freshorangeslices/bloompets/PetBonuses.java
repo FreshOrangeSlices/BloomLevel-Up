@@ -443,12 +443,26 @@ public final class PetBonuses {
 		return (long) (4800 / power);
 	}
 
-	/** The Sniffer stops, sniffs, digs, and comes up with a find, near its owner (not while they stand AFK). */
+	/** Whether the player has moved in the last 5 minutes (no treasure for standing AFK). */
+	static boolean awake(ServerPlayer player, long now) {
+		return now - MOVED_AT.getOrDefault(player.getUUID(), now) <= 5 * 60 * 20;
+	}
+
+	/** The Sniffer's bonus: now and then it digs near its owner (within 12 blocks, while they aren't AFK). */
 	private static void dig(ServerPlayer player, Bonus bonus, long now) {
-		if (!(bonus.pet() instanceof Sniffer sniffer) || !sniffer.onGround() || sniffer.level() != player.level()
-				|| sniffer.distanceToSqr(player) > 12.0 * 12.0 || now - MOVED_AT.getOrDefault(player.getUUID(), now) > 5 * 60 * 20
-				|| !DIGGABLE.contains(sniffer.getBlockStateOn().getBlock())) {
-			return;
+		if (bonus.pet() instanceof Sniffer sniffer && sniffer.level() == player.level() && sniffer.distanceToSqr(player) <= 12.0 * 12.0
+				&& awake(player, now)) {
+			dig(sniffer, player, true, now);
+		}
+	}
+
+	/**
+	 * The Sniffer stops, sniffs, digs, and comes up with a find (its own animation plays), on ground it could dig in:
+	 * seeds and flowers, and with {@code treasure} sometimes an armor trim. Returns whether it dug.
+	 */
+	static boolean dig(Sniffer sniffer, ServerPlayer owner, boolean treasure, long now) {
+		if (!sniffer.onGround() || !DIGGABLE.contains(sniffer.getBlockStateOn().getBlock())) {
+			return false;
 		}
 
 		sniffer.transitionTo(Sniffer.State.SNIFFING);
@@ -463,20 +477,24 @@ public final class PetBonuses {
 			}
 
 			sniffer.transitionTo(Sniffer.State.RISING);
-			Item found = treasure(player.getUUID(), sniffer.getRandom(), now);
+			Item found = treasure && owner != null ? treasure(owner.getUUID(), sniffer.getRandom(), now) : plainFind(sniffer.getRandom());
 			double yaw = Math.toRadians(sniffer.getYRot());
 			ItemEntity drop = new ItemEntity(sniffer.level(), sniffer.getX() - Math.sin(yaw) * 1.6, sniffer.getY() + 0.4,
 					sniffer.getZ() + Math.cos(yaw) * 1.6, new ItemStack(found));
 			drop.setDefaultPickUpDelay();
 			sniffer.level().addFreshEntity(drop);
 			sniffer.playSound(SoundEvents.SNIFFER_DROP_SEED, 1.0F, 1.0F);
-			announce(player, sniffer, found);
+
+			if (owner != null) {
+				announce(owner, sniffer, found);
+			}
 		});
 		later(now + 160, () -> {
 			if (sniffer.isAlive()) {
 				sniffer.transitionTo(Sniffer.State.IDLING);
 			}
 		});
+		return true;
 	}
 
 	/** An armor trim one dig in five (rarer trims less often; at most three an hour), else seeds and flowers. */

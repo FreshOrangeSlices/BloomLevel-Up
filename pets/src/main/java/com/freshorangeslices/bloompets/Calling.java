@@ -46,8 +46,12 @@ public final class Calling {
 	public static Component call(ServerPlayer player, PetRegistry.Record record) {
 		Entity pet = Pets.loaded(player.server, record.pet);
 
+		// Calling a pet takes it off its post.
+		record.post = null;
+
 		if (pet != null) {
 			Fainting.cameOut(pet);
+			PetPosts.leave(pet);
 			bring(pet, player);
 			return Component.translatable("bloompets.call.came", record.name);
 		}
@@ -87,6 +91,7 @@ public final class Calling {
 
 			if (pet != null) {
 				Fainting.cameOut(pet);
+				PetPosts.leave(pet);
 				bring(pet, player);
 				player.displayClientMessage(Component.translatable("bloompets.call.came", pending.name()), true);
 				it.remove();

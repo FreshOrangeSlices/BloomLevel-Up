@@ -55,9 +55,14 @@ public final class PetEvents {
 			return;
 		}
 
-		// The party may have changed while the pet was away.
+		// The party may have changed while the pet was away (and joining it takes a pet off its post).
 		if (Pets.inParty(mob) != record.party) {
 			Pets.setParty(mob, record.party);
+		}
+
+		if (record.party && PetPosts.posted(mob)) {
+			PetPosts.leave(mob);
+			record.post = null;
 		}
 
 		PetSkills.refresh(mob);
@@ -94,6 +99,7 @@ public final class PetEvents {
 		Fainting.check(entity);
 		PetMood.second(entity);
 		PetXp.second(entity);
+		PetPosts.second(entity);
 		PetSkills.second(entity);
 
 		if (entity.tickCount % SEEN_EVERY == 0) {

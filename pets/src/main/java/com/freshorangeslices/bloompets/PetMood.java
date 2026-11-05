@@ -42,6 +42,7 @@ public final class PetMood {
 	private static final double EATS_AT = 14.0;
 	private static final double MEAL = 6.0;
 	private static final double DROP_PER_SECOND = 1.0 / 180.0;
+	private static final double POST_DROP_PER_SECOND = 1.0 / 120.0;
 	private static final double HUNGER_PER_SECOND = 1.0 / 240.0;
 	private static final double REST_PER_SECOND = 10.0 / 60.0;
 	private static final long TIRED_AFTER = 90 * 60;
@@ -122,7 +123,19 @@ public final class PetMood {
 		boolean wasTired = tired(pet);
 		boolean wasHungry = hunger(pet) <= HUNGRY_AT;
 
-		if (Pets.inParty(pet)) {
+		boolean posted = PetPosts.posted(pet);
+
+		if (posted) {
+			// At its post: a point every 2 minutes while its owner's online (no one to tire it out); hungry as in the party.
+			if (owner(pet) != null) {
+				setMood(pet, mood(pet) - POST_DROP_PER_SECOND * dropPace(pet) * seconds);
+				setHunger(pet, hunger(pet) - HUNGER_PER_SECOND * seconds);
+
+				if (hunger(pet) <= EATS_AT) {
+					eatFromStorage(pet);
+				}
+			}
+		} else if (Pets.inParty(pet)) {
 			setMood(pet, mood(pet) - DROP_PER_SECOND * dropPace(pet) * seconds);
 			setHunger(pet, hunger(pet) - HUNGER_PER_SECOND * seconds);
 			data.putLong("tired", Math.min(TIRED_AFTER, data.getLong("tired") + seconds));

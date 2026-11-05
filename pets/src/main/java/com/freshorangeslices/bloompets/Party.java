@@ -49,9 +49,12 @@ public final class Party {
 		}
 
 		record.party = true;
+		record.post = null;
 		Entity entity = Pets.loaded(player.server, record.pet);
 
 		if (entity != null) {
+			// Joining the party takes it off its post.
+			PetPosts.leave(entity);
 			Pets.setParty(entity, true);
 
 			if (entity instanceof LivingEntity living) {

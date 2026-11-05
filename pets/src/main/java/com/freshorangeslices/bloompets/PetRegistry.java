@@ -59,6 +59,8 @@ public final class PetRegistry extends SavedData {
 		public double hunger = PetMood.MAX_HUNGER;
 		public boolean loved;
 		public boolean tired;
+		/** Its post, if it keeps one. */
+		public BlockPos post;
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -81,6 +83,11 @@ public final class PetRegistry extends SavedData {
 			tag.putLong("faintedUntil", faintedUntil);
 			tag.putDouble("mood", mood);
 			tag.putDouble("hunger", hunger);
+
+			if (post != null) {
+				tag.putLong("post", post.asLong());
+			}
+
 			return tag;
 		}
 
@@ -105,6 +112,7 @@ public final class PetRegistry extends SavedData {
 			record.faintedUntil = tag.getLong("faintedUntil");
 			record.mood = tag.contains("mood") ? tag.getDouble("mood") : PetMood.START_MOOD;
 			record.hunger = tag.contains("hunger") ? tag.getDouble("hunger") : PetMood.MAX_HUNGER;
+			record.post = tag.contains("post") ? BlockPos.of(tag.getLong("post")) : null;
 			return record;
 		}
 	}
@@ -181,6 +189,7 @@ public final class PetRegistry extends SavedData {
 		record.hunger = PetMood.hunger(entity);
 		record.loved = PetMood.loved(entity);
 		record.tired = PetMood.tired(entity);
+		record.post = PetPosts.post(entity);
 
 		// Its look, at most once a minute (a pet's saved data isn't small).
 		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {

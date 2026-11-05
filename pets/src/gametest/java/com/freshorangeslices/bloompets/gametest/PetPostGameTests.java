@@ -23,9 +23,8 @@ import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
@@ -88,27 +87,27 @@ public final class PetPostGameTests {
 	}
 
 	@GameTest(template = "empty")
-	public static void theBeeTendsTheCropsAroundItsPost(GameTestHelper helper) {
+	public static void theBeeTendsThePlantsAroundItsPost(GameTestHelper helper) {
 		ServerPlayer owner = player(helper, new BlockPos(6, 1, 6));
 		Mob bee = pet(helper, EntityType.BEE, owner, new BlockPos(3, 3, 3), 8);
 		post(helper, bee);
 
-		// Planted without block updates: the test area is dark, and a crop's neighbour update would pop the others out.
+		// Saplings (crops need daylight to stay put, and the test area is closed in by barriers).
 		for (int x = 1; x <= 5; x++) {
-			helper.getLevel().setBlock(helper.absolutePos(new BlockPos(x, 1, 5)), Blocks.FARMLAND.defaultBlockState(), Block.UPDATE_CLIENTS);
-			helper.getLevel().setBlock(helper.absolutePos(new BlockPos(x, 2, 5)), Blocks.WHEAT.defaultBlockState(), Block.UPDATE_CLIENTS);
+			helper.setBlock(new BlockPos(x, 1, 5), Blocks.DIRT);
+			helper.setBlock(new BlockPos(x, 2, 5), Blocks.OAK_SAPLING);
 		}
 
 		int grown = PetPosts.tend(helper.getLevel(), PetPosts.post(bee), 6, 4, bee.getRandom());
 		int older = 0;
 
 		for (int x = 1; x <= 5; x++) {
-			if (helper.getBlockState(new BlockPos(x, 2, 5)).getValue(CropBlock.AGE) > 0) {
+			if (helper.getBlockState(new BlockPos(x, 2, 5)).getValue(SaplingBlock.STAGE) > 0) {
 				older++;
 			}
 		}
 
-		helper.assertTrue(grown == 4 && older == 4, "Four of the five crops grew a stage (" + grown + ", " + older + ")");
+		helper.assertTrue(grown == 4 && older == 4, "Four of the five saplings grew a stage (" + grown + ", " + older + ")");
 		helper.succeed();
 	}
 

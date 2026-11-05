@@ -94,7 +94,7 @@ divided by 10:
 |---|---|---|
 | 1 | Starting skill (each kind its own) | e.g. the plugin's Iron Colossus, Double Strike, Unyielding, Momentum, Bamboo Blessing |
 | 10 | Awareness | steps out of fire, lava and cacti back to you; no fall damage |
-| 15 | Gore | chance of double damage: 1% a pet level, so 100% at 100 (the plugin's numbers; too much here, to tone down) |
+| 15 | Gore | chance of double damage: half the pet's level in %, so about 8% at 15 and 50% at 100 (capped at 50%, 2026-11-05: strong on purpose, it's for players who aren't good at fighting) |
 | 20 | Special skill (each kind its own) | e.g. Guardian Intervention, Phase Strike, Crushing Presence, Ram, Soothing Presence |
 | 20 | Fast Food | 50% chance to heal by the damage it deals |
 | 25 | Thick Fur | half damage from attacks and arrows; shakes off burning |
@@ -138,13 +138,13 @@ small 9 slots (18 later), medium 18 (27 later), pack 27 up to 54.
 | Ocelot | Speedster | tropical fish | creepers and phantoms leave you alone; you often wake up to a gift | creepers and phantoms near the post leave everyone alone |
 | Strider | Speedster | warped fungus | Fire Resistance in the Nether | waits |
 | Cat | Utility | cod | as the Ocelot | as the Ocelot |
-| Bee | Utility | any flower | crops around you grow fast, the same as Bloom's Growth Aura (kept on purpose, 2026-11-05: the pet is the other way to get it, for players who'd rather keep their Major points) | tends the crops around its post |
+| Bee | Utility | any flower | crops **and saplings** around you grow fast, like Bloom's Growth Aura but always on while the Bee is out (no hoe needed; 2026-11-05: the pet is the other way to get it, for players who'd rather keep their Major points). Doesn't stack with the Major: owning both is no faster | tends the crops around its post |
 | Allay | Utility | amethyst shard | pulls nearby drops to you and bottles loose XP into its storage | collects drops and loose XP around its post |
 | Chicken | Utility | seeds | you glide down long drops | waits |
 | Cow | Utility | wheat | clears one bad effect every 2 minutes | waits |
 | Turtle | Utility | seagrass | you breathe underwater | waits |
 | Frog | Utility | slime ball | Dolphin's Grace while swimming | waits |
-| Pig | Utility | carrot, potato or beetroot | Lumberjack: fells whole trees, the same as Bloom's Timber (kept on purpose, like the Bee's) | waits |
+| Pig | Utility | carrot, potato or beetroot | Lumberjack: fells whole trees, the same as Bloom's Timber (kept on purpose, like the Bee's; doesn't stack with the Major) | waits |
 | Axolotl | Utility | tropical fish (or a bucket of it) | you slowly heal while hurt, faster in water | waits |
 | Bat | Utility | melon slice | Night Vision | waits |
 
@@ -185,7 +185,7 @@ through). Names agreed 2026-11-05:
 | 75 | Wolfsteel Fangs | +2 bite damage |
 
 What the shared ones do: **Awareness** steps out of fire, lava and cacti back to you, no fall damage; **Gore** a chance
-of double damage (just the plugin's name for it, nothing gory; the plugin's 1% a level reaches 100% at level 100, every hit doubled: the numbers to tone down); **Fast Food** 50% chance to heal by the damage it
+of double damage (just the plugin's name for it, nothing gory), half the pet's level in %, up to 50% at 100 (the plugin's 1% a level went to 100%); **Fast Food** 50% chance to heal by the damage it
 deals; **Thick Fur** half damage from attacks and arrows (the golem: fire too), shakes off burning; **Holy Hound** magic,
 poison and wither heal it; **Shock Proof** 1/6 damage from explosions and lightning; **Sharpened Claws** +2 damage on
 every hit.

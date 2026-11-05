@@ -247,7 +247,10 @@ hub button on the inventory. The list (Bloom pets orange, companions dark red, t
 party, Bloom pets, companions); the chosen pet's model following the mouse (the live one when it's nearby, else drawn
 from its look, kept in its entry); four slots a side, empty until levels, with the Pet / Bloom switch at the top right;
 health and where it is; Call, Join / Leave party (greyed out with the time left while the cooldown runs; companions
-are always with you) and Storage (Bloom pets only).
+are always with you) and Storage (Bloom pets only). In the Skill Hub's look (FreshOrangeSlices, 2026-11-04): the hub's
+dark panel and gold frame, its palette, the name large and gold like the hub's headings, the list in a box like the
+hub's stats window, dark buttons with an orange edge under the mouse, and the pet standing on a piece of the hub's art
+(the combat cave for fighters and companions, the meadow for the rest).
 
 
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.

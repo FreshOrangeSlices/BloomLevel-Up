@@ -1,13 +1,16 @@
 package com.freshorangeslices.bloompets.client;
 
+import com.freshorangeslices.bloompets.BloomPets;
 import com.freshorangeslices.bloompets.Pets;
 import com.freshorangeslices.bloompets.network.PetsNetwork;
+import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -16,30 +19,64 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * The pet screen (FreshOrangeSlices' sketch, docs/design/art/pets-screen-sketch.png): the player's pets on the left,
- * Bloom pets first (orange) then companions (dark red), the party's marked pink; the chosen pet in the middle, turning
- * to follow the mouse, with its skill slots on either side (filled from Phase 2: pet levels) and a switch between its
- * own traits and its Bloom weapon tree (One and the Same); its health and where it is under it; Call, the party and
- * its storage at the bottom.
+ * The pet screen (FreshOrangeSlices' sketch, docs/design/art/pets-screen-sketch.png), in the Skill Hub's look: a dark
+ * panel in the hub's gold frame. The player's pets on the left, Bloom pets first (orange) then companions (red), the
+ * party's marked pink; the chosen pet in the middle, standing on a piece of the hub's art (the combat cave for fighters
+ * and companions, the meadow for the rest) and turning to follow the mouse, with its skill slots on either side (filled
+ * from Phase 2: pet levels) and a switch between its own traits and its Bloom weapon tree (One and the Same); its
+ * health and where it is under it; Call, the party and its storage at the bottom.
  */
 public final class PetScreen extends Screen {
-	private static final int W = 320;
-	private static final int H = 196;
-	private static final int LIST_W = 98;
-	private static final int ROW_H = 15;
-	private static final int LIST_TOP = 40;
+	private static final int W = 340;
+	private static final int H = 210;
+	/** The gold frame, drawn this far outside the panel (as the hub's). */
+	private static final int FRAME = 6;
+	/** The list panel's right edge, from the panel's left. */
+	private static final int LIST_W = 110;
+	private static final int ROW_H = 14;
+	private static final int LIST_TOP = 42;
+	/** The divider under the pet's name. */
+	private static final int HEAD = 36;
 	private static final int SLOT = 22;
-	private static final int TEXT = 0xFF303030;
-	private static final int SOFT = 0xFF606060;
-	private static final int BLOOM = 0xFFB85C00;
-	private static final int MODDED = 0xFF8B1A1A;
-	private static final int PARTY = 0xFFE0569A;
+	private static final int SLOT_GAP = 3;
+	private static final float BIG = 1.5F;
+
+	// The Skill Hub's palette (Bloom's HubScreen and its details window).
+	static final int PANEL = 0xF0141210;
+	static final int PANEL_EDGE = 0xFF5A4A33;
+	static final int TEXT = 0xFFEFE6D2;
+	static final int MUTED = 0xFFA99F8A;
+	static final int ACCENT = 0xFFE5933F;
+	static final int GOLD = 0xFFFFD86B;
+	static final int FAINT = 0xFF6E6250;
+	private static final int DIVIDER = 0xFF8A6A2A;
+	private static final int BAR_BACK = 0xFF2A241D;
+	private static final int ROW_ON = 0xFF3A3128;
+	private static final int SCROLL_THUMB = 0xFFC98F1F;
+	private static final int SCROLL_TRACK = 0xFF2E261C;
+	private static final int BLOOM = ACCENT;
+	/** Companions' red, light enough to read on the dark panel. */
+	private static final int MODDED = 0xFFD9574A;
+	private static final int PARTY = 0xFFEC6AAE;
+	private static final int PARTY_EDGE = 0xFF7A2450;
+	private static final int HEALTH = 0xFFD8453A;
+	private static final int HEALTH_SHINE = 0xFFF0705F;
+
+	private static final ResourceLocation FRAME_TEXTURE = new ResourceLocation(BloomPets.MOD_ID, "textures/gui/frame.png");
+	private static final int FRAME_SIZE = 28;
+	private static final int FRAME_BORDER = 6;
+	/** Pieces of the hub's backgrounds (256x176), drawn a picture pixel per GUI pixel like the hub's, centred. */
+	private static final ResourceLocation BACKDROP_COMBAT = new ResourceLocation(BloomPets.MOD_ID, "textures/gui/backdrop_combat.png");
+	private static final ResourceLocation BACKDROP_MEADOW = new ResourceLocation(BloomPets.MOD_ID, "textures/gui/backdrop_meadow.png");
+	private static final int BACKDROP_W = 256;
+	private static final int BACKDROP_H = 176;
 
 	private enum Filter {
 		ALL, PARTY, BLOOM, COMPANIONS
@@ -81,6 +118,8 @@ public final class PetScreen extends Screen {
 			selected = list.pets().stream().filter(PetsNetwork.Entry::party).map(PetsNetwork.Entry::pet).findFirst()
 					.orElse(list.pets().isEmpty() ? null : list.pets().get(0).pet());
 		}
+
+		scroll = Mth.clamp(scroll, 0, Math.max(0, shown().size() - visibleRows()));
 	}
 
 	/** New data from the server (after an action, or a fresh list). */
@@ -119,26 +158,59 @@ public final class PetScreen extends Screen {
 		return Math.max(0, list.partyWait() - (int) ((System.currentTimeMillis() - receivedAt) / 50));
 	}
 
+	// Layout: the list panel on the left, the chosen pet to its right.
+
+	private int mainLeft() {
+		return left + LIST_W + 8;
+	}
+
+	private int mainRight() {
+		return left + W - 8;
+	}
+
+	private int rowLeft() {
+		return left + 8;
+	}
+
+	private int rowRight(int shown) {
+		return left + LIST_W - (shown > visibleRows() ? 7 : 2);
+	}
+
+	private int visibleRows() {
+		return (H - 6 - 22 - LIST_TOP) / ROW_H;
+	}
+
+	private int slotY(int i) {
+		return top + HEAD + 6 + i * (SLOT + SLOT_GAP);
+	}
+
+	private int canvasTop() {
+		return slotY(0);
+	}
+
+	private int canvasBottom() {
+		return slotY(3) + SLOT;
+	}
+
 	@Override
 	protected void init() {
 		left = (width - W) / 2;
 		top = (height - H) / 2;
-		filterButton = addRenderableWidget(Button.builder(filterLabel(), b -> {
+		filterButton = addRenderableWidget(new PetButton(left + 10, top + 23, LIST_W - 14, 14, filterLabel(), b -> {
 			filter = Filter.values()[(filter.ordinal() + 1) % Filter.values().length];
 			scroll = 0;
 			b.setMessage(filterLabel());
-		}).bounds(left + 6, top + 18, LIST_W - 12, 16).build());
-		viewButton = addRenderableWidget(Button.builder(Component.literal("⇄"), b -> {
+		}));
+		viewButton = addRenderableWidget(new PetButton(mainRight() - 16, top + 8, 16, 16, Component.literal("⇄"), b -> {
 			bloomView = !bloomView;
 			updateButtons();
-		}).bounds(left + W - 24, top + 5, 18, 18).build());
-		int mainLeft = left + LIST_W + 4;
-		callButton = addRenderableWidget(Button.builder(Component.translatable("bloompets.screen.call"), b -> act(PetsNetwork.Action.CALL))
-				.bounds(mainLeft + 4, top + H - 24, 58, 18).build());
-		partyButton = addRenderableWidget(Button.builder(Component.empty(), b -> act(PetsNetwork.Action.PARTY))
-				.bounds(mainLeft + 66, top + H - 24, 84, 18).build());
-		storageButton = addRenderableWidget(Button.builder(Component.translatable("bloompets.screen.storage"), b -> act(PetsNetwork.Action.STORAGE))
-				.bounds(left + W - 64, top + H - 24, 58, 18).build());
+		}));
+		int buttonsY = top + H - 26;
+		callButton = addRenderableWidget(new PetButton(mainLeft(), buttonsY, 56, 18, Component.translatable("bloompets.screen.call"),
+				b -> act(PetsNetwork.Action.CALL)));
+		partyButton = addRenderableWidget(new PetButton(mainLeft() + 60, buttonsY, 90, 18, Component.empty(), b -> act(PetsNetwork.Action.PARTY)));
+		storageButton = addRenderableWidget(new PetButton(mainRight() - 60, buttonsY, 60, 18, Component.translatable("bloompets.screen.storage"),
+				b -> act(PetsNetwork.Action.STORAGE)));
 		updateButtons();
 	}
 
@@ -170,23 +242,28 @@ public final class PetScreen extends Screen {
 		}
 
 		callButton.setTooltip(Tooltip.create(Component.translatable("bloompets.screen.call.tip", pet.name())));
-
-		if (pet.kind() == Pets.Kind.MODDED) {
-			partyButton.active = false;
-			partyButton.setMessage(Component.translatable("bloompets.screen.always"));
-			partyButton.setTooltip(Tooltip.create(Component.translatable("bloompets.party.modded", pet.name())));
-		} else {
-			int wait = partyWait();
-			partyButton.active = wait <= 0;
-			partyButton.setMessage(Component.translatable(pet.party() ? "bloompets.screen.leave" : "bloompets.screen.join"));
-			partyButton.setTooltip(Tooltip.create(wait > 0 ? Component.translatable("bloompets.party.wait", time(wait))
-					: Component.translatable("bloompets.screen.party.tip")));
-		}
-
+		updatePartyButton(pet);
 		boolean storage = pet.kind() == Pets.Kind.BLOOM && pet.slots() > 0;
 		storageButton.active = storage;
 		storageButton.setTooltip(Tooltip.create(storage ? Component.translatable("bloompets.screen.storage.tip", pet.slots())
 				: Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.storage.modded" : "bloompets.storage.none", pet.name())));
+	}
+
+	/** Join or leave, with the time left while the party can't change yet. */
+	private void updatePartyButton(PetsNetwork.Entry pet) {
+		if (pet.kind() == Pets.Kind.MODDED) {
+			partyButton.active = false;
+			partyButton.setMessage(Component.translatable("bloompets.screen.always"));
+			partyButton.setTooltip(Tooltip.create(Component.translatable("bloompets.party.modded", pet.name())));
+			return;
+		}
+
+		int wait = partyWait();
+		String key = pet.party() ? "bloompets.screen.leave" : "bloompets.screen.join";
+		partyButton.active = wait <= 0;
+		partyButton.setMessage(wait > 0 ? Component.translatable(key + ".wait", time(wait)) : Component.translatable(key));
+		partyButton.setTooltip(Tooltip.create(wait > 0 ? Component.translatable("bloompets.party.wait", time(wait))
+				: Component.translatable("bloompets.screen.party.tip")));
 	}
 
 	private static String time(int ticks) {
@@ -196,9 +273,11 @@ public final class PetScreen extends Screen {
 
 	@Override
 	public void tick() {
-		// The party cooldown ticks down here; the button comes back on when it's over.
-		if (partyButton != null && current() != null && current().kind() == Pets.Kind.BLOOM && partyButton.active == (partyWait() > 0)) {
-			updateButtons();
+		// The party cooldown counts down on its button; the button comes back on when it's over.
+		PetsNetwork.Entry pet = current();
+
+		if (partyButton != null && pet != null && pet.kind() == Pets.Kind.BLOOM && (partyWait() > 0 || !partyButton.active)) {
+			updatePartyButton(pet);
 		}
 	}
 
@@ -220,11 +299,12 @@ public final class PetScreen extends Screen {
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		List<PetsNetwork.Entry> shown = shown();
+		int rowRight = rowRight(shown.size());
 
 		for (int i = 0; i < visibleRows() && i + scroll < shown.size(); i++) {
 			int y = top + LIST_TOP + i * ROW_H;
 
-			if (mouseX >= left + 5 && mouseX < left + LIST_W - 5 && mouseY >= y && mouseY < y + ROW_H) {
+			if (mouseX >= rowLeft() && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_H) {
 				selected = shown.get(i + scroll).pet();
 				updateButtons();
 				return true;
@@ -245,22 +325,16 @@ public final class PetScreen extends Screen {
 		return super.mouseScrolled(mouseX, mouseY, delta);
 	}
 
-	private int visibleRows() {
-		return (H - LIST_TOP - 22) / ROW_H;
-	}
-
 	@Override
 	public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
 		renderBackground(g);
-		panel(g, left, top, W, H);
-		g.drawString(font, title, left + 8, top + 7, TEXT, false);
+		g.fill(left, top, left + W, top + H, PANEL);
+		nineSlice(g, FRAME_TEXTURE, left - FRAME, top - FRAME, W + 2 * FRAME, H + 2 * FRAME, FRAME_SIZE, FRAME_BORDER);
 		renderList(g, mouseX, mouseY);
 		PetsNetwork.Entry pet = current();
 
 		if (pet == null) {
-			int cx = left + LIST_W + (W - LIST_W) / 2;
-			g.drawCenteredString(font, Component.translatable("bloompets.screen.empty"), cx, top + 70, 0xFFFFFFFF);
-			drawWrapped(g, Component.translatable("bloompets.command.none"), left + LIST_W + 14, top + 90, W - LIST_W - 28, SOFT);
+			renderEmpty(g);
 		} else {
 			renderPet(g, pet, mouseX, mouseY);
 		}
@@ -268,107 +342,197 @@ public final class PetScreen extends Screen {
 		super.render(g, mouseX, mouseY, partialTick);
 
 		if (message != null && System.currentTimeMillis() - messageAt < 5000) {
-			g.drawCenteredString(font, message, width / 2, top + H + 6, 0xFFFFFFFF);
+			g.drawCenteredString(font, message, width / 2, top + H + FRAME + 4, TEXT);
 		}
 
 		if (pet != null) {
-			slotTooltip(g, pet, mouseX, mouseY);
+			slotTooltip(g, mouseX, mouseY);
 		}
 	}
 
+	/** The list panel, as the hub's stats window: a darker box with a brown edge and orange corners. */
 	private void renderList(GuiGraphics g, int mouseX, int mouseY) {
-		int listBottom = top + LIST_TOP + visibleRows() * ROW_H;
-		inset(g, left + 4, top + LIST_TOP - 2, LIST_W - 8, listBottom - (top + LIST_TOP) + 4, 0xFFE4E4E4);
+		int x0 = left + 6;
+		int y0 = top + 6;
+		int x1 = left + LIST_W;
+		int y1 = top + H - 6;
+		g.fill(x0, y0, x1, y1, 0xE8141210);
+		frame(g, x0, y0, x1, y1, PANEL_EDGE);
+		corners(g, x0, y0, x1, y1);
+		Component heading = title.copy().withStyle(ChatFormatting.BOLD);
+		g.drawString(font, heading, x0 + 4, y0 + 5, ACCENT);
+		g.drawString(font, Integer.toString(list.pets().size()), x0 + 8 + font.width(heading), y0 + 5, TEXT);
+
 		List<PetsNetwork.Entry> shown = shown();
+		int rowLeft = rowLeft();
+		int rowRight = rowRight(shown.size());
 
 		for (int i = 0; i < visibleRows() && i + scroll < shown.size(); i++) {
 			PetsNetwork.Entry e = shown.get(i + scroll);
 			int y = top + LIST_TOP + i * ROW_H;
-			boolean hover = mouseX >= left + 5 && mouseX < left + LIST_W - 5 && mouseY >= y && mouseY < y + ROW_H;
+			int color = e.kind() == Pets.Kind.MODDED ? MODDED : BLOOM;
+			boolean hover = mouseX >= rowLeft && mouseX < rowRight && mouseY >= y && mouseY < y + ROW_H;
 
 			if (e.pet().equals(selected)) {
-				g.fill(left + 5, y, left + LIST_W - 5, y + ROW_H, 0xFFFFFFFF);
-				g.fill(left + 5, y, left + 7, y + ROW_H, e.kind() == Pets.Kind.MODDED ? MODDED : BLOOM);
+				g.fill(rowLeft, y, rowRight, y + ROW_H, ROW_ON);
+				g.fill(rowLeft, y, rowLeft + 2, y + ROW_H, color);
 			} else if (hover) {
-				g.fill(left + 5, y, left + LIST_W - 5, y + ROW_H, 0xFFF2F2F2);
+				g.fill(rowLeft, y, rowRight, y + ROW_H, 0x22EFE6D2);
 			}
 
-			int color = e.kind() == Pets.Kind.MODDED ? MODDED : BLOOM;
-			String name = font.plainSubstrByWidth(e.name(), LIST_W - 30);
-			g.drawString(font, name, left + 10, y + 4, color, false);
+			g.drawString(font, font.plainSubstrByWidth(e.name(), rowRight - rowLeft - 24), rowLeft + 5, y + 3, color);
 
 			if (e.party() || e.kind() == Pets.Kind.MODDED) {
 				// Pink: in the party (companions always are).
-				g.fill(left + LIST_W - 14, y + 5, left + LIST_W - 9, y + 10, PARTY);
+				g.fill(rowRight - 10, y + 4, rowRight - 4, y + 10, PARTY_EDGE);
+				g.fill(rowRight - 9, y + 5, rowRight - 5, y + 9, PARTY);
 			}
 
 			if (!e.loaded()) {
-				g.drawString(font, "·", left + LIST_W - 20, y + 3, SOFT, false);
+				g.drawString(font, "·", rowRight - 16, y + 2, MUTED);
 			}
 		}
 
 		if (shown.isEmpty()) {
-			g.drawString(font, Component.translatable("bloompets.screen.none"), left + 10, top + LIST_TOP + 4, SOFT, false);
+			g.drawString(font, Component.translatable("bloompets.screen.none"), rowLeft + 5, top + LIST_TOP + 3, MUTED);
 		}
 
-		long party = list.pets().stream().filter(PetsNetwork.Entry::party).count();
-		String follows = list.pets().stream().filter(PetsNetwork.Entry::party).map(PetsNetwork.Entry::name).findFirst().orElse("-");
-		g.drawString(font, font.plainSubstrByWidth(Component.translatable("bloompets.screen.follows", follows).getString(), LIST_W - 12),
-				left + 6, top + H - 14, party > 0 ? PARTY : SOFT, false);
+		if (shown.size() > visibleRows()) {
+			// The hub's scrollbar: a dark track, an amber thumb.
+			int trackTop = top + LIST_TOP;
+			int trackH = visibleRows() * ROW_H;
+			int thumbH = Math.max(8, trackH * visibleRows() / shown.size());
+			int thumbY = trackTop + (trackH - thumbH) * scroll / Math.max(1, shown.size() - visibleRows());
+			g.fill(x1 - 5, trackTop, x1 - 3, trackTop + trackH, SCROLL_TRACK);
+			g.fill(x1 - 5, thumbY, x1 - 3, thumbY + thumbH, SCROLL_THUMB);
+		}
+
+		g.fill(x0 + 4, y1 - 16, x1 - 4, y1 - 15, PANEL_EDGE);
+		String follows = list.pets().stream().filter(PetsNetwork.Entry::party).map(PetsNetwork.Entry::name).findFirst().orElse(null);
+		g.drawString(font, font.plainSubstrByWidth(Component.translatable("bloompets.screen.follows", follows == null ? "-" : follows).getString(), x1 - x0 - 8),
+				x0 + 4, y1 - 11, follows != null ? PARTY : MUTED);
+	}
+
+	private void renderEmpty(GuiGraphics g) {
+		int mainLeft = mainLeft();
+		int mainRight = mainRight();
+		big(g, Component.translatable("bloompets.screen.empty").withStyle(ChatFormatting.BOLD), mainLeft, top + 9, GOLD);
+		g.fill(mainLeft, top + HEAD, mainRight, top + HEAD + 1, DIVIDER);
+		canvas(g, null, mainLeft, canvasTop(), mainRight, canvasBottom(), 0, 0);
+		int y = canvasBottom() + 7;
+
+		for (var line : font.split(Component.translatable("bloompets.command.none"), mainRight - mainLeft)) {
+			g.drawString(font, line, mainLeft, y, MUTED);
+			y += 10;
+		}
 	}
 
 	private void renderPet(GuiGraphics g, PetsNetwork.Entry pet, int mouseX, int mouseY) {
-		int mainLeft = left + LIST_W + 4;
-		g.drawString(font, font.plainSubstrByWidth(pet.name(), W - LIST_W - 70), mainLeft + 4, top + 8, TEXT, false);
-		String kind = typeName(pet) + " · " + Component.translatable("bloompets.category." + pet.category()).getString();
-		g.drawString(font, font.plainSubstrByWidth(kind, W - LIST_W - 40), mainLeft + 4, top + 20, SOFT, false);
-		g.drawString(font, Component.translatable(bloomView ? "bloompets.screen.view.bloom.short" : "bloompets.screen.view.pet.short"),
-				left + W - 24 - font.width(Component.translatable(bloomView ? "bloompets.screen.view.bloom.short" : "bloompets.screen.view.pet.short")) - 4,
-				top + 10, SOFT, false);
+		int mainLeft = mainLeft();
+		int mainRight = mainRight();
 
-		// The skill slots, four a side (filled in Phase 2).
+		// Its name, large and gold as the hub's headings; its kind under it; which view the slots show, by the switch.
+		Component view = Component.translatable(bloomView ? "bloompets.screen.view.bloom.short" : "bloompets.screen.view.pet.short");
+		int viewX = mainRight - 20 - font.width(view);
+		g.drawString(font, view, viewX, top + 12, MUTED);
+		big(g, bold(pet.name(), (int) ((viewX - 6 - mainLeft) / BIG)), mainLeft, top + 9, GOLD);
+		String kind = typeName(pet) + " · " + Component.translatable("bloompets.category." + pet.category()).getString();
+		g.drawString(font, font.plainSubstrByWidth(kind, mainRight - mainLeft), mainLeft, top + 25, MUTED);
+		g.fill(mainLeft, top + HEAD, mainRight, top + HEAD + 1, DIVIDER);
+
+		// The skill slots, four a side (filled in Phase 2), and the pet between them.
 		for (int i = 0; i < 4; i++) {
-			slot(g, mainLeft + 4, top + 34 + i * (SLOT + 2));
-			slot(g, left + W - SLOT - 6, top + 34 + i * (SLOT + 2));
+			slot(g, mainLeft, slotY(i), mouseX, mouseY);
+			slot(g, mainRight - SLOT, slotY(i), mouseX, mouseY);
 		}
 
-		// The model, turning to follow the mouse.
-		int boxX = mainLeft + SLOT + 10;
-		int boxY = top + 34;
-		int boxW = (left + W - SLOT - 10) - boxX;
-		int boxH = 4 * (SLOT + 2) - 2;
-		g.fill(boxX - 1, boxY - 1, boxX + boxW + 1, boxY + boxH + 1, 0xFF373737);
-		g.fill(boxX, boxY, boxX + boxW, boxY + boxH, 0xFF101010);
-		LivingEntity model = model(pet);
+		canvas(g, pet, mainLeft + SLOT + 6, canvasTop(), mainRight - SLOT - 6, canvasBottom(), mouseX, mouseY);
+
+		// Health, as the hub's level bar.
+		int y = canvasBottom() + 7;
+		Component health = Component.translatable("bloompets.screen.health");
+		g.drawString(font, health, mainLeft, y, MUTED);
+		String amount = String.format(Locale.ROOT, "%.0f/%.0f", pet.health(), pet.maxHealth());
+		int barX0 = mainLeft + font.width(health) + 6;
+		int barX1 = mainRight - font.width(amount) - 6;
+		float fraction = pet.maxHealth() > 0 ? Mth.clamp(pet.health() / pet.maxHealth(), 0.0F, 1.0F) : 0.0F;
+		int fill = barX0 + Math.round((barX1 - barX0) * fraction);
+		g.fill(barX0, y + 1, barX1, y + 7, BAR_BACK);
+
+		if (fill > barX0) {
+			g.fill(barX0, y + 1, fill, y + 7, HEALTH);
+			g.fill(barX0, y + 1, fill, y + 2, HEALTH_SHINE);
+		}
+
+		g.drawString(font, amount, mainRight - font.width(amount), y, TEXT);
+		// How it's doing (and how far), then where it is: labels in orange, as the hub's numbers.
+		labelled(g, "bloompets.screen.status", state(pet), mainLeft, y + 12, mainRight);
+		labelled(g, "bloompets.screen.where", where(pet), mainLeft, y + 23, mainRight);
+	}
+
+	private void labelled(GuiGraphics g, String labelKey, String value, int x, int y, int right) {
+		Component label = Component.translatable(labelKey);
+		g.drawString(font, label, x, y, ACCENT);
+		int valueX = x + font.width(label) + 5;
+		g.drawString(font, font.plainSubstrByWidth(value, right - valueX), valueX, y, TEXT);
+	}
+
+	/** The pet on a piece of the hub's art, turning to follow the mouse; a soft shadow at the top and bottom. */
+	private void canvas(GuiGraphics g, PetsNetwork.Entry pet, int x0, int y0, int x1, int y1, int mouseX, int mouseY) {
+		int w = x1 - x0;
+		int h = y1 - y0;
+		frame(g, x0 - 1, y0 - 1, x1 + 1, y1 + 1, PANEL_EDGE);
+		corners(g, x0 - 1, y0 - 1, x1 + 1, y1 + 1);
+		g.enableScissor(x0, y0, x1, y1);
+		g.fill(x0, y0, x1, y1, 0xFF120F0C);
+		boolean fighter = pet != null && (pet.kind() == Pets.Kind.MODDED || "combat".equals(pet.category()));
+		RenderSystem.enableBlend();
+		g.blit(fighter ? BACKDROP_COMBAT : BACKDROP_MEADOW, x0, y0, Math.max(0, (BACKDROP_W - w) / 2), Math.max(0, (BACKDROP_H - h) / 2),
+				Math.min(w, BACKDROP_W), Math.min(h, BACKDROP_H), BACKDROP_W, BACKDROP_H);
+		g.fillGradient(x0, y0, x1, y0 + 14, 0x90000000, 0x00000000);
+		g.fillGradient(x0, y1 - 18, x1, y1, 0x00000000, 0xA0000000);
+
+		for (int i = 0; i < 4; i++) {
+			int alpha = (0x60 - i * 0x18) << 24;
+			g.fill(x0 + i * 2, y0, x0 + i * 2 + 2, y1, alpha);
+			g.fill(x1 - i * 2 - 2, y0, x1 - i * 2, y1, alpha);
+		}
+
+		LivingEntity model = pet == null ? null : model(pet);
 
 		if (model != null) {
 			float size = Math.max(model.getBbHeight(), model.getBbWidth() * 0.9F);
 			int scale = (int) Mth.clamp(64.0F / Math.max(size, 0.3F), 10, 52);
-			int cx = boxX + boxW / 2;
-			int cy = boxY + boxH - 8;
-			g.enableScissor(boxX, boxY, boxX + boxW, boxY + boxH);
+			int cx = x0 + w / 2;
+			int cy = y1 - 10;
 
 			try {
 				InventoryScreen.renderEntityInInventoryFollowsMouse(g, cx, cy, scale, cx - mouseX, cy - scale * model.getEyeHeight() - mouseY, model);
 			} catch (RuntimeException e) {
 				// A mod's mob that won't draw here; the rest of the screen still does.
 			}
-
-			g.disableScissor();
 		}
 
-		// Health, then where it is.
-		int infoY = boxY + boxH + 6;
-		g.drawString(font, Component.translatable("bloompets.screen.health"), boxX, infoY, SOFT, false);
-		int barX = boxX + 40;
-		int barW = boxW - 80;
-		float fraction = pet.maxHealth() > 0 ? Mth.clamp(pet.health() / pet.maxHealth(), 0.0F, 1.0F) : 0.0F;
-		g.fill(barX, infoY, barX + barW, infoY + 7, 0xFF3A1010);
-		g.fill(barX, infoY, barX + (int) (barW * fraction), infoY + 7, 0xFFD23C3C);
-		g.drawString(font, String.format(Locale.ROOT, "%.0f/%.0f", pet.health(), pet.maxHealth()), barX + barW + 4, infoY, SOFT, false);
-		// Two lines: how it's doing (and how far), then where it is.
-		g.drawString(font, font.plainSubstrByWidth(state(pet), W - LIST_W - 16), mainLeft + 4, infoY + 12, SOFT, false);
-		g.drawString(font, font.plainSubstrByWidth(where(pet), W - LIST_W - 16), mainLeft + 4, infoY + 22, SOFT, false);
+		g.disableScissor();
+	}
+
+	private Component bold(String text, int width) {
+		String s = text;
+
+		while (!s.isEmpty() && font.width(Component.literal(s).withStyle(ChatFormatting.BOLD)) > width) {
+			s = s.substring(0, s.length() - 1);
+		}
+
+		return Component.literal(s).withStyle(ChatFormatting.BOLD);
+	}
+
+	/** Text half as large again, as the hub's headings; its top-left corner at x, y. */
+	private void big(GuiGraphics g, Component text, int x, int y, int color) {
+		g.pose().pushPose();
+		g.pose().translate(x, y, 0.0F);
+		g.pose().scale(BIG, BIG, 1.0F);
+		g.drawString(font, text, 0, 0, color);
+		g.pose().popPose();
 	}
 
 	private String state(PetsNetwork.Entry pet) {
@@ -444,14 +608,14 @@ public final class PetScreen extends Screen {
 		return found;
 	}
 
-	private void slotTooltip(GuiGraphics g, PetsNetwork.Entry pet, int mouseX, int mouseY) {
-		int mainLeft = left + LIST_W + 4;
+	private boolean overSlot(int x, int y, int mouseX, int mouseY) {
+		return mouseX >= x && mouseX < x + SLOT && mouseY >= y && mouseY < y + SLOT;
+	}
 
+	private void slotTooltip(GuiGraphics g, int mouseX, int mouseY) {
 		for (int i = 0; i < 4; i++) {
-			for (int x : new int[] {mainLeft + 4, left + W - SLOT - 6}) {
-				int y = top + 34 + i * (SLOT + 2);
-
-				if (mouseX >= x && mouseX < x + SLOT && mouseY >= y && mouseY < y + SLOT) {
+			for (int x : new int[] {mainLeft(), mainRight() - SLOT}) {
+				if (overSlot(x, slotY(i), mouseX, mouseY)) {
 					g.renderTooltip(font, Component.translatable(bloomView ? "bloompets.screen.slot.bloom" : "bloompets.screen.slot.pet"), mouseX, mouseY);
 					return;
 				}
@@ -459,33 +623,49 @@ public final class PetScreen extends Screen {
 		}
 	}
 
-	private void slot(GuiGraphics g, int x, int y) {
-		inset(g, x, y, SLOT, SLOT, 0xFF8B8B8B);
-		g.drawCenteredString(font, "?", x + SLOT / 2, y + 7, 0xFFB0B0B0);
+	/** An empty skill slot, as the hub's locked icons: near black, a brown edge (orange under the mouse). */
+	private void slot(GuiGraphics g, int x, int y, int mouseX, int mouseY) {
+		g.fill(x, y, x + SLOT, y + SLOT, 0xFF0E0C0A);
+		frame(g, x, y, x + SLOT, y + SLOT, overSlot(x, y, mouseX, mouseY) ? ACCENT : PANEL_EDGE);
+		g.drawCenteredString(font, "?", x + SLOT / 2, y + 7, FAINT);
 	}
 
-	private void drawWrapped(GuiGraphics g, Component text, int x, int y, int width, int color) {
-		for (var line : font.split(text, width)) {
-			g.drawString(font, line, x, y, color, false);
-			y += 10;
-		}
+	/** A one-pixel outline. */
+	static void frame(GuiGraphics g, int x0, int y0, int x1, int y1, int color) {
+		g.fill(x0, y0, x1, y0 + 1, color);
+		g.fill(x0, y1 - 1, x1, y1, color);
+		g.fill(x0, y0 + 1, x0 + 1, y1 - 1, color);
+		g.fill(x1 - 1, y0 + 1, x1, y1 - 1, color);
 	}
 
-	/** Minecraft's own panel: light grey, a white edge top-left and a dark one bottom-right, a black outline. */
-	private static void panel(GuiGraphics g, int x, int y, int w, int h) {
-		g.fill(x, y, x + w, y + h, 0xFF000000);
-		g.fill(x + 1, y + 1, x + w - 1, y + h - 1, 0xFFC6C6C6);
-		g.fill(x + 1, y + 1, x + w - 2, y + 3, 0xFFFFFFFF);
-		g.fill(x + 1, y + 1, x + 3, y + h - 2, 0xFFFFFFFF);
-		g.fill(x + 2, y + h - 3, x + w - 1, y + h - 1, 0xFF555555);
-		g.fill(x + w - 3, y + 2, x + w - 1, y + h - 1, 0xFF555555);
-		g.fill(x + LIST_W, y + 4, x + LIST_W + 1, y + h - 4, 0xFF8B8B8B);
+	/** The hub's orange corner marks, top-left and bottom-right. */
+	private static void corners(GuiGraphics g, int x0, int y0, int x1, int y1) {
+		g.fill(x0, y0, x0 + 3, y0 + 1, ACCENT);
+		g.fill(x0, y0, x0 + 1, y0 + 3, ACCENT);
+		g.fill(x1 - 3, y1 - 1, x1, y1, ACCENT);
+		g.fill(x1 - 1, y1 - 3, x1, y1, ACCENT);
 	}
 
-	/** A sunken area: dark edge top-left, white bottom-right, as Minecraft's slots. */
-	private static void inset(GuiGraphics g, int x, int y, int w, int h, int fill) {
-		g.fill(x, y, x + w, y + h, 0xFF373737);
-		g.fill(x + 1, y + 1, x + w, y + h, 0xFFFFFFFF);
-		g.fill(x + 1, y + 1, x + w - 1, y + h - 1, fill);
+	/** A square nine-slice texture stretched to width x height: corners as they are, edges and middle stretched (Bloom's BloomGraphics). */
+	private static void nineSlice(GuiGraphics g, ResourceLocation texture, int x, int y, int width, int height, int size, int border) {
+		RenderSystem.enableBlend();
+		RenderSystem.defaultBlendFunc();
+		int inner = size - 2 * border;
+		int midW = Math.max(0, width - 2 * border);
+		int midH = Math.max(0, height - 2 * border);
+		int right = x + width - border;
+		int bottom = y + height - border;
+		// Corners.
+		g.blit(texture, x, y, border, border, 0, 0, border, border, size, size);
+		g.blit(texture, right, y, border, border, size - border, 0, border, border, size, size);
+		g.blit(texture, x, bottom, border, border, 0, size - border, border, border, size, size);
+		g.blit(texture, right, bottom, border, border, size - border, size - border, border, border, size, size);
+		// Edges.
+		g.blit(texture, x + border, y, midW, border, border, 0, inner, border, size, size);
+		g.blit(texture, x + border, bottom, midW, border, border, size - border, inner, border, size, size);
+		g.blit(texture, x, y + border, border, midH, 0, border, border, inner, size, size);
+		g.blit(texture, right, y + border, border, midH, size - border, border, border, inner, size, size);
+		// Middle: the frame's own middle is see-through, so the panel shows.
+		g.blit(texture, x + border, y + border, midW, midH, border, border, inner, inner, size, size);
 	}
 }

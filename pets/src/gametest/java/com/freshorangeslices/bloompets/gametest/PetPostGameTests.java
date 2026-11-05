@@ -23,6 +23,7 @@ import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraftforge.common.util.FakePlayer;
@@ -92,9 +93,10 @@ public final class PetPostGameTests {
 		Mob bee = pet(helper, EntityType.BEE, owner, new BlockPos(3, 3, 3), 8);
 		post(helper, bee);
 
+		// Planted without block updates: the test area is dark, and a crop's neighbour update would pop the others out.
 		for (int x = 1; x <= 5; x++) {
-			helper.setBlock(new BlockPos(x, 1, 5), Blocks.FARMLAND);
-			helper.setBlock(new BlockPos(x, 2, 5), Blocks.WHEAT);
+			helper.getLevel().setBlock(helper.absolutePos(new BlockPos(x, 1, 5)), Blocks.FARMLAND.defaultBlockState(), Block.UPDATE_CLIENTS);
+			helper.getLevel().setBlock(helper.absolutePos(new BlockPos(x, 2, 5)), Blocks.WHEAT.defaultBlockState(), Block.UPDATE_CLIENTS);
 		}
 
 		int grown = PetPosts.tend(helper.getLevel(), PetPosts.post(bee), 6, 4, bee.getRandom());

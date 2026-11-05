@@ -1,0 +1,88 @@
+package com.freshorangeslices.bloompets;
+
+import java.util.UUID;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+/**
+ * Bonding, the plugin's way: sneak and right-click a wild animal of the roster with its favourite food. Each feeding
+ * counts (hearts above the hotbar show how far along); after enough (5 for most) it's the player's pet. Feeding without
+ * sneaking still breeds animals as usual.
+ */
+public final class Bonding {
+	private Bonding() {
+	}
+
+	public enum Result {
+		NOT_FOOD, OWNED_BY_YOU, OWNED_BY_SOMEONE, FED, BONDED
+	}
+
+	@SubscribeEvent
+	public static void onInteract(PlayerInteractEvent.EntityInteract event) {
+		Player player = event.getEntity();
+
+		if (event.getLevel().isClientSide() || event.getHand() != InteractionHand.MAIN_HAND || !player.isShiftKeyDown()
+				|| !(event.getTarget() instanceof Mob mob) || !(player instanceof ServerPlayer serverPlayer)) {
+			return;
+		}
+
+		Species species = Pets.species(mob);
+
+		if (species == null || !species.isFood(event.getItemStack())) {
+			return;
+		}
+
+		event.setCanceled(true);
+		event.setCancellationResult(InteractionResult.SUCCESS);
+		feed(serverPlayer, mob, event.getItemStack());
+	}
+
+	/** One feeding toward bonding (the food is used up unless the player is in creative). Public for the game tests. */
+	public static Result feed(ServerPlayer player, Mob mob, ItemStack food) {
+		Species species = Pets.species(mob);
+
+		if (species == null || !species.isFood(food)) {
+			return Result.NOT_FOOD;
+		}
+
+		UUID owner = Pets.owner(mob);
+
+		if (owner != null) {
+			boolean yours = owner.equals(player.getUUID());
+			player.displayClientMessage(Component.translatable(yours ? "bloompets.bond.yours" : "bloompets.bond.taken", mob.getName()), true);
+			return yours ? Result.OWNED_BY_YOU : Result.OWNED_BY_SOMEONE;
+		}
+
+		if (!player.getAbilities().instabuild) {
+			food.shrink(1);
+		}
+
+		int fed = Pets.bondProgress(mob, player.getUUID()) + 1;
+		ServerLevel level = player.serverLevel();
+		level.sendParticles(ParticleTypes.HEART, mob.getX(), mob.getY() + mob.getBbHeight() * 0.8, mob.getZ(), 3, 0.3, 0.2, 0.3, 0.0);
+
+		if (fed < species.feeds()) {
+			Pets.setBondProgress(mob, player.getUUID(), fed);
+			player.displayClientMessage(Component.literal("♥".repeat(fed)).withStyle(ChatFormatting.RED)
+					.append(Component.literal("♡".repeat(species.feeds() - fed)).withStyle(ChatFormatting.GRAY)), true);
+			return Result.FED;
+		}
+
+		Pets.claim(mob, player);
+		PetRegistry.get(player.server).upsert(player.getUUID(), mob);
+		level.sendParticles(ParticleTypes.HEART, mob.getX(), mob.getY() + mob.getBbHeight(), mob.getZ(), 10, 0.5, 0.4, 0.5, 0.0);
+		player.sendSystemMessage(Component.translatable("bloompets.bond.done", mob.getName(), species.displayName())
+				.withStyle(ChatFormatting.LIGHT_PURPLE));
+		return Result.BONDED;
+	}
+}

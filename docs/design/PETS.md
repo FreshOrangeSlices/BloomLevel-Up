@@ -237,6 +237,12 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 
 ## Building it, in phases
 
+**Phase 1a (built, 2026-11-04):** the `bloompets` mod and its CI job; the roster as data; bonding; every player's pets
+kept with the world; the party, its cooldown and full health on joining; Call (any pet, any dimension); Bloom pets'
+storage (fixed sizes for now: 9, 18 or 27); owners' hits never landing; `/bloompets` (also `/pets`) until the screen.
+Not yet: the Vex (with its gear), the screen (1b), levels and everything after.
+
+
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 
 1. **The mod and the list**: the `bloompets` mod and its CI job; tracking owned pets; the party (3 places); the screen with

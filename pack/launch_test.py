@@ -1256,6 +1256,14 @@ def main():
     carry_failures, carry_notes = carry_on_check(server_dir)
     failures += carry_failures
     notes += carry_notes
+    # Bloom Pets (pets/, packed in like the add-on): loaded, with its roster read.
+    if any(f.startswith("bloompets") for f in os.listdir(os.path.join(server_dir, "mods"))):
+        said = next((l for l in server.lines if re.search(r"Bloom Pets: \d+ species", l)), None)
+        if said is None:
+            failures.append("bloom pets: the server never said how many species it read (not loaded?)")
+        else:
+            count = int(re.search(r"Bloom Pets: (\d+) species", said).group(1))
+            (failures if count == 0 else notes).append(f"bloom pets: {count} species in the roster")
     # The LegionWareX add-on (addon/, packed in like Bloom): loaded, with its keepsake and its companion tag.
     if any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(server_dir, "mods"))):
         dump_rows = [json.loads(line) for line in open(os.path.join(server_dir, "bloom-dump.jsonl")) if line.strip()] \

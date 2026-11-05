@@ -60,10 +60,25 @@ public final class Companions {
 		return enemigo != null ? enemigo : entity.saveWithoutId(new CompoundTag()).getBoolean("IsEnemigo");
 	}
 
+	/**
+	 * A Bloom Pets pet's owner (mod id bloompets: an animal bonded by feeding, kept in its persistent data as
+	 * {@code bloompets.owner}), or null. Many of them (iron golems, pandas, cows) have no vanilla owner of their own.
+	 */
+	public static UUID bloomPetOwner(Entity entity) {
+		CompoundTag data = entity.getPersistentData().getCompound("bloompets");
+		return data.hasUUID("owner") ? data.getUUID("owner") : null;
+	}
+
 	/** The player a companion or pet belongs to (Migamigos' owner, or a tamed animal's), or null. */
 	public static UUID ownerOf(Entity entity) {
 		if (entity == null) {
 			return null;
+		}
+
+		UUID bloomPet = bloomPetOwner(entity);
+
+		if (bloomPet != null) {
+			return bloomPet;
 		}
 
 		if (isCompanion(entity)) {

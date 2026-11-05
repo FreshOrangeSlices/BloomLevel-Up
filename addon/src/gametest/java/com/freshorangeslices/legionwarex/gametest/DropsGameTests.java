@@ -2,12 +2,15 @@ package com.freshorangeslices.legionwarex.gametest;
 
 import com.freshorangeslices.legionwarex.LegionWareX;
 import java.util.List;
+import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -64,6 +67,30 @@ public final class DropsGameTests {
 		chicken.hurt(helper.getLevel().damageSources().generic(), 100.0F);
 		helper.assertTrue(chicken.isDeadOrDying(), "It died with no killer (chickens take no fall damage, so generic damage)");
 		helper.assertTrue(drops(helper, chicken).stream().anyMatch(i -> i.getItem().is(Items.CHICKEN)), "No killer, so it drops as usual");
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
+	public static void aMobAPlayersPetKillsStillDrops(GameTestHelper helper) {
+		// A tamed wolf, and an iron golem bonded through Bloom Pets (its owner in its persistent data, bloompets.owner).
+		Chicken first = chicken(helper, new BlockPos(1, 2, 1));
+		Wolf wolf = helper.spawn(EntityType.WOLF, new BlockPos(4, 2, 1));
+		wolf.setNoAi(true);
+		wolf.setTame(true);
+		wolf.setOwnerUUID(UUID.randomUUID());
+		first.hurt(helper.getLevel().damageSources().mobAttack(wolf), 100.0F);
+		helper.assertTrue(first.isDeadOrDying() && drops(helper, first).stream().anyMatch(i -> i.getItem().is(Items.CHICKEN)),
+				"A pet wolf's kill drops as its owner's would");
+
+		Chicken second = chicken(helper, new BlockPos(1, 2, 6));
+		IronGolem golem = helper.spawn(EntityType.IRON_GOLEM, new BlockPos(5, 2, 6));
+		golem.setNoAi(true);
+		CompoundTag pet = new CompoundTag();
+		pet.putUUID("owner", UUID.randomUUID());
+		golem.getPersistentData().put("bloompets", pet);
+		second.hurt(helper.getLevel().damageSources().mobAttack(golem), 100.0F);
+		helper.assertTrue(second.isDeadOrDying() && drops(helper, second).stream().anyMatch(i -> i.getItem().is(Items.CHICKEN)),
+				"A Bloom pet's kill drops too, though an iron golem has no owner of its own");
 		helper.succeed();
 	}
 }

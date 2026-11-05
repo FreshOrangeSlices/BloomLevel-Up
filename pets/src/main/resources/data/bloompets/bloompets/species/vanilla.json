@@ -1,0 +1,250 @@
+{
+  "_comment": "Bloom Pets' roster (from the BloomPets plugin, docs/design/PETS.md): the animal, its category (combat, pack, speedster, utility), the food that bonds it (sneak + right-click a wild one, 'feeds' times; '#' for an item tag), and its storage (none, small 9, medium 18, pack 27). A data pack can add more files here; a later file's entry for the same animal replaces the earlier one. Left out for now: the Vex (it comes with its gear) and the Armadillo (not in 1.20.1).",
+  "species": [
+    {
+      "entity": "minecraft:wolf",
+      "category": "combat",
+      "foods": [
+        "minecraft:beef",
+        "minecraft:cooked_beef",
+        "minecraft:porkchop",
+        "minecraft:cooked_porkchop",
+        "minecraft:chicken",
+        "minecraft:cooked_chicken",
+        "minecraft:mutton",
+        "minecraft:cooked_mutton",
+        "minecraft:rabbit",
+        "minecraft:cooked_rabbit",
+        "minecraft:rotten_flesh"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:polar_bear",
+      "category": "combat",
+      "foods": [
+        "minecraft:salmon",
+        "minecraft:cooked_salmon"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:iron_golem",
+      "category": "combat",
+      "foods": [
+        "minecraft:iron_ingot"
+      ],
+      "feeds": 8,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:goat",
+      "category": "combat",
+      "foods": [
+        "minecraft:wheat"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:panda",
+      "category": "combat",
+      "foods": [
+        "minecraft:bamboo"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:donkey",
+      "category": "pack",
+      "foods": [
+        "minecraft:golden_carrot"
+      ],
+      "feeds": 5,
+      "storage": "pack"
+    },
+    {
+      "entity": "minecraft:mule",
+      "category": "pack",
+      "foods": [
+        "minecraft:apple"
+      ],
+      "feeds": 5,
+      "storage": "pack"
+    },
+    {
+      "entity": "minecraft:llama",
+      "category": "pack",
+      "foods": [
+        "minecraft:hay_block"
+      ],
+      "feeds": 5,
+      "storage": "pack"
+    },
+    {
+      "entity": "minecraft:camel",
+      "category": "pack",
+      "foods": [
+        "minecraft:cactus"
+      ],
+      "feeds": 5,
+      "storage": "pack"
+    },
+    {
+      "entity": "minecraft:sniffer",
+      "category": "pack",
+      "foods": [
+        "minecraft:torchflower_seeds"
+      ],
+      "feeds": 6,
+      "storage": "pack"
+    },
+    {
+      "entity": "minecraft:horse",
+      "category": "speedster",
+      "foods": [
+        "minecraft:sugar"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:fox",
+      "category": "speedster",
+      "foods": [
+        "minecraft:sweet_berries",
+        "minecraft:glow_berries"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:rabbit",
+      "category": "speedster",
+      "foods": [
+        "minecraft:carrot",
+        "minecraft:dandelion"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:ocelot",
+      "category": "speedster",
+      "foods": [
+        "minecraft:tropical_fish"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:strider",
+      "category": "speedster",
+      "foods": [
+        "minecraft:warped_fungus"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:cat",
+      "category": "utility",
+      "foods": [
+        "minecraft:cod",
+        "minecraft:cooked_cod"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:bee",
+      "category": "utility",
+      "foods": [
+        "#minecraft:flowers"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:allay",
+      "category": "utility",
+      "foods": [
+        "minecraft:amethyst_shard"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:chicken",
+      "category": "utility",
+      "foods": [
+        "minecraft:wheat_seeds",
+        "minecraft:melon_seeds",
+        "minecraft:pumpkin_seeds",
+        "minecraft:beetroot_seeds"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:cow",
+      "category": "utility",
+      "foods": [
+        "minecraft:wheat"
+      ],
+      "feeds": 5,
+      "storage": "medium"
+    },
+    {
+      "entity": "minecraft:turtle",
+      "category": "utility",
+      "foods": [
+        "minecraft:seagrass"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:frog",
+      "category": "utility",
+      "foods": [
+        "minecraft:slime_ball"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:pig",
+      "category": "utility",
+      "foods": [
+        "minecraft:carrot",
+        "minecraft:potato",
+        "minecraft:beetroot"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:axolotl",
+      "category": "utility",
+      "foods": [
+        "minecraft:tropical_fish_bucket",
+        "minecraft:tropical_fish"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    },
+    {
+      "entity": "minecraft:bat",
+      "category": "utility",
+      "foods": [
+        "minecraft:melon_slice"
+      ],
+      "feeds": 5,
+      "storage": "small"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		maven {
+			name = 'MinecraftForge'
+			url = 'https://maven.minecraftforge.net/'
+		}
+	}
+}
+
+plugins {
+	id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+// Bloom Pets: its own Forge 1.20.1 mod beside Bloom (FreshOrangeSlices, 2026-11-04), built on its own from this
+// folder with the repository's Gradle wrapper (`./gradlew -p pets build`).
+rootProject.name = 'bloompets'

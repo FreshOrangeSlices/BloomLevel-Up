@@ -24,7 +24,7 @@ public final class MobKillDrops {
 	private MobKillDrops() {
 	}
 
-	/** A player, or a pet or companion one owns. */
+	/** A player, or a pet or companion one owns (a Bloom Pets pet too). */
 	public static boolean playerSide(Entity entity) {
 		if (entity == null) {
 			return false;
@@ -35,6 +35,10 @@ public final class MobKillDrops {
 		}
 
 		if (entity instanceof OwnableEntity owned && owned.getOwnerUUID() != null) {
+			return true;
+		}
+
+		if (Companions.bloomPetOwner(entity) != null) {
 			return true;
 		}
 

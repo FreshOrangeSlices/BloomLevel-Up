@@ -1,0 +1,309 @@
+## mods/irons_spellbooks-1.20.1-3.16.3.jar io/redspace/ironsspellbooks/config/ServerConfigs.class
+Compiled from "ServerConfigs.java"
+public class io.redspace.ironsspellbooks.config.ServerConfigs {
+  private static final net.minecraftforge.common.ForgeConfigSpec$Builder BUILDER;
+  public static final net.minecraftforge.common.ForgeConfigSpec SPEC;
+  public static final io.redspace.ironsspellbooks.config.ServerConfigs$SpellConfigParameters DEFAULT_CONFIG;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> SWORDS_CONSUME_MANA;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> SWORDS_CD_MULTIPLIER;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> CAN_ATTACK_OWN_SUMMONS;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> MAX_UPGRADES;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> MANA_SPAWN_PERCENT;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> SCROLL_RECYCLE_CHANCE;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> SCROLL_MERGING;
+  private static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends java.lang.String>> UPGRADE_WHITELIST;
+  private static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends java.lang.String>> UPGRADE_BLACKLIST;
+  private static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends java.lang.String>> IMBUE_WHITELIST;
+  private static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends java.lang.String>> IMBUE_BLACKLIST;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> PRIEST_TOWER_SPAWNRATE;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> AQUIFER_DETECTION;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> ALLOW_CAULDRON_BREWING;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> FURLED_MAPS_SKIP_CHUNKS;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> APPLY_ALL_MULTIHAND_ATTRIBUTES;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> BETTER_CREEPER_THUNDERHIT;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> SPELL_GREIFING;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> ADDITIONAL_WANDERING_TRADER_TRADES;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> DISABLE_ADVENTURE_MODE_CASTING;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> HOGLIN_OFFSPRING_PROTECTION;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> MANA_REGEN_MULTIPLIER;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> CREATIVE_MANA_COST;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> CREATIVE_COOLDOWN;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> ICE_SPIDER_PATROLS;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> TYROS_OMINOUS_FIGHT;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> PORTAL_FRAME_RESTRICT_DYE;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> PORTAL_FRAME_RESTRICT_BREAKING;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> TYROS_ADDITIONAL_HEALTH;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> TYROS_ADDITIONAL_ATTACK_DAMAGE;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> TYROS_ADDITIONAL_SPELL_POWER;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> DEAD_KING_ADDITIONAL_HEALTH;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> DEAD_KING_ADDITIONAL_ATTACK_DAMAGE;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> DEAD_KING_ADDITIONAL_SPELL_POWER;
+  public static final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends java.lang.Double>> RARITY_CONFIG;
+  public static final java.util.Set<net.minecraft.world.item.Item> UPGRADE_WHITELIST_ITEMS;
+  public static final java.util.Set<net.minecraft.world.item.Item> UPGRADE_BLACKLIST_ITEMS;
+  public static final java.util.Set<net.minecraft.world.item.Item> IMBUE_WHITELIST_ITEMS;
+  public static final java.util.Set<net.minecraft.world.item.Item> IMBUE_BLACKLIST_ITEMS;
+  private static final java.util.Map<java.lang.String, io.redspace.ironsspellbooks.config.ServerConfigs$SpellConfigParameters> SPELL_CONFIGS;
+  public io.redspace.ironsspellbooks.config.ServerConfigs();
+  public static io.redspace.ironsspellbooks.config.ServerConfigs$SpellConfigParameters getSpellConfig(io.redspace.ironsspellbooks.api.spells.AbstractSpell);
+  public static java.util.Map<java.lang.String, io.redspace.ironsspellbooks.config.ServerConfigs$SpellConfigParameters> getSpellConfigs();
+  public static void onConfigReload();
+  private static void cacheItemList(java.util.List<? extends java.lang.String>, java.util.Set<net.minecraft.world.item.Item>);
+  private static void createSpellConfig(io.redspace.ironsspellbooks.api.spells.AbstractSpell);
+  private static java.lang.String createSpellConfigTitle(java.lang.String);
+  private static java.lang.Boolean lambda$createSpellConfig$20(io.redspace.ironsspellbooks.api.config.DefaultConfig);
+  private static java.lang.Double lambda$createSpellConfig$19(io.redspace.ironsspellbooks.api.config.DefaultConfig);
+  private static java.lang.Double lambda$createSpellConfig$18();
+  private static java.lang.Double lambda$createSpellConfig$17();
+  private static io.redspace.ironsspellbooks.api.spells.SpellRarity lambda$createSpellConfig$16(io.redspace.ironsspellbooks.api.config.DefaultConfig);
+  private static java.lang.Integer lambda$createSpellConfig$15(io.redspace.ironsspellbooks.api.config.DefaultConfig);
+  private static java.lang.String lambda$createSpellConfig$14(io.redspace.ironsspellbooks.api.config.DefaultConfig);
+  private static java.lang.Boolean lambda$createSpellConfig$13(io.redspace.ironsspellbooks.api.config.DefaultConfig);
+  private static boolean lambda$cacheItemList$12(net.minecraft.tags.TagKey, net.minecraft.world.item.Item);
+  private static boolean lambda$static$11(java.lang.Object);
+  private static boolean lambda$static$10(java.lang.Object);
+  private static boolean lambda$static$9(java.lang.Object);
+  private static boolean lambda$static$8(java.lang.Object);
+  private static boolean lambda$static$7(java.lang.Object);
+  private static java.lang.Boolean lambda$static$6();
+  private static java.lang.Double lambda$static$5();
+  private static java.lang.Double lambda$static$4();
+  private static java.lang.Double lambda$static$3();
+  private static io.redspace.ironsspellbooks.api.spells.SpellRarity lambda$static$2();
+  private static java.lang.Integer lambda$static$1();
+  private static java.lang.Boolean lambda$static$0();
+  static {};
+}
+
+## mods/irons_spellbooks-1.20.1-3.16.3.jar io/redspace/ironsspellbooks/player/ClientMagicData.class
+Compiled from "ClientMagicData.java"
+public class io.redspace.ironsspellbooks.player.ClientMagicData {
+  private static final io.redspace.ironsspellbooks.api.magic.MagicData playerMagicData;
+  private static final java.util.Set<java.util.UUID> activeSummons;
+  private static final java.util.HashMap<java.lang.Integer, io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData> playerSyncedDataLookup;
+  private static final io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData emptySyncedData;
+  static io.redspace.ironsspellbooks.api.magic.SpellSelectionManager spellSelectionManager;
+  private static io.redspace.ironsspellbooks.capabilities.magic.ClientSpellTargetingData spellTargetingData;
+  public io.redspace.ironsspellbooks.player.ClientMagicData();
+  public static io.redspace.ironsspellbooks.api.magic.SpellSelectionManager getSpellSelectionManager();
+  public static void updateSpellSelectionManager(net.minecraft.server.level.ServerPlayer);
+  public static void updateSpellSelectionManager();
+  public static void setTargetingData(io.redspace.ironsspellbooks.capabilities.magic.ClientSpellTargetingData);
+  public static io.redspace.ironsspellbooks.capabilities.magic.ClientSpellTargetingData getTargetingData();
+  public static void resetTargetingData();
+  public static io.redspace.ironsspellbooks.capabilities.magic.PlayerCooldowns getCooldowns();
+  public static io.redspace.ironsspellbooks.capabilities.magic.PlayerRecasts getRecasts();
+  public static void cacheClientSummons();
+  public static void setRecasts(io.redspace.ironsspellbooks.capabilities.magic.PlayerRecasts);
+  public static java.util.Set<java.util.UUID> getActiveSummons();
+  public static float getCooldownPercent(io.redspace.ironsspellbooks.api.spells.AbstractSpell);
+  public static int getPlayerMana();
+  public static void setMana(int);
+  public static io.redspace.ironsspellbooks.api.spells.CastType getCastType();
+  public static java.lang.String getCastingSpellId();
+  public static int getCastingSpellLevel();
+  public static int getCastDurationRemaining();
+  public static int getCastDuration();
+  public static boolean isCasting();
+  public static void handleCastDuration();
+  public static float getCastCompletionPercent();
+  public static void setClientCastState(java.lang.String, int, int, io.redspace.ironsspellbooks.api.spells.CastSource, java.lang.String);
+  public static void resetClientCastState(java.util.UUID);
+  public static io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData getSyncedSpellData(net.minecraft.world.entity.LivingEntity);
+  public static void handlePlayerSyncedData(io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData);
+  public static void handleAbstractCastingMobSyncedData(int, io.redspace.ironsspellbooks.capabilities.magic.SyncedSpellData);
+  private static void lambda$cacheClientSummons$0(io.redspace.ironsspellbooks.capabilities.magic.RecastInstance);
+  static {};
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/api/spell/summon/SummonBehaviour$Action$SpellCast.class
+Compiled from "SummonBehaviour.java"
+public class net.spell_engine.api.spell.summon.SummonBehaviour$Action$SpellCast {
+  public java.lang.String spell_id;
+  public int cooldown;
+  public net.spell_engine.api.spell.summon.SummonBehaviour$Action$SpellCast$Aiming aiming;
+  public net.spell_engine.api.spell.summon.SummonBehaviour$Action$SpellCast$Range range;
+  public java.util.List<java.lang.Integer> cast_animation_variants;
+  public java.util.List<java.lang.Integer> release_animation_variants;
+  public int release_animation_duration;
+  public net.spell_engine.api.spell.summon.SummonBehaviour$Action$SpellCast();
+  public net.spell_engine.api.spell.summon.SummonBehaviour$Action$SpellCast(java.lang.String, int);
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/config/ClientConfig.class
+Compiled from "ClientConfig.java"
+public class net.spell_engine.config.ClientConfig implements me.shedaniel.autoconfig.ConfigData {
+  public boolean holdToCastChannelled;
+  public boolean holdToCastCharged;
+  public boolean spellHotbarHidesOffhand;
+  public boolean spellHotbarUseKey;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_1_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_2_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_3_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_4_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_5_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_6_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_7_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_8_defer;
+  public net.spell_engine.client.input.WrappedKeybinding$VanillaAlternative spell_hotbar_9_defer;
+  public boolean sneakingByPassSpellHotbar;
+  public boolean useKeyHighPriority;
+  public boolean renderBeamsHighLuminance;
+  public boolean highlightTarget;
+  public boolean filterInvalidTargets;
+  public boolean alwaysShowFullTooltip;
+  public boolean showSpellBookSuppportTooltip;
+  public boolean showSpellBindingTooltip;
+  public boolean showSpellCastErrors;
+  public boolean shoulderSurfingAdaptiveWhileUse;
+  public net.spell_engine.config.TriStateAuto firstPersonAnimations;
+  public net.spell_engine.config.ClientConfig();
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/config/FallbackConfig.class
+Compiled from "FallbackConfig.java"
+public class net.spell_engine.config.FallbackConfig {
+  public boolean enabled;
+  public net.spell_engine.config.FallbackConfig$CompatGroup melee_weapons;
+  public net.spell_engine.config.FallbackConfig$CompatGroup ranged_weapons;
+  public net.spell_engine.config.FallbackConfig();
+  public boolean isValid();
+  public static net.spell_engine.config.FallbackConfig defaults();
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/config/HudConfig.class
+Compiled from "HudConfig.java"
+public class net.spell_engine.config.HudConfig {
+  public net.spell_engine.config.HudConfig$CastBar castbar;
+  public net.spell_engine.client.gui.HudElement hotbar;
+  public net.spell_engine.client.gui.HudElement error_message;
+  public static final java.util.List<net.spell_engine.config.HudConfig> presets;
+  public net.spell_engine.config.HudConfig();
+  public net.spell_engine.config.HudConfig(net.spell_engine.config.HudConfig$CastBar, net.spell_engine.client.gui.HudElement, net.spell_engine.client.gui.HudElement);
+  public net.spell_engine.config.HudConfig copy();
+  public static net.spell_engine.client.gui.HudElement defaultHotBar();
+  public static net.spell_engine.client.gui.HudElement defaultErrorMessage();
+  public static net.spell_engine.config.HudConfig createDefault();
+  private static net.spell_engine.config.HudConfig overXPBar();
+  private static net.spell_engine.config.HudConfig preset(net.spell_engine.client.gui.HudElement$Origin);
+  private static net.minecraft.world.phys.Vec2 targetOffsetUp();
+  private static net.minecraft.world.phys.Vec2 targetOffsetDown();
+  private static net.minecraft.world.phys.Vec2 iconLeft(int);
+  private static net.minecraft.world.phys.Vec2 iconRight(int);
+  public boolean isValid();
+  static {};
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/config/ServerConfig.class
+Compiled from "ServerConfig.java"
+public class net.spell_engine.config.ServerConfig implements me.shedaniel.autoconfig.ConfigData {
+  public float movement_multiplier_speed_while_casting;
+  public boolean bypass_iframes;
+  public boolean haste_affects_cooldown;
+  public float spell_cost_exhaust_multiplier;
+  public boolean spell_cost_item_allowed;
+  public boolean spell_cost_durability_allowed;
+  public int spell_instant_cast_global_cooldown;
+  public float spell_target_range_tolerance;
+  public boolean spell_item_cooldown_lock;
+  public float spell_book_additional_cooldown;
+  public boolean spell_book_creation_enabled;
+  public int spell_book_creation_cost;
+  public int spell_book_creation_requirement;
+  public int spell_binding_level_cost_multiplier;
+  public int spell_binding_level_cost_offset;
+  public int spell_binding_level_cost_min;
+  public int spell_binding_level_requirement_multiplier;
+  public int spell_binding_level_requirement_offset;
+  public int spell_binding_level_requirement_min;
+  public int spell_binding_lapis_cost_multiplier;
+  public boolean spell_binding_allow_unbinding;
+  public int spell_scroll_level_cost_per_tier;
+  public int spell_scroll_apply_cost_base;
+  public boolean spell_container_caching;
+  public boolean spell_container_from_offhand_any;
+  public boolean projectiles_pass_thru_irrelevant_targets;
+  public int auto_swap_cooldown;
+  public float attribute_evasion_angle;
+  public boolean attribute_evasion_allowed_while_spell_casting;
+  public boolean attribute_evasion_allowed_while_item_usage;
+  public boolean melee_skills_area_focus_mode;
+  public java.util.LinkedHashMap<java.lang.String, net.spell_engine.internals.target.EntityRelation> player_relations;
+  public java.util.LinkedHashMap<java.lang.String, net.spell_engine.internals.target.EntityRelation> player_relation_tags;
+  public net.spell_engine.internals.target.EntityRelation player_relation_to_owned_pets;
+  public net.spell_engine.internals.target.EntityRelation player_relation_to_absent_owner_pets;
+  public net.spell_engine.internals.target.EntityRelation player_relation_to_teammates;
+  public net.spell_engine.internals.target.EntityRelation player_relation_to_passives;
+  public net.spell_engine.internals.target.EntityRelation player_relation_to_hostiles;
+  public net.spell_engine.internals.target.EntityRelation player_relation_to_other;
+  public net.spell_engine.internals.target.EntityRelation summoned_relation_to_owner;
+  public net.spell_engine.config.ServerConfig();
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/config/WeaknessConfig.class
+Compiled from "WeaknessConfig.java"
+public class net.spell_engine.config.WeaknessConfig {
+  public java.util.LinkedHashMap<java.lang.String, java.util.List<net.spell_engine.api.spell.weakness.ScopedWeakness>> school_weaknesses;
+  public net.spell_engine.config.WeaknessConfig();
+  public boolean isValid();
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/internals/casting/SpellCast.class
+Compiled from "SpellCast.java"
+public class net.spell_engine.internals.casting.SpellCast {
+  public net.spell_engine.internals.casting.SpellCast();
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/rpg_series/config/ArmorSetConfig.class
+Compiled from "ArmorSetConfig.java"
+public class net.spell_engine.rpg_series.config.ArmorSetConfig {
+  public float armor_toughness;
+  public float knockback_resistance;
+  public net.spell_engine.rpg_series.config.ArmorSetConfig$Piece head;
+  public net.spell_engine.rpg_series.config.ArmorSetConfig$Piece chest;
+  public net.spell_engine.rpg_series.config.ArmorSetConfig$Piece legs;
+  public net.spell_engine.rpg_series.config.ArmorSetConfig$Piece feet;
+  public net.spell_engine.rpg_series.config.ArmorSetConfig();
+  public static net.spell_engine.rpg_series.config.ArmorSetConfig with(net.spell_engine.rpg_series.config.ArmorSetConfig$Piece, net.spell_engine.rpg_series.config.ArmorSetConfig$Piece, net.spell_engine.rpg_series.config.ArmorSetConfig$Piece, net.spell_engine.rpg_series.config.ArmorSetConfig$Piece);
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/rpg_series/config/EffectConfig.class
+Compiled from "EffectConfig.java"
+public class net.spell_engine.rpg_series.config.EffectConfig {
+  public java.util.List<net.spell_engine.rpg_series.config.AttributeModifier> attributes;
+  public net.spell_engine.rpg_series.config.ConditionalAttributes conditional_attributes;
+  public static final net.spell_engine.rpg_series.config.EffectConfig EMPTY;
+  public net.spell_engine.rpg_series.config.EffectConfig();
+  public net.spell_engine.rpg_series.config.EffectConfig(java.util.List<net.spell_engine.rpg_series.config.AttributeModifier>);
+  public java.util.List<net.spell_engine.rpg_series.config.AttributeModifier> selectedAttributes();
+  public java.util.List<net.spell_engine.rpg_series.config.AttributeModifier> attributes();
+  public net.spell_engine.rpg_series.config.AttributeModifier firstModifier();
+  public net.spell_engine.rpg_series.config.EffectConfig conditionalAttributes(java.lang.String, java.util.List<net.spell_engine.rpg_series.config.AttributeModifier>);
+  static {};
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/rpg_series/config/ShieldConfig.class
+Compiled from "ShieldConfig.java"
+public class net.spell_engine.rpg_series.config.ShieldConfig {
+  public int durability;
+  public java.util.List<net.spell_engine.rpg_series.config.AttributeModifier> attributes;
+  public net.spell_engine.rpg_series.config.ConditionalAttributes conditional_attributes;
+  public java.util.List<net.spell_engine.rpg_series.config.AttributeModifier> selectedAttributes();
+  public net.spell_engine.rpg_series.config.ShieldConfig();
+  public net.spell_engine.rpg_series.config.ShieldConfig(int);
+  public net.spell_engine.rpg_series.config.ShieldConfig attributes(java.util.List<net.spell_engine.rpg_series.config.AttributeModifier>);
+  public net.spell_engine.rpg_series.config.ShieldConfig conditionalAttributes(java.lang.String, java.util.List<net.spell_engine.rpg_series.config.AttributeModifier>);
+}
+
+## mods/spell_engine-forge-1.10.10+1.20.1.jar net/spell_engine/rpg_series/config/WeaponConfig.class
+Compiled from "WeaponConfig.java"
+public class net.spell_engine.rpg_series.config.WeaponConfig {
+  public float attack_damage;
+  public float attack_speed;
+  public java.util.ArrayList<net.spell_engine.rpg_series.config.AttributeModifier> attributes;
+  public net.spell_engine.rpg_series.config.ConditionalAttributes conditional_attributes;
+  public java.util.List<net.spell_engine.rpg_series.config.AttributeModifier> selectedAttributes();
+  public net.spell_engine.rpg_series.config.WeaponConfig();
+  public net.spell_engine.rpg_series.config.WeaponConfig(float, float);
+  public net.spell_engine.rpg_series.config.WeaponConfig add(net.spell_engine.rpg_series.config.AttributeModifier);
+}

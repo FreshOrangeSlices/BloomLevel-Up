@@ -387,4 +387,19 @@ Each phase is its own chunk: built, tested (game tests on plain wolves first; Mi
 3. **Mood and bonuses** (whatever of the plugin's engagement layer is kept): mood, petting, owner bonuses, posts (built
    as 3a, 3b, 3c; fetch is left for later).
 4. **One and the Same**: the Major in Bloom, weapon trees on pets, cooldown abilities and their switches.
-5. **The pack**: Migamigos and Zoni's per-kind skills, dragons' limits, a quest chapter, tuning.
+5. **The pack**: Migamigos and Zoni's per-kind skills (Spirits), their mood and bonus, fetch, a quest chapter, tuning.
+   **Dragons are out of Bloom Pets altogether** (FreshOrangeSlices, 2026-11-05: no dragons' limits step).
+
+**Decided after Phase 4 (FreshOrangeSlices, 2026-11-05; notes, not built yet):**
+- **Polish of the Bloom view**: a locked tree effect shows its icon greyed, its level small in the corner (not a dark box);
+  the left column's empty 5th slot shows the pet's overall stats (its damage with its tree, and so on), or holds the tree
+  swap (to settle); an Amigo whose levels wait for its next kill says so in the status line ("Levels up on its next kill").
+- **A softer reset** (instead of back to level 1 / a 5-hour wait): 50% for Bloom pets, 75% for modded companions (to
+  settle: of what, and how for Amigos).
+- **Spirits use the same numbers as a Bloom pet's skills.** **One reroll, ever** (the free one).
+- **Fetch with a ball**: a blue ball with the Heart of the Sea's look, named Ball (to settle: how it's made).
+- **No upgrade test** (going all in).
+- **Bloom Pets' version follows its phase** (0.4.0 after Phase 4; the build number stays on the end).
+- **`/bloompets info <pet>`** for operators: level, an Amigo's pace count, tree, mood, hunger, fainting.
+- **Phase 5's numbers are written down and agreed before it's built.**
+- Kept as they are: how strong Amigos can get (a strong build is the player's choice), and how full the screen is.

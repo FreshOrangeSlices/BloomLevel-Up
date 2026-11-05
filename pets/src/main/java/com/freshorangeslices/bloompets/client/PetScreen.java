@@ -1,6 +1,7 @@
 package com.freshorangeslices.bloompets.client;
 
 import com.freshorangeslices.bloompets.BloomPets;
+import com.freshorangeslices.bloompets.PetBonuses;
 import com.freshorangeslices.bloompets.PetSkills;
 import com.freshorangeslices.bloompets.Pets;
 import com.freshorangeslices.bloompets.network.PetsNetwork;
@@ -29,6 +30,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 
 /**
  * The pet screen (FreshOrangeSlices' sketch, docs/design/art/pets-screen-sketch.png), in the Skill Hub's look: a dark
@@ -116,7 +119,7 @@ public final class PetScreen extends Screen {
 	private Button storageButton;
 	private int ticks;
 	/** A tooltip for something drawn in the pet's panel (its mood or hunger), drawn last, over the buttons. */
-	private List<Component> panelTip;
+	private List<FormattedCharSequence> panelTip;
 
 	public PetScreen(PetsNetwork.PetList list) {
 		super(Component.translatable("bloompets.screen.title"));
@@ -373,7 +376,7 @@ public final class PetScreen extends Screen {
 			slotTooltip(g, pet, mouseX, mouseY);
 
 			if (panelTip != null) {
-				g.renderComponentTooltip(font, panelTip, mouseX, mouseY);
+				g.renderTooltip(font, panelTip, mouseX, mouseY);
 			}
 		}
 	}
@@ -461,6 +464,7 @@ public final class PetScreen extends Screen {
 	private void renderPet(GuiGraphics g, PetsNetwork.Entry pet, int mouseX, int mouseY) {
 		int mainLeft = mainLeft();
 		int mainRight = mainRight();
+		panelTip = null;
 
 		// Its name, large and gold as the hub's headings; its kind under it; which view the slots show, by the switch.
 		Component view = Component.translatable(bloomView ? "bloompets.screen.view.bloom.short" : "bloompets.screen.view.pet.short");
@@ -472,6 +476,11 @@ public final class PetScreen extends Screen {
 		int kindX = mainLeft + font.width(level);
 		String kind = " · " + typeName(pet) + " · " + Component.translatable("bloompets.category." + pet.category()).getString();
 		g.drawString(font, font.plainSubstrByWidth(kind, mainRight - kindX), kindX, top + 25, MUTED);
+
+		// Its bonus for you, under the mouse on that line.
+		if (pet.kind() == Pets.Kind.BLOOM && mouseX >= mainLeft && mouseX < mainRight && mouseY >= top + 24 && mouseY < top + 34) {
+			panelTip = bonusTip(pet);
+		}
 		g.fill(mainLeft, top + HEAD, mainRight, top + HEAD + 1, DIVIDER);
 
 		// The skill slots, five a side, and the pet between them.
@@ -502,8 +511,6 @@ public final class PetScreen extends Screen {
 
 	/** Mood (hearts as a bar: green, gold, red when it sulks, pink when it loves you) and hunger, side by side. */
 	private void moodRow(GuiGraphics g, PetsNetwork.Entry pet, Component mood, int barX0, int x0, int x1, int y, int mouseX, int mouseY) {
-		panelTip = null;
-
 		if (pet.mood() < 0) {
 			labelled(g, "bloompets.screen.mood", Component.translatable("bloompets.screen.mood.modded").getString(), x0, y, x1);
 			return;
@@ -540,7 +547,7 @@ public final class PetScreen extends Screen {
 				tip.add(Component.translatable("bloompets.screen.hunger.how").withStyle(ChatFormatting.DARK_GRAY));
 			}
 
-			panelTip = tip;
+			panelTip = tip.stream().map(Component::getVisualOrderText).toList();
 		}
 	}
 
@@ -712,6 +719,34 @@ public final class PetScreen extends Screen {
 		return mouseX >= x && mouseX < x + SLOT && mouseY >= y && mouseY < y + SLOT;
 	}
 
+	/** A non-combat Bloom pet's first slot holds its bonus for you (it has no skill tree). */
+	private boolean bonusSlot(PetsNetwork.Entry pet, int index) {
+		return index == 0 && !bloomView && pet.kind() == Pets.Kind.BLOOM && PetSkills.Kind.byId(pet.skills()) == null;
+	}
+
+	/** What the pet's bonus does at its level, and when it gives it. */
+	private List<FormattedCharSequence> bonusTip(PetsNetwork.Entry pet) {
+		String kind = pet.type().substring(pet.type().indexOf(':') + 1);
+		double p = PetBonuses.power(pet.level());
+		Object[] args = switch (kind) {
+			case "wolf", "horse" -> new Object[] {number(8.0 * p)};
+			case "iron_golem" -> new Object[] {number(3.0 * p)};
+			case "goat" -> new Object[] {number(Math.min(70.0, 40.0 * p))};
+			case "donkey", "llama" -> new Object[] {number(2.0 * p)};
+			case "mule" -> new Object[] {number(Math.min(60.0, 30.0 * p))};
+			case "fox" -> new Object[] {number(Math.min(50.0, 25.0 * p))};
+			case "cow" -> new Object[] {number(120.0 / p)};
+			case "bee" -> new Object[] {number(p * 100.0 - 100.0)};
+			default -> new Object[0];
+		};
+		List<FormattedCharSequence> tip = new ArrayList<>();
+		tip.add(Component.translatable("bloompets.screen.bonus").withStyle(st -> st.withColor(GOLD & 0xFFFFFF).withBold(true)).getVisualOrderText());
+		tip.addAll(font.split(Component.translatable("bloompets.bonus." + kind, args).withStyle(st -> st.withColor(SKILL_TEXT & 0xFFFFFF)), 200));
+		tip.addAll(font.split(Component.translatable("combat".equals(pet.category()) ? "bloompets.screen.bonus.party" : "bloompets.screen.bonus.near")
+				.withStyle(ChatFormatting.DARK_GRAY), 200));
+		return tip;
+	}
+
 	/** The skill in slot {@code index} (0 to 9: the left column, then the right), or null for an empty slot. */
 	private PetSkills.Slot skillAt(PetsNetwork.Entry pet, int index) {
 		if (bloomView || pet.kind() != Pets.Kind.BLOOM) {
@@ -731,6 +766,11 @@ public final class PetScreen extends Screen {
 			}
 
 			PetSkills.Slot slot = skillAt(pet, i);
+
+			if (bonusSlot(pet, i)) {
+				g.renderTooltip(font, bonusTip(pet), mouseX, mouseY);
+				return;
+			}
 
 			if (slot == null) {
 				String key = bloomView ? "bloompets.screen.slot.bloom" : pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.slot.modded"
@@ -778,6 +818,14 @@ public final class PetScreen extends Screen {
 		boolean hover = overSlot(x, y, mouseX, mouseY);
 		PetSkills.Slot slot = skillAt(pet, index);
 		g.fill(x, y, x + SLOT, y + SLOT, 0xFF0E0C0A);
+
+		if (bonusSlot(pet, index)) {
+			frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : SKILL_EDGE);
+			EntityType<?> type = EntityType.byString(pet.type()).orElse(null);
+			SpawnEggItem egg = type == null ? null : SpawnEggItem.byId(type);
+			g.renderItem(new ItemStack(egg == null ? Items.LEAD : egg), x + 1, y + 1);
+			return;
+		}
 
 		if (slot == null) {
 			frame(g, x, y, x + SLOT, y + SLOT, hover ? ACCENT : PANEL_EDGE);

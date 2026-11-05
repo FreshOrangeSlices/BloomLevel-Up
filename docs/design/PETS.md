@@ -302,6 +302,15 @@ storage until it cheers up. Hunger 0 to 20: a point every 4 minutes in the party
 favourite food fills 6 (feeding it, or by itself from its storage at 14 and under); 15 and up it slowly heals. The
 screen shows both bars (with tooltips) and "sulking" in its status.
 
+**Phase 3b (built, 2026-11-05): bonuses for the owner** (`PetBonuses`), every kind in the roster (the Vex's when it
+comes), the plugin's numbers times the pet's bonus power (1 at level 1, 1.45 at 100). Who gives one: the party pet, and
+up to 3 of the owner's non-combat pets within 32 blocks of them (the nearest; one of each kind, the highest level); not
+while sulking or fainted. Stat bonuses are modifiers on the player that go when the pet does. The Bee and the Pig use
+Bloom's own Growth Aura (crops and saplings, no hoe, its chance times the Bee's power) and Timber: Bloom Pets keeps a
+short-lived flag on the player (`bloompets.growth`/`growthUntil`, `timberUntil` in their persistent data) and Bloom's
+`UtilitySkill` honours it, so there's one aura and one Timber, and owning the Major too is no faster. The screen: the
+bonus under the mouse on a pet's level line, and in a non-combat pet's first slot (its spawn egg).
+
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 
 1. **The mod and the list**: the `bloompets` mod and its CI job; tracking owned pets; the party (3 places); the screen with

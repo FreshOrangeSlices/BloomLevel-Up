@@ -20,6 +20,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -160,6 +163,28 @@ public final class UtilitySkill {
 		return service().isMajorActive(BloomAttachments.profile(player), majorId);
 	}
 
+	/**
+	 * Bloom Pets' Bee and Pig give their owner this Growth Aura (crops and saplings, no hoe needed, a little stronger
+	 * with the Bee's level) and this Timber, rather than copies of them, so owning the Major as well is no faster. Bloom
+	 * Pets keeps them on in the player's persistent data ({@code bloompets}: {@code growth} with {@code growthUntil},
+	 * {@code timberUntil}, in Overworld game time) while the pet is near; without Bloom Pets nothing sets them.
+	 */
+	private static CompoundTag pets(ServerPlayer player) {
+		CompoundTag data = player.getPersistentData();
+		return data.contains("bloompets", Tag.TAG_COMPOUND) ? data.getCompound("bloompets") : null;
+	}
+
+	/** The Bee's strength (its bonus power, 1 or more), or 0 without one near. */
+	private static double petGrowth(ServerPlayer player) {
+		CompoundTag pets = pets(player);
+		return pets != null && pets.getLong("growthUntil") > player.server.overworld().getGameTime() ? pets.getDouble("growth") : 0.0;
+	}
+
+	private static boolean petTimber(ServerPlayer player) {
+		CompoundTag pets = pets(player);
+		return pets != null && pets.getLong("timberUntil") > player.server.overworld().getGameTime();
+	}
+
 	private static int stat(ServerPlayer player, String statId) {
 		return service().statValue(BloomAttachments.profile(player), statId);
 	}
@@ -284,7 +309,7 @@ public final class UtilitySkill {
 		if (state.is(BloomTags.VEIN_MINEABLE) && tool.is(ItemTags.PICKAXES) && player.hasCorrectToolForDrops(state)
 				&& active(player, UtilityIds.VEIN_MINING)) {
 			CHAIN_QUEUE.add(new ChainJob(player, level, pos.immutable(), state.getBlock(), tool.getItem(), ChainKind.VEIN));
-		} else if (!placed && state.is(BloomTags.TIMBER_LOGS) && tool.is(ItemTags.AXES) && active(player, UtilityIds.TIMBER)) {
+		} else if (!placed && state.is(BloomTags.TIMBER_LOGS) && tool.is(ItemTags.AXES) && (active(player, UtilityIds.TIMBER) || petTimber(player))) {
 			CHAIN_QUEUE.add(new ChainJob(player, level, pos.immutable(), state.getBlock(), tool.getItem(), ChainKind.TIMBER));
 		}
 	}
@@ -562,14 +587,18 @@ public final class UtilitySkill {
 	 * Public for game tests.
 	 */
 	public static int growthAura(ServerPlayer player) {
-		if (player.isSpectator() || !(player.getMainHandItem().is(ItemTags.HOES) || player.getOffhandItem().is(ItemTags.HOES))
-				|| !active(player, UtilityIds.GROWTH_AURA) || !(player.level() instanceof ServerLevel level)) {
+		boolean major = (player.getMainHandItem().is(ItemTags.HOES) || player.getOffhandItem().is(ItemTags.HOES))
+				&& active(player, UtilityIds.GROWTH_AURA);
+		double bee = petGrowth(player);
+
+		if (player.isSpectator() || !major && bee <= 0 || !(player.level() instanceof ServerLevel level)) {
 			return 0;
 		}
 
 		int radius = config().growthAuraRadius;
 		int height = config().growthAuraHeight;
-		double chance = config().growthAuraChance;
+		// One aura, never two: the Bee's is a little stronger with its level, and takes saplings too.
+		double chance = Math.min(1.0, config().growthAuraChance * Math.max(major ? 1.0 : 0.0, bee));
 		BlockPos center = player.blockPosition();
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		int grown = 0;
@@ -577,7 +606,8 @@ public final class UtilitySkill {
 		for (BlockPos cursor : BlockPos.betweenClosed(center.offset(-radius, -height, -radius), center.offset(radius, height, radius))) {
 			BlockState state = level.getBlockState(cursor);
 
-			if (!state.is(BloomTags.GROWTH_AURA_CROPS) || !state.isRandomlyTicking() || random.nextDouble() >= chance) {
+			if (!(state.is(BloomTags.GROWTH_AURA_CROPS) || bee > 0 && state.is(BlockTags.SAPLINGS)) || !state.isRandomlyTicking()
+					|| random.nextDouble() >= chance) {
 				continue;
 			}
 

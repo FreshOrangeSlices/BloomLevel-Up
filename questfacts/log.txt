@@ -1,14 +1,21 @@
-sophisticated-backpacks 1.20.1-3.26.19.2239 sophisticatedbackpacks-1.20.1-3.26.19.2239.jar deps=[('vRYk0bv7', 'optional'), ('BAscRYKm', 'optional'), ('u6dRKJwZ', 'optional'), ('b1fMg6sH', 'optional'), ('nmoqTijg', 'required'), ('DMu0oBKf', 'optional'), ('vvuO3ImH', 'optional')]
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=['164'] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-  net/p3pp3rf1y/sophisticatedbackpacks/client/KeybindHandler.class: key.category.sophisticatedbackpacks.main consts=[] []
-sophisticated-core 1.20.1-1.5.26.2457 sophisticatedcore-1.20.1-1.5.26.2457.jar deps=[]
-  net/p3pp3rf1y/sophisticatedcore/client/ClientEventHandler.class: key.category.sophisticatedcore.main consts=[] []
-  net/p3pp3rf1y/sophisticatedcore/client/ClientEventHandler.class: key.category.sophisticatedcore.main consts=[] []
-  net/p3pp3rf1y/sophisticatedcore/client/ClientEventHandler.class: key.category.sophisticatedcore.main consts=[] []
-3 carryon files
+barrier.json: {"exhaust": 0.0, "cooldown": {"duration": 40.0}}
+battle_banner.json: {"exhaust": 0.0, "cooldown": {"duration": 45.0}}
+blessed_strikes.json: {"exhaust": 0.0, "cooldown": {"duration": 12.0}}
+circle_of_healing.json: {"exhaust": 0.0, "cooldown": {"duration": 10.0}}
+divine_protection.json: {"exhaust": 0.0, "cooldown": {"duration": 30.0}}
+flash_heal.json: {"exhaust": 0.0, "cooldown": {"duration": 6.0}}
+heal.json: {"cooldown": {"duration": 4.0}, "exhaust": 0.0}
+holy_beam.json: {"exhaust": 0.0, "cooldown": {"duration": 10.0, "proportional": true}}
+holy_shock.json: {"exhaust": 0.0, "cooldown": {"group": "weapon", "duration": 3.0}}
+immolation.json: {"exhaust": 0.0, "cooldown": {"duration": 12.0}}
+judgement.json: {"cooldown": {"duration": 15.0}, "exhaust": 0.0}
+levitate.json: {"cooldown": {"duration": 24.0, "proportional": true}, "exhaust": 0.0}
+lightwell.json: {"exhaust": 0.0, "cooldown": {"duration": 45.0, "haste_affected": false}}
+lightwell_heal.json: {"cooldown": {"duration": 1.5}, "exhaust": 0.0}
+penance.json: {"exhaust": 0.0, "cooldown": {"duration": 12.0, "proportional": true}}
+15 paladins spells in the pack's data pack
+config/carryon-common.toml: [settings] | 	useWhitelistEntities = true |  | [whitelist] | 	allowedEntities = ["minecraft:chicken", "minecraft:cow", "minecraft:mooshroom", "minecraft:pig", "minecraft:sheep", "minecraft:rabbit", "minecraft:goat", "minecraft:fox", "minecraft:cat", "minecraft:ocelot", "minecraft:wolf", "minecraft:parrot", "minecraft:horse", "minecraft:donkey", "minecraft:mule", "minecraft:llama", "minecraft:trader_llama"
+mods/sophisticatedbackpacks-1.20.1-3.26.19.2239.jar
+mods/sophisticatedcore-1.20.1-1.5.26.2457.jar
+mods/legionwarex-addon-forge-1.20.1-0.1.0+build.351.jar
+mods/bloompets-forge-1.20.1-0.1.0+build.351.jar

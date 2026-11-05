@@ -3,6 +3,7 @@ package com.freshorangeslices.bloompets.client;
 import com.freshorangeslices.bloompets.BloomPets;
 import com.freshorangeslices.bloompets.PetBonuses;
 import com.freshorangeslices.bloompets.PetSkills;
+import com.freshorangeslices.bloompets.PetTrees;
 import com.freshorangeslices.bloompets.Pets;
 import com.freshorangeslices.bloompets.network.PetsNetwork;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -118,6 +119,11 @@ public final class PetScreen extends Screen {
 	private Button partyButton;
 	private Button storageButton;
 	private Button postButton;
+	/** A question waiting for yes or no (picking or resetting a tree), drawn over the pet, and what yes does. */
+	private Component confirmText;
+	private Runnable confirmYes;
+	private Button yesButton;
+	private Button noButton;
 	private int ticks;
 	/** A tooltip for something drawn in the pet's panel (its mood or hunger), drawn last, over the buttons. */
 	private List<FormattedCharSequence> panelTip;
@@ -236,6 +242,18 @@ public final class PetScreen extends Screen {
 		postButton = addRenderableWidget(new PetButton(mainLeft() + 128, buttonsY, 40, 18, Component.empty(), b -> act(PetsNetwork.Action.POST)));
 		storageButton = addRenderableWidget(new PetButton(mainRight() - 44, buttonsY, 44, 18, Component.translatable("bloompets.screen.storage"),
 				b -> act(PetsNetwork.Action.STORAGE)));
+		int middle = (mainLeft() + mainRight()) / 2;
+		yesButton = addRenderableWidget(new PetButton(middle - 44, canvasBottom() - 24, 40, 16, Component.translatable("bloompets.screen.yes"), b -> {
+			Runnable yes = confirmYes;
+			closeConfirm();
+
+			if (yes != null) {
+				yes.run();
+			}
+		}));
+		noButton = addRenderableWidget(new PetButton(middle + 4, canvasBottom() - 24, 40, 16, Component.translatable("bloompets.screen.no"),
+				b -> closeConfirm()));
+		closeConfirm();
 		updateButtons();
 	}
 
@@ -259,7 +277,12 @@ public final class PetScreen extends Screen {
 		PetsNetwork.Entry pet = current();
 		boolean any = pet != null;
 		callButton.visible = partyButton.visible = storageButton.visible = postButton.visible = any;
-		viewButton.visible = any;
+		// The Pet / Bloom switch comes with One and the Same.
+		if (!list.oneAndTheSame()) {
+			bloomView = false;
+		}
+
+		viewButton.visible = any && list.oneAndTheSame();
 		viewButton.setTooltip(Tooltip.create(Component.translatable(bloomView ? "bloompets.screen.view.bloom" : "bloompets.screen.view.pet")));
 
 		if (!any) {
@@ -294,6 +317,11 @@ public final class PetScreen extends Screen {
 		partyButton.setMessage(wait > 0 ? Component.translatable(key + ".wait", time(wait)) : Component.translatable(key));
 		partyButton.setTooltip(Tooltip.create(wait > 0 ? Component.translatable("bloompets.party.wait", time(wait))
 				: Component.translatable("bloompets.screen.party.tip")));
+	}
+
+	private static String hours(int ticks) {
+		int seconds = (ticks + 19) / 20;
+		return String.format(Locale.ROOT, "%d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60);
 	}
 
 	private static String time(int ticks) {
@@ -333,6 +361,22 @@ public final class PetScreen extends Screen {
 
 	@Override
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		// A question on screen takes every click until it's answered.
+		if (confirmText != null) {
+			return yesButton.mouseClicked(mouseX, mouseY, button) || noButton.mouseClicked(mouseX, mouseY, button) || true;
+		}
+
+		PetsNetwork.Entry chosen = current();
+
+		if (bloomView && chosen != null) {
+			for (int i = 0; i < SLOTS * 2; i++) {
+				if (overSlot(i < SLOTS ? mainLeft() : mainRight() - SLOT, slotY(i % SLOTS), (int) mouseX, (int) mouseY)) {
+					bloomClick(chosen, i);
+					return true;
+				}
+			}
+		}
+
 		List<PetsNetwork.Entry> shown = shown();
 		int rowRight = rowRight(shown.size());
 
@@ -476,8 +520,11 @@ public final class PetScreen extends Screen {
 
 		// Its name, large and gold as the hub's headings; its kind under it; which view the slots show, by the switch.
 		Component view = Component.translatable(bloomView ? "bloompets.screen.view.bloom.short" : "bloompets.screen.view.pet.short");
-		int viewX = mainRight - 20 - font.width(view);
-		g.drawString(font, view, viewX, top + 12, MUTED);
+		int viewX = list.oneAndTheSame() ? mainRight - 20 - font.width(view) : mainRight;
+
+		if (list.oneAndTheSame()) {
+			g.drawString(font, view, viewX, top + 12, MUTED);
+		}
 		big(g, bold(pet.name(), (int) ((viewX - 6 - mainLeft) / BIG)), mainLeft, top + 9, GOLD);
 		Component level = Component.translatable("bloompets.screen.level", pet.level());
 		g.drawString(font, level, mainLeft, top + 25, pet.level() >= PetSkills.Slot.MAX.level ? GOLD : ACCENT);
@@ -515,6 +562,10 @@ public final class PetScreen extends Screen {
 		moodRow(g, pet, mood, barX0, mainLeft, mainRight, y + 22, mouseX, mouseY);
 		labelled(g, "bloompets.screen.status", state(pet), mainLeft, y + 33, mainRight);
 		labelled(g, "bloompets.screen.where", where(pet), mainLeft, y + 44, mainRight);
+
+		if (confirmText != null) {
+			drawConfirm(g);
+		}
 	}
 
 	/** Mood (hearts as a bar: green, gold, red when it sulks, pink when it loves you) and hunger, side by side. */
@@ -603,7 +654,7 @@ public final class PetScreen extends Screen {
 			g.fill(x1 - i * 2 - 2, y0, x1 - i * 2, y1, alpha);
 		}
 
-		LivingEntity model = pet == null ? null : model(pet);
+		LivingEntity model = pet == null || confirmText != null ? null : model(pet);
 
 		if (model != null) {
 			float size = Math.max(model.getBbHeight(), model.getBbWidth() * 0.9F);
@@ -728,6 +779,193 @@ public final class PetScreen extends Screen {
 		return mouseX >= x && mouseX < x + SLOT && mouseY >= y && mouseY < y + SLOT;
 	}
 
+	// One and the Same: the Bloom view.
+
+	private void confirm(Component text, Runnable yes) {
+		confirmText = text;
+		confirmYes = yes;
+		yesButton.visible = noButton.visible = true;
+	}
+
+	private void closeConfirm() {
+		confirmText = null;
+		confirmYes = null;
+
+		if (yesButton != null) {
+			yesButton.visible = noButton.visible = false;
+		}
+	}
+
+	/** The question, in a box over the pet (its model isn't drawn meanwhile), with yes and no under it. */
+	private void drawConfirm(GuiGraphics g) {
+		int x0 = mainLeft() + SLOT + 6;
+		int x1 = mainRight() - SLOT - 6;
+		int y0 = canvasTop();
+		int y1 = canvasBottom();
+		g.fill(x0, y0, x1, y1, 0xF2141210);
+		frame(g, x0, y0, x1, y1, ACCENT);
+		corners(g, x0, y0, x1, y1);
+		List<FormattedCharSequence> lines = font.split(confirmText, x1 - x0 - 12);
+		int y = y0 + 10;
+
+		for (FormattedCharSequence line : lines) {
+			g.drawString(font, line, (x0 + x1 - font.width(line)) / 2, y, TEXT);
+			y += 10;
+		}
+	}
+
+	private static ResourceLocation effectIcon(PetTrees.Effect effect) {
+		return new ResourceLocation("bloomlevelup", "textures/icon/major/combat/" + effect.icon + ".png");
+	}
+
+	/** What a slot holds in the Bloom view: a tree to pick, one of its tree's effects, the tree itself, the reset, or nothing. */
+	private Object bloomAt(PetsNetwork.Entry pet, int index) {
+		if (!pet.treeable()) {
+			return null;
+		}
+
+		PetTrees.Tree tree = PetTrees.Tree.byId(pet.tree());
+
+		if (tree == null) {
+			return index < PetTrees.Tree.values().length ? PetTrees.Tree.values()[index] : null;
+		}
+
+		if (index < tree.effects().size()) {
+			return tree.effects().get(index);
+		}
+
+		return index == SLOTS ? "tree" : index == SLOTS * 2 - 1 ? "reset" : null;
+	}
+
+	private boolean abilityOff(PetsNetwork.Entry pet, PetTrees.Effect effect) {
+		return java.util.Arrays.asList(pet.abilitiesOff().split(",")).contains(effect.id());
+	}
+
+	private void bloomSlot(GuiGraphics g, PetsNetwork.Entry pet, int index, int x, int y, boolean hover) {
+		Object what = bloomAt(pet, index);
+		g.fill(x, y, x + SLOT, y + SLOT, 0xFF0E0C0A);
+
+		if (what == null) {
+			frame(g, x, y, x + SLOT, y + SLOT, hover ? ACCENT : PANEL_EDGE);
+			g.drawCenteredString(font, "?", x + SLOT / 2, y + 5, FAINT);
+			return;
+		}
+
+		if (what instanceof PetTrees.Tree tree) {
+			frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : SKILL_EDGE);
+			g.renderItem(new ItemStack(tree.icon), x + 1, y + 1);
+
+			if (pet.treeWait() > 0) {
+				dim(g, x, y, "");
+			}
+
+			return;
+		}
+
+		if (what instanceof PetTrees.Effect effect) {
+			boolean open = pet.level() >= effect.level;
+			frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : open ? SKILL_EDGE : PANEL_EDGE);
+			RenderSystem.enableBlend();
+			g.blit(effectIcon(effect), x + 1, y + 1, 16, 16, 0.0F, 0.0F, 64, 64, 64, 64);
+
+			if (!open) {
+				dim(g, x, y, Integer.toString(effect.level));
+			} else if (effect.cooldown && abilityOff(pet, effect)) {
+				dim(g, x, y, "");
+				g.pose().pushPose();
+				g.pose().translate(0.0F, 0.0F, 200.0F);
+				g.drawCenteredString(font, "✕", x + SLOT / 2, y + 5, HEALTH);
+				g.pose().popPose();
+			}
+
+			return;
+		}
+
+		PetTrees.Tree tree = PetTrees.Tree.byId(pet.tree());
+		boolean reset = "reset".equals(what);
+		frame(g, x, y, x + SLOT, y + SLOT, hover ? (reset ? HEALTH : GOLD) : reset ? PANEL_EDGE : SKILL_EDGE);
+		g.renderItem(new ItemStack(reset ? Items.BARRIER : tree.icon), x + 1, y + 1);
+	}
+
+	/** A slot's dark veil (over its icon), with a word on it. */
+	private void dim(GuiGraphics g, int x, int y, String text) {
+		g.pose().pushPose();
+		g.pose().translate(0.0F, 0.0F, 200.0F);
+		g.fill(x + 1, y + 1, x + SLOT - 1, y + SLOT - 1, 0xC8100E0C);
+
+		if (!text.isEmpty()) {
+			g.drawString(font, text, x + (SLOT - font.width(text)) / 2 + 1, y + 5, MUTED);
+		}
+
+		g.pose().popPose();
+	}
+
+	private void bloomTip(GuiGraphics g, PetsNetwork.Entry pet, int index, int mouseX, int mouseY) {
+		Object what = bloomAt(pet, index);
+		List<FormattedCharSequence> lines = new ArrayList<>();
+		boolean companion = pet.kind() == Pets.Kind.MODDED;
+
+		if (what == null) {
+			lines.addAll(font.split(Component.translatable(pet.treeable() ? "bloompets.screen.slot.bloom" : "bloompets.screen.tree.none"), 200));
+		} else if (what instanceof PetTrees.Tree tree) {
+			lines.add(title(Component.translatable("bloompets.screen.tree.title", Component.translatable("bloompets.tree." + tree.id()))));
+
+			for (PetTrees.Effect effect : tree.effects()) {
+				lines.add(Component.translatable("bloompets.screen.tree.line", effect.level, Component.translatable("bloompets.effect." + effect.id()))
+						.withStyle(st -> st.withColor(SKILL_TEXT & 0xFFFFFF)).getVisualOrderText());
+			}
+
+			lines.addAll(font.split(pet.treeWait() > 0 ? Component.translatable("bloompets.screen.tree.wait", hours(pet.treeWait()))
+					.withStyle(ChatFormatting.RED) : Component.translatable(companion ? "bloompets.screen.tree.pick.companion"
+					: "bloompets.screen.tree.pick").withStyle(ChatFormatting.DARK_GRAY), 200));
+		} else if (what instanceof PetTrees.Effect effect) {
+			boolean open = pet.level() >= effect.level;
+			lines.add(title(Component.translatable("bloompets.effect." + effect.id())));
+			lines.add(Component.translatable(open ? "bloompets.screen.skill.open" : "bloompets.screen.skill.locked", effect.level)
+					.withStyle(st -> st.withColor((open ? XP_FILL : MUTED) & 0xFFFFFF)).getVisualOrderText());
+			lines.addAll(font.split(Component.translatable("bloompets.effect." + effect.id() + ".desc")
+					.withStyle(st -> st.withColor(SKILL_TEXT & 0xFFFFFF)), 200));
+
+			if (effect.cooldown && open) {
+				lines.addAll(font.split(Component.translatable(abilityOff(pet, effect) ? "bloompets.screen.ability.off" : "bloompets.screen.ability.on")
+						.withStyle(ChatFormatting.DARK_GRAY), 200));
+			}
+
+			if (!companion && !pet.party() && !pet.posted()) {
+				lines.addAll(font.split(Component.translatable("bloompets.screen.tree.resting").withStyle(ChatFormatting.GRAY), 200));
+			}
+		} else if ("tree".equals(what)) {
+			lines.add(title(Component.translatable("bloompets.screen.tree.follows",
+					Component.translatable("bloompets.tree." + pet.tree()))));
+			lines.addAll(font.split(Component.translatable("bloompets.screen.tree.how").withStyle(ChatFormatting.GRAY), 200));
+		} else {
+			lines.add(title(Component.translatable("bloompets.screen.tree.reset")));
+			lines.addAll(font.split(Component.translatable(companion ? "bloompets.screen.tree.reset.companion" : "bloompets.screen.tree.reset.pet")
+					.withStyle(ChatFormatting.RED), 200));
+		}
+
+		g.renderTooltip(font, lines, mouseX, mouseY);
+	}
+
+	private FormattedCharSequence title(MutableComponent text) {
+		return text.withStyle(st -> st.withColor(GOLD & 0xFFFFFF).withBold(true)).getVisualOrderText();
+	}
+
+	private void bloomClick(PetsNetwork.Entry pet, int index) {
+		Object what = bloomAt(pet, index);
+		boolean companion = pet.kind() == Pets.Kind.MODDED;
+
+		if (what instanceof PetTrees.Tree tree && pet.treeWait() <= 0) {
+			confirm(Component.translatable("bloompets.screen.tree.confirm", pet.name(), Component.translatable("bloompets.tree." + tree.id())),
+					() -> PetsClient.act(PetsNetwork.Action.TREE, pet.pet(), tree.id()));
+		} else if (what instanceof PetTrees.Effect effect && effect.cooldown && pet.level() >= effect.level) {
+			PetsClient.act(PetsNetwork.Action.ABILITY, pet.pet(), effect.id());
+		} else if ("reset".equals(what)) {
+			confirm(Component.translatable(companion ? "bloompets.screen.tree.confirm.reset.companion" : "bloompets.screen.tree.confirm.reset",
+					pet.name()), () -> PetsClient.act(PetsNetwork.Action.TREE_RESET, pet.pet()));
+		}
+	}
+
 	/** A non-combat Bloom pet's first slot holds its bonus for you (it has no skill tree). */
 	private boolean bonusSlot(PetsNetwork.Entry pet, int index) {
 		return index == 0 && !bloomView && pet.kind() == Pets.Kind.BLOOM && PetSkills.Kind.byId(pet.skills()) == null;
@@ -772,6 +1010,11 @@ public final class PetScreen extends Screen {
 
 			if (!overSlot(x, slotY(i % SLOTS), mouseX, mouseY)) {
 				continue;
+			}
+
+			if (bloomView) {
+				bloomTip(g, pet, i, mouseX, mouseY);
+				return;
 			}
 
 			PetSkills.Slot slot = skillAt(pet, i);
@@ -825,6 +1068,11 @@ public final class PetScreen extends Screen {
 	 */
 	private void slot(GuiGraphics g, PetsNetwork.Entry pet, int index, int x, int y, int mouseX, int mouseY) {
 		boolean hover = overSlot(x, y, mouseX, mouseY);
+		if (bloomView) {
+			bloomSlot(g, pet, index, x, y, hover);
+			return;
+		}
+
 		PetSkills.Slot slot = skillAt(pet, index);
 		g.fill(x, y, x + SLOT, y + SLOT, 0xFF0E0C0A);
 

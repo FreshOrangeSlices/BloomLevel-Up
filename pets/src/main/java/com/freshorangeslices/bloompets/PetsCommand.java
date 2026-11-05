@@ -36,6 +36,9 @@ public final class PetsCommand {
 				.then(Commands.literal("call").then(pet().executes(c -> act(c, Action.CALL))))
 				.then(Commands.literal("storage").then(pet().executes(c -> act(c, Action.STORAGE))))
 				.then(Commands.literal("post").then(pet().executes(c -> act(c, Action.POST))))
+				.then(Commands.literal("tree").then(Commands.argument("tree", StringArgumentType.word())
+						.suggests((c, b) -> SharedSuggestionProvider.suggest(List.of("sword", "axe", "trident", "unarmed", "reset"), b))
+						.then(pet().executes(PetsCommand::tree))))
 				.then(Commands.literal("species").executes(PetsCommand::species))
 				.then(Commands.literal("screen").executes(c -> {
 					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
@@ -129,6 +132,27 @@ public final class PetsCommand {
 
 		context.getSource().sendSuccess(() -> Component.translatable("bloompets.command.level", record.name, PetLevels.level(living)), true);
 		return PetLevels.level(living);
+	}
+
+	/** One and the Same: pick a pet's weapon tree, or reset it. */
+	private static int tree(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+		ServerPlayer player = context.getSource().getPlayerOrException();
+		String wanted = StringArgumentType.getString(context, "pet");
+		String tree = StringArgumentType.getString(context, "tree");
+		PetRegistry.Record record = find(player, wanted);
+
+		if (record == null) {
+			context.getSource().sendFailure(Component.translatable("bloompets.command.nopet", wanted));
+			return 0;
+		}
+
+		Component message = "reset".equals(tree) ? PetTrees.reset(player, record) : PetTrees.pick(player, record, tree);
+
+		if (message != null) {
+			context.getSource().sendSuccess(() -> message, false);
+		}
+
+		return 1;
 	}
 
 	private static int list(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

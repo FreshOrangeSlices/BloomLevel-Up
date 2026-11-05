@@ -239,9 +239,9 @@ Copycat
  | Select exactly one owned eligible weapon-Major effect and universalize it across compatible weapons. Selection can be freely changed; source toggle controls Copycat active state.
  | 
 One and the Same
- | 4-5 TBD
- | Future Combat + Pet requirement
- | Future Combat/Pets bridge. Exact scope and cost wait for the Pet system.
+ | 3
+ | Bloom Pets
+ | The Combat/Pets bridge (FreshOrangeSlices, 2026-11-05; docs/design/PETS.md): your combat pets and companions each follow a weapon tree (Sword, Axe, Trident, Unarmed), its effects opening with the pet's level. Shown under Copycat.
  | 
 Current cost pressure: weapon-Major ranks total 20 Major Levels with Spear included. Priced Universal Majors total 30 Major Levels before One and the Same. Combat therefore currently contains 50 purchasable Major Levels before the Pet bridge, intentionally exceeding the player’s total lifetime Major budget when other tabs are considered.
 7. Copycat rules
@@ -297,7 +297,7 @@ The separate “Combat Major Interactions & Technical Rules” document remains 
 • 5. Finalize Aura Sword prerequisite relationship if one is desired.
 • 6. Finalize Trident Lightning target-search radius and exact target-selection order.
 • 7. Finalize Lightning Summon control mapping and 10% durability rounding at very low durability.
-• 8. Finalize One and the Same after the Pet system is designed.
+• 8. One and the Same: done with Bloom Pets' Phase 4 (2026-11-05).
 • 9. Finalize explicit control-conflict pairs once input-sensitive Majors are implemented.
 • 10. Decide whether Long Reach is a valid Copycat source.
 Current status: Combat is structurally defined enough for implementation in chunks. Remaining work is mostly numeric tuning, controls, edge-case validation, and future Pets integration.

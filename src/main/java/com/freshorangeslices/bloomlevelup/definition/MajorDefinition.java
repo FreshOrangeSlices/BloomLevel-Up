@@ -51,6 +51,8 @@ public record MajorDefinition(
 	public static final String FLAG_COPYCAT_INELIGIBLE = "copycat_ineligible";
 	public static final String FLAG_PRIMARY_HIT_ONLY = "primary_hit_only";
 	public static final String FLAG_DISABLED = "disabled";
+	/** Shown in the hub right under Copycat (One and the Same: FreshOrangeSlices, 2026-11-05). */
+	public static final String FLAG_UNDER_COPYCAT = "under_copycat";
 	/** Prefix marking a prerequisite as "any one Major in this group". */
 	public static final String GROUP_PREFIX = "#";
 

@@ -53,6 +53,8 @@ public final class SmokeGameTests {
 		helper.assertTrue(categories == 4, "expected 4 Bloom categories, found " + categories);
 		helper.assertTrue(majors > 50, "expected the Majors to load, found " + majors);
 		helper.assertTrue(BloomServices.definitions().warnings().isEmpty(), "definition warnings: " + BloomServices.definitions().warnings());
+		helper.assertTrue(BloomServices.definitions().major("bloomlevelup:combat/one_and_the_same").filter(major -> major.cost() == 3).isPresent(),
+				"One and the Same is in, for 3 Major Levels (Bloom Pets' weapon trees)");
 		helper.succeed();
 	}
 

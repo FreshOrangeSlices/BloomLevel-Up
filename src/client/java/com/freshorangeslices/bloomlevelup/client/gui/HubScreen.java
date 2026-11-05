@@ -801,7 +801,12 @@ public final class HubScreen extends Screen {
 			index++;
 		}
 
-		// Universal Majors: rows along the bottom, the priciest (Copycat) in the middle, the rest around it in order.
+		// Universal Majors: rows along the bottom, the priciest (Copycat) in the middle, the rest around it in order;
+		// those flagged to sit under Copycat (One and the Same) go right below it.
+		List<MajorDefinition> underCopycat = new ArrayList<>(universal.stream()
+				.filter(major -> major.hasFlag(MajorDefinition.FLAG_UNDER_COPYCAT)).toList());
+		universal.removeAll(underCopycat);
+
 		if (universal.size() > 2) {
 			MajorDefinition priciest = universal.stream().max(java.util.Comparator.comparingInt(MajorDefinition::cost)).orElseThrow();
 			universal.remove(priciest);
@@ -815,6 +820,15 @@ public final class HubScreen extends Screen {
 			int inRow = Math.min(UNIVERSALS_PER_ROW, universal.size() - row * UNIVERSALS_PER_ROW);
 			int col = k % UNIVERSALS_PER_ROW;
 			nodes.add(new Node(universal.get(k), null, (int) Math.round((col - (inRow - 1) / 2.0) * CELL), top + row * CELL, false));
+		}
+
+		Node copycat = nodes.stream().filter(node -> node.major() != null && node.major().hasFlag(MajorDefinition.FLAG_COPIES_WEAPON_MAJOR))
+				.findFirst().orElse(null);
+		int belowX = copycat == null ? 0 : copycat.x();
+		int belowY = copycat == null ? top + (universal.size() + UNIVERSALS_PER_ROW - 1) / UNIVERSALS_PER_ROW * CELL : copycat.y() + CELL;
+
+		for (int k = 0; k < underCopycat.size(); k++) {
+			nodes.add(new Node(underCopycat.get(k), null, belowX, belowY + k * CELL, false));
 		}
 	}
 

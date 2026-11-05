@@ -250,13 +250,14 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
   view shows the four trees; click one, confirm; then its effects fill the slots, dimmed until their level; a Reset
   button warns first. **A Bloom pet's reset puts it back to level 1; a modded companion's costs a 5-hour wait instead**
   (its level is its own mod's, which Pets doesn't touch). **Migamigos companions use their own Amigo level** as their
-  level (read from Migamigos); Zoni's companions, with none, use Bloom Pets'. Proposal (not decided):
+  level (read from Migamigos); Zoni's companions, with none, use Bloom Pets'. A pet's Execute: +30% (2026-11-05). The
+  trees (agreed 2026-11-05, Predator rather than First Strike in the Trident's gap):
 
   | Tree | 10 | 25 | 50 | 75 |
   |---|---|---|---|---|
   | Sword | Slash | Full Sweep | Execute | Aura Sword |
   | Axe | Armor Break | Guaranteed Critical | Charge Attack (cooldown) | a leap on its target (cooldown) |
-  | Trident | Lightning Shock | First Strike | Lightning Summon (cooldown) | Overkill |
+  | Trident | Lightning Shock | Predator | Lightning Summon (cooldown) | Overkill |
   | Unarmed | Brawler | Combo | Bloodlust | Disarm |
 - **Its own skills and its tree work together** (2026-11-05: strong on purpose).
 - **One and the Same off or lost** (toggled off, or a Major reset): the pets' trees are disabled, their picks and
@@ -350,6 +351,25 @@ Llama spits at monsters (10 blocks), the Cat and Ocelot keep creepers and phanto
 100: half again the area. A pet at its post uses its skills, faints rather than dying, gets hungry and glum (a point
 every 2 minutes) only while its owner's online, and earns **job XP**: a point a crop, an item or bottle, 10 a find, 2 a
 spit, 30 a minute at most (guards earn their fighting XP). Calling it, or adding it to the party, takes it off its post.
+
+**Phase 4 (built, 2026-11-05): One and the Same.** In Bloom: the Major switched on, 3 Major Levels, drawn under Copycat
+(flag `under_copycat`), its text saying what it does. In Bloom Pets (`PetTrees`): the four trees above on combat Bloom
+pets and companions, each pet's pick, its switched-off abilities and a companion's wait kept on the pet (and in its
+entry); `BloomBridge` asks Bloom's `BloomApi.isMajorActive` by name whether its owner has the Major (remembered while
+they're away, so a pet at its post keeps its tree as they left it), and reads Bloom's Bleed and boss list. Effects on a
+pet's own melee hits, Bloom's numbers where they fit a pet (Slash 50% Bleed 3 s, Full Sweep 1 + the hit around the
+target, Aura Sword every 5th hit 4 blocks, Armor Break half the damage as durability, Lightning Shock 3 sparks at 50%
+once per 2 s, Predator +10%/hit to +50%, Overkill 60% of the excess to 3 enemies, Combo +0.25/hit to +5, Bloodlust +8%
+a kill for 10 s to 5 stacks, Disarm 30%); for a pet: Brawler +3 (a player's +6 is for bare fists), Guaranteed Critical
+×1.35 (no −2 penalty, which would make a wolf weaker), Execute +30% under 50% (bosses) or 70%, Charge Attack a double
+hit every 25 s, Leap onto a target 4 to 12 blocks off every 25 s (its landing hit +50%), Lightning Summon every 25 s:
+the look of lightning, 6 damage and fire to its target only. A tree's sweeps and sparks set off nothing more (no skills,
+no second sweep). Migamigos companions use their own Amigo level and XP (`Amigos`, read by name; Bloom Pets never adds
+to it). The screen: the Pet / Bloom switch only with the Major; the Bloom view picks a tree (its four effects listed),
+then shows them with Bloom's own icons, dimmed until their level, cooldown ones switching off with a click (a red ✕),
+the tree at the top right and Reset at the bottom right, both asking first in a box over the pet. `/bloompets tree
+<sword|axe|trident|unarmed|reset> <pet>`. Game tests: `PetTreeGameTests` (and Bloom's smoke test checks the Major
+loads at 3).
 
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 

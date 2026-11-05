@@ -6,6 +6,7 @@ import com.freshorangeslices.bloompets.Fainting;
 import com.freshorangeslices.bloompets.Party;
 import com.freshorangeslices.bloompets.PetLevels;
 import com.freshorangeslices.bloompets.PetMood;
+import com.freshorangeslices.bloompets.PetTrees;
 import com.freshorangeslices.bloompets.PetRegistry;
 import com.freshorangeslices.bloompets.PetStorage;
 import com.freshorangeslices.bloompets.Pets;
@@ -37,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "4";
+	private static final String VERSION = "5";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -53,7 +54,9 @@ public final class PetsNetwork {
 
 	/** What the player can do with a pet from the screen (REFRESH: the list again for an open screen, never opening it). */
 	public enum Action {
-		LIST, CALL, PARTY, STORAGE, REFRESH, POST
+		LIST, CALL, PARTY, STORAGE, REFRESH, POST,
+		/** One and the Same: pick a tree (the argument), reset it, switch a cooldown ability (the argument) off or on. */
+		TREE, TREE_RESET, ABILITY
 	}
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
@@ -61,8 +64,12 @@ public final class PetsNetwork {
 		CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), PetList.of(player, open, message));
 	}
 
-	/** Client to server: list my pets, or act on one of them. */
-	public record Request(Action action, UUID pet) {
+	/** Client to server: list my pets, or act on one of them (with an argument for some actions). */
+	public record Request(Action action, UUID pet, String arg) {
+		public Request(Action action, UUID pet) {
+			this(action, pet, "");
+		}
+
 		public static Request list() {
 			return new Request(Action.LIST, new UUID(0, 0));
 		}
@@ -70,10 +77,11 @@ public final class PetsNetwork {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeEnum(action);
 			buf.writeUUID(pet);
+			buf.writeUtf(arg, 64);
 		}
 
 		static Request decode(FriendlyByteBuf buf) {
-			return new Request(buf.readEnum(Action.class), buf.readUUID());
+			return new Request(buf.readEnum(Action.class), buf.readUUID(), buf.readUtf(64));
 		}
 
 		void handle(Supplier<NetworkEvent.Context> context) {
@@ -100,6 +108,9 @@ public final class PetsNetwork {
 				case PARTY -> Party.toggle(player, record);
 				case STORAGE -> PetStorage.open(player, record);
 				case POST -> com.freshorangeslices.bloompets.PetPosts.toggle(player, record);
+				case TREE -> PetTrees.pick(player, record, arg);
+				case TREE_RESET -> PetTrees.reset(player, record);
+				case ABILITY -> PetTrees.toggle(player, record, arg);
 				default -> null;
 			};
 
@@ -115,11 +126,13 @@ public final class PetsNetwork {
 	 * One pet as the screen shows it: also its level, its XP into that level and what the next takes (0 at 100), the
 	 * ticks left of its rest if it fainted, its skill tree (a {@link com.freshorangeslices.bloompets.PetSkills.Kind}
 	 * id, or empty), and its mood (0 to 100; -1 for companions, which keep their own mods' needs) and hunger (0 to 20),
-	 * whether it loves you, whether it's tired, whether it keeps a post.
+	 * whether it loves you, whether it's tired, whether it keeps a post; One and the Same: whether it can follow a tree,
+	 * its tree (or empty), its switched-off abilities (comma-separated), a companion's ticks left before it can pick again.
 	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
-			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted) {
+			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted, boolean treeable, String tree,
+			String abilitiesOff, int treeWait) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -144,18 +157,22 @@ public final class PetsNetwork {
 			buf.writeBoolean(loved);
 			buf.writeBoolean(tired);
 			buf.writeBoolean(posted);
+			buf.writeBoolean(treeable);
+			buf.writeUtf(tree);
+			buf.writeUtf(abilitiesOff);
+			buf.writeVarInt(treeWait);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
 			return new Entry(buf.readUUID(), buf.readUtf(), buf.readUtf(), buf.readEnum(Pets.Kind.class), buf.readUtf(), buf.readUtf(),
 					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
 					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf(), buf.readFloat(), buf.readFloat(),
-					buf.readBoolean(), buf.readBoolean(), buf.readBoolean());
+					buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readUtf(), buf.readUtf(), buf.readVarInt());
 		}
 	}
 
-	/** Server to client: the player's pets, and how long until their party can change. */
-	public record PetList(boolean open, int partyWait, List<Entry> pets, Component message) {
+	/** Server to client: the player's pets, how long until their party can change, and whether they have One and the Same. */
+	public record PetList(boolean open, int partyWait, List<Entry> pets, Component message, boolean oneAndTheSame) {
 		static PetList of(ServerPlayer player, boolean open, Component message) {
 			PetRegistry registry = PetRegistry.get(player.server);
 			long now = player.server.overworld().getGameTime();
@@ -180,7 +197,8 @@ public final class PetsNetwork {
 				int level = live != null ? PetLevels.level(live) : r.level;
 				double xp = live != null ? PetLevels.xp(live) : r.xp;
 				boolean combat = r.kind == Pets.Kind.MODDED || species != null && species.combat();
-				float next = level >= PetLevels.MAX ? 0.0F : (float) PetLevels.xpToNext(level, combat);
+				float next = live != null ? (float) PetLevels.xpNext(live)
+						: level >= PetLevels.MAX ? 0.0F : r.xpNext > 0 ? (float) r.xpNext : (float) PetLevels.xpToNext(level, combat);
 				int rest = live != null ? Fainting.ticksLeft(live) : (int) Math.max(0, r.faintedUntil - now);
 				String skills = species == null || species.skills() == null ? "" : species.skills();
 				boolean bloom = r.kind == Pets.Kind.BLOOM;
@@ -188,12 +206,17 @@ public final class PetsNetwork {
 				float hunger = (float) (live != null ? PetMood.hunger(live) : r.hunger);
 				boolean loved = bloom && (live != null ? PetMood.loved(live) : r.loved);
 				boolean tired = bloom && (live != null ? PetMood.tired(live) : r.tired);
+				boolean treeable = r.kind == Pets.Kind.MODDED || combat;
+				String tree = live != null ? (PetTrees.tree(live) == null ? "" : PetTrees.tree(live).id()) : r.tree == null ? "" : r.tree;
+				String off = String.join(",", live != null ? PetTrees.abilitiesOff(live) : r.abilitiesOff);
+				long treeWaitUntil = live != null ? Pets.data(live).getLong("treeWait") : r.treeWait;
 				pets.add(new Entry(r.pet, r.name, r.type, r.kind, category, r.dimension, r.pos, r.party, live != null, health, max,
 						r.slots, look == null ? new CompoundTag() : look, level, (float) xp, next, rest, skills, mood, hunger, loved, tired,
-						live != null ? com.freshorangeslices.bloompets.PetPosts.posted(live) : r.post != null));
+						live != null ? com.freshorangeslices.bloompets.PetPosts.posted(live) : r.post != null, treeable, tree, off,
+						(int) Math.min(Integer.MAX_VALUE, Math.max(0, treeWaitUntil - now))));
 			}
 
-			return new PetList(open, wait, pets, message);
+			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player));
 		}
 
 		void encode(FriendlyByteBuf buf) {
@@ -206,6 +229,8 @@ public final class PetsNetwork {
 			if (message != null) {
 				buf.writeComponent(message);
 			}
+
+			buf.writeBoolean(oneAndTheSame);
 		}
 
 		static PetList decode(FriendlyByteBuf buf) {
@@ -218,7 +243,8 @@ public final class PetsNetwork {
 				pets.add(Entry.decode(buf));
 			}
 
-			return new PetList(open, wait, pets, buf.readBoolean() ? buf.readComponent() : null);
+			Component message = buf.readBoolean() ? buf.readComponent() : null;
+			return new PetList(open, wait, pets, message, buf.readBoolean());
 		}
 
 		void handle(Supplier<NetworkEvent.Context> context) {

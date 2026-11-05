@@ -43,14 +43,40 @@ public final class PetLevels {
 		return species != null && species.combat();
 	}
 
+	/** The pet's level: its own, or a Migamigos companion's Amigo level (FreshOrangeSlices, 2026-11-05: one level each). */
 	public static int level(Entity pet) {
+		Integer amigo = Amigos.level(pet);
+
+		if (amigo != null) {
+			return Math.max(1, Math.min(MAX, amigo));
+		}
+
 		CompoundTag data = Pets.dataOrNull(pet);
 		return data == null ? 1 : Math.max(1, Math.min(MAX, data.getInt("level")));
 	}
 
 	public static double xp(Entity pet) {
+		Integer amigo = Amigos.level(pet) == null ? null : Amigos.xp(pet);
+
+		if (amigo != null) {
+			return amigo;
+		}
+
 		CompoundTag data = Pets.dataOrNull(pet);
 		return data == null ? 0.0 : data.getDouble("xp");
+	}
+
+	/** The XP its next level takes (an Amigo's from Migamigos' own curve), or 0 at the top. */
+	public static double xpNext(Entity pet) {
+		Integer amigo = Amigos.level(pet);
+
+		if (amigo != null) {
+			Integer next = amigo >= 99 ? null : Amigos.xpNext(pet, amigo);
+			return next == null ? 0.0 : next;
+		}
+
+		int level = level(pet);
+		return level >= MAX ? 0.0 : xpToNext(level, combat(pet));
 	}
 
 	/** Whether the pet earns XP right now: a Bloom pet in the party or at its post and awake, or a modded companion. */
@@ -63,11 +89,11 @@ public final class PetLevels {
 		return kind == Pets.Kind.MODDED || kind == Pets.Kind.BLOOM && (Pets.inParty(pet) || PetPosts.posted(pet)) && !Fainting.fainted(pet);
 	}
 
-	/** Adds XP to an active pet, levelling it up as it fills; returns the levels gained. */
+	/** Adds XP to an active pet, levelling it up as it fills; returns the levels gained. A Migamigos Amigo levels its own way. */
 	public static int addXp(LivingEntity pet, double amount) {
 		int level = level(pet);
 
-		if (amount <= 0 || level >= MAX) {
+		if (amount <= 0 || level >= MAX || Amigos.has(pet)) {
 			return 0;
 		}
 
@@ -91,6 +117,10 @@ public final class PetLevels {
 
 	/** Sets the pet's level (operators' command, tests), its XP back to the start of that level. */
 	public static void setLevel(LivingEntity pet, int level) {
+		if (Amigos.has(pet)) {
+			return;
+		}
+
 		int before = level(pet);
 		int after = Math.max(1, Math.min(MAX, level));
 		store(pet, after, 0.0);

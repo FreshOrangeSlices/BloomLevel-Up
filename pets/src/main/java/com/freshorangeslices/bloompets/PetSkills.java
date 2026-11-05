@@ -311,8 +311,8 @@ public final class PetSkills {
 			event.setAmount(defend(target, guard, source, event.getAmount()));
 		}
 
-		// The pet dealing it, with its own bite or blow.
-		if (source.getDirectEntity() instanceof LivingEntity pet && source.getEntity() == pet && pet != target) {
+		// The pet dealing it, with its own bite or blow (not a sweep or spark its weapon tree sends out).
+		if (!PetTrees.splashing() && source.getDirectEntity() instanceof LivingEntity pet && source.getEntity() == pet && pet != target) {
 			int level = skillLevel(pet);
 
 			if (level >= 0 && kind(pet) != null) {
@@ -344,7 +344,7 @@ public final class PetSkills {
 	public static void onDamage(LivingDamageEvent event) {
 		LivingEntity target = event.getEntity();
 
-		if (target.level().isClientSide() || !(event.getSource().getDirectEntity() instanceof LivingEntity pet)
+		if (PetTrees.splashing() || target.level().isClientSide() || !(event.getSource().getDirectEntity() instanceof LivingEntity pet)
 				|| event.getSource().getEntity() != pet || pet == target) {
 			return;
 		}

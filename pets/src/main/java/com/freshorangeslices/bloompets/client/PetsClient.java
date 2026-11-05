@@ -59,6 +59,11 @@ public final class PetsClient {
 		PetsNetwork.CHANNEL.sendToServer(new PetsNetwork.Request(action, pet));
 	}
 
+	/** An action with an argument (a tree to pick, an ability to switch). */
+	public static void act(PetsNetwork.Action action, UUID pet, String arg) {
+		PetsNetwork.CHANNEL.sendToServer(new PetsNetwork.Request(action, pet, arg));
+	}
+
 	public static void receive(PetsNetwork.PetList list) {
 		Minecraft minecraft = Minecraft.getInstance();
 

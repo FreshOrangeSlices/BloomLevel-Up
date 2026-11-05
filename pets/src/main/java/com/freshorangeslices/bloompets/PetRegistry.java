@@ -30,6 +30,8 @@ public final class PetRegistry extends SavedData {
 	private final Map<UUID, List<Record>> byOwner = new LinkedHashMap<>();
 	private final Map<UUID, UUID> ownerOf = new HashMap<>();
 	private final Map<UUID, Long> partyChanged = new HashMap<>();
+	/** Whether each owner had One and the Same on when last online (their pets' trees work while they're away). */
+	private final Map<UUID, Boolean> oneAndTheSame = new HashMap<>();
 
 	/** One pet, as last seen. */
 	public static final class Record {
@@ -61,6 +63,12 @@ public final class PetRegistry extends SavedData {
 		public boolean tired;
 		/** Its post, if it keeps one. */
 		public BlockPos post;
+		/** What its next level takes (a Migamigos Amigo's from its own curve), for when it's away. */
+		public double xpNext;
+		/** One and the Same: its weapon tree (or null), its switched-off cooldown abilities, and a companion's wait to pick again. */
+		public String tree;
+		public java.util.Set<String> abilitiesOff = new java.util.HashSet<>();
+		public long treeWait;
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -88,6 +96,14 @@ public final class PetRegistry extends SavedData {
 				tag.putLong("post", post.asLong());
 			}
 
+			tag.putDouble("xpNext", xpNext);
+
+			if (tree != null) {
+				tag.putString("tree", tree);
+			}
+
+			tag.putString("abilitiesOff", String.join(",", abilitiesOff));
+			tag.putLong("treeWait", treeWait);
 			return tag;
 		}
 
@@ -113,6 +129,16 @@ public final class PetRegistry extends SavedData {
 			record.mood = tag.contains("mood") ? tag.getDouble("mood") : PetMood.START_MOOD;
 			record.hunger = tag.contains("hunger") ? tag.getDouble("hunger") : PetMood.MAX_HUNGER;
 			record.post = tag.contains("post") ? BlockPos.of(tag.getLong("post")) : null;
+			record.xpNext = tag.getDouble("xpNext");
+			record.tree = tag.contains("tree") ? tag.getString("tree") : null;
+
+			for (String off : tag.getString("abilitiesOff").split(",")) {
+				if (!off.isEmpty()) {
+					record.abilitiesOff.add(off);
+				}
+			}
+
+			record.treeWait = tag.getLong("treeWait");
 			return record;
 		}
 	}
@@ -137,6 +163,16 @@ public final class PetRegistry extends SavedData {
 	/** The owner's Bloom pet in the party, or null. */
 	public Record partyPet(UUID owner) {
 		return pets(owner).stream().filter(r -> r.party).findFirst().orElse(null);
+	}
+
+	public boolean oneAndTheSame(UUID owner) {
+		return oneAndTheSame.getOrDefault(owner, false);
+	}
+
+	public void setOneAndTheSame(UUID owner, boolean on) {
+		if (!Boolean.valueOf(on).equals(oneAndTheSame.put(owner, on))) {
+			setDirty();
+		}
 	}
 
 	public long partyChanged(UUID owner) {
@@ -190,6 +226,10 @@ public final class PetRegistry extends SavedData {
 		record.loved = PetMood.loved(entity);
 		record.tired = PetMood.tired(entity);
 		record.post = PetPosts.post(entity);
+		record.xpNext = PetLevels.xpNext(entity);
+		record.tree = PetTrees.tree(entity) == null ? null : PetTrees.tree(entity).id();
+		record.abilitiesOff = PetTrees.abilitiesOff(entity);
+		record.treeWait = data == null ? 0L : data.getLong("treeWait");
 
 		// Its look, at most once a minute (a pet's saved data isn't small).
 		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {
@@ -234,6 +274,8 @@ public final class PetRegistry extends SavedData {
 				owner.putLong("partyChanged", partyChanged.get(entry.getKey()));
 			}
 
+			owner.putBoolean("oneAndTheSame", oneAndTheSame(entry.getKey()));
+
 			ListTag pets = new ListTag();
 			entry.getValue().forEach(record -> pets.add(record.save()));
 			owner.put("pets", pets);
@@ -254,6 +296,8 @@ public final class PetRegistry extends SavedData {
 			if (owner.contains("partyChanged")) {
 				registry.partyChanged.put(id, owner.getLong("partyChanged"));
 			}
+
+			registry.oneAndTheSame.put(id, owner.getBoolean("oneAndTheSame"));
 
 			List<Record> pets = new ArrayList<>();
 

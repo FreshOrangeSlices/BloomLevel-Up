@@ -100,6 +100,7 @@ public final class PetEvents {
 		PetMood.second(entity);
 		PetXp.second(entity);
 		PetPosts.second(entity);
+		PetTrees.second(entity);
 		PetSkills.second(entity);
 
 		if (entity.tickCount % SEEN_EVERY == 0) {

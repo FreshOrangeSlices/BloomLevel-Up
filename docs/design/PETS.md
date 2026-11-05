@@ -70,7 +70,11 @@ FreshOrangeSlices' sketch: `art/pets-screen-sketch.png`; with suggestions added:
 
 ## Levels (party pets, 1 to 100)
 
-XP sources from the plugin (numbers to retune for 100 levels; the plugin's 40 + 30 x n per level is far too steep there):
+**The curve is Bloom's own, cut in half** (FreshOrangeSlices, 2026-11-05): XP from level L to L+1 = 25 + 5 x L (Bloom's
+50 + 10 x L halved), so 30 XP for level 2, 275 at level 50, 520 for the last one, about 27,250 from 1 to 100 (a Bloom
+tab takes about 54,500). The plugin's 40 + 30 x n per level was far too steep for 100 levels.
+
+XP sources from the plugin (numbers to retune for that curve):
 
 | Source | Plugin XP |
 |---|---|
@@ -138,7 +142,7 @@ small 9 slots (18 later), medium 18 (27 later), pack 27 up to 54.
 | Ocelot | Speedster | tropical fish | creepers and phantoms leave you alone; you often wake up to a gift | creepers and phantoms near the post leave everyone alone |
 | Strider | Speedster | warped fungus | Fire Resistance in the Nether | waits |
 | Cat | Utility | cod | as the Ocelot | as the Ocelot |
-| Bee | Utility | any flower | crops **and saplings** around you grow fast, like Bloom's Growth Aura but always on while the Bee is out (no hoe needed; 2026-11-05: the pet is the other way to get it, for players who'd rather keep their Major points). Doesn't stack with the Major: owning both is no faster | tends the crops around its post |
+| Bee | Utility | any flower | crops **and saplings** around you grow fast, like Bloom's Growth Aura but always on while the Bee is out (no hoe needed; 2026-11-05: the pet is the other way to get it, for players who'd rather keep their Major points). A bit better than the Major on purpose: the Major stays as it is (crops only, hoe in hand). Doesn't stack with the Major: owning both is no faster | tends the crops around its post |
 | Allay | Utility | amethyst shard | pulls nearby drops to you and bottles loose XP into its storage | collects drops and loose XP around its post |
 | Chicken | Utility | seeds | you glide down long drops | waits |
 | Cow | Utility | wheat | clears one bad effect every 2 minutes | waits |

@@ -88,7 +88,10 @@ crop it grows, an Allay for each item it collects, a Sniffer for each find...), 
 taking the party's place.
 
 **How long to 100** (FreshOrangeSlices, 2026-11-05): a non-combat pet about **8 hours** with it out; a combat pet about
-**2 days** of steady fighting, the last levels the hardest. The XP rates are set to land there.
+**16 hours of real fighting**, about 48 hours of normal play with it out (a pet fights maybe a third of the time). The
+first 10 levels come in about 20 minutes of fighting; levels 90 to 100 take about 3 hours. Bloom's Combat rate as it
+is would max a wolf in about 4 hours of fighting, far too quick, so the pets' XP per damage is scaled down to land
+there.
 
 For reference, the plugin's XP sources (replaced by the above):
 

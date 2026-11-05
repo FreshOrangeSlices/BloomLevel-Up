@@ -12,18 +12,18 @@ Nothing here is built yet. Questions still open are marked **Open**.
 - **Three kinds of pets** (FreshOrangeSlices, 2026-11-04: "three companion mods"):
   - **Bloom pets**: the plugin's roster of vanilla animals, bonded the plugin's way (sneak + feed a wild one its
     favourite food a few times). The Armadillo is left out (it isn't in 1.20.1).
-  - **Migamigos companions** and **Zoni's Companions**, tamed by their own mods, then bonded in the pet screen.
-  - **Dragons can't be bonded** (to avoid trouble), nor anything else.
+  - **Migamigos companions** and **Zoni's Companions**, tamed by their own mods, then listed in the pet screen like the rest.
+  - **Dragons can't join** (to avoid trouble), nor anything else.
 - **Its own screen**, opened from a tab next to the skill hub (not a fifth skill tab).
 
 What carries over from the plugin, and what changes:
 
 | Plugin | In the Forge mod |
 |---|---|
-| Pets live with the player, summoned from a menu | Migamigos and Zoni's companions stay in the world (storing and respawning other mods' mobs broke a dragon with Carry On). The screen **calls** any pet to you, for everyone (**Open**: in the plugin they live in the book and come out when summoned, and from level 8 up to 3 can be out in the world at posts; probably only the modded ones stay in the world; to think through) |
-| One pet out at a time | Up to **3 bonded pets** (the ones that level up and get skills); every other owned pet is just listed |
+| Pets live with the player, summoned from a menu | **All pets stay out in the world**, Bloom pets too (FreshOrangeSlices, 2026-11-04: a friend keeps about 10 dogs, and that's how he plays). Only the pets in the player's **party** get their skills, owner bonus and Bloom stats; every other pet is a plain pet. The screen **calls** any pet to you, for everyone |
+| One pet out at a time | Any number out; a **party of up to 3** (the ones that level up and get skills); every other owned pet is just listed |
 | Levels 1 to 10, skills from the player's mcMMO Taming level (0 to 1000) | **Pet levels 1 to 100**, and the skills come from the pet's own level (Bloom has no Taming skill) |
-| Pets never die: they faint and rest | Kept for bonded pets |
+| Pets never die: they faint and rest | Kept for party pets |
 | Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding still heals, and pets get a **second bar, hunger**, like the player's food: a pet has to be fed, and one with food in its own inventory takes it and eats by itself |
 | Bonus for the owner while a pet is out, per species | Kept, per kind of pet (**Open**) |
 | Posts with jobs at level 8 | **Open** (Migamigos already has "stay") |
@@ -34,12 +34,12 @@ What carries over from the plugin, and what changes:
 - **Every pet the player owns**, including ones not loaded right now: name, kind, level, mood, where it was last seen,
   fine or fainted. Pets tamed before the mod is in show up the next time they load near their owner.
 - Per pet: **Call** (teleport it to you; everyone has it), **Inventory** (a shortcut to its own: a Migamigos backpack, a donkey's chest,
-  a Zoni's companion's), **Bond / Unbond** (3 bond slots).
-- Per bonded pet: level and XP, mood, its skills, and (with One and the Same) its weapon tree and an on/off switch per
+  a Zoni's companion's), **Add to / take out of the party** (3 places).
+- Per party pet: level and XP, mood, its skills, and (with One and the Same) its weapon tree and an on/off switch per
   ability.
 - Pets that don't fight (horses, cats, parrots...): listed, Call and Inventory, nothing more.
 
-## Levels (bonded pets, 1 to 100)
+## Levels (party pets, 1 to 100)
 
 XP sources from the plugin (numbers to retune for 100 levels; the plugin's 40 + 30 x n per level is far too steep there):
 
@@ -75,7 +75,7 @@ divided by 10:
 | 100 | Max level | gold name and a sparkle, a second wind once each time it's called |
 
 Bloom pets keep their own kind's tree from the plugin (a wolf mcMMO's wolf skills, the Iron Golem, Vex, Polar Bear, Goat
-and Panda their own). A **modded companion rolls one of those kinds at random when it's bonded** and keeps it for good:
+and Panda their own). A **modded companion rolls one of those kinds at random when it first joins the party** and keeps it for good:
 a Migamigos Claymore might fight like a Panda, a Wolf or an Iron Golem.
 
 ## The roster: every Bloom pet
@@ -123,7 +123,7 @@ gear (armor and a weapon, which adds to its damage).
 ## Combat pets' skills
 
 The six combat kinds each have their own names for the shared skills, plus a starting and a special skill of their own.
-A Migamigos or Zoni's companion rolls one of these six kinds when it's bonded. Levels are the pet's own (the plugin's
+A Migamigos or Zoni's companion rolls one of these six kinds when it first joins the party. Levels are the pet's own (the plugin's
 1000 scale divided by 10).
 
 | Level | Skill | Wolf | Iron Golem | Vex | Polar Bear | Goat | Panda |
@@ -163,7 +163,7 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 ## One and the Same (Bloom's Combat Major, the bridge)
 
 - A Combat Major in Bloom (it exists today hidden and switched off, waiting for this).
-- Owning it lets the player give **up to 3 bonded pets one weapon tree each** (Sword, Axe, Trident, Unarmed; Bow maybe
+- Owning it lets the player give **the 3 pets in the party one weapon tree each** (Sword, Axe, Trident, Unarmed; Bow maybe
   for pets that shoot; Crossbow no).
 - How much of a tree a pet can use grows with the **player's total Major Levels earned** (the whole tree at about 10 to
   15), not with what the player bought for themselves.
@@ -193,7 +193,7 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 
-1. **The mod and the list**: the `bloompets` mod and its CI job; tracking owned pets; bonding (3 slots); the screen with
+1. **The mod and the list**: the `bloompets` mod and its CI job; tracking owned pets; the party (3 places); the screen with
    Call and Inventory.
 2. **Levels and skills**: XP sources, levels 1 to 100, the skill table, fainting instead of dying, max-level perks.
 3. **Mood and bonuses** (whatever of the plugin's engagement layer is kept): mood, petting, owner bonuses, maybe posts.

@@ -47,7 +47,11 @@ What carries over from the plugin, and what changes:
   level and traits stored; joining again brings them back, **with its health filled to full**.
 - **Party changes have a 5-minute cooldown** (so swapping isn't a free full heal mid-fight).
 - **Bloom pets at posts keep their jobs** outside the party (a guard still guards), as in the plugin.
-- **Only the party pet earns XP**; Bloom pets outside the party don't level.
+- **Only the party pet earns XP**; Bloom pets outside the party don't level (support pets at posts earn from their jobs,
+  see Levels).
+- **Out of the party a pet is unprotected** (2026-11-05): plain vanilla stats, and it can die like any dog; only the
+  party pet faints. **Open** (an idea): a limit on how many pets a player can have, with more slots for levels or
+  resources.
 - **Kills by pets keep their drops**: the add-on's rule that a mob killed by another mob drops nothing already counts
   tamed pets and companions as the player's side. Bloom pets that aren't tameable in vanilla (Iron Golem, Panda, Bee...)
   must carry an owner mark the add-on reads too (`world/MobKillDrops.playerSide`), with a game test.
@@ -76,8 +80,15 @@ tab takes about 54,500). The plugin's 40 + 30 x n per level was far too steep fo
 quarter of Bloom's curve** (12.5 + 2.5 x L, about 13,600 to 100), since they level the slowest.
 
 **How they earn it** (2026-11-05): **combat pets the way Bloom's Combat tab does**, 0.5 XP per point of real damage they
-deal (after armor, never more than the target had left), and the killing blow adds 50% of what that kill took.
-**Non-combat pets** from time together, walking with you and feeding (numbers to set).
+deal (after armor, never more than the target had left), and the killing blow adds 50% of what that kill took. **Each
+combat kind has its own XP multiplier** so they all level at about the same pace, whatever they hit for (a wolf bites for
+about 4, an Iron Golem about 15, a goat's ram about 2: roughly wolf 1x, golem 0.3x, goat 2x; agreed 2026-11-05).
+**Non-combat pets** from time together, walking with you and feeding, plus **XP from their jobs** on top (a Bee for each
+crop it grows, an Allay for each item it collects, a Sniffer for each find...), so a farm pet at its post levels without
+taking the party's place.
+
+**How long to 100** (FreshOrangeSlices, 2026-11-05): a non-combat pet about **8 hours** with it out; a combat pet about
+**2 days** of steady fighting, the last levels the hardest. The XP rates are set to land there.
 
 For reference, the plugin's XP sources (replaced by the above):
 

@@ -11,11 +11,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 /**
- * The pet screen's tab on the inventory: just left of Bloom's Skill Hub button when Bloom is there (found by its class,
- * so Bloom Pets doesn't need Bloom), else beside the inventory's top-left corner. Placed every frame, so it follows
- * the recipe book and Bloom's own buttons.
+ * The pet screen's tab on the inventory: under Bloom's Skill Hub button when Bloom is there (FreshOrangeSlices,
+ * 2026-11-05), after Bloom's own buttons in its column (the Hoarder's Pocket and runes buttons, when the player has them),
+ * so Bloom's column stays together and never has to move for it; at the end of Bloom's row when Bloom lays its buttons
+ * out across the top (the recipe book open on a small screen). Bloom's buttons are found by their class names, so
+ * Bloom Pets doesn't need Bloom; without it, the tab sits beside the inventory's top-left corner. Placed every frame, so
+ * it follows the recipe book and Bloom's buttons.
  */
 public final class PetsTabButton extends Button {
+	private static final int GAP = 2;
 	private static final ItemStack ICON = new ItemStack(Items.LEAD);
 	private final AbstractContainerScreen<?> screen;
 
@@ -27,15 +31,37 @@ public final class PetsTabButton extends Button {
 	}
 
 	private void place() {
+		AbstractWidget hub = null;
+		AbstractWidget last = null;
+
 		for (GuiEventListener child : screen.children()) {
-			if (child instanceof AbstractWidget widget && widget != this && widget.getClass().getSimpleName().equals("HubButton")) {
-				setX(widget.getX() - width - 2);
-				setY(widget.getY());
-				return;
+			if (child instanceof AbstractWidget widget && widget != this && widget.visible) {
+				String name = widget.getClass().getSimpleName();
+
+				if (name.equals("HubButton") || name.equals("SideButton")) {
+					hub = name.equals("HubButton") ? widget : hub;
+
+					if (last == null || widget.getY() > last.getY() || widget.getY() == last.getY() && widget.getX() > last.getX()) {
+						last = widget;
+					}
+				}
 			}
 		}
 
-		setX(screen.getGuiLeft() - width - 2);
+		if (hub != null) {
+			// Bloom's row sits above the panel; its column starts beside it.
+			if (hub.getY() + hub.getHeight() <= screen.getGuiTop()) {
+				setX(last.getX() + last.getWidth() + GAP);
+				setY(last.getY());
+			} else {
+				setX(hub.getX());
+				setY(last.getY() + last.getHeight() + GAP);
+			}
+
+			return;
+		}
+
+		setX(screen.getGuiLeft() - width - GAP);
 		setY(screen.getGuiTop());
 	}
 

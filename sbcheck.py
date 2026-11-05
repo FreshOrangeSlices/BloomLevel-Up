@@ -32,3 +32,22 @@ for slug in ("sophisticated-backpacks", "sophisticated-core"):
                 pass
 open(os.path.join(out, "summary.txt"), "w").write("\n".join(lines))
 print("\n".join(lines)[:3000])
+
+# Carry On's generated config, wherever the artifacts keep it (the server's config/, unzipped or in a zip)
+found = []
+for base in ("shots", "pack"):
+    for folder, _, names in os.walk(base):
+        for name in names:
+            full = os.path.join(folder, name)
+            if "carryon" in name.lower() and not name.endswith(".jar"):
+                found.append(f"== {full}\n" + open(full, encoding="utf-8", errors="replace").read()[:6000])
+            elif name.endswith(".zip"):
+                try:
+                    z = zipfile.ZipFile(full)
+                except zipfile.BadZipFile:
+                    continue
+                for n in z.namelist():
+                    if "carryon" in n.lower() and not n.endswith(".jar") and not n.endswith("/"):
+                        found.append(f"== {full}!{n}\n" + z.read(n).decode("utf-8", "replace")[:6000])
+open(os.path.join(out, "carryon.txt"), "w").write("\n".join(found) if found else "no carryon config in the artifacts")
+print(len(found), "carryon files")

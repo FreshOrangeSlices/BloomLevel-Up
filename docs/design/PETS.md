@@ -275,6 +275,21 @@ dark panel and gold frame, its palette, the name large and gold like the hub's h
 hub's stats window, dark buttons with an orange edge under the mouse, and the pet standing on a piece of the hub's art
 (the combat cave for fighters and companions, the meadow for the rest).
 
+**Phase 2 (built, 2026-11-05):** pet levels 1 to 100, kept on the pet itself (`bloompets.level`, `bloompets.xp`) and in
+its entry; the curves, XP sources and per-kind multipliers above (in `PetsConfig`'s `levels` section, the multiplier in
+the roster's `xp_multiplier`); a level-up message naming the skills it opens. The nine skills for the five combat kinds
+(the roster's `skills`: wolf, iron_golem, polar_bear, goat, panda), the plugin's numbers, Gore at half the level in %
+(Rending Bite also Bleeds, with Bloom's Bleed when Bloom is there); skills work while the pet is in the party and awake.
+The golem, polar bear, goat and panda in the party fight for their owner (whatever hurts them or they hit; the goat gets
+a melee attack of its own); pets never hurt or go after players (co-op) or their owner's other pets. Party pets faint
+instead of dying: a minute's rest where they fell, unhurt, then up with half their health (`/kill` still kills; the void
+brings them to their owner first). Level 100: a gold name, a sparkle, a second wind once each time it comes out (called,
+or joining the party). Sneak-feeding your own pet its food heals it (and gives a non-combat party pet XP, at most every
+30 seconds). The screen: the level beside the kind and in the list, an XP bar, five slots a side (the nine skills and the
+level-100 perk, item icons, dimmed with their level until open, a tooltip with what each does at the pet's level), the
+rest's countdown, the list kept fresh every 2 seconds. Operators: `/bloompets level <level> <pet>` and
+`/bloompets xp <amount> <pet>`. Not yet: modded companions' Spirit and its reroll (Phase 5; they level already), job XP
+for pets at posts (Phase 3).
 
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.
 

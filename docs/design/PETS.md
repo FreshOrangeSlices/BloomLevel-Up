@@ -37,16 +37,16 @@ What carries over from the plugin, and what changes:
 
 ## The party
 
-- **Up to 3 party pets.** Only one Bloom pet follows you; modded companions don't go home the way Bloom pets do, so a
-  party can be, say, 3 companions and the one Bloom pet that follows (**Open**: exactly how the 3 places and the one
-  follower add up).
-- **In the party**: the pet has its level, skills, owner bonus and Bloom stats. A support pet's passive (Bee, Allay, Cat...)
-  works only while you're within a reasonable distance of it (**Open**: how far; 32 blocks?).
-- **Out of the party**: still yours, still out in the world, still callable, but no Bloom bonus of any kind. It keeps its
-  level and traits stored; joining the party again brings them back.
-- **Joining the party with more health from its level**: its health fills to full (**suggestion**: only out of combat,
-  or with a short cooldown on party changes, so swapping isn't a free full heal mid-fight).
-- (**Open**: the sketch's note "modded pets will always have their traits and bonus": always, even outside the party?)
+- **Bloom pets: one in the party**, the one that follows you. It has its level, skills, owner bonus and Bloom stats.
+- **Support pets** (Bee, Allay, Cat and the other non-combat ones): their passive works while you're **within 32
+  blocks** of them, following or not. **At most 3 support pets work in any 60-block area**: a 4th there does nothing
+  (so 3 Bees is the limit for one farm).
+- **Modded companions: no limit, and they always have their traits and bonus**, in the party or not (FreshOrangeSlices,
+  2026-11-04: broken, but fine; a player who'd rather not fight can lean on a good team).
+- **Out of the party** (Bloom pets): still yours, still out in the world, still callable, no Bloom bonus. It keeps its
+  level and traits stored; joining again brings them back, **with its health filled to full**.
+- **Party changes have a 5-minute cooldown** (so swapping isn't a free full heal mid-fight).
+- (**Open**: do Bloom pets at posts keep their jobs outside the party, as in the plugin?)
 
 ## The pet screen
 
@@ -61,7 +61,7 @@ FreshOrangeSlices' sketch: `art/pets-screen-sketch.png`; with suggestions added:
   and the Same) and **Pet** (its level and traits).
 - **Bottom left: Call** (summons it to you; everyone has it). **Bottom right: its inventory** (Bloom pets only).
 - Suggestions for what the sketch has no room for yet: see the mockup (name and level with an XP bar, health, hunger and
-  mood bars, where it is, the rolled kind for a modded companion, the owner bonus line, locked slots showing their
+  mood bars, where it is, a modded companion's rolled kind ("Spirit of the Panda"), the owner bonus line, locked slots showing their
   level, on/off switches for abilities, party and follow buttons, post, rename, release, list filters).
 
 ## Levels (party pets, 1 to 100)
@@ -101,7 +101,8 @@ divided by 10:
 
 Bloom pets keep their own kind's tree from the plugin (a wolf mcMMO's wolf skills, the Iron Golem, Vex, Polar Bear, Goat
 and Panda their own). A **modded companion rolls one of the combat kinds at random when it first joins the party** (never the Vex, and never
-a non-combat kind) and keeps it for good: a Migamigos Claymore might fight like a Panda, a Wolf or an Iron Golem.
+a non-combat kind) and keeps it: a Migamigos Claymore might get the **Spirit of the Panda**, of the Wolf or of the Iron
+Golem (shown that way in the screen). **One reroll** is allowed, with something rare (**Open**: what).
 
 ## The roster: every Bloom pet
 

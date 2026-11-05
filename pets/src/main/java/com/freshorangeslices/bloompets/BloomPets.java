@@ -1,13 +1,18 @@
 package com.freshorangeslices.bloompets;
 
+import com.freshorangeslices.bloompets.network.PetsNetwork;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 /**
@@ -15,7 +20,7 @@ import org.slf4j.Logger;
  * roster in data/bloompets/bloompets/species) and the companions other mods give them (Migamigos, Zoni's Companions).
  * Every pet stays out in the world; one Bloom pet is in the player's party and follows them; any pet can be called to
  * its owner; Bloom pets carry a storage. Phase 1: bonding, the list of a player's pets, the party, calling and storage,
- * through {@code /bloompets}; the screen, levels and skills come next.
+ * and the pet screen (a key, K, or the paw beside Bloom's hub button; {@code /bloompets} too); levels and skills next.
  */
 @Mod(BloomPets.MOD_ID)
 public final class BloomPets {
@@ -23,7 +28,10 @@ public final class BloomPets {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public BloomPets() {
+		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, PetsConfig.SPEC);
+		PetsNetwork.register();
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> com.freshorangeslices.bloompets.client.PetsClient.init(modBus));
 		MinecraftForge.EVENT_BUS.register(Bonding.class);
 		MinecraftForge.EVENT_BUS.register(PetEvents.class);
 		MinecraftForge.EVENT_BUS.register(Calling.class);

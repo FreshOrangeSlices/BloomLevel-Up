@@ -1212,6 +1212,19 @@ def main():
             press("Escape")
             time.sleep(1)
             progress("quest book shown")
+        # Bloom Pets' screen, with a wolf (in the party), a cow and a fox given to the player.
+        if any(f.startswith("bloompets") for f in os.listdir(os.path.join(server_dir, "mods"))):
+            for species in ("wolf", "cow", "fox"):
+                server.send(f"bloompets give {species} {PLAYER}")
+            time.sleep(2)
+            server.send(f"execute as {PLAYER} run bloompets party 1")
+            time.sleep(1)
+            server.send(f"execute as {PLAYER} run bloompets screen")
+            time.sleep(4)
+            capture(shots, "pack_pets")
+            press("Escape")
+            time.sleep(1)
+            progress("pet screen shown")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")

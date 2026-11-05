@@ -240,7 +240,14 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 **Phase 1a (built, 2026-11-04):** the `bloompets` mod and its CI job; the roster as data; bonding; every player's pets
 kept with the world; the party, its cooldown and full health on joining; Call (any pet, any dimension); Bloom pets'
 storage (fixed sizes for now: 9, 18 or 27); owners' hits never landing; `/bloompets` (also `/pets`) until the screen.
-Not yet: the Vex (with its gear), the screen (1b), levels and everything after.
+Not yet: the Vex (with its gear), levels and everything after.
+
+**Phase 1b (built, 2026-11-04):** the pet screen, after the sketch: K, or the tab with a lead on it just left of Bloom's
+hub button on the inventory. The list (Bloom pets orange, companions dark red, the party marked pink, a filter: all,
+party, Bloom pets, companions); the chosen pet's model following the mouse (the live one when it's nearby, else drawn
+from its look, kept in its entry); four slots a side, empty until levels, with the Pet / Bloom switch at the top right;
+health and where it is; Call, Join / Leave party (greyed out with the time left while the cooldown runs; companions
+are always with you) and Storage (Bloom pets only).
 
 
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.

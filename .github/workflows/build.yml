@@ -483,6 +483,9 @@ jobs:
           # The quest book, opened in the full pack.
           - layers: 6
             shot: pack_quests
+          # Bloom Pets' screen, with three pets given to the player.
+          - layers: 6
+            shot: pack_pets
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

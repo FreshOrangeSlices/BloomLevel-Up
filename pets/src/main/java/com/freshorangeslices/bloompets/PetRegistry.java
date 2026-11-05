@@ -22,6 +22,11 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public final class PetRegistry extends SavedData {
 	private static final String NAME = "bloompets_pets";
+	private static final long LOOK_EVERY = 1200;
+	/** Saved data a pet's look doesn't need (its inventory, memories, effects, other mods' data). */
+	private static final java.util.Set<String> NOT_LOOKS = java.util.Set.of("Items", "Inventory", "Brain", "Attributes",
+			"ActiveEffects", "ForgeCaps", "ForgeData", "Passengers", "Leash", "Offers", "Gossips", "Pos", "Motion", "UUID");
+	private static final int LOOK_MAX_BYTES = 8192;
 	private final Map<UUID, List<Record>> byOwner = new LinkedHashMap<>();
 	private final Map<UUID, UUID> ownerOf = new HashMap<>();
 	private final Map<UUID, Long> partyChanged = new HashMap<>();
@@ -40,6 +45,11 @@ public final class PetRegistry extends SavedData {
 		public long seen;
 		public int slots;
 		public ListTag items = new ListTag();
+		public float health;
+		public float maxHealth;
+		/** How it looks (its saved data without inventories and the like), for the pet screen when it isn't nearby. */
+		public CompoundTag look = new CompoundTag();
+		public long lookSeen;
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -54,6 +64,9 @@ public final class PetRegistry extends SavedData {
 			tag.putLong("seen", seen);
 			tag.putInt("slots", slots);
 			tag.put("items", items);
+			tag.putFloat("health", health);
+			tag.putFloat("maxHealth", maxHealth);
+			tag.put("look", look);
 			return tag;
 		}
 
@@ -70,6 +83,9 @@ public final class PetRegistry extends SavedData {
 			record.seen = tag.getLong("seen");
 			record.slots = tag.getInt("slots");
 			record.items = tag.getList("items", Tag.TAG_COMPOUND);
+			record.health = tag.getFloat("health");
+			record.maxHealth = tag.getFloat("maxHealth");
+			record.look = tag.getCompound("look");
 			return record;
 		}
 	}
@@ -132,6 +148,18 @@ public final class PetRegistry extends SavedData {
 		record.dimension = entity.level().dimension().location().toString();
 		record.pos = entity.blockPosition();
 		record.seen = entity.level().getGameTime();
+
+		if (entity instanceof net.minecraft.world.entity.LivingEntity living) {
+			record.health = living.getHealth();
+			record.maxHealth = living.getMaxHealth();
+		}
+
+		// Its look, at most once a minute (a pet's saved data isn't small).
+		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {
+			record.look = look(entity);
+			record.lookSeen = record.seen;
+		}
+
 		setDirty();
 		return record;
 	}
@@ -148,6 +176,13 @@ public final class PetRegistry extends SavedData {
 		byOwner.get(owner).remove(record);
 		setDirty();
 		return record;
+	}
+
+	/** The pet's look: its saved data less what doesn't show (empty if that's still too big to send). */
+	public static CompoundTag look(Entity entity) {
+		CompoundTag tag = entity.saveWithoutId(new CompoundTag());
+		NOT_LOOKS.forEach(tag::remove);
+		return tag.toString().length() > LOOK_MAX_BYTES ? new CompoundTag() : tag;
 	}
 
 	@Override

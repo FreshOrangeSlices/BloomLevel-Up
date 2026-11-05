@@ -34,6 +34,10 @@ public final class PetsCommand {
 				.then(Commands.literal("call").then(pet().executes(c -> act(c, Action.CALL))))
 				.then(Commands.literal("storage").then(pet().executes(c -> act(c, Action.STORAGE))))
 				.then(Commands.literal("species").executes(PetsCommand::species))
+				.then(Commands.literal("screen").executes(c -> {
+					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
+					return 1;
+				}))
 				.then(Commands.literal("give").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("species", StringArgumentType.word())
 								.suggests((c, b) -> SharedSuggestionProvider.suggest(SpeciesData.all().stream().map(s -> s.id().getPath()), b))

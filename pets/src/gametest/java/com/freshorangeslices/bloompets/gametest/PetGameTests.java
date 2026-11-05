@@ -173,4 +173,17 @@ public final class PetGameTests {
 		helper.assertTrue(record.items.isEmpty() || record.items.equals(new ListTag()), "and its storage is empty");
 		helper.succeed();
 	}
+
+	@GameTest(template = "empty")
+	public static void aPetsEntryKeepsItsLookAndHealthForTheScreen(GameTestHelper helper) {
+		ServerPlayer owner = player(helper, new BlockPos(4, 1, 4));
+		Cow cow = pet(helper, owner, new BlockPos(2, 2, 2));
+		cow.setHealth(6.0F);
+		PetRegistry.Record record = PetEvents.observe(cow);
+		helper.assertTrue(record.health == 6.0F && record.maxHealth == cow.getMaxHealth(), "Its health, for when it's away");
+		helper.assertFalse(record.look.isEmpty(), "Its look, to draw it in the screen when it's away");
+		helper.assertFalse(record.look.contains("Attributes") || record.look.contains("Brain") || record.look.contains("ForgeData"),
+				"without what doesn't show (attributes, memories, other mods' data)");
+		helper.succeed();
+	}
 }

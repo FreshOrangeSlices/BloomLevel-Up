@@ -250,7 +250,13 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
   view shows the four trees; click one, confirm; then its effects fill the slots, dimmed until their level; a Reset
   button warns first. **A Bloom pet's reset puts it back to level 1; a modded companion's costs a 5-hour wait instead**
   (its level is its own mod's, which Pets doesn't touch). **Migamigos companions use their own Amigo level** as their
-  level (read from Migamigos); Zoni's companions, with none, use Bloom Pets'. A pet's Execute: +30% (2026-11-05). The
+  level (read from Migamigos); Zoni's companions, with none, use Bloom Pets' (the normal system: level 1-100 and XP as
+  a Bloom combat pet's, FreshOrangeSlices 2026-11-05). **Amigos level at a Bloom pet's pace (agreed 2026-11-05, not built
+  yet):** Migamigos' own curve (XP only from its kills, the mob's orb XP; 10 x 1.1^level a level, to 99; +0.1 damage a
+  level, +1 health every 2nd) makes Amigo 50 about 2,300 zombie kills and 75 about 25,000, so its tree's last effects
+  would never come. Bloom Pets keeps its own count for an Amigo on the Bloom combat curve and, each time that count
+  would level a Bloom pet, gives the Amigo one Amigo level's worth of XP; Migamigos levels it on its next kill, with its
+  own health and damage. A pet's Execute: +30% (2026-11-05). The
   trees (agreed 2026-11-05, Predator rather than First Strike in the Trident's gap):
 
   | Tree | 10 | 25 | 50 | 75 |

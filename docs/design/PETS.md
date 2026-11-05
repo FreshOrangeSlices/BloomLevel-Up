@@ -243,7 +243,14 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
   its post, like its skills; **leaving the party only disables it**: nothing is reset or undone.
 - **The pet's own level opens its tree** (2026-11-05: "pet based", not the player's Major Levels), the same table for
   every pet and companion: levels 10, 25, 50, 75. Gaps in a tree are filled with Bloom's universal passive combat
-  Majors. **Disarm at 75. No Bow tree** (2026-11-05: more trouble than it's worth). Proposal (not decided):
+  Majors. **Disarm at 75. No Bow tree** (2026-11-05: more trouble than it's worth). **A pet's Execute finishes
+  nothing**: it hits harder on a boss under 50% health and on anything else under 70% (2026-11-05). **A pet's Disarm
+  drops the item as a player's does** (fine: farming it would be on purpose). Cooldown abilities (Charge Attack,
+  Lightning Summon, the leap) each switch off in the screen (Lightning Summon would get annoying). Picking: the Bloom
+  view shows the four trees; click one, confirm; then its effects fill the slots, dimmed until their level; a Reset
+  button warns first. **A Bloom pet's reset puts it back to level 1; a modded companion's costs a 5-hour wait instead**
+  (its level is its own mod's, which Pets doesn't touch). **Migamigos companions use their own Amigo level** as their
+  level (read from Migamigos); Zoni's companions, with none, use Bloom Pets'. Proposal (not decided):
 
   | Tree | 10 | 25 | 50 | 75 |
   |---|---|---|---|---|
@@ -263,7 +270,7 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 
 | Tree | Effect | On a pet |
 |---|---|---|
-| Sword | Execute | its hits finish off enemies at 30% health or less (bosses 10%) |
+| Sword | Execute | its hits do more damage to a boss under 50% health and anything else under 70% (finishes nothing; 2026-11-05) |
 | Sword | Full Sweep / Batter Up | its hits sweep the enemies around its target |
 | Sword | Slash | its hits can make the target Bleed |
 | Sword | Aura Sword | every 5 hits, sweep waves around it (or a cooldown ability) |

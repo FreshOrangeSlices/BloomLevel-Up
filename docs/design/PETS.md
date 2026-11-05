@@ -78,6 +78,88 @@ Bloom pets keep their own kind's tree from the plugin (a wolf mcMMO's wolf skill
 and Panda their own). A **modded companion rolls one of those kinds at random when it's bonded** and keeps it for good:
 a Migamigos Claymore might fight like a Panda, a Wolf or an Iron Golem.
 
+## The roster: every Bloom pet
+
+From the plugin (its README and `Species.java`), with the changes agreed on 2026-11-04. Every owner bonus grows with
+the pet's level (in the plugin about 45% stronger at its top level; here spread over 100 levels). A sad pet's bonus, job,
+skills and storage rest until it cheers up.
+
+**Categories** (from the plugin): **Combat** fights whatever you fight and defends you, medium storage; **Pack** carries
+the most (up to a double chest); **Speedster** is the fastest; **Utility** helps around you. Storage grows with level:
+small 9 slots (18 later), medium 18 (27 later), pack 27 up to 54.
+
+| Pet | Category | Favourite food | Bonus for you while it's out | Job at a post |
+|---|---|---|---|---|
+| Wolf | Combat | any meat | +8% melee damage | guards (attacks monsters within 16 blocks) |
+| Polar Bear | Combat | salmon | you can't freeze, and Slowness can't touch you | guards |
+| Iron Golem | Combat | iron ingot | +3 armor | guards |
+| Goat | Combat | wheat | 40% less fall damage | guards |
+| Panda | Combat | bamboo | stand still a moment and you slowly heal | guards |
+| Vex | Combat | emerald | +10% attack speed | guards |
+| Donkey | Pack | golden carrot | +2 hearts | waits |
+| Mule | Pack | apple | +30% knockback resistance | waits |
+| Llama | Pack | hay bale | spits at mobs that hit you | spits at monsters that come close |
+| Camel | Pack | cactus | speed on sand, soul sand and snow | waits |
+| Sniffer | Pack | torchflower seeds | now and then digs up treasure while you walk on dirt, sand or gravel (armor trims rarely, seeds and flowers) | digs up finds around its post |
+| Horse | Speedster | sugar | +8% movement speed | waits |
+| Fox | Speedster | sweet or glow berries | mobs notice you from 25% shorter range | waits |
+| Rabbit | Speedster | carrot or dandelion | Jump Boost | waits |
+| Ocelot | Speedster | tropical fish | creepers and phantoms leave you alone; you often wake up to a gift | creepers and phantoms near the post leave everyone alone |
+| Strider | Speedster | warped fungus | Fire Resistance in the Nether | waits |
+| Cat | Utility | cod | as the Ocelot | as the Ocelot |
+| Bee | Utility | any flower | **new bonus needed** (its "crops around you grow fast" is Bloom's Growth Aura); proposal: when you drop low, a burst of Absorption, every few minutes | tends the crops around its post |
+| Allay | Utility | amethyst shard | pulls nearby drops to you and bottles loose XP into its storage | collects drops and loose XP around its post |
+| Chicken | Utility | seeds | you glide down long drops | waits |
+| Cow | Utility | wheat | clears one bad effect every 2 minutes | waits |
+| Turtle | Utility | seagrass | you breathe underwater | waits |
+| Frog | Utility | slime ball | Dolphin's Grace while swimming | waits |
+| Pig | Utility | carrot, potato or beetroot | **new bonus needed** (its "Lumberjack" is Bloom's Timber); proposal: food you eat fills more | waits |
+| Axolotl | Utility | tropical fish (or a bucket of it) | you slowly heal while hurt, faster in water | waits |
+| Bat | Utility | melon slice | Night Vision | waits |
+
+Left out: the Armadillo (not in 1.20.1). **The Vex** has no storage and can't be ridden; it's the only pet that wears
+gear (armor and a weapon, which adds to its damage).
+
+## Combat pets' skills
+
+The six combat kinds each have their own names for the shared skills, plus a starting and a special skill of their own.
+A Migamigos or Zoni's companion rolls one of these six kinds when it's bonded. Levels are the pet's own (the plugin's
+1000 scale divided by 10).
+
+| Level | Skill | Wolf | Iron Golem | Vex | Polar Bear | Goat | Panda |
+|---|---|---|---|---|---|---|---|
+| 1 | Starting skill | **new** (proposal: Pummel, mcMMO's knock-back chance) | Iron Colossus | Double Strike | Unyielding | Momentum | Bamboo Blessing |
+| 10 | Awareness | Environmentally Aware | Construct Awareness | Phantom Awareness | Arctic Awareness | Mountain Awareness | Bamboo Sense |
+| 15 | Gore | Gore | Crushing Blow | Spectral Rend | Mauling Blow | Headbutt | Heavy Paw |
+| 20 | Special skill | **new** | Guardian Intervention | Phase Strike | Crushing Presence | Ram | Soothing Presence |
+| 20 | Fast Food | Fast Food Service | Self Repair | Soul Siphon | Feast | Graze | Snack Break |
+| 25 | Thick Fur | Thick Fur | Iron Plating | Ethereal Form | Thick Hide | Thick Horns | Dense Fur |
+| 35 | Holy Hound | Holy Hound | Arcane Core | Voidfed | Winterborn | Mountain Spirit | Inner Balance |
+| 50 | Shock Proof | Shock Proof | Reinforced Frame | Stormproof | Avalanche Proof | Rock Solid | Unshaken |
+| 75 | Sharpened Claws | Sharpened Claws | Forged Fists | Spectral Blade | Rending Claws | Hardened Horns | Heavy Paws |
+
+What the shared ones do: **Awareness** steps out of fire, lava and cacti back to you, no fall damage; **Gore** a chance
+of double damage (the plugin's 1% a level reaches 100%: to tone down); **Fast Food** 50% chance to heal by the damage it
+deals; **Thick Fur** half damage from attacks and arrows (the golem: fire too), shakes off burning; **Holy Hound** magic,
+poison and wither heal it; **Shock Proof** 1/6 damage from explosions and lightning; **Sharpened Claws** +2 damage on
+every hit.
+
+Starting and special skills:
+- **Iron Colossus**: a walking fortress with 100+ health. **Guardian Intervention**: once a Minecraft day, a blow that
+  would kill you leaves you at half a heart with Resistance II for 20 seconds (only while it follows you; a totem in your
+  hand goes first).
+- **Double Strike**: a 2% chance to hit twice as hard, +2% every 5 levels, up to 10%. **Phase Strike**: its strikes
+  ignore 25% of the target's armor (50% from level 50).
+- **Unyielding**: can't be knocked back, slowed or frozen. **Crushing Presence**: its hits slow (II) and weaken (I) for 5
+  seconds (Slowness IV and Weakness II from level 50).
+- **Momentum**: every third hit lands 30% harder. **Ram**: that third hit also launches the target about 6 blocks up.
+- **Bamboo Blessing**: when it wins a fight, it and you get Regeneration I for 8 seconds. **Soothing Presence**: a chance
+  on each hit (15% at level 20, up to 60% at 100) to heal it, you and friends within 6 blocks, and hurt the undead (3
+  health at 20, +1 every 10 levels, up to 9).
+
+Non-combat pets have no skill tree (their bonus, job, storage and riding are what they bring). At level 100 every pet
+gets a gold name and a sparkle, a second wind once each time it comes out, and a bigger area at its post.
+
 ## One and the Same (Bloom's Combat Major, the bridge)
 
 - A Combat Major in Bloom (it exists today hidden and switched off, waiting for this).

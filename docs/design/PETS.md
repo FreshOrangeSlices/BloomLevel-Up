@@ -27,7 +27,7 @@ What carries over from the plugin, and what changes:
 | Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding still heals, and pets get a **second bar, hunger**, like the player's food: a pet has to be fed, and one with food in its own inventory takes it and eats by itself. **Fuel**: a Bloom pet eats its favourite food; a modded companion eats cooked vanilla food |
 | Bonus for the owner while a pet is out, per species | Kept (party pets only). A modded companion has the bonus of the kind it rolled |
 | Posts with jobs at level 8 | Kept |
-| Fetch, petting | Kept |
+| Fetch, petting | Kept; **fetch only for Bloom pets** (the roster's vanilla animals, nothing else; FreshOrangeSlices, 2026-11-05) |
 | Riding every pet | Kept for Bloom pets, as a late phase. **Modded companions can't be ridden** (Migamigos and Zoni's are people, not mounts); dragons aren't in the list (they ride their own way) |
 | Storage per pet | Kept for Bloom pets (small; it also holds their food). **No pet inventory for modded companions** in the screen (they keep their own mod's) |
 | Pet Toy, Pet Blooms | The screen and a key replace the toy; a bloom stays as an optional flower that calls one pet |
@@ -49,8 +49,9 @@ What carries over from the plugin, and what changes:
 - **Bloom pets at posts keep their jobs** outside the party (a guard still guards), as in the plugin.
 - **Only the party pet earns XP**; Bloom pets outside the party don't level (support pets at posts earn from their jobs,
   see Levels).
-- **Out of the party a pet is unprotected** (2026-11-05): plain vanilla stats, and it can die like any dog; only the
-  party pet faints. **Open** (an idea): a limit on how many pets a player can have, with more slots for levels or
+- **Out of the party a pet is unprotected** (2026-11-05): its level's stats aren't in effect (plain vanilla stats), and
+  if it dies at home it's dead. The party pet faints, and **a pet at its post comes back** (it faints there and rests;
+  confirmed 2026-11-05). **Open** (an idea): a limit on how many pets a player can have, with more slots for levels or
   resources.
 - **Kills by pets keep their drops**: the add-on's rule that a mob killed by another mob drops nothing already counts
   tamed pets and companions as the player's side. Bloom pets that aren't tameable in vanilla (Iron Golem, Panda, Bee...)
@@ -231,9 +232,13 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 
 ## One and the Same (Bloom's Combat Major, the bridge)
 
-- A Combat Major in Bloom (it exists today hidden and switched off, waiting for this).
-- Owning it lets the player give **the 3 pets in the party one weapon tree each** (Sword, Axe, Trident, Unarmed; Bow maybe
-  for pets that shoot; Crossbow no).
+- A Combat Major in Bloom (it exists today hidden and switched off, waiting for this). **In the Combat tab, under
+  Copycat, for 3 Major points** (FreshOrangeSlices, 2026-11-05).
+- **It shows the pet screen's Pet / Bloom toggle** (2026-11-05: rather than a pet slot of its own): without it the toggle
+  isn't there; with it, the Bloom view lets the player **pick which weapon tree the pet follows**. The choice stays;
+  **the player can reset it, but that resets the pet's whole level** (back to 1).
+- Earlier note (2026-11-04, before the party changed to one Bloom pet): owning it lets the player give **the 3 pets in
+  the party one weapon tree each** (Sword, Axe, Trident, Unarmed; Bow maybe for pets that shoot; Crossbow no).
 - How much of a tree a pet can use grows with the **player's total Major Levels earned** (the whole tree at about 10 to
   15), not with what the player bought for themselves.
 - Passive effects work on the pet's own hits; effects the player triggers with a key become **cooldown abilities** the

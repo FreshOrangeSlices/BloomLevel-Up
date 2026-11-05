@@ -94,7 +94,7 @@ divided by 10:
 |---|---|---|
 | 1 | Starting skill (each kind its own) | e.g. the plugin's Iron Colossus, Double Strike, Unyielding, Momentum, Bamboo Blessing |
 | 10 | Awareness | steps out of fire, lava and cacti back to you; no fall damage |
-| 15 | Gore | chance of double damage: 1% a pet level, so 100% at 100 (the plugin's numbers; likely too much here) |
+| 15 | Gore | chance of double damage: 1% a pet level, so 100% at 100 (the plugin's numbers; too much here, to tone down) |
 | 20 | Special skill (each kind its own) | e.g. Guardian Intervention, Phase Strike, Crushing Presence, Ram, Soothing Presence |
 | 20 | Fast Food | 50% chance to heal by the damage it deals |
 | 25 | Thick Fur | half damage from attacks and arrows; shakes off burning |
@@ -138,13 +138,13 @@ small 9 slots (18 later), medium 18 (27 later), pack 27 up to 54.
 | Ocelot | Speedster | tropical fish | creepers and phantoms leave you alone; you often wake up to a gift | creepers and phantoms near the post leave everyone alone |
 | Strider | Speedster | warped fungus | Fire Resistance in the Nether | waits |
 | Cat | Utility | cod | as the Ocelot | as the Ocelot |
-| Bee | Utility | any flower | **new bonus needed** (its "crops around you grow fast" is Bloom's Growth Aura); proposal: when you drop low, a burst of Absorption, every few minutes | tends the crops around its post |
+| Bee | Utility | any flower | crops around you grow fast, the same as Bloom's Growth Aura (kept on purpose, 2026-11-05: the pet is the other way to get it, for players who'd rather keep their Major points) | tends the crops around its post |
 | Allay | Utility | amethyst shard | pulls nearby drops to you and bottles loose XP into its storage | collects drops and loose XP around its post |
 | Chicken | Utility | seeds | you glide down long drops | waits |
 | Cow | Utility | wheat | clears one bad effect every 2 minutes | waits |
 | Turtle | Utility | seagrass | you breathe underwater | waits |
 | Frog | Utility | slime ball | Dolphin's Grace while swimming | waits |
-| Pig | Utility | carrot, potato or beetroot | **new bonus needed** (its "Lumberjack" is Bloom's Timber); proposal: food you eat fills more | waits |
+| Pig | Utility | carrot, potato or beetroot | Lumberjack: fells whole trees, the same as Bloom's Timber (kept on purpose, like the Bee's) | waits |
 | Axolotl | Utility | tropical fish (or a bucket of it) | you slowly heal while hurt, faster in water | waits |
 | Bat | Utility | melon slice | Night Vision | waits |
 
@@ -159,20 +159,20 @@ A Migamigos or Zoni's companion rolls one of these kinds (not the Vex) when it f
 
 | Level | Skill | Wolf | Iron Golem | Vex | Polar Bear | Goat | Panda |
 |---|---|---|---|---|---|---|---|
-| 1 | Starting skill | **new** | Iron Colossus | Double Strike | Unyielding | Momentum | Bamboo Blessing |
-| 10 | Awareness | Environmentally Aware | Construct Awareness | Phantom Awareness | Arctic Awareness | Mountain Awareness | Bamboo Sense |
-| 15 | Gore | Gore | Crushing Blow | Spectral Rend | Mauling Blow | Headbutt | Heavy Paw |
-| 20 | Special skill | **new** | Guardian Intervention | Phase Strike | Crushing Presence | Ram | Soothing Presence |
-| 20 | Fast Food | Fast Food Service | Self Repair | Soul Siphon | Feast | Graze | Snack Break |
-| 25 | Thick Fur | Thick Fur | Iron Plating | Ethereal Form | Thick Hide | Thick Horns | Dense Fur |
-| 35 | Holy Hound | Holy Hound | Arcane Core | Voidfed | Winterborn | Mountain Spirit | Inner Balance |
-| 50 | Shock Proof | Shock Proof | Reinforced Frame | Stormproof | Avalanche Proof | Rock Solid | Unshaken |
-| 75 | Sharpened Claws | Sharpened Claws | Forged Fists | Spectral Blade | Rending Claws | Hardened Horns | Heavy Paws |
+| 1 | Starting skill | Pack Bond | Iron Colossus | Double Strike | Unyielding | Momentum | Bamboo Blessing |
+| 10 | Awareness | Keen Nose | Construct Awareness | Phantom Awareness | Arctic Awareness | Mountain Awareness | Bamboo Sense |
+| 15 | Gore | Rending Bite | Crushing Blow | Spectral Rend | Mauling Blow | Headbutt | Heavy Paw |
+| 20 | Special skill | Alpha Howl | Guardian Intervention | Phase Strike | Crushing Presence | Ram | Soothing Presence |
+| 20 | Fast Food | Blood Hunger | Self Repair | Soul Siphon | Feast | Graze | Snack Break |
+| 25 | Thick Fur | Winter Coat | Iron Plating | Ethereal Form | Thick Hide | Thick Horns | Dense Fur |
+| 35 | Holy Hound | Moonblessed | Arcane Core | Voidfed | Winterborn | Mountain Spirit | Inner Balance |
+| 50 | Shock Proof | Storm Hide | Reinforced Frame | Stormproof | Avalanche Proof | Rock Solid | Unshaken |
+| 75 | Sharpened Claws | Wolfsteel Fangs | Forged Fists | Spectral Blade | Rending Claws | Hardened Horns | Heavy Paws |
 
 **The Wolf's skills get new names and reworded effects** (FreshOrangeSlices, 2026-11-04: mcMMO's wolf shouldn't show
-through); the names in its column are mcMMO's, to replace. Proposal (not decided):
+through). Names agreed 2026-11-05:
 
-| Level | Wolf (proposal) | What it does |
+| Level | Wolf | What it does |
 |---|---|---|
 | 1 | Pack Bond | when you and it hit the same target within 3 seconds, its bite deals 20% more |
 | 10 | Keen Nose | it smells danger: steps out of fire and lava back to you, and lands soft (no fall damage) |
@@ -185,7 +185,7 @@ through); the names in its column are mcMMO's, to replace. Proposal (not decided
 | 75 | Wolfsteel Fangs | +2 bite damage |
 
 What the shared ones do: **Awareness** steps out of fire, lava and cacti back to you, no fall damage; **Gore** a chance
-of double damage (the plugin's 1% a level reaches 100%: to tone down); **Fast Food** 50% chance to heal by the damage it
+of double damage (just the plugin's name for it, nothing gory; the plugin's 1% a level reaches 100% at level 100, every hit doubled: the numbers to tone down); **Fast Food** 50% chance to heal by the damage it
 deals; **Thick Fur** half damage from attacks and arrows (the golem: fire too), shakes off burning; **Holy Hound** magic,
 poison and wither heal it; **Shock Proof** 1/6 damage from explosions and lightning; **Sharpened Claws** +2 damage on
 every hit.

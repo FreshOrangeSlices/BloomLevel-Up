@@ -163,7 +163,7 @@
     },
     {
       "name": "animation-and-qol",
-      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back.",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back. Sophisticated Backpacks (FreshOrangeSlices, 2026-11-04: backpacks worth having; leather to netherite, with upgrades; Sophisticated Core comes with it).",
       "modrinth": [
         "punchy-fpa",
         "fwa",
@@ -175,7 +175,7 @@
         "jade",
         "appleskin",
         "mouse-tweaks",
-        "inventory-profiles-next",
+        "inventory-profiles-next", "sophisticated-backpacks",
         "crafting-tweaks",
         "lootr",
         "corpse",
@@ -246,6 +246,8 @@
   "config_files": {
     "_comment": "For both sides (the server, and the worlds a player makes; Forge copies defaultconfigs into each new world). A safety net: an entity or block entity that errors while ticking is removed and logged instead of crashing the server. Legionary's Unbreakable boss shoots flaming skulls and magma blocks whose code needs a client-only class, so each one crashes a dedicated server on its first tick (found by the mob check); with this they fizzle instead.",
     "defaultconfigs/forge-server.toml": "[server]\n\tremoveErroringBlockEntities = true\n\tremoveErroringEntities = true\n",
+    "_carryon": "Carry On (picks up chests, furnaces and animals): only plain vanilla animals and villagers can be carried (FreshOrangeSlices, 2026-11-04: a friend picked up a dragon and it broke its looks and AI; other mods' mobs don't survive being stored and put back). Its own size limit and no-hostiles rule still apply; the rest of its settings are its defaults (Forge fills in what the file leaves out).",
+    "config/carryon-common.toml": "[settings]\n\tuseWhitelistEntities = true\n\n[whitelist]\n\tallowedEntities = [\"minecraft:chicken\", \"minecraft:cow\", \"minecraft:mooshroom\", \"minecraft:pig\", \"minecraft:sheep\", \"minecraft:rabbit\", \"minecraft:goat\", \"minecraft:fox\", \"minecraft:cat\", \"minecraft:ocelot\", \"minecraft:wolf\", \"minecraft:parrot\", \"minecraft:horse\", \"minecraft:donkey\", \"minecraft:mule\", \"minecraft:llama\", \"minecraft:trader_llama\", \"minecraft:turtle\", \"minecraft:frog\", \"minecraft:tadpole\", \"minecraft:axolotl\", \"minecraft:bee\", \"minecraft:allay\", \"minecraft:panda\", \"minecraft:polar_bear\", \"minecraft:strider\", \"minecraft:bat\", \"minecraft:snow_golem\", \"minecraft:villager\", \"minecraft:wandering_trader\", \"minecraft:cod\", \"minecraft:salmon\", \"minecraft:tropical_fish\", \"minecraft:pufferfish\", \"minecraft:squid\", \"minecraft:glow_squid\"]\n",
     "_biomesoplenty": "BOP's own files with two Nether biomes off (Visceral Heap's flesh, Withered Abyss's void pits) and its Nether region weight 5 instead of 13 (vanilla's is 10), so about two thirds of the Nether stays vanilla. The Overworld is BOP's default.",
     "config/biomesoplenty/biome_toggles.json": {"aspen_glade_enabled": true, "auroral_garden_enabled": true, "bayou_enabled": true, "bog_enabled": true, "cold_desert_enabled": true, "coniferous_forest_enabled": true, "crag_enabled": true, "crystalline_chasm_enabled": true, "dead_forest_enabled": true, "dryland_enabled": true, "dune_beach_enabled": true, "erupting_inferno_enabled": true, "field_enabled": true, "fir_clearing_enabled": true, "floodplain_enabled": true, "forested_field_enabled": true, "fungal_jungle_enabled": true, "glowing_grotto_enabled": true, "grassland_enabled": true, "gravel_beach_enabled": true, "highland_enabled": true, "hot_springs_enabled": true, "jacaranda_glade_enabled": true, "jade_cliffs_enabled": true, "lavender_field_enabled": true, "lush_desert_enabled": true, "lush_savanna_enabled": true, "maple_woods_enabled": true, "marsh_enabled": true, "mediterranean_forest_enabled": true, "moor_enabled": true, "muskeg_enabled": true, "mystic_grove_enabled": true, "old_growth_dead_forest_enabled": true, "old_growth_woodland_enabled": true, "ominous_woods_enabled": true, "orchard_enabled": true, "origin_valley_enabled": true, "overgrown_greens_enabled": true, "pasture_enabled": true, "prairie_enabled": true, "pumpkin_patch_enabled": true, "rainforest_enabled": true, "redwood_forest_enabled": true, "rocky_rainforest_enabled": true, "rocky_shrubland_enabled": true, "scrubland_enabled": true, "seasonal_forest_enabled": true, "shrubland_enabled": true, "snowblossom_grove_enabled": true, "snowy_coniferous_forest_enabled": true, "snowy_fir_clearing_enabled": true, "snowy_maple_woods_enabled": true, "spider_nest_enabled": true, "tropics_enabled": true, "tundra_enabled": true, "undergrowth_enabled": true, "visceral_heap_enabled": false, "volcanic_plains_enabled": true, "volcano_enabled": true, "wasteland_enabled": true, "wasteland_steppe_enabled": true, "wetland_enabled": true, "wintry_origin_valley_enabled": true, "withered_abyss_enabled": false, "woodland_enabled": true},
     "config/biomesoplenty/generation.toml": "\n[nether]\n\t#The weighting of bop biome regions in the nether.\n\tbop_nether_region_weight = 5\n\t#The weighting of rare bop biome regions in the nether.\n\tbop_nether_rare_region_weight = 2\n\n[overworld]\n\t#The weighting of primary bop biome regions in the overworld.\n\tbop_primary_overworld_region_weight = 10\n\t#The weighting of rare bop biome regions in the overworld.\n\tbop_overworld_rare_region_weight = 2\n\t#The weighting of secondary bop biome regions in the overworld.\n\tbop_secondary_overworld_region_weight = 8\n\n",
@@ -557,7 +559,12 @@
       }
     },
     "data_edits": {
-      "_comment": "A mod's own data file with some of its values changed (the rest, and a mod update's new ones, stay): data/<namespace>/<path>.json.",
+      "_comment": "A mod's own data file with some of its values changed (the rest, and a mod update's new ones, stay): data/<namespace>/<path>.json; merge sets values, remove takes keys out (/ paths), and a path ending in * edits every file in that folder.",
+      "paladins:spell/*": {
+        "why": "Paladins & Priests' spells cost only their cooldown (FreshOrangeSlices, 2026-11-04: it's the healing class; no hunger either). Each named a Healing Rune (runes:healing_stone) from the RPG Series' Runes mod, which isn't in the pack, so the rune could never be had; the item cost and the hunger (exhaust) come out of every spell of the mod's, its own updates' new spells too.",
+        "merge": {"cost": {"exhaust": 0.0}},
+        "remove": ["cost/item"]
+      },
       "bookofdragons:spawn_settings": {
         "why": "Book of Dragons 1.4's dragons out in the wild, away from roosts (new in 1.4), at half its numbers so dragons stay a find: at most 7 in the world (its default 14) plus 2 per extra player (3), and 2 within 128 blocks (4). The roosts, doubled earlier, stay the main place to meet one.",
         "merge": {"roostless_cap": 7, "per_extra_player": 2, "density_cap": 2}

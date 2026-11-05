@@ -187,7 +187,7 @@ def pack_data_check(server_dir, dump_file, server_lines):
     packs = os.path.join(server_dir, "config", "openloader", "data")
     if not os.path.isdir(packs):
         return [], []
-    removed, hidden = [], []
+    removed, hidden, spell_costs = [], [], []
     for pack in sorted(os.listdir(packs)):
         data = os.path.join(packs, pack, "data")
         for folder, _, names in os.walk(data):
@@ -201,6 +201,17 @@ def pack_data_check(server_dir, dump_file, server_lines):
                         recipe = {}
                     if {"type": "forge:false"} in recipe.get("conditions", []):
                         removed.append(f"{parts[0]}:{parts[2][:-5]}")
+        # Spell costs edited (data_edits on a mod's spell folder, Paladins & Priests): no item cost and no hunger left.
+        for namespace in (os.listdir(data) if os.path.isdir(data) else []):
+            spells = os.path.join(data, namespace, "spell")
+            if not os.path.isdir(spells):
+                continue
+            for file_name in sorted(os.listdir(spells)):
+                try:
+                    cost = json.load(open(os.path.join(spells, file_name))).get("cost") or {}
+                except ValueError:
+                    cost = {}
+                spell_costs.append((f"{namespace}:{file_name[:-5]}", cost))
         tag = os.path.join(data, "c", "tags", "items", "hidden_from_recipe_viewers.json")
         if os.path.exists(tag):
             hidden += [v["id"] if isinstance(v, dict) else v for v in json.load(open(tag))["values"]]
@@ -225,10 +236,32 @@ def pack_data_check(server_dir, dump_file, server_lines):
         makers = sorted(r["id"] for r in recipes if r.get("result") == item)
         if makers:
             failures.append(f"pack data: {item} is hidden but still made by {', '.join(makers)}")
+    costly = [spell for spell, cost in spell_costs if "item" in cost or cost.get("exhaust", 0.0) != 0.0]
+    if costly:
+        failures.append(f"pack data: {len(costly)} edited spells still cost an item or hunger: {', '.join(costly[:10])}")
     injected = next((l.split("]: ", 1)[-1] for l in server_lines if "Successfully injected" in l), "Open Loader said nothing")
     notes = [f"pack data: {len([r for r in removed if r.split(':')[0] in mods])} recipes out, {len(checked)} items hidden "
-             f"(of {len(removed)} and {len(hidden)} listed; the rest are from mods this layer leaves out); {injected}"]
+             f"(of {len(removed)} and {len(hidden)} listed; the rest are from mods this layer leaves out)"
+             + (f"; {len(spell_costs)} spells cost only their cooldown" if spell_costs else "") + f"; {injected}"]
     return failures, notes
+
+
+def carry_on_check(server_dir):
+    """Carry On's mob whitelist as the server left its config (the pack ships it; the mod adds its other settings): only
+    plain vanilla animals and villagers can be picked up. Nothing to check without the mod. Returns (failures, notes)."""
+    if not any(f.lower().startswith("carryon") for f in os.listdir(os.path.join(server_dir, "mods"))):
+        return [], []
+    path = os.path.join(server_dir, "config", "carryon-common.toml")
+    if not os.path.exists(path):
+        return ["carry on: config/carryon-common.toml isn't on the server"], []
+    text = open(path, encoding="utf-8", errors="replace").read()
+    allowed = re.search(r"allowedEntities\s*=\s*\[(.*?)\]", text, re.S)
+    allowed = re.findall(r'"([^"]+)"', allowed.group(1)) if allowed else []
+    if not re.search(r"useWhitelistEntities\s*=\s*true", text) or "minecraft:cow" not in allowed:
+        return [f"carry on: the mob whitelist isn't on (useWhitelistEntities, {len(allowed)} allowed)"], []
+    modded = [e for e in allowed if not e.startswith("minecraft:")]
+    return ([f"carry on: modded mobs on the whitelist: {', '.join(modded)}"] if modded else []), \
+        [f"carry on: only {len(allowed)} vanilla mobs can be carried"]
 
 
 def voice_check(server_dir, spec_file):
@@ -1220,6 +1253,9 @@ def main():
     voice_failures, voice_notes = voice_check(server_dir, os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
     failures += voice_failures
     notes += voice_notes
+    carry_failures, carry_notes = carry_on_check(server_dir)
+    failures += carry_failures
+    notes += carry_notes
     # The LegionWareX add-on (addon/, packed in like Bloom): loaded, with its keepsake and its companion tag.
     if any(f.startswith("legionwarex-addon") for f in os.listdir(os.path.join(server_dir, "mods"))):
         dump_rows = [json.loads(line) for line in open(os.path.join(server_dir, "bloom-dump.jsonl")) if line.strip()] \

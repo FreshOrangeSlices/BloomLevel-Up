@@ -355,36 +355,53 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
             original = original.replace(f'"{old_item}"', f'"{new_item}"')
         out[f"{root}/data/{namespace}/recipes/{path}.json"] = json.loads(original)
     # A mod's own data file with some of its values changed: {"<namespace>:<path under data/<namespace>>": {"why": ...,
-    # "merge": {...}}}, the file from the jars with "merge" merged in (objects key by key), so a mod update's new
-    # values stay. Skipped when the mod isn't in the layers built.
+    # "merge": {...}, "remove": ["a/b", ...]}}, the file from the jars with "merge" merged in (objects key by key) and the
+    # "remove" keys (/ paths) taken out, so a mod update's new values stay. A path ending in * edits every file in that
+    # folder ("paladins:spell/*"). Skipped when the mod isn't in the layers built.
+    def merge(into, changes):
+        for key, value in changes.items():
+            if isinstance(value, dict) and isinstance(into.get(key), dict):
+                merge(into[key], value)
+            else:
+                into[key] = value
+
+    def remove(node, key_path):
+        *parents, last = key_path.split("/")
+        for part in parents:
+            node = node.get(part) if isinstance(node, dict) else None
+        if isinstance(node, dict):
+            node.pop(last, None)
+
     for ident, edit in data.get("data_edits", {}).items():
         if ident.startswith("_"):
             continue
         namespace, path = ident.split(":", 1)
         if jars is not None and namespace not in mods_in(jars):
             continue
-        original = None
+        wanted = f"data/{namespace}/{path}.json"
+        found = {}
         for jar_data in (jars or {}).values():
             try:
-                original = json.loads(zipfile.ZipFile(io.BytesIO(jar_data)).read(f"data/{namespace}/{path}.json").decode("utf-8"))
-                break
-            except (KeyError, zipfile.BadZipFile):
+                archive = zipfile.ZipFile(io.BytesIO(jar_data))
+            except zipfile.BadZipFile:
                 continue
-        if original is None:
+            names = [n for n in archive.namelist() if n.endswith(".json")
+                     and (n == wanted or (path.endswith("*") and n.startswith(wanted[:-len("*.json")]) and "/" not in n[len(wanted) - len("*.json"):]))]
+            for name in names:
+                if name not in found:
+                    found[name] = json.loads(archive.read(name).decode("utf-8"))
+        if not found:
             if jars:
-                problems.append(f"pack_data.data_edits: no data/{namespace}/{path}.json in the pack's jars")
+                problems.append(f"pack_data.data_edits: no {wanted} in the pack's jars")
             continue
-
-        def merge(into, changes):
-            for key, value in changes.items():
-                if isinstance(value, dict) and isinstance(into.get(key), dict):
-                    merge(into[key], value)
-                else:
-                    into[key] = value
-        merge(original, edit["merge"])
-        out[f"{root}/data/{namespace}/{path}.json"] = original
+        for name, original in found.items():
+            merge(original, edit.get("merge", {}))
+            for key_path in edit.get("remove", []):
+                remove(original, key_path)
+            out[f"{root}/{name}"] = original
         if notes is not None:
-            notes.append(f"data edit: {ident} ({', '.join(edit['merge'])})")
+            changed = list(edit.get("merge", {})) + [f"-{k}" for k in edit.get("remove", [])]
+            notes.append(f"data edit: {ident} ({', '.join(changed)}" + (f"; {len(found)} files)" if len(found) > 1 else ")"))
     # Worldgen files replaced outright (vanilla's or a mod's): the pack's data pack loads after both.
     for ident, spec in data.get("worldgen", {}).items():
         if ident.startswith("_"):

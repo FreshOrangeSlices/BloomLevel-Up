@@ -46,7 +46,11 @@ What carries over from the plugin, and what changes:
 - **Out of the party** (Bloom pets): still yours, still out in the world, still callable, no Bloom bonus. It keeps its
   level and traits stored; joining again brings them back, **with its health filled to full**.
 - **Party changes have a 5-minute cooldown** (so swapping isn't a free full heal mid-fight).
-- (**Open**: do Bloom pets at posts keep their jobs outside the party, as in the plugin?)
+- **Bloom pets at posts keep their jobs** outside the party (a guard still guards), as in the plugin.
+- **Only the party pet earns XP**; Bloom pets outside the party don't level.
+- **Kills by pets keep their drops**: the add-on's rule that a mob killed by another mob drops nothing already counts
+  tamed pets and companions as the player's side. Bloom pets that aren't tameable in vanilla (Iron Golem, Panda, Bee...)
+  must carry an owner mark the add-on reads too (`world/MobKillDrops.playerSide`), with a game test.
 
 ## The pet screen
 
@@ -102,7 +106,8 @@ divided by 10:
 Bloom pets keep their own kind's tree from the plugin (a wolf mcMMO's wolf skills, the Iron Golem, Vex, Polar Bear, Goat
 and Panda their own). A **modded companion rolls one of the combat kinds at random when it first joins the party** (never the Vex, and never
 a non-combat kind) and keeps it: a Migamigos Claymore might get the **Spirit of the Panda**, of the Wolf or of the Iron
-Golem (shown that way in the screen). **One reroll** is allowed, with something rare (**Open**: what).
+Golem (shown that way in the screen). **One free reroll**: the first time the player opens its page, a pop-up says
+"Claymore gained the Spirit of the Wolf. Keep it, or reroll? (This can't be undone.)"
 
 ## The roster: every Bloom pet
 

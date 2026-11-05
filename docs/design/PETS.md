@@ -9,20 +9,22 @@ Nothing here is built yet. Questions still open are marked **Open**.
 - **Its own mod** beside Bloom (mod id `bloompets`): its own folder and build like the Warionex add-on, its own game
   tests and CI job, so it builds and tests in minutes and can be swapped in game as one jar. It needs Bloom; Bloom never
   needs it. Tuning happens later, in the pack.
-- **Pets are the pets players already own**: tamed animals (wolves, cats, horses...), Migamigos companions, Zoni's
-  Companions. Bloom Pets adds no creatures and no taming of its own (the plugin's favourite-food taming isn't needed: the
-  mods tame). Dragons are restricted (**Open**: not bondable at all, or bondable without skills and trees?).
+- **Three kinds of pets** (FreshOrangeSlices, 2026-11-04: "three companion mods"):
+  - **Bloom pets**: the plugin's roster of vanilla animals, bonded the plugin's way (sneak + feed a wild one its
+    favourite food a few times). The Armadillo is left out (it isn't in 1.20.1).
+  - **Migamigos companions** and **Zoni's Companions**, tamed by their own mods, then bonded in the pet screen.
+  - **Dragons can't be bonded** (to avoid trouble), nor anything else.
 - **Its own screen**, opened from a tab next to the skill hub (not a fifth skill tab).
 
 What carries over from the plugin, and what changes:
 
 | Plugin | In the Forge mod |
 |---|---|
-| Pets live with the player, summoned from a menu | Pets stay in the world (they're other mods' mobs; storing and respawning them broke a dragon with Carry On). The screen **calls** a pet to you instead |
+| Pets live with the player, summoned from a menu | Migamigos and Zoni's companions stay in the world (storing and respawning other mods' mobs broke a dragon with Carry On). The screen **calls** any pet to you, for everyone (**Open**: Bloom pets live with you and are summoned, as in the plugin, or stay in the world too?) |
 | One pet out at a time | Up to **3 bonded pets** (the ones that level up and get skills); every other owned pet is just listed |
 | Levels 1 to 10, skills from the player's mcMMO Taming level (0 to 1000) | **Pet levels 1 to 100**, and the skills come from the pet's own level (Bloom has no Taming skill) |
 | Pets never die: they faint and rest | Kept for bonded pets |
-| Happiness, petting, fetch, "loves you", tired | Kept as the engagement layer (**Open**: all of it?) |
+| Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding is for its mood, not for healing (**Open**: how a pet heals then) |
 | Bonus for the owner while a pet is out, per species | Kept, per kind of pet (**Open**) |
 | Posts with jobs at level 8 | **Open** (Migamigos already has "stay") |
 | Riding any pet, storage per pet | Dropped: modded pets ride and carry the way their own mod says; the screen opens the pet's own inventory where it has one |
@@ -31,7 +33,7 @@ What carries over from the plugin, and what changes:
 
 - **Every pet the player owns**, including ones not loaded right now: name, kind, level, mood, where it was last seen,
   fine or fainted. Pets tamed before the mod is in show up the next time they load near their owner.
-- Per pet: **Call** (teleport it to you), **Inventory** (a shortcut to its own: a Migamigos backpack, a donkey's chest,
+- Per pet: **Call** (teleport it to you; everyone has it), **Inventory** (a shortcut to its own: a Migamigos backpack, a donkey's chest,
   a Zoni's companion's), **Bond / Unbond** (3 bond slots).
 - Per bonded pet: level and XP, mood, its skills, and (with One and the Same) its weapon tree and an on/off switch per
   ability.
@@ -72,8 +74,9 @@ divided by 10:
 | 75 | Sharpened Claws | +2 damage on every hit |
 | 100 | Max level | gold name and a sparkle, a second wind once each time it's called |
 
-For modded pets the starting and special skills need picking per kind (a Migamigos Claymore, a Zoni's companion...);
-**Open**: per kind, or per category (combat, pack, speedster, utility as in the plugin)?
+Bloom pets keep their own kind's tree from the plugin (a wolf mcMMO's wolf skills, the Iron Golem, Vex, Polar Bear, Goat
+and Panda their own). A **modded companion rolls one of those kinds at random when it's bonded** and keeps it for good:
+a Migamigos Claymore might fight like a Panda, a Wolf or an Iron Golem.
 
 ## One and the Same (Bloom's Combat Major, the bridge)
 
@@ -84,7 +87,6 @@ For modded pets the starting and special skills need picking per kind (a Migamig
   15), not with what the player bought for themselves.
 - Passive effects work on the pet's own hits; effects the player triggers with a key become **cooldown abilities** the
   pet uses itself every 20 to 30 seconds, each switchable off.
-- **Open**: is calling a pet to you (teleport) part of One and the Same, or for everyone?
 
 | Tree | Effect | On a pet |
 |---|---|---|

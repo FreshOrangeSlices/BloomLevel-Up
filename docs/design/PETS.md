@@ -241,7 +241,16 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
   comes) and modded companions, one tree each (Sword, Axe, Trident, Unarmed; Bow for pets that shoot; Crossbow no).
   Non-combat pets don't (their bonus and job are what they bring). A tree works while the pet is in the party or at
   its post, like its skills; **leaving the party only disables it**: nothing is reset or undone.
-- **The pet's own level opens its tree** (2026-11-05: "pet based", not the player's Major Levels).
+- **The pet's own level opens its tree** (2026-11-05: "pet based", not the player's Major Levels), the same table for
+  every pet and companion: levels 10, 25, 50, 75. Gaps in a tree are filled with Bloom's universal passive combat
+  Majors. **Disarm at 75. No Bow tree** (2026-11-05: more trouble than it's worth). Proposal (not decided):
+
+  | Tree | 10 | 25 | 50 | 75 |
+  |---|---|---|---|---|
+  | Sword | Slash | Full Sweep | Execute | Aura Sword |
+  | Axe | Armor Break | Guaranteed Critical | Charge Attack (cooldown) | a leap on its target (cooldown) |
+  | Trident | Lightning Shock | First Strike | Lightning Summon (cooldown) | Overkill |
+  | Unarmed | Brawler | Combo | Bloodlust | Disarm |
 - **Its own skills and its tree work together** (2026-11-05: strong on purpose).
 - **One and the Same off or lost** (toggled off, or a Major reset): the pets' trees are disabled, their picks and
   levels kept; owning it again brings everything back as it was.
@@ -268,7 +277,7 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
 | Unarmed | Brawler | flat extra damage |
 | Unarmed | Combo | each hit in a row adds a little damage |
 | Unarmed | Disarm | its hits can knock the item out of a target's hand |
-| Bow | Marksman, Piercing Shot, Straight Shot | only for pets that shoot (Migamigos' Cocogoat and Wavelyn), if their shots are arrows |
+| Bow | Marksman, Piercing Shot, Straight Shot | dropped (2026-11-05) |
 | Crossbow | all | left out |
 
 ## Building it, in phases

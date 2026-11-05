@@ -1239,20 +1239,22 @@ def main():
             time.sleep(2)
             server.send(f"execute as {PLAYER} run bloompets tree sword 1")
             time.sleep(2)
-            # What the server said to those (Bloom's answers, the tree's) and what Bloom Pets found of Bloom's API.
-            said = [line[-160:] for line in server.lines[mark:] if re.search(r"Major|major|tree|Sword|One and the Same|bloom", line)]
-            # (First in the notes: the summary is cut at 3900 characters.)
-            notes.insert(0, "bloom pets: One and the Same for the screenshot: " + (" | ".join(said[:6]) or "no answer")[:600])
-            bridge = next((line for line in server.lines if "Bloom Pets: Bloom's API" in line), None)
-            if bridge and "not found" in bridge:
-                failures.append("bloom pets: " + bridge[-200:])
-            elif bridge:
-                notes.insert(1, "bloom pets: " + bridge[-120:])
             server.send(f"execute as {PLAYER} run bloompets screen bloom")
             time.sleep(4)
             capture(shots, "pack_pets_bloom")
             press("Escape")
             time.sleep(1)
+            # What the server said to all that (Bloom's answers to the Major's purchase, the tree's, and Bloom Pets' line
+            # on what Bloom told it), in the milestones (the summary is cut at 3900 characters, too late for these).
+            said = [line for line in server.lines[mark:] if line.strip() and "Can't keep up" not in line]
+            for line in said[:10]:
+                progress("pets: " + line[-220:])
+            bridge = next((line for line in server.lines if "Bloom Pets: Bloom's API" in line), None)
+            if bridge and "not found" in bridge:
+                failures.append("bloom pets: " + bridge[-200:])
+            view = next((line for line in said if "opens the pet screen's Bloom view" in line), "")
+            if "One and the Same off" in view:
+                failures.append("bloom pets: the Bloom view didn't open: " + view[-200:])
             progress("pet screen's Bloom view shown")
     else:
         failures.append("the client didn't join the server")

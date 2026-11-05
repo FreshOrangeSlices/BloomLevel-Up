@@ -27,6 +27,7 @@ public final class BloomBridge {
 	private static Method isMajorActive;
 	private static boolean looked;
 	private static boolean failureLogged;
+	private static String status = "not asked yet";
 
 	private BloomBridge() {
 	}
@@ -50,11 +51,17 @@ public final class BloomBridge {
 		} catch (ReflectiveOperationException | RuntimeException e) {
 			if (!failureLogged) {
 				failureLogged = true;
+				status = "found, but asking it failed (" + e + (e.getCause() != null ? ", " + e.getCause() : "") + ")";
 				BloomPets.LOGGER.warn("Bloom Pets: asking Bloom's API about One and the Same failed", e);
 			}
 
 			return false;
 		}
+	}
+
+	/** How asking Bloom has gone: found, not found (and why), or found but failing (and why). For logs. */
+	public static synchronized String status() {
+		return status;
 	}
 
 	/** Game tests: this player counts as having One and the Same on (or off). */
@@ -68,9 +75,11 @@ public final class BloomBridge {
 
 			try {
 				isMajorActive = Class.forName("com.freshorangeslices.bloomlevelup.api.BloomApi").getMethod("isMajorActive", Player.class, String.class);
+				status = "found";
 				BloomPets.LOGGER.info("Bloom Pets: Bloom's API found (One and the Same is asked of it)");
 			} catch (ReflectiveOperationException | RuntimeException | LinkageError e) {
 				isMajorActive = null;
+				status = "not found (" + e + ")";
 				BloomPets.LOGGER.info("Bloom Pets: Bloom's API not found ({}): no pet trees", e.toString());
 			}
 		}

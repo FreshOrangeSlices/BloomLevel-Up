@@ -82,10 +82,23 @@ repositories {
 			includeGroup 'maven.modrinth'
 		}
 	}
+	maven {
+		name = 'CurseMaven'
+		url = 'https://cursemaven.com'
+		content {
+			includeGroup 'curse.maven'
+		}
+	}
 }
 
 dependencies {
 	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+	// In the dev runs only, for the game tests: Migamigos (and what it needs), whose Amigo levels Bloom Pets reads and
+	// feeds by name.
+	runtimeOnly fg.deobf("maven.modrinth:migamigos:${migamigos_version}")
+	runtimeOnly fg.deobf("maven.modrinth:geckolib:${geckolib_version}")
+	runtimeOnly fg.deobf("curse.maven:framework-549225:${framework_file}")
 }
 
 def resourceProps = [

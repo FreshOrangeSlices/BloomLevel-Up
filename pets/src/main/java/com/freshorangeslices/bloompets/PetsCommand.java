@@ -44,7 +44,16 @@ public final class PetsCommand {
 					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
 					return 1;
 				}).then(Commands.literal("bloom").executes(c -> {
-					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null, true);
+					ServerPlayer player = c.getSource().getPlayerOrException();
+					boolean has = BloomBridge.oneAndTheSame(player);
+					BloomPets.LOGGER.info("Bloom Pets: {} opens the pet screen's Bloom view: One and the Same {} (Bloom's API {})",
+							player.getGameProfile().getName(), has ? "on" : "off", BloomBridge.status());
+
+					if (!has) {
+						c.getSource().sendFailure(Component.translatable("bloompets.tree.needs"));
+					}
+
+					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(player, true, null, has);
 					return 1;
 				})))
 				.then(Commands.literal("level").requires(source -> source.hasPermission(2))

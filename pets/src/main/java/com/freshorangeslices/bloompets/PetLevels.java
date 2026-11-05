@@ -23,6 +23,8 @@ import net.minecraft.world.entity.LivingEntity;
  */
 public final class PetLevels {
 	public static final int MAX = 100;
+	/** Bloom Pets helps an Amigo up to this Amigo level; past it, it's Migamigos' own climb (FreshOrangeSlices, 2026-11-05). */
+	public static final int AMIGO_PACE_CAP = 75;
 
 	private PetLevels() {
 	}
@@ -89,11 +91,18 @@ public final class PetLevels {
 		return kind == Pets.Kind.MODDED || kind == Pets.Kind.BLOOM && (Pets.inParty(pet) || PetPosts.posted(pet)) && !Fainting.fainted(pet);
 	}
 
-	/** Adds XP to an active pet, levelling it up as it fills; returns the levels gained. A Migamigos Amigo levels its own way. */
+	/**
+	 * Adds XP to an active pet, levelling it up as it fills; returns the levels gained. A Migamigos Amigo instead climbs
+	 * at a Bloom pet's pace ({@link #amigoPace}).
+	 */
 	public static int addXp(LivingEntity pet, double amount) {
+		if (Amigos.has(pet)) {
+			return amigoPace(pet, amount);
+		}
+
 		int level = level(pet);
 
-		if (amount <= 0 || level >= MAX || Amigos.has(pet)) {
+		if (amount <= 0 || level >= MAX) {
 			return 0;
 		}
 
@@ -113,6 +122,40 @@ public final class PetLevels {
 		}
 
 		return level - start;
+	}
+
+	/**
+	 * An Amigo at a Bloom pet's pace (FreshOrangeSlices, 2026-11-05): on its own, Migamigos' curve makes Amigo 50 about
+	 * 2,300 zombie kills and 75 about 25,000, so a One and the Same tree's last effects would never come. Bloom Pets
+	 * keeps its own count for the Amigo on the Bloom combat curve ({@code bloompets.paceLevel}, {@code paceXp}; it
+	 * starts at the Amigo's level when first counted, nothing owed for the past), and each time that count would level
+	 * a Bloom pet it gives the Amigo one Amigo level's worth of XP, up to Amigo level {@value #AMIGO_PACE_CAP}.
+	 * Migamigos levels it on its next kill, with its own health and damage. Returns the Amigo levels given.
+	 */
+	private static int amigoPace(LivingEntity pet, double amount) {
+		Integer amigo = Amigos.level(pet);
+
+		if (amount <= 0 || amigo == null) {
+			return 0;
+		}
+
+		CompoundTag data = Pets.data(pet);
+		int pace = data.contains("paceLevel") ? Math.max(1, data.getInt("paceLevel")) : Math.max(1, Math.min(MAX, amigo));
+		double xp = data.getDouble("paceXp") + amount;
+		int given = 0;
+
+		while (pace < MAX && xp >= xpToNext(pace, true)) {
+			xp -= xpToNext(pace, true);
+			pace++;
+
+			if (Amigos.giveLevel(pet, AMIGO_PACE_CAP)) {
+				given++;
+			}
+		}
+
+		data.putInt("paceLevel", pace);
+		data.putDouble("paceXp", pace >= MAX ? 0.0 : xp);
+		return given;
 	}
 
 	/** Sets the pet's level (operators' command, tests), its XP back to the start of that level. */

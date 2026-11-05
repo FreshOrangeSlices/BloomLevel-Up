@@ -486,6 +486,9 @@ jobs:
           # Bloom Pets' screen, with three pets given to the player.
           - layers: 6
             shot: pack_pets
+          # Its Bloom view (One and the Same): the wolf's Sword tree.
+          - layers: 6
+            shot: pack_pets_bloom
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

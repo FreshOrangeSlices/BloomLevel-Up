@@ -368,7 +368,8 @@ no second sweep). Migamigos companions use their own Amigo level and XP (`Amigos
 to it). The screen: the Pet / Bloom switch only with the Major; the Bloom view picks a tree (its four effects listed),
 then shows them with Bloom's own icons, dimmed until their level, cooldown ones switching off with a click (a red ✕),
 the tree at the top right and Reset at the bottom right, both asking first in a box over the pet. `/bloompets tree
-<sword|axe|trident|unarmed|reset> <pet>`. Game tests: `PetTreeGameTests` (and Bloom's smoke test checks the Major
+<sword|axe|trident|unarmed|reset> <pet>`. One and the Same's icon is Bloom's question mark (FreshOrangeSlices, 2026-11-05). `/bloompets screen bloom`
+opens the screen on its Bloom view; the pack test buys the Major and shows the wolf's Sword tree (`pack_pets_bloom`). Game tests: `PetTreeGameTests` (and Bloom's smoke test checks the Major
 loads at 3).
 
 Each phase is its own chunk: built, tested (game tests on plain wolves first; Migamigos and Zoni's later), pushed.

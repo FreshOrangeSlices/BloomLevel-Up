@@ -1213,8 +1213,10 @@ def main():
             time.sleep(1)
             progress("quest book shown")
         # Bloom Pets' screen, with a wolf (in the party, level 40 with some XP: skills open up to Moonblessed), a cow
-        # and a fox given to the player.
+        # and a fox given to the player; peaceful first, so what the checks above left around can't kill them.
         if any(f.startswith("bloompets") for f in os.listdir(os.path.join(server_dir, "mods"))):
+            server.send("difficulty peaceful")
+            time.sleep(2)
             for species in ("wolf", "cow", "fox"):
                 server.send(f"bloompets give {species} {PLAYER}")
             time.sleep(2)
@@ -1229,6 +1231,19 @@ def main():
             press("Escape")
             time.sleep(1)
             progress("pet screen shown")
+            # One and the Same (Bloom's Combat Major, 3 points): the wolf follows the Sword tree, shown in the screen's
+            # Bloom view (Slash and Full Sweep open at its level 40, Execute and Aura Sword still dim).
+            server.send(f"bloom admin majorlevels {PLAYER} 3")
+            server.send(f"execute as {PLAYER} run bloom buy bloomlevelup:combat/one_and_the_same")
+            time.sleep(1)
+            server.send(f"execute as {PLAYER} run bloompets tree sword 1")
+            time.sleep(1)
+            server.send(f"execute as {PLAYER} run bloompets screen bloom")
+            time.sleep(4)
+            capture(shots, "pack_pets_bloom")
+            press("Escape")
+            time.sleep(1)
+            progress("pet screen's Bloom view shown")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")

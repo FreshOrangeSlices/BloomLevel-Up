@@ -43,7 +43,10 @@ public final class PetsCommand {
 				.then(Commands.literal("screen").executes(c -> {
 					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
 					return 1;
-				}))
+				}).then(Commands.literal("bloom").executes(c -> {
+					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null, true);
+					return 1;
+				})))
 				.then(Commands.literal("level").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("level", IntegerArgumentType.integer(1, PetLevels.MAX)).then(pet().executes(c -> level(c, false)))))
 				.then(Commands.literal("xp").requires(source -> source.hasPermission(2))

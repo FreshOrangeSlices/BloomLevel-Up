@@ -131,6 +131,7 @@ public final class PetScreen extends Screen {
 	public PetScreen(PetsNetwork.PetList list) {
 		super(Component.translatable("bloompets.screen.title"));
 		accept(list);
+		bloomView = list.bloomView() && list.oneAndTheSame();
 	}
 
 	private void accept(PetsNetwork.PetList list) {

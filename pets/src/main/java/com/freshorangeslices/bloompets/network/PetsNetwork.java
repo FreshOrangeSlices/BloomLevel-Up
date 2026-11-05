@@ -38,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "5";
+	private static final String VERSION = "6";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -61,7 +61,12 @@ public final class PetsNetwork {
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
 	public static void sendList(ServerPlayer player, boolean open, Component message) {
-		CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), PetList.of(player, open, message));
+		sendList(player, open, message, false);
+	}
+
+	/** As above; {@code bloomView} opens the screen on its Bloom view (if the player has One and the Same). */
+	public static void sendList(ServerPlayer player, boolean open, Component message, boolean bloomView) {
+		CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), PetList.of(player, open, message, bloomView));
 	}
 
 	/** Client to server: list my pets, or act on one of them (with an argument for some actions). */
@@ -171,9 +176,12 @@ public final class PetsNetwork {
 		}
 	}
 
-	/** Server to client: the player's pets, how long until their party can change, and whether they have One and the Same. */
-	public record PetList(boolean open, int partyWait, List<Entry> pets, Component message, boolean oneAndTheSame) {
-		static PetList of(ServerPlayer player, boolean open, Component message) {
+	/**
+	 * Server to client: the player's pets, how long until their party can change, whether they have One and the Same, and
+	 * whether a screen this opens starts on its Bloom view.
+	 */
+	public record PetList(boolean open, int partyWait, List<Entry> pets, Component message, boolean oneAndTheSame, boolean bloomView) {
+		static PetList of(ServerPlayer player, boolean open, Component message, boolean bloomView) {
 			PetRegistry registry = PetRegistry.get(player.server);
 			long now = player.server.overworld().getGameTime();
 			long last = registry.partyChanged(player.getUUID());
@@ -216,7 +224,7 @@ public final class PetsNetwork {
 						(int) Math.min(Integer.MAX_VALUE, Math.max(0, treeWaitUntil - now))));
 			}
 
-			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player));
+			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player), bloomView);
 		}
 
 		void encode(FriendlyByteBuf buf) {
@@ -231,6 +239,7 @@ public final class PetsNetwork {
 			}
 
 			buf.writeBoolean(oneAndTheSame);
+			buf.writeBoolean(bloomView);
 		}
 
 		static PetList decode(FriendlyByteBuf buf) {
@@ -244,7 +253,8 @@ public final class PetsNetwork {
 			}
 
 			Component message = buf.readBoolean() ? buf.readComponent() : null;
-			return new PetList(open, wait, pets, message, buf.readBoolean());
+			boolean oneAndTheSame = buf.readBoolean();
+			return new PetList(open, wait, pets, message, oneAndTheSame, buf.readBoolean());
 		}
 
 		void handle(Supplier<NetworkEvent.Context> context) {

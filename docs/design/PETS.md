@@ -20,24 +20,49 @@ What carries over from the plugin, and what changes:
 
 | Plugin | In the Forge mod |
 |---|---|
-| Pets live with the player, summoned from a menu | **All pets stay out in the world**, Bloom pets too (FreshOrangeSlices, 2026-11-04: a friend keeps about 10 dogs, and that's how he plays). Only the pets in the player's **party** get their skills, owner bonus and Bloom stats; every other pet is a plain pet. The screen **calls** any pet to you, for everyone |
-| One pet out at a time | Any number out; a **party of up to 3** (the ones that level up and get skills); every other owned pet is just listed |
+| Pets live with the player, summoned from a menu | **All pets stay out in the world**, Bloom pets too (FreshOrangeSlices, 2026-11-04: a friend keeps about 10 dogs, and that's how he plays). Only the pets in the player's **party** get their levels, skills, owner bonus and Bloom stats (see The party); every other pet is a plain pet. The screen **calls** any pet to you, for everyone |
+| One pet out at a time | Any number out; a **party of up to 3**, and **only one Bloom pet follows** you (modded companions all follow, their own mods' way) |
 | Levels 1 to 10, skills from the player's mcMMO Taming level (0 to 1000) | **Pet levels 1 to 100**, and the skills come from the pet's own level (Bloom has no Taming skill) |
 | Pets never die: they faint and rest | Kept for party pets |
-| Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding still heals, and pets get a **second bar, hunger**, like the player's food: a pet has to be fed, and one with food in its own inventory takes it and eats by itself |
-| Bonus for the owner while a pet is out, per species | Kept, per kind of pet (**Open**) |
-| Posts with jobs at level 8 | **Open** (Migamigos already has "stay") |
-| Riding any pet, storage per pet | Dropped: modded pets ride and carry the way their own mod says; the screen opens the pet's own inventory where it has one |
+| Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding still heals, and pets get a **second bar, hunger**, like the player's food: a pet has to be fed, and one with food in its own inventory takes it and eats by itself. **Fuel**: a Bloom pet eats its favourite food; a modded companion eats cooked vanilla food |
+| Bonus for the owner while a pet is out, per species | Kept (party pets only). A modded companion has the bonus of the kind it rolled |
+| Posts with jobs at level 8 | Kept |
+| Fetch, petting | Kept |
+| Riding every pet | Kept for Bloom pets, as a late phase. **Modded companions can't be ridden** (Migamigos and Zoni's are people, not mounts); dragons aren't in the list (they ride their own way) |
+| Storage per pet | Kept for Bloom pets (small; it also holds their food). **No pet inventory for modded companions** in the screen (they keep their own mod's) |
+| Pet Toy, Pet Blooms | The screen and a key replace the toy; a bloom stays as an optional flower that calls one pet |
+| Pet Guide | A quest book chapter |
+| Pet PvP toggle | Dropped (co-op) |
+| mcMMO tie-in | Gone (pet levels instead) |
+
+## The party
+
+- **Up to 3 party pets.** Only one Bloom pet follows you; modded companions don't go home the way Bloom pets do, so a
+  party can be, say, 3 companions and the one Bloom pet that follows (**Open**: exactly how the 3 places and the one
+  follower add up).
+- **In the party**: the pet has its level, skills, owner bonus and Bloom stats. A support pet's passive (Bee, Allay, Cat...)
+  works only while you're within a reasonable distance of it (**Open**: how far; 32 blocks?).
+- **Out of the party**: still yours, still out in the world, still callable, but no Bloom bonus of any kind. It keeps its
+  level and traits stored; joining the party again brings them back.
+- **Joining the party with more health from its level**: its health fills to full (**suggestion**: only out of combat,
+  or with a short cooldown on party changes, so swapping isn't a free full heal mid-fight).
+- (**Open**: the sketch's note "modded pets will always have their traits and bonus": always, even outside the party?)
 
 ## The pet screen
 
-- **Every pet the player owns**, including ones not loaded right now: name, kind, level, mood, where it was last seen,
-  fine or fainted. Pets tamed before the mod is in show up the next time they load near their owner.
-- Per pet: **Call** (teleport it to you; everyone has it), **Inventory** (a shortcut to its own: a Migamigos backpack, a donkey's chest,
-  a Zoni's companion's), **Add to / take out of the party** (3 places).
-- Per party pet: level and XP, mood, its skills, and (with One and the Same) its weapon tree and an on/off switch per
-  ability.
-- Pets that don't fight (horses, cats, parrots...): listed, Call and Inventory, nothing more.
+FreshOrangeSlices' sketch: `art/pets-screen-sketch.png`; with suggestions added: `art/pets-screen-mockup.png`.
+
+- **Left, the pet list**: Bloom (vanilla) pets first, then modded companions; a pink mark on the ones in the party.
+  Every pet the player owns, including ones not loaded right now. Pets tamed before the mod is in show up the next time
+  they load near their owner.
+- **Centre, the pet's model**, turning to follow the mouse (as the inventory shows the player; Easy Mob Spawn Control's
+  screen does it for mobs).
+- **Four slots each side**: its skills. A toggle at the top right switches between **Bloom** (its weapon tree, with One
+  and the Same) and **Pet** (its level and traits).
+- **Bottom left: Call** (summons it to you; everyone has it). **Bottom right: its inventory** (Bloom pets only).
+- Suggestions for what the sketch has no room for yet: see the mockup (name and level with an XP bar, health, hunger and
+  mood bars, where it is, the rolled kind for a modded companion, the owner bonus line, locked slots showing their
+  level, on/off switches for abilities, party and follow buttons, post, rename, release, list filters).
 
 ## Levels (party pets, 1 to 100)
 
@@ -51,9 +76,9 @@ XP sources from the plugin (numbers to retune for 100 levels; the plugin's 40 + 
 | Every hit it lands | 1, or 2 for a big hit, at most every 1.5 seconds (the fastest way) |
 | Time together | 2 a minute |
 | Walking around with it | 1 per 20 blocks |
-| Playing fetch | 2, at most every 15 seconds (**Open**: fetch at all?) |
+| Playing fetch | 2, at most every 15 seconds |
 
-AFK leveling is fine (FreshOrangeSlices). Levels stay on the pet itself, so a Migamigos companion back from its
+**Non-combat pets need half the XP per level** (they level slower otherwise); combat pets as they are. XP comes from attacks, kills, time with the player, feeding and play. AFK leveling is fine (FreshOrangeSlices). Levels stay on the pet itself, so a Migamigos companion back from its
 keepsake keeps its level.
 
 ## Pet skills, by the pet's level
@@ -75,8 +100,8 @@ divided by 10:
 | 100 | Max level | gold name and a sparkle, a second wind once each time it's called |
 
 Bloom pets keep their own kind's tree from the plugin (a wolf mcMMO's wolf skills, the Iron Golem, Vex, Polar Bear, Goat
-and Panda their own). A **modded companion rolls one of those kinds at random when it first joins the party** and keeps it for good:
-a Migamigos Claymore might fight like a Panda, a Wolf or an Iron Golem.
+and Panda their own). A **modded companion rolls one of the combat kinds at random when it first joins the party** (never the Vex, and never
+a non-combat kind) and keeps it for good: a Migamigos Claymore might fight like a Panda, a Wolf or an Iron Golem.
 
 ## The roster: every Bloom pet
 
@@ -123,12 +148,12 @@ gear (armor and a weapon, which adds to its damage).
 ## Combat pets' skills
 
 The six combat kinds each have their own names for the shared skills, plus a starting and a special skill of their own.
-A Migamigos or Zoni's companion rolls one of these six kinds when it first joins the party. Levels are the pet's own (the plugin's
+A Migamigos or Zoni's companion rolls one of these kinds (not the Vex) when it first joins the party. Levels are the pet's own (the plugin's
 1000 scale divided by 10).
 
 | Level | Skill | Wolf | Iron Golem | Vex | Polar Bear | Goat | Panda |
 |---|---|---|---|---|---|---|---|
-| 1 | Starting skill | **new** (proposal: Pummel, mcMMO's knock-back chance) | Iron Colossus | Double Strike | Unyielding | Momentum | Bamboo Blessing |
+| 1 | Starting skill | **new** | Iron Colossus | Double Strike | Unyielding | Momentum | Bamboo Blessing |
 | 10 | Awareness | Environmentally Aware | Construct Awareness | Phantom Awareness | Arctic Awareness | Mountain Awareness | Bamboo Sense |
 | 15 | Gore | Gore | Crushing Blow | Spectral Rend | Mauling Blow | Headbutt | Heavy Paw |
 | 20 | Special skill | **new** | Guardian Intervention | Phase Strike | Crushing Presence | Ram | Soothing Presence |
@@ -137,6 +162,21 @@ A Migamigos or Zoni's companion rolls one of these six kinds when it first joins
 | 35 | Holy Hound | Holy Hound | Arcane Core | Voidfed | Winterborn | Mountain Spirit | Inner Balance |
 | 50 | Shock Proof | Shock Proof | Reinforced Frame | Stormproof | Avalanche Proof | Rock Solid | Unshaken |
 | 75 | Sharpened Claws | Sharpened Claws | Forged Fists | Spectral Blade | Rending Claws | Hardened Horns | Heavy Paws |
+
+**The Wolf's skills get new names and reworded effects** (FreshOrangeSlices, 2026-11-04: mcMMO's wolf shouldn't show
+through); the names in its column are mcMMO's, to replace. Proposal (not decided):
+
+| Level | Wolf (proposal) | What it does |
+|---|---|---|
+| 1 | Pack Bond | when you and it hit the same target within 3 seconds, its bite deals 20% more |
+| 10 | Keen Nose | it smells danger: steps out of fire and lava back to you, and lands soft (no fall damage) |
+| 15 | Rending Bite | a chance its bite tears deep: twice the damage, and the target Bleeds |
+| 20 | Alpha Howl | in a fight, every 30 seconds it howls: you and your party pets get Strength I for 6 seconds, enemies near it are slowed |
+| 20 | Blood Hunger | a chance its bites mend it by the damage they deal |
+| 25 | Winter Coat | half damage from blows and arrows; fire goes out on it fast |
+| 35 | Moonblessed | poison, wither and magic mend it instead of hurting it |
+| 50 | Storm Hide | explosions and lightning barely scratch it (a sixth of the damage) |
+| 75 | Wolfsteel Fangs | +2 bite damage |
 
 What the shared ones do: **Awareness** steps out of fire, lava and cacti back to you, no fall damage; **Gore** a chance
 of double damage (the plugin's 1% a level reaches 100%: to tone down); **Fast Food** 50% chance to heal by the damage it

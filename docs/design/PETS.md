@@ -282,7 +282,7 @@ the roster's `xp_multiplier`); a level-up message naming the skills it opens. Th
 (Rending Bite also Bleeds, with Bloom's Bleed when Bloom is there); skills work while the pet is in the party and awake.
 The golem, polar bear, goat and panda in the party fight for their owner (whatever hurts them or they hit; the goat gets
 a melee attack of its own); pets never hurt or go after players (co-op) or their owner's other pets. Party pets faint
-instead of dying: a minute's rest where they fell, unhurt, then up with half their health (`/kill` still kills; the void
+instead of dying: 5 minutes' rest where they fell, unhurt, then up with half their health (`/kill` still kills; the void
 brings them to their owner first). Level 100: a gold name, a sparkle, a second wind once each time it comes out (called,
 or joining the party). Sneak-feeding your own pet its food heals it (and gives a non-combat party pet XP, at most every
 30 seconds). The screen: the level beside the kind and in the list, an XP bar, five slots a side (the nine skills and the

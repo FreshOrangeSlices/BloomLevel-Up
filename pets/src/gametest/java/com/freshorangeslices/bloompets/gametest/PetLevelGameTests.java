@@ -101,6 +101,9 @@ public final class PetLevelGameTests {
 		second.hurt(helper.getLevel().damageSources().mobAttack(homeWolf), 4.0F);
 		helper.assertTrue(PetLevels.xp(homeWolf) == 0.0, "A wolf outside the party earns nothing");
 		helper.assertTrue(near(PetXp.multiplier(wolf), 1.0), "A wolf's multiplier is 1");
+		// Mobs off the roster (as a modded companion) get theirs from their attack: more for soft hitters, never under 1.
+		helper.assertTrue(near(PetXp.multiplier(zombie(helper, new BlockPos(3, 2, 6))), 4.0 / 3.0), "A soft hitter (3) earns 4/3 a point");
+		helper.assertTrue(near(PetXp.multiplier(helper.spawn(EntityType.RAVAGER, new BlockPos(6, 2, 6))), 1.0), "A hard hitter (12) never less than a wolf");
 		helper.succeed();
 	}
 

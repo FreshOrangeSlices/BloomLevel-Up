@@ -59,8 +59,8 @@ public final class PetsConfig {
 				.defineInRange("feedCooldownSeconds", 30, 0, 3600);
 		builder.pop();
 		builder.push("fainting");
-		REST_SECONDS = builder.comment("A party pet that would die faints and rests this long instead (it can't be hurt meanwhile).")
-				.defineInRange("restSeconds", 60, 1, 3600);
+		REST_SECONDS = builder.comment("A party pet that would die faints and rests this long instead (it can't be hurt meanwhile; 5 minutes, FreshOrangeSlices 2026-11-05).")
+				.defineInRange("restSeconds", 300, 1, 3600);
 		REST_HEALTH = builder.comment("Share of its health it gets back when it's on its feet again.")
 				.defineInRange("comesBackWithHealth", 0.5, 0.05, 1.0);
 		builder.pop();
@@ -123,7 +123,7 @@ public final class PetsConfig {
 	}
 
 	public static int restTicks() {
-		return (SPEC.isLoaded() ? REST_SECONDS.get() : 60) * 20;
+		return (SPEC.isLoaded() ? REST_SECONDS.get() : 300) * 20;
 	}
 
 	public static double restHealth() {

@@ -23,7 +23,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 
 /**
  * Party pets never die (the plugin's way, kept for the party pet): at no health they faint and rest where they fell for
- * a minute, unhurt by anything meanwhile, then get up with half their health. A level-100 pet first gets a second wind
+ * 5 minutes, unhurt by anything meanwhile, then get up with half their health. A level-100 pet first gets a second wind
  * (back to half health), once each time it comes out (called, or joining the party). Pets outside the party are plain
  * pets and can die (FreshOrangeSlices, 2026-11-05). {@code /kill} still kills; a fall into the void brings it to its
  * owner first.

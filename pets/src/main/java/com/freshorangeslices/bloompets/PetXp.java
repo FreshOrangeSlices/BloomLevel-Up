@@ -42,7 +42,11 @@ public final class PetXp {
 	private PetXp() {
 	}
 
-	/** The pet's XP multiplier: its kind's, or worked out from how hard it hits (a modded companion's weapon too). */
+	/**
+	 * The pet's XP multiplier: its kind's, or worked out from how hard it hits (a modded companion's weapon too), never
+	 * below a wolf's: a companion that hits softly earns more per point, one that hits hard never less than a wolf
+	 * (FreshOrangeSlices, 2026-11-05: levels mustn't hold back the companions that do less damage than a golem).
+	 */
 	public static double multiplier(LivingEntity pet) {
 		Species species = Pets.species(pet);
 
@@ -52,7 +56,7 @@ public final class PetXp {
 
 		AttributeInstance attack = pet.getAttribute(Attributes.ATTACK_DAMAGE);
 		double damage = attack == null ? 4.0 : attack.getValue();
-		return Mth.clamp(4.0 / Math.max(0.5, damage), 0.2, 3.0);
+		return Mth.clamp(4.0 / Math.max(0.5, damage), 1.0, 3.0);
 	}
 
 	/** The pet and the target are on the same side (its owner, the owner's other pets): no XP, and no fighting. */

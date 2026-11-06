@@ -410,6 +410,14 @@ get (a strong build is the player's choice) and how full the screen is.
   + right-click (a plain right-click is Migamigos' own menu); a sulking companion's Spirit skills and tree rest.
 - **No owner bonus from companions** (a player can have an army of them).
 - **Fetch** (Bloom pets only), like the plugin: **a ball** (a blue ball with the Heart of the Sea's look, named Ball),
-  one given to the player with every new pet (any ball works with any pet that plays, so players end up with plenty).
+  one given to the player with every new pet (any ball works with any pet that plays, so players end up with plenty;
+  no recipe, FreshOrangeSlices 2026-11-05). As the plugin's Fetch Stick (`PetManager.throwFetch`, `fetch`, `endFetch`;
+  `Species.playsFetch`): **every Bloom pet but the Iron Golem and the Vex plays; companions don't**; only **the pet in
+  the party** plays (not one at a post, fainted or ridden); right-click throws the ball (no one else can pick it up);
+  the pet runs (or flies) to it, carries it back on its head and drops it at your feet, and the ball is back in your
+  inventory (also if it can't reach it or after 25 seconds, so it's never lost); hearts, a sound, "Name brought the ball
+  back! ♥". **Each fetch**: the plugin's +2 bond (one minute of its time-together XP) is **22 XP** here (one minute of
+  ours), and its +8 happiness is **+8 mood**, each at most every 15 seconds.
+- **The Spirit pop-up** shows just its name ("Claymore gained the Spirit of the Wolf") and asks keep or reroll.
 - **A "Pets" chapter in the quest book**: bond a pet, reach level 10, post a pet, a pet at level 25, buy One and the
   Same, pick a tree.

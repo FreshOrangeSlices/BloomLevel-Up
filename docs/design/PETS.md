@@ -431,6 +431,9 @@ as a party pet; **anywhere else it rests**, as a pet at home (tiredness goes, a 
 army left at a base needs no feeding. It eats **cooked vanilla food** (`#bloompets:companion_food`: cooked meat and
 fish, baked potatoes, bread, dried kelp, cookies, pumpkin pie, the stews; the pack can add to it), sneak + right-click;
 sneak + right-click with an empty hand pats it; both are cancelled before its own mod sees them (a plain click is still
-Migamigos' backpack). It has no storage to eat from. **A sulking companion's tree rests** (and its Spirit, from 5b).
+Migamigos' backpack). **One that's out eats by itself from its own inventory** at 14 food and under, as a Bloom pet from
+its storage (FreshOrangeSlices, 2026-11-05: `CompanionInventory`, a Migamigos companion's backpack through its
+`getInventory()`, a Zoni's companion's slots through Forge's item capability). **Its news goes above the hotbar**, not
+to chat (a player can have an army). **A sulking companion's tree rests** (and its Spirit, from 5b).
 The screen shows its mood and food bars with its own help texts. Game tests: `CompanionCareGameTests` (a Migamigos
 Claymore).

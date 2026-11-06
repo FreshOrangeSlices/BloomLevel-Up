@@ -34,7 +34,9 @@ import net.minecraft.world.item.ItemStack;
  * the party: one is "out" while it's within {@value #WITH_YOU} blocks of its owner (it tires, gets hungry, and its mood
  * drops as a party pet's), and rests as a pet at home when it's anywhere else, so a whole army left at a base needs no
  * feeding. They eat cooked vanilla food ({@code #bloompets:companion_food}), sneak + right-click (a plain right-click is
- * their own mod's), and have no storage to eat from. A sulking companion's tree (and, later, its Spirit) rests.
+ * their own mod's), and one that's out takes it from its own inventory when it's down to 14 ({@link CompanionInventory}:
+ * a Migamigos companion's backpack, a Zoni's companion's slots). Their news goes above the hotbar, not to chat. A
+ * sulking companion's tree (and, later, its Spirit) rests.
  */
 public final class PetMood {
 	public static final double MAX_MOOD = 100.0;
@@ -186,24 +188,39 @@ public final class PetMood {
 			PetSkills.refresh(pet);
 		}
 
+		boolean companion = Pets.kind(pet) == Pets.Kind.MODDED;
+
 		if (!wasSad && sad(pet)) {
-			owner.sendSystemMessage(Component.translatable(Pets.kind(pet) == Pets.Kind.MODDED ? "bloompets.mood.sad.companion" : "bloompets.mood.sad",
-					pet.getName()).withStyle(ChatFormatting.RED));
-			owner.playNotifySound(SoundEvents.WOLF_WHINE, SoundSource.NEUTRAL, 0.6F, 1.2F);
+			tell(owner, pet, Component.translatable(companion ? "bloompets.mood.sad.companion" : "bloompets.mood.sad", pet.getName())
+					.withStyle(ChatFormatting.RED));
+
+			if (!companion) {
+				owner.playNotifySound(SoundEvents.WOLF_WHINE, SoundSource.NEUTRAL, 0.6F, 1.2F);
+			}
 		} else if (wasSad && !sad(pet)) {
 			feltBetter(owner, pet);
 		}
 
 		if (!wasTired && tired(pet)) {
-			owner.sendSystemMessage(Component.translatable(Pets.kind(pet) == Pets.Kind.MODDED ? "bloompets.mood.tired.companion" : "bloompets.mood.tired",
-					pet.getName()).withStyle(ChatFormatting.GOLD));
+			tell(owner, pet, Component.translatable(companion ? "bloompets.mood.tired.companion" : "bloompets.mood.tired", pet.getName())
+					.withStyle(ChatFormatting.GOLD));
 		}
 
-		boolean companion = Pets.kind(pet) == Pets.Kind.MODDED;
-
 		if (!wasHungry && hunger(pet) <= HUNGRY_AT) {
-			owner.sendSystemMessage(Component.translatable(companion ? "bloompets.mood.hungry.companion" : "bloompets.mood.hungry", pet.getName())
+			tell(owner, pet, Component.translatable(companion ? "bloompets.mood.hungry.companion" : "bloompets.mood.hungry", pet.getName())
 					.withStyle(ChatFormatting.GOLD));
+		}
+	}
+
+	/**
+	 * A word to the owner about how a pet is doing: in chat for a Bloom pet; above the hotbar for a companion, since a
+	 * player can have a whole army of them (FreshOrangeSlices, 2026-11-05).
+	 */
+	private static void tell(ServerPlayer owner, Entity pet, Component text) {
+		if (Pets.kind(pet) == Pets.Kind.MODDED) {
+			owner.displayClientMessage(text, true);
+		} else {
+			owner.sendSystemMessage(text);
 		}
 	}
 
@@ -223,8 +240,17 @@ public final class PetMood {
 		}
 	}
 
-	/** A party pet that's getting hungry takes its favourite food from its storage. */
+	/** A party pet that's getting hungry takes its favourite food from its storage (a companion, from its own inventory). */
 	private static void eatFromStorage(LivingEntity pet) {
+		if (Pets.kind(pet) == Pets.Kind.MODDED) {
+			if (CompanionInventory.takeOne(pet, stack -> stack.is(Bonding.COMPANION_FOOD))) {
+				setHunger(pet, hunger(pet) + MEAL);
+				pet.playSound(SoundEvents.GENERIC_EAT, 0.6F, 1.0F);
+			}
+
+			return;
+		}
+
 		Species species = Pets.species(pet);
 		PetRegistry.Record record = pet.getServer() == null ? null : PetRegistry.get(pet.getServer()).find(pet.getUUID());
 
@@ -299,7 +325,7 @@ public final class PetMood {
 				owner.serverLevel().sendParticles(ParticleTypes.HEART, pet.getX(), pet.getY() + pet.getBbHeight() + 0.3, pet.getZ(), 10,
 						0.5, 0.4, 0.5, 0.0);
 				owner.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.NEUTRAL, 0.5F, 1.8F);
-				owner.sendSystemMessage(Component.translatable("bloompets.mood.loved", pet.getName()).withStyle(ChatFormatting.LIGHT_PURPLE));
+				tell(owner, pet, Component.translatable("bloompets.mood.loved", pet.getName()).withStyle(ChatFormatting.LIGHT_PURPLE));
 			}
 		}
 
@@ -309,7 +335,7 @@ public final class PetMood {
 	}
 
 	private static void feltBetter(ServerPlayer owner, LivingEntity pet) {
-		owner.sendSystemMessage(Component.translatable("bloompets.mood.better", pet.getName()).withStyle(ChatFormatting.GREEN));
+		tell(owner, pet, Component.translatable("bloompets.mood.better", pet.getName()).withStyle(ChatFormatting.GREEN));
 		PetSkills.refresh(pet);
 	}
 

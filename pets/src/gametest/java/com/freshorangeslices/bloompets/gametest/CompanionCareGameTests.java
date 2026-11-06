@@ -3,6 +3,7 @@ package com.freshorangeslices.bloompets.gametest;
 import com.freshorangeslices.bloompets.BloomBridge;
 import com.freshorangeslices.bloompets.BloomPets;
 import com.freshorangeslices.bloompets.Bonding;
+import com.freshorangeslices.bloompets.CompanionInventory;
 import com.freshorangeslices.bloompets.PetEvents;
 import com.freshorangeslices.bloompets.PetMood;
 import com.freshorangeslices.bloompets.PetRegistry;
@@ -15,6 +16,7 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
@@ -85,6 +87,26 @@ public final class CompanionCareGameTests {
 
 		ServerPlayer stranger = player(helper, false);
 		helper.assertTrue(Bonding.feedCompanion(stranger, mob, cooked) == Bonding.Result.OWNED_BY_SOMEONE, "Not someone else's companion");
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
+	public static void aHungryCompanionEatsFromItsBackpack(GameTestHelper helper) {
+		Mob mob = companion(helper, player(helper, false));
+		Container backpack = CompanionInventory.container(mob);
+		helper.assertTrue(backpack != null, "Migamigos' backpack is found (getInventory)");
+		backpack.setItem(0, new ItemStack(Items.BEEF, 3));
+		backpack.setItem(1, new ItemStack(Items.COOKED_COD, 2));
+
+		PetMood.setHunger(mob, 16.0);
+		PetMood.update(mob, 1, true);
+		helper.assertTrue(backpack.getItem(1).getCount() == 2, "Not hungry enough yet (over 14): nothing eaten");
+
+		PetMood.setHunger(mob, 14.0);
+		PetMood.update(mob, 1, true);
+		helper.assertTrue(backpack.getItem(1).getCount() == 1 && backpack.getItem(0).getCount() == 3,
+				"Down to 14 and out with you: it eats the cooked fish, not the raw beef");
+		helper.assertTrue(PetMood.hunger(mob) > 19.9, "A meal: +6 (" + PetMood.hunger(mob) + ")");
 		helper.succeed();
 	}
 

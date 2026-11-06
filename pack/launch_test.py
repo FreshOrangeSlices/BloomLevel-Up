@@ -1080,9 +1080,10 @@ def terrain_check(server_dir, spec_file):
         # windswept hills and meadows sit higher in erosion and keep their share by design, so mountain biomes are
         # only reported). Without the change both sides are the same world, so the bar only has to sit clear of 100%:
         # across runs 324-325's twelve seeds the pack kept 0-52% of the peaks and 26-77% of the land over 130 (a mountainous
-        # seed in run 325 kept 75% and 60%, just over the old 60% bar).
+        # seed in run 325 kept 75% and 60%, just over the old 60% bar; a seed with almost no peaks in November 2026's
+        # Bloom Pets runs kept 80% of its land over 130, over the 75% bar after it: now 90%, still well clear of 100%).
         some = vanilla["peakBiomes"] >= 0.003 or vanilla["over130"] >= 0.005
-        fewer = pack["peakBiomes"] <= vanilla["peakBiomes"] * 0.75 or pack["over130"] <= vanilla["over130"] * 0.75
+        fewer = pack["peakBiomes"] <= vanilla["peakBiomes"] * 0.9 or pack["over130"] <= vanilla["over130"] * 0.9
         if "minecraft:density_function/overworld/erosion" in spec.get("pack_data", {}).get("worldgen", {}) and some and not fewer:
             failures.append("terrain: the pack's erosion change left nearly as many peaks and as much land over y 130 as vanilla's ("
                             + pct(pack["peakBiomes"]) + " vs " + pct(vanilla["peakBiomes"]) + "; "

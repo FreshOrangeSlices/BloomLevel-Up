@@ -111,6 +111,70 @@ public final class CompanionCareGameTests {
 	}
 
 	@GameTest(template = "empty")
+	public static void aReleasedCompanionIsWildAgain(GameTestHelper helper) {
+		ServerPlayer owner = player(helper, false);
+		Mob mob = companion(helper, owner);
+
+		try {
+			java.lang.reflect.Field field = null;
+
+			for (Class<?> c = mob.getClass(); c != null && field == null; c = c.getSuperclass()) {
+				try {
+					field = c.getDeclaredField("followingPlayerUUID");
+				} catch (NoSuchFieldException e) {
+					// up the hierarchy
+				}
+			}
+
+			helper.assertTrue(field != null, "Migamigos keeps its owner in followingPlayerUUID");
+			field.setAccessible(true);
+			field.set(mob, owner.getUUID());
+			com.freshorangeslices.bloompets.Release.release(owner, PetRegistry.get(helper.getLevel().getServer()).find(mob.getUUID()));
+			helper.assertTrue(field.get(mob) == null, "Released: Migamigos' owner is gone");
+		} catch (IllegalAccessException e) {
+			helper.fail("followingPlayerUUID: " + e);
+		}
+
+		helper.assertTrue(Pets.owner(mob) == null && !Pets.listed(mob), "nobody's, off the list");
+		mob.saveWithoutId(new net.minecraft.nbt.CompoundTag());
+		helper.succeed();
+	}
+
+	/** Released by Bloom Pets 0.5.0 or 0.5.1 (off the list, still its owner's in Migamigos): wild once it loads. */
+	@GameTest(template = "empty")
+	public static void anEarlierReleaseIsFinished(GameTestHelper helper) {
+		ServerPlayer owner = player(helper, false);
+		Mob mob = companion(helper, owner);
+
+		try {
+			java.lang.reflect.Field field = null;
+
+			for (Class<?> c = mob.getClass(); c != null && field == null; c = c.getSuperclass()) {
+				try {
+					field = c.getDeclaredField("followingPlayerUUID");
+				} catch (NoSuchFieldException e) {
+					// up the hierarchy
+				}
+			}
+
+			field.setAccessible(true);
+			field.set(mob, owner.getUUID());
+			// As the old release left it: Bloom Pets' data gone but the mark.
+			mob.getPersistentData().put("bloompets", new net.minecraft.nbt.CompoundTag());
+			mob.getPersistentData().getCompound("bloompets").putUUID("releasedBy", owner.getUUID());
+			helper.assertTrue(!Pets.listed(mob), "Off the list, though Migamigos still has its owner");
+
+			com.freshorangeslices.bloompets.Release.finishOldRelease(mob);
+			helper.assertTrue(field.get(mob) == null, "As it loads: wild in Migamigos too");
+			helper.assertFalse(mob.getPersistentData().getCompound("bloompets").contains("releasedBy"), "and the mark is gone");
+		} catch (IllegalAccessException e) {
+			helper.fail("followingPlayerUUID: " + e);
+		}
+
+		helper.succeed();
+	}
+
+	@GameTest(template = "empty")
 	public static void aSulkingCompanionsTreeRests(GameTestHelper helper) {
 		ServerPlayer owner = player(helper, true);
 		Mob mob = companion(helper, owner);

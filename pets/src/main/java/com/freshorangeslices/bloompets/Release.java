@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -20,11 +21,13 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Releasing a pet (FreshOrangeSlices' playtest, 2026-11-05): the pet screen's Release (it asks first) and
  * {@code /bloompets release}. The pet comes off its owner's list, and whatever its storage (or a companion's food pouch)
- * held goes to them. A Bloom pet goes back to the wild: no owner mark, untamed, out of the party and off its post, its
- * levels gone. A companion stays its owner's in its own mod (Bloom Pets never takes that away) but leaves the list for
- * good, with its Bloom levels, Spirit and tree; given to someone else, it can be listed again. A pet that isn't loaded
- * leaves the list now and is set free the next time it loads; an entry whose pet is gone for good (a duplicate, one that
- * vanished without dying) just leaves.
+ * held goes to them. Every pet goes back to the wild (FreshOrangeSlices: companions too, Ganyu and Claymore included):
+ * a Bloom pet loses its owner mark and is untamed, out of the party and off its post, its levels gone; a companion is
+ * untamed in its own mod as well (a Zoni's one, tamed the vanilla way plus its own "tamed" flag, can be tamed again with
+ * its food; a Migamigos one loses its owner and is wild again, befriended again as any wild one), with its Bloom levels,
+ * Spirit and tree gone. If a companion's mod won't let go of it, it stays its owner's there but leaves the list for good
+ * (marked {@code releasedBy}). A pet that isn't loaded leaves the list now and is set free the next time it loads; an
+ * entry whose pet is gone for good (a duplicate, one that vanished without dying) just leaves.
  */
 public final class Release {
 	private Release() {
@@ -68,6 +71,54 @@ public final class Release {
 		record.items = new ListTag();
 	}
 
+	/** A companion untamed in its own mod: a tamed animal's way (and its mod's own "tamed" flag), or a Migamigos one's owner. */
+	private static boolean untameCompanion(Entity entity, UUID owner) {
+		if (entity instanceof TamableAnimal tamable && owner.equals(tamable.getOwnerUUID())) {
+			tamable.setOrderedToSit(false);
+			tamable.setInSittingPose(false);
+			tamable.setTame(false);
+			tamable.setOwnerUUID(null);
+			modTamedFlag(entity);
+			return true;
+		}
+
+		if (Amigos.has(entity) && Pets.clearMigamigosOwner(entity, owner)) {
+			// A wild one roams.
+			Amigos.setFollowing(entity, false);
+			Amigos.setAllowWandering(entity, true);
+			return true;
+		}
+
+		return false;
+	}
+
+	/** An MCreator companion's own "tamed" flag (Zoni's {@code DATA_Tamed}), off too. */
+	@SuppressWarnings("unchecked")
+	private static void modTamedFlag(Entity entity) {
+		try {
+			Object accessor = entity.getClass().getField("DATA_Tamed").get(null);
+
+			if (accessor instanceof EntityDataAccessor<?> data) {
+				entity.getEntityData().set((EntityDataAccessor<Boolean>) data, false);
+			}
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			// No such flag: the vanilla taming was all.
+		}
+	}
+
+	/**
+	 * A companion released before releasing untamed them in their own mod (Bloom Pets 0.5.0 and 0.5.1 only took them off
+	 * the list): as it loads, it's untamed there too, if it's still that owner's. Public for the game tests.
+	 */
+	public static void finishOldRelease(Entity entity) {
+		var data = Pets.dataOrNull(entity);
+
+		if (data != null && data.hasUUID("releasedBy") && Pets.kind(entity) == Pets.Kind.MODDED && untameCompanion(entity, data.getUUID("releasedBy"))) {
+			data.remove("releasedBy");
+			BloomPets.LOGGER.info("Bloom Pets: {}, released earlier, is wild again", entity.getName().getString());
+		}
+	}
+
 	/** Sets the pet free (now, or as it loads after a release while it was away). Public for the game tests. */
 	public static void free(Entity entity, UUID owner) {
 		boolean companion = Pets.kind(entity) == Pets.Kind.MODDED;
@@ -81,8 +132,10 @@ public final class Release {
 		Pets.forget(entity);
 
 		if (companion) {
-			// Still its owner's in its own mod: kept off the list by this mark.
-			Pets.data(entity).putUUID("releasedBy", owner);
+			// Untamed in its own mod too; if that can't be done, still its owner's there and kept off the list by this mark.
+			if (!untameCompanion(entity, owner)) {
+				Pets.data(entity).putUUID("releasedBy", owner);
+			}
 		} else if (entity instanceof TamableAnimal tamable && owner.equals(tamable.getOwnerUUID())) {
 			tamable.setOrderedToSit(false);
 			tamable.setInSittingPose(false);

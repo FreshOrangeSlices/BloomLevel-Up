@@ -69,7 +69,13 @@ public final class PetEvents {
 
 	@SubscribeEvent
 	public static void onJoin(EntityJoinLevelEvent event) {
-		if (event.getLevel().isClientSide() || !Pets.listed(event.getEntity())) {
+		if (event.getLevel().isClientSide()) {
+			return;
+		}
+
+		Release.finishOldRelease(event.getEntity());
+
+		if (!Pets.listed(event.getEntity())) {
 			return;
 		}
 

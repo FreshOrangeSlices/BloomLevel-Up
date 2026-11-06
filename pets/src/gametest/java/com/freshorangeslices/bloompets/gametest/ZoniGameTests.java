@@ -158,18 +158,29 @@ public final class ZoniGameTests {
 		helper.succeed();
 	}
 
+	@SuppressWarnings("unchecked")
 	@GameTest(template = "empty")
-	public static void aReleasedCompanionLeavesTheList(GameTestHelper helper) {
+	public static void aReleasedCompanionGoesBackToTheWild(GameTestHelper helper) {
 		ServerPlayer owner = player(helper);
 		Mob mob = bocchi(helper, owner, false);
 		PetRegistry.Record record = record(helper, mob);
+
+		// Zoni's own "tamed" flag on, as its summon device leaves it.
+		try {
+			mob.getEntityData().set((net.minecraft.network.syncher.EntityDataAccessor<Boolean>) mob.getClass().getField("DATA_Tamed").get(null), true);
+		} catch (ReflectiveOperationException e) {
+			helper.fail("Bocchi's DATA_Tamed: " + e);
+		}
+
 		SimpleContainer pouch = new SimpleContainer(PetStorage.POUCH);
 		pouch.setItem(0, new ItemStack(Items.BREAD, 4));
 		record.items = pouch.createTag();
 
 		Release.release(owner, record);
 		helper.assertTrue(record(helper, mob) == null && !Pets.listed(mob), "It's off the list");
-		helper.assertTrue(owner.getUUID().equals(((TamableAnimal) mob).getOwnerUUID()), "but still its owner's in Zoni's Companions");
+		TamableAnimal tamable = (TamableAnimal) mob;
+		helper.assertTrue(!tamable.isTame() && tamable.getOwnerUUID() == null, "and untamed in Zoni's Companions, nobody's");
+		helper.assertFalse(mob.saveWithoutId(new net.minecraft.nbt.CompoundTag()).getBoolean("DataTamed"), "its own tamed flag off too");
 		helper.assertTrue(PetEvents.observe(mob) == null && record(helper, mob) == null, "and it doesn't come back on the list");
 		helper.assertTrue(owner.getInventory().countItem(Items.BREAD) == 4, "Its pouch's food is its owner's");
 		helper.succeed();

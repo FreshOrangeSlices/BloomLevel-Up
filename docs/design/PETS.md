@@ -486,9 +486,11 @@ the Same, Sword, Axe, Trident or Fists (a tree); rewards in vanilla levels and B
   them up (the newest fallen first; not Migamigos, whose keepsake brings the same one back). Its second wind is taken
   as the killing blow lands (it was at death, when Zoni's had already dropped its gear and swapped its device).
 - **Rename** (the pencil, top right of the picture; `/bloompets rename "<name>" <pet>`), so two of a kind can be told
-  apart; **Release** (the ✕ beside it, asking first; `/bloompets release <pet>`): a Bloom pet goes back to the wild, a
-  companion leaves the list but stays its owner's in its own mod; its storage comes back to them; a pet that isn't
-  loaded is set free when it next loads.
+  apart; **Release** (the ✕ beside it, asking first; `/bloompets release <pet>`): every pet goes back to the wild
+  (FreshOrangeSlices: Ganyu and Claymore too), a companion untamed in its own mod as well (Zoni's: vanilla taming and
+  its own `DATA_Tamed`, tamed again with its food; Migamigos: its owner cleared, only if its save still writes); its
+  storage comes back to them; a pet that isn't loaded is set free when it next loads; companions released by 0.5.0 or
+  0.5.1 (only taken off the list) are freed in their mods as they load (0.5.2).
 - Game tests: `PetModeGameTests`, `ZoniGameTests` (Zoni's Companions' Bocchi, now in the test run too).
 - **Hidden armor** (Bloom Pets 0.5.1 with the add-on's 0.2.0): the dot at the top right of a companion's picture (left
   of rename; green shown, red hidden) hides all its armor for everyone, or shows it again; it still protects. The add-on's `armor/HiddenArmor`

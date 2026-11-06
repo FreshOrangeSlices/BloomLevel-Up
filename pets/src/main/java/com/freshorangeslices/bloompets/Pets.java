@@ -116,8 +116,41 @@ public final class Pets {
 		entity.getPersistentData().remove(DATA);
 	}
 
-	private static UUID migamigosOwner(Entity entity) {
-		Optional<Field> field = OWNER_FIELDS.computeIfAbsent(entity.getClass(), type -> {
+	/**
+	 * A Migamigos companion's owner cleared (released back to the wild) if it's still {@code owner}'s, and if its saved
+	 * data still writes without one; otherwise its owner is put back and false.
+	 */
+	static boolean clearMigamigosOwner(Entity entity, UUID owner) {
+		Optional<Field> field = migamigosOwnerField(entity);
+
+		if (field.isEmpty()) {
+			return false;
+		}
+
+		try {
+			Object before = field.get().get(entity);
+
+			if (!owner.equals(before)) {
+				return before == null;
+			}
+
+			field.get().set(entity, null);
+
+			try {
+				entity.saveWithoutId(new CompoundTag());
+				return true;
+			} catch (RuntimeException e) {
+				field.get().set(entity, before);
+				BloomPets.LOGGER.warn("Bloom Pets: a Migamigos companion can't be without an owner ({}); kept off the list instead", e.toString());
+				return false;
+			}
+		} catch (IllegalAccessException e) {
+			return false;
+		}
+	}
+
+	private static Optional<Field> migamigosOwnerField(Entity entity) {
+		return OWNER_FIELDS.computeIfAbsent(entity.getClass(), type -> {
 			for (Class<?> c = type; c != null && c != Object.class; c = c.getSuperclass()) {
 				try {
 					Field f = c.getDeclaredField(MIGAMIGOS_OWNER);
@@ -130,6 +163,10 @@ public final class Pets {
 
 			return Optional.empty();
 		});
+	}
+
+	private static UUID migamigosOwner(Entity entity) {
+		Optional<Field> field = migamigosOwnerField(entity);
 
 		try {
 			return field.isPresent() && field.get().get(entity) instanceof UUID uuid ? uuid : null;

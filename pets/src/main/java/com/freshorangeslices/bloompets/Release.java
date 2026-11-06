@@ -134,7 +134,7 @@ public final class Release {
 		UUID owner = data.getUUID("releasedBy");
 
 		if (summonItem(type(entity)) != null) {
-			data.remove("releasedBy");
+			// Still marked released until it's gone, so nothing lists it again meanwhile.
 			data.putUUID(BACK_TO_DEVICE, owner);
 			data.putBoolean(GIVE_SUMMON, true);
 		} else if (untameCompanion(entity, owner)) {
@@ -207,6 +207,9 @@ public final class Release {
 	 * left where the companion was).
 	 */
 	private static void backToDevice(Entity entity, UUID owner, boolean give) {
+		// Marked released, so its leaving the world (still tamed in its mod) doesn't put it back on the list.
+		Pets.data(entity).putUUID("releasedBy", owner);
+
 		if (entity instanceof LivingEntity living) {
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				ItemStack stack = living.getItemBySlot(slot);
@@ -251,6 +254,8 @@ public final class Release {
 		// A summoned companion (Zoni's) goes back into its device; its summon item went to its owner as they released it.
 		if (companion && summonItem(type(entity)) != null) {
 			Pets.forget(entity);
+			// Off the list from now on (it's still tamed in its mod until it's gone).
+			Pets.data(entity).putUUID("releasedBy", owner);
 
 			if (loading) {
 				Pets.data(entity).putUUID(BACK_TO_DEVICE, owner);

@@ -709,6 +709,10 @@ public final class PetScreen extends Screen {
 			state += " · " + Component.translatable("bloompets.screen.state.sulking").getString();
 		}
 
+		if (pet.owed() > 0) {
+			state += " · " + Component.translatable("bloompets.screen.state.owed").getString();
+		}
+
 		if (!pet.loaded()) {
 			return state + " · " + Component.translatable("bloompets.screen.state.away").getString();
 		}
@@ -819,10 +823,17 @@ public final class PetScreen extends Screen {
 		return new ResourceLocation("bloomlevelup", "textures/icon/major/combat/" + effect.icon + ".png");
 	}
 
-	/** What a slot holds in the Bloom view: a tree to pick, one of its tree's effects, the tree itself, the reset, or nothing. */
+	/**
+	 * What a slot holds in the Bloom view: a tree to pick, one of its tree's effects, the pet's stats (the left column's
+	 * last slot), the tree itself, the reset, or nothing.
+	 */
 	private Object bloomAt(PetsNetwork.Entry pet, int index) {
 		if (!pet.treeable()) {
 			return null;
+		}
+
+		if (index == SLOTS - 1) {
+			return "stats";
 		}
 
 		PetTrees.Tree tree = PetTrees.Tree.byId(pet.tree());
@@ -867,10 +878,17 @@ public final class PetScreen extends Screen {
 			boolean open = pet.level() >= effect.level;
 			frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : open ? SKILL_EDGE : PANEL_EDGE);
 			RenderSystem.enableBlend();
+
+			// Locked: its icon greyed, so what's coming shows, and the level it opens at small in the corner.
+			if (!open) {
+				g.setColor(0.38F, 0.38F, 0.38F, 1.0F);
+			}
+
 			g.blit(effectIcon(effect), x + 1, y + 1, 16, 16, 0.0F, 0.0F, 64, 64, 64, 64);
 
 			if (!open) {
-				dim(g, x, y, Integer.toString(effect.level));
+				g.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+				cornerNumber(g, x, y, Integer.toString(effect.level));
 			} else if (effect.cooldown && abilityOff(pet, effect)) {
 				dim(g, x, y, "");
 				g.pose().pushPose();
@@ -882,10 +900,31 @@ public final class PetScreen extends Screen {
 			return;
 		}
 
+		if ("stats".equals(what)) {
+			frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : SKILL_EDGE);
+			g.renderItem(new ItemStack(Items.BOOK), x + 1, y + 1);
+			return;
+		}
+
 		PetTrees.Tree tree = PetTrees.Tree.byId(pet.tree());
 		boolean reset = "reset".equals(what);
 		frame(g, x, y, x + SLOT, y + SLOT, hover ? (reset ? HEALTH : GOLD) : reset ? PANEL_EDGE : SKILL_EDGE);
 		g.renderItem(new ItemStack(reset ? Items.BARRIER : tree.icon), x + 1, y + 1);
+	}
+
+	/** A small number in a slot's bottom-right corner, over its icon, on a dark backing. */
+	private void cornerNumber(GuiGraphics g, int x, int y, String text) {
+		float scale = 0.75F;
+		int width = (int) Math.ceil(font.width(text) * scale);
+		int x1 = x + SLOT - 1;
+		int y1 = y + SLOT - 1;
+		g.pose().pushPose();
+		g.pose().translate(0.0F, 0.0F, 200.0F);
+		g.fill(x1 - width - 2, y1 - 7, x1, y1, 0xD0100E0C);
+		g.pose().translate(x1 - width - 1, y1 - 6, 0.0F);
+		g.pose().scale(scale, scale, 1.0F);
+		g.drawString(font, text, 0, 0, MUTED, false);
+		g.pose().popPose();
 	}
 
 	/** A slot's dark veil (over its icon), with a word on it. */
@@ -935,6 +974,8 @@ public final class PetScreen extends Screen {
 			if (!companion && !pet.party() && !pet.posted()) {
 				lines.addAll(font.split(Component.translatable("bloompets.screen.tree.resting").withStyle(ChatFormatting.GRAY), 200));
 			}
+		} else if ("stats".equals(what)) {
+			lines.addAll(statsTip(pet));
 		} else if ("tree".equals(what)) {
 			lines.add(title(Component.translatable("bloompets.screen.tree.follows",
 					Component.translatable("bloompets.tree." + pet.tree()))));
@@ -946,6 +987,51 @@ public final class PetScreen extends Screen {
 		}
 
 		g.renderTooltip(font, lines, mouseX, mouseY);
+	}
+
+	/**
+	 * The pet's stats, in one place: its damage per hit (an Amigo's own attacks, with what its levels add), the extras
+	 * every hit gets (Sharpened Claws and the like at 75, Brawler on the Unarmed tree at 10), its health and armor.
+	 */
+	private List<FormattedCharSequence> statsTip(PetsNetwork.Entry pet) {
+		List<FormattedCharSequence> lines = new ArrayList<>();
+		lines.add(title(Component.translatable("bloompets.screen.stats.title", pet.name())));
+
+		if (!pet.loaded() || pet.armor() < 0) {
+			lines.addAll(font.split(Component.translatable("bloompets.screen.stats.away").withStyle(ChatFormatting.GRAY), 200));
+			return lines;
+		}
+
+		int color = SKILL_TEXT & 0xFFFFFF;
+
+		if (pet.amigoPower() >= 0) {
+			lines.add(Component.translatable("bloompets.screen.stats.amigo", String.format(Locale.ROOT, "%.1f", pet.amigoPower()))
+					.withStyle(st -> st.withColor(color)).getVisualOrderText());
+		} else if (pet.damage() >= 0) {
+			lines.add(Component.translatable("bloompets.screen.stats.damage", String.format(Locale.ROOT, "%.1f", pet.damage()))
+					.withStyle(st -> st.withColor(color)).getVisualOrderText());
+		}
+
+		PetSkills.Kind kind = PetSkills.Kind.byId(pet.skills());
+
+		if (kind != null && pet.level() >= PetSkills.Slot.CLAWS.level) {
+			lines.add(Component.translatable("bloompets.screen.stats.extra", "+2", Component.translatable(PetSkills.nameKey(kind, PetSkills.Slot.CLAWS)))
+					.withStyle(ChatFormatting.GRAY).getVisualOrderText());
+		}
+
+		if ("unarmed".equals(pet.tree()) && pet.level() >= PetTrees.Effect.BRAWLER.level) {
+			lines.add(Component.translatable("bloompets.screen.stats.extra", "+3", Component.translatable("bloompets.effect.brawler"))
+					.withStyle(ChatFormatting.GRAY).getVisualOrderText());
+		}
+
+		lines.add(Component.translatable("bloompets.screen.stats.body", String.format(Locale.ROOT, "%.0f", pet.maxHealth()),
+				String.format(Locale.ROOT, "%.0f", pet.armor())).withStyle(st -> st.withColor(color)).getVisualOrderText());
+
+		if (pet.kind() == Pets.Kind.BLOOM && !pet.party() && !pet.posted()) {
+			lines.addAll(font.split(Component.translatable("bloompets.screen.stats.resting").withStyle(ChatFormatting.DARK_GRAY), 200));
+		}
+
+		return lines;
 	}
 
 	private FormattedCharSequence title(MutableComponent text) {

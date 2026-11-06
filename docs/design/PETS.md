@@ -248,7 +248,9 @@ gets a gold name and a sparkle, a second wind once each time it comes out, and a
   drops the item as a player's does** (fine: farming it would be on purpose). Cooldown abilities (Charge Attack,
   Lightning Summon, the leap) each switch off in the screen (Lightning Summon would get annoying). Picking: the Bloom
   view shows the four trees; click one, confirm; then its effects fill the slots, dimmed until their level; a Reset
-  button warns first. **A Bloom pet's reset puts it back to level 1; a modded companion's costs a 5-hour wait instead**
+  button warns first. **A reset costs a Bloom pet half its current level, another mod's companion three quarters of
+  its level (FreshOrangeSlices, 2026-11-05; first it was back to level 1); a Migamigos Amigo keeps its level and waits 5
+  hours instead**
   (its level is its own mod's, which Pets doesn't touch). **Migamigos companions use their own Amigo level** as their
   level (read from Migamigos); Zoni's companions, with none, use Bloom Pets' (the normal system: level 1-100 and XP as
   a Bloom combat pet's, FreshOrangeSlices 2026-11-05). **Amigos level at a Bloom pet's pace (agreed and built 2026-11-05):** Migamigos' own curve (XP only from its kills, the mob's orb XP; 10 x 1.1^level a level, to 99; +0.1 damage a
@@ -390,16 +392,24 @@ Each phase is its own chunk: built, tested (game tests on plain wolves first; Mi
 5. **The pack**: Migamigos and Zoni's per-kind skills (Spirits), their mood and bonus, fetch, a quest chapter, tuning.
    **Dragons are out of Bloom Pets altogether** (FreshOrangeSlices, 2026-11-05: no dragons' limits step).
 
-**Decided after Phase 4 (FreshOrangeSlices, 2026-11-05; notes, not built yet):**
-- **Polish of the Bloom view**: a locked tree effect shows its icon greyed, its level small in the corner (not a dark box);
-  the left column's empty 5th slot shows the pet's overall stats (its damage with its tree, and so on), or holds the tree
-  swap (to settle); an Amigo whose levels wait for its next kill says so in the status line ("Levels up on its next kill").
-- **A softer reset** (instead of back to level 1 / a 5-hour wait): 50% for Bloom pets, 75% for modded companions (to
-  settle: of what, and how for Amigos).
-- **Spirits use the same numbers as a Bloom pet's skills.** **One reroll, ever** (the free one).
-- **Fetch with a ball**: a blue ball with the Heart of the Sea's look, named Ball (to settle: how it's made).
-- **No upgrade test** (going all in).
-- **Bloom Pets' version follows its phase** (0.4.0 after Phase 4; the build number stays on the end).
-- **`/bloompets info <pet>`** for operators: level, an Amigo's pace count, tree, mood, hunger, fainting.
-- **Phase 5's numbers are written down and agreed before it's built.**
-- Kept as they are: how strong Amigos can get (a strong build is the player's choice), and how full the screen is.
+**Phase 4 polish (agreed and built, 2026-11-05; Bloom Pets 0.4.0):** a locked tree effect shows its icon greyed, its
+level small in the corner; the left column's 5th slot in the Bloom view is the pet's stats (a book: damage per hit, or an
+Amigo's damage from its levels, the extras every hit gets, health and armor; loaded pets only); an Amigo with levels
+waiting says "Levels up on its next kill"; **the softer reset** (above: half a Bloom pet's level, three quarters of a
+companion's, an Amigo's 5-hour wait); Bloom Pets' version follows its phase (0.4.0; CI's build number stays on the end);
+`/bloompets info <pet> [player]` for operators. No upgrade test (going all in). Kept as they are: how strong Amigos can
+get (a strong build is the player's choice) and how full the screen is.
+
+**Phase 5, agreed before building (FreshOrangeSlices, 2026-11-05):**
+- **Spirits**: a companion gets its Spirit when it's added to its owner's pet list (companions never join the party),
+  an even chance of each combat kind (Wolf, Iron Golem, Polar Bear, Goat, Panda; **never the Vex**), with the same skill
+  numbers as a Bloom pet of that kind, at the companion's level. **One reroll, ever** (the free one, from the pop-up the
+  first time its page opens; it can't land on the same kind). An Amigo (top level 99) gets the level-100 perks (gold
+  name, second wind) at 99.
+- **Companions' mood and hunger**: the same bars and rates as a Bloom pet's; they eat cooked vanilla food, fed with sneak
+  + right-click (a plain right-click is Migamigos' own menu); a sulking companion's Spirit skills and tree rest.
+- **No owner bonus from companions** (a player can have an army of them).
+- **Fetch** (Bloom pets only), like the plugin: **a ball** (a blue ball with the Heart of the Sea's look, named Ball),
+  one given to the player with every new pet (any ball works with any pet that plays, so players end up with plenty).
+- **A "Pets" chapter in the quest book**: bond a pet, reach level 10, post a pet, a pet at level 25, buy One and the
+  Same, pick a tree.

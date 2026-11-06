@@ -114,14 +114,16 @@ public final class PetTreeGameTests {
 	}
 
 	@GameTest(template = "empty")
-	public static void aResetCostsABloomPetItsLevel(GameTestHelper helper) {
+	public static void aResetCostsABloomPetHalfItsLevel(GameTestHelper helper) {
 		ServerPlayer owner = player(helper, new BlockPos(4, 1, 4), true);
-		Wolf wolf = pet(helper, EntityType.WOLF, owner, new BlockPos(1, 2, 1), 50, true);
+		Wolf wolf = pet(helper, EntityType.WOLF, owner, new BlockPos(1, 2, 1), 51, true);
 		PetTrees.pick(owner, record(helper, wolf), "trident");
 		PetTrees.reset(owner, record(helper, wolf));
-		helper.assertTrue(PetTrees.tree(wolf) == null && PetLevels.level(wolf) == 1, "No tree, and back to level 1");
+		helper.assertTrue(PetTrees.tree(wolf) == null && PetLevels.level(wolf) == 25, "No tree, and half its level kept (51 to 25): " + PetLevels.level(wolf));
 		PetTrees.pick(owner, record(helper, wolf), "axe");
 		helper.assertTrue(PetTrees.tree(wolf) == PetTrees.Tree.AXE, "and free to pick again");
+		helper.assertTrue(PetTrees.resetLevel(80, true) == 20 && PetTrees.resetLevel(1, false) == 1 && PetTrees.resetLevel(3, true) == 1,
+				"A companion keeps a quarter; never below level 1");
 		helper.succeed();
 	}
 

@@ -51,6 +51,21 @@ public final class Amigos {
 		return Pets.kind(entity) == Pets.Kind.MODDED ? call(entity, "getAmigoLevel") : null;
 	}
 
+	/** The damage its Amigo levels add to each of its attacks (+0.1 a level), or null. */
+	public static Float extraPower(Entity entity) {
+		if (level(entity) == null) {
+			return null;
+		}
+
+		Optional<Method> method = find(entity.getClass(), "getExtraPower");
+
+		try {
+			return method.isPresent() && method.get().invoke(entity) instanceof Float value ? value : null;
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			return null;
+		}
+	}
+
 	/** Its XP toward the next Amigo level, or null. */
 	public static Integer xp(Entity entity) {
 		return call(entity, "getExperience");

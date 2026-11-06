@@ -38,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "6";
+	private static final String VERSION = "7";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -132,12 +132,14 @@ public final class PetsNetwork {
 	 * ticks left of its rest if it fainted, its skill tree (a {@link com.freshorangeslices.bloompets.PetSkills.Kind}
 	 * id, or empty), and its mood (0 to 100; -1 for companions, which keep their own mods' needs) and hunger (0 to 20),
 	 * whether it loves you, whether it's tired, whether it keeps a post; One and the Same: whether it can follow a tree,
-	 * its tree (or empty), its switched-off abilities (comma-separated), a companion's ticks left before it can pick again.
+	 * its tree (or empty), its switched-off abilities (comma-separated), a companion's ticks left before it can pick again;
+	 * its stats when it's loaded (attack damage and armor, -1 when away; an Amigo's damage from its levels, -1 for others)
+	 * and an Amigo's levels waiting for its next kill.
 	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
 			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted, boolean treeable, String tree,
-			String abilitiesOff, int treeWait) {
+			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -166,13 +168,18 @@ public final class PetsNetwork {
 			buf.writeUtf(tree);
 			buf.writeUtf(abilitiesOff);
 			buf.writeVarInt(treeWait);
+			buf.writeFloat(damage);
+			buf.writeFloat(armor);
+			buf.writeFloat(amigoPower);
+			buf.writeVarInt(owed);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
 			return new Entry(buf.readUUID(), buf.readUtf(), buf.readUtf(), buf.readEnum(Pets.Kind.class), buf.readUtf(), buf.readUtf(),
 					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
 					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf(), buf.readFloat(), buf.readFloat(),
-					buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readUtf(), buf.readUtf(), buf.readVarInt());
+					buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readUtf(), buf.readUtf(), buf.readVarInt(),
+					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt());
 		}
 	}
 
@@ -218,10 +225,17 @@ public final class PetsNetwork {
 				String tree = live != null ? (PetTrees.tree(live) == null ? "" : PetTrees.tree(live).id()) : r.tree == null ? "" : r.tree;
 				String off = String.join(",", live != null ? PetTrees.abilitiesOff(live) : r.abilitiesOff);
 				long treeWaitUntil = live != null ? Pets.data(live).getLong("treeWait") : r.treeWait;
+				LivingEntity alive = live instanceof LivingEntity living ? living : null;
+				var attack = alive == null ? null : alive.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
+				Float power = live == null ? null : com.freshorangeslices.bloompets.Amigos.extraPower(live);
+				Integer owed = live == null ? null : com.freshorangeslices.bloompets.Amigos.owedLevel(live);
+				Integer amigoLevel = live == null ? null : com.freshorangeslices.bloompets.Amigos.level(live);
 				pets.add(new Entry(r.pet, r.name, r.type, r.kind, category, r.dimension, r.pos, r.party, live != null, health, max,
 						r.slots, look == null ? new CompoundTag() : look, level, (float) xp, next, rest, skills, mood, hunger, loved, tired,
 						live != null ? com.freshorangeslices.bloompets.PetPosts.posted(live) : r.post != null, treeable, tree, off,
-						(int) Math.min(Integer.MAX_VALUE, Math.max(0, treeWaitUntil - now))));
+						(int) Math.min(Integer.MAX_VALUE, Math.max(0, treeWaitUntil - now)),
+						attack == null ? -1.0F : (float) attack.getValue(), alive == null ? -1.0F : alive.getArmorValue(),
+						power == null ? -1.0F : power, owed == null || amigoLevel == null ? 0 : Math.max(0, owed - amigoLevel)));
 			}
 
 			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player), bloomView);

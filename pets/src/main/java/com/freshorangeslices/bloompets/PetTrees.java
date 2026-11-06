@@ -43,8 +43,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * One and the Same (docs/design/PETS.md): with the Bloom Major on, the player picks a weapon tree for each combat pet
  * and companion in the pet screen's Bloom view. The pet's own level opens its tree's four effects (levels 10, 25, 50,
  * 75; the same table for everyone), which work beside its own skills while it's in the party or at its post (a
- * companion: always). The pick stays: a reset puts a Bloom pet back to level 1, and makes a companion wait 5 hours
- * before picking again. With the Major off (or gone) every tree rests, nothing lost. Bloom's effects, on a pet's own
+ * companion: always). The pick stays: a reset costs a Bloom pet half its level and another mod's companion three
+ * quarters; a Migamigos Amigo (its level is Migamigos') waits 5 hours before picking again. With the Major off (or gone) every tree rests, nothing lost. Bloom's effects, on a pet's own
  * melee hits; a pet's Execute finishes nothing, it hits 30% harder on a boss under half health and anything else under
  * 70%; the cooldown abilities (Charge Attack, Leap, Lightning Summon) come every 25 seconds and switch off one by one.
  */
@@ -262,7 +262,7 @@ public final class PetTrees {
 				.withStyle(ChatFormatting.GOLD);
 	}
 
-	/** The player resets the pet's tree: a Bloom pet goes back to level 1; a companion can't pick again for 5 hours. */
+	/** The player resets the pet's tree: see {@link #resetLevel}; an Amigo can't pick again for 5 hours. */
 	public static Component reset(ServerPlayer player, PetRegistry.Record record) {
 		Entity pet = Pets.loaded(player.server, record.pet);
 
@@ -279,15 +279,23 @@ public final class PetTrees {
 		data.remove("abilitiesOff");
 		STATES.remove(pet);
 
-		if (Pets.kind(pet) == Pets.Kind.MODDED) {
+		// FreshOrangeSlices, 2026-11-05: a Bloom pet keeps half its level, another mod's companion a quarter; a Migamigos
+		// Amigo's level is Migamigos' own (lowering it would mean undoing its health and damage), so it waits instead.
+		if (Amigos.has(pet)) {
 			data.putLong("treeWait", now(pet) + COMPANION_WAIT);
 			PetEvents.observe(pet);
-			return Component.translatable("bloompets.tree.reset.companion", record.name);
+			return Component.translatable("bloompets.tree.reset.amigo", record.name);
 		}
 
-		PetLevels.setLevel(living, 1);
+		int kept = resetLevel(PetLevels.level(pet), Pets.kind(pet) == Pets.Kind.MODDED);
+		PetLevels.setLevel(living, kept);
 		PetEvents.observe(pet);
-		return Component.translatable("bloompets.tree.reset", record.name);
+		return Component.translatable("bloompets.tree.reset", record.name, kept);
+	}
+
+	/** The level a pet keeps after a tree reset: half its level for a Bloom pet, a quarter for a companion; at least 1. */
+	public static int resetLevel(int level, boolean companion) {
+		return Math.max(1, companion ? level / 4 : level / 2);
 	}
 
 	/** Switches one of the pet's cooldown abilities off, or back on. */

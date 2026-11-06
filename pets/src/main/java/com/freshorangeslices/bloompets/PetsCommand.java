@@ -13,6 +13,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -60,6 +61,10 @@ public final class PetsCommand {
 						.then(Commands.argument("level", IntegerArgumentType.integer(1, PetLevels.MAX)).then(pet().executes(c -> level(c, false)))))
 				.then(Commands.literal("xp").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("amount", IntegerArgumentType.integer(1)).then(pet().executes(c -> level(c, true)))))
+				.then(Commands.literal("info").requires(source -> source.hasPermission(2))
+						.then(pet().executes(c -> info(c, c.getSource().getPlayerOrException()))
+								.then(Commands.argument("player", EntityArgument.player())
+										.executes(c -> info(c, EntityArgument.getPlayer(c, "player"))))))
 				.then(Commands.literal("give").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("species", StringArgumentType.word())
 								.suggests((c, b) -> SharedSuggestionProvider.suggest(SpeciesData.all().stream().map(s -> s.id().getPath()), b))
@@ -144,6 +149,73 @@ public final class PetsCommand {
 
 		context.getSource().sendSuccess(() -> Component.translatable("bloompets.command.level", record.name, PetLevels.level(living)), true);
 		return PetLevels.level(living);
+	}
+
+	/**
+	 * Operators: everything Bloom Pets keeps about one pet (one of the player's, by its number or name), to answer "my pet
+	 * didn't level": its level and XP (an Amigo's own, with Bloom Pets' pace count and the levels waiting for its next
+	 * kill), its tree, mood and hunger, where it stands (party, post, fainted) and where it is. From the pet itself when
+	 * it's loaded, else from its entry.
+	 */
+	private static int info(CommandContext<CommandSourceStack> context, ServerPlayer owner) {
+		String wanted = StringArgumentType.getString(context, "pet");
+		PetRegistry.Record r = find(owner, wanted);
+
+		if (r == null) {
+			context.getSource().sendFailure(Component.translatable("bloompets.command.nopet", wanted));
+			return 0;
+		}
+
+		Entity pet = Pets.loaded(owner.server, r.pet);
+		boolean live = pet instanceof LivingEntity;
+		long now = owner.server.overworld().getGameTime();
+		List<String> lines = new java.util.ArrayList<>();
+		lines.add(r.name + " (" + r.type + ", " + r.kind.name().toLowerCase(Locale.ROOT) + ") of " + owner.getGameProfile().getName()
+				+ (live ? "" : " · not loaded: from its entry"));
+
+		if (live && Amigos.has(pet)) {
+			CompoundTag data = Pets.data(pet);
+			lines.add(String.format(Locale.ROOT, "Amigo level %d, XP %d / %d · waiting for its next kill: %d levels · Bloom Pets' pace: level %s, XP %.1f",
+					Amigos.level(pet), Amigos.xp(pet), Amigos.xpNext(pet, Amigos.level(pet)),
+					Math.max(0, Amigos.owedLevel(pet) - Amigos.level(pet)),
+					data.contains("paceLevel") ? Integer.toString(data.getInt("paceLevel")) : "not started", data.getDouble("paceXp")));
+		} else {
+			lines.add(String.format(Locale.ROOT, "Level %d, XP %.1f / %.0f", live ? PetLevels.level(pet) : r.level,
+					live ? PetLevels.xp(pet) : r.xp, live ? PetLevels.xpNext(pet) : r.xpNext));
+		}
+
+		PetTrees.Tree tree = live ? PetTrees.tree(pet) : PetTrees.Tree.byId(r.tree);
+		long treeWait = (live ? Pets.data(pet).getLong("treeWait") : r.treeWait) - now;
+		String off = String.join(",", live ? PetTrees.abilitiesOff(pet) : r.abilitiesOff);
+		lines.add("Tree: " + (tree == null ? "none" : tree.id() + (live ? (PetTrees.treeLevel(pet) >= 0 ? " (working)" : " (resting)") : ""))
+				+ (off.isEmpty() ? "" : " · off: " + off) + (treeWait > 0 ? " · can pick again in " + clock(treeWait) : "")
+				+ " · owner has One and the Same: " + (PetRegistry.get(owner.server).oneAndTheSame(owner.getUUID()) ? "yes" : "no"));
+
+		if (r.kind == Pets.Kind.BLOOM) {
+			double mood = live ? PetMood.mood(pet) : r.mood;
+			double hunger = live ? PetMood.hunger(pet) : r.hunger;
+			boolean loved = live ? PetMood.loved(pet) : r.loved;
+			boolean tired = live ? PetMood.tired(pet) : r.tired;
+			lines.add(String.format(Locale.ROOT, "Mood %.0f%s · hunger %.1f / 20%s%s", mood, mood < 30.0 ? " (sulking)" : "", hunger,
+					loved ? " · loves its owner" : "", tired ? " · tired" : ""));
+		}
+
+		int rest = live ? Fainting.ticksLeft(pet) : (int) Math.max(0, r.faintedUntil - now);
+		boolean posted = live ? PetPosts.posted(pet) : r.post != null;
+		lines.add((r.party ? "In the party" : posted ? "At its post" : r.kind == Pets.Kind.MODDED ? "A companion" : "At home")
+				+ (rest > 0 ? " · fainted, back in " + clock(rest) : "") + " · " + r.dimension + " " + r.pos.toShortString()
+				+ (live ? String.format(Locale.ROOT, " · health %.0f / %.0f", ((LivingEntity) pet).getHealth(), ((LivingEntity) pet).getMaxHealth()) : ""));
+
+		for (String line : lines) {
+			context.getSource().sendSuccess(() -> Component.literal(line), false);
+		}
+
+		return 1;
+	}
+
+	private static String clock(long ticks) {
+		long seconds = ticks / 20;
+		return String.format(Locale.ROOT, "%d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60);
 	}
 
 	/** One and the Same: pick a pet's weapon tree, or reset it. */

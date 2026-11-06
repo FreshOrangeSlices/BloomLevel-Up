@@ -357,7 +357,7 @@ public final class PetScreen extends Screen {
 		boolean picture = any && confirmText == null;
 		modeButton.visible = picture;
 		renameButton.visible = releaseButton.visible = picture && renaming == null;
-		armorButton.visible = picture && renaming == null && pet.armor() > 0;
+		armorButton.visible = picture && renaming == null && pet.armorState() > 0;
 
 		if (renaming != null && (pet == null || !renaming.equals(pet.pet()))) {
 			stopRename(false);
@@ -384,9 +384,9 @@ public final class PetScreen extends Screen {
 		releaseButton.setTooltip(Tooltip.create(Component.translatable("bloompets.screen.release.tip", pet.name())));
 		// An open eye while its armor shows, a hollow one while it's hidden.
 		armorButton.active = pet.loaded();
-		armorButton.setMessage(Component.literal(pet.armor() == 2 ? "\u25cb" : "\u25c9"));
+		armorButton.setMessage(Component.literal(pet.armorState() == 2 ? "\u25cb" : "\u25c9"));
 		armorButton.setTooltip(Tooltip.create(Component.translatable(!pet.loaded() ? "bloompets.screen.away.tip"
-				: pet.armor() == 2 ? "bloompets.screen.armor.hidden" : "bloompets.screen.armor.shown", pet.name())));
+				: pet.armorState() == 2 ? "bloompets.screen.armor.hidden" : "bloompets.screen.armor.shown", pet.name())));
 		boolean storage = pet.slots() > 0;
 		storageButton.active = storage;
 		// A companion's Storage is its food pouch (one with a backpack of its own eats from that instead).
@@ -556,7 +556,7 @@ public final class PetScreen extends Screen {
 		boolean picture = pet != null && confirmText == null;
 		modeButton.visible = picture;
 		renameButton.visible = releaseButton.visible = picture && renaming == null;
-		armorButton.visible = picture && renaming == null && pet.armor() > 0;
+		armorButton.visible = picture && renaming == null && pet.armorState() > 0;
 		super.render(g, mouseX, mouseY, partialTick);
 
 		if (message != null && System.currentTimeMillis() - messageAt < 5000) {

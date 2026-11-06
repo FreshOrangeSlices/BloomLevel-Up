@@ -154,7 +154,7 @@ public final class PetsNetwork {
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
 			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted, boolean treeable, String tree,
 			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed, boolean spiritPending, int topLevel,
-			String mode, int armor) {
+			String mode, int armorState) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -190,7 +190,7 @@ public final class PetsNetwork {
 			buf.writeBoolean(spiritPending);
 			buf.writeVarInt(topLevel);
 			buf.writeUtf(mode);
-			buf.writeByte(armor);
+			buf.writeByte(armorState);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {

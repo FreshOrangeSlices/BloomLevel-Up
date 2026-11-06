@@ -122,6 +122,9 @@ public final class PetScreen extends Screen {
 	/** A question waiting for yes or no (picking or resetting a tree), drawn over the pet, and what yes does. */
 	private Component confirmText;
 	private Runnable confirmYes;
+	private Runnable confirmNo;
+	/** Companions whose Spirit this screen has asked about already (it asks once a visit; the chat asked first). */
+	private final java.util.Set<UUID> askedSpirit = new java.util.HashSet<>();
 	private Button yesButton;
 	private Button noButton;
 	private int ticks;
@@ -252,8 +255,14 @@ public final class PetScreen extends Screen {
 				yes.run();
 			}
 		}));
-		noButton = addRenderableWidget(new PetButton(middle + 4, canvasBottom() - 24, 40, 16, Component.translatable("bloompets.screen.no"),
-				b -> closeConfirm()));
+		noButton = addRenderableWidget(new PetButton(middle + 4, canvasBottom() - 24, 40, 16, Component.translatable("bloompets.screen.no"), b -> {
+			Runnable no = confirmNo;
+			closeConfirm();
+
+			if (no != null) {
+				no.run();
+			}
+		}));
 		closeConfirm();
 		updateButtons();
 	}
@@ -515,6 +524,7 @@ public final class PetScreen extends Screen {
 	}
 
 	private void renderPet(GuiGraphics g, PetsNetwork.Entry pet, int mouseX, int mouseY) {
+		askSpirit(pet);
 		int mainLeft = mainLeft();
 		int mainRight = mainRight();
 		panelTip = null;
@@ -528,9 +538,12 @@ public final class PetScreen extends Screen {
 		}
 		big(g, bold(pet.name(), (int) ((viewX - 6 - mainLeft) / BIG)), mainLeft, top + 9, GOLD);
 		Component level = Component.translatable("bloompets.screen.level", pet.level());
-		g.drawString(font, level, mainLeft, top + 25, pet.level() >= PetSkills.Slot.MAX.level ? GOLD : ACCENT);
+		g.drawString(font, level, mainLeft, top + 25, pet.level() >= pet.topLevel() ? GOLD : ACCENT);
 		int kindX = mainLeft + font.width(level);
-		String kind = " · " + typeName(pet) + " · " + Component.translatable("bloompets.category." + pet.category()).getString();
+		// A companion's Spirit where a Bloom pet shows its category.
+		String kind = " · " + typeName(pet) + " · " + (pet.kind() == Pets.Kind.MODDED && !pet.skills().isEmpty()
+				? Component.translatable("bloompets.spirit.name." + pet.skills()).getString()
+				: Component.translatable("bloompets.category." + pet.category()).getString());
 		g.drawString(font, font.plainSubstrByWidth(kind, mainRight - kindX), kindX, top + 25, MUTED);
 
 		// Its bonus for you, under the mouse on that line.
@@ -790,18 +803,39 @@ public final class PetScreen extends Screen {
 	// One and the Same: the Bloom view.
 
 	private void confirm(Component text, Runnable yes) {
+		choose(text, Component.translatable("bloompets.screen.yes"), yes, Component.translatable("bloompets.screen.no"), null);
+	}
+
+	/** A question with two answers of its own (a companion's Spirit: Keep or Reroll). */
+	private void choose(Component text, Component yesLabel, Runnable yes, Component noLabel, Runnable no) {
 		confirmText = text;
 		confirmYes = yes;
+		confirmNo = no;
+		yesButton.setMessage(yesLabel);
+		noButton.setMessage(noLabel);
 		yesButton.visible = noButton.visible = true;
 	}
 
 	private void closeConfirm() {
 		confirmText = null;
 		confirmYes = null;
+		confirmNo = null;
 
 		if (yesButton != null) {
 			yesButton.visible = noButton.visible = false;
 		}
+	}
+
+	/** A companion whose Spirit isn't settled yet: Keep or Reroll, in the box over it (once a visit). */
+	private void askSpirit(PetsNetwork.Entry pet) {
+		if (!pet.spiritPending() || confirmText != null || bloomView || !askedSpirit.add(pet.pet())) {
+			return;
+		}
+
+		Component spirit = Component.translatable("bloompets.spirit.name." + pet.skills());
+		choose(Component.translatable("bloompets.screen.spirit.ask", pet.name(), spirit),
+				Component.translatable("bloompets.screen.spirit.keep"), () -> PetsClient.act(PetsNetwork.Action.SPIRIT, pet.pet(), "keep"),
+				Component.translatable("bloompets.screen.spirit.reroll"), () -> PetsClient.act(PetsNetwork.Action.SPIRIT, pet.pet(), "reroll"));
 	}
 
 	/** The question, in a box over the pet (its model isn't drawn meanwhile), with yes and no under it. */
@@ -1086,7 +1120,8 @@ public final class PetScreen extends Screen {
 
 	/** The skill in slot {@code index} (0 to 9: the left column, then the right), or null for an empty slot. */
 	private PetSkills.Slot skillAt(PetsNetwork.Entry pet, int index) {
-		if (bloomView || pet.kind() != Pets.Kind.BLOOM) {
+		// A companion's slots hold its Spirit's skills (none until it has one).
+		if (bloomView || pet.kind() != Pets.Kind.BLOOM && PetSkills.Kind.byId(pet.skills()) == null) {
 			return null;
 		}
 
@@ -1122,16 +1157,22 @@ public final class PetScreen extends Screen {
 			}
 
 			PetSkills.Kind kind = PetSkills.Kind.byId(pet.skills());
-			boolean open = pet.level() >= slot.level;
+			int opens = opensAt(pet, slot);
+			boolean open = pet.level() >= opens;
 			List<FormattedCharSequence> lines = new ArrayList<>();
 			lines.add(Component.translatable(PetSkills.nameKey(kind, slot)).withStyle(st -> st.withColor(GOLD & 0xFFFFFF).withBold(true))
 					.getVisualOrderText());
-			lines.add(Component.translatable(open ? "bloompets.screen.skill.open" : "bloompets.screen.skill.locked", slot.level)
+			lines.add(Component.translatable(open ? "bloompets.screen.skill.open" : "bloompets.screen.skill.locked", opens)
 					.withStyle(st -> st.withColor((open ? XP_FILL : MUTED) & 0xFFFFFF)).getVisualOrderText());
-			lines.addAll(font.split(describe(kind, slot, open ? pet.level() : slot.level).withStyle(st -> st.withColor(SKILL_TEXT & 0xFFFFFF)), 200));
+			lines.addAll(font.split(describe(kind, slot, open ? pet.level() : opens).withStyle(st -> st.withColor(SKILL_TEXT & 0xFFFFFF)), 200));
 			g.renderTooltip(font, lines, mouseX, mouseY);
 			return;
 		}
+	}
+
+	/** The level a skill opens at: its own, but the top one (100) is an Amigo's 99. */
+	private static int opensAt(PetsNetwork.Entry pet, PetSkills.Slot slot) {
+		return slot == PetSkills.Slot.MAX ? pet.topLevel() : slot.level;
 	}
 
 	/** What the skill does, with its numbers at this level (a kind's own wording first, then the shared one). */
@@ -1180,7 +1221,7 @@ public final class PetScreen extends Screen {
 			return;
 		}
 
-		boolean open = pet.level() >= slot.level;
+		boolean open = pet.level() >= opensAt(pet, slot);
 		frame(g, x, y, x + SLOT, y + SLOT, hover ? GOLD : open ? SKILL_EDGE : PANEL_EDGE);
 		g.renderItem(new ItemStack(PetSkills.icon(PetSkills.Kind.byId(pet.skills()), slot)), x + 1, y + 1);
 
@@ -1189,7 +1230,7 @@ public final class PetScreen extends Screen {
 			g.pose().pushPose();
 			g.pose().translate(0.0F, 0.0F, 200.0F);
 			g.fill(x + 1, y + 1, x + SLOT - 1, y + SLOT - 1, 0xC8100E0C);
-			String level = Integer.toString(slot.level);
+			String level = Integer.toString(opensAt(pet, slot));
 			g.drawString(font, level, x + (SLOT - font.width(level)) / 2 + 1, y + 5, MUTED);
 			g.pose().popPose();
 		}

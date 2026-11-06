@@ -81,6 +81,17 @@ public final class PetLevels {
 		return level >= MAX ? 0.0 : xpToNext(level, combat(pet));
 	}
 
+	/** Its top level: 100, or a Migamigos Amigo's 99 (it gets the level-100 perks there: FreshOrangeSlices, 2026-11-05). */
+	public static int top(Entity pet) {
+		return Amigos.level(pet) != null ? Amigos.MAX : MAX;
+	}
+
+	/** At its top level: a gold name, a sparkle, a second wind. */
+	public static boolean maxed(Entity pet) {
+		Pets.Kind kind = Pets.kind(pet);
+		return (kind == Pets.Kind.BLOOM || kind == Pets.Kind.MODDED) && level(pet) >= top(pet);
+	}
+
 	/** Whether the pet earns XP right now: a Bloom pet in the party or at its post and awake, or a modded companion. */
 	public static boolean active(Entity pet) {
 		if (Pets.owner(pet) == null) {
@@ -182,7 +193,7 @@ public final class PetLevels {
 	private static void leveledUp(LivingEntity pet, int from, int to, boolean announce) {
 		PetSkills.refresh(pet);
 
-		if (to >= MAX) {
+		if (to >= top(pet)) {
 			PetSkills.goldName(pet);
 		}
 
@@ -207,7 +218,7 @@ public final class PetLevels {
 		List<Component> unlocked = new ArrayList<>();
 
 		for (PetSkills.Slot slot : PetSkills.Slot.values()) {
-			if (slot.level > from && slot.level <= to && (kind != null || slot == PetSkills.Slot.MAX) && Pets.kind(pet) == Pets.Kind.BLOOM) {
+			if (slot.level > from && slot.level <= to && (kind != null || slot == PetSkills.Slot.MAX && Pets.kind(pet) == Pets.Kind.BLOOM)) {
 				unlocked.add(Component.translatable(PetSkills.nameKey(kind, slot)));
 			}
 		}

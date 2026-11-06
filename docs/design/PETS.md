@@ -397,7 +397,7 @@ level small in the corner; the left column's 5th slot in the Bloom view is the p
 Amigo's damage from its levels, the extras every hit gets, health and armor; loaded pets only); an Amigo with levels
 waiting says "Levels up on its next kill"; **the softer reset** (above: half a Bloom pet's level, three quarters of a
 companion's, an Amigo's 5-hour wait); Bloom Pets' version follows its phase (0.4.0; CI's build number stays on the end);
-`/bloompets info <pet> [player]` for operators. No upgrade test (going all in). Kept as they are: how strong Amigos can
+`/bloompets info <player> <pet>` for operators (`@s` for your own; the player first, since a pet's name can have spaces). No upgrade test (going all in). Kept as they are: how strong Amigos can
 get (a strong build is the player's choice) and how full the screen is.
 
 **Phase 5, agreed before building (FreshOrangeSlices, 2026-11-05):**
@@ -437,3 +437,16 @@ its storage (FreshOrangeSlices, 2026-11-05: `CompanionInventory`, a Migamigos co
 to chat (a player can have an army). **A sulking companion's tree rests** (and its Spirit, from 5b).
 The screen shows its mood and food bars with its own help texts. Game tests: `CompanionCareGameTests` (a Migamigos
 Claymore).
+
+**Phase 5b (built, 2026-11-05): Spirits** (`Spirits`). A companion gets its Spirit the moment it's added to its
+owner's pet list (companions listed before this version, the first time it sees them): an even pick of Wolf, Iron
+Golem, Polar Bear, Goat and Panda, never the Vex. **The owner is told at once** in chat ("Claymore gained the Spirit of
+the Wolf. [Keep] [Reroll]", FreshOrangeSlices: instantly, the buttons running `/bloompets spirit keep|reroll <pet>`),
+and the pet screen asks too (Keep / Reroll in the box over the pet) until it's settled. **One reroll, ever**, always
+to another kind; after Keep or the reroll it's settled. Its skills are that kind's nine with a Bloom pet's numbers
+(Iron Colossus too: kept, FreshOrangeSlices 2026-11-05), at the companion's level (an Amigo's own), working whenever
+it isn't sulking; a companion with the Iron Golem's Spirit (level 20+, within 32 blocks) can step in as Guardian
+Intervention. The screen shows "Spirit of the Wolf" where a Bloom pet shows its category, and the skills in its slots.
+**Top level**: 100, or an Amigo's 99 (FreshOrangeSlices: the perks at 99): a gold name, a sparkle, and a second wind
+once each time it's called (a blow that would kill it leaves it at half health; before the add-on's keepsake).
+`/bloompets info` shows the Spirit. Game tests: `SpiritGameTests` (a Migamigos Claymore).

@@ -49,7 +49,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 /**
  * Combat pets' skills (docs/design/PETS.md, Combat pets' skills): the plugin's mcMMO-style tree, unlocked by the pet's
  * own level. Each combat kind has its own names for the shared skills, plus a starting and a special skill of its own;
- * the Wolf's are new (FreshOrangeSlices, 2026-11-05). Skills work while the pet is in its owner's party and awake.
+ * the Wolf's are new (FreshOrangeSlices, 2026-11-05). Skills work while the pet is in its owner's party and awake. A
+ * companion's Spirit ({@link Spirits}) gives it one of these trees, working whenever it isn't sulking.
  * Gore (a chance of double damage) is half the pet's level in %, up to 50% at 100 (strong on purpose: pets are for
  * players who'd rather not fight). The numbers are the plugin's.
  */
@@ -113,8 +114,12 @@ public final class PetSkills {
 		return slot == Slot.MAX || kind == null ? "bloompets.skill.max" : "bloompets.skill." + kind.id() + "." + slot.id();
 	}
 
-	/** The pet's skill tree, or null (non-combat pets, and modded companions until their Spirit comes). */
+	/** The pet's skill tree, or null (non-combat pets, and companions without a Spirit). */
 	public static Kind kind(Entity pet) {
+		if (Pets.kind(pet) == Pets.Kind.MODDED) {
+			return Spirits.of(pet);
+		}
+
 		Species species = Pets.species(pet);
 		return species == null || species.skills() == null ? null : Kind.byId(species.skills());
 	}
@@ -142,10 +147,23 @@ public final class PetSkills {
 		return level >= 50;
 	}
 
-	/** The pet's level if its skills work right now (in the party or at its post, awake, not sulking), else -1. */
+	/**
+	 * The pet's level if its skills work right now, else -1: a Bloom pet in the party or at its post, awake; a companion
+	 * with a Spirit; neither sulking.
+	 */
 	static int skillLevel(Entity pet) {
-		if (!(pet instanceof LivingEntity) || pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.BLOOM
-				|| !Pets.inParty(pet) && !PetPosts.posted(pet) || Fainting.fainted(pet) || PetMood.sad(pet) || Pets.owner(pet) == null) {
+		// Its kind first: this is asked for every blow in the world.
+		Pets.Kind kind = pet instanceof LivingEntity && !pet.level().isClientSide() ? Pets.kind(pet) : null;
+
+		if (kind == null || PetMood.sad(pet) || Pets.owner(pet) == null) {
+			return -1;
+		}
+
+		if (kind == Pets.Kind.MODDED) {
+			return Spirits.of(pet) == null ? -1 : PetLevels.level(pet);
+		}
+
+		if (kind != Pets.Kind.BLOOM || !Pets.inParty(pet) && !PetPosts.posted(pet) || Fainting.fainted(pet)) {
 			return -1;
 		}
 
@@ -172,7 +190,8 @@ public final class PetSkills {
 			return;
 		}
 
-		double bonus = kind(pet) == Kind.IRON_GOLEM && Pets.inParty(pet) && !PetMood.sad(pet) ? colossusHealth(PetLevels.level(pet)) : 0.0;
+		boolean working = Pets.inParty(pet) || Pets.kind(pet) == Pets.Kind.MODDED;
+		double bonus = kind(pet) == Kind.IRON_GOLEM && working && !PetMood.sad(pet) ? colossusHealth(PetLevels.level(pet)) : 0.0;
 		AttributeModifier old = health.getModifier(COLOSSUS);
 
 		if (old != null && old.getAmount() == bonus) {
@@ -208,9 +227,18 @@ public final class PetSkills {
 			return;
 		}
 
-		if (PetLevels.level(pet) >= PetLevels.MAX && Pets.kind(pet) == Pets.Kind.BLOOM && pet.tickCount % 40 < 20) {
+		if (PetLevels.maxed(pet) && pet.tickCount % 40 < 20) {
 			level.sendParticles(ParticleTypes.WAX_OFF, pet.getX(), pet.getY() + pet.getBbHeight() + 0.2, pet.getZ(), 2,
 					pet.getBbWidth() * 0.5, 0.2, pet.getBbWidth() * 0.5, 0.0);
+		}
+
+		// A companion levels on its own (an Amigo through Migamigos): its Iron Colossus and gold name keep up.
+		if (Pets.kind(pet) == Pets.Kind.MODDED) {
+			refresh(pet);
+
+			if (PetLevels.maxed(pet)) {
+				goldName(pet);
+			}
 		}
 
 		int skill = skillLevel(pet);
@@ -534,11 +562,9 @@ public final class PetSkills {
 			return;
 		}
 
-		PetRegistry.Record record = PetRegistry.get(player.server).partyPet(player.getUUID());
-		Entity golem = record == null ? null : Pets.loaded(player.server, record.pet);
+		LivingEntity living = guardian(player);
 
-		if (!(golem instanceof LivingEntity living) || kind(golem) != Kind.IRON_GOLEM || !has(skillLevel(golem), Slot.SPECIAL)
-				|| golem.level() != player.level() || golem.distanceToSqr(player) > GUARDIAN_RANGE * GUARDIAN_RANGE) {
+		if (living == null) {
 			return;
 		}
 
@@ -559,6 +585,34 @@ public final class PetSkills {
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 40, 0.4, 0.6, 0.4, 0.3);
 		level.playSound(null, player.blockPosition(), SoundEvents.IRON_GOLEM_REPAIR, SoundSource.PLAYERS, 1.0F, 0.8F);
 		player.sendSystemMessage(Component.translatable("bloompets.guardian", living.getName()).withStyle(ChatFormatting.GOLD));
+	}
+
+	/** The player's golem that can step in: their party pet, or a companion with the Iron Golem's Spirit, level 20+, near. */
+	private static LivingEntity guardian(ServerPlayer player) {
+		PetRegistry registry = PetRegistry.get(player.server);
+		PetRegistry.Record party = registry.partyPet(player.getUUID());
+		List<PetRegistry.Record> candidates = new ArrayList<>();
+
+		if (party != null) {
+			candidates.add(party);
+		}
+
+		for (PetRegistry.Record record : registry.pets(player.getUUID())) {
+			if (record.kind == Pets.Kind.MODDED) {
+				candidates.add(record);
+			}
+		}
+
+		for (PetRegistry.Record record : candidates) {
+			Entity golem = Pets.loaded(player.server, record.pet);
+
+			if (golem instanceof LivingEntity living && kind(golem) == Kind.IRON_GOLEM && has(skillLevel(golem), Slot.SPECIAL)
+					&& golem.level() == player.level() && golem.distanceToSqr(player) <= GUARDIAN_RANGE * GUARDIAN_RANGE) {
+				return living;
+			}
+		}
+
+		return null;
 	}
 
 	/** An icon for each skill, for the screen (items, so they need no art of their own). */

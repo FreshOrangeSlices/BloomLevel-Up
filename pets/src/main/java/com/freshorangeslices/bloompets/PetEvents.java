@@ -39,6 +39,11 @@ public final class PetEvents {
 			return null;
 		}
 
+		// A companion just added to the list (or one listed before Spirits) gets its Spirit (Phase 5b).
+		if (entity instanceof LivingEntity living && Pets.kind(entity) == Pets.Kind.MODDED && Spirits.of(entity) == null) {
+			Spirits.ensure(living);
+		}
+
 		return PetRegistry.get(entity.level().getServer()).upsert(owner, entity);
 	}
 

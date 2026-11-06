@@ -38,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "7";
+	private static final String VERSION = "8";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -56,7 +56,9 @@ public final class PetsNetwork {
 	public enum Action {
 		LIST, CALL, PARTY, STORAGE, REFRESH, POST,
 		/** One and the Same: pick a tree (the argument), reset it, switch a cooldown ability (the argument) off or on. */
-		TREE, TREE_RESET, ABILITY
+		TREE, TREE_RESET, ABILITY,
+		/** A companion's Spirit: keep it, or use the one reroll (the argument: keep or reroll). */
+		SPIRIT
 	}
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
@@ -116,6 +118,8 @@ public final class PetsNetwork {
 				case TREE -> PetTrees.pick(player, record, arg);
 				case TREE_RESET -> PetTrees.reset(player, record);
 				case ABILITY -> PetTrees.toggle(player, record, arg);
+				case SPIRIT -> "reroll".equals(arg) ? com.freshorangeslices.bloompets.Spirits.reroll(player, record)
+						: com.freshorangeslices.bloompets.Spirits.keep(player, record);
 				default -> null;
 			};
 
@@ -134,12 +138,13 @@ public final class PetsNetwork {
 	 * whether it loves you, whether it's tired, whether it keeps a post; One and the Same: whether it can follow a tree,
 	 * its tree (or empty), its switched-off abilities (comma-separated), a companion's ticks left before it can pick again;
 	 * its stats when it's loaded (attack damage and armor, -1 when away; an Amigo's damage from its levels, -1 for others)
-	 * and an Amigo's levels waiting for its next kill.
+	 * and an Amigo's levels waiting for its next kill; a companion's Spirit waiting to be kept or rerolled (its id is in
+	 * {@code skills}), and the pet's top level (100, an Amigo's 99).
 	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
 			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted, boolean treeable, String tree,
-			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed) {
+			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed, boolean spiritPending, int topLevel) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -172,6 +177,8 @@ public final class PetsNetwork {
 			buf.writeFloat(armor);
 			buf.writeFloat(amigoPower);
 			buf.writeVarInt(owed);
+			buf.writeBoolean(spiritPending);
+			buf.writeVarInt(topLevel);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
@@ -179,7 +186,7 @@ public final class PetsNetwork {
 					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
 					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf(), buf.readFloat(), buf.readFloat(),
 					buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readUtf(), buf.readUtf(), buf.readVarInt(),
-					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt());
+					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt());
 		}
 	}
 
@@ -216,6 +223,15 @@ public final class PetsNetwork {
 						: level >= PetLevels.MAX ? 0.0F : r.xpNext > 0 ? (float) r.xpNext : (float) PetLevels.xpToNext(level, combat);
 				int rest = live != null ? Fainting.ticksLeft(live) : (int) Math.max(0, r.faintedUntil - now);
 				String skills = species == null || species.skills() == null ? "" : species.skills();
+
+				// A companion's skills are its Spirit's.
+				if (r.kind == Pets.Kind.MODDED) {
+					skills = live != null ? (com.freshorangeslices.bloompets.Spirits.of(live) == null ? "" : com.freshorangeslices.bloompets.Spirits.of(live).id())
+							: r.spirit == null ? "" : r.spirit;
+				}
+
+				boolean spiritPending = r.kind == Pets.Kind.MODDED && !skills.isEmpty()
+						&& !(live != null ? com.freshorangeslices.bloompets.Spirits.settled(live) : r.spiritSettled);
 				// Bloom pets and companions alike have mood and hunger (Phase 5a).
 				boolean bloom = r.kind == Pets.Kind.BLOOM || r.kind == Pets.Kind.MODDED;
 				float mood = !bloom ? -1.0F : (float) (live != null ? PetMood.mood(live) : r.mood);
@@ -236,7 +252,8 @@ public final class PetsNetwork {
 						live != null ? com.freshorangeslices.bloompets.PetPosts.posted(live) : r.post != null, treeable, tree, off,
 						(int) Math.min(Integer.MAX_VALUE, Math.max(0, treeWaitUntil - now)),
 						attack == null ? -1.0F : (float) attack.getValue(), alive == null ? -1.0F : alive.getArmorValue(),
-						power == null ? -1.0F : power, owed == null || amigoLevel == null ? 0 : Math.max(0, owed - amigoLevel)));
+						power == null ? -1.0F : power, owed == null || amigoLevel == null ? 0 : Math.max(0, owed - amigoLevel), spiritPending,
+						live != null ? com.freshorangeslices.bloompets.PetLevels.top(live) : PetLevels.MAX));
 			}
 
 			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player), bloomView);

@@ -40,6 +40,9 @@ public final class PetsCommand {
 				.then(Commands.literal("tree").then(Commands.argument("tree", StringArgumentType.word())
 						.suggests((c, b) -> SharedSuggestionProvider.suggest(List.of("sword", "axe", "trident", "unarmed", "reset"), b))
 						.then(pet().executes(PetsCommand::tree))))
+				.then(Commands.literal("spirit").then(Commands.argument("choice", StringArgumentType.word())
+						.suggests((c, b) -> SharedSuggestionProvider.suggest(List.of("keep", "reroll"), b))
+						.then(pet().executes(PetsCommand::spirit))))
 				.then(Commands.literal("species").executes(PetsCommand::species))
 				.then(Commands.literal("screen").executes(c -> {
 					com.freshorangeslices.bloompets.network.PetsNetwork.sendList(c.getSource().getPlayerOrException(), true, null);
@@ -61,10 +64,10 @@ public final class PetsCommand {
 						.then(Commands.argument("level", IntegerArgumentType.integer(1, PetLevels.MAX)).then(pet().executes(c -> level(c, false)))))
 				.then(Commands.literal("xp").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("amount", IntegerArgumentType.integer(1)).then(pet().executes(c -> level(c, true)))))
+				// The player first (the pet's name may have spaces): /bloompets info @s 1, /bloompets info Steve Rex.
 				.then(Commands.literal("info").requires(source -> source.hasPermission(2))
-						.then(pet().executes(c -> info(c, c.getSource().getPlayerOrException()))
-								.then(Commands.argument("player", EntityArgument.player())
-										.executes(c -> info(c, EntityArgument.getPlayer(c, "player"))))))
+						.then(Commands.argument("player", EntityArgument.player())
+								.then(pet().executes(c -> info(c, EntityArgument.getPlayer(c, "player"))))))
 				.then(Commands.literal("give").requires(source -> source.hasPermission(2))
 						.then(Commands.argument("species", StringArgumentType.word())
 								.suggests((c, b) -> SharedSuggestionProvider.suggest(SpeciesData.all().stream().map(s -> s.id().getPath()), b))
@@ -96,7 +99,9 @@ public final class PetsCommand {
 			int index = Integer.parseInt(wanted.trim()) - 1;
 			return index >= 0 && index < pets.size() ? pets.get(index) : null;
 		} catch (NumberFormatException e) {
-			return pets.stream().filter(r -> r.name.equalsIgnoreCase(wanted.trim())).findFirst().orElse(null);
+			// Its name, or its id (the chat's buttons use that).
+			return pets.stream().filter(r -> r.name.equalsIgnoreCase(wanted.trim()) || r.pet.toString().equalsIgnoreCase(wanted.trim()))
+					.findFirst().orElse(null);
 		}
 	}
 
@@ -191,7 +196,13 @@ public final class PetsCommand {
 				+ (off.isEmpty() ? "" : " · off: " + off) + (treeWait > 0 ? " · can pick again in " + clock(treeWait) : "")
 				+ " · owner has One and the Same: " + (PetRegistry.get(owner.server).oneAndTheSame(owner.getUUID()) ? "yes" : "no"));
 
-		if (r.kind == Pets.Kind.BLOOM) {
+		if (r.kind == Pets.Kind.MODDED) {
+			PetSkills.Kind spirit = live ? Spirits.of(pet) : PetSkills.Kind.byId(r.spirit == null ? "" : r.spirit);
+			boolean settled = live ? Spirits.settled(pet) : r.spiritSettled;
+			lines.add("Spirit: " + (spirit == null ? "none yet" : spirit.id() + (settled ? " (settled)" : " (its reroll still unused)")));
+		}
+
+		if (r.kind == Pets.Kind.BLOOM || r.kind == Pets.Kind.MODDED) {
 			double mood = live ? PetMood.mood(pet) : r.mood;
 			double hunger = live ? PetMood.hunger(pet) : r.hunger;
 			boolean loved = live ? PetMood.loved(pet) : r.loved;
@@ -216,6 +227,23 @@ public final class PetsCommand {
 	private static String clock(long ticks) {
 		long seconds = ticks / 20;
 		return String.format(Locale.ROOT, "%d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60);
+	}
+
+	/** A companion's Spirit: keep it, or use its one reroll (the chat's buttons run this, with the pet's id). */
+	private static int spirit(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+		ServerPlayer player = context.getSource().getPlayerOrException();
+		String wanted = StringArgumentType.getString(context, "pet");
+		PetRegistry.Record record = find(player, wanted);
+
+		if (record == null) {
+			context.getSource().sendFailure(Component.translatable("bloompets.command.nopet", wanted));
+			return 0;
+		}
+
+		Component message = "reroll".equals(StringArgumentType.getString(context, "choice")) ? Spirits.reroll(player, record)
+				: Spirits.keep(player, record);
+		context.getSource().sendSuccess(() -> message, false);
+		return 1;
 	}
 
 	/** One and the Same: pick a pet's weapon tree, or reset it. */

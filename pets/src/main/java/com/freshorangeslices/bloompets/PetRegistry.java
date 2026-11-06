@@ -69,6 +69,9 @@ public final class PetRegistry extends SavedData {
 		public String tree;
 		public java.util.Set<String> abilitiesOff = new java.util.HashSet<>();
 		public long treeWait;
+		/** A companion's Spirit (a skill tree's id, or null) and whether its owner has settled it. */
+		public String spirit;
+		public boolean spiritSettled;
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -104,6 +107,12 @@ public final class PetRegistry extends SavedData {
 
 			tag.putString("abilitiesOff", String.join(",", abilitiesOff));
 			tag.putLong("treeWait", treeWait);
+
+			if (spirit != null) {
+				tag.putString("spirit", spirit);
+			}
+
+			tag.putBoolean("spiritSettled", spiritSettled);
 			return tag;
 		}
 
@@ -139,6 +148,8 @@ public final class PetRegistry extends SavedData {
 			}
 
 			record.treeWait = tag.getLong("treeWait");
+			record.spirit = tag.contains("spirit") ? tag.getString("spirit") : null;
+			record.spiritSettled = tag.getBoolean("spiritSettled");
 			return record;
 		}
 	}
@@ -230,6 +241,8 @@ public final class PetRegistry extends SavedData {
 		record.tree = PetTrees.tree(entity) == null ? null : PetTrees.tree(entity).id();
 		record.abilitiesOff = PetTrees.abilitiesOff(entity);
 		record.treeWait = data == null ? 0L : data.getLong("treeWait");
+		record.spirit = Spirits.of(entity) == null ? null : Spirits.of(entity).id();
+		record.spiritSettled = Spirits.settled(entity);
 
 		// Its look, at most once a minute (a pet's saved data isn't small).
 		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {

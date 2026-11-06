@@ -12,7 +12,7 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.SitWhenOrderedToSitGoal;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -62,7 +62,7 @@ public final class PetGoals {
 
 	/** Whether it sits when told to (wolves, cats, parrots); Zoni's companions, tame too, don't. */
 	public static boolean sits(net.minecraft.world.entity.Entity pet) {
-		return pet instanceof Mob mob && mob.goalSelector.getAvailableGoals().stream().anyMatch(g -> g.getGoal() instanceof SitWhenOrderedToSitGoal);
+		return pet instanceof Mob mob && mob.goalSelector.getAvailableGoals().stream().anyMatch(g -> g.getGoal() instanceof SitWhenOrderedToGoal);
 	}
 
 	/** Gives a Bloom pet its goals. */

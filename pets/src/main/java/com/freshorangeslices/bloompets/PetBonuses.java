@@ -546,7 +546,7 @@ public final class PetBonuses {
 	private static void announce(ServerPlayer player, LivingEntity sniffer, Item found) {
 		if (TRIMS.containsKey(found)) {
 			player.displayClientMessage(Component.translatable("bloompets.bonus.trim", sniffer.getName(), found.getDescription())
-					.withStyle(ChatFormatting.LIGHT_PURPLE));
+					.withStyle(ChatFormatting.LIGHT_PURPLE), true);
 			player.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.NEUTRAL, 0.6F, 1.8F);
 		} else {
 			player.displayClientMessage(Component.translatable("bloompets.bonus.sniffed", sniffer.getName(), found.getDescription())

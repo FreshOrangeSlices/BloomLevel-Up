@@ -144,7 +144,7 @@ public final class Bonding {
 		PetEvents.observe(mob);
 		level.sendParticles(ParticleTypes.HEART, mob.getX(), mob.getY() + mob.getBbHeight(), mob.getZ(), 10, 0.5, 0.4, 0.5, 0.0);
 		player.displayClientMessage(Component.translatable("bloompets.bond.done", mob.getName(), species.displayName())
-				.withStyle(ChatFormatting.LIGHT_PURPLE));
+				.withStyle(ChatFormatting.LIGHT_PURPLE), true);
 		return Result.BONDED;
 	}
 }

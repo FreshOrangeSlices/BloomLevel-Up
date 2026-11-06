@@ -30,7 +30,11 @@ import net.minecraft.world.item.ItemStack;
  *   minutes: a full bar lasts 80 minutes). Its favourite food fills 6; a pet with that food in its storage eats it by
  *   itself when it's down to 14. Well fed (15 and up) it slowly heals; hungry (6 and under) it gets glum fast.</li>
  * </ul>
- * Modded companions keep their own mods' needs for now (Phase 5).
+ * <b>Companions</b> (other mods', Phase 5a: FreshOrangeSlices, 2026-11-05) have the same bars and rates. They never join
+ * the party: one is "out" while it's within {@value #WITH_YOU} blocks of its owner (it tires, gets hungry, and its mood
+ * drops as a party pet's), and rests as a pet at home when it's anywhere else, so a whole army left at a base needs no
+ * feeding. They eat cooked vanilla food ({@code #bloompets:companion_food}), sneak + right-click (a plain right-click is
+ * their own mod's), and have no storage to eat from. A sulking companion's tree (and, later, its Spirit) rests.
  */
 public final class PetMood {
 	public static final double MAX_MOOD = 100.0;
@@ -52,12 +56,22 @@ public final class PetMood {
 	private static final long FEED_CHEER_EVERY = 1200;
 	private static final long PET_EVERY = 600;
 	private static final long LOVED_FOR = 30 * 60 * 20;
+	/** How near its owner a companion has to be to count as out with them. */
+	public static final int WITH_YOU = 32;
 
 	private PetMood() {
 	}
 
+	/** Bloom pets and other mods' companions have mood and hunger. */
 	private static boolean has(Entity pet) {
-		return Pets.kind(pet) == Pets.Kind.BLOOM;
+		Pets.Kind kind = Pets.kind(pet);
+		return kind == Pets.Kind.BLOOM || kind == Pets.Kind.MODDED;
+	}
+
+	/** A companion out with its owner: they're online, in the same dimension and within {@value #WITH_YOU} blocks. */
+	public static boolean withOwner(Entity pet) {
+		ServerPlayer owner = owner(pet);
+		return owner != null && owner.level() == pet.level() && owner.distanceToSqr(pet) <= WITH_YOU * WITH_YOU;
 	}
 
 	private static long now(Entity pet) {
@@ -82,7 +96,7 @@ public final class PetMood {
 		Pets.data(pet).putDouble("hunger", Math.max(0.0, Math.min(MAX_HUNGER, hunger)));
 	}
 
-	/** A sad (sulking) Bloom pet: no skills, owner bonus, job or storage until it cheers up. */
+	/** A sad (sulking) pet: no skills, owner bonus, job or storage until it cheers up (a companion: no tree or Spirit). */
 	public static boolean sad(Entity pet) {
 		return has(pet) && mood(pet) < SAD_BELOW;
 	}
@@ -116,8 +130,13 @@ public final class PetMood {
 		}
 	}
 
-	/** {@code seconds} of the pet's day: working in the party, or resting at home. Public for the game tests. */
+	/** {@code seconds} of the pet's day: working in the party (a companion: out with its owner), or resting at home. */
 	public static void update(LivingEntity pet, int seconds) {
+		update(pet, seconds, Pets.kind(pet) == Pets.Kind.MODDED ? withOwner(pet) : Pets.inParty(pet));
+	}
+
+	/** As above, with whether it's out (in the party, or a companion with its owner) given. Public for the game tests. */
+	public static void update(LivingEntity pet, int seconds, boolean out) {
 		CompoundTag data = Pets.data(pet);
 		boolean wasSad = sad(pet);
 		boolean wasTired = tired(pet);
@@ -135,7 +154,7 @@ public final class PetMood {
 					eatFromStorage(pet);
 				}
 			}
-		} else if (Pets.inParty(pet)) {
+		} else if (out) {
 			setMood(pet, mood(pet) - DROP_PER_SECOND * dropPace(pet) * seconds);
 			setHunger(pet, hunger(pet) - HUNGER_PER_SECOND * seconds);
 			data.putLong("tired", Math.min(TIRED_AFTER, data.getLong("tired") + seconds));
@@ -168,18 +187,23 @@ public final class PetMood {
 		}
 
 		if (!wasSad && sad(pet)) {
-			owner.sendSystemMessage(Component.translatable("bloompets.mood.sad", pet.getName()).withStyle(ChatFormatting.RED));
+			owner.sendSystemMessage(Component.translatable(Pets.kind(pet) == Pets.Kind.MODDED ? "bloompets.mood.sad.companion" : "bloompets.mood.sad",
+					pet.getName()).withStyle(ChatFormatting.RED));
 			owner.playNotifySound(SoundEvents.WOLF_WHINE, SoundSource.NEUTRAL, 0.6F, 1.2F);
 		} else if (wasSad && !sad(pet)) {
 			feltBetter(owner, pet);
 		}
 
 		if (!wasTired && tired(pet)) {
-			owner.sendSystemMessage(Component.translatable("bloompets.mood.tired", pet.getName()).withStyle(ChatFormatting.GOLD));
+			owner.sendSystemMessage(Component.translatable(Pets.kind(pet) == Pets.Kind.MODDED ? "bloompets.mood.tired.companion" : "bloompets.mood.tired",
+					pet.getName()).withStyle(ChatFormatting.GOLD));
 		}
 
+		boolean companion = Pets.kind(pet) == Pets.Kind.MODDED;
+
 		if (!wasHungry && hunger(pet) <= HUNGRY_AT) {
-			owner.sendSystemMessage(Component.translatable("bloompets.mood.hungry", pet.getName()).withStyle(ChatFormatting.GOLD));
+			owner.sendSystemMessage(Component.translatable(companion ? "bloompets.mood.hungry.companion" : "bloompets.mood.hungry", pet.getName())
+					.withStyle(ChatFormatting.GOLD));
 		}
 	}
 

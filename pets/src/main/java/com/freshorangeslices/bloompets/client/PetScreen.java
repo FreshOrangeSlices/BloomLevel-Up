@@ -593,18 +593,21 @@ public final class PetScreen extends Screen {
 				tip.add(Component.translatable("bloompets.screen.mood.tip", Component.translatable("bloompets.screen.mood." + word), hearts)
 						.withStyle(st -> st.withColor(color & 0xFFFFFF)));
 
+				String who = pet.kind() == Pets.Kind.MODDED ? ".companion" : "";
+
 				if (sad) {
-					tip.add(Component.translatable("bloompets.screen.mood.sulking").withStyle(ChatFormatting.GRAY));
+					tip.add(Component.translatable("bloompets.screen.mood.sulking" + who).withStyle(ChatFormatting.GRAY));
 				}
 
 				if (pet.tired()) {
-					tip.add(Component.translatable("bloompets.screen.mood.tired").withStyle(ChatFormatting.GRAY));
+					tip.add(Component.translatable("bloompets.screen.mood.tired" + who).withStyle(ChatFormatting.GRAY));
 				}
 
-				tip.add(Component.translatable("bloompets.screen.mood.how").withStyle(ChatFormatting.DARK_GRAY));
+				tip.add(Component.translatable("bloompets.screen.mood.how" + who).withStyle(ChatFormatting.DARK_GRAY));
 			} else {
 				tip.add(Component.translatable("bloompets.screen.hunger.tip", (int) Math.ceil(pet.hunger())).withStyle(st -> st.withColor(FOOD & 0xFFFFFF)));
-				tip.add(Component.translatable("bloompets.screen.hunger.how").withStyle(ChatFormatting.DARK_GRAY));
+				tip.add(Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.hunger.how.companion" : "bloompets.screen.hunger.how")
+						.withStyle(ChatFormatting.DARK_GRAY));
 			}
 
 			panelTip = tip.stream().map(Component::getVisualOrderText).toList();

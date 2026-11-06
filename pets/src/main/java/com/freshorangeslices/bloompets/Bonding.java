@@ -3,14 +3,17 @@ package com.freshorangeslices.bloompets;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,9 +22,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * Bonding, the plugin's way: sneak and right-click a wild animal of the roster with its favourite food. Each feeding
  * counts (hearts above the hotbar show how far along); after enough (5 for most) it's the player's pet. Feeding without
  * sneaking still breeds animals as usual. Sneak-feeding your own pet feeds it (health, hunger, mood, and XP for a
- * non-combat party pet); sneak + right-click with an empty hand pats it.
+ * non-combat party pet); sneak + right-click with an empty hand pats it. Your companions (other mods') the same way:
+ * cooked vanilla food ({@code #bloompets:companion_food}) feeds one, an empty hand pats it; their own mod's right-click
+ * (Migamigos' backpack) is left to a plain click.
  */
 public final class Bonding {
+	/** What a companion eats. */
+	public static final TagKey<Item> COMPANION_FOOD = TagKey.create(Registries.ITEM, BloomPets.id("companion_food"));
+
 	private Bonding() {
 	}
 
@@ -38,6 +46,11 @@ public final class Bonding {
 
 		if (event.getLevel().isClientSide() || event.getHand() != InteractionHand.MAIN_HAND || !player.isShiftKeyDown()
 				|| !(event.getTarget() instanceof Mob mob) || !(player instanceof ServerPlayer serverPlayer)) {
+			return;
+		}
+
+		if (Pets.kind(mob) == Pets.Kind.MODDED) {
+			companion(event, serverPlayer, mob);
 			return;
 		}
 
@@ -65,6 +78,33 @@ public final class Bonding {
 		event.setCanceled(true);
 		event.setCancellationResult(InteractionResult.SUCCESS);
 		feed(serverPlayer, mob, event.getItemStack());
+	}
+
+	/** Sneak + right-click on one of your companions: a pat with an empty hand, a meal with cooked food. */
+	private static void companion(PlayerInteractEvent.EntityInteract event, ServerPlayer player, Mob mob) {
+		ItemStack held = event.getItemStack();
+
+		if (!player.getUUID().equals(Pets.owner(mob)) || !held.isEmpty() && !held.is(COMPANION_FOOD)) {
+			return;
+		}
+
+		event.setCanceled(true);
+		event.setCancellationResult(InteractionResult.SUCCESS);
+
+		if (held.isEmpty()) {
+			PetMood.pat(player, mob);
+		} else {
+			feedCompanion(player, mob, held);
+		}
+	}
+
+	/** Feeds one of the player's companions (cooked vanilla food). Public for the game tests. */
+	public static Result feedCompanion(ServerPlayer player, Mob mob, ItemStack food) {
+		if (!food.is(COMPANION_FOOD)) {
+			return Result.NOT_FOOD;
+		}
+
+		return player.getUUID().equals(Pets.owner(mob)) ? PetXp.feed(player, mob, food) : Result.OWNED_BY_SOMEONE;
 	}
 
 	/** One feeding toward bonding (the food is used up unless the player is in creative). Public for the game tests. */

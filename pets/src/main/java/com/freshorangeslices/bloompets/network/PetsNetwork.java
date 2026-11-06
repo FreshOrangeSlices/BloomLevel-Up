@@ -130,7 +130,7 @@ public final class PetsNetwork {
 	/**
 	 * One pet as the screen shows it: also its level, its XP into that level and what the next takes (0 at 100), the
 	 * ticks left of its rest if it fainted, its skill tree (a {@link com.freshorangeslices.bloompets.PetSkills.Kind}
-	 * id, or empty), and its mood (0 to 100; -1 for companions, which keep their own mods' needs) and hunger (0 to 20),
+	 * id, or empty), and its mood (0 to 100) and hunger (0 to 20),
 	 * whether it loves you, whether it's tired, whether it keeps a post; One and the Same: whether it can follow a tree,
 	 * its tree (or empty), its switched-off abilities (comma-separated), a companion's ticks left before it can pick again;
 	 * its stats when it's loaded (attack damage and armor, -1 when away; an Amigo's damage from its levels, -1 for others)
@@ -216,7 +216,8 @@ public final class PetsNetwork {
 						: level >= PetLevels.MAX ? 0.0F : r.xpNext > 0 ? (float) r.xpNext : (float) PetLevels.xpToNext(level, combat);
 				int rest = live != null ? Fainting.ticksLeft(live) : (int) Math.max(0, r.faintedUntil - now);
 				String skills = species == null || species.skills() == null ? "" : species.skills();
-				boolean bloom = r.kind == Pets.Kind.BLOOM;
+				// Bloom pets and companions alike have mood and hunger (Phase 5a).
+				boolean bloom = r.kind == Pets.Kind.BLOOM || r.kind == Pets.Kind.MODDED;
 				float mood = !bloom ? -1.0F : (float) (live != null ? PetMood.mood(live) : r.mood);
 				float hunger = (float) (live != null ? PetMood.hunger(live) : r.hunger);
 				boolean loved = bloom && (live != null ? PetMood.loved(live) : r.loved);

@@ -208,7 +208,7 @@ public final class PetTrees {
 			return -1;
 		}
 
-		if (Pets.kind(pet) == Pets.Kind.BLOOM && (!Pets.inParty(pet) && !PetPosts.posted(pet) || Fainting.fainted(pet) || PetMood.sad(pet))) {
+		if (Pets.kind(pet) == Pets.Kind.BLOOM && (!Pets.inParty(pet) && !PetPosts.posted(pet) || Fainting.fainted(pet)) || PetMood.sad(pet)) {
 			return -1;
 		}
 

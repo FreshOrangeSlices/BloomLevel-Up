@@ -420,4 +420,17 @@ get (a strong build is the player's choice) and how full the screen is.
   ours), and its +8 happiness is **+8 mood**, each at most every 15 seconds.
 - **The Spirit pop-up** shows just its name ("Claymore gained the Spirit of the Wolf") and asks keep or reroll.
 - **A "Pets" chapter in the quest book**: bond a pet, reach level 10, post a pet, a pet at level 25, buy One and the
-  Same, pick a tree.
+  Same, pick a tree. Rewards: some XP and Bloom XP, nothing more (FreshOrangeSlices, 2026-11-05).
+- **Order** (FreshOrangeSlices, 2026-11-05): companions' mood and hunger first (5a), then Spirits (5b), then fetch and
+  the quest chapter (5c), one push each.
+
+**Phase 5a (built, 2026-11-05): companions' mood and hunger** (`PetMood`, `Bonding`). Bloom pets' bars and rates for
+other mods' companions (Migamigos', Zoni's). A companion never joins the party, so it counts as **out while it's within
+32 blocks of its owner** (online, same dimension): its mood drops, it tires and gets hungry, and it mends while well fed,
+as a party pet; **anywhere else it rests**, as a pet at home (tiredness goes, a fed one cheers up, no hungrier), so an
+army left at a base needs no feeding. It eats **cooked vanilla food** (`#bloompets:companion_food`: cooked meat and
+fish, baked potatoes, bread, dried kelp, cookies, pumpkin pie, the stews; the pack can add to it), sneak + right-click;
+sneak + right-click with an empty hand pats it; both are cancelled before its own mod sees them (a plain click is still
+Migamigos' backpack). It has no storage to eat from. **A sulking companion's tree rests** (and its Spirit, from 5b).
+The screen shows its mood and food bars with its own help texts. Game tests: `CompanionCareGameTests` (a Migamigos
+Claymore).

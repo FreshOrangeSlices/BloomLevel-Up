@@ -28,7 +28,7 @@ What carries over from the plugin, and what changes:
 | Bonus for the owner while a pet is out, per species | Kept (party pets only). A modded companion has the bonus of the kind it rolled |
 | Posts with jobs at level 8 | Kept |
 | Fetch, petting | Kept; **fetch only for Bloom pets** (the roster's vanilla animals, nothing else; FreshOrangeSlices, 2026-11-05) |
-| Riding every pet | Kept for Bloom pets, as a late phase. **Modded companions can't be ridden** (Migamigos and Zoni's are people, not mounts); dragons aren't in the list (they ride their own way) |
+| Riding every pet | **Dropped** (FreshOrangeSlices, 2026-11-05): on Forge 1.20.1 it can't be the plugin's simple version (steering a mob runs on the player's own game and needs a client patch, and there's no built-in way to grow a pet or shrink its rider, which needs a mod like Pehkui), and about three chunks for something roughly like the plugin's wasn't worth it. Horses, donkeys, llamas, camels, pigs and striders keep their vanilla riding. Modded companions and dragons were never in it |
 | Storage per pet | Kept for Bloom pets (small; it also holds their food). **No pet inventory for modded companions** in the screen (they keep their own mod's) |
 | Pet Toy, Pet Blooms | The screen and a key replace the toy; a bloom stays as an optional flower that calls one pet |
 | Pet Guide | A quest book chapter |
@@ -227,7 +227,7 @@ Starting and special skills:
   on each hit (15% at level 20, up to 60% at 100) to heal it, you and friends within 6 blocks, and hurt the undead (3
   health at 20, +1 every 10 levels, up to 9).
 
-Non-combat pets have no skill tree (their bonus, job, storage and riding are what they bring). At level 100 every pet
+Non-combat pets have no skill tree (their bonus, job and storage are what they bring). At level 100 every pet
 gets a gold name and a sparkle, a second wind once each time it comes out, and a bigger area at its post.
 
 ## One and the Same (Bloom's Combat Major, the bridge)

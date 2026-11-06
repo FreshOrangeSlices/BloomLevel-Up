@@ -121,6 +121,8 @@ public final class SpiritGameTests {
 		helper.assertTrue(PetLevels.maxed(mob), "Amigo level 99 is its top");
 		mob.hurt(mob.damageSources().generic(), 1000.0F);
 		helper.assertTrue(mob.isAlive() && mob.getHealth() > 0.0F, "A second wind: it's still standing (" + mob.getHealth() + ")");
+		// Past the half second after a hit when a blow no bigger than the last is shrugged off.
+		mob.invulnerableTime = 0;
 		mob.hurt(mob.damageSources().generic(), 1000.0F);
 		helper.assertTrue(!mob.isAlive(), "Only once until it's called again");
 		helper.succeed();

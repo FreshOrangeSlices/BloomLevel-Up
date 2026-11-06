@@ -38,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "9";
+	private static final String VERSION = "10";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -60,7 +60,9 @@ public final class PetsNetwork {
 		/** A companion's Spirit: keep it, or use the one reroll (the argument: keep or reroll). */
 		SPIRIT,
 		/** Follow, Wander or Stay (the argument); a new name (the argument; empty for its own); let it go. */
-		MODE, RENAME, RELEASE
+		MODE, RENAME, RELEASE,
+		/** A companion's armor hidden or shown again (the Warionex add-on's hidden armor). */
+		ARMOR
 	}
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
@@ -125,6 +127,7 @@ public final class PetsNetwork {
 				case MODE -> com.freshorangeslices.bloompets.PetModes.change(player, record, arg);
 				case RENAME -> com.freshorangeslices.bloompets.PetModes.rename(player, record, arg);
 				case RELEASE -> com.freshorangeslices.bloompets.Release.release(player, record);
+				case ARMOR -> com.freshorangeslices.bloompets.ArmorBridge.toggle(player, record);
 				default -> null;
 			};
 
@@ -145,13 +148,13 @@ public final class PetsNetwork {
 	 * its stats when it's loaded (attack damage and armor, -1 when away; an Amigo's damage from its levels, -1 for others)
 	 * and an Amigo's levels waiting for its next kill; a companion's Spirit waiting to be kept or rerolled (its id is in
 	 * {@code skills}), and the pet's top level (100, an Amigo's 99); what it does when it isn't working (follow, wander,
-	 * stay).
+	 * stay); a companion's armor: 0 no switch (not a companion, or no hidden armor), 1 shown, 2 hidden.
 	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
 			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted, boolean treeable, String tree,
 			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed, boolean spiritPending, int topLevel,
-			String mode) {
+			String mode, int armor) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -187,6 +190,7 @@ public final class PetsNetwork {
 			buf.writeBoolean(spiritPending);
 			buf.writeVarInt(topLevel);
 			buf.writeUtf(mode);
+			buf.writeByte(armor);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
@@ -194,7 +198,7 @@ public final class PetsNetwork {
 					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
 					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf(), buf.readFloat(), buf.readFloat(),
 					buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readUtf(), buf.readUtf(), buf.readVarInt(),
-					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt(), buf.readUtf());
+					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt(), buf.readUtf(), buf.readByte());
 		}
 	}
 
@@ -262,7 +266,9 @@ public final class PetsNetwork {
 						attack == null ? -1.0F : (float) attack.getValue(), alive == null ? -1.0F : alive.getArmorValue(),
 						power == null ? -1.0F : power, owed == null || amigoLevel == null ? 0 : Math.max(0, owed - amigoLevel), spiritPending,
 						live != null ? com.freshorangeslices.bloompets.PetLevels.top(live) : PetLevels.MAX,
-						live != null ? com.freshorangeslices.bloompets.PetModes.mode(live).id() : r.mode));
+						live != null ? com.freshorangeslices.bloompets.PetModes.mode(live).id() : r.mode,
+						r.kind != Pets.Kind.MODDED || !com.freshorangeslices.bloompets.ArmorBridge.available() ? 0
+								: live != null && com.freshorangeslices.bloompets.ArmorBridge.hidden(live) ? 2 : 1));
 			}
 
 			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player), bloomView);

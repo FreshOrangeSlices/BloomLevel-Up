@@ -1,5 +1,7 @@
 package com.freshorangeslices.legionwarex;
 
+import com.freshorangeslices.legionwarex.armor.ArmorNetwork;
+import com.freshorangeslices.legionwarex.armor.HiddenArmor;
 import com.freshorangeslices.legionwarex.band.BandCommand;
 import com.freshorangeslices.legionwarex.band.BandEvents;
 import com.freshorangeslices.legionwarex.chart.AddItemModifier;
@@ -23,10 +25,12 @@ import com.mojang.serialization.Codec;
 import net.minecraft.commands.Commands;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -42,7 +46,8 @@ import org.slf4j.Logger;
  * despawn the way monsters do (Migamigos keeps every one for good). Illager war bands roam by day and pirate bands
  * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/);
  * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, mobs other mobs kill
- * drop nothing unless a player took part, zombies get no endless buffs, and a few mobs never join a world at all (world/). The pack was
+ * drop nothing unless a player took part, zombies get no endless buffs, and a few mobs never join a world at all (world/);
+ * players and companions can wear their armor hidden (armor/). The pack was
  * LegionWareX at first and is Warionex now; the mod id, commands and saved data keep the first name.
  */
 @Mod(LegionWareX.MOD_ID)
@@ -82,6 +87,9 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(ZombieBuffs.class);
 		MinecraftForge.EVENT_BUS.register(BannedMobs.class);
 		MinecraftForge.EVENT_BUS.register(KrampusNaughtiness.class);
+		MinecraftForge.EVENT_BUS.register(HiddenArmor.class);
+		ArmorNetwork.register();
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 
@@ -90,5 +98,7 @@ public final class LegionWareX {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
 				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node())
 				.then(KrampusNaughtiness.node()));
+		// Anyone's.
+		event.getDispatcher().register(HiddenArmor.command());
 	}
 }

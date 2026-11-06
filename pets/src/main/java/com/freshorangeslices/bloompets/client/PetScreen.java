@@ -125,6 +125,8 @@ public final class PetScreen extends Screen {
 	private Button modeButton;
 	private Button renameButton;
 	private Button releaseButton;
+	/** A companion's armor shown or hidden (with the Warionex add-on). */
+	private Button armorButton;
 	/** The pet's new name, typed over its name while renaming (Enter keeps it, Escape doesn't). */
 	private EditBox nameBox;
 	private UUID renaming;
@@ -266,6 +268,7 @@ public final class PetScreen extends Screen {
 				PetsClient.act(PetsNetwork.Action.MODE, pet.pet(), mode.next().id());
 			}
 		}));
+		armorButton = addRenderableWidget(new PetButton(canvasRight - 49, canvasTop() + 3, 14, 14, Component.empty(), b -> act(PetsNetwork.Action.ARMOR)));
 		renameButton = addRenderableWidget(new PetButton(canvasRight - 33, canvasTop() + 3, 14, 14, Component.literal("\u270e"), b -> startRename()));
 		releaseButton = addRenderableWidget(new PetButton(canvasRight - 17, canvasTop() + 3, 14, 14,
 				Component.literal("\u2715").withStyle(ChatFormatting.RED), b -> {
@@ -354,6 +357,7 @@ public final class PetScreen extends Screen {
 		boolean picture = any && confirmText == null;
 		modeButton.visible = picture;
 		renameButton.visible = releaseButton.visible = picture && renaming == null;
+		armorButton.visible = picture && renaming == null && pet.armor() > 0;
 
 		if (renaming != null && (pet == null || !renaming.equals(pet.pet()))) {
 			stopRename(false);
@@ -378,6 +382,11 @@ public final class PetScreen extends Screen {
 		renameButton.active = pet.loaded();
 		renameButton.setTooltip(Tooltip.create(Component.translatable(pet.loaded() ? "bloompets.screen.rename.tip" : "bloompets.screen.away.tip", pet.name())));
 		releaseButton.setTooltip(Tooltip.create(Component.translatable("bloompets.screen.release.tip", pet.name())));
+		// An open eye while its armor shows, a hollow one while it's hidden.
+		armorButton.active = pet.loaded();
+		armorButton.setMessage(Component.literal(pet.armor() == 2 ? "\u25cb" : "\u25c9"));
+		armorButton.setTooltip(Tooltip.create(Component.translatable(!pet.loaded() ? "bloompets.screen.away.tip"
+				: pet.armor() == 2 ? "bloompets.screen.armor.hidden" : "bloompets.screen.armor.shown", pet.name())));
 		boolean storage = pet.slots() > 0;
 		storageButton.active = storage;
 		// A companion's Storage is its food pouch (one with a backpack of its own eats from that instead).
@@ -547,6 +556,7 @@ public final class PetScreen extends Screen {
 		boolean picture = pet != null && confirmText == null;
 		modeButton.visible = picture;
 		renameButton.visible = releaseButton.visible = picture && renaming == null;
+		armorButton.visible = picture && renaming == null && pet.armor() > 0;
 		super.render(g, mouseX, mouseY, partialTick);
 
 		if (message != null && System.currentTimeMillis() - messageAt < 5000) {

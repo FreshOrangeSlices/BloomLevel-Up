@@ -6,24 +6,29 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
+import net.minecraftforge.client.event.ContainerScreenEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * Hidden armor on the client: the masks the server sends, by entity id; while an entity with one is drawn, its hidden
  * pieces are taken out of its armor slots (this client's copy only) and put straight back after, so its armor layer,
- * any mod's armor model and the inventory's figure all leave them out. And the eye beside each armor slot of the
- * player's own inventory (the creative one's too).
+ * any mod's armor model and the inventory's figure all leave them out. And the dot in each armor slot's bottom-left
+ * corner of the player's own inventory (the creative one's too; green shown, red hidden), with a line on a hidden
+ * piece's tooltip.
  */
 public final class ArmorClient {
 	private static final Map<Integer, Integer> MASKS = new HashMap<>();
@@ -115,11 +120,39 @@ public final class ArmorClient {
 		TAKEN.clear();
 	}
 
+	/** The dots, over the slots' items (a container draws its items after its buttons). */
+	@SubscribeEvent
+	public static void onForeground(ContainerScreenEvent.Render.Foreground event) {
+		for (var child : event.getContainerScreen().children()) {
+			if (child instanceof ArmorDot dot) {
+				dot.draw(event.getGuiGraphics(), event.getMouseX(), event.getMouseY());
+			}
+		}
+	}
+
+	/** A hidden piece says so on its tooltip (the one being worn: the very stack in the armor slot). */
+	@SubscribeEvent
+	public static void onTooltip(ItemTooltipEvent event) {
+		var player = Minecraft.getInstance().player;
+		int mask = own();
+
+		if (player == null || mask == 0 || event.getEntity() != player) {
+			return;
+		}
+
+		for (int i = 0; i < 4; i++) {
+			if ((mask & 1 << i) != 0 && player.getInventory().armor.get(i) == event.getItemStack()) {
+				event.getToolTip().add(Component.translatable("gui.legionwarex.armor_hidden_line").withStyle(ChatFormatting.GRAY));
+				return;
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public static void onScreenInit(ScreenEvent.Init.Post event) {
 		if (event.getScreen() instanceof InventoryScreen || event.getScreen() instanceof CreativeModeInventoryScreen) {
 			for (int i = 0; i < 4; i++) {
-				event.addListener(new EyeButton((AbstractContainerScreen<?>) event.getScreen(), i));
+				event.addListener(new ArmorDot((AbstractContainerScreen<?>) event.getScreen(), i));
 			}
 		}
 	}

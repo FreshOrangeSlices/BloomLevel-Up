@@ -382,9 +382,9 @@ public final class PetScreen extends Screen {
 		renameButton.active = pet.loaded();
 		renameButton.setTooltip(Tooltip.create(Component.translatable(pet.loaded() ? "bloompets.screen.rename.tip" : "bloompets.screen.away.tip", pet.name())));
 		releaseButton.setTooltip(Tooltip.create(Component.translatable("bloompets.screen.release.tip", pet.name())));
-		// An open eye while its armor shows, a hollow one while it's hidden.
+		// A green dot while its armor shows, a red one while it's hidden (as the inventory's armor slots have).
 		armorButton.active = pet.loaded();
-		armorButton.setMessage(Component.literal(pet.armorState() == 2 ? "\u25cb" : "\u25c9"));
+		armorButton.setMessage(Component.literal("\u25cf").withStyle(pet.armorState() == 2 ? ChatFormatting.RED : ChatFormatting.GREEN));
 		armorButton.setTooltip(Tooltip.create(Component.translatable(!pet.loaded() ? "bloompets.screen.away.tip"
 				: pet.armorState() == 2 ? "bloompets.screen.armor.hidden" : "bloompets.screen.armor.shown", pet.name())));
 		boolean storage = pet.slots() > 0;

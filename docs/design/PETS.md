@@ -490,7 +490,7 @@ the Same, Sword, Axe, Trident or Fists (a tree); rewards in vanilla levels and B
   companion leaves the list but stays its owner's in its own mod; its storage comes back to them; a pet that isn't
   loaded is set free when it next loads.
 - Game tests: `PetModeGameTests`, `ZoniGameTests` (Zoni's Companions' Bocchi, now in the test run too).
-- **Hidden armor** (Bloom Pets 0.5.1 with the add-on's 0.2.0): the eye at the top right of a companion's picture (left
-  of rename) hides all its armor for everyone, or shows it again; it still protects. The add-on's `armor/HiddenArmor`
+- **Hidden armor** (Bloom Pets 0.5.1 with the add-on's 0.2.0): the dot at the top right of a companion's picture (left
+  of rename; green shown, red hidden) hides all its armor for everyone, or shows it again; it still protects. The add-on's `armor/HiddenArmor`
   does the hiding (players hide theirs piece by piece by the inventory's armor slots, or `/hidearmor`); Bloom Pets calls
-  it by name (`ArmorBridge`), so without the add-on there's no eye.
+  it by name (`ArmorBridge`), so without the add-on there's no dot.

@@ -19,7 +19,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * armor, drawn as if they weren't worn, for everyone, while they still protect. A mask kept on the entity
  * ({@value #KEY} in its persistent data: bit 0 boots, 1 leggings, 2 chestplate, 3 helmet, as {@link EquipmentSlot}'s
  * armor index), sent to everyone who can see it ({@link ArmorNetwork}); each client leaves the hidden pieces out as it
- * draws the entity ({@code armor.client.ArmorClient}). A player clicks the eye beside each armor slot of their inventory
+ * draws the entity ({@code armor.client.ArmorClient}). A player clicks the dot in each armor slot of their inventory
  * (or {@code /hidearmor}); Bloom Pets' pet screen hides a companion's ({@link #toggleAll}, called by name, so neither
  * mod needs the other). A player's mask stays with them through death and dimensions.
  */

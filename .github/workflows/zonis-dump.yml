@@ -1,0 +1,60 @@
+name: zonis-dump
+on: push
+jobs:
+  dump:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: fetch
+        run: |
+          curl -sSL -o z.jar "https://cdn.modrinth.com/data/sZtlm7ZN/versions/HMEDa19A/zonis_companions-1.3.16-forge-1.20.1.jar"
+          mkdir z && cd z && unzip -q ../z.jar
+          find . -name "*.class" | sed 's#^\./##' > ../classes.txt
+          wc -l ../classes.txt
+      - name: dump
+        run: |
+          cat > dump.py <<'PY'
+          import subprocess, sys, re
+          cls, title = sys.argv[1], sys.argv[2]
+          out = subprocess.run(["javap", "-c", "-p", "-cp", "z", cls], capture_output=True, text=True).stdout
+          keep = []
+          for line in out.splitlines():
+              s = line.strip()
+              if not s or re.match(r"^\d+: (aload|astore|iload|istore|dload|dstore|fload|fstore|lload|lstore|dup|pop|iconst|dconst|fconst|lconst|bipush|sipush|i2d|d2i|i2f|f2d|d2f|checkcast)", s):
+                  continue
+              s = re.sub(r"\s*//\s*", " // ", s)
+              keep.append(s)
+          text = "\n".join(keep)
+          esc = lambda t: t.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+          for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
+              print(f"::notice title={title}-{n:02d}::{esc(text[i:i+3900])}")
+          if len(text) > 3900 * 9:
+              print(f"::warning title={title}-cut::{len(text)} chars, cut")
+          PY
+          python3 dump.py net.zoni.zoniscompanions.item.CompanionPendantItem pendant
+      - name: dies
+        run: python3 dump.py net.zoni.zoniscompanions.procedures.BocchiEntityDiesProcedure dies
+      - name: tick
+        run: python3 dump.py net.zoni.zoniscompanions.procedures.BocchiOnEntityTickUpdateProcedure tick
+      - name: summon
+        run: python3 dump.py net.zoni.zoniscompanions.procedures.BocchiSummonItemRightclickedProcedure summon
+      - name: entity
+        run: |
+          javap -p -cp z net.zoni.zoniscompanions.entity.BocchiEntity | head -80 > sig.txt
+          python3 - <<'PY'
+          t = open("sig.txt").read()
+          esc = lambda s: s.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+          print(f"::notice title=entity-sig::{esc(t[:3900])}")
+          PY
+          python3 dump.py net.zoni.zoniscompanions.entity.BocchiEntity entity
+      - name: procedures
+        run: |
+          grep -i "procedures/.*\(pendant\|companion\|follow\|stay\|owner\|wander\)" classes.txt | head -40 > procs.txt || true
+          python3 - <<'PY'
+          t = open("procs.txt").read()
+          esc = lambda s: s.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+          print(f"::notice title=procs::{esc(t[:3900] or 'none')}")
+          PY

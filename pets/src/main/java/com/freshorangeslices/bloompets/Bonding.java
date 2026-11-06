@@ -22,9 +22,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * Bonding, the plugin's way: sneak and right-click a wild animal of the roster with its favourite food. Each feeding
  * counts (hearts above the hotbar show how far along); after enough (5 for most) it's the player's pet. Feeding without
  * sneaking still breeds animals as usual. Sneak-feeding your own pet feeds it (health, hunger, mood, and XP for a
- * non-combat party pet); sneak + right-click with an empty hand pats it. Your companions (other mods') the same way:
- * cooked vanilla food ({@code #bloompets:companion_food}) feeds one, an empty hand pats it; their own mod's right-click
- * (Migamigos' backpack) is left to a plain click.
+ * non-combat party pet); sneak + right-click with an empty hand pats it. Your companions (other mods') are fed the same
+ * way with cooked vanilla food ({@code #bloompets:companion_food}); they aren't patted, so every other click on them is
+ * still their own mod's.
  */
 public final class Bonding {
 	/** What a companion eats. */
@@ -80,22 +80,20 @@ public final class Bonding {
 		feed(serverPlayer, mob, event.getItemStack());
 	}
 
-	/** Sneak + right-click on one of your companions: a pat with an empty hand, a meal with cooked food. */
+	/**
+	 * Sneak + right-click on one of your companions with cooked food: a meal. Nothing else (no pats: FreshOrangeSlices,
+	 * 2026-11-05), so an empty hand stays its own mod's (Zoni's companions' controls, Migamigos' backpack).
+	 */
 	private static void companion(PlayerInteractEvent.EntityInteract event, ServerPlayer player, Mob mob) {
 		ItemStack held = event.getItemStack();
 
-		if (!player.getUUID().equals(Pets.owner(mob)) || !held.isEmpty() && !held.is(COMPANION_FOOD)) {
+		if (!player.getUUID().equals(Pets.owner(mob)) || held.isEmpty() || !held.is(COMPANION_FOOD)) {
 			return;
 		}
 
 		event.setCanceled(true);
 		event.setCancellationResult(InteractionResult.SUCCESS);
-
-		if (held.isEmpty()) {
-			PetMood.pat(player, mob);
-		} else {
-			feedCompanion(player, mob, held);
-		}
+		feedCompanion(player, mob, held);
 	}
 
 	/** Feeds one of the player's companions (cooked vanilla food). Public for the game tests. */
@@ -142,9 +140,10 @@ public final class Bonding {
 		}
 
 		Pets.claim(mob, player);
-		PetRegistry.get(player.server).upsert(player.getUUID(), mob);
+		// Through observe, so a new pet's Ball and the quest book's first step come with it.
+		PetEvents.observe(mob);
 		level.sendParticles(ParticleTypes.HEART, mob.getX(), mob.getY() + mob.getBbHeight(), mob.getZ(), 10, 0.5, 0.4, 0.5, 0.0);
-		player.sendSystemMessage(Component.translatable("bloompets.bond.done", mob.getName(), species.displayName())
+		player.displayClientMessage(Component.translatable("bloompets.bond.done", mob.getName(), species.displayName())
 				.withStyle(ChatFormatting.LIGHT_PURPLE));
 		return Result.BONDED;
 	}

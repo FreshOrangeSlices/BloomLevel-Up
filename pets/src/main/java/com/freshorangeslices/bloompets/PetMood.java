@@ -212,16 +212,9 @@ public final class PetMood {
 		}
 	}
 
-	/**
-	 * A word to the owner about how a pet is doing: in chat for a Bloom pet; above the hotbar for a companion, since a
-	 * player can have a whole army of them (FreshOrangeSlices, 2026-11-05).
-	 */
+	/** A word to the owner about how a pet is doing, above the hotbar (not chat: FreshOrangeSlices, 2026-11-05). */
 	private static void tell(ServerPlayer owner, Entity pet, Component text) {
-		if (Pets.kind(pet) == Pets.Kind.MODDED) {
-			owner.displayClientMessage(text, true);
-		} else {
-			owner.sendSystemMessage(text);
-		}
+		owner.displayClientMessage(text, true);
 	}
 
 	/** A rain cloud over a sad pet, a heart now and then over one that loves you. */
@@ -240,21 +233,24 @@ public final class PetMood {
 		}
 	}
 
-	/** A party pet that's getting hungry takes its favourite food from its storage (a companion, from its own inventory). */
+	/**
+	 * A party pet that's getting hungry takes its favourite food from its storage (a companion, cooked food from its own
+	 * backpack, or else from Bloom Pets' food pouch).
+	 */
 	private static void eatFromStorage(LivingEntity pet) {
-		if (Pets.kind(pet) == Pets.Kind.MODDED) {
-			if (CompanionInventory.takeOne(pet, stack -> stack.is(Bonding.COMPANION_FOOD))) {
-				setHunger(pet, hunger(pet) + MEAL);
-				pet.playSound(SoundEvents.GENERIC_EAT, 0.6F, 1.0F);
-			}
+		boolean companion = Pets.kind(pet) == Pets.Kind.MODDED;
 
+		if (companion && CompanionInventory.takeOne(pet, stack -> stack.is(Bonding.COMPANION_FOOD))) {
+			setHunger(pet, hunger(pet) + MEAL);
+			pet.playSound(SoundEvents.GENERIC_EAT, 0.6F, 1.0F);
 			return;
 		}
 
 		Species species = Pets.species(pet);
+		java.util.function.Predicate<ItemStack> food = companion ? stack -> stack.is(Bonding.COMPANION_FOOD) : species == null ? null : species::isFood;
 		PetRegistry.Record record = pet.getServer() == null ? null : PetRegistry.get(pet.getServer()).find(pet.getUUID());
 
-		if (species == null || record == null || record.items.isEmpty()) {
+		if (food == null || record == null || record.items.isEmpty()) {
 			return;
 		}
 
@@ -264,7 +260,7 @@ public final class PetMood {
 		for (int i = 0; i < box.getContainerSize(); i++) {
 			ItemStack stack = box.getItem(i);
 
-			if (species.isFood(stack)) {
+			if (food.test(stack)) {
 				stack.shrink(1);
 				box.setChanged();
 				record.items = box.createTag();

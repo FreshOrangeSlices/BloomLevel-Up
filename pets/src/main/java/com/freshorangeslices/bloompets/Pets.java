@@ -87,7 +87,10 @@ public final class Pets {
 		return moddedKind(entity) ? Kind.MODDED : null;
 	}
 
-	/** The player the pet belongs to, or null. */
+	/**
+	 * The player the pet belongs to, or null. A companion its owner released ({@link Release}) stays theirs in its own mod
+	 * but has no owner here (given to someone else, it's theirs).
+	 */
 	public static UUID owner(Entity entity) {
 		CompoundTag data = dataOrNull(entity);
 
@@ -95,15 +98,22 @@ public final class Pets {
 			return data.getUUID("owner");
 		}
 
+		UUID owner = null;
+
 		if (entity instanceof OwnableEntity owned && owned.getOwnerUUID() != null) {
-			return owned.getOwnerUUID();
+			owner = owned.getOwnerUUID();
+		} else if (entity instanceof AbstractHorse horse && horse.getOwnerUUID() != null) {
+			owner = horse.getOwnerUUID();
+		} else {
+			owner = migamigosOwner(entity);
 		}
 
-		if (entity instanceof AbstractHorse horse && horse.getOwnerUUID() != null) {
-			return horse.getOwnerUUID();
-		}
+		return owner != null && data != null && data.hasUUID("releasedBy") && owner.equals(data.getUUID("releasedBy")) ? null : owner;
+	}
 
-		return migamigosOwner(entity);
+	/** Everything Bloom Pets kept on the pet, gone (it's released). */
+	static void forget(Entity entity) {
+		entity.getPersistentData().remove(DATA);
 	}
 
 	private static UUID migamigosOwner(Entity entity) {

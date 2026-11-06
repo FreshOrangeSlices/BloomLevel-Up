@@ -39,13 +39,19 @@ public final class PetEvents {
 			return null;
 		}
 
+		PetRegistry registry = PetRegistry.get(entity.level().getServer());
+		boolean added = registry.find(entity.getUUID()) == null;
+
+		// A companion just added picks up where its owner's fallen one of its kind left off (Zoni's summon device).
+		if (added && entity instanceof LivingEntity living) {
+			Comeback.restore(living, registry);
+		}
+
 		// A companion just added to the list (or one listed before Spirits) gets its Spirit (Phase 5b).
 		if (entity instanceof LivingEntity living && Pets.kind(entity) == Pets.Kind.MODDED && Spirits.of(entity) == null) {
 			Spirits.ensure(living);
 		}
 
-		PetRegistry registry = PetRegistry.get(entity.level().getServer());
-		boolean added = registry.find(entity.getUUID()) == null;
 		PetRegistry.Record record = registry.upsert(owner, entity);
 
 		// A new Bloom pet (bonded, tamed or given): a Ball for its owner, and the quest book's first step.
@@ -68,7 +74,19 @@ public final class PetEvents {
 		}
 
 		Entity entity = event.getEntity();
+		UUID releasedBy = entity.getServer() == null ? null : PetRegistry.get(entity.getServer()).takeReleased(entity.getUUID());
+
+		// Released while it was away: free now.
+		if (releasedBy != null) {
+			Release.free(entity, releasedBy);
+			return;
+		}
+
 		PetRegistry.Record record = observe(entity);
+
+		if (entity instanceof Mob mob) {
+			PetGoals.ensure(mob);
+		}
 
 		if (record == null || record.kind != Pets.Kind.BLOOM || !(entity instanceof Mob mob)) {
 			return;
@@ -77,6 +95,7 @@ public final class PetEvents {
 		// The party may have changed while the pet was away (and joining it takes a pet off its post).
 		if (Pets.inParty(mob) != record.party) {
 			Pets.setParty(mob, record.party);
+			PetModes.partyChanged(mob, record.party);
 		}
 
 		if (record.party && PetPosts.posted(mob)) {
@@ -96,7 +115,6 @@ public final class PetEvents {
 		}
 
 		mob.setPersistenceRequired();
-		PetGoals.add(mob);
 	}
 
 	@SubscribeEvent
@@ -113,6 +131,11 @@ public final class PetEvents {
 
 		if (entity.tickCount % 20 != 0 || !Pets.listed(entity)) {
 			return;
+		}
+
+		// Goals for a pet listed since it loaded (bonded, tamed, given): before, it had none until it was next loaded.
+		if (entity instanceof Mob mob) {
+			PetGoals.ensure(mob);
 		}
 
 		Fainting.check(entity);
@@ -159,10 +182,13 @@ public final class PetEvents {
 		}
 
 		PetStorage.dropAll(entity, record);
+		Comeback.fallen(entity, PetRegistry.get(server));
 		ServerPlayer owner = server.getPlayerList().getPlayer(Pets.owner(entity));
 
 		if (owner != null) {
-			owner.sendSystemMessage(Component.translatable("bloompets.died", record.name));
+			// A companion's progress waits for the next of its kind (Comeback): its owner is told so.
+			boolean comesBack = record.kind == Pets.Kind.MODDED && !Amigos.has(entity);
+			owner.sendSystemMessage(Component.translatable(comesBack ? "bloompets.died.companion" : "bloompets.died", record.name));
 		}
 	}
 

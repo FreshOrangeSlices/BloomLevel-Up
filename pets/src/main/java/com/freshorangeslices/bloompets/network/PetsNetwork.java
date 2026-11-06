@@ -38,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * server answers with the whole list, as the world keeps it plus what's live for the pets that are loaded.
  */
 public final class PetsNetwork {
-	private static final String VERSION = "8";
+	private static final String VERSION = "9";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(BloomPets.id("main"), () -> VERSION, VERSION::equals, VERSION::equals);
 
 	private PetsNetwork() {
@@ -58,7 +58,9 @@ public final class PetsNetwork {
 		/** One and the Same: pick a tree (the argument), reset it, switch a cooldown ability (the argument) off or on. */
 		TREE, TREE_RESET, ABILITY,
 		/** A companion's Spirit: keep it, or use the one reroll (the argument: keep or reroll). */
-		SPIRIT
+		SPIRIT,
+		/** Follow, Wander or Stay (the argument); a new name (the argument; empty for its own); let it go. */
+		MODE, RENAME, RELEASE
 	}
 
 	/** Sends the player their pets; {@code open} opens the screen, else it only refreshes an open one. */
@@ -84,11 +86,11 @@ public final class PetsNetwork {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeEnum(action);
 			buf.writeUUID(pet);
-			buf.writeUtf(arg, 64);
+			buf.writeUtf(arg, 96);
 		}
 
 		static Request decode(FriendlyByteBuf buf) {
-			return new Request(buf.readEnum(Action.class), buf.readUUID(), buf.readUtf(64));
+			return new Request(buf.readEnum(Action.class), buf.readUUID(), buf.readUtf(96));
 		}
 
 		void handle(Supplier<NetworkEvent.Context> context) {
@@ -120,6 +122,9 @@ public final class PetsNetwork {
 				case ABILITY -> PetTrees.toggle(player, record, arg);
 				case SPIRIT -> "reroll".equals(arg) ? com.freshorangeslices.bloompets.Spirits.reroll(player, record)
 						: com.freshorangeslices.bloompets.Spirits.keep(player, record);
+				case MODE -> com.freshorangeslices.bloompets.PetModes.change(player, record, arg);
+				case RENAME -> com.freshorangeslices.bloompets.PetModes.rename(player, record, arg);
+				case RELEASE -> com.freshorangeslices.bloompets.Release.release(player, record);
 				default -> null;
 			};
 
@@ -139,12 +144,14 @@ public final class PetsNetwork {
 	 * its tree (or empty), its switched-off abilities (comma-separated), a companion's ticks left before it can pick again;
 	 * its stats when it's loaded (attack damage and armor, -1 when away; an Amigo's damage from its levels, -1 for others)
 	 * and an Amigo's levels waiting for its next kill; a companion's Spirit waiting to be kept or rerolled (its id is in
-	 * {@code skills}), and the pet's top level (100, an Amigo's 99).
+	 * {@code skills}), and the pet's top level (100, an Amigo's 99); what it does when it isn't working (follow, wander,
+	 * stay).
 	 */
 	public record Entry(UUID pet, String name, String type, Pets.Kind kind, String category, String dimension, BlockPos pos,
 			boolean party, boolean loaded, float health, float maxHealth, int slots, CompoundTag look, int level, float xp, float xpNext,
 			int rest, String skills, float mood, float hunger, boolean loved, boolean tired, boolean posted, boolean treeable, String tree,
-			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed, boolean spiritPending, int topLevel) {
+			String abilitiesOff, int treeWait, float damage, float armor, float amigoPower, int owed, boolean spiritPending, int topLevel,
+			String mode) {
 		void encode(FriendlyByteBuf buf) {
 			buf.writeUUID(pet);
 			buf.writeUtf(name);
@@ -179,6 +186,7 @@ public final class PetsNetwork {
 			buf.writeVarInt(owed);
 			buf.writeBoolean(spiritPending);
 			buf.writeVarInt(topLevel);
+			buf.writeUtf(mode);
 		}
 
 		static Entry decode(FriendlyByteBuf buf) {
@@ -186,7 +194,7 @@ public final class PetsNetwork {
 					buf.readBlockPos(), buf.readBoolean(), buf.readBoolean(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readNbt(),
 					buf.readVarInt(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readUtf(), buf.readFloat(), buf.readFloat(),
 					buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readBoolean(), buf.readUtf(), buf.readUtf(), buf.readVarInt(),
-					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt());
+					buf.readFloat(), buf.readFloat(), buf.readFloat(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt(), buf.readUtf());
 		}
 	}
 
@@ -253,7 +261,8 @@ public final class PetsNetwork {
 						(int) Math.min(Integer.MAX_VALUE, Math.max(0, treeWaitUntil - now)),
 						attack == null ? -1.0F : (float) attack.getValue(), alive == null ? -1.0F : alive.getArmorValue(),
 						power == null ? -1.0F : power, owed == null || amigoLevel == null ? 0 : Math.max(0, owed - amigoLevel), spiritPending,
-						live != null ? com.freshorangeslices.bloompets.PetLevels.top(live) : PetLevels.MAX));
+						live != null ? com.freshorangeslices.bloompets.PetLevels.top(live) : PetLevels.MAX,
+						live != null ? com.freshorangeslices.bloompets.PetModes.mode(live).id() : r.mode));
 			}
 
 			return new PetList(open, wait, pets, message, com.freshorangeslices.bloompets.BloomBridge.oneAndTheSame(player), bloomView);

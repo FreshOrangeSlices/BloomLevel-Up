@@ -3,9 +3,11 @@ package com.freshorangeslices.bloompets;
 import com.freshorangeslices.bloompets.network.PetsNetwork;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -38,11 +40,16 @@ public final class BloomPets {
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 	/** The Ball: thrown for the party pet to fetch (one comes with every new Bloom pet). */
 	public static final RegistryObject<Item> BALL = ITEMS.register("ball", () -> new BallItem(new Item.Properties().stacksTo(16)));
+	private static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MOD_ID);
+	/** A companion's food pouch (the pet screen's Storage for a companion with no backpack of its own). */
+	public static final RegistryObject<MenuType<PouchMenu>> POUCH = MENUS.register("pouch",
+			() -> IForgeMenuType.create((id, inventory, data) -> new PouchMenu(id, inventory)));
 
 	public BloomPets() {
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, PetsConfig.SPEC);
 		ITEMS.register(modBus);
+		MENUS.register(modBus);
 		modBus.addListener((BuildCreativeModeTabContentsEvent event) -> {
 			if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
 				event.accept(BALL);

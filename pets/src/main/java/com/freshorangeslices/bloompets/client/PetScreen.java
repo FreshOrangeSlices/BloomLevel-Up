@@ -2,6 +2,7 @@ package com.freshorangeslices.bloompets.client;
 
 import com.freshorangeslices.bloompets.BloomPets;
 import com.freshorangeslices.bloompets.PetBonuses;
+import com.freshorangeslices.bloompets.PetModes;
 import com.freshorangeslices.bloompets.PetSkills;
 import com.freshorangeslices.bloompets.PetTrees;
 import com.freshorangeslices.bloompets.Pets;
@@ -17,6 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -119,6 +121,13 @@ public final class PetScreen extends Screen {
 	private Button partyButton;
 	private Button storageButton;
 	private Button postButton;
+	/** In the pet's picture: what it does when it isn't working (Follow, Wander, Stay; click for the next), rename, release. */
+	private Button modeButton;
+	private Button renameButton;
+	private Button releaseButton;
+	/** The pet's new name, typed over its name while renaming (Enter keeps it, Escape doesn't). */
+	private EditBox nameBox;
+	private UUID renaming;
 	/** A question waiting for yes or no (picking or resetting a tree), drawn over the pet, and what yes does. */
 	private Component confirmText;
 	private Runnable confirmYes;
@@ -246,6 +255,32 @@ public final class PetScreen extends Screen {
 		postButton = addRenderableWidget(new PetButton(mainLeft() + 128, buttonsY, 40, 18, Component.empty(), b -> act(PetsNetwork.Action.POST)));
 		storageButton = addRenderableWidget(new PetButton(mainRight() - 44, buttonsY, 44, 18, Component.translatable("bloompets.screen.storage"),
 				b -> act(PetsNetwork.Action.STORAGE)));
+		// Its mode, top left in its picture; rename and release, top right.
+		int canvasLeft = mainLeft() + SLOT + 6;
+		int canvasRight = mainRight() - SLOT - 6;
+		modeButton = addRenderableWidget(new PetButton(canvasLeft + 3, canvasTop() + 3, 62, 14, Component.empty(), b -> {
+			PetsNetwork.Entry pet = current();
+			PetModes.Mode mode = pet == null ? null : PetModes.Mode.byId(pet.mode());
+
+			if (mode != null) {
+				PetsClient.act(PetsNetwork.Action.MODE, pet.pet(), mode.next().id());
+			}
+		}));
+		renameButton = addRenderableWidget(new PetButton(canvasRight - 33, canvasTop() + 3, 14, 14, Component.literal("\u270e"), b -> startRename()));
+		releaseButton = addRenderableWidget(new PetButton(canvasRight - 17, canvasTop() + 3, 14, 14,
+				Component.literal("\u2715").withStyle(ChatFormatting.RED), b -> {
+					PetsNetwork.Entry pet = current();
+
+					if (pet != null) {
+						confirm(Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.release.confirm.companion"
+								: "bloompets.screen.release.confirm", pet.name()), () -> PetsClient.act(PetsNetwork.Action.RELEASE, pet.pet()));
+						updateButtons();
+					}
+				}));
+		nameBox = addRenderableWidget(new EditBox(font, mainLeft(), top + 7, 150, 16, Component.translatable("bloompets.screen.rename")));
+		nameBox.setMaxLength(PetModes.NAME_MAX);
+		nameBox.visible = false;
+		renaming = null;
 		int middle = (mainLeft() + mainRight()) / 2;
 		yesButton = addRenderableWidget(new PetButton(middle - 44, canvasBottom() - 24, 40, 16, Component.translatable("bloompets.screen.yes"), b -> {
 			Runnable yes = confirmYes;
@@ -264,6 +299,34 @@ public final class PetScreen extends Screen {
 			}
 		}));
 		closeConfirm();
+		updateButtons();
+	}
+
+	/** Rename: the name box over its name, with its name in it. */
+	private void startRename() {
+		PetsNetwork.Entry pet = current();
+
+		if (pet == null) {
+			return;
+		}
+
+		renaming = pet.pet();
+		nameBox.setValue(pet.name());
+		nameBox.visible = true;
+		setFocused(nameBox);
+		nameBox.setFocused(true);
+		updateButtons();
+	}
+
+	private void stopRename(boolean keep) {
+		if (renaming != null && keep) {
+			PetsClient.act(PetsNetwork.Action.RENAME, renaming, nameBox.getValue());
+		}
+
+		renaming = null;
+		nameBox.visible = false;
+		nameBox.setFocused(false);
+		setFocused(null);
 		updateButtons();
 	}
 
@@ -287,6 +350,16 @@ public final class PetScreen extends Screen {
 		PetsNetwork.Entry pet = current();
 		boolean any = pet != null;
 		callButton.visible = partyButton.visible = storageButton.visible = postButton.visible = any;
+		// Over the pet's picture: not while a question's asked there, nor while it's being renamed.
+		boolean picture = any && confirmText == null;
+		modeButton.visible = picture;
+		renameButton.visible = releaseButton.visible = picture && renaming == null;
+
+		if (renaming != null && (pet == null || !renaming.equals(pet.pet()))) {
+			stopRename(false);
+			return;
+		}
+
 		// The Pet / Bloom switch comes with One and the Same.
 		if (!list.oneAndTheSame()) {
 			bloomView = false;
@@ -301,15 +374,37 @@ public final class PetScreen extends Screen {
 
 		callButton.setTooltip(Tooltip.create(Component.translatable("bloompets.screen.call.tip", pet.name())));
 		updatePartyButton(pet);
-		boolean storage = pet.kind() == Pets.Kind.BLOOM && pet.slots() > 0;
+		updateModeButton(pet);
+		renameButton.active = pet.loaded();
+		renameButton.setTooltip(Tooltip.create(Component.translatable(pet.loaded() ? "bloompets.screen.rename.tip" : "bloompets.screen.away.tip", pet.name())));
+		releaseButton.setTooltip(Tooltip.create(Component.translatable("bloompets.screen.release.tip", pet.name())));
+		boolean storage = pet.slots() > 0;
 		storageButton.active = storage;
-		storageButton.setTooltip(Tooltip.create(storage ? Component.translatable("bloompets.screen.storage.tip", pet.slots())
+		// A companion's Storage is its food pouch (one with a backpack of its own eats from that instead).
+		storageButton.setTooltip(Tooltip.create(storage ? Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.pouch.tip"
+				: "bloompets.screen.storage.tip", pet.slots())
 				: Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.storage.modded" : "bloompets.storage.none", pet.name())));
 		// A post: Bloom pets out of the party; "Unpost" calls one off its post.
 		postButton.active = pet.kind() == Pets.Kind.BLOOM && (pet.posted() || !pet.party());
 		postButton.setMessage(Component.translatable(pet.posted() ? "bloompets.screen.unpost" : "bloompets.screen.post"));
 		postButton.setTooltip(Tooltip.create(Component.translatable(pet.kind() != Pets.Kind.BLOOM ? "bloompets.screen.post.modded"
 				: pet.posted() ? "bloompets.screen.unpost.tip" : pet.party() ? "bloompets.screen.post.party" : "bloompets.screen.post.tip")));
+	}
+
+	/** Following, Wandering or Staying; the tip says what it does and what a click makes it. */
+	private void updateModeButton(PetsNetwork.Entry pet) {
+		PetModes.Mode mode = PetModes.Mode.byId(pet.mode());
+
+		if (mode == null) {
+			mode = PetModes.Mode.WANDER;
+		}
+
+		modeButton.active = pet.loaded();
+		modeButton.setMessage(Component.translatable("bloompets.screen.mode." + mode.id()));
+		modeButton.setTooltip(Tooltip.create(!pet.loaded() ? Component.translatable("bloompets.screen.away.tip", pet.name())
+				: Component.translatable("bloompets.screen.mode.tip." + mode.id(), pet.name()).append("\n")
+						.append(Component.translatable("bloompets.screen.mode.click", Component.translatable("bloompets.screen.mode." + mode.next().id()))
+								.withStyle(ChatFormatting.GRAY))));
 	}
 
 	/** Join or leave, with the time left while the party can't change yet. */
@@ -361,6 +456,21 @@ public final class PetScreen extends Screen {
 
 	@Override
 	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+		// Typing a name: Enter keeps it, Escape doesn't, and every other key is for the box (K too).
+		if (renaming != null) {
+			if (keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER || keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_KP_ENTER) {
+				stopRename(true);
+				return true;
+			}
+
+			if (keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE) {
+				stopRename(false);
+				return true;
+			}
+
+			return nameBox.keyPressed(keyCode, scanCode, modifiers) || nameBox.canConsumeInput() || super.keyPressed(keyCode, scanCode, modifiers);
+		}
+
 		if (PetsClient.OPEN.matches(keyCode, scanCode)) {
 			onClose();
 			return true;
@@ -374,6 +484,11 @@ public final class PetScreen extends Screen {
 		// A question on screen takes every click until it's answered.
 		if (confirmText != null) {
 			return yesButton.mouseClicked(mouseX, mouseY, button) || noButton.mouseClicked(mouseX, mouseY, button) || true;
+		}
+
+		// A click away from the name box keeps the new name.
+		if (renaming != null && !nameBox.isMouseOver(mouseX, mouseY)) {
+			stopRename(true);
 		}
 
 		PetsNetwork.Entry chosen = current();
@@ -428,6 +543,10 @@ public final class PetScreen extends Screen {
 			renderPet(g, pet, mouseX, mouseY);
 		}
 
+		// The buttons over its picture stay out of a question's way (asked here, or by the Spirit's box).
+		boolean picture = pet != null && confirmText == null;
+		modeButton.visible = picture;
+		renameButton.visible = releaseButton.visible = picture && renaming == null;
 		super.render(g, mouseX, mouseY, partialTick);
 
 		if (message != null && System.currentTimeMillis() - messageAt < 5000) {
@@ -536,7 +655,9 @@ public final class PetScreen extends Screen {
 		if (list.oneAndTheSame()) {
 			g.drawString(font, view, viewX, top + 12, MUTED);
 		}
-		big(g, bold(pet.name(), (int) ((viewX - 6 - mainLeft) / BIG)), mainLeft, top + 9, GOLD);
+		if (renaming == null) {
+			big(g, bold(pet.name(), (int) ((viewX - 6 - mainLeft) / BIG)), mainLeft, top + 9, GOLD);
+		}
 		Component level = Component.translatable("bloompets.screen.level", pet.level());
 		g.drawString(font, level, mainLeft, top + 25, pet.level() >= pet.topLevel() ? GOLD : ACCENT);
 		int kindX = mainLeft + font.width(level);
@@ -623,7 +744,8 @@ public final class PetScreen extends Screen {
 						.withStyle(ChatFormatting.DARK_GRAY));
 			}
 
-			panelTip = tip.stream().map(Component::getVisualOrderText).toList();
+			// Wrapped, so a long line doesn't run off the screen (FreshOrangeSlices' playtest).
+			panelTip = tip.stream().flatMap(line -> font.split(line, 220).stream()).toList();
 		}
 	}
 

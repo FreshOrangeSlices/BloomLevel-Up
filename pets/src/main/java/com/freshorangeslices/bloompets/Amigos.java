@@ -51,6 +51,52 @@ public final class Amigos {
 		return Pets.kind(entity) == Pets.Kind.MODDED ? call(entity, "getAmigoLevel") : null;
 	}
 
+	/** "Is Following" (true) or "Is Staying" (false); true when it can't be told. */
+	public static boolean following(Entity entity) {
+		return call(entity, "isFollowing", Boolean.class, true);
+	}
+
+	/** "Can Wander" (true) or "Cannot Wander" (false); true when it can't be told. */
+	public static boolean canWander(Entity entity) {
+		return call(entity, "canWander", Boolean.class, true);
+	}
+
+	public static void setFollowing(Entity entity, boolean following) {
+		invoke(entity, "setFollowing", boolean.class, following);
+	}
+
+	public static void setAllowWandering(Entity entity, boolean wander) {
+		invoke(entity, "setAllowWandering", boolean.class, wander);
+	}
+
+	/** Where a staying companion keeps to. */
+	public static void setPostPos(Entity entity, org.joml.Vector3f post) {
+		invoke(entity, "setPostPos", org.joml.Vector3f.class, post);
+	}
+
+	private static <T> T call(Entity entity, String name, Class<T> type, T fallback) {
+		Optional<Method> method = find(entity.getClass(), name);
+
+		try {
+			Object value = method.isPresent() ? method.get().invoke(entity) : null;
+			return type.isInstance(value) ? type.cast(value) : fallback;
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			return fallback;
+		}
+	}
+
+	private static void invoke(Entity entity, String name, Class<?> parameter, Object value) {
+		Optional<Method> method = find(entity.getClass(), name, parameter);
+
+		try {
+			if (method.isPresent()) {
+				method.get().invoke(entity, value);
+			}
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			// Not this Migamigos: it keeps its own state.
+		}
+	}
+
 	/** The damage its Amigo levels add to each of its attacks (+0.1 a level), or null. */
 	public static Float extraPower(Entity entity) {
 		if (level(entity) == null) {

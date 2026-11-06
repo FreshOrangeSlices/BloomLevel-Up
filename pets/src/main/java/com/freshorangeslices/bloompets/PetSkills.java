@@ -584,7 +584,7 @@ public final class PetSkills {
 		ServerLevel level = player.serverLevel();
 		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 40, 0.4, 0.6, 0.4, 0.3);
 		level.playSound(null, player.blockPosition(), SoundEvents.IRON_GOLEM_REPAIR, SoundSource.PLAYERS, 1.0F, 0.8F);
-		player.sendSystemMessage(Component.translatable("bloompets.guardian", living.getName()).withStyle(ChatFormatting.GOLD));
+		player.displayClientMessage(Component.translatable("bloompets.guardian", living.getName()).withStyle(ChatFormatting.GOLD), true);
 	}
 
 	/** The player's golem that can step in: their party pet, or a companion with the Iron Golem's Spirit, level 20+, near. */

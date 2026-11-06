@@ -463,3 +463,30 @@ anyone can pick up). Each fetch: 22 XP and +8 mood, at most every 15 seconds. **
 for Life (bond), Go Get It! (fetch, optional), Growing Up (level 10), On Guard (a post), Old Friends (level 25), One and
 the Same, Sword, Axe, Trident or Fists (a tree); rewards in vanilla levels and Bloom XP for every tab
 (FreshOrangeSlices: all tabs; 25 to 50 each, 100 each for the last two). Game tests: `FetchGameTests`.
+
+**Playtest fixes (FreshOrangeSlices' first playtest, 2026-11-05; Bloom Pets 0.5.0):**
+- **Follow, Wander or Stay for every pet** (`PetModes`), Bloom pets and companions alike: the button at the top left of
+  the pet's picture (click for the next), `/bloompets mode <follow|wander|stay> <pet>`, kept on the pet
+  (`bloompets.mode`). Follow walks after you (a fighter fights for you); Wander roams around where you left it; Stay
+  stands on its spot (it leaves it only to fight, then walks back). Joining the party sets Follow, leaving it Wander
+  where it is, a Call Follow; a posted pet keeps its post whatever its mode. A wolf, cat or parrot stays by sitting; a
+  Migamigos companion through its own Follow / Wander / post (by name); everything else through a goal ahead of its
+  others (`PetGoals.Keep`), which also holds a Zoni's companion "sitting" so its own follow goal lets go. Goals now
+  come the first second a pet is listed (before, a pet bonded mid-game had none until it was next loaded).
+- **Your target first**: a fighter on Follow (the party pet, or any you set to Follow) goes for whatever you hit ahead
+  of what's hitting it or you, and switches the moment you hit something else (within 32 blocks; wolves too).
+- **News above the hotbar**: level-ups, Spirits (the screen still asks Keep or Reroll), the Ball, bonding, fainting,
+  bonuses, mood. Only a death and a lost call stay in chat.
+- **Companions aren't patted or fetched**: a sneak + right-click with an empty hand is theirs (Bocchi's own controls).
+- **A food pouch for companions with no inventory of their own** (Zoni's: only their gear): 2 slots of cooked food,
+  the pet screen's Storage; it eats from there when it's hungry and out with you (a Migamigos one still eats from its
+  backpack).
+- **A fallen companion comes back** (`Comeback`): Zoni's summon device brings a companion back as a new one, so its
+  level, XP, Spirit, tree, mood and name are kept for its owner by its kind and the next one of that kind they get picks
+  them up (the newest fallen first; not Migamigos, whose keepsake brings the same one back). Its second wind is taken
+  as the killing blow lands (it was at death, when Zoni's had already dropped its gear and swapped its device).
+- **Rename** (the pencil, top right of the picture; `/bloompets rename "<name>" <pet>`), so two of a kind can be told
+  apart; **Release** (the ✕ beside it, asking first; `/bloompets release <pet>`): a Bloom pet goes back to the wild, a
+  companion leaves the list but stays its owner's in its own mod; its storage comes back to them; a pet that isn't
+  loaded is set free when it next loads.
+- Game tests: `PetModeGameTests`, `ZoniGameTests` (Zoni's Companions' Bocchi, now in the test run too).

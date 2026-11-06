@@ -52,7 +52,7 @@ public final class Calling {
 		if (pet != null) {
 			Fainting.cameOut(pet);
 			PetPosts.leave(pet);
-			bring(pet, player);
+			follow(bring(pet, player));
 			return Component.translatable("bloompets.call.came", record.name);
 		}
 
@@ -92,13 +92,20 @@ public final class Calling {
 			if (pet != null) {
 				Fainting.cameOut(pet);
 				PetPosts.leave(pet);
-				bring(pet, player);
+				follow(bring(pet, player));
 				player.displayClientMessage(Component.translatable("bloompets.call.came", pending.name()), true);
 				it.remove();
 			} else if (--pending.ticksLeft()[0] <= 0) {
 				player.sendSystemMessage(Component.translatable("bloompets.call.lost", pending.name()));
 				it.remove();
 			}
+		}
+	}
+
+	/** A called pet comes to follow (FreshOrangeSlices' playtest: a call is "come here", whatever it was told before). */
+	private static void follow(Entity pet) {
+		if (pet instanceof Mob mob) {
+			PetModes.set(mob, PetModes.Mode.FOLLOW);
 		}
 	}
 

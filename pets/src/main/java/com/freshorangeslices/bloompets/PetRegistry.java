@@ -32,6 +32,10 @@ public final class PetRegistry extends SavedData {
 	private final Map<UUID, Long> partyChanged = new HashMap<>();
 	/** Whether each owner had One and the Same on when last online (their pets' trees work while they're away). */
 	private final Map<UUID, Boolean> oneAndTheSame = new HashMap<>();
+	/** Fallen companions' Bloom progress, by owner and kind ({@link Comeback}), the newest last. */
+	private final Map<String, List<CompoundTag>> fallen = new LinkedHashMap<>();
+	/** Pets released while they weren't loaded, and by whom: they're set free when they next load ({@link Release}). */
+	private final Map<UUID, UUID> released = new HashMap<>();
 
 	/** One pet, as last seen. */
 	public static final class Record {
@@ -72,6 +76,8 @@ public final class PetRegistry extends SavedData {
 		/** A companion's Spirit (a skill tree's id, or null) and whether its owner has settled it. */
 		public String spirit;
 		public boolean spiritSettled;
+		/** What it does when it isn't working ({@link PetModes}: follow, wander or stay), as last seen. */
+		public String mode = PetModes.Mode.WANDER.id();
 
 		CompoundTag save() {
 			CompoundTag tag = new CompoundTag();
@@ -113,6 +119,7 @@ public final class PetRegistry extends SavedData {
 			}
 
 			tag.putBoolean("spiritSettled", spiritSettled);
+			tag.putString("mode", mode);
 			return tag;
 		}
 
@@ -150,6 +157,7 @@ public final class PetRegistry extends SavedData {
 			record.treeWait = tag.getLong("treeWait");
 			record.spirit = tag.contains("spirit") ? tag.getString("spirit") : null;
 			record.spiritSettled = tag.getBoolean("spiritSettled");
+			record.mode = tag.contains("mode") ? tag.getString("mode") : record.party ? PetModes.Mode.FOLLOW.id() : PetModes.Mode.WANDER.id();
 			return record;
 		}
 	}
@@ -243,6 +251,12 @@ public final class PetRegistry extends SavedData {
 		record.treeWait = data == null ? 0L : data.getLong("treeWait");
 		record.spirit = Spirits.of(entity) == null ? null : Spirits.of(entity).id();
 		record.spiritSettled = Spirits.settled(entity);
+		record.mode = PetModes.mode(entity).id();
+
+		// A companion without a backpack of its own gets Bloom Pets' food pouch.
+		if (record.kind == Pets.Kind.MODDED) {
+			record.slots = CompanionInventory.container(entity) == null ? PetStorage.POUCH : 0;
+		}
 
 		// Its look, at most once a minute (a pet's saved data isn't small).
 		if (record.look.isEmpty() || record.seen - record.lookSeen >= LOOK_EVERY) {
@@ -252,6 +266,57 @@ public final class PetRegistry extends SavedData {
 
 		setDirty();
 		return record;
+	}
+
+	private static String fallenKey(UUID owner, String type) {
+		return owner + "|" + type;
+	}
+
+	/** Keeps a fallen companion's progress for its owner (the newest few of each kind). */
+	public void rememberFallen(UUID owner, String type, CompoundTag kept) {
+		List<CompoundTag> list = fallen.computeIfAbsent(fallenKey(owner, type), k -> new ArrayList<>());
+		list.add(kept);
+
+		while (list.size() > Comeback.MAX_KEPT) {
+			list.remove(0);
+		}
+
+		setDirty();
+	}
+
+	/** The newest fallen companion of this kind its owner had, taken off the list, or null. */
+	public CompoundTag takeFallen(UUID owner, String type) {
+		List<CompoundTag> list = fallen.get(fallenKey(owner, type));
+
+		if (list == null || list.isEmpty()) {
+			return null;
+		}
+
+		CompoundTag kept = list.remove(list.size() - 1);
+
+		if (list.isEmpty()) {
+			fallen.remove(fallenKey(owner, type));
+		}
+
+		setDirty();
+		return kept;
+	}
+
+	/** A pet released while away: set free when it next loads. */
+	public void releaseLater(UUID pet, UUID owner) {
+		released.put(pet, owner);
+		setDirty();
+	}
+
+	/** Who released this pet while it was away (and forgets it), or null. */
+	public UUID takeReleased(UUID pet) {
+		UUID owner = released.remove(pet);
+
+		if (owner != null) {
+			setDirty();
+		}
+
+		return owner;
 	}
 
 	/** Takes the pet off its owner's list; returns its entry (with its storage), or null. */
@@ -296,6 +361,28 @@ public final class PetRegistry extends SavedData {
 		}
 
 		tag.put("owners", owners);
+		ListTag fallenTag = new ListTag();
+
+		for (Map.Entry<String, List<CompoundTag>> entry : fallen.entrySet()) {
+			CompoundTag one = new CompoundTag();
+			one.putString("key", entry.getKey());
+			ListTag kept = new ListTag();
+			kept.addAll(entry.getValue());
+			one.put("kept", kept);
+			fallenTag.add(one);
+		}
+
+		tag.put("fallen", fallenTag);
+		ListTag releasedTag = new ListTag();
+
+		for (Map.Entry<UUID, UUID> entry : released.entrySet()) {
+			CompoundTag one = new CompoundTag();
+			one.putUUID("pet", entry.getKey());
+			one.putUUID("owner", entry.getValue());
+			releasedTag.add(one);
+		}
+
+		tag.put("released", releasedTag);
 		return tag;
 	}
 
@@ -325,6 +412,18 @@ public final class PetRegistry extends SavedData {
 			}
 
 			registry.byOwner.put(id, pets);
+		}
+
+		for (Tag element : tag.getList("fallen", Tag.TAG_COMPOUND)) {
+			CompoundTag one = (CompoundTag) element;
+			List<CompoundTag> kept = new ArrayList<>();
+			one.getList("kept", Tag.TAG_COMPOUND).forEach(t -> kept.add((CompoundTag) t));
+			registry.fallen.put(one.getString("key"), kept);
+		}
+
+		for (Tag element : tag.getList("released", Tag.TAG_COMPOUND)) {
+			CompoundTag one = (CompoundTag) element;
+			registry.released.put(one.getUUID("pet"), one.getUUID("owner"));
 		}
 
 		return registry;

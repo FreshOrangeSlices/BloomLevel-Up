@@ -121,8 +121,8 @@ public final class Fainting {
 
 		if (owner != null) {
 			int seconds = PetsConfig.restTicks() / 20;
-			owner.sendSystemMessage(Component.translatable("bloompets.faint", pet.getName(), String.format("%d:%02d", seconds / 60, seconds % 60))
-					.withStyle(ChatFormatting.GRAY));
+			owner.displayClientMessage(Component.translatable("bloompets.faint", pet.getName(), String.format("%d:%02d", seconds / 60, seconds % 60))
+					.withStyle(ChatFormatting.GRAY), true);
 		}
 
 		PetEvents.observe(pet);

@@ -247,6 +247,6 @@ public final class PetLevels {
 			text.append(Component.translatable("bloompets.levelup.unlocked").withStyle(ChatFormatting.GRAY));
 		}
 
-		player.sendSystemMessage(text);
+		player.displayClientMessage(text, true);
 	}
 }

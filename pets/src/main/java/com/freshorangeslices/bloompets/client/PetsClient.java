@@ -5,6 +5,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import java.util.UUID;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -13,6 +14,7 @@ import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -27,6 +29,8 @@ public final class PetsClient {
 
 	public static void init(IEventBus modBus) {
 		modBus.addListener((RegisterKeyMappingsEvent event) -> event.register(OPEN));
+		modBus.addListener((FMLClientSetupEvent event) -> event.enqueueWork(
+				() -> MenuScreens.register(com.freshorangeslices.bloompets.BloomPets.POUCH.get(), PouchScreen::new)));
 		MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> {
 			if (event.phase != TickEvent.Phase.END) {
 				return;

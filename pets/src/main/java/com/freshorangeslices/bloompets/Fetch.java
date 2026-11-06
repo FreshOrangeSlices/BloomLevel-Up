@@ -297,6 +297,6 @@ public final class Fetch {
 			player.drop(ball, false);
 		}
 
-		player.displayClientMessage(Component.translatable("bloompets.ball.got").withStyle(ChatFormatting.LIGHT_PURPLE), false);
+		player.displayClientMessage(Component.translatable("bloompets.ball.got").withStyle(ChatFormatting.LIGHT_PURPLE), true);
 	}
 }

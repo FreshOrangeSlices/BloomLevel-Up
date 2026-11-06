@@ -8,14 +8,12 @@ import java.util.function.Predicate;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.IItemHandler;
 
 /**
  * A companion's own inventory, as its mod keeps it (Bloom Pets doesn't compile against those mods): a public
- * {@code getInventory()} that gives a {@link Container} (a Migamigos companion's backpack), and Forge's item capability
- * (a Zoni's companion's slots; every living thing has one too, for what it holds and wears). A hungry companion that's
- * out with its owner takes a meal from it (FreshOrangeSlices, 2026-11-05).
+ * {@code getInventory()} that gives a {@link Container} (a Migamigos companion's backpack). A hungry companion that's
+ * out with its owner takes a meal from it (FreshOrangeSlices, 2026-11-05). Zoni's companions have nothing but what
+ * they hold and wear (FreshOrangeSlices' playtest), so they're fed by hand.
  */
 public final class CompanionInventory {
 	private static final Map<Class<?>, Optional<Method>> GETTERS = new ConcurrentHashMap<>();
@@ -23,7 +21,7 @@ public final class CompanionInventory {
 	private CompanionInventory() {
 	}
 
-	/** Takes one of the first stack that's {@code wanted}, from the backpack first, then the item capability. */
+	/** Takes one of the first stack that's {@code wanted} from its backpack. */
 	public static boolean takeOne(Entity entity, Predicate<ItemStack> wanted) {
 		Container box = container(entity);
 
@@ -32,18 +30,6 @@ public final class CompanionInventory {
 				if (wanted.test(box.getItem(i))) {
 					box.removeItem(i, 1);
 					box.setChanged();
-					return true;
-				}
-			}
-		}
-
-		Optional<IItemHandler> handler = entity.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve();
-
-		if (handler.isPresent()) {
-			IItemHandler items = handler.get();
-
-			for (int i = 0; i < items.getSlots(); i++) {
-				if (wanted.test(items.getStackInSlot(i)) && !items.extractItem(i, 1, false).isEmpty()) {
 					return true;
 				}
 			}

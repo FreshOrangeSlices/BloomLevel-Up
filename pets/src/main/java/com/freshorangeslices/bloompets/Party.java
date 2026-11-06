@@ -39,6 +39,7 @@ public final class Party {
 
 			if (entity != null) {
 				Pets.setParty(entity, false);
+				PetModes.partyChanged(entity, false);
 			}
 		}
 
@@ -56,6 +57,7 @@ public final class Party {
 			// Joining the party takes it off its post.
 			PetPosts.leave(entity);
 			Pets.setParty(entity, true);
+			PetModes.partyChanged(entity, true);
 
 			if (entity instanceof LivingEntity living) {
 				living.setHealth(living.getMaxHealth());

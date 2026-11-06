@@ -11,15 +11,24 @@ import net.minecraft.world.inventory.MenuType;
 
 /**
  * A Bloom pet's storage (small 9 slots, medium 18, pack 27; the Vex has none), kept with the pet's entry in the world's
- * pet list, so it opens from anywhere. Modded companions keep their own mod's inventory and have none here.
+ * pet list, so it opens from anywhere. A companion with a backpack of its own (Migamigos) keeps its food there; one
+ * without (Zoni's Companions) gets a food pouch here, two slots of cooked food it eats from when it's hungry
+ * (FreshOrangeSlices' playtest, 2026-11-05), opened from the pet screen's Storage.
  */
 public final class PetStorage {
+	/** A companion's food pouch. */
+	public static final int POUCH = 2;
+
 	private PetStorage() {
 	}
 
 	/** Opens the pet's storage for its owner; returns a message if it has none, else null. */
 	public static Component open(ServerPlayer player, PetRegistry.Record record) {
-		if (record.kind != Pets.Kind.BLOOM || record.slots <= 0) {
+		if (record.kind == Pets.Kind.MODDED) {
+			return openPouch(player, record);
+		}
+
+		if (record.slots <= 0) {
 			return Component.translatable("bloompets.storage.none", record.name);
 		}
 
@@ -51,6 +60,32 @@ public final class PetStorage {
 		container.fromTag(record.items);
 		player.openMenu(new SimpleMenuProvider((id, inventory, p) -> new ChestMenu(type, id, inventory, container, rows),
 				Component.translatable("bloompets.storage.title", record.name)));
+		return null;
+	}
+
+	/** A companion's food pouch (it's open even while it sulks: food is what cheers it up). */
+	private static Component openPouch(ServerPlayer player, PetRegistry.Record record) {
+		if (record.slots <= 0) {
+			return Component.translatable("bloompets.screen.storage.modded", record.name);
+		}
+
+		PetRegistry registry = PetRegistry.get(player.server);
+		SimpleContainer pouch = new SimpleContainer(POUCH) {
+			@Override
+			public void setChanged() {
+				super.setChanged();
+				record.items = createTag();
+				registry.setDirty();
+			}
+
+			@Override
+			public boolean canPlaceItem(int slot, net.minecraft.world.item.ItemStack stack) {
+				return stack.is(Bonding.COMPANION_FOOD);
+			}
+		};
+		pouch.fromTag(record.items);
+		player.openMenu(new SimpleMenuProvider((id, inventory, p) -> new PouchMenu(id, inventory, pouch),
+				Component.translatable("bloompets.pouch.title", record.name)));
 		return null;
 	}
 

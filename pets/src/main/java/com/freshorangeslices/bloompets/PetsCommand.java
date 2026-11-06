@@ -22,8 +22,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 
 /**
- * {@code /bloompets} (also {@code /pets}): list your pets, put one in your party, call one, open one's storage, the
- * roster, the pet screen; and for operators, give a player a bonded pet, set a pet's level or give it XP.
+ * {@code /bloompets} (also {@code /pets}): list your pets, put one in your party, call one, open one's storage, tell one
+ * to follow, wander or stay, rename or release one, the roster, the pet screen; and for operators, give a player a
+ * bonded pet, set a pet's level or give it XP.
  */
 public final class PetsCommand {
 	private PetsCommand() {
@@ -37,6 +38,13 @@ public final class PetsCommand {
 				.then(Commands.literal("call").then(pet().executes(c -> act(c, Action.CALL))))
 				.then(Commands.literal("storage").then(pet().executes(c -> act(c, Action.STORAGE))))
 				.then(Commands.literal("post").then(pet().executes(c -> act(c, Action.POST))))
+				.then(Commands.literal("release").then(pet().executes(c -> act(c, Action.RELEASE))))
+				.then(Commands.literal("mode").then(Commands.argument("mode", StringArgumentType.word())
+						.suggests((c, b) -> SharedSuggestionProvider.suggest(List.of("follow", "wander", "stay"), b))
+						.then(pet().executes(c -> act(c, Action.MODE)))))
+				// The new name first, in quotes if it has spaces: /bloompets rename "Big Bocchi" 2 ("" for its own name).
+				.then(Commands.literal("rename").then(Commands.argument("name", StringArgumentType.string())
+						.then(pet().executes(c -> act(c, Action.RENAME)))))
 				.then(Commands.literal("tree").then(Commands.argument("tree", StringArgumentType.word())
 						.suggests((c, b) -> SharedSuggestionProvider.suggest(List.of("sword", "axe", "trident", "unarmed", "reset"), b))
 						.then(pet().executes(PetsCommand::tree))))
@@ -79,7 +87,7 @@ public final class PetsCommand {
 	}
 
 	private enum Action {
-		PARTY, CALL, STORAGE, POST
+		PARTY, CALL, STORAGE, POST, RELEASE, MODE, RENAME
 	}
 
 	private static com.mojang.brigadier.builder.RequiredArgumentBuilder<CommandSourceStack, String> pet() {
@@ -120,6 +128,9 @@ public final class PetsCommand {
 			case CALL -> Calling.call(player, record);
 			case STORAGE -> PetStorage.open(player, record);
 			case POST -> PetPosts.toggle(player, record);
+			case RELEASE -> Release.release(player, record);
+			case MODE -> PetModes.change(player, record, StringArgumentType.getString(context, "mode"));
+			case RENAME -> PetModes.rename(player, record, StringArgumentType.getString(context, "name"));
 		};
 
 		if (message != null) {

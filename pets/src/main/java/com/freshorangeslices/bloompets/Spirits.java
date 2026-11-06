@@ -3,10 +3,7 @@ package com.freshorangeslices.bloompets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -16,7 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -25,7 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * of the combat kinds' skill trees when it's added to its owner's pet list, at even odds (Wolf, Iron Golem, Polar
  * Bear, Goat, Panda; never the Vex): the "Spirit of the Wolf" and so on, with a Bloom pet's skills and numbers at the
  * companion's own level, working whenever it isn't sulking (a companion is always with its owner's band). The owner is
- * told at once, with Keep and Reroll to click (and the pet screen asks too, until it's settled); **one reroll, ever**,
+ * told at once above the hotbar, and the pet screen asks Keep or Reroll until it's settled; **one reroll, ever**,
  * always to another kind. Companions listed before this version get theirs the first time it sees them.
  * <p>
  * A companion at its top level (100, or a Migamigos Amigo's 99) gets the level-100 perks: a gold name and a sparkle,
@@ -85,7 +82,10 @@ public final class Spirits {
 		PetEvents.observe(pet);
 	}
 
-	/** "Claymore gained the Spirit of the Wolf. [Keep] [Reroll]", in chat, the buttons running the commands. */
+	/**
+	 * "Claymore gained the Spirit of the Wolf: open your pets (K) to keep it or reroll", above the hotbar (not chat:
+	 * FreshOrangeSlices, 2026-11-05); the pet screen asks Keep or Reroll when its page opens.
+	 */
 	static void offer(ServerPlayer owner, LivingEntity pet) {
 		PetSkills.Kind kind = of(pet);
 
@@ -93,20 +93,9 @@ public final class Spirits {
 			return;
 		}
 
-		String id = pet.getUUID().toString();
-		MutableComponent text = Component.translatable("bloompets.spirit.gained", pet.getName(),
-				Component.translatable(nameKey(kind)).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.LIGHT_PURPLE);
-		text.append(" ").append(button("bloompets.spirit.keep.button", "bloompets.spirit.keep.hover", "/bloompets spirit keep " + id, ChatFormatting.GREEN));
-		text.append(" ").append(button("bloompets.spirit.reroll.button", "bloompets.spirit.reroll.hover", "/bloompets spirit reroll " + id,
-				ChatFormatting.YELLOW));
-		owner.sendSystemMessage(text);
+		owner.displayClientMessage(Component.translatable("bloompets.spirit.gained.bar", pet.getName(),
+				Component.translatable(nameKey(kind)).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.LIGHT_PURPLE), true);
 		owner.playNotifySound(SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.NEUTRAL, 0.8F, 1.2F);
-	}
-
-	private static Component button(String label, String hover, String command, ChatFormatting color) {
-		return Component.translatable(label).withStyle(style -> style.withColor(color).withBold(true)
-				.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command))
-				.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable(hover))));
 	}
 
 	/** The owner keeps the Spirit it has. */
@@ -156,15 +145,17 @@ public final class Spirits {
 
 	/**
 	 * The second wind of a companion at its top level: a blow that would kill it leaves it at half health, once each time
-	 * it's called. Before the add-on's keepsake (which takes a fallen companion away), hence LOW.
+	 * it's called. Taken as the blow lands, before it dies: a companion's own mod may do things as it dies that no
+	 * called-off death undoes (Zoni's drop its gear and swap its summon device). Last, so armour and other mods have had
+	 * their say on how hard the blow is.
 	 */
-	@SubscribeEvent(priority = EventPriority.LOW)
-	public static void onDeath(LivingDeathEvent event) {
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onDamage(LivingDamageEvent event) {
 		LivingEntity pet = event.getEntity();
 		DamageSource source = event.getSource();
 
-		if (event.isCanceled() || pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.MODDED || Pets.owner(pet) == null
-				|| !PetLevels.maxed(pet) || source.is(DamageTypes.GENERIC_KILL) || source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
+		if (event.isCanceled() || pet.level().isClientSide() || event.getAmount() < pet.getHealth() || Pets.kind(pet) != Pets.Kind.MODDED
+				|| Pets.owner(pet) == null || !PetLevels.maxed(pet) || source.is(DamageTypes.GENERIC_KILL) || source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
 			return;
 		}
 

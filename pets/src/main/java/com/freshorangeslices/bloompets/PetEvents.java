@@ -84,7 +84,7 @@ public final class PetEvents {
 
 		// Released while it was away: free now.
 		if (releasedBy != null) {
-			Release.free(entity, releasedBy);
+			Release.free(entity, releasedBy, true);
 			return;
 		}
 
@@ -133,6 +133,11 @@ public final class PetEvents {
 
 		if (Fainting.resting(entity)) {
 			Fainting.rest(entity);
+		}
+
+		// A summoned companion released while away (or by an older version) goes back into its device.
+		if (entity.tickCount % 20 == 1) {
+			Release.tick(entity);
 		}
 
 		if (entity.tickCount % 20 != 0 || !Pets.listed(entity)) {

@@ -158,31 +158,32 @@ public final class ZoniGameTests {
 		helper.succeed();
 	}
 
-	@SuppressWarnings("unchecked")
 	@GameTest(template = "empty")
-	public static void aReleasedCompanionGoesBackToTheWild(GameTestHelper helper) {
+	public static void aReleasedCompanionGoesBackIntoItsDevice(GameTestHelper helper) {
 		ServerPlayer owner = player(helper);
 		Mob mob = bocchi(helper, owner, false);
 		PetRegistry.Record record = record(helper, mob);
-
-		// Zoni's own "tamed" flag on, as its summon device leaves it.
-		try {
-			mob.getEntityData().set((net.minecraft.network.syncher.EntityDataAccessor<Boolean>) mob.getClass().getField("DATA_Tamed").get(null), true);
-		} catch (ReflectiveOperationException e) {
-			helper.fail("Bocchi's DATA_Tamed: " + e);
-		}
-
+		net.minecraft.world.item.Item summon = Release.summonItem(record.type);
+		ResourceLocation emptyId = new ResourceLocation(ZONI, "empty_summon_item");
+		String items = ForgeRegistries.ITEMS.getKeys().stream().filter(id -> id.getNamespace().equals(ZONI))
+				.map(ResourceLocation::getPath).collect(Collectors.joining(", "));
+		helper.assertTrue(summon != null && ForgeRegistries.ITEMS.containsKey(emptyId), "Bocchi's summon item and the empty one are found (" + items + ")");
+		owner.getInventory().add(new ItemStack(ForgeRegistries.ITEMS.getValue(emptyId)));
+		mob.setItemSlot(net.minecraft.world.entity.EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+		mob.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
 		SimpleContainer pouch = new SimpleContainer(PetStorage.POUCH);
 		pouch.setItem(0, new ItemStack(Items.BREAD, 4));
 		record.items = pouch.createTag();
 
 		Release.release(owner, record);
-		helper.assertTrue(record(helper, mob) == null && !Pets.listed(mob), "It's off the list");
-		TamableAnimal tamable = (TamableAnimal) mob;
-		helper.assertTrue(!tamable.isTame() && tamable.getOwnerUUID() == null, "and untamed in Zoni's Companions, nobody's");
-		helper.assertFalse(mob.saveWithoutId(new net.minecraft.nbt.CompoundTag()).getBoolean("DataTamed"), "its own tamed flag off too");
-		helper.assertTrue(PetEvents.observe(mob) == null && record(helper, mob) == null, "and it doesn't come back on the list");
-		helper.assertTrue(owner.getInventory().countItem(Items.BREAD) == 4, "Its pouch's food is its owner's");
+		helper.assertTrue(mob.isRemoved() && record(helper, mob) == null, "Back into its device: gone, and off the list");
+		helper.assertTrue(owner.getInventory().countItem(summon) == 1 && owner.getInventory().countItem(ForgeRegistries.ITEMS.getValue(emptyId)) == 0,
+				"Its summon item is its owner's, in place of the empty one");
+		helper.assertTrue(owner.getInventory().countItem(Items.BREAD) == 4, "and its pouch's food");
+		AABB box = new AABB(helper.absolutePos(BlockPos.ZERO), helper.absolutePos(new BlockPos(8, 8, 8)));
+		var dropped = helper.getLevel().getEntitiesOfClass(ItemEntity.class, box);
+		helper.assertTrue(dropped.stream().anyMatch(i -> i.getItem().is(Items.IRON_HELMET)) && dropped.stream().anyMatch(i -> i.getItem().is(Items.IRON_SWORD)),
+				"Its gear dropped where it stood");
 		helper.succeed();
 	}
 }

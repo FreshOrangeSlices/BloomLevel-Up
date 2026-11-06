@@ -275,8 +275,11 @@ public final class PetScreen extends Screen {
 					PetsNetwork.Entry pet = current();
 
 					if (pet != null) {
-						confirm(Component.translatable(pet.kind() == Pets.Kind.MODDED ? "bloompets.screen.release.confirm.companion"
-								: "bloompets.screen.release.confirm", pet.name()), () -> PetsClient.act(PetsNetwork.Action.RELEASE, pet.pet()));
+						// A summoned companion (Zoni's) goes back into its device; other companions and Bloom pets to the wild.
+						String key = pet.kind() != Pets.Kind.MODDED ? "bloompets.screen.release.confirm"
+								: com.freshorangeslices.bloompets.Release.summonItem(pet.type()) != null ? "bloompets.screen.release.confirm.summoned"
+								: "bloompets.screen.release.confirm.companion";
+						confirm(Component.translatable(key, pet.name()), () -> PetsClient.act(PetsNetwork.Action.RELEASE, pet.pet()));
 						updateButtons();
 					}
 				}));

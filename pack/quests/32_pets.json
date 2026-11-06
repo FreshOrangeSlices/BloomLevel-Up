@@ -1,0 +1,354 @@
+{
+  "id": "pets",
+  "group": "guides",
+  "title": "Pets",
+  "subtitle": [
+    "Friends who grow with you."
+  ],
+  "icon": "minecraft:lead",
+  "mods": [
+    "bloompets"
+  ],
+  "progression_mode": "flexible",
+  "quests": [
+    {
+      "id": "bond",
+      "title": "A Friend for Life",
+      "icon": "minecraft:bone",
+      "shape": "heart",
+      "x": 0,
+      "y": 0,
+      "description": [
+        "Sneak and right-click a wild animal holding its favourite food, a few times over, and it's your pet for good: a wolf with a bone, a cat with fish, a cow with wheat. Taming one the usual way counts too.",
+        "",
+        "Open your pets with K, or the tab with a lead on it under the Skill Hub's button in your inventory. Every new pet comes with a Ball."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/bond",
+          "title": "Bond with a pet"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 2
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 50
+        }
+      ]
+    },
+    {
+      "id": "fetch",
+      "title": "Go Get It!",
+      "icon": "bloompets:ball",
+      "x": 1.5,
+      "y": -1,
+      "deps": [
+        "bond"
+      ],
+      "optional": true,
+      "description": [
+        "Put a pet in your party (the Party button in the pet screen) and right-click the Ball: it runs for it and brings it back to your feet.",
+        "",
+        "Fetch cheers a pet up and earns it XP, once every 15 seconds. The Iron Golem won't play, and neither will companions."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/fetch",
+          "title": "Play fetch"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 2
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 25
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 25
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 25
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 25
+        }
+      ]
+    },
+    {
+      "id": "level_10",
+      "title": "Growing Up",
+      "icon": "minecraft:experience_bottle",
+      "x": 1.5,
+      "y": 0.5,
+      "deps": [
+        "bond"
+      ],
+      "description": [
+        "Pets level from 1 to 100. Fighters learn by fighting beside you; the others by spending time with you, walking with you and being fed.",
+        "",
+        "A fighter's skills open up as it levels: hover its slots in the pet screen to see what's coming."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/level_10",
+          "title": "A pet at level 10"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 3
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 50
+        }
+      ]
+    },
+    {
+      "id": "post",
+      "title": "On Guard",
+      "icon": "minecraft:oak_fence",
+      "x": 3,
+      "y": 0,
+      "deps": [
+        "level_10"
+      ],
+      "description": [
+        "From level 8 a pet can keep a post: the Post button leaves it where it stands, out of your party, and it gets to work.",
+        "",
+        "Fighters guard the spot; a bee tends the crops around it, an allay gathers what's dropped, a sniffer digs, a llama spits at intruders, a cat keeps watch. Up to three posts each."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/post",
+          "title": "Post a pet"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 3
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 50
+        }
+      ]
+    },
+    {
+      "id": "level_25",
+      "title": "Old Friends",
+      "icon": "minecraft:golden_apple",
+      "x": 3,
+      "y": 1.5,
+      "deps": [
+        "level_10"
+      ],
+      "description": [
+        "Keep your pet fed and happy (pat it: sneak and right-click with an empty hand) and it keeps growing.",
+        "",
+        "A sad pet sulks: its skills, bonus and job rest until it cheers up."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/level_25",
+          "title": "A pet at level 25"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 50
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 50
+        }
+      ]
+    },
+    {
+      "id": "one_and_the_same",
+      "title": "One and the Same",
+      "icon": "minecraft:iron_sword",
+      "shape": "hexagon",
+      "x": 4.5,
+      "y": 0.75,
+      "deps": [
+        "level_25",
+        "post"
+      ],
+      "min_deps": 1,
+      "description": [
+        "In the Skill Hub's Combat tab, right under Copycat: One and the Same, for 3 Major points. Your fighting pets and companions can follow a weapon tree of their own.",
+        "",
+        "Once you have it, the pet screen gets a Pet / Bloom switch at its top right."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/one_and_the_same",
+          "title": "Take One and the Same"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 100
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 100
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 100
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 100
+        }
+      ]
+    },
+    {
+      "id": "tree",
+      "title": "Sword, Axe, Trident or Fists",
+      "icon": "minecraft:trident",
+      "shape": "gear",
+      "x": 6,
+      "y": 0.75,
+      "deps": [
+        "one_and_the_same"
+      ],
+      "description": [
+        "In the pet screen's Bloom view, pick a tree for a fighting pet: Sword, Axe, Trident or Unarmed. Its effects open at the pet's levels 10, 25, 50 and 75, beside its own skills.",
+        "",
+        "A tree stays until you reset it, and a reset costs a pet half its level, so choose with care."
+      ],
+      "tasks": [
+        {
+          "type": "advancement",
+          "advancement": "bloompets:pets/tree",
+          "title": "Give a pet a weapon tree"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 100
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 100
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 100
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 100
+        }
+      ]
+    }
+  ]
+}

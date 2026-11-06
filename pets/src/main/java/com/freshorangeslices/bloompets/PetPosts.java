@@ -131,6 +131,7 @@ public final class PetPosts {
 		}
 
 		take(mob, mob.blockPosition());
+		PetAdvancements.award(player, PetAdvancements.POST);
 		record.post = mob.blockPosition();
 		PetEvents.observe(mob);
 		player.playNotifySound(SoundEvents.NOTE_BLOCK_CHIME.value(), net.minecraft.sounds.SoundSource.NEUTRAL, 0.7F, 1.2F);

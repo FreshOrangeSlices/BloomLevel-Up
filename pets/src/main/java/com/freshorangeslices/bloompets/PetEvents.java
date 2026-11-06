@@ -44,7 +44,21 @@ public final class PetEvents {
 			Spirits.ensure(living);
 		}
 
-		return PetRegistry.get(entity.level().getServer()).upsert(owner, entity);
+		PetRegistry registry = PetRegistry.get(entity.level().getServer());
+		boolean added = registry.find(entity.getUUID()) == null;
+		PetRegistry.Record record = registry.upsert(owner, entity);
+
+		// A new Bloom pet (bonded, tamed or given): a Ball for its owner, and the quest book's first step.
+		if (added && record.kind == Pets.Kind.BLOOM) {
+			ServerPlayer player = entity.getServer().getPlayerList().getPlayer(owner);
+
+			if (player != null) {
+				Fetch.giveBall(player);
+				PetAdvancements.award(player, PetAdvancements.BOND);
+			}
+		}
+
+		return record;
 	}
 
 	@SubscribeEvent

@@ -199,7 +199,22 @@ public final class PetLevels {
 
 		PetEvents.observe(pet);
 
-		if (!announce || !(pet.level() instanceof ServerLevel level)) {
+		if (!(pet.level() instanceof ServerLevel level)) {
+			return;
+		}
+
+		UUID ownerId = Pets.owner(pet);
+		ServerPlayer ownerPlayer = ownerId == null ? null : level.getServer().getPlayerList().getPlayer(ownerId);
+
+		if (ownerPlayer != null && to >= 10) {
+			PetAdvancements.award(ownerPlayer, PetAdvancements.LEVEL_10);
+		}
+
+		if (ownerPlayer != null && to >= 25) {
+			PetAdvancements.award(ownerPlayer, PetAdvancements.LEVEL_25);
+		}
+
+		if (!announce) {
 			return;
 		}
 

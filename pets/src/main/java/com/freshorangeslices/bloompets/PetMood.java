@@ -288,6 +288,11 @@ public final class PetMood {
 		}
 	}
 
+	/** A game of fetch: +{@value Fetch#MOOD} (its own 15 seconds apart, kept by {@link Fetch}). */
+	static void played(ServerPlayer owner, LivingEntity pet) {
+		cheer(owner, pet, Fetch.MOOD);
+	}
+
 	/** Sneak + right-click with an empty hand: a pat on the head (cheers it up every 30 seconds). Public for the game tests. */
 	public static void pat(ServerPlayer owner, LivingEntity pet) {
 		ServerLevel level = owner.serverLevel();

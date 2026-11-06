@@ -40,7 +40,7 @@ import re
 
 GROUPS = {"guides": "Guides", "bosses": "Bosses"}
 TABS = {"combat": "Combat", "armor": "Armor", "utility": "Utility", "misc": "Misc"}
-ALWAYS = {"minecraft", "forge", "bloomlevelup", "legionwarex", "ftbquests"}
+ALWAYS = {"minecraft", "forge", "bloomlevelup", "legionwarex", "bloompets", "ftbquests"}
 SHAPES = {"circle", "square", "rsquare", "diamond", "pentagon", "hexagon", "octagon", "heart", "gear", "none"}
 MODES = {"default", "linear", "flexible"}
 

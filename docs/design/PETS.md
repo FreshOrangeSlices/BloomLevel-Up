@@ -450,3 +450,16 @@ Intervention. The screen shows "Spirit of the Wolf" where a Bloom pet shows its 
 **Top level**: 100, or an Amigo's 99 (FreshOrangeSlices: the perks at 99): a gold name, a sparkle, and a second wind
 once each time it's called (a blow that would kill it leaves it at half health; before the add-on's keepsake).
 `/bloompets info` shows the Spirit. Game tests: `SpiritGameTests` (a Migamigos Claymore).
+
+**Phase 5c (built, 2026-11-05): fetch and the Pets chapter.** **The Ball** (`bloompets:ball`, the Heart of the Sea's
+look, stacks to 16, no recipe): one is given with every new Bloom pet (bonded, tamed or given; FreshOrangeSlices: Bloom
+pets only). Right-click throws it for the pet in your party (`Fetch`, the plugin's rules above: every Bloom pet but the
+Iron Golem and the Vex; not while it's fainted, sitting or ridden); a goal ahead of all its others runs it to the ball
+and home, the ball on its head; at your feet the ball is back in your inventory, as it is when the pet can't reach it,
+after 25 seconds, or when anything ends the game (a thrown ball left over after a restart becomes an ordinary ball
+anyone can pick up). Each fetch: 22 XP and +8 mood, at most every 15 seconds. **Quiet advancements**
+(`bloompets:pets/bond|level_10|level_25|post|one_and_the_same|tree|fetch`, no display, awarded by code:
+`PetAdvancements`) for **the quest book's Pets chapter** (`pack/quests/32_pets.json`, a flexible guide chapter): A Friend
+for Life (bond), Go Get It! (fetch, optional), Growing Up (level 10), On Guard (a post), Old Friends (level 25), One and
+the Same, Sword, Axe, Trident or Fists (a tree); rewards in vanilla levels and Bloom XP for every tab
+(FreshOrangeSlices: all tabs; 25 to 50 each, 100 each for the last two). Game tests: `FetchGameTests`.

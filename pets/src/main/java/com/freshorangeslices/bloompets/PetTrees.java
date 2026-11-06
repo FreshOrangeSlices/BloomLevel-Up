@@ -193,7 +193,12 @@ public final class PetTrees {
 			return;
 		}
 
-		PetRegistry.get(player.server).setOneAndTheSame(player.getUUID(), BloomBridge.oneAndTheSame(player));
+		boolean has = BloomBridge.oneAndTheSame(player);
+		PetRegistry.get(player.server).setOneAndTheSame(player.getUUID(), has);
+
+		if (has) {
+			PetAdvancements.award(player, PetAdvancements.ONE_AND_THE_SAME);
+		}
 	}
 
 	/** Whether the pet's owner has One and the Same on (as last seen while they were online). */
@@ -256,6 +261,7 @@ public final class PetTrees {
 
 		Pets.data(pet).putString("tree", tree.id());
 		remember(player);
+		PetAdvancements.award(player, PetAdvancements.TREE);
 		PetEvents.observe(pet);
 		player.playNotifySound(SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS, 0.8F, 1.0F);
 		return Component.translatable("bloompets.tree.picked", record.name, Component.translatable("bloompets.tree." + tree.id()))

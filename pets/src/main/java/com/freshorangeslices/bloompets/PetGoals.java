@@ -35,6 +35,11 @@ public final class PetGoals {
 		// At its post (any pet, wolves and cats too: it keeps them from following their owner off).
 		mob.goalSelector.addGoal(2, new HoldPost(mob));
 
+		// Fetch, ahead of every goal that moves it.
+		if (Fetch.plays(mob)) {
+			mob.goalSelector.addGoal(0, new Fetch.FetchGoal(mob));
+		}
+
 		if (combat) {
 			mob.targetSelector.addGoal(1, new GuardPost(mob));
 		}

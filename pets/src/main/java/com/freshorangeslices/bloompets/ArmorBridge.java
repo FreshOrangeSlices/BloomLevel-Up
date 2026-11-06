@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 /**
  * A companion's hidden armor, the Warionex add-on's (its {@code armor.HiddenArmor}, found by name: Bloom Pets doesn't
- * need the add-on, and without it the pet screen has no armor switch). The pet screen's eye hides all of a companion's
+ * need the add-on, and without it the pet screen has no armor switch). The pet screen's dot hides all of a companion's
  * armor for everyone, or shows it again; it still protects. FreshOrangeSlices' playtest, 2026-11-05.
  */
 public final class ArmorBridge {

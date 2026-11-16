@@ -50,6 +50,28 @@
       ]
     },
     {
+      "id": "fabled_weapons",
+      "title": "Fabled Weapons",
+      "icon": "fabledweaponry:greatsword_iron",
+      "x": 3, "y": 0,
+      "shape": "circle",
+      "deps": ["weapon_families"],
+      "mods": ["fabledweaponry"],
+      "description": [
+        "Fabled Weaponry's weapons come in every vanilla material, wood to netherite, and each kind has a passive of its own: read it in the weapon's tooltip. Search @fabled in JEI to see them all and how they're made.",
+        "",
+        "For Bloom, greatswords, scimitars, scythes and daggers are swords (Catch! throws the daggers), war axes, mauls and maces are axes, longbows are bows and ballistas are crossbows."
+      ],
+      "tasks": [
+        {"type": "checkmark", "title": "Make a Fabled weapon and read its passive"}
+      ],
+      "rewards": [
+        {"type": "xp_levels", "levels": 3},
+        {"type": "bloom_xp", "tab": "combat", "xp": 150},
+        {"type": "item", "item": "minecraft:iron_ingot", "count": 4}
+      ]
+    },
+    {
       "id": "steel",
       "title": "Blast Furnace Steel",
       "icon": "magistuarmory:steel_ingot",

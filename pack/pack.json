@@ -148,7 +148,7 @@
     },
     {
       "name": "magic-and-gear",
-      "_comment": "Iron's Spells as the mage, the RPG Series' Paladins & Priests and Rogues & Warriors (Spell Engine comes with them), weapons and armor, and the recipe glue for all of it. Marium's Soulslike Weaponry is on test (power creep).",
+      "_comment": "Iron's Spells as the mage, the RPG Series' Paladins & Priests and Rogues & Warriors (Spell Engine comes with them), weapons and armor, and the recipe glue for all of it. Marium's Soulslike Weaponry is on test (power creep). Fabled Weaponry (FreshOrangeSlices, 2026-11-16: weapons with passives; CurseForge only, packed inside).",
       "modrinth": [
         "irons-spells-n-spellbooks",
         "irons-lib",
@@ -159,11 +159,25 @@
         "mariums-soulslike-weaponry",
         "polymorph",
         "almostunified"
+      ],
+      "external": [
+        {
+          "name": "Fabled Weaponry",
+          "_why": "FreshOrangeSlices, 2026-11-16: its weapons and their passives (maces, warhammers, battle axes, scythes, greatswords, scimitars, daggers, longbows, crossbows, shields, aegises and tomes in each vanilla material). CurseForge only. Bloom sorts them (optional entries in its weapon tags); Better Combat swings come from the pack's data pack where its own name-based guesses miss.",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/fabled-weaponry",
+          "file": "fabledweaponry-1.20.1-1.0.7.5.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/5381/204/fabledweaponry-1.20.1-1.0.7.5.jar",
+            "https://edge.forgecdn.net/files/5381/204/fabledweaponry-1.20.1-1.0.7.5.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        }
       ]
     },
     {
       "name": "animation-and-qol",
-      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back. Sophisticated Backpacks (FreshOrangeSlices, 2026-11-04: backpacks worth having; leather to netherite, with upgrades; Sophisticated Core comes with it).",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back. Sophisticated Backpacks (FreshOrangeSlices, 2026-11-04: backpacks worth having; leather to netherite, with upgrades; Sophisticated Core comes with it). Tom's Simple Storage (FreshOrangeSlices, 2026-11-16: a friend wanted to craft from every chest in the base; all of it kept, wireless terminals too). Advanced Loot Info (FreshOrangeSlices, 2026-11-16: JEI shows which mobs, chests and blocks drop an item; on the server too, since loot tables live there).",
       "modrinth": [
         "punchy-fpa",
         "fwa",
@@ -172,10 +186,11 @@
         "carry-on",
         "emf-compat-carry-on",
         "jei",
+        "advanced-loot-info",
         "jade",
         "appleskin",
         "mouse-tweaks",
-        "inventory-profiles-next", "sophisticated-backpacks",
+        "inventory-profiles-next", "sophisticated-backpacks", "toms-storage",
         "crafting-tweaks",
         "lootr",
         "corpse",
@@ -233,13 +248,38 @@
     },
     {
       "name": "world-and-decor",
-      "_comment": "Copper Age Backport (FreshOrangeSlices, 2026-10-29: copper tools and armor, which 1.20.1 doesn't have, and the rest of its copper lineup: chests, shelves, bars, chains, lanterns, torches, bulbs, doors and the copper golem; held at its last release). Biomes O' Plenty for the world (FreshOrangeSlices' pick; Terralith's biomes felt too big), and Decorative Blocks and Handcrafted for building (beams, braziers, chains, lattices and seats; vanilla-style furniture). BOP's Nether is cut back (config_files): Visceral Heap and Withered Abyss are off, and its Nether regions weigh 5 against vanilla's 10 (BOP's default is 13, more than half the Nether). Every Compat (Wood Good) makes the decor in BOP's woods too (and in any other mod's woods it knows); its blocks have their own creative tab.",
+      "_comment": "Copper Age Backport (FreshOrangeSlices, 2026-10-29: copper tools and armor, which 1.20.1 doesn't have, and the rest of its copper lineup: chests, shelves, bars, chains, lanterns, torches, bulbs, doors and the copper golem; held at its last release). Biomes O' Plenty for the world (FreshOrangeSlices' pick; Terralith's biomes felt too big), and Decorative Blocks and Handcrafted for building (beams, braziers, chains, lattices and seats; vanilla-style furniture). BOP's Nether is cut back (config_files): Visceral Heap and Withered Abyss are off, and its Nether regions weigh 5 against vanilla's 10 (BOP's default is 13, more than half the Nether). Every Compat (Wood Good) makes the decor in BOP's woods too (and in any other mod's woods it knows); its blocks have their own creative tab. More furniture and lights (FreshOrangeSlices, 2026-11-16): the whole Macaw's family (furniture, lights and lamps, windows, doors, trapdoors, roofs, bridges, fences and walls, paths, stairs and balconies, paintings; Every Compat makes them in BOP's woods too) and MrCrayfish's Furniture Mod: Refurbished (CurseForge only, packed inside).",
       "modrinth": [
         "biomes-o-plenty",
         "decorative-blocks",
         "handcrafted",
         "every-compat",
-        "backport-copper-age"
+        "backport-copper-age",
+        "macaws-furniture",
+        "macaws-lights-and-lamps",
+        "macaws-windows",
+        "macaws-doors",
+        "macaws-trapdoors",
+        "macaws-roofs",
+        "macaws-bridges",
+        "macaws-fences-and-walls",
+        "macaws-paths-and-pavings",
+        "macaws-stairs",
+        "macaws-paintings"
+      ],
+      "external": [
+        {
+          "name": "MrCrayfish's Furniture Mod: Refurbished",
+          "_why": "FreshOrangeSlices, 2026-11-16: more furniture (kitchens, lamps, sofas, its working appliances and mail). CurseForge only; runs on Framework, which the creatures layer already packs. Its last Forge 1.20.1 build.",
+          "page": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
+          "file": "refurbished_furniture-forge-1.20.1-1.0.12.jar",
+          "urls": [
+            "https://mediafilez.forgecdn.net/files/6272/885/refurbished_furniture-forge-1.20.1-1.0.12.jar",
+            "https://edge.forgecdn.net/files/6272/885/refurbished_furniture-forge-1.20.1-1.0.12.jar"
+          ],
+          "client": "required",
+          "server": "required"
+        }
       ]
     }
   ],

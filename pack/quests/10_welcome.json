@@ -371,6 +371,88 @@
         {"type": "bloom_xp", "tab": "misc", "xp": 100},
         {"type": "item", "item": "minecraft:bread", "count": 6}
       ]
+    },
+    {
+      "id": "storage_network",
+      "title": "Every Chest in One Screen",
+      "icon": "toms_storage:ts.crafting_terminal",
+      "x": 0.75,
+      "y": 6,
+      "shape": "circle",
+      "mods": [
+        "toms_storage"
+      ],
+      "description": [
+        "Tom's Simple Storage joins a base's chests into one. Put an Inventory Connector beside your chests (chests touching it, or each other, join; Inventory Cable reaches further), then a Storage Terminal or Crafting Terminal on the connector.",
+        "",
+        "The terminal shows everything in every connected chest, with a search box. The Crafting Terminal crafts straight from all of them, and JEI's + button fills its grid for you.",
+        "A Wireless Terminal reaches the network from across the base."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "toms_storage:ts.crafting_terminal",
+          "title": "Make a Crafting Terminal"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 3
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "utility",
+          "xp": 150
+        },
+        {
+          "type": "item",
+          "item": "minecraft:chest",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "who_drops_it",
+      "title": "Who Drops It?",
+      "icon": "minecraft:bone",
+      "x": 2.25,
+      "y": 6,
+      "shape": "circle",
+      "deps": [
+        "recipes_and_labels"
+      ],
+      "mods": [
+        "jei",
+        "ali"
+      ],
+      "description": [
+        "JEI also shows where things drop. Hover over an item and press R: besides its recipes there are tabs for the mobs that drop it, the chests it turns up in and the blocks that drop it, each with its chance.",
+        "",
+        "Only drops that come from loot tables show. A few mods give drops straight from their code, and those aren't listed."
+      ],
+      "tasks": [
+        {
+          "type": "checkmark",
+          "title": "Look up where something drops"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 2
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "misc",
+          "xp": 100
+        },
+        {
+          "type": "item",
+          "item": "minecraft:arrow",
+          "count": 16
+        }
+      ]
     }
   ]
 }

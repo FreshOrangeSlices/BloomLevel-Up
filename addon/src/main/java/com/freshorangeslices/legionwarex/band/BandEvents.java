@@ -2,6 +2,7 @@ package com.freshorangeslices.legionwarex.band;
 
 import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.Despawning;
+import com.freshorangeslices.legionwarex.world.IllagerCrowding;
 import java.util.List;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
@@ -104,10 +105,16 @@ public final class BandEvents {
 			return List.of();
 		}
 
+		// Rarer where illagers keep coming (world/IllagerCrowding).
+		if (!IllagerCrowding.roll(level, spot, random, "a war band")) {
+			return List.of();
+		}
+
 		List<Mob> band = Bands.spawn(level, BandKind.WAR, spot, random, Bands.vanillaSize(level, spot));
 
 		if (!band.isEmpty()) {
 			Bands.log(Bands.describe(BandKind.WAR, band) + " (near " + player.getScoreboardName() + ")");
+			IllagerCrowding.arrived(level, spot, "a war band");
 		}
 
 		return band;

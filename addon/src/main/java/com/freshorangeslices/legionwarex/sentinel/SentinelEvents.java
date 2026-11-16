@@ -3,6 +3,7 @@ package com.freshorangeslices.legionwarex.sentinel;
 import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.Despawning;
 import com.freshorangeslices.legionwarex.band.Bands;
+import com.freshorangeslices.legionwarex.world.IllagerCrowding;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -111,9 +112,18 @@ public final class SentinelEvents {
 				return null;
 			}
 
+			// A pillager scout is rarer where illagers keep coming (world/IllagerCrowding).
+			if (entry.roams() && !IllagerCrowding.roll(level, top, random, "a pillager scout")) {
+				return null;
+			}
+
 			Mob mob = Sentinels.spawn(level, entry, top, true);
 
 			if (mob != null) {
+				if (entry.roams()) {
+					IllagerCrowding.arrived(level, top, "a pillager scout");
+				}
+
 				Sentinels.log(entry.entity() + (entry.roams() ? " (scout)" : "") + " at " + top.toShortString() + " in "
 						+ biome.unwrapKey().map(key -> key.location().toString()).orElse("?") + " (near " + player.getScoreboardName() + ")");
 				return mob;

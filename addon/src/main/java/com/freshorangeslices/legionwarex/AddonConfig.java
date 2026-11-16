@@ -31,6 +31,11 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue SENTINEL_VANILLA_SHARE;
 	private static final ForgeConfigSpec.DoubleValue SCOUT_SHARE;
 	private static final ForgeConfigSpec.IntValue SENTINEL_FROM_DAY;
+	private static final ForgeConfigSpec.BooleanValue ILLAGER_CROWDING;
+	private static final ForgeConfigSpec.DoubleValue ILLAGER_HALF_LIFE;
+	private static final ForgeConfigSpec.DoubleValue ILLAGER_STRENGTH;
+	private static final ForgeConfigSpec.IntValue ILLAGER_RADIUS;
+	private static final ForgeConfigSpec.BooleanValue ILLAGER_NATURAL;
 	private static final ForgeConfigSpec.BooleanValue HARVEST_ALL_YEAR;
 	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
 	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
@@ -135,6 +140,29 @@ public final class AddonConfig {
 		SENTINEL_FROM_DAY = builder
 				.comment("The first day sentinels come (day 0 is the world's first).")
 				.defineInRange("sentinelFromDay", 1, 0, 1000);
+		builder.pop();
+
+		builder.comment("Illagers grow rarer where they keep turning up (FreshOrangeSlices, 2026-11-16: pillagers came too often). Each",
+				"vanilla patrol, war band or pillager scout that comes warms the chunk it came to; the next one goes ahead with a chance",
+				"of 1 / (1 + strength x warmth), warmth being what's in the chunks within the radius, and warmth halves every few days.",
+				"Raids, outposts and other structures' own illagers, spawners, spawn eggs and commands are left alone.",
+				"/legionwarex illagers [cool|warm <n>] shows or sets the warmth where it runs.").push("illagers");
+		ILLAGER_CROWDING = builder
+				.comment("Whether illagers grow rarer where they keep coming.")
+				.define("illagerCrowding", true);
+		ILLAGER_HALF_LIFE = builder
+				.comment("How long warmth takes to halve, in Minecraft days (20 minutes each).")
+				.defineInRange("illagerCoolingDays", 3.0, 0.25, 60.0);
+		ILLAGER_STRENGTH = builder
+				.comment("How much each arrival counts: with 1, one arrival halves the chance of the next, two make it a third, three a quarter.")
+				.defineInRange("illagerCrowdingStrength", 1.0, 0.0, 20.0);
+		ILLAGER_RADIUS = builder
+				.comment("How far an arrival's warmth reaches, in chunks (4 is 64 blocks: a base and its fields).")
+				.defineInRange("illagerCrowdingRadius", 4, 0, 16);
+		ILLAGER_NATURAL = builder
+				.comment("Whether illagers that spawn in the wild like other monsters (Illager Invasion's at night, The Graveyard's in the",
+						"dark) are thinned by the same warmth. They don't add to it: there are too many of them, coming and going out of sight.")
+				.define("illagerCrowdingNatural", true);
 		builder.pop();
 
 		builder.comment("The Harvest Court: Born in Chaos's pumpkin folk. Its spawn rule only lets them out from 25 October to 7 November;",
@@ -273,6 +301,26 @@ public final class AddonConfig {
 
 	public static int sentinelFromDay() {
 		return get(SENTINEL_FROM_DAY, 1);
+	}
+
+	public static boolean illagerCrowding() {
+		return get(ILLAGER_CROWDING, true);
+	}
+
+	public static double illagerCoolingDays() {
+		return get(ILLAGER_HALF_LIFE, 3.0);
+	}
+
+	public static double illagerCrowdingStrength() {
+		return get(ILLAGER_STRENGTH, 1.0);
+	}
+
+	public static int illagerCrowdingRadius() {
+		return get(ILLAGER_RADIUS, 4);
+	}
+
+	public static boolean illagerCrowdingNatural() {
+		return get(ILLAGER_NATURAL, true);
 	}
 
 	public static boolean dropsWhenKilledByMobs() {

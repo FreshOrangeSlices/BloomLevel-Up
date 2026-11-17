@@ -441,6 +441,18 @@ jobs:
         if: always()
         run: |
           [ -f pack-progress.txt ] && echo "::notice title=pack-progress::$(sed 's/%/%25/g' pack-progress.txt | sed ':a;N;$!ba;s/\n/%0A/g')" || true
+      # The client's warnings by mod, like the boot test's server-warnings (missing models and textures show only here).
+      - name: client warnings
+        if: always()
+        run: |
+          [ -f client-warnings.txt ] || exit 0
+          python3 -c "
+          import sys
+          t = open('client-warnings.txt').read()
+          esc = lambda x: x.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          for n, i in enumerate(range(0, min(len(t), 3900 * 6), 3900)):
+              print(f'::notice title=client-warnings-{n:02d}::{esc(t[i:i + 3900])}')
+          "
       - name: capture the client's screenshots and logs
         if: always()
         uses: actions/upload-artifact@v7

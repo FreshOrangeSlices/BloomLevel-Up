@@ -1381,7 +1381,9 @@
     },
     "copies": {
       "_comment": "Whole files copied over a mod's own once per change of their content. Xaero's Minimap's radar colors (FreshOrangeSlices: hostile red, passive green, neutral yellow, your own pets sky blue, players as their heads, no dropped items or projectiles, bigger dots): its default categories file, which every minimap profile without radar categories of its own reads. Neutral is a category of its own (mobs that only fight back), ahead of Hostile so endermen and piglins land there; tamed mobs anywhere are sky blue. Colors are Minecraft's chat colors by number (10 green, 11 aqua, 12 red, 14 yellow, 15 white). A \"file:\" value is a file under pack/files.",
-      "xaero/minimap/default_radar_categories_client.json": "file:xaero/default_radar_categories_client.json"
+      "xaero/minimap/default_radar_categories_client.json": "file:xaero/default_radar_categories_client.json",
+    "_toms_storage": "Inventory Profiles Next's buttons only on the player's side of Tom's terminals (2026-11-17): the terminal's grid isn't real slots and Tom's sorts it itself, so IPN's container buttons would only shuffle the Crafting Terminal's grid. IPN ships the same hint for Refined Storage's grids, none for Tom's.",
+    "inventoryprofilesnext/integrationHints/toms_storage.json": "file:inventoryprofilesnext/toms_storage.json"
     },
     "files": {
       "_comment": "Client config files, as given (the mod fills in every setting left out). A file under defaultconfigs/ is a mod's default, copied in only where the player has no config of their own yet (so an update never resets their settings). FreshOrangeSlices wants Minecraft's own title screen: Aquamirae swaps in its frozen-sea panorama and logo. Inventory Profiles Next's sort buttons sat on top of the Spell Binding Table's spell list (FreshOrangeSlices' playtest): an IPN hint switches IPN off on that screen (the table has nothing to sort).",

@@ -14,6 +14,7 @@ Checks: the client gets in, Bloom switched the pack's resource packs (and shader
 mob check, and nothing crashed. Results and the client's warnings go out as GitHub annotations; the screenshots are
 written as PNGs for the screenshot job.
 """
+import collections
 import json
 import os
 import re
@@ -1428,6 +1429,7 @@ def main():
     mods = next((l for l in client_log if re.search(r"Found \d+ mod|Loading \d+ mods|Mod List", l)), "")
     summary = [f"joined: {'yes' if joined else 'no'}", applied or "no pack defaults line", packs_line, mods.strip()] + notes
     print(f"::notice title=pack-launch::{esc(chr(10).join(summary)[:3900])}")
+    client_warnings(client_log)
     problems = [l for l in client_log if re.search(r"/ERROR\]|Exception|Caused by|Mixin apply failed|InvalidInjection|Missing or unsupported", l)]
     if problems:
         text = "\n".join(dict.fromkeys(problems))
@@ -1437,6 +1439,32 @@ def main():
         tail = "\n".join(client_log[-60:])
         print(f"::error title=pack-launch-failed::{esc(('; '.join(failures) + chr(10) + tail)[:3900])}")
         sys.exit(1)
+
+
+def client_warnings(client_log):
+    """Every distinct client warning and error, by the mod (namespace) it names, most frequent first, written to
+    client-warnings.txt for the workflow's next step to print (as the boot test does for the server): a mod's missing
+    models, textures and broken blockstates only show on the client. "Error loading class" lines (optional mixins for
+    mods that aren't there) are only counted."""
+    byns = collections.defaultdict(collections.Counter)
+    optional = 0
+    for line in client_log:
+        m = re.match(r"\[[^\]]+\] \[[^\]]+\] \[(WARN|ERROR)\] (.*)", line) or re.match(r"\[[^\]]+\] \[[^\]]+/(WARN|ERROR)\] (?:\[[^\]]+\]: |: )?(.*)", line)
+        if not m or "Can't keep up" in m.group(2):
+            continue
+        if m.group(2).startswith("Error loading class:"):
+            optional += 1
+            continue
+        names = re.findall(r"\b([a-z0-9_.-]+):[a-z0-9_/.-]+", m.group(2))
+        ns = next((x for x in names if x not in ("minecraft", "http", "https", "file", "union", "jar")), names[0] if names else "other")
+        byns[ns][f"[{m.group(1)}] " + re.sub(r"\d+", "#", m.group(2))[:200]] += 1
+    detail = [f"(and {optional} optional mixin classes not found: mods' extras for mods that aren't in the pack)"] if optional else []
+    for ns, counter in sorted(byns.items(), key=lambda kv: -sum(kv[1].values())):
+        detail.append(f"{ns}: {sum(counter.values())} lines")
+        for text, n in counter.most_common(4):
+            detail.append(f"    {n}x {text}")
+    with open("client-warnings.txt", "w") as out:
+        out.write("\n".join(detail) or "none")
 
 
 if __name__ == "__main__":

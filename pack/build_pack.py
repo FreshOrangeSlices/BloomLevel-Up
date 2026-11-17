@@ -112,6 +112,12 @@ To update later: stop the server, upload the new build's mods, config and defaul
 (delete the old mods folder first, so no old jar stays behind), start it again. The world stays, unless the update
 says it needs a new one (terrain changes only reach chunks made after them).
 
+Shared map (Unified Xaero Worldmap): the world map is kept on the server, in the world folder (unified_xaero_worldmap/),
+so everyone sees where anyone has been and a fresh install gets it back on joining. Once, after the first start with
+it: run /save-all, then /uxwm render, and the server draws everything already explored (the surface; caves and the
+Nether fill in as players go). /uxwm status shows how far it is. Players' own older maps (an old install's
+xaero/world-map/<server> folder) can go into unified_xaero_worldmap/import/ for /uxwm import.
+
 Voice chat (Simple Voice Chat): it needs one UDP port of its own, set up once on whichever machine runs the server.
 Friends don't open anything; they talk with Caps Lock (push-to-talk) and open the voice menu with Ctrl+V.
 - On a host (Shockbyte): in the panel, Ports -> Add Additional Port, and restart. Put that port's number after

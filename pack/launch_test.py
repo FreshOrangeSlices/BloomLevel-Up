@@ -712,14 +712,29 @@ def client_settings_check(game_dir):
     tips = os.path.join(game_dir, "tooltips.jsonl")
     if os.path.exists(tips):
         live = [json.loads(l) for l in open(tips, encoding="utf-8", errors="replace") if '"kind":"key"' in l.replace(" ", "")]
-        for name in ("keybinds.combatroll.roll", "key.bloomlevelup.weapon_skill", "key.push_to_talk"):
+        alone = ["keybinds.combatroll.roll", "key.bloomlevelup.weapon_skill", "key.push_to_talk"]
+        # The backpack's open key (B): Tom's Simple Storage's Open Terminal took it too (2026-11-19).
+        alone += [r["id"] for r in live if "sophisticatedbackpacks" in r.get("id", "") and r["id"].endswith("open_backpack")]
+        for name in alone:
             mine = next((r for r in live if r.get("id") == name), None)
             if mine is None or mine.get("key") == "key.keyboard.unknown":
                 continue
-            others = sorted(r["id"] for r in live if r.get("id") != name and r.get("key") == mine.get("key")
-                            and r.get("modifier", "NONE") == mine.get("modifier", "NONE") and r.get("context") in ("IN_GAME", "UNIVERSAL"))
+            if "clashes" in mine:  # Bloom's dump: same key, modifier and an overlapping context, so only one fires
+                others = sorted(mine["clashes"])
+            else:
+                others = sorted(r["id"] for r in live if r.get("id") != name and r.get("key") == mine.get("key")
+                                and r.get("modifier", "NONE") == mine.get("modifier", "NONE") and r.get("context") in ("IN_GAME", "UNIVERSAL"))
             if others:
                 failures.append(f"{mine['key']} should be {name}'s alone, but {', '.join(others)} use(s) it too")
+        # Every key two bindings fight over, for the client-warnings step (keys the pack shares on purpose left out).
+        fights = collections.defaultdict(set)
+        for r in live:
+            for other in r.get("clashes", []):
+                if wanted.get(r["id"]) is None or wanted.get(r["id"]) != wanted.get(other):
+                    fights[(r["key"], r.get("modifier", "NONE"))].update((r["id"], other))
+        with open("key-clashes.txt", "w") as out:
+            out.write("\n".join(f"{key}{'' if mod == 'NONE' else ' + ' + mod}: {', '.join(sorted(ids))}"
+                                 for (key, mod), ids in sorted(fights.items())) or "none")
     checked, kept = 0, 0
     for line in lines:
         word, _, rest = line.partition("=")

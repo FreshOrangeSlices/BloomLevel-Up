@@ -105,6 +105,16 @@ public final class TooltipDump {
 			out.addProperty("default", key.getDefaultKey().getName());
 			out.addProperty("defaultModifier", key.getDefaultKeyModifier().name());
 			out.addProperty("context", String.valueOf(key.getKeyConflictContext()));
+			// The bindings that share its key, modifier and context: only one of them fires.
+			JsonArray clashes = new JsonArray();
+
+			for (KeyMapping other : minecraft.options.keyMappings) {
+				if (other != key && clash(key, other)) {
+					clashes.add(other.getName());
+				}
+			}
+
+			out.add("clashes", clashes);
 			lines.add(GSON.toJson(out));
 		}
 
@@ -140,5 +150,15 @@ public final class TooltipDump {
 		}
 
 		return out;
+	}
+
+	/**
+	 * Two bindings where only one ever fires: the same key with the same modifier, in contexts that overlap (Forge's lookup
+	 * takes the first active one). Forge's Controls screen also marks a key against its Ctrl/Shift/Alt form, but those
+	 * both work, told apart by the modifier held.
+	 */
+	static boolean clash(KeyMapping a, KeyMapping b) {
+		return !a.isUnbound() && a.getKey().equals(b.getKey()) && a.getKeyModifier() == b.getKeyModifier()
+				&& (a.getKeyConflictContext().conflicts(b.getKeyConflictContext()) || b.getKeyConflictContext().conflicts(a.getKeyConflictContext()));
 	}
 }

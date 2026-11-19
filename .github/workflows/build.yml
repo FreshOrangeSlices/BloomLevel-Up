@@ -445,6 +445,7 @@ jobs:
       - name: client warnings
         if: always()
         run: |
+          [ -f key-clashes.txt ] && echo "::notice title=key-clashes::$(sed 's/%/%25/g' key-clashes.txt | sed ':a;N;$!ba;s/\n/%0A/g')" || true
           [ -f client-warnings.txt ] || exit 0
           python3 -c "
           import sys

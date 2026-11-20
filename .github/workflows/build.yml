@@ -8,6 +8,8 @@ on: [pull_request, push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-24.04
+    # A hung game test or runner otherwise holds the whole run for GitHub's 6 hours (twice by 2026-11-19); jobs take a few minutes.
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -123,6 +125,8 @@ jobs:
   # Gradle wrapper and game-tested on a real dedicated server with Migamigos loaded; the pack jobs pack its jar in.
   addon:
     runs-on: ubuntu-24.04
+    # A hung game test or runner otherwise holds the whole run for GitHub's 6 hours (twice by 2026-11-19); jobs take a few minutes.
+    timeout-minutes: 20
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -202,6 +206,8 @@ jobs:
   # wrapper and game-tested on a real dedicated server; the pack jobs pack its jar in.
   pets:
     runs-on: ubuntu-24.04
+    # A hung game test or runner otherwise holds the whole run for GitHub's 6 hours (twice by 2026-11-19); jobs take a few minutes.
+    timeout-minutes: 20
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -279,6 +285,8 @@ jobs:
   # throw and a charged slam.
   client-test:
     runs-on: ubuntu-24.04
+    # A hung game test or runner otherwise holds the whole run for GitHub's 6 hours (twice by 2026-11-19); jobs take a few minutes.
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -380,6 +388,8 @@ jobs:
     needs: [build, addon, pets]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
+    # A layer takes up to about 20 minutes; a hang fails here instead of holding the run for 6 hours.
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:

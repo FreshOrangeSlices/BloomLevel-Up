@@ -610,6 +610,26 @@ def mob_check(server, client, player, entities, with_egg, shots, server_dir=".")
     return failures, warnings, summoned
 
 
+def hold_mouse(button, seconds):
+    """Holds a mouse button down in the game window for {seconds} (xdotool on the virtual display); False when that
+    isn't possible."""
+    if not shutil.which("xdotool"):
+        return False
+    try:
+        found = subprocess.run(["xdotool", "search", "--name", "Minecraft"], capture_output=True, text=True, timeout=10)
+        window = (found.stdout.split() or [None])[0]
+        if window:
+            subprocess.run(["xdotool", "windowfocus", "--sync", window], check=False, timeout=10)
+        if subprocess.run(["xdotool", "mousedown", str(button)], check=False, timeout=10).returncode != 0:
+            return False
+        time.sleep(seconds)
+        subprocess.run(["xdotool", "mouseup", str(button)], check=False, timeout=10)
+        return True
+    except (OSError, subprocess.TimeoutExpired) as error:
+        print(f"couldn't hold mouse button {button}: {error}")
+        return False
+
+
 def press(key):
     """Types a key into the game window (xdotool on the virtual display); False when that isn't possible."""
     if not shutil.which("xdotool"):
@@ -970,7 +990,7 @@ def milk_check(server, server_dir):
     player drinks milk with Bad Omen on, logged as "LegionWareX milk:". Fails when the add-on is here but said nothing, or
     its cure didn't take Bad Omen off. When plain milk doesn't cure it in this layer, a pack-milk warning says so, so the
     first layer it shows up in points at the mod that stops it. Returns (failures, notes)."""
-    lines = [l for l in server.lines if "LegionWareX milk:" in l]
+    lines = [l for l in server.lines if "LegionWareX milk:" in l and ("plain milk cures" in l or "stand-in" in l)]
     mods = os.listdir(os.path.join(server_dir, "mods")) if os.path.isdir(os.path.join(server_dir, "mods")) else []
     if not lines:
         if any(m.lower().startswith("legionwarex") for m in mods):
@@ -983,6 +1003,49 @@ def milk_check(server, server_dir):
     if "failed" in line or "couldn't" in line or not line.endswith(": yes"):
         return [f"add-on: milk doesn't take Bad Omen off: {line[:300]}"], []
     return [], [f"add-on: milk: {line[:300]}"]
+
+
+def milk_drink_check(server, player):
+    """A real player drinking milk with Bad Omen on, the way a player does (right-click held on the client, looking at
+    the sky so no block or mob takes the click), with every mod in the layer. Fails when they drank and Bad Omen was
+    still on 3 seconds later. Warns (pack-milk) when the drink didn't happen (the bucket stayed full) or when plain milk
+    didn't take it off and the add-on had to (its "drank milk and Bad Omen was still on" line). Returns (failures, notes)."""
+    def warn(text):
+        print("::warning title=pack-milk::" + text[:900].replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+
+    server.send(f"gamemode survival {player}")
+    server.send(f"effect clear {player}")
+    server.send(f"effect give {player} minecraft:bad_omen 600 0")
+    server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 -90")
+    server.send(f"item replace entity {player} weapon.mainhand with minecraft:milk_bucket")
+    time.sleep(2)
+    mark = len(server.lines)
+    if not hold_mouse(3, 3):
+        return [], ["add-on: milk drink: couldn't hold the right mouse button here"]
+    time.sleep(1)
+    server.send(f"data get entity {player} SelectedItem.id")
+    held = lines_since(server, mark, r"has the following entity data|Found no elements matching", 10) or ""
+    time.sleep(3)
+    after = len(server.lines)
+    server.send(f"data get entity {player} ActiveEffects")
+    effects = lines_since(server, after, r"has the following entity data|Found no elements matching", 10) or ""
+    cured = next((l for l in server.lines[mark:] if "drank milk and Bad Omen was still on" in l), None)
+    server.send(f"effect clear {player}")
+    server.send(f"clear {player} minecraft:bucket")
+    server.send(f"clear {player} minecraft:milk_bucket")
+    drank = '"minecraft:bucket"' in held
+    still = "bad_omen" in effects or re.search(r"Id: 31\b", effects) is not None
+    if not drank:
+        warn(f"The player's milk drink didn't happen (held after: {held.strip()[-120:] or 'no answer'}); Bad Omen after: {'on' if still else 'off'}")
+        return [], [f"add-on: milk drink: didn't happen (held after: {held.strip()[-80:]})"]
+    if still:
+        warn(f"The player drank milk and Bad Omen was still on 3 s later{' (the add-on had taken it off, so something gave it back)' if cured else ''}: {effects.strip()[-300:]}")
+        return [f"add-on: a player drank milk and still had Bad Omen 3 s later{' (given back after the add-on took it off)' if cured else ''}"], []
+    if cured:
+        line = cured.split("LegionWareX milk:", 1)[1].strip()
+        warn(f"Plain milk didn't take a real player's Bad Omen off in this layer; the add-on did: {line[:300]}")
+        return [], [f"add-on: milk drink: plain milk didn't, the add-on did ({line[:160]})"]
+    return [], ["add-on: milk drink: a player drank milk and plain milk took Bad Omen off"]
 
 
 def krampus_check(server, player):
@@ -1264,6 +1327,10 @@ def main():
             milk_failures, milk_notes = milk_check(server, server_dir)
             failures += milk_failures
             notes += milk_notes
+            drink_failures, drink_notes = milk_drink_check(server, PLAYER)
+            failures += drink_failures
+            notes += drink_notes
+            progress("milk check done")
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes

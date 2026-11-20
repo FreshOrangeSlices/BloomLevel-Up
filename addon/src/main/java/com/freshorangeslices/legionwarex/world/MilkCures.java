@@ -2,6 +2,7 @@ package com.freshorangeslices.legionwarex.world;
 
 import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.LegionWareX;
+import java.util.concurrent.atomic.AtomicInteger;
 import net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,41 +23,44 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * neither the add-on, Bloom nor Bloom Pets touch either). When anyone finishes drinking milk, a Bad Omen still on them
  * comes off; if a mod refuses the removal, it's taken off directly and the player's game told. At server start a
  * stand-in player tries it, logged as "LegionWareX milk:" (whether plain milk worked, whether milk is still listed as Bad
- * Omen's cure, whether a mod refused a plain removal, and whether the add-on's cure worked), which the pack test reads.
+ * Omen's cure, whether a mod refused a plain removal, and whether the add-on's cure worked), and the first few times a
+ * real player's Bad Omen outlasts their milk are logged too; the pack test reads both.
  * Config {@code milkCuresBadOmen}.
  */
 public final class MilkCures {
 	private MilkCures() {
 	}
 
+	/** How many times the add-on has said it had to cure, this run (the first few are logged). */
+	private static final AtomicInteger CURED = new AtomicInteger();
+
+	/** Runs last, after the milk's own cure and every other mod: a Bad Omen still on here is one plain milk didn't take. */
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onDrink(LivingEntityUseItemEvent.Finish event) {
 		LivingEntity entity = event.getEntity();
 
-		if (AddonConfig.milkCuresBadOmen() && !entity.level().isClientSide && event.getItem().is(Items.MILK_BUCKET)) {
-			cure(entity);
+		if (AddonConfig.milkCuresBadOmen() && !entity.level().isClientSide && event.getItem().is(Items.MILK_BUCKET) && entity.hasEffect(MobEffects.BAD_OMEN)) {
+			boolean refused = !entity.removeEffect(MobEffects.BAD_OMEN);
+
+			if (refused) {
+				force(entity);
+			}
+
+			if (entity instanceof ServerPlayer && !(entity instanceof FakePlayer) && CURED.getAndIncrement() < 5) {
+				LegionWareX.LOGGER.info("LegionWareX milk: {} drank milk and Bad Omen was still on after it: the add-on took it off{}",
+						entity.getName().getString(), refused ? " (a mod refused the removal)" : "");
+			}
 		}
 	}
 
-	/** Takes Bad Omen off, past a mod that refuses it. Whether there was one to take. */
-	public static boolean cure(LivingEntity entity) {
-		if (!entity.hasEffect(MobEffects.BAD_OMEN)) {
-			return false;
-		}
-
-		if (entity.removeEffect(MobEffects.BAD_OMEN)) {
-			return true;
-		}
-
-		// Refused (MobEffectEvent.Remove cancelled): off the list directly, and the player's screen told, as
-		// ServerPlayer.onEffectRemoved would (Bad Omen has no attribute modifiers to take back).
+	/** A refused removal (MobEffectEvent.Remove cancelled): off the list directly, and the player's screen told, as
+	 * ServerPlayer.onEffectRemoved would (Bad Omen has no attribute modifiers to take back). */
+	private static void force(LivingEntity entity) {
 		MobEffectInstance gone = entity.removeEffectNoUpdate(MobEffects.BAD_OMEN);
 
 		if (gone != null && entity instanceof ServerPlayer player && player.connection != null) {
 			player.connection.send(new ClientboundRemoveMobEffectPacket(player.getId(), MobEffects.BAD_OMEN));
 		}
-
-		return gone != null;
 	}
 
 	/** The stand-in's try, logged for the pack test. */

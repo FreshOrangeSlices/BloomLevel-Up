@@ -57,6 +57,7 @@ import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
@@ -190,13 +191,51 @@ public final class RegistryDump {
 			}
 		}
 
+		// Every enchantment, for finding mods' enchantments that do the same thing: its mod, levels, what it goes on,
+		// where it can come from (the table, villagers, or loot only), its English name and description.
+		int enchantments = 0;
+
+		for (Enchantment enchantment : BuiltInRegistries.ENCHANTMENT) {
+			try {
+				lines.add(GSON.toJson(enchantment(enchantment)));
+				enchantments++;
+			} catch (Throwable e) {
+				lines.add(GSON.toJson(error("enchantment", String.valueOf(BuiltInRegistries.ENCHANTMENT.getKey(enchantment)), e)));
+			}
+		}
+
 		try {
 			Files.write(target, lines, StandardCharsets.UTF_8);
-			BloomLevelUp.LOGGER.info("Bloom registry dump: {} items, {} entity types, {} recipes, {} biomes and structures -> {}", items,
-					entities, recipes, places, target.toAbsolutePath());
+			BloomLevelUp.LOGGER.info("Bloom registry dump: {} items, {} entity types, {} recipes, {} biomes and structures, {} enchantments -> {}",
+					items, entities, recipes, places, enchantments, target.toAbsolutePath());
 		} catch (IOException e) {
 			BloomLevelUp.LOGGER.warn("Bloom registry dump couldn't be written to {}", target, e);
 		}
+	}
+
+	private static JsonObject enchantment(Enchantment enchantment) {
+		JsonObject out = new JsonObject();
+		out.addProperty("kind", "enchantment");
+		out.addProperty("id", BuiltInRegistries.ENCHANTMENT.getKey(enchantment).toString());
+		out.addProperty("name", Component.translatable(enchantment.getDescriptionId()).getString());
+		// The ".desc" line many mods ship for Enchantment Descriptions.
+		String descriptionKey = enchantment.getDescriptionId() + ".desc";
+		String description = Component.translatable(descriptionKey).getString();
+
+		if (!description.equals(descriptionKey)) {
+			out.addProperty("description", description);
+		}
+
+		out.addProperty("max_level", enchantment.getMaxLevel());
+		out.addProperty("category", String.valueOf(enchantment.category));
+		out.addProperty("rarity", String.valueOf(enchantment.getRarity()));
+		out.addProperty("treasure", enchantment.isTreasureOnly());
+		out.addProperty("curse", enchantment.isCurse());
+		out.addProperty("discoverable", enchantment.isDiscoverable());
+		out.addProperty("tradeable", enchantment.isTradeable());
+		out.addProperty("books", enchantment.isAllowedOnBooks());
+		out.addProperty("class", enchantment.getClass().getName());
+		return out;
 	}
 
 	private static JsonObject item(ServerLevel level, Item item) {

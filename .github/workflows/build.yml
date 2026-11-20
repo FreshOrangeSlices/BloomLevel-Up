@@ -441,6 +441,24 @@ jobs:
         if: always()
         run: |
           [ -f pack-progress.txt ] && echo "::notice title=pack-progress::$(sed 's/%/%25/g' pack-progress.txt | sed ':a;N;$!ba;s/\n/%0A/g')" || true
+      # Every enchantment by mod (the server's registry dump), for finding ones that do the same thing.
+      - name: enchantments
+        if: always()
+        run: |
+          [ -f enchantments.txt ] || exit 0
+          python3 -c "
+          t = open('enchantments.txt').read()
+          esc = lambda x: x.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          parts, part = [], ''
+          for line in t.split('\n'):
+              if len(part) + len(line) + 1 > 3900:
+                  parts.append(part)
+                  part = ''
+              part += line + '\n'
+          parts.append(part)
+          for n, p in enumerate(parts[:10]):
+              print(f'::notice title=pack-enchantments-{n:02d}::{esc(p)}')
+          "
       # The client's warnings by mod, like the boot test's server-warnings (missing models and textures show only here).
       - name: client warnings
         if: always()

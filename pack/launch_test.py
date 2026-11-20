@@ -1312,6 +1312,7 @@ def main():
     notes.append(sorting)
     if unsorted:
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
+    enchantment_list(os.path.join(server_dir, "bloom-dump.jsonl"))
     # ---- materials a trim left with nothing to make (reviewed by hand: some are drops with uses outside recipes)
     leftover_note, leftovers = leftover_check(os.path.join(server_dir, "bloom-dump.jsonl"),
                                               os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)
@@ -1454,6 +1455,35 @@ def main():
         tail = "\n".join(client_log[-60:])
         print(f"::error title=pack-launch-failed::{esc(('; '.join(failures) + chr(10) + tail)[:3900])}")
         sys.exit(1)
+
+
+def enchantment_list(dump_file):
+    """Every enchantment by mod, from the server's registry dump, written to enchantments.txt for the workflow to print
+    (pack-enchantments-NN): for finding mods' enchantments that do the same thing. Each line: name, id, max level, where
+    it comes from (table, villagers, or loot only), what it goes on, and its description if the mod ships one."""
+    if not os.path.exists(dump_file):
+        return
+    byns = collections.defaultdict(list)
+    with open(dump_file) as f:
+        for line in f:
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            if r.get("kind") != "enchantment" or "id" not in r:
+                continue
+            ns, path = r["id"].split(":", 1)
+            where = ("curse" if r.get("curse") else "loot only" if r.get("treasure") or not r.get("discoverable")
+                     else "table") + (", villagers" if r.get("tradeable") and not r.get("curse") else "")
+            desc = r.get("description", "")
+            byns[ns].append(f"  {r.get('name', path)} [{path}] max {r.get('max_level')}, {where}, {str(r.get('category', '')).lower()}"
+                            + (f": {desc[:110]}" if desc else ""))
+    out = []
+    for ns in sorted(byns, key=lambda n: (n != "minecraft", n)):
+        out.append(f"{ns} ({len(byns[ns])})")
+        out.extend(sorted(byns[ns]))
+    with open("enchantments.txt", "w") as f:
+        f.write("\n".join(out) or "none")
 
 
 def client_warnings(client_log):

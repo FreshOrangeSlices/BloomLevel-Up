@@ -965,6 +965,26 @@ def naughtiness_check(server, server_dir):
     return [], [f"add-on: naughtiness: {line[:300]}"]
 
 
+def milk_check(server, server_dir):
+    """The add-on's milk cure for Bad Omen (something in the pack stopped milk clearing it): at server start a stand-in
+    player drinks milk with Bad Omen on, logged as "LegionWareX milk:". Fails when the add-on is here but said nothing, or
+    its cure didn't take Bad Omen off. When plain milk doesn't cure it in this layer, a pack-milk warning says so, so the
+    first layer it shows up in points at the mod that stops it. Returns (failures, notes)."""
+    lines = [l for l in server.lines if "LegionWareX milk:" in l]
+    mods = os.listdir(os.path.join(server_dir, "mods")) if os.path.isdir(os.path.join(server_dir, "mods")) else []
+    if not lines:
+        if any(m.lower().startswith("legionwarex") for m in mods):
+            return ["add-on: it said nothing about milk and Bad Omen at start (LegionWareX milk:)"], []
+        return [], []
+    line = lines[-1].split("LegionWareX milk:", 1)[1].strip()
+    if "plain milk cures Bad Omen: no" in line:
+        text = line[:600].replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+        print(f"::warning title=pack-milk::Plain milk doesn't take Bad Omen off in this layer: {text}")
+    if "failed" in line or "couldn't" in line or not line.endswith(": yes"):
+        return [f"add-on: milk doesn't take Bad Omen off: {line[:300]}"], []
+    return [], [f"add-on: milk: {line[:300]}"]
+
+
 def krampus_check(server, player):
     """The add-on's Krampus count (Born in Chaos's meter, filled by villager kills only): the meter set to 0, then five
     villagers summoned beside the player and killed by them; the 5th should bring Krampus (logged "Krampus came"), none
@@ -1241,6 +1261,9 @@ def main():
             naughty_failures, naughty_notes = naughtiness_check(server, server_dir)
             failures += naughty_failures
             notes += naughty_notes
+            milk_failures, milk_notes = milk_check(server, server_dir)
+            failures += milk_failures
+            notes += milk_notes
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes

@@ -39,6 +39,7 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.BooleanValue HARVEST_ALL_YEAR;
 	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
 	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
+	private static final ForgeConfigSpec.BooleanValue MILK_CURES;
 	private static final ForgeConfigSpec.BooleanValue KRAMPUS_ANIMALS;
 	private static final ForgeConfigSpec.IntValue KRAMPUS_VILLAGER_KILLS;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOBS;
@@ -187,6 +188,10 @@ public final class AddonConfig {
 						"Off: refused whoever gives them, and taken off zombies already in the world when they load; the first refusal from",
 						"each place in the code is logged as \"LegionWareX buffs\".")
 				.define("zombieEndlessBuffs", false);
+		MILK_CURES = builder
+				.comment("Whether drinking milk always takes Bad Omen off, as in vanilla (something in the pack stopped it), even past a",
+						"mod that refuses the removal. The server's start logs what it found as \"LegionWareX milk\".")
+				.define("milkCuresBadOmen", true);
 		KRAMPUS_ANIMALS = builder
 				.comment("Whether killing animals adds to Born in Chaos's naughtiness (its Krampus meter: warnings, then Krampus comes for",
 						"the player). Off: only villagers and wandering traders count. Applied when the server starts.")
@@ -329,6 +334,10 @@ public final class AddonConfig {
 
 	public static boolean zombieEndlessBuffs() {
 		return get(ZOMBIE_ENDLESS_BUFFS, false);
+	}
+
+	public static boolean milkCuresBadOmen() {
+		return get(MILK_CURES, true);
 	}
 
 	/** The config's extra bans (the pack's own list is {@link #BANNED_DEFAULT}, always in force). */

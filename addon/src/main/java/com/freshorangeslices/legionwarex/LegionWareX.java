@@ -20,6 +20,7 @@ import com.freshorangeslices.legionwarex.world.IllagerCrowding;
 import com.freshorangeslices.legionwarex.world.KrampusNaughtiness;
 import com.freshorangeslices.legionwarex.world.MobKillDrops;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
+import com.freshorangeslices.legionwarex.world.MilkCures;
 import com.freshorangeslices.legionwarex.world.ZombieBuffs;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
@@ -86,6 +87,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(HarvestCourt.class);
 		MinecraftForge.EVENT_BUS.register(MobKillDrops.class);
 		MinecraftForge.EVENT_BUS.register(ZombieBuffs.class);
+		MinecraftForge.EVENT_BUS.register(MilkCures.class);
 		MinecraftForge.EVENT_BUS.register(BannedMobs.class);
 		MinecraftForge.EVENT_BUS.register(KrampusNaughtiness.class);
 		MinecraftForge.EVENT_BUS.register(IllagerCrowding.class);

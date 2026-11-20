@@ -1007,13 +1007,16 @@ def milk_check(server, server_dir):
 
 def milk_drink_check(server, player):
     """A real player drinking milk with Bad Omen on, the way a player does (right-click held on the client, looking at
-    the sky so no block or mob takes the click), with every mod in the layer. Fails when they drank and Bad Omen was
-    still on 3 seconds later. Warns (pack-milk) when the drink didn't happen (the bucket stayed full) or when plain milk
-    didn't take it off and the add-on had to (its "drank milk and Bad Omen was still on" line). Returns (failures, notes)."""
+    the sky so no block or mob takes the click), with every mod in the layer. In creative, so nothing left around by the
+    checks before can kill them mid-drink (milk still cures there; the bucket just stays full, so the drink is counted
+    with the game's own statistic for milk buckets used). Fails when they drank and Bad Omen was still on 3 seconds
+    later. Warns (pack-milk) when the drink didn't happen or when plain milk didn't take it off and the add-on had to
+    (its "drank milk and Bad Omen was still on" line). Returns (failures, notes)."""
     def warn(text):
         print("::warning title=pack-milk::" + text[:900].replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
 
-    server.send(f"gamemode survival {player}")
+    server.send(f"gamemode creative {player}")
+    server.send("scoreboard objectives add lwx_milk minecraft.used:minecraft.milk_bucket")
     server.send(f"effect clear {player}")
     server.send(f"effect give {player} minecraft:bad_omen 600 0")
     server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 -90")
@@ -1021,23 +1024,23 @@ def milk_drink_check(server, player):
     time.sleep(2)
     mark = len(server.lines)
     if not hold_mouse(3, 3):
+        server.send("scoreboard objectives remove lwx_milk")
         return [], ["add-on: milk drink: couldn't hold the right mouse button here"]
-    time.sleep(1)
-    server.send(f"data get entity {player} SelectedItem.id")
-    held = lines_since(server, mark, r"has the following entity data|Found no elements matching", 10) or ""
     time.sleep(3)
+    server.send(f"scoreboard players get {player} lwx_milk")
+    used = lines_since(server, mark, r"lwx_milk", 10) or ""
     after = len(server.lines)
     server.send(f"data get entity {player} ActiveEffects")
     effects = lines_since(server, after, r"has the following entity data|Found no elements matching", 10) or ""
     cured = next((l for l in server.lines[mark:] if "drank milk and Bad Omen was still on" in l), None)
     server.send(f"effect clear {player}")
-    server.send(f"clear {player} minecraft:bucket")
     server.send(f"clear {player} minecraft:milk_bucket")
-    drank = '"minecraft:bucket"' in held
+    server.send("scoreboard objectives remove lwx_milk")
+    drank = re.search(r"has [1-9]\d* \[lwx_milk\]", used) is not None
     still = "bad_omen" in effects or re.search(r"Id: 31\b", effects) is not None
     if not drank:
-        warn(f"The player's milk drink didn't happen (held after: {held.strip()[-120:] or 'no answer'}); Bad Omen after: {'on' if still else 'off'}")
-        return [], [f"add-on: milk drink: didn't happen (held after: {held.strip()[-80:]})"]
+        warn(f"The player's milk drink didn't happen ({used.strip()[-120:] or 'no answer'}); Bad Omen after: {'on' if still else 'off'}")
+        return [], [f"add-on: milk drink: didn't happen ({used.strip()[-80:]})"]
     if still:
         warn(f"The player drank milk and Bad Omen was still on 3 s later{' (the add-on had taken it off, so something gave it back)' if cured else ''}: {effects.strip()[-300:]}")
         return [f"add-on: a player drank milk and still had Bad Omen 3 s later{' (given back after the add-on took it off)' if cured else ''}"], []

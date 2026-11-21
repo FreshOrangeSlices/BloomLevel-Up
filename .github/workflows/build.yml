@@ -530,6 +530,9 @@ jobs:
           # Its Bloom view (One and the Same): the wolf's Sword tree.
           - layers: 6
             shot: pack_pets_bloom
+          # Bosses'Rise's Undying Tentacle, charged by the player: its Ghost Tentacles round them.
+          - layers: 6
+            shot: pack_tentacles
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

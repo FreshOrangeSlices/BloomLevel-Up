@@ -1,6 +1,9 @@
 package com.freshorangeslices.bloomlevelup.player;
 
 import com.mojang.serialization.DataResult;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -92,11 +95,33 @@ public final class BloomAttachments {
 		}
 	}
 
+	/** Callers already logged as asking for a profile that isn't there (playtest log, 2026-11-21: dozens a death). */
+	private static final Set<String> MISSING_CALLERS = ConcurrentHashMap.newKeySet();
+	private static final StackWalker WALKER = StackWalker.getInstance();
+
 	/** The live, mutable profile for a player. Server-side truth only. */
 	public static BloomProfile profile(Player player) {
 		return player.getCapability(PROFILE).map(Holder::profile).orElseGet(() -> {
-			// Only a player whose capabilities are already gone (removed, mid-clone) lands here.
-			BloomLevelUp.LOGGER.warn("Bloom profile asked for {} without one attached", player.getName().getString());
+			// A dead player's body is removed a second after death, which drops its capabilities; until they press
+			// Respawn, the tick code that walks the player list still asks about it (dozens of warnings a death in the
+			// playtest log, 2026-11-21). The profile itself lives on: onClone copies it to the new body. So a removed
+			// player gets a blank stand-in quietly; anything else is unexpected and logged once per caller, with its calls.
+			if (player.isRemoved()) {
+				return new BloomProfile();
+			}
+
+			List<String> calls = WALKER.walk(frames -> frames.skip(1)
+					.map(frame -> frame.getClassName() + "." + frame.getMethodName())
+					.filter(call -> !call.startsWith(BloomAttachments.class.getName()) && !call.startsWith("net.minecraftforge.common.util.LazyOptional")
+							&& !call.startsWith("java.") && !call.startsWith("jdk.") && !call.startsWith("net.minecraftforge.eventbus."))
+					.limit(10).toList());
+			String caller = calls.isEmpty() ? "?" : calls.get(0);
+
+			if (MISSING_CALLERS.size() < 50 && MISSING_CALLERS.add(caller)) {
+				BloomLevelUp.LOGGER.warn("Bloom profile asked for {} without one attached (alive: {}, removed: {}; once per caller); calls: {}",
+						player.getName().getString(), player.isAlive(), player.isRemoved(), String.join(" < ", calls));
+			}
+
 			return new BloomProfile();
 		});
 	}

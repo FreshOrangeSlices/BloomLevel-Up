@@ -610,24 +610,35 @@ def mob_check(server, client, player, entities, with_egg, shots, server_dir=".")
     return failures, warnings, summoned
 
 
-def hold_mouse(button, seconds):
-    """Holds a mouse button down in the game window for {seconds} (xdotool on the virtual display); False when that
-    isn't possible."""
+def hold_mouse(button, seconds, keys=()):
+    """Holds a mouse button down in the game window for {seconds} (xdotool on the virtual display), with {keys} held
+    from a moment before to a moment after (Shift_L to sneak); False when that isn't possible."""
     if not shutil.which("xdotool"):
         return False
+    held = []
     try:
         found = subprocess.run(["xdotool", "search", "--name", "Minecraft"], capture_output=True, text=True, timeout=10)
         window = (found.stdout.split() or [None])[0]
         if window:
             subprocess.run(["xdotool", "windowfocus", "--sync", window], check=False, timeout=10)
+        for key in keys:
+            if subprocess.run(["xdotool", "keydown", key], check=False, timeout=10).returncode == 0:
+                held.append(key)
+        if keys:
+            time.sleep(0.5)
         if subprocess.run(["xdotool", "mousedown", str(button)], check=False, timeout=10).returncode != 0:
             return False
         time.sleep(seconds)
         subprocess.run(["xdotool", "mouseup", str(button)], check=False, timeout=10)
-        return True
+        return len(held) == len(keys)
     except (OSError, subprocess.TimeoutExpired) as error:
         print(f"couldn't hold mouse button {button}: {error}")
         return False
+    finally:
+        if held:
+            time.sleep(0.3)
+        for key in held:
+            subprocess.run(["xdotool", "keyup", key], check=False, timeout=10)
 
 
 def press(key):
@@ -1051,6 +1062,86 @@ def milk_drink_check(server, player):
     return [], ["add-on: milk drink: a player drank milk and plain milk took Bad Omen off"]
 
 
+def tentacle_check(server, player, server_dir, shots):
+    """Bosses'Rise's Undying Tentacle as a player uses it (FreshOrangeSlices, 2026-11-21: on the server, sneaking and
+    holding it plays the charge sound and nothing appears): in creative, on open ground well away from the checks
+    before, looking ahead, the client sneaks and holds right-click for 3.5 seconds (the charge is 2), then the server
+    counts Ghost Tentacles, with the add-on's watch on them, so the log says whether any appeared and, if they were
+    taken away, by what. Screenshot pack_tentacles. Fails when they appeared and something removed them at once; warns
+    (pack-tentacle) when none appeared or the input couldn't be sent. Returns (failures, notes)."""
+    mods_dir = os.path.join(server_dir, "mods")
+    if not any(m.startswith("block_factorys_bosses") for m in os.listdir(mods_dir)):
+        return [], []
+
+    def warn(text):
+        print("::warning title=pack-tentacle::" + text[:3000].replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+
+    ghost = "block_factorys_bosses:ghost_tentacle"
+    mark = len(server.lines)
+    server.send(f"data get entity {player} Pos")
+    pos_line = lines_since(server, mark, r"has the following entity data: \[", 10) or ""
+    back = re.findall(r"(-?[0-9.]+)d", pos_line.split("entity data:", 1)[-1])[:3]
+    server.send(f"gamemode creative {player}")
+    server.send(f"legionwarex watch {ghost}")
+    server.send(f"execute at {player} run spreadplayers ~120 ~ 0 1 false {player}")
+    time.sleep(3)
+    server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 0")
+    server.send(f"kill @e[type={ghost}]")
+    server.send(f"item replace entity {player} weapon.mainhand with block_factorys_bosses:undying_tentacle")
+    time.sleep(2)
+    mark = len(server.lines)
+    sent = hold_mouse(3, 3.5, keys=("Shift_L",))
+    time.sleep(0.5)
+    server.send(f"execute if entity @e[type={ghost}]")
+    counted = lines_since(server, mark, r"Test (passed|failed)", 10) or ""
+    found = re.search(r"count: (\d+)", counted)
+    count = int(found.group(1)) if found else 0
+    capture(shots, "pack_tentacles")
+    time.sleep(1)
+    watch = [line.split("LegionWareX watch:", 1)[1].strip() for line in server.lines[mark:] if "LegionWareX watch:" in line]
+    server.send("legionwarex watch off")
+    server.send(f"kill @e[type={ghost}]")
+    server.send(f"clear {player} block_factorys_bosses:undying_tentacle")
+    if len(back) == 3:
+        server.send(f"tp {player} {back[0]} {back[1]} {back[2]}")
+    time.sleep(1)
+    seen = "; ".join(watch)[:1500] or "the watch saw none appear"
+    if not sent:
+        warn(f"couldn't send the sneak and right-click to the client; tentacles: {count}; watch: {seen}")
+        return [], [f"tentacles: the input couldn't be sent ({count} there)"]
+    if count >= 4:
+        return [], [f"tentacles: a player's Undying Tentacle summoned {count}"]
+    appeared = [w for w in watch if " appeared at " in w]
+    removed = [w for w in watch if " was removed after " in w and not w.split(" after ", 1)[1].startswith(tuple(f"{n} ticks" for n in range(40, 400)))]
+    if appeared and removed:
+        warn(f"Ghost Tentacles appeared and were taken away at once: {seen}")
+        return [f"tentacles: {len(appeared)} appeared and were removed straight away ({removed[0][:200]})"], []
+    warn(f"A player's Undying Tentacle summoned {count} Ghost Tentacle(s) (4 expected); watch: {seen}")
+    return [], [f"tentacles: {count} of 4 appeared; watch: {seen[:200]}"]
+
+
+def death_check(server, player):
+    """A player dying and respawning: Bloom says nothing about a missing profile (the playtest log of 2026-11-21 had
+    dozens of "Bloom profile asked for ... without one attached" a death, from the tick code asking the removed body).
+    Keeps the inventory for it, then puts the game rule back. Fails on any such warning. Returns (failures, notes)."""
+    mark = len(server.lines)
+    server.send("gamerule keepInventory")
+    rule = lines_since(server, mark, r"keepInventory is currently set to", 10) or ""
+    keep = "true" if rule.strip().endswith("true") else "false"
+    server.send("gamerule keepInventory true")
+    mark = len(server.lines)
+    server.send(f"kill {player}")
+    time.sleep(3)
+    respawned = respawn_if_dead(server, player)
+    time.sleep(2)
+    server.send(f"gamerule keepInventory {keep}")
+    warnings = [line for line in server.lines[mark:] if "Bloom profile asked for" in line]
+    if warnings:
+        print("::warning title=pack-bloom-death::" + "%0A".join(w[-500:].replace("%", "%25") for w in warnings[:5]))
+        return [f"bloom: {len(warnings)} missing-profile warnings around a death ({warnings[0][-240:]})"], []
+    return [], [f"bloom: a death and respawn, no missing-profile warnings ({respawned or 'respawned'})"]
+
+
 def krampus_check(server, player):
     """The add-on's Krampus count (Born in Chaos's meter, filled by villager kills only): the meter set to 0, then five
     villagers summoned beside the player and killed by them; the 5th should bring Krampus (logged "Krampus came"), none
@@ -1334,6 +1425,10 @@ def main():
             failures += drink_failures
             notes += drink_notes
             progress("milk check done")
+            tentacle_failures, tentacle_notes = tentacle_check(server, PLAYER, server_dir, shots)
+            failures += tentacle_failures
+            notes += tentacle_notes
+            progress("tentacle check done")
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes
@@ -1396,6 +1491,11 @@ def main():
             if "One and the Same off" in view:
                 failures.append("bloom pets: the Bloom view didn't open: " + view[-200:])
             progress("pet screen's Bloom view shown")
+        # Last, as it moves the player to the world's spawn: a death and a respawn.
+        death_failures, death_notes = death_check(server, PLAYER)
+        failures += death_failures
+        notes += death_notes
+        progress("death check done")
     else:
         failures.append("the client didn't join the server")
         capture(shots, "pack_0")

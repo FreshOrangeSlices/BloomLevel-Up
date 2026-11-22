@@ -1,0 +1,21 @@
+name: probe
+on: push
+permissions:
+  actions: read
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: pack-screenshots-L6
+          path: art
+          run-id: 44944657665
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: FreshOrangeSlices/BloomLevel-Up
+      - run: find art -maxdepth 3 | head -50 && python3 probe/analyse.py art
+      - run: python3 probe/emit.py 0 30
+      - run: python3 probe/emit.py 30 30
+      - run: python3 probe/emit.py 60 30

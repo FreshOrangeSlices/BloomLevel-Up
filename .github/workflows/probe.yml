@@ -15,7 +15,14 @@ jobs:
           run-id: 44944657665
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: FreshOrangeSlices/BloomLevel-Up
-      - run: find art -maxdepth 3 | head -50 && python3 probe/analyse.py art
+      - uses: actions/download-artifact@v4
+        with:
+          name: warionex
+          path: art/pack
+          run-id: 44944657665
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: FreshOrangeSlices/BloomLevel-Up
+      - run: curl -sSL -o cfr.jar https://github.com/leibnitz27/cfr/releases/download/0.152/cfr-0.152.jar && ls art/pack && python3 probe/analyse.py art
       - run: python3 probe/emit.py 0 30
       - run: python3 probe/emit.py 30 30
       - run: python3 probe/emit.py 60 30

@@ -1,7 +1,9 @@
 package com.freshorangeslices.legionwarex.gametest;
 
+import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.Despawning;
 import com.freshorangeslices.legionwarex.LegionWareX;
+import com.freshorangeslices.legionwarex.band.BandEvents;
 import com.freshorangeslices.legionwarex.band.BandKind;
 import com.freshorangeslices.legionwarex.band.Bands;
 import com.freshorangeslices.legionwarex.band.FollowLeaderGoal;
@@ -10,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -25,6 +28,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.PatrollingMonster;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.gametest.GameTestHolder;
@@ -209,6 +213,54 @@ public final class BandGameTests {
 
 			helper.succeed();
 		});
+	}
+
+	/**
+	 * A pirate band sails off once its time is up and no player is within 32 blocks (the test server has none): one that
+	 * landed long ago goes within a second, a band that just landed stays, and so does a name-tagged pirate.
+	 */
+	@GameTest(template = "room", timeoutTicks = 100)
+	public static void aPirateBandSailsOffWhenItsTimeIsUp(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		List<Mob> old = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 3, 3)), RandomSource.create(7), 2, false);
+		List<Mob> fresh = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 8, 8)), RandomSource.create(8), 1, false);
+		helper.assertTrue(old.size() == 2 && fresh.size() == 1, "Two bands found room: " + Bands.describe(BandKind.PIRATE, old) + "; "
+				+ Bands.describe(BandKind.PIRATE, fresh));
+		long longAgo = level.getGameTime() - AddonConfig.pirateBandStay() - 1;
+		old.forEach(pirate -> pirate.getPersistentData().getCompound(Bands.DATA).putLong("landed", longAgo));
+		helper.assertTrue(Bands.landed(fresh.get(0)) >= level.getGameTime() - 1, "A new band notes when it landed");
+		Mob named = old.get(1);
+		named.setCustomName(net.minecraft.network.chat.Component.literal("Kept"));
+		helper.assertTrue(BandEvents.sailsOff(old.get(0)), "The old band's time is up, and no player is near");
+		helper.assertFalse(BandEvents.sailsOff(named), "A name-tagged pirate stays");
+		helper.assertFalse(BandEvents.sailsOff(fresh.get(0)), "The new band stays");
+		helper.runAfterDelay(25, () -> {
+			try {
+				helper.assertTrue(old.get(0).isRemoved(), "The old band's pirate sailed off");
+				helper.assertFalse(named.isRemoved() || fresh.get(0).isRemoved(), "The name-tagged one and the new band are still here");
+			} finally {
+				clear(old);
+				clear(fresh);
+			}
+
+			helper.succeed();
+		});
+	}
+
+	/** At most five in a band; pirate bands only on warm beaches (the add-on's biome tags). */
+	@GameTest(template = "empty")
+	public static void aBandIsAtMostFiveAndPiratesLikeWarmBeaches(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		helper.assertTrue(Bands.vanillaSize(level, helper.absolutePos(BlockPos.ZERO)) <= AddonConfig.bandMaxSize() && AddonConfig.bandMaxSize() == 5,
+				"A band is at most 5: " + Bands.vanillaSize(level, helper.absolutePos(BlockPos.ZERO)));
+		var biomes = level.registryAccess().registryOrThrow(Registries.BIOME);
+		helper.assertTrue(biomes.getHolderOrThrow(Biomes.BEACH).is(BandEvents.PIRATE_BEACHES), "Vanilla's Beach is a pirate beach");
+		helper.assertFalse(biomes.getHolderOrThrow(Biomes.SNOWY_BEACH).is(BandEvents.PIRATE_BEACHES), "A snowy beach isn't");
+		helper.assertFalse(biomes.getHolderOrThrow(Biomes.STONY_SHORE).is(BandEvents.PIRATE_BEACHES), "Nor a stony shore");
+		helper.assertTrue(biomes.getHolderOrThrow(Biomes.WARM_OCEAN).is(BandEvents.WARM_OCEANS) && biomes.getHolderOrThrow(Biomes.LUKEWARM_OCEAN)
+				.is(BandEvents.WARM_OCEANS), "Warm and lukewarm seas make it warm");
+		helper.assertFalse(biomes.getHolderOrThrow(Biomes.COLD_OCEAN).is(BandEvents.WARM_OCEANS), "A cold one doesn't");
+		helper.succeed();
 	}
 
 	@GameTest(template = "empty")

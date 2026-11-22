@@ -1120,6 +1120,92 @@ def tentacle_check(server, player, server_dir, shots):
     return [], [f"tentacles: {count} of 4 appeared; watch: {seen[:200]}"]
 
 
+def summon_check(server, player, server_dir, shots):
+    """Bosses'Rise's Pirate Saber as a player uses it (FreshOrangeSlices, 2026-11-22: its two pirates stayed for good,
+    couldn't be hurt and came at their owner with sword and bolt, alone and beside a friend). In survival with Resistance
+    V (so the area's mobs can't kill the player, and mobs still pick them), on open ground looking ahead: the client
+    holds right-click for 1.5 seconds (the charge is 0.7), a zombie beside the player gives the pair a fight, a second
+    charge a few seconds on is still waiting (10 s since 0.4.0), and a third once 11 game seconds have passed sends the
+    first pair away. The
+    add-on's /legionwarex summons lists them each time. Screenshot pack_pirates. Fails when a charge summons no pair, a
+    waiting one does, or more than two are left; every target and hit the add-on refused is noted (pack-summons), with
+    the calls that tried it, which name the mod pointing summons at their owner. Returns (failures, notes)."""
+    mods_dir = os.path.join(server_dir, "mods")
+    if not any(m.startswith("block_factorys_bosses") for m in os.listdir(mods_dir)):
+        return [], []
+    rook, shooter, saber = "block_factorys_bosses:pirate_rook", "block_factorys_bosses:crossbow_pirate", "block_factorys_bosses:pirate_saber"
+
+    def listed():
+        """The player's summons as the add-on lists them: [(entity, id, seconds left)]."""
+        mark = len(server.lines)
+        server.send("legionwarex summons")
+        line = lines_since(server, mark, r"LegionWareX summons: \d+ Pirate Saber summon", 10) or ""
+        return [(m.group(1), m.group(2), int(m.group(3)))
+                for m in re.finditer(r"; (\S+) #(\w+) of " + re.escape(player) + r" at [-0-9 ]+, (\d+) s left", line)]
+
+    def charge():
+        sent = hold_mouse(3, 1.5)
+        time.sleep(1)
+        return sent, listed()
+
+    failures, notes = [], []
+    mark_all = len(server.lines)
+    server.send(f"data get entity {player} Pos")
+    pos_line = lines_since(server, mark_all, r"has the following entity data: \[", 10) or ""
+    back = re.findall(r"(-?[0-9.]+)d", pos_line.split("entity data:", 1)[-1])[:3]
+    server.send(f"gamemode survival {player}")
+    server.send(f"effect give {player} minecraft:resistance 90 4 true")
+    server.send(f"effect give {player} minecraft:regeneration 90 4 true")
+    server.send(f"execute at {player} run spreadplayers ~-120 ~ 0 1 false {player}")
+    time.sleep(3)
+    server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 0")
+    for kind in (rook, shooter):
+        server.send(f"execute at {player} run kill @e[type={kind},distance=..32]")
+    server.send(f"item replace entity {player} weapon.mainhand with {saber}")
+    time.sleep(2)
+    sent, first = charge()
+    server.send(f"execute at {player} run summon minecraft:zombie ^ ^ ^4")
+    time.sleep(3)
+    _, waiting = charge()
+    # The wait is in game time, which a busy server runs slower than the clock: the first pair's time left says how much
+    # has passed. The third charge goes once 11 game seconds have.
+    end = time.time() + 45
+    while time.time() < end and first:
+        now = listed()
+        if now and max(s for _, _, s in now) <= max(s for _, _, s in first) - 11:
+            break
+        time.sleep(2)
+    _, third = charge()
+    capture(shots, "pack_pirates")
+    time.sleep(2)
+    said = [line.split("LegionWareX summons:", 1)[1].strip() for line in server.lines[mark_all:]
+            if "LegionWareX summons:" in line and " Pirate Saber summon" not in line]
+    for kind in (rook, shooter, "minecraft:zombie"):
+        server.send(f"execute at {player} run kill @e[type={kind},distance=..32]")
+    server.send(f"clear {player} {saber}")
+    server.send(f"effect clear {player}")
+    server.send(f"gamemode creative {player}")
+    if len(back) == 3:
+        server.send(f"tp {player} {back[0]} {back[1]} {back[2]}")
+    time.sleep(1)
+    shown = lambda summons: ", ".join(f"{e.split(':')[1]} #{i} {s} s" for e, i, s in summons) or "none"
+    ids = lambda summons: {i for _, i, _ in summons}
+    if said:
+        print("::notice title=pack-summons::" + "%0A".join(s[:600].replace("%", "%25") for s in said[:12]))
+    if not sent:
+        print("::warning title=pack-summons::couldn't send the right-click to the client")
+        return [], ["summons: the right-click couldn't be sent"]
+    if len(first) != 2:
+        failures.append(f"summons: a charge of the Pirate Saber left {len(first)} summons, not 2 ({shown(first)})")
+    elif ids(waiting) != ids(first):
+        failures.append(f"summons: a charge a few seconds on wasn't still waiting ({shown(first)}, then {shown(waiting)})")
+    elif len(third) != 2 or ids(third) & ids(first):
+        failures.append(f"summons: a charge 11 s on didn't send the first pair away ({shown(waiting)}, then {shown(third)})")
+    notes.append(f"summons: the Pirate Saber's pair ({shown(first)}; then {shown(waiting)}; then {shown(third)}); "
+                 f"{len(said)} refusals logged" + (f", first: {said[0][:200]}" if said else ""))
+    return failures, notes
+
+
 def death_check(server, player):
     """A player dying and respawning: Bloom says nothing about a missing profile (the playtest log of 2026-11-21 had
     dozens of "Bloom profile asked for ... without one attached" a death, from the tick code asking the removed body).
@@ -1429,6 +1515,10 @@ def main():
             failures += tentacle_failures
             notes += tentacle_notes
             progress("tentacle check done")
+            summon_failures, summon_notes = summon_check(server, PLAYER, server_dir, shots)
+            failures += summon_failures
+            notes += summon_notes
+            progress("summon check done")
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes

@@ -21,6 +21,12 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.IntValue PIRATE_BAND_EVERY;
 	private static final ForgeConfigSpec.DoubleValue PIRATE_BAND_CHANCE;
 	private static final ForgeConfigSpec.IntValue PIRATE_BAND_FROM_DAY;
+	private static final ForgeConfigSpec.IntValue PIRATE_BAND_STAY;
+	private static final ForgeConfigSpec.IntValue BAND_MAX_SIZE;
+	private static final ForgeConfigSpec.IntValue SUMMON_LIFETIME;
+	private static final ForgeConfigSpec.IntValue SUMMONS_AT_ONCE;
+	private static final ForgeConfigSpec.DoubleValue SABER_DAMAGE;
+	private static final ForgeConfigSpec.IntValue SABER_COOLDOWN;
 	private static final ForgeConfigSpec.BooleanValue MAINLAND_SPAWN;
 	private static final ForgeConfigSpec.DoubleValue CHART_DROP_CHANCE;
 	private static final ForgeConfigSpec.IntValue CHART_REACH;
@@ -69,8 +75,11 @@ public final class AddonConfig {
 		builder.pop();
 
 		builder.comment("Bands that roam by day, the way vanilla's pillager patrols do: a leader and a few followers, as many as a patrol",
-				"(more on harder difficulties and as the area's local difficulty grows). Every so often one player is picked and a band",
-				"may come 24 to 48 blocks from them. /legionwarex band war|pirate [size] calls one for testing.").push("bands");
+				"(more on harder difficulties and as the area's local difficulty grows), up to bandMaxSize. Every so often one player is",
+				"picked and a band may come 24 to 48 blocks from them. /legionwarex band war|pirate [size] calls one for testing.").push("bands");
+		BAND_MAX_SIZE = builder
+				.comment("The most mobs in a band, war or pirate (FreshOrangeSlices, 2026-11-22: 5). A patrol's own size can reach 8 on Hard.")
+				.defineInRange("bandMaxSize", 5, 1, 20);
 		WAR_BANDS = builder
 				.comment("Illager war bands by day, in any land biome that has patrols (not near villages): pillagers, vindicators and",
 						"Illager Invasion's marauders, provokers, alchemists and the odd basher, led by one carrying the ominous banner",
@@ -87,19 +96,47 @@ public final class AddonConfig {
 				.defineInRange("warBandFromDay", 5, 0, 1000);
 		PIRATE_BANDS = builder
 				.comment("Bosses'Rise's pirates on the coasts, day or night: rooks and crossbow pirates led by a rook (the captain stays",
-						"on the Kraken's ship), landing on a beach or the shore by the sea near a player (never close to a Kraken's ship).",
-						"They walk 40% faster than the ship's crew, and rooks wait 1.25 s between swings instead of 2 s. Pirates never",
-						"despawn by themselves, so the add-on despawns these ones the way monsters despawn.")
+						"on the Kraken's ship), landing near a player on a warm beach: one in the biome tag legionwarex:pirate_beaches",
+						"(vanilla's Beach, Biomes O' Plenty's Dune Beach) with a sea in legionwarex:warm_oceans (warm and lukewarm) within",
+						"48 blocks. Never close to a Kraken's ship, nor within 128 blocks of another pirate band. They walk 40% faster than",
+						"the ship's crew, and rooks wait 1.25 s between swings instead of 2 s. Pirates never despawn by themselves, so the",
+						"add-on despawns these ones the way monsters despawn, and they sail off after pirateBandStayTicks.")
 				.define("pirateBands", true);
 		PIRATE_BAND_EVERY = builder
-				.comment("How often a pirate band is tried, in ticks (plus up to a minute); it only comes when a player is near a coast.")
-				.defineInRange("pirateBandEveryTicks", 4800, 200, DAY * 10);
+				.comment("How often a pirate band is tried, in ticks (plus up to a minute); one try in pirateBandChance brings one, so",
+						"about one every 20 minutes with the defaults, near a warm beach. (Named pirateBandEveryTicks before 0.4.0, at",
+						"4800: renamed so worlds made before take the new pace.)")
+				.defineInRange("pirateBandTryEveryTicks", 12000, 200, DAY * 10);
 		PIRATE_BAND_CHANCE = builder
 				.comment("The chance a try brings a pirate band.")
 				.defineInRange("pirateBandChance", 0.5, 0.0, 1.0);
 		PIRATE_BAND_FROM_DAY = builder
 				.comment("The first day pirate bands come.")
 				.defineInRange("pirateBandFromDay", 3, 0, 1000);
+		PIRATE_BAND_STAY = builder
+				.comment("How long a pirate band stays after landing, in ticks (6000 = 5 minutes): then each pirate sails off once no",
+						"player is within 32 blocks of it, also when its chunk loads again. A name-tagged, leashed or riding one stays.",
+						"Bands from before 0.4.0 have no landing time and sail off at once.")
+				.defineInRange("pirateBandStayTicks", 6000, 200, DAY * 10);
+		builder.pop();
+
+		builder.comment("Summons: monsters a player owns (Bosses'Rise's Pirate Saber pirates and Undying Tentacle ghosts, other mods'",
+				"summoned monsters). Nothing a player owns ever targets or hits its owner or the rest of that owner's side",
+				"(companions, pets, summons), and a summon never targets or hits any player. /legionwarex summons lists the Pirate",
+				"Saber's.").push("summons");
+		SUMMON_LIFETIME = builder
+				.comment("How long the Pirate Saber's two pirates stay, in ticks (1200 = 60 seconds). Ones already in a world get the time",
+						"from when they next load.")
+				.defineInRange("pirateSaberSummonTicks", 1200, 20, DAY);
+		SUMMONS_AT_ONCE = builder
+				.comment("How many of the Pirate Saber's pirates a player may have at once; a new charge sends the oldest away.")
+				.defineInRange("pirateSaberSummonsAtOnce", 2, 1, 20);
+		SABER_DAMAGE = builder
+				.comment("The Pirate Saber's attack damage as its tooltip shows it (Bosses'Rise's own: 12).")
+				.defineInRange("pirateSaberDamage", 9.0, 1.0, 40.0);
+		SABER_COOLDOWN = builder
+				.comment("The Pirate Saber's wait after a summon, in ticks (Bosses'Rise's own: 80).")
+				.defineInRange("pirateSaberCooldownTicks", 200, 0, 6000);
 		builder.pop();
 
 		builder.comment("Pirate charts: band pirates drop them, and they turn up in shipwreck and buried-treasure chests (the add-on's loot",
@@ -257,7 +294,31 @@ public final class AddonConfig {
 	}
 
 	public static int pirateBandEvery() {
-		return get(PIRATE_BAND_EVERY, 4800);
+		return get(PIRATE_BAND_EVERY, 12000);
+	}
+
+	public static int pirateBandStay() {
+		return get(PIRATE_BAND_STAY, 6000);
+	}
+
+	public static int bandMaxSize() {
+		return get(BAND_MAX_SIZE, 5);
+	}
+
+	public static int summonLifetime() {
+		return get(SUMMON_LIFETIME, 1200);
+	}
+
+	public static int summonsAtOnce() {
+		return get(SUMMONS_AT_ONCE, 2);
+	}
+
+	public static double pirateSaberDamage() {
+		return get(SABER_DAMAGE, 9.0);
+	}
+
+	public static int pirateSaberCooldown() {
+		return get(SABER_COOLDOWN, 200);
 	}
 
 	public static double pirateBandChance() {

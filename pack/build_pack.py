@@ -307,7 +307,7 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
     removed_items takes items out of the game as far as data can: every recipe in the pack's jars ({path: bytes})
     that makes only removed items is replaced by one that never loads, every loot table that names one is rewritten
     without it, and each is hidden from JEI. What a mod drops from its own code can't be changed this way; those are
-    only hidden (listed in notes).
+    only hidden (listed in notes). shown_items ({reason: [ids]}) leaves removed items in JEI all the same.
 
     recipe_edits changes a mod's recipe in place: {recipe id: {"swap": {old item: new item}}}, from the recipe in the
     jars.
@@ -419,7 +419,9 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
             carried = [name for name, jar_data in (jars or {}).items() if target in zipfile.ZipFile(io.BytesIO(jar_data)).namelist()] \
                 if jars else []
             notes.append(f"worldgen: {ident} replaced" + (f" (also in {', '.join(os.path.basename(c) for c in carried)}; the pack's wins)" if carried else ""))
-    hidden = list(dict.fromkeys(grouped("hidden_items") + removed))
+    # shown_items: removed (their recipes and loot entries out) but left in JEI, for one a mob still carries and drops.
+    shown = set(grouped("shown_items"))
+    hidden = [item for item in dict.fromkeys(grouped("hidden_items") + removed) if item not in shown]
     if hidden:
         out[f"{root}/data/c/tags/items/hidden_from_recipe_viewers.json"] = {
             "replace": False, "values": [{"id": item, "required": False} for item in hidden]}

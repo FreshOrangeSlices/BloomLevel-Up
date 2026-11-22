@@ -1,5 +1,6 @@
 package com.freshorangeslices.legionwarex.band;
 
+import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.LegionWareX;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +34,18 @@ import net.minecraftforge.registries.ForgeRegistries;
 public final class Bands {
 	/** On every band member (scoreboard tags are cheap to check each tick, unlike persistent data). */
 	public static final String TAG = "legionwarex_band";
-	/** In its persistent data: {kind, leader}. */
+	/** In its persistent data: {kind, leader, landed (game time)}. */
 	public static final String DATA = "legionwarex_band";
 
 	private Bands() {
 	}
 
-	/** How many: vanilla's patrol size (the local difficulty's effective difficulty, rounded up, plus one). */
+	/**
+	 * How many: vanilla's patrol size (the local difficulty's effective difficulty, rounded up, plus one), at most the
+	 * config's bandMaxSize (5: FreshOrangeSlices, 2026-11-22; a patrol reaches 8 on Hard).
+	 */
 	public static int vanillaSize(ServerLevel level, BlockPos pos) {
-		return (int) Math.ceil(level.getCurrentDifficultyAt(pos).getEffectiveDifficulty()) + 1;
+		return Math.min(AddonConfig.bandMaxSize(), (int) Math.ceil(level.getCurrentDifficultyAt(pos).getEffectiveDifficulty()) + 1);
 	}
 
 	/** A spot 'near' to 'far' blocks away (each way, at random) from a position, on the same level. */
@@ -185,6 +189,7 @@ public final class Bands {
 		mob.addTag(TAG);
 		CompoundTag data = new CompoundTag();
 		data.putString("kind", kind.id);
+		data.putLong("landed", level.getGameTime());
 
 		if (leader != null) {
 			data.putUUID("leader", leader);
@@ -205,6 +210,12 @@ public final class Bands {
 	public static UUID leaderOf(Entity entity) {
 		CompoundTag data = entity.getPersistentData().getCompound(DATA);
 		return data.hasUUID("leader") ? data.getUUID("leader") : null;
+	}
+
+	/** When its band came (game time), or -1 for one from before the add-on noted it (0.4.0). */
+	public static long landed(Entity entity) {
+		CompoundTag data = entity.getPersistentData().getCompound(DATA);
+		return data.contains("landed") ? data.getLong("landed") : -1L;
 	}
 
 	public static boolean inBand(Entity entity) {

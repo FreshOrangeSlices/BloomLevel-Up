@@ -8,6 +8,7 @@ import com.freshorangeslices.legionwarex.band.BandKind;
 import com.freshorangeslices.legionwarex.band.Bands;
 import com.freshorangeslices.legionwarex.band.FollowLeaderGoal;
 import com.freshorangeslices.legionwarex.band.PirateTuning;
+import com.freshorangeslices.legionwarex.summon.Summons;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -163,8 +164,9 @@ public final class BandGameTests {
 		band.forEach(pirate -> pirate.kill());
 		helper.runAfterDelay(60, () -> {
 			AABB around = new AABB(at).inflate(96);
-			List<Entity> bosses = level.getEntities((Entity) null, around,
-					entity -> entity instanceof LivingEntity living && living.isAlive() && id(entity).startsWith("block_factorys_bosses:"));
+			// Other tests' band pirates and summons nearby aren't the Kraken's.
+			List<Entity> bosses = level.getEntities((Entity) null, around, entity -> entity instanceof LivingEntity living && living.isAlive()
+					&& id(entity).startsWith("block_factorys_bosses:") && !Bands.inBand(entity) && !Summons.isSummon(entity));
 			helper.assertTrue(bosses.isEmpty(), "Killing the band brought nothing: " + bosses);
 			helper.succeed();
 		});
@@ -217,30 +219,41 @@ public final class BandGameTests {
 
 	/**
 	 * A pirate band sails off once its time is up and no player is within 32 blocks (the test server has none): one that
-	 * landed long ago goes within a second, a band that just landed stays, and so does a name-tagged pirate.
+	 * landed long ago goes within a second, a band that just landed stays, and so does a name-tagged pirate. Bands of one
+	 * (the leader stands where it's put), cleared whatever happens.
 	 */
 	@GameTest(template = "room", timeoutTicks = 100)
 	public static void aPirateBandSailsOffWhenItsTimeIsUp(GameTestHelper helper) {
 		ServerLevel level = helper.getLevel();
-		List<Mob> old = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 3, 3)), RandomSource.create(7), 2, false);
-		List<Mob> fresh = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 8, 8)), RandomSource.create(8), 1, false);
-		helper.assertTrue(old.size() == 2 && fresh.size() == 1, "Two bands found room: " + Bands.describe(BandKind.PIRATE, old) + "; "
-				+ Bands.describe(BandKind.PIRATE, fresh));
-		long longAgo = level.getGameTime() - AddonConfig.pirateBandStay() - 1;
-		old.forEach(pirate -> pirate.getPersistentData().getCompound(Bands.DATA).putLong("landed", longAgo));
-		helper.assertTrue(Bands.landed(fresh.get(0)) >= level.getGameTime() - 1, "A new band notes when it landed");
-		Mob named = old.get(1);
-		named.setCustomName(net.minecraft.network.chat.Component.literal("Kept"));
-		helper.assertTrue(BandEvents.sailsOff(old.get(0)), "The old band's time is up, and no player is near");
-		helper.assertFalse(BandEvents.sailsOff(named), "A name-tagged pirate stays");
-		helper.assertFalse(BandEvents.sailsOff(fresh.get(0)), "The new band stays");
+		List<Mob> all = new java.util.ArrayList<>();
+		List<Mob> old = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 3, 3)), RandomSource.create(7), 1, false);
+		List<Mob> named = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 5, 8)), RandomSource.create(8), 1, false);
+		List<Mob> fresh = Bands.spawn(level, BandKind.PIRATE, helper.absolutePos(Rooms.on(helper, 8, 5)), RandomSource.create(9), 1, false);
+		all.addAll(old);
+		all.addAll(named);
+		all.addAll(fresh);
+
+		try {
+			helper.assertTrue(old.size() == 1 && named.size() == 1 && fresh.size() == 1, "Three bands of one found room: " + all.size());
+			long longAgo = level.getGameTime() - AddonConfig.pirateBandStay() - 1;
+			old.get(0).getPersistentData().getCompound(Bands.DATA).putLong("landed", longAgo);
+			named.get(0).getPersistentData().getCompound(Bands.DATA).putLong("landed", longAgo);
+			named.get(0).setCustomName(net.minecraft.network.chat.Component.literal("Kept"));
+			helper.assertTrue(Bands.landed(fresh.get(0)) >= level.getGameTime() - 1, "A new band notes when it landed");
+			helper.assertTrue(BandEvents.sailsOff(old.get(0)), "The old band's time is up, and no player is near");
+			helper.assertFalse(BandEvents.sailsOff(named.get(0)), "A name-tagged pirate stays");
+			helper.assertFalse(BandEvents.sailsOff(fresh.get(0)), "The new band stays");
+		} catch (RuntimeException e) {
+			clear(all);
+			throw e;
+		}
+
 		helper.runAfterDelay(25, () -> {
 			try {
 				helper.assertTrue(old.get(0).isRemoved(), "The old band's pirate sailed off");
-				helper.assertFalse(named.isRemoved() || fresh.get(0).isRemoved(), "The name-tagged one and the new band are still here");
+				helper.assertFalse(named.get(0).isRemoved() || fresh.get(0).isRemoved(), "The name-tagged one and the new band are still here");
 			} finally {
-				clear(old);
-				clear(fresh);
+				clear(all);
 			}
 
 			helper.succeed();

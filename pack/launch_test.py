@@ -1176,6 +1176,9 @@ def summon_check(server, player, server_dir, shots):
             break
         time.sleep(2)
     _, third = charge()
+    # They stand at the player's sides: turn to the Rook for the picture.
+    server.send(f"execute as {player} at @s run tp @s ~ ~ ~ facing entity @e[type={rook},sort=nearest,limit=1] feet")
+    time.sleep(2)
     capture(shots, "pack_pirates")
     time.sleep(2)
     said = [line.split("LegionWareX summons:", 1)[1].strip() for line in server.lines[mark_all:]

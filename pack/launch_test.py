@@ -1127,8 +1127,9 @@ def summon_check(server, player, server_dir, shots):
     holds right-click for 1.5 seconds (the charge is 0.7), a zombie beside the player gives the pair a fight, a second
     charge a few seconds on is still waiting (10 s since 0.4.0), and a third once 11 game seconds have passed sends the
     first pair away. The
-    add-on's /legionwarex summons lists them each time. Screenshot pack_pirates. Fails when a charge summons no pair, a
-    waiting one does, or more than two are left; every target and hit the add-on refused is noted (pack-summons), with
+    add-on's /legionwarex summons lists them each time. Screenshot pack_pirates. Fails when a charge the game saw (the
+    saber's use statistic) summons no pair, a waiting one does, or more than two are left (a right-click that never
+    reached the game, a screen left open, only warns); every target and hit the add-on refused is noted (pack-summons), with
     the calls that tried it, which name the mod pointing summons at their owner. Returns (failures, notes)."""
     mods_dir = os.path.join(server_dir, "mods")
     if not any(m.startswith("block_factorys_bosses") for m in os.listdir(mods_dir)):
@@ -1153,9 +1154,12 @@ def summon_check(server, player, server_dir, shots):
     server.send(f"data get entity {player} Pos")
     pos_line = lines_since(server, mark_all, r"has the following entity data: \[", 10) or ""
     back = re.findall(r"(-?[0-9.]+)d", pos_line.split("entity data:", 1)[-1])[:3]
-    server.send(f"gamemode survival {player}")
     server.send(f"effect give {player} minecraft:resistance 90 4 true")
     server.send(f"effect give {player} minecraft:regeneration 90 4 true")
+    server.send(f"gamemode survival {player}")
+    # The saber's own use statistic says whether a charge finished at all (a screen left open eats the right-click).
+    server.send(f"scoreboard objectives add lwx_saber minecraft.used:{saber.replace(':', '.')}")
+    server.send(f"scoreboard players set {player} lwx_saber 0")
     server.send(f"execute at {player} run spreadplayers ~-120 ~ 0 1 false {player}")
     time.sleep(3)
     server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 0")
@@ -1164,6 +1168,10 @@ def summon_check(server, player, server_dir, shots):
     server.send(f"item replace entity {player} weapon.mainhand with {saber}")
     time.sleep(2)
     sent, first = charge()
+    mark = len(server.lines)
+    server.send(f"scoreboard players get {player} lwx_saber")
+    used_line = lines_since(server, mark, r"lwx_saber", 10) or ""
+    used = int(m.group(1)) if (m := re.search(r"has (\d+) \[lwx_saber\]", used_line)) else 0
     server.send(f"execute at {player} run summon minecraft:zombie ^ ^ ^4")
     time.sleep(3)
     _, waiting = charge()
@@ -1186,6 +1194,7 @@ def summon_check(server, player, server_dir, shots):
     for kind in (rook, shooter, "minecraft:zombie"):
         server.send(f"execute at {player} run kill @e[type={kind},distance=..32]")
     server.send(f"clear {player} {saber}")
+    server.send("scoreboard objectives remove lwx_saber")
     server.send(f"effect clear {player}")
     server.send(f"gamemode creative {player}")
     if len(back) == 3:
@@ -1195,9 +1204,10 @@ def summon_check(server, player, server_dir, shots):
     ids = lambda summons: {i for _, i, _ in summons}
     if said:
         print("::notice title=pack-summons::" + "%0A".join(s[:600].replace("%", "%25") for s in said[:12]))
-    if not sent:
-        print("::warning title=pack-summons::couldn't send the right-click to the client")
-        return [], ["summons: the right-click couldn't be sent"]
+    if not sent or (not first and not used):
+        why = "couldn't send the right-click to the client" if not sent else f"the right-click didn't reach the game: the saber was never used ({used_line.strip()[-160:]})"
+        print("::warning title=pack-summons::" + why)
+        return [], ["summons: " + why]
     if len(first) != 2:
         failures.append(f"summons: a charge of the Pirate Saber left {len(first)} summons, not 2 ({shown(first)})")
     elif ids(waiting) != ids(first):

@@ -1,0 +1,60 @@
+{
+	"name": "Heat Night",
+	"omen": "The air still shimmers though the sun is barely up.",
+	"subtitle": "The ground burns after sundown.",
+	"color": "gold",
+	"health": 1.5,
+	"climate": "hot",
+	"mobs": [
+		{
+			"entity": "minecraft:husk",
+			"weight": 25
+		},
+		{
+			"entity": "ddenizens:burning_skeleton",
+			"weight": 12
+		},
+		{
+			"entity": "ddenizens:magma_skeleton",
+			"weight": 10
+		},
+		{
+			"entity": "skarrier_mobs:snap",
+			"weight": 8,
+			"max": 2
+		},
+		{
+			"entity": "skarrier_mobs:quake",
+			"weight": 6,
+			"max": 1
+		},
+		{
+			"entity": "skarrier_mobs:viruleon",
+			"weight": 4,
+			"after": "minecraft:wither"
+		},
+		{
+			"entity": "legendary_monsters:bomber",
+			"weight": 6
+		},
+		{
+			"entity": "cataclysm:koboleton",
+			"weight": 12
+		},
+		{
+			"entity": "cataclysm:ignited_revenant",
+			"weight": 2,
+			"max": 1
+		},
+		{
+			"entity": "cataclysm:ignited_berserker",
+			"weight": 2,
+			"max": 1
+		},
+		{
+			"entity": "mythsandlegends:scorched_sentinel",
+			"weight": 2,
+			"max": 1
+		}
+	]
+}

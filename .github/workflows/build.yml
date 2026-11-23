@@ -553,6 +553,9 @@ jobs:
           # Construction Wand: a stone wand's row of cobblestone, placed from the player's own blocks.
           - layers: 6
             shot: pack_wand
+          # Themed nights: Bone Night's title at dusk, one of each of its mobs in rows in front of the player.
+          - layers: 6
+            shot: pack_night
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

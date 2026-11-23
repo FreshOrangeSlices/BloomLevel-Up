@@ -227,7 +227,7 @@ public final class IllagerCrowding extends SavedData {
 	}
 
 	/** Inside a structure that spawns its own monsters (an outpost's pillagers, a fort's crew), where its own rules hold. */
-	static boolean inSpawnStructure(ServerLevel level, BlockPos pos) {
+	public static boolean inSpawnStructure(ServerLevel level, BlockPos pos) {
 		StructureManager structures = level.structureManager();
 
 		for (Structure structure : structures.getAllStructuresAt(pos).keySet()) {

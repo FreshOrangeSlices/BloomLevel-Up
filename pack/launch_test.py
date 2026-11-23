@@ -1441,6 +1441,77 @@ def death_check(server, player):
     return [], [f"bloom: a death and respawn, no missing-profile warnings ({respawned or 'respawned'})"]
 
 
+def night_check(server, player, shots):
+    """The add-on's themed nights: every night's mobs against the game (one whose mod is in the layer but isn't in the game
+    fails), then Bone Night started (its title at dusk), one of each of its installed mobs placed in rows in front of the
+    player (in creative, with night vision for the picture) with the night's health, captured (pack_night), and 40 natural
+    spawns of another monster tried where the player stands: most should come as the night's (pack-night lists what came
+    and any mob whose health isn't the night's). Returns (failures, notes, report lines)."""
+    failures, notes, report = [], [], []
+    mark = len(server.lines)
+    server.send("legionwarex night themes")
+    line = lines_since(server, mark, r"LegionWareX night: \d+ themes", 30)
+    if not line:
+        return ["add-on: /legionwarex night themes said nothing (is the command there?)"], notes, report
+    listed = re.search(r"(\d+) themes: (.*?)(?:; not in the game though their mod is: (.*))?$", line.strip())
+    if not listed:
+        return [f"add-on: couldn't read the night list: {line.strip()[-300:]}"], notes, report
+    if listed.group(3):
+        failures.append("add-on: night mobs not in the game though their mod is: " + listed.group(3))
+    nights = re.findall(r"legionwarex:(\w+) ([^;]+?) \(health x([\d.]+), (\d+) of (\d+) installed\)", listed.group(2))
+    notes.append("add-on: themed nights: " + ", ".join(f"{n[0]} {n[3]}/{n[4]}" for n in nights))
+    if not any(n[0] == "bone" and int(n[3]) > 0 for n in nights):
+        failures.append("add-on: Bone Night has no installed mobs: " + listed.group(2)[:300])
+        return failures, notes, report
+    server.send(f"gamemode creative {player}")
+    server.send(f"effect give {player} minecraft:night_vision 60 0 true")
+    server.send(f"execute as {player} at @s run kill @e[type=!player,distance=..64]")
+    time.sleep(1)
+    mark = len(server.lines)
+    server.send("legionwarex night start legionwarex:bone")
+    if not lines_since(server, mark, r"LegionWareX night: started", 20):
+        failures.append("add-on: /legionwarex night start said nothing")
+    mark = len(server.lines)
+    server.send(f"execute as {player} at @s run legionwarex night show")
+    line = lines_since(server, mark, r"LegionWareX night: placed", 60) or ""
+    placed = re.search(r"placed (\d+) of (\d+) installed mobs of [\w:]+: (.*?)(?:; couldn't place: (.*))?$", line.strip())
+    if not placed:
+        failures.append(f"add-on: couldn't read the night's placed mobs: {line.strip()[-300:]}")
+    else:
+        rows = re.findall(r"([\w:]+) \(hp (\d+)/(\d+), base (\d+)\)", placed.group(3))
+        boosted = [r for r in rows if abs(int(r[2]) - round(int(r[3]) * 1.5)) <= 1]
+        off = [f"{r[0]} {r[2]} of base {r[3]}" for r in rows if r not in boosted]
+        notes.append(f"add-on: Bone Night: {placed.group(1)} of {placed.group(2)} installed mobs placed, {len(boosted)} with 1.5x health")
+        report.append("placed: " + placed.group(3))
+        if placed.group(4):
+            report.append("couldn't place: " + placed.group(4))
+        if off:
+            report.append("health not the night's: " + ", ".join(off))
+        if rows and not boosted:
+            failures.append("add-on: no Bone Night mob got the night's health: " + ", ".join(off)[:300])
+    time.sleep(2)
+    capture(shots, "pack_night")
+    mark = len(server.lines)
+    server.send(f"execute as {player} at @s run legionwarex night check")
+    line = lines_since(server, mark, r"LegionWareX night: check:", 30) or ""
+    checked = re.search(r"check: (\d+) of (\d+) natural ([\w:]+) spawns came as \w+ mobs \(expected about (\d+)", line)
+    if not checked:
+        failures.append(f"add-on: couldn't read the night check: {line.strip()[-300:]}")
+    else:
+        notes.append("add-on: " + line.strip().split("LegionWareX night: ", 1)[-1][:400])
+        if int(checked.group(1)) == 0 and int(checked.group(4)) > 0:
+            failures.append("add-on: on Bone Night no natural spawn came as one of the night's: " + line.strip()[-300:])
+    server.send("legionwarex night stop")
+    time.sleep(1)
+    server.send(f"execute as {player} at @s run kill @e[tag=legionwarex_night,distance=..96]")
+    server.send("time set 1000")
+    time.sleep(2)
+    server.send(f"execute as {player} at @s run kill @e[type=item,distance=..96]")
+    server.send(f"effect clear {player} minecraft:night_vision")
+    server.send(f"gamemode survival {player}")
+    return failures, notes, report
+
+
 def krampus_check(server, player):
     """The add-on's Krampus count (Born in Chaos's meter, filled by villager kills only): the meter set to 0, then five
     villagers summoned beside the player and killed by them; the 5th should bring Krampus (logged "Krampus came"), none
@@ -1744,6 +1815,14 @@ def main():
             failures += wand_failures
             notes += wand_notes
             progress("wand check done")
+            night_failures, night_notes, night_report = night_check(server, PLAYER, shots)
+            failures += night_failures
+            notes += night_notes
+            if night_report:
+                text = chr(10).join(night_report)
+                for n, i in enumerate(range(0, min(len(text), 3900 * 2), 3900)):
+                    print(f"::notice title=pack-night-{n}::{esc(text[i:i + 3900])}")
+            progress("night check done")
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes

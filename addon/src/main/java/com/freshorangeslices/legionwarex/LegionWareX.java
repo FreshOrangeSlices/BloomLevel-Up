@@ -11,6 +11,8 @@ import com.freshorangeslices.legionwarex.chart.PirateChartItem;
 import com.freshorangeslices.legionwarex.companion.CompanionEvents;
 import com.freshorangeslices.legionwarex.companion.OwnerHits;
 import com.freshorangeslices.legionwarex.harvest.HarvestCommand;
+import com.freshorangeslices.legionwarex.night.NightCommand;
+import com.freshorangeslices.legionwarex.night.NightEvents;
 import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
 import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
@@ -106,6 +108,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(PirateSaber.class);
 		MinecraftForge.EVENT_BUS.register(DeadEnchantments.class);
 		MinecraftForge.EVENT_BUS.register(RareMobGear.class);
+		MinecraftForge.EVENT_BUS.register(NightEvents.class);
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
@@ -115,7 +118,8 @@ public final class LegionWareX {
 	private static void registerCommands(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
 				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node())
-				.then(KrampusNaughtiness.node()).then(IllagerCrowding.node()).then(EntityWatch.node()).then(Summons.node()).then(DeadEnchantments.node()));
+				.then(KrampusNaughtiness.node()).then(IllagerCrowding.node()).then(EntityWatch.node()).then(Summons.node()).then(DeadEnchantments.node())
+				.then(NightCommand.node()));
 		// Anyone's.
 		event.getDispatcher().register(HiddenArmor.command());
 	}

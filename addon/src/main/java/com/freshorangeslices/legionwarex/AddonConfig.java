@@ -48,6 +48,10 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.BooleanValue MILK_CURES;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> DEAD_ENCHANTMENTS;
 	private static final ForgeConfigSpec.DoubleValue RARE_GEAR_CHANCE;
+	private static final ForgeConfigSpec.BooleanValue THEMED_NIGHTS;
+	private static final ForgeConfigSpec.IntValue THEMED_NIGHT_EVERY;
+	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_SHARE;
+	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_OFF_CLIMATE;
 	/** Enchantments that do nothing in the pack (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"). */
 	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity", "skarrier_mobs:bluntness", "skarrier_mobs:mass",
 			"skarrier_mobs:mobility");
@@ -218,6 +222,29 @@ public final class AddonConfig {
 		HARVEST_MOBS = builder
 				.comment("Which mobs spawn all year (entity ids).")
 				.defineListAllowEmpty("harvestCourtMobs", HARVEST_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+		builder.pop();
+
+		builder.comment("Themed nights (FreshOrangeSlices, 2026-11-22/23): now and then a night of one kind of monster (bugs, bones, frost,",
+				"heat, demons, the deep, vanilla's own), from a shuffled deck so each comes once before any comes again. Most other",
+				"monsters that would spawn naturally that night come as one of the night's instead, with more health; the night's",
+				"climate (cold, hot) has them at full strength, elsewhere far fewer. Myths & Legends' Blood Moon keeps its own cycle and",
+				"wins a night they'd share: the themed night waits for the next. They despawn like any monster, and what's left of",
+				"them after the night goes once no player is within 32 blocks. The nights are data files",
+				"(data/<namespace>/legionwarex/nights/<name>.json). /legionwarex night [themes|start <night>|stop|in <days>|show|check].").push("nights");
+		THEMED_NIGHTS = builder
+				.comment("Whether themed nights come.")
+				.define("themedNights", true);
+		THEMED_NIGHT_EVERY = builder
+				.comment("Days from one themed night to the next (Minecraft days, 20 minutes each).")
+				.defineInRange("themedNightEveryDays", 30, 1, 365);
+		THEMED_NIGHT_SHARE = builder
+				.comment("Of the other monsters that would spawn naturally on a themed night, the share that come as one of the night's",
+						"instead (in the night's own climate; elsewhere this times themedNightOffClimateShare).")
+				.defineInRange("themedNightShare", 0.8, 0.0, 1.0);
+		THEMED_NIGHT_OFF_CLIMATE = builder
+				.comment("How strong a cold or hot night (or one of its mobs) is outside its climate: this in temperate land, its square",
+						"in the opposite climate (0.2: a fifth, and a twenty-fifth in the heat for frost mobs).")
+				.defineInRange("themedNightOffClimateShare", 0.2, 0.0, 1.0);
 		builder.pop();
 
 		builder.push("world");
@@ -419,6 +446,22 @@ public final class AddonConfig {
 
 	public static double rareMobGearDropChance() {
 		return get(RARE_GEAR_CHANCE, 0.005);
+	}
+
+	public static boolean themedNights() {
+		return get(THEMED_NIGHTS, true);
+	}
+
+	public static int themedNightEveryDays() {
+		return get(THEMED_NIGHT_EVERY, 30);
+	}
+
+	public static double themedNightShare() {
+		return get(THEMED_NIGHT_SHARE, 0.8);
+	}
+
+	public static double themedNightOffClimateShare() {
+		return get(THEMED_NIGHT_OFF_CLIMATE, 0.2);
 	}
 
 	public static boolean milkCuresBadOmen() {

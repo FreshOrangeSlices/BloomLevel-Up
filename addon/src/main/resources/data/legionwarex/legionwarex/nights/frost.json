@@ -1,0 +1,53 @@
+{
+	"name": "Frost Night",
+	"omen": "There's frost on the inside of the windows this morning.",
+	"subtitle": "The cold comes walking.",
+	"color": "aqua",
+	"health": 1.5,
+	"climate": "cold",
+	"mobs": [
+		{
+			"entity": "minecraft:stray",
+			"weight": 25
+		},
+		{
+			"entity": "ddenizens:frost_skeleton",
+			"weight": 15
+		},
+		{
+			"entity": "skarrier_mobs:frost",
+			"weight": 10
+		},
+		{
+			"entity": "graveyard:revenant",
+			"weight": 8
+		},
+		{
+			"entity": "mythsandlegends:draugr",
+			"weight": 10
+		},
+		{
+			"entity": "cataclysm:draugr",
+			"weight": 10
+		},
+		{
+			"entity": "cataclysm:elite_draugr",
+			"weight": 5
+		},
+		{
+			"entity": "cataclysm:royal_draugr",
+			"weight": 1,
+			"max": 1
+		},
+		{
+			"entity": "mythsandlegends:karakondjul",
+			"weight": 2,
+			"max": 1
+		},
+		{
+			"entity": "skarrier_mobs:freeze",
+			"weight": 5,
+			"after": "minecraft:wither"
+		}
+	]
+}

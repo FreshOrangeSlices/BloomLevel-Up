@@ -1,5 +1,6 @@
 import os, re, json, zipfile, subprocess, urllib.request, traceback
 def get(url):
+    url = url.replace(' ', '%20')
     req = urllib.request.Request(url, headers={"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"})
     return urllib.request.urlopen(req, timeout=180).read()
 def dec(cls, jar='j.jar'):
@@ -7,8 +8,7 @@ def dec(cls, jar='j.jar'):
     return [l for l in r.stdout.splitlines() if l.strip() and not l.startswith(' *') and not l.startswith('import ')]
 out = []; p = out.append
 jars = json.load(open('probe/jars.json'))
-for key in ['the-graveyard-forge', 'undead-unleashed', 'borninchaos', 'monster-expansion', 'mutant-monsters', 'myths-and-legends',
-            'mariums-soulslike-weaponry', 'legendary-monsters', 'l_enders-cataclysm', 'Skarrier Mobs', 'Dungeon Denizens']:
+for key in ['legendary-monsters']:
     try:
         open('j.jar', 'wb').write(get(jars[key])); z = zipfile.ZipFile('j.jar'); names = z.namelist()
         ids = set()

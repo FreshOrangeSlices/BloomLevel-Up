@@ -1,36 +1,32 @@
-import os, re, sys, json, zipfile, urllib.request, urllib.parse, traceback
+import os, re, sys, json, zipfile, subprocess, urllib.request, traceback
 out = []; p = out.append
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"})
     return urllib.request.urlopen(req, timeout=120).read()
-PAT = re.compile(r'blood.?moon|bloodmoon|swift.?strike|flurry|cleave|heavy.?slam|rusted|bone_dagger|vial_of_blood|orchid', re.I)
+def dec(j, cls, limit=6000):
+    r = subprocess.run(['java', '-jar', 'cfr.jar', j, '--jarfilter', '^' + re.escape(cls) + '$'], capture_output=True, text=True)
+    return '\n'.join(l for l in r.stdout.splitlines() if not l.startswith(' *') and not l.startswith('import ') and l.strip())[:limit]
 try:
     jars = json.load(open('probe/jars.json'))
-    for name, url in jars.items():
-        try:
-            path = 'j_' + re.sub(r'\W', '_', name) + '.jar'
-            open(path, 'wb').write(get(url.replace(' ', '%20').replace('+', '%2B') if 'forgecdn' in url else url))
-            z = zipfile.ZipFile(path)
-        except Exception as e:
-            p(f"#### {name}: download failed {e}"); continue
-        hits = []
-        for n in z.namelist():
-            low = n.lower()
-            if low.endswith('.class'):
-                data = z.read(n)
-                found = sorted(set(m.group(0).decode('latin1') for m in re.finditer(rb'(?i)blood.?moon|swift.?strike|flurry|cleave|heavy.?slam|bone_dagger|vial_of_blood', data)))
-                if found: hits.append(f"class {n}: {found}")
-            elif low.endswith(('.json', '.toml', '.lang', '.txt', '.mcmeta', '.cfg')):
-                if PAT.search(n):
-                    hits.append(f"file {n}")
-                if '/lang/en_us' in low or low.endswith('.toml') or ('recipes/' in low or 'loot_tables/' in low or 'loot_table' in low):
-                    try: text = z.read(n).decode('utf8', 'replace')
-                    except Exception: continue
-                    for line in text.splitlines():
-                        if PAT.search(line):
-                            hits.append(f"{n}: {line.strip()[:300]}")
-        p(f"#### {name} ({len(hits)} hits)")
-        for h in hits[:45]: p(h)
+    open('ss.jar', 'wb').write(get(jars['simply-swords']))
+    z = zipfile.ZipFile('ss.jar'); names = z.namelist()
+    p("simply swords file: " + jars['simply-swords'].split('/')[-1])
+    for cls in ['net.sweenus.simplyswords.api.WeaponImplicitRegistry', 'net.sweenus.simplyswords.config.CompatibilityConfig']:
+        p(f"==== {cls}\n{dec('ss.jar', cls, 7000)}")
+    dirs = sorted(set('/'.join(n.split('/')[:3]) for n in names if n.startswith('data/')))
+    p("data dirs: " + ", ".join(dirs))
+    impl = [n for n in names if 'implicit' in n.lower()]
+    p("implicit files: " + ", ".join(impl[:80]))
+    lang = json.loads(z.read('assets/simplyswords/lang/en_us.json'))
+    p("implicit lang: " + "\n".join(f"{k}: {v}" for k, v in lang.items() if 'implicit' in k.lower())[:5000])
+    # Oddities' Blade of the Orchid.
+    open('od.jar', 'wb').write(get(jars['Bosses Oddities']))
+    zo = zipfile.ZipFile('od.jar')
+    for n in zo.namelist():
+        if re.search(r'(?i)orchid.*(blade|sword)|blade.*orchid', n) and n.endswith('.class'):
+            p(f"==== {n}\n{dec('od.jar', n[:-6].replace('/', '.'), 4000)}")
+    for n in zo.namelist():
+        if 'weapon_attributes' in n: p(f"oddities {n}: {zo.read(n).decode()[:400]}")
 except Exception:
     p(traceback.format_exc())
 open('report.txt', 'w').write('\n'.join(out))

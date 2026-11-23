@@ -24,6 +24,7 @@ import com.freshorangeslices.legionwarex.world.IllagerCrowding;
 import com.freshorangeslices.legionwarex.world.KrampusNaughtiness;
 import com.freshorangeslices.legionwarex.world.LateCompat;
 import com.freshorangeslices.legionwarex.world.MobKillDrops;
+import com.freshorangeslices.legionwarex.world.RareMobGear;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
 import com.freshorangeslices.legionwarex.world.EntityWatch;
 import com.freshorangeslices.legionwarex.world.MilkCures;
@@ -104,6 +105,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(Summons.class);
 		MinecraftForge.EVENT_BUS.register(PirateSaber.class);
 		MinecraftForge.EVENT_BUS.register(DeadEnchantments.class);
+		MinecraftForge.EVENT_BUS.register(RareMobGear.class);
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);

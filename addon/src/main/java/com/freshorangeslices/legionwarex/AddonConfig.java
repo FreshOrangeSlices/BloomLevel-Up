@@ -47,6 +47,7 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
 	private static final ForgeConfigSpec.BooleanValue MILK_CURES;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> DEAD_ENCHANTMENTS;
+	private static final ForgeConfigSpec.DoubleValue RARE_GEAR_CHANCE;
 	/** Enchantments that do nothing in the pack (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"). */
 	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity", "skarrier_mobs:bluntness", "skarrier_mobs:mass",
 			"skarrier_mobs:mobility");
@@ -239,6 +240,11 @@ public final class AddonConfig {
 						"use it on (no spell costs an item); Skarrier Mobs' three are for its Morgenstern, which the pack takes out.",
 						"/legionwarex enchantments checks them.")
 				.defineListAllowEmpty("deadEnchantments", DEAD_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+		RARE_GEAR_CHANCE = builder
+				.comment("The chance a monster drops a piece of #legionwarex:rare_mob_gear it was wearing (Epic Knights' rust series),",
+						"flat: Looting doesn't raise it (vanilla drops worn gear 8.5% of the time, plus 1% a Looting level). Only when a",
+						"player had a hand in the kill, as in vanilla. A piece the monster picked up still always drops. 0.005 is 1 in 200.")
+				.defineInRange("rareMobGearDropChance", 0.005, 0.0, 1.0);
 		KRAMPUS_ANIMALS = builder
 				.comment("Whether killing animals adds to Born in Chaos's naughtiness (its Krampus meter: warnings, then Krampus comes for",
 						"the player). Off: only villagers and wandering traders count. Applied when the server starts.")
@@ -409,6 +415,10 @@ public final class AddonConfig {
 
 	public static List<? extends String> deadEnchantments() {
 		return get(DEAD_ENCHANTMENTS, DEAD_DEFAULT);
+	}
+
+	public static double rareMobGearDropChance() {
+		return get(RARE_GEAR_CHANCE, 0.005);
 	}
 
 	public static boolean milkCuresBadOmen() {

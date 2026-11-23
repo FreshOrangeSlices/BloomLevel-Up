@@ -545,6 +545,34 @@ def recipe_mentions(server_dir, ids):
     return found
 
 
+# Items a player reported missing, reported from the server's registry dump until found (FreshOrangeSlices, 2026-11-22:
+# the server didn't show the Graveyard's bone dagger, which the Lich's vial needs).
+WATCHED_ITEMS = {"graveyard:bone_dagger": "minecraft:bone"}
+
+
+def item_watch(dump_file):
+    """For each watched item: is it in the game, is it hidden from JEI (c:hidden_from_recipe_viewers), which recipes
+    make it, and which other recipes take only its ingredient (one could be taking its pattern). Returns notes."""
+    if not os.path.exists(dump_file):
+        return ["item watch: no registry dump"]
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    items = {r["id"]: r for r in rows if r.get("kind") == "item"}
+    recipes = [r for r in rows if r.get("kind") == "recipe"]
+    notes = []
+    for item, ingredient in WATCHED_ITEMS.items():
+        row = items.get(item)
+        if row is None:
+            notes.append(f"item watch: {item} is not in the game")
+            continue
+        hidden = "c:hidden_from_recipe_viewers" in row.get("tags", [])
+        makes = [f"{r['id']} ({r.get('type')}, takes {', '.join(r.get('ingredients', [])) or 'nothing listed'})" for r in recipes if r.get("result") == item]
+        alike = [f"{r['id']} -> {r.get('result')} ({r.get('type')})" for r in recipes
+                 if r.get("ingredients") == [ingredient] and r.get("result") != item]
+        notes.append(f"item watch: {item} ({row.get('name', '')}) is in the game{', hidden from JEI' if hidden else ', shown in JEI'}; "
+                     f"made by {'; '.join(makes) or 'no recipe'}; other recipes from {ingredient} alone: {'; '.join(alike) or 'none'}")
+    return notes
+
+
 def leftover_check(dump_file, spec_file, server_dir):
     """Materials (ingots, nuggets, gems, scales, plates and the like) that nothing takes any more: what a gear trim can
     leave behind (FreshOrangeSlices: copper had almost nothing left to make). A material here is one no recipe crafts
@@ -1793,6 +1821,7 @@ def main():
     if unsorted:
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
     enchantment_list(os.path.join(server_dir, "bloom-dump.jsonl"))
+    notes += item_watch(os.path.join(server_dir, "bloom-dump.jsonl"))
     # ---- materials a trim left with nothing to make (reviewed by hand: some are drops with uses outside recipes)
     leftover_note, leftovers = leftover_check(os.path.join(server_dir, "bloom-dump.jsonl"),
                                               os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)

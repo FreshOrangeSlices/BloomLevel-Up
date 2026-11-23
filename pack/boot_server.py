@@ -158,6 +158,14 @@ def main():
     install = f"Forge installed in {installed:.0f} s, " if installed else ""
     print(f"::notice title=server-boot::{install}up in {done:.0f} s with -Xmx{heap}; {mods}; server process memory {memory} MB right after start")
 
+    # Worn gear the add-on keeps rare (RareMobGear: Epic Knights' rust series, 1 in 200): how many items its tag found.
+    rare = next((l for l in log if "LegionWareX rare gear:" in l), None)
+    if rare:
+        found = re.search(r"rare gear: (\d+) items", rare)
+        knights = os.path.isdir(mods_dir) and any(f.lower().startswith("epic") and "knight" in f.lower() for f in os.listdir(mods_dir))
+        level = "warning" if found and found.group(1) == "0" and knights else "notice"
+        print(f"::{level} title=server-rare-gear::{esc(rare.split('LegionWareX ', 1)[-1][:3000])}")
+
     # Other mods' compat code the add-on held until common setup (LateCompat: Copper Age Backport's Sophisticated
     # Storage compat, which otherwise stops the server starting): each held one should have run.
     held = [l for l in log if "LegionWareX compat:" in l]

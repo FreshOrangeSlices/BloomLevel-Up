@@ -1925,6 +1925,10 @@ def main():
     mods = next((l for l in client_log if re.search(r"Found \d+ mod|Loading \d+ mods|Mod List", l)), "")
     summary = [f"joined: {'yes' if joined else 'no'}", applied or "no pack defaults line", packs_line, mods.strip()] + notes
     print(f"::notice title=pack-launch::{esc(chr(10).join(summary)[:3900])}")
+    # The checks' notes whole (the summary above stops at 3900 characters, which the presets line nearly fills), for
+    # the workflow's next step to print as pack-notes-NN.
+    with open("pack-notes.txt", "w") as out:
+        out.write("\n".join(notes) + "\n")
     client_warnings(client_log)
     problems = [l for l in client_log if re.search(r"/ERROR\]|Exception|Caused by|Mixin apply failed|InvalidInjection|Missing or unsupported", l)]
     if problems:

@@ -451,6 +451,17 @@ jobs:
         if: always()
         run: |
           [ -f pack-progress.txt ] && echo "::notice title=pack-progress::$(sed 's/%/%25/g' pack-progress.txt | sed ':a;N;$!ba;s/\n/%0A/g')" || true
+      # Every check's notes (the wand's blocks placed, the enchantment rolls, ...), whole: the test's own summary is cut short.
+      - name: launch test notes
+        if: always()
+        run: |
+          [ -f pack-notes.txt ] || exit 0
+          python3 - <<'EOF'
+          text = open("pack-notes.txt", errors="replace").read()
+          esc = lambda s: s.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+          for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
+              print(f"::notice title=pack-notes-{n:02d}::{esc(text[i:i + 3900])}")
+          EOF
       # Every enchantment by mod (the server's registry dump), for finding ones that do the same thing.
       - name: enchantments
         if: always()

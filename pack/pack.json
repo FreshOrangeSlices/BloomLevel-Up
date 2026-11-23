@@ -568,7 +568,7 @@
         "sophisticatedstorage:limited_netherite_barrel_2", "sophisticatedstorage:limited_netherite_barrel_3", "sophisticatedstorage:limited_netherite_barrel_4",
         "sophisticatedstorage:shulker_box", "sophisticatedstorage:copper_shulker_box", "sophisticatedstorage:iron_shulker_box",
         "sophisticatedstorage:gold_shulker_box", "sophisticatedstorage:diamond_shulker_box", "sophisticatedstorage:netherite_shulker_box",
-        "sophisticatedstorage:controller", "sophisticatedstorage:storage_link", "sophisticatedstorage:storage_connector",
+        "sophisticatedstorage:controller", "sophisticatedstorage:storage_link", "sophisticatedstorage:oak_storage_connector", "sophisticatedstorage:spruce_storage_connector", "sophisticatedstorage:birch_storage_connector", "sophisticatedstorage:jungle_storage_connector", "sophisticatedstorage:acacia_storage_connector", "sophisticatedstorage:dark_oak_storage_connector", "sophisticatedstorage:mangrove_storage_connector", "sophisticatedstorage:cherry_storage_connector", "sophisticatedstorage:bamboo_storage_connector", "sophisticatedstorage:crimson_storage_connector", "sophisticatedstorage:warped_storage_connector",
         "sophisticatedstorage:storage_input", "sophisticatedstorage:storage_output", "sophisticatedstorage:storage_io",
         "sophisticatedstorage:tank", "sophisticatedstorage:copper_tank", "sophisticatedstorage:iron_tank",
         "sophisticatedstorage:gold_tank", "sophisticatedstorage:diamond_tank", "sophisticatedstorage:netherite_tank"
@@ -628,7 +628,7 @@
       "ddenizens:weapon_attributes/shadow_falchion": {"why": "Shadow Falchion: a cutlass", "json": {"parent": "bettercombat:cutlass"}},
       "legendary_monsters:weapon_attributes/somber_key": {"why": "Somber Key: a sword", "json": {"parent": "bettercombat:sword"}},
       "mythsandlegends:weapon_attributes/noctifer_tenebris": {"why": "Noctifer Tenebris: a sword", "json": {"parent": "bettercombat:sword"}},
-      "onlyhammersandexcavators:weapon_attributes/wooden_hammer": {"why": "Only Hammers And Excavators' mining hammers: Better Combat's name rules (mace|hammer|flail) would swing them as maces, weapons Bloom would then want sorted; the pickaxe's swing, as for any pickaxe", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/wooden_hammer": {"why": "Only Hammers And Excavators' mining hammers and excavators: Better Combat's name rules (mace|hammer|flail) match the whole id, the mod's name included, so they would all swing as maces, weapons Bloom would then want sorted; the pickaxe's swing, as for any pickaxe", "json": {"parent": "bettercombat:pickaxe"}},
       "onlyhammersandexcavators:weapon_attributes/stone_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
       "onlyhammersandexcavators:weapon_attributes/iron_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
       "onlyhammersandexcavators:weapon_attributes/gold_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
@@ -637,7 +637,17 @@
       "onlyhammersandexcavators:weapon_attributes/obsidian_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
       "onlyhammersandexcavators:weapon_attributes/diamond_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
       "onlyhammersandexcavators:weapon_attributes/emerald_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
-      "onlyhammersandexcavators:weapon_attributes/netherite_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}}
+      "onlyhammersandexcavators:weapon_attributes/netherite_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/wooden_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/stone_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/iron_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/gold_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/lapis_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/redstone_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/obsidian_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/diamond_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/emerald_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/netherite_excavator": {"why": "As the wooden hammer (an excavator digs like a shovel, and swings like a tool)", "json": {"parent": "bettercombat:pickaxe"}}
     },
     "worldgen": {
       "_comment": "Worldgen files the pack replaces, at data/<namespace>/worldgen/<path>.json. They only shape chunks made after the change: an old world gets seams where new chunks meet old ones, so these are for new worlds. The pack test reads the terrain the server would make (the add-on's terrain survey, -Dlegionwarex.terrain) beside vanilla's for the same seed.",

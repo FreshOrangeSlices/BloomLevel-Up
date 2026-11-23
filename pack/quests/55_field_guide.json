@@ -765,6 +765,575 @@
      "count": 4
     }
    ]
+  },
+  {
+   "id": "ss_chest",
+   "title": "Sophisticated Chests",
+   "subtitle": "Sophisticated Storage",
+   "icon": "sophisticatedstorage:chest",
+   "x": 0,
+   "y": 10.5,
+   "shape": "circle",
+   "description": [
+    "Sophisticated Storage's chests and barrels hold more than vanilla's and take upgrades; two chests side by side make a double.",
+    "",
+    "Packing Tape lets you pick one up with everything still inside and set it down somewhere else."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "sophisticatedstorage:chest",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:oak_log",
+     "count": 8
+    }
+   ]
+  },
+  {
+   "id": "ss_tier",
+   "title": "Tier Up",
+   "subtitle": "Sophisticated Storage",
+   "icon": "sophisticatedstorage:iron_chest",
+   "x": 1.5,
+   "y": 10.5,
+   "shape": "circle",
+   "description": [
+    "Right-click a placed chest or barrel with a tier upgrade (basic to copper, then iron, gold, diamond and netherite) to raise it where it stands, contents and all. Each tier brings more slots and more room for upgrades."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "sophisticatedstorage:iron_chest",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 4
+    }
+   ],
+   "deps": [
+    "ss_chest"
+   ]
+  },
+  {
+   "id": "ss_stack",
+   "title": "Stack Upgrades",
+   "subtitle": "Sophisticated Storage",
+   "icon": "sophisticatedstorage:stack_upgrade_tier_1",
+   "x": 3,
+   "y": 10.5,
+   "shape": "circle",
+   "description": [
+    "A stack upgrade multiplies how many stacks fit in each slot: twice as many for the first, then 4, 8, 16 and 32 times. Other upgrades pick up, filter, compact, smelt, feed you, or void what you don't want.",
+    "",
+    "Limited Barrels have only one to four slots, each holding far more of a single item."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "sophisticatedstorage:stack_upgrade_tier_1",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:redstone",
+     "count": 8
+    }
+   ],
+   "deps": [
+    "ss_chest"
+   ]
+  },
+  {
+   "id": "ss_controller",
+   "title": "One Wall of Storage",
+   "subtitle": "Sophisticated Storage",
+   "icon": "sophisticatedstorage:controller",
+   "x": 4.5,
+   "y": 10.5,
+   "shape": "diamond",
+   "description": [
+    "A Storage Controller joins a wall of touching chests and barrels into one: put items into the controller and they go into the storage connected to it. Storage Links join groups that don't touch, and Storage Connectors bridge gaps.",
+    "",
+    "Tom's Simple Storage's terminals reach your chests too (Getting Started has it)."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "sophisticatedstorage:controller",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 1
+    }
+   ],
+   "deps": [
+    "ss_tier"
+   ]
+  },
+  {
+   "id": "sb_backpack",
+   "title": "A Backpack",
+   "subtitle": "Sophisticated Backpacks",
+   "icon": "sophisticatedbackpacks:backpack",
+   "x": 0,
+   "y": 12,
+   "shape": "circle",
+   "description": [
+    "Wear a backpack on your back or carry it; its key (B) opens it wherever you are. Tiers from copper to netherite add slots, and upgrades go in like a chest's."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "sophisticatedbackpacks:backpack",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:leather",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "id": "sb_feeding",
+   "title": "Upgrades on the Go",
+   "subtitle": "Sophisticated Backpacks",
+   "icon": "sophisticatedbackpacks:feeding_upgrade",
+   "x": 1.5,
+   "y": 12,
+   "shape": "circle",
+   "description": [
+    "Backpack upgrades start from an Upgrade Base. The Pickup and Magnet upgrades pull drops in, the Feeding upgrade feeds you from the backpack when you're hungry, Compacting presses nuggets and ingots into blocks, and Void deletes what you filter."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "sophisticatedbackpacks:feeding_upgrade",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cooked_beef",
+     "count": 8
+    }
+   ],
+   "deps": [
+    "sb_backpack"
+   ]
+  },
+  {
+   "id": "cw_wand",
+   "title": "Construction Wand",
+   "subtitle": "Construction Wand",
+   "icon": "constructionwand:stone_wand",
+   "x": 0,
+   "y": 13.5,
+   "shape": "circle",
+   "description": [
+    "Right-click a block face with a wand to extend it by many blocks at once, taken from your inventory. Stone, iron and diamond wands place more and last longer; the Infinity Wand, made with a nether star, never breaks.",
+    "",
+    "Sneak and scroll to lock it to a row or column; its tooltip shows the rest of its keys. Cores, combined with the wand in a crafting grid, add modes: the Angel core places blocks behind the one you face or in mid-air, and the Destruction core clears blocks fast."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "constructionwand:stone_wand",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cobblestone",
+     "count": 64
+    }
+   ]
+  },
+  {
+   "id": "oh_hammer",
+   "title": "Hammers and Excavators",
+   "subtitle": "Only Hammers And Excavators",
+   "icon": "onlyhammersandexcavators:iron_hammer",
+   "x": 1.5,
+   "y": 13.5,
+   "shape": "circle",
+   "description": [
+    "A hammer mines a 3 by 3 area of stone and ore, and an excavator the same of dirt, sand and gravel. Sneak to mine a single block.",
+    "",
+    "They come in wood up to netherite, with lapis, redstone, emerald and obsidian between, and last a long time. O shows the area they'll mine."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "onlyhammersandexcavators:iron_hammer",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "ca_golem",
+   "title": "The Copper Golem",
+   "subtitle": "Copper Age Backport",
+   "icon": "minecraft:copper_chest",
+   "x": 0,
+   "y": 15,
+   "shape": "circle",
+   "description": [
+    "Copper Age Backport brings copper tools and armor, copper chests, lanterns, bars, chains, bulbs and doors, and the Copper Golem.",
+    "",
+    "Put a carved pumpkin on a copper block: the block becomes a Copper Chest and a golem steps onto it. It carries items out of copper chests into the chests and barrels around it. Wax keeps copper from weathering."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "minecraft:copper_chest",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:copper_ingot",
+     "count": 8
+    }
+   ],
+   "mods": [
+    "copperagebackport"
+   ]
+  },
+  {
+   "id": "fu_home",
+   "title": "Make It Home",
+   "subtitle": "Furniture",
+   "icon": "refurbished_furniture:workbench",
+   "x": 1.5,
+   "y": 15,
+   "shape": "circle",
+   "description": [
+    "Four furniture mods: Macaw's (furniture, lights, windows, doors, trapdoors, roofs, bridges, fences, paths, stairs, paintings), Handcrafted (vanilla-style furniture; its hammer changes a piece's look), MrCrayfish's Furniture Refurbished (kitchens, bathrooms, electronics, mailboxes) and Decorative Blocks (beams, supports, palisades, seats, braziers). Every Compat makes them in other mods' woods too.",
+    "",
+    "Refurbished's pieces come from its Workbench, which takes the materials from your inventory and the storage next to it. Its mailboxes send packages to other players."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "refurbished_furniture:workbench",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:oak_log",
+     "count": 16
+    }
+   ]
+  },
+  {
+   "id": "sw_skills",
+   "title": "Weapon Skills",
+   "subtitle": "RPG Series",
+   "icon": "minecraft:iron_sword",
+   "x": 0,
+   "y": 16.5,
+   "shape": "circle",
+   "description": [
+    "The RPG Series gives most melee weapons a weapon skill, cast with right-click: Swift Strikes, Flurry, Cleave, Whirlwind, Ground Slam, Smash, Impale, Fan of Knives, Thrust or Swipe, chosen by the kind of weapon. Each has a cooldown of its own. Bloom's own weapon skill is on V, apart from these.",
+    "",
+    "A weapon with a right-click power of its own (Oddities' Blade of the Orchid, for one) does both. Hold Left Alt while you right-click to use only the weapon's own power."
+   ],
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "Got it"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:bread",
+     "count": 6
+    }
+   ],
+   "mods": [
+    "spell_engine"
+   ]
+  },
+  {
+   "id": "br_tentacle",
+   "title": "The Undying Tentacle",
+   "subtitle": "Bosses'Rise",
+   "icon": "block_factorys_bosses:undying_tentacle",
+   "x": 1.5,
+   "y": 16.5,
+   "shape": "circle",
+   "description": [
+    "The Kraken's Undying Tentacle calls up Ghost Tentacles. Hold right-click past the jingle (that's the charge starting) until the ground smash, about two seconds.",
+    "",
+    "Give them room: each tentacle needs a clear spot a little over two blocks tall, three blocks out and level with your feet."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "block_factorys_bosses:undying_tentacle",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cooked_cod",
+     "count": 8
+    }
+   ]
+  },
+  {
+   "id": "br_gauntlet",
+   "title": "The Skor Gauntlet",
+   "subtitle": "Bosses'Rise",
+   "icon": "block_factorys_bosses:ice_gauntlet",
+   "x": 3,
+   "y": 16.5,
+   "shape": "circle",
+   "description": [
+    "Skor the Yeti's gauntlet raises a wall of ice spikes. Hold right-click while sneaking, look at the ground a few blocks ahead, and let go while still sneaking: the full wave comes at about a second and a half, with four seconds between waves.",
+    "",
+    "Looking at a mob or at the sky when you let go does nothing. The gauntlet also counts as Unarmed for Bloom."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "block_factorys_bosses:ice_gauntlet",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cooked_beef",
+     "count": 8
+    }
+   ]
+  },
+  {
+   "id": "br_saber",
+   "title": "The Pirate Saber",
+   "subtitle": "Bosses'Rise",
+   "icon": "block_factorys_bosses:pirate_saber",
+   "x": 4.5,
+   "y": 16.5,
+   "shape": "circle",
+   "description": [
+    "A rare drop from Pirate Rooks. Charge it with right-click to call two pirates who fight beside you for a minute, at most two at a time, with ten seconds between calls. They never turn on any player."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "block_factorys_bosses:pirate_saber",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:gold_ingot",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "id": "mg_guns",
+   "title": "Hunter's Guns",
+   "subtitle": "Marium's Soulslike Weaponry",
+   "icon": "soulsweapons:hunter_pistol",
+   "x": 0,
+   "y": 18,
+   "shape": "circle",
+   "description": [
+    "Marium's guns are the Hunter Pistol, the Hunter Blunderbuss, the Gatling Gun and the Hunter Cannon, built from iron, sticks and a Lost Soul (smelt soul sand).",
+    "",
+    "They fire Infused Quicksilver Bullets: a silver ingot, a Lost Soul and gunpowder make ten, or an iron ingot for three. A gun's tooltip shows its damage, cooldown and how many bullets a shot takes. Their hits wear down a target's posture, Twinkling Titanite in a smithing table raises their damage, and they have eleven enchantments of their own."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "soulsweapons:hunter_pistol",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:gunpowder",
+     "count": 16
+    },
+    {
+     "type": "item",
+     "item": "minecraft:soul_sand",
+     "count": 8
+    }
+   ]
   }
  ]
 }

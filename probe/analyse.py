@@ -1,4 +1,4 @@
-import os, re, sys, glob, zipfile, subprocess, json, urllib.request
+import os, re, sys, glob, zipfile, subprocess, json, urllib.request, traceback
 root = sys.argv[1]
 out = []; p = out.append
 def get(url):
@@ -8,13 +8,13 @@ def dec(j, cls, limit=9000):
     r = subprocess.run(['java', '-jar', 'cfr.jar', j, '--jarfilter', '^' + re.escape(cls) + '$'], capture_output=True, text=True)
     return '\n'.join(l for l in r.stdout.splitlines() if not l.startswith(' *') and not l.startswith('import ') and l.strip())[:limit]
 os.makedirs('dl', exist_ok=True)
-for slug in ["only-hammers-and-excavators", "sophisticated-storage", "construction-wand", "enchantment-descriptions"]:
+def one(slug):
     try:
         vs = json.loads(get(f'https://api.modrinth.com/v2/project/{slug}/version?loaders=%5B%22forge%22%5D&game_versions=%5B%221.20.1%22%5D'))
     except Exception as e:
-        p(f"#### {slug}: {e}"); continue
+        p(f"#### {slug}: {e}"); return
     if not vs:
-        p(f"#### {slug}: no Forge 1.20.1 version"); continue
+        p(f"#### {slug}: no Forge 1.20.1 version"); return
     v = vs[0]
     f = [x for x in v['files'] if x.get('primary')] or v['files']
     p(f"#### {slug}: {v['version_number']} ({v['date_published'][:10]}), {len(vs)} versions; file {f[0]['filename']}; deps " +
@@ -40,6 +40,12 @@ for slug in ["only-hammers-and-excavators", "sophisticated-storage", "constructi
     for n in names:
         if n.endswith('.class') and re.search(r'[Cc]onfig', n) and '$' not in n and slug != 'sophisticated-storage':
             p(f"== {n}\n{dec(path, n[:-6].replace('/', '.'), 6000)}")
+for slug in ["only-hammers-and-excavators", "sophisticated-storage", "construction-wand", "enchantment-descriptions"]:
+    try:
+        one(slug)
+    except Exception:
+        p(f"#### {slug} failed: " + traceback.format_exc()[-1500:])
+open('report.txt', 'w').write('\n'.join(out))
 # Jars already in the pack.
 zips = glob.glob(os.path.join(root, '**', '*server*.zip'), recursive=True)
 with zipfile.ZipFile(zips[0]) as z:
@@ -47,7 +53,7 @@ with zipfile.ZipFile(zips[0]) as z:
     for n in jars:
         if re.search(r'bettercombat|skarrier|spell_engine|spell-engine|spellengine', n, re.I):
             z.extract(n, 'mods')
-for j in glob.glob('mods/**/*.jar', recursive=True):
+def packjar(j):
     zf = zipfile.ZipFile(j); names = zf.namelist()
     p(f"#### pack jar {os.path.basename(j)}")
     presets = sorted(n.split('weapon_attributes/')[1] for n in names if 'data/bettercombat/weapon_attributes/' in n)
@@ -61,5 +67,10 @@ for j in glob.glob('mods/**/*.jar', recursive=True):
     for n in names:
         if n.endswith('.json') and 'enchant' in n.lower() and 'lang' not in n:
             p(f"json {n}: {zf.read(n)[:400]!r}")
+for j in glob.glob('mods/**/*.jar', recursive=True):
+    try:
+        packjar(j)
+    except Exception:
+        p(f"#### {j} failed: " + traceback.format_exc()[-1500:])
 open('report.txt', 'w').write('\n'.join(out))
 print(len('\n'.join(out)), 'chars')

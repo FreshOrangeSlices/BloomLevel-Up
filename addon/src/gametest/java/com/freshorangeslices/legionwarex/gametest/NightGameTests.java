@@ -18,7 +18,6 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.monster.Skeleton;
@@ -156,14 +155,14 @@ public final class NightGameTests {
 		ServerLevel level = helper.getLevel();
 		NightCycle over = NightCycle.fresh();
 		NightTable.Theme theme = theme("leftover", 1.5, mob(EntityType.SKELETON, 1));
-		Mob marked = helper.spawn(EntityType.SKELETON, new BlockPos(1, 2, 1));
-		marked.setNoAi(true);
+		// Made here, not with the helper's spawn (which makes a mob persistent, as a name tag would).
+		Skeleton marked = EntityType.SKELETON.create(level);
 		NightMobs.mark(marked, theme, 3);
 		helper.assertTrue(NightMobs.leaves(marked, over, false), "a mob of an ended night with no one near goes");
 		helper.assertFalse(NightMobs.leaves(marked, over, true), "... not while a player is near");
 		marked.setPersistenceRequired();
 		helper.assertFalse(NightMobs.leaves(marked, over, false), "... nor once a player has kept it (a name tag)");
-		Mob plain = helper.spawn(EntityType.SKELETON, new BlockPos(3, 2, 1));
+		Skeleton plain = EntityType.SKELETON.create(level);
 		helper.assertFalse(NightMobs.leaves(plain, over, false), "a skeleton of no night stays");
 		marked.discard();
 		plain.discard();

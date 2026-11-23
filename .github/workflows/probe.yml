@@ -2,7 +2,7 @@ name: probe
 on: push
 permissions:
   actions: read
-  contents: read
+  contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
@@ -14,3 +14,12 @@ jobs:
       - run: python3 probe/emit.py 30 30
       - run: python3 probe/emit.py 60 30
       - run: python3 probe/emit.py 90 30
+      - if: always()
+        run: |
+          git config user.name "probe"
+          git config user.email "probe@users.noreply.github.com"
+          git checkout --orphan probe-out-tmp
+          git rm -rf --cached . > /dev/null
+          git add -f probe-out report.txt
+          git commit -qm "probe output"
+          git push -f origin HEAD:refs/heads/ci/probe-bossesrise-out

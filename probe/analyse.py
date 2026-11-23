@@ -19,9 +19,12 @@ try:
             hits = sorted(set(m.group(0).decode('latin1') for m in pat.finditer(data)))
             if hits:
                 p(f"{n}: {hits}")
+    for cls in ['com.github.smallinger.copperagebackport.CommonClass',
+                'com.github.smallinger.copperagebackport.compat.modules.SophisticatedStorageCompat']:
+        p(f"==== {cls}\n{dec('cab.jar', cls, 9000)}")
     for n in names:
-        if n.endswith('.class') and re.search(r'(Tier|Tiers|ToolMaterial|CopperAgeBackport|Forge[A-Z]\w*Mod|ModItems)\.class$', n):
-            p(f"==== {n}\n{dec('cab.jar', n[:-6].replace('/', '.'))}")
+        if 'compat' in n.lower() and n.endswith('.class'):
+            p(f"compat class {n}")
     for n in names:
         if n.endswith('mods.toml'):
             p(z.read(n).decode('utf8', 'replace')[:1500])

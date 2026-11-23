@@ -177,7 +177,9 @@ def modded_entities(mods_dir):
     return sorted(entities), with_egg
 
 
-BLOOM_NONE = {"staff", "battlestaff", "wand", "spellbreaker", "horn", "shield", "fist"}  # spell weapons, shields, gauntlets
+# Better Combat categories Bloom gives no family: spell weapons, shields, and mining tools (the pickaxe's swing, which the
+# pack gives Only Hammers And Excavators' hammers). Fist weapons (gauntlets, claws) are Bloom's Unarmed since 2026-11-22.
+BLOOM_NONE = {"staff", "battlestaff", "wand", "spellbreaker", "horn", "shield", "pickaxe"}
 
 
 def pack_data_check(server_dir, dump_file, server_lines):
@@ -188,12 +190,18 @@ def pack_data_check(server_dir, dump_file, server_lines):
     packs = os.path.join(server_dir, "config", "openloader", "data")
     if not os.path.isdir(packs):
         return [], []
-    removed, hidden, spell_costs = [], [], []
+    removed, hidden, spell_costs, swings = [], [], [], {}
     for pack in sorted(os.listdir(packs)):
         data = os.path.join(packs, pack, "data")
         for folder, _, names in os.walk(data):
             for file_name in names:
                 parts = os.path.relpath(os.path.join(folder, file_name), data).replace(os.sep, "/").split("/", 2)
+                # Better Combat swings the pack gives (data_files): {item: the preset}.
+                if len(parts) == 3 and parts[1] == "weapon_attributes" and file_name.endswith(".json"):
+                    try:
+                        swings[f"{parts[0]}:{parts[2][:-5]}"] = json.load(open(os.path.join(folder, file_name))).get("parent", "")
+                    except ValueError:
+                        swings[f"{parts[0]}:{parts[2][:-5]}"] = ""
                 if len(parts) == 3 and parts[1] == "recipes" and file_name.endswith(".json"):
                     # Only recipes switched off (a forge:false condition); recipe_edits are changed, not removed.
                     try:
@@ -237,13 +245,24 @@ def pack_data_check(server_dir, dump_file, server_lines):
         makers = sorted(r["id"] for r in recipes if r.get("result") == item)
         if makers:
             failures.append(f"pack data: {item} is hidden but still made by {', '.join(makers)}")
+    # Each swing the pack gives took (the dump has Better Combat's category for every item): a weapon with one at all, a
+    # mining hammer with the pickaxe's, not the mace's its name would get.
+    given = [item for item in swings if item in items]
+    for item in given:
+        category = (items[item].get("bettercombat") or "").split("|")[0]
+        wanted = swings[item].split(":")[-1]
+        if not category:
+            failures.append(f"pack data: {item} has no Better Combat swing (the pack gives {swings[item]})")
+        elif wanted == "pickaxe" and category != "pickaxe":
+            failures.append(f"pack data: {item} swings as {category}, not the pickaxe the pack gives it")
     costly = [spell for spell, cost in spell_costs if "item" in cost or cost.get("exhaust", 0.0) != 0.0]
     if costly:
         failures.append(f"pack data: {len(costly)} edited spells still cost an item or hunger: {', '.join(costly[:10])}")
     injected = next((l.split("]: ", 1)[-1] for l in server_lines if "Successfully injected" in l), "Open Loader said nothing")
     notes = [f"pack data: {len([r for r in removed if r.split(':')[0] in mods])} recipes out, {len(checked)} items hidden "
              f"(of {len(removed)} and {len(hidden)} listed; the rest are from mods this layer leaves out)"
-             + (f"; {len(spell_costs)} spells cost only their cooldown" if spell_costs else "") + f"; {injected}"]
+             + (f"; {len(spell_costs)} spells cost only their cooldown" if spell_costs else "")
+             + (f"; {len(given)} Better Combat swings given" if given else "") + f"; {injected}"]
     return failures, notes
 
 
@@ -467,7 +486,7 @@ def bloom_sorting(dump_file):
     if not os.path.exists(dump_file):
         return "no registry dump", []
     rows = [json.loads(line) for line in open(dump_file) if line.strip()]
-    families = ("sword", "axe", "bow", "crossbow", "trident")
+    families = ("sword", "axe", "bow", "crossbow", "trident", "unarmed")
     in_family = lambda r: any(f"bloomlevelup:weapon/{f}" in r["tags"] and f"bloomlevelup:weapon/not_{f}" not in r["tags"] for f in families)
     weapons, armor, daggers, bosses, unsorted = 0, 0, 0, 0, []
     for r in rows:
@@ -1120,6 +1139,88 @@ def tentacle_check(server, player, server_dir, shots):
     return [], [f"tentacles: {count} of 4 appeared; watch: {seen[:200]}"]
 
 
+def enchantment_check(server):
+    """The enchantments the pack switches off (the add-on's deadEnchantments: Spell Engine's Spell Infinity, Skarrier Mobs'
+    Bluntness, Mass and Mobility; FreshOrangeSlices, 2026-11-22): /legionwarex enchantments rolls the enchanting table
+    2000 times, the librarian's book trade 500 and takes them off a loot book. Fails when the table or a trade still
+    gives one, or loot keeps one. Returns (failures, notes)."""
+    mark = len(server.lines)
+    server.send("legionwarex enchantments")
+    line = lines_since(server, mark, r"LegionWareX enchantments: ", 30) or ""
+    said = line.split("LegionWareX enchantments: ", 1)[-1].strip()
+    if not said:
+        return [], ["enchantments: the add-on said nothing"]
+    failures = []
+    table = re.search(r"the table: (\d+) of", said)
+    trades = re.search(r"trades: (\d+) of", said)
+    if table and int(table.group(1)):
+        failures.append(f"enchantments: the table still gave a switched-off one ({said[:300]})")
+    if trades and int(trades.group(1)):
+        failures.append(f"enchantments: a trade still sold a switched-off one ({said[:300]})")
+    if "NOT taken off" in said:
+        failures.append(f"enchantments: loot kept a switched-off one ({said[:300]})")
+    return failures, [f"enchantments: {said[:400]}"]
+
+
+def wand_check(server, player, server_dir, shots):
+    """Construction Wand as a player uses it (FreshOrangeSlices, 2026-11-22: build assist for survival): in survival with
+    Resistance V, on open ground, a 3x3 patch of cobblestone is set into the ground two blocks ahead; the player, with a
+    stone wand and 64 cobblestone, looks at the patch and right-clicks. The wand copies the face it's pointed at, from
+    the player's own blocks, so the cobblestone they carry goes down. The wand's use statistic says whether the click
+    landed. Screenshot pack_wand. Fails when the click landed and nothing was placed; warns (pack-wand) when it didn't
+    land. Returns (failures, notes)."""
+    mods_dir = os.path.join(server_dir, "mods")
+    if not any(m.startswith("constructionwand") for m in os.listdir(mods_dir)):
+        return [], []
+
+    def carried():
+        mark = len(server.lines)
+        server.send(f"clear {player} minecraft:cobblestone 0")
+        found = re.search(r"Found (\d+) matching", lines_since(server, mark, r"matching|No items were found", 10) or "")
+        return int(found.group(1)) if found else 0
+
+    mark = len(server.lines)
+    server.send(f"data get entity {player} Pos")
+    pos_line = lines_since(server, mark, r"has the following entity data: \[", 10) or ""
+    back = re.findall(r"(-?[0-9.]+)d", pos_line.split("entity data:", 1)[-1])[:3]
+    server.send(f"effect give {player} minecraft:resistance 60 4 true")
+    server.send(f"gamemode survival {player}")
+    server.send(f"execute at {player} run spreadplayers ~-120 ~120 0 1 false {player}")
+    time.sleep(3)
+    server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 35")
+    server.send(f"execute at {player} run fill ~-1 ~-1 ~1 ~1 ~-1 ~3 minecraft:cobblestone")
+    server.send(f"execute at {player} run fill ~-1 ~ ~1 ~1 ~3 ~3 minecraft:air")
+    server.send("scoreboard objectives add lwx_wand minecraft.used:constructionwand.stone_wand")
+    server.send(f"scoreboard players set {player} lwx_wand 0")
+    server.send(f"item replace entity {player} weapon.mainhand with constructionwand:stone_wand")
+    server.send(f"give {player} minecraft:cobblestone 64")
+    time.sleep(2)
+    before = carried()
+    sent = hold_mouse(3, 0.15)
+    time.sleep(1)
+    after = carried()
+    capture(shots, "pack_wand")
+    mark = len(server.lines)
+    server.send(f"scoreboard players get {player} lwx_wand")
+    used_line = lines_since(server, mark, r"lwx_wand", 10) or ""
+    used = int(m.group(1)) if (m := re.search(r"has (\d+) \[lwx_wand\]", used_line)) else 0
+    server.send("scoreboard objectives remove lwx_wand")
+    server.send(f"clear {player} constructionwand:stone_wand")
+    server.send(f"clear {player} minecraft:cobblestone")
+    server.send(f"effect clear {player}")
+    server.send(f"gamemode creative {player}")
+    if len(back) == 3:
+        server.send(f"tp {player} {back[0]} {back[1]} {back[2]}")
+    time.sleep(1)
+    placed = before - after
+    if placed > 0:
+        return [], [f"wand: a player's stone wand placed {placed} cobblestone from their inventory"]
+    if not sent or not used:
+        print("::warning title=pack-wand::the right-click didn't reach the game (the wand was never used)")
+        return [], ["wand: the right-click didn't reach the game"]
+    return [f"wand: the stone wand was used and placed nothing (cobblestone {before} then {after})"], []
+
+
 def gauntlet_check(server, player, server_dir, shots):
     """Bosses'Rise's Skor Gauntlet (the Yeti's arm) as a player uses it (FreshOrangeSlices, 2026-11-22: a friend found it
     made no wall). By its code its wave of ice spikes comes as right-click is let go, only while sneaking, off its
@@ -1607,6 +1708,14 @@ def main():
             failures += gauntlet_failures
             notes += gauntlet_notes
             progress("gauntlet check done")
+            enchantment_failures, enchantment_notes = enchantment_check(server)
+            failures += enchantment_failures
+            notes += enchantment_notes
+            progress("enchantment check done")
+            wand_failures, wand_notes = wand_check(server, PLAYER, server_dir, shots)
+            failures += wand_failures
+            notes += wand_notes
+            progress("wand check done")
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes

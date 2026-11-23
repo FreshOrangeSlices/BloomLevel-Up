@@ -539,6 +539,9 @@ jobs:
           # Bosses'Rise's Skor Gauntlet, sneak-released at the ground: its wall of ice spikes.
           - layers: 6
             shot: pack_gauntlet
+          # Construction Wand: a stone wand's row of cobblestone, placed from the player's own blocks.
+          - layers: 6
+            shot: pack_wand
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

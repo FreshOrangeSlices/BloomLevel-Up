@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.freshorangeslices.legionwarex.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "legionwarex.refmap.json",
+	"mixins": [
+		"EnchantmentHelperMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

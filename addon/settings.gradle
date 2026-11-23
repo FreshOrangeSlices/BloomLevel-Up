@@ -5,6 +5,11 @@ pluginManagement {
 			name = 'MinecraftForge'
 			url = 'https://maven.minecraftforge.net/'
 		}
+		// The mixin plugin (MixinGradle), for the add-on's one mixin.
+		maven {
+			name = 'Sponge'
+			url = 'https://repo.spongepowered.org/repository/maven-public/'
+		}
 	}
 }
 

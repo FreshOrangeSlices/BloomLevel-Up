@@ -177,7 +177,7 @@
     },
     {
       "name": "animation-and-qol",
-      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back. Sophisticated Backpacks (FreshOrangeSlices, 2026-11-04: backpacks worth having; leather to netherite, with upgrades; Sophisticated Core comes with it). Tom's Simple Storage (FreshOrangeSlices, 2026-11-16: a friend wanted to craft from every chest in the base; all of it kept, wireless terminals too). Advanced Loot Info (FreshOrangeSlices, 2026-11-16: JEI shows which mobs, chests and blocks drop an item; on the server too, since loot tables live there).",
+      "_comment": "The rest of the visual stack (Punchy! stays unless testing shows it fights Better Combat; Oculus, the Forge port of Iris, with Complementary Unbound picked, Solas to swap to, and MakeUp Ultra Fast for weaker PCs), and the quality-of-life and multiplayer mods. Keybind Atlas replaced KeyVision (FreshOrangeSlices' playtest: KeyVision took over the Controls screen and had no mouse buttons); it's a separate keyboard-and-mouse map on Ctrl+K, so the normal Controls list is back. Sophisticated Backpacks (FreshOrangeSlices, 2026-11-04: backpacks worth having; leather to netherite, with upgrades; Sophisticated Core comes with it). Tom's Simple Storage (FreshOrangeSlices, 2026-11-16: a friend wanted to craft from every chest in the base; all of it kept, wireless terminals too). Advanced Loot Info (FreshOrangeSlices, 2026-11-16: JEI shows which mobs, chests and blocks drop an item; on the server too, since loot tables live there). The batch of 2026-11-22 (FreshOrangeSlices): Sophisticated Storage for its chests only (vanilla wood types, copper to netherite tiers and the upgrades; its barrels, limited barrels, shulker boxes, linking blocks and tanks cut, pack_data), Only Hammers And Excavators (a friend's better excavation: hammers 3x3, excavators 3x1, sneak for one block, wood to netherite; Better Combat would swing the hammers as maces by their name, so they get its pickaxe swing, pack_data's data_files), Construction Wand (building in survival: stone, iron, diamond and infinity wands place up to 1024 blocks from the player's inventory; its extra key is Left Control held while sneaking, set in its own config, not a keybinding) and Enchantment Descriptions (what each enchantment does, in its tooltip; Bookshelf comes with it).",
       "modrinth": [
         "punchy-fpa",
         "fwa",
@@ -190,7 +190,10 @@
         "jade",
         "appleskin",
         "mouse-tweaks",
-        "inventory-profiles-next", "sophisticated-backpacks", "toms-storage",
+        "inventory-profiles-next", "sophisticated-backpacks", "sophisticated-storage", "toms-storage",
+        "only-hammers-and-excavators",
+        "construction-wand",
+        "enchantment-descriptions",
         "crafting-tweaks",
         "lootr",
         "corpse",
@@ -507,11 +510,8 @@
         "simplyswords:gold_scythe", "simplyswords:gold_spear", "simplyswords:gold_warglaive",
         "simplyswords:runic_claymore", "simplyswords:runic_glaive", "simplyswords:runic_warglaive"
       ],
-      "Monster Expansion: the ones marked Cut": [
-        "monsterexpansion:charcraw", "monsterexpansion:diamond_mace", "monsterexpansion:diamond_spear",
-        "monsterexpansion:golden_mace", "monsterexpansion:golden_spear", "monsterexpansion:iron_mace",
-        "monsterexpansion:iron_spear", "monsterexpansion:netherite_mace", "monsterexpansion:netherite_spear",
-        "monsterexpansion:stone_mace", "monsterexpansion:stone_spear", "monsterexpansion:test_sword"
+      "Monster Expansion: its developers' test sword (the Charcraw and the maces and spears marked Cut came back, FreshOrangeSlices, 2026-11-22)": [
+        "monsterexpansion:test_sword"
       ],
       "Legendary Monsters: the ones marked Cut": [
         "legendary_monsters:chorus_blade", "legendary_monsters:dinosaur_bone_club", "legendary_monsters:enderitium_sickle",
@@ -552,10 +552,26 @@
         "skarrier_mobs:invulnerite_axe", "skarrier_mobs:invulnerite_sword", "skarrier_mobs:morgenstern",
         "skarrier_mobs:resisteel_axe", "skarrier_mobs:voracious_blade"
       ],
-      "Marium's Soulslike Weaponry: the ones marked Cut": [
-        "soulsweapons:blunderbuss", "soulsweapons:chungus_staff", "soulsweapons:gatling_gun",
-        "soulsweapons:guts_sword", "soulsweapons:hunter_pistol", "soulsweapons:moonstone_axe",
-        "soulsweapons:silver_sword"
+      "Marium's Soulslike Weaponry: the ones marked Cut (its guns, the Blunderbuss, Hunter Pistol and Gatling Gun, came back with their enchantments, FreshOrangeSlices, 2026-11-22; guns stay outside Bloom)": [
+        "soulsweapons:chungus_staff", "soulsweapons:guts_sword", "soulsweapons:moonstone_axe", "soulsweapons:silver_sword"
+      ],
+      "Sophisticated Storage: chests only (FreshOrangeSlices, 2026-11-22: 'all I want are the chest ones'; Tom's Simple Storage already links storage): its barrels, limited barrels (the drawer-like ones), shulker boxes, the blocks that link storage together, and its fluid tanks": [
+        "sophisticatedstorage:barrel", "sophisticatedstorage:copper_barrel", "sophisticatedstorage:iron_barrel",
+        "sophisticatedstorage:gold_barrel", "sophisticatedstorage:diamond_barrel", "sophisticatedstorage:netherite_barrel",
+        "sophisticatedstorage:limited_barrel_1", "sophisticatedstorage:limited_barrel_2", "sophisticatedstorage:limited_barrel_3",
+        "sophisticatedstorage:limited_barrel_4", "sophisticatedstorage:limited_copper_barrel_1", "sophisticatedstorage:limited_copper_barrel_2",
+        "sophisticatedstorage:limited_copper_barrel_3", "sophisticatedstorage:limited_copper_barrel_4", "sophisticatedstorage:limited_iron_barrel_1",
+        "sophisticatedstorage:limited_iron_barrel_2", "sophisticatedstorage:limited_iron_barrel_3", "sophisticatedstorage:limited_iron_barrel_4",
+        "sophisticatedstorage:limited_gold_barrel_1", "sophisticatedstorage:limited_gold_barrel_2", "sophisticatedstorage:limited_gold_barrel_3",
+        "sophisticatedstorage:limited_gold_barrel_4", "sophisticatedstorage:limited_diamond_barrel_1", "sophisticatedstorage:limited_diamond_barrel_2",
+        "sophisticatedstorage:limited_diamond_barrel_3", "sophisticatedstorage:limited_diamond_barrel_4", "sophisticatedstorage:limited_netherite_barrel_1",
+        "sophisticatedstorage:limited_netherite_barrel_2", "sophisticatedstorage:limited_netherite_barrel_3", "sophisticatedstorage:limited_netherite_barrel_4",
+        "sophisticatedstorage:shulker_box", "sophisticatedstorage:copper_shulker_box", "sophisticatedstorage:iron_shulker_box",
+        "sophisticatedstorage:gold_shulker_box", "sophisticatedstorage:diamond_shulker_box", "sophisticatedstorage:netherite_shulker_box",
+        "sophisticatedstorage:controller", "sophisticatedstorage:storage_link", "sophisticatedstorage:storage_connector",
+        "sophisticatedstorage:storage_input", "sophisticatedstorage:storage_output", "sophisticatedstorage:storage_io",
+        "sophisticatedstorage:tank", "sophisticatedstorage:copper_tank", "sophisticatedstorage:iron_tank",
+        "sophisticatedstorage:gold_tank", "sophisticatedstorage:diamond_tank", "sophisticatedstorage:netherite_tank"
       ],
       "Bosses'Rise: the ones marked Cut": [
         "block_factorys_bosses:dagger", "block_factorys_bosses:knight_sword", "block_factorys_bosses:large_sword",
@@ -602,6 +618,26 @@
     "recipe_edits": {
       "_comment": "Mods' recipes changed in place (the recipe from its jar, items swapped).",
       "zonis_companions:summon_item_craft": {"why": "Zoni's empty summon device: 8 amethyst shards around an iron block instead of a diamond block (FreshOrangeSlices: a bit easier)", "swap": {"minecraft:diamond_block": "minecraft:iron_block"}}
+    },
+    "data_files": {
+      "_comment": "Data files the pack adds outright, written as given: data/<namespace>/<path>.json. Better Combat's weapon_attributes give a weapon its swing; a weapon with none from its mod gets one only when its id matches Better Combat's name rules (fallback_compatibility), so these boss weapons swung like vanilla (FreshOrangeSlices, 2026-11-22: the lich weapons \"did not use better combat\"). Their own right-click abilities stay: Better Combat only changes the left click. Legionary's Cudgel (its own charged attack) and the Spatula are left out.",
+      "cataclysm:weapon_attributes/soul_render": {"why": "Soul Render (Maledictus): a halberd, two-handed with long reach", "json": {"parent": "bettercombat:halberd"}},
+      "cataclysm:weapon_attributes/the_annihilator": {"why": "The Annihilator (Maledictus): a heavy two-handed hammer", "json": {"parent": "bettercombat:hammer"}},
+      "cataclysm:weapon_attributes/the_immolator": {"why": "The Immolator (Ignis): a claymore", "json": {"parent": "bettercombat:claymore"}},
+      "cataclysm:weapon_attributes/meat_shredder": {"why": "Meat Shredder: an axe", "json": {"parent": "bettercombat:axe"}},
+      "ddenizens:weapon_attributes/shadow_falchion": {"why": "Shadow Falchion: a cutlass", "json": {"parent": "bettercombat:cutlass"}},
+      "legendary_monsters:weapon_attributes/somber_key": {"why": "Somber Key: a sword", "json": {"parent": "bettercombat:sword"}},
+      "mythsandlegends:weapon_attributes/noctifer_tenebris": {"why": "Noctifer Tenebris: a sword", "json": {"parent": "bettercombat:sword"}},
+      "onlyhammersandexcavators:weapon_attributes/wooden_hammer": {"why": "Only Hammers And Excavators' mining hammers: Better Combat's name rules (mace|hammer|flail) would swing them as maces, weapons Bloom would then want sorted; the pickaxe's swing, as for any pickaxe", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/stone_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/iron_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/gold_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/lapis_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/redstone_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/obsidian_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/diamond_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/emerald_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}},
+      "onlyhammersandexcavators:weapon_attributes/netherite_hammer": {"why": "As the wooden hammer", "json": {"parent": "bettercombat:pickaxe"}}
     },
     "worldgen": {
       "_comment": "Worldgen files the pack replaces, at data/<namespace>/worldgen/<path>.json. They only shape chunks made after the change: an old world gets seams where new chunks meet old ones, so these are for new worlds. The pack test reads the terrain the server would make (the add-on's terrain survey, -Dlegionwarex.terrain) beside vanilla's for the same seed.",

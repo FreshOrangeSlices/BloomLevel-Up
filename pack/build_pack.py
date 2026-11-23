@@ -419,6 +419,15 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
             carried = [name for name, jar_data in (jars or {}).items() if target in zipfile.ZipFile(io.BytesIO(jar_data)).namelist()] \
                 if jars else []
             notes.append(f"worldgen: {ident} replaced" + (f" (also in {', '.join(os.path.basename(c) for c in carried)}; the pack's wins)" if carried else ""))
+    # Data files the pack adds outright (data_files: {"<namespace>:<path>": {"why", "json"}}), written as given to
+    # data/<namespace>/<path>.json: Better Combat's weapon_attributes for weapons that had no swing, say.
+    for ident, spec in data.get("data_files", {}).items():
+        if ident.startswith("_"):
+            continue
+        namespace, path = ident.split(":", 1)
+        out[f"{root}/data/{namespace}/{path}.json"] = spec["json"]
+    if notes is not None and any(not k.startswith("_") for k in data.get("data_files", {})):
+        notes.append(f"data files: {sum(1 for k in data['data_files'] if not k.startswith('_'))} added")
     # shown_items: removed (their recipes and loot entries out) but left in JEI, for one a mob still carries and drops.
     shown = set(grouped("shown_items"))
     hidden = [item for item in dict.fromkeys(grouped("hidden_items") + removed) if item not in shown]

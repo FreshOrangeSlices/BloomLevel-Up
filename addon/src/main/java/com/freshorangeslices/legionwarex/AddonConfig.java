@@ -46,6 +46,10 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.BooleanValue MOB_KILL_DROPS;
 	private static final ForgeConfigSpec.BooleanValue ZOMBIE_ENDLESS_BUFFS;
 	private static final ForgeConfigSpec.BooleanValue MILK_CURES;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> DEAD_ENCHANTMENTS;
+	/** Enchantments that do nothing in the pack (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"). */
+	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity", "skarrier_mobs:bluntness", "skarrier_mobs:mass",
+			"skarrier_mobs:mobility");
 	private static final ForgeConfigSpec.BooleanValue KRAMPUS_ANIMALS;
 	private static final ForgeConfigSpec.IntValue KRAMPUS_VILLAGER_KILLS;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOBS;
@@ -229,6 +233,12 @@ public final class AddonConfig {
 				.comment("Whether drinking milk always takes Bad Omen off, as in vanilla (something in the pack stopped it), even past a",
 						"mod that refuses the removal. The server's start logs what it found as \"LegionWareX milk\".")
 				.define("milkCuresBadOmen", true);
+		DEAD_ENCHANTMENTS = builder
+				.comment("Enchantments switched off: never offered by the enchanting table (books too), villagers or the wandering trader,",
+						"nor found on loot (taken off; a book left with none is a plain book). Spell Infinity has no spell in the pack to",
+						"use it on (no spell costs an item); Skarrier Mobs' three are for its Morgenstern, which the pack takes out.",
+						"/legionwarex enchantments checks them.")
+				.defineListAllowEmpty("deadEnchantments", DEAD_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
 		KRAMPUS_ANIMALS = builder
 				.comment("Whether killing animals adds to Born in Chaos's naughtiness (its Krampus meter: warnings, then Krampus comes for",
 						"the player). Off: only villagers and wandering traders count. Applied when the server starts.")
@@ -395,6 +405,10 @@ public final class AddonConfig {
 
 	public static boolean zombieEndlessBuffs() {
 		return get(ZOMBIE_ENDLESS_BUFFS, false);
+	}
+
+	public static List<? extends String> deadEnchantments() {
+		return get(DEAD_ENCHANTMENTS, DEAD_DEFAULT);
 	}
 
 	public static boolean milkCuresBadOmen() {

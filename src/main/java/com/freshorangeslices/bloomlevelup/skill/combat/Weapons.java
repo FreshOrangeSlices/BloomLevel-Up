@@ -14,8 +14,9 @@ import com.freshorangeslices.bloomlevelup.BloomLevelUp;
  * Weapon families by item tag ({@code bloomlevelup:weapon/<family>}), so modded weapons join a family by
  * tag and one item may deliberately belong to several. An item in {@code bloomlevelup:weapon/not_<family>} is never
  * in that family, even when the family's tag takes it in through a wider tag (the RPG Series puts its maces, hammers,
- * spears, glaives and double axes in {@code #minecraft:swords}). An empty hand is Unarmed. The Forge 1.20.1 build has no
- * mace or spear families (1.20.1 has neither weapon).
+ * spears, glaives and double axes in {@code #minecraft:swords}). An empty hand is Unarmed, and so is an item in
+ * {@code bloomlevelup:weapon/unarmed}: gauntlets and claws, worn on the fist (FreshOrangeSlices, 2026-11-22). The
+ * Forge 1.20.1 build has no mace or spear families (1.20.1 has neither weapon).
  */
 public final class Weapons {
 	public enum Family {
@@ -62,7 +63,7 @@ public final class Weapons {
 		EnumSet<Family> out = EnumSet.noneOf(Family.class);
 
 		for (Family family : Family.values()) {
-			if (family != Family.UNARMED && family.holds(stack)) {
+			if (family.holds(stack)) {
 				out.add(family);
 			}
 		}
@@ -71,8 +72,8 @@ public final class Weapons {
 	}
 
 	public static boolean is(ItemStack stack, Family family) {
-		if (family == Family.UNARMED) {
-			return stack == null || stack.isEmpty();
+		if (family == Family.UNARMED && (stack == null || stack.isEmpty())) {
+			return true;
 		}
 
 		return stack != null && !stack.isEmpty() && family.holds(stack);

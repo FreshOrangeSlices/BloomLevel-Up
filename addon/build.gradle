@@ -2,6 +2,7 @@ plugins {
 	id 'eclipse'
 	id 'idea'
 	id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
+	id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 // The LegionWareX add-on for Forge 1.20.1. It reaches the mods it adds to through their entity tags and saved data
@@ -74,6 +75,12 @@ minecraft {
 	}
 }
 
+// The add-on's one mixin (mixin/EnchantmentHelperMixin: the enchanting table never offers a switched-off enchantment).
+mixin {
+	add sourceSets.main, "${mod_id}.refmap.json"
+	config "${mod_id}.mixins.json"
+}
+
 repositories {
 	mavenCentral()
 	maven {
@@ -94,6 +101,7 @@ repositories {
 
 dependencies {
 	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
 	// The mods the add-on works with, and what they need, in the dev runs only, for the game tests: Migamigos
 	// (companions), Illager Invasion (war bands) and Bosses'Rise (pirate bands).
@@ -136,6 +144,7 @@ tasks.named('jar', Jar).configure {
 				'Implementation-Title'    : project.name,
 				'Implementation-Version'  : project.jar.archiveVersion,
 				'Implementation-Vendor'   : mod_authors,
+				'MixinConfigs'            : "${mod_id}.mixins.json",
 		])
 	}
 	finalizedBy 'reobfJar'

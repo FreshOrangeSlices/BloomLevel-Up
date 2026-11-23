@@ -276,9 +276,9 @@ public final class MiscSkill {
 
 	// ------------------------------------------------------------------ Become My Fuel
 
-	/** Weapons that can carry fuel: anything in a weapon family (not an empty hand). */
+	/** Weapons that can carry fuel: anything in a weapon family (not an empty hand; a gauntlet in the Unarmed tag can). */
 	public static boolean fuelEligible(ItemStack weapon) {
-		return !weapon.isEmpty() && !Weapons.families(weapon).isEmpty() && !Weapons.families(weapon).contains(Weapons.Family.UNARMED);
+		return !weapon.isEmpty() && !Weapons.families(weapon).isEmpty();
 	}
 
 	/** Stores the potion's first harmful, non-instant effect on the weapon (overwriting any earlier one). */

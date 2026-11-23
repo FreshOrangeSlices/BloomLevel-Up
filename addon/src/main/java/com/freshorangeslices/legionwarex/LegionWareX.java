@@ -17,6 +17,8 @@ import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
 import com.freshorangeslices.legionwarex.companion.CompanionKeepsakeItem;
 import com.freshorangeslices.legionwarex.summon.PirateSaber;
 import com.freshorangeslices.legionwarex.summon.Summons;
+import com.freshorangeslices.legionwarex.world.DeadEnchantmentLoot;
+import com.freshorangeslices.legionwarex.world.DeadEnchantments;
 import com.freshorangeslices.legionwarex.world.BannedMobs;
 import com.freshorangeslices.legionwarex.world.IllagerCrowding;
 import com.freshorangeslices.legionwarex.world.KrampusNaughtiness;
@@ -74,6 +76,7 @@ public final class LegionWareX {
 
 	static {
 		LOOT_MODIFIERS.register("add_item", AddItemModifier.CODEC);
+		LOOT_MODIFIERS.register("dead_enchantments", DeadEnchantmentLoot.CODEC);
 	}
 
 	public LegionWareX() {
@@ -98,6 +101,7 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(HiddenArmor.class);
 		MinecraftForge.EVENT_BUS.register(Summons.class);
 		MinecraftForge.EVENT_BUS.register(PirateSaber.class);
+		MinecraftForge.EVENT_BUS.register(DeadEnchantments.class);
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
@@ -107,7 +111,7 @@ public final class LegionWareX {
 	private static void registerCommands(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
 				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node())
-				.then(KrampusNaughtiness.node()).then(IllagerCrowding.node()).then(EntityWatch.node()).then(Summons.node()));
+				.then(KrampusNaughtiness.node()).then(IllagerCrowding.node()).then(EntityWatch.node()).then(Summons.node()).then(DeadEnchantments.node()));
 		// Anyone's.
 		event.getDispatcher().register(HiddenArmor.command());
 	}

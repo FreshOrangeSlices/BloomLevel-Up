@@ -139,6 +139,18 @@ def main():
         print(f"::warning title=server-log::{esc(text[:3900])}")
     if done is None:
         print(f"::error title=server-boot::The server didn't come up (exit {process.returncode}). Last lines:%0A{esc(chr(10).join(log[-40:])[:3800])}")
+        # The cause chain from the newest crash report (a mod's "has failed to load correctly" names only the outer error):
+        # each "Caused by" with the first lines under it, which name the mod and class at fault.
+        reports = sorted((os.path.join(root, "crash-reports", f) for f in os.listdir(os.path.join(root, "crash-reports"))),
+                         key=os.path.getmtime) if os.path.isdir(os.path.join(root, "crash-reports")) else []
+        text = open(reports[-1], errors="replace").read() if reports else "\n".join(log)
+        lines = text.splitlines()
+        causes = []
+        for i, line in enumerate(lines):
+            if line.lstrip().startswith("Caused by") or "has failed to load correctly" in line or line.startswith("Description:"):
+                causes.append("\n".join(l.rstrip() for l in lines[i:i + 7]))
+        if causes:
+            print(f"::error title=server-crash::{esc(chr(10).join(causes)[:3900])}")
         sys.exit(1)
     install = f"Forge installed in {installed:.0f} s, " if installed else ""
     print(f"::notice title=server-boot::{install}up in {done:.0f} s with -Xmx{heap}; {mods}; server process memory {memory} MB right after start")

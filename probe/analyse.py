@@ -1,22 +1,36 @@
-import os, re, sys, glob, zipfile, subprocess, json, urllib.request, traceback
+import os, re, sys, json, zipfile, urllib.request, urllib.parse, traceback
 out = []; p = out.append
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"})
-    return urllib.request.urlopen(req, timeout=60).read()
-def dec(j, cls, limit=6000):
-    r = subprocess.run(['java', '-jar', 'cfr.jar', j, '--jarfilter', '^' + re.escape(cls) + '$'], capture_output=True, text=True)
-    return '\n'.join(l for l in r.stdout.splitlines() if not l.startswith(' *') and not l.startswith('import ') and l.strip())[:limit]
+    return urllib.request.urlopen(req, timeout=120).read()
+PAT = re.compile(r'blood.?moon|bloodmoon|swift.?strike|flurry|cleave|heavy.?slam|rusted|bone_dagger|vial_of_blood|orchid', re.I)
 try:
-    vs = json.loads(get('https://api.modrinth.com/v2/project/sophisticated-storage/version?loaders=%5B%22forge%22%5D&game_versions=%5B%221.20.1%22%5D'))
-    v = [v for v in vs if v['version_number'] == '1.20.1-1.5.19.2243'][0]
-    f = [x for x in v['files'] if x.get('primary')] or v['files']
-    open('ss.jar', 'wb').write(get(f[0]['url']))
-    z = zipfile.ZipFile('ss.jar')
-    lang = json.loads(z.read('assets/sophisticatedstorage/lang/en_us.json'))
-    ids = sorted(set(re.sub(r'^(block|item)\.sophisticatedstorage\.', '', k) for k in lang if re.match(r'^(block|item)\.sophisticatedstorage\.[a-z0-9_]+$', k)))
-    p("SS ids (" + str(len(ids)) + "): " + ", ".join(ids))
-    models = sorted(n.split('/')[-1][:-5] for n in z.namelist() if n.startswith('assets/sophisticatedstorage/models/item/') and n.endswith('.json'))
-    p("SS item models (" + str(len(models)) + "): " + ", ".join(models))
+    jars = json.load(open('probe/jars.json'))
+    for name, url in jars.items():
+        try:
+            path = 'j_' + re.sub(r'\W', '_', name) + '.jar'
+            open(path, 'wb').write(get(url.replace(' ', '%20').replace('+', '%2B') if 'forgecdn' in url else url))
+            z = zipfile.ZipFile(path)
+        except Exception as e:
+            p(f"#### {name}: download failed {e}"); continue
+        hits = []
+        for n in z.namelist():
+            low = n.lower()
+            if low.endswith('.class'):
+                data = z.read(n)
+                found = sorted(set(m.group(0).decode('latin1') for m in re.finditer(rb'(?i)blood.?moon|swift.?strike|flurry|cleave|heavy.?slam|bone_dagger|vial_of_blood', data)))
+                if found: hits.append(f"class {n}: {found}")
+            elif low.endswith(('.json', '.toml', '.lang', '.txt', '.mcmeta', '.cfg')):
+                if PAT.search(n):
+                    hits.append(f"file {n}")
+                if '/lang/en_us' in low or low.endswith('.toml') or ('recipes/' in low or 'loot_tables/' in low or 'loot_table' in low):
+                    try: text = z.read(n).decode('utf8', 'replace')
+                    except Exception: continue
+                    for line in text.splitlines():
+                        if PAT.search(line):
+                            hits.append(f"{n}: {line.strip()[:300]}")
+        p(f"#### {name} ({len(hits)} hits)")
+        for h in hits[:45]: p(h)
 except Exception:
     p(traceback.format_exc())
 open('report.txt', 'w').write('\n'.join(out))

@@ -215,7 +215,7 @@ public final class NightGameTests {
 			long extras = pair.stream().filter(NightMobs::isExtra).count();
 			helper.assertTrue(extras == 1, "one of them the extra, found " + extras);
 			helper.assertTrue(pair.stream().filter(NightMobs::isExtra).allMatch(Skeleton::isPersistenceRequired), "the extra is persistent (outside the cap)");
-			helper.assertTrue(pair.stream().allMatch(skeleton -> Math.abs(skeleton.getMaxHealth() - 40.0F) < 0.01F), "both with the night's health");
+			helper.assertTrue(pair.stream().allMatch(each -> Math.abs(each.getMaxHealth() - 40.0F) < 0.01F), "both with the night's health");
 			pair.forEach(Skeleton::discard);
 		} finally {
 			NightEvents.testTheme = null;

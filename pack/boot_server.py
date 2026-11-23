@@ -149,11 +149,25 @@ def main():
         for i, line in enumerate(lines):
             if line.lstrip().startswith("Caused by") or "has failed to load correctly" in line or line.startswith("Description:"):
                 causes.append("\n".join(l.rstrip() for l in lines[i:i + 7]))
+            elif line.lstrip().startswith("Exception message:"):
+                # The innermost exception and where it was thrown (a class's static setup, say).
+                causes.append("\n".join(l.rstrip() for l in lines[i:i + 14]))
         if causes:
             print(f"::error title=server-crash::{esc(chr(10).join(causes)[:3900])}")
         sys.exit(1)
     install = f"Forge installed in {installed:.0f} s, " if installed else ""
     print(f"::notice title=server-boot::{install}up in {done:.0f} s with -Xmx{heap}; {mods}; server process memory {memory} MB right after start")
+
+    # Other mods' compat code the add-on held until common setup (LateCompat: Copper Age Backport's Sophisticated
+    # Storage compat, which otherwise stops the server starting): each held one should have run.
+    held = [l for l in log if "LegionWareX compat:" in l]
+    if held:
+        failed = [l for l in held if "failed at common setup" in l]
+        waited = sum("waits for common setup" in l for l in held)
+        ran = sum("ran at common setup" in l for l in held)
+        level = "warning" if failed or ran < waited else "notice"
+        print(f"::{level} title=server-compat::{waited} compat module(s) held until common setup, {ran} ran then"
+              f"{'; ' + esc(chr(10).join(failed)[:3000]) if failed else ''}")
 
     # Bug hunting: every distinct warning and error, by the mod (namespace) it names, most frequent first.
     byns = collections.defaultdict(collections.Counter)

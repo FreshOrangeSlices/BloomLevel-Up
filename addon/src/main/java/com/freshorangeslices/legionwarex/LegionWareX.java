@@ -22,6 +22,7 @@ import com.freshorangeslices.legionwarex.world.DeadEnchantments;
 import com.freshorangeslices.legionwarex.world.BannedMobs;
 import com.freshorangeslices.legionwarex.world.IllagerCrowding;
 import com.freshorangeslices.legionwarex.world.KrampusNaughtiness;
+import com.freshorangeslices.legionwarex.world.LateCompat;
 import com.freshorangeslices.legionwarex.world.MobKillDrops;
 import com.freshorangeslices.legionwarex.world.WorldEvents;
 import com.freshorangeslices.legionwarex.world.EntityWatch;
@@ -83,6 +84,7 @@ public final class LegionWareX {
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ITEMS.register(modBus);
 		LOOT_MODIFIERS.register(modBus);
+		modBus.addListener(LateCompat::onCommonSetup);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, AddonConfig.SPEC);
 		MinecraftForge.EVENT_BUS.register(CompanionEvents.class);
 		MinecraftForge.EVENT_BUS.register(OwnerHits.class);

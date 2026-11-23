@@ -3,6 +3,7 @@ package com.freshorangeslices.legionwarex.world;
 import com.freshorangeslices.legionwarex.AddonConfig;
 import com.freshorangeslices.legionwarex.LegionWareX;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -160,17 +161,41 @@ public final class DeadEnchantments {
 		});
 	}
 
-	/** Vanilla's librarian enchanted-book trade (its class isn't public, so found by name in the trade table). */
-	public static VillagerTrades.ItemListing librarianBooks() {
-		for (VillagerTrades.ItemListing[] level : VillagerTrades.TRADES.get(net.minecraft.world.entity.npc.VillagerProfession.LIBRARIAN).values()) {
-			for (VillagerTrades.ItemListing listing : level) {
-				if (listing.getClass().getSimpleName().contains("EnchantBook") || listing.getClass().getName().endsWith("$EnchantBookForEmeralds")) {
-					return listing;
+	/**
+	 * Vanilla's librarian enchanted-book trade, unwrapped: the librarian's trade that sells enchanted books (its class
+	 * isn't public, and Forge puts the trades back after its event, wrapped), or, if none does, one made from its class.
+	 */
+	public static VillagerTrades.ItemListing librarianBooks(Entity trader) {
+		RandomSource random = RandomSource.create(7L);
+		Int2ObjectMap<VillagerTrades.ItemListing[]> librarian = VillagerTrades.TRADES.get(net.minecraft.world.entity.npc.VillagerProfession.LIBRARIAN);
+
+		if (librarian != null) {
+			for (VillagerTrades.ItemListing[] level : librarian.values()) {
+				for (VillagerTrades.ItemListing listing : level) {
+					for (int i = 0; i < 4; i++) {
+						try {
+							MerchantOffer offer = listing.getOffer(trader, random);
+
+							// Forge writes the trades back after its event, so the table holds the add-on's wrappers.
+							if (offer != null && offer.getResult().is(Items.ENCHANTED_BOOK)) {
+								return listing instanceof Clean clean ? clean.inner() : listing;
+							}
+						} catch (RuntimeException ignored) {
+							break;
+						}
+					}
 				}
 			}
 		}
 
-		return null;
+		try {
+			java.lang.reflect.Constructor<?> make = Class.forName("net.minecraft.world.entity.npc.VillagerTrades$EnchantBookForEmeralds").getDeclaredConstructor(int.class);
+			make.setAccessible(true);
+			return (VillagerTrades.ItemListing) make.newInstance(1);
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			LegionWareX.LOGGER.warn("LegionWareX enchantments: no librarian book trade found ({})", e.toString());
+			return null;
+		}
 	}
 
 	/** The check's findings, as one line. Public for the game tests. */
@@ -197,7 +222,7 @@ public final class DeadEnchantments {
 		}
 
 		Entity trader = EntityType.VILLAGER.create(level);
-		VillagerTrades.ItemListing books = librarianBooks();
+		VillagerTrades.ItemListing books = librarianBooks(trader);
 
 		if (books == null) {
 			return "no librarian book trade found to check";

@@ -39,9 +39,9 @@ public final class DeadEnchantmentGameTests {
 	public static void aSwitchedOffEnchantmentNeverComes(GameTestHelper helper) {
 		RandomSource random = RandomSource.create(42L);
 		ItemStack sword = new ItemStack(Items.IRON_SWORD);
-		VillagerTrades.ItemListing books = DeadEnchantments.librarianBooks();
-		helper.assertTrue(books != null, "Vanilla's librarian book trade is found");
 		Entity trader = EntityType.VILLAGER.create(helper.getLevel());
+		VillagerTrades.ItemListing books = DeadEnchantments.librarianBooks(trader);
+		helper.assertTrue(books != null, "Vanilla's librarian book trade is found");
 		boolean tableHadIt = EnchantmentHelper.getAvailableEnchantmentResults(30, sword, false).stream()
 				.anyMatch(instance -> instance.enchantment == Enchantments.SHARPNESS);
 		int plainTrades = 0;

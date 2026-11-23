@@ -3,7 +3,7 @@ root = sys.argv[1]
 out = []; p = out.append
 zips = glob.glob(os.path.join(root, '**', '*server*.zip'), recursive=True)
 with zipfile.ZipFile(zips[0]) as z:
-    jar = [n for n in z.namelist() if 'unified' in n.lower() and n.endswith('.jar')][0]
+    jar = [n for n in z.namelist() if 'xaero' in n.lower() and 'unified' in n.lower() and n.endswith('.jar')][0]
     z.extract(jar, 'mods')
 j = os.path.join('mods', jar)
 zf = zipfile.ZipFile(j)

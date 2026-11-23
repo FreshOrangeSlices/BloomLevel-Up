@@ -41,7 +41,8 @@ public final class NightGameTests {
 	}
 
 	private static NightTable.Theme theme(String name, double health, NightTable.Mob... mobs) {
-		return new NightTable.Theme(new ResourceLocation(LegionWareX.MOD_ID, "test_" + name), "Test " + name, "", "", ChatFormatting.RED, health, List.of(mobs));
+		return new NightTable.Theme(new ResourceLocation(LegionWareX.MOD_ID, "test_" + name), "Test " + name, "", "", ChatFormatting.RED, health,
+				NightTable.Climate.ANY, List.of(mobs));
 	}
 
 	@GameTest(template = "empty")
@@ -70,13 +71,24 @@ public final class NightGameTests {
 
 			// A night whose mobs aren't installed is never dealt.
 			NightTable.set(List.of(theme("a", 1.5, mob(EntityType.SKELETON, 1)),
-					new NightTable.Theme(new ResourceLocation(LegionWareX.MOD_ID, "test_missing"), "Missing", "", "", ChatFormatting.RED, 1.5,
+					new NightTable.Theme(new ResourceLocation(LegionWareX.MOD_ID, "test_missing"), "Missing", "", "", ChatFormatting.RED, 1.5, NightTable.Climate.ANY,
 							List.of(new NightTable.Mob(new ResourceLocation("nosuchmod", "ghost"), 1, NightTable.Climate.ANY, 0, null)))));
 			NightCycle other = NightCycle.fresh();
 
 			for (int i = 0; i < 5; i++) {
 				helper.assertTrue(other.deal(helper.getLevel().getRandom()).id().getPath().equals("test_a"), "only the installed night is dealt");
 			}
+
+			// A night of any climate is full strength everywhere; a cold one a fifth in temperate land, a twenty-fifth in the heat.
+			NightTable.Theme any = theme("any", 1.5, mob(EntityType.SKELETON, 1), new NightTable.Mob(EntityType.getKey(EntityType.STRAY), 1,
+					NightTable.Climate.COLD, 0, null));
+			NightTable.Theme cold = new NightTable.Theme(new ResourceLocation(LegionWareX.MOD_ID, "test_cold"), "Cold", "", "", ChatFormatting.AQUA, 1.5,
+					NightTable.Climate.COLD, List.of(new NightTable.Mob(EntityType.getKey(EntityType.STRAY), 1, NightTable.Climate.COLD, 0, null)));
+			double off = AddonConfig.themedNightOffClimateShare();
+			helper.assertTrue(any.strength(NightTable.Climate.HOT) == 1.0 && any.strength(NightTable.Climate.ANY) == 1.0, "a night of any climate is full everywhere");
+			helper.assertTrue(cold.strength(NightTable.Climate.COLD) == 1.0, "a cold night is full in the cold");
+			helper.assertTrue(Math.abs(cold.strength(NightTable.Climate.ANY) - off) < 1e-9, "... less in temperate land");
+			helper.assertTrue(Math.abs(cold.strength(NightTable.Climate.HOT) - off * off) < 1e-9, "... far less in the heat");
 		} finally {
 			NightTable.set(saved);
 		}

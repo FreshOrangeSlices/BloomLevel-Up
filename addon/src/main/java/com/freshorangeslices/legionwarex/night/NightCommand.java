@@ -212,6 +212,7 @@ public final class NightCommand {
 			spot = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spot);
 			mob.moveTo(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, 0.0F, 0.0F);
 			NightEvents.lastReplacement = null;
+			NightEvents.forgetGroup();
 			ForgeEventFactory.onFinalizeSpawn(mob, level, level.getCurrentDifficultyAt(spot), MobSpawnType.NATURAL, null, null);
 			Mob instead = NightEvents.lastReplacement;
 

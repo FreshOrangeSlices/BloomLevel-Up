@@ -60,6 +60,11 @@ public final class NightEvents {
 		event.addListener(new NightTable());
 	}
 
+	/** Forgets the last group, so the next replacement is picked afresh (/legionwarex night check's tries, each its own). */
+	public static void forgetGroup() {
+		groupMob = null;
+	}
+
 	/** Tonight's night in this level (Overworld only), or null. */
 	public static NightTable.Theme active(ServerLevel level) {
 		if (testTheme != null) {

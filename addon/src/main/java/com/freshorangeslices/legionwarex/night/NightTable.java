@@ -86,8 +86,9 @@ public final class NightTable extends SimpleJsonResourceReloadListener {
 		}
 	}
 
-	/** A night: its id, what players see, the health its mobs get (times their own), and its mobs. */
-	public record Theme(ResourceLocation id, String name, String omen, String subtitle, ChatFormatting color, double health, List<Mob> mobs) {
+	/** A night: its id, what players see, the health its mobs get (times their own), its climate, and its mobs. */
+	public record Theme(ResourceLocation id, String name, String omen, String subtitle, ChatFormatting color, double health, Climate climate,
+			List<Mob> mobs) {
 		public List<Mob> installed() {
 			return mobs.stream().filter(Mob::present).toList();
 		}
@@ -98,17 +99,12 @@ public final class NightTable extends SimpleJsonResourceReloadListener {
 			return id != null && mobs.stream().anyMatch(mob -> mob.entity().equals(id));
 		}
 
-		/** How strong the night is in a spot of this climate: its installed mobs' shares there, by weight (1 for a night of any climate). */
+		/**
+		 * How strong the night is in a spot of this climate: full in its own (a night of any climate everywhere), less
+		 * outside it. Its cold or hot mobs in a night of any climate are rarer outside theirs through {@link #pick} instead.
+		 */
 		public double strength(Climate here) {
-			double all = 0.0;
-			double there = 0.0;
-
-			for (Mob mob : installed()) {
-				all += mob.weight();
-				there += mob.weight() * mob.climate().share(here);
-			}
-
-			return all <= 0.0 ? 0.0 : there / all;
+			return installed().isEmpty() ? 0.0 : climate.share(here);
 		}
 
 		/** One of its installed mobs for a spot of this climate, by weight times its share there, among those 'allowed' lets in; null when none. */
@@ -182,7 +178,7 @@ public final class NightTable extends SimpleJsonResourceReloadListener {
 				String name = json.get("name").getAsString();
 				out.add(new Theme(file.getKey(), name, json.has("omen") ? json.get("omen").getAsString() : "Something feels wrong this morning.",
 						json.has("subtitle") ? json.get("subtitle").getAsString() : "", color == null || !color.isColor() ? ChatFormatting.RED : color,
-						json.has("health") ? Math.max(1.0, json.get("health").getAsDouble()) : 1.0, List.copyOf(mobs)));
+						json.has("health") ? Math.max(1.0, json.get("health").getAsDouble()) : 1.0, climate, List.copyOf(mobs)));
 			} catch (RuntimeException e) {
 				LegionWareX.LOGGER.warn("LegionWareX night: night file {} couldn't be read: {}", file.getKey(), e.toString());
 			}

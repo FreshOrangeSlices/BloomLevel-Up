@@ -84,19 +84,20 @@ public final class NightGameTests {
 			// A night with two copies comes twice a deck, never back to back.
 			NightTable.Theme twice = new NightTable.Theme(new ResourceLocation(LegionWareX.MOD_ID, "test_twice"), "Twice", "", "", ChatFormatting.GREEN, 2.0,
 					NightTable.Climate.ANY, -1.0, true, 2, List.of(mob(EntityType.ZOMBIE, 1)));
-			NightTable.set(List.of(twice, theme("once", 1.5, mob(EntityType.SKELETON, 1))));
+			// (With only one other night a deck of three can't keep them apart across a shuffle; the pack's deck has eight.)
+			NightTable.set(List.of(twice, theme("once", 1.5, mob(EntityType.SKELETON, 1)), theme("also", 1.5, mob(EntityType.SPIDER, 1))));
 			NightCycle copies = NightCycle.fresh();
 			ResourceLocation previous = null;
 			int twiceCount = 0;
 
-			for (int i = 0; i < 30; i++) {
+			for (int i = 0; i < 40; i++) {
 				ResourceLocation next = copies.deal(helper.getLevel().getRandom()).id();
 				helper.assertFalse(next.equals(previous), "a night twice running (deal " + i + "): " + next);
 				twiceCount += next.getPath().equals("test_twice") ? 1 : 0;
 				previous = next;
 			}
 
-			helper.assertTrue(twiceCount == 20, "the two-copy night should be 20 of 30 deals, was " + twiceCount);
+			helper.assertTrue(twiceCount == 20, "the two-copy night should be 20 of 40 deals, was " + twiceCount);
 
 			// A night of any climate is full strength everywhere; a cold one a fifth in temperate land, a twenty-fifth in the heat.
 			NightTable.Theme any = theme("any", 1.5, mob(EntityType.SKELETON, 1), new NightTable.Mob(EntityType.getKey(EntityType.STRAY), 1,

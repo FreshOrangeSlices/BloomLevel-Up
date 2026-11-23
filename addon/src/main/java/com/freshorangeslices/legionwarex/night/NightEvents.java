@@ -16,6 +16,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -37,20 +38,25 @@ import net.minecraftforge.registries.ForgeRegistries;
  * comes, at the night's strength there ({@code themedNightShare} times its climate's share), as one of the night's mobs
  * instead, on the same spot (one that fits: a solid floor, no water, room for it), a group of the same kind staying one
  * kind; the mob's own spawn rules don't apply (the night brings the deep's mobs up to the surface). The night's own mobs
- * spawning naturally are marked too. Monsters in structures that spawn their own (fortresses, outposts, monuments) and
- * spawns of any other kind (spawners, eggs, commands, raids, other mods' events) are left alone.
+ * spawning naturally are marked too. Beside each night's mob that comes, one more of its kind may ({@code
+ * themedNightMoreMobs}), a few blocks away in the dark. Monsters in structures that spawn their own (fortresses, outposts,
+ * monuments) and spawns of any other kind (spawners, eggs, commands, raids, other mods' events) are left alone, except
+ * that a night with {@code patrols: false} (The Old Night) turns vanilla's illager patrols away, and the add-on's pirate
+ * bands wait ({@link #holdsBandsOff}).
  */
 public final class NightEvents {
 	/** For the game tests: this night as if it were on (number -1), and this share in place of the config's; null for the world's. */
 	public static NightTable.Theme testTheme;
 	public static Double testShare;
+	public static Double testMore;
 	public static final int TEST_NIGHT = -1;
 	// The last replacement, so a group spawning together stays one kind (not saved).
 	private static long groupTick = Long.MIN_VALUE;
 	private static BlockPos groupAt = BlockPos.ZERO;
 	private static NightTable.Mob groupMob;
-	/** The last mob that came in another's place, for /legionwarex night check. */
+	/** The last mob that came in another's place, and the last extra, for /legionwarex night check. */
 	static Mob lastReplacement;
+	static Mob lastExtra;
 
 	private NightEvents() {
 	}
@@ -78,8 +84,31 @@ public final class NightEvents {
 		return testTheme != null ? TEST_NIGHT : NightCycle.of(level).count();
 	}
 
-	static double share() {
+	/** The share of other monsters that come as this night's: its own if it has one, else the config's. */
+	static double share(NightTable.Theme theme) {
+		if (theme.share() >= 0.0) {
+			return theme.share();
+		}
+
 		return testShare != null ? testShare : AddonConfig.themedNightShare();
+	}
+
+	static double more() {
+		return testMore != null ? testMore : AddonConfig.themedNightMoreMobs();
+	}
+
+	/** Whether tonight holds the add-on's pirate bands off (a night with patrols: false). */
+	public static boolean holdsBandsOff(ServerLevel level) {
+		NightTable.Theme theme = active(level);
+		return theme != null && !theme.patrols();
+	}
+
+	/** A night with patrols: false turns vanilla's illager patrols away (first, so the illager crowding doesn't count them). */
+	@SubscribeEvent(priority = EventPriority.HIGH)
+	public static void onPatrol(MobSpawnEvent.FinalizeSpawn event) {
+		if (event.getSpawnType() == MobSpawnType.PATROL && !event.isSpawnCancelled() && holdsBandsOff(event.getLevel().getLevel())) {
+			event.setSpawnCancelled(true);
+		}
 	}
 
 	@SubscribeEvent
@@ -112,12 +141,13 @@ public final class NightEvents {
 			return;
 		}
 
+		BlockPos pos = BlockPos.containing(event.getX(), event.getY(), event.getZ());
+
 		if (theme.has(mob.getType())) {
 			NightMobs.mark(mob, theme, night(level));
+			extra(level, theme, theme.entry(mob.getType()), pos, level.getRandom());
 			return;
 		}
-
-		BlockPos pos = BlockPos.containing(event.getX(), event.getY(), event.getZ());
 
 		if (!level.getFluidState(pos).isEmpty() || !level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP)
 				|| IllagerCrowding.inSpawnStructure(level, pos)) {
@@ -126,12 +156,13 @@ public final class NightEvents {
 
 		NightTable.Climate here = NightTable.Climate.at(level, pos);
 
-		if (level.getRandom().nextDouble() >= share() * theme.strength(here)) {
+		if (level.getRandom().nextDouble() >= share(theme) * theme.strength(here)) {
 			return;
 		}
 
 		if (replace(level, theme, pos, here, level.getRandom()) != null) {
 			event.setSpawnCancelled(true);
+			extra(level, theme, groupMob, pos, level.getRandom());
 		}
 	}
 
@@ -172,7 +203,7 @@ public final class NightEvents {
 				return null;
 			}
 
-			Mob mob = spawn(level, theme, pick, pos, random, MobSpawnType.NATURAL);
+			Mob mob = spawn(level, theme, pick, pos, random, MobSpawnType.NATURAL, false);
 
 			if (mob != null) {
 				groupTick = level.getGameTime();
@@ -188,8 +219,41 @@ public final class NightEvents {
 		return null;
 	}
 
-	/** One of the night's mobs at pos, marked as the night's and finalized as this kind of spawn; null when it doesn't fit there. */
-	static Mob spawn(ServerLevel level, NightTable.Theme theme, NightTable.Mob pick, BlockPos pos, RandomSource random, MobSpawnType type) {
+	/**
+	 * One more of this night's mob a few blocks from pos (a solid floor, no water, no torchlight, room for it), at the
+	 * {@code themedNightMoreMobs} chance; an extra, so the monster cap doesn't count it. Null when it doesn't come.
+	 */
+	static Mob extra(ServerLevel level, NightTable.Theme theme, NightTable.Mob pick, BlockPos near, RandomSource random) {
+		if (pick == null || random.nextDouble() >= more() || !allowed(level, NightCycle.of(level), pick, near)) {
+			return null;
+		}
+
+		for (int attempt = 0; attempt < 10; attempt++) {
+			BlockPos column = near.offset(random.nextInt(7) - 3, 0, random.nextInt(7) - 3);
+
+			// The same height first, then a step up or down.
+			for (int dy : new int[] {0, 1, -1}) {
+				BlockPos at = column.above(dy);
+
+				if (at.equals(near) || !level.getFluidState(at).isEmpty() || level.getBrightness(LightLayer.BLOCK, at) > 0
+						|| !level.getBlockState(at.below()).isFaceSturdy(level, at.below(), Direction.UP)) {
+					continue;
+				}
+
+				Mob mob = spawn(level, theme, pick, at, random, MobSpawnType.NATURAL, true);
+
+				if (mob != null) {
+					lastExtra = mob;
+					return mob;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/** One of the night's mobs at pos, marked as the night's (and as an extra) and finalized as this kind of spawn; null when it doesn't fit there. */
+	static Mob spawn(ServerLevel level, NightTable.Theme theme, NightTable.Mob pick, BlockPos pos, RandomSource random, MobSpawnType type, boolean extra) {
 		if (!pick.present() || !(pick.type().create(level) instanceof Mob mob)) {
 			return null;
 		}
@@ -203,6 +267,11 @@ public final class NightEvents {
 		}
 
 		NightMobs.mark(mob, theme, night(level));
+
+		if (extra) {
+			NightMobs.markExtra(mob);
+		}
+
 		ForgeEventFactory.onFinalizeSpawn(mob, level, level.getCurrentDifficultyAt(pos), type, null, null);
 
 		if (mob.isSpawnCancelled() || !level.addFreshEntity(mob)) {

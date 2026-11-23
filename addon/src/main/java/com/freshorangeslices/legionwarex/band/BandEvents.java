@@ -1,6 +1,7 @@
 package com.freshorangeslices.legionwarex.band;
 
 import com.freshorangeslices.legionwarex.AddonConfig;
+import com.freshorangeslices.legionwarex.night.NightEvents;
 import com.freshorangeslices.legionwarex.Despawning;
 import com.freshorangeslices.legionwarex.LegionWareX;
 import com.freshorangeslices.legionwarex.world.IllagerCrowding;
@@ -157,8 +158,9 @@ public final class BandEvents {
 
 	/** A pirate band landing on a warm beach, 24 to 56 blocks from a player, none within 128 blocks of another. */
 	static List<Mob> tryPirateBand(ServerLevel level, RandomSource random) {
+		// A night that holds patrols off (The Old Night: vanilla's night mobs only) holds the pirates off too.
 		if (!AddonConfig.pirateBands() || !BandKind.PIRATE.available() || !mayComeAt(level, AddonConfig.pirateBandFromDay())
-				|| random.nextDouble() >= AddonConfig.pirateBandChance()) {
+				|| NightEvents.holdsBandsOff(level) || random.nextDouble() >= AddonConfig.pirateBandChance()) {
 			return List.of();
 		}
 

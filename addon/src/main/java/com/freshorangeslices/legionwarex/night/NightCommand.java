@@ -158,7 +158,7 @@ public final class NightCommand {
 		for (NightTable.Mob mob : theme.installed()) {
 			BlockPos at = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, start.offset((i % 8) * 4 - 14, 0, 10 + (i / 8) * 5));
 			i++;
-			Mob spawned = NightEvents.spawn(level, theme, mob, at, level.getRandom(), MobSpawnType.COMMAND);
+			Mob spawned = NightEvents.spawn(level, theme, mob, at, level.getRandom(), MobSpawnType.COMMAND, false);
 			(spawned == null ? failed : placed).add(spawned == null ? mob.entity().toString() : describe(spawned));
 		}
 
@@ -201,6 +201,7 @@ public final class NightCommand {
 		Map<String, Integer> came = new TreeMap<>();
 		int tries = 40;
 		int replaced = 0;
+		int extras = 0;
 		double health = 0.0;
 
 		for (int i = 0; i < tries; i++) {
@@ -212,6 +213,7 @@ public final class NightCommand {
 			spot = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spot);
 			mob.moveTo(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, 0.0F, 0.0F);
 			NightEvents.lastReplacement = null;
+			NightEvents.lastExtra = null;
 			NightEvents.forgetGroup();
 			ForgeEventFactory.onFinalizeSpawn(mob, level, level.getCurrentDifficultyAt(spot), MobSpawnType.NATURAL, null, null);
 			Mob instead = NightEvents.lastReplacement;
@@ -223,13 +225,19 @@ public final class NightCommand {
 				instead.discard();
 			}
 
+			if (NightEvents.lastExtra != null) {
+				extras++;
+				NightEvents.lastExtra.discard();
+			}
+
 			mob.discard();
 		}
 
 		List<String> kinds = came.entrySet().stream().map(entry -> entry.getKey() + " x" + entry.getValue()).toList();
-		double expected = NightEvents.share() * theme.strength(here);
+		double expected = NightEvents.share(theme) * theme.strength(here);
 		return say(source, "check: " + replaced + " of " + tries + " natural " + ForgeRegistries.ENTITY_TYPES.getKey(standIn) + " spawns came as "
 				+ theme.id().getPath() + " mobs (expected about " + Math.round(expected * tries) + ", climate " + here.name().toLowerCase(Locale.ROOT)
-				+ "), health x" + (replaced == 0 ? 0 : Math.round(health / replaced * 100.0) / 100.0) + ": " + String.join(", ", kinds), true);
+				+ "), health x" + (replaced == 0 ? 0 : Math.round(health / replaced * 100.0) / 100.0) + ": " + String.join(", ", kinds) + "; " + extras
+				+ " more came beside them (expected about " + Math.round(replaced * NightEvents.more()) + ")", true);
 	}
 }

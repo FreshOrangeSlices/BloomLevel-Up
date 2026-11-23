@@ -1445,8 +1445,9 @@ def night_check(server, player, shots):
     """The add-on's themed nights: every night's mobs against the game (one whose mod is in the layer but isn't in the game
     fails), then Bone Night started (its title at dusk), one of each of its installed mobs placed in rows in front of the
     player (in creative, with night vision for the picture) with the night's health, captured (pack_night), and 40 natural
-    spawns of another monster tried where the player stands: most should come as the night's (pack-night lists what came
-    and any mob whose health isn't the night's). Returns (failures, notes, report lines)."""
+    spawns of another monster tried where the player stands: most should come as the night's, and about half of those
+    bring one more beside them (pack-night lists what came and any mob whose health isn't the night's). Returns
+    (failures, notes, report lines)."""
     failures, notes, report = [], [], []
     mark = len(server.lines)
     server.send("legionwarex night themes")
@@ -1501,6 +1502,11 @@ def night_check(server, player, shots):
         notes.append("add-on: " + line.strip().split("LegionWareX night: ", 1)[-1][:400])
         if int(checked.group(1)) == 0 and int(checked.group(4)) > 0:
             failures.append("add-on: on Bone Night no natural spawn came as one of the night's: " + line.strip()[-300:])
+        more = re.search(r"; (\d+) more came beside them \(expected about (\d+)\)", line)
+        if not more:
+            failures.append(f"add-on: the night check didn't say how many more came beside them: {line.strip()[-200:]}")
+        elif int(more.group(1)) == 0 and int(more.group(2)) > 2:
+            failures.append(f"add-on: on Bone Night no extra came beside the night's mobs (expected about {more.group(2)})")
     server.send("legionwarex night stop")
     time.sleep(1)
     server.send(f"execute as {player} at @s run kill @e[tag=legionwarex_night,distance=..96]")

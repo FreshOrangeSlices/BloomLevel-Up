@@ -52,6 +52,7 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.IntValue THEMED_NIGHT_EVERY;
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_SHARE;
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_OFF_CLIMATE;
+	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_MORE;
 	/** Enchantments that do nothing in the pack (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"). */
 	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity", "skarrier_mobs:bluntness", "skarrier_mobs:mass",
 			"skarrier_mobs:mobility");
@@ -235,8 +236,9 @@ public final class AddonConfig {
 				.comment("Whether themed nights come.")
 				.define("themedNights", true);
 		THEMED_NIGHT_EVERY = builder
-				.comment("Days from one themed night to the next (Minecraft days, 20 minutes each).")
-				.defineInRange("themedNightEveryDays", 30, 1, 365);
+				.comment("Days from one themed night to the next (Minecraft days: 20 minutes, about 13 when players sleep through",
+						"the night; 6 is about an hour and a half). Was themedNightEveryDays (30) in 0.6.0: renamed so worlds take the new value.")
+				.defineInRange("daysBetweenThemedNights", 6, 1, 365);
 		THEMED_NIGHT_SHARE = builder
 				.comment("Of the other monsters that would spawn naturally on a themed night, the share that come as one of the night's",
 						"instead (in the night's own climate; elsewhere this times themedNightOffClimateShare).")
@@ -245,6 +247,11 @@ public final class AddonConfig {
 				.comment("How strong a cold or hot night (or one of its mobs) is outside its climate: this in temperate land, its square",
 						"in the opposite climate (0.2: a fifth, and a twenty-fifth in the heat for frost mobs).")
 				.defineInRange("themedNightOffClimateShare", 0.2, 0.0, 1.0);
+		THEMED_NIGHT_MORE = builder
+				.comment("The chance that one more of the night's mobs comes beside each that spawns (0.5: about 1.5 times as many).",
+						"These extras don't count toward the game's monster cap (so the night really has more), and despawn by the add-on's",
+						"own rule, as vanilla's: at once with no player within 128 blocks, now and then beyond 32.")
+				.defineInRange("themedNightMoreMobs", 0.5, 0.0, 1.0);
 		builder.pop();
 
 		builder.push("world");
@@ -453,7 +460,11 @@ public final class AddonConfig {
 	}
 
 	public static int themedNightEveryDays() {
-		return get(THEMED_NIGHT_EVERY, 30);
+		return get(THEMED_NIGHT_EVERY, 6);
+	}
+
+	public static double themedNightMoreMobs() {
+		return get(THEMED_NIGHT_MORE, 0.5);
 	}
 
 	public static double themedNightShare() {

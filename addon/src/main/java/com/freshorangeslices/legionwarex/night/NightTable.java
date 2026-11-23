@@ -33,7 +33,10 @@ import net.minecraftforge.registries.ForgeRegistries;
  * The themed nights: data files at {@code data/<namespace>/legionwarex/nights/<name>.json}, one night each (its id is the
  * file's: {@code legionwarex:bone}), {@code {"name": "Bone Night", "omen": "<the morning's line>", "subtitle": "<under the
  * title at dusk>", "color": "<chat colour>", "health": 1.5, "climate": "any|cold|hot", "mobs": [{"entity": "<id>",
- * "weight": 10, "climate": "cold", "max": 1, "after": "<boss id>"}]}}. A mob's climate is the night's unless it names one;
+ * "weight": 10, "climate": "cold", "max": 1, "after": "<boss id>"}], "share": 1.0, "patrols": false, "copies": 2}}. {@code share}
+ * is this night's in place of {@code themedNightShare} (1: every other monster that would spawn naturally comes as the
+ * night's), {@code patrols: false} holds vanilla's illager patrols and the add-on's pirate bands off that night, and
+ * {@code copies} puts it in the deck that many times (never twice running). A mob's climate is the night's unless it names one;
  * {@code max} is how many of it may be loaded within 128 blocks of a spot (none: no limit), for the rare and the lone;
  * {@code after} keeps it out until a player has killed that boss (Skarrier's mobs that only come after the Wither). Mobs
  * whose mod isn't installed are left out when one is picked, so a night ships entries for mods the pack may not have.
@@ -86,9 +89,23 @@ public final class NightTable extends SimpleJsonResourceReloadListener {
 		}
 	}
 
-	/** A night: its id, what players see, the health its mobs get (times their own), its climate, and its mobs. */
+	/**
+	 * A night: its id, what players see, the health its mobs get (times their own), its climate, its share of other
+	 * monsters (below 0: the config's), whether patrols and pirate bands may come, its copies in the deck, and its mobs.
+	 */
 	public record Theme(ResourceLocation id, String name, String omen, String subtitle, ChatFormatting color, double health, Climate climate,
-			List<Mob> mobs) {
+			double share, boolean patrols, int copies, List<Mob> mobs) {
+		/** A night with the config's share, patrols allowed, once in the deck. */
+		public Theme(ResourceLocation id, String name, String omen, String subtitle, ChatFormatting color, double health, Climate climate, List<Mob> mobs) {
+			this(id, name, omen, subtitle, color, health, climate, -1.0, true, 1, mobs);
+		}
+
+		/** The mob entry for this kind, or null. */
+		public Mob entry(EntityType<?> type) {
+			ResourceLocation key = ForgeRegistries.ENTITY_TYPES.getKey(type);
+			return key == null ? null : mobs.stream().filter(mob -> mob.entity().equals(key)).findFirst().orElse(null);
+		}
+
 		public List<Mob> installed() {
 			return mobs.stream().filter(Mob::present).toList();
 		}
@@ -178,7 +195,10 @@ public final class NightTable extends SimpleJsonResourceReloadListener {
 				String name = json.get("name").getAsString();
 				out.add(new Theme(file.getKey(), name, json.has("omen") ? json.get("omen").getAsString() : "Something feels wrong this morning.",
 						json.has("subtitle") ? json.get("subtitle").getAsString() : "", color == null || !color.isColor() ? ChatFormatting.RED : color,
-						json.has("health") ? Math.max(1.0, json.get("health").getAsDouble()) : 1.0, climate, List.copyOf(mobs)));
+						json.has("health") ? Math.max(1.0, json.get("health").getAsDouble()) : 1.0, climate,
+						json.has("share") ? Math.max(0.0, Math.min(1.0, json.get("share").getAsDouble())) : -1.0,
+						!json.has("patrols") || json.get("patrols").getAsBoolean(), json.has("copies") ? Math.max(1, Math.min(4, json.get("copies").getAsInt())) : 1,
+						List.copyOf(mobs)));
 			} catch (RuntimeException e) {
 				LegionWareX.LOGGER.warn("LegionWareX night: night file {} couldn't be read: {}", file.getKey(), e.toString());
 			}

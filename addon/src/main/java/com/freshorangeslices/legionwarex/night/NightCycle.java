@@ -110,26 +110,56 @@ public final class NightCycle extends SavedData {
 		deck.removeIf(id -> NightTable.get(id) == null || NightTable.get(id).installed().isEmpty());
 
 		if (deck.isEmpty()) {
-			List<ResourceLocation> all = new ArrayList<>(NightTable.all().values().stream().filter(theme -> !theme.installed().isEmpty())
-					.map(NightTable.Theme::id).toList());
+			List<ResourceLocation> all = new ArrayList<>();
 
-			for (int i = all.size() - 1; i > 0; i--) {
-				int j = random.nextInt(i + 1);
-				ResourceLocation swap = all.get(i);
-				all.set(i, all.get(j));
-				all.set(j, swap);
+			for (NightTable.Theme theme : NightTable.all().values()) {
+				if (!theme.installed().isEmpty()) {
+					for (int copy = 0; copy < theme.copies(); copy++) {
+						all.add(theme.id());
+					}
+				}
 			}
 
-			// Never the same night twice running across a shuffle.
-			if (all.size() > 1 && all.get(0).equals(last)) {
-				all.add(all.remove(0));
-			}
-
-			deck.addAll(all);
+			deck.addAll(shuffled(all, last, random));
 			setDirty();
 		}
 
 		return deck.isEmpty() ? null : NightTable.get(deck.get(0));
+	}
+
+	/**
+	 * The cards in a random order with no night twice running, the first not the night before it (a night with two copies
+	 * never comes back to back); shuffled again until it holds, as near as it can be when it can't.
+	 */
+	static List<ResourceLocation> shuffled(List<ResourceLocation> cards, ResourceLocation before, RandomSource random) {
+		List<ResourceLocation> best = new ArrayList<>(cards);
+		int bestRepeats = Integer.MAX_VALUE;
+
+		for (int round = 0; round < 50 && bestRepeats > 0; round++) {
+			List<ResourceLocation> order = new ArrayList<>(cards);
+
+			for (int i = order.size() - 1; i > 0; i--) {
+				int j = random.nextInt(i + 1);
+				ResourceLocation swap = order.get(i);
+				order.set(i, order.get(j));
+				order.set(j, swap);
+			}
+
+			int repeats = 0;
+
+			for (int i = 0; i < order.size(); i++) {
+				if (order.get(i).equals(i == 0 ? before : order.get(i - 1))) {
+					repeats++;
+				}
+			}
+
+			if (repeats < bestRepeats) {
+				best = order;
+				bestRepeats = repeats;
+			}
+		}
+
+		return best;
 	}
 
 	/** Deals the next night off the deck. */
@@ -137,7 +167,7 @@ public final class NightCycle extends SavedData {
 		NightTable.Theme theme = peek(random);
 
 		if (theme != null) {
-			deck.remove(theme.id());
+			deck.remove(0);
 			last = theme.id();
 			setDirty();
 		}
@@ -226,6 +256,7 @@ public final class NightCycle extends SavedData {
 	/** Starts this night now (tonight: the day's own night). */
 	public void start(ServerLevel level, NightTable.Theme theme, long day) {
 		active = theme.id();
+		last = theme.id();
 		activeDay = day;
 		count++;
 		setDirty();

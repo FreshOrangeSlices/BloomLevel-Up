@@ -25,7 +25,7 @@ def one(slug):
     for n in names:
         if n.endswith('mods.toml'):
             t = z.read(n).decode('utf8', 'replace')
-            p("mods.toml deps: " + ' | '.join(re.findall(r'modId\s*=\s*"([^"]+)"[^\[]*?mandatory\s*=\s*(\w+)', t)))
+            p("mods.toml: " + ' | '.join(f"{a}={b}" for a, b in re.findall(r'modId\s*=\s*"([^"]+)"[^\[]*?mandatory\s*=\s*(\w+)', t)) + " || " + t[:600].replace('\n', ' / '))
     langs = [n for n in names if n.endswith('lang/en_us.json')]
     for n in langs:
         lang = json.loads(z.read(n))
@@ -67,7 +67,7 @@ def packjar(j):
     for n in names:
         if n.endswith('.json') and 'enchant' in n.lower() and 'lang' not in n:
             p(f"json {n}: {zf.read(n)[:400]!r}")
-for j in glob.glob('mods/**/*.jar', recursive=True):
+for j in []:
     try:
         packjar(j)
     except Exception:

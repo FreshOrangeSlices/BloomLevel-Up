@@ -1,0 +1,770 @@
+{
+ "id": "field_guide",
+ "title": "Field Guide",
+ "subtitle": [
+  "The mods with a longer road: where each one starts and where it leads."
+ ],
+ "icon": "minecraft:writable_book",
+ "group": "guides",
+ "mods": [],
+ "progression_mode": "flexible",
+ "quests": [
+  {
+   "id": "me_foundry",
+   "title": "The Foundry",
+   "subtitle": "Monster Expansion",
+   "icon": "monsterexpansion:foundry",
+   "x": 0,
+   "y": 0,
+   "shape": "circle",
+   "description": [
+    "Monster Expansion's beasts are hunted like big game: you learn them, break pieces off them in the fight, and carve those pieces into gear.",
+    "",
+    "Its workbench is the Foundry: planks and an iron ingot over two logs."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "monsterexpansion:foundry",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "id": "me_notes",
+   "title": "Hunter's Notes",
+   "subtitle": "Monster Expansion",
+   "icon": "monsterexpansion:guidebook",
+   "x": 1.5,
+   "y": 0,
+   "shape": "circle",
+   "description": [
+    "A book with a wooden sword, a wooden mace and a wooden spear around it makes the Hunter's Notes, the mod's own guide.",
+    "",
+    "For each monster it has where it lives, how dangerous it is, what it drops and how to fight it, and for each status effect they cause, how to shake it off: crouch, sprint, roll, or stand still. It also lists hunts to take on."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "monsterexpansion:guidebook",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:bread",
+     "count": 6
+    }
+   ],
+   "deps": [
+    "me_foundry"
+   ]
+  },
+  {
+   "id": "me_gear",
+   "title": "Carved from the Hunt",
+   "subtitle": "Monster Expansion",
+   "icon": "monsterexpansion:rakoth_helmet",
+   "x": 3,
+   "y": 0,
+   "shape": "diamond",
+   "description": [
+    "The Skrythe, Ignathos, Rhyza, Leivekilth and Rakoth each live in a lair of their own (the boss chapters have them). Each drops pieces of itself, and a severed tail drops a piece of its own, so aim for the tail.",
+    "",
+    "At the Foundry those pieces become an armor set with a set bonus: the Rakoth's lets you step up full blocks, the Leivekilth's walks you over frozen water, the Rhyza's turns you invisible at low health. They also make the mod's weapons: Duskrend, Rimescourge, Charcraw, the Horn of the Shattercry and the Spire Shell Bulwark."
+   ],
+   "tasks": [
+    {
+     "type": "advancement",
+     "advancement": "monsterexpansion:craft_monster_armor"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 2
+    }
+   ],
+   "deps": [
+    "me_notes"
+   ]
+  },
+  {
+   "id": "me_kobeko",
+   "title": "A Kobeko of Your Own",
+   "subtitle": "Monster Expansion",
+   "icon": "monsterexpansion:kobeko_locator",
+   "x": 4.5,
+   "y": 0,
+   "shape": "circle",
+   "description": [
+    "Kobeko roam most land biomes, by day too. To win one over, fight it until it faints, then give it a Golden Apple and it pledges its loyalty. You can have one at a time.",
+    "",
+    "Right-click it with an empty hand to open its gear: a weapon, a helmet and a chestplate (iron to netherite, or carved from the big monsters, with bonuses of their own), and three gadgets. The Taunt Shield draws enemies to it, the Whistlewind Horn bolsters it, the Vigor Belt lets it heal itself or you with potions, and it throws Flash Bundles. If it faints, a Golden Apple brings it back.",
+    "",
+    "The Kobeko Locator, three bones on a diagonal, calls your Kobeko to you from anywhere."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "monsterexpansion:kobeko_locator",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:golden_apple",
+     "count": 1
+    }
+   ],
+   "deps": [
+    "me_notes"
+   ]
+  },
+  {
+   "id": "me_arborix",
+   "title": "Ride an Arborix",
+   "subtitle": "Monster Expansion",
+   "icon": "minecraft:saddle",
+   "x": 6,
+   "y": 0,
+   "shape": "circle",
+   "description": [
+    "The Arborix wanders the same lands as the Kobeko. Feed one Raw Beef to tame it (one at a time).",
+    "",
+    "Saddle it and right-click with an empty hand to ride it; sneak and right-click to open its gear, where its cosmetic heads, chest pieces and tails go. It climbs and glides, and has key bindings of its own to call it to you and to jump (in Controls)."
+   ],
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "I have an Arborix"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:saddle",
+     "count": 1
+    }
+   ],
+   "deps": [
+    "me_kobeko"
+   ]
+  },
+  {
+   "id": "sk_coatings",
+   "title": "Coatings",
+   "subtitle": "Skarrier Mobs",
+   "icon": "skarrier_mobs:dragger_silk",
+   "x": 0,
+   "y": 1.5,
+   "shape": "circle",
+   "description": [
+    "Skarrier Mobs' creatures drop parts you rub onto your gear: hold the part in your main hand and the gear in your off-hand, and right-click. A coating wears off after so many uses.",
+    "",
+    "Dragger Silk mends simple tools and weapons (up to iron). A Wrought Scale on a shield often makes a block cost a single point of durability. Bowlder Dust on a weapon crumbles armor.",
+    "",
+    "Draggers, Wroughts and their kin live underground, in the dark."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "skarrier_mobs:dragger_silk",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:torch",
+     "count": 32
+    }
+   ]
+  },
+  {
+   "id": "sk_slither",
+   "title": "Fast Food",
+   "subtitle": "Skarrier Mobs",
+   "icon": "skarrier_mobs:raw_slither",
+   "x": 1.5,
+   "y": 1.5,
+   "shape": "circle",
+   "description": [
+    "Slithers swarm swamps and mangrove swamps above Y 60. Cook one and eat it."
+   ],
+   "tasks": [
+    {
+     "type": "advancement",
+     "advancement": "skarrier_mobs:fast_food"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cooked_beef",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "id": "sk_wither",
+   "title": "After the Wither",
+   "subtitle": "Skarrier Mobs",
+   "icon": "skarrier_mobs:acidic_bile",
+   "x": 3,
+   "y": 1.5,
+   "shape": "diamond",
+   "description": [
+    "Nine of Skarrier's creatures only appear once the Wither has been beaten in the world: Bowlders and Gorgers underground, the Freeze on frozen peaks, the Gadlisk in swamps, the Viruleon in badlands and deserts, the Voidrake in the End, and others.",
+    "",
+    "The Gorger drops Acidic Bile: use it on an ore to melt it down for a bigger yield."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "skarrier_mobs:gorger",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 1
+    }
+   ],
+   "deps": [
+    "sk_coatings"
+   ]
+  },
+  {
+   "id": "bic_dark_metal",
+   "title": "Dark Metal",
+   "subtitle": "Born in Chaos",
+   "icon": "born_in_chaos_v1:dark_metal_ingot",
+   "x": 0,
+   "y": 3,
+   "shape": "circle",
+   "description": [
+    "Born in Chaos's metal comes in pieces, from chests in its ruins and from Dark Metal Deposits. Nine pieces make a pile, and a blast furnace turns a pile into a Dark Metal Ingot.",
+    "",
+    "With Monster Skin, which Dread Hounds and their leader drop in forests and taigas, ingots and nuggets make Nightmare armor. Dark Metal armor is netherite gear upgraded at a smithing table."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "born_in_chaos_v1:dark_metal_ingot",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "id": "bic_spiny_shell",
+   "title": "Spiny Shell",
+   "subtitle": "Born in Chaos",
+   "icon": "born_in_chaos_v1:spiny_shell",
+   "x": 1.5,
+   "y": 3,
+   "shape": "circle",
+   "description": [
+    "Thornshell Crabs live on beaches and stony shores. Hand one rotten flesh or rotten fish and it may give you a Spiny Shell; they drop them too.",
+    "",
+    "Shells make Spiny Shell armor."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "born_in_chaos_v1:spiny_shell",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cooked_cod",
+     "count": 6
+    }
+   ]
+  },
+  {
+   "id": "ml_blood_moon",
+   "title": "The Blood Moon",
+   "subtitle": "Myths & Legends",
+   "icon": "mythsandlegends:blood_moon",
+   "x": 0,
+   "y": 4.5,
+   "shape": "diamond",
+   "description": [
+    "Every 20 to 29 days the moon turns red. You're warned at dusk, when an unsettling silence falls, and through the night the undead come stronger and in greater numbers.",
+    "",
+    "Survive until sunrise."
+   ],
+   "tasks": [
+    {
+     "type": "advancement",
+     "advancement": "mythsandlegends:adventure/dawn_of_the_living"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "ml_chronicler",
+   "title": "The Chronicler",
+   "subtitle": "Myths & Legends",
+   "icon": "mythsandlegends:research_notes",
+   "x": 1.5,
+   "y": 4.5,
+   "shape": "circle",
+   "description": [
+    "Somewhere in the Overworld stands the Chronicler's house. Bring him what you find and he researches it, one project at a time (he may make a breakthrough or a mistake along the way), unlocking recipes you couldn't make before.",
+    "",
+    "Harder projects open up as you finish easier ones. JEI lists them all, with what each needs, under Research Projects."
+   ],
+   "tasks": [
+    {
+     "type": "structure",
+     "structure": "mythsandlegends:chronicler_house"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:bread",
+     "count": 6
+    }
+   ]
+  },
+  {
+   "id": "ml_gargoyle",
+   "title": "Gargoyle Arsenal",
+   "subtitle": "Myths & Legends",
+   "icon": "mythsandlegends:stony_shield",
+   "x": 3,
+   "y": 4.5,
+   "shape": "diamond",
+   "description": [
+    "Gargoyles, which may stand guard by day as sentinels, drop shards, fragments and pieces of themselves.",
+    "",
+    "Give the Chronicler three fragments and three shards to research the Gargoyle Arsenal. Then fragments and a shard make the Stony Shield, and the Gargoyle Axe pushes enemies back with a shockwave when you right-click a block."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "mythsandlegends:stony_shield",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 1
+    }
+   ],
+   "deps": [
+    "ml_chronicler"
+   ]
+  },
+  {
+   "id": "ml_ironshade",
+   "title": "Bound by Darkness",
+   "subtitle": "Myths & Legends",
+   "icon": "mythsandlegends:ironshade_helmet",
+   "x": 4.5,
+   "y": 4.5,
+   "shape": "circle",
+   "description": [
+    "Possessed Armor walks the mountains, dropping Possessed Armor Fragments and Cursed Cores. A blast furnace turns a fragment into a Bound Soul Ingot.",
+    "",
+    "Ingots and a Cursed Core make Ironshade armor: Strength under the sun, and more of it under the moon."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "mythsandlegends:ironshade_chestplate",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 4
+    }
+   ]
+  },
+  {
+   "id": "mm_chemical_x",
+   "title": "Chemical X",
+   "subtitle": "Mutant Monsters",
+   "icon": "mutantmonsters:mutant_skeleton_skull",
+   "x": 0,
+   "y": 6,
+   "shape": "diamond",
+   "description": [
+    "A mutant's trophy, such as a Hulk Hammer or a Mutant Skeleton Skull, brewed into a Thick Potion makes Chemical X.",
+    "",
+    "Splash it on a creeper, zombie, skeleton or enderman and it becomes a mutant. A snow golem becomes a Mutant Snow Golem, and a pig fed a Fermented Spider Eye first becomes a Spider Pig."
+   ],
+   "tasks": [
+    {
+     "type": "advancement",
+     "advancement": "mutantmonsters:gunpowder_spice"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "id": "mm_skeleton_armor",
+   "title": "Bones of a Giant",
+   "subtitle": "Mutant Monsters",
+   "icon": "mutantmonsters:mutant_skeleton_chestplate",
+   "x": 1.5,
+   "y": 6,
+   "shape": "circle",
+   "description": [
+    "A Mutant Skeleton falls apart into its pieces: ribs, limbs, shoulder pads, a pelvis and its skull.",
+    "",
+    "They make Mutant Skeleton armor. Six ribs make a rib cage, shoulder pads and limbs make arms, and the two together make the chestplate."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "mutantmonsters:mutant_skeleton_chestplate",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:arrow",
+     "count": 16
+    }
+   ]
+  },
+  {
+   "id": "ii_platinum",
+   "title": "Platinum",
+   "subtitle": "Illager Invasion",
+   "icon": "illagerinvasion:platinum_sheet",
+   "x": 0,
+   "y": 7.5,
+   "shape": "circle",
+   "description": [
+    "Illager Invasion's illagers (Bashers, Provokers, Marauders, Alchemists, Inquisitors, Firecallers, Invokers, Sorcerers and more) hold its forts, towers, labyrinths and huts, and some roam outside them.",
+    "",
+    "Pillagers, ravagers and Inquisitors drop Platinum Chunks, and four make a Platinum Sheet. Platinum also trims armor."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "illagerinvasion:platinum_sheet",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 2
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 100
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 3
+    }
+   ]
+  },
+  {
+   "id": "ii_imbuing",
+   "title": "The Imbuing Table",
+   "subtitle": "Illager Invasion",
+   "icon": "illagerinvasion:imbuing_table",
+   "x": 1.5,
+   "y": 7.5,
+   "shape": "diamond",
+   "description": [
+    "The Imbuing Table takes an enchantment past its usual limit. It's made of copper blocks, paper, dark oak logs, a bottle o' enchanting and Primal Essence, which Invokers drop.",
+    "",
+    "Put in a book with one enchantment at its highest level, the item it goes on, and a Hallowed Gem (amethyst, a diamond, and the Unusual Dust of Sorcerers and Illusionary Dust of Illusioners): the item gets that enchantment one level higher."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "illagerinvasion:imbuing_table",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 5
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "utility",
+     "xp": 300
+    },
+    {
+     "type": "item",
+     "item": "minecraft:diamond",
+     "count": 1
+    }
+   ],
+   "deps": [
+    "ii_platinum"
+   ]
+  },
+  {
+   "id": "dd_classics",
+   "title": "Classic Monsters",
+   "subtitle": "Dungeon Denizens",
+   "icon": "minecraft:skeleton_skull",
+   "x": 0,
+   "y": 9,
+   "shape": "circle",
+   "description": [
+    "Dungeon Denizens fills the dark with classic monsters: skeleton warriors and champions, iron, frost and burning skeletons, wights, bodaks, gargoyles, oozes and jellies, shadows and more.",
+    "",
+    "Some stand guard by day as sentinels. The Shadow Falchion and Shadow Blade hit Shadowspawn harder."
+   ],
+   "tasks": [
+    {
+     "type": "kill",
+     "entity": "ddenizens:skeleton_champion",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "combat",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:cooked_beef",
+     "count": 6
+    }
+   ]
+  },
+  {
+   "id": "uu_plate",
+   "title": "Heavy Plating",
+   "subtitle": "Undead Unleashed",
+   "icon": "undead_unleashed:plate_chestplate",
+   "x": 1.5,
+   "y": 9,
+   "shape": "circle",
+   "description": [
+    "Undead Unleashed's Dreadknights drop Heavy Plating. Four plates around an iron armor piece make Plate armor, which turns arrows aside: up to half of them in the full set.",
+    "",
+    "Flamebreathers drop Demon Horns, which go into Demon Broth."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "undead_unleashed:plate_chestplate",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "armor",
+     "xp": 150
+    },
+    {
+     "type": "item",
+     "item": "minecraft:iron_ingot",
+     "count": 4
+    }
+   ]
+  }
+ ]
+}

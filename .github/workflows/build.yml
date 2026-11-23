@@ -536,6 +536,9 @@ jobs:
           # Bosses'Rise's Pirate Saber, charged by the player: its two pirates beside them.
           - layers: 6
             shot: pack_pirates
+          # Bosses'Rise's Skor Gauntlet, sneak-released at the ground: its wall of ice spikes.
+          - layers: 6
+            shot: pack_gauntlet
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

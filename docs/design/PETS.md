@@ -23,7 +23,7 @@ What carries over from the plugin, and what changes:
 | Pets live with the player, summoned from a menu | **All pets stay out in the world**, Bloom pets too (FreshOrangeSlices, 2026-11-04: a friend keeps about 10 dogs, and that's how he plays). Only the pets in the player's **party** get their levels, skills, owner bonus and Bloom stats (see The party); every other pet is a plain pet. The screen **calls** any pet to you, for everyone |
 | One pet out at a time | Any number out; a **party of up to 3**, and **only one Bloom pet follows** you (modded companions all follow, their own mods' way) |
 | Levels 1 to 10, skills from the player's mcMMO Taming level (0 to 1000) | **Pet levels 1 to 100**, and the skills come from the pet's own level (Bloom has no Taming skill) |
-| Pets never die: they faint and rest | Kept for party pets |
+| Pets never die: they faint and rest | Kept for party pets, and since 2026-11-21 for any Bloom pet on Follow |
 | Happiness, petting, fetch, "loves you", tired | **Mood stays**: an unhappy pet loses some of its abilities, so feeding it is needed. Feeding still heals, and pets get a **second bar, hunger**, like the player's food: a pet has to be fed, and one with food in its own inventory takes it and eats by itself. **Fuel**: a Bloom pet eats its favourite food; a modded companion eats cooked vanilla food |
 | Bonus for the owner while a pet is out, per species | Kept (party pets only). A modded companion has the bonus of the kind it rolled |
 | Posts with jobs at level 8 | Kept |
@@ -51,7 +51,8 @@ What carries over from the plugin, and what changes:
   see Levels).
 - **Out of the party a pet is unprotected** (2026-11-05): its level's stats aren't in effect (plain vanilla stats), and
   if it dies at home it's dead. The party pet faints, and **a pet at its post comes back** (it faints there and rests;
-  confirmed 2026-11-05). **Open** (an idea): a limit on how many pets a player can have, with more slots for levels or
+  confirmed 2026-11-05). **A pet on Follow faints too** (2026-11-21, FreshOrangeSlices' choice (a): Follow and the
+  party were easy to mix up), so only a pet left on Wander or Stay can die. **Open** (an idea): a limit on how many pets a player can have, with more slots for levels or
   resources.
 - **Kills by pets keep their drops**: the add-on's rule that a mob killed by another mob drops nothing already counts
   tamed pets and companions as the player's side. Bloom pets that aren't tameable in vanilla (Iron Golem, Panda, Bee...)
@@ -320,8 +321,8 @@ the roster's `xp_multiplier`); a level-up message naming the skills it opens. Th
 (the roster's `skills`: wolf, iron_golem, polar_bear, goat, panda), the plugin's numbers, Gore at half the level in %
 (Rending Bite also Bleeds, with Bloom's Bleed when Bloom is there); skills work while the pet is in the party and awake.
 The golem, polar bear, goat and panda in the party fight for their owner (whatever hurts them or they hit; the goat gets
-a melee attack of its own); pets never hurt or go after players (co-op) or their owner's other pets. Party pets faint
-instead of dying: 5 minutes' rest where they fell, unhurt, then up with half their health (`/kill` still kills; the void
+a melee attack of its own); pets never hurt or go after players (co-op) or their owner's other pets. Party pets (and,
+since 2026-11-21, any Bloom pet on Follow) faint instead of dying: 5 minutes' rest where they fell, unhurt, then up with half their health (`/kill` still kills; the void
 brings them to their owner first). Level 100: a gold name, a sparkle, a second wind once each time it comes out (called,
 or joining the party). Sneak-feeding your own pet its food heals it (and gives a non-combat party pet XP, at most every
 30 seconds). The screen: the level beside the kind and in the list, an XP bar, five slots a side (the nine skills and the
@@ -337,7 +338,9 @@ party; twice while hungry, four times starving; a quarter while it loves you); a
 minutes) and, if fed, cheers up 10 a minute. Feeding cheers it up 15 (once a minute), a pat (sneak + right-click with
 an empty hand; not horses, donkeys, mules, llamas or camels, which open their inventory that way) 5 (every 30 seconds);
 full mood from your care and it loves you for 30 minutes (fainting ends it). Under 30 it sulks: no skills, bonus, job or
-storage until it cheers up. Hunger 0 to 20: a point every 4 minutes in the party (a full bar lasts 80 minutes); its
+storage until it cheers up. Hunger 0 to 20: a point every 4 minutes in the party (a full bar lasts 80 minutes), half
+that on Wander and a quarter on Stay (2026-11-22: about 2 hours 40 minutes and 5 hours 20 minutes; a companion out with
+its owner the same; at a post the full pace); its
 favourite food fills 6 (feeding it, or by itself from its storage at 14 and under); 15 and up it slowly heals. The
 screen shows both bars (with tooltips) and "sulking" in its status.
 

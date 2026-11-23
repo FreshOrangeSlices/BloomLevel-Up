@@ -6,6 +6,8 @@ import com.freshorangeslices.bloompets.Fainting;
 import com.freshorangeslices.bloompets.Party;
 import com.freshorangeslices.bloompets.PetEvents;
 import com.freshorangeslices.bloompets.PetLevels;
+import com.freshorangeslices.bloompets.PetModes;
+import com.freshorangeslices.bloompets.PetMood;
 import com.freshorangeslices.bloompets.PetRegistry;
 import com.freshorangeslices.bloompets.PetSkills;
 import com.freshorangeslices.bloompets.PetXp;
@@ -168,8 +170,76 @@ public final class PetLevelGameTests {
 		wolf.invulnerableTime = 0;
 		helper.assertFalse(wolf.hurt(helper.getLevel().damageSources().playerAttack(stranger), 5.0F), "Nothing hurts it while it rests");
 		helper.assertTrue(PetRegistry.get(helper.getLevel().getServer()).find(wolf.getUUID()) != null, "It's still on its owner's list");
+		// Since 2026-11-21 a pet on Follow faints too; only one left on Wander or Stay is a plain pet.
+		Wolf followWolf = pet(helper, EntityType.WOLF, owner, new BlockPos(6, 2, 6), 1, false);
+		PetModes.set(followWolf, PetModes.Mode.FOLLOW);
+		followWolf.hurt(helper.getLevel().damageSources().generic(), 1000.0F);
+		helper.assertTrue(followWolf.isAlive() && Fainting.fainted(followWolf), "A wolf on Follow, out of the party, fainted too");
+		PetModes.set(homeWolf, PetModes.Mode.WANDER);
 		homeWolf.hurt(helper.getLevel().damageSources().generic(), 1000.0F);
-		helper.assertTrue(homeWolf.isDeadOrDying(), "A wolf outside the party is a plain pet: it dies");
+		helper.assertTrue(homeWolf.isDeadOrDying(), "A wolf left on Wander is a plain pet: it dies");
+		helper.succeed();
+	}
+
+	/**
+	 * A pet that dies stays off its owner's list (FreshOrangeSlices, 2026-11-21: dead pets stayed on it). Its second of
+	 * death animation once put it back (the list is brought up to date every 100 ticks); and an entry saved that way is
+	 * dropped as the list loads.
+	 */
+	@GameTest(template = "empty", timeoutTicks = 100)
+	public static void aDeadPetStaysOffTheList(GameTestHelper helper) {
+		ServerPlayer owner = player(helper, new BlockPos(4, 1, 4));
+		Wolf wolf = pet(helper, EntityType.WOLF, owner, new BlockPos(1, 2, 1), 1, false);
+		Wolf alive = pet(helper, EntityType.WOLF, owner, new BlockPos(6, 2, 6), 1, false);
+		PetModes.set(wolf, PetModes.Mode.STAY);
+		PetRegistry registry = PetRegistry.get(helper.getLevel().getServer());
+		helper.assertTrue(registry.find(wolf.getUUID()) != null, "Listed while alive");
+		// Its next tick is a 100th: the one that used to list it again.
+		wolf.tickCount = 99;
+		wolf.hurt(helper.getLevel().damageSources().generic(), 1000.0F);
+		helper.assertTrue(wolf.isDeadOrDying() && registry.find(wolf.getUUID()) == null, "It died, and left the list");
+		helper.assertTrue(PetEvents.observe(wolf) == null && registry.find(wolf.getUUID()) == null, "Dying, it isn't listed again");
+		helper.runAfterDelay(25, () -> {
+			helper.assertTrue(registry.find(wolf.getUUID()) == null, "Its death animation over, it's still off the list");
+
+			// An entry saved as a dead pet (no health, not resting from a faint) is dropped when the list loads.
+			net.minecraft.nbt.CompoundTag saved = registry.save(new net.minecraft.nbt.CompoundTag());
+
+			for (net.minecraft.nbt.Tag owners : saved.getList("owners", net.minecraft.nbt.Tag.TAG_COMPOUND)) {
+				for (net.minecraft.nbt.Tag pet : ((net.minecraft.nbt.CompoundTag) owners).getList("pets", net.minecraft.nbt.Tag.TAG_COMPOUND)) {
+					net.minecraft.nbt.CompoundTag entry = (net.minecraft.nbt.CompoundTag) pet;
+
+					if (entry.hasUUID("pet") && entry.getUUID("pet").equals(alive.getUUID())) {
+						entry.putFloat("health", 0.0F);
+					}
+				}
+			}
+
+			PetRegistry loaded = PetRegistry.load(saved);
+			helper.assertTrue(loaded.find(alive.getUUID()) == null, "A dead pet's entry was dropped as the list loaded");
+			helper.assertTrue(registry.find(alive.getUUID()) != null, "(the live list still has the wolf, alive)");
+			alive.discard();
+			helper.succeed();
+		});
+	}
+
+	/** Out with its owner, a pet gets hungry at the full pace on Follow, half on Wander, a quarter on Stay (2026-11-22). */
+	@GameTest(template = "empty")
+	public static void aPetOnStayOrWanderGetsHungrySlower(GameTestHelper helper) {
+		ServerPlayer owner = player(helper, new BlockPos(4, 1, 4));
+		double[] used = new double[3];
+		PetModes.Mode[] modes = {PetModes.Mode.FOLLOW, PetModes.Mode.WANDER, PetModes.Mode.STAY};
+
+		for (int i = 0; i < modes.length; i++) {
+			Wolf wolf = pet(helper, EntityType.WOLF, owner, new BlockPos(1 + 2 * i, 2, 1), 1, false);
+			PetModes.set(wolf, modes[i]);
+			PetMood.setHunger(wolf, PetMood.MAX_HUNGER);
+			PetMood.update(wolf, 240, true);
+			used[i] = PetMood.MAX_HUNGER - PetMood.hunger(wolf);
+		}
+
+		helper.assertTrue(near(used[0], 1.0) && near(used[1], 0.5) && near(used[2], 0.25),
+				"4 minutes out: Follow " + used[0] + ", Wander " + used[1] + ", Stay " + used[2] + " (1, 0.5, 0.25)");
 		helper.succeed();
 	}
 

@@ -24,9 +24,10 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 /**
  * Party pets never die (the plugin's way, kept for the party pet): at no health they faint and rest where they fell for
  * 5 minutes, unhurt by anything meanwhile, then get up with half their health. A level-100 pet first gets a second wind
- * (back to half health), once each time it comes out (called, or joining the party). Pets outside the party are plain
- * pets and can die (FreshOrangeSlices, 2026-11-05); a pet at its post faints there, as in the plugin. {@code /kill} still kills; a fall into the void brings it to its
- * owner first.
+ * (back to half health), once each time it comes out (called, or joining the party). Pets outside the party were plain
+ * pets that could die (FreshOrangeSlices, 2026-11-05); since 2026-11-21 a pet on Follow faints too, the way the party
+ * pet does (Follow and the party were easy to mix up), and only pets left on Wander or Stay can die. A pet at its post
+ * faints there, as in the plugin. {@code /kill} still kills; a fall into the void brings it to its owner first.
  */
 public final class Fainting {
 	private static final String UNTIL = "faintedUntil";
@@ -64,12 +65,17 @@ public final class Fainting {
 		}
 	}
 
+	/** Whether this Bloom pet faints rather than dies: in the party, at its post, or on Follow. */
+	public static boolean faints(Entity pet) {
+		return Pets.inParty(pet) || PetPosts.posted(pet) || PetModes.mode(pet) == PetModes.Mode.FOLLOW;
+	}
+
 	/**
 	 * The pet would die: a party pet gets its second wind, or faints, instead. Returns true if it lives (then the death
 	 * is called off).
 	 */
 	public static boolean save(LivingEntity pet, DamageSource source) {
-		if (pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.BLOOM || !Pets.inParty(pet) && !PetPosts.posted(pet) || Pets.owner(pet) == null
+		if (pet.level().isClientSide() || Pets.kind(pet) != Pets.Kind.BLOOM || !faints(pet) || Pets.owner(pet) == null
 				|| source.is(DamageTypes.GENERIC_KILL)) {
 			return false;
 		}

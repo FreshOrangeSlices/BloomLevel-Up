@@ -31,11 +31,16 @@ public final class PetEvents {
 	private PetEvents() {
 	}
 
-	/** Brings the pet's entry up to date (a pet tamed the vanilla way is added here). Public for the game tests. */
+	/**
+	 * Brings the pet's entry up to date (a pet tamed the vanilla way is added here). Public for the game tests. Never for a
+	 * dying pet: in its second of death animation it would go back on the list after its death took it off
+	 * (FreshOrangeSlices, 2026-11-21: dead pets stayed on the list), and a companion would use up the progress kept for
+	 * the next of its kind.
+	 */
 	public static PetRegistry.Record observe(Entity entity) {
 		UUID owner = Pets.owner(entity);
 
-		if (owner == null || entity.level().getServer() == null) {
+		if (owner == null || entity.level().getServer() == null || entity instanceof LivingEntity dying && dying.isDeadOrDying()) {
 			return null;
 		}
 
@@ -127,7 +132,8 @@ public final class PetEvents {
 	public static void onTick(LivingEvent.LivingTickEvent event) {
 		LivingEntity entity = event.getEntity();
 
-		if (entity.level().isClientSide()) {
+		// A dying pet does nothing more (it was put back on its owner's list from here).
+		if (entity.level().isClientSide() || entity.isDeadOrDying()) {
 			return;
 		}
 

@@ -388,6 +388,7 @@ public final class PetRegistry extends SavedData {
 
 	public static PetRegistry load(CompoundTag tag) {
 		PetRegistry registry = new PetRegistry();
+		int dead = 0;
 
 		for (Tag element : tag.getList("owners", Tag.TAG_COMPOUND)) {
 			CompoundTag owner = (CompoundTag) element;
@@ -404,6 +405,13 @@ public final class PetRegistry extends SavedData {
 			for (Tag pet : owner.getList("pets", Tag.TAG_COMPOUND)) {
 				try {
 					Record record = Record.load((CompoundTag) pet);
+
+					// Put back on the list as it died (before 0.5.4): no health, not resting from a faint.
+					if (((CompoundTag) pet).contains("health") && record.health <= 0.0F && record.faintedUntil == 0L) {
+						dead++;
+						continue;
+					}
+
 					pets.add(record);
 					registry.ownerOf.put(record.pet, id);
 				} catch (RuntimeException e) {
@@ -412,6 +420,10 @@ public final class PetRegistry extends SavedData {
 			}
 
 			registry.byOwner.put(id, pets);
+		}
+
+		if (dead > 0) {
+			BloomPets.LOGGER.info("Bloom Pets: took {} dead pet(s) off their owners' lists", dead);
 		}
 
 		for (Tag element : tag.getList("fallen", Tag.TAG_COMPOUND)) {

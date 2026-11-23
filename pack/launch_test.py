@@ -1120,6 +1120,77 @@ def tentacle_check(server, player, server_dir, shots):
     return [], [f"tentacles: {count} of 4 appeared; watch: {seen[:200]}"]
 
 
+def gauntlet_check(server, player, server_dir, shots):
+    """Bosses'Rise's Skor Gauntlet (the Yeti's arm) as a player uses it (FreshOrangeSlices, 2026-11-22: a friend found it
+    made no wall). By its code its wave of ice spikes comes as right-click is let go, only while sneaking, off its
+    cooldown, with a block within reach of where the player looks. In creative, on open ground away from the checks
+    before, looking at the ground two blocks ahead, the client sneaks and holds right-click for 2 seconds (the wave is
+    full at 1.6) and lets go still sneaking; the server counts Bosses'Rise's ice spikes (their ids from the dump), with
+    the add-on's watch on them. Screenshot pack_gauntlet. Warns (pack-gauntlet) when none came or the input couldn't
+    be sent. Returns (failures, notes)."""
+    mods_dir = os.path.join(server_dir, "mods")
+    dump = os.path.join(server_dir, "bloom-dump.jsonl")
+    if not any(m.startswith("block_factorys_bosses") for m in os.listdir(mods_dir)) or not os.path.exists(dump):
+        return [], []
+    spikes = sorted({r["id"] for r in (json.loads(line) for line in open(dump) if line.strip())
+                     if r.get("kind") == "entity" and str(r.get("id", "")).startswith("block_factorys_bosses:ice_spike")})
+    if not spikes:
+        return [], ["gauntlet: no ice spike entity in the dump"]
+
+    def warn(text):
+        print("::warning title=pack-gauntlet::" + text[:3000].replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+
+    def count():
+        total = {}
+        for kind in spikes:
+            mark = len(server.lines)
+            server.send(f"execute at {player} if entity @e[type={kind},distance=..16]")
+            found = re.search(r"count: (\d+)", lines_since(server, mark, r"Test (passed|failed)", 10) or "")
+            total[kind] = int(found.group(1)) if found else 0
+        return total
+
+    gauntlet = "block_factorys_bosses:ice_gauntlet"
+    mark = len(server.lines)
+    server.send(f"data get entity {player} Pos")
+    pos_line = lines_since(server, mark, r"has the following entity data: \[", 10) or ""
+    back = re.findall(r"(-?[0-9.]+)d", pos_line.split("entity data:", 1)[-1])[:3]
+    server.send(f"gamemode creative {player}")
+    for kind in spikes:
+        server.send(f"legionwarex watch {kind}")
+    server.send(f"execute at {player} run spreadplayers ~ ~120 0 1 false {player}")
+    time.sleep(3)
+    server.send(f"execute as {player} at @s run tp @s ~ ~ ~ 0 40")
+    for kind in spikes:
+        server.send(f"kill @e[type={kind}]")
+    server.send(f"item replace entity {player} weapon.mainhand with {gauntlet}")
+    time.sleep(2)
+    mark = len(server.lines)
+    sent = hold_mouse(3, 2.0, keys=("Shift_L",))
+    time.sleep(0.3)
+    first = count()
+    capture(shots, "pack_gauntlet")
+    later = count()
+    most = {kind: max(first.get(kind, 0), later.get(kind, 0)) for kind in spikes}
+    watch = [line.split("LegionWareX watch:", 1)[1].strip() for line in server.lines[mark:] if "LegionWareX watch:" in line]
+    server.send("legionwarex watch off")
+    for kind in spikes:
+        server.send(f"kill @e[type={kind}]")
+    server.send(f"clear {player} {gauntlet}")
+    if len(back) == 3:
+        server.send(f"tp {player} {back[0]} {back[1]} {back[2]}")
+    time.sleep(1)
+    shown = ", ".join(f"{kind.split(':')[1]} {n}" for kind, n in most.items())
+    appeared = sum(1 for w in watch if " appeared at " in w)
+    if not sent:
+        warn(f"couldn't send the sneak and right-click to the client; spikes: {shown}")
+        return [], [f"gauntlet: the input couldn't be sent ({shown})"]
+    if sum(most.values()) or appeared:
+        return [], [f"gauntlet: a player's Skor Gauntlet raised its wall ({shown}; {appeared} seen appearing)"]
+    seen = "; ".join(watch)[:1500] or "the watch saw none appear"
+    warn(f"A player's Skor Gauntlet, sneaking and looking at the ground, raised no ice spikes ({shown}); watch: {seen}")
+    return [], [f"gauntlet: no wall ({shown})"]
+
+
 def summon_check(server, player, server_dir, shots):
     """Bosses'Rise's Pirate Saber as a player uses it (FreshOrangeSlices, 2026-11-22: its two pirates stayed for good,
     couldn't be hurt and came at their owner with sword and bolt, alone and beside a friend). In survival with Resistance
@@ -1532,6 +1603,10 @@ def main():
             failures += summon_failures
             notes += summon_notes
             progress("summon check done")
+            gauntlet_failures, gauntlet_notes = gauntlet_check(server, PLAYER, server_dir, shots)
+            failures += gauntlet_failures
+            notes += gauntlet_notes
+            progress("gauntlet check done")
             krampus_failures, krampus_notes = krampus_check(server, PLAYER)
             failures += krampus_failures
             notes += krampus_notes

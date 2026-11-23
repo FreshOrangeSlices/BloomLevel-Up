@@ -27,7 +27,8 @@ import net.minecraft.world.item.ItemStack;
  *   at a quarter of the pace; fainting ends it). Below 30 it's <b>sad</b> and sulks: no skills, owner bonus, job or
  *   storage until it cheers up (nothing is lost).</li>
  *   <li><b>Hunger</b>, 0 to 20 like the player's food. It empties while the pet is in the party (a point every 4
- *   minutes: a full bar lasts 80 minutes). Its favourite food fills 6; a pet with that food in its storage eats it by
+ *   minutes: a full bar lasts 80 minutes), at half that pace on Wander and a quarter on Stay (FreshOrangeSlices,
+ *   2026-11-22: about 2 hours 40 minutes and 5 hours 20 minutes; at a post, the full pace). Its favourite food fills 6; a pet with that food in its storage eats it by
  *   itself when it's down to 14. Well fed (15 and up) it slowly heals; hungry (6 and under) it gets glum fast.</li>
  * </ul>
  * <b>Companions</b> (other mods', Phase 5a: FreshOrangeSlices, 2026-11-05) have the same bars and rates. They never join
@@ -125,6 +126,15 @@ public final class PetMood {
 		return loved(pet) ? pace * 0.25 : pace;
 	}
 
+	/** How fast it gets hungry while out, by its mode: 1 on Follow, a half on Wander, a quarter on Stay. */
+	public static double hungerPace(Entity pet) {
+		return switch (PetModes.mode(pet)) {
+			case STAY -> 0.25;
+			case WANDER -> 0.5;
+			default -> 1.0;
+		};
+	}
+
 	/** Once a second for a loaded Bloom pet. */
 	static void second(LivingEntity pet) {
 		if (has(pet) && !Fainting.fainted(pet)) {
@@ -158,7 +168,7 @@ public final class PetMood {
 			}
 		} else if (out) {
 			setMood(pet, mood(pet) - DROP_PER_SECOND * dropPace(pet) * seconds);
-			setHunger(pet, hunger(pet) - HUNGER_PER_SECOND * seconds);
+			setHunger(pet, hunger(pet) - HUNGER_PER_SECOND * hungerPace(pet) * seconds);
 			data.putLong("tired", Math.min(TIRED_AFTER, data.getLong("tired") + seconds));
 
 			if (hunger(pet) <= EATS_AT) {

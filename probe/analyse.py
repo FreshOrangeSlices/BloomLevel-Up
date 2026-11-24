@@ -1,4 +1,4 @@
-"""Who listens to Architectury's spawn check (EntityEvent.LIVING_CHECK_SPAWN) and what do they answer?"""
+"""Which mods change spawn rules through Forge's SpawnPlacementRegisterEvent, for which mobs, with which operation?"""
 import json, os, re, subprocess, urllib.request, zipfile
 from concurrent.futures import ThreadPoolExecutor
 
@@ -33,7 +33,6 @@ def fetch(item):
 
 with ThreadPoolExecutor(8) as pool:
     fetched = list(pool.map(fetch, jars.items()))
-hits = []
 for slug, path in fetched:
     if not path:
         continue
@@ -42,30 +41,22 @@ for slug, path in fetched:
     except Exception:
         continue
     for name in z.namelist():
-        if name.endswith(".class") and b"LIVING_CHECK_SPAWN" in z.read(name):
-            hits.append((slug, path, name))
-            p(f"{slug} | {name}")
-p("")
-for slug, path, name in hits:
-    cls = name[:-6].replace("/", ".")
-    if cls.startswith("dev.architectury"):
-        r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-        text = r.stdout
-        for m in re.finditer(r"LIVING_CHECK_SPAWN|SpawnPlacementCheck|PositionCheck", text):
-            start = text.rfind("\n    ", 0, m.start())
-            p(f"---- {slug} {cls}\n" + text[start:start + 1500])
-            break
-        continue
-    r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls.split("$")[0]) + "$"], capture_output=True, text=True)
-    text = r.stdout
-    p(f"---- {slug} {cls}")
-    for m in re.finditer(r"LIVING_CHECK_SPAWN", text):
-        start = text.rfind("\n    ", 0, m.start())
-        p(text[start:start + 2500])
-    # The lambdas it registers often sit in the same class: print methods returning EventResult.
-    for m in re.finditer(r"\n    (?:private |public |protected )?(?:static )?EventResult \w+\([^)]*\) \{", text):
-        p(text[m.start():m.start() + 3000])
+        if not name.endswith(".class") or name.startswith("net/minecraft"):
+            continue
+        b = z.read(name)
+        if b"SpawnPlacementRegisterEvent" not in b:
+            continue
+        vanilla = re.findall(rb"f_20(?:458|524|501|562|481|526|530|568|468|497|550|455|479|513|549)_", b)
+        ops = sorted(set(m.decode() for m in re.findall(rb"(REPLACE|AND|OR)", b)))
+        p(f"{slug} | {name} | operations named: {ops} | vanilla EntityType fields: {sorted(set(v.decode() for v in vanilla))}")
+        if b"REPLACE" in b or b"$Operation" in b and (b"OR" in b or vanilla):
+            cls = name[:-6].replace("/", ".").split("$")[0]
+            r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
+            text = r.stdout
+            for m in re.finditer(r"Operation\.(REPLACE|OR)", text):
+                line_start = text.rfind(";", 0, m.start())
+                p("    " + " ".join(text[line_start + 1:m.end() + 40].split())[:500])
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/archspawn.txt", "w").write("\n".join(out))
+open("probe-out/placements.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

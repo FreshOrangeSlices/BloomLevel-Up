@@ -1,4 +1,4 @@
-"""1. Where Fabled Weaponry uses its tomes. 2. Which Spell Engine add-ons have a Forge 1.20.1 build, and Wizards' spells."""
+"""Raw Wizards spell files (a few) and Fabled Weaponry's CommonEvents where it names tomes."""
 import io, json, os, re, subprocess, urllib.parse, urllib.request, zipfile
 
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (spell engine check)"}
@@ -23,49 +23,28 @@ for u in (url if isinstance(url, list) else [url]):
     if data:
         break
 open("fw.jar", "wb").write(data)
-z = zipfile.ZipFile("fw.jar")
-p("==== Fabled Weaponry: what names the tomes")
-for n in z.namelist():
-    b = z.read(n)
-    if n.endswith(".json") and b"tome_" in b and "/recipes/tome_" not in n:
-        p(f"  {n}: " + " ".join(b.decode("utf-8", "replace").split())[:500])
-    if n.endswith(".class") and (b"TomeItem" in b or b"tome_" in b) and not n.endswith("TomeItem.class"):
-        p(f"  class {n}")
-        cls = n[:-6].replace("/", ".")
-        r = subprocess.run(["java", "-jar", "cfr.jar", "fw.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-        text = r.stdout
-        for m in re.finditer(r"TomeItem|tome_", text):
-            start = text.rfind("\n    ", 0, m.start())
-            p("    " + "\n    ".join(l[:200] for l in text[start:start + 1800].splitlines()))
-            break
-lang = json.loads(z.read([n for n in z.namelist() if n.endswith("lang/en_us.json")][0]))
-for k, v in lang.items():
-    if re.search(r"(?i)tooltip|desc|passive", k) and re.search(r"(?i)tome|book|spell|magic", str(v)):
-        p(f"  lang {k} = {v}")
+for cls in ("net.mindoth.fabledweaponry.event.CommonEvents",):
+    r = subprocess.run(["java", "-jar", "cfr.jar", "fw.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
+    text = r.stdout
+    p(f"==== {cls}: {len(text)} chars")
+    seen = set()
+    for m in re.finditer(r"(?i)tome", text):
+        start = text.rfind("\n    public", 0, m.start())
+        if start in seen:
+            continue
+        seen.add(start)
+        end = text.find("\n    }\n", m.start())
+        p(text[start:min(end + 7, start + 4000)])
 
-p("\n==== Forge 1.20.1 builds")
-for slug in ("wizards", "archers", "jewelry", "runes", "gazebos", "elemental-wizards-rpg", "forcemaster-rpg-class", "berserker-rpg-class",
-             "witcher-rpg-class", "bard-more-rpg-classes", "archers-expansion", "druids", "relics-rpg", "more-relics-rpg",
-             "armory-rpg-series", "arsenal-rpg-series", "skill-tree", "lne-wizards", "more-rpg-library", "class-selection"):
-    res = get(f"https://api.modrinth.com/v2/project/{slug}/version?loaders=" + urllib.parse.quote('["forge"]') + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
-    versions = json.loads(res) if res else []
-    p(f"  {slug}: " + (f"yes, {versions[0]['version_number']}" if versions else "no Forge 1.20.1 build"))
-    if slug == "wizards" and versions:
-        f = next(x for x in versions[0]["files"] if x["primary"])
-        wz = zipfile.ZipFile(io.BytesIO(get(f["url"])))
-        wl = [n for n in wz.namelist() if n.endswith("lang/en_us.json")]
-        wlang = json.loads(wz.read(wl[0])) if wl else {}
-        spells = sorted(n for n in wz.namelist() if re.match(r"data/wizards/spells?/.*\.json$", n))
-        p(f"  ---- Wizards spells ({len(spells)})")
-        for n in spells:
-            sp = json.loads(wz.read(n))
-            sid = n.rsplit("/", 1)[-1][:-5]
-            cast = sp.get("cast", {})
-            cost = sp.get("cost", {})
-            name = wlang.get(f"spell.wizards.{sid}.name", sid)
-            p(f"    {name} ({sid}): school {sp.get('school')}, cast {cast.get('duration', 0)}s{' channelled' if cast.get('channel_ticks') else ''}, "
-              f"cooldown {cost.get('cooldown_duration', 0)}s, rune {cost.get('item_id', cost.get('item', '-'))}, exhaust {cost.get('exhaust', 0)}")
+res = get("https://api.modrinth.com/v2/project/wizards/version?loaders=" + urllib.parse.quote('["forge"]') + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
+v = json.loads(res)[0]
+f = next(x for x in v["files"] if x["primary"])
+wz = zipfile.ZipFile(io.BytesIO(get(f["url"])))
+for sid in ("arcane_bolt", "fireball", "frostbolt", "fire_meteor", "frost_nova", "arcane_blink"):
+    for n in wz.namelist():
+        if re.search(r"data/wizards/spells?/" + sid + r"\.json$", n):
+            p(f"==== {n}\n" + " ".join(wz.read(n).decode().split())[:1500])
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/magic2.txt", "w").write("\n".join(out))
+open("probe-out/magic3.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

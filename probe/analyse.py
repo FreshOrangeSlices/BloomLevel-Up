@@ -1,25 +1,36 @@
-import os, re, json, zipfile, subprocess, urllib.request, traceback
+import os, re, json, zipfile, urllib.request, traceback, io
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"})
     return urllib.request.urlopen(req, timeout=240).read()
-def dec(cls, jar):
-    r = subprocess.run(['java', '-jar', 'cfr.jar', jar, '--jarfilter', '^' + re.escape(cls) + '$'], capture_output=True, text=True)
-    return [l for l in r.stdout.splitlines() if l.strip() and not l.startswith(' *') and not l.startswith('import ') and not l.startswith('/*')]
 out = []; p = out.append
 try:
-    data = None
-    for url in ["https://mediafilez.forgecdn.net/files/5381/204/fabledweaponry-1.20.1-1.0.7.5.jar", "https://edge.forgecdn.net/files/5381/204/fabledweaponry-1.20.1-1.0.7.5.jar"]:
-        try:
-            data = get(url); break
-        except Exception as e:
-            p(f"!! {url}: {e}")
-    open('fw.jar', 'wb').write(data); z = zipfile.ZipFile('fw.jar'); names = z.namelist()
-    src = dec('net.mindoth.fabledweaponry.event.CommonEvents', 'fw.jar')
-    p("==== CommonEvents\n" + "\n".join(l[:330] for l in src))
-    for n in names:
-        if n.endswith('.class') and ('MaceItem' in n or 'Config' in n) and '$' not in n:
-            p(f"---- {n}\n" + "\n".join(l[:300] for l in dec(n[:-6].replace('/', '.'), 'fw.jar'))[:3000])
+    z = zipfile.ZipFile(io.BytesIO(get("https://maven.minecraftforge.net/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/mcp_config-1.20.1-20230612.114412.zip")))
+    tsrg = z.read('config/joined.tsrg').decode()
+    # obf -> srg for DamageTypes fields
+    cls = None; srg_by_obf = {}; in_dt = False
+    for line in tsrg.splitlines():
+        if not line.startswith('\t'):
+            parts = line.split()
+            in_dt = len(parts) >= 2 and parts[1] == 'net/minecraft/world/damagesource/DamageTypes'
+            if in_dt: cls = parts[0]
+        elif in_dt and not line.startswith('\t\t'):
+            parts = line.split()
+            if len(parts) >= 2 and parts[1] in ('f_268515_', 'f_268530_'):
+                srg_by_obf[parts[0]] = parts[1]
+    p(f"DamageTypes obf class {cls}; {srg_by_obf}")
+    manifest = json.loads(get("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"))
+    v = next(x for x in manifest['versions'] if x['id'] == '1.20.1')
+    meta = json.loads(get(v['url']))
+    maps = get(meta['downloads']['client_mappings']['url']).decode()
+    in_cls = False
+    for line in maps.splitlines():
+        if not line.startswith(' '):
+            in_cls = line.startswith('net.minecraft.world.damagesource.DamageTypes ->')
+        elif in_cls and '->' in line:
+            named, obf = line.strip().split(' -> ')
+            if obf in srg_by_obf:
+                p(f"{srg_by_obf[obf]} = {named}")
 except Exception:
     p(traceback.format_exc())
 os.makedirs('probe-out', exist_ok=True)
-open('probe-out/fabled2.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')
+open('probe-out/damagetypes.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')

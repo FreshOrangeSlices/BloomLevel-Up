@@ -1,5 +1,6 @@
-"""The Graveyard's horde spawner and its spawn checks: does it spawn in light, every night, near players?"""
+"""Legendary Monsters' spawn placement handler, and every other jar's listeners that could say ALLOW to a spawn check."""
 import json, os, re, subprocess, urllib.request, zipfile
+from concurrent.futures import ThreadPoolExecutor
 
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"}
 
@@ -17,31 +18,47 @@ def get(urls):
 jars = json.load(open("probe/alljars.json"))
 out = []
 p = out.append
-open("tg.jar", "wb").write(get(jars["the-graveyard-forge"]))
-z = zipfile.ZipFile("tg.jar")
-for cls in ("com.lion.graveyard.entities.horde.GraveyardHordeSpawner", "com.lion.graveyard.forge.GraveyardForge",
-            "com.lion.graveyard.entities.HostileGraveyardEntity"):
-    r = subprocess.run(["java", "-jar", "cfr.jar", "tg.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-    body = [l for l in r.stdout.splitlines() if l.strip() and not l.startswith(" *") and not l.startswith("import ") and not l.startswith("/*")]
-    p(f"---- {cls} ({len(body)} lines)")
-    p("\n".join(l[:230] for l in body)[:9000])
-for n in z.namelist():
-    if re.search(r"(?i)horde", n):
-        p(f"file {n}")
-for n in z.namelist():
-    if re.search(r"(?i)config", n) and n.endswith(".class") and "$" not in n:
-        r = subprocess.run(["java", "-jar", "cfr.jar", "tg.jar", "--jarfilter", "^" + re.escape(n[:-6].replace("/", ".")) + "$"], capture_output=True, text=True)
-        text = r.stdout
-        for m in re.finditer(r"(?i)[^\n]*horde[^\n]*", text):
-            p(f"  {n.rsplit('/', 1)[-1]}: {m.group(0).strip()[:230]}")
-for n in z.namelist():
-    if n.endswith(".json") and re.search(r"(?i)config|horde", n):
-        p(f"file {n}: " + z.read(n).decode("utf-8", "replace")[:1500].replace("\n", " "))
-lang = json.loads(z.read("assets/graveyard/lang/en_us.json").decode("utf-8", "replace"))
-for k, v in lang.items():
-    if re.search(r"(?i)horde", k + v):
-        p(f"lang {k} = {v}")
+open("lm.jar", "wb").write(get(jars["legendary-monsters"]))
+r = subprocess.run(["java", "-jar", "cfr.jar", "lm.jar", "--jarfilter", "^net\\.miauczel\\.legendary_monsters\\.event\\.ForgeEvents$"], capture_output=True, text=True)
+text = r.stdout
+at = text.find("SpawnPlacementCheck")
+p("---- legendary_monsters ForgeEvents around SpawnPlacementCheck")
+for m in re.finditer(r"SpawnPlacementCheck", text):
+    start = text.rfind("\n    @", 0, m.start())
+    p(text[start:start + 2500])
+    p("....")
+
+# Any class anywhere in the pack that both names a spawn check event and sets Result.ALLOW (Event$Result.ALLOW).
+os.makedirs("jars", exist_ok=True)
+
+
+def fetch(item):
+    slug, urls = item
+    path = os.path.join("jars", re.sub(r"[^A-Za-z0-9._-]", "_", slug) + ".jar")
+    data = get(urls)
+    if data:
+        open(path, "wb").write(data)
+        return slug, path
+    return slug, None
+
+
+with ThreadPoolExecutor(8) as pool:
+    fetched = list(pool.map(fetch, jars.items()))
+p("\n---- classes naming a spawn check together with ALLOW")
+for slug, path in fetched:
+    if not path:
+        continue
+    try:
+        z = zipfile.ZipFile(path)
+    except Exception:
+        continue
+    for name in z.namelist():
+        if not name.endswith(".class") or name.startswith("net/minecraft/"):
+            continue
+        b = z.read(name)
+        if (b"SpawnPlacementCheck" in b or b"PositionCheck" in b or b"CheckSpawn" in b or b"m_217074_" in b) and b"ALLOW" in b:
+            p(f"{slug} | {name}")
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/graveyard.txt", "w").write("\n".join(out))
+open("probe-out/allow.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

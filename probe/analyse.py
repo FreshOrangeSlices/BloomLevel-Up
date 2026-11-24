@@ -1,7 +1,7 @@
-"""Bosses'Rise: the Ashlord's (Infernal Dragon's) drops, and its wearable items with abilities."""
+"""Bosses'Rise: what wearing the Ashlord Skull and the Dragon Bones set does."""
 import json, os, re, subprocess, urllib.request, zipfile
 
-UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (bosses rise wearables)"}
+UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (ashlord skull)"}
 
 
 def get(urls):
@@ -20,23 +20,25 @@ p = out.append
 urls = jars["bossesrise"]
 open("br.jar", "wb").write(get(urls if isinstance(urls, list) else [urls]))
 z = zipfile.ZipFile("br.jar")
-for n in z.namelist():
-    if "loot_tables" in n and re.search(r"(?i)infernal|dragon|ashlord", n):
-        p(f"loot {n}: " + " ".join(z.read(n).decode().split())[:1200])
-lang = {}
-for n in z.namelist():
-    if n.endswith("lang/en_us.json"):
-        lang.update(json.loads(z.read(n)))
-for k, v in lang.items():
-    if re.search(r"(?i)skull|helmet|crown|mask|head|goggle|hat|boots|chestplate|leggings|charm|amulet|ring|ashlord|tooltip|desc", k):
-        p(f"lang {k} = {re.sub('§.', '', str(v))[:240]}")
-for n in z.namelist():
-    if n.endswith(".class") and re.search(r"(?i)(skull|helmet|crown|mask|armor)\w*Item", n) and "$" not in n:
-        cls = n[:-6].replace("/", ".")
-        r = subprocess.run(["java", "-jar", "cfr.jar", "br.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-        body = [" ".join(l.split()) for l in r.stdout.splitlines() if l.strip() and not l.startswith(" *") and not l.startswith("import ") and not l.startswith("/*")]
-        p(f"---- {cls}\n   " + "\n   ".join(l[:200] for l in body[:70]))
+for n in sorted(z.namelist()):
+    if not n.endswith(".class"):
+        continue
+    b = z.read(n)
+    if not (b"DRAGON_SKULL" in b or b"DRAGON_BONES" in b or b"dragon_skull" in b or b"dragon_bones" in b or b"DragonBones" in b or b"DragonSkull" in b):
+        continue
+    if re.search(r"(?i)renderer|model|registry|init/|Blocks|Items\.class|Tabs|Creative", n):
+        p(f"  (skip {n})")
+        continue
+    cls = n[:-6].replace("/", ".")
+    r = subprocess.run(["java", "-jar", "cfr.jar", "br.jar", "--jarfilter", "^" + re.escape(cls.split("$")[0]) + "$"], capture_output=True, text=True)
+    text = r.stdout
+    p(f"---- {cls}")
+    for m in re.finditer(r"DRAGON_SKULL|DRAGON_BONES|DragonSkull|DragonBones", text):
+        start = text.rfind("\n    ", 0, m.start())
+        end = text.find("\n    }", m.start())
+        p("   " + " ".join(text[start:min(end, start + 1800)].split())[:1800])
+        break
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/bossesrise_wear.txt", "w").write("\n".join(out))
+open("probe-out/ashlord.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

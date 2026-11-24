@@ -13,20 +13,19 @@ try:
     jars = json.load(open('probe/jars.json'))
     open('j.jar', 'wb').write(get(jars['Skarrier Mobs'])); z = zipfile.ZipFile('j.jar'); names = z.namelist()
     lang = json.loads(z.read('assets/skarrier_mobs/lang/en_us.json').decode('utf-8', 'replace'))
-    for cls in ['InvulneriteSwordItem', 'MorgensternItem', 'ResisteelAxeItem', 'VoraciousBladeItem', 'MorgensternLivingEntityIsHitWithToolProcedure',
-                'VoraciousBladeLivingEntityIsHitWithToolProcedure', 'DecayeriteUpgradeTemplateItem', 'InvulneriteOreBlockDestroyedByPlayerProcedure']:
-        hits = [n for n in names if n.endswith('/' + cls + '.class')]
-        for n in hits:
-            p(f"---- {n}\n" + "\n".join(dec(n[:-6].replace('/', '.')))[:2600])
-    p("==== voracious / decayerite / invulnerite anywhere in class names")
-    p("\n".join(n for n in names if n.endswith('.class') and '$' not in n and __import__('re').search(r'(?i)voracious|decayerite|invulnerite', n)))
-    p("==== worldgen and data naming invulnerite or decayerite")
+    import re as _re
+    want = [n for n in names if n.endswith('.class') and '$' not in n and _re.search(r'(?i)(bluntness|mass|mobility)enchantment|morgenstern', n)]
+    p("\n".join(want))
+    for n in want:
+        src = dec(n[:-6].replace('/', '.'))
+        p(f"---- {n}\n" + "\n".join(src)[:2200])
     for n in names:
-        if n.startswith('data/') and n.endswith('.json') and ('invulnerite' in n or 'decayerite' in n or 'worldgen' in n):
-            t = z.read(n).decode('utf-8', 'replace')
-            if 'invulnerite' in t or 'decayerite' in t or 'invulnerite' in n or 'decayerite' in n:
-                p(f"-- {n}\n{t[:700]}")
+        if n.endswith('.class') and '$' not in n and _re.search(r'(?i)procedure', n):
+            src = dec(n[:-6].replace('/', '.'))
+            text = "\n".join(src)
+            if 'MOBILITY' in text:
+                p(f"---- uses MOBILITY: {n}\n" + text[:2200])
 except Exception:
     p(traceback.format_exc())
 os.makedirs('probe-out', exist_ok=True)
-open('probe-out/skarrier2.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')
+open('probe-out/skarrier3.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')

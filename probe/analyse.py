@@ -1,6 +1,5 @@
-"""1. Fabled Weaponry's tome: what it is and does. 2. Spell Engine content for Forge 1.20.1 on Modrinth, and Wizards' spells
-(cast time, cooldown, cost) as its own files have them."""
-import json, os, re, subprocess, urllib.parse, urllib.request, zipfile
+"""1. Where Fabled Weaponry uses its tomes. 2. Which Spell Engine add-ons have a Forge 1.20.1 build, and Wizards' spells."""
+import io, json, os, re, subprocess, urllib.parse, urllib.request, zipfile
 
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (spell engine check)"}
 
@@ -9,16 +8,13 @@ def get(url):
     for _ in range(3):
         try:
             return urllib.request.urlopen(urllib.request.Request(url.replace(" ", "%20"), headers=UA), timeout=240).read()
-        except Exception as e:
-            err = e
-    print("failed", url, err)
+        except Exception:
+            pass
     return None
 
 
 out = []
 p = out.append
-
-# 1. Fabled Weaponry
 jars = json.load(open("probe/alljars.json"))
 url = jars["cf:fabledweaponry-1.20.1-1.0.7.5.jar"]
 data = None
@@ -28,53 +24,48 @@ for u in (url if isinstance(url, list) else [url]):
         break
 open("fw.jar", "wb").write(data)
 z = zipfile.ZipFile("fw.jar")
-names = z.namelist()
-lang_name = [n for n in names if n.endswith("lang/en_us.json")]
-lang = json.loads(z.read(lang_name[0]).decode("utf-8", "replace")) if lang_name else {}
-p("==== Fabled Weaponry: lang lines about a tome or book")
+p("==== Fabled Weaponry: what names the tomes")
+for n in z.namelist():
+    b = z.read(n)
+    if n.endswith(".json") and b"tome_" in b and "/recipes/tome_" not in n:
+        p(f"  {n}: " + " ".join(b.decode("utf-8", "replace").split())[:500])
+    if n.endswith(".class") and (b"TomeItem" in b or b"tome_" in b) and not n.endswith("TomeItem.class"):
+        p(f"  class {n}")
+        cls = n[:-6].replace("/", ".")
+        r = subprocess.run(["java", "-jar", "cfr.jar", "fw.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
+        text = r.stdout
+        for m in re.finditer(r"TomeItem|tome_", text):
+            start = text.rfind("\n    ", 0, m.start())
+            p("    " + "\n    ".join(l[:200] for l in text[start:start + 1800].splitlines()))
+            break
+lang = json.loads(z.read([n for n in z.namelist() if n.endswith("lang/en_us.json")][0]))
 for k, v in lang.items():
-    if re.search(r"(?i)tome|book|grimoire|codex", k + " " + str(v)):
-        p(f"  {k} = {v}")
-classes = [n for n in names if n.endswith(".class") and re.search(r"(?i)tome|book", n.rsplit("/", 1)[-1])]
-p(f"classes: {classes}")
-for n in classes[:6]:
-    cls = n[:-6].replace("/", ".")
-    r = subprocess.run(["java", "-jar", "cfr.jar", "fw.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-    body = [l for l in r.stdout.splitlines() if l.strip() and not l.startswith(" *") and not l.startswith("import ") and not l.startswith("/*")]
-    p(f"---- {cls}\n" + "\n".join(l[:220] for l in body)[:6000])
-for n in names:
-    if re.search(r"(?i)tome|book", n) and n.endswith(".json") and "/recipes/" in n:
-        p(f"recipe {n}: " + " ".join(z.read(n).decode().split())[:800])
+    if re.search(r"(?i)tooltip|desc|passive", k) and re.search(r"(?i)tome|book|spell|magic", str(v)):
+        p(f"  lang {k} = {v}")
 
-# 2. Spell Engine content for Forge 1.20.1
-p("\n==== Modrinth: Spell Engine content for Forge 1.20.1")
-facets = json.dumps([["categories:forge"], ["versions:1.20.1"]])
-for query in ("spell engine", "rpg series", "spell power"):
-    res = get("https://api.modrinth.com/v2/search?limit=40&query=" + urllib.parse.quote(query) + "&facets=" + urllib.parse.quote(facets))
-    if res:
-        for hit in json.loads(res)["hits"]:
-            p(f"  [{query}] {hit['slug']}: {hit['title']} ({hit['downloads']} downloads) - {hit['description'][:140]}")
-for slug in ("wizards", "archers", "spell-engine", "elemental-wizards", "jewelry", "runes", "relics-rpgs", "arsenal"):
+p("\n==== Forge 1.20.1 builds")
+for slug in ("wizards", "archers", "jewelry", "runes", "gazebos", "elemental-wizards-rpg", "forcemaster-rpg-class", "berserker-rpg-class",
+             "witcher-rpg-class", "bard-more-rpg-classes", "archers-expansion", "druids", "relics-rpg", "more-relics-rpg",
+             "armory-rpg-series", "arsenal-rpg-series", "skill-tree", "lne-wizards", "more-rpg-library", "class-selection"):
     res = get(f"https://api.modrinth.com/v2/project/{slug}/version?loaders=" + urllib.parse.quote('["forge"]') + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
     versions = json.loads(res) if res else []
-    p(f"  {slug}: {len(versions)} Forge 1.20.1 versions" + (f", newest {versions[0]['version_number']}, needs " + str([d.get('project_id') for d in versions[0]['dependencies'] if d['dependency_type'] == 'required']) if versions else ""))
+    p(f"  {slug}: " + (f"yes, {versions[0]['version_number']}" if versions else "no Forge 1.20.1 build"))
     if slug == "wizards" and versions:
         f = next(x for x in versions[0]["files"] if x["primary"])
-        wz = zipfile.ZipFile(__import__("io").BytesIO(get(f["url"])))
-        p(f"  ---- Wizards {versions[0]['version_number']} spells")
-        for n in sorted(wz.namelist()):
-            if re.match(r"data/wizards/spells/.*\.json$", n):
-                sp = json.loads(wz.read(n))
-                cast = sp.get("cast", {})
-                cost = sp.get("cost", {})
-                p(f"    {n.rsplit('/', 1)[-1][:-5]}: school {sp.get('school')}, cast {cast.get('duration', 0)}s {'channel' if cast.get('channel_ticks') else ''}, cooldown {cost.get('cooldown_duration', 0)}s, rune {cost.get('item_id', '-')}, exhaust {cost.get('exhaust', 0)}")
+        wz = zipfile.ZipFile(io.BytesIO(get(f["url"])))
         wl = [n for n in wz.namelist() if n.endswith("lang/en_us.json")]
-        if wl:
-            wlang = json.loads(wz.read(wl[0]))
-            for k, v in wlang.items():
-                if k.startswith("spell.wizards.") and k.count(".") == 2:
-                    p(f"    name {k} = {v}")
+        wlang = json.loads(wz.read(wl[0])) if wl else {}
+        spells = sorted(n for n in wz.namelist() if re.match(r"data/wizards/spells?/.*\.json$", n))
+        p(f"  ---- Wizards spells ({len(spells)})")
+        for n in spells:
+            sp = json.loads(wz.read(n))
+            sid = n.rsplit("/", 1)[-1][:-5]
+            cast = sp.get("cast", {})
+            cost = sp.get("cost", {})
+            name = wlang.get(f"spell.wizards.{sid}.name", sid)
+            p(f"    {name} ({sid}): school {sp.get('school')}, cast {cast.get('duration', 0)}s{' channelled' if cast.get('channel_ticks') else ''}, "
+              f"cooldown {cost.get('cooldown_duration', 0)}s, rune {cost.get('item_id', cost.get('item', '-'))}, exhaust {cost.get('exhaust', 0)}")
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/magic.txt", "w").write("\n".join(out))
+open("probe-out/magic2.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

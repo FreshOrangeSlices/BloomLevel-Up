@@ -1,0 +1,1077 @@
+{
+  "id": "armory",
+  "title": "The Armory",
+  "subtitle": [
+    "The pack's strongest armor and weapons, and where each one comes from."
+  ],
+  "icon": "minecraft:netherite_chestplate",
+  "group": "guides",
+  "mods": [],
+  "progression_mode": "flexible",
+  "quests": [
+    {
+      "id": "netherite",
+      "title": "Netherite",
+      "subtitle": "Minecraft",
+      "icon": "minecraft:netherite_chestplate",
+      "x": 0,
+      "y": 0.0,
+      "description": [
+        "Most of the pack's strongest armor starts here: Cataclysm's, Legendary Monsters', Born in Chaos's, Myths & Legends' and Skarrier's best sets are all smithed onto netherite pieces.",
+        "",
+        "Netherite comes from Ancient Debris deep in the Nether: four scraps and four gold make an ingot, and a Netherite Upgrade template turns diamond gear into netherite at a Smithing Table."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "minecraft:netherite_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 2
+        }
+      ],
+      "shape": "hexagon"
+    },
+    {
+      "id": "ignitium",
+      "title": "Ignitium",
+      "subtitle": "L_Ender's Cataclysm",
+      "icon": "cataclysm:ignitium_chestplate",
+      "x": 1.5,
+      "y": 0.0,
+      "description": [
+        "The strongest armor in the pack (32 armor in all, 4 toughness a piece).",
+        "",
+        "Ignis drops Ignitium Ingots (Nether Bosses). An Ignitium Upgrade template is a Netherite Upgrade template with blaze powder and nether bricks. Template, ingot and a netherite piece at a Smithing Table make each piece.",
+        "",
+        "Gaze of Heat (the helmet: a key press puts Blazing Brand on a mob), Flame Reflex (the leggings) and Lava Walker (the boots). The chestplate can be fused with an elytra at the Mechanical Fusion Anvil."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "cataclysm:ignitium_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "netherite"
+      ]
+    },
+    {
+      "id": "cursium",
+      "title": "Cursium",
+      "subtitle": "L_Ender's Cataclysm",
+      "icon": "cataclysm:cursium_chestplate",
+      "x": 3,
+      "y": 0.0,
+      "description": [
+        "28 armor in all, 4 toughness a piece.",
+        "",
+        "Maledictus drops Cursium Ingots (Overworld Bosses). The Cursium Upgrade template is a Netherite Upgrade template with a Black Steel Ingot and gold.",
+        "",
+        "The chestplate brings you back from death once: at 5 health, untouchable for 5 seconds, then weakened for 6 minutes before it can again. The leggings sometimes let an attack pass through you (projectiles more often), the helmet shows mobs through walls at a key press, and the boots soften falls and step you back at a key press."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "cataclysm:cursium_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "netherite"
+      ]
+    },
+    {
+      "id": "annihilator",
+      "title": "Annihilator's Armor",
+      "subtitle": "Legendary Monsters",
+      "icon": "legendary_monsters:annihilator_chestplate",
+      "x": 4.5,
+      "y": 0.0,
+      "description": [
+        "31 armor in all, 4 toughness a piece.",
+        "",
+        "The Obliterator drops Portal Shards (End Bosses). Its Upgrade template is a Bottle of Annihilation, an Enderitium Ingot and end stone. Template, a shard and a netherite piece at a Smithing Table make each piece."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "legendary_monsters:annihilator_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "netherite"
+      ]
+    },
+    {
+      "id": "dark_metal",
+      "title": "Dark Metal Armor",
+      "subtitle": "Born in Chaos",
+      "icon": "born_in_chaos_v1:dark_metal_armor_chestplate",
+      "x": 6,
+      "y": 0.0,
+      "description": [
+        "24 armor in all, but the most toughness of any set: 5 a piece.",
+        "",
+        "Each piece is a netherite piece, a Dark Metal Armor Plate (Dark Metal Ingots and Monster Skin) and the Dark Upgrade template at a Smithing Table. The Fallen Chaos Knight drops the template; a template, a Dark Metal Ingot and a Seed of Chaos make a second one.",
+        "",
+        "Full set: you go into a rampage when your health is low, and you resist Wither."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "born_in_chaos_v1:dark_metal_armor_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "netherite",
+        "field_guide/bic_dark_metal"
+      ]
+    },
+    {
+      "id": "infernum",
+      "title": "Infernum Warplate",
+      "subtitle": "Myths & Legends",
+      "icon": "mythsandlegends:infernum_warplate_chestplate",
+      "x": 7.5,
+      "y": 0.0,
+      "description": [
+        "24 armor in all, 3 toughness a piece.",
+        "",
+        "Infernum Ingots and the Infernum Upgrade template come from Sepulcrum Ignitum chests. A template, a diamond and an ingot make another template. Template, ingot and a netherite piece at a Smithing Table make each piece."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "mythsandlegends:infernum_warplate_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "netherite"
+      ]
+    },
+    {
+      "id": "invulnerite",
+      "title": "Invulnerite",
+      "subtitle": "Skarrier Mobs",
+      "icon": "skarrier_mobs:invulnerite_armor_chestplate",
+      "x": 9,
+      "y": 0.0,
+      "description": [
+        "24 armor in all, 4 toughness a piece, and it never breaks.",
+        "",
+        "When a Tunnel Gore dies (Overworld Bosses), the tangled ore in its tunnels turns into Invulnerite Ore. Smelted, it gives nuggets: nine make an Invulnerite Chunk, and a Netherite Upgrade template, a Blank Template and a nugget make the Invulnerite Upgrade template.",
+        "",
+        "Template, a chunk and a netherite piece make each piece; the same goes for the Invulnerite Sword and Axe."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "skarrier_mobs:invulnerite_armor_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "netherite"
+      ]
+    },
+    {
+      "id": "deep_alloy",
+      "title": "Deep Alloy",
+      "subtitle": "Skarrier Mobs",
+      "icon": "skarrier_mobs:deep_alloy_armor_chestplate",
+      "x": 0,
+      "y": 1.5,
+      "description": [
+        "28 armor in all, 3 toughness a piece. It mends itself whenever you kill something, and while you're Blinded it gives you Warden's Might.",
+        "",
+        "A Deep Alloy Ingot is an Echo Shard, Acidic Bile (Gorgers, after the Wither), a Resisteel Ingot and a Warden Vein. Ingots and a Sculk Catalyst make each piece; ingots and echo shards make Deep Alloy tools, which mend on kill too."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "skarrier_mobs:deep_alloy_armor_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/sk_wither"
+      ]
+    },
+    {
+      "id": "abyssal",
+      "title": "Abyssal Armor",
+      "subtitle": "Aquamirae",
+      "icon": "aquamirae:abyssal_brigandine",
+      "x": 1.5,
+      "y": 1.5,
+      "description": [
+        "20 armor in all, 2 toughness a piece: diamond's numbers on a set from the frozen seas.",
+        "",
+        "Abyssal Amethyst comes from the Maze Mother and treasure pouches in Aquamirae's ice mazes. Amethyst, a Ship Graveyard Echo (from the deep's monsters) and a Terrible Upgrade template make the Abyssal Upgrade template; with more amethyst it turns diamond pieces into Abyssal ones."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "aquamirae:abyssal_brigandine",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "battlemage",
+      "title": "Netherite Battlemage",
+      "subtitle": "Iron's Spells 'n Spellbooks",
+      "icon": "irons_spellbooks:netherite_mage_chestplate",
+      "x": 3,
+      "y": 1.5,
+      "description": [
+        "Netherite's numbers (20 armor, 3 toughness a piece) on mage robes.",
+        "",
+        "A Netherite Upgrade template and a netherite ingot turn a piece of Iron's mage armor into a Netherite Battlemage piece at a Smithing Table."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "irons_spellbooks:netherite_mage_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "leivekilth",
+      "title": "Leivekilth Armor",
+      "subtitle": "Monster Expansion",
+      "icon": "monsterexpansion:leivekilth_chestplate",
+      "x": 4.5,
+      "y": 1.5,
+      "description": [
+        "24 armor in all, 4.5 toughness a piece.",
+        "",
+        "The Leivekilth drops the pieces (its lair is in the boss chapters): at the Foundry, Hoarfrost Shards, Armorplates and its Rimepelt make the set."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "monsterexpansion:leivekilth_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/me_gear"
+      ]
+    },
+    {
+      "id": "ignathos",
+      "title": "Ignathos Armor",
+      "subtitle": "Monster Expansion",
+      "icon": "monsterexpansion:ignathos_chestplate",
+      "x": 6.0,
+      "y": 1.5,
+      "description": [
+        "22 armor in all, 3 toughness a piece.",
+        "",
+        "The Ignathos drops the pieces (its lair is in the boss chapters): at the Foundry, its feathers, hide, talons and beak make the set."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "monsterexpansion:ignathos_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/me_gear"
+      ]
+    },
+    {
+      "id": "skrythe",
+      "title": "Skrythe Armor",
+      "subtitle": "Monster Expansion",
+      "icon": "monsterexpansion:skrythe_chestplate",
+      "x": 7.5,
+      "y": 1.5,
+      "description": [
+        "22 armor in all, 3 toughness a piece.",
+        "",
+        "The Skrythe drops the pieces (its lair is in the boss chapters): at the Foundry, its Armorplates, wing membrane and frill with netherite ingots make the set."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "monsterexpansion:skrythe_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/me_gear"
+      ]
+    },
+    {
+      "id": "rhyza",
+      "title": "Rhyza Armor",
+      "subtitle": "Monster Expansion",
+      "icon": "monsterexpansion:rhyza_chestplate",
+      "x": 9.0,
+      "y": 1.5,
+      "description": [
+        "20 armor in all, 2 toughness a piece.",
+        "",
+        "The Rhyza drops the pieces (its lair is in the boss chapters): at the Foundry, its fur and scales with glowstone make the set."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "monsterexpansion:rhyza_chestplate",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "armor",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/me_gear"
+      ]
+    },
+    {
+      "id": "forges",
+      "title": "The Forges",
+      "subtitle": "L_Ender's Cataclysm",
+      "icon": "cataclysm:infernal_forge",
+      "x": 0,
+      "y": 3.5,
+      "description": [
+        "The Netherite Monstrosity drops the Infernal Forge (Nether Bosses): 13 damage, and right-click a block to blast everything around it. It's also a pickaxe.",
+        "",
+        "Fused with a Void Core from the Ender Golem at the Mechanical Fusion Anvil, it becomes the Void Forge, which sends Void Runes out in a fan."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "cataclysm:infernal_forge",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "gauntlets",
+      "title": "The Gauntlets",
+      "subtitle": "L_Ender's Cataclysm",
+      "icon": "cataclysm:gauntlet_of_guard",
+      "x": 1.5,
+      "y": 3.5,
+      "description": [
+        "The Ender Guardian drops the Gauntlet of Guard (End Bosses): 11 damage, and right-click pulls mobs to you. Bloom counts the gauntlets as Unarmed, so Combo, Brawler and Disarm work with them.",
+        "",
+        "At the Mechanical Fusion Anvil it takes a Sandstorm in a Bottle (the Ancient Remnant) to become the Gauntlet of Maelstrom, which calls a Void Vortex, or the Bulwark of the Flame (a shield made with Ignitium) to become the Gauntlet of Bulwark: hold right-click to push mobs back and brand them, then let go to charge."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "cataclysm:gauntlet_of_guard",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "soul_render",
+      "title": "Soul Render",
+      "subtitle": "L_Ender's Cataclysm",
+      "icon": "cataclysm:soul_render",
+      "x": 3,
+      "y": 3.5,
+      "description": [
+        "A halberd of 15 damage: Black Steel Ingots and a Cursium Ingot from Maledictus.",
+        "",
+        "It can rush forward (Rush of Render), and used while sneaking it raises Phantom Halberds in a spiral."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "cataclysm:soul_render",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "storm",
+      "title": "Ceraunus and Astrape",
+      "subtitle": "L_Ender's Cataclysm",
+      "icon": "cataclysm:ceraunus",
+      "x": 4.5,
+      "y": 3.5,
+      "description": [
+        "Scylla drops Essence of the Storm (Overworld Bosses); with Lacrima (from the Acropolis and its sea creatures) it makes either one.",
+        "",
+        "Ceraunus, an anchor of 16 damage, can be thrown, and sneaking with it sends waves out in a fan. Astrape (10.5 damage, faster) throws Lightning Spears."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "cataclysm:ceraunus",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "tesseract",
+      "title": "The Tesseract",
+      "subtitle": "Legendary Monsters",
+      "icon": "legendary_monsters:the_tesseract",
+      "x": 0,
+      "y": 5.0,
+      "description": [
+        "16 damage: a Bottle of Annihilation, an Enderitium Ingot and a Portal Shard from the Obliterator (End Bosses)."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "legendary_monsters:the_tesseract",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "lm_trophies",
+      "title": "Monster Trophies",
+      "subtitle": "Legendary Monsters",
+      "icon": "legendary_monsters:axe_of_lightning",
+      "x": 1.5,
+      "y": 5.0,
+      "description": [
+        "Legendary Monsters' bosses each leave a piece for a weapon:",
+        "",
+        "Axe of Lightning (13 damage): an Air Rune from Cumulonimbus, iron and a stick. Soul Great Sword (14.5): the Possessed Paladin's own. Monstrous Anchor (14, slow): the Ancient Guardian's Anchor Handle with iron. Mossy Hammer: a Nature Crystal from the Overgrown Colossus. Shattered Greatsword: Metal Debris from the Beheaded and Resurrected Knights."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "legendary_monsters:axe_of_lightning",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "dark_warblade",
+      "title": "Dark Warblade",
+      "subtitle": "Born in Chaos",
+      "icon": "born_in_chaos_v1:darkwarblade",
+      "x": 3,
+      "y": 5.0,
+      "description": [
+        "20 damage, the hardest single hit in the pack, but so heavy it's hard to swing without a Strength effect. A Dark Metal Block and a Bone Handle (dark metal, a Dark Rod and a bone).",
+        "",
+        "Born in Chaos's other heavy weapons: the Great Reaper Axe (each kill in a row feeds a rampage, up to five), the Skullbreaker Hammer (jumping attacks stun), the Nightmare Scythe (heals you and withers the target), and Soulbane, Lord Pumpkinhead's blade: wear his hat and its hits wrap foes in hellfire that slows them."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "born_in_chaos_v1:darkwarblade",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/bic_dark_metal"
+      ]
+    },
+    {
+      "id": "behemoth",
+      "title": "Behemoth Blade",
+      "subtitle": "Skarrier Mobs",
+      "icon": "skarrier_mobs:behemoth_blade",
+      "x": 4.5,
+      "y": 5.0,
+      "description": [
+        "11 damage at a sword's speed: a netherite ingot, a blaze rod, Magmadermis from the Hellamander and a Serrated Shred from the Crimlin, both of which only come after the Wither.",
+        "",
+        "Skarrier's other weapons: the Serraxe (bleeds its target, worse on the unarmored), the Deep Alloy Sword (a sonic boom on a third of critical hits), the unbreakable Invulnerite Sword and Axe, and the Morgenstern, whose charged hits send out a shockwave."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "skarrier_mobs:behemoth_blade",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/sk_wither"
+      ]
+    },
+    {
+      "id": "boreal",
+      "title": "Boreal Blade",
+      "subtitle": "Iron's Spells 'n Spellbooks",
+      "icon": "irons_spellbooks:boreal_blade",
+      "x": 0,
+      "y": 6.5,
+      "description": [
+        "16 damage: mithril, an Ice Venom Vial, Weapon Parts (mithril and an Arcane Ingot) and ice.",
+        "",
+        "Iron's other blades: the Spellbreaker (diamond, mithril and Weapon Parts; quick), the Hellrazor (the Decrepit Scythe from the Echo of Tyros, smithed with pyrium and Timeless Slurry) and the Legionnaire Flamberge (a Decrepit Flamberge from citadel ramparts, smithed the same way)."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "irons_spellbooks:boreal_blade",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "tidepiercer",
+      "title": "Tidepiercer",
+      "subtitle": "Aquamirae",
+      "icon": "aquamirae:tidepiercer",
+      "x": 1.5,
+      "y": 6.5,
+      "description": [
+        "14 damage, from the Ghost of Captain Cornelia (Summoned & Roaming).",
+        "",
+        "Aquamirae has two more at 14, the Jawbreaker and the Tempest Trident, and the Shatterspike, made from Abyssal Amethyst, a Ship Graveyard Echo, a diamond and a stick. Its Dagger of Greed, quick and sharp, turns up in frozen chests and ship holds."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "aquamirae:tidepiercer",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "orchid",
+      "title": "Blade of the Orchid",
+      "subtitle": "Bosses Oddities",
+      "icon": "oddities:blade_of_the_orchid",
+      "x": 3,
+      "y": 6.5,
+      "description": [
+        "The Queen of Orchid's blade (Overworld Bosses): 11 damage at a quick 2 swings a second, and right-click sends a slash flying (3 seconds between).",
+        "",
+        "Spell Engine gives every melee weapon a skill on right-click too: hold Left Alt while right-clicking to use the blade's own slash."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "oddities:blade_of_the_orchid",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "rimescourge",
+      "title": "Rimescourge",
+      "subtitle": "Monster Expansion",
+      "icon": "monsterexpansion:rimescourge",
+      "x": 4.5,
+      "y": 6.5,
+      "description": [
+        "15 damage, very slow: at the Foundry, the Leivekilth's Hoarfrost Shard, Deepfreeze Gland, Armorplate and Tusk with a copper ingot."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "monsterexpansion:rimescourge",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "field_guide/me_gear"
+      ]
+    },
+    {
+      "id": "waking_legend",
+      "title": "A Waking Legend",
+      "subtitle": "Simply Swords",
+      "icon": "simplyswords:runic_tablet",
+      "x": 0,
+      "y": 8.0,
+      "description": [
+        "Awake, Simply Swords' unique weapons are among the strongest in the pack for their speed: Bramblethorn, Wickpiercer, Molten Edge, Livyatan, Whisperwind, Storm's Edge and Star's Edge each deal 40 to 55% more a second than a netherite sword.",
+        "",
+        "They turn up in chests asleep; wake one at the Runic Forge (Arms & Armor)."
+      ],
+      "tasks": [
+        {
+          "type": "checkmark",
+          "title": "Wake a unique weapon"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "arms/runic_forge"
+      ],
+      "mods": [
+        "simplyswords"
+      ]
+    },
+    {
+      "id": "lord_soul_legend",
+      "title": "Legends of the Lords",
+      "subtitle": "Marium's Soulslike Weaponry",
+      "icon": "soulsweapons:lord_soul",
+      "x": 1.5,
+      "y": 8.0,
+      "description": [
+        "Soulslike Weaponry's strongest weapons, among them the Darkin Scythe and Darkin Blade, the Shadow Assassin Scythe, Frostmourne, Nightfall, the Soul Reaper and Supernova, come from its bosses and the Lord Souls they leave (Arms & Armor). JEI shows what each one takes."
+      ],
+      "tasks": [
+        {
+          "type": "checkmark",
+          "title": "Forge a legendary weapon"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
+      ],
+      "deps": [
+        "arms/lord_soul"
+      ],
+      "mods": [
+        "soulsweapons"
+      ]
+    }
+  ]
+}

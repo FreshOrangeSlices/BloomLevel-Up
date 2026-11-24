@@ -30,7 +30,7 @@ for slug in ("borninchaos", "undead-unleashed"):
         m = re.search(r"SpawnPlacements\.m_21754_\((.*?)\);", text, re.S)
         pred = " ".join(m.group(1).split()) if m else "(no register call found)"
         # Helper methods the predicate calls (MCreator puts conditions in procedures).
-        p(f"{name.rsplit('/', 1)[-1][:-6]}: {pred[:600]}")
+        p(f"{name.rsplit('/', 1)[-1][:-6]}: {pred[:2600] if any(w in name for w in ("DecayingZombie", "DecrepitSkeleton", "BarrelZombie", "SkeletonThrasher", "ZombieLumberjack", "Wraith")) else pred[:200]}")
         for helper in re.findall(r"(\w+Procedure)\.execute", pred):
             p(f"    uses {helper}")
 

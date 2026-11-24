@@ -29,12 +29,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * {@code /legionwarex night}: where the cycle stands; {@code themes}: every night and its mobs (installed, and any whose
- * mod is installed but isn't in the game: a wrong id); {@code start <night>}: that night now (the time set to dusk's end
- * if it's day); {@code stop}; {@code in <days>}: the next one that many days from today; {@code show}: one of each of
+ * mod is installed but isn't in the game: a wrong id); {@code start <night>}: that night now (the time set to when
+ * monsters can spawn in the open, if it's earlier or day); {@code stop}; {@code in <days>}: the next one that many days from today; {@code show}: one of each of
  * tonight's installed mobs in rows in front of you, with the night's health; {@code check}: 40 natural spawns of a
  * monster that isn't the night's, tried where you stand, and what came instead. Logged as "LegionWareX night:".
  */
 public final class NightCommand {
+	/** The time of day {@code start} sets: the open sky dark enough for monsters (light 6; at 13000 it's still 9). */
+	static final long DARK = 13500L;
+
 	private NightCommand() {
 	}
 
@@ -120,9 +123,9 @@ public final class NightCommand {
 		long day = time / AddonConfig.DAY;
 		long hour = time % AddonConfig.DAY;
 
-		if (hour < NightCycle.DUSK || hour >= NightCycle.DAWN) {
-			// As Myths & Legends' own command does: the time set to the night of today.
-			level.setDayTime(day * AddonConfig.DAY + 13000L);
+		if (hour < DARK || hour >= NightCycle.DAWN) {
+			// As Myths & Legends' own command does: the time set to the night of today, dark enough for monsters in the open.
+			level.setDayTime(day * AddonConfig.DAY + DARK);
 		}
 
 		cycle.start(level, theme, day);
@@ -202,6 +205,7 @@ public final class NightCommand {
 		int tries = 40;
 		int replaced = 0;
 		int extras = 0;
+		int dark = 0;
 		double health = 0.0;
 
 		for (int i = 0; i < tries; i++) {
@@ -212,6 +216,7 @@ public final class NightCommand {
 			BlockPos spot = at.offset(i % 5 * 3 - 6, 0, i / 5 % 2 * 3);
 			spot = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spot);
 			mob.moveTo(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, 0.0F, 0.0F);
+			dark += NightEvents.darkEnough(level, spot) ? 1 : 0;
 			NightEvents.lastReplacement = null;
 			NightEvents.lastExtra = null;
 			NightEvents.forgetGroup();
@@ -238,6 +243,7 @@ public final class NightCommand {
 		return say(source, "check: " + replaced + " of " + tries + " natural " + ForgeRegistries.ENTITY_TYPES.getKey(standIn) + " spawns came as "
 				+ theme.id().getPath() + " mobs (expected about " + Math.round(expected * tries) + ", climate " + here.name().toLowerCase(Locale.ROOT)
 				+ "), health x" + (replaced == 0 ? 0 : Math.round(health / replaced * 100.0) / 100.0) + ": " + String.join(", ", kinds) + "; " + extras
-				+ " more came beside them (expected about " + Math.round(replaced * NightEvents.more()) + ")", true);
+				+ " more came beside them (expected about " + Math.round(replaced * NightEvents.more()) + ")"
+				+ (dark < tries ? "; " + (tries - dark) + " spots too light for monsters" : ""), true);
 	}
 }

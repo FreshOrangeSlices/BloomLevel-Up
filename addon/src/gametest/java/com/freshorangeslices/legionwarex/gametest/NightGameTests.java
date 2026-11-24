@@ -124,6 +124,8 @@ public final class NightGameTests {
 			NightEvents.testTheme = theme("bones", 2.0, mob(EntityType.SKELETON, 1));
 			NightEvents.testShare = 1.0;
 			NightEvents.testMore = 0.0;
+			// The tests run in daylight (and the light engine catches up a tick later): every spot counts as dark until the end.
+			NightEvents.testDark = true;
 
 			for (int x = 0; x < 4; x++) {
 				helper.setBlock(new BlockPos(x, 1, 1), Blocks.STONE);
@@ -218,10 +220,33 @@ public final class NightGameTests {
 			helper.assertTrue(pair.stream().filter(NightMobs::isExtra).allMatch(Skeleton::isPersistenceRequired), "the extra is persistent (outside the cap)");
 			helper.assertTrue(pair.stream().allMatch(each -> Math.abs(each.getMaxHealth() - 40.0F) < 0.01F), "both with the night's health");
 			pair.forEach(Skeleton::discard);
+
+			// A spot too light for a monster (a lit house): a mod's monster that may spawn there comes as itself, not as one of
+			// the night's, and no extra comes beside the night's own (FreshOrangeSlices, 2026-11-23: zombies in a lit base).
+			NightEvents.testDark = false;
+			Zombie lit = EntityType.ZOMBIE.create(level);
+			lit.moveTo(middle.getX() + 0.5, middle.getY(), middle.getZ() + 0.5);
+			ForgeEventFactory.onFinalizeSpawn(lit, level, level.getCurrentDifficultyAt(middle), MobSpawnType.NATURAL, null, null);
+			helper.assertFalse(lit.isSpawnCancelled(), "in torchlight the zombie isn't turned into one of the night's");
+			lit.discard();
+			Skeleton litOwn = EntityType.SKELETON.create(level);
+			litOwn.moveTo(middle.getX() + 0.5, middle.getY(), middle.getZ() + 0.5);
+			ForgeEventFactory.onFinalizeSpawn(litOwn, level, level.getCurrentDifficultyAt(middle), MobSpawnType.NATURAL, null, null);
+			litOwn.discard();
+			List<Skeleton> litCame = level.getEntitiesOfClass(Skeleton.class, new AABB(middle).inflate(5.0), NightMobs::isNight);
+			helper.assertTrue(litCame.isEmpty(), "in torchlight no night skeleton comes, nor an extra beside one: found " + litCame.size());
+
+			// The light test on its numbers, as the Overworld reads it (no torchlight at all, light 7 at most).
+			helper.assertTrue(NightEvents.darkEnough(0, 0, 4, 7), "a dark night in the open is dark enough");
+			helper.assertFalse(NightEvents.darkEnough(13, 0, 13, 7), "a lit house isn't");
+			helper.assertFalse(NightEvents.darkEnough(1, 0, 1, 7), "nor one torch's last glow");
+			helper.assertFalse(NightEvents.darkEnough(0, 0, 9, 7), "nor the open sky at dusk");
+			helper.assertTrue(NightEvents.darkEnough(11, 15, 7, 7), "with no torchlight limit (15) only the light counts");
 		} finally {
 			NightEvents.testTheme = null;
 			NightEvents.testShare = null;
 			NightEvents.testMore = null;
+			NightEvents.testDark = null;
 		}
 
 		helper.succeed();

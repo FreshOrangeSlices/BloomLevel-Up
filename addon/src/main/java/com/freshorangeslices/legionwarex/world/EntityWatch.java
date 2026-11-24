@@ -1,9 +1,12 @@
 package com.freshorangeslices.legionwarex.world;
 
 import com.freshorangeslices.legionwarex.LegionWareX;
+import com.freshorangeslices.legionwarex.night.NightMobs;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +18,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -22,9 +26,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.LightLayer;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,7 +43,11 @@ import net.minecraftforge.registries.ForgeRegistries;
  * an entity of that type appears, is stopped from appearing, dies or is removed, with why: the removal reason, how many
  * ticks it lived, its health, what last hurt it, and the calls that removed it, so a mod that deletes something shows by
  * name. Made for the Undying Tentacle (FreshOrangeSlices, 2026-11-21: "Nothing appears, audio jingle does play"); works
- * for any entity. {@code watch off} stops every watch, {@code watch} lists them. Not saved: a restart clears it.
+ * for any entity. When one appears it also says how it was spawned (its spawn type, the light on its spot, whether it's a
+ * themed night's mob) and the calls that brought it, so a mod spawning mobs where they shouldn't shows by name
+ * (FreshOrangeSlices, 2026-11-23: zombies in a well-lit base). A player watcher hears about those within 64 blocks of
+ * them; the console hears about all of them. {@code watch off} stops every watch, {@code watch} lists them. Not saved: a
+ * restart clears it.
  */
 public final class EntityWatch {
 	/** The console (or a command block) as a watcher: it reads the log. */
@@ -46,6 +58,10 @@ public final class EntityWatch {
 	private static final Map<ResourceLocation, Set<UUID>> WATCHERS = new ConcurrentHashMap<>();
 	private static final Map<ResourceLocation, Integer> LEFT = new ConcurrentHashMap<>();
 	private static final Map<UUID, Long> JOINED = new HashMap<>();
+	/** How each watched mob was spawned (from its finalize event), until it joins. */
+	private static final Map<UUID, MobSpawnType> SPAWN_TYPES = new ConcurrentHashMap<>();
+	/** A player watcher hears about an entity within this many blocks of them; the console hears about all. */
+	private static final double NEAR = 64.0;
 
 	private EntityWatch() {
 	}
@@ -80,7 +96,8 @@ public final class EntityWatch {
 
 		set.add(watcher);
 		LEFT.put(id, REPORTS);
-		context.getSource().sendSuccess(() -> Component.literal("Watching " + id + ": you'll be told when one appears, dies or is removed"), true);
+		context.getSource().sendSuccess(() -> Component.literal("Watching " + id + ": you'll be told when one appears, dies or is removed"
+				+ (watcher.equals(CONSOLE) ? "" : " within " + (int) NEAR + " blocks of you") + ", with how it spawned"), true);
 		return 1;
 	}
 
@@ -88,6 +105,7 @@ public final class EntityWatch {
 		int count = WATCHERS.size();
 		WATCHERS.clear();
 		JOINED.clear();
+		SPAWN_TYPES.clear();
 		context.getSource().sendSuccess(() -> Component.literal("Stopped " + count + " watch" + (count == 1 ? "" : "es")), true);
 		return count;
 	}
@@ -111,13 +129,34 @@ public final class EntityWatch {
 			return;
 		}
 
+		MobSpawnType type = SPAWN_TYPES.remove(entity.getUUID());
+
 		if (event.isCanceled()) {
-			report(level.getServer(), id, name(entity) + " was stopped from appearing at " + where(entity) + " (a mod cancelled it)");
+			report(level.getServer(), id, entity, name(entity) + " was stopped from appearing at " + where(entity) + " (a mod cancelled it)");
 			return;
 		}
 
 		JOINED.put(entity.getUUID(), level.getGameTime());
-		report(level.getServer(), id, name(entity) + " appeared at " + where(entity) + (event.loadedFromDisk() ? " (loaded with its chunk)" : ""));
+		report(level.getServer(), id, entity, name(entity) + " appeared at " + where(entity)
+				+ (event.loadedFromDisk() ? " (loaded with its chunk)" : ": " + spawned(level, entity, type) + "; calls: " + calls()));
+	}
+
+	/** Keeps how a watched mob is being spawned, for its line as it appears (a spawn a mod turned away never appears). */
+	@SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+	public static void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
+		Mob mob = event.getEntity();
+
+		if (!event.isSpawnCancelled() && watched(mob) != null) {
+			SPAWN_TYPES.put(mob.getUUID(), event.getSpawnType());
+		}
+	}
+
+	/** "spawned as natural, torchlight 0, light 4": its spawn type (none: added to the world straight), its spot's light, a themed night's. */
+	private static String spawned(ServerLevel level, Entity entity, MobSpawnType type) {
+		BlockPos pos = entity.blockPosition();
+		return (type == null ? "no spawn type (added straight to the world)" : "spawned as " + type.name().toLowerCase(Locale.ROOT))
+				+ ", torchlight " + level.getBrightness(LightLayer.BLOCK, pos) + ", light " + level.getMaxLocalRawBrightness(pos)
+				+ (NightMobs.isNight(entity) ? ", a themed night's mob" + (NightMobs.isExtra(entity) ? " (an extra)" : "") : "");
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
@@ -126,7 +165,7 @@ public final class EntityWatch {
 		ResourceLocation id = watched(entity);
 
 		if (id != null && entity.level() instanceof ServerLevel level) {
-			report(level.getServer(), id, name(entity) + " died" + (event.isCanceled() ? " (a mod cancelled the death)" : "") + ": " + damage(event.getSource()));
+			report(level.getServer(), id, entity, name(entity) + " died" + (event.isCanceled() ? " (a mod cancelled the death)" : "") + ": " + damage(event.getSource()));
 		}
 	}
 
@@ -143,7 +182,7 @@ public final class EntityWatch {
 		String age = joined == null ? "" : " after " + (level.getGameTime() - joined) + " ticks";
 		String health = entity instanceof LivingEntity living ? ", health " + Math.round(living.getHealth() * 10) / 10.0 : "";
 		String hurt = entity instanceof LivingEntity living && living.getLastDamageSource() != null ? ", last hurt by " + damage(living.getLastDamageSource()) : "";
-		report(level.getServer(), id, name(entity) + " was removed" + age + ": " + entity.getRemovalReason() + health + hurt + "; calls: " + calls());
+		report(level.getServer(), id, entity, name(entity) + " was removed" + age + ": " + entity.getRemovalReason() + health + hurt + "; calls: " + calls());
 	}
 
 	@SubscribeEvent
@@ -151,6 +190,7 @@ public final class EntityWatch {
 		WATCHERS.clear();
 		LEFT.clear();
 		JOINED.clear();
+		SPAWN_TYPES.clear();
 	}
 
 	private static ResourceLocation watched(Entity entity) {
@@ -162,7 +202,28 @@ public final class EntityWatch {
 		return id != null && WATCHERS.containsKey(id) ? id : null;
 	}
 
-	private static void report(MinecraftServer server, ResourceLocation id, String text) {
+	/** One line about this entity, to its watchers near it (and the console): nothing when no one who watches is near. */
+	private static void report(MinecraftServer server, ResourceLocation id, Entity about, String text) {
+		boolean console = false;
+		List<ServerPlayer> near = new ArrayList<>();
+
+		for (UUID watcher : WATCHERS.getOrDefault(id, Set.of())) {
+			if (watcher.equals(CONSOLE)) {
+				console = true;
+				continue;
+			}
+
+			ServerPlayer player = server.getPlayerList().getPlayer(watcher);
+
+			if (player != null && player.level() == about.level() && player.distanceToSqr(about) <= NEAR * NEAR) {
+				near.add(player);
+			}
+		}
+
+		if (!console && near.isEmpty()) {
+			return;
+		}
+
 		int left = LEFT.merge(id, -1, Integer::sum);
 
 		if (left < 0) {
@@ -172,12 +233,8 @@ public final class EntityWatch {
 		String line = left == 0 ? text + " (no more reports for " + id + " until you watch it again)" : text;
 		LegionWareX.LOGGER.info("LegionWareX watch: {}", line);
 
-		for (UUID watcher : WATCHERS.getOrDefault(id, Set.of())) {
-			ServerPlayer player = watcher.equals(CONSOLE) ? null : server.getPlayerList().getPlayer(watcher);
-
-			if (player != null) {
-				player.sendSystemMessage(Component.literal("[watch] " + line).withStyle(ChatFormatting.GRAY));
-			}
+		for (ServerPlayer player : near) {
+			player.sendSystemMessage(Component.literal("[watch] " + line).withStyle(ChatFormatting.GRAY));
 		}
 	}
 

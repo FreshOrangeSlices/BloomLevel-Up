@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
@@ -36,8 +37,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 /**
  * The themed nights at work. On a themed night (Overworld only) a monster spawning naturally that isn't one of the night's
  * comes, at the night's strength there ({@code themedNightShare} times its climate's share), as one of the night's mobs
- * instead, on the same spot (one that fits: a solid floor, no water, room for it), a group of the same kind staying one
- * kind; the mob's own spawn rules don't apply (the night brings the deep's mobs up to the surface). The night's own mobs
+ * instead, on the same spot (one that fits: a solid floor, no water, room for it, dark enough for a monster: {@link
+ * #darkEnough}), a group of the same kind staying one kind; the mob's other spawn rules don't apply (the night brings the
+ * deep's mobs up to the surface). The night's own mobs
  * spawning naturally are marked too. Beside each night's mob that comes, one more of its kind may ({@code
  * themedNightMoreMobs}), a few blocks away in the dark. Monsters in structures that spawn their own (fortresses, outposts,
  * monuments) and spawns of any other kind (spawners, eggs, commands, raids, other mods' events) are left alone, except
@@ -49,6 +51,8 @@ public final class NightEvents {
 	public static NightTable.Theme testTheme;
 	public static Double testShare;
 	public static Double testMore;
+	/** For the game tests: every spot dark enough (true) or none (false) in place of reading the light; null to read it. */
+	public static Boolean testDark;
 	public static final int TEST_NIGHT = -1;
 	// The last replacement, so a group spawning together stays one kind (not saved).
 	private static long groupTick = Long.MIN_VALUE;
@@ -150,7 +154,7 @@ public final class NightEvents {
 		}
 
 		if (!level.getFluidState(pos).isEmpty() || !level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP)
-				|| IllagerCrowding.inSpawnStructure(level, pos)) {
+				|| IllagerCrowding.inSpawnStructure(level, pos) || !darkEnough(level, pos)) {
 			return;
 		}
 
@@ -164,6 +168,29 @@ public final class NightEvents {
 			event.setSpawnCancelled(true);
 			extra(level, theme, groupMob, pos, level.getRandom());
 		}
+	}
+
+	/**
+	 * Whether a monster could spawn here by the light, read as vanilla's own test reads it, without its random part: no
+	 * torchlight over the dimension's limit (none in the Overworld), and the spot's light no brighter than the most a
+	 * monster ever spawns in (7 in the Overworld; a thunderstorm darkens it, as in vanilla). A themed night's mob only comes
+	 * where this holds, so a mod's monster that may spawn in torchlight isn't turned into one of the night's inside a lit
+	 * house (FreshOrangeSlices, 2026-11-23: zombies in a base lit almost to the top).
+	 */
+	public static boolean darkEnough(ServerLevel level, BlockPos pos) {
+		if (testDark != null) {
+			return testDark;
+		}
+
+		DimensionType dimension = level.dimensionType();
+		int raw = level.isThundering() ? level.getMaxLocalRawBrightness(pos, 10) : level.getMaxLocalRawBrightness(pos);
+		return darkEnough(level.getBrightness(LightLayer.BLOCK, pos), dimension.monsterSpawnBlockLightLimit(), raw,
+				dimension.monsterSpawnLightTest().getMaxValue());
+	}
+
+	/** The light test on its numbers: torchlight within the limit (15: no limit) and the spot's light within its own. */
+	public static boolean darkEnough(int blockLight, int blockLimit, int light, int lightLimit) {
+		return (blockLimit >= 15 || blockLight <= blockLimit) && light <= lightLimit;
 	}
 
 	/** Whether this mob of the night may come at this spot: its boss beaten (if it waits for one), not too many of it near. */
@@ -220,7 +247,7 @@ public final class NightEvents {
 	}
 
 	/**
-	 * One more of this night's mob a few blocks from pos (a solid floor, no water, no torchlight, room for it), at the
+	 * One more of this night's mob a few blocks from pos (a solid floor, no water, dark enough for a monster, room for it), at the
 	 * {@code themedNightMoreMobs} chance; an extra, so the monster cap doesn't count it. Null when it doesn't come.
 	 */
 	static Mob extra(ServerLevel level, NightTable.Theme theme, NightTable.Mob pick, BlockPos near, RandomSource random) {
@@ -235,7 +262,7 @@ public final class NightEvents {
 			for (int dy : new int[] {0, 1, -1}) {
 				BlockPos at = column.above(dy);
 
-				if (at.equals(near) || !level.getFluidState(at).isEmpty() || level.getBrightness(LightLayer.BLOCK, at) > 0
+				if (at.equals(near) || !level.getFluidState(at).isEmpty() || !darkEnough(level, at)
 						|| !level.getBlockState(at.below()).isFaceSturdy(level, at.below(), Direction.UP)) {
 					continue;
 				}

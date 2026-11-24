@@ -1,6 +1,5 @@
-"""Which mods change spawn rules through Forge's SpawnPlacementRegisterEvent, for which mobs, with which operation?"""
+"""Born in Chaos's (and Undead Unleashed's) spawn rules: the predicate each mob registers, light or not."""
 import json, os, re, subprocess, urllib.request, zipfile
-from concurrent.futures import ThreadPoolExecutor
 
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"}
 
@@ -18,45 +17,23 @@ def get(urls):
 jars = json.load(open("probe/alljars.json"))
 out = []
 p = out.append
-os.makedirs("jars", exist_ok=True)
-
-
-def fetch(item):
-    slug, urls = item
-    path = os.path.join("jars", re.sub(r"[^A-Za-z0-9._-]", "_", slug) + ".jar")
-    data = get(urls)
-    if data:
-        open(path, "wb").write(data)
-        return slug, path
-    return slug, None
-
-
-with ThreadPoolExecutor(8) as pool:
-    fetched = list(pool.map(fetch, jars.items()))
-for slug, path in fetched:
-    if not path:
-        continue
-    try:
-        z = zipfile.ZipFile(path)
-    except Exception:
-        continue
-    for name in z.namelist():
-        if not name.endswith(".class") or name.startswith("net/minecraft"):
+for slug in ("borninchaos", "undead-unleashed"):
+    path = slug + ".jar"
+    open(path, "wb").write(get(jars[slug]))
+    z = zipfile.ZipFile(path)
+    for name in sorted(z.namelist()):
+        if not name.endswith("Entity.class") or "$" in name or b"SpawnPlacements" not in z.read(name):
             continue
-        b = z.read(name)
-        if b"SpawnPlacementRegisterEvent" not in b:
-            continue
-        vanilla = re.findall(rb"f_20(?:458|524|501|562|481|526|530|568|468|497|550|455|479|513|549)_", b)
-        ops = sorted(set(m.decode() for m in re.findall(rb"(REPLACE|AND|OR)", b)))
-        p(f"{slug} | {name} | operations named: {ops} | vanilla EntityType fields: {sorted(set(v.decode() for v in vanilla))}")
-        if b"REPLACE" in b or b"$Operation" in b and (b"OR" in b or vanilla):
-            cls = name[:-6].replace("/", ".").split("$")[0]
-            r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-            text = r.stdout
-            for m in re.finditer(r"Operation\.(REPLACE|OR)", text):
-                line_start = text.rfind(";", 0, m.start())
-                p("    " + " ".join(text[line_start + 1:m.end() + 40].split())[:500])
+        cls = name[:-6].replace("/", ".")
+        r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
+        text = r.stdout
+        m = re.search(r"SpawnPlacements\.m_21754_\((.*?)\);", text, re.S)
+        pred = " ".join(m.group(1).split()) if m else "(no register call found)"
+        # Helper methods the predicate calls (MCreator puts conditions in procedures).
+        p(f"{name.rsplit('/', 1)[-1][:-6]}: {pred[:600]}")
+        for helper in re.findall(r"(\w+Procedure)\.execute", pred):
+            p(f"    uses {helper}")
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/placements.txt", "w").write("\n".join(out))
+open("probe-out/bic_spawns.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

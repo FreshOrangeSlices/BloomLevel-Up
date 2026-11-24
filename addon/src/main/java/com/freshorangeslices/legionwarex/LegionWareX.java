@@ -13,6 +13,8 @@ import com.freshorangeslices.legionwarex.companion.OwnerHits;
 import com.freshorangeslices.legionwarex.harvest.HarvestCommand;
 import com.freshorangeslices.legionwarex.night.NightCommand;
 import com.freshorangeslices.legionwarex.night.NightEvents;
+import com.freshorangeslices.legionwarex.world.BossDrops;
+import com.freshorangeslices.legionwarex.world.GearTuning;
 import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
 import com.freshorangeslices.legionwarex.sentinel.SentinelEvents;
@@ -109,6 +111,8 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(DeadEnchantments.class);
 		MinecraftForge.EVENT_BUS.register(RareMobGear.class);
 		MinecraftForge.EVENT_BUS.register(NightEvents.class);
+		MinecraftForge.EVENT_BUS.register(GearTuning.class);
+		MinecraftForge.EVENT_BUS.register(BossDrops.class);
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);

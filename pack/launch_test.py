@@ -554,6 +554,35 @@ GEAR_MATERIALS = re.compile(r"^(wood(en)?|stone|iron|gold(en)?|diamond|netherite
                             r"flint|bone|obsidian|emerald|amethyst|quartz|platinum)_")
 
 
+# The add-on's weaponDamage defaults (FreshOrangeSlices, 2026-11-23: the top weapons by how hard each is to get).
+TUNED_WEAPONS = {"born_in_chaos_v1:soulbane": 13.2, "legendary_monsters:the_tesseract": 18.3, "skarrier_mobs:wretched_claymore": 12.8,
+                 "oddities:blade_of_the_orchid": 9.9, "simplyswords:bramblethorn": 8.7}
+
+
+def tuned_weapons(dump_file):
+    """The weapons whose damage the add-on sets, as the server's registry dump has them (a plain one in the main hand): each
+    should show the set damage. Returns (failures, note)."""
+    if not os.path.exists(dump_file):
+        return [], "tuned weapons: no registry dump"
+    items = {}
+    for line in open(dump_file):
+        if line.strip():
+            r = json.loads(line)
+            if r.get("kind") == "item" and r["id"] in TUNED_WEAPONS:
+                items[r["id"]] = r
+    failures, rows = [], []
+    for item, want in TUNED_WEAPONS.items():
+        r = items.get(item)
+        if r is None:
+            continue
+        got = r.get("damage", 0) + 1
+        per_second = got * (4 + r.get("speed", 0))
+        rows.append(f"{item} {got:g} x {4 + r.get('speed', 0):g} = {per_second:.1f}/s")
+        if abs(got - want) > 0.05:
+            failures.append(f"add-on: {item} shows {got:g} damage, the pack sets {want:g}")
+    return failures, "tuned weapons: " + ("; ".join(rows) or "none in this layer")
+
+
 def gear_audit(dump_file, spec_file, server_dir):
     """End-game gear and the quest book (FreshOrangeSlices, 2026-11-23: "a player could just get 1 op weapon and never
     bother with the new weapons"): from the server's registry dump, every armor set at diamond's strength or better (its
@@ -1970,6 +1999,9 @@ def main():
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
     enchantment_list(os.path.join(server_dir, "bloom-dump.jsonl"))
     notes += item_watch(os.path.join(server_dir, "bloom-dump.jsonl"))
+    tuned_failures, tuned_note = tuned_weapons(os.path.join(server_dir, "bloom-dump.jsonl"))
+    failures += tuned_failures
+    notes.append(tuned_note)
     gear_note, gear_report = gear_audit(os.path.join(server_dir, "bloom-dump.jsonl"), os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)
     notes.append(gear_note)
     if gear_report:

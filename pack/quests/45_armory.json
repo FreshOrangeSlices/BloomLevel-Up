@@ -708,7 +708,7 @@
       "x": 0,
       "y": 5.0,
       "description": [
-        "16 damage: a Bottle of Annihilation, an Enderitium Ingot and a Portal Shard from the Obliterator (End Bosses)."
+        "18.3 damage, the second strongest weapon in the pack for its speed: a Bottle of Annihilation, an Enderitium Ingot and a Portal Shard from the Obliterator (End Bosses), who always drops two to four."
       ],
       "tasks": [
         {
@@ -780,7 +780,7 @@
       "description": [
         "20 damage, the hardest single hit in the pack, but so heavy it's hard to swing without a Strength effect. A Dark Metal Block and a Bone Handle (dark metal, a Dark Rod and a bone).",
         "",
-        "Born in Chaos's other heavy weapons: the Great Reaper Axe (each kill in a row feeds a rampage, up to five), the Skullbreaker Hammer (jumping attacks stun), the Nightmare Scythe (heals you and withers the target), and Soulbane, Lord Pumpkinhead's blade: wear his hat and its hits wrap foes in hellfire that slows them."
+        "Born in Chaos's other heavy weapons: the Great Reaper Axe (each kill in a row feeds a rampage, up to five), the Skullbreaker Hammer (jumping attacks stun), and the Nightmare Scythe (heals you and withers the target)."
       ],
       "tasks": [
         {
@@ -819,7 +819,7 @@
       "description": [
         "11 damage at a sword's speed: a netherite ingot, a blaze rod, Magmadermis from the Hellamander and a Serrated Shred from the Crimlin, both of which only come after the Wither.",
         "",
-        "Skarrier's other weapons: the Serraxe (bleeds its target, worse on the unarmored), the Deep Alloy Sword (a sonic boom on a third of critical hits), the unbreakable Invulnerite Sword and Axe, and the Morgenstern, whose charged hits send out a shockwave."
+        "Skarrier's other weapons: the Serraxe (bleeds its target, worse on the unarmored), the Deep Alloy Sword (a sonic boom on a third of critical hits), the unbreakable Invulnerite Sword and Axe, the Morgenstern, whose charged hits send out a shockwave, and the Wretched Claymore (the Tunnel Gore's)."
       ],
       "tasks": [
         {
@@ -846,6 +846,78 @@
       ],
       "deps": [
         "field_guide/sk_wither"
+      ]
+    },
+    {
+      "id": "soulbane",
+      "title": "Soulbane",
+      "subtitle": "Born in Chaos",
+      "icon": "born_in_chaos_v1:soulbane",
+      "x": 6,
+      "y": 5.0,
+      "description": [
+        "The strongest weapon in the pack for its speed: 13.2 damage at 1.7 swings a second.",
+        "",
+        "Lord Pumpkinhead always drops it from the last of his three forms. Summon him by using a Transmuting Elixir on an Infernal Evil Pumpkin; the elixir takes a sculk catalyst, a Chaos Component, a chorus fruit, blaze powder, a diamond, a scute, Holiday Candy, an Intoxicating Decoction and a torchflower.",
+        "",
+        "Wear Lord Pumpkinhead's Hat and its hits wrap foes in hellfire that slows them."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "born_in_chaos_v1:soulbane",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:netherite_scrap",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "wretched_claymore",
+      "title": "Wretched Claymore",
+      "subtitle": "Skarrier Mobs",
+      "icon": "skarrier_mobs:wretched_claymore",
+      "x": 7.5,
+      "y": 5.0,
+      "description": [
+        "12.8 damage at a sword's speed. The Tunnel Gore (Overworld Bosses) always drops one when a player has a hand in its death."
+      ],
+      "tasks": [
+        {
+          "type": "item",
+          "item": "skarrier_mobs:wretched_claymore",
+          "count": 1
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp_levels",
+          "levels": 5
+        },
+        {
+          "type": "bloom_xp",
+          "tab": "combat",
+          "xp": 300
+        },
+        {
+          "type": "item",
+          "item": "minecraft:diamond",
+          "count": 1
+        }
       ]
     },
     {
@@ -928,7 +1000,7 @@
       "x": 3,
       "y": 6.5,
       "description": [
-        "The Queen of Orchid's blade (Overworld Bosses): 11 damage at a quick 2 swings a second, and right-click sends a slash flying (3 seconds between).",
+        "The Queen of Orchid's blade (Overworld Bosses), dropped half the time: 9.9 damage at a quick 2 swings a second, and right-click sends a slash flying (3 seconds between).",
         "",
         "Spell Engine gives every melee weapon a skill on right-click too: hold Left Alt while right-clicking to use the blade's own slash."
       ],
@@ -1001,7 +1073,7 @@
       "x": 0,
       "y": 8.0,
       "description": [
-        "Awake, Simply Swords' unique weapons are among the strongest in the pack for their speed: Bramblethorn, Wickpiercer, Molten Edge, Livyatan, Whisperwind, Storm's Edge and Star's Edge each deal 40 to 55% more a second than a netherite sword.",
+        "Awake, Simply Swords' unique weapons are among the strongest in the pack for their speed: Bramblethorn, Wickpiercer, Molten Edge, Livyatan, Whisperwind, Storm's Edge and Star's Edge each deal 40 to 50% more a second than a netherite sword.",
         "",
         "They turn up in chests asleep; wake one at the Runic Forge (Arms & Armor)."
       ],

@@ -53,6 +53,12 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_SHARE;
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_OFF_CLIMATE;
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_MORE;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> WEAPON_DAMAGE;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BOSS_DROPS;
+	/** The top weapons' damage by how hard each is to get (FreshOrangeSlices, 2026-11-23): the shown damage, a hand's 1 included. */
+	public static final List<String> WEAPON_DAMAGE_DEFAULT = List.of("born_in_chaos_v1:soulbane=13.2", "legendary_monsters:the_tesseract=18.3",
+			"skarrier_mobs:wretched_claymore=12.8", "oddities:blade_of_the_orchid=9.9", "simplyswords:bramblethorn=8.7");
+	public static final List<String> BOSS_DROPS_DEFAULT = List.of("skarrier_mobs:tunnel_gore=skarrier_mobs:wretched_claymore");
 	/** Enchantments that do nothing in the pack (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"). */
 	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity");
 	private static final ForgeConfigSpec.BooleanValue KRAMPUS_ANIMALS;
@@ -251,6 +257,21 @@ public final class AddonConfig {
 						"These extras don't count toward the game's monster cap (so the night really has more), and despawn by the add-on's",
 						"own rule, as vanilla's: at once with no player within 128 blocks, now and then beyond 32.")
 				.defineInRange("themedNightMoreMobs", 0.5, 0.0, 1.0);
+		builder.pop();
+
+		builder.comment("Gear (FreshOrangeSlices, 2026-11-23: \"which ever methods is the hardest gets the highest value dmg\").").push("gear");
+		WEAPON_DAMAGE = builder
+				.comment("Weapons whose attack damage the pack sets, as \"<item>=<damage>\": the damage the tooltip shows (a hand's 1 included).",
+						"Each weapon keeps its own attack speed; the damage is scaled from the weapon's own, so one that grows (Simply Swords' uniques",
+						"waking up) still grows to it. By default the five strongest per second, ranked by how hard each is to get: Soulbane (Lord",
+						"Pumpkinhead), the Tesseract (the Obliterator), the Wretched Claymore (the Tunnel Gore), the Blade of the Orchid (the Queen of",
+						"Orchid, half the time) and Bramblethorn (a chest, then the Runic Forge).")
+				.defineListAllowEmpty("weaponDamage", WEAPON_DAMAGE_DEFAULT, o -> o instanceof String s && s.contains("="));
+		BOSS_DROPS = builder
+				.comment("Weapons a boss always drops, one each, as \"<entity>=<item>\" (\"<entity>=<item>@0.5\" for a chance), when a player",
+						"(or their tamed pet) hit it in its last 5 seconds, as vanilla's player-only drops ask. By default the Tunnel Gore's Wretched",
+						"Claymore, which Skarrier Mobs has no other way to get in the pack.")
+				.defineListAllowEmpty("bossWeaponDrops", BOSS_DROPS_DEFAULT, o -> o instanceof String s && s.contains("="));
 		builder.pop();
 
 		builder.push("world");
@@ -464,6 +485,14 @@ public final class AddonConfig {
 
 	public static double themedNightMoreMobs() {
 		return get(THEMED_NIGHT_MORE, 0.5);
+	}
+
+	public static List<? extends String> weaponDamage() {
+		return get(WEAPON_DAMAGE, WEAPON_DAMAGE_DEFAULT);
+	}
+
+	public static List<? extends String> bossDrops() {
+		return get(BOSS_DROPS, BOSS_DROPS_DEFAULT);
 	}
 
 	public static double themedNightShare() {

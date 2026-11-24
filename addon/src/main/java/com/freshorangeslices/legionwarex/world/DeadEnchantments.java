@@ -33,8 +33,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Enchantments switched off (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"): ones that do nothing in
- * the pack, by default Spell Engine's Spell Infinity (no spell in the pack costs an item) and Skarrier Mobs' Bluntness,
- * Mass and Mobility (made for its Morgenstern, which the pack takes out). Skarrier Mobs has no setting for them, so:
+ * the pack, by default Spell Engine's Spell Infinity (no spell in the pack costs an item). Skarrier Mobs' Bluntness, Mass
+ * and Mobility were too until its Morgenstern came back (0.6.2, 2026-11-23). Their mods have no setting for them, so:
  * <ul>
  *   <li>the enchanting table never offers one (books too), nor does anything else that enchants by level (a mob's
  *   gear, enchant_with_levels loot): {@code mixin/EnchantmentHelperMixin} drops them from vanilla's list of
@@ -44,7 +44,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  *   <li>loot never carries one ({@link DeadEnchantmentLoot}, a global loot modifier): it's taken off, and a book left
  *   with none becomes a plain book.</li>
  * </ul>
- * The list is the config's {@code deadEnchantments}. {@code /legionwarex enchantments} rolls the table, the librarian's
+ * The list is the config's {@code switchedOffEnchantments}. {@code /legionwarex enchantments} rolls the table, the librarian's
  * book trade and a loot book many times and logs what it found as "LegionWareX enchantments:" (the pack test reads it).
  */
 public final class DeadEnchantments {

@@ -1168,8 +1168,9 @@ def tentacle_check(server, player, server_dir, shots):
 
 
 def enchantment_check(server):
-    """The enchantments the pack switches off (the add-on's deadEnchantments: Spell Engine's Spell Infinity, Skarrier Mobs'
-    Bluntness, Mass and Mobility; FreshOrangeSlices, 2026-11-22): /legionwarex enchantments rolls the enchanting table
+    """The enchantments the pack switches off (the add-on's switchedOffEnchantments: Spell Engine's Spell Infinity;
+    FreshOrangeSlices, 2026-11-22; Skarrier Mobs' Bluntness, Mass and Mobility came back with the Morgenstern on
+    2026-11-23): /legionwarex enchantments rolls the enchanting table
     2000 times, the librarian's book trade 500 and takes them off a loot book. Fails when the table or a trade still
     gives one, or loot keeps one. Returns (failures, notes)."""
     mark = len(server.lines)

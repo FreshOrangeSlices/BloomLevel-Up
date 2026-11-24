@@ -54,8 +54,7 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_OFF_CLIMATE;
 	private static final ForgeConfigSpec.DoubleValue THEMED_NIGHT_MORE;
 	/** Enchantments that do nothing in the pack (FreshOrangeSlices, 2026-11-22: "switch off the dead enchantments"). */
-	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity", "skarrier_mobs:bluntness", "skarrier_mobs:mass",
-			"skarrier_mobs:mobility");
+	public static final List<String> DEAD_DEFAULT = List.of("spell_engine:spell_infinity");
 	private static final ForgeConfigSpec.BooleanValue KRAMPUS_ANIMALS;
 	private static final ForgeConfigSpec.IntValue KRAMPUS_VILLAGER_KILLS;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_MOBS;
@@ -271,9 +270,9 @@ public final class AddonConfig {
 		DEAD_ENCHANTMENTS = builder
 				.comment("Enchantments switched off: never offered by the enchanting table (books too), villagers or the wandering trader,",
 						"nor found on loot (taken off; a book left with none is a plain book). Spell Infinity has no spell in the pack to",
-						"use it on (no spell costs an item); Skarrier Mobs' three are for its Morgenstern, which the pack takes out.",
-						"/legionwarex enchantments checks them.")
-				.defineListAllowEmpty("deadEnchantments", DEAD_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+						"use it on (no spell costs an item). /legionwarex enchantments checks them. Was deadEnchantments in 0.5.0 to 0.6.1,",
+						"with Skarrier Mobs' Bluntness, Mass and Mobility, which came back with its Morgenstern: renamed so worlds take the new list.")
+				.defineListAllowEmpty("switchedOffEnchantments", DEAD_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
 		RARE_GEAR_CHANCE = builder
 				.comment("The chance a monster drops a piece of #legionwarex:rare_mob_gear it was wearing (Epic Knights' rust series),",
 						"flat: Looting doesn't raise it (vanilla drops worn gear 8.5% of the time, plus 1% a Looting level). Only when a",

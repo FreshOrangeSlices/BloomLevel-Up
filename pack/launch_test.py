@@ -550,6 +550,68 @@ def recipe_mentions(server_dir, ids):
 WATCHED_ITEMS = {"graveyard:bone_dagger": "minecraft:bone"}
 
 
+GEAR_MATERIALS = re.compile(r"^(wood(en)?|stone|iron|gold(en)?|diamond|netherite|copper|bronze|steel|silver|tin|lead|leather|chainmail|"
+                            r"flint|bone|obsidian|emerald|amethyst|quartz|platinum)_")
+
+
+def gear_audit(dump_file, spec_file, server_dir):
+    """End-game gear and the quest book (FreshOrangeSlices, 2026-11-23: "a player could just get 1 op weapon and never
+    bother with the new weapons"): from the server's registry dump, every armor set at diamond's strength or better (its
+    pieces' defense adding up to 20 or more, toughness 2 or more) and every one-of-a-kind weapon (not a material variant
+    such as netherite_longsword) hitting harder than a netherite sword (9 or more), each marked by whether the built quest
+    book names any of its pieces. Items the pack takes out or hides are left out. Returns (note, report lines)."""
+    if not os.path.exists(dump_file):
+        return "gear: no registry dump", []
+    spec = json.load(open(spec_file)).get("pack_data", {})
+    gone = {i for field in ("removed_items", "hidden_items") for reason, ids in spec.get(field, {}).items()
+            if not reason.startswith("_") for i in ids}
+    quests = ""
+    folder = os.path.join(server_dir, "config", "ftbquests", "quests")
+    for root, _, files in os.walk(folder):
+        for f in files:
+            if f.endswith(".snbt"):
+                quests += open(os.path.join(root, f), errors="replace").read()
+    named = lambda i: f'"{i}"' in quests
+    rows = [json.loads(line) for line in open(dump_file) if line.strip()]
+    items = [r for r in rows if r.get("kind") == "item" and r["id"] not in gone and "c:hidden_from_recipe_viewers" not in r.get("tags", [])]
+    sets = {}
+    for r in items:
+        if "armor" in r:
+            key = (r["id"].split(":")[0], r["armor"]["material"])
+            sets.setdefault(key, []).append(r)
+    strong_sets = []
+    for (mod, material), pieces in sets.items():
+        by_slot = {}
+        for r in pieces:
+            slot = r["armor"]["slot"]
+            if slot not in by_slot or r["armor"]["defense"] > by_slot[slot]["armor"]["defense"]:
+                by_slot[slot] = r
+        defense = sum(r["armor"]["defense"] for r in by_slot.values())
+        toughness = max(r["armor"]["toughness"] for r in by_slot.values())
+        if defense >= 20 and toughness >= 2:
+            strong_sets.append((defense, toughness, mod, material, sorted(r["id"] for r in pieces), any(named(r["id"]) for r in pieces)))
+    strong_sets.sort(key=lambda x: (-x[0], -x[1], x[2], x[3]))
+    weapons = []
+    for r in items:
+        if "armor" in r or GEAR_MATERIALS.search(r["id"].split(":", 1)[1]):
+            continue
+        weaponish = r.get("bettercombat") or any(t.startswith("bloomlevelup:weapon/") and "/not_" not in t for t in r.get("tags", []))
+        if weaponish and r.get("damage", 0) + 1 >= 9:
+            weapons.append((r["damage"] + 1, round(4 + r.get("speed", 0), 2), r["id"], r.get("name", ""), named(r["id"])))
+    weapons.sort(key=lambda x: (-x[0], x[2]))
+    sets_out = [s for s in strong_sets if not s[5]]
+    weapons_out = [w for w in weapons if not w[4]]
+    report = ["Armor sets at diamond's strength or better that no quest names (defense of the set, toughness, mod, material: pieces):"]
+    report += [f"{d} def, {t:g} tough, {mod} {mat}: {', '.join(ids)}" for d, t, mod, mat, ids, _ in sets_out] or ["(none)"]
+    report.append("Named by a quest: " + "; ".join(f"{mod} {mat} ({d} def)" for d, t, mod, mat, ids, q in strong_sets if q))
+    report.append("One-of-a-kind weapons hitting 9 or more that no quest names (damage, attack speed, id, name):")
+    report += [f"{d:g} dmg, {sp:g} spd, {i} ({n})" for d, sp, i, n, _ in weapons_out] or ["(none)"]
+    report.append("Named by a quest: " + ", ".join(f"{i} ({d:g})" for d, sp, i, n, q in weapons if q))
+    note = (f"gear: {len(strong_sets)} armor sets at diamond's strength or better, {len(sets_out)} not in any quest; "
+            f"{len(weapons)} one-of-a-kind weapons hitting 9+, {len(weapons_out)} not in any quest")
+    return note, report
+
+
 def item_watch(dump_file):
     """For each watched item: is it in the game, is it hidden from JEI (c:hidden_from_recipe_viewers), which recipes
     make it, and which other recipes take only its ingredient (one could be taking its pattern). Returns notes."""
@@ -1908,6 +1970,12 @@ def main():
         print(f"::warning title=pack-bloom-unsorted::{esc(chr(10).join(unsorted)[:3900])}")
     enchantment_list(os.path.join(server_dir, "bloom-dump.jsonl"))
     notes += item_watch(os.path.join(server_dir, "bloom-dump.jsonl"))
+    gear_note, gear_report = gear_audit(os.path.join(server_dir, "bloom-dump.jsonl"), os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)
+    notes.append(gear_note)
+    if gear_report:
+        # Printed by a step of its own (the workflow's "end-game gear"): GitHub keeps 10 notices a step.
+        with open("pack-gear.txt", "w") as out:
+            out.write(chr(10).join(gear_report))
     # ---- materials a trim left with nothing to make (reviewed by hand: some are drops with uses outside recipes)
     leftover_note, leftovers = leftover_check(os.path.join(server_dir, "bloom-dump.jsonl"),
                                               os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)

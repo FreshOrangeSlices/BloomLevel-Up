@@ -462,6 +462,17 @@ jobs:
           for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
               print(f"::notice title=pack-notes-{n:02d}::{esc(text[i:i + 3900])}")
           EOF
+      # End-game armor and one-of-a-kind weapons, and which the quest book names (launch_test.py's gear_audit).
+      - name: end-game gear
+        if: always()
+        run: |
+          [ -f pack-gear.txt ] || exit 0
+          python3 - <<'EOF'
+          text = open("pack-gear.txt", errors="replace").read()
+          esc = lambda s: s.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+          for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
+              print(f"::notice title=pack-gear-{n:02d}::{esc(text[i:i + 3900])}")
+          EOF
       # Every enchantment by mod (the server's registry dump), for finding ones that do the same thing.
       - name: enchantments
         if: always()

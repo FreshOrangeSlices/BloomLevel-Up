@@ -50,22 +50,26 @@ for slug in ["monster-expansion", "jei"]:
         if "foundry" in text:
             foundry.append(n)
     p(f"{len(recipes)} recipes, {len(foundry)} of them Foundry recipes: {[os.path.basename(f) for f in foundry]}")
-    for n in names:
-        if re.search(r"(?i)charcraw", n) and n.endswith(".json"):
-            p(f"-- {n}: " + re.sub(r"\s+", " ", z.read(n).decode("utf-8", "replace"))[:1500])
-    for n in foundry[:2]:
-        if "charcraw" not in n:
-            p(f"-- {n}: " + re.sub(r"\s+", " ", z.read(n).decode("utf-8", "replace"))[:1200])
+    # The recipe files as written (spaces matter in a pattern), each row's length, for every Foundry recipe.
+    for n in foundry:
+        recipe = json.loads(z.read(n).decode("utf-8", "replace"))
+        pattern = recipe.get("pattern", [])
+        p(f"-- {os.path.basename(n)}: rows {[len(r) for r in pattern]} {json.dumps(pattern)}")
     # The Foundry's own recipe type and serializer, and anything about a recipe book or unlocking.
     for n in names:
         if n.endswith(".class") and re.search(r"(?i)foundry", n):
             p(f"class {n}")
     for n in names:
-        if n.endswith(".class") and re.search(r"(?i)foundry.*(recipe|serializer)|recipe.*foundry", n):
-            r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(n[:-6].replace("/", ".")) + "$"],
+        if n in ("net/saksolm/monsterexpansion/recipe/FoundryRecipe$Serializer.class", "net/saksolm/monsterexpansion/recipe/jei/FoundryJeiPlugin.class"):
+            r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(n[:-6].replace("/", ".").replace("$", ".")) + "$"],
                                capture_output=True, text=True)
+            if not r.stdout.strip():
+                r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^net\\.saksolm\\.monsterexpansion\\.recipe\\.FoundryRecipe$"],
+                                   capture_output=True, text=True)
             lines = [l for l in r.stdout.splitlines() if l.strip() and not l.startswith(" *") and not l.startswith("import ") and not l.startswith("/*")]
-            p(f"---- {n}\n" + "\n".join(l[:220] for l in lines)[:3500])
+            text = "\n".join(l[:220] for l in lines)
+            at = text.find("class Serializer")
+            p(f"---- {n}\n" + (text[at:at + 6000] if at >= 0 else text[:6000]))
     lang = json.loads(z.read("assets/monsterexpansion/lang/en_us.json").decode("utf-8", "replace"))
     for k, v in lang.items():
         if re.search(r"(?i)foundry|jei|hunter", k):

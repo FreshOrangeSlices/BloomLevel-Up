@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,6 +35,8 @@ public final class GearTuning {
 	public static Map<ResourceLocation, Double> testTable;
 	/** Each weapon's own attack damage modifiers, added up, on a plain one (cached; the hand's 1 not included). */
 	private static final Map<Item, Double> PLAIN = new ConcurrentHashMap<>();
+	/** Items being worked out right now, so an item that asks again mid-way is left untouched. */
+	private static final Set<Item> ASKING = ConcurrentHashMap.newKeySet();
 	private static List<? extends String> parsedFrom;
 	private static Map<ResourceLocation, Double> parsed = Map.of();
 
@@ -85,9 +88,29 @@ public final class GearTuning {
 		return sum;
 	}
 
-	/** The weapon's own damage on a plain one (its item's modifiers, the event not asked). */
+	/**
+	 * The weapon's own damage on a plain one (its item's modifiers, the event not asked). Worked out outside the map's own
+	 * update: an item whose modifiers ask the stack's again would come back here for the same key, which
+	 * {@code computeIfAbsent} refuses ("Recursive update"); this way the inner ask gets the item's numbers untouched.
+	 */
 	private static double plain(Item item) {
-		return PLAIN.computeIfAbsent(item, it -> ownDamage(it.getAttributeModifiers(EquipmentSlot.MAINHAND, new ItemStack(it))));
+		Double known = PLAIN.get(item);
+
+		if (known != null) {
+			return known;
+		}
+
+		if (!ASKING.add(item)) {
+			return 0.0;
+		}
+
+		try {
+			double damage = ownDamage(item.getAttributeModifiers(EquipmentSlot.MAINHAND, new ItemStack(item)));
+			PLAIN.put(item, damage);
+			return damage;
+		} finally {
+			ASKING.remove(item);
+		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)

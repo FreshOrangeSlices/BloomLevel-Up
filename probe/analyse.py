@@ -13,31 +13,20 @@ try:
     jars = json.load(open('probe/jars.json'))
     open('j.jar', 'wb').write(get(jars['Skarrier Mobs'])); z = zipfile.ZipFile('j.jar'); names = z.namelist()
     lang = json.loads(z.read('assets/skarrier_mobs/lang/en_us.json').decode('utf-8', 'replace'))
-    p("==== lang")
-    for k, v in lang.items():
-        if any(w.split('_')[0] in k for w in WEAPONS) or re.search(r'invuln|morgen|blitz|voracious|ban_|resisteel|decayer|tooltip|desc', k):
-            p(f"{k} = {v}")
-    p("==== data files naming them")
+    for cls in ['InvulneriteSwordItem', 'MorgensternItem', 'ResisteelAxeItem', 'VoraciousBladeItem', 'MorgensternLivingEntityIsHitWithToolProcedure',
+                'VoraciousBladeLivingEntityIsHitWithToolProcedure', 'DecayeriteUpgradeTemplateItem', 'InvulneriteOreBlockDestroyedByPlayerProcedure']:
+        hits = [n for n in names if n.endswith('/' + cls + '.class')]
+        for n in hits:
+            p(f"---- {n}\n" + "\n".join(dec(n[:-6].replace('/', '.')))[:2600])
+    p("==== voracious / decayerite / invulnerite anywhere in class names")
+    p("\n".join(n for n in names if n.endswith('.class') and '$' not in n and __import__('re').search(r'(?i)voracious|decayerite|invulnerite', n)))
+    p("==== worldgen and data naming invulnerite or decayerite")
     for n in names:
-        if n.startswith('data/') and n.endswith('.json'):
+        if n.startswith('data/') and n.endswith('.json') and ('invulnerite' in n or 'decayerite' in n or 'worldgen' in n):
             t = z.read(n).decode('utf-8', 'replace')
-            hits = [w for w in WEAPONS if 'skarrier_mobs:' + w in t]
-            if hits:
-                p(f"-- {n}: {hits}\n{t[:900]}")
-    p("==== item classes")
-    item_classes = [n for n in names if n.endswith('.class') and '/item/' in n.lower() and '$' not in n
-                    and re.search(r'(?i)invuln|morgen|blitz|voracious|ban|resisteel|decayer', n)]
-    p("\n".join(item_classes))
-    for n in item_classes[:14]:
-        src = dec(n[:-6].replace('/', '.'))
-        p(f"---- {n}\n" + "\n".join(src)[:3500])
-    # procedures that mention these items (MCreator)
-    p("==== procedures naming them")
-    for n in names:
-        if n.endswith('.class') and '$' not in n and re.search(r'(?i)procedure', n) and re.search(r'(?i)invuln|morgen|blitz|voracious|ban|resisteel|decayer', n):
-            src = dec(n[:-6].replace('/', '.'))
-            p(f"---- {n}\n" + "\n".join(src)[:2500])
+            if 'invulnerite' in t or 'decayerite' in t or 'invulnerite' in n or 'decayerite' in n:
+                p(f"-- {n}\n{t[:700]}")
 except Exception:
     p(traceback.format_exc())
 os.makedirs('probe-out', exist_ok=True)
-open('probe-out/skarrier.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')
+open('probe-out/skarrier2.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')

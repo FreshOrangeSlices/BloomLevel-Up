@@ -1,31 +1,73 @@
-import os, re, json, zipfile, subprocess, urllib.request, traceback
+import os, re, json, zipfile, urllib.request, traceback
 def get(url):
     url = url.replace(' ', '%20')
     req = urllib.request.Request(url, headers={"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe"})
-    return urllib.request.urlopen(req, timeout=180).read()
-def dec(cls, jar='j.jar'):
-    r = subprocess.run(['java', '-jar', 'cfr.jar', jar, '--jarfilter', '^' + re.escape(cls) + '$'], capture_output=True, text=True)
-    return [l for l in r.stdout.splitlines() if l.strip() and not l.startswith(' *') and not l.startswith('import ') and not l.startswith('/*')]
+    return urllib.request.urlopen(req, timeout=240).read()
+targets = json.load(open('probe/gear_targets.json'))
+ids = set(targets["weapons"])
+for s in targets["sets"]:
+    ids.update(s["pieces"])
+jars = {}
+for f in ['probe/jars.json', 'probe/jars2.json', 'probe/jars3.json']:
+    jars.update(json.load(open(f)))
+KEYS = ['l_enders-cataclysm', 'legendary-monsters', 'Skarrier Mobs', 'borninchaos', 'monster-expansion', 'myths-and-legends',
+        'irons-spells-n-spellbooks', 'aquamirae', 'Bosses Oddities', 'simply-swords', 'mariums-soulslike-weaponry', 'mutant-monsters']
 out = []; p = out.append
-WEAPONS = ['ban_sword', 'blitzblade', 'decayerite_sword', 'invulnerite_axe', 'invulnerite_sword', 'morgenstern', 'resisteel_axe', 'voracious_blade',
-           'ascendant_ingot', 'contagium_ingot', 'decayerite_ingot', 'pristinium_ingot', 'invulnerite', 'resisteel']
-try:
-    jars = json.load(open('probe/jars.json'))
-    open('j.jar', 'wb').write(get(jars['Skarrier Mobs'])); z = zipfile.ZipFile('j.jar'); names = z.namelist()
-    lang = json.loads(z.read('assets/skarrier_mobs/lang/en_us.json').decode('utf-8', 'replace'))
-    import re as _re
-    want = [n for n in names if n.endswith('.class') and '$' not in n and _re.search(r'(?i)(bluntness|mass|mobility)enchantment|morgenstern', n)]
-    p("\n".join(want))
-    for n in want:
-        src = dec(n[:-6].replace('/', '.'))
-        p(f"---- {n}\n" + "\n".join(src)[:2200])
-    for n in names:
-        if n.endswith('.class') and '$' not in n and _re.search(r'(?i)procedure', n):
-            src = dec(n[:-6].replace('/', '.'))
-            text = "\n".join(src)
-            if 'MOBILITY' in text:
-                p(f"---- uses MOBILITY: {n}\n" + text[:2200])
-except Exception:
-    p(traceback.format_exc())
+recipes, loot, lang = [], {}, {}
+for key in KEYS:
+    try:
+        z = zipfile.ZipFile(__import__('io').BytesIO(get(jars[key])))
+    except Exception as e:
+        p(f"!! {key}: {e}"); continue
+    for n in z.namelist():
+        try:
+            if n.startswith('data/') and n.endswith('.json') and '/recipes/' in n:
+                t = json.loads(z.read(n).decode('utf-8', 'replace'))
+                res = t.get('result')
+                rid = res if isinstance(res, str) else (res or {}).get('item') or (res or {}).get('id')
+                if rid:
+                    ings = sorted(set(re.findall(r'"(?:item|tag)"\s*:\s*"([^"]+)"', json.dumps({k: v for k, v in t.items() if k != 'result'}))))
+                    recipes.append((rid, t.get('type'), ings, n))
+            elif n.startswith('data/') and n.endswith('.json') and ('/loot_tables/' in n or '/loot_modifiers/' in n):
+                text = z.read(n).decode('utf-8', 'replace')
+                for i in re.findall(r'"([a-z0-9_]+:[a-z0-9_/]+)"', text):
+                    loot.setdefault(i, set()).add(n.split('/data/')[-1] if '/data/' in n else n[5:])
+            elif re.match(r'assets/[^/]+/lang/en_us\.json$', n):
+                lang.update(json.loads(z.read(n).decode('utf-8', 'replace')))
+        except Exception:
+            pass
+def recipe_lines(i):
+    return [f"recipe {typ}: {', '.join(ings)} [{path.split('/recipes/')[-1]}]" for rid, typ, ings, path in recipes if rid == i]
+def lang_lines(i):
+    ns, path = i.split(':')
+    return [f"lang {k} = {v}" for k, v in lang.items() if (path in k and ns in k) and ('desc' in k or 'tooltip' in k or 'lore' in k or 'ability' in k or 'bonus' in k or k.endswith(path))][:8]
+def ingredients_report(i, seen):
+    lines = []
+    for rid, typ, ings, path in recipes:
+        if rid != i:
+            continue
+        for g in ings:
+            if g.startswith('minecraft:') or g.startswith('forge:') or g in seen:
+                continue
+            seen.add(g)
+            src = recipe_lines(g)[:2] + [f"loot {x}" for x in sorted(loot.get(g, []))[:6]]
+            lines.append(f"   <- {g} ({lang.get('item.' + g.replace(':', '.'), '')}): " + (" | ".join(src) or "no recipe or loot found"))
+    return lines
+p("==== WEAPONS")
+for i, w in sorted(targets["weapons"].items(), key=lambda kv: -kv[1]["dmg"] * kv[1]["spd"]):
+    p(f"## {i} {w['name']} {w['dmg']}x{w['spd']}={w['dmg']*w['spd']:.1f}")
+    for l in recipe_lines(i) + [f"loot {x}" for x in sorted(loot.get(i, []))[:10]] + lang_lines(i) + ingredients_report(i, set()):
+        p("  " + l[:400])
+p("==== ARMOR")
+for s in targets["sets"]:
+    p(f"## {s['mod']} {s['material']} {s['def']} def {s['tough']} tough")
+    seen = set()
+    for i in s["pieces"]:
+        for l in recipe_lines(i) + [f"loot {x}" for x in sorted(loot.get(i, []))[:6]] + lang_lines(i) + ingredients_report(i, seen):
+            p(f"  {i.split(':')[1]}: " + l[:400])
+    mat = s['material'].split(':')[-1].replace('_armor', '')
+    for k, v in lang.items():
+        if mat in k and ('set' in k or 'bonus' in k or 'full' in k or 'desc' in k):
+            p(f"  setlang {k} = {v[:300]}")
 os.makedirs('probe-out', exist_ok=True)
-open('probe-out/skarrier3.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')
+open('probe-out/gear.txt', 'w').write('\n'.join(out)); open('report.txt', 'w').write('done')

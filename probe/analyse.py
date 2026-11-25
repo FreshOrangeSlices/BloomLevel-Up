@@ -1,7 +1,7 @@
-"""Only Hammers And Excavators: each material's numbers (mining level, speed, durability, damage, enchantability), and recipes."""
+"""Iron's Spells' upgrade orbs: where their bonuses are applied (attribute event, curio event, NBT), and each orb's bonus."""
 import json, os, re, subprocess, urllib.request, zipfile
 
-UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (hammers)"}
+UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (upgrade orbs)"}
 
 
 def get(urls):
@@ -17,25 +17,32 @@ def get(urls):
 jars = json.load(open("probe/alljars.json"))
 out = []
 p = out.append
-urls = jars["only-hammers-and-excavators"]
-open("oh.jar", "wb").write(get(urls if isinstance(urls, list) else [urls]))
-z = zipfile.ZipFile("oh.jar")
-classes = [n for n in z.namelist() if n.endswith(".class")]
-p("classes: " + ", ".join(n.rsplit("/", 1)[-1][:-6] for n in classes if "$" not in n))
-for n in classes:
+urls = jars["irons-spells-n-spellbooks"]
+open("iss.jar", "wb").write(get(urls if isinstance(urls, list) else [urls]))
+z = zipfile.ZipFile("iss.jar")
+for n in sorted(z.namelist()):
+    if not n.endswith(".class"):
+        continue
     b = z.read(n)
-    if re.search(rb"(?i)tier|material|config", n.encode()) or b"Tier" in b and (b"m_6609_" in b or b"getUses" in b):
+    if b"UpgradeData" in b and (b"ItemAttributeModifierEvent" in b or b"CurioAttributeModifierEvent" in b or b"getAttributeModifiers" in b or b"m_7167_" in b):
         cls = n[:-6].replace("/", ".")
-        r = subprocess.run(["java", "-jar", "cfr.jar", "oh.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
-        body = [" ".join(l.split()) for l in r.stdout.splitlines() if l.strip() and not l.startswith(" *") and not l.startswith("import ") and not l.startswith("/*")]
+        r = subprocess.run(["java", "-jar", "cfr.jar", "iss.jar", "--jarfilter", "^" + re.escape(cls.split("$")[0]) + "$"], capture_output=True, text=True)
+        text = r.stdout
         p(f"---- {cls}")
-        p("\n".join(l[:300] for l in body[:120]))
+        for m in re.finditer(r"ItemAttributeModifierEvent|CurioAttributeModifierEvent|UpgradeData\.|EventPriority", text):
+            start = text.rfind("\n", 0, m.start())
+            p("   " + " ".join(text[start:start + 400].split())[:400])
+for n in sorted(z.namelist()):
+    if n.endswith(".class") and re.search(r"(?i)UpgradeOrbType|UpgradeType|UpgradeTypes", n):
+        cls = n[:-6].replace("/", ".")
+        r = subprocess.run(["java", "-jar", "cfr.jar", "iss.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
+        lines = [" ".join(l.split()) for l in r.stdout.splitlines() if re.search(r"(?i)register|new UpgradeOrbType|AttributeRegistry|0\.\d+|ModifierOperation|Operation", l)]
+        p(f"---- {cls}")
+        p("\n".join("   " + l[:260] for l in lines[:40]))
 for n in z.namelist():
-    if n.endswith(".json") and ("/recipes/" in n) and "hammer" in n:
-        p(f"recipe {n.rsplit('/', 1)[-1]}: " + " ".join(z.read(n).decode().split())[:400])
-    if n.endswith(".toml") or (n.endswith(".json") and "config" in n):
-        p(f"file {n}: " + " ".join(z.read(n).decode("utf-8", "replace").split())[:1500])
+    if n.startswith("data/irons_spellbooks/") and "upgrade" in n and n.endswith(".json"):
+        p(f"file {n}: " + " ".join(z.read(n).decode().split())[:300])
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/hammers.txt", "w").write("\n".join(out))
+open("probe-out/orbs.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

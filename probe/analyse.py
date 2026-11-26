@@ -1,4 +1,6 @@
-"""The magic ceiling, and spell power on both sides: how Spell Power and Iron's Spells define their stats, and what the gear gives.
+"""Chunk 2 facts: attribute ids, damage types, the Curios attribute event, Fabled Weaponry tomes and maces.
+
+Was: the magic ceiling, and spell power on both sides: how Spell Power and Iron's Spells define their stats, and what the gear gives.
 
 Spell Power and Iron's Spells: attribute definitions (base, min, max) and how spell damage reads them. Gear: every
 attribute modifier on Wizards', Jewelry's, Paladins' and Iron's armor, jewelry and weapons, from their own data or code.
@@ -33,110 +35,85 @@ out = []
 p = out.append
 jars = json.load(open("probe/alljars.json"))
 paths = {}
-for slug in ("spell-power", "spell-engine", "irons-spells-n-spellbooks", "paladins-and-priests", "rogues-and-warriors"):
-    urls = jars.get(slug)
-    if not urls:
-        p(f"no jar for {slug}")
-        continue
+for slug in ("spell-power", "spell-engine", "irons-spells-n-spellbooks", "curios", "cf:fabledweaponry-1.20.1-1.0.7.5.jar", "paladins-and-priests"):
+    urls = jars[slug]
     data = None
     for u in (urls if isinstance(urls, list) else [urls]):
         data = get(u)
         if data:
             break
-    paths[slug] = slug + ".jar"
+    paths[slug] = re.sub(r"[^a-z0-9]+", "_", slug) + ".jar"
     open(paths[slug], "wb").write(data)
-for slug in ("wizards", "relics-rpg"):
+for slug in ("wizards",):
     ver, data, deps = modrinth(slug)
     paths[slug] = slug + ".jar"
     open(paths[slug], "wb").write(data)
-    p(f"{slug} {ver}")
+    p(f"{slug} {ver} needs {deps}")
 
 
-def full(path, cls, rx, label=None, limit=200):
+def lines(path, cls, rx, limit=120):
     t = decompile(path, cls)
     if not t.strip():
         p(f"  ({cls} not found)")
         return t
-    lines = [" ".join(l.split()) for l in t.splitlines() if re.search(rx, l)]
-    p(f"-- {label or cls} ({len(lines)} lines)")
-    for l in lines[:limit]:
-        p("   " + l)
+    got = [" ".join(l.split()) for l in t.splitlines() if re.search(rx, l)]
+    p(f"-- {cls} ({len(got)})")
+    for l in got[:limit]:
+        p("   " + l[:400])
     return t
 
 
-def method(path, cls, name, label=None):
-    t = decompile(path, cls)
-    m = re.search(r"\n([^\n]*\b" + re.escape(name) + r"\([^\n]*\{)", t)
-    if not m:
-        p(f"  ({cls}.{name} not found)")
-        return
-    i = m.start(1)
-    depth, j = 0, t.index("{", i)
-    k = j
-    while k < len(t):
-        if t[k] == "{":
-            depth += 1
-        elif t[k] == "}":
-            depth -= 1
-            if depth == 0:
-                break
-        k += 1
-    p(f"-- {label or cls + '.' + name}: " + " ".join(t[i:k + 1].split())[:1500])
+def classes(path, rx):
+    z = zipfile.ZipFile(path)
+    return [n[:-6].replace("/", ".") for n in z.namelist() if n.endswith(".class") and re.search(rx, n)]
 
 
-IR = paths["irons-spells-n-spellbooks"]
-p("\n==== Iron's: how power reaches damage")
-method(IR, "io.redspace.ironsspellbooks.api.util.Utils", "softCapFormula")
-method(IR, "io.redspace.ironsspellbooks.api.spells.AbstractSpell", "getSpellPower")
-method(IR, "io.redspace.ironsspellbooks.api.spells.AbstractSpell", "getEntityPowerMultiplier")
-method(IR, "io.redspace.ironsspellbooks.api.spells.AbstractSpell", "getSpellDamage")
-p("\n==== Iron's: armor sets (full lines)")
-full(IR, "io.redspace.ironsspellbooks.item.armor.ExtendedArmorMaterials", r"^\s*[A-Z_]+\(\"|schoolArmorMap|makeArmorMap\(", limit=60)
-p("\n==== Iron's: items with attributes (full lines)")
-full(IR, "io.redspace.ironsspellbooks.registries.ItemRegistry", r"withSpellbookAttributes|withAttributes|AttributeContainer|SPELL_POWER|StaffItem|Staff\(", limit=120)
-p("\n==== Iron's: upgrade orb data and the upgrade limit")
+SP, SE, IR, CU, FW = paths["spell-power"], paths["spell-engine"], paths["irons-spells-n-spellbooks"], paths["curios"], paths["cf:fabledweaponry-1.20.1-1.0.7.5.jar"]
+p("\n==== Spell Power: how school attributes and their ids are made")
+for cls in classes(SP, r"(SpellSchools|SpellSchool|SpellPowerMechanics|SpellResistance|SpellPowerMod)\.class$"):
+    lines(SP, cls, r'ResourceLocation\(|"spell_power"|createMagic\(|entry\("|resistance|register|DEFAULT_NAMESPACE|GENERIC', 60)
+p("\n==== Spell Power and Spell Engine: damage types")
+for path in (SP, SE):
+    z = zipfile.ZipFile(path)
+    for n in sorted(z.namelist()):
+        if "damage_type" in n and n.endswith(".json"):
+            p(f"   {n}: " + " ".join(z.read(n).decode().split())[:200])
+for cls in classes(SP, r"(Damage|SpellDamage)\w*\.class$") + classes(SE, r"(SpellDamage|DamageSource|SpellHelper)\w*\.class$"):
+    lines(SP if cls.startswith("net.spell_power") else SE, cls, r"damageSource|DamageSource|ResourceKey|DAMAGE_TYPE|damage_type|indirectMagic|magic\(", 40)
+p("\n==== Iron's: attribute ids and damage types")
+lines(IR, "io.redspace.ironsspellbooks.api.registry.AttributeRegistry", r'register|"[a-z_]+_spell_power"|newResistanceAttribute|newPowerAttribute', 60)
 z = zipfile.ZipFile(IR)
 for n in sorted(z.namelist()):
-    if "upgrade_orb_type" in n and n.endswith(".json"):
-        p("   " + n + ": " + " ".join(z.read(n).decode().split()))
-full(IR, "io.redspace.ironsspellbooks.config.ServerConfigs", r"MAX_UPGRADES\s*=|define\(\"maxUpgrades|maxUpgrades|defineInRange\(\"max", limit=10)
-for cls in ("io.redspace.ironsspellbooks.registries.UpgradeOrbTypeRegistry", "io.redspace.ironsspellbooks.item.UpgradeOrbItem"):
-    full(IR, cls, r"0\.\d|AttributeRegistry\.|new UpgradeOrbType", limit=40)
-p("\n==== Spell Power: base values and how a spell's number is made")
-SP = paths["spell-power"]
-zs = zipfile.ZipFile(SP)
-for n in sorted(zs.namelist()):
-    if n.endswith(".json") and ("config" in n or "attributes" in n):
-        p("   " + n + ": " + " ".join(zs.read(n).decode("utf-8", "replace").split())[:1500])
-for n in sorted(zs.namelist()):
-    if n.endswith(".class") and re.search(r"(AttributesConfig|SpellPowerMechanics)\.class$", n):
-        full(SP, n[:-6].replace("/", "."), r"=|entry\(|base_spell_power|float ", limit=60)
-SE = paths["spell-engine"]
-ze = zipfile.ZipFile(SE)
-for n in sorted(ze.namelist()):
-    if n.endswith(".class") and re.search(r"(SpellHelper|SpellPowerHelper|SpellDamage)\.class$", n):
-        t = decompile(SE, n[:-6].replace("/", "."))
-        for l in t.splitlines():
-            if re.search(r"(?i)coefficient|spell_power_coefficient|randomValue|getSpellPower|amount\s*\*|\* power", l):
-                p(f"   {n.rsplit('/', 1)[-1]}: " + " ".join(l.split())[:400])
-p("\n==== Wizards: armor and weapons (full lines with numbers)")
-WZ = paths["wizards"]
-zw = zipfile.ZipFile(WZ)
-for n in sorted(zw.namelist()):
-    if n.endswith(".class") and "$" not in n and re.search(r"(Armors|Weapons|Group)\w*\.class$", n):
-        full(WZ, n[:-6].replace("/", "."), r"\d\.\d|bonus|multiply|SpellSchools|Attribute\(", label=n.rsplit('/', 1)[-1], limit=120)
-p("\n==== Relics: every relic's attributes (full lines)")
-RL = paths["relics-rpg"]
-full(RL, "net.relics_rpgs.item.RelicItems", r"new Entry\(|withAttributes|AttributeModifier\(|_multiplier|0\.\d+f", limit=200)
-for slug in ("paladins-and-priests", "rogues-and-warriors"):
-    if slug not in paths:
-        continue
-    p(f"\n==== {slug}: armor and weapons with spell power")
-    zz = zipfile.ZipFile(paths[slug])
-    for n in sorted(zz.namelist()):
-        if n.endswith(".class") and "$" not in n and re.search(r"(Armors|Weapons|Group)\w*\.class$", n):
-            full(paths[slug], n[:-6].replace("/", "."), r"SpellSchools|spell_power|bonus\(|multiply", label=n.rsplit('/', 1)[-1], limit=60)
+    if "damage_type" in n and n.endswith(".json") and "tags" not in n:
+        p(f"   {n.split('/')[-1]}")
+    if "/tags/damage_type/" in n:
+        p(f"   tag {n}: " + " ".join(z.read(n).decode().split())[:400])
+for cls in classes(IR, r"(ISSDamageTypes|DamageSources|SpellDamageSource)\.class$"):
+    lines(IR, cls, r"ResourceKey|register|create|DamageSource|getEntity|getDirectEntity", 60)
+p("\n==== Curios: the attribute event")
+for cls in classes(CU, r"(CurioAttributeModifierEvent|CuriosApi|ICuriosItemHandler|SlotResult)\.class$"):
+    lines(CU, cls, r"public .*\(|record |class ", 80)
+p("\n==== Fabled Weaponry: tomes and maces")
+z = zipfile.ZipFile(FW)
+for n in sorted(z.namelist()):
+    if n.endswith("lang/en_us.json"):
+        lang = json.loads(z.read(n).decode("utf-8", "replace"))
+        p("   lang: " + "; ".join(f"{k}={v}" for k, v in lang.items() if re.search(r"(?i)tome|mace", k))[:3000])
+for cls in classes(FW, r"(?i)(tome|mace|ItemInit|ModItems|Items)\w*\.class$")[:25]:
+    lines(FW, cls, r"(?i)magic|indirectMagic|damageSources|hurt\(|getOffhandItem|OFF_HAND|tome|register\(|\"[a-z_]+_tome\"|setLastHurtByPlayer|getAttackStrength", 50)
+p("\n==== Paladins: one spell file (for the shape of a Spell Engine spell)")
+z = zipfile.ZipFile(paths["paladins-and-priests"])
+for n in sorted(z.namelist()):
+    if "/spell/" in n and n.endswith(".json"):
+        p("   " + n + ": " + " ".join(z.read(n).decode().split())[:700])
+        break
+p("\n==== Wizards: spell files' cost blocks")
+z = zipfile.ZipFile(paths["wizards"])
+for n in sorted(z.namelist()):
+    if "/spell/" in n and n.endswith(".json"):
+        j = json.loads(z.read(n))
+        p(f"   {n.split('/')[-1]}: cost {json.dumps(j.get('cost'))[:200]} damage-ish {json.dumps([i.get('action', {}).get('damage') for i in j.get('impacts', [])])[:160]}")
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/spellmax2.txt", "w").write("\n".join(out))
+open("probe-out/chunk2.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

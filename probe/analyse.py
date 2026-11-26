@@ -1,4 +1,6 @@
-"""Chunk 4 facts, round 3: how Wizards armor gets its spell bonuses.
+"""Chunk 4 facts, round 4: Spell Engine's item attribute mixin.
+
+Was round 3: how Wizards armor gets its spell bonuses.
 
 Was round 2: where the altar and staff pieces sit, the champion's config defaults.
 
@@ -47,31 +49,16 @@ def decompile(path, cls):
 
 out = []
 p = out.append
-for slug in ("wizards", "spell-engine", "spell-power"):
-    try:
-        ver, data, deps = modrinth(slug)
-    except Exception as e:
-        p(f"==== {slug}: not found ({e})")
-        continue
-    open("w.jar", "wb").write(data)
-    z = zipfile.ZipFile("w.jar")
-    names = z.namelist()
-    p(f"==== {slug} {ver}")
-    for n in names:
-        if n.endswith(".class"):
-            b = z.read(n)
-            hits = [k for k in (b"ItemAttributeModifierEvent", b"getAttributeModifiers", b"getDefaultAttributeModifiers", b"m_7167_", b"m_41638_", b"CurioAttributeModifierEvent") if k in b]
-            if hits:
-                p(f"   {n}: {[h.decode() for h in hits]}")
-        if n.endswith("mixins.json"):
-            p(f"   {n}: " + " ".join(z.read(n).decode(errors='replace').split())[:800])
-    if slug == "wizards":
-        for n in names:
-            if re.search(r"(Armor|Robe)[^/]*\.class$", n):
-                t = decompile("w.jar", n[:-6].replace("/", "."))
-                for l in t.splitlines():
-                    if re.search(r"Attribute|Multimap|Modifier|getDefault|m_7167_", l):
-                        p(f"   {n.split('/')[-1]}: " + " ".join(l.split())[:260])
+ver, data, deps = modrinth("spell-engine")
+open("w.jar", "wb").write(data)
+p(f"==== spell-engine {ver}")
+for c in ("net.spell_engine.mixin.item.ItemStackAttributeModifiersMixin", "net.spell_engine.utils.AttributeModifierUtil", "net.spell_engine.rpg_series.item.Armor$CustomItem"):
+    t = decompile("w.jar", c)
+    p(f"\n==== {c}")
+    for l in t.splitlines():
+        ls = l.strip()
+        if ls and not ls.startswith(("import", "*", "/*", "package")):
+            p("   " + " ".join(ls.split())[:300])
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/chunk4c.txt", "w").write("\n".join(out)[:300000])
+open("probe-out/chunk4d.txt", "w").write("\n".join(out)[:300000])
 open("report.txt", "w").write("done")

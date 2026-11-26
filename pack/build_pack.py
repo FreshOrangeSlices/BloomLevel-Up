@@ -110,7 +110,9 @@ On a host (Shockbyte and similar)
 Skip forge-installer.jar, start.bat, start.sh and eula.txt: the host does those.
 To update later: stop the server, upload the new build's mods, config and defaultconfigs folders over the old ones
 (delete the old mods folder first, so no old jar stays behind), start it again. The world stays, unless the update
-says it needs a new one (terrain changes only reach chunks made after them).
+says it needs a new one (terrain changes only reach chunks made after them). The pack's own data pack
+(config/openloader/data/legionwarex) cleans itself: files an older build left there that this one doesn't list are
+deleted as the server starts (the log's "LegionWareX pack files:" line names them); replacing that folder whole works too.
 
 Shared map (Unified Xaero Worldmap): the world map is kept on the server, in the world folder (unified_xaero_worldmap/),
 so everyone sees where anyone has been and a fresh install gets it back on joining. Once, after the first start with
@@ -436,6 +438,12 @@ def pack_data_files(data, have_loader, problems, jars=None, notes=None):
             "replace": False, "values": [{"id": item, "required": False} for item in hidden]}
     if data.get("spawns"):
         out.update(spawn_data(root, data["spawns"], mods_in(jars) if jars else None, problems, notes, jars))
+    # Every file this build puts in the data pack, so the add-on can take out what an older version left behind (a
+    # server updated by copying the new files over keeps the old ones: a removed recipe or spawn change would stay).
+    # The add-on reads it as the game starts, before any world loads, and deletes the folder's files not listed.
+    listed = sorted(path[len(root) + 1:] for path in out)
+    out[f"{root}/files.json"] = {"why": "Written by the pack build; the Warionex add-on deletes files in this folder that it doesn't list.",
+                                 "files": listed + ["files.json"]}
     return out
 
 

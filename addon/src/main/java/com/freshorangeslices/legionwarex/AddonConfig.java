@@ -81,6 +81,15 @@ public final class AddonConfig {
 	private static final ForgeConfigSpec.DoubleValue ROAMER_XP;
 	private static final ForgeConfigSpec.IntValue ROAMER_NOTICE;
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ALWAYS_DESPAWN;
+	private static final ForgeConfigSpec.IntValue FAR_START;
+	private static final ForgeConfigSpec.IntValue FAR_STEP;
+	private static final ForgeConfigSpec.IntValue FAR_STEPS;
+	private static final ForgeConfigSpec.DoubleValue FAR_HEALTH;
+	private static final ForgeConfigSpec.DoubleValue FAR_BOSS_SHARE;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> FAR_DIMENSIONS;
+	private static final ForgeConfigSpec.DoubleValue FAR_WEAPON;
+	private static final ForgeConfigSpec.DoubleValue FAR_STAFF_SHARE;
+	private static final ForgeConfigSpec.DoubleValue LEGENDARY_DAMAGE;
 	/** The bosses the pack lets roam (pack.json's spawns: roaming_queen_of_orchid, roaming_draugr_boss, harvest_court). */
 	public static final List<String> ROAMING_DEFAULT = List.of("oddities:queen_of_orchid", "soulsweapons:draugr_boss", "born_in_chaos_v1:sir_pumpkinhead");
 	/** The roamers that drop nothing, pay more XP and leave you alone until hit (FreshOrangeSlices, 2026-11-24/25). */
@@ -317,6 +326,43 @@ public final class AddonConfig {
 				.defineListAllowEmpty("bossWeaponDrops", BOSS_DROPS_DEFAULT, o -> o instanceof String s && s.contains("="));
 		builder.pop();
 
+		builder.comment("Distance from spawn (FreshOrangeSlices, 2026-11-25: \"health should ideally increase via distance\"; \"increase the range",
+				"from 4k blocks to 6k and if possible for bosses to gain half the effects\"; found weapons scaling the same way \"so let the",
+				"player try other weapons\"). Measured across the ground from the world's spawn; in the Nether a block counts as 8.").push("distance");
+		FAR_START = builder
+				.comment("How far from spawn, in blocks, before anything grows.")
+				.defineInRange("farStart", 1000, 0, 100000);
+		FAR_STEP = builder
+				.comment("Blocks per step past farStart.")
+				.defineInRange("farStep", 1000, 1, 100000);
+		FAR_STEPS = builder
+				.comment("Steps until it stops growing (5: from 1000 blocks out to 6000).")
+				.defineInRange("farSteps", 5, 0, 100);
+		FAR_HEALTH = builder
+				.comment("Monsters' extra health per step, as a share of their own (0.5: x3.5 at 6000 blocks). Set once, where a monster first",
+						"enters the world; anything a player owns (pets, companions, summons) is left alone.")
+				.defineInRange("farHealthPerStep", 0.5, 0.0, 10.0);
+		FAR_BOSS_SHARE = builder
+				.comment("A boss's share of that (Bloom's bosses tag; 0.5: +25% a step, x2.25 at 6000).")
+				.defineInRange("farBossShare", 0.5, 0.0, 1.0);
+		FAR_DIMENSIONS = builder
+				.comment("Where monsters' health grows.")
+				.defineListAllowEmpty("farHealthDimensions", List.of("minecraft:overworld", "minecraft:the_nether"), o -> o instanceof String);
+		FAR_WEAPON = builder
+				.comment("A weapon found in a chest or dropped by a mob: extra damage per step of where it was found, as a share of its own",
+						"(0.1: +50% at 6000). Not wooden, stone or golden weapons, nor #legionwarex:rare_mob_gear; crafted ones get none.",
+						"Boss and legendary weapons (#legionwarex:boss_weapons, and one-of-a-kind weapons hitting legendaryDamage or more) grow",
+						"instead by their holder's farthest boss kill, however they were got.")
+				.defineInRange("farWeaponPerStep", 0.1, 0.0, 10.0);
+		FAR_STAFF_SHARE = builder
+				.comment("Staffs, wands and other spell weapons: their share of that, as Spell Power (0.5: +5% a step).")
+				.defineInRange("farStaffShare", 0.5, 0.0, 1.0);
+		LEGENDARY_DAMAGE = builder
+				.comment("A one-of-a-kind weapon (not a material's version, such as an iron or netherite one) with this much attack damage or",
+						"more (a hand's 1 included: a netherite sword's 9) counts as legendary.")
+				.defineInRange("legendaryDamage", 9.0, 1.0, 1000.0);
+		builder.pop();
+
 		builder.push("world");
 		MOB_KILL_DROPS = builder
 				.comment("Whether a mob killed by another mob (an iron golem, a rival, a creeper) drops its loot. Off: it drops nothing unless",
@@ -538,6 +584,42 @@ public final class AddonConfig {
 
 	public static List<? extends String> weaponDamage() {
 		return get(WEAPON_DAMAGE, WEAPON_DAMAGE_DEFAULT);
+	}
+
+	public static int farStart() {
+		return get(FAR_START, 1000);
+	}
+
+	public static int farStep() {
+		return get(FAR_STEP, 1000);
+	}
+
+	public static int farSteps() {
+		return get(FAR_STEPS, 5);
+	}
+
+	public static double farHealthPerStep() {
+		return get(FAR_HEALTH, 0.5);
+	}
+
+	public static double farBossShare() {
+		return get(FAR_BOSS_SHARE, 0.5);
+	}
+
+	public static List<? extends String> farHealthDimensions() {
+		return get(FAR_DIMENSIONS, List.of("minecraft:overworld", "minecraft:the_nether"));
+	}
+
+	public static double farWeaponPerStep() {
+		return get(FAR_WEAPON, 0.1);
+	}
+
+	public static double farStaffShare() {
+		return get(FAR_STAFF_SHARE, 0.5);
+	}
+
+	public static double legendaryDamage() {
+		return get(LEGENDARY_DAMAGE, 9.0);
 	}
 
 	public static List<? extends String> bossDrops() {

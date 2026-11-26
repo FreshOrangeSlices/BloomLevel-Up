@@ -343,12 +343,26 @@ public final class MagicBridge {
 				Multimap<Attribute, AttributeModifier> modifiers = new ItemStack(item).getAttributeModifiers(entry.getValue());
 				List<String> copied = new ArrayList<>();
 				List<String> own = new ArrayList<>();
-				modifiers.entries().forEach(e -> {
+				int copyable = 0;
+
+				for (Map.Entry<Attribute, AttributeModifier> e : modifiers.entries()) {
 					String text = ForgeRegistries.ATTRIBUTES.getKey(e.getKey()) + " " + ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(e.getValue().getAmount())
 							+ " " + e.getValue().getOperation().name().toLowerCase(java.util.Locale.ROOT);
-					(NAME.equals(e.getValue().getName()) ? copied : own).add(text);
-				});
-				parts.add(entry.getKey() + ": " + (copied.isEmpty() ? "no copy" : "copies " + copied) + " (own " + own.size() + ")");
+					boolean isCopy = NAME.equals(e.getValue().getName());
+					(isCopy ? copied : own).add(text);
+
+					if (!isCopy) {
+						for (Copy copy : copies().getOrDefault(e.getKey(), List.of())) {
+							if (copy(e.getValue(), copy.kind(), copy.fromSpellEngine(), ForgeRegistries.ATTRIBUTES.getKey(copy.target())) != null) {
+								copyable++;
+							}
+						}
+					}
+				}
+
+				// An item whose spell bonuses are all flat school ones (Wizards' robes: +1 Fire Spell Power) has nothing to copy, by design.
+				String verdict = !copied.isEmpty() ? "copies " + copied : copyable == 0 ? "nothing to copy " + own : "no copy";
+				parts.add(entry.getKey() + ": " + verdict + " (own " + own.size() + ")");
 			}
 
 			String text = String.join("; ", parts);

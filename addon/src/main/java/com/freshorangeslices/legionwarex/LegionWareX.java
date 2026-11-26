@@ -29,6 +29,9 @@ import com.freshorangeslices.legionwarex.companion.CompanionKeepsakeItem;
 import com.freshorangeslices.legionwarex.summon.PirateSaber;
 import com.freshorangeslices.legionwarex.summon.Summons;
 import com.freshorangeslices.legionwarex.world.DeadEnchantmentLoot;
+import com.freshorangeslices.legionwarex.world.FarHealth;
+import com.freshorangeslices.legionwarex.world.FarWeapons;
+import com.freshorangeslices.legionwarex.world.PackFiles;
 import com.freshorangeslices.legionwarex.world.DeadEnchantments;
 import com.freshorangeslices.legionwarex.world.BannedMobs;
 import com.freshorangeslices.legionwarex.world.IllagerCrowding;
@@ -93,9 +96,12 @@ public final class LegionWareX {
 	static {
 		LOOT_MODIFIERS.register("add_item", AddItemModifier.CODEC);
 		LOOT_MODIFIERS.register("dead_enchantments", DeadEnchantmentLoot.CODEC);
+		LOOT_MODIFIERS.register("found_far", FarWeapons.Loot.CODEC);
 	}
 
 	public LegionWareX() {
+		// An older pack's leftover data pack files, out before any world loads (PackFiles).
+		PackFiles.cleanAtStart(net.minecraftforge.fml.loading.FMLPaths.GAMEDIR.get());
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ITEMS.register(modBus);
 		LOOT_MODIFIERS.register(modBus);
@@ -123,6 +129,8 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(NightEvents.class);
 		MinecraftForge.EVENT_BUS.register(GearTuning.class);
 		MinecraftForge.EVENT_BUS.register(BossDrops.class);
+		MinecraftForge.EVENT_BUS.register(FarHealth.class);
+		MinecraftForge.EVENT_BUS.register(FarWeapons.class);
 		MinecraftForge.EVENT_BUS.register(Roamers.class);
 		MinecraftForge.EVENT_BUS.register(AlwaysDespawn.class);
 		MinecraftForge.EVENT_BUS.register(MagicBridge.class);

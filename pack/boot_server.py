@@ -181,24 +181,41 @@ def main():
         level = "warning" if both and pairs and int(pairs.group(1)) < 8 else "notice"
         print(f"::{level} title=server-magic::{esc(magic.split('LegionWareX ', 1)[-1][:3000])}")
 
-    # Accessories (chunk 3): the Trophy slot's pieces and effects in this layer, and Artifacts' numbers set once per
-    # world (a fresh world here, so they should be set now; a "not found" means Artifacts renamed a rule).
+    # The add-on's newer rules, in one notice (a step keeps only 10): accessories (the Trophy slot's pieces, the player's
+    # slot rows, Artifacts' numbers set once per world, a fresh world here) and distance from spawn (monsters' health; which
+    # weapons grow by where they're found and which, the legendary ones, by the holder's farthest boss kill). Anything
+    # wrong is a warning of its own.
+    addon_notes = []
     trophies = next((l for l in log if "LegionWareX trophies:" in l), None)
     if trophies:
-        print(f"::notice title=server-trophies::{esc(trophies.split('LegionWareX ', 1)[-1][:3000])}")
+        addon_notes.append(trophies.split("LegionWareX ", 1)[-1])
     slots = next((l for l in log if "LegionWareX accessories: player slots" in l), None)
     if slots:
         # The pack's rows (pack_data's data_files): Ring 3, Belt 2, the Trophy slot; Cataclysm's Rings and Waist and
         # Spell Engine's Spell Quiver gone (left out or 0). A layer without a mod that gives players a ring or belt row has none.
-        sizes = dict(re.findall(r"(\w+)=(\d+)", slots.split("player slots", 1)[1]))
+        listed = slots.split("player slots", 1)[1].strip()
+        sizes = dict(re.findall(r"(\w+)=(\d+)", listed))
         wrong = [f"{row} {sizes.get(row, 'missing')} (want {want})" for row, want in
                  (("ring", "3"), ("belt", "2"), ("trophy", "1")) if sizes.get(row, want if row != "trophy" else None) != want]
         wrong += [f"{row} still {sizes[row]}" for row in ("rings", "waist", "spell_quiver") if sizes.get(row, "0") != "0"]
-        print(f"::{'warning' if wrong else 'notice'} title=server-slots::{esc(('; '.join(wrong) + ' | ' if wrong else '') + slots.split('player slots', 1)[1].strip()[:2500])}")
+        if wrong:
+            print(f"::warning title=server-slots::{esc('; '.join(wrong) + ' | ' + listed[:2500])}")
+        addon_notes.append("player slots " + listed)
     artifacts = next((l for l in log if "LegionWareX artifacts:" in l), None)
     if artifacts:
-        level = "warning" if "not found" in artifacts or " is a " in artifacts else "notice"
-        print(f"::{level} title=server-artifacts::{esc(artifacts.split('LegionWareX ', 1)[-1][:3000])}")
+        if "not found" in artifacts or " is a " in artifacts:
+            print(f"::warning title=server-artifacts::{esc(artifacts.split('LegionWareX ', 1)[-1][:3000])}")
+        addon_notes.append(artifacts.split("LegionWareX ", 1)[-1])
+    cleaned = next((l for l in log if "LegionWareX pack files:" in l), None)
+    if cleaned and "matches this version's list" not in cleaned:
+        # A fresh server from this build's zip has nothing left over: anything removed is a file the build wrote but didn't list.
+        print(f"::warning title=server-pack-files::{esc(cleaned.split('LegionWareX ', 1)[-1][:3000])}")
+    for tag in ("LegionWareX pack files:", "LegionWareX distance:", "LegionWareX far weapons:"):
+        line = next((l for l in log if tag in l), None)
+        if line:
+            addon_notes.append(line.split("LegionWareX ", 1)[-1])
+    if addon_notes:
+        print(f"::notice title=server-addon::{esc(chr(10).join(n[:1500] for n in addon_notes)[:3900])}")
 
     # Other mods' compat code the add-on held until common setup (LateCompat: Copper Age Backport's Sophisticated
     # Storage compat, which otherwise stops the server starting): each held one should have run.

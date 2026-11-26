@@ -35,6 +35,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
@@ -354,7 +355,8 @@ public final class Roamers {
 		for (String id : roaming()) {
 			ResourceLocation key = ResourceLocation.tryParse(id);
 
-			if (key == null || !ForgeRegistries.ENTITY_TYPES.containsKey(key)) {
+			// A mod left out of this layer is fine; a missing id in a mod that's there is a typo or a rename.
+			if (key == null || ModList.get().isLoaded(key.getNamespace()) && !ForgeRegistries.ENTITY_TYPES.containsKey(key)) {
 				unknown.add(id);
 			}
 		}

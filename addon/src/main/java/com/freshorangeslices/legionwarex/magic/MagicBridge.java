@@ -316,6 +316,48 @@ public final class MagicBridge {
 		}
 	}
 
+	/** Items the check builds: a Spell Engine robe and an Iron's robe (worn), each should carry the other mod's copies. */
+	static final Map<String, net.minecraft.world.entity.EquipmentSlot> CHECKED = new java.util.LinkedHashMap<>();
+
+	static {
+		CHECKED.put("wizards:netherite_fire_robe_chest", net.minecraft.world.entity.EquipmentSlot.CHEST);
+		CHECKED.put("wizards:arcane_robe_head", net.minecraft.world.entity.EquipmentSlot.HEAD);
+		CHECKED.put("irons_spellbooks:pyromancer_chestplate", net.minecraft.world.entity.EquipmentSlot.CHEST);
+		CHECKED.put("irons_spellbooks:shadowwalker_helmet", net.minecraft.world.entity.EquipmentSlot.HEAD);
+	}
+
+	/** {@code /legionwarex magic}: what the copies on a few real items come to, for the pack test ("LegionWareX magic check:"). */
+	public static com.mojang.brigadier.builder.LiteralArgumentBuilder<net.minecraft.commands.CommandSourceStack> node() {
+		return net.minecraft.commands.Commands.literal("magic").executes(context -> {
+			List<String> parts = new ArrayList<>();
+
+			for (Map.Entry<String, net.minecraft.world.entity.EquipmentSlot> entry : CHECKED.entrySet()) {
+				ResourceLocation id = ResourceLocation.tryParse(entry.getKey());
+				net.minecraft.world.item.Item item = id == null ? null : ForgeRegistries.ITEMS.getValue(id);
+
+				if (item == null || item == net.minecraft.world.item.Items.AIR) {
+					parts.add(entry.getKey() + (id != null && ModList.get().isLoaded(id.getNamespace()) ? ": missing (renamed?)" : ": not in this layer"));
+					continue;
+				}
+
+				Multimap<Attribute, AttributeModifier> modifiers = new ItemStack(item).getAttributeModifiers(entry.getValue());
+				List<String> copied = new ArrayList<>();
+				List<String> own = new ArrayList<>();
+				modifiers.entries().forEach(e -> {
+					String text = ForgeRegistries.ATTRIBUTES.getKey(e.getKey()) + " " + ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(e.getValue().getAmount())
+							+ " " + e.getValue().getOperation().name().toLowerCase(java.util.Locale.ROOT);
+					(NAME.equals(e.getValue().getName()) ? copied : own).add(text);
+				});
+				parts.add(entry.getKey() + ": " + (copied.isEmpty() ? "no copy" : "copies " + copied) + " (own " + own.size() + ")");
+			}
+
+			String text = String.join("; ", parts);
+			LegionWareX.LOGGER.info("LegionWareX magic check: {}", text);
+			context.getSource().sendSuccess(() -> Component.literal(text), false);
+			return 1;
+		});
+	}
+
 	/** What the server runs with, for the boot test: the pairs found, and which side is missing for the rest. */
 	@SubscribeEvent
 	public static void onServerStarted(ServerStartedEvent event) {

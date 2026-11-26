@@ -134,7 +134,7 @@ public final class LegionWareX {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
 				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node())
 				.then(KrampusNaughtiness.node()).then(IllagerCrowding.node()).then(EntityWatch.node()).then(Summons.node()).then(DeadEnchantments.node())
-				.then(NightCommand.node()).then(Roamers.node()));
+				.then(NightCommand.node()).then(Roamers.node()).then(MagicBridge.node()));
 		// Anyone's.
 		event.getDispatcher().register(HiddenArmor.command());
 	}

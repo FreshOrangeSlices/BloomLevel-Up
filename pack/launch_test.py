@@ -255,13 +255,24 @@ def pack_data_check(server_dir, dump_file, server_lines):
             failures.append(f"pack data: {item} has no Better Combat swing (the pack gives {swings[item]})")
         elif wanted == "pickaxe" and category != "pickaxe":
             failures.append(f"pack data: {item} swings as {category}, not the pickaxe the pack gives it")
-    costly = [spell for spell, cost in spell_costs if "item" in cost or cost.get("exhaust", 0.0) != 0.0]
+    # Each mod's spells as its data_edits leave them: Paladins' with no item and no hunger, Wizards' with no rune (their
+    # hunger kept, FreshOrangeSlices, 2026-11-24).
+    try:
+        edits = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json")))["pack_data"].get("data_edits", {})
+    except (OSError, ValueError, KeyError):
+        edits = {}
+    costly = []
+    for spell, cost in spell_costs:
+        edit = edits.get(spell.split(":")[0] + ":spell/*", {})
+        hunger = (edit.get("merge") or {}).get("cost", {}).get("exhaust")
+        if "item" in cost and "cost/item" in edit.get("remove", []) or hunger is not None and cost.get("exhaust", 0.0) != hunger:
+            costly.append(spell)
     if costly:
-        failures.append(f"pack data: {len(costly)} edited spells still cost an item or hunger: {', '.join(costly[:10])}")
+        failures.append(f"pack data: {len(costly)} edited spells don't cost what their edit says (an item left, or hunger): {', '.join(costly[:10])}")
     injected = next((l.split("]: ", 1)[-1] for l in server_lines if "Successfully injected" in l), "Open Loader said nothing")
     notes = [f"pack data: {len([r for r in removed if r.split(':')[0] in mods])} recipes out, {len(checked)} items hidden "
              f"(of {len(removed)} and {len(hidden)} listed; the rest are from mods this layer leaves out)"
-             + (f"; {len(spell_costs)} spells cost only their cooldown" if spell_costs else "")
+             + (f"; {len(spell_costs)} spells edited ({', '.join(sorted({c[0].split(':')[0] for c in spell_costs}))}): no item cost" if spell_costs else "")
              + (f"; {len(given)} Better Combat swings given" if given else "") + f"; {injected}"]
     return failures, notes
 
@@ -1282,6 +1293,20 @@ def enchantment_check(server):
     return failures, [f"enchantments: {said[:400]}"]
 
 
+def magic_check(server):
+    """Both magic mods' gear counting for both (the add-on's magic/MagicBridge, FreshOrangeSlices, 2026-11-24):
+    /legionwarex magic builds a Wizards robe and an Iron's robe and lists the other mod's copies each carries. Fails when
+    a robe in the layer carries none, or one the add-on names is missing from its mod. Returns (failures, notes)."""
+    mark = len(server.lines)
+    server.send("legionwarex magic")
+    line = lines_since(server, mark, r"LegionWareX magic check: ", 30) or ""
+    said = line.split("LegionWareX magic check: ", 1)[-1].strip()
+    if not said:
+        return [], ["magic: the add-on said nothing"]
+    failures = [f"magic: {part}" for part in said.split("; ") if part.endswith("no copy") or "no copy (" in part or "missing" in part]
+    return failures, [f"magic: {said[:1500]}"]
+
+
 def wand_check(server, player, server_dir, shots):
     """Construction Wand as a player uses it (FreshOrangeSlices, 2026-11-22: build assist for survival): in survival with
     Resistance V, on open ground, a 3x3 patch of cobblestone is set into the ground two blocks ahead; the player, with a
@@ -1909,6 +1934,10 @@ def main():
             failures += enchantment_failures
             notes += enchantment_notes
             progress("enchantment check done")
+            magic_failures, magic_notes = magic_check(server)
+            failures += magic_failures
+            notes += magic_notes
+            progress("magic check done")
             wand_failures, wand_notes = wand_check(server, PLAYER, server_dir, shots)
             failures += wand_failures
             notes += wand_notes

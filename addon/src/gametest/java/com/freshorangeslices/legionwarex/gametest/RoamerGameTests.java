@@ -160,6 +160,9 @@ public final class RoamerGameTests {
 		plain.setNoAi(true);
 		plain.setTarget(far);
 		helper.assertTrue(plain.getTarget() == far, "a zombie that isn't a roamer targets as usual");
+		// Gone at once: a companion in a test beside this one would go for a zombie left standing.
+		roamer.discard();
+		plain.discard();
 		helper.succeed();
 	}
 

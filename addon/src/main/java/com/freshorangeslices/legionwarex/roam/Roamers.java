@@ -196,9 +196,11 @@ public final class Roamers {
 	public static void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
 		Mob mob = event.getEntity();
 
-		if (event.isSpawnCancelled() || event.getSpawnType() != MobSpawnType.NATURAL || !(event.getLevel().getLevel() instanceof ServerLevel level)) {
+		if (event.isSpawnCancelled() || event.getSpawnType() != MobSpawnType.NATURAL) {
 			return;
 		}
+
+		ServerLevel level = event.getLevel().getLevel();
 
 		String id = id(mob);
 
@@ -350,7 +352,9 @@ public final class Roamers {
 		List<String> unknown = new ArrayList<>();
 
 		for (String id : roaming()) {
-			if (!ForgeRegistries.ENTITY_TYPES.containsKey(new ResourceLocation(id))) {
+			ResourceLocation key = ResourceLocation.tryParse(id);
+
+			if (key == null || !ForgeRegistries.ENTITY_TYPES.containsKey(key)) {
 				unknown.add(id);
 			}
 		}

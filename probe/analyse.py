@@ -1,4 +1,6 @@
-"""Chunk 3 facts, round 6: Artifacts' loot modifier format.
+"""Chunk 4 facts: The Graveyard's altar, staff, vial and dagger (the Corrupted Champion).
+
+Was chunk 3 facts, round 6: Artifacts' loot modifier format.
 
 Was round 5: where Artifacts are injected, and Jewelry's gems, recipes, ores and jeweler.
 
@@ -41,22 +43,42 @@ def decompile(path, cls):
 
 out = []
 p = out.append
-ver, data, deps = modrinth("artifacts")
-open("a.jar", "wb").write(data)
-z = zipfile.ZipFile("a.jar")
-p(f"==== artifacts {ver}")
-for n in ["data/artifacts/loot_modifiers/inject/chests/abandoned_mineshaft.json", "data/artifacts/loot_tables/inject/chests/abandoned_mineshaft.json", "data/forge/loot_modifiers/global_loot_modifiers.json"]:
-    try:
-        p(f"   {n}: " + " ".join(z.read(n).decode().split())[:1500])
-    except KeyError:
-        p(f"   {n}: missing")
-classes = [n[:-6].replace("/", ".") for n in z.namelist() if n.endswith(".class") and re.search(r"(LootModifier|Modifiers|LootConditions?|ArtifactRarity|Mimic|Campsite)", n.split("/")[-1])]
-p("   classes: " + ", ".join(classes)[:1500])
+jars = json.load(open("probe/alljars.json"))
+urls = jars["the-graveyard-forge"]
+data = None
+for u in (urls if isinstance(urls, list) else [urls]):
+    data = get(u)
+    if data:
+        break
+open("g.jar", "wb").write(data)
+z = zipfile.ZipFile("g.jar")
+names = z.namelist()
+p("==== The Graveyard: lang lines about the altar, staff, vial, dagger, lich")
+for n in names:
+    if n.endswith("lang/en_us.json"):
+        lang = json.loads(z.read(n))
+        for k, v in lang.items():
+            if re.search(r"altar|staff|vial|dagger|lich|blood|champion|ominous|fragment|sacrific|corrupt", k + v, re.I):
+                p(f"   {k}: {v}")
+p("\n==== Files naming the staff fragments, the vial or the dagger")
+for n in sorted(names):
+    if n.endswith(".json") and n.startswith("data/"):
+        body = z.read(n).decode(errors="replace")
+        if re.search(r"bone_staff|vial_of_blood|bone_dagger|ossuary|lich", body):
+            p(f"   {n}: " + " ".join(body.split())[:700])
+p("\n==== Structures and where they go")
+for n in sorted(names):
+    if re.search(r"data/graveyard/(worldgen/structure/|tags/worldgen/biome/has_structure/)", n):
+        p(f"   {n}: " + " ".join(z.read(n).decode(errors="replace").split())[:400])
+classes = [n[:-6].replace("/", ".") for n in names if n.endswith(".class") and re.search(r"(Altar|BoneStaff|Vial|Dagger|Ossuary|LichEntity|Sacrific|Summon)", n.split("/")[-1])]
+p("\n   classes: " + ", ".join(classes)[:1500])
 for c in classes:
-    t = decompile("a.jar", c)
+    t = decompile("g.jar", c)
+    p(f"\n==== {c}")
     for l in t.splitlines():
-        if re.search(r"fieldOf|register\(|\"[a-z_]+\"|Codec|CODEC", l) and len(l.strip()) > 8:
-            p(f"   {c.split('.')[-1]}: " + " ".join(l.split())[:260])
+        ls = l.strip()
+        if ls and not ls.startswith(("import", "*", "/*", "package")) and len(ls) > 3:
+            p("   " + " ".join(ls.split())[:240])
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/chunk3f.txt", "w").write("\n".join(out)[:200000])
+open("probe-out/chunk4a.txt", "w").write("\n".join(out)[:600000])
 open("report.txt", "w").write("done")

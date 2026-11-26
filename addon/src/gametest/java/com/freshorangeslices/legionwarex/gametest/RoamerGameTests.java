@@ -3,7 +3,9 @@ package com.freshorangeslices.legionwarex.gametest;
 import com.freshorangeslices.legionwarex.LegionWareX;
 import com.freshorangeslices.legionwarex.roam.RoamerClock;
 import com.freshorangeslices.legionwarex.roam.Roamers;
+import com.mojang.authlib.GameProfile;
 import java.util.List;
+import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -31,6 +33,21 @@ import net.minecraftforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public final class RoamerGameTests {
 	private static final String BEAR = "minecraft:polar_bear";
+
+	/** A mock player in survival (the helper's is in creative, and creative players are never noticed, as with vanilla's monsters). */
+	private static Player survival(GameTestHelper helper) {
+		return new Player(helper.getLevel(), BlockPos.ZERO, 0.0F, new GameProfile(UUID.randomUUID(), "roamer-test")) {
+			@Override
+			public boolean isSpectator() {
+				return false;
+			}
+
+			@Override
+			public boolean isCreative() {
+				return false;
+			}
+		};
+	}
 
 	@GameTest(template = "empty")
 	public static void aRoamingBossWaitsItsDaysAndItsLairTwinDoesNot(GameTestHelper helper) {
@@ -126,11 +143,18 @@ public final class RoamerGameTests {
 		roamer.setTarget(far);
 		helper.assertTrue(roamer.getTarget() == null, "calmed down, it leaves them alone again");
 
-		Player close = helper.makeMockPlayer();
+		Player close = survival(helper);
 		close.setPos(at.x + 5.0, at.y, at.z);
 		roamer.setTarget(close);
 		helper.assertTrue(roamer.getTarget() == close, "a player within 12 blocks is noticed");
 		helper.assertTrue(Roamers.provokedBy(roamer, close), "... and stays its target past 12 blocks (it's angry at them now)");
+
+		Player creative = helper.makeMockPlayer();
+		creative.setPos(at.x + 3.0, at.y, at.z);
+		roamer.setTarget(null);
+		Roamers.calm(roamer);
+		roamer.setTarget(creative);
+		helper.assertTrue(roamer.getTarget() == null, "a player in creative close by isn't noticed");
 
 		Zombie plain = helper.spawn(EntityType.ZOMBIE, new BlockPos(3, 2, 1));
 		plain.setNoAi(true);

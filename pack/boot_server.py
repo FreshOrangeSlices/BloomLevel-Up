@@ -166,6 +166,12 @@ def main():
         level = "warning" if found and found.group(1) == "0" and knights else "notice"
         print(f"::{level} title=server-rare-gear::{esc(rare.split('LegionWareX ', 1)[-1][:3000])}")
 
+    # Roaming bosses (the add-on's roam/): the bosses it holds to a wait, and any id the game doesn't have (a typo, a mod gone).
+    roam = next((l for l in log if "LegionWareX roamers:" in l and "roaming boss(es)" in l), None)
+    if roam:
+        level = "warning" if "not in the game" in roam else "notice"
+        print(f"::{level} title=server-roamers::{esc(roam.split('LegionWareX ', 1)[-1][:3000])}")
+
     # Other mods' compat code the add-on held until common setup (LateCompat: Copper Age Backport's Sophisticated
     # Storage compat, which otherwise stops the server starting): each held one should have run.
     held = [l for l in log if "LegionWareX compat:" in l]

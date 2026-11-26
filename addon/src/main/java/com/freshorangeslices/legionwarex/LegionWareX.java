@@ -13,7 +13,9 @@ import com.freshorangeslices.legionwarex.companion.OwnerHits;
 import com.freshorangeslices.legionwarex.harvest.HarvestCommand;
 import com.freshorangeslices.legionwarex.night.NightCommand;
 import com.freshorangeslices.legionwarex.night.NightEvents;
+import com.freshorangeslices.legionwarex.world.AlwaysDespawn;
 import com.freshorangeslices.legionwarex.world.BossDrops;
+import com.freshorangeslices.legionwarex.roam.Roamers;
 import com.freshorangeslices.legionwarex.world.GearTuning;
 import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
@@ -60,6 +62,7 @@ import org.slf4j.Logger;
  * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/);
  * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, mobs other mobs kill
  * drop nothing unless a player took part, zombies get no endless buffs, and a few mobs never join a world at all (world/);
+ * roaming bosses wait their days, and the quiet ones drop nothing, pay more XP and leave you alone until hit (roam/);
  * players and companions can wear their armor hidden (armor/). The pack was
  * LegionWareX at first and is Warionex now; the mod id, commands and saved data keep the first name.
  */
@@ -113,17 +116,19 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(NightEvents.class);
 		MinecraftForge.EVENT_BUS.register(GearTuning.class);
 		MinecraftForge.EVENT_BUS.register(BossDrops.class);
+		MinecraftForge.EVENT_BUS.register(Roamers.class);
+		MinecraftForge.EVENT_BUS.register(AlwaysDespawn.class);
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);
 	}
 
-	/** {@code /legionwarex band|chart|sentinel|harvest|naughtiness|illagers|watch ...} (operators). */
+	/** {@code /legionwarex band|chart|sentinel|harvest|naughtiness|illagers|watch|summons|enchantments|night|roamers ...} (operators). */
 	private static void registerCommands(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal(MOD_ID).requires(source -> source.hasPermission(2))
 				.then(BandCommand.node()).then(ChartCommand.node()).then(SentinelCommand.node()).then(HarvestCommand.node())
 				.then(KrampusNaughtiness.node()).then(IllagerCrowding.node()).then(EntityWatch.node()).then(Summons.node()).then(DeadEnchantments.node())
-				.then(NightCommand.node()));
+				.then(NightCommand.node()).then(Roamers.node()));
 		// Anyone's.
 		event.getDispatcher().register(HiddenArmor.command());
 	}

@@ -98,6 +98,11 @@ import com.freshorangeslices.bloomlevelup.stats.StatFormulas;
 public final class CombatSkill {
 	private static final TagKey<EntityType<?>> BOSSES = TagKey.create(Registries.ENTITY_TYPE, BloomLevelUp.id("bosses"));
 	private static final TagKey<EntityType<?>> NO_COMBAT_XP = TagKey.create(Registries.ENTITY_TYPE, BloomLevelUp.id("no_combat_xp"));
+	/**
+	 * A mob's own Combat XP multiplier, as a double in its persistent data (above 0; on top of combatEntityXpMultipliers):
+	 * for another mod to make one mob worth more than others of its kind, such as a pack's roaming boss.
+	 */
+	public static final String MOB_XP_MULTIPLIER = "bloomlevelup.combatXpMultiplier";
 
 	/** What kind of hit this is, which decides which Majors may follow it. */
 	public enum HitKind {
@@ -525,6 +530,12 @@ public final class CombatSkill {
 		}
 
 		double multiplier = config().combatEntityXpMultipliers.getOrDefault(BuiltInRegistries.ENTITY_TYPE.getKey(target.getType()).toString(), 1.0);
+		double own = target.getPersistentData().getDouble(MOB_XP_MULTIPLIER);
+
+		if (own > 0.0) {
+			multiplier *= own;
+		}
+
 		double xp = StatFormulas.combatHitXp(real, healthBefore, config().combatXpPerDamage, multiplier);
 
 		if (xp > 0.0) {

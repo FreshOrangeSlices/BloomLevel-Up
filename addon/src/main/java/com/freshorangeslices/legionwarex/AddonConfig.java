@@ -74,6 +74,22 @@ public final class AddonConfig {
 			"ddenizens:orc", "ddenizens:orc_shaman", "ddenizens:ghoul", "ddenizens:sewer_ghoul", "ddenizens:alligator_gar",
 			"ddenizens:boulder", "ddenizens:beholder", "ddenizens:death_tyrant", "ddenizens:gazer", "ddenizens:spectator");
 	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HARVEST_MOBS;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ROAMING_BOSSES;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> QUIET_ROAMERS;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ROAMER_HEIRS;
+	private static final ForgeConfigSpec.DoubleValue ROAMER_WAIT_DAYS;
+	private static final ForgeConfigSpec.DoubleValue ROAMER_XP;
+	private static final ForgeConfigSpec.IntValue ROAMER_NOTICE;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ALWAYS_DESPAWN;
+	/** The bosses the pack lets roam (pack.json's spawns: roaming_queen_of_orchid, roaming_draugr_boss, harvest_court). */
+	public static final List<String> ROAMING_DEFAULT = List.of("oddities:queen_of_orchid", "soulsweapons:draugr_boss", "born_in_chaos_v1:sir_pumpkinhead");
+	/** The roamers that drop nothing, pay more XP and leave you alone until hit (FreshOrangeSlices, 2026-11-24/25). */
+	public static final List<String> QUIET_DEFAULT = List.of("oddities:queen_of_orchid", "soulsweapons:draugr_boss");
+	/** What rises where a quiet roamer falls counts as one: the Old Champion's Frenzied Shade. */
+	public static final List<String> HEIRS_DEFAULT = List.of("soulsweapons:draugr_boss=soulsweapons:night_shade");
+	/** Monsters their own mod keeps for good that despawn as vanilla's (FreshOrangeSlices, 2026-11-24: after The Damned). */
+	public static final List<String> ALWAYS_DESPAWN_DEFAULT = List.of("born_in_chaos_v1:scarlet_persecutor", "born_in_chaos_v1:infernal_spirit",
+			"undead_unleashed:flamebreather");
 	/** Born in Chaos's pumpkin folk that spawn in the wild (its Lord Pumpkinhead and the rest come from them or from items). */
 	public static final List<String> HARVEST_DEFAULT = List.of("born_in_chaos_v1:mr_pumpkin", "born_in_chaos_v1:mrs_pumpkin",
 			"born_in_chaos_v1:senor_pumpkin", "born_in_chaos_v1:pumpkin_bruiser", "born_in_chaos_v1:sir_pumpkinhead");
@@ -259,6 +275,33 @@ public final class AddonConfig {
 				.defineInRange("themedNightMoreMobs", 0.5, 0.0, 1.0);
 		builder.pop();
 
+		builder.comment("Roaming bosses (FreshOrangeSlices, 2026-11-24: five Queens of Orchid in one hour): the bosses that spawn out in the",
+				"world, told from the same bosses in their lairs by coming as a natural spawn. /legionwarex roamers [reset].").push("roamers");
+		ROAMING_BOSSES = builder
+				.comment("Roaming bosses: after one spawns naturally, no other of it does for roamingBossWaitDays. Entity ids.")
+				.defineListAllowEmpty("roamingBosses", ROAMING_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+		ROAMER_WAIT_DAYS = builder
+				.comment("How long the next of a roaming boss waits after one spawns, in days of play (game time, which sleeping doesn't",
+						"skip: 3 days is an hour).")
+				.defineInRange("roamingBossWaitDays", 3.0, 0.0, 100.0);
+		QUIET_ROAMERS = builder
+				.comment("Roaming bosses that drop nothing, pay roamerXpMultiplier times the XP (vanilla's and Bloom's Combat XP), and leave",
+						"everyone alone until something hits them or a player comes within roamerNoticeRange blocks; they calm down after",
+						"15 seconds without a target. By default the Queen of Orchid and the Old Champion's Remains (Sir Pumpkinhead keeps his",
+						"drops and stays a threat: he has no lair). Entity ids; each must be in roamingBosses too.")
+				.defineListAllowEmpty("quietRoamers", QUIET_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+		ROAMER_HEIRS = builder
+				.comment("What rises where a quiet roamer falls (within 24 blocks and 30 seconds) counts as one too, as \"<roamer>=<entity>\":",
+						"the Frenzied Shade, which drops the Essence of Eventide, so a roaming Champion's doesn't.")
+				.defineListAllowEmpty("roamerHeirs", HEIRS_DEFAULT, o -> o instanceof String s && s.contains("="));
+		ROAMER_XP = builder
+				.comment("How much more XP a quiet roamer pays: its vanilla XP orbs and Bloom's Combat XP from hitting it.")
+				.defineInRange("roamerXpMultiplier", 2.0, 0.0, 100.0);
+		ROAMER_NOTICE = builder
+				.comment("How close a player may come before a quiet roamer goes for them unprovoked, in blocks.")
+				.defineInRange("roamerNoticeRange", 12, 0, 64);
+		builder.pop();
+
 		builder.comment("Gear (FreshOrangeSlices, 2026-11-23: \"which ever methods is the hardest gets the highest value dmg\").").push("gear");
 		WEAPON_DAMAGE = builder
 				.comment("Weapons whose attack damage the pack sets, as \"<item>=<damage>\": the damage the tooltip shows (a hand's 1 included).",
@@ -314,6 +357,12 @@ public final class AddonConfig {
 						"come (natural spawns, structures, spawners, other mobs' summons, spawn eggs, commands); ones already in a world",
 						"vanish when their chunk loads. Entity ids.")
 				.defineListAllowEmpty("bannedMobs", List.of(), o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
+		ALWAYS_DESPAWN = builder
+				.comment("Monsters their own mod keeps for good that despawn as vanilla's do (at once with no player within 128 blocks, now",
+						"and then beyond 32), unless a player kept one (a name tag, a leash, a rider, gear it picked up). By default Born in",
+						"Chaos's Scarlet Persecutor and Infernal Spirit and Undead Unleashed's Flamebreather, which stayed for days after The",
+						"Damned. Entity ids.")
+				.defineListAllowEmpty("alwaysDespawn", ALWAYS_DESPAWN_DEFAULT, o -> o instanceof String s && ResourceLocation.isValidResourceLocation(s));
 		MAINLAND_SPAWN = builder
 				.comment("A new world's spawn on the mainland: the land nearest the middle of the world that is well inland (no sea",
 						"within about 250 blocks), not a beach, river or mountain, and not too high. Off: vanilla's spawn (which can be",
@@ -526,5 +575,33 @@ public final class AddonConfig {
 
 	public static List<? extends String> harvestMobs() {
 		return get(HARVEST_MOBS, HARVEST_DEFAULT);
+	}
+
+	public static List<? extends String> roamingBosses() {
+		return get(ROAMING_BOSSES, ROAMING_DEFAULT);
+	}
+
+	public static List<? extends String> quietRoamers() {
+		return get(QUIET_ROAMERS, QUIET_DEFAULT);
+	}
+
+	public static List<? extends String> roamerHeirs() {
+		return get(ROAMER_HEIRS, HEIRS_DEFAULT);
+	}
+
+	public static double roamingBossWaitDays() {
+		return get(ROAMER_WAIT_DAYS, 3.0);
+	}
+
+	public static double roamerXpMultiplier() {
+		return get(ROAMER_XP, 2.0);
+	}
+
+	public static int roamerNoticeRange() {
+		return get(ROAMER_NOTICE, 12);
+	}
+
+	public static List<? extends String> alwaysDespawn() {
+		return get(ALWAYS_DESPAWN, ALWAYS_DESPAWN_DEFAULT);
 	}
 }

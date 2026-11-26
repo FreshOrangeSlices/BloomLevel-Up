@@ -19,11 +19,14 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -262,8 +265,29 @@ public final class NightGameTests {
 		NightMobs.mark(marked, theme, 3);
 		helper.assertTrue(NightMobs.leaves(marked, over, false), "a mob of an ended night with no one near goes");
 		helper.assertFalse(NightMobs.leaves(marked, over, true), "... not while a player is near");
+		// Since 0.8.0 only what a player kept stays: a mob its own mod keeps for good (The Damned's flyers and demons) goes.
 		marked.setPersistenceRequired();
+		helper.assertTrue(NightMobs.leaves(marked, over, false), "a mob its own mod made persistent still goes");
+		int faded = 0;
+
+		for (int i = 0; i < 400; i++) {
+			faded += NightMobs.fades(marked, over, true, level.getRandom()) ? 1 : 0;
+		}
+
+		helper.assertTrue(faded > 60 && faded < 150, "by day it fades even with a player near, about 1 sweep in 4: " + faded + " of 400");
+		helper.assertFalse(NightMobs.fades(marked, over, false, level.getRandom()), "... not at night");
+		Skeleton armed = EntityType.SKELETON.create(level);
+		NightMobs.mark(armed, theme, 3);
+		armed.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
+		armed.setGuaranteedDrop(EquipmentSlot.HEAD);
+		helper.assertFalse(NightMobs.leaves(armed, over, false), "one wearing gear it picked up (a player's) stays");
+		NightMobs.testFade = true;
+		helper.assertFalse(NightMobs.fades(armed, over, true, level.getRandom()), "... and doesn't fade by day either");
+		NightMobs.testFade = false;
+		armed.discard();
+		marked.setCustomName(Component.literal("Kept"));
 		helper.assertFalse(NightMobs.leaves(marked, over, false), "... nor once a player has kept it (a name tag)");
+		marked.setCustomName(null);
 		Skeleton plain = EntityType.SKELETON.create(level);
 		helper.assertFalse(NightMobs.leaves(plain, over, false), "a skeleton of no night stays");
 		// An extra is persistent (outside the monster cap) but not kept: it still goes, and despawns as vanilla's monsters do.

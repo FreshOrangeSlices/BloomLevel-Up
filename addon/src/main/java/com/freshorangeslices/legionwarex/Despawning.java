@@ -1,6 +1,10 @@
 package com.freshorangeslices.legionwarex;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 
@@ -19,6 +23,27 @@ public final class Despawning {
 	/** Never one that is name-tagged, leashed, riding or ridden. */
 	public static boolean keptByPlayer(Mob mob) {
 		return mob.hasCustomName() || mob.isLeashed() || mob.isPassenger() || mob.isVehicle();
+	}
+
+	/**
+	 * Whether it wears or holds something it picked up (a player's dropped gear): vanilla marks such a slot's drop chance
+	 * above 1 (a sure drop) and keeps the mob for good. Read from the mob's saved form (vanilla keeps the chances
+	 * protected), so only when it matters.
+	 */
+	public static boolean pickedUpGear(Mob mob) {
+		CompoundTag saved = mob.saveWithoutId(new CompoundTag());
+
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			if (slot.getType() == EquipmentSlot.Type.HAND || slot.getType() == EquipmentSlot.Type.ARMOR) {
+				ListTag list = saved.getList(slot.getType() == EquipmentSlot.Type.ARMOR ? "ArmorDropChances" : "HandDropChances", Tag.TAG_FLOAT);
+
+				if (!mob.getItemBySlot(slot).isEmpty() && slot.getIndex() < list.size() && list.getFloat(slot.getIndex()) > 1.0F) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/** Once a second (every 20 ticks): gone, or its idle time reset with a player close. */

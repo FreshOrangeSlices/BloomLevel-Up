@@ -148,12 +148,15 @@
     },
     {
       "name": "magic-and-gear",
-      "_comment": "Iron's Spells as the mage, the RPG Series' Paladins & Priests and Rogues & Warriors (Spell Engine comes with them), weapons and armor, and the recipe glue for all of it. Marium's Soulslike Weaponry is on test (power creep). Fabled Weaponry (FreshOrangeSlices, 2026-11-16: weapons with passives; CurseForge only, packed inside).",
+      "_comment": "Iron's Spells as the mage, the RPG Series' Paladins & Priests, Rogues & Warriors and (since 2026-11-26) Wizards, with Jewelry (rings and necklaces, gem veins, the Jeweler) and Gazebos (village spell libraries) (Spell Engine comes with them; the add-on makes both magic mods' gear count for both), weapons and armor, and the recipe glue for all of it. Marium's Soulslike Weaponry is on test (power creep). Fabled Weaponry (FreshOrangeSlices, 2026-11-16: weapons with passives; CurseForge only, packed inside).",
       "modrinth": [
         "irons-spells-n-spellbooks",
         "irons-lib",
         "paladins-and-priests",
         "rogues-and-warriors",
+        "wizards",
+        "jewelry",
+        "gazebos",
         "epic-knights-shields-armor-and-weapons",
         "simply-swords",
         "mariums-soulslike-weaponry",
@@ -651,6 +654,10 @@
       "paladins:spell/*": {
         "why": "Paladins & Priests' spells cost only their cooldown (FreshOrangeSlices, 2026-11-04: it's the healing class; no hunger either). Each named a Healing Rune (runes:healing_stone) from the RPG Series' Runes mod, which isn't in the pack, so the rune could never be had; the item cost and the hunger (exhaust) come out of every spell of the mod's, its own updates' new spells too.",
         "merge": {"cost": {"exhaust": 0.0}},
+        "remove": ["cost/item"]
+      },
+      "wizards:spell/*": {
+        "why": "Wizards' spells without runes (FreshOrangeSlices, 2026-11-24: bring back Spell Engine's magic, runes off): each named an arcane, fire or frost rune from the RPG Series' Runes mod, which the pack leaves out, so the item cost comes out of every spell of the mod's, its updates' new spells too. Unlike Paladins', the hunger (exhaust) stays (FreshOrangeSlices: keep the hunger cost). The basic spells (Arcane Bolt and Blast, Scorch, Fireball, Frost Shard, Frostbolt) have no cooldown of their own, so with runes off they cast about once a second, like a bow.",
         "remove": ["cost/item"]
       },
       "bookofdragons:spawn_settings": {

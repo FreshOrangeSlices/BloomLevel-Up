@@ -103,6 +103,12 @@ public final class CombatSkill {
 	 * for another mod to make one mob worth more than others of its kind, such as a pack's roaming boss.
 	 */
 	public static final String MOB_XP_MULTIPLIER = "bloomlevelup.combatXpMultiplier";
+	/** Spells (the magic mods' damage types, as optional entries): Combat XP and crits, no weapon Majors. */
+	public static final TagKey<net.minecraft.world.damagesource.DamageType> SPELL = TagKey.create(Registries.DAMAGE_TYPE, BloomLevelUp.id("spell"));
+	/** Spells with no crit of their own (Iron's Spells'): Bloom rolls one, at the player's spell crit chance. */
+	public static final TagKey<net.minecraft.world.damagesource.DamageType> SPELL_ROLLS_CRIT = TagKey.create(Registries.DAMAGE_TYPE, BloomLevelUp.id("spell_rolls_crit"));
+	/** Spell Power's spell crit chance (points of 100 plus its own 5%: 105 is 5%); 5% where it isn't installed. */
+	private static final net.minecraft.resources.ResourceLocation SPELL_CRIT_CHANCE = new net.minecraft.resources.ResourceLocation("spell_power", "critical_chance");
 
 	/** What kind of hit this is, which decides which Majors may follow it. */
 	public enum HitKind {
@@ -117,10 +123,12 @@ public final class CombatSkill {
 		/** A direct hit that wasn't a swing. */
 		KINETIC,
 		/** The mod's own secondary damage (Lightning Shock, Overkill). Never feeds weapon Majors again. */
-		SECONDARY;
+		SECONDARY,
+		/** A spell (damage types in #bloomlevelup:spell): Combat XP and crits, never weapon Majors. */
+		SPELL;
 
 		boolean weaponHit() {
-			return this != SECONDARY;
+			return this != SECONDARY && this != SPELL;
 		}
 	}
 
@@ -333,6 +341,10 @@ public final class CombatSkill {
 		ItemStack weapon;
 		PendingAttack swing = null;
 
+		if (source.is(SPELL) && !BloomDamage.isSecondary(source)) {
+			return spellHit(level, player, target, source, amount);
+		}
+
 		if (BloomDamage.isSecondary(source)) {
 			kind = HitKind.SECONDARY;
 			weapon = player.getMainHandItem();
@@ -377,6 +389,36 @@ public final class CombatSkill {
 
 		ACTIVE.put(target, new Hit(player, source, kind, weapon, result, amount, swing));
 		return result;
+	}
+
+	/**
+	 * A spell's hit (FreshOrangeSlices, 2026-11-25: "we can allow crit to effect magic"): Iron's Spells' spells, which never
+	 * crit by themselves, crit at the player's spell crit chance for the same multiplier as a weapon's crit (Critical);
+	 * Spell Power's crit by their own roll, and Critical raises their crit damage the same way (StatEffects). Combat XP as
+	 * any hit; no weapon Majors.
+	 */
+	private static float spellHit(ServerLevel level, ServerPlayer player, LivingEntity target, DamageSource source, float amount) {
+		float result = amount;
+
+		if (source.is(SPELL_ROLLS_CRIT) && pvpAllowed(target) && ThreadLocalRandom.current().nextDouble() < spellCritChance(player)) {
+			result = (float) (amount * StatFormulas.criticalMultiplier(stat(player, CombatIds.CRITICAL)));
+			player.crit(target);
+			level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.2F);
+		}
+
+		ACTIVE.put(target, new Hit(player, source, HitKind.SPELL, player.getMainHandItem(), result, amount, null));
+		return result;
+	}
+
+	/** The player's spell crit chance: Spell Power's attribute where installed (gear raises it), else 5%. */
+	static double spellCritChance(Player player) {
+		net.minecraft.world.entity.ai.attributes.Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(SPELL_CRIT_CHANCE);
+
+		if (attribute != null && BuiltInRegistries.ATTRIBUTE.containsKey(SPELL_CRIT_CHANCE) && player.getAttribute(attribute) != null) {
+			return Math.max(0.0, player.getAttributeValue(attribute) / 100.0 - 1.0);
+		}
+
+		return 0.05;
 	}
 
 	private static float applyBonuses(ServerLevel level, ServerPlayer player, LivingEntity target, HitKind kind, ItemStack weapon,

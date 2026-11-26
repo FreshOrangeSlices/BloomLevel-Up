@@ -172,6 +172,15 @@ def main():
         level = "warning" if "not in the game" in roam else "notice"
         print(f"::{level} title=server-roamers::{esc(roam.split('LegionWareX ', 1)[-1][:3000])}")
 
+    # Both magic mods' gear counting for both (the add-on's magic/MagicBridge): the attribute pairs it found.
+    magic = next((l for l in log if "LegionWareX magic:" in l and "count for both" in l), None)
+    if magic:
+        pairs = re.search(r"magic: (\d+) pair", magic)
+        both = os.path.isdir(mods_dir) and any("irons" in f.lower() for f in os.listdir(mods_dir)) \
+            and any(f.lower().startswith("spell-power") or f.lower().startswith("spell_power") for f in os.listdir(mods_dir))
+        level = "warning" if both and pairs and int(pairs.group(1)) < 8 else "notice"
+        print(f"::{level} title=server-magic::{esc(magic.split('LegionWareX ', 1)[-1][:3000])}")
+
     # Other mods' compat code the add-on held until common setup (LateCompat: Copper Age Backport's Sophisticated
     # Storage compat, which otherwise stops the server starting): each held one should have run.
     held = [l for l in log if "LegionWareX compat:" in l]

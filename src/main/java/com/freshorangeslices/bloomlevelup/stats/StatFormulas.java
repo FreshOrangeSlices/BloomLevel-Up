@@ -273,6 +273,14 @@ public final class StatFormulas {
 	 * Wisdom's spell haste (with the RPG Series' Spell Power): +0.5% per point, so +50% at 100. The value is in Spell
 	 * Power's haste attribute points (100 = normal speed), added on top.
 	 */
+	/**
+	 * Wisdom's magic damage (FreshOrangeSlices, 2026-11-25: "lets make it give % bonus dmg for magic"): +1% Spell Power per
+	 * point, as a share (1.0 at 100: twice the damage), for whichever magic mods are installed.
+	 */
+	public static double wisdomSpellPower(int points) {
+		return 0.01 * Math.max(0, points);
+	}
+
 	public static double wisdomSpellHaste(int points) {
 		return 0.5 * Math.max(0, points);
 	}

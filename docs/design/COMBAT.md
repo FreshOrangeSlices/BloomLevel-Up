@@ -25,7 +25,7 @@ Tempo
  | 2x baseline attack speed/recovery.
  | 
 Critical
- | Increases the damage of successful Minecraft critical hits; does not add crit chance.
+ | Increases the damage of successful Minecraft critical hits; does not add crit chance. Spells crit too (FreshOrangeSlices, 2026-11-25): Spell Power's spells by their own roll, with Critical raising their crit damage the same way; Iron's Spells' (no crit of their own) at the player's spell crit chance (Spell Power's attribute, else 5%), for the same multiplier.
  | The entire successful critical hit deals 4x damage.
  | 
 Penetration

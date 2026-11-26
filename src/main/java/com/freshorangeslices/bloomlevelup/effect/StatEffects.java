@@ -66,6 +66,13 @@ public final class StatEffects {
 	public static final ModifierId WISDOM_HASTE_MOD = ModifierId.of("stat/wisdom_spell_haste");
 	/** Spell Power's spell haste (the RPG Series): faster casting and shorter spell cooldowns. Absent without it. */
 	private static final net.minecraft.resources.ResourceLocation SPELL_HASTE = new net.minecraft.resources.ResourceLocation("spell_power", "haste");
+	public static final ModifierId WISDOM_POWER_MOD = ModifierId.of("stat/wisdom_spell_power");
+	public static final ModifierId CRITICAL_SPELL_MOD = ModifierId.of("stat/critical_spell_damage");
+	/** Spell Power's own Spell Power (points of 100: 110 is +10%) and spell crit damage (150 is x1.5). Absent without it. */
+	private static final net.minecraft.resources.ResourceLocation SPELL_POWER = new net.minecraft.resources.ResourceLocation("spell_power", "generic");
+	private static final net.minecraft.resources.ResourceLocation SPELL_CRIT_DAMAGE = new net.minecraft.resources.ResourceLocation("spell_power", "critical_damage");
+	/** Iron's Spells' Spell Power (a share of 1: 1.1 is +10%). Absent without it. */
+	private static final net.minecraft.resources.ResourceLocation IRONS_SPELL_POWER = new net.minecraft.resources.ResourceLocation("irons_spellbooks", "spell_power");
 
 	/** Power: +6 attack damage at 100 points (first-pass linear, per the Combat doc). */
 	public static final double POWER_PER_POINT = 0.06;
@@ -193,7 +200,25 @@ public final class StatEffects {
 					AttributeModifier.Operation.ADDITION));
 		}
 
+		// Wisdom: +1% magic damage per point, for Spell Power's spells and Iron's Spells' (x2 at 100), where they're installed.
+		double wisdomPower = StatFormulas.wisdomSpellPower(service.statValue(profile, com.freshorangeslices.bloomlevelup.skill.misc.MiscIds.WISDOM));
+		addIfPresent(modifiers, SPELL_POWER, WISDOM_POWER_MOD, wisdomPower * 100.0, AttributeModifier.Operation.ADDITION);
+		addIfPresent(modifiers, IRONS_SPELL_POWER, WISDOM_POWER_MOD, wisdomPower, AttributeModifier.Operation.MULTIPLY_BASE);
+
+		// Critical: a spell's crit hits as hard as a weapon's (Spell Power's spells crit by its own roll, at x1.5 before this).
+		double critBonus = StatFormulas.criticalMultiplier(service.statValue(profile, com.freshorangeslices.bloomlevelup.skill.combat.CombatIds.CRITICAL)) - 1.5;
+		addIfPresent(modifiers, SPELL_CRIT_DAMAGE, CRITICAL_SPELL_MOD, critBonus * 100.0, AttributeModifier.Operation.ADDITION);
+
 		return modifiers;
+	}
+
+	private static void addIfPresent(List<HeldModifier> modifiers, net.minecraft.resources.ResourceLocation id, ModifierId modifier, double amount,
+			AttributeModifier.Operation operation) {
+		net.minecraft.world.entity.ai.attributes.Attribute attribute = net.minecraftforge.registries.ForgeRegistries.ATTRIBUTES.getValue(id);
+
+		if (attribute != null && net.minecraftforge.registries.ForgeRegistries.ATTRIBUTES.containsKey(id)) {
+			modifiers.add(new HeldModifier(attribute, modifier, amount, operation));
+		}
 	}
 
 	/**

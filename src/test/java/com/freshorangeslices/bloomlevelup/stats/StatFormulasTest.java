@@ -192,6 +192,10 @@ class StatFormulasTest {
 		assertEquals(0.0, StatFormulas.wisdomSpellHaste(0), 1e-9);
 		assertEquals(50.0, StatFormulas.wisdomSpellHaste(100), 1e-9);
 		assertEquals(75.0, StatFormulas.wisdomSpellHaste(150), 1e-9);
+		// Magic damage: +1% Spell Power a point, twice the damage at 100, and on past 100.
+		assertEquals(0.0, StatFormulas.wisdomSpellPower(0), 1e-9);
+		assertEquals(1.0, StatFormulas.wisdomSpellPower(100), 1e-9);
+		assertEquals(1.5, StatFormulas.wisdomSpellPower(150), 1e-9);
 		assertEquals(15, StatFormulas.scaledXp(3, 5.0, new java.util.Random(1)));
 		assertEquals(0, StatFormulas.scaledXp(0, 5.0, new java.util.Random(1)));
 		assertEquals(1.0, StatFormulas.enduranceExhaustionFactor(0), 1e-9);

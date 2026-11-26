@@ -16,6 +16,8 @@ import com.freshorangeslices.legionwarex.night.NightEvents;
 import com.freshorangeslices.legionwarex.world.AlwaysDespawn;
 import com.freshorangeslices.legionwarex.world.BossDrops;
 import com.freshorangeslices.legionwarex.roam.Roamers;
+import com.freshorangeslices.legionwarex.magic.MagicBridge;
+import com.freshorangeslices.legionwarex.magic.Tomes;
 import com.freshorangeslices.legionwarex.world.GearTuning;
 import com.freshorangeslices.legionwarex.harvest.HarvestCourt;
 import com.freshorangeslices.legionwarex.sentinel.SentinelCommand;
@@ -62,6 +64,7 @@ import org.slf4j.Logger;
  * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/);
  * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, mobs other mobs kill
  * drop nothing unless a player took part, zombies get no endless buffs, and a few mobs never join a world at all (world/);
+ * both magic mods' gear counts for both, and Fabled Weaponry's tomes for all magic (magic/);
  * roaming bosses wait their days, and the quiet ones drop nothing, pay more XP and leave you alone until hit (roam/);
  * players and companions can wear their armor hidden (armor/). The pack was
  * LegionWareX at first and is Warionex now; the mod id, commands and saved data keep the first name.
@@ -118,6 +121,9 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(BossDrops.class);
 		MinecraftForge.EVENT_BUS.register(Roamers.class);
 		MinecraftForge.EVENT_BUS.register(AlwaysDespawn.class);
+		MinecraftForge.EVENT_BUS.register(MagicBridge.class);
+		MinecraftForge.EVENT_BUS.register(Tomes.class);
+		MagicBridge.registerCurios();
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);

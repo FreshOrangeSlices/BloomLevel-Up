@@ -1,15 +1,11 @@
-"""How Jewelry and Relics are got: their recipes, loot, trades and config files.
+"""The magic ceiling, and spell power on both sides: how Spell Power and Iron's Spells define their stats, and what the gear gives.
 
-Was: accessory mods for the empty slots: Artifacts, Jewelry, Archers, Relics, Wizards.
-
-For each: the Curios slots it defines and gives players, the items each slot tag takes (Curios' own and Spell Engine's).
-For Artifacts also: every item's tooltip text, its game rules (the knobs and their defaults), where it is found
-(loot modifiers and its own loot tables) and the mobs that wear one.
+Spell Power and Iron's Spells: attribute definitions (base, min, max) and how spell damage reads them. Gear: every
+attribute modifier on Wizards', Jewelry's, Paladins' and Iron's armor, jewelry and weapons, from their own data or code.
 """
 import io, json, os, re, subprocess, urllib.parse, urllib.request, zipfile
-from collections import defaultdict
 
-UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (accessory mods)"}
+UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (spell power check)"}
 
 
 def get(url):
@@ -21,93 +17,157 @@ def get(url):
     return None
 
 
-def versions(slug):
-    res = get(f"https://api.modrinth.com/v2/project/{slug}/version?loaders=" + urllib.parse.quote('["forge"]')
-              + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
-    try:
-        return json.loads(res) if res else []
-    except Exception:
-        return []
+def modrinth(slug):
+    res = get(f"https://api.modrinth.com/v2/project/{slug}/version?loaders=" + urllib.parse.quote('["forge"]') + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
+    v = json.loads(res)[0]
+    f = next(x for x in v["files"] if x["primary"])
+    return v["version_number"], get(f["url"]), [d.get("project_id") for d in v["dependencies"] if d["dependency_type"] == "required"]
 
 
-def find(slugs, query):
-    for slug in slugs:
-        v = versions(slug)
-        if v:
-            return slug, v[0]
-    res = get("https://api.modrinth.com/v2/search?limit=10&query=" + urllib.parse.quote(query) + "&facets="
-              + urllib.parse.quote('[["versions:1.20.1"],["categories:forge"]]'))
-    hits = json.loads(res)["hits"] if res else []
-    for h in hits:
-        v = versions(h["slug"])
-        if v:
-            return h["slug"] + " (search: " + h["title"] + " by " + h["author"] + ")", v[0]
-    return None, None
-
-
-def flat(text):
-    return " ".join(str(text).split())
+def decompile(path, cls):
+    r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True)
+    return r.stdout
 
 
 out = []
 p = out.append
+jars = json.load(open("probe/alljars.json"))
+paths = {}
+for slug in ("spell-power", "spell-engine", "irons-spells-n-spellbooks", "paladins-and-priests", "curios"):
+    urls = jars[slug]
+    data = None
+    for u in (urls if isinstance(urls, list) else [urls]):
+        data = get(u)
+        if data:
+            break
+    paths[slug] = slug + ".jar"
+    open(paths[slug], "wb").write(data)
+for slug in ("wizards", "jewelry", "relics-rpg"):
+    ver, data, deps = modrinth(slug)
+    paths[slug] = slug + ".jar"
+    open(paths[slug], "wb").write(data)
+    p(f"{slug} {ver} needs {deps}")
 
 
-def recipe_line(j):
-    t = j.get("type", "")
-    res = j.get("result", {})
-    res = res if isinstance(res, str) else (res.get("item", "") + (" x" + str(res.get("count")) if res.get("count") else ""))
-    if "pattern" in j:
-        keys = {k: (v.get("item") or ("#" + v.get("tag", "")) if isinstance(v, dict) else str(v)) for k, v in j.get("key", {}).items()}
-        return f"{t} {res} <= {' / '.join(j['pattern'])} where " + ", ".join(f"{k}={v}" for k, v in keys.items())
-    ings = j.get("ingredients") or [j.get("ingredient"), j.get("base"), j.get("addition"), j.get("template")]
-    flat_ings = []
-    for i in ings:
-        if isinstance(i, dict):
-            flat_ings.append(i.get("item") or ("#" + i.get("tag", "")))
-        elif isinstance(i, list):
-            flat_ings.append("|".join((x.get("item") or "#" + x.get("tag", "")) for x in i if isinstance(x, dict)))
-    return f"{t} {res} <= " + ", ".join(x for x in flat_ings if x)
-
-
-for slugs, query in [(["jewelry"], "jewelry rpg series"), (["relics-rpg", "relics"], "relics rpg series")]:
-    slug, v = find(slugs, query)
-    p(f"######## {slug} {v['version_number'] if v else 'NOT FOUND'}")
-    if not v:
-        continue
-    f = next(x for x in v["files"] if x["primary"])
-    open("m.jar", "wb").write(get(f["url"]))
-    z = zipfile.ZipFile("m.jar")
-    names = sorted(z.namelist())
-    p("   ---- recipes")
-    for n in names:
-        if re.match(r"data/[^/]+/recipes?/.+\.json$", n):
-            try:
-                p("   " + n.split("/")[-1][:-5] + ": " + recipe_line(json.loads(z.read(n))))
-            except Exception as e:
-                p(f"   {n}: <{e}> " + flat(z.read(n).decode("utf-8", "replace"))[:300])
-    p("   ---- other data and config files")
-    for n in names:
-        if n.endswith(".json") and not re.search(r"/recipes?/|/models?/|/blockstates/|/lang/|/advancements?/|/textures?/|/sounds|/particles/|/tags/blocks/|/animations/", n):
-            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:900]}")
-    p("   ---- code mentioning loot, trades or villagers (decompiled, matching lines)")
+def strings_with(path, word_re, limit=40):
+    z = zipfile.ZipFile(path)
     hits = []
-    for n in names:
-        if n.endswith(".class"):
+    for n in z.namelist():
+        if n.endswith(".class") and re.search(word_re.encode(), z.read(n)):
+            hits.append(n)
+    return hits[:limit]
+
+
+# Spell Power: attribute definitions and the damage formula.
+p("\n==== Spell Power: attributes")
+z = zipfile.ZipFile(paths["spell-power"])
+for n in z.namelist():
+    if n.endswith(".class") and re.search(r"(?i)(SpellSchools|SpellPower|SpellAttribute|SpellPowerMechanics|SpellSchool)\.class$", n):
+        text = decompile(paths["spell-power"], n[:-6].replace("/", "."))
+        for m in re.finditer(r"(?i)(new \w*Attribute\w*\(|RangedAttribute|createAttribute|baseValue|defaultValue|public static \w+ getSpellPower|double value|randomValue|criticalChance|return .*\* )", text):
+            p(f"  {n.rsplit('/', 1)[-1]}: " + " ".join(text[max(0, m.start() - 120):m.start() + 260].split()))
+lang_names = [n for n in z.namelist() if n.endswith("lang/en_us.json")]
+for ln in lang_names:
+    for k, v in json.loads(z.read(ln)).items():
+        if k.startswith("attribute"):
+            p(f"  lang {k} = {v}")
+
+# Iron's Spells: attribute registry.
+p("\n==== Iron's Spells: attributes")
+text = decompile(paths["irons-spells-n-spellbooks"], "io.redspace.ironsspellbooks.api.registry.AttributeRegistry")
+for m in re.finditer(r"register\(\"([a-z_]+)\"[^;]*;", text):
+    p("  " + " ".join(m.group(0).split())[:260])
+if not text.strip():
+    p("  (AttributeRegistry not found at that name)")
+
+# Iron's armor: the attributes each set gives.
+p("\n==== Iron's armor")
+z = zipfile.ZipFile(paths["irons-spells-n-spellbooks"])
+for n in sorted(z.namelist()):
+    if n.endswith(".class") and "/item/armor/" in n and "$" not in n and re.search(r"(?i)Materials?\.class$|ArmorMaterial", n):
+        text = decompile(paths["irons-spells-n-spellbooks"], n[:-6].replace("/", "."))
+        for line in text.splitlines():
+            if re.search(r"(?i)SPELL_POWER|MAX_MANA|MANA_REGEN|COOLDOWN|CAST_TIME|SPELL_RESIST|AttributeModifier", line):
+                p(f"  {n.rsplit('/', 1)[-1][:-6]}: " + " ".join(line.split())[:240])
+
+# Wizards, Jewelry, Paladins: their gear's attributes (data files first, then code).
+for slug in ("wizards", "jewelry", "relics-rpg", "paladins-and-priests"):
+    p(f"\n==== {slug}: gear attributes")
+    z = zipfile.ZipFile(paths[slug])
+    shown = 0
+    for n in sorted(z.namelist()):
+        if n.endswith(".json") and not n.startswith("assets/"):
             b = z.read(n)
-            if re.search(rb"(?i)loot|trade|villager|profession|chests/", b):
-                hits.append(n[:-6].replace("/", "."))
-    for cls in hits[:40]:
-        try:
-            r = subprocess.run(["java", "-jar", "cfr.jar", "m.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True, timeout=300)
-        except Exception:
-            continue
-        lines = [flat(l) for l in r.stdout.splitlines() if re.search(r'(?i)chests/|minecraft:|weight|chance|tier|price|emerald|level|trade|offer', l)]
+            if b"spell_power:" in b or b"attribute" in b.lower():
+                p(f"  {n}: " + " ".join(b.decode("utf-8", "replace").split())[:900])
+                shown += 1
+                if shown > 25:
+                    break
+    for n in sorted(z.namelist()):
+        if n.endswith(".class") and re.search(r"(?i)(Armors|Weapons|Group|Items|Jewel|Gems|Config)\w*\.class$", n) and "$" not in n:
+            b = z.read(n)
+            if b"spell_power" not in b and b"SpellSchools" not in b and b"EntityAttributes" not in b and b"Attributes" not in b:
+                continue
+            text = decompile(paths[slug], n[:-6].replace("/", "."))
+            lines = [" ".join(l.split()) for l in text.splitlines() if re.search(r"(?i)spell_power|SpellSchools|AttributeModifier|new ItemConfig\.Attribute|Attribute\.bonus|multiply|0\.\d+[fF]?\)", l)]
+            if lines:
+                p(f"  -- {n.rsplit('/', 1)[-1][:-6]}")
+                for l in lines[:40]:
+                    p("     " + l[:230])
+
+
+# ---- more for the magic ceiling
+IR = paths["irons-spells-n-spellbooks"]
+zi = zipfile.ZipFile(IR)
+p("\n==== Iron's: item registry lines with attributes (spellbooks, curios, staffs)")
+text = decompile(IR, "io.redspace.ironsspellbooks.registries.ItemRegistry")
+for l in text.splitlines():
+    if re.search(r"(?i)AttributeRegistry|Attributes\.|SpellBook|Curio|Ring|Amulet|Necklace|Staff|Talisman", l):
+        p("  " + " ".join(l.split())[:300])
+p("\n==== Iron's: curio and spellbook item classes (attribute lines)")
+for n in sorted(zi.namelist()):
+    if n.endswith(".class") and "$" not in n and re.search(r"/item/(curios|spell_books?|weapons|SpellBook|UniqueSpellBook|SimpleAttribute)", n):
+        t = decompile(IR, n[:-6].replace("/", "."))
+        lines = [" ".join(l.split()) for l in t.splitlines() if re.search(r"(?i)AttributeModifier|AttributeRegistry\.|Attributes\.|put\(", l)]
         if lines:
-            p(f"   -- {cls}")
-            for l in lines[:80]:
-                p("      " + l[:260])
+            p(f"  -- {n.rsplit('/', 1)[-1][:-6]}")
+            for l in lines[:20]:
+                p("     " + l[:240])
+p("\n==== Iron's: server config (upgrades, damage)")
+for cls in ("io.redspace.ironsspellbooks.config.ServerConfigs",):
+    t = decompile(IR, cls)
+    for l in t.splitlines():
+        if re.search(r"(?i)upgrade|define|comment", l):
+            p("  " + " ".join(l.split())[:260])
+p("\n==== Iron's: upgrade orb types")
+for n in sorted(zi.namelist()):
+    if n.endswith(".class") and re.search(r"(?i)UpgradeType|UpgradeTypes|UpgradeOrb", n) and "$" not in n:
+        t = decompile(IR, n[:-6].replace("/", "."))
+        for l in t.splitlines():
+            if re.search(r"(?i)new |0\.\d|AttributeRegistry|Operation", l):
+                p(f"  {n.rsplit('/', 1)[-1][:-6]}: " + " ".join(l.split())[:240])
+p("\n==== Iron's: every spell's numbers (base spell power, per level, max level, cooldown, cast time, mana) and its damage line")
+rows = []
+for n in sorted(zi.namelist()):
+    if n.endswith("Spell.class") and "/spells/" in n and "$" not in n and "Abstract" not in n:
+        t = decompile(IR, n[:-6].replace("/", "."))
+        def grab(rx):
+            m = re.search(rx, t)
+            return m.group(1) if m else "?"
+        dmg = [" ".join(l.split()) for l in t.splitlines() if re.search(r"(?i)getDamage|getSpellPower\(|damage\s*=|DamageSources\.applyDamage", l)]
+        rows.append(f"  {n.rsplit('/', 1)[-1][:-6]}: base {grab(r'baseSpellPower\s*=\s*([0-9.]+)')} +{grab(r'spellPowerPerLevel\s*=\s*([0-9.]+)')}/lvl, max lvl {grab(r'setMaxLevel\((\d+)')}, cd {grab(r'setCooldownSeconds\(([0-9.]+)')} s, cast {grab(r'castTime\s*=\s*(\d+)')} t, mana {grab(r'baseManaCost\s*=\s*(\d+)')}+{grab(r'manaCostPerLevel\s*=\s*(\d+)')}/lvl, school {grab(r'SchoolRegistry\.([A-Z_]+)')} :: " + " || ".join(dmg)[:500])
+for r in rows:
+    p(r)
+p("\n==== Spell Power: critical, haste and school attribute classes")
+SP = paths["spell-power"]
+zs = zipfile.ZipFile(SP)
+for n in sorted(zs.namelist()):
+    if n.endswith(".class") and re.search(r"(?i)(SpellPowerMechanics|SpellSchools|SpellPower|SpellStatusEffect|Attributes?)\.class$", n):
+        t = decompile(SP, n[:-6].replace("/", "."))
+        for l in t.splitlines():
+            if re.search(r"(?i)critical|haste|new .*Attribute|defaultValue|baseValue|clamp|Math\.|return .*\*", l):
+                p(f"  {n.rsplit('/', 1)[-1][:-6]}: " + " ".join(l.split())[:260])
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/accessory_sources.txt", "w").write("\n".join(out))
-open("report.txt", "w").write("\n".join(out))
+open("probe-out/spellmax.txt", "w").write("\n".join(out))
+open("report.txt", "w").write("done")

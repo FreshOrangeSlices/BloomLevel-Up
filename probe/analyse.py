@@ -1,4 +1,6 @@
-"""Accessory mods for the empty slots: Artifacts, Jewelry, Archers, Relics, Wizards.
+"""How Jewelry and Relics are got: their recipes, loot, trades and config files.
+
+Was: accessory mods for the empty slots: Artifacts, Jewelry, Archers, Relics, Wizards.
 
 For each: the Curios slots it defines and gives players, the items each slot tag takes (Curios' own and Spell Engine's).
 For Artifacts also: every item's tooltip text, its game rules (the knobs and their defaults), where it is found
@@ -49,90 +51,63 @@ def flat(text):
 
 out = []
 p = out.append
-mods = [
-    (["artifacts"], "artifacts ochotonida"),
-    (["jewelry"], "jewelry rpg series"),
-    (["archers"], "archers rpg series"),
-    (["relics-rpg", "relics", "rpg-series-relics"], "relics rpg series"),
-    (["wizards"], "wizards rpg series"),
-]
-for slugs, query in mods:
-    try:
-        slug, v = find(slugs, query)
-    except Exception as e:
-        p(f"######## {slugs[0]}: lookup failed {e}")
-        continue
-    p(f"######## {slugs[0]}: {slug} {v['version_number'] if v else 'NOT FOUND'}")
+
+
+def recipe_line(j):
+    t = j.get("type", "")
+    res = j.get("result", {})
+    res = res if isinstance(res, str) else (res.get("item", "") + (" x" + str(res.get("count")) if res.get("count") else ""))
+    if "pattern" in j:
+        keys = {k: (v.get("item") or ("#" + v.get("tag", "")) if isinstance(v, dict) else str(v)) for k, v in j.get("key", {}).items()}
+        return f"{t} {res} <= {' / '.join(j['pattern'])} where " + ", ".join(f"{k}={v}" for k, v in keys.items())
+    ings = j.get("ingredients") or [j.get("ingredient"), j.get("base"), j.get("addition"), j.get("template")]
+    flat_ings = []
+    for i in ings:
+        if isinstance(i, dict):
+            flat_ings.append(i.get("item") or ("#" + i.get("tag", "")))
+        elif isinstance(i, list):
+            flat_ings.append("|".join((x.get("item") or "#" + x.get("tag", "")) for x in i if isinstance(x, dict)))
+    return f"{t} {res} <= " + ", ".join(x for x in flat_ings if x)
+
+
+for slugs, query in [(["jewelry"], "jewelry rpg series"), (["relics-rpg", "relics"], "relics rpg series")]:
+    slug, v = find(slugs, query)
+    p(f"######## {slug} {v['version_number'] if v else 'NOT FOUND'}")
     if not v:
         continue
     f = next(x for x in v["files"] if x["primary"])
-    p(f"   file {f['filename']}; required: {[d.get('project_id') for d in v['dependencies'] if d['dependency_type'] == 'required']}")
-    data = get(f["url"])
-    open("m.jar", "wb").write(data)
+    open("m.jar", "wb").write(get(f["url"]))
     z = zipfile.ZipFile("m.jar")
-    names = z.namelist()
-    for n in sorted(names):
-        if re.match(r"data/[^/]+/curios/(slots|entities)/.+\.json$", n):
-            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:400]}")
-    for n in sorted(names):
-        m = re.match(r"data/([^/]+)/tags/items/(.+)\.json$", n)
-        if m and (m.group(1) in ("curios", "spell_engine", "trinkets") or "trinket" in m.group(2) or "quiver" in m.group(2)):
+    names = sorted(z.namelist())
+    p("   ---- recipes")
+    for n in names:
+        if re.match(r"data/[^/]+/recipes?/.+\.json$", n):
             try:
-                vals = [x if isinstance(x, str) else x.get("id", str(x)) for x in json.loads(z.read(n)).get("values", [])]
+                p("   " + n.split("/")[-1][:-5] + ": " + recipe_line(json.loads(z.read(n))))
             except Exception as e:
-                vals = [f"<{e}>"]
-            p(f"   tag #{m.group(1)}:{m.group(2)} ({len(vals)}): {', '.join(vals)}")
-    slotnames = set()
+                p(f"   {n}: <{e}> " + flat(z.read(n).decode("utf-8", "replace"))[:300])
+    p("   ---- other data and config files")
+    for n in names:
+        if n.endswith(".json") and not re.search(r"/recipes?/|/models?/|/blockstates/|/lang/|/advancements?/|/textures?/|/sounds|/particles/|/tags/blocks/|/animations/", n):
+            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:900]}")
+    p("   ---- code mentioning loot, trades or villagers (decompiled, matching lines)")
+    hits = []
     for n in names:
         if n.endswith(".class"):
             b = z.read(n)
-            for s in re.findall(rb"spell_(?:trinket|quiver|book)|curios:[a-z_]+", b):
-                slotnames.add(s.decode())
-    if slotnames:
-        p("   slot names in code: " + ", ".join(sorted(slotnames)))
-    if slugs[0] != "artifacts":
-        langs = [n for n in names if n.endswith("lang/en_us.json")]
-        for n in langs[:1]:
-            try:
-                lang = json.loads(z.read(n).decode("utf-8", "replace"))
-            except Exception:
-                continue
-            items = [f"{k.split('.')[-1]}={val}" for k, val in lang.items() if k.startswith("item.") and k.count(".") == 2]
-            p(f"   items ({len(items)}): " + "; ".join(items)[:3000])
-        continue
-    # ---- Artifacts in depth
-    lang = {}
-    for n in names:
-        if n.endswith("lang/en_us.json") and n.startswith("assets/artifacts/"):
-            lang = json.loads(z.read(n).decode("utf-8", "replace"))
-    items = sorted({k.split(".")[2] for k in lang if k.startswith("item.artifacts.") and k.count(".") == 2})
-    p(f"   ---- {len(items)} items, with their tooltips")
-    for it in items:
-        tips = [flat(val) for k, val in lang.items() if (it in k) and ("tooltip" in k)]
-        p(f"   {it} = {lang.get('item.artifacts.' + it)} :: " + " | ".join(tips)[:500])
-    other = [f"{k}={flat(val)}" for k, val in lang.items() if "tooltip" not in k and not k.startswith("item.artifacts.")]
-    p("   ---- other lang lines: " + " || ".join(other)[:3000])
-    p("   ---- game rules and config (decompiled)")
-    for n in sorted(names):
-        if n.endswith(".class") and re.search(r"(?i)gamerule|config", n) and "$" not in n:
-            cls = n[:-6].replace("/", ".")
-            try:
-                r = subprocess.run(["java", "-jar", "cfr.jar", "m.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True, timeout=300)
-            except Exception:
-                continue
-            lines = [flat(l) for l in r.stdout.splitlines() if re.search(r'"[a-z][A-Za-z0-9_.]+"\s*,\s*-?[0-9.]+|create(Boolean|Integer|Double|Float)|Value\(|define\(|\.comment\(', l)]
-            if lines:
-                p(f"   -- {cls} ({len(lines)} lines)")
-                for l in lines[:400]:
-                    p("      " + l[:240])
-    p("   ---- loot (modifiers, tables)")
-    for n in sorted(names):
-        if n.startswith("data/") and ("loot_modifiers" in n or "global_loot" in n or "/loot_tables/" in n) and n.endswith(".json"):
-            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:700]}")
-    for n in sorted(names):
-        if n.startswith("data/") and "/tags/" in n and re.search(r"(?i)entity|wear|equip|archaeology|suspicious", n) and n.endswith(".json"):
-            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:500]}")
+            if re.search(rb"(?i)loot|trade|villager|profession|chests/", b):
+                hits.append(n[:-6].replace("/", "."))
+    for cls in hits[:40]:
+        try:
+            r = subprocess.run(["java", "-jar", "cfr.jar", "m.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True, timeout=300)
+        except Exception:
+            continue
+        lines = [flat(l) for l in r.stdout.splitlines() if re.search(r'(?i)chests/|minecraft:|weight|chance|tier|price|emerald|level|trade|offer', l)]
+        if lines:
+            p(f"   -- {cls}")
+            for l in lines[:80]:
+                p("      " + l[:260])
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/accessories.txt", "w").write("\n".join(out))
+open("probe-out/accessory_sources.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("\n".join(out))

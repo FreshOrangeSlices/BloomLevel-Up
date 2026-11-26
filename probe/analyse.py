@@ -82,7 +82,7 @@ for mod, urls in jars.items():
         except Exception:
             continue
         for line in r.stdout.splitlines():
-            if re.search(r"SlotTypeMessage|SlotTypePreset|registerCurio|(?i)talisman|getSlotType|addSlotModifier|addTransientSlotModifier|curios:", line):
+            if re.search(r"SlotTypeMessage|SlotTypePreset|registerCurio|[Tt]alisman|getSlotType|addSlotModifier|addTransientSlotModifier|curios:", line):
                 (register_calls if "registerCurio" in line else imc).append((mod, cls, flat(line)[:300]))
 
 p("==== Slot definitions (data/*/curios/slots)")

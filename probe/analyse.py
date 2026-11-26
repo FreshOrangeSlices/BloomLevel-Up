@@ -49,6 +49,11 @@ for mod, urls in jars.items():
         m = re.match(r"data/([^/]+)/curios/entities/(.+)\.json$", n)
         if m:
             entities.append((mod, n, flat(z.read(n).decode("utf-8", "replace"))))
+        m2 = re.match(r"data/([^/]+)/tags/items/(spell_trinket|spell_quiver|spell_books|spell_book|trinkets?|talisman.*)\.json$", n)
+        if m2:
+            tags["#" + m2.group(1) + ":" + m2.group(2)].append((mod, [v if isinstance(v, str) else v.get("id", str(v)) for v in json.loads(z.read(n).decode("utf-8", "replace")).get("values", [])], False))
+        if b"talisman" in n.encode() and n.endswith(".json") and "curios" not in n:
+            entities.append((mod, n, flat(z.read(n).decode("utf-8", "replace"))[:300]))
         m = re.match(r"data/curios/tags/items/(.+)\.json$", n)
         if m:
             try:
@@ -64,18 +69,20 @@ for mod, urls in jars.items():
         b = z.read(n)
         if b"top/theillusivec4/curios/api/type/capability/ICurio" in b:
             curio_classes[mod].append(n[:-6].replace("/", "."))
+        if mod == "l_enders-cataclysm" and (b"talisman" in b or b"Sandstorm" in n.encode()):
+            hits.append(n[:-6].replace("/", "."))
         if b"SlotTypeMessage" in b or b"registerCurio" in b or b"SlotTypePreset" in b:
             hits.append(n[:-6].replace("/", "."))
     if mod == "curios":
         continue
-    for cls in hits[:12]:
+    for cls in hits[:30]:
         try:
             r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls.split("$")[0]) + "$"],
                                capture_output=True, text=True, timeout=300)
         except Exception:
             continue
         for line in r.stdout.splitlines():
-            if re.search(r"SlotTypeMessage|SlotTypePreset|registerCurio", line):
+            if re.search(r"SlotTypeMessage|SlotTypePreset|registerCurio|(?i)talisman|getSlotType|addSlotModifier|addTransientSlotModifier|curios:", line):
                 (register_calls if "registerCurio" in line else imc).append((mod, cls, flat(line)[:300]))
 
 p("==== Slot definitions (data/*/curios/slots)")

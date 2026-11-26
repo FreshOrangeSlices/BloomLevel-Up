@@ -1,4 +1,6 @@
-"""Chunk 3 facts, round 4: Artifacts' and Relics' slots and Artifacts' rule names.
+"""Chunk 3 facts, round 5: where Artifacts are injected, and Jewelry's gems, recipes, ores and jeweler.
+
+Was round 4: Artifacts' and Relics' slots and Artifacts' rule names.
 
 Was chunk 3 facts: trophy pieces, Curios slot merging, Cataclysm belts, Artifacts game rule names, modded chests.
 
@@ -37,27 +39,35 @@ def decompile(path, cls):
 
 out = []
 p = out.append
-for slug in ("artifacts", "relics-rpg"):
-    try:
-        ver, data, deps = modrinth(slug)
-    except Exception as e:
-        p(f"==== {slug}: not found ({e})")
-        continue
-    open("a.jar", "wb").write(data)
-    z = zipfile.ZipFile("a.jar")
-    p(f"==== {slug} {ver} (deps {deps})")
-    for n in sorted(z.namelist()):
-        if re.search(r"data/[^/]+/(curios/|tags/items/)", n) and n.endswith(".json"):
-            body = " ".join(z.read(n).decode(errors="replace").split())
-            p(f"   {n}: {body[:900]}")
-    if slug == "artifacts":
-        t = decompile("a.jar", "artifacts.registry.ModGameRules")
-        for l in t.splitlines():
-            if re.search(r"(integer|boolean|double|float)Value\(|Value\(Mod|ModItems\.", l):
-                p("   rule: " + " ".join(l.split())[:300])
-    mods = [n for n in z.namelist() if n.endswith("mods.toml")]
-    for n in mods:
-        p("   " + n + ": " + " ".join(re.findall(r'modId\s*=\s*"([^"]+)"', z.read(n).decode())))
+ver, data, deps = modrinth("artifacts")
+open("a.jar", "wb").write(data)
+z = zipfile.ZipFile("a.jar")
+p(f"==== artifacts {ver}: injected tables and their chances")
+for n in sorted(z.namelist()):
+    if "/loot_tables/inject/" in n or "/loot_modifiers/" in n:
+        body = z.read(n).decode(errors="replace")
+        probs = re.findall(r'"(?:default_probability|chance|probability)"\s*:\s*([0-9.]+)', body)
+        tables = re.findall(r'"(?:loot_table_id|lootTable|loot_table)"\s*:\s*"([^"]+)"', body)
+        p(f"   {n.split('/loot_')[1]}: chance {probs} {tables[:3]}")
+p("")
+ver, data, deps = modrinth("jewelry")
+open("j.jar", "wb").write(data)
+z = zipfile.ZipFile("j.jar")
+p(f"==== jewelry {ver} (deps {deps})")
+for n in sorted(z.namelist()):
+    if re.search(r"data/[^/]+/(curios/|tags/items/|worldgen/|recipes/|tags/point_of_interest|tags/worldgen)", n) and n.endswith(".json"):
+        body = " ".join(z.read(n).decode(errors="replace").split())
+        p(f"   {n}: {body[:500]}")
+for n in z.namelist():
+    if n.endswith("mods.toml"):
+        p("   mods: " + " ".join(re.findall(r'modId\s*=\s*"([^"]+)"', z.read(n).decode())))
+classes = [n[:-6].replace("/", ".") for n in z.namelist() if n.endswith(".class") and re.search(r"(Items?|Gems?|Villag|Ore|Feature|Config)", n.split("/")[-1])]
+p("   classes: " + ", ".join(classes)[:1500])
+for c in classes:
+    t = decompile("j.jar", c)
+    for l in t.splitlines():
+        if re.search(r"spell_power|AttributeModifier|new \w*Config|ItemConfig|attribute|Ore|height|y_|VillagerProfession|poi|trade|Offer|\bnew \w+Entry", l, re.I) and len(l.strip()) > 8:
+            p(f"   {c.split('.')[-1]}: " + " ".join(l.split())[:260])
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/chunk3d.txt", "w").write("\n".join(out))
+open("probe-out/chunk3e.txt", "w").write("\n".join(out)[:400000])
 open("report.txt", "w").write("done")

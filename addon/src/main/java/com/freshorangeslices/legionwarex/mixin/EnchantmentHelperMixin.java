@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * The add-on's one mixin: vanilla's list of enchantments to pick from at a given level (the enchanting table, books
+ * Vanilla's list of enchantments to pick from at a given level (the enchanting table, books
  * included; a mob's gear; enchant_with_levels loot) never holds a switched-off one ({@link DeadEnchantments}). No event
  * covers the table in 1.20.1.
  */

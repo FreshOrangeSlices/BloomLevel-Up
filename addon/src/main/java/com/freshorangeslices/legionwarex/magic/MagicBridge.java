@@ -244,7 +244,17 @@ public final class MagicBridge {
 
 	// ---------------------------------------------------------------- events
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	/**
+	 * The item and Curios listeners, added once every mod has loaded (from the add-on's load-complete step): a mod that
+	 * adds its own spell bonuses on the same event at the same last priority (Wizards' armor does) runs before them then,
+	 * since listeners of one priority are called in the order they were added. Added at mod construction, the copies
+	 * missed those bonuses (the pack test's magic check: Wizards' robes, "no copy").
+	 */
+	public static void registerLate() {
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, false, ItemAttributeModifierEvent.class, MagicBridge::onItemModifiers);
+		registerCurios();
+	}
+
 	public static void onItemModifiers(ItemAttributeModifierEvent event) {
 		remember(event.getItemStack(), addCopies(event.getModifiers(), event::addModifier));
 	}
@@ -361,7 +371,7 @@ public final class MagicBridge {
 				}
 
 				// An item whose spell bonuses are all flat school ones (Wizards' robes: +1 Fire Spell Power) has nothing to copy, by design.
-				String verdict = !copied.isEmpty() ? "copies " + copied : copyable == 0 ? "nothing to copy " + own : "no copy";
+				String verdict = !copied.isEmpty() ? "copies " + copied : copyable == 0 ? "nothing to copy " + own : "no copy of " + own;
 				parts.add(entry.getKey() + ": " + verdict + " (own " + own.size() + ")");
 			}
 

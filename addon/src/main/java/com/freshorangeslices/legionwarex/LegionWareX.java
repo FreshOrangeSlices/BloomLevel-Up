@@ -135,7 +135,8 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(AlwaysDespawn.class);
 		MinecraftForge.EVENT_BUS.register(MagicBridge.class);
 		MinecraftForge.EVENT_BUS.register(Tomes.class);
-		MagicBridge.registerCurios();
+		// Last of all: after every mod has added its own listeners (MagicBridge.registerLate).
+		modBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent event) -> event.enqueueWork(MagicBridge::registerLate));
 		MinecraftForge.EVENT_BUS.register(Trophies.class);
 		Trophies.register();
 		SharedSlots.register();

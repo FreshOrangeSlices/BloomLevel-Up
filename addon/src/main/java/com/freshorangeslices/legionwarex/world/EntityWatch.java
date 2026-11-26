@@ -185,6 +185,48 @@ public final class EntityWatch {
 		report(level.getServer(), id, entity, name(entity) + " was removed" + age + ": " + entity.getRemovalReason() + health + hurt + "; calls: " + calls());
 	}
 
+	/**
+	 * While a watch is on, a player's use of an item from the watched entity's mod, to the log: started, nearly done,
+	 * finished or let go (with the calls), so a summon that never comes shows whether the use itself was cut short (the
+	 * Undying Tentacle: its Ghost Tentacles come only when the 2-second use finishes).
+	 */
+	private static void use(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent event, String what) {
+		if (WATCHERS.isEmpty() || !(event.getEntity() instanceof net.minecraft.world.entity.player.Player player) || player.level().isClientSide()) {
+			return;
+		}
+
+		ResourceLocation item = ForgeRegistries.ITEMS.getKey(event.getItem().getItem());
+
+		if (item == null || WATCHERS.keySet().stream().noneMatch(id -> id.getNamespace().equals(item.getNamespace()))) {
+			return;
+		}
+
+		LegionWareX.LOGGER.info("LegionWareX watch: {} {} {} ({} ticks left{})", player.getGameProfile().getName(), what, item, event.getDuration(),
+				what.equals("let go of") ? "; calls: " + calls() : "");
+	}
+
+	@SubscribeEvent
+	public static void onUseStart(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent.Start event) {
+		use(event, "started using");
+	}
+
+	@SubscribeEvent
+	public static void onUseTick(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent.Tick event) {
+		if (event.getDuration() == 1) {
+			use(event, "is about to finish using");
+		}
+	}
+
+	@SubscribeEvent
+	public static void onUseStop(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent.Stop event) {
+		use(event, "let go of");
+	}
+
+	@SubscribeEvent
+	public static void onUseFinish(net.minecraftforge.event.entity.living.LivingEntityUseItemEvent.Finish event) {
+		use(event, "finished using");
+	}
+
 	@SubscribeEvent
 	public static void onServerStopped(ServerStoppedEvent event) {
 		WATCHERS.clear();

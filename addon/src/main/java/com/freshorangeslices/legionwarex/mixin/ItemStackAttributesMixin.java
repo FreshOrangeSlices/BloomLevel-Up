@@ -13,18 +13,20 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * After Spell Engine's own mixin on the same method has replaced a Spell Engine item's attributes (priority 1500: applied
- * after the default 1000, so this runs after it), Forge's attribute event is fired again on that result, so other mods'
- * and the add-on's additions count for those items too ({@link SpellEngineItems}).
+ * For Spell Engine's items, the answer comes at the method's head: Spell Engine's own attributes for the slot, put
+ * through Forge's attribute event, so other mods' and the add-on's additions count ({@link SpellEngineItems}). Spell
+ * Engine's own mixin, at the method's return, cancels there with its attributes alone, so a fix at the return would
+ * never run (the pack test's magic check: still "no copy" with one).
  */
-@Mixin(value = ItemStack.class, priority = 1500)
+@Mixin(ItemStack.class)
 public abstract class ItemStackAttributesMixin {
-	@Inject(method = "getAttributeModifiers", at = @At("RETURN"), cancellable = true)
-	private void legionwarex$eventAfterSpellEngine(EquipmentSlot slot, CallbackInfoReturnable<Multimap<Attribute, AttributeModifier>> info) {
+	@Inject(method = "getAttributeModifiers", at = @At("HEAD"), cancellable = true)
+	private void legionwarex$spellEngineThroughTheEvent(EquipmentSlot slot, CallbackInfoReturnable<Multimap<Attribute, AttributeModifier>> info) {
 		ItemStack stack = (ItemStack) (Object) this;
+		Multimap<Attribute, AttributeModifier> own = SpellEngineItems.forSlot(stack, slot);
 
-		if (SpellEngineItems.replaced(stack)) {
-			info.setReturnValue(ForgeHooks.getAttributeModifiers(stack, slot, info.getReturnValue()));
+		if (own != null) {
+			info.setReturnValue(ForgeHooks.getAttributeModifiers(stack, slot, own));
 		}
 	}
 }

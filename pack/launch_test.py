@@ -1303,7 +1303,7 @@ def magic_check(server):
     said = line.split("LegionWareX magic check: ", 1)[-1].strip()
     if not said:
         return [], ["magic: the add-on said nothing"]
-    failures = [f"magic: {part}" for part in said.split("; ") if part.endswith("no copy") or "no copy (" in part or "missing" in part]
+    failures = [f"magic: {part}" for part in said.split("; ") if "no copy" in part or "missing" in part]
     return failures, [f"magic: {said[:1500]}"]
 
 

@@ -1,121 +1,138 @@
-"""Curios in the pack: every slot each mod defines, the slots players get, and the items each slot takes."""
-import json, os, re, subprocess, urllib.request, zipfile
+"""Accessory mods for the empty slots: Artifacts, Jewelry, Archers, Relics, Wizards.
+
+For each: the Curios slots it defines and gives players, the items each slot tag takes (Curios' own and Spell Engine's).
+For Artifacts also: every item's tooltip text, its game rules (the knobs and their defaults), where it is found
+(loot modifiers and its own loot tables) and the mobs that wear one.
+"""
+import io, json, os, re, subprocess, urllib.parse, urllib.request, zipfile
 from collections import defaultdict
 
-UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (curios slots)"}
+UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (accessory mods)"}
 
 
-def get(urls):
-    for url in urls:
-        for _ in range(3):
-            try:
-                return urllib.request.urlopen(urllib.request.Request(url.replace(" ", "%20"), headers=UA), timeout=240).read()
-            except Exception:
-                pass
+def get(url):
+    for _ in range(3):
+        try:
+            return urllib.request.urlopen(urllib.request.Request(url.replace(" ", "%20"), headers=UA), timeout=240).read()
+        except Exception:
+            pass
     return None
 
 
+def versions(slug):
+    res = get(f"https://api.modrinth.com/v2/project/{slug}/version?loaders=" + urllib.parse.quote('["forge"]')
+              + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
+    try:
+        return json.loads(res) if res else []
+    except Exception:
+        return []
+
+
+def find(slugs, query):
+    for slug in slugs:
+        v = versions(slug)
+        if v:
+            return slug, v[0]
+    res = get("https://api.modrinth.com/v2/search?limit=10&query=" + urllib.parse.quote(query) + "&facets="
+              + urllib.parse.quote('[["versions:1.20.1"],["categories:forge"]]'))
+    hits = json.loads(res)["hits"] if res else []
+    for h in hits:
+        v = versions(h["slug"])
+        if v:
+            return h["slug"] + " (search: " + h["title"] + " by " + h["author"] + ")", v[0]
+    return None, None
+
+
 def flat(text):
-    return " ".join(text.split())
+    return " ".join(str(text).split())
 
 
-jars = json.load(open("probe/alljars.json"))
 out = []
 p = out.append
-slots = defaultdict(list)       # slot -> [(mod, file, json)]
-entities = []                   # (mod, file, json)
-tags = defaultdict(list)        # slot -> [(mod, values, replace)]
-imc = []                        # (mod, cls, line)
-curio_classes = defaultdict(list)
-register_calls = []
-missing = []
-for mod, urls in jars.items():
-    data = get(urls if isinstance(urls, list) else [urls])
-    if not data:
-        missing.append(mod)
-        continue
-    path = "jar.jar"
-    open(path, "wb").write(data)
+mods = [
+    (["artifacts"], "artifacts ochotonida"),
+    (["jewelry"], "jewelry rpg series"),
+    (["archers"], "archers rpg series"),
+    (["relics-rpg", "relics", "rpg-series-relics"], "relics rpg series"),
+    (["wizards"], "wizards rpg series"),
+]
+for slugs, query in mods:
     try:
-        z = zipfile.ZipFile(path)
-    except Exception:
-        missing.append(mod + " (bad zip)")
+        slug, v = find(slugs, query)
+    except Exception as e:
+        p(f"######## {slugs[0]}: lookup failed {e}")
         continue
+    p(f"######## {slugs[0]}: {slug} {v['version_number'] if v else 'NOT FOUND'}")
+    if not v:
+        continue
+    f = next(x for x in v["files"] if x["primary"])
+    p(f"   file {f['filename']}; required: {[d.get('project_id') for d in v['dependencies'] if d['dependency_type'] == 'required']}")
+    data = get(f["url"])
+    open("m.jar", "wb").write(data)
+    z = zipfile.ZipFile("m.jar")
     names = z.namelist()
-    for n in names:
-        m = re.match(r"data/([^/]+)/curios/slots/(.+)\.json$", n)
-        if m:
-            slots[m.group(2)].append((mod, n, flat(z.read(n).decode("utf-8", "replace"))))
-        m = re.match(r"data/([^/]+)/curios/entities/(.+)\.json$", n)
-        if m:
-            entities.append((mod, n, flat(z.read(n).decode("utf-8", "replace"))))
-        m2 = re.match(r"data/([^/]+)/tags/items/(spell_trinket|spell_quiver|spell_books|spell_book|trinkets?|talisman.*)\.json$", n)
-        if m2:
-            tags["#" + m2.group(1) + ":" + m2.group(2)].append((mod, [v if isinstance(v, str) else v.get("id", str(v)) for v in json.loads(z.read(n).decode("utf-8", "replace")).get("values", [])], False))
-        if b"talisman" in n.encode() and n.endswith(".json") and "curios" not in n:
-            entities.append((mod, n, flat(z.read(n).decode("utf-8", "replace"))[:300]))
-        m = re.match(r"data/curios/tags/items/(.+)\.json$", n)
-        if m:
+    for n in sorted(names):
+        if re.match(r"data/[^/]+/curios/(slots|entities)/.+\.json$", n):
+            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:400]}")
+    for n in sorted(names):
+        m = re.match(r"data/([^/]+)/tags/items/(.+)\.json$", n)
+        if m and (m.group(1) in ("curios", "spell_engine", "trinkets") or "trinket" in m.group(2) or "quiver" in m.group(2)):
             try:
-                j = json.loads(z.read(n).decode("utf-8", "replace"))
-                vals = [v if isinstance(v, str) else v.get("id", str(v)) for v in j.get("values", [])]
-                tags[m.group(1)].append((mod, vals, j.get("replace", False)))
+                vals = [x if isinstance(x, str) else x.get("id", str(x)) for x in json.loads(z.read(n)).get("values", [])]
             except Exception as e:
-                tags[m.group(1)].append((mod, ["<unreadable: %s>" % e], False))
-    hits = []
+                vals = [f"<{e}>"]
+            p(f"   tag #{m.group(1)}:{m.group(2)} ({len(vals)}): {', '.join(vals)}")
+    slotnames = set()
     for n in names:
-        if not n.endswith(".class"):
-            continue
-        b = z.read(n)
-        if b"top/theillusivec4/curios/api/type/capability/ICurio" in b:
-            curio_classes[mod].append(n[:-6].replace("/", "."))
-        if mod == "l_enders-cataclysm" and (b"talisman" in b or b"Sandstorm" in n.encode()):
-            hits.append(n[:-6].replace("/", "."))
-        if b"SlotTypeMessage" in b or b"registerCurio" in b or b"SlotTypePreset" in b:
-            hits.append(n[:-6].replace("/", "."))
-    if mod == "curios":
+        if n.endswith(".class"):
+            b = z.read(n)
+            for s in re.findall(rb"spell_(?:trinket|quiver|book)|curios:[a-z_]+", b):
+                slotnames.add(s.decode())
+    if slotnames:
+        p("   slot names in code: " + ", ".join(sorted(slotnames)))
+    if slugs[0] != "artifacts":
+        langs = [n for n in names if n.endswith("lang/en_us.json")]
+        for n in langs[:1]:
+            try:
+                lang = json.loads(z.read(n).decode("utf-8", "replace"))
+            except Exception:
+                continue
+            items = [f"{k.split('.')[-1]}={val}" for k, val in lang.items() if k.startswith("item.") and k.count(".") == 2]
+            p(f"   items ({len(items)}): " + "; ".join(items)[:3000])
         continue
-    for cls in hits[:30]:
-        try:
-            r = subprocess.run(["java", "-jar", "cfr.jar", path, "--jarfilter", "^" + re.escape(cls.split("$")[0]) + "$"],
-                               capture_output=True, text=True, timeout=300)
-        except Exception:
-            continue
-        for line in r.stdout.splitlines():
-            if re.search(r"SlotTypeMessage|SlotTypePreset|registerCurio|[Tt]alisman|getSlotType|addSlotModifier|addTransientSlotModifier|curios:", line):
-                (register_calls if "registerCurio" in line else imc).append((mod, cls, flat(line)[:300]))
-
-p("==== Slot definitions (data/*/curios/slots)")
-for slot in sorted(slots):
-    for mod, n, j in slots[slot]:
-        p(f"{slot} | {mod} | {n} | {j[:400]}")
-p("")
-p("==== Slots given to entities (data/*/curios/entities)")
-for mod, n, j in entities:
-    p(f"{mod} | {n} | {j[:600]}")
-p("")
-p("==== Slots registered in code (IMC)")
-for mod, cls, line in imc:
-    p(f"{mod} | {cls} | {line}")
-p("")
-p("==== Items per slot tag (data/curios/tags/items)")
-for slot in sorted(tags):
-    total = sum(len(v) for _, v, _ in tags[slot])
-    p(f"-- {slot}: {total} entries")
-    for mod, vals, rep in tags[slot]:
-        p(f"   {mod}{' (replace)' if rep else ''}: {', '.join(vals)}")
-p("")
-p("==== Curio item classes in code (ICurioItem / ICurio), per mod")
-for mod in sorted(curio_classes):
-    cl = curio_classes[mod]
-    p(f"{mod}: {len(cl)}: " + ", ".join(c.split('.')[-1] for c in cl[:60]))
-p("")
-p("==== registerCurio calls")
-for mod, cls, line in register_calls:
-    p(f"{mod} | {cls} | {line}")
-p("")
-p("==== Jars not read: " + ", ".join(missing))
+    # ---- Artifacts in depth
+    lang = {}
+    for n in names:
+        if n.endswith("lang/en_us.json") and n.startswith("assets/artifacts/"):
+            lang = json.loads(z.read(n).decode("utf-8", "replace"))
+    items = sorted({k.split(".")[2] for k in lang if k.startswith("item.artifacts.") and k.count(".") == 2})
+    p(f"   ---- {len(items)} items, with their tooltips")
+    for it in items:
+        tips = [flat(val) for k, val in lang.items() if (it in k) and ("tooltip" in k)]
+        p(f"   {it} = {lang.get('item.artifacts.' + it)} :: " + " | ".join(tips)[:500])
+    other = [f"{k}={flat(val)}" for k, val in lang.items() if "tooltip" not in k and not k.startswith("item.artifacts.")]
+    p("   ---- other lang lines: " + " || ".join(other)[:3000])
+    p("   ---- game rules and config (decompiled)")
+    for n in sorted(names):
+        if n.endswith(".class") and re.search(r"(?i)gamerule|config", n) and "$" not in n:
+            cls = n[:-6].replace("/", ".")
+            try:
+                r = subprocess.run(["java", "-jar", "cfr.jar", "m.jar", "--jarfilter", "^" + re.escape(cls) + "$"], capture_output=True, text=True, timeout=300)
+            except Exception:
+                continue
+            lines = [flat(l) for l in r.stdout.splitlines() if re.search(r'"[a-z][A-Za-z0-9_.]+"\s*,\s*-?[0-9.]+|create(Boolean|Integer|Double|Float)|Value\(|define\(|\.comment\(', l)]
+            if lines:
+                p(f"   -- {cls} ({len(lines)} lines)")
+                for l in lines[:400]:
+                    p("      " + l[:240])
+    p("   ---- loot (modifiers, tables)")
+    for n in sorted(names):
+        if n.startswith("data/") and ("loot_modifiers" in n or "global_loot" in n or "/loot_tables/" in n) and n.endswith(".json"):
+            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:700]}")
+    for n in sorted(names):
+        if n.startswith("data/") and "/tags/" in n and re.search(r"(?i)entity|wear|equip|archaeology|suspicious", n) and n.endswith(".json"):
+            p(f"   {n}: {flat(z.read(n).decode('utf-8', 'replace'))[:500]}")
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/curios.txt", "w").write("\n".join(out))
+open("probe-out/accessories.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("\n".join(out))

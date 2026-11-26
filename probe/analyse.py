@@ -36,92 +36,42 @@ def decompile(path, cls):
 out = []
 p = out.append
 jars = json.load(open("probe/alljars.json"))
-NAMES = ["Mantis Goggles", "Ashlord", "Pumpkinhead's Hat", "Pumpkinhead Hat", "Monstrous Helm", "Infernal Crown", "Missionary Hat",
-         "Spiritual Guide", "Nightmare Mantle", "Spiny Shell", "Quake Boots", "Crushing Pauldron", "Orchid Mantis Boots"]
-chests = {}
-found = []
-for mod, urls in jars.items():
-    data = None
+def jar(slug):
+    urls = jars[slug]
     for u in (urls if isinstance(urls, list) else [urls]):
-        data = get(u)
-        if data:
-            break
-    if not data:
-        continue
-    path = "j.jar"
-    open(path, "wb").write(data)
-    try:
-        z = zipfile.ZipFile(path)
-    except Exception:
-        continue
-    names = z.namelist()
-    cs = [n for n in names if re.match(r"data/[^/]+/loot_tables/chests/.+\.json$", n)]
-    if cs:
-        chests[mod] = cs
-    hits = []
-    for n in names:
-        if n.endswith("lang/en_us.json"):
-            try:
-                lang = json.loads(z.read(n).decode("utf-8", "replace"))
-            except Exception:
-                continue
-            for k, v in lang.items():
-                if isinstance(v, str) and any(w.lower() in v.lower() for w in NAMES) and k.startswith("item."):
-                    hits.append((k, v))
-    if hits:
-        p(f"######## {mod}: " + "; ".join(f"{k}={v}" for k, v in hits))
-        keys = {k.split(".")[-1] for k, _ in hits}
-        # classes that name those items or look like their item classes
-        cls_hits = []
-        for n in names:
-            if not n.endswith(".class") or "$" in n:
-                continue
-            b = z.read(n)
-            base = n.rsplit("/", 1)[-1][:-6].lower()
-            if any(k.encode() in b for k in keys) and re.search(r"(?i)event|handler|item|armor|helmet|hat|goggle|skull|crown", n) \
-                    or re.search(r"(?i)(goggle|ashlord|dragonskull|pumpkinheadhat|monstrous|infernalcrown|crown)", base):
-                cls_hits.append(n[:-6].replace("/", "."))
-        for cls in cls_hits[:14]:
-            t = decompile(path, cls)
-            got = [" ".join(l.split()) for l in t.splitlines() if re.search(r"(?i)getItemBySlot|EquipmentSlot\.HEAD|addEffect|MobEffect|Attribute|onArmorTick|inventoryTick|setSecondsOnFire|LivingHurtEvent|LivingAttackEvent|getAttackStrength|isOnFire|isInLava|getHealth\(\) <|knockback|REACH|attack_speed|AttributeModifier\(", l)]
-            if got:
-                p(f"   -- {cls} ({len(got)})")
-                for l in got[:40]:
-                    p("      " + l[:300])
-    if mod == "curios":
-        for n in names:
-            if n.endswith(".class") and re.search(r"(?i)(SlotTypeManager|CuriosSlotManager|SlotTypeBuilder|CuriosEntityManager)\.class$", n):
-                t = decompile(path, n[:-6].replace("/", "."))
-                got = [" ".join(l.split()) for l in t.splitlines() if re.search(r'(?i)"size"|"replace"|"operation"|Math\.max|SET|ADD|REMOVE|sizeMod|this\.size', l)]
-                p(f"   -- curios {n} ({len(got)})")
-                for l in got[:50]:
-                    p("      " + l[:300])
-    if mod == "l_enders-cataclysm":
-        for n in names:
-            if n.endswith(".class") and re.search(r"(?i)(belt|curio)", n.rsplit("/", 1)[-1]) and "$" not in n:
-                t = decompile(path, n[:-6].replace("/", "."))
-                got = [" ".join(l.split()) for l in t.splitlines() if re.search(r'(?i)talisman|waist|addSlotModifier|identifier|slotContext', l)]
-                if got:
-                    p(f"   -- cataclysm {n} ({len(got)})")
-                    for l in got[:20]:
-                        p("      " + l[:300])
-art_v = modrinth("artifacts")
-open("a.jar", "wb").write(art_v[1])
-p("\n==== Artifacts game rule names")
-t = decompile("a.jar", "artifacts.registry.ModGameRules")
-m = re.search(r"createName\([^)]*\)\s*\{[^}]*\}", t)
-p("   " + (" ".join(m.group(0).split()) if m else "(createName not found)"))
-for l in t.splitlines():
-    if re.search(r"POWER_GLOVE|CRYSTAL_HEART|VAMPIRIC|CROSS_NECKLACE|BUNNY|register\(|GameRules\.register|m_46189_", l):
-        p("   " + " ".join(l.split())[:300])
-z = zipfile.ZipFile("a.jar")
+        d = get(u)
+        if d:
+            return d
+for slug, path in (("curios", "cu.jar"), ("l_enders-cataclysm", "ca.jar"), ("cf:oddities-1.0.1-forge-1.20.1.jar", "od.jar"), ("bossesrise", "br.jar"),
+                   ("borninchaos", "bic.jar"), ("cf:skarrier_mobs-1.1.2-forge-1.20.1.jar", "sk.jar")):
+    open(path, "wb").write(jar(slug))
+def full(path, cls, limit=4000):
+    t = decompile(path, cls)
+    p(f"\n######## {cls} ({len(t)} chars)")
+    p(t[:limit])
+full("cu.jar", "top.theillusivec4.curios.common.data.CuriosSlotManager", 9000)
+for n in zipfile.ZipFile("cu.jar").namelist():
+    if re.search(r"(?i)config/CuriosConfig\.class$|CuriosConfig\.class$", n):
+        full("cu.jar", n[:-6].replace("/", "."), 6000)
+full("cu.jar", "top.theillusivec4.curios.common.slottype.SlotType$Builder", 4000)
+full("ca.jar", "com.github.L_Ender.cataclysm.items.CuriosItem.CuriosItem", 5000)
+z = zipfile.ZipFile("ca.jar")
 for n in z.namelist():
-    if "loot_tables/artifact" in n or n.endswith("loot_tables/artifact.json") or "/loot_tables/" in n and n.split("/")[-1] in ("artifact.json", "all.json"):
-        p(f"   {n}: " + " ".join(z.read(n).decode().split())[:400])
-p("\n==== Modded chest loot tables")
-for mod, cs in sorted(chests.items()):
-    p(f"   {mod} ({len(cs)}): " + ", ".join(c.split("/loot_tables/")[0].split("/")[1] + ":" + c.split("/loot_tables/")[1][:-5] for c in cs)[:1500])
+    if re.search(r"(?i)belt_of|Belt", n) and n.endswith(".class") and "render" not in n.lower():
+        full("ca.jar", n[:-6].replace("/", "."), 2500)
+full("ca.jar", "com.github.L_Ender.cataclysm.items.Monstrous_Helm", 5000)
+for path, rx in (("od.jar", r"(?i)goggle"), ("br.jar", r"(?i)dragonskull|DragonSkull"), ("bic.jar", r"(?i)lordpumpkinheadshat|LordPumpkinheadsHat"), ("sk.jar", r"(?i)infernalcrown|InfernalCrown")):
+    z = zipfile.ZipFile(path)
+    for n in z.namelist():
+        if re.search(rx, n.rsplit("/", 1)[-1]) and n.endswith(".class") and "$" not in n and "render" not in n.lower() and "model" not in n.lower():
+            full(path, n[:-6].replace("/", "."), 3500)
+    # procedures/events that read the head slot for these items
+    for n in z.namelist():
+        if n.endswith(".class") and re.search(r"(?i)procedure|event|handler", n):
+            b = z.read(n)
+            if re.search(rb"(?i)goggle|DRAGON_SKULL|LORD_PUMPKINHEADS_HAT|INFERNAL_CROWN", b):
+                full(path, n[:-6].replace("/", "."), 2500)
 
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/chunk3.txt", "w").write("\n".join(out))
+open("probe-out/chunk3b.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

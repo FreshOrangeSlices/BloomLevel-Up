@@ -1,4 +1,6 @@
-"""Chunk 4 facts, round 4: Spell Engine's item attribute mixin.
+"""Chunk 4 facts, round 5: the Undying Tentacle, and Artifacts and Relics mixins.
+
+Was round 4: Spell Engine's item attribute mixin.
 
 Was round 3: how Wizards armor gets its spell bonuses.
 
@@ -49,16 +51,43 @@ def decompile(path, cls):
 
 out = []
 p = out.append
-ver, data, deps = modrinth("spell-engine")
-open("w.jar", "wb").write(data)
-p(f"==== spell-engine {ver}")
-for c in ("net.spell_engine.mixin.item.ItemStackAttributeModifiersMixin", "net.spell_engine.utils.AttributeModifierUtil", "net.spell_engine.rpg_series.item.Armor$CustomItem"):
-    t = decompile("w.jar", c)
-    p(f"\n==== {c}")
-    for l in t.splitlines():
-        ls = l.strip()
-        if ls and not ls.startswith(("import", "*", "/*", "package")):
-            p("   " + " ".join(ls.split())[:300])
+jars = json.load(open("probe/alljars.json"))
+key = next(k for k in jars if "bossesrise" in k or "bosses-rise" in k or "block_factorys" in k)
+urls = jars[key]
+data = None
+for u in (urls if isinstance(urls, list) else [urls]):
+    data = get(u)
+    if data:
+        break
+open("b.jar", "wb").write(data)
+z = zipfile.ZipFile("b.jar")
+cls = [n[:-6].replace("/", ".") for n in z.namelist() if n.endswith(".class") and re.search(r"(UndyingTentacle|GhostTentacle)[^/]*\.class$", n)]
+p(f"==== {key}: {cls}")
+for c in cls:
+    if "Item" in c or "Procedure" in c:
+        t = decompile("b.jar", c)
+        p(f"\n==== {c}")
+        for l in t.splitlines():
+            ls = l.strip()
+            if ls and not ls.startswith(("import", "*", "/*", "package")):
+                p("   " + " ".join(ls.split())[:260])
+for n in z.namelist():
+    if re.search(r"procedures/.*Tentacle.*\.class$", n, re.I):
+        c = n[:-6].replace("/", ".")
+        t = decompile("b.jar", c)
+        p(f"\n==== {c}")
+        for l in t.splitlines():
+            ls = l.strip()
+            if ls and not ls.startswith(("import", "*", "/*", "package")):
+                p("   " + " ".join(ls.split())[:260])
+for slug in ("artifacts", "relics-rpg"):
+    ver, data, deps = modrinth(slug)
+    open("a.jar", "wb").write(data)
+    z2 = zipfile.ZipFile("a.jar")
+    p(f"\n==== {slug} {ver} mixins")
+    for n in z2.namelist():
+        if n.endswith("mixins.json"):
+            p(f"   {n}: " + " ".join(z2.read(n).decode(errors='replace').split())[:2500])
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/chunk4d.txt", "w").write("\n".join(out)[:300000])
+open("probe-out/chunk4e.txt", "w").write("\n".join(out)[:300000])
 open("report.txt", "w").write("done")

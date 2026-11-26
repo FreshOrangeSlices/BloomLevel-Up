@@ -16,6 +16,9 @@ import com.freshorangeslices.legionwarex.night.NightEvents;
 import com.freshorangeslices.legionwarex.world.AlwaysDespawn;
 import com.freshorangeslices.legionwarex.world.BossDrops;
 import com.freshorangeslices.legionwarex.roam.Roamers;
+import com.freshorangeslices.legionwarex.accessory.ArtifactRules;
+import com.freshorangeslices.legionwarex.accessory.SharedSlots;
+import com.freshorangeslices.legionwarex.accessory.Trophies;
 import com.freshorangeslices.legionwarex.magic.MagicBridge;
 import com.freshorangeslices.legionwarex.magic.Tomes;
 import com.freshorangeslices.legionwarex.world.GearTuning;
@@ -64,6 +67,7 @@ import org.slf4j.Logger;
  * land on the coasts (band/); pirate charts lead to boss lairs (chart/); lone sentinels stand watch by day (sentinel/);
  * Born in Chaos's pumpkin folk spawn all year (harvest/); a new world starts on the mainland, mobs other mobs kill
  * drop nothing unless a player took part, zombies get no endless buffs, and a few mobs never join a world at all (world/);
+ * a Trophy slot, shared ring and belt rows, Artifacts toned down (accessory/);
  * both magic mods' gear counts for both, and Fabled Weaponry's tomes for all magic (magic/);
  * roaming bosses wait their days, and the quiet ones drop nothing, pay more XP and leave you alone until hit (roam/);
  * players and companions can wear their armor hidden (armor/). The pack was
@@ -124,6 +128,10 @@ public final class LegionWareX {
 		MinecraftForge.EVENT_BUS.register(MagicBridge.class);
 		MinecraftForge.EVENT_BUS.register(Tomes.class);
 		MagicBridge.registerCurios();
+		MinecraftForge.EVENT_BUS.register(Trophies.class);
+		Trophies.register();
+		SharedSlots.register();
+		MinecraftForge.EVENT_BUS.register(ArtifactRules.class);
 		ArmorNetwork.register();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> com.freshorangeslices.legionwarex.armor.client.ArmorClient::init);
 		MinecraftForge.EVENT_BUS.addListener(LegionWareX::registerCommands);

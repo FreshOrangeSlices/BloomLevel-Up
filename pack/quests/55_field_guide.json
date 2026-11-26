@@ -1334,6 +1334,77 @@
      "count": 8
     }
    ]
+  },
+  {
+   "id": "artifacts_found",
+   "title": "Artifacts",
+   "subtitle": "Artifacts",
+   "icon": "artifacts:cloud_in_a_bottle",
+   "x": 1.5,
+   "y": 18,
+   "shape": "circle",
+   "mods": [
+    "artifacts"
+   ],
+   "description": [
+    "Artifacts can't be crafted: they're found. Each is worn in an accessory slot (head, necklace, belt, hands, feet) and does one thing well: a double jump, a magnet for items, faster digging, breathing underwater.",
+    "",
+    "Where: vanilla structures' chests, about one in three in a mineshaft, stronghold, igloo or end city, two in five in a woodland mansion, two in three in a bastion's treasure, and fewer in villages; brushing suspicious sand and gravel at desert wells and pyramids, ocean ruins and trail ruins finds them too. The pack adds them to modded dungeons' chests (about one in ten, a boss's or dungeon's treasure chest one in four). Artifacts' own underground campsites have chests too (some of them are Mimics). With Lootr each player rolls each chest for themselves.",
+    "",
+    "The strongest are toned down here: the Power Glove gives +2 damage, the Crystal Heart +3 hearts, the Vampiric Glove heals a tenth of each hit (up to 1.5 hearts), the Cross Necklace's extra moment of safety after a hit is half a second, and Bunny Hoppers jump high but no longer stop fall damage."
+   ],
+   "tasks": [
+    {
+     "type": "checkmark",
+     "title": "I know where to look"
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 150
+    }
+   ]
+  },
+  {
+   "id": "jewelry_ring",
+   "title": "Rings and Necklaces",
+   "subtitle": "Jewelry",
+   "icon": "jewelry:gold_ring",
+   "x": 3,
+   "y": 18,
+   "shape": "circle",
+   "mods": [
+    "jewelry"
+   ],
+   "description": [
+    "Jewelry makes rings and necklaces, worn in the shared Ring (three) and Necklace slots. Rings are four ingots in a ring (copper and iron give a little armor, gold is the base for the rest); a gem on three gold makes a gem ring, a netherite ingot in place of the bottom gold a netherite one. Necklaces are string over a gold ingot over a gem (an emerald or diamond works too).",
+    "",
+    "Gems come from gem veins underground, from y 16 down, most often near the bottom of the world. Ruby is attack damage, Sapphire health, Jade ranged damage, Topaz arcane, Tanzanite frost and Citrine healing; the spell ones count for Iron's Spells too. A villager who takes a Jeweler's Kit (a copper, iron and gold ingot over three planks) as a job block becomes a Jeweler. The best pieces, the unique rings and necklaces, are only found."
+   ],
+   "tasks": [
+    {
+     "type": "item",
+     "item": "jewelry:gold_ring",
+     "count": 1
+    }
+   ],
+   "rewards": [
+    {
+     "type": "xp_levels",
+     "levels": 3
+    },
+    {
+     "type": "bloom_xp",
+     "tab": "misc",
+     "xp": 150
+    }
+   ]
   }
  ]
 }

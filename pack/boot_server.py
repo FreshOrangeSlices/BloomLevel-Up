@@ -181,6 +181,25 @@ def main():
         level = "warning" if both and pairs and int(pairs.group(1)) < 8 else "notice"
         print(f"::{level} title=server-magic::{esc(magic.split('LegionWareX ', 1)[-1][:3000])}")
 
+    # Accessories (chunk 3): the Trophy slot's pieces and effects in this layer, and Artifacts' numbers set once per
+    # world (a fresh world here, so they should be set now; a "not found" means Artifacts renamed a rule).
+    trophies = next((l for l in log if "LegionWareX trophies:" in l), None)
+    if trophies:
+        print(f"::notice title=server-trophies::{esc(trophies.split('LegionWareX ', 1)[-1][:3000])}")
+    slots = next((l for l in log if "LegionWareX accessories: player slots" in l), None)
+    if slots:
+        # The pack's rows (pack_data's data_files): Ring 3, Belt 2, the Trophy slot; Cataclysm's Rings and Waist and
+        # Spell Engine's Spell Quiver gone (left out or 0). A layer without a mod that gives players a ring or belt row has none.
+        sizes = dict(re.findall(r"(\w+)=(\d+)", slots.split("player slots", 1)[1]))
+        wrong = [f"{row} {sizes.get(row, 'missing')} (want {want})" for row, want in
+                 (("ring", "3"), ("belt", "2"), ("trophy", "1")) if sizes.get(row, want if row != "trophy" else None) != want]
+        wrong += [f"{row} still {sizes[row]}" for row in ("rings", "waist", "spell_quiver") if sizes.get(row, "0") != "0"]
+        print(f"::{'warning' if wrong else 'notice'} title=server-slots::{esc(('; '.join(wrong) + ' | ' if wrong else '') + slots.split('player slots', 1)[1].strip()[:2500])}")
+    artifacts = next((l for l in log if "LegionWareX artifacts:" in l), None)
+    if artifacts:
+        level = "warning" if "not found" in artifacts or " is a " in artifacts else "notice"
+        print(f"::{level} title=server-artifacts::{esc(artifacts.split('LegionWareX ', 1)[-1][:3000])}")
+
     # Other mods' compat code the add-on held until common setup (LateCompat: Copper Age Backport's Sophisticated
     # Storage compat, which otherwise stops the server starting): each held one should have run.
     held = [l for l in log if "LegionWareX compat:" in l]

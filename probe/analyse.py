@@ -1,4 +1,6 @@
-"""Chunk 4 facts, round 5: the Undying Tentacle, and Artifacts and Relics mixins.
+"""JEI audit, round 1: every locked mod against its newest Forge 1.20.1 build on Modrinth.
+
+Was chunk 4 facts, round 5: the Undying Tentacle, and Artifacts and Relics mixins.
 
 Was round 4: Spell Engine's item attribute mixin.
 
@@ -51,43 +53,35 @@ def decompile(path, cls):
 
 out = []
 p = out.append
-jars = json.load(open("probe/alljars.json"))
-key = next(k for k in jars if "bossesrise" in k or "bosses-rise" in k or "block_factorys" in k)
-urls = jars[key]
-data = None
-for u in (urls if isinstance(urls, list) else [urls]):
-    data = get(u)
-    if data:
-        break
-open("b.jar", "wb").write(data)
-z = zipfile.ZipFile("b.jar")
-cls = [n[:-6].replace("/", ".") for n in z.namelist() if n.endswith(".class") and re.search(r"(UndyingTentacle|GhostTentacle)[^/]*\.class$", n)]
-p(f"==== {key}: {cls}")
-for c in cls:
-    if "Item" in c or "Procedure" in c:
-        t = decompile("b.jar", c)
-        p(f"\n==== {c}")
-        for l in t.splitlines():
-            ls = l.strip()
-            if ls and not ls.startswith(("import", "*", "/*", "package")):
-                p("   " + " ".join(ls.split())[:260])
-for n in z.namelist():
-    if re.search(r"procedures/.*Tentacle.*\.class$", n, re.I):
-        c = n[:-6].replace("/", ".")
-        t = decompile("b.jar", c)
-        p(f"\n==== {c}")
-        for l in t.splitlines():
-            ls = l.strip()
-            if ls and not ls.startswith(("import", "*", "/*", "package")):
-                p("   " + " ".join(ls.split())[:260])
-for slug in ("artifacts", "relics-rpg"):
-    ver, data, deps = modrinth(slug)
-    open("a.jar", "wb").write(data)
-    z2 = zipfile.ZipFile("a.jar")
-    p(f"\n==== {slug} {ver} mixins")
-    for n in z2.namelist():
-        if n.endswith("mixins.json"):
-            p(f"   {n}: " + " ".join(z2.read(n).decode(errors='replace').split())[:2500])
+lock = json.load(open("probe/lock.json"))["versions"]
+pins = json.load(open("probe/pins.json"))
+newer, same, missing = [], [], []
+for slug, have in sorted(lock.items()):
+    try:
+        res = get(f"https://api.modrinth.com/v2/project/{slug}/version?loaders=" + urllib.parse.quote('["forge"]') + "&game_versions=" + urllib.parse.quote('["1.20.1"]'))
+        vs = json.loads(res)
+    except Exception as e:
+        missing.append(f"{slug} ({e.__class__.__name__})")
+        continue
+    if not vs:
+        missing.append(f"{slug} (no Forge 1.20.1 build listed)")
+        continue
+    top = vs[0]
+    names = [v["version_number"] for v in vs]
+    if top["version_number"] == have:
+        same.append(slug)
+    else:
+        behind = names.index(have) if have in names else "?"
+        held = f" HELD at {pins[slug]}" if slug in pins else ""
+        newer.append(f"{slug}: have {have}, newest {top['version_number']} ({top['date_published'][:10]}, {top['version_type']}), {behind} release(s) behind{held}")
+    time.sleep(0.25)
+p(f"==== {len(lock)} locked projects: {len(same)} on their newest Forge 1.20.1 build, {len(newer)} with a newer one, {len(missing)} not checked")
+p("\n==== Newer builds")
+for l in newer:
+    p("   " + l)
+p("\n==== Not checked")
+for l in missing:
+    p("   " + l)
 os.makedirs("probe-out", exist_ok=True)
-open("probe-out/chunk4e.txt", "w").write("\n".join(out)[:300000])
+open("probe-out/jei1.txt", "w").write("\n".join(out))
 open("report.txt", "w").write("done")

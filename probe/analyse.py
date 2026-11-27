@@ -25,7 +25,7 @@ Was: the magic ceiling, and spell power on both sides: how Spell Power and Iron'
 Spell Power and Iron's Spells: attribute definitions (base, min, max) and how spell damage reads them. Gear: every
 attribute modifier on Wizards', Jewelry's, Paladins' and Iron's armor, jewelry and weapons, from their own data or code.
 """
-import io, json, os, re, subprocess, urllib.parse, urllib.request, zipfile
+import io, json, os, re, subprocess, time, urllib.parse, urllib.request, zipfile
 
 UA = {"User-Agent": "FreshOrangeSlices/BloomLevel-Up probe (spell power check)"}
 

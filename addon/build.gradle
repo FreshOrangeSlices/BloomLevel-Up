@@ -97,6 +97,14 @@ repositories {
 			includeGroup 'curse.maven'
 		}
 	}
+	maven {
+		// JEI's API, for the pack test's JEI audit (jei/JeiAudit): compiled against, never shipped or run in the dev runs.
+		name = 'JEI'
+		url = 'https://maven.blamejared.com/'
+		content {
+			includeGroup 'mezz.jei'
+		}
+	}
 }
 
 dependencies {
@@ -111,6 +119,10 @@ dependencies {
 	runtimeOnly fg.deobf("maven.modrinth:illager-invasion:${illager_invasion_version}")
 	runtimeOnly fg.deobf("maven.modrinth:puzzles-lib:${puzzles_lib_version}")
 	runtimeOnly fg.deobf("maven.modrinth:bossesrise:${bossesrise_version}")
+
+	// JEI's API only (the audit's plugin class loads only where JEI is installed).
+	compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+	compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
 }
 
 def resourceProps = [

@@ -675,6 +675,64 @@ def item_watch(dump_file):
     return notes
 
 
+def jei_audit(jei_file, spec_file):
+    """JEI against the game (FreshOrangeSlices, 2026-11-26: "can we look over all of JEI and double check if it's up to date
+    with everything"): the add-on's JEI audit (-Dlegionwarex.jei, written by the real client once JEI runs in the world)
+    lists every registered item with whether JEI knows it, shows it, whether it's in a creative tab (JEI builds its list
+    from those), and the recipe categories that make and use it. Compared here with what the pack hides on purpose
+    (pack_data's removed_items and hidden_items, less shown_items). Returns (note, report lines)."""
+    if not os.path.exists(jei_file):
+        return "JEI audit: the client wrote no audit (JEI not running, or the add-on's plugin didn't load)", []
+    data = json.load(open(jei_file))
+    spec = json.load(open(spec_file)).get("pack_data", {})
+    shown_on_purpose = {i for reason, ids in spec.get("shown_items", {}).items() if not reason.startswith("_") for i in ids}
+    hidden_on_purpose = {i for field in ("removed_items", "hidden_items") for reason, ids in spec.get(field, {}).items()
+                         if not reason.startswith("_") for i in ids} - shown_on_purpose
+    items = data.get("items", [])
+    by_mod = {}
+    for item in items:
+        by_mod.setdefault(item["id"].split(":")[0], []).append(item)
+    missing, unexpected, leaking, no_source = {}, {}, {}, {}
+    rows = []
+    for mod in sorted(by_mod):
+        entries = by_mod[mod]
+        known = [e for e in entries if e.get("known")]
+        shown = [e for e in entries if e.get("shown")]
+        for e in entries:
+            if e["id"] in hidden_on_purpose:
+                if e.get("shown"):
+                    leaking.setdefault(mod, []).append(e["id"])
+                continue
+            if not e.get("known"):
+                missing.setdefault(mod, []).append(e["id"] + ("" if e.get("tab") else " (no tab)"))
+            elif not e.get("shown"):
+                unexpected.setdefault(mod, []).append(e["id"])
+            elif not e.get("made"):
+                no_source.setdefault(mod, []).append(e["id"])
+        rows.append(f"  {mod}: {len(entries)} / {len(known)} / {len(shown)} / {len(no_source.get(mod, []))}")
+    def block(title, groups):
+        lines = [f"{title}: {sum(len(v) for v in groups.values())}"]
+        for mod in sorted(groups, key=lambda m: -len(groups[m])):
+            ids = groups[mod]
+            lines.append(f"  {mod} ({len(ids)}): " + ", ".join(i.split(":", 1)[1] for i in ids[:60]) + (" ..." if len(ids) > 60 else ""))
+        return lines
+    categories = sorted(data.get("categories", []), key=lambda c: c["id"])
+    report = [f"JEI audit: {len(items)} items registered; JEI knows {sum(1 for e in items if e.get('known'))}, shows "
+              f"{sum(1 for e in items if e.get('shown'))}; {len(categories)} recipe categories. The pack hides "
+              f"{len(hidden_on_purpose)} on purpose (cut or banned).",
+              "", "Per mod: registered / in JEI / shown / shown with nothing in JEI that makes it"] + rows
+    report += [""] + block("Not in JEI at all, and the pack doesn't hide them ('no tab': in no creative tab, which is where JEI looks)", missing)
+    report += [""] + block("In JEI but hidden, though the pack doesn't hide them", unexpected)
+    report += [""] + block("Shown, though the pack hides them", leaking)
+    report += [""] + block("Shown, with nothing in JEI that makes them (found only: loot, mobs, trades; or a step JEI can't show)", no_source)
+    report += ["", "Recipe categories (recipes): " + "; ".join(f"{c['title']} ({c['id']}): {c['recipes']}" for c in categories)]
+    note = (f"JEI audit: {len(items)} items, {sum(1 for e in items if e.get('shown'))} shown; "
+            f"{sum(len(v) for v in missing.values())} not in JEI, {sum(len(v) for v in unexpected.values())} hidden by something else, "
+            f"{sum(len(v) for v in leaking.values())} shown though cut, {sum(len(v) for v in no_source.values())} with no source in JEI "
+            "(the whole report: pack-jei-NN)")
+    return note, report
+
+
 def leftover_check(dump_file, spec_file, server_dir):
     """Materials (ingots, nuggets, gems, scales, plates and the like) that nothing takes any more: what a gear trim can
     leave behind (FreshOrangeSlices: copper had almost nothing left to make). A material here is one no recipe crafts
@@ -1841,7 +1899,9 @@ def main():
 
     # Second start: straight into the server.
     # Bloom's tooltip dump (ten seconds in): every weapon's tooltip as a player sees it, for sorting the pack's weapons.
-    client = Process(launch + [f"--jvm-arg=-Dbloomlevelup.tooltips={os.path.join(game_dir, 'tooltips.jsonl')}", "--join-server", "127.0.0.1"], game_dir)
+    # The add-on's JEI audit (ten seconds after JEI runs in the world): every item beside what JEI knows and shows.
+    client = Process(launch + [f"--jvm-arg=-Dbloomlevelup.tooltips={os.path.join(game_dir, 'tooltips.jsonl')}",
+                               f"--jvm-arg=-Dlegionwarex.jei={os.path.join(game_dir, 'jei-audit.json')}", "--join-server", "127.0.0.1"], game_dir)
     joined = server.wait_for(rf"{PLAYER} joined the game", JOIN_LIMIT)
     started = time.time()
 
@@ -2037,6 +2097,17 @@ def main():
         # Printed by a step of its own (the workflow's "end-game gear"): GitHub keeps 10 notices a step.
         with open("pack-gear.txt", "w") as out:
             out.write(chr(10).join(gear_report))
+    # ---- JEI against the game (printed whole by the workflow's "JEI" step)
+    jei_file = os.path.join(game_dir, "jei-audit.json")
+    for _ in range(90):
+        if os.path.exists(jei_file) or not joined:
+            break
+        time.sleep(1)
+    jei_note, jei_report = jei_audit(jei_file, os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"))
+    notes.append(jei_note)
+    if jei_report:
+        with open("pack-jei.txt", "w") as out:
+            out.write(chr(10).join(jei_report))
     # ---- materials a trim left with nothing to make (reviewed by hand: some are drops with uses outside recipes)
     leftover_note, leftovers = leftover_check(os.path.join(server_dir, "bloom-dump.jsonl"),
                                               os.path.join(os.path.dirname(os.path.abspath(__file__)), "pack.json"), server_dir)

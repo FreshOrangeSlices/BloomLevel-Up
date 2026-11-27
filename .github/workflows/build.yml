@@ -473,6 +473,17 @@ jobs:
           for n, i in enumerate(range(0, min(len(text), 3900 * 9), 3900)):
               print(f"::notice title=pack-gear-{n:02d}::{esc(text[i:i + 3900])}")
           EOF
+      # JEI against the game (launch_test.py's jei_audit, from the add-on's audit in the real client).
+      - name: JEI
+        if: always()
+        run: |
+          [ -f pack-jei.txt ] || exit 0
+          python3 - <<'EOF'
+          text = open("pack-jei.txt", errors="replace").read()
+          esc = lambda s: s.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+          for n, i in enumerate(range(0, min(len(text), 3900 * 10), 3900)):
+              print(f"::notice title=pack-jei-{n:02d}::{esc(text[i:i + 3900])}")
+          EOF
       # Every enchantment by mod (the server's registry dump), for finding ones that do the same thing.
       - name: enchantments
         if: always()
